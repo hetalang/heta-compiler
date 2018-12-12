@@ -1,0 +1,182 @@
+{
+  "$id": "http://qs3p.insilicobio.ru/",
+   "definitions": {
+     "VarKind": {
+       "type": "string",
+       "enum": ["dynamic", "static", "rule"]
+     },
+
+     "ID": {
+       "type": "string",
+       "minLength": 1,
+       "pattern": "^[_a-zA-Z][_a-zA-Z0-9]*$"
+     },
+
+     "Units": {
+       "type": "string",
+       "minLength": 1,
+       "pattern": "^[_a-zA-Z][_a-zA-Z0-9]*$"
+     },
+
+     "Filter": {
+     },
+
+     "SimpleQ": {
+       "type": "object",
+       "properties": {
+         "class": {"type": "string"},
+         "title": {"type": "string"},
+         "notes": {"type": "string"},
+         "tags": {
+           "type": "array",
+           "items": { "type": "string" }
+         },
+         "aux": {"type": "object"}
+       }
+     },
+
+     "NumericQ": {
+       "allOf": [
+         { "$ref": "#/definitions/SimpleQ" },
+         {
+           "required": ["num"],
+           "properties": {
+             "num": {"type": "number"},
+             "free": {"type": "boolean"}
+           }
+         }
+       ]
+    },
+
+    "ExpressionQ": {
+      "allOf": [
+        { "$ref": "#/definitions/SimpleQ" },
+        {
+          "required": ["expr"],
+          "properties": {
+            "expr": {"type": "string"},
+            "lang": {"type": "string"}
+          }
+        }
+      ]
+    },
+
+    "VariableQ": {
+      "type": "object",
+      "required": ["id", "size"],
+      "properties": {
+        "id": {"$ref": "#/definitions/ID"},
+        "kind": { "$ref": "#/definitions/VarKind" },
+        "units": {"$ref": "#/definitions/Units"}
+      }
+    },
+
+    "QuantityQ": {
+      "required": ["variable"],
+      "properties": {
+        "variable": {"$ref": "#/definitions/VariableQ"}
+      }
+    },
+
+    "CompartmentQ": {
+      "allOf": [
+        { "$ref": "#/definitions/QuantityQ" }
+      ]
+    },
+
+    "SpeciesQ": {
+      "required": ["compartmentRef"],
+      "properties": {
+        "compartmentRef": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "EffectorQ": {
+      "type": "object",
+      "required": ["targetRef"],
+      "properties": {
+        "targetRef": {"$ref": "#/definitions/ID"}
+      }
+    },
+
+    "ActorQ": {
+      "allOf": [
+        {"$ref": "#/definitions/EffectorQ"},
+        {
+          "required": [],
+          "properties": {
+            "stoichiometry": {"type": "number"}
+          }
+        }
+      ]
+    },
+
+    "ContinuousProcessQ": {
+      "properties": {
+        "variable": {
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": ["rule"]
+            }
+          }
+        },
+        "effectors": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EffectorQ" }
+        },
+        "actors": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ActorQ" }
+        }
+      }
+    },
+
+    "ReactionQ": {
+      "$ref": "#/definitions/ContinuousProcessQ"
+    },
+
+    "SceneQ": {
+      "properties": {
+        "filter": { "$ref": "#/definitions/Filter" }
+      }
+    },
+
+    "Q": {
+      "anyOf": [
+        { "allOf": [
+          { "$ref": "#/definitions/NumericQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Numeric"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/ExpressionQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Expression"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/QuantityQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Quantity"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/CompartmentQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Compartment"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/SpeciesQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Species"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/ContinuousProcessQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["ContinuousProcess"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/ReactionQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Reaction"]}}}
+        ]},
+        { "allOf": [
+          { "$ref": "#/definitions/SceneQ" },
+          { "required": ["class"], "properties": {"class": {"enum": ["Scene"]}}}
+        ]}
+      ]
+    }
+   }
+}

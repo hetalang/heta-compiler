@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
+  <model>
+  {% if out.listOfCompartments|length > 0 %}
+    <listOfCompartments>
+    {%- for variable in out.listOfCompartments %}
+      <compartment
+        id="{{variable.id}}"
+        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        constant="false"
+        {% if variable.size.num!==undefined and variable.kind!=='rule' -%}size="{{variable.size.num}}"{%- endif %}
+        {% if variable.units!==undefined -%}units="{{variable.units}}"{%- endif %}
+        >
+      </compartment>
+    {%- endfor %}
+    </listOfCompartments>
+  {% endif %}
+  {% if out.listOfSpecies|length > 0 %}
+    <listOfSpecies>
+    {%- for variable in out.listOfSpecies %}
+      <species
+        id="{{variable.id}}"
+        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        hasOnlySubstanceUnits="{{variable.parent.isAmount===true}}"
+        speciesType=""
+        compartment="{{variable.parent.compartmentRef}}"
+        constant="false"
+        boundaryCondition="{{ variable.kind!=='dynamic' }}"
+        {% if variable.size.num!==undefined and variable.kind!=='rule' -%}initialConcentration="{{variable.size.num}}"{%- endif %}
+        {% if variable.units!==undefined -%}substanceUnits="{{variable.units}}"{%- endif %}
+        >
+      </species>
+    {%- endfor %}
+    </listOfSpecies>
+  {% endif %}
+  {% if out.listOfParameters|length > 0 %}
+    <listOfParameters>
+    {%- for variable in out.listOfParameters %}
+      <parameter
+        id="{{variable.id}}"
+        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        constant="false"
+        {% if variable.size.num!==undefined and variable.kind!=='rule' -%}value="{{variable.size.num}}"{%- endif %}
+        {% if variable.units!==undefined -%}units="{{variable.units}}"{%- endif %}
+        >
+      </parameter>
+    {%- endfor %}
+  </listOfParameters>
+  {% endif %}
+  {% if out.listOfReactions|length > 0 %}
+    <listOfReactions>
+    {%- for variable in out.listOfReactions %}
+      <reaction
+        id="{{variable.id}}"
+        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        reversible="{{ variable.parent.aux.reversible!=='false' }}"
+        fast="{{ variable.parent.aux.fast==='true' }}"
+        >
+        <listOfReactants>
+          {% for actor in variable.parent.actors -%}
+          {% if actor.stoichiometry<0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ -actor.stoichiometry }}"/>{% endif %}
+          {% endfor -%}
+        </listOfReactants>
+        <listOfProducts>
+          {% for actor in variable.parent.actors -%}
+          {% if actor.stoichiometry>0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ actor.stoichiometry }}"/>{% endif %}
+          {% endfor -%}
+        </listOfProducts>
+        <listOfModifiers>
+          {% for effector in variable.parent.effectors -%}
+          <modifierSpeciesReference species="{{ effector.targetRef }}"/>
+          {% endfor -%}
+        </listOfModifiers>
+        <kineticLaw>
+          {%- if variable.size.expr -%}
+            {{variable.size.MathML}}
+          {%- endif -%}
+          {% if variable.size.num %}
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <cn>{{variable.size.num}}</cn>
+          </math>
+          {%- endif %}
+        </kineticLaw>
+      </reaction>
+    {%- endfor %}
+  </listOfReactions>
+  {% endif %}
+  {% if out.listOfRules|length > 0 %}
+    <listOfRules>
+    {%- for variable in out.listOfRules %}
+      <assignmentRule
+        variable="{{variable.id}}"
+        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        >
+        {%- if variable.size.expr -%}
+          {{variable.size.MathML}}
+        {%- endif -%}
+        {% if variable.size.num %}
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <cn>{{variable.size.num}}</cn>
+        </math>
+        {%- endif %}
+      </assignmentRule>
+    {%- endfor %}
+    </listOfRules>
+  {% endif %}
+  </model>
+</sbml>

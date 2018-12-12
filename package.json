@@ -1,0 +1,21 @@
+{
+  "name": "qs3p-js",
+  "version": "0.3.0",
+  "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/start.js"
+  },
+  "author": "Evgeny Metelkin",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "ajv": "^6.6.1",
+    "lodash": "^4.17.11",
+    "markdown": "^0.5.0",
+    "mathjs": "^5.4.0",
+    "mathjs-translate": "^0.1.1",
+    "nunjucks": "^3.1.4",
+    "random-id": "^1.0.3"
+  },
+  "devDependencies": {}
+}
