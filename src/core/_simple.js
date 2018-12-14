@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const markdown = require('markdown');
+const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 
 /*
@@ -16,6 +16,25 @@ class _Simple {
   }
   static get schemaName(){
     return 'SimpleQ';
+  }
+  clone(){ // creates copy of element TODO: not tested
+    let clone = _.clone(this);
+    return clone;
+  }
+  get notesMdTree(){
+    if(this.notes){
+      return markdown.parse(this.notes);
+    }else{
+      return;
+    }
+  }
+  get notesHTML() { // TODO: not tested
+    if(this.notes){
+      let HTMLTree = markdown.toHTMLTree(this.notesMdTree);
+      return markdown.renderJsonML(HTMLTree);
+    }else{
+      return;
+    }
   }
   static isValid(q){
     let validate = validator

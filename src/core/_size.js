@@ -1,4 +1,9 @@
 const _ = require('lodash');
+const math = require('mathjs');
+const mathjsTranslate = require('mathjs-translate');
+math.import(mathjsTranslate);
+const mathjsCMathML = require('mathjs-cmathml');
+math.import(mathjsCMathML);
 const { validator } = require('./utilities.js');
 
 class _Size {
@@ -48,13 +53,24 @@ class Expression extends _Size {
     }else{
       Expression.isValid(q);
       this._exprInput = q.expr;
-      this._inputLang = q.lang
+      this._langInput = q.lang
         ? q.lang
         : 'qs3p';
     }
+    this.exprParsed = math.parse(this._exprInput);
   }
   get expr(){
-    return this._exprInput;
+    return this.exprParsed.toString();
+  }
+  set expr(v){
+    this._exprInput = v;
+    this._langInput = 'qs3p';
+    this.exprParsed = math.parse(this._exprInput);
+  };
+  get exprCMathML(){
+    return this.exprParsed
+      .toCMathML()
+      .toString();
   }
   static get schemaName(){
     return 'ExpressionQ';

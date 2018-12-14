@@ -11,6 +11,7 @@
         {% if variable.size.num!==undefined and variable.kind!=='rule' -%}size="{{variable.size.num}}"{%- endif %}
         {% if variable.units!==undefined -%}units="{{variable.units}}"{%- endif %}
         >
+        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
       </compartment>
     {%- endfor %}
     </listOfCompartments>
@@ -29,6 +30,7 @@
         {% if variable.size.num!==undefined and variable.kind!=='rule' -%}initialConcentration="{{variable.size.num}}"{%- endif %}
         {% if variable.units!==undefined -%}substanceUnits="{{variable.units}}"{%- endif %}
         >
+        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
       </species>
     {%- endfor %}
     </listOfSpecies>
@@ -43,6 +45,7 @@
         {% if variable.size.num!==undefined and variable.kind!=='rule' -%}value="{{variable.size.num}}"{%- endif %}
         {% if variable.units!==undefined -%}units="{{variable.units}}"{%- endif %}
         >
+        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
       </parameter>
     {%- endfor %}
   </listOfParameters>
@@ -56,6 +59,7 @@
         reversible="{{ variable.parent.aux.reversible!=='false' }}"
         fast="{{ variable.parent.aux.fast==='true' }}"
         >
+        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
         <listOfReactants>
           {% for actor in variable.parent.actors -%}
           {% if actor.stoichiometry<0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ -actor.stoichiometry }}"/>{% endif %}
@@ -73,7 +77,7 @@
         </listOfModifiers>
         <kineticLaw>
           {%- if variable.size.expr -%}
-            {{variable.size.MathML}}
+            {{variable.size.exprCMathML}}
           {%- endif -%}
           {% if variable.size.num %}
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -93,7 +97,7 @@
         {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
         >
         {%- if variable.size.expr -%}
-          {{variable.size.MathML}}
+          {{variable.size.exprCMathML}}
         {%- endif -%}
         {% if variable.size.num %}
         <math xmlns="http://www.w3.org/1998/Math/MathML">

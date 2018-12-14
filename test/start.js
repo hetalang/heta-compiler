@@ -28,7 +28,7 @@ let o3 = new clss.Quantity({
 });
 
 let container = new clss.Container();
-container.importOne({
+let q1 = container.importOne({
   class: 'Quantity',
   title: 'Test platform',
   notes: 'This is *test* platform',
@@ -41,9 +41,10 @@ container.importOne({
   }
 });
 
-container.importOne({
+let comp1 = container.importOne({
   class: 'Compartment',
   title: 'This is compartment',
+  notes: 'This is just text. *italic*, **bold**\n\nanother line',
   variable: {
     id: 'comp1',
     size: 5.2
@@ -101,7 +102,6 @@ let scene = container.importOne({
 scene.populate();
 scene.checkReferences();
 
-//console.log(scene._components)
-// console.log(scene.listOfSpecies())
-console.log(scene);
+//console.log(scene);
 fs.writeFileSync('result.xml', scene.toSBML());
+console.log(container._storage[0].variable.size.exprCMathML);
