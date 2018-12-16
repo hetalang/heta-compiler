@@ -1,5 +1,7 @@
 const _ = require('lodash');
 const {Numeric, Expression} = require('./_size');
+const {UnitsParser, qspUnits} = require('units-parser');
+let uParser = new UnitsParser(qspUnits);
 
 class Variable {
   constructor(q){
@@ -27,6 +29,15 @@ class Variable {
       throw new Error('Wrong Variable argument.');
     }
 
+  }
+  get unitsHash(){
+    if(this.units){
+      return uParser
+        .parse(this.units)
+        .toHash();
+    }else{
+      return;
+    }
   }
   toQ(){
     let res = _.pick(this, ['id', 'kind', 'units']);

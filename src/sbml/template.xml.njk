@@ -9,7 +9,7 @@
         {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
         constant="false"
         {% if variable.size.num!==undefined and variable.kind!=='rule' -%}size="{{variable.size.num}}"{%- endif %}
-        {% if variable.units!==undefined -%}units="{{variable.units}}"{%- endif %}
+        {% if variable.units!==undefined -%}units="{{ variable.unitsHash }}"{%- endif %}
         >
         {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
       </compartment>
@@ -28,7 +28,7 @@
         constant="false"
         boundaryCondition="{{ variable.kind!=='dynamic' }}"
         {% if variable.size.num!==undefined and variable.kind!=='rule' -%}initialConcentration="{{variable.size.num}}"{%- endif %}
-        {% if variable.units!==undefined -%}substanceUnits="{{variable.units}}"{%- endif %}
+        {% if variable.units!==undefined -%}substanceUnits="{{variable.unitsHash}}"{%- endif %}
         >
         {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
       </species>
@@ -43,7 +43,7 @@
         {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
         constant="false"
         {% if variable.size.num!==undefined and variable.kind!=='rule' -%}value="{{variable.size.num}}"{%- endif %}
-        {% if variable.units!==undefined -%}units="{{variable.units}}"{%- endif %}
+        {% if variable.units!==undefined -%}units="{{variable.unitsHash}}"{%- endif %}
         >
         {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
       </parameter>
@@ -107,6 +107,13 @@
       </assignmentRule>
     {%- endfor %}
     </listOfRules>
+  {% endif %}
+  {% if out.getUniqueUnits()|length > 0 %}
+    <listOfUnitDefinitions>
+    {%- for variable in out.getUniqueUnits() %}
+      {{ variable.getUnitDefinition() }}
+    {%- endfor %}
+  </listOfUnitDefinitions>
   {% endif %}
   </model>
 </sbml>

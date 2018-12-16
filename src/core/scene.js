@@ -62,6 +62,12 @@ class Scene extends _Simple {
       && variable.kind==='rule';
     });
   }
+  getUniqueUnits(){
+    return _.chain(this._components)
+      .filter((variable) => variable.units)
+      .uniqBy((variable) => variable.unitsHash)
+      .value();
+  }
   checkReferences(){
     _.forEach(this._components, (quantity) => {
         // check compartment in Species

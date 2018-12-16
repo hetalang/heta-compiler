@@ -12,7 +12,8 @@ let o2 = new clss.Quantity({
   aux: {a:1, b:2},
   variable: {
     id: 'k1',
-    size: 0.2
+    size: 0.2,
+    units: '1/min'
   }
 });
 
@@ -47,7 +48,8 @@ let comp1 = container.importOne({
   notes: 'This is just text. *italic*, **bold**\n\nanother line',
   variable: {
     id: 'comp1',
-    size: 5.2
+    size: 5.2,
+    units: 'L'
   }
 });
 
@@ -58,7 +60,7 @@ container.importMany([
   },
   {
     class: 'Quantity',
-    variable: {id: 'p2', size: 15.223}
+    variable: {id: 'p2', size: 15.223, units: '1/min/fM*nm'}
   },
   {
     class: 'Quantity',
@@ -88,7 +90,7 @@ container.importMany([
   },
   {
     class: 'Reaction',
-    variable: {id: 'r3', kind: 'rule', size: 28},
+    variable: {id: 'r3', kind: 'rule', size: 28, units: 'mole/L'},
     effectors: [
       {targetRef: 's2'}
     ]
@@ -102,6 +104,6 @@ let scene = container.importOne({
 scene.populate();
 scene.checkReferences();
 
-//console.log(scene);
+console.log(scene.getUniqueUnits()[1].getUnitDefinition());
 fs.writeFileSync('result.xml', scene.toSBML());
-console.log(container._storage[0].variable.size.exprCMathML);
+//console.log(container._storage[0].variable.size.exprCMathML);
