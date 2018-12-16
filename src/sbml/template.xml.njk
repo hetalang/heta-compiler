@@ -108,6 +108,18 @@
     {%- endfor %}
     </listOfRules>
   {% endif %}
+  {% if out.listOfInitialAssignments|length > 0 %}
+    <listOfInitialAssignments>
+    {%- for variable in out.listOfInitialAssignments %}
+      <initialAssignment
+        symbol="{{variable.id}}"
+        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        >
+        {{variable.size.exprCMathML}}
+      </initialAssignment>
+    {%- endfor %}
+    </listOfInitialAssignments>
+  {% endif %}
   {% if out.getUniqueUnits()|length > 0 %}
     <listOfUnitDefinitions>
     {%- for variable in out.getUniqueUnits() %}

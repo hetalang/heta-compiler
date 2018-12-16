@@ -44,24 +44,6 @@ class Scene extends _Simple {
         this._components[simple.variable.id] = simple.variable;
       });
   }
-  get listOfCompartments(){
-    return _.filter(this._components, (variable) => variable.parent instanceof Compartment);
-  }
-  get listOfSpecies(){
-    return _.filter(this._components, (variable) => variable.parent instanceof Species);
-  }
-  get listOfParameters(){
-    return _.filter(this._components, (variable) => variable.parent.className==='Quantity');
-  }
-  get listOfReactions(){
-    return _.filter(this._components, (variable) => variable.parent instanceof Reaction);
-  }
-  get listOfRules(){
-    return _.filter(this._components, (variable) => {
-      return !(variable.parent instanceof Reaction)
-      && variable.kind==='rule';
-    });
-  }
   getUniqueUnits(){
     return _.chain(this._components)
       .filter((variable) => variable.units)

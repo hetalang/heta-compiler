@@ -48,7 +48,7 @@ let comp1 = container.importOne({
   notes: 'This is just text. *italic*, **bold**\n\nanother line',
   variable: {
     id: 'comp1',
-    size: 5.2,
+    size: 'x*y',
     units: 'L'
   }
 });
@@ -104,6 +104,5 @@ let scene = container.importOne({
 scene.populate();
 scene.checkReferences();
 
-console.log(scene.getUniqueUnits()[1].getUnitDefinition());
+console.log(scene.listOfInitialAssignments);
 fs.writeFileSync('result.xml', scene.toSBML());
-//console.log(container._storage[0].variable.size.exprCMathML);
