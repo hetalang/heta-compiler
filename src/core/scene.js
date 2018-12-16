@@ -52,40 +52,44 @@ class Scene extends _Simple {
   }
   checkReferences(){
     _.forEach(this._components, (quantity) => {
-        // check compartment in Species
-        if(quantity.parent instanceof Species){
-          let compartmentVariable = this._components[quantity.parent.compartmentRef];
-          if(compartmentVariable===undefined){
-            throw new Error(`"compartmentRef" ${quantity.parent.compartmentRef} is not found inside scene.`);
+      // check compartment in Species
+      if(quantity.parent instanceof Species){
+        let compartmentVariable = this._components[quantity.parent.compartmentRef];
+        if(compartmentVariable===undefined){
+          throw new Error(
+            `"compartmentRef" ${quantity.parent.compartmentRef} is not found inside scene.`
+          );
+        }
+        if(!(compartmentVariable.parent instanceof Compartment)){
+          throw new Error(
+            `"compartmentRef" ${quantity.parent.compartmentRef} reffered not to "Compartment".`
+          );
+        }
+      }
+      // check reactions
+      if((quantity.parent instanceof Reaction) && quantity.parent.actors!==undefined){
+        quantity.parent.actors.forEach((actor) => {
+          let actorVariable = this._components[actor.targetRef];
+          if(actorVariable===undefined){
+            throw new Error(`"targetRef" ${actor.targetRef} is not found inside scene.`);
           }
-          if(!(compartmentVariable.parent instanceof Compartment)){
-            throw new Error(`"compartmentRef" ${quantity.parent.compartmentRef} reffered not to "Compartment".`);
+          if(!(actorVariable.parent instanceof Species)){
+            throw new Error(`"targetRef" ${actor.targetRef} reffered not to "Species".`);
           }
-        }
-        // check reactions
-        if((quantity.parent instanceof Reaction) && quantity.parent.actors!==undefined){
-          quantity.parent.actors.forEach((actor) => {
-            let actorVariable = this._components[actor.targetRef];
-            if(actorVariable===undefined){
-              throw new Error(`"targetRef" ${actor.targetRef} is not found inside scene.`);
-            }
-            if(!(actorVariable.parent instanceof Species)){
-              throw new Error(`"targetRef" ${actor.targetRef} reffered not to "Species".`);
-            }
-          });
-        }
-        if((quantity.parent instanceof Reaction) && quantity.parent.effectors!==undefined){
-          quantity.parent.effectors.forEach((effector) => {
-            let effectorVariable = this._components[effector.targetRef];
-            if(effectorVariable===undefined){
-              throw new Error(`"targetRef" ${effector.targetRef} is not found inside scene.`);
-            }
-            if(!(effectorVariable.parent instanceof Species)){
-              throw new Error(`"targetRef" ${effector.targetRef} reffered not to "Species".`);
-            }
-          });
-        }
-      });
+        });
+      }
+      if((quantity.parent instanceof Reaction) && quantity.parent.effectors!==undefined){
+        quantity.parent.effectors.forEach((effector) => {
+          let effectorVariable = this._components[effector.targetRef];
+          if(effectorVariable===undefined){
+            throw new Error(`"targetRef" ${effector.targetRef} is not found inside scene.`);
+          }
+          if(!(effectorVariable.parent instanceof Species)){
+            throw new Error(`"targetRef" ${effector.targetRef} reffered not to "Species".`);
+          }
+        });
+      }
+    });
     return true;
   }
   toQ(){

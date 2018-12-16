@@ -1,0 +1,53 @@
+{
+    "globals": {
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "warn",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "valid-jsdoc": [
+		  "warn",
+		  {"requireReturn": false}
+		],
+        "dot-location": [
+          "error",
+          "property"
+        ],
+        "eqeqeq": "error",
+        "no-extend-native": "error",
+        "no-multi-spaces": "error",
+        "no-sequences": "error",
+        "no-throw-literal": "error",
+        "no-unused-expressions": [
+			"error",
+			{ "allowShortCircuit": true }
+		],
+        "no-warning-comments": "warn",
+        "yoda": "error",
+        "global-require": "warn",
+        "max-len": [
+          "warn",
+          {"code": 100, "ignoreComments": true}
+        ],
+        "max-nested-callbacks": ["warn", 4],
+        "no-unused-vars": "warn"
+    }
+}

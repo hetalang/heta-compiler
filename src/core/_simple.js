@@ -28,7 +28,7 @@ class _Simple {
       return;
     }
   }
-  get notesHTML() { // TODO: not tested
+  get notesHTML() {
     if(this.notes){
       let HTMLTree = markdown.toHTMLTree(this.notesMdTree);
       return markdown.renderJsonML(HTMLTree);
@@ -41,7 +41,7 @@ class _Simple {
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
     if(!valid) {
-      console.log(validate.errors);  // TODO: delete later
+      console.log(validate.errors); // TODO: delete later
       throw new Error('Validation error!');
     }
   }

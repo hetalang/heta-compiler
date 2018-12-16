@@ -1,5 +1,5 @@
 const { Variable } = require('../core/variable');
-const {UnitsParser, qspUnits, Unit, qspToSbml} = require('units-parser');
+const {UnitsParser, qspUnits, qspToSbml} = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
 Variable.prototype.getUnitDefinition = function(){
@@ -7,4 +7,4 @@ Variable.prototype.getUnitDefinition = function(){
   return uParser
     .parse(this.units)
     .toXmlUnitDefinition(transformator, {nameStyle: 'HTML'});
-}
+};

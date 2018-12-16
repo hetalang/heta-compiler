@@ -1,6 +1,5 @@
 const { _Simple } = require('./_simple');
 const { Variable } = require('./variable');
-const { validator } = require('./utilities.js');
 
 class Quantity extends _Simple {
   constructor(q){
