@@ -16,7 +16,7 @@ class Container {
       Scene
     };
   }
-  insert(simple, id, space='default'){
+  insert(simple, id, space){
     // set identifiers
     simple.id = id;
     if(simple instanceof Quantity) {
@@ -27,28 +27,11 @@ class Container {
     return this;
   }
   select(id, space){
-    let _id = space ? id+'$'+space : id;
-    let foundElement = _.find(this._storage, (simple) => simple._id===_id);
+    let index = space ? id+'$'+space : id;
+    let foundElement = _.find(this._storage, (simple) => simple.index===index);
 
     return foundElement;
   }
-  /*importOne(q){
-    // check existence of "class" property
-    if(!('class' in q)){
-      throw new Error('Argument in "importOne" should include "class" property.');
-    }
-    // select class based on "class" property
-    let selectedClass = this.classes[q.class];
-    if(selectedClass===undefined){
-      throw new Error(`Unknown "class" ${q.class} in "importOne".`);
-    }
-    // create object and push to container
-    let simple = new selectedClass(q);
-    simple.container = this;
-    this._storage.push(simple);
-    // return SceneContainer for chain operations
-    return simple;
-  }*/
   importOne(
     q,
     strategy = 'upsert', // ['insert', 'update', 'upsert']
@@ -56,27 +39,27 @@ class Container {
   ){
     // checking arguments
     if(!q || q.id===undefined) throw new Error('Q object must exist and have "id" property.');
-    let _id = q.space
+    let index = q.space
       ? q.id + '$' + q.space
       : q.id;
     let hasClass = 'class' in q;
-    let targetComponent = this.select(_id);
+    let targetComponent = this.select(index);
 
     // check if class is known
     if(targetComponent===undefined && !hasClass)
-      throw new Error(`Element with _id: "${_id}" is not exist and class cannot be estimated.`);
+      throw new Error(`Element with index: "${index}" is not exist and class cannot be estimated.`);
     // class cannot be changed
     if(hasClass && targetComponent && q.class !== targetComponent.className)
-      throw new Error(`Component "${_id}" truing to change class which is not allowed in current version.`);
+      throw new Error(`Component "${index}" truing to change class which is not allowed in current version.`);
 
     // changes in existed components is not allowed
     if(strategy==='insert' && targetComponent!==undefined)
-      throw new Error(`Component with _id: "${targetComponent._id}" is already exist which is not allowed for "insert" strategy.`);
+      throw new Error(`Component with index: "${targetComponent.index}" is already exist which is not allowed for "insert" strategy.`);
     if(strategy==='insert' && !hasClass)
       throw new Error(`Imported component with id: "${q.id}" has no class which is not allowed for "insert" strategy.`);
     // creation of new components is not allowed
     if(strategy==='update' && targetComponent===undefined)
-      throw new Error(`Element with _id: "${_id}" is not exist which is not allowed for "update" strategy.`);
+      throw new Error(`Element with index: "${index}" is not exist which is not allowed for "update" strategy.`);
     // can create new or change existed components
     // if(strategy==='upsert')
 
@@ -101,9 +84,19 @@ class Container {
 
     return this;
   }
-  importMany(qArr){
+  importMany(
+    qArr,
+    strategy = 'upsert', // ['insert', 'update', 'upsert']
+    deepMerge = true // if false than replace // XXX: not implemented
+  ){
     qArr.forEach((q) => {
-      this.importOne(q);
+      this.importOne(q, strategy, deepMerge);
+    });
+    return this;
+  }
+  scopedVariables(scope='default'){
+    return this._storage.filter((component) => {
+      return (component instanceof Quantity) && component.space===scope;
     });
   }
   toQArr(){

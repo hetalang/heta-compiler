@@ -5,8 +5,11 @@ class Species extends Quantity {
     super();
   }
   merge(q){
+    super.merge(q);
     // Species.isValid(q);
     this.compartmentRef = q.compartmentRef;
+
+    return this;
   }
   static get schemaName(){
     return 'SpeciesQ';

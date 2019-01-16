@@ -25,7 +25,7 @@ class _Simple {
   get className(){
     return '_Simple';
   }
-  get _id(){
+  get index(){
     return this.id;
   }
   clone(){ // creates copy of element TODO: not tested

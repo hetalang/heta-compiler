@@ -1,4 +1,4 @@
-const { _Simple, Scene, Container, Quantity, Numeric, Expression } = require('../src');
+const { _Simple, Scene, Container, Quantity, Numeric, Expression, Species } = require('../src');
 
 let x1 = (new _Simple).merge({
   title: 'This is the title',
@@ -34,7 +34,6 @@ let o2 = (new Quantity).merge({
   tags: ['a', 'b'],
   aux: {a:1, b:2},
   variable: {
-    //id: 'k1',
     kind: 'dynamic',
     size: num1,
     units: '1/min'
@@ -49,7 +48,6 @@ let o3 = (new Quantity).merge({
   tags: ['a', 'b', 'c'],
   aux: {a:1, b:2, c: 3},
   variable: {
-    id: 'r1',
     size: expr1
   }
 });
@@ -60,6 +58,7 @@ c.insert(o3, 'f0');
 c.importOne({
   class: 'Quantity',
   id: 'r1',
+  space: 'default',
   title: 'Test platform',
   notes: 'This is *test* platform',
   tags: ['a', 'b', 'c'],
@@ -75,8 +74,74 @@ c.importOne({
   variable: {kind: 'dynamic'}
 }, 'upsert');
 
-// output
+c.importOne({
+  class: 'Compartment',
+  id: 'comp1',
+  space: 'default',
+  title: 'This is compartment',
+  notes: 'This is just text. *italic*, **bold**\n\nanother line',
+  variable: {
+    size: 'x*y',
+    units: 'L'
+  }
+});
 
-//let arr = c.toJSON();
-console.log(c.select('r1', 'default').notesHTML);
-//console.log(num1.toQ());
+c.importMany([
+  {
+    class: 'Compartment',
+    id: 'comp2',
+    space: 'default',
+    variable: {size: 3.2}
+  },
+  {
+    class: 'Quantity',
+    id: 'p2',
+    space: 'default',
+    variable: {size: 15.223, units: '1/min/fM*nm'}
+  },
+  {
+    class: 'Quantity',
+    id: 'p3',
+    space: 'default',
+    variable: {kind: 'rule', size: 15.223}
+  },
+  {
+    class: 'Species',
+    id: 's1',
+    space: 'default',
+    variable: {kind: 'dynamic', size: 1.1},
+    compartmentRef: 'comp1'
+  },
+  {
+    class: 'Species',
+    id: 's2',
+    space: 'default',
+    title: 's2 title',
+    variable: {kind: 'rule', size: 'x*y'},
+    compartmentRef: 'comp1'
+  },
+  {
+    class: 'Reaction',
+    id: 'r2',
+    space: 'default',
+    variable: {kind: 'rule', size: 'p2*comp1*s1'},
+    actors: [
+      {targetRef: 's1', stoichiometry: -2},
+      {targetRef: 's2', stoichiometry: 1}
+    ],
+    effectors: [
+      {targetRef: 's2'}
+    ]
+  },
+  {
+    class: 'Reaction',
+    id: 'r3',
+    //space: 'default',
+    variable: {kind: 'rule', size: 28, units: 'mole/L'},
+    effectors: [
+      {targetRef: 's2'}
+    ]
+  }
+]);
+
+console.log(c.toQArr());

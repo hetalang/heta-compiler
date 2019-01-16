@@ -23,7 +23,8 @@
           <y:BorderStyle color="#FF0000" type="line" width="2.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="56.7236328125" x="29.13818359375" xml:space="preserve" y="3.0">Quantity<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
-            <y:AttributeLabel xml:space="preserve">variable: Variable</y:AttributeLabel>
+            <y:AttributeLabel xml:space="preserve">space: String
+variable: Variable</y:AttributeLabel>
             <y:MethodLabel xml:space="preserve"/>
           </y:UML>
         </y:UMLClassNode>
@@ -132,12 +133,14 @@ add: _Size</y:AttributeLabel>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="53.8544921875" x="66.57275390625" xml:space="preserve" y="3.0">_Simple<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
-            <y:AttributeLabel xml:space="preserve">_id: _ID
+            <y:AttributeLabel xml:space="preserve">id: _ID
 title: string {use: "optional"}
 notes: string {use: "optional"}
 tags: TagsType {use: "optional"}
 aux: Object {use: "optional"}</y:AttributeLabel>
-            <y:MethodLabel xml:space="preserve">toJSON()</y:MethodLabel>
+            <y:MethodLabel xml:space="preserve">toQ()
+toJSON()
+get _id</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>

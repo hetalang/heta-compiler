@@ -7,6 +7,7 @@ class Reaction extends Quantity {
     this.actors = [];
   }
   merge(q){
+    super.merge(q);
     // Reaction.isValid(q);
     if(q.effectors) {
       this.effectors = q.effectors.map((effector) => new Modifier(effector));
@@ -14,12 +15,29 @@ class Reaction extends Quantity {
     if(q.actors) {
       this.actors = q.actors.map((actor) => new Reactant(actor));
     }
+
+    return this;
   }
   static get schemaName(){
     return 'ReactionQ';
   }
   get className(){
     return 'Reaction';
+  }
+  toQ(){
+    let res = super.toQ();
+    res.actors = this.actors.map((actor) => {
+      return {
+        targetRef: actor.targetRef,
+        stoichiometry: actor.stoichiometry
+      };
+    });
+    res.effectors = this.effectors.map((effector) => {
+      return {
+        targetRef: effector.targetRef
+      };
+    });
+    return res;
   }
 }
 

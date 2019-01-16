@@ -1,5 +1,5 @@
-include external_file.heta as heta
-include external_file.xml as sbml
+# include external_file.heta
+# include external_file.xml
 
 # submodel 1 without structures
 

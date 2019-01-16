@@ -46,8 +46,8 @@ class Quantity extends _Simple {
   get className(){
     return 'Quantity';
   }
-  get _id(){
-    return this.id + '$' + this.space;
+  get index(){
+    return [this.id, this.space].join('$');
   }
   toQ(){
     let res = super.toQ();

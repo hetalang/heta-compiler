@@ -8,6 +8,7 @@ const { Quantity } = require('./quantity');
 class Scene extends _Simple {
   constructor(){
     super();
+    this._variables = [];
   }
   merge(q){
     // Scene.isValid(q);
@@ -28,16 +29,6 @@ class Scene extends _Simple {
   /*
   getVariable(id){
     return this._components[id];
-  }
-  add(obj){
-    if(!(obj instanceof Quantity)){
-      throw new Error('Only "Quantity" object can be added to scene.');
-    }
-    if(_.keys(this._components).indexOf(obj.variable.id)!==-1){
-      throw new Error(`"id" ${obj.variable.id} must be unique.`);
-    }
-    this._components[obj.variable.id] = obj.variable;
-    return this;
   }
   populate(){ // TODO: currently filter in off
     this.container._storage
