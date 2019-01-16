@@ -6,16 +6,27 @@ const { validator } = require('./utilities.js');
   Abstract class _Simple
 */
 class _Simple {
-  constructor(q){
-    _Simple.isValid(q);
+  constructor(){
+    this.tags = [];
+    this.aux = {};
+  }
+  merge(q){
+    //_Simple.isValid(q);
+    if(q && q.title) this.title = q.title;
+    if(q && q.notes) this.notes = q.notes;
+    if(q && q.tags) this.tags = _.clone(q.tags);
+    if(q && q.aux) this.aux = _.clone(q.aux);
 
-    if(q.title) this.title = q.title;
-    if(q.notes) this.notes = q.notes;
-    if(q.tags) this.tags = q.tags;
-    if(q.aux) this.aux = q.aux;
+    return this;
   }
   static get schemaName(){
     return 'SimpleQ';
+  }
+  get className(){
+    return '_Simple';
+  }
+  get _id(){
+    return this.id;
   }
   clone(){ // creates copy of element TODO: not tested
     let clone = _.clone(this);
@@ -36,7 +47,7 @@ class _Simple {
       return;
     }
   }
-  static isValid(q){
+  static isValid(q){ // TOFIX: not used
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
@@ -46,7 +57,7 @@ class _Simple {
     }
   }
   toQ(){
-    let res = _.pick(this, ['title', 'notes', 'tags', 'aux']);
+    let res = _.pick(this, ['title', 'notes', 'tags', 'aux', 'id']);
     res.class = this.className;
     return res;
   }

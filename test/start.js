@@ -1,108 +1,82 @@
-const fs = require('fs');
-const clss = require('../src');
+const { _Simple, Scene, Container, Quantity, Numeric, Expression } = require('../src');
 
-function pjs(o){
-  return JSON.stringify(o, null, 2);
-}
+let x1 = (new _Simple).merge({
+  title: 'This is the title',
+  notes: 'This is the notes.',
+  tags: ['tag1', 'tag2'],
+  aux: {'aaa': 'bbb'}
+});
 
-let o2 = new clss.Quantity({
+let scn1 = (new Scene).merge({
+  title: 'test scene',
+  scope: 'one',
+  kind: 'kinetic',
+  method: {timeRange: [0,120], timeStep: 2, solver: 'lsoda'}
+}).merge({
+  scope: 'two'
+});
+
+let c = new Container()
+  .insert(x1, 'x1')
+  .insert(scn1, 'scn1')
+  .insert(new _Simple, 'x2');
+
+let x2 = c.select('x2').merge({
+  title: 'selected simple obj'
+});
+
+// from previous version, using new
+
+let num1 = new Numeric(0.2);
+let o2 = (new Quantity).merge({
   title: 'Test platform',
   notes: 'This is *test* platform',
   tags: ['a', 'b'],
   aux: {a:1, b:2},
   variable: {
-    id: 'k1',
-    size: 0.2,
+    //id: 'k1',
+    kind: 'dynamic',
+    size: num1,
     units: '1/min'
   }
 });
+c.insert(o2, 'k0', 'one');
 
-let o3 = new clss.Quantity({
+let expr1 = new Expression('m*c^2');
+let o3 = (new Quantity).merge({
   title: 'Test platform',
   notes: 'This is *test* platform',
   tags: ['a', 'b', 'c'],
   aux: {a:1, b:2, c: 3},
   variable: {
     id: 'r1',
-    size: 'm*a'
+    size: expr1
   }
 });
+c.insert(o3, 'f0');
 
-let container = new clss.Container();
-let q1 = container.importOne({
+// from previous version, using importOne
+
+c.importOne({
   class: 'Quantity',
+  id: 'r1',
   title: 'Test platform',
   notes: 'This is *test* platform',
   tags: ['a', 'b', 'c'],
   aux: {a:1, b:2, c: 3},
   variable: {
-    id: 'r1',
     kind: 'rule',
-    size: 'm*a'
+    size: expr1
   }
-});
+}, 'upsert').importOne({
+  id: 'r1',
+  space: 'default',
+  title: 'updated title',
+  variable: {kind: 'dynamic'}
+}, 'upsert');
 
-let comp1 = container.importOne({
-  class: 'Compartment',
-  title: 'This is compartment',
-  notes: 'This is just text. *italic*, **bold**\n\nanother line',
-  variable: {
-    id: 'comp1',
-    size: 'x*y',
-    units: 'L'
-  }
-});
+// output
 
-container.importMany([
-  {
-    class: 'Compartment',
-    variable: {id: 'comp2', size: 3.2}
-  },
-  {
-    class: 'Quantity',
-    variable: {id: 'p2', size: 15.223, units: '1/min/fM*nm'}
-  },
-  {
-    class: 'Quantity',
-    variable: {id: 'p3', kind: 'rule', size: 15.223}
-  },
-  {
-    class: 'Species',
-    variable: {id: 's1', kind: 'dynamic', size: 1.1},
-    compartmentRef: 'comp1'
-  },
-  {
-    class: 'Species',
-    title: 's2 title',
-    variable: {id: 's2', kind: 'rule', size: 'x*y'},
-    compartmentRef: 'comp1'
-  },
-  {
-    class: 'Reaction',
-    variable: {id: 'r2', kind: 'rule', size: 'p2*comp1*s1'},
-    actors: [
-      {targetRef: 's1', stoichiometry: -2},
-      {targetRef: 's2', stoichiometry: 1}
-    ],
-    effectors: [
-      {targetRef: 's2'}
-    ]
-  },
-  {
-    class: 'Reaction',
-    variable: {id: 'r3', kind: 'rule', size: 28, units: 'mole/L'},
-    effectors: [
-      {targetRef: 's2'}
-    ]
-  }
-]);
-
-let scene = container.importOne({
-  class: 'Scene',
-  filter: {}
-});
-scene.populate();
-scene.checkReferences();
-
-console.log(scene.listOfInitialAssignments);
-fs.writeFileSync('result.xml', scene.toSBML());
+//let arr = c.toJSON();
+console.log(c.select('r1', 'default').notesHTML);
+//console.log(num1.toQ());

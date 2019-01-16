@@ -6,14 +6,18 @@ const { Reaction } = require('./reaction');
 const { Quantity } = require('./quantity');
 
 class Scene extends _Simple {
-  constructor(q){
-    super(q);
-    Scene.isValid(q);
+  constructor(){
+    super();
+  }
+  merge(q){
+    // Scene.isValid(q);
+    super.merge(q);
 
-    this.filter = q.filter
-      ? q.filter
-      : {};
-    this._components = {};
+    if(q && q.scope) this.scope = q.scope;
+    if(q && q.type) this.type = q.type;
+    if(q && q.method) this.method = q.method;
+
+    return this;
   }
   get className(){
     return 'Scene';
@@ -21,6 +25,7 @@ class Scene extends _Simple {
   static get schemaName(){
     return 'SceneQ';
   }
+  /*
   getVariable(id){
     return this._components[id];
   }
@@ -92,9 +97,13 @@ class Scene extends _Simple {
     });
     return true;
   }
+  */
   toQ(){
     let res = super.toQ();
-    res.filter = this.filter;
+    if(this.scope) res.scope = this.scope;
+    if(this.type) res.type = this.type;
+    if(this.method) res.method = this.method;
+
     return res;
   }
 }

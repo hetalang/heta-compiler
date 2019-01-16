@@ -1,10 +1,13 @@
 const { Quantity } = require('./quantity');
 
 class Reaction extends Quantity {
-  constructor(q){
-    super(q);
-    Reaction.isValid(q);
-
+  constructor(){
+    super();
+    this.effectors = [];
+    this.actors = [];
+  }
+  merge(q){
+    // Reaction.isValid(q);
     if(q.effectors) {
       this.effectors = q.effectors.map((effector) => new Modifier(effector));
     }

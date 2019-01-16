@@ -1,9 +1,11 @@
 const { Quantity } = require('./quantity');
 
 class Species extends Quantity {
-  constructor(q){
-    super(q);
-    Species.isValid(q);
+  constructor(){
+    super();
+  }
+  merge(q){
+    // Species.isValid(q);
     this.compartmentRef = q.compartmentRef;
   }
   static get schemaName(){
