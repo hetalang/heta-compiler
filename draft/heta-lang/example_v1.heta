@@ -3,15 +3,14 @@
 
 # submodel 1 without structures
 
-one @scope;
-scn1 @scene {
+scn1 @scene { # insert/upsert
   scope: one,
   type: kinetic,
   method: {timeRange: [0,120], timeStep: 2, solver: lsoda}
 };
 
-comp1$one @compartment;
-comp1$one = 0.5;
+comp1$one @compartment; # insert/upsert
+comp1$one = 0.5; # update/upsert
 comp2$one @compartment;
 comp2$one = 0.3;
 
@@ -37,7 +36,7 @@ k2$one = 0.02;
 two @scope;
 
 block $two
-  block @compartment
+  block <= @compartment
     comp1;
     comp2;
   endblock
@@ -82,9 +81,11 @@ scn2 @scene {
 
 integrated @scope;
 
-block $integrated
-  import * from one;
-  import * from two;
+block {space: 'integrated'}
+  clone * $one;
+  clone * $two;
+endblock
 
-  comp1 = 1.1;
+block $integrated
+  comp1 = 0.23;
 endblock

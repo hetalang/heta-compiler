@@ -110,7 +110,7 @@ c.importMany([
     id: 's1',
     space: 'default',
     variable: {kind: 'dynamic', size: 1.1},
-    compartmentRef: 'comp1'
+    compartmentRef: 'comp3'
   },
   {
     class: 'Species',
@@ -126,7 +126,7 @@ c.importMany([
     space: 'default',
     variable: {kind: 'rule', size: 'p2*comp1*s1'},
     actors: [
-      {targetRef: 's1', stoichiometry: -2},
+      {targetRef: 's4', stoichiometry: -2},
       {targetRef: 's2', stoichiometry: 1}
     ],
     effectors: [
@@ -136,7 +136,7 @@ c.importMany([
   {
     class: 'Reaction',
     id: 'r3',
-    //space: 'default',
+    space: 'default',
     variable: {kind: 'rule', size: 28, units: 'mole/L'},
     effectors: [
       {targetRef: 's2'}
@@ -144,4 +144,9 @@ c.importMany([
   }
 ]);
 
-console.log(c.toQArr());
+c
+  //.checkQuantitiesByScope()
+  .populateQuantitiesByScope();
+
+  console.log(scn1.listOfInitialAssignments);
+  //fs.writeFileSync('result.xml', scene.toSBML());
