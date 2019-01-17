@@ -141,12 +141,17 @@ c.importMany([
     effectors: [
       {targetRef: 's2'}
     ]
+  },
+  {
+    class: 'Scene',
+    id: 'scn2',
+    scope: 'default'
   }
 ]);
 
-c
-  //.checkQuantitiesByScope()
-  .populateQuantitiesByScope();
+c.select('scn2')
+  //.check()
+  .populate();
 
-  console.log(scn1.listOfInitialAssignments);
+  //console.log(scn1.listOfInitialAssignments);
   //fs.writeFileSync('result.xml', scene.toSBML());
