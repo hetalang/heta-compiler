@@ -19,11 +19,9 @@ class Container {
     };
   }
   select(index){ // db-mode
-    let foundElement = _.find(this._storage, (simple) => simple.id===index.id && simple.space===index.space);
-
-    return foundElement;
+    return this._storage.get(index);
   }
-  insert(q){ // db-mode
+  insert(q){
     let hasClass = 'class' in q;
     let index = {id: q.id, space: q.space};
 
@@ -39,7 +37,7 @@ class Container {
 
     return this;
   }
-  update(q){ // db-mode
+  update(q){
     let hasClass = 'class' in q;
     let index = {id: q.id, space: q.space};
     let targetComponent = this.select(index);
@@ -55,7 +53,7 @@ class Container {
 
     return this;
   }
-  import( // db-mode
+  import(
     q,
     deepMerge = true // XXX: not implemented
   ){

@@ -5,7 +5,7 @@ class Storage extends Array {
   constructor(){
     super();
   }
-  set(index, simple){ // collection-mode
+  set(index, simple){
     // set index
     simple.id = index.id;
     simple.space = index.space;
@@ -24,6 +24,16 @@ class Storage extends Array {
     }
 
     return simple;
+  }
+  get(index){
+    return this.find((simple) => simple.id===index.id && simple.space===index.space);
+  }
+  delete(index){
+    let elementNumber = _.findIndex(this, (simple) => simple.id===index.id && simple.space===index.space);
+    if(elementNumber === -1)
+      throw new Error(`Cannot delete element with index ${index.id} because it is not in Storage.`);
+
+    return this.splice(elementNumber, 1);
   }
 }
 
