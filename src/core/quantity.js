@@ -1,5 +1,7 @@
 const { _Simple } = require('./_simple');
 const { Numeric, Expression } = require('./_size');
+const {UnitsParser, qspUnits} = require('units-parser');
+let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
 class Quantity extends _Simple {
@@ -49,12 +51,24 @@ class Quantity extends _Simple {
   get index(){
     return {id: this.id, space: this.space};
   }
+  get indexString(){
+    return this.id + '$' + this.space;
+  }
   toQ(){
     let res = super.toQ();
     res.space = this.space;
     res.variable = _.pick(this.variable, ['kind', 'units']);
     res.variable.size = this.variable.size.toQ();
     return res;
+  }
+  get unitsHash(){
+    if(this.variable.units){
+      return uParser
+        .parse(this.variable.units)
+        .toHash();
+    }else{
+      return;
+    }
   }
 }
 

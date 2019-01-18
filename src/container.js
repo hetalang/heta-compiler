@@ -17,16 +17,24 @@ class Container {
       Scene
     };
   }
-  set(simple, ind){ // collection-mode
-    // set identifiers
-    simple.id = ind.id;
-    simple.space = ind.space;
+  set(simple, index){ // collection-mode
+    // set index
+    simple.id = index.id;
+    simple.space = index.space;
+
+    let elementNumber = _.findIndex(this._storage, (simple) => simple.id===index.id && simple.space===index.space);
+
     // set container
     if(simple instanceof Scene) {
       simple._container = this;
     }
 
-    this._storage.push(simple);
+    if(elementNumber === -1) {
+      this._storage.push(simple);
+    } else {
+      this._storage[elementNumber] = simple;
+    }
+
     return this;
   }
   select(index){ // db-mode

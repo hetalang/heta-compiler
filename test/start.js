@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { _Simple, Scene, Container, Quantity, Numeric, Expression, Species } = require('../src');
 
 let x1 = (new _Simple).merge({
@@ -120,6 +121,11 @@ c.importMany([
     variable: {kind: 'rule', size: 15.223}
   },
   {
+    id: 'p3',
+    space: 'default',
+    variable: {kind: 'rule', size: 'xxx*yyy', units: '1/L/h'}
+  },
+  {
     class: 'Species',
     id: 's1',
     space: 'default',
@@ -167,5 +173,6 @@ let scn2 = c.select({id: 'scn2'})
   //.check()
   .populate();
 
-  console.log(scn2.listOfCompartments);
-  //fs.writeFileSync('result.xml', scene.toSBML());
+//console.log(scn2.toSBML());
+//console.log(c.select({id: 'p3', space: 'default'}).getUnitDefinition()); //
+fs.writeFileSync('result.xml', scn2.toSBML());

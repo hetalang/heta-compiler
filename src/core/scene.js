@@ -13,6 +13,7 @@ class Scene extends _Simple {
   merge(q){
     // Scene.isValid(q);
     super.merge(q);
+    this._container;
 
     if(q && q.scope) this.scope = q.scope;
     if(q && q.type) this.type = q.type;
@@ -26,14 +27,12 @@ class Scene extends _Simple {
   static get schemaName(){
     return 'SceneQ';
   }
-  /*
   getUniqueUnits(){
-    return _.chain(this._components)
-      .filter((variable) => variable.units)
-      .uniqBy((variable) => variable.unitsHash)
+    return _.chain(this.getQuantities())
+      .filter((quantity) => quantity.variable.units)
+      .uniqBy((quantity) => quantity.unitsHash)
       .value();
   }
-  */
   getQuantities(){
     return this._container._storage.filter((component) => {
       return (component instanceof Quantity) && component.space===this.scope;

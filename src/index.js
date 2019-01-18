@@ -8,7 +8,7 @@ const { Numeric, Expression } = require('./core/_size');
 
 // set sbml methods
 require('./sbml/scene');
-require('./sbml/variable');
+require('./sbml/quantity');
 
 const { Container } = require('./container');
 

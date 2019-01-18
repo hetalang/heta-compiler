@@ -28,6 +28,9 @@ class _Simple {
   get index(){
     return {id: this.id};
   }
+  get indexString(){
+    return this.id;
+  }
   clone(){ // creates copy of element TODO: not tested
     let clone = _.clone(this);
     return clone;

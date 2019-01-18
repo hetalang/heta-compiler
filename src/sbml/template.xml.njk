@@ -3,85 +3,89 @@
   <model>
   {% if out.listOfCompartments|length > 0 %}
     <listOfCompartments>
-    {%- for variable in out.listOfCompartments %}
+    {%- for quantity in out.listOfCompartments %}
       <compartment
-        id="{{variable.id}}"
-        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        id="{{quantity.id}}"
+        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         constant="false"
-        {% if variable.size.num!==undefined and variable.kind!=='rule' -%}size="{{variable.size.num}}"{%- endif %}
-        {% if variable.units!==undefined -%}units="{{ variable.unitsHash }}"{%- endif %}
+        {% if quantity.variable.size.num!==undefined and quantity.kind!=='rule' -%}size="{{quantity.variable.size.num}}"{%- endif %}
+        {% if quantity.variable.units!==undefined -%}units="{{ quantity.unitsHash }}"{%- endif %}
+        metaid="{{quantity.indexString}}"
         >
-        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
+        {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
       </compartment>
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
   {% if out.listOfSpecies|length > 0 %}
     <listOfSpecies>
-    {%- for variable in out.listOfSpecies %}
+    {%- for quantity in out.listOfSpecies %}
       <species
-        id="{{variable.id}}"
-        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
-        hasOnlySubstanceUnits="{{variable.parent.isAmount===true}}"
+        id="{{quantity.id}}"
+        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
+        hasOnlySubstanceUnits="{{quantity.isAmount===true}}"
         speciesType=""
-        compartment="{{variable.parent.compartmentRef}}"
+        compartment="{{quantity.compartmentRef}}"
         constant="false"
-        boundaryCondition="{{ variable.kind!=='dynamic' }}"
-        {% if variable.size.num!==undefined and variable.kind!=='rule' -%}initialConcentration="{{variable.size.num}}"{%- endif %}
-        {% if variable.units!==undefined -%}substanceUnits="{{variable.unitsHash}}"{%- endif %}
+        boundaryCondition="{{ quantity.variable.kind!=='dynamic' }}"
+        {% if quantity.variable.size.num!==undefined and quantity.variable.kind!=='rule' -%}initialConcentration="{{quantity.variable.size.num}}"{%- endif %}
+        {% if quantity.variable.units!==undefined -%}substanceUnits="{{quantity.unitsHash}}"{%- endif %}
+        metaid="{{quantity.indexString}}"
         >
-        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
+        {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
       </species>
     {%- endfor %}
     </listOfSpecies>
   {% endif %}
   {% if out.listOfParameters|length > 0 %}
     <listOfParameters>
-    {%- for variable in out.listOfParameters %}
+    {%- for quantity in out.listOfParameters %}
       <parameter
-        id="{{variable.id}}"
-        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        id="{{quantity.id}}"
+        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         constant="false"
-        {% if variable.size.num!==undefined and variable.kind!=='rule' -%}value="{{variable.size.num}}"{%- endif %}
-        {% if variable.units!==undefined -%}units="{{variable.unitsHash}}"{%- endif %}
+        {% if quantity.variable.size.num!==undefined and quantity.variable.kind!=='rule' -%}value="{{quantity.variable.size.num}}"{%- endif %}
+        {% if quantity.variable.units!==undefined -%}units="{{quantity.unitsHash}}"{%- endif %}
+        metaid="{{quantity.indexString}}"
         >
-        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
+        {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
       </parameter>
     {%- endfor %}
   </listOfParameters>
   {% endif %}
   {% if out.listOfReactions|length > 0 %}
     <listOfReactions>
-    {%- for variable in out.listOfReactions %}
+    {%- for quantity in out.listOfReactions %}
       <reaction
-        id="{{variable.id}}"
-        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
-        reversible="{{ variable.parent.aux.reversible!=='false' }}"
-        fast="{{ variable.parent.aux.fast==='true' }}"
+        id="{{quantity.id}}"
+        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
+        reversible="{{ quantity.aux.reversible!=='false' }}"
+        fast="{{ quantity.aux.fast==='true' }}"
+        metaid="{{quantity.indexString}}"
         >
-        {% if variable.parent.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{variable.parent.notesHTML}}</html></notes>{% endif %}
+        {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
         <listOfReactants>
-          {% for actor in variable.parent.actors -%}
+          {% for actor in quantity.actors -%}
           {% if actor.stoichiometry<0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ -actor.stoichiometry }}"/>{% endif %}
           {% endfor -%}
         </listOfReactants>
         <listOfProducts>
-          {% for actor in variable.parent.actors -%}
+          {% for actor in quantity.actors -%}
           {% if actor.stoichiometry>0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ actor.stoichiometry }}"/>{% endif %}
           {% endfor -%}
         </listOfProducts>
         <listOfModifiers>
-          {% for effector in variable.parent.effectors -%}
+          {% for effector in quantity.effectors -%}
           <modifierSpeciesReference species="{{ effector.targetRef }}"/>
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
-          {%- if variable.size.expr -%}
-            {{variable.size.exprCMathML}}
+          {%- if quantity.variable.size.expr -%}
+            {{quantity.variable.size.exprCMathML}}
           {%- endif -%}
-          {% if variable.size.num %}
+          {% if quantity.variable.size.num %}
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <cn>{{variable.size.num}}</cn>
+            <cn>{{quantity.variable.size.num}}</cn>
           </math>
           {%- endif %}
         </kineticLaw>
@@ -91,17 +95,17 @@
   {% endif %}
   {% if out.listOfRules|length > 0 %}
     <listOfRules>
-    {%- for variable in out.listOfRules %}
+    {%- for quantity in out.listOfRules %}
       <assignmentRule
-        variable="{{variable.id}}"
-        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        variable="{{quantity.id}}"
+        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         >
-        {%- if variable.size.expr -%}
-          {{variable.size.exprCMathML}}
+        {%- if quantity.variable.size.expr -%}
+          {{quantity.variable.size.exprCMathML}}
         {%- endif -%}
-        {% if variable.size.num %}
+        {% if quantity.variable.size.num %}
         <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <cn>{{variable.size.num}}</cn>
+          <cn>{{quantity.variable.size.num}}</cn>
         </math>
         {%- endif %}
       </assignmentRule>
@@ -110,20 +114,20 @@
   {% endif %}
   {% if out.listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
-    {%- for variable in out.listOfInitialAssignments %}
+    {%- for quantity in out.listOfInitialAssignments %}
       <initialAssignment
-        symbol="{{variable.id}}"
-        {% if variable.parent.title %}name="{{variable.parent.title}}"{% endif %}
+        symbol="{{quantity.id}}"
+        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         >
-        {{variable.size.exprCMathML}}
+        {{quantity.variable.size.exprCMathML}}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
   {% if out.getUniqueUnits()|length > 0 %}
     <listOfUnitDefinitions>
-    {%- for variable in out.getUniqueUnits() %}
-      {{ variable.getUnitDefinition() }}
+    {%- for quantity in out.getUniqueUnits() %}
+      {{ quantity.getUnitDefinition() }}
     {%- endfor %}
   </listOfUnitDefinitions>
   {% endif %}

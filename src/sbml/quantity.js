@@ -1,10 +1,10 @@
-const { Variable } = require('../core/variable');
+const { Quantity } = require('../core/quantity');
 const {UnitsParser, qspUnits, qspToSbml} = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
-Variable.prototype.getUnitDefinition = function(){
+Quantity.prototype.getUnitDefinition = function(){
   let transformator = qspToSbml; // TODO: add user defined units
   return uParser
-    .parse(this.units)
+    .parse(this.variable.units)
     .toXmlUnitDefinition(transformator, {nameStyle: 'HTML'});
 };
