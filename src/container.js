@@ -3,9 +3,8 @@ const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
 const { Scene } = require('./core/scene');
-const { exception } = require('./exceptions');
 const { Storage } = require('./storage');
-const _ = require('lodash');
+// const _ = require('lodash');
 
 class Container {
   constructor(){
@@ -27,10 +26,14 @@ class Container {
 
     // check if class is known
     if(!hasClass)
-      throw new Error(`Element with index: "${index.id}" is not exist and class cannot be estimated.`);
+      throw new Error(
+        `Element with index: "${index.id}" is not exist and class cannot be estimated.`
+      );
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
-      throw new Error(`Unknown "class" ${q.class} in "import" for component id: "${q.id}".`);
+      throw new Error(
+        `Unknown "class" ${q.class} in "import" for component id: "${q.id}".`
+      );
 
     let simple = (new selectedClass).merge(q);
     this._storage.set(index, simple);
@@ -44,19 +47,20 @@ class Container {
 
     // creation of new components is not allowed
     if(targetComponent===undefined)
-        throw new Error(`Element with index: "${index}" is not exist which is not allowed for "update" strategy.`);
+      throw new Error(
+        `Element with index: "${index}" is not exist which is not allowed for "update" strategy.`
+      );
     // class cannot be changed
     if(hasClass && targetComponent && q.class !== targetComponent.className)
-      throw new Error(`Component "${index}" truing to change class which is not allowed in current version.`);
+      throw new Error(
+        `Component "${index}" truing to change class which is not allowed in current version.`
+      );
 
     targetComponent.merge(q);
 
     return this;
   }
-  import(
-    q,
-    deepMerge = true // XXX: not implemented
-  ){
+  import(q){
     // checking arguments
     let hasClass = 'class' in q;
     if(hasClass){
@@ -67,13 +71,8 @@ class Container {
 
     return this;
   }
-  importMany(
-    qArr,
-    deepMerge = true // XXX: not implemented
-  ){
-    qArr.forEach((q) => {
-      this.import(q, deepMerge);
-    });
+  importMany(qArr){
+    qArr.forEach((q) => this.import(q));
     return this;
   }
   toQArr(){

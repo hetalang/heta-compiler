@@ -13,7 +13,7 @@ class Scene extends _Simple {
   merge(q){
     // Scene.isValid(q);
     super.merge(q);
-    this._storage;
+    // this._storage;
 
     if(q && q.scope) this.scope = q.scope;
     if(q && q.type) this.type = q.type;
@@ -44,22 +44,29 @@ class Scene extends _Simple {
       .forEach((quantity, i, array) => {
         // check compartmentRef in Species
         if(quantity instanceof Species){
-          if(!quantity.compartmentRef) console.log(`compartmentRef is not set for ${quantity.index}`);
+          if(!quantity.compartmentRef)
+            exception(`compartmentRef is not set for ${quantity.index}`);
           let target = array.find((x) => x.id===quantity.compartmentRef);
-          if(!target) console.log(`compartmentRef reffered to absent value "${quantity.compartmentRef}"`);
-          if(!(target instanceof Compartment)) console.log(`compartmentRef reffered to not a compartment "${quantity.compartmentRef}"`);
+          if(!target)
+            exception(`compartmentRef reffered to absent value "${quantity.compartmentRef}"`);
+          if(!(target instanceof Compartment))
+            exception(`compartmentRef reffered to not a compartment "${quantity.compartmentRef}"`);
         }
         // check targetRef in Reactions
         if(quantity instanceof Reaction){
           quantity.actors.forEach((actor) => {
             let target = array.find((x) => x.id===actor.targetRef);
-            if(!target) console.log(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${quantity.index}`);
-            if(!(target instanceof Species)) console.log(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${quantity.index}`);
+            if(!target)
+              exception(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${quantity.index}`);
+            if(!(target instanceof Species))
+              exception(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${quantity.index}`);
           });
           quantity.effectors.forEach((effector) => {
             let target = array.find((x) => x.id===effector.targetRef);
-            if(!target) console.log(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${quantity.index}`);
-            if(!(target instanceof Species)) console.log(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${quantity.index}`);
+            if(!target)
+              exception(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${quantity.index}`);
+            if(!(target instanceof Species))
+              exception(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${quantity.index}`);
           });
         }
       });

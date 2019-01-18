@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
+const { exception } = require('./exceptions');
 
 /*
   Abstract class _Simple
@@ -55,7 +56,7 @@ class _Simple {
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
     if(!valid) {
-      console.log(validate.errors); // TODO: delete later
+      exception(validate.errors);
       throw new Error('Validation error!');
     }
   }

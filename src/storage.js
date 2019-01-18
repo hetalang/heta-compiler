@@ -10,7 +10,10 @@ class Storage extends Array {
     simple.id = index.id;
     simple.space = index.space;
 
-    let elementNumber = _.findIndex(this, (simple) => simple.id===index.id && simple.space===index.space);
+    let elementNumber = _.findIndex(this, (simple) => {
+      return simple.id===index.id
+        && simple.space===index.space;
+    });
 
     // set container
     if(simple instanceof Scene) {
@@ -29,7 +32,10 @@ class Storage extends Array {
     return this.find((simple) => simple.id===index.id && simple.space===index.space);
   }
   delete(index){
-    let elementNumber = _.findIndex(this, (simple) => simple.id===index.id && simple.space===index.space);
+    let elementNumber = _.findIndex(this, (simple) => {
+      return simple.id===index.id
+        && simple.space===index.space;
+    });
     if(elementNumber === -1)
       throw new Error(`Cannot delete element with index ${index.id} because it is not in Storage.`);
 

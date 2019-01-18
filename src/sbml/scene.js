@@ -7,9 +7,6 @@ const { Expression } = require('../core/_size');
 const { Compartment } = require('../core/compartment');
 const { Species } = require('../core/species');
 const { Reaction } = require('../core/reaction');
-const {UnitsParser, qspUnits, qspToSbml} = require('units-parser');
-let uParser = new UnitsParser(qspUnits);
-const _ = require('lodash');
 
 Scene.prototype.toSBML = function(){
   let sbmlText = nunjucks.render('sbml/template.xml.njk', {out: this});
@@ -60,6 +57,9 @@ Object.defineProperty(Scene.prototype, 'listOfInitialAssignments', {
   get: function(){
     return this
       .getQuantities()
-      .filter((quantity) => (quantity.variable.size instanceof Expression) && quantity.variable.kind!=='rule' );
+      .filter((quantity) => {
+        return (quantity.variable.size instanceof Expression)
+          && quantity.variable.kind!=='rule';
+      });
   }
 });

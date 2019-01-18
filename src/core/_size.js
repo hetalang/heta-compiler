@@ -5,6 +5,7 @@ math.import(mathjsTranslate);
 const mathjsCMathML = require('mathjs-cmathml');
 math.import(mathjsCMathML);
 const { validator } = require('./utilities.js');
+const { exception } = require('./exceptions');
 
 class _Size {
   static isValid(q){
@@ -12,7 +13,7 @@ class _Size {
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
     if(!valid) {
-      console.log(validate.errors); // TODO: delete later
+      exception(validate.errors);
       throw new Error('Validation error!');
     }
   }
