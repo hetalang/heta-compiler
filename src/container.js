@@ -4,11 +4,12 @@ const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
 const { Scene } = require('./core/scene');
 const { exception } = require('./exceptions');
+const { Storage } = require('./storage');
 const _ = require('lodash');
 
 class Container {
   constructor(){
-    this._storage = [];
+    this._storage = new Storage();
     this.classes = {
       Quantity,
       Compartment,
@@ -16,26 +17,6 @@ class Container {
       Reaction,
       Scene
     };
-  }
-  set(simple, index){ // collection-mode
-    // set index
-    simple.id = index.id;
-    simple.space = index.space;
-
-    let elementNumber = _.findIndex(this._storage, (simple) => simple.id===index.id && simple.space===index.space);
-
-    // set container
-    if(simple instanceof Scene) {
-      simple._container = this;
-    }
-
-    if(elementNumber === -1) {
-      this._storage.push(simple);
-    } else {
-      this._storage[elementNumber] = simple;
-    }
-
-    return this;
   }
   select(index){ // db-mode
     let foundElement = _.find(this._storage, (simple) => simple.id===index.id && simple.space===index.space);
@@ -54,7 +35,7 @@ class Container {
       throw new Error(`Unknown "class" ${q.class} in "import" for component id: "${q.id}".`);
 
     let simple = (new selectedClass).merge(q);
-    this.set(simple, index);
+    this._storage.set(index, simple);
 
     return this;
   }

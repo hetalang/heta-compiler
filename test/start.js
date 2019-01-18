@@ -17,10 +17,11 @@ let scn1 = (new Scene).merge({
   scope: 'two'
 });
 
-let c = new Container()
-  .set(x1, {id: 'x1'})
-  .set(scn1, {id: 'scn1'})
-  .set(new _Simple, {id: 'x2'});
+let c = new Container();
+
+c._storage.set({id: 'x1'}, x1);
+c._storage.set({id: 'scn1'}, scn1);
+c._storage.set({id: 'x2'}, new _Simple);
 
 let x2 = c.select({id: 'x2'}).merge({
   title: 'selected simple obj'
@@ -40,7 +41,7 @@ let o2 = (new Quantity).merge({
     units: '1/min'
   }
 });
-c.set(o2, {id: 'k0', space: 'one'});
+c._storage.set({id: 'k0', space: 'one'}, o2);
 
 let expr1 = new Expression('m*c^2');
 let o3 = (new Quantity).merge({
@@ -52,7 +53,7 @@ let o3 = (new Quantity).merge({
     size: expr1
   }
 });
-c.set(o3, {id: 'f0', space: 'default'});
+c._storage.set({id: 'f0', space: 'default'}, o3);
 
 let xxx = c.import({
   class: 'Quantity',

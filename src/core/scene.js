@@ -13,7 +13,7 @@ class Scene extends _Simple {
   merge(q){
     // Scene.isValid(q);
     super.merge(q);
-    this._container;
+    this._storage;
 
     if(q && q.scope) this.scope = q.scope;
     if(q && q.type) this.type = q.type;
@@ -34,7 +34,7 @@ class Scene extends _Simple {
       .value();
   }
   getQuantities(){
-    return this._container._storage.filter((component) => {
+    return this._storage.filter((component) => {
       return (component instanceof Quantity) && component.space===this.scope;
     });
   }
