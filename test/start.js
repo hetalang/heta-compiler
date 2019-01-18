@@ -17,11 +17,11 @@ let scn1 = (new Scene).merge({
 });
 
 let c = new Container()
-  .insert(x1, 'x1')
-  .insert(scn1, 'scn1')
-  .insert(new _Simple, 'x2');
+  .set(x1, {id: 'x1'})
+  .set(scn1, {id: 'scn1'})
+  .set(new _Simple, {id: 'x2'});
 
-let x2 = c.select('x2').merge({
+let x2 = c.select({id: 'x2'}).merge({
   title: 'selected simple obj'
 });
 
@@ -39,7 +39,7 @@ let o2 = (new Quantity).merge({
     units: '1/min'
   }
 });
-c.insert(o2, 'k0', 'one');
+c.set(o2, {id: 'k0', space: 'one'});
 
 let expr1 = new Expression('m*c^2');
 let o3 = (new Quantity).merge({
@@ -51,11 +51,9 @@ let o3 = (new Quantity).merge({
     size: expr1
   }
 });
-c.insert(o3, 'f0');
+c.set(o3, {id: 'f0', space: 'default'});
 
-// from previous version, using importOne
-
-c.importOne({
+let xxx = c.import({
   class: 'Quantity',
   id: 'r1',
   space: 'default',
@@ -67,14 +65,30 @@ c.importOne({
     kind: 'rule',
     size: expr1
   }
-}, 'upsert').importOne({
+}, 'upsert');
+
+// from previous version, using import
+
+c.import({
+  class: 'Quantity',
+  id: 'r1',
+  space: 'default',
+  title: 'Test platform',
+  notes: 'This is *test* platform',
+  tags: ['a', 'b', 'c'],
+  aux: {a:1, b:2, c: 3},
+  variable: {
+    kind: 'rule',
+    size: expr1
+  }
+}, 'upsert').import({
   id: 'r1',
   space: 'default',
   title: 'updated title',
   variable: {kind: 'dynamic'}
 }, 'upsert');
 
-c.importOne({
+c.import({
   class: 'Compartment',
   id: 'comp1',
   space: 'default',
@@ -149,9 +163,9 @@ c.importMany([
   }
 ]);
 
-c.select('scn2')
+let scn2 = c.select({id: 'scn2'})
   //.check()
   .populate();
 
-  //console.log(scn1.listOfInitialAssignments);
+  console.log(scn2.listOfCompartments);
   //fs.writeFileSync('result.xml', scene.toSBML());
