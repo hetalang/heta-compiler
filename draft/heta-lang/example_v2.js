@@ -51,6 +51,17 @@ c.select('k2', 'one').merge({
   variable: {kind: 'static', size: 0.02}
 });
 
+c.insert({id: evt1, space: one, class: Event});
+c.update({id: evt1, space: one, variable: {size: t-12, kind: rule}});
+c.update({
+  id: evt1,
+  space: one,
+  assignments: [
+    {target: A, size: A+5},
+    {target: B, size: 0}
+  ]
+});
+
 // submodel 2 with structures
 
 // TODO

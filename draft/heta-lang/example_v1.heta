@@ -31,9 +31,15 @@ k1$one = 0.01;
 k2$one @quant;
 k2$one = 0.02;
 
-# submodel 2 with structures
+evt1$one @event;
+evt1$one = t - 12;
 
-two @scope;
+evt1$one {assignments: [
+    {target: A, size: A+5},
+    {target: B, size: 0}
+]};
+
+# submodel 2 with structures
 
 block $two
   block <= @compartment

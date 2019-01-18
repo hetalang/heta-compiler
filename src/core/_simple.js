@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { exception } = require('./exceptions');
+const { exception } = require('../exceptions');
 
 /*
   Abstract class _Simple
@@ -12,7 +12,7 @@ class _Simple {
     this.aux = {};
   }
   merge(q){
-    //_Simple.isValid(q);
+    _Simple.isValid(q);
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;
     if(q && q.tags) this.tags = _.clone(q.tags);
@@ -51,7 +51,8 @@ class _Simple {
       return;
     }
   }
-  static isValid(q){ // TOFIX: not used
+  static isValid(q){
+    /*
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
@@ -59,6 +60,7 @@ class _Simple {
       exception(validate.errors);
       throw new Error('Validation error!');
     }
+    */
   }
   toQ(){
     let res = _.pick(this, ['title', 'notes', 'tags', 'aux', 'id']);

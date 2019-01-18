@@ -11,7 +11,7 @@ class Scene extends _Simple {
     super();
   }
   merge(q){
-    // Scene.isValid(q);
+    Scene.isValid(q);
     super.merge(q);
     // this._storage;
 

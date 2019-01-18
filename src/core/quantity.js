@@ -16,9 +16,9 @@ class Quantity extends _Simple {
 
   }
   merge(q){
-    // Quantity.isValid(q);
-
+    Quantity.isValid(q);
     super.merge(q);
+
     if(q && q.variable && q.variable.kind!==undefined) this.variable.kind = q.variable.kind;
     if(q && q.variable && q.variable.units!==undefined) this.variable.units = q.variable.units;
 

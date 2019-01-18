@@ -5,8 +5,9 @@ class Species extends Quantity {
     super();
   }
   merge(q){
+    Species.isValid(q);
     super.merge(q);
-    // Species.isValid(q);
+
     this.compartmentRef = q.compartmentRef;
 
     return this;

@@ -5,7 +5,7 @@ math.import(mathjsTranslate);
 const mathjsCMathML = require('mathjs-cmathml');
 math.import(mathjsCMathML);
 const { validator } = require('./utilities.js');
-const { exception } = require('./exceptions');
+const { exception } = require('../exceptions');
 
 class _Size {
   static isValid(q){

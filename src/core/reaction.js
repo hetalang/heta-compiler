@@ -7,8 +7,8 @@ class Reaction extends Quantity {
     this.actors = [];
   }
   merge(q){
+    Reaction.isValid(q);
     super.merge(q);
-    // Reaction.isValid(q);
     if(q.effectors) {
       this.effectors = q.effectors.map((effector) => new Modifier(effector));
     }
