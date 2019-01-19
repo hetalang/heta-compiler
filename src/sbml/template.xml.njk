@@ -80,14 +80,7 @@
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
-          {%- if quantity.variable.size.expr -%}
-            {{quantity.variable.size.exprCMathML}}
-          {%- endif -%}
-          {% if quantity.variable.size.num %}
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <cn>{{quantity.variable.size.num}}</cn>
-          </math>
-          {%- endif %}
+          {{quantity.variable.size.exprCMathML}}
         </kineticLaw>
       </reaction>
     {%- endfor %}
@@ -99,14 +92,7 @@
       variable="{{quantity.id}}"
       {% if quantity.title %}name="{{quantity.title}}"{% endif %}
       >
-      {%- if quantity.variable.size.expr -%}
-        {{quantity.variable.size.exprCMathML}}
-      {%- endif -%}
-      {% if quantity.variable.size.num %}
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <cn>{{quantity.variable.size.num}}</cn>
-      </math>
-      {%- endif %}
+      {{quantity.variable.size.exprCMathML}}
     </assignmentRule>
   {%- endfor %}
   {%- for quantity in out.listOfProcesses %}
