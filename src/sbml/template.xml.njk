@@ -138,6 +138,32 @@
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
+  {% if out.listOfEvents %}
+    <listOfEvents>
+      {%- for event in out.listOfEvents %}
+      <event
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <ci>{{ event.id }}</ci>
+              <cn>0</cn>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          {% for assignment in event.assignments %}
+          <eventAssignment
+            variable="{{ assignment.targetRef }}">
+            {{ assignment.size.exprCMathML }}
+          </eventAssignment>
+          {% endfor %}
+        </listOfEventAssignments>
+      </event>
+      {%- endfor %}
+    </listOfEvents>
+  {% endif %}
   {% if out.getUniqueUnits()|length > 0 %}
     <listOfUnitDefinitions>
     {%- for quantity in out.getUniqueUnits() %}

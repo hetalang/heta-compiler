@@ -135,6 +135,27 @@
           }
         }
       }
+    },
+
+    "EventQ": {
+      "properties": {
+        "assignments": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AssignmentQ" }
+        }
+      }
+    },
+
+    "AssignmentQ": {
+      "properties": {
+        "targetRef": {"$ref": "#/definitions/ID"},
+        "size": {
+          "anyOf": [
+            { "$ref": "#/definitions/ExpressionQ" },
+            { "$ref": "#/definitions/NumericQ" }
+          ]
+        }
+      }
     }
    }
 }

@@ -5,6 +5,7 @@ const { Reaction } = require('./core/reaction');
 const { Scene } = require('./core/scene');
 const { Storage } = require('./storage');
 const { Process } = require('./core/process');
+const { Event } = require('./core/event');
 // const _ = require('lodash');
 
 class Container {
@@ -16,7 +17,8 @@ class Container {
       Species,
       Process,
       Reaction,
-      Scene
+      Scene,
+      Event
     };
   }
   select(index){ // db-mode

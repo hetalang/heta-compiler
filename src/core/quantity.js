@@ -31,9 +31,9 @@ class Quantity extends _Simple {
       }else if(typeof size === 'string'){
         this.variable.size = new Expression(size);
       }else if('num' in size){
-        this.size = new Numeric(size);
+        this.variable.size = new Numeric(size);
       }else if('expr' in size){
-        this.size = new Expression(size);
+        this.variable.size = new Expression(size);
       }else{
         // if code is OK never throws
         throw new Error('Wrong Variable argument.');

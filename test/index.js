@@ -44,9 +44,20 @@ c.importMany([
     actors: [
       {targetRef: 's1', stoichiometry: -1}
     ]
+  },
+  {
+    class: 'Event',
+    id: 'evt1',
+    space: 'default',
+    assignments: [
+      {targetRef: 's1', size: 1.2},
+      {targetRef: 'k0', size: 'k1*1.1'}
+    ],
+    variable: {kind: 'rule', size: 't-3'}
   }
 ]);
 
-console.log(c.select({id: 'scn1'}).listOfProcesses);
+//console.log(c.select({id: 'scn1'}).listOfEvents);
+console.log(c.select({id: 'scn1'}).listOfParameters);
 fs.writeFileSync('result.xml', c.select({id: 'scn1'}).toSBML());
 //console.log(c.storage[4]);

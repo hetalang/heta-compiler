@@ -33,6 +33,9 @@ class Numeric extends _Size {
         : false;
     }
   }
+  get exprCMathML(){
+    return `<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>${this.num}</cn></math>`;
+  }
   static get schemaName(){
     return 'NumericQ';
   }
