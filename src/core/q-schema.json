@@ -18,9 +18,6 @@
        "pattern": "^[_a-zA-Z0-9/][_a-zA-Z0-9/*]*$"
      },
 
-     "Filter": {
-     },
-
      "SimpleQ": {
        "type": "object",
        "properties": {
@@ -36,56 +33,45 @@
      },
 
      "NumericQ": {
-       "allOf": [
-         { "$ref": "#/definitions/SimpleQ" },
-         {
-           "required": ["num"],
-           "properties": {
-             "num": {"type": "number"},
-             "free": {"type": "boolean"}
-           }
-         }
-       ]
-    },
+       "required": ["num"],
+       "properties": {
+         "num": {"type": "number"},
+         "free": {"type": "boolean"}
+       }
+     },
 
     "ExpressionQ": {
-      "allOf": [
-        { "$ref": "#/definitions/SimpleQ" },
-        {
-          "required": ["expr"],
-          "properties": {
-            "expr": {"type": "string"},
-            "lang": {"type": "string"}
-          }
-        }
-      ]
+      "required": ["expr"],
+      "properties": {
+        "expr": {"type": "string"},
+        "lang": {"type": "string"}
+      }
     },
 
     "VariableQ": {
       "type": "object",
-      "required": ["id", "size"],
       "properties": {
-        "id": {"$ref": "#/definitions/ID"},
         "kind": { "$ref": "#/definitions/VarKind" },
-        "units": {"$ref": "#/definitions/Units"}
+        "units": {"$ref": "#/definitions/Units"},
+        "size": {
+          "anyOf": [
+            { "$ref": "#/definitions/ExpressionQ" },
+            { "$ref": "#/definitions/NumericQ" }
+          ]
+        }
       }
     },
 
     "QuantityQ": {
-      "required": ["variable"],
       "properties": {
         "variable": {"$ref": "#/definitions/VariableQ"}
       }
     },
 
     "CompartmentQ": {
-      "allOf": [
-        { "$ref": "#/definitions/QuantityQ" }
-      ]
     },
 
     "SpeciesQ": {
-      "required": ["compartmentRef"],
       "properties": {
         "compartmentRef": { "$ref": "#/definitions/ID" }
       }
@@ -138,45 +124,17 @@
 
     "SceneQ": {
       "properties": {
-        "filter": { "$ref": "#/definitions/Filter" }
+        "scope": { "type": "string"},
+        "kind": {"type": "string", "enum": ["kinetic"]},
+        "method": {
+          "type": "object",
+          "properties": {
+            "timeRange": {},
+            "timeStep": {},
+            "solver": {"type": "string", "enum": ["lsoda"]}
+          }
+        }
       }
-    },
-
-    "Q": {
-      "anyOf": [
-        { "allOf": [
-          { "$ref": "#/definitions/NumericQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Numeric"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/ExpressionQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Expression"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/QuantityQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Quantity"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/CompartmentQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Compartment"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/SpeciesQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Species"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/ContinuousProcessQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["ContinuousProcess"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/ReactionQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Reaction"]}}}
-        ]},
-        { "allOf": [
-          { "$ref": "#/definitions/SceneQ" },
-          { "required": ["class"], "properties": {"class": {"enum": ["Scene"]}}}
-        ]}
-      ]
     }
    }
 }
