@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test": "node test/start.js"
+    "test": "node test/index.js"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",

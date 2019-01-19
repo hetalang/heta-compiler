@@ -4,21 +4,23 @@ const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
 const { Scene } = require('./core/scene');
 const { Storage } = require('./storage');
+const { Process } = require('./core/process');
 // const _ = require('lodash');
 
 class Container {
   constructor(){
-    this._storage = new Storage();
+    this.storage = new Storage();
     this.classes = {
       Quantity,
       Compartment,
       Species,
+      Process,
       Reaction,
       Scene
     };
   }
   select(index){ // db-mode
-    return this._storage.get(index);
+    return this.storage.get(index);
   }
   insert(q){
     let hasClass = 'class' in q;
@@ -36,7 +38,7 @@ class Container {
       );
 
     let simple = (new selectedClass).merge(q);
-    this._storage.set(index, simple);
+    this.storage.set(index, simple);
 
     return this;
   }
@@ -76,7 +78,7 @@ class Container {
     return this;
   }
   toQArr(){
-    let qArr = this._storage.map((obj) => obj.toQ());
+    let qArr = this.storage.map((obj) => obj.toQ());
     return qArr;
   }
   toJSON(){

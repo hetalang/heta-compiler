@@ -7,6 +7,7 @@ const { Expression } = require('../core/_size');
 const { Compartment } = require('../core/compartment');
 const { Species } = require('../core/species');
 const { Reaction } = require('../core/reaction');
+const { Process } = require('../core/process');
 
 Scene.prototype.toSBML = function(){
   let sbmlText = nunjucks.render('sbml/template.xml.njk', {out: this});
@@ -33,7 +34,7 @@ Object.defineProperty(Scene.prototype, 'listOfParameters', {
   get: function(){
     return this
       .getQuantities()
-      .filter((quantity) => quantity.className==='Quantity');
+      .filter((quantity) => quantity.className==='Quantity' || quantity.className==='Process');
   }
 });
 
@@ -50,6 +51,14 @@ Object.defineProperty(Scene.prototype, 'listOfRules', {
     return this
       .getQuantities()
       .filter((quantity) => !(quantity instanceof Reaction) && quantity.variable.kind==='rule' );
+  }
+});
+
+Object.defineProperty(Scene.prototype, 'listOfProcesses', {
+  get: function(){
+    return this
+      .getQuantities()
+      .filter((quantity) => !(quantity instanceof Reaction) && quantity instanceof Process );
   }
 });
 

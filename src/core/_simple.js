@@ -13,6 +13,7 @@ class _Simple {
   }
   merge(q){
     _Simple.isValid(q);
+    
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;
     if(q && q.tags) this.tags = _.clone(q.tags);
@@ -60,7 +61,7 @@ class _Simple {
       exception(validate.errors);
       throw new Error('Validation error!');
     }
-    
+
   }
   toQ(){
     let res = _.pick(this, ['title', 'notes', 'tags', 'aux', 'id']);

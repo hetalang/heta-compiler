@@ -1,20 +1,13 @@
 const { Quantity } = require('./quantity');
+const { Process, Effector, Actor } = require('./process');
 
-class Reaction extends Quantity {
+class Reaction extends Process {
   constructor(){
     super();
-    this.effectors = [];
-    this.actors = [];
   }
   merge(q){
     Reaction.isValid(q);
     super.merge(q);
-    if(q.effectors) {
-      this.effectors = q.effectors.map((effector) => new Modifier(effector));
-    }
-    if(q.actors) {
-      this.actors = q.actors.map((actor) => new Reactant(actor));
-    }
 
     return this;
   }
@@ -24,36 +17,12 @@ class Reaction extends Quantity {
   get className(){
     return 'Reaction';
   }
-  toQ(){
-    let res = super.toQ();
-    res.actors = this.actors.map((actor) => {
-      return {
-        targetRef: actor.targetRef,
-        stoichiometry: actor.stoichiometry
-      };
-    });
-    res.effectors = this.effectors.map((effector) => {
-      return {
-        targetRef: effector.targetRef
-      };
-    });
-    return res;
-  }
 }
 
-class Modifier {
-  constructor(q){
-    this.targetRef = q.targetRef;
-  }
+class Modifier extends Effector {
 }
 
-class Reactant extends Modifier {
-  constructor(q){
-    super(q);
-    this.stoichiometry = q.stoichiometry!==undefined
-      ? q.stoichiometry
-      : 1; // default value
-  }
+class Reactant extends Actor {
 }
 
 module.exports = {

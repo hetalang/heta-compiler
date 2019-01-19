@@ -97,7 +97,7 @@
       ]
     },
 
-    "ContinuousProcessQ": {
+    "ProcessQ": {
       "properties": {
         "variable": {
           "properties": {
@@ -119,7 +119,7 @@
     },
 
     "ReactionQ": {
-      "$ref": "#/definitions/ContinuousProcessQ"
+      "$ref": "#/definitions/ProcessQ"
     },
 
     "SceneQ": {

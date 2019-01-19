@@ -85,6 +85,7 @@ class Scene extends _Simple {
             let target = array.find((x) => x.id===quantity.compartmentRef);
             if(!target) {
               exception(`compartmentRef reffered to absent value "${quantity.compartmentRef}"`);
+            } else {
               if(!(target instanceof Compartment)) {
                 exception(`compartmentRef reffered to not a compartment "${quantity.compartmentRef}"`);
               }else{

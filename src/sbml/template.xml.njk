@@ -93,25 +93,39 @@
     {%- endfor %}
   </listOfReactions>
   {% endif %}
-  {% if out.listOfRules|length > 0 %}
-    <listOfRules>
-    {%- for quantity in out.listOfRules %}
-      <assignmentRule
-        variable="{{quantity.id}}"
-        {% if quantity.title %}name="{{quantity.title}}"{% endif %}
-        >
-        {%- if quantity.variable.size.expr -%}
-          {{quantity.variable.size.exprCMathML}}
-        {%- endif -%}
-        {% if quantity.variable.size.num %}
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <cn>{{quantity.variable.size.num}}</cn>
-        </math>
-        {%- endif %}
-      </assignmentRule>
+  <listOfRules>
+  {%- for quantity in out.listOfRules %}
+    <assignmentRule
+      variable="{{quantity.id}}"
+      {% if quantity.title %}name="{{quantity.title}}"{% endif %}
+      >
+      {%- if quantity.variable.size.expr -%}
+        {{quantity.variable.size.exprCMathML}}
+      {%- endif -%}
+      {% if quantity.variable.size.num %}
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <cn>{{quantity.variable.size.num}}</cn>
+      </math>
+      {%- endif %}
+    </assignmentRule>
+  {%- endfor %}
+  {%- for quantity in out.listOfProcesses %}
+    {%- for actor in quantity.actors %}
+    <rateRule
+      variable="{{actor.targetRef}}"
+      {% if quantity.title %}name="{{quantity.title}}"{% endif %}
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <times/>
+          <cn>{{actor.stoichiometry}}</cn>
+          <ci>{{quantity.id}}</ci>
+        </apply>
+      </math>
+    </rateRule>
     {%- endfor %}
-    </listOfRules>
-  {% endif %}
+  {%- endfor %}
+  </listOfRules>
   {% if out.listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
     {%- for quantity in out.listOfInitialAssignments %}
