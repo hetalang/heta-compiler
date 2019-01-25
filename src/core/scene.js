@@ -9,6 +9,7 @@ const { exception } = require('../exceptions');
 class Scene extends _Simple {
   constructor(){
     super();
+    this.scope = 'default';
   }
   merge(q){
     Scene.isValid(q);
@@ -37,41 +38,6 @@ class Scene extends _Simple {
     return this._storage.filter((component) => {
       return (component instanceof Quantity) && component.space===this.scope;
     });
-  }
-  check(){
-    this
-      .getQuantities()
-      .forEach((quantity, i, array) => {
-        // check compartmentRef in Species
-        if(quantity instanceof Species){
-          if(!quantity.compartmentRef)
-            exception(`compartmentRef is not set for ${quantity.index}`);
-          let target = array.find((x) => x.id===quantity.compartmentRef);
-          if(!target)
-            exception(`compartmentRef reffered to absent value "${quantity.compartmentRef}"`);
-          if(!(target instanceof Compartment))
-            exception(`compartmentRef reffered to not a compartment "${quantity.compartmentRef}"`);
-        }
-        // check targetRef in Reactions
-        if(quantity instanceof Reaction){
-          quantity.actors.forEach((actor) => {
-            let target = array.find((x) => x.id===actor.targetRef);
-            if(!target)
-              exception(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${quantity.index}`);
-            if(!(target instanceof Species))
-              exception(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${quantity.index}`);
-          });
-          quantity.effectors.forEach((effector) => {
-            let target = array.find((x) => x.id===effector.targetRef);
-            if(!target)
-              exception(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${quantity.index}`);
-            if(!(target instanceof Species))
-              exception(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${quantity.index}`);
-          });
-        }
-      });
-
-    return this;
   }
   populate(){
     this

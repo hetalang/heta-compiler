@@ -1,5 +1,6 @@
 const fs = require('fs');
-const { _Simple, Scene, Container, Quantity, Numeric, Expression, Species } = require('../src');
+const { Scene, Container, Quantity, Numeric, Expression, Species } = require('../src');
+const { _Simple } = require('../src/core/_simple');
 
 let x1 = (new _Simple).merge({
   title: 'This is the title',
