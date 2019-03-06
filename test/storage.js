@@ -1,7 +1,7 @@
 const { Storage } = require('../src/storage');
 const should = require('should');
 
-describe('Unit test for Storage', () => {
+describe('Unit tests for Storage', () => {
   var s;
 
   it('Creating empty storage.', () => {

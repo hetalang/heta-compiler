@@ -6,7 +6,10 @@ const { Scene } = require('./core/scene');
 const { Storage } = require('./storage');
 const { Process } = require('./core/process');
 const { Event } = require('./core/event');
-// const _ = require('lodash');
+const { _Scoped } = require('./core/_scoped');
+const { ReferenceDefinition } = require('./core/reference-definition');
+const _ = require('lodash');
+const should = require('should');
 
 class Container {
   constructor(){
@@ -18,28 +21,34 @@ class Container {
       Process,
       Reaction,
       Scene,
-      Event
+      Event,
+      ReferenceDefinition
     };
   }
   select(index){ // db-mode
     return this.storage.get(index);
   }
-  insert(q){
-    let hasClass = 'class' in q;
-    let index = {id: q.id, space: q.space};
+  insert(q){ // checking with schema is required
 
-    // check if class is known
+    // check if class is presented
+    // q.should.has.property('class');
+    let hasClass = 'class' in q;
     if(!hasClass)
       throw new Error(
-        `Element with index: "${index.id}" is not exist and class cannot be estimated.`
+        `Element with index: "${q.id}" is has no "class" property.`
       );
+
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
       throw new Error(
-        `Unknown "class" ${q.class} in "import" for component id: "${q.id}".`
+        `Unknown "class" ${q.class} for component id: "${q.id}".`
       );
 
     let simple = (new selectedClass).merge(q);
+    let index = {
+      id: q.id,
+      space: (simple instanceof _Scoped) ? q.space : undefined
+    };
     this.storage.set(index, simple);
 
     return this;
@@ -65,15 +74,10 @@ class Container {
     return this;
   }
   import(q){
-    // checking arguments
-    let hasClass = 'class' in q;
-    if(hasClass){
-      this.insert(q);
-    }else{
-      this.update(q);
-    }
-
-    return this;
+    // estimate action
+    let actionName = _.get(q, 'action', 'upsert');
+    // do action
+    return this[actionName](q);
   }
   importMany(qArr){
     qArr.forEach((q) => this.import(q));
