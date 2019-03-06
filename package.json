@@ -4,12 +4,13 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test": "node test/index.js"
+    "test": "mocha test"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",
   "dependencies": {
     "ajv": "^6.6.1",
+    "heta-standard": "git+ssh://git@gitlab.insysbio.com/dev-group/heta-standard.git",
     "lodash": "^4.17.11",
     "markdown": "^0.5.0",
     "mathjs": "^5.4.0",
@@ -19,5 +20,8 @@
     "random-id": "^1.0.3",
     "units-parser": "^0.2.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mocha": "^6.0.2",
+    "should": "^13.2.3"
+  }
 }
