@@ -1,0 +1,15 @@
+stages:
+  - test
+
+before_script:
+  - "node -v"
+  - "npm -v"
+
+unit-test:
+  stage: test
+  tags:
+    - node
+  before_script:
+    - npm i
+  script:
+    - npm test
