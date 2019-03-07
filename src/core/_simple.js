@@ -53,26 +53,22 @@ class _Simple {
     }
   }
   static isValid(q){
-
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
     if(!valid) {
-      // exception(validate.errors);
+      exception(validate.errors);
       throw new Error('Validation error!');
     }
-
   }
   toQ(){
     let res = _.pick(this, ['title', 'notes', 'tags', 'aux', 'id']);
     res.class = this.className;
     return res;
   }
-
   populate(){
     // do nothing
   }
-
 }
 
 module.exports = {

@@ -29,8 +29,7 @@ class Container {
   select(index){ // db-mode
     return this.storage.get(index);
   }
-  insert(q){ // checking with schema is required
-
+  insert(q){
     // check if class is presented
     q.should.has.property('class').with.ok();
     // check if class is in the list
