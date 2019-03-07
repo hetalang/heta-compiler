@@ -48,15 +48,8 @@ class Quantity extends _Scoped {
   get className(){
     return 'Quantity';
   }
-  get index(){
-    return {id: this.id, space: this.space};
-  }
-  get indexString(){
-    return this.id + '$' + this.space;
-  }
   toQ(){
     let res = super.toQ();
-    res.space = this.space;
     res.variable = _.pick(this.variable, ['kind', 'units']);
     res.variable.size = this.variable.size.toQ();
     return res;

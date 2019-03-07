@@ -14,6 +14,7 @@ describe('Unit test for _Simple common methods', () => {
     simple.should.has.property('index');
     simple.should.has.property('indexString');
     simple.should.has.property('clone');
+    simple.should.has.property('merge');
   });
 
   it('Merge with empty', () => {
@@ -102,22 +103,11 @@ describe('Unit test for _Simple common methods', () => {
 });
 
 describe('Unit test for ReferenceDefinition', () => {
-  it('Prefix property', () => {
-    let simple = (new ReferenceDefinition)
-      .merge({prefix: 'this://is.correct/prefix/'});
-    simple.should.has.property('prefix').with.be.ok();
-  });
 
   it('Incorrect prefix property', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({prefix: {}});
     });
-  });
-
-  it('Suffix property', () => {
-    let simple = (new ReferenceDefinition)
-      .merge({suffix: '-suffix'});
-    simple.should.has.property('suffix').with.be.ok();
   });
 
   it('Incorrect suffix property', () => {
@@ -136,7 +126,7 @@ describe('Unit test for ReferenceDefinition', () => {
       suffix: '-suffix',
       prefix: 'this://is.correct/prefix/'
     });
-    
+
     simple.toQ().should.be.deepEqual({
       // id: 'pmid', // TODO: id cannot be merged in current version
       title: 'title',

@@ -30,7 +30,7 @@ class _Scoped extends _Simple {
   }
   toQ(){
     let res = super.toQ();
-    res.space = this.space;
+    if(this.space) res.space = this.space;
     return res;
   }
   populate(){
