@@ -1,3 +1,5 @@
+/* global describe, it */
+
 const { Storage } = require('../src/storage');
 const should = require('should');
 

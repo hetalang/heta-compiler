@@ -1,3 +1,5 @@
+/* global describe, it, should */
+
 const { Container } = require('../src/container');
 
 describe('Unit tests for Container', () => {
@@ -75,7 +77,7 @@ describe('Unit tests for Container', () => {
     });
 
     it('DELETE LATER', () => {
-      console.log(c);
+      // console.log(c);
     });
   });
 });

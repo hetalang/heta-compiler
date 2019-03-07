@@ -1,7 +1,7 @@
-const _ = require('lodash');
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 const { exception } = require('../exceptions');
+const _ = require('lodash');
 
 /*
   Abstract class _Simple
@@ -13,7 +13,7 @@ class _Simple {
   }
   merge(q){
     _Simple.isValid(q);
-    
+
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;
     if(q && q.tags) this.tags = _.clone(q.tags);
@@ -22,7 +22,7 @@ class _Simple {
     return this;
   }
   static get schemaName(){
-    return 'SimpleQ';
+    return '_Simple';
   }
   get className(){
     return '_Simple';
@@ -68,6 +68,11 @@ class _Simple {
     res.class = this.className;
     return res;
   }
+
+  populate(){
+    // do nothing
+  }
+
 }
 
 module.exports = {

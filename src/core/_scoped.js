@@ -20,7 +20,7 @@ class _Scoped extends _Simple {
     return this;
   }
   static get schemaName(){
-    return '_Scoped';
+    return '_ScopedP';
   }
   get className(){
     return '_Scoped';
