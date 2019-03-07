@@ -11,8 +11,8 @@ class _Simple {
     this.tags = [];
     this.aux = {};
   }
-  merge(q){
-    _Simple.isValid(q);
+  merge(q, skipChecking){
+    if(!skipChecking) _Simple.isValid(q);
 
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;
@@ -58,7 +58,7 @@ class _Simple {
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
     if(!valid) {
-      exception(validate.errors);
+      // exception(validate.errors);
       throw new Error('Validation error!');
     }
 

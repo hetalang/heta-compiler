@@ -8,9 +8,10 @@ class Event extends Quantity {
 
     this.assignments = [];
   }
-  merge(q){
-    Event.isValid(q);
-    super.merge(q);
+  merge(q, skipChecking){
+    if(!skipChecking) Event.isValid(q);
+    super.merge(q, skipChecking);
+    
     if(q.assignments && q.assignments.length>0) {
       q.assignments.forEach((assignmentQ) => {
         let assignment = {targetRef: assignmentQ.targetRef};
@@ -40,7 +41,7 @@ class Event extends Quantity {
     return this;
   }
   static get schemaName(){
-    return 'EventQ';
+    return 'EventP';
   }
   get className(){
     return 'Event';

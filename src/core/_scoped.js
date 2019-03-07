@@ -9,8 +9,8 @@ const { _Simple } = require('./_simple');
   Abstract class _Scoped
 */
 class _Scoped extends _Simple {
-  merge(q){
-    _Scoped.isValid(q);
+  merge(q, skipChecking){
+    if(!skipChecking) _Scoped.isValid(q);
 
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;

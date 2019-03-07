@@ -1,10 +1,10 @@
-const { _Simple } = require('./_simple');
+const { _Scoped } = require('./_scoped');
 const { Numeric, Expression } = require('./_size');
-const {UnitsParser, qspUnits} = require('units-parser');
+const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
-class Quantity extends _Simple {
+class Quantity extends _Scoped {
   constructor(){
     super();
 
@@ -15,9 +15,9 @@ class Quantity extends _Simple {
     this.variable.parent = this; // this is cyclic ref
 
   }
-  merge(q){
-    Quantity.isValid(q);
-    super.merge(q);
+  merge(q, skipChecking){
+    if(!skipChecking) Quantity.isValid(q);
+    super.merge(q, skipChecking);
 
     if(q && q.variable && q.variable.kind!==undefined) this.variable.kind = q.variable.kind;
     if(q && q.variable && q.variable.units!==undefined) this.variable.units = q.variable.units;
@@ -43,7 +43,7 @@ class Quantity extends _Simple {
     return this;
   }
   static get schemaName(){
-    return 'QuantityQ';
+    return 'QuantityP';
   }
   get className(){
     return 'Quantity';

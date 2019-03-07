@@ -4,15 +4,15 @@ class Compartment extends Quantity {
   constructor(){
     super();
   }
-  merge(q){
-    Compartment.isValid(q);
-    super.merge(q);
+  merge(q, skipChecking){
+    if(!skipChecking) Compartment.isValid(q);
+    super.merge(q, skipChecking);
     // nothing
 
     return this;
   }
   static get schemaName(){
-    return 'CompartmentQ';
+    return 'CompartmentP';
   }
   get className(){
     return 'Compartment';

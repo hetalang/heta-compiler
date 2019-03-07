@@ -5,14 +5,14 @@ class Reaction extends Process {
   constructor(){
     super();
   }
-  merge(q){
-    Reaction.isValid(q);
-    super.merge(q);
+  merge(q, skipChecking){
+    if(!skipChecking) Reaction.isValid(q);
+    super.merge(q, skipChecking);
 
     return this;
   }
   static get schemaName(){
-    return 'ReactionQ';
+    return 'ReactionP';
   }
   get className(){
     return 'Reaction';

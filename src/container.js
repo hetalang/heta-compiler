@@ -8,8 +8,9 @@ const { Process } = require('./core/process');
 const { Event } = require('./core/event');
 const { _Scoped } = require('./core/_scoped');
 const { ReferenceDefinition } = require('./core/reference-definition');
+// const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
-const should = require('should');
+// const should = require('should');
 
 class Container {
   constructor(){
@@ -31,20 +32,15 @@ class Container {
   insert(q){ // checking with schema is required
 
     // check if class is presented
-    // q.should.has.property('class');
-    let hasClass = 'class' in q;
-    if(!hasClass)
-      throw new Error(
-        `Element with index: "${q.id}" is has no "class" property.`
-      );
-
+    q.should.has.property('class').with.ok();
+    // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
       throw new Error(
         `Unknown "class" ${q.class} for component id: "${q.id}".`
       );
 
-    let simple = (new selectedClass).merge(q);
+    let simple = (new selectedClass).merge(q, false);
     let index = {
       id: q.id,
       space: (simple instanceof _Scoped) ? q.space : undefined
@@ -69,7 +65,7 @@ class Container {
         `Component "${index}" truing to change class which is not allowed in current version.`
       );
 
-    targetComponent.merge(q);
+    targetComponent.merge(q, false);
 
     return this;
   }

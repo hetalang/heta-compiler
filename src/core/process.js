@@ -1,4 +1,6 @@
 const { Quantity } = require('./quantity');
+const exception = require('./utilities');
+const { Species } =require('./species');
 
 class Process extends Quantity {
   constructor(){
@@ -6,9 +8,9 @@ class Process extends Quantity {
     this.effectors = [];
     this.actors = [];
   }
-  merge(q){
-    Process.isValid(q);
-    super.merge(q);
+  merge(q, skipChecking){
+    if(!skipChecking) Process.isValid(q);
+    super.merge(q, skipChecking);
     if(q.effectors) {
       this.effectors = q.effectors.map((q) => new Effector(q));
     }
@@ -19,7 +21,7 @@ class Process extends Quantity {
     return this;
   }
   static get schemaName(){
-    return 'ProcessQ';
+    return 'ProcessP';
   }
   get className(){
     return 'Process';
@@ -39,6 +41,36 @@ class Process extends Quantity {
     });
     return res;
   }
+
+  populate(storage){
+    super.populate(storage);
+
+    this.actors.forEach((actor) => {
+      let target = storage.find((x) => x.id===actor.targetRef);
+      if(!target) {
+        exception(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${this.index}`);
+      } else {
+        if(!(target instanceof Species)) {
+          exception(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${this.index}`);
+        } else {
+          actor.target = target;
+        }
+      }
+    });
+    this.effectors.forEach((effector) => {
+      let target = storage.find((x) => x.id===effector.targetRef);
+      if(!target) {
+        exception(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${this.index}`);
+      } else {
+        if(!(target instanceof Species)) {
+          exception(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${this.index}`);
+        } else {
+          effector.target = target;
+        }
+      }
+    });
+  }
+
 }
 
 class Effector {
