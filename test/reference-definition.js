@@ -90,7 +90,7 @@ describe('Unit test for _Simple common methods', () => {
       aux: {a: 1, b: 'b', c: {}}
     });
     simple.toQ().should.be.deepEqual({
-      // id: 'pmid', // id is not stored in current version
+      // id: 'pmid', // TODO: id cannot be merged in current version
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
@@ -102,5 +102,51 @@ describe('Unit test for _Simple common methods', () => {
 });
 
 describe('Unit test for ReferenceDefinition', () => {
+  it('Prefix property', () => {
+    let simple = (new ReferenceDefinition)
+      .merge({prefix: 'this://is.correct/prefix/'});
+    simple.should.has.property('prefix').with.be.ok();
+  });
+
+  it('Incorrect prefix property', () => {
+    should.throws(() => {
+      (new ReferenceDefinition).merge({prefix: {}});
+    });
+  });
+
+  it('Suffix property', () => {
+    let simple = (new ReferenceDefinition)
+      .merge({suffix: '-suffix'});
+    simple.should.has.property('suffix').with.be.ok();
+  });
+
+  it('Incorrect suffix property', () => {
+    should.throws(() => {
+      (new ReferenceDefinition).merge({suffix: {}});
+    });
+  });
+
+  it('ToQ transformation', () => {
+    let simple = (new ReferenceDefinition).merge({
+      id: 'pmid',
+      title: 'title',
+      notes: 'notes',
+      tags: ['a', 'b', 'c'],
+      aux: {a: 1, b: 'b', c: {}},
+      suffix: '-suffix',
+      prefix: 'this://is.correct/prefix/'
+    });
+    
+    simple.toQ().should.be.deepEqual({
+      // id: 'pmid', // TODO: id cannot be merged in current version
+      title: 'title',
+      notes: 'notes',
+      tags: ['a', 'b', 'c'],
+      aux: {a: 1, b: 'b', c: {}},
+      class: 'ReferenceDefinition',
+      suffix: '-suffix',
+      prefix: 'this://is.correct/prefix/'
+    });
+  });
 
 });

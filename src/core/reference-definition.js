@@ -21,6 +21,13 @@ class ReferenceDefinition extends _Simple {
   get className(){
     return 'ReferenceDefinition';
   }
+  toQ(){
+    let res = super.toQ();
+    if(this.prefix) res.prefix = this.prefix;
+    if(this.suffix) res.suffix = this.suffix;
+
+    return res;
+  }
 }
 
 module.exports = {
