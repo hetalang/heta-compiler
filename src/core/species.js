@@ -1,5 +1,5 @@
 const { Quantity } = require('./quantity');
-const { exception } = require('./utilities');
+const { exception, SchemaValidationError } = require('./utilities');
 const { Compartment } = require('./compartment');
 
 class Species extends Quantity {

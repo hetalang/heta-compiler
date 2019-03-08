@@ -1,6 +1,6 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { exception } = require('../exceptions');
+const { SchemaValidationError } = require('../exceptions');
 const _ = require('lodash');
 
 /*
@@ -55,8 +55,7 @@ class _Simple {
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     let valid = validate(q);
     if(!valid) {
-      exception(validate.errors);
-      throw new Error('Validation error!');
+      throw new SchemaValidationError('Validation error!', validate.errors);
     }
   }
   toQ(){

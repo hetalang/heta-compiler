@@ -1,5 +1,6 @@
 /* global describe, it, should */
 const { Page } = require('../src/core/page');
+const { SchemaValidationError } = require('../src/exceptions');
 const should = require('should');
 
 describe('Unit test for _Scoped common methods', () => {
@@ -51,7 +52,7 @@ describe('Unit test for Page', () => {
   it('Incorrect content property', () => {
     should.throws(() => {
       (new Page).merge({content: {}});
-    });
+    }, SchemaValidationError);
   });
 
   it('ToQ transformation', () => {

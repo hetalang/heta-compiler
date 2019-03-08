@@ -1,7 +1,6 @@
 const _ = require('lodash');
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { exception } = require('../exceptions');
 
 const { _Simple } = require('./_simple');
 
