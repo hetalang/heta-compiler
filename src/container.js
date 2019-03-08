@@ -6,7 +6,6 @@ const { Scene } = require('./core/scene');
 const { Storage } = require('./storage');
 const { Process } = require('./core/process');
 const { Event } = require('./core/event');
-const { _Scoped } = require('./core/_scoped');
 const { ReferenceDefinition } = require('./core/reference-definition');
 // const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
@@ -40,11 +39,8 @@ class Container {
       );
 
     let simple = (new selectedClass).merge(q, false);
-    let index = {
-      id: q.id,
-      space: (simple instanceof _Scoped) ? q.space : undefined
-    };
-    this.storage.set(index, simple);
+
+    this.storage.set(simple);
 
     return this;
   }

@@ -12,7 +12,8 @@ class _Scoped extends _Simple {
   merge(q, skipChecking){
     if(!skipChecking) _Scoped.isValid(q);
     super.merge(q, skipChecking);
-    // what about space?
+
+    if(q && q.space) this.space = q.space;
 
     return this;
   }
@@ -24,9 +25,6 @@ class _Scoped extends _Simple {
   }
   get index(){
     return {id: this.id, space: this.space};
-  }
-  get indexString(){
-    return this.id + '$' + this.space;
   }
   toQ(){
     let res = super.toQ();

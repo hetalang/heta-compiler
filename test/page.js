@@ -1,5 +1,6 @@
 /* global describe, it, should */
 const { Page } = require('../src/core/page');
+const { should } = require('should');
 
 describe('Unit test for _Scoped common methods', () => {
 
@@ -12,7 +13,6 @@ describe('Unit test for _Scoped common methods', () => {
     let simple = new Page();
     simple.should.has.property('className', 'Page');
     simple.should.has.property('index');
-    simple.should.has.property('indexString');
     simple.should.has.property('clone');
     simple.should.has.property('merge');
   });
@@ -27,8 +27,8 @@ describe('Unit test for _Scoped common methods', () => {
       aux: {a: 1, b: 'b', c: {}}
     });
     simple.toQ().should.be.deepEqual({
-      // id: 'pg1', // TODO: id cannot be merged in current version
-      // space: 'one',
+      id: 'pg1',
+      space: 'one',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
@@ -59,8 +59,8 @@ describe('Unit test for Page', () => {
     });
 
     simple.toQ().should.be.deepEqual({
-      // id: 'pmid', // TODO: id cannot be merged in current version
-      // space: 'one',
+      id: 'pmid',
+      space: 'one',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],

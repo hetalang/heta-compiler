@@ -39,7 +39,7 @@ describe('Unit tests for Container', () => {
         prefix: 'https://google.com'
       });
       c.storage.get({id: 'pmid2'}).should.property('prefix', 'https://google.com');
-      c.storage.get({id: 'pmid2'}).should.property('space').be.equal(undefined);
+      c.storage.get({id: 'pmid2'}).should.not.property('space');
       c.storage.should.be.lengthOf(2);
     });
 
@@ -72,7 +72,7 @@ describe('Unit tests for Container', () => {
       });
       let component = c.storage.get({id: 'pmid4'});
       component.should.property('prefix', 'xxx');
-      component.should.property('space').be.equal(undefined);
+      component.should.not.property('space');
       c.storage.should.be.lengthOf(3);
     });
 

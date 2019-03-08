@@ -2,14 +2,10 @@ const { Scene } = require('./core/scene');
 const _ = require('lodash');
 const should = require('should');
 
-
-
-/**
- *
- */
 class Storage extends Array {
   /**
    * constructor - description
+   * value includes key in _index
    *
    * @return {type}  description
    */
@@ -25,26 +21,13 @@ class Storage extends Array {
    * @param  {object} value any object. **mutable**
    * @return {object}        value object updated by `id` and `space`
    */
-  set(key, value){
+  set(value){
     // check arguments
-    should(key).have.property('id').with.String();
-    key.space!==undefined && should(key.space).is.String();
+    should(value).have.property('id').with.String();
+    value.space!==undefined && should(value.space).is.String();
+    value._index = value.space + '.' + value.id;
 
-    // set key
-    value.id = key.id;
-    value.space = key.space;
-
-    let elementNumber = _.findIndex(this, (value) => {
-      return value.id===key.id
-        && value.space===key.space;
-    });
-
-    // set container
-    /*
-    if(value instanceof Scene) {
-      value._storage = this;
-    }
-    */
+    let elementNumber = this.findIndex((x) => x._index === value._index);
 
     if(elementNumber === -1) {
       this.push(value);
@@ -59,17 +42,16 @@ class Storage extends Array {
     should(key).have.property('id').with.String();
     key.space!==undefined && should(key.space).is.String();
 
-    return this.find((value) => value.id===key.id && value.space===key.space);
+    let _index = key.space + '.' + key.id;
+    return this.find((x) => x._index === _index);
   }
   delete(key){
     // check arguments
     should(key).have.property('id').with.String();
     key.space!==undefined && should(key.space).is.String();
 
-    let elementNumber = _.findIndex(this, (value) => {
-      return value.id===key.id
-        && value.space===key.space;
-    });
+    let _index = key.space + '.' + key.id;
+    let elementNumber = this.findIndex((x) => x._index === _index);
     if(elementNumber === -1)
       throw new Error(`Cannot delete element with key ${key.id} because it is not in Storage.`);
 

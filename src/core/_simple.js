@@ -14,6 +14,7 @@ class _Simple {
   merge(q, skipChecking){
     if(!skipChecking) _Simple.isValid(q);
 
+    if(q && q.id) this.id = q.id;
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;
     if(q && q.tags) this.tags = _.clone(q.tags);
@@ -29,9 +30,6 @@ class _Simple {
   }
   get index(){
     return {id: this.id};
-  }
-  get indexString(){
-    return this.id;
   }
   clone(){ // creates copy of element TODO: not tested
     let clone = _.clone(this);

@@ -11,50 +11,48 @@ describe('Unit tests for Storage', () => {
   });
 
   it('Set element without space and check return.', () => {
-    let out = s.set({id: 'x1'}, {prop1: 'val1'});
+    let out = s.set({id: 'x1', prop1: 'val1'});
     out.should.have.property('prop1', 'val1');
     out.should.have.property('id', 'x1');
-    out.should.property('space').be.equal(undefined);
+    out.should.not.property('space');
   });
 
   it('Set element with the same id.', () => {
-    let out = s.set({id: 'x1'}, {prop2: 'val2'});
+    let out = s.set({id: 'x1', prop2: 'val2'});
     out.should.have.not.property('prop1', 'val1');
     out.should.have.property('prop2', 'val2');
     out.should.have.property('id', 'x1');
-    out.should.property('space').be.equal(undefined);
+    out.should.not.property('space');
   });
 
   it('Set element with space and check return.', () => {
-    let out = s.set({id: 'x2', space: 'one'}, {prop1: 'val3'});
+    let out = s.set({id: 'x2', space: 'one', prop1: 'val3'});
     out.should.have.property('prop1', 'val3');
     out.should.have.property('id', 'x2');
     out.should.property('space', 'one');
+    let out2 = s.set({id: 'x2', space: 'two', prop1: 'val3.5'});
+    out2.should.have.property('prop1', 'val3.5');
+    out2.should.have.property('id', 'x2');
+    out2.should.property('space', 'two');
   });
 
   it('Set element with the same id and space.', () => {
-    let out = s.set({id: 'x2', space: 'one'}, {prop2: 'val4'});
+    let out = s.set({id: 'x2', space: 'one', prop2: 'val4'});
     out.should.have.not.property('prop1');
     out.should.have.property('prop2', 'val4');
     out.should.have.property('id', 'x2');
     out.should.property('space', 'one');
   });
 
-  it('When set id and space inside value should be ignored.', () => {
-    let out = s.set({id: 'x3', space: 'one'}, {prop2: 'val5', id: 'y3', space: 'two'});
-    out.should.have.property('id', 'x3');
-    out.should.property('space', 'one');
-  });
-
   it('Set element without id throws error.', () => {
     should.throws(() => {
-      s.set({space: 'one'}, {prop1: 'val6'});
+      s.set({space: 'one', prop1: 'val6'});
     });
   });
 
   it('Set element without id and space throw error.', () => {
     should.throws(() => {
-      s.set({}, {prop1: 'val7'});
+      s.set({prop1: 'val7'});
     });
   });
 

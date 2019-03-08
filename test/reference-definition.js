@@ -1,5 +1,6 @@
 /* global describe, it, should */
 const { ReferenceDefinition } = require('../src/core/reference-definition');
+const should = require('should');
 
 describe('Unit test for _Simple common methods', () => {
 
@@ -12,7 +13,6 @@ describe('Unit test for _Simple common methods', () => {
     let simple = new ReferenceDefinition();
     simple.should.has.property('className', 'ReferenceDefinition');
     simple.should.has.property('index');
-    simple.should.has.property('indexString');
     simple.should.has.property('clone');
     simple.should.has.property('merge');
   });
@@ -78,7 +78,7 @@ describe('Unit test for _Simple common methods', () => {
       .merge({title: 'This is title', prop: 'property', id: 'xxx', space: 'yyy'});
     simple.should.has.property('title');
     simple.should.not.has.property('prop');
-    simple.should.not.has.property('id');
+    simple.should.has.property('id');
     simple.should.not.has.property('space');
   });
 
@@ -91,7 +91,7 @@ describe('Unit test for _Simple common methods', () => {
       aux: {a: 1, b: 'b', c: {}}
     });
     simple.toQ().should.be.deepEqual({
-      // id: 'pmid', // TODO: id cannot be merged in current version
+      id: 'pmid', // TODO: id cannot be merged in current version
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
@@ -128,7 +128,7 @@ describe('Unit test for ReferenceDefinition', () => {
     });
 
     simple.toQ().should.be.deepEqual({
-      // id: 'pmid', // TODO: id cannot be merged in current version
+      id: 'pmid', // TODO: id cannot be merged in current version
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
