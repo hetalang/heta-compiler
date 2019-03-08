@@ -1,5 +1,6 @@
 const { Quantity } = require('./quantity');
-const { Numeric, Expression } = require('./_size');
+const { Numeric } = require('./numeric');
+const { Expression } = require('./expression');
 const _ = require('lodash');
 
 class Event extends Quantity {
@@ -11,7 +12,7 @@ class Event extends Quantity {
   merge(q, skipChecking){
     if(!skipChecking) Event.isValid(q);
     super.merge(q, skipChecking);
-    
+
     if(q.assignments && q.assignments.length>0) {
       q.assignments.forEach((assignmentQ) => {
         let assignment = {targetRef: assignmentQ.targetRef};

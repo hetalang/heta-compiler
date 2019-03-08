@@ -1,5 +1,6 @@
 const { _Scoped } = require('./_scoped');
-const { Numeric, Expression } = require('./_size');
+const { Numeric } = require('./numeric');
+const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');

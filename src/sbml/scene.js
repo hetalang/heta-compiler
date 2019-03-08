@@ -3,7 +3,7 @@
 */
 const { Scene } = require('../core/scene');
 const nunjucks = require('../nunjucks-env');
-const { Expression } = require('../core/_size');
+const { Expression } = require('../core/expression');
 const { Quantity } = require('../core/quantity');
 const { Compartment } = require('../core/compartment');
 const { Species } = require('../core/species');

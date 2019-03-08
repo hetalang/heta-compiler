@@ -34,7 +34,7 @@ describe('Unit test for _Simple common methods', () => {
   it('Incorrect title property', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({title: {}});
-    }, SchemaValidationError);
+    });
   });
 
   it('Tags property', () => {
@@ -46,13 +46,13 @@ describe('Unit test for _Simple common methods', () => {
   it('Incorrect tags property 1', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({tags: {}});
-    }, SchemaValidationError);
+    });
   });
 
   it('Incorrect tags property 2', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({tags: [{}]});
-    }, SchemaValidationError);
+    });
   });
 
   it('Aux property', () => {
@@ -64,7 +64,7 @@ describe('Unit test for _Simple common methods', () => {
   it('Incorrect aux property', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({aux: []});
-    }, SchemaValidationError);
+    });
   });
 
   it('Notes property', () => {
@@ -110,13 +110,13 @@ describe('Unit test for ReferenceDefinition', () => {
   it('Incorrect prefix property', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({prefix: {}});
-    }, SchemaValidationError);
+    });
   });
 
   it('Incorrect suffix property', () => {
     should.throws(() => {
       (new ReferenceDefinition).merge({suffix: {}});
-    }, SchemaValidationError);
+    });
   });
 
   it('ToQ transformation', () => {

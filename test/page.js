@@ -52,7 +52,7 @@ describe('Unit test for Page', () => {
   it('Incorrect content property', () => {
     should.throws(() => {
       (new Page).merge({content: {}});
-    }, SchemaValidationError);
+    });
   });
 
   it('ToQ transformation', () => {

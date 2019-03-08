@@ -3,7 +3,8 @@ const { Compartment } = require('./core/compartment');
 const { Reaction } = require('./core/species');
 const { Species } = require('./core/species');
 const { Scene } = require('./core/scene');
-const { Numeric, Expression } = require('./core/_size');
+const { Numeric } = require('./core/numeric');
+const { Expression } = require('./core/expression');
 const { ReferenceDefinition } = require('./core/reference-definition');
 
 // set sbml methods
