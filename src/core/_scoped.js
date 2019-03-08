@@ -13,7 +13,7 @@ class _Scoped extends _Simple {
     if(!skipChecking) _Scoped.isValid(q);
     super.merge(q, skipChecking);
 
-    if(q && q.space) this.space = q.space;
+    this.space = (q && q.space) ? q.space : 'default__';
 
     return this;
   }

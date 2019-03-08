@@ -20,6 +20,8 @@ describe('Unit test for _Simple common methods', () => {
   it('Merge with empty', () => {
     let simple = new ReferenceDefinition;
     simple.merge({});
+    simple.should.not.has.property('id');
+    simple.should.not.has.property('space');
   });
 
   it('Title property', () => {

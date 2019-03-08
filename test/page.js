@@ -1,6 +1,6 @@
 /* global describe, it, should */
 const { Page } = require('../src/core/page');
-const { should } = require('should');
+const should = require('should');
 
 describe('Unit test for _Scoped common methods', () => {
 
@@ -15,6 +15,13 @@ describe('Unit test for _Scoped common methods', () => {
     simple.should.has.property('index');
     simple.should.has.property('clone');
     simple.should.has.property('merge');
+  });
+
+  it('Merge with empty', () => {
+    let simple = new Page;
+    simple.merge({});
+    simple.should.not.has.property('id');
+    simple.should.has.property('space', 'default__');
   });
 
   it('ToQ transformation', () => {
@@ -40,13 +47,13 @@ describe('Unit test for _Scoped common methods', () => {
 });
 
 describe('Unit test for Page', () => {
-/*
-  it('Incorrect suffix property', () => {
+
+  it('Incorrect content property', () => {
     should.throws(() => {
-      (new Page).merge({suffix: {}});
+      (new Page).merge({content: {}});
     });
   });
-*/
+
   it('ToQ transformation', () => {
     let simple = (new Page).merge({
       id: 'pmid',

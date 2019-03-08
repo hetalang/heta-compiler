@@ -7,6 +7,7 @@ const { Storage } = require('./storage');
 const { Process } = require('./core/process');
 const { Event } = require('./core/event');
 const { ReferenceDefinition } = require('./core/reference-definition');
+const { Page } = require('./core/page');
 // const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
 // const should = require('should');
@@ -22,7 +23,8 @@ class Container {
       Reaction,
       Scene,
       Event,
-      ReferenceDefinition
+      ReferenceDefinition,
+      Page
     };
   }
   select(index){ // db-mode
@@ -37,7 +39,6 @@ class Container {
       throw new Error(
         `Unknown "class" ${q.class} for component id: "${q.id}".`
       );
-
     let simple = (new selectedClass).merge(q, false);
 
     this.storage.set(simple);
