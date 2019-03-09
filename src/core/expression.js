@@ -10,12 +10,11 @@ const { SchemaValidationError } = require('../exceptions');
 
 class Expression {
   constructor(q){ // string or object
-    // super(q);
+    Expression.isValid(q);
     if(typeof q==='string'){
       this._exprInput = q;
       this._inputLang = 'qs3p';
     }else{
-      Expression.isValid(q);
       this._exprInput = q.expr;
       this._langInput = q.lang
         ? q.lang
@@ -37,7 +36,7 @@ class Expression {
       .toString();
   }
   static get schemaName(){
-    return 'Expression';
+    return 'ExpressionInput';
   }
   get className(){
     return 'Expression';
