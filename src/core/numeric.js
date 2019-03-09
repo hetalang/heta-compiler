@@ -16,7 +16,7 @@ class Numeric {
         : false;
     }
   }
-  get exprCMathML(){
+  get toCMathML(){
     return `<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>${this.num}</cn></math>`;
   }
   static get schemaName(){
@@ -26,7 +26,8 @@ class Numeric {
     return 'Numeric';
   }
   toQ(){
-    let res = _.pick(this, ['num', 'free']);
+    let res = { num: this.num };
+    if(this.free) res.free = this.free;
     return res;
   }
   static isValid(q){

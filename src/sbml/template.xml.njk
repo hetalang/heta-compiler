@@ -80,7 +80,7 @@
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
-          {{quantity.variable.size.exprCMathML}}
+          {{quantity.variable.size.toCMathML}}
         </kineticLaw>
       </reaction>
     {%- endfor %}
@@ -92,7 +92,7 @@
       variable="{{quantity.id}}"
       {% if quantity.title %}name="{{quantity.title}}"{% endif %}
       >
-      {{quantity.variable.size.exprCMathML}}
+      {{quantity.variable.size.toCMathML}}
     </assignmentRule>
   {%- endfor %}
   {%- for quantity in out.listOfProcesses %}
@@ -119,7 +119,7 @@
         symbol="{{quantity.id}}"
         {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         >
-        {{quantity.variable.size.exprCMathML}}
+        {{quantity.variable.size.toCMathML}}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>
@@ -142,7 +142,7 @@
           {% for assignment in event.assignments %}
           <eventAssignment
             variable="{{ assignment.targetRef }}">
-            {{ assignment.size.exprCMathML }}
+            {{ assignment.size.toCMathML }}
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>

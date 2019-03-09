@@ -40,5 +40,30 @@ describe('Unit test for Numeric.', () => {
     should.throws(() => {
       new Numeric({xxx: 12});
     });
+    should.throws(() => {
+      new Numeric({num: 12, free: 1});
+    });
+  });
+
+  it('Conversion to Q.', () => {
+    let numeric1 = new Numeric(3.14);
+    numeric1.toQ().should.be.deepEqual({
+      num: 3.14
+    });
+    let numeric2 = new Numeric({num: 3.14, free: true});
+    numeric2.toQ().should.be.deepEqual({
+      num: 3.14,
+      free: true
+    });
+  });
+
+  it('Conversion to CMathML.', () => {
+    new Numeric(1.1)
+      .toCMathML.should.be
+      .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.1</cn></math>');
+
+    new Numeric(1e-15)
+      .toCMathML.should.be
+      .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1e-15</cn></math>');
   });
 });

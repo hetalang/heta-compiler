@@ -16,7 +16,7 @@ describe('Unit test for Expression.', () => {
 
   it('Conversion to CMathML.', () => {
     let cmathml1 = new Expression('x*y')
-      .exprCMathML.should.be
+      .toCMathML.should.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
 

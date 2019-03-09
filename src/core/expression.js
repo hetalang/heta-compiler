@@ -30,7 +30,7 @@ class Expression {
     this._langInput = 'qs3p';
     this.exprParsed = math.parse(this._exprInput);
   }
-  get exprCMathML(){
+  get toCMathML(){
     return this.exprParsed
       .toCMathML()
       .toString();
