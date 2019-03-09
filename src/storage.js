@@ -1,4 +1,3 @@
-const { Scene } = require('./core/scene');
 const _ = require('lodash');
 const should = require('should');
 

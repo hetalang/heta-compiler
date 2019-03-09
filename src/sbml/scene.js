@@ -1,7 +1,7 @@
 /*
-  Adds toSBML() method to scene
+  Adds toSBML() method to model
 */
-const { Scene } = require('../core/scene');
+const { Model } = require('../core/model');
 const nunjucks = require('../nunjucks-env');
 const { Expression } = require('../core/expression');
 const { Quantity } = require('../core/quantity');
@@ -11,12 +11,12 @@ const { Reaction } = require('../core/reaction');
 const { Process } = require('../core/process');
 const { Event } = require('../core/event');
 
-Scene.prototype.toSBML = function(){
+Model.prototype.toSBML = function(){
   let sbmlText = nunjucks.render('sbml/template.xml.njk', {out: this});
   return sbmlText;
 };
 
-Object.defineProperty(Scene.prototype, 'listOfCompartments', {
+Object.defineProperty(Model.prototype, 'listOfCompartments', {
   get: function(){
     return this
       .getQuantities()
@@ -24,7 +24,7 @@ Object.defineProperty(Scene.prototype, 'listOfCompartments', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfSpecies', {
+Object.defineProperty(Model.prototype, 'listOfSpecies', {
   get: function(){
     return this
       .getQuantities()
@@ -32,7 +32,7 @@ Object.defineProperty(Scene.prototype, 'listOfSpecies', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfParameters', {
+Object.defineProperty(Model.prototype, 'listOfParameters', {
   get: function(){
     return this
       .getQuantities()
@@ -43,7 +43,7 @@ Object.defineProperty(Scene.prototype, 'listOfParameters', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfReactions', {
+Object.defineProperty(Model.prototype, 'listOfReactions', {
   get: function(){
     return this
       .getQuantities()
@@ -51,7 +51,7 @@ Object.defineProperty(Scene.prototype, 'listOfReactions', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfRules', {
+Object.defineProperty(Model.prototype, 'listOfRules', {
   get: function(){
     return this
       .getQuantities()
@@ -59,7 +59,7 @@ Object.defineProperty(Scene.prototype, 'listOfRules', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfProcesses', {
+Object.defineProperty(Model.prototype, 'listOfProcesses', {
   get: function(){
     return this
       .getQuantities()
@@ -67,7 +67,7 @@ Object.defineProperty(Scene.prototype, 'listOfProcesses', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfInitialAssignments', {
+Object.defineProperty(Model.prototype, 'listOfInitialAssignments', {
   get: function(){
     return this
       .getQuantities()
@@ -78,7 +78,7 @@ Object.defineProperty(Scene.prototype, 'listOfInitialAssignments', {
   }
 });
 
-Object.defineProperty(Scene.prototype, 'listOfEvents', {
+Object.defineProperty(Model.prototype, 'listOfEvents', {
   get: function(){
     return this
       .getQuantities()

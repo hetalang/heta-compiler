@@ -2,7 +2,7 @@ const { Quantity } = require('./core/quantity');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
-const { Scene } = require('./core/scene');
+const { Model } = require('./core/model');
 const { Storage } = require('./storage');
 const { Process } = require('./core/process');
 const { Event } = require('./core/event');
@@ -21,7 +21,7 @@ class Container {
       Species,
       Process,
       Reaction,
-      Scene,
+      Model,
       Event,
       ReferenceDefinition,
       Page

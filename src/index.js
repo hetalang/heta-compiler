@@ -2,13 +2,13 @@ const { Quantity } = require('./core/quantity');
 const { Compartment } = require('./core/compartment');
 const { Reaction } = require('./core/species');
 const { Species } = require('./core/species');
-const { Scene } = require('./core/scene');
+const { Model } = require('./core/model');
 const { Numeric } = require('./core/numeric');
 const { Expression } = require('./core/expression');
 const { ReferenceDefinition } = require('./core/reference-definition');
 
 // set sbml methods
-require('./sbml/scene');
+require('./sbml/model');
 require('./sbml/quantity');
 
 const { Container } = require('./container');
@@ -19,7 +19,7 @@ module.exports = {
   Species,
   Reaction,
   Container,
-  Scene,
+  Model,
   Numeric,
   Expression,
   ReferenceDefinition
