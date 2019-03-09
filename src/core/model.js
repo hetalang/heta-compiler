@@ -1,23 +1,12 @@
 const _ = require('lodash');
-const { _Scoped } = require('./_scoped');
-const { Compartment } = require('./compartment');
-const { Species } = require('./species');
-const { Reaction } = require('./reaction');
+const { _Simple } = require('./_simple');
 const { Quantity } = require('./quantity');
 
-class Model extends _Scoped {
-  constructor(){
-    super();
-    this.scope = 'default';
-    this.type = 'kinetic';
-  }
+class Model extends _Simple {
   merge(q, skipChecking){
     if(!skipChecking) Model.isValid(q);
     super.merge(q, skipChecking);
-    // this._storage;
 
-    if(q && q.scope) this.scope = q.scope;
-    if(q && q.type) this.type = q.type;
     if(q && q.method) this.method = q.method;
 
     return this;
@@ -53,9 +42,7 @@ class Model extends _Scoped {
   }
   toQ(){
     let res = super.toQ();
-    if(this.scope) res.scope = this.scope;
-    if(this.type) res.type = this.type;
-    if(this.method) res.method = this.method;
+    if(this.method) res.method = _.cloneDeep(this.method);
 
     return res;
   }

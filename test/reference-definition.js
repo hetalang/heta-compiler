@@ -1,4 +1,4 @@
-/* global describe, it, should */
+/* global describe, it*/
 const { ReferenceDefinition } = require('../src/core/reference-definition');
 const { SchemaValidationError } = require('../src/exceptions');
 const should = require('should');
