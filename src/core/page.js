@@ -1,6 +1,6 @@
-const { _Scoped } = require('./_scoped');
+const { _Simple } = require('./_simple');
 
-class Page extends _Scoped {
+class Page extends _Simple {
   merge(q, skipChecking){
     if(!skipChecking) Page.isValid(q);
     super.merge(q, skipChecking);

@@ -24,7 +24,6 @@ describe('Unit test for Page', () => {
 
     simple.toQ().should.be.deepEqual({
       id: 'pg1',
-      space: 'default__',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
