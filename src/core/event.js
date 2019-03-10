@@ -4,8 +4,8 @@ const { Expression } = require('./expression');
 const _ = require('lodash');
 
 class Event extends Quantity {
-  constructor(){
-    super();
+  constructor(ind){
+    super(ind);
 
     this.assignments = [];
   }

@@ -25,12 +25,12 @@ describe('Unit tests for Container', () => {
       });
       res.should.be.instanceOf(Container);
       c.storage.should.be.lengthOf(1);
-      let simple = c.storage.get({id: 'pmid1'});
+      let simple = c.storage.get({id: 'pmid1', space: 'global__'});
       simple.should.has.property('prefix', 'https://pubmed.org/');
       simple.should.has.property('suffix', '/');
       simple.should.has.property('className', 'ReferenceDefinition');
       simple.should.has.property('id', 'pmid1');
-      simple.should.not.has.property('space');
+      simple.should.has.property('space');
     });
 
     it('Insert components with the same id.', () => {
@@ -44,8 +44,9 @@ describe('Unit tests for Container', () => {
         id: 'pmid2',
         prefix: 'https://google.com'
       });
-      c.storage.get({id: 'pmid2'}).should.property('prefix', 'https://google.com');
-      c.storage.get({id: 'pmid2'}).should.not.property('space');
+      let simple = c.storage.get({id: 'pmid2', space: 'global__'});
+      simple.should.has.property('prefix', 'https://google.com');
+      simple.should.has.property('space');
       c.storage.should.be.lengthOf(2);
     });
 
@@ -76,9 +77,9 @@ describe('Unit tests for Container', () => {
         prefix: 'xxx',
         suffix: '/'
       });
-      let component = c.storage.get({id: 'pmid4'});
+      let component = c.storage.get({id: 'pmid4', space: 'global__'});
       component.should.property('prefix', 'xxx');
-      component.should.not.has.property('space');
+      component.should.has.property('space');
       c.storage.should.be.lengthOf(3);
     });
 

@@ -2,8 +2,8 @@ const _ = require('lodash');
 const { _Simple } = require('./_simple');
 
 class UnitDefinition extends _Simple {
-  constructor(){
-    super();
+  constructor(ind){
+    super(ind);
     this.components = []; // default
   }
   merge(q, skipChecking){

@@ -11,24 +11,38 @@ describe('Unit test for _Scoped common methods', () => {
   });
 
   it('Create empty Page', () => {
-    let simple = new Page();
+    let simple = new Page({id: 'pg1', space: 'one'});
     simple.should.has.property('className', 'Page');
+    simple.should.has.property('id', 'pg1');
+    simple.should.has.property('space', 'one');
     simple.should.has.property('index');
     simple.should.has.property('clone');
     simple.should.has.property('merge');
   });
 
   it('Merge with empty', () => {
-    let simple = new Page;
+    let simple = new Page({id: 'pg1'});
     simple.merge({});
-    simple.should.not.has.property('id');
+    simple.should.has.property('id', 'pg1');
     simple.should.has.property('space', 'default__');
   });
 
+  it('No id and space throws.', () => {
+    should.throws(() => {
+      new Page;
+    });
+  });
+
+  it('No id throws.', () => {
+    should.throws(() => {
+      new Page({space: 'one'});
+    });
+  });
+
   it('ToQ transformation', () => {
-    let simple = (new Page).merge({
-      id: 'pg1',
-      space: 'one',
+    let simple = (new Page({id: 'pg1', space: 'one'})).merge({
+      id: 'pg2',
+      space: 'two',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
@@ -51,12 +65,12 @@ describe('Unit test for Page', () => {
 
   it('Incorrect content property', () => {
     should.throws(() => {
-      (new Page).merge({content: {}});
+      (new Page({id: 'pg1'})).merge({content: {}});
     });
   });
 
   it('ToQ transformation', () => {
-    let simple = (new Page).merge({
+    let simple = (new Page({id: 'pg1'})).merge({
       id: 'pmid',
       space: 'one',
       title: 'title',
@@ -67,8 +81,8 @@ describe('Unit test for Page', () => {
     });
 
     simple.toQ().should.be.deepEqual({
-      id: 'pmid',
-      space: 'one',
+      id: 'pg1',
+      space: 'default__',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],

@@ -6,8 +6,8 @@ let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
 class Quantity extends _Scoped {
-  constructor(){
-    super();
+  constructor(ind){
+    super(ind);
 
     this.variable = {
       kind: 'static',

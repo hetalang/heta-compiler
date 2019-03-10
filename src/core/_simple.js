@@ -7,20 +7,27 @@ const _ = require('lodash');
   Abstract class _Simple
 */
 class _Simple {
-  constructor(){
+  constructor(ind){
+    ind.should.has.property('id').with.String();
+    this._id = ind.id;
     this.tags = [];
     this.aux = {};
   }
   merge(q, skipChecking){
     if(!skipChecking) _Simple.isValid(q);
 
-    if(q && q.id) this.id = q.id;
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = q.notes;
-    if(q && q.tags) this.tags = _.clone(q.tags);
-    if(q && q.aux) this.aux = _.clone(q.aux);
+    if(q && q.tags) this.tags = _.cloneDeep(q.tags);
+    if(q && q.aux) this.aux = _.cloneDeep(q.aux);
 
     return this;
+  }
+  get id(){
+    return this._id;
+  }
+  get space(){
+    return 'global__';
   }
   static get schemaName(){
     return '_Simple';
@@ -29,7 +36,7 @@ class _Simple {
     return '_Simple';
   }
   get index(){
-    return {id: this.id};
+    return {id: this._id};
   }
   clone(){ // creates copy of element TODO: not tested
     let clone = _.clone(this);
@@ -59,8 +66,14 @@ class _Simple {
     }
   }
   toQ(){
-    let res = _.pick(this, ['title', 'notes', 'tags', 'aux', 'id']);
+    let res = {};
     res.class = this.className;
+    res.id = this.id;
+    if(this.title) res.title = this.title;
+    if(this.notes) res.notes = this.notes;
+    if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
+    if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
+
     return res;
   }
   populate(){

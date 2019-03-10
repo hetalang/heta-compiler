@@ -3,8 +3,8 @@ const { exception, SchemaValidationError } = require('./utilities');
 const { Species } =require('./species');
 
 class Process extends Quantity {
-  constructor(){
-    super();
+  constructor(ind){
+    super(ind);
     this.effectors = [];
     this.actors = [];
   }

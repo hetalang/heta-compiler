@@ -3,8 +3,8 @@ const { exception, SchemaValidationError } = require('./utilities');
 const { Compartment } = require('./compartment');
 
 class Species extends Quantity {
-  constructor(){
-    super();
+  constructor(ind){
+    super(ind);
   }
   merge(q, skipChecking){
     if(!skipChecking) Species.isValid(q);

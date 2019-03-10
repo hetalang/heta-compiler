@@ -3,20 +3,20 @@ const { Model } = require('../src/core/model');
 const should = require('should');
 
 describe('Unit test for Model.', () => {
-  it('Merge with empty', () => {
-    let simple = (new Model).merge({});
-    simple.should.not.has.property('id');
-    simple.should.not.has.property('space');
+  it('Create minimal', () => {
+    let simple = new Model({id: 'm1'});
+    simple.should.has.property('id', 'm1');
+    simple.should.has.property('space', 'global__');
   });
 
   it('Merge with empty.', () => {
-    let simple = (new Model).merge({});
-    simple.should.not.has.property('id');
-    simple.should.not.has.property('space');
+    let simple = (new Model({id: 'm1', space: 'one'})).merge({});
+    simple.should.has.property('id', 'm1');
+    simple.should.has.property('space', 'global__');
   });
 
   it('Method property and toQ().', () => {
-    let simple = (new Model).merge({
+    let simple = (new Model({id: 'm1', space: 'one'})).merge({
       method: {
         timeRange: [0, 120],
         timeStep: 2,
@@ -31,8 +31,7 @@ describe('Unit test for Model.', () => {
     simple.should.has.property('method');
     simple.toQ().should.be.deepEqual({
       class: 'Model',
-      aux: {},
-      tags: [],
+      id: 'm1',
       method: {
         timeRange: [0, 120],
         timeStep: 2,
@@ -48,28 +47,28 @@ describe('Unit test for Model.', () => {
 
   it('Wrong input.', () => {
     should.throws(() => {
-      (new Model).merge({
+      (new Model({id: 'm1'})).merge({
         method: {
           timeRange: [1,2,3]
         }
       });
     });
     should.throws(() => {
-      (new Model).merge({
+      (new Model({id: 'm1'})).merge({
         method: {
           timeStep: -1
         }
       });
     });
     should.throws(() => {
-      (new Model).merge({
+      (new Model({id: 'm1'})).merge({
         method: {
           solver: 'xxx'
         }
       });
     });
     should.throws(() => {
-      (new Model).merge({
+      (new Model({id: 'm1'})).merge({
         method: {
           abstol: '1'
         }

@@ -39,7 +39,7 @@ class Container {
       throw new Error(
         `Unknown "class" ${q.class} for component id: "${q.id}".`
       );
-    let simple = (new selectedClass).merge(q, false);
+    let simple = (new selectedClass({id: q.id, space: q.space})).merge(q, false);
 
     this.storage.set(simple);
 

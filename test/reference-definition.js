@@ -11,64 +11,66 @@ describe('Unit test for _Simple common methods', () => {
   });
 
   it('Create empty ReferenceDefinition', () => {
-    let simple = new ReferenceDefinition();
+    let simple = new ReferenceDefinition({id: 'ref1'});
     simple.should.has.property('className', 'ReferenceDefinition');
+    simple.should.has.property('id', 'ref1');
+    simple.should.has.property('space', 'global__');
     simple.should.has.property('index');
     simple.should.has.property('clone');
     simple.should.has.property('merge');
   });
 
   it('Merge with empty', () => {
-    let simple = new ReferenceDefinition;
+    let simple = new ReferenceDefinition({id: 'ref1'});
     simple.merge({});
-    simple.should.not.has.property('id');
-    simple.should.not.has.property('space');
+    simple.should.has.property('id', 'ref1');
+    simple.should.has.property('space', 'global__');
   });
 
   it('Title property', () => {
-    let simple = (new ReferenceDefinition)
+    let simple = (new ReferenceDefinition({id: 'ref1'}))
       .merge({title: 'This is correct title.'});
     simple.should.has.property('title').with.be.ok();
   });
 
   it('Incorrect title property', () => {
     should.throws(() => {
-      (new ReferenceDefinition).merge({title: {}});
+      (new ReferenceDefinition({id: 'ref1'})).merge({title: {}});
     });
   });
 
   it('Tags property', () => {
-    let simple = (new ReferenceDefinition)
+    let simple = (new ReferenceDefinition({id: 'ref1'}))
       .merge({tags: ['a', 'b']});
     simple.should.has.property('tags').with.instanceOf(Array);
   });
 
   it('Incorrect tags property 1', () => {
     should.throws(() => {
-      (new ReferenceDefinition).merge({tags: {}});
+      (new ReferenceDefinition({id: 'ref1'})).merge({tags: {}});
     });
   });
 
   it('Incorrect tags property 2', () => {
     should.throws(() => {
-      (new ReferenceDefinition).merge({tags: [{}]});
+      (new ReferenceDefinition({id: 'ref1'})).merge({tags: [{}]});
     });
   });
 
   it('Aux property', () => {
-    let simple = (new ReferenceDefinition)
+    let simple = (new ReferenceDefinition({id: 'ref1'}))
       .merge({aux: {a: 'a', b: 1, c: []}});
     simple.should.has.property('aux');
   });
 
   it('Incorrect aux property', () => {
     should.throws(() => {
-      (new ReferenceDefinition).merge({aux: []});
+      (new ReferenceDefinition({id: 'ref1'})).merge({aux: []});
     });
   });
 
   it('Notes property', () => {
-    let simple = new ReferenceDefinition;
+    let simple = new ReferenceDefinition({id: 'ref1'});
     simple.should.not.has.property('notes');
     simple.merge({notes: 'This is correct **note**.'});
     simple.should.has.property('notes');
@@ -77,24 +79,24 @@ describe('Unit test for _Simple common methods', () => {
   });
 
   it('Do not merge unknown properties', () => {
-    let simple = (new ReferenceDefinition)
+    let simple = (new ReferenceDefinition({id: 'ref1'}))
       .merge({title: 'This is title', prop: 'property', id: 'xxx', space: 'yyy'});
     simple.should.has.property('title');
     simple.should.not.has.property('prop');
-    simple.should.has.property('id');
-    simple.should.not.has.property('space');
+    simple.should.has.property('id', 'ref1');
+    simple.should.has.property('space', 'global__');
   });
 
   it('ToQ transformation', () => {
-    let simple = (new ReferenceDefinition).merge({
-      id: 'pmid',
+    let simple = (new ReferenceDefinition({id: 'pmid'})).merge({
+      id: 'pmid2',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}}
     });
     simple.toQ().should.be.deepEqual({
-      id: 'pmid', // TODO: id cannot be merged in current version
+      id: 'pmid',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],
@@ -109,18 +111,18 @@ describe('Unit test for ReferenceDefinition', () => {
 
   it('Incorrect prefix property', () => {
     should.throws(() => {
-      (new ReferenceDefinition).merge({prefix: {}});
+      (new ReferenceDefinition({id: 'ref1'})).merge({prefix: {}});
     });
   });
 
   it('Incorrect suffix property', () => {
     should.throws(() => {
-      (new ReferenceDefinition).merge({suffix: {}});
+      (new ReferenceDefinition({id: 'ref1'})).merge({suffix: {}});
     });
   });
 
   it('ToQ transformation', () => {
-    let simple = (new ReferenceDefinition).merge({
+    let simple = (new ReferenceDefinition({id: 'ref1'})).merge({
       id: 'pmid',
       title: 'title',
       notes: 'notes',
@@ -131,7 +133,7 @@ describe('Unit test for ReferenceDefinition', () => {
     });
 
     simple.toQ().should.be.deepEqual({
-      id: 'pmid',
+      id: 'ref1',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],

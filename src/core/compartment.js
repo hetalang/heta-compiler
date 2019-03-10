@@ -1,8 +1,8 @@
 const { Quantity } = require('./quantity');
 
 class Compartment extends Quantity {
-  constructor(){
-    super();
+  constructor(ind){
+    super(ind);
   }
   merge(q, skipChecking){
     if(!skipChecking) Compartment.isValid(q);

@@ -4,12 +4,12 @@ const should = require('should');
 
 describe('Unit test for UnitDefinition', () => {
   it('Empty UnitDefinition', () => {
-    let simple = new UnitDefinition;
+    let simple = new UnitDefinition({id: 'ud1'});
     simple.should.has.property('components', []);
   });
 
   it('Correct UnitDefinition', () => {
-    let simple = (new UnitDefinition).merge({
+    let simple = (new UnitDefinition({id: 'ud1'})).merge({
       components: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
         {kind: 'mole', exponent: -1}
@@ -17,8 +17,7 @@ describe('Unit test for UnitDefinition', () => {
     });
     simple.toQ().should.be.deepEqual({
       class: 'UnitDefinition',
-      aux: {},
-      tags: [],
+      id: 'ud1',
       components: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
         {kind: 'mole', exponent: -1}
@@ -28,17 +27,17 @@ describe('Unit test for UnitDefinition', () => {
 
   it('Wrong input.', () => {
     should.throws(() => {
-      (new UnitDefinition).merge({
+      (new UnitDefinition({id: 'ud1'})).merge({
         components: 'xxx'
       });
     });
     should.throws(() => {
-      (new UnitDefinition).merge({
+      (new UnitDefinition({id: 'ud1'})).merge({
         components: ['xxx']
       });
     });
     should.throws(() => {
-      (new UnitDefinition).merge({
+      (new UnitDefinition({id: 'ud1'})).merge({
         components: [{}]
       });
     });
