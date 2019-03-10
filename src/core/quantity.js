@@ -8,26 +8,24 @@ const _ = require('lodash');
 class Quantity extends _Scoped {
   constructor(ind){
     super(ind);
-
+    /*
     this.variable = {
       kind: 'static',
       size: new Numeric(0)
     };
-    this.variable.parent = this; // this is cyclic ref
+    */
+    // this.variable.parent = this; // this is cyclic ref
 
   }
   merge(q, skipChecking){
     if(!skipChecking) Quantity.isValid(q);
     super.merge(q, skipChecking);
 
-    if(q && q.variable && q.variable.kind!==undefined) this.variable.kind = q.variable.kind;
-    if(q && q.variable && q.variable.units!==undefined) this.variable.units = q.variable.units;
-
-    let size = _.get(q, 'variable.size');
-    if(size){
-      if(size instanceof Numeric || size instanceof Expression){
-        this.variable.size = size;
-      }else if(typeof size === 'number'){
+    if(q && q.variable){
+      this.variable = { kind: q.variable.kind };
+      if(q.variable.units!==undefined) this.variable.units = q.variable.units;
+      let size = q.variable.size;
+      if(typeof size === 'number'){
         this.variable.size = new Numeric(size);
       }else if(typeof size === 'string'){
         this.variable.size = new Expression(size);
@@ -44,7 +42,7 @@ class Quantity extends _Scoped {
     return this;
   }
   static get schemaName(){
-    return 'QuantityP';
+    return 'QuantityInputP';
   }
   get className(){
     return 'Quantity';

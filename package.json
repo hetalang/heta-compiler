@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test",
-    "test:single": "mocha test/unit-definition"
+    "test:single": "mocha test/quantity"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",

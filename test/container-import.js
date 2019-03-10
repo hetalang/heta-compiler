@@ -25,8 +25,4 @@ describe('Unit tests for Container import', () => {
     res.should.be.instanceOf(Container);
     c.storage.should.be.lengthOf(1);
   });
-
-  it('DELETE LATER', () => {
-    //console.log(c);
-  });
 });
