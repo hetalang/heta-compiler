@@ -7,6 +7,7 @@ const { Storage } = require('./storage');
 const { Process } = require('./core/process');
 const { Event } = require('./core/event');
 const { ReferenceDefinition } = require('./core/reference-definition');
+const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 // const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
@@ -16,14 +17,17 @@ class Container {
   constructor(){
     this.storage = new Storage();
     this.classes = {
+      // scoped classes
       Quantity,
       Compartment,
       Species,
       Process,
       Reaction,
-      Model,
       Event,
+      // unscoped classes
+      Model,
       ReferenceDefinition,
+      UnitDefinition,
       Page
     };
   }
