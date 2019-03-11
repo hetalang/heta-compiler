@@ -30,13 +30,13 @@ class Process extends Quantity {
     let res = super.toQ();
     res.actors = this.actors.map((actor) => {
       return {
-        targetRef: actor.targetRef,
+        target: actor.target,
         stoichiometry: actor.stoichiometry
       };
     });
     res.effectors = this.effectors.map((effector) => {
       return {
-        targetRef: effector.targetRef
+        target: effector.target
       };
     });
     return res;
@@ -46,26 +46,26 @@ class Process extends Quantity {
     super.populate(storage);
 
     this.actors.forEach((actor) => {
-      let target = storage.find((x) => x.id===actor.targetRef);
-      if(!target) {
-        throw new ValidationError(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${this.index}`);
+      let targetObj = storage.find((x) => x.id===actor.target);
+      if(!targetObj) {
+        throw new ValidationError(`target reffered to absent value "${actor.target}" in reaction ${this.index}`);
       } else {
-        if(!(target instanceof Species)) {
-          throw new ValidationError(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${this.index}`);
+        if(!(targetObj instanceof Species)) {
+          throw new ValidationError(`target reffered to not a Species "${actor.target}" in reaction ${this.index}`);
         } else {
-          actor.target = target;
+          actor.targetObj = targetObj;
         }
       }
     });
     this.effectors.forEach((effector) => {
-      let target = storage.find((x) => x.id===effector.targetRef);
-      if(!target) {
-        throw new ValidationError(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${this.index}`);
+      let targetObj = storage.find((x) => x.id===effector.target);
+      if(!targetObj) {
+        throw new ValidationError(`target reffered to absent value "${effector.target}" in reaction ${this.index}`);
       } else {
-        if(!(target instanceof Species)) {
-          throw new ValidationError(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${this.index}`);
+        if(!(targetObj instanceof Species)) {
+          throw new ValidationError(`target reffered to not a Species "${effector.target}" in reaction ${this.index}`);
         } else {
-          effector.target = target;
+          effector.targetObj = targetObj;
         }
       }
     });
@@ -75,7 +75,7 @@ class Process extends Quantity {
 
 class Effector {
   constructor(q){
-    this.targetRef = q.targetRef;
+    this.target = q.target;
   }
 }
 

@@ -133,9 +133,29 @@ describe('Unit tests for Container', () => {
         }
       });
     });
+    it('Reaction', () => {
+      c.insert({
+        class: 'Reaction',
+        id: 'r1',
+        actors: [
+          {target: 's1', stoichiometry: -1},
+          {target: 's2', stoichiometry: 2}
+        ],
+        effectors: [
+          {target: 'm1'},
+          {target: 'm2'},
+          {target: 'm3'}
+        ],
+        variable: {
+          kind: 'rule',
+          size: {expr: 'k1 * s1'},
+          units: 'umole/h'
+        }
+      });
+    });
   });
 
-  describe('Test insert() wrong.', () =>{
+  describe('Test insert() wrong.', () => {
     it('Insert wrong components.', () => {
       should.throws(() => {
         c.insert({});
@@ -152,7 +172,7 @@ describe('Unit tests for Container', () => {
       should.throws(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       });
-      c.storage.size.should.be.eql(9);
+      c.storage.size.should.be.eql(10);
 
       // console.log(c);
     });
