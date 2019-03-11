@@ -2,25 +2,10 @@ const _ = require('lodash');
 const should = require('should');
 
 class Storage extends Array {
-  /**
-   * constructor - description
-   * value includes key in _index
-   *
-   * @return {type}  description
-   */
   constructor(){
     super();
   }
-
-  /**
-   * add element to the storage.
-   *
-   * @param  {object} key  key object with two properties: `id`(required)
-   * and `space`. This properties will be added to value object.
-   * @param  {object} value any object. **mutable**
-   * @return {object}        value object updated by `id` and `space`
-   */
-  set(value){
+  setByIndex(value){
     // check arguments
     should(value).have.property('id').with.String();
     value.space!==undefined && should(value.space).is.String();
@@ -36,7 +21,7 @@ class Storage extends Array {
 
     return value;
   }
-  get(key){
+  getByIndex(key){
     // check arguments
     should(key).have.property('id').with.String();
     key.space!==undefined && should(key.space).is.String();
@@ -44,7 +29,7 @@ class Storage extends Array {
     let _index = key.space + '.' + key.id;
     return this.find((x) => x._index === _index);
   }
-  delete(key){
+  deleteByIndex(key){
     // check arguments
     should(key).have.property('id').with.String();
     key.space!==undefined && should(key.space).is.String();

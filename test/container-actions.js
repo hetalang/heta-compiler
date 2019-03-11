@@ -25,7 +25,7 @@ describe('Unit tests for Container', () => {
       });
       res.should.be.instanceOf(Container);
       c.storage.should.be.lengthOf(1);
-      let simple = c.storage.get({id: 'pmid1', space: 'global__'});
+      let simple = c.storage.getByIndex({id: 'pmid1', space: 'global__'});
       simple.should.has.property('prefix', 'https://pubmed.org/');
       simple.should.has.property('suffix', '/');
       simple.should.has.property('className', 'ReferenceDefinition');
@@ -44,7 +44,7 @@ describe('Unit tests for Container', () => {
         id: 'pmid2',
         prefix: 'https://google.com'
       });
-      let simple = c.storage.get({id: 'pmid2', space: 'global__'});
+      let simple = c.storage.getByIndex({id: 'pmid2', space: 'global__'});
       simple.should.has.property('prefix', 'https://google.com');
       simple.should.has.property('space');
       c.storage.should.be.lengthOf(2);
@@ -58,7 +58,7 @@ describe('Unit tests for Container', () => {
         prefix: 'xxx',
         suffix: '/'
       });
-      let component = c.storage.get({id: 'pmid4', space: 'global__'});
+      let component = c.storage.getByIndex({id: 'pmid4', space: 'global__'});
       component.should.property('prefix', 'xxx');
       component.should.has.property('space');
       c.storage.should.be.lengthOf(3);
@@ -70,7 +70,7 @@ describe('Unit tests for Container', () => {
         id: 'pg1',
         space: 'another'
       });
-      let simple = c.storage.get({id: 'pg1', space: 'another'});
+      let simple = c.storage.getByIndex({id: 'pg1', space: 'another'});
       simple.should.has.property('space', 'another');
       c.storage.should.be.lengthOf(4);
     });
@@ -80,8 +80,8 @@ describe('Unit tests for Container', () => {
         class: 'Quantity',
         id: 'pg1'
       });
-      let simple = c.storage.get({id: 'pg1', space: 'default__'});
-      should(c.storage.get({id: 'pg1'})).be.undefined();
+      let simple = c.storage.getByIndex({id: 'pg1', space: 'default__'});
+      should(c.storage.getByIndex({id: 'pg1'})).be.undefined();
       simple.should.has.property('space', 'default__');
       c.storage.should.be.lengthOf(5);
     });

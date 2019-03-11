@@ -45,7 +45,7 @@ class Container {
       );
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q, false);
 
-    this.storage.set(simple);
+    this.storage.setByIndex(simple);
 
     return this;
   }
