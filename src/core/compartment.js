@@ -8,7 +8,6 @@ class Compartment extends Quantity {
     if(!skipChecking) Compartment.isValid(q);
     super.merge(q, skipChecking);
     // nothing
-
     return this;
   }
   static get schemaName(){

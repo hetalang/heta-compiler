@@ -10,7 +10,7 @@ class Species extends Quantity {
     if(!skipChecking) Species.isValid(q);
     super.merge(q, skipChecking);
 
-    this.compartmentRef = q.compartmentRef;
+    this.compartment = q.compartment;
 
     return this;
   }
@@ -22,7 +22,7 @@ class Species extends Quantity {
   }
   toQ(){
     let res = super.toQ();
-    res.compartmentRef = this.compartmentRef;
+    res.compartment = this.compartment;
     return res;
   }
 

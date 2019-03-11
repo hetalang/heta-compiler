@@ -9,7 +9,7 @@ describe('Unit tests for Container', () => {
     c = new Container();
   });
 
-  describe('Test insert().', () => {
+  describe('Test insert() correct.', () => {
     it('Insert component and check return.', () => {
       /*
       #insert pmid1 @ReferenceDefinition {
@@ -50,25 +50,6 @@ describe('Unit tests for Container', () => {
       c.storage.should.be.lengthOf(2);
     });
 
-    it('Insert wrong components.', () => {
-      should.throws(() => {
-        c.insert({});
-      });
-      should.throws(() => {
-        c.insert({id: 'pmid3'});
-      });
-      should.throws(() => {
-        c.insert({class: 'ReferenceDefinition'});
-      });
-      should.throws(() => {
-        c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
-      });
-      should.throws(() => {
-        c.insert({id: '1xxx', class: 'ReferenceDefinition'});
-      });
-      c.storage.should.be.lengthOf(2);
-    });
-
     it('Insert unscoped components with space.', () => {
       c.insert({
         class: 'ReferenceDefinition',
@@ -103,6 +84,77 @@ describe('Unit tests for Container', () => {
       should(c.storage.get({id: 'pg1'})).be.undefined();
       simple.should.has.property('space', 'default__');
       c.storage.should.be.lengthOf(5);
+    });
+  });
+
+  describe('All correct components.', () => {
+    it('Quantity', () => {
+      c.insert({
+        class: 'Quantity',
+        id: 'k1',
+        variable: {
+          kind: 'static',
+          size: {num: 1.2e-2, free: true},
+          units: '1/h'
+        }
+      });
+    });
+    it('Compartment', () => {
+      c.insert({
+        class: 'Compartment',
+        id: 'comp1',
+        variable: {
+          kind: 'static',
+          size: {num: 5.2, free: false},
+          units: 'L'
+        }
+      });
+    });
+    it('Species', () => {
+      c.insert({
+        class: 'Species',
+        id: 's1',
+        compartment: 'comp1',
+        variable: {
+          kind: 'dynamic',
+          size: {num: 10, free: false},
+          units: 'uM'
+        }
+      });
+    });
+    it('Process', () => {
+      c.insert({
+        class: 'Process',
+        id: 'pr1',
+        variable: {
+          kind: 'rule',
+          size: {expr: 'k1*s1'},
+          units: 'mole/h'
+        }
+      });
+    });
+  });
+
+  describe('Test insert() wrong.', () =>{
+    it('Insert wrong components.', () => {
+      should.throws(() => {
+        c.insert({});
+      });
+      should.throws(() => {
+        c.insert({id: 'pmid3'});
+      });
+      should.throws(() => {
+        c.insert({class: 'ReferenceDefinition'});
+      });
+      should.throws(() => {
+        c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
+      });
+      should.throws(() => {
+        c.insert({id: '1xxx', class: 'ReferenceDefinition'});
+      });
+      c.storage.should.be.lengthOf(9);
+
+      console.log(c);
     });
   });
 });

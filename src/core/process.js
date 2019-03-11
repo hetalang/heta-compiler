@@ -1,5 +1,5 @@
 const { Quantity } = require('./quantity');
-const { exception, SchemaValidationError } = require('./utilities');
+const { ValidationError } = require('./utilities');
 const { Species } =require('./species');
 
 class Process extends Quantity {
@@ -48,10 +48,10 @@ class Process extends Quantity {
     this.actors.forEach((actor) => {
       let target = storage.find((x) => x.id===actor.targetRef);
       if(!target) {
-        exception(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${this.index}`);
+        throw new ValidationError(`targetRef reffered to absent value "${actor.targetRef}" in reaction ${this.index}`);
       } else {
         if(!(target instanceof Species)) {
-          exception(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${this.index}`);
+          throw new ValidationError(`targetRef reffered to not a Species "${actor.targetRef}" in reaction ${this.index}`);
         } else {
           actor.target = target;
         }
@@ -60,10 +60,10 @@ class Process extends Quantity {
     this.effectors.forEach((effector) => {
       let target = storage.find((x) => x.id===effector.targetRef);
       if(!target) {
-        exception(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${this.index}`);
+        throw new ValidationError(`targetRef reffered to absent value "${effector.targetRef}" in reaction ${this.index}`);
       } else {
         if(!(target instanceof Species)) {
-          exception(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${this.index}`);
+          throw new ValidationError(`targetRef reffered to not a Species "${effector.targetRef}" in reaction ${this.index}`);
         } else {
           effector.target = target;
         }
