@@ -17,17 +17,6 @@ class Model extends _Simple {
   static get schemaName(){
     return 'ModelP';
   }
-  getUniqueUnits(){
-    return _.chain(this.getQuantities())
-      .filter((quantity) => quantity.variable.units)
-      .uniqBy((quantity) => quantity.unitsHash)
-      .value();
-  }
-  getQuantities(){
-    return this._storage.filter((component) => {
-      return (component instanceof Quantity) && component.space===this.scope;
-    });
-  }
   populate(){
     this
       .getQuantities()

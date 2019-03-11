@@ -64,6 +64,14 @@
     ]
   },
   {
+    "class": "Event",
+    "id": "evt1",
+    "variable": {"kind": "rule", "size": {"expr": "t-12"}, "units": "min"},
+    "assignments": [
+      {"target": "s1", "size": {"expr": "s1+2"}}
+    ]
+  },
+  {
     "class": "Model",
     "id": "scn2"
   }
