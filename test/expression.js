@@ -5,8 +5,10 @@ const should = require('should');
 
 describe('Unit test for Expression.', () => {
   it('Create expession from "x*y".', () => {
-    let expression = new Expression('x*y');
-    should(expression.expr).be.equal('x * y');
+    should.throws(() => {
+      let expression = new Expression('x*y');
+      should(expression.expr).be.equal('x * y');
+    });
   });
 
   it('Create Expression from {expr: "x*y"}.', () => {
@@ -15,7 +17,7 @@ describe('Unit test for Expression.', () => {
   });
 
   it('Conversion to CMathML.', () => {
-    let cmathml1 = new Expression('x*y')
+    new Expression({expr: 'x*y'})
       .toCMathML.should.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
@@ -44,10 +46,10 @@ describe('Unit test for Expression.', () => {
 
   it('Wrong input', () => {
     should.throws(() => {
-      new Expression('a/*');
+      new Expression({expr: 'a/*'});
     });
     should.throws(() => {
-      new Expression('(a*b');
+      new Expression({expr: '(a*b'});
     });
   });
 });

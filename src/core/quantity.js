@@ -42,7 +42,7 @@ class Quantity extends _Scoped {
     return this;
   }
   static get schemaName(){
-    return 'QuantityInputP';
+    return 'QuantityP';
   }
   get className(){
     return 'Quantity';

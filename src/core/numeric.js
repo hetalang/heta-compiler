@@ -20,7 +20,7 @@ class Numeric {
     return `<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>${this.num}</cn></math>`;
   }
   static get schemaName(){
-    return 'NumericInput';
+    return 'Numeric';
   }
   get className(){
     return 'Numeric';

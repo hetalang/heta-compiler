@@ -17,28 +17,14 @@ describe('Unit tests for Quantity.', () => {
     simple.should.has.property('space', 'one');
   });
 
-  it('Set static numeric 1.', () => {
-    let simple = (new Quantity({id: 'k1', space: 'one'})).merge({
-      variable: {kind: 'static', size: 1.1}
-    });
-    simple.should.has.propertyByPath('variable','size').instanceOf(Numeric);
-  });
-
-  it('Set static numeric 2.', () => {
+  it('Set static numeric.', () => {
     let simple = (new Quantity({id: 'k1', space: 'one'})).merge({
       variable: {kind: 'static', size: {num: 1.1}}
     });
     simple.should.has.propertyByPath('variable','size').instanceOf(Numeric);
   });
 
-  it('Set static expression 1.', () => {
-    let simple = (new Quantity({id: 'k1', space: 'one'})).merge({
-      variable: {kind: 'static', size: 'x*y'}
-    });
-    simple.should.has.propertyByPath('variable','size').instanceOf(Expression);
-  });
-
-  it('Set static expression 2.', () => {
+  it('Set static expression.', () => {
     let simple = (new Quantity({id: 'k1', space: 'one'})).merge({
       variable: {kind: 'static', size: {expr: 'x*y'}}
     });

@@ -36,7 +36,7 @@ class Expression {
       .toString();
   }
   static get schemaName(){
-    return 'ExpressionInput';
+    return 'Expression';
   }
   get className(){
     return 'Expression';
