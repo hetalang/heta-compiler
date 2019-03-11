@@ -29,11 +29,10 @@ Container.prototype.toSBML = function(scope = 'default__'){
 };
 
 Container.prototype.getUniqueUnits = function(scope = 'default__'){
-  let quantities = this.storage.getByInstance(Quantity, scope);
-  return _.chain(quantities)
-    .filter((quantity) => quantity.variable.units)
-    .uniqBy((quantity) => quantity.unitsHash)
-    .value();
+  let quantities = this.storage
+    .getByInstance(Quantity, scope)
+    .filter((quantity) => quantity.variable.units);
+  return _.uniqBy(quantities, (quantity) => quantity.unitsHash);
 };
 
 Container.prototype.getListOfParameters = function(scope = 'default__'){
@@ -46,17 +45,17 @@ Container.prototype.getListOfParameters = function(scope = 'default__'){
 };
 
 Container.prototype.getListOfRules = function(scope = 'default__'){
-  let quantities = this.storage.getByInstance(Quantity, scope);
-  return _.filter(quantities, (quantity) => {
-    return !(quantity instanceof Reaction)
-      && quantity.variable.kind==='rule';
-  });
+  return this.storage
+    .getByInstance(Quantity, scope)
+    .filter((quantity) => !(quantity instanceof Reaction)
+        && quantity.variable.kind==='rule'
+    );
 };
 
 Container.prototype.getListOfInitialAssignments = function(scope = 'default__'){
-  let quantities = this.storage.getByInstance(Quantity, scope);
-  return _.filter(quantities, (quantity) => {
-    return (quantity.variable.size instanceof Expression)
-      && quantity.variable.kind!=='rule';
-  });
+  return this.storage
+    .getByInstance(Quantity, scope)
+    .filter((quantity) => (quantity.variable.size instanceof Expression)
+        && quantity.variable.kind!=='rule'
+    );
 };
