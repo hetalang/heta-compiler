@@ -15,24 +15,20 @@ class Event extends Quantity {
 
     if(q.assignments && q.assignments.length>0) {
       q.assignments.forEach((assignmentQ) => {
-        let assignment = {targetRef: assignmentQ.targetRef};
+        let assignment = {target: assignmentQ.target};
 
-        let size = _.get(assignmentQ, 'size');
-        if(size){
-          if(size instanceof Numeric || size instanceof Expression){
-            assignment.size = size;
-          }else if(typeof size === 'number'){
-            assignment.size = new Numeric(size);
-          }else if(typeof size === 'string'){
-            assignment.size = new Expression(size);
-          }else if('num' in size){
-            assignment.size = new Numeric(size);
-          }else if('expr' in size){
-            assignment.size = new Expression(size);
-          }else{
-            // if code is OK never throws
-            throw new Error('Wrong Variable argument.');
-          }
+        let size = assignmentQ.size;
+        if(typeof size === 'number'){
+          assignment.size = new Numeric(size, true); // skip checking because already checked
+        }else if(typeof size === 'string'){
+          assignment.size = new Expression(size, true);
+        }else if('num' in size){
+          assignment.size = new Numeric(size, true);
+        }else if('expr' in size){
+          assignment.size = new Expression(size, true);
+        }else{
+          // if code is OK never throws
+          throw new Error('Wrong EventAssignment argument.');
         }
 
         this.assignments.push(assignment);

@@ -153,6 +153,19 @@ describe('Unit tests for Container', () => {
         }
       });
     });
+    it('Event', () => {
+      c.insert({
+        class: 'Event',
+        id: 'evt1',
+        variable: {
+          kind: 'rule',
+          size: {expr: 't-12'}
+        },
+        assignments: [
+          {target: 's1', size: {num: 10.4}}
+        ]
+      });
+    });
   });
 
   describe('Test insert() wrong.', () => {
@@ -172,7 +185,7 @@ describe('Unit tests for Container', () => {
       should.throws(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       });
-      c.storage.size.should.be.eql(10);
+      c.storage.size.should.be.eql(11);
 
       // console.log(c);
     });
