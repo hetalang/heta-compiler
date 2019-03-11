@@ -10,7 +10,7 @@
         constant="false"
         {% if quantity.variable.size.num!==undefined and quantity.kind!=='rule' -%}size="{{quantity.variable.size.num}}"{%- endif %}
         {% if quantity.variable.units!==undefined -%}units="{{ quantity.unitsHash }}"{%- endif %}
-        metaid="{{quantity.indexString}}"
+        metaid="{{quantity.index}}"
         >
         {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
       </compartment>
@@ -25,12 +25,12 @@
         {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         hasOnlySubstanceUnits="{{quantity.isAmount===true}}"
         speciesType=""
-        compartment="{{quantity.compartmentRef}}"
+        compartment="{{quantity.compartment}}"
         constant="false"
         boundaryCondition="{{ quantity.variable.kind!=='dynamic' }}"
         {% if quantity.variable.size.num!==undefined and quantity.variable.kind!=='rule' -%}initialConcentration="{{quantity.variable.size.num}}"{%- endif %}
         {% if quantity.variable.units!==undefined -%}substanceUnits="{{quantity.unitsHash}}"{%- endif %}
-        metaid="{{quantity.indexString}}"
+        metaid="{{quantity.index}}"
         >
         {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
       </species>
@@ -46,7 +46,7 @@
         constant="false"
         {% if quantity.variable.size.num!==undefined and quantity.variable.kind!=='rule' -%}value="{{quantity.variable.size.num}}"{%- endif %}
         {% if quantity.variable.units!==undefined -%}units="{{quantity.unitsHash}}"{%- endif %}
-        metaid="{{quantity.indexString}}"
+        metaid="{{quantity.index}}"
         >
         {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
       </parameter>
@@ -61,22 +61,22 @@
         {% if quantity.title %}name="{{quantity.title}}"{% endif %}
         reversible="{{ quantity.aux.reversible!=='false' }}"
         fast="{{ quantity.aux.fast==='true' }}"
-        metaid="{{quantity.indexString}}"
+        metaid="{{quantity.index}}"
         >
         {% if quantity.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{quantity.notesHTML}}</html></notes>{% endif %}
         <listOfReactants>
           {% for actor in quantity.actors -%}
-          {% if actor.stoichiometry<0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ -actor.stoichiometry }}"/>{% endif %}
+          {% if actor.stoichiometry<0 %}<speciesReference species="{{ actor.target }}" stoichiometry="{{ -actor.stoichiometry }}"/>{% endif %}
           {% endfor -%}
         </listOfReactants>
         <listOfProducts>
           {% for actor in quantity.actors -%}
-          {% if actor.stoichiometry>0 %}<speciesReference species="{{ actor.targetRef }}" stoichiometry="{{ actor.stoichiometry }}"/>{% endif %}
+          {% if actor.stoichiometry>0 %}<speciesReference species="{{ actor.target }}" stoichiometry="{{ actor.stoichiometry }}"/>{% endif %}
           {% endfor -%}
         </listOfProducts>
         <listOfModifiers>
           {% for effector in quantity.effectors -%}
-          <modifierSpeciesReference species="{{ effector.targetRef }}"/>
+          <modifierSpeciesReference species="{{ effector.target }}"/>
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
@@ -98,7 +98,7 @@
   {%- for quantity in out.listOfProcesses %}
     {%- for actor in quantity.actors %}
     <rateRule
-      variable="{{actor.targetRef}}"
+      variable="{{actor.target}}"
       {% if quantity.title %}name="{{quantity.title}}"{% endif %}
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -141,7 +141,7 @@
         <listOfEventAssignments>
           {% for assignment in event.assignments %}
           <eventAssignment
-            variable="{{ assignment.targetRef }}">
+            variable="{{ assignment.target }}">
             {{ assignment.size.toCMathML }}
           </eventAssignment>
           {% endfor %}
@@ -150,9 +150,9 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
-  {% if out.getUniqueUnits()|length > 0 %}
+  {% if out.uniqueUnits|length > 0 %}
     <listOfUnitDefinitions>
-    {%- for quantity in out.getUniqueUnits() %}
+    {%- for quantity in out.uniqueUnits %}
       {{ quantity.getUnitDefinition() }}
     {%- endfor %}
   </listOfUnitDefinitions>

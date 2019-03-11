@@ -20,6 +20,18 @@ class Storage extends Map {
   get length(){
     return this.size;
   }
+  getByInstance(constructor, scope){
+    return _.chain([...this])
+      .filter((x) => (x[1] instanceof constructor) && x[1].space===scope)
+      .map((x) => x[1])
+      .value();
+  }
+  getByClassName(className, scope){
+    return _.chain([...this])
+      .filter((x) => (x[1].className===className) && x[1].space===scope)
+      .map((x) => x[1])
+      .value();
+  }
 }
 
 module.exports = {

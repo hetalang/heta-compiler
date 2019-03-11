@@ -4,8 +4,8 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha test",
-    "test:single": "mocha test/reaction"
+    "test": "mocha test/*",
+    "test:single": "mocha test/to-sbml/start"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",

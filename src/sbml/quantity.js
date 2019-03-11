@@ -1,5 +1,5 @@
 const { Quantity } = require('../core/quantity');
-const {UnitsParser, qspUnits, qspToSbml} = require('units-parser');
+const { UnitsParser, qspUnits, qspToSbml } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
 Quantity.prototype.getUnitDefinition = function(){
