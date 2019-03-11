@@ -10,9 +10,12 @@ class ValidationError extends Error {
 }
 
 class SchemaValidationError extends Error {
-  constructor(message, troubles = []){
-    super(message);
-    this.troubles = troubles;
+  constructor(message, diagnostics = []){
+    super(
+      message + ' Diagnostics:\n'
+      + JSON.stringify(diagnostics, null, 2)
+    );
+    this.diagnostics = diagnostics;
   }
 }
 
