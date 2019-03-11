@@ -24,8 +24,8 @@ describe('Unit tests for Container', () => {
         suffix: '/'
       });
       res.should.be.instanceOf(Container);
-      c.storage.should.be.lengthOf(1);
-      let simple = c.storage.getByIndex({id: 'pmid1', space: 'global__'});
+      c.storage.size.should.be.eql(1);
+      let simple = c.storage.get('global__.pmid1');
       simple.should.has.property('prefix', 'https://pubmed.org/');
       simple.should.has.property('suffix', '/');
       simple.should.has.property('className', 'ReferenceDefinition');
@@ -44,10 +44,10 @@ describe('Unit tests for Container', () => {
         id: 'pmid2',
         prefix: 'https://google.com'
       });
-      let simple = c.storage.getByIndex({id: 'pmid2', space: 'global__'});
+      let simple = c.storage.get('global__.pmid2');
       simple.should.has.property('prefix', 'https://google.com');
       simple.should.has.property('space');
-      c.storage.should.be.lengthOf(2);
+      c.storage.size.should.be.eql(2);
     });
 
     it('Insert unscoped components with space.', () => {
@@ -58,10 +58,10 @@ describe('Unit tests for Container', () => {
         prefix: 'xxx',
         suffix: '/'
       });
-      let component = c.storage.getByIndex({id: 'pmid4', space: 'global__'});
+      let component = c.storage.get('global__.pmid4');
       component.should.property('prefix', 'xxx');
       component.should.has.property('space');
-      c.storage.should.be.lengthOf(3);
+      c.storage.size.should.be.eql(3);
     });
 
     it('Insert scoped component and check.', () => {
@@ -70,9 +70,9 @@ describe('Unit tests for Container', () => {
         id: 'pg1',
         space: 'another'
       });
-      let simple = c.storage.getByIndex({id: 'pg1', space: 'another'});
+      let simple = c.storage.get('another.pg1');
       simple.should.has.property('space', 'another');
-      c.storage.should.be.lengthOf(4);
+      c.storage.size.should.be.eql(4);
     });
 
     it('Insert scoped component without space and check.', () => {
@@ -80,10 +80,10 @@ describe('Unit tests for Container', () => {
         class: 'Quantity',
         id: 'pg1'
       });
-      let simple = c.storage.getByIndex({id: 'pg1', space: 'default__'});
-      should(c.storage.getByIndex({id: 'pg1'})).be.undefined();
+      let simple = c.storage.get('default__.pg1');
+      should(c.storage.get('pg1')).be.undefined();
       simple.should.has.property('space', 'default__');
-      c.storage.should.be.lengthOf(5);
+      c.storage.size.should.be.eql(5);
     });
   });
 
@@ -152,9 +152,9 @@ describe('Unit tests for Container', () => {
       should.throws(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       });
-      c.storage.should.be.lengthOf(9);
+      c.storage.size.should.be.eql(9);
 
-      console.log(c);
+      // console.log(c);
     });
   });
 });

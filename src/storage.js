@@ -1,45 +1,24 @@
 const _ = require('lodash');
 const should = require('should');
 
-class Storage extends Array {
+class Storage extends Map {
   constructor(){
     super();
   }
+  set(key, value){
+    key.should.be.String();
+    return super.set(key, value);
+  }
   setByIndex(value){
     // check arguments
-    should(value).have.property('id').with.String();
-    value.space!==undefined && should(value.space).is.String();
-    value._index = value.space + '.' + value.id;
+    should(value).have.property('index').with.String();
 
-    let elementNumber = this.findIndex((x) => x._index === value._index);
-
-    if(elementNumber === -1) {
-      this.push(value);
-    } else {
-      this[elementNumber] = value;
-    }
+    this.set(value.index, value);
 
     return value;
   }
-  getByIndex(key){
-    // check arguments
-    should(key).have.property('id').with.String();
-    key.space!==undefined && should(key.space).is.String();
-
-    let _index = key.space + '.' + key.id;
-    return this.find((x) => x._index === _index);
-  }
-  deleteByIndex(key){
-    // check arguments
-    should(key).have.property('id').with.String();
-    key.space!==undefined && should(key.space).is.String();
-
-    let _index = key.space + '.' + key.id;
-    let elementNumber = this.findIndex((x) => x._index === _index);
-    if(elementNumber === -1)
-      throw new Error(`Cannot delete element with key ${key.id} because it is not in Storage.`);
-
-    return this.splice(elementNumber, 1)[0];
+  get length(){
+    return this.size;
   }
 }
 

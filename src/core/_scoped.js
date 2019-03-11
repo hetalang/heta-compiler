@@ -31,9 +31,6 @@ class _Scoped extends _Simple {
   get className(){
     return '_Scoped';
   }
-  get index(){
-    return {id: this._id, space: this._space};
-  }
   toQ(){
     let res = super.toQ();
     res.space = this.space;

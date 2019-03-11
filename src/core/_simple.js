@@ -36,7 +36,7 @@ class _Simple {
     return '_Simple';
   }
   get index(){
-    return {id: this._id};
+    return this.space + '.' + this.id;
   }
   clone(){ // creates copy of element TODO: not tested
     let clone = _.clone(this);
