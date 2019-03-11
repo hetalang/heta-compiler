@@ -9,8 +9,8 @@ const { validator } = require('./utilities.js');
 const { SchemaValidationError } = require('../exceptions');
 
 class Expression {
-  constructor(q){ // string or object
-    Expression.isValid(q);
+  constructor(q, skipChecking){ // string or object
+    if(!skipChecking) Expression.isValid(q);
     if(typeof q==='string'){
       this._exprInput = q;
       this._inputLang = 'qs3p';

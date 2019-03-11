@@ -3,9 +3,9 @@ const { validator } = require('./utilities.js');
 const { SchemaValidationError } = require('../exceptions');
 
 class Numeric {
-  constructor(q){ // numeric or object
+  constructor(q, skipChecking){ // number or object
     // super(q);
-    Numeric.isValid(q);
+    if(!skipChecking) Numeric.isValid(q);
     if(typeof q==='number'){
       this.num = q;
       this.free = false;

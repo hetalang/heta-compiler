@@ -26,13 +26,13 @@ class Quantity extends _Scoped {
       if(q.variable.units!==undefined) this.variable.units = q.variable.units;
       let size = q.variable.size;
       if(typeof size === 'number'){
-        this.variable.size = new Numeric(size);
+        this.variable.size = new Numeric(size, true); // skip checking because already checked
       }else if(typeof size === 'string'){
-        this.variable.size = new Expression(size);
+        this.variable.size = new Expression(size, true);
       }else if('num' in size){
-        this.variable.size = new Numeric(size);
+        this.variable.size = new Numeric(size, true);
       }else if('expr' in size){
-        this.variable.size = new Expression(size);
+        this.variable.size = new Expression(size, true);
       }else{
         // if code is OK never throws
         throw new Error('Wrong Variable argument.');
