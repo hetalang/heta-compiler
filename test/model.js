@@ -1,6 +1,6 @@
 /* global describe, it*/
 const { Model } = require('../src/core/model');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for Model.', () => {
   it('Create minimal', () => {
@@ -29,7 +29,7 @@ describe('Unit test for Model.', () => {
       }
     });
     simple.should.has.property('method');
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       class: 'Model',
       id: 'm1',
       method: {
@@ -46,28 +46,28 @@ describe('Unit test for Model.', () => {
   });
 
   it('Wrong input.', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           timeRange: [1,2,3]
         }
       });
     });
-    should.throws(() => {
+    should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           timeStep: -1
         }
       });
     });
-    should.throws(() => {
+    should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           solver: 'xxx'
         }
       });
     });
-    should.throws(() => {
+    should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           abstol: '1'

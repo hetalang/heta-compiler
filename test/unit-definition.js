@@ -1,11 +1,11 @@
 /* global describe, it */
 const { UnitDefinition } = require('../src/core/unit-definition');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for UnitDefinition', () => {
   it('Empty UnitDefinition', () => {
     let simple = new UnitDefinition({id: 'ud1'});
-    simple.should.has.property('components', []);
+    simple.should.has.deep.property('components', []);
   });
 
   it('Correct UnitDefinition', () => {
@@ -15,7 +15,7 @@ describe('Unit test for UnitDefinition', () => {
         {kind: 'mole', exponent: -1}
       ]
     });
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       class: 'UnitDefinition',
       id: 'ud1',
       components: [
@@ -26,17 +26,17 @@ describe('Unit test for UnitDefinition', () => {
   });
 
   it('Wrong input.', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: 'xxx'
       });
     });
-    should.throws(() => {
+    should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: ['xxx']
       });
     });
-    should.throws(() => {
+    should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: [{}]
       });

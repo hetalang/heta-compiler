@@ -1,11 +1,11 @@
 /* global describe, it */
 const { Expression } = require('../src/core/expression');
 const { ValidationError, SchemaValidationError } = require('../src/exceptions');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for Expression.', () => {
   it('Create expession from "x*y".', () => {
-    should.throws(() => {
+    should.Throw(() => {
       let expression = new Expression('x*y');
       should(expression.expr).be.equal('x * y');
     });
@@ -13,7 +13,7 @@ describe('Unit test for Expression.', () => {
 
   it('Create Expression from {expr: "x*y"}.', () => {
     let expression = new Expression({expr: 'x*y'});
-    should(expression.expr).be.equal('x * y');
+    expression.expr.should.be.equal('x * y');
   });
 
   it('Conversion to CMathML.', () => {
@@ -24,31 +24,31 @@ describe('Unit test for Expression.', () => {
 
   it('Conversion to Q.', () => {
     let expression = new Expression({expr: 'x*y'});
-    expression.toQ().should.be.deepEqual({
+    expression.toQ().should.be.deep.equal({
       expr: 'x * y'
     });
   });
 
   it('Empty input.', () => {
-    should.throws(() => {
+    should.Throw(() => {
       new Expression();
     }, SchemaValidationError);
-    should.throws(() => {
+    should.Throw(() => {
       new Expression({});
     }, SchemaValidationError);
-    should.throws(() => {
+    should.Throw(() => {
       new Expression({xxx: 'yyy'});
     }, SchemaValidationError);
-    should.throws(() => {
+    should.Throw(() => {
       new Expression('');
     }, SchemaValidationError);
   });
 
   it('Wrong input', () => {
-    should.throws(() => {
+    should.Throw(() => {
       new Expression({expr: 'a/*'});
     });
-    should.throws(() => {
+    should.Throw(() => {
       new Expression({expr: '(a*b'});
     });
   });

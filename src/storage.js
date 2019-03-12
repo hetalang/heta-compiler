@@ -1,17 +1,17 @@
 const _ = require('lodash');
-const should = require('should');
+const should = require('chai').should();
 
 class Storage extends Map {
   constructor(){
     super();
   }
   set(key, value){
-    key.should.be.String();
+    key.should.be.a('string');
     return super.set(key, value);
   }
   setByIndex(value){
     // check arguments
-    should(value).have.property('index').with.String();
+    value.should.have.property('index').with.a('string');
 
     this.set(value.index, value);
 

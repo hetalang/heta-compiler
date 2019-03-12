@@ -8,7 +8,7 @@ const _ = require('lodash');
 */
 class _Simple {
   constructor(ind){
-    ind.should.has.property('id').with.String();
+    ind.should.has.property('id').be.a('string');
     this._id = ind.id;
     this.tags = [];
     this.aux = {};

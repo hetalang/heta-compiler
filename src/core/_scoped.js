@@ -9,7 +9,7 @@ class _Scoped extends _Simple {
   constructor(ind){
     super(ind);
     if(ind.space!==undefined) {
-      ind.space.should.be.String();
+      ind.space.should.be.a('string');
       ind.space.should.not.be.equal('global__');
       this._space = ind.space;
     }else{

@@ -1,7 +1,7 @@
 /* global describe, it */
 const { _Simple } = require('../src/core/_simple');
 const { SchemaValidationError } = require('../src/exceptions');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for _Simple common methods', () => {
 
@@ -30,11 +30,11 @@ describe('Unit test for _Simple common methods', () => {
   it('Title property', () => {
     let simple = (new _Simple({id: 'ref1'}))
       .merge({title: 'This is correct title.'});
-    simple.should.has.property('title').with.be.ok();
+    simple.should.has.property('title').with.a('string');
   });
 
   it('Incorrect title property', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({title: {}});
     });
   });
@@ -46,13 +46,13 @@ describe('Unit test for _Simple common methods', () => {
   });
 
   it('Incorrect tags property 1', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({tags: {}});
     });
   });
 
   it('Incorrect tags property 2', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({tags: [{}]});
     });
   });
@@ -64,7 +64,7 @@ describe('Unit test for _Simple common methods', () => {
   });
 
   it('Incorrect aux property', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({aux: []});
     });
   });
@@ -75,7 +75,7 @@ describe('Unit test for _Simple common methods', () => {
     simple.merge({notes: 'This is correct **note**.'});
     simple.should.has.property('notes');
     simple.should.has.property('notesMdTree').with.instanceOf(Array);
-    simple.should.has.property('notesHTML').with.instanceOf(String);
+    simple.should.has.property('notesHTML').with.a('string');
   });
 
   it('Do not merge unknown properties', () => {
@@ -95,7 +95,7 @@ describe('Unit test for _Simple common methods', () => {
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}}
     });
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       id: 'pmid',
       title: 'title',
       notes: 'notes',

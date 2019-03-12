@@ -1,12 +1,12 @@
 /* global describe, it, should */
 const { Page } = require('../src/core/page');
 const { SchemaValidationError } = require('../src/exceptions');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for Page', () => {
 
   it('Incorrect content property', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new Page({id: 'pg1'})).merge({content: {}});
     });
   });
@@ -22,7 +22,7 @@ describe('Unit test for Page', () => {
       aux: {a: 1, b: 'b', c: {}}
     });
 
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       id: 'pg1',
       title: 'title',
       notes: 'notes',

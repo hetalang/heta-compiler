@@ -1,6 +1,6 @@
 /* global describe, it */
 const { Reaction } = require('../src/core/reaction');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit tests for Reaction.', () => {
   it('Check toQ.', () => {
@@ -21,7 +21,7 @@ describe('Unit tests for Reaction.', () => {
         units: 'umole/h'
       }
     });
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       class: 'Reaction',
       id: 'r1',
       space: 'default__',

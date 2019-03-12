@@ -1,6 +1,7 @@
 /* global describe, it, should */
 
 const { Container } = require('../src/container');
+const should = require('chai').should();
 
 describe('Unit tests for Container', () => {
   var c;
@@ -81,7 +82,6 @@ describe('Unit tests for Container', () => {
         id: 'pg1'
       });
       let simple = c.storage.get('default__.pg1');
-      should(c.storage.get('pg1')).be.undefined();
       simple.should.has.property('space', 'default__');
       c.storage.size.should.be.eql(5);
     });
@@ -170,19 +170,19 @@ describe('Unit tests for Container', () => {
 
   describe('Test insert() wrong.', () => {
     it('Insert wrong components.', () => {
-      should.throws(() => {
+      should.Throw(() => {
         c.insert({});
       });
-      should.throws(() => {
+      should.Throw(() => {
         c.insert({id: 'pmid3'});
       });
-      should.throws(() => {
+      should.Throw(() => {
         c.insert({class: 'ReferenceDefinition'});
       });
-      should.throws(() => {
+      should.Throw(() => {
         c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
       });
-      should.throws(() => {
+      should.Throw(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       });
       c.storage.size.should.be.eql(11);

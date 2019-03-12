@@ -1,18 +1,18 @@
 /* global describe, it */
 const { ReferenceDefinition } = require('../src/core/reference-definition');
 const { SchemaValidationError } = require('../src/exceptions');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for ReferenceDefinition', () => {
 
   it('Incorrect prefix property', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new ReferenceDefinition({id: 'ref1'})).merge({prefix: {}});
     });
   });
 
   it('Incorrect suffix property', () => {
-    should.throws(() => {
+    should.Throw(() => {
       (new ReferenceDefinition({id: 'ref1'})).merge({suffix: {}});
     });
   });
@@ -28,7 +28,7 @@ describe('Unit test for ReferenceDefinition', () => {
       prefix: 'this://is.correct/prefix/'
     });
 
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       id: 'ref1',
       title: 'title',
       notes: 'notes',

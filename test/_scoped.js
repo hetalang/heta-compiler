@@ -1,7 +1,7 @@
 /* global describe, it, should */
 const { _Scoped } = require('../src/core/_scoped');
 const { SchemaValidationError } = require('../src/exceptions');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for _Scoped common methods', () => {
 
@@ -28,13 +28,13 @@ describe('Unit test for _Scoped common methods', () => {
   });
 
   it('No id and space throws.', () => {
-    should.throws(() => {
+    should.Throw(() => {
       new _Scoped;
     });
   });
 
   it('No id throws.', () => {
-    should.throws(() => {
+    should.Throw(() => {
       new _Scoped({space: 'one'});
     });
   });
@@ -48,7 +48,7 @@ describe('Unit test for _Scoped common methods', () => {
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}}
     });
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       id: 'pg1',
       space: 'one',
       title: 'title',

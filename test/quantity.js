@@ -2,7 +2,7 @@
 const { Quantity } = require('../src/core/quantity');
 const { Numeric } = require('../src/core/numeric');
 const { Expression } = require('../src/core/expression');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit tests for Quantity.', () => {
   it('Minimal quantity.', () => {
@@ -21,14 +21,14 @@ describe('Unit tests for Quantity.', () => {
     let simple = (new Quantity({id: 'k1', space: 'one'})).merge({
       variable: {kind: 'static', size: {num: 1.1}}
     });
-    simple.should.has.propertyByPath('variable','size').instanceOf(Numeric);
+    simple.should.has.nested.property('variable.size').instanceOf(Numeric);
   });
 
   it('Set static expression.', () => {
     let simple = (new Quantity({id: 'k1', space: 'one'})).merge({
       variable: {kind: 'static', size: {expr: 'x*y'}}
     });
-    simple.should.has.propertyByPath('variable','size').instanceOf(Expression);
+    simple.should.has.nested.property('variable.size').instanceOf(Expression);
   });
 
   it('Check toQ for expression Quantity.', () => {
@@ -36,7 +36,7 @@ describe('Unit tests for Quantity.', () => {
       title: 'complex quantity',
       variable: {kind: 'rule', size: {expr: 'm*c^2'}, units: 'J'}
     });
-    simple.toQ().should.be.deepEqual({
+    simple.toQ().should.be.deep.equal({
       class: 'Quantity',
       id: 'r1',
       space: 'default__',

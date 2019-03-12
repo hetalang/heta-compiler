@@ -1,21 +1,21 @@
 /* global describe, it */
 const { Numeric } = require('../src/core/numeric');
 const { ValidationError, SchemaValidationError } = require('../src/exceptions');
-const should = require('should');
+const should = require('chai').should();
 
 describe('Unit test for Numeric.', () => {
   it('Create numeric from 3.14', () => {
-    should.throws(() => {
+    should.Throw(() => {
       let numeric = new Numeric(3.14);
       numeric.should.has.property('num', 3.14);
-      numeric.should.has.property('free').not.ok();
+      numeric.should.not.has.property('free');
     });
   });
 
   it('Create numeric from {num: 3.14}', () => {
     let numeric = new Numeric({num: 3.14});
-    numeric.should.has.property('num', 3.14);
-    numeric.should.has.property('free').not.ok();
+    numeric.should.have.property('num', 3.14);
+    numeric.should.not.have.property('free', true);
   });
 
   it('Create numeric from {num: 3.14, free: true}', () => {
@@ -30,26 +30,26 @@ describe('Unit test for Numeric.', () => {
   });
 
   it('Wrong input', () => {
-    should.throws(() => {
+    should.Throw(() => {
       new Numeric();
     });
-    should.throws(() => {
+    should.Throw(() => {
       new Numeric('a');
     });
-    should.throws(() => {
+    should.Throw(() => {
       new Numeric('1');
     });
-    should.throws(() => {
+    should.Throw(() => {
       new Numeric({xxx: 12});
     });
-    should.throws(() => {
+    should.Throw(() => {
       new Numeric({num: 12, free: 1});
     });
   });
 
   it('Conversion to Q.', () => {
     let numeric = new Numeric({num: 3.14, free: true});
-    numeric.toQ().should.be.deepEqual({
+    numeric.toQ().should.be.deep.equal({
       num: 3.14,
       free: true
     });
