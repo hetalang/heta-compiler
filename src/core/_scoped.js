@@ -1,5 +1,6 @@
 const _ = require('lodash');
 
+const expect = require('chai').expect;
 const { _Simple } = require('./_simple');
 
 /*
@@ -9,8 +10,8 @@ class _Scoped extends _Simple {
   constructor(ind){
     super(ind);
     if(ind.space!==undefined) {
-      ind.space.should.be.a('string');
-      ind.space.should.not.be.equal('global__');
+      expect(ind.space).be.a('string');
+      expect(ind.space).not.be.equal('global__');
       this._space = ind.space;
     }else{
       this._space = 'default__';

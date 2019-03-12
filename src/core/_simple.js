@@ -2,13 +2,14 @@ const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 const { SchemaValidationError } = require('../exceptions');
 const _ = require('lodash');
+const expect = require('chai').expect;
 
 /*
   Abstract class _Simple
 */
 class _Simple {
   constructor(ind){
-    ind.should.has.property('id').be.a('string');
+    expect(ind).has.property('id').be.a('string');
     this._id = ind.id;
     this.tags = [];
     this.aux = {};

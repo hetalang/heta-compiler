@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
+  <model>
+    <listOfCompartments>
+      <compartment
+        id="comp1"
+        name="This is compartment"
+        constant="false"
+
+        units="L"
+        metaid="default__.comp1"
+        >
+        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>This is just text. <em>italic</em>, <strong>bold</strong></p>
+
+<p>another line</p></html></notes>
+      </compartment>
+      <compartment
+        id="comp2"
+
+        constant="false"
+        size="3.2"
+
+        metaid="default__.comp2"
+        >
+
+      </compartment>
+    </listOfCompartments>
+
+
+    <listOfSpecies>
+      <species
+        id="s1"
+
+        hasOnlySubstanceUnits="false"
+        speciesType=""
+        compartment="comp3"
+        constant="false"
+        boundaryCondition="false"
+        initialConcentration="1.1"
+
+        metaid="default__.s1"
+        >
+
+      </species>
+      <species
+        id="s2"
+        name="s2 title"
+        hasOnlySubstanceUnits="false"
+        speciesType=""
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="true"
+
+
+        metaid="default__.s2"
+        >
+
+      </species>
+    </listOfSpecies>
+
+
+    <listOfParameters>
+      <parameter
+        id="p2"
+
+        constant="false"
+        value="15.223"
+        units="nm__min__fM"
+        metaid="default__.p2"
+        >
+
+      </parameter>
+      <parameter
+        id="p3"
+
+        constant="false"
+
+        units="__h__L"
+        metaid="default__.p3"
+        >
+
+      </parameter>
+      <parameter
+        id="evt1"
+
+        constant="false"
+
+        units="min"
+        metaid="default__.evt1"
+        >
+
+      </parameter>
+  </listOfParameters>
+
+
+    <listOfReactions>
+      <reaction
+        id="r2"
+
+        reversible="true"
+        fast="false"
+        metaid="default__.r2"
+        >
+
+        <listOfReactants>
+          <speciesReference species="s4" stoichiometry="2"/>
+
+          </listOfReactants>
+        <listOfProducts>
+
+          <speciesReference species="s2" stoichiometry="1"/>
+          </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="s2"/>
+          </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>p2</ci><ci>comp1</ci></apply><ci>s1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="r3"
+
+        reversible="true"
+        fast="false"
+        metaid="default__.r3"
+        >
+
+        <listOfReactants>
+          </listOfReactants>
+        <listOfProducts>
+          </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="s2"/>
+          </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>28</cn></math>
+        </kineticLaw>
+      </reaction>
+  </listOfReactions>
+
+  <listOfRules>
+    <assignmentRule
+      variable="p3"
+
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="s2"
+      name="s2 title"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="evt1"
+
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
+    </assignmentRule>
+  </listOfRules>
+
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="comp1"
+        name="This is compartment"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+
+
+    <listOfEvents>
+      <event
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <ci>evt1</ci>
+              <cn>0</cn>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+
+          <eventAssignment
+            variable="s1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s1</ci><cn>2</cn></apply></math>
+          </eventAssignment>
+
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+
+
+    <listOfUnitDefinitions>
+      <unitDefinition id="L" name="L">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="nm__min__fM" name="1 / min / fM&#183;nm">
+  <listOfUnits>
+    <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
+    <unit kind="mole" exponent="-1" scale="-15" multiplier="1"/>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+    <unit kind="metre" exponent="1" scale="-9" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="__h__L" name="1 / L / h">
+  <listOfUnits>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+    <unit kind="second" exponent="-1" scale="0" multiplier="3600"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="mole__L" name="mole / L">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="min" name="min">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="0" multiplier="60"/>
+  </listOfUnits>
+</unitDefinition>
+  </listOfUnitDefinitions>
+
+  </model>
+</sbml>

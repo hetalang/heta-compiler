@@ -11,7 +11,7 @@ const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 // const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
-const should = require('chai').should();
+const expect = require('chai').expect;
 
 class Container {
   constructor(){
@@ -36,7 +36,7 @@ class Container {
   }
   insert(q){
     // check if class is presented
-    q.should.has.property('class').with.a('string');
+    expect(q).has.property('class').with.a('string');
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
