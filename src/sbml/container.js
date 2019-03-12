@@ -1,4 +1,4 @@
-const { Container } = require('../container');
+const Container = require('../container');
 const { Quantity } = require('../core/quantity');
 const { Compartment } = require('../core/compartment');
 const { Species } = require('../core/species');

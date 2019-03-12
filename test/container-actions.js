@@ -1,6 +1,6 @@
 /* global describe, it, should */
 
-const { Container } = require('../src/container');
+const Container = require('../src/container');
 const should = require('chai').should();
 
 describe('Unit tests for Container', () => {

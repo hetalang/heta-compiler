@@ -1,5 +1,5 @@
 /* global describe, it */
-const { Container } = require('../src/container');
+const Container = require('../src/container');
 
 describe('Unit tests for Container import', () => {
   var c;

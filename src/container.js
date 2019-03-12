@@ -88,6 +88,4 @@ class Container {
   }
 }
 
-module.exports = {
-  Container
-};
+module.exports = Container;
