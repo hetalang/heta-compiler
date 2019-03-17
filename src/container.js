@@ -47,7 +47,7 @@ class Container {
 
     this.storage.setByIndex(simple);
 
-    return this;
+    return simple;
   }
   update(q){
     expect(q).not.to.have.property('class');
@@ -62,9 +62,9 @@ class Container {
         `Element with index: "${index}" is not exist which is not allowed for "update" strategy.`
       );
 
-    targetComponent.merge(q);
+    let simple = targetComponent.merge(q);
 
-    return this;
+    return simple;
   }
   import(q){
     // estimate action

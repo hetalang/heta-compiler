@@ -1,7 +1,8 @@
-/* global describe, it, should */
+/* global describe, it */
 
 const Container = require('../src/container');
 const should = require('chai').should();
+const { _Simple } = require('../src/core/_simple');
 
 describe('Unit tests for Container', () => {
   var c;
@@ -24,7 +25,7 @@ describe('Unit tests for Container', () => {
         prefix: 'https://pubmed.org/',
         suffix: '/'
       });
-      res.should.be.instanceOf(Container);
+      res.should.be.instanceOf(_Simple);
       c.storage.size.should.be.eql(1);
       let simple = c.storage.get('default__.pmid1');
       simple.should.has.property('prefix', 'https://pubmed.org/');
@@ -40,7 +41,8 @@ describe('Unit tests for Container', () => {
         id: 'pmid2',
         prefix: 'https://pubmed.org/',
         suffix: '/'
-      }).insert({
+      });
+      c.insert({
         class: 'ReferenceDefinition',
         id: 'pmid2',
         prefix: 'https://google.com'

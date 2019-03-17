@@ -3,6 +3,6 @@
 //require('./sbml/quantity');
 require('./sbml/container');
 
-const Container  = require('./container');
+const Container = require('./container');
 
 module.exports = Container;

@@ -16,10 +16,11 @@ describe('Unit tests for Container import', () => {
     });
   });
 
-  it('Insert Quantity k2', () => {
+  it('Insert Quantity k2 with space', () => {
     c.insert({ // insert new
       class: 'Quantity',
       id: 'k2',
+      space: 'one',
       title: 'k2 title',
       variable: {
         kind: 'static',
@@ -39,10 +40,11 @@ describe('Unit tests for Container import', () => {
     });
   });
 
-  it('Insert Quantity k2', () => {
+  it('Insert Quantity k2 with replace', () => {
     c.insert({ // insert new instead of old
       class: 'Quantity',
       id: 'k2',
+      space: 'one',
       variable: {
         kind: 'static',
         size: {num: 1.2}
