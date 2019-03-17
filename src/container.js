@@ -67,7 +67,7 @@ class Container {
     return simple;
   }
   import(q){
-    // estimate action
+    // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'insert');
     // do action
     return this[actionName](q);
