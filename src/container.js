@@ -66,9 +66,16 @@ class Container {
 
     return simple;
   }
+  upsert(q){
+    if('class' in q){
+      return this.insert(q);
+    }else{
+      return this.update(q);
+    }
+  }
   import(q){
     // estimate action, default is upsert
-    let actionName = _.get(q, 'action', 'insert');
+    let actionName = _.get(q, 'action', 'upsert');
     // do action
     return this[actionName](q);
   }

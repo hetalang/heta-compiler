@@ -85,10 +85,56 @@ describe('Unit tests for Container import', () => {
     should.Throw(() => {
       c.update({id: 'k1', class: 'Species'}); // class property is not allowed
     });
+    c.storage.should.be.lengthOf(2);
+  });
+
+  it('upsert acts like insert if class presented.', () => {
+    c.insert({
+      class: 'Quantity',
+      id: 'k3',
+      title: 'k3 title',
+      notes: 'k3 notes'
+    });
+    let simple = c.upsert({
+      class: 'Quantity',
+      id: 'k3',
+      title: 'k3 updated title'
+    });
+    simple.should.have.property('title', 'k3 updated title');
+    simple.should.not.have.property('notes');
+    c.storage.should.be.lengthOf(3);
+  });
+
+  it('upsert acts like update if no class presented.', () => {
+    c.insert({
+      class: 'Quantity',
+      id: 'k4',
+      title: 'k4 title',
+      notes: 'k4 notes'
+    });
+    let simple = c.upsert({
+      id: 'k4',
+      title: 'k4 updated title'
+    });
+    c.storage.should.be.lengthOf(4);
+    simple.should.have.property('title', 'k4 updated title');
+    simple.should.have.property('notes', 'k4 notes');
+  });
+
+  it('Throws wrond upsert', () => {
+    should.Throw(() => {
+      c.upsert({}); // empty
+    });
+    should.Throw(() => {
+      c.upsert({class: 'Quantity'}); // no id
+    });
+    should.Throw(() => {
+      c.upsert({id: 'k10'}); // no class and unknown id
+    });
   });
 
   it('DELETE LATER', () => {
-    c.storage.should.be.lengthOf(2);
+    c.storage.should.be.lengthOf(4);
     // console.log(c.storage);
   });
 });
