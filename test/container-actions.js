@@ -1,6 +1,7 @@
 /* global describe, it */
 const Container = require('../src/container');
 const should = require('chai').should();
+const { _Simple } = require('../src/core/_simple');
 
 describe('Unit tests for Container import', () => {
   var c = new Container();
@@ -130,6 +131,33 @@ describe('Unit tests for Container import', () => {
     });
     should.Throw(() => {
       c.upsert({id: 'k10'}); // no class and unknown id
+    });
+  });
+
+  it('delete existed element.', () => {
+    c.insert({
+      class: 'Quantity',
+      id: 'k5',
+      title: 'k5 title',
+    });
+    c.storage.should.be.lengthOf(5);
+    let simple = c.delete({
+      id: 'k5'
+    });
+    simple.should.be.instanceOf(_Simple);
+    simple.should.have.property('title', 'k5 title');
+    c.storage.should.be.lengthOf(4);
+  });
+
+  it('Throws wrong delete', () => {
+    should.Throw(() => {
+      c.delete({}); // empty
+    });
+    should.Throw(() => {
+      c.delete({id: 'k3', class: 'Quantity'}); // class is not allowed
+    });
+    should.Throw(() => {
+      c.delete({id: 'k10'}); // deleting not existed element is not allowed
     });
   });
 

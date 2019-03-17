@@ -31,9 +31,6 @@ class Container {
       Page
     };
   }
-  select(index){ // db-mode
-    return this.storage.get(index);
-  }
   insert(q){
     // check if class is presented
     expect(q).has.property('class').with.a('string');
@@ -62,9 +59,9 @@ class Container {
         `Element with index: "${index}" is not exist which is not allowed for "update" strategy.`
       );
 
-    let simple = targetComponent.merge(q);
+    targetComponent.merge(q);
 
-    return simple;
+    return targetComponent;
   }
   upsert(q){
     if('class' in q){
@@ -72,6 +69,15 @@ class Container {
     }else{
       return this.update(q);
     }
+  }
+  delete(q){
+    expect(q).not.to.have.property('class');
+    expect(q).to.have.property('id').with.a('string');
+    let index = q.space ? q.space : 'default__'
+      + '.' + q.id;
+    let targetComponent = this.storage.delete(index);
+
+    return targetComponent;
   }
   import(q){
     // estimate action, default is upsert

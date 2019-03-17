@@ -9,6 +9,13 @@ class Storage extends Map {
     expect(key).be.a('string');
     return super.set(key, value);
   }
+  delete(key){
+    let res = super.get(key);
+    if(res===undefined)
+      throw new Error(`Element with key ${key} is not exist and cannot be deleted.`);
+    super.delete(key);
+    return res;
+  }
   setByIndex(value){
     // check arguments
     expect(value).have.property('index').with.a('string');
