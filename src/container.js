@@ -43,29 +43,26 @@ class Container {
       throw new Error(
         `Unknown "class" ${q.class} for component id: "${q.id}".`
       );
-    let simple = (new selectedClass({id: q.id, space: q.space})).merge(q, false);
+    let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     this.storage.setByIndex(simple);
 
     return this;
   }
   update(q){
-    let hasClass = 'class' in q;
-    let index = {id: q.id, space: q.space};
-    let targetComponent = this.select(index);
+    expect(q).not.to.have.property('class');
+    expect(q).to.have.property('id').with.a('string');
+    let index = q.space ? q.space : 'default__'
+      + '.' + q.id;
+    let targetComponent = this.storage.get(index);
 
     // creation of new components is not allowed
     if(targetComponent===undefined)
       throw new Error(
         `Element with index: "${index}" is not exist which is not allowed for "update" strategy.`
       );
-    // class cannot be changed
-    if(hasClass && targetComponent && q.class !== targetComponent.className)
-      throw new Error(
-        `Component "${index}" truing to change class which is not allowed in current version.`
-      );
 
-    targetComponent.merge(q, false);
+    targetComponent.merge(q);
 
     return this;
   }

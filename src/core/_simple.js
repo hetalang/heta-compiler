@@ -28,7 +28,11 @@ class _Simple {
     return this._id;
   }
   get space(){
-    return 'global__';
+    return 'default__';
+    // to use specific space for unscoped objects
+    // currently it is not used because unclear how to estimate what to select when
+    // class is not set for update() method
+    // return 'global__';
   }
   static get schemaName(){
     return '_Simple';

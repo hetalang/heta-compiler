@@ -11,7 +11,7 @@ class _Scoped extends _Simple {
     super(ind);
     if(ind.space!==undefined) {
       expect(ind.space).be.a('string');
-      expect(ind.space).not.be.equal('global__');
+      // expect(ind.space).not.be.equal('global__');
       this._space = ind.space;
     }else{
       this._space = 'default__';

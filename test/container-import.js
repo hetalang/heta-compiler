@@ -1,5 +1,6 @@
 /* global describe, it */
 const Container = require('../src/container');
+const should = require('chai').should();
 
 describe('Unit tests for Container import', () => {
   var c;

@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test/*",
-    "test:single": "mocha test/to-sbml/index"
+    "test:single": "mocha test/container-actions"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",
