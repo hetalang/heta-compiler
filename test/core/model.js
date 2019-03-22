@@ -1,5 +1,5 @@
 /* global describe, it*/
-const { Model } = require('../src/core/model');
+const { Model } = require('../../src/core/model');
 const should = require('chai').should();
 
 describe('Unit test for Model.', () => {

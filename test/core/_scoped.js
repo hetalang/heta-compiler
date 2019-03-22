@@ -1,6 +1,6 @@
 /* global describe, it, should */
-const { _Scoped } = require('../src/core/_scoped');
-const { SchemaValidationError } = require('../src/exceptions');
+const { _Scoped } = require('../../src/core/_scoped');
+const { SchemaValidationError } = require('../../src/exceptions');
 const should = require('chai').should();
 
 describe('Unit test for _Scoped common methods', () => {

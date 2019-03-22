@@ -1,5 +1,5 @@
 /* global describe, it */
-const { Reaction } = require('../src/core/reaction');
+const { Reaction } = require('../../src/core/reaction');
 const should = require('chai').should();
 
 describe('Unit tests for Reaction.', () => {

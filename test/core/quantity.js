@@ -1,7 +1,7 @@
 /* global describe, it */
-const { Quantity } = require('../src/core/quantity');
-const { Numeric } = require('../src/core/numeric');
-const { Expression } = require('../src/core/expression');
+const { Quantity } = require('../../src/core/quantity');
+const { Numeric } = require('../../src/core/numeric');
+const { Expression } = require('../../src/core/expression');
 const should = require('chai').should();
 
 describe('Unit tests for Quantity.', () => {

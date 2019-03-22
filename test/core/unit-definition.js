@@ -1,5 +1,5 @@
 /* global describe, it */
-const { UnitDefinition } = require('../src/core/unit-definition');
+const { UnitDefinition } = require('../../src/core/unit-definition');
 const should = require('chai').should();
 
 describe('Unit test for UnitDefinition', () => {

@@ -1,6 +1,6 @@
 /* global describe, it, should */
-const { Page } = require('../src/core/page');
-const { SchemaValidationError } = require('../src/exceptions');
+const { Page } = require('../../src/core/page');
+const { SchemaValidationError } = require('../../src/exceptions');
 const should = require('chai').should();
 
 describe('Unit test for Page', () => {

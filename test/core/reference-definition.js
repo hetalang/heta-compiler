@@ -1,6 +1,6 @@
 /* global describe, it */
-const { ReferenceDefinition } = require('../src/core/reference-definition');
-const { SchemaValidationError } = require('../src/exceptions');
+const { ReferenceDefinition } = require('../../src/core/reference-definition');
+const { SchemaValidationError } = require('../../src/exceptions');
 const should = require('chai').should();
 
 describe('Unit test for ReferenceDefinition', () => {

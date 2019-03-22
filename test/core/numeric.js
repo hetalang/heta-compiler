@@ -1,6 +1,6 @@
 /* global describe, it */
-const { Numeric } = require('../src/core/numeric');
-const { ValidationError, SchemaValidationError } = require('../src/exceptions');
+const { Numeric } = require('../../src/core/numeric');
+const { ValidationError, SchemaValidationError } = require('../../src/exceptions');
 const should = require('chai').should();
 
 describe('Unit test for Numeric.', () => {
