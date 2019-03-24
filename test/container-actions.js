@@ -6,9 +6,9 @@ const { _Simple } = require('../src/core/_simple');
 describe('Unit tests for Container import', () => {
   var c = new Container();
 
-  it('Insert Quantity k1', () => {
+  it('Insert Record k1', () => {
     let simple = c.insert({ // insert new
-      class: 'Quantity',
+      class: 'Record',
       id: 'k1',
       title: 'k1 title',
       variable: {
@@ -20,9 +20,9 @@ describe('Unit tests for Container import', () => {
     simple.should.have.property('index', 'default__.k1');
   });
 
-  it('Insert Quantity k2 with space', () => {
+  it('Insert Record k2 with space', () => {
     let simple = c.insert({ // insert new
-      class: 'Quantity',
+      class: 'Record',
       id: 'k2',
       space: 'one',
       title: 'k2 title',
@@ -35,7 +35,7 @@ describe('Unit tests for Container import', () => {
     simple.should.have.property('index', 'one.k2');
   });
 
-  it('Update Quantity k1', () => {
+  it('Update Record k1', () => {
     let simple = c.update({ // update old
       id: 'k1',
       variable: {
@@ -49,9 +49,9 @@ describe('Unit tests for Container import', () => {
     simple.should.have.property('title', 'k1 title');
   });
 
-  it('Insert Quantity k2 with replace', () => {
+  it('Insert Record k2 with replace', () => {
     let simple = c.insert({ // insert new instead of old
-      class: 'Quantity',
+      class: 'Record',
       id: 'k2',
       space: 'one',
       variable: {
@@ -69,7 +69,7 @@ describe('Unit tests for Container import', () => {
       c.insert({}); // empty
     });
     should.Throw(() => {
-      c.insert({ class: 'Quantity' }); // no id
+      c.insert({ class: 'Record' }); // no id
     });
     should.Throw(() => {
       c.insert({ id: 'k0' }); // no class
@@ -91,13 +91,13 @@ describe('Unit tests for Container import', () => {
 
   it('upsert acts like insert if class presented.', () => {
     c.insert({
-      class: 'Quantity',
+      class: 'Record',
       id: 'k3',
       title: 'k3 title',
       notes: 'k3 notes'
     });
     let simple = c.upsert({
-      class: 'Quantity',
+      class: 'Record',
       id: 'k3',
       title: 'k3 updated title'
     });
@@ -108,7 +108,7 @@ describe('Unit tests for Container import', () => {
 
   it('upsert acts like update if no class presented.', () => {
     c.insert({
-      class: 'Quantity',
+      class: 'Record',
       id: 'k4',
       title: 'k4 title',
       notes: 'k4 notes'
@@ -127,7 +127,7 @@ describe('Unit tests for Container import', () => {
       c.upsert({}); // empty
     });
     should.Throw(() => {
-      c.upsert({class: 'Quantity'}); // no id
+      c.upsert({class: 'Record'}); // no id
     });
     should.Throw(() => {
       c.upsert({id: 'k10'}); // no class and unknown id
@@ -136,7 +136,7 @@ describe('Unit tests for Container import', () => {
 
   it('delete existed element.', () => {
     c.insert({
-      class: 'Quantity',
+      class: 'Record',
       id: 'k5',
       title: 'k5 title',
     });
@@ -154,7 +154,7 @@ describe('Unit tests for Container import', () => {
       c.delete({}); // empty
     });
     should.Throw(() => {
-      c.delete({id: 'k3', class: 'Quantity'}); // class is not allowed
+      c.delete({id: 'k3', class: 'Record'}); // class is not allowed
     });
     should.Throw(() => {
       c.delete({id: 'k10'}); // deleting not existed element is not allowed

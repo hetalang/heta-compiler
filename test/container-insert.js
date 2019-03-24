@@ -69,7 +69,7 @@ describe('Unit tests for Container', () => {
 
     it('Insert scoped component and check.', () => {
       c.insert({
-        class: 'Quantity',
+        class: 'Record',
         id: 'pg1',
         space: 'another'
       });
@@ -80,7 +80,7 @@ describe('Unit tests for Container', () => {
 
     it('Insert scoped component without space and check.', () => {
       c.insert({
-        class: 'Quantity',
+        class: 'Record',
         id: 'pg1'
       });
       let simple = c.storage.get('default__.pg1');
@@ -90,9 +90,9 @@ describe('Unit tests for Container', () => {
   });
 
   describe('All correct components.', () => {
-    it('Quantity', () => {
+    it('Record', () => {
       c.insert({
-        class: 'Quantity',
+        class: 'Record',
         id: 'k1',
         variable: {
           kind: 'static',
@@ -155,19 +155,6 @@ describe('Unit tests for Container', () => {
         }
       });
     });
-    it('Event', () => {
-      c.insert({
-        class: 'Event',
-        id: 'evt1',
-        variable: {
-          kind: 'rule',
-          size: {expr: 't-12'}
-        },
-        assignments: [
-          {target: 's1', size: {num: 10.4}}
-        ]
-      });
-    });
   });
 
   describe('Test insert() wrong.', () => {
@@ -187,7 +174,7 @@ describe('Unit tests for Container', () => {
       should.Throw(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       });
-      c.storage.size.should.be.eql(11);
+      c.storage.size.should.be.eql(10);
 
       // console.log(c);
     });

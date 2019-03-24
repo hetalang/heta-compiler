@@ -1,6 +1,6 @@
 // set sbml methods
 //require('./sbml/model');
-//require('./sbml/quantity');
+//require('./sbml/record');
 require('./sbml/container');
 
 const Container = require('./container');

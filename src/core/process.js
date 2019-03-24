@@ -1,8 +1,8 @@
-const { Quantity } = require('./quantity');
+const { Record } = require('./record');
 const { ValidationError } = require('./utilities');
 const { Species } =require('./species');
 
-class Process extends Quantity {
+class Process extends Record {
   constructor(ind){
     super(ind);
     this.effectors = [];

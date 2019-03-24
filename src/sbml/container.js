@@ -1,5 +1,5 @@
 const Container = require('../container');
-const { Quantity } = require('../core/quantity');
+const { Record } = require('../core/record');
 const { Compartment } = require('../core/compartment');
 const { Species } = require('../core/species');
 // const { Process } = require('../core/process');
@@ -9,7 +9,7 @@ const { Expression } = require('../core/expression');
 const { Event } = require('../core/event');
 const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
-require('./quantity');
+require('./record');
 
 Container.prototype.toSBML = function(scope = 'default__'){
   let selected = {
@@ -30,32 +30,32 @@ Container.prototype.toSBML = function(scope = 'default__'){
 
 Container.prototype.getUniqueUnits = function(scope = 'default__'){
   let quantities = this.storage
-    .getByInstance(Quantity, scope)
-    .filter((quantity) => quantity.variable.units);
-  return _.uniqBy(quantities, (quantity) => quantity.unitsHash);
+    .getByInstance(Record, scope)
+    .filter((record) => record.variable.units);
+  return _.uniqBy(quantities, (record) => record.unitsHash);
 };
 
 Container.prototype.getListOfParameters = function(scope = 'default__'){
   return this.storage
-    .getByInstance(Quantity, scope)
-    .filter((quantity) => !(quantity instanceof Compartment)
-      && !(quantity instanceof Species)
-      && !(quantity instanceof Reaction)
+    .getByInstance(Record, scope)
+    .filter((record) => !(record instanceof Compartment)
+      && !(record instanceof Species)
+      && !(record instanceof Reaction)
     );
 };
 
 Container.prototype.getListOfRules = function(scope = 'default__'){
   return this.storage
-    .getByInstance(Quantity, scope)
-    .filter((quantity) => !(quantity instanceof Reaction)
-        && quantity.variable.kind==='rule'
+    .getByInstance(Record, scope)
+    .filter((record) => !(record instanceof Reaction)
+        && record.variable.kind==='rule'
     );
 };
 
 Container.prototype.getListOfInitialAssignments = function(scope = 'default__'){
   return this.storage
-    .getByInstance(Quantity, scope)
-    .filter((quantity) => (quantity.variable.size instanceof Expression)
-        && quantity.variable.kind!=='rule'
+    .getByInstance(Record, scope)
+    .filter((record) => (record.variable.size instanceof Expression)
+        && record.variable.kind!=='rule'
     );
 };

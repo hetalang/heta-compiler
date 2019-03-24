@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { _Simple } = require('./_simple');
-const { Quantity } = require('./quantity');
+const { Record } = require('./record');
 
 class Model extends _Simple {
   merge(q, skipChecking){
@@ -20,9 +20,9 @@ class Model extends _Simple {
   populate(){
     this
       .getQuantities()
-      .forEach((quantity, i, array) => {
+      .forEach((record, i, array) => {
         // check compartmentRef in Species
-        quantity.populate(array);
+        record.populate(array);
         // check targetRef in Reactions
 
       });

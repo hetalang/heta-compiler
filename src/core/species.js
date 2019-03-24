@@ -1,8 +1,8 @@
-const { Quantity } = require('./quantity');
+const { Record } = require('./record');
 const { exception, SchemaValidationError } = require('./utilities');
 const { Compartment } = require('./compartment');
 
-class Species extends Quantity {
+class Species extends Record {
   constructor(ind){
     super(ind);
   }

@@ -16,17 +16,17 @@
     "variable": {"kind": "static", "size": {"num": 3.2}}
   },
   {
-    "class": "Quantity",
+    "class": "Record",
     "id": "p2",
     "variable": {"kind": "static", "size": {"num": 15.223}, "units": "1/min/fM*nm"}
   },
   {
-    "class": "Quantity",
+    "class": "Record",
     "id": "p3",
     "variable": {"kind": "rule", "size": {"num": 15.223}}
   },
   {
-    "class": "Quantity",
+    "class": "Record",
     "id": "p3",
     "variable": {"kind": "rule", "size": {"expr": "xxx*yyy"}, "units": "1/L/h"}
   },

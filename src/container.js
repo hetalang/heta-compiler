@@ -1,4 +1,4 @@
-const { Quantity } = require('./core/quantity');
+const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
@@ -18,7 +18,7 @@ class Container {
     this.storage = new Storage();
     this.classes = {
       // scoped classes
-      Quantity,
+      Record,
       Compartment,
       Species,
       Process,

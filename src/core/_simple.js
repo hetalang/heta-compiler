@@ -35,7 +35,7 @@ class _Simple {
     // return 'global__';
   }
   static get schemaName(){
-    return '_Simple';
+    return '_SimpleP';
   }
   get className(){
     return '_Simple';
@@ -65,6 +65,9 @@ class _Simple {
   static isValid(q){
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
+    if(!validate){
+      throw new Error(`No such definition: ${this.schemaName} in schema.`);
+    }
     let valid = validate(q);
     if(!valid) {
       throw new SchemaValidationError('Validation error!', validate.errors);

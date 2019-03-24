@@ -1,6 +1,6 @@
-const { Quantity } = require('./quantity');
+const { Record } = require('./record');
 
-class Compartment extends Quantity {
+class Compartment extends Record {
   constructor(ind){
     super(ind);
   }

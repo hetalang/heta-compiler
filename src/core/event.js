@@ -1,9 +1,9 @@
-const { Quantity } = require('./quantity');
+const { Record } = require('./record');
 const { Numeric } = require('./numeric');
 const { Expression } = require('./expression');
 const _ = require('lodash');
 
-class Event extends Quantity {
+class Event extends Record {
   constructor(ind){
     super(ind);
 

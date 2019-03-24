@@ -5,7 +5,7 @@ const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
-class Quantity extends _Scoped {
+class Record extends _Scoped {
   constructor(ind){
     super(ind);
     /*
@@ -18,7 +18,7 @@ class Quantity extends _Scoped {
 
   }
   merge(q, skipChecking){
-    if(!skipChecking) Quantity.isValid(q);
+    if(!skipChecking) Record.isValid(q);
     super.merge(q, skipChecking);
 
     if(q && q.variable){
@@ -42,10 +42,10 @@ class Quantity extends _Scoped {
     return this;
   }
   static get schemaName(){
-    return 'QuantityP';
+    return 'RecordP';
   }
   get className(){
-    return 'Quantity';
+    return 'Record';
   }
   toQ(){
     let res = super.toQ();
@@ -65,5 +65,5 @@ class Quantity extends _Scoped {
 }
 
 module.exports = {
-  Quantity
+  Record
 };

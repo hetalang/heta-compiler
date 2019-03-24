@@ -1,4 +1,4 @@
-const schema = require('heta-standard');
+const schema = require('heta-standard').hetaJSONSchema
 const Ajv = require('ajv');
 
 const validator = new Ajv()

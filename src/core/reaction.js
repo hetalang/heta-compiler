@@ -1,4 +1,4 @@
-const { Quantity } = require('./quantity');
+const { Record } = require('./record');
 const { Process, Effector, Actor } = require('./process');
 
 class Reaction extends Process {

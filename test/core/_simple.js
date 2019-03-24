@@ -6,7 +6,7 @@ const should = require('chai').should();
 describe('Unit test for _Simple common methods', () => {
 
   it('Check static methods', () => {
-    _Simple.should.has.property('schemaName', '_Simple');
+    _Simple.should.has.property('schemaName', '_SimpleP');
     _Simple.should.has.property('isValid');
   });
 
