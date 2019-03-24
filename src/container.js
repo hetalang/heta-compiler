@@ -23,7 +23,7 @@ class Container {
       Species,
       Process,
       Reaction,
-      Event,
+      // Event,
       // unscoped classes
       Model,
       ReferenceDefinition,

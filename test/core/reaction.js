@@ -15,11 +15,10 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm2'},
         {target: 'm3'}
       ],
-      variable: {
-        kind: 'rule',
-        size: {expr: 'k1*s1'},
-        units: 'umole/h'
-      }
+      assignments: {
+        ode__: { expr: 'k1*s1' }
+      },
+      units: 'umole/h'
     });
     simple.toQ().should.be.deep.equal({
       class: 'Reaction',
@@ -34,11 +33,10 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm2'},
         {target: 'm3'}
       ],
-      variable: {
-        kind: 'rule',
-        size: {expr: 'k1 * s1'},
-        units: 'umole/h'
-      }
+      assignments: {
+        ode__: { expr: 'k1 * s1' }
+      },
+      units: 'umole/h'
     });
   });
 });

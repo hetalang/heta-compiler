@@ -11,9 +11,8 @@ describe('Unit tests for Container import', () => {
       class: 'Record',
       id: 'k1',
       title: 'k1 title',
-      variable: {
-        kind: 'static',
-        size: {num: 1e-3}
+      assignments: {
+        start__: {num: 1e-3}
       }
     });
     c.storage.should.be.lengthOf(1);
@@ -26,9 +25,8 @@ describe('Unit tests for Container import', () => {
       id: 'k2',
       space: 'one',
       title: 'k2 title',
-      variable: {
-        kind: 'static',
-        size: {num: 1.2}
+      assignments: {
+        start: {num: 1.2}
       }
     });
     c.storage.should.be.lengthOf(2);
@@ -38,14 +36,13 @@ describe('Unit tests for Container import', () => {
   it('Update Record k1', () => {
     let simple = c.update({ // update old
       id: 'k1',
-      variable: {
-        kind: 'static',
-        size: {num: 1},
-        units: '1/h'
-      }
+      assignments: {
+        start__: {num: 1}
+      },
+      units: '1/h'
     });
     c.storage.should.be.lengthOf(2);
-    simple.should.have.nested.property('variable.units', '1/h');
+    simple.should.have.nested.property('units', '1/h');
     simple.should.have.property('title', 'k1 title');
   });
 
@@ -54,13 +51,13 @@ describe('Unit tests for Container import', () => {
       class: 'Record',
       id: 'k2',
       space: 'one',
-      variable: {
-        kind: 'static',
-        size: {num: 1.4}
+      assignments: {
+        start__: {num: 1.4}
       }
     });
     c.storage.should.be.lengthOf(2);
-    simple.should.have.nested.property('variable.size.num', 1.4);
+    console.log(simple);
+    simple.should.have.nested.property('assignments.start__.num', 1.4);
     simple.should.not.have.property('title');
   });
 

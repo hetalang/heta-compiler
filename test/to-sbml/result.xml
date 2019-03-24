@@ -140,19 +140,19 @@
 
   <listOfRules>
     <assignmentRule
-      variable="p3"
+      assignments="p3"
 
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
     </assignmentRule>
     <assignmentRule
-      variable="s2"
+      assignments="s2"
       name="s2 title"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
     </assignmentRule>
     <assignmentRule
-      variable="evt1"
+      assignments="evt1"
 
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
@@ -184,7 +184,7 @@
         <listOfEventAssignments>
 
           <eventAssignment
-            variable="s1">
+            assignments="s1">
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s1</ci><cn>2</cn></apply></math>
           </eventAssignment>
 

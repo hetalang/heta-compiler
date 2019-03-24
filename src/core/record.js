@@ -21,22 +21,26 @@ class Record extends _Scoped {
     if(!skipChecking) Record.isValid(q);
     super.merge(q, skipChecking);
 
-    if(q && q.variable){
-      this.variable = { kind: q.variable.kind };
-      if(q.variable.units!==undefined) this.variable.units = q.variable.units;
-      let size = q.variable.size;
-      if(typeof size === 'number'){
-        this.variable.size = new Numeric(size, true); // skip checking because already checked
-      }else if(typeof size === 'string'){
-        this.variable.size = new Expression(size, true);
-      }else if('num' in size){
-        this.variable.size = new Numeric(size, true);
-      }else if('expr' in size){
-        this.variable.size = new Expression(size, true);
-      }else{
-        // if code is OK never throws
-        throw new Error('Wrong Variable argument.');
-      }
+    if(q && q.assignments){
+      let assignments = _.mapValues(q.assignments, (size) => {
+        if(typeof size === 'number'){
+          return new Numeric(size, true); // skip checking because already checked
+        }else if(typeof size === 'string'){
+          return new Expression(size, true);
+        }else if('num' in size){
+          return new Numeric(size, true);
+        }else if('expr' in size){
+          return new Expression(size, true);
+        }else{
+          // if code is OK never throws
+          throw new Error('Wrong Variable argument.');
+        }
+      });
+      this.assignments = _.assign(this.assignments, assignments); // maybe clone is required
+    }
+
+    if(q && q.units!==undefined){
+      this.units = q.units;
     }
 
     return this;
@@ -49,8 +53,10 @@ class Record extends _Scoped {
   }
   toQ(){
     let res = super.toQ();
-    res.variable = _.pick(this.variable, ['kind', 'units']);
-    res.variable.size = this.variable.size.toQ();
+    if(this.assignments){
+      res.assignments = _.mapValues(this.assignments, (value) => value.toQ());
+    }
+    res.units = this.units;
     return res;
   }
   get unitsHash(){

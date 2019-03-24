@@ -19,29 +19,31 @@ describe('Unit tests for Record.', () => {
 
   it('Set static numeric.', () => {
     let simple = (new Record({id: 'k1', space: 'one'})).merge({
-      variable: {kind: 'static', size: {num: 1.1}}
+      assignments: { start__: {num: 1.1} }
     });
-    simple.should.has.nested.property('variable.size').instanceOf(Numeric);
+    simple.should.has.nested.property('assignments.start__').instanceOf(Numeric);
   });
 
   it('Set static expression.', () => {
     let simple = (new Record({id: 'k1', space: 'one'})).merge({
-      variable: {kind: 'static', size: {expr: 'x*y'}}
+      assignments: { start__: {expr: 'x*y'} }
     });
-    simple.should.has.nested.property('variable.size').instanceOf(Expression);
+    simple.should.has.nested.property('assignments.start__').instanceOf(Expression);
   });
 
   it('Check toQ for expression Record.', () => {
     let simple = (new Record({id: 'r1'})).merge({
       title: 'complex record',
-      variable: {kind: 'rule', size: {expr: 'm*c^2'}, units: 'J'}
+      assignments: { ode__: {expr: 'm*c^2'} },
+      units: 'J'
     });
     simple.toQ().should.be.deep.equal({
       class: 'Record',
       id: 'r1',
       space: 'default__',
       title: 'complex record',
-      variable: {kind: 'rule', size: {expr: 'm * c ^ 2'}, units: 'J'}
+      assignments: { ode__: {expr: 'm * c ^ 2'} },
+      units: 'J'
     });
   });
 });

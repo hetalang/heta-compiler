@@ -94,22 +94,20 @@ describe('Unit tests for Container', () => {
       c.insert({
         class: 'Record',
         id: 'k1',
-        variable: {
-          kind: 'static',
-          size: {num: 1.2e-2, free: true},
-          units: '1/h'
-        }
+        assignments: {
+          start__: {num: 1.2e-2, free: true}
+        },
+        units: '1/h'
       });
     });
     it('Compartment', () => {
       c.insert({
         class: 'Compartment',
         id: 'comp1',
-        variable: {
-          kind: 'static',
-          size: {num: 5.2, free: false},
-          units: 'L'
-        }
+        assignments: {
+          start__: {num: 5.2, free: false}
+        },
+        units: 'L'
       });
     });
     it('Species', () => {
@@ -117,22 +115,20 @@ describe('Unit tests for Container', () => {
         class: 'Species',
         id: 's1',
         compartment: 'comp1',
-        variable: {
-          kind: 'dynamic',
-          size: {num: 10, free: false},
-          units: 'uM'
-        }
+        assignments: {
+          ode__: {num: 10, free: false}
+        },
+        units: 'uM'
       });
     });
     it('Process', () => {
       c.insert({
         class: 'Process',
         id: 'pr1',
-        variable: {
-          kind: 'rule',
-          size: {expr: 'k1*s1'},
-          units: 'mole/h'
-        }
+        assignments: {
+          ode__: {expr: 'k1*s1'}
+        },
+        units: 'mole/h'
       });
     });
     it('Reaction', () => {
@@ -148,11 +144,10 @@ describe('Unit tests for Container', () => {
           {target: 'm2'},
           {target: 'm3'}
         ],
-        variable: {
-          kind: 'rule',
-          size: {expr: 'k1 * s1'},
-          units: 'umole/h'
-        }
+        assignments: {
+          ode__: {expr: 'k1 * s1'}
+        },
+        units: 'umole/h'
       });
     });
   });
