@@ -26,6 +26,9 @@ class _Scoped extends _Simple {
   get space(){
     return this._space;
   }
+  get index(){
+    return this.space + '.' + this.id;
+  }
   static get schemaName(){
     return '_ScopedP';
   }

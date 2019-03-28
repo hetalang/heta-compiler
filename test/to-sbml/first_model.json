@@ -2,6 +2,7 @@
   {
     "class": "Compartment",
     "id": "comp1",
+    "space": "first",
     "title": "This is compartment",
     "notes": "This is just text. *italic*, **bold**\n\nanother line",
     "assignments": {
@@ -12,42 +13,73 @@
   {
     "class": "Compartment",
     "id": "comp2",
-    "assignments": {"start__": {"num": 3.2}}
+    "space": "first",
+    "assignments": {
+      "start__": {"num": 3.2}
+    }
   },
   {
     "class": "Record",
     "id": "p2",
-    "assignments": {"start__": {"num": 15.223}},
+    "space": "first",
+    "assignments": {
+      "start__": {"num": 15.223}
+    },
     "units": "1/min/fM*nm"
   },
   {
     "class": "Record",
     "id": "p3",
-    "assignments": {"ode__": {"num": 15.223}}
+    "space": "first",
+    "assignments": {
+      "ode__": {"num": 15.223}
+    }
   },
   {
     "class": "Record",
     "id": "p3",
-    "assignments": {"ode__": "xxx*yyy"},
+    "space": "first",
+    "assignments": {
+      "ode__": {"expr": "xxx*yyy"}
+    },
     "units": "1/L/h"
+  },
+  {
+    "class": "Record",
+    "id": "evt1",
+    "space": "first",
+    "assignments": {
+      "ode__": {"expr": "t-12"}
+    },
+    "units": "min"
   },
   {
     "class": "Species",
     "id": "s1",
-    "assignments": {"start__": {"num": 1.1}},
+    "space": "first",
+    "assignments": {
+      "start__": {"num": 1.1}
+    },
     "compartment": "comp3"
   },
   {
     "class": "Species",
     "id": "s2",
+    "space": "first",
     "title": "s2 title",
-    "assignments": {"ode__": {"expr": "x*y"}},
-    "compartment": "comp1"
+    "assignments": {
+      "ode__": {"expr": "x*y"}
+    },
+    "compartment": "comp1",
+    "boundary": true
   },
   {
     "class": "Reaction",
     "id": "r2",
-    "assignments": {"ode__": {"expr": "p2*comp1*s1"}},
+    "space": "first",
+    "assignments": {
+      "ode__": {"expr": "p2*comp1*s1"}
+    },
     "actors": [
       {"target": "s4", "stoichiometry": -2},
       {"target": "s2", "stoichiometry": 1}
@@ -59,14 +91,25 @@
   {
     "class": "Reaction",
     "id": "r3",
-    "assignments": {"ode__": {"num": 28}},
+    "space": "first",
+    "assignments": {
+      "ode__": {"num": 28}
+    },
     "units": "mole/L",
     "effectors": [
       {"target": "s2"}
     ]
   },
   {
+    "class": "Switcher",
+    "id": "sw1",
+    "space": "first",
+    "condition": "evt1"
+  },
+  {
     "class": "Model",
-    "id": "scn2"
+    "id": "first",
+    "title": "Model title",
+    "notes": "Model *notes*"
   }
 ]

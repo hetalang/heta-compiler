@@ -6,13 +6,13 @@ describe('Unit test for Model.', () => {
   it('Create minimal', () => {
     let simple = new Model({id: 'm1'});
     simple.should.has.property('id', 'm1');
-    simple.should.has.property('space', 'default__');
+    simple.should.not.has.property('space');
   });
 
   it('Merge with empty.', () => {
     let simple = (new Model({id: 'm1', space: 'one'})).merge({});
     simple.should.has.property('id', 'm1');
-    simple.should.has.property('space', 'default__');
+    simple.should.not.has.property('space');
   });
 
   it('Method property and toQ().', () => {

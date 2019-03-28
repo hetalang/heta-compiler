@@ -27,13 +27,6 @@ class _Simple {
   get id(){
     return this._id;
   }
-  get space(){
-    return 'default__';
-    // to use specific space for unscoped objects
-    // currently it is not used because unclear how to estimate what to select when
-    // class is not set for update() method
-    // return 'global__';
-  }
   static get schemaName(){
     return '_SimpleP';
   }
@@ -41,7 +34,7 @@ class _Simple {
     return '_Simple';
   }
   get index(){
-    return this.space + '.' + this.id;
+    return this.id;
   }
   clone(){ // creates copy of element TODO: not tested
     let clone = _.clone(this);

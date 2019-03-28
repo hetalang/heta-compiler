@@ -14,7 +14,6 @@ describe('Unit test for _Simple common methods', () => {
     let simple = new _Simple({id: 'ref1'});
     simple.should.has.property('className', '_Simple');
     simple.should.has.property('id', 'ref1');
-    simple.should.has.property('space', 'default__');
     simple.should.has.property('index');
     simple.should.has.property('clone');
     simple.should.has.property('merge');
@@ -24,7 +23,6 @@ describe('Unit test for _Simple common methods', () => {
     let simple = new _Simple({id: 'ref1'});
     simple.merge({});
     simple.should.has.property('id', 'ref1');
-    simple.should.has.property('space', 'default__');
   });
 
   it('Title property', () => {
@@ -84,7 +82,6 @@ describe('Unit test for _Simple common methods', () => {
     simple.should.has.property('title');
     simple.should.not.has.property('prop');
     simple.should.has.property('id', 'ref1');
-    simple.should.has.property('space', 'default__');
   });
 
   it('ToQ transformation', () => {
