@@ -32,7 +32,7 @@ describe('Unit tests for Record.', () => {
   });
 
   it('Check toQ for expression Record.', () => {
-    let simple = (new Record({id: 'r1'})).merge({
+    let simple = (new Record({id: 'r1', space: 'default__'})).merge({
       title: 'complex record',
       assignments: { ode__: {expr: 'm*c^2'} },
       units: 'J'

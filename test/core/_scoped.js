@@ -21,7 +21,7 @@ describe('Unit test for _Scoped common methods', () => {
   });
 
   it('Merge with empty', () => {
-    let simple = new _Scoped({id: 'pg1'});
+    let simple = new _Scoped({id: 'pg1', space: 'default__'});
     simple.merge({});
     simple.should.has.property('id', 'pg1');
     simple.should.has.property('space', 'default__');

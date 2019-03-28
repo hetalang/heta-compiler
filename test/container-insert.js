@@ -77,16 +77,6 @@ describe('Unit tests for Container', () => {
       simple.should.has.property('space', 'another');
       c.storage.size.should.be.eql(4);
     });
-
-    it('Insert scoped component without space and check.', () => {
-      c.insert({
-        class: 'Record',
-        id: 'pg1'
-      });
-      let simple = c.storage.get('default__.pg1');
-      simple.should.has.property('space', 'default__');
-      c.storage.size.should.be.eql(5);
-    });
   });
 
   describe('All correct components.', () => {
@@ -94,6 +84,7 @@ describe('Unit tests for Container', () => {
       c.insert({
         class: 'Record',
         id: 'k1',
+        space: 'default__',
         assignments: {
           start__: {num: 1.2e-2, free: true}
         },
@@ -104,6 +95,7 @@ describe('Unit tests for Container', () => {
       c.insert({
         class: 'Compartment',
         id: 'comp1',
+        space: 'default__',
         assignments: {
           start__: {num: 5.2, free: false}
         },
@@ -114,6 +106,7 @@ describe('Unit tests for Container', () => {
       c.insert({
         class: 'Species',
         id: 's1',
+        space: 'default__',
         compartment: 'comp1',
         assignments: {
           ode__: {num: 10, free: false}
@@ -125,6 +118,7 @@ describe('Unit tests for Container', () => {
       c.insert({
         class: 'Process',
         id: 'pr1',
+        space: 'default__',
         assignments: {
           ode__: {expr: 'k1*s1'}
         },
@@ -135,6 +129,7 @@ describe('Unit tests for Container', () => {
       c.insert({
         class: 'Reaction',
         id: 'r1',
+        space: 'default__',
         actors: [
           {target: 's1', stoichiometry: -1},
           {target: 's2', stoichiometry: 2}
@@ -169,7 +164,7 @@ describe('Unit tests for Container', () => {
       should.Throw(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       });
-      c.storage.size.should.be.eql(10);
+      c.storage.size.should.be.eql(9);
 
       // console.log(c);
     });

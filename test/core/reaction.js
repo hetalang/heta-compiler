@@ -4,7 +4,7 @@ const should = require('chai').should();
 
 describe('Unit tests for Reaction.', () => {
   it('Check toQ.', () => {
-    let simple = (new Reaction({id: 'r1'})).merge({
+    let simple = (new Reaction({id: 'r1', space: 'default__'})).merge({
       class: 'Reaction',
       actors: [
         {target: 's1', stoichiometry: -1},

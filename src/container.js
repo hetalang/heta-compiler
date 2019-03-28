@@ -33,8 +33,9 @@ class Container {
     };
   }
   insert(q){
-    // check if class is presented
-    expect(q).has.property('class').with.a('string');
+    // check
+    expect(q).to.have.property('id').with.a('string');
+    expect(q).to.have.property('class').with.a('string');
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
@@ -50,8 +51,7 @@ class Container {
   update(q){
     expect(q).not.to.have.property('class');
     expect(q).to.have.property('id').with.a('string');
-    let index = q.space ? q.space : 'default__'
-      + '.' + q.id;
+    let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.get(index);
 
     // creation of new components is not allowed
@@ -74,8 +74,7 @@ class Container {
   delete(q){
     expect(q).not.to.have.property('class');
     expect(q).to.have.property('id').with.a('string');
-    let index = q.space ? q.space : 'default__'
-      + '.' + q.id;
+    let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.delete(index);
 
     return targetComponent;

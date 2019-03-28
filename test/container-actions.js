@@ -10,6 +10,7 @@ describe('Unit tests for Container import', () => {
     let simple = c.insert({ // insert new
       class: 'Record',
       id: 'k1',
+      space: 'default__',
       title: 'k1 title',
       assignments: {
         start__: {num: 1e-3}
@@ -36,6 +37,7 @@ describe('Unit tests for Container import', () => {
   it('Update Record k1', () => {
     let simple = c.update({ // update old
       id: 'k1',
+      space: 'default__',
       assignments: {
         start__: {num: 1}
       },
@@ -89,11 +91,13 @@ describe('Unit tests for Container import', () => {
     c.insert({
       class: 'Record',
       id: 'k3',
+      space: 'default__',
       title: 'k3 title',
       notes: 'k3 notes'
     });
     let simple = c.upsert({
       class: 'Record',
+      space: 'default__',
       id: 'k3',
       title: 'k3 updated title'
     });
@@ -106,11 +110,13 @@ describe('Unit tests for Container import', () => {
     c.insert({
       class: 'Record',
       id: 'k4',
+      space: 'default__',
       title: 'k4 title',
       notes: 'k4 notes'
     });
     let simple = c.upsert({
       id: 'k4',
+      space: 'default__',
       title: 'k4 updated title'
     });
     c.storage.should.be.lengthOf(4);
@@ -134,11 +140,13 @@ describe('Unit tests for Container import', () => {
     c.insert({
       class: 'Record',
       id: 'k5',
+      space: 'default__',
       title: 'k5 title',
     });
     c.storage.should.be.lengthOf(5);
     let simple = c.delete({
-      id: 'k5'
+      id: 'k5',
+      space: 'default__',
     });
     simple.should.be.instanceOf(_Simple);
     simple.should.have.property('title', 'k5 title');
@@ -150,10 +158,10 @@ describe('Unit tests for Container import', () => {
       c.delete({}); // empty
     });
     should.Throw(() => {
-      c.delete({id: 'k3', class: 'Record'}); // class is not allowed
+      c.delete({id: 'k3', space: 'default__', class: 'Record'}); // class is not allowed
     });
     should.Throw(() => {
-      c.delete({id: 'k10'}); // deleting not existed element is not allowed
+      c.delete({id: 'k10', space: 'default__'}); // deleting not existed element is not allowed
     });
   });
 
