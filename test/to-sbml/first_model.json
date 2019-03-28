@@ -58,7 +58,8 @@
     "id": "s1",
     "space": "first",
     "assignments": {
-      "start__": {"num": 1.1}
+      "start__": {"num": 1.1},
+      "sw1": {"num": 1.5}
     },
     "compartment": "comp3"
   },

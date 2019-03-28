@@ -56,7 +56,6 @@ describe('Unit tests for Container import', () => {
       }
     });
     c.storage.should.be.lengthOf(2);
-    console.log(simple);
     simple.should.have.nested.property('assignments.start__.num', 1.4);
     simple.should.not.have.property('title');
   });

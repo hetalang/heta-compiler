@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model>
+  <model id="{{out.model.id}}" metaid="{{out.model.index}}" {% if out.model.title %}name="{{out.model.title}}"{% endif %}>
+  {% if out.model.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{out.model.notes}}</html></notes>{% endif %}
   {% if out.listOfCompartments|length > 0 %}
     <listOfCompartments>
     {%- for record in out.listOfCompartments %}
@@ -8,8 +9,8 @@
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
         constant="false"
-        {% if record.variable.size.num!==undefined and record.kind!=='rule' -%}size="{{record.variable.size.num}}"{%- endif %}
-        {% if record.variable.units!==undefined -%}units="{{ record.unitsHash }}"{%- endif %}
+        {% if record.assignments.start__.num!==undefined -%}size="{{record.assignments.start__.num}}"{%- endif %}
+        {% if record.units!==undefined -%}units="{{ record.unitsHash }}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
@@ -27,9 +28,9 @@
         speciesType=""
         compartment="{{record.compartment}}"
         constant="false"
-        boundaryCondition="{{ record.variable.kind!=='dynamic' }}"
-        {% if record.variable.size.num!==undefined and record.variable.kind!=='rule' -%}initialConcentration="{{record.variable.size.num}}"{%- endif %}
-        {% if record.variable.units!==undefined -%}substanceUnits="{{record.unitsHash}}"{%- endif %}
+        boundaryCondition="{{ record.boundary===true or record.assignments.ode__!==undefined }}"
+        {% if record.assignments.start__.num!==undefined -%}initialConcentration="{{record.assignments.start__.num}}"{%- endif %}
+        {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash}}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
@@ -44,8 +45,8 @@
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
         constant="false"
-        {% if record.variable.size.num!==undefined and record.variable.kind!=='rule' -%}value="{{record.variable.size.num}}"{%- endif %}
-        {% if record.variable.units!==undefined -%}units="{{record.unitsHash}}"{%- endif %}
+        {% if record.assignments.start__.num!==undefined -%}value="{{record.assignments.start__.num}}"{%- endif %}
+        {% if record.units!==undefined -%}units="{{record.unitsHash}}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
@@ -80,7 +81,7 @@
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
-          {{record.variable.size.toCMathML}}
+          {{record.assignments.ode__.toCMathML}}
         </kineticLaw>
       </reaction>
     {%- endfor %}
@@ -90,9 +91,10 @@
   {%- for record in out.listOfRules %}
     <assignmentRule
       variable="{{record.id}}"
+      metaid="{{record.index}}.ode__"
       {% if record.title %}name="{{record.title}}"{% endif %}
       >
-      {{record.variable.size.toCMathML}}
+      {{record.assignments.ode__.toCMathML}}
     </assignmentRule>
   {%- endfor %}
   {%- for record in out.listOfProcesses %}
@@ -117,9 +119,10 @@
     {%- for record in out.listOfInitialAssignments %}
       <initialAssignment
         symbol="{{record.id}}"
+        metaid="{{record.index}}.start__"
         {% if record.title %}name="{{record.title}}"{% endif %}
         >
-        {{record.variable.size.toCMathML}}
+        {{record.assignments.start__.toCMathML}}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>
@@ -128,20 +131,22 @@
     <listOfEvents>
       {%- for event in out.listOfEvents %}
       <event
+        id="{{event.id}}" metaid="{{event.index}}"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <geq/>
-              <ci>{{ event.id }}</ci>
+              <ci>{{ event.condition }}</ci>
               <cn>0</cn>
             </apply>
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for assignment in event.assignments %}
+          {% for assignment in event.switcherSpecificAssignments %}
           <eventAssignment
-            variable="{{ assignment.target }}">
+            variable="{{ assignment.symbol }}"
+            metaid="{{out.model.id}}.{{assignment.symbol}}.{{event.id}}">
             {{ assignment.size.toCMathML }}
           </eventAssignment>
           {% endfor %}

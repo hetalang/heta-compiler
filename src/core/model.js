@@ -27,12 +27,22 @@ class Model extends _Simple {
       .filter((x) => x[1].space===this.id)
       .map((x) => x[1]);
   }
+  get populated(){
+    return this._populated;
+  }
   populate(){
-    this._populated = true;
-    let switchers = this._storage
+    this._storage
       .getByInstance(Switcher, this.id)
-      .forEach((sw) => sw.switcherSpecificEl = []);
-
+      .forEach((sw) => {
+        sw.switcherSpecificAssignments = this
+          .getChildren()
+          .filter((scoped) => (scoped instanceof Record)
+            && _.has(scoped, 'assignments.' + sw.id))
+          .map((record) => {
+            return {symbol: record.id, size: record.assignments[sw.id]};
+          });
+      });
+    this._populated = true;
     return this;
   }
   toQ(){
