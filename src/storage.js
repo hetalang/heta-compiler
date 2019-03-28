@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const expect = require('chai').expect;
+const { Model } = require('./core/model');
 
 class Storage extends Map {
   constructor(){
@@ -7,6 +8,7 @@ class Storage extends Map {
   }
   set(key, value){
     expect(key).be.a('string');
+    if(value instanceof Model) value._storage = this;
     return super.set(key, value);
   }
   delete(key){
@@ -19,7 +21,6 @@ class Storage extends Map {
   setByIndex(value){
     // check arguments
     expect(value).have.property('index').with.a('string');
-
     this.set(value.index, value);
 
     return value;

@@ -5,7 +5,7 @@ const { Reaction } = require('./core/reaction');
 const { Model } = require('./core/model');
 const { Storage } = require('./storage');
 const { Process } = require('./core/process');
-const { Event } = require('./core/event');
+const { Switcher } = require('./core/switcher');
 const { ReferenceDefinition } = require('./core/reference-definition');
 const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
@@ -23,6 +23,7 @@ class Container {
       Species,
       Process,
       Reaction,
+      Switcher,
       // Event,
       // unscoped classes
       Model,

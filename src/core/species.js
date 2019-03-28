@@ -11,6 +11,7 @@ class Species extends Record {
     super.merge(q, skipChecking);
 
     this.compartment = q.compartment;
+    this.boundary = q.boundary ? true : false; // default: false
 
     return this;
   }

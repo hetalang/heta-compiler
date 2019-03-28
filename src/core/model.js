@@ -1,8 +1,13 @@
 const _ = require('lodash');
 const { _Simple } = require('./_simple');
 const { Record } = require('./record');
+const { Switcher } = require('./switcher');
 
 class Model extends _Simple {
+  constructor(ind){
+    super(ind);
+    this._populated = false;
+  }
   merge(q, skipChecking){
     if(!skipChecking) Model.isValid(q);
     super.merge(q, skipChecking);
@@ -17,15 +22,16 @@ class Model extends _Simple {
   static get schemaName(){
     return 'ModelP';
   }
+  getChildren(){
+    return [...this._storage]
+      .filter((x) => x[1].space===this.id)
+      .map((x) => x[1]);
+  }
   populate(){
-    this
-      .getQuantities()
-      .forEach((record, i, array) => {
-        // check compartmentRef in Species
-        record.populate(array);
-        // check targetRef in Reactions
-
-      });
+    this._populated = true;
+    let switchers = this._storage
+      .getByInstance(Switcher, this.id)
+      .forEach((sw) => sw.switcherSpecificEl = []);
 
     return this;
   }

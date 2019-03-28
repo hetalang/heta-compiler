@@ -8,13 +8,6 @@ const _ = require('lodash');
 class Record extends _Scoped {
   constructor(ind){
     super(ind);
-    /*
-    this.variable = {
-      kind: 'static',
-      size: new Numeric(0)
-    };
-    */
-    // this.variable.parent = this; // this is cyclic ref
 
   }
   merge(q, skipChecking){
@@ -33,7 +26,7 @@ class Record extends _Scoped {
           return new Expression(size, true);
         }else{
           // if code is OK never throws
-          throw new Error('Wrong Variable argument.');
+          throw new Error('Wrong size argument.');
         }
       });
       this.assignments = _.assign(this.assignments, assignments); // maybe clone is required
@@ -60,9 +53,9 @@ class Record extends _Scoped {
     return res;
   }
   get unitsHash(){
-    if(this.variable.units){
+    if(this.units){
       return uParser
-        .parse(this.variable.units)
+        .parse(this.units)
         .toHash();
     }else{
       return;
