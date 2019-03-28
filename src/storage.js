@@ -28,18 +28,6 @@ class Storage extends Map {
   get length(){
     return this.size;
   }
-  getByInstance(constructor, space){
-    return _.chain([...this])
-      .filter((x) => (x[1] instanceof constructor) && x[1].space===space)
-      .map((x) => x[1])
-      .value();
-  }
-  getByClassName(className, space){
-    return _.chain([...this])
-      .filter((x) => (x[1].className===className) && x[1].space===space)
-      .map((x) => x[1])
-      .value();
-  }
 }
 
 module.exports = {

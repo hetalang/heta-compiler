@@ -2,6 +2,7 @@
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
   <model id="{{model.id}}" metaid="{{model.index}}" {% if model.title %}name="{{model.title}}"{% endif %}>
   {% if model.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{model.notes}}</html></notes>{% endif %}
+  {%- set listOfCompartments = model.getByClassName('Compartment') -%}
   {% if listOfCompartments|length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
@@ -18,6 +19,7 @@
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
+  {%- set listOfSpecies = model.getByClassName('Species') -%}
   {% if listOfSpecies|length > 0 %}
     <listOfSpecies>
     {%- for record in listOfSpecies %}
@@ -38,6 +40,7 @@
     {%- endfor %}
     </listOfSpecies>
   {% endif %}
+  {%- set listOfParameters = model.getByClassName('Record') -%}
   {% if listOfParameters|length > 0 %}
     <listOfParameters>
     {%- for record in listOfParameters %}
@@ -54,6 +57,7 @@
     {%- endfor %}
   </listOfParameters>
   {% endif %}
+  {%- set listOfReactions = model.getByClassName('Reaction') -%}
   {% if listOfReactions|length > 0 %}
     <listOfReactions>
     {%- for record in listOfReactions %}
@@ -88,7 +92,7 @@
   </listOfReactions>
   {% endif %}
   <listOfRules>
-  {%- for record in listOfRules %}
+  {%- for record in model.getListOfRules() %}
     <assignmentRule
       variable="{{record.id}}"
       metaid="{{record.index}}.ode_"
@@ -97,7 +101,7 @@
       {{record.assignments.ode_.toCMathML}}
     </assignmentRule>
   {%- endfor %}
-  {%- for record in listOfProcesses %}
+  {%- for record in model.getByClassName('Process') %}
     {%- for actor in record.actors %}
     <rateRule
       variable="{{actor.target}}"
@@ -114,6 +118,7 @@
     {%- endfor %}
   {%- endfor %}
   </listOfRules>
+  {%- set listOfInitialAssignments = model.getListOfInitialAssignments() -%}
   {% if listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
     {%- for record in listOfInitialAssignments %}
@@ -127,7 +132,8 @@
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
-  {% if listOfEvents %}
+  {%- set listOfEvents = model.getByClassName('Switcher') -%}
+  {% if listOfEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfEvents %}
       <event
@@ -155,6 +161,7 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
+  {%- set uniqueUnits = model.getUniqueUnits() -%}
   {% if uniqueUnits|length > 0 %}
     <listOfUnitDefinitions>
     {%- for record in uniqueUnits %}

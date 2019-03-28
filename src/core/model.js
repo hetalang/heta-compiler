@@ -30,11 +30,23 @@ class Model extends _Simple {
   get populated(){
     return this._populated;
   }
+  getByInstance(constructor){
+    return _.chain([...this._storage])
+      .filter((x) => (x[1] instanceof constructor) && x[1].space===this.id)
+      .map((x) => x[1])
+      .value();
+  }
+  getByClassName(className){
+    return _.chain([...this._storage])
+      .filter((x) => (x[1].className===className) && x[1].space===this.id)
+      .map((x) => x[1])
+      .value();
+  }
   populate(){
     // set scopes
     this._scopes = { start_: [], ode_: [] };
-    this._storage
-      .getByInstance(Switcher, this.id)
+    this
+      .getByInstance(Switcher)
       .forEach((sw) => this._scopes[sw.id] = []);
     // populate _scopes
     _.forOwn(this._scopes, (value, scope) => {
