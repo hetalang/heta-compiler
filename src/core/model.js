@@ -7,10 +7,6 @@ class Model extends _Simple {
   constructor(ind){
     super(ind);
     this._populated = false;
-    this._scopes = {
-      start_: [],
-      ode_: []
-    };
   }
   merge(q, skipChecking){
     if(!skipChecking) Model.isValid(q);
@@ -35,17 +31,19 @@ class Model extends _Simple {
     return this._populated;
   }
   populate(){
+    // set scopes
+    this._scopes = { start_: [], ode_: [] };
     this._storage
       .getByInstance(Switcher, this.id)
-      .forEach((sw) => {
-        this._scopes[sw.id] = this
-          .getChildren()
-          .filter((scoped) => (scoped instanceof Record)
-            && _.has(scoped, 'assignments.' + sw.id))
-          .map((record) => {
-            return {symbol: record.id, size: record.assignments[sw.id]};
-          });
-      });
+      .forEach((sw) => this._scopes[sw.id] = []);
+    // populate _scopes
+    _.forOwn(this._scopes, (value, scope) => {
+      this.getChildren()
+        .filter((scoped) => (scoped instanceof Record) && _.has(scoped, `assignments.${scope}`))
+        .forEach((record) => {
+          value.push({symbol: record.id, size: record.assignments[scope]});
+        });
+    });
     this._populated = true;
     return this;
   }
