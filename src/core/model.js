@@ -7,6 +7,10 @@ class Model extends _Simple {
   constructor(ind){
     super(ind);
     this._populated = false;
+    this._scopes = {
+      start_: [],
+      ode_: []
+    };
   }
   merge(q, skipChecking){
     if(!skipChecking) Model.isValid(q);
@@ -34,7 +38,7 @@ class Model extends _Simple {
     this._storage
       .getByInstance(Switcher, this.id)
       .forEach((sw) => {
-        sw.switcherSpecificAssignments = this
+        this._scopes[sw.id] = this
           .getChildren()
           .filter((scoped) => (scoped instanceof Record)
             && _.has(scoped, 'assignments.' + sw.id))
