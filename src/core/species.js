@@ -10,8 +10,9 @@ class Species extends Record {
     if(!skipChecking) Species.isValid(q);
     super.merge(q, skipChecking);
 
-    this.compartment = q.compartment;
-    this.boundary = q.boundary ? true : false; // default: false
+    if(q.compartment!==undefined) this.compartment = q.compartment;
+    if(q.boundary!==undefined) this.boundary = q.boundary;
+    if(q.isAmount!==undefined) this.isAmount = q.isAmount;
 
     return this;
   }

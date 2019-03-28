@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="{{out.model.id}}" metaid="{{out.model.index}}" {% if out.model.title %}name="{{out.model.title}}"{% endif %}>
-  {% if out.model.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{out.model.notes}}</html></notes>{% endif %}
-  {% if out.listOfCompartments|length > 0 %}
+  <model id="{{model.id}}" metaid="{{model.index}}" {% if model.title %}name="{{model.title}}"{% endif %}>
+  {% if model.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{model.notes}}</html></notes>{% endif %}
+  {% if listOfCompartments|length > 0 %}
     <listOfCompartments>
-    {%- for record in out.listOfCompartments %}
+    {%- for record in listOfCompartments %}
       <compartment
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
@@ -18,9 +18,9 @@
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
-  {% if out.listOfSpecies|length > 0 %}
+  {% if listOfSpecies|length > 0 %}
     <listOfSpecies>
-    {%- for record in out.listOfSpecies %}
+    {%- for record in listOfSpecies %}
       <species
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
@@ -38,9 +38,9 @@
     {%- endfor %}
     </listOfSpecies>
   {% endif %}
-  {% if out.listOfParameters|length > 0 %}
+  {% if listOfParameters|length > 0 %}
     <listOfParameters>
-    {%- for record in out.listOfParameters %}
+    {%- for record in listOfParameters %}
       <parameter
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
@@ -54,9 +54,9 @@
     {%- endfor %}
   </listOfParameters>
   {% endif %}
-  {% if out.listOfReactions|length > 0 %}
+  {% if listOfReactions|length > 0 %}
     <listOfReactions>
-    {%- for record in out.listOfReactions %}
+    {%- for record in listOfReactions %}
       <reaction
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
@@ -88,7 +88,7 @@
   </listOfReactions>
   {% endif %}
   <listOfRules>
-  {%- for record in out.listOfRules %}
+  {%- for record in listOfRules %}
     <assignmentRule
       variable="{{record.id}}"
       metaid="{{record.index}}.ode_"
@@ -97,7 +97,7 @@
       {{record.assignments.ode_.toCMathML}}
     </assignmentRule>
   {%- endfor %}
-  {%- for record in out.listOfProcesses %}
+  {%- for record in listOfProcesses %}
     {%- for actor in record.actors %}
     <rateRule
       variable="{{actor.target}}"
@@ -114,9 +114,9 @@
     {%- endfor %}
   {%- endfor %}
   </listOfRules>
-  {% if out.listOfInitialAssignments|length > 0 %}
+  {% if listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
-    {%- for record in out.listOfInitialAssignments %}
+    {%- for record in listOfInitialAssignments %}
       <initialAssignment
         symbol="{{record.id}}"
         metaid="{{record.index}}.start_"
@@ -127,9 +127,9 @@
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
-  {% if out.listOfEvents %}
+  {% if listOfEvents %}
     <listOfEvents>
-      {%- for event in out.listOfEvents %}
+      {%- for event in listOfEvents %}
       <event
         id="{{event.id}}" metaid="{{event.index}}"
         >
@@ -143,10 +143,10 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for assignment in out.model._scopes[event.id] %}
+          {% for assignment in model._scopes[event.id] %}
           <eventAssignment
             variable="{{ assignment.symbol }}"
-            metaid="{{out.model.id}}.{{assignment.symbol}}.{{event.id}}">
+            metaid="{{model.id}}.{{assignment.symbol}}.{{event.id}}">
             {{ assignment.size.toCMathML }}
           </eventAssignment>
           {% endfor %}
@@ -155,9 +155,9 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
-  {% if out.uniqueUnits|length > 0 %}
+  {% if uniqueUnits|length > 0 %}
     <listOfUnitDefinitions>
-    {%- for record in out.uniqueUnits %}
+    {%- for record in uniqueUnits %}
       {{ record.getUnitDefinition() }}
     {%- endfor %}
   </listOfUnitDefinitions>

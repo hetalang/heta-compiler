@@ -27,7 +27,7 @@ Model.prototype.toSBML = function(){
     listOfInitialAssignments: this.getListOfInitialAssignments(space),
     listOfEvents: this._storage.getByInstance(Switcher, space)
   };
-  let SBMLText = nunjucks.render('sbml/template.xml.njk', {out: selected});
+  let SBMLText = nunjucks.render('sbml/template.xml.njk', selected);
 
   return SBMLText;
 };
@@ -38,16 +38,7 @@ Model.prototype.getUniqueUnits = function(space){
     .filter((record) => record.units);
   return _.uniqBy(quantities, (record) => record.unitsHash);
 };
-/*
-Model.prototype.getListOfParameters = function(space){
-  return this._storage
-    .getByInstance(Record, space)
-    .filter((record) => !(record instanceof Compartment)
-      && !(record instanceof Species)
-      && !(record instanceof Reaction)
-    );
-};
-*/
+
 Model.prototype.getListOfRules = function(space){
   return this._storage
     .getByInstance(Record, space)

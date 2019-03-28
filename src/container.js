@@ -9,6 +9,7 @@ const { Switcher } = require('./core/switcher');
 const { ReferenceDefinition } = require('./core/reference-definition');
 const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
+const { Const } = require('./core/const');
 // const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
 const expect = require('chai').expect;
@@ -28,7 +29,8 @@ class Container {
       Model,
       ReferenceDefinition,
       UnitDefinition,
-      Page
+      Page,
+      Const
     };
   }
   insert(q){
