@@ -143,21 +143,21 @@
   <listOfRules>
     <assignmentRule
       variable="p3"
-      metaid="first.p3.ode__"
+      metaid="first.p3.ode_"
       
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="evt1"
-      metaid="first.evt1.ode__"
+      metaid="first.evt1.ode_"
       
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="s2"
-      metaid="first.s2.ode__"
+      metaid="first.s2.ode_"
       name="s2 title"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
@@ -167,7 +167,7 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="comp1"
-        metaid="first.comp1.start__"
+        metaid="first.comp1.start_"
         name="This is compartment"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>

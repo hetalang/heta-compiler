@@ -9,7 +9,7 @@
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
         constant="false"
-        {% if record.assignments.start__.num!==undefined -%}size="{{record.assignments.start__.num}}"{%- endif %}
+        {% if record.assignments.start_.num!==undefined -%}size="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{ record.unitsHash }}"{%- endif %}
         metaid="{{record.index}}"
         >
@@ -28,8 +28,8 @@
         speciesType=""
         compartment="{{record.compartment}}"
         constant="false"
-        boundaryCondition="{{ record.boundary===true or record.assignments.ode__!==undefined }}"
-        {% if record.assignments.start__.num!==undefined -%}initialConcentration="{{record.assignments.start__.num}}"{%- endif %}
+        boundaryCondition="{{ record.boundary===true or record.assignments.ode_!==undefined }}"
+        {% if record.assignments.start_.num!==undefined -%}initialConcentration="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash}}"{%- endif %}
         metaid="{{record.index}}"
         >
@@ -45,7 +45,7 @@
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
         constant="false"
-        {% if record.assignments.start__.num!==undefined -%}value="{{record.assignments.start__.num}}"{%- endif %}
+        {% if record.assignments.start_.num!==undefined -%}value="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{record.unitsHash}}"{%- endif %}
         metaid="{{record.index}}"
         >
@@ -81,7 +81,7 @@
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
-          {{record.assignments.ode__.toCMathML}}
+          {{record.assignments.ode_.toCMathML}}
         </kineticLaw>
       </reaction>
     {%- endfor %}
@@ -91,10 +91,10 @@
   {%- for record in out.listOfRules %}
     <assignmentRule
       variable="{{record.id}}"
-      metaid="{{record.index}}.ode__"
+      metaid="{{record.index}}.ode_"
       {% if record.title %}name="{{record.title}}"{% endif %}
       >
-      {{record.assignments.ode__.toCMathML}}
+      {{record.assignments.ode_.toCMathML}}
     </assignmentRule>
   {%- endfor %}
   {%- for record in out.listOfProcesses %}
@@ -119,10 +119,10 @@
     {%- for record in out.listOfInitialAssignments %}
       <initialAssignment
         symbol="{{record.id}}"
-        metaid="{{record.index}}.start__"
+        metaid="{{record.index}}.start_"
         {% if record.title %}name="{{record.title}}"{% endif %}
         >
-        {{record.assignments.start__.toCMathML}}
+        {{record.assignments.start_.toCMathML}}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>

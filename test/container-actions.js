@@ -13,7 +13,7 @@ describe('Unit tests for Container import', () => {
       space: 'default__',
       title: 'k1 title',
       assignments: {
-        start__: {num: 1e-3}
+        start_: {num: 1e-3}
       }
     });
     c.storage.should.be.lengthOf(1);
@@ -39,7 +39,7 @@ describe('Unit tests for Container import', () => {
       id: 'k1',
       space: 'default__',
       assignments: {
-        start__: {num: 1}
+        start_: {num: 1}
       },
       units: '1/h'
     });
@@ -54,11 +54,11 @@ describe('Unit tests for Container import', () => {
       id: 'k2',
       space: 'one',
       assignments: {
-        start__: {num: 1.4}
+        start_: {num: 1.4}
       }
     });
     c.storage.should.be.lengthOf(2);
-    simple.should.have.nested.property('assignments.start__.num', 1.4);
+    simple.should.have.nested.property('assignments.start_.num', 1.4);
     simple.should.not.have.property('title');
   });
 

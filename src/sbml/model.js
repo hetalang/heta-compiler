@@ -52,12 +52,12 @@ Model.prototype.getListOfRules = function(scope){
   return this._storage
     .getByInstance(Record, scope)
     .filter((record) => !(record instanceof Reaction)
-        && _.has(record, 'assignments.ode__')
+        && _.has(record, 'assignments.ode_')
     );
 };
 
 Model.prototype.getListOfInitialAssignments = function(scope){
   return this._storage
     .getByInstance(Record, scope)
-    .filter((record) => _.get(record, 'assignments.start__') instanceof Expression);
+    .filter((record) => _.get(record, 'assignments.start_') instanceof Expression);
 };
