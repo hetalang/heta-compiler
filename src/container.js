@@ -24,7 +24,6 @@ class Container {
       Process,
       Reaction,
       Switcher,
-      // Event,
       // unscoped classes
       Model,
       ReferenceDefinition,
