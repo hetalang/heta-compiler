@@ -39,9 +39,39 @@ class Model extends _Simple {
     return this.selectByInstance(Record)
       .filter((record) => _.has(record, 'assignments.' + scope));
   }
+  getChildrenIds(includingVirtual=false){
+    return this.population
+      .filter((scoped) => !scoped.virtual || includingVirtual)
+      .map((scoped) => scoped.id);
+  }
   populate(){
     // add population
     this.population = this.collectChildren();
+    // collect all deps
+    let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
+      .map((record) => {
+        return _.map(record.assignments, (assignment) => assignment)
+          .filter((size) => size.className==='Expression');
+      })
+      .flatten()
+      .map((expression) => expression.exprParsed.getSymbols())
+      .flatten()
+      .uniq()
+      .difference(this.getChildrenIds()) // remove local ids from the list
+      .difference(['t']) // remove time
+      .value();
+    deps.forEach((id) => { // select deps mentioned in global but not in space
+      let unscoped = this._storage.get(id);
+      if(unscoped!==undefined && unscoped.className==='Const') {
+        let virtualRecord = new Record({id: id, space: this.id}).merge({
+          title: 'Generated virtual Record',
+          assignments: {}
+        });
+        virtualRecord.assignments.start_ = unscoped.clone(); // maybe clone is not required
+        virtualRecord.virtual = true; // flat means it is generated but not set by user
+        this.population.push(virtualRecord);
+      }
+    });
     // add virtual assignments, search for global if no assignments
     this.selectByInstance(Record)
       .filter((scoped) => scoped.assignments===undefined)
@@ -52,7 +82,7 @@ class Model extends _Simple {
           scoped.assignments = {start_: globalConst};
         }
       });
-      
+
     return this;
   }
   toQ(){
