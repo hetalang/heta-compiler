@@ -6,7 +6,6 @@ const { Switcher } = require('./switcher');
 class Model extends _Simple {
   constructor(ind){
     super(ind);
-    this._populated = false;
   }
   merge(q, skipChecking){
     if(!skipChecking) Model.isValid(q);
@@ -26,9 +25,6 @@ class Model extends _Simple {
     return [...this._storage]
       .filter((x) => x[1].space===this.id)
       .map((x) => x[1]);
-  }
-  get populated(){
-    return this._populated;
   }
   getByInstance(constructor){
     return _.chain([...this._storage])
@@ -50,13 +46,24 @@ class Model extends _Simple {
       .forEach((sw) => this._scopes[sw.id] = []);
     // populate _scopes
     _.forOwn(this._scopes, (value, scope) => {
-      this.getChildren()
-        .filter((scoped) => (scoped instanceof Record) && _.has(scoped, `assignments.${scope}`))
+      this.getByInstance(Record)
+        .filter((scoped) => _.has(scoped, `assignments.${scope}`))
         .forEach((record) => {
           value.push({symbol: record.id, size: record.assignments[scope]});
         });
     });
-    this._populated = true;
+    // add virtual assignments, search for global if no assignments
+    this.getByInstance(Record)
+      .filter((scoped) => scoped.assignments===undefined)
+      .forEach((scoped) => {
+        let unscoped = this._storage.get(scoped.id); // search the same id in global
+        if(unscoped!==undefined && unscoped.className==='Const') {
+          let globalConst = _.cloneDeep(unscoped);
+          globalConst.const = true;
+          globalConst.virtual = true;
+          scoped.assignments = {start_: globalConst};
+        }
+      });
     return this;
   }
   toQ(){

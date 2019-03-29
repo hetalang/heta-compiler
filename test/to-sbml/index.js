@@ -19,7 +19,6 @@ describe('Create SBML.', () => {
     c.importMany(firstModel);
     let text = c.storage
       .get('first')
-      .populate()
       .toSBML();
     //fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
@@ -31,8 +30,8 @@ describe('Create SBML.', () => {
     c.importMany(compartmentModel);
     let text = c.storage
       .get('two_comp')
-      .populate()
       .toSBML();
+    // console.log(c.storage.get('two_comp'));
     fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
     //text.should.xml.be.deep.equal(result);

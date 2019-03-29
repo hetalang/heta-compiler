@@ -9,7 +9,7 @@
       <compartment
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        constant="false"
+        constant="{{ record.assignments.start_.const===true }}"
         {% if record.assignments.start_.num!==undefined -%}size="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{ record.unitsHash }}"{%- endif %}
         metaid="{{record.index}}"
@@ -29,7 +29,7 @@
         hasOnlySubstanceUnits="{{record.isAmount===true}}"
         speciesType=""
         compartment="{{record.compartment}}"
-        constant="false"
+        constant="{{ record.assignments.start_.const===true }}"
         boundaryCondition="{{ record.boundary===true or record.assignments.ode_!==undefined }}"
         {% if record.assignments.start_.num!==undefined -%}initialConcentration="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash}}"{%- endif %}
@@ -47,7 +47,7 @@
       <parameter
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        constant="false"
+        constant="{{ record.assignments.start_.const===true }}"
         {% if record.assignments.start_.num!==undefined -%}value="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{record.unitsHash}}"{%- endif %}
         metaid="{{record.index}}"
