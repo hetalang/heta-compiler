@@ -85,7 +85,7 @@
   },
   {
     "id": "a0", "space": "two_comp",
-    "assignments": {"sw1": {"num": 10, "units": "umole", "additive": true}}
+    "assignments": {"sw1": {"num": 10, "units": "umole", "increment": true}}
   },
   {
     "id": "s1", "space": "two_comp",
@@ -97,7 +97,7 @@
   },
   {
     "id": "auc", "space": "two_comp",
-    "assignments": {"ode_": {"expr": "s1", "additive": true}}
+    "assignments": {"ode_": {"expr": "s1", "increment": true}}
   },
   {
     "id": "auc", "space": "two_comp",

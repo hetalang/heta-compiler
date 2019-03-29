@@ -20,6 +20,7 @@ class Expression {
         ? q.lang
         : 'qs3p';
     }
+    if(q.increment!==undefined) this.increment = q.increment;
     this.exprParsed = math.parse(this._exprInput);
   }
   get expr(){
@@ -35,6 +36,11 @@ class Expression {
       .toCMathML()
       .toString();
   }
+  get toCMathMLWithIncrement(){ // the same as toCMathML() but take into account increment
+    return this.exprParsed
+      .toCMathML()
+      .toString();
+  }
   static get schemaName(){
     return 'Expression';
   }
@@ -43,6 +49,7 @@ class Expression {
   }
   toQ(){
     let res = _.pick(this, ['expr']);
+    if(this.increment) res.increment = true;
     return res;
   }
   static isValid(q){

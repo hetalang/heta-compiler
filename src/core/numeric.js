@@ -11,9 +11,17 @@ class Numeric {
     }else{
       this.num = q.num;
     }
+    if(q.increment!==undefined) this.increment = q.increment;
   }
   get toCMathML(){
     return `<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>${this.num}</cn></math>`;
+  }
+  get toCMathMLWithIncrement(){
+    if(this.increment){
+      return `<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>${this.id}</ci><cn>${this.num}</cn></apply></math>`;
+    }else{
+      return `<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>${this.num}</cn></math>`;
+    }
   }
   static get schemaName(){
     return 'Numeric';
@@ -23,6 +31,7 @@ class Numeric {
   }
   toQ(){
     let res = { num: this.num };
+    if(this.increment) res.increment = true;
     return res;
   }
   static isValid(q){

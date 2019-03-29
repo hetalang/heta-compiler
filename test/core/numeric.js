@@ -19,9 +19,9 @@ describe('Unit test for Numeric.', () => {
   });
 
   it('Create numeric from {num: 3.14, free: true}', () => {
-    let numeric = new Numeric({num: 3.14, free: true});
+    let numeric = new Numeric({num: 3.14, increment: true});
     numeric.should.has.property('num', 3.14);
-    // numeric.should.has.property('free', true);
+    numeric.should.has.property('increment', true);
   });
 
   it('Create numeric from {num: 1e-15}', () => {
@@ -45,10 +45,10 @@ describe('Unit test for Numeric.', () => {
   });
 
   it('Conversion to Q.', () => {
-    let numeric = new Numeric({num: 3.14, free: true});
+    let numeric = new Numeric({num: 3.14, increment: true});
     numeric.toQ().should.be.deep.equal({
       num: 3.14,
-      // free: true
+      increment: true
     });
   });
 

@@ -22,11 +22,21 @@ Model.prototype.getUniqueUnits = function(){
   return _.uniqBy(quantities, (record) => record.unitsHash);
 };
 
-Model.prototype.getListOfRules = function(){
+Model.prototype.getListOfRulesAssignment = function(){
   return this
     .selectByInstance(Record)
     .filter((record) => !(record instanceof Reaction)
         && _.has(record, 'assignments.ode_')
+        && !record.assignments.ode_.increment
+    );
+};
+
+Model.prototype.getListOfRulesRate = function(){
+  return this
+    .selectByInstance(Record)
+    .filter((record) => !(record instanceof Reaction)
+        && _.has(record, 'assignments.ode_')
+        && record.assignments.ode_.increment
     );
 };
 

@@ -92,7 +92,7 @@
   </listOfReactions>
   {% endif %}
   <listOfRules>
-  {%- for record in model.getListOfRules() %}
+  {%- for record in model.getListOfRulesAssignment() %}
     <assignmentRule
       variable="{{record.id}}"
       metaid="{{record.index}}.ode_"
@@ -100,6 +100,15 @@
       >
       {{record.assignments.ode_.toCMathML}}
     </assignmentRule>
+  {%- endfor %}
+  {%- for record in model.getListOfRulesRate() %}
+    <rateRule
+      variable="{{record.id}}"
+      metaid="{{record.index}}.ode_"
+      {% if record.title %}name="{{record.title}}"{% endif %}
+      >
+      {{record.assignments.ode_.toCMathML}}
+    </rateRule>
   {%- endfor %}
   {%- for record in model.selectByClassName('Process') %}
     {%- for actor in record.actors %}
@@ -127,7 +136,7 @@
         metaid="{{record.index}}.start_"
         {% if record.title %}name="{{record.title}}"{% endif %}
         >
-        {{record.assignments.start_.toCMathML}}
+        {{record.assignments.start_.toCMathMLWithIncrement}}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>
@@ -153,7 +162,7 @@
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}.{{event.id}}">
-            {{ record.assignments[event.id].toCMathML }}
+            {{ record.assignments[event.id].toCMathMLWithIncrement }}
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
