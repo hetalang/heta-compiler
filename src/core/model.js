@@ -6,6 +6,7 @@ const { Switcher } = require('./switcher');
 class Model extends _Simple {
   constructor(ind){
     super(ind);
+    this.population = [];
   }
   merge(q, skipChecking){
     if(!skipChecking) Model.isValid(q);
@@ -21,49 +22,37 @@ class Model extends _Simple {
   static get schemaName(){
     return 'ModelP';
   }
-  getChildren(){
+  collectChildren(){
     return [...this._storage]
       .filter((x) => x[1].space===this.id)
       .map((x) => x[1]);
   }
-  getByInstance(constructor){
-    return _.chain([...this._storage])
-      .filter((x) => (x[1] instanceof constructor) && x[1].space===this.id)
-      .map((x) => x[1])
-      .value();
+  selectByInstance(constructor){
+    return this.population
+      .filter((x) => (x instanceof constructor));
   }
-  getByClassName(className){
-    return _.chain([...this._storage])
-      .filter((x) => (x[1].className===className) && x[1].space===this.id)
-      .map((x) => x[1])
-      .value();
+  selectByClassName(className){
+    return this.population
+      .filter((x) => x.className===className);
+  }
+  selectRecordsByScope(scope){
+    return this.selectByInstance(Record)
+      .filter((record) => _.has(record, 'assignments.' + scope));
   }
   populate(){
-    // set scopes
-    this._scopes = { start_: [], ode_: [] };
-    this
-      .getByInstance(Switcher)
-      .forEach((sw) => this._scopes[sw.id] = []);
-    // populate _scopes
-    _.forOwn(this._scopes, (value, scope) => {
-      this.getByInstance(Record)
-        .filter((scoped) => _.has(scoped, `assignments.${scope}`))
-        .forEach((record) => {
-          value.push({symbol: record.id, size: record.assignments[scope]});
-        });
-    });
+    // add population
+    this.population = this.collectChildren();
     // add virtual assignments, search for global if no assignments
-    this.getByInstance(Record)
+    this.selectByInstance(Record)
       .filter((scoped) => scoped.assignments===undefined)
       .forEach((scoped) => {
         let unscoped = this._storage.get(scoped.id); // search the same id in global
         if(unscoped!==undefined && unscoped.className==='Const') {
-          let globalConst = _.cloneDeep(unscoped);
-          globalConst.const = true;
-          globalConst.virtual = true;
+          let globalConst = unscoped.clone(); // maybe clone is not required
           scoped.assignments = {start_: globalConst};
         }
       });
+      
     return this;
   }
   toQ(){

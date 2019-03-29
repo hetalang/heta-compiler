@@ -37,8 +37,7 @@ class _Simple {
     return this.id;
   }
   clone(){ // creates copy of element TODO: not tested
-    let clone = _.clone(this);
-    return clone;
+    return _.clone(this);
   }
   get notesMdTree(){
     if(this.notes){

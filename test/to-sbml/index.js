@@ -10,7 +10,10 @@ chai.should();
 const chaiXml = require('chai-xml');
 chai.use(chaiXml);
 
-const result = fs.readFileSync(path.resolve(__dirname, './result.xml'), 'utf8');
+const first_model_result = fs.readFileSync(
+  path.resolve(__dirname, './first_model_result.xml'),
+  'utf8'
+);
 
 describe('Create SBML.', () => {
 
@@ -22,7 +25,7 @@ describe('Create SBML.', () => {
       .toSBML();
     //fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
-    text.should.xml.be.deep.equal(result);
+    text.should.xml.be.deep.equal(first_model_result);
   });
 
   it('Compartment model', () => {

@@ -17,14 +17,14 @@ Model.prototype.toSBML = function(){
 
 Model.prototype.getUniqueUnits = function(){
   let quantities = this
-    .getByInstance(Record)
+    .selectByInstance(Record)
     .filter((record) => record.units);
   return _.uniqBy(quantities, (record) => record.unitsHash);
 };
 
 Model.prototype.getListOfRules = function(){
   return this
-    .getByInstance(Record)
+    .selectByInstance(Record)
     .filter((record) => !(record instanceof Reaction)
         && _.has(record, 'assignments.ode_')
     );
@@ -32,6 +32,6 @@ Model.prototype.getListOfRules = function(){
 
 Model.prototype.getListOfInitialAssignments = function(){
   return this
-    .getByInstance(Record)
+    .selectByInstance(Record)
     .filter((record) => _.get(record, 'assignments.start_') instanceof Expression);
 };

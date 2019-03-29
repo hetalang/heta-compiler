@@ -2,14 +2,14 @@
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
   <model id="{{model.id}}" metaid="{{model.index}}" {% if model.title %}name="{{model.title}}"{% endif %}>
   {% if model.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{model.notes}}</html></notes>{% endif %}
-  {%- set listOfCompartments = model.getByClassName('Compartment') -%}
+  {%- set listOfCompartments = model.selectByClassName('Compartment') -%}
   {% if listOfCompartments|length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
       <compartment
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        constant="{{ record.assignments.start_.const===true }}"
+        constant="{{ record.assignments.start_.className==='Const' }}"
         {% if record.assignments.start_.num!==undefined -%}size="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{ record.unitsHash }}"{%- endif %}
         metaid="{{record.index}}"
@@ -19,7 +19,7 @@
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
-  {%- set listOfSpecies = model.getByClassName('Species') -%}
+  {%- set listOfSpecies = model.selectByClassName('Species') -%}
   {% if listOfSpecies|length > 0 %}
     <listOfSpecies>
     {%- for record in listOfSpecies %}
@@ -29,7 +29,7 @@
         hasOnlySubstanceUnits="{{record.isAmount===true}}"
         speciesType=""
         compartment="{{record.compartment}}"
-        constant="{{ record.assignments.start_.const===true }}"
+        constant="{{ record.assignments.start_.className==='Const' }}"
         boundaryCondition="{{ record.boundary===true or record.assignments.ode_!==undefined }}"
         {% if record.assignments.start_.num!==undefined -%}initialConcentration="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash}}"{%- endif %}
@@ -40,14 +40,14 @@
     {%- endfor %}
     </listOfSpecies>
   {% endif %}
-  {%- set listOfParameters = model.getByClassName('Record') -%}
+  {%- set listOfParameters = model.selectByClassName('Record') -%}
   {% if listOfParameters|length > 0 %}
     <listOfParameters>
     {%- for record in listOfParameters %}
       <parameter
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        constant="{{ record.assignments.start_.const===true }}"
+        constant="{{ record.assignments.start_.className==='Const' }}"
         {% if record.assignments.start_.num!==undefined -%}value="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{record.unitsHash}}"{%- endif %}
         metaid="{{record.index}}"
@@ -57,7 +57,7 @@
     {%- endfor %}
   </listOfParameters>
   {% endif %}
-  {%- set listOfReactions = model.getByClassName('Reaction') -%}
+  {%- set listOfReactions = model.selectByClassName('Reaction') -%}
   {% if listOfReactions|length > 0 %}
     <listOfReactions>
     {%- for record in listOfReactions %}
@@ -101,7 +101,7 @@
       {{record.assignments.ode_.toCMathML}}
     </assignmentRule>
   {%- endfor %}
-  {%- for record in model.getByClassName('Process') %}
+  {%- for record in model.selectByClassName('Process') %}
     {%- for actor in record.actors %}
     <rateRule
       variable="{{actor.target}}"
@@ -132,7 +132,7 @@
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
-  {%- set listOfEvents = model.getByClassName('Switcher') -%}
+  {%- set listOfEvents = model.selectByClassName('Switcher') -%}
   {% if listOfEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfEvents %}
@@ -149,11 +149,11 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for assignment in model._scopes[event.id] %}
+          {% for record in model.selectRecordsByScope(event.id) %}
           <eventAssignment
-            variable="{{ assignment.symbol }}"
-            metaid="{{model.id}}.{{assignment.symbol}}.{{event.id}}">
-            {{ assignment.size.toCMathML }}
+            variable="{{ record.id }}"
+            metaid="{{record.index}}.{{event.id}}">
+            {{ record.assignments[event.id].toCMathML }}
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
