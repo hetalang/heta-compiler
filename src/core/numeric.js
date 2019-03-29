@@ -8,12 +8,8 @@ class Numeric {
     if(!skipChecking) Numeric.isValid(q);
     if(typeof q==='number'){
       this.num = q;
-      this.free = false;
     }else{
       this.num = q.num;
-      this.free = q.free
-        ? q.free
-        : false;
     }
   }
   get toCMathML(){
@@ -27,7 +23,6 @@ class Numeric {
   }
   toQ(){
     let res = { num: this.num };
-    if(this.free) res.free = this.free;
     return res;
   }
   static isValid(q){

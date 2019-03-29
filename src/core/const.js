@@ -9,9 +9,7 @@ class Const extends _Simple { // implicit extend Numeric
       this.free = false;
     }else{
       this.num = q.num;
-      this.free = q.free
-        ? q.free
-        : false;
+      this.free = q.free ? q.free : false;
     }
 
     return this;
