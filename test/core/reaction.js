@@ -16,7 +16,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm3'}
       ],
       assignments: {
-        ode_: { expr: 'k1*s1' }
+        ode_: { size: {expr: 'k1*s1'} }
       },
       units: 'umole/h'
     });
@@ -34,7 +34,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm3'}
       ],
       assignments: {
-        ode_: { expr: 'k1 * s1' }
+        ode_: { size: {expr: 'k1 * s1'} }
       },
       units: 'umole/h'
     });

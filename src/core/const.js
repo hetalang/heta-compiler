@@ -11,7 +11,7 @@ class Const extends _Simple { // implicit extend Numeric
       this.num = q.num;
       this.free = q.free ? q.free : false;
     }
-    if(q.increment!==undefined) this.increment = q.increment;
+    if(q.units!==undefined) this.units = q.units;
 
     return this;
   }
@@ -25,7 +25,7 @@ class Const extends _Simple { // implicit extend Numeric
     let res = super.toQ();
     res.num = this.num;
     if(this.free) res.free = true;
-    if(this.increment) res.increment = true;
+    if(this.units) res.units = this.units;
     return res;
   }
 }

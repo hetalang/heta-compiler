@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { _Simple } = require('./_simple');
-const { Record } = require('./record');
+const { Record, Assignment } = require('./record');
 const { Switcher } = require('./switcher');
 
 class Model extends _Simple {
@@ -50,7 +50,7 @@ class Model extends _Simple {
     // collect all deps
     let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
       .map((record) => {
-        return _.map(record.assignments, (assignment) => assignment)
+        return _.map(record.assignments, (assignment) => assignment.size)
           .filter((size) => size.className==='Expression');
       })
       .flatten()
@@ -65,10 +65,11 @@ class Model extends _Simple {
       if(unscoped!==undefined && unscoped.className==='Const') {
         let virtualRecord = new Record({id: id, space: this.id}).merge({
           title: 'Generated virtual Record',
-          assignments: {}
+          assignments: {},
+          units: unscoped.units // use unit from Const
         });
-        virtualRecord.assignments.start_ = unscoped.clone(); // maybe clone is not required
-        virtualRecord.virtual = true; // flat means it is generated but not set by user
+        virtualRecord.assignments.start_ = new Assignment({size: unscoped.clone(), id: id});
+        virtualRecord.virtual = true; // virtual means it is generated but not set by user
         this.population.push(virtualRecord);
       }
     });
@@ -78,8 +79,9 @@ class Model extends _Simple {
       .forEach((scoped) => {
         let unscoped = this._storage.get(scoped.id); // search the same id in global
         if(unscoped!==undefined && unscoped.className==='Const') {
-          let globalConst = unscoped.clone(); // maybe clone is not required
-          scoped.assignments = {start_: globalConst};
+          scoped.assignments = {
+            start_: new Assignment({size: unscoped.clone(), id: scoped.id})
+          };
         }
       });
 

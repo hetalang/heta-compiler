@@ -19,7 +19,8 @@ Model.prototype.getUniqueUnits = function(){
   let quantities = this
     .selectByInstance(Record)
     .filter((record) => record.units);
-  return _.uniqBy(quantities, (record) => record.unitsHash);
+  let res = _.uniqBy(quantities, (record) => record.unitsHash);
+  return res;
 };
 
 Model.prototype.getListOfRulesAssignment = function(){
@@ -43,5 +44,5 @@ Model.prototype.getListOfRulesRate = function(){
 Model.prototype.getListOfInitialAssignments = function(){
   return this
     .selectByInstance(Record)
-    .filter((record) => _.get(record, 'assignments.start_') instanceof Expression);
+    .filter((record) => _.get(record, 'assignments.start_.size') instanceof Expression);
 };

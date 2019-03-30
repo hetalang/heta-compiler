@@ -11,9 +11,10 @@ describe('Unit test for Expression.', () => {
     });
   });
 
-  it('Create Expression from {expr: "x*y"}.', () => {
-    let expression = new Expression({expr: 'x*y'});
-    expression.expr.should.be.equal('x * y');
+  it('Create Expression from {expr: "x*y", units: "L"}.', () => {
+    let expression = new Expression({expr: 'x*y', units: 'L'});
+    expression.should.have.property('expr', 'x * y');
+    expression.should.have.property('units', 'L');
   });
 
   it('Conversion to CMathML.', () => {
@@ -23,33 +24,31 @@ describe('Unit test for Expression.', () => {
   });
 
   it('Conversion to Q.', () => {
-    let expression = new Expression({expr: 'x*y'});
+    let expression = new Expression({expr: 'x*y', units: 'L'});
     expression.toQ().should.be.deep.equal({
-      expr: 'x * y'
+      expr: 'x * y',
+      units: 'L'
     });
   });
 
   it('Empty input.', () => {
     should.Throw(() => {
       new Expression();
-    }, SchemaValidationError);
+    }, Error);
     should.Throw(() => {
       new Expression({});
-    }, SchemaValidationError);
+    }, Error);
     should.Throw(() => {
       new Expression({xxx: 'yyy'});
-    }, SchemaValidationError);
-    should.Throw(() => {
-      new Expression('');
-    }, SchemaValidationError);
+    }, Error);
   });
 
   it('Wrong input', () => {
     should.Throw(() => {
       new Expression({expr: 'a/*'});
-    });
+    }, Error);
     should.Throw(() => {
       new Expression({expr: '(a*b'});
-    });
+    }, Error);
   });
 });

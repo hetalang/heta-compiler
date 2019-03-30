@@ -5,23 +5,14 @@ const should = require('chai').should();
 
 describe('Unit test for Numeric.', () => {
   it('Create numeric from 3.14', () => {
-    should.Throw(() => {
-      let numeric = new Numeric(3.14);
-      numeric.should.has.property('num', 3.14);
-      numeric.should.not.has.property('free');
-    });
-  });
-
-  it('Create numeric from {num: 3.14}', () => {
-    let numeric = new Numeric({num: 3.14});
-    numeric.should.have.property('num', 3.14);
-    numeric.should.not.have.property('free', true);
-  });
-
-  it('Create numeric from {num: 3.14, free: true}', () => {
-    let numeric = new Numeric({num: 3.14, increment: true});
+    let numeric = new Numeric(3.14);
     numeric.should.has.property('num', 3.14);
-    numeric.should.has.property('increment', true);
+  });
+
+  it('Create numeric from {num: 3.14, units: "L"}', () => {
+    let numeric = new Numeric({num: 3.14, units: 'L'});
+    numeric.should.have.property('num', 3.14);
+    numeric.should.have.property('units', 'L');
   });
 
   it('Create numeric from {num: 1e-15}', () => {
@@ -45,10 +36,10 @@ describe('Unit test for Numeric.', () => {
   });
 
   it('Conversion to Q.', () => {
-    let numeric = new Numeric({num: 3.14, increment: true});
+    let numeric = new Numeric({num: 3.14, units: 'L'});
     numeric.toQ().should.be.deep.equal({
       num: 3.14,
-      increment: true
+      units: 'L'
     });
   });
 

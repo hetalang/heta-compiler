@@ -86,7 +86,7 @@ describe('Unit tests for Container', () => {
         id: 'k1',
         space: 'default__',
         assignments: {
-          start_: {num: 1.2e-2, free: true}
+          start_: {size: {num: 1.2e-2}}
         },
         units: '1/h'
       });
@@ -97,7 +97,7 @@ describe('Unit tests for Container', () => {
         id: 'comp1',
         space: 'default__',
         assignments: {
-          start_: {num: 5.2, free: false}
+          start_: {size: {num: 5.2}}
         },
         units: 'L'
       });
@@ -109,7 +109,7 @@ describe('Unit tests for Container', () => {
         space: 'default__',
         compartment: 'comp1',
         assignments: {
-          ode_: {num: 10, free: false}
+          ode_: {size: {num: 10}}
         },
         units: 'uM'
       });
@@ -120,7 +120,7 @@ describe('Unit tests for Container', () => {
         id: 'pr1',
         space: 'default__',
         assignments: {
-          ode_: {expr: 'k1*s1'}
+          ode_: {size: {expr: 'k1*s1'}}
         },
         units: 'mole/h'
       });
@@ -140,7 +140,7 @@ describe('Unit tests for Container', () => {
           {target: 'm3'}
         ],
         assignments: {
-          ode_: {expr: 'k1 * s1'}
+          ode_: {size: {expr: 'k1 * s1'}}
         },
         units: 'umole/h'
       });

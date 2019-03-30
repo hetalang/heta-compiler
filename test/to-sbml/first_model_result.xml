@@ -2,7 +2,6 @@
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
   <model id="first" metaid="first" name="Model title">
   <notes><html xmlns="http://www.w3.org/1999/xhtml">Model *notes*</html></notes>
-  
     <listOfCompartments>
       <compartment
         id="comp1"
@@ -27,7 +26,6 @@
         
       </compartment>
     </listOfCompartments>
-  
   
     <listOfSpecies>
       <species
@@ -59,7 +57,6 @@
         
       </species>
     </listOfSpecies>
-  
   
     <listOfParameters>
       <parameter
@@ -93,7 +90,6 @@
         
       </parameter>
   </listOfParameters>
-  
   
     <listOfReactions>
       <reaction
@@ -163,7 +159,6 @@
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
     </assignmentRule>
   </listOfRules>
-  
     <listOfInitialAssignments>
       <initialAssignment
         symbol="comp1"
@@ -173,7 +168,6 @@
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
       </initialAssignment>
     </listOfInitialAssignments>
-  
   
     <listOfEvents>
       <event
@@ -200,14 +194,13 @@
       </event>
     </listOfEvents>
   
-  
     <listOfUnitDefinitions>
       <unitDefinition id="L" name="L">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="nm__min__fM" name="1 / min / fM&#183;nm">
+      <unitDefinition id="nm__min__fM" name="1/min/fM*nm">
   <listOfUnits>
     <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
     <unit kind="mole" exponent="-1" scale="-15" multiplier="1"/>
@@ -215,7 +208,7 @@
     <unit kind="metre" exponent="1" scale="-9" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="__h__L" name="1 / L / h">
+      <unitDefinition id="__h__L" name="1/L/h">
   <listOfUnits>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="0" multiplier="3600"/>
@@ -226,7 +219,7 @@
     <unit kind="second" exponent="1" scale="0" multiplier="60"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="mole__L" name="mole / L">
+      <unitDefinition id="mole__L" name="mole/L">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>

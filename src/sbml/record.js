@@ -4,7 +4,8 @@ let uParser = new UnitsParser(qspUnits);
 
 Record.prototype.getUnitDefinition = function(){
   let transformator = qspToSbml; // TODO: add user defined units
-  return uParser
+  let res = uParser
     .parse(this.units)
-    .toXmlUnitDefinition(transformator, {nameStyle: 'HTML'});
+    .toXmlUnitDefinition(transformator, {nameStyle: 'string'});
+  return res;
 };

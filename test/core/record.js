@@ -19,22 +19,22 @@ describe('Unit tests for Record.', () => {
 
   it('Set static numeric.', () => {
     let simple = (new Record({id: 'k1', space: 'one'})).merge({
-      assignments: { start_: {num: 1.1} }
+      assignments: { start_: {size: {num: 1.1}} }
     });
-    simple.should.has.nested.property('assignments.start_').instanceOf(Numeric);
+    simple.should.has.nested.property('assignments.start_.size').instanceOf(Numeric);
   });
 
   it('Set static expression.', () => {
     let simple = (new Record({id: 'k1', space: 'one'})).merge({
-      assignments: { start_: {expr: 'x*y'} }
+      assignments: { start_: {size: {expr: 'x*y'}} }
     });
-    simple.should.has.nested.property('assignments.start_').instanceOf(Expression);
+    simple.should.has.nested.property('assignments.start_.size').instanceOf(Expression);
   });
 
   it('Check toQ for expression Record.', () => {
     let simple = (new Record({id: 'r1', space: 'default__'})).merge({
       title: 'complex record',
-      assignments: { ode_: {expr: 'm*c^2'} },
+      assignments: { ode_: {size: {expr: 'm*c^2'}} },
       units: 'J'
     });
     simple.toQ().should.be.deep.equal({
@@ -42,7 +42,7 @@ describe('Unit tests for Record.', () => {
       id: 'r1',
       space: 'default__',
       title: 'complex record',
-      assignments: { ode_: {expr: 'm * c ^ 2'} },
+      assignments: { ode_: {size: {expr: 'm * c ^ 2'}} },
       units: 'J'
     });
   });

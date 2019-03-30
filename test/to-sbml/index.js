@@ -14,6 +14,10 @@ const first_model_result = fs.readFileSync(
   path.resolve(__dirname, './first_model_result.xml'),
   'utf8'
 );
+const two_compartment_model_result = fs.readFileSync(
+  path.resolve(__dirname, './two-compartment-model-result.xml'),
+  'utf8'
+);
 
 describe('Create SBML.', () => {
 
@@ -34,10 +38,10 @@ describe('Create SBML.', () => {
     let text = c.storage
       .get('two_comp')
       .toSBML();
-    // console.log(c.storage.get('two_comp'));
-    fs.writeFileSync('result.xml', text);
+
+    //fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
-    //text.should.xml.be.deep.equal(result);
+    text.should.xml.be.deep.equal(two_compartment_model_result);
   });
 
 });

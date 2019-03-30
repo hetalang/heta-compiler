@@ -3,14 +3,13 @@ const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
 const mathjsCMathML = require('mathjs-cmathml');
 math.import(mathjsCMathML);
-
 const _ = require('lodash');
-const { validator } = require('./utilities.js');
-const { SchemaValidationError } = require('../exceptions');
 
 class Expression {
-  constructor(q, skipChecking){ // string or object
-    if(!skipChecking) Expression.isValid(q);
+  constructor(q){ // string or object
+    if(typeof q!=='string' && !('expr' in q))
+      throw new Error('Wrong Expression input: ' + q);
+
     if(typeof q==='string'){
       this._exprInput = q;
       this._inputLang = 'qs3p';
@@ -20,8 +19,8 @@ class Expression {
         ? q.lang
         : 'qs3p';
     }
-    if(q.increment!==undefined) this.increment = q.increment;
     this.exprParsed = math.parse(this._exprInput);
+    if(q.units) this.units = q.units;
   }
   get expr(){
     return this.exprParsed.toString();
@@ -36,11 +35,6 @@ class Expression {
       .toCMathML()
       .toString();
   }
-  get toCMathMLWithIncrement(){ // the same as toCMathML() but take into account increment
-    return this.exprParsed
-      .toCMathML()
-      .toString();
-  }
   static get schemaName(){
     return 'Expression';
   }
@@ -48,17 +42,9 @@ class Expression {
     return 'Expression';
   }
   toQ(){
-    let res = _.pick(this, ['expr']);
-    if(this.increment) res.increment = true;
+    let res = {expr: this.expr};
+    if(this.units) res.units = this.units;
     return res;
-  }
-  static isValid(q){
-    let validate = validator
-      .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
-    let valid = validate(q);
-    if(!valid) {
-      throw new SchemaValidationError('Validation error!', validate.errors);
-    }
   }
 }
 
