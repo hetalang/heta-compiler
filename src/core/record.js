@@ -29,9 +29,7 @@ class Record extends _Scoped {
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
     }
 
-    if(q && q.units!==undefined){
-      this.units = q.units;
-    }
+    if(q && q.units!==undefined) this.units = q.units;
 
     return this;
   }
@@ -49,7 +47,10 @@ class Record extends _Scoped {
     res.units = this.units;
     return res;
   }
-  get unitsHash(){
+  SBMLUnits(){
+    return this.units;
+  }
+  unitsHash(){
     if(this.units){
       return uParser
         .parse(this.units)

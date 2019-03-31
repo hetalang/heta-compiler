@@ -11,7 +11,7 @@
         {% if record.title %}name="{{record.title}}"{% endif %}
         constant="{{ record.assignments.start_.size.className==='Const' }}"
         {% if record.assignments.start_.size.num!==undefined -%}size="{{record.assignments.start_.size.num}}"{%- endif %}
-        {% if record.units!==undefined -%}units="{{ record.unitsHash }}"{%- endif %}
+        {% if record.units!==undefined -%}units="{{ record.unitsHash() }}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
@@ -32,7 +32,7 @@
         constant="{{ record.assignments.start_.size.className==='Const' }}"
         boundaryCondition="{{ record.boundary===true or record.assignments.ode_!==undefined }}"
         {% if record.assignments.start_.size.num!==undefined -%}initialConcentration="{{record.assignments.start_.size.num}}"{%- endif %}
-        {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash}}"{%- endif %}
+        {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash(true)}}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
@@ -49,7 +49,7 @@
         {% if record.title %}name="{{record.title}}"{% endif %}
         constant="{{ record.assignments.start_.size.className==='Const' }}"
         {% if record.assignments.start_.size.num!==undefined -%}value="{{record.assignments.start_.size.num}}"{%- endif %}
-        {% if record.units!==undefined -%}units="{{record.unitsHash}}"{%- endif %}
+        {% if record.units!==undefined -%}units="{{record.unitsHash()}}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
@@ -170,11 +170,11 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
-  {%- set uniqueUnits = model.getUniqueUnits() -%}
-  {% if uniqueUnits|length > 0 %}
+  {%- set listOfUnitDefinitions = model.getListOfUnitDefinitions() -%}
+  {% if listOfUnitDefinitions|length > 0 %}
     <listOfUnitDefinitions>
-    {%- for record in uniqueUnits %}
-      {{ record.getUnitDefinition() }}
+    {%- for unitDefinition in listOfUnitDefinitions %}
+      {{ unitDefinition }}
     {%- endfor %}
   </listOfUnitDefinitions>
   {% endif %}

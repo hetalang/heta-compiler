@@ -45,7 +45,7 @@
         constant="false"
         boundaryCondition="false"
         
-        
+        substanceUnits="umole"
         metaid="two_comp.a0"
         >
         
@@ -59,7 +59,7 @@
         constant="false"
         boundaryCondition="false"
         initialConcentration="0"
-        
+        substanceUnits="uM_L"
         metaid="two_comp.s1"
         >
         
@@ -73,7 +73,7 @@
         constant="false"
         boundaryCondition="false"
         initialConcentration="0"
-        
+        substanceUnits="uM_L"
         metaid="two_comp.s2"
         >
         
@@ -277,6 +277,18 @@
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
+      <unitDefinition id="umole" name="umole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="uM_L" name="uM*L">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
       <unitDefinition id="uM_h" name="uM*h">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
@@ -287,11 +299,6 @@
       <unitDefinition id="h" name="h">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="0" multiplier="3600"/>
-  </listOfUnits>
-</unitDefinition>
-      <unitDefinition id="umole" name="umole">
-  <listOfUnits>
-    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
       <unitDefinition id="__h" name="1/h">

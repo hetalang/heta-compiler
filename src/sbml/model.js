@@ -4,7 +4,9 @@ const { Reaction } = require('../core/reaction');
 const { Expression } = require('../core/expression');
 const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
-require('./record');
+// require('./record');
+const { UnitsParser, qspUnits, qspToSbml } = require('units-parser');
+let uParser = new UnitsParser(qspUnits);
 
 Model.prototype.toSBML = function(){
   //if(!this.populated)
@@ -16,11 +18,21 @@ Model.prototype.toSBML = function(){
 };
 
 Model.prototype.getUniqueUnits = function(){
-  let quantities = this
-    .selectByInstance(Record)
-    .filter((record) => record.units);
-  let res = _.uniqBy(quantities, (record) => record.unitsHash);
-  return res;
+  return _.chain(this.selectByInstance(Record))
+    .filter((record) => record.SBMLUnits())
+    .uniqBy((record) => record.unitsHash(true))
+    .map((record) => record.SBMLUnits())
+    .value();
+};
+
+Model.prototype.getListOfUnitDefinitions = function(){
+  return this.getUniqueUnits()
+    .map((units) => {
+      return uParser
+        .parse(units)
+        .simplify()
+        .toXmlUnitDefinition(qspToSbml, {nameStyle: 'string'});
+    });
 };
 
 Model.prototype.getListOfRulesAssignment = function(){

@@ -1,6 +1,10 @@
 const { Record } = require('./record');
 const { exception, SchemaValidationError } = require('./utilities');
 const { Compartment } = require('./compartment');
+const { UnitsParser, qspUnits } = require('units-parser');
+let uParser = new UnitsParser(qspUnits);
+const _ = require('lodash');
+
 
 class Species extends Record {
   constructor(ind){
@@ -27,25 +31,27 @@ class Species extends Record {
     res.compartment = this.compartment;
     return res;
   }
-
-  populate(storage){
-    super.populate(storage);
-    if(!this.compartmentRef) {
-      exception(`compartmentRef is not set for ${this.index}`);
-    } else {
-      let target = storage.find((x) => x.id===this.compartmentRef);
-      if(!target) {
-        exception(`compartmentRef reffered to absent value "${this.compartmentRef}"`);
-      } else {
-        if(!(target instanceof Compartment)) {
-          exception(`compartmentRef reffered to not a compartment "${this.compartmentRef}"`);
-        }else{
-          this.compartment = target;
-        }
-      }
+  SBMLUnits(){
+    let compartmentUnits = _.get(this, 'compartmentObj.units');
+    if(compartmentUnits!==undefined && this.units!==undefined && !this.isAmount){
+      return this.units + '*' + compartmentUnits;
+    }else{
+      return this.units;
     }
   }
-
+  unitsHash(useSBMLUnits){ // get normal or substance units
+    if(!useSBMLUnits && this.units){
+      return uParser
+        .parse(this.units)
+        .toHash();
+    }else if(useSBMLUnits && this.SBMLUnits()){
+      return uParser
+        .parse(this.SBMLUnits())
+        .toHash();
+    }else{
+      return;
+    }
+  }
 }
 
 module.exports = {

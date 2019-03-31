@@ -48,15 +48,15 @@
   },
   {
     "class": "Species", "id": "a0", "space": "two_comp",
-    "compartment": "c0", "isAmount": true, "unit": "umole"
+    "compartment": "c0", "isAmount": true, "units": "umole"
   },
   {
     "class": "Species", "id": "s1", "space": "two_comp",
-    "compartment": "c1", "unit": "uM"
+    "compartment": "c1", "units": "uM"
   },
   {
     "class": "Species", "id": "s2", "space": "two_comp",
-    "compartment": "c2", "unit": "uM"
+    "compartment": "c2", "units": "uM"
   },
   {
     "class": "Reaction", "id": "r1", "space": "two_comp",

@@ -1,7 +1,8 @@
 const _ = require('lodash');
 const { _Simple } = require('./_simple');
 const { Record, Assignment } = require('./record');
-const { Switcher } = require('./switcher');
+const { Species } = require('./species');
+const expect = require('chai').expect;
 
 class Model extends _Simple {
   constructor(ind){
@@ -26,6 +27,10 @@ class Model extends _Simple {
     return [...this._storage]
       .filter((x) => x[1].space===this.id)
       .map((x) => x[1]);
+  }
+  getById(id){
+    return this.population
+      .find((scoped) => scoped.id===id);
   }
   selectByInstance(constructor){
     return this.population
@@ -82,6 +87,16 @@ class Model extends _Simple {
           scoped.assignments = {
             start_: new Assignment({size: unscoped.clone(), id: scoped.id})
           };
+        }
+      });
+    // add refernced objects for Species
+    this.selectByInstance(Species)
+      .forEach((species) => {
+        expect(species).to.have.property('compartment');
+        let compartment = this.getById(species.compartment);
+        if(compartment!==undefined){
+          expect(compartment).to.have.property('className', 'Compartment');
+          species.compartmentObj = compartment;
         }
       });
 
