@@ -5,7 +5,7 @@ const { Expression } = require('../core/expression');
 const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
 // require('./record');
-const { UnitsParser, qspUnits, qspToSbml } = require('units-parser');
+const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
 Model.prototype.toSBML = function(){
@@ -30,8 +30,7 @@ Model.prototype.getListOfUnitDefinitions = function(){
     .map((units) => {
       return uParser
         .parse(units)
-        .simplify()
-        .toXmlUnitDefinition(qspToSbml, {nameStyle: 'string'});
+        .toSbmlUnitDefinition({nameStyle: 'string', simplify: true});
     });
 };
 

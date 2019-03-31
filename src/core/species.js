@@ -48,8 +48,6 @@ class Species extends Record {
       return uParser
         .parse(this.SBMLUnits())
         .toHash();
-    }else{
-      return;
     }
   }
 }

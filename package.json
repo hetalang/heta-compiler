@@ -11,6 +11,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "ajv": "^6.6.1",
+    "heta-standard": "^0.1.0",
     "lodash": "^4.17.11",
     "markdown": "^0.5.0",
     "mathjs": "^5.4.0",
@@ -18,8 +19,7 @@
     "mathjs-translate": "^0.1.1",
     "nunjucks": "^3.1.4",
     "random-id": "^1.0.3",
-    "units-parser": "^0.2.4",
-    "heta-standard": "^0.1.0"
+    "units-parser": "^0.2.6"
   },
   "devDependencies": {
     "chai": "^4.2.0",
