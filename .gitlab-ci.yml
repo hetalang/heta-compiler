@@ -12,5 +12,6 @@ unit-test:
     - gitlab-access
   before_script:
     - npm i
+    - npm i git+ssh://git@gitlab.insysbio.com/dev-group/heta-standard.git
   script:
     - npm test
