@@ -1,5 +1,6 @@
 /* global describe, it*/
 const { Model } = require('../../src/core/model');
+const { SchemaValidationError } = require('../../src/validation-error');
 const should = require('chai').should();
 
 describe('Unit test for Model.', () => {
@@ -52,27 +53,27 @@ describe('Unit test for Model.', () => {
           timeRange: [1,2,3]
         }
       });
-    });
+    }, SchemaValidationError);
     should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           timeStep: -1
         }
       });
-    });
+    }, SchemaValidationError);
     should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           solver: 'xxx'
         }
       });
-    });
+    }, SchemaValidationError);
     should.Throw(() => {
       (new Model({id: 'm1'})).merge({
         method: {
           abstol: '1'
         }
       });
-    });
+    }, SchemaValidationError);
   });
 });

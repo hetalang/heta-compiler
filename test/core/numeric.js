@@ -1,6 +1,5 @@
 /* global describe, it */
 const { Numeric } = require('../../src/core/numeric');
-const { ValidationError, SchemaValidationError } = require('../../src/exceptions');
 const should = require('chai').should();
 
 describe('Unit test for Numeric.', () => {
@@ -23,16 +22,16 @@ describe('Unit test for Numeric.', () => {
   it('Wrong input', () => {
     should.Throw(() => {
       new Numeric();
-    });
+    }, Error);
     should.Throw(() => {
       new Numeric('a');
-    });
+    }, Error);
     should.Throw(() => {
       new Numeric('1');
     });
     should.Throw(() => {
       new Numeric({xxx: 12});
-    });
+    }, Error);
   });
 
   it('Conversion to Q.', () => {

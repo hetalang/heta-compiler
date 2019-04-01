@@ -1,6 +1,6 @@
 /* global describe, it */
 const { _Simple } = require('../../src/core/_simple');
-const { SchemaValidationError } = require('../../src/exceptions');
+const { SchemaValidationError } = require('../../src/validation-error');
 const should = require('chai').should();
 
 describe('Unit test for _Simple common methods', () => {
@@ -34,7 +34,7 @@ describe('Unit test for _Simple common methods', () => {
   it('Incorrect title property', () => {
     should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({title: {}});
-    });
+    }, SchemaValidationError);
   });
 
   it('Tags property', () => {
@@ -46,13 +46,13 @@ describe('Unit test for _Simple common methods', () => {
   it('Incorrect tags property 1', () => {
     should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({tags: {}});
-    });
+    }, SchemaValidationError);
   });
 
   it('Incorrect tags property 2', () => {
     should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({tags: [{}]});
-    });
+    }, SchemaValidationError);
   });
 
   it('Aux property', () => {
@@ -64,7 +64,7 @@ describe('Unit test for _Simple common methods', () => {
   it('Incorrect aux property', () => {
     should.Throw(() => {
       (new _Simple({id: 'ref1'})).merge({aux: []});
-    });
+    }, SchemaValidationError);
   });
 
   it('Notes property', () => {

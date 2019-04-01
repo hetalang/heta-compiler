@@ -1,10 +1,7 @@
 const { Record } = require('./record');
-const { exception, SchemaValidationError } = require('./utilities');
-const { Compartment } = require('./compartment');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
-
 
 class Species extends Record {
   constructor(ind){

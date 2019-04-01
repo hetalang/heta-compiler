@@ -1,5 +1,6 @@
 /* global describe, it */
 const { UnitDefinition } = require('../../src/core/unit-definition');
+const { SchemaValidationError } = require('../../src/validation-error');
 const should = require('chai').should();
 
 describe('Unit test for UnitDefinition', () => {
@@ -30,16 +31,16 @@ describe('Unit test for UnitDefinition', () => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: 'xxx'
       });
-    });
+    }, SchemaValidationError);
     should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: ['xxx']
       });
-    });
+    }, SchemaValidationError);
     should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: [{}]
       });
-    });
+    }, SchemaValidationError);
   });
 });

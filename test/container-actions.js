@@ -2,6 +2,7 @@
 const Container = require('../src/container');
 const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');
+const { IndexValidationError } = require('../src/validation-error');
 
 describe('Unit tests for Container import', () => {
   var c = new Container();
@@ -65,25 +66,25 @@ describe('Unit tests for Container import', () => {
   it('Throws wrong insert.', () => {
     should.Throw(() => {
       c.insert({}); // empty
-    });
+    }, IndexValidationError);
     should.Throw(() => {
       c.insert({ class: 'Record' }); // no id
-    });
+    }, IndexValidationError);
     should.Throw(() => {
       c.insert({ id: 'k0' }); // no class
-    });
+    }, Error);
   });
 
   it('Throws wrong update.', () => {
     should.Throw(() => {
       c.update({}); // empty
-    });
+    }, IndexValidationError);
     should.Throw(() => {
       c.update({id: 'k0'}); // id is not exists
-    });
+    }, Error);
     should.Throw(() => {
       c.update({id: 'k1', class: 'Species'}); // class property is not allowed
-    });
+    }, Error);
     c.storage.should.be.lengthOf(2);
   });
 
@@ -127,13 +128,13 @@ describe('Unit tests for Container import', () => {
   it('Throws wrond upsert', () => {
     should.Throw(() => {
       c.upsert({}); // empty
-    });
+    }, IndexValidationError);
     should.Throw(() => {
       c.upsert({class: 'Record'}); // no id
-    });
+    }, IndexValidationError);
     should.Throw(() => {
       c.upsert({id: 'k10'}); // no class and unknown id
-    });
+    }, Error);
   });
 
   it('delete existed element.', () => {
@@ -156,13 +157,13 @@ describe('Unit tests for Container import', () => {
   it('Throws wrong delete', () => {
     should.Throw(() => {
       c.delete({}); // empty
-    });
+    }, IndexValidationError);
     should.Throw(() => {
       c.delete({id: 'k3', space: 'default__', class: 'Record'}); // class is not allowed
-    });
+    }, Error);
     should.Throw(() => {
       c.delete({id: 'k10', space: 'default__'}); // deleting not existed element is not allowed
-    });
+    }, Error);
   });
 
   it('DELETE LATER', () => {

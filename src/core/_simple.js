@@ -1,15 +1,19 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { SchemaValidationError } = require('../exceptions');
+const { IndexValidationError, SchemaValidationError } = require('../validation-error');
 const _ = require('lodash');
-const expect = require('chai').expect;
+// const expect = require('chai').expect;
 
 /*
   Abstract class _Simple
 */
 class _Simple {
   constructor(ind){
-    expect(ind).has.property('id').be.a('string');
+    // expect(ind).has.property('id').be.a('string');
+    if(!ind)
+      throw new IndexValidationError(ind);
+    if(!ind.id || (typeof ind.id !== 'string'))
+      throw new IndexValidationError({id: ind.id});
     this._id = ind.id;
     this.tags = [];
     this.aux = {};
@@ -62,7 +66,7 @@ class _Simple {
     }
     let valid = validate(q);
     if(!valid) {
-      throw new SchemaValidationError('Validation error!', validate.errors);
+      throw new SchemaValidationError(validate.errors, this.schemaName);
     }
   }
   toQ(){

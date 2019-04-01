@@ -9,8 +9,6 @@ const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
 Model.prototype.toSBML = function(){
-  //if(!this.populated)
-  //  throw new Error(`Model ${this.id} must be populated before exporting to SBML.` );
   this.populate(); // populate before any export
   let SBMLText = nunjucks.render('sbml/template.xml.njk', {model: this});
 

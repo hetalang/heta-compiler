@@ -1,6 +1,5 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
-const { ValidationError, SchemaValidationError } = require('../../src/exceptions');
 const should = require('chai').should();
 
 describe('Unit test for Expression.', () => {
