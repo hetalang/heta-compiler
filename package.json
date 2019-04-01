@@ -11,7 +11,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "ajv": "^6.6.1",
-    "heta-standard": "^0.1.0",
+    "heta-standard": "git+ssh://git@gitlab.insysbio.com/dev-group/heta-standard.git",
     "lodash": "^4.17.11",
     "markdown": "^0.5.0",
     "mathjs": "^5.4.0",
