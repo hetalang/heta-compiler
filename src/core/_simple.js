@@ -1,6 +1,6 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { IndexValidationError, SchemaValidationError } = require('../validation-error');
+const { ConstructValidationError, SchemaValidationError } = require('../validation-error');
 const _ = require('lodash');
 // const expect = require('chai').expect;
 
@@ -11,9 +11,9 @@ class _Simple {
   constructor(ind){
     // expect(ind).has.property('id').be.a('string');
     if(!ind)
-      throw new IndexValidationError(ind);
+      throw new ConstructValidationError(ind);
     if(!ind.id || (typeof ind.id !== 'string'))
-      throw new IndexValidationError({id: ind.id});
+      throw new ConstructValidationError({id: ind.id});
     this._id = ind.id;
     this.tags = [];
     this.aux = {};

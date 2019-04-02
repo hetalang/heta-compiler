@@ -9,12 +9,22 @@ class SchemaValidationError extends Error {
   }
 }
 
-class IndexValidationError extends Error {
+class ConstructValidationError extends Error {
   constructor(index, fileName, lineNumber){
-    let message = 'Wrong Heta index '
+    let message = 'Wrong Heta args '
       + JSON.stringify(index);
     super(message, fileName, lineNumber);
-    this.name = 'IndexValidationError';
+    this.name = 'ConstructValidationError';
+    this.index = index;
+  }
+}
+
+class ActionError extends Error {
+  constructor(index, fileName, lineNumber){
+    let message = 'Wrong Heta args '
+      + JSON.stringify(index);
+    super(message, fileName, lineNumber);
+    this.name = 'ActionError';
     this.index = index;
   }
 }
@@ -27,6 +37,7 @@ class RefValidationError extends Error {
 
 module.exports = {
   SchemaValidationError,
-  IndexValidationError,
-  RefValidationError
+  ConstructValidationError,
+  RefValidationError,
+  ActionError
 };

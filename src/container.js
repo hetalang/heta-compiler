@@ -1,4 +1,4 @@
-const { IndexValidationError } = require('./validation-error');
+const { ActionError } = require('./validation-error');
 const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
@@ -37,9 +37,9 @@ class Container {
   insert(q){
     // check
     if(!q)
-      throw new IndexValidationError(q);
+      throw new ActionError(q);
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexValidationError({id: q.id});
+      throw new ActionError({id: q.id});
     expect(q).to.have.property('class').with.a('string');
     // check if class is in the list
     let selectedClass = this.classes[q.class];
@@ -55,9 +55,9 @@ class Container {
   }
   update(q){
     if(!q)
-      throw new IndexValidationError(q);
+      throw new ActionError(q);
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexValidationError({id: q.id});
+      throw new ActionError({id: q.id});
     expect(q).not.to.have.property('class');
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.get(index);
@@ -81,9 +81,9 @@ class Container {
   }
   delete(q){
     if(!q)
-      throw new IndexValidationError(q);
+      throw new ActionError(q);
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexValidationError({id: q.id});
+      throw new ActionError({id: q.id});
     expect(q).not.to.have.property('class');
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.delete(index);

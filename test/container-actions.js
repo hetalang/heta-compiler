@@ -2,7 +2,7 @@
 const Container = require('../src/container');
 const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');
-const { IndexValidationError } = require('../src/validation-error');
+const { ActionError } = require('../src/validation-error');
 
 describe('Unit tests for Container import', () => {
   var c = new Container();
@@ -66,10 +66,10 @@ describe('Unit tests for Container import', () => {
   it('Throws wrong insert.', () => {
     should.Throw(() => {
       c.insert({}); // empty
-    }, IndexValidationError);
+    }, ActionError);
     should.Throw(() => {
       c.insert({ class: 'Record' }); // no id
-    }, IndexValidationError);
+    }, ActionError);
     should.Throw(() => {
       c.insert({ id: 'k0' }); // no class
     }, Error);
@@ -78,7 +78,7 @@ describe('Unit tests for Container import', () => {
   it('Throws wrong update.', () => {
     should.Throw(() => {
       c.update({}); // empty
-    }, IndexValidationError);
+    }, ActionError);
     should.Throw(() => {
       c.update({id: 'k0'}); // id is not exists
     }, Error);
@@ -128,10 +128,10 @@ describe('Unit tests for Container import', () => {
   it('Throws wrond upsert', () => {
     should.Throw(() => {
       c.upsert({}); // empty
-    }, IndexValidationError);
+    }, ActionError);
     should.Throw(() => {
       c.upsert({class: 'Record'}); // no id
-    }, IndexValidationError);
+    }, ActionError);
     should.Throw(() => {
       c.upsert({id: 'k10'}); // no class and unknown id
     }, Error);
@@ -157,7 +157,7 @@ describe('Unit tests for Container import', () => {
   it('Throws wrong delete', () => {
     should.Throw(() => {
       c.delete({}); // empty
-    }, IndexValidationError);
+    }, ActionError);
     should.Throw(() => {
       c.delete({id: 'k3', space: 'default__', class: 'Record'}); // class is not allowed
     }, Error);
