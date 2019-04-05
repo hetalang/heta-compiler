@@ -11,9 +11,8 @@ const { ReferenceDefinition } = require('./core/reference-definition');
 const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 const { Const } = require('./core/const');
-// const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
-const expect = require('chai').expect;
+const { expect } = require('chai');
 const ModuleSystem = require('./module-system');
 
 class Container {
@@ -105,7 +104,7 @@ class Container {
     let ms = new ModuleSystem();
     ms.addModuleDeep(filepath, type);
     let arr = ms.integrate();
-    this.forEach((q) => this.load(q));
+    arr.forEach((q) => this.load(q));
 
     return this;
   }
