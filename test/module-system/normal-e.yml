@@ -1,0 +1,7 @@
+- action: insert
+  class: Record
+  id: k2
+  space: 'one'
+  assignments:
+    - start_: a*b
+    - evt1: k2+dose

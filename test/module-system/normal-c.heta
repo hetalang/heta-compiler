@@ -1,2 +1,7 @@
 k3 @quantity;
 k3 = 1.2;
+
+#import eee {
+  source: "./normal-e.yml",
+  type: "yml"
+};

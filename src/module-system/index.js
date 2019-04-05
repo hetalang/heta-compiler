@@ -1,8 +1,9 @@
-const { readFileSync } = require('fs');
 const path = require('path');
 const _ = require('lodash');
-const hetaParse = require('heta').parse;
-var TopoSort = require('topo-sort');
+const TopoSort = require('topo-sort');
+let HetaModule = require('./heta-module');
+let JSONModule = require('./json-module');
+let YAMLModule = require('./yaml-module');
 
 class ModuleSystem {
   constructor(){
@@ -12,7 +13,21 @@ class ModuleSystem {
   // parse single file without dependencies
   registerModule(filepath, type){
     // parse
-    let mdl = new HetaModule(filepath, type);
+    console.log(type);
+    console.log(filepath);
+    switch(type){
+      case 'heta':
+        var mdl = new HetaModule(filepath);
+        break;
+      case 'json':
+        mdl = new JSONModule(filepath);
+        break;
+      case 'yml':
+        mdl = new YAMLModule(filepath);
+        break;
+      default:
+        throw new Error(`Unknown type "${type}" for file "${filepath}" `);
+    }
     this.storage[filepath] = mdl;
     // set in graph
     let paths = mdl
@@ -72,27 +87,6 @@ function compose(obj, arr){
   });
 }
 
-class HetaModule{
-  constructor(filename, type){
-    let fileContent = readFileSync(filename, 'utf8');
-
-    this.filename = path.resolve(filename); // get abs path
-    this._content = fileContent; // temporal
-    this.type = type;
-    this.parsed = hetaParse(fileContent);
-
-    let absDirPath = path.dirname(this.filename);
-    this.parsed // replace relative paths by absolute ones
-      .filter((simple) => simple.action==='import')
-      .forEach((simple) => simple.source = path.resolve(absDirPath, simple.source));
-  }
-  getImportElements(){
-    return this.parsed
-      .filter((simple) => simple.action==='import');
-  }
-}
-
 module.exports = {
-  ModuleSystem,
-  HetaModule
+  ModuleSystem
 };

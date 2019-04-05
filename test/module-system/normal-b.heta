@@ -2,5 +2,11 @@ k2 @quantity;
 k2 = 1.2;
 
 #import ccc {
-  source: "./normal-c.heta"
+  source: "./normal-c.heta",
+  type: "heta"
+};
+
+#import ddd {
+  source: "./normal-d.json",
+  type: "json"
 };
