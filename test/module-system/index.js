@@ -1,4 +1,4 @@
-const { HetaModule, ModuleSystem } = require('../../src/module-system');
+const ModuleSystem = require('../../src/module-system');
 const path = require('path');
 
 let ms = new ModuleSystem();

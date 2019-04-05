@@ -87,6 +87,4 @@ function compose(obj, arr){
   });
 }
 
-module.exports = {
-  ModuleSystem
-};
+module.exports = ModuleSystem;

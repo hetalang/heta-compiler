@@ -14,6 +14,7 @@ const { Const } = require('./core/const');
 // const { validator } = require('./core/utilities.js');
 const _ = require('lodash');
 const expect = require('chai').expect;
+const ModuleSystem = require('./module-system');
 
 class Container {
   constructor(){
@@ -98,6 +99,14 @@ class Container {
   }
   loadMany(qArr){
     qArr.forEach((q) => this.load(q));
+    return this;
+  }
+  import(filepath, type){ // import external file
+    let ms = new ModuleSystem();
+    ms.addModuleDeep(filepath, type);
+    let arr = ms.integrate();
+    this.forEach((q) => this.load(q));
+
     return this;
   }
   toQArr(){
