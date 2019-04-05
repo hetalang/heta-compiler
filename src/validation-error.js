@@ -1,3 +1,4 @@
+// error for matching schema
 class SchemaValidationError extends Error {
   constructor(diagnostics = [], schemaName, fileName, lineNumber){
     let message = `Validation not passed for ${schemaName}\n`
@@ -9,6 +10,7 @@ class SchemaValidationError extends Error {
   }
 }
 
+// error for wrong constructor args
 class ConstructValidationError extends Error {
   constructor(index, fileName, lineNumber){
     let message = 'Wrong Heta args '
@@ -29,9 +31,11 @@ class ActionError extends Error {
   }
 }
 
+// error for checking internal references
 class RefValidationError extends Error {
   constructor(message, fileName, lineNumber){
     super(message, fileName, lineNumber);
+    this.name = 'RefValidationError';
   }
 }
 

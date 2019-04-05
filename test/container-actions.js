@@ -4,7 +4,7 @@ const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');
 const { ActionError } = require('../src/validation-error');
 
-describe('Unit tests for Container import', () => {
+describe('Unit tests for Container load', () => {
   var c = new Container();
 
   it('Insert Record k1', () => {

@@ -90,14 +90,14 @@ class Container {
 
     return targetComponent;
   }
-  import(q){
+  load(q){
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
     // do action
     return this[actionName](q);
   }
-  importMany(qArr){
-    qArr.forEach((q) => this.import(q));
+  loadMany(qArr){
+    qArr.forEach((q) => this.load(q));
     return this;
   }
   toQArr(){

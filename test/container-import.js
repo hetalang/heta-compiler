@@ -3,7 +3,7 @@ const Container = require('../src/container');
 const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');
 
-describe('Unit tests for Container import', () => {
+describe('Unit tests for Container load', () => {
   var c;
   c = new Container();
 
@@ -17,7 +17,7 @@ describe('Unit tests for Container import', () => {
       suffix: /
     }
     */
-    let res = c.import({
+    let res = c.load({
       action: 'insert',
       class: 'ReferenceDefinition',
       id: 'pmid2',

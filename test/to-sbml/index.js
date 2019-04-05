@@ -23,7 +23,7 @@ describe('Create SBML.', () => {
 
   it('First model', () => {
     let c = new Container();
-    c.importMany(firstModel);
+    c.loadMany(firstModel);
     let text = c.storage
       .get('first')
       .toSBML();
@@ -34,7 +34,7 @@ describe('Create SBML.', () => {
 
   it('Compartment model', () => {
     let c = new Container();
-    c.importMany(compartmentModel);
+    c.loadMany(compartmentModel);
     let text = c.storage
       .get('two_comp')
       .toSBML();
