@@ -13,8 +13,6 @@ class ModuleSystem {
   // parse single file without dependencies
   registerModule(filepath, type){
     // parse
-    console.log(type);
-    console.log(filepath);
     switch(type){
       case 'heta':
         var mdl = new HetaModule(filepath);

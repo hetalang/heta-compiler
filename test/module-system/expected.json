@@ -1,0 +1,76 @@
+[
+  {
+    "id": "k1",
+    "action": "upsert",
+    "class": "Quantity",
+    "title": "hello world"
+  },
+  {
+    "id": "k2",
+    "action": "upsert",
+    "class": "Quantity"
+  },
+  {
+    "id": "k2",
+    "action": "upsert",
+    "size": 1.2
+  },
+  {
+    "id": "k3",
+    "action": "upsert",
+    "class": "Quantity"
+  },
+  {
+    "id": "k3",
+    "action": "upsert",
+    "size": 1.2
+  },
+  {
+    "action": "insert",
+    "class": "Record",
+    "id": "k2",
+    "space": "one",
+    "assignments": [
+      {
+        "start_": "a*b"
+      },
+      {
+        "evt1": "k2+dose"
+      }
+    ]
+  },
+  {
+    "class": "Record",
+    "id": "k1",
+    "space": "one",
+    "assignments": {
+      "start_": {
+        "size": 1.1
+      }
+    }
+  },
+  {
+    "id": "k3",
+    "action": "upsert",
+    "class": "Quantity"
+  },
+  {
+    "id": "k3",
+    "action": "upsert",
+    "size": 1.2
+  },
+  {
+    "action": "insert",
+    "class": "Record",
+    "id": "k2",
+    "space": "one",
+    "assignments": [
+      {
+        "start_": "a*b"
+      },
+      {
+        "evt1": "k2+dose"
+      }
+    ]
+  }
+]
