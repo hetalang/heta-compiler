@@ -1,0 +1,4 @@
+k0 := 1.1;
+#import xxx {
+  source: "./self-import.heta"
+};

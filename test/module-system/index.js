@@ -4,8 +4,18 @@ const ModuleSystem = require('../../src/module-system');
 const path = require('path');
 // const { writeFileSync } = require('fs');
 const expected = require('./expected');
+const noImportOutput = require('./no-import');
 
-let ms = new ModuleSystem();
+describe('ModuleSystem without import.', () => {
+  let ms = new ModuleSystem();
+
+  it('Add module.', () => {
+    let filepath = path.join(__dirname, 'no-import.heta');
+    let mdl = ms.addModuleDeep(filepath, 'heta');
+    mdl.parsed.should.be.deep.equal(noImportOutput);
+  });
+
+});
 
 describe('Run normal ModuleSystem.', () => {
   let ms;

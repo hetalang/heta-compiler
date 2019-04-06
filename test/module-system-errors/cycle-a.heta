@@ -1,0 +1,7 @@
+// dependences: a <- b, b <- a, b <- c
+#import aaa {
+  source: "./cycle-b.heta",
+  type: heta
+};
+
+x := 1;

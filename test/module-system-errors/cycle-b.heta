@@ -1,0 +1,11 @@
+#import bbb {
+  source: "./cycle-a.heta",
+  type: heta
+};
+
+#import ccc {
+  source: "./cycle-c.heta",
+  type: heta
+};
+
+y := x;
