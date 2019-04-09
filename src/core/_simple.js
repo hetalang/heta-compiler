@@ -2,14 +2,12 @@ const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 const { ConstructValidationError, SchemaValidationError } = require('../validation-error');
 const _ = require('lodash');
-// const expect = require('chai').expect;
 
 /*
   Abstract class _Simple
 */
 class _Simple {
   constructor(ind){
-    // expect(ind).has.property('id').be.a('string');
     if(!ind)
       throw new ConstructValidationError(ind);
     if(!ind.id || (typeof ind.id !== 'string'))

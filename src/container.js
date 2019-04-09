@@ -11,7 +11,6 @@ const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const _ = require('lodash');
-const { expect } = require('chai');
 const ModuleSystem = require('./module-system');
 
 class Container {
@@ -39,11 +38,12 @@ class Container {
       throw new ActionError(q);
     if(!q.id || (typeof q.id !== 'string'))
       throw new ActionError({id: q.id});
-    expect(q).to.have.property('class').with.a('string');
+    if(!q.class || typeof q.class !== 'string')
+      throw new TypeError(`No class or unsuitable class for "insert": ${q.class}`);
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
-      throw new Error(
+      throw new TypeError(
         `Unknown "class" ${q.class} for component id: "${q.id}".`
       );
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
@@ -59,7 +59,8 @@ class Container {
       throw new ActionError(q);
     if(!q.id || (typeof q.id !== 'string'))
       throw new ActionError({id: q.id});
-    expect(q).not.to.have.property('class');
+    if(q.class)
+      throw new TypeError(`Class property is not allowed for "update": ${q.class}`);
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.get(index);
 
@@ -85,7 +86,8 @@ class Container {
       throw new ActionError(q);
     if(!q.id || (typeof q.id !== 'string'))
       throw new ActionError({id: q.id});
-    expect(q).not.to.have.property('class');
+    if(q.class)
+      throw new TypeError(`Class property is not allowed for "delete": ${q.class}`);
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.delete(index);
     if(!targetComponent) // if targetComponent===false, element is not exist

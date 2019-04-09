@@ -1,5 +1,5 @@
 const { Record } = require('./record');
-const { RefValidationError } = require('../validation-error'); // not working
+const { RefValidationError } = require('../validation-error');
 const { Species } =require('./species');
 
 class Process extends Record {

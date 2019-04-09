@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const expect = require('chai').expect;
 
 class Numeric {
   constructor(q){

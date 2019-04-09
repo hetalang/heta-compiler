@@ -1,6 +1,5 @@
 const _ = require('lodash');
 const { ConstructValidationError } = require('../validation-error');
-// const expect = require('chai').expect;
 const { _Simple } = require('./_simple');
 
 /*
@@ -9,7 +8,6 @@ const { _Simple } = require('./_simple');
 class _Scoped extends _Simple {
   constructor(ind){
     super(ind);
-    // expect(ind).to.have.property('space').with.a('string');
     if(!ind.space || (typeof ind.space !== 'string'))
       throw new ConstructValidationError({id: ind.id, space: ind.space});
     this._space = ind.space;

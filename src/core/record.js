@@ -4,7 +4,6 @@ const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
-const expect = require('chai').expect;
 const math = require('mathjs');
 
 class Record extends _Scoped {
@@ -63,7 +62,9 @@ class Record extends _Scoped {
 
 class Assignment {
   constructor(q){
-    expect(q.size.className).to.be.oneOf(['Numeric', 'Expression', 'Const']);
+    // check that size is correct Object
+    if(['Numeric', 'Expression', 'Const'].indexOf(q.size.className)===-1)
+      throw new Error(`Size of assignment ${JSON.stringify(q)} must be one of ['Numeric', 'Expression', 'Const'].`);
     this.size = q.size;
     if(q.increment!==undefined) this.increment = q.increment;
     if(q.id!==undefined) this.id = q.id;
