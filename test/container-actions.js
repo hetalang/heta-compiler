@@ -17,7 +17,7 @@ describe('Unit tests for Container load', () => {
         start_: {size: {num: 1e-3}}
       }
     });
-    c.storage.should.be.lengthOf(1);
+    c.should.be.lengthOf(1);
     simple.should.have.property('index', 'default__.k1');
   });
 
@@ -31,7 +31,7 @@ describe('Unit tests for Container load', () => {
         start: {size: {num: 1.2}}
       }
     });
-    c.storage.should.be.lengthOf(2);
+    c.should.be.lengthOf(2);
     simple.should.have.property('index', 'one.k2');
   });
 
@@ -44,7 +44,7 @@ describe('Unit tests for Container load', () => {
       },
       units: '1/h'
     });
-    c.storage.should.be.lengthOf(2);
+    c.should.be.lengthOf(2);
     simple.should.have.nested.property('units', '1/h');
     simple.should.have.property('title', 'k1 title');
   });
@@ -58,7 +58,7 @@ describe('Unit tests for Container load', () => {
         start_: {size: {num: 1.4}}
       }
     });
-    c.storage.should.be.lengthOf(2);
+    c.should.be.lengthOf(2);
     simple.should.have.nested.property('assignments.start_.size.num', 1.4);
     simple.should.not.have.property('title');
   });
@@ -85,7 +85,7 @@ describe('Unit tests for Container load', () => {
     should.Throw(() => {
       c.update({id: 'k1', class: 'Species'}); // class property is not allowed
     }, Error);
-    c.storage.should.be.lengthOf(2);
+    c.should.be.lengthOf(2);
   });
 
   it('upsert acts like insert if class presented.', () => {
@@ -104,7 +104,7 @@ describe('Unit tests for Container load', () => {
     });
     simple.should.have.property('title', 'k3 updated title');
     simple.should.not.have.property('notes');
-    c.storage.should.be.lengthOf(3);
+    c.should.be.lengthOf(3);
   });
 
   it('upsert acts like update if no class presented.', () => {
@@ -120,7 +120,7 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k4 updated title'
     });
-    c.storage.should.be.lengthOf(4);
+    c.should.be.lengthOf(4);
     simple.should.have.property('title', 'k4 updated title');
     simple.should.have.property('notes', 'k4 notes');
   });
@@ -144,14 +144,13 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k5 title',
     });
-    c.storage.should.be.lengthOf(5);
-    let simple = c.delete({
+    c.should.be.lengthOf(5);
+    let res = c.delete({
       id: 'k5',
       space: 'default__',
     });
-    simple.should.be.instanceOf(_Simple);
-    simple.should.have.property('title', 'k5 title');
-    c.storage.should.be.lengthOf(4);
+    res.should.be.a('boolean').and.true;
+    c.should.be.lengthOf(4);
   });
 
   it('Throws wrong delete', () => {
@@ -167,7 +166,7 @@ describe('Unit tests for Container load', () => {
   });
 
   it('DELETE LATER', () => {
-    c.storage.should.be.lengthOf(4);
+    c.should.be.lengthOf(4);
     // console.log(c.storage);
   });
 });

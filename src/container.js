@@ -4,7 +4,6 @@ const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
 const { Model } = require('./core/model');
-const { Storage } = require('./storage');
 const { Process } = require('./core/process');
 const { Switcher } = require('./core/switcher');
 const { ReferenceDefinition } = require('./core/reference-definition');
@@ -17,7 +16,7 @@ const ModuleSystem = require('./module-system');
 
 class Container {
   constructor(){
-    this.storage = new Storage();
+    this.storage = new Map();
     this.classes = {
       // scoped classes
       Record,
@@ -49,7 +48,9 @@ class Container {
       );
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
-    this.storage.setByIndex(simple);
+    // this.storage.setByIndex(simple);
+    this.storage.set(simple.index, simple);
+    if(simple instanceof Model) simple._storage = this.storage;
 
     return simple;
   }
@@ -87,8 +88,10 @@ class Container {
     expect(q).not.to.have.property('class');
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.delete(index);
+    if(!targetComponent) // if targetComponent===false, element is not exist
+      throw new Error(`Element with index "${index}" is not exist and cannot be deleted.`);
 
-    return targetComponent;
+    return targetComponent; // true or false
   }
   load(q){
     // estimate action, default is upsert
@@ -114,6 +117,9 @@ class Container {
   }
   toJSON(){
     return JSON.stringify(this.toQArr(), null, 2);
+  }
+  get length(){
+    return this.storage.size;
   }
 }
 

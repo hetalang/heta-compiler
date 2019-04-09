@@ -25,6 +25,6 @@ describe('Unit tests for Container load', () => {
       suffix: '/'
     });
     res.should.be.instanceOf(_Simple);
-    c.storage.should.be.lengthOf(1);
+    c.should.be.lengthOf(1);
   });
 });
