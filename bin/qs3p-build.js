@@ -4,7 +4,7 @@
 const program = require('commander');
 const fs = require('fs');
 const path = require('path');
-const Declaration = require('../src/declaration');
+const Builder = require('../src/builder');
 const {safeLoad} = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 
 program
@@ -31,9 +31,9 @@ let index = searches
   .indexOf(true);
 
 if(index!==-1){
-  let declarationArg = {id: 'test'};
-  let d = new Declaration(
-    declarationArg, // target folder
+  let declaration = {id: 'test'};
+  let d = new Builder(
+    declaration, // target folder
     targetDir
   );
   d.run((err) => {

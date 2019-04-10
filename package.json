@@ -27,7 +27,8 @@
     "random-id": "^1.0.3",
     "semver": "^6.0.0",
     "topo-sort": "^1.0.0",
-    "units-parser": "^0.2.6"
+    "units-parser": "^0.2.6",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -5,14 +5,16 @@ const ajv = new Ajv({ useDefaults: true });//.addSchema(declarationSchema);
 const { SchemaValidationError } = require('./validation-error');
 const semver = require('semver'); // for future check of buildVersion
 const { version } = require('../package');
+const Container = require('./container');
+const winston = require('winston');
 
-class Declaration{
+class Builder{
   constructor(decl, coreDirname='.', distDirname = 'dist', metaDirname = 'meta'){
     // check based on schema
     let validate = ajv.compile(declarationSchema);
     let valid = validate(decl);
     if(!valid) {
-      throw new SchemaValidationError(validate.errors, 'Declaration');
+      throw new SchemaValidationError(validate.errors, 'Builder');
     }
 
     // verssion check
@@ -25,15 +27,21 @@ class Declaration{
     this._coreDirname = path.resolve(coreDirname);
     this._distDirname = path.resolve(coreDirname, distDirname);
     this._metaDirname = path.resolve(coreDirname, metaDirname);
+
+    // create container
+    this.container = new Container();
   }
   // starts async build
   run(callback){
     callback(null);
   }
-  // start sync build
-  runSync(){
-
+  // import
+  runImports(callback){
+    callback(null);
+  }
+  runExports(callback){
+    callback(null);
   }
 }
 
-module.exports = Declaration;
+module.exports = Builder;
