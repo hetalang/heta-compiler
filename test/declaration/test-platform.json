@@ -1,24 +1,23 @@
 {
   "id": "test",
-  "titel": "Test",
+  "title": "Test",
   "notes": "Test platform",
   "version": "0.1.0",
   "copyright": "InSysBio",
-  "buildVersion": "^0.3",
+  "builderVersion": "^0.3",
   "aux": {},
   "options": {
     "debuggingMode": true,
-    "syncMode": true,
-    "logFilename": "logs.txt"
+    "syncMode": false,
+    "logs": "logs.txt"
   },
   "scripts": {
     "afterInit": "script0.js",
-    "afterLoad": "script2.js",
-    "afterExport": "script3.js"
+    "afterImports": "script2.js",
+    "afterExports": "script3.js"
   },
-  "loadModules": [
+  "imports": [
     {
-      "ignore": false,
       "class": "HetaModule",
       "filename": "src/model.heta"
     },
@@ -29,11 +28,17 @@
     },
     {
       "ignore": true,
+      "ignoreDeps": true,
       "class": "SlvModule",
       "filename": "src/model.slv"
     }
   ],
-  "export": [
-
+  "exports": [
+    {
+      "ignore": false,
+      "format": "sbml",
+      "filename": "one.xml",
+      "model": "one"
+    }
   ]
 }

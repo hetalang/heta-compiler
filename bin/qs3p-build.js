@@ -16,7 +16,6 @@ program
   .option('-i, --index-file <filename>', 'platform index file, search through extensions: ["", ".json", ".json5", ".yml"]', 'platform')
   .parse(process.argv);
 
-
 // set environment as 'development', it requires only for winston
 // process.env.NODE_ENV = 'development';
 
@@ -32,7 +31,7 @@ let index = searches
   .indexOf(true);
 
 if(index!==-1){
-  let declarationArg = {};
+  let declarationArg = {id: 'test'};
   let d = new Declaration(
     declarationArg, // target folder
     targetDir

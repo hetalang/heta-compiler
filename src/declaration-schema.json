@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "required": ["id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string"},
+    "title": {"type": "string"},
+    "notes": {"type": "string"},
+    "version": {"type": "string"},
+    "copyright": {"type": "string"},
+    "builderVersion": {"type": "string", "default": "^0.3.0"},
+    "aux": {"type": "object"},
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "debuggingMode": {"type": "boolean", "default": false},
+        "syncMode": {"type": "boolean", "default": false},
+        "logs": {"type": "string"}
+      }
+    },
+    "scripts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "afterInit": {"type": "string"},
+        "afterImports": {"type": "string"},
+        "afterExports": {"type": "string"}
+      }
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["class", "filename"],
+        "additionalProperties": false,
+        "properties": {
+          "ignore": {"type": "boolean", "default": false},
+          "class": {"type": "string", "enum": ["HetaModule", "YAMLModule", "SlvModule", "JSONModule", "SBMLModule"]},
+          "filename": {"type": "string"},
+          "ignoreDeps": {"type": "boolean", "default": false}
+        }
+      }
+    },
+    "exports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["format", "filename"],
+        "additionalProperties": false,
+        "properties": {
+          "ignore": {"type": "boolean", "default": false},
+          "format": {"type": "string", "enum": ["sbml", "slv", "simbio", "rxode", "mrgsolve"]},
+          "filename": {"type": "string"},
+          "model": {"type": "string"}
+        }
+      }
+    }
+  }
+}
