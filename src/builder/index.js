@@ -2,10 +2,10 @@ const path = require('path');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true });//.addSchema(declarationSchema);
-const { SchemaValidationError } = require('./validation-error');
+const { SchemaValidationError } = require('../validation-error');
 const semver = require('semver'); // for future check of buildVersion
-const { version } = require('../package');
-const Container = require('./container');
+const { version } = require('../../package');
+const Container = require('../container');
 const winston = require('winston');
 
 class Builder{
