@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true });//.addSchema(declarationSchema);
@@ -9,6 +9,7 @@ const { version } = require('../../package');
 const Container = require('../container');
 const ModuleSystem = require('../module-system');
 const winston = require('winston');
+
 let logger = winston.createLogger({
   //level: logLevel,
   format: winston.format.combine(
@@ -84,7 +85,7 @@ class Builder{
     let model = this.container.storage.get(exportItem.model); // required get method
     //console.log(model);
     let SBMLText = model.toSBML();
-    fs.writeFileSync(absFilename, SBMLText);
+    fs.outputFileSync(absFilename, SBMLText);
   }
 }
 

@@ -18,6 +18,7 @@
     "ajv": "^6.6.1",
     "commander": "^2.20.0",
     "download-git-repo": "^1.1.0",
+    "fs-extra": "^7.0.1",
     "lodash": "^4.17.11",
     "markdown": "^0.5.0",
     "mathjs": "^5.4.0",

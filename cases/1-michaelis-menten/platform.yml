@@ -1,0 +1,11 @@
+id: mm
+builderVersion: ^0.3
+options:
+  logLevel: info
+imports:
+  - type: heta
+    filename: src/index.heta
+exports:
+  - format: sbml
+    filename: mm.xml
+    model: mm
