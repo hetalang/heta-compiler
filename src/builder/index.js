@@ -55,23 +55,47 @@ class Builder{
   }
   // starts async build
   run(callback){
+    let errorFlag = false;
     logger.info(`Start importing of modules, total: ${this.imports.length}.`);
     this.imports.forEach((importItem) => this.import(importItem));
     logger.info('Importing finished.');
     logger.info(`Start exporting to files, total: ${this.exports.length}.`);
-    this.exports.forEach((exportItem) => this.export(exportItem));
+    this.exports.forEach((exportItem) => {
+      try{
+        this.export(exportItem);
+      }catch(e){
+        errorFlag = true;
+        this.errorCatcher(e);
+      }
+    });
     logger.info('Exporting finished.');
-    logger.info('ALL DONE.');
-    callback(null);
+    if(errorFlag){
+      let e = new Error('Critical errors when build, see logs.');
+      callback(e);
+    }else{
+      callback(null);
+    }
   }
   // import
   import(importItem){
     logger.info(`Importing module "${importItem.filename}" of type "${importItem.type}"...`);
     let ms = new ModuleSystem();
     let absFilename = path.join(this._coreDirname, importItem.filename);
-    ms.addModuleDeep(absFilename, importItem.type);
-    let arr = ms.integrate();
-    arr.forEach((q) => this.container.load(q));
+    let arr = [];
+    try{
+      ms.addModuleDeep(absFilename, importItem.type);
+      arr = ms.integrate();
+    }catch(e){
+      this.errorCatcher(e);
+    }
+
+    arr.forEach((q) => {
+      try{
+        this.container.load(q);
+      }catch(e){
+        this.errorCatcher(e);
+      }
+    });
     // debugging
     let j1 = JSON.stringify(arr, null, 2);
     let j2 = JSON.stringify(this.container.toQArr(), null, 2);
@@ -83,9 +107,15 @@ class Builder{
     logger.info(`Exporting to file "${exportItem.filename}" of type "${exportItem.format}"...`);
     let absFilename = path.join(this._distDirname, exportItem.filename);
     let model = this.container.storage.get(exportItem.model); // required get method
-    //console.log(model);
+    if(model===undefined){
+      throw new Error(`Required model "${exportItem.model}" is not found in container and will not be exported.`);
+    }
     let SBMLText = model.toSBML();
     fs.outputFileSync(absFilename, SBMLText);
+  }
+  errorCatcher(error){
+    logger.error(`[${error.name}] ${error.message}`);
+    if(this.options.debuggingMode) throw error;
   }
 }
 

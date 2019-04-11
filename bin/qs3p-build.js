@@ -16,11 +16,7 @@ program
   .option('-i, --index-file <filename>', 'platform index file, search through extensions: ["", ".json", ".json5", ".yml"]', 'platform')
   .parse(process.argv);
 
-// set environment as 'development', it requires only for winston
-// process.env.NODE_ENV = 'development';
-
 let targetDir = path.resolve(program.args[0] || '.');
-// console.log(targetDir);
 
 // search index file
 let searches = ['', '.json', '.json5', '.yml']
@@ -39,17 +35,19 @@ if(index!==-1){
   );
   d.run((err) => {
     if(err){
-      console.log('Critical building errors.', err.message);
-      console.log('STOP.');
+      console.log('STOP!', err.message);
       process.exit(1);
     }else{
       // console.log(d);
-      console.log('OK.');
+      console.log('OK! ALL DONE.');
       process.exit(0);
     }
   });
 }else{
-  console.log('Declaration file is not found in\n', JSON.stringify(searches, null, 2));
-  console.log('STOP.');
+  console.log(
+    'STOP.',
+    'Declaration file is not found in\n',
+    JSON.stringify(searches, null, 2)
+  );
   process.exit(1);
 }
