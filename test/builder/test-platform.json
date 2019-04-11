@@ -9,7 +9,8 @@
   "options": {
     "debuggingMode": true,
     "syncMode": false,
-    "logs": "logs.txt"
+    "logs": "logs.txt",
+    "logLevel": "info"
   },
   "scripts": {
     "afterInit": "script0.js",
@@ -18,18 +19,18 @@
   },
   "imports": [
     {
-      "class": "HetaModule",
+      "type": "heta",
       "filename": "src/model.heta"
     },
     {
       "ignore": true,
-      "class": "YAMLModule",
+      "type": "yaml",
       "filename": "src/model.yml"
     },
     {
       "ignore": true,
       "ignoreDeps": true,
-      "class": "SlvModule",
+      "type": "slv",
       "filename": "src/model.slv"
     }
   ],

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const firstModel = require('./first_model');
 const compartmentModel = require('./compartment-model');
-const Container = require('../../src');
+const { Container } = require('../../src');
 
 const chai = require('chai');
 chai.should();

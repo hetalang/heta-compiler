@@ -4,7 +4,7 @@
 const program = require('commander');
 const fs = require('fs');
 const path = require('path');
-const Builder = require('../src/builder');
+const { Builder } = require('../src');
 const {safeLoad} = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 
 program
@@ -31,24 +31,25 @@ let index = searches
   .indexOf(true);
 
 if(index!==-1){
-  let declaration = {id: 'test'};
+  let declarationText = fs.readFileSync(searches[index]);
+  let declaration = safeLoad(declarationText);
   let d = new Builder(
     declaration, // target folder
     targetDir
   );
   d.run((err) => {
-    console.log('Building...');
     if(err){
       console.log('Critical building errors.', err.message);
       console.log('STOP.');
       process.exit(1);
     }else{
+      // console.log(d);
       console.log('OK.');
       process.exit(0);
     }
   });
 }else{
-  console.log('Index file is not found in\n', JSON.stringify(searches, null, 2));
+  console.log('Declaration file is not found in\n', JSON.stringify(searches, null, 2));
   console.log('STOP.');
   process.exit(1);
 }

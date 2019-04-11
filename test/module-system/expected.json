@@ -2,28 +2,29 @@
   {
     "id": "k1",
     "action": "upsert",
-    "class": "Quantity",
+    "class": "Record",
+    "space": "one",
     "title": "hello world"
   },
   {
     "id": "k2",
     "action": "upsert",
-    "class": "Quantity"
+    "class": "Const"
   },
   {
     "id": "k2",
     "action": "upsert",
-    "size": 1.2
+    "num": 1.2
   },
   {
     "id": "k3",
     "action": "upsert",
-    "class": "Quantity"
+    "class": "Const"
   },
   {
     "id": "k3",
     "action": "upsert",
-    "size": 1.2
+    "num": 1.2
   },
   {
     "action": "insert",
@@ -52,12 +53,12 @@
   {
     "id": "k3",
     "action": "upsert",
-    "class": "Quantity"
+    "class": "Const"
   },
   {
     "id": "k3",
     "action": "upsert",
-    "size": 1.2
+    "num": 1.2
   },
   {
     "action": "insert",

@@ -1,6 +1,6 @@
 // dependences: a <- b, a <- c, b <- c
 
-k1 @quantity {
+k1 @Record $one {
   title: hello world
 };
 

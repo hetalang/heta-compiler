@@ -16,8 +16,10 @@
       "properties": {
         "debuggingMode": {"type": "boolean", "default": false},
         "syncMode": {"type": "boolean", "default": false},
-        "logs": {"type": "string"}
-      }
+        "logs": {"type": "string"},
+        "logLevel": {"type": "string", "enum": ["error", "warn", "info", "verbose", "debug", "silly"]}
+      },
+      "default": {"debuggingMode": false, "syncMode": false, "logLevel": "info"}
     },
     "scripts": {
       "type": "object",
@@ -32,11 +34,11 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["class", "filename"],
+        "required": ["type", "filename"],
         "additionalProperties": false,
         "properties": {
           "ignore": {"type": "boolean", "default": false},
-          "class": {"type": "string", "enum": ["HetaModule", "YAMLModule", "SlvModule", "JSONModule", "SBMLModule"]},
+          "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml"]},
           "filename": {"type": "string"},
           "ignoreDeps": {"type": "boolean", "default": false}
         }

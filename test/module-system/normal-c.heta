@@ -1,4 +1,4 @@
-k3 @quantity;
+k3 @Const;
 k3 = 1.2;
 
 #import eee {

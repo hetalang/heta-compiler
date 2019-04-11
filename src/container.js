@@ -11,7 +11,6 @@ const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const _ = require('lodash');
-const ModuleSystem = require('./module-system');
 
 class Container {
   constructor(){
@@ -105,16 +104,9 @@ class Container {
     qArr.forEach((q) => this.load(q));
     return this;
   }
-  import(filepath, type){ // import external file
-    let ms = new ModuleSystem();
-    ms.addModuleDeep(filepath, type);
-    let arr = ms.integrate();
-    arr.forEach((q) => this.load(q));
-
-    return this;
-  }
   toQArr(){
-    let qArr = this.storage.map((obj) => obj.toQ());
+    let qArr = [...this.storage]
+      .map((obj) => obj[1].toQ());
     return qArr;
   }
   toJSON(){

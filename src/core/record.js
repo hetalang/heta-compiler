@@ -16,7 +16,7 @@ class Record extends _Scoped {
 
     if(q && q.assignments){ // add new assignments from q
       let newAssignments = _.mapValues(q.assignments, (x) => {
-        if(typeof x.size === 'number' || 'num' in x.size){
+        if(typeof x.size === 'number' || x.size.num!==undefined){
           var size = new Numeric(x.size);
         }else if(typeof x.size === 'string' || 'expr' in x.size){
           size = new Expression(x.size);
