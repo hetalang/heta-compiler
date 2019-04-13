@@ -26,6 +26,7 @@ describe('Create SBML.', () => {
     c.loadMany(firstModel);
     let text = c.storage
       .get('first')
+      .populate()
       .toSBML();
     //fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
@@ -37,6 +38,7 @@ describe('Create SBML.', () => {
     c.loadMany(compartmentModel);
     let text = c.storage
       .get('two_comp')
+      .populate()
       .toSBML();
 
     // fs.writeFileSync('result.xml', text);

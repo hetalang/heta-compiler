@@ -53,13 +53,16 @@ class Builder{
     // create container
     this.container = new Container();
     logger.info(`Builder initialized with directory "${this._coreDirname}".`);
+
+    this.errorFlag = false;
   }
   // starts async build
   run(callback){
-    let errorFlag = false;
-
+    this.errorFlag = false;
     logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
-    this.importModules.forEach((importItem) => this.import(importItem));
+    this.importModules.forEach((importItem) => {
+      this.import(importItem);
+    });
     logger.info('Importing finished.');
 
     let exportElements = [...this.container.storage]
@@ -73,14 +76,14 @@ class Builder{
         let codeText = exportItem.do();
         fs.outputFileSync(absFilename, codeText);
       }catch(e){
-        errorFlag = true;
+        this.errorFlag = true;
         this.errorCatcher(e, 'Export will be skipped.');
       }
     });
     logger.info('Exporting finished.');
 
-    if(errorFlag){
-      let e = new Error('Critical errors when build, see logs.');
+    if(this.errorFlag){
+      let e = new Error('Critical errors when run, see logs.');
       callback(e);
     }else{
       callback(null);
@@ -96,6 +99,7 @@ class Builder{
       ms.addModuleDeep(absFilename, importItem.type);
       arr = ms.integrate();
     }catch(e){
+      this.errorFlag = true;
       this.errorCatcher(e, 'Module will be skipped.');
     }
 
@@ -103,6 +107,7 @@ class Builder{
       try{
         this.container.load(q);
       }catch(e){
+        this.errorFlag = true;
         this.errorCatcher(e, 'Element will be skipped.');
       }
     });

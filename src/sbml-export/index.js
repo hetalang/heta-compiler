@@ -23,7 +23,9 @@ class SBMLExport extends _Export{
     if(modelObject===undefined){
       throw new Error(`Required model "${this.model}" is not found in container and will not be exported to SBML.`);
     }
-    let code = modelObject.toSBML();
+    let code = modelObject
+      .populate()
+      .toSBML();
     return code;
   }
   toQ(){
