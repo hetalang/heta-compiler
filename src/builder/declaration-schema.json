@@ -17,7 +17,8 @@
         "debuggingMode": {"type": "boolean", "default": false},
         "syncMode": {"type": "boolean", "default": false},
         "logs": {"type": "string"},
-        "logLevel": {"type": "string", "enum": ["error", "warn", "info", "verbose", "debug", "silly"]}
+        "logLevel": {"type": "string", "enum": ["error", "warn", "info", "verbose", "debug", "silly"]},
+        "skipExport": {"type": "boolean", "default": false}
       },
       "default": {"debuggingMode": false, "syncMode": false, "logLevel": "info"}
     },

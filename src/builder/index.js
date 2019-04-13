@@ -65,22 +65,26 @@ class Builder{
     });
     logger.info('Importing finished.');
 
-    let exportElements = [...this.container.storage]
-      .filter((obj) => obj[1] instanceof _Export)
-      .map((obj) => obj[1]);
-    logger.info(`Start exporting to files, total: ${exportElements.length}.`);
-    exportElements.forEach((exportItem) => {
-      try{
-        logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
-        let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
-        let codeText = exportItem.do();
-        fs.outputFileSync(absFilename, codeText);
-      }catch(e){
-        this.errorFlag = true;
-        this.errorCatcher(e, 'Export will be skipped.');
-      }
-    });
-    logger.info('Exporting finished.');
+    if(!this.options.skipExport){
+      let exportElements = [...this.container.storage]
+        .filter((obj) => obj[1] instanceof _Export)
+        .map((obj) => obj[1]);
+      logger.info(`Start exporting to files, total: ${exportElements.length}.`);
+      exportElements.forEach((exportItem) => {
+        try{
+          logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
+          let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
+          let codeText = exportItem.do();
+          fs.outputFileSync(absFilename, codeText);
+        }catch(e){
+          this.errorFlag = true;
+          this.errorCatcher(e, 'Export will be skipped.');
+        }
+      });
+      logger.info('Exporting finished.');
+    }else{
+      logger.warn('Exporting skipped because of options.');
+    }
 
     if(this.errorFlag){
       let e = new Error('Critical errors when run, see logs.');
