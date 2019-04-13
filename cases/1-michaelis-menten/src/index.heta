@@ -30,7 +30,7 @@ block $mm begin
   r1 := Vmax/(Km+S)*default;
 end
 
-mm_sbml @SBMLExport { model: mm };
+mm_sbml @SBMLExport {model: mm};
 
 full_json @JSONExport;
 
