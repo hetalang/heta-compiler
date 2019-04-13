@@ -17,7 +17,7 @@
     "afterImports": "script2.js",
     "afterExports": "script3.js"
   },
-  "imports": [
+  "importModules": [
     {
       "type": "heta",
       "filename": "src/model.heta"
@@ -32,14 +32,6 @@
       "ignoreDeps": true,
       "type": "slv",
       "filename": "src/model.slv"
-    }
-  ],
-  "exports": [
-    {
-      "ignore": false,
-      "format": "sbml",
-      "filename": "one.xml",
-      "model": "one"
     }
   ]
 }
