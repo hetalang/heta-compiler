@@ -9,6 +9,7 @@ const { version } = require('../../package');
 const Container = require('../container');
 const ModuleSystem = require('../module-system');
 const winston = require('winston');
+const { _Export } = require('../core/_export');
 
 let logger = winston.createLogger({
   //level: logLevel,
@@ -56,19 +57,28 @@ class Builder{
   // starts async build
   run(callback){
     let errorFlag = false;
-    logger.info(`Start importing of modules, total: ${this.imports.length}.`);
-    this.imports.forEach((importItem) => this.import(importItem));
+
+    logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
+    this.importModules.forEach((importItem) => this.import(importItem));
     logger.info('Importing finished.');
-    logger.info(`Start exporting to files, total: ${this.exports.length}.`);
-    this.exports.forEach((exportItem) => {
+
+    let exportElements = [...this.container.storage]
+      .filter((obj) => obj[1] instanceof _Export)
+      .map((obj) => obj[1]);
+    logger.info(`Start exporting to files, total: ${exportElements.length}.`);
+    exportElements.forEach((exportItem) => {
       try{
-        this.export(exportItem);
+        logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
+        let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
+        let codeText = exportItem.do();
+        fs.outputFileSync(absFilename, codeText);
       }catch(e){
         errorFlag = true;
-        this.errorCatcher(e);
+        this.errorCatcher(e, 'Export will be skipped.');
       }
     });
     logger.info('Exporting finished.');
+
     if(errorFlag){
       let e = new Error('Critical errors when build, see logs.');
       callback(e);
@@ -86,14 +96,14 @@ class Builder{
       ms.addModuleDeep(absFilename, importItem.type);
       arr = ms.integrate();
     }catch(e){
-      this.errorCatcher(e);
+      this.errorCatcher(e, 'Module will be skipped.');
     }
 
     arr.forEach((q) => {
       try{
         this.container.load(q);
       }catch(e){
-        this.errorCatcher(e);
+        this.errorCatcher(e, 'Element will be skipped.');
       }
     });
     // debugging
@@ -103,18 +113,8 @@ class Builder{
 
     return this;
   }
-  export(exportItem){
-    logger.info(`Exporting to file "${exportItem.filename}" of type "${exportItem.format}"...`);
-    let absFilename = path.join(this._distDirname, exportItem.filename);
-    let model = this.container.storage.get(exportItem.model); // required get method
-    if(model===undefined){
-      throw new Error(`Required model "${exportItem.model}" is not found in container and will not be exported.`);
-    }
-    let SBMLText = model.toSBML();
-    fs.outputFileSync(absFilename, SBMLText);
-  }
-  errorCatcher(error){
-    logger.error(`[${error.name}] ${error.message}`);
+  errorCatcher(error, builderMessage = ''){
+    logger.error(`[${error.name}] ${error.message} ${builderMessage}`);
     if(this.options.debuggingMode) throw error;
   }
 }

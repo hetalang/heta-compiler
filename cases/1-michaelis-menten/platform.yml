@@ -3,10 +3,6 @@ builderVersion: ^0.3
 options:
   logLevel: info
   debuggingMode: false
-imports:
+importModules:
   - type: heta
     filename: src/index.heta
-exports:
-  - format: sbml
-    filename: mm.xml
-    model: mm

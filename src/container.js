@@ -11,25 +11,11 @@ const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const _ = require('lodash');
+const { _Export, JSONExport } = require('./core/_export');
 
 class Container {
   constructor(){
     this.storage = new Map();
-    this.classes = {
-      // scoped classes
-      Record,
-      Compartment,
-      Species,
-      Process,
-      Reaction,
-      Switcher,
-      // unscoped classes
-      Model,
-      ReferenceDefinition,
-      UnitDefinition,
-      Page,
-      Const
-    };
   }
   insert(q){
     // check
@@ -49,7 +35,12 @@ class Container {
 
     // this.storage.setByIndex(simple);
     this.storage.set(simple.index, simple);
-    if(simple instanceof Model) simple._storage = this.storage;
+    let shouldIncludeStorage =
+      (simple instanceof Model)
+      || (simple instanceof _Export);
+    if(shouldIncludeStorage) {
+      simple._storage = this.storage;
+    }
 
     return simple;
   }
@@ -104,17 +95,49 @@ class Container {
     qArr.forEach((q) => this.load(q));
     return this;
   }
-  toQArr(){
+  toQArr(useVirtual){
     let qArr = [...this.storage]
+      .filter((obj) => !obj.virtual || useVirtual)
       .map((obj) => obj[1].toQ());
     return qArr;
   }
   toJSON(){
     return JSON.stringify(this.toQArr(), null, 2);
   }
+  // get different code of different formats
+  // TODO: implement format selection
+  toCode(format, model){
+    let modelObject = this.storage.get(model); // TODO: implement get to use this.get({id: model})
+    if(modelObject===undefined){
+      throw new Error(`Required model "${model}" is not found in container and will not be exported to ${format}.`);
+    }
+    switch(format){
+      case 'sbml':
+        return modelObject.toSBML();
+        break;
+      default:
+        throw new Error(`Unknown format ${format} to export.`);
+    }
+  }
   get length(){
     return this.storage.size;
   }
 }
 
+Container.prototype.classes = {
+  // scoped classes
+  Record,
+  Compartment,
+  Species,
+  Process,
+  Reaction,
+  Switcher,
+  // unscoped classes
+  Model,
+  ReferenceDefinition,
+  UnitDefinition,
+  Page,
+  Const,
+  JSONExport
+};
 module.exports = Container;

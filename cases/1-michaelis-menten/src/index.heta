@@ -1,16 +1,15 @@
-'''
-This is simple model with one reaction.
-'''
-mm @Model {
-  title: Michaelis-Menten reaction in compartment
-};
-
 block @Const begin
   Vmax = 0.1;
   Km = 2.5;
   default = 1;
 end
 
+'''
+This is simple model with one reaction.
+'''
+mm @Model {
+  title: Michaelis-Menten reaction in compartment
+};
 block $mm begin
   default @Compartment;
   S @Species {
@@ -30,3 +29,11 @@ block $mm begin
   P []= 0;
   r1 := Vmax/(Km+S)*default;
 end
+
+mm_sbml @SBMLExport { model: mm };
+
+full_json @JSONExport;
+
+full_yaml @YAMLExport;
+
+// mm_slv @SLVExport;

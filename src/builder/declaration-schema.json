@@ -30,7 +30,7 @@
         "afterExports": {"type": "string"}
       }
     },
-    "imports": {
+    "importModules": {
       "type": "array",
       "items": {
         "type": "object",
@@ -42,21 +42,8 @@
           "filename": {"type": "string"},
           "ignoreDeps": {"type": "boolean", "default": false}
         }
-      }
-    },
-    "exports": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["format", "filename"],
-        "additionalProperties": false,
-        "properties": {
-          "ignore": {"type": "boolean", "default": false},
-          "format": {"type": "string", "enum": ["sbml", "slv", "simbio", "rxode", "mrgsolve"]},
-          "filename": {"type": "string"},
-          "model": {"type": "string"}
-        }
-      }
+      },
+      "default": []
     }
   }
 }
