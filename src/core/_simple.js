@@ -1,6 +1,6 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { ConstructValidationError, SchemaValidationError } = require('../validation-error');
+const { HetaValidationError, SchemaValidationError } = require('../validation-error');
 const _ = require('lodash');
 
 /*
@@ -9,9 +9,9 @@ const _ = require('lodash');
 class _Simple {
   constructor(ind){
     if(!ind)
-      throw new ConstructValidationError(ind);
+      throw new HetaValidationError(`No index in element "${ind}"`);
     if(!ind.id || (typeof ind.id !== 'string'))
-      throw new ConstructValidationError({id: ind.id});
+      throw new HetaValidationError('Wrong index ' + JSON.stringify({id: ind.id}));
     this._id = ind.id;
     this.tags = [];
     this.aux = {};
@@ -60,7 +60,7 @@ class _Simple {
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     if(!validate){
-      throw new Error(`The schema "${this.schemaName}" is unknown for Heta-standard.`);
+      throw new HetaValidationError(`The schema "${this.schemaName}" is unknown for Heta-standard.`);
     }
     let valid = validate(q);
     if(!valid) {

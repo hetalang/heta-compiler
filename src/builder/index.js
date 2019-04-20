@@ -104,7 +104,7 @@ class Builder{
       arr = ms.integrate();
     }catch(e){
       this.errorFlag = true;
-      this.errorCatcher(e, 'Module will be skipped.');
+      this.errorCatcher(e, `Module "${importItem.filename}" will be skipped.`);
     }
 
     arr.forEach((q) => {
@@ -112,7 +112,7 @@ class Builder{
         this.container.load(q);
       }catch(e){
         this.errorFlag = true;
-        this.errorCatcher(e, 'Element will be skipped.');
+        this.errorCatcher(e, 'The element will be skipped.');
       }
     });
     // debugging
@@ -123,7 +123,13 @@ class Builder{
     return this;
   }
   errorCatcher(error, builderMessage = ''){
-    logger.error(`[${error.name}] ${error.message} ${builderMessage}`);
+    if(error.name === 'SyntaxError'){
+      //let coord = `Line ${error.location.start.line}, Column ${error.location.start.column}.`;
+      let coord = `${error.location.start.line}:${error.location.start.column}-${error.location.end.line}:${error.location.end.column}.`;
+      logger.error(`[${error.name}] ${coord} ${error.message} ${builderMessage}`);
+    }else{
+      logger.error(`[${error.name}] ${error.message} ${builderMessage}`);
+    }
     if(this.options.debuggingMode) throw error;
   }
 }

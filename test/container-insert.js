@@ -1,6 +1,6 @@
 /* global describe, it */
 
-const { ActionError, SchemaValidationError } = require('../src/validation-error');
+const { ContainerError, SchemaValidationError } = require('../src/validation-error');
 const Container = require('../src/container');
 const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');
@@ -152,13 +152,13 @@ describe('Unit tests for Container', () => {
     it('Insert wrong components.', () => {
       should.Throw(() => {
         c.insert({});
-      }, ActionError);
+      }, ContainerError);
       should.Throw(() => {
         c.insert({id: 'pmid3'});
       }, Error);
       should.Throw(() => {
         c.insert({class: 'ReferenceDefinition'});
-      }, ActionError);
+      }, ContainerError);
       should.Throw(() => {
         c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
       }, Error);

@@ -1,6 +1,6 @@
 /* global describe, it */
 const { _Scoped } = require('../../src/core/_scoped');
-const { ConstructValidationError } = require('../../src/validation-error');
+const { HetaValidationError } = require('../../src/validation-error');
 const should = require('chai').should();
 
 describe('Unit test for _Scoped common methods', () => {
@@ -30,19 +30,19 @@ describe('Unit test for _Scoped common methods', () => {
   it('No id and space throws.', () => {
     should.Throw(() => {
       new _Scoped;
-    }, ConstructValidationError);
+    }, HetaValidationError);
   });
 
   it('No id throws.', () => {
     should.Throw(() => {
       new _Scoped({space: 'one'});
-    }, ConstructValidationError);
+    }, HetaValidationError);
   });
 
   it('No space throws.', () => {
     should.Throw(() => {
       new _Scoped({id: 'one'});
-    }, ConstructValidationError);
+    }, HetaValidationError);
   });
 
   it('ToQ transformation', () => {

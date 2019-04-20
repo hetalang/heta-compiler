@@ -1,4 +1,4 @@
-const { ActionError } = require('./validation-error');
+const { ContainerError } = require('./validation-error');
 const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
@@ -20,17 +20,15 @@ class Container {
   insert(q){
     // check
     if(!q)
-      throw new ActionError(q);
+      throw new ContainerError(JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new ActionError({id: q.id});
+      throw new ContainerError(JSON.stringify({id: q.id}));
     if(!q.class || typeof q.class !== 'string')
-      throw new TypeError(`No class or unsuitable class for "insert": ${q.class}`);
+      throw new ContainerError(`No class or unsuitable class for "insert": ${q.class}`);
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
-      throw new TypeError(
-        `Unknown "class" ${q.class} for component id: "${q.id}".`
-      );
+      throw new ContainerError(`Unknown class "${q.class}" for element id "${q.id}".`);
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     // this.storage.setByIndex(simple);
@@ -46,19 +44,17 @@ class Container {
   }
   update(q){
     if(!q)
-      throw new ActionError(q);
+      throw new ContainerError(JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new ActionError({id: q.id});
+      throw new ContainerError(JSON.stringify({id: q.id}));
     if(q.class)
-      throw new TypeError(`Class property is not allowed for "update": ${q.class}`);
+      throw new ContainerError(`Class property is not allowed for "update": ${q.class}`);
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.get(index);
 
     // creation of new components is not allowed
     if(targetComponent===undefined)
-      throw new Error(
-        `Element with index: "${index}" is not exist which is not allowed for "update" strategy.`
-      );
+      throw new ContainerError(`Element with index: "${index}" is not exist which is not allowed for "update" strategy.`);
 
     targetComponent.merge(q);
 
@@ -73,15 +69,15 @@ class Container {
   }
   delete(q){
     if(!q)
-      throw new ActionError(q);
+      throw new ContainerError(JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new ActionError({id: q.id});
+      throw new ContainerError(JSON.stringify({id: q.id}));
     if(q.class)
-      throw new TypeError(`Class property is not allowed for "delete": ${q.class}`);
+      throw new ContainerError(`Class property is not allowed for "delete": ${q.class}`);
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.delete(index);
     if(!targetComponent) // if targetComponent===false, element is not exist
-      throw new Error(`Element with index "${index}" is not exist and cannot be deleted.`);
+      throw new ContainerError(`Element with index "${index}" is not exist and cannot be deleted.`);
 
     return targetComponent; // true or false
   }
@@ -104,21 +100,6 @@ class Container {
   toJSON(){
     return JSON.stringify(this.toQArr(), null, 2);
   }
-  // get different code of different formats
-  // TODO: implement format selection
-  toCode(format, model){
-    let modelObject = this.storage.get(model); // TODO: implement get to use this.get({id: model})
-    if(modelObject===undefined){
-      throw new Error(`Required model "${model}" is not found in container and will not be exported to ${format}.`);
-    }
-    switch(format){
-      case 'sbml':
-        return modelObject.toSBML();
-        break;
-      default:
-        throw new Error(`Unknown format ${format} to export.`);
-    }
-  }
   get length(){
     return this.storage.size;
   }
@@ -140,4 +121,5 @@ Container.prototype.classes = {
   Const,
   JSONExport
 };
+
 module.exports = Container;

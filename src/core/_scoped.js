@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { ConstructValidationError } = require('../validation-error');
+const { HetaValidationError } = require('../validation-error');
 const { _Simple } = require('./_simple');
 
 /*
@@ -9,7 +9,7 @@ class _Scoped extends _Simple {
   constructor(ind){
     super(ind);
     if(!ind.space || (typeof ind.space !== 'string'))
-      throw new ConstructValidationError({id: ind.id, space: ind.space});
+      throw new HetaValidationError('Wrong index ' + JSON.stringify({id: ind.id, space: ind.space}));
     this._space = ind.space;
   }
   merge(q, skipChecking){
