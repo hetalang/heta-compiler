@@ -112,7 +112,7 @@ class Builder{
         this.container.load(q);
       }catch(e){
         this.errorFlag = true;
-        this.errorCatcher(e, 'The element will be skipped.');
+        this.errorCatcher(e, `The element with id:"${q.id}" space:"${q.space}" will be skipped.`);
       }
     });
     // debugging
@@ -127,8 +127,11 @@ class Builder{
       //let coord = `Line ${error.location.start.line}, Column ${error.location.start.column}.`;
       let coord = `${error.location.start.line}:${error.location.start.column}-${error.location.end.line}:${error.location.end.column}.`;
       logger.error(`[${error.name}] ${coord} ${error.message} ${builderMessage}`);
-    }else{
-      logger.error(`[${error.name}] ${error.message} ${builderMessage}`);
+    }else if(error.name === 'SchemaValidationError'){
+      let messageArray = error.diagnostics
+        .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
+        .join('\n');
+      logger.error(`[${error.name}] ${builderMessage} \n${messageArray}`);
     }
     if(this.options.debuggingMode) throw error;
   }
