@@ -15,7 +15,14 @@ class Process extends Record {
       this.effectors = q.effectors.map((q) => new Effector(q));
     }
     if(q.actors) {
-      this.actors = q.actors.map((q) => new Actor(q));
+      if(q.actors instanceof Array){
+        this.actors = q.actors
+          .map((q) => new Actor(q));
+      }else{
+        //throw new Error('String actors is not implemented yet.');
+        this.actors = rct2actors(q.actors)
+          .map((q) => new Actor(q));
+      }
     }
 
     return this;
@@ -86,6 +93,33 @@ class Actor extends Effector {
       ? q.stoichiometry
       : 1; // default value
   }
+}
+
+function rct2actors(rct){
+  var matches = /^(.*)<?[=-]>?(.*)$/gm.exec(rct);
+  var substrates = matches[1];
+  var products = matches[2];
+
+  var targetArray = [];
+  var regexp = /([\d]*)\*?(\w[\w\d]*)/gm;
+  let r; // iterator
+  while (
+    (r = regexp.exec(substrates))!==null
+  ){
+    targetArray.push({
+      target: r[2],
+      stoichiometry: (r[1]) ? -r[1] : -1
+    });
+  }
+  while (
+    (r = regexp.exec(products))!==null
+  ){
+    targetArray.push({
+      target: r[2],
+      stoichiometry: (r[1]) ? +r[1] : 1
+    });
+  }
+  return targetArray;
 }
 
 module.exports = {

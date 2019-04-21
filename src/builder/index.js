@@ -132,6 +132,8 @@ class Builder{
         .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
         .join('\n');
       logger.error(`[${error.name}] ${builderMessage} \n${messageArray}`);
+    }else{
+      logger.error(`[${error.name}] ${error.message} \n${builderMessage}`);
     }
     if(this.options.debuggingMode) throw error;
   }
