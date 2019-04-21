@@ -8,12 +8,10 @@
 - sbml
 - markdown
 - svg
-- 
 
 ## exports
 
 - slv
-- dat
 - dat
 - irtdb
 - rxode

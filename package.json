@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "ajv": "^6.6.1",
+    "async": "^2.6.2",
     "commander": "^2.20.0",
     "download-git-repo": "^1.1.0",
     "fs-extra": "^7.0.1",

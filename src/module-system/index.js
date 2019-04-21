@@ -41,6 +41,16 @@ class ModuleSystem {
     this._top = this._addModuleDeep(absFilePath, type);
     return this._top;
   }
+  // XXX: fake async
+  addModuleDeepAsync(rawAbsFilePath, type, callback){
+    try{
+      let absFilePath = path.normalize(rawAbsFilePath);
+      this._top = this._addModuleDeep(absFilePath, type);
+      callback(null, this._top);
+    }catch(err){
+      callback(err);
+    }
+  }
   // scan module dependences recursively
   _addModuleDeep(absFilePath, type){
     if(!(absFilePath in this.storage)){ // new file

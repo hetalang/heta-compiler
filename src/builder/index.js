@@ -10,6 +10,7 @@ const Container = require('../container');
 const ModuleSystem = require('../module-system');
 const winston = require('winston');
 const { _Export } = require('../core/_export');
+const async = require('async');
 
 let logger = winston.createLogger({
   //level: logLevel,
@@ -53,10 +54,80 @@ class Builder{
     // create container
     this.container = new Container();
     logger.info(`Builder initialized with directory "${this._coreDirname}".`);
+  }
+  importManyAsync(callback){
+    logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
+    async.each(this.importModules, (importItem, cb) => {
+      this.importAsync(importItem, cb);
+    }, (err) => {
+      logger.info('Importing finished.');
+      callback(err);
+    });
+  }
+  importAsync(importItem, callback){
+    logger.info(`Importing module "${importItem.filename}" of type "${importItem.type}"...`);
+    let ms = new ModuleSystem();
+    let absFilename = path.join(this._coreDirname, importItem.filename);
 
-    this.errorFlag = false;
+    ms.addModuleDeepAsync(absFilename, importItem.type, (err, arr) => {
+      if(err){
+        this.errorCatcher(err, `Module "${importItem.filename}" will be skipped.`);
+        callback(null);
+      }else{
+        arr = ms.integrate();
+        arr.forEach((q) => {
+          try{
+            this.container.load(q);
+          }catch(e){
+            this.errorCatcher(e, `The element with id:"${q.id}" space:"${q.space}" will be skipped.`);
+          }
+        });
+        callback(null);
+      }
+    });
+  }
+  exportManyAsync(callback){
+    if(!this.options.skipExport){
+      let exportElements = [...this.container.storage]
+        .filter((obj) => obj[1] instanceof _Export)
+        .map((obj) => obj[1]);
+      logger.info(`Start exporting to files, total: ${exportElements.length}.`);
+      async.each(exportElements, (exportItem, cb) => {
+        try{
+          logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
+          let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
+          let codeText = exportItem.do();
+          fs.outputFileSync(absFilename, codeText);
+        }catch(e){
+          this.errorCatcher(e, 'Export will be skipped.');
+        }
+        cb(null);
+      }, (err) => {
+        logger.info('Exporting finished.');
+        callback(err);
+      });
+    }else{
+      logger.warn('Exporting skipped because of options.');
+      callback(null);
+    }
   }
   // starts async build
+  runAsync(callback){
+    this.errorFlag = false; // reset platform level errors
+    async.waterfall([
+      (cb) => this.importManyAsync(cb),
+      (cb) => this.exportManyAsync(cb)
+    ], (err) => {
+      if(err) throw err; // this is js level error
+      if(this.errorFlag){ // check platform level errors
+        let e = new Error('Critical errors when run, see logs.');
+        callback(e);
+      }else{
+        callback(null);
+      }
+    });
+  }
+  // sync methods
   run(callback){
     this.errorFlag = false;
     logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
@@ -77,7 +148,6 @@ class Builder{
           let codeText = exportItem.do();
           fs.outputFileSync(absFilename, codeText);
         }catch(e){
-          this.errorFlag = true;
           this.errorCatcher(e, 'Export will be skipped.');
         }
       });
@@ -103,7 +173,6 @@ class Builder{
       ms.addModuleDeep(absFilename, importItem.type);
       arr = ms.integrate();
     }catch(e){
-      this.errorFlag = true;
       this.errorCatcher(e, `Module "${importItem.filename}" will be skipped.`);
     }
 
@@ -111,21 +180,22 @@ class Builder{
       try{
         this.container.load(q);
       }catch(e){
-        this.errorFlag = true;
         this.errorCatcher(e, `The element with id:"${q.id}" space:"${q.space}" will be skipped.`);
       }
     });
     // debugging
-    let j1 = JSON.stringify(arr, null, 2);
-    let j2 = JSON.stringify(this.container.toQArr(), null, 2);
-    logger.debug(j1);
+    //let j1 = JSON.stringify(arr, null, 2);
+    //let j2 = JSON.stringify(this.container.toQArr(), null, 2);
+    //logger.debug(j1);
 
     return this;
   }
   errorCatcher(error, builderMessage = ''){
+    this.errorFlag = true;
     if(error.name === 'SyntaxError'){
-      //let coord = `Line ${error.location.start.line}, Column ${error.location.start.column}.`;
-      let coord = `${error.location.start.line}:${error.location.start.column}-${error.location.end.line}:${error.location.end.column}.`;
+      let loc = error.location;
+      //let coord = `Line ${loc.start.line}, Column ${loc.start.column}.`;
+      let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}.`;
       logger.error(`[${error.name}] ${coord} ${error.message} ${builderMessage}`);
     }else if(error.name === 'SchemaValidationError'){
       let messageArray = error.diagnostics

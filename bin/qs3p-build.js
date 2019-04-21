@@ -33,7 +33,7 @@ if(index!==-1){
     declaration, // target folder
     targetDir
   );
-  d.run((err) => {
+  d.runAsync((err) => {
     if(err){
       console.log('STOP!', err.message);
       process.exit(1);
