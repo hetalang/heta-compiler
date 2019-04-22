@@ -10,8 +10,8 @@ class Const extends _Simple { // implicit extend Numeric
     }else{
       this.num = q.num;
       this.free = q.free ? q.free : false;
+      if(q.units!==undefined) this.units = q.units;
     }
-    if(q.units!==undefined) this.units = q.units;
 
     return this;
   }

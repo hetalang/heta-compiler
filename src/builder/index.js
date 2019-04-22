@@ -32,18 +32,20 @@ class Builder{
     let validate = ajv.compile(declarationSchema);
     let valid = validate(decl);
     if(!valid) {
-      throw new SchemaValidationError(validate.errors, 'Builder');
+      let error = new SchemaValidationError(validate.errors, 'Builder');
+      this.errorCatcher(error);
+      throw error;
     }
 
     // update logger
     logger.level = decl.options.logLevel;
 
-    // verssion check
+    // version check
     let satisfiesVersion = semver.satisfies(version, decl.builderVersion);
     if(!satisfiesVersion){
-      let errMessage = `Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`;
-      logger.error(errMessage);
-      throw new Error(errMessage);
+      let error = new Error(`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
+      this.errorCatcher(error);
+      throw error;
     }
     // assignments
     Object.assign(this, decl);
@@ -93,9 +95,9 @@ class Builder{
         .map((obj) => obj[1]);
       logger.info(`Start exporting to files, total: ${exportElements.length}.`);
       async.each(exportElements, (exportItem, cb) => {
+        logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
+        let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
         try{
-          logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
-          let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
           let codeText = exportItem.do();
           fs.outputFileSync(absFilename, codeText);
         }catch(e){
@@ -120,14 +122,14 @@ class Builder{
     ], (err) => {
       if(err) throw err; // this is js level error
       if(this.errorFlag){ // check platform level errors
-        let e = new Error('Critical errors when run, see logs.');
+        let e = new Error('Critical errors when Builder runs, see logs.');
         callback(e);
       }else{
         callback(null);
       }
     });
   }
-  // sync methods
+  // sync run, not used
   run(callback){
     this.errorFlag = false;
     logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
@@ -163,7 +165,7 @@ class Builder{
       callback(null);
     }
   }
-  // import
+  // sync import, not used
   import(importItem){
     logger.info(`Importing module "${importItem.filename}" of type "${importItem.type}"...`);
     let ms = new ModuleSystem();
@@ -190,11 +192,14 @@ class Builder{
 
     return this;
   }
+  // analyze different errors
+  // if error in heta syntax or structure then send to logger
+  // if it is internal error then throw
   errorCatcher(error, builderMessage = ''){
+    let debuggingMode = this.options && this.options.debuggingMode;
     this.errorFlag = true;
     if(error.name === 'SyntaxError'){
       let loc = error.location;
-      //let coord = `Line ${loc.start.line}, Column ${loc.start.column}.`;
       let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}.`;
       logger.error(`[${error.name}] ${coord} ${error.message} ${builderMessage}`);
     }else if(error.name === 'SchemaValidationError'){
@@ -205,7 +210,7 @@ class Builder{
     }else{
       logger.error(`[${error.name}] ${error.message} \n${builderMessage}`);
     }
-    if(this.options.debuggingMode) throw error;
+    if(debuggingMode) throw error;
   }
 }
 

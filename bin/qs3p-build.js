@@ -27,26 +27,26 @@ let index = searches
   .indexOf(true);
 
 if(index!==-1){
-  let declarationText = fs.readFileSync(searches[index]);
-  let declaration = safeLoad(declarationText);
-  let d = new Builder(
-    declaration, // target folder
-    targetDir
-  );
-  d.runAsync((err) => {
+  try{
+    let declarationText = fs.readFileSync(searches[index]);
+    let declaration = safeLoad(declarationText);
+    var builder = new Builder(declaration, targetDir);
+  }catch(err){
+    console.log('STOP! Wrong declaration file.', err.message); // builder initialization error
+    process.exit(1);
+  }
+  builder.runAsync((err) => {
     if(err){
-      console.log('STOP!', err.message);
+      console.log('STOP! Builder run error.', err.message); // builder run error
       process.exit(1);
     }else{
-      // console.log(d);
       console.log('OK! ALL DONE.');
       process.exit(0);
     }
   });
 }else{
-  console.log(
-    'STOP.',
-    'Declaration file is not found in\n',
+  console.log( // builder initialization error(no builder file)
+    'STOP! Declaration file is not found in\n',
     JSON.stringify(searches, null, 2)
   );
   process.exit(1);
