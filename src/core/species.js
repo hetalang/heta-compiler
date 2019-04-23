@@ -26,6 +26,8 @@ class Species extends Record {
   toQ(){
     let res = super.toQ();
     res.compartment = this.compartment;
+    if(this.boundary) res.boundary = this.boundary;
+    if(this.isAmount) res.isAmount = this.isAmount;
     return res;
   }
   SBMLUnits(){
