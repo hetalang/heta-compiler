@@ -2,7 +2,7 @@
 const Container = require('../src/container');
 const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');
-const { ContainerError } = require('../src/validation-error');
+const { ContainerError } = require('../src/heta-error');
 
 describe('Unit tests for Container load', () => {
   var c = new Container();

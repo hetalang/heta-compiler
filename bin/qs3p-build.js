@@ -32,12 +32,12 @@ if(index!==-1){
     let declaration = safeLoad(declarationText);
     var builder = new Builder(declaration, targetDir);
   }catch(err){
-    console.log('STOP! Wrong declaration file.', err.message); // builder initialization error
+    console.log('CRIRICAL ERROR!', err.message); // builder initialization error
     process.exit(1);
   }
   builder.runAsync((err) => {
     if(err){
-      console.log('STOP! Builder run error.', err.message); // builder run error
+      console.log('ERROR!', err.message); // builder run error
       process.exit(1);
     }else{
       console.log('OK! ALL DONE.');

@@ -1,6 +1,6 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { HetaValidationError, SchemaValidationError } = require('../validation-error');
+const { IndexedHetaError, SchemaValidationError } = require('../heta-error');
 const _ = require('lodash');
 
 /*
@@ -9,9 +9,9 @@ const _ = require('lodash');
 class _Simple {
   constructor(ind){
     if(!ind)
-      throw new HetaValidationError(`No index in element "${ind}"`);
+      throw new IndexedHetaError(ind, `No index in element "${ind}"`);
     if(!ind.id || (typeof ind.id !== 'string'))
-      throw new HetaValidationError('Wrong index ' + JSON.stringify({id: ind.id}));
+      throw new IndexedHetaError(ind, 'Wrong index ' + JSON.stringify({id: ind.id}));
     this._id = ind.id;
     this.tags = [];
     this.aux = {};
@@ -38,6 +38,9 @@ class _Simple {
   get index(){
     return this.id;
   }
+  get indexObj(){
+    return {id: this.id};
+  }
   clone(){ // creates copy of element TODO: not tested
     return _.clone(this);
   }
@@ -60,11 +63,11 @@ class _Simple {
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     if(!validate){
-      throw new HetaValidationError(`The schema "${this.schemaName}" is unknown for Heta-standard.`);
+      throw new IndexedHetaError(q, `The schema "${this.schemaName}" is unknown for Heta-standard.`);
     }
     let valid = validate(q);
     if(!valid) {
-      throw new SchemaValidationError(validate.errors, this.schemaName);
+      throw new SchemaValidationError(validate.errors, this.schemaName, q);
     }
   }
   toQ(){

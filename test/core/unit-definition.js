@@ -1,6 +1,6 @@
 /* global describe, it */
 const { UnitDefinition } = require('../../src/core/unit-definition');
-const { SchemaValidationError } = require('../../src/validation-error');
+const { SchemaValidationError } = require('../../src/heta-error');
 const should = require('chai').should();
 
 describe('Unit test for UnitDefinition', () => {

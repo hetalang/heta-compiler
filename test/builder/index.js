@@ -2,7 +2,7 @@
 const { Builder } = require('../../src');
 const declaration = require('./test-platform');
 const { expect } = require('chai');
-const { SchemaValidationError } = require('../../src/validation-error');
+const { SchemaValidationError } = require('../../src/heta-error');
 
 describe('Test Builder.', () => {
   let b;

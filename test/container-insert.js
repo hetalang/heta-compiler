@@ -1,6 +1,6 @@
 /* global describe, it */
 
-const { ContainerError, SchemaValidationError } = require('../src/validation-error');
+const { ContainerError, SchemaValidationError } = require('../src/heta-error');
 const Container = require('../src/container');
 const should = require('chai').should();
 const { _Simple } = require('../src/core/_simple');

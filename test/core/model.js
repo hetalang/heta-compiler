@@ -1,6 +1,6 @@
 /* global describe, it*/
 const { Model } = require('../../src/core/model');
-const { SchemaValidationError } = require('../../src/validation-error');
+const { SchemaValidationError } = require('../../src/heta-error');
 const should = require('chai').should();
 
 describe('Unit test for Model.', () => {

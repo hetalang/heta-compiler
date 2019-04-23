@@ -2,7 +2,7 @@ const _ = require('lodash');
 const { _Simple } = require('./_simple');
 const { Record, Assignment } = require('./record');
 const { Species } = require('./species');
-const { RefValidationError } = require('../validation-error');
+const { IndexedHetaError } = require('../heta-error');
 
 class Model extends _Simple {
   constructor(ind){
@@ -93,11 +93,11 @@ class Model extends _Simple {
     this.selectByInstance(Species)
       .forEach((species) => {
         if(!species.compartment)
-          throw RefValidationError('No "compartment" prop for Species: ', species.index);
+          throw IndexedHetaError(species.indexObj, 'No "compartment" prop for Species.');
         let compartment = this.getById(species.compartment);
         if(compartment!==undefined){
           if(compartment.className!=='Compartment')
-            throw RefValidationError(`"compartment" prop reffered not to Compartment but ${compartment.className} for Species: `, species.index);
+            throw IndexedHetaError(species.indexObj, `"compartment" prop reffered not to Compartment but ${compartment.className} for Species.`);
           species.compartmentObj = compartment;
         }
       });

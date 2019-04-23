@@ -1,6 +1,6 @@
 /* global describe, it */
 const { _Simple } = require('../../src/core/_simple');
-const { SchemaValidationError } = require('../../src/validation-error');
+const { SchemaValidationError } = require('../../src/heta-error');
 const should = require('chai').should();
 
 describe('Unit test for _Simple common methods', () => {

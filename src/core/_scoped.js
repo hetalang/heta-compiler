@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { HetaValidationError } = require('../validation-error');
+const { IndexedHetaError } = require('../heta-error');
 const { _Simple } = require('./_simple');
 
 /*
@@ -9,7 +9,7 @@ class _Scoped extends _Simple {
   constructor(ind){
     super(ind);
     if(!ind.space || (typeof ind.space !== 'string'))
-      throw new HetaValidationError('Wrong index ' + JSON.stringify({id: ind.id, space: ind.space}));
+      throw new IndexedHetaError(ind, 'Wrong index ' + JSON.stringify({id: ind.id, space: ind.space}));
     this._space = ind.space;
   }
   merge(q, skipChecking){
@@ -23,6 +23,9 @@ class _Scoped extends _Simple {
   }
   get index(){
     return this.space + '.' + this.id;
+  }
+  get indexObj(){
+    return {id: this.id, space: this.space};
   }
   static get schemaName(){
     return '_ScopedP';

@@ -1,5 +1,5 @@
 const { Record } = require('./record');
-const { RefValidationError } = require('../validation-error');
+const { IndexedHetaError } = require('../heta-error');
 const { Species } =require('./species');
 
 class Process extends Record {
@@ -55,10 +55,10 @@ class Process extends Record {
     this.actors.forEach((actor) => {
       let targetObj = storage.find((x) => x.id===actor.target);
       if(!targetObj) {
-        throw new RefValidationError(`target reffered to absent value "${actor.target}" in reaction ${this.index}`);
+        throw new IndexedHetaError(this.indexObj, `target reffered to absent value "${actor.target}" in reaction.`);
       } else {
         if(!(targetObj instanceof Species)) {
-          throw new RefValidationError(`target reffered to not a Species "${actor.target}" in reaction ${this.index}`);
+          throw new IndexedHetaError(this.indexObj, `target reffered to not a Species "${actor.target}" in reaction.`);
         } else {
           actor.targetObj = targetObj;
         }
@@ -67,10 +67,10 @@ class Process extends Record {
     this.effectors.forEach((effector) => {
       let targetObj = storage.find((x) => x.id===effector.target);
       if(!targetObj) {
-        throw new RefValidationError(`target reffered to absent value "${effector.target}" in reaction ${this.index}`);
+        throw new IndexedHetaError(this.indexObj, `target reffered to absent value "${effector.target}" in reaction.`);
       } else {
         if(!(targetObj instanceof Species)) {
-          throw new RefValidationError(`target reffered to not a Species "${effector.target}" in reaction ${this.index}`);
+          throw new IndexedHetaError(this.indexObj, `target reffered to not a Species "${effector.target}" in reaction.`);
         } else {
           effector.targetObj = targetObj;
         }

@@ -1,4 +1,4 @@
-const { ContainerError } = require('./validation-error');
+const { IndexedHetaError } = require('./heta-error');
 const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
@@ -20,15 +20,15 @@ class Container {
   insert(q){
     // check
     if(!q)
-      throw new ContainerError(JSON.stringify(q));
+      throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new ContainerError(JSON.stringify({id: q.id}));
+      throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
     if(!q.class || typeof q.class !== 'string')
-      throw new ContainerError(`No class or unsuitable class for "insert": ${q.class}`);
+      throw new IndexedHetaError(q, `No class or unsuitable class for "insert": ${q.class}`);
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
-      throw new ContainerError(`Unknown class "${q.class}" for element id "${q.id}".`);
+      throw new IndexedHetaError(q, `Unknown class "${q.class}" for the element.`);
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     // this.storage.setByIndex(simple);
@@ -44,17 +44,17 @@ class Container {
   }
   update(q){
     if(!q)
-      throw new ContainerError(JSON.stringify(q));
+      throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new ContainerError(JSON.stringify({id: q.id}));
+      throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
     if(q.class)
-      throw new ContainerError(`Class property is not allowed for "update": ${q.class}`);
+      throw new IndexedHetaError(q, `Class property is not allowed for "update": ${q.class}`);
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.get(index);
 
     // creation of new components is not allowed
     if(targetComponent===undefined)
-      throw new ContainerError(`Element with index: "${index}" is not exist which is not allowed for "update" strategy.`);
+      throw new IndexedHetaError(q, 'Element with the index is not exist which is not allowed for "update" strategy.');
 
     targetComponent.merge(q);
 
@@ -69,15 +69,15 @@ class Container {
   }
   delete(q){
     if(!q)
-      throw new ContainerError(JSON.stringify(q));
+      throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new ContainerError(JSON.stringify({id: q.id}));
+      throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
     if(q.class)
-      throw new ContainerError(`Class property is not allowed for "delete": ${q.class}`);
+      throw new IndexedHetaError(q, `Class property is not allowed for "delete": ${q.class}`);
     let index = q.space ? (q.space + '.' + q.id) : q.id;
     let targetComponent = this.storage.delete(index);
     if(!targetComponent) // if targetComponent===false, element is not exist
-      throw new ContainerError(`Element with index "${index}" is not exist and cannot be deleted.`);
+      throw new IndexedHetaError(q, 'Element with index is not exist and cannot be deleted.');
 
     return targetComponent; // true or false
   }

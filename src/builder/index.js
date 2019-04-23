@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true });//.addSchema(declarationSchema);
-const { SchemaValidationError } = require('../validation-error');
+const { SchemaValidationError, HetaError } = require('../heta-error');
 const semver = require('semver'); // for future check of buildVersion
 const { version } = require('../../package');
 const Container = require('../container');
@@ -33,7 +33,7 @@ class Builder{
     let valid = validate(decl);
     if(!valid) {
       let error = new SchemaValidationError(validate.errors, 'Builder');
-      this.errorCatcher(error);
+      this.errorCatcher(error, 'Builder is not created.');
       throw error;
     }
 
@@ -43,7 +43,7 @@ class Builder{
     // version check
     let satisfiesVersion = semver.satisfies(version, decl.builderVersion);
     if(!satisfiesVersion){
-      let error = new Error(`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
+      let error = new HetaError(`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
       this.errorCatcher(error);
       throw error;
     }
@@ -55,14 +55,13 @@ class Builder{
 
     // create container
     this.container = new Container();
-    logger.info(`Builder initialized with directory "${this._coreDirname}".`);
+    logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
   importManyAsync(callback){
-    logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
-    async.each(this.importModules, (importItem, cb) => {
-      this.importAsync(importItem, cb);
-    }, (err) => {
-      logger.info('Importing finished.');
+    let notIgnoredImports = this.importModules.filter((importItem) => !importItem.ignore);
+    logger.info(`Start importing of modules, total: ${notIgnoredImports.length}.`);
+    async.each(notIgnoredImports, (importItem, cb) => this.importAsync(importItem, cb), (err) => {
+      logger.info('Import finished.');
       callback(err);
     });
   }
@@ -76,12 +75,12 @@ class Builder{
         this.errorCatcher(err, `Module "${importItem.filename}" will be skipped.`);
         callback(null);
       }else{
-        arr = ms.integrate();
+        arr = ms.integrate(); // TODO: try/catch required
         arr.forEach((q) => {
           try{
             this.container.load(q);
           }catch(e){
-            this.errorCatcher(e, `The element with id:"${q.id}" space:"${q.space}" will be skipped.`);
+            this.errorCatcher(e, 'The element will be skipped.');
           }
         });
         callback(null);
@@ -109,7 +108,7 @@ class Builder{
         callback(err);
       });
     }else{
-      logger.warn('Exporting skipped because of options.');
+      logger.warn('Exporting skipped as stated in declaration.');
       callback(null);
     }
   }
@@ -120,11 +119,11 @@ class Builder{
       (cb) => this.importManyAsync(cb),
       (cb) => this.exportManyAsync(cb)
     ], (err) => {
-      if(err) throw err; // this is js level error
-      if(this.errorFlag){ // check platform level errors
-        let e = new Error('Critical errors when Builder runs, see logs.');
-        callback(e);
-      }else{
+      if(err) { // internal errors
+        callback(err);
+      }else if(this.errorFlag){ // check platform level errors
+        callback(new Error('Errors when Builder run.'));
+      }else{ // no errors
         callback(null);
       }
     });
@@ -159,7 +158,7 @@ class Builder{
     }
 
     if(this.errorFlag){
-      let e = new Error('Critical errors when run, see logs.');
+      let e = new Error('Critical errors when run.');
       callback(e);
     }else{
       callback(null);
@@ -193,24 +192,18 @@ class Builder{
     return this;
   }
   // analyze different errors
-  // if error in heta syntax or structure then send to logger
-  // if it is internal error then throw
   errorCatcher(error, builderMessage = ''){
+    // all errors throws
     let debuggingMode = this.options && this.options.debuggingMode;
-    this.errorFlag = true;
-    if(error.name === 'SyntaxError'){
-      let loc = error.location;
-      let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}.`;
-      logger.error(`[${error.name}] ${coord} ${error.message} ${builderMessage}`);
-    }else if(error.name === 'SchemaValidationError'){
-      let messageArray = error.diagnostics
-        .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
-        .join('\n');
-      logger.error(`[${error.name}] ${builderMessage} \n${messageArray}`);
-    }else{
-      logger.error(`[${error.name}] ${error.message} \n${builderMessage}`);
-    }
     if(debuggingMode) throw error;
+
+    // all errors to logs
+    this.errorFlag = true;
+    if(error instanceof HetaError || error.name === 'SyntaxError'){
+      logger.error(`[${error.name}] ${error.logMessage()} \n\t${builderMessage}`);
+    }else{
+      logger.error(`[${error.name}] ${error.message} \n\t${builderMessage}`);
+    }
   }
 }
 

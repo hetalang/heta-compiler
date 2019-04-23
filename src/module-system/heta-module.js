@@ -3,6 +3,14 @@ const path = require('path');
 const hetaParser = require('heta');
 const _Module = require('./_module');
 
+// add logMessage
+// TODO: make this getter
+hetaParser.SyntaxError.prototype.logMessage = function(){
+  let loc = this.location;
+  let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}.`;
+  return `${coord} ${this.message}`;
+};
+
 class HetaModule extends _Module{
   constructor(filename){
     super(filename);
