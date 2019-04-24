@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test/**/*.js",
-    "test1": "mocha test/declaration"
+    "test1": "mocha test/expr"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",

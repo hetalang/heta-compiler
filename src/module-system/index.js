@@ -1,7 +1,7 @@
 const path = require('path');
 const _ = require('lodash');
 const TopoSort = require('topo-sort');
-let HetaModule = require('./heta-module');
+let { HetaModule } = require('./heta-module');
 let JSONModule = require('./json-module');
 let YAMLModule = require('./yaml-module');
 

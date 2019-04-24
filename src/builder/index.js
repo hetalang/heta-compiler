@@ -122,7 +122,7 @@ class Builder{
       if(err) { // internal errors
         callback(err);
       }else if(this.errorFlag){ // check platform level errors
-        callback(new Error('Errors when Builder run.'));
+        callback(new Error('Errors when Builder run. See logs.'));
       }else{ // no errors
         callback(null);
       }
@@ -199,7 +199,7 @@ class Builder{
 
     // all errors to logs
     this.errorFlag = true;
-    logger.error(`[${error.name}] ${error.message} \n\t${builderMessage}`);
+    logger.error(`[${error.name}] ${error.message} \n\t=> ${builderMessage}`);
   }
 }
 

@@ -5,11 +5,9 @@ const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 const math = require('mathjs');
+const { IndexedHetaError } = require('../heta-error');
 
 class Record extends _Scoped {
-  constructor(ind){
-    super(ind);
-  }
   merge(q, skipChecking){
     if(!skipChecking) Record.isValid(q);
     super.merge(q, skipChecking);
@@ -19,7 +17,11 @@ class Record extends _Scoped {
         if(typeof x.size === 'number' || x.size.num!==undefined){
           var size = new Numeric(x.size);
         }else if(typeof x.size === 'string' || 'expr' in x.size){
-          size = new Expression(x.size);
+          try{ // this is for the cases of wrong size structure
+            size = new Expression(x.size);
+          }catch(e){
+            throw new IndexedHetaError(q, e.message);
+          }
         }else{
           throw new Error('Wrong size argument.');// if code is OK never throws
         }

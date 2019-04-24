@@ -3,13 +3,15 @@ const path = require('path');
 const hetaParser = require('heta');
 const _Module = require('./_module');
 
-// add logMessage
-// TODO: make this getter
-hetaParser.SyntaxError.prototype.logMessage = function(){
-  let loc = this.location;
-  let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}.`;
-  return `${coord} ${this.message}`;
-};
+class HetaSyntaxError extends SyntaxError{
+  constructor(se){ // error as argument
+    let loc = se.location;
+    let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}`;
+    let message = `(${coord}) ${se.message}`;
+    super(message, se.filename, se.lineNumber);
+    this.name = 'HetaSyntaxError';
+  }
+}
 
 class HetaModule extends _Module{
   constructor(filename){
@@ -17,7 +19,11 @@ class HetaModule extends _Module{
     this.type = 'heta';
 
     let fileContent = readFileSync(this.filename, 'utf8');
-    this.parsed = hetaParser.parse(fileContent);
+    try{
+      this.parsed = hetaParser.parse(fileContent);
+    }catch(e){
+      throw new HetaSyntaxError(e);
+    }
 
     let absDirPath = path.dirname(this.filename);
     this.parsed // replace relative paths by absolute ones
@@ -26,4 +32,6 @@ class HetaModule extends _Module{
   }
 }
 
-module.exports = HetaModule;
+module.exports = {
+  HetaModule
+};

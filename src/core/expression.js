@@ -3,12 +3,11 @@ const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
 const mathjsCMathML = require('mathjs-cmathml');
 math.import(mathjsCMathML);
-const _ = require('lodash');
 
 class Expression {
-  constructor(q){ // string or object
+  constructor(q={}){ // string or object
     if(typeof q!=='string' && !('expr' in q))
-      throw new Error('Wrong Expression input: ' + q);
+      throw new TypeError('Expected <string> or {expr: <string>}, but get ' + JSON.stringify(q));
 
     if(typeof q==='string'){
       this._exprInput = q;
@@ -19,7 +18,11 @@ class Expression {
         ? q.lang
         : 'qs3p';
     }
-    this.exprParsed = math.parse(this._exprInput);
+    try{
+      this.exprParsed = math.parse(this._exprInput);
+    }catch(e){
+      throw new TypeError('Cannot parse .expr property. ' + e.message);
+    }
     if(q.units) this.units = q.units;
   }
   get expr(){
