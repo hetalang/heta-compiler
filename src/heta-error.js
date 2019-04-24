@@ -3,34 +3,29 @@ class HetaError extends Error {
   constructor(...params){
     super(...params);
   }
-  logMessage(){
-    return `${this.message}`;
-  }
 }
 HetaError.prototype.name = 'HetaError';
 
 class IndexedHetaError extends HetaError {
-  constructor(q, ...params){
-    super(...params);
-    this.index = _getIndex(q);
-  }
-  logMessage(){
-    return `(${this.index}) ${this.message}`;
+  constructor(q, message, filename, lineNumber){
+    let index = _getIndex(q);
+    let indexedMessage = `(${index}) ${message}`;
+    super(indexedMessage, filename, lineNumber);
+    this.index = index;
   }
 }
 IndexedHetaError.prototype.name = 'IndexedHetaError';
 
 // error for matching heta schema
 class SchemaValidationError extends IndexedHetaError {
-  constructor(diagnostics = [], schemaName, index, ...params){
-    super(index, ...params);
+  constructor(diagnostics = [], schemaName, q, filename, lineNumber){
+    let message = `Element does not satisfy schema "${schemaName}"\n`
+      + diagnostics
+        .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
+        .join('\n');
+    super(q, message, filename, lineNumber);
     this.schemaName = schemaName;
     this.diagnostics = diagnostics;
-  }
-  logMessage(){
-    return `(${this.index}) Element does not satisfy schema "${this.schemaName}"\n` + this.diagnostics
-      .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
-      .join('\n');
   }
 }
 SchemaValidationError.prototype.name = 'SchemaValidationError';
@@ -41,7 +36,7 @@ module.exports = {
   HetaError
 };
 
-function _getIndex(q={}){
+function _getIndex(q = {}){
   if(q.space!==undefined){
     return `${q.space}.${q.id}`;
   }else{

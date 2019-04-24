@@ -199,11 +199,7 @@ class Builder{
 
     // all errors to logs
     this.errorFlag = true;
-    if(error instanceof HetaError || error.name === 'SyntaxError'){
-      logger.error(`[${error.name}] ${error.logMessage()} \n\t${builderMessage}`);
-    }else{
-      logger.error(`[${error.name}] ${error.message} \n\t${builderMessage}`);
-    }
+    logger.error(`[${error.name}] ${error.message} \n\t${builderMessage}`);
   }
 }
 
