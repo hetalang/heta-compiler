@@ -3,8 +3,8 @@ const { IndexedHetaError } = require('../heta-error');
 const { Species } =require('./species');
 
 class Process extends Record {
-  constructor(ind){
-    super(ind);
+  constructor(q = {}){
+    super(q);
     this.effectors = [];
     this.actors = [];
   }
@@ -81,13 +81,13 @@ class Process extends Record {
 }
 
 class Effector {
-  constructor(q){
+  constructor(q = {}){
     this.target = q.target;
   }
 }
 
 class Actor extends Effector {
-  constructor(q){
+  constructor(q = {}){
     super(q);
     this.stoichiometry = q.stoichiometry!==undefined
       ? q.stoichiometry

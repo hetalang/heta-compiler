@@ -4,9 +4,6 @@ let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
 class Species extends Record {
-  constructor(ind){
-    super(ind);
-  }
   merge(q, skipChecking){
     if(!skipChecking) Species.isValid(q);
     super.merge(q, skipChecking);

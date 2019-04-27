@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 class Numeric {
-  constructor(q){
+  constructor(q = {}){
     if(typeof q!=='number' && !('num' in q))
       throw new Error('Wrong Numeric input: ' + q);
 

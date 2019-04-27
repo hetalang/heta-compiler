@@ -5,7 +5,7 @@ const mathjsCMathML = require('mathjs-cmathml');
 math.import(mathjsCMathML);
 
 class Expression {
-  constructor(q={}){ // string or object
+  constructor(q = {}){ // string or object
     if(typeof q!=='string' && !('expr' in q))
       throw new TypeError('Expected <string> or {expr: <string>}, but get ' + JSON.stringify(q));
 

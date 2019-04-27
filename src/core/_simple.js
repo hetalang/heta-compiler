@@ -7,12 +7,10 @@ const _ = require('lodash');
   Abstract class _Simple
 */
 class _Simple {
-  constructor(ind){
-    if(!ind)
-      throw new IndexedHetaError(ind, `No index in element "${ind}"`);
-    if(!ind.id || (typeof ind.id !== 'string'))
-      throw new IndexedHetaError(ind, 'Wrong index ' + JSON.stringify({id: ind.id}));
-    this._id = ind.id;
+  constructor(q = {}){
+    if(!q.id || (typeof q.id !== 'string'))
+      throw new TypeError('Wrong index ' + JSON.stringify({id: q.id}));
+    this._id = q.id;
     this.tags = [];
     this.aux = {};
   }

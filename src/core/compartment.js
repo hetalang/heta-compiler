@@ -1,9 +1,6 @@
 const { Record } = require('./record');
 
 class Compartment extends Record {
-  constructor(ind){
-    super(ind);
-  }
   merge(q, skipChecking){
     if(!skipChecking) Compartment.isValid(q);
     super.merge(q, skipChecking);

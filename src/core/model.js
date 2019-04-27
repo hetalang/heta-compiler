@@ -5,8 +5,8 @@ const { Species } = require('./species');
 const { IndexedHetaError } = require('../heta-error');
 
 class Model extends _Simple {
-  constructor(ind){
-    super(ind);
+  constructor(q = {}){
+    super(q);
     this.population = [];
   }
   merge(q, skipChecking){

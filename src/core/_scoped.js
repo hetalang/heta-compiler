@@ -6,11 +6,11 @@ const { _Simple } = require('./_simple');
   Abstract class _Scoped
 */
 class _Scoped extends _Simple {
-  constructor(ind){
-    super(ind);
-    if(!ind.space || (typeof ind.space !== 'string'))
-      throw new IndexedHetaError(ind, 'Wrong index ' + JSON.stringify({id: ind.id, space: ind.space}));
-    this._space = ind.space;
+  constructor(q = {}){
+    super(q);
+    if(!q.space || (typeof q.space !== 'string'))
+      throw new TypeError('Wrong index ' + JSON.stringify({id: q.id, space: q.space}));
+    this._space = q.space;
   }
   merge(q, skipChecking){
     if(!skipChecking) _Scoped.isValid(q);

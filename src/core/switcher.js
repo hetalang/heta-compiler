@@ -1,9 +1,6 @@
 const { _Scoped } = require('./_scoped');
 
 class Switcher extends _Scoped {
-  constructor(ind){
-    super(ind);
-  }
   merge(q, skipChecking){
     if(!skipChecking) Switcher.isValid(q);
     super.merge(q, skipChecking);

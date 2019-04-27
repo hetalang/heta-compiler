@@ -32,7 +32,6 @@ class Container {
       throw new IndexedHetaError(q, `Unknown class "${q.class}" for the element.`);
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
-    // this.storage.setByIndex(simple);
     this.storage.set(simple.index, simple);
     let shouldIncludeStorage =
       (simple instanceof Model)
