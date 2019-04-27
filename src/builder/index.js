@@ -128,69 +128,6 @@ class Builder{
       }
     });
   }
-  // sync run, not used
-  run(callback){
-    this.errorFlag = false;
-    logger.info(`Start importing of modules, total: ${this.importModules.length}.`);
-    this.importModules.forEach((importItem) => {
-      this.import(importItem);
-    });
-    logger.info('Importing finished.');
-
-    if(!this.options.skipExport){
-      let exportElements = [...this.container.storage]
-        .filter((obj) => obj[1] instanceof _Export)
-        .map((obj) => obj[1]);
-      logger.info(`Start exporting to files, total: ${exportElements.length}.`);
-      exportElements.forEach((exportItem) => {
-        try{
-          logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
-          let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
-          let codeText = exportItem.do();
-          fs.outputFileSync(absFilename, codeText);
-        }catch(e){
-          this.errorCatcher(e, 'Export will be skipped.');
-        }
-      });
-      logger.info('Exporting finished.');
-    }else{
-      logger.warn('Exporting skipped because of options.');
-    }
-
-    if(this.errorFlag){
-      let e = new Error('Critical errors when run.');
-      callback(e);
-    }else{
-      callback(null);
-    }
-  }
-  // sync import, not used
-  import(importItem){
-    logger.info(`Importing module "${importItem.filename}" of type "${importItem.type}"...`);
-    let ms = new ModuleSystem();
-    let absFilename = path.join(this._coreDirname, importItem.filename);
-    let arr = [];
-    try{
-      ms.addModuleDeep(absFilename, importItem.type);
-      arr = ms.integrate();
-    }catch(e){
-      this.errorCatcher(e, `Module "${importItem.filename}" will be skipped.`);
-    }
-
-    arr.forEach((q) => {
-      try{
-        this.container.load(q);
-      }catch(e){
-        this.errorCatcher(e, `The element with id:"${q.id}" space:"${q.space}" will be skipped.`);
-      }
-    });
-    // debugging
-    //let j1 = JSON.stringify(arr, null, 2);
-    //let j2 = JSON.stringify(this.container.toQArr(), null, 2);
-    //logger.debug(j1);
-
-    return this;
-  }
   // analyze different errors
   errorCatcher(error, builderMessage = ''){
     // all errors throws

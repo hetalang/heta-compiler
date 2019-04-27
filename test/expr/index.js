@@ -28,7 +28,7 @@ describe('Expression constructor.', () => {
   it('Bad expression string throws.', () => {
     expect(() => {
       let expr = new Expression('e*(m');
-    }).throw(SyntaxError);
+    }).throw(TypeError);
   });
 });
 

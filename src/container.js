@@ -12,6 +12,7 @@ const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const _ = require('lodash');
 const { _Export, JSONExport } = require('./core/_export');
+const { getIndexFromQ } = require('./common');
 
 class Container {
   constructor(){
@@ -49,7 +50,7 @@ class Container {
       throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
     if(q.class)
       throw new IndexedHetaError(q, `Class property is not allowed for "update": ${q.class}`);
-    let index = q.space ? (q.space + '.' + q.id) : q.id;
+    let index = getIndexFromQ(q);
     let targetComponent = this.storage.get(index);
 
     // creation of new components is not allowed
@@ -74,12 +75,20 @@ class Container {
       throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
     if(q.class)
       throw new IndexedHetaError(q, `Class property is not allowed for "delete": ${q.class}`);
-    let index = q.space ? (q.space + '.' + q.id) : q.id;
+    let index = getIndexFromQ(q);
     let targetComponent = this.storage.delete(index);
     if(!targetComponent) // if targetComponent===false, element is not exist
       throw new IndexedHetaError(q, 'Element with index is not exist and cannot be deleted.');
 
     return targetComponent; // true or false
+  }
+  select(q){
+    if(!q)
+      throw new IndexedHetaError(q, JSON.stringify(q));
+    if(!q.id || (typeof q.id !== 'string'))
+      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
+    let index = getIndexFromQ(q);
+    return this.storage.get(index);
   }
   load(q){
     // estimate action, default is upsert

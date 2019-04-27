@@ -1,8 +1,9 @@
-const schema = require('heta-standard').hetaJSONSchema
+const schema = require('heta-standard').hetaJSONSchema;
 const Ajv = require('ajv');
 
-const validator = new Ajv()
+const validator = new Ajv({allErrors: true, jsonPointers: true})
   .addSchema(schema);
+require('ajv-errors')(validator);
 
 // from qs3p-ts
 // const randomId = require('random-id');

@@ -1,3 +1,5 @@
+const { getIndexFromQ } = require('./common');
+
 // default error but available for heta users
 class HetaError extends Error {
   constructor(...params){
@@ -8,7 +10,7 @@ HetaError.prototype.name = 'HetaError';
 
 class IndexedHetaError extends HetaError {
   constructor(q, message, filename, lineNumber){
-    let index = _getIndex(q);
+    let index = getIndexFromQ(q);
     let indexedMessage = `(${index}) ${message}`;
     super(indexedMessage, filename, lineNumber);
     this.index = index;
@@ -35,11 +37,3 @@ module.exports = {
   IndexedHetaError,
   HetaError
 };
-
-function _getIndex(q = {}){
-  if(q.space!==undefined){
-    return `${q.space}.${q.id}`;
-  }else{
-    return q.id;
-  }
-}

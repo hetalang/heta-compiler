@@ -1,6 +1,8 @@
 /* global describe, it */
 const Container = require('../src/container');
-const should = require('chai').should();
+const chai = require('chai');
+const should = chai.should();
+const { expect } = chai;
 const { _Simple } = require('../src/core/_simple');
 const { ContainerError } = require('../src/heta-error');
 
@@ -168,5 +170,19 @@ describe('Unit tests for Container load', () => {
   it('DELETE LATER', () => {
     c.should.be.lengthOf(4);
     // console.log(c.storage);
+  });
+
+  it('Select existed element', () => {
+    let res = c.select({id: 'k2', space: 'one'});
+    expect(res).to.have.property('className', 'Record');
+  });
+
+  it('Select non existed element', () => {
+    let res = c.select({id: 'k2', space: 'ten'});
+    expect(res).to.be.undefined;
+  });
+
+  it('Select with empty id throws.', () => {
+    expect(() => c.select({})).throw(Error);
   });
 });
