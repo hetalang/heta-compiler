@@ -87,7 +87,7 @@ class ModuleSystem {
 
 // temporal version of composer
 function compose(obj, arr){
-  let cleanedObj = _.omit(obj, ['action', 'id', 'class']);
+  let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type']);
   return arr.map((x) => {
     return _.chain(x)
       .cloneDeep()

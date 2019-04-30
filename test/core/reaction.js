@@ -10,7 +10,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 's1', stoichiometry: -1},
         {target: 's2', stoichiometry: 2}
       ],
-      effectors: [
+      modifiers: [
         {target: 'm1'},
         {target: 'm2'},
         {target: 'm3'}
@@ -28,7 +28,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 's1', stoichiometry: -1},
         {target: 's2', stoichiometry: 2}
       ],
-      effectors: [
+      modifiers: [
         {target: 'm1'},
         {target: 'm2'},
         {target: 'm3'}
