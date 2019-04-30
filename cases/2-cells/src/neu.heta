@@ -34,7 +34,7 @@ block $abstract_neu begin
 
   r_syn_P1 @Reaction {
     actors: 2ATP_neu + S1 -> 2ADP_neu + P1_neu,
-    modifiers: [{target: IL15_ext}]
+    modifiers: [IL15_ext]
   };
   r_syn_P1 := ksyn_P1 * neu_vol * S1 / (S1 + Km_S1) * ATP_neu^2;
 

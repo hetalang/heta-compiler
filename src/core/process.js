@@ -5,14 +5,13 @@ const { Species } =require('./species');
 class Process extends Record {
   constructor(q = {}){
     super(q);
-    this.effectors = [];
     this.actors = [];
   }
   merge(q, skipChecking){
     if(!skipChecking) Process.isValid(q);
     super.merge(q, skipChecking);
     if(q.effectors) {
-      this.effectors = q.effectors.map((q) => new Effector(q));
+      this.effectors = q.effectors.map((q) => new _Effector(q));
     }
     if(q.actors) {
       if(q.actors instanceof Array){
@@ -41,11 +40,7 @@ class Process extends Record {
         stoichiometry: actor.stoichiometry
       };
     });
-    res.effectors = this.effectors.map((effector) => {
-      return {
-        target: effector.target
-      };
-    });
+
     return res;
   }
 
@@ -80,13 +75,13 @@ class Process extends Record {
 
 }
 
-class Effector {
+class _Effector {
   constructor(q = {}){
     this.target = q.target;
   }
 }
 
-class Actor extends Effector {
+class Actor extends _Effector {
   constructor(q = {}){
     super(q);
     this.stoichiometry = q.stoichiometry!==undefined
@@ -124,6 +119,6 @@ function rct2actors(rct){
 
 module.exports = {
   Process,
-  Effector,
+  _Effector,
   Actor
 };
