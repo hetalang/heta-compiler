@@ -31,11 +31,13 @@ class Reaction extends Process {
   }
   toQ(){
     let res = super.toQ();
-    res.modifiers = this.modifiers.map((modifier) => {
-      return {
-        target: modifier.target
-      };
-    });
+    if(this.modifiers.length>0){
+      res.modifiers = this.modifiers.map((modifier) => {
+        return {
+          target: modifier.target
+        };
+      });
+    }
 
     return res;
   }
