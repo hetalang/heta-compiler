@@ -1,0 +1,48 @@
+- class: Const
+  id: tot_vol
+  num: 0.1
+- class: Const
+  id: neu_count
+  num: 1000000
+- class: Const
+  id: IL15_ext
+  num: 0
+- class: Const
+  id: blood
+  num: 5.2
+- class: Model
+  id: invitro
+- class: Record
+  id: P1_mean
+  space: invitro
+  assignments:
+    ode_: {size: {expr: (P1_ext * ext + P1_neu * neu_vol) / tot_vol}}
+- class: Model
+  id: invivo
+- class: Compartment
+  id: blood
+  space: invivo
+  assignments:
+    start_: {size: {class: Const, id: blood, num: 5.2}}
+- class: Species
+  id: neu_count
+  space: invivo
+  assignments:
+    start_: {size: {num: 1.e-9}}
+  compartment: blood
+- class: Reaction
+  id: r_prol_neu
+  space: invivo
+  assignments:
+    ode_: {size: {expr: k_prol * neu_count}}
+  actors:
+    - {target: neu_count, stoichiometry: 1}
+  effectors: []
+- class: SBMLExport
+  id: invitro_sbml
+  model: invitro
+- class: SBMLExport
+  id: invivo_sbml
+  model: invivo
+- class: YAMLExport
+  id: yaml

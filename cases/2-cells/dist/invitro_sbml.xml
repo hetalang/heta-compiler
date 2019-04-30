@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
+  <model id="invitro" metaid="invitro" >
+  
+    <listOfParameters>
+      <parameter
+        id="P1_mean"
+        
+        constant="false"
+        
+        
+        metaid="invitro.P1_mean"
+        >
+        
+      </parameter>
+      <parameter
+        id="tot_vol"
+        name="Generated virtual Record"
+        constant="true"
+        value="0.1"
+        
+        metaid="invitro.tot_vol"
+        >
+        
+      </parameter>
+  </listOfParameters>
+  
+  <listOfRules>
+    <assignmentRule
+      variable="P1_mean"
+      metaid="invitro.P1_mean.ode_"
+      
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><plus/><apply><times/><ci>P1_ext</ci><ci>ext</ci></apply><apply><times/><ci>P1_neu</ci><ci>neu_vol</ci></apply></apply><ci>tot_vol</ci></apply></math>
+    </assignmentRule>
+  </listOfRules>
+  </model>
+</sbml>

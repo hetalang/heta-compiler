@@ -1,0 +1,8 @@
+id: mm
+builderVersion: ^0.3
+options:
+  logLevel: info
+  debuggingMode: false
+importModules:
+  - type: heta
+    filename: src/index.heta

@@ -1,0 +1,45 @@
+/*
+  module describes population of neutrophils in volume
+*/
+
+block @Const begin
+  neu_size = 1e-12; // <L/cell>
+  K_eq_ADP = 10; // <UL>
+  ksyn_ATP = 1e-4;
+  ksyn_P1 = 1e-2;
+  Km_S1 = 1.2; // <nM>
+  k_tr_P1 = 1.3e-2;
+  ATP_neu = 1e4; // <>
+end
+
+block $abstract_neu begin
+  tot_vol @Compartment;
+  S1 @Species {compartment: tot_vol};
+
+  neu_vol @Compartment;
+  neu_vol := tot_vol * neu_count * neu_size; // <L>
+  ATP_neu @Species {compartment: neu_vol};
+  ADP_neu @Species {compartment: neu_vol};
+  P1_neu @Species {compartment: neu_vol};
+
+  ext @Compartment;
+  ext := tot_vol - neu_vol;
+  P1_ext @Species {compartment: ext};
+  IL15_ext @Species {compartment: ext};
+
+  r_syn_ATP @Reaction {
+    actors: ADP_neu -> ATP_neu
+  };
+  r_syn_ATP := ksyn_ATP * neu_vol * (ADP_neu - ATP_neu/K_eq_ADP); // <nmole/min>
+
+  r_syn_P1 @Reaction {
+    actors: 2ATP_neu + S1 -> 2ADP_neu + P1_neu,
+    modifiers: [{target: IL15_ext}]
+  };
+  r_syn_P1 := ksyn_P1 * neu_vol * S1 / (S1 + Km_S1) * ATP_neu^2;
+
+  r_tr_P1 @Reaction {
+    actors: P1_neu -> P1_ext
+  };
+  r_tr_P1 := k_tr_P1 * neu_vol * (P1_neu - P1_ext);
+end
