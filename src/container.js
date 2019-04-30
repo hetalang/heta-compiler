@@ -23,7 +23,7 @@ class Container {
     if(!q)
       throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
+      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
     if(!q.class || typeof q.class !== 'string')
       throw new IndexedHetaError(q, `No class or unsuitable class for "insert": ${q.class}`);
     // check if class is in the list
@@ -46,7 +46,7 @@ class Container {
     if(!q)
       throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string')){
-      throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
+      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
     }
     if(q.class)
       throw new IndexedHetaError(q, `Class property is not allowed for "update": ${q.class}`);
@@ -72,7 +72,7 @@ class Container {
     if(!q)
       throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
+      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
     if(q.class)
       throw new IndexedHetaError(q, `Class property is not allowed for "delete": ${q.class}`);
     let index = getIndexFromQ(q);
