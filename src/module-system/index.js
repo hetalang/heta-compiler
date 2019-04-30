@@ -87,10 +87,12 @@ class ModuleSystem {
 
 // temporal version of composer
 function compose(obj, arr){
+  let cleanedObj = _.omit(obj, ['action', 'id', 'class']);
   return arr.map((x) => {
     return _.chain(x)
       .cloneDeep()
       // transform each element here based on obj
+      .assign(cleanedObj)
       .value();
   });
 }

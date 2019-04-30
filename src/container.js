@@ -45,8 +45,9 @@ class Container {
   update(q){
     if(!q)
       throw new IndexedHetaError(q, JSON.stringify(q));
-    if(!q.id || (typeof q.id !== 'string'))
+    if(!q.id || (typeof q.id !== 'string')){
       throw new IndexedHetaError(q, JSON.stringify({id: q.id}));
+    }
     if(q.class)
       throw new IndexedHetaError(q, `Class property is not allowed for "update": ${q.class}`);
     let index = getIndexFromQ(q);
