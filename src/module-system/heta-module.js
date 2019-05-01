@@ -1,19 +1,15 @@
 const { readFileSync } = require('fs');
-const path = require('path');
 const hetaParser = require('heta');
 const _Module = require('./_module');
 
-class HetaModule extends _Module{
-  constructor(filename){
-    super(filename);
-    this.type = 'heta';
+_Module.prototype.setHetaModule = function(){
+  this.type = 'heta';
 
-    let fileContent = readFileSync(this.filename, 'utf8');
-    this.parsed = _hetaParse(this.filename, fileContent);
+  let fileContent = readFileSync(this.filename, 'utf8');
+  this.parsed = _hetaParse(this.filename, fileContent);
 
-    this.updateByAbsPaths();
-  }
-}
+  return this;
+};
 
 function _hetaParse(filename, ...params){
   try{
@@ -28,7 +24,3 @@ function _hetaParse(filename, ...params){
     throw e;
   }
 }
-
-module.exports = {
-  HetaModule
-};

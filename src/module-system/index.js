@@ -1,9 +1,11 @@
 const path = require('path');
 const _ = require('lodash');
 const TopoSort = require('topo-sort');
-let { HetaModule } = require('./heta-module');
-let JSONModule = require('./json-module');
-let YAMLModule = require('./yaml-module');
+const _Module = require('./_module');
+require('./heta-module');
+require('./json-module');
+require('./yaml-module');
+require('./xlsx-module');
 
 class ModuleSystem {
   constructor(){
@@ -11,21 +13,10 @@ class ModuleSystem {
     this.graph = new TopoSort();
   }
   // parse single file without dependencies
-  registerModule(filepath, type){
+  addModule(filepath, type){
     // parse
-    switch(type){
-      case 'heta':
-        var mdl = new HetaModule(filepath);
-        break;
-      case 'json':
-        mdl = new JSONModule(filepath);
-        break;
-      case 'yml':
-        mdl = new YAMLModule(filepath);
-        break;
-      default:
-        throw new TypeError(`Unknown type "${type}" for file "${filepath}" `);
-    }
+    let mdl = _Module.createModule(filepath, type);
+    // push to storage
     this.storage[filepath] = mdl;
     // set in graph
     let paths = mdl
@@ -54,7 +45,7 @@ class ModuleSystem {
   // scan module dependences recursively
   _addModuleDeep(absFilePath, type){
     if(!(absFilePath in this.storage)){ // new file
-      let mdl = this.registerModule(absFilePath, type);
+      let mdl = this.addModule(absFilePath, type);
       mdl.getImportElements()
         .forEach((p) => this._addModuleDeep(p.source, p.type));
       return mdl;

@@ -1,18 +1,14 @@
 const { readFileSync } = require('fs');
-const path = require('path');
 const _Module = require('./_module');
 
-class JSONModule extends _Module{
-  constructor(filename){
-    super(filename);
-    this.type = 'json';
+_Module.prototype.setJSONModule = function(){
+  this.type = 'json';
 
-    let fileContent = readFileSync(this.filename, 'utf8');
-    this.parsed = _JSONParse(filename, fileContent);
+  let fileContent = readFileSync(this.filename, 'utf8');
+  this.parsed = _JSONParse(this.filename, fileContent);
 
-    this.updateByAbsPaths();
-  }
-}
+  return this;
+};
 
 function _JSONParse(filename, ...params){
   try{
@@ -36,5 +32,3 @@ function _JSONParse(filename, ...params){
     throw e;
   }
 }
-
-module.exports = JSONModule;
