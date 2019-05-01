@@ -1,0 +1,15 @@
+/*
+  This modul imports different types of modules
+*/
+
+#import {
+  source: heta.heta,
+  type: heta
+};
+
+#import {
+  source: json.json,
+  type: json
+};
+
+yaml @YAMLExport;

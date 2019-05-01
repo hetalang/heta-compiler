@@ -1,0 +1,10 @@
+[
+  {
+    "id": "p1",
+    "space": "one",
+    "class": "Record",
+    "assignments": {
+      "start_": {"size": 1}
+    }
+  }
+]

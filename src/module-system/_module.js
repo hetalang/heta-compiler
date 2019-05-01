@@ -9,6 +9,12 @@ class _Module{
     return this.parsed
       .filter((simple) => simple.action==='import');
   }
+  updateByAbsPaths(){
+    let absDirPath = path.dirname(this.filename);
+    this.parsed // replace relative paths by absolute ones
+      .filter((simple) => simple.action==='import')
+      .forEach((simple) => simple.source = path.resolve(absDirPath, simple.source));
+  }
 }
 
 module.exports = _Module;

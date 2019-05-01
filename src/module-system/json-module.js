@@ -8,12 +8,32 @@ class JSONModule extends _Module{
     this.type = 'json';
 
     let fileContent = readFileSync(this.filename, 'utf8');
-    this.parsed = JSON.parse(fileContent);
+    this.parsed = _JSONParse(filename, fileContent);
 
-    let absDirPath = path.dirname(this.filename);
-    this.parsed // replace relative paths by absolute ones
-      .filter((simple) => simple.action==='import')
-      .forEach((simple) => simple.source = path.resolve(absDirPath, simple.source));
+    this.updateByAbsPaths();
+  }
+}
+
+function _JSONParse(filename, ...params){
+  try{
+    return JSON.parse(...params);
+  }catch(e){
+    let select = e.message.match(/at position (\d*)/); // This is ugly part, sorry
+    if((e instanceof SyntaxError) && typeof +select[1]==='number'){
+      e.name = 'JSONSynaxError';
+      let pos = +select[1];
+      let parsedPart = params[0].substring(0, pos);
+      let splittedText = parsedPart.split(/\r*\n/);
+      let substringToShow = splittedText[splittedText.length-1];
+      e.coordinate = {
+        line: splittedText.length,
+        column: substringToShow.length,
+        position: pos,
+        filename: filename
+      };
+      e.message = `(${e.coordinate.line}:${e.coordinate.column} in "${e.coordinate.filename}") ` + e.message;
+    }
+    throw e;
   }
 }
 
