@@ -11,10 +11,7 @@ class YAMLModule extends _Module{
     let fileContent = readFileSync(this.filename, 'utf8');
     this.parsed = jsYAML.safeLoad(fileContent);
 
-    let absDirPath = path.dirname(this.filename);
-    this.parsed // replace relative paths by absolute ones
-      .filter((simple) => simple.action==='import')
-      .forEach((simple) => simple.source = path.resolve(absDirPath, simple.source));
+    this.updateByAbsPaths();
   }
 }
 

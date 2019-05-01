@@ -3,13 +3,18 @@
 */
 
 #import {
+  source: json.json,
+  type: json
+};
+
+#import {
   source: heta.heta,
   type: heta
 };
 
 #import {
-  source: json.json,
-  type: json
+  source: yaml.yml,
+  type: yml
 };
 
 yaml @YAMLExport;

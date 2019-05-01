@@ -24,7 +24,7 @@ class ModuleSystem {
         mdl = new YAMLModule(filepath);
         break;
       default:
-        throw new Error(`Unknown type "${type}" for file "${filepath}" `);
+        throw new TypeError(`Unknown type "${type}" for file "${filepath}" `);
     }
     this.storage[filepath] = mdl;
     // set in graph
