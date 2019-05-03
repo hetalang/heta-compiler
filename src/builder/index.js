@@ -8,6 +8,7 @@ const semver = require('semver'); // for future check of buildVersion
 const { version } = require('../../package');
 const Container = require('../container');
 const ModuleSystem = require('../module-system');
+const _Module = require('../module-system/_module');
 const winston = require('winston');
 const { _Export } = require('../core/_export');
 const async = require('async');
@@ -57,34 +58,30 @@ class Builder{
     this.container = new Container();
     logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
-  importManyAsync(callback){
-    let notIgnoredImports = this.importModules.filter((importItem) => !importItem.ignore);
-    logger.info(`Start importing of modules, total: ${notIgnoredImports.length}.`);
-    async.each(notIgnoredImports, (importItem, cb) => this.importAsync(importItem, cb), (err) => {
-      logger.info('Import finished.');
-      callback(err);
-    });
-  }
-  importAsync(importItem, callback){
-    logger.info(`Importing module "${importItem.filename}" of type "${importItem.type}"...`);
+  importAsync(callback){
+    logger.info(`Importing module "${this.importModule.filename}" of type "${this.importModule.type}"...`);
     let ms = new ModuleSystem();
-    let absFilename = path.join(this._coreDirname, importItem.filename);
-
-    ms.addModuleDeepAsync(absFilename, importItem.type, (err, arr) => {
+    let absFilename = path.join(this._coreDirname, this.importModule.filename);
+    // use module from importModule property
+    // err : first error in importing
+    ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule.options, (err) => {
       if(err){
-        this.errorCatcher(err, `Module "${importItem.filename}" will be skipped.`);
-        callback(null);
+        this.errorCatcher(err, `Module "${absFilename}" will be skipped.`);
       }else{
-        arr = ms.integrate(); // TODO: try/catch required
-        arr.forEach((q) => {
-          try{
-            this.container.load(q);
-          }catch(e){
-            this.errorCatcher(e, 'The element will be skipped.');
-          }
-        });
-        callback(null);
+        try{
+          ms.integrate()
+            .forEach((q) => {
+              try{
+                this.container.load(q);
+              }catch(e){
+                this.errorCatcher(e, 'The element will be skipped.');
+              }
+            });
+        }catch(integrationError){
+          this.errorCatcher(integrationError, `Module "${absFilename}" will be skipped.`);
+        }
       }
+      callback(null);
     });
   }
   exportManyAsync(callback){
@@ -116,7 +113,7 @@ class Builder{
   runAsync(callback){
     this.errorFlag = false; // reset platform level errors
     async.waterfall([
-      (cb) => this.importManyAsync(cb),
+      (cb) => this.importAsync(cb),
       (cb) => this.exportManyAsync(cb)
     ], (err) => {
       if(err) { // internal errors

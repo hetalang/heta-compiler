@@ -2,40 +2,37 @@ const path = require('path');
 
 // abstract class for different import types
 class _Module{
-  // constructor with type selection
-  static createModule(filepath, type){
+  static createModuleAsync(filename, type, options = {}, callback){
     let mdl = new _Module;
-    mdl.filename = path.resolve(filepath); // get abs path
-
+    mdl.filename = path.resolve(filename); // get abs path
+    mdl.type = type;
+    mdl.options = options;
+    
     switch(type){
       case 'heta':
-        mdl.setHetaModule(filepath);
+        mdl.setHetaModuleAsync(callback);
         break;
       case 'json':
-        mdl.setJSONModule(filepath);
+        mdl.setJSONModuleAsync(callback);
         break;
       case 'yml':
-        mdl.setYAMLModule(filepath);
+        mdl.setYAMLModuleAsync(callback);
         break;
       case 'xlsx':
-        mdl.setXLSXModule(filepath);
+        mdl.setXLSXModuleAsync(callback);
         break;
       default:
-        throw new TypeError(`Unknown type "${type}" for file "${filepath}" `);
+        callback(new TypeError(`Unknown type "${type}" for file "${filename}" `));
     }
-
-    mdl.updateByAbsPaths();
-
-    return mdl;
   }
   getImportElements(){
     return this.parsed
       .filter((simple) => simple.action==='import');
   }
+  // replace relative paths by absolute ones
   updateByAbsPaths(){
     let absDirPath = path.dirname(this.filename);
-    this.parsed // replace relative paths by absolute ones
-      .filter((simple) => simple.action==='import')
+    this.getImportElements()
       .forEach((simple) => simple.source = path.resolve(absDirPath, simple.source));
   }
 }

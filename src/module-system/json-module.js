@@ -1,13 +1,28 @@
-const { readFileSync } = require('fs');
+const fs = require('fs');
 const _Module = require('./_module');
-
+/*
 _Module.prototype.setJSONModule = function(){
   this.type = 'json';
 
-  let fileContent = readFileSync(this.filename, 'utf8');
+  let fileContent = fs.readFileSync(this.filename, 'utf8');
   this.parsed = _JSONParse(this.filename, fileContent);
 
   return this;
+};
+*/
+_Module.prototype.setJSONModuleAsync = function(callback){
+  fs.readFile(this.filename, 'utf8', (err, fileContent) => {
+    if(err){
+      callback(err);
+    }else{
+      try{
+        this.parsed = _JSONParse(this.filename, fileContent);
+        callback(null, this);
+      }catch(e){
+        callback(e);
+      }
+    }
+  });
 };
 
 function _JSONParse(filename, ...params){

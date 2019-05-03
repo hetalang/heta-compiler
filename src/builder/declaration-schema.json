@@ -31,20 +31,17 @@
         "afterExports": {"type": "string"}
       }
     },
-    "importModules": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["type", "filename"],
-        "additionalProperties": false,
-        "properties": {
-          "ignore": {"type": "boolean", "default": false},
-          "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml"]},
-          "filename": {"type": "string"},
-          "ignoreDeps": {"type": "boolean", "default": false}
-        }
-      },
-      "default": []
+    "importModule": {
+      "type": "object",
+      "required": ["type", "filename"],
+      "additionalProperties": false,
+      "properties": {
+        "ignore": {"type": "boolean", "default": false},
+        "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml", "xlsx"]},
+        "filename": {"type": "string"},
+        "ignoreDeps": {"type": "boolean", "default": false},
+        "options": {"type": "object", "default": {}}
+      }
     }
   }
 }

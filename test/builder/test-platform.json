@@ -17,21 +17,8 @@
     "afterImports": "script2.js",
     "afterExports": "script3.js"
   },
-  "importModules": [
-    {
-      "type": "heta",
-      "filename": "src/model.heta"
-    },
-    {
-      "ignore": true,
-      "type": "yaml",
-      "filename": "src/model.yml"
-    },
-    {
-      "ignore": true,
-      "ignoreDeps": true,
-      "type": "slv",
-      "filename": "src/model.slv"
-    }
-  ]
+  "importModule": {
+    "type": "heta",
+    "filename": "src/model.heta"
+  }
 }

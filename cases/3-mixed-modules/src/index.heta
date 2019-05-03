@@ -17,4 +17,10 @@
   type: yml
 };
 
+/*
+#import {
+  source: xlsx.xlsx,
+  type: xlsx
+};
+*/
 yaml @YAMLExport;
