@@ -17,10 +17,22 @@
   type: yml
 };
 
-/*
 #import {
   source: xlsx.xlsx,
-  type: xlsx
+  type: xlsx,
+  options: {
+    sheetNum: 1,
+    omitRows: 3
+  }
 };
-*/
+
+#import {
+  source: xlsx.xlsx,
+  type: xlsx,
+  options: {
+    sheetNum: 2,
+    omitRows: 3
+  }
+};
+
 yaml @YAMLExport;

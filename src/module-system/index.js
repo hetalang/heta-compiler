@@ -27,10 +27,13 @@ class ModuleSystem {
   }
   // scan module dependences recursively
   _addModuleDeepAsync(absFilePath, type, options = {}, callback){
+    if(typeof callback!=='function') throw TypeError('callback function should be set.');
+    // XXX: restriction: currently different tables in one xlsx file is not supported
+    // to support this the another algorythm of addModule() and integrate() is required
     if(!(absFilePath in this.storage)){ // new file
-      this.addModuleAsync(absFilePath, type, options, (err, mdl) => {
-        if(err){
-          callback(err);
+      this.addModuleAsync(absFilePath, type, options, (err0, mdl) => {
+        if(err0){
+          callback(err0);
         }else{
           async.eachSeries(mdl.getImportElements(), (importItem, cb) => {
             this._addModuleDeepAsync(importItem.source, importItem.type, importItem.options, cb);
@@ -49,6 +52,7 @@ class ModuleSystem {
   }
   // parse single file without dependencies
   addModuleAsync(filename, type, options = {}, callback){
+    if(typeof callback!=='function') throw TypeError('callback function should be set.');
     // parse
     _Module.createModuleAsync(filename, type, options, (err, mdl) => {
       if(err){
