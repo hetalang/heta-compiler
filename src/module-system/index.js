@@ -13,38 +13,6 @@ class ModuleSystem {
     this.storage = {};
     this.graph = new TopoSort();
   }
-  // === sync version of all methods ===
-  // entrance to scan
-  addModuleDeep(rawAbsFilePath, type){
-    let absFilePath = path.normalize(rawAbsFilePath);
-    this._top = this._addModuleDeep(absFilePath, type);
-    return this._top;
-  }
-  // scan module dependences recursively
-  _addModuleDeep(absFilePath, type){
-    if(!(absFilePath in this.storage)){ // new file
-      let mdl = this.addModule(absFilePath, type);
-      mdl.getImportElements()
-        .forEach((p) => this._addModuleDeep(p.source, p.type));
-      return mdl;
-    }
-    // if file already in storage do nothing
-  }
-  // parse single file without dependencies
-  addModule(filepath, type){
-    // parse
-    let mdl = _Module.createModule(filepath, type);
-    // push to storage
-    this.storage[filepath] = mdl;
-    // set in graph
-    let paths = mdl
-      .getImportElements()
-      .map((x) => x.source);
-    this.graph.add(filepath, paths);
-
-    return mdl;
-  }
-  // === async version of all methods ===
   // entrance to scan
   addModuleDeepAsync(rawAbsFilePath, type, options = {}, callback){
     let absFilePath = path.normalize(rawAbsFilePath);
@@ -53,7 +21,7 @@ class ModuleSystem {
         callback(err);
       }else{
         this._top = mdl;
-        callback(null);
+        callback(null, mdl);
       }
     });
   }
@@ -126,7 +94,7 @@ class ModuleSystem {
 
 // temporal version of composer
 function compose(obj, arr){
-  let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type']);
+  let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type', 'options']);
   return arr.map((x) => {
     return _.chain(x)
       .cloneDeep()

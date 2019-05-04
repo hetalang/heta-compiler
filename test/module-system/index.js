@@ -9,30 +9,39 @@ const noImportOutput = require('./no-import');
 describe('ModuleSystem without import.', () => {
   let ms = new ModuleSystem();
 
-  it('Add module.', () => {
+  it('Add module.', (done) => {
     let filepath = path.join(__dirname, 'no-import.heta');
-    let mdl = ms.addModuleDeep(filepath, 'heta');
-    mdl.parsed.should.be.deep.equal(noImportOutput);
+    ms.addModuleDeepAsync(filepath, 'heta', {}, (err, mdl) => {
+      if(err){
+        done(err);
+      }else{
+        expect(mdl.parsed).to.be.deep.equal(noImportOutput);
+        done();
+      }
+    });
   });
-
 });
+
 
 describe('Run normal ModuleSystem.', () => {
   let ms;
-  it('Create.', () => {
-    ms = new ModuleSystem();
-  });
-  it('Add module.', () => {
-    let filepath = path.join(__dirname, './normal-a.heta');
-    let mdl = ms.addModuleDeep(filepath, 'heta');
-    expect(mdl).to.have.property('filename').with.a('string');
-    expect(mdl).to.have.property('type', 'heta');
-    expect(mdl).to.have.property('parsed').with.a('Array').lengthOf(3);
-  });
 
-  it('Integrate and check.', () => {
-    let arr = ms.integrate();
-    // writeFileSync('arr.json', JSON.stringify(arr, null, 2));
-    expect(arr).to.be.deep.equal(expected);
+  it('Add module.', (done) => {
+    ms = new ModuleSystem();
+    let filepath = path.join(__dirname, './normal-a.heta');
+    ms.addModuleDeepAsync(filepath, 'heta', {}, (err, mdl) => {
+      if(err){
+        done(err);
+      }else{
+        expect(mdl).to.have.property('filename').with.a('string');
+        expect(mdl).to.have.property('type', 'heta');
+        expect(mdl).to.have.property('parsed').with.a('Array').lengthOf(3);
+
+        let arr = ms.integrate();
+        // writeFileSync('arr.json', JSON.stringify(arr, null, 2));
+        expect(arr).to.be.deep.equal(expected);
+        done();
+      }
+    });
   });
 });
