@@ -7,16 +7,22 @@ _Module.prototype.setXLSXModuleAsync = function(callback){
     sheetNum: 1,
     omitRows: 0
   });
+  // this part is the way to fix bug in excel-as-json 10 second before callback
+  let tableOk = false;
+  let waitSec = 10;
+  setTimeout(() => {
+    if(!tableOk)
+      callback(new Error(`Table #${options.sheetNum} is not found in "${this.filename}" or reading table require more than ${waitSec} sec.`));
+  }, 1000*waitSec);
   convertExcel(
     this.filename,
     null,
     // XXX: if scheet is not exist, then callback will not work
-    // this is bag of 'excel-as-json' and I have no idea how to repare it
+    // this is bag of 'excel-as-json' and not best way to repair is used
     // be carefull about sheet number in "platform.json" imports
-    //{sheet: sheet.sheetNum, omitEmptyFields: true},
     {sheet: options.sheetNum, omitEmptyFields: true},
     (err, data) => {
-      console.log(data);
+      tableOk = true;
       if(err){
         callback(err);
       }else{
