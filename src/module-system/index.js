@@ -5,6 +5,7 @@ const TopoSort = require('topo-sort');
 const _Module = require('./_module');
 require('./heta-module');
 require('./json-module');
+require('./md-module');
 require('./yaml-module');
 require('./xlsx-module');
 

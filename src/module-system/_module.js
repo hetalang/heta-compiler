@@ -16,6 +16,9 @@ class _Module{
       case 'json':
         mdl.setJSONModuleAsync(callback);
         break;
+      case 'md':
+        mdl.setMdModuleAsync(callback);
+        break;
       case 'yml':
         mdl.setYAMLModuleAsync(callback);
         break;

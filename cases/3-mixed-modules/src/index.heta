@@ -35,4 +35,12 @@
   }
 };
 
+#import {
+  source: page.md,
+  type: md,
+  options: {pageId: xxx},
+  id: yyy,
+  title: hhh
+};
+
 yaml @YAMLExport;

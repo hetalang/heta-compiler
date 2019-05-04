@@ -4,10 +4,12 @@
 
 - slv
 - dat
-- xlsx
++ xlsx
 - sbml
-- markdown
++ markdown -> Page
 - svg
++ json
++ yaml
 
 ## exports
 
@@ -18,5 +20,5 @@
 - mrgsolve
 - simbio
 - simsolve
-- json
-- yml
++ json
++ yml
