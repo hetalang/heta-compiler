@@ -1,9 +1,10 @@
 block @Const begin
     tot_vol = 0.1; // <L>
-    neu_count = 1e6; // <cells/L>
+    neu_count = 1e6; // <cells>
     IL15_ext = 0; // <nM>
     blood = 5.2;
     plasma = 2.5;
+    AXP_neu = 0.1;
 end
 
 invitro @Model;
@@ -12,6 +13,7 @@ block $invitro begin
 
     P1_mean @Record := ( P1_ext * ext + P1_neu * neu_vol ) / tot_vol;
 
+    ext .= 1;
     S1 .= 150; // initial value of substrate
     P1_ext .= 0;
     P1_neu .= 0;

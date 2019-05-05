@@ -1,0 +1,33 @@
+'''
+This is notes describing the model
+'''
+mm @Model;
+
+// this block unites elements with the same space
+block $mm begin
+  default @Compartment { units: L };
+
+  S @Species { title: substrate, compartment: default, units: uM };
+  P @Species { title: product,  compartment: default, units: uM };
+  ''' Transformation of __substate__ to __product__ '''
+  r1 @Reaction {
+    title: Michaelis-Menten reaction,
+    actors: S -> P,
+    units: umole/min
+  };
+
+  r1 := Vmax*S/(Km+S)*default; // S is used here but assigned below
+  S .= 10; // S should be initialialized after creation
+  P .= 0;
+end
+
+// this block unites element with the same class
+block @Const begin
+  Vmax = 0.1 {units: L}; // this is global constant available for any scoped equation
+  Km = 2.5 {units: uM};
+  default = 1 {units: L};
+end
+
+mm_sbml @SBMLExport { model: mm };
+full_json @JSONExport;
+full_yaml @YAMLExport;

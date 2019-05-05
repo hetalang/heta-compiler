@@ -1,0 +1,34 @@
+/*
+  This module describes simple model with styles
+*/
+mm @Model;
+
+// this block unites elements with the same space
+block $mm begin
+  default @Compartment;
+
+  S @Species {
+    compartment: default
+  };
+  P @Species {
+    compartment: default
+  };
+  r1 @Reaction {
+    actors: S -> P
+  };
+
+  r1 := Vmax*S/(Km+S)*default; // S is used here but assigned below
+  S .= 10; // S should be initialialized after creation
+  P .= 0;
+end
+
+// this block unites element with the same class
+block @Const begin
+  Vmax = 0.1; // this is global constant available for any scoped equation
+  Km = 2.5;
+  default = 1;
+end
+
+mm_sbml @SBMLExport { model: mm };
+full_json @JSONExport;
+full_yaml @YAMLExport;

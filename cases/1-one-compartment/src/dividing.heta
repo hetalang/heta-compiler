@@ -1,0 +1,22 @@
+block @Const begin
+  comp0 = 1; // compartment 0 volume
+  comp1 = 5.2; // compartment 1 volume
+  kabs = 0.01; // constant of absorption
+  kel = 0.01; // constant of elimination
+  Vmax = 1.2;
+  Km = 1.1;
+end
+
+#import {
+  source: non-saturable.heta,
+  type: heta
+};
+
+#import {
+  source: saturable.heta,
+  type: heta
+};
+
+sbml_non_saturable @SBMLExport {model: one_comp};
+sbml_saturable @SBMLExport {model: one_comp_saturation};
+yaml @YAMLExport;

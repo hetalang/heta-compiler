@@ -17,7 +17,7 @@ block $abstract_neu begin
   S1 @Species {compartment: tot_vol};
 
   neu_vol @Compartment;
-  neu_vol := tot_vol * neu_count * neu_size; // <L>
+  neu_vol := neu_count * neu_size; // <L>
   ATP_neu @Species {compartment: neu_vol};
   ADP_neu @Species {compartment: neu_vol};
   P1_neu @Species {compartment: neu_vol};

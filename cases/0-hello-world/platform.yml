@@ -5,4 +5,4 @@ options:
   debuggingMode: false
 importModule:
   type: heta
-  filename: src/index.heta
+  filename: src/1-style.heta
