@@ -52,7 +52,7 @@ class Model extends _Simple {
   populate(){
     // add population
     this.population = this.collectChildren();
-    // collect all deps
+    // collect all deps, possibly helpfull for diagnostics
     let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
       .map((record) => {
         return _.map(record.assignments, (assignment) => assignment.size)
@@ -65,6 +65,7 @@ class Model extends _Simple {
       .difference(this.getChildrenIds()) // remove local ids from the list
       .difference(['t']) // remove time
       .value();
+    /* removed support for virtual Record
     deps.forEach((id) => { // select deps mentioned in global but not in space
       let unscoped = this._storage.get(id);
       if(unscoped!==undefined && unscoped.className==='Const') {
@@ -78,6 +79,7 @@ class Model extends _Simple {
         this.population.push(virtualRecord);
       }
     });
+    */
     // add virtual assignments, search for global if no assignments
     this.selectByInstance(Record)
       .filter((scoped) => scoped.assignments===undefined)

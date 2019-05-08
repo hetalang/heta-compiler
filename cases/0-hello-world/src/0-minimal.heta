@@ -5,6 +5,8 @@ default @Compartment $mm;
 S @Species $mm { compartment: default };
 P @Species $mm { compartment: default };
 r1 @Reaction $mm { actors: S -> P };
+Vmax $mm @Record;
+Km $mm @Record;
 
 S $mm .= 10;
 P $mm .= 0;

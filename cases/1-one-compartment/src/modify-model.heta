@@ -18,6 +18,9 @@ block $one_comp_saturation begin
     source: non-saturable.heta,
     type: heta
   };
+  Vmax @Record;
+  Km @Record;
+  #delete kel;
   vel := Vmax*s1*comp1/(Km + s1);
 end
 

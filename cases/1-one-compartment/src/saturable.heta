@@ -6,6 +6,9 @@ block $one_comp_saturation begin
   comp1 @Compartment;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
+  Vmax @Record;
+  Km @Record;
+  kabs @Record;
 
   vabs := kabs*a0;
   vel := Vmax*s1*comp1/(Km + s1);

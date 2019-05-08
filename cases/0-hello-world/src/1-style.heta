@@ -16,6 +16,8 @@ block $mm begin
   r1 @Reaction {
     actors: S -> P
   };
+  Vmax @Record;
+  Km @Record;
 
   r1 := Vmax*S/(Km+S)*default; // S is used here but assigned below
   S .= 10; // S should be initialialized after creation

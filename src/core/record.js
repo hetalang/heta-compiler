@@ -69,7 +69,7 @@ class Assignment {
       throw new Error(`Size of assignment ${JSON.stringify(q)} must be one of ['Numeric', 'Expression', 'Const'].`);
     this.size = q.size;
     if(q.increment!==undefined) this.increment = q.increment;
-    if(q.id!==undefined) this.id = q.id;
+    // if(q.id!==undefined) this.id = q.id; // XXX: I don't know if this required
   }
   get exprParsed(){
     if(this.size instanceof Expression){

@@ -5,4 +5,4 @@ options:
   debuggingMode: false
 importModule:
   type: heta
-  filename: src/1-style.heta
+  filename: src/2-annotation.heta

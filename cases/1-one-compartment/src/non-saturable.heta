@@ -6,6 +6,8 @@ block $one_comp begin
   comp1 @Compartment;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
+  kabs @Record;
+  kel @Record;
 
   vabs := kabs*a0;
   vel := kel*s1*comp1;
