@@ -162,7 +162,7 @@
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}.{{event.id}}">
-            {{ record.assignments[event.id].toCMathML() }}
+            {{ record.assignments[event.id].size.toCMathML }}
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>

@@ -101,56 +101,6 @@
         >
         
       </parameter>
-      <parameter
-        id="a0_0"
-        name="Generated virtual Record"
-        constant="true"
-        value="10"
-        units="umole"
-        metaid="two_comp.a0_0"
-        >
-        
-      </parameter>
-      <parameter
-        id="kabs"
-        name="Generated virtual Record"
-        constant="true"
-        value="0.01"
-        units="__h"
-        metaid="two_comp.kabs"
-        >
-        
-      </parameter>
-      <parameter
-        id="kdiff"
-        name="Generated virtual Record"
-        constant="true"
-        value="0.01"
-        units="__h"
-        metaid="two_comp.kdiff"
-        >
-        
-      </parameter>
-      <parameter
-        id="PS"
-        name="Generated virtual Record"
-        constant="true"
-        value="2.2"
-        units="m2"
-        metaid="two_comp.PS"
-        >
-        
-      </parameter>
-      <parameter
-        id="kel"
-        name="Generated virtual Record"
-        constant="true"
-        value="0.00001"
-        units="__h"
-        metaid="two_comp.kel"
-        >
-        
-      </parameter>
   </listOfParameters>
   
     <listOfReactions>
@@ -264,7 +214,7 @@
           <eventAssignment
             variable="a0"
             metaid="two_comp.a0.sw1">
-            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>a0</ci><cn>10</cn></apply></math>
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           
         </listOfEventAssignments>
@@ -297,16 +247,6 @@
       <unitDefinition id="h" name="h">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="0" multiplier="3600"/>
-  </listOfUnits>
-</unitDefinition>
-      <unitDefinition id="__h" name="1/h">
-  <listOfUnits>
-    <unit kind="second" exponent="-1" scale="0" multiplier="3600"/>
-  </listOfUnits>
-</unitDefinition>
-      <unitDefinition id="m2" name="m^2">
-  <listOfUnits>
-    <unit kind="metre" exponent="2" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
   </listOfUnitDefinitions>

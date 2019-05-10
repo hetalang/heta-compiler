@@ -41,7 +41,7 @@ describe('Create SBML.', () => {
       .populate()
       .toSBML();
 
-    // fs.writeFileSync('result.xml', text);
+    fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
     text.should.xml.be.deep.equal(two_compartment_model_result);
   });
