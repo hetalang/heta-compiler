@@ -18,7 +18,7 @@ class _Simple {
     if(!skipChecking) _Simple.isValid(q);
 
     if(q && q.title) this.title = q.title;
-    if(q && q.notes) this.notes = q.notes;
+    if(q && q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
     if(q && q.tags) this.tags = _.cloneDeep(q.tags);
     if(q && q.aux) this.aux = _.cloneDeep(q.aux);
 
