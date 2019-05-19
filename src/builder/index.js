@@ -81,6 +81,13 @@ class Builder{
           this.errorCatcher(integrationError, `Module "${absFilename}" will be skipped.`);
         }
       }
+      // it should be not here but in runAsync()
+      logger.info('Setting references in elements, total length ' + this.container.length);
+      try{
+        this.container.setReferences();
+      }catch(referenceError){
+        this.errorCatcher(referenceError, 'Bad reference.');
+      }
       callback(null);
     });
   }

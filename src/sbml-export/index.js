@@ -1,15 +1,16 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
+const { IndexedHetaError } = require('../heta-error');
+const nunjucks = require('../nunjucks-env');
 require('./model');
 
 class SBMLExport extends _Export{
   merge(q, skipChecking){
     super.merge(q, skipChecking);
-    if(q && typeof q.model!=='string')
+    if(q && typeof q.model===undefined)
       throw new TypeError(`"model" property in SBMLExport ${this.id} should be string.`);
-    if(q && q.model){
-      this.model = q.model;
-    }
+    this.model = q.model;
+
     return this;
   }
   get className(){
@@ -19,14 +20,18 @@ class SBMLExport extends _Export{
     return 'xml';
   }
   do(){
-    let modelObject = this._storage.get(this.model); // TODO: implement get to use this.get({id: model})
-    if(modelObject===undefined){
-      throw new Error(`Required model "${this.model}" is not found in container and will not be exported to SBML.`);
-    }
-    let code = modelObject
-      .populate()
-      .toSBML();
-    return code;
+    this._model_ = this._storage.get(this.model); // TODO: implement get to use this.get({id: model})
+    if(this._model_===undefined)
+      throw new IndexedHetaError(this.indexObj, `Required property model reffers to lost model id "${this.model}".`);
+
+    return this.getSBMLCode();
+  }
+  getSBMLCode(){
+    this._model_.populate();
+    return nunjucks.render(
+      'sbml-export/template.xml.njk',
+      this
+    );
   }
   toQ(){
     let res = super.toQ();

@@ -17,5 +17,8 @@ env.addFilter('filter2', function(arr, path, value) {
     return _.filter(arr, [path, value]);
   }
 });
+env.addFilter('exclude2', function(arr, path) {
+  return arr.filter((x) => _.get(x, path)===undefined);
+});
 
 module.exports = env;

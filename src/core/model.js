@@ -2,6 +2,7 @@ const _ = require('lodash');
 const { _Simple } = require('./_simple');
 const { Record, Assignment } = require('./record');
 const { Species } = require('./species');
+const { Process } = require('./process');
 const { IndexedHetaError } = require('../heta-error');
 
 class Model extends _Simple {
@@ -37,7 +38,9 @@ class Model extends _Simple {
       .filter((x) => (x instanceof constructor));
   }
   selectByClassName(className){
-    return this.population
+    //return this.population
+    //  .filter((x) => x.className===className);
+    return this.collectChildren()
       .filter((x) => x.className===className);
   }
   selectRecordsByScope(scope){
@@ -65,21 +68,7 @@ class Model extends _Simple {
       .difference(this.getChildrenIds()) // remove local ids from the list
       .difference(['t']) // remove time
       .value();
-    /* removed support for virtual Record
-    deps.forEach((id) => { // select deps mentioned in global but not in space
-      let unscoped = this._storage.get(id);
-      if(unscoped!==undefined && unscoped.className==='Const') {
-        let virtualRecord = new Record({id: id, space: this.id}).merge({
-          title: 'Generated virtual Record',
-          assignments: {},
-          units: unscoped.units // use unit from Const
-        });
-        virtualRecord.assignments.start_ = new Assignment({size: unscoped.clone(), id: id});
-        virtualRecord.virtual = true; // virtual means it is generated but not set by user
-        this.population.push(virtualRecord);
-      }
-    });
-    */
+      
     // add virtual assignments, search for global if no assignments
     this.selectByInstance(Record)
       .filter((scoped) => scoped.assignments===undefined)
@@ -109,6 +98,77 @@ class Model extends _Simple {
   toQ(){
     let res = super.toQ();
     if(this.method) res.method = _.cloneDeep(this.method);
+
+    return res;
+  }
+  // methods for ode creation
+  createMatrixBasedODE(){
+    let children = this.collectChildren();
+    let res = {
+      processes: [], // processes/reactions which change at least one variable
+      variables: [], // variables of ode
+      matrix: [] // stoichiometry matrix in format [[process num, variable num, stoichiometry], ...]
+    };
+    // push active processes
+    let processNumerator = 0; // numerator of processes
+    let variableNumerator = 0; // numerator of variable
+    children.filter((x) => {
+      return x instanceof Process
+        && x.actors.length>0 // process with actors
+        && x.actors.some((actor) => !actor._target_.boundary && !actor._target_.implicitBoundary);// true if there is at least non boundary target
+    }).forEach((process) => {
+      process.num = processNumerator++;
+      res.processes.push(process);
+    });
+    // push non boundary ode variables which are mentioned in processes
+    children.filter((x) => {
+      return x instanceof Record
+        && !x.boundary
+        && !x.implicitBoundary
+        && x.backReferences.length>0;
+    }).forEach((record) => {
+      record.num = variableNumerator++;
+      res.variables.push(record);
+    });
+
+    // create matrix
+    res.processes.forEach((process) => {
+      process.actors.filter((actor) => {
+        return !actor._target_.boundary
+          && !actor._target_.implicitBoundary;
+      }).forEach((actor) => {
+        res.matrix.push([process.num, actor._target_.num, actor.stoichiometry]);
+      });
+    });
+
+    // push virtual processes and variables with ode_.increment
+    children.filter((x) => {
+      return x instanceof Record
+        && _.get(x, 'assignments.ode_.increment', false);
+    }).forEach((record) => {
+      // create process for the record
+      // virtual process existed only in res.processes array
+      let process = new Process({id: `${record.id}_rate_`, space: record.space})
+        .merge({
+          actors: [
+            {target: record.id, stoichiometry: 1} // add record as actor but without backReferences
+          ],
+          assignments: {
+            ode_: new Assignment({size: record.assignments.ode_.size}) // copy size from record, increment = false
+          }
+        });
+      process.actors[0]._target_ = record; // force setting of target object
+      process.num = processNumerator++;
+      process.isVirtual = true;
+      res.processes.push(process);
+
+      // push process with ode_.increment to variables array
+      record.num = variableNumerator++;
+      res.variables.push(record);
+
+      // set stoichiometry in matrix
+      res.matrix.push([process.num, record.num, 1]);
+    });
 
     return res;
   }

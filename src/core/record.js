@@ -8,6 +8,10 @@ const math = require('mathjs');
 const { IndexedHetaError } = require('../heta-error');
 
 class Record extends _Scoped {
+  constructor(q = {}){
+    super(q);
+    this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
+  }
   merge(q, skipChecking){
     if(!skipChecking) Record.isValid(q);
     super.merge(q, skipChecking);
@@ -30,6 +34,7 @@ class Record extends _Scoped {
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
     }
 
+    if(q && q.boundary) this.boundary = q.boundary;
     if(q && q.units!==undefined) this.units = q.units;
 
     return this;
@@ -44,6 +49,9 @@ class Record extends _Scoped {
     let res = super.toQ();
     if(this.assignments){
       res.assignments = _.mapValues(this.assignments, (x) => x.toQ());
+    }
+    if(this.boundary){
+      res.boundary = this.boundary;
     }
     res.units = this.units;
     return res;
@@ -60,6 +68,10 @@ class Record extends _Scoped {
       return;
     }
   }
+  get implicitBoundary(){
+    return _.has(this, 'assignments.ode_') // this is rule or explicit diff equation
+      || _.get(this, 'assignments.start_.size.className')==='Const'; // this is Constant
+  }
 }
 
 class Assignment {
@@ -68,8 +80,8 @@ class Assignment {
     if(['Numeric', 'Expression', 'Const'].indexOf(q.size.className)===-1)
       throw new Error(`Size of assignment ${JSON.stringify(q)} must be one of ['Numeric', 'Expression', 'Const'].`);
     this.size = q.size;
-    if(q.increment!==undefined) this.increment = q.increment;
-    // if(q.id!==undefined) this.id = q.id; // XXX: I don't know if this required
+    if(q.increment) this.increment = q.increment;
+    if(q.parentId!==undefined) this.parentId = q.parentId; // XXX: I don't know if this required
   }
   get exprParsed(){
     if(this.size instanceof Expression){
@@ -93,7 +105,7 @@ class Assignment {
   }
   toQ(){
     let res = {size: this.size.toQ()};
-    if(this.increment) res.increment = true;
+    if(this.increment) res.increment = this.increment;
     return res;
   }
 }

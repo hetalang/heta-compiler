@@ -1,5 +1,5 @@
 const { IndexedHetaError } = require('./heta-error');
-const { Record } = require('./core/record');
+const { Record, Assignment } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
@@ -38,6 +38,7 @@ class Container {
       || (simple instanceof _Export);
     if(shouldIncludeStorage) {
       simple._storage = this.storage;
+      simple._container = this;
     }
 
     return simple;
@@ -86,7 +87,7 @@ class Container {
     if(!q)
       throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
+      throw new IndexedHetaError(q, `Id should be string, got "${q.id}"`);
     let index = getIndexFromQ(q);
     return this.storage.get(index);
   }
@@ -111,6 +112,85 @@ class Container {
   }
   get length(){
     return this.storage.size;
+  }
+  setReferences(){
+    // add virtual assignments, search for global if no assignments
+    [...this.storage].map((x) => x[1]) // get array of elements
+      .filter((x) => x instanceof Record)
+      .filter((x) => x.assignments===undefined)
+      .forEach((scoped) => {
+        let unscoped = this.storage.get(scoped.id); // search the same id in global
+        if(unscoped!==undefined){ // empty assignments is not an error
+          if(unscoped.className==='Const') {
+            scoped.assignments = {
+              start_: new Assignment({size: unscoped.clone()})
+            };
+          }else{
+            throw new IndexedHetaError(scoped.indexObj, `Element is expected to reffer implicitly to "Const", got "${unscoped.className}", `);
+          }
+        }
+      });
+
+    // add compartment ref for Species
+    [...this.storage].map((x) => x[1])
+      .filter((x) => x instanceof Species)
+      .forEach((species) => {
+        if(!species.compartment)
+          throw new IndexedHetaError(species.indexObj, 'No "compartment" prop for Species.');
+        let compartment = this.select({id: species.compartment, space: species.space});
+        if(!compartment)
+          throw new IndexedHetaError(species.indexObj, `Property "compartment" has lost reference "${species.compartment}".`);
+        if(compartment.className!=='Compartment')
+          throw new IndexedHetaError(species.indexObj, `"compartment" prop reffered not to Compartment but ${compartment.className} for Species.`);
+        species.compartmentObj = compartment;
+      });
+
+    // add record ref for Process.actors
+    [...this.storage].map((x) => x[1])
+      .filter((x) => x instanceof Process)
+      .forEach((process) => {
+        process.actors.forEach((actor) => {
+          // checking target
+          let target = this.select({id: actor.target, space: process.space});
+          if(!target)
+            throw new IndexedHetaError(process.indexObj, `Property "target" has lost reference "${actor.target}".`);
+          if(!(target instanceof Record))
+            throw new IndexedHetaError(process.indexObj, `"target" prop reffered not to Record but ${target.className} for Process.`);
+          actor._target_ = target;
+          // create ode expression
+          target.backReferences.push({
+            process: process.id,
+            _process_: process,
+            stoichiometry: actor.stoichiometry
+          });
+        });
+      });
+
+    // check Reactions
+    [...this.storage].map((x) => x[1])
+      .filter((x) => x instanceof Reaction)
+      .forEach((reaction) => {
+        reaction.actors.forEach((actor) => { // check ref objects for actors
+          if(!(actor._target_ instanceof Species))
+            throw new IndexedHetaError(reaction.indexObj, `"target" prop refered not to Species but ${actor._target_.className} for Reaction.`);
+        });
+        reaction.modifiers.forEach((modifier) => { // set ref objects for modifiers
+          let _target_ = this.select({id: modifier.target, space: reaction.space});
+          if(!_target_)
+            throw new IndexedHetaError(reaction.indexObj, `Property "target" has lost reference "${modifier.target}".`);
+          if(!(_target_ instanceof Species))
+            throw new IndexedHetaError(reaction.indexObj, `"target" prop reffered not to Species but ${_target_.className} for Reaction.`);
+          modifier._target_ = _target_;
+        });
+      });
+
+    /*
+    let test = [...this.storage]
+      .filter((x) => x[1] instanceof Record)
+      .map((x) => x[1].backReferences);
+    console.log(test);
+    */
+    return this;
   }
 }
 

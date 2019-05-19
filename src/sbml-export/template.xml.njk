@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="{{model.id}}" metaid="{{model.index}}" {% if model.title %}name="{{model.title}}"{% endif %}>
-  {% if model.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{model.notesHTML}}</html></notes>{% endif %}
-  {%- set listOfCompartments = model.selectByClassName('Compartment') -%}
+  <model id="{{_model_.id}}" metaid="{{_model_.index}}" {% if _model_.title %}name="{{_model_.title}}"{% endif %}>
+  {% if _model_.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{_model_.notesHTML}}</html></notes>{% endif %}
+  {%- set listOfCompartments = _model_.selectByClassName('Compartment') -%}
   {% if listOfCompartments|length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
@@ -19,7 +19,7 @@
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
-  {%- set listOfSpecies = model.selectByClassName('Species') -%}
+  {%- set listOfSpecies = _model_.selectByClassName('Species') -%}
   {% if listOfSpecies|length > 0 %}
     <listOfSpecies>
     {%- for record in listOfSpecies %}
@@ -40,7 +40,7 @@
     {%- endfor %}
     </listOfSpecies>
   {% endif %}
-  {%- set listOfParameters = model.selectByClassName('Record') -%}
+  {%- set listOfParameters = _model_.selectByClassName('Record') -%}
   {% if listOfParameters|length > 0 %}
     <listOfParameters>
     {%- for record in listOfParameters %}
@@ -57,7 +57,7 @@
     {%- endfor %}
   </listOfParameters>
   {% endif %}
-  {%- set listOfReactions = model.selectByClassName('Reaction') -%}
+  {%- set listOfReactions = _model_.selectByClassName('Reaction') -%}
   {% if listOfReactions|length > 0 %}
     <listOfReactions>
     {%- for record in listOfReactions %}
@@ -92,7 +92,7 @@
   </listOfReactions>
   {% endif %}
   <listOfRules>
-  {%- for record in model.getListOfRulesAssignment() %}
+  {%- for record in _model_.getListOfRulesAssignment() %}
     <assignmentRule
       variable="{{record.id}}"
       metaid="{{record.index}}.ode_"
@@ -101,7 +101,7 @@
       {{record.assignments.ode_.size.toCMathML}}
     </assignmentRule>
   {%- endfor %}
-  {%- for record in model.getListOfRulesRate() %}
+  {%- for record in _model_.getListOfRulesRate() %}
     <rateRule
       variable="{{record.id}}"
       metaid="{{record.index}}.ode_"
@@ -110,7 +110,7 @@
       {{record.assignments.ode_.size.toCMathML}}
     </rateRule>
   {%- endfor %}
-  {%- for record in model.selectByClassName('Process') %}
+  {%- for record in _model_.selectByClassName('Process') %}
     {%- for actor in record.actors %}
     <rateRule
       variable="{{actor.target}}"
@@ -127,7 +127,7 @@
     {%- endfor %}
   {%- endfor %}
   </listOfRules>
-  {%- set listOfInitialAssignments = model.getListOfInitialAssignments() -%}
+  {%- set listOfInitialAssignments = _model_.getListOfInitialAssignments() -%}
   {% if listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
     {%- for record in listOfInitialAssignments %}
@@ -141,7 +141,7 @@
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
-  {%- set listOfEvents = model.selectByClassName('Switcher') -%}
+  {%- set listOfEvents = _model_.selectByClassName('Switcher') -%}
   {% if listOfEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfEvents %}
@@ -158,7 +158,7 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for record in model.selectRecordsByScope(event.id) %}
+          {% for record in _model_.selectRecordsByScope(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}.{{event.id}}">
@@ -170,7 +170,7 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
-  {%- set listOfUnitDefinitions = model.getListOfUnitDefinitions() -%}
+  {%- set listOfUnitDefinitions = _model_.getListOfUnitDefinitions() -%}
   {% if listOfUnitDefinitions|length > 0 %}
     <listOfUnitDefinitions>
     {%- for unitDefinition in listOfUnitDefinitions %}

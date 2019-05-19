@@ -48,26 +48,26 @@ class Process extends Record {
     super.populate(storage);
 
     this.actors.forEach((actor) => {
-      let targetObj = storage.find((x) => x.id===actor.target);
-      if(!targetObj) {
+      let _target_ = storage.find((x) => x.id===actor.target);
+      if(!_target_) {
         throw new IndexedHetaError(this.indexObj, `target reffered to absent value "${actor.target}" in reaction.`);
       } else {
-        if(!(targetObj instanceof Species)) {
+        if(!(_target_ instanceof Species)) {
           throw new IndexedHetaError(this.indexObj, `target reffered to not a Species "${actor.target}" in reaction.`);
         } else {
-          actor.targetObj = targetObj;
+          actor._target_ = _target_;
         }
       }
     });
     this.effectors.forEach((effector) => {
-      let targetObj = storage.find((x) => x.id===effector.target);
-      if(!targetObj) {
+      let _target_ = storage.find((x) => x.id===effector.target);
+      if(!_target_) {
         throw new IndexedHetaError(this.indexObj, `target reffered to absent value "${effector.target}" in reaction.`);
       } else {
-        if(!(targetObj instanceof Species)) {
+        if(!(_target_ instanceof Species)) {
           throw new IndexedHetaError(this.indexObj, `target reffered to not a Species "${effector.target}" in reaction.`);
         } else {
-          effector.targetObj = targetObj;
+          effector._target_ = _target_;
         }
       }
     });

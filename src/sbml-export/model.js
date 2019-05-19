@@ -2,17 +2,10 @@ const { Model } = require('../core/model');
 const { Record } = require('../core/record');
 const { Reaction } = require('../core/reaction');
 const { Expression } = require('../core/expression');
-const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
 // require('./record');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
-
-Model.prototype.toSBML = function(){
-  let SBMLText = nunjucks.render('sbml-export/template.xml.njk', {model: this});
-
-  return SBMLText;
-};
 
 Model.prototype.getUniqueUnits = function(){
   return _.chain(this.selectByInstance(Record))

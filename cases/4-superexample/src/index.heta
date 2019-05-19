@@ -1,0 +1,51 @@
+mod1 @Model;
+block $mod1 begin
+  p1 @Record;
+  p1 .= 1;
+  p2 @Record;
+  p2 := 1*2;
+  k1 @Record;
+  p3 @Record;
+  p3 {assignments: {
+    start_: {size: 1}
+  }};
+  p4 @Record;
+  p4 .= 0;
+  p4 `= 3;
+
+  comp1 @Compartment {units: L};
+  comp1 .= 5;
+  comp2 @Compartment {units: mL};
+  comp2 := p1;
+
+  sp1 @Species { compartment: comp1, isAmount: false };
+  sp1 .= 0;
+
+  r1 @Reaction { actors: sp1 =>, modifiers: [sp1] };
+  r1 := p1 * sp1 * comp1;
+
+  r2 @Process { actors: p3 + 2k1 => p4 };
+  r2 := 1;
+
+  r3 @Process { actors: => k1 };
+  r3 := 0;
+end
+
+block @Const begin
+  k1 = 0.1;
+end
+k2 @Page {content: this is content};
+
+mod1_sbml @SBMLExport {
+  model: mod1
+};
+/*
+yaml @YAMLExport {
+};
+*/
+mod1_slv @SLVExport {
+  model: mod1,
+  eventsOff: true
+};
+yaml @JSONExport {
+};
