@@ -1,7 +1,7 @@
 const path = require('path');
 const async = require('async');
 const _ = require('lodash');
-const TopoSort = require('topo-sort');
+const TopoSort = require('@insysbio/topo-sort');
 const _Module = require('./_module');
 require('./heta-module');
 require('./json-module');
