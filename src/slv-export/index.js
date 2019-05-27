@@ -2,11 +2,11 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 // const { IndexedHetaError } = require('../heta-error');
 // const { Model } = require('../core/model');
-const Scene = require('../core/scene');
+const XArray = require('../x-array');
 const nunjucks = require('../nunjucks-env');
 const { Process } = require('../core/process');
 const { Compartment } = require('../core/compartment');
-const { Record, Assignment } = require('../core/record');
+const { Record } = require('../core/record');
 const _ = require('lodash');
 
 class SLVExport extends _Export{
@@ -27,26 +27,25 @@ class SLVExport extends _Export{
   }
   do(){
     // another approach where model created dynamically
-    this._model_ = new Scene(this.model);
+    this._model_ = {
+      targetSpace: this.model
+    };
 
-    // using global shared model
-    // this._model_ = this._storage.get(this.model);
-    //if(this._model_===undefined)
-    //  throw new IndexedHetaError(this.indexObj, `Required property model reffers to lost model id "${this.model}".`);
-    this.populateScene(this._model_);
+    this.populate(this._model_);
     return this.getSLVCode();
   }
-  populateScene(scene){
+  populate(_model_){
     let children = [...this._storage]
-      .filter((x) => x[1].space===scene.targetSpace)
+      .filter((x) => x[1].space===_model_.targetSpace)
       .map((x) => x[1]);
-    scene.population = children;
-    // scene.population.push(...children);
+    _model_.population = new XArray(...children);
+    // _model_.population = new XArray()
+    // _model_.population.push(...children);
 
     // add default_compartment_
     let default_compartment_ = new Compartment({
       id: 'default_compartment_',
-      space: scene.targetSpace
+      space: _model_.targetSpace
     }).merge({
       assignments: {
         start_: {size: 1, increment: false}
@@ -55,36 +54,36 @@ class SLVExport extends _Export{
       units: 'UL',
       notes: 'This is fake compartment to support compounds without compartment.'
     });
-    scene.population.push(default_compartment_);
+    _model_.population.push(default_compartment_);
 
     // push active processes
-    scene.processes = [];
-    scene.variables = [];
-    scene.matrix = [];
-    scene.population.filter((x) => {
+    _model_.processes = new XArray();
+    _model_.variables = new XArray();
+    _model_.matrix = [];
+    _model_.population.filter((x) => {
       return x instanceof Process
         && x.actors.length>0 // process with actors
         && x.actors.some((actor) => !actor._target_.boundary && !actor._target_.implicitBoundary);// true if there is at least non boundary target
     }).forEach((process) => {
-      scene.processes.push(process);
+      _model_.processes.push(process);
     });
     // push non boundary ode variables which are mentioned in processes
-    scene.population.filter((x) => {
+    _model_.population.filter((x) => {
       return x instanceof Record
         && !x.boundary
         && !x.implicitBoundary
         && x.backReferences.length>0;
     }).forEach((record) => {
-      scene.variables.push(record);
+      _model_.variables.push(record);
     });
     // create matrix
-    scene.processes.forEach((process, processNum) => {
+    _model_.processes.forEach((process, processNum) => {
       process.actors.filter((actor) => {
         return !actor._target_.boundary
           && !actor._target_.implicitBoundary;
       }).forEach((actor) => {
-        let variableNum = scene.variables.indexOf(actor._target_);
-        scene.matrix.push([processNum, variableNum, actor.stoichiometry]);
+        let variableNum = _model_.variables.indexOf(actor._target_);
+        _model_.matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
     });
     // push virtual processes and variables with ode_.increment
@@ -105,18 +104,20 @@ class SLVExport extends _Export{
         });
       process.actors[0]._target_ = record; // force setting of target object
       process.isVirtual = true;
-      scene.processes.push(process);
-      scene.population.push(process);
+      _model_.processes.push(process);
+      _model_.population.push(process);
 
       // push process with ode_.increment to variables array
-      scene.variables.push(record);
+      _model_.variables.push(record);
 
       // set stoichiometry in matrix
-      let processNum = scene.processes.length - 1;
-      let variableNum = scene.variables.indexOf(record);
-      scene.matrix.push([processNum, variableNum, 1]);
+      let processNum = _model_.processes.length - 1;
+      let variableNum = _model_.variables.indexOf(record);
+      _model_.matrix.push([processNum, variableNum, 1]);
     });
-    //console.log(scene.processes[2].assignments);
+    let res = _model_.population
+      .map((x) => `${x.id} = ${_.get(x, 'assignments.ode_.size.expr')}`);
+    console.log(res);
   }
   getSLVCode(){
     return nunjucks.render(

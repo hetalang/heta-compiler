@@ -114,7 +114,7 @@ class Container {
     return this.storage.size;
   }
   setReferences(){
-    // add virtual assignments, search for global if no assignments
+    // add virtual assignments, search for global if no assignments presented
     [...this.storage].map((x) => x[1]) // get array of elements
       .filter((x) => x instanceof Record)
       .filter((x) => x.assignments===undefined)
@@ -184,12 +184,6 @@ class Container {
         });
       });
 
-    /*
-    let test = [...this.storage]
-      .filter((x) => x[1] instanceof Record)
-      .map((x) => x[1].backReferences);
-    console.log(test);
-    */
     return this;
   }
 }

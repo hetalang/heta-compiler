@@ -12,6 +12,10 @@ block $mod1 begin
   p4 @Record;
   p4 .= 0;
   p4 `= 3;
+  p5 @Record;
+  p5 := 1 * p6;
+  p6 @Record;
+  p6 := 2 * p4;
 
   comp1 @Compartment {units: L};
   comp1 .= 5;
