@@ -8,6 +8,7 @@ const { Process } = require('../core/process');
 const { Compartment } = require('../core/compartment');
 const { Record } = require('../core/record');
 const _ = require('lodash');
+const { Expression } = require('../core/expression');
 
 class SLVExport extends _Export{
   merge(q, skipChecking){
@@ -114,10 +115,22 @@ class SLVExport extends _Export{
       _model_.matrix.push([processNum, variableNum, 1]);
     });
 
+    // create and sort expressions for RHS
     _model_.rhs = _model_.population
       .selectByInstance(Record)
       .filter((record) => _.has(record, 'assignments.ode_'))
       .sortExpressionsByScope('ode_');
+    // check that all record in start are not Expression
+    let startExpressions = _model_.population
+      .selectByInstance(Record)
+      .filter((record) => _.get(record, 'assignments.start_.size') instanceof Expression);
+    if(startExpressions.length > 0){
+      let errorMsg = 'DBSolve does not support expressions in InitialValues.\n'
+        + startExpressions
+          .map((x) => `${x.id}$${x.space} []= ${x.assignments.start_.size.expr}`)
+          .join('\n');
+      throw new Error(errorMsg);
+    }
   }
   getSLVCode(){
     return nunjucks.render(

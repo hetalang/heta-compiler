@@ -1,7 +1,7 @@
 mod1 @Model;
 block $mod1 begin
   p1 @Record;
-  p1 .= 1;
+  p1 .= 1 * 1;
   p2 @Record;
   p2 := 1*2;
   k1 @Record;
