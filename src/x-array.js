@@ -29,8 +29,10 @@ class XArray extends Array{
       });
 
     try{
-      var sortedBackward = graph.sort();
-    }catch(e){
+      var sortedGraph = graph
+        .sort()
+        .reverse(); // independent should be at the beginning
+    }catch(e){ // catch cycling 
       // error changes
       let infoLine = e.circular
         .map((id) => {
@@ -43,7 +45,7 @@ class XArray extends Array{
       error.circular = e.circular;
       throw error;
     }
-    let sortedGraph = _.reverse(sortedBackward); // independent should be at the beginning
+
     let sorted = _.sortBy(this, (record) => sortedGraph.indexOf(record.id)); // if record not in graph than -1 and will be first
 
     return new XArray(...sorted); // sorted is Array, return must be XArray

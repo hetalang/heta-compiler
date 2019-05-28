@@ -39,8 +39,6 @@ class SLVExport extends _Export{
       .filter((x) => x[1].space===_model_.targetSpace)
       .map((x) => x[1]);
     _model_.population = new XArray(...children);
-    // _model_.population = new XArray()
-    // _model_.population.push(...children);
 
     // add default_compartment_
     let default_compartment_ = new Compartment({
@@ -115,9 +113,11 @@ class SLVExport extends _Export{
       let variableNum = _model_.variables.indexOf(record);
       _model_.matrix.push([processNum, variableNum, 1]);
     });
-    let res = _model_.population
-      .map((x) => `${x.id} = ${_.get(x, 'assignments.ode_.size.expr')}`);
-    console.log(res);
+
+    _model_.rhs = _model_.population
+      .selectByInstance(Record)
+      .filter((record) => _.has(record, 'assignments.ode_'))
+      .sortExpressionsByScope('ode_');
   }
   getSLVCode(){
     return nunjucks.render(
