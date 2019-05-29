@@ -85,6 +85,7 @@ class Builder{
       logger.info('Setting references in elements, total length ' + this.container.length);
       try{
         this.container.setReferences();
+        this.container.checkExpressionRefs();
       }catch(referenceError){
         this.errorCatcher(referenceError, 'Bad reference.');
       }

@@ -186,6 +186,35 @@ class Container {
 
     return this;
   }
+  // it it not optimal solution because search for id many times
+  checkExpressionRefs(){
+    let messages = [];
+    [...this.storage].map((x) => x[1])
+      .filter((component) => component instanceof Record)
+      .filter((record) => record.assignments)
+      .forEach((record) => { // iterate throw all records
+        _.chain(record.assignments)
+          .pickBy((value) => value.size.className==='Expression')
+          .forEach((value, key) => { // iterates throw assignments
+            let deps = value.size.exprParsed.getSymbols();
+            deps.forEach((id) => { // iterates throw all ids
+              let _component_ = this.select({id: id, space: record.space});
+              if(!_component_){
+                messages.push(`Component "${id}$${record.space}" is not found as expected in expression\n`
+                  + `${record.id}$${record.space} [${key}]= ${value.size.expr};`);
+              }else if(!(_component_ instanceof Record)){
+                messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
+                  + `${record.id}$${record.space} [${key}]= ${value.size.expr};`);
+              }
+            });
+          })
+          .value();
+      });
+
+    if(messages.length>0){
+      throw new Error('References error in expressions:\n' + messages.join('\n'));
+    }
+  }
 }
 
 Container.prototype.classes = {

@@ -55,19 +55,6 @@ class Model extends _Simple {
   populate(){
     // add population
     this.population = this.collectChildren();
-    // collect all deps, possibly helpfull for diagnostics
-    let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
-      .map((record) => {
-        return _.map(record.assignments, (assignment) => assignment.size)
-          .filter((size) => size.className==='Expression');
-      })
-      .flatten()
-      .map((expression) => expression.exprParsed.getSymbols())
-      .flatten()
-      .uniq()
-      .difference(this.getChildrenIds()) // remove local ids from the list
-      .difference(['t']) // remove time
-      .value();
 
     // add virtual assignments, search for global if no assignments
     this.selectByInstance(Record)

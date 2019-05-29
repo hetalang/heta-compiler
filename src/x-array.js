@@ -1,6 +1,7 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 const { Expression } = require('./core/expression');
+const { Record } = require('./core/record');
 
 class XArray extends Array{
   getById(id){
@@ -32,7 +33,7 @@ class XArray extends Array{
       var sortedGraph = graph
         .sort()
         .reverse(); // independent should be at the beginning
-    }catch(e){ // catch cycling 
+    }catch(e){ // catch cycling
       // error changes
       let infoLine = e.circular
         .map((id) => {
@@ -49,6 +50,22 @@ class XArray extends Array{
     let sorted = _.sortBy(this, (record) => sortedGraph.indexOf(record.id)); // if record not in graph than -1 and will be first
 
     return new XArray(...sorted); // sorted is Array, return must be XArray
+  }
+  expressionDeps(){
+    // collect all deps, possibly helpfull for diagnostics
+    let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
+      .map((record) => {
+        return _.map(record.assignments, (assignment) => assignment.size)
+          .filter((size) => size.className==='Expression');
+      })
+      .flatten()
+      .map((expression) => expression.exprParsed.getSymbols())
+      .flatten()
+      .uniq()
+      .difference(this.getChildrenIds()) // remove local ids from the list
+      .difference(['t']) // remove time
+      .value();
+    return deps;
   }
 }
 
