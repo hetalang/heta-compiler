@@ -15,8 +15,12 @@ describe('ModuleSystem without import.', () => {
       if(err){
         done(err);
       }else{
-        expect(mdl.parsed).to.be.deep.equal(noImportOutput);
-        done();
+        try{
+          expect(mdl.parsed).to.be.deep.equal(noImportOutput);
+          done();
+        }catch(e){
+          done(e);
+        }
       }
     });
   });
@@ -38,9 +42,13 @@ describe('Run normal ModuleSystem.', () => {
         expect(mdl).to.have.property('parsed').with.a('Array').lengthOf(3);
 
         let arr = ms.integrate();
-        // writeFileSync('arr.json', JSON.stringify(arr, null, 2));
-        expect(arr).to.be.deep.equal(expected);
-        done();
+        //writeFileSync('arr.json', JSON.stringify(arr, null, 2));
+        try{
+          expect(arr).to.be.deep.equal(expected);
+          done();
+        }catch(e){
+          done(e);
+        }
       }
     });
   });
