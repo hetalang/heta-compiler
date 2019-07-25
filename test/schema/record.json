@@ -1,0 +1,46 @@
+[
+  {
+    "class": "Record",
+    "id": "k1",
+    "title": "Record for example",
+    "space": "one",
+    "units": "1/h",
+    "assignments": {
+      "start_": {"expr": 1e-4}
+    },
+    "notes": "Hello world!\nThis _record_ is just *for example*.",
+    "aux": {
+      "prop1": "Some string",
+      "prop2": 3.141592,
+      "prop3": {"subprop": 1e-5},
+      "prop4": [1, 2, 3]
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k2",
+    "space": "default_space_",
+    "assignments": {
+      "start_": {"expr": 1e-4}
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k3",
+    "space": "default_space_",
+    "assignments": {
+      "ode_": {"expr": "x*y"}
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k5",
+    "space": "default_space_"
+  },
+  {
+    "class": "Record",
+    "id": "k6_err",
+    "space": "one",
+    "assignments": {}
+  }
+]

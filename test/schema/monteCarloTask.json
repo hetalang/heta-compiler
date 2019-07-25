@@ -1,0 +1,20 @@
+[
+  {
+    "class": "MonteCarloTask",
+    "id": "tsk1",
+    "space": "one",
+    "statistics": [
+    ]
+  },
+  {
+    "class": "MonteCarloTask",
+    "id": "tsk2",
+    "space": "one",
+    "statistics": [
+      {"kind": "raw"},
+      {"kind": "quantile"},
+      {"kind": "correlation"},
+      {"kind": "mean"}
+    ]
+  }
+]

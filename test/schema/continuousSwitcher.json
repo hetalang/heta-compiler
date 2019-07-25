@@ -1,0 +1,8 @@
+[
+  {
+    "class": "ContinuousSwitcher",
+    "id": "sw1",
+    "space": "one",
+    "condition": "xxx"
+  }
+]

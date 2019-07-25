@@ -1,0 +1,30 @@
+[
+  {
+    "class": "MonteCarloTask",
+    "id": "tsk6",
+    "space": "one",
+    "statistics": [
+      {}
+    ],
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "missingProperty"
+      }
+    }
+  },
+  {
+    "class": "MonteCarloTask",
+    "id": "tsk7",
+    "space": "one",
+    "statistics": [
+      {"kind": "xxx"}
+    ],
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "allowedValues"
+      }
+    }
+  }
+]

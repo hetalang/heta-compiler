@@ -1,0 +1,26 @@
+[
+  {
+    "class": "ContinuousSwitcher",
+    "id": "sw6",
+    "space": "one",
+    "condition": true,
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "type"
+      }
+    }
+  },
+  {
+    "class": "ContinuousSwitcher",
+    "id": "sw7",
+    "space": "one",
+    "condition": 17,
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "type"
+      }
+    }
+  }
+]

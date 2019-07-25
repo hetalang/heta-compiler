@@ -1,0 +1,8 @@
+[
+  {
+    "class": "FunctionDefinition",
+    "id": "pow",
+    "args": ["x", "y"],
+    "expr": "x^y"
+  }
+]

@@ -1,0 +1,35 @@
+[
+
+  {
+    "class": "Page",
+    "id": "pg6",
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "missingProperty"
+      }
+    }
+  },
+
+  {
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "missingProperty"
+      }
+    }
+  },
+
+  {
+    "id": "_pg8",
+    "content": "wrong id",
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "pattern"
+      }
+    }
+  }
+
+
+]

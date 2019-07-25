@@ -1,6 +1,6 @@
 /* global describe, it */
 const { Reaction } = require('../../src/core/reaction');
-const should = require('chai').should();
+const { expect } = require('chai');
 
 describe('Unit tests for Reaction.', () => {
   it('Check toQ.', () => {
@@ -16,11 +16,11 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm3'}
       ],
       assignments: {
-        ode_: { size: {expr: 'k1*s1'} }
+        ode_: { expr: 'k1*s1' }
       },
       units: 'umole/h'
     });
-    simple.toQ().should.be.deep.equal({
+    expect(simple.toQ()).to.be.deep.equal({
       class: 'Reaction',
       id: 'r1',
       space: 'default__',
@@ -34,7 +34,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm3'}
       ],
       assignments: {
-        ode_: { size: {expr: 'k1 * s1'} }
+        ode_: { expr: 'k1 * s1' }
       },
       units: 'umole/h'
     });

@@ -1,0 +1,555 @@
+{
+  "$id": "http://qs3p.insilicobio.ru/",
+   "definitions": {
+
+     "ID": {
+       "description": "First character is letter, others are letter, digit or lodash.",
+       "type": "string",
+       "minLength": 1,
+       "pattern": "^[a-zA-Z][_a-zA-Z0-9]*$",
+       "example": "x_12_"
+     },
+
+     "Units": {
+       "description": "Unit expression, see qsp-units project.",
+       "type": "string",
+       "minLength": 1,
+       "pattern": "^[a-zA-Z1/][_a-zA-Z0-9/*^ ]*$",
+       "example": "1/h * ms"
+     },
+
+     "ActorsString": {
+       "type": "string",
+       "pattern": "^((\\d* *\\*? *\\w+) *\\+? *)*<?[=-]>?((\\d* *\\*? *\\w+) *\\+? *)*$",
+       "example": "2*S -> 3P1+P2",
+       "errorMessage":{
+         "pattern": "should be in format: \"2*S -> 3P1+P2\""
+       }
+     },
+
+    "ExprString": {
+      "description": "Expression as string. Currently pattern does not analyze expressions.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "[a-zA-Z0-9. -+/*^()]*$"
+    },
+
+    "Expression": {
+      "type": "object",
+      "required": ["expr"],
+      "properties": {
+        "expr": {
+          "oneOf": [
+            { "$ref": "#/definitions/ExprString" },
+            { "type": "number"}
+          ]
+        },
+        "increment": {
+          "type": "boolean", "default": false
+        }
+      }
+    },
+
+    "AssignmentDict": {
+      "description": "Stores initializations as key/value dictionary. Key is switcher when to use. Key is one of Switcher id.",
+      "type": "object",
+      "propertyNames": { "$ref": "#/definitions/ID" },
+      "additionalProperties": { "$ref": "#/definitions/Expression" },
+      "example": {
+        "start_": { "expr": 1.2 },
+        "ode_": { "expr": "x * y", "increment": true },
+        "evt1": {"expr": "z + 1.2"}
+      }
+    },
+
+    "Effector": {
+      "description": "Abstract class for modifiers and actors",
+      "type": "object",
+      "required": ["target"],
+      "properties": {
+        "target": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "Actor": {
+      "allOf": [
+        { "$ref": "#/definitions/Effector" },
+        {
+          "properties": {
+            "stoichiometry": { "type": "number" }
+          }
+        }
+      ],
+      "example": { "target": "x1", "stoichiometry": -1 }
+    },
+
+    "Statistics": {
+      "description": "Describes different outputs for monte-carlo problem.",
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["quantile", "mean", "correlation", "raw"] }
+      }
+    },
+
+    "UnitDefinitionComponent": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "$ref": "#/definitions/ID" },
+        "multiplier": { "type": "number", "exclusiveMinimum": 0 },
+        "exponent": { "type": "number" }
+      },
+      "example": { "kind": "mole", "multiplier": 1e-6, "exponent": 1 }
+    },
+
+    "_SimpleP": {
+      "type": "object",
+      "description": "Abstract class for all top elements.",
+      "properties": {
+        "class": { "type": "string" },
+        "id": { "$ref": "#/definitions/ID" },
+        "title": { "type": "string" },
+        "notes": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "aux": { "type": "object" }
+      }
+    },
+
+    "_ScopedP": {
+      "description": "Abstract class for Records and other classes with space.",
+      "properties": {
+        "space": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "RecordP": {
+      "type": "object",
+      "properties": {
+        "assignments": {
+          "$ref": "#/definitions/AssignmentDict"
+        },
+        "boundary": {
+          "type": "boolean", "default": false,
+          "description": "If it is true the record cannot be changed by any process, only byexpression in assignments."
+        },
+        "units": {
+          "$ref": "#/definitions/Units"
+        }
+      }
+    },
+
+    "Record": {
+      "description": "Class describing numerical value which can be changed in time.",
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/RecordP" },
+        {
+          "required": ["id", "space"],
+          "properties": { "class": { "const": "Record" } }
+        }
+      ]
+    },
+
+    "CompartmentP": {
+      "type": "object"
+    },
+
+    "Compartment": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/RecordP" },
+        { "$ref": "#/definitions/CompartmentP" },
+        {
+          "required": ["id", "space"],
+          "properties": { "class": { "const": "Compartment" } }
+        }
+      ]
+    },
+
+    "SpeciesP": {
+      "type": "object",
+      "properties": {
+        "compartment": {
+          "$ref": "#/definitions/ID"
+        },
+        "isAmount": {
+          "description": "If it is false then the value represents the concentration, i.e. normalized to compartment.",
+          "type": "boolean", "default": false
+        }
+      }
+    },
+
+    "Species": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/RecordP" },
+        { "$ref": "#/definitions/SpeciesP" },
+        {
+          "required": ["id", "space", "compartement"],
+          "properties": { "class": { "const": "Species" } }
+        }
+      ]
+    },
+
+    "ProcessP": {
+      "type": "object",
+      "properties": {
+        "assignments": {
+          "required": ["ode_"]
+        },
+        "actors": {
+          "oneOf": [
+            { "type": "array", "items": {"$ref": "#/definitions/Actor"}, "errorMessage":  {"type": "should be an array of actors."}},
+            { "$ref": "#/definitions/ActorsString" }
+          ]
+        }
+      },
+      "errorMessage": {
+        "properties": {
+          "actors": "is not string or array."
+        }
+      }
+    },
+
+    "Process": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/RecordP" },
+        { "$ref": "#/definitions/ProcessP" },
+        {
+          "required": ["id", "space", "actors"],
+          "properties": { "class": { "const": "Process" } }
+        }
+      ]
+    },
+
+    "ReactionP": {
+      "type": "object",
+      "properties": {
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/Effector" },
+              { "$ref": "#/definitions/ID" }
+            ]
+          }
+        }
+      },
+      "errorMessage": {
+        "properties": {
+          "modifiers":  "is not an array of ids or modifiers."
+        }
+      }
+    },
+
+    "Reaction": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/RecordP" },
+        { "$ref": "#/definitions/ProcessP" },
+        { "$ref": "#/definitions/ReactionP" },
+        {
+          "required": ["id", "space", "actors", "modifiers"],
+          "properties": { "class": { "const": "Reaction" } }
+        }
+      ]
+    },
+
+    "_SwitcherP": {
+      "type": "object"
+    },
+
+    "ContinuousSwitcherP": {
+      "type": "object",
+      "properties": {
+        "condition": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "ContinuousSwitcher": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/_SwitcherP" },
+        { "$ref": "#/definitions/ContinuousSwitcherP" },
+        {
+          "required": ["id", "space", "condition"],
+          "properties": { "class": { "const": "ContinuousSwitcher" } }
+        }
+      ]
+    },
+
+    "_ExportP": {
+      "type": "object",
+      "properties": {
+        "model": { "$ref": "#/definitions/ID" },
+        "ignore": { "type": "boolean", "default": false }
+      }
+    },
+
+    "_Export": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ExportP" },
+        {
+          "required": ["id"],
+          "properties": { "class": { "type": "string", "pattern": "[A-Z].*Export"} }
+        }
+      ]
+    },
+
+    "ConstP": {
+      "type": "object",
+      "properties": {
+        "free": { "type": "boolean" },
+        "num": { "type": "number" }
+      }
+     },
+
+    "Const": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/ConstP" },
+        {
+          "required": ["id", "num"],
+          "properties": { "class": { "const": "Const" } }
+        }
+      ]
+    },
+
+    "ModelP": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "object",
+          "properties": {
+            "timeRange": {
+              "type": "array",
+              "additionalItems": false,
+              "items": [
+                { "type": "number", "minimum": 0 },
+                { "type": "number", "exclusiveMinimum": 0 }
+              ]
+            },
+            "timeStep": { "type": "number", "exclusiveMinimum": 0 },
+            "solver": { "type": "string", "enum": ["lsoda"] },
+            "abstol": { "type": "number", "minimum": 0 },
+            "reltol": { "type": "number", "minimum": 0 },
+            "dt": { "type": "number", "minimum": 0 },
+            "dtmin": { "type": "number", "minimum": 0 },
+            "dtmax": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+
+    "Model": {
+      "description": "Currently it is unclear if this class is required. default task can be used instead of method property.",
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/ModelP" },
+        {
+          "required": ["id"],
+          "properties": { "class": { "const": "Model" } }
+        }
+      ]
+    },
+
+    "_TaskP": {
+      "type": "object"
+    },
+
+    "MonteCarloTaskP": {
+      "type": "object",
+      "properties": {
+        "statistics": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Statistics" }
+        }
+      }
+    },
+
+    "MonteCarloTask": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/_TaskP" },
+        { "$ref": "#/definitions/MonteCarloTaskP" },
+        {
+          "required": ["id", "space", "statistics"],
+          "properties": { "class": { "const": "MonteCarloTask" } }
+        }
+      ]
+    },
+
+    "PageP": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+
+    "Page": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/PageP" },
+        {
+          "required": ["id", "content"],
+          "properties": { "class": { "const": "Page" } }
+        }
+      ]
+    },
+
+    "UnitDefinitionP": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/UnitDefinitionComponent" }
+        }
+      }
+    },
+
+    "UnitDefinition": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/UnitDefinitionP" },
+        {
+          "required": ["id", "components"],
+          "properties": { "class": { "const": "UnitDefinition" } }
+        }
+      ]
+    },
+
+    "FunctionDefinitionP": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ID" }
+        },
+        "expr": { "$ref": "#/definitions/ExprString" }
+      }
+    },
+
+    "FunctionDefinition": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/FunctionDefinitionP" },
+        {
+          "required": ["id", "args", "expr"],
+          "properties": { "class": { "const": "FunctionDefinition" } }
+        }
+      ]
+    },
+
+    "ReferenceDefinitionP": {
+      "type": "object",
+      "properties": {
+        "prefix": { "type": "string" },
+        "suffix": { "type": "string" }
+      }
+    },
+
+    "ReferenceDefinition": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/ReferenceDefinitionP" },
+        {
+          "required": ["id"],
+          "properties": { "class": { "const": "ReferenceDefinition" } }
+        }
+      ]
+    },
+
+    "ObservationP": {
+      "type": "object",
+      "properties": {
+        "kind": { "type": "string", "enum": ["kinetics"] },
+        "indepDataMarker": { "$ref": "#/definitions/ID" },
+        "depDataMarkers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ID" }
+        },
+        "indepData": {
+          "type": "array",
+          "items": { "type": "number" }
+        },
+        "depData": {
+          "type": "array",
+          "items": { "type": "array", "items": { "type": "number" } }
+        }
+      }
+    },
+
+    "Observation": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/ObservationP" },
+        {
+          "required": ["id", "kind"],
+          "properties": { "class": { "const": "Observation" } }
+        }
+      ]
+    },
+
+    "Insert": {
+      "type": "object",
+      "description": "Insert new element. Currently properties are not being checked.",
+      "required": ["action", "class", "id"],
+      "properties": {
+        "action": { "const": "insert" },
+        "class": { "type": "string", "pattern": "^[A-Z]" },
+        "id": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "Update": {
+      "type": "object",
+      "description": "Update existed element. Currently properties are not being checked.",
+      "required": ["action", "id"],
+      "properties": {
+        "action": { "const": "update" },
+        "id": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "Upsert": {
+      "anyOf": [
+        { "$ref": "#/definitions/Update" },
+        { "$ref": "#/definitions/Insert" }
+      ]
+    },
+
+    "Delete": {
+      "type": "object",
+      "description": "Delete existed element. Currently properties are not being checked.",
+      "required": ["action", "id"],
+      "properties": {
+        "action": { "const": "delete" },
+        "id": { "$ref": "#/definitions/ID" }
+      }
+    },
+
+    "Import": {
+      "type": "object",
+      "description": "Import some part from another file.",
+      "required": ["action", "source"],
+      "properties": {
+        "action": { "const": "import" },
+        "source": { "type": "string" },
+        "format": { "type": "string", "enum": ["heta", "slv", "dat", "md", "sbml"], "default": "heta" }
+      }
+    }
+
+   }
+}

@@ -1,0 +1,69 @@
+[
+  {
+    "class": "Record",
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "missingProperty"
+      }
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k4_err",
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "missingProperty"
+      }
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k7_err",
+    "space": "one",
+    "assignments": {"start_": "xxx"},
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "type"
+      }
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k8_err",
+    "space": "one",
+    "assignments": {"start_": 1},
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "type"
+      }
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k9_err",
+    "space": "one",
+    "assignments": { "start_": "a*b" },
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "type"
+      }
+    }
+  },
+  {
+    "class": "Record",
+    "id": "k10_err",
+    "space": "one",
+    "assignments": {"ode_": {}},
+    "aux": {
+      "validationResult": {
+        "num": 0,
+        "prop": "missingProperty"
+      }
+    }
+  }
+]

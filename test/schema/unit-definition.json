@@ -1,0 +1,10 @@
+[
+  {
+    "class": "UnitDefinition",
+    "id": "kDa",
+    "components": [
+      {"kind": "g", "multiplier": 1e3, "exponent": 1},
+      {"kind": "mole", "exponent": -1}
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "class": "Model",
+    "id": "scn1",
+    "title": "example model 1",
+    "notes": "Some notes 1",
+    "method": {
+      "timeRange": [0, 120],
+      "timeStep": 0.1,
+      "solver": "lsoda"
+    },
+    "aux": {}
+  },
+  {
+    "class": "Model",
+    "id": "scn2"
+  }
+]

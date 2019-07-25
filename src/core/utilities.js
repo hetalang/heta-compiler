@@ -1,4 +1,4 @@
-const schema = require('heta-standard').hetaJSONSchema;
+const schema = require('../heta.json-schema');
 const Ajv = require('ajv');
 
 const validator = new Ajv({allErrors: true, jsonPointers: true})
