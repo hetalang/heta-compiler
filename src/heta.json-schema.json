@@ -54,11 +54,17 @@
       "description": "Stores initializations as key/value dictionary. Key is switcher when to use. Key is one of Switcher id.",
       "type": "object",
       "propertyNames": { "$ref": "#/definitions/ID" },
-      "additionalProperties": { "$ref": "#/definitions/Expression" },
+      "additionalProperties": {
+        "oneOf": [
+          { "$ref": "#/definitions/ExprString" },
+          { "type": "number"},
+          { "$ref": "#/definitions/Expression" }
+        ]
+      },
       "example": {
         "start_": { "expr": 1.2 },
         "ode_": { "expr": "x * y", "increment": true },
-        "evt1": {"expr": "z + 1.2"}
+        "evt1": { "expr": "z + 1.2" }
       }
     },
 

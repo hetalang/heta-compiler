@@ -78,48 +78,48 @@
     "class": "Record", "id": "evt1", "space": "two_comp"
   },
   {
-    "class": "Switcher", "id": "sw1", "space": "two_comp",
+    "class": "ContinuousSwitcher", "id": "sw1", "space": "two_comp",
     "condition": "evt1"
   },
 
   {
     "id": "a0", "space": "two_comp",
-    "assignments": {"start_": {"size": {"expr": "a0_0"}}}
+    "assignments": {"start_": {"expr": "a0_0"}}
   },
   {
     "id": "a0", "space": "two_comp",
-    "assignments": {"sw1": {"size": {"num": 10, "units": "umole"}, "increment": true}}
+    "assignments": {"sw1": {"expr": 10, "units": "umole", "increment": true}}
   },
   {
     "id": "s1", "space": "two_comp",
-    "assignments": {"start_": {"size": {"num": 0, "units": "uM"}}}
+    "assignments": {"start_": {"expr": 0, "units": "uM"}}
   },
   {
     "id": "s2", "space": "two_comp",
-    "assignments": {"start_": {"size": {"num": 0, "units": "uM"}}}
+    "assignments": {"start_": {"expr": 0, "units": "uM"}}
   },
   {
     "id": "auc", "space": "two_comp",
-    "assignments": {"ode_": {"size": {"expr": "s1"}, "increment": true}}
+    "assignments": {"ode_": {"expr": "s1", "increment": true}}
   },
   {
     "id": "auc", "space": "two_comp",
-    "assignments": {"start_": {"size": {"num": 0}}}
+    "assignments": {"start_": {"expr": 0}}
   },
   {
     "id": "evt1", "space": "two_comp",
-    "assignments": {"ode_": {"size": {"expr": "t-12"}}}, "units": "h"
+    "assignments": {"ode_": {"expr": "t-12"}}, "units": "h"
   },
   {
     "id": "r1", "space": "two_comp",
-    "assignments": {"ode_": {"size": {"expr": "kabs*a0"}}}
+    "assignments": {"ode_": {"expr": "kabs*a0"}}
   },
   {
     "id": "r2", "space": "two_comp",
-    "assignments": {"ode_": {"size": {"expr": "kdiff*PS*(s1-s2)"}}}
+    "assignments": {"ode_": {"expr": "kdiff*PS*(s1-s2)"}}
   },
   {
     "id": "r3", "space": "two_comp",
-    "assignments": {"ode_": {"size": {"expr": "kel*s1*c1"}}}
+    "assignments": {"ode_": {"expr": "kel*s1*c1"}}
   }
 ]

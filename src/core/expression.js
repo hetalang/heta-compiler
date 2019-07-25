@@ -6,11 +6,14 @@ math.import(mathjsCMathML);
 
 class Expression {
   constructor(q = {}){ // string or object
-    if(typeof q!=='string' && !('expr' in q))
-      throw new TypeError('Expected <string> or {expr: <string>}, but get ' + JSON.stringify(q));
+    if(typeof q!=='string' && typeof q!=='number' && !('expr' in q))
+      throw new TypeError('Expected <string> or <number> or {expr: <string>}, but get ' + JSON.stringify(q));
 
     if(typeof q==='string'){
       this._exprInput = q;
+      this._inputLang = 'qs3p';
+    }else if(typeof q==='number'){
+      this._exprInput = q + ''; // implicit transformation to string
       this._inputLang = 'qs3p';
     }else{
       this._exprInput = q.expr;

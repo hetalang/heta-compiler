@@ -45,5 +45,5 @@ Model.prototype.getListOfRulesRate = function(){
 Model.prototype.getListOfInitialAssignments = function(){
   return this
     .selectByInstance(Record)
-    .filter((record) => _.get(record, 'assignments.start_.size') instanceof Expression);
+    .filter((record) => _.get(record, 'assignments.start_') instanceof Expression);
 };

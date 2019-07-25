@@ -8,11 +8,6 @@ describe('Expression constructor.', () => {
       let expr = new Expression();
     }).throw(TypeError);
   });
-  it('Number argument throws', () => {
-    expect(() => {
-      let expr = new Expression(1);
-    }).throw(TypeError);
-  });
   it('Empty argument throws', () => {
     expect(() => {
       let expr = new Expression({});

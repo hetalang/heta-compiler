@@ -16,9 +16,9 @@ describe('Unit tests for Record.', () => {
     simple.should.has.property('space', 'one');
   });
 
-  it('Set static numeric.', () => {
+  it('Set static expression with numeric.', () => {
     let simple = (new Record({id: 'k1', space: 'one'})).merge({
-      assignments: { start_: { expr: 1.1 } }
+      assignments: { start_: { expr: '1.1' } }
     });
     simple.should.has.nested.property('assignments.start_').instanceOf(Expression);
   });

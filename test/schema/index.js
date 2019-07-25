@@ -47,7 +47,7 @@ function singleTest(className, checkedArray, errorArray){
     // no errors
     checkedArray && checkedArray.forEach((component) => {
       let valid = validate(component);
-      // if(!valid) console.log(validate.errors);
+      //if(!valid) console.log(validate.errors);
       it(`Structure OK of ${component.class} id :"${component.id}"`, () => {
         expect(valid).to.be.true;
       })
@@ -56,7 +56,7 @@ function singleTest(className, checkedArray, errorArray){
     errorArray && errorArray.forEach((component) => {
       it(`Wrong structure of ${component.class} id : "${component.id}"`, () => {
         validate(component);
-        // console.log(validate.errors);
+        //console.log(validate.errors);
         expect(validate.errors[component.aux.validationResult.num].params)
           .to.have.property(component.aux.validationResult.prop);
       });

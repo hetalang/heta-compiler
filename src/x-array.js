@@ -18,7 +18,7 @@ class XArray extends Array{
   }
   sortExpressionsByScope(scope){
     // path to Expression based on scope
-    let exprPath = 'assignments.' + scope + '.size';
+    let exprPath = 'assignments.' + scope;
     // create topo-sort tree
     let graph = new TopoSort();
     this
@@ -55,8 +55,8 @@ class XArray extends Array{
     // collect all deps, possibly helpfull for diagnostics
     let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
       .map((record) => {
-        return _.map(record.assignments, (assignment) => assignment.size)
-          .filter((size) => size.className==='Expression');
+        return _.map(record.assignments, (assignment) => assignment)
+          .filter((assignment) => assignment.className==='Expression');
       })
       .flatten()
       .map((expression) => expression.exprParsed.getSymbols())

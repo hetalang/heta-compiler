@@ -3,7 +3,6 @@ const Container = require('../src/container');
 const chai = require('chai');
 const should = chai.should();
 const { expect } = chai;
-const { _Simple } = require('../src/core/_simple');
 const { ContainerError } = require('../src/heta-error');
 
 describe('Unit tests for Container load', () => {
@@ -16,7 +15,7 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k1 title',
       assignments: {
-        start_: {size: {num: 1e-3}}
+        start_: {expr: 1e-3}
       }
     });
     c.should.be.lengthOf(1);
@@ -30,7 +29,7 @@ describe('Unit tests for Container load', () => {
       space: 'one',
       title: 'k2 title',
       assignments: {
-        start: {size: {num: 1.2}}
+        start: {expr: 1.2}
       }
     });
     c.should.be.lengthOf(2);
@@ -42,7 +41,7 @@ describe('Unit tests for Container load', () => {
       id: 'k1',
       space: 'default__',
       assignments: {
-        start_: {size: {num: 1}}
+        start_: {expr: 1}
       },
       units: '1/h'
     });
@@ -57,11 +56,11 @@ describe('Unit tests for Container load', () => {
       id: 'k2',
       space: 'one',
       assignments: {
-        start_: {size: {num: 1.4}}
+        start_: {expr: 1.4}
       }
     });
     c.should.be.lengthOf(2);
-    simple.should.have.nested.property('assignments.start_.size.num', 1.4);
+    simple.should.have.nested.property('assignments.start_.expr', '1.4');
     simple.should.not.have.property('title');
   });
 

@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { _Simple } = require('./_simple');
-const { Record, Assignment } = require('./record');
+const { Record } = require('./record');
 const { Species } = require('./species');
 // const { Process } = require('./process');
 const { IndexedHetaError } = require('../heta-error');
@@ -63,7 +63,8 @@ class Model extends _Simple {
         let unscoped = this._storage.get(scoped.id); // search the same id in global
         if(unscoped!==undefined && unscoped.className==='Const') {
           scoped.assignments = {
-            start_: new Assignment({size: unscoped.clone(), id: scoped.id})
+            //start_: new Assignment({size: unscoped.clone(), id: scoped.id})
+            start_: unscoped.clone()
           };
         }
       });

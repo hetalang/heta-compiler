@@ -51,3 +51,42 @@ describe('Unit test for Expression.', () => {
     }, Error);
   });
 });
+
+describe('Unit test for Expression with number.', () => {
+  it('Create expr from 3.14', () => {
+    let expression = new Expression(3.14);
+    expression.should.has.property('expr', '3.14');
+  });
+
+  it('Create expr from {expr: 3.14, units: "L"}', () => {
+    let expression = new Expression({expr: 3.14, units: 'L'});
+    expression.should.have.property('expr', '3.14');
+    expression.should.have.property('units', 'L');
+  });
+
+
+  it('Create expression from {expr: 1e-15}', () => {
+    let expression = new Expression({expr: 1e-15});
+    expression.should.has.property('expr', '1e-15');
+  });
+
+
+  it('Conversion to Q.', () => {
+    let expression = new Expression({expr: 3.14, units: 'L'});
+    expression.toQ().should.be.deep.equal({
+      expr: '3.14',
+      units: 'L'
+    });
+  });
+
+  it('Conversion to CMathML.', () => {
+    new Expression({expr: 1.1})
+      .toCMathML.should.be
+      .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.1</cn></math>');
+
+    new Expression({expr: 1e-15})
+      .toCMathML.should.be
+      .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn type="e-notation">1<sep/>-15</cn></math>');
+
+  });
+});

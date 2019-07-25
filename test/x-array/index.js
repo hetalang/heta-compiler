@@ -9,25 +9,25 @@ describe('XArray testing.', () => {
     x = new XArray();
     let rec1 = new Record({id: 'p1', space: 'one'}).merge({
       assignments: {
-        ode_: {size: 1}
+        ode_: 1
       }
     });
     x.push(rec1);
     let rec2 = new Record({id: 'p2', space: 'one'}).merge({
       assignments: {
-        ode_: {size: 'p1'}
+        ode_: 'p1'
       }
     });
     x.push(rec2);
     let rec3 = new Record({id: 'p3', space: 'one'}).merge({
       assignments: {
-        ode_: {size: 'p1*p4'}
+        ode_: 'p1*p4'
       }
     });
     x.push(rec3);
     let rec4 = new Record({id: 'p4', space: 'one'}).merge({
       assignments: {
-        ode_: {size: 'p1*p2'}
+        ode_: 'p1*p2'
       }
     });
     x.push(rec4);
@@ -51,13 +51,13 @@ describe('XArray testing.', () => {
     let cycle = new XArray();
     let rec1 = new Record({id: 'p1', space: 'one'}).merge({
       assignments: {
-        ode_: {size: 'p2'}
+        ode_: 'p2'
       }
     });
     cycle.push(rec1);
     let rec2 = new Record({id: 'p2', space: 'one'}).merge({
       assignments: {
-        ode_: {size: 'p1'}
+        ode_: 'p1'
       }
     });
     cycle.push(rec2);

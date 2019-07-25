@@ -1,8 +1,8 @@
 const { _Scoped } = require('./_scoped');
 
-class Switcher extends _Scoped {
+class ContinuousSwitcher extends _Scoped {
   merge(q, skipChecking){
-    if(!skipChecking) Switcher.isValid(q);
+    if(!skipChecking) ContinuousSwitcher.isValid(q);
     super.merge(q, skipChecking);
 
     if(q && q.condition!==undefined) this.condition = q.condition;
@@ -10,10 +10,10 @@ class Switcher extends _Scoped {
     return this;
   }
   static get schemaName(){
-    return 'SwitcherP';
+    return 'ContinuousSwitcherP';
   }
   get className(){
-    return 'Switcher';
+    return 'ContinuousSwitcher';
   }
   toQ(){
     let res = super.toQ();
@@ -23,5 +23,5 @@ class Switcher extends _Scoped {
 }
 
 module.exports = {
-  Switcher
+  ContinuousSwitcher
 };
