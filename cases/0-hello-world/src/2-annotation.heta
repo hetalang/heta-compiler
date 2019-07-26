@@ -30,6 +30,7 @@ block @Const begin
   default = 1;
 end
 
-mm_sbml @SBMLExport { model: mm };
+//mm_sbml @SBMLExport { model: mm };
 full_json @JSONExport;
 full_yaml @YAMLExport;
+mm_slv @SLVExport { model: mm };

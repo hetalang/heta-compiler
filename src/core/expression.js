@@ -31,6 +31,11 @@ class Expression {
   get expr(){
     return this.exprParsed.toString();
   }
+  get num(){ // if it is constant than return number
+    if(this.exprParsed.isConstantNode){
+      return this.exprParsed.value;
+    }
+  }
   set expr(v){
     this._exprInput = v;
     this._langInput = 'qs3p';

@@ -21,7 +21,7 @@
   source: xlsx.xlsx,
   type: xlsx,
   options: {
-    sheetNum: 1,
+    sheetNum: 5,
     omitRows: 3
   }
 };

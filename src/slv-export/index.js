@@ -47,7 +47,7 @@ class SLVExport extends _Export{
       space: _model_.targetSpace
     }).merge({
       assignments: {
-        start_: {size: 1, increment: false}
+        start_: {expr: 1, increment: false}
       },
       boundary: true,
       units: 'UL',
@@ -98,7 +98,7 @@ class SLVExport extends _Export{
             {target: record.id, stoichiometry: 1} // add record as actor but without backReferences
           ],
           assignments: {
-            ode_: {size: record.assignments.ode_.size} // copy size from record, increment = false
+            ode_: record.assignments.ode_ // copy size from record, increment = false
           }
         });
       process.actors[0]._target_ = record; // force setting of target object
@@ -123,11 +123,12 @@ class SLVExport extends _Export{
     // check that all record in start are not Expression
     let startExpressions = _model_.population
       .selectByInstance(Record)
-      .filter((record) => _.get(record, 'assignments.start_.size') instanceof Expression);
+      .filter((record) => _.get(record, 'assignments.start_') instanceof Expression)
+      .filter((record) => record.assignments.start_.num===undefined); // check if it is not Number
     if(startExpressions.length > 0){
-      let errorMsg = 'DBSolve does not support expressions in InitialValues.\n'
+      let errorMsg = 'DBSolve does not support expressions string in InitialValues.\n'
         + startExpressions
-          .map((x) => `${x.id}$${x.space} []= ${x.assignments.start_.size.expr}`)
+          .map((x) => `${x.id}$${x.space} []= ${x.assignments.start_.expr}`)
           .join('\n');
       throw new Error(errorMsg);
     }

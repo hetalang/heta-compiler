@@ -6,7 +6,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 }else{}
 {% endfor %}{% endblock %}
 ============================ output ======================
-{% block outputVars %}{% for out in _model_.population.selectByClassName('Species') | sort %}{{ out.id }}  {% endfor %}{% endblock %}
+{% block outputVars %}{% for out in _model_.population.selectByClassName('Species') | sort %}{{ out.id }}  {% endfor %}t  {% endblock %}
 ================================ Events ============================
 {% block events %}{{ events.length }}{% for event in events %}
 {{ event.id }}
@@ -34,10 +34,10 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% endblock %}
 =============================== IV ================================
 {% block iv %}
-{% set ivElements = _model_.population|filter2("assignments.start_.size.num") %}
+{% set ivElements = _model_.population|filter2("assignments.start_.num") %}
 //! Initialization at start, count: {{ ivElements|length }}
 {%- for number in ivElements %}
-{{ number.id }} = {{ number.assignments.start_.size.num }}; // @{{ number.className }} {units: {{ number.units|default('?') }}}
+{{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {units: {{ number.units|default('?') }}}
 {%- else -%}// nothing here
 {% endfor %}
 {% endblock %}
@@ -51,7 +51,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% set rhsElements = _model_.rhs|exclude2("assignments.ode_.increment") %}
 //! Initialization at ode, count: {{ rhsElements|length }}
 {% for rule in rhsElements %}
-{{ rule.id }} = {{ rule.assignments.ode_.size.expr }}{{ rule.assignments.ode_.size.num }}; // @{{ rule.className }} {units: {{ rule.units|default('?') }}}
+{{ rule.id }} = {{ rule.assignments.ode_.expr }}; // @{{ rule.className }} {units: {{ rule.units|default('?') }}}
 {% else %}// nothing here
 {% endfor %}
 //! Differential equations, count: {{ _model_.variables|length}}

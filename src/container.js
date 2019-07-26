@@ -1,5 +1,5 @@
 const { IndexedHetaError } = require('./heta-error');
-const { Record, Assignment } = require('./core/record');
+const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
@@ -123,7 +123,7 @@ class Container {
         if(unscoped!==undefined){ // empty assignments is not an error
           if(unscoped.className==='Const') {
             scoped.assignments = {
-              start_: new Assignment({size: unscoped.clone()})
+              start_: unscoped.clone()
             };
           }else{
             throw new IndexedHetaError(scoped.indexObj, `Element is expected to reffer implicitly to "Const", got "${unscoped.className}", `);
@@ -194,17 +194,17 @@ class Container {
       .filter((record) => record.assignments)
       .forEach((record) => { // iterate throw all records
         _.chain(record.assignments)
-          .pickBy((value) => value.size.className==='Expression')
+          .pickBy((value) => value.className==='Expression')
           .forEach((value, key) => { // iterates throw assignments
-            let deps = value.size.exprParsed.getSymbols();
-            deps.forEach((id) => { // iterates throw all ids
+            let deps = value.exprParsed.getSymbols();
+            deps.forEach((id, i) => { // iterates throw all ids
               let _component_ = this.select({id: id, space: record.space});
               if(!_component_){
                 messages.push(`Component "${id}$${record.space}" is not found as expected in expression\n`
-                  + `${record.id}$${record.space} [${key}]= ${value.size.expr};`);
+                  + `${record.id}$${record.space} [${key}]= ${value.expr};`);
               }else if(!(_component_ instanceof Record)){
                 messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
-                  + `${record.id}$${record.space} [${key}]= ${value.size.expr};`);
+                  + `${record.id}$${record.space} [${key}]= ${value.expr};`);
               }
             });
           })
@@ -212,7 +212,7 @@ class Container {
       });
 
     if(messages.length>0){
-      throw new Error('References error in expressions:\n' + messages.join('\n'));
+      throw new Error('References error in expressions:\n' + messages.map((m, i) => `(${i}) `+ m).join('\n\n'));
     }
   }
 }

@@ -34,6 +34,7 @@ block $one_comp_saturation begin
   comp1 @Compartment;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
+  kabs @Record;
   Vmax @Record;
   Km @Record;
 
@@ -43,6 +44,8 @@ block $one_comp_saturation begin
   s1 []= 0;
 end
 
-sbml_non_saturable @SBMLExport {model: one_comp};
-sbml_saturable @SBMLExport {model: one_comp_saturation};
-yaml @YAMLExport;
+//sbml_non_saturable @SBMLExport {model: one_comp};
+//sbml_saturable @SBMLExport {model: one_comp_saturation};
+json @JSONExport;
+slv_non_saturable @SLVExport { model: one_comp };
+slv_saturable @SLVExport { model: one_comp_saturation };

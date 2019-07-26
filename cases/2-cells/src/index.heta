@@ -5,20 +5,22 @@ block @Const begin
     blood = 5.2;
     plasma = 2.5;
     AXP_neu = 0.1;
+    k_prol = 1e-4;
 end
 
 invitro @Model;
 block $invitro begin
     #import {source: neu.heta, type: heta};
 
+    AXP_neu @Record;
     P1_mean @Record := ( P1_ext * ext + P1_neu * neu_vol ) / tot_vol;
 
     ext .= 1;
     S1 .= 150; // initial value of substrate
     P1_ext .= 0;
     P1_neu .= 0;
-    ATP_neu .= AXP_neu * K_eq / (1 + K_eq);
-    ADP_neu .= AXP_neu / (1 + K_eq);
+    ATP_neu .= AXP_neu * K_eq_ADP / (1 + K_eq_ADP);
+    ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
 invivo @Model;
@@ -31,6 +33,10 @@ block $invivo begin
     #delete tot_vol; // delete
     ext := plasma; // substitue id is better but is not available for this heta version
 
+    AXP_neu @Record;
+    plasma @Record;
+    k_prol @Record;
+
     neu_count .= 1e-9;
     r_prol_neu @Reaction {
         actors: -> neu_count
@@ -40,10 +46,12 @@ block $invivo begin
     S1 .= 10; // initial value of substrate
     P1_ext .= 0;
     P1_neu .= 0;
-    ATP_neu .= AXP_neu * K_eq / (1 + K_eq);
-    ADP_neu .= AXP_neu / (1 + K_eq);
+    ATP_neu .= AXP_neu * K_eq_ADP / (1 + K_eq_ADP);
+    ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
-invitro_sbml @SBMLExport {model: invitro};
-invivo_sbml @SBMLExport {model: invivo};
+//invitro_sbml @SBMLExport {model: invitro};
+//invivo_sbml @SBMLExport {model: invivo};
 yaml @YAMLExport;
+invitro_slv @SLVExport {model: invitro};
+invivo_slv @SLVExport {model: invivo};

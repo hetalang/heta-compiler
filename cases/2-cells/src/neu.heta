@@ -15,6 +15,10 @@ end
 block $abstract_neu begin
   tot_vol @Compartment;
   S1 @Species {compartment: tot_vol};
+  neu_count @Species {compartment: tot_vol, isAmount: true}; // <cell>
+  block @Record begin
+    neu_size; K_eq_ADP; ksyn_ATP; ksyn_P1; Km_S1; k_tr_P1; ATP_neu;
+  end
 
   neu_vol @Compartment;
   neu_vol := neu_count * neu_size; // <L>

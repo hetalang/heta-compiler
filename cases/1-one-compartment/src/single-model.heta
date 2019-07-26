@@ -24,5 +24,6 @@ block $one_comp begin
   s1 []= 0;
 end
 
-sbml @SBMLExport {model: one_comp};
-yaml @YAMLExport;
+//sbml @SBMLExport {model: one_comp};
+json @JSONExport;
+slv @SLVExport { model: one_comp };
