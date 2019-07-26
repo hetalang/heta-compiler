@@ -45,7 +45,11 @@ class Record extends _Scoped {
   toQ(){
     let res = super.toQ();
     if(this.assignments){
-      res.assignments = _.mapValues(this.assignments, (x) => x.toQ());
+      res.assignments = _.mapValues(this.assignments, (x) => {
+        if(x.className==='Expression'){
+          return x.toQ();
+        }
+      });
     }
     if(this.boundary){
       res.boundary = this.boundary;
