@@ -1,7 +1,5 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-// const { IndexedHetaError } = require('../heta-error');
-// const { Model } = require('../core/model');
 const XArray = require('../x-array');
 const nunjucks = require('../nunjucks-env');
 const { Process } = require('../core/process');
@@ -26,25 +24,35 @@ class SLVExport extends _Export{
   get ext(){
     return 'slv';
   }
+  /**
+   * The method creates text code to save as SLV file.
+   *
+   * @return {string} Text code of exported format.
+   */
   do(){
-    // another approach where model created dynamically
-    this._model_ = {
-      targetSpace: this.model
-    };
+    this._model_ = this._getSLVImage(this.model);
 
-    this.populate(this._model_);
     return this.getSLVCode();
   }
-  populate(_model_){
+  /**
+   * Creates model image by nesessary components based on space.
+   * @param {string} targetSpace - Model image to update.
+   *
+   * @return {undefined}
+   */
+  _getSLVImage(targetSpace){
+    // creates empty model image
+    let _model_ = {};
+
     let children = [...this._storage]
-      .filter((x) => x[1].space===_model_.targetSpace)
+      .filter((x) => x[1].space===targetSpace)
       .map((x) => x[1]);
     _model_.population = new XArray(...children);
 
     // add default_compartment_
     let default_compartment_ = new Compartment({
       id: 'default_compartment_',
-      space: _model_.targetSpace
+      space: targetSpace
     }).merge({
       assignments: {
         start_: {expr: 1, increment: false}
@@ -57,8 +65,6 @@ class SLVExport extends _Export{
 
     // push active processes
     _model_.processes = new XArray();
-    _model_.variables = new XArray();
-    _model_.matrix = [];
     _model_.population.filter((x) => {
       return x instanceof Process
         && x.actors.length>0 // process with actors
@@ -67,15 +73,17 @@ class SLVExport extends _Export{
       _model_.processes.push(process);
     });
     // push non boundary ode variables which are mentioned in processes
+    _model_.variables = new XArray();
     _model_.population.filter((x) => {
-      return x instanceof Record
-        && !x.boundary
-        && !x.implicitBoundary
-        && x.backReferences.length>0;
+      return x instanceof Record // must be record
+        && !x.boundary // not boundary
+        && !x.implicitBoundary // not constant, not rule, not explicit diff equation
+        && x.backReferences.length>0; // mentioned in process
     }).forEach((record) => {
       _model_.variables.push(record);
     });
     // create matrix
+    _model_.matrix = [];
     _model_.processes.forEach((process, processNum) => {
       process.actors.filter((actor) => {
         return !actor._target_.boundary
@@ -92,17 +100,16 @@ class SLVExport extends _Export{
     }).forEach((record) => {
       // create process for the record
       // virtual process existed only in res.processes array
-      let process = new Process({id: `${record.id}_rate_`, space: record.space})
+      let process = new Process({id: `${record.id}_rate_`, space: targetSpace})
         .merge({
           actors: [
             {target: record.id, stoichiometry: 1} // add record as actor but without backReferences
           ],
           assignments: {
-            ode_: record.assignments.ode_ // copy size from record, increment = false
+            ode_: new Expression(record.assignments.ode_.expr) // create Expression from the record, increment = false
           }
         });
       process.actors[0]._target_ = record; // force setting of target object
-      process.isVirtual = true;
       _model_.processes.push(process);
       _model_.population.push(process);
 
@@ -132,6 +139,8 @@ class SLVExport extends _Export{
           .join('\n');
       throw new Error(errorMsg);
     }
+
+    return _model_;
   }
   getSLVCode(){
     return nunjucks.render(

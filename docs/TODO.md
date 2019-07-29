@@ -2,23 +2,24 @@
 
 ## modules:
 
-- slv
-- dat
 + xlsx
-- sbml
 + markdown -> Page
-- svg
 + json
 + yaml
+- sbml
+- slv
+- dat
+- svg
 
 ## exports
 
-- slv
+* slv
++ json
++ yaml
+* sbml
+- mrgsolve
 - dat
 - irtdb
 - rxode
-- mrgsolve
 - simbio
-- simsolve
-+ json
-+ yml
+- simsolver
