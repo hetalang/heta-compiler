@@ -6,6 +6,7 @@ const { Reaction } = require('./core/reaction');
 const { Model } = require('./core/model');
 const { Process } = require('./core/process');
 const { ContinuousSwitcher } = require('./core/continuous-switcher');
+const { TimeSwitcher } = require('./core/time-switcher');
 const { ReferenceDefinition } = require('./core/reference-definition');
 const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
@@ -225,6 +226,7 @@ Container.prototype.classes = {
   Process,
   Reaction,
   ContinuousSwitcher,
+  TimeSwitcher,
   // unscoped classes
   Model,
   ReferenceDefinition,

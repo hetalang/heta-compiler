@@ -8,7 +8,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 ============================ output ======================
 {% block outputVars %}{% for out in _model_.population.selectByClassName('Species') | sort %}{{ out.id }}  {% endfor %}t  {% endblock %}
 ================================ Events ============================
-{% block events %}{{ events.length }}{% for event in events %}
+{% block events %}{{ _model_.events.length }}{% for event in _model_.events %}
 {{ event.id }}
 {{ event.multiply }}
 {{ event.add }}

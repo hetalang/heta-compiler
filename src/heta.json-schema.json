@@ -292,6 +292,28 @@
       ]
     },
 
+    "TimeSwitcherP": {
+      "type": "object",
+      "properties": {
+        "start": { "type": "number" },
+        "period": { "type": "number" , "minimum": 0, "default": 0},
+        "repeatCount": { "type": "integer" , "minimum": 0, "default": 0}
+      }
+    },
+
+    "ContinuousSwitcher": {
+      "allOf": [
+        { "$ref": "#/definitions/_SimpleP" },
+        { "$ref": "#/definitions/_ScopedP" },
+        { "$ref": "#/definitions/_SwitcherP" },
+        { "$ref": "#/definitions/TimeSwitcherP" },
+        {
+          "required": ["id", "space", "start"],
+          "properties": { "class": { "const": "TimeSwitcher" } }
+        }
+      ]
+    },
+
     "_ExportP": {
       "type": "object",
       "properties": {

@@ -992,7 +992,7 @@ k1
 1
 0.000010
 1000000
-{{ not(eventsOff) }}
+{{ 0 if eventsOff else 1 }}
 {% block events %}{% endblock %}
 <listModelData>
    <item>

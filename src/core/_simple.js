@@ -65,7 +65,7 @@ class _Simple {
     }
     let valid = validate(q);
     if(!valid) {
-      console.log(q);
+      // console.log(q);
       throw new SchemaValidationError(validate.errors, this.schemaName, q);
     }
   }

@@ -7,7 +7,7 @@ block $mod1 begin
   k1 @Record;
   p3 @Record;
   p3 {assignments: {
-    start_: {size: 1}
+    start_: {expr: 1}
   }};
   p4 @Record;
   p4 .= 0;
@@ -35,21 +35,33 @@ block $mod1 begin
   r3 := 0;
 end
 
+block @TimeSwitcher $mod1 begin
+  sw1 {
+    start: 6
+  };
+  sw2 {
+    start: 12,
+    period: 6,
+    repeatCount: 3
+  };
+end
+
 block @Const begin
   k1 = 0.1;
 end
 k2 @Page {content: this is content};
-
+/*
 mod1_sbml @SBMLExport {
   model: mod1
 };
-/*
+
 yaml @YAMLExport {
 };
 */
 mod1_slv @SLVExport {
   model: mod1,
-  eventsOff: true
+  eventsOff: false
 };
-yaml @JSONExport {
+
+json @JSONExport {
 };

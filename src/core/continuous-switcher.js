@@ -1,6 +1,6 @@
-const { _Scoped } = require('./_scoped');
+const { _Switcher } = require('./_switcher');
 
-class ContinuousSwitcher extends _Scoped {
+class ContinuousSwitcher extends _Switcher {
   merge(q, skipChecking){
     if(!skipChecking) ContinuousSwitcher.isValid(q);
     super.merge(q, skipChecking);
