@@ -18,6 +18,8 @@ const page = require('./page');
 const pageError = require('./page-error');
 const switcher = require('./continuousSwitcher');
 const switcherError = require('./continuousSwitcher-error');
+const timeSwitcher = require('./timeSwitcher');
+const timeSwitcherError = require('./timeSwitcher-error');
 
 // unscoped
 const unitDefinition = require('./unit-definition');
@@ -33,6 +35,7 @@ singleTest('ContinuousSwitcher', switcher, switcherError);
 singleTest('Model', model, modelError);
 singleTest('MonteCarloTask', monteCarloTask, monteCarloTaskError);
 singleTest('Page', page, pageError);
+singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
 
 // unscoped
 singleTest('UnitDefinition', unitDefinition);
@@ -46,9 +49,9 @@ function singleTest(className, checkedArray, errorArray){
     let validate = validator.getSchema(`http://qs3p.insilicobio.ru#/definitions/${className}`);
     // no errors
     checkedArray && checkedArray.forEach((component) => {
-      let valid = validate(component);
-      //if(!valid) console.log(validate.errors);
       it(`Structure OK of ${component.class} id :"${component.id}"`, () => {
+        let valid = validate(component);
+        if(!valid) console.log(validate.errors);
         expect(valid).to.be.true;
       })
     });
@@ -57,7 +60,7 @@ function singleTest(className, checkedArray, errorArray){
       it(`Wrong structure of ${component.class} id : "${component.id}"`, () => {
         validate(component);
         //console.log(validate.errors);
-        expect(validate.errors[component.aux.validationResult.num].params)
+        expect(validate.errors[component.aux.validationResult.num||0].params)
           .to.have.property(component.aux.validationResult.prop);
       });
     });
