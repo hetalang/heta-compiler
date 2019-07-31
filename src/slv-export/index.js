@@ -140,6 +140,54 @@ class SLVExport extends _Export{
       throw new Error(errorMsg);
     }
 
+    // create TimeEvents
+    _model_.events = [];
+    _model_.population
+      .selectByClassName('TimeSwitcher')
+      .forEach((switcher) => { // scan for switch
+        // if period===undefined or period===0 or repeatCount===0 => single dose
+        // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
+        let period = !switcher.period || switcher.repeatCount===0
+          ? 0
+          : switcher.period;
+        _model_.population
+          .selectByInstance(Record)
+          .filter((record) => _.has(record, 'assignments.' + switcher.id))
+          .forEach((record) => { // scan for records in switch
+            let expression = record.assignments[switcher.id];
+            let [multiply, add] = expression
+              .linearizeFor(record.id)
+              .map((tree) => {
+                if(tree.isSymbolNode){ // a is symbol case, i.e. 'p1'
+                  return tree.toString();
+                }else{
+                  try{ // a can be evaluated, i.e. '3/4'
+                    return tree.eval();
+                  }catch(e){ // other cases, i.e. 'p1*2'
+                    throw new Error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`);
+                  }
+                }
+              });
+
+            _model_.events.push({
+              start: switcher.start,
+              period: period,
+              on: 1,
+              target: record.id,
+              multiply: multiply,
+              add: add
+            });
+          });
+      });
+
+    // search for ContinuousSwitcher
+    let bagSwitchers = _model_.population
+      .selectByClassName('ContinuousSwitcher')
+      .map((switcher) => switcher.id);
+    if(bagSwitchers.length>0){
+      throw new Error('ContinuousSwitcher is not supported in SLVExport: ' + bagSwitchers);
+    }
+
     return _model_;
   }
   getSLVCode(){

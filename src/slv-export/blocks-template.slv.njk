@@ -9,10 +9,10 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% block outputVars %}{% for out in _model_.population.selectByClassName('Species') | sort %}{{ out.id }}  {% endfor %}t  {% endblock %}
 ================================ Events ============================
 {% block events %}{{ _model_.events.length }}{% for event in _model_.events %}
-{{ event.id }}
+{{ event.target }}
 {{ event.multiply }}
 {{ event.add }}
-{{ event.startingTime }}
+{{ event.start }}
 {{ event.period }}
 {{ event.on }}{% endfor %}{% endblock %}
 =============================== All reactions ======================

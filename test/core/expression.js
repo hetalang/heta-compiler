@@ -1,6 +1,7 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
 const should = require('chai').should();
+const { expect } = require('chai');
 
 describe('Unit test for Expression.', () => {
   it('Create expession from "x*y".', () => {
@@ -88,5 +89,36 @@ describe('Unit test for Expression with number.', () => {
       .toCMathML.should.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn type="e-notation">1<sep/>-15</cn></math>');
 
+  });
+});
+
+describe('Methods for Expression', () => {
+  it('Linearization of y = a*y + b', () => {
+    let expr = new Expression({expr: 'a*y + b', id: 'y'});
+    let res = expr
+      .linearizeFor('y')
+      .map((expression) => expression.toString());
+    expect(res).to.deep.equal(['a', 'b']);
+  });
+  it('Linearization of y = a*y', () => {
+    let expr = new Expression({expr: 'a*y', id: 'y'});
+    let res = expr
+      .linearizeFor('y')
+      .map((expression) => expression.toString());
+    expect(res).to.deep.equal(['a', '0']);
+  });
+  it('Linearization of y = b', () => {
+    let expr = new Expression({expr: 'b', id: 'y'});
+    let res = expr
+      .linearizeFor('y')
+      .map((expression) => expression.toString());
+    expect(res).to.deep.equal(['0', 'b']);
+  });
+  it('Linearization of y = a*y^2 + b', () => {
+    let expr = new Expression({expr: 'a*y^2 + b', id: 'y'});
+    let res = expr
+      .linearizeFor('y')
+      .map((expression) => expression.toString());
+    expect(res).to.deep.equal(['y * a', 'b']);
   });
 });

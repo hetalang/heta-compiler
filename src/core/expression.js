@@ -59,6 +59,23 @@ class Expression {
     if(this.increment) res.increment = this.increment;
     return res;
   }
+  linearizeFor(target){
+    let { OperatorNode, SymbolNode } = math.expression.node;
+    // estimate a, b from 'a * target + b'
+    // b = a*0+b
+    let bTree = math.simplify(this.exprParsed, {[target]: 0});
+    // a = (a*y+b - b)/y
+    let aTree = new OperatorNode('/', 'divide', [
+      new OperatorNode('-', 'subtract', [
+        this.exprParsed,
+        bTree
+      ]),
+      new SymbolNode(target)
+    ]);
+
+    let aTreeSimplified = math.simplify(aTree);
+    return [aTreeSimplified, bTree];
+  }
 }
 
 module.exports = {

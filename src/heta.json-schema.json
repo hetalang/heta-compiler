@@ -301,7 +301,7 @@
       }
     },
 
-    "ContinuousSwitcher": {
+    "TimeSwitcher": {
       "allOf": [
         { "$ref": "#/definitions/_SimpleP" },
         { "$ref": "#/definitions/_ScopedP" },
