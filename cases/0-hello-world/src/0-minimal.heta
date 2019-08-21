@@ -1,12 +1,10 @@
-mm @Model;
 
 default @Compartment $mm;
+default $mm .= 1;
 
 S @Species $mm { compartment: default };
 P @Species $mm { compartment: default };
 r1 @Reaction $mm { actors: S -> P };
-Vmax $mm @Record;
-Km $mm @Record;
 
 S $mm .= 10;
 P $mm .= 0;
@@ -14,7 +12,6 @@ r1 $mm := Vmax*S/(Km+S)*default;
 
 Vmax @Const = 0.1;
 Km @Const = 2.5;
-default @Const = 1;
 
 //mm_sbml @SBMLExport { model: mm };
 full_json @JSONExport;

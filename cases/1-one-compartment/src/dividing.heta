@@ -1,6 +1,4 @@
 block @Const begin
-  comp0 = 1; // compartment 0 volume
-  comp1 = 5.2; // compartment 1 volume
   kabs = 0.01; // constant of absorption
   kel = 0.01; // constant of elimination
   Vmax = 1.2;

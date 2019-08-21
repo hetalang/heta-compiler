@@ -2,12 +2,10 @@ one_comp @model;
 block $one_comp begin
   a0 @Species {compartment: comp0, isAmount: true};
   s1 @Species {compartment: comp1};
-  comp0 @Compartment;
-  comp1 @Compartment;
+  comp0 @Compartment .= 1;
+  comp1 @Compartment .= 5.2;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
-  kabs @Record;
-  kel @Record;
 
   vabs := kabs*a0;
   vel := kel*s1*comp1;

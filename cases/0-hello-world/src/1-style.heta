@@ -6,6 +6,7 @@ mm @Model;
 // this block unites elements with the same space
 block $mm begin
   default @Compartment;
+  default .= 1;
 
   S @Species {
     compartment: default
@@ -16,8 +17,6 @@ block $mm begin
   r1 @Reaction {
     actors: S -> P
   };
-  Vmax @Record;
-  Km @Record;
 
   r1 := Vmax*S/(Km+S)*default; // S is used here but assigned below
   S .= 10; // S should be initialialized after creation
@@ -28,7 +27,6 @@ end
 block @Const begin
   Vmax = 0.1; // this is global constant available for any scoped equation
   Km = 2.5;
-  default = 1;
 end
 
 //mm_sbml @SBMLExport { model: mm };

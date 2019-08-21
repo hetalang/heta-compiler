@@ -1,6 +1,4 @@
 block @Const begin
-  comp0 = 1; // compartment 0 volume
-  comp1 = 5.2; // compartment 1 volume
   kabs = 0.01; // constant of absorption
   kel = 0.01; // constant of elimination
   Vmax = 1.2;
@@ -13,12 +11,10 @@ one_comp @model;
 block $one_comp begin
   a0 @Species {compartment: comp0, isAmount: true};
   s1 @Species {compartment: comp1};
-  comp0 @Compartment;
-  comp1 @Compartment;
+  comp0 @Compartment .= 1;
+  comp1 @Compartment .= 5.2;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
-  kabs @Record;
-  kel @Record;
 
   vabs := kabs*a0;
   vel := kel*s1*comp1;
@@ -30,13 +26,10 @@ one_comp_saturation @model;
 block $one_comp_saturation begin
   a0 @Species {compartment: comp0, isAmount: true};
   s1 @Species {compartment: comp1};
-  comp0 @Compartment;
-  comp1 @Compartment;
+  comp0 @Compartment .= 1;
+  comp1 @Compartment .= 5.2;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
-  kabs @Record;
-  Vmax @Record;
-  Km @Record;
 
   vabs := kabs*a0;
   vel := Vmax*s1*comp1/(Km + s1);

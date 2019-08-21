@@ -1,11 +1,8 @@
-'''
-This is __notes__ describing the model
-'''
-mm @Model;
 
 // this block unites elements with the same space
 block $mm begin
   default @Compartment { units: L };
+  default .= 1;
 
   S @Species { title: substrate, compartment: default, units: uM };
   P @Species { title: product,  compartment: default, units: uM };
@@ -15,8 +12,6 @@ block $mm begin
     actors: S -> P,
     units: umole/min
   };
-  Vmax @Record;
-  //Km @Record;
 
   r1 := Vmax*S/(Km+S)*default; // S is used here but assigned below
   S .= 10; // S should be initialialized after creation
@@ -27,7 +22,6 @@ end
 block @Const begin
   Vmax = 0.1; // this is global constant available for any scoped equation
   Km = 2.5;
-  default = 1;
 end
 
 //mm_sbml @SBMLExport { model: mm };

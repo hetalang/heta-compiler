@@ -34,6 +34,12 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% endblock %}
 =============================== IV ================================
 {% block iv %}
+{% set constants = _model_.population.selectByClassName("Const") %}
+//! Constants, count: {{ constants|length }}
+{%- for con in constants %}
+{{ con.id }} = {{ con.num }}; // @{{ con.className }};
+{%- else -%}// nothing here
+{% endfor %}
 {% set ivElements = _model_.population|filter2("assignments.start_.num") %}
 //! Initialization at start, count: {{ ivElements|length }}
 {%- for number in ivElements %}

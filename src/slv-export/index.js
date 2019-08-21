@@ -5,6 +5,7 @@ const nunjucks = require('../nunjucks-env');
 const { Process } = require('../core/process');
 const { Compartment } = require('../core/compartment');
 const { Record } = require('../core/record');
+const { Const } = require('../core/const');
 const _ = require('lodash');
 const { Expression } = require('../core/expression');
 
@@ -49,13 +50,45 @@ class SLVExport extends _Export{
       .map((x) => x[1]);
     _model_.population = new XArray(...children);
 
+    // add Const to population
+    let messages = [];
+    _model_.population
+      .selectByInstance(Record)
+      .filter((record) => record.assignments)
+      .forEach((record) => {
+        _.forEach(record.assignments, (value, key) => {
+          let deps = value.exprParsed.getSymbols();
+          deps.forEach((id, i) => {
+            let _component_ = _model_.population.getById(id);
+            if(!_component_){ // component inside space is not found
+              let _global_ = this._storage.get(id);
+              if(!_global_){
+                messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
+                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+              }else if(!(_global_ instanceof Const)){
+                messages.push(`Component "${id}" is not a Const class as expected in expression\n`
+                  + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+              }else{
+                _model_.population.push(_global_);
+              }
+            }else if(!(_component_ instanceof Record)){
+              messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
+                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+            }
+          });
+        });
+      });
+    if(messages.length>0){
+      throw new Error('References error in expressions:\n' + messages.map((m, i) => `(${i}) `+ m).join('\n\n'));
+    }
+
     // add default_compartment_
     let default_compartment_ = new Compartment({
       id: 'default_compartment_',
       space: targetSpace
     }).merge({
       assignments: {
-        start_: {expr: 1, increment: false}
+        start_: {expr: 1}
       },
       boundary: true,
       units: 'UL',
@@ -92,34 +125,6 @@ class SLVExport extends _Export{
         let variableNum = _model_.variables.indexOf(actor._target_);
         _model_.matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
-    });
-    // push virtual processes and variables with ode_.increment
-    children.filter((x) => {
-      return x instanceof Record
-        && _.get(x, 'assignments.ode_.increment');
-    }).forEach((record) => {
-      // create process for the record
-      // virtual process existed only in res.processes array
-      let process = new Process({id: `${record.id}_rate_`, space: targetSpace})
-        .merge({
-          actors: [
-            {target: record.id, stoichiometry: 1} // add record as actor but without backReferences
-          ],
-          assignments: {
-            ode_: new Expression(record.assignments.ode_.expr) // create Expression from the record, increment = false
-          }
-        });
-      process.actors[0]._target_ = record; // force setting of target object
-      _model_.processes.push(process);
-      _model_.population.push(process);
-
-      // push process with ode_.increment to variables array
-      _model_.variables.push(record);
-
-      // set stoichiometry in matrix
-      let processNum = _model_.processes.length - 1;
-      let variableNum = _model_.variables.indexOf(record);
-      _model_.matrix.push([processNum, variableNum, 1]);
     });
 
     // create and sort expressions for RHS
@@ -187,7 +192,6 @@ class SLVExport extends _Export{
     if(bagSwitchers.length>0){
       throw new Error('ContinuousSwitcher is not supported in SLVExport: ' + bagSwitchers);
     }
-
     return _model_;
   }
   getSLVCode(){

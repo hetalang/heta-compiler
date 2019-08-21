@@ -1,6 +1,6 @@
 block @Const begin
-  comp0 = 1; // compartment 0 volume
-  comp1 = 5.2; // compartment 1 volume
+  comp0_vol = 1; // compartment 0 volume
+  comp1_vol = 5.2; // compartment 1 volume
   kabs = 0.01; // constant of absorption
   kel = 0.01; // constant of elimination
 end
@@ -15,9 +15,9 @@ block $one_comp begin
   comp1 @Compartment;
   vabs @Reaction {actors: a0 -> s1};
   vel @Reaction {actors: s1 ->};
-  kabs @Record;
-  kel @Record;
 
+  comp0 .= 1;
+  comp1 .= 5.2;
   vabs := kabs*a0;
   vel := kel*s1*comp1;
   a0 []= 10; // initial value

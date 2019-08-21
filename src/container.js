@@ -115,6 +115,7 @@ class Container {
     return this.storage.size;
   }
   setReferences(){
+    /* TODO: old version
     // add virtual assignments, search for global if no assignments presented
     [...this.storage].map((x) => x[1]) // get array of elements
       .filter((x) => x instanceof Record)
@@ -131,7 +132,7 @@ class Container {
           }
         }
       });
-
+    */
     // add compartment ref for Species
     [...this.storage].map((x) => x[1])
       .filter((x) => x instanceof Species)
@@ -194,22 +195,25 @@ class Container {
       .filter((component) => component instanceof Record)
       .filter((record) => record.assignments)
       .forEach((record) => { // iterate throw all records
-        _.chain(record.assignments)
-          .pickBy((value) => value.className==='Expression')
-          .forEach((value, key) => { // iterates throw assignments
-            let deps = value.exprParsed.getSymbols();
-            deps.forEach((id, i) => { // iterates throw all ids
-              let _component_ = this.select({id: id, space: record.space});
-              if(!_component_){
-                messages.push(`Component "${id}$${record.space}" is not found as expected in expression\n`
-                  + `${record.id}$${record.space} [${key}]= ${value.expr};`);
-              }else if(!(_component_ instanceof Record)){
-                messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
+        _.forEach(record.assignments, (value, key) => { // iterates throw assignments
+          let deps = value.exprParsed.getSymbols();
+          deps.forEach((id, i) => { // iterates throw all ids
+            let _component_ = this.select({id: id, space: record.space});
+            if(!_component_){ // component inside space is not found
+              let _global_ = this.select({id: id});
+              if(!_global_){
+                messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
+                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+              }else if(!(_global_ instanceof Const)){
+                messages.push(`Component "${id}" is not a Const class as expected in expression\n`
                   + `${record.id}$${record.space} [${key}]= ${value.expr};`);
               }
-            });
-          })
-          .value();
+            }else if(!(_component_ instanceof Record)){
+              messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
+                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+            }
+          });
+        });
       });
 
     if(messages.length>0){

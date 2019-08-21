@@ -1,6 +1,4 @@
 block @Const begin
-  comp0 = 1; // compartment 0 volume
-  comp1 = 5.2; // compartment 1 volume
   kabs = 0.01; // constant of absorption
   kel = 0.01; // constant of elimination
   Vmax = 1.2;
@@ -18,9 +16,6 @@ block $one_comp_saturation begin
     source: non-saturable.heta,
     type: heta
   };
-  Vmax @Record;
-  Km @Record;
-  #delete kel;
   vel := Vmax*s1*comp1/(Km + s1);
 end
 
