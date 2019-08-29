@@ -4,7 +4,7 @@ block $mod1 begin
   p1 .= 1;
   p2 @Record;
   p2 := 1*2;
-  k1 @Record;
+  k1 @Record .= 0.1;
   p3 @Record;
   p3 {assignments: {
     start_: {expr: 1}
@@ -51,7 +51,7 @@ block @TimeSwitcher $mod1 begin
 end
 
 block @Const begin
-  k1 = 0.1;
+  k1 = 0.2;
 end
 k2 @Page {content: this is content};
 /*

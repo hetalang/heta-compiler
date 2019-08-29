@@ -337,7 +337,10 @@
       "type": "object",
       "properties": {
         "free": { "type": "boolean" },
-        "num": { "type": "number" }
+        "num": { "type": "number" },
+        "units": {
+          "$ref": "#/definitions/Units"
+        }
       }
      },
 

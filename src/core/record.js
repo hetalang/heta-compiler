@@ -54,7 +54,9 @@ class Record extends _Scoped {
     if(this.boundary){
       res.boundary = this.boundary;
     }
-    res.units = this.units;
+    if(this.units){
+      res.units = this.units;
+    }
     return res;
   }
   SBMLUnits(){
@@ -74,43 +76,7 @@ class Record extends _Scoped {
       || _.get(this, 'assignments.start_.className')==='Const'; // this is Constant
   }
 }
-/*
-class Assignment {
-  constructor(q){
-    // check that size is correct Object
-    if(['Numeric', 'Expression', 'Const'].indexOf(q.size.className)===-1)
-      throw new Error(`Size of assignment ${JSON.stringify(q)} must be one of ['Numeric', 'Expression', 'Const'].`);
-    this.size = q.size;
-    if(q.increment) this.increment = q.increment;
-    if(q.parentId!==undefined) this.parentId = q.parentId; // XXX: I don't know if this required
-  }
-  get exprParsed(){
-    if(this.size instanceof Expression){
-      var exprParsed = this.size.exprParsed.cloneDeep();
-    }else{
-      exprParsed = math.parse(this.size.num);
-    }
-    if(!this.increment){
-      return exprParsed;
-    }else{
-      let idSymbol = new math.expression.node.SymbolNode(this.id);
-      return new math.expression.node.OperatorNode('+', 'add', [
-        idSymbol, exprParsed
-      ]);
-    }
-  }
-  toCMathML(){
-    return this.exprParsed
-      .toCMathML()
-      .toString();
-  }
-  toQ(){
-    let res = {size: this.size.toQ()};
-    if(this.increment) res.increment = this.increment;
-    return res;
-  }
-}
-*/
+
 module.exports = {
   Record
 };
