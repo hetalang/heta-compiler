@@ -9,7 +9,8 @@ unit-test:
   stage: test
   tags:
     - node
-    - gitlab-access
+    - npm
+    - powershell
   before_script:
     - npm i
   script:
