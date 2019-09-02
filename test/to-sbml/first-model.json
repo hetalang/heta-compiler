@@ -61,7 +61,7 @@
       "start_": {"expr": 1.1},
       "sw1": {"expr": 1.5}
     },
-    "compartment": "comp3"
+    "compartment": "comp2"
   },
   {
     "class": "Species",
@@ -82,10 +82,10 @@
       "ode_": {"expr": "p2*comp1*s1"}
     },
     "actors": [
-      {"target": "s4", "stoichiometry": -2},
+      {"target": "s1", "stoichiometry": -2},
       {"target": "s2", "stoichiometry": 1}
     ],
-    "effectors": [
+    "modifiers": [
       {"target": "s2"}
     ]
   },
@@ -97,7 +97,7 @@
       "ode_": {"expr": 28}
     },
     "units": "mole/L",
-    "effectors": [
+    "modifiers": [
       {"target": "s2"}
     ]
   },
@@ -108,8 +108,10 @@
     "condition": "evt1"
   },
   {
-    "class": "Model",
-    "id": "first",
+    "class": "SBMLExport",
+    "id": "sbml",
+    "model": "first",
+    "skipMathChecking": true,
     "title": "Model title",
     "notes": "Model *notes*"
   }

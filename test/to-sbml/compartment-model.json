@@ -1,13 +1,5 @@
 [
   {
-    "class": "Const", "id": "c0",
-    "num": 1, "units": "L", "free": true
-  },
-  {
-    "class": "Const", "id": "c1",
-    "num": 5, "units": "L"
-  },
-  {
     "class": "Const", "id": "c2",
     "num": 1.5, "units": "L"
   },
@@ -32,19 +24,20 @@
     "num": 2.2, "units": "m^2"
   },
   {
-    "class": "Model", "id": "two_comp"
+    "class": "SBMLExport", "id": "sbml",
+    "model": "two_comp"
   },
   {
     "class": "Compartment", "id": "c0", "space": "two_comp",
-    "units": "L"
+    "assignments": {"start_": 1}, "units": "L"
   },
   {
     "class": "Compartment", "id": "c1", "space": "two_comp",
-    "units": "L"
+    "assignments": {"start_": 5}, "units": "L"
   },
   {
     "class": "Compartment", "id": "c2", "space": "two_comp",
-    "units": "L"
+    "assignments": {"start_": 1.5}, "units": "L"
   },
   {
     "class": "Species", "id": "a0", "space": "two_comp",
@@ -88,7 +81,7 @@
   },
   {
     "id": "a0", "space": "two_comp",
-    "assignments": {"sw1": {"expr": 10, "units": "umole", "increment": true}}
+    "assignments": {"sw1": {"expr": 10, "units": "umole"}}
   },
   {
     "id": "s1", "space": "two_comp",
@@ -99,8 +92,9 @@
     "assignments": {"start_": {"expr": 0, "units": "uM"}}
   },
   {
-    "id": "auc", "space": "two_comp",
-    "assignments": {"ode_": {"expr": "s1", "increment": true}}
+    "class": "Process", "id": "pr1", "space": "two_comp",
+    "actors": [{"target": "auc", "stoichiometry": 1}],
+    "assignments": {"ode_": {"expr": "s1"}}
   },
   {
     "id": "auc", "space": "two_comp",

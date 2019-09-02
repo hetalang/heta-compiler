@@ -11,9 +11,12 @@ const _ = require('lodash');
 class SBMLExport extends _Export{
   merge(q, skipChecking){
     super.merge(q, skipChecking);
-    if(q && typeof q.model===undefined)
+    if(q && q.model===undefined){
       throw new TypeError(`"model" property in SBMLExport ${this.id} should be declared.`);
+    }
     this.model = q.model;
+    if(q && q.skipMathChecking)
+      this.skipMathChecking = q.skipMathChecking;
 
     return this;
   }
@@ -50,13 +53,15 @@ class SBMLExport extends _Export{
       .filter((record) => record.assignments)
       .forEach((record) => {
         _.forEach(record.assignments, (value, key) => {
-          let deps = value.exprParsed.getSymbols();
+          let deps = value.exprParsed
+            .getSymbols()
+            .filter((symbol) => ['t'].indexOf(symbol)===-1); // remove t from the search
           deps.forEach((id, i) => {
             let _component_ = _model_.population.getById(id);
             if(!_component_){ // component inside space is not found
               let _global_ = this._storage.get(id);
               if(!_global_){
-                messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
+                if(!this.skipMathChecking) messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
                 + `${record.id}$${record.space} [${key}]= ${value.expr};`);
               }else if(!(_global_ instanceof Const)){
                 messages.push(`Component "${id}" is not a Const class as expected in expression\n`
@@ -86,6 +91,8 @@ class SBMLExport extends _Export{
   toQ(){
     let res = super.toQ();
     if(this.model) res.model = this.model;
+    if(this.skipMathChecking) res.skipMathChecking = this.skipMathChecking;
+
     return res;
   }
 }
