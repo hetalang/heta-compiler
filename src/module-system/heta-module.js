@@ -1,5 +1,5 @@
 const fs = require('fs');
-const hetaParser = require('heta');
+const hetaParser = require('heta-parser');
 const _Module = require('./_module');
 /*
 _Module.prototype.setHetaModule = function(){
@@ -10,7 +10,7 @@ _Module.prototype.setHetaModule = function(){
 
   return this;
 };
-*/
+*/ 
 _Module.prototype.setHetaModuleAsync = function(callback){
   fs.readFile(this.filename, 'utf8', (err, fileContent) => {
     if(err){
