@@ -1,4 +1,6 @@
 const { _Simple } = require('./_simple');
+const { UnitsParser, qspUnits } = require('units-parser');
+let uParser = new UnitsParser(qspUnits);
 
 class Const extends _Simple { // implicit extend Numeric
   merge(q, skipChecking){
@@ -27,6 +29,18 @@ class Const extends _Simple { // implicit extend Numeric
     if(this.free) res.free = true;
     if(this.units) res.units = this.units;
     return res;
+  }  
+  SBMLUnits(){
+    return this.units;
+  }
+  unitsHash(){
+    if(this.units){
+      return uParser
+        .parse(this.units)
+        .toHash();
+    }else{
+      return;
+    }
   }
 }
 

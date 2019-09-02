@@ -112,8 +112,11 @@
   </listOfReactions>
   {% endif %}
 
+  {%- set listOfAssignmentRules = _model_.population|filter2("assignments.ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
+  {%- set listOfRateRules = _model_.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
+  {% if listOfAssignmentRules|length+listOfRateRules|length > 0 %}
   <listOfRules>
-  {%- for record in _model_.population|filter2("assignments.ode_")|exclude2("className","Reaction") %} {# all ode_ but not reactions #}
+  {%- for record in listOfAssignmentRules %}
     <assignmentRule
       variable="{{record.id}}"
       {% if record.title %}name="{{record.title}}"{% endif %}
@@ -123,7 +126,7 @@
     </assignmentRule>
   {%- endfor %}
 
-  {%- for record in _model_.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) %}
+  {%- for record in listOfRateRules %}
     <rateRule
       variable="{{record.id}}"
       {% if record.title %}name="{{record.title}}"{% endif %}
@@ -145,6 +148,7 @@
   {% endfor %}
   
   </listOfRules>
+  {% endif %}
   
   {%- set listOfInitialAssignments = _model_.population|filter2("assignments.start_")|exclude2("assignments.start_.num") -%}
   {% if listOfInitialAssignments|length > 0 %}

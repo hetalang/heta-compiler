@@ -2,6 +2,7 @@ const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 const { Expression } = require('./core/expression');
 const { Record } = require('./core/record');
+const { Const } = require('./core/const');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
@@ -83,6 +84,7 @@ class XArray extends Array{
   }
   getUniqueUnits(){
     return _.chain(this.selectByInstance(Record))
+      .concat(this.selectByInstance(Const))
       .filter((record) => record.SBMLUnits())
       .uniqBy((record) => record.unitsHash(true))
       .map((record) => record.SBMLUnits())
