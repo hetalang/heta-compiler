@@ -1,0 +1,35 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "case1",
+            "type": "shell",
+            "command": "qs3p build cases/0-hello-world",
+            "group": "test"
+        },
+        {
+            "label": "case2",
+            "type": "shell",
+            "command": "qs3p build cases/1-one-compartment",
+            "group": "test"
+        },
+        {
+            "label": "case3",
+            "type": "shell",
+            "command": "qs3p build cases/2-cells",
+            "group": "test"
+        },
+        {
+            "label": "case4",
+            "type": "shell",
+            "command": "qs3p build cases/4-superexample",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

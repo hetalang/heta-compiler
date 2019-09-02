@@ -54,6 +54,7 @@ class XArray extends Array{
 
     return new XArray(...sorted); // sorted is Array, return must be XArray
   }
+  /* currently not used, see _getXXXImage in Export
   expressionDeps(){
     // collect all deps, possibly helpfull for diagnostics
     let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
@@ -70,6 +71,7 @@ class XArray extends Array{
       .value();
     return deps;
   }
+  */
   selectRecordsByScope(scope){
     return this.selectByInstance(Record)
       .filter((record) => _.has(record, 'assignments.' + scope));

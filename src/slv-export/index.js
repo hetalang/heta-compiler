@@ -57,7 +57,9 @@ class SLVExport extends _Export{
       .filter((record) => record.assignments)
       .forEach((record) => {
         _.forEach(record.assignments, (value, key) => {
-          let deps = value.exprParsed.getSymbols();
+          let deps = value.exprParsed
+            .getSymbols()
+            .filter((symbol) => ['t'].indexOf(symbol)===-1); // remove t from the search
           deps.forEach((id, i) => {
             let _component_ = _model_.population.getById(id);
             if(!_component_){ // component inside space is not found
