@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="{{_model_.id}}" metaid="{{_model_.index}}" {% if _model_.title %}name="{{_model_.title}}"{% endif %}>
+  <model id="{{_id}}" metaid="{{_id}}" {% if title %}name="{{title}}"{% endif %}>
   {% if _model_.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{_model_.notesHTML}}</html></notes>{% endif %}
-  {%- set listOfCompartments = _model_.selectByClassName('Compartment') -%}
+  
+  {%- set listOfCompartments = _model_.population.selectByClassName('Compartment') -%}
   {% if listOfCompartments|length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
       <compartment
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        constant="{{ record.assignments.start_.size.className==='Const' }}"
-        {% if record.assignments.start_.size.num!==undefined -%}size="{{record.assignments.start_.size.num}}"{%- endif %}
+        constant="false"
+        {% if record.assignments.start_.num!==undefined -%}size="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{ record.unitsHash() }}"{%- endif %}
         metaid="{{record.index}}"
         >
@@ -19,19 +20,22 @@
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
-  {%- set listOfSpecies = _model_.selectByClassName('Species') -%}
+ 
+  {%- set listOfSpecies = _model_.population.selectByClassName('Species') -%}
   {% if listOfSpecies|length > 0 %}
     <listOfSpecies>
     {%- for record in listOfSpecies %}
       <species
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        hasOnlySubstanceUnits="{{record.isAmount===true}}"
-        speciesType=""
+        {#- speciesType="" #}
         compartment="{{record.compartment}}"
-        constant="{{ record.assignments.start_.size.className==='Const' }}"
-        boundaryCondition="{{ record.boundary===true or record.assignments.ode_!==undefined }}"
-        {% if record.assignments.start_.size.num!==undefined -%}initialConcentration="{{record.assignments.start_.size.num}}"{%- endif %}
+        constant="false"
+        boundaryCondition="{{ record.boundary===true or record.implicitBoundary===true }}"
+        hasOnlySubstanceUnits="{{record.isAmount===true}}"
+        {% if record.assignments.start_.num!==undefined -%}
+          {% if record.isAmount===true %}initialAmount{% else %}initialConcentration{% endif %}="{{record.assignments.start_.num}}"
+        {%- endif %}
         {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash(true)}}"{%- endif %}
         metaid="{{record.index}}"
         >
@@ -40,24 +44,40 @@
     {%- endfor %}
     </listOfSpecies>
   {% endif %}
-  {%- set listOfParameters = _model_.selectByClassName('Record') -%}
-  {% if listOfParameters|length > 0 %}
+  
+  {%- set listOfParameters = _model_.population.selectByClassName('Record') -%}
+  {%- set listOfProcesses = _model_.population.selectByClassName('Process') -%}
+  {%- set listOfConstants = _model_.population.selectByClassName('Const') -%}
+  {% if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 %}
     <listOfParameters>
-    {%- for record in listOfParameters %}
+    {%- for record in listOfParameters.concat(listOfProcesses) %}
       <parameter
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        constant="{{ record.assignments.start_.size.className==='Const' }}"
-        {% if record.assignments.start_.size.num!==undefined -%}value="{{record.assignments.start_.size.num}}"{%- endif %}
+        constant="false"
+        {% if record.assignments.start_.num!==undefined -%}value="{{record.assignments.start_.num}}"{%- endif %}
         {% if record.units!==undefined -%}units="{{record.unitsHash()}}"{%- endif %}
         metaid="{{record.index}}"
         >
         {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
       </parameter>
     {%- endfor %}
+    {%- for con in listOfConstants %}
+      <parameter
+        id="{{con.id}}"
+        {% if record.title %}name="{{con.title}}"{% endif %}
+        constant="true"
+        {% if con.num!==undefined -%}value="{{con.num}}"{%- endif %}
+        {% if con.units!==undefined -%}units="{{con.unitsHash()}}"{%- endif %}
+        metaid="{{con.index}}"
+        >
+        {% if con.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{con.notesHTML}}</html></notes>{% endif %}
+      </parameter>
+    {%- endfor %}
   </listOfParameters>
   {% endif %}
-  {%- set listOfReactions = _model_.selectByClassName('Reaction') -%}
+
+  {%- set listOfReactions = _model_.population.selectByClassName('Reaction') -%}
   {% if listOfReactions|length > 0 %}
     <listOfReactions>
     {%- for record in listOfReactions %}
@@ -80,54 +100,53 @@
           {% endfor -%}
         </listOfProducts>
         <listOfModifiers>
-          {% for effector in record.effectors -%}
-          <modifierSpeciesReference species="{{ effector.target }}"/>
+          {% for modifier in record.modifiers -%}
+          <modifierSpeciesReference species="{{ modifier.target }}"/>
           {% endfor -%}
         </listOfModifiers>
         <kineticLaw>
-          {{record.assignments.ode_.size.toCMathML}}
+          {{record.assignments.ode_.toCMathML}}
         </kineticLaw>
       </reaction>
     {%- endfor %}
   </listOfReactions>
   {% endif %}
+
   <listOfRules>
-  {%- for record in _model_.getListOfRulesAssignment() %}
+  {%- for record in _model_.population|filter2("assignments.ode_")|exclude2("className","Reaction") %} {# all ode_ but not reactions #}
     <assignmentRule
       variable="{{record.id}}"
-      metaid="{{record.index}}.ode_"
       {% if record.title %}name="{{record.title}}"{% endif %}
+      metaid="{{record.index}}.ode_"
       >
-      {{record.assignments.ode_.size.toCMathML}}
+      {{record.assignments.ode_.toCMathML}}
     </assignmentRule>
   {%- endfor %}
-  {%- for record in _model_.getListOfRulesRate() %}
+
+  {%- for record in _model_.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) %}
     <rateRule
       variable="{{record.id}}"
+      {% if record.title %}name="{{record.title}}"{% endif %}
       metaid="{{record.index}}.ode_"
-      {% if record.title %}name="{{record.title}}"{% endif %}
-      >
-      {{record.assignments.ode_.size.toCMathML}}
-    </rateRule>
-  {%- endfor %}
-  {%- for record in _model_.selectByClassName('Process') %}
-    {%- for actor in record.actors %}
-    <rateRule
-      variable="{{actor.target}}"
-      {% if record.title %}name="{{record.title}}"{% endif %}
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
-          <times/>
-          <cn>{{actor.stoichiometry}}</cn>
-          <ci>{{record.id}}</ci>
+          <plus/>
+          {% for ref in record.backReferences %}
+          <apply>
+            <times/>
+            <cn>{{ ref.stoichiometry }}</cn>
+            <ci>{{ ref.process }}</ci>
+          </apply>
+          {% endfor %}
         </apply>
       </math>
     </rateRule>
-    {%- endfor %}
-  {%- endfor %}
+  {% endfor %}
+  
   </listOfRules>
-  {%- set listOfInitialAssignments = _model_.getListOfInitialAssignments() -%}
+  
+  {%- set listOfInitialAssignments = _model_.population|filter2("assignments.start_")|exclude2("assignments.start_.num") -%}
   {% if listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
     {%- for record in listOfInitialAssignments %}
@@ -136,15 +155,41 @@
         metaid="{{record.index}}.start_"
         {% if record.title %}name="{{record.title}}"{% endif %}
         >
-        {{record.assignments.start_.toCMathML()}}
+        {{record.assignments.start_.toCMathML}}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>
   {% endif %}
-  {%- set listOfEvents = _model_.selectByClassName('Switcher') -%}
-  {% if listOfEvents|length > 0 %}
+  
+  {%- set listOfTimeEvents = _model_.population.selectByClassName("TimeSwitcher") -%}
+  {%- set listOfContinuousEvents = _model_.population.selectByClassName("ContinuousSwitcher") -%}
+  {% if listOfTimeEvents|length + listOfContinuousEvents|length > 0 %}
     <listOfEvents>
-      {%- for event in listOfEvents %}
+      {%- for event in listOfTimeEvents %}
+      <event
+        id="{{event.id}}" metaid="{{event.index}}"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <ci>t</ci>
+              <cn>{{event.start}}</cn>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          {% for record in _model_.population.selectRecordsByScope(event.id) %}
+          <eventAssignment
+            variable="{{ record.id }}"
+            metaid="{{record.index}}.{{event.id}}">
+            {{ record.assignments[event.id].toCMathML }}
+          </eventAssignment>
+          {% endfor %}
+        </listOfEventAssignments>
+      </event>
+      {%- endfor %}
+      {%- for event in listOfContinuousEvents %}
       <event
         id="{{event.id}}" metaid="{{event.index}}"
         >
@@ -158,11 +203,11 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for record in _model_.selectRecordsByScope(event.id) %}
+          {% for record in _model_.population.selectRecordsByScope(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}.{{event.id}}">
-            {{ record.assignments[event.id].size.toCMathML }}
+            {{ record.assignments[event.id].toCMathML }}
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
@@ -170,7 +215,8 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
-  {%- set listOfUnitDefinitions = _model_.getListOfUnitDefinitions() -%}
+  
+  {%- set listOfUnitDefinitions = _model_.population.getListOfUnitDefinitions() -%}
   {% if listOfUnitDefinitions|length > 0 %}
     <listOfUnitDefinitions>
     {%- for unitDefinition in listOfUnitDefinitions %}
@@ -178,5 +224,6 @@
     {%- endfor %}
   </listOfUnitDefinitions>
   {% endif %}
+  
   </model>
 </sbml>

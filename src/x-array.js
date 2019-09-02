@@ -2,6 +2,8 @@ const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 const { Expression } = require('./core/expression');
 const { Record } = require('./core/record');
+const { UnitsParser, qspUnits } = require('units-parser');
+let uParser = new UnitsParser(qspUnits);
 
 class XArray extends Array{
   getById(id){
@@ -66,6 +68,25 @@ class XArray extends Array{
       .difference(['t']) // remove time
       .value();
     return deps;
+  }
+  selectRecordsByScope(scope){
+    return this.selectByInstance(Record)
+      .filter((record) => _.has(record, 'assignments.' + scope));
+  }
+  getListOfUnitDefinitions(){
+    return this.getUniqueUnits()
+      .map((units) => {
+        return uParser
+          .parse(units)
+          .toSbmlUnitDefinition({nameStyle: 'string', simplify: true});
+      });
+  }
+  getUniqueUnits(){
+    return _.chain(this.selectByInstance(Record))
+      .filter((record) => record.SBMLUnits())
+      .uniqBy((record) => record.unitsHash(true))
+      .map((record) => record.SBMLUnits())
+      .value();
   }
 }
 

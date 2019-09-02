@@ -3,7 +3,7 @@ const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
-const math = require('mathjs');
+// const math = require('mathjs');
 const { IndexedHetaError } = require('../heta-error');
 
 class Record extends _Scoped {
@@ -26,7 +26,6 @@ class Record extends _Scoped {
         }else{
           throw new Error('Wrong expression argument.');// if code is OK never throws
         }
-        // return new Assignment({size: size, increment: x.increment, id: this.id}); // set id for increment support // TODO: remove increment, id to Expression
       });
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
     }
@@ -72,8 +71,7 @@ class Record extends _Scoped {
     }
   }
   get implicitBoundary(){
-    return _.has(this, 'assignments.ode_') // this is rule or explicit diff equation
-      || _.get(this, 'assignments.start_.className')==='Const'; // this is Constant
+    return _.has(this, 'assignments.ode_'); // this is rule
   }
 }
 
