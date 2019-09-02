@@ -40,7 +40,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {{ con.id }} = {{ con.num }}; // @{{ con.className }};
 {%- else -%}// nothing here
 {% endfor %}
-{% set ivElements = _model_.population|filter2("assignments.start_.num") %}
+{% set ivElements = _model_.population|exclude2("assignments.start_.num", undefined) %}
 //! Initialization at start, count: {{ ivElements|length }}
 {%- for number in ivElements %}
 {{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {units: {{ number.units|default('?') }}}

@@ -11,18 +11,10 @@ env.addFilter('selectattr2', function(arr, attr, value) {
 });
 */
 env.addFilter('filter2', function(arr, path, value) {
-  if(value===undefined){
-    return arr.filter((x) => _.get(x, path)!==undefined);
-  }else{
-    return arr.filter((x) => _.get(x, path)===value);
-  }
+  return arr.filter((x) => _.get(x, path)===value);
 });
 env.addFilter('exclude2', function(arr, path, value) {
-  if(value===undefined){
-    return arr.filter((x) => _.get(x, path)===undefined);
-  }else{
-    return arr.filter((x) => _.get(x, path)!==value);
-  }
+  return arr.filter((x) => _.get(x, path)!==value);
 });
 
 module.exports = env;

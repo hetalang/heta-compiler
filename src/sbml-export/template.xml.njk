@@ -112,7 +112,7 @@
   </listOfReactions>
   {% endif %}
 
-  {%- set listOfAssignmentRules = _model_.population|filter2("assignments.ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
+  {%- set listOfAssignmentRules = _model_.population|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
   {%- set listOfRateRules = _model_.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
   {% if listOfAssignmentRules|length+listOfRateRules|length > 0 %}
   <listOfRules>
@@ -150,7 +150,7 @@
   </listOfRules>
   {% endif %}
   
-  {%- set listOfInitialAssignments = _model_.population|filter2("assignments.start_")|exclude2("assignments.start_.num") -%}
+  {%- set listOfInitialAssignments = _model_.population|exclude2("assignments.start_", undefined)|filter2("assignments.start_.num", undefined) -%}
   {% if listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
     {%- for record in listOfInitialAssignments %}
