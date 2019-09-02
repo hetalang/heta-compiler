@@ -43,9 +43,6 @@
             { "$ref": "#/definitions/ExprString" },
             { "type": "number"}
           ]
-        },
-        "increment": {
-          "type": "boolean", "default": false
         }
       }
     },
@@ -63,7 +60,7 @@
       },
       "example": {
         "start_": { "expr": 1.2 },
-        "ode_": { "expr": "x * y", "increment": true },
+        "ode_": { "expr": "x * y" },
         "evt1": { "expr": "z + 1.2" }
       }
     },

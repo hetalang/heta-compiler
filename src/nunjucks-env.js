@@ -12,13 +12,17 @@ env.addFilter('selectattr2', function(arr, attr, value) {
 */
 env.addFilter('filter2', function(arr, path, value) {
   if(value===undefined){
-    return _.filter(arr, (x) => _.get(x, path)!==undefined);
+    return arr.filter((x) => _.get(x, path)!==undefined);
   }else{
-    return _.filter(arr, [path, value]);
+    return arr.filter((x) => _.get(x, path)===value);
   }
 });
-env.addFilter('exclude2', function(arr, path) {
-  return arr.filter((x) => _.get(x, path)===undefined);
+env.addFilter('exclude2', function(arr, path, value) {
+  if(value===undefined){
+    return arr.filter((x) => _.get(x, path)===undefined);
+  }else{
+    return arr.filter((x) => _.get(x, path)!==value);
+  }
 });
 
 module.exports = env;

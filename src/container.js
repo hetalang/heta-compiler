@@ -115,24 +115,6 @@ class Container {
     return this.storage.size;
   }
   setReferences(){
-    /* TODO: old version
-    // add virtual assignments, search for global if no assignments presented
-    [...this.storage].map((x) => x[1]) // get array of elements
-      .filter((x) => x instanceof Record)
-      .filter((x) => x.assignments===undefined)
-      .forEach((scoped) => {
-        let unscoped = this.storage.get(scoped.id); // search the same id in global
-        if(unscoped!==undefined){ // empty assignments is not an error
-          if(unscoped.className==='Const') {
-            scoped.assignments = {
-              start_: unscoped.clone()
-            };
-          }else{
-            throw new IndexedHetaError(scoped.indexObj, `Element is expected to reffer implicitly to "Const", got "${unscoped.className}", `);
-          }
-        }
-      });
-    */
     // add compartment ref for Species
     [...this.storage].map((x) => x[1])
       .filter((x) => x instanceof Species)

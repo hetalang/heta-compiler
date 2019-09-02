@@ -27,7 +27,6 @@ class Expression {
       throw new TypeError('Cannot parse .expr property. ' + e.message);
     }
     if(q.units) this.units = q.units;
-    if(q.increment) this.increment = q.increment;
   }
   get expr(){
     return this.exprParsed.toString();
@@ -56,7 +55,6 @@ class Expression {
   toQ(){
     let res = {expr: this.expr};
     if(this.units) res.units = this.units;
-    if(this.increment) res.increment = this.increment;
     return res;
   }
   linearizeFor(target){
