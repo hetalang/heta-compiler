@@ -12,7 +12,6 @@ unit-test:
     - npm
     - powershell
   before_script:
-    - npm link heta-parser
     - npm i
   script:
-    - npm test
+    - npm testcov
