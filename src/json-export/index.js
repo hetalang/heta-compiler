@@ -8,9 +8,8 @@ class JSONExport extends _Export{
   get ext(){
     return 'json';
   }
-  do(useVirtual){
+  do(){
     let qArr = [...this._storage]
-      .filter((obj) => !obj[1].virtual || useVirtual)
       .map((obj) => obj[1].toQ());
     return JSON.stringify(qArr, null, 2);
   }

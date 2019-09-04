@@ -9,9 +9,8 @@ class YAMLExport extends _Export {
   get ext(){
     return 'yml';
   }
-  do(useVirtual){
+  do(){
     let qArr = [...this._storage]
-      .filter((obj) => !obj[1].virtual || useVirtual)
       .map((obj) => obj[1].toQ());
     let order = ['class', 'id', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);

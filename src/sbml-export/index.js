@@ -6,7 +6,6 @@ const XArray = require('../x-array');
 const { Record } = require('../core/record');
 const { Const } = require('../core/const');
 const _ = require('lodash');
-// require('./model');
 
 class SBMLExport extends _Export{
   merge(q, skipChecking){
@@ -25,14 +24,7 @@ class SBMLExport extends _Export{
   }
   get ext(){
     return 'xml';
-  }/* // old version with Model class
-  do(){
-    this._model_ = this._storage.get(this.model); // TODO: implement get to use this.get({id: model})
-    if(this._model_===undefined)
-      throw new IndexedHetaError(this.indexObj, `Required property model reffers to lost model id "${this.model}".`);
-
-    return this.getSBMLCode();
-  }*/
+  }
   do(){
     this._model_ = this._getSBMLImage(this.model);
     return this.getSBMLCode();

@@ -3,7 +3,6 @@ const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
 const { Reaction } = require('./core/reaction');
-const { Model } = require('./core/model');
 const { Process } = require('./core/process');
 const { ContinuousSwitcher } = require('./core/continuous-switcher');
 const { TimeSwitcher } = require('./core/time-switcher');
@@ -34,10 +33,7 @@ class Container {
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     this.storage.set(simple.index, simple);
-    let shouldIncludeStorage =
-      (simple instanceof Model)
-      || (simple instanceof _Export);
-    if(shouldIncludeStorage) {
+    if(simple instanceof _Export) { // include storage
       simple._storage = this.storage;
       simple._container = this;
     }
@@ -102,9 +98,8 @@ class Container {
     qArr.forEach((q) => this.load(q));
     return this;
   }
-  toQArr(useVirtual){
+  toQArr(){
     let qArr = [...this.storage]
-      .filter((obj) => !obj.virtual || useVirtual)
       .map((obj) => obj[1].toQ());
     return qArr;
   }
@@ -182,7 +177,6 @@ Container.prototype.classes = {
   ContinuousSwitcher,
   TimeSwitcher,
   // unscoped classes
-  Model,
   ReferenceDefinition,
   UnitDefinition,
   Page,

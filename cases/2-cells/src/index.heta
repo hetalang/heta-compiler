@@ -8,7 +8,6 @@ block @Const begin
     k_prol = 1e-4;
 end
 
-invitro @Model;
 block $invitro begin
     #import {source: neu.heta, type: heta};
 
@@ -23,7 +22,6 @@ block $invitro begin
     ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
-invivo @Model;
 block $invivo begin
     #import {source: neu.heta, type: heta};
 

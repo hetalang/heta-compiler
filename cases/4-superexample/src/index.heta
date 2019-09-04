@@ -1,4 +1,4 @@
-mod1 @Model;
+
 block $mod1 begin
   p1 @Record;
   p1 .= 1;

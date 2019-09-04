@@ -10,7 +10,6 @@ end
   type: heta
 };
 
-one_comp_saturation @Model;
 block $one_comp_saturation begin
   #import {
     source: non-saturable.heta,

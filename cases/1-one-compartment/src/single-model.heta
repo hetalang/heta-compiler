@@ -4,10 +4,7 @@ block @Const begin
   kabs = 0.01; // constant of absorption
   kel = 0.01; // constant of elimination
 end
-'''
-One compartment PK model
-'''
-one_comp @model;
+
 block $one_comp begin
   a0 @Species {compartment: comp0, isAmount: true};
   s1 @Species {compartment: comp1};
