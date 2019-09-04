@@ -14,4 +14,4 @@ unit-test:
   before_script:
     - npm i
   script:
-    - npm testcov
+    - npm run testcov
