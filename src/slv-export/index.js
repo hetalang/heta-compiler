@@ -43,46 +43,9 @@ class SLVExport extends _Export{
    */
   _getSLVImage(targetSpace){
     // creates empty model image
-    let _model_ = {};
-
-    let children = [...this._storage]
-      .filter((x) => x[1].space===targetSpace)
-      .map((x) => x[1]);
-    _model_.population = new XArray(...children);
-
-    // add Const to population
-    let messages = [];
-    _model_.population
-      .selectByInstance(Record)
-      .filter((record) => record.assignments)
-      .forEach((record) => {
-        _.forEach(record.assignments, (value, key) => {
-          let deps = value.exprParsed
-            .getSymbols()
-            .filter((symbol) => ['t'].indexOf(symbol)===-1); // remove t from the search
-          deps.forEach((id, i) => {
-            let _component_ = _model_.population.getById(id);
-            if(!_component_){ // component inside space is not found
-              let _global_ = this._storage.get(id);
-              if(!_global_){
-                messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
-                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
-              }else if(!(_global_ instanceof Const)){
-                messages.push(`Component "${id}" is not a Const class as expected in expression\n`
-                  + `${record.id}$${record.space} [${key}]= ${value.expr};`);
-              }else{
-                _model_.population.push(_global_);
-              }
-            }else if(!(_component_ instanceof Record)){
-              messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
-                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
-            }
-          });
-        });
-      });
-    if(messages.length>0){
-      throw new Error('References error in expressions:\n' + messages.map((m, i) => `(${i}) `+ m).join('\n\n'));
-    }
+    let model = {
+      population: this._container.getPopulation(targetSpace, false)
+    };
 
     // add default_compartment_
     let default_compartment_ = new Compartment({
@@ -96,46 +59,46 @@ class SLVExport extends _Export{
       units: 'UL',
       notes: 'This is fake compartment to support compounds without compartment.'
     });
-    _model_.population.push(default_compartment_);
+    model.population.push(default_compartment_);
 
     // push active processes
-    _model_.processes = new XArray();
-    _model_.population.filter((x) => {
+    model.processes = new XArray();
+    model.population.filter((x) => {
       return x instanceof Process
         && x.actors.length>0 // process with actors
         && x.actors.some((actor) => !actor._target_.boundary && !actor._target_.implicitBoundary);// true if there is at least non boundary target
     }).forEach((process) => {
-      _model_.processes.push(process);
+      model.processes.push(process);
     });
     // push non boundary ode variables which are mentioned in processes
-    _model_.variables = new XArray();
-    _model_.population.filter((x) => {
+    model.variables = new XArray();
+    model.population.filter((x) => {
       return x instanceof Record // must be record
         && !x.boundary // not boundary
         && !x.implicitBoundary // not constant, not rule, not explicit diff equation
         && x.backReferences.length>0; // mentioned in process
     }).forEach((record) => {
-      _model_.variables.push(record);
+      model.variables.push(record);
     });
     // create matrix
-    _model_.matrix = [];
-    _model_.processes.forEach((process, processNum) => {
+    model.matrix = [];
+    model.processes.forEach((process, processNum) => {
       process.actors.filter((actor) => {
         return !actor._target_.boundary
           && !actor._target_.implicitBoundary;
       }).forEach((actor) => {
-        let variableNum = _model_.variables.indexOf(actor._target_);
-        _model_.matrix.push([processNum, variableNum, actor.stoichiometry]);
+        let variableNum = model.variables.indexOf(actor._target_);
+        model.matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
     });
 
     // create and sort expressions for RHS
-    _model_.rhs = _model_.population
+    model.rhs = model.population
       .selectByInstance(Record)
       .filter((record) => _.has(record, 'assignments.ode_'))
       .sortExpressionsByScope('ode_');
     // check that all record in start are not Expression
-    let startExpressions = _model_.population
+    let startExpressions = model.population
       .selectByInstance(Record)
       .filter((record) => _.get(record, 'assignments.start_') instanceof Expression)
       .filter((record) => record.assignments.start_.num===undefined); // check if it is not Number
@@ -148,8 +111,8 @@ class SLVExport extends _Export{
     }
 
     // create TimeEvents
-    _model_.events = [];
-    _model_.population
+    model.events = [];
+    model.population
       .selectByClassName('TimeSwitcher')
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
@@ -157,7 +120,7 @@ class SLVExport extends _Export{
         let period = !switcher.period || switcher.repeatCount===0
           ? 0
           : switcher.period;
-        _model_.population
+        model.population
           .selectByInstance(Record)
           .filter((record) => _.has(record, 'assignments.' + switcher.id))
           .forEach((record) => { // scan for records in switch
@@ -176,7 +139,7 @@ class SLVExport extends _Export{
                 }
               });
 
-            _model_.events.push({
+            model.events.push({
               start: switcher.start,
               period: period,
               on: 1,
@@ -188,13 +151,14 @@ class SLVExport extends _Export{
       });
 
     // search for ContinuousSwitcher
-    let bagSwitchers = _model_.population
+    let bagSwitchers = model.population
       .selectByClassName('ContinuousSwitcher')
       .map((switcher) => switcher.id);
     if(bagSwitchers.length>0){
       throw new Error('ContinuousSwitcher is not supported in SLVExport: ' + bagSwitchers);
     }
-    return _model_;
+    
+    return model;
   }
   getSLVCode(){
     return nunjucks.render(

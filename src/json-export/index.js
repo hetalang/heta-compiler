@@ -9,8 +9,8 @@ class JSONExport extends _Export{
     return 'json';
   }
   do(){
-    let qArr = [...this._storage]
-      .map((obj) => obj[1].toQ());
+    let qArr = this._container.toQArr();
+    
     return JSON.stringify(qArr, null, 2);
   }
   toQ(){

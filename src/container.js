@@ -13,6 +13,7 @@ const { Const } = require('./core/const');
 const _ = require('lodash');
 const { _Export, JSONExport } = require('./core/_export');
 const { getIndexFromQ } = require('./common');
+const XArray = require('./x-array');
 
 class Container {
   constructor(){
@@ -33,8 +34,7 @@ class Container {
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     this.storage.set(simple.index, simple);
-    if(simple instanceof _Export) { // include storage
-      simple._storage = this.storage;
+    if(simple instanceof _Export) { // include parent
       simple._container = this;
     }
 
@@ -108,6 +108,55 @@ class Container {
   }
   get length(){
     return this.storage.size;
+  }
+  getPopulation(targetSpace, skipMathChecking=false){
+    // argument checking
+    if(targetSpace===undefined || typeof targetSpace!=='string'){
+      throw new TypeError('targetSpace must be string');
+    }
+    let children = [...this.storage]
+      .filter((x) => x[1].space===targetSpace)
+      .map((x) => x[1]);
+    let population = new XArray(...children);
+
+
+    // add Const to population
+    let messages = []; // messages for reference errors
+    population
+      .selectByInstance(Record)
+      .filter((record) => record.assignments)
+      .forEach((record) => {
+        _.forEach(record.assignments, (value, key) => {
+          let deps = value.exprParsed
+            .getSymbols()
+            .filter((symbol) => ['t'].indexOf(symbol)===-1); // remove t from the search
+          deps.forEach((id, i) => {
+            let _component_ = population.getById(id);
+            if(!_component_){ // component inside space is not found
+              let _global_ = this.storage.get(id);
+              if(!_global_){
+                if(!skipMathChecking) {
+                  messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
+                    + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+                }
+              }else if(!(_global_ instanceof Const)){
+                messages.push(`Component "${id}" is not a Const class as expected in expression\n`
+                  + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+              }else{
+                population.push(_global_);
+              }
+            }else if(!(_component_ instanceof Record)){
+              messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
+                + `${record.id}$${record.space} [${key}]= ${value.expr};`);
+            }
+          });
+        });
+      });
+    if(messages.length>0){
+      throw new Error('References error in expressions:\n' + messages.map((m, i) => `(${i}) `+ m).join('\n\n'));
+    }
+
+    return population;
   }
   setReferences(){
     // add compartment ref for Species

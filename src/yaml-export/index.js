@@ -10,8 +10,7 @@ class YAMLExport extends _Export {
     return 'yml';
   }
   do(){
-    let qArr = [...this._storage]
-      .map((obj) => obj[1].toQ());
+    let qArr = this._container.toQArr();
     let order = ['class', 'id', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);
     let yaml = safeDump(qArr, {
@@ -20,6 +19,7 @@ class YAMLExport extends _Export {
       sortKeys: compareFunction,
       styles: {}
     });
+    
     return yaml;
   }
   toQ(){
