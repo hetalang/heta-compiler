@@ -5,6 +5,7 @@ require('./yaml-export');
 require('./json-export');
 require('./sbml-export');
 require('./slv-export');
+require('./mrgsolve-export');
 
 module.exports = {
   Container,

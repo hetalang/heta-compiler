@@ -33,6 +33,9 @@ class _Simple {
   get className(){
     return '_Simple';
   }
+  get is_Simple(){
+    return true;
+  }
   get index(){
     return this.id;
   }
@@ -54,7 +57,7 @@ class _Simple {
       let HTMLTree = markdown.toHTMLTree(this.notesMdTree);
       return markdown.renderJsonML(HTMLTree);
     }else{
-      return;
+      return undefined;
     }
   }
   static isValid(q){

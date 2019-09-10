@@ -41,6 +41,9 @@ class Record extends _Scoped {
   get className(){
     return 'Record';
   }
+  get isRecord(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     if(this.assignments){
@@ -72,6 +75,12 @@ class Record extends _Scoped {
   }
   get implicitBoundary(){
     return _.has(this, 'assignments.ode_'); // this is rule
+  }
+  // works properly only after setReferences()
+  get isDynamic(){
+    return !this.boundary
+      && !this.implicitBoundary
+      && this.backReferences.length > 0;
   }
 }
 

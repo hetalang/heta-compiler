@@ -2,10 +2,7 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 //const { IndexedHetaError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
-const XArray = require('../x-array');
-const { Record } = require('../core/record');
-const { Const } = require('../core/const');
-const _ = require('lodash');
+//const _ = require('lodash');
 
 class SBMLExport extends _Export{
   merge(q, skipChecking){

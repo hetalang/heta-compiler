@@ -5,7 +5,6 @@ const nunjucks = require('../nunjucks-env');
 const { Process } = require('../core/process');
 const { Compartment } = require('../core/compartment');
 const { Record } = require('../core/record');
-const { Const } = require('../core/const');
 const _ = require('lodash');
 const { Expression } = require('../core/expression');
 

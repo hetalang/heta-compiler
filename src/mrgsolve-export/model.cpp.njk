@@ -1,0 +1,56 @@
+$PROB
+# Model: `{{ _id }}`
+  - Title: {{ title }}
+  - Notes: {{ notes }}
+  - Source: Generated automatically from platform with qs3p-js 0.3.0
+  - Date: `r Sys.Date()`
+  - Version: `r packageVersion("mrgsolve")`
+
+# Demo
+```{r,echo=TRUE}
+  ev(amt=10) %>% mrgsim()
+  plot
+```
+
+$SET end={{ method.timeRange[1]|default(120) }}, delta={{ method.dt|default(0.1) }}, hmax={{ method.dtmax|default(0.01) }}, hmin={{ method.dtmin|default(0) }}, rtol={{ method.reltol|default("1e-3") }}, atol={{ method.abstol|default("1e-6") }}
+
+$PARAM @annotated
+{%- for constant in _model_.population.selectByClassName("Const") %}
+// @{{ constant.className }} '{{ constant.title }}'
+{{ constant.id }} : {{ constant.num }} : {% if constant.units %}({{ constant.units }}){% endif %}
+{%- endfor %}
+
+{% set variables = _model_.population|filter2("isRecord", true)|filter2("isDynamic", true) -%}
+$CMT @annotated
+{%- for record in variables %}
+// @{{ record.className }} '{{ record.title }}'
+{{ record.id }}_amt_ : as amount
+{%- endfor %}
+
+$GLOBAL
+{%- for variable in variables %}
+#define {{ variable.id }} ({{ variable.id }}_amt_ / {{ variable.compartment }})
+{%- endfor %}
+
+$MAIN
+{% for record in _model_.population|filter2("isRecord", true)|exclude2("assignments.start_", undefined) -%}{# numbers in format 10. must be here #}
+{%- if record.isDynamic -%}
+{{ record.id }}_amt__0 = {{ record.assignments.start_.expr }}; 
+{% else -%}
+double {{ record.id }} = {{ record.assignments.start_.expr }}; 
+{% endif -%}
+{%- endfor %}
+
+$ODE
+{%- for record in _model_.population|filter2("isRecord", true)|exclude2("assignments.ode_", undefined) %} {# |sort(attribute='correctNumeration') #}
+// @{{ record.className }} '{{ record.title }}'
+double {{ record.id }} = {{  record.assignments.ode_.expr }};
+{% endfor %}
+{%- for variable in variables %} {# |sort(attribute='compound') #}
+dxdt_{{ variable.id }}_amt_ ={% for item in variable.backReferences %} {{ "+ " if not loop.first }}({{ item.stoichiometry }})*{{ item.process }}{% endfor %};
+{%- endfor %}
+
+$CAPTURE @annotated
+{%- for record in _model_.population|filter2("isRecord", true) %}
+{{ record.id }} : {{ record.title }} {% if record.units %}({{ record.units }}){% endif %}
+{%- endfor %}
