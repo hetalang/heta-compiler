@@ -38,3 +38,5 @@ end
 json @JSONExport;
 slv_non_saturable @SLVExport { model: one_comp };
 slv_saturable @SLVExport { model: one_comp_saturation };
+mrg_non_saturable @MrgsolveExport { model: one_comp };
+mrg_saturable @MrgsolveExport { model: one_comp_saturation };

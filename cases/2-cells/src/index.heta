@@ -1,7 +1,4 @@
 block @Const begin
-    tot_vol = 0.1; // <L>
-    neu_count = 1e6; // <cells>
-    IL15_ext = 0; // <nM>
     blood = 5.2;
     plasma = 2.5;
     AXP_neu = 0.1;
@@ -10,12 +7,14 @@ end
 
 block $invitro begin
     #import {source: neu.heta, type: heta};
+    tot_vol @Compartment []= 0.1; // <L>
 
-    AXP_neu @Record;
     P1_mean @Record := ( P1_ext * ext + P1_neu * neu_vol ) / tot_vol;
 
     ext .= 1;
     S1 .= 150; // initial value of substrate
+    IL15_ext .= 0; // <nM>
+    neu_count .= 1e6;
     P1_ext .= 0;
     P1_neu .= 0;
     ATP_neu .= AXP_neu * K_eq_ADP / (1 + K_eq_ADP);
@@ -48,8 +47,10 @@ block $invivo begin
     ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
-//invitro_sbml @SBMLExport {model: invitro};
-//invivo_sbml @SBMLExport {model: invivo};
 yaml @YAMLExport;
-invitro_slv @SLVExport {model: invitro};
-invivo_slv @SLVExport {model: invivo};
+slv_invitro @SLVExport {model: invitro};
+slv_invivo_slv @SLVExport {model: invivo};
+mrg_invitro @MrgsolveExport {model: invitro};
+mrg_invivo @MrgsolveExport {model: invivo};
+smbl_invitro @SBMLExport {model: invitro};
+sbml_invivo @SBMLExport {model: invivo};

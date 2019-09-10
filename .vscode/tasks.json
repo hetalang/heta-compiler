@@ -4,25 +4,25 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "case1",
+            "label": "case-0",
             "type": "shell",
             "command": "qs3p build cases/0-hello-world",
             "group": "test"
         },
         {
-            "label": "case2",
+            "label": "case-1",
             "type": "shell",
             "command": "qs3p build cases/1-one-compartment",
             "group": "test"
         },
         {
-            "label": "case3",
+            "label": "case-2",
             "type": "shell",
             "command": "qs3p build cases/2-cells",
             "group": "test"
         },
         {
-            "label": "case4",
+            "label": "case-4",
             "type": "shell",
             "command": "qs3p build cases/4-superexample",
             "group": {

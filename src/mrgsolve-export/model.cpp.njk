@@ -3,13 +3,10 @@ $PROB
   - Title: {{ title }}
   - Notes: {{ notes }}
   - Source: Generated automatically from platform with qs3p-js 0.3.0
-  - Date: `r Sys.Date()`
-  - Version: `r packageVersion("mrgsolve")`
 
 # Demo
 ```{r,echo=TRUE}
-  ev(amt=10) %>% mrgsim()
-  plot
+  ev(amt=10) %>% mrgsim %>% plot
 ```
 
 $SET end={{ method.timeRange[1]|default(120) }}, delta={{ method.dt|default(0.1) }}, hmax={{ method.dtmax|default(0.01) }}, hmin={{ method.dtmin|default(0) }}, rtol={{ method.reltol|default("1e-3") }}, atol={{ method.abstol|default("1e-6") }}
@@ -24,30 +21,36 @@ $PARAM @annotated
 $CMT @annotated
 {%- for record in variables %}
 // @{{ record.className }} '{{ record.title }}'
+{% if record.className=="Species" and not record.isAmount -%}
 {{ record.id }}_amt_ : as amount
+{%- else -%}
+{{ record.id }} : amount
+{%- endif %}
 {%- endfor %}
 
 $GLOBAL
-{%- for variable in variables %}
+{%- for variable in variables|filter2("className", "Species")|exclude2("isAmount", true) %}
 #define {{ variable.id }} ({{ variable.id }}_amt_ / {{ variable.compartment }})
 {%- endfor %}
 
-$MAIN
-{% for record in _model_.population|filter2("isRecord", true)|exclude2("assignments.start_", undefined) -%}{# numbers in format 10. must be here #}
-{%- if record.isDynamic -%}
-{{ record.id }}_amt__0 = {{ record.assignments.start_.expr }}; 
-{% else -%}
+{% set start_ = _model_.population|filter2("isRecord", true)|exclude2("assignments.start_", undefined) -%}
+$PREAMBLE
+{%- for record in start_|exclude2("isDynamic", true) %}
 double {{ record.id }} = {{ record.assignments.start_.expr }}; 
-{% endif -%}
+{%- endfor %}
+
+$MAIN
+{%- for variable in variables %}{# numbers in format 10. must be here #}
+{{  variable.id }}{{ "_amt_" if (variable.className==="Species" and not variable.isAmount) }}_0 = ({{ variable.assignments.start_.expr }}){% if variable.className==="Species" and not variable.isAmount %} * {{ variable.compartment }}{% endif %}; 
 {%- endfor %}
 
 $ODE
 {%- for record in _model_.population|filter2("isRecord", true)|exclude2("assignments.ode_", undefined) %} {# |sort(attribute='correctNumeration') #}
 // @{{ record.className }} '{{ record.title }}'
-double {{ record.id }} = {{  record.assignments.ode_.expr }};
-{% endfor %}
-{%- for variable in variables %} {# |sort(attribute='compound') #}
-dxdt_{{ variable.id }}_amt_ ={% for item in variable.backReferences %} {{ "+ " if not loop.first }}({{ item.stoichiometry }})*{{ item.process }}{% endfor %};
+{{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.expr }};
+{%- endfor %}
+{% for variable in variables -%} {# |sort(attribute='compound') #}
+dxdt_{{ variable.id }}{{ "_amt_" if variable.className==="Species" and not variable.isAmount }} ={% for item in variable.backReferences %} {{ "+ " if not loop.first }}({{ item.stoichiometry }})*{{ item.process }}{% endfor %};
 {%- endfor %}
 
 $CAPTURE @annotated

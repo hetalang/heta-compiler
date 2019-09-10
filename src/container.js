@@ -145,7 +145,7 @@ class Container {
               }else{
                 population.push(_global_);
               }
-            }else if(!(_component_ instanceof Record)){
+            }else if(!(_component_ instanceof Record) && !(_component_ instanceof Const)){
               messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
                 + `${record.id}$${record.space} [${key}]= ${value.expr};`);
             }
