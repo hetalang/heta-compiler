@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test --recursive",
-    "test1": "mocha test/core/expression.js",
+    "test1": "mocha test/core/species.js",
     "testcov": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter test -- -R spec --recursive",
     "testcov1": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter test -- -R spec --recursive&& codecov"
   },

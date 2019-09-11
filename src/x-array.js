@@ -1,6 +1,5 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
-const { Expression } = require('./core/expression');
 const { Record } = require('./core/record');
 const { Const } = require('./core/const');
 const { UnitsParser, qspUnits } = require('units-parser');
@@ -22,11 +21,10 @@ class XArray extends Array{
     // create topo-sort tree
     let graph = new TopoSort();
     this
-      .selectByClassName('Record')
-      .filter((record) => _.get(record, exprPath) instanceof Expression)
-      .forEach((record) => {
-        let deps = _.get(record, exprPath).exprParsed.getSymbols();
-        graph.add(record.id, deps);
+      .filter((component) => component.isRecord)
+      .forEach((component) => {
+        let deps = component.dependOnIds(scope);
+        graph.add(component.id, deps);
       });
 
     try{

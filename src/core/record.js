@@ -78,6 +78,25 @@ class Record extends _Scoped {
       && !this.implicitBoundary
       && this.backReferences.length > 0;
   }
+  dependOnIds(scope){
+    if(typeof scope !== 'string')
+      throw new TypeError('scope must be of string type.');
+    if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
+      throw new Error('compartment should be set for Species when isAmount=false');
+
+    let exprPath = 'assignments.' + scope;
+    if(_.has(this, exprPath)){
+      let deps = this.assignments[scope]
+        .exprParsed
+        .getSymbols();
+      _.pull(deps, 't'); // remove t from dependence
+      if(this.className==='Species' && !this.isAmount) 
+        deps.push(this.compartment);
+      return deps;
+    }else{
+      return undefined;
+    }
+  }
 }
 
 module.exports = {
