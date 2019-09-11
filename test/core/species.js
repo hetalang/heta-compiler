@@ -16,8 +16,8 @@ describe('Testing dependOnIds() for Record and Species', () => {
     let deps2 = species.dependOnIds('evt1');
     let deps3 = species.dependOnIds('evt2');
     let deps4 = species.dependOnIds('evt3');
-    expect(deps1).to.be.deep.equal(['x', 'y', 'z']);
-    expect(deps2).to.be.deep.equal(['x', 'y', 'z']);
+    expect(deps1).to.have.members(['x', 'y', 'z']);
+    expect(deps2).to.have.members(['x', 'y', 'z']);
     expect(deps3).to.be.deep.equal([]);
     expect(deps4).to.be.an('undefined');
   });
@@ -34,9 +34,9 @@ describe('Testing dependOnIds() for Record and Species', () => {
     let deps2 = species.dependOnIds('evt1');
     let deps3 = species.dependOnIds('evt2');
     let deps4 = species.dependOnIds('evt3');
-    expect(deps1).to.be.deep.equal(['x', 'y', 'z', 'comp']);
-    expect(deps2).to.be.deep.equal(['x', 'y', 'z', 'comp']);
-    expect(deps3).to.be.deep.equal(['comp']);
+    expect(deps1).to.have.members(['x', 'y', 'z', 'comp']);
+    expect(deps2).to.have.members(['x', 'y', 'z', 'comp']);
+    expect(deps3).to.have.members(['comp']);
     expect(deps4).to.be.an('undefined');
   });
   it('Throws for Species when  isAmount=undefined and no compartment', () => {
