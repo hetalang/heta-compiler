@@ -1,19 +1,19 @@
 // this block unites elements with the same space
 block $mm begin
-  default @Compartment;
-  default .= 1;
+  default_comp @Compartment;
+  default_comp .= 1;
 
   S @Species {
-    compartment: default
+    compartment: default_comp
   };
   P @Species {
-    compartment: default
+    compartment: default_comp
   };
   r1 @Reaction {
     actors: S -> P
   };
 
-  r1 := Vmax*S/(Km+S)*default; // S is used here but assigned below
+  r1 := Vmax*S/(Km+S)*default_comp; // S is used here but assigned below
   S .= 10; // S should be initialialized after creation
   P .= 0;
 end

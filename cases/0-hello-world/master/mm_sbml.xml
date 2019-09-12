@@ -4,14 +4,14 @@
   
     <listOfCompartments>
       <compartment
-        id="default"
+        id="default_comp"
         name="Default compartment"
         constant="false"
         size="1"
         units="L"
-        metaid="mm.default"
+        metaid="mm.default_comp"
         >
-        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Note for the default compartment</p></html></notes>
+        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Note for the Default compartment</p></html></notes>
       </compartment>
     </listOfCompartments>
   
@@ -19,7 +19,7 @@
       <species
         id="S"
         name="substrate"
-        compartment="default"
+        compartment="default_comp"
         constant="false"
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
@@ -32,7 +32,7 @@
       <species
         id="P"
         name="product"
-        compartment="default"
+        compartment="default_comp"
         constant="false"
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
@@ -87,7 +87,7 @@
         <listOfModifiers>
           </listOfModifiers>
         <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>Vmax</ci><ci>S</ci></apply><apply><plus/><ci>Km</ci><ci>S</ci></apply></apply><ci>default</ci></apply></math>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>Vmax</ci><ci>S</ci></apply><apply><plus/><ci>Km</ci><ci>S</ci></apply></apply><ci>default_comp</ci></apply></math>
         </kineticLaw>
       </reaction>
   </listOfReactions>

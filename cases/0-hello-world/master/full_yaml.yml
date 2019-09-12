@@ -1,7 +1,7 @@
 - class: Compartment
-  id: default
+  id: default_comp
   title: Default compartment
-  notes: Note for the default compartment
+  notes: Note for the Default compartment
   space: mm
   assignments:
     start_: {expr: '1'}
@@ -13,7 +13,7 @@
   assignments:
     start_: {expr: '10'}
   units: uM
-  compartment: default
+  compartment: default_comp
 - class: Species
   id: P
   title: product
@@ -21,14 +21,14 @@
   assignments:
     start_: {expr: '0'}
   units: uM
-  compartment: default
+  compartment: default_comp
 - class: Reaction
   id: r1
   title: Michaelis-Menten reaction
   notes: Transformation of __substate__ to __product__
   space: mm
   assignments:
-    ode_: {expr: Vmax * S / (Km + S) * default}
+    ode_: {expr: Vmax * S / (Km + S) * default_comp}
   units: umole/min
   actors:
     - {target: S, stoichiometry: -1}

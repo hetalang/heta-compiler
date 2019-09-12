@@ -15,6 +15,12 @@ const { _Export, JSONExport } = require('./core/_export');
 const { getIndexFromQ } = require('./common');
 const XArray = require('./x-array');
 
+// they cannot be used as id, when 
+const reservedWords = [
+  'default',
+  'id'
+];
+
 class Container {
   constructor(){
     this.storage = new Map();
@@ -25,6 +31,8 @@ class Container {
       throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
       throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
+    if(reservedWords.indexOf(q.id)!==-1)
+      throw new IndexedHetaError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
       throw new IndexedHetaError(q, `No class or unsuitable class for "insert": ${q.class}`);
     // check if class is in the list

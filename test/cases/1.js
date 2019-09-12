@@ -4,7 +4,7 @@ const { expect, use } = require('chai');
 const chaiXml = require('chai-xml');
 use(chaiXml);
 const { safeLoad } = require('js-yaml');
-const fs = require('fs');
+const fs = require('fs-extra');
 const sbml_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml.xml','utf8');
 const json_correct = require('../../cases/0-hello-world/master/full_json.json');
 const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
@@ -44,9 +44,10 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @MrgsolveExport, check and compare.', () => {
     let mm_mrg = b.container.select({id: 'mm_mrg'});
-    var code = mm_mrg.do();
-    //console.log(code);
-    // TODO: how to check ???
+    let code = mm_mrg.do();
+    let filename = './diagnostics/1/mm_mrg.cpp';
+    fs.outputFileSync(filename, code);
+    // the simulations will be checked later in R
   });
 
   it('Run @JSONExport, check and compare.', () => {
