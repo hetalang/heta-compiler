@@ -31,4 +31,4 @@ mrgsolve-test:
     - Rscript.exe ./test/R/start.R ./diagnostics/1/mm_mrg.cpp ./diagnostics/1
   artifacts:
     paths:
-      - diagnostics/**.pdf
+      - diagnostics
