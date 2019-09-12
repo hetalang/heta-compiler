@@ -1,7 +1,5 @@
 block @Const begin
-    blood = 5.2;
     plasma = 2.5;
-    AXP_neu = 0.1;
     k_prol = 1e-4;
 end
 
@@ -24,13 +22,13 @@ end
 block $invivo begin
     #import {source: neu.heta, type: heta};
 
-    blood @Compartment;
+    blood @Compartment .= 5.2;
     neu_count @Species {compartment: blood};
     #update S1 {compartment: blood}; // update from neu
     #delete tot_vol; // delete
     ext := plasma; // substitue id is better but is not available for this heta version
 
-    AXP_neu @Record;
+    AXP_neu @Record .= 0.1;
     plasma @Record;
     k_prol @Record;
 

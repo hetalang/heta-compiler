@@ -64,14 +64,18 @@ pg2 @Page {content: this is content};
 mod1_sbml @SBMLExport {
   model: mod1
 };
-/*
+
+json @JSONExport {
+};
+
 yaml @YAMLExport {
 };
-*/
+
 mod1_slv @SLVExport {
   model: mod1,
   eventsOff: false
 };
 
-json @JSONExport {
+mrg_mod1 @MrgsolveExport {
+  model: mod1
 };

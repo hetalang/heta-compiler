@@ -33,23 +33,22 @@ $GLOBAL
 #define {{ variable.id }} ({{ variable.id }}_amt_ / {{ variable.compartment }})
 {%- endfor %}
 
-{% set start_ = _model_.population|filter2("isRecord", true)|exclude2("assignments.start_", undefined) -%}
 $PREAMBLE
-{%- for record in start_|exclude2("isDynamic", true) %}
-double {{ record.id }} = {{ record.assignments.start_.expr }}; 
+{%- for record in _model_.start_ %}
+{{ "//" if record.isDynamic }}double {{ record.id }} = {{ record.assignments.start_.expr }}; 
 {%- endfor %}
 
 $MAIN
-{%- for variable in variables %}{# numbers in format 10. must be here #}
+{%- for variable in _model_.start_|filter2("isDynamic", true) %}
 {{  variable.id }}{{ "_amt_" if (variable.className==="Species" and not variable.isAmount) }}_0 = ({{ variable.assignments.start_.expr }}){% if variable.className==="Species" and not variable.isAmount %} * {{ variable.compartment }}{% endif %}; 
 {%- endfor %}
 
 $ODE
-{%- for record in _model_.population|filter2("isRecord", true)|exclude2("assignments.ode_", undefined) %} {# |sort(attribute='correctNumeration') #}
+{%- for record in _model_.ode_ %}
 // @{{ record.className }} '{{ record.title }}'
 {{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.expr }};
 {%- endfor %}
-{% for variable in variables -%} {# |sort(attribute='compound') #}
+{% for variable in variables %}
 dxdt_{{ variable.id }}{{ "_amt_" if variable.className==="Species" and not variable.isAmount }} ={% for item in variable.backReferences %} {{ "+ " if not loop.first }}({{ item.stoichiometry }})*{{ item.process }}{% endfor %};
 {%- endfor %}
 

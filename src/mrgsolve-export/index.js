@@ -29,19 +29,21 @@ class MrgsolveExport extends _Export{
       population: this._container.getPopulation(targetSpace, false)
     };
 
-    /*
-    // push non boundary ode variables which are mentioned in processes
-    model.variables = new XArray();
-    model.population.filter((x) => {
-      return x.isRecord // must be record
-        && !x.boundary // not boundary
-        && !x.implicitBoundary // not constant, not rule, not explicit diff equation
-        && x.backReferences.length>0; // mentioned in process
-    }).forEach((record) => {
-      model.variables.push(record);
-    });
-    */
+    // set sorted array of rules
+    model.ode_ = model.population
+      .filter((component) => {
+        return component.isRecord 
+          && component.assignments 
+          && component.assignments.ode_;
+      }).sortExpressionsByScope('ode_');
 
+    // set sorted array of initials
+    model.start_ = model.population
+      .filter((component) => {
+        return component.isRecord 
+          && component.assignments 
+          && component.assignments.start_;
+      }).sortExpressionsByScope('start_');
 
     return model;
   }
