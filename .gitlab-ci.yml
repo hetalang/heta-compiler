@@ -1,9 +1,15 @@
 stages:
   - test
+  - diagnostics
 
 before_script:
   - "node -v"
   - "npm -v"
+  - "Rscript --version"
+
+cache:
+  paths:
+    - diagnostics/
 
 unit-test:
   stage: test
@@ -16,8 +22,8 @@ unit-test:
   script:
     - npm run testcov
 
-diagnostics:
-  stage: test
+mrgsolve-test:
+  stage: diagnostics
   tags:
     - r-3
     - powershell
