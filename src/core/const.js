@@ -39,7 +39,7 @@ class Const extends _Simple { // implicit extend Numeric
         .parse(this.units)
         .toHash();
     }else{
-      return;
+      return undefined;
     }
   }
 }

@@ -1,0 +1,55 @@
+- class: Compartment
+  id: default
+  title: Default compartment
+  notes: Note for the default compartment
+  space: mm
+  assignments:
+    start_: {expr: '1'}
+  units: L
+- class: Species
+  id: S
+  title: substrate
+  space: mm
+  assignments:
+    start_: {expr: '10'}
+  units: uM
+  compartment: default
+- class: Species
+  id: P
+  title: product
+  space: mm
+  assignments:
+    start_: {expr: '0'}
+  units: uM
+  compartment: default
+- class: Reaction
+  id: r1
+  title: Michaelis-Menten reaction
+  notes: Transformation of __substate__ to __product__
+  space: mm
+  assignments:
+    ode_: {expr: Vmax * S / (Km + S) * default}
+  units: umole/min
+  actors:
+    - {target: S, stoichiometry: -1}
+    - {target: P, stoichiometry: 1}
+- class: Const
+  id: Vmax
+  num: 0.1
+- class: Const
+  id: Km
+  num: 2.5
+- class: SBMLExport
+  id: mm_sbml
+  title: Exported mm model
+  model: mm
+- class: JSONExport
+  id: full_json
+- class: YAMLExport
+  id: full_yaml
+- class: SLVExport
+  id: mm_slv
+  model: mm
+- class: MrgsolveExport
+  id: mm_mrg
+  title: export to mrgsolve

@@ -49,7 +49,7 @@ class _Simple {
     if(this.notes){
       return markdown.parse(this.notes);
     }else{
-      return;
+      return undefined;
     }
   }
   get notesHTML() {
@@ -82,9 +82,6 @@ class _Simple {
     if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
 
     return res;
-  }
-  populate(){
-    // do nothing
   }
 }
 

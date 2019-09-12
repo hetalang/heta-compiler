@@ -103,9 +103,6 @@ class Container {
       .map((obj) => obj[1].toQ());
     return qArr;
   }
-  toJSON(){
-    return JSON.stringify(this.toQArr(), null, 2);
-  }
   get length(){
     return this.storage.size;
   }

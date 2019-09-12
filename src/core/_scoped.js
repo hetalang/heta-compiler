@@ -38,9 +38,6 @@ class _Scoped extends _Simple {
     res.space = this.space;
     return res;
   }
-  populate(){
-    // do nothing
-  }
 }
 
 module.exports = {

@@ -1,0 +1,73 @@
+/* global describe, it */
+const { Builder } = require('../../src');
+const { expect, use } = require('chai');
+const chaiXml = require('chai-xml');
+use(chaiXml);
+const { safeLoad } = require('js-yaml');
+const fs = require('fs');
+const sbml_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml.xml','utf8');
+const json_correct = require('../../cases/0-hello-world/master/full_json.json');
+const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
+const yaml_correct = safeLoad(yaml_correct_text);
+
+describe('Testing "cases/0-hello-world"', () => {
+  let b;
+
+  it('Create builder.', () => {
+    let declaration = {
+      'id': 'test',
+      'builderVersion': '^0.3',
+      'options': {
+        'logLevel': 'error'
+      },
+      'importModule': {
+        'type': 'heta',
+        'filename': 'src/2-annotation.heta'
+      }
+    };
+    b = new Builder(declaration, 'cases/0-hello-world', '../../test/cases/1/dist');
+    //console.log(b);
+  });
+
+  it('Run import', (done) => {
+    b.importAsync(done);
+  });
+
+  it('Run @SBMLExport, check and compare.', () => {
+    // b.container.setReferences(); // setReferences automatically run in importAsync
+    let sbml_export = b.container.select({id: 'mm_sbml'});
+    let code = sbml_export.do();
+    expect(code).xml.to.to.be.valid();
+    expect(code).xml.be.deep.equal(sbml_correct);
+    //console.log(code);
+  });
+
+  it('Run @MrgsolveExport, check and compare.', () => {
+    let mm_mrg = b.container.select({id: 'mm_mrg'});
+    var code = mm_mrg.do();
+    //console.log(code);
+    // TODO: how to check ???
+  });
+
+  it('Run @JSONExport, check and compare.', () => {
+    const JSONExport = b.container.classes.JSONExport;
+    let json_export = new JSONExport({id: 'json_export'});
+    json_export._container = b.container;
+
+    let code = json_export.do();
+    let obj = JSON.parse(code);
+    expect(obj).to.be.deep.equal(json_correct);
+    //console.log(obj);
+  });
+
+  it('Run @YAMLExport, check and compare.', () => {
+    const YAMLExport = b.container.classes.YAMLExport;
+    let yaml_export = new YAMLExport({id: 'yaml_export'});
+    yaml_export._container = b.container;
+
+    let code = yaml_export.do();
+    let obj = safeLoad(code);
+    expect(obj).to.be.deep.equal(yaml_correct);
+    //console.log(code);
+  });
+});

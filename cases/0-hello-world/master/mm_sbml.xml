@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
+  <model id="mm_sbml" metaid="mm_sbml" name="Exported mm model">
+  
+    <listOfCompartments>
+      <compartment
+        id="default"
+        name="Default compartment"
+        constant="false"
+        size="1"
+        units="L"
+        metaid="mm.default"
+        >
+        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Note for the default compartment</p></html></notes>
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="S"
+        name="substrate"
+        compartment="default"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        substanceUnits="uM_L"
+        metaid="mm.S"
+        >
+        
+      </species>
+      <species
+        id="P"
+        name="product"
+        compartment="default"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        substanceUnits="uM_L"
+        metaid="mm.P"
+        >
+        
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="Vmax"
+        
+        constant="true"
+        value="0.1"
+        
+        metaid="Vmax"
+        >
+        
+      </parameter>
+      <parameter
+        id="Km"
+        
+        constant="true"
+        value="2.5"
+        
+        metaid="Km"
+        >
+        
+      </parameter>
+  </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        name="Michaelis-Menten reaction"
+        reversible="true"
+        fast="false"
+        metaid="mm.r1"
+        >
+        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Transformation of <strong>substate</strong> to <strong>product</strong></p></html></notes>
+        <listOfReactants>
+          <speciesReference species="S" stoichiometry="1"/>
+          
+          </listOfReactants>
+        <listOfProducts>
+          
+          <speciesReference species="P" stoichiometry="1"/>
+          </listOfProducts>
+        <listOfModifiers>
+          </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>Vmax</ci><ci>S</ci></apply><apply><plus/><ci>Km</ci><ci>S</ci></apply></apply><ci>default</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+  </listOfReactions>
+  
+    <listOfUnitDefinitions>
+      <unitDefinition id="L" name="L">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="uM_L" name="uM*L">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="umole__min" name="umole/min">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
+  </listOfUnits>
+</unitDefinition>
+  </listOfUnitDefinitions>
+  
+  
+  </model>
+</sbml>
