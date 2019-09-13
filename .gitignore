@@ -5,3 +5,5 @@ node_modules
 /diagnostics
 *.tmp
 ~$*.*
+
+.nyc_output

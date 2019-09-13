@@ -20,7 +20,7 @@ unit-test:
   before_script:
     - npm i
   script:
-    - npm run testcov
+    - npm run test:cov
 
 mrgsolve-test:
   stage: diagnostics

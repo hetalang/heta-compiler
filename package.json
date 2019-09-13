@@ -6,8 +6,9 @@
   "scripts": {
     "test": "mocha test --recursive",
     "test1": "mocha test/cases --recursive",
-    "testcov": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter test -- -R spec --recursive",
-    "testcov1": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter test -- -R spec --recursive&& codecov"
+    "test:cov": "nyc --reporter=lcov npm run test",
+    "test:cov0": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter test -- -R spec --recursive",
+    "test:codecov": "nyc --reporter=lcov npm run test&& codecov"
   },
   "author": "Evgeny Metelkin",
   "license": "UNLICENSED",
@@ -42,8 +43,8 @@
     "chai": "^4.2.0",
     "chai-xml": "^0.3.2",
     "coveralls": "^3.0.3",
-    "istanbul": "^0.4.5",
     "mocha": "^6.0.2",
-    "mocha-lcov-reporter": "^1.3.0"
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^14.1.1"
   }
 }
