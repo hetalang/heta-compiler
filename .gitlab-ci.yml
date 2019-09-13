@@ -28,7 +28,7 @@ mrgsolve-test:
     - r-3
     - powershell
   script:
-    - Rscript.exe ./test/R/start.R ./diagnostics/1/mm_mrg.cpp ./diagnostics/1
+    - Rscript.exe ./test/R/start.R ./diagnostics/0/mm_mrg.cpp ./diagnostics/0
   artifacts:
     paths:
       - diagnostics

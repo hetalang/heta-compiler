@@ -5,10 +5,14 @@ const chaiXml = require('chai-xml');
 use(chaiXml);
 const { safeLoad } = require('js-yaml');
 const fs = require('fs-extra');
+const { slvParse } = require('slv-utils');
+
 const sbml_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml.xml','utf8');
 const json_correct = require('../../cases/0-hello-world/master/full_json.json');
 const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
 const yaml_correct = safeLoad(yaml_correct_text);
+const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
+const slv_correct = slvParse.parse(slv_correct_text);
 
 describe('Testing "cases/0-hello-world"', () => {
   let b;
@@ -45,7 +49,7 @@ describe('Testing "cases/0-hello-world"', () => {
   it('Run @MrgsolveExport, check and compare.', () => {
     let mm_mrg = b.container.select({id: 'mm_mrg'});
     let code = mm_mrg.do();
-    let filename = './diagnostics/1/mm_mrg.cpp';
+    let filename = './diagnostics/0/mm_mrg.cpp';
     fs.outputFileSync(filename, code);
     // the simulations will be checked later in R
   });
@@ -70,5 +74,16 @@ describe('Testing "cases/0-hello-world"', () => {
     let obj = safeLoad(code);
     expect(obj).to.be.deep.equal(yaml_correct);
     //console.log(code);
+  });
+
+  it('Run @SLVExport, check and compare.', () => {
+    const SLVExport = b.container.classes.SLVExport;
+    let slv_export = (new SLVExport({id: 'slv_export'})).merge({model: 'mm'});
+    slv_export._container = b.container;
+
+    let code = slv_export.do();
+    let obj = slvParse.parse(code);
+    expect(obj).to.be.deep.equal(slv_correct);
+    //console.log(obj);
   });
 });
