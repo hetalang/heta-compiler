@@ -30,8 +30,7 @@ block $invivo begin
     ext := plasma; // substitue id is better but is not available for this heta version
 
     AXP_neu @Record .= 0.1;
-    plasma @Record;
-    k_prol @Record;
+    IL15_ext .= 0; // <nM>
 
     neu_count .= 1e-9;
     r_prol_neu @Reaction {

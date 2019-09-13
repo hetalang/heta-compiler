@@ -17,9 +17,8 @@ $PARAM @annotated
 {{ constant.id }} : {{ constant.num }} : {% if constant.units %}({{ constant.units }}){% endif %}
 {%- endfor %}
 
-{% set variables = _model_.population|filter2("isRecord", true)|filter2("isDynamic", true) -%}
 $CMT @annotated
-{%- for record in variables %}
+{%- for record in _model_.dynamics %}
 // @{{ record.className }} '{{ record.title }}'
 {% if record.className=="Species" and not record.isAmount -%}
 {{ record.id }}_amt_ : as amount
@@ -29,7 +28,7 @@ $CMT @annotated
 {%- endfor %}
 
 $GLOBAL
-{%- for variable in variables|filter2("className", "Species")|exclude2("isAmount", true) %}
+{%- for variable in _model_.dynamics|filter2("className", "Species")|exclude2("isAmount", true) %}
 #define {{ variable.id }} ({{ variable.id }}_amt_ / {{ variable.compartment }})
 {%- endfor %}
 
@@ -48,7 +47,7 @@ $ODE
 // @{{ record.className }} '{{ record.title }}'
 {{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.toCString() }};
 {%- endfor %}
-{% for variable in variables %}
+{% for variable in _model_.dynamics %}
 dxdt_{{ variable.id }}{{ "_amt_" if variable.className==="Species" and not variable.isAmount }} ={% for item in variable.backReferences %} {{ "+ " if not loop.first }}({{ item.stoichiometry }})*{{ item.process }}{% endfor %};
 {%- endfor %}
 

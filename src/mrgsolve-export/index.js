@@ -2,7 +2,8 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 //const { IndexedHetaError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
-const XArray = require('../x-array');
+//const XArray = require('../x-array');
+const _ = require('lodash');
 
 class MrgsolveExport extends _Export{
   merge(q, skipChecking){
@@ -29,13 +30,31 @@ class MrgsolveExport extends _Export{
       population: this._container.getPopulation(targetSpace, false)
     };
 
-    // set sorted array of rules
-    model.ode_ = model.population
+    // set dynamic variables
+    model.dynamics = model.population
+      .filter((component) => {
+        return component.isRecord 
+          && component.isDynamic;
+      });
+    let dynamicIds = model.dynamics
+      .map((component) => component.id);
+
+    // check if initials depends on dynamic initials, than stop
+    model.population
       .filter((component) => {
         return component.isRecord 
           && component.assignments 
-          && component.assignments.ode_;
-      }).sortExpressionsByScope('ode_');
+          && component.assignments.start_;
+      }).forEach((record) => {
+        let deps = record.dependOnIds('start_');
+        let diff = _.intersection(dynamicIds, deps);
+        if(diff.length>0){
+          let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
+          + `${record.id}$${record.space} []= ${record.assignments.start_.expr}`;
+            
+          throw new Error(errorMsg);
+        }
+      });
 
     // set sorted array of initials
     model.start_ = model.population
@@ -44,6 +63,14 @@ class MrgsolveExport extends _Export{
           && component.assignments 
           && component.assignments.start_;
       }).sortExpressionsByScope('start_');
+
+    // set sorted array of rules
+    model.ode_ = model.population
+      .filter((component) => {
+        return component.isRecord 
+          && component.assignments 
+          && component.assignments.ode_;
+      }).sortExpressionsByScope('ode_');
 
     return model;
   }
