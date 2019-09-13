@@ -1,6 +1,7 @@
 block @Const begin
     plasma = 2.5;
     k_prol = 1e-4;
+    AXP_neu =  0.1;
 end
 
 block $invitro begin

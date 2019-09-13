@@ -13,11 +13,11 @@
 
 ## exports
 
-* slv
++ slv
 + json
 + yaml
-* sbml
-- mrgsolve
++ sbml
++ mrgsolve
 - dat
 - irtdb
 - rxode

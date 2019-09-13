@@ -161,33 +161,9 @@ describe('Expession exports', () => {
     let expr = new Expression('x*(1+2.2)/3');
     expect(expr.toCString()).to.be.equal('x * (1.0 + 2.2) / 3.0');
   });
-  it('toCString("keep") for "pow(x, y) + x^y"', () => {
+  it('toCString() for "pow(x, y) + x^y"', () => {
     let expr = new Expression('pow(x, y) + x^y');
-    expect(expr.toCString('keep')).to.be.equal('pow(x, y) + x ^ y');
-  });
-  it('toCString("function") for "pow(x, y) + x^y"', () => {
-    let expr = new Expression('pow(x, y) + x^y');
-    expect(expr.toCString('function')).to.be.equal('pow(x, y) + pow(x, y)');
-  });
-  it('toCString("operator") for "pow(x, y) + x^y"', () => {
-    let expr = new Expression('pow(x, y) + x^y');
-    expect(expr.toCString('operator')).to.be.equal('x ^ y + x ^ y');
-  });
-  it('toCString("operator") for "pow(x, y+z)"', () => {
-    let expr = new Expression('pow(x, y+z)');
-    expect(expr.toCString('operator')).to.be.equal('x ^ (y + z)');
-  });
-  it('toCString("operator") for "pow(-1, n)"', () => {
-    let expr = new Expression('pow(-1, n)');
-    expect(expr.toCString('operator')).to.be.equal('(-1.0) ^ n');
-  });
-  it('toCString("operator") for "pow(n, -1/2)"', () => {
-    let expr = new Expression('pow(n, -1/2)');
-    expect(expr.toCString('operator')).to.be.equal('n ^ (-1.0 / 2.0)');
-  });
-  it('Wrong powTransform', () => {
-    let expr = new Expression('pow(a, b)');
-    expect(() => expr.toCString('xxx')).Throw(TypeError);
+    expect(expr.toCString()).to.be.equal('pow(x, y) + pow(x, y)');
   });
   it('toCString() for "abs(-1/2)"', () => {
     let expr = new Expression('abs(-1/2)');
@@ -200,5 +176,34 @@ describe('Expession exports', () => {
   it('toCString() for "exp(-kel*t)"', () => {
     let expr = new Expression('exp(-kel*t)');
     expect(expr.toCString()).to.be.equal('exp(-kel * SOLVERTIME)');
+  });
+
+  it('toSLVString("keep") for "pow(x, y) + x^y"', () => {
+    let expr = new Expression('pow(x, y) + x^y');
+    expect(expr.toSLVString('keep')).to.be.equal('pow(x, y) + x ^ y');
+  });
+  it('toSLVString("function") for "pow(x, y) + x^y"', () => {
+    let expr = new Expression('pow(x, y) + x^y');
+    expect(expr.toSLVString('function')).to.be.equal('pow(x, y) + pow(x, y)');
+  });
+  it('toSLVString("operator") for "pow(x, y) + x^y"', () => {
+    let expr = new Expression('pow(x, y) + x^y');
+    expect(expr.toSLVString('operator')).to.be.equal('x ^ y + x ^ y');
+  });
+  it('toSLVString("operator") for "pow(x, y+z)"', () => {
+    let expr = new Expression('pow(x, y+z)');
+    expect(expr.toSLVString('operator')).to.be.equal('x ^ (y + z)');
+  });
+  it('toSLVString("operator") for "pow(-1, n)"', () => {
+    let expr = new Expression('pow(-1, n)');
+    expect(expr.toSLVString('operator')).to.be.equal('(-1) ^ n');
+  });
+  it('toSLVString("operator") for "pow(n, -1/2)"', () => {
+    let expr = new Expression('pow(n, -1/2)');
+    expect(expr.toSLVString('operator')).to.be.equal('n ^ (-1 / 2)');
+  });
+  it('Wrong powTransform', () => {
+    let expr = new Expression('pow(a, b)');
+    expect(() => expr.toSLVString('xxx')).Throw(TypeError);
   });
 });

@@ -41,15 +41,12 @@ class Expression {
       .toCMathML()
       .toString();
   }
-  toCString(powTransform = 'keep'){
+  toSLVString(powTransform = 'keep'){
     if(['keep', 'operator', 'function'].indexOf(powTransform) === -1){
       throw new TypeError('powTransform must be one of values: "keep", "operator", "function".');
     }
 
-    let CStringHandler = (node, options) => {
-      if(node.type==='ConstantNode' && Number.isInteger(node.value)){
-        return node.value + '.0';
-      }
+    let SLVStringHandler = (node, options) => {
       if(node.type==='OperatorNode' && node.fn==='pow' && powTransform==='function'){
         return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
       }
@@ -65,6 +62,39 @@ class Expression {
           arg1 = node.args[1].toString(options);
         }
         return `${arg0} ^ ${arg1}`;
+      }
+      if(node.type==='FunctionNode' && node.fn.name==='abs'){ // TODO: wrong
+        return `fabs(${node.args[0].toString(options)})`;
+      }
+      if(node.type==='FunctionNode' && node.fn.name==='max'){ // TODO: wrong
+        let args = node.args
+          .map((arg) => arg.toString(options))
+          .join(', ');
+        return `std::max(${args})`;
+      }
+      if(node.type==='FunctionNode' && node.fn.name==='min'){ // TODO: wrong
+        let args = node.args
+          .map((arg) => arg.toString(options))
+          .join(', ');
+        return `std::min(${args})`;
+      }
+    };
+
+    return this.exprParsed
+      //.translate(math.expression.translator.to['dbsolve'])
+      .toString({
+        parenthesis: 'keep',
+        implicit: 'show',   
+        handler: SLVStringHandler
+      });
+  }
+  toCString(){
+    let CStringHandler = (node, options) => {
+      if(node.type==='ConstantNode' && Number.isInteger(node.value)){
+        return node.value + '.0';
+      }
+      if(node.type==='OperatorNode' && node.fn==='pow'){
+        return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
       }
       if(node.type==='FunctionNode' && node.fn.name==='abs'){
         return `fabs(${node.args[0].toString(options)})`;
