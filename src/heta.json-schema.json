@@ -464,7 +464,6 @@
     "SimpleTaskP": {
       "type": "object",
       "properties": {
-        "model": { "$ref": "#/definitions/ID" },
         "type": { "type": "string", "enum": ["simulation"], "default": "simulation" },
         "subtasks": {
           "type": "array",
@@ -474,8 +473,17 @@
             "properties": {
               "saveat": {"type": "array", "items": {}, "example": [1,2,3] },
               "output": {"type": "array", "items": { "$ref": "#/definitions/ID" } }
-            }
+            },
+            "required": ["saveat", "output"]
           }
+        },
+        "tspan": {
+          "type": "array",
+          "items": [
+            {},
+            {}
+          ],
+          "additionalItems": false
         },
         "reassign": {
           "type": "object",

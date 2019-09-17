@@ -6,10 +6,14 @@ class SimpleTask extends _Scoped {
     if(!skipChecking) SimpleTask.isValid(q);
     super.merge(q, skipChecking);
 
-    if(q.model) this.model = q.model;
     if(q.type) this.type = q.type;
     if(q.subtasks){
       this.subtasks = q.subtasks.map((q) => new Subtask(q));
+    }
+    if(q.tspan){
+      this.tspan = q.tspan;
+    }else{
+      this.tspan = [0, 100];
     }
     if(q.reassign){
       this.reassign = _.mapValues(q.reassign, (x) => x);
@@ -38,12 +42,11 @@ class SimpleTask extends _Scoped {
   }
   toQ(){
     let res = super.toQ();
-    if(this.model) res.model = this.model;
     if(this.type) res.type = this.type;
     if(this.subtasks) res.subtasks = this.subtasks;
     if(_.size(this.reassign)) res.reassign = _.cloneDeep(this.reassign);
     if(_.size(this.solver)) res.solver = _.cloneDeep(this.solver);
-    
+    if(this.tspan) res.tspan = _.cloneDeep(this.tspan);
     return res;
   }
 }

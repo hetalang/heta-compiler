@@ -200,7 +200,7 @@ class Container {
         });
       });
 
-    // check Reactions
+    // check Reactions and add refs
     [...this.storage].map((x) => x[1])
       .filter((x) => x instanceof Reaction)
       .forEach((reaction) => {
@@ -217,6 +217,43 @@ class Container {
           modifier._target_ = _target_;
         });
       });
+
+    // check Exports and add defaultTask refs
+    [...this.storage].map((x) => x[1])
+      .filter((x) => x instanceof _Export && x.defaultTask)
+      .forEach((x) => {
+        let _defaultTask_ = this.select({id: x.defaultTask, space: x.model});
+        if(!_defaultTask_){
+          let msg = `Property "defaultTask" has lost reference for "${x.defaultTask}".`;
+          throw new IndexedHetaError(x.indexObj, msg);
+        }else if(_defaultTask_ instanceof SimpleTask){
+          x._defaultTask_ = _defaultTask_;
+        }else{
+          let msg = `"defaultTask" prop must be reffered to SimpleTask but now on ${_defaultTask_.className}.`;
+          throw new IndexedHetaError(x.indexObj, msg);
+        }
+      });
+
+    // check output refs in SimpleTasks
+    [...this.storage].map((x) => x[1])
+      .filter((x) => x instanceof SimpleTask && x.subtasks)
+      .forEach((x) => {
+        x.subtasks.forEach((sub) => { // iterate through subtasks
+          sub.output.forEach((out) => { // itrate through record refs
+            let _record_ = this.select({id: out, space: x.space});
+            if(!_record_){
+              let msg = `Property "output" has lost reference for "${out}".`;
+              throw new IndexedHetaError(x.indexObj, msg);
+            }else if(_record_ instanceof Record){
+              // do not attach
+            }else{
+              let msg = `"output" prop must be reffered to Record but now on ${_record_.className}.`;
+              throw new IndexedHetaError(x.indexObj, msg);
+            }
+          });
+        });
+      });
+
 
     return this;
   }
