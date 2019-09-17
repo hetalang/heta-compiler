@@ -10,8 +10,9 @@ const { ReferenceDefinition } = require('./core/reference-definition');
 const { UnitDefinition } = require('./core/reference-definition');
 const { Page } = require('./core/page');
 const { Const } = require('./core/const');
+const { SimpleTask } = require('./core/simple-task');
 const _ = require('lodash');
-const { _Export, JSONExport } = require('./core/_export');
+const { _Export } = require('./core/_export');
 const { getIndexFromQ } = require('./common');
 const XArray = require('./x-array');
 
@@ -235,7 +236,7 @@ Container.prototype.classes = {
   UnitDefinition,
   Page,
   Const,
-  JSONExport
+  SimpleTask
 };
 
 module.exports = Container;

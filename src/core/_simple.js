@@ -64,7 +64,7 @@ class _Simple {
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     if(!validate){
-      throw new IndexedHetaError(q, `The schema "${this.schemaName}" is unknown for Heta-standard.`);
+      throw new IndexedHetaError(q, `The schema "${this.schemaName}" is not found.`);
     }
     let valid = validate(q);
     if(!valid) {

@@ -352,44 +352,6 @@
       ]
     },
 
-    "ModelP": {
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "object",
-          "properties": {
-            "timeRange": {
-              "type": "array",
-              "additionalItems": false,
-              "items": [
-                { "type": "number", "minimum": 0 },
-                { "type": "number", "exclusiveMinimum": 0 }
-              ]
-            },
-            "timeStep": { "type": "number", "exclusiveMinimum": 0 },
-            "solver": { "type": "string", "enum": ["lsoda"] },
-            "abstol": { "type": "number", "minimum": 0 },
-            "reltol": { "type": "number", "minimum": 0 },
-            "dt": { "type": "number", "minimum": 0 },
-            "dtmin": { "type": "number", "minimum": 0 },
-            "dtmax": { "type": "number", "minimum": 0 }
-          }
-        }
-      }
-    },
-
-    "Model": {
-      "description": "Currently it is unclear if this class is required. default task can be used instead of method property.",
-      "allOf": [
-        { "$ref": "#/definitions/_SimpleP" },
-        { "$ref": "#/definitions/ModelP" },
-        {
-          "required": ["id"],
-          "properties": { "class": { "const": "Model" } }
-        }
-      ]
-    },
-
     "_TaskP": {
       "type": "object"
     },
@@ -497,6 +459,49 @@
           "properties": { "class": { "const": "ReferenceDefinition" } }
         }
       ]
+    },
+
+    "SimpleTaskP": {
+      "type": "object",
+      "properties": {
+        "model": { "$ref": "#/definitions/ID" },
+        "type": { "type": "string", "enum": ["simulation"], "default": "simulation" },
+        "subtasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "saveat": {"type": "array", "items": {}, "example": [1,2,3] },
+              "output": {"type": "array", "items": { "$ref": "#/definitions/ID" } }
+            }
+          }
+        },
+        "reassign": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "propertyNames": { "$ref": "#/definitions/ID" },
+            "additionalProperties": { "type": "number" }
+          }
+        },
+        "solver": {
+          "type": "object",
+          "properties": {
+            "alg": { "type": "string" },
+            "reltol": { "type": "number", "minimum": 0 },
+            "abstol": { "type": "number", "minimum": 0 },
+            "maxiters": { "type": "number", "minimum": 0 },
+            "dt": { "type": "number", "minimum": 0 },
+            "dtmin": { "type": "number", "minimum": 0 },
+            "dtmax": { "type": "number", "minimum": 0 },
+            "tstops": {
+              "type": "array",
+              "items": { "type": "number" }
+            }
+          }
+        }
+      }
     },
 
     "ObservationP": {

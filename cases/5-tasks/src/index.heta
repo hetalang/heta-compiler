@@ -1,0 +1,46 @@
+/*
+  This case is based on 0-hello-world but with @Task
+*/
+
+block $mm begin
+  '''Note for the Default compartment'''
+  default_comp @Compartment { title: Default compartment, units: L };
+  default_comp .= 1;
+
+  S @Species { title: substrate, compartment: default_comp, units: uM };
+  P @Species { title: product,  compartment: default_comp, units: uM };
+  ''' Transformation of __substate__ to __product__ '''
+  r1 @Reaction {
+    title: Michaelis-Menten reaction,
+    actors: S -> P,
+    units: umole/min
+  };
+
+  r1 := Vmax*S/(Km+S)*default_comp; // S is used here but assigned below
+  S .= 10; // S should be initialialized after creation
+  P .= 0;
+end
+
+// this block unites element with the same class
+block @Const begin
+  Vmax = 0.1; // this is global constant available for any scoped equation
+  Km = 2.5;
+end
+
+// simulation tasks
+sim_task1 @SimpleTask {
+  model: mm,
+  type: simulation,
+  subtasks: [
+    { saveat: [0, 50, 100, 200], output: [S, P] }
+    { saveat: [0, 1, 2, 3], output: [S, P, r1] }
+  ],
+  reassign: {k1: 0},
+  solver: {dtmax: 12}
+};
+
+mm_sbml @SBMLExport { title: Exported mm model, model: mm };
+full_json @JSONExport;
+full_yaml @YAMLExport;
+mm_slv @SLVExport { model: mm };
+mm_mrg @MrgsolveExport { model: mm, title: export to mrgsolve };

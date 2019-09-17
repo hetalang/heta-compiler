@@ -30,6 +30,12 @@
                 "isDefault": true
             },
             "problemMatcher": []
+        },
+        {
+            "label": "case-5",
+            "type": "shell",
+            "command": "qs3p build cases/5-tasks",
+            "group": "test"
         }
     ]
 }
