@@ -28,7 +28,7 @@ block @Const begin
 end
 
 // simulation tasks
-sim_task1 @SimpleTask {
+sim_task1 @SimpleTask $mm {
   model: mm,
   type: simulation,
   subtasks: [
@@ -42,5 +42,5 @@ sim_task1 @SimpleTask {
 mm_sbml @SBMLExport { title: Exported mm model, model: mm };
 full_json @JSONExport;
 full_yaml @YAMLExport;
-mm_slv @SLVExport { model: mm };
+mm_slv @SLVExport { model: mm, defaultTask: sim_task1 };
 mm_mrg @MrgsolveExport { model: mm, title: export to mrgsolve };

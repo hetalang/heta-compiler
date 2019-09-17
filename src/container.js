@@ -231,12 +231,12 @@ Container.prototype.classes = {
   Reaction,
   ContinuousSwitcher,
   TimeSwitcher,
+  SimpleTask,
   // unscoped classes
   ReferenceDefinition,
   UnitDefinition,
   Page,
-  Const,
-  SimpleTask
+  Const
 };
 
 module.exports = Container;

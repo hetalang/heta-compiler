@@ -5,13 +5,13 @@ const nunjucks = require('../nunjucks-env');
 //const _ = require('lodash');
 
 class SBMLExport extends _Export{
-  merge(q, skipChecking){
+  merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q && q.model===undefined){
+    if(q.model===undefined){
       throw new TypeError(`"model" property in SBMLExport ${this.id} should be declared.`);
     }
     this.model = q.model;
-    if(q && q.skipMathChecking)
+    if(q.skipMathChecking)
       this.skipMathChecking = q.skipMathChecking;
 
     return this;

@@ -9,12 +9,14 @@ const _ = require('lodash');
 const { Expression } = require('../core/expression');
 
 class SLVExport extends _Export{
-  merge(q, skipChecking){
+  merge(q={}, skipChecking){
     super.merge(q, skipChecking);
     if(q && typeof q.model===undefined)
       throw new TypeError(`"model" property in SLVExport ${this.id} should be declared.`);
     this.model = q.model;
     if(q.eventsOff) this.eventsOff = q.eventsOff;
+    if(q.defaultTask)
+      this.defaultTask = q.defaultTask;
 
     return this;
   }
@@ -169,6 +171,8 @@ class SLVExport extends _Export{
     let res = super.toQ();
     if(this.model) res.model = this.model;
     if(this.eventsOff) res.eventsOff = this.eventsOff;
+    if(this.defaultTask) res.defaultTask = this.defaultTask;
+    
     return res;
   }
 }

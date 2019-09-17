@@ -9,7 +9,7 @@ class _Scoped extends _Simple {
   constructor(q = {}){
     super(q);
     if(!q.space || (typeof q.space !== 'string'))
-      throw new TypeError('Wrong index ' + JSON.stringify({id: q.id, space: q.space}));
+      throw new TypeError('Space must be set for scoped classes, wrong index ' + JSON.stringify({id: q.id, space: q.space}));
     this._space = q.space;
   }
   merge(q, skipChecking){
