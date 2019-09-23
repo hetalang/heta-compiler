@@ -17,15 +17,7 @@ class Const extends _Simple { // implicit extend Numeric
 
     return this;
   }
-  static get schemaName(){
-    return 'ConstP';
-  }
-  get className(){
-    return 'Const';
-  }
-  get isConst(){
-    return true;
-  }
+
   toQ(){
     let res = super.toQ();
     res.num = this.num;

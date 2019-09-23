@@ -14,21 +14,17 @@ class Species extends Record {
 
     return this;
   }
-  static get schemaName(){
-    return 'SpeciesP';
-  }
-  get className(){
-    return 'Species';
-  }
-  get isSpecies(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     res.compartment = this.compartment;
     if(this.boundary) res.boundary = this.boundary;
     if(this.isAmount) res.isAmount = this.isAmount;
     return res;
+  }
+  get requirements(){
+    return {
+      compartment: { required: true, isReference: true, class: 'Compartment', setTarget: true }
+    };
   }
   SBMLUnits(){
     let compartmentUnits = _.get(this, 'compartmentObj.units');

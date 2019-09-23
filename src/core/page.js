@@ -9,15 +9,6 @@ class Page extends _Simple {
 
     return this;
   }
-  static get schemaName(){
-    return 'PageP';
-  }
-  get className(){
-    return 'Page';
-  }
-  get isPage(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     if(this.content) res.content = this.content;

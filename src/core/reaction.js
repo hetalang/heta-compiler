@@ -23,15 +23,6 @@ class Reaction extends Process {
 
     return this;
   }
-  static get schemaName(){
-    return 'ReactionP';
-  }
-  get className(){
-    return 'Reaction';
-  }
-  get isReaction(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     if(this.modifiers.length>0){
@@ -43,6 +34,12 @@ class Reaction extends Process {
     }
 
     return res;
+  }
+  static req(){
+    return {
+      actors: { required: false, isArray: true, isReference: true, class: 'Species', setTarget: true },
+      modifiers: { required: false, isArray: true, isReference: true, class: 'Species', setTarget: true }
+    };
   }
 }
 

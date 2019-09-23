@@ -28,13 +28,10 @@ class _Simple {
     return this._id;
   }
   static get schemaName(){
-    return '_SimpleP';
+    return this.name + 'P';
   }
   get className(){
-    return '_Simple';
-  }
-  get isSimple(){
-    return true;
+    return this.constructor.name;
   }
   get index(){
     return this.id;
@@ -68,7 +65,6 @@ class _Simple {
     }
     let valid = validate(q);
     if(!valid) {
-      // console.log(q);
       throw new SchemaValidationError(validate.errors, this.schemaName, q);
     }
   }
@@ -82,6 +78,30 @@ class _Simple {
     if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
 
     return res;
+  }
+  static req(){
+    return {};
+  }
+  /* recursively create requirements from req, 
+  currently it is not optimal */
+  static requirements(){
+    if(this.name === '_Simple'){
+      return this.req();
+    }else{
+      let deeper = this.requirements.call(this.__proto__);
+      console.log(deeper)
+      return Object.assign({}, deeper, this.req());
+    }
+  }
+  /* recursively check class names */
+  instanceOf(className){
+    if(this.constructor.name === className){
+      return true;
+    }else if(this.constructor.name === 'Object'){
+      return false;
+    }else{
+      return this.instanceOf.call(this.__proto__, className);
+    }
   }
 }
 

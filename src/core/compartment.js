@@ -7,15 +7,6 @@ class Compartment extends Record {
     // nothing
     return this;
   }
-  static get schemaName(){
-    return 'CompartmentP';
-  }
-  get className(){
-    return 'Compartment';
-  }
-  get isCompartment(){
-    return true;
-  }
 }
 
 module.exports = {

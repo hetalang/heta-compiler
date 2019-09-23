@@ -14,15 +14,6 @@ class UnitDefinition extends _Simple {
 
     return this;
   }
-  static get schemaName(){
-    return 'UnitDefinitionP';
-  }
-  get className(){
-    return 'UnitDefinition';
-  }
-  get isUnitDefinition(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     if(this.components.length>0)

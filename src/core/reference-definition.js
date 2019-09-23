@@ -12,15 +12,6 @@ class ReferenceDefinition extends _Simple {
 
     return this;
   }
-  static get schemaName(){
-    return 'ReferenceDefinitionP';
-  }
-  get className(){
-    return 'ReferenceDefinition';
-  }
-  get isReferenceDefinition(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     if(this.prefix) res.prefix = this.prefix;

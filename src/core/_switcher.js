@@ -7,15 +7,6 @@ class _Switcher extends _Scoped{
 
     return this;
   }
-  static get schemaName(){
-    return '_SwitcherP';
-  }
-  get className(){
-    return '_Switcher';
-  }
-  get isSwitcher(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     return res;

@@ -35,15 +35,6 @@ class Record extends _Scoped {
 
     return this;
   }
-  static get schemaName(){
-    return 'RecordP';
-  }
-  get className(){
-    return 'Record';
-  }
-  get isRecord(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     if(this.assignments){

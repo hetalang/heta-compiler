@@ -9,15 +9,6 @@ class ContinuousSwitcher extends _Switcher {
 
     return this;
   }
-  static get schemaName(){
-    return 'ContinuousSwitcherP';
-  }
-  get className(){
-    return 'ContinuousSwitcher';
-  }
-  get isContinuousSwitcher(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     res.condition = this.condition;

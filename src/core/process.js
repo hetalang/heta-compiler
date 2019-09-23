@@ -9,30 +9,17 @@ class Process extends Record {
   merge(q, skipChecking){
     if(!skipChecking) Process.isValid(q);
     super.merge(q, skipChecking);
-    if(q.effectors) {
-      this.effectors = q.effectors.map((q) => new _Effector(q));
-    }
     if(q.actors) {
       if(q.actors instanceof Array){
         this.actors = q.actors
           .map((q) => new Actor(q));
       }else{
-        //throw new Error('String actors is not implemented yet.');
         this.actors = rct2actors(q.actors)
           .map((q) => new Actor(q));
       }
     }
 
     return this;
-  }
-  static get schemaName(){
-    return 'ProcessP';
-  }
-  get className(){
-    return 'Process';
-  }
-  get isProcess(){
-    return true;
   }
   toQ(){
     let res = super.toQ();
@@ -44,6 +31,11 @@ class Process extends Record {
     });
 
     return res;
+  }
+  static req(){
+    return {
+      actors: { required: false, isArray: true, isReference: true, class: 'Record', setTarget: true }
+    };
   }
 }
 

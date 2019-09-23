@@ -21,7 +21,7 @@ class XArray extends Array{
     // create topo-sort tree
     let graph = new TopoSort();
     this
-      .filter((component) => component.isRecord)
+      .filter((component) => component.instanceOf('Record'))
       .forEach((component) => {
         let deps = component.dependOn(context);
         graph.add(component.id, deps);

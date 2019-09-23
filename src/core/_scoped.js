@@ -27,15 +27,6 @@ class _Scoped extends _Simple {
   get indexObj(){
     return {id: this.id, space: this.space};
   }
-  static get schemaName(){
-    return '_ScopedP';
-  }
-  get className(){
-    return '_Scoped';
-  }
-  get isScoped(){
-    return true;
-  }
   toQ(){
     let res = super.toQ();
     res.space = this.space;

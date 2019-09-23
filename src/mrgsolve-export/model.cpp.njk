@@ -52,6 +52,6 @@ dxdt_{{ variable.id }}{{ "_amt_" if variable.className==="Species" and not varia
 {%- endfor %}
 
 $CAPTURE @annotated
-{%- for record in _model_.population|filter2("isRecord", true) %}
+{%- for record in _model_.records %}
 {{ record.id }} : {{ record.title }} {% if record.units %}({{ record.units }}){% endif %}
 {%- endfor %}

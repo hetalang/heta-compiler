@@ -33,7 +33,7 @@ class MrgsolveExport extends _Export{
     // set dynamic variables
     model.dynamics = model.population
       .filter((component) => {
-        return component.isRecord 
+        return component.instanceOf('Record') 
           && component.isDynamic;
       });
     let dynamicIds = model.dynamics
@@ -42,7 +42,7 @@ class MrgsolveExport extends _Export{
     // check if initials depends on dynamic initials, than stop
     model.population
       .filter((component) => {
-        return component.isRecord 
+        return component.instanceOf('Record')
           && component.assignments 
           && component.assignments.start_;
       }).forEach((record) => {
@@ -56,10 +56,14 @@ class MrgsolveExport extends _Export{
         }
       });
 
+    // set array of records
+    model.records = model.population
+      .filter((component) => component.instanceOf('Record'));
+
     // set sorted array of initials
     model.start_ = model.population
       .filter((component) => {
-        return component.isRecord 
+        return component.instanceOf('Record') 
           && component.assignments 
           && component.assignments.start_;
       }).sortExpressionsByContext('start_');
@@ -67,7 +71,7 @@ class MrgsolveExport extends _Export{
     // set sorted array of rules
     model.ode_ = model.population
       .filter((component) => {
-        return component.isRecord 
+        return component.instanceOf('Record') 
           && component.assignments 
           && component.assignments.ode_;
       }).sortExpressionsByContext('ode_');
