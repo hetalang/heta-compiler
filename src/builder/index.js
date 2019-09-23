@@ -94,7 +94,7 @@ class Builder{
   exportManyAsync(callback){
     if(!this.options.skipExport){
       let exportElements = [...this.container.storage]
-        .filter((obj) => obj[1] instanceof _Export)
+        .filter((obj) => obj[1].instanceOf('_Export'))
         .map((obj) => obj[1]);
       logger.info(`Start exporting to files, total: ${exportElements.length}.`);
       async.each(exportElements, (exportItem, cb) => {

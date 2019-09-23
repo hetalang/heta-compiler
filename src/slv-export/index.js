@@ -2,11 +2,8 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 const XArray = require('../x-array');
 const nunjucks = require('../nunjucks-env');
-const { Process } = require('../core/process');
 const { Compartment } = require('../core/compartment');
-const { Record } = require('../core/record');
 const _ = require('lodash');
-const { Expression } = require('../core/expression');
 
 class SLVExport extends _Export{
   merge(q={}, skipChecking){
@@ -65,7 +62,7 @@ class SLVExport extends _Export{
     // push active processes
     model.processes = new XArray();
     model.population.filter((x) => {
-      return x instanceof Process
+      return x.instanceOf('Process')
         && x.actors.length>0 // process with actors
         && x.actors.some((actor) => !actor._target_.boundary && !actor._target_.implicitBoundary);// true if there is at least non boundary target
     }).forEach((process) => {
@@ -74,7 +71,7 @@ class SLVExport extends _Export{
     // push non boundary ode variables which are mentioned in processes
     model.variables = new XArray();
     model.population.filter((x) => {
-      return x instanceof Record // must be record
+      return x.instanceOf('Record') // must be record
         && !x.boundary // not boundary
         && !x.implicitBoundary // not constant, not rule, not explicit diff equation
         && x.backReferences.length>0; // mentioned in process
@@ -95,13 +92,12 @@ class SLVExport extends _Export{
 
     // create and sort expressions for RHS
     model.rhs = model.population
-      .selectByInstance(Record)
+      .selectByInstanceOf('Record')
       .filter((record) => _.has(record, 'assignments.ode_'))
       .sortExpressionsByContext('ode_');
     // check that all record in start are not Expression
     let startExpressions = model.population
-      .selectByInstance(Record)
-      .filter((record) => _.get(record, 'assignments.start_') instanceof Expression)
+      .selectRecordsByContext('start_')
       .filter((record) => record.assignments.start_.num===undefined); // check if it is not Number
     if(startExpressions.length > 0){
       let errorMsg = 'DBSolve does not support expressions string in InitialValues.\n'
@@ -122,8 +118,7 @@ class SLVExport extends _Export{
           ? 0
           : switcher.period;
         model.population
-          .selectByInstance(Record)
-          .filter((record) => _.has(record, 'assignments.' + switcher.id))
+          .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
             let expression = record.assignments[switcher.id];
             let [multiply, add] = expression

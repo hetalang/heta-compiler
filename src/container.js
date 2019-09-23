@@ -129,7 +129,7 @@ class Container {
     // add Const to population
     let messages = []; // messages for reference errors
     population
-      .selectByInstance(Record)
+      .selectByInstanceOf('Record')
       .filter((record) => record.assignments)
       .forEach((record) => {
         _.keys(record.assignments)

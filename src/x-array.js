@@ -1,7 +1,5 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
-const { Record } = require('./core/record');
-const { Const } = require('./core/const');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
@@ -12,8 +10,8 @@ class XArray extends Array{
   selectByClassName(className){
     return this.filter((x) => x.className === className);
   }
-  selectByInstance(constructor){
-    return this.filter((x) => x instanceof constructor);
+  selectByInstanceOf(className){
+    return this.filter((x) => x.instanceOf(className));
   }
   sortExpressionsByContext(context){
     // path to Expression based on context
@@ -21,7 +19,7 @@ class XArray extends Array{
     // create topo-sort tree
     let graph = new TopoSort();
     this
-      .filter((component) => component.instanceOf('Record'))
+      .selectByInstanceOf('Record')
       .forEach((component) => {
         let deps = component.dependOn(context);
         graph.add(component.id, deps);
@@ -52,7 +50,7 @@ class XArray extends Array{
   /* currently not used, see _getXXXImage in Export
   expressionDeps(){
     // collect all deps, possibly helpfull for diagnostics
-    let deps = _.chain(this.selectByInstance(Record)) // get list of all dependent values
+    let deps = _.chain(this.selectByInstanceOf('Record')) // get list of all dependent values
       .map((record) => {
         return _.map(record.assignments, (assignment) => assignment)
           .filter((assignment) => assignment.className==='Expression');
@@ -68,7 +66,7 @@ class XArray extends Array{
   }
   */
   selectRecordsByContext(context){
-    return this.selectByInstance(Record)
+    return this.selectByInstanceOf('Record')
       .filter((record) => _.has(record, 'assignments.' + context));
   }
   getListOfUnitDefinitions(){
@@ -80,8 +78,8 @@ class XArray extends Array{
       });
   }
   getUniqueUnits(){
-    return _.chain(this.selectByInstance(Record))
-      .concat(this.selectByInstance(Const))
+    return _.chain(this.selectByInstanceOf('Record'))
+      .concat(this.selectByInstanceOf('Const'))
       .filter((record) => record.SBMLUnits())
       .uniqBy((record) => record.unitsHash(true))
       .map((record) => record.SBMLUnits())
