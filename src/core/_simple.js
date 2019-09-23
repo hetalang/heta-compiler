@@ -33,7 +33,7 @@ class _Simple {
   get className(){
     return '_Simple';
   }
-  get is_Simple(){
+  get isSimple(){
     return true;
   }
   get index(){

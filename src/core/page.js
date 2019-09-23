@@ -15,6 +15,9 @@ class Page extends _Simple {
   get className(){
     return 'Page';
   }
+  get isPage(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     if(this.content) res.content = this.content;

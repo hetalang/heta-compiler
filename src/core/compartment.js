@@ -13,6 +13,9 @@ class Compartment extends Record {
   get className(){
     return 'Compartment';
   }
+  get isCompartment(){
+    return true;
+  }
 }
 
 module.exports = {

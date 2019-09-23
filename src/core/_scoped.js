@@ -33,6 +33,9 @@ class _Scoped extends _Simple {
   get className(){
     return '_Scoped';
   }
+  get isScoped(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     res.space = this.space;

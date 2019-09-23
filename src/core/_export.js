@@ -13,6 +13,9 @@ class _Export extends _Simple{
   get className(){
     return '_Export';
   }
+  get isExport(){
+    return true;
+  }
   do(){ // error for abstract class
     throw new Error(`No method do() for "${this.className}".`);
   }

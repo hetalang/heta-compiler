@@ -31,6 +31,9 @@ class Process extends Record {
   get className(){
     return 'Process';
   }
+  get isProcess(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     res.actors = this.actors.map((actor) => {

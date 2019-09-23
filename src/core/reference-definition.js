@@ -18,6 +18,9 @@ class ReferenceDefinition extends _Simple {
   get className(){
     return 'ReferenceDefinition';
   }
+  get isReferenceDefinition(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     if(this.prefix) res.prefix = this.prefix;

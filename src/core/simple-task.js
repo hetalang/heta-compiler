@@ -40,6 +40,9 @@ class SimpleTask extends _Scoped {
   get className(){
     return 'SimpleTask';
   }
+  get isSimpleTask(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     if(this.type) res.type = this.type;

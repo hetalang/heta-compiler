@@ -17,6 +17,9 @@ class TimeSwitcher extends _Switcher {
   get className(){
     return 'TimeSwitcher';
   }
+  get isTimeSwitcher(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     res.condition = this.condition;

@@ -15,6 +15,9 @@ class ContinuousSwitcher extends _Switcher {
   get className(){
     return 'ContinuousSwitcher';
   }
+  get isContinuousSwitcher(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     res.condition = this.condition;

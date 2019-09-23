@@ -20,6 +20,9 @@ class Species extends Record {
   get className(){
     return 'Species';
   }
+  get isSpecies(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     res.compartment = this.compartment;

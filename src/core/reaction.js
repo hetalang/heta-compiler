@@ -29,6 +29,9 @@ class Reaction extends Process {
   get className(){
     return 'Reaction';
   }
+  get isReaction(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     if(this.modifiers.length>0){

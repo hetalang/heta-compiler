@@ -20,6 +20,9 @@ class UnitDefinition extends _Simple {
   get className(){
     return 'UnitDefinition';
   }
+  get isUnitDefinition(){
+    return true;
+  }
   toQ(){
     let res = super.toQ();
     if(this.components.length>0)
