@@ -78,15 +78,15 @@ class Record extends _Scoped {
       && !this.implicitBoundary
       && this.backReferences.length > 0;
   }
-  dependOnIds(scope){
-    if(typeof scope !== 'string')
-      throw new TypeError('scope must be of string type.');
+  dependOn(context){
+    if(typeof context !== 'string')
+      throw new TypeError('context must be of string type.');
     if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
       throw new Error('compartment should be set for Species when isAmount=false');
 
-    let exprPath = 'assignments.' + scope;
+    let exprPath = 'assignments.' + context;
     if(_.has(this, exprPath)){
-      let deps = this.assignments[scope]
+      let deps = this.assignments[context]
         .exprParsed
         .getSymbols();
       _.pull(deps, 't'); // remove t from dependence

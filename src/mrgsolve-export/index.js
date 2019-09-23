@@ -46,7 +46,7 @@ class MrgsolveExport extends _Export{
           && component.assignments 
           && component.assignments.start_;
       }).forEach((record) => {
-        let deps = record.dependOnIds('start_');
+        let deps = record.dependOn('start_');
         let diff = _.intersection(dynamicIds, deps);
         if(diff.length>0){
           let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
@@ -62,7 +62,7 @@ class MrgsolveExport extends _Export{
         return component.isRecord 
           && component.assignments 
           && component.assignments.start_;
-      }).sortExpressionsByScope('start_');
+      }).sortExpressionsByContext('start_');
 
     // set sorted array of rules
     model.ode_ = model.population
@@ -70,7 +70,7 @@ class MrgsolveExport extends _Export{
         return component.isRecord 
           && component.assignments 
           && component.assignments.ode_;
-      }).sortExpressionsByScope('ode_');
+      }).sortExpressionsByContext('ode_');
 
     return model;
   }

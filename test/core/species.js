@@ -2,7 +2,7 @@
 const { Species } = require('../../src/core/species');
 const { expect } = require('chai');
 
-describe('Testing dependOnIds() for Record and Species', () => {
+describe('Testing dependOn() for Record and Species', () => {
   it('for Species isAmount=true', () => {
     let species = new Species({id: 'S1', space: 'one'}).merge({
       isAmount: true,
@@ -12,10 +12,10 @@ describe('Testing dependOnIds() for Record and Species', () => {
         evt2: 1.4
       }
     });
-    let deps1 = species.dependOnIds('start_');
-    let deps2 = species.dependOnIds('evt1');
-    let deps3 = species.dependOnIds('evt2');
-    let deps4 = species.dependOnIds('evt3');
+    let deps1 = species.dependOn('start_');
+    let deps2 = species.dependOn('evt1');
+    let deps3 = species.dependOn('evt2');
+    let deps4 = species.dependOn('evt3');
     expect(deps1).to.have.members(['x', 'y', 'z']);
     expect(deps2).to.have.members(['x', 'y', 'z']);
     expect(deps3).to.be.deep.equal([]);
@@ -30,10 +30,10 @@ describe('Testing dependOnIds() for Record and Species', () => {
         evt2: 1.4
       }
     });
-    let deps1 = species.dependOnIds('start_');
-    let deps2 = species.dependOnIds('evt1');
-    let deps3 = species.dependOnIds('evt2');
-    let deps4 = species.dependOnIds('evt3');
+    let deps1 = species.dependOn('start_');
+    let deps2 = species.dependOn('evt1');
+    let deps3 = species.dependOn('evt2');
+    let deps4 = species.dependOn('evt3');
     expect(deps1).to.have.members(['x', 'y', 'z', 'comp']);
     expect(deps2).to.have.members(['x', 'y', 'z', 'comp']);
     expect(deps3).to.have.members(['comp']);
@@ -41,6 +41,6 @@ describe('Testing dependOnIds() for Record and Species', () => {
   });
   it('Throws for Species when  isAmount=undefined and no compartment', () => {
     let species = new Species({id: 'S1', space: 'one'});
-    expect(() => species.dependOnIds('start_')).throw(Error);
+    expect(() => species.dependOn('start_')).throw(Error);
   });
 });

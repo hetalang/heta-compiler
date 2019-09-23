@@ -183,7 +183,7 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for record in _model_.population.selectRecordsByScope(event.id) %}
+          {% for record in _model_.population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}.{{event.id}}">
@@ -207,7 +207,7 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for record in _model_.population.selectRecordsByScope(event.id) %}
+          {% for record in _model_.population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}.{{event.id}}">

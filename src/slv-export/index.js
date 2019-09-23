@@ -97,7 +97,7 @@ class SLVExport extends _Export{
     model.rhs = model.population
       .selectByInstance(Record)
       .filter((record) => _.has(record, 'assignments.ode_'))
-      .sortExpressionsByScope('ode_');
+      .sortExpressionsByContext('ode_');
     // check that all record in start are not Expression
     let startExpressions = model.population
       .selectByInstance(Record)

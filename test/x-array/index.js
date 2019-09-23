@@ -41,8 +41,8 @@ describe('XArray testing.', () => {
     let res = x.getById('p0');
     expect(res).to.be.undefined;
   });
-  it('sortExpressionsByScope for "ode_"', () => {
-    let res = x.sortExpressionsByScope('ode_');
+  it('sortExpressionsByContext for "ode_"', () => {
+    let res = x.sortExpressionsByContext('ode_');
     expect(res).to.be.instanceOf(XArray);
     let sequence = res.map((x) => x.id);
     expect(sequence).to.be.deep.equal(['p1', 'p2', 'p4', 'p3']);
@@ -62,7 +62,7 @@ describe('XArray testing.', () => {
     });
     cycle.push(rec2);
     expect(() => {
-      cycle.sortExpressionsByScope('ode_');
+      cycle.sortExpressionsByContext('ode_');
     }).to.throw();
   });
 });

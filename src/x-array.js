@@ -15,15 +15,15 @@ class XArray extends Array{
   selectByInstance(constructor){
     return this.filter((x) => x instanceof constructor);
   }
-  sortExpressionsByScope(scope){
-    // path to Expression based on scope
-    let exprPath = 'assignments.' + scope;
+  sortExpressionsByContext(context){
+    // path to Expression based on context
+    let exprPath = 'assignments.' + context;
     // create topo-sort tree
     let graph = new TopoSort();
     this
       .filter((component) => component.isRecord)
       .forEach((component) => {
-        let deps = component.dependOnIds(scope);
+        let deps = component.dependOn(context);
         graph.add(component.id, deps);
       });
 
@@ -37,10 +37,10 @@ class XArray extends Array{
         .map((id) => {
           let record = this.getById(id);
           let expr = _.get(record, exprPath).expr;
-          return `${id}$${record.space} [${scope}]= ${expr};`;
+          return `${id}$${record.space} [${context}]= ${expr};`;
         })
         .join('\n');
-      let error = new Error(`Circular dependency in scope "${scope}" for expressions: \n` + infoLine);
+      let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
       error.circular = e.circular;
       throw error;
     }
@@ -67,9 +67,9 @@ class XArray extends Array{
     return deps;
   }
   */
-  selectRecordsByScope(scope){
+  selectRecordsByContext(context){
     return this.selectByInstance(Record)
-      .filter((record) => _.has(record, 'assignments.' + scope));
+      .filter((record) => _.has(record, 'assignments.' + context));
   }
   getListOfUnitDefinitions(){
     return this.getUniqueUnits()

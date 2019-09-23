@@ -135,7 +135,7 @@ class Container {
         _.keys(record.assignments)
           .forEach((key) => {
             let expr = record.assignments[key].expr;
-            let deps = record.dependOnIds(key);
+            let deps = record.dependOn(key);
             deps.forEach((id, i) => {
               let _component_ = population.getById(id);
               if(!_component_){ // component inside space is not found
