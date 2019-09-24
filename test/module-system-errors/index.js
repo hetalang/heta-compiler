@@ -15,7 +15,7 @@ describe('ModuleSystem for cyclic.', () => {
       if(err){
         done(err);
       }else{
-        Object.keys(ms.storage).should.have.lengthOf(3);
+        Object.keys(ms.moduleCollection).should.have.lengthOf(3);
         done();
       }
     });

@@ -10,7 +10,6 @@ const Container = require('../container');
 const ModuleSystem = require('../module-system');
 // const _Module = require('../module-system/_module');
 const winston = require('winston');
-const { _Export } = require('../core/_export');
 const async = require('async');
 
 let logger = winston.createLogger({

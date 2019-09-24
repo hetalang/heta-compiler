@@ -12,7 +12,6 @@ const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const { SimpleTask } = require('./core/simple-task');
 const _ = require('lodash');
-const { _Export } = require('./core/_export');
 const { getIndexFromQ } = require('./common');
 const XArray = require('./x-array');
 

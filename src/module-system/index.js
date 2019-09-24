@@ -11,7 +11,9 @@ require('./xlsx-module');
 
 class ModuleSystem {
   constructor(){
-    this.storage = {};
+    // stores modules in format
+    // { filepath : module, ...}
+    this.moduleCollection = {};
     this.graph = new TopoSort();
   }
   // entrance to scan
@@ -31,7 +33,7 @@ class ModuleSystem {
     if(typeof callback!=='function') throw TypeError('callback function should be set.');
     // XXX: restriction: currently different tables in one xlsx file is not supported
     // to support this the another algorythm of addModule() and integrate() is required
-    if(!(absFilePath in this.storage)){ // new file
+    if(!(absFilePath in this.moduleCollection)){ // new file
       this.addModuleAsync(absFilePath, type, options, (err0, mdl) => {
         if(err0){
           callback(err0);
@@ -47,7 +49,7 @@ class ModuleSystem {
           });
         }
       });
-    }else{ // if file already in storage do nothing
+    }else{ // if file already in moduleCollection do nothing
       callback(null);
     }
   }
@@ -60,8 +62,8 @@ class ModuleSystem {
         callback(err);
       }else{
         mdl.updateByAbsPaths();
-        // push to storage
-        this.storage[filename] = mdl;
+        // push to moduleCollection
+        this.moduleCollection[filename] = mdl;
         // set in graph
         let paths = mdl
           .getImportElements()
@@ -80,11 +82,11 @@ class ModuleSystem {
     this
       .sortedPaths()
       .reverse()
-      .map((y) => this.storage[y])
+      .map((y) => this.moduleCollection[y])
       .forEach((x) => {
         x._integrated = x.parsed.reduce((acc, current) => {
           if(current.action==='import'){
-            let childIntegrated = this.storage[current.source]._integrated;
+            let childIntegrated = this.moduleCollection[current.source]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);
           }else{
