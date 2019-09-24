@@ -24,7 +24,7 @@ class Const extends _Simple { // implicit extend Numeric
     if(this.free) res.free = true;
     if(this.units) res.units = this.units;
     return res;
-  }  
+  }
   SBMLUnits(){
     return this.units;
   }

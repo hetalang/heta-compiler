@@ -43,7 +43,7 @@ class Container {
     let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     this.storage.set(simple.index, simple);
-    if(simple instanceof _Export) { // include parent
+    if(simple.instanceOf('_Export')) { // include parent
       simple._container = this;
     }
 

@@ -1,8 +1,17 @@
+/* global describe, it */
 const { Container } = require('../src');
-
 let c = new Container();
-const { Reaction } = c.classes;
+const { Page, Reaction } = c.classes;
+const { expect } = require('chai');
 
-let r = new Reaction({id: 'r', space: 'one'});
+describe('Test for requirements', () => {
+  it('Check Page requirements', () => {
+    expect(Page.requirements())
+      .to.be.deep.equal({});  
+  });
+  it('Check Page requirements', () => {
+    expect(Reaction.requirements())
+      .to.have.all.keys('actors', 'modifiers');  
+  });
+});
 
-console.log(Reaction.requirements())

@@ -79,18 +79,20 @@ class _Simple {
 
     return res;
   }
-  static req(){
+  static _requirements(){
     return {};
   }
-  /* recursively create requirements from req, 
+  /* recursively create requirements from _requirements, 
   currently it is not optimal */
   static requirements(){
     if(this.name === '_Simple'){
-      return this.req();
+      return this._requirements();
+    }else if(this.hasOwnProperty('_requirements')){
+      let deeper = this.requirements.call(this.__proto__);
+      return Object.assign({}, deeper, this._requirements());
     }else{
       let deeper = this.requirements.call(this.__proto__);
-      console.log(deeper)
-      return Object.assign({}, deeper, this.req());
+      return deeper;
     }
   }
   /* recursively check class names */

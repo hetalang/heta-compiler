@@ -32,9 +32,9 @@ class Process extends Record {
 
     return res;
   }
-  static req(){
+  static _requirements(){
     return {
-      actors: { required: false, isArray: true, isReference: true, class: 'Record', setTarget: true }
+      actors: { required: true, isArray: true, isReference: true, class: 'Record', setTarget: true }
     };
   }
 }

@@ -43,6 +43,12 @@ class SimpleTask extends _Scoped {
     if(this.tspan) res.tspan = _.cloneDeep(this.tspan);
     return res;
   }
+  static _requirements(){
+    return {
+      type: {required: true, isReference: false},
+      'subtasks.output': {required: true, isArray: true, isReference: true, class: 'Record'}
+    };
+  }
 }
 
 class Subtask {

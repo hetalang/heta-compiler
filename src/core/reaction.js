@@ -35,10 +35,10 @@ class Reaction extends Process {
 
     return res;
   }
-  static req(){
+  static _requirements(){
     return {
-      actors: { required: false, isArray: true, isReference: true, class: 'Species', setTarget: true },
-      modifiers: { required: false, isArray: true, isReference: true, class: 'Species', setTarget: true }
+      actors: { required: true, isArray: true, isReference: true, class: 'Species', setTarget: true },
+      modifiers: { required: true, isArray: true, isReference: true, class: 'Species', setTarget: true }
     };
   }
 }

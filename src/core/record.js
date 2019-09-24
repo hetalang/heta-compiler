@@ -3,7 +3,6 @@ const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
-// const math = require('mathjs');
 const { IndexedHetaError } = require('../heta-error');
 
 class Record extends _Scoped {

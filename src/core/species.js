@@ -21,7 +21,7 @@ class Species extends Record {
     if(this.isAmount) res.isAmount = this.isAmount;
     return res;
   }
-  get requirements(){
+  static _requirements(){
     return {
       compartment: { required: true, isReference: true, class: 'Compartment', setTarget: true }
     };
