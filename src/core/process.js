@@ -34,7 +34,11 @@ class Process extends Record {
   }
   static _requirements(){
     return {
-      actors: { required: true, isArray: true, isReference: true, class: 'Record', setTarget: true }
+      actors: { 
+        required: false, 
+        isArray: true, path: 'target', 
+        isReference: true, targetClass: 'Record', setTarget: true 
+      }
     };
   }
 }

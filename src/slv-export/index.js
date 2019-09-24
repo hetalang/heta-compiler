@@ -64,7 +64,7 @@ class SLVExport extends _Export{
     model.population.filter((x) => {
       return x.instanceOf('Process')
         && x.actors.length>0 // process with actors
-        && x.actors.some((actor) => !actor._target_.boundary && !actor._target_.implicitBoundary);// true if there is at least non boundary target
+        && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary);// true if there is at least non boundary target
     }).forEach((process) => {
       model.processes.push(process);
     });
@@ -82,10 +82,10 @@ class SLVExport extends _Export{
     model.matrix = [];
     model.processes.forEach((process, processNum) => {
       process.actors.filter((actor) => {
-        return !actor._target_.boundary
-          && !actor._target_.implicitBoundary;
+        return !actor.targetObj.boundary
+          && !actor.targetObj.implicitBoundary;
       }).forEach((actor) => {
-        let variableNum = model.variables.indexOf(actor._target_);
+        let variableNum = model.variables.indexOf(actor.targetObj);
         model.matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
     });

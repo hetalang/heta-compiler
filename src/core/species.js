@@ -23,7 +23,11 @@ class Species extends Record {
   }
   static _requirements(){
     return {
-      compartment: { required: true, isReference: true, class: 'Compartment', setTarget: true }
+      compartment: {
+        required: true,
+        isArray: false,
+        isReference: true, targetClass: 'Compartment', setTarget: true 
+      }
     };
   }
   SBMLUnits(){

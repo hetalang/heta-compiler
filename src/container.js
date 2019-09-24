@@ -165,76 +165,48 @@ class Container {
     return population;
   }
   setReferences(){
-    // add compartment ref for Species
     [...this.storage].map((x) => x[1])
-      .filter((x) => x instanceof Species)
-      .forEach((species) => {
-        if(!species.compartment)
-          throw new IndexedHetaError(species.indexObj, 'No "compartment" prop for Species.');
-        let compartment = this.select({id: species.compartment, space: species.space});
-        if(!compartment)
-          throw new IndexedHetaError(species.indexObj, `Property "compartment" has lost reference "${species.compartment}".`);
-        if(compartment.className!=='Compartment')
-          throw new IndexedHetaError(species.indexObj, `"compartment" prop reffered not to Compartment but ${compartment.className} for Species.`);
-        species.compartmentObj = compartment;
-      });
-
-    // add record ref for Process.actors
-    [...this.storage].map((x) => x[1])
-      .filter((x) => x instanceof Process)
-      .forEach((process) => {
-        process.actors.forEach((actor) => {
-          // checking target
-          let target = this.select({id: actor.target, space: process.space});
-          if(!target)
-            throw new IndexedHetaError(process.indexObj, `Property "target" has lost reference "${actor.target}".`);
-          if(!(target instanceof Record))
-            throw new IndexedHetaError(process.indexObj, `"target" prop reffered not to Record but ${target.className} for Process.`);
-          actor._target_ = target;
-          // create ode expression
-          target.backReferences.push({
-            process: process.id,
-            _process_: process,
-            stoichiometry: actor.stoichiometry
-          });
+      .forEach((x) => { // iterates all components
+        let req = x.constructor.requirements();
+        _.each(req, (rule, prop) => { // iterates through rules
+          // required: true
+          if(rule.required && !_.has(x, prop)){
+            throw new IndexedHetaError(x.indexObj, `No "${prop}" property for ${x.className}.`);
+          }
+          // isReference: true + className
+          if(rule.isReference && _.has(x, prop)){
+            const iterator = (item, path) => {
+              let target = this.select({id: _.get(x, path), space: x.space});
+              if(!target){
+                throw new IndexedHetaError(x.indexObj, `Property "${path}" has lost reference "${_.get(x, path)}".`);
+              }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
+                throw new IndexedHetaError(x.indexObj, `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
+              }else if(rule.setTarget){
+                _.set(x, path + 'Obj', target);
+                // add back references for Process XXX: ugly solution
+                if(x.instanceOf('Process')){
+                  target.backReferences.push({
+                    process: x.id,
+                    _process_: x,
+                    stoichiometry: item.stoichiometry
+                  });
+                }
+              }
+            };
+            if(rule.isArray){ // iterates through array
+              _.get(x, prop).forEach((item, i) => { 
+                let fullPath = `${prop}[${i}].${rule.path || ''}`;
+                iterator(item, fullPath);
+              });
+            }else{
+              let fullPath = prop + (rule.path || '');
+              iterator(_.get(x, prop), fullPath);
+            }
+          }
         });
       });
 
-    // check Reactions and add refs
-    [...this.storage].map((x) => x[1])
-      .filter((x) => x instanceof Reaction)
-      .forEach((reaction) => {
-        reaction.actors.forEach((actor) => { // check ref objects for actors
-          if(!(actor._target_ instanceof Species))
-            throw new IndexedHetaError(reaction.indexObj, `"target" prop refered not to Species but ${actor._target_.className} for Reaction.`);
-        });
-        reaction.modifiers.forEach((modifier) => { // set ref objects for modifiers
-          let _target_ = this.select({id: modifier.target, space: reaction.space});
-          if(!_target_)
-            throw new IndexedHetaError(reaction.indexObj, `Property "target" has lost reference "${modifier.target}".`);
-          if(!(_target_ instanceof Species))
-            throw new IndexedHetaError(reaction.indexObj, `"target" prop reffered not to Species but ${_target_.className} for Reaction.`);
-          modifier._target_ = _target_;
-        });
-      });
-
-    // check Exports and add defaultTask refs
-    [...this.storage].map((x) => x[1])
-      .filter((x) => x instanceof _Export && x.defaultTask)
-      .forEach((x) => {
-        let _defaultTask_ = this.select({id: x.defaultTask, space: x.model});
-        if(!_defaultTask_){
-          let msg = `Property "defaultTask" has lost reference for "${x.defaultTask}".`;
-          throw new IndexedHetaError(x.indexObj, msg);
-        }else if(_defaultTask_ instanceof SimpleTask){
-          x._defaultTask_ = _defaultTask_;
-        }else{
-          let msg = `"defaultTask" prop must be reffered to SimpleTask but now on ${_defaultTask_.className}.`;
-          throw new IndexedHetaError(x.indexObj, msg);
-        }
-      });
-
-    // check output refs in SimpleTasks
+    // check output refs in SimpleTasks XXX: it seems to be working but ugly
     [...this.storage].map((x) => x[1])
       .filter((x) => x instanceof SimpleTask && x.subtasks)
       .forEach((x) => {
@@ -253,7 +225,6 @@ class Container {
           });
         });
       });
-
 
     return this;
   }

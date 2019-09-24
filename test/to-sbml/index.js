@@ -24,7 +24,8 @@ describe('Create SBML.', () => {
   it('First model', () => {
     let c = (new Container)
       .loadMany(firstModel)
-      .setReferences();
+      .setReferences()
+      //.setReferences2();
     let text = c.storage
       .get('sbml')
       .do();
@@ -36,7 +37,8 @@ describe('Create SBML.', () => {
   it('Compartment model', () => {
     let c = (new Container)
       .loadMany(compartmentModel)
-      .setReferences();
+      .setReferences()
+      //.setReferences2();
     let text = c.storage
       .get('sbml')
       .do();
