@@ -231,21 +231,21 @@
     <assignmentRule
       variable="evt1"
       
-      metaid="two_comp::evt1.ode_"
+      metaid="two_comp::evt1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="pr1"
       
-      metaid="two_comp::pr1.ode_"
+      metaid="two_comp::pr1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>s1</ci></math>
     </assignmentRule>
     <rateRule
       variable="auc"
       
-      metaid="two_comp::auc.ode_"
+      metaid="two_comp::auc::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -267,7 +267,7 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="a0"
-        metaid="two_comp::a0.start_"
+        metaid="two_comp::a0::start_"
         
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>a0_0</ci></math>
@@ -291,7 +291,7 @@
           
           <eventAssignment
             variable="a0"
-            metaid="two_comp::a0.sw1">
+            metaid="two_comp::a0::sw1">
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           

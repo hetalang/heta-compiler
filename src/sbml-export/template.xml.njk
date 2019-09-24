@@ -120,7 +120,7 @@
     <assignmentRule
       variable="{{record.id}}"
       {% if record.title %}name="{{record.title}}"{% endif %}
-      metaid="{{record.index}}.ode_"
+      metaid="{{record.index}}::ode_"
       >
       {{record.assignments.ode_.toCMathML()}}
     </assignmentRule>
@@ -130,7 +130,7 @@
     <rateRule
       variable="{{record.id}}"
       {% if record.title %}name="{{record.title}}"{% endif %}
-      metaid="{{record.index}}.ode_"
+      metaid="{{record.index}}::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -156,7 +156,7 @@
     {%- for record in listOfInitialAssignments %}
       <initialAssignment
         symbol="{{record.id}}"
-        metaid="{{record.index}}.start_"
+        metaid="{{record.index}}::start_"
         {% if record.title %}name="{{record.title}}"{% endif %}
         >
         {{record.assignments.start_.toCMathML()}}
@@ -186,7 +186,7 @@
           {% for record in _model_.population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
-            metaid="{{record.index}}.{{event.id}}">
+            metaid="{{record.index}}::{{event.id}}">
             {{ record.assignments[event.id].toCMathML() }}
           </eventAssignment>
           {% endfor %}
@@ -210,7 +210,7 @@
           {% for record in _model_.population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
-            metaid="{{record.index}}.{{event.id}}">
+            metaid="{{record.index}}::{{event.id}}">
             {{ record.assignments[event.id].toCMathML() }}
           </eventAssignment>
           {% endfor %}
