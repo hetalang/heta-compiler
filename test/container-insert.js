@@ -74,7 +74,7 @@ describe('Unit tests for Container', () => {
         id: 'pg1',
         space: 'another'
       });
-      let simple = c.storage.get('another.pg1');
+      let simple = c.storage.get('another::pg1');
       simple.should.has.property('space', 'another');
       c.storage.size.should.be.eql(4);
     });

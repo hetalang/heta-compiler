@@ -9,7 +9,7 @@
         constant="false"
         size="1"
         units="L"
-        metaid="two_comp.c0"
+        metaid="two_comp::c0"
         >
         
       </compartment>
@@ -19,7 +19,7 @@
         constant="false"
         size="5"
         units="L"
-        metaid="two_comp.c1"
+        metaid="two_comp::c1"
         >
         
       </compartment>
@@ -29,7 +29,7 @@
         constant="false"
         size="1.5"
         units="L"
-        metaid="two_comp.c2"
+        metaid="two_comp::c2"
         >
         
       </compartment>
@@ -45,7 +45,7 @@
         hasOnlySubstanceUnits="true"
         
         substanceUnits="umole"
-        metaid="two_comp.a0"
+        metaid="two_comp::a0"
         >
         
       </species>
@@ -58,7 +58,7 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
         substanceUnits="uM_L"
-        metaid="two_comp.s1"
+        metaid="two_comp::s1"
         >
         
       </species>
@@ -71,7 +71,7 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
         substanceUnits="uM_L"
-        metaid="two_comp.s2"
+        metaid="two_comp::s2"
         >
         
       </species>
@@ -84,7 +84,7 @@
         constant="false"
         value="0"
         units="uM_h"
-        metaid="two_comp.auc"
+        metaid="two_comp::auc"
         >
         
       </parameter>
@@ -94,7 +94,7 @@
         constant="false"
         
         units="h"
-        metaid="two_comp.evt1"
+        metaid="two_comp::evt1"
         >
         
       </parameter>
@@ -104,7 +104,7 @@
         constant="false"
         
         
-        metaid="two_comp.pr1"
+        metaid="two_comp::pr1"
         >
         
       </parameter>
@@ -166,7 +166,7 @@
         
         reversible="true"
         fast="false"
-        metaid="two_comp.r1"
+        metaid="two_comp::r1"
         >
         
         <listOfReactants>
@@ -188,7 +188,7 @@
         
         reversible="true"
         fast="false"
-        metaid="two_comp.r2"
+        metaid="two_comp::r2"
         >
         
         <listOfReactants>
@@ -210,7 +210,7 @@
         
         reversible="true"
         fast="false"
-        metaid="two_comp.r3"
+        metaid="two_comp::r3"
         >
         
         <listOfReactants>
@@ -231,21 +231,21 @@
     <assignmentRule
       variable="evt1"
       
-      metaid="two_comp.evt1.ode_"
+      metaid="two_comp::evt1.ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="pr1"
       
-      metaid="two_comp.pr1.ode_"
+      metaid="two_comp::pr1.ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>s1</ci></math>
     </assignmentRule>
     <rateRule
       variable="auc"
       
-      metaid="two_comp.auc.ode_"
+      metaid="two_comp::auc.ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -267,7 +267,7 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="a0"
-        metaid="two_comp.a0.start_"
+        metaid="two_comp::a0.start_"
         
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>a0_0</ci></math>
@@ -276,7 +276,7 @@
   
     <listOfEvents>
       <event
-        id="sw1" metaid="two_comp.sw1"
+        id="sw1" metaid="two_comp::sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -291,7 +291,7 @@
           
           <eventAssignment
             variable="a0"
-            metaid="two_comp.a0.sw1">
+            metaid="two_comp::a0.sw1">
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           

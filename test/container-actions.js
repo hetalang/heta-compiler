@@ -19,7 +19,7 @@ describe('Unit tests for Container load', () => {
       }
     });
     c.should.be.lengthOf(1);
-    simple.should.have.property('index', 'default__.k1');
+    simple.should.have.property('index', 'default__::k1');
   });
 
   it('Insert Record k2 with space', () => {
@@ -33,7 +33,7 @@ describe('Unit tests for Container load', () => {
       }
     });
     c.should.be.lengthOf(2);
-    simple.should.have.property('index', 'one.k2');
+    simple.should.have.property('index', 'one::k2');
   });
 
   it('Update Record k1', () => {

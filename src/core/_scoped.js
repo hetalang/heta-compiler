@@ -22,7 +22,7 @@ class _Scoped extends _Simple {
     return this._space;
   }
   get index(){
-    return this.space + '.' + this.id;
+    return this.space + '::' + this.id;
   }
   get indexObj(){
     return {id: this.id, space: this.space};

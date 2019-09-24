@@ -9,7 +9,7 @@
         constant="false"
         
         units="L"
-        metaid="first.comp1"
+        metaid="first::comp1"
         >
         <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>This is just text. <em>italic</em>, <strong>bold</strong></p>
 
@@ -21,7 +21,7 @@
         constant="false"
         size="3.2"
         
-        metaid="first.comp2"
+        metaid="first::comp2"
         >
         
       </compartment>
@@ -37,7 +37,7 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="1.1"
         
-        metaid="first.s1"
+        metaid="first::s1"
         >
         
       </species>
@@ -50,7 +50,7 @@
         hasOnlySubstanceUnits="false"
         
         
-        metaid="first.s2"
+        metaid="first::s2"
         >
         
       </species>
@@ -63,7 +63,7 @@
         constant="false"
         value="15.223"
         units="nm__min__fM"
-        metaid="first.p2"
+        metaid="first::p2"
         >
         
       </parameter>
@@ -73,7 +73,7 @@
         constant="false"
         
         units="__h__L"
-        metaid="first.p3"
+        metaid="first::p3"
         >
         
       </parameter>
@@ -83,7 +83,7 @@
         constant="false"
         
         units="min"
-        metaid="first.evt1"
+        metaid="first::evt1"
         >
         
       </parameter>
@@ -95,7 +95,7 @@
         
         reversible="true"
         fast="false"
-        metaid="first.r2"
+        metaid="first::r2"
         >
         
         <listOfReactants>
@@ -118,7 +118,7 @@
         
         reversible="true"
         fast="false"
-        metaid="first.r3"
+        metaid="first::r3"
         >
         
         <listOfReactants>
@@ -138,21 +138,21 @@
     <assignmentRule
       variable="p3"
       
-      metaid="first.p3.ode_"
+      metaid="first::p3.ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="evt1"
       
-      metaid="first.evt1.ode_"
+      metaid="first::evt1.ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="s2"
       name="s2 title"
-      metaid="first.s2.ode_"
+      metaid="first::s2.ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
     </assignmentRule>
@@ -162,7 +162,7 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="comp1"
-        metaid="first.comp1.start_"
+        metaid="first::comp1.start_"
         name="This is compartment"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
@@ -171,7 +171,7 @@
   
     <listOfEvents>
       <event
-        id="sw1" metaid="first.sw1"
+        id="sw1" metaid="first::sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -186,7 +186,7 @@
           
           <eventAssignment
             variable="s1"
-            metaid="first.s1.sw1">
+            metaid="first::s1.sw1">
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.5</cn></math>
           </eventAssignment>
           

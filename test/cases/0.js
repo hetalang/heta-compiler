@@ -38,7 +38,6 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @SBMLExport, check and compare.', () => {
-    // b.container.setReferences(); // setReferences automatically run in importAsync
     let sbml_export = b.container.select({id: 'mm_sbml'});
     let code = sbml_export.do();
     expect(code).xml.to.to.be.valid();
