@@ -26,8 +26,7 @@ describe('Create SBML.', () => {
       .loadMany(firstModel)
       .setReferences()
       //.setReferences2();
-    let text = c.storage
-      .get('sbml')
+    let text = c.select({id: 'sbml'})
       .do();
     // fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
@@ -39,8 +38,7 @@ describe('Create SBML.', () => {
       .loadMany(compartmentModel)
       .setReferences()
       //.setReferences2();
-    let text = c.storage
-      .get('sbml')
+    let text = c.select({id: 'sbml'})
       .do();
 
     // fs.writeFileSync('result.xml', text);

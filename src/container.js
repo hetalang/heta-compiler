@@ -96,6 +96,17 @@ class Container {
     let index = getIndexFromQ(q);
     return this.storage.get(index);
   }
+  /*
+    The same as select() but search in namespace and globally
+  */
+  softSelect(q = {}){
+    let tryDirectly = this.select(q);
+    if(tryDirectly || !q.space){
+      return tryDirectly;
+    }else{
+      return this.select({id: q.id});
+    }
+  }
   load(q){
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
@@ -123,7 +134,6 @@ class Container {
       .filter((x) => x[1].space===targetSpace)
       .map((x) => x[1]);
     let population = new XArray(...children);
-
 
     // add Const to population
     let messages = []; // messages for reference errors

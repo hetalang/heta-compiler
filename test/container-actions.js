@@ -168,7 +168,6 @@ describe('Unit tests for Container load', () => {
 
   it('DELETE LATER', () => {
     c.should.be.lengthOf(4);
-    // console.log(c.storage);
   });
 
   it('Select existed element', () => {
