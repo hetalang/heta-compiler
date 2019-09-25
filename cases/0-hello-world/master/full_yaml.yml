@@ -52,4 +52,5 @@
   model: mm
 - class: MrgsolveExport
   id: mm_mrg
+  model: mm
   title: export to mrgsolve

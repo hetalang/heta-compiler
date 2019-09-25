@@ -7,10 +7,9 @@ const nunjucks = require('../nunjucks-env');
 class SBMLExport extends _Export{
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q.model===undefined){
-      throw new TypeError(`"model" property in SBMLExport ${this.id} should be declared.`);
+    if(q.model){
+      this.model = q.model;
     }
-    this.model = q.model;
     if(q.skipMathChecking)
       this.skipMathChecking = q.skipMathChecking;
 
@@ -44,6 +43,13 @@ class SBMLExport extends _Export{
     if(this.skipMathChecking) res.skipMathChecking = this.skipMathChecking;
 
     return res;
+  }
+  static _requirements(){
+    return {
+      model: {
+        required: true
+      }
+    };
   }
 }
 

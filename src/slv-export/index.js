@@ -8,9 +8,9 @@ const _ = require('lodash');
 class SLVExport extends _Export{
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q && typeof q.model===undefined)
-      throw new TypeError(`"model" property in SLVExport ${this.id} should be declared.`);
-    this.model = q.model;
+    if(q.model)
+      this.model = q.model;
+    
     if(q.eventsOff) this.eventsOff = q.eventsOff;
     if(q.defaultTask)
       this.defaultTask = q.defaultTask;
@@ -169,6 +169,13 @@ class SLVExport extends _Export{
     if(this.defaultTask) res.defaultTask = this.defaultTask;
     
     return res;
+  }
+  static _requirements(){
+    return {
+      model: {
+        required: true
+      }
+    };
   }
 }
 

@@ -6,12 +6,11 @@ const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
 
 class MrgsolveExport extends _Export{
-  merge(q, skipChecking){
+  merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q && q.model===undefined){
-      throw new TypeError(`"model" property in MrgsolveExport ${this.id} should be declared.`);
+    if(q.model){
+      this.model = q.model;
     }
-    this.model = q.model;
 
     return this;
   }
@@ -83,6 +82,19 @@ class MrgsolveExport extends _Export{
       'mrgsolve-export/model.cpp.njk',
       this
     );
+  }
+  toQ(){
+    let res = super.toQ();
+    if(this.model) res.model = this.model;
+
+    return res;
+  }
+  static _requirements(){
+    return {
+      model: {
+        required: true
+      }
+    };
   }
 }
 
