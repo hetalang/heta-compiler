@@ -206,4 +206,37 @@ describe('Expession exports', () => {
     let expr = new Expression('pow(a, b)');
     expect(() => expr.toSLVString('xxx')).Throw(TypeError);
   });
+
+  it('toMatlabString() for "pow(x, y)"', () => {
+    let expr = new Expression('pow(x, y)');
+    expect(expr.toMatlabString()).to.be.equal('power(x, y)');
+  });
+  it('toMatlabString() for "max(1, 2, 3)"', () => {
+    let expr = new Expression('max(1, 2, 3)');
+    expect(expr.toMatlabString()).to.be.equal('max([1, 2, 3])');
+  });
+  it('toMatlabString() for "min(1, 2, 3)"', () => {
+    let expr = new Expression('min(1, 2, 3)');
+    expect(expr.toMatlabString()).to.be.equal('min([1, 2, 3])');
+  });
+  it('toMatlabString() for "log(x)"', () => {
+    let expr = new Expression('log(x)');
+    expect(expr.toMatlabString()).to.be.equal('log(x)');
+  });
+  it('toMatlabString() for "log(x, y)"', () => {
+    let expr = new Expression('log(x, y)');
+    expect(expr.toMatlabString()).to.be.equal('(log(x)/log(y))');
+  });
+  it('toMatlabString() for "log10(x)"', () => {
+    let expr = new Expression('log10(x)');
+    expect(expr.toMatlabString()).to.be.equal('log10(x)');
+  });
+  it('toMatlabString() for "log2(x)"', () => {
+    let expr = new Expression('log2(x)');
+    expect(expr.toMatlabString()).to.be.equal('(log(x)/log(2))');
+  });
+  it('toMatlabString() for "exp(-kel*t)"', () => {
+    let expr = new Expression('exp(-kel*t)');
+    expect(expr.toMatlabString()).to.be.equal('exp(-kel * time)');
+  });
 });

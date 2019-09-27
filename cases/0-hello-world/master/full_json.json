@@ -78,6 +78,11 @@
     "model": "mm"
   },
   {
+    "class": "SimbioExport",
+    "id": "mm_simbio",
+    "model": "mm"
+  },
+  {
     "class": "JSONExport",
     "id": "full_json"
   },
@@ -93,7 +98,7 @@
   {
     "class": "MrgsolveExport",
     "id": "mm_mrg",
-    "model": "mm",
-    "title": "export to mrgsolve"
+    "title": "export to mrgsolve",
+    "model": "mm"
   }
 ]

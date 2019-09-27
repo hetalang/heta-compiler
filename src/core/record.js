@@ -47,7 +47,7 @@ class Record extends _Scoped {
     }
     return res;
   }
-  SBMLUnits(){
+  unitsSBML(){
     return this.units;
   }
   unitsHash(){
@@ -58,6 +58,10 @@ class Record extends _Scoped {
     }else{
       return;
     }
+  }
+  // XXX: temporal solution
+  unitsSimbio(){
+    return this.units;
   }
   get implicitBoundary(){
     return _.has(this, 'assignments.ode_'); // this is rule

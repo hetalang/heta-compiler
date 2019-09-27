@@ -30,7 +30,7 @@ class Species extends Record {
       }
     };
   }
-  SBMLUnits(){
+  unitsSBML(){
     let compartmentUnits = _.get(this, 'compartmentObj.units');
     if(compartmentUnits!==undefined && this.units!==undefined && !this.isAmount){
       return this.units + '*' + compartmentUnits;
@@ -43,9 +43,9 @@ class Species extends Record {
       return uParser
         .parse(this.units)
         .toHash();
-    }else if(useSBMLUnits && this.SBMLUnits()){
+    }else if(useSBMLUnits && this.unitsSBML()){
       return uParser
-        .parse(this.SBMLUnits())
+        .parse(this.unitsSBML())
         .toHash();
     }
   }

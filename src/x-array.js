@@ -80,9 +80,9 @@ class XArray extends Array{
   getUniqueUnits(){
     return _.chain(this.selectByInstanceOf('Record'))
       .concat(this.selectByInstanceOf('Const'))
-      .filter((record) => record.SBMLUnits())
+      .filter((record) => record.unitsSBML())
       .uniqBy((record) => record.unitsHash(true))
-      .map((record) => record.SBMLUnits())
+      .map((record) => record.unitsSBML())
       .value();
   }
 }

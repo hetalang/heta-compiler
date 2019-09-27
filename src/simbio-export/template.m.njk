@@ -1,0 +1,123 @@
+%{
+  This model was created by qs3p-js.
+  Additional functions and constants for compatibility see in "fun.m"
+  export from : {{_id}} @SimbioExport {...};
+  {{title}}
+  {{notes}}
+%}
+
+sbioaddtolibrary(sbiounit('week', 'day', 7));
+sbioaddtolibrary(sbiounit('xxx', 'nanomole', 1));
+
+{% set model_id = _model_.model + "_model" -%}
+{{ model_id }} = sbiomodel('{{_model_.model}}');
+
+% Useful parameters
+addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
+
+{% set listOfCompartments = _model_.population.selectByClassName('Compartment') -%}
+{{ "% Compartments" if listOfCompartments|length > 0 }}
+{%- for record in listOfCompartments %}
+{{_model_.model}}.compartment.{{record.id}} = addcompartment(
+  {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
+  {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
+  {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsSimbio() }}'{% endif -%}
+  , 'Notes', '{{record.notesHTML}}', 'Tag', '');
+{%- endfor %}
+
+{% set listOfSpecies = _model_.population.selectByClassName('Species') -%}
+{{ "% Species" if listOfSpecies|length > 0 }}
+{%- for record in listOfSpecies %}
+{{_model_.model}}.species.{{record.id}} = addspecies(
+  {{- _model_.model }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
+  {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
+  {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsSimbio() }}'{% endif -%}
+  , 'BoundaryCondition', {{ record.boundary===true or record.implicitBoundary===true -}}
+  , 'Notes', '{{record.notesHTML}}', 'Tag', '');
+{%- endfor %}
+
+{% set listOfParameters = _model_.population.selectByClassName('Record') -%}
+{% set listOfProcesses = _model_.population.selectByClassName('Process') -%}
+{% set listOfConstants = _model_.population.selectByClassName('Const') -%}
+{{ "% Parameters" if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 }}
+{%- for record in listOfParameters.concat(listOfProcesses) %}
+{{_model_.model}}.parameter.{{record.id}} = addparameter(
+  {{- model_id }}, '{{record.id}}', 'ConstantValue', false
+  {%- if record.assignments.start_.num!==undefined %}, 'Value', {{record.assignments.start_.num}}{% endif -%}
+  {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsSimbio() }}'{% endif -%}
+  , 'Notes', '{{record.notesHTML}}', 'Tag', '');
+{%- endfor %}
+{%- for con in listOfConstants %}
+{{_model_.model}}.parameter.{{con.id}} = addparameter(
+  {{- model_id }}, '{{con.id}}', 'ConstantValue', true
+  {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
+  {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsSimbio() }}'{% endif -%}
+  , 'Notes', '{{con.notesHTML}}', 'Tag', '');
+{%- endfor %}
+
+{% set listOfReactions = _model_.population.selectByClassName('Reaction') -%}
+{{ "% Reactions" if listOfReactions|length > 0 }}
+{%- for record in listOfReactions %}
+{{_model_.model}}.reaction.{{record.id}} = addreaction(
+  {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.aux.reversible!=='false'}}
+  {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
+  , 'Notes', '{{record.notesHTML}}', 'Tag', '');
+  {% set fullActors = record.actors.concat(record.modifiers) -%}
+  addreactant({{_model_.model}}.reaction.{{record.id}}, [
+    {%- for actor in fullActors -%}
+    {%- if not actor.stoichiometry or actor.stoichiometry<0 %}{{_model_.model}}.species.{{ actor.target }}, {% endif -%}
+    {%- endfor -%}
+    ], [
+    {%- for actor in fullActors -%}
+    {%- if not actor.stoichiometry or actor.stoichiometry<0 %}{{ -actor.stoichiometry if actor.stoichiometry<0 else 1 }}, {% endif -%}
+    {%- endfor -%}
+    ]);
+  addproduct({{_model_.model}}.reaction.{{record.id}}, [
+    {%- for actor in fullActors -%}
+    {%- if not actor.stoichiometry or actor.stoichiometry>0 %}{{_model_.model}}.species.{{ actor.target }}, {% endif -%}
+    {%- endfor -%}
+    ], [
+    {%- for actor in fullActors -%}
+    {%- if not actor.stoichiometry or actor.stoichiometry>0 %}{{ actor.stoichiometry if actor.stoichiometry>0 else 1 }}, {% endif -%}
+    {%- endfor -%}
+    ]);
+{%- endfor %}
+
+{% set listOfAssignmentRules = _model_.population.selectRecordsByContext("ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
+{%- set listOfRateRules = _model_.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
+{{ "% Rules" if listOfAssignmentRules|length + listOfRateRules|length > 0 }}
+{% for record in listOfAssignmentRules -%}
+addrule(
+  {{- model_id }}, '{{record.id}} = {{ record.assignments.ode_.toMatlabString() }}', 'repeatedAssignment');
+{% endfor %}
+{% for record in listOfRateRules -%}
+addrule(
+  {{- model_id }}, '{{record.id}} = 
+  {%- for ref in record.backReferences -%}
+    {{ " " + ref.stoichiometry if ref.stoichiometry<0 or loop.first else " + " + ref.stoichiometry }}*{{ ref.process }}
+  {%- endfor -%}
+  ', 'rate');
+{%- endfor %}
+
+{%- set listOfInitialAssignments = _model_.population.selectRecordsByContext("start_")|filter2("assignments.start_.num", undefined) %}
+{{- "% InitialAssignments" if listOfInitialAssignments|length > 0 -}}
+{% for record in listOfInitialAssignments %}
+addrule(
+  {{- model_id }}, '{{record.id}} = {{ record.assignments.start_.toMatlabString() }}', 'initialAssignment');
+{% endfor %}
+
+{%- set listOfTimeEvents = _model_.population.selectByClassName("TimeSwitcher") %}
+{% set listOfContinuousEvents = _model_.population.selectByClassName("ContinuousSwitcher") %}
+{{- "% Events" if listOfTimeEvents|length + listOfContinuousEvents|length > 0 }}
+{% for event in listOfTimeEvents -%}
+{{_model_.model}}.event.{{event.id}} = addevent({{- model_id }}, 'time/timeOne >= {{ event.start }}', {
+  {%- for record in _model_.population.selectRecordsByContext(event.id) -%}
+  '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
+  }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
+{% endfor %}
+{% for event in listOfContinuousEvents -%}
+{{_model_.model}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
+  {%- for record in _model_.population.selectRecordsByContext(event.id) -%}
+  '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
+  }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
+{% endfor %}

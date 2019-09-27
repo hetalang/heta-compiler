@@ -65,6 +65,10 @@ mod1_sbml @SBMLExport {
   model: mod1
 };
 
+mod1_simbio @SimbioExport {
+  model: mod1
+};
+
 json @JSONExport {
 };
 

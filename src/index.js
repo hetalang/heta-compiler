@@ -6,6 +6,7 @@ require('./json-export');
 require('./sbml-export');
 require('./slv-export');
 require('./mrgsolve-export');
+require('./simbio-export');
 
 module.exports = {
   Container,

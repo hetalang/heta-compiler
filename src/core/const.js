@@ -25,7 +25,7 @@ class Const extends _Simple { // implicit extend Numeric
     if(this.units) res.units = this.units;
     return res;
   }
-  SBMLUnits(){
+  unitsSBML(){
     return this.units;
   }
   unitsHash(){
