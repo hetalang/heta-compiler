@@ -1,5 +1,5 @@
 
-block $mod1 begin
+ namespace mod1 begin
   p1 @Record;
   p1 .= 1;
   p2 @Record;
@@ -40,15 +40,15 @@ block $mod1 begin
   p4[sw3]= 2;
 end
 
-sw3 @ContinuousSwitcher $mod1 {
+mod1::sw3 @ContinuousSwitcher {
   condition: p1
 };
 
-block @TimeSwitcher $mod1 begin
-  sw1 {
+namespace mod1 begin
+  sw1 @TimeSwitcher {
     start: 6
   };
-  sw2 {
+  sw2 @TimeSwitcher {
     start: 12,
     period: 6,
     repeatCount: 3

@@ -1,2 +1,2 @@
-p2 @Record $one;
-p2 $one := x*y;
+one::p2 @Record;
+one::p2  := x*y;

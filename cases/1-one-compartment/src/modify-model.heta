@@ -10,7 +10,7 @@ end
   type: heta
 };
 
-block $one_comp_saturation begin
+namespace one_comp_saturation begin
   #import {
     source: non-saturable.heta,
     type: heta

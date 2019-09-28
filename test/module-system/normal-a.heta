@@ -1,6 +1,6 @@
 // dependences: a <- b, a <- c, b <- c
 
-k1 @Record $one {
+one::k1 @Record {
   title: hello world
 };
 

@@ -2,7 +2,7 @@
   This case is based on 0-hello-world but with @Task
 */
 
-block $mm begin
+namespace mm begin
   '''Note for the Default compartment'''
   default_comp @Compartment { title: Default compartment, units: L };
   default_comp .= 1;
@@ -28,7 +28,7 @@ block @Const begin
 end
 
 // simulation tasks
-sim_task1 @SimpleTask $mm {
+mm::sim_task1 @SimpleTask {
   type: simulation,
   subtasks: [
     { saveat: [0, 50, 100, 200], output: [S, P] }

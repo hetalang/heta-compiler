@@ -1,14 +1,14 @@
 
-default_comp @Compartment $mm;
-default_comp $mm .= 1;
+mm::default_comp @Compartment;
+mm::default_comp .= 1;
 
-S @Species $mm { compartment: default_comp };
-P @Species $mm { compartment: default_comp };
-r1 @Reaction $mm { actors: S -> P };
+mm::S @Species { compartment: default_comp };
+mm::P @Species { compartment: default_comp };
+mm::r1 @Reaction { actors: S -> P };
 
-S $mm .= 10;
-P $mm .= 0;
-r1 $mm := Vmax*S/(Km+S)*default_comp;
+mm::S .= 10;
+mm::P .= 0;
+mm::r1 := Vmax*S/(Km+S)*default_comp;
 
 Vmax @Const = 0.1;
 Km @Const = 2.5;

@@ -4,7 +4,7 @@ block @Const begin
     AXP_neu =  0.1;
 end
 
-block $invitro begin
+namespace invitro begin
     #import {source: neu.heta, type: heta};
     tot_vol @Compartment []= 0.1; // <L>
 
@@ -20,7 +20,7 @@ block $invitro begin
     ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
-block $invivo begin
+namespace invivo begin
     #import {source: neu.heta, type: heta};
 
     blood @Compartment .= 5.2;

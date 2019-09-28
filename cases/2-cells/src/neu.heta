@@ -12,7 +12,7 @@ block @Const begin
   ATP_neu = 1e4; // <>
 end
 
-block $abstract_neu begin
+namespace abstract_neu begin
   tot_vol @Compartment;
   S1 @Species {compartment: tot_vol};
   neu_count @Species {compartment: tot_vol, isAmount: true}; // <cell>

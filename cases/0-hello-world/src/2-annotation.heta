@@ -1,6 +1,6 @@
 
 // this block unites elements with the same space
-block $mm begin
+namespace mm begin
   '''Note for the Default compartment'''
   default_comp @Compartment { title: Default compartment, units: L };
   default_comp .= 1;

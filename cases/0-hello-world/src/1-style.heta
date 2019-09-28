@@ -1,5 +1,5 @@
 // this block unites elements with the same space
-block $mm begin
+namespace mm begin
   default_comp @Compartment;
   default_comp .= 1;
 
