@@ -30,6 +30,7 @@
     "excel-as-json": "^2.0.2",
     "fs-extra": "^7.0.1",
     "heta-parser": "^0.1.1",
+    "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "markdown": "^0.5.0",
     "mathjs": "^5.10.3",

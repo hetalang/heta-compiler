@@ -19,11 +19,8 @@ namespace mm begin
   P .= 0;
 end
 
-// this block unites element with the same class
-block @Const begin
-  Vmax = 0.1; // this is global constant available for any scoped equation
-  Km = 2.5;
-end
+Vmax @Const = 0.1; // this is global constant available for any scoped equation
+Km @Const = 2.5;
 
 mm_sbml @SBMLExport { title: Exported mm model, model: mm };
 mm_simbio @SimbioExport { model: mm };
