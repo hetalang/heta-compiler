@@ -49,7 +49,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% endblock %}
 =============================== RHS ================================
 {% macro diff(backReferences=[]) -%}
-{% for br in backReferences %}{% if br.stoichiometry>0 and not loop.first %}+{% endif %}{{ br.stoichiometry + '*'}}{{ br.process }}{% endfor %}
+{% for br in backReferences|exclude2('stoichiometry', undefined) %}{% if br.stoichiometry>0 and not loop.first %}+{% endif %}{{ br.stoichiometry + '*'}}{{ br.process }}{% endfor %}
 {%- endmacro %}
 {% block rhs %}
 //! Pools
