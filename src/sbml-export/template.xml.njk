@@ -84,7 +84,7 @@
       <reaction
         id="{{record.id}}"
         {% if record.title %}name="{{record.title}}"{% endif %}
-        reversible="{{ record.aux.reversible!=='false' }}"
+        reversible="{{ record.aux.reversible!==false }}"
         fast="{{ record.aux.fast==='true' }}"
         metaid="{{record.index}}"
         >

@@ -71,7 +71,7 @@
       <reaction
         id="r1"
         name="Michaelis-Menten reaction"
-        reversible="true"
+        reversible="false"
         fast="false"
         metaid="mm::r1"
         >

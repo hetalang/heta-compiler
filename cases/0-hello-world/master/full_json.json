@@ -43,6 +43,9 @@
     "id": "r1",
     "title": "Michaelis-Menten reaction",
     "notes": "Transformation of __substate__ to __product__",
+    "aux": {
+      "reversible": false
+    },
     "space": "mm",
     "assignments": {
       "ode_": {

@@ -1,4 +1,5 @@
 const { Record } = require('./record');
+const _ = require('lodash');
 // const { IndexedHetaError } = require('../heta-error');
 
 class Process extends Record {
@@ -14,8 +15,11 @@ class Process extends Record {
         this.actors = q.actors
           .map((q) => new Actor(q));
       }else{
-        this.actors = rct2actors(q.actors)
+        let {targetArray, isReversible} = rct2actors(q.actors);
+        this.actors = targetArray
           .map((q) => new Actor(q));
+        _.set(this, 'aux.reversible', isReversible);
+        console.log('= parse actors string = ', isReversible)
       }
     }
 
@@ -59,9 +63,10 @@ class Actor extends _Effector {
 }
 
 function rct2actors(rct){
-  var matches = /^(.*)<?[=-]>?(.*)$/gm.exec(rct);
+  var matches = /^(.*)(<)?[=-]>?(.*)$/gm.exec(rct);
   var substrates = matches[1];
-  var products = matches[2];
+  var products = matches[3];
+  let isReversible = matches[2]==='<';
 
   var targetArray = [];
   var regexp = /([\d]*)\*?(\w[\w\d]*)/gm;
@@ -82,7 +87,7 @@ function rct2actors(rct){
       stoichiometry: (r[1]) ? +r[1] : 1
     });
   }
-  return targetArray;
+  return {targetArray, isReversible};
 }
 
 module.exports = {
