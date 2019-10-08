@@ -19,7 +19,6 @@ class Process extends Record {
         this.actors = targetArray
           .map((q) => new Actor(q));
         _.set(this, 'aux.reversible', isReversible);
-        console.log('= parse actors string = ', isReversible)
       }
     }
 
@@ -63,13 +62,13 @@ class Actor extends _Effector {
 }
 
 function rct2actors(rct){
-  var matches = /^(.*)(<)?[=-]>?(.*)$/gm.exec(rct);
-  var substrates = matches[1];
-  var products = matches[3];
+  let matches = /^([^<]*)(<)?[=-]+>?(.*)$/gm.exec(rct);
+  let substrates = matches[1];
+  let products = matches[3];
   let isReversible = matches[2]==='<';
 
-  var targetArray = [];
-  var regexp = /([\d]*)\*?(\w[\w\d]*)/gm;
+  let targetArray = [];
+  let regexp = /([\d]*)\*?(\w[\w\d]*)/gm;
   let r; // iterator
   while (
     (r = regexp.exec(substrates))!==null
