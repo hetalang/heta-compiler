@@ -32,15 +32,14 @@ mm::sim_task1 @SimpleTask {
   type: simulation,
   subtasks: [
     { saveat: [0, 50, 100, 200], output: [S, P] }
-    { saveat: [0, 1, 2, 3], output: [S, P, r1] }
   ],
-  tspan: [0, 120],
-  reassign: {k1: 0},
-  solver: {dtmax: 12}
+  tspan: [ 0, 120 ],
+  reassign: { k1: 0 },
+  solver: { dtmax: 12 }
 };
 
 mm_sbml @SBMLExport { title: Exported mm model, model: mm };
 full_json @JSONExport;
 full_yaml @YAMLExport;
-mm_slv @SLVExport { model: mm, defaultTask: sim_task1 };
+mm_slv @SLVExport { model: mm }; /* defaultTask: sim_task1 */
 mm_mrg @MrgsolveExport { model: mm, title: export to mrgsolve };

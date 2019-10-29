@@ -46,7 +46,8 @@ class SimpleTask extends _Scoped {
   static _requirements(){
     return {
       type: {required: true, isReference: false},
-      'subtasks.output': {required: true, isArray: true, isReference: true, class: 'Record'}
+      // temporaly excluded because cannot analyse arrays of objects
+      //'subtasks.output': {required: true, isArray: true, isReference: true, class: 'Record'}
     };
   }
 }
