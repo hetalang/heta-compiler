@@ -1,6 +1,6 @@
-const { _Scoped } = require('./_scoped');
+const { _Simple } = require('./_simple');
 
-class _Switcher extends _Scoped{
+class _Switcher extends _Simple {
   merge(q, skipChecking){
     if(!skipChecking) _Switcher.isValid(q);
     super.merge(q, skipChecking);

@@ -1,11 +1,11 @@
-const { _Scoped } = require('./_scoped');
+const { _Simple } = require('./_simple');
 const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 const { IndexedHetaError } = require('../heta-error');
 
-class Record extends _Scoped {
+class Record extends _Simple {
   constructor(q = {}){
     super(q);
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
@@ -66,7 +66,7 @@ class Record extends _Scoped {
   get implicitBoundary(){
     return _.has(this, 'assignments.ode_'); // this is rule
   }
-  // works properly only after setReferences()
+  // works properly only after populate()
   get isDynamic(){
     return !this.boundary
       && !this.implicitBoundary

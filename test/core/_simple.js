@@ -15,7 +15,16 @@ describe('Unit test for _Simple common methods', () => {
     simple.should.has.property('className', '_Simple');
     simple.should.has.property('id', 'ref1');
     simple.should.has.property('index');
-    simple.should.has.property('clone');
+    simple.should.has.property('space', undefined);
+    simple.should.has.property('merge');
+  });
+
+  it('Create empty scoped _Simple', () => {
+    let simple = new _Simple({id: 'pg1', space: 'one'});
+    simple.should.has.property('className', '_Simple');
+    simple.should.has.property('id', 'pg1');
+    simple.should.has.property('space', 'one');
+    simple.should.has.property('index');
     simple.should.has.property('merge');
   });
 
@@ -102,4 +111,23 @@ describe('Unit test for _Simple common methods', () => {
     });
   });
 
+  it('ToQ transformation', () => {
+    let simple = (new _Simple({id: 'pg1', space: 'one'})).merge({
+      id: 'pg2',
+      space: 'two',
+      title: 'title',
+      notes: 'notes',
+      tags: ['a', 'b', 'c'],
+      aux: {a: 1, b: 'b', c: {}}
+    });
+    simple.toQ().should.be.deep.equal({
+      id: 'pg1',
+      space: 'one',
+      title: 'title',
+      notes: 'notes',
+      tags: ['a', 'b', 'c'],
+      aux: {a: 1, b: 'b', c: {}},
+      class: '_Simple'
+    });
+  });
 });

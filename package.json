@@ -1,11 +1,11 @@
 {
   "name": "qs3p-js",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test --recursive",
-    "test:dev": "mocha test/core/expression.js",
+    "test:dev": "mocha test/container/populate.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "test:coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test &&coveralls"
   },

@@ -51,7 +51,7 @@
         constant="true"
         value="0.1"
         
-        metaid="Vmax"
+        metaid="mm::Vmax"
         >
         
       </parameter>
@@ -61,7 +61,7 @@
         constant="true"
         value="2.5"
         
-        metaid="Km"
+        metaid="mm::Km"
         >
         
       </parameter>

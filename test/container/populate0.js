@@ -1,8 +1,8 @@
 /* global describe, it */
-const { Container } = require('../src');
+const { Container } = require('../../src');
 const { expect } = require('chai');
 
-describe('Check setReferences() for Species', () => {
+describe('Check populate() for Species', () => {
   let c = new Container();
   let sp1 = c.load({
     class: 'Species',
@@ -10,13 +10,13 @@ describe('Check setReferences() for Species', () => {
     space: 'one'
   });
   it('Set no compartment', () => {
-    expect(() => c.setReferences(), 'does not check empty property').throw();
+    expect(() => c.populate(), 'does not check empty property').throw();
   });
   it('Set lost ref', () => {
     sp1.merge({
       compartment: 'comp1'
     });
-    expect(() => c.setReferences(), 'does not check lost ref').throw();
+    expect(() => c.populate(), 'does not check lost ref').throw();
   });
   it('Set wrong ref', () => {
     c.load({
@@ -24,7 +24,7 @@ describe('Check setReferences() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    expect(() => c.setReferences()).throw();
+    expect(() => c.populate()).throw();
   });
   it('Set good ref', () => {
     c.load({
@@ -32,12 +32,12 @@ describe('Check setReferences() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    c.setReferences();
+    c.populate();
     expect(sp1).to.have.property('compartmentObj');
   });
 });
 
-describe('Check setReferences() for Reaction', () => {
+describe('Check populate() for Reaction', () => {
   let c = new Container();
   let r1 = c.load({
     class: 'Reaction',
@@ -47,7 +47,7 @@ describe('Check setReferences() for Reaction', () => {
   });
   
   it('have lost ref', () => {
-    expect(() => c.setReferences(), 'does not check lost ref').throw();
+    expect(() => c.populate(), 'does not check lost ref').throw();
   });
   
   it('Set wrong ref', () => {
@@ -62,7 +62,7 @@ describe('Check setReferences() for Reaction', () => {
       id: 'def',
       space: 'one'
     });
-    expect(() => c.setReferences()).throw();
+    expect(() => c.populate()).throw();
   });
 
   it('Set good ref', () => {
@@ -72,7 +72,7 @@ describe('Check setReferences() for Reaction', () => {
       space: 'one',
       compartment: 'def'
     });
-    c.setReferences();
+    c.populate();
     expect(r1.actors[0]).to.have.property('targetObj');
   });
 });

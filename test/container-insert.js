@@ -29,11 +29,13 @@ describe('Unit tests for Container', () => {
       res.should.be.instanceOf(_Simple);
       c.storage.size.should.be.eql(1);
       let simple = c.storage.get('pmid1');
+      //
+      console.log(simple.space)
       simple.should.has.property('prefix', 'https://pubmed.org/');
       simple.should.has.property('suffix', '/');
       simple.should.has.property('className', 'ReferenceDefinition');
       simple.should.has.property('id', 'pmid1');
-      simple.should.not.has.property('space');
+      simple.should.has.property('space', undefined);
     });
 
     it('Insert components with the same id.', () => {
@@ -50,11 +52,11 @@ describe('Unit tests for Container', () => {
       });
       let simple = c.storage.get('pmid2');
       simple.should.has.property('prefix', 'https://google.com');
-      simple.should.not.has.property('space');
+      simple.should.has.property('space', undefined);
       c.storage.size.should.be.eql(2);
     });
 
-    it('Insert unscoped components with space.', () => {
+    it('Insert components with space.', () => {
       c.insert({
         class: 'ReferenceDefinition',
         id: 'pmid4',
@@ -62,9 +64,9 @@ describe('Unit tests for Container', () => {
         prefix: 'xxx',
         suffix: '/'
       });
-      let component = c.storage.get('pmid4');
+      let component = c.storage.get('three::pmid4');
       component.should.property('prefix', 'xxx');
-      component.should.not.has.property('space');
+      component.should.has.property('space', 'three');
       c.storage.size.should.be.eql(3);
     });
 

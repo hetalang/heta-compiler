@@ -97,7 +97,7 @@ class Container {
     return this.storage.get(index);
   }
   /*
-    The same as select() but search in namespace and globally
+    The same as select() but search in namespace then globally
   */
   softSelect(q = {}){
     let tryDirectly = this.select(q);
@@ -119,13 +119,149 @@ class Container {
   }
   toQArr(){
     let qArr = [...this.storage]
-      .map((obj) => obj[1].toQ());
+      .map((obj) => obj[1].toQ())
+      .filter((x) => !x.isVirtual);
     return qArr;
   }
   get length(){
     return this.storage.size;
   }
-  getPopulation(targetSpace, skipMathChecking=false){
+  /* version WITH VIRTUALS
+    1. check all components for good references recursively
+    2. clone global referenced components as virtual
+    3. if lost reference than error
+    4. repeat 2-4 recursively
+  */
+  pop(component, skipErrors = false){ // check, set references and clone global references to local virtual components
+    // checking argument may be good idea
+    
+    let messages = []; // messages for reference errors
+    
+    const iterator = (item, path, rule) => {
+      let target = this.softSelect({
+        id: _.get(component, path), 
+        space: component.space
+      });
+
+      if(!target){
+        throw new IndexedHetaError(component.indexObj, `Property "${path}" has lost reference "${_.get(component, path)}".`);
+      }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
+        throw new IndexedHetaError(component.indexObj, `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
+      }else{
+        if(component.space !== target.space){ // if local -> global
+          // clone component with another space
+          let q = target.toQ();
+          let selectedClass = this.classes[q.class];
+          target = (new selectedClass({id: target.id, space: component.space})).merge(q);
+          target.isVirtual = true;
+          this.storage.set(target.index, target);
+          // pop dependencies of virtual recursively
+          this.pop(target);
+        }
+        // set direct ref
+        if(rule.setTarget) _.set(component, path + 'Obj', target);
+        // add back references for Process XXX: ugly solution
+        if(component.instanceOf('Process')){
+          target.backReferences.push({
+            process: component.id,
+            _process_: component,
+            stoichiometry: item.stoichiometry
+          });
+        }
+      }
+    };
+
+    // check requirements
+    let req = component.constructor.requirements();
+    _.each(req, (rule, prop) => { // iterates through rules
+      // required: true
+      if(rule.required && !_.has(component, prop)){
+        throw new IndexedHetaError(component.indexObj, `No required "${prop}" property for ${component.className}.`);
+      }
+      // isReference: true + className
+      if(rule.isReference && _.has(component, prop)){
+        if(rule.isArray){ // iterates through array
+          _.get(component, prop).forEach((item, i) => {
+            let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
+            iterator(item, fullPath, rule);
+          });
+        }else{
+          let item = _.get(component, prop);
+          let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
+          iterator(item, fullPath, rule);
+        }
+      }
+    });
+    
+    // check output refs in SimpleTasks XXX: it seems to be working but ugly and without iterativity
+    if(component instanceof SimpleTask && component.subtasks){
+      component.subtasks.forEach((sub) => { // iterate through subtasks
+        sub.output.forEach((out) => { // itrate through record refs
+          let _record_ = this.select({id: out, space: component.space});
+          if(!_record_){
+            let msg = `Property "output" has lost reference for "${out}".`;
+            throw new IndexedHetaError(component.indexObj, msg);
+          }else if(_record_ instanceof Record){
+            // do not attach
+          }else{
+            let msg = `"output" prop must be reffered to Record but now on ${_record_.className}.`;
+            throw new IndexedHetaError(component.indexObj, msg);
+          }
+        });
+      });
+    }
+    
+    // check math expression refs
+    if(component instanceof Record && component.assignments){
+      _.each(component.assignments, (mathExpr, key) => {
+        component
+          .dependOn(key)
+          .forEach((id) => {
+            let target = this.softSelect({
+              id: id, 
+              space: component.space
+            });
+
+            if(!target){
+              messages.push(`Component "${id}" is not found in space "${component.space}" or in global as expected in expression\n`
+                    + `${component.index} [${key}]= ${mathExpr.expr};`);
+            }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
+              messages.push(`Component "${id}" is not a Const or Record class as expected in expression\n`
+                + `${component.index} [${key}]= ${mathExpr.expr};`);
+            }else{
+              if(component.space !== target.space){ // if local -> global
+                // clone component with another space
+                let q = target.toQ();
+                let selectedClass = this.classes[q.class];
+                target = (new selectedClass({id: target.id, space: component.space})).merge(q);
+                target.isVirtual = true;
+                this.storage.set(target.index, target);
+                // pop dependencies of virtual recursively
+                this.pop(target);
+              }
+            }
+          });
+      });
+    }
+
+    let msg = 'References error in expressions:\n' 
+      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
+    if(messages.length>0 && !skipErrors){
+      throw new Error(msg);
+    }else if(messages.length>0 && skipErrors){
+      console.log(msg);
+    }
+
+    return this;
+  }
+  // check all components and add references
+  populate(skipErrors = false){
+    [...this.storage].map((x) => x[1])
+      .forEach((component) => this.pop(component, skipErrors)); // iterates all components
+
+    return this;
+  }
+  getPopulation(targetSpace){
     // argument checking
     if(targetSpace===undefined || typeof targetSpace!=='string'){
       throw new TypeError('targetSpace must be string');
@@ -135,112 +271,11 @@ class Container {
       .map((x) => x[1]);
     let population = new XArray(...children);
 
-    // add Const to population
-    let messages = []; // messages for reference errors
-    population
-      .selectByInstanceOf('Record')
-      .filter((record) => record.assignments)
-      .forEach((record) => {
-        _.keys(record.assignments)
-          .forEach((key) => {
-            let expr = record.assignments[key].expr;
-            let deps = record.dependOn(key);
-            deps.forEach((id, i) => {
-              let _component_ = population.getById(id);
-              if(!_component_){ // component inside space is not found
-                let _global_ = this.storage.get(id);
-                if(!_global_){
-                  if(!skipMathChecking) {
-                    messages.push(`Component "${id}" is not found in space "${record.space}" or in global as expected in expression\n`
-                      + `${record.id}$${record.space} [${key}]= ${expr};`);
-                  }
-                }else if(!(_global_ instanceof Const)){
-                  messages.push(`Component "${id}" is not a Const class as expected in expression\n`
-                    + `${record.id}$${record.space} [${key}]= ${expr};`);
-                }else{
-                  population.push(_global_);
-                }
-              }else if(!(_component_ instanceof Record) && !(_component_ instanceof Const)){
-                messages.push(`Component "${id}$${record.space}" is not a Record class as expected in expression\n`
-                  + `${record.id}$${record.space} [${key}]= ${expr};`);
-              }
-            });
-          });
-      });
-    if(messages.length>0){
-      throw new Error('References error in expressions:\n' + messages.map((m, i) => `(${i}) `+ m).join('\n\n'));
-    }
-
     return population;
-  }
-  setReferences(){
-    [...this.storage].map((x) => x[1])
-      .forEach((x) => { // iterates all components
-        let req = x.constructor.requirements();
-        _.each(req, (rule, prop) => { // iterates through rules
-          // required: true
-          if(rule.required && !_.has(x, prop)){
-            throw new IndexedHetaError(x.indexObj, `No "${prop}" property for ${x.className}.`);
-          }
-          // isReference: true + className
-          if(rule.isReference && _.has(x, prop)){
-            const iterator = (item, path) => {
-              let target = this.select({id: _.get(x, path), space: x.space});
-              if(!target){
-                throw new IndexedHetaError(x.indexObj, `Property "${path}" has lost reference "${_.get(x, path)}".`);
-              }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
-                throw new IndexedHetaError(x.indexObj, `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
-              }else if(rule.setTarget){
-                _.set(x, path + 'Obj', target);
-                // add back references for Process XXX: ugly solution
-                if(x.instanceOf('Process')){
-                  target.backReferences.push({
-                    process: x.id,
-                    _process_: x,
-                    stoichiometry: item.stoichiometry
-                  });
-                }
-              }
-            };
-            if(rule.isArray){ // iterates through array
-              _.get(x, prop).forEach((item, i) => { 
-                let fullPath = `${prop}[${i}].${rule.path || ''}`;
-                iterator(item, fullPath);
-              });
-            }else{
-              let fullPath = prop + (rule.path || '');
-              iterator(_.get(x, prop), fullPath);
-            }
-          }
-        });
-      });
-
-    // check output refs in SimpleTasks XXX: it seems to be working but ugly
-    [...this.storage].map((x) => x[1])
-      .filter((x) => x instanceof SimpleTask && x.subtasks)
-      .forEach((x) => {
-        x.subtasks.forEach((sub) => { // iterate through subtasks
-          sub.output.forEach((out) => { // itrate through record refs
-            let _record_ = this.select({id: out, space: x.space});
-            if(!_record_){
-              let msg = `Property "output" has lost reference for "${out}".`;
-              throw new IndexedHetaError(x.indexObj, msg);
-            }else if(_record_ instanceof Record){
-              // do not attach
-            }else{
-              let msg = `"output" prop must be reffered to Record but now on ${_record_.className}.`;
-              throw new IndexedHetaError(x.indexObj, msg);
-            }
-          });
-        });
-      });
-
-    return this;
   }
 }
 
 Container.prototype.classes = {
-  // scoped classes
   Record,
   Compartment,
   Species,
@@ -249,7 +284,6 @@ Container.prototype.classes = {
   ContinuousSwitcher,
   TimeSwitcher,
   SimpleTask,
-  // unscoped classes
   ReferenceDefinition,
   UnitDefinition,
   Page,

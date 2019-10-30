@@ -7,10 +7,20 @@ const _ = require('lodash');
   Abstract class _Simple
 */
 class _Simple {
-  constructor(q = {}){
-    if(!q.id || (typeof q.id !== 'string'))
+  constructor(q = {}){ // q must be in form {id: <string>} or {id: <string>, space: <string>}
+    if(q.id && (typeof q.id === 'string')){
+      this._id = q.id;
+    }else{
       throw new TypeError('Wrong index ' + JSON.stringify({id: q.id}));
-    this._id = q.id;
+    }
+    if(q.space){
+      if(typeof q.space === 'string'){
+        this._space = q.space;
+      }else{
+        throw new TypeError('Wrong index, space should be string, but get ' + q.space);
+      }
+    }
+
     this.tags = [];
     this.aux = {};
   }
@@ -27,6 +37,9 @@ class _Simple {
   get id(){
     return this._id;
   }
+  get space(){
+    return this._space;
+  }
   static get schemaName(){
     return this.name + 'P';
   }
@@ -34,14 +47,24 @@ class _Simple {
     return this.constructor.name;
   }
   get index(){
-    return this.id;
+    if(this._space){
+      return this._space + '::' + this._id;
+    }else{
+      return this.id;
+    }
   }
   get indexObj(){
-    return {id: this.id};
+    if(this._space){
+      return { id: this._id, space: this._space };
+    }else{
+      return { id: this._id };
+    }
   }
+  /*
   clone(){ // creates copy of element TODO: not tested
     return _.clone(this);
   }
+  */
   get notesMdTree(){
     if(this.notes){
       return markdown.parse(this.notes);
@@ -71,11 +94,13 @@ class _Simple {
   toQ(){
     let res = {};
     res.class = this.className;
-    res.id = this.id;
+    res.id = this._id;
+    if(this._space) res.space = this._space;
     if(this.title) res.title = this.title;
     if(this.notes) res.notes = this.notes;
     if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
     if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
+    if(this.isVirtual) res.isVirtual = this.isVirtual;
 
     return res;
   }

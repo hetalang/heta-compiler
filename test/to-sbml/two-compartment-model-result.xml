@@ -114,7 +114,7 @@
         constant="true"
         value="10"
         units="umole"
-        metaid="a0_0"
+        metaid="two_comp::a0_0"
         >
         
       </parameter>
@@ -124,7 +124,7 @@
         constant="true"
         value="0.01"
         units="__h"
-        metaid="kabs"
+        metaid="two_comp::kabs"
         >
         
       </parameter>
@@ -134,7 +134,7 @@
         constant="true"
         value="0.01"
         units="__h"
-        metaid="kdiff"
+        metaid="two_comp::kdiff"
         >
         
       </parameter>
@@ -144,7 +144,7 @@
         constant="true"
         value="2.2"
         units="m2"
-        metaid="PS"
+        metaid="two_comp::PS"
         >
         
       </parameter>
@@ -154,7 +154,7 @@
         constant="true"
         value="0.00001"
         units="__h"
-        metaid="kel"
+        metaid="two_comp::kel"
         >
         
       </parameter>

@@ -24,8 +24,7 @@ describe('Create SBML.', () => {
   it('First model', () => {
     let c = (new Container)
       .loadMany(firstModel)
-      .setReferences()
-      //.setReferences2();
+      .populate(true);
     let text = c.select({id: 'sbml'})
       .do();
     // fs.writeFileSync('result.xml', text);
@@ -36,8 +35,7 @@ describe('Create SBML.', () => {
   it('Compartment model', () => {
     let c = (new Container)
       .loadMany(compartmentModel)
-      .setReferences()
-      //.setReferences2();
+      .populate();
     let text = c.select({id: 'sbml'})
       .do();
 
