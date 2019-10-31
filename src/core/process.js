@@ -35,16 +35,15 @@ class Process extends Record {
 
     return res;
   }
-  static _requirements(){
-    return {
-      actors: { 
-        required: false, 
-        isArray: true, path: 'target', 
-        isReference: true, targetClass: 'Record', setTarget: true 
-      }
-    };
-  }
 }
+
+Process._requirements = {
+  actors: { 
+    required: false, 
+    isArray: true, path: 'target', 
+    isReference: true, targetClass: 'Record', setTarget: true 
+  }
+};
 
 class _Effector {
   constructor(q = {}){

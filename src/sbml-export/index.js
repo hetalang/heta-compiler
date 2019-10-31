@@ -44,15 +44,16 @@ class SBMLExport extends _Export{
 
     return res;
   }
-  static _requirements(){
-    return {
-      model: {
-        required: true
-      }
-    };
-  }
 }
+
+SBMLExport._requirements = {
+  model: {
+    required: true
+  }
+};
 
 Container.prototype.classes.SBMLExport = SBMLExport;
 
-module.exports = { SBMLExport };
+module.exports = {
+  SBMLExport
+};

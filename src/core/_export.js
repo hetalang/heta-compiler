@@ -17,14 +17,13 @@ class _Export extends _Simple{
     let res = super.toQ();
     return res;
   }
-  static _requirements(){
-    return {
-      defaultTask: { 
-        required: false,
-        isReference: true, targetClass: 'SimpleTask', setTarget: true 
-      }
-    };
-  }
 }
+
+_Export._requirements = {
+  defaultTask: { 
+    required: false,
+    isReference: true, targetClass: 'SimpleTask', setTarget: true 
+  }
+};
 
 module.exports = { _Export };

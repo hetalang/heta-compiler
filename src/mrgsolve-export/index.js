@@ -89,15 +89,16 @@ class MrgsolveExport extends _Export{
 
     return res;
   }
-  static _requirements(){
-    return {
-      model: {
-        required: true
-      }
-    };
-  }
 }
+
+MrgsolveExport._requirements = {
+  model: {
+    required: true
+  }
+};
 
 Container.prototype.classes.MrgsolveExport = MrgsolveExport;
 
-module.exports = { MrgsolveExport };
+module.exports = {
+  MrgsolveExport
+};

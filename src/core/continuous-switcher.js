@@ -14,12 +14,14 @@ class ContinuousSwitcher extends _Switcher {
     res.condition = this.condition;
     return res;
   }
-  static _requirements(){
-    return {
-      condition: {required: true, isReference: true, class: 'Record', setTarget: false}
-    };
-  }
 }
+
+ContinuousSwitcher._requirements = {
+  condition: {
+    required: true, 
+    isReference: true, class: 'Record', setTarget: false
+  }
+};
 
 module.exports = {
   ContinuousSwitcher

@@ -248,8 +248,6 @@ class Container {
       + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
     if(messages.length>0 && !skipErrors){
       throw new Error(msg);
-    }else if(messages.length>0 && skipErrors){
-      console.log(msg);
     }
 
     return this;

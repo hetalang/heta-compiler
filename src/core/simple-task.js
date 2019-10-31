@@ -43,14 +43,16 @@ class SimpleTask extends _Simple {
     if(this.tspan) res.tspan = _.cloneDeep(this.tspan);
     return res;
   }
-  static _requirements(){
-    return {
-      type: {required: true, isReference: false},
-      // temporaly excluded because cannot analyse arrays of objects
-      //'subtasks.output': {required: true, isArray: true, isReference: true, class: 'Record'}
-    };
-  }
 }
+
+SimpleTask._requirements = {
+  type: {
+    required: true, 
+    isReference: false
+  },
+  // temporaly excluded because cannot analyse arrays of objects
+  //'subtasks.output': {required: true, isArray: true, isReference: true, class: 'Record'}
+};
 
 class Subtask {
   constructor(q={}){

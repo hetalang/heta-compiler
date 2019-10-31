@@ -21,15 +21,6 @@ class Species extends Record {
     if(this.isAmount) res.isAmount = this.isAmount;
     return res;
   }
-  static _requirements(){
-    return {
-      compartment: {
-        required: true,
-        isArray: false,
-        isReference: true, targetClass: 'Compartment', setTarget: true 
-      }
-    };
-  }
   unitsSBML(){
     let compartmentUnits = _.get(this, 'compartmentObj.units');
     if(compartmentUnits!==undefined && this.units!==undefined && !this.isAmount){
@@ -50,6 +41,14 @@ class Species extends Record {
     }
   }
 }
+
+Species._requirements = {
+  compartment: {
+    required: true,
+    isArray: false,
+    isReference: true, targetClass: 'Compartment', setTarget: true 
+  }
+};
 
 module.exports = {
   Species

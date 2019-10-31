@@ -35,20 +35,19 @@ class Reaction extends Process {
 
     return res;
   }
-  static _requirements(){
-    return {
-      actors: { 
-        required: false, 
-        isArray: true, path: 'target', 
-        isReference: true, targetClass: 'Species', setTarget: true 
-      },
-      modifiers: {
-        required: false, 
-        isArray: true, path: 'target', 
-        isReference: true, class: 'Species', setTarget: true }
-    };
-  }
 }
+
+Reaction._requirements = {
+  actors: { 
+    required: false, 
+    isArray: true, path: 'target', 
+    isReference: true, targetClass: 'Species', setTarget: true 
+  },
+  modifiers: {
+    required: false, 
+    isArray: true, path: 'target', 
+    isReference: true, class: 'Species', setTarget: true }
+};
 
 class Modifier extends _Effector {
 }

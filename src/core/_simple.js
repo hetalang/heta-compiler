@@ -104,17 +104,14 @@ class _Simple {
 
     return res;
   }
-  static _requirements(){
-    return {};
-  }
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
   static requirements(){
     if(this.name === '_Simple'){
-      return this._requirements();
+      return this._requirements;
     }else if(this.hasOwnProperty('_requirements')){
       let deeper = this.requirements.call(this.__proto__);
-      return Object.assign({}, deeper, this._requirements());
+      return Object.assign({}, deeper, this._requirements);
     }else{
       let deeper = this.requirements.call(this.__proto__);
       return deeper;
@@ -131,6 +128,8 @@ class _Simple {
     }
   }
 }
+
+_Simple._requirements = {};
 
 module.exports = {
   _Simple

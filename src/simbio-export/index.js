@@ -44,15 +44,16 @@ class SimbioExport extends _Export{
 
     return res;
   }
-  static _requirements(){
-    return {
-      model: {
-        required: true
-      }
-    };
-  }
 }
+
+SimbioExport._requirements = {
+  model: {
+    required: true
+  }
+};
 
 Container.prototype.classes.SimbioExport = SimbioExport;
 
-module.exports = { SimbioExport };
+module.exports = {
+  SimbioExport
+};

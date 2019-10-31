@@ -170,15 +170,16 @@ class SLVExport extends _Export{
     
     return res;
   }
-  static _requirements(){
-    return {
-      model: {
-        required: true
-      }
-    };
-  }
 }
+
+SLVExport._requirements = {
+  model: {
+    required: true
+  }
+};
 
 Container.prototype.classes.SLVExport = SLVExport;
 
-module.exports = { SLVExport };
+module.exports = {
+  SLVExport
+};
