@@ -35,12 +35,6 @@
   actors:
     - {target: S, stoichiometry: -1}
     - {target: P, stoichiometry: 1}
-- class: Const
-  id: Vmax
-  num: 0.1
-- class: Const
-  id: Km
-  num: 2.5
 - class: SBMLExport
   id: mm_sbml
   title: Exported mm model
@@ -61,3 +55,13 @@
   id: mm_mrg
   title: export to mrgsolve
   space: mm
+- class: Const
+  id: Vmax
+  num: 0.1
+  space: mm
+  isVirtual: true
+- class: Const
+  id: Km
+  num: 2.5
+  space: mm
+  isVirtual: true

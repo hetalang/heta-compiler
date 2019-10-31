@@ -10,11 +10,14 @@ class YAMLExport extends _Export {
     return 'yml';
   }
   do(){
-    let qArr = this._container.toQArr();
-    let order = ['class', 'id', 'title', 'notes', 'tags', 'aux'];
+    let qArr = this._container
+      .getPopulation(this.space)
+      .map((x) => x.toQ());
+
+    let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);
     let yaml = safeDump(qArr, {
-      skipInvalid: true, // TOFIX:
+      skipInvalid: true, // TOFIX: ???
       flowLevel: 3,
       sortKeys: compareFunction,
       styles: {}

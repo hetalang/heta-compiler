@@ -9,7 +9,9 @@ class JSONExport extends _Export{
     return 'json';
   }
   do(){
-    let qArr = this._container.toQArr();
+    let qArr = this._container
+      .getPopulation(this.space)
+      .map((x) => x.toQ());
     
     return JSON.stringify(qArr, null, 2);
   }
