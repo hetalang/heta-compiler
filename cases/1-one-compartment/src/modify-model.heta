@@ -18,8 +18,8 @@ namespace one_comp_saturation begin
   vel := Vmax*s1*comp1/(Km + s1);
 end
 
-//sbml_non_saturable @SBMLExport {model: one_comp};
-//sbml_saturable @SBMLExport {model: one_comp_saturation};
+//one_comp::sbml_non_saturable @SBMLExport;
+//one_comp_saturation::sbml_saturable @SBMLExport;
 json @JSONExport;
-slv_non_saturable @SLVExport { model: one_comp };
-slv_saturable @SLVExport { model: one_comp_saturation };
+one_comp::slv_non_saturable @SLVExport;
+one_comp_saturation::slv_saturable @SLVExport;

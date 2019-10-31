@@ -110,7 +110,7 @@
   {
     "class": "SBMLExport",
     "id": "sbml",
-    "model": "first",
+    "space": "first",
     "skipMathChecking": true,
     "title": "Model title",
     "notes": "Model *notes*"

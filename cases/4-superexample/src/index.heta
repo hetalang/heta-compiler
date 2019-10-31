@@ -61,25 +61,14 @@ block @Const begin
 end
 pg2 @Page {content: this is content};
 
-mod1_sbml @SBMLExport {
-  model: mod1
-};
+mod1::mod1_sbml @SBMLExport;
 
-mod1_simbio @SimbioExport {
-  model: mod1
-};
+mod1::mod1_simbio @SimbioExport;
 
-json @JSONExport {
-};
+mod1::json @JSONExport;
 
-yaml @YAMLExport {
-};
+mod1::yaml @YAMLExport;
 
-mod1_slv @SLVExport {
-  model: mod1,
-  eventsOff: false
-};
+mod1::mod1_slv @SLVExport { eventsOff: false };
 
-mrg_mod1 @MrgsolveExport {
-  model: mod1
-};
+mod1::mrg_mod1 @MrgsolveExport;

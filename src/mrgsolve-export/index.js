@@ -8,9 +8,6 @@ const _ = require('lodash');
 class MrgsolveExport extends _Export{
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q.model){
-      this.model = q.model;
-    }
 
     return this;
   }
@@ -21,12 +18,12 @@ class MrgsolveExport extends _Export{
     return 'cpp';
   }
   do(){
-    this._model_ = this._getMrgsolveImage(this.model);
+    this._model_ = this._getMrgsolveImage(this.space);
     return this.getMrgsolveCode();
   }
   _getMrgsolveImage(targetSpace){
     let model = {
-      population: this._container.getPopulation(targetSpace, false)
+      population: this._container.getPopulation(targetSpace)
     };
 
     // set dynamic variables
@@ -85,17 +82,12 @@ class MrgsolveExport extends _Export{
   }
   toQ(){
     let res = super.toQ();
-    if(this.model) res.model = this.model;
 
     return res;
   }
 }
 
-MrgsolveExport._requirements = {
-  model: {
-    required: true
-  }
-};
+MrgsolveExport._requirements = { };
 
 Container.prototype.classes.MrgsolveExport = MrgsolveExport;
 

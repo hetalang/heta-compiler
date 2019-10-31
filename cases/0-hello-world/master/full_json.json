@@ -78,30 +78,32 @@
     "class": "SBMLExport",
     "id": "mm_sbml",
     "title": "Exported mm model",
-    "model": "mm"
+    "space": "mm"
   },
   {
     "class": "SimbioExport",
     "id": "mm_simbio",
-    "model": "mm"
+    "space": "mm"
   },
   {
     "class": "JSONExport",
-    "id": "full_json"
+    "id": "full_json",
+    "space": "mm"
   },
   {
     "class": "YAMLExport",
-    "id": "full_yaml"
+    "id": "full_yaml",
+    "space": "mm"
   },
   {
     "class": "SLVExport",
     "id": "mm_slv",
-    "model": "mm"
+    "space": "mm"
   },
   {
     "class": "MrgsolveExport",
     "id": "mm_mrg",
     "title": "export to mrgsolve",
-    "model": "mm"
+    "space": "mm"
   }
 ]

@@ -7,10 +7,6 @@ const nunjucks = require('../nunjucks-env');
 class SimbioExport extends _Export{
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q.model)
-      this.model = q.model;
-    if(q.skipMathChecking)
-      this.skipMathChecking = q.skipMathChecking;
 
     return this;
   }
@@ -21,12 +17,12 @@ class SimbioExport extends _Export{
     return 'm';
   }
   do(){
-    this._model_ = this._getSimbioImage(this.model);
+    this._model_ = this._getSimbioImage(this.space);
     return this.getSimbioCode();
   }
   _getSimbioImage(targetSpace){
     let model = {
-      model: this.model,
+      model: this.space,
       population: this._container.getPopulation(targetSpace, this.skipMathChecking)
     };
     return model;
@@ -39,18 +35,12 @@ class SimbioExport extends _Export{
   }
   toQ(){
     let res = super.toQ();
-    if(this.model) res.model = this.model;
-    if(this.skipMathChecking) res.skipMathChecking = this.skipMathChecking;
 
     return res;
   }
 }
 
-SimbioExport._requirements = {
-  model: {
-    required: true
-  }
-};
+SimbioExport._requirements = { };
 
 Container.prototype.classes.SimbioExport = SimbioExport;
 

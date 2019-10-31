@@ -25,7 +25,7 @@
   },
   {
     "class": "SBMLExport", "id": "sbml",
-    "model": "two_comp"
+    "space": "two_comp"
   },
   {
     "class": "Compartment", "id": "c0", "space": "two_comp",

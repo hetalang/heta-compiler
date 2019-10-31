@@ -25,7 +25,7 @@ describe('Create SBML.', () => {
     let c = (new Container)
       .loadMany(firstModel)
       .populate(true);
-    let text = c.select({id: 'sbml'})
+    let text = c.select({id: 'sbml', space: 'first'})
       .do();
     // fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
@@ -36,7 +36,7 @@ describe('Create SBML.', () => {
     let c = (new Container)
       .loadMany(compartmentModel)
       .populate();
-    let text = c.select({id: 'sbml'})
+    let text = c.select({id: 'sbml', space: 'two_comp'})
       .do();
 
     // fs.writeFileSync('result.xml', text);

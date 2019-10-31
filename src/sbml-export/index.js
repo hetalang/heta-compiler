@@ -7,11 +7,6 @@ const nunjucks = require('../nunjucks-env');
 class SBMLExport extends _Export{
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q.model){
-      this.model = q.model;
-    }
-    if(q.skipMathChecking)
-      this.skipMathChecking = q.skipMathChecking;
 
     return this;
   }
@@ -22,7 +17,7 @@ class SBMLExport extends _Export{
     return 'xml';
   }
   do(){
-    this._model_ = this._getSBMLImage(this.model);
+    this._model_ = this._getSBMLImage(this.space);
     return this.getSBMLCode();
   }
   _getSBMLImage(targetSpace){
@@ -39,18 +34,12 @@ class SBMLExport extends _Export{
   }
   toQ(){
     let res = super.toQ();
-    if(this.model) res.model = this.model;
-    if(this.skipMathChecking) res.skipMathChecking = this.skipMathChecking;
 
     return res;
   }
 }
 
-SBMLExport._requirements = {
-  model: {
-    required: true
-  }
-};
+SBMLExport._requirements = { };
 
 Container.prototype.classes.SBMLExport = SBMLExport;
 

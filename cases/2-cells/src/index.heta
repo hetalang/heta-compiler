@@ -45,10 +45,11 @@ namespace invivo begin
     ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
-yaml @YAMLExport;
-slv_invitro @SLVExport {model: invitro};
-slv_invivo_slv @SLVExport {model: invivo};
-mrg_invitro @MrgsolveExport {model: invitro};
-mrg_invivo @MrgsolveExport {model: invivo};
-smbl_invitro @SBMLExport {model: invitro};
-sbml_invivo @SBMLExport {model: invivo};
+invitro::yaml @YAMLExport;
+invivo::yaml @YAMLExport;
+invitro::slv_invitro @SLVExport;
+invivo::slv_invivo_slv @SLVExport;
+invitro::mrg_invitro @MrgsolveExport;
+invivo::mrg_invivo @MrgsolveExport;
+invitro::smbl_invitro @SBMLExport;
+invivo::sbml_invivo @SBMLExport;

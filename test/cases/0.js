@@ -38,7 +38,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @SBMLExport, check and compare.', () => {
-    let sbml_export = b.container.select({id: 'mm_sbml'});
+    let sbml_export = b.container.select({id: 'mm_sbml', space: 'mm'});
     let code = sbml_export.do();
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);
@@ -46,7 +46,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @MrgsolveExport, check and compare.', () => {
-    let mm_mrg = b.container.select({id: 'mm_mrg'});
+    let mm_mrg = b.container.select({id: 'mm_mrg', space: 'mm'});
     let code = mm_mrg.do();
     let filename = './diagnostics/0/mm_mrg.cpp';
     fs.outputFileSync(filename, code);
@@ -55,7 +55,7 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.classes.JSONExport;
-    let json_export = new JSONExport({id: 'json_export'});
+    let json_export = new JSONExport({id: 'json_export', space: 'mm'});
     json_export._container = b.container;
 
     let code = json_export.do();
@@ -66,7 +66,7 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @YAMLExport, check and compare.', () => {
     const YAMLExport = b.container.classes.YAMLExport;
-    let yaml_export = new YAMLExport({id: 'yaml_export'});
+    let yaml_export = new YAMLExport({id: 'yaml_export', space: 'mm'});
     yaml_export._container = b.container;
 
     let code = yaml_export.do();
@@ -77,7 +77,7 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @SLVExport, check and compare.', () => {
     const SLVExport = b.container.classes.SLVExport;
-    let slv_export = (new SLVExport({id: 'slv_export'})).merge({model: 'mm'});
+    let slv_export = (new SLVExport({id: 'slv_export', space: 'mm'}));
     slv_export._container = b.container;
 
     let code = slv_export.do();

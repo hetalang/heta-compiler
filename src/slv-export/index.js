@@ -8,8 +8,6 @@ const _ = require('lodash');
 class SLVExport extends _Export{
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
-    if(q.model)
-      this.model = q.model;
     
     if(q.eventsOff) this.eventsOff = q.eventsOff;
     if(q.defaultTask)
@@ -29,7 +27,7 @@ class SLVExport extends _Export{
    * @return {string} Text code of exported format.
    */
   do(){
-    this._model_ = this._getSLVImage(this.model);
+    this._model_ = this._getSLVImage(this.space);
 
     return this.getSLVCode();
   }
@@ -164,7 +162,6 @@ class SLVExport extends _Export{
   }
   toQ(){
     let res = super.toQ();
-    if(this.model) res.model = this.model;
     if(this.eventsOff) res.eventsOff = this.eventsOff;
     if(this.defaultTask) res.defaultTask = this.defaultTask;
     
@@ -172,11 +169,7 @@ class SLVExport extends _Export{
   }
 }
 
-SLVExport._requirements = {
-  model: {
-    required: true
-  }
-};
+SLVExport._requirements = { };
 
 Container.prototype.classes.SLVExport = SLVExport;
 
