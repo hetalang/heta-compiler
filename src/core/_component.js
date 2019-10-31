@@ -60,6 +60,9 @@ class _Component {
       return { id: this._id };
     }
   }
+  get isGlobal(){
+    return this._space===undefined;
+  }
   /*
   clone(){ // creates copy of element TODO: not tested
     return _.clone(this);

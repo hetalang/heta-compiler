@@ -10,9 +10,13 @@ class YAMLExport extends _Export {
     return 'yml';
   }
   do(){
-    let qArr = this._container
-      .getPopulation(this.space)
-      .map((x) => x.toQ());
+    if(this.isGlobal){
+      var qArr = this.toQArr();
+    }else{
+      qArr = this._container
+        .getPopulation(this.space)
+        .map((x) => x.toQ());
+    }
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);
