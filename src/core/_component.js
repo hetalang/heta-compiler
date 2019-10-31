@@ -91,6 +91,75 @@ class _Component {
       throw new SchemaValidationError(validate.errors, this.schemaName, q);
     }
   }
+  /*
+    Checking references:
+    - check properties based on requirements(): required, find by symbol link
+    - create virtual component if local prop refferences to global component
+  */
+  bind(container, skipErrors = false){
+    if(!container) throw new TypeError('"container" argument should be set.');
+    let messages = [];
+    
+    const iterator = (item, path, rule) => {
+      let target = container.softSelect({
+        id: _.get(this, path), 
+        space: this.space
+      });
+
+      if(!target){
+        throw new IndexedHetaError(this.indexObj, `Property "${path}" has lost reference "${_.get(this, path)}".`);
+      }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
+        throw new IndexedHetaError(this.indexObj, `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
+      }else{
+        if(this.space !== target.space){ // if local -> global
+          // clone component with another space
+          let q = target.toQ();
+          let selectedClass = container.classes[q.class];
+          target = (new selectedClass({id: target.id, space: this.space})).merge(q);
+          target.isVirtual = true;
+          container.storage.set(target.index, target);
+          // pop dependencies of virtual recursively
+          target.bind(container, skipErrors);
+        }
+        // set direct ref
+        if(rule.setTarget) _.set(this, path + 'Obj', target);
+        // add back references for Process XXX: ugly solution
+        if(this.instanceOf('Process')){
+          target.backReferences.push({
+            process: this.id,
+            _process_: this,
+            stoichiometry: item.stoichiometry
+          });
+        }
+      }
+    };
+
+    // check requirements
+    let req = this.constructor.requirements();
+    _.each(req, (rule, prop) => { // iterates through rules
+      // required: true
+      if(rule.required && !_.has(this, prop)){
+        throw new IndexedHetaError(this.indexObj, `No required "${prop}" property for ${this.className}.`);
+      }
+      // isReference: true + className
+      if(rule.isReference && _.has(this, prop)){
+        if(rule.isArray){ // iterates through array
+          _.get(this, prop).forEach((item, i) => {
+            let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
+            iterator(item, fullPath, rule);
+          });
+        }else{
+          let item = _.get(this, prop);
+          let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
+          iterator(item, fullPath, rule);
+        }
+      }
+    });
+
+    let msg = 'References error in expressions:\n' 
+      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
+    if(messages.length>0 && !skipErrors) throw new Error(msg);
+  }
   toQ(){
     let res = {};
     res.class = this.className;

@@ -25,8 +25,7 @@ describe('Create SBML.', () => {
     let c = (new Container)
       .loadMany(firstModel)
       .populate(true);
-    let text = c.select({id: 'sbml', space: 'first'})
-      .do();
+    let text = c.select({id: 'sbml', space: 'first'}).do();
     // fs.writeFileSync('result.xml', text);
     text.should.xml.to.be.valid();
     text.should.xml.be.deep.equal(first_model_result);

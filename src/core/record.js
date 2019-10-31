@@ -34,6 +34,49 @@ class Record extends _Component {
 
     return this;
   }
+  bind(container, skipErrors = false){
+    super.bind(container, skipErrors);
+
+    if(!container) throw new TypeError('"container" argument should be set.');
+    let messages = [];
+    
+    // check math expression refs
+    if(this.assignments){
+      _.each(this.assignments, (mathExpr, key) => {
+        this
+          .dependOn(key)
+          .forEach((id) => {
+            let target = container.softSelect({
+              id: id, 
+              space: this.space
+            });
+
+            if(!target){
+              messages.push(`Component "${id}" is not found in space "${this.space}" or in global as expected in expression\n`
+                    + `${this.index} [${key}]= ${mathExpr.expr};`);
+            }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
+              messages.push(`Component "${id}" is not a Const or Record class as expected in expression\n`
+                + `${this.index} [${key}]= ${mathExpr.expr};`);
+            }else{
+              if(this.space !== target.space){ // if local -> global
+                // clone component with another space
+                let q = target.toQ();
+                let selectedClass = container.classes[q.class];
+                target = (new selectedClass({id: target.id, space: this.space})).merge(q);
+                target.isVirtual = true;
+                container.storage.set(target.index, target);
+                // pop dependencies of virtual recursively
+                target.bind(container, skipErrors);
+              }
+            }
+          });
+      });
+    }
+
+    let msg = 'References error in expressions:\n' 
+      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
+    if(messages.length>0 && !skipErrors) throw new Error(msg);
+  }
   toQ(){
     let res = super.toQ();
     if(this.assignments){

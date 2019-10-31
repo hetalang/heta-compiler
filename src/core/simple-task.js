@@ -1,5 +1,6 @@
 const { _Component } = require('./_component');
 const _ = require('lodash');
+const { IndexedHetaError, SchemaValidationError } = require('../heta-error');
 
 class SimpleTask extends _Component {
   merge(q={}, skipChecking){
@@ -33,6 +34,34 @@ class SimpleTask extends _Component {
     this.solver = _.defaultsDeep(q.solver, defaultSolver);
 
     return this;
+  }
+  bind(container, skipErrors = false){
+    super.bind(container, skipErrors);
+
+    if(!container) throw new TypeError('"container" argument should be set.');
+    let messages = [];
+
+    // check output refs in SimpleTasks XXX: it seems to be working but ugly and without iterativity
+    if(this instanceof SimpleTask && this.subtasks){
+      this.subtasks.forEach((sub) => { // iterate through subtasks
+        sub.output.forEach((out) => { // itrate through record refs
+          let _record_ = container.select({id: out, space: this.space});
+          if(!_record_){
+            let msg = `Property "output" has lost reference for "${out}".`;
+            throw new IndexedHetaError(this.indexObj, msg);
+          }else if(_record_.instanceOf('Record')){
+            // do not attach
+          }else{
+            let msg = `"output" prop must be reffered to Record but now on ${_record_.className}.`;
+            throw new IndexedHetaError(this.indexObj, msg);
+          }
+        });
+      });
+    }
+
+    let msg = 'References error in expressions:\n' 
+      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
+    if(messages.length>0 && !skipErrors) throw new Error(msg);
   }
   toQ(){
     let res = super.toQ();
