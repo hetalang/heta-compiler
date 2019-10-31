@@ -3,7 +3,7 @@
 const { ContainerError, SchemaValidationError } = require('../src/heta-error');
 const Container = require('../src/container');
 const should = require('chai').should();
-const { _Simple } = require('../src/core/_simple');
+const { _Component } = require('../src/core/_component');
 
 describe('Unit tests for Container', () => {
   var c;
@@ -26,7 +26,7 @@ describe('Unit tests for Container', () => {
         prefix: 'https://pubmed.org/',
         suffix: '/'
       });
-      res.should.be.instanceOf(_Simple);
+      res.should.be.instanceOf(_Component);
       c.storage.size.should.be.eql(1);
       let simple = c.storage.get('pmid1');
       //

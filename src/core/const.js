@@ -1,8 +1,8 @@
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 
-class Const extends _Simple { // implicit extend Numeric
+class Const extends _Component { // implicit extend Numeric
   merge(q, skipChecking){
     if(!skipChecking) Const.isValid(q);
     super.merge(q, skipChecking);

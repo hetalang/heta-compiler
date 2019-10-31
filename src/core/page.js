@@ -1,6 +1,6 @@
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 
-class Page extends _Simple {
+class Page extends _Component {
   merge(q, skipChecking){
     if(!skipChecking) Page.isValid(q);
     super.merge(q, skipChecking);

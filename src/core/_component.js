@@ -4,9 +4,9 @@ const { IndexedHetaError, SchemaValidationError } = require('../heta-error');
 const _ = require('lodash');
 
 /*
-  Abstract class _Simple
+  Abstract class _Component
 */
-class _Simple {
+class _Component {
   constructor(q = {}){ // q must be in form {id: <string>} or {id: <string>, space: <string>}
     if(q.id && (typeof q.id === 'string')){
       this._id = q.id;
@@ -25,7 +25,7 @@ class _Simple {
     this.aux = {};
   }
   merge(q, skipChecking){
-    if(!skipChecking) _Simple.isValid(q);
+    if(!skipChecking) _Component.isValid(q);
 
     if(q && q.title) this.title = q.title;
     if(q && q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
@@ -107,7 +107,7 @@ class _Simple {
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
   static requirements(){
-    if(this.name === '_Simple'){
+    if(this.name === '_Component'){
       return this._requirements;
     }else if(this.hasOwnProperty('_requirements')){
       let deeper = this.requirements.call(this.__proto__);
@@ -129,8 +129,8 @@ class _Simple {
   }
 }
 
-_Simple._requirements = {};
+_Component._requirements = {};
 
 module.exports = {
-  _Simple
+  _Component
 };

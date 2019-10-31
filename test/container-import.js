@@ -1,7 +1,7 @@
 /* global describe, it */
 const Container = require('../src/container');
 require('chai').should();
-const { _Simple } = require('../src/core/_simple');
+const { _Component } = require('../src/core/_component');
 
 describe('Unit tests for Container load', () => {
   var c;
@@ -24,7 +24,7 @@ describe('Unit tests for Container load', () => {
       prefix: 'https://pubmed.org/',
       suffix: '/'
     });
-    res.should.be.instanceOf(_Simple);
+    res.should.be.instanceOf(_Component);
     c.should.be.lengthOf(1);
   });
 });

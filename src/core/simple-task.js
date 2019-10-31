@@ -1,7 +1,7 @@
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 const _ = require('lodash');
 
-class SimpleTask extends _Simple {
+class SimpleTask extends _Component {
   merge(q={}, skipChecking){
     if(!skipChecking) SimpleTask.isValid(q);
     super.merge(q, skipChecking);

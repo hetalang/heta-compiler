@@ -39,14 +39,14 @@ class Container {
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
       throw new IndexedHetaError(q, `Unknown class "${q.class}" for the element.`);
-    let simple = (new selectedClass({id: q.id, space: q.space})).merge(q);
+    let component = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
-    this.storage.set(simple.index, simple);
-    if(simple.instanceOf('_Export')) { // include parent
-      simple._container = this;
+    this.storage.set(component.index, component);
+    if(component.instanceOf('_Export')) { // include parent
+      component._container = this;
     }
 
-    return simple;
+    return component;
   }
   update(q){
     if(!q)

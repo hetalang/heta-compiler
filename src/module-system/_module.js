@@ -32,13 +32,13 @@ class _Module{
   }
   getImportElements(){
     return this.parsed
-      .filter((simple) => simple.action==='import');
+      .filter((component) => component.action==='import');
   }
   // replace relative paths by absolute ones
   updateByAbsPaths(){
     let absDirPath = path.dirname(this.filename);
     this.getImportElements()
-      .forEach((simple) => simple.source = path.resolve(absDirPath, simple.source));
+      .forEach((component) => component.source = path.resolve(absDirPath, component.source));
   }
 }
 

@@ -1,7 +1,7 @@
 const _ = require('lodash');
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 
-class UnitDefinition extends _Simple {
+class UnitDefinition extends _Component {
   constructor(q = {}){
     super(q);
     this.components = []; // default

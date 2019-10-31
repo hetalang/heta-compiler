@@ -1,6 +1,6 @@
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 
-class _Switcher extends _Simple {
+class _Switcher extends _Component {
   merge(q, skipChecking){
     if(!skipChecking) _Switcher.isValid(q);
     super.merge(q, skipChecking);
@@ -13,4 +13,6 @@ class _Switcher extends _Simple {
   }
 }
 
-module.exports = { _Switcher };
+module.exports = {
+  _Switcher
+};

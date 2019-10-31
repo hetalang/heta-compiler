@@ -1,6 +1,6 @@
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 
-class _Export extends _Simple{
+class _Export extends _Component{
   merge(q, skipChecking){
     if(!skipChecking) _Export.isValid(q);
     super.merge(q, skipChecking);

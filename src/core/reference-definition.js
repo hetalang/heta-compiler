@@ -1,8 +1,8 @@
 // const _ = require('lodash');
 
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 
-class ReferenceDefinition extends _Simple {
+class ReferenceDefinition extends _Component {
   merge(q, skipChecking){
     if(!skipChecking) ReferenceDefinition.isValid(q);
     super.merge(q, skipChecking);

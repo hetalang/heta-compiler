@@ -1,11 +1,11 @@
-const { _Simple } = require('./_simple');
+const { _Component } = require('./_component');
 const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 const { IndexedHetaError } = require('../heta-error');
 
-class Record extends _Simple {
+class Record extends _Component {
   constructor(q = {}){
     super(q);
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
