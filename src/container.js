@@ -261,13 +261,13 @@ class Container {
   }
   getPopulation(targetSpace){
     // argument checking
-    if(targetSpace===undefined || typeof targetSpace!=='string'){
+    if(targetSpace!==undefined && typeof targetSpace!=='string'){
       throw new TypeError('targetSpace must be string');
     }
     let children = [...this.storage]
       .filter((x) => x[1].space===targetSpace)
-      .map((x) => x[1]);
-    let population = new XArray(...children);
+      .map((x) => x[1]); // get array
+    let population = new XArray(...children); // get XArray
 
     return population;
   }

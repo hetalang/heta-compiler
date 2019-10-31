@@ -7,6 +7,7 @@ const { expect } = require('chai');
 
 describe('Test populate()', () => {
   let c; // for Container
+
   it('Creating good platform.', () => {
     c = new Container();
     c.loadMany([
@@ -22,7 +23,7 @@ describe('Test populate()', () => {
       {class: 'Record', id: 'p4', assignments: {start_: 'p1'}}, // glob + local
 
       {class: 'Compartment', id: 'comp1'}, // glob
-      {class: 'Compartment', id: 'comp2'}, // glob + virtual local OK!
+      {class: 'Compartment', id: 'comp2'}, // glob + virtual local
       {class: 'Compartment', id: 'comp1', space: 'one'},
 
       {class: 'Species', id: 's1', compartment: 'comp1'}, // glob
@@ -32,9 +33,21 @@ describe('Test populate()', () => {
     //console.log(c.storage);
     expect(c).to.have.property('length', 14);
   });
-  it('populate', () => {
+
+  it('Populate good platform.', () => {
     c.populate();
-    //console.log([...c.storage].map((x) => `${x[0]} : ${x[1].counter}`));
     expect(c).to.have.property('length', 17);
+  });
+
+  it('Get components visible for "one" namespace', () => {
+    let one = c.getPopulation('one');
+    expect(one).to.be.instanceOf(XArray);
+    expect(one).to.have.property('length', 10);
+  });
+
+  it('Get components visible for "anonimous" namespace', () => {
+    let one = c.getPopulation();
+    expect(one).to.be.instanceOf(XArray);
+    expect(one).to.have.property('length', 7);
   });
 });

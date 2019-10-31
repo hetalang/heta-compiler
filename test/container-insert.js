@@ -29,8 +29,7 @@ describe('Unit tests for Container', () => {
       res.should.be.instanceOf(_Component);
       c.storage.size.should.be.eql(1);
       let simple = c.storage.get('pmid1');
-      //
-      console.log(simple.space)
+      
       simple.should.has.property('prefix', 'https://pubmed.org/');
       simple.should.has.property('suffix', '/');
       simple.should.has.property('className', 'ReferenceDefinition');
