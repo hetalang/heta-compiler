@@ -29,7 +29,7 @@ describe('Errors in declaration.', () => {
   });
   it('Wrong version format.', () => {
     expect(() => {
-      new Builder({id: 'test', builderVersion: '0.4.0', options: {logLevel: -1}});
+      new Builder({id: 'test', builderVersion: '0.100.0', options: {logLevel: -1}});
     }).to.throw(Error);
   });
 });
