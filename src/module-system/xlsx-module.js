@@ -23,7 +23,6 @@ _Module.prototype.setXLSXModuleAsync = function(callback){
     convertExcel(
       this.filename,
       null,
-      // XXX: if scheet is not exist, then callback will not work
       // this is bag of 'excel-as-json' and not best way to repair is used
       // be carefull about sheet number in "platform.json" imports
       {sheet: i, omitEmptyFields: true},
@@ -33,7 +32,21 @@ _Module.prototype.setXLSXModuleAsync = function(callback){
           cb(err);
         }else{
           data.splice(0, options.omitRows); // remove rows
-          let dataFiltered = data.filter((x) => x.on).map((x)=>x); // ignore rows
+          let dataFiltered = data
+            .filter((x) => x.on) // ignore rows
+            .map((x) => {
+              let cleaned = _.cloneDeepWith(x, (value) => {
+                if(_.isString(value)) {
+                  return clean(value);
+                }
+                if(_.isArray(value)) {
+                  return value
+                    .map((y) => clean(y))
+                    .filter((y) => y!==''); // removes empty strings from array
+                }
+              });
+              return cleaned;
+            });
           cb(null, dataFiltered);
         }
       }
@@ -47,3 +60,10 @@ _Module.prototype.setXLSXModuleAsync = function(callback){
     }
   });
 };
+
+// remove blanks and new lines symbols
+function clean(string){
+  return _.trim(string)
+    .replace(/_x000D_\n/g, '')
+    .replace(/\r*\n+/g, '');
+}
