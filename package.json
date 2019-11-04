@@ -34,7 +34,7 @@
     "lodash": "^4.17.15",
     "markdown": "^0.5.0",
     "mathjs": "^5.10.3",
-    "mathjs-cmathml": "^0.1.3",
+    "mathjs-mathml": "^0.2.0",
     "mathjs-translate": "^0.1.4",
     "nunjucks": "^3.1.4",
     "random-id": "^1.0.3",

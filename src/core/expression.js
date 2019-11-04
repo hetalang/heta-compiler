@@ -1,8 +1,8 @@
 const math = require('mathjs');
 const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
-const mathjsCMathML = require('mathjs-cmathml');
-math.import(mathjsCMathML);
+const mathjsMathML = require('mathjs-mathml');
+math.import(mathjsMathML);
 
 class Expression {
   constructor(q = {}){ // string or object
@@ -38,8 +38,7 @@ class Expression {
   }
   toCMathML(){
     return this.exprParsed
-      .toCMathML()
-      .toString();
+      .toCMathML();
   }
   toSLVString(powTransform = 'keep'){
     if(['keep', 'operator', 'function'].indexOf(powTransform) === -1){
