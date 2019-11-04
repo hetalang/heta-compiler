@@ -7,7 +7,7 @@
     "test": "mocha test --recursive",
     "test:dev": "mocha test/container/populate.js",
     "test:cov": "nyc --reporter=lcov npm run test",
-    "test:coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test &&coveralls"
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
     "download-git-repo": "^1.1.0",
     "excel-as-json": "^2.0.2",
     "fs-extra": "^7.0.1",
-    "heta-parser": "^0.1.1",
+    "heta-parser": "^0.2.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "markdown": "^0.5.0",
