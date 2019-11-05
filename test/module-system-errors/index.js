@@ -4,21 +4,12 @@ const ModuleSystem = require('../../src/module-system');
 const path = require('path');
 
 describe('ModuleSystem for cyclic.', () => {
-  let ms;
-  it('create ModuleSystem', () => {
-    ms = new ModuleSystem();
-  });
 
-  it('Add cyclic module.', (done) => {
+  it('Add cyclic module.', async () => {
+    let ms = new ModuleSystem();
     let filepath = path.join(__dirname, './cycle-a.heta');
-    ms.addModuleDeepAsync(filepath, 'heta', {}, (err, mdl) => {
-      if(err){
-        done(err);
-      }else{
-        Object.keys(ms.moduleCollection).should.have.lengthOf(3);
-        done();
-      }
-    });
+    let mdl = await ms.addModuleDeepAsync(filepath, 'heta', {});
+    expect(Object.keys(ms.moduleCollection)).to.have.lengthOf(3);
   });
 
   it('Sort throws because it is cyclic', () => {
@@ -28,9 +19,9 @@ describe('ModuleSystem for cyclic.', () => {
 
 describe('ModuleSystem with self import.', () => {
   let ms = new ModuleSystem();
-  it('Add module.', (done) => {
+  it('Add module.', async () => {
     let filepath = path.join(__dirname, 'self-import.heta');
-    ms.addModuleDeepAsync(filepath, 'heta', {}, done);
+    await ms.addModuleDeepAsync(filepath, 'heta', {});
   });
   it('Sort throws.', () => {
     expect(() => ms.sortedPaths()).to.throw();

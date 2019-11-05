@@ -1,0 +1,170 @@
+{
+  "moduleCollection": {
+    "y:\\qs3p-js\\test\\module-system\\normal-a.heta": {
+      "filename": "y:\\qs3p-js\\test\\module-system\\normal-a.heta",
+      "type": "heta",
+      "options": {},
+      "parsed": [
+        {
+          "action": "upsert",
+          "id": "k1",
+          "space": "one",
+          "class": "Record",
+          "title": "hello world"
+        },
+        {
+          "action": "import",
+          "id": "bbb",
+          "source": "y:\\qs3p-js\\test\\module-system\\normal-b.heta",
+          "type": "heta"
+        },
+        {
+          "action": "import",
+          "id": "ccc",
+          "source": "y:\\qs3p-js\\test\\module-system\\normal-c.heta",
+          "type": "heta"
+        }
+      ]
+    },
+    "y:\\qs3p-js\\test\\module-system\\normal-b.heta": {
+      "filename": "y:\\qs3p-js\\test\\module-system\\normal-b.heta",
+      "type": "heta",
+      "options": {},
+      "parsed": [
+        {
+          "action": "upsert",
+          "id": "k2",
+          "class": "Const"
+        },
+        {
+          "action": "upsert",
+          "id": "k2",
+          "num": 1.2
+        },
+        {
+          "action": "import",
+          "id": "ccc",
+          "source": "y:\\qs3p-js\\test\\module-system\\normal-c.heta",
+          "type": "heta"
+        },
+        {
+          "action": "import",
+          "id": "ddd",
+          "source": "y:\\qs3p-js\\test\\module-system\\normal-d.json",
+          "type": "json"
+        }
+      ]
+    },
+    "y:\\qs3p-js\\test\\module-system\\normal-c.heta": {
+      "filename": "y:\\qs3p-js\\test\\module-system\\normal-c.heta",
+      "type": "heta",
+      "options": {},
+      "parsed": [
+        {
+          "action": "upsert",
+          "id": "k3",
+          "class": "Const"
+        },
+        {
+          "action": "upsert",
+          "id": "k3",
+          "num": 1.2
+        },
+        {
+          "action": "import",
+          "id": "eee",
+          "source": "y:\\qs3p-js\\test\\module-system\\normal-e.yml",
+          "type": "yml"
+        }
+      ]
+    },
+    "y:\\qs3p-js\\test\\module-system\\normal-e.yml": {
+      "filename": "y:\\qs3p-js\\test\\module-system\\normal-e.yml",
+      "type": "yml",
+      "options": {},
+      "parsed": [
+        {
+          "action": "insert",
+          "class": "Record",
+          "id": "k2",
+          "space": "one",
+          "assignments": [
+            {
+              "start_": "a*b"
+            },
+            {
+              "evt1": "k2+dose"
+            }
+          ]
+        }
+      ]
+    },
+    "y:\\qs3p-js\\test\\module-system\\normal-d.json": {
+      "filename": "y:\\qs3p-js\\test\\module-system\\normal-d.json",
+      "type": "json",
+      "options": {},
+      "parsed": [
+        {
+          "class": "Record",
+          "id": "k1",
+          "space": "one",
+          "assignments": {
+            "start_": {
+              "expr": 1.1
+            }
+          }
+        }
+      ]
+    }
+  },
+  "graph": {
+    "ins": {
+      "y:\\qs3p-js\\test\\module-system\\normal-a.heta": 0,
+      "y:\\qs3p-js\\test\\module-system\\normal-b.heta": 1,
+      "y:\\qs3p-js\\test\\module-system\\normal-c.heta": 2,
+      "y:\\qs3p-js\\test\\module-system\\normal-d.json": 1,
+      "y:\\qs3p-js\\test\\module-system\\normal-e.yml": 1
+    },
+    "map": {
+      "y:\\qs3p-js\\test\\module-system\\normal-a.heta": [
+        "y:\\qs3p-js\\test\\module-system\\normal-b.heta",
+        "y:\\qs3p-js\\test\\module-system\\normal-c.heta"
+      ],
+      "y:\\qs3p-js\\test\\module-system\\normal-b.heta": [
+        "y:\\qs3p-js\\test\\module-system\\normal-c.heta",
+        "y:\\qs3p-js\\test\\module-system\\normal-d.json"
+      ],
+      "y:\\qs3p-js\\test\\module-system\\normal-c.heta": [
+        "y:\\qs3p-js\\test\\module-system\\normal-e.yml"
+      ],
+      "y:\\qs3p-js\\test\\module-system\\normal-e.yml": [],
+      "y:\\qs3p-js\\test\\module-system\\normal-d.json": []
+    }
+  },
+  "_top": {
+    "filename": "y:\\qs3p-js\\test\\module-system\\normal-a.heta",
+    "type": "heta",
+    "options": {},
+    "parsed": [
+      {
+        "action": "upsert",
+        "id": "k1",
+        "space": "one",
+        "class": "Record",
+        "title": "hello world"
+      },
+      {
+        "action": "import",
+        "id": "bbb",
+        "source": "y:\\qs3p-js\\test\\module-system\\normal-b.heta",
+        "type": "heta"
+      },
+      {
+        "action": "import",
+        "id": "ccc",
+        "source": "y:\\qs3p-js\\test\\module-system\\normal-c.heta",
+        "type": "heta"
+      }
+    ]
+  }
+}

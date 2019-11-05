@@ -33,8 +33,8 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(b);
   });
 
-  it('Run import', (done) => {
-    b.importAsync(done);
+  it('Run import', async () => {
+    await b.importAsync();
   });
 
   it('Run @SBMLExport, check and compare.', () => {

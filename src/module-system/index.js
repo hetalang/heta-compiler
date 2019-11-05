@@ -65,8 +65,8 @@ class ModuleSystem {
     // to support this the another algorythm of addModule() and integrate() is required
     if(!(absFilePath in this.moduleCollection)){ // new file
       let mdl = await this.addModuleAsync(absFilePath, type, options);
-      let tmp = mdl.getImportElements().map((importItem) => {
-        this._addModuleDeepAsync(importItem.source, importItem.type, importItem.options);
+      let tmp = mdl.getImportElements().map(async (importItem) => {
+        await this._addModuleDeepAsync(importItem.source, importItem.type, importItem.options);
       });
       await Promise.all(tmp);
       return mdl;
