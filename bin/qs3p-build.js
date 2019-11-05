@@ -5,7 +5,7 @@ const program = require('commander');
 const fs = require('fs');
 const path = require('path');
 const { Builder } = require('../src');
-const {safeLoad} = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const { safeLoad } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 
 program
   .description('Import all files, send to database and export to local files')
@@ -35,15 +35,15 @@ if(index!==-1){
     console.log('CRIRICAL ERROR!', err.message); // builder initialization error
     process.exit(1);
   }
-  builder.runAsync((err) => {
-    if(err){
-      console.log('ERROR!', err.message); // builder run error
-      process.exit(1);
-    }else{
+  builder.runAsync()
+    .then(() => {
       console.log('OK! ALL DONE.');
       process.exit(0);
-    }
-  });
+    })
+    .catch((err) => {
+      console.log('ERROR!', err.message);
+      process.exit(1);
+    });
 }else{
   console.log( // builder initialization error(no builder file)
     'STOP! Declaration file is not found in\n',

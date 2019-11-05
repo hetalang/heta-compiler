@@ -11,7 +11,7 @@ class YAMLExport extends _Export {
   }
   do(){
     if(this.isGlobal){
-      var qArr = this.toQArr();
+      var qArr = this._container.toQArr();
     }else{
       qArr = this._container
         .getPopulation(this.space)
