@@ -11,7 +11,7 @@ _Module.prototype.setHetaModule = function(){
   return this;
 };
 */ 
-_Module.prototype.setHetaModuleAsync = function(callback){
+_Module.prototype.setHetaModuleAsync0 = function(callback){
   fs.readFile(this.filename, 'utf8', (err, fileContent) => {
     if(err){
       callback(err);
@@ -24,6 +24,13 @@ _Module.prototype.setHetaModuleAsync = function(callback){
       }
     }
   });
+};
+
+_Module.prototype.setHetaModuleAsync = async function(){
+  let fileContent = fs.readFileSync(this.filename, 'utf8');
+  this.parsed = _hetaParse(this.filename, fileContent);
+
+  return this;
 };
 
 function _hetaParse(filename, ...params){

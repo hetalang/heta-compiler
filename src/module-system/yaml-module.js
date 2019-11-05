@@ -11,7 +11,7 @@ _Module.prototype.setYAMLModule = function(){
   return this;
 };
 */
-_Module.prototype.setYAMLModuleAsync = function(callback){
+_Module.prototype.setYAMLModuleAsync1 = function(callback){
   fs.readFile(this.filename, 'utf8', (err, fileContent) => {
     if(err){
       callback(err);
@@ -24,4 +24,11 @@ _Module.prototype.setYAMLModuleAsync = function(callback){
       }
     }
   });
+};
+
+_Module.prototype.setYAMLModuleAsync = async function(){
+  let fileContent = fs.readFileSync(this.filename, 'utf8');
+  this.parsed = jsYAML.safeLoad(fileContent);
+  
+  return this;
 };

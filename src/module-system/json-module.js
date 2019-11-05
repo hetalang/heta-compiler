@@ -10,7 +10,8 @@ _Module.prototype.setJSONModule = function(){
   return this;
 };
 */
-_Module.prototype.setJSONModuleAsync = function(callback){
+
+_Module.prototype.setJSONModuleAsync0 = function(callback){
   fs.readFile(this.filename, 'utf8', (err, fileContent) => {
     if(err){
       callback(err);
@@ -23,6 +24,13 @@ _Module.prototype.setJSONModuleAsync = function(callback){
       }
     }
   });
+};
+
+_Module.prototype.setJSONModuleAsync = async function(){
+  let fileContent = fs.readFileSync(this.filename, 'utf8');
+  this.parsed = _JSONParse(this.filename, fileContent);
+  
+  return this;
 };
 
 function _JSONParse(filename, ...params){
