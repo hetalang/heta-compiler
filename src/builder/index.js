@@ -10,7 +10,6 @@ const Container = require('../container');
 const ModuleSystem = require('../module-system');
 // const _Module = require('../module-system/_module');
 const winston = require('winston');
-const async = require('async');
 
 let logger = winston.createLogger({
   //level: logLevel,
@@ -57,39 +56,6 @@ class Builder{
     this.container = new Container();
     logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
-  importAsync0(callback){
-    logger.info(`Importing module "${this.importModule.filename}" of type "${this.importModule.type}"...`);
-    let ms = new ModuleSystem();
-    let absFilename = path.join(this._coreDirname, this.importModule.filename);
-    // use module from importModule property
-    // err : first error in importing
-    ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule.options, (err) => {
-      if(err){
-        this.errorCatcher(err, `Module "${absFilename}" will be skipped.`);
-      }else{
-        try{
-          ms.integrate()
-            .forEach((q) => {
-              try{
-                this.container.load(q);
-              }catch(e){
-                this.errorCatcher(e, 'The element will be skipped.');
-              }
-            });
-        }catch(integrationError){
-          this.errorCatcher(integrationError, `Module "${absFilename}" will be skipped.`);
-        }
-      }
-      // it should be not here but in runAsync()
-      logger.info('Setting references in elements, total length ' + this.container.length);
-      try{
-        this.container.populate();
-      }catch(referenceError){
-        this.errorCatcher(referenceError, 'Bad reference.');
-      }
-      callback(null);
-    });
-  }
   async importAsync(){
     logger.info(`Importing module "${this.importModule.filename}" of type "${this.importModule.type}"...`);
     let ms = new ModuleSystem();
@@ -119,31 +85,6 @@ class Builder{
     }
     return;
   }
-  exportManyAsync0(callback){
-    if(!this.options.skipExport){
-      let exportElements = [...this.container.storage]
-        .filter((obj) => obj[1].instanceOf('_Export'))
-        .map((obj) => obj[1]);
-      logger.info(`Start exporting to files, total: ${exportElements.length}.`);
-      async.each(exportElements, (exportItem, cb) => {
-        logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
-        let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
-        try{
-          let codeText = exportItem.do();
-          fs.outputFileSync(absFilename, codeText);
-        }catch(e){
-          this.errorCatcher(e, 'Export will be skipped.');
-        }
-        cb(null);
-      }, (err) => {
-        logger.info('Exporting finished.');
-        callback(err);
-      });
-    }else{
-      logger.warn('Exporting skipped as stated in declaration.');
-      callback(null);
-    }
-  }
   async exportManyAsync(){
     if(!this.options.skipExport){
       let exportElements = [...this.container.storage]
@@ -170,21 +111,6 @@ class Builder{
     }
   }
   // starts async build
-  runAsync0(callback){
-    this.errorFlag = false; // reset platform level errors
-    async.waterfall([
-      (cb) => this.importAsync(cb),
-      (cb) => this.exportManyAsync(cb)
-    ], (err) => {
-      if(err) { // internal errors
-        callback(err);
-      }else if(this.errorFlag){ // check platform level errors
-        callback(new Error('Errors when Builder run. See logs.'));
-      }else{ // no errors
-        callback(null);
-      }
-    });
-  }
   async runAsync(){
     this.errorFlag = false; // reset platform level errors
     await this.importAsync();

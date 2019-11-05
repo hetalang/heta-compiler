@@ -1,7 +1,6 @@
 const _Module = require('./_module');
 const convertExcel = require('excel-as-json').processFile; // see https://www.npmjs.com/package/excel-as-json
 const _ = require('lodash');
-const async = require('async');
 
 _Module.prototype.setXLSXModuleAsync1 = function(callback){
   // TODO: checking arguments is required

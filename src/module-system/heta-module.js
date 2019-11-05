@@ -1,30 +1,6 @@
 const fs = require('fs');
 const hetaParser = require('heta-parser');
 const _Module = require('./_module');
-/*
-_Module.prototype.setHetaModule = function(){
-  this.type = 'heta';
-
-  let fileContent = fs.readFileSync(this.filename, 'utf8');
-  this.parsed = _hetaParse(this.filename, fileContent);
-
-  return this;
-};
-*/ 
-_Module.prototype.setHetaModuleAsync0 = function(callback){
-  fs.readFile(this.filename, 'utf8', (err, fileContent) => {
-    if(err){
-      callback(err);
-    }else{
-      try{
-        this.parsed = _hetaParse(this.filename, fileContent);
-        callback(null, this);
-      }catch(e){
-        callback(e);
-      }
-    }
-  });
-};
 
 _Module.prototype.setHetaModuleAsync = async function(){
   let fileContent = fs.readFileSync(this.filename, 'utf8');
