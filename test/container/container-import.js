@@ -1,7 +1,7 @@
 /* global describe, it */
-const Container = require('../src/container');
+const Container = require('../../src/container');
 require('chai').should();
-const { _Component } = require('../src/core/_component');
+const { _Component } = require('../../src/core/_component');
 
 describe('Unit tests for Container load', () => {
   var c;

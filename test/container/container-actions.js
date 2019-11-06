@@ -1,9 +1,9 @@
 /* global describe, it */
-const Container = require('../src/container');
+const Container = require('../../src/container');
 const chai = require('chai');
 const should = chai.should();
 const { expect } = chai;
-const { ContainerError } = require('../src/heta-error');
+const { ContainerError } = require('../../src/heta-error');
 
 describe('Unit tests for Container load', () => {
   var c = new Container();

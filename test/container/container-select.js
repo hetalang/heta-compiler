@@ -1,5 +1,5 @@
 /* global describe, it */
-const { Container } = require('../src');
+const { Container } = require('../../src');
 // const { Page } = c.classes;
 const { expect } = require('chai');
 

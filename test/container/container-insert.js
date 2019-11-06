@@ -1,9 +1,9 @@
 /* global describe, it */
 
-const { ContainerError, SchemaValidationError } = require('../src/heta-error');
-const Container = require('../src/container');
+const { ContainerError, SchemaValidationError } = require('../../src/heta-error');
+const Container = require('../../src/container');
 const should = require('chai').should();
-const { _Component } = require('../src/core/_component');
+const { _Component } = require('../../src/core/_component');
 
 describe('Unit tests for Container', () => {
   var c;
