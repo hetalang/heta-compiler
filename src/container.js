@@ -12,7 +12,6 @@ const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const { SimpleTask } = require('./core/simple-task');
 const _ = require('lodash');
-const { getIndexFromQ } = require('./common');
 const XArray = require('./x-array');
 
 // they cannot be used as id, when 
@@ -161,5 +160,14 @@ Container.prototype.classes = {
   Page,
   Const
 };
+
+// converts {id: 'k1', space: 'one'} => 'one.k1'
+function getIndexFromQ(q = {}){
+  if(q.space!==undefined){
+    return `${q.space}::${q.id}`;
+  }else{
+    return q.id;
+  }
+}
 
 module.exports = Container;
