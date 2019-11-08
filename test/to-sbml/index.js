@@ -6,7 +6,7 @@ const compartmentModel = require('./compartment-model');
 const { Container } = require('../../src');
 
 const chai = require('chai');
-chai.should();
+const { expect } = chai;
 const chaiXml = require('chai-xml');
 chai.use(chaiXml);
 
@@ -27,8 +27,8 @@ describe('Create SBML.', () => {
       .populate(true);
     let text = c.select({id: 'sbml', space: 'first'}).do();
     // fs.writeFileSync('result.xml', text);
-    text.should.xml.to.be.valid();
-    text.should.xml.be.deep.equal(first_model_result);
+    expect(text).xml.to.be.valid();
+    expect(text).xml.be.deep.equal(first_model_result);
   });
 
   it('Compartment model', () => {
@@ -39,8 +39,8 @@ describe('Create SBML.', () => {
       .do();
 
     // fs.writeFileSync('result.xml', text);
-    text.should.xml.to.be.valid();
-    text.should.xml.be.deep.equal(two_compartment_model_result);
+    expect(text).xml.to.be.valid();
+    expect(text).xml.be.deep.equal(two_compartment_model_result);
   });
 
 });

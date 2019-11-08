@@ -1,96 +1,96 @@
 /* global describe, it */
 const { _Component } = require('../../src/core/_component');
 const { ValidationError } = require('../../src/heta-error');
-const should = require('chai').should();
+const { expect } = require('chai');
 
 describe('Unit test for _Component common methods', () => {
 
   it('Check static methods', () => {
-    _Component.should.has.property('schemaName', '_ComponentP');
-    _Component.should.has.property('isValid');
+    expect(_Component).to.have.property('schemaName', '_ComponentP');
+    expect(_Component).to.have.property('isValid');
   });
 
   it('Create empty _Component', () => {
     let simple = new _Component({id: 'ref1'});
-    simple.should.has.property('className', '_Component');
-    simple.should.has.property('id', 'ref1');
-    simple.should.has.property('index');
-    simple.should.has.property('space', undefined);
-    simple.should.has.property('merge');
+    expect(simple).to.have.property('className', '_Component');
+    expect(simple).to.have.property('id', 'ref1');
+    expect(simple).to.have.property('index');
+    expect(simple).to.have.property('space', undefined);
+    expect(simple).to.have.property('merge');
   });
 
   it('Create empty scoped _Component', () => {
     let simple = new _Component({id: 'pg1', space: 'one'});
-    simple.should.has.property('className', '_Component');
-    simple.should.has.property('id', 'pg1');
-    simple.should.has.property('space', 'one');
-    simple.should.has.property('index');
-    simple.should.has.property('merge');
+    expect(simple).to.have.property('className', '_Component');
+    expect(simple).to.have.property('id', 'pg1');
+    expect(simple).to.have.property('space', 'one');
+    expect(simple).to.have.property('index');
+    expect(simple).to.have.property('merge');
   });
 
   it('Merge with empty', () => {
     let simple = new _Component({id: 'ref1'});
     simple.merge({});
-    simple.should.has.property('id', 'ref1');
+    expect(simple).to.have.property('id', 'ref1');
   });
 
   it('Title property', () => {
     let simple = (new _Component({id: 'ref1'}))
       .merge({title: 'This is correct title.'});
-    simple.should.has.property('title').with.a('string');
+    expect(simple).to.have.property('title').with.a('string');
   });
 
   it('Incorrect title property', () => {
-    should.Throw(() => {
+    expect(() => {
       (new _Component({id: 'ref1'})).merge({title: {}});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('Tags property', () => {
     let simple = (new _Component({id: 'ref1'}))
       .merge({tags: ['a', 'b']});
-    simple.should.has.property('tags').with.instanceOf(Array);
+    expect(simple).to.have.property('tags').with.instanceOf(Array);
   });
 
   it('Incorrect tags property 1', () => {
-    should.Throw(() => {
+    expect(() => {
       (new _Component({id: 'ref1'})).merge({tags: {}});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('Incorrect tags property 2', () => {
-    should.Throw(() => {
+    expect(() => {
       (new _Component({id: 'ref1'})).merge({tags: [{}]});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('Aux property', () => {
     let simple = (new _Component({id: 'ref1'}))
       .merge({aux: {a: 'a', b: 1, c: []}});
-    simple.should.has.property('aux');
+    expect(simple).to.have.property('aux');
   });
 
   it('Incorrect aux property', () => {
-    should.Throw(() => {
+    expect(() => {
       (new _Component({id: 'ref1'})).merge({aux: []});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('Notes property', () => {
     let simple = new _Component({id: 'ref1'});
-    simple.should.not.has.property('notes');
+    expect(simple).not.to.have.property('notes');
     simple.merge({notes: 'This is correct **note**.'});
-    simple.should.has.property('notes');
-    simple.should.has.property('notesMdTree').with.instanceOf(Array);
-    simple.should.has.property('notesHTML').with.a('string');
+    expect(simple).to.have.property('notes');
+    expect(simple).to.have.property('notesMdTree').with.instanceOf(Array);
+    expect(simple).to.have.property('notesHTML').with.a('string');
   });
 
   it('Do not merge unknown properties', () => {
     let simple = (new _Component({id: 'ref1'}))
       .merge({title: 'This is title', prop: 'property', id: 'xxx', space: 'yyy'});
-    simple.should.has.property('title');
-    simple.should.not.has.property('prop');
-    simple.should.has.property('id', 'ref1');
+    expect(simple).to.have.property('title');
+    expect(simple).not.to.have.property('prop');
+    expect(simple).to.have.property('id', 'ref1');
   });
 
   it('ToQ transformation', () => {
@@ -101,7 +101,7 @@ describe('Unit test for _Component common methods', () => {
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}}
     });
-    simple.toQ().should.be.deep.equal({
+    expect(simple.toQ()).to.be.deep.equal({
       id: 'pmid',
       title: 'title',
       notes: 'notes',
@@ -120,7 +120,7 @@ describe('Unit test for _Component common methods', () => {
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}}
     });
-    simple.toQ().should.be.deep.equal({
+    expect(simple.toQ()).to.be.deep.equal({
       id: 'pg1',
       space: 'one',
       title: 'title',

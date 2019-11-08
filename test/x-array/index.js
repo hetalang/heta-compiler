@@ -2,6 +2,7 @@
 const { expect } = require('chai');
 const { Record } = require('../../src/core/record');
 const XArray = require('../../src/x-array');
+const { BindingError } = require('../../src/heta-error');
 
 describe('XArray testing.', () => {
   let x;
@@ -63,6 +64,6 @@ describe('XArray testing.', () => {
     cycle.push(rec2);
     expect(() => {
       cycle.sortExpressionsByContext('ode_');
-    }).to.throw();
+    }).to.throw(Error); // ExportError?
   });
 });

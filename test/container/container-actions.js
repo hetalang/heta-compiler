@@ -1,8 +1,6 @@
 /* global describe, it */
 const Container = require('../../src/container');
-const chai = require('chai');
-const should = chai.should();
-const { expect } = chai;
+const { expect } = require('chai');
 const { ContainerError } = require('../../src/heta-error');
 
 describe('Unit tests for Container load', () => {
@@ -18,8 +16,8 @@ describe('Unit tests for Container load', () => {
         start_: {expr: 1e-3}
       }
     });
-    c.should.be.lengthOf(1);
-    simple.should.have.property('index', 'default__::k1');
+    expect(c).to.be.lengthOf(1);
+    expect(simple).to.have.property('index', 'default__::k1');
   });
 
   it('Insert Record k2 with space', () => {
@@ -32,8 +30,8 @@ describe('Unit tests for Container load', () => {
         start: {expr: 1.2}
       }
     });
-    c.should.be.lengthOf(2);
-    simple.should.have.property('index', 'one::k2');
+    expect(c).to.be.lengthOf(2);
+    expect(simple).to.have.property('index', 'one::k2');
   });
 
   it('Update Record k1', () => {
@@ -45,9 +43,9 @@ describe('Unit tests for Container load', () => {
       },
       units: '1/h'
     });
-    c.should.be.lengthOf(2);
-    simple.should.have.nested.property('units', '1/h');
-    simple.should.have.property('title', 'k1 title');
+    expect(c).to.be.lengthOf(2);
+    expect(simple).to.have.nested.property('units', '1/h');
+    expect(simple).to.have.property('title', 'k1 title');
   });
 
   it('Insert Record k2 with replace', () => {
@@ -59,34 +57,23 @@ describe('Unit tests for Container load', () => {
         start_: {expr: 1.4}
       }
     });
-    c.should.be.lengthOf(2);
-    simple.should.have.nested.property('assignments.start_.expr', '1.4');
-    simple.should.not.have.property('title');
+    expect(c).to.be.lengthOf(2);
+    expect(simple).to.have.nested.property('assignments.start_.expr', '1.4');
+    expect(simple).not.to.have.property('title');
   });
 
   it('Throws wrong insert.', () => {
-    should.Throw(() => {
-      c.insert({}); // empty
-    }, ContainerError);
-    should.Throw(() => {
-      c.insert({ class: 'Record' }); // no id
-    }, ContainerError);
-    should.Throw(() => {
-      c.insert({ id: 'k0' }); // no class
-    }, Error);
+    expect(() => c.insert({})).to.throw(ContainerError); // empty
+    expect(() => c.insert({ class: 'Record' })).to.throw(ContainerError); // no id
+    expect(() => c.insert({ id: 'k0' })).to.throw(ContainerError); // no class
   });
 
   it('Throws wrong update.', () => {
-    should.Throw(() => {
-      c.update({}); // empty
-    }, ContainerError);
-    should.Throw(() => {
-      c.update({id: 'k0'}); // id is not exists
-    }, Error);
-    should.Throw(() => {
-      c.update({id: 'k1', class: 'Species'}); // class property is not allowed
-    }, Error);
-    c.should.be.lengthOf(2);
+    expect(() => c.update({})).to.throw(ContainerError); // empty
+    expect(() => c.update({id: 'k0'})).to.throw(ContainerError); // id is not exists
+    expect(() => c.update({id: 'k1', class: 'Species'})).to.throw(ContainerError); // class property is not allowed
+
+    expect(c).to.be.lengthOf(2);
   });
 
   it('upsert acts like insert if class presented.', () => {
@@ -103,9 +90,9 @@ describe('Unit tests for Container load', () => {
       id: 'k3',
       title: 'k3 updated title'
     });
-    simple.should.have.property('title', 'k3 updated title');
-    simple.should.not.have.property('notes');
-    c.should.be.lengthOf(3);
+    expect(simple).to.have.property('title', 'k3 updated title');
+    expect(simple).not.to.have.property('notes');
+    expect(c).to.be.lengthOf(3);
   });
 
   it('upsert acts like update if no class presented.', () => {
@@ -121,21 +108,15 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k4 updated title'
     });
-    c.should.be.lengthOf(4);
-    simple.should.have.property('title', 'k4 updated title');
-    simple.should.have.property('notes', 'k4 notes');
+    expect(c).to.be.lengthOf(4);
+    expect(simple).to.have.property('title', 'k4 updated title');
+    expect(simple).to.have.property('notes', 'k4 notes');
   });
 
-  it('Throws wrond upsert', () => {
-    should.Throw(() => {
-      c.upsert({}); // empty
-    }, ContainerError);
-    should.Throw(() => {
-      c.upsert({class: 'Record'}); // no id
-    }, ContainerError);
-    should.Throw(() => {
-      c.upsert({id: 'k10'}); // no class and unknown id
-    }, Error);
+  it('Throws wrong upsert', () => {
+    expect(() => c.upsert({})).to.throw(ContainerError); // empty
+    expect(() => c.upsert({class: 'Record'})).to.throw(ContainerError); // no id
+    expect(() => c.upsert({id: 'k10'})).to.throw(ContainerError); // no class and unknown id
   });
 
   it('delete existed element.', () => {
@@ -145,29 +126,23 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k5 title',
     });
-    c.should.be.lengthOf(5);
+    expect(c).to.be.lengthOf(5);
     let res = c.delete({
       id: 'k5',
       space: 'default__',
     });
-    res.should.be.a('boolean').and.true;
-    c.should.be.lengthOf(4);
+    expect(res).to.be.a('boolean').and.true;
+    expect(c).to.be.lengthOf(4);
   });
 
   it('Throws wrong delete', () => {
-    should.Throw(() => {
-      c.delete({}); // empty
-    }, ContainerError);
-    should.Throw(() => {
-      c.delete({id: 'k3', space: 'default__', class: 'Record'}); // class is not allowed
-    }, Error);
-    should.Throw(() => {
-      c.delete({id: 'k10', space: 'default__'}); // deleting not existed element is not allowed
-    }, Error);
+    expect(() => c.delete({})).to.throw(ContainerError);// empty
+    expect(() => c.delete({id: 'k3', space: 'default__', class: 'Record'})).to.throw(ContainerError); // class is not allowed
+    expect(() => c.delete({id: 'k10', space: 'default__'})).to.throw(ContainerError); // deleting not existed element is not allowed
   });
 
   it('DELETE LATER', () => {
-    c.should.be.lengthOf(4);
+    expect(c).to.be.lengthOf(4);
   });
 
   it('Select existed element', () => {
@@ -181,6 +156,6 @@ describe('Unit tests for Container load', () => {
   });
 
   it('Select with empty id throws.', () => {
-    expect(() => c.select({})).throw(Error);
+    expect(() => c.select({})).to.throw(ContainerError);
   });
 });

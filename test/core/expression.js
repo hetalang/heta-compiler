@@ -1,6 +1,5 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
-const should = require('chai').should();
 const { expect } = require('chai');
 
 describe('Unit test for Expression.', () => {
@@ -11,80 +10,77 @@ describe('Unit test for Expression.', () => {
 
   it('Create Expression from {expr: "x*y", units: "L"}.', () => {
     let expression = new Expression({expr: 'x*y', units: 'L'});
-    expression.should.have.property('expr', 'x * y');
-    expression.should.have.property('units', 'L');
+    expect(expression).to.have.property('expr', 'x * y');
+    expect(expression).to.have.property('units', 'L');
   });
 
   it('Conversion to CMathML.', () => {
-    new Expression({expr: 'x*y'})
-      .toCMathML().should.be
+    expect(new Expression({expr: 'x*y'}).toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
 
   it('Conversion to Q.', () => {
     let expression = new Expression({expr: 'x*y', units: 'L'});
-    expression.toQ().should.be.deep.equal({
+    expect(expression.toQ()).to.be.deep.equal({
       expr: 'x * y',
       units: 'L'
     });
   });
 
   it('Empty input.', () => {
-    should.Throw(() => {
+    expect(() => {
       new Expression();
-    }, TypeError);
-    should.Throw(() => {
+    }).to.throw(TypeError);
+    expect(() => {
       new Expression({});
-    }, TypeError);
-    should.Throw(() => {
+    }).to.throw(TypeError);
+    expect(() => {
       new Expression({xxx: 'yyy'});
-    }, TypeError);
+    }).to.throw(TypeError);
   });
 
   it('Wrong expr syntax', () => {
-    should.Throw(() => {
+    expect(() => {
       new Expression({expr: 'a/*'});
-    }, TypeError);
-    should.Throw(() => {
+    }).to.throw(TypeError);
+    expect(() => {
       new Expression({expr: '(a*b'});
-    }, TypeError);
+    }).to.throw(TypeError);
   });
 });
 
 describe('Unit test for Expression with number.', () => {
   it('Create expr from 3.14', () => {
     let expression = new Expression(3.14);
-    expression.should.has.property('expr', '3.14');
+    expect(expression).to.have.property('expr', '3.14');
   });
 
   it('Create expr from {expr: 3.14, units: "L"}', () => {
     let expression = new Expression({expr: 3.14, units: 'L'});
-    expression.should.have.property('expr', '3.14');
-    expression.should.have.property('units', 'L');
+    expect(expression).to.have.property('expr', '3.14');
+    expect(expression).to.have.property('units', 'L');
   });
 
 
   it('Create expression from {expr: 1e-15}', () => {
     let expression = new Expression({expr: 1e-15});
-    expression.should.has.property('expr', '1e-15');
+    expect(expression).to.have.property('expr', '1e-15');
   });
 
 
   it('Conversion to Q.', () => {
     let expression = new Expression({expr: 3.14, units: 'L'});
-    expression.toQ().should.be.deep.equal({
+    expect(expression.toQ()).to.be.deep.equal({
       expr: '3.14',
       units: 'L'
     });
   });
 
   it('Conversion to CMathML.', () => {
-    new Expression({expr: 1.1})
-      .toCMathML().should.be
+    expect(new Expression({expr: 1.1}).toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.1</cn></math>');
 
-    new Expression({expr: 1e-15})
-      .toCMathML().should.be
+    expect(new Expression({expr: 1e-15}).toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn type="e-notation">1<sep/>-15</cn></math>');
 
   });

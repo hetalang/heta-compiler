@@ -1,6 +1,7 @@
 /* global describe, it */
 const { Container } = require('../../src');
 const { expect } = require('chai');
+const { ValidationError, BindingError } = require('../../src/heta-error');
 
 describe('Check populate() for Species', () => {
   let c = new Container();
@@ -10,13 +11,13 @@ describe('Check populate() for Species', () => {
     space: 'one'
   });
   it('Set no compartment', () => {
-    expect(() => c.populate(), 'does not check empty property').throw();
+    expect(() => c.populate(), 'does not check empty property').throw(ValidationError);
   });
   it('Set lost ref', () => {
     sp1.merge({
       compartment: 'comp1'
     });
-    expect(() => c.populate(), 'does not check lost ref').throw();
+    expect(() => c.populate(), 'does not check lost ref').throw(BindingError);
   });
   it('Set wrong ref', () => {
     c.load({
@@ -24,7 +25,7 @@ describe('Check populate() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    expect(() => c.populate()).throw();
+    expect(() => c.populate()).throw(BindingError);
   });
   it('Set good ref', () => {
     c.load({
@@ -47,7 +48,7 @@ describe('Check populate() for Reaction', () => {
   });
   
   it('have lost ref', () => {
-    expect(() => c.populate(), 'does not check lost ref').throw();
+    expect(() => c.populate(), 'does not check lost ref').throw(BindingError);
   });
   
   it('Set wrong ref', () => {
@@ -62,7 +63,7 @@ describe('Check populate() for Reaction', () => {
       id: 'def',
       space: 'one'
     });
-    expect(() => c.populate()).throw();
+    expect(() => c.populate()).throw(BindingError);
   });
 
   it('Set good ref', () => {

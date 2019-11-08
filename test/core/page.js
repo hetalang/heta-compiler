@@ -1,14 +1,14 @@
-/* global describe, it, should */
+/* global describe, it */
 const { Page } = require('../../src/core/page');
 const { ValidationError } = require('../../src/heta-error');
-const should = require('chai').should();
+const { expect } = require('chai');
 
 describe('Unit test for Page', () => {
 
   it('Incorrect content property', () => {
-    should.Throw(() => {
+    expect(() => {
       (new Page({id: 'pg1'})).merge({content: {}});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('ToQ transformation', () => {
@@ -22,7 +22,7 @@ describe('Unit test for Page', () => {
       aux: {a: 1, b: 'b', c: {}}
     });
 
-    simple.toQ().should.be.deep.equal({
+    expect(simple.toQ()).to.be.deep.equal({
       id: 'pg1',
       title: 'title',
       notes: 'notes',

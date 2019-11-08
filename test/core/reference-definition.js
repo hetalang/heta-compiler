@@ -1,20 +1,20 @@
 /* global describe, it */
 const { ReferenceDefinition } = require('../../src/core/reference-definition');
 const { ValidationError } = require('../../src/heta-error');
-const should = require('chai').should();
+const { expect } = require('chai');
 
 describe('Unit test for ReferenceDefinition', () => {
 
   it('Incorrect prefix property', () => {
-    should.Throw(() => {
+    expect(() => {
       (new ReferenceDefinition({id: 'ref1'})).merge({prefix: {}});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('Incorrect suffix property', () => {
-    should.Throw(() => {
+    expect(() => {
       (new ReferenceDefinition({id: 'ref1'})).merge({suffix: {}});
-    }, ValidationError);
+    }).to.throw(ValidationError);
   });
 
   it('ToQ transformation', () => {
@@ -28,7 +28,7 @@ describe('Unit test for ReferenceDefinition', () => {
       prefix: 'this://is.correct/prefix/'
     });
 
-    simple.toQ().should.be.deep.equal({
+    expect(simple.toQ()).to.be.deep.equal({
       id: 'ref1',
       title: 'title',
       notes: 'notes',

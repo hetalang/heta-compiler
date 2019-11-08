@@ -1,6 +1,7 @@
 /* global describe, it */
 const { Species } = require('../../src/core/species');
 const { expect } = require('chai');
+const { BindingError } = require('../../src/heta-error');
 
 describe('Testing dependOn() for Record and Species', () => {
   it('for Species isAmount=true', () => {
@@ -41,6 +42,8 @@ describe('Testing dependOn() for Record and Species', () => {
   });
   it('Throws for Species when  isAmount=undefined and no compartment', () => {
     let species = new Species({id: 'S1', space: 'one'});
-    expect(() => species.dependOn('start_')).throw(Error);
+    expect(() => {
+      species.dependOn('start_');
+    }).throw(BindingError);
   });
 });

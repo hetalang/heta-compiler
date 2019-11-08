@@ -1,8 +1,8 @@
 /* global describe, it */
 
-const { ContainerError, ValidationError } = require('../../src/heta-error');
+const { ContainerError } = require('../../src/heta-error');
 const Container = require('../../src/container');
-const should = require('chai').should();
+const { expect } = require('chai');
 const { _Component } = require('../../src/core/_component');
 
 describe('Unit tests for Container', () => {
@@ -26,15 +26,15 @@ describe('Unit tests for Container', () => {
         prefix: 'https://pubmed.org/',
         suffix: '/'
       });
-      res.should.be.instanceOf(_Component);
-      c.storage.size.should.be.eql(1);
+      expect(res).to.be.instanceOf(_Component);
+      expect(c.storage.size).to.be.eql(1);
+
       let simple = c.storage.get('pmid1');
-      
-      simple.should.has.property('prefix', 'https://pubmed.org/');
-      simple.should.has.property('suffix', '/');
-      simple.should.has.property('className', 'ReferenceDefinition');
-      simple.should.has.property('id', 'pmid1');
-      simple.should.has.property('space', undefined);
+      expect(simple).to.has.property('prefix', 'https://pubmed.org/');
+      expect(simple).to.has.property('suffix', '/');
+      expect(simple).to.has.property('className', 'ReferenceDefinition');
+      expect(simple).to.has.property('id', 'pmid1');
+      expect(simple).to.has.property('space', undefined);
     });
 
     it('Insert components with the same id.', () => {
@@ -50,9 +50,9 @@ describe('Unit tests for Container', () => {
         prefix: 'https://google.com'
       });
       let simple = c.storage.get('pmid2');
-      simple.should.has.property('prefix', 'https://google.com');
-      simple.should.has.property('space', undefined);
-      c.storage.size.should.be.eql(2);
+      expect(simple).to.have.property('prefix', 'https://google.com');
+      expect(simple).to.have.property('space', undefined);
+      expect(c.storage.size).to.be.eql(2);
     });
 
     it('Insert components with space.', () => {
@@ -64,9 +64,9 @@ describe('Unit tests for Container', () => {
         suffix: '/'
       });
       let component = c.storage.get('three::pmid4');
-      component.should.property('prefix', 'xxx');
-      component.should.has.property('space', 'three');
-      c.storage.size.should.be.eql(3);
+      expect(component).to.have.property('prefix', 'xxx');
+      expect(component).to.have.property('space', 'three');
+      expect(c.storage.size).to.be.eql(3);
     });
 
     it('Insert scoped component and check.', () => {
@@ -76,8 +76,8 @@ describe('Unit tests for Container', () => {
         space: 'another'
       });
       let simple = c.storage.get('another::pg1');
-      simple.should.has.property('space', 'another');
-      c.storage.size.should.be.eql(4);
+      expect(simple).to.has.property('space', 'another');
+      expect(c.storage.size).to.be.eql(4);
     });
   });
 
@@ -151,22 +151,13 @@ describe('Unit tests for Container', () => {
 
   describe('Test insert() wrong.', () => {
     it('Insert wrong components.', () => {
-      should.Throw(() => {
-        c.insert({});
-      }, ContainerError);
-      should.Throw(() => {
-        c.insert({id: 'pmid3'});
-      }, Error);
-      should.Throw(() => {
-        c.insert({class: 'ReferenceDefinition'});
-      }, ContainerError);
-      should.Throw(() => {
-        c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
-      }, Error);
-      should.Throw(() => {
-        c.insert({id: '1xxx', class: 'ReferenceDefinition'});
-      }, ValidationError);
-      c.storage.size.should.be.eql(9);
+      expect(() => c.insert({})).to.throw(ContainerError);
+      expect(() => c.insert({id: 'pmid3'})).to.throw(ContainerError);
+      expect(() => c.insert({class: 'ReferenceDefinition'})).to.throw(ContainerError);
+      expect(() => c.insert({id: 'pmid3', class: 'ReferenceDefinition2'})).to.throw(ContainerError);
+      expect(() => c.insert({id: '1xxx', class: 'ReferenceDefinition'})).to.throw(ContainerError);
+
+      expect(c.storage.size).to.be.eql(9);
 
       // console.log(c);
     });
