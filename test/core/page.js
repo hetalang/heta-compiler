@@ -1,6 +1,6 @@
 /* global describe, it, should */
 const { Page } = require('../../src/core/page');
-const { SchemaValidationError } = require('../../src/heta-error');
+const { ValidationError } = require('../../src/heta-error');
 const should = require('chai').should();
 
 describe('Unit test for Page', () => {
@@ -8,7 +8,7 @@ describe('Unit test for Page', () => {
   it('Incorrect content property', () => {
     should.Throw(() => {
       (new Page({id: 'pg1'})).merge({content: {}});
-    }, SchemaValidationError);
+    }, ValidationError);
   });
 
   it('ToQ transformation', () => {

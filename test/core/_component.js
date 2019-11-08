@@ -1,6 +1,6 @@
 /* global describe, it */
 const { _Component } = require('../../src/core/_component');
-const { SchemaValidationError } = require('../../src/heta-error');
+const { ValidationError } = require('../../src/heta-error');
 const should = require('chai').should();
 
 describe('Unit test for _Component common methods', () => {
@@ -43,7 +43,7 @@ describe('Unit test for _Component common methods', () => {
   it('Incorrect title property', () => {
     should.Throw(() => {
       (new _Component({id: 'ref1'})).merge({title: {}});
-    }, SchemaValidationError);
+    }, ValidationError);
   });
 
   it('Tags property', () => {
@@ -55,13 +55,13 @@ describe('Unit test for _Component common methods', () => {
   it('Incorrect tags property 1', () => {
     should.Throw(() => {
       (new _Component({id: 'ref1'})).merge({tags: {}});
-    }, SchemaValidationError);
+    }, ValidationError);
   });
 
   it('Incorrect tags property 2', () => {
     should.Throw(() => {
       (new _Component({id: 'ref1'})).merge({tags: [{}]});
-    }, SchemaValidationError);
+    }, ValidationError);
   });
 
   it('Aux property', () => {
@@ -73,7 +73,7 @@ describe('Unit test for _Component common methods', () => {
   it('Incorrect aux property', () => {
     should.Throw(() => {
       (new _Component({id: 'ref1'})).merge({aux: []});
-    }, SchemaValidationError);
+    }, ValidationError);
   });
 
   it('Notes property', () => {

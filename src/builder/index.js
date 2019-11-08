@@ -2,14 +2,23 @@ const path = require('path');
 const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
-const ajv = new Ajv({ useDefaults: true });//.addSchema(declarationSchema);
-const { SchemaValidationError, HetaError } = require('../heta-error');
-const semver = require('semver'); // for future check of buildVersion
+const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
+const semver = require('semver');
 const { version } = require('../../package');
 const Container = require('../container');
 const ModuleSystem = require('../module-system');
-// const _Module = require('../module-system/_module');
 const winston = require('winston');
+
+class BuilderError extends Error {
+  constructor(diagnostics = [], message, filename, lineNumber){
+    let indexedMessage = `${message}\n`
+      + diagnostics
+        .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
+        .join('\n');
+    super(indexedMessage, filename, lineNumber);
+  }
+}
+BuilderError.prototype.name = 'BuilderError';
 
 let logger = winston.createLogger({
   //level: logLevel,
@@ -25,13 +34,13 @@ let logger = winston.createLogger({
   ]
 });
 
-class Builder{
+class Builder {
   constructor(decl, coreDirname='.', distDirname = 'dist', metaDirname = 'meta'){
     // check based on schema
     let validate = ajv.compile(declarationSchema);
     let valid = validate(decl);
     if(!valid) {
-      let error = new SchemaValidationError(validate.errors, 'Builder');
+      let error = new BuilderError(validate.errors, "Wrong platform file:");
       this.errorCatcher(error, 'Builder is not created.');
       throw error;
     }
@@ -42,7 +51,7 @@ class Builder{
     // version check
     let satisfiesVersion = semver.satisfies(version, decl.builderVersion);
     if(!satisfiesVersion){
-      let error = new HetaError(`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
+      let error = new BuilderError([],`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
       this.errorCatcher(error);
       throw error;
     }
@@ -56,34 +65,26 @@ class Builder{
     this.container = new Container();
     logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
-  async importAsync(){
-    logger.info(`Importing module "${this.importModule.filename}" of type "${this.importModule.type}"...`);
+  async compileAsync(){
+    logger.info(`Compilation of module "${this.importModule.filename}" of type "${this.importModule.type}"...`);
     let ms = new ModuleSystem();
     let absFilename = path.join(this._coreDirname, this.importModule.filename);
-    // use module from importModule property
-    // err : first error in importing
+    
+    // 1. Parsing
     await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule.options);
-    try{
-      ms.integrate()
-        .forEach((q) => {
-          try{
-            this.container.load(q);
-          }catch(e){
-            this.errorCatcher(e, 'The element will be skipped.');
-          }
-        });
-    }catch(integrationError){
-      this.errorCatcher(integrationError, `Module "${absFilename}" will be skipped.`);
-    }
-
-    // it should be not here but in runAsync()
+    // 2. Modules integration
+    let queue = ms.integrate();
+    // 3. Translation
+    queue.forEach((q) => {
+      try{
+        this.container.load(q);
+      }catch(validationError){
+        this.errorCatcher(validationError, 'The element will be skipped.');
+      }
+    });
+    // 4. Binding
     logger.info('Setting references in elements, total length ' + this.container.length);
-    try{
-      this.container.populate();
-    }catch(referenceError){
-      this.errorCatcher(referenceError, 'Bad reference.');
-    }
-    return;
+    this.container.populate();
   }
   async exportManyAsync(){
     if(!this.options.skipExport){
@@ -101,34 +102,46 @@ class Builder{
         }catch(e){
           this.errorCatcher(e, 'Export will be skipped.');
         }
-        return;
       });
       await Promise.all(tmp);
-      return;
     }else{
       logger.warn('Exporting skipped as stated in declaration.');
-      return;
     }
   }
   // starts async build
   async runAsync(){
     this.errorFlag = false; // reset platform level errors
-    await this.importAsync();
-    await this.exportManyAsync();
+    let absFilename = path.join(this._coreDirname, this.importModule.filename);
+    // Compilation steps
+    await this.compileAsync().catch((error) => {
+      this.errorCatcher(error, `Module "${absFilename}" was not compiled properly.`);
+    });
+    // Other steps
+    await this.exportManyAsync().catch((error) => {
+      this.errorCatcher(error, `Some of files was not exported.`);
+    });
+    
     if(this.errorFlag) // check platform level errors
       throw new Error('Errors when Builder run. See logs.');
     return;
   }
   // analyze different errors
+  // currently only errors from load()
   errorCatcher(error, builderMessage = ''){
     // all errors throws
     let debuggingMode = this.options && this.options.debuggingMode;
-    if(debuggingMode) throw error;
-
     // all errors to logs
     this.errorFlag = true;
     logger.error(`[${error.name}] ${error.message} \n\t=> ${builderMessage}`);
+
+    if (debuggingMode) {
+      console.log(error);
+      throw error;
+    }
   }
 }
 
-module.exports = Builder;
+module.exports = {
+  Builder, 
+  BuilderError
+};

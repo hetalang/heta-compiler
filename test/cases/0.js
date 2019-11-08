@@ -34,7 +34,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run import', async () => {
-    await b.importAsync();
+    await b.compileAsync();
   });
 
   it('Run @SBMLExport, check and compare.', () => {

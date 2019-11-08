@@ -3,7 +3,7 @@ const { Expression } = require('./expression');
 const { UnitsParser, qspUnits } = require('units-parser');
 let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
-const { IndexedHetaError } = require('../heta-error');
+const { ValidationError, BindingError } = require('../heta-error');
 
 class Record extends _Component {
   constructor(q = {}){
@@ -20,10 +20,10 @@ class Record extends _Component {
           try{ // this is for the cases of wrong size structure
             return new Expression(x);
           }catch(e){
-            throw new IndexedHetaError(q, e.message);
+            throw new ValidationError(q, [], e.message + `: "${x.expr}"`);
           }
         }else{
-          throw new Error('Wrong expression argument.');// if code is OK never throws
+          throw new Error('Wrong expression argument.'); // if code is OK never throws
         }
       });
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
@@ -52,10 +52,10 @@ class Record extends _Component {
             });
 
             if(!target){
-              messages.push(`Component "${id}" is not found in space "${this.space}" or in global as expected in expression\n`
+              messages.push(`Component "${id}" is not found in space "${this.space}" or in global as expected in expression: `
                     + `${this.index} [${key}]= ${mathExpr.expr};`);
             }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
-              messages.push(`Component "${id}" is not a Const or Record class as expected in expression\n`
+              messages.push(`Component "${id}" is not a Const or Record class as expected in expression: `
                 + `${this.index} [${key}]= ${mathExpr.expr};`);
             }else{
               if(this.space !== target.space){ // if local -> global
@@ -73,9 +73,8 @@ class Record extends _Component {
       });
     }
 
-    let msg = 'References error in expressions:\n' 
-      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
-    if(messages.length>0 && !skipErrors) throw new Error(msg);
+    if(messages.length>0 && !skipErrors)
+      throw new BindingError(this.index, messages, 'References error in expressions:');
   }
   toQ(){
     let res = super.toQ();
@@ -119,7 +118,7 @@ class Record extends _Component {
     if(typeof context !== 'string')
       throw new TypeError('context must be of string type.');
     if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
-      throw new Error('compartment should be set for Species when isAmount=false');
+      throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
 
     let exprPath = 'assignments.' + context;
     if(_.has(this, exprPath)){

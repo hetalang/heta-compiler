@@ -1,6 +1,6 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { IndexedHetaError, SchemaValidationError } = require('../heta-error');
+const { ValidationError, BindingError } = require('../heta-error');
 const _ = require('lodash');
 
 /*
@@ -87,11 +87,11 @@ class _Component {
     let validate = validator
       .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
     if(!validate){
-      throw new IndexedHetaError(q, `The schema "${this.schemaName}" is not found.`);
+      throw new TypeError(q, `The schema "${this.schemaName}" is not found.`);
     }
     let valid = validate(q);
     if(!valid) {
-      throw new SchemaValidationError(validate.errors, this.schemaName, q);
+      throw new ValidationError(q, validate.errors, `Some of properties do not satisfy requirements for class "${this.name}".`);
     }
   }
   /*
@@ -101,7 +101,6 @@ class _Component {
   */
   bind(container, skipErrors = false){
     if(!container) throw new TypeError('"container" argument should be set.');
-    let messages = [];
     
     const iterator = (item, path, rule) => {
       let target = container.softSelect({
@@ -110,9 +109,9 @@ class _Component {
       });
 
       if(!target){
-        throw new IndexedHetaError(this.indexObj, `Property "${path}" has lost reference "${_.get(this, path)}".`);
+        throw new BindingError(this.index, [], `Property "${path}" has lost reference "${_.get(this, path)}".`);
       }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
-        throw new IndexedHetaError(this.indexObj, `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
+        throw new BindingError(this.index, [], `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
       }else{
         if(this.space !== target.space){ // if local -> global
           // clone component with another space
@@ -142,7 +141,7 @@ class _Component {
     _.each(req, (rule, prop) => { // iterates through rules
       // required: true
       if(rule.required && !_.has(this, prop)){
-        throw new IndexedHetaError(this.indexObj, `No required "${prop}" property for ${this.className}.`);
+        throw new ValidationError(this.indexObj, [], `No required "${prop}" property for ${this.className}.`);
       }
       // isReference: true + className
       if(rule.isReference && _.has(this, prop)){
@@ -158,10 +157,6 @@ class _Component {
         }
       }
     });
-
-    let msg = 'References error in expressions:\n' 
-      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
-    if(messages.length>0 && !skipErrors) throw new Error(msg);
   }
   toQ(){
     let res = {};

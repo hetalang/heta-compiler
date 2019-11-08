@@ -1,5 +1,5 @@
 const Container = require('./container');
-const Builder = require('./builder');
+const { Builder } = require('./builder');
 
 require('./yaml-export');
 require('./json-export');

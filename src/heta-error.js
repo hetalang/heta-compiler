@@ -1,12 +1,14 @@
-// default error but available for heta users
-class HetaError extends Error {
-  constructor(...params){
-    super(...params);
-  }
-}
-HetaError.prototype.name = 'HetaError';
 
-class IndexedHetaError extends HetaError {
+// compilation step 1
+class FileSystemError extends Error { }
+FileSystemError.prototype.name = 'FileSystemError';
+
+// compilation step 2
+class ModuleError extends Error { }
+ModuleError.prototype.name = 'ModuleError';
+
+// compilation step 3
+class QueueError extends Error {
   constructor(q, message, filename, lineNumber){
     let index = getIndexFromQ(q);
     let indexedMessage = `(${index}) ${message}`;
@@ -14,23 +16,36 @@ class IndexedHetaError extends HetaError {
     this.index = index;
   }
 }
-IndexedHetaError.prototype.name = 'IndexedHetaError';
+QueueError.prototype.name = 'QueueError';
 
+// compilation step 3
 // error for matching heta schema
-class SchemaValidationError extends IndexedHetaError {
-  constructor(diagnostics = [], schemaName, q, filename, lineNumber){
-    let message = `Element does not satisfy schema "${schemaName}"\n`
+class ValidationError extends Error {
+  constructor(q, diagnostics = [], message, filename, lineNumber){
+    let index = getIndexFromQ(q);
+    let indexedMessage = `(${index}) ${message}\n`
       + diagnostics
         .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
         .join('\n');
-    super(q, message, filename, lineNumber);
-    this.schemaName = schemaName;
-    this.diagnostics = diagnostics;
+    super(indexedMessage, filename, lineNumber);
+    this.index = index;
   }
 }
-SchemaValidationError.prototype.name = 'SchemaValidationError';
+ValidationError.prototype.name = 'ValidationError';
 
-// converts {id: 'k1', space: 'one'} => 'one.k1'
+// compilation step 4
+// error for lost references
+class BindingError extends Error {
+  constructor(index, diagnostics = [], message, filename, lineNumber){
+    let indexedMessage = `(${index}) ${message}`
+      + diagnostics.map((x) => '\n\t' + x).join('');
+    super(indexedMessage, filename, lineNumber);
+    this.index = index;
+  }
+}
+BindingError.prototype.name = 'BindingError';
+
+// converts {id: 'k1', space: 'one'} => 'one::k1'
 function getIndexFromQ(q = {}){
   if(q.space!==undefined){
     return `${q.space}::${q.id}`;
@@ -40,7 +55,9 @@ function getIndexFromQ(q = {}){
 }
 
 module.exports = {
-  SchemaValidationError,
-  IndexedHetaError,
-  HetaError
+  ValidationError,
+  FileSystemError,
+  ModuleError,
+  QueueError,
+  BindingError
 };

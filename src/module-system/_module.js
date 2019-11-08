@@ -1,4 +1,5 @@
 const path = require('path');
+const { ModuleError } = require('../heta-error');
 
 // abstract class for different import types
 class _Module{
@@ -25,7 +26,7 @@ class _Module{
         await mdl.setXLSXModuleAsync();
         break;
       default:
-        throw new TypeError(`Unknown type "${type}" for file "${filename}" `);
+        throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yml", "xlsx"] `);
         break;
     }
     
@@ -33,13 +34,16 @@ class _Module{
   }
   getImportElements(){
     return this.parsed
-      .filter((component) => component.action==='import');
+      .filter((q) => q.action==='import');
   }
   // replace relative paths by absolute ones
   updateByAbsPaths(){
     let absDirPath = path.dirname(this.filename);
-    this.getImportElements()
-      .forEach((component) => component.source = path.resolve(absDirPath, component.source));
+    this.getImportElements().forEach((q) => {
+      if(typeof q.source !== 'string') 
+        throw new ModuleError(`Property "source" in import inside "${this.filename}" must be string, but currently is ${q.source}.`);
+      q.source = path.resolve(absDirPath, q.source);
+    });
   }
 }
 

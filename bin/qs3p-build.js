@@ -35,15 +35,13 @@ if(index!==-1){
     console.log('CRIRICAL ERROR!', err.message); // builder initialization error
     process.exit(1);
   }
-  builder.runAsync()
-    .then(() => {
-      console.log('OK! ALL DONE.');
-      process.exit(0);
-    })
-    .catch((err) => {
-      console.log('ERROR!', err.message);
-      process.exit(1);
-    });
+  builder.runAsync().then(() => {
+    console.log('OK! ALL DONE.');
+    process.exit(0);
+  }, (err) => {
+    console.log('ERROR!', err.message);
+    process.exit(1);
+  });
 }else{
   console.log( // builder initialization error(no builder file)
     'STOP! Declaration file is not found in\n',

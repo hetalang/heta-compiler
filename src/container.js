@@ -1,4 +1,4 @@
-const { IndexedHetaError } = require('./heta-error');
+const { QueueError } = require('./heta-error');
 const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
@@ -24,20 +24,18 @@ class Container {
   constructor(){
     this.storage = new Map();
   }
-  insert(q){
+  insert(q = {}){
     // check
-    if(!q)
-      throw new IndexedHetaError(q, JSON.stringify(q));
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
+      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     if(reservedWords.indexOf(q.id)!==-1)
-      throw new IndexedHetaError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
+      throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
-      throw new IndexedHetaError(q, `No class or unsuitable class for "insert": ${q.class}`);
+      throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
-      throw new IndexedHetaError(q, `Unknown class "${q.class}" for the element.`);
+      throw new QueueError(q, `Unknown class "${q.class}" for the element.`);
     let component = (new selectedClass({id: q.id, space: q.space})).merge(q);
 
     this.storage.set(component.index, component);
@@ -47,51 +45,45 @@ class Container {
 
     return component;
   }
-  update(q){
-    if(!q)
-      throw new IndexedHetaError(q, JSON.stringify(q));
+  update(q = {}){
     if(!q.id || (typeof q.id !== 'string')){
-      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
+      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     }
     if(q.class)
-      throw new IndexedHetaError(q, `Class property is not allowed for "update": ${q.class}`);
+      throw new QueueError(q, `Class property is not allowed for "update": ${q.class}`);
     let index = getIndexFromQ(q);
     let targetComponent = this.storage.get(index);
 
     // creation of new components is not allowed
     if(targetComponent===undefined)
-      throw new IndexedHetaError(q, 'Element with the index is not exist which is not allowed for "update" strategy.');
+      throw new QueueError(q, 'Element with the index is not exist which is not allowed for "update" strategy.');
 
     targetComponent.merge(q);
 
     return targetComponent;
   }
-  upsert(q){
+  upsert(q = {}){
     if('class' in q){
       return this.insert(q);
     }else{
       return this.update(q);
     }
   }
-  delete(q){
-    if(!q)
-      throw new IndexedHetaError(q, JSON.stringify(q));
+  delete(q = {}){
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexedHetaError(q, `Id should be string, but have "${q.id}"`);
+      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     if(q.class)
-      throw new IndexedHetaError(q, `Class property is not allowed for "delete": ${q.class}`);
+      throw new QueueError(q, `Class property is not allowed for "delete": ${q.class}`);
     let index = getIndexFromQ(q);
     let targetComponent = this.storage.delete(index);
     if(!targetComponent) // if targetComponent===false, element is not exist
-      throw new IndexedHetaError(q, 'Element with index is not exist and cannot be deleted.');
+      throw new QueueError(q, 'Element with index is not exist and cannot be deleted.');
 
     return targetComponent; // true or false
   }
-  select(q){
-    if(!q)
-      throw new IndexedHetaError(q, JSON.stringify(q));
+  select(q = {}){
     if(!q.id || (typeof q.id !== 'string'))
-      throw new IndexedHetaError(q, `Id should be string, got "${q.id}"`);
+      throw new QueueError(q, `Id should be string, got "${q.id}"`);
     let index = getIndexFromQ(q);
     return this.storage.get(index);
   }

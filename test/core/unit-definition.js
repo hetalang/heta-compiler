@@ -1,6 +1,6 @@
 /* global describe, it */
 const { UnitDefinition } = require('../../src/core/unit-definition');
-const { SchemaValidationError } = require('../../src/heta-error');
+const { ValidationError } = require('../../src/heta-error');
 const should = require('chai').should();
 
 describe('Unit test for UnitDefinition', () => {
@@ -31,16 +31,16 @@ describe('Unit test for UnitDefinition', () => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: 'xxx'
       });
-    }, SchemaValidationError);
+    }, ValidationError);
     should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: ['xxx']
       });
-    }, SchemaValidationError);
+    }, ValidationError);
     should.Throw(() => {
       (new UnitDefinition({id: 'ud1'})).merge({
         components: [{}]
       });
-    }, SchemaValidationError);
+    }, ValidationError);
   });
 });

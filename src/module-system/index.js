@@ -7,6 +7,7 @@ require('./json-module');
 require('./md-module');
 require('./yaml-module');
 require('./xlsx-module');
+const { ModuleError } = require('../heta-error');
 
 class ModuleSystem {
   constructor(){
@@ -39,7 +40,7 @@ class ModuleSystem {
     }
   }
   // parse single file without dependencies
-  async addModuleAsync(filename, type, options = {}){
+  async addModuleAsync(filename, type='heta', options = {}){
     // parse
     let mdl = await _Module.createModuleAsync(filename, type, options);
     mdl.updateByAbsPaths();
@@ -55,7 +56,11 @@ class ModuleSystem {
   }
   // other
   sortedPaths(){
-    return this.graph.sort();
+    try{
+      return this.graph.sort();
+    }catch(error){
+      throw new ModuleError(`Circular import in modules: [ ${error.circular.join(', ')} ]`);
+    }
   }
   integrate(){
     this

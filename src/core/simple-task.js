@@ -1,6 +1,6 @@
 const { _Component } = require('./_component');
 const _ = require('lodash');
-const { IndexedHetaError, SchemaValidationError } = require('../heta-error');
+const { IndexedHetaError} = require('../heta-error');
 
 class SimpleTask extends _Component {
   merge(q={}, skipChecking){
@@ -39,7 +39,6 @@ class SimpleTask extends _Component {
     super.bind(container, skipErrors);
 
     if(!container) throw new TypeError('"container" argument should be set.');
-    let messages = [];
 
     // check output refs in SimpleTasks XXX: it seems to be working but ugly and without iterativity
     if(this instanceof SimpleTask && this.subtasks){
@@ -58,10 +57,6 @@ class SimpleTask extends _Component {
         });
       });
     }
-
-    let msg = 'References error in expressions:\n' 
-      + messages.map((m, i) => `(${i}) `+ m).join('\n\n');
-    if(messages.length>0 && !skipErrors) throw new Error(msg);
   }
   toQ(){
     let res = super.toQ();

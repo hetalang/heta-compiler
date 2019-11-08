@@ -1,6 +1,6 @@
 /* global describe, it */
 
-const { ContainerError, SchemaValidationError } = require('../../src/heta-error');
+const { ContainerError, ValidationError } = require('../../src/heta-error');
 const Container = require('../../src/container');
 const should = require('chai').should();
 const { _Component } = require('../../src/core/_component');
@@ -165,7 +165,7 @@ describe('Unit tests for Container', () => {
       }, Error);
       should.Throw(() => {
         c.insert({id: '1xxx', class: 'ReferenceDefinition'});
-      }, SchemaValidationError);
+      }, ValidationError);
       c.storage.size.should.be.eql(9);
 
       // console.log(c);
