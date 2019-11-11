@@ -3,6 +3,7 @@ const { _Export } = require('../core/_export');
 const XArray = require('../x-array');
 const nunjucks = require('../nunjucks-env');
 const { Compartment } = require('../core/compartment');
+const { ExportError } = require('../heta-error');
 const _ = require('lodash');
 
 class SLVExport extends _Export{
@@ -102,7 +103,7 @@ class SLVExport extends _Export{
         + startExpressions
           .map((x) => `${x.id}$${x.space} []= ${x.assignments.start_.expr}`)
           .join('\n');
-      throw new Error(errorMsg);
+      throw new ExportError(errorMsg);
     }
 
     // create TimeEvents
@@ -128,7 +129,7 @@ class SLVExport extends _Export{
                   try{ // a can be evaluated, i.e. '3/4'
                     return tree.eval();
                   }catch(e){ // other cases, i.e. 'p1*2'
-                    throw new Error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`);
+                    throw new ExportError(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`);
                   }
                 }
               });
@@ -149,7 +150,7 @@ class SLVExport extends _Export{
       .selectByClassName('ContinuousSwitcher')
       .map((switcher) => switcher.id);
     if(bagSwitchers.length>0){
-      throw new Error('ContinuousSwitcher is not supported in SLVExport: ' + bagSwitchers);
+      throw new ExportError('ContinuousSwitcher is not supported in SLVExport: ' + bagSwitchers);
     }
     
     return model;

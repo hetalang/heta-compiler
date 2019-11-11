@@ -1,7 +1,8 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
+//const { ExportError } = require('../heta-error');
 
-class JSONExport extends _Export{
+class JSONExport extends _Export {
   get className(){
     return 'JSONExport';
   }

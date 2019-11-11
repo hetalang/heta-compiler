@@ -1,8 +1,7 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-//const { IndexedHetaError } = require('../heta-error');
+//const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
-//const _ = require('lodash');
 
 class SimbioExport extends _Export{
   merge(q={}, skipChecking){

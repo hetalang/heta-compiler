@@ -1,14 +1,17 @@
+// general Heta error
+class HetaError extends Error {}
+HetaError.prototype.name = 'HetaError';
 
 // compilation step 1
-class FileSystemError extends Error { }
+class FileSystemError extends HetaError { }
 FileSystemError.prototype.name = 'FileSystemError';
 
 // compilation step 2
-class ModuleError extends Error { }
+class ModuleError extends HetaError { }
 ModuleError.prototype.name = 'ModuleError';
 
 // compilation step 3
-class QueueError extends Error {
+class QueueError extends HetaError {
   constructor(q, message, filename, lineNumber){
     let index = getIndexFromQ(q);
     let indexedMessage = `(${index}) ${message}`;
@@ -20,7 +23,7 @@ QueueError.prototype.name = 'QueueError';
 
 // compilation step 3
 // error for matching heta schema
-class ValidationError extends Error {
+class ValidationError extends HetaError {
   constructor(q, diagnostics = [], message, filename, lineNumber){
     let index = getIndexFromQ(q);
     let indexedMessage = `(${index}) ${message}\n`
@@ -35,7 +38,7 @@ ValidationError.prototype.name = 'ValidationError';
 
 // compilation step 4
 // error for lost references
-class BindingError extends Error {
+class BindingError extends HetaError {
   constructor(index, diagnostics = [], message, filename, lineNumber){
     let indexedMessage = `(${index}) ${message}`
       + diagnostics.map((x) => '\n\t' + x).join('');
@@ -44,6 +47,11 @@ class BindingError extends Error {
   }
 }
 BindingError.prototype.name = 'BindingError';
+
+// compilation error 5
+// error in export
+class ExportError extends HetaError {}
+ExportError.prototype.name = 'ExportError';
 
 // converts {id: 'k1', space: 'one'} => 'one::k1'
 function getIndexFromQ(q = {}){
@@ -55,9 +63,11 @@ function getIndexFromQ(q = {}){
 }
 
 module.exports = {
+  HetaError,
   ValidationError,
   FileSystemError,
   ModuleError,
   QueueError,
-  BindingError
+  BindingError,
+  ExportError
 };

@@ -1,8 +1,7 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-//const { IndexedHetaError } = require('../heta-error');
+const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
-//const XArray = require('../x-array');
 const _ = require('lodash');
 
 class MrgsolveExport extends _Export{
@@ -48,7 +47,7 @@ class MrgsolveExport extends _Export{
           let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
           + `${record.id}$${record.space} []= ${record.assignments.start_.expr}`;
             
-          throw new Error(errorMsg);
+          throw new ExportError(errorMsg);
         }
       });
 
