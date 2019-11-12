@@ -1,21 +1,19 @@
 {
   "type": "object",
   "required": ["id"],
-  "additionalProperties": false,
+  "additionalProperties": true,
   "properties": {
     "id": {"type": "string"},
     "title": {"type": "string"},
     "notes": {"type": "string"},
     "version": {"type": "string"},
     "copyright": {"type": "string"},
-    "builderVersion": {"type": "string", "default": "^0.3.0"},
-    "aux": {"type": "object"},
+    "builderVersion": {"type": "string", "default": "^0.0.0"},
     "options": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "debuggingMode": {"type": "boolean", "default": false},
-        "syncMode": {"type": "boolean", "default": false},
         "logs": {"type": "string"},
         "logLevel": {"type": "string", "enum": ["error", "warn", "info", "verbose", "debug", "silly"]},
         "skipExport": {"type": "boolean", "default": false}
@@ -36,7 +34,6 @@
       "required": ["type", "filename"],
       "additionalProperties": false,
       "properties": {
-        "ignore": {"type": "boolean", "default": false},
         "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml", "xlsx"]},
         "filename": {"type": "string"},
         "ignoreDeps": {"type": "boolean", "default": false},

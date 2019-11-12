@@ -1,0 +1,16 @@
+[
+    {
+        "action": "upsert",
+        "class": "Record",
+        "id": "p1",
+        "assignments": {
+            "start_": "1"
+        }
+    },
+    {
+        "action": "upsert",
+        "class": "SBMLExport",
+        "id": "output_sbml",
+        "version": "L2V4"
+    }
+]

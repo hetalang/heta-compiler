@@ -51,7 +51,7 @@ class Builder {
     // version check
     let satisfiesVersion = semver.satisfies(version, decl.builderVersion);
     if(!satisfiesVersion){
-      let error = new BuilderError([],`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
+      let error = new BuilderError([], `Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`);
       this.errorCatcher(error);
       throw error;
     }

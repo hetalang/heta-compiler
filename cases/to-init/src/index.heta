@@ -1,0 +1,12 @@
+/*
+  template file for creating platform
+*/
+
+p1 @Record .= 1;
+
+output_sbml @SBMLExport { version: L2V4 };
+
+// #import { source: module.heta, type: heta };
+// #import { source: table.xlsx, type: xlsx };
+// #import { source: addon.json, type: json };
+// #import { source: addon.yml, type: yaml };
