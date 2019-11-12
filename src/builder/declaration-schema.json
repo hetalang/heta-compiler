@@ -31,11 +31,11 @@
     },
     "importModule": {
       "type": "object",
-      "required": ["type", "filename"],
+      "required": ["type", "source"],
       "additionalProperties": false,
       "properties": {
         "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml", "xlsx"]},
-        "filename": {"type": "string"},
+        "source": {"type": "string"},
         "ignoreDeps": {"type": "boolean", "default": false},
         "options": {"type": "object", "default": {}}
       }

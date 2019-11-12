@@ -26,7 +26,7 @@ describe('Testing "cases/0-hello-world"', () => {
       },
       'importModule': {
         'type': 'heta',
-        'filename': 'src/2-annotation.heta'
+        'source': 'src/2-annotation.heta'
       }
     };
     b = new Builder(declaration, 'cases/0-hello-world', '../../test/cases/1/dist');

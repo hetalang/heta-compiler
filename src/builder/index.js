@@ -66,9 +66,9 @@ class Builder {
     logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
   async compileAsync(){
-    logger.info(`Compilation of module "${this.importModule.filename}" of type "${this.importModule.type}"...`);
+    logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     let ms = new ModuleSystem();
-    let absFilename = path.join(this._coreDirname, this.importModule.filename);
+    let absFilename = path.join(this._coreDirname, this.importModule.source);
     
     // 1. Parsing
     await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule.options);
@@ -111,7 +111,7 @@ class Builder {
   // starts async build
   async runAsync(){
     this.errorFlag = false; // reset platform level errors
-    let absFilename = path.join(this._coreDirname, this.importModule.filename);
+    let absFilename = path.join(this._coreDirname, this.importModule.source);
     // Compilation steps
     await this.compileAsync().catch((error) => {
       this.errorCatcher(error, `Module "${absFilename}" was not compiled properly.`);

@@ -19,6 +19,6 @@
   },
   "importModule": {
     "type": "heta",
-    "filename": "src/model.heta"
+    "source": "src/model.heta"
   }
 }
