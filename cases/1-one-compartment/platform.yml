@@ -5,4 +5,4 @@ options:
   debuggingMode: true
 importModule:
   type: heta
-  filename: src/shared-constants.heta
+  source: src/shared-constants.heta
