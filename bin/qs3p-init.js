@@ -5,17 +5,25 @@ const path = require('path').posix;
 const { prompt } = require('inquirer');
 const pkg = require('../package');
 
+// for the development of JSON schema
+// we use https://docs.npmjs.com/files/package.json
+
 const defaultPlatform = {
+  '$schema': 'https://github.com/insysbio/qs3p-js#',
   id: 'template',
   title: 'platform title',
   notes: 'platform notes',
   version: 'v0.1.0',
-  copyright: 'platform owner',
-  license: 'MIT',
+  keywords: [],
+  //homepage: '',
+  //repository: {url: '', type: 'git'},
+  license: 'UNLICENSED', // for not published
+  //private: false,
+  constributors: [],
   builderVersion: '^' + pkg.version,
   options: {
     debuggingMode: false,
-    logs: 'log.log',
+    logs: 'output.log',
     logLevel: 'info',
     skipExport: false
   },

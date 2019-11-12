@@ -1,13 +1,26 @@
 {
+  "$schema": "http://json-schema.org/schema#",
+  "description" : "Describes platform.json file in qs3p-js.",
   "type": "object",
-  "required": ["id"],
+  "required": ["id", "importModule"],
   "additionalProperties": true,
   "properties": {
     "id": {"type": "string"},
     "title": {"type": "string"},
     "notes": {"type": "string"},
     "version": {"type": "string"},
-    "copyright": {"type": "string"},
+    "keywords": {"type": "array", "items": {"type": "string"}},
+    "homepage": {"type": "string"},
+    "repository": {
+      "type": "object",
+      "properties": {
+        "type": {"type": "string"},
+        "url": {"type": "string"}
+      }
+    },
+    "license" : {"type": "string", "default": "UNLICENSED", "description": "see https://spdx.org/licenses/"},
+    "private": {"type": "boolean"},
+    "contributors": {"type": "array", "items": {"type": "string", "example": "Your Name <email@example.com> (http://example.com)"}},
     "builderVersion": {"type": "string", "default": "^0.0.0"},
     "options": {
       "type": "object",
