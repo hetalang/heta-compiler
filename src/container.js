@@ -20,25 +20,46 @@ const reservedWords = [
   'id'
 ];
 
+class Storage extends Map {
+  set(key, value){
+    // argument checking
+    let keyIsCorrect = /^([a-zA-Z_]\w*::)*([a-zA-Z_]\w*)$/.test(key);
+    if(!keyIsCorrect) 
+      throw new TypeError('Wrong index in Storage: ' + key);
+
+    if(!value.instanceOf('_Component'))
+      throw new TypeError('Value in Storage should be _Component, but we have: ' + value);
+
+    super.set(key, value);
+    let indexArray = _.reverse(key.split('::'));
+    value._id = indexArray[0];
+    if(indexArray.length > 1) value._space = indexArray[1];
+
+    return this;
+  }
+}
+
 class Container {
   constructor(){
-    this.storage = new Map();
+    this.storage = new Storage();
   }
   insert(q = {}){
-    // check
+    // check index
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     if(reservedWords.indexOf(q.id)!==-1)
       throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
       throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
+
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
       throw new QueueError(q, `Unknown class "${q.class}" for the element.`);
-    let component = (new selectedClass({id: q.id, space: q.space})).merge(q);
+    let component = (new selectedClass).merge(q);
 
-    this.storage.set(component.index, component);
+    let index = getIndexFromQ(q);
+    this.storage.set(index, component);
     if(component.instanceOf('_Export')) { // include parent
       component._container = this;
     }
@@ -85,6 +106,7 @@ class Container {
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, got "${q.id}"`);
     let index = getIndexFromQ(q);
+    
     return this.storage.get(index);
   }
   /*

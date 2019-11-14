@@ -45,10 +45,7 @@ class SLVExport extends _Export{
     };
 
     // add default_compartment_
-    let default_compartment_ = new Compartment({
-      id: 'default_compartment_',
-      space: targetSpace
-    }).merge({
+    let default_compartment_ = (new Compartment).merge({
       assignments: {
         start_: {expr: 1}
       },
@@ -56,6 +53,8 @@ class SLVExport extends _Export{
       units: 'UL',
       notes: 'This is fake compartment to support compounds without compartment.'
     });
+    default_compartment_._id = 'default_compartment_';
+    default_compartment_._space = targetSpace;
     model.population.push(default_compartment_);
 
     // push active processes
@@ -63,7 +62,7 @@ class SLVExport extends _Export{
     model.population.filter((x) => {
       return x.instanceOf('Process')
         && x.actors.length>0 // process with actors
-        && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary);// true if there is at least non boundary target
+        && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary); // true if there is at least non boundary target
     }).forEach((process) => {
       model.processes.push(process);
     });

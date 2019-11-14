@@ -6,7 +6,7 @@ const { expect } = require('chai');
 
 describe('Test for instanceOf', () => {
   it('Check Page parents', () => {
-    let page1 = new Page({id: 'page1'});
+    let page1 = new Page;
     expect(page1.instanceOf('Page'))
       .to.be.true;
     expect(page1.instanceOf('_Component'))
@@ -19,7 +19,7 @@ describe('Test for instanceOf', () => {
       .to.be.false;  
   });
   it('Check Page className', () => {
-    let page1 = new Page({id: 'page1'});
+    let page1 = new Page;
     expect(page1)
       .to.have.property('className', 'Page');
   });

@@ -5,7 +5,7 @@ const { BindingError } = require('../../src/heta-error');
 
 describe('Testing dependOn() for Record and Species', () => {
   it('for Species isAmount=true', () => {
-    let species = new Species({id: 'S1', space: 'one'}).merge({
+    let species = (new Species).merge({
       isAmount: true,
       assignments: {
         start_: 'x*y*exp(z*t)',
@@ -23,7 +23,7 @@ describe('Testing dependOn() for Record and Species', () => {
     expect(deps4).to.be.an('undefined');
   });
   it('for Species isAmount=undefined', () => {
-    let species = new Species({id: 'S1', space: 'one'}).merge({
+    let species = (new Species).merge({
       compartment: 'comp',
       assignments: {
         start_: 'x*y*exp(z)',
@@ -41,7 +41,7 @@ describe('Testing dependOn() for Record and Species', () => {
     expect(deps4).to.be.an('undefined');
   });
   it('Throws for Species when  isAmount=undefined and no compartment', () => {
-    let species = new Species({id: 'S1', space: 'one'});
+    let species = new Species;
     expect(() => {
       species.dependOn('start_');
     }).throw(BindingError);

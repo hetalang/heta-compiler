@@ -7,20 +7,7 @@ const _ = require('lodash');
   Abstract class _Component
 */
 class _Component {
-  constructor(q = {}){ // q must be in form {id: <string>} or {id: <string>, space: <string>}
-    if(q.id && (typeof q.id === 'string')){
-      this._id = q.id;
-    }else{
-      throw new TypeError('Wrong index ' + JSON.stringify({id: q.id}));
-    }
-    if(q.space){
-      if(typeof q.space === 'string'){
-        this._space = q.space;
-      }else{
-        throw new TypeError('Wrong index, space should be string, but get ' + q.space);
-      }
-    }
-
+  constructor(){
     this.tags = [];
     this.aux = {};
   }
@@ -117,7 +104,10 @@ class _Component {
           // clone component with another space
           let q = target.toQ();
           let selectedClass = container.classes[q.class];
-          target = (new selectedClass({id: target.id, space: this.space})).merge(q);
+          let previousId = target.id;
+          target = (new selectedClass).merge(q);
+          target._id = previousId;
+          target._space = this.space;
           target.isVirtual = true;
           container.storage.set(target.index, target);
           // pop dependencies of virtual recursively
@@ -161,8 +151,8 @@ class _Component {
   toQ(){
     let res = {};
     res.class = this.className;
-    res.id = this._id;
-    if(this._space) res.space = this._space;
+    res.id = this.id;
+    if(this.space) res.space = this.space;
     if(this.title) res.title = this.title;
     if(this.notes) res.notes = this.notes;
     if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);

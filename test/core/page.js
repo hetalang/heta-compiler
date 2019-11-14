@@ -7,12 +7,12 @@ describe('Unit test for Page', () => {
 
   it('Incorrect content property', () => {
     expect(() => {
-      (new Page({id: 'pg1'})).merge({content: {}});
+      (new Page).merge({content: {}});
     }).to.throw(ValidationError);
   });
 
   it('ToQ transformation', () => {
-    let simple = (new Page({id: 'pg1'})).merge({
+    let simple = (new Page).merge({
       id: 'pmid',
       space: 'one',
       title: 'title',
@@ -21,6 +21,7 @@ describe('Unit test for Page', () => {
       content: 'content',
       aux: {a: 1, b: 'b', c: {}}
     });
+    simple._id = 'pg1';
 
     expect(simple.toQ()).to.be.deep.equal({
       id: 'pg1',

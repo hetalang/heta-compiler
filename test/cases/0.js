@@ -55,7 +55,9 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.classes.JSONExport;
-    let json_export = new JSONExport({id: 'json_export', space: 'mm'});
+    let json_export = new JSONExport;
+    json_export._id = 'json_export';
+    json_export._space = 'mm';
     json_export._container = b.container;
 
     let code = json_export.do();
@@ -66,7 +68,9 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @YAMLExport, check and compare.', () => {
     const YAMLExport = b.container.classes.YAMLExport;
-    let yaml_export = new YAMLExport({id: 'yaml_export', space: 'mm'});
+    let yaml_export = new YAMLExport;
+    yaml_export._id = 'yaml_export';
+    yaml_export._space = 'mm';
     yaml_export._container = b.container;
 
     let code = yaml_export.do();
@@ -77,7 +81,9 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @SLVExport, check and compare.', () => {
     const SLVExport = b.container.classes.SLVExport;
-    let slv_export = (new SLVExport({id: 'slv_export', space: 'mm'}));
+    let slv_export = new SLVExport;
+    slv_export._id = 'slv_export';
+    slv_export._space = 'mm';
     slv_export._container = b.container;
 
     let code = slv_export.do();

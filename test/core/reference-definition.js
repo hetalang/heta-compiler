@@ -7,18 +7,18 @@ describe('Unit test for ReferenceDefinition', () => {
 
   it('Incorrect prefix property', () => {
     expect(() => {
-      (new ReferenceDefinition({id: 'ref1'})).merge({prefix: {}});
+      (new ReferenceDefinition).merge({prefix: {}});
     }).to.throw(ValidationError);
   });
 
   it('Incorrect suffix property', () => {
     expect(() => {
-      (new ReferenceDefinition({id: 'ref1'})).merge({suffix: {}});
+      (new ReferenceDefinition).merge({suffix: {}});
     }).to.throw(ValidationError);
   });
 
   it('ToQ transformation', () => {
-    let simple = (new ReferenceDefinition({id: 'ref1'})).merge({
+    let simple = (new ReferenceDefinition).merge({
       id: 'pmid',
       title: 'title',
       notes: 'notes',
@@ -27,6 +27,7 @@ describe('Unit test for ReferenceDefinition', () => {
       suffix: '-suffix',
       prefix: 'this://is.correct/prefix/'
     });
+    simple._id = 'ref1';
 
     expect(simple.toQ()).to.be.deep.equal({
       id: 'ref1',

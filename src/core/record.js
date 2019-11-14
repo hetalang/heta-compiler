@@ -62,9 +62,10 @@ class Record extends _Component {
                 // clone component with another space
                 let q = target.toQ();
                 let selectedClass = container.classes[q.class];
-                target = (new selectedClass({id: target.id, space: this.space})).merge(q);
+                let previousId = target.id;
+                target = (new selectedClass).merge(q);
                 target.isVirtual = true;
-                container.storage.set(target.index, target);
+                container.storage.set(`${this.space}::${previousId}`, target);
                 // pop dependencies of virtual recursively
                 target.bind(container, skipErrors);
               }
