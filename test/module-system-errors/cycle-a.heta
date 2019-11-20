@@ -1,5 +1,5 @@
 // dependences: a <- b, b <- a, b <- c
 
-include ./cycle-b.heta oftype heta
+include ./cycle-b.heta type heta
 
 x := 1;

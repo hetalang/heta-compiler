@@ -6,11 +6,10 @@ p1 @Record .= 1;
 
 output_sbml @SBMLExport { version: L2V4 };
 
-// #import { source: module.heta, type: heta };
-#import {
-  source: table.xlsx,
-  type: xlsx,
+// include module.heta type: heta
+include table.xlsx type xlsx with {
   options: { sheetNum: [1], omitRows: 3 }
-};
-// #import { source: addon.json, type: json };
-// #import { source: addon.yml, type: yaml };
+}
+
+// include addon.json type json
+// include addon.yml type yaml

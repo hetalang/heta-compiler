@@ -3,4 +3,4 @@ k2 = 1.2;
 
 include ./normal-c.heta
 
-include ./normal-d.json oftype json
+include ./normal-d.json type json

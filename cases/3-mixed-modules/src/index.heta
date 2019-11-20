@@ -2,26 +2,17 @@
   This modul imports different types of modules
 */
 
-include json.json oftype json
+include json.json type json
 
-include heta.heta oftype heta
+include heta.heta type heta
 
-include yaml.yml oftype yaml
+include yaml.yml type yaml
 
-// should be replaced by include but how?
-#import {
-  source: xlsx.xlsx,
-  type: xlsx,
-  options: {
-    sheetNum: [1, 2],
-    omitRows: 3
-  }
-};
+include xlsx.xlsx type xlsx with {
+  options: { sheetNum: [1, 2], omitRows: 3 }
+}
 
-// should be replaced by include but how?
-#import {
-  source: page.md,
-  type: md,
+include page.md type md with {
   options: {pageId: xxx},
   id: yyy,
   title: hhh
