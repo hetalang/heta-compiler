@@ -4,12 +4,6 @@ one::k1 @Record {
   title: hello world
 };
 
-#import bbb {
-  source: "normal-b.heta",
-  type: "heta"
-};
+include normal-b.heta
 
-#import ccc {
-  source: "../module-system/normal-c.heta",
-  type: "heta"
-};
+include ../module-system/normal-c.heta

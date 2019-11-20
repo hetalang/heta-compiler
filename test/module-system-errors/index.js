@@ -16,10 +16,10 @@ describe('ModuleSystem for cyclic.', () => {
   });
 });
 
-describe('ModuleSystem with self import.', () => {
+describe('ModuleSystem with self include.', () => {
   it('Add module. Sort throws.', async () => {
     let ms = new ModuleSystem();
-    let filepath = path.join(__dirname, 'self-import.heta');
+    let filepath = path.join(__dirname, 'self-include.heta');
     await ms.addModuleDeepAsync(filepath, 'heta', {});
     expect(() => {
       ms.sortedPaths();

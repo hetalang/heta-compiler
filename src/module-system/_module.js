@@ -2,7 +2,7 @@ const path = require('path');
 const { ModuleError } = require('../heta-error');
 
 // abstract class for different import types
-class _Module{
+class _Module {
   static async createModuleAsync(filename, type, options = {}){
     let mdl = new _Module;
     mdl.filename = path.resolve(filename); // get abs path
@@ -34,14 +34,14 @@ class _Module{
   }
   getImportElements(){
     return this.parsed
-      .filter((q) => q.action==='import');
+      .filter((q) => q.action==='import' || q.action==='include');
   }
   // replace relative paths by absolute ones
   updateByAbsPaths(){
     let absDirPath = path.dirname(this.filename);
     this.getImportElements().forEach((q) => {
-      if(typeof q.source !== 'string') 
-        throw new ModuleError(`Property "source" in import inside "${this.filename}" must be string, but currently is ${q.source}.`);
+      if(typeof q.source !== 'string')
+        throw new ModuleError(`Property "source" in include inside "${this.filename}" must be string, but currently is ${q.source}.`);
       q.source = path.resolve(absDirPath, q.source);
     });
   }

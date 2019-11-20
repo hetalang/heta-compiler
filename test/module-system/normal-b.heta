@@ -1,12 +1,6 @@
 k2 @Const;
 k2 = 1.2;
 
-#import ccc {
-  source: "./normal-c.heta",
-  type: "heta"
-};
+include ./normal-c.heta
 
-#import ddd {
-  source: "./normal-d.json",
-  type: "json"
-};
+include ./normal-d.json oftype json

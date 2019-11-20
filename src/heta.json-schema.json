@@ -579,17 +579,6 @@
         "action": { "const": "delete" },
         "id": { "$ref": "#/definitions/ID" }
       }
-    },
-
-    "Import": {
-      "type": "object",
-      "description": "Import some part from another file.",
-      "required": ["action", "source"],
-      "properties": {
-        "action": { "const": "import" },
-        "source": { "type": "string" },
-        "format": { "type": "string", "enum": ["heta", "slv", "dat", "md", "sbml"], "default": "heta" }
-      }
     }
 
    }

@@ -33,7 +33,7 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(b);
   });
 
-  it('Run import', async () => {
+  it('Run include', async () => {
     await b.compileAsync();
   });
 

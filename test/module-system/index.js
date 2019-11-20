@@ -4,12 +4,12 @@ const ModuleSystem = require('../../src/module-system');
 const path = require('path');
 //const { writeFileSync } = require('fs');
 const expected = require('./expected');
-const noImportOutput = require('./no-import');
+const noImportOutput = require('./no-include');
 
-describe('ModuleSystem without import.', () => {
+describe('ModuleSystem without include.', () => {
   it('Add module.', async () => {
     let ms = new ModuleSystem();
-    let filepath = path.join(__dirname, 'no-import.heta');
+    let filepath = path.join(__dirname, 'no-include.heta');
     let mdl = await ms.addModuleDeepAsync(filepath, 'heta', {});
     
     expect(mdl.parsed).to.be.deep.equal(noImportOutput);

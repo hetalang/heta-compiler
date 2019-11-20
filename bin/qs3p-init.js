@@ -34,7 +34,7 @@ const defaultPlatform = {
   //},
   importModule: {
     type: 'heta',
-    filename: 'src/index.heta',
+    source: 'src/index.heta',
     ignoreDeps: false
   }
 };
@@ -128,7 +128,7 @@ prompt(questions)
     } else if (answers.importModule==='xlsx') {
       platform.importModule = {
         type: 'xlsx',
-        filename: 'src/table.xlsx',
+        source: 'src/table.xlsx',
         options: {
           sheetNum: [1],
           omitRows: 3
@@ -146,7 +146,7 @@ prompt(questions)
     }else if (answers.importModule==='json') {
       platform.importModule = {
         type: 'json',
-        filename: 'src/index.json'
+        source: 'src/index.json'
       };
 
       // create files in src

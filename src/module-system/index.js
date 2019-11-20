@@ -59,7 +59,7 @@ class ModuleSystem {
     try{
       return this.graph.sort();
     }catch(error){
-      throw new ModuleError(`Circular import in modules: [ ${error.circular.join(', ')} ]`);
+      throw new ModuleError(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
     }
   }
   integrate(){
@@ -69,7 +69,7 @@ class ModuleSystem {
       .map((y) => this.moduleCollection[y])
       .forEach((x) => {
         x._integrated = x.parsed.reduce((acc, current) => {
-          if(current.action==='import'){
+          if(current.action==='import' || current.action==='include'){
             let childIntegrated = this.moduleCollection[current.source]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);

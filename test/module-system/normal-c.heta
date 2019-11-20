@@ -1,7 +1,4 @@
 k3 @Const;
 k3 = 1.2;
 
-#import eee {
-  source: "./normal-e.yml",
-  type: "yml"
-};
+include ./normal-e.yml oftype yml

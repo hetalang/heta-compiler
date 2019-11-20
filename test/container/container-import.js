@@ -7,7 +7,7 @@ describe('Unit tests for Container load', () => {
   var c;
   c = new Container();
 
-  it('Import component and check return.', () => {
+  it('Load component and check return.', () => {
     /*
     {
       action: insert,
