@@ -2,21 +2,13 @@
   This modul imports different types of modules
 */
 
-#import {
-  source: json.json,
-  type: json
-};
+include json.json oftype json
 
-#import {
-  source: heta.heta,
-  type: heta
-};
+include heta.heta oftype heta
 
-#import {
-  source: yaml.yml,
-  type: yml
-};
+include yaml.yml oftype yml
 
+// should be replaced by include but how?
 #import {
   source: xlsx.xlsx,
   type: xlsx,
@@ -26,6 +18,7 @@
   }
 };
 
+// should be replaced by include but how?
 #import {
   source: page.md,
   type: md,

@@ -5,7 +5,7 @@ block @Const begin
 end
 
 namespace invitro begin
-    #import {source: neu.heta, type: heta};
+    include neu.heta
     tot_vol @Compartment []= 0.1; // <L>
 
     P1_mean @Record := ( P1_ext * ext + P1_neu * neu_vol ) / tot_vol;
@@ -21,7 +21,7 @@ namespace invitro begin
 end
 
 namespace invivo begin
-    #import {source: neu.heta, type: heta};
+    include neu.heta
 
     blood @Compartment .= 5.2;
     neu_count @Species {compartment: blood};

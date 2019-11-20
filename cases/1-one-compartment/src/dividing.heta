@@ -5,15 +5,8 @@ block @Const begin
   Km = 1.1;
 end
 
-#import {
-  source: non-saturable.heta,
-  type: heta
-};
-
-#import {
-  source: saturable.heta,
-  type: heta
-};
+include non-saturable.heta
+include saturable.heta
 
 //one_comp::sbml_non_saturable @SBMLExport;
 //one_comp_saturation::sbml_saturable @SBMLExport {model: one_comp_saturation};

@@ -6,4 +6,4 @@ k2 @Const = 2.0;
 //p1 @Record .= k5;
 p1 @Record [ode_]= k6*;
 
-#import { source: ./addon.heta, type: heta };
+include ./addon.heta

@@ -5,16 +5,10 @@ block @Const begin
   Km = 1.1;
 end
 
-#import {
-  source: non-saturable.heta,
-  type: heta
-};
+include non-saturable.heta
 
 namespace one_comp_saturation begin
-  #import {
-    source: non-saturable.heta,
-    type: heta
-  };
+  include non-saturable.heta
   vel := Vmax*s1*comp1/(Km + s1);
 end
 
