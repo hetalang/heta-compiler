@@ -19,14 +19,14 @@ class _Module {
       case 'md':
         await mdl.setMdModuleAsync();
         break;
-      case 'yml':
+      case 'yaml':
         await mdl.setYAMLModuleAsync();
         break;
       case 'xlsx':
         await mdl.setXLSXModuleAsync();
         break;
       default:
-        throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yml", "xlsx"] `);
+        throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yaml", "xlsx"] `);
         break;
     }
     

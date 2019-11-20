@@ -6,7 +6,7 @@ include json.json oftype json
 
 include heta.heta oftype heta
 
-include yaml.yml oftype yml
+include yaml.yml oftype yaml
 
 // should be replaced by include but how?
 #import {
