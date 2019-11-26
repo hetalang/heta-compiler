@@ -2,6 +2,12 @@
   This case is based on 0-hello-world but with @Task
 */
 
+// this block unites element with the same class
+block @Const begin
+  Vmax = 0.1; // this is global constant available for any scoped equation
+  Km = 2.5;
+end
+
 namespace mm begin
   '''Note for the Default compartment'''
   default_comp @Compartment { title: Default compartment, units: L };
@@ -19,12 +25,6 @@ namespace mm begin
   r1 := Vmax*S/(Km+S)*default_comp; // S is used here but assigned below
   S .= 10; // S should be initialialized after creation
   P .= 0;
-end
-
-// this block unites element with the same class
-block @Const begin
-  Vmax = 0.1; // this is global constant available for any scoped equation
-  Km = 2.5;
 end
 
 // simulation tasks

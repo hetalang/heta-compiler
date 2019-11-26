@@ -1,4 +1,10 @@
 
+block @Const begin
+  k1 = 0.2;
+  k2 = 0.03;
+end
+pg2 @Page {content: this is content};
+
  namespace mod1 begin
   p1 @Record;
   p1 .= 1;
@@ -55,11 +61,6 @@ namespace mod1 begin
   };
 end
 
-block @Const begin
-  k1 = 0.2;
-  k2 = 0.03;
-end
-pg2 @Page {content: this is content};
 
 mod1::mod1_sbml @SBMLExport;
 
