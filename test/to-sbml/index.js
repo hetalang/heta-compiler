@@ -26,7 +26,7 @@ describe('Create SBML.', () => {
       .loadMany(firstModel)
       .populate(true);
     let text = c.select({id: 'sbml', space: 'first'}).do();
-    // fs.writeFileSync('result.xml', text);
+    //fs.writeFileSync('first-model-result-0.xml', text);
     expect(text).xml.to.be.valid();
     expect(text).xml.be.deep.equal(first_model_result);
   });
@@ -38,7 +38,7 @@ describe('Create SBML.', () => {
     let text = c.select({id: 'sbml', space: 'two_comp'})
       .do();
 
-    // fs.writeFileSync('result.xml', text);
+    //fs.writeFileSync('two-compartment-model-result-0.xml', text);
     expect(text).xml.to.be.valid();
     expect(text).xml.be.deep.equal(two_compartment_model_result);
   });

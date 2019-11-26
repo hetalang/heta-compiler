@@ -1,4 +1,7 @@
 
+Vmax @Const = 0.1; // this is global constant available for any scoped equation
+Km @Const = 2.5;
+
 // this block unites elements with the same space
 namespace mm begin
   '''Note for the Default compartment'''
@@ -18,9 +21,6 @@ namespace mm begin
   S .= 10; // S should be initialialized after creation
   P .= 0;
 end
-
-Vmax @Const = 0.1; // this is global constant available for any scoped equation
-Km @Const = 2.5;
 
 mm::mm_sbml @SBMLExport { title: Exported mm model};
 mm::mm_simbio @SimbioExport;

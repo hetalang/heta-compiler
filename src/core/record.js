@@ -46,29 +46,17 @@ class Record extends _Component {
         this
           .dependOn(key)
           .forEach((id) => {
-            let target = container.softSelect({
+            let target = container.select({
               id: id, 
               space: this.space
             });
 
             if(!target){
-              messages.push(`Component "${id}" is not found in space "${this.space}" or in global as expected in expression: `
+              messages.push(`Component "${id}" is not found in space "${this.space}" as expected in expression: `
                     + `${this.index} [${key}]= ${mathExpr.expr};`);
             }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
               messages.push(`Component "${id}" is not a Const or Record class as expected in expression: `
                 + `${this.index} [${key}]= ${mathExpr.expr};`);
-            }else{
-              if(this.space !== target.space){ // if local -> global
-                // clone component with another space
-                let q = target.toQ();
-                let selectedClass = container.classes[q.class];
-                let previousId = target.id;
-                target = (new selectedClass).merge(q);
-                target.isVirtual = true;
-                container.storage.set(`${this.space}::${previousId}`, target);
-                // pop dependencies of virtual recursively
-                target.bind(container, skipErrors);
-              }
             }
           });
       });

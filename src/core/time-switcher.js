@@ -1,13 +1,13 @@
 const { _Switcher } = require('./_switcher');
 
 class TimeSwitcher extends _Switcher {
-  merge(q, skipChecking){
+  merge(q={}, skipChecking){
     if(!skipChecking) TimeSwitcher.isValid(q);
     super.merge(q, skipChecking);
 
-    this.start = q.start;
-    if(q && q.period!==undefined) this.period = q.period;
-    if(q && q.repeatCount!==undefined) this.repeatCount = q.repeatCount;
+    if(q.start!==undefined) this.start = q.start;
+    if(q.period!==undefined) this.period = q.period;
+    if(q.repeatCount!==undefined) this.repeatCount = q.repeatCount;
 
     return this;
   }
@@ -20,6 +20,12 @@ class TimeSwitcher extends _Switcher {
     return res;
   }
 }
+
+TimeSwitcher._requirements = {
+  start: {
+    required: true
+  }
+};
 
 module.exports = {
   TimeSwitcher

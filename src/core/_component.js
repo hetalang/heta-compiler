@@ -50,11 +50,14 @@ class _Component {
   get isGlobal(){
     return this._space===undefined;
   }
-  /*
-  clone(){ // creates copy of element TODO: not tested
-    return _.clone(this);
+  clone(q = {}, isVirtual = false){ // creates copy of element TODO: not tested
+    let res = _.cloneDeep(this);
+    if(q.id) res._id = q.id;
+    if(q.space) res._space = q.space;
+    res.isVirtual = isVirtual;
+
+    return res;
   }
-  */
   get notesMdTree(){
     if(this.notes){
       return markdown.parse(this.notes);
@@ -90,7 +93,7 @@ class _Component {
     if(!container) throw new TypeError('"container" argument should be set.');
     
     const iterator = (item, path, rule) => {
-      let target = container.softSelect({
+      let target = container.select({
         id: _.get(this, path), 
         space: this.space
       });
@@ -100,19 +103,6 @@ class _Component {
       }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
         throw new BindingError(this.index, [], `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
       }else{
-        if(this.space !== target.space){ // if local -> global
-          // clone component with another space
-          let q = target.toQ();
-          let selectedClass = container.classes[q.class];
-          let previousId = target.id;
-          target = (new selectedClass).merge(q);
-          target._id = previousId;
-          target._space = this.space;
-          target.isVirtual = true;
-          container.storage.set(target.index, target);
-          // pop dependencies of virtual recursively
-          target.bind(container, skipErrors);
-        }
         // set direct ref
         if(rule.setTarget) _.set(this, path + 'Obj', target);
         // add back references for Process XXX: ugly solution

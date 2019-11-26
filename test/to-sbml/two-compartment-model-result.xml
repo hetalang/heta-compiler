@@ -4,6 +4,16 @@
   
     <listOfCompartments>
       <compartment
+        id="c2"
+        
+        constant="false"
+        size="1.5"
+        units="L"
+        metaid="two_comp::c2"
+        >
+        
+      </compartment>
+      <compartment
         id="c0"
         
         constant="false"
@@ -20,16 +30,6 @@
         size="5"
         units="L"
         metaid="two_comp::c1"
-        >
-        
-      </compartment>
-      <compartment
-        id="c2"
-        
-        constant="false"
-        size="1.5"
-        units="L"
-        metaid="two_comp::c2"
         >
         
       </compartment>
@@ -129,6 +129,16 @@
         
       </parameter>
       <parameter
+        id="kel"
+        
+        constant="true"
+        value="0.00001"
+        units="__h"
+        metaid="two_comp::kel"
+        >
+        
+      </parameter>
+      <parameter
         id="kdiff"
         
         constant="true"
@@ -145,16 +155,6 @@
         value="2.2"
         units="m2"
         metaid="two_comp::PS"
-        >
-        
-      </parameter>
-      <parameter
-        id="kel"
-        
-        constant="true"
-        value="0.00001"
-        units="__h"
-        metaid="two_comp::kel"
         >
         
       </parameter>

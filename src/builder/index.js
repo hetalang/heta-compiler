@@ -82,7 +82,7 @@ class Builder {
         this.errorCatcher(validationError, 'The element will be skipped.');
       }
     });
-    // 4. Binding
+    // 4. Binding TODO: population must be when exported
     logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.populate();
   }

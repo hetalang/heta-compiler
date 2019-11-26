@@ -17,7 +17,8 @@ const XArray = require('./x-array');
 // they cannot be used as id, when 
 const reservedWords = [
   'default',
-  'id'
+  'id',
+  'space'
 ];
 
 class Storage extends Map {
@@ -37,11 +38,27 @@ class Storage extends Map {
 
     return this;
   }
+  selectBySpace(space){
+    if(space===undefined){
+      var res = [...this].filter((item) => {
+        let indexArray = item[0].split('::');
+        return indexArray.length===1;
+      });
+    } else {
+      res = [...this].filter((item) => {
+        let indexArray = item[0].split('::');
+        return indexArray.length===2 && indexArray[0]===space;
+      });
+    }
+
+    return res.map((item) => item[1]);
+  }
 }
 
 class Container {
   constructor(){
     this.storage = new Storage();
+    this.namespaces = [];
   }
   insert(q = {}){
     // check index
@@ -109,6 +126,15 @@ class Container {
     
     return this.storage.get(index);
   }
+  /* clone space components to another space */
+  cloneNamespace(q = {}, isVirtual = false){
+    let toClone = this.storage.selectBySpace(q.space);
+    toClone.forEach((component) => {
+      let clone = component.clone({space: q.targetSpace}, isVirtual);
+      let index = clone.index;
+      this.storage.set(index, clone);
+    });
+  }
   /*
     The same as select() but search in namespace then globally
   */
@@ -121,6 +147,10 @@ class Container {
     }
   }
   load(q){
+    if(q.space!==undefined && this.namespaces.indexOf(q.space)===-1){
+      this.namespaces.push(q.space);
+      this.cloneNamespace({ targetSpace: q.space }, true);
+    }
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
     // do action

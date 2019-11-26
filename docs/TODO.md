@@ -23,3 +23,12 @@
 - rxode
 + simbio
 - simsolver
+
+## plan
+
+1. New spaces: isolated + anonimous
+1. #clone, #move
+1. UnitsDefinition
+1. FunctionDefinition, check export functions
+1. ContineousSwitcher в DBSolve
+1. Assignments A + x*y в DBSolve

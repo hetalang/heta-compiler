@@ -11,38 +11,38 @@ describe('Test populate()', () => {
   it('Creating good platform.', () => {
     c = new Container();
     c.loadMany([
-      {class: 'Const', id: 'k1', num: 1}, // glob
-      {class: 'Const', id: 'k2', num: 2}, // glob + virtual local
-      {class: 'Const', id: 'k1', space: 'one', num: 1.1},
+      {class: 'Const', id: 'k1', num: 1}, // 1
+      {class: 'Const', id: 'k2', num: 2}, // 1 + 1
+      {class: 'Const', id: 'k1', space: 'one', num: 1.1}, // 1 first space call
 
-      {class: 'Record', id: 'p1', assignments: {start_: 'k1'}}, // glob
-      {class: 'Record', id: 'p1', space: 'one', assignments: {start_: 'k1'}},
-      {class: 'Record', id: 'p2', space: 'one', assignments: {start_: 'k2'}},
+      {class: 'Record', id: 'p1', assignments: {start_: 'k1'}}, // 1 
+      {class: 'Record', id: 'p1', space: 'one', assignments: {start_: 'k1'}}, // 1
+      {class: 'Record', id: 'p2', space: 'one', assignments: {start_: 'k2'}}, // 1
 
-      {class: 'Record', id: 'p3', space: 'one', assignments: {start_: 'p4'}},
-      {class: 'Record', id: 'p4', assignments: {start_: 'p1'}}, // glob + local
+      {class: 'Record', id: 'p3', space: 'one', assignments: {start_: 'p2'}}, // 1
+      {class: 'Record', id: 'p4', assignments: {start_: 'p1'}}, // 1 + 0
 
-      {class: 'Compartment', id: 'comp1'}, // glob
-      {class: 'Compartment', id: 'comp2'}, // glob + virtual local
-      {class: 'Compartment', id: 'comp1', space: 'one'},
+      {class: 'Compartment', id: 'comp1'}, // 1
+      {class: 'Compartment', id: 'comp2'}, // 1 + 0
+      {class: 'Compartment', id: 'comp1', space: 'one'}, // 1
 
-      {class: 'Species', id: 's1', compartment: 'comp1'}, // glob
-      {class: 'Species', id: 's1', space: 'one', compartment: 'comp1'},
-      {class: 'Species', id: 's2', space: 'one', compartment: 'comp2'}
+      {class: 'Species', id: 's1', compartment: 'comp1'}, // 1
+      {class: 'Species', id: 's1', space: 'one', compartment: 'comp1'}, // 1
+      {class: 'Species', id: 's2', space: 'one', compartment: 'comp1'} // 1
     ]);
-    //console.log(c.storage);
-    expect(c).to.have.property('length', 14);
+    
+    expect(c).to.have.property('length', 15);
   });
 
   it('Populate good platform.', () => {
     c.populate();
-    expect(c).to.have.property('length', 17);
+    expect(c).to.have.property('length', 15);
   });
 
-  it('Get components visible for "one" namespace', () => {
+  it('population visibility', () => {
     let one = c.getPopulation('one');
     expect(one).to.be.instanceOf(XArray);
-    expect(one).to.have.property('length', 10);
+    expect(one).to.have.property('length', 8);
   });
 
   it('Get components visible for "anonimous" namespace', () => {

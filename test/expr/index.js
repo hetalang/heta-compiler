@@ -26,11 +26,3 @@ describe('Expression constructor.', () => {
     }).throw(TypeError);
   });
 });
-
-try{
-  let expr = new Expression('m*(c^2');
-}catch(e){
-  console.log(JSON.stringify(e, null, 2));
-  console.log(e.name);
-  console.log(e.message);
-}

@@ -1,34 +1,44 @@
+- class: Const
+  id: Vmax
+  space: mm
+  isVirtual: true
+  num: 0.1
+- class: Const
+  id: Km
+  space: mm
+  isVirtual: true
+  num: 2.5
 - class: Compartment
   id: default_comp
+  space: mm
   title: Default compartment
   notes: Note for the Default compartment
-  space: mm
   assignments:
     start_: {expr: '1'}
   units: L
 - class: Species
   id: S
-  title: substrate
   space: mm
+  title: substrate
   assignments:
     start_: {expr: '10'}
   units: uM
   compartment: default_comp
 - class: Species
   id: P
-  title: product
   space: mm
+  title: product
   assignments:
     start_: {expr: '0'}
   units: uM
   compartment: default_comp
 - class: Reaction
   id: r1
+  space: mm
   title: Michaelis-Menten reaction
   notes: Transformation of __substate__ to __product__
   aux:
     reversible: false
-  space: mm
   assignments:
     ode_: {expr: Vmax * S / (Km + S) * default_comp}
   units: umole/min
@@ -37,8 +47,8 @@
     - {target: P, stoichiometry: 1}
 - class: SBMLExport
   id: mm_sbml
-  title: Exported mm model
   space: mm
+  title: Exported mm model
 - class: SimbioExport
   id: mm_simbio
   space: mm
@@ -53,15 +63,5 @@
   space: mm
 - class: MrgsolveExport
   id: mm_mrg
+  space: mm
   title: export to mrgsolve
-  space: mm
-- class: Const
-  id: Vmax
-  num: 0.1
-  space: mm
-  isVirtual: true
-- class: Const
-  id: Km
-  num: 2.5
-  space: mm
-  isVirtual: true
