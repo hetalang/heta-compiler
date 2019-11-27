@@ -127,29 +127,49 @@ class Container {
     return this.storage.get(index);
   }
   /* clone space components to another space */
-  cloneNamespace(q = {}, isVirtual = false){
+  useNamespace(q = {}, isVirtual = false){
     let toClone = this.storage.selectBySpace(q.space);
     toClone.forEach((component) => {
-      let clone = component.clone({space: q.targetSpace}, isVirtual);
+      let clone = component.clone({toSpace: q.toSpace}, isVirtual);
       let index = clone.index;
       this.storage.set(index, clone);
     });
   }
-  /*
-    The same as select() but search in namespace then globally
+  /* 
+    clones element updating id, space and referencies
+    #use one::k1 {
+      toId: k2
+      toSpace: two,
+      // to: two::k2
+      prefix: '',
+      suffix: '',
+      rename: {}
+    };
   */
-  softSelect(q = {}){
-    let tryDirectly = this.select(q);
-    if(tryDirectly || !q.space){
-      return tryDirectly;
-    }else{
-      return this.select({id: q.id});
-    }
+  use(q = {}, isVirtual = false){
+    // checking arguments
+    if(!q.id || (typeof q.id !== 'string'))
+      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
+    if(q.space && (typeof q.space !== 'string'))
+      throw new QueueError(q, `Space should be string, but have "${q.space}"`);
+      
+    // select component to copy
+    let component = this.select(q);
+    if(!component)
+      throw new QueueError(q, `Element with ${component.index} is not exist and cannot be cloned.`);
+
+    // cloning and update references
+    let clone = component.clone(q, isVirtual);
+    clone.updateReferences(q);
+
+    this.storage.set(clone.index, clone);
+
+    return clone;
   }
   load(q){
     if(q.space!==undefined && this.namespaces.indexOf(q.space)===-1){
       this.namespaces.push(q.space);
-      this.cloneNamespace({ targetSpace: q.space }, true);
+      this.useNamespace({ toSpace: q.space }, true);
     }
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');

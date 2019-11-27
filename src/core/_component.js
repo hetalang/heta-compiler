@@ -50,13 +50,55 @@ class _Component {
   get isGlobal(){
     return this._space===undefined;
   }
-  clone(q = {}, isVirtual = false){ // creates copy of element TODO: not tested
+  // creates copy of element
+  clone(q = {}, isVirtual = false){
     let res = _.cloneDeep(this);
-    if(q.id) res._id = q.id;
-    if(q.space) res._space = q.space;
+
+    // update index
+    if(q.toId) res._id = q.toId;
+    if(q.toSpace) res._space = q.toSpace;
     res.isVirtual = isVirtual;
 
     return res;
+  }
+  updateReferences(q = {}){
+    // set defaults
+    _.defaults(q, {
+      prefix: '',
+      suffix: '',
+      rename: {}
+    });
+
+    // change references
+    const iterator = (item, path) => { // Actor { target: 'y', stoichiometry: -1 }, actors[0].target
+      let oldRef = _.get(this, path);
+      let newRef = _.get(
+        q.rename, 
+        oldRef,
+        [q.prefix, oldRef, q.suffix].join('') // default behaviour
+      );
+
+      _.set(this, path, newRef);
+    };
+    // search ref in requirements
+    let req = this.constructor.requirements();
+    _.each(req, (rule, prop) => { // iterates through rules
+      // isReference: true
+      if(rule.isReference && _.has(this, prop)){
+        if(rule.isArray){ // iterates through array
+          _.get(this, prop).forEach((item, i) => {
+            let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
+            iterator(item, fullPath, rule);
+          });
+        }else{
+          let item = _.get(this, prop);
+          let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
+          iterator(item, fullPath, rule);
+        }
+      }
+    });
+
+    return this;
   }
   get notesMdTree(){
     if(this.notes){

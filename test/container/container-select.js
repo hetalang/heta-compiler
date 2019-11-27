@@ -39,21 +39,4 @@ describe('Test select() and softSelect()', () => {
     let sp1 = c.select({id: 'sp2'});
     expect(sp1).to.be.undefined;
   });
-
-  it('Check softSelect() for existed local.', () => {
-    let sp1 = c.softSelect({id: 'sp1', space: 'one'});
-    expect(sp1).to.have.property('className', 'Species');
-  });
-  it('Check softSelect() for existed global.', () => {
-    let sp1 = c.softSelect({id: 'sp1'});
-    expect(sp1).to.have.property('className', 'Const');
-  });
-  it('Check softSelect() for not existed local.', () => {
-    let sp1 = c.softSelect({id: 'sp3', space: 'one'});
-    expect(sp1).to.have.property('className', 'Const');
-  });
-  it('Check softSelect() for not existed global.', () => {
-    let sp1 = c.softSelect({id: 'sp2'});
-    expect(sp1).to.be.undefined;
-  });
 });
