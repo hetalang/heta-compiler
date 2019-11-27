@@ -1,0 +1,16 @@
+//add abstract RateLaws
+
+namespace RateLaws begin
+    '''Mikhaelis-Menten reaction'''
+    mm @Reaction {
+        actors: S => P,
+        modifiers: [E]
+    };
+    mm := k*E*S/(Km + S)*comp;
+
+    '''Mass-Action reaction'''
+    ma @Reaction {
+        actors: S => P
+    };
+    ma := k * S * comp;
+end

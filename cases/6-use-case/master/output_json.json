@@ -1,0 +1,98 @@
+[
+  {
+    "class": "Const",
+    "id": "k1",
+    "space": "model",
+    "isVirtual": true,
+    "num": 0.001
+  },
+  {
+    "class": "Compartment",
+    "id": "comp",
+    "space": "model",
+    "assignments": {
+      "start_": {
+        "expr": "1"
+      }
+    }
+  },
+  {
+    "class": "Species",
+    "id": "A",
+    "space": "model",
+    "assignments": {
+      "start_": {
+        "expr": "10"
+      }
+    },
+    "compartment": "comp"
+  },
+  {
+    "class": "Species",
+    "id": "B",
+    "space": "model",
+    "assignments": {
+      "start_": {
+        "expr": "0"
+      }
+    },
+    "compartment": "comp"
+  },
+  {
+    "class": "Species",
+    "id": "enzyme",
+    "space": "model",
+    "assignments": {
+      "start_": {
+        "expr": "1e-8"
+      }
+    },
+    "boundary": true,
+    "compartment": "comp"
+  },
+  {
+    "class": "Reaction",
+    "id": "r1",
+    "space": "model",
+    "notes": "Mikhaelis-Menten reaction",
+    "aux": {
+      "reversible": false
+    },
+    "assignments": {
+      "ode_": {
+        "expr": "k1 * enzyme * A / (Km_A + A) * comp"
+      }
+    },
+    "actors": [
+      {
+        "target": "A",
+        "stoichiometry": -1
+      },
+      {
+        "target": "B",
+        "stoichiometry": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "enzyme"
+      }
+    ]
+  },
+  {
+    "class": "Const",
+    "id": "Km_A",
+    "space": "model",
+    "num": 0.8
+  },
+  {
+    "class": "SBMLExport",
+    "id": "output_sbml",
+    "space": "model"
+  },
+  {
+    "class": "JSONExport",
+    "id": "output_json",
+    "space": "model"
+  }
+]

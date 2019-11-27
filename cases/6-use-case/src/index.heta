@@ -1,0 +1,29 @@
+include lib.heta
+
+k1 @Const = 1e-3;
+
+namespace model begin
+  comp @Compartment .= 1;
+  A @Species { compartment: comp };
+  B @Species { compartment: comp };
+  enzyme @Species { compartment: comp, boundary: true };
+
+  #use RateLaws::mm {
+    toSpace: model,
+    toId: r1,
+    suffix: _A,
+    rename: { S: A, P: B, E: enzyme, k: k1, comp: comp }
+  };
+
+  A .= 10;
+  B .= 0;
+  enzyme .= 1e-8;
+
+  Km_A @Const = 0.8;
+end
+
+model::output_sbml @SBMLExport { version: L2V4 };
+model::output_json @JSONExport;
+
+#delete RateLaws::mm;
+#delete RateLaws::ma;
