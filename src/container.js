@@ -58,7 +58,14 @@ class Storage extends Map {
 class Container {
   constructor(){
     this.storage = new Storage();
-    this.namespaces = [];
+    this.namespaces = [{
+      name: undefined, // for anonimous
+      abstract: undefined, // undefined => can be changed by @_Export, true => @_Export is not allowed, false => bindings
+      private: false // cannot be included
+    }];
+  }
+  get nsList(){
+    return this.namespaces.map((ns) => ns.name);
   }
   insert(q = {}){
     // check index
@@ -68,6 +75,9 @@ class Container {
       throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
       throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
+    //if(this.nsList.indexOf(q.space)===-1){
+    //  throw new QueueError(q, `Namespace must be initialized before first use. namespace ${q.space} begin ... end`);
+    //}
 
     // check if class is in the list
     let selectedClass = this.classes[q.class];
@@ -198,9 +208,22 @@ class Container {
 
     return clone;
   }
+  /*
+    #initNamespace one::* { abstract: true };
+  
+  initNamespace(q = {}){
+    if(this.namespaces.indexOf(q.space)===-1){
+      this.namespaces.push({ name: q.space, abstract: q.abstract });
+      this.useNamespace({ toSpace: q.space }, true);
+    }else{
+      throw new QueueError(q, `Namespace ${q.space} was already initiated.`);
+    }
+  }
+  */
   load(q){
-    if(q.space!==undefined && this.namespaces.indexOf(q.space)===-1){
-      this.namespaces.push(q.space);
+    // push to spaces list and use anonimous
+    if(this.nsList.indexOf(q.space)===-1){
+      this.namespaces.push({ name: q.space });
       this.useNamespace({ toSpace: q.space }, true);
     }
     // estimate action, default is upsert
