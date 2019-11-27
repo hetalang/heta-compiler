@@ -126,14 +126,46 @@ class Container {
     
     return this.storage.get(index);
   }
-  /* clone space components to another space */
+  /* 
+    clone space components to another space
+    #useNamespace one::* {
+      toSpace: two,
+      // to: two::k2
+      prefix: '',
+      suffix: '',
+      rename: {}
+    };
+*/
   useNamespace(q = {}, isVirtual = false){
     let toClone = this.storage.selectBySpace(q.space);
-    toClone.forEach((component) => {
-      let clone = component.clone({toSpace: q.toSpace}, isVirtual);
-      let index = clone.index;
-      this.storage.set(index, clone);
+    if(q.id)
+      throw new QueueError(q, `id must not be set for #useNamespace, but have "${q.id}"`);
+    if(q.toId)
+      throw new QueueError(q, `toId must not be set for #useNamespace, but have "${q.toId}"`);
+    _.defaults(q, {
+      prefix: '',
+      suffix: '',
+      rename: {}
     });
+
+    let clones = toClone.map((component) => {
+      // update toId: q.toId is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
+      q.toId = _.get(
+        q.rename, 
+        component.id,
+        [q.prefix, component.id, q.suffix].join('') // default value
+      );
+
+      // cloning and update references
+      let clone = component.clone(q, isVirtual);
+      clone.updateReferences(q);
+
+      this.storage.set(clone.index, clone);
+
+      return clone;
+    });
+
+    return clones;
   }
   /* 
     clones element updating id, space and referencies
@@ -156,7 +188,7 @@ class Container {
     // select component to copy
     let component = this.select(q);
     if(!component)
-      throw new QueueError(q, `Element with ${component.index} is not exist and cannot be cloned.`);
+      throw new QueueError(q, `Element with ${component.index} does not exist and cannot be cloned.`);
 
     // cloning and update references
     let clone = component.clone(q, isVirtual);

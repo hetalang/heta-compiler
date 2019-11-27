@@ -1,0 +1,22 @@
+namespace one begin
+  k1 @Const = 1e-3;
+  r1 @Reaction {
+    actors: A => 2B
+  };
+  r1 := k1 * A *comp1;
+end
+
+namespace two begin
+  #useNamespace {
+    space: one,
+    toSpace: two,
+    prefix: one_,
+    rename: { comp1: comp1, r1: r1 }
+  };
+  comp1 @Compartment .= 1;
+end
+
+two::output_json @JSONExport;
+
+#delete one::k1;
+#delete one::r1;

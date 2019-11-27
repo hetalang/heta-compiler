@@ -1,0 +1,46 @@
+[
+  {
+    "class": "Const",
+    "id": "one_k1",
+    "space": "two",
+    "num": 0.001
+  },
+  {
+    "class": "Reaction",
+    "id": "r1",
+    "space": "two",
+    "aux": {
+      "reversible": false
+    },
+    "assignments": {
+      "ode_": {
+        "expr": "one_k1 * one_A * comp1"
+      }
+    },
+    "actors": [
+      {
+        "target": "one_A",
+        "stoichiometry": -1
+      },
+      {
+        "target": "one_B",
+        "stoichiometry": 2
+      }
+    ]
+  },
+  {
+    "class": "Compartment",
+    "id": "comp1",
+    "space": "two",
+    "assignments": {
+      "start_": {
+        "expr": "1"
+      }
+    }
+  },
+  {
+    "class": "JSONExport",
+    "id": "output_json",
+    "space": "two"
+  }
+]
