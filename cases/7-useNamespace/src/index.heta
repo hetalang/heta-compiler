@@ -18,5 +18,3 @@ end
 
 two::output_json @JSONExport;
 
-#delete one::k1;
-#delete one::r1;
