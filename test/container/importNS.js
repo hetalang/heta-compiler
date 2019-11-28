@@ -3,7 +3,7 @@ const { Container } = require('../../src');
 const { QueueError } = require('../../src/builder');
 const { expect } = require('chai');
 
-describe('Test correct useNamespace', () => {
+describe('Test correct importNS', () => {
   it('Two namespaces', () => {
     var c = new Container();
     c.load({
@@ -21,9 +21,9 @@ describe('Test correct useNamespace', () => {
       assignments: { ode_: 'k1 * A *comp1' },
       actors: 'A => 2B'
     });
-    let clone = c.useNamespace({
-      space: 'one',
-      toSpace: 'two',
+    let clone = c.importNS({
+      fromSpace: 'one',
+      space: 'two',
 
       prefix: 'one_',
       rename: { comp1: 'comp1', r1: 'r1' }

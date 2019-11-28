@@ -7,12 +7,12 @@ namespace one begin
 end
 
 namespace two begin
-  #useNamespace {
-    space: one,
-    toSpace: two,
+  #importNS {
+    fromSpace: one,
     prefix: one_,
     rename: { comp1: comp1, r1: r1 }
   };
+
   comp1 @Compartment .= 1;
 end
 

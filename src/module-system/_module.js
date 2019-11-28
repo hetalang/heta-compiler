@@ -34,7 +34,7 @@ class _Module {
   }
   getImportElements(){
     return this.parsed
-      .filter((q) => q.action==='import' || q.action==='include');
+      .filter((q) => q.action==='include');
   }
   // replace relative paths by absolute ones
   updateByAbsPaths(){

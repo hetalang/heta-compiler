@@ -138,20 +138,20 @@ class Container {
   }
   /* 
     clone space components to another space
-    #useNamespace one::* {
-      toSpace: two,
-      // to: two::k2
+    #importNS two::* {
+      fromSpace: one,
+      //from: two::*
       prefix: '',
       suffix: '',
       rename: {}
     };
 */
-  useNamespace(q = {}, isVirtual = false){
-    let toClone = this.storage.selectBySpace(q.space);
+  importNS(q = {}, isVirtual = false){
+    let toClone = this.storage.selectBySpace(q.fromSpace);
+    if(q.fromId)
+      throw new QueueError(q, `fromId must not be set for #importNS, but have "${q.fromId}"`);
     if(q.id)
-      throw new QueueError(q, `id must not be set for #useNamespace, but have "${q.id}"`);
-    if(q.toId)
-      throw new QueueError(q, `toId must not be set for #useNamespace, but have "${q.toId}"`);
+      throw new QueueError(q, `id must not be set for #importNS, but have "${q.id}"`);
     _.defaults(q, {
       prefix: '',
       suffix: '',
@@ -159,8 +159,8 @@ class Container {
     });
 
     let clones = toClone.map((component) => {
-      // update toId: q.toId is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
-      q.toId = _.get(
+      // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
+      q.id = _.get(
         q.rename, 
         component.id,
         [q.prefix, component.id, q.suffix].join('') // default value
@@ -179,24 +179,24 @@ class Container {
   }
   /* 
     clones element updating id, space and referencies
-    #use one::k1 {
-      toId: k2
-      toSpace: two,
-      // to: two::k2
+    #import two::k2 {
+      fromId: k1
+      fromSpace: one,
+      // from: one::k1
       prefix: '',
       suffix: '',
       rename: {}
     };
   */
-  use(q = {}, isVirtual = false){
+  import(q = {}, isVirtual = false){
     // checking arguments
-    if(!q.id || (typeof q.id !== 'string'))
-      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
-    if(q.space && (typeof q.space !== 'string'))
-      throw new QueueError(q, `Space should be string, but have "${q.space}"`);
+    if(!q.fromId || (typeof q.fromId !== 'string'))
+      throw new QueueError(q, `fromId should be string, but have "${q.fromId}"`);
+    if(q.fromSpace && (typeof q.fromSpace !== 'string'))
+      throw new QueueError(q, `fromSpace should be string, but have "${q.fromSpace}"`);
       
     // select component to copy
-    let component = this.select(q);
+    let component = this.select({id: q.fromId, space: q.fromSpace});
     if(!component)
       throw new QueueError(q, `Element with ${component.index} does not exist and cannot be cloned.`);
 
@@ -214,7 +214,7 @@ class Container {
   initNamespace(q = {}){
     if(this.namespaces.indexOf(q.space)===-1){
       this.namespaces.push({ name: q.space, abstract: q.abstract });
-      this.useNamespace({ toSpace: q.space }, true);
+      this.importNS({ space: q.space }, true);
     }else{
       throw new QueueError(q, `Namespace ${q.space} was already initiated.`);
     }
@@ -224,7 +224,7 @@ class Container {
     // push to spaces list and use anonimous
     if(this.nsList.indexOf(q.space)===-1){
       this.namespaces.push({ name: q.space });
-      this.useNamespace({ toSpace: q.space }, true);
+      this.importNS({ space: q.space }, true);
     }
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');

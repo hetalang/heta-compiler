@@ -1,5 +1,6 @@
 //add abstract RateLaws
 
+//abstract namespace RateLaws begin
 namespace RateLaws begin
     '''Mikhaelis-Menten reaction'''
     mm @Reaction {

@@ -69,7 +69,7 @@ class ModuleSystem {
       .map((y) => this.moduleCollection[y])
       .forEach((x) => {
         x._integrated = x.parsed.reduce((acc, current) => {
-          if(current.action==='import' || current.action==='include'){
+          if(current.action==='include'){
             let childIntegrated = this.moduleCollection[current.source]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);

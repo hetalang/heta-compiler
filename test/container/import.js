@@ -14,11 +14,11 @@ describe('Test correct use', () => {
       space: 'one',
       num: 1
     });
-    let clone = c.use({
-      id: 'k1',
-      space: 'one',
-      toId: 'k2',
-      toSpace: 'two'
+    let clone = c.import({
+      fromId: 'k1',
+      fromSpace: 'one',
+      id: 'k2',
+      space: 'two'
     });
 
     expect(c).to.be.lengthOf(2);
@@ -28,11 +28,11 @@ describe('Test correct use', () => {
   it('use of not existed Const', () => {
     var c = new Container();
     expect(() => {
-      c.use({
-        id: 'k1',
-        space: 'one',
-        toId: 'k2',
-        toSpace: 'two'
+      c.import({
+        fromId: 'k1',
+        fromSpace: 'one',
+        id: 'k2',
+        space: 'two'
       });
     }).to.throw(QueueError);
     expect(c).to.be.lengthOf(0);
@@ -50,11 +50,11 @@ describe('Test correct use', () => {
         ode_: 'x*y'
       }
     });
-    let clone = c.use({
-      id: 'p1',
-      space: 'one',
-      toId: 'p2',
-      toSpace: 'two',
+    let clone = c.import({
+      fromId: 'p1',
+      fromSpace: 'one',
+      id: 'p2',
+      space: 'two',
       prefix: 'pr_',
       suffix: '_suf',
       rename: { y: 'z'}

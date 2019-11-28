@@ -55,8 +55,8 @@ class _Component {
     let res = _.cloneDeep(this);
 
     // update index
-    if(q.toId) res._id = q.toId;
-    if(q.toSpace) res._space = q.toSpace;
+    if(q.id) res._id = q.id;
+    if(q.space) res._space = q.space;
     res.isVirtual = isVirtual;
 
     return res;
