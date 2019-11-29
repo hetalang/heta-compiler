@@ -18,11 +18,11 @@
        "example": "1/h * ms"
      },
 
-     "ActorsString": {
+     "ProcessExpr": {
        "type": "string",
-       "pattern": "^((\\d* *\\*? *\\w+) *\\+? *)*<?[=-]>?((\\d* *\\*? *\\w+) *\\+? *)*$",
+       "pattern": "^((\\d*\\s*\\*?\\s*\\w+) *\\+? *)*<?[=-]>?((\\d*\\s*\\*?\\s*\\w+) *\\+? *)*$",
        "example": "2*S -> 3P1+P2",
-       "errorMessage":{
+       "errorMessage": {
          "pattern": "should be in format: \"2*S -> 3P1+P2\""
        }
      },
@@ -207,7 +207,7 @@
         "actors": {
           "oneOf": [
             { "type": "array", "items": {"$ref": "#/definitions/Actor"}, "errorMessage":  {"type": "should be an array of actors."}},
-            { "$ref": "#/definitions/ActorsString" }
+            { "$ref": "#/definitions/ProcessExpr" }
           ]
         }
       },

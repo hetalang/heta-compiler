@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha test --recursive",
-    "test:dev": "mocha test/container/container-use.js",
+    "test:dev": "mocha test/process-expr.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
   },

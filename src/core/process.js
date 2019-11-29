@@ -15,7 +15,7 @@ class Process extends Record {
         this.actors = q.actors
           .map((q) => new Actor(q));
       }else{
-        let {targetArray, isReversible} = rct2actors(q.actors);
+        let { targetArray, isReversible } = rct2actors(q.actors);
         this.actors = targetArray
           .map((q) => new Actor(q));
         _.set(this, 'aux.reversible', isReversible);
@@ -61,20 +61,27 @@ class Actor extends _Effector {
 }
 
 function rct2actors(rct){
-  let matches = /^([^<]*)(<)?[=-]+>?(.*)$/gm.exec(rct);
+  let matches = /^([\w\d\s*+]*)(<)?[=-]+(>)?([\w\d\s*+]*)$/m.exec(rct);
+  if(matches===null) throw new TypeError('Wrong ProcessExpr string:', rct);
+
   let substrates = matches[1];
-  let products = matches[3];
-  let isReversible = matches[2]==='<';
+  let products = matches[4];
+
+  if (matches[2]==='<' && matches[3]==='>'){
+    var isReversible = true;
+  }else if(matches[3]==='>'){
+    isReversible = false;
+  }
 
   let targetArray = [];
-  let regexp = /([\d]*)\*?(\w[\w\d]*)/gm;
+  let regexp = /\s*([0-9]*)?\s*\*?\s*(\w[\w\d]*)/gm;
   let r; // iterator
   while (
     (r = regexp.exec(substrates))!==null
   ){
     targetArray.push({
       target: r[2],
-      stoichiometry: (r[1]) ? -r[1] : -1
+      stoichiometry: r[1] ? -r[1] : -1
     });
   }
   while (
@@ -85,11 +92,12 @@ function rct2actors(rct){
       stoichiometry: (r[1]) ? +r[1] : 1
     });
   }
-  return {targetArray, isReversible};
+  return { targetArray, isReversible };
 }
 
 module.exports = {
   Process,
   _Effector,
-  Actor
+  Actor,
+  rct2actors
 };
