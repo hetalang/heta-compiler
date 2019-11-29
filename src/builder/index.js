@@ -94,8 +94,9 @@ class Builder {
       logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
       let tmp = exportElements.map(async (exportItem) => {
-        logger.info(`Exporting to file "${exportItem.id}" of type "${exportItem.className}"...`);
-        let absFilename = path.join(this._distDirname, exportItem.id + '.' + exportItem.ext);
+        let filepath = exportItem.filepath || exportItem.id;
+        logger.info(`Exporting to file "${filepath}" of type "${exportItem.className}"...`);
+        let absFilename = path.join(this._distDirname, filepath + '.' + exportItem.ext);
         try{
           let codeText = exportItem.do();
           fs.outputFileSync(absFilename, codeText);

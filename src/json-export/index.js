@@ -10,13 +10,9 @@ class JSONExport extends _Export {
     return 'json';
   }
   do(){
-    if(this.isGlobal){
-      var qArr = this._container.toQArr();
-    }else{
-      qArr = this._container
-        .getPopulation(this.space)
-        .map((x) => x.toQ());
-    }
+    let qArr = this._container
+      .getPopulation(this.space)
+      .map((x) => x.toQ());
     
     return JSON.stringify(qArr, null, 2);
   }

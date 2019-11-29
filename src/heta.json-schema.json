@@ -314,8 +314,7 @@
     "_ExportP": {
       "type": "object",
       "properties": {
-        "model": { "$ref": "#/definitions/ID" },
-        "ignore": { "type": "boolean", "default": false }
+        "filepath": { "type": "string" }
       }
     },
 

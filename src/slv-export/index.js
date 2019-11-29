@@ -11,8 +11,7 @@ class SLVExport extends _Export{
     super.merge(q, skipChecking);
     
     if(q.eventsOff) this.eventsOff = q.eventsOff;
-    if(q.defaultTask)
-      this.defaultTask = q.defaultTask;
+    if(q.defaultTask) this.defaultTask = q.defaultTask;
 
     return this;
   }
