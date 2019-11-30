@@ -136,6 +136,9 @@ class Container {
     
     return this.storage.get(index);
   }
+  setNS(q = {}){
+    // do nothing: temporal solution
+  }
   /* 
     clone space components to another space
     #importNS two::* {

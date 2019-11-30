@@ -27,7 +27,7 @@
     "commander": "^2.20.0",
     "excel-as-json": "^2.0.2",
     "fs-extra": "^7.0.1",
-    "heta-parser": "^0.2.4",
+    "heta-parser": "^0.3.0",
     "inquirer": "^7.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
