@@ -1,6 +1,6 @@
 
 Vmax @Const = 0.1; // this is global constant available for any scoped equation
-Km @Const = 2.5;
+Km @Const = 2.5 {units: uM};
 
 // this block unites elements with the same space
 namespace mm begin

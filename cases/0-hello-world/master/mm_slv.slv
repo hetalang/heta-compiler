@@ -710,16 +710,16 @@ InteractionNetwork
 
 //! Initialization at ode, count: 1
 
-r1 = Vmax * S / (Km + S) * default_comp; // @Reaction {units: umole/min}
+r1 = Vmax * S / (Km + S) * default_comp; // @Reaction 'Michaelis-Menten reaction' {units: umole/min}
 
 //! Differential equations, count: 2
 
-//!! S  @Species {units: uM}
+//!! S  @Species 'substrate' {units: uM}
 
 F[1] = ( -1*r1 ) / default_comp;
 
 
-//!! P  @Species {units: uM}
+//!! P  @Species 'product' {units: uM}
 
 F[2] = ( 1*r1 ) / default_comp;
 
@@ -751,14 +751,14 @@ F[2] = ( 1*r1 ) / default_comp;
 
 
 //! Constants, count: 2
-Vmax = 0.1; // @Const;
-Km = 2.5; // @Const;
+Vmax = 0.1; // @Const  {units: ?};
+Km = 2.5; // @Const  {units: uM};
 
 //! Initialization at start, count: 4
-default_comp = 1; // @Compartment {units: L}
-S = 10; // @Species {units: uM}
-P = 0; // @Species {units: uM}
-default_compartment_ = 1; // @Compartment {units: UL}
+default_comp = 1; // @Compartment 'Default compartment' {units: L}
+S = 10; // @Species 'substrate' {units: uM}
+P = 0; // @Species 'product' {units: uM}
+default_compartment_ = 1; // @Compartment  {units: UL}
 
 #
 

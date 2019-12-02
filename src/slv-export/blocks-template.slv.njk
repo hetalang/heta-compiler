@@ -37,13 +37,13 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% set constants = _model_.population.selectByClassName("Const") %}
 //! Constants, count: {{ constants|length }}
 {%- for con in constants %}
-{{ con.id }} = {{ con.num }}; // @{{ con.className }};
+{{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'"+con.title+"'" if con.title }} {units: {{ con.units|default('?') }}};
 {%- else -%}// nothing here
 {% endfor %}
 {% set ivElements = _model_.population|exclude2("assignments.start_.num", undefined) %}
 //! Initialization at start, count: {{ ivElements|length }}
 {%- for number in ivElements %}
-{{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {units: {{ number.units|default('?') }}}
+{{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {{ "'"+number.title+"'" if number.title }} {units: {{ number.units|default('?') }}}
 {%- else -%}// nothing here
 {% endfor %}
 {% endblock %}
@@ -57,12 +57,12 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% set rhsElements = _model_.rhs %}
 //! Initialization at ode, count: {{ rhsElements|length }}
 {% for rule in rhsElements %}
-{{ rule.id }} = {{ rule.assignments.ode_.expr }}; // @{{ rule.className }} {units: {{ rule.units|default('?') }}}
+{{ rule.id }} = {{ rule.assignments.ode_.expr }}; // @{{ rule.className }} {{ "'"+rule.title+"'" if rule.title }} {units: {{ rule.units|default('?') }}}
 {% else %}// nothing here
 {% endfor %}
 //! Differential equations, count: {{ _model_.variables|length}}
 {% for dynamic in _model_.variables %}
-//!! {{ dynamic.id }}  @{{ dynamic.className }} {units: {{ dynamic.units|default('?') }}}
+//!! {{ dynamic.id }}  @{{ dynamic.className }} {{ "'"+dynamic.title+"'" if dynamic.title }} {units: {{ dynamic.units|default('?') }}}
 {% if dynamic.implicitBoundary %}
 F[{{ loop.index }}] = {{ dynamic.id }}_rate_;
 {% elif dynamic.className!=='Species' or dynamic.isAmount%}

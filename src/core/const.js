@@ -24,6 +24,10 @@ class Const extends _Component { // implicit extend Numeric
   unitsSBML(){
     return this.units;
   }
+  // temporal solution
+  unitsSimbio(){
+    return this.units;
+  }
   unitsHash(){
     if(this.units){
       return uParser

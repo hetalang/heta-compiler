@@ -60,7 +60,7 @@
         
         constant="true"
         value="2.5"
-        
+        units="uM"
         metaid="mm::Km"
         >
         
@@ -107,6 +107,12 @@
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
+  </listOfUnits>
+</unitDefinition>
+      <unitDefinition id="uM" name="uM">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
   </listOfUnitDefinitions>

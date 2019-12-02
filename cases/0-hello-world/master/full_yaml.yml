@@ -8,6 +8,7 @@
   space: mm
   isVirtual: true
   num: 2.5
+  units: uM
 - class: Compartment
   id: default_comp
   space: mm

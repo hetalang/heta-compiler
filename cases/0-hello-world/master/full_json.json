@@ -11,7 +11,8 @@
     "id": "Km",
     "space": "mm",
     "isVirtual": true,
-    "num": 2.5
+    "num": 2.5,
+    "units": "uM"
   },
   {
     "class": "Compartment",
