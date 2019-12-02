@@ -6,14 +6,10 @@ class Const extends _Component { // implicit extend Numeric
   merge(q, skipChecking){
     if(!skipChecking) Const.isValid(q);
     super.merge(q, skipChecking);
-    if(typeof q==='number'){
-      this.num = q;
-      this.free = false;
-    }else{
-      this.num = q.num;
-      this.free = q.free ? q.free : false;
-      if(q.units!==undefined) this.units = q.units;
-    }
+
+    if(q.num!==undefined) this.num = q.num;
+    this.free = q.free ? q.free : false;
+    if(q.units!==undefined) this.units = q.units;
 
     return this;
   }
