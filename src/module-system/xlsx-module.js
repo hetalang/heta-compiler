@@ -1,39 +1,37 @@
 const _Module = require('./_module');
-const convertExcel = require('excel-as-json').processFile; // see https://www.npmjs.com/package/excel-as-json
+const { processFile } = require('excel-as-json'); // see https://www.npmjs.com/package/excel-as-json
 const _ = require('lodash');
+const util = require('util');
+const convertExcel = util.promisify(processFile);
 
 _Module.prototype.setXLSXModuleAsync = async function(){
   // TODO: checking arguments is required
   const options = _.defaultsDeep(this.options, {
-    sheetNum: [1],
+    sheet: 1,
     omitRows: 0,
     waitSec: 10
   });
 
-  let tmp = options.sheetNum.map(async (i) => {
-    let data = await convertExcel(this.filename, null, {sheet: i, omitEmptyFields: true});
-    data.splice(0, options.omitRows); // remove rows
-    let dataFiltered = data
-      .filter((x) => x.on) // ignore rows
-      .map((x) => {
-        let cleaned = _.cloneDeepWith(x, (value) => {
-          if(_.isString(value)) {
-            return clean(value);
-          }
-          if(_.isArray(value)) {
-            return value
-              .map((y) => clean(y))
-              .filter((y) => y!==''); // removes empty strings from array
-          }
-        });
-        return cleaned;
+  let rawData = await convertExcel(this.filename, null, {sheet: options.sheet, omitEmptyFields: true});
+  rawData.splice(0, options.omitRows); // remove rows
+
+  let dataFiltered = rawData
+    .filter((x) => x.on) // ignore rows
+    .map((x) => {
+      let cleaned = _.cloneDeepWith(x, (value) => {
+        if(_.isString(value)) {
+          return clean(value);
+        }
+        if(_.isArray(value)) {
+          return value
+            .map((y) => clean(y))
+            .filter((y) => y!==''); // removes empty strings from array
+        }
       });
-    return dataFiltered;
-  });
+      return cleaned;
+    });
 
-  let dataFilteredArray = await Promise.all(tmp);
-  this.parsed = _.flatten(dataFilteredArray);
-
+  this.parsed = dataFiltered;
   return this;
 };
 

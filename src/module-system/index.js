@@ -26,9 +26,8 @@ class ModuleSystem {
   }
   // scan module dependences recursively
   async _addModuleDeepAsync(absFilePath, type, options = {}){
-    // XXX: restriction: currently different tables in one xlsx file is not supported
-    // to support this the another algorythm of addModule() and integrate() is required
-    if(!(absFilePath in this.moduleCollection)){ // new file
+    let moduleName = [absFilePath, '#', options.sheet || '1'].join('');
+    if(!(moduleName in this.moduleCollection)){ // new file
       let mdl = await this.addModuleAsync(absFilePath, type, options);
       let tmp = mdl.getImportElements().map(async (importItem) => {
         await this._addModuleDeepAsync(importItem.source, importItem.type, importItem.options);
@@ -45,12 +44,13 @@ class ModuleSystem {
     let mdl = await _Module.createModuleAsync(filename, type, options);
     mdl.updateByAbsPaths();
     // push to moduleCollection
-    this.moduleCollection[filename] = mdl;
+    let moduleName = [filename, '#', options.sheet || '1'].join('');
+    this.moduleCollection[moduleName] = mdl;
     // set in graph
     let paths = mdl
       .getImportElements()
-      .map((x) => x.source);
-    this.graph.add(filename, paths);
+      .map((x) => x.type==='xlsx' ? x.source + '#' + x.options.sheet : x.source);
+    this.graph.add(moduleName, paths);
     
     return mdl;
   }
@@ -66,11 +66,13 @@ class ModuleSystem {
     this
       .sortedPaths()
       .reverse()
-      .map((y) => this.moduleCollection[y])
-      .forEach((x) => {
+      .map((y) => {
+        return this.moduleCollection[y];
+      }).forEach((x) => {
         x._integrated = x.parsed.reduce((acc, current) => {
           if(current.action==='include'){
-            let childIntegrated = this.moduleCollection[current.source]._integrated;
+            let moduleName = [current.source, '#', current.options.sheet || '1'].join('');
+            let childIntegrated = this.moduleCollection[moduleName]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);
           }else{

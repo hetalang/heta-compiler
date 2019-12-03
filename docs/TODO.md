@@ -26,9 +26,10 @@
 
 ## plan
 
-1. New spaces: isolated + anonimous
-1. #clone, #move
+1. #setNS abstract or concrete space
+1. #move, #moveNS
 1. UnitsDefinition
-1. FunctionDefinition, check export functions
+1. FunctionDefinition
 1. ContineousSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
+1. function conversion to DBSolve
