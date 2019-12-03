@@ -1,0 +1,15 @@
+{
+  "builderVersion": "^0.4.6",
+  "id": "test-xlsx",
+  "title": "Testing xlsx",
+  "notes": "platform notes",
+  "version": "v0.1.0",
+  "license": "UNLICENSED",
+  "options": {
+    "debuggingMode": true
+  },
+  "importModule": {
+    "type": "heta",
+    "source": "src/index.heta"
+  }
+}

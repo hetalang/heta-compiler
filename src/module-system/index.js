@@ -30,7 +30,7 @@ class ModuleSystem {
     if(!(moduleName in this.moduleCollection)){ // new file
       let mdl = await this.addModuleAsync(absFilePath, type, options);
       let tmp = mdl.getImportElements().map(async (importItem) => {
-        await this._addModuleDeepAsync(importItem.source, importItem.type, importItem.options);
+        await this._addModuleDeepAsync(importItem.source, importItem.type, importItem);
       });
       await Promise.all(tmp);
       return mdl;
@@ -49,7 +49,7 @@ class ModuleSystem {
     // set in graph
     let paths = mdl
       .getImportElements()
-      .map((x) => x.type==='xlsx' ? x.source + '#' + x.options.sheet : x.source);
+      .map((x) => x.type==='xlsx' ? x.source + '#' + x.sheet : x.source);
     this.graph.add(moduleName, paths);
     
     return mdl;
@@ -71,7 +71,7 @@ class ModuleSystem {
       }).forEach((x) => {
         x._integrated = x.parsed.reduce((acc, current) => {
           if(current.action==='include'){
-            let moduleName = [current.source, '#', current.options.sheet || '1'].join('');
+            let moduleName = [current.source, '#', current.sheet || '1'].join('');
             let childIntegrated = this.moduleCollection[moduleName]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);
@@ -87,7 +87,7 @@ class ModuleSystem {
 
 // temporal version of composer
 function compose(obj, arr){
-  let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type', 'options']);
+  let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type', 'sheet']);
   return arr.map((x) => {
     return _.chain(x)
       .cloneDeep()

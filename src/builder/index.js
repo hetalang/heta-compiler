@@ -40,7 +40,7 @@ class Builder {
     let validate = ajv.compile(declarationSchema);
     let valid = validate(decl);
     if(!valid) {
-      let error = new BuilderError(validate.errors, "Wrong platform file:");
+      let error = new BuilderError(validate.errors, 'Wrong platform file:');
       this.errorCatcher(error, 'Builder is not created.');
       throw error;
     }
@@ -71,7 +71,7 @@ class Builder {
     let absFilename = path.join(this._coreDirname, this.importModule.source);
     
     // 1. Parsing
-    await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule.options);
+    await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule);
     // 2. Modules integration
     let queue = ms.integrate();
     // 3. Translation

@@ -1,0 +1,10 @@
+
+// include module.heta type: heta
+include table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
+
+include table.xlsx type xlsx with {
+  sheet: 2,
+  omitRows: 3
+}
+
+output @JSONExport;
