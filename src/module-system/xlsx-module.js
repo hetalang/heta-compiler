@@ -1,3 +1,4 @@
+const { ModuleError } = require('../heta-error');
 const _Module = require('./_module');
 const { processFile } = require('excel-as-json'); // see https://www.npmjs.com/package/excel-as-json
 const _ = require('lodash');
@@ -18,7 +19,7 @@ _Module.prototype.setXLSXModuleAsync = async function(){
   // throws error in 10 seconds in any way
   let waiter = new Promise((resolve, reject) => {
     setTimeout(() => {
-      let err = new Error(`sheet #${options.sheet} is not found in "${this.filename}" or reading table require more than ${options.waitSec} sec.`);
+      let err = new ModuleError(`sheet #${options.sheet} is not found in "${this.filename}" or reading table require more than ${options.waitSec} sec.`);
       reject(err);
     }, 1000*options.waitSec);
   });
