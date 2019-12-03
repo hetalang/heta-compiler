@@ -49,7 +49,7 @@ class ModuleSystem {
     // set in graph
     let paths = mdl
       .getImportElements()
-      .map((x) => x.type==='xlsx' ? x.source + '#' + x.sheet : x.source);
+      .map((x) => [x.source, '#', x.sheet || 1].join(''));
     this.graph.add(moduleName, paths);
     
     return mdl;
