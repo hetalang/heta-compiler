@@ -50,7 +50,8 @@
         "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml", "xlsx"]},
         "source": {"type": "string"},
         "ignoreDeps": {"type": "boolean", "default": false},
-        "options": {"type": "object", "default": {}}
+        "sheet": { "type": "integer" },
+        "omitRows": { "type": "integer" }
       }
     }
   }

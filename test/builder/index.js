@@ -5,13 +5,9 @@ const { expect } = require('chai');
 
 describe('Test Builder.', () => {
   let b;
-  it('Create Builder object.', () => {
-    b = new Builder(declaration, '.');
-  });
-  it('Run without errors.', () => {
-    //b.run((err) => {
-    //  expect(err).to.be.null;
-    //});
+  it('Create Builder object and run.', async () => {
+    b = new Builder(declaration, __dirname);
+    await b.runAsync();
   });
 });
 
