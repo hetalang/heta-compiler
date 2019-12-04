@@ -12,7 +12,7 @@ _Module.prototype.setXLSXModuleAsync = async function(){
   const options = _.defaultsDeep(this.options, {
     sheet: 1,
     omitRows: 0,
-    waitSec: 10
+    waitSec: 30
   });
 
   // this part is the way to fix bug in excel-as-json 10 second before callback
@@ -20,6 +20,7 @@ _Module.prototype.setXLSXModuleAsync = async function(){
   let waiter = new Promise((resolve, reject) => {
     setTimeout(() => {
       let err = new ModuleError(`sheet #${options.sheet} is not found in "${this.filename}" or reading table require more than ${options.waitSec} sec.`);
+      console.log(options.waitSec, 'sec is out for', options);
       reject(err);
     }, 1000*options.waitSec);
   });

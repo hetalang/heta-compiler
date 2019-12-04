@@ -51,7 +51,8 @@
         "source": {"type": "string"},
         "ignoreDeps": {"type": "boolean", "default": false},
         "sheet": { "type": "integer" },
-        "omitRows": { "type": "integer" }
+        "omitRows": { "type": "integer" },
+        "waitSec": { "type": "number" }
       }
     }
   }
