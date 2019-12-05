@@ -180,6 +180,19 @@ class Container {
 
     return clones;
   }
+  /*
+    the same as importNS but delete all elements from source namespace
+  */
+  moveNS(q = {}, isVirtual = false){
+    let toClone = this.storage.selectBySpace(q.fromSpace);
+    let clones = this.importNS(q, isVirtual);
+
+    toClone.forEach((component) => {
+      this.storage.delete(component.index);
+    });
+
+    return clones;
+  }
   /* 
     clones element updating id, space and referencies
     #import two::k2 {
@@ -208,6 +221,17 @@ class Container {
     clone.updateReferences(q);
 
     this.storage.set(clone.index, clone);
+
+    return clone;
+  }
+  /*
+   the same as import but delete source component
+  */
+  move(q = {}, isVirtual = false){
+    let clone = this.import(q, isVirtual);
+
+    // delete component
+    this.delete(q);
 
     return clone;
   }

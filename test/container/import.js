@@ -3,9 +3,9 @@ const { Container } = require('../../src');
 const { QueueError } = require('../../src/builder');
 const { expect } = require('chai');
 
-describe('Test correct use', () => {
+describe('Test correct import', () => {
 
-  it('Create and use Const', () => {
+  it('Create and import Const', () => {
     var c = new Container();
     c.load({
       action: 'insert',
@@ -25,7 +25,7 @@ describe('Test correct use', () => {
     expect(clone).to.have.property('index', 'two::k2');
   });
 
-  it('use of not existed Const', () => {
+  it('import of not existed Const', () => {
     var c = new Container();
     expect(() => {
       c.import({
@@ -38,7 +38,7 @@ describe('Test correct use', () => {
     expect(c).to.be.lengthOf(0);
   });
 
-  it('Create and use Process', () => {
+  it('Create and import Process', () => {
     var c = new Container();
     c.load({
       action: 'insert',
@@ -65,5 +65,28 @@ describe('Test correct use', () => {
     expect(clone.actors[1]).to.have.property('target', 'pr_A_suf');
     expect(clone.actors[0]).to.have.property('target', 'z');
     expect(clone.assignments.ode_).to.have.property('expr', 'pr_x_suf * z');
+  });
+});
+
+describe('Test correct move', () => {
+
+  it('Create and move Const', () => {
+    var c = new Container();
+    c.load({
+      action: 'insert',
+      class: 'Const',
+      id: 'k1',
+      space: 'one',
+      num: 1
+    });
+    let clone = c.move({
+      fromId: 'k1',
+      fromSpace: 'one',
+      id: 'k2',
+      space: 'two'
+    });
+
+    expect(c).to.be.lengthOf(1);
+    expect(clone).to.have.property('index', 'two::k2');
   });
 });
