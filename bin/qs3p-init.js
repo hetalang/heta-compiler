@@ -71,6 +71,11 @@ if(program.silent){
 
   // saving files
   fs.outputJsonSync(filePath, platform, {spaces: 2});
+  // saving .gitignore
+  fs.copySync(
+    path.join(__dirname, './init/.gitignore'),
+    path.join(targetDir, '.gitignore')
+  );
 
   console.log('Platform template is created in silent mode.');
   console.log('DONE.');
@@ -129,10 +134,8 @@ prompt(questions)
       platform.importModule = {
         type: 'xlsx',
         source: 'src/table.xlsx',
-        options: {
-          sheetNum: [1],
-          omitRows: 3
-        }
+        sheet: 1,
+        omitRows: 3
       };
 
       // create files in src
@@ -143,7 +146,7 @@ prompt(questions)
           xlsxTableFile
         );
       }
-    }else if (answers.importModule==='json') {
+    } else if (answers.importModule==='json') {
       platform.importModule = {
         type: 'json',
         source: 'src/index.json'
@@ -157,7 +160,7 @@ prompt(questions)
           jsonIndexFile
         );
       }
-    }else if (answers.importModule==='yaml') {
+    } else if (answers.importModule==='yaml') {
       platform.importModule = {
         type: 'yaml',
         filename: 'src/index.yml'
@@ -175,6 +178,11 @@ prompt(questions)
 
     // saving platform file
     fs.outputJsonSync(filePath, platform, {spaces: 2});
+    // saving .gitignore
+    fs.copySync(
+      path.join(__dirname, './init/.gitignore'),
+      path.join(targetDir, '.gitignore')
+    );
 
     console.log('Platform template is created.');
     console.log(JSON.stringify(platform, null, 2));

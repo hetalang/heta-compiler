@@ -7,9 +7,7 @@ p1 @Record .= 1;
 output_sbml @SBMLExport { version: L2V4 };
 
 // include module.heta type: heta
-include table.xlsx type xlsx with {
-  options: { sheetNum: [1], omitRows: 3 }
-}
+include table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
 
 // include addon.json type json
 // include addon.yml type yaml
