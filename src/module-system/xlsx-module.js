@@ -17,10 +17,12 @@ _Module.prototype.setXLSXModuleAsync = async function(){
 
   // this part is the way to fix bug in excel-as-json 10 second before callback
   // throws error in 10 seconds in any way
+  
+  let timeout;
   let waiter = new Promise((resolve, reject) => {
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       let err = new ModuleError(`sheet #${options.sheet} is not found in "${this.filename}" or reading table require more than ${options.waitSec} sec.`);
-      console.log(options.waitSec, 'sec is out for', options);
+      //console.log(options.waitSec, 'sec is out for', options);
       reject(err);
     }, 1000*options.waitSec);
   });
@@ -30,6 +32,7 @@ _Module.prototype.setXLSXModuleAsync = async function(){
     convertExcel(this.filename, null, { sheet: options.sheet, omitEmptyFields: true }),
     waiter
   ]);
+  clearTimeout(timeout);
   rawData.splice(0, options.omitRows); // remove rows
 
   let dataFiltered = rawData

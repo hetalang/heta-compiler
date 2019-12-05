@@ -8,7 +8,7 @@ describe('ModuleSystem for cyclic.', () => {
   it('Add cyclic module.', async () => {
     let ms = new ModuleSystem();
     let filepath = path.join(__dirname, './cycle-a.heta');
-    let mdl = await ms.addModuleDeepAsync(filepath, 'heta', {});
+    await ms.addModuleDeepAsync(filepath, 'heta', {});
     expect(Object.keys(ms.moduleCollection)).to.have.lengthOf(3);
     expect(() => {
       ms.sortedPaths();
