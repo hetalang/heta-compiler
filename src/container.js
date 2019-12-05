@@ -214,7 +214,7 @@ class Container {
     // select component to copy
     let component = this.select({id: q.fromId, space: q.fromSpace});
     if(!component)
-      throw new QueueError(q, `Element with ${component.index} does not exist and cannot be cloned.`);
+      throw new QueueError(q, `Element with ${getIndexFromQ({id: q.fromId, space: q.fromSpace})} does not exist and cannot be cloned.`);
 
     // cloning and update references
     let clone = component.clone(q, isVirtual);
@@ -231,7 +231,7 @@ class Container {
     let clone = this.import(q, isVirtual);
 
     // delete component
-    this.delete(q);
+    this.delete({id: q.fromId, space: q.fromSpace});
 
     return clone;
   }
