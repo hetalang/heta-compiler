@@ -6,10 +6,10 @@ const chaiXml = require('chai-xml');
 use(chaiXml);
 const fs = require('fs-extra');
 
-const sbml_correct = fs.readFileSync('cases/6-use-case/master/output_sbml.xml','utf8');
-const json_correct = require('../../cases/6-use-case/master/output_json.json');
+const sbml_correct = fs.readFileSync('cases/6-import/master/output_sbml.xml','utf8');
+const json_correct = require('../../cases/6-import/master/output_json.json');
 
-describe('Testing "cases/6-use-case"', () => {
+describe('Testing "cases/6-import"', () => {
   let b;
 
   it('Create builder.', () => {
@@ -24,7 +24,7 @@ describe('Testing "cases/6-use-case"', () => {
         'source': 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/6-use-case', '../../test/cases/6/dist');
+    b = new Builder(declaration, 'cases/6-import', '../../test/cases/6/dist');
     //console.log(b);
   });
 
