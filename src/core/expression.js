@@ -40,7 +40,7 @@ class Expression {
     return this.exprParsed
       .toCMathML();
   }
-  toSLVString(powTransform = 'keep'){
+  toMrgString(powTransform = 'keep'){
     if(['keep', 'operator', 'function'].indexOf(powTransform) === -1){
       throw new TypeError('powTransform must be one of values: "keep", "operator", "function".');
     }

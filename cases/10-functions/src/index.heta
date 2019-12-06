@@ -1,0 +1,42 @@
+
+k1 @Const = 1e-3;
+s1 @Species { compartment: comp1 } .= 10;
+comp1 @Compartment .= 1;
+r1 @Reaction { actors: s1=> } := k1*s1*comp1;
+
+x @Const = 10;
+y @const = 10;
+z @Const = 10;
+base @Const = 10;
+
+p1 @Record 'abs(x)' := abs(x);
+p2 @Record 'add(x, y)' := "add(x, y)";
+p3 @Record 'ceil(x)' := ceil(x);
+p4 @Record := cube(x);
+p5 @Record := "divide(x, y)";
+p6 @Record := exp(x);
+p7 @Record := floor(x);
+p8 @Record := ln(x);
+p9 @Record := log(x);
+p10 @Record := "log(x, base)";
+p11 @Record := log10(x);
+p12 @Record := log2(x);
+p13 @Record := "multiply(x, y)";
+p14 @Record := "pow(x, y)";
+p17 @Record := sign(x);
+p18 @Record := sqrt(x);
+p19 @Record := square(x);
+p20 @Record := "subtract(x, y)";
+p22 @Record := "min(x, y)";
+p23 @Record := "min(x, y, z)";
+p24 @Record := "max(x, y)";
+p25 @Record := "max(x, y, z)";
+
+p26 @Record := x+y;
+p27 @Record := x-y;
+p28 @Record := x*y;
+p29 @Record := x/y;
+p30 @Record := x^y;
+
+slv1 @SLVExport { fielpath: model.slv };
+// output_sbml @SBMLExport { filepath: sbml.xml };

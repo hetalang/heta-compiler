@@ -314,7 +314,8 @@
     "_ExportP": {
       "type": "object",
       "properties": {
-        "filepath": { "type": "string" }
+        "filepath": { "type": "string" },
+        "powTransform": { "type": "string", "enum": ["keep", "function", "operator"]}
       }
     },
 

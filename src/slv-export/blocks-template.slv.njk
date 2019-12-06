@@ -57,7 +57,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% set rhsElements = _model_.rhs %}
 //! Initialization at ode, count: {{ rhsElements|length }}
 {% for rule in rhsElements %}
-{{ rule.id }} = {{ rule.assignments.ode_.expr }}; // @{{ rule.className }} {{ "'"+rule.title+"'" if rule.title }} {units: {{ rule.units|default('?') }}}
+{{ rule.id }} = {{ rule.assignments.ode_.toSLVString(powTransform) }}; // @{{ rule.className }} {{ "'"+rule.title+"'" if rule.title }} {units: {{ rule.units|default('?') }}}
 {% else %}// nothing here
 {% endfor %}
 //! Differential equations, count: {{ _model_.variables|length}}

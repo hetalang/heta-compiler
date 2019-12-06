@@ -5,6 +5,7 @@ const nunjucks = require('../nunjucks-env');
 const { Compartment } = require('../core/compartment');
 const { ExportError } = require('../heta-error');
 const _ = require('lodash');
+require('./expression');
 
 class SLVExport extends _Export{
   merge(q={}, skipChecking){
