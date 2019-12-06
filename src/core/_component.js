@@ -2,6 +2,7 @@ const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 const { ValidationError, BindingError } = require('../heta-error');
 const _ = require('lodash');
+const { flatten } = require('./utilities');
 
 /*
   Abstract class _Component
@@ -180,7 +181,7 @@ class _Component {
       }
     });
   }
-  toQ(){
+  toQ(options = {}){
     let res = {};
     res.class = this.className;
     res.id = this.id;
@@ -193,9 +194,22 @@ class _Component {
 
     return res;
   }
+  toFlat(options = {}){
+    // set defaults
+    _.defaults(options, {
+      simplifyModifiers: true,
+      simplifyActors: true,
+      simplifyExpressions: true
+    });
+
+    let q = this.toQ(options);
+    let res = flatten(q);
+
+    return res;
+  }
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
-  static requirements(){
+  static requirements(){ 
     if(this.name === '_Component'){
       return this._requirements;
     }else if(this.hasOwnProperty('_requirements')){

@@ -1,9 +1,19 @@
-k1 @Const = 1;
-k2 @Const = 2.0;
+'''Notes !!!'''
+k1 @Const 'Title' = 1;
+k1 {
+    aux: {a: [1,2,3], b: [{},{}], c: [], x: {y: {z: 1.3}}},
+    tags: [a,b,c]
+};
 
-//S @Species {};
+p1 @Record { boundary: false };
+p1 .= 1*2;
+p1 := 2*3;
+p1 [sw1]= 4*5;
 
-//p1 @Record .= k5;
-p1 @Record [ode_]= k6*;
+r1 @Reaction {
+    actors: 2*A + 2B => 6C + D,
+    modifiers: [E1,E2,E3]
+};
 
-include ./addon.heta
+excel @XLSXExport { filename: table.json, omitRows: 3, sheet: one };
+json @JSONExport { filename: output.json };

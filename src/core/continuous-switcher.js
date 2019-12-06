@@ -9,8 +9,8 @@ class ContinuousSwitcher extends _Switcher {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     res.condition = this.condition;
     return res;
   }

@@ -11,8 +11,8 @@ class TimeSwitcher extends _Switcher {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     res.condition = this.condition;
     res.start = this.start;
     if(this.period!==undefined) res.period = this.period;

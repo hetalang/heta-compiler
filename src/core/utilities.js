@@ -13,9 +13,13 @@ function flatten(o){
   let res = {};
   _.each(o, (value, key) => {
     if(value instanceof Array) {
-      res[key + '[]'] = value
-        .map((x) => JSON.stringify(x))
-        .join('; ');
+      res[key + '[]'] = value.map((x) => {
+        if(typeof x === 'object'){
+          return JSON.stringify(x);
+        }else{
+          return x;
+        }
+      }).join('; ');
     } else if (typeof value !== 'object') {
       res[key] = value;
     } else {

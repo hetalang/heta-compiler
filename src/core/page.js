@@ -9,8 +9,8 @@ class Page extends _Component {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.content) res.content = this.content;
     return res;
   }

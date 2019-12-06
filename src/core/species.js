@@ -14,8 +14,8 @@ class Species extends Record {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     res.compartment = this.compartment;
     if(this.boundary) res.boundary = this.boundary;
     if(this.isAmount) res.isAmount = this.isAmount;

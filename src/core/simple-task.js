@@ -58,8 +58,8 @@ class SimpleTask extends _Component {
       });
     }
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.type) res.type = this.type;
     if(this.subtasks) res.subtasks = this.subtasks;
     if(_.size(this.reassign)) res.reassign = _.cloneDeep(this.reassign);

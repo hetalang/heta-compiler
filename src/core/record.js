@@ -87,10 +87,10 @@ class Record extends _Component {
     if(messages.length>0 && !skipErrors)
       throw new BindingError(this.index, messages, 'References error in expressions:');
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.assignments){
-      res.assignments = _.mapValues(this.assignments, (x) => x.toQ());
+      res.assignments = _.mapValues(this.assignments, (x) => x.toQ(options));
     }
     if(this.boundary){
       res.boundary = this.boundary;

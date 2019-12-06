@@ -12,8 +12,8 @@ class ReferenceDefinition extends _Component {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.prefix) res.prefix = this.prefix;
     if(this.suffix) res.suffix = this.suffix;
 

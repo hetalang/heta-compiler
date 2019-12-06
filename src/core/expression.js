@@ -113,8 +113,10 @@ class Expression {
         handler: CStringHandler
       });
   }
-  toQ(){
-    let res = {expr: this.expr};
+  toQ(options = {}){
+    let res = options.simplifyExpressions
+      ? this.expr
+      : {expr: this.expr};
     if(this.units) res.units = this.units;
     return res;
   }

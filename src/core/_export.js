@@ -19,8 +19,8 @@ class _Export extends _Component {
   do(){ // error for abstract class
     throw new Error(`No method do() for "${this.className}".`);
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.filepath) res.filepath = this.filepath;
     if(this.powTransform!=='keep') res.powTransform = this.powTransform;
 

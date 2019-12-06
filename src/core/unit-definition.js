@@ -14,8 +14,8 @@ class UnitDefinition extends _Component {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.components.length>0)
       res.components = this.components.map((component) => {
         return _.cloneDeep(component);

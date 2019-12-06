@@ -24,14 +24,13 @@ class Process extends Record {
 
     return this;
   }
-  toQ(){
-    let res = super.toQ();
-    res.actors = this.actors.map((actor) => {
-      return {
-        target: actor.target,
-        stoichiometry: actor.stoichiometry
-      };
-    });
+  toQ(options = {}){
+    let res = super.toQ(options);
+    res.actors = options.simplifyActors
+      ? actors2rct(this.actors)
+      : this.actors.map((actor) => {
+        return { target: actor.target, stoichiometry: actor.stoichiometry };
+      });
 
     return res;
   }
@@ -93,6 +92,27 @@ function rct2actors(rct){
     });
   }
   return { targetArray, isReversible };
+}
+
+function actors2rct(actors = []){
+
+  let left = actors.filter((x) => x.stoichiometry < 0).map((x) => {
+    if(x.stoichiometry === -1){
+      return x.target;
+    }else{
+      return -x.stoichiometry + x.target;
+    }
+  }).join(' + ');
+
+  let right = actors.filter((x) => x.stoichiometry > 0).map((x) => {
+    if(x.stoichiometry === 1){
+      return x.target;
+    }else{
+      return x.stoichiometry + x.target;
+    }
+  }).join(' + ');
+
+  return left + ' = ' + right;
 }
 
 module.exports = {
