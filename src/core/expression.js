@@ -24,7 +24,7 @@ class Expression {
   get expr(){
     return this.exprParsed.toString();
   }
-  get num(){ // if it is constant than return number
+  get num(){ // if it is constant than return number or undefined otherwice
     let tree = this.exprParsed;
     if(tree.isConstantNode){
       return tree.value;
@@ -33,53 +33,6 @@ class Expression {
     }else{
       return undefined;
     }
-  }
-  toMrgString(powTransform = 'keep'){
-    if(['keep', 'operator', 'function'].indexOf(powTransform) === -1){
-      throw new TypeError('powTransform must be one of values: "keep", "operator", "function".');
-    }
-
-    let SLVStringHandler = (node, options) => {
-      if(node.type==='OperatorNode' && node.fn==='pow' && powTransform==='function'){
-        return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
-      }
-      if(node.type==='FunctionNode' && node.fn.name==='pow' && powTransform==='operator'){
-        if(node.args[0].type==='OperatorNode'){
-          var arg0 = `(${node.args[0].toString(options)})`;
-        }else{
-          arg0 = node.args[0].toString(options);
-        }
-        if(node.args[1].type==='OperatorNode'){
-          var arg1 = `(${node.args[1].toString(options)})`;
-        }else{
-          arg1 = node.args[1].toString(options);
-        }
-        return `${arg0} ^ ${arg1}`;
-      }
-      if(node.type==='FunctionNode' && node.fn.name==='abs'){ // TODO: wrong
-        return `fabs(${node.args[0].toString(options)})`;
-      }
-      if(node.type==='FunctionNode' && node.fn.name==='max'){ // TODO: wrong
-        let args = node.args
-          .map((arg) => arg.toString(options))
-          .join(', ');
-        return `std::max(${args})`;
-      }
-      if(node.type==='FunctionNode' && node.fn.name==='min'){ // TODO: wrong
-        let args = node.args
-          .map((arg) => arg.toString(options))
-          .join(', ');
-        return `std::min(${args})`;
-      }
-    };
-
-    return this.exprParsed
-      //.translate(math.expression.translator.to['dbsolve'])
-      .toString({
-        parenthesis: 'keep',
-        implicit: 'show',   
-        handler: SLVStringHandler
-      });
   }
   toMatlabString(){
     let CStringHandler = (node, options) => {
