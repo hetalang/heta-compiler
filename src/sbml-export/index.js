@@ -2,6 +2,7 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 //const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
+require('./expression');
 
 class SBMLExport extends _Export {
   merge(q={}, skipChecking){

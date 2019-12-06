@@ -1,8 +1,6 @@
 const math = require('mathjs');
 const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
-const mathjsMathML = require('mathjs-mathml');
-math.import(mathjsMathML);
 
 class Expression {
   constructor(q = {}){ // string or object
@@ -35,10 +33,6 @@ class Expression {
     }else{
       return undefined;
     }
-  }
-  toCMathML(){
-    return this.exprParsed
-      .toCMathML();
   }
   toMrgString(powTransform = 'keep'){
     if(['keep', 'operator', 'function'].indexOf(powTransform) === -1){

@@ -138,6 +138,14 @@ class Container {
   }
   setNS(q = {}){
     // do nothing: temporal solution
+    /*
+    if(this.namespaces.indexOf(q.space)===-1){
+      this.namespaces.push({ name: q.space, abstract: q.abstract });
+      this.importNS({ space: q.space }, true);
+    }else{
+      throw new QueueError(q, `Namespace ${q.space} was already initiated.`);
+    }
+    */
   }
   /* 
     clone space components to another space
@@ -235,18 +243,6 @@ class Container {
 
     return clone;
   }
-  /*
-    #initNamespace one::* { abstract: true };
-  
-  initNamespace(q = {}){
-    if(this.namespaces.indexOf(q.space)===-1){
-      this.namespaces.push({ name: q.space, abstract: q.abstract });
-      this.importNS({ space: q.space }, true);
-    }else{
-      throw new QueueError(q, `Namespace ${q.space} was already initiated.`);
-    }
-  }
-  */
   load(q){
     // push to spaces list and use anonimous
     if(this.nsList.indexOf(q.space)===-1){
