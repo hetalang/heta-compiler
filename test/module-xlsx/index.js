@@ -59,16 +59,19 @@ describe('Integral test of correct xlsx module', () => {
       }
     };
     let b = new Builder(declaration, __dirname);
+    
     try{
       await b.runAsync();
     }catch(err){
       expect(err).to.be.instanceOf(ModuleError);
       return null;
     }
+    
     throw new Error('Wrong sheet should throw.');
   });
 
   /* The same as previously but solved using Promise syntax */
+  /*
   it('Create platform for empty XLSX sheets: error', function(done) {
     this.timeout(7e3);
     let declaration = {
@@ -95,4 +98,5 @@ describe('Integral test of correct xlsx module', () => {
         }
       });
   });
+  */
 });

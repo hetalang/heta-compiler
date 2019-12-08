@@ -204,6 +204,7 @@ class _Component {
 
     let q = this.toQ(options);
     let res = flatten(q);
+    res.on = 1;
 
     return res;
   }
