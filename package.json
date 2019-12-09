@@ -1,6 +1,6 @@
 {
   "name": "qs3p-js",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
