@@ -180,7 +180,7 @@ prompt(questions)
     fs.outputJsonSync(filePath, platform, {spaces: 2});
     // saving .gitignore
     fs.copySync(
-      path.join(__dirname, './init/.gitignore'),
+      path.join(__dirname, './init/template.gitignore'),
       path.join(targetDir, '.gitignore')
     );
 
