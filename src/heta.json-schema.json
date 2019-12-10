@@ -315,7 +315,8 @@
       "type": "object",
       "properties": {
         "filepath": { "type": "string" },
-        "powTransform": { "type": "string", "enum": ["keep", "function", "operator"]}
+        "powTransform": { "type": "string", "enum": ["keep", "function", "operator"]},
+        "omitRows": {"type": "number"}
       }
     },
 

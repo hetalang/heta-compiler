@@ -43,6 +43,6 @@ describe('Testing anonimous space.', () => {
     });
     
     expect(c).to.have.property('length', 6);
-    json1.do();
+    json1.make();
   });
 });

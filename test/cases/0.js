@@ -39,7 +39,7 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @SBMLExport, check and compare.', () => {
     let sbml_export = b.container.select({id: 'mm_sbml', space: 'mm'});
-    let code = sbml_export.do();
+    let code = sbml_export.make()[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);
     //console.log(code);
@@ -47,7 +47,7 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run @MrgsolveExport, check and compare.', () => {
     let mm_mrg = b.container.select({id: 'mm_mrg', space: 'mm'});
-    let code = mm_mrg.do();
+    let code = mm_mrg.make()[0].content;
     let filename = './diagnostics/0/mm_mrg.cpp';
     fs.outputFileSync(filename, code);
     // the simulations will be checked later in R
@@ -60,7 +60,7 @@ describe('Testing "cases/0-hello-world"', () => {
     json_export._space = 'mm';
     json_export._container = b.container;
 
-    let code = json_export.do();
+    let code = json_export.make()[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
     //console.log(obj);
@@ -73,7 +73,7 @@ describe('Testing "cases/0-hello-world"', () => {
     yaml_export._space = 'mm';
     yaml_export._container = b.container;
 
-    let code = yaml_export.do();
+    let code = yaml_export.make()[0].content;
     let obj = safeLoad(code);
     expect(obj).to.be.deep.equal(yaml_correct);
     //console.log(code);
@@ -86,7 +86,7 @@ describe('Testing "cases/0-hello-world"', () => {
     slv_export._space = 'mm';
     slv_export._container = b.container;
 
-    let code = slv_export.do();
+    let code = slv_export.make()[0].content;
     let obj = slvParse.parse(code);
     expect(obj).to.be.deep.equal(slv_correct);
     //console.log(obj);

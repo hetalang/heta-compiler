@@ -19,9 +19,6 @@ class _Export extends _Component {
   static get schemaName(){
     return '_ExportP';
   }
-  do(){ // error for abstract class
-    throw new ExportError(`No method do() for "${this.className}".`);
-  }
   /*
     Method creates exported files.
     return in format 
