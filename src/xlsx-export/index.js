@@ -6,15 +6,16 @@ class XLSXExport extends _Export {
   get className(){
     return 'XLSXExport';
   }
-  get ext(){
-    return 'json';
-  }
-  do(){
+  make(){
     let qArr = this._container
       .getPopulation(this.space)
       .map((x) => x.toFlat());
     
-    return JSON.stringify(qArr, null, 2);
+    return [{
+      content: JSON.stringify(qArr, null, 2),
+      pathSuffix: '.json',
+      type: 'text'
+    }];
   }
   toQ(){
     let res = super.toQ();

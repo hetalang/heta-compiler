@@ -15,5 +15,6 @@ r1 @Reaction {
     modifiers: [E1,E2,E3]
 };
 
-excel @XLSXExport { filename: table.json, omitRows: 3, sheet: one };
-json @JSONExport { filename: output.json };
+excel @XLSXExport { filepath: table, omitRows: 3, sheet: one };
+json @JSONExport { filepath: output };
+yaml @YAMLExport { filepath: output };

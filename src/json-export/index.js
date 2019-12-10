@@ -6,15 +6,16 @@ class JSONExport extends _Export {
   get className(){
     return 'JSONExport';
   }
-  get ext(){
-    return 'json';
-  }
-  do(){
+  make(){
     let qArr = this._container
       .getPopulation(this.space)
       .map((x) => x.toQ());
     
-    return JSON.stringify(qArr, null, 2);
+    return [{
+      content: JSON.stringify(qArr, null, 2),
+      pathSuffix: '.json',
+      type: 'text'
+    }];
   }
   toQ(){
     let res = super.toQ();

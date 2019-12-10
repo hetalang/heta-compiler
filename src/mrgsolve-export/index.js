@@ -13,12 +13,14 @@ class MrgsolveExport extends _Export{
   get className(){
     return 'MrgsolveExport';
   }
-  get ext(){
-    return 'cpp';
-  }
-  do(){
+  make(){
     this._model_ = this._getMrgsolveImage(this.space);
-    return this.getMrgsolveCode();
+
+    return [{
+      content: this.getMrgsolveCode(),
+      pathSuffix: '.cpp',
+      type: 'text'
+    }];
   }
   _getMrgsolveImage(targetSpace){
     let model = {

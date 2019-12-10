@@ -12,12 +12,14 @@ class SimbioExport extends _Export{
   get className(){
     return 'SimbioExport';
   }
-  get ext(){
-    return 'm';
-  }
-  do(){
+  make(){
     this._model_ = this._getSimbioImage(this.space);
-    return this.getSimbioCode();
+
+    return [{
+      content: this.getSimbioCode(),
+      pathSuffix: '.m',
+      type: 'text'
+    }];
   }
   _getSimbioImage(targetSpace){
     let model = {

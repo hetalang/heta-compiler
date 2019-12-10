@@ -19,18 +19,19 @@ class SLVExport extends _Export{
   get className(){
     return 'SLVExport';
   }
-  get ext(){
-    return 'slv';
-  }
   /**
    * The method creates text code to save as SLV file.
    *
    * @return {string} Text code of exported format.
    */
-  do(){
+  make(){
     this._model_ = this._getSLVImage(this.space);
 
-    return this.getSLVCode();
+    return [{
+      content: this.getSLVCode(),
+      pathSuffix: '.slv',
+      type: 'text'
+    }];
   }
   /**
    * Creates model image by nesessary components based on space.

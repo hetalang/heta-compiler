@@ -13,12 +13,14 @@ class SBMLExport extends _Export {
   get className(){
     return 'SBMLExport';
   }
-  get ext(){
-    return 'xml';
-  }
-  do(){
+  make(){
     this._model_ = this._getSBMLImage(this.space);
-    return this.getSBMLCode();
+
+    return [{
+      content: this.getSBMLCode(),
+      pathSuffix: '.xml',
+      type: 'text'
+    }];
   }
   _getSBMLImage(targetSpace){
     let model = {

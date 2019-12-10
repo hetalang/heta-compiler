@@ -94,12 +94,9 @@ class Builder {
       logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
       let tmp = exportElements.map(async (exportItem) => {
-        let filepath = exportItem.filepath || exportItem.id;
-        logger.info(`Exporting to file "${filepath}" of type "${exportItem.className}"...`);
-        let absFilename = path.join(this._distDirname, filepath + '.' + exportItem.ext);
+        logger.info(`Exporting "${exportItem.index}" component of type "${exportItem.className}"...`);
         try{
-          let codeText = exportItem.do();
-          fs.outputFileSync(absFilename, codeText);
+          exportItem.makeAndSave(this._distDirname);
         }catch(e){
           this.errorCatcher(e, 'Export will be skipped.');
         }

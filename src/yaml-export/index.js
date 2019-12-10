@@ -6,10 +6,7 @@ class YAMLExport extends _Export {
   get className(){
     return 'YAMLExport';
   }
-  get ext(){
-    return 'yml';
-  }
-  do(){
+  make(){
     let qArr = this._container
       .getPopulation(this.space)
       .map((x) => x.toQ());
@@ -23,7 +20,11 @@ class YAMLExport extends _Export {
       styles: {}
     });
     
-    return yaml;
+    return [{
+      content: yaml,
+      pathSuffix: '.yml',
+      type: 'text'
+    }];
   }
   toQ(){
     let res = super.toQ();
