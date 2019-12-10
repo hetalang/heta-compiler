@@ -9,30 +9,39 @@ class Const extends _Component { // implicit extend Numeric
 
     if(q.num!==undefined) this.num = q.num;
     this.free = q.free ? q.free : false;
-    if(q.units!==undefined) this.units = q.units;
+    if(q.units!==undefined){
+      //this.units = q.units;
+      this.unitsParsed = uParser.parse(q.units);
+    }
 
     return this;
   }
-
+  get units(){
+    if(this.unitsParsed!==undefined){
+      return this.unitsParsed.toString();
+    }else{
+      return undefined;
+    }
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     res.num = this.num;
     if(this.free) res.free = true;
     if(this.units) res.units = this.units;
+
     return res;
   }
+  /* used only in sbml */
   unitsSBML(){
-    return this.units;
+    return this.unitsParsed;
   }
   // temporal solution
   unitsSimbio(){
     return this.units;
   }
   unitsHash(){
-    if(this.units){
-      return uParser
-        .parse(this.units)
-        .toHash();
+    if(this.unitsParsed!==undefined){
+      return this.unitsParsed.toHash();
     }else{
       return undefined;
     }

@@ -22,22 +22,22 @@ class Species extends Record {
     return res;
   }
   unitsSBML(){
-    let compartmentUnits = _.get(this, 'compartmentObj.units');
-    if(compartmentUnits!==undefined && this.units!==undefined && !this.isAmount){
-      return this.units + '*' + compartmentUnits;
-    }else{
-      return this.units;
+    let compartmentUnits = _.get(this, 'compartmentObj.unitsParsed');
+    if (!this.isAmount && compartmentUnits!==undefined && this.unitsParsed!==undefined) {
+      return this.unitsParsed
+        .multiply(compartmentUnits)
+        .simplify();
+    } else if (this.isAmount && this.unitsParsed!==undefined) {
+      return this.unitsParsed;
+    } else {
+      return undefined;
     }
   }
   unitsHash(useSBMLUnits){ // get normal or substance units
-    if(!useSBMLUnits && this.units){
-      return uParser
-        .parse(this.units)
-        .toHash();
+    if(!useSBMLUnits && this.unitsParsed!==undefined){
+      return this.unitsParsed.toHash();
     }else if(useSBMLUnits && this.unitsSBML()){
-      return uParser
-        .parse(this.unitsSBML())
-        .toHash();
+      return this.unitsSBML().toHash();
     }
   }
 }

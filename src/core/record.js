@@ -14,7 +14,7 @@ class Record extends _Component {
     if(!skipChecking) Record.isValid(q);
     super.merge(q, skipChecking);
 
-    if(q && q.assignments){ // add new assignments from q
+    if(q.assignments){ // add new assignments from q
       let newAssignments = _.mapValues(q.assignments, (x) => {
         if(typeof x === 'string' || typeof x === 'number' || 'expr' in x){
           try{ // this is for the cases of wrong size structure
@@ -29,10 +29,21 @@ class Record extends _Component {
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
     }
 
+    if(q.units!==undefined){
+      //this.units = q.units;
+      this.unitsParsed = uParser.parse(q.units);
+    }
+
     if(q && q.boundary) this.boundary = q.boundary;
-    if(q && q.units!==undefined) this.units = q.units;
 
     return this;
+  }
+  get units(){
+    if(this.unitsParsed!==undefined){
+      return this.unitsParsed.toString();
+    }else{
+      return undefined;
+    }
   }
   updateReferences(q = {}){
     super.updateReferences(q);
@@ -101,15 +112,13 @@ class Record extends _Component {
     return res;
   }
   unitsSBML(){
-    return this.units;
+    return this.unitsParsed;
   }
   unitsHash(){
-    if(this.units){
-      return uParser
-        .parse(this.units)
-        .toHash();
+    if(this.unitsParsed!==undefined){
+      return this.unitsParsed.toHash();
     }else{
-      return;
+      return undefined;
     }
   }
   // XXX: temporal solution
