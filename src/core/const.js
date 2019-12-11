@@ -25,9 +25,9 @@ class Const extends _Component { // implicit extend Numeric
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    res.num = this.num;
-    if(this.free) res.free = true;
-    if(this.units) res.units = this.units;
+    if (this.num !== undefined) res.num = this.num;
+    if (this.free) res.free = true;
+    if (this.units) res.units = this.units;
 
     return res;
   }

@@ -5,11 +5,21 @@
         "id": "k1",
         "num": 1.2,
         "title": "I am a title",
-        "notes": "I am **notes**"
+        "notes": "I am **notes**",
+        "free": true
     },
     {
         "class": "Const",
         "id": "k3",
         "num": 1.2
+    },
+    {
+        "class": "Const",
+        "id": "k4",
+        "num": 0
+    },
+    {
+        "class": "Const",
+        "id": "k5"
     }
 ]
