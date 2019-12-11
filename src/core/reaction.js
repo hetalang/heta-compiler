@@ -2,8 +2,8 @@ const { Record } = require('./record');
 const { Process, _Effector, Actor } = require('./process');
 
 class Reaction extends Process {
-  constructor(q = {}){
-    super(q);
+  constructor(){
+    super();
     this.modifiers = [];
   }
   merge(q, skipChecking){

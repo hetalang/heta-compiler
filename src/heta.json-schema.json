@@ -242,6 +242,10 @@
               { "$ref": "#/definitions/ID" }
             ]
           }
+        },
+        "isAmount": { "type": "boolean" },
+        "compartment": {
+          "$ref": "#/definitions/ID"
         }
       },
       "errorMessage": {

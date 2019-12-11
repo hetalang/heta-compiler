@@ -1,6 +1,6 @@
 const { Record } = require('./record');
-const { UnitsParser, qspUnits } = require('units-parser');
-let uParser = new UnitsParser(qspUnits);
+//const { UnitsParser, qspUnits } = require('units-parser');
+//let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
 class Species extends Record {
@@ -9,15 +9,13 @@ class Species extends Record {
     super.merge(q, skipChecking);
 
     if(q.compartment!==undefined) this.compartment = q.compartment;
-    if(q.boundary!==undefined) this.boundary = q.boundary;
     if(q.isAmount!==undefined) this.isAmount = q.isAmount;
 
     return this;
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    res.compartment = this.compartment;
-    if(this.boundary) res.boundary = this.boundary;
+    if(this.compartment) res.compartment = this.compartment;
     if(this.isAmount) res.isAmount = this.isAmount;
     return res;
   }

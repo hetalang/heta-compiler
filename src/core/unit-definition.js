@@ -2,8 +2,8 @@ const _ = require('lodash');
 const { _Component } = require('./_component');
 
 class UnitDefinition extends _Component {
-  constructor(q = {}){
-    super(q);
+  constructor(){
+    super();
     this.components = []; // default
   }
   merge(q, skipChecking){

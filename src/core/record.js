@@ -6,8 +6,8 @@ const _ = require('lodash');
 const { ValidationError, BindingError } = require('../heta-error');
 
 class Record extends _Component {
-  constructor(q = {}){
-    super(q);
+  constructor(){
+    super();
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
   }
   merge(q, skipChecking){

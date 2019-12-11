@@ -4,8 +4,8 @@ const path = require('path');
 const fs = require('fs-extra');
 
 class _Export extends _Component {
-  constructor(q = {}){
-    super(q);
+  constructor(){
+    super();
     this.powTransform = 'keep';
   }
   merge(q, skipChecking){
