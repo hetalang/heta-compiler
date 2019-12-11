@@ -49,7 +49,9 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% endblock %}
 =============================== RHS ================================
 {% macro diff(backReferences=[]) -%}
-{% for br in backReferences|exclude2('stoichiometry', undefined) %}{% if br.stoichiometry>0 and not loop.first %}+{% endif %}{{ br.stoichiometry + '*'}}{{ br.process }}{% endfor %}
+{% for br in backReferences|exclude2('stoichiometry', undefined) -%}
+{% if br.stoichiometry>0 and not loop.first %}+{% endif %}{{ br.stoichiometry + '*'}}{{ br.process }}{{ '' if br._process_.isAmount else '*' + br._process_.compartment }}
+{%- endfor %}
 {%- endmacro %}
 {% block rhs %}
 //! Pools
@@ -63,9 +65,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 //! Differential equations, count: {{ _model_.variables|length}}
 {% for dynamic in _model_.variables %}
 //!! {{ dynamic.id }}  @{{ dynamic.className }} {{ "'"+dynamic.title+"'" if dynamic.title }} {units: {{ dynamic.units|default('?') }}}
-{% if dynamic.implicitBoundary %}
-F[{{ loop.index }}] = {{ dynamic.id }}_rate_;
-{% elif dynamic.className!=='Species' or dynamic.isAmount%}
+{% if dynamic.className!=='Species' or dynamic.isAmount%}
 F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {% else %}
 F[{{ loop.index }}] = ( {{ diff(dynamic.backReferences) }} ) / {{ dynamic.compartment|default('default_compartment_') }};

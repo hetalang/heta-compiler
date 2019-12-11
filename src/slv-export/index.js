@@ -60,23 +60,18 @@ class SLVExport extends _Export{
 
     // push active processes
     model.processes = new XArray();
-    model.population.filter((x) => {
-      return x.instanceOf('Process')
-        && x.actors.length>0 // process with actors
-        && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary); // true if there is at least non boundary target
-    }).forEach((process) => {
-      model.processes.push(process);
-    });
+    model.population
+      .filter((x) => {
+        return x.instanceOf('Process')
+          && x.actors.length>0 // process with actors
+          && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary); // true if there is at least non boundary target
+      })
+      .forEach((process) => model.processes.push(process));
     // push non boundary ode variables which are mentioned in processes
     model.variables = new XArray();
-    model.population.filter((x) => {
-      return x.instanceOf('Record') // must be record
-        && !x.boundary // not boundary
-        && !x.implicitBoundary // not constant, not rule, not explicit diff equation
-        && x.backReferences.length>0; // mentioned in process
-    }).forEach((record) => {
-      model.variables.push(record);
-    });
+    model.population
+      .filter((x) => x.instanceOf('Record') && x.isDynamic)
+      .forEach((record) => model.variables.push(record));
     // create matrix
     model.matrix = [];
     model.processes.forEach((process, processNum) => {

@@ -148,8 +148,8 @@ class _Component {
       }else{
         // set direct ref
         if(rule.setTarget) _.set(this, path + 'Obj', target);
-        // add back references for Process XXX: ugly solution
-        if(this.instanceOf('Process')){
+        // add back references for Record from Process XXX: ugly solution
+        if(this.instanceOf('Process') && item.className === 'Actor' ){
           target.backReferences.push({
             process: this.id,
             _process_: this,

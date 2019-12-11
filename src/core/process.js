@@ -57,6 +57,9 @@ class Actor extends _Effector {
       ? q.stoichiometry
       : 1; // default value
   }
+  get className(){
+    return 'Actor';
+  }
 }
 
 function rct2actors(rct){
