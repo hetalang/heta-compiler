@@ -1,9 +1,9 @@
-const { Record } = require('./record');
 const { Process, _Effector, Actor } = require('./process');
 
 class Reaction extends Process {
   constructor(){
     super();
+    this.isAmount = true;
     this.modifiers = [];
   }
   merge(q, skipChecking){
@@ -20,6 +20,9 @@ class Reaction extends Process {
           }
         });
     }
+    
+    if(q.compartment!==undefined) this.compartment = q.compartment;
+    if(q.isAmount!==undefined) this.isAmount = q.isAmount;
 
     return this;
   }
@@ -30,6 +33,9 @@ class Reaction extends Process {
         ? this.modifiers.map((modifier) => modifier.target )
         : this.modifiers.map((modifier) => { return { target: modifier.target }; });
     }
+
+    if(this.compartment) res.compartment = this.compartment;
+    if(this.isAmount!==true) res.isAmount = this.isAmount;
 
     return res;
   }
@@ -44,7 +50,13 @@ Reaction._requirements = {
   modifiers: {
     required: false, 
     isArray: true, path: 'target', 
-    isReference: true, class: 'Species', setTarget: true }
+    isReference: true, class: 'Species', setTarget: true 
+  },
+  compartment: {
+    required: false,
+    isArray: false,
+    isReference: true, targetClass: 'Compartment', setTarget: true 
+  }
 };
 
 class Modifier extends _Effector {

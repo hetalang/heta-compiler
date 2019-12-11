@@ -11,7 +11,6 @@ describe('Test for requirements', () => {
   });
   it('Check Page requirements', () => {
     expect(Reaction.requirements())
-      .to.have.all.keys('actors', 'modifiers');  
+      .to.have.all.keys('actors', 'compartment', 'modifiers');  
   });
 });
-
