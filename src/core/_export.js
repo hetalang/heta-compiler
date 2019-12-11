@@ -32,7 +32,7 @@ class _Export extends _Component {
     throw new ExportError(`No method make() for "${this.clasName}"`);
   }
   /*
-    sva one or several output foles to disk
+    save one or several output files to disk
   */
   makeAndSave(pathPrefix){
     this.make().forEach((out) => {

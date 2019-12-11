@@ -12,9 +12,19 @@ p1 [sw1]= 4*5;
 
 r1 @Reaction {
     actors: 2*A + 2B => 6C + D,
-    modifiers: [E1,E2,E3]
+    modifiers: [E1,E2]
 };
 
-excel @XLSXExport { filepath: table, omitRows: 3, sheet: one };
+'''Some spec'''
+A @Species { compartment: comp1 };
+B @Species { compartment: comp1 };
+C @Species { compartment: comp1 };
+D @Species { compartment: comp1 };
+E1 @Species { compartment: comp1, boundary: true };
+E2 @Species { compartment: comp1, boundary: true };
+
+comp1 @Compartment;
+
+excel @XLSXExport { filepath: table, omitRows: 3, sheet: one, splitByClass: true };
 json @JSONExport { filepath: output };
 yaml @YAMLExport { filepath: output };
