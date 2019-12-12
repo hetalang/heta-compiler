@@ -67,6 +67,24 @@ class Expression {
       if(node.type==='SymbolNode' && node.name === 't'){
         return 'time';
       }
+      if(node.type==='FunctionNode' && node.fn.name==='ifg'){
+        let args = node.args
+          .map((arg) => arg.toString(options))
+          .join(', ');
+        return `fun.ifg(${args})`;
+      }
+      if(node.type==='FunctionNode' && node.fn.name==='ife'){
+        let args = node.args
+          .map((arg) => arg.toString(options))
+          .join(', ');
+        return `fun.ife(${args})`;
+      }
+      if(node.type==='FunctionNode' && node.fn.name==='ifge'){
+        let args = node.args
+          .map((arg) => arg.toString(options))
+          .join(', ');
+        return `fun.ifge(${args})`;
+      }
     };
 
     return this.exprParsed

@@ -62,25 +62,23 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
   {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.aux.reversible!==false}}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
-  {% set fullActors = record.actors.concat(record.modifiers) -%}
+  {%- set fullActors = record.actors.concat(record.modifiers) -%}
+  {% set reactants = fullActors|getReactants %}
+  {%- if reactants|length > 0 %}
   addreactant({{_model_.model}}.reaction.{{record.id}}, [
-    {%- for actor in fullActors -%}
-    {%- if not actor.stoichiometry or actor.stoichiometry<0 %}{{_model_.model}}.species.{{ actor.target }}, {% endif -%}
-    {%- endfor -%}
+    {%- for actor in reactants %}{{_model_.model}}.species.{{ actor.target }}, {% endfor -%}
     ], [
-    {%- for actor in fullActors -%}
-    {%- if not actor.stoichiometry or actor.stoichiometry<0 %}{{ -actor.stoichiometry if actor.stoichiometry<0 else 1 }}, {% endif -%}
-    {%- endfor -%}
+    {%- for actor in reactants %}{{ -actor.stoichiometry if actor.stoichiometry<0 else 1 }}, {% endfor -%}
     ]);
+  {%- endif %}
+  {%- set products = fullActors|getProducts %}
+  {%- if products|length > 0 %}
   addproduct({{_model_.model}}.reaction.{{record.id}}, [
-    {%- for actor in fullActors -%}
-    {%- if not actor.stoichiometry or actor.stoichiometry>0 %}{{_model_.model}}.species.{{ actor.target }}, {% endif -%}
-    {%- endfor -%}
+    {%- for actor in products %}{{_model_.model}}.species.{{ actor.target }}, {% endfor -%}
     ], [
-    {%- for actor in fullActors -%}
-    {%- if not actor.stoichiometry or actor.stoichiometry>0 %}{{ actor.stoichiometry if actor.stoichiometry>0 else 1 }}, {% endif -%}
-    {%- endfor -%}
+    {%- for actor in products %}{{ actor.stoichiometry if actor.stoichiometry>0 else 1 }}, {% endfor -%}
     ]);
+  {%- endif %}
 {%- endfor %}
 
 {% set listOfAssignmentRules = _model_.population.selectRecordsByContext("ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}

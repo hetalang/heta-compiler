@@ -2,6 +2,13 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 //const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
+const fs = require('fs');
+const path = require('path');
+
+const fun = fs.readFileSync(
+  path.join(__dirname, 'fun.m'),
+  'utf8'
+);
 
 class SimbioExport extends _Export{
   merge(q={}, skipChecking){
@@ -15,15 +22,22 @@ class SimbioExport extends _Export{
   make(){
     this._model_ = this._getSimbioImage(this.space);
 
-    return [{
-      content: this.getSimbioCode(),
-      pathSuffix: '.m',
-      type: 'text'
-    }];
+    return [
+      {
+        content: this.getSimbioCode(),
+        pathSuffix: '/model.m',
+        type: 'text'
+      },
+      {
+        content: fun,
+        pathSuffix: '/fun.m',
+        type: 'text'
+      }
+    ];
   }
   _getSimbioImage(targetSpace){
     let model = {
-      model: this.space,
+      model: this.space || 'anonimous',
       population: this._container.getPopulation(targetSpace, this.skipMathChecking)
     };
     return model;
