@@ -105,14 +105,21 @@ addrule(
 {% endfor %}
 
 {%- set listOfTimeEvents = _model_.population.selectByClassName("TimeSwitcher") %}
-{% set listOfContinuousEvents = _model_.population.selectByClassName("ContinuousSwitcher") %}
-{{- "% Events" if listOfTimeEvents|length + listOfContinuousEvents|length > 0 }}
+{{- "% Time Events" if listOfTimeEvents|length > 0 }}
 {% for event in listOfTimeEvents -%}
-{{_model_.model}}.event.{{event.id}} = addevent({{- model_id }}, 'time/timeOne >= {{ event.start }}', {
-  {%- for record in _model_.population.selectRecordsByContext(event.id) -%}
-  '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
+{%- for record in _model_.population.selectRecordsByContext(event.id) -%}
+{{_model_.model}}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
+    {{_model_.model}}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
+    {{_model_.model}}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
+    {{_model_.model}}.dose.{{event.id}}.{{record.id}}.Interval = '{{event.period}}';
+    {{_model_.model}}.dose.{{event.id}}.{{record.id}}.RepeatCount = '{{event.repeatCount if event.repeatCount>0 else 0}}';
+    {{_model_.model}}.dose.{{event.id}}.{{record.id}}.StartTime = '{{event.start}}';
+    {{_model_.model}}.dose.{{event.id}}.{{record.id}}.Active = true;
+{% endfor -%}
 {% endfor %}
+
+{% set listOfContinuousEvents = _model_.population.selectByClassName("ContinuousSwitcher") %}
+{{- "% Events" if listOfContinuousEvents|length > 0 }}
 {% for event in listOfContinuousEvents -%}
 {{_model_.model}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
   {%- for record in _model_.population.selectRecordsByContext(event.id) -%}

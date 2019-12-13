@@ -296,9 +296,18 @@
     "TimeSwitcherP": {
       "type": "object",
       "properties": {
-        "start": { "type": "number" },
-        "period": { "type": "number" , "minimum": 0, "default": 0},
-        "repeatCount": { "type": "integer" , "minimum": 0, "default": 0}
+        "start": {
+          "oneOf" : [{ "type": "number" }, { "$ref": "#/definitions/ID" }]
+        },
+        "stop": {
+          "oneOf" : [{ "type": "number" }, { "$ref": "#/definitions/ID" }]
+        },
+        "period": {
+          "oneOf" : [{ "type": "number" , "minimum": 0, "default": 0}, { "$ref": "#/definitions/ID" }]
+        },
+        "repeatCount": {
+          "ineOf" : [{ "type": "integer" , "minimum": 0, "default": 0}, { "$ref": "#/definitions/ID" }]
+        }
       }
     },
 

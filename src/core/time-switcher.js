@@ -6,6 +6,7 @@ class TimeSwitcher extends _Switcher {
     super.merge(q, skipChecking);
 
     if(q.start!==undefined) this.start = q.start;
+    if(q.stop!==undefined) this.stop = q.stop;
     if(q.period!==undefined) this.period = q.period;
     if(q.repeatCount!==undefined) this.repeatCount = q.repeatCount;
 
@@ -24,6 +25,9 @@ class TimeSwitcher extends _Switcher {
 TimeSwitcher._requirements = {
   start: {
     required: true
+  },
+  stop: {
+    required: false
   }
 };
 

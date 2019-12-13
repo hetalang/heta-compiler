@@ -37,7 +37,7 @@ class SimbioExport extends _Export{
   }
   _getSimbioImage(targetSpace){
     let model = {
-      model: this.space || 'anonimous',
+      model: this.id,
       population: this._container.getPopulation(targetSpace, this.skipMathChecking)
     };
     return model;
