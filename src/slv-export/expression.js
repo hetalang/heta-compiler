@@ -109,6 +109,42 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
         .map((arg) => arg.toString(options));
       return `log(${args[0]}) / log(2)`;
     }
+    if(node.type==='FunctionNode' && node.fn.name==='ifg'){
+      let args = [
+        node.args[0].toString(options),
+        0,
+        node.args[1].toString(options),
+        node.args[2].toString(options)
+      ].join(', ');
+      return `ifgt(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='ife'){
+      let args = [
+        node.args[0].toString(options),
+        0,
+        node.args[1].toString(options),
+        node.args[2].toString(options)
+      ].join(', ');
+      return `ifeq(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='ifg'){
+      let args = [
+        node.args[0].toString(options),
+        0,
+        node.args[1].toString(options),
+        node.args[2].toString(options)
+      ].join(', ');
+      return `ifgt(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='ifge'){
+      let args = [
+        node.args[0].toString(options),
+        0,
+        node.args[1].toString(options),
+        node.args[2].toString(options)
+      ].join(', ');
+      return `ifge(${args})`;
+    }
   };
 
   return this.exprParsed
