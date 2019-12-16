@@ -296,18 +296,10 @@
     "TimeSwitcherP": {
       "type": "object",
       "properties": {
-        "start": {
-          "oneOf" : [{ "type": "number" }, { "$ref": "#/definitions/ID" }]
-        },
-        "stop": {
-          "oneOf" : [{ "type": "number" }, { "$ref": "#/definitions/ID" }]
-        },
-        "period": {
-          "oneOf" : [{ "type": "number" , "minimum": 0, "default": 0}, { "$ref": "#/definitions/ID" }]
-        },
-        "repeatCount": {
-          "ineOf" : [{ "type": "integer" , "minimum": 0, "default": 0}, { "$ref": "#/definitions/ID" }]
-        }
+        "start": { "$ref" : "#/definitions/ConstInternal" },
+        "stop": { "$ref" : "#/definitions/ConstInternal" },
+        "period": { "$ref" : "#/definitions/ConstInternal" },
+        "repeatCount": { "$ref" : "#/definitions/ConstInternal" }
       }
     },
 
@@ -354,6 +346,14 @@
           "$ref": "#/definitions/Units"
         }
       }
+     },
+
+     "ConstInternal": {
+      "anyOf": [
+        { "allOf": [ { "$ref": "#/definitions/ConstP" }, { "required": ["num"] } ] },
+        { "$ref": "#/definitions/ID" },
+        { "type": "number" }
+      ]
      },
 
     "Const": {

@@ -34,5 +34,13 @@
     "start": 5.5,
     "period": 12.2,
     "repeatCount": 0
+  },
+  {
+    "class": "TimeSwitcher",
+    "id": "tsw6",
+    "space": "one",
+    "start": "start0",
+    "period": { "num": 12.2, "units": "h" },
+    "repeatCount": 0
   }
 ]

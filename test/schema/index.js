@@ -50,7 +50,7 @@ function singleTest(className, checkedArray, errorArray){
         let valid = validate(component);
         if(!valid) console.log(validate.errors);
         expect(valid).to.be.true;
-      })
+      });
     });
     // errors
     errorArray && errorArray.forEach((component) => {

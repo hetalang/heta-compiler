@@ -15,11 +15,11 @@
     "id": "tsw2_err",
     "space": "one",
     "start": 12,
-    "period": -2,
+    "period": {},
     "aux": {
       "validationResult": {
         "num": 0,
-        "prop": "comparison"
+        "prop": "missingProperty"
       }
     }
   },
@@ -27,27 +27,12 @@
     "class": "TimeSwitcher",
     "id": "tsw3_err",
     "space": "one",
-    "start": 12,
-    "period": 2,
-    "repeatCount": -1,
+    "start": "12",
+    "period": {},
     "aux": {
       "validationResult": {
-        "num": 0,
-        "prop": "comparison"
-      }
-    }
-  },
-  {
-    "class": "TimeSwitcher",
-    "id": "tsw4_err",
-    "space": "one",
-    "start": 12,
-    "period": 2,
-    "repeatCount": 1.1,
-    "aux": {
-      "validationResult": {
-        "num": 0,
-        "prop": "type"
+        "num": 1,
+        "prop": "pattern"
       }
     }
   }
