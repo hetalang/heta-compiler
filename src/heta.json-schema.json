@@ -135,9 +135,6 @@
         "boundary": {
           "type": "boolean", "default": false,
           "description": "If it is true the record cannot be changed by any process, only byexpression in assignments."
-        },
-        "units": {
-          "$ref": "#/definitions/Units"
         }
       }
     },
@@ -341,12 +338,16 @@
       "type": "object",
       "properties": {
         "free": { "type": "boolean" },
-        "num": { "type": "number" },
-        "units": {
-          "$ref": "#/definitions/Units"
-        }
+        "num": { "type": "number" }
       }
      },
+
+     "_SizeP": {
+       "type": "object",
+       "properties": {
+         "units": { "$ref": "#/definitions/Units" }
+       }
+      },
 
      "ConstInternal": {
       "anyOf": [

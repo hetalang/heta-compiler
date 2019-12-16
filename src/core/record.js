@@ -1,11 +1,9 @@
-const { _Component } = require('./_component');
+const { _Size } = require('./_size');
 const { Expression } = require('./expression');
-const { UnitsParser, qspUnits } = require('units-parser');
-let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 const { ValidationError, BindingError } = require('../heta-error');
 
-class Record extends _Component {
+class Record extends _Size {
   constructor(){
     super();
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
@@ -29,21 +27,9 @@ class Record extends _Component {
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
     }
 
-    if(q.units!==undefined){
-      //this.units = q.units;
-      this.unitsParsed = uParser.parse(q.units);
-    }
-
     if(q && q.boundary) this.boundary = q.boundary;
 
     return this;
-  }
-  get units(){
-    if(this.unitsParsed!==undefined){
-      return this.unitsParsed.toString();
-    }else{
-      return undefined;
-    }
   }
   updateReferences(q = {}){
     super.updateReferences(q);
@@ -110,20 +96,6 @@ class Record extends _Component {
       res.units = this.units;
     }
     return res;
-  }
-  unitsSBML(){
-    return this.unitsParsed;
-  }
-  unitsHash(){
-    if(this.unitsParsed!==undefined){
-      return this.unitsParsed.toHash();
-    }else{
-      return undefined;
-    }
-  }
-  // XXX: temporal solution
-  unitsSimbio(){
-    return this.units;
   }
   get implicitBoundary(){
     return _.has(this, 'assignments.ode_'); // this is rule
