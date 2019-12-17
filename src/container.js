@@ -157,7 +157,7 @@ class Container {
       rename: {}
     };
 */
-  importNS(q = {}, isVirtual = false){
+  importNS(q = {}){
     let toClone = this.storage.selectBySpace(q.fromSpace);
     if(q.fromId)
       throw new QueueError(q, `fromId must not be set for #importNS, but have "${q.fromId}"`);
@@ -178,7 +178,7 @@ class Container {
       );
 
       // cloning and update references
-      let clone = component.clone(q, isVirtual);
+      let clone = component.clone(q);
       clone.updateReferences(q);
 
       this.storage.set(clone.index, clone);
@@ -191,9 +191,9 @@ class Container {
   /*
     the same as importNS but delete all elements from source namespace
   */
-  moveNS(q = {}, isVirtual = false){
+  moveNS(q = {}){
     let toClone = this.storage.selectBySpace(q.fromSpace);
-    let clones = this.importNS(q, isVirtual);
+    let clones = this.importNS(q);
 
     toClone.forEach((component) => {
       this.storage.delete(component.index);
@@ -212,7 +212,7 @@ class Container {
       rename: {}
     };
   */
-  import(q = {}, isVirtual = false){
+  import(q = {}){
     // checking arguments
     if(!q.fromId || (typeof q.fromId !== 'string'))
       throw new QueueError(q, `fromId should be string, but have "${q.fromId}"`);
@@ -225,7 +225,7 @@ class Container {
       throw new QueueError(q, `Element with ${getIndexFromQ({id: q.fromId, space: q.fromSpace})} does not exist and cannot be cloned.`);
 
     // cloning and update references
-    let clone = component.clone(q, isVirtual);
+    let clone = component.clone(q);
     clone.updateReferences(q);
 
     this.storage.set(clone.index, clone);
@@ -235,8 +235,8 @@ class Container {
   /*
    the same as import but delete source component
   */
-  move(q = {}, isVirtual = false){
-    let clone = this.import(q, isVirtual);
+  move(q = {}){
+    let clone = this.import(q);
 
     // delete component
     this.delete({id: q.fromId, space: q.fromSpace});
@@ -260,8 +260,8 @@ class Container {
   }
   toQArr(){
     let qArr = [...this.storage]
-      .map((obj) => obj[1].toQ())
-      .filter((x) => !x.isVirtual);
+      .map((obj) => obj[1].toQ());
+      //.filter((x) => !x.isVirtual);
     return qArr;
   }
   get length(){

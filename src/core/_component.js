@@ -52,13 +52,12 @@ class _Component {
     return this._space===undefined;
   }
   // creates copy of element
-  clone(q = {}, isVirtual = false){
+  clone(q = {}){
     let res = _.cloneDeep(this);
 
     // update index
     if(q.id) res._id = q.id;
     if(q.space) res._space = q.space;
-    res.isVirtual = isVirtual;
 
     return res;
   }
@@ -190,7 +189,6 @@ class _Component {
     if(this.notes) res.notes = this.notes;
     if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
     if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
-    if(this.isVirtual) res.isVirtual = this.isVirtual;
 
     return res;
   }

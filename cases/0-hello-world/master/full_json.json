@@ -3,14 +3,12 @@
     "class": "Const",
     "id": "Vmax",
     "space": "mm",
-    "isVirtual": true,
     "num": 0.1
   },
   {
     "class": "Const",
     "id": "Km",
     "space": "mm",
-    "isVirtual": true,
     "num": 2.5,
     "units": "uM"
   },

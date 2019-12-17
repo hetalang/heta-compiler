@@ -1,6 +1,13 @@
 const _ = require('lodash');
 const { _Component } = require('./_component');
 
+/*
+  example: xxx = nM / kg3
+  xxx @UnitDef { components: [
+    { kind: nM, multiplier: 1, exponent: 1 },
+    { kind: kg, multiplier: 1, exponent: -3 }
+  ]};
+*/
 class UnitDef extends _Component {
   constructor(){
     super();
