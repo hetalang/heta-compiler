@@ -1,13 +1,13 @@
 const _ = require('lodash');
 const { _Component } = require('./_component');
 
-class UnitDefinition extends _Component {
+class UnitDef extends _Component {
   constructor(){
     super();
     this.components = []; // default
   }
   merge(q, skipChecking){
-    if(!skipChecking) UnitDefinition.isValid(q);
+    if(!skipChecking) UnitDef.isValid(q);
     super.merge(q, skipChecking);
 
     if(q && q.components) this.components = q.components;
@@ -26,5 +26,5 @@ class UnitDefinition extends _Component {
 }
 
 module.exports = {
-  UnitDefinition
+  UnitDef
 };

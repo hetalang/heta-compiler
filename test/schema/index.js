@@ -20,7 +20,7 @@ const timeSwitcher = require('./timeSwitcher');
 const timeSwitcherError = require('./timeSwitcher-error');
 
 // unscoped
-const unitDefinition = require('./unit-definition');
+const unitDef = require('./unit-def');
 const functionDefinition = require('./function-definition');
 const referenceDefinition = require('./reference-definition');
 const const_ = require('./const');
@@ -35,7 +35,7 @@ singleTest('Page', page, pageError);
 singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
 
 // unscoped
-singleTest('UnitDefinition', unitDefinition);
+singleTest('UnitDef', unitDef);
 singleTest('FunctionDefinition', functionDefinition);
 singleTest('ReferenceDefinition', referenceDefinition);
 singleTest('Const', const_);

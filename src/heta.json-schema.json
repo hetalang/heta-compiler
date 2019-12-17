@@ -95,7 +95,7 @@
       }
     },
 
-    "UnitDefinitionComponent": {
+    "UnitDefComponent": {
       "type": "object",
       "required": ["kind"],
       "properties": {
@@ -415,23 +415,23 @@
       ]
     },
 
-    "UnitDefinitionP": {
+    "UnitDefP": {
       "type": "object",
       "properties": {
         "components": {
           "type": "array",
-          "items": { "$ref": "#/definitions/UnitDefinitionComponent" }
+          "items": { "$ref": "#/definitions/UnitDefComponent" }
         }
       }
     },
 
-    "UnitDefinition": {
+    "UnitDef": {
       "allOf": [
         { "$ref": "#/definitions/_ComponentP" },
-        { "$ref": "#/definitions/UnitDefinitionP" },
+        { "$ref": "#/definitions/UnitDefP" },
         {
           "required": ["id", "components"],
-          "properties": { "class": { "const": "UnitDefinition" } }
+          "properties": { "class": { "const": "UnitDef" } }
         }
       ]
     },

@@ -7,7 +7,7 @@ const { Process } = require('./core/process');
 const { ContinuousSwitcher } = require('./core/continuous-switcher');
 const { TimeSwitcher } = require('./core/time-switcher');
 const { ReferenceDefinition } = require('./core/reference-definition');
-const { UnitDefinition } = require('./core/reference-definition');
+const { UnitDef } = require('./core/unit-def');
 const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const { SimpleTask } = require('./core/simple-task');
@@ -298,7 +298,7 @@ Container.prototype.classes = {
   TimeSwitcher,
   SimpleTask,
   ReferenceDefinition,
-  UnitDefinition,
+  UnitDef,
   Page,
   Const
 };

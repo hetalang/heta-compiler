@@ -1,16 +1,16 @@
 /* global describe, it */
-const { UnitDefinition } = require('../../src/core/unit-definition');
+const { UnitDef } = require('../../src/core/unit-def');
 const { ValidationError } = require('../../src/heta-error');
 const { expect } = require('chai');
 
-describe('Unit test for UnitDefinition', () => {
-  it('Empty UnitDefinition', () => {
-    let simple = new UnitDefinition;
+describe('Unit test for UnitDef', () => {
+  it('Empty UnitDef', () => {
+    let simple = new UnitDef;
     expect(simple).to.have.deep.property('components', []);
   });
 
-  it('Correct UnitDefinition', () => {
-    let simple = (new UnitDefinition).merge({
+  it('Correct UnitDef', () => {
+    let simple = (new UnitDef).merge({
       components: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
         {kind: 'mole', exponent: -1}
@@ -18,7 +18,7 @@ describe('Unit test for UnitDefinition', () => {
     });
     simple._id = 'ud1';
     expect(simple.toQ()).to.be.deep.equal({
-      class: 'UnitDefinition',
+      class: 'UnitDef',
       id: 'ud1',
       components: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
@@ -29,17 +29,17 @@ describe('Unit test for UnitDefinition', () => {
 
   it('Wrong input.', () => {
     expect(() => {
-      (new UnitDefinition).merge({
+      (new UnitDef).merge({
         components: 'xxx'
       });
     }).to.throw(ValidationError);
     expect(() => {
-      (new UnitDefinition).merge({
+      (new UnitDef).merge({
         components: ['xxx']
       });
     }).to.throw(ValidationError);
     expect(() => {
-      (new UnitDefinition).merge({
+      (new UnitDef).merge({
         components: [{}]
       });
     }).to.throw(ValidationError);
