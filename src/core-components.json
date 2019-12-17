@@ -1,0 +1,128 @@
+[
+    {
+        "isCore": true,
+        "id": "fmole",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-15 } ]
+    },
+    {
+        "isCore": true,
+        "id": "pmole",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-12 } ]
+    },
+    {
+        "isCore": true,
+        "id": "nmole",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-9 } ]
+    },
+    {
+        "isCore": true,
+        "id": "umole",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-6 } ]
+    },
+    {
+        "isCore": true,
+        "id": "mmole",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-3 } ]
+    },
+    {
+        "isCore": true,
+        "id": "mole",
+        "class": "UnitDef"
+    },
+
+    {
+        "isCore": true,
+        "id": "fM",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
+    },
+    {
+        "isCore": true,
+        "id": "pM",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-12 }, {"kind":"litre", "exponent": -1} ]
+    },
+    {
+        "isCore": true,
+        "id": "nM",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-9 }, {"kind":"litre", "exponent": -1} ]
+    },
+    {
+        "isCore": true,
+        "id": "uM",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
+    },
+    {
+        "isCore": true,
+        "id": "mM",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e-3 }, {"kind":"litre", "exponent": -1} ]
+    },
+    {
+        "isCore": true,
+        "id": "M",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole" }, {"kind":"litre", "exponent": -1} ]
+    },
+    {
+        "isCore": true,
+        "id": "kM",
+        "class": "UnitDef",
+        "components": [ { "kind": "mole", "multiplier": 1e3 }, { "kind":"litre", "exponent": -1 } ]
+    },
+
+    {
+        "isCore": true,
+        "id": "fL",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre", "multiplier": 1e-15 } ]
+    },
+    {
+        "isCore": true,
+        "id": "pL",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre", "multiplier": 1e-12 } ]
+    },
+    {
+        "isCore": true,
+        "id": "nL",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre", "multiplier": 1e-9 } ]
+    },
+    {
+        "isCore": true,
+        "id": "uL",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre", "multiplier": 1e-6 } ]
+    },
+    {
+        "isCore": true,
+        "id": "mL",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre", "multiplier": 1e-3 } ]
+    },
+    {
+        "isCore": true,
+        "id": "dL",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre", "multiplier": 1e-1 } ]
+    },
+    {
+        "isCore": true,
+        "id": "L",
+        "class": "UnitDef",
+        "components": [ { "kind": "litre" } ]
+    },
+    {
+        "isCore": true,
+        "id": "litre",
+        "class": "UnitDef"
+    }
+]

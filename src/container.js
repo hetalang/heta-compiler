@@ -75,15 +75,12 @@ class Container {
       throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
       throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
-    //if(this.nsList.indexOf(q.space)===-1){
-    //  throw new QueueError(q, `Namespace must be initialized before first use. namespace ${q.space} begin ... end`);
-    //}
 
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
       throw new QueueError(q, `Unknown class "${q.class}" for the element.`);
-    let component = (new selectedClass).merge(q);
+    let component = (new selectedClass(q.isCore)).merge(q);
 
     let index = getIndexFromQ(q);
     this.storage.set(index, component);
@@ -105,6 +102,8 @@ class Container {
     // creation of new components is not allowed
     if(targetComponent===undefined)
       throw new QueueError(q, 'Element with the index is not exist which is not allowed for "update" strategy.');
+    if(targetComponent.isCore)
+      throw new QueueError(q, 'Core component is read-only and cannot be updated.');
 
     targetComponent.merge(q);
 
@@ -258,10 +257,11 @@ class Container {
     qArr.forEach((q) => this.load(q));
     return this;
   }
-  toQArr(){
+  toQArr(removeCoreComponents = false){
     let qArr = [...this.storage]
+      .filter((obj) => !removeCoreComponents || !obj[1].isCore)
       .map((obj) => obj[1].toQ());
-      //.filter((x) => !x.isVirtual);
+
     return qArr;
   }
   get length(){
@@ -274,7 +274,7 @@ class Container {
 
     return this;
   }
-  getPopulation(targetSpace){
+  getPopulation(targetSpace, removeCoreComponents = false){
     // argument checking
     if(targetSpace!==undefined && typeof targetSpace!=='string'){
       throw new TypeError('targetSpace must be string');
@@ -282,8 +282,9 @@ class Container {
     let children = [...this.storage]
       .filter((x) => x[1].space===targetSpace)
       .map((x) => x[1]); // get array
-    let population = new XArray(...children); // get XArray
-
+    let population = removeCoreComponents
+      ? (new XArray(...children)).filter((component) => !component.isCore)
+      : new XArray(...children);
     return population;
   }
 }

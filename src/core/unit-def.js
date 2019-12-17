@@ -9,8 +9,8 @@ const { _Component } = require('./_component');
   ]};
 */
 class UnitDef extends _Component {
-  constructor(){
-    super();
+  constructor(isCore = false){
+    super(isCore);
     this.components = []; // default
   }
   merge(q, skipChecking){

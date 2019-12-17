@@ -4,8 +4,8 @@ const _ = require('lodash');
 const { ValidationError, BindingError } = require('../heta-error');
 
 class Record extends _Size {
-  constructor(){
-    super();
+  constructor(isCore = false){
+    super(isCore);
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
   }
   merge(q, skipChecking){

@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs-extra');
+//const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
@@ -8,6 +8,7 @@ const { version } = require('../../package');
 const Container = require('../container');
 const ModuleSystem = require('../module-system');
 const winston = require('winston');
+const coreComponents = require('../core-components');
 
 class BuilderError extends Error {
   constructor(diagnostics = [], message, filename, lineNumber){
@@ -70,6 +71,10 @@ class Builder {
     let ms = new ModuleSystem();
     let absFilename = path.join(this._coreDirname, this.importModule.source);
     
+    // 0. Load core components
+    logger.info('Loading core components, total count: ' + coreComponents.length);
+    this.container.loadMany(coreComponents);
+
     // 1. Parsing
     await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule);
     // 2. Modules integration

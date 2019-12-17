@@ -1,8 +1,8 @@
 const { Process, _Effector, Actor } = require('./process');
 
 class Reaction extends Process {
-  constructor(){
-    super();
+  constructor(isCore = false){
+    super(isCore);
     this.isAmount = true;
     this.modifiers = [];
   }

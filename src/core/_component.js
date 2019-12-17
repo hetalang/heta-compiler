@@ -8,9 +8,10 @@ const { flatten } = require('./utilities');
   Abstract class _Component
 */
 class _Component {
-  constructor(){
+  constructor(isCore = false){
     this.tags = [];
     this.aux = {};
+    if (isCore) this._isCore = true;
   }
   merge(q, skipChecking){
     if(!skipChecking) _Component.isValid(q);
@@ -21,6 +22,9 @@ class _Component {
     if(q && q.aux) this.aux = _.cloneDeep(q.aux);
 
     return this;
+  }
+  get isCore(){
+    return this._isCore;
   }
   get id(){
     return this._id;

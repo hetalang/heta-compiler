@@ -54,7 +54,7 @@ class XLSXExport extends _Export {
   }
   make(){
     let qArr = this._container
-      .getPopulation(this.space)
+      .getPopulation(this.space, true)
       .map((x) => x.toFlat());
 
     // split qArr to several sheets

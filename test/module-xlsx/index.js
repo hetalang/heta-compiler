@@ -21,7 +21,7 @@ describe('Integral test of correct xlsx module', () => {
     };
     let b = new Builder(declaration, __dirname);
     await b.runAsync();
-    let result = b.container.toQArr();
+    let result = b.container.toQArr(true);
     expect(result).to.be.deep.equal(output);
   });
 
@@ -40,7 +40,7 @@ describe('Integral test of correct xlsx module', () => {
     };
     let b = new Builder(declaration, __dirname);
     await b.runAsync();
-    let result = b.container.toQArr();
+    let result = b.container.toQArr(true);
     expect(result).to.be.deep.equal(output);
   });
   

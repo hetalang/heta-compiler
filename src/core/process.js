@@ -3,8 +3,8 @@ const _ = require('lodash');
 // const { IndexedHetaError } = require('../heta-error');
 
 class Process extends Record {
-  constructor(){
-    super();
+  constructor(isCore = false){
+    super(isCore);
     this.actors = [];
   }
   merge(q, skipChecking){
