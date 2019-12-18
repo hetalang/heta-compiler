@@ -73,7 +73,7 @@ class Builder {
     
     // 0. Load core components
     logger.info('Loading core components, total count: ' + coreComponents.length);
-    this.container.loadMany(coreComponents);
+    this.container.loadMany(coreComponents, true);
 
     // 1. Parsing
     await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule);

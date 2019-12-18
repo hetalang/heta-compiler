@@ -67,7 +67,7 @@ class Container {
   get nsList(){
     return this.namespaces.map((ns) => ns.name);
   }
-  insert(q = {}){
+  insert(q = {}, isCore = false){
     // check index
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, but have "${q.id}"`);
@@ -75,12 +75,13 @@ class Container {
       throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
       throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
+    // TODO: check targer if it is read-only
 
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass===undefined)
       throw new QueueError(q, `Unknown class "${q.class}" for the element.`);
-    let component = (new selectedClass(q.isCore)).merge(q);
+    let component = (new selectedClass(isCore)).merge(q);
 
     let index = getIndexFromQ(q);
     this.storage.set(index, component);
@@ -109,14 +110,14 @@ class Container {
 
     return targetComponent;
   }
-  upsert(q = {}){
+  upsert(q = {}, isCore = false){
     if('class' in q){
-      return this.insert(q);
+      return this.insert(q, isCore);
     }else{
-      return this.update(q);
+      return this.update(q, isCore);
     }
   }
-  delete(q = {}){
+  delete(q = {}, isCore = false){
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     if(q.class)
@@ -125,6 +126,8 @@ class Container {
     let targetComponent = this.storage.delete(index);
     if(!targetComponent) // if targetComponent===false, element is not exist
       throw new QueueError(q, 'Element with index is not exist and cannot be deleted.');
+    if(targetComponent.isCore)
+      throw new QueueError(q, 'Core component is read-only and cannot be deleted.');
 
     return targetComponent; // true or false
   }
@@ -155,7 +158,7 @@ class Container {
       suffix: '',
       rename: {}
     };
-*/
+  */
   importNS(q = {}){
     let toClone = this.storage.selectBySpace(q.fromSpace);
     if(q.fromId)
@@ -242,7 +245,7 @@ class Container {
 
     return clone;
   }
-  load(q){
+  load(q, isCore = false){
     // push to spaces list and use anonimous
     if(this.nsList.indexOf(q.space)===-1){
       this.namespaces.push({ name: q.space });
@@ -251,10 +254,10 @@ class Container {
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
     // do action
-    return this[actionName](q);
+    return this[actionName](q, isCore);
   }
-  loadMany(qArr){
-    qArr.forEach((q) => this.load(q));
+  loadMany(qArr, isCore = false){
+    qArr.forEach((q) => this.load(q, isCore));
     return this;
   }
   toQArr(removeCoreComponents = false){

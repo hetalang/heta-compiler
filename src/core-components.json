@@ -1,128 +1,230 @@
 [
-    {
-        "isCore": true,
-        "id": "fmole",
-        "class": "UnitDef",
+    { 
+        "id": "fmole", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-15 } ]
     },
     {
-        "isCore": true,
-        "id": "pmole",
-        "class": "UnitDef",
+        "id": "pmole", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-12 } ]
     },
     {
-        "isCore": true,
-        "id": "nmole",
-        "class": "UnitDef",
+        "id": "nmole", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-9 } ]
     },
     {
-        "isCore": true,
-        "id": "umole",
-        "class": "UnitDef",
+        "id": "umole", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-6 } ]
     },
     {
-        "isCore": true,
-        "id": "mmole",
-        "class": "UnitDef",
+        "id": "mmole", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-3 } ]
     },
     {
-        "isCore": true,
-        "id": "mole",
-        "class": "UnitDef"
+        "id": "mole", "class": "UnitDef"
     },
 
     {
-        "isCore": true,
-        "id": "fM",
-        "class": "UnitDef",
+        "id": "fM", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
     },
     {
-        "isCore": true,
-        "id": "pM",
-        "class": "UnitDef",
+        "id": "pM", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-12 }, {"kind":"litre", "exponent": -1} ]
     },
     {
-        "isCore": true,
-        "id": "nM",
-        "class": "UnitDef",
+        "id": "nM", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-9 }, {"kind":"litre", "exponent": -1} ]
     },
     {
-        "isCore": true,
-        "id": "uM",
-        "class": "UnitDef",
+        "id": "uM", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
     },
     {
-        "isCore": true,
-        "id": "mM",
-        "class": "UnitDef",
+        "id": "mM", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e-3 }, {"kind":"litre", "exponent": -1} ]
     },
     {
-        "isCore": true,
-        "id": "M",
-        "class": "UnitDef",
+        "id": "M", "class": "UnitDef",
         "components": [ { "kind": "mole" }, {"kind":"litre", "exponent": -1} ]
     },
     {
-        "isCore": true,
-        "id": "kM",
-        "class": "UnitDef",
+        "id": "kM", "class": "UnitDef",
         "components": [ { "kind": "mole", "multiplier": 1e3 }, { "kind":"litre", "exponent": -1 } ]
     },
 
     {
-        "isCore": true,
-        "id": "fL",
-        "class": "UnitDef",
+        "id": "fL", "class": "UnitDef",
         "components": [ { "kind": "litre", "multiplier": 1e-15 } ]
     },
     {
-        "isCore": true,
-        "id": "pL",
-        "class": "UnitDef",
+        "id": "pL", "class": "UnitDef",
         "components": [ { "kind": "litre", "multiplier": 1e-12 } ]
     },
     {
-        "isCore": true,
-        "id": "nL",
-        "class": "UnitDef",
+        "id": "nL", "class": "UnitDef",
         "components": [ { "kind": "litre", "multiplier": 1e-9 } ]
     },
     {
-        "isCore": true,
-        "id": "uL",
-        "class": "UnitDef",
+        "id": "uL", "class": "UnitDef",
         "components": [ { "kind": "litre", "multiplier": 1e-6 } ]
     },
     {
-        "isCore": true,
-        "id": "mL",
-        "class": "UnitDef",
+        "id": "mL", "class": "UnitDef",
         "components": [ { "kind": "litre", "multiplier": 1e-3 } ]
     },
     {
-        "isCore": true,
-        "id": "dL",
-        "class": "UnitDef",
+        "id": "dL", "class": "UnitDef",
         "components": [ { "kind": "litre", "multiplier": 1e-1 } ]
     },
     {
-        "isCore": true,
-        "id": "L",
-        "class": "UnitDef",
+        "id": "L", "class": "UnitDef",
         "components": [ { "kind": "litre" } ]
     },
     {
-        "isCore": true,
-        "id": "litre",
-        "class": "UnitDef"
+        "id": "litre", "class": "UnitDef"
+    },
+
+    {
+        "id": "fs", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 1e-15 } ]
+    },
+    {
+        "id": "ps", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 1e-12 } ]
+    },
+    {
+        "id": "ns", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 1e-9 } ]
+    },
+    {
+        "id": "us", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 1e-6 } ]
+    },
+    {
+        "id": "ms", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 1e-3 } ]
+    },
+    {
+        "id": "s", "class": "UnitDef",
+        "components": [ { "kind": "second" } ]
+    },
+    {
+        "id": "min", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 60 } ]
+    },
+    {
+        "id": "h", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 3600 } ]
+    },
+    {
+        "id": "day", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 86400 } ]
+    },
+    {
+        "id": "week", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 604800 } ]
+    },
+    {
+        "id": "year", "class": "UnitDef",
+        "components": [ { "kind": "second", "multiplier": 31558208 } ]
+    },
+    {
+        "id": "second", "class": "UnitDef"
+    },
+
+    {
+        "id": "fg", "class": "UnitDef",
+        "components": [ { "kind": "kilogram", "multiplier": 1e-18 } ]
+    },
+    {
+        "id": "pg", "class": "UnitDef",
+        "components": [ { "kind": "kilogram", "multiplier": 1e-15 } ]
+    },
+    {
+        "id": "ng", "class": "UnitDef",
+        "components": [ { "kind": "kilogram", "multiplier": 1e-12 } ]
+    },
+    {
+        "id": "ug", "class": "UnitDef",
+        "components": [ { "kind": "kilogram", "multiplier": 1e-9 } ]
+    },
+    {
+        "id": "mg", "class": "UnitDef",
+        "components": [ { "kind": "kilogram", "multiplier": 1e-6 } ]
+    },
+    {
+        "id": "g", "class": "UnitDef",
+        "components": [ { "kind": "kilogram", "multiplier": 1e-3 } ]
+    },
+    {
+        "id": "kg", "class": "UnitDef",
+        "components": [ { "kind": "kilogram"} ]
+    },
+    {
+        "id": "kilogram", "class": "UnitDef"
+    },
+
+    {
+        "id": "kat", "class": "UnitDef",
+        "components": [ { "kind": "katal"} ]
+    },
+    {
+        "id": "katal", "class": "UnitDef"
+    },
+    
+    {
+        "id": "cell", "class": "UnitDef",
+        "components": [ { "kind": "item"} ]
+    },
+    {
+        "id": "kcell", "class": "UnitDef",
+        "components": [ { "kind": "item", "multiplier": 1e3 } ]
+    },
+    {
+        "id": "item", "class": "UnitDef"
+    },
+    
+    {
+        "id": "cal", "class": "UnitDef",
+        "components": [ { "kind": "joule", "multiplier": 4.1868} ]
+    },
+    {
+        "id": "kcal", "class": "UnitDef",
+        "components": [ { "kind": "joule", "multiplier": 4.1868e3} ]
+    },
+    {
+        "id": "joule", "class": "UnitDef"
+    },
+    
+    {
+        "id": "fm", "class": "UnitDef",
+        "components": [ { "kind": "metre", "multiplier": 1e-15} ]
+    },
+    {
+        "id": "pm", "class": "UnitDef",
+        "components": [ { "kind": "metre", "multiplier": 1e-12} ]
+    },
+    {
+        "id": "nm", "class": "UnitDef",
+        "components": [ { "kind": "metre", "multiplier": 1e-9} ]
+    },
+    {
+        "id": "um", "class": "UnitDef",
+        "components": [ { "kind": "metre", "multiplier": 1e-6} ]
+    },
+    {
+        "id": "mm", "class": "UnitDef",
+        "components": [ { "kind": "metre", "multiplier": 1e-13} ]
+    },
+    {
+        "id": "cm", "class": "UnitDef",
+        "components": [ { "kind": "metre", "multiplier": 1e-2} ]
+    },
+    {
+        "id": "m", "class": "UnitDef",
+        "components": [ { "kind": "metre" } ]
+    },
+    {
+        "id": "metre", "class": "UnitDef"
     }
 ]
