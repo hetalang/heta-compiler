@@ -6,7 +6,7 @@ const { expect } = require('chai');
 describe('Unit test for UnitDef', () => {
   it('Empty UnitDef', () => {
     let simple = new UnitDef;
-    expect(simple).to.have.deep.property('components', []);
+    expect(simple).to.have.not.deep.property('components');
   });
 
   it('Correct UnitDef', () => {
@@ -22,7 +22,7 @@ describe('Unit test for UnitDef', () => {
       id: 'ud1',
       components: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
-        {kind: 'mole', exponent: -1}
+        {kind: 'mole', multiplier: 1, exponent: -1}
       ]
     });
   });

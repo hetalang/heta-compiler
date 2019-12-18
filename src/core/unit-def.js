@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const { _Component } = require('./_component');
+const { Unit } = require('./unit');
 
 /*
   example: xxx = nM / kg3
@@ -11,22 +12,20 @@ const { _Component } = require('./_component');
 class UnitDef extends _Component {
   constructor(isCore = false){
     super(isCore);
-    this.components = []; // default
   }
-  merge(q, skipChecking){
+  merge(q = {}, skipChecking){
     if(!skipChecking) UnitDef.isValid(q);
     super.merge(q, skipChecking);
 
-    if(q && q.components) this.components = q.components;
+    if(q.components) this.components = Unit.fromQ(q.components);
 
     return this;
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if(this.components.length>0)
-      res.components = this.components.map((component) => {
-        return _.cloneDeep(component);
-      });
+    if(this.components.length>0){
+      res.components = this.components.toQ(options);
+    }
 
     return res;
   }
