@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const firstModel = require('./first-model');
 const compartmentModel = require('./compartment-model');
-const { Container } = require('../../src');
+const { Container, coreComponents } = require('../../src');
 
 const chai = require('chai');
 const { expect } = chai;
@@ -33,6 +33,7 @@ describe('Create SBML.', () => {
 
   it('Compartment model', () => {
     let c = (new Container)
+      .loadMany(coreComponents, true)
       .loadMany(compartmentModel)
       .populate();
     let text = c.select({id: 'sbml', space: 'two_comp'})

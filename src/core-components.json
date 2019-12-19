@@ -226,5 +226,20 @@
     },
     {
         "id": "metre", "class": "UnitDef"
+    },
+    
+    {
+        "id": "UL", "class": "UnitDef",
+        "units": [ { "kind": "dimensionless" } ]
+    },
+    {
+        "id": "percent", "class": "UnitDef",
+        "units": [ { "kind": "dimensionless", "multiplier": 1e-2 } ]
+    },
+    {
+        "id": "dimensionless", "class": "UnitDef"
+    },
+    {
+        "id": "item", "class": "UnitDef"
     }
 ]

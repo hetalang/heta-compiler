@@ -30,4 +30,11 @@ json @JSONExport { filepath: output };
 yaml @YAMLExport { filepath: output };
 
 //xxx @UnitDef { components: [{ kind: nM, multiplier: 1, exponent: 1 }, { kind: kg, multiplier: 1, exponent: -3 }]};
-yyy @UnitDef { components: [{ kind: nM, multiplier: 1, exponent: 1 }, { kind: kg, multiplier: 1, exponent: -3 }]};
+yyy @UnitDef {
+    units: [
+        { kind: nM, multiplier: 1, exponent: 1 },
+        { kind: kg, multiplier: 1, exponent: -3 }
+    ]
+};
+
+k10 @Const = 1.1 { units: mg*kg/L };

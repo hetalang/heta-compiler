@@ -31,6 +31,7 @@ class Record extends _Size {
 
     return this;
   }
+  /** change referencies inside expression */
   updateReferences(q = {}){
     super.updateReferences(q);
     
@@ -56,7 +57,6 @@ class Record extends _Size {
   bind(container, skipErrors = false){
     super.bind(container, skipErrors);
 
-    if(!container) throw new TypeError('"container" argument should be set.');
     let messages = [];
     
     // check math expression refs

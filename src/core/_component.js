@@ -65,6 +65,7 @@ class _Component {
 
     return res;
   }
+  /** Change referencies of component based on suffix/prefix/rename */
   updateReferences(q = {}){
     // set defaults
     _.defaults(q, {

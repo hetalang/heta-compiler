@@ -1,5 +1,6 @@
 const Container = require('./container');
 const { Builder } = require('./builder');
+const coreComponents = require('./core-components');
 
 require('./yaml-export');
 require('./json-export');
@@ -11,5 +12,6 @@ require('./xlsx-export');
 
 module.exports = {
   Container,
-  Builder
+  Builder,
+  coreComponents
 };
