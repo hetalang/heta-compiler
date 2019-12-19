@@ -2,7 +2,7 @@
   {
     "class": "UnitDef",
     "id": "kDa",
-    "components": [
+    "units": [
       {"kind": "g", "multiplier": 1e3, "exponent": 1},
       {"kind": "mole", "exponent": -1}
     ]

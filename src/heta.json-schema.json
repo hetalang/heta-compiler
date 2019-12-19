@@ -10,7 +10,7 @@
        "example": "x_12_"
      },
 
-     "Units": {
+     "UnitsExpr": {
        "description": "Unit expression, see qsp-units project.",
        "type": "string",
        "minLength": 1,
@@ -93,17 +93,6 @@
       "properties": {
         "kind": { "type": "string", "enum": ["quantile", "mean", "correlation", "raw"] }
       }
-    },
-
-    "UnitDefComponent": {
-      "type": "object",
-      "required": ["kind"],
-      "properties": {
-        "kind": { "$ref": "#/definitions/ID" },
-        "multiplier": { "type": "number", "exclusiveMinimum": 0 },
-        "exponent": { "type": "number" }
-      },
-      "example": { "kind": "mole", "multiplier": 1e-6, "exponent": 1 }
     },
 
     "_ComponentP": {
@@ -342,10 +331,24 @@
       }
      },
 
+     "UnitComponent": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "$ref": "#/definitions/ID" },
+        "multiplier": { "type": "number", "exclusiveMinimum": 0 },
+        "exponent": { "type": "number" }
+      },
+      "example": { "kind": "mole", "multiplier": 1e-6, "exponent": 1 }
+    },
+
      "_SizeP": {
        "type": "object",
        "properties": {
-         "units": { "$ref": "#/definitions/Units" }
+         "units": { "anyOf": [
+            { "$ref": "#/definitions/UnitsExpr" },
+            { "type": "array", "items": { "$ref": "#/definitions/UnitComponent" } }
+         ] }
        }
       },
 
@@ -418,19 +421,16 @@
     "UnitDefP": {
       "type": "object",
       "properties": {
-        "components": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/UnitDefComponent" }
-        }
       }
     },
 
     "UnitDef": {
       "allOf": [
         { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/_SizeP" },
         { "$ref": "#/definitions/UnitDefP" },
         {
-          "required": ["id", "components"],
+          "required": ["id"],
           "properties": { "class": { "const": "UnitDef" } }
         }
       ]

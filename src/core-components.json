@@ -1,23 +1,23 @@
 [
     { 
         "id": "fmole", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-15 } ]
+        "units": [ { "kind": "mole", "multiplier": 1e-15 } ]
     },
     {
         "id": "pmole", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-12 } ]
+        "units": [ { "kind": "mole", "multiplier": 1e-12 } ]
     },
     {
         "id": "nmole", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-9 } ]
+        "units": [ { "kind": "mole", "multiplier": 1e-9 } ]
     },
     {
         "id": "umole", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-6 } ]
+        "units": [ { "kind": "mole", "multiplier": 1e-6 } ]
     },
     {
         "id": "mmole", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-3 } ]
+        "units": [ { "kind": "mole", "multiplier": 1e-3 } ]
     },
     {
         "id": "mole", "class": "UnitDef"
@@ -25,60 +25,60 @@
 
     {
         "id": "fM", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
+        "units": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
     },
     {
         "id": "pM", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-12 }, {"kind":"litre", "exponent": -1} ]
+        "units": [ { "kind": "mole", "multiplier": 1e-12 }, {"kind":"litre", "exponent": -1} ]
     },
     {
         "id": "nM", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-9 }, {"kind":"litre", "exponent": -1} ]
+        "units": [ { "kind": "mole", "multiplier": 1e-9 }, {"kind":"litre", "exponent": -1} ]
     },
     {
         "id": "uM", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
+        "units": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
     },
     {
         "id": "mM", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e-3 }, {"kind":"litre", "exponent": -1} ]
+        "units": [ { "kind": "mole", "multiplier": 1e-3 }, {"kind":"litre", "exponent": -1} ]
     },
     {
         "id": "M", "class": "UnitDef",
-        "components": [ { "kind": "mole" }, {"kind":"litre", "exponent": -1} ]
+        "units": [ { "kind": "mole" }, {"kind":"litre", "exponent": -1} ]
     },
     {
         "id": "kM", "class": "UnitDef",
-        "components": [ { "kind": "mole", "multiplier": 1e3 }, { "kind":"litre", "exponent": -1 } ]
+        "units": [ { "kind": "mole", "multiplier": 1e3 }, { "kind":"litre", "exponent": -1 } ]
     },
 
     {
         "id": "fL", "class": "UnitDef",
-        "components": [ { "kind": "litre", "multiplier": 1e-15 } ]
+        "units": [ { "kind": "litre", "multiplier": 1e-15 } ]
     },
     {
         "id": "pL", "class": "UnitDef",
-        "components": [ { "kind": "litre", "multiplier": 1e-12 } ]
+        "units": [ { "kind": "litre", "multiplier": 1e-12 } ]
     },
     {
         "id": "nL", "class": "UnitDef",
-        "components": [ { "kind": "litre", "multiplier": 1e-9 } ]
+        "units": [ { "kind": "litre", "multiplier": 1e-9 } ]
     },
     {
         "id": "uL", "class": "UnitDef",
-        "components": [ { "kind": "litre", "multiplier": 1e-6 } ]
+        "units": [ { "kind": "litre", "multiplier": 1e-6 } ]
     },
     {
         "id": "mL", "class": "UnitDef",
-        "components": [ { "kind": "litre", "multiplier": 1e-3 } ]
+        "units": [ { "kind": "litre", "multiplier": 1e-3 } ]
     },
     {
         "id": "dL", "class": "UnitDef",
-        "components": [ { "kind": "litre", "multiplier": 1e-1 } ]
+        "units": [ { "kind": "litre", "multiplier": 1e-1 } ]
     },
     {
         "id": "L", "class": "UnitDef",
-        "components": [ { "kind": "litre" } ]
+        "units": [ { "kind": "litre" } ]
     },
     {
         "id": "litre", "class": "UnitDef"
@@ -86,47 +86,47 @@
 
     {
         "id": "fs", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 1e-15 } ]
+        "units": [ { "kind": "second", "multiplier": 1e-15 } ]
     },
     {
         "id": "ps", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 1e-12 } ]
+        "units": [ { "kind": "second", "multiplier": 1e-12 } ]
     },
     {
         "id": "ns", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 1e-9 } ]
+        "units": [ { "kind": "second", "multiplier": 1e-9 } ]
     },
     {
         "id": "us", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 1e-6 } ]
+        "units": [ { "kind": "second", "multiplier": 1e-6 } ]
     },
     {
         "id": "ms", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 1e-3 } ]
+        "units": [ { "kind": "second", "multiplier": 1e-3 } ]
     },
     {
         "id": "s", "class": "UnitDef",
-        "components": [ { "kind": "second" } ]
+        "units": [ { "kind": "second" } ]
     },
     {
         "id": "min", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 60 } ]
+        "units": [ { "kind": "second", "multiplier": 60 } ]
     },
     {
         "id": "h", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 3600 } ]
+        "units": [ { "kind": "second", "multiplier": 3600 } ]
     },
     {
         "id": "day", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 86400 } ]
+        "units": [ { "kind": "second", "multiplier": 86400 } ]
     },
     {
         "id": "week", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 604800 } ]
+        "units": [ { "kind": "second", "multiplier": 604800 } ]
     },
     {
         "id": "year", "class": "UnitDef",
-        "components": [ { "kind": "second", "multiplier": 31558208 } ]
+        "units": [ { "kind": "second", "multiplier": 31558208 } ]
     },
     {
         "id": "second", "class": "UnitDef"
@@ -134,31 +134,31 @@
 
     {
         "id": "fg", "class": "UnitDef",
-        "components": [ { "kind": "kilogram", "multiplier": 1e-18 } ]
+        "units": [ { "kind": "kilogram", "multiplier": 1e-18 } ]
     },
     {
         "id": "pg", "class": "UnitDef",
-        "components": [ { "kind": "kilogram", "multiplier": 1e-15 } ]
+        "units": [ { "kind": "kilogram", "multiplier": 1e-15 } ]
     },
     {
         "id": "ng", "class": "UnitDef",
-        "components": [ { "kind": "kilogram", "multiplier": 1e-12 } ]
+        "units": [ { "kind": "kilogram", "multiplier": 1e-12 } ]
     },
     {
         "id": "ug", "class": "UnitDef",
-        "components": [ { "kind": "kilogram", "multiplier": 1e-9 } ]
+        "units": [ { "kind": "kilogram", "multiplier": 1e-9 } ]
     },
     {
         "id": "mg", "class": "UnitDef",
-        "components": [ { "kind": "kilogram", "multiplier": 1e-6 } ]
+        "units": [ { "kind": "kilogram", "multiplier": 1e-6 } ]
     },
     {
         "id": "g", "class": "UnitDef",
-        "components": [ { "kind": "kilogram", "multiplier": 1e-3 } ]
+        "units": [ { "kind": "kilogram", "multiplier": 1e-3 } ]
     },
     {
         "id": "kg", "class": "UnitDef",
-        "components": [ { "kind": "kilogram"} ]
+        "units": [ { "kind": "kilogram"} ]
     },
     {
         "id": "kilogram", "class": "UnitDef"
@@ -166,7 +166,7 @@
 
     {
         "id": "kat", "class": "UnitDef",
-        "components": [ { "kind": "katal"} ]
+        "units": [ { "kind": "katal"} ]
     },
     {
         "id": "katal", "class": "UnitDef"
@@ -174,11 +174,11 @@
     
     {
         "id": "cell", "class": "UnitDef",
-        "components": [ { "kind": "item"} ]
+        "units": [ { "kind": "item"} ]
     },
     {
         "id": "kcell", "class": "UnitDef",
-        "components": [ { "kind": "item", "multiplier": 1e3 } ]
+        "units": [ { "kind": "item", "multiplier": 1e3 } ]
     },
     {
         "id": "item", "class": "UnitDef"
@@ -186,11 +186,11 @@
     
     {
         "id": "cal", "class": "UnitDef",
-        "components": [ { "kind": "joule", "multiplier": 4.1868} ]
+        "units": [ { "kind": "joule", "multiplier": 4.1868} ]
     },
     {
         "id": "kcal", "class": "UnitDef",
-        "components": [ { "kind": "joule", "multiplier": 4.1868e3} ]
+        "units": [ { "kind": "joule", "multiplier": 4.1868e3} ]
     },
     {
         "id": "joule", "class": "UnitDef"
@@ -198,31 +198,31 @@
     
     {
         "id": "fm", "class": "UnitDef",
-        "components": [ { "kind": "metre", "multiplier": 1e-15} ]
+        "units": [ { "kind": "metre", "multiplier": 1e-15} ]
     },
     {
         "id": "pm", "class": "UnitDef",
-        "components": [ { "kind": "metre", "multiplier": 1e-12} ]
+        "units": [ { "kind": "metre", "multiplier": 1e-12} ]
     },
     {
         "id": "nm", "class": "UnitDef",
-        "components": [ { "kind": "metre", "multiplier": 1e-9} ]
+        "units": [ { "kind": "metre", "multiplier": 1e-9} ]
     },
     {
         "id": "um", "class": "UnitDef",
-        "components": [ { "kind": "metre", "multiplier": 1e-6} ]
+        "units": [ { "kind": "metre", "multiplier": 1e-6} ]
     },
     {
         "id": "mm", "class": "UnitDef",
-        "components": [ { "kind": "metre", "multiplier": 1e-13} ]
+        "units": [ { "kind": "metre", "multiplier": 1e-13} ]
     },
     {
         "id": "cm", "class": "UnitDef",
-        "components": [ { "kind": "metre", "multiplier": 1e-2} ]
+        "units": [ { "kind": "metre", "multiplier": 1e-2} ]
     },
     {
         "id": "m", "class": "UnitDef",
-        "components": [ { "kind": "metre" } ]
+        "units": [ { "kind": "metre" } ]
     },
     {
         "id": "metre", "class": "UnitDef"

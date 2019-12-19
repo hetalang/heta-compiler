@@ -43,11 +43,7 @@ describe('Testing correct units.', () => {
       it('toHTML(): equal to correct HTML: ' + x.html, () => {
         expect(unit.toHTML()).equal(x.html);
       });
-/*
-      it('toXmlUnitDefinition(): no errors', () => {
-        unit.toXmlUnitDefinition(); // no errors
-      });
-*/
+
     });
   });
 });

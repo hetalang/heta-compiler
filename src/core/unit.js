@@ -21,6 +21,8 @@ class Unit extends Array {
   }
 
   rebase(transformator){
+    if(!transformator)
+      throw new TypeError('Transformator should be set for rebase.');
     let newUnit = new Unit();
 
     this.forEach((parseUnit) => {

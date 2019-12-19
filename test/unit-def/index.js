@@ -14,14 +14,14 @@ let input0 = [
   {
     class: 'UnitDef',
     id: 'mbase',
-    components: [
+    units: [
       { kind: 'base', multiplier: 1e-3, exponent: 1 }
     ]
   },
   {
     class: 'UnitDef',
     id: 'mbase_per_L2',
-    components: [
+    units: [
       { kind: 'base', multiplier: 1e-3, exponent: 1 },
       { kind: 'L', multiplier: 1, exponent: -2 }
     ]

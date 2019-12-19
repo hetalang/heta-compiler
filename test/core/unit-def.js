@@ -6,12 +6,12 @@ const { expect } = require('chai');
 describe('Unit test for UnitDef', () => {
   it('Empty UnitDef', () => {
     let simple = new UnitDef;
-    expect(simple).to.have.not.deep.property('components');
+    expect(simple.units).to.be.undefined;
   });
 
   it('Correct UnitDef', () => {
     let simple = (new UnitDef).merge({
-      components: [
+      units: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
         {kind: 'mole', exponent: -1}
       ]
@@ -20,7 +20,7 @@ describe('Unit test for UnitDef', () => {
     expect(simple.toQ()).to.be.deep.equal({
       class: 'UnitDef',
       id: 'ud1',
-      components: [
+      units: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
         {kind: 'mole', multiplier: 1, exponent: -1}
       ]
@@ -30,17 +30,12 @@ describe('Unit test for UnitDef', () => {
   it('Wrong input.', () => {
     expect(() => {
       (new UnitDef).merge({
-        components: 'xxx'
+        units: ['xxx']
       });
     }).to.throw(ValidationError);
     expect(() => {
       (new UnitDef).merge({
-        components: ['xxx']
-      });
-    }).to.throw(ValidationError);
-    expect(() => {
-      (new UnitDef).merge({
-        components: [{}]
+        units: [{}]
       });
     }).to.throw(ValidationError);
   });
