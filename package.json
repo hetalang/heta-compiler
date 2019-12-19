@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha --recursive test/unit",
+    "test:dev": "mocha --recursive test/unit/operations.js",
     "test": "mocha test --recursive",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
@@ -38,7 +38,6 @@
     "nunjucks": "^3.2.0",
     "random-id": "^1.0.3",
     "semver": "^6.3.0",
-    "units-parser": "^0.2.7",
     "winston": "^3.2.1",
     "xlsx": "^0.15.3",
     "xml2js": "^0.4.22"

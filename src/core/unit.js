@@ -1,12 +1,12 @@
 const _ = require('lodash');
+const { floor, log10 } = Math;
 
 class Unit extends Array {
   static fromQ(obj = []){
     let res = new Unit;
-    res.multiplier = 1;
 
     obj.forEach((x) => {
-      if (!x.kind) throw new TypeError('kind property must be set.');
+      if (typeof x.kind !== 'string') throw new TypeError('kind property must be string.');
       _.defaults(x, { multiplier: 1, exponent: 1 });
       res.push(x);
     });
@@ -22,7 +22,7 @@ class Unit extends Array {
 
   rebase(transformator){
     let newUnit = new Unit();
-    newUnit.multiplier = this.multiplier;
+
     this.forEach((parseUnit) => {
       transformator[parseUnit.kind].forEach((simpleUnit) => {
         let simpleUnit_defaults = {
@@ -50,7 +50,6 @@ class Unit extends Array {
    */
   multiply(unit) {
     let res = this.concat(unit);
-    res.multiplier = this.multiplier * unit.multiplier;
 
     return res;
   }
@@ -70,7 +69,6 @@ class Unit extends Array {
     });
 
     let res = this.concat(newUnit);
-    res.multiplier = this.multiplier / unit.multiplier;
     return res;
   }
   
@@ -80,34 +78,41 @@ class Unit extends Array {
    * @return {Unit} Simplified version of units.
    */
   simplify() {
-    let listOfKind = [];
-    let newUnit = new this.constructor();
-    newUnit.multiplier = this.multiplier;
-    //consoconsole.log(newUnit.multiplier);
-    //console.log(this.multiplier);
+    // group by kind, combine elements inside kind
+    // then transform to regular array
+    // if exponent == 0, create dimentionless element to store multiplier
+    // if dimentionless element is trivial remove it
+    let group = _.chain(this)
+      .groupBy((x) => x.kind)
+      .map((x, key) => {
+        let exponent = _.sumBy(x, (y) => y.exponent);
+        if (exponent===0) {
+          let tmp = _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
+          let multiplier = 10 ** (tmp);
+          var res = {
+            kind: '',
+            exponent: 1,
+            multiplier: multiplier
+          };
+        } else {
+          let tmp = _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
+          let multiplier = 10 ** (tmp / exponent);
+          res = {
+            kind: key,
+            exponent: exponent,
+            multiplier: multiplier
+          };
+        }
 
-    this.forEach((item) => {
-      let current = Object.assign({}, item);
-      let posElement = listOfKind.indexOf(current.kind);
+        return res;
+      })
+      .toPairs()
+      .map(1)
+      //.flatten()
+      .filter((x, i) => !(x.kind==='' && x.multiplier===1))
+      .value();
 
-      if (posElement !== -1) { // already exist kind
-        newUnit[posElement].exponent += current.exponent;
-        // newUnit[posElement].multiplier *= (current.multiplier/newUnit[posElement].multiplier) ** (current.exponent / newUnit[posElement].exponent);
-      } else {
-        newUnit.push({
-          kind: current.kind,
-          multiplier: 1,
-          exponent: current.exponent
-        });
-        listOfKind.push(current.kind);
-      }
-      newUnit.multiplier *= current.multiplier ** current.exponent;
-    });
-
-    let filtered = newUnit.filter((x) => x.exponent!==0);
-    filtered.multiplier = newUnit.multiplier;
-
-    return filtered;
+    return Unit.fromQ(group);
   }
   
   /**
@@ -118,7 +123,6 @@ class Unit extends Array {
    */
   static parse(unitString){
     let unit = new Unit;
-    unit.multiplier = 1;
 
     let items = unitString // split to parts
       .replace(/\s*/g, '') // remove blanks
@@ -176,6 +180,7 @@ class Unit extends Array {
    */
   toString(){
     return this
+      .filter((x) => x.kind!=='') // remove unitless
       .map((item, i) => {
         let operator = (item.exponent<0)
           ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
@@ -253,30 +258,30 @@ class Unit extends Array {
       .join('');
   }
 
-  /* XXX: not checked */
   toXmlUnitDefinition(transformator, options){
     // set default options
-    let _options = Object.assign({nameStyle: 'string', simplify: false}, options);
+    let _options = Object.assign({nameStyle: 'string', simplify: true}, options);
     let units = _options.simplify
-      ? this.toRebaseUnits(transformator).simplify()
-      : this.toRebaseUnits(transformator);
+      ? this.rebase(transformator).simplify()
+      : this.rebase(transformator);
 
     let listOfUnits = units
-      .map((item) => {
-        return `\n    <unit kind="${item.kind}" exponent="${item.exponent}" scale="${item.scale}" multiplier="${item.multiplier}"/>`;
+      .map((x) => {
+        let scale = floor(log10(x.multiplier));
+        let multiplier = x.multiplier / 10 ** scale;
+        return `\n    <unit kind="${x.kind}" exponent="${x.exponent}" scale="${scale}" multiplier="${multiplier}"/>`;
       })
       .join('');
 
-    let nameAttr; // name attribute
     switch (_options.nameStyle) {
     case 'TeX':
-      nameAttr = ` name="${this.toTex()}"`
+      var nameAttr = ` name="${this.toTex()}"`; // name attribute
       break;
     case 'HTML':
-      nameAttr = ` name="${this.toHTML()}"`
+      nameAttr = ` name="${this.toHTML()}"`;
       break;
     case 'string':
-      nameAttr = ` name="${this.toString()}"`
+      nameAttr = ` name="${this.toString()}"`;
       break;
     default:
       throw new Error(_options.nameStyle + ' is unsupported value for "options.nameStyle". Use one of values: TeX, HTML, string.');

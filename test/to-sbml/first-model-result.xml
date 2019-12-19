@@ -202,7 +202,7 @@
 </unitDefinition>
       <unitDefinition id="nm__min__fM" name="1/min/fM*nm">
   <listOfUnits>
-    <unit kind="second" exponent="-1" scale="0" multiplier="60"/>
+    <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
     <unit kind="mole" exponent="-1" scale="-15" multiplier="1"/>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
     <unit kind="metre" exponent="1" scale="-9" multiplier="1"/>
@@ -211,12 +211,12 @@
       <unitDefinition id="__h__L" name="1/L/h">
   <listOfUnits>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
-    <unit kind="second" exponent="-1" scale="0" multiplier="3600"/>
+    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
       <unitDefinition id="min" name="min">
   <listOfUnits>
-    <unit kind="second" exponent="1" scale="0" multiplier="60"/>
+    <unit kind="second" exponent="1" scale="1" multiplier="6"/>
   </listOfUnits>
 </unitDefinition>
       <unitDefinition id="mole__L" name="mole/L">

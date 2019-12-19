@@ -1,6 +1,4 @@
 const { _Component } = require('./_component');
-const { UnitsParser, qspUnits } = require('units-parser');
-let uParser = new UnitsParser(qspUnits);
 const { Unit } = require('./unit');
 
 class _Size extends _Component {
@@ -9,8 +7,7 @@ class _Size extends _Component {
     super.merge(q, skipChecking);
 
     if(q.units!==undefined){
-      //this.units = q.units;
-      this.unitsParsed = uParser.parse(q.units);
+      this.unitsParsed = Unit.parse(q.units);
     }
 
     return this;

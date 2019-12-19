@@ -1,7 +1,6 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
-const { UnitsParser, qspUnits } = require('units-parser');
-let uParser = new UnitsParser(qspUnits);
+const qspToSbml = require('./qsp-to-sbml');
 
 class XArray extends Array{
   getById(id){
@@ -47,24 +46,6 @@ class XArray extends Array{
 
     return new XArray(...sorted); // sorted is Array, return must be XArray
   }
-  /* currently not used, see _getXXXImage in Export
-  expressionDeps(){
-    // collect all deps, possibly helpfull for diagnostics
-    let deps = _.chain(this.selectByInstanceOf('Record')) // get list of all dependent values
-      .map((record) => {
-        return _.map(record.assignments, (assignment) => assignment)
-          .filter((assignment) => assignment.className==='Expression');
-      })
-      .flatten()
-      .map((expression) => expression.exprParsed.getSymbols())
-      .flatten()
-      .uniq()
-      .difference(this.getChildrenIds()) // remove local ids from the list
-      .difference(['t']) // remove time
-      .value();
-    return deps;
-  }
-  */
   selectRecordsByContext(context){
     return this.selectByInstanceOf('Record')
       .filter((record) => _.has(record, 'assignments.' + context));
@@ -72,9 +53,7 @@ class XArray extends Array{
   getListOfUnitDefinitions(){
     return this.getUniqueUnits()
       .map((units) => {
-        return uParser
-          .parse(units)
-          .toSbmlUnitDefinition({nameStyle: 'string', simplify: true});
+        return units.toXmlUnitDefinition(qspToSbml, {nameStyle: 'string', simplify: true});
       });
   }
   getUniqueUnits(){
@@ -82,7 +61,7 @@ class XArray extends Array{
       .concat(this.selectByInstanceOf('Const'))
       .filter((record) => record.unitsSBML()!==undefined)
       .uniqBy((record) => record.unitsHash(true))
-      .map((record) => record.unitsSBML().toString())
+      .map((record) => record.unitsSBML()) // .toString()
       .value();
   }
 }

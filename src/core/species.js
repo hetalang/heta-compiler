@@ -1,6 +1,4 @@
 const { Record } = require('./record');
-//const { UnitsParser, qspUnits } = require('units-parser');
-//let uParser = new UnitsParser(qspUnits);
 const _ = require('lodash');
 
 class Species extends Record {
