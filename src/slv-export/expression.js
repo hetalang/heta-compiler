@@ -109,7 +109,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
         .map((arg) => arg.toString(options));
       return `log(${args[0]}) / log(2)`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ifg'){
+    if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
       let args = [
         node.args[0].toString(options),
         0,
@@ -118,7 +118,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       ].join(', ');
       return `ifgt(${args})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ife'){
+    if(node.type==='FunctionNode' && node.fn.name==='ife0'){
       let args = [
         node.args[0].toString(options),
         0,
@@ -127,7 +127,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       ].join(', ');
       return `ifeq(${args})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ifg'){
+    if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
       let args = [
         node.args[0].toString(options),
         0,
@@ -136,7 +136,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       ].join(', ');
       return `ifgt(${args})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ifge'){
+    if(node.type==='FunctionNode' && node.fn.name==='ifge0'){
       let args = [
         node.args[0].toString(options),
         0,

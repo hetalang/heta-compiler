@@ -67,23 +67,23 @@ class Expression {
       if(node.type==='SymbolNode' && node.name === 't'){
         return 'time';
       }
-      if(node.type==='FunctionNode' && node.fn.name==='ifg'){
+      if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
         let args = node.args
           .map((arg) => arg.toString(options))
           .join(', ');
-        return `fun.ifg(${args})`;
+        return `fun.ifg0(${args})`;
       }
-      if(node.type==='FunctionNode' && node.fn.name==='ife'){
+      if(node.type==='FunctionNode' && node.fn.name==='ife0'){
         let args = node.args
           .map((arg) => arg.toString(options))
           .join(', ');
-        return `fun.ife(${args})`;
+        return `fun.ife0(${args})`;
       }
-      if(node.type==='FunctionNode' && node.fn.name==='ifge'){
+      if(node.type==='FunctionNode' && node.fn.name==='ifge0'){
         let args = node.args
           .map((arg) => arg.toString(options))
           .join(', ');
-        return `fun.ifge(${args})`;
+        return `fun.ifge0(${args})`;
       }
     };
 
