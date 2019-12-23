@@ -1,0 +1,37 @@
+
+comp0_vol @Const = 1; // compartment 0 volume
+comp1_vol @Const = 5.2; // compartment 1 volume
+kabs @Const = 0.01; // constant of absorption
+kel @Const = 0.01; // constant of elimination
+
+a0 @Species {compartment: comp0, isAmount: true};
+s1 @Species {compartment: comp1};
+comp0 @Compartment;
+comp1 @Compartment;
+vabs @Reaction {actors: a0 -> s1};
+vel @Reaction {actors: s1 ->};
+
+comp0 .= 1;
+comp1 .= 5.2;
+vabs := kabs*a0;
+vel := kel*s1*comp1;
+a0 []= 0; // initial value
+s1 []= 0;
+
+//one_comp::sbml @SBMLExport;
+json @JSONExport;
+slv @SLVExport;
+
+sw1 @TimeSwitcher {
+  start: 0,
+  stop: 120,
+  period: 12,
+  repeatCount: 5
+};
+a0 [sw1]= a0 + 10;
+
+sw2 @TimeSwitcher {
+  start: 5,
+  period: 24
+};
+s1 [sw2]= s1 + 2;

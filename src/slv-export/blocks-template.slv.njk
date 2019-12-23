@@ -46,6 +46,13 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {{ "'"+number.title+"'" if number.title }} {units: {{ number.units|default('?') }}}
 {%- else -%}// nothing here
 {% endfor %}
+{% set switchers = _model_.population.selectByClassName("TimeSwitcher")%}
+{% if switchers|length > 0 %}
+//! Switchers for time events, count {{ switchers|length }}
+{% for switcher in switchers %}
+{{ switcher.id }}_ = 1; // @TimeSwitcher {  }
+{% endfor %}
+{% endif %}
 {% endblock %}
 =============================== RHS ================================
 {% macro diff(backReferences=[]) -%}

@@ -28,6 +28,7 @@ comp1 @Compartment;
 excel @XLSXExport { filepath: table, omitRows: 3, sheet: one, splitByClass: true };
 json @JSONExport { filepath: output };
 yaml @YAMLExport { filepath: output };
+slv @SLVExport { filepath: model };
 
 //xxx @UnitDef { components: [{ kind: nM, multiplier: 1, exponent: 1 }, { kind: kg, multiplier: 1, exponent: -3 }]};
 yyy @UnitDef {

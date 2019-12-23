@@ -132,11 +132,22 @@ class SLVExport extends _Export{
             model.events.push({
               start: switcher.start,
               period: period,
-              on: 1,
+              on: switcher.id + '_',
               target: record.id,
               multiply: multiply,
               add: add
             });
+
+            if (switcher.stop!==undefined){
+              model.events.push({
+                start: switcher.stop,
+                period: 0,
+                on: 1,
+                target: switcher.id + '_',
+                multiply: 0,
+                add: 0
+              });
+            }
           });
       });
 
