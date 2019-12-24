@@ -9,6 +9,7 @@ require('./slv-export');
 require('./mrgsolve-export');
 require('./simbio-export');
 require('./xlsx-export');
+require('./gsk-xlsx-export');
 
 module.exports = {
   Container,

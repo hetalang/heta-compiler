@@ -20,32 +20,12 @@ class XLSXExport extends _Export {
     let out = this.make();
     let relPath = [this.filepath || this.id, '.xlsx'].join('');
     let fullPath = path.join(pathPrefix, relPath);
-    let sequense = [
-      'on', 'action', 'class', 'space', 'id', 
-      'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',
-      'compartment', 'isAmount', 'actors', 'modifiers[]',
-      'title', 'notes', 'tags[]'
-    ];
     
     let wb = XLSX.utils.book_new();
     out.forEach((x) => {
-      let keys = []; // store unique keys
-      let content = x.content
-        .map((q) => { // iterate and modify properties
-          q.on = 1;
-          // convert boolen to string
-          return _.mapValues(q, (value, key) => {
-            if (keys.indexOf(key)===-1) keys.push(key);
-            return typeof value === 'boolean' ? value.toString() : value;
-          });
-        });
-
-      //let sequense_i = _.cloneDeep(sequense); // many empty columns
-      let sequense_i = _.intersection(sequense, keys);
-      
       let ws = XLSX.utils.json_to_sheet(
-        _.times(this.omitRows, {}).concat(content),
-        { header: sequense_i } // XLSX tries to mutate header
+        _.times(this.omitRows, {}).concat(x.content),
+        { header: x.headerSeq } // XLSX tries to mutate header
       );
       XLSX.utils.book_append_sheet(wb, ws, x.name);
     });
@@ -53,6 +33,13 @@ class XLSXExport extends _Export {
     XLSX.writeFile(wb, fullPath, {});
   }
   make(){
+    let sequense = [
+      'on', 'action', 'class', 'space', 'id', 
+      'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',
+      'compartment', 'isAmount', 'actors', 'modifiers[]',
+      'title', 'notes', 'tags[]'
+    ];
+
     let qArr = this._container
       .getPopulation(this.space, true)
       .map((x) => x.toFlat());
@@ -61,15 +48,31 @@ class XLSXExport extends _Export {
     let splitted = _.chain(qArr)
       .groupBy((q) => q.class)
       .mapValues((value, prop) => {
+
+        let keys = []; // store unique keys
+        let updValue = value.map((q) => { // iterate and modify properties
+          q.on = 1;
+          // convert boolen to string
+          return _.mapValues(q, (value, key) => {
+            if (keys.indexOf(key)===-1) keys.push(key);
+            return typeof value === 'boolean' ? value.toString() : value;
+          });
+        });
+  
+        let sequense_i = _.intersection(sequense, keys);
+
         return {
-          content: value,
+          content:  updValue,
           pathSuffix: '',
           type: 'sheet',
-          name: prop
+          name: prop,
+          headerSeq: sequense_i
         };
       })
       .values()
       .value();
+
+    
     
     return splitted;
   }
