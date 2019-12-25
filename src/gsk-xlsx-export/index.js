@@ -3,7 +3,7 @@ const Container = require('../container');
 //const XLSX = require('xlsx'); // see docs 
 const _ = require('lodash');
 const { XLSXExport } = require('../xlsx-export');
-require('./record');
+require('./_size');
 
 class GSKXLSXExport extends XLSXExport {
   merge(q={}, skipChecking){
@@ -24,30 +24,33 @@ class GSKXLSXExport extends XLSXExport {
       pathSuffix: '',
       type: 'sheet',
       name: 'main_tab',
-      headerSeq: ['#', 'st', 'id', 'actors', 'assignments.ode_', 'compartment', 'notes']
+      headerSeq: [
+        'tags[]', 'st', 'id', 'actors',
+        'assignments.ode_', 'compartment', 'notes', 'nothing',
+        'on'
+      ]
     };
-    functions.content = [{'#': '#', 'id': 'ID', 'assignments.ode_': 'Rate Law/formulae', 'actors': 'Reaction', 'compartment': 'Compartment', 'notes': 'Description', 'st': '[r/f/c]?'}];
-    let counter = 1;
+    functions.content = [{
+      'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'assignments.ode_': 'Rate Law/formulae',
+      'actors': 'Reaction', 'compartment': 'Compartment', 'notes': 'Description', 'nothing': 'CHANGE', 
+      'on': 'Scenario (2/1/0)'
+    }];
+    //let counter = 1;
     functions.content = functions.content.concat(
       qArr.filter((q) => q.class === 'Record')
         .map((q) => {
-          q['#'] = counter++;
+          //q['#'] = counter++;
           q.st = 'f';
-          delete q.class;
-          delete q.on;
-          delete q.units;
 
-          return q;
+          return _.omit(q, ['class', 'units', 'unitsGSK']);
         }), 
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
-          q['#'] = counter++;
+          //q['#'] = counter++;
           q.st = 'r';
-          delete q.class;
-          delete q.on;
-          delete q.units;
+          if (q.isAmount!==false) q.compartment = 'no';
 
-          return q;
+          return _.omit(q, ['class', 'units', 'unitsGSK']);
         })
     );
 
@@ -56,18 +59,23 @@ class GSKXLSXExport extends XLSXExport {
       pathSuffix: '',
       type: 'sheet',
       name: 'Vs',
-      headerSeq: ['#', 'id', 'assignments.start_', 'unitsSimbio', 'notes', 'compartment', 'COM']
+      headerSeq: [
+        'tags[]', 'id', 'assignments.start_', 'unitsGSK', 
+        'notes', 'compartment', 'COM', 'nothing',
+        'on'
+      ]
     };
-    species.content = [{'#': '#', 'id': 'Variable name', 'assignments.start_': 'Value', 'unitsSimbio': 'Unit', 'notes': 'Description', 'compartment': 'Compartment', 'COM': 'COM'}];
+    species.content = [{
+      'tags[]': '#', 'id': 'Variable name', 'assignments.start_': 'Value', 'unitsGSK': 'Unit', 
+      'notes': 'Description', 'compartment': 'Compartment', 'COM': 'COM', 'nothing': '',
+      'on': 'Scenario (2/1/0)'
+    }];
     species.content = species.content.concat(
       qArr.filter((q) => q.class === 'Species')
         .map((q, i) => {
-          q['#'] = i + 1;
-          delete q.class;
-          delete q.on;
-          delete q.units;
+          //q['#'] = i + 1;
 
-          return q;
+          return _.omit(q, ['class', 'units']);
         })
     );
 
@@ -76,23 +84,57 @@ class GSKXLSXExport extends XLSXExport {
       pathSuffix: '',
       type: 'sheet',
       name: 'Ps',
-      headerSeq: ['#', 'id', 'num', 'unitsSimbio', 'notes', 'st']
+      headerSeq: [
+        'tags[]', 'id', 'num', 'unitsGSK',
+        'notes', 'nothing', 'nothing2', 'st',
+        'on'
+      ]
     };
-    parameters.content = [{'#': '#', 'id': 'Parameter name', 'num': 'Value', 'unitsSimbio': 'Unit', 'notes': 'Description', 'st': 'string type (p/c)'}];
+    parameters.content = [{
+      'tags[]': '#', 'id': 'Parameter name', 'num': 'Value', 'unitsGSK': 'Unit',
+      'notes': 'Description', 'nothing': '', 'nothing2': '', 'st': 'string type (p/c)',
+      'on': 'Scenario (2/1/0)'
+    }];
     parameters.content = parameters.content.concat(
       qArr.filter((q) => q.class === 'Const')
         .map((q, i) => {
-          q['#'] = i + 1;
+          //q['#'] = i + 1;
           q.st = 'p';
-          delete q.class;
-          delete q.on;
-          delete q.units;
 
-          return q;
+          return _.omit(q, ['class', 'units']);
         })
     );
 
-    return [functions, species, parameters];
+    
+    // function units sheet
+    let function_units = {
+      omitRows: 0,
+      pathSuffix: '',
+      type: 'sheet',
+      name: 'function units',
+      headerSeq: [
+        'tags[]', 'st', 'id', 'unitsGSK'
+      ]
+    };
+    function_units.content = [{
+      'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'unitsGSK': 'Unit'
+    }];
+    function_units.content = function_units.content.concat(
+      qArr.filter((q) => q.class === 'Record')
+        .map((q) => {
+          q.st = 'f';
+
+          return _.pick(q, ['tags[]', 'st', 'id', 'unitsGSK']);
+        })/*,
+      qArr.filter((q) => q.class === 'Reaction')
+        .map((q) => {
+          q.st = 'r';
+
+          return _.pick(q, ['tags[]', 'st', 'id', 'unitsGSK']);
+        })*/
+    );
+
+    return [functions, species, parameters, function_units];
   }
   toQ(){
     let res = super.toQ();

@@ -103,7 +103,7 @@ function actors2rct(actors = []){
     if(x.stoichiometry === -1){
       return x.target;
     }else{
-      return -x.stoichiometry + x.target;
+      return -x.stoichiometry + '*' + x.target;
     }
   }).join(' + ');
 
@@ -111,7 +111,7 @@ function actors2rct(actors = []){
     if(x.stoichiometry === 1){
       return x.target;
     }else{
-      return x.stoichiometry + x.target;
+      return x.stoichiometry + '*' + x.target;
     }
   }).join(' + ');
 

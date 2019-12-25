@@ -23,8 +23,11 @@ class XLSXExport extends _Export {
     
     let wb = XLSX.utils.book_new();
     out.forEach((x) => {
+      let omitRows = x.omitRows!==undefined
+        ? x.omitRows // use omitRows from out 
+        : this.omitRows;
       let ws = XLSX.utils.json_to_sheet(
-        _.times(this.omitRows, {}).concat(x.content),
+        _.times(omitRows, {}).concat(x.content),
         { header: x.headerSeq } // XLSX tries to mutate header
       );
       XLSX.utils.book_append_sheet(wb, ws, x.name);
@@ -71,8 +74,6 @@ class XLSXExport extends _Export {
       })
       .values()
       .value();
-
-    
     
     return splitted;
   }
