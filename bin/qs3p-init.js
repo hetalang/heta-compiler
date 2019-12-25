@@ -183,6 +183,11 @@ prompt(questions)
       path.join(__dirname, './init/template.gitignore'),
       path.join(targetDir, '.gitignore')
     );
+    // saving .gitattributes
+    fs.copySync(
+      path.join(__dirname, './init/template.gitattributes'),
+      path.join(targetDir, '.gitattributes')
+    );
 
     console.log('Platform template is created.');
     console.log(JSON.stringify(platform, null, 2));
