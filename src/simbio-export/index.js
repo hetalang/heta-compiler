@@ -4,7 +4,6 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('../nunjucks-env');
 const fs = require('fs');
 const path = require('path');
-require('./_size.js');
 
 const fun = fs.readFileSync(
   path.join(__dirname, 'fun.m'),

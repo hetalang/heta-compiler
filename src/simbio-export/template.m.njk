@@ -21,7 +21,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {{_model_.model}}.compartment.{{record.id}} = addcompartment(
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
-  {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsSimbio() }}'{% endif -%}
+  {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(_model_.population.unitTransformator, true) }}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
@@ -31,7 +31,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {{_model_.model}}.species.{{record.id}} = addspecies(
   {{- _model_.model }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
   {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
-  {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsSimbio() }}'{% endif -%}
+  {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(_model_.population.unitTransformator, true) }}'{% endif -%}
   , 'BoundaryCondition', {{ record.boundary===true or record.implicitBoundary===true -}}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
@@ -44,14 +44,14 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {{_model_.model}}.parameter.{{record.id}} = addparameter(
   {{- model_id }}, '{{record.id}}', 'ConstantValue', false
   {%- if record.assignments.start_.num!==undefined %}, 'Value', {{record.assignments.start_.num}}{% endif -%}
-  {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsSimbio() }}'{% endif -%}
+  {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsRebased(_model_.population.unitTransformator, true) }}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 {%- for con in listOfConstants %}
 {{_model_.model}}.parameter.{{con.id}} = addparameter(
   {{- model_id }}, '{{con.id}}', 'ConstantValue', true
   {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
-  {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsSimbio() }}'{% endif -%}
+  {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(_model_.population.unitTransformator, true) }}'{% endif -%}
   , 'Notes', '{{con.notesHTML}}', 'Tag', '');
 {%- endfor %}
 

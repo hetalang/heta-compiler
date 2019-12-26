@@ -59,11 +59,11 @@ class _Size extends _Component {
       return undefined;
     }
   }
-  unitsRebased(transformator = {}){
+  unitsRebased(transformator = {}, usePefix = false){
     if (this.unitsParsed!==undefined){
       return this.unitsParsed
         .rebase(transformator)
-        .toString();
+        .toString(usePefix);
     } else {
       return undefined;
     }

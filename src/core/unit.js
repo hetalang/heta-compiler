@@ -1,5 +1,20 @@
 const _ = require('lodash');
 const { floor, log10 } = Math;
+const prefixes = {
+  '1e-2':       'centi',
+  '1e-1':       'deci',
+  '1e+1':       'deka',
+  '1e-15':      'femto',
+  '1e+9':       'giga',
+  '1e+2':       'hecto',
+  '1e+3':       'kilo',
+  '1e+6':       'mega',
+  '1e-6':       'micro',
+  '1e-3':       'milli',
+  '1e-9':       'nano',
+  '1e-12':      'pico',
+  '1e+12':      'tera'
+};
 
 class Unit extends Array {
   static fromQ(obj = []){
@@ -184,13 +199,22 @@ class Unit extends Array {
    *
    * @return {string} of format: 'mM2*L/mg/h2'
    */
-  toString(){
+  toString(usePrefix = false){
     return this
       .filter((x) => x.kind!=='') // remove unitless
       .map((item, i) => {
-        let kindUpd = item.multiplier===1
-          ? item.kind
-          : '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
+        if(item.multiplier===1){
+          var kindUpd = item.kind;
+        } else if (usePrefix) {
+          let exponential = item.multiplier.toExponential();
+          let pref = _.get(prefixes, exponential);
+          if (pref === undefined) throw new Error('No prefix found');
+
+          kindUpd = pref + item.kind;
+        } else {
+          kindUpd = '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
+        }
+
         let operator = (item.exponent<0)
           ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
           : ( (i>0) ? '*' : '' ); // no operator for first element
