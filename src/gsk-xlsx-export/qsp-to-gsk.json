@@ -40,6 +40,7 @@
   "ms": [{"kind": "second", "multiplier": 0.016666e-3}],
   "s":  [{"kind": "second", "multiplier": 0.016666}],
   "min":[{"kind": "second", "multiplier": 60}],
+  "hour":  [{"kind": "hour", "multiplier": 1}],
   "h":  [{"kind": "hour", "multiplier": 1}],
   "day":[{"kind": "hour", "multiplier": 24}],
   "week":[{"kind": "hour", "multiplier": 168}],
