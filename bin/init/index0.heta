@@ -1,6 +1,9 @@
 /*
   template file for creating platform
 */
+// add qsp units
+// comment next line if not required
+include ./qsp-units.json type json
 
 p1 @Record .= 1;
 

@@ -1,5 +1,25 @@
 [
   {
+      "id": "m", "class": "UnitDef",
+      "units": [ { "kind": "metre" } ]
+  },
+  {
+      "id": "uM", "class": "UnitDef",
+      "units": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
+  },
+  {
+      "id": "h", "class": "UnitDef",
+      "units": [ { "kind": "second", "multiplier": 3600 } ]
+  },
+  {
+      "id": "L", "class": "UnitDef",
+      "units": [ { "kind": "litre" } ]
+  },
+  {
+      "id": "umole", "class": "UnitDef",
+      "units": [ { "kind": "mole", "multiplier": 1e-6 } ]
+  },
+  {
     "class": "Const", "id": "c2",
     "num": 1.5, "units": "L"
   },

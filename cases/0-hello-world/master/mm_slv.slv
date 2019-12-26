@@ -760,6 +760,8 @@ S = 10; // @Species 'substrate' {units: uM}
 P = 0; // @Species 'product' {units: uM}
 default_compartment_ = 1; // @Compartment  {units: UL}
 
+
+
 #
 
 <INI 2

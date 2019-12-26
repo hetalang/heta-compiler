@@ -176,6 +176,11 @@ prompt(questions)
       }
     }
 
+    // saving qsp-units.json
+    fs.copySync(
+      path.join(__dirname, './init/qsp-units.json'),
+      path.join(targetDir, 'src/qsp-units.json')
+    );
     // saving platform file
     fs.outputJsonSync(filePath, platform, {spaces: 2});
     // saving .gitignore

@@ -1,5 +1,652 @@
 [
   {
+    "class": "UnitDef",
+    "id": "fmole",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1e-15,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "pmole",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1e-12,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "nmole",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1e-9,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "umole",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 0.000001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "mmole",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 0.001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "fM",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1e-15,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "pM",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1e-12,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "nM",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1e-9,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "uM",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 0.000001,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "mM",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 0.001,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "M",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "kM",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "mole",
+        "multiplier": 1000,
+        "exponent": 1
+      },
+      {
+        "kind": "litre",
+        "exponent": -1,
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "fL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 1e-15,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "pL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 1e-12,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "nL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 1e-9,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "uL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 0.000001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "mL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 0.001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "dL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 0.1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "L",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "litre",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "fs",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 1e-15,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "ps",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 1e-12,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "ns",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 1e-9,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "us",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 0.000001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "ms",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 0.001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "s",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "min",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 60,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "h",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 3600,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "day",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 86400,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "week",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 604800,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "year",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 31558208,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "fg",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 1e-18,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "pg",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 1e-15,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "ng",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 1e-12,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "ug",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 1e-9,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "mg",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 0.000001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "g",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 0.001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "kg",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "kilogram",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "kat",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "katal",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "cell",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "item",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "kcell",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "item",
+        "multiplier": 1000,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "cal",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "joule",
+        "multiplier": 4.1868,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "kcal",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "joule",
+        "multiplier": 4186.8,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "fm",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 1e-15,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "pm",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 1e-12,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "nm",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 1e-9,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "um",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 0.000001,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "mm",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 1e-13,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "cm",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 0.01,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "m",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "metre",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "UL",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "dimensionless",
+        "multiplier": 1,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "percent",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "dimensionless",
+        "multiplier": 0.01,
+        "exponent": 1
+      }
+    ]
+  },
+  {
     "class": "Const",
     "id": "Vmax",
     "space": "mm",
@@ -9,8 +656,8 @@
     "class": "Const",
     "id": "Km",
     "space": "mm",
-    "num": 2.5,
-    "units": "uM"
+    "units": "uM",
+    "num": 2.5
   },
   {
     "class": "Compartment",
@@ -18,24 +665,24 @@
     "space": "mm",
     "title": "Default compartment",
     "notes": "Note for the Default compartment",
+    "units": "L",
     "assignments": {
       "start_": {
         "expr": "1"
       }
-    },
-    "units": "L"
+    }
   },
   {
     "class": "Species",
     "id": "S",
     "space": "mm",
     "title": "substrate",
+    "units": "uM",
     "assignments": {
       "start_": {
         "expr": "10"
       }
     },
-    "units": "uM",
     "compartment": "default_comp"
   },
   {
@@ -43,12 +690,12 @@
     "id": "P",
     "space": "mm",
     "title": "product",
+    "units": "uM",
     "assignments": {
       "start_": {
         "expr": "0"
       }
     },
-    "units": "uM",
     "compartment": "default_comp"
   },
   {
@@ -60,12 +707,12 @@
     "aux": {
       "reversible": false
     },
+    "units": "umole/min",
     "assignments": {
       "ode_": {
         "expr": "Vmax * S / (Km + S) * default_comp"
       }
     },
-    "units": "umole/min",
     "actors": [
       {
         "target": "S",
