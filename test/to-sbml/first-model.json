@@ -1,5 +1,37 @@
 [
   {
+    "id": "min", "class": "UnitDef",
+    "units": [ { "kind": "second", "multiplier": 60 } ]
+  },
+  {
+      "id": "nm", "class": "UnitDef",
+      "units": [ { "kind": "metre", "multiplier": 1e-9 } ]
+  },
+  {
+      "id": "m", "class": "UnitDef",
+      "units": [ { "kind": "metre" } ]
+  },
+  {
+      "id": "uM", "class": "UnitDef",
+      "units": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
+  },
+  {
+    "id": "fM", "class": "UnitDef",
+    "units": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
+},
+  {
+      "id": "h", "class": "UnitDef",
+      "units": [ { "kind": "second", "multiplier": 3600 } ]
+  },
+  {
+      "id": "L", "class": "UnitDef",
+      "units": [ { "kind": "litre" } ]
+  },
+  {
+      "id": "umole", "class": "UnitDef",
+      "units": [ { "kind": "mole", "multiplier": 1e-6 } ]
+  },
+  {
     "class": "Compartment",
     "id": "comp1",
     "space": "first",

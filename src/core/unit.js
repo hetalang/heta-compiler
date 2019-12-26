@@ -24,22 +24,25 @@ class Unit extends Array {
     if(!transformator)
       throw new TypeError('Transformator should be set for rebase.');
     let newUnit = new Unit();
-
+    
     this.forEach((parseUnit) => {
-      transformator[parseUnit.kind].forEach((simpleUnit) => {
-        let simpleUnit_defaults = {
-          kind: simpleUnit.kind,
-          multiplier: simpleUnit.multiplier!==undefined ? simpleUnit.multiplier : 1,
-          exponent: simpleUnit.exponent!==undefined ? simpleUnit.exponent : 1,
-        };
-        newUnit.push({
-          kind: simpleUnit_defaults.kind,
-          multiplier: simpleUnit_defaults.multiplier * Math.pow(parseUnit.multiplier, 1/simpleUnit_defaults.exponent),
-          exponent: simpleUnit_defaults.exponent * parseUnit.exponent
+      if (transformator[parseUnit.kind] === undefined ){ // use the same if is not found in transformator
+        newUnit.push(_.cloneDeep(parseUnit));
+      } else {
+        transformator[parseUnit.kind].forEach((simpleUnit) => {
+          let simpleUnit_defaults = {
+            kind: simpleUnit.kind,
+            multiplier: simpleUnit.multiplier!==undefined ? simpleUnit.multiplier : 1,
+            exponent: simpleUnit.exponent!==undefined ? simpleUnit.exponent : 1,
+          };
+          newUnit.push({
+            kind: simpleUnit_defaults.kind,
+            multiplier: simpleUnit_defaults.multiplier * Math.pow(parseUnit.multiplier, 1/simpleUnit_defaults.exponent),
+            exponent: simpleUnit_defaults.exponent * parseUnit.exponent
+          });
         });
-      });
+      }
     });
-
     return newUnit;
   }
 

@@ -2,7 +2,6 @@ const { _Component } = require('./_component');
 const { Unit } = require('./unit');
 const { ValidationError, BindingError } = require('../heta-error');
 
-
 class _Size extends _Component {
   merge(q = {}, skipChecking){
     if(!skipChecking) _Size.isValid(q);
@@ -57,6 +56,15 @@ class _Size extends _Component {
     if(this.unitsParsed!==undefined){
       return this.unitsParsed.toHash();
     }else{
+      return undefined;
+    }
+  }
+  unitsRebased(transformator = {}){
+    if (this.unitsParsed!==undefined){
+      return this.unitsParsed
+        .rebase(transformator)
+        .toString();
+    } else {
       return undefined;
     }
   }

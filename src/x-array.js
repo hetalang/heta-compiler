@@ -1,8 +1,10 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
-const qspToSbml = require('./qsp-to-sbml');
 
 class XArray extends Array{
+  get unitTransformator(){
+    return this._unitTranformator;
+  }
   getById(id){
     return this.find((x) => x.id === id);
   }
@@ -51,17 +53,21 @@ class XArray extends Array{
       .filter((record) => _.has(record, 'assignments.' + context));
   }
   getListOfUnitDefinitions(){
-    return this.getUniqueUnits()
+    let res = this.getUniqueUnits()
       .map((units) => {
-        return units.toXmlUnitDefinition(qspToSbml, {nameStyle: 'string', simplify: true});
+        return units
+          .toXmlUnitDefinition(this.unitTransformator, { nameStyle: 'string', simplify: true });
       });
+      
+    return res;
   }
   getUniqueUnits(){
-    return _.chain(this.selectByInstanceOf('Record'))
+    return _
+      .chain(this.selectByInstanceOf('Record'))
       .concat(this.selectByInstanceOf('Const'))
       .filter((record) => record.unitsSBML()!==undefined)
       .uniqBy((record) => record.unitsHash(true))
-      .map((record) => record.unitsSBML()) // .toString()
+      .map((record) => record.unitsSBML())
       .value();
   }
 }
