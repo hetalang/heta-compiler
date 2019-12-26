@@ -1,6 +1,6 @@
 const Container = require('../container');
 //const { ExportError } = require('../heta-error');
-//const XLSX = require('xlsx'); // see docs 
+//const XLSX = require('xlsx'); // see docs https://docs.sheetjs.com/
 const _ = require('lodash');
 const { XLSXExport } = require('../xlsx-export');
 require('./_size');
@@ -42,7 +42,7 @@ class GSKXLSXExport extends XLSXExport {
           //q['#'] = counter++;
           q.st = 'f';
 
-          return _.omit(q, ['class', 'units', 'unitsGSK']);
+          return _.omit(q, ['class', 'units', 'unitsGSK', 'aux.reversible']);
         }), 
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
@@ -109,6 +109,7 @@ class GSKXLSXExport extends XLSXExport {
     // function units sheet
     let function_units = {
       omitRows: 0,
+      skipHeader: true,
       pathSuffix: '',
       type: 'sheet',
       name: 'function units',

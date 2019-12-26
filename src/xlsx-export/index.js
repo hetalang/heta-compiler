@@ -28,7 +28,7 @@ class XLSXExport extends _Export {
         : this.omitRows;
       let ws = XLSX.utils.json_to_sheet(
         _.times(omitRows, {}).concat(x.content),
-        { header: x.headerSeq } // XLSX tries to mutate header
+        { header: x.headerSeq, skipHeader: x.skipHeader } // XLSX tries to mutate header
       );
       XLSX.utils.book_append_sheet(wb, ws, x.name);
     });
