@@ -50,7 +50,7 @@ class GSKXLSXExport extends XLSXExport {
           q.st = 'r';
           if (q.isAmount!==false) q.compartment = 'no';
 
-          return _.omit(q, ['class', 'units', 'unitsGSK']);
+          return _.omit(q, ['class', 'units', 'unitsGSK', 'aux.reversible']);
         })
     );
 
