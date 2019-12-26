@@ -34,7 +34,7 @@ describe('Checking operations', () => {
   });
 });
 
-describe('Test operations for UnitGeneral', () => {
+describe('Test operations for Unit', () => {
   let test = {
     in1: [
       { kind: 'kg', multiplier: 1e3, exponent: 2 }, // (1e3 kg)^2

@@ -153,6 +153,7 @@ class Unit extends Array {
 
     return unit;
   }
+
   /**
    * Serialize unit-object to identificator.
    *
@@ -184,6 +185,9 @@ class Unit extends Array {
     return this
       .filter((x) => x.kind!=='') // remove unitless
       .map((item, i) => {
+        let kindUpd = item.multiplier===1
+          ? item.kind
+          : '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
         let operator = (item.exponent<0)
           ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
           : ( (i>0) ? '*' : '' ); // no operator for first element
@@ -193,7 +197,7 @@ class Unit extends Array {
           ? '^' + expAbs
           : '';
 
-        return operator + item.kind + exponent;
+        return operator + kindUpd + exponent;
       })
       .join('');
   }
