@@ -3,7 +3,7 @@
 */
 // add qsp units
 // comment next line if not required
-include ./qsp-units.json type json
+include ./qsp-units.heta
 
 p1 @Record .= 1;
 

@@ -176,10 +176,10 @@ prompt(questions)
       }
     }
 
-    // saving qsp-units.json
+    // saving qsp-units.heta
     fs.copySync(
-      path.join(__dirname, './init/qsp-units.json'),
-      path.join(targetDir, 'src/qsp-units.json')
+      path.join(__dirname, './init/qsp-units.heta'),
+      path.join(targetDir, 'src/qsp-units.heta')
     );
     // saving platform file
     fs.outputJsonSync(filePath, platform, {spaces: 2});

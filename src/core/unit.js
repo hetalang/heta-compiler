@@ -208,7 +208,8 @@ class Unit extends Array {
         } else if (usePrefix) {
           let exponential = item.multiplier.toExponential();
           let pref = _.get(prefixes, exponential);
-          if (pref === undefined) throw new Error('No prefix found');
+          if (pref === undefined) 
+            throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
 
           kindUpd = pref + item.kind;
         } else {
