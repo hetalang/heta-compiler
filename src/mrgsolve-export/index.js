@@ -53,9 +53,10 @@ class MrgsolveExport extends _Export{
         }
       });
 
-    // set array of records
-    model.records = model.population
-      .filter((component) => component.instanceOf('Record'));
+    // set array of output records
+    model.output = model.population
+      .filter((component) => component.instanceOf('Record') && component.assignments!==undefined)
+      .filter((component) => !component.instanceOf('Species') || !component.isAmount);
 
     // set sorted array of initials
     model.start_ = model.population
