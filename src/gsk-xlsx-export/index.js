@@ -102,6 +102,14 @@ class GSKXLSXExport extends XLSXExport {
           q.st = 'p';
 
           return _.omit(q, ['class', 'units']);
+        }),
+      qArr.filter((q) => q.class === 'Compartment')
+        .map((q, i) => {
+          //q['#'] = i + 1;
+          q.st = 'c';
+          q.num = _.get(q, 'assignments.start_', '');
+
+          return _.omit(q, ['class', 'units', 'assignments.start_']);
         })
     );
 
