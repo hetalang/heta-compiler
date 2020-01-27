@@ -106,7 +106,7 @@ class GSKXLSXExport extends XLSXExport {
       qArr.filter((q) => q.class === 'Compartment')
         .map((q, i) => {
           //q['#'] = i + 1;
-          q.st = 'c';
+          q.st = 'p';
           q.num = _.get(q, 'assignments.start_', '');
 
           return _.omit(q, ['class', 'units', 'assignments.start_']);
