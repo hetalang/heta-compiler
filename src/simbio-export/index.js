@@ -4,6 +4,8 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('../nunjucks-env');
 const fs = require('fs');
 const path = require('path');
+const legalUnits = require('./legal-units');
+const _ = require('lodash');
 
 const fun = fs.readFileSync(
   path.join(__dirname, 'fun.m'),
@@ -20,7 +22,7 @@ class SimbioExport extends _Export{
     return 'SimbioExport';
   }
   make(){
-    this._model_ = this._getSimbioImage(this.space);
+    this.image = this._getSimbioImage(this.space);
 
     return [
       {
@@ -36,11 +38,16 @@ class SimbioExport extends _Export{
     ];
   }
   _getSimbioImage(targetSpace){
-    let model = {
-      model: this.id,
-      population: this._container.getPopulation(targetSpace, this.skipMathChecking)
+    let population = this._container
+      .getPopulation(targetSpace, this.skipMathChecking);
+    let unitTransformator = _.omit(population.unitTransformator, []/*legalUnits*/);
+    console.log(unitTransformator)
+
+    return {
+      id: this.id, // not sure this is required
+      population: population,
+      unitTransformator: unitTransformator
     };
-    return model;
   }
   getSimbioCode(){
     return nunjucks.render(

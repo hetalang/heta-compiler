@@ -40,5 +40,64 @@
     },
     {
         "id": "newton", "class": "UnitDef"
+    },
+    
+
+    {
+        "id": "becquerel", "class": "UnitDef"
+    },
+    {
+        "id": "candela", "class": "UnitDef"
+    },
+    {
+        "id": "coulomb", "class": "UnitDef"
+    },
+    {
+        "id": "farad", "class": "UnitDef"
+    },
+    {
+        "id": "gram", "class": "UnitDef"
+    },
+    {
+        "id": "gray", "class": "UnitDef"
+    },
+    {
+        "id": "henry", "class": "UnitDef"
+    },
+    {
+        "id": "hertz", "class": "UnitDef"
+    },
+    {
+        "id": "kelvin", "class": "UnitDef"
+    },
+    {
+        "id": "lumen", "class": "UnitDef"
+    },
+    {
+        "id": "lux", "class": "UnitDef"
+    },
+    {
+        "id": "ohm", "class": "UnitDef"
+    },
+    {
+        "id": "pascal", "class": "UnitDef"
+    },
+    {
+        "id": "radian", "class": "UnitDef"
+    },
+    {
+        "id": "siemens", "class": "UnitDef"
+    },
+    {
+        "id": "sievert", "class": "UnitDef"
+    },
+    {
+        "id": "steradian", "class": "UnitDef"
+    },
+    {
+        "id": "tesla", "class": "UnitDef"
+    },
+    {
+        "id": "weber", "class": "UnitDef"
     }
 ]
