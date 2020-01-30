@@ -331,12 +331,19 @@ class Unit extends Array {
   creates unit transformation object from array of unitDef
 */
 function createUnitTransformation(unitDefArray = [], legalUnits = []){
-  let res = _.chain(unitDefArray)
-    .filter((x) => x.unitsParsed !== undefined)
-    .map((x) => [x.id, x.unitsParsed])
+  // remove units which are already part of exported software
+  let cleared = _.chain(unitDefArray)
+    .map((x) => {
+      if (legalUnits.indexOf(x.id) === -1) {
+        return [x.id, x.unitsParsed];
+      } else {
+        return [x.id, undefined]; // skip allowed units from transformator
+      }
+    })
     .fromPairs()
-    .omit(legalUnits) // skip allowed units from transformator
     .value();
+
+  let res = _.omitBy(cleared, _.isUndefined);
     
   return res;
 }

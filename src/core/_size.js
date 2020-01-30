@@ -41,6 +41,7 @@ class _Size extends _Component {
             + `${this.index} { unit: ${this.units} };`);
         }else{
           // kindObj can be set here
+          //x.kindObj = target;
         }
       });
     }

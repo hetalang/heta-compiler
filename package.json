@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha --recursive test/to-sbml",
+    "test:dev": "mocha --recursive test/unit/create-unit-transformator.js",
     "test": "mocha test --recursive",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
