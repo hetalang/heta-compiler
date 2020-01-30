@@ -49,8 +49,6 @@ class SimbioExport extends _Export{
       .omit(legalUnits) // skip allowed units from transformator
       .value();
       
-    //console.log(unitTransformator)
-
     return {
       id: this.id, // not sure this is required
       population: population,

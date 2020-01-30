@@ -103,12 +103,8 @@
         "units": [ { "kind": "second" } ]
     },
     {
-        "id": "min", "class": "UnitDef",
-        "units": [ { "kind": "second", "multiplier": 60 } ]
-    },
-    {
         "id": "h", "class": "UnitDef",
-        "units": [ { "kind": "second", "multiplier": 3600 } ]
+        "units": [ { "kind": "hour", "multiplier": 1 } ]
     },
     {
         "id": "week", "class": "UnitDef",
