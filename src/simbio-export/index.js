@@ -39,9 +39,17 @@ class SimbioExport extends _Export{
   }
   _getSimbioImage(targetSpace){
     let population = this._container
-      .getPopulation(targetSpace, this.skipMathChecking);
-    let unitTransformator = _.omit(population.unitTransformator, []/*legalUnits*/);
-    console.log(unitTransformator)
+      .getPopulation(targetSpace, false);
+    
+    // create unit transformator based on unitDef and legalUnits
+    let unitTransformator = _.chain(population)
+      .filter((x) => x.className === 'UnitDef')
+      .map((x) => [x.id, x.unitsParsed])
+      .fromPairs()
+      .omit(legalUnits) // skip allowed units from transformator
+      .value();
+      
+    //console.log(unitTransformator)
 
     return {
       id: this.id, // not sure this is required

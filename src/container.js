@@ -289,15 +289,6 @@ class Container {
       ? (new XArray(...children)).filter((component) => !component.isCore)
       : new XArray(...children);
 
-    // XXX: not sure it should be here, repeat the same several times
-    // get unit transformator
-    let unitTranformator = _.chain(children)
-      .filter((x) => x.className === 'UnitDef')
-      .map((x) => [x.id, x.unitsParsed])
-      .fromPairs()
-      .value();
-    population._unitTranformator = unitTranformator;
-
     return population;
   }
 }

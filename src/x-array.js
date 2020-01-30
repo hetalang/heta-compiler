@@ -2,9 +2,6 @@ const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 
 class XArray extends Array{
-  get unitTransformator(){
-    return this._unitTranformator;
-  }
   getById(id){
     return this.find((x) => x.id === id);
   }
@@ -51,15 +48,6 @@ class XArray extends Array{
   selectRecordsByContext(context){
     return this.selectByInstanceOf('Record')
       .filter((record) => _.has(record, 'assignments.' + context));
-  }
-  getListOfUnitDefinitions(){
-    let res = this.getUniqueUnits()
-      .map((units) => {
-        return units
-          .toXmlUnitDefinition(this.unitTransformator, { nameStyle: 'string', simplify: true });
-      });
-      
-    return res;
   }
   getUniqueUnits(){
     return _

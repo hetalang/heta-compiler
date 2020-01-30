@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
   <model id="{{_id}}" metaid="{{_id}}" {% if title %}name="{{title}}"{% endif %}>
-  {% if _model_.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{_model_.notesHTML}}</html></notes>{% endif %}
+  {% if image.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{image.notesHTML}}</html></notes>{% endif %}
   
-  {%- set listOfCompartments = _model_.population.selectByClassName('Compartment') -%}
+  {%- set listOfCompartments = image.population.selectByClassName('Compartment') -%}
   {% if listOfCompartments|length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
@@ -20,8 +20,8 @@
     {%- endfor %}
     </listOfCompartments>
   {% endif %}
- 
-  {%- set listOfSpecies = _model_.population.selectByClassName('Species') -%}
+  
+  {%- set listOfSpecies = image.population.selectByClassName('Species') -%}
   {% if listOfSpecies|length > 0 %}
     <listOfSpecies>
     {%- for record in listOfSpecies %}
@@ -45,9 +45,9 @@
     </listOfSpecies>
   {% endif %}
   
-  {%- set listOfParameters = _model_.population.selectByClassName('Record') -%}
-  {%- set listOfProcesses = _model_.population.selectByClassName('Process') -%}
-  {%- set listOfConstants = _model_.population.selectByClassName('Const') -%}
+  {%- set listOfParameters = image.population.selectByClassName('Record') -%}
+  {%- set listOfProcesses = image.population.selectByClassName('Process') -%}
+  {%- set listOfConstants = image.population.selectByClassName('Const') -%}
   {% if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 %}
     <listOfParameters>
     {%- for record in listOfParameters.concat(listOfProcesses) %}
@@ -77,7 +77,7 @@
   </listOfParameters>
   {% endif %}
 
-  {%- set listOfReactions = _model_.population.selectByClassName('Reaction') -%}
+  {%- set listOfReactions = image.population.selectByClassName('Reaction') -%}
   {% if listOfReactions|length > 0 %}
     <listOfReactions>
     {%- for record in listOfReactions %}
@@ -112,8 +112,8 @@
   </listOfReactions>
   {% endif %}
 
-  {%- set listOfAssignmentRules = _model_.population|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
-  {%- set listOfRateRules = _model_.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
+  {%- set listOfAssignmentRules = image.population|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
+  {%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
   {% if listOfAssignmentRules|length+listOfRateRules|length > 0 %}
   <listOfRules>
   {%- for record in listOfAssignmentRules %}
@@ -150,7 +150,7 @@
   </listOfRules>
   {% endif %}
   
-  {%- set listOfInitialAssignments = _model_.population|exclude2("assignments.start_", undefined)|filter2("assignments.start_.num", undefined) -%}
+  {%- set listOfInitialAssignments = image.population|exclude2("assignments.start_", undefined)|filter2("assignments.start_.num", undefined) -%}
   {% if listOfInitialAssignments|length > 0 %}
     <listOfInitialAssignments>
     {%- for record in listOfInitialAssignments %}
@@ -165,8 +165,8 @@
     </listOfInitialAssignments>
   {% endif %}
   
-  {%- set listOfTimeEvents = _model_.population.selectByClassName("TimeSwitcher") -%}
-  {%- set listOfContinuousEvents = _model_.population.selectByClassName("ContinuousSwitcher") -%}
+  {%- set listOfTimeEvents = image.population.selectByClassName("TimeSwitcher") -%}
+  {%- set listOfContinuousEvents = image.population.selectByClassName("ContinuousSwitcher") -%}
   {% if listOfTimeEvents|length + listOfContinuousEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfTimeEvents %}
@@ -183,7 +183,7 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for record in _model_.population.selectRecordsByContext(event.id) %}
+          {% for record in image.population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}::{{event.id}}">
@@ -207,7 +207,7 @@
           </math>
         </trigger>
         <listOfEventAssignments>
-          {% for record in _model_.population.selectRecordsByContext(event.id) %}
+          {% for record in image.population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
             metaid="{{record.index}}::{{event.id}}">
@@ -220,7 +220,7 @@
     </listOfEvents>
   {% endif %}
   
-  {%- set listOfUnitDefinitions = _model_.population.getListOfUnitDefinitions() -%}
+  {%- set listOfUnitDefinitions = image.listOfUnitDefinitions -%}
   {% if listOfUnitDefinitions|length > 0 %}
     <listOfUnitDefinitions>
     {%- for unitDefinition in listOfUnitDefinitions %}
