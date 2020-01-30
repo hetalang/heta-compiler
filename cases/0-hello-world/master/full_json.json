@@ -1,6 +1,30 @@
 [
   {
     "class": "UnitDef",
+    "id": "year",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 31558208,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
+    "id": "day",
+    "space": "mm",
+    "units": [
+      {
+        "kind": "second",
+        "multiplier": 86400,
+        "exponent": 1
+      }
+    ]
+  },
+  {
+    "class": "UnitDef",
     "id": "fmole",
     "space": "mm",
     "units": [
@@ -360,36 +384,12 @@
   },
   {
     "class": "UnitDef",
-    "id": "day",
-    "space": "mm",
-    "units": [
-      {
-        "kind": "second",
-        "multiplier": 86400,
-        "exponent": 1
-      }
-    ]
-  },
-  {
-    "class": "UnitDef",
     "id": "week",
     "space": "mm",
     "units": [
       {
         "kind": "second",
         "multiplier": 604800,
-        "exponent": 1
-      }
-    ]
-  },
-  {
-    "class": "UnitDef",
-    "id": "year",
-    "space": "mm",
-    "units": [
-      {
-        "kind": "second",
-        "multiplier": 31558208,
         "exponent": 1
       }
     ]

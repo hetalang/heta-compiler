@@ -82,14 +82,8 @@ min @UnitDef {
 h @UnitDef {
     units: [ { kind: second, multiplier: 3600 } ]
 };
-day @UnitDef {
-    units: [ { kind: second, multiplier: 86400 } ]
-};
 week @UnitDef {
     units: [ { kind: second, multiplier: 604800 } ]
-};
-year @UnitDef {
-    units: [ { kind: second, multiplier: 31558208 } ]
 };
 
 fg @UnitDef {

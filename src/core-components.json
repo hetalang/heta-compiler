@@ -12,7 +12,8 @@
         "id": "kilogram", "class": "UnitDef"
     },
     {
-        "id": "katal", "class": "UnitDef"
+        "id": "katal", "class": "UnitDef",
+        "units": [{ "kind": "mole", "multiplier": 1 }, { "kind": "second", "multiplier": 1, "exponent": -1 }]
     },
     {
         "id": "item", "class": "UnitDef"
@@ -30,9 +31,6 @@
         "id": "watt", "class": "UnitDef"
     },
     {
-        "id": "joule", "class": "UnitDef"
-    },
-    {
         "id": "volt", "class": "UnitDef"
     },
     {
@@ -44,28 +42,33 @@
     
 
     {
-        "id": "becquerel", "class": "UnitDef"
+        "id": "becquerel", "class": "UnitDef",
+        "units": [{ "kind": "second", "multiplier": 1, "exponent": -1 }]
     },
     {
         "id": "candela", "class": "UnitDef"
     },
     {
-        "id": "coulomb", "class": "UnitDef"
+        "id": "coulomb", "class": "UnitDef",
+        "units": [{ "kind": "ampere", "multiplier": 1 }, { "kind": "second", "multiplier": 1 }]
     },
     {
         "id": "farad", "class": "UnitDef"
     },
     {
-        "id": "gram", "class": "UnitDef"
+        "id": "gram", "class": "UnitDef",
+        "units": [{ "kind": "kilogram", "multiplier": 1e-3 }]
     },
     {
-        "id": "gray", "class": "UnitDef"
+        "id": "gray", "class": "UnitDef",
+        "units": [{ "kind": "metre", "multiplier": 1, "exponent": 2 }, { "kind": "second", "multiplier": 1, "exponent": -2 }]
     },
     {
         "id": "henry", "class": "UnitDef"
     },
     {
-        "id": "hertz", "class": "UnitDef"
+        "id": "hertz", "class": "UnitDef",
+        "units": [{ "kind": "second", "multiplier": 1, "exponent": -1 }]
     },
     {
         "id": "kelvin", "class": "UnitDef"
@@ -89,7 +92,8 @@
         "id": "siemens", "class": "UnitDef"
     },
     {
-        "id": "sievert", "class": "UnitDef"
+        "id": "sievert", "class": "UnitDef",
+        "units": [{ "kind": "metre", "multiplier": 1, "exponent": 2 }, { "kind": "second", "multiplier": 1, "exponent": -2 }]
     },
     {
         "id": "steradian", "class": "UnitDef"
@@ -99,5 +103,22 @@
     },
     {
         "id": "weber", "class": "UnitDef"
+    },
+
+    {
+        "id": "year", "class": "UnitDef",
+        "units": [{ "kind": "second", "multiplier": 31557600 }]
+    },
+    {
+        "id": "day", "class": "UnitDef",
+        "units": [{ "kind": "second", "multiplier": 86400 }]
+    },
+    {
+        "id": "hour", "class": "UnitDef",
+        "units": [{ "kind": "second", "multiplier": 3600 }]
+    },
+    {
+        "id": "minute", "class": "UnitDef",
+        "units": [{ "kind": "second", "multiplier": 60 }]
     }
 ]
