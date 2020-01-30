@@ -7,10 +7,9 @@
 %}
 
 sbioaddtolibrary(sbiounit('week', 'day', 7));
-sbioaddtolibrary(sbiounit('xxx', 'nanomole', 1));
 
-{% set model_id = image.id + "_model" -%}
-{{ model_id }} = sbiomodel('{{image.id}}');
+{% set model_id = _id + "_model" -%}
+{{ model_id }} = sbiomodel('{{_id}}');
 
 % Useful parameters
 addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
@@ -18,7 +17,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {% set listOfCompartments = image.population.selectByClassName('Compartment') -%}
 {{ "% Compartments" if listOfCompartments|length > 0 }}
 {%- for record in listOfCompartments %}
-{{image.id}}.compartment.{{record.id}} = addcompartment(
+{{_id}}.compartment.{{record.id}} = addcompartment(
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
   {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(image.unitTransformator, true) }}'{% endif -%}
@@ -28,8 +27,8 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {% set listOfSpecies = image.population.selectByClassName('Species') -%}
 {{ "% Species" if listOfSpecies|length > 0 }}
 {%- for record in listOfSpecies %}
-{{image.id}}.species.{{record.id}} = addspecies(
-  {{- image.id }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
+{{_id}}.species.{{record.id}} = addspecies(
+  {{- _id }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
   {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(image.unitTransformator, true) }}'{% endif -%}
   , 'BoundaryCondition', {{ record.boundary===true or record.implicitBoundary===true -}}
@@ -41,14 +40,14 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {% set listOfConstants = image.population.selectByClassName('Const') -%}
 {{ "% Parameters" if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 }}
 {%- for record in listOfParameters.concat(listOfProcesses) %}
-{{image.id}}.parameter.{{record.id}} = addparameter(
+{{_id}}.parameter.{{record.id}} = addparameter(
   {{- model_id }}, '{{record.id}}', 'ConstantValue', false
   {%- if record.assignments.start_.num!==undefined %}, 'Value', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsRebased(image.unitTransformator, true) }}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 {%- for con in listOfConstants %}
-{{image.id}}.parameter.{{con.id}} = addparameter(
+{{_id}}.parameter.{{con.id}} = addparameter(
   {{- model_id }}, '{{con.id}}', 'ConstantValue', true
   {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
   {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(image.unitTransformator, true) }}'{% endif -%}
@@ -58,23 +57,23 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {% set listOfReactions = image.population.selectByClassName('Reaction') -%}
 {{ "% Reactions" if listOfReactions|length > 0 }}
 {%- for record in listOfReactions %}
-{{image.id}}.reaction.{{record.id}} = addreaction(
+{{_id}}.reaction.{{record.id}} = addreaction(
   {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.aux.reversible!==false}}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
   {%- set fullActors = record.actors.concat(record.modifiers) -%}
   {% set reactants = fullActors|getReactants %}
   {%- if reactants|length > 0 %}
-  addreactant({{image.id}}.reaction.{{record.id}}, [
-    {%- for actor in reactants %}{{image.id}}.species.{{ actor.target }}, {% endfor -%}
+  addreactant({{_id}}.reaction.{{record.id}}, [
+    {%- for actor in reactants %}{{_id}}.species.{{ actor.target }}, {% endfor -%}
     ], [
     {%- for actor in reactants %}{{ -actor.stoichiometry if actor.stoichiometry<0 else 1 }}, {% endfor -%}
     ]);
   {%- endif %}
   {%- set products = fullActors|getProducts %}
   {%- if products|length > 0 %}
-  addproduct({{image.id}}.reaction.{{record.id}}, [
-    {%- for actor in products %}{{image.id}}.species.{{ actor.target }}, {% endfor -%}
+  addproduct({{_id}}.reaction.{{record.id}}, [
+    {%- for actor in products %}{{_id}}.species.{{ actor.target }}, {% endfor -%}
     ], [
     {%- for actor in products %}{{ actor.stoichiometry if actor.stoichiometry>0 else 1 }}, {% endfor -%}
     ]);
@@ -108,20 +107,20 @@ addrule(
 {{- "% Time Events" if listOfTimeEvents|length > 0 }}
 {% for event in listOfTimeEvents -%}
 {%- for record in image.population.selectRecordsByContext(event.id) -%}
-{{image.id}}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
-    {{image.id}}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
-    {{image.id}}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
-    {{image.id}}.dose.{{event.id}}.{{record.id}}.Interval = '{{event.period}}';
-    {{image.id}}.dose.{{event.id}}.{{record.id}}.RepeatCount = '{{event.repeatCount if event.repeatCount>0 else 0}}';
-    {{image.id}}.dose.{{event.id}}.{{record.id}}.StartTime = '{{event.start}}';
-    {{image.id}}.dose.{{event.id}}.{{record.id}}.Active = true;
+{{_id}}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
+    {{_id}}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
+    {{_id}}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
+    {{_id}}.dose.{{event.id}}.{{record.id}}.Interval = '{{event.period}}';
+    {{_id}}.dose.{{event.id}}.{{record.id}}.RepeatCount = '{{event.repeatCount if event.repeatCount>0 else 0}}';
+    {{_id}}.dose.{{event.id}}.{{record.id}}.StartTime = '{{event.start}}';
+    {{_id}}.dose.{{event.id}}.{{record.id}}.Active = true;
 {% endfor -%}
 {% endfor %}
 
 {% set listOfContinuousEvents = image.population.selectByClassName("ContinuousSwitcher") %}
 {{- "% Events" if listOfContinuousEvents|length > 0 }}
 {% for event in listOfContinuousEvents -%}
-{{image.id}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
+{{_id}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
   {%- for record in image.population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Notes', '{{event.notesHTML}}', 'Tag', '');

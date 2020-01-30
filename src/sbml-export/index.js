@@ -4,7 +4,7 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('../nunjucks-env');
 require('./expression');
 const legalUnits = require('./legal-units');
-const _ = require('lodash');
+const { createUnitTransformation } = require('../core/unit');
 
 class SBMLExport extends _Export {
   merge(q={}, skipChecking){
@@ -29,12 +29,10 @@ class SBMLExport extends _Export {
       .getPopulation(targetSpace, false);
 
     // create unit transformator based on unitDef and legalUnits
-    let unitTransformator = _.chain(population)
-      .filter((x) => x.className === 'UnitDef')
-      .map((x) => [x.id, x.unitsParsed])
-      .fromPairs()
-      .omit(legalUnits) // skip allowed units from transformator
-      .value();
+    let unitTransformator = createUnitTransformation(
+      population.filter((x) => x.className === 'UnitDef'),
+      legalUnits
+    );
 
     let listOfUnitDefinitions = population.getUniqueUnits()
       .map((units) => {

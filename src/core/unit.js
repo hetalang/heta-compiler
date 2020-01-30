@@ -325,9 +325,23 @@ class Unit extends Array {
       + listOfUnits
       + `\n  </listOfUnits>\n</unitDefinition>`;
   }
-  
+}
+
+/*
+  creates unit transformation object from array of unitDef
+*/
+function createUnitTransformation(unitDefArray = [], legalUnits = []){
+  let res = _.chain(unitDefArray)
+    .filter((x) => x.unitsParsed !== undefined)
+    .map((x) => [x.id, x.unitsParsed])
+    .fromPairs()
+    .omit(legalUnits) // skip allowed units from transformator
+    .value();
+    
+  return res;
 }
 
 module.exports = {
-  Unit
+  Unit,
+  createUnitTransformation
 };

@@ -5,7 +5,7 @@ const nunjucks = require('../nunjucks-env');
 const fs = require('fs');
 const path = require('path');
 const legalUnits = require('./legal-units');
-const _ = require('lodash');
+const { createUnitTransformation } = require('../core/unit');
 
 const fun = fs.readFileSync(
   path.join(__dirname, 'fun.m'),
@@ -42,15 +42,12 @@ class SimbioExport extends _Export{
       .getPopulation(targetSpace, false);
     
     // create unit transformator based on unitDef and legalUnits
-    let unitTransformator = _.chain(population)
-      .filter((x) => x.className === 'UnitDef')
-      .map((x) => [x.id, x.unitsParsed])
-      .fromPairs()
-      .omit(legalUnits) // skip allowed units from transformator
-      .value();
+    let unitTransformator = createUnitTransformation(
+      population.filter((x) => x.className === 'UnitDef'),
+      legalUnits
+    );
       
     return {
-      id: this.id, // not sure this is required
       population: population,
       unitTransformator: unitTransformator
     };
