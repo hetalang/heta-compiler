@@ -29,10 +29,8 @@ class Unit extends Array {
     return res;
   }
 
-  toQ(){
-    return this.map((component) => {
-      return component;
-    });
+  toQ(options = {}){
+    return this.map((x) => _.pick(x, ['kind', 'multiplier','exponent']));
   }
 
   rebase(transformator){
@@ -325,6 +323,7 @@ class Unit extends Array {
       + listOfUnits
       + `\n  </listOfUnits>\n</unitDefinition>`;
   }
+
 }
 
 /*
