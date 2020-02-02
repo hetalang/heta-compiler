@@ -5,7 +5,6 @@ const nunjucks = require('../nunjucks-env');
 const fs = require('fs');
 const path = require('path');
 const legalUnits = require('./legal-units');
-const { createUnitTransformation } = require('../core/unit');
 
 const fun = fs.readFileSync(
   path.join(__dirname, 'fun.m'),
@@ -40,16 +39,10 @@ class SimbioExport extends _Export{
   _getSimbioImage(targetSpace){
     let population = this._container
       .getPopulation(targetSpace, false);
-    
-    // create unit transformator based on unitDef and legalUnits
-    let unitTransformator = createUnitTransformation(
-      population.filter((x) => x.className === 'UnitDef'),
-      legalUnits
-    );
       
     return {
       population: population,
-      unitTransformator: unitTransformator
+      legalUnits: legalUnits
     };
   }
   getSimbioCode(){

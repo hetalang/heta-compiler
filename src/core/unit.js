@@ -32,8 +32,8 @@ class Unit extends Array {
   toQ(options = {}){
     return this.map((x) => _.pick(x, ['kind', 'multiplier','exponent']));
   }
-
-  rebase(transformator){
+  // old version of rebase, not used
+  rebase0(transformator){
     if(!transformator)
       throw new TypeError('Transformator should be set for rebase.');
     let newUnit = new Unit();
@@ -57,6 +57,33 @@ class Unit extends Array {
       }
     });
     return newUnit;
+  }
+  rebase(legalUnits = []){
+    let unit = new Unit();
+
+    this.forEach((x) => {
+      if (legalUnits.indexOf(x.kind) !== -1) { // any legal
+        let clearedUnit =_.pick(x, ['kind', 'exponent', 'multiplier']);
+        unit.push(clearedUnit);
+      } else if (x.kindObj.unitsParsed.length === 0) { // elementary but not legal
+        throw new Error(`Not defined unit: "${x.kind}"`);
+      } else { // 
+        let unitDefRebased = x.kindObj
+          .unitsParsed
+          .map((y) => {
+            // combine deep units with the current: 
+            // unit = (mult_x*u2)^exp_x = (mult_x * (mult_y*u3)^exp_y)^exp_x
+            return {
+              kind: y.kind,
+              exponent: y.exponent * x.exponent,
+              multiplier: y.multiplier * x.multiplier**(1/y.exponent)
+            };
+          });
+        unit = unit.concat(unitDefRebased);
+      }
+    });
+
+    return unit;
   }
 
   /**
@@ -120,6 +147,8 @@ class Unit extends Array {
             exponent: exponent,
             multiplier: multiplier
           };
+          // if there is reference to unitDef, than copy it
+          if (x[0].kindObj) res.kindObj = x[0].kindObj;
         }
 
         return res;
@@ -290,12 +319,12 @@ class Unit extends Array {
       .join('');
   }
 
-  toXmlUnitDefinition(transformator, options){
+  toXmlUnitDefinition(legalUnits = [], options){
     // set default options
     let _options = Object.assign({nameStyle: 'string', simplify: true}, options);
     let units = _options.simplify
-      ? this.rebase(transformator).simplify()
-      : this.rebase(transformator);
+      ? this.rebase(legalUnits).simplify()
+      : this.rebase(legalUnits);
 
     let listOfUnits = units
       .map((x) => {
@@ -326,28 +355,6 @@ class Unit extends Array {
 
 }
 
-/*
-  creates unit transformation object from array of unitDef
-*/
-function createUnitTransformation(unitDefArray = [], legalUnits = []){
-  // remove units which are already part of exported software
-  let cleared = _.chain(unitDefArray)
-    .map((x) => {
-      if (legalUnits.indexOf(x.id) === -1) {
-        return [x.id, x.unitsParsed];
-      } else {
-        return [x.id, undefined]; // skip allowed units from transformator
-      }
-    })
-    .fromPairs()
-    .value();
-
-  let res = _.omitBy(cleared, _.isUndefined);
-    
-  return res;
-}
-
 module.exports = {
-  Unit,
-  createUnitTransformation
+  Unit
 };

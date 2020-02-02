@@ -6,7 +6,7 @@ const { expect } = require('chai');
 describe('Unit test for UnitDef', () => {
   it('Empty UnitDef', () => {
     let simple = new UnitDef;
-    expect(simple.units).to.be.undefined;
+    expect(simple.units).to.be.equal('');
   });
 
   it('Correct UnitDef', () => {
