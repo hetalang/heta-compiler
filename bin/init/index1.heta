@@ -2,10 +2,7 @@
   template file for creating platform
 */
 // add qsp units
-// comment next line if not required
 include ./qsp-units.heta
-
-p1 @Record .= 1;
 
 // @Const
 include ./table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
@@ -21,4 +18,13 @@ include ./table.xlsx type xlsx with { sheet: 5, omitRows: 3 }
 // include addon.json type json
 // include addon.yml type yaml
 
-sbml1 @SBMLExport { filepath: model };
+p1 @Record .= 1;
+
+// exports
+output_sbml @SBMLExport { filepath: sbml, version: L2V4 };
+//output_slv @SLVExport { filepath: model, eventsOff: false };
+//output_json @JSONExport { filepath: output };
+//output_yaml @YAMLExport { filepath: output };
+//output_simbio @SimbioExport { filepath: simbio };
+//output_mrg @MrgsolveExport { filepath: mrgsolve };
+//output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };
