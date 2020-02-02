@@ -61,15 +61,17 @@ class Unit extends Array {
   rebase(legalUnits = []){
     let unit = new Unit();
 
+    if (this.length === 0)
+      throw new TypeError('Cannot use rebase for empty Unit');
+
     this.forEach((x) => {
       if (legalUnits.indexOf(x.kind) !== -1) { // any legal
         let clearedUnit =_.pick(x, ['kind', 'exponent', 'multiplier']);
         unit.push(clearedUnit);
-      } else if (x.kindObj.unitsParsed.length === 0) { // elementary but not legal
-        throw new Error(`Not defined unit: "${x.kind}"`);
-      } else { // 
+      } else {
         let unitDefRebased = x.kindObj
           .unitsParsed
+          .rebase(legalUnits)
           .map((y) => {
             // combine deep units with the current: 
             // unit = (mult_x*u2)^exp_x = (mult_x * (mult_y*u3)^exp_y)^exp_x
