@@ -9,7 +9,8 @@
         "id": "second", "class": "UnitDef"
     },
     {
-        "id": "kilogram", "class": "UnitDef"
+        "id": "kilogram", "class": "UnitDef",
+        "units": [{ "kind": "gram", "multiplier": 1e3, "exponent": 1 }]
     },
     {
         "id": "katal", "class": "UnitDef",
@@ -56,8 +57,7 @@
         "id": "farad", "class": "UnitDef"
     },
     {
-        "id": "gram", "class": "UnitDef",
-        "units": [{ "kind": "kilogram", "multiplier": 1e-3 }]
+        "id": "gram", "class": "UnitDef"
     },
     {
         "id": "gray", "class": "UnitDef",
