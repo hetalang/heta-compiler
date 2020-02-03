@@ -1,22 +1,13 @@
 const { _Size } = require('../core/_size');
-//const qspToGSK = require('./qsp-to-gsk');
+//const legalUnits = require('./legal-units');
 
 _Size.prototype.toFlat = function(options = {}){
 
   //let res = super.toFlat(options);
   let res = _Size.__proto__.prototype.toFlat.call(this, options);
 
-  //res.unitsGSK = this.unitsGSK(); // solution where units are transformated
+  // res.unitsGSK = this.unitsRebased(legalUnits, usePefix = false); // with unit transformation
   res.unitsGSK = this.units; // units without transformation
 
   return res;
 };
-/*
-_Size.prototype.unitsGSK = function(){
-  return this.unitsParsed
-    ? this.unitsParsed
-      .rebase(qspToGSK)
-      .toString()
-    : undefined;
-};
-*/
