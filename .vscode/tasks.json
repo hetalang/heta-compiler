@@ -42,6 +42,12 @@
             "type": "shell",
             "command": "qs3p build cases/6-import",
             "group": "test"
+        },
+        {
+            "label": "case-7",
+            "type": "shell",
+            "command": "qs3p build cases/7-importNS",
+            "group": "test"
         }
     ]
 }

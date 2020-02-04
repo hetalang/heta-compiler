@@ -32,3 +32,4 @@
 1. FunctionDefinition + function checking
 1. ContinuousSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
+1. сделать this.namespace._space <= this._space
