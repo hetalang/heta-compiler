@@ -132,18 +132,16 @@ class Container {
     namespace._isAbstract = q.type === 'abstract';
   }
   /* 
-    clone space components to another space
+    clone all components to another space
     #importNS two::* {
       fromSpace: one,
-      //from: two::*
       prefix: '',
       suffix: '',
       rename: {}
     };
   */
-  /*
   importNS(q = {}){
-    let toClone = this.storage.selectBySpace(q.fromSpace);
+    let space = q.space || 'nameless';
     if(q.fromId)
       throw new QueueError(q, `fromId must not be set for #importNS, but have "${q.fromId}"`);
     if(q.id)
@@ -154,26 +152,34 @@ class Container {
       rename: {}
     });
 
-    let clones = toClone.map((component) => {
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      throw new QueueError(q, `Create namespace "${space}" before use.`);
+
+    let fromNamespace = this.namespaces.get(q.fromSpace);
+    if (fromNamespace === undefined)
+      throw new QueueError(q, `Create namespace "${q.fromSpace}" before use.`);
+
+    let clones = fromNamespace.toArray().map((component) => {
       // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
-      q.id = _.get(
+      let newId = _.get(
         q.rename, 
         component.id,
         [q.prefix, component.id, q.suffix].join('') // default value
       );
 
       // cloning and update references
-      let clone = component.clone(q);
+      let clone = component.clone({id: newId, space: q.space});
       clone.updateReferences(q);
 
-      this.storage.set(clone.index, clone);
+      namespace.set(newId, clone);
 
       return clone;
     });
 
     return clones;
   }
-  */
+
   /*
     the same as importNS but delete all elements from source namespace
   */
