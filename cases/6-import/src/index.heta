@@ -4,6 +4,7 @@ k1 @Const = 1e-3;
 
 // concrete namespace model begin
 namespace model begin
+  #importNS { fromSpace: nameless };
   comp @Compartment .= 1;
   A @Species { compartment: comp };
   B @Species { compartment: comp };

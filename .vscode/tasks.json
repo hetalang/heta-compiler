@@ -36,6 +36,12 @@
             "type": "shell",
             "command": "qs3p build cases/5-tasks",
             "group": "test"
+        },
+        {
+            "label": "case-6",
+            "type": "shell",
+            "command": "qs3p build cases/6-import",
+            "group": "test"
         }
     ]
 }

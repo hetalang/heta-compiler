@@ -45,7 +45,7 @@ describe('Testing "cases/6-import"', () => {
     let json_export = new JSONExport;
     json_export._id = 'output_json';
     json_export._space = 'model';
-    json_export._container = b.container;
+    json_export.namespace = b.container.namespaces.get('model');
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);
