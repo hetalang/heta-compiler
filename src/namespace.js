@@ -11,6 +11,13 @@ class Namespace extends Map {
   toArray(){
     return [...this].map((x) => x[1]);
   }
+  toQArr(removeCoreComponents = false){
+    let qArr = this.toArray()
+      .filter((x) => !removeCoreComponents || !x.isCore)
+      .map((x) => x.toQ());
+    
+    return qArr;
+  }
   selectByClassName(className){
     return this
       .toArray()

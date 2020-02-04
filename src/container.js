@@ -259,9 +259,8 @@ class Container {
   }
   toArray(){
     return _.chain([...this.namespaces])
-      .map((x) => [...x[1]])
+      .map((x) => x[1].toArray())
       .flatten()
-      .map((x) => x[1])
       .value();
   }
   toQArr(removeCoreComponents = false){

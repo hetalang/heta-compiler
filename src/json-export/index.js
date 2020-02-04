@@ -7,10 +7,7 @@ class JSONExport extends _Export {
     return 'JSONExport';
   }
   make(){
-    let qArr = this.namespace
-      .toArray()
-      .filter((x) => !x.isCore)
-      .map((x) => x.toQ());
+    let qArr = this.namespace.toQArr(true);
     
     return [{
       content: JSON.stringify(qArr, null, 2),

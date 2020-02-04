@@ -33,3 +33,4 @@
 1. ContinuousSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
 1. сделать this.namespace._space <= this._space
+1. _ for nameless space
