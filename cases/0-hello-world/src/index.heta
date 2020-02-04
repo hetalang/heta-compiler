@@ -23,6 +23,11 @@ namespace mm begin
   P .= 0;
 end
 
+#importNS {
+  fromSpace: nameless, 
+  space: mm
+};
+
 mm::mm_sbml @SBMLExport { title: Exported mm model};
 mm::mm_simbio @SimbioExport;
 mm::full_json @JSONExport;

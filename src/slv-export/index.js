@@ -42,7 +42,7 @@ class SLVExport extends _Export{
   _getSLVImage(){
     // creates empty model image
     let model = {
-      population: this.namespace.toArray()
+      population: this.namespace
     };
 
     // add default_compartment_
@@ -56,11 +56,12 @@ class SLVExport extends _Export{
     });
     default_compartment_._id = 'default_compartment_';
     default_compartment_._space = this.space;
-    model.population.push(default_compartment_);
-
+    //model.population.push(default_compartment_);
+ 
     // push active processes
     model.processes = new XArray();
     model.population
+      .toArray()
       .filter((x) => {
         return x.instanceOf('Process')
           && x.actors.length>0 // process with actors
@@ -72,6 +73,7 @@ class SLVExport extends _Export{
     // push non boundary ode variables which are mentioned in processes
     model.variables = new XArray();
     model.population
+      .toArray()
       .filter((x) => x.instanceOf('Record') && x.isDynamic)
       .forEach((record) => model.variables.push(record));
     // create matrix
@@ -88,9 +90,8 @@ class SLVExport extends _Export{
 
     // create and sort expressions for RHS
     model.rhs = model.population
-      .selectByInstanceOf('Record')
-      .filter((record) => _.has(record, 'assignments.ode_'))
-      .sortExpressionsByContext('ode_');
+      .sortExpressionsByContext('ode_')
+      .filter((record) => record.instanceOf('Record') && _.has(record, 'assignments.ode_'));
     // check that all record in start are not Expression
     let startExpressions = model.population
       .selectRecordsByContext('start_')

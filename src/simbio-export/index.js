@@ -37,10 +37,8 @@ class SimbioExport extends _Export{
     ];
   }
   _getSimbioImage(){
-    let population = this.namespace.toArray();
-      
     return {
-      population: population,
+      population: this.namespace,
       legalUnits: legalUnits
     };
   }

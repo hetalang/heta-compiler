@@ -1,5 +1,70 @@
 [
   {
+    "class": "Compartment",
+    "id": "default_comp",
+    "space": "mm",
+    "title": "Default compartment",
+    "notes": "Note for the Default compartment",
+    "units": "L",
+    "assignments": {
+      "start_": {
+        "expr": "1"
+      }
+    }
+  },
+  {
+    "class": "Species",
+    "id": "S",
+    "space": "mm",
+    "title": "substrate",
+    "units": "uM",
+    "assignments": {
+      "start_": {
+        "expr": "10"
+      }
+    },
+    "compartment": "default_comp"
+  },
+  {
+    "class": "Species",
+    "id": "P",
+    "space": "mm",
+    "title": "product",
+    "units": "uM",
+    "assignments": {
+      "start_": {
+        "expr": "0"
+      }
+    },
+    "compartment": "default_comp"
+  },
+  {
+    "class": "Reaction",
+    "id": "r1",
+    "space": "mm",
+    "title": "Michaelis-Menten reaction",
+    "notes": "Transformation of __substate__ to __product__",
+    "aux": {
+      "reversible": false
+    },
+    "units": "umole/min",
+    "assignments": {
+      "ode_": {
+        "expr": "Vmax * S / (Km + S) * default_comp"
+      }
+    },
+    "actors": [
+      {
+        "target": "S",
+        "stoichiometry": -1
+      },
+      {
+        "target": "P",
+        "stoichiometry": 1
+      }
+    ]
+  },
+  {
     "class": "UnitDef",
     "id": "year",
     "space": "mm",
@@ -95,8 +160,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -112,8 +177,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -129,8 +194,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -146,8 +211,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -163,8 +228,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -180,8 +245,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -197,8 +262,8 @@
       },
       {
         "kind": "litre",
-        "exponent": -1,
-        "multiplier": 1
+        "multiplier": 1,
+        "exponent": -1
       }
     ]
   },
@@ -658,71 +723,6 @@
     "space": "mm",
     "units": "uM",
     "num": 2.5
-  },
-  {
-    "class": "Compartment",
-    "id": "default_comp",
-    "space": "mm",
-    "title": "Default compartment",
-    "notes": "Note for the Default compartment",
-    "units": "L",
-    "assignments": {
-      "start_": {
-        "expr": "1"
-      }
-    }
-  },
-  {
-    "class": "Species",
-    "id": "S",
-    "space": "mm",
-    "title": "substrate",
-    "units": "uM",
-    "assignments": {
-      "start_": {
-        "expr": "10"
-      }
-    },
-    "compartment": "default_comp"
-  },
-  {
-    "class": "Species",
-    "id": "P",
-    "space": "mm",
-    "title": "product",
-    "units": "uM",
-    "assignments": {
-      "start_": {
-        "expr": "0"
-      }
-    },
-    "compartment": "default_comp"
-  },
-  {
-    "class": "Reaction",
-    "id": "r1",
-    "space": "mm",
-    "title": "Michaelis-Menten reaction",
-    "notes": "Transformation of __substate__ to __product__",
-    "aux": {
-      "reversible": false
-    },
-    "units": "umole/min",
-    "assignments": {
-      "ode_": {
-        "expr": "Vmax * S / (Km + S) * default_comp"
-      }
-    },
-    "actors": [
-      {
-        "target": "S",
-        "stoichiometry": -1
-      },
-      {
-        "target": "P",
-        "stoichiometry": 1
-      }
-    ]
   },
   {
     "class": "SBMLExport",

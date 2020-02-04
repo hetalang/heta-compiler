@@ -179,7 +179,6 @@ class Container {
 
     return clones;
   }
-
   /*
     the same as importNS but delete all elements from source namespace
   */
@@ -206,28 +205,36 @@ class Container {
       rename: {}
     };
   */
-  /*
   import(q = {}){
+    let space = q.space || 'nameless';
     // checking arguments
     if(!q.fromId || (typeof q.fromId !== 'string'))
       throw new QueueError(q, `fromId should be string, but have "${q.fromId}"`);
     if(q.fromSpace && (typeof q.fromSpace !== 'string'))
       throw new QueueError(q, `fromSpace should be string, but have "${q.fromSpace}"`);
       
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      throw new QueueError(q, `Create namespace "${space}" before use.`);
+
+    let fromNamespace = this.namespaces.get(q.fromSpace);
+    if (fromNamespace === undefined)
+      throw new QueueError(q, `Create namespace "${q.fromSpace}" before use.`);
+
     // select component to copy
-    let component = this.select({id: q.fromId, space: q.fromSpace});
+    let component = fromNamespace.get(q.fromId);
     if(!component)
-      throw new QueueError(q, `Element with ${getIndexFromQ({id: q.fromId, space: q.fromSpace})} does not exist and cannot be cloned.`);
+      throw new QueueError(q, `Element with ${q.fromId}::${q.fromSpace})} does not exist and cannot be cloned.`);
 
     // cloning and update references
-    let clone = component.clone(q);
+    let clone = component.clone({id: q.id, space: q.space});
     clone.updateReferences(q);
 
-    this.storage.set(clone.index, clone);
+    namespace.set(q.id, clone);
 
     return clone;
   }
-  */
+
   /*
    the same as import but delete source component
   

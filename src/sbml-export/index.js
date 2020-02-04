@@ -24,16 +24,14 @@ class SBMLExport extends _Export {
     }];
   }
   _getSBMLImage(){
-    let population = this.namespace.toArray();
-
-    let listOfUnitDefinitions = population.getUniqueUnits()
+    let listOfUnitDefinitions = this.namespace.getUniqueUnits()
       .map((units) => {
         return units
           .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
       });
       
     return {
-      population: population,
+      population: this.namespace,
       listOfUnitDefinitions: listOfUnitDefinitions
     };
   }

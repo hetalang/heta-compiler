@@ -40,12 +40,13 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'"+con.title+"'" if con.title }} {units: {{ con.units|default('?') }}};
 {%- else -%}// nothing here
 {% endfor %}
-{% set ivElements = _model_.population|exclude2("assignments.start_.num", undefined) %}
-//! Initialization at start, count: {{ ivElements|length }}
+{% set ivElements = _model_.population.toArray()|exclude2("assignments.start_.num", undefined) %}
+//! Initialization at start, count: {{ ivElements|length + 1}}
 {%- for number in ivElements %}
 {{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {{ "'"+number.title+"'" if number.title }} {units: {{ number.units|default('?') }}}
 {%- else -%}// nothing here
 {% endfor %}
+default_compartment_ = 1; // {units: UL} This is fake compartment to support compounds without compartment.
 {% set switchers = _model_.population.selectByClassName("TimeSwitcher")%}
 {% if switchers|length > 0 %}
 //! Switchers for time events, count {{ switchers|length }}
