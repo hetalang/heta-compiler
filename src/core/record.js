@@ -54,8 +54,8 @@ class Record extends _Size {
       });
     }
   }
-  bind(container, skipErrors = false){
-    super.bind(container, skipErrors);
+  bind(namespace, skipErrors = false){
+    super.bind(namespace, skipErrors);
 
     let messages = [];
     
@@ -65,10 +65,7 @@ class Record extends _Size {
         this
           .dependOn(key)
           .forEach((id) => {
-            let target = container.select({
-              id: id, 
-              space: this.space
-            });
+            let target = namespace.get(id);
 
             if(!target){
               messages.push(`Component "${id}" is not found in space "${this.space}" as expected in expression: `
@@ -100,7 +97,7 @@ class Record extends _Size {
   get implicitBoundary(){
     return _.has(this, 'assignments.ode_'); // this is rule
   }
-  // works properly only after populate()
+  // works properly only after knit()
   get isDynamic(){
     return !this.boundary
       && !this.implicitBoundary

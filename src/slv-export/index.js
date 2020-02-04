@@ -39,10 +39,10 @@ class SLVExport extends _Export{
    *
    * @return {undefined}
    */
-  _getSLVImage(targetSpace){
+  _getSLVImage(){
     // creates empty model image
     let model = {
-      population: this._container.getPopulation(targetSpace, false)
+      population: this.namespace.toArray()
     };
 
     // add default_compartment_
@@ -55,7 +55,7 @@ class SLVExport extends _Export{
       notes: 'This is fake compartment to support compounds without compartment.'
     });
     default_compartment_._id = 'default_compartment_';
-    default_compartment_._space = targetSpace;
+    default_compartment_._space = this.space;
     model.population.push(default_compartment_);
 
     // push active processes
@@ -64,7 +64,9 @@ class SLVExport extends _Export{
       .filter((x) => {
         return x.instanceOf('Process')
           && x.actors.length>0 // process with actors
-          && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary); // true if there is at least non boundary target
+          && x.actors.some((actor) => { // true if there is at least non boundary target
+            return !actor.targetObj.boundary && !actor.targetObj.implicitBoundary;
+          });
       })
       .forEach((process) => model.processes.push(process));
     // push non boundary ode variables which are mentioned in processes

@@ -1,28 +1,38 @@
 /* global describe, it */
 const { Container } = require('../../src');
-// const { Page } = c.classes;
 const { expect } = require('chai');
 
-describe('Test select() and softSelect()', () => {
-  let c = new Container();
-  c.load({
-    class: 'Species',
-    id: 'sp1',
-    space: 'one'
+describe('Test select()', () => {
+  let c;
+
+  it('Create container', () => {
+    c = new Container();
+    c.loadMany([
+      {
+        action: 'setNS',
+        space: 'one'
+      },
+      {
+        class: 'Species',
+        id: 'sp1',
+        space: 'one'
+      },
+      {
+        class: 'Species',
+        id: 'sp2',
+        space: 'one'
+      },
+      {
+        class: 'Const',
+        id: 'sp1'
+      },
+      {
+        class: 'Const',
+        id: 'sp3'
+      }
+    ]);
   });
-  c.load({
-    class: 'Species',
-    id: 'sp2',
-    space: 'one'
-  });
-  c.load({
-    class: 'Const',
-    id: 'sp1'
-  });
-  c.load({
-    class: 'Const',
-    id: 'sp3'
-  });
+
   it('Check select() for existed local.', () => {
     let sp1 = c.select({id: 'sp1', space: 'one'});
     expect(sp1).to.have.property('className', 'Species');

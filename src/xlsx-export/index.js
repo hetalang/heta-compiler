@@ -43,8 +43,9 @@ class XLSXExport extends _Export {
       'title', 'notes', 'tags[]'
     ];
 
-    let qArr = this._container
-      .getPopulation(this.space, true)
+    let qArr = this.namespace
+      .toArray()
+      .filter((x) => !x.isCore)
       .map((x) => x.toFlat());
 
     // split qArr to several sheets

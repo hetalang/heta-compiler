@@ -14,7 +14,7 @@ class MrgsolveExport extends _Export{
     return 'MrgsolveExport';
   }
   make(){
-    this._model_ = this._getMrgsolveImage(this.space);
+    this._model_ = this._getMrgsolveImage();
 
     return [{
       content: this.getMrgsolveCode(),
@@ -22,9 +22,9 @@ class MrgsolveExport extends _Export{
       type: 'text'
     }];
   }
-  _getMrgsolveImage(targetSpace){
+  _getMrgsolveImage(){
     let model = {
-      population: this._container.getPopulation(targetSpace)
+      population: this.namespace.toArray()
     };
 
     // set dynamic variables

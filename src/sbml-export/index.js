@@ -15,7 +15,7 @@ class SBMLExport extends _Export {
     return 'SBMLExport';
   }
   make(){
-    this.image = this._getSBMLImage(this.space);
+    this.image = this._getSBMLImage();
 
     return [{
       content: this.getSBMLCode(),
@@ -23,9 +23,8 @@ class SBMLExport extends _Export {
       type: 'text'
     }];
   }
-  _getSBMLImage(targetSpace){
-    let population = this._container
-      .getPopulation(targetSpace, false);
+  _getSBMLImage(){
+    let population = this.namespace.toArray();
 
     let listOfUnitDefinitions = population.getUniqueUnits()
       .map((units) => {

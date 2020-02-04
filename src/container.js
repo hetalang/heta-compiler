@@ -12,62 +12,29 @@ const { Page } = require('./core/page');
 const { Const } = require('./core/const');
 const { SimpleTask } = require('./core/simple-task');
 const _ = require('lodash');
-const XArray = require('./x-array');
+const { Namespace } = require('./namespace');
 
 // they cannot be used as id, when 
 const reservedWords = [
   'default',
   'id',
-  'space'
+  'space',
+  'nameless'
 ];
-
-class Storage extends Map {
-  set(key, value){
-    // argument checking
-    let keyIsCorrect = /^([a-zA-Z_]\w*::)*([a-zA-Z_]\w*)$/.test(key);
-    if(!keyIsCorrect) 
-      throw new TypeError('Wrong index in Storage: ' + key);
-
-    if(!value.instanceOf('_Component'))
-      throw new TypeError('Value in Storage should be _Component, but we have: ' + value);
-
-    super.set(key, value);
-    let indexArray = _.reverse(key.split('::'));
-    value._id = indexArray[0];
-    if(indexArray.length > 1) value._space = indexArray[1];
-
-    return this;
-  }
-  selectBySpace(space){
-    if(space===undefined){
-      var res = [...this].filter((item) => {
-        let indexArray = item[0].split('::');
-        return indexArray.length===1;
-      });
-    } else {
-      res = [...this].filter((item) => {
-        let indexArray = item[0].split('::');
-        return indexArray.length===2 && indexArray[0]===space;
-      });
-    }
-
-    return res.map((item) => item[1]);
-  }
-}
 
 class Container {
   constructor(){
-    this.storage = new Storage();
-    this.namespaces = [{
-      name: undefined, // for anonimous
-      abstract: undefined, // undefined => can be changed by @_Export, true => @_Export is not allowed, false => bindings
-      private: false // cannot be included
-    }];
+    this._namespaces = new Map();
+    // default namespace
+    let nameless = new Namespace();
+    nameless._isAbstract = false;
+    this._namespaces.set('nameless', nameless);
   }
-  get nsList(){
-    return this.namespaces.map((ns) => ns.name);
+  get namespaces(){
+    return this._namespaces;
   }
   insert(q = {}, isCore = false){
+    let space = q.space || 'nameless';
     // check index
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, but have "${q.id}"`);
@@ -75,33 +42,42 @@ class Container {
       throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
     if(!q.class || typeof q.class !== 'string')
       throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
-    // TODO: check targer if it is read-only
 
     // check if class is in the list
     let selectedClass = this.classes[q.class];
-    if(selectedClass===undefined)
+    if(selectedClass === undefined)
       throw new QueueError(q, `Unknown class "${q.class}" for the element.`);
     let component = (new selectedClass(isCore)).merge(q);
 
-    let index = getIndexFromQ(q);
-    this.storage.set(index, component);
+    // set component in namespace
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      throw new QueueError(q, `Create namespace "${space}" before use.`);
+    component._id = q.id;
+    component._space = q.space;
+    namespace.set(q.id, component);
     if(component.instanceOf('_Export')) { // include parent
-      component._container = this;
+      component.namespace = namespace;
     }
 
     return component;
   }
   update(q = {}){
+    let space = q.space || 'nameless';
     if(!q.id || (typeof q.id !== 'string')){
       throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     }
     if(q.class)
       throw new QueueError(q, `Class property is not allowed for "update": ${q.class}`);
-    let index = getIndexFromQ(q);
-    let targetComponent = this.storage.get(index);
+
+    // set component
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      throw new QueueError(q, `Create namespace "${space}" before use.`);
+    let targetComponent = namespace.get(q.id);
 
     // creation of new components is not allowed
-    if(targetComponent===undefined)
+    if(targetComponent === undefined)
       throw new QueueError(q, 'Element with the index is not exist which is not allowed for "update" strategy.');
     if(targetComponent.isCore)
       throw new QueueError(q, 'Core component is read-only and cannot be updated.');
@@ -114,40 +90,46 @@ class Container {
     if('class' in q){
       return this.insert(q, isCore);
     }else{
-      return this.update(q, isCore);
+      return this.update(q);
     }
   }
-  delete(q = {}, isCore = false){
+  delete(q = {}){
+    let space = q.space || 'nameless';
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, but have "${q.id}"`);
     if(q.class)
       throw new QueueError(q, `Class property is not allowed for "delete": ${q.class}`);
-    let index = getIndexFromQ(q);
-    let targetComponent = this.storage.delete(index);
+
+    // set component
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      throw new QueueError(q, `Create namespace "${space}" before use.`);
+    let targetComponent = namespace.get(q.id);
     if(!targetComponent) // if targetComponent===false, element is not exist
-      throw new QueueError(q, 'Element with index is not exist and cannot be deleted.');
+      throw new QueueError(q, `Element with id "${q.id}" does not exist and cannot be deleted.`);
     if(targetComponent.isCore)
       throw new QueueError(q, 'Core component is read-only and cannot be deleted.');
-
-    return targetComponent; // true or false
+    
+    return namespace.delete(q.id); // true or false
   }
   select(q = {}){
+    let space = q.space || 'nameless';
     if(!q.id || (typeof q.id !== 'string'))
       throw new QueueError(q, `Id should be string, got "${q.id}"`);
-    let index = getIndexFromQ(q);
-    
-    return this.storage.get(index);
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      throw new QueueError(q, `Create namespace "${space}" before use.`);
+
+    return namespace.get(q.id);
   }
   setNS(q = {}){
-    // do nothing: temporal solution
-    /*
-    if(this.namespaces.indexOf(q.space)===-1){
-      this.namespaces.push({ name: q.space, abstract: q.abstract });
-      this.importNS({ space: q.space }, true);
-    }else{
-      throw new QueueError(q, `Namespace ${q.space} was already initiated.`);
+    // create namespace if not exists
+    let namespace = this.namespaces.get(q.space);
+    if (namespace === undefined){
+      namespace = new Namespace();
+      this._namespaces.set(q.space, namespace);
     }
-    */
+    namespace._isAbstract = q.type === 'abstract';
   }
   /* 
     clone space components to another space
@@ -159,6 +141,7 @@ class Container {
       rename: {}
     };
   */
+  /*
   importNS(q = {}){
     let toClone = this.storage.selectBySpace(q.fromSpace);
     if(q.fromId)
@@ -190,9 +173,11 @@ class Container {
 
     return clones;
   }
+  */
   /*
     the same as importNS but delete all elements from source namespace
   */
+  /*
   moveNS(q = {}){
     let toClone = this.storage.selectBySpace(q.fromSpace);
     let clones = this.importNS(q);
@@ -203,6 +188,7 @@ class Container {
 
     return clones;
   }
+  */
   /* 
     clones element updating id, space and referencies
     #import two::k2 {
@@ -214,6 +200,7 @@ class Container {
       rename: {}
     };
   */
+  /*
   import(q = {}){
     // checking arguments
     if(!q.fromId || (typeof q.fromId !== 'string'))
@@ -234,9 +221,10 @@ class Container {
 
     return clone;
   }
+  */
   /*
    the same as import but delete source component
-  */
+  
   move(q = {}){
     let clone = this.import(q);
 
@@ -245,12 +233,8 @@ class Container {
 
     return clone;
   }
+  */
   load(q, isCore = false){
-    // push to spaces list and use anonimous
-    if(this.nsList.indexOf(q.space)===-1){
-      this.namespaces.push({ name: q.space });
-      this.importNS({ space: q.space }, true);
-    }
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
     // do action
@@ -260,36 +244,33 @@ class Container {
     qArr.forEach((q) => this.load(q, isCore));
     return this;
   }
+  toArray(){
+    return _.chain([...this.namespaces])
+      .map((x) => [...x[1]])
+      .flatten()
+      .map((x) => x[1])
+      .value();
+  }
   toQArr(removeCoreComponents = false){
-    let qArr = [...this.storage]
-      .filter((obj) => !removeCoreComponents || !obj[1].isCore)
-      .map((obj) => obj[1].toQ());
-
+    let qArr = this.toArray()
+      .filter((x) => !removeCoreComponents || !x.isCore)
+      .map((x) => x.toQ());
+    
     return qArr;
   }
   get length(){
-    return this.storage.size;
+    return _.sumBy([...this.namespaces], (x) => x[1].size);
   }
   // check all components and add references
-  populate(skipErrors = false){
-    [...this.storage].map((x) => x[1])
-      .forEach((component) => component.bind(this, skipErrors)); // iterates all components
+  knit(skipErrors = false){
+    [...this.namespaces].forEach((x) => {
+      let ns = x[1];
+      ns.forEach((component) => { // iterates all components
+        component.bind(ns, skipErrors);
+      });
+    });
 
     return this;
-  }
-  getPopulation(targetSpace, removeCoreComponents = false){
-    // argument checking
-    if(targetSpace!==undefined && typeof targetSpace!=='string'){
-      throw new TypeError('targetSpace must be string');
-    }
-    let children = [...this.storage]
-      .filter((x) => x[1].space===targetSpace)
-      .map((x) => x[1]); // get array
-    let population = removeCoreComponents
-      ? (new XArray(...children)).filter((component) => !component.isCore)
-      : new XArray(...children);
-
-    return population;
   }
 }
 
@@ -307,7 +288,7 @@ Container.prototype.classes = {
   Page,
   Const
 };
-
+/*
 // converts {id: 'k1', space: 'one'} => 'one.k1'
 function getIndexFromQ(q = {}){
   if(q.space!==undefined){
@@ -316,5 +297,5 @@ function getIndexFromQ(q = {}){
     return q.id;
   }
 }
-
+*/
 module.exports = Container;

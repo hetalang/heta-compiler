@@ -8,8 +8,11 @@ const { _Component } = require('../../src/core/_component');
 describe('Unit tests for Container', () => {
   var c;
 
-  it('Creating empty container.', () => {
+  it('Creating empty container and three namespaces.', () => {
     c = new Container();
+    c.setNS({space: 'three'});
+    c.setNS({space: 'another'});
+    c.setNS({space: 'default__'});
   });
 
   describe('Test insert() correct.', () => {
@@ -27,9 +30,9 @@ describe('Unit tests for Container', () => {
         suffix: '/'
       });
       expect(res).to.be.instanceOf(_Component);
-      expect(c.storage.size).to.be.eql(1);
+      expect(c.length).to.be.eql(1);
 
-      let simple = c.storage.get('pmid1');
+      let simple = c.namespaces.get('nameless').get('pmid1');
       expect(simple).to.has.property('prefix', 'https://pubmed.org/');
       expect(simple).to.has.property('suffix', '/');
       expect(simple).to.has.property('className', 'ReferenceDefinition');
@@ -49,10 +52,10 @@ describe('Unit tests for Container', () => {
         id: 'pmid2',
         prefix: 'https://google.com'
       });
-      let simple = c.storage.get('pmid2');
+      let simple = c.namespaces.get('nameless').get('pmid2');
       expect(simple).to.have.property('prefix', 'https://google.com');
       expect(simple).to.have.property('space', undefined);
-      expect(c.storage.size).to.be.eql(2);
+      expect(c.length).to.be.eql(2);
     });
 
     it('Insert components with space.', () => {
@@ -63,10 +66,10 @@ describe('Unit tests for Container', () => {
         prefix: 'xxx',
         suffix: '/'
       });
-      let component = c.storage.get('three::pmid4');
+      let component = c.namespaces.get('three').get('pmid4');
       expect(component).to.have.property('prefix', 'xxx');
       expect(component).to.have.property('space', 'three');
-      expect(c.storage.size).to.be.eql(3);
+      expect(c.length).to.be.eql(3);
     });
 
     it('Insert scoped component and check.', () => {
@@ -75,9 +78,9 @@ describe('Unit tests for Container', () => {
         id: 'pg1',
         space: 'another'
       });
-      let simple = c.storage.get('another::pg1');
+      let simple = c.namespaces.get('another').get('pg1');
       expect(simple).to.has.property('space', 'another');
-      expect(c.storage.size).to.be.eql(4);
+      expect(c.length).to.be.eql(4);
     });
   });
 
@@ -157,9 +160,11 @@ describe('Unit tests for Container', () => {
       expect(() => c.insert({id: 'pmid3', class: 'ReferenceDefinition2'})).to.throw(ContainerError);
       expect(() => c.insert({id: '1xxx', class: 'ReferenceDefinition'})).to.throw(ContainerError);
 
-      expect(c.storage.size).to.be.eql(9);
+      expect(c.length).to.be.eql(9);
+    });
 
-      // console.log(c);
+    it('Insert to wrong namespace', () => {
+      expect(() => c.insert({id: 'k1', class: 'Const', space: 'wrong', num: 1})).to.throw(Error);
     });
   });
 });

@@ -44,6 +44,10 @@
     "num": 2.2, "units": "m^2"
   },
   {
+    "action": "setNS",
+    "space": "two_comp"
+  },
+  {
     "class": "SBMLExport", "id": "sbml",
     "space": "two_comp"
   },

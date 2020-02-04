@@ -23,6 +23,9 @@ class _Component {
 
     return this;
   }
+  get isComponent(){
+    return true;
+  }
   get isCore(){
     return this._isCore;
   }
@@ -136,17 +139,15 @@ class _Component {
     - check properties based on requirements(): required, find by symbol link
     - create virtual component if local prop refferences to global component
   */
-  bind(container, skipErrors = false){
-    if(!container) throw new TypeError('"container" argument should be set.');
+  bind(namespace, skipErrors = false){
+    if(!namespace) throw new TypeError('"namespace" argument should be set.');
     
     const iterator = (item, path, rule) => {
-      let target = container.select({
-        id: _.get(this, path), 
-        space: this.space
-      });
+      let targetId = _.get(this, path);
+      let target = namespace.get(targetId);
 
       if(!target){
-        throw new BindingError(this.index, [], `Property "${path}" has lost reference "${_.get(this, path)}".`);
+        throw new BindingError(this.index, [], `Property "${path}" has lost reference "${targetId}".`);
       }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
         throw new BindingError(this.index, [], `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
       }else{

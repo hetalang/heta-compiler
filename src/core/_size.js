@@ -24,14 +24,14 @@ class _Size extends _Component {
     }
   }
   /** Additional check of units items */
-  bind(container, skipErrors = false){
-    super.bind(container, skipErrors);
+  bind(namespace, skipErrors = false){
+    super.bind(namespace, skipErrors);
 
     let messages = [];
 
     if (this.unitsParsed){
       this.unitsParsed.forEach((x) => {
-        let target = container.select({id: x.kind, space: this.space});
+        let target = namespace.get(x.kind);
         
         if(!target){
           messages.push(`Unit "${x.kind}" is not found as expected here: `

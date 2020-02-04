@@ -35,16 +35,14 @@ class SimpleTask extends _Component {
 
     return this;
   }
-  bind(container, skipErrors = false){
-    super.bind(container, skipErrors);
-
-    if(!container) throw new TypeError('"container" argument should be set.');
+  bind(namespace, skipErrors = false){
+    super.bind(namespace, skipErrors);
 
     // check output refs in SimpleTasks XXX: it seems to be working but ugly and without iterativity
     if(this instanceof SimpleTask && this.subtasks){
       this.subtasks.forEach((sub) => { // iterate through subtasks
         sub.output.forEach((out) => { // itrate through record refs
-          let _record_ = container.select({id: out, space: this.space});
+          let _record_ = namespace.get(out);
           if(!_record_){
             let msg = `Property "output" has lost reference for "${out}".`;
             throw new IndexedHetaError(this.indexObj, msg);

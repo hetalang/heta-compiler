@@ -18,7 +18,7 @@
   {
     "id": "fM", "class": "UnitDef",
     "units": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
-},
+  },
   {
       "id": "h", "class": "UnitDef",
       "units": [ { "kind": "second", "multiplier": 3600 } ]
@@ -30,6 +30,10 @@
   {
       "id": "umole", "class": "UnitDef",
       "units": [ { "kind": "mole", "multiplier": 1e-6 } ]
+  },
+  {
+    "action": "setNS",
+    "space": "first"
   },
   {
     "class": "Compartment",

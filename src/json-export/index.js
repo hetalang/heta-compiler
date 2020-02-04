@@ -7,8 +7,9 @@ class JSONExport extends _Export {
     return 'JSONExport';
   }
   make(){
-    let qArr = this._container
-      .getPopulation(this.space, true)
+    let qArr = this.namespace
+      .toArray()
+      .filter((x) => !x.isCore)
       .map((x) => x.toQ());
     
     return [{

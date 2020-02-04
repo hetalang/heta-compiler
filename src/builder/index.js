@@ -89,13 +89,13 @@ class Builder {
     });
     // 4. Binding TODO: population must be when exported
     logger.info('Setting references in elements, total length ' + this.container.length);
-    this.container.populate();
+    this.container.knit();
   }
   async exportManyAsync(){
     if(!this.options.skipExport){
-      let exportElements = [...this.container.storage]
-        .filter((obj) => obj[1].instanceOf('_Export'))
-        .map((obj) => obj[1]);
+      let exportElements = this.container
+        .toArray()
+        .filter((obj) => obj.instanceOf('_Export'));
       logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
       let tmp = exportElements.map(async (exportItem) => {

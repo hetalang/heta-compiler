@@ -7,8 +7,9 @@ class YAMLExport extends _Export {
     return 'YAMLExport';
   }
   make(){
-    let qArr = this._container
-      .getPopulation(this.space, true)
+    let qArr = this.namespace
+      .toArray()
+      .filter((x) => !x.isCore)
       .map((x) => x.toQ());
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
