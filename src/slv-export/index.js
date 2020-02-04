@@ -1,6 +1,5 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const XArray = require('../x-array');
 const nunjucks = require('../nunjucks-env');
 const { Compartment } = require('../core/compartment');
 const { ExportError } = require('../heta-error');
@@ -45,21 +44,8 @@ class SLVExport extends _Export{
       population: this.namespace
     };
 
-    // add default_compartment_
-    let default_compartment_ = (new Compartment).merge({
-      assignments: {
-        start_: {expr: 1}
-      },
-      boundary: true,
-      units: 'UL',
-      notes: 'This is fake compartment to support compounds without compartment.'
-    });
-    default_compartment_._id = 'default_compartment_';
-    default_compartment_._space = this.space;
-    //model.population.push(default_compartment_);
- 
     // push active processes
-    model.processes = new XArray();
+    model.processes = [];
     model.population
       .toArray()
       .filter((x) => {
@@ -71,7 +57,7 @@ class SLVExport extends _Export{
       })
       .forEach((process) => model.processes.push(process));
     // push non boundary ode variables which are mentioned in processes
-    model.variables = new XArray();
+    model.variables = [];
     model.population
       .toArray()
       .filter((x) => x.instanceOf('Record') && x.isDynamic)
