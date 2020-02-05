@@ -3,7 +3,7 @@ const { Container } = require('../../src');
 const { expect } = require('chai');
 const { ValidationError, BindingError } = require('../../src/heta-error');
 
-describe('Check knit() for Species', () => {
+describe('Check knitMany() for Species', () => {
   let c = new Container();
   c.load({
     action: 'setNS',
@@ -15,13 +15,13 @@ describe('Check knit() for Species', () => {
     space: 'one'
   });
   it('Set no compartment', () => {
-    expect(() => c.knit(), 'does not check empty property').throw(ValidationError);
+    expect(() => c.knitMany(), 'does not check empty property').throw(ValidationError);
   });
   it('Set lost ref', () => {
     sp1.merge({
       compartment: 'comp1'
     });
-    expect(() => c.knit(), 'does not check lost ref').throw(BindingError);
+    expect(() => c.knitMany(), 'does not check lost ref').throw(BindingError);
   });
   it('Set wrong ref', () => {
     c.load({
@@ -29,7 +29,7 @@ describe('Check knit() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    expect(() => c.knit()).throw(BindingError);
+    expect(() => c.knitMany()).throw(BindingError);
   });
   it('Set good ref', () => {
     c.load({
@@ -37,12 +37,12 @@ describe('Check knit() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    c.knit();
+    c.knitMany();
     expect(sp1).to.have.property('compartmentObj');
   });
 });
 
-describe('Check knit() for Reaction', () => {
+describe('Check knitMany() for Reaction', () => {
   let c, r1;
 
   it('Create platform', () => {
@@ -57,7 +57,7 @@ describe('Check knit() for Reaction', () => {
   });
   
   it('have lost ref', () => {
-    expect(() => c.knit(), 'does not check lost ref').throw(BindingError);
+    expect(() => c.knitMany(), 'does not check lost ref').throw(BindingError);
   });
   
   it('Set wrong ref', () => {
@@ -72,7 +72,7 @@ describe('Check knit() for Reaction', () => {
       id: 'def',
       space: 'one'
     });
-    expect(() => c.knit()).throw(BindingError);
+    expect(() => c.knitMany()).throw(BindingError);
   });
 
   it('Set good ref', () => {
@@ -82,7 +82,7 @@ describe('Check knit() for Reaction', () => {
       space: 'one',
       compartment: 'def'
     });
-    c.knit();
+    c.knitMany();
     expect(r1.actors[0]).to.have.property('targetObj');
   });
 });

@@ -89,7 +89,7 @@ class Builder {
     });
     // 4. Binding TODO: population must be when exported
     logger.info('Setting references in elements, total length ' + this.container.length);
-    this.container.knit();
+    this.container.knitMany();
   }
   async exportManyAsync(){
     if(!this.options.skipExport){

@@ -273,13 +273,12 @@ class Container {
   get length(){
     return _.sumBy([...this.namespaces], (x) => x[1].size);
   }
-  // check all components and add references
-  knit(skipErrors = false){
+  // check all namespaces
+  knitMany(skipErrors = false){
     [...this.namespaces].forEach((x) => {
       let ns = x[1];
-      ns.forEach((component) => { // iterates all components
-        component.bind(ns, skipErrors);
-      });
+      // knit only concrete namespace
+      if (!ns.isAbstract) ns.knit(skipErrors);
     });
 
     return this;

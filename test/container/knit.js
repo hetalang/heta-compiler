@@ -4,7 +4,7 @@ const { Container } = require('../../src');
 
 const { expect } = require('chai');
 
-describe('Test knit()', () => {
+describe('Test All()', () => {
   let c; // for Container
 
   it('Creating good platform.', () => {
@@ -35,8 +35,8 @@ describe('Test knit()', () => {
     expect(c).to.have.property('length', 15);
   });
 
-  it('knit good platform.', () => {
-    c.knit();
+  it('knitMany good platform.', () => {
+    c.knitMany();
     expect(c).to.have.property('length', 15);
   });
 });

@@ -5,6 +5,9 @@ class Namespace extends Map {
   constructor(){
     super();
   }
+  get isAbstract(){
+    return this._isAbstract;
+  }
   set(key, value){
     return super.set(key, value);
   }
@@ -74,6 +77,13 @@ class Namespace extends Map {
       .uniqBy((record) => record.unitsHash(true))
       .map((record) => record.unitsSBML())
       .value();
+  }
+  knit(skipErrors = false){
+    this.toArray().forEach((component) => { // iterates all components
+      component.bind(this, skipErrors);
+    });
+
+    return this;
   }
 }
 
