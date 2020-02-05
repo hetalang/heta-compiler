@@ -24,11 +24,13 @@ class SBMLExport extends _Export {
     }];
   }
   _getSBMLImage(){
-    let listOfUnitDefinitions = this.namespace.getUniqueUnits()
-      .map((units) => {
-        return units
-          .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
-      });
+    let listOfUnitDefinitions = this.namespace.isAbstract 
+      ? [] // do not create unitsDef for abstract ns
+      : this.namespace.getUniqueUnits()
+        .map((units) => {
+          return units
+            .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
+        });
       
     return {
       population: this.namespace,
