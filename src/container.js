@@ -26,9 +26,8 @@ class Container {
   constructor(){
     this._namespaces = new Map();
     // default namespace
-    let nameless = new Namespace();
+    let nameless = new Namespace('nameless');
     nameless._isAbstract = false;
-    nameless._spaceName = 'nameless';
     this._namespaces.set('nameless', nameless);
   }
   get namespaces(){
@@ -125,8 +124,7 @@ class Container {
     // create namespace if not exists
     let namespace = this.namespaces.get(q.space);
     if (namespace === undefined){
-      namespace = new Namespace();
-      namespace._spaceName = q.space;
+      namespace = new Namespace(q.space);
       this._namespaces.set(q.space, namespace);
     }
     // it is possible to update type

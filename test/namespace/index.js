@@ -7,8 +7,7 @@ const { BindingError } = require('../../src/heta-error');
 describe('Namespace sort testing.', () => {
   let x;
   it('Create empty and push four Records.', () => {
-    x = new Namespace();
-    x._spaceName = 'one';
+    x = new Namespace('one');
     let rec1 = (new Record).merge({
       assignments: {
         ode_: 1
@@ -52,8 +51,7 @@ describe('Namespace sort testing.', () => {
   });
 
   it('cycle in "ode_"', () => {
-    let cycle = new Namespace();
-    cycle._spaceName = 'one';
+    let cycle = new Namespace('one');
     let rec1 = (new Record).merge({
       assignments: {
         ode_: 'p2'

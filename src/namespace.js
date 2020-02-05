@@ -2,8 +2,12 @@ const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 
 class Namespace extends Map {
-  constructor(){
+  constructor(spaceName){
     super();
+    //if (typeof spaceName !== 'string')
+    //  throw new TypeError(`spaceName argument must be string, got ${spaceName}`);
+
+    this._spaceName = spaceName;
   }
   get isAbstract(){
     return this._isAbstract;
