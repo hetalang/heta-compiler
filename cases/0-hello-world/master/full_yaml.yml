@@ -326,3 +326,7 @@
   id: mm_mrg
   space: mm
   title: export to mrgsolve
+- class: MatlabExport
+  id: matlab1
+  space: mm
+  filepath: matlab

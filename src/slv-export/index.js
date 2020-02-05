@@ -1,7 +1,6 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('../nunjucks-env');
-const { Compartment } = require('../core/compartment');
 const { ExportError } = require('../heta-error');
 const _ = require('lodash');
 require('./expression');
@@ -24,7 +23,7 @@ class SLVExport extends _Export{
    * @return {string} Text code of exported format.
    */
   make(){
-    this._model_ = this._getSLVImage(this.space);
+    this._model_ = this._getSLVImage();
 
     return [{
       content: this.getSLVCode(),

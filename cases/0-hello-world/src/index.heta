@@ -34,3 +34,4 @@ mm::full_json @JSONExport;
 mm::full_yaml @YAMLExport;
 mm::mm_slv @SLVExport;
 mm::mm_mrg @MrgsolveExport { title: export to mrgsolve };
+mm::matlab1 @MatlabExport { filepath: matlab };
