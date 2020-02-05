@@ -37,7 +37,7 @@ describe('Unit tests for Container', () => {
       expect(simple).to.has.property('suffix', '/');
       expect(simple).to.has.property('className', 'ReferenceDefinition');
       expect(simple).to.has.property('id', 'pmid1');
-      expect(simple).to.has.property('space', undefined);
+      expect(simple).to.has.property('space', 'nameless');
     });
 
     it('Insert components with the same id.', () => {
@@ -54,7 +54,7 @@ describe('Unit tests for Container', () => {
       });
       let simple = c.namespaces.get('nameless').get('pmid2');
       expect(simple).to.have.property('prefix', 'https://google.com');
-      expect(simple).to.have.property('space', undefined);
+      expect(simple).to.have.property('space', 'nameless');
       expect(c.length).to.be.eql(2);
     });
 

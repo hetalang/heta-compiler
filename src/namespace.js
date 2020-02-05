@@ -8,6 +8,10 @@ class Namespace extends Map {
   get isAbstract(){
     return this._isAbstract;
   }
+  // title of space
+  get spaceName(){
+    return this._spaceName;
+  }
   set(key, value){
     return super.set(key, value);
   }

@@ -37,7 +37,6 @@ describe('Testing "cases/12-to-sbml"', () => {
     const SBMLExport = b.container.classes.SBMLExport;
     let sbml_export = new SBMLExport;
     sbml_export._id = 'output_sbml';
-    sbml_export._space = 'first';
     sbml_export.namespace = b.container.namespaces.get('first');
 
     let code = sbml_export.make()[0].content;
@@ -50,7 +49,6 @@ describe('Testing "cases/12-to-sbml"', () => {
     const JSONExport = b.container.classes.JSONExport;
     let json_export = new JSONExport;
     json_export._id = 'json_export';
-    json_export._space = 'first';
     json_export.namespace = b.container.namespaces.get('first');
 
     let code = json_export.make()[0].content;

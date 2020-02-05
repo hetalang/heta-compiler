@@ -8,13 +8,14 @@ describe('Namespace sort testing.', () => {
   let x;
   it('Create empty and push four Records.', () => {
     x = new Namespace();
+    x._spaceName = 'one';
     let rec1 = (new Record).merge({
       assignments: {
         ode_: 1
       }
     });
     rec1._id = 'p1';
-    rec1._space = 'one';
+    rec1.namespace = x;
     x.set(rec1._id, rec1);
     let rec2 = (new Record).merge({
       assignments: {
@@ -22,7 +23,7 @@ describe('Namespace sort testing.', () => {
       }
     });
     rec2._id = 'p2';
-    rec2._space = 'one';
+    rec2.namespace = x;
     x.set(rec2._id, rec2);
     let rec3 = (new Record).merge({
       assignments: {
@@ -30,7 +31,7 @@ describe('Namespace sort testing.', () => {
       }
     });
     rec3._id = 'p3';
-    rec3._space = 'one';
+    rec3.namespace = x;
     x.set(rec3._id, rec3);
     let rec4 = (new Record).merge({
       assignments: {
@@ -38,7 +39,7 @@ describe('Namespace sort testing.', () => {
       }
     });
     rec4._id = 'p4';
-    rec4._space = 'one';
+    rec4.namespace = x;
     x.set(rec4._id, rec4);
     expect(x).to.be.lengthOf(4);
   });
@@ -52,13 +53,14 @@ describe('Namespace sort testing.', () => {
 
   it('cycle in "ode_"', () => {
     let cycle = new Namespace();
+    cycle._spaceName = 'one';
     let rec1 = (new Record).merge({
       assignments: {
         ode_: 'p2'
       }
     });
     rec1._id = 'p1';
-    rec1._space = 'one';
+    rec1.namespace = cycle;
     cycle.set(rec1._id, rec1);
     let rec2 = (new Record).merge({
       assignments: {
@@ -66,7 +68,7 @@ describe('Namespace sort testing.', () => {
       }
     });
     rec2._id = 'p2';
-    rec2._space = 'one';
+    rec2.namespace = cycle;
     cycle.set(rec2._id, rec2);
     expect(() => {
       cycle.sortExpressionsByContext('ode_');

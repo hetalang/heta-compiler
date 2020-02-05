@@ -57,7 +57,6 @@ describe('Testing "cases/0-hello-world"', () => {
     const JSONExport = b.container.classes.JSONExport;
     let json_export = new JSONExport;
     json_export._id = 'json_export';
-    json_export._space = 'mm';
     json_export.namespace = b.container.namespaces.get('mm');
 
     let code = json_export.make()[0].content;
@@ -70,7 +69,6 @@ describe('Testing "cases/0-hello-world"', () => {
     const YAMLExport = b.container.classes.YAMLExport;
     let yaml_export = new YAMLExport;
     yaml_export._id = 'yaml_export';
-    yaml_export._space = 'mm';
     yaml_export.namespace = b.container.namespaces.get('mm');
 
     let code = yaml_export.make()[0].content;
@@ -83,7 +81,6 @@ describe('Testing "cases/0-hello-world"', () => {
     const SLVExport = b.container.classes.SLVExport;
     let slv_export = new SLVExport;
     slv_export._id = 'slv_export';
-    slv_export._space = 'mm';
     slv_export.namespace = b.container.namespaces.get('mm');
 
     let code = slv_export.make()[0].content;

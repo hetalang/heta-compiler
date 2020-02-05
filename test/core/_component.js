@@ -23,10 +23,8 @@ describe('Unit test for _Component common methods', () => {
   it('Create empty scoped _Component', () => {
     let simple = new _Component;
     simple._id = 'pg1';
-    simple._space = 'one';
     expect(simple).to.have.property('className', '_Component');
     expect(simple).to.have.property('id', 'pg1');
-    expect(simple).to.have.property('space', 'one');
     expect(simple).to.have.property('index');
     expect(simple).to.have.property('merge');
   });
@@ -126,11 +124,9 @@ describe('Unit test for _Component common methods', () => {
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}}
     });
-    simple._id ='pg1' ;
-    simple._space = 'one';
+    simple._id ='pg1';
     expect(simple.toQ()).to.be.deep.equal({
       id: 'pg1',
-      space: 'one',
       title: 'title',
       notes: 'notes',
       tags: ['a', 'b', 'c'],

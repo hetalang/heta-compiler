@@ -21,12 +21,10 @@ describe('Unit tests for Reaction.', () => {
       units: 'umole/h'
     });
     simple._id = 'r1';
-    simple._space = 'default__';
 
     expect(simple.toQ()).to.be.deep.equal({
       class: 'Reaction',
       id: 'r1',
-      space: 'default__',
       actors: [
         {target: 's1', stoichiometry: -1},
         {target: 's2', stoichiometry: 2}

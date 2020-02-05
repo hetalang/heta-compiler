@@ -5,11 +5,10 @@ const { expect } = require('chai');
 
 describe('Unit tests for Record.', () => {
   it('Minimal record.', () => {
-    let simple = new Record({id: 'k1', space: 'one'});
+    let simple = new Record({id: 'k5', space: 'one'});
     simple._id = 'k1';
-    simple._space = 'one';
     expect(simple).to.have.property('id', 'k1');
-    expect(simple).to.have.property('space', 'one');
+    expect(simple).to.have.property('space', undefined);
   });
 
   it('Merge empty.', () => {
@@ -39,11 +38,9 @@ describe('Unit tests for Record.', () => {
       units: 'J'
     });
     simple._id = 'r1';
-    simple._space = 'default__';
     expect(simple.toQ()).to.be.deep.equal({
       class: 'Record',
       id: 'r1',
-      space: 'default__',
       title: 'complex record',
       assignments: { ode_: { expr: 'm * c ^ 2' } },
       units: 'J'

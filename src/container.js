@@ -28,6 +28,7 @@ class Container {
     // default namespace
     let nameless = new Namespace();
     nameless._isAbstract = false;
+    nameless._spaceName = 'nameless';
     this._namespaces.set('nameless', nameless);
   }
   get namespaces(){
@@ -54,11 +55,9 @@ class Container {
     if (namespace === undefined)
       throw new QueueError(q, `Create namespace "${space}" before use.`);
     component._id = q.id;
-    component._space = q.space;
+    component.namespace = namespace; // set parent space directly to component
+
     namespace.set(q.id, component);
-    if(component.instanceOf('_Export')) { // include parent
-      component.namespace = namespace;
-    }
 
     return component;
   }
@@ -127,8 +126,10 @@ class Container {
     let namespace = this.namespaces.get(q.space);
     if (namespace === undefined){
       namespace = new Namespace();
+      namespace._spaceName = q.space;
       this._namespaces.set(q.space, namespace);
     }
+    // it is possible to update type
     namespace._isAbstract = q.type === 'abstract';
   }
   /* 
@@ -170,6 +171,7 @@ class Container {
 
       // cloning and update references
       let clone = component.clone({id: newId, space: q.space});
+      clone.namespace = namespace;
       clone.updateReferences(q);
 
       namespace.set(newId, clone);
@@ -227,7 +229,8 @@ class Container {
       throw new QueueError(q, `Element with ${q.fromId}::${q.fromSpace})} does not exist and cannot be cloned.`);
 
     // cloning and update references
-    let clone = component.clone({id: q.id, space: q.space});
+    let clone = component.clone({id: q.id});
+    clone.namespace = namespace;
     clone.updateReferences(q);
 
     namespace.set(q.id, clone);

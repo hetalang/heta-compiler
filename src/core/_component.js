@@ -32,8 +32,13 @@ class _Component {
   get id(){
     return this._id;
   }
+  // if NS not set, than undefined
+  // if set any, than spaceName
+  // if set nameless, than 'nameless'
   get space(){
-    return this._space;
+    if (this.namespace) {
+      return this.namespace.spaceName;
+    }
   }
   static get schemaName(){
     return this.name + 'P';
@@ -42,21 +47,17 @@ class _Component {
     return this.constructor.name;
   }
   get index(){
-    if(this._space){
-      return this._space + '::' + this._id;
+    if(this.space !== 'nameless'){
+      return this.space + '::' + this._id;
     }else{
       return this.id;
     }
   }
   get indexObj(){
-    if(this._space){
-      return { id: this._id, space: this._space };
-    }else{
-      return { id: this._id };
-    }
+    return { id: this.id, space: this.space };
   }
   get isGlobal(){
-    return this._space===undefined;
+    return this.space === 'nameless';
   }
   // creates copy of element
   clone(q = {}){
@@ -64,7 +65,6 @@ class _Component {
 
     // update index
     if(q.id) res._id = q.id;
-    if(q.space) res._space = q.space;
 
     return res;
   }
@@ -190,7 +190,7 @@ class _Component {
     let res = {};
     res.class = this.className;
     res.id = this.id;
-    if(this.space) res.space = this.space;
+    if(this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
     if(this.title) res.title = this.title;
     if(this.notes) res.notes = this.notes;
     if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
