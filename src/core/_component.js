@@ -23,9 +23,6 @@ class _Component {
 
     return this;
   }
-  get isComponent(){
-    return true;
-  }
   get isCore(){
     return this._isCore;
   }
@@ -55,9 +52,6 @@ class _Component {
   }
   get indexObj(){
     return { id: this.id, space: this.space };
-  }
-  get isGlobal(){
-    return this.space === 'nameless';
   }
   // creates copy of element
   clone(q = {}){
