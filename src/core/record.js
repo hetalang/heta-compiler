@@ -109,18 +109,22 @@ class Record extends _Size {
     if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
       throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
 
-    let exprPath = 'assignments.' + context;
-    if(_.has(this, exprPath)){
-      let deps = this.assignments[context]
+    let assignment = this.getAssignment(context, true);
+    if (assignment !== undefined) {
+      let deps = assignment
         .exprParsed
         .getSymbols();
       _.pull(deps, 't'); // remove t from dependence
-      if(this.className==='Species' && !this.isAmount) 
-        deps.push(this.compartment);
       return deps;
     }else{
       return undefined;
     }
+  }
+  // return Expression based on context
+  getAssignment(context){
+    if(typeof context !== 'string')
+      throw new TypeError('context argument must be of string type.');
+    return _.get(this, 'assignments.' + context);
   }
 }
 

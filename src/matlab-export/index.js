@@ -18,8 +18,18 @@ class MatlabExport extends _Export {
         type: 'text'
       },
       {
+        content: this.getInitCode(image),
+        pathSuffix: '/init.m',
+        type: 'text'
+      },
+      {
         content: this.getParamCode(image),
         pathSuffix: '/param.m',
+        type: 'text'
+      },
+      {
+        content: this.getRunCode(image),
+        pathSuffix: '/run.m',
         type: 'text'
       }
     ];
@@ -34,6 +44,10 @@ class MatlabExport extends _Export {
     // ODE variables
     let dynamicRecords = this.namespace.toArray()
       .filter((x) => x.instanceOf('Record') && !x.implicitBoundary);
+    // initialize at start records
+    let initRecords = this.namespace
+      .sortExpressionsByContext('start_')
+      .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.start_'));
     // Rules
     let ruleRecords = this.namespace
       .sortExpressionsByContext('ode_')
@@ -74,6 +88,7 @@ class MatlabExport extends _Export {
       constants,
       dynamicRecords,
       rhs,
+      initRecords,
       ruleRecords,
       translator
     };
@@ -87,6 +102,18 @@ class MatlabExport extends _Export {
   getParamCode(image = {}){
     return nunjucks.render(
       'matlab-export/param.m.njk',
+      image
+    );
+  }
+  getRunCode(image = {}){
+    return nunjucks.render(
+      'matlab-export/run.m.njk',
+      image
+    );
+  }
+  getInitCode(image = {}){
+    return nunjucks.render(
+      'matlab-export/init.m.njk',
       image
     );
   }
