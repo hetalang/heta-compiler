@@ -11,11 +11,18 @@ class MatlabExport extends _Export {
   make(){
     let image = this.getMatlabImage();
 
-    return [{
-      content: this.getModelCode(image),
-      pathSuffix: '/model.m',
-      type: 'text'
-    }];
+    return [
+      {
+        content: this.getModelCode(image),
+        pathSuffix: '/model.m',
+        type: 'text'
+      },
+      {
+        content: this.getParamCode(image),
+        pathSuffix: '/param.m',
+        type: 'text'
+      }
+    ];
   }
   getMatlabImage(){
     let builderName = pkg.name + ' of v' + pkg.version;
@@ -74,6 +81,12 @@ class MatlabExport extends _Export {
   getModelCode(image = {}){
     return nunjucks.render(
       'matlab-export/model.m.njk',
+      image
+    );
+  }
+  getParamCode(image = {}){
+    return nunjucks.render(
+      'matlab-export/param.m.njk',
       image
     );
   }
