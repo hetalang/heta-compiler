@@ -21,15 +21,55 @@ class MatlabExport extends _Export {
     let builderName = pkg.name + ' of v' + pkg.version;
     let namespace = this.namespace;
     let options = this.toQ();
+    // constants
+    let constants = this.namespace
+      .selectByInstanceOf('Const');
     // ODE variables
     let dynamicRecords = this.namespace.toArray()
-      .filter((x) => x.instanceOf('Record') && x.isDynamic);
+      .filter((x) => x.instanceOf('Record') && !x.implicitBoundary);
     // Rules
     let ruleRecords = this.namespace
       .sortExpressionsByContext('ode_')
-      .filter((record) => record.instanceOf('Record') && _.has(record, 'assignments.ode_'));
+      .filter((x) => x.instanceOf('Record') && x.implicitBoundary);
+    // RHS of ODE
+    let rhs = dynamicRecords
+      .map((record) => {
+        if (!record.isDynamic) {
+          return 0;
+        } else { 
+          return record.backReferences.map((ref, i) => {
+            if (ref.stoichiometry === -1) {
+              var st = '-';
+            } else if (ref.stoichiometry < 0) {
+              st = ref.stoichiometry + '*';
+            } else if (ref.stoichiometry === 1){
+              st = i === 0 ? '' : '+';
+            } else { // ref.stoichiometry >= 0
+              st = '+' + st + '*';
+            }
+            return st + ref.process;
+          });
+        }
+      });
+    
+    let yTranslator = dynamicRecords
+      .map((x, i) => [x.id, `y(${i+1})`]);
+    let pTranslator = constants
+      .map((x, i) => [x.id, `p(${i+1})`]);
+    let translator = {
+      symbolName: _.fromPairs(yTranslator.concat(pTranslator))
+    };
 
-    return { builderName, options, namespace, dynamicRecords, ruleRecords };
+    return { 
+      builderName,
+      options,
+      namespace,
+      constants,
+      dynamicRecords,
+      rhs,
+      ruleRecords,
+      translator
+    };
   }
   getModelCode(image = {}){
     return nunjucks.render(

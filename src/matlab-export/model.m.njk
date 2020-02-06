@@ -5,20 +5,20 @@ function dydt = {{ options.id }}(t, y, p)
 
 dydt = zeros({{ dynamicRecords|length }}, 1);
 
-% Dynamic records annotation
+%%% Dynamic records annotation
 {%- for record in dynamicRecords %}
 %{{ loop.index }} - {{ record.id }}, {{ record.title }} ({{ record.units }}) {{ record.notes }}
 {%- endfor %}
 
-% Rules in ODE system
+%%% Rules in ODE system
 {%- for record in ruleRecords %}
 % {{ record.title }} ({{ record.units }}) {{ record.notes }}
-{{ record.id }} = {{ record.assignments.ode_.toMatlabString() }};
+{{ record.id }} = {{ record.assignments.ode_.translate(translator).toMatlabString() }};
 {%- endfor %}
 
-% Differential equations
+%%% Differential equations
 {%- for record in dynamicRecords %}
-dydt({{ loop.index }}) = !!!;
+dydt({{ loop.index }}) = {{ rhs[loop.index0] }};
 {%- endfor %}
 
 end

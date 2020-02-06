@@ -158,8 +158,10 @@ class Expression {
     let aTreeSimplified = math.simplify(aTree);
     return [aTreeSimplified, bTree];
   }
-  translate(){
-
+  translate(translator = {}){
+    let exprParsed = this.exprParsed
+      .translate(translator);
+    return new Expression(exprParsed);
   }
 }
 
