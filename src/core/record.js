@@ -16,7 +16,7 @@ class Record extends _Size {
       let newAssignments = _.mapValues(q.assignments, (x) => {
         if(typeof x === 'string' || typeof x === 'number' || 'expr' in x){
           try{ // this is for the cases of wrong size structure
-            return new Expression(x);
+            return Expression.fromQ(x);
           }catch(e){
             throw new ValidationError(q, [], e.message + `: "${x.expr}"`);
           }
