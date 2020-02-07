@@ -15,7 +15,7 @@ class SBMLExport extends _Export {
     return 'SBMLExport';
   }
   make(){
-    this.image = this._getSBMLImage(this.space);
+    this.image = this._getSBMLImage();
 
     return [{
       content: this.getSBMLCode(),
@@ -23,18 +23,17 @@ class SBMLExport extends _Export {
       type: 'text'
     }];
   }
-  _getSBMLImage(targetSpace){
-    let population = this._container
-      .getPopulation(targetSpace, false);
-
-    let listOfUnitDefinitions = population.getUniqueUnits()
-      .map((units) => {
-        return units
-          .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
-      });
+  _getSBMLImage(){
+    let listOfUnitDefinitions = this.namespace.isAbstract 
+      ? [] // do not create unitsDef for abstract ns
+      : this.namespace.getUniqueUnits()
+        .map((units) => {
+          return units
+            .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
+        });
       
     return {
-      population: population,
+      population: this.namespace,
       listOfUnitDefinitions: listOfUnitDefinitions
     };
   }

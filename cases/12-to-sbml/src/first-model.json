@@ -16,9 +16,9 @@
       "units": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
   },
   {
-    "id": "fM", "class": "UnitDef",
-    "units": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
-},
+     "id": "fM", "class": "UnitDef",
+     "units": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
+  },
   {
       "id": "h", "class": "UnitDef",
       "units": [ { "kind": "second", "multiplier": 3600 } ]
@@ -30,6 +30,16 @@
   {
       "id": "umole", "class": "UnitDef",
       "units": [ { "kind": "mole", "multiplier": 1e-6 } ]
+  },
+  {
+    "action": "setNS",
+    "space": "first",
+    "type": "abstract"
+  },
+  {
+    "action": "importNS",
+    "space": "first",
+    "fromSpace": "nameless"
   },
   {
     "class": "Compartment",
@@ -138,13 +148,5 @@
     "id": "sw1",
     "space": "first",
     "condition": "evt1"
-  },
-  {
-    "class": "SBMLExport",
-    "id": "sbml",
-    "space": "first",
-    "skipMathChecking": true,
-    "title": "Model title",
-    "notes": "Model *notes*"
   }
 ]

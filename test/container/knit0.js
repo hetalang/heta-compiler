@@ -3,21 +3,25 @@ const { Container } = require('../../src');
 const { expect } = require('chai');
 const { ValidationError, BindingError } = require('../../src/heta-error');
 
-describe('Check populate() for Species', () => {
+describe('Check knitMany() for Species', () => {
   let c = new Container();
+  c.load({
+    action: 'setNS',
+    space: 'one'
+  });
   let sp1 = c.load({
     class: 'Species',
     id: 'sp1',
     space: 'one'
   });
   it('Set no compartment', () => {
-    expect(() => c.populate(), 'does not check empty property').throw(ValidationError);
+    expect(() => c.knitMany(), 'does not check empty property').throw(ValidationError);
   });
   it('Set lost ref', () => {
     sp1.merge({
       compartment: 'comp1'
     });
-    expect(() => c.populate(), 'does not check lost ref').throw(BindingError);
+    expect(() => c.knitMany(), 'does not check lost ref').throw(BindingError);
   });
   it('Set wrong ref', () => {
     c.load({
@@ -25,7 +29,7 @@ describe('Check populate() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    expect(() => c.populate()).throw(BindingError);
+    expect(() => c.knitMany()).throw(BindingError);
   });
   it('Set good ref', () => {
     c.load({
@@ -33,22 +37,27 @@ describe('Check populate() for Species', () => {
       id: 'comp1',
       space: 'one'
     });
-    c.populate();
+    c.knitMany();
     expect(sp1).to.have.property('compartmentObj');
   });
 });
 
-describe('Check populate() for Reaction', () => {
-  let c = new Container();
-  let r1 = c.load({
-    class: 'Reaction',
-    id: 'r1',
-    space: 'one',
-    actors: 'A=>'
+describe('Check knitMany() for Reaction', () => {
+  let c, r1;
+
+  it('Create platform', () => {
+    c = new Container();
+    c.setNS({space: 'one'});
+    r1 = c.load({
+      class: 'Reaction',
+      id: 'r1',
+      space: 'one',
+      actors: 'A=>'
+    });
   });
   
   it('have lost ref', () => {
-    expect(() => c.populate(), 'does not check lost ref').throw(BindingError);
+    expect(() => c.knitMany(), 'does not check lost ref').throw(BindingError);
   });
   
   it('Set wrong ref', () => {
@@ -63,7 +72,7 @@ describe('Check populate() for Reaction', () => {
       id: 'def',
       space: 'one'
     });
-    expect(() => c.populate()).throw(BindingError);
+    expect(() => c.knitMany()).throw(BindingError);
   });
 
   it('Set good ref', () => {
@@ -73,7 +82,7 @@ describe('Check populate() for Reaction', () => {
       space: 'one',
       compartment: 'def'
     });
-    c.populate();
+    c.knitMany();
     expect(r1.actors[0]).to.have.property('targetObj');
   });
 });

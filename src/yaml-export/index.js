@@ -7,9 +7,7 @@ class YAMLExport extends _Export {
     return 'YAMLExport';
   }
   make(){
-    let qArr = this._container
-      .getPopulation(this.space, true)
-      .map((x) => x.toQ());
+    let qArr = this.namespace.toQArr(true);
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);

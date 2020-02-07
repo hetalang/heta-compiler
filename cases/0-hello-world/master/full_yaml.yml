@@ -1,3 +1,40 @@
+- class: Compartment
+  id: default_comp
+  space: mm
+  title: Default compartment
+  notes: Note for the Default compartment
+  units: L
+  assignments:
+    start_: {expr: '1'}
+- class: Species
+  id: S
+  space: mm
+  title: substrate
+  units: uM
+  assignments:
+    start_: {expr: '10'}
+  compartment: default_comp
+- class: Species
+  id: P
+  space: mm
+  title: product
+  units: uM
+  assignments:
+    start_: {expr: '0'}
+  compartment: default_comp
+- class: Reaction
+  id: r1
+  space: mm
+  title: Michaelis-Menten reaction
+  notes: Transformation of __substate__ to __product__
+  aux:
+    reversible: false
+  units: umole/min
+  assignments:
+    ode_: {expr: Vmax * S / (Km + S) * default_comp}
+  actors:
+    - {target: S, stoichiometry: -1}
+    - {target: P, stoichiometry: 1}
 - class: UnitDef
   id: year
   space: mm
@@ -38,43 +75,43 @@
   space: mm
   units:
     - {kind: mole, multiplier: 1.e-15, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: pM
   space: mm
   units:
     - {kind: mole, multiplier: 1.e-12, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: nM
   space: mm
   units:
     - {kind: mole, multiplier: 1.e-9, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: uM
   space: mm
   units:
     - {kind: mole, multiplier: 0.000001, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: mM
   space: mm
   units:
     - {kind: mole, multiplier: 0.001, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: M
   space: mm
   units:
     - {kind: mole, multiplier: 1, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: kM
   space: mm
   units:
     - {kind: mole, multiplier: 1000, exponent: 1}
-    - {kind: litre, exponent: -1, multiplier: 1}
+    - {kind: litre, multiplier: 1, exponent: -1}
 - class: UnitDef
   id: fL
   space: mm
@@ -269,43 +306,6 @@
   space: mm
   units: uM
   num: 2.5
-- class: Compartment
-  id: default_comp
-  space: mm
-  title: Default compartment
-  notes: Note for the Default compartment
-  units: L
-  assignments:
-    start_: {expr: '1'}
-- class: Species
-  id: S
-  space: mm
-  title: substrate
-  units: uM
-  assignments:
-    start_: {expr: '10'}
-  compartment: default_comp
-- class: Species
-  id: P
-  space: mm
-  title: product
-  units: uM
-  assignments:
-    start_: {expr: '0'}
-  compartment: default_comp
-- class: Reaction
-  id: r1
-  space: mm
-  title: Michaelis-Menten reaction
-  notes: Transformation of __substate__ to __product__
-  aux:
-    reversible: false
-  units: umole/min
-  assignments:
-    ode_: {expr: Vmax * S / (Km + S) * default_comp}
-  actors:
-    - {target: S, stoichiometry: -1}
-    - {target: P, stoichiometry: 1}
 - class: SBMLExport
   id: mm_sbml
   space: mm
@@ -326,3 +326,7 @@
   id: mm_mrg
   space: mm
   title: export to mrgsolve
+- class: MatlabExport
+  id: matlab1
+  space: mm
+  filepath: matlab

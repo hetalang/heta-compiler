@@ -4,7 +4,13 @@ const { expect } = require('chai');
 const { ContainerError } = require('../../src/heta-error');
 
 describe('Unit tests for Container load', () => {
-  var c = new Container();
+  var c;
+
+  it('Create container', () => {
+    c = new Container();
+    c.setNS({space: 'default__'});
+    c.setNS({space: 'one'});
+  });
 
   it('Insert Record k1', () => {
     let simple = c.insert({ // insert new
@@ -151,11 +157,15 @@ describe('Unit tests for Container load', () => {
   });
 
   it('Select non existed element', () => {
-    let res = c.select({id: 'k2', space: 'ten'});
+    let res = c.select({id: 'k99', space: 'one'});
     expect(res).to.be.undefined;
   });
 
   it('Select with empty id throws.', () => {
     expect(() => c.select({})).to.throw(ContainerError);
+  });
+
+  it('Select from not existed namespace throws', () => {
+    expect(() => c.select({id: 'k1', space: 'error'})).to.throw(Error);
   });
 });

@@ -26,7 +26,7 @@ describe('Testing "cases/0-hello-world"', () => {
       },
       'importModule': {
         'type': 'heta',
-        'source': 'src/2-annotation.heta'
+        'source': 'src/index.heta'
       }
     };
     b = new Builder(declaration, 'cases/0-hello-world', '../../test/cases/1/dist');
@@ -44,7 +44,7 @@ describe('Testing "cases/0-hello-world"', () => {
     expect(code).xml.be.deep.equal(sbml_correct);
     //console.log(code);
   });
-
+/*
   it('Run @MrgsolveExport, check and compare.', () => {
     let mm_mrg = b.container.select({id: 'mm_mrg', space: 'mm'});
     let code = mm_mrg.make()[0].content;
@@ -52,13 +52,12 @@ describe('Testing "cases/0-hello-world"', () => {
     fs.outputFileSync(filename, code);
     // the simulations will be checked later in R
   });
-
+*/
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.classes.JSONExport;
     let json_export = new JSONExport;
     json_export._id = 'json_export';
-    json_export._space = 'mm';
-    json_export._container = b.container;
+    json_export.namespace = b.container.namespaces.get('mm');
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);
@@ -70,8 +69,7 @@ describe('Testing "cases/0-hello-world"', () => {
     const YAMLExport = b.container.classes.YAMLExport;
     let yaml_export = new YAMLExport;
     yaml_export._id = 'yaml_export';
-    yaml_export._space = 'mm';
-    yaml_export._container = b.container;
+    yaml_export.namespace = b.container.namespaces.get('mm');
 
     let code = yaml_export.make()[0].content;
     let obj = safeLoad(code);
@@ -83,8 +81,7 @@ describe('Testing "cases/0-hello-world"', () => {
     const SLVExport = b.container.classes.SLVExport;
     let slv_export = new SLVExport;
     slv_export._id = 'slv_export';
-    slv_export._space = 'mm';
-    slv_export._container = b.container;
+    slv_export.namespace = b.container.namespaces.get('mm');
 
     let code = slv_export.make()[0].content;
     let obj = slvParse.parse(code);

@@ -6,6 +6,7 @@ const { expect } = require('chai');
 describe('Test correct importNS', () => {
   it('Two namespaces', () => {
     var c = new Container();
+    c.setNS({space: 'one'});
     c.load({
       action: 'insert',
       class: 'Const',
@@ -20,6 +21,14 @@ describe('Test correct importNS', () => {
       space: 'one',
       assignments: { ode_: 'k1 * A *comp1' },
       actors: 'A => 2B'
+    });
+    c.load({
+      action: 'setNS',
+      space: 'one'
+    });
+    c.load({
+      action: 'setNS',
+      space: 'two'
     });
     let clone = c.importNS({
       fromSpace: 'one',
@@ -44,12 +53,12 @@ describe('Test correct importNS', () => {
     expect(clone[1].actors[0]).to.have.property('target', 'one_A');
     expect(clone[1].assignments.ode_).to.have.property('expr', 'one_k1 * one_A * comp1');
 
-    expect(c.storage.selectBySpace('one')).to.be.lengthOf(2);
-    expect(c.storage.selectBySpace('two')).to.be.lengthOf(3);
+    expect(c.namespaces.get('one')).to.be.lengthOf(2);
+    expect(c.namespaces.get('two')).to.be.lengthOf(3);
   });
 });
 
-
+/*
 describe('Test correct moveNS', () => {
   it('Two namespaces', () => {
     var c = new Container();
@@ -95,3 +104,4 @@ describe('Test correct moveNS', () => {
     expect(c.storage.selectBySpace('two')).to.be.lengthOf(3);
   });
 });
+*/

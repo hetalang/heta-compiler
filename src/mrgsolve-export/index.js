@@ -14,7 +14,7 @@ class MrgsolveExport extends _Export{
     return 'MrgsolveExport';
   }
   make(){
-    this._model_ = this._getMrgsolveImage(this.space);
+    this._model_ = this._getMrgsolveImage();
 
     return [{
       content: this.getMrgsolveCode(),
@@ -22,13 +22,14 @@ class MrgsolveExport extends _Export{
       type: 'text'
     }];
   }
-  _getMrgsolveImage(targetSpace){
+  _getMrgsolveImage(){
     let model = {
-      population: this._container.getPopulation(targetSpace)
+      population: this.namespace
     };
 
     // set dynamic variables
     model.dynamics = model.population
+      .toArray()
       .filter((component) => {
         return component.instanceOf('Record') 
           && component.isDynamic;
@@ -38,6 +39,7 @@ class MrgsolveExport extends _Export{
 
     // check if initials depends on dynamic initials, than stop
     model.population
+      .toArray()
       .filter((component) => {
         return component.instanceOf('Record')
           && component.assignments 
@@ -55,24 +57,27 @@ class MrgsolveExport extends _Export{
 
     // set array of output records
     model.output = model.population
+      .toArray()
       .filter((component) => component.instanceOf('Record') && component.assignments!==undefined)
       .filter((component) => !component.instanceOf('Species') || !component.isAmount);
 
     // set sorted array of initials
     model.start_ = model.population
+      .sortExpressionsByContext('start_')
       .filter((component) => {
         return component.instanceOf('Record') 
           && component.assignments 
           && component.assignments.start_;
-      }).sortExpressionsByContext('start_');
+      });
 
     // set sorted array of rules
     model.ode_ = model.population
+      .sortExpressionsByContext('ode_')
       .filter((component) => {
         return component.instanceOf('Record') 
           && component.assignments 
           && component.assignments.ode_;
-      }).sortExpressionsByContext('ode_');
+      });
 
     return model;
   }

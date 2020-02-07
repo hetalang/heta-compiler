@@ -1,8 +1,6 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const XArray = require('../x-array');
 const nunjucks = require('../nunjucks-env');
-const { Compartment } = require('../core/compartment');
 const { ExportError } = require('../heta-error');
 const _ = require('lodash');
 require('./expression');
@@ -25,7 +23,7 @@ class SLVExport extends _Export{
    * @return {string} Text code of exported format.
    */
   make(){
-    this._model_ = this._getSLVImage(this.space);
+    this._model_ = this._getSLVImage();
 
     return [{
       content: this.getSLVCode(),
@@ -39,37 +37,28 @@ class SLVExport extends _Export{
    *
    * @return {undefined}
    */
-  _getSLVImage(targetSpace){
+  _getSLVImage(){
     // creates empty model image
     let model = {
-      population: this._container.getPopulation(targetSpace, false)
+      population: this.namespace
     };
 
-    // add default_compartment_
-    let default_compartment_ = (new Compartment).merge({
-      assignments: {
-        start_: {expr: 1}
-      },
-      boundary: true,
-      units: 'UL',
-      notes: 'This is fake compartment to support compounds without compartment.'
-    });
-    default_compartment_._id = 'default_compartment_';
-    default_compartment_._space = targetSpace;
-    model.population.push(default_compartment_);
-
     // push active processes
-    model.processes = new XArray();
+    model.processes = [];
     model.population
+      .toArray()
       .filter((x) => {
         return x.instanceOf('Process')
           && x.actors.length>0 // process with actors
-          && x.actors.some((actor) => !actor.targetObj.boundary && !actor.targetObj.implicitBoundary); // true if there is at least non boundary target
+          && x.actors.some((actor) => { // true if there is at least non boundary target
+            return !actor.targetObj.boundary && !actor.targetObj.implicitBoundary;
+          });
       })
       .forEach((process) => model.processes.push(process));
     // push non boundary ode variables which are mentioned in processes
-    model.variables = new XArray();
+    model.variables = [];
     model.population
+      .toArray()
       .filter((x) => x.instanceOf('Record') && x.isDynamic)
       .forEach((record) => model.variables.push(record));
     // create matrix
@@ -86,9 +75,8 @@ class SLVExport extends _Export{
 
     // create and sort expressions for RHS
     model.rhs = model.population
-      .selectByInstanceOf('Record')
-      .filter((record) => _.has(record, 'assignments.ode_'))
-      .sortExpressionsByContext('ode_');
+      .sortExpressionsByContext('ode_')
+      .filter((record) => record.instanceOf('Record') && _.has(record, 'assignments.ode_'));
     // check that all record in start are not Expression
     let startExpressions = model.population
       .selectRecordsByContext('start_')

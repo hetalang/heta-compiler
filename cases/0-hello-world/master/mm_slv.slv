@@ -758,7 +758,7 @@ Km = 2.5; // @Const  {units: uM};
 default_comp = 1; // @Compartment 'Default compartment' {units: L}
 S = 10; // @Species 'substrate' {units: uM}
 P = 0; // @Species 'product' {units: uM}
-default_compartment_ = 1; // @Compartment  {units: UL}
+default_compartment_ = 1; // {units: UL} This is fake compartment to support compounds without compartment.
 
 
 
@@ -948,25 +948,19 @@ Maximize objective function
 0
 0
 0
-2
+1
 default_comp
-default_compartment_
-0
-2
 0
 1
-2
+0
+1
 
-
-2
-false
+1
 false
 0
-2
+1
 1.00
-1.00
-2
-3
+1
 3
 2
 S

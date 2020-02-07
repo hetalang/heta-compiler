@@ -15,8 +15,9 @@ class GSKXLSXExport extends XLSXExport {
     return 'GSKXLSXExport';
   }
   make(){
-    let qArr = this._container
-      .getPopulation(this.space, true)
+    let qArr = this.namespace
+      .toArray()
+      .filter((x) => !x.isCore)
       .map((x) => x.toFlat());
 
     // main_tab sheet

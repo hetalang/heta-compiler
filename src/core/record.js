@@ -16,7 +16,7 @@ class Record extends _Size {
       let newAssignments = _.mapValues(q.assignments, (x) => {
         if(typeof x === 'string' || typeof x === 'number' || 'expr' in x){
           try{ // this is for the cases of wrong size structure
-            return new Expression(x);
+            return Expression.fromQ(x);
           }catch(e){
             throw new ValidationError(q, [], e.message + `: "${x.expr}"`);
           }
@@ -54,8 +54,8 @@ class Record extends _Size {
       });
     }
   }
-  bind(container, skipErrors = false){
-    super.bind(container, skipErrors);
+  bind(namespace, skipErrors = false){
+    super.bind(namespace, skipErrors);
 
     let messages = [];
     
@@ -65,10 +65,7 @@ class Record extends _Size {
         this
           .dependOn(key)
           .forEach((id) => {
-            let target = container.select({
-              id: id, 
-              space: this.space
-            });
+            let target = namespace.get(id);
 
             if(!target){
               messages.push(`Component "${id}" is not found in space "${this.space}" as expected in expression: `
@@ -100,7 +97,7 @@ class Record extends _Size {
   get implicitBoundary(){
     return _.has(this, 'assignments.ode_'); // this is rule
   }
-  // works properly only after populate()
+  // works properly only after knit()
   get isDynamic(){
     return !this.boundary
       && !this.implicitBoundary
@@ -112,18 +109,22 @@ class Record extends _Size {
     if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
       throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
 
-    let exprPath = 'assignments.' + context;
-    if(_.has(this, exprPath)){
-      let deps = this.assignments[context]
+    let assignment = this.getAssignment(context, true);
+    if (assignment !== undefined) {
+      let deps = assignment
         .exprParsed
         .getSymbols();
       _.pull(deps, 't'); // remove t from dependence
-      if(this.className==='Species' && !this.isAmount) 
-        deps.push(this.compartment);
       return deps;
     }else{
       return undefined;
     }
+  }
+  // return Expression based on context
+  getAssignment(context){
+    if(typeof context !== 'string')
+      throw new TypeError('context argument must be of string type.');
+    return _.get(this, 'assignments.' + context);
   }
 }
 

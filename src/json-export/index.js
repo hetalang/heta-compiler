@@ -7,9 +7,7 @@ class JSONExport extends _Export {
     return 'JSONExport';
   }
   make(){
-    let qArr = this._container
-      .getPopulation(this.space, true)
-      .map((x) => x.toQ());
+    let qArr = this.namespace.toQArr(true);
     
     return [{
       content: JSON.stringify(qArr, null, 2),

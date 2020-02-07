@@ -3,27 +3,31 @@ const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
 
 class Expression {
-  constructor(q = {}){ // string or object
-    if(typeof q!=='string' && typeof q!=='number' && !('expr' in q))
+  constructor(exprParsed){ // string or object
+    this.exprParsed = exprParsed;
+  }
+  static fromQ(q = {}){ // string or object
+    if (typeof q!=='string' && typeof q!=='number' && !('expr' in q))
       throw new TypeError('Expected <string> or <number> or {expr: <string>}, but get ' + JSON.stringify(q));
 
-    if(typeof q==='string' || typeof q==='number'){
-      this._exprInput = q.toString(); // to transform numbers to string
-      this._inputLang = 'qs3p';
-    }else{
-      this._exprInput = q.expr;
-      this._langInput = q.lang ? q.lang : 'qs3p';
+    if (typeof q==='string' || typeof q==='number') {
+      var exprString = q.toString();
+    } else {
+      exprString = q.expr;
     }
-    try{
-      this.exprParsed = math.parse(this._exprInput);
-    }catch(e){
+    try {
+      var exprParsed = math.parse(exprString);
+    } catch(e) {
       throw new TypeError('Cannot parse .expr property. ' + e.message);
     }
-    if(q.units) this.units = q.units;
+
+    return new Expression(exprParsed);
   }
+  /* string format */
   get expr(){
     return this.exprParsed.toString();
   }
+  /* number if expression can be directly transformed to number, undefined otherwice*/
   get num(){ // if it is constant than return number or undefined otherwice
     let tree = this.exprParsed;
     if(tree.isConstantNode){
@@ -135,7 +139,6 @@ class Expression {
     let res = options.simplifyExpressions
       ? this.expr
       : {expr: this.expr};
-    if(this.units) res.units = this.units;
     return res;
   }
   linearizeFor(target){
@@ -154,6 +157,11 @@ class Expression {
 
     let aTreeSimplified = math.simplify(aTree);
     return [aTreeSimplified, bTree];
+  }
+  translate(translator = {}){
+    let exprParsed = this.exprParsed
+      .translate(translator);
+    return new Expression(exprParsed);
   }
 }
 

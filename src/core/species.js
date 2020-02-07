@@ -1,5 +1,7 @@
 const { Record } = require('./record');
+const { Expression } = require('./expression');
 const _ = require('lodash');
+const math = require('mathjs');
 
 class Species extends Record {
   merge(q, skipChecking){
@@ -34,6 +36,26 @@ class Species extends Record {
       return this.unitsParsed.toHash();
     }else if(useSBMLUnits && this.unitsSBML()){
       return this.unitsSBML().toHash();
+    }
+  }
+  // useAmount = true means that returns amount expression instead of concentration
+  getAssignment(context, useAmount = false){
+    if(typeof context !== 'string')
+      throw new TypeError('context argument must be of string type.');
+
+    let directExpr = _.get(this, 'assignments.' + context);
+    if (directExpr === undefined) {
+      return undefined;
+    } else if (this.isAmount || !useAmount) {
+      return directExpr;
+    } else {
+      // multiply concentration and compartment
+      let args = [
+        directExpr.exprParsed,
+        new math.expression.node.SymbolNode(this.compartment)
+      ];
+      let expr = new math.expression.node.OperatorNode('*', 'multiply', args);
+      return new Expression(expr);
     }
   }
 }

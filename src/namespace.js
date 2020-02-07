@@ -1,15 +1,43 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 
-class XArray extends Array{
-  getById(id){
-    return this.find((x) => x.id === id);
+class Namespace extends Map {
+  constructor(spaceName){
+    super();
+    //if (typeof spaceName !== 'string')
+    //  throw new TypeError(`spaceName argument must be string, got ${spaceName}`);
+
+    this._spaceName = spaceName;
+  }
+  get isAbstract(){
+    return this._isAbstract;
+  }
+  // title of space
+  get spaceName(){
+    return this._spaceName;
+  }
+  set(key, value){
+    return super.set(key, value);
+  }
+  toArray(){
+    return [...this].map((x) => x[1]);
+  }
+  toQArr(removeCoreComponents = false){
+    let qArr = this.toArray()
+      .filter((x) => !removeCoreComponents || !x.isCore)
+      .map((x) => x.toQ());
+    
+    return qArr;
   }
   selectByClassName(className){
-    return this.filter((x) => x.className === className);
+    return this
+      .toArray()
+      .filter((x) => x.className === className);
   }
   selectByInstanceOf(className){
-    return this.filter((x) => x.instanceOf(className));
+    return this
+      .toArray()
+      .filter((x) => x.instanceOf(className));
   }
   sortExpressionsByContext(context){
     // path to Expression based on context
@@ -33,7 +61,7 @@ class XArray extends Array{
         .map((id) => {
           let record = this.getById(id);
           let expr = _.get(record, exprPath).expr;
-          return `${id}$${record.space} [${context}]= ${expr};`;
+          return `${record.space}::${id} [${context}]= ${expr};`;
         })
         .join('\n');
       let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
@@ -41,9 +69,9 @@ class XArray extends Array{
       throw error;
     }
 
-    let sorted = _.sortBy(this, (record) => sortedGraph.indexOf(record.id)); // if record not in graph than -1 and will be first
+    let sorted = _.sortBy(this.toArray(), (record) => sortedGraph.indexOf(record.id)); // if record not in graph than -1 and will be first
 
-    return new XArray(...sorted); // sorted is Array, return must be XArray
+    return sorted; // sorted is Array, return must be XArray
   }
   selectRecordsByContext(context){
     return this.selectByInstanceOf('Record')
@@ -58,6 +86,15 @@ class XArray extends Array{
       .map((record) => record.unitsSBML())
       .value();
   }
+  knit(skipErrors = false){
+    this.toArray().forEach((component) => { // iterates all components
+      component.bind(this, skipErrors);
+    });
+
+    return this;
+  }
 }
 
-module.exports = XArray;
+module.exports = {
+  Namespace
+};

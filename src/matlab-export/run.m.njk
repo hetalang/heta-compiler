@@ -1,0 +1,33 @@
+clear; clc; close all;
+
+% global p;
+
+p_names = [
+{%- for con in constants -%}
+"{{ con.id }}"{{ ', ' if not loop.last }}
+{%- endfor -%}
+];
+y_names = [
+{%- for record in dynamicRecords -%}
+"{{ record.id }}"{{ ', ' if not loop.last }}
+{%- endfor -%}
+];
+
+p = param();
+y0 = init();
+
+%%% default task
+t_span = [0 100];
+opt = odeset(); % odeset('Mass',M,'RelTol',1e-4,'AbsTol',[1e-6 1e-10 1e-6], 'Stats','on');
+[t, y] = ode15s(@(t, y) model(t, y, p), t_span, y0);
+
+figure
+hold on
+for i = 1:length(y_names)
+    plot(t, y(:, i), '-', 'Linewidth', 1)
+end
+title('Default plot','Fontsize', 14)
+xlabel('t', 'Fontsize', 14)
+ylabel('records', 'Fontsize', 14)
+legend(y_names)
+hold off

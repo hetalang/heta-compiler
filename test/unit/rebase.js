@@ -28,7 +28,7 @@ describe('unit transformation 0', () => {
   it('Create platform', () => {
     c = (new Container)
       .loadMany(platform0)
-      .populate();
+      .knitMany();
   });
 
   it('Elementary unit transformation', () => {
@@ -83,7 +83,7 @@ describe('Hour problem testing', () => {
   it('Create platform', () => {
     c = (new Container)
       .loadMany(platform1)
-      .populate();
+      .knitMany();
   });
 
   it('SBML-like transformation for UnitDef', () => {

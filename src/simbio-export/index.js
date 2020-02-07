@@ -21,7 +21,7 @@ class SimbioExport extends _Export{
     return 'SimbioExport';
   }
   make(){
-    this.image = this._getSimbioImage(this.space);
+    this.image = this._getSimbioImage();
 
     return [
       {
@@ -36,12 +36,9 @@ class SimbioExport extends _Export{
       }
     ];
   }
-  _getSimbioImage(targetSpace){
-    let population = this._container
-      .getPopulation(targetSpace, false);
-      
+  _getSimbioImage(){
     return {
-      population: population,
+      population: this.namespace,
       legalUnits: legalUnits
     };
   }
