@@ -52,4 +52,4 @@ qs3p build
 
 ## Copyright
 
-&copy; 2019 InSysBio LLC
+&copy; 2019-2020 InSysBio LLC
