@@ -69,7 +69,7 @@ class MatlabExport extends _Export {
               st = '+' + st + '*';
             }
             return st + ref.process;
-          });
+          }).join(' ');
         }
       });
     

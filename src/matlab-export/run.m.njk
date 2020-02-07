@@ -17,16 +17,17 @@ p = param();
 y0 = init();
 
 %%% default task
-t_end = 1000;
-[t, y] = ode15s(@(t, y) model(t, y, p), [0 t_end], y0);
+t_span = [0 100];
+opt = odeset(); % odeset('Mass',M,'RelTol',1e-4,'AbsTol',[1e-6 1e-10 1e-6], 'Stats','on');
+[t, y] = ode15s(@(t, y) model(t, y, p), t_span, y0);
 
 figure
 hold on
 for i = 1:length(y_names)
-    plot(t, y(:, i), '-', 'Linewidth', 2)
+    plot(t, y(:, i), '-', 'Linewidth', 1)
 end
-title('Default plot','Fontsize',14)
-xlabel('t','Fontsize',14)
-ylabel('records','Fontsize',14)
+title('Default plot','Fontsize', 14)
+xlabel('t', 'Fontsize', 14)
+ylabel('records', 'Fontsize', 14)
+legend(y_names)
 hold off
- 
