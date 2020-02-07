@@ -15,7 +15,7 @@ describe('Testing "cases/7-importNS"', () => {
   it('Create builder.', () => {
     let declaration = {
       'id': 'test',
-      'builderVersion': '^0.4',
+      'builderVersion': '^0.5',
       'options': {
         'logLevel': 'error'
       },
