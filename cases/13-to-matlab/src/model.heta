@@ -3,14 +3,15 @@ comp1 @Compartment 'First Compartment' .= 1.1 {units: L};
 comp2 @Compartment .= 2.2;
 
 s1 @Species { compartment: comp1, isAmount: true } .= 10;
-s2 @Species { compartment: comp2 } .= 0;
+s2 @Species { compartment: comp2 } .= s2_0;
 s3 @Species { compartment: comp2 } .= 0;
 s4 @Species { compartment: comp2 } .= 5;
+s5 @Species { compartment: comp2, boundary: true } .= 2.4;
 
 r1 @Reaction { actors: s1 => s2 };
 r1 := k1 * (s1 - s2) * PS;
-r2 @Reaction { actors: s2 => s4 + 2s3 };
-r2 := k2 * s2 * comp2;
+r2 @Reaction { actors: s2 + s5 => s4 + 2s3 };
+r2 := k2 * s2 * s5* comp2;
 r3 @Reaction { actors: s3 <=> s4 };
 r3 := k3 * (s3 - s4/Keq3) * comp2;
 r4 @Reaction { actors: s3 => };
@@ -22,6 +23,7 @@ k3 @Const = 2.1e-3;
 k4 @Const = 1e-3;
 Keq3 @Const = 4.0;
 PS @Const = 1e-1;
+s2_0 @Const = 0.3;
 
 AUC_s3 @Record .= 0;
 pr1 @Process { actors: => AUC_s3 };

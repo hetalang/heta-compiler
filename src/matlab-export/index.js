@@ -68,8 +68,6 @@ class MatlabExport extends _Export {
             } else { // ref.stoichiometry >= 0
               st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
             }
-            
-            console.log(st)
     
             return st + ref.process;
           }).join(' ');
