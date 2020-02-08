@@ -66,13 +66,16 @@ class MatlabExport extends _Export {
             } else if (ref.stoichiometry === 1){
               st = i === 0 ? '' : '+';
             } else { // ref.stoichiometry >= 0
-              st = '+' + st + '*';
+              st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
             }
+            
+            console.log(st)
+    
             return st + ref.process;
           }).join(' ');
         }
       });
-    
+
     let yTranslator = dynamicRecords
       .map((x, i) => [x.id, `y(${i+1})`]);
     let pTranslator = constants

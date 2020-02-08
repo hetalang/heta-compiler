@@ -1,0 +1,20 @@
+/*
+  template file for creating platform
+*/
+// add qsp units
+include ./qsp-units.heta
+
+include model.heta
+// include table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
+// include addon.json type json
+// include addon.yml type yaml
+
+// exports
+output_sbml @SBMLExport { filepath: sbml, version: L2V4 };
+matlab1 @MatlabExport { filepath: matlab };
+output_slv @SLVExport { filepath: model, eventsOff: false };
+//output_json @JSONExport { filepath: output };
+//output_yaml @YAMLExport { filepath: output };
+//output_simbio @SimbioExport { filepath: simbio };
+//output_mrg @MrgsolveExport { filepath: mrgsolve };
+//output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };
