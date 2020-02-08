@@ -16,7 +16,7 @@ describe('Testing "cases/12-to-sbml"', () => {
   it('Create builder.', () => {
     let declaration = {
       'id': 'test',
-      'builderVersion': '^0.5',
+      'builderVersion': '^0.4.21',
       'options': {
         'logLevel': 'error'
       },

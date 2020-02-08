@@ -20,7 +20,7 @@ describe('Testing "cases/0-hello-world"', () => {
   it('Create builder.', () => {
     let declaration = {
       'id': 'test',
-      'builderVersion': '^0.5',
+      'builderVersion': '^0.4.21',
       'options': {
         'logLevel': 'error'
       },
