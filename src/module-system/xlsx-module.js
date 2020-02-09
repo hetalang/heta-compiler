@@ -48,7 +48,22 @@ _Module.prototype.setXLSXModuleAsync = async function(){
             .filter((y) => y!==''); // removes empty strings from array
         }
       });
-      return cleaned;
+      // converts 0/'0' -> false, 1/'1' -> true
+      let booleanConverter = (value, key) => {
+        if (['isAmount', 'free', 'boundary'].indexOf(key) !== -1){
+          if (value == 0) {
+            return false;
+          } else if (value == 1) {
+            return true;
+          } else {
+            return value;
+          }
+        } else {
+          return value;
+        }
+      }
+
+      return _.mapValues(cleaned, booleanConverter);
     });
 
   this.parsed = dataFiltered;
