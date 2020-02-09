@@ -11,6 +11,8 @@
 
 function y = {{ options.id }}_Init(p)
 
+y = zeros({{ dynamicRecords|length }}, 1);
+
 %%% Initialization of dynamic records
 {%- for record in initRecords %}
 {{ idOrSynonim(record) }} = {{ record.getAssignment('start_', true).translate(translator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }}) {{ record.notes }}
