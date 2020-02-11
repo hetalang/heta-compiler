@@ -1,5 +1,6 @@
 stages:
   - test
+  - diagnostics
 
 before_script:
   - "node -v"
