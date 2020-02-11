@@ -44,7 +44,7 @@ describe('Testing "cases/0-hello-world"', () => {
     expect(code).xml.be.deep.equal(sbml_correct);
     //console.log(code);
   });
-/*
+
   it('Run @MrgsolveExport, check and compare.', () => {
     let mm_mrg = b.container.select({id: 'mm_mrg', space: 'mm'});
     let code = mm_mrg.make()[0].content;
@@ -52,7 +52,7 @@ describe('Testing "cases/0-hello-world"', () => {
     fs.outputFileSync(filename, code);
     // the simulations will be checked later in R
   });
-*/
+
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.classes.JSONExport;
     let json_export = new JSONExport;
