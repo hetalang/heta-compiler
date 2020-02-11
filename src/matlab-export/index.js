@@ -48,10 +48,10 @@ class MatlabExport extends _Export {
     let initRecords = this.namespace
       .sortExpressionsByContext('start_')
       .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.start_'));
-    // Rules
-    let ruleRecords = this.namespace
-      .sortExpressionsByContext('ode_')
-      .filter((x) => x.instanceOf('Record') && x.implicitBoundary);
+    // currently we output all records
+    let outputRecords = this.namespace
+      .sortExpressionsByContext('ode_', true)
+      .filter((x) => x.instanceOf('Record'));
     // RHS of ODE
     let rhs = dynamicRecords
       .map((record) => {
@@ -90,8 +90,10 @@ class MatlabExport extends _Export {
       dynamicRecords,
       rhs,
       initRecords,
-      ruleRecords,
-      translator
+      outputRecords,
+      translator,
+      yTranslator: { symbolName: _.fromPairs(yTranslator)},
+      pTranslator: { symbolName: _.fromPairs(pTranslator)}
     };
   }
   getModelCode(image = {}){

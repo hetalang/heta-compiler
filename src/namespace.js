@@ -39,15 +39,15 @@ class Namespace extends Map {
       .toArray()
       .filter((x) => x.instanceOf(className));
   }
-  sortExpressionsByContext(context){
-    // path to Expression based on context
-    let exprPath = 'assignments.' + context;
+  /*
+  */
+  sortExpressionsByContext(context, includeCompartmentDep = false){
     // create topo-sort tree
     let graph = new TopoSort();
     this
       .selectByInstanceOf('Record')
       .forEach((component) => {
-        let deps = component.dependOn(context);
+        let deps = component.dependOn(context, includeCompartmentDep);
         graph.add(component.id, deps);
       });
 
@@ -56,6 +56,8 @@ class Namespace extends Map {
         .sort()
         .reverse(); // independent should be at the beginning
     }catch(e){ // catch cycling
+      // path to Expression based on context
+      let exprPath = 'assignments.' + context;
       // error changes
       let infoLine = e.circular
         .map((id) => {

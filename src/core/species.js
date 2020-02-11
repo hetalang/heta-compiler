@@ -38,7 +38,16 @@ class Species extends Record {
       return this.unitsSBML().toHash();
     }
   }
+  dependOn(context, includeCompatment = false){
+    let deps = super.dependOn(context);
+    if (includeCompatment && !this.isAmount && !this.implicitBoundary) {
+      deps.push(this.compartment);
+    }
+
+    return deps;
+  }
   // useAmount = true means that returns amount expression instead of concentration
+  /*
   getAssignment(context, useAmount = false){
     if(typeof context !== 'string')
       throw new TypeError('context argument must be of string type.');
@@ -58,6 +67,7 @@ class Species extends Record {
       return new Expression(expr);
     }
   }
+  */
 }
 
 Species._requirements = {

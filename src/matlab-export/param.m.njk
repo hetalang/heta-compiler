@@ -3,6 +3,7 @@
 
 function p = {{ options.id }}_Param()
 
+p = zeros({{ constants|length }}, 1);
 %%% parameter annotation
 {%- for con in constants %}
 p({{ loop.index }}) = {{ con.num }}; % {{ con.id }}, {{ con.title }} ({{ con.units }}) {{ con.notes }}

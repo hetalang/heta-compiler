@@ -109,7 +109,7 @@ class Record extends _Size {
     if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
       throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
 
-    let assignment = this.getAssignment(context, true);
+    let assignment = this.getAssignment(context);
     if (assignment !== undefined) {
       let deps = assignment
         .exprParsed
@@ -117,7 +117,7 @@ class Record extends _Size {
       _.pull(deps, 't'); // remove t from dependence
       return deps;
     }else{
-      return undefined;
+      return [];
     }
   }
   // return Expression based on context

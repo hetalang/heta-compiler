@@ -11,7 +11,7 @@ s5 @Species { compartment: comp2, boundary: true } .= 2.4;
 r1 @Reaction { actors: s1 => s2 };
 r1 := k1 * (s1 - s2) * PS;
 r2 @Reaction { actors: s2 + s5 => s4 + 2s3 };
-r2 := k2 * s2 * s5* comp2;
+r2 := k2 * s2 * s5 * comp2;
 r3 @Reaction { actors: s3 <=> s4 };
 r3 := k3 * (s3 - s4/Keq3) * comp2;
 r4 @Reaction { actors: s3 => };
@@ -28,3 +28,18 @@ s2_0 @Const = 0.3;
 AUC_s3 @Record .= 0;
 pr1 @Process { actors: => AUC_s3 };
 pr1 := s3;
+
+// Record in start and ode
+x1 @Record .= rec1;
+rec1 @Record := k1 * s1 * PS;
+rec1 .= 0;
+
+// switchers and events
+sw1 @TimeSwitcher {
+    start: 12,
+    period: 6,
+    end: 60,
+    repeatCount: 3
+};
+s1 [sw1]= dose;
+dose @Const = 10;
