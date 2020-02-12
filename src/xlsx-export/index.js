@@ -46,37 +46,53 @@ class XLSXExport extends _Export {
     let qArr = this.namespace
       .toArray()
       .filter((x) => !x.isCore)
-      .map((x) => x.toFlat());
+      .map((x) => x.toFlat())
+      .map((x) => {
+        // add on property
+        x.on = 1;
+        // convert boolen to string
+        return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
+      });
 
     // split qArr to several sheets
-    let splitted = _.chain(qArr)
-      .groupBy((q) => q.class)
-      .mapValues((value, prop) => {
+    if (this.splitByClass) {
+      let splitted = _.chain(qArr)
+        .groupBy((q) => q.class)
+        .mapValues((value, prop) => {
+          let keys = _.chain(value) // store unique keys
+            .map((x) => _.keys(x))
+            .flatten()
+            .uniq()
+            .value();
+          let sequense_i = _.intersection(sequense, keys);
 
-        let keys = []; // store unique keys
-        let updValue = value.map((q) => { // iterate and modify properties
-          q.on = 1;
-          // convert boolen to string
-          return _.mapValues(q, (value, key) => {
-            if (keys.indexOf(key)===-1) keys.push(key);
-            return typeof value === 'boolean' ? value.toString() : value;
-          });
-        });
-  
-        let sequense_i = _.intersection(sequense, keys);
+          return {
+            content:  value,
+            pathSuffix: '',
+            type: 'sheet',
+            name: prop,
+            headerSeq: sequense_i
+          };
+        })
+        .values()
+        .value();
+      return splitted;
+    } else {
+      let keys = _.chain(qArr) // store unique keys
+        .map((x) => _.keys(x))
+        .flatten()
+        .uniq()
+        .value();
+      let sequense_out = _.intersection(sequense, keys);
 
-        return {
-          content:  updValue,
-          pathSuffix: '',
-          type: 'sheet',
-          name: prop,
-          headerSeq: sequense_i
-        };
-      })
-      .values()
-      .value();
-    
-    return splitted;
+      return [{
+        content:  qArr,
+        pathSuffix: '',
+        type: 'sheet',
+        name: this.space,
+        headerSeq: sequense_out
+      }];
+    }
   }
   toQ(){
     let res = super.toQ();

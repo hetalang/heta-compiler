@@ -7,7 +7,7 @@ _Size.prototype.toFlat = function(options = {}){
   let res = _Size.__proto__.prototype.toFlat.call(this, options);
 
   // res.unitsGSK = this.unitsRebased(legalUnits, usePefix = false); // with unit transformation
-  res.unitsGSK = this.units; // units without transformation
+  if (this.units) res.unitsGSK = this.units; // units without transformation
 
   return res;
 };
