@@ -84,9 +84,9 @@ function [ode_func, out_func, events_] = {{ options.id }}_Model()
 
         check = res * ev_period;
     end
-    function out = {{ event.switcher.id }}_affect(p)
+    function out = {{ event.switcher.id }}_affect()
     end
-    {{ event.switcher.id }}_ = [{{ event.switcher.id }}_condition, {{ event.switcher.id }}_affect];
+    {{ event.switcher.id }}_ = { @{{ event.switcher.id }}_condition, @{{ event.switcher.id }}_affect };
     {%- endfor %}
 
     events_ = [

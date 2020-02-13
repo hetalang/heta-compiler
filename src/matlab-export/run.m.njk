@@ -13,7 +13,7 @@ output_names = [
 
 p = param();
 y0 = init(p);
-[ode_func, out_func] = model();
+[ode_func, out_func, events] = model();
 
 %%% default task
 t_span = [0 100];
