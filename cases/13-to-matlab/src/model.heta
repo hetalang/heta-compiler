@@ -38,7 +38,7 @@ rec1 .= 0;
 sw1 @TimeSwitcher {
     start: 12,
     period: 6,
-    end: 60,
+    stop: 60,
     repeatCount: 3
 };
 s1 [sw1]= dose;

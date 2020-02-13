@@ -17,6 +17,7 @@ class TimeSwitcher extends _Switcher {
     res.condition = this.condition;
     res.start = this.start;
     if(this.period!==undefined) res.period = this.period;
+    if(this.stop!==undefined) res.stop = this.stop;
     if(this.repeatCount!==undefined) res.repeatCount = this.repeatCount;
     return res;
   }

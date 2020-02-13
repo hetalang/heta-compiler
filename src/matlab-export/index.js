@@ -82,6 +82,20 @@ class MatlabExport extends _Export {
       symbolName: _.fromPairs(yTranslator.concat(pTranslator))
     };
 
+    // create events from switchers
+    let events = this.namespace
+      .selectByInstanceOf('TimeSwitcher')
+      .map((switcher) => {
+        let condition = {};
+        let affect = {};
+        
+        return {
+          switcher,
+          condition,
+          affect
+        };
+      });
+
     return { 
       builderName,
       options,
@@ -93,7 +107,8 @@ class MatlabExport extends _Export {
       outputRecords,
       translator,
       yTranslator: { symbolName: _.fromPairs(yTranslator)},
-      pTranslator: { symbolName: _.fromPairs(pTranslator)}
+      pTranslator: { symbolName: _.fromPairs(pTranslator)},
+      events
     };
   }
   getModelCode(image = {}){
