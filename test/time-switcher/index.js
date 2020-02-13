@@ -51,6 +51,6 @@ describe('Test TimeSwitcher methods', () => {
   it('getRepeatCount() 7', () => {
     let ts1 = new TimeSwitcher();
     ts1.merge({ start: 12, repeatCount: 400, stop: 120 });
-    expect(ts1.getRepeatCount()).to.be.equal(17);
+    expect(ts1.getRepeatCount()).to.be.equal(400);
   });
 });
