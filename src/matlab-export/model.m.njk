@@ -61,28 +61,23 @@ function [ode_func, out_func, events_] = {{ options.id }}_Model()
     end
 
     {% for event in events -%}
-    function [check, isterminal, direction] = {{ event.switcher.id }}_condition(t, y)
+    function [res, isterminal, direction] = {{ event.switcher.id }}_condition(t, y)
         direction = [];
         isterminal = 1;
         
         ev_start = {{ event.switcher.start }};
         ev_period = {{ event.switcher.period if event.switcher.period is defined else '[]'}};
-        ev_stop = {{ event.switcher.stop if event.switcher.stop is defined else '[]' }};
-        ev_repeatCount = {{ event.switcher.repeatCount if event.switcher.repeatCount is defined else '0' }};
+        ev_repeatCount = {{ event.switcher.getRepeatCount() }};
         
-        ev_repeat = min([ev_repeatCount, (ev_stop-ev_start)/ev_period]);
-
         flag = (t - ev_start)/ev_period;
         
         if flag <= 0.
             res = flag;
-        elseif (0. < flag) && (flag < ev_repeat)
+        elseif (0. < flag) && (flag < ev_repeatCount)
             res = flag - floor(flag + 0.5);
         else
-            res = flag - ev_repeat;
+            res = flag - ev_repeatCount;
         end
-
-        check = res * ev_period;
     end
     function out = {{ event.switcher.id }}_affect()
     end
