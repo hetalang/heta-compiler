@@ -1,4 +1,5 @@
 const { _Switcher } = require('./_switcher');
+const { ceil, floor, min, max } = Math;
 
 class TimeSwitcher extends _Switcher {
   merge(q={}, skipChecking){
@@ -11,6 +12,26 @@ class TimeSwitcher extends _Switcher {
     if(q.repeatCount!==undefined) this.repeatCount = q.repeatCount;
 
     return this;
+  }
+  getRepeatCount(){
+    let repeatCount0 = this.repeatCount === undefined
+      ? undefined
+      : floor(this.repeatCount);
+    let repeatCount1 = this.stop === undefined || this.period === undefined
+      ? undefined
+      : ceil((this.stop-this.start)/this.period) - 1;
+
+    if (repeatCount0 === undefined && repeatCount1 === undefined){
+      var repeatCount = 0;
+    } else if (repeatCount0 === undefined) {
+      repeatCount = repeatCount1;
+    } else if (repeatCount1 === undefined){
+      repeatCount = repeatCount0;
+    } else {
+      repeatCount = min(repeatCount0, repeatCount1);
+    }
+
+    return repeatCount;
   }
   toQ(options = {}){
     let res = super.toQ(options);
