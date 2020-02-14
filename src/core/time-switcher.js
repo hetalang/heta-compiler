@@ -16,25 +16,25 @@ class TimeSwitcher extends _Switcher {
     if (typeof q.start === 'string'){
       this.start = q.start;
     } else if (typeof q.start === 'number') {
-      this.start = undefined;
+      delete this.start;
       this.startObj = (new Const).merge({ num: q.start });
     }
     if (typeof q.stop === 'string'){
       this.stop = q.stop;
     } else if (typeof q.stop === 'number') {
-      this.stop = undefined;
+      delete this.stop;
       this.stopObj = (new Const).merge({ num: q.stop });
     }
     if (typeof q.period === 'string'){
       this.period = q.period;
     } else if (typeof q.period === 'number') {
-      this.period = undefined;
+      delete this.period;
       this.periodObj = (new Const).merge({ num: q.period });
     }
     if (typeof q.repeatCount === 'string'){
       this.repeatCount = q.repeatCount;
     } else if (typeof q.repeatCount === 'number') {
-      this.repeatCount = undefined;
+      delete this.repeatCount;
       this.repeatCountObj = (new Const).merge({ num: q.repeatCount });
     }
 
@@ -111,10 +111,24 @@ class TimeSwitcher extends _Switcher {
 
 TimeSwitcher._requirements = {
   start: {
-    required: false
+    required: false,
+    isArray: false,
+    isReference: true, targetClass: 'Const', setTarget: true
   },
   stop: {
-    required: false
+    required: false,
+    isArray: false,
+    isReference: true, targetClass: 'Const', setTarget: true
+  },
+  period: {
+    required: false,
+    isArray: false,
+    isReference: true, targetClass: 'Const', setTarget: true
+  },
+  repeatCount: {
+    required: false,
+    isArray: false,
+    isReference: true, targetClass: 'Const', setTarget: true
   }
 };
 
