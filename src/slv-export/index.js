@@ -96,9 +96,9 @@ class SLVExport extends _Export{
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
         // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
-        let period = !switcher.period || switcher.repeatCount===0
+        let period = switcher.periodObj === undefined || _.get(switcher, 'repeatCountObj.num') === 0
           ? 0
-          : switcher.period;
+          : switcher.getPeriod();
         model.population
           .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
@@ -118,7 +118,7 @@ class SLVExport extends _Export{
               });
 
             model.events.push({
-              start: switcher.start,
+              start: switcher.getStart(),
               period: period,
               on: switcher.id + '_',
               target: record.id,
@@ -126,9 +126,9 @@ class SLVExport extends _Export{
               add: add
             });
 
-            if (switcher.stop!==undefined){
+            if (switcher.stopObj!==undefined){
               model.events.push({
-                start: switcher.stop,
+                start: switcher.getStop(),
                 period: 0,
                 on: 1,
                 target: switcher.id + '_',

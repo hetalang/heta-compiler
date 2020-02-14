@@ -178,7 +178,8 @@
             <apply>
               <geq/>
               <ci>t</ci>
-              <cn>{{event.start}}</cn>
+              {% if event.start is defined %}<ci>{{ event.start }}</ci>
+              {%- else %}<cn>{{ event.startObj.num }}</cn>{% endif %}
             </apply>
           </math>
         </trigger>

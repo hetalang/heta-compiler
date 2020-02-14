@@ -65,9 +65,9 @@ function [ode_func, out_func, events_] = {{ options.id }}_Model()
         direction = [];
         isterminal = 1;
         
-        ev_start = {{ event.switcher.start }};
-        ev_period = {{ event.switcher.period if event.switcher.period is defined else '[]'}};
-        ev_repeatCount = {{ event.switcher.getRepeatCount() }};
+        ev_start = {{ event.switcher.startObj.num }};
+        ev_period = {{ event.switcher.periodObj.num if event.switcher.periodObj.num is defined else '[]'}};
+        ev_repeatCount = {{ event.switcher.getRepeatCountInt() }};
         
         flag = (t - ev_start)/ev_period;
         
