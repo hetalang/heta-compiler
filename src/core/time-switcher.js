@@ -1,8 +1,14 @@
 const { _Switcher } = require('./_switcher');
 const { Const } = require('./const');
-const { ceil, floor, min, max } = Math;
+const { floor, min } = Math;
 const _ = require('lodash');
-
+/*
+  How many times does it switch?
+  if (repeatCount < 0 || stop-start < 0) return 0;
+  if (period <= 0 || 0 <= repeatCount < 1 || 0 <= (stop-start)/period < 1) return 1;
+  if (period > 0 && 1 <= repeatCount && 1 <= (stop-start)/period) return n;
+  if (period > 0 && repeatCount === Infinity/undefined && stop === Infinity/undefined) return Infinity;
+*/
 class TimeSwitcher extends _Switcher {
   constructor(isCore = false){
     super(isCore);
@@ -13,24 +19,28 @@ class TimeSwitcher extends _Switcher {
     if(!skipChecking) TimeSwitcher.isValid(q);
     super.merge(q, skipChecking);
 
+    // empty means anon 0 as default
     if (typeof q.start === 'string'){
       this.start = q.start;
     } else if (typeof q.start === 'number') {
       delete this.start;
       this.startObj = (new Const).merge({ num: q.start });
     }
-    if (typeof q.stop === 'string'){
-      this.stop = q.stop;
-    } else if (typeof q.stop === 'number') {
-      delete this.stop;
-      this.stopObj = (new Const).merge({ num: q.stop });
-    }
+    // empty is same as 0
     if (typeof q.period === 'string'){
       this.period = q.period;
     } else if (typeof q.period === 'number') {
       delete this.period;
       this.periodObj = (new Const).merge({ num: q.period });
     }
+    // empty is the same as Infinity
+    if (typeof q.stop === 'string'){
+      this.stop = q.stop;
+    } else if (typeof q.stop === 'number') {
+      delete this.stop;
+      this.stopObj = (new Const).merge({ num: q.stop });
+    }
+    // empty is the same as Infinity
     if (typeof q.repeatCount === 'string'){
       this.repeatCount = q.repeatCount;
     } else if (typeof q.repeatCount === 'number') {
@@ -69,24 +79,15 @@ class TimeSwitcher extends _Switcher {
     }
   }
   getRepeatCountInt(){
-    let repeatCount0 = _.get(this, 'repeatCountObj.num');
-    let stop1 = _.get(this, 'stopObj.num');
-    let period1 = _.get(this, 'periodObj.num');
-    let repeatCount1 = stop1 === undefined|| period1 === undefined
-      ? undefined
-      : ceil((stop1-this.startObj.num)/period1) - 1;
+    let repeatCount0 = _.get(this, 'repeatCountObj.num', Infinity);
+    let stop1 = _.get(this, 'stopObj.num', Infinity);
+    let period1 = _.get(this, 'periodObj.num', 0);
 
-    if (repeatCount0 === undefined && repeatCount1 === undefined){
-      var repeatCount = 0;
-    } else if (repeatCount0 === undefined) {
-      repeatCount = repeatCount1;
-    } else if (repeatCount1 === undefined){
-      repeatCount = repeatCount0;
-    } else {
-      repeatCount = min(repeatCount0, repeatCount1);
-    }
+    let repeatCount = period1 <= 0
+      ? repeatCount0
+      : min(repeatCount0, (stop1-this.startObj.num)/period1);
 
-    return repeatCount;
+    return repeatCount === Infinity ? undefined : floor(repeatCount);
   }
   toQ(options = {}){
     let res = super.toQ(options);

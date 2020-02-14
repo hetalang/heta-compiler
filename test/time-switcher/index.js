@@ -21,7 +21,7 @@ describe('Test TimeSwitcher methods', () => {
   it('getRepeatCountInt() 2', () => {
     let ts1 = new TimeSwitcher();
     ts1.merge({ start: 12 });
-    expect(ts1.getRepeatCountInt()).to.be.equal(0);
+    expect(ts1.getRepeatCountInt()).to.be.undefined;
   });
 
   it('getRepeatCountInt() 3', () => {
@@ -33,7 +33,7 @@ describe('Test TimeSwitcher methods', () => {
   it('getRepeatCountInt() 4', () => {
     let ts1 = new TimeSwitcher();
     ts1.merge({ start: 12, period: 6, stop: 120 });
-    expect(ts1.getRepeatCountInt()).to.be.equal(17);
+    expect(ts1.getRepeatCountInt()).to.be.equal(18);
   });
 
   it('getRepeatCountInt() 5', () => {
@@ -45,7 +45,7 @@ describe('Test TimeSwitcher methods', () => {
   it('getRepeatCountInt() 6', () => {
     let ts1 = new TimeSwitcher();
     ts1.merge({ start: 12, period: 6, repeatCount: 400, stop: 120 });
-    expect(ts1.getRepeatCountInt()).to.be.equal(17);
+    expect(ts1.getRepeatCountInt()).to.be.equal(18);
   });
 
   it('getRepeatCountInt() 7', () => {

@@ -117,6 +117,15 @@ class SLVExport extends _Export{
                 }
               });
 
+            model.events.push({
+              start: switcher.getStart(),
+              period: period,
+              on: switcher.id + '_',
+              target: record.id,
+              multiply: multiply,
+              add: add
+            });
+
             if (switcher.stopObj!==undefined){
               model.events.push({
                 start: switcher.getStop(),
@@ -128,14 +137,6 @@ class SLVExport extends _Export{
               });
             }
 
-            model.events.push({
-              start: switcher.getStart(),
-              period: period,
-              on: switcher.id + '_',
-              target: record.id,
-              multiply: multiply,
-              add: add
-            });
           });
       });
 
