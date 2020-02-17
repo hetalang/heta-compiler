@@ -17,11 +17,11 @@ class MatlabExport extends _Export {
         pathSuffix: '/model.m',
         type: 'text'
       },
-      {
+      /*{
         content: this.getInitCode(image),
         pathSuffix: '/init.m',
         type: 'text'
-      },
+      },*/
       {
         content: this.getParamCode(image),
         pathSuffix: '/param.m',
