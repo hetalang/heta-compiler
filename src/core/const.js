@@ -10,6 +10,9 @@ class Const extends _Size { // implicit extend Numeric
 
     return this;
   }
+  getAssignment(){
+    return this.num;
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     if (this.num !== undefined) res.num = this.num;

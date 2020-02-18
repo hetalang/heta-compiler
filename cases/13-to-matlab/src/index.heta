@@ -15,6 +15,6 @@ matlab1 @MatlabExport { filepath: matlab };
 //output_slv @SLVExport { filepath: model, eventsOff: false };
 output_json @JSONExport { filepath: output };
 //output_yaml @YAMLExport { filepath: output };
-//output_simbio @SimbioExport { filepath: simbio };
+output_simbio @SimbioExport { filepath: simbio };
 //output_mrg @MrgsolveExport { filepath: mrgsolve };
 //output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };

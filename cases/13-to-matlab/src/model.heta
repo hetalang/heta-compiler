@@ -41,5 +41,6 @@ sw1 @TimeSwitcher {
     stop: 60,
     repeatCount: 3
 };
-s1 [sw1]= dose;
+s1 [sw1]= s1 + dose;
 dose @Const = 10;
+s2 [sw1]= s2 + dose/comp2;

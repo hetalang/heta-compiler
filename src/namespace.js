@@ -56,14 +56,11 @@ class Namespace extends Map {
         .sort()
         .reverse(); // independent should be at the beginning
     }catch(e){ // catch cycling
-      // path to Expression based on context
-      let exprPath = 'assignments.' + context;
       // error changes
       let infoLine = e.circular
         .map((id) => {
-          let record = this.getById(id);
-          let expr = _.get(record, exprPath).expr;
-          return `${record.space}::${id} [${context}]= ${expr};`;
+          let record = this.get(id);
+          return `${record.index} [${context}]= ${record.getAssignment(context, includeCompartmentDep).expr};`;
         })
         .join('\n');
       let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);

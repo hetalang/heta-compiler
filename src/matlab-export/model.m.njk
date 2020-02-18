@@ -1,6 +1,6 @@
-{% macro idOrSynonim(component) %}{# if no Synonim in translator, than use id #}
-{%- if translator.symbolName[component.id] -%}
-{{ translator.symbolName[component.id] }}
+{% macro idOrSynonim(component) %}{# if no Synonim in yTranslator, than use id #}
+{%- if yTranslator.symbolName[component.id] -%}
+{{ yTranslator.symbolName[component.id] }}
 {%- else -%}
 {{ component.id }}
 {%- endif -%}
@@ -94,7 +94,31 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
             res = flag - ev_repeatCount;
         end
     end
-    function out = {{ event.switcher.id }}_affect()
+    function out = {{ event.switcher.id }}_affect(t, y)
+
+        %%% Records
+        {%- for record in outputRecords %}
+        % {{ record.title }} ({{ record.units }}) {{ record.notes }}
+        {% if record.implicitBoundary -%}
+        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {%- elif record.instanceOf('Species') and not record.isAmount -%}
+        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {%- else -%}
+        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {%- endif -%}
+        {%- endfor %}
+
+        % out = y;
+        
+        %%% recalculated values
+        {%- for assignment in event.affect %}
+        {% if assignment.instanceOf('Species') and not assignment.isAmount and not assignment.implicitBoundary -%}
+        {{ idOrSynonim(assignment) }} = ({{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }}) * {{ assignment.compartment }};
+        {%- else -%}
+        {{ idOrSynonim(assignment) }} = {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }};
+        {%- endif -%}
+        {%- endfor %}
+        
     end
     {{ event.switcher.id }}_ = { @{{ event.switcher.id }}_condition, @{{ event.switcher.id }}_affect };
     {%- endfor %}

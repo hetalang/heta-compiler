@@ -78,20 +78,16 @@ class MatlabExport extends _Export {
       .map((x, i) => [x.id, `y(${i+1})`]);
     let pTranslator = constants
       .map((x, i) => [x.id, `p(${i+1})`]);
-    let translator = {
-      symbolName: _.fromPairs(yTranslator.concat(pTranslator))
-    };
 
     // create events from switchers
     let events = this.namespace
       .selectByInstanceOf('TimeSwitcher')
       .map((switcher) => {
-        let condition = {};
-        let affect = {};
+        let affect = switcher.namespace.toArray()
+          .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));
         
         return {
           switcher,
-          condition,
           affect
         };
       });
@@ -105,9 +101,9 @@ class MatlabExport extends _Export {
       rhs,
       initRecords,
       outputRecords,
-      translator,
       yTranslator: { symbolName: _.fromPairs(yTranslator)},
       pTranslator: { symbolName: _.fromPairs(pTranslator)},
+      translator: { symbolName: _.fromPairs(yTranslator.concat(pTranslator))},
       events
     };
   }
