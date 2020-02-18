@@ -94,7 +94,7 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
             res = flag - ev_repeatCount;
         end
     end
-    function out = {{ event.switcher.id }}_affect(t, y)
+    function y = {{ event.switcher.id }}_affect(t, y)
 
         %%% Records
         {%- for record in outputRecords %}
@@ -107,8 +107,6 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
         {%- endif -%}
         {%- endfor %}
-
-        % out = y;
         
         %%% recalculated values
         {%- for assignment in event.affect %}
