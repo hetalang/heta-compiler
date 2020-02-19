@@ -53,7 +53,6 @@ describe('Unit test for Expression with number.', () => {
     expect(expression).to.have.property('expr', '1e-15');
   });
 
-
   it('Conversion to Q.', () => {
     let expression = Expression.fromQ({expr: 3.14});
     expect(expression.toQ()).to.be.deep.equal({

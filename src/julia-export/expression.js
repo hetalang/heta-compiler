@@ -1,64 +1,75 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toJuliaString = function(){ // TODO: this is still the copy of Matlab structure
-  let CStringHandler = (node, options) => {
+Expression.prototype.toJuliaString = function(){
+  let juliaStringHandler = (node, options) => {
+    if(node.type==='ConstantNode' && Number.isInteger(node.value)){
+      return node.value + '.0';
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='plus'){
+      let args = node.args
+        .map((arg) => arg.toString(options))
+        .join(', ');
+      return `+(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='substract'){
+      let args = node.args
+        .map((arg) => arg.toString(options))
+        .join(', ');
+      return `-(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='multiply'){
+      let args = node.args
+        .map((arg) => arg.toString(options))
+        .join(', ');
+      return `*(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='divide'){
+      let args = node.args
+        .map((arg) => arg.toString(options))
+        .join(', ');
+      return `/(${args})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='cube'){
+      return `^(${node.args[0].toString(options)}, 3)`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='square'){
+      return `^(${node.args[0].toString(options)}, 2)`;
+    }
     if(node.type==='FunctionNode' && node.fn.name==='pow'){
-      return `power(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
+      return `^(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='max'){
+    if(node.type==='FunctionNode' && node.fn.name==='ln'){
       let args = node.args
-        .map((arg) => arg.toString(options))
-        .join(', ');
-      return `max([${args}])`;
+        .map((arg) => arg.toString(options));
+      return `log(${args[0]})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='min'){
+    if(node.type==='FunctionNode' && node.fn.name==='log' && node.args.length >= 2){
       let args = node.args
-        .map((arg) => arg.toString(options))
-        .join(', ');
-      return `min([${args}])`;
-    }
-    if(node.type==='FunctionNode' && node.fn.name==='log'){
-      if(node.args.length===1){
-        return `log(${node.args[0].toString(options)})`;
-      }else if(node.args.length===2){ // converts log(a, b) => log(a)/log(b)
-        let args = node.args
-          .map((arg) => `log(${arg.toString(options)})`)
-          .join('/');
-        return `(${args})`;
-      }
-    }
-    if(node.type==='FunctionNode' && node.fn.name==='log2'){
-      return `(log(${node.args[0].toString(options)})/log(2))`;
-    }
-    if(node.type==='SymbolNode' && node.name === 't'){
-      return 'time';
+        .map((arg) => arg.toString(options));
+      return `log(${args[1]}, ${args[0]})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
       let args = node.args
-        .map((arg) => arg.toString(options))
-        .join(', ');
-      return `fun.ifg0(${args})`;
+        .map((arg) => arg.toString(options));
+      return `${args[0]} > 0 ? ${args[1]} : ${args[2]}`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='ife0'){
       let args = node.args
-        .map((arg) => arg.toString(options))
-        .join(', ');
-      return `fun.ife0(${args})`;
+        .map((arg) => arg.toString(options));
+      return `${args[0]} == 0 ? ${args[1]} : ${args[2]}`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='ifge0'){
       let args = node.args
-        .map((arg) => arg.toString(options))
-        .join(', ');
-      return `fun.ifge0(${args})`;
+        .map((arg) => arg.toString(options));
+      return `${args[0]} >= 0 ? ${args[1]} : ${args[2]}`;
     }
   };
 
   return this.exprParsed
-    //.translate(math.expression.translator.to['dbsolve'])
     .toString({
       parenthesis: 'keep',
       implicit: 'show',   
-      handler: CStringHandler
+      handler: juliaStringHandler
     });
 };
 
