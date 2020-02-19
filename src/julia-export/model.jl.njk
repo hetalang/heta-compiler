@@ -29,14 +29,14 @@ constants_ = ({% for con in constants %}
 )
 
 ### initialization of ODE variables and Records
-function start_(constants)
-    ({% for con in constants -%}
+function start_(cons)
+    #({% for con in constants -%}
     {{ con.id }}{{ ', ' if not loop.last }}
-    {%- endfor %}) = constants
+    {%- endfor %}) = cons
 
     # Heta initialize
     {% for record in initRecords -%}
-    {{ record.id }} = {{ record.getAssignment('start_').toJuliaString() if record.getAssignment('start_') is defined else 'missing' }}
+    {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toJuliaString() if record.getAssignment('start_') is defined else 'missing' }}
     {% endfor %}
     # save results
 
@@ -58,9 +58,7 @@ end
 
 ### calculate RHS of ODE
 function ode_(du, u, p, t)
-    ({% for con in constants -%}
-    {{ con.id }}{{ ', ' if not loop.last }}
-    {%- endfor %}) = p.constants
+    cons = p.constants
     ({% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = p.static
@@ -71,14 +69,13 @@ function ode_(du, u, p, t)
     # Heta rules
     {% for record in ruleRecords %}
     {%- if record.implicitBoundary -%}
-    {{ record.id }} = {{ record.assignments.ode_.toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
     {{ record.id }} = {{ record.id }}_
     {% endif -%}
     {% endfor %}
-
     #p.static .= [{% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}]
@@ -91,9 +88,7 @@ end
 ### output function
 function make_saving_(outputIds::Vector{Symbol})
     function saving_(u, t, integrator)
-        ({% for con in constants -%}
-        {{ con.id }}{{ ', ' if not loop.last }}
-        {%- endfor %}) = integrator.p.constants
+        cons = integrator.p.constants
         ({% for record in staticRecords -%}
         {{ record.id }}{{ ', ' if not loop.last }}
         {%- endfor %}) = integrator.p.static
@@ -104,7 +99,7 @@ function make_saving_(outputIds::Vector{Symbol})
         # Heta rules
         {% for record in ruleRecords %}
         {%- if record.implicitBoundary -%}
-        {{ record.id }} = {{ record.assignments.ode_.toJuliaString() }}
+        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
         {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
         {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
         {% elif record.isDynamic -%}
@@ -119,9 +114,7 @@ end
 ### events
 {% for event in events -%}
 function {{event.switcher.id}}_condition_(u, t, integrator)
-    ({% for con in constants -%}
-    {{ con.id }}{{ ', ' if not loop.last }}
-    {%- endfor %}) = integrator.p.constants
+    cons = integrator.p.constants
     ({% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = integrator.p.static
@@ -132,7 +125,7 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
     # Heta rules
     {% for record in ruleRecords %}
     {%- if record.implicitBoundary -%}
-    {{ record.id }} = {{ record.assignments.ode_.toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
@@ -161,9 +154,7 @@ end
 
 function {{event.switcher.id}}_assignment_(integrator)
     save_position(integrator)
-    ({% for con in constants -%}
-    {{ con.id }}{{ ', ' if not loop.last }}
-    {%- endfor %}) = integrator.p.constants
+    cons = integrator.p.constants
     ({% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = integrator.p.static
@@ -174,7 +165,7 @@ function {{event.switcher.id}}_assignment_(integrator)
     # Heta rules
     {% for record in ruleRecords %}
     {%- if record.implicitBoundary -%}
-    {{ record.id }} = {{ record.assignments.ode_.toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
@@ -185,7 +176,7 @@ function {{event.switcher.id}}_assignment_(integrator)
     ({%- for assignment in event.affect -%}
     {{ assignment.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = ({%- for assignment in event.affect -%}
-    {{ assignment.getAssignment(event.switcher.id).toJuliaString() }}{{ ', ' if not loop.last }}
+    {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toJuliaString() }}{{ ', ' if not loop.last }}
     {%- endfor %})
     
     # save results

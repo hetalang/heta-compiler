@@ -81,6 +81,9 @@ class JuliaExport extends _Export {
         };
       });
 
+    let pTranslator = constants
+      .map((x, i) => [x.id, `cons(${i+1})`]);
+
     return { 
       builderName,
       options,
@@ -91,7 +94,8 @@ class JuliaExport extends _Export {
       rhs,
       initRecords,
       ruleRecords,
-      events
+      events,
+      pTranslator: { symbolName: _.fromPairs(pTranslator)},
     };
   }
   getModelCode(image = {}){
