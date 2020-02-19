@@ -7,9 +7,10 @@
 {% endmacro -%}
 {#-
   constants : all constants
-  initRecords : all records SORTED by start_
-  dynamicRecords : all records with isDynamic = true, i.e. no rules, no boundary, have reactions
+  initRecords : all records SORTED by start_ and have start_
+  dynamicRecords : records with isDynamic = true, i.e. no rules, no boundary, have reactions
   ruleRecords : all records SORTED by ode_
+  staticRecords : records which is not dynamic nor rule
   events : array of {switcher, array of assignments with [switcher]}
 -#}
 
@@ -38,21 +39,20 @@ function start_(constants)
     {{ record.id }} = {{ record.getAssignment('start_').toJuliaString() if record.getAssignment('start_') is defined else 'missing' }}
     {% endfor %}
     # save results
-    
-    u__ = [{% for record in dynamicRecords %}
-    {%- if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary %}
-        {{ record.id }} * {{ record.compartment }}{{ ', ' if not loop.last}}
-    {%- else %}
-        {{ record.id }}{{ ', ' if not loop.last}}
-    {%- endif %}
-    {%- endfor %}
-    ]
 
     return (
-        u__,
-        [{% for record in namespace.selectByInstanceOf('Record') -%}
-        {{ record.id }}{{ ', ' if not loop.last }}
-        {%- endfor %}]
+        [{% for record in dynamicRecords %}
+        {%- if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary %}
+            {{ record.id }} * {{ record.compartment }}{{ ', ' if not loop.last}}
+        {%- else %}
+            {{ record.id }}{{ ', ' if not loop.last}}
+        {%- endif %}
+        {%- endfor %}
+        ],
+        [{% for record in staticRecords %}
+            {{ record.id }}{{ ', ' if not loop.last }}
+        {%- endfor %}
+        ]
     )
 end
 
@@ -61,7 +61,7 @@ function ode_(du, u, p, t)
     ({% for con in constants -%}
     {{ con.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = p.constants
-    ({% for record in namespace.selectByInstanceOf('Record') -%}
+    ({% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = p.static
     ({% for record in dynamicRecords -%}
@@ -79,7 +79,7 @@ function ode_(du, u, p, t)
     {% endif -%}
     {% endfor %}
 
-    #p.static .= [{% for record in namespace.selectByInstanceOf('Record') -%}
+    #p.static .= [{% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}]
     du .= [{% for record in dynamicRecords %}
@@ -94,7 +94,7 @@ function make_saving_(outputIds::Vector{Symbol})
         ({% for con in constants -%}
         {{ con.id }}{{ ', ' if not loop.last }}
         {%- endfor %}) = integrator.p.constants
-        ({% for record in namespace.selectByInstanceOf('Record') -%}
+        ({% for record in staticRecords -%}
         {{ record.id }}{{ ', ' if not loop.last }}
         {%- endfor %}) = integrator.p.static
         ({% for record in dynamicRecords -%}
@@ -122,7 +122,7 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
     ({% for con in constants -%}
     {{ con.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = integrator.p.constants
-    ({% for record in namespace.selectByInstanceOf('Record') -%}
+    ({% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = integrator.p.static
     ({% for record in dynamicRecords -%}
@@ -164,7 +164,7 @@ function {{event.switcher.id}}_assignment_(integrator)
     ({% for con in constants -%}
     {{ con.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = integrator.p.constants
-    ({% for record in namespace.selectByInstanceOf('Record') -%}
+    ({% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}) = integrator.p.static
     ({% for record in dynamicRecords -%}
@@ -199,7 +199,7 @@ function {{event.switcher.id}}_assignment_(integrator)
     {%- endfor %}
     ]
     
-    integrator.p.static .= [{% for record in namespace.selectByInstanceOf('Record') -%}
+    integrator.p.static .= [{% for record in staticRecords -%}
     {{ record.id }}{{ ', ' if not loop.last }}
     {%- endfor %}]
     save_position(integrator)

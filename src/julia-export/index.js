@@ -38,11 +38,14 @@ class JuliaExport extends _Export {
     // initialize at start records
     let initRecords = this.namespace
       .sortExpressionsByContext('start_')
-      .filter((x) => x.instanceOf('Record'));
+      .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.start_'));
     // currently we output all records
     let ruleRecords = this.namespace
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.instanceOf('Record'));
+    let staticRecords = this.namespace
+      .selectByInstanceOf('Record')
+      .filter((x) => !x.isDynamic && !x.implicitBoundary);
     // RHS of ODE
     let rhs = dynamicRecords
       .map((record) => {
@@ -84,6 +87,7 @@ class JuliaExport extends _Export {
       namespace,
       constants,
       dynamicRecords,
+      staticRecords,
       rhs,
       initRecords,
       ruleRecords,
