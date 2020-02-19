@@ -65,11 +65,6 @@ class JuliaExport extends _Export {
         }
       });
 
-    let yTranslator = dynamicRecords
-      .map((x, i) => [x.id, `y(${i+1})`]);
-    let pTranslator = constants
-      .map((x, i) => [x.id, `p(${i+1})`]);
-
     // create events from switchers
     let events = this.namespace
       .selectByInstanceOf('TimeSwitcher')
@@ -92,9 +87,6 @@ class JuliaExport extends _Export {
       rhs,
       initRecords,
       outputRecords,
-      yTranslator: { symbolName: _.fromPairs(yTranslator)},
-      pTranslator: { symbolName: _.fromPairs(pTranslator)},
-      translator: { symbolName: _.fromPairs(yTranslator.concat(pTranslator))},
       events
     };
   }

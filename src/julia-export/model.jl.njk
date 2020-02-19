@@ -14,13 +14,13 @@
 module {{ options.id }}
 using SimSolver
 
-# create default constants
+### create default constants
 constants_ = ({% for con in constants %}
     {{ con.id }} = {{ con.num }}{{ ', ' if not loop.last }}
 {%- endfor %}
 )
 
-# initialization of ODE variables and Records
+### initialization of ODE variables and Records
 function start_(constants)
     ({% for con in constants -%}
     {{ con.id }}{{ ', ' if not loop.last }}
@@ -48,7 +48,7 @@ function start_(constants)
     )
 end
 
-# calculate RHS of ODE
+### calculate RHS of ODE
 function ode_(du, u, p, t)
     ({% for con in constants -%}
     {{ con.id }}{{ ', ' if not loop.last }}
@@ -80,7 +80,7 @@ function ode_(du, u, p, t)
     ]
 end
 
-# output function
+### output function
 function make_saving_(outputIds::Vector{Symbol})
     function saving_(u, t, integrator)
         ({% for con in constants -%}
@@ -108,71 +108,112 @@ function make_saving_(outputIds::Vector{Symbol})
     end
 end
 
+### events
+{% for event in events -%}
+function {{event.switcher.id}}_condition_(u, t, integrator)
+    ({% for con in constants -%}
+    {{ con.id }}{{ ', ' if not loop.last }}
+    {%- endfor %}) = integrator.p.constants
+    ({% for record in namespace.selectByInstanceOf('Record') -%}
+    {{ record.id }}{{ ', ' if not loop.last }}
+    {%- endfor %}) = integrator.p.static
+    ({% for record in dynamicRecords -%}
+    {{ record.id }}_{{ ', ' if not loop.last }}
+    {%- endfor %}) = u
+
+    # Heta rules
+    {% for record in outputRecords %}
+    {%- if record.implicitBoundary -%}
+    {{ record.id }} = {{ record.assignments.ode_.toJuliaString() }}
+    {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+    {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
+    {% elif record.isDynamic -%}
+    {{ record.id }} = {{ record.id }}_
+    {% endif -%}
+    {% endfor %}
+
+    {%- set ev_start = event.switcher.getStart() if event.switcher.startObj.num is defined else '0.0' %}
+    {%- set ev_period = event.switcher.getPeriod() if event.switcher.periodObj.num is defined else '0.0' %}
+    {%- set ev_repeatCount = event.switcher.getRepeatCount() if event.switcher.repeatCountObj.num is defined else 'Inf' %}
+    function flag_(t)
+        flag_ = (t - {{ ev_start }})/{{ ev_period }};
+        
+        if flag_ <= 0.
+            res_ = flag_
+        elseif 0. < flag_ & flag_ < {{ ev_repeatCount }}
+            res_ = flag_ - floor(flag_ + 0.5)
+        else
+            res_ = flag_ - {{ ev_repeatCount }}
+        end
+        return res_
+    end
+
+    return flag_(t)
+end
+
+function {{event.switcher.id}}_assignment_(integrator)
+    save_position(integrator)
+    ({% for con in constants -%}
+    {{ con.id }}{{ ', ' if not loop.last }}
+    {%- endfor %}) = integrator.p.constants
+    ({% for record in namespace.selectByInstanceOf('Record') -%}
+    {{ record.id }}{{ ', ' if not loop.last }}
+    {%- endfor %}) = integrator.p.static
+    ({% for record in dynamicRecords -%}
+    {{ record.id }}_{{ ', ' if not loop.last }}
+    {%- endfor %}) = integrator.u
+
+    # Heta rules
+    {% for record in outputRecords %}
+    {%- if record.implicitBoundary -%}
+    {{ record.id }} = {{ record.assignments.ode_.toJuliaString() }}
+    {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+    {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
+    {% elif record.isDynamic -%}
+    {{ record.id }} = {{ record.id }}_
+    {% endif -%}
+    {% endfor %}
+    # recalculated values
+    ({%- for assignment in event.affect -%}
+    {{ assignment.id }}{{ ', ' if not loop.last }}
+    {%- endfor %}) = ({%- for assignment in event.affect -%}
+    {{ assignment.getAssignment(event.switcher.id).toJuliaString() }}{{ ', ' if not loop.last }}
+    {%- endfor %})
+
+    # transform to ODE variables
+    {% for record in dynamicRecords -%}
+    {% if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary -%}
+    {{ record.id }}_ = {{ record.id }} * {{ record.compartment }}
+    {% else -%}
+    {{ record.id }}_ = {{ record.id }}
+    {% endif %}
+    {%- endfor %}
+    # save results
+    integrator.p.static .= [{% for record in namespace.selectByInstanceOf('Record') -%}
+    {{ record.id }}{{ ', ' if not loop.last }}
+    {%- endfor %}]
+    integrator.u .= [{% for record in dynamicRecords -%}
+    {{ record.id }}_{{ ', ' if not loop.last }}
+    {%- endfor %}]
+    save_position(integrator)
+end
+{% endfor %}
+
+### OUTPUT ###
+
 {{namespace.spaceName}} = Model(
   start_,
   ode_,
-  [],
+  [{% for event in events %}({{event.switcher.id}}_condition_, {{event.switcher.id}}_assignment_){{ ', ' if not loop.last}}{% endfor %}],
   make_saving_,
   constants_
 )
 
-### OUTPUT ###
-
 models = (
     {{namespace.spaceName}} = {{namespace.spaceName}}
 )
+tasks = ()
 
-#=
-function [out_func, events_] = {{ options.id }}_Model(p)
+export models, tasks
 
-    {% for event in events -%}
-    function [res, isterminal, direction] = {{ event.switcher.id }}_condition(t, y)
-        direction = 1; % [];
-        isterminal = 1;
-        
-        ev_start = {{ event.switcher.startObj.num }};
-        ev_period = {{ event.switcher.periodObj.num if event.switcher.periodObj.num is defined else '[]'}};
-        ev_repeatCount = {{ event.switcher.getRepeatCountInt() }};
-        
-        flag = (t - ev_start)/ev_period;
-        
-        if flag <= 0.
-            res = flag;
-        elseif (0. < flag) && (flag < ev_repeatCount)
-            res = flag - floor(flag + 0.5);
-        else
-            res = flag - ev_repeatCount;
-        end
-    end
-    function y = {{ event.switcher.id }}_affect(t, y)
-
-        %%% Records
-        {%- for record in outputRecords %}
-        % {{ record.title }} ({{ record.units }}) {{ record.notes }}
-        {% if record.implicitBoundary -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
-        {%- elif record.instanceOf('Species') and not record.isAmount -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
-        {%- else -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
-        {%- endif -%}
-        {%- endfor %}
-        
-        %%% recalculated values
-        {%- for assignment in event.affect %}
-        {% if assignment.instanceOf('Species') and not assignment.isAmount and not assignment.implicitBoundary -%}
-        {{ idOrSynonim(assignment) }} = ({{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }}) * {{ assignment.compartment }};
-        {%- else -%}
-        {{ idOrSynonim(assignment) }} = {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }};
-        {%- endif -%}
-        {%- endfor %}
-        
-    end
-    {{ event.switcher.id }}_ = { @{{ event.switcher.id }}_condition, @{{ event.switcher.id }}_affect };
-    {%- endfor %}
-
-    events_ = [
-    {%- for event in events %}{{ event.switcher.id }}_{{ ', ' if not loop.last }}{% endfor -%}
-    ];
 end
-=#
