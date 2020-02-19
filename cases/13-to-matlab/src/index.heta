@@ -18,3 +18,4 @@ output_json @JSONExport { filepath: output };
 output_simbio @SimbioExport { filepath: simbio };
 //output_mrg @MrgsolveExport { filepath: mrgsolve };
 //output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };
+output_julia @JuliaExport { filepath: julia };
