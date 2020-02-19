@@ -40,7 +40,7 @@ class JuliaExport extends _Export {
       .sortExpressionsByContext('start_')
       .filter((x) => x.instanceOf('Record'));
     // currently we output all records
-    let outputRecords = this.namespace
+    let ruleRecords = this.namespace
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.instanceOf('Record'));
     // RHS of ODE
@@ -86,7 +86,7 @@ class JuliaExport extends _Export {
       dynamicRecords,
       rhs,
       initRecords,
-      outputRecords,
+      ruleRecords,
       events
     };
   }
