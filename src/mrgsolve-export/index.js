@@ -3,6 +3,7 @@ const { _Export } = require('../core/_export');
 const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
+require('./expression');
 
 class MrgsolveExport extends _Export{
   merge(q={}, skipChecking){
