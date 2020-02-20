@@ -103,20 +103,29 @@ class Record extends _Size {
       && !this.isRule
       && this.backReferences.length > 0;
   }
+  /*
+    returns array of ids which depends on
+    t (time) is not included
+    if no expression returns dependence from ode
+  */
   dependOn(context){
     if(typeof context !== 'string')
       throw new TypeError('context must be of string type.');
-    if(this.className==='Species' && !this.isAmount && this.compartment===undefined)
-      throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
 
-    let assignment = this.getAssignment(context);
+    let assignment = _.get(this, 'assignments.' + context);
     if (assignment !== undefined) {
       let deps = assignment
         .exprParsed
         .getSymbols();
       _.pull(deps, 't'); // remove t from dependence
       return deps;
-    }else{
+    } else if(this.isRule) {
+      let deps = this.assignments.ode_
+        .exprParsed
+        .getSymbols();
+      _.pull(deps, 't');
+      return deps;
+    } else {
       return [];
     }
   }
@@ -124,7 +133,14 @@ class Record extends _Size {
   getAssignment(context){
     if(typeof context !== 'string')
       throw new TypeError('context argument must be of string type.');
-    return _.get(this, 'assignments.' + context);
+    
+    let assignment = _.get(this, 'assignments.' + context);
+    //if (assignment !== undefined) {
+    //  return assignment;
+    //} else {
+    //  return _.get(this, 'assignments.ode_');
+    //}
+    return assignment;
   }
 }
 

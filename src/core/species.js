@@ -1,7 +1,6 @@
 const { Record } = require('./record');
-const { Expression } = require('./expression');
 const _ = require('lodash');
-const math = require('mathjs');
+const { BindingError } = require('../heta-error');
 
 class Species extends Record {
   merge(q, skipChecking){
@@ -39,6 +38,8 @@ class Species extends Record {
     }
   }
   dependOn(context, includeCompatment = false){
+    if(!this.isAmount && this.compartment === undefined)
+      throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
     let deps = super.dependOn(context);
     if (includeCompatment && !this.isAmount && !this.isRule) {
       deps.push(this.compartment);
@@ -46,28 +47,6 @@ class Species extends Record {
 
     return deps;
   }
-  // useAmount = true means that returns amount expression instead of concentration
-  /*
-  getAssignment(context, useAmount = false){
-    if(typeof context !== 'string')
-      throw new TypeError('context argument must be of string type.');
-
-    let directExpr = _.get(this, 'assignments.' + context);
-    if (directExpr === undefined) {
-      return undefined;
-    } else if (this.isAmount || !useAmount) {
-      return directExpr;
-    } else {
-      // multiply concentration and compartment
-      let args = [
-        directExpr.exprParsed,
-        new math.expression.node.SymbolNode(this.compartment)
-      ];
-      let expr = new math.expression.node.OperatorNode('*', 'multiply', args);
-      return new Expression(expr);
-    }
-  }
-  */
 }
 
 Species._requirements = {

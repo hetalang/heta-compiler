@@ -7,7 +7,7 @@
 {% endmacro -%}
 {#-
   constants : all constants
-  initRecords : all records SORTED by start_ and have start_
+  initRecords : all records SORTED by start_ and have start_ or isRule
   dynamicRecords : records with isDynamic = true, i.e. no rules, no boundary, have reactions
   ruleRecords : all records SORTED by ode_
   staticRecords : records which is not dynamic nor rule
@@ -36,7 +36,11 @@ function start_(cons)
 
     # Heta initialize
     {% for record in initRecords -%}
-    {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toJuliaString() if record.getAssignment('start_') is defined else 'missing' }}
+    {% if record.getAssignment('start_') is defined -%}
+    {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toJuliaString() }}
+    {%- else -%}
+    {{ record.id }} = {{ record.getAssignment('ode_').translate(pTranslator).toJuliaString() }}
+    {%- endif %}
     {% endfor %}
     # save results
 
