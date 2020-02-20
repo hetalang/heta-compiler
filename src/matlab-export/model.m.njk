@@ -20,7 +20,7 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         y = zeros({{ dynamicRecords|length }}, 1);
 
         {%- for record in initRecords %}
-        {% if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary -%}
+        {% if record.instanceOf('Species') and not record.isAmount and not record.isRule -%}
         {{ idOrSynonim(record) }} = ({{ record.getAssignment('start_').translate(translator).toMatlabString() }}) * {{ idOrSynonim(record.compartmentObj) }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
         {%- else -%}
         {{ idOrSynonim(record) }} = {{ record.getAssignment('start_').translate(translator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
@@ -57,7 +57,7 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         %%% Output records
         {%- for record in outputRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
-        {% if record.implicitBoundary -%}
+        {% if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
         {%- elif record.instanceOf('Species') and not record.isAmount -%}
         {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
@@ -99,7 +99,7 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         %%% Records
         {%- for record in outputRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
-        {% if record.implicitBoundary -%}
+        {% if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
         {%- elif record.instanceOf('Species') and not record.isAmount -%}
         {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
@@ -110,7 +110,7 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         
         %%% recalculated values
         {%- for assignment in event.affect %}
-        {% if assignment.instanceOf('Species') and not assignment.isAmount and not assignment.implicitBoundary -%}
+        {% if assignment.instanceOf('Species') and not assignment.isAmount and not assignment.isRule -%}
         {{ idOrSynonim(assignment) }} = ({{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }}) * {{ assignment.compartment }};
         {%- else -%}
         {{ idOrSynonim(assignment) }} = {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }};

@@ -94,13 +94,13 @@ class Record extends _Size {
     }
     return res;
   }
-  get implicitBoundary(){
+  get isRule(){
     return _.has(this, 'assignments.ode_'); // this is rule
   }
   // works properly only after knit()
   get isDynamic(){
     return !this.boundary
-      && !this.implicitBoundary
+      && !this.isRule
       && this.backReferences.length > 0;
   }
   dependOn(context){

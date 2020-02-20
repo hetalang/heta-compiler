@@ -31,7 +31,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
   {{- _id }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
   {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(image.legalUnits, true) }}'{% endif -%}
-  , 'BoundaryCondition', {{ record.boundary===true or record.implicitBoundary===true -}}
+  , 'BoundaryCondition', {{ record.boundary===true or record.isRule===true -}}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
@@ -81,7 +81,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {%- endfor %}
 
 {% set listOfAssignmentRules = image.population.selectRecordsByContext("ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
-{%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
+{%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
 {{ "% Rules" if listOfAssignmentRules|length + listOfRateRules|length > 0 }}
 {% for record in listOfAssignmentRules -%}
 addrule(

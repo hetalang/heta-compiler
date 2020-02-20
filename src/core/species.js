@@ -40,7 +40,7 @@ class Species extends Record {
   }
   dependOn(context, includeCompatment = false){
     let deps = super.dependOn(context);
-    if (includeCompatment && !this.isAmount && !this.implicitBoundary) {
+    if (includeCompatment && !this.isAmount && !this.isRule) {
       deps.push(this.compartment);
     }
 

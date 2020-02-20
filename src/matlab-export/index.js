@@ -43,7 +43,7 @@ class MatlabExport extends _Export {
       .selectByInstanceOf('Const');
     // ODE variables
     let dynamicRecords = this.namespace.toArray()
-      .filter((x) => x.instanceOf('Record') && !x.implicitBoundary);
+      .filter((x) => x.instanceOf('Record') && !x.isRule);
     // initialize at start records
     let initRecords = this.namespace
       .sortExpressionsByContext('start_')

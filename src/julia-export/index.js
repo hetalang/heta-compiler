@@ -45,7 +45,7 @@ class JuliaExport extends _Export {
       .filter((x) => x.instanceOf('Record'));
     let staticRecords = this.namespace
       .selectByInstanceOf('Record')
-      .filter((x) => !x.isDynamic && !x.implicitBoundary);
+      .filter((x) => !x.isDynamic && !x.isRule);
     // RHS of ODE
     let rhs = dynamicRecords
       .map((record) => {

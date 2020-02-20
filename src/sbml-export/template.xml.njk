@@ -31,7 +31,7 @@
         {#- speciesType="" #}
         compartment="{{record.compartment}}"
         constant="false"
-        boundaryCondition="{{ record.boundary===true or record.implicitBoundary===true }}"
+        boundaryCondition="{{ record.boundary===true or record.isRule===true }}"
         hasOnlySubstanceUnits="{{record.isAmount===true}}"
         {% if record.assignments.start_.num!==undefined -%}
           {% if record.isAmount===true %}initialAmount{% else %}initialConcentration{% endif %}="{{record.assignments.start_.num}}"
@@ -113,7 +113,7 @@
   {% endif %}
 
   {%- set listOfAssignmentRules = image.population.toArray()|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
-  {%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("implicitBoundary", true)|exclude2("backReferences.length", 0) -%}
+  {%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
   {% if listOfAssignmentRules|length+listOfRateRules|length > 0 %}
   <listOfRules>
   {%- for record in listOfAssignmentRules %}

@@ -15,7 +15,7 @@ y = zeros({{ dynamicRecords|length }}, 1);
 
 %%% Initialization of dynamic records
 {%- for record in initRecords %}
-{% if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary -%}
+{% if record.instanceOf('Species') and not record.isAmount and not record.isRule -%}
 {{ idOrSynonim(record) }} = ({{ record.getAssignment('start_').translate(translator).toMatlabString() }}) * {{ idOrSynonim(record.compartmentObj) }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
 {%- else -%}
 {{ idOrSynonim(record) }} = {{ record.getAssignment('start_').translate(translator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})

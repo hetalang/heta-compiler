@@ -42,7 +42,7 @@ function start_(cons)
 
     return (
         [{% for record in dynamicRecords %}
-        {%- if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary %}
+        {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
             {{ record.id }} * {{ record.compartment }}{{ ', ' if not loop.last}}
         {%- else %}
             {{ record.id }}{{ ', ' if not loop.last}}
@@ -68,7 +68,7 @@ function ode_(du, u, p, t)
 
     # Heta rules
     {% for record in ruleRecords %}
-    {%- if record.implicitBoundary -%}
+    {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
@@ -98,7 +98,7 @@ function make_saving_(outputIds::Vector{Symbol})
 
         # Heta rules
         {% for record in ruleRecords %}
-        {%- if record.implicitBoundary -%}
+        {%- if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
         {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
         {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
@@ -124,7 +124,7 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
 
     # Heta rules
     {% for record in ruleRecords %}
-    {%- if record.implicitBoundary -%}
+    {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
@@ -164,7 +164,7 @@ function {{event.switcher.id}}_assignment_(integrator)
 
     # Heta rules
     {% for record in ruleRecords %}
-    {%- if record.implicitBoundary -%}
+    {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
@@ -182,7 +182,7 @@ function {{event.switcher.id}}_assignment_(integrator)
     # save results
 
     integrator.u .= [{% for record in dynamicRecords %}
-    {%- if record.instanceOf('Species') and not record.isAmount and not record.implicitBoundary %}
+    {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
         {{ record.id }} * {{ record.compartment }}{{ ', ' if not loop.last}}
     {%- else %}
         {{ record.id }}{{ ', ' if not loop.last}}
