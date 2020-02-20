@@ -141,7 +141,7 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
         
         if flag_ <= 0.
             res_ = flag_
-        elseif 0. < flag_ & flag_ < {{ ev_repeatCount }}
+        elseif 0. < flag_ && flag_ < {{ ev_repeatCount }}
             res_ = flag_ - floor(flag_ + 0.5)
         else
             res_ = flag_ - {{ ev_repeatCount }}

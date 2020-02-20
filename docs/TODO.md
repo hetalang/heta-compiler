@@ -7,8 +7,6 @@
 + json
 + yaml
 - sbml
-- slv
-- dat
 - svg
 
 ## exports
@@ -21,15 +19,14 @@
 - dat
 - rxode
 + simbio
-- simsolver
++ simsolver
 + xlsx
 + gsk xlsx
++ matlab
 
 ## plan
 
-1. #setNS abstract or concrete space
 1. #move, #moveNS
 1. FunctionDefinition + function checking
 1. ContinuousSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
-1. _ for nameless space

@@ -64,7 +64,7 @@ class JuliaExport extends _Export {
             }
     
             return st + ref.process;
-          }).join(' ');
+          }).join('');
         }
       });
 
@@ -82,7 +82,7 @@ class JuliaExport extends _Export {
       });
 
     let pTranslator = constants
-      .map((x, i) => [x.id, `cons(${i+1})`]);
+      .map((x, i) => [x.id, `cons[${i+1}]`]);
 
     return { 
       builderName,
