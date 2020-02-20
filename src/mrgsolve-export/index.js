@@ -73,7 +73,7 @@ class MrgsolveExport extends _Export{
 
     // set sorted array of rules
     model.ode_ = model.population
-      .sortExpressionsByContext('ode_')
+      .sortExpressionsByContext('ode_', true)
       .filter((component) => {
         return component.instanceOf('Record') 
           && component.assignments 

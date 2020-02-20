@@ -47,7 +47,7 @@ class MatlabExport extends _Export {
     // initialize at start records
     let initRecords = this.namespace
       .sortExpressionsByContext('start_')
-      .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.start_'));
+      .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
     // currently we output all records
     let outputRecords = this.namespace
       .sortExpressionsByContext('ode_', true)
