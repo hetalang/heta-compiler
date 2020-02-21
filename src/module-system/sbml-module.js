@@ -47,6 +47,18 @@ function jsbmlToQArr(JSBML){
     qArr.push(q);
   });
 
+  // species
+  let species = _.chain(model.elements)
+    .filter(['name', 'listOfSpecies'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'species'])
+    .value();
+  species.forEach((x) => {
+    let q = speciesToQ(x);
+    qArr.push(q);
+  });
+
   // parameters
   let parameters = _.chain(model.elements)
     .filter(['name', 'listOfParameters'])
@@ -163,6 +175,36 @@ function compartmentToQ(x){
   q.boundary = _.get(x, 'attributes.constant') !== 'false';
   let start_ = _.get(x, 'attributes.size');
   if (start_ !== undefined) _.set(q, 'assignments.start_', start_);
+
+  // compartmentType
+  let compartmentType = _.get(x, 'attributes.compartmentType');
+  if (compartmentType !== undefined) _.set(q, 'tags.0', compartmentType);
+
+  return q;
+}
+
+function speciesToQ(x){
+  let q = baseToQ(x);
+
+  q.class = 'Species';
+  q.boundary = _.get(x, 'attributes.constant') === 'true' 
+    || _.get(x, 'attributes.boundaryCondition') === 'true';
+  q.compartment = _.get(x, 'attributes.compartment');
+  q.isAmount = _.get(x, 'attributes.hasOnlySubstanceUnits') === 'true';
+  let concentration = _.get(x, 'attributes.initialConcentration');
+  let amount = _.get(x, 'attributes.initialAmount');
+  if (concentration !== undefined && !q.isAmount) {
+    _.set(q, 'assignments.start_', concentration);
+  } else if (concentration !== undefined && q.isAmount) {
+    _.set(q, 'assignments.start_', concentration + '*' + q.compartment);
+  } else if (amount !== undefined && !q.isAmount) {
+    _.set(q, 'assignments.start_', amount + '/' + q.compartment);
+  } else if (amount !== undefined && q.isAmount) {
+    _.set(q, 'assignments.start_', amount);
+  }
+  // speciesType
+  let speciesType = _.get(x, 'attributes.speciesType');
+  if (speciesType !== undefined) _.set(q, 'tags.0', speciesType);
 
   return q;
 }
