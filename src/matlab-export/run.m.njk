@@ -32,13 +32,12 @@ while ti < t_span(2)
     ti = t(end);
     yi = events{2}(ti, ye(end,:));
     tout = vertcat(tout, t);
-    yout = vertcat(yout, output);
 end
 
 figure
 hold on
 for i = 1:length(output_names)
-    plot(tout, yout(:, i), '-', 'Linewidth', 1)
+    plot(tout, output(:, i), '-', 'Linewidth', 1)
 end
 title('Default plot','Fontsize', 14)
 xlabel('t', 'Fontsize', 14)

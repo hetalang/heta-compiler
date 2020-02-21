@@ -19,8 +19,14 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
     out_func = @OutputFunc;
     y0_ = InitFunc();
 
+    % shared variable
+    shared_values = zeros(1, {{ outputRecords|length }});
+    integrator = [];
+
     %%% Initialization of dynamic records
     function y__ = InitFunc()
+        integrator = []; % reset integrator
+
         {%- for record in initRecords %}
         {% if record.getAssignment('start_') is defined -%}
         {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
@@ -38,19 +44,14 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         {%- endfor %}];
     end
 
-    % shared variable
-    shared_values = zeros(1, {{ outputRecords|length }});
-
     function status = OutputFunc(t, y, flag)
-        persistent integrator;
-
-        switch (flag)
-        case 'init'
-        integrator = shared_values;
-        case []
-        integrator = [integrator; shared_values];
-        case 'done'
-        assignin('base', 'output', integrator);
+        switch flag
+            case 'done'
+                assignin('base', 'output', integrator);
+            case 'affect'
+                integrator(end, :) = shared_values;
+            otherwise
+                integrator = [integrator; shared_values];
         end
         status = 0;
     end
@@ -118,6 +119,11 @@ function [ode_func, out_func, y0_, events_] = {{ options.id }}_Model(p)
         {%- endif -%}
         {%- endfor %}
         
+        shared_values = [{% for record in outputRecords -%}
+        {{ record.id }}{{ ', ' if not loop.last }}
+        {%- endfor %}];
+        OutputFunc(t, y, 'affect');
+
         %%% recalculated values
         {%- for assignment in event.affect %}
         {% if assignment.instanceOf('Species') and not assignment.isAmount and not assignment.isRule -%}
