@@ -40,7 +40,7 @@
     "semver": "^6.3.0",
     "winston": "^3.2.1",
     "xlsx": "^0.15.3",
-    "xml2js": "^0.4.22"
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "chai": "^4.2.0",

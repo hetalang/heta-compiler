@@ -7,6 +7,7 @@ require('./json-module');
 require('./md-module');
 require('./yaml-module');
 require('./xlsx-module');
+require('./sbml-module');
 const { ModuleError } = require('../heta-error');
 
 class ModuleSystem {

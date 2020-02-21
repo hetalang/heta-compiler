@@ -25,6 +25,9 @@ class _Module {
       case 'xlsx':
         await mdl.setXLSXModuleAsync();
         break;
+      case 'sbml':
+        await mdl.setSBMLModuleAsync();
+        break;
       default:
         throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yaml", "xlsx"] `);
         break;
