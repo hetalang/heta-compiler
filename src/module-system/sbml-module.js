@@ -59,6 +59,18 @@ function jsbmlToQArr(JSBML){
     qArr.push(q);
   });
 
+  // reactions
+  let reactions = _.chain(model.elements)
+    .filter(['name', 'listOfReactions'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'reaction'])
+    .value();
+  reactions.forEach((x) => {
+    let q = reactionToQ(x);
+    qArr.push(q);
+  });
+
   // parameters
   let parameters = _.chain(model.elements)
     .filter(['name', 'listOfParameters'])
@@ -71,7 +83,6 @@ function jsbmlToQArr(JSBML){
     qArr.push(q);
   });
 
-  //console.log(parameters[0]);
   return qArr;
 }
 
@@ -205,6 +216,71 @@ function speciesToQ(x){
   // speciesType
   let speciesType = _.get(x, 'attributes.speciesType');
   if (speciesType !== undefined) _.set(q, 'tags.0', speciesType);
+
+  return q;
+}
+
+function reactionToQ(x){
+  let q = baseToQ(x);
+
+  q.class = 'Reaction';
+  let ode_ = 'xxx';
+  if (ode_ !== undefined) _.set(q, 'assignments.ode_', ode_);
+
+  let reversible = _.get(x, 'attributes.reversible') !== 'false' ;
+  _.set(q, 'aux.reversible', reversible);
+  let fast = _.get(x, 'attributes.fast') === 'true' ;
+  _.set(q, 'aux.fast', fast);
+
+  // products
+  let products = x.elements
+    && x.elements.find((y) => y.name === 'listOfProducts');
+  if (_.has(products, 'elements')) {
+    var actors0 = products.elements
+      .filter((y) => y.name === 'speciesReference')
+      .map((y) => {
+        let stoichiometry = _.get(y, 'attributes.stoichiometry');
+        return {
+          target: _.get(y, 'attributes.species'),
+          stoichiometry: Number.parseFloat(stoichiometry)
+        };
+      });
+  } else {
+    actors0 = [];
+  }
+
+  // reactants
+  let reactants = x.elements
+    && x.elements.find((y) => y.name === 'listOfReactants');
+  if (_.has(reactants, 'elements')) {
+    var actors1 = reactants.elements
+      .filter((y) => y.name === 'speciesReference')
+      .map((y) => {
+        let stoichiometry = _.get(y, 'attributes.stoichiometry');
+        return {
+          target: _.get(y, 'attributes.species'),
+          stoichiometry: (-1) * Number.parseFloat(stoichiometry)
+        };
+      });
+  } else {
+    actors1 = [];
+  }
+
+  // modifiers
+  let modifiers = x.elements
+    && x.elements.find((y) => y.name === 'listOfModifiers');
+  if (_.has(modifiers, 'elements')) {
+    var modifiers1 = modifiers.elements
+      .filter((y) => y.name === 'modifierSpeciesReference')
+      .map((y) => {
+        return { target: _.get(y, 'attributes.species') };
+      });
+  } else {
+    modifiers1 = [];
+  }
+
+  q.actors = actors0.concat(actors1);
+  q.modifiers = modifiers1;
 
   return q;
 }

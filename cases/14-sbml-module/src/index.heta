@@ -9,12 +9,14 @@
 // include addon.json type json
 // include addon.yml type yaml
 //include ./00026-sbml-l2v4.xml type sbml
-include ./superexample-l2v5.xml type sbml
+abstract namespace one begin
+  include ./superexample-l2v5.xml type sbml
+end
 
 // exports
 //output_sbml @SBMLExport { filepath: sbml, version: L2V4 };
 //output_slv @SLVExport { filepath: model, eventsOff: false };
-output_json @JSONExport { filepath: output };
+one::output_json @JSONExport { filepath: output };
 //output_yaml @YAMLExport { filepath: output };
 //output_simbio @SimbioExport { filepath: simbio };
 //output_mrg @MrgsolveExport { filepath: mrgsolve };
