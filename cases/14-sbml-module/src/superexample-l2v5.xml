@@ -697,7 +697,7 @@
         <exe a="2" b="3"/>
       </example>
     </annotation>
-          <eventAssignment variable="S1" metaid="metaexample" sboTerm="SBO:001">
+          <eventAssignment variable="A" metaid="metaexample" sboTerm="SBO:001">
         <notes>This is a test text element.</notes>
     <annotation>
       <example xmlns="example.com">
@@ -708,7 +708,7 @@
               <cn type="rational"> 1 <sep/> 50 </cn>
             </math>
           </eventAssignment>
-          <eventAssignment variable="S4" metaid="metaexample" sboTerm="SBO:001">
+          <eventAssignment variable="C" metaid="metaexample" sboTerm="SBO:001">
         <notes>This is a test text element.</notes>
     <annotation>
       <example xmlns="example.com">
@@ -737,7 +737,7 @@
           </math>
         </delay>
         <listOfEventAssignments>
-          <eventAssignment variable="S4">
+          <eventAssignment variable="C">
             <math xmlns="http://www.w3.org/1998/Math/MathML">
               <cn type="rational"> 1 <sep/> 200 </cn>
             </math>
@@ -760,7 +760,7 @@
           </math>
         </delay>
         <listOfEventAssignments>
-          <eventAssignment variable="S1">
+          <eventAssignment variable="B">
             <math xmlns="http://www.w3.org/1998/Math/MathML">
               <cn type="rational"> 1 <sep/> 50 </cn>
             </math>

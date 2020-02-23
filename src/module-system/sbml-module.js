@@ -28,6 +28,7 @@ function _SBMLParse(filename, fileContent){
 */
 function jsbmlToQArr(JSBML){
   let qArr = [];
+  eventCounter = 0; // reset event counter
 
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
@@ -124,7 +125,7 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'listOfEvents'])
     .map('elements')
     .flatten()
-    .filter(['name', 'assignmentRule'])
+    .filter(['name', 'event'])
     .value();
   events.forEach((x) => {
     let qs = eventToQ(x);
@@ -492,6 +493,32 @@ function rateRuleToQ(x){
   return q;
 }
 
+let eventCounter = 0;
 function eventToQ(x){
-  return [];
+  let qArr = [];
+
+  let switcher = baseToQ(x);
+  switcher.class = 'ContinuousSwitcher';
+  if (switcher.id === undefined) switcher.id = 'evt' + eventCounter++;
+  qArr.push(switcher);
+
+  // assignments
+  let assignments = x.elements 
+    && x.elements.find((y) => y.name === 'listOfEventAssignments');
+  if (_.has(assignments, 'elements')) {
+    assignments.elements
+      .filter((y) => y.name === 'eventAssignment')
+      .forEach((y) => {
+        let assign = {
+          id: _.get(y, 'attributes.variable')
+        };
+
+        let math = y.elements
+          && y.elements.find((z) => z.name === 'math');
+        if (math) _.set(assign, 'assignments.' + switcher.id, _toMathExpr(math));
+        qArr.push(assign);
+      });
+  }
+
+  return qArr;
 }
