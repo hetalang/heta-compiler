@@ -265,7 +265,7 @@
         <exe a="2" b="3"/>
       </example>
     </annotation>
-      <initialAssignment symbol="k1" metaid="metaexample" sboTerm="SBO:001">
+      <initialAssignment symbol="comp1" metaid="metaexample" sboTerm="SBO:001">
     <notes>This is a test text element.</notes>
     <annotation>
       <example xmlns="example.com">
@@ -286,7 +286,7 @@
         <exe a="2" b="3"/>
       </example>
     </annotation>
-    <assignmentRule variable="someFun2" metaid="metaexample" sboTerm="SBO:001">
+    <assignmentRule variable="comp2" metaid="metaexample" sboTerm="SBO:001">
     <notes>This example includes csymbol time</notes>
     <annotation>
       <example xmlns="example.com">
@@ -303,7 +303,7 @@
            </apply>
         </math>
       </assignmentRule>
-  <assignmentRule variable="someFun3" metaid="metaexample" sboTerm="SBO:001">
+  <assignmentRule variable="A" metaid="metaexample" sboTerm="SBO:001">
     <notes>This example includes csymbol delay</notes>
     <annotation>
       <example xmlns="example.com">

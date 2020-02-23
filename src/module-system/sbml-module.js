@@ -83,6 +83,54 @@ function jsbmlToQArr(JSBML){
     qArr.push(q);
   });
 
+  // initialAssignments
+  let initialAssignments = _.chain(model.elements)
+    .filter(['name', 'listOfInitialAssignments'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'initialAssignment'])
+    .value();
+  initialAssignments.forEach((x) => {
+    let q = initialAssignmentToQ(x);
+    qArr.push(q);
+  });
+
+  // assignmentRules
+  let assignmentRules = _.chain(model.elements)
+    .filter(['name', 'listOfRules'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'assignmentRule'])
+    .value();
+  assignmentRules.forEach((x) => {
+    let q = assignmentRuleToQ(x);
+    qArr.push(q);
+  });
+
+  // assignmentRules
+  let rateRules = _.chain(model.elements)
+    .filter(['name', 'listOfRules'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'rateRule'])
+    .value();
+  rateRules.forEach((x) => {
+    let q = rateRuleToQ(x);
+    qArr.push(q);
+  });
+
+  // assignmentRules
+  let events = _.chain(model.elements)
+    .filter(['name', 'listOfEvents'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'assignmentRule'])
+    .value();
+  events.forEach((x) => {
+    let qs = eventToQ(x);
+    qArr = qArr.concat(qs);
+  });
+
   return qArr;
 }
 
@@ -249,8 +297,8 @@ function _toMathExpr(element, useParentheses = false){
     }
   } else if (element.name === 'piecewise') {
     throw new Error('one piece is supported in MathML peicewise.');
-  } else if (element.name === 'apply' && first.name === 'ci') { // some user defined functions
-    let funcName = _.get(first, 'elements.0.text');
+  } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
+    let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
     element.elements.shift();
     let args = element.elements.map((x) => _toMathExpr(x)).join(', ');
     return `${funcName}(${args})`;
@@ -262,6 +310,10 @@ function _toMathExpr(element, useParentheses = false){
     return _.get(element, 'elements.0.text');
   } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/time') {
     return 't';
+  } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/delay') {
+    return 'delay';
+  } else if (element.name === 'csymbol') {
+    return _.get(element, 'elements.0.text');
   } else if (element.name === 'cn' && _.get(element, 'elements.0.text') < 0) {
     return `(${_.get(element, 'elements.0.text')})`;
   } else if (element.name === 'cn') {
@@ -396,4 +448,50 @@ function parameterToQ(x){
   }
 
   return q;
+}
+
+function initialAssignmentToQ(x){
+  let q = {
+    id: _.get(x, 'attributes.symbol'),
+  };
+
+  let math = x.elements
+    && x.elements.find((y) => y.name === 'math');
+  if (math) _.set(q, 'assignments.start_', _toMathExpr(math));
+
+  return q;
+}
+
+function assignmentRuleToQ(x){
+  let q = {
+    id: _.get(x, 'attributes.variable'),
+  };
+
+  let math = x.elements
+    && x.elements.find((y) => y.name === 'math');
+  if (math) _.set(q, 'assignments.ode_', _toMathExpr(math));
+
+  return q;
+}
+
+function rateRuleToQ(x){
+  let q = baseToQ(x);
+
+  let target = _.get(x, 'attributes.variable');
+  q.id = target + '_proc';
+  q.class = 'Process';
+  q.actors = [{
+    stoichiometry: 1,
+    target: target
+  }];
+
+  let math = x.elements
+    && x.elements.find((y) => y.name === 'math');
+  if (math) _.set(q, 'assignments.ode_', _toMathExpr(math));
+
+  return q;
+}
+
+function eventToQ(x){
+  return [];
 }
