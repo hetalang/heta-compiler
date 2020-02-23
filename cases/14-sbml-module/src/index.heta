@@ -10,7 +10,7 @@
 // include addon.yml type yaml
 //include ./00026-sbml-l2v4.xml type sbml
 abstract namespace one begin
-  include ./superexample-l2v5.xml type sbml
+  include ./two-compartment-model-result.xml type sbml
 end
 
 // exports

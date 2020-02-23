@@ -179,6 +179,98 @@ function _toAux(elements){
   return elements;
 }
 
+function _toMathExpr(element, useParentheses = false){
+  let first = _.get(element, 'elements.0');
+  if (element.name === 'math') {
+    return _toMathExpr(element.elements[0]);
+  } else if(element.name === 'apply' && first.name === 'times') {
+    element.elements.shift();
+    return element.elements.map((x) => _toMathExpr(x, true)).join(' * ');
+  } else if(element.name === 'apply' && first.name === 'divide') {
+    element.elements.shift();
+    return element.elements.map((x) => _toMathExpr(x, true)).join(' / ');
+  } else if(element.name === 'apply' && first.name === 'minus') {
+    element.elements.shift();
+    let expr = element.elements.map((x) => _toMathExpr(x, true)).join(' - ');
+    return useParentheses ? `(${expr})` : expr;
+  } else if(element.name === 'apply' && first.name === 'plus') {
+    element.elements.shift();
+    let expr = element.elements.map((x) => _toMathExpr(x, true)).join(' + ');
+    return useParentheses ? `(${expr})` : expr;
+  } else if(element.name === 'apply' && first.name === 'power') {
+    element.elements.shift();
+    let expr = element.elements.map((x) => _toMathExpr(x, true)).join(', ');
+    return `pow(${expr})`;
+  } else if(element.name === 'apply' && first.name === 'root') {
+    element.elements.shift();
+    let args = element.elements.map((x) => _toMathExpr(x, true));
+    return `sqrt(${args[0]})`;
+  } else if(element.name === 'apply' && first.name === 'log') {
+    let logbase = element.elements.find(y => y.name === 'logbase');
+    element.elements.shift();
+    let expr = element.elements
+      .filter((x) => x.name !== 'logbase')
+      .map((x) => _toMathExpr(x));
+    if (logbase === undefined) {
+      return `log10(${expr[0]})`;
+    } else if (_.get(logbase, 'elements.0.elements.0.text') === '2') {
+      return `log2(${expr[0]})`;
+    } else {
+      let base = _toMathExpr(logbase.elements[0]);
+      return `log(${expr[0]}, ${base})`;
+    }
+  } else if (element.name === 'piecewise' && element.elements.length === 2) {
+    let arg1 = _toMathExpr(_.get(element, 'elements.0.elements.0'));
+    let arg2 = _toMathExpr(_.get(element, 'elements.1.elements.0'));
+    let condName = _.get(first, 'elements.1.elements.0.name');
+    let condElements = _.get(first, 'elements.1.elements');
+    condElements.shift();
+    let condArgs = condElements.map((x) => _toMathExpr(x));
+    if (condName === 'lt') {
+      let cond = `${condArgs[1]} - ${condArgs[0]}`;
+      return `ifg0(${cond}, ${arg1}, ${arg2})`;
+    } else if (condName === 'gt') {
+      let cond = `${condArgs[0]} - ${condArgs[1]}`;
+      return `ifg0(${cond}, ${arg1}, ${arg2})`;
+    } else if (condName === 'leq') {
+      let cond = `${condArgs[1]} - ${condArgs[0]}`;
+      return `ifge0(${cond}, ${arg1}, ${arg2})`;
+    } else if (condName === 'geq') {
+      let cond = `${condArgs[0]} - ${condArgs[1]}`;
+      return `ifge0(${cond}, ${arg1}, ${arg2})`;
+    } else if (condName === 'eq') {
+      let cond = `${condArgs[0]} - ${condArgs[1]}`;
+      return `ife0(${cond}, ${arg1}, ${arg2})`;
+    } else if (condName === 'neq') {
+      let cond = `${condArgs[0]} - ${condArgs[1]}`;
+      return `ife0(${cond}, ${arg2}, ${arg1})`;
+    } else {
+      throw new Error('Error in translation MathML piecewise');
+    }
+  } else if (element.name === 'piecewise') {
+    throw new Error('one piece is supported in MathML peicewise.');
+  } else if (element.name === 'apply' && first.name === 'ci') { // some user defined functions
+    let funcName = _.get(first, 'elements.0.text');
+    element.elements.shift();
+    let args = element.elements.map((x) => _toMathExpr(x)).join(', ');
+    return `${funcName}(${args})`;
+  } else if (element.name === 'apply') { // all other internal mathml functions
+    element.elements.shift();
+    let args = element.elements.map((x) => _toMathExpr(x)).join(', ');
+    return `${first.name}(${args})`;
+  } else if (element.name === 'ci') {
+    return _.get(element, 'elements.0.text');
+  } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/time') {
+    return 't';
+  } else if (element.name === 'cn' && _.get(element, 'elements.0.text') < 0) {
+    return `(${_.get(element, 'elements.0.text')})`;
+  } else if (element.name === 'cn') {
+    return _.get(element, 'elements.0.text');
+  } else {
+    return 'o';
+  }
+}
+
 function compartmentToQ(x){
   let q = baseToQ(x);
 
@@ -224,8 +316,12 @@ function reactionToQ(x){
   let q = baseToQ(x);
 
   q.class = 'Reaction';
-  let ode_ = 'xxx';
-  if (ode_ !== undefined) _.set(q, 'assignments.ode_', ode_);
+  let kineticLaw = x.elements
+    && x.elements.find((y) => y.name === 'kineticLaw');
+  let math = kineticLaw 
+    && kineticLaw.elements
+    && kineticLaw.elements.find((y) => y.name === 'math'); 
+  if (math) _.set(q, 'assignments.ode_', _toMathExpr(math));
 
   let reversible = _.get(x, 'attributes.reversible') !== 'false' ;
   _.set(q, 'aux.reversible', reversible);
