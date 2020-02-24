@@ -231,7 +231,7 @@
     ]
   },
   {
-    "class": "ContinuousSwitcher",
+    "class": "CondSwitcher",
     "id": "sw1",
     "space": "first",
     "condition": "evt1"

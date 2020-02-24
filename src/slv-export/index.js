@@ -140,12 +140,12 @@ class SLVExport extends _Export{
           });
       });
 
-    // search for ContinuousSwitcher
+    // search for CondSwitcher
     let bagSwitchers = model.population
-      .selectByClassName('ContinuousSwitcher')
+      .selectByClassName('CondSwitcher')
       .map((switcher) => switcher.id);
     if(bagSwitchers.length>0){
-      throw new ExportError('ContinuousSwitcher is not supported in SLVExport: ' + bagSwitchers);
+      throw new ExportError('CondSwitcher is not supported in SLVExport: ' + bagSwitchers);
     }
     
     return model;

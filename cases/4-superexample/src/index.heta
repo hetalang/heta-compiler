@@ -46,7 +46,7 @@ pg2 @Page {content: this is content};
   p4[sw3]= 2;
 end
 
-mod1::sw3 @ContinuousSwitcher {
+mod1::sw3 @CondSwitcher {
   condition: p1
 };
 

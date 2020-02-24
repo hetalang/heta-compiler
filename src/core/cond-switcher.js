@@ -1,8 +1,8 @@
 const { _Switcher } = require('./_switcher');
 
-class ContinuousSwitcher extends _Switcher {
+class CondSwitcher extends _Switcher {
   merge(q, skipChecking){
-    if(!skipChecking) ContinuousSwitcher.isValid(q);
+    if(!skipChecking) CondSwitcher.isValid(q);
     super.merge(q, skipChecking);
 
     if(q && q.condition!==undefined) this.condition = q.condition;
@@ -16,7 +16,7 @@ class ContinuousSwitcher extends _Switcher {
   }
 }
 
-ContinuousSwitcher._requirements = {
+CondSwitcher._requirements = {
   condition: {
     required: true, 
     isReference: true, class: 'Record', setTarget: false
@@ -24,5 +24,5 @@ ContinuousSwitcher._requirements = {
 };
 
 module.exports = {
-  ContinuousSwitcher
+  CondSwitcher
 };

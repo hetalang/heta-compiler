@@ -10,7 +10,7 @@ sbml1 @SBMLExport { filepath: sbml.xml };
 
 // switcher
 cond1 @Record := 6-x1;
-sw1 @ContinuousSwitcher {
+sw1 @CondSwitcher {
   condition: cond1
 };
 x1 [sw1]= 10;

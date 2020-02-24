@@ -166,8 +166,8 @@
   {% endif %}
   
   {%- set listOfTimeEvents = image.population.selectByClassName("TimeSwitcher") -%}
-  {%- set listOfContinuousEvents = image.population.selectByClassName("ContinuousSwitcher") -%}
-  {% if listOfTimeEvents|length + listOfContinuousEvents|length > 0 %}
+  {%- set listOfCondEvents = image.population.selectByClassName("CondSwitcher") -%}
+  {% if listOfTimeEvents|length + listOfCondEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfTimeEvents %}
       <event
@@ -194,7 +194,7 @@
         </listOfEventAssignments>
       </event>
       {%- endfor %}
-      {%- for event in listOfContinuousEvents %}
+      {%- for event in listOfCondEvents %}
       <event
         id="{{event.id}}" metaid="{{event.index}}"
         >

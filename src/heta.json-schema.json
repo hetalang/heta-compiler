@@ -259,22 +259,22 @@
       "type": "object"
     },
 
-    "ContinuousSwitcherP": {
+    "CondSwitcherP": {
       "type": "object",
       "properties": {
         "condition": { "$ref": "#/definitions/ID" }
       }
     },
 
-    "ContinuousSwitcher": {
+    "CondSwitcher": {
       "allOf": [
         { "$ref": "#/definitions/_ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/_SwitcherP" },
-        { "$ref": "#/definitions/ContinuousSwitcherP" },
+        { "$ref": "#/definitions/CondSwitcherP" },
         {
           "required": ["id", "space", "condition"],
-          "properties": { "class": { "const": "ContinuousSwitcher" } }
+          "properties": { "class": { "const": "CondSwitcher" } }
         }
       ]
     },

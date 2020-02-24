@@ -117,9 +117,9 @@ addrule(
 {% endfor -%}
 {% endfor %}
 
-{% set listOfContinuousEvents = image.population.selectByClassName("ContinuousSwitcher") %}
-{{- "% Events" if listOfContinuousEvents|length > 0 }}
-{% for event in listOfContinuousEvents -%}
+{% set listOfCondEvents = image.population.selectByClassName("CondSwitcher") %}
+{{- "% Events" if listOfCondEvents|length > 0 }}
+{% for event in listOfCondEvents -%}
 {{_id}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
   {%- for record in image.population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}

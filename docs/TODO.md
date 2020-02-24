@@ -28,5 +28,5 @@
 
 1. #move, #moveNS
 1. FunctionDefinition + function checking
-1. ContinuousSwitcher в DBSolve
+1. CondSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve

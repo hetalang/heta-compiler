@@ -1,6 +1,6 @@
 [
   {
-    "class": "ContinuousSwitcher",
+    "class": "CondSwitcher",
     "id": "sw1",
     "space": "one",
     "condition": "xxx"
