@@ -14,3 +14,5 @@
 *.RTF	 diff=astextplain
 
 cases/* linguist-documentation
+test/* linguist-documentation
+*.njk linguist-language=JavaScript
