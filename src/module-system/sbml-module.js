@@ -232,32 +232,59 @@ function _toMathExpr(element, useParentheses = false){
   let first = _.get(element, 'elements.0');
   if (element.name === 'math') {
     return _toMathExpr(element.elements[0]);
+  } else if(element.name === 'apply' && (first.name === 'gt' || first.name === 'geq' || first.name === 'eq')) {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${one}-${two}`;
+  } else if(element.name === 'apply' && (first.name === 'lt' || first.name === 'leq' || first.name === 'neq')) {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${two}-${one}`;
+  } else if(element.name === 'apply' && first.name === 'and') {
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(', ');
+    return `min(${args})`;
+  } else if(element.name === 'apply' && first.name === 'or') {
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(', ');
+    return `max(${args})`;
+  } else if(element.name === 'apply' && first.name === 'xor' && element.elements.length === 3) {
+    let one = _toMathExpr(element.elements[1]);
+    let two = _toMathExpr(element.elements[2]);
+    return `max(min(${one}, -(${two})), min(-(${one}), ${two}))`;
+  } else if(element.name === 'apply' && first.name === 'not') {
+    let one = _toMathExpr(element.elements[1]);
+    return `- (${one})`;
   } else if(element.name === 'apply' && first.name === 'times') {
-    element.elements.shift();
-    return element.elements.map((x) => _toMathExpr(x, true)).join(' * ');
+    return _.drop(element.elements) // without first element
+      .map((x) => _toMathExpr(x, true)).join(' * ');
   } else if(element.name === 'apply' && first.name === 'divide') {
-    element.elements.shift();
-    return element.elements.map((x) => _toMathExpr(x, true)).join(' / ');
+    return _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(' / ');
   } else if(element.name === 'apply' && first.name === 'minus') {
-    element.elements.shift();
-    let expr = element.elements.map((x) => _toMathExpr(x, true)).join(' - ');
+    let expr = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(' - ');
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
-    element.elements.shift();
-    let expr = element.elements.map((x) => _toMathExpr(x, true)).join(' + ');
+    let expr = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(' + ');
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'power') {
-    element.elements.shift();
-    let expr = element.elements.map((x) => _toMathExpr(x, true)).join(', ');
+    let expr = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(', ');
     return `pow(${expr})`;
   } else if(element.name === 'apply' && first.name === 'root') {
-    element.elements.shift();
-    let args = element.elements.map((x) => _toMathExpr(x, true));
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true));
     return `sqrt(${args[0]})`;
+  } else if(element.name === 'apply' && first.name === 'ln') {
+    let expr = _.drop(element.elements)
+      .map((x) => _toMathExpr(x));
+    return `ln(${expr[0]})`;
   } else if(element.name === 'apply' && first.name === 'log') {
-    let logbase = element.elements.find(y => y.name === 'logbase');
-    element.elements.shift();
-    let expr = element.elements
+    let logbase = element.elements
+      .find(y => y.name === 'logbase');
+    let expr = _.drop(element.elements)
       .filter((x) => x.name !== 'logbase')
       .map((x) => _toMathExpr(x));
     if (logbase === undefined) {
@@ -273,8 +300,8 @@ function _toMathExpr(element, useParentheses = false){
     let arg2 = _toMathExpr(_.get(element, 'elements.1.elements.0'));
     let condName = _.get(first, 'elements.1.elements.0.name');
     let condElements = _.get(first, 'elements.1.elements');
-    condElements.shift();
-    let condArgs = condElements.map((x) => _toMathExpr(x));
+    let condArgs = _.drop(condElements)
+      .map((x) => _toMathExpr(x));
     if (condName === 'lt') {
       let cond = `${condArgs[1]} - ${condArgs[0]}`;
       return `ifg0(${cond}, ${arg1}, ${arg2})`;
@@ -300,12 +327,12 @@ function _toMathExpr(element, useParentheses = false){
     throw new Error('one piece is supported in MathML peicewise.');
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
-    element.elements.shift();
-    let args = element.elements.map((x) => _toMathExpr(x)).join(', ');
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x)).join(', ');
     return `${funcName}(${args})`;
   } else if (element.name === 'apply') { // all other internal mathml functions
-    element.elements.shift();
-    let args = element.elements.map((x) => _toMathExpr(x)).join(', ');
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x)).join(', ');
     return `${first.name}(${args})`;
   } else if (element.name === 'ci') {
     return _.get(element, 'elements.0.text');
@@ -319,8 +346,12 @@ function _toMathExpr(element, useParentheses = false){
     return `(${_.get(element, 'elements.0.text')})`;
   } else if (element.name === 'cn') {
     return _.get(element, 'elements.0.text');
+  } else if (element.name === 'true') {
+    return '1';
+  } else if (element.name === 'false') {
+    return '-1';
   } else {
-    return 'o';
+    throw new Error('Cannot parse MathML:' + element);
   }
 }
 
@@ -501,6 +532,35 @@ function eventToQ(x){
   switcher.class = 'CondSwitcher';
   if (switcher.id === undefined) switcher.id = 'evt' + eventCounter++;
   qArr.push(switcher);
+
+  // useValuesFromTriggerTime
+  let useValuesFromTriggerTime = _.get(x, 'attributes.useValuesFromTriggerTime') !== 'false';
+  //console.log(useValuesFromTriggerTime);
+
+  // condition
+  let trigger = x.elements
+    && x.elements.find((y) => y.name === 'trigger');
+  let triggerMath = trigger
+    && trigger.elements
+    && trigger.elements.find((y) => y.name === 'math');
+  if (triggerMath) {
+    let condId = switcher.id + '_cond';
+    qArr.push({
+      id: condId,
+      class: 'Record',
+      assignments: {ode_: _toMathExpr(triggerMath)}
+    });
+    switcher.condition = condId;
+  }
+
+  // delay : not used
+  let delay = x.elements
+    && x.elements.find((y) => y.name === 'delay');
+  let delayMath = delay
+    && delay.elements
+    && delay.elements.find((y) => y.name === 'math');
+  let delayExpr = _toMathExpr(delayMath);
+  //console.log(delayExpr);
 
   // assignments
   let assignments = x.elements 
