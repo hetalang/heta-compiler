@@ -1,9 +1,7 @@
 [![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://insysbio.github.io/heta-compiler)
 [![GitHub issues](https://img.shields.io/github/issues/insysbio/heta-compiler.svg)](https://GitHub.com/insysbio/heta-compiler/issues/)
 [![Travis](https://travis-ci.org/insysbio/heta-compiler.svg?branch=master)](https://travis-ci.org/insysbio/heta-compiler)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/insysbio/heta-compiler?branch=master&svg=true)](https://ci.appveyor.com/project/metelkin/heta-compiler)
 [![Coverage Status](https://coveralls.io/repos/github/insysbio/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/insysbio/heta-compiler?branch=master)
-[![GitHub release](https://img.shields.io/github/release/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/releases/)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
 [![GitHub license](https://img.shields.io/github/license/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/blob/master/LICENSE)
 
