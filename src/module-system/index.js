@@ -42,7 +42,7 @@ class ModuleSystem {
   // parse single file without dependencies
   async addModuleAsync(filename, type='heta', options = {}){
     // parse
-    let mdl = await _Module.createModuleAsync(filename, type, options);
+    let mdl = _Module.createModule(filename, type, options);
     mdl.updateByAbsPaths();
     // push to moduleCollection
     let moduleName = [filename, '#', options.sheet || '1'].join('');

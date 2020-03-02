@@ -3,7 +3,7 @@ const { ModuleError } = require('../heta-error');
 
 // abstract class for different import types
 class _Module {
-  static async createModuleAsync(filename, type, options = {}){
+  static createModule(filename, type, options = {}){
     let mdl = new _Module;
     mdl.filename = path.resolve(filename); // get abs path
     mdl.type = type;
