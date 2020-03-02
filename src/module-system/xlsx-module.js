@@ -1,38 +1,17 @@
-const { ModuleError } = require('../heta-error');
+//const { ModuleError } = require('../heta-error');
 const _Module = require('./_module');
-const { processFile } = require('excel-as-json'); // see https://www.npmjs.com/package/excel-as-json
+//const { processFile } = require('excel-as-json'); // see https://www.npmjs.com/package/excel-as-json
+const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
-
-// to use as Promise
-const util = require('util');
-const convertExcel = util.promisify(processFile);
 
 _Module.prototype.setXLSXModuleAsync = async function(){
   // TODO: checking arguments is required
-  const options = _.defaultsDeep(this.options, {
+  const options = _.defaults(this.options, {
     sheet: 1,
-    omitRows: 0,
-    waitSec: 30
+    omitRows: 0
   });
 
-  // this part is the way to fix bug in excel-as-json 10 second before callback
-  // throws error in 10 seconds in any way
-  
-  let timeout;
-  let waiter = new Promise((resolve, reject) => {
-    timeout = setTimeout(() => {
-      let err = new ModuleError(`sheet #${options.sheet} is not found in "${this.filename}" or reading table require more than ${options.waitSec} sec.`);
-      //console.log(options.waitSec, 'sec is out for', options);
-      reject(err);
-    }, 1000*options.waitSec);
-  });
-
-  // who is faster
-  let rawData = await Promise.race([
-    convertExcel(this.filename, null, { sheet: options.sheet, omitEmptyFields: true }),
-    waiter
-  ]);
-  clearTimeout(timeout);
+  let rawData = convertExcelSync(this.filename, null, { sheet: options.sheet, omitEmptyFields: true });
   rawData.splice(0, options.omitRows); // remove rows
 
   let dataFiltered = rawData
@@ -48,9 +27,13 @@ _Module.prototype.setXLSXModuleAsync = async function(){
             .filter((y) => y!==''); // removes empty strings from array
         }
       });
-      // converts 0/'0' -> false, 1/'1' -> true
+      
       let booleanConverter = (value, key) => {
-        if (['isAmount', 'free', 'boundary'].indexOf(key) !== -1){
+        if (_.trim(value) === 'true') { // string to boolean
+          return true;
+        } else if (_.trim(value) === 'false') {
+          return false;
+        } else if (['isAmount', 'free', 'boundary'].indexOf(key) !== -1){ // converts 0/'0' -> false, 1/'1' -> true
           if (value == 0) {
             return false;
           } else if (value == 1) {
@@ -58,7 +41,7 @@ _Module.prototype.setXLSXModuleAsync = async function(){
           } else {
             return value;
           }
-        } else {
+        } else { // for others
           return value;
         }
       }

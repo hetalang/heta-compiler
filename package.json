@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha --recursive test/xlsx-connector",
+    "test:dev": "mocha --recursive test/module-xlsx",
     "test": "mocha test --recursive --exclude **/*.tmp.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
@@ -25,7 +25,6 @@
     "ajv": "^6.10.2",
     "ajv-errors": "^1.0.1",
     "commander": "^2.20.3",
-    "excel-as-json": "^2.0.2",
     "fs-extra": "^7.0.1",
     "heta-parser": "^0.3.6",
     "inquirer": "^7.0.0",

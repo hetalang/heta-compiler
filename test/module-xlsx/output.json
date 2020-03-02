@@ -17,13 +17,11 @@
         "class": "Species",
         "id": "s1",
         "isAmount": true,
-        "compartment": "c1",
-        "assignments": {}
+        "compartment": "c1"
     },
     {
         "class": "Compartment",
-        "id": "c1",
-        "assignments": {}
+        "id": "c1"
     },
     {
         "class": "Const",
