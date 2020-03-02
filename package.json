@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha --recursive test/julia-export",
+    "test:dev": "mocha --recursive test/xlsx-connector",
     "test": "mocha test --recursive --exclude **/*.tmp.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"

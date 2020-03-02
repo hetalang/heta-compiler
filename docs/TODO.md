@@ -6,7 +6,7 @@
 + markdown -> Page
 + json
 + yaml
-- sbml
++ sbml
 - svg
 
 ## exports
