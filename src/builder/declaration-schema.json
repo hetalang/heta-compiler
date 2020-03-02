@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema#",
-  "description" : "Describes platform.json file in qs3p-js.",
+  "description" : "Describes platform.json file in Heta compiler.",
   "type": "object",
   "required": ["id", "importModule"],
   "additionalProperties": true,

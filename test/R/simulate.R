@@ -1,5 +1,5 @@
 # setwd("Y:\\PLATFORMS\\dermatitis-lilly")
-# filename <- "y:/qs3p-js/test/cases/1/dist/mm_mrg.cpp"
+# filename <- "y:/heta-compiler/test/cases/1/dist/mm_mrg.cpp"
 # results_folder <- "simulations"
 
 message('Reading model. ', appendLF = FALSE)

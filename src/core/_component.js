@@ -119,7 +119,7 @@ class _Component {
   }
   static isValid(q){
     let validate = validator
-      .getSchema('http://qs3p.insilicobio.ru#/definitions/' + this.schemaName);
+      .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
     if(!validate){
       throw new TypeError(q, `The schema "${this.schemaName}" is not found.`);
     }

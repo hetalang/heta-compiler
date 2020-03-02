@@ -43,7 +43,7 @@ singleTest('Observation', observation);
 
 function singleTest(className, checkedArray, errorArray){
   describe(`Test ${className} instances.`, () => {
-    let validate = validator.getSchema(`http://qs3p.insilicobio.ru#/definitions/${className}`);
+    let validate = validator.getSchema(`https://hetalang.github.io#/definitions/${className}`);
     // no errors
     checkedArray && checkedArray.forEach((component) => {
       it(`Structure OK of ${component.class} id :"${component.id}"`, () => {
