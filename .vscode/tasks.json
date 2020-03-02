@@ -6,25 +6,25 @@
         {
             "label": "case-0",
             "type": "shell",
-            "command": "qs3p build cases/0-hello-world",
+            "command": "heta build cases/0-hello-world",
             "group": "test"
         },
         {
             "label": "case-1",
             "type": "shell",
-            "command": "qs3p build cases/1-one-compartment",
+            "command": "heta build cases/1-one-compartment",
             "group": "test"
         },
         {
             "label": "case-2",
             "type": "shell",
-            "command": "qs3p build cases/2-cells",
+            "command": "heta build cases/2-cells",
             "group": "test"
         },
         {
             "label": "case-4",
             "type": "shell",
-            "command": "qs3p build cases/4-superexample",
+            "command": "heta build cases/4-superexample",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -34,19 +34,19 @@
         {
             "label": "case-5",
             "type": "shell",
-            "command": "qs3p build cases/5-tasks",
+            "command": "heta build cases/5-tasks",
             "group": "test"
         },
         {
             "label": "case-6",
             "type": "shell",
-            "command": "qs3p build cases/6-import",
+            "command": "heta build cases/6-import",
             "group": "test"
         },
         {
             "label": "case-7",
             "type": "shell",
-            "command": "qs3p build cases/7-importNS",
+            "command": "heta build cases/7-importNS",
             "group": "test"
         }
     ]

@@ -9,7 +9,7 @@ const pkg = require('../package');
 // we use https://docs.npmjs.com/files/package.json
 
 const defaultPlatform = {
-  '$schema': 'https://github.com/insysbio/qs3p-js#',
+  '$schema': 'https://github.com/insysbio/heta-compiler#',
   id: 'template',
   title: 'platform title',
   notes: 'platform notes',

@@ -1,5 +1,5 @@
 {
-  "name": "qs3p-js",
+  "name": "heta-compiler",
   "version": "0.4.26",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
   "main": "src/index.js",
@@ -11,14 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.insysbio.com/metelkin/qs3p-js.git"
+    "url": "https://github.com/insysbio/heta-compiler.git"
   },
   "author": "Evgeny Metelkin <evgeny.metelkin@gmail.com> (https://github.com/metelkin)",
   "license": "Apache-2.0",
   "bin": {
-    "qs3p": "bin/qs3p.js",
-    "qs3p-build": "bin/qs3p-build.js",
-    "qs3p-init": "bin/qs3p-init.js"
+    "heta": "bin/heta.js",
+    "heta-build": "bin/heta-build.js",
+    "heta-init": "bin/heta-init.js",
+    "qs3p": "bin/heta.js",
+    "qs3p-build": "bin/heta-build.js",
+    "qs3p-init": "bin/heta-init.js"
   },
   "dependencies": {
     "@insysbio/topo-sort": "^1.0.1",

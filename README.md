@@ -1,15 +1,15 @@
-[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://insysbio.github.io/qs3p-js)
-[![GitHub issues](https://img.shields.io/github/issues/insysbio/qs3p-js.svg)](https://GitHub.com/insysbio/qs3p-js/issues/)
-[![Travis](https://travis-ci.org/insysbio/qs3p-js.svg?branch=master)](https://travis-ci.org/insysbio/qs3p-js)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/insysbio/qs3p-js?branch=master&svg=true)](https://ci.appveyor.com/project/metelkin/qs3p-js)
-[![Coverage Status](https://coveralls.io/repos/github/insysbio/qs3p-js/badge.svg?branch=master)](https://coveralls.io/github/insysbio/qs3p-js?branch=master)
-[![GitHub release](https://img.shields.io/github/release/insysbio/qs3p-js.svg)](https://github.com/insysbio/qs3p-js/releases/)
-[![GitHub npm](https://img.shields.io/npm/v/qs3p-js/latest.svg)](https://www.npmjs.com/package/qs3p-js)
-[![GitHub license](https://img.shields.io/github/license/insysbio/qs3p-js.svg)](https://github.com/insysbio/qs3p-js/blob/master/LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://insysbio.github.io/heta-compiler)
+[![GitHub issues](https://img.shields.io/github/issues/insysbio/heta-compiler.svg)](https://GitHub.com/insysbio/heta-compiler/issues/)
+[![Travis](https://travis-ci.org/insysbio/heta-compiler.svg?branch=master)](https://travis-ci.org/insysbio/heta-compiler)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/insysbio/heta-compiler?branch=master&svg=true)](https://ci.appveyor.com/project/metelkin/heta-compiler)
+[![Coverage Status](https://coveralls.io/repos/github/insysbio/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/insysbio/heta-compiler?branch=master)
+[![GitHub release](https://img.shields.io/github/release/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/releases/)
+[![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
+[![GitHub license](https://img.shields.io/github/license/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/blob/master/LICENSE)
 
-# qs3p-js
+# Heta compiler JS
 
-**Q**uantitative **S**ystems **P**harmacology **P**rogramming **P**latform in **J**ava**S**cript
+Heta compiler JS is Quantitative Systems Pharmacology Programming Platform in JavaScript
 
 This is part of [heta-lang](https://insysbio.github.io/heta-lang/) project.
 
@@ -20,17 +20,17 @@ This is part of [heta-lang](https://insysbio.github.io/heta-lang/) project.
 
 The stable version can be installed from npm
 ```bash
-npm i -g qs3p-js
+npm i -g heta-compiler
 ```
 The latest version can be installed directly from git
 ```bash
-npm i -g git+https://github.com/insysbio/qs3p.git
+npm i -g git+https://github.com/insysbio/heta-compiler.git
 ```
 
 ## Usage in JavaScript
 
 ```javascript
-const { Container } = require('qs3p-js');
+const { Container } = require('heta-compiler');
 
 let c = new Container();
 let k1 = c.insert({
@@ -44,10 +44,10 @@ let k1 = c.insert({
 To build the dist files from source.
 
 ```bash
-npm i -g qs3p-js
+npm i -g heta-compiler
 cd ./path/to/platform/folder
-qs3p init
-qs3p build
+heta init
+heta build
 ```
 
 ## Copyright
