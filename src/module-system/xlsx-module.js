@@ -4,7 +4,7 @@ const _Module = require('./_module');
 const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
 
-_Module.prototype.setXLSXModuleAsync = async function(){
+_Module.prototype.setXLSXModule = function(){
   // TODO: checking arguments is required
   const options = _.defaults(this.options, {
     sheet: 1,

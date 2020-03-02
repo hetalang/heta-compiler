@@ -9,28 +9,27 @@ class _Module {
     mdl.type = type;
     mdl.options = options;
 
-    switch(type){
-      case 'heta':
-        await mdl.setHetaModuleAsync();
-        break;
-      case 'json':
-        await mdl.setJSONModuleAsync();
-        break;
-      case 'md':
-        await mdl.setMdModuleAsync();
-        break;
-      case 'yaml':
-        await mdl.setYAMLModuleAsync();
-        break;
-      case 'xlsx':
-        await mdl.setXLSXModuleAsync();
-        break;
-      case 'sbml':
-        await mdl.setSBMLModuleAsync();
-        break;
-      default:
-        throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yaml", "xlsx"] `);
-        break;
+    switch (type) {
+    case 'heta':
+      mdl.setHetaModule();
+      break;
+    case 'json':
+      mdl.setJSONModule();
+      break;
+    case 'md':
+      mdl.setMdModule();
+      break;
+    case 'yaml':
+      mdl.setYAMLModule();
+      break;
+    case 'xlsx':
+      mdl.setXLSXModule();
+      break;
+    case 'sbml':
+      mdl.setSBMLModule();
+      break;
+    default:
+      throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yaml", "xlsx"] `);
     }
     
     return mdl;

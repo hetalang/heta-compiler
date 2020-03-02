@@ -3,7 +3,7 @@ const hetaParser = require('heta-parser');
 const _Module = require('./_module');
 const { FileSystemError } = require('../heta-error');
 
-_Module.prototype.setHetaModuleAsync = async function(){
+_Module.prototype.setHetaModule = function(){
   //checking file exists
   if(!fs.existsSync(this.filename)) throw new FileSystemError(`No such file: ${this.filename}`);
   

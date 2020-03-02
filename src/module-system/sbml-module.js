@@ -4,7 +4,7 @@ const { xml2js } = require('xml-js');
 const { FileSystemError } = require('../heta-error');
 const _ = require('lodash');
 
-_Module.prototype.setSBMLModuleAsync = async function(){
+_Module.prototype.setSBMLModule = function(){
   //checking file exists
   if(!fs.existsSync(this.filename)) throw new FileSystemError(`No such file: ${this.filename}`);
   

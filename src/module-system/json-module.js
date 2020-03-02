@@ -1,7 +1,7 @@
 const fs = require('fs');
 const _Module = require('./_module');
 
-_Module.prototype.setJSONModuleAsync = async function(){
+_Module.prototype.setJSONModule = function(){
   let fileContent = fs.readFileSync(this.filename, 'utf8');
   this.parsed = _JSONParse(this.filename, fileContent);
   
