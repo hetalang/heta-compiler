@@ -76,7 +76,7 @@ class Builder {
     this.container.loadMany(coreComponents, true);
 
     // 1. Parsing
-    await ms.addModuleDeepAsync(absFilename, this.importModule.type, this.importModule);
+    ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
     // 2. Modules integration
     let queue = ms.integrate();
     // 3. Translation

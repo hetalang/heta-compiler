@@ -18,29 +18,29 @@ class ModuleSystem {
     this.graph = new TopoSort();
   }
   // entrance to scan
-  async addModuleDeepAsync(rawAbsFilePath, type, options = {}){
+  addModuleDeep(rawAbsFilePath, type, options = {}){
     let absFilePath = path.normalize(rawAbsFilePath);
-    let mdl = await this._addModuleDeepAsync(absFilePath, type, options);
+    let mdl = this._addModuleDeep(absFilePath, type, options);
     this._top = mdl;
 
     return mdl;
   }
   // scan module dependences recursively
-  async _addModuleDeepAsync(absFilePath, type, options = {}){
+  _addModuleDeep(absFilePath, type, options = {}){
     let moduleName = [absFilePath, '#', options.sheet || '1'].join('');
     if(!(moduleName in this.moduleCollection)){ // new file
-      let mdl = await this.addModuleAsync(absFilePath, type, options);
-      let tmp = mdl.getImportElements().map(async (importItem) => {
-        await this._addModuleDeepAsync(importItem.source, importItem.type, importItem);
+      let mdl = this.addModule(absFilePath, type, options);
+      mdl.getImportElements().forEach((importItem) => {
+        this._addModuleDeep(importItem.source, importItem.type, importItem);
       });
-      await Promise.all(tmp);
+      
       return mdl;
     }else{ // if file already in moduleCollection do nothing
       return;
     }
   }
   // parse single file without dependencies
-  async addModuleAsync(filename, type='heta', options = {}){
+  addModule(filename, type='heta', options = {}){
     // parse
     let mdl = _Module.createModule(filename, type, options);
     mdl.updateByAbsPaths();

@@ -5,10 +5,10 @@ const path = require('path');
 const { ModuleError } = require('../../src/heta-error');
 
 describe('ModuleSystem for cyclic.', () => {
-  it('Add cyclic module.', async () => {
+  it('Add cyclic module.', () => {
     let ms = new ModuleSystem();
     let filepath = path.join(__dirname, './cycle-a.heta');
-    await ms.addModuleDeepAsync(filepath, 'heta', {});
+    ms.addModuleDeep(filepath, 'heta', {});
     expect(Object.keys(ms.moduleCollection)).to.have.lengthOf(3);
     expect(() => {
       ms.sortedPaths();
@@ -17,10 +17,10 @@ describe('ModuleSystem for cyclic.', () => {
 });
 
 describe('ModuleSystem with self include.', () => {
-  it('Add module. Sort throws.', async () => {
+  it('Add module. Sort throws.', () => {
     let ms = new ModuleSystem();
     let filepath = path.join(__dirname, 'self-include.heta');
-    await ms.addModuleDeepAsync(filepath, 'heta', {});
+    ms.addModuleDeep(filepath, 'heta', {});
     expect(() => {
       ms.sortedPaths();
     }).to.throw(ModuleError);

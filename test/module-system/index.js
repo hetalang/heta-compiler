@@ -10,17 +10,17 @@ describe('ModuleSystem without include.', () => {
   it('Add module.', async () => {
     let ms = new ModuleSystem();
     let filepath = path.join(__dirname, 'no-include.heta');
-    let mdl = await ms.addModuleDeepAsync(filepath, 'heta', {});
+    let mdl = ms.addModuleDeep(filepath, 'heta', {});
     
     expect(mdl.parsed).to.be.deep.equal(noImportOutput);
   });
 });
 
 describe('Run normal ModuleSystem.', () => {
-  it('Add module.', async () => {
+  it('Add module.', () => {
     let ms = new ModuleSystem();
     let filepath = path.join(__dirname, './normal-a.heta');
-    let mdl = await ms.addModuleDeepAsync(filepath, 'heta', {});
+    let mdl = ms.addModuleDeep(filepath, 'heta', {});
     //writeFileSync('res0-new.json', JSON.stringify(ms, null, 2));
 
     expect(mdl).to.have.property('filename').with.a('string');
