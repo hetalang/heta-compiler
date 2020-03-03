@@ -419,7 +419,7 @@ function reactionToQ(x){
     var actors0 = products.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
-        let stoichiometry = _.get(y, 'attributes.stoichiometry');
+        let stoichiometry = _.get(y, 'attributes.stoichiometry', '1');
         return {
           target: _.get(y, 'attributes.species'),
           stoichiometry: Number.parseFloat(stoichiometry)
@@ -436,7 +436,7 @@ function reactionToQ(x){
     var actors1 = reactants.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
-        let stoichiometry = _.get(y, 'attributes.stoichiometry');
+        let stoichiometry = _.get(y, 'attributes.stoichiometry', '1');
         return {
           target: _.get(y, 'attributes.species'),
           stoichiometry: (-1) * Number.parseFloat(stoichiometry)
