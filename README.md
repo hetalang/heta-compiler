@@ -14,7 +14,7 @@ This is part of [heta-lang](https://insysbio.github.io/heta-lang/) project.
 ## Intro
 
 ## Installation
-[NodeJS](https://nodejs.org/en/) is required. Currently NodeJS v6 and newer are supported.
+[NodeJS](https://nodejs.org/en/) is required. Currently NodeJS v8 and newer are supported.
 
 The stable version can be installed from npm
 ```bash
@@ -56,7 +56,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    <http://www.apache.org/licenses/LICENSE-2.0>
+<http://www.apache.org/licenses/LICENSE-2.0>
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -29,7 +29,8 @@
         "debuggingMode": {"type": "boolean", "default": false},
         "logs": {"type": "string"},
         "logLevel": {"type": "string", "enum": ["error", "warn", "info", "verbose", "debug", "silly"]},
-        "skipExport": {"type": "boolean", "default": false}
+        "skipExport": {"type": "boolean", "default": false},
+        "distDir": {"type": "string", "default": "dist" }
       },
       "default": {"debuggingMode": false, "syncMode": false, "logLevel": "info"}
     },

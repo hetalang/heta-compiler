@@ -36,7 +36,7 @@ let logger = winston.createLogger({
 });
 
 class Builder {
-  constructor(decl, coreDirname='.', distDirname = 'dist', metaDirname = 'meta'){
+  constructor(decl, coreDirname='.', distDir, metaDirname = 'meta'){
     // check based on schema
     let validate = ajv.compile(declarationSchema);
     let valid = validate(decl);
@@ -59,6 +59,7 @@ class Builder {
     // assignments
     Object.assign(this, decl);
     this._coreDirname = path.resolve(coreDirname);
+    let distDirname = distDir || decl.options.distDir;
     this._distDirname = path.resolve(coreDirname, distDirname);
     this._metaDirname = path.resolve(coreDirname, metaDirname);
 
