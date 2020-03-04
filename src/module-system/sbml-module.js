@@ -10,7 +10,7 @@ _Module.prototype.setSBMLModule = function(){
   
   let fileContent = fs.readFileSync(this.filename, 'utf8');
   this.parsed = _SBMLParse(this.filename, fileContent);
-
+  console.log(this.filename)
   return this;
 };
 
@@ -274,9 +274,18 @@ function _toMathExpr(element, useParentheses = false){
       .map((x) => _toMathExpr(x, true)).join(', ');
     return `pow(${expr})`;
   } else if(element.name === 'apply' && first.name === 'root') {
+    let degree = element.elements
+      .find(y => y.name === 'degree');
     let args = _.drop(element.elements)
+      .filter((x) => x.name !== 'degree')
       .map((x) => _toMathExpr(x, true));
-    return `sqrt(${args[0]})`;
+    if (degree) {
+      let n_element = _.get(degree, 'elements.0');
+      let n = _toMathExpr(n_element);
+      return `nthRoot(${args[0]}, ${n})`;
+    } else {
+      return `sqrt(${args[0]})`;
+    }
   } else if(element.name === 'apply' && first.name === 'ln') {
     let expr = _.drop(element.elements)
       .map((x) => _toMathExpr(x));
@@ -350,7 +359,16 @@ function _toMathExpr(element, useParentheses = false){
     return '1';
   } else if (element.name === 'false') {
     return '-1';
+  } else if (element.name === 'exponentiale') {
+    return 'e';
+  } else if (element.name === 'pi') {
+    return 'pi';
+  } else if (element.name === 'infinity') {
+    return 'Infinity';
+  } else if (element.name === 'notanumber') {
+    return 'NaN';
   } else {
+    //console.log(element)
     throw new Error('Cannot parse MathML:' + element);
   }
 }
@@ -404,8 +422,11 @@ function reactionToQ(x){
     && x.elements.find((y) => y.name === 'kineticLaw');
   let math = kineticLaw 
     && kineticLaw.elements
-    && kineticLaw.elements.find((y) => y.name === 'math'); 
-  if (math) _.set(q, 'assignments.ode_', _toMathExpr(math));
+    && kineticLaw.elements.find((y) => y.name === 'math');
+  
+  if (math) {
+    _.set(q, 'assignments.ode_', _toMathExpr(math));
+  }
 
   let reversible = _.get(x, 'attributes.reversible') !== 'false' ;
   _.set(q, 'aux.reversible', reversible);
@@ -559,8 +580,10 @@ function eventToQ(x){
   let delayMath = delay
     && delay.elements
     && delay.elements.find((y) => y.name === 'math');
-  let delayExpr = _toMathExpr(delayMath);
-  //console.log(delayExpr);
+  if (delayMath) {
+    let delayExpr = _toMathExpr(delayMath);
+    //console.log(delayExpr);
+  }
 
   // assignments
   let assignments = x.elements 

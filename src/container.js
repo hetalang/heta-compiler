@@ -19,7 +19,10 @@ const reservedWords = [
   'default',
   'id',
   'space',
-  'nameless'
+  'nameless',
+  'NaN', 'Infinity',
+  'e', 'E',
+  'pi', 'PI'
 ];
 
 class Container {

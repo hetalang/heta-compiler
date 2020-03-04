@@ -105,7 +105,7 @@ class Record extends _Size {
   }
   /*
     returns array of ids which depends on
-    t (time) is not included
+    t (time), e, pi are not included
     if no expression returns dependence from ode
   */
   dependOn(context){
@@ -117,13 +117,13 @@ class Record extends _Size {
       let deps = assignment
         .exprParsed
         .getSymbols();
-      _.pull(deps, 't'); // remove t from dependence
+      _.pull(deps, 't', 'e', 'pi'); // remove t from dependence
       return deps;
     } else if(this.isRule) {
       let deps = this.assignments.ode_
         .exprParsed
         .getSymbols();
-      _.pull(deps, 't');
+      _.pull(deps, 't', 'e', 'pi');
       return deps;
     } else {
       return [];
