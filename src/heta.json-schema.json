@@ -6,7 +6,7 @@
        "description": "First character is letter, others are letter, digit or lodash.",
        "type": "string",
        "minLength": 1,
-       "pattern": "^[a-zA-Z][_a-zA-Z0-9]*$",
+       "pattern": "^[_a-zA-Z][_a-zA-Z0-9]*$",
        "example": "x_12_"
      },
 
