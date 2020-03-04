@@ -378,8 +378,10 @@ function compartmentToQ(x){
 
   q.class = 'Compartment';
   q.boundary = _.get(x, 'attributes.constant') !== 'false';
-  let start_ = _.get(x, 'attributes.size');
-  if (start_ !== undefined) _.set(q, 'assignments.start_', start_);
+  let num = _.get(x, 'attributes.size');
+  if (num !== undefined) {
+    _.set(q, 'assignments.start_', SBMLValueToNumber(num));
+  }
 
   // compartmentType
   let compartmentType = _.get(x, 'attributes.compartmentType');
@@ -399,13 +401,13 @@ function speciesToQ(x){
   let concentration = _.get(x, 'attributes.initialConcentration');
   let amount = _.get(x, 'attributes.initialAmount');
   if (concentration !== undefined && !q.isAmount) {
-    _.set(q, 'assignments.start_', concentration);
+    _.set(q, 'assignments.start_', SBMLValueToNumber(concentration));
   } else if (concentration !== undefined && q.isAmount) {
-    _.set(q, 'assignments.start_', concentration + '*' + q.compartment);
+    _.set(q, 'assignments.start_', SBMLValueToNumber(concentration) + '*' + q.compartment);
   } else if (amount !== undefined && !q.isAmount) {
-    _.set(q, 'assignments.start_', amount + '/' + q.compartment);
+    _.set(q, 'assignments.start_', SBMLValueToNumber(amount) + '/' + q.compartment);
   } else if (amount !== undefined && q.isAmount) {
-    _.set(q, 'assignments.start_', amount);
+    _.set(q, 'assignments.start_', SBMLValueToNumber(amount));
   }
   // speciesType
   let speciesType = _.get(x, 'attributes.speciesType');
@@ -490,14 +492,17 @@ function parameterToQ(x){
   let q = baseToQ(x);
 
   let isConstant = _.get(x, 'attributes.constant') === 'true';
+  let num = _.get(x, 'attributes.value');
   if (isConstant) {
     q.class = 'Const';
-    let num = _.get(x, 'attributes.value');
-    if (num !== undefined) q.num = Number.parseFloat(num);
+    if (num !== undefined) {
+      q.num = SBMLValueToNumber(num);
+    }
   } else {
     q.class = 'Record';
-    let start_ = _.get(x, 'attributes.value');
-    if (start_ !== undefined) _.set(q, 'assignments.start_', start_);
+    if (num !== undefined) {
+      _.set(q, 'assignments.start_', SBMLValueToNumber(num));
+    }
   }
 
   return q;
@@ -604,4 +609,16 @@ function eventToQ(x){
   }
 
   return qArr;
+}
+
+function SBMLValueToNumber(value){
+  if (value.replace(/ /g, '') === 'INF') {
+    return Infinity;
+  } else if (value.replace(/ /g, '') === '-INF') {
+    return -Infinity;
+  } else if (value.replace(/ /g, '') === 'NaN') {
+    return NaN;
+  } else {
+    return Number.parseFloat(value);
+  }
 }
