@@ -23,10 +23,15 @@ module {{ options.id }}
 using SimSolver
 
 ### create default constants
-constants_ = ({% for con in constants %}
-    {{ con.id }} = Float64({{ con.num }}){{ ', ' if not loop.last }}
-{%- endfor %}
-)
+constants_ = NamedTuple{(
+  {% for con in constants -%}
+    :{{ con.id }}{{ ', ' if not loop.last }}
+  {%- endfor %}
+)}(Float64[
+  {% for con in constants -%}
+    {{ con.num }}{{ ', ' if not loop.last }}
+  {%- endfor %}
+])
 
 ### initialization of ODE variables and Records
 function start_(cons)
