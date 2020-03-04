@@ -25,18 +25,18 @@ using SimSolver
 ### create default constants
 constants_ = NamedTuple{(
   {% for con in constants -%}
-    :{{ con.id }}{{ ', ' if not loop.last }}
+    :{{ con.id }}, 
   {%- endfor %}
 )}(Float64[
   {% for con in constants -%}
-    {{ con.num }}{{ ', ' if not loop.last }}
+    {{ con.num }},
   {%- endfor %}
 ])
 
 ### initialization of ODE variables and Records
 function start_(cons)
     #({% for con in constants -%}
-    {{ con.id }}{{ ', ' if not loop.last }}
+    {{ con.id }}, 
     {%- endfor %}) = cons
 
     # Heta initialize
@@ -52,14 +52,14 @@ function start_(cons)
     return (
         [{% for record in dynamicRecords %}
         {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
-            {{ record.id }} * {{ record.compartment }}{{ ', ' if not loop.last}}
+            {{ record.id }} * {{ record.compartment }}, 
         {%- else %}
-            {{ record.id }}{{ ', ' if not loop.last}}
+            {{ record.id }}, 
         {%- endif %}
         {%- endfor %}
         ],
         [{% for record in staticRecords %}
-            {{ record.id }}{{ ', ' if not loop.last }}
+            {{ record.id }}, 
         {%- endfor %}
         ]
     )
@@ -69,10 +69,10 @@ end
 function ode_(du, u, p, t)
     cons = p.constants
     ({% for record in staticRecords -%}
-    {{ record.id }}{{ ', ' if not loop.last }}
+    {{ record.id }}, 
     {%- endfor %}) = p.static
     ({% for record in dynamicRecords -%}
-    {{ record.id }}_{{ ', ' if not loop.last }}
+    {{ record.id }}_, 
     {%- endfor %}) = u {# TODO: replace by u[index] #}
 
     # Heta rules
@@ -86,10 +86,10 @@ function ode_(du, u, p, t)
     {% endif -%}
     {% endfor %}
     #p.static .= [{% for record in staticRecords -%}
-    {{ record.id }}{{ ', ' if not loop.last }}
+    {{ record.id }}, 
     {%- endfor %}]
     du .= [{% for record in dynamicRecords %}
-      {{ rhs[loop.index0] }}{{ ', ' if not loop.last}} # d{{ record.id }}_/dt
+      {{ rhs[loop.index0] }},  # d{{ record.id }}_/dt
     {%- endfor %}
     ]
 end
@@ -99,10 +99,10 @@ function make_saving_(outputIds::Vector{Symbol})
     function saving_(u, t, integrator)
         cons = integrator.p.constants
         ({% for record in staticRecords -%}
-        {{ record.id }}{{ ', ' if not loop.last }}
+        {{ record.id }}, 
         {%- endfor %}) = integrator.p.static
         ({% for record in dynamicRecords -%}
-        {{ record.id }}_{{ ', ' if not loop.last }}
+        {{ record.id }}_, 
         {%- endfor %}) = u{# TODO: replace by u[index] #}
 
         # Heta rules
@@ -125,10 +125,10 @@ end
 function {{event.switcher.id}}_condition_(u, t, integrator)
     cons = integrator.p.constants
     ({% for record in staticRecords -%}
-    {{ record.id }}{{ ', ' if not loop.last }}
+    {{ record.id }}, 
     {%- endfor %}) = integrator.p.static
     ({% for record in dynamicRecords -%}
-    {{ record.id }}_{{ ', ' if not loop.last }}
+    {{ record.id }}_, 
     {%- endfor %}) = u
 
     # Heta rules
@@ -165,10 +165,10 @@ function {{event.switcher.id}}_assignment_(integrator)
     save_position(integrator)
     cons = integrator.p.constants
     ({% for record in staticRecords -%}
-    {{ record.id }}{{ ', ' if not loop.last }}
+    {{ record.id }}, 
     {%- endfor %}) = integrator.p.static
     ({% for record in dynamicRecords -%}
-    {{ record.id }}_{{ ', ' if not loop.last }}
+    {{ record.id }}_, 
     {%- endfor %}) = integrator.u
 
     # Heta rules
@@ -183,24 +183,24 @@ function {{event.switcher.id}}_assignment_(integrator)
     {% endfor %}
     # recalculated values
     ({%- for assignment in event.affect -%}
-    {{ assignment.id }}{{ ', ' if not loop.last }}
+    {{ assignment.id }}, 
     {%- endfor %}) = ({%- for assignment in event.affect -%}
-    {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toJuliaString() }}{{ ', ' if not loop.last }}
+    {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toJuliaString() }}, 
     {%- endfor %})
     
     # save results
 
     integrator.u .= [{% for record in dynamicRecords %}
     {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
-        {{ record.id }} * {{ record.compartment }}{{ ', ' if not loop.last}}
+        {{ record.id }} * {{ record.compartment }}, 
     {%- else %}
-        {{ record.id }}{{ ', ' if not loop.last}}
+        {{ record.id }}, 
     {%- endif %}
     {%- endfor %}
     ]
     
     integrator.p.static .= [{% for record in staticRecords -%}
-    {{ record.id }}{{ ', ' if not loop.last }}
+    {{ record.id }}, 
     {%- endfor %}]
     save_position(integrator)
 end
@@ -211,7 +211,7 @@ end
 {{namespace.spaceName}} = Model(
   start_,
   ode_,
-  [{% for event in events %}({{event.switcher.id}}_condition_, {{event.switcher.id}}_assignment_){{ ', ' if not loop.last}}{% endfor %}],
+  [{% for event in events %}({{event.switcher.id}}_condition_, {{event.switcher.id}}_assignment_), {% endfor %}],
   make_saving_,
   constants_
 )
