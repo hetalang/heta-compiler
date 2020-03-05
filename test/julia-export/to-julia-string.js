@@ -76,4 +76,8 @@ describe('Expession exports to Julia', () => {
     let expr = Expression.fromQ('factorial(x*y)');
     expect(expr.toJuliaString()).to.be.equal('factorial(ceil(Int, x * y))');
   });
+  it('toJuliaString() for "ceiling(x*y)"', () => {
+    let expr = Expression.fromQ('ceiling(x*y)');
+    expect(expr.toJuliaString()).to.be.equal('ceil(x * y)');
+  });
 });
