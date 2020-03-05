@@ -70,7 +70,7 @@ class JuliaExport extends _Export {
 
     // create events from switchers
     let events = this.namespace
-      .selectByInstanceOf('TimeSwitcher')
+      .selectByInstanceOf('_Switcher')
       .map((switcher) => {
         let affect = switcher.namespace.toArray()
           .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));

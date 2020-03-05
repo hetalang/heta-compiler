@@ -142,6 +142,7 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
     {% endif -%}
     {% endfor %}
 
+    {%- if event.switcher.instanceOf('TimeSwitcher') %}
     {%- set ev_start = event.switcher.getStart() if event.switcher.startObj.num is defined else '0.0' %}
     {%- set ev_period = event.switcher.getPeriod() if event.switcher.periodObj.num is defined else '0.0' %}
     {%- set ev_repeatCount = event.switcher.getRepeatCount() if event.switcher.repeatCountObj.num is defined else 'Inf' %}
@@ -159,6 +160,9 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
     end
 
     return flag_(t)
+    {%- elif event.switcher.instanceOf('CondSwitcher') %}
+    return {{ event.switcher.condition }}
+    {%- endif %}
 end
 
 function {{event.switcher.id}}_assignment_(integrator)
