@@ -273,6 +273,10 @@ function _toMathExpr(element, useParentheses = false){
     let expr = _.drop(element.elements)
       .map((x) => _toMathExpr(x, true)).join(', ');
     return `pow(${expr})`;
+  } else if(element.name === 'apply' && first.name === 'ceiling') {
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true));
+    return `ceil(${args[0]})`;
   } else if(element.name === 'apply' && first.name === 'root') {
     let degree = element.elements
       .find(y => y.name === 'degree');

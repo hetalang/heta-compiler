@@ -53,11 +53,6 @@ Expression.prototype.toJuliaString = function(){
         .map((arg) => arg.toString(options));
       return `factorial(ceil(Int, ${args[0]}))`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ceiling'){
-      let args = node.args
-        .map((arg) => arg.toString(options));
-      return `ceil(${args[0]})`;
-    }
     if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
       let args = node.args
         .map((arg) => arg.toString(options));
