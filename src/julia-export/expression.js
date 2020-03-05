@@ -48,6 +48,11 @@ Expression.prototype.toJuliaString = function(){
         .map((arg) => arg.toString(options));
       return `log(${args[1]}, ${args[0]})`;
     }
+    if(node.type==='FunctionNode' && node.fn.name==='factorial'){
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `factorial(ceil(Int, ${args[0]}))`;
+    }
     if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
       let args = node.args
         .map((arg) => arg.toString(options));
@@ -68,7 +73,7 @@ Expression.prototype.toJuliaString = function(){
   return this.exprParsed
     .toString({
       parenthesis: 'keep',
-      implicit: 'show',   
+      implicit: 'show',
       handler: juliaStringHandler
     });
 };

@@ -72,4 +72,8 @@ describe('Expession exports to Julia', () => {
     let expr = Expression.fromQ('ifge0(x-y, 1,2)');
     expect(expr.toJuliaString()).to.be.equal('x - y >= 0 ? 1.0 : 2.0');
   });
+  it('toJuliaString() for "factorial(x*y)"', () => {
+    let expr = Expression.fromQ('factorial(x*y)');
+    expect(expr.toJuliaString()).to.be.equal('factorial(ceil(Int, x * y))');
+  });
 });
