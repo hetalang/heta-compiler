@@ -37,6 +37,7 @@ function jsbmlToQArr(JSBML){
     .find((x) => x.name === 'model'); // <model>
 
   // compartments
+  let zeroSpatialDimensions = [];
   let compartments = _.chain(model.elements)
     .filter(['name', 'listOfCompartments'])
     .map('elements')
@@ -44,6 +45,12 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'compartment'])
     .value();
   compartments.forEach((x) => {
+    // collect compartments with zero dimention
+    let isZero = _.get(x, 'attributes.spatialDimensions') === '0';
+    if (isZero) {
+      zeroSpatialDimensions.push(_.get(x, 'attributes.id'));
+    }
+
     let q = compartmentToQ(x);
     qArr.push(q);
   });
@@ -56,7 +63,7 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'species'])
     .value();
   species.forEach((x) => {
-    let q = speciesToQ(x);
+    let q = speciesToQ(x, zeroSpatialDimensions);
     qArr.push(q);
   });
 
@@ -167,55 +174,55 @@ function _toMarkdown(elements){
       return x.text.replace(/\r*\n/g, '');
     } else {
       switch (x.name) {
-        case 'body':
-        case 'div':
-        case 'p':
-          return _toMarkdown(x.elements) + '\n\n';
-          break;
-        case 'b':
-        case 'strong':
-          return '**' + _toMarkdown(x.elements) + '**';
-          break;
-        case 'i':
-          return '_' +_toMarkdown(x.elements) + '_';
-          break;
-        case 'ul': {
-          let list = x.elements.map((y) => '  * ' +_toMarkdown(y.elements))
-            .join('\n');
-          return list;
-          break;
-        }
-        case 'ol': {
-          let list = x.elements.map((y) => '  1. ' +_toMarkdown(y.elements))
-            .join('\n');
-          return list;
-          break;
-        }
-        case 'a':
-          let href = _.get(x, 'attributes.href');
-          let title = _.get(x, 'attributes.title');
-          return '[' + _toMarkdown(x.elements) + '](' + href + ')';
-          break;
-        case 'h1':
-          return '# ' + _toMarkdown(x.elements) + '\n\n';
-          break;
-        case 'h2':
-          return '## ' + _toMarkdown(x.elements) + '\n\n';
-          break;
-        case 'h3':
-          return '### ' + _toMarkdown(x.elements) + '\n\n';
-          break;
-        case 'h4':
-          return '#### ' + _toMarkdown(x.elements) + '\n\n';
-          break;
-        case 'h5':
-          return '##### ' + _toMarkdown(x.elements) + '\n\n';
-          break;
-        case 'h6':
-          return '###### ' + _toMarkdown(x.elements) + '\n\n';
-          break;
+      case 'body':
+      case 'div':
+      case 'p':
+        return _toMarkdown(x.elements) + '\n\n';
+        break;
+      case 'b':
+      case 'strong':
+        return '**' + _toMarkdown(x.elements) + '**';
+        break;
+      case 'i':
+        return '_' +_toMarkdown(x.elements) + '_';
+        break;
+      case 'ul': {
+        let list = x.elements.map((y) => '  * ' +_toMarkdown(y.elements))
+          .join('\n');
+        return list;
+        break;
+      }
+      case 'ol': {
+        let list = x.elements.map((y) => '  1. ' +_toMarkdown(y.elements))
+          .join('\n');
+        return list;
+        break;
+      }
+      case 'a':
+        let href = _.get(x, 'attributes.href');
+        let title = _.get(x, 'attributes.title');
+        return '[' + _toMarkdown(x.elements) + '](' + href + ')';
+        break;
+      case 'h1':
+        return '# ' + _toMarkdown(x.elements) + '\n\n';
+        break;
+      case 'h2':
+        return '## ' + _toMarkdown(x.elements) + '\n\n';
+        break;
+      case 'h3':
+        return '### ' + _toMarkdown(x.elements) + '\n\n';
+        break;
+      case 'h4':
+        return '#### ' + _toMarkdown(x.elements) + '\n\n';
+        break;
+      case 'h5':
+        return '##### ' + _toMarkdown(x.elements) + '\n\n';
+        break;
+      case 'h6':
+        return '###### ' + _toMarkdown(x.elements) + '\n\n';
+        break;
       default:
-          return _toMarkdown(x.elements);
+        return _toMarkdown(x.elements);
       }
     }
   }).join('');
@@ -394,14 +401,15 @@ function compartmentToQ(x){
   return q;
 }
 
-function speciesToQ(x){
+function speciesToQ(x, zeroSpatialDimensions = []){
   let q = baseToQ(x);
 
   q.class = 'Species';
   q.boundary = _.get(x, 'attributes.constant') === 'true' 
     || _.get(x, 'attributes.boundaryCondition') === 'true';
   q.compartment = _.get(x, 'attributes.compartment');
-  q.isAmount = _.get(x, 'attributes.hasOnlySubstanceUnits') === 'true';
+  q.isAmount = _.get(x, 'attributes.hasOnlySubstanceUnits') === 'true'
+    || zeroSpatialDimensions.indexOf(q.compartment) >= 0;
   let concentration = _.get(x, 'attributes.initialConcentration');
   let amount = _.get(x, 'attributes.initialAmount');
   if (concentration !== undefined && !q.isAmount) {
