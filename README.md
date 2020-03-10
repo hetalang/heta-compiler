@@ -1,3 +1,4 @@
+[![Heta project](https://img.shields.io/badge/%CD%B1-Heta_project-blue)](https://hetalang.github.io/)
 [![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://insysbio.github.io/heta-compiler)
 [![GitHub issues](https://img.shields.io/github/issues/insysbio/heta-compiler.svg)](https://GitHub.com/insysbio/heta-compiler/issues/)
 [![Travis](https://travis-ci.org/insysbio/heta-compiler.svg?branch=master)](https://travis-ci.org/insysbio/heta-compiler)

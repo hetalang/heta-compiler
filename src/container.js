@@ -223,6 +223,11 @@ class Container {
     let fromNamespace = this.namespaces.get(q.fromSpace);
     if (fromNamespace === undefined)
       throw new QueueError(q, `Create namespace "${q.fromSpace}" before use.`);
+    _.defaults(q, {
+      prefix: '',
+      suffix: '',
+      rename: {}
+    });
 
     // select component to copy
     let component = fromNamespace.get(q.fromId);
