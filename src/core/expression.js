@@ -6,15 +6,12 @@ class Expression {
   constructor(exprParsed){ // string or object
     this.exprParsed = exprParsed;
   }
-  static fromQ(q = {}){ // string or object
-    if (typeof q!=='string' && typeof q!=='number' && !('expr' in q))
-      throw new TypeError('Expected <string> or <number> or {expr: <string>}, but get ' + JSON.stringify(q));
+  static fromString(q){ // string or object
+    if (typeof q!=='string' && typeof q!=='number')
+      throw new TypeError('Expected <string> or <number>, but get ' + JSON.stringify(q));
 
-    if (typeof q==='string' || typeof q==='number') {
-      var exprString = q.toString();
-    } else {
-      exprString = q.expr;
-    }
+    let exprString = q.toString();
+
     try {
       var exprParsed = math.parse(exprString);
     } catch(e) {
@@ -23,9 +20,9 @@ class Expression {
 
     return new Expression(exprParsed);
   }
-  /* string format */
-  get expr(){
-    return this.exprParsed.toString();
+  // the same options as in mathjs
+  toString(options = {}){
+    return this.exprParsed.toString(options);
   }
   /* number if expression can be directly transformed to number, undefined otherwice*/
   get num(){ // if it is constant than return number or undefined otherwice
@@ -98,9 +95,6 @@ class Expression {
         implicit: 'show',   
         handler: CStringHandler
       });
-  }
-  toQ(options = {}){
-    return this.expr;
   }
   linearizeFor(target){
     let { OperatorNode, SymbolNode } = math.expression.node;

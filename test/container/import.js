@@ -68,7 +68,7 @@ describe('Test correct import', () => {
     expect(clone).to.have.property('index', 'two::p2');
     expect(clone.actors[1]).to.have.property('target', 'pr_A_suf');
     expect(clone.actors[0]).to.have.property('target', 'z');
-    expect(clone.assignments.ode_).to.have.property('expr', 'pr_x_suf * z');
+    expect(clone.assignments.ode_.toString()).to.be.equal('pr_x_suf * z');
   });
 });
 /*

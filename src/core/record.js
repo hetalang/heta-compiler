@@ -22,7 +22,7 @@ class Record extends _Size {
       let newAssignments = _.mapValues(q.assignments, (x) => {
         if(typeof x === 'string' || typeof x === 'number' || 'expr' in x){
           try{ // this is for the cases of wrong size structure
-            return Expression.fromQ(x);
+            return Expression.fromString(x);
           }catch(e){
             throw new ValidationError(q, [], e.message + `: "${x.expr}"`);
           }
@@ -90,7 +90,7 @@ class Record extends _Size {
   toQ(options = {}){
     let res = super.toQ(options);
     if(this.assignments){
-      res.assignments = _.mapValues(this.assignments, (x) => x.toQ(options));
+      res.assignments = _.mapValues(this.assignments, (x) => x.toString(options));
     }
     if(this.boundary){
       res.boundary = this.boundary;

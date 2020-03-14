@@ -64,7 +64,8 @@ describe('Unit tests for Container load', () => {
       }
     });
     expect(c).to.be.lengthOf(2);
-    expect(simple).to.have.nested.property('assignments.start_.expr', '1.4');
+    expect(simple).to.have.nested.property('assignments.start_');
+    expect(simple.assignments.start_.toString()).to.be.equal('1.4');
     expect(simple).not.to.have.property('title');
   });
 

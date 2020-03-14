@@ -51,7 +51,7 @@ describe('Test correct importNS', () => {
 
     expect(clone[1]).to.have.property('index', 'two::r1');
     expect(clone[1].actors[0]).to.have.property('target', 'one_A');
-    expect(clone[1].assignments.ode_).to.have.property('expr', 'one_k1 * one_A * comp1');
+    expect(clone[1].assignments.ode_.toString()).to.be.equal('one_k1 * one_A * comp1');
 
     expect(c.namespaces.get('one')).to.be.lengthOf(2);
     expect(c.namespaces.get('two')).to.be.lengthOf(3);
@@ -98,7 +98,7 @@ describe('Test correct moveNS', () => {
 
     expect(clone[1]).to.have.property('index', 'two::r1');
     expect(clone[1].actors[0]).to.have.property('target', 'one_A');
-    expect(clone[1].assignments.ode_).to.have.property('expr', 'one_k1 * one_A * comp1');
+    expect(clone[1].assignments.ode_.toString()).to.be.equal('one_k1 * one_A * comp1');
 
     expect(c.storage.selectBySpace('one')).to.be.lengthOf(0);
     expect(c.storage.selectBySpace('two')).to.be.lengthOf(3);
