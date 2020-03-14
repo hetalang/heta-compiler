@@ -2,6 +2,14 @@ const { Record } = require('./record');
 const _ = require('lodash');
 const { BindingError } = require('../heta-error');
 
+/* 
+  Species class
+
+  species1 @Species {
+    compartment: comp1,
+    isAmount: true
+  };
+*/
 class Species extends Record {
   merge(q, skipChecking){
     if(!skipChecking) Species.isValid(q);

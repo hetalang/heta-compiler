@@ -3,7 +3,7 @@ const { Unit } = require('./unit');
 
 /*
   example: xxx = nM / kg3
-  xxx @UnitDef { units: [
+  unitDef1 @UnitDef { units: [
     { kind: nM, multiplier: 1, exponent: 1 },
     { kind: kg, multiplier: 1, exponent: -3 }
   ]};

@@ -1,5 +1,12 @@
 const { _Component } = require('./_component');
 
+/*
+  _Switcher abstract class
+
+  _switcher @_Switcher {
+    // no specific properties
+  };
+*/
 class _Switcher extends _Component {
   merge(q, skipChecking){
     if(!skipChecking) _Switcher.isValid(q);

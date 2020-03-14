@@ -2,6 +2,19 @@ const { _Component } = require('./_component');
 const { Unit } = require('./unit');
 const { ValidationError, BindingError } = require('../heta-error');
 
+/*
+  Abstract class _Size
+
+  size1 @_Size {
+    units: unit1/unit2 // <UnitsExpr>
+  };
+  size2 @_Size {
+    units: [ // <UnitsArray>
+      {kind: unit1, multiplier: 1, exponent: 1},
+      {kind: unit2, multiplier: 1, exponent: -1}
+    ] 
+  };
+*/
 class _Size extends _Component {
   merge(q = {}, skipChecking){
     if(!skipChecking) _Size.isValid(q);

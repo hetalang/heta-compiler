@@ -3,6 +3,12 @@ const { Expression } = require('./expression');
 const _ = require('lodash');
 const { ValidationError, BindingError } = require('../heta-error');
 
+/*
+  record1 @Record {
+    assignments: { start_: x*y },
+    boundary: true
+  };
+*/
 class Record extends _Size {
   constructor(isCore = false){
     super(isCore);

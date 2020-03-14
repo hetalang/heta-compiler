@@ -6,6 +6,12 @@ const { flatten } = require('./utilities');
 
 /*
   Abstract class _Component
+
+  ''' Notes 1 '''
+  component1 @_Component 'title 1' {
+    tags: [tag1, tag2],
+    aux: {}
+  };
 */
 class _Component {
   constructor(isCore = false){

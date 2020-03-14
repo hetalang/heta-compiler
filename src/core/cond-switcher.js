@@ -1,5 +1,12 @@
 const { _Switcher } = require('./_switcher');
 
+/*
+  CondSwitcher class
+
+  cs1 @CondSwitcher {
+    condition: cond1
+  };
+*/
 class CondSwitcher extends _Switcher {
   merge(q, skipChecking){
     if(!skipChecking) CondSwitcher.isValid(q);

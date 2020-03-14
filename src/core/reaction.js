@@ -1,5 +1,15 @@
 const { Process, _Effector, Actor } = require('./process');
 
+/*
+  Reaction class
+
+  reaction1 @Reaction {
+    modifiers: [M!, M2]
+  };
+  reaction2 @Reaction {
+    modifiers: [{target: M1}, {target: M2}]
+  };
+*/
 class Reaction extends Process {
   constructor(isCore = false){
     super(isCore);

@@ -3,6 +3,21 @@ const { Const } = require('./const');
 const { floor, min } = Math;
 const _ = require('lodash');
 /*
+  TimeSwitcher class
+
+  ts1 @TimeSwitcher {
+    start: 12,
+    period: 6,
+    stop: 120,
+    repeatCount: 8
+  };
+  ts2 @TimeSwitcher {
+    start: start1, // ref to @Const
+    period: period1,
+    stop: stop1,
+    repeatCount: count1
+  };
+
   How many times does it switch?
   if (repeatCount < 0 || stop-start < 0) return 0;
   if (period <= 0 || 0 <= repeatCount < 1 || 0 <= (stop-start)/period < 1) return 1;
@@ -91,7 +106,6 @@ class TimeSwitcher extends _Switcher {
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if (this.condition !== undefined) res.condition = this.condition;
 
     if (this.startObj !== undefined) {
       res.start = this.getStart();

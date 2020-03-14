@@ -1,5 +1,12 @@
 const { Record } = require('./record');
 
+/*
+  Compartment class
+
+  compartment1 @Compartment {
+    // no specific properties
+  };
+*/
 class Compartment extends Record {
   constructor(isCore = false){
     super(isCore);

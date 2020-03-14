@@ -3,6 +3,14 @@ const { ExportError } = require('../heta-error');
 const path = require('path');
 const fs = require('fs-extra');
 
+/*
+  _Export class
+
+  export1 @_Export {
+    filepath: ../dir1,
+    powTransform: keep // possible values are: keep/operator/function
+  };
+*/
 class _Export extends _Component {
   constructor(isCore = false){
     super(isCore);

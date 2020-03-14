@@ -2,6 +2,16 @@ const { Record } = require('./record');
 const _ = require('lodash');
 // const { IndexedHetaError } = require('../heta-error');
 
+/*
+  Process class
+
+  process1 @Process {
+    actors: A => B
+  };
+  process2 @Process {
+    actors: [{target: A, stoichiometry: -1}, {target: B, stoichiometry: 1}]
+  };
+*/
 class Process extends Record {
   constructor(isCore = false){
     super(isCore);
