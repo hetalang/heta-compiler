@@ -19,14 +19,14 @@ describe('Unit tests for Record.', () => {
 
   it('Set static expression with numeric.', () => {
     let simple = (new Record).merge({
-      assignments: { start_: { expr: '1.1' } }
+      assignments: { start_: '1.1' }
     });
     expect(simple).to.have.nested.property('assignments.start_').instanceOf(Expression);
   });
 
   it('Set static expression.', () => {
     let simple = (new Record).merge({
-      assignments: { start_: { expr: 'x*y' } }
+      assignments: { start_: 'x*y' }
     });
     expect(simple).to.have.nested.property('assignments.start_').instanceOf(Expression);
   });
@@ -34,7 +34,7 @@ describe('Unit tests for Record.', () => {
   it('Check toQ for expression Record.', () => {
     let simple = (new Record).merge({
       title: 'complex record',
-      assignments: { ode_: { expr: 'm*c^2' } },
+      assignments: { ode_: 'm*c^2' },
       units: 'J'
     });
     simple._id = 'r1';
@@ -42,7 +42,7 @@ describe('Unit tests for Record.', () => {
       class: 'Record',
       id: 'r1',
       title: 'complex record',
-      assignments: { ode_: { expr: 'm * c ^ 2' } },
+      assignments: { ode_: 'm * c ^ 2' },
       units: 'J'
     });
   });

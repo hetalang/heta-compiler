@@ -15,9 +15,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm2'},
         {target: 'm3'}
       ],
-      assignments: {
-        ode_: { expr: 'k1*s1' }
-      },
+      assignments: { ode_: 'k1*s1' },
       units: 'umole/h'
     });
     simple._id = 'r1';
@@ -34,9 +32,7 @@ describe('Unit tests for Reaction.', () => {
         {target: 'm2'},
         {target: 'm3'}
       ],
-      assignments: {
-        ode_: { expr: 'k1 * s1' }
-      },
+      assignments: { ode_: 'k1 * s1' },
       units: 'umole/h'
     });
   });

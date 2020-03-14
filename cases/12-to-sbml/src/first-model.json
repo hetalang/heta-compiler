@@ -48,7 +48,7 @@
     "title": "This is compartment",
     "notes": "This is just text. *italic*, **bold**\n\nanother line",
     "assignments": {
-      "start_": {"expr": "x*y"}
+      "start_": "x*y"
     },
     "units": "L"
   },
@@ -57,7 +57,7 @@
     "id": "comp2",
     "space": "first",
     "assignments": {
-      "start_": {"expr": 3.2}
+      "start_": 3.2
     }
   },
   {
@@ -65,7 +65,7 @@
     "id": "p2",
     "space": "first",
     "assignments": {
-      "start_": {"expr": 15.223}
+      "start_": 15.223
     },
     "units": "1/min/fM*nm"
   },
@@ -74,7 +74,7 @@
     "id": "p3",
     "space": "first",
     "assignments": {
-      "ode_": {"expr": 15.223}
+      "ode_": 15.223
     }
   },
   {
@@ -82,7 +82,7 @@
     "id": "p3",
     "space": "first",
     "assignments": {
-      "ode_": {"expr": "xxx*yyy"}
+      "ode_": "xxx*yyy"
     },
     "units": "1/L/h"
   },
@@ -91,7 +91,7 @@
     "id": "evt1",
     "space": "first",
     "assignments": {
-      "ode_": {"expr": "t-12"}
+      "ode_": "t-12"
     },
     "units": "min"
   },
@@ -100,8 +100,8 @@
     "id": "s1",
     "space": "first",
     "assignments": {
-      "start_": {"expr": 1.1},
-      "sw1": {"expr": 1.5}
+      "start_": 1.1,
+      "sw1": 1.5
     },
     "compartment": "comp2"
   },
@@ -111,7 +111,7 @@
     "space": "first",
     "title": "s2 title",
     "assignments": {
-      "ode_": {"expr": "x*y"}
+      "ode_": "x*y"
     },
     "compartment": "comp1",
     "boundary": true
@@ -121,7 +121,7 @@
     "id": "r2",
     "space": "first",
     "assignments": {
-      "ode_": {"expr": "p2*comp1*s1"}
+      "ode_": "p2*comp1*s1"
     },
     "actors": [
       {"target": "s1", "stoichiometry": -2},
@@ -136,7 +136,7 @@
     "id": "r3",
     "space": "first",
     "assignments": {
-      "ode_": {"expr": 28}
+      "ode_": 28
     },
     "units": "mole/L",
     "modifiers": [

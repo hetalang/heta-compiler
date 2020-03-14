@@ -4,7 +4,7 @@
     "id": "k1",
     "space": "one",
     "assignments": {
-      "start_": {"expr": 1.1}
+      "start_": 1.1
     }
   }
 ]

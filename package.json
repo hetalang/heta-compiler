@@ -29,7 +29,7 @@
     "ajv-errors": "^1.0.1",
     "commander": "^2.20.3",
     "fs-extra": "^7.0.1",
-    "heta-parser": "^0.3.6",
+    "heta-parser": "^0.3.7",
     "inquirer": "^7.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",

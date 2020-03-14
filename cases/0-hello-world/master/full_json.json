@@ -7,9 +7,7 @@
     "notes": "Note for the Default compartment",
     "units": "L",
     "assignments": {
-      "start_": {
-        "expr": "1"
-      }
+      "start_": "1"
     }
   },
   {
@@ -19,9 +17,7 @@
     "title": "substrate",
     "units": "uM",
     "assignments": {
-      "start_": {
-        "expr": "10"
-      }
+      "start_": "10"
     },
     "compartment": "default_comp"
   },
@@ -32,9 +28,7 @@
     "title": "product",
     "units": "uM",
     "assignments": {
-      "start_": {
-        "expr": "0"
-      }
+      "start_": "0"
     },
     "compartment": "default_comp"
   },
@@ -49,9 +43,7 @@
     },
     "units": "umole/min",
     "assignments": {
-      "ode_": {
-        "expr": "Vmax * S / (Km + S) * default_comp"
-      }
+      "ode_": "Vmax * S / (Km + S) * default_comp"
     },
     "actors": [
       {

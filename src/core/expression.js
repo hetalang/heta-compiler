@@ -100,10 +100,7 @@ class Expression {
       });
   }
   toQ(options = {}){
-    let res = options.simplifyExpressions
-      ? this.expr
-      : {expr: this.expr};
-    return res;
+    return this.expr;
   }
   linearizeFor(target){
     let { OperatorNode, SymbolNode } = math.expression.node;

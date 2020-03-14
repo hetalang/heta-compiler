@@ -1,4 +1,4 @@
 [
   { "id": "k1", "action": "upsert", "class": "Record" },
-  { "id": "k1", "action": "upsert", "assignments": { "ode_": {"expr": 1.2} } }
+  { "id": "k1", "action": "upsert", "assignments": { "ode_": 1.2 } }
 ]

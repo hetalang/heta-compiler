@@ -10,9 +10,7 @@
     "id": "comp",
     "space": "model",
     "assignments": {
-      "start_": {
-        "expr": "1"
-      }
+      "start_": "1"
     }
   },
   {
@@ -20,9 +18,7 @@
     "id": "A",
     "space": "model",
     "assignments": {
-      "start_": {
-        "expr": "10"
-      }
+      "start_": "10"
     },
     "compartment": "comp"
   },
@@ -31,9 +27,7 @@
     "id": "B",
     "space": "model",
     "assignments": {
-      "start_": {
-        "expr": "0"
-      }
+      "start_": "0"
     },
     "compartment": "comp"
   },
@@ -42,9 +36,7 @@
     "id": "enzyme",
     "space": "model",
     "assignments": {
-      "start_": {
-        "expr": "1e-8"
-      }
+      "start_": "1e-8"
     },
     "boundary": true,
     "compartment": "comp"
@@ -58,9 +50,7 @@
       "reversible": false
     },
     "assignments": {
-      "ode_": {
-        "expr": "k1 * enzyme * A / (Km_A + A) * comp"
-      }
+      "ode_": "k1 * enzyme * A / (Km_A + A) * comp"
     },
     "actors": [
       {

@@ -11,7 +11,7 @@
     "id": "pr2",
     "space": "two",
     "assignments": {
-      "ode_": {"expr": "0.5*x1"}
+      "ode_": "0.5*x1"
     },
     "actors": [
       {"target": "x1", "stoichiometry": -1},

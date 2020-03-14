@@ -113,9 +113,7 @@
     "notes": "This is just text. *italic*, **bold**\n\nanother line",
     "units": "L",
     "assignments": {
-      "start_": {
-        "expr": "x * y"
-      }
+      "start_": "x * y"
     }
   },
   {
@@ -123,9 +121,7 @@
     "id": "comp2",
     "space": "first",
     "assignments": {
-      "start_": {
-        "expr": "3.2"
-      }
+      "start_": "3.2"
     }
   },
   {
@@ -134,9 +130,7 @@
     "space": "first",
     "units": "1/min/fM*nm",
     "assignments": {
-      "start_": {
-        "expr": "15.223"
-      }
+      "start_": "15.223"
     }
   },
   {
@@ -145,9 +139,7 @@
     "space": "first",
     "units": "1/L/h",
     "assignments": {
-      "ode_": {
-        "expr": "xxx * yyy"
-      }
+      "ode_": "xxx * yyy"
     }
   },
   {
@@ -156,9 +148,7 @@
     "space": "first",
     "units": "min",
     "assignments": {
-      "ode_": {
-        "expr": "t - 12"
-      }
+      "ode_": "t - 12"
     }
   },
   {
@@ -166,12 +156,8 @@
     "id": "s1",
     "space": "first",
     "assignments": {
-      "start_": {
-        "expr": "1.1"
-      },
-      "sw1": {
-        "expr": "1.5"
-      }
+      "start_": "1.1",
+      "sw1": "1.5"
     },
     "compartment": "comp2"
   },
@@ -181,9 +167,7 @@
     "space": "first",
     "title": "s2 title",
     "assignments": {
-      "ode_": {
-        "expr": "x * y"
-      }
+      "ode_": "x * y"
     },
     "boundary": true,
     "compartment": "comp1"
@@ -193,9 +177,7 @@
     "id": "r2",
     "space": "first",
     "assignments": {
-      "ode_": {
-        "expr": "p2 * comp1 * s1"
-      }
+      "ode_": "p2 * comp1 * s1"
     },
     "actors": [
       {
@@ -219,9 +201,7 @@
     "space": "first",
     "units": "mole/L",
     "assignments": {
-      "ode_": {
-        "expr": "28"
-      }
+      "ode_": "28"
     },
     "actors": [],
     "modifiers": [

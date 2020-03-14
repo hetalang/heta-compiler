@@ -19,7 +19,7 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k1 title',
       assignments: {
-        start_: {expr: 1e-3}
+        start_: 1e-3
       }
     });
     expect(c).to.be.lengthOf(1);
@@ -33,7 +33,7 @@ describe('Unit tests for Container load', () => {
       space: 'one',
       title: 'k2 title',
       assignments: {
-        start: {expr: 1.2}
+        start: 1.2
       }
     });
     expect(c).to.be.lengthOf(2);
@@ -45,7 +45,7 @@ describe('Unit tests for Container load', () => {
       id: 'k1',
       space: 'default__',
       assignments: {
-        start_: {expr: 1}
+        start_: 1
       },
       units: '1/h'
     });
@@ -60,7 +60,7 @@ describe('Unit tests for Container load', () => {
       id: 'k2',
       space: 'one',
       assignments: {
-        start_: {expr: 1.4}
+        start_: 1.4
       }
     });
     expect(c).to.be.lengthOf(2);

@@ -16,9 +16,7 @@ describe('Expression constructor.', () => {
   it('mc^2', () => {
     let expr = Expression.fromQ('m*c^2');
     expect(expr.expr).to.be.equal('m * c ^ 2');
-    expect(expr.toQ()).to.be.deep.equal({
-      expr: 'm * c ^ 2'
-    });
+    expect(expr.toQ()).to.be.deep.equal('m * c ^ 2');
   });
   it('Bad expression string throws.', () => {
     expect(() => {

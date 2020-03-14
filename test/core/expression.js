@@ -9,15 +9,13 @@ describe('Unit test for Expression.', () => {
   });
 
   it('Conversion to CMathML.', () => {
-    expect(Expression.fromQ({expr: 'x*y'}).toCMathML()).to.be
+    expect(Expression.fromQ('x*y').toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
 
   it('Conversion to Q.', () => {
-    let expression = Expression.fromQ({expr: 'x*y'});
-    expect(expression.toQ()).to.be.deep.equal({
-      expr: 'x * y'
-    });
+    let expression = Expression.fromQ('x*y');
+    expect(expression.toQ()).to.be.deep.equal('x * y');
   });
 
   it('Empty input.', () => {
@@ -34,10 +32,10 @@ describe('Unit test for Expression.', () => {
 
   it('Wrong expr syntax', () => {
     expect(() => {
-      Expression.fromQ({expr: 'a/*'});
+      Expression.fromQ('a/*');
     }).to.throw(TypeError);
     expect(() => {
-      Expression.fromQ({expr: '(a*b'});
+      Expression.fromQ('(a*b');
     }).to.throw(TypeError);
   });
 });
@@ -48,51 +46,49 @@ describe('Unit test for Expression with number.', () => {
     expect(expression).to.have.property('expr', '3.14');
   });
 
-  it('Create expression from {expr: 1e-15}', () => {
-    let expression = Expression.fromQ({expr: 1e-15});
+  it('Create expression from 1e-15', () => {
+    let expression = Expression.fromQ(1e-15);
     expect(expression).to.have.property('expr', '1e-15');
   });
 
   it('Conversion to Q.', () => {
-    let expression = Expression.fromQ({expr: 3.14});
-    expect(expression.toQ()).to.be.deep.equal({
-      expr: '3.14'
-    });
+    let expression = Expression.fromQ(3.14);
+    expect(expression.toQ()).to.be.deep.equal('3.14');
   });
 
   it('Conversion to CMathML.', () => {
-    expect(Expression.fromQ({expr: 1.1}).toCMathML()).to.be
+    expect(Expression.fromQ(1.1).toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.1</cn></math>');
 
-    expect(Expression.fromQ({expr: 1e-15}).toCMathML()).to.be
+    expect(Expression.fromQ(1e-15).toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><cn type="e-notation">1<sep/>-15</cn></math>');
   });
 });
 
 describe('Linearization for Expression', () => {
   it('Linearization of y = a*y + b', () => {
-    let expr = Expression.fromQ({expr: 'a*y + b', id: 'y'});
+    let expr = Expression.fromQ('a*y + b');
     let res = expr
       .linearizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['a', 'b']);
   });
   it('Linearization of y = a*y', () => {
-    let expr = Expression.fromQ({expr: 'a*y', id: 'y'});
+    let expr = Expression.fromQ('a*y');
     let res = expr
       .linearizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['a', '0']);
   });
   it('Linearization of y = b', () => {
-    let expr = Expression.fromQ({expr: 'b', id: 'y'});
+    let expr = Expression.fromQ('b');
     let res = expr
       .linearizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['0', 'b']);
   });
   it('Linearization of y = a*y^2 + b', () => {
-    let expr = Expression.fromQ({expr: 'a*y^2 + b'});
+    let expr = Expression.fromQ('a*y^2 + b');
     let res = expr
       .linearizeFor('y')
       .map((expression) => expression.toString());
