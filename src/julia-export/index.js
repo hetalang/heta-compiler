@@ -35,6 +35,8 @@ class JuliaExport extends _Export {
     // ODE variables
     let dynamicRecords = this.namespace.toArray()
       .filter((x) => x.instanceOf('Record') && x.isDynamic);
+    let notDynamicRecords = this.namespace.toArray()
+      .filter((x) => x.instanceOf('Record') && !x.isDynamic);
     // initialize at start records
     let initRecords = this.namespace
       .sortExpressionsByContext('start_')
@@ -90,6 +92,7 @@ class JuliaExport extends _Export {
       namespace,
       constants,
       dynamicRecords,
+      notDynamicRecords,
       staticRecords,
       rhs,
       initRecords,

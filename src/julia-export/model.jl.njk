@@ -115,6 +115,15 @@ function make_saving_(outputIds::Vector{Symbol})
         {{ record.id }} = {{ record.id }}_
         {% endif -%}
         {% endfor %}
+        # calculate amounts
+        {%- for record in notDynamicRecords %}
+        {%- if record.instanceOf('Species') and not record.isAmount %}
+        {{ record.id }}_ = {{ record.id }} * {{ record.compartment }}
+        {%- else %}
+        {{ record.id }}_ = {{ record.id }}
+        {%- endif %}
+        {%- endfor %}
+
         d = Base.@locals
         return [d[id] for id in outputIds]
     end
