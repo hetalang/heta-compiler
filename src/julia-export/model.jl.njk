@@ -166,7 +166,6 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
 end
 
 function {{event.switcher.id}}_assignment_(integrator)
-    save_position(integrator)
     cons = integrator.p.constants
     ({% for record in staticRecords -%}
     {{ record.id }}, 
@@ -206,7 +205,6 @@ function {{event.switcher.id}}_assignment_(integrator)
     integrator.p.static .= [{% for record in staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}]
-    save_position(integrator)
 end
 {% endfor %}
 
