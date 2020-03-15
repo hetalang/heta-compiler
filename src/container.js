@@ -16,10 +16,8 @@ const { Namespace } = require('./namespace');
 
 // they cannot be used as id, when 
 const reservedWords = [
-  'default',
-  'id',
-  'space',
   'nameless',
+  'include', 'block', 'namespace', 'abstract', 'concrete', 'begin', 'end',
   'NaN', 'Infinity',
   'e', 'E',
   'pi', 'PI'
