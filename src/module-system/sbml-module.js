@@ -49,6 +49,8 @@ function jsbmlToQArr(JSBML){
     let isZero = _.get(x, 'attributes.spatialDimensions') === '0';
     if (isZero) {
       zeroSpatialDimensions.push(_.get(x, 'attributes.id'));
+      // set zero initial size
+      _.set(x, 'attributes.size', '0'); 
     }
 
     let q = compartmentToQ(x);
