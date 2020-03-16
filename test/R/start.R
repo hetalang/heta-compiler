@@ -12,17 +12,17 @@ results_folder <- args[2]
 
 # library(mrgsolve, warn.conflicts = FALSE) # simple but not stable way
 if(!require(mrgsolve, warn.conflicts = FALSE)){
-  install.packages("mrgsolve")
+  install.packages("mrgsolve", repos = "https://cloud.r-project.org")
   library(mrgsolve, warn.conflicts = FALSE)
 }
 
 if(!require(lattice, warn.conflicts = FALSE)){
-  install.packages("lattice")
+  install.packages("lattice", repos = "https://cloud.r-project.org")
   library(lattice, warn.conflicts = FALSE)
 }
 
 if(!require(withr, warn.conflicts = FALSE)){
-  install.packages("withr")
+  install.packages("withr", repos = "https://cloud.r-project.org")
   library(withr, warn.conflicts = FALSE)
 }
 
