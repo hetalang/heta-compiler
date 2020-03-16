@@ -364,9 +364,20 @@ function _toMathExpr(element, useParentheses = false){
     return 'delay';
   } else if (element.name === 'csymbol') {
     return _.get(element, 'elements.0.text');
-  } else if (element.name === 'cn' && _.get(element, 'elements.0.text') < 0) {
+  } else if (element.name === 'cn' && _.get(element, 'attributes.type') === 'rational' && _.get(element, 'elements.1.name') === 'sep') { // rational numbers: 1/1000
+    let numerator = _.get(element, 'elements.0.text');
+    let denominator = _.get(element, 'elements.2.text');
+    let sign = (numerator >= 0 && denominator > 0) || (numerator <= 0 && denominator < 0)
+      ? ''
+      : '-';
+    return `(${sign}${Math.abs(numerator)}/${Math.abs(denominator)})`;
+  } else if (element.name === 'cn' && _.get(element, 'attributes.type') === 'e-notation' && _.get(element, 'elements.1.name') === 'sep') { // rational numbers: 1.1*10^-3
+    let mantissa = _.get(element, 'elements.0.text').trim();
+    let power = _.get(element, 'elements.2.text').trim();
+    return `(${mantissa}e${power})`;
+  } else if (element.name === 'cn' && _.get(element, 'elements.0.text') < 0) { // negative number requires (-2)
     return `(${_.get(element, 'elements.0.text')})`;
-  } else if (element.name === 'cn') {
+  } else if (element.name === 'cn') { // regular positive numbers
     return _.get(element, 'elements.0.text');
   } else if (element.name === 'true') {
     return '1';
