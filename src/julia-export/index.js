@@ -64,8 +64,15 @@ class JuliaExport extends _Export {
             } else { // ref.stoichiometry >= 0
               st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
             }
-    
-            return st + ref.process;
+            
+            let isCompartmentRequired = ref._process_.className === 'Process' 
+              && record.instanceOf('Species') 
+              && !record.isAmount;
+            if (isCompartmentRequired) {
+              return st + ref.process + '*' + record.compartment;
+            } else {
+              return st + ref.process;
+            }
           }).join('');
         }
       });
