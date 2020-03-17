@@ -12,7 +12,8 @@ describe('Check knitMany() for Species', () => {
   let sp1 = c.load({
     class: 'Species',
     id: 'sp1',
-    space: 'one'
+    space: 'one',
+    assignments: {start_ : 0}
   });
   it('Set no compartment', () => {
     expect(() => c.knitMany(), 'does not check empty property').throw(ValidationError);
@@ -27,7 +28,8 @@ describe('Check knitMany() for Species', () => {
     c.load({
       class: 'Record',
       id: 'comp1',
-      space: 'one'
+      space: 'one',
+      assignments: {ode_: 1}
     });
     expect(() => c.knitMany()).throw(BindingError);
   });
@@ -35,7 +37,8 @@ describe('Check knitMany() for Species', () => {
     c.load({
       class: 'Compartment',
       id: 'comp1',
-      space: 'one'
+      space: 'one',
+      assignments: {ode_: 1}
     });
     c.knitMany();
     expect(sp1).to.have.property('compartmentObj');
@@ -52,7 +55,8 @@ describe('Check knitMany() for Reaction', () => {
       class: 'Reaction',
       id: 'r1',
       space: 'one',
-      actors: 'A=>'
+      actors: 'A=>',
+      assignments: {ode_: 1}
     });
   });
   
@@ -70,7 +74,8 @@ describe('Check knitMany() for Reaction', () => {
     c.load({
       class: 'Compartment',
       id: 'def',
-      space: 'one'
+      space: 'one',
+      assignments: {start_: 1.1}
     });
     expect(() => c.knitMany()).throw(BindingError);
   });
@@ -80,7 +85,8 @@ describe('Check knitMany() for Reaction', () => {
       class: 'Species',
       id: 'A',
       space: 'one',
-      compartment: 'def'
+      compartment: 'def',
+      assignments: { ode_: 1 }
     });
     c.knitMany();
     expect(r1.actors[0]).to.have.property('targetObj');

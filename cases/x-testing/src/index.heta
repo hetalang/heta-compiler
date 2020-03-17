@@ -1,41 +1,11 @@
-'''Notes !!!'''
-k1 @Const 'Title' = 1;
-k1 {
-    aux: {a: [1,2,3], b: [{},{}], c: [], x: {y: {z: 1.3}}},
-    tags: [a,b,c]
-};
+p1 @Record { title: Hello };
+p1 .= 1.1;
 
-p1 @Record { boundary: false };
-p1 .= 1*2;
-p1 := 2*3;
-p1 [sw1]= 4*5;
+k1 @Const = 1.4;
 
-r1 @Reaction {
-    actors: 2*A + 2B => 6C + D,
-    modifiers: [E1,E2]
-};
-
-'''Some spec'''
-A @Species { compartment: comp1 };
-B @Species { compartment: comp1 };
-C @Species { compartment: comp1 };
-D @Species { compartment: comp1 };
-E1 @Species { compartment: comp1, boundary: true };
-E2 @Species { compartment: comp1, boundary: true };
-
-comp1 @Compartment;
+c1 @Compartment .= 1;
 
 excel @XLSXExport { filepath: table, omitRows: 3, sheet: one, splitByClass: true };
 json @JSONExport { filepath: output };
-yaml @YAMLExport { filepath: output };
-slv @SLVExport { filepath: model };
-
-//xxx @UnitDef { components: [{ kind: nM, multiplier: 1, exponent: 1 }, { kind: kg, multiplier: 1, exponent: -3 }]};
-yyy @UnitDef {
-    units: [
-        { kind: nM, multiplier: 1, exponent: 1 },
-        { kind: kg, multiplier: 1, exponent: -3 }
-    ]
-};
-
-k10 @Const = 1.1 { units: mg*kg/L };
+//yaml @YAMLExport { filepath: output };
+//slv @SLVExport { filepath: model };

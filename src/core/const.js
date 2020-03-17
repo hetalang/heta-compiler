@@ -29,6 +29,12 @@ class Const extends _Size { // implicit extend Numeric
   }
 }
 
+Const._requirements = {
+  num: {
+    required: true
+  }
+};
+
 module.exports = {
   Const
 };

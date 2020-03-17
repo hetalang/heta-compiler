@@ -11,17 +11,20 @@
     },
     {
         "class": "Const",
-        "id": "k5"
+        "id": "k5",
+        "num": 0.8
     },
     {
         "class": "Species",
         "id": "s1",
         "isAmount": true,
-        "compartment": "c1"
+        "compartment": "c1",
+        "assignments": {"start_": "12"}
     },
     {
         "class": "Compartment",
-        "id": "c1"
+        "id": "c1",
+        "assignments": {"start_": "0.099"}
     },
     {
         "class": "Const",

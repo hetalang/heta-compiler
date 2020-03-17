@@ -13,6 +13,7 @@ class Record extends _Size {
   constructor(isCore = false){
     super(isCore);
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
+    this.assignments = {};
   }
   merge(q, skipChecking){
     if(!skipChecking) Record.isValid(q);
@@ -64,38 +65,43 @@ class Record extends _Size {
     super.bind(namespace, skipErrors);
 
     let messages = [];
+
+    // check initialization
+    let hasInit = _.get(this, 'assignments.start_') !== undefined
+      || _.get(this, 'assignments.ode_') !== undefined;
+    if (!hasInit) {
+      throw new BindingError(`Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`);
+    }
     
     // check math expression refs
-    if(this.assignments){
-      _.each(this.assignments, (mathExpr, key) => {
-        this
-          .dependOn(key)
-          .forEach((id) => {
-            let target = namespace.get(id);
+    _.each(this.assignments, (mathExpr, key) => {
+      this
+        .dependOn(key)
+        .forEach((id) => {
+          let target = namespace.get(id);
 
-            if(!target){
-              messages.push(`Component "${id}" is not found in space "${this.space}" as expected in expression: `
-                    + `${this.index} [${key}]= ${mathExpr.expr};`);
-            }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
-              messages.push(`Component "${id}" is not a Const or Record class as expected in expression: `
-                + `${this.index} [${key}]= ${mathExpr.expr};`);
-            }
-          });
-      });
-    }
+          if(!target){
+            messages.push(`Component "${id}" is not found in space "${this.space}" as expected in expression: `
+                  + `${this.index} [${key}]= ${mathExpr.expr};`);
+          }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
+            messages.push(`Component "${id}" is not a Const or Record class as expected in expression: `
+              + `${this.index} [${key}]= ${mathExpr.expr};`);
+          }
+        });
+    });
 
     if(messages.length>0 && !skipErrors)
       throw new BindingError(this.index, messages, 'References error in expressions:');
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if(this.assignments){
+    if (_.size(this.assignments)) {
       res.assignments = _.mapValues(this.assignments, (x) => x.toString(options));
     }
-    if(this.boundary){
+    if (this.boundary) {
       res.boundary = this.boundary;
     }
-    if(this.units){
+    if (this.units) {
       res.units = this.units;
     }
     return res;
