@@ -9,27 +9,33 @@ class _Module {
     mdl.type = type;
     mdl.options = options;
 
-    switch (type) {
-    case 'heta':
-      mdl.setHetaModule();
-      break;
-    case 'json':
-      mdl.setJSONModule();
-      break;
-    case 'md':
-      mdl.setMdModule();
-      break;
-    case 'yaml':
-      mdl.setYAMLModule();
-      break;
-    case 'xlsx':
-      mdl.setXLSXModule();
-      break;
-    case 'sbml':
-      mdl.setSBMLModule();
-      break;
-    default:
-      throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yaml", "xlsx"] `);
+    try {
+      switch (type) {
+      case 'heta':
+        mdl.setHetaModule();
+        break;
+      case 'json':
+        mdl.setJSONModule();
+        break;
+      case 'md':
+        mdl.setMdModule();
+        break;
+      case 'yaml':
+        mdl.setYAMLModule();
+        break;
+      case 'xlsx':
+        mdl.setXLSXModule();
+        break;
+      case 'sbml':
+        console.log(mdl.filename); // TODO: delete later
+        mdl.setSBMLModule();
+        break;
+      default:
+        throw new ModuleError(`Unknown type "${type}" for source "${filename}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml"] `);
+      }
+    } catch (e) {
+      console.log(e.message);
+      mdl.parsed = [];
     }
     
     return mdl;

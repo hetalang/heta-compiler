@@ -1,7 +1,7 @@
 const fs = require('fs');
 const _Module = require('./_module');
 const { xml2js } = require('xml-js');
-const { FileSystemError } = require('../heta-error');
+const { FileSystemError, ModuleError } = require('../heta-error');
 const _ = require('lodash');
 
 _Module.prototype.setSBMLModule = function(){
@@ -10,17 +10,13 @@ _Module.prototype.setSBMLModule = function(){
   
   let fileContent = fs.readFileSync(this.filename, 'utf8');
   this.parsed = _SBMLParse(this.filename, fileContent);
-  console.log(this.filename)
   return this;
 };
 
 function _SBMLParse(filename, fileContent){
-  try {
-    let JSBML = xml2js(fileContent, {compact: false});
-    return jsbmlToQArr(JSBML);
-  } catch(e) {
-    throw e;
-  }
+  let JSBML = xml2js(fileContent, { compact: false });
+  
+  return jsbmlToQArr(JSBML);
 }
 
 /*
@@ -117,7 +113,18 @@ function jsbmlToQArr(JSBML){
     qArr.push(q);
   });
 
-  // assignmentRules
+  // algebraicRules
+  let algebraicRules = _.chain(model.elements)
+    .filter(['name', 'listOfRules'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'algebraicRule'])
+    .value();
+  if (algebraicRules.length !== 0) {
+    throw new ModuleError('"algebraicRule" from SBML module is not supported.');
+  }
+
+  // rateRules
   let rateRules = _.chain(model.elements)
     .filter(['name', 'listOfRules'])
     .map('elements')
@@ -129,7 +136,7 @@ function jsbmlToQArr(JSBML){
     qArr.push(q);
   });
 
-  // assignmentRules
+  // events
   let events = _.chain(model.elements)
     .filter(['name', 'listOfEvents'])
     .map('elements')
