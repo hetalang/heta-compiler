@@ -73,8 +73,8 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'reaction'])
     .value();
   reactions.forEach((x) => {
-    let q = reactionToQ(x);
-    qArr.push(q);
+    let qArr_add = reactionToQ(x);
+    qArr = qArr.concat(qArr_add);
   });
 
   // parameters
@@ -449,17 +449,46 @@ function speciesToQ(x, zeroSpatialDimensions = []){
 }
 
 function reactionToQ(x){
+  let qArr = [];
+  let localConstTranslate = [];
   let q = baseToQ(x);
 
   q.class = 'Reaction';
+
   let kineticLaw = x.elements
     && x.elements.find((y) => y.name === 'kineticLaw');
+  
+  // local parameters
+  let listOfParameters = kineticLaw 
+    && kineticLaw.elements
+    && kineticLaw.elements.find((y) => y.name === 'listOfParameters');
+  if (listOfParameters) {
+    let parameters = listOfParameters.elements
+      .filter((y) => y.name = 'parameter');
+    parameters.forEach((y) => {
+      let id = _.get(y, 'attributes.id');
+      let newId = id + '__' + q.id + '_local';
+      // set translator
+      localConstTranslate.push({id, newId});
+      // add component
+      qArr.push({
+        class: 'Const',
+        id: newId,
+        num: Number.parseFloat(_.get(y, 'attributes.value'))
+      });
+    });
+  }
+  // math
   let math = kineticLaw 
     && kineticLaw.elements
     && kineticLaw.elements.find((y) => y.name === 'math');
-  
   if (math) {
-    _.set(q, 'assignments.ode_', _toMathExpr(math));
+    let expr = _toMathExpr(math);
+    localConstTranslate.forEach((y) => {
+      let regexp = new RegExp(`\\b${y.id}\\b`, 'g');
+      expr = expr.replace(regexp, y.newId);
+    });
+    _.set(q, 'assignments.ode_', expr);
   }
 
   let reversible = _.get(x, 'attributes.reversible') !== 'false' ;
@@ -517,7 +546,9 @@ function reactionToQ(x){
   q.actors = actors0.concat(actors1);
   q.modifiers = modifiers1;
 
-  return q;
+  // add reaction q
+  qArr.push(q);
+  return qArr;
 }
 
 function parameterToQ(x){
