@@ -15,7 +15,7 @@ class Record extends _Size {
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
     this.assignments = {};
   }
-  merge(q, skipChecking){
+  merge(q = {}, skipChecking){
     if(!skipChecking) Record.isValid(q);
     super.merge(q, skipChecking);
 
@@ -34,7 +34,7 @@ class Record extends _Size {
       this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
     }
 
-    if(q && q.boundary) this.boundary = q.boundary;
+    if(q.boundary !== undefined) this.boundary = q.boundary;
 
     return this;
   }

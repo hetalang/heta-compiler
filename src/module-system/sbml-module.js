@@ -132,8 +132,8 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'rateRule'])
     .value();
   rateRules.forEach((x) => {
-    let q = rateRuleToQ(x);
-    qArr.push(q);
+    let qArr_add = rateRuleToQ(x);
+    qArr = qArr.concat(qArr_add);
   });
 
   // events
@@ -565,21 +565,24 @@ function assignmentRuleToQ(x){
 }
 
 function rateRuleToQ(x){
-  let q = baseToQ(x);
+  let q0 = baseToQ(x);
 
   let target = _.get(x, 'attributes.variable');
-  q.id = target + '_proc';
-  q.class = 'Process';
-  q.actors = [{
+  q0.id = target + '_proc';
+  q0.class = 'Process';
+  q0.actors = [{
     stoichiometry: 1,
     target: target
   }];
 
   let math = x.elements
     && x.elements.find((y) => y.name === 'math');
-  if (math) _.set(q, 'assignments.ode_', _toMathExpr(math));
+  if (math) _.set(q0, 'assignments.ode_', _toMathExpr(math));
 
-  return q;
+  // remove boundary for Species
+  let q1 = { id: target, boundary: false };
+
+  return [q0, q1];
 }
 
 let eventCounter = 0;
