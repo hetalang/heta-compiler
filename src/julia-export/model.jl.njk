@@ -50,7 +50,9 @@ function start_(cons)
     # save results
 
     return (
-        [{% for record in dynamicRecords %}
+        {%- if dynamicRecords|length > 0 %}
+        [
+        {%- for record in dynamicRecords %}
         {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
             {{ record.id }} * {{ record.compartment }}, 
         {%- else %}
@@ -58,7 +60,11 @@ function start_(cons)
         {%- endif %}
         {%- endfor %}
         ],
-        [{% for record in staticRecords %}
+        {% else %}
+        [ 0.0 ], # init for fake variable
+        {%- endif %}
+        [
+        {%- for record in staticRecords %}
             {{ record.id }}, 
         {%- endfor %}
         ]
@@ -88,10 +94,14 @@ function ode_(du, u, p, t)
     #p.static .= [{% for record in staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}]
+    {%- if dynamicRecords|length > 0 %}
     du .= [{% for record in dynamicRecords %}
       {{ rhs[loop.index0] }},  # d{{ record.id }}_/dt
     {%- endfor %}
     ]
+    {%- else %}
+    du .= [ 1.0 ] # RHS for fake variable
+    {%- endif %}
 end
 
 ### output function
