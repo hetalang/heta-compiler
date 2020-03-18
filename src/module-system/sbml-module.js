@@ -1,15 +1,12 @@
 const fs = require('fs');
 const _Module = require('./_module');
 const { xml2js } = require('xml-js');
-const { FileSystemError, ModuleError } = require('../heta-error');
 const _ = require('lodash');
 
 _Module.prototype.setSBMLModule = function(){
-  //checking file exists
-  if(!fs.existsSync(this.filename)) throw new FileSystemError(`No such file: ${this.filename}`);
-  
   let fileContent = fs.readFileSync(this.filename, 'utf8');
   this.parsed = _SBMLParse(this.filename, fileContent);
+
   return this;
 };
 
@@ -121,7 +118,7 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'algebraicRule'])
     .value();
   if (algebraicRules.length !== 0) {
-    throw new ModuleError('"algebraicRule" from SBML module is not supported.');
+    this.logger.error('"algebraicRule" from SBML module is not supported.', 'ModuleError');
   }
 
   // rateRules
@@ -350,10 +347,12 @@ function _toMathExpr(element, useParentheses = false){
       let cond = `${condArgs[0]} - ${condArgs[1]}`;
       return `ife0(${cond}, ${arg2}, ${arg1})`;
     } else {
-      throw new Error('Error in translation MathML piecewise');
+      this.logger.error('Error in translation MathML piecewise', 'ModuleError');
+      return '';
     }
   } else if (element.name === 'piecewise') {
-    throw new Error('one piece is supported in MathML peicewise.');
+    this.loger.error('only one piece is supported in MathML peicewise.', 'ModuleError');
+    return '';
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
     let args = _.drop(element.elements)
@@ -399,8 +398,8 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'notanumber') {
     return 'NaN';
   } else {
-    //console.log(element)
-    throw new Error('Cannot parse MathML:' + element);
+    this.logger.error('Cannot parse MathML:' + element, 'ModuleError');
+    return '';
   }
 }
 

@@ -1,12 +1,4 @@
 
-// compilation step 1
-class FileSystemError extends Error { }
-FileSystemError.prototype.name = 'FileSystemError';
-
-// compilation step 2
-class ModuleError extends Error { }
-ModuleError.prototype.name = 'ModuleError';
-
 // compilation step 3
 class QueueError extends Error {
   constructor(q, message, filename, lineNumber){
@@ -61,8 +53,6 @@ function getIndexFromQ(q = {}){
 
 module.exports = {
   ValidationError,
-  FileSystemError,
-  ModuleError,
   QueueError,
   BindingError,
   ExportError

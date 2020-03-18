@@ -1,7 +1,6 @@
 /*global describe, it*/
 const { expect } = require('chai');
 const { Builder } = require('../../src/builder');
-const { ModuleError } = require('../../src/heta-error');
 const output = require('./output');
 
 describe('Integral test of correct xlsx module', () => {

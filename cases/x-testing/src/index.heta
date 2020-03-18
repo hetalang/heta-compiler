@@ -9,3 +9,5 @@ excel @XLSXExport { filepath: table, omitRows: 3, sheet: one, splitByClass: true
 json @JSONExport { filepath: output };
 //yaml @YAMLExport { filepath: output };
 //slv @SLVExport { filepath: model };
+
+include 1.heta type heta

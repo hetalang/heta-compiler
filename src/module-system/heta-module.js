@@ -1,15 +1,15 @@
 const fs = require('fs');
 const hetaParser = require('heta-parser');
 const _Module = require('./_module');
-const { FileSystemError } = require('../heta-error');
 
 _Module.prototype.setHetaModule = function(){
-  //checking file exists
-  if(!fs.existsSync(this.filename)) throw new FileSystemError(`No such file: ${this.filename}`);
+  try {
+    let fileContent = fs.readFileSync(this.filename, 'utf8');
+    this.parsed = _hetaParse(this.filename, fileContent);
+  } catch(e) {
+    this.logger.error(e.message, 'ModuleError');
+  }
   
-  let fileContent = fs.readFileSync(this.filename, 'utf8');
-  this.parsed = _hetaParse(this.filename, fileContent);
-
   return this;
 };
 
