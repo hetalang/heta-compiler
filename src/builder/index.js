@@ -43,7 +43,7 @@ class Builder {
     this.container = new Container();
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
-  async compileAsync(){
+  async runAsync(){
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     let ms = new ModuleSystem();
     let absFilename = path.join(this._coreDirname, this.importModule.source);
@@ -51,6 +51,7 @@ class Builder {
     // 0. Load core components
     this.logger.info('Loading core components, total count: ' + coreComponents.length);
     this.container.loadMany(coreComponents, true);
+    this.logger.pushMany(this.container.logger);
 
     // 1. Parsing
     ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
@@ -60,17 +61,17 @@ class Builder {
     let queue = ms.integrate();
 
     // 3. Translation
-    queue.forEach((q) => {
-      try {
-        this.container.load(q);
-      } catch (validationError) {
-        this.logger.error(validationError.message, 'ValidationError');
-      }
-    });
+    this.container.loadMany(queue, false);
+    this.logger.pushMany(this.container.logger);
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.knitMany();
+    
+    // 5. Exports
+    await this.exportManyAsync();
+    
+    return;
   }
   async exportManyAsync(){
     if(!this.options.skipExport){
@@ -91,21 +92,6 @@ class Builder {
     }else{
       this.logger.warn('Exporting skipped as stated in declaration.');
     }
-  }
-  // starts async build
-  async runAsync(){
-    //let absFilename = path.join(this._coreDirname, this.importModule.source);
-    // Compilation steps
-    await this.compileAsync();
-    // Other steps
-    await this.exportManyAsync();
-    
-    // throw error
-    if (this.logger.hasErrors) {
-      throw new Error('Critical compilation errors. See logs.');
-    }
-    
-    return;
   }
 }
 

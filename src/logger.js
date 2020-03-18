@@ -1,13 +1,17 @@
+const colors = require('colors');
 /*
   Class describing Heta logs
 */
 
 class _HetaLog {
   toString(){
+    let levelColored = this.color
+      ? colors[this.color](`[${this.level}]`)
+      : `[${this.level}]`;
     let errorType = this.type !== undefined
       ? `(${this.type})`
       : '';
-    return `[${this.level}]: ${errorType} ${this.message}`;
+    return `${levelColored}: ${errorType} ${this.message}`;
   }
 }
 
@@ -26,6 +30,7 @@ class HetaWarn extends _HetaLog {
     this.message = msg;
     this.type = type;
     this.level = 'warn';
+    this.color = 'yellow';
   }
 }
 
@@ -35,6 +40,7 @@ class HetaError extends _HetaLog {
     this.message = msg;
     this.type = type;
     this.level = 'error';
+    this.color = 'red';
   }
 }
 

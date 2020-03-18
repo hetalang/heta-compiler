@@ -27,6 +27,7 @@
     "@insysbio/topo-sort": "^1.0.1",
     "ajv": "^6.10.2",
     "ajv-errors": "^1.0.1",
+    "colors": "^1.4.0",
     "commander": "^2.20.3",
     "fs-extra": "^7.0.1",
     "heta-parser": "^0.3.7",

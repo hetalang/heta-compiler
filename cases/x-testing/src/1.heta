@@ -1,1 +1,8 @@
-k1 @Const = {};
+k1 @Const = 2;
+
+#setNS { space: one };
+
+#import one::k2 {
+    fromId: k,
+    fromSpace: nameless
+};

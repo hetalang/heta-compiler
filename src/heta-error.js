@@ -1,16 +1,5 @@
 
 // compilation step 3
-class QueueError extends Error {
-  constructor(q, message, filename, lineNumber){
-    let index = getIndexFromQ(q);
-    let indexedMessage = `(${index}) ${message}`;
-    super(indexedMessage, filename, lineNumber);
-    this.index = index;
-  }
-}
-QueueError.prototype.name = 'QueueError';
-
-// compilation step 3
 // error for matching heta schema
 class ValidationError extends Error {
   constructor(q, diagnostics = [], message, filename, lineNumber){
@@ -53,7 +42,6 @@ function getIndexFromQ(q = {}){
 
 module.exports = {
   ValidationError,
-  QueueError,
   BindingError,
   ExportError
 };
