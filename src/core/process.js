@@ -1,6 +1,5 @@
 const { Record } = require('./record');
 const _ = require('lodash');
-// const { IndexedHetaError } = require('../heta-error');
 
 /*
   Process class

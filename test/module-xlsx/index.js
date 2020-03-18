@@ -43,7 +43,6 @@ describe('Integral test of correct xlsx module', () => {
   });
 
   it('Create platform for empty XLSX sheets: error', function(done) {
-    this.timeout(0);
     let declaration = {
       id: 'test',
       title: 'Test',
