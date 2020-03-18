@@ -1,4 +1,3 @@
-const { QueueError } = require('./heta-error');
 const { Record } = require('./core/record');
 const { Compartment } = require('./core/compartment');
 const { Species } = require('./core/species');
@@ -13,6 +12,7 @@ const { Const } = require('./core/const');
 const { SimpleTask } = require('./core/simple-task');
 const _ = require('lodash');
 const { Namespace } = require('./namespace');
+const Logger = require('./logger');
 
 // they cannot be used as id, when 
 const reservedWords = [
@@ -25,6 +25,7 @@ const reservedWords = [
 
 class Container {
   constructor(){
+    this.logger = new Logger();
     this._namespaces = new Map();
     // default namespace
     let nameless = new Namespace('nameless');
@@ -35,55 +36,72 @@ class Container {
     return this._namespaces;
   }
   insert(q = {}, isCore = false){
+    let logger = new Logger();
+    let ind = getIndexFromQ(q);
+
     let space = q.space || 'nameless';
     // check index
     if(!q.id || (typeof q.id !== 'string'))
-      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
+      logger.error(`${ind} id should be string, but have "${q.id}"`, 'QueueError');
     if(reservedWords.indexOf(q.id)!==-1)
-      throw new QueueError(q, `Id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`);
+      logger.error(`${ind} id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`, 'QueueError');
     if(!q.class || typeof q.class !== 'string')
-      throw new QueueError(q, `No class or unsuitable class for "insert": ${q.class}`);
+      logger.error(`${ind} No class or unsuitable class for "insert": ${q.class}`);
 
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if(selectedClass === undefined)
-      throw new QueueError(q, `Unknown class "${q.class}" for the element.`);
-    let component = (new selectedClass(isCore)).merge(q);
-
-    // set component in namespace
+      logger.error(`${ind} Unknown class "${q.class}" for the element.`, 'QueueError');
+    
+    // get in namespace
     let namespace = this.namespaces.get(space);
     if (namespace === undefined)
-      throw new QueueError(q, `Create namespace "${space}" before use.`);
-    component._id = q.id;
-    component.namespace = namespace; // set parent space directly to component
+      logger.error(`${ind} create namespace "${space}" before use.`, 'QueueError');
 
-    namespace.set(q.id, component);
-
-    return component;
+    this.logger.pushMany(logger);
+    if (!logger.hasErrors) {
+      let component = (new selectedClass(isCore)).merge(q);
+      component._id = q.id;
+      component.namespace = namespace; // set parent space directly to component
+      namespace.set(q.id, component);
+      return component;
+    } else {
+      this.logger.warn(`${ind} will be skipped from queue.`);
+      return;
+    }
   }
   update(q = {}){
+    let logger = new Logger();
+    let ind = getIndexFromQ(q);
+
     let space = q.space || 'nameless';
-    if(!q.id || (typeof q.id !== 'string')){
-      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
-    }
-    if(q.class)
-      throw new QueueError(q, `Class property is not allowed for "update": ${q.class}`);
+    if (!q.id || (typeof q.id !== 'string'))
+      logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
+    if (q.class)
+      logger.error(`${ind} Class property is not allowed for "update": ${q.class}`, 'QueueError');
 
     // set component
     let namespace = this.namespaces.get(space);
-    if (namespace === undefined)
-      throw new QueueError(q, `Create namespace "${space}" before use.`);
-    let targetComponent = namespace.get(q.id);
+    if (namespace === undefined) {
+      logger.error(`${ind} Create namespace "${space}" before use.`, 'QueueError');
+    } else {
+      var targetComponent = namespace.get(q.id);
+        
+      // creation of new components is not allowed
+      if (targetComponent === undefined)
+        logger.error(`${ind} component does not exist which is not allowed for "update" strategy.`, 'QueueError');
+      else if (targetComponent.isCore)
+        logger.error(`${ind} Core component is read-only and cannot be updated.`, 'QueueError');
+    }
 
-    // creation of new components is not allowed
-    if(targetComponent === undefined)
-      throw new QueueError(q, 'Element with the index is not exist which is not allowed for "update" strategy.');
-    if(targetComponent.isCore)
-      throw new QueueError(q, 'Core component is read-only and cannot be updated.');
-
-    targetComponent.merge(q);
-
-    return targetComponent;
+    this.logger.pushMany(logger);
+    if (!logger.hasErrors) {
+      targetComponent.merge(q);
+      return targetComponent;
+    } else {
+      this.logger.warn(`${ind} will not be updated.`);
+      return;
+    }
   }
   upsert(q = {}, isCore = false){
     if('class' in q){
@@ -93,33 +111,51 @@ class Container {
     }
   }
   delete(q = {}){
+    let logger = new Logger();
+    let ind = getIndexFromQ(q);
+
     let space = q.space || 'nameless';
     if(!q.id || (typeof q.id !== 'string'))
-      throw new QueueError(q, `Id should be string, but have "${q.id}"`);
+      logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
     if(q.class)
-      throw new QueueError(q, `Class property is not allowed for "delete": ${q.class}`);
+      logger.error(`${ind} Class property is not allowed for "delete": ${q.class}`, 'QueueError');
 
     // set component
     let namespace = this.namespaces.get(space);
-    if (namespace === undefined)
-      throw new QueueError(q, `Create namespace "${space}" before use.`);
-    let targetComponent = namespace.get(q.id);
-    if(!targetComponent) // if targetComponent===false, element is not exist
-      throw new QueueError(q, `Element with id "${q.id}" does not exist and cannot be deleted.`);
-    if(targetComponent.isCore)
-      throw new QueueError(q, 'Core component is read-only and cannot be deleted.');
+    if (namespace === undefined) {
+      logger.error(`${ind} Create namespace "${space}" before use.`, 'QueueError');
+    } else {
+      var targetComponent = namespace.get(q.id);
+      if (!targetComponent) // if targetComponent===false, element is not exist
+        logger.error(`${ind} Element with id "${q.id}" does not exist and cannot be deleted.`, 'QueueError');
+      else if(targetComponent.isCore)
+        logger.error(`${ind} Core component is read-only and cannot be deleted.`, 'QueueError');
+    }
     
-    return namespace.delete(q.id); // true or false
+    this.logger.pushMany(logger);
+    if (!logger.hasErrors) {
+      logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
+    } else {
+      this.logger.warn(`${ind} will not be deleted.`);
+      return false;
+    }
   }
   select(q = {}){
-    let space = q.space || 'nameless';
-    if(!q.id || (typeof q.id !== 'string'))
-      throw new QueueError(q, `Id should be string, got "${q.id}"`);
-    let namespace = this.namespaces.get(space);
-    if (namespace === undefined)
-      throw new QueueError(q, `Create namespace "${space}" before use.`);
+    let logger = new Logger();
+    let ind = getIndexFromQ(q);
 
-    return namespace.get(q.id);
+    let space = q.space || 'nameless';
+    if (!q.id || (typeof q.id !== 'string'))
+      logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined) {
+      logger.error(`${ind} Create namespace "${space}" before use.`, 'QueueError');
+    } else {
+      var targetComponent = namespace.get(q.id);
+    }
+    this.logger.pushMany(logger);
+
+    return targetComponent;
   }
   setNS(q = {}){
     // create namespace if not exists
@@ -130,6 +166,8 @@ class Container {
     }
     // it is possible to update type
     namespace._isAbstract = q.type === 'abstract';
+    let typeString = namespace._isAbstract ? 'abstaract' : 'concrete'
+    this.logger.info(`Namespace "${q.space}" was set as "${typeString}"`);
   }
   /* 
     clone all components to another space
@@ -141,44 +179,58 @@ class Container {
     };
   */
   importNS(q = {}){
-    let space = q.space || 'nameless';
-    if(q.fromId)
-      throw new QueueError(q, `fromId must not be set for #importNS, but have "${q.fromId}"`);
-    if(q.id)
-      throw new QueueError(q, `id must not be set for #importNS, but have "${q.id}"`);
+    let logger = new Logger();
     _.defaults(q, {
       prefix: '',
       suffix: '',
       rename: {}
     });
 
+    let space = q.space || 'nameless';
+    if(q.fromId)
+      logger.error(`fromId must not be set for #importNS, but have "${q.fromId}"`, 'QueueError');
+    if(q.id)
+      logger.error(`id must not be set for #importNS, but have "${q.id}"`);
+
     let namespace = this.namespaces.get(space);
-    if (namespace === undefined)
-      throw new QueueError(q, `Create namespace "${space}" before use.`);
+    if (namespace === undefined) {
+      logger.error(`Create namespace "${space}" before use.`, 'QueueError');
+    }
+    
+    if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
+      logger.error(`space should be string, but have "${q.fromSpace}"`, 'QueueError');
+    } else {
+      var fromNamespace = this.namespaces.get(q.fromSpace);
+      if (fromNamespace === undefined) {
+        logger.error(`Create namespace "${q.fromSpace}" before use.`, 'QueueError');
+      }
+    }
 
-    let fromNamespace = this.namespaces.get(q.fromSpace);
-    if (fromNamespace === undefined)
-      throw new QueueError(q, `Create namespace "${q.fromSpace}" before use.`);
+    this.logger.pushMany(logger);
+    if (!logger.hasErrors) {
+      let clones = fromNamespace.toArray().map((component) => {
+        // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
+        let newId = _.get(
+          q.rename, 
+          component.id,
+          [q.prefix, component.id, q.suffix].join('') // default value
+        );
+  
+        // cloning and update references
+        let clone = component.clone({id: newId, space: q.space});
+        clone.namespace = namespace;
+        clone.updateReferences(q);
+  
+        namespace.set(newId, clone);
+  
+        return clone;
+      });
 
-    let clones = fromNamespace.toArray().map((component) => {
-      // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
-      let newId = _.get(
-        q.rename, 
-        component.id,
-        [q.prefix, component.id, q.suffix].join('') // default value
-      );
-
-      // cloning and update references
-      let clone = component.clone({id: newId, space: q.space});
-      clone.namespace = namespace;
-      clone.updateReferences(q);
-
-      namespace.set(newId, clone);
-
-      return clone;
-    });
-
-    return clones;
+      return clones;
+    } else {
+      this.logger.warn(`namespace "${q.fromSpace}" was not imported to "${space}"`);
+      return [];
+    }
   }
   /*
     the same as importNS but delete all elements from source namespace
@@ -207,39 +259,55 @@ class Container {
     };
   */
   import(q = {}){
-    let space = q.space || 'nameless';
-    // checking arguments
-    if(!q.fromId || (typeof q.fromId !== 'string'))
-      throw new QueueError(q, `fromId should be string, but have "${q.fromId}"`);
-    if(q.fromSpace && (typeof q.fromSpace !== 'string'))
-      throw new QueueError(q, `fromSpace should be string, but have "${q.fromSpace}"`);
-      
-    let namespace = this.namespaces.get(space);
-    if (namespace === undefined)
-      throw new QueueError(q, `Create namespace "${space}" before use.`);
+    let logger = new Logger();
+    let ind = getIndexFromQ(q);
 
-    let fromNamespace = this.namespaces.get(q.fromSpace);
-    if (fromNamespace === undefined)
-      throw new QueueError(q, `Create namespace "${q.fromSpace}" before use.`);
     _.defaults(q, {
       prefix: '',
       suffix: '',
       rename: {}
     });
 
-    // select component to copy
-    let component = fromNamespace.get(q.fromId);
-    if(!component)
-      throw new QueueError(q, `Element with ${q.fromId}::${q.fromSpace})} does not exist and cannot be cloned.`);
+    let space = q.space || 'nameless';
+    // checking arguments
+    if(!q.fromId || (typeof q.fromId !== 'string'))
+      logger.error(`${ind} fromId should be string, but have "${q.fromId}"`, 'QueueError');
+    if (!q.id || (typeof q.id !== 'string'))
+      logger.error(`${ind} id should be string, but have "${q.id}"`, 'QueueError');
+      
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined) {
+      logger.error(`Create namespace "${space}" before use.`, 'QueueError');
+    }
 
-    // cloning and update references
-    let clone = component.clone({id: q.id});
-    clone.namespace = namespace;
-    clone.updateReferences(q);
+    if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
+      logger.error(`fromSpace should be string, but have "${q.fromSpace}"`, 'QueueError');
+    } else {
+      var fromNamespace = this.namespaces.get(q.fromSpace);
+      if (fromNamespace === undefined) {
+        logger.error(`Create namespace "${q.fromSpace}" before use.`, 'QueueError');
+      } else {
+        // select component to copy
+        var component = fromNamespace.get(q.fromId);
+        if(!component)
+          logger.error(`Element with ${q.fromSpace}::${q.fromId} does not exist and cannot be imported.`, 'QueueError');
+      }
+    }
+    
+    this.logger.pushMany(logger);
+    if (!logger.hasErrors) {
+      // cloning and update references
+      let clone = component.clone({id: q.id});
+      clone.namespace = namespace;
+      clone.updateReferences(q);
 
-    namespace.set(q.id, clone);
+      namespace.set(q.id, clone);
 
-    return clone;
+      return clone;
+    } else {
+      this.logger.warn(`Element ${ind} was not created.`);
+      return;
+    }
   }
 
   /*
@@ -306,8 +374,8 @@ Container.prototype.classes = {
   Page,
   Const
 };
-/*
-// converts {id: 'k1', space: 'one'} => 'one.k1'
+
+// converts {id: 'k1', space: 'one'} => 'one::k1'
 function getIndexFromQ(q = {}){
   if(q.space!==undefined){
     return `${q.space}::${q.id}`;
@@ -315,5 +383,4 @@ function getIndexFromQ(q = {}){
     return q.id;
   }
 }
-*/
 module.exports = Container;

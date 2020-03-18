@@ -1,6 +1,6 @@
 const { _Component } = require('./_component');
 const { Unit } = require('./unit');
-const { ValidationError, BindingError } = require('../heta-error');
+const { BindingError } = require('../heta-error');
 
 /*
   Abstract class _Size
