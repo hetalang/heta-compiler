@@ -8,7 +8,7 @@ require('./md-module');
 require('./yaml-module');
 require('./xlsx-module');
 require('./sbml-module');
-const { ModuleError } = require('../heta-error');
+const Logger = require('../logger');
 
 class ModuleSystem {
   constructor(){
@@ -16,13 +16,14 @@ class ModuleSystem {
     // { filepath : module, ...}
     this.moduleCollection = {};
     this.graph = new TopoSort();
+    this.logger = new Logger();
   }
   // entrance to scan
   addModuleDeep(rawAbsFilePath, type, options = {}){
     let absFilePath = path.normalize(rawAbsFilePath);
     let mdl = this._addModuleDeep(absFilePath, type, options);
     this._top = mdl;
-
+    
     return mdl;
   }
   // scan module dependences recursively
@@ -53,6 +54,9 @@ class ModuleSystem {
       .map((x) => [x.source, '#', x.sheet || 1].join(''));
     this.graph.add(moduleName, paths);
     
+    // combine loggers
+    this.logger.pushMany(mdl.logger);
+
     return mdl;
   }
   // other
@@ -60,7 +64,7 @@ class ModuleSystem {
     try{
       return this.graph.sort();
     }catch(error){
-      throw new ModuleError(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
+      throw new Error(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
     }
   }
   integrate(){

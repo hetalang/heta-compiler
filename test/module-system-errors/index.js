@@ -2,7 +2,6 @@
 const { expect } = require('chai');
 const ModuleSystem = require('../../src/module-system');
 const path = require('path');
-const { ModuleError } = require('../../src/heta-error');
 
 describe('ModuleSystem for cyclic.', () => {
   it('Add cyclic module.', () => {
@@ -12,7 +11,7 @@ describe('ModuleSystem for cyclic.', () => {
     expect(Object.keys(ms.moduleCollection)).to.have.lengthOf(3);
     expect(() => {
       ms.sortedPaths();
-    }).to.throw(ModuleError);
+    }).to.throw(Error);
   });
 });
 
@@ -23,6 +22,6 @@ describe('ModuleSystem with self include.', () => {
     ms.addModuleDeep(filepath, 'heta', {});
     expect(() => {
       ms.sortedPaths();
-    }).to.throw(ModuleError);
+    }).to.throw(Error);
   });
 });

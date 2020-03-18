@@ -1,6 +1,4 @@
-//const { ModuleError } = require('../heta-error');
 const _Module = require('./_module');
-//const { processFile } = require('excel-as-json'); // see https://www.npmjs.com/package/excel-as-json
 const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
 

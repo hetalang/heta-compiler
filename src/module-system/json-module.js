@@ -2,9 +2,14 @@ const fs = require('fs');
 const _Module = require('./_module');
 
 _Module.prototype.setJSONModule = function(){
-  let fileContent = fs.readFileSync(this.filename, 'utf8');
-  this.parsed = _JSONParse(this.filename, fileContent);
-  
+  //checking file exists
+  try {
+    let fileContent = fs.readFileSync(this.filename, 'utf8');
+    this.parsed = _JSONParse(this.filename, fileContent);
+  } catch(e) {
+    this.logger.error(e.message, 'ModuleError');
+  }
+
   return this;
 };
 
