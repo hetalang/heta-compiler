@@ -1,19 +1,4 @@
 
-// compilation step 3
-// error for matching heta schema
-class ValidationError extends Error {
-  constructor(q, diagnostics = [], message, filename, lineNumber){
-    let index = getIndexFromQ(q);
-    let indexedMessage = `(${index}) ${message}\n`
-      + diagnostics
-        .map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
-        .join('\n');
-    super(indexedMessage, filename, lineNumber);
-    this.index = index;
-  }
-}
-ValidationError.prototype.name = 'ValidationError';
-
 // compilation step 4
 // error for lost references
 class BindingError extends Error {
@@ -41,7 +26,6 @@ function getIndexFromQ(q = {}){
 }
 
 module.exports = {
-  ValidationError,
   BindingError,
   ExportError
 };

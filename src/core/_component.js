@@ -1,8 +1,9 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { ValidationError, BindingError } = require('../heta-error');
+const { BindingError } = require('../heta-error');
 const _ = require('lodash');
 const { flatten } = require('./utilities');
+const Logger = require('../logger');
 
 /*
   Abstract class _Component
@@ -18,15 +19,19 @@ class _Component {
     this.tags = [];
     this.aux = {};
     if (isCore) this._isCore = true;
+    this.logger = new Logger();
   }
-  merge(q, skipChecking){
-    if(!skipChecking) _Component.isValid(q);
+  merge(q = {}){
+    let validationLogger = _Component.isValid(q);
 
-    if(q && q.title) this.title = q.title;
-    if(q && q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
-    if(q && q.tags) this.tags = _.cloneDeep(q.tags);
-    if(q && q.aux) this.aux = _.cloneDeep(q.aux);
-
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.title) this.title = q.title;
+      if(q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
+      if(q.tags) this.tags = _.cloneDeep(q.tags);
+      if(q.aux) this.aux = _.cloneDeep(q.aux);
+    }
+    
     return this;
   }
   get isCore(){
@@ -41,6 +46,8 @@ class _Component {
   get space(){
     if (this.namespace) {
       return this.namespace.spaceName;
+    } else {
+      return;
     }
   }
   static get schemaName(){
@@ -124,15 +131,24 @@ class _Component {
     }
   }
   static isValid(q){
+    let validationLogger = new Logger();
+    let ind = q.space ? `${q.space}::` : '' + q.id;
+
     let validate = validator
       .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
     if(!validate){
       throw new TypeError(q, `The schema "${this.schemaName}" is not found.`);
     }
     let valid = validate(q);
-    if(!valid) {
-      throw new ValidationError(q, validate.errors, `Some of properties do not satisfy requirements for class "${this.name}".`);
+    if (!valid) {
+      let msg = `${ind} Some of properties do not satisfy requirements for class "${this.schemaName}"\n`
+        + validate.errors.map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
+          .join('\n');
+      validationLogger.error(msg, 'ValidationError');
+      validationLogger.warn('Some of component properties will not be updated.');
     }
+    
+    return validationLogger;
   }
   /*
     Checking references:
@@ -169,7 +185,7 @@ class _Component {
     _.each(req, (rule, prop) => { // iterates through rules
       // required: true
       if(rule.required && !_.has(this, prop)){
-        throw new ValidationError(this.indexObj, [], `No required "${prop}" property for ${this.className}.`);
+        throw new TypeError(`No required "${prop}" property for ${this.className}.`);
       }
       // isReference: true + className
       if(rule.isReference && _.has(this, prop)){

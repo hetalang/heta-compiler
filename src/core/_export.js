@@ -16,11 +16,15 @@ class _Export extends _Component {
     super(isCore);
     this.powTransform = 'keep';
   }
-  merge(q, skipChecking){
-    if(!skipChecking) _Export.isValid(q);
-    super.merge(q, skipChecking);
-    if(q.filepath) this.filepath = q.filepath;
-    if(q.powTransform) this.powTransform = q.powTransform;
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = _Export.isValid(q);
+
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.filepath) this.filepath = q.filepath;
+      if(q.powTransform) this.powTransform = q.powTransform;
+    }
 
     return this;
   }

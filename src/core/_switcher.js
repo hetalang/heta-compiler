@@ -8,9 +8,11 @@ const { _Component } = require('./_component');
   };
 */
 class _Switcher extends _Component {
-  merge(q, skipChecking){
-    if(!skipChecking) _Switcher.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = _Switcher.isValid(q);
+    
+    this.logger.pushMany(validationLogger);
 
     return this;
   }

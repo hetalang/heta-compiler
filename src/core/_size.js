@@ -16,15 +16,18 @@ const { BindingError } = require('../heta-error');
   };
 */
 class _Size extends _Component {
-  merge(q = {}, skipChecking){
-    if(!skipChecking) _Size.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = _Size.isValid(q);
 
-    if(q.units!==undefined){
-      if (typeof q.units === 'string')
-        this.unitsParsed = Unit.parse(q.units);
-      else
-        this.unitsParsed = Unit.fromQ(q.units);
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.units!==undefined){
+        if (typeof q.units === 'string')
+          this.unitsParsed = Unit.parse(q.units);
+        else
+          this.unitsParsed = Unit.fromQ(q.units);
+      }
     }
 
     return this;

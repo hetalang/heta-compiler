@@ -16,24 +16,27 @@ class Reaction extends Process {
     this.isAmount = true;
     this.modifiers = [];
   }
-  merge(q, skipChecking){
-    if(!skipChecking) Reaction.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Reaction.isValid(q);
 
-    if(q.modifiers) {
-      this.modifiers = q.modifiers
-        .map((mod) => {
-          if(typeof mod==='string'){
-            return new Modifier({target: mod});
-          }else{
-            return new Modifier(mod);
-          }
-        });
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.modifiers) {
+        this.modifiers = q.modifiers
+          .map((mod) => {
+            if(typeof mod==='string'){
+              return new Modifier({target: mod});
+            }else{
+              return new Modifier(mod);
+            }
+          });
+      }
+      
+      if(q.compartment!==undefined) this.compartment = q.compartment;
+      if(q.isAmount!==undefined) this.isAmount = q.isAmount;
     }
     
-    if(q.compartment!==undefined) this.compartment = q.compartment;
-    if(q.isAmount!==undefined) this.isAmount = q.isAmount;
-
     return this;
   }
   toQ(options = {}){

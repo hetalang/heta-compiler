@@ -8,12 +8,15 @@ const { _Switcher } = require('./_switcher');
   };
 */
 class CondSwitcher extends _Switcher {
-  merge(q, skipChecking){
-    if(!skipChecking) CondSwitcher.isValid(q);
-    super.merge(q, skipChecking);
-
-    if(q && q.condition!==undefined) this.condition = q.condition;
-
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = CondSwitcher.isValid(q);
+    
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.condition!==undefined) this.condition = q.condition;
+    }
+    
     return this;
   }
   toQ(options = {}){

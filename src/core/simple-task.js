@@ -3,36 +3,39 @@ const _ = require('lodash');
 const { IndexedHetaError} = require('../heta-error');
 
 class SimpleTask extends _Component {
-  merge(q={}, skipChecking){
-    if(!skipChecking) SimpleTask.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = SimpleTask.isValid(q);
 
-    if(q.type) this.type = q.type;
-    if(q.subtasks){
-      this.subtasks = q.subtasks.map((q) => new Subtask(q));
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if (q.type) this.type = q.type;
+      if (q.subtasks) {
+        this.subtasks = q.subtasks.map((q) => new Subtask(q));
+      }
+      if (q.tspan) {
+        this.tspan = q.tspan;
+      } else {
+        this.tspan = [0, 100];
+      }
+      if (q.reassign) {
+        this.reassign = _.mapValues(q.reassign, (x) => x);
+      } else {
+        this.reassign = {};
+      }
+      let defaultSolver = {
+        alg: 'lsode',
+        reltol: 1e-6,
+        abstol: 1e-6,
+        maxiters: 1e5,
+        dt: 0,
+        dtmin: 0,
+        dtmax: 0,
+        tstops: []
+      };
+      this.solver = _.defaultsDeep(q.solver, defaultSolver);
     }
-    if(q.tspan){
-      this.tspan = q.tspan;
-    }else{
-      this.tspan = [0, 100];
-    }
-    if(q.reassign){
-      this.reassign = _.mapValues(q.reassign, (x) => x);
-    }else{
-      this.reassign = {};
-    }
-    let defaultSolver = {
-      alg: 'lsode',
-      reltol: 1e-6,
-      abstol: 1e-6,
-      maxiters: 1e5,
-      dt: 0,
-      dtmin: 0,
-      dtmax: 0,
-      tstops: []
-    };
-    this.solver = _.defaultsDeep(q.solver, defaultSolver);
-
+    
     return this;
   }
   bind(namespace, skipErrors = false){

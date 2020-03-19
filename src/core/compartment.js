@@ -11,9 +11,11 @@ class Compartment extends Record {
   constructor(isCore = false){
     super(isCore);
   }
-  merge(q, skipChecking){
-    if(!skipChecking) Compartment.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Compartment.isValid(q);
+
+    this.logger.pushMany(validationLogger);
     
     return this;
   }

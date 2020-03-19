@@ -30,37 +30,40 @@ class TimeSwitcher extends _Switcher {
     // default start
     this.startObj = (new Const).merge({ num: 0 });
   }
-  merge(q={}, skipChecking){
-    if(!skipChecking) TimeSwitcher.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = TimeSwitcher.isValid(q);
 
-    // empty means anon 0 as default
-    if (typeof q.start === 'string'){
-      this.start = q.start;
-    } else if (typeof q.start === 'number') {
-      delete this.start;
-      this.startObj = (new Const).merge({ num: q.start });
-    }
-    // empty is same as 0
-    if (typeof q.period === 'string'){
-      this.period = q.period;
-    } else if (typeof q.period === 'number') {
-      delete this.period;
-      this.periodObj = (new Const).merge({ num: q.period });
-    }
-    // empty is the same as Infinity
-    if (typeof q.stop === 'string'){
-      this.stop = q.stop;
-    } else if (typeof q.stop === 'number') {
-      delete this.stop;
-      this.stopObj = (new Const).merge({ num: q.stop });
-    }
-    // empty is the same as Infinity
-    if (typeof q.repeatCount === 'string'){
-      this.repeatCount = q.repeatCount;
-    } else if (typeof q.repeatCount === 'number') {
-      delete this.repeatCount;
-      this.repeatCountObj = (new Const).merge({ num: q.repeatCount });
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      // empty means anon 0 as default
+      if (typeof q.start === 'string'){
+        this.start = q.start;
+      } else if (typeof q.start === 'number') {
+        delete this.start;
+        this.startObj = (new Const).merge({ num: q.start });
+      }
+      // empty is same as 0
+      if (typeof q.period === 'string'){
+        this.period = q.period;
+      } else if (typeof q.period === 'number') {
+        delete this.period;
+        this.periodObj = (new Const).merge({ num: q.period });
+      }
+      // empty is the same as Infinity
+      if (typeof q.stop === 'string'){
+        this.stop = q.stop;
+      } else if (typeof q.stop === 'number') {
+        delete this.stop;
+        this.stopObj = (new Const).merge({ num: q.stop });
+      }
+      // empty is the same as Infinity
+      if (typeof q.repeatCount === 'string'){
+        this.repeatCount = q.repeatCount;
+      } else if (typeof q.repeatCount === 'number') {
+        delete this.repeatCount;
+        this.repeatCountObj = (new Const).merge({ num: q.repeatCount });
+      }
     }
 
     return this;

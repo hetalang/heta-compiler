@@ -3,12 +3,15 @@
 const { _Component } = require('./_component');
 
 class ReferenceDefinition extends _Component {
-  merge(q, skipChecking){
-    if(!skipChecking) ReferenceDefinition.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = ReferenceDefinition.isValid(q);
 
-    if(q && q.prefix) this.prefix = q.prefix;
-    if(q && q.suffix) this.suffix = q.suffix;
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.prefix) this.prefix = q.prefix;
+      if(q.suffix) this.suffix = q.suffix;
+    }
 
     return this;
   }

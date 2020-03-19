@@ -15,7 +15,7 @@ class Expression {
     try {
       var exprParsed = math.parse(exprString);
     } catch(e) {
-      throw new TypeError('Cannot parse .expr property. ' + e.message);
+      throw new TypeError('Cannot parse MathExpr properly. ' + e.message);
     }
 
     return new Expression(exprParsed);

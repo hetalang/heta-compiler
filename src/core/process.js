@@ -16,21 +16,25 @@ class Process extends Record {
     super(isCore);
     this.actors = [];
   }
-  merge(q, skipChecking){
-    if(!skipChecking) Process.isValid(q);
-    super.merge(q, skipChecking);
-    if(q.actors) {
-      if(q.actors instanceof Array){
-        this.actors = q.actors
-          .map((q) => new Actor(q));
-      }else{
-        let { targetArray, isReversible } = rct2actors(q.actors);
-        this.actors = targetArray
-          .map((q) => new Actor(q));
-        _.set(this, 'aux.reversible', isReversible);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Process.isValid(q);
+
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.actors) {
+        if(q.actors instanceof Array){
+          this.actors = q.actors
+            .map((q) => new Actor(q));
+        }else{
+          let { targetArray, isReversible } = rct2actors(q.actors);
+          this.actors = targetArray
+            .map((q) => new Actor(q));
+          _.set(this, 'aux.reversible', isReversible);
+        }
       }
     }
-
+    
     return this;
   }
   toQ(options = {}){
