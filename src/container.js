@@ -136,7 +136,7 @@ class Container {
     
     this.logger.pushMany(logger);
     if (!logger.hasErrors) {
-      logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
+      return namespace.delete(q.id);
     } else {
       this.logger.warn(`${ind} will not be deleted.`);
       return false;

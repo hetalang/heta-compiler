@@ -6,15 +6,13 @@ const { expect } = require('chai');
 describe('Unit test for ReferenceDefinition', () => {
 
   it('Incorrect prefix property', () => {
-    expect(() => {
-      (new ReferenceDefinition).merge({prefix: {}});
-    }).to.throw(ValidationError);
+    let refDef1 = (new ReferenceDefinition).merge({prefix: {}});
+    expect(refDef1.logger).to.has.property('hasErrors', true);
   });
 
   it('Incorrect suffix property', () => {
-    expect(() => {
-      (new ReferenceDefinition).merge({suffix: {}});
-    }).to.throw(ValidationError);
+    let refDef1 = (new ReferenceDefinition).merge({suffix: {}});
+    expect(refDef1.logger).to.has.property('hasErrors', true);
   });
 
   it('ToQ transformation', () => {
@@ -29,6 +27,7 @@ describe('Unit test for ReferenceDefinition', () => {
     });
     simple._id = 'ref1';
 
+    expect(simple.logger).to.has.property('hasErrors', false);
     expect(simple.toQ()).to.be.deep.equal({
       id: 'ref1',
       title: 'title',

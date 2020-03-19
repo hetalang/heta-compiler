@@ -19,14 +19,15 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Create builder.', () => {
     let declaration = {
-      'id': 'test',
-      'builderVersion': '^0.4.21',
-      'options': {
-        'logLevel': 'error'
+      id: 'test',
+      builderVersion: '^0.4.21',
+      options: {
+        logLevel: 'error',
+        skipExport: true
       },
-      'importModule': {
-        'type': 'heta',
-        'source': 'src/index.heta'
+      importModule: {
+        type: 'heta',
+        source: 'src/index.heta'
       }
     };
     b = new Builder(declaration, 'cases/0-hello-world', '../../test/cases/1/dist');
@@ -34,7 +35,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run include', async () => {
-    await b.compileAsync();
+    await b.runAsync();
   });
 
   it('Run @SBMLExport, check and compare.', () => {

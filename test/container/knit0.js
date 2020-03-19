@@ -1,39 +1,56 @@
 /* global describe, it */
 const { Container } = require('../../src');
 const { expect } = require('chai');
-const { ValidationError, BindingError } = require('../../src/heta-error');
 
 describe('Check knitMany() for Species', () => {
-  let c = new Container();
-  c.load({
-    action: 'setNS',
-    space: 'one'
+  let c;
+  let sp1;
+
+  it('Initialize container', () => {
+    c = new Container();
+    c.load({
+      action: 'setNS',
+      space: 'one'
+    });
+    sp1 = c.load({
+      class: 'Species',
+      id: 'sp1',
+      space: 'one',
+      assignments: {start_ : 0}
+    });
+
+    expect(c.logger).to.have.property('hasErrors', false);
   });
-  let sp1 = c.load({
-    class: 'Species',
-    id: 'sp1',
-    space: 'one',
-    assignments: {start_ : 0}
-  });
+
   it('Set no compartment', () => {
-    expect(() => c.knitMany(), 'does not check empty property').throw(ValidationError);
+    c.logger.reset();
+    c.knitMany();
+    expect(c.logger).to.have.property('hasErrors', true);
   });
+
   it('Set lost ref', () => {
+    c.logger.reset();
     sp1.merge({
       compartment: 'comp1'
     });
-    expect(() => c.knitMany(), 'does not check lost ref').throw(BindingError);
+    c.knitMany();
+    expect(c.logger).to.have.property('hasErrors', true);
   });
+  
   it('Set wrong ref', () => {
+    c.logger.reset();
     c.load({
       class: 'Record',
       id: 'comp1',
       space: 'one',
       assignments: {ode_: 1}
     });
-    expect(() => c.knitMany()).throw(BindingError);
+    c.knitMany();
+    expect(c.logger).to.have.property('hasErrors', true);
   });
+
   it('Set good ref', () => {
+    c.logger.reset();
     c.load({
       class: 'Compartment',
       id: 'comp1',
@@ -58,13 +75,17 @@ describe('Check knitMany() for Reaction', () => {
       actors: 'A=>',
       assignments: {ode_: 1}
     });
+    expect(c.logger).to.have.property('hasErrors', false);
   });
   
   it('have lost ref', () => {
-    expect(() => c.knitMany(), 'does not check lost ref').throw(BindingError);
+    c.logger.reset();
+    c.knitMany();
+    expect(c.logger).to.have.property('hasErrors', true);
   });
   
   it('Set wrong ref', () => {
+    c.logger.reset();
     c.load({
       class: 'Record',
       id: 'A',
@@ -77,10 +98,12 @@ describe('Check knitMany() for Reaction', () => {
       space: 'one',
       assignments: {start_: 1.1}
     });
-    expect(() => c.knitMany()).throw(BindingError);
+    c.knitMany();
+    expect(c.logger).to.have.property('hasErrors', true);
   });
 
   it('Set good ref', () => {
+    c.logger.reset();
     c.load({
       class: 'Species',
       id: 'A',
@@ -89,6 +112,7 @@ describe('Check knitMany() for Reaction', () => {
       assignments: { ode_: 1 }
     });
     c.knitMany();
+    expect(c.logger).to.have.property('hasErrors', false);
     expect(r1.actors[0]).to.have.property('targetObj');
   });
 });

@@ -1,14 +1,12 @@
 /* global describe, it */
 const { Page } = require('../../src/core/page');
-const { ValidationError } = require('../../src/heta-error');
 const { expect } = require('chai');
 
 describe('Unit test for Page', () => {
 
   it('Incorrect content property', () => {
-    expect(() => {
-      (new Page).merge({content: {}});
-    }).to.throw(ValidationError);
+    let page1 = (new Page).merge({content: {}});
+    expect(page1.logger).to.has.property('hasErrors', true);
   });
 
   it('ToQ transformation', () => {
@@ -23,6 +21,7 @@ describe('Unit test for Page', () => {
     });
     simple._id = 'pg1';
 
+    expect(simple.logger).to.has.property('hasErrors', false);
     expect(simple.toQ()).to.be.deep.equal({
       id: 'pg1',
       title: 'title',

@@ -87,6 +87,7 @@ class Namespace extends Map {
       .value();
   }
   knit(){
+    this.logger.reset();
     this.toArray().forEach((component) => { // iterates all components
       let bindLogger = component.bind(this);
       this.logger.pushMany(bindLogger);

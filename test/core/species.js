@@ -40,10 +40,10 @@ describe('Testing dependOn() for Record and Species', () => {
     expect(deps3).to.have.members(['comp']);
     expect(deps4).to.be.lengthOf(1);
   });
-  it('Throws for Species when  isAmount=undefined and no compartment', () => {
+
+  it('Do not Throws for Species without compartment', () => {
     let species = new Species;
-    expect(() => {
-      species.dependOn('start_');
-    }).throw(BindingError);
+    let deps = species.dependOn('start_');
+    expect(deps).to.be.lengthOf(0);
   });
 });

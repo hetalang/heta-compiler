@@ -1,6 +1,4 @@
 /* global describe, it */
-
-const { ContainerError } = require('../../src/heta-error');
 const Container = require('../../src/container');
 const { expect } = require('chai');
 const { _Component } = require('../../src/core/_component');
@@ -29,6 +27,7 @@ describe('Unit tests for Container', () => {
         prefix: 'https://pubmed.org/',
         suffix: '/'
       });
+      expect(c.logger).to.have.property('hasErrors', false);
       expect(res).to.be.instanceOf(_Component);
       expect(c.length).to.be.eql(1);
 
@@ -52,6 +51,7 @@ describe('Unit tests for Container', () => {
         id: 'pmid2',
         prefix: 'https://google.com'
       });
+      expect(c.logger).to.have.property('hasErrors', false);
       let simple = c.namespaces.get('nameless').get('pmid2');
       expect(simple).to.have.property('prefix', 'https://google.com');
       expect(simple).to.have.property('space', 'nameless');
@@ -66,6 +66,7 @@ describe('Unit tests for Container', () => {
         prefix: 'xxx',
         suffix: '/'
       });
+      expect(c.logger).to.have.property('hasErrors', false);
       let component = c.namespaces.get('three').get('pmid4');
       expect(component).to.have.property('prefix', 'xxx');
       expect(component).to.have.property('space', 'three');
@@ -78,6 +79,7 @@ describe('Unit tests for Container', () => {
         id: 'pg1',
         space: 'another'
       });
+      expect(c.logger).to.have.property('hasErrors', false);
       let simple = c.namespaces.get('another').get('pg1');
       expect(simple).to.has.property('space', 'another');
       expect(c.length).to.be.eql(4);
@@ -154,17 +156,21 @@ describe('Unit tests for Container', () => {
 
   describe('Test insert() wrong.', () => {
     it('Insert wrong components.', () => {
-      expect(() => c.insert({})).to.throw(ContainerError);
-      expect(() => c.insert({id: 'pmid3'})).to.throw(ContainerError);
-      expect(() => c.insert({class: 'ReferenceDefinition'})).to.throw(ContainerError);
-      expect(() => c.insert({id: 'pmid3', class: 'ReferenceDefinition2'})).to.throw(ContainerError);
-      expect(() => c.insert({id: '1xxx', class: 'ReferenceDefinition'})).to.throw(ContainerError);
+      c.logger.reset();
+      c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
+      expect(c.logger).to.have.property('hasErrors', true);
+  
+      c.logger.reset();
+      c.insert({id: '1xxx', class: 'ReferenceDefinition'});
+      expect(c.logger).to.have.property('hasErrors', true);
 
-      expect(c.length).to.be.eql(9);
+      expect(c.length).to.be.eql(10);
     });
 
     it('Insert to wrong namespace', () => {
-      expect(() => c.insert({id: 'k1', class: 'Const', space: 'wrong', num: 1})).to.throw(Error);
+      c.logger.reset();
+      c.insert({id: 'k1', class: 'Const', space: 'wrong', num: 1});
+      expect(c.logger).to.have.property('hasErrors', true);
     });
   });
 });

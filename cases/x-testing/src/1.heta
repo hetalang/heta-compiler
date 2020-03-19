@@ -9,6 +9,7 @@ k3 @Const {
 spec1 @Species {
     compartment: c1
 };
+spec1 .= 0;
 
 Da @UnitDef {
     units: gram/mole

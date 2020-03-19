@@ -10,16 +10,18 @@ describe('TimeSwitcher errors', () => {
     c.loadMany([
       { id: 'sw1', class: 'TimeSwitcher', start: 'start' }
     ]);
+    c.knitMany();
 
-    expect(() => c.knitMany()).throw(BindingError);
+    expect(c.logger).to.has.property('hasErrors', true);
   });
   
   it('Wrong reference type', () => {
     let c = new Container();
 
-    expect(() => c.loadMany([
+    c.loadMany([
       { id: 'sw1', class: 'TimeSwitcher', start: {} }
-    ])).throw(ValidationError);
+    ]);
+    expect(c.logger).to.has.property('hasErrors', true);
   });
 
   it('No reference', () => {
@@ -29,6 +31,7 @@ describe('TimeSwitcher errors', () => {
       { id: 'start', class: 'Record', assignments: { start_: 12 } }
     ]);
 
-    expect(() => c.knitMany()).throw(BindingError);
+    c.knitMany();
+    expect(c.logger).to.has.property('hasErrors', true);
   });
 });
