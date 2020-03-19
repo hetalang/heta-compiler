@@ -1,12 +1,11 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
 const _ = require('lodash');
 require('./expression');
 
-class MrgsolveExport extends _Export{
-  merge(q={}, skipChecking){
+class MrgsolveExport extends _Export {
+  merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
 
     return this;
@@ -15,6 +14,7 @@ class MrgsolveExport extends _Export{
     return 'MrgsolveExport';
   }
   make(){
+    this.logger.reset();
     this._model_ = this._getMrgsolveImage();
 
     return [{
@@ -48,11 +48,11 @@ class MrgsolveExport extends _Export{
       }).forEach((record) => {
         let deps = record.dependOn('start_', true);
         let diff = _.intersection(dynamicIds, deps);
-        if(diff.length>0){
+        if (diff.length > 0) {
           let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
-          + `${record.id}$${record.space} []= ${record.assignments.start_.expr}`;
+            + `${record.id}$${record.space} []= ${record.assignments.start_.expr}`;
             
-          throw new ExportError(errorMsg);
+          this.logger.error(errorMsg, 'ExportError');
         }
       });
 

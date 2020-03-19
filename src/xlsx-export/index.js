@@ -1,6 +1,5 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-//const { ExportError } = require('../heta-error');
 const path = require('path');
 const XLSX = require('xlsx'); // see docs 
 const _ = require('lodash');
@@ -36,6 +35,7 @@ class XLSXExport extends _Export {
     XLSX.writeFile(wb, fullPath, {});
   }
   make(){
+    this.logger.reset();
     let sequense = [
       'on', 'action', 'class', 'space', 'id', 
       'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',

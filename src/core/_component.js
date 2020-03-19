@@ -21,6 +21,7 @@ class _Component {
     this.logger = new Logger();
   }
   merge(q = {}){
+    this.logger.reset();
     let validationLogger = _Component.isValid(q);
 
     this.logger.pushMany(validationLogger);

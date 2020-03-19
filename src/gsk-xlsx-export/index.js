@@ -1,5 +1,4 @@
 const Container = require('../container');
-//const { ExportError } = require('../heta-error');
 //const XLSX = require('xlsx'); // see docs https://docs.sheetjs.com/
 const _ = require('lodash');
 const { XLSXExport } = require('../xlsx-export');
@@ -15,6 +14,7 @@ class GSKXLSXExport extends XLSXExport {
     return 'GSKXLSXExport';
   }
   make(){
+    this.logger.reset();
     let qArr = this.namespace
       .toArray()
       .filter((x) => !x.isCore)

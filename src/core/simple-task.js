@@ -1,6 +1,5 @@
 const { _Component } = require('./_component');
 const _ = require('lodash');
-const { IndexedHetaError} = require('../heta-error');
 
 class SimpleTask extends _Component {
   merge(q = {}){
@@ -46,14 +45,14 @@ class SimpleTask extends _Component {
       this.subtasks.forEach((sub) => { // iterate through subtasks
         sub.output.forEach((out) => { // itrate through record refs
           let _record_ = namespace.get(out);
-          if(!_record_){
+          if (!_record_) {
             let msg = `Property "output" has lost reference for "${out}".`;
-            throw new IndexedHetaError(this.indexObj, msg);
-          }else if(_record_.instanceOf('Record')){
+            logger.error(msg, 'BindingError');
+          } else if (_record_.instanceOf('Record')){
             // do not attach
-          }else{
+          } else {
             let msg = `"output" prop must be reffered to Record but now on ${_record_.className}.`;
-            throw new IndexedHetaError(this.indexObj, msg);
+            logger.error(msg, 'BindingError')
           }
         });
       });

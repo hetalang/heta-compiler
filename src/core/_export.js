@@ -1,5 +1,4 @@
 const { _Component } = require('./_component');
-const { ExportError } = require('../heta-error');
 const path = require('path');
 const fs = require('fs-extra');
 
@@ -41,7 +40,7 @@ class _Export extends _Component {
     }]
   */
   make(){
-    throw new ExportError(`No method make() for "${this.clasName}"`);
+    throw new TypeError(`No method make() for "${this.className}"`);
   }
   /*
     save one or several output files to disk

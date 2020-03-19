@@ -81,6 +81,9 @@ class Logger {
   pushMany(logger = {logs: []}){
     this._logs = this._logs.concat(logger.logs);
   }
+  reset(){
+    this._logs = [];
+  }
 }
 
 module.exports = Logger;
