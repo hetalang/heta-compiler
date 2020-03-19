@@ -1,12 +1,15 @@
 const { _Component } = require('./_component');
 
 class Page extends _Component {
-  merge(q, skipChecking){
-    if(!skipChecking) Page.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Page.isValid(q);
 
-    if(q && q.content) this.content = q.content;
-
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.content) this.content = q.content;
+    }
+    
     return this;
   }
   toQ(options = {}){

@@ -61,6 +61,7 @@ class Container {
     this.logger.pushMany(logger);
     if (!logger.hasErrors) {
       let component = (new selectedClass(isCore)).merge(q);
+      this.logger.pushMany(component.logger);
       component._id = q.id;
       component.namespace = namespace; // set parent space directly to component
       namespace.set(q.id, component);
@@ -97,6 +98,7 @@ class Container {
     this.logger.pushMany(logger);
     if (!logger.hasErrors) {
       targetComponent.merge(q);
+      this.logger.pushMany(targetComponent.logger);
       return targetComponent;
     } else {
       this.logger.warn(`${ind} will not be updated.`);

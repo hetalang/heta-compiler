@@ -1,7 +1,7 @@
 const { _Size } = require('./_size');
 const { Expression } = require('./expression');
 const _ = require('lodash');
-const { ValidationError, BindingError } = require('../heta-error');
+const { BindingError } = require('../heta-error');
 
 /*
   record1 @Record {
@@ -15,27 +15,30 @@ class Record extends _Size {
     this.backReferences = []; // storing in format {process: r1, _process_: {}, stoichiometry: -1}
     this.assignments = {};
   }
-  merge(q = {}, skipChecking){
-    if(!skipChecking) Record.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Record.isValid(q);
 
-    if(q.assignments){ // add new assignments from q
-      let newAssignments = _.mapValues(q.assignments, (x) => {
-        if(typeof x === 'string' || typeof x === 'number' || 'expr' in x){
-          try{ // this is for the cases of wrong size structure
-            return Expression.fromString(x);
-          }catch(e){
-            throw new ValidationError(q, [], e.message + `: "${x.expr}"`);
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if (q.assignments) { // add new assignments from q
+        _.forOwn(q.assignments, (x, key) => {
+          if (typeof x === 'string' || typeof x === 'number' || 'expr' in x) {
+            try { // this is for the cases of wrong size structure
+              _.set(this.assignments, key, Expression.fromString(x));
+            } catch (e) {
+              let msg = this.index + ' '+ e.message + ` "${x.toString()}"`;
+              this.logger.error(msg, 'ValidationError');
+            }
+          } else {
+            throw new Error('Wrong expression argument.'); // if code is OK never throws
           }
-        }else{
-          throw new Error('Wrong expression argument.'); // if code is OK never throws
-        }
-      });
-      this.assignments = _.assign(this.assignments, newAssignments); // maybe clone is required
+        });
+      }
+  
+      if(q.boundary !== undefined) this.boundary = q.boundary;
     }
-
-    if(q.boundary !== undefined) this.boundary = q.boundary;
-
+    
     return this;
   }
   /** change referencies inside expression */

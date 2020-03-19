@@ -21,6 +21,7 @@ class HetaInfo extends _HetaLog {
     this.message = msg;
     this.type = type;
     this.level = 'info';
+    this.color = 'blue';
   }
 }
 

@@ -1,8 +1,10 @@
 k1 @Const = 2;
+k2 @Const = 1;
 
-#setNS { space: one };
-
-#import one::k2 {
-    fromId: k,
-    fromSpace: nameless
+k3 @Const {
+    num: 1,
+    title: "[]"
 };
+
+p1 @Record .= 0;
+p1 := (1*2;

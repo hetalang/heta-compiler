@@ -11,12 +11,15 @@ const { BindingError } = require('../heta-error');
   };
 */
 class Species extends Record {
-  merge(q, skipChecking){
-    if(!skipChecking) Species.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Species.isValid(q);
 
-    if(q.compartment!==undefined) this.compartment = q.compartment;
-    if(q.isAmount!==undefined) this.isAmount = q.isAmount;
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if (q.compartment !== undefined) this.compartment = q.compartment;
+      if (q.isAmount !== undefined) this.isAmount = q.isAmount;
+    }
 
     return this;
   }

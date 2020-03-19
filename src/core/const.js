@@ -8,12 +8,15 @@ const { _Size } = require('./_size');
 */
 
 class Const extends _Size { // implicit extend Numeric
-  merge(q, skipChecking){
-    if(!skipChecking) Const.isValid(q);
-    super.merge(q, skipChecking);
+  merge(q = {}){
+    super.merge(q);
+    let validationLogger = Const.isValid(q);
 
-    if(q.num!==undefined) this.num = q.num;
-    this.free = q.free ? q.free : false;
+    this.logger.pushMany(validationLogger);
+    if (!validationLogger.hasErrors) {
+      if(q.num!==undefined) this.num = q.num;
+      this.free = q.free ? q.free : false;
+    }
 
     return this;
   }
