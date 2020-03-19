@@ -1,7 +1,6 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('../nunjucks-env');
-const { ExportError } = require('../heta-error');
 const _ = require('lodash');
 require('./expression');
 
@@ -23,6 +22,7 @@ class SLVExport extends _Export{
    * @return {string} Text code of exported format.
    */
   make(){
+    this.logger.reset();
     this._model_ = this._getSLVImage();
 
     return [{
@@ -81,12 +81,12 @@ class SLVExport extends _Export{
     let startExpressions = model.population
       .selectRecordsByContext('start_')
       .filter((record) => record.assignments.start_.num===undefined); // check if it is not Number
-    if(startExpressions.length > 0){
+    if (startExpressions.length > 0) {
       let errorMsg = 'DBSolve does not support expressions string in InitialValues.\n'
         + startExpressions
           .map((x) => `${x.index} []= ${x.assignments.start_.expr}`)
           .join('\n');
-      throw new ExportError(errorMsg);
+      this.logger.error(errorMsg, 'ExportError');
     }
 
     // create TimeEvents
@@ -106,13 +106,13 @@ class SLVExport extends _Export{
             let [multiply, add] = expression
               .linearizeFor(record.id)
               .map((tree) => {
-                if(tree.isSymbolNode){ // a is symbol case, i.e. 'p1'
+                if (tree.isSymbolNode) { // a is symbol case, i.e. 'p1'
                   return tree.toString();
-                }else{
-                  try{ // a can be evaluated, i.e. '3/4'
+                } else {
+                  try { // a can be evaluated, i.e. '3/4'
                     return tree.eval();
-                  }catch(e){ // other cases, i.e. 'p1*2'
-                    throw new ExportError(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`);
+                  } catch (e) { // other cases, i.e. 'p1*2'
+                    this.logger.error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, 'ExportError');
                   }
                 }
               });
@@ -144,8 +144,8 @@ class SLVExport extends _Export{
     let bagSwitchers = model.population
       .selectByClassName('CondSwitcher')
       .map((switcher) => switcher.id);
-    if(bagSwitchers.length>0){
-      throw new ExportError('CondSwitcher is not supported in SLVExport: ' + bagSwitchers);
+    if(bagSwitchers.length > 0){
+      this.logger.error('CondSwitcher is not supported in SLVExport: ' + bagSwitchers, 'ExportError');
     }
     
     return model;

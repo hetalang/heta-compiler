@@ -1,6 +1,5 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-//const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
 const fs = require('fs');
 const path = require('path');
@@ -21,6 +20,7 @@ class SimbioExport extends _Export{
     return 'SimbioExport';
   }
   make(){
+    this.logger.reset();
     this.image = this._getSimbioImage();
 
     return [

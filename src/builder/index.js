@@ -74,7 +74,7 @@ class Builder {
     return;
   }
   async exportManyAsync(){
-    if(!this.options.skipExport){
+    if (!this.options.skipExport) {
       let exportElements = this.container
         .toArray()
         .filter((obj) => obj.instanceOf('_Export'));
@@ -82,14 +82,11 @@ class Builder {
 
       let tmp = exportElements.map(async (exportItem) => {
         this.logger.info(`Exporting "${exportItem.index}" component of type "${exportItem.className}"...`);
-        try{
-          exportItem.makeAndSave(this._distDirname);
-        }catch(e){
-          this.logger.error(e.message, 'ExportError');
-        }
+        exportItem.makeAndSave(this._distDirname);
+        this.logger.pushMany(exportItem.logger);
       });
       await Promise.all(tmp);
-    }else{
+    } else {
       this.logger.warn('Exporting skipped as stated in declaration.');
     }
   }

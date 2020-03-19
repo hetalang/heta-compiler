@@ -1,6 +1,5 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-//const { ExportError } = require('../heta-error');
 const nunjucks = require('../nunjucks-env');
 require('./expression');
 const legalUnits = require('./legal-units');
@@ -15,6 +14,7 @@ class SBMLExport extends _Export {
     return 'SBMLExport';
   }
   make(){
+    this.logger.reset();
     this.image = this._getSBMLImage();
 
     return [{
