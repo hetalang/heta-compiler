@@ -62,11 +62,11 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(queue, false);
-    this.logger.pushMany(this.container.logger);
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.knitMany();
+    this.logger.pushMany(this.container.logger);
     
     // 5. Exports
     await this.exportManyAsync();

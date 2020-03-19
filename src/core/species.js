@@ -1,6 +1,5 @@
 const { Record } = require('./record');
 const _ = require('lodash');
-const { BindingError } = require('../heta-error');
 
 /* 
   Species class
@@ -49,12 +48,13 @@ class Species extends Record {
     }
   }
   dependOn(context, includeCompatment = false){
-    if(!this.isAmount && this.compartment === undefined)
-      throw new BindingError(this.index, [], 'compartment should be set for Species when isAmount=false');
     let deps = super.dependOn(context);
-    if (includeCompatment && !this.isAmount && !this.isRule) {
-      deps.push(this.compartment);
-    }
+
+    let useCompartment = includeCompatment 
+      && this.compartment !== undefined 
+      && !this.isAmount 
+      && !this.isRule;
+    if (useCompartment) deps.push(this.compartment);
 
     return deps;
   }

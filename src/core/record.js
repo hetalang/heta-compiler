@@ -1,7 +1,6 @@
 const { _Size } = require('./_size');
 const { Expression } = require('./expression');
 const _ = require('lodash');
-const { BindingError } = require('../heta-error');
 
 /*
   record1 @Record {
@@ -64,16 +63,15 @@ class Record extends _Size {
       });
     }
   }
-  bind(namespace, skipErrors = false){
-    super.bind(namespace, skipErrors);
-
-    let messages = [];
+  bind(namespace){
+    let logger = super.bind(namespace);
 
     // check initialization
     let hasInit = _.get(this, 'assignments.start_') !== undefined
       || _.get(this, 'assignments.ode_') !== undefined;
     if (!hasInit) {
-      throw new BindingError(`Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`);
+      let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`
+      logger.error(msg, 'BindingError');
     }
     
     // check math expression refs
@@ -84,17 +82,18 @@ class Record extends _Size {
           let target = namespace.get(id);
 
           if(!target){
-            messages.push(`Component "${id}" is not found in space "${this.space}" as expected in expression: `
-                  + `${this.index} [${key}]= ${mathExpr.expr};`);
+            let msg = `Component "${id}" is not found in space "${this.space}" as expected in expression: `
+                  + `${this.index} [${key}]= ${mathExpr.toString()};`;
+            logger.error(msg, 'BindingError');
           }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
-            messages.push(`Component "${id}" is not a Const or Record class as expected in expression: `
-              + `${this.index} [${key}]= ${mathExpr.expr};`);
+            let msg = `Component "${id}" is not a Const or Record class as expected in expression: `
+              + `${this.index} [${key}]= ${mathExpr.toString()};`;
+            logger.error(msg, 'BindingError');
           }
         });
     });
 
-    if(messages.length>0 && !skipErrors)
-      throw new BindingError(this.index, messages, 'References error in expressions:');
+    return logger;
   }
   toQ(options = {}){
     let res = super.toQ(options);

@@ -1,12 +1,13 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
+const Logger = require('./logger');
 
 class Namespace extends Map {
   constructor(spaceName){
     super();
     //if (typeof spaceName !== 'string')
     //  throw new TypeError(`spaceName argument must be string, got ${spaceName}`);
-
+    this.logger = new Logger();
     this._spaceName = spaceName;
   }
   get isAbstract(){
@@ -85,11 +86,12 @@ class Namespace extends Map {
       .map((record) => record.unitsSBML())
       .value();
   }
-  knit(skipErrors = false){
+  knit(){
     this.toArray().forEach((component) => { // iterates all components
-      component.bind(this, skipErrors);
+      let bindLogger = component.bind(this);
+      this.logger.pushMany(bindLogger);
     });
-
+    
     return this;
   }
 }
