@@ -1,6 +1,5 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
-const { BindingError } = require('../heta-error');
 const _ = require('lodash');
 const { flatten } = require('./utilities');
 const Logger = require('../logger');
@@ -155,18 +154,20 @@ class _Component {
     - check properties based on requirements(): required, find by symbol link
     - create virtual component if local prop refferences to global component
   */
-  bind(namespace, skipErrors = false){
-    if(!namespace) throw new TypeError('"namespace" argument should be set.');
+  bind(namespace){
+    let logger = new Logger();
+    if(!namespace)
+      throw new TypeError('"namespace" argument should be set.');
     
     const iterator = (item, path, rule) => {
       let targetId = _.get(this, path);
       let target = namespace.get(targetId);
 
-      if(!target){
-        throw new BindingError(this.index, [], `Property "${path}" has lost reference "${targetId}".`);
-      }else if(rule.targetClass && !target.instanceOf(rule.targetClass)){
-        throw new BindingError(this.index, [], `"${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`);
-      }else{
+      if (!target) {
+        logger.error(this.index + ` Property "${path}" has lost reference "${targetId}".`, 'BindingError');
+      } else if(rule.targetClass && !target.instanceOf(rule.targetClass)) {
+        logger.error(this.index + ` "${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`, 'BindingError');
+      } else {
         // set direct ref
         if(rule.setTarget) _.set(this, path + 'Obj', target);
         // add back references for Record from Process XXX: ugly solution
@@ -185,7 +186,7 @@ class _Component {
     _.each(req, (rule, prop) => { // iterates through rules
       // required: true
       if(rule.required && !_.has(this, prop)){
-        throw new TypeError(`No required "${prop}" property for ${this.className}.`);
+        logger.error(`No required "${prop}" property for ${this.className}.`, 'BindingError');
       }
       // isReference: true + className
       if(rule.isReference && _.has(this, prop)){
@@ -201,6 +202,8 @@ class _Component {
         }
       }
     });
+    
+    return logger;
   }
   toQ(options = {}){
     let res = {};

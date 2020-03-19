@@ -38,8 +38,8 @@ class SimpleTask extends _Component {
     
     return this;
   }
-  bind(namespace, skipErrors = false){
-    super.bind(namespace, skipErrors);
+  bind(namespace){
+    let logger = super.bind(namespace);
 
     // check output refs in SimpleTasks XXX: it seems to be working but ugly and without iterativity
     if(this instanceof SimpleTask && this.subtasks){
@@ -58,6 +58,8 @@ class SimpleTask extends _Component {
         });
       });
     }
+
+    return logger;
   }
   toQ(options = {}){
     let res = super.toQ(options);

@@ -351,11 +351,12 @@ class Container {
     return _.sumBy([...this.namespaces], (x) => x[1].size);
   }
   // check all namespaces
-  knitMany(skipErrors = false){
+  knitMany(){
     [...this.namespaces].forEach((x) => {
       let ns = x[1];
       // knit only concrete namespace
-      if (!ns.isAbstract) ns.knit(skipErrors);
+      if (!ns.isAbstract) ns.knit();
+      this.logger.pushMany(ns.logger);
     });
 
     return this;

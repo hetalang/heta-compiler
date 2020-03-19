@@ -1,6 +1,5 @@
 const { _Component } = require('./_component');
 const { Unit } = require('./unit');
-const { BindingError } = require('../heta-error');
 
 /*
   Abstract class _Size
@@ -40,21 +39,21 @@ class _Size extends _Component {
     }
   }
   /** Additional check of units items */
-  bind(namespace, skipErrors = false){
-    super.bind(namespace, skipErrors);
-
-    let messages = [];
+  bind(namespace){
+    let logger = super.bind(namespace);
 
     if (this.unitsParsed){
       this.unitsParsed.forEach((x) => {
         let target = namespace.get(x.kind);
         
         if(!target){
-          messages.push(`Unit "${x.kind}" is not found as expected here: `
-            + `${this.index} { unit: ${this.units} };`);
+          let msg = `Unit "${x.kind}" is not found as expected here: `
+            + `${this.index} { unit: ${this.units} };`;
+          logger.error(msg, 'BindingError');
         }else if(!target.instanceOf('UnitDef')){
-          messages.push(`Unit "${x.kind}" is not of UnitDef class as expected here: `
-            + `${this.index} { unit: ${this.units} };`);
+          let msg = `Unit "${x.kind}" is not of UnitDef class as expected here: `
+            + `${this.index} { unit: ${this.units} };`;
+          logger.error(msg, 'BindingError');
         }else{
           // kindObj can be set here
           x.kindObj = target;
@@ -62,8 +61,7 @@ class _Size extends _Component {
       });
     }
     
-    if(messages.length>0 && !skipErrors)
-      throw new BindingError(this.index, messages, 'References error in units:');
+    return logger;
   }
   /* used only in sbml */
   unitsSBML(){
