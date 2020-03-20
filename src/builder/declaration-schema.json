@@ -27,7 +27,8 @@
       "additionalProperties": true,
       "properties": {
         "debuggingMode": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
-        "logs": {"type": "string"},
+        "logMode": {"type": "string", "default": "none", "enum": ["error", "always", "none"]},
+        "logPath": {"type": "string", "default": "build.log"},
         "logLevel": {"type": "string"},
         "skipExport": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },

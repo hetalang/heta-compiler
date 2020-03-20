@@ -1,5 +1,5 @@
 const path = require('path');
-//const fs = require('fs-extra');
+const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
@@ -40,6 +40,7 @@ class Builder {
     this._coreDirname = path.resolve(coreDirname);
     this._distDirname = path.resolve(coreDirname, (distDir || declaration.options.distDir || 'dist'));
     this._metaDirname = path.resolve(coreDirname, (metaDir || declaration.options.metaDir || 'meta'));
+    this._logPath = path.resolve(coreDirname, declaration.options.logPath);
 
     // create container
     this.container = new Container();
@@ -72,6 +73,13 @@ class Builder {
     
     // 5. Exports
     this.exportMany();
+
+    // 6.save logs if required
+    let createLog = this.options.logMode === 'always' 
+      || (this.options.logMode === 'error' && this.logger.hasErrors);
+    if (createLog) {
+      fs.outputFileSync(this._logPath, this.logger.toString(false));
+    }
     
     return;
   }

@@ -5,14 +5,18 @@ const colors = require('colors');
 */
 
 class _HetaLog {
-  toString(){
-    let levelColored = this.color
-      ? colors[this.color](`[${this.level}]`)
-      : `[${this.level}]`;
+  toString(useColour = true){
+    if (useColour) {
+      var levelString = this.color
+        ? colors[this.color](`[${this.level}]`)
+        : `[${this.level}]`;
+    } else{
+      levelString = `[${this.level}]`;
+    }
     let errorType = this.type !== undefined
       ? `(${this.type})`
       : '';
-    return `${levelColored}: ${errorType} ${this.message}`;
+    return `${levelString}: ${errorType} ${this.message}`;
   }
 }
 
@@ -77,12 +81,12 @@ class Logger {
     let numberOfErrors = this._logs.filter((log) => log.level === 'error');
     return numberOfErrors.length > 0;
   }
-  list(){
+  list(useColour = true){
     return this._logs
-      .map((log) => log.toString());
+      .map((log) => log.toString(useColour));
   }
-  toString(){
-    return this.list().join('\n');
+  toString(useColour = true){
+    return this.list(useColour).join('\n');
   }
   pushMany(logger = {logs: []}){
     this._logs = this._logs.concat(logger.logs);

@@ -1,5 +1,7 @@
 id: mm
 builderVersion: ^0.4
+options:
+  logMode: error
 importModule:
   type: heta
   source: src/index.heta

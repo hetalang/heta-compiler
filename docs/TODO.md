@@ -37,4 +37,5 @@
 1. logPath: true/path/log.log
 1. logFormat: json, text
 1. contact the developers if JS error
-1. declaration: "options.debuggingMode", "options.logs", "options.logLevel", "options.metaDir"
+1. declaration: "options.debuggingMode", "options.metaDir"
+1. declaration: "options.exitWithoutError" with default false

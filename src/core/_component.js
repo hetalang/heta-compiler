@@ -142,7 +142,7 @@ class _Component {
     let valid = validate(q);
     if (!valid) {
       let msg = `${ind} Some of properties do not satisfy requirements for class "${this.schemaName}"\n`
-        + validate.errors.map((x, i) => `\t${i+1}. ${x.dataPath} ${x.message}`)
+        + validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');
       validationLogger.error(msg, 'ValidationError');
       validationLogger.warn('Some of component properties will not be updated.');
