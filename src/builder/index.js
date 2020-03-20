@@ -43,10 +43,8 @@ class Builder {
     this.container = new Container();
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
   }
-  async runAsync(){
+  run(){
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
-    let ms = new ModuleSystem();
-    let absFilename = path.join(this._coreDirname, this.importModule.source);
     
     // 0. Load core components
     this.logger.info('Loading core components, total count: ' + coreComponents.length);
@@ -54,6 +52,8 @@ class Builder {
     this.logger.pushMany(this.container.logger);
 
     // 1. Parsing
+    let ms = new ModuleSystem();
+    let absFilename = path.join(this._coreDirname, this.importModule.source);
     ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
     this.logger.pushMany(ms.logger);
 
@@ -69,23 +69,23 @@ class Builder {
     this.logger.pushMany(this.container.logger);
     
     // 5. Exports
-    await this.exportManyAsync();
+    this.exportMany();
     
     return;
   }
-  async exportManyAsync(){
+  exportMany(){
     if (!this.options.skipExport) {
       let exportElements = this.container
         .toArray()
         .filter((obj) => obj.instanceOf('_Export'));
       this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
-      let tmp = exportElements.map(async (exportItem) => {
-        this.logger.info(`Exporting "${exportItem.index}" component of type "${exportItem.className}"...`);
+      exportElements.forEach((exportItem) => {
+        let msg = `Exporting "${exportItem.index}" component of type "${exportItem.className}"...`;
+        this.logger.info(msg);
         exportItem.makeAndSave(this._distDirname);
         this.logger.pushMany(exportItem.logger);
       });
-      await Promise.all(tmp);
     } else {
       this.logger.warn('Exporting skipped as stated in declaration.');
     }

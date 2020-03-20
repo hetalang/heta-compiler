@@ -5,9 +5,9 @@ const { expect } = require('chai');
 
 describe('Test Builder.', () => {
   let b;
-  it('Create Builder object and run.', async () => {
+  it('Create Builder object and run.', () => {
     b = new Builder(declaration, __dirname);
-    await b.runAsync();
+    b.run();
   });
 });
 

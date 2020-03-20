@@ -29,8 +29,8 @@ describe('Testing "cases/7-importNS"', () => {
     //console.log(b);
   });
 
-  it('Run include', async () => {
-    await b.runAsync();
+  it('Run include', () => {
+    b.run();
   });
 /*
   it('Run @SBMLExport, check and compare.', () => {

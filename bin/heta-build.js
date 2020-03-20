@@ -29,18 +29,16 @@ if (index!==-1) {
   let declaration = safeLoad(declarationText);
   var builder = new Builder(declaration, targetDir);
 
-  builder.runAsync().then(() => {
-    if (builder.logger.hasErrors) {
-      console.log('Compilation ERROR! See logs.');
-      process.exit(1);
-    } else {
-      console.log('Compilation OK!');
-      process.exit(0);
-    }
-  }, (err) => {
-    console.log(err); // JS error
+  builder.run();
+  
+  if (builder.logger.hasErrors) {
+    console.log('Compilation ERROR! See logs.');
     process.exit(1);
-  });
+  } else {
+    console.log('Compilation OK!');
+    process.exit(0);
+  }
+
 } else {
   console.log( // builder initialization error(no builder file)
     'STOP! Declaration file is not found in\n',

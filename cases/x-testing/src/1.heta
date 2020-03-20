@@ -7,7 +7,7 @@ k3 @Const {
 };
 
 spec1 @Species {
-    compartment: c1
+    compartment: {}
 };
 spec1 .= 0;
 

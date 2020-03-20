@@ -3,14 +3,24 @@ const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
 
 _Module.prototype.setXLSXModule = function(){
+  // default results
+  let rawData = [];
   // TODO: checking arguments is required
   const options = _.defaults(this.options, {
     sheet: 1,
     omitRows: 0
   });
 
-  let rawData = convertExcelSync(this.filename, null, { sheet: options.sheet, omitEmptyFields: true });
-  rawData.splice(0, options.omitRows); // remove rows
+  try {
+    rawData = convertExcelSync(
+      this.filename, 
+      null, 
+      { sheet: options.sheet, omitEmptyFields: true }
+    );
+    rawData.splice(0, options.omitRows); // remove rows
+  } catch (e) {
+    this.logger.error(e.message, 'ModuleError');
+  }
 
   let dataFiltered = rawData
     .filter((x) => x.on) // ignore rows
@@ -42,12 +52,13 @@ _Module.prototype.setXLSXModule = function(){
         } else { // for others
           return value;
         }
-      }
+      };
 
       return _.mapValues(cleaned, booleanConverter);
     });
 
   this.parsed = dataFiltered;
+
   return this;
 };
 

@@ -7,7 +7,7 @@ const expected = require('./expected');
 const noImportOutput = require('./no-include');
 
 describe('ModuleSystem without include.', () => {
-  it('Add module.', async () => {
+  it('Add module.', () => {
     let ms = new ModuleSystem();
     let filepath = path.join(__dirname, 'no-include.heta');
     let mdl = ms.addModuleDeep(filepath, 'heta', {});
