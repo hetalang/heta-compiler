@@ -26,13 +26,14 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "debuggingMode": {"type": "boolean", "default": false},
+        "debuggingMode": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
         "logs": {"type": "string"},
-        "logLevel": {"type": "string", "enum": ["error", "warn", "info", "verbose", "debug", "silly"]},
+        "logLevel": {"type": "string", "enum": ["error", "warn", "info", "debug"]},
         "skipExport": {"type": "boolean", "default": false},
-        "distDir": {"type": "string", "default": "dist" }
+        "distDir": {"type": "string", "default": "dist" },
+        "metaDir": {"type": "string", "default": "meta" }
       },
-      "default": {"debuggingMode": false, "syncMode": false, "logLevel": "info"}
+      "default": {"debuggingMode": false, "logLevel": "info"}
     },
     "scripts": {
       "type": "object",
@@ -48,9 +49,8 @@
       "required": ["type", "source"],
       "additionalProperties": false,
       "properties": {
-        "type": {"type": "string", "enum": ["heta", "yaml", "slv", "json", "sbml", "xlsx"]},
+        "type": {"type": "string", "enum": ["heta", "xlsx", "json", "yaml", "sbml"]},
         "source": {"type": "string"},
-        "ignoreDeps": {"type": "boolean", "default": false},
         "sheet": { "type": "integer" },
         "omitRows": { "type": "integer" }
       }

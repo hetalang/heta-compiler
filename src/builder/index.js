@@ -11,13 +11,13 @@ const coreComponents = require('../core-components');
 const Logger = require('../logger');
 
 class Builder {
-  constructor(decl, coreDirname='.', distDir, metaDirname = 'meta'){
+  constructor(declaration, coreDirname = '.', distDir, metaDir){
     // set logger
     this.logger = new Logger();
 
     // check based on schema
     let validate = ajv.compile(declarationSchema);
-    let valid = validate(decl);
+    let valid = validate(declaration);
     if(!valid) {
       // convert validation errors to heta errors
       validate.errors.forEach((x) => {
@@ -27,18 +27,17 @@ class Builder {
     }
 
     // version check and throws
-    let satisfiesVersion = semver.satisfies(version, decl.builderVersion);
+    let satisfiesVersion = semver.satisfies(version, declaration.builderVersion);
     if(!satisfiesVersion){
-      this.logger.error(`Version of declaration file "${decl.builderVersion}" does not satisfy current builder.`, 'BuilderError');
+      this.logger.error(`Version of declaration file "${declaration.builderVersion}" does not satisfy current builder.`, 'BuilderError');
       throw new Error('Builder is not created. See logs.');
     }
     // assignments
-    Object.assign(this, decl);
+    Object.assign(this, declaration);
     this._coreDirname = path.resolve(coreDirname);
-    let distDirname = distDir || decl.options.distDir;
-    this._distDirname = path.resolve(coreDirname, distDirname);
-    this._metaDirname = path.resolve(coreDirname, metaDirname);
-
+    this._distDirname = path.resolve(coreDirname, (distDir || declaration.options.distDir || 'dist'));
+    this._metaDirname = path.resolve(coreDirname, (metaDir || declaration.options.metaDir || 'meta'));
+ 
     // create container
     this.container = new Container();
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
