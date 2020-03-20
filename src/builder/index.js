@@ -9,10 +9,13 @@ const Container = require('../container');
 const ModuleSystem = require('../module-system');
 const coreComponents = require('../core-components');
 const Logger = require('../logger');
+const _ = require('lodash');
 
 class Builder {
   constructor(declaration, coreDirname = '.', distDir, metaDir){
     // set logger
+    let logLevel = _.get(declaration, 'options.logLevel', 'info');
+    global.showLogLevel = ['debug', 'info', 'warn', 'error', 'panic'].indexOf(logLevel);
     this.logger = new Logger();
 
     // check based on schema
@@ -37,7 +40,7 @@ class Builder {
     this._coreDirname = path.resolve(coreDirname);
     this._distDirname = path.resolve(coreDirname, (distDir || declaration.options.distDir || 'dist'));
     this._metaDirname = path.resolve(coreDirname, (metaDir || declaration.options.metaDir || 'meta'));
- 
+
     // create container
     this.container = new Container();
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);

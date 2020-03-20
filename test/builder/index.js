@@ -14,12 +14,12 @@ describe('Test Builder.', () => {
 describe('Errors in declaration.', () => {
   it('Empty declaration throws.', () => {
     expect(() => {
-      new Builder({});
+      new Builder({options: {logLevel: 'panic'}});
     }).to.throw(BuilderError);
   });
   it('Wrong prop type.', () => {
     expect(() => {
-      new Builder({id: 'test', notes: 1.1});
+      new Builder({id: 'test', notes: 1.1, options: {logLevel: 'panic'}});
     }).to.throw(BuilderError);
   });
   it('Wrong version format.', () => {

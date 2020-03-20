@@ -28,7 +28,7 @@
       "properties": {
         "debuggingMode": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
         "logs": {"type": "string"},
-        "logLevel": {"type": "string", "enum": ["error", "warn", "info", "debug"]},
+        "logLevel": {"type": "string"},
         "skipExport": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "metaDir": {"type": "string", "default": "meta" }

@@ -1,0 +1,1 @@
+global.showLogLevel = 99;

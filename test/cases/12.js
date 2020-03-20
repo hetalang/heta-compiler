@@ -18,7 +18,7 @@ describe('Testing "cases/12-to-sbml"', () => {
       id: 'test',
       builderVersion: '^0.4.21',
       options: {
-        logLevel: 'error',
+        logLevel: 'panic',
         skipExport: true
       },
       importModule: {

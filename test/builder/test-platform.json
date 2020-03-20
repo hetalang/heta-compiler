@@ -10,7 +10,7 @@
     "debuggingMode": true,
     "syncMode": false,
     "logs": "logs.txt",
-    "logLevel": "info"
+    "logLevel": "panic"
   },
   "scripts": {
     "afterInit": "script0.js",

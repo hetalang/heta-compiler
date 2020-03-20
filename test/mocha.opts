@@ -1,0 +1,3 @@
+--globals global
+--require ./test/setup
+--require chai

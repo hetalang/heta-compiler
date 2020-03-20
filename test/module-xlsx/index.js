@@ -9,7 +9,7 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'error' },
+      options: { logLevel: 'panic' },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
@@ -28,7 +28,7 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'error' },
+      options: { logLevel: 'panic' },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
@@ -46,7 +46,7 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'error', debuggingMode: false },
+      options: { logLevel: 'panic', debuggingMode: false },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',

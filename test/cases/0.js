@@ -22,7 +22,7 @@ describe('Testing "cases/0-hello-world"', () => {
       id: 'test',
       builderVersion: '^0.4.21',
       options: {
-        logLevel: 'error',
+        logLevel: 'panic',
         skipExport: true
       },
       importModule: {

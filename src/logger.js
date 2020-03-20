@@ -1,3 +1,4 @@
+
 const colors = require('colors');
 /*
   Class describing Heta logs
@@ -21,6 +22,7 @@ class HetaInfo extends _HetaLog {
     this.message = msg;
     this.type = type;
     this.level = 'info';
+    this.levelNum = 1;
     this.color = 'blue';
   }
 }
@@ -31,6 +33,7 @@ class HetaWarn extends _HetaLog {
     this.message = msg;
     this.type = type;
     this.level = 'warn';
+    this.levelNum = 2;
     this.color = 'yellow';
   }
 }
@@ -41,13 +44,15 @@ class HetaError extends _HetaLog {
     this.message = msg;
     this.type = type;
     this.level = 'error';
+    this.levelNum = 3;
     this.color = 'red';
   }
 }
 
+// XXX: global.showLogLevel is ugly solution but i dont know how to do this
 class Logger {
-  constructor(showLog = true){
-    this._showLog = showLog;
+  constructor(showLogLevel = global.showLogLevel || 0){
+    this.showLogLevel = showLogLevel;
     this._logs = [];
   }
   get logs(){
@@ -55,17 +60,17 @@ class Logger {
   }
   info(msg, type){
     let info = new HetaInfo(msg, type);
-    if (this._showLog) console.log(info.toString());
+    if (this.showLogLevel <= 1) console.log(info.toString());
     this._logs.push(info);
   }
   warn(msg, type){
     let warn = new HetaWarn(msg, type);
-    if (this._showLog) console.log(warn.toString());
+    if (this.showLogLevel <= 2) console.log(warn.toString());
     this._logs.push(warn);
   }
   error(msg, type){
     let error = new HetaError(msg, type);
-    if (this._showLog) console.log(error.toString());
+    if (this.showLogLevel <= 3) console.log(error.toString());
     this._logs.push(error);
   }
   get hasErrors(){
@@ -73,7 +78,8 @@ class Logger {
     return numberOfErrors.length > 0;
   }
   list(){
-    return this._logs.map((log) => log.toString());
+    return this._logs
+      .map((log) => log.toString());
   }
   toString(){
     return this.list().join('\n');

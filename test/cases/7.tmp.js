@@ -17,7 +17,7 @@ describe('Testing "cases/7-importNS"', () => {
       id: 'test',
       builderVersion: '^0.4.21',
       options: {
-        logLevel: 'error',
+        logLevel: 'panic',
         skipExport: true
       },
       importModule: {
