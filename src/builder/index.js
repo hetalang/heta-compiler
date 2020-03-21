@@ -61,6 +61,15 @@ class Builder {
     this.logger.pushMany(ms.logger);
 
     // 2. Modules integration
+    if (this.options.debuggingMode) {
+      _.forOwn(ms.moduleCollection, (value) => {
+        let relPath = path.relative(this._coreDirname, value.filename);
+        let absPath = path.join(this._metaDirname, relPath);
+        let str = JSON.stringify(value.parsed, null, 2);
+        fs.outputFileSync(absPath, str);
+        this.logger.info(`Meta file was saved to ${absPath}`);
+      });
+    }
     let queue = ms.integrate();
 
     // 3. Translation

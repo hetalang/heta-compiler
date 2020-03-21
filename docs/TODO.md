@@ -31,11 +31,10 @@
 1. FunctionDefinition + function checking
 1. CondSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
-1. running heta without platform.js
+
+1. running Heta without platform.js
 1. heta update => npm i heta-compiler
 1. heta-compiler installer
-1. logPath: true/path/log.log
-1. logFormat: json, text
 1. contact the developers if JS error
-1. declaration: "options.debuggingMode", "options.metaDir"
+1. *declaration: "options.debuggingMode", "options.metaDir"
 1. declaration: "options.exitWithoutError" with default false
