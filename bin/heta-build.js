@@ -14,7 +14,7 @@ program
   .usage('[options] [dir]')
   .option('-d, --declaration <filename>', 'platform declaration file, search extensions: ["", ".json", ".json5", ".yml"]', 'platform')
   .option('--skip-export', 'do not export files to local directory')
-  .option('--log-mode <never|error|always>', 'When to create log file.', 'never')
+  .option('--log-mode <never|error|always>', 'When to create log file.')
   .parse(process.argv);
 
 // set target directory of platform

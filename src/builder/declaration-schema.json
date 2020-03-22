@@ -49,7 +49,7 @@
     "importModule": {
       "type": "object",
       "required": ["type", "source"],
-      "additionalProperties": false,
+      "additionalProperties": true,
       "properties": {
         "type": {"type": "string", "enum": ["heta", "xlsx", "json", "yaml", "sbml"]},
         "source": {"type": "string"},

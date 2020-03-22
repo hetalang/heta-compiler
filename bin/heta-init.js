@@ -34,8 +34,7 @@ const defaultPlatform = {
   //},
   importModule: {
     type: 'heta',
-    source: 'src/index.heta',
-    ignoreDeps: false
+    source: 'src/index.heta'
   }
 };
 
