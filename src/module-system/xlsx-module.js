@@ -19,7 +19,8 @@ _Module.prototype.setXLSXModule = function(){
     );
     rawData.splice(0, options.omitRows); // remove rows
   } catch (e) {
-    this.logger.error(e.message, 'ModuleError');
+    let msg = e.message + ` when converting module "${this.filename}"`;
+    this.logger.error(msg, 'ModuleError');
   }
 
   let dataFiltered = rawData

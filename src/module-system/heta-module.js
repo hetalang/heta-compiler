@@ -7,7 +7,9 @@ _Module.prototype.setHetaModule = function(){
     let fileContent = fs.readFileSync(this.filename, 'utf8');
     this.parsed = _hetaParse(this.filename, fileContent);
   } catch(e) {
-    this.logger.error(e.message, 'ModuleError');
+    this.parsed = [];
+    let msg = e.message + ` when converting module "${this.filename}"`;
+    this.logger.error(msg, 'ModuleError');
   }
   
   return this;

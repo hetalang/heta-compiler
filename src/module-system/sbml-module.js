@@ -5,7 +5,13 @@ const _ = require('lodash');
 
 _Module.prototype.setSBMLModule = function(){
   let fileContent = fs.readFileSync(this.filename, 'utf8');
-  this.parsed = _SBMLParse(this.filename, fileContent);
+  try {
+    this.parsed = _SBMLParse(this.filename, fileContent);
+  } catch (e) {
+    this.parsed = [];
+    let msg = e.message + ` when converting module "${this.filename}"`;
+    this.logger.error(msg, 'ModuleError');
+  }
 
   return this;
 };
@@ -118,7 +124,7 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'algebraicRule'])
     .value();
   if (algebraicRules.length !== 0) {
-    this.logger.error('"algebraicRule" from SBML module is not supported.', 'ModuleError');
+    throw new Error('"algebraicRule" from SBML module is not supported.');
   }
 
   // rateRules
@@ -204,11 +210,12 @@ function _toMarkdown(elements){
         return list;
         break;
       }
-      case 'a':
+      case 'a': {
         let href = _.get(x, 'attributes.href');
         let title = _.get(x, 'attributes.title');
         return '[' + _toMarkdown(x.elements) + '](' + href + ')';
         break;
+      }
       case 'h1':
         return '# ' + _toMarkdown(x.elements) + '\n\n';
         break;
@@ -347,12 +354,10 @@ function _toMathExpr(element, useParentheses = false){
       let cond = `${condArgs[0]} - ${condArgs[1]}`;
       return `ife0(${cond}, ${arg2}, ${arg1})`;
     } else {
-      this.logger.error('Error in translation MathML piecewise', 'ModuleError');
-      return '';
+      throw new Error('Error in translation MathML piecewise');
     }
   } else if (element.name === 'piecewise') {
-    this.loger.error('only one piece is supported in MathML peicewise.', 'ModuleError');
-    return '';
+    throw new Error('only one piece is supported in MathML peicewise.');
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
     let args = _.drop(element.elements)
@@ -398,8 +403,7 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'notanumber') {
     return 'NaN';
   } else {
-    this.logger.error('Cannot parse MathML:' + element, 'ModuleError');
-    return '';
+    throw new Error('Cannot parse MathML:' + element);
   }
 }
 
