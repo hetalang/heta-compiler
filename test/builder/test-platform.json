@@ -7,9 +7,7 @@
   "builderVersion": ">=0.4",
   "aux": {},
   "options": {
-    "debuggingMode": true,
-    "syncMode": false,
-    "logs": "logs.txt",
+    "debuggingMode": false,
     "logLevel": "panic"
   },
   "scripts": {

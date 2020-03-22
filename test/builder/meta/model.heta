@@ -1,8 +1,0 @@
-[
-  {
-    "id": "k1",
-    "class": "Const",
-    "num": 1,
-    "action": "upsert"
-  }
-]
