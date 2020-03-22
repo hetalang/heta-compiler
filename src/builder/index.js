@@ -55,7 +55,7 @@ class Builder {
     // 2. Modules integration
     if (this.options.debuggingMode) {
       _.forOwn(ms.moduleCollection, (value) => {
-        let relPath = path.relative(this._coreDirname, value.filename);
+        let relPath = path.relative(this._coreDirname, value.filename + '.json');
         let absPath = path.join(this._metaDirname, relPath);
         let str = JSON.stringify(value.parsed, null, 2);
         fs.outputFileSync(absPath, str);
@@ -79,6 +79,7 @@ class Builder {
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.logger.hasErrors);
     if (createLog) {
+      this.logger.info(`All logs was saved to file: "${this._logPath}"`)
       fs.outputFileSync(this._logPath, this.logger.toString(false));
     }
     
