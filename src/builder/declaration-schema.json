@@ -26,13 +26,14 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "logMode": {"type": "string", "default": "none", "enum": ["error", "always", "none"]},
+        "logMode": {"type": "string", "default": "never", "enum": ["never", "error", "always"]},
         "logPath": {"type": "string", "default": "build.log"},
         "logLevel": {"type": "string", "default": "info"},
         "skipExport": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debuggingMode": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
-        "metaDir": {"type": "string", "default": "meta" }
+        "metaDir": {"type": "string", "default": "meta" },
+        "exitWithoutError": {"type": "boolean", "default": false}
       },
       "default": {"debuggingMode": false, "logLevel": "info"}
     },

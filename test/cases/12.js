@@ -26,7 +26,7 @@ describe('Testing "cases/12-to-sbml"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/12-to-sbml', '../../test/cases/12-to-sbml/dist');
+    b = new Builder(declaration, 'cases/12-to-sbml');
     //console.log(b);
   });
 

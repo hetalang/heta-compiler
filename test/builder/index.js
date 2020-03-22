@@ -1,5 +1,5 @@
 /* global describe, it */
-const { Builder, BuilderError } = require('../../src/builder');
+const { Builder } = require('../../src/builder');
 const declaration = require('./test-platform');
 const { expect } = require('chai');
 
@@ -13,18 +13,15 @@ describe('Test Builder.', () => {
 
 describe('Errors in declaration.', () => {
   it('Empty declaration throws.', () => {
-    expect(() => {
-      new Builder({options: {logLevel: 'panic'}});
-    }).to.throw(BuilderError);
+    let b = new Builder({options: {logLevel: 'panic'}});
+    expect(b.logger).to.have.property('hasErrors', true);
   });
   it('Wrong prop type.', () => {
-    expect(() => {
-      new Builder({id: 'test', notes: 1.1, options: {logLevel: 'panic'}});
-    }).to.throw(BuilderError);
+    let b = new Builder({id: 'test', notes: 1.1, options: {logLevel: 'panic'}});
+    expect(b.logger).to.have.property('hasErrors', true);
   });
   it('Wrong version format.', () => {
-    expect(() => {
-      new Builder({id: 'test', builderVersion: '0.100.0', options: {logLevel: -1}});
-    }).to.throw(BuilderError);
+    let b = new Builder({id: 'test', builderVersion: '0.100.0', options: {logLevel: -1}});
+    expect(b.logger).to.have.property('hasErrors', true);
   });
 });

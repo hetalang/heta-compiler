@@ -25,7 +25,7 @@ describe('Testing "cases/7-importNS"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/7-importNS', '../../test/cases/7/dist');
+    b = new Builder(declaration, 'cases/7-importNS');
     //console.log(b);
   });
 

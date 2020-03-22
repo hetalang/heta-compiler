@@ -36,5 +36,3 @@
 1. heta update => npm i heta-compiler
 1. heta-compiler installer
 1. contact the developers if JS error
-1. *declaration: "options.debuggingMode", "options.metaDir"
-1. declaration: "options.exitWithoutError" with default false

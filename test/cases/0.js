@@ -30,7 +30,7 @@ describe('Testing "cases/0-hello-world"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/0-hello-world', '../../test/cases/1/dist');
+    b = new Builder(declaration, 'cases/0-hello-world');
     //console.log(b);
   });
 

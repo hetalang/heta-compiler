@@ -13,6 +13,6 @@ let descriptionText = `Command line utilities for working with Heta compiler
 program
   .version(version, '-v, --version')
   .description(descriptionText)
-  .command('build [dir]', 'Import all files, send to database and export to local files')
+  .command('build [dir]', 'Compile Heta based platform and create set of export files.')
   .command('init [dir]', 'Create template platform files in directory')
   .parse(process.argv);

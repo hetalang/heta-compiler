@@ -25,7 +25,7 @@ describe('Testing "cases/6-import"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/6-import', '../../test/cases/6/dist');
+    b = new Builder(declaration, 'cases/6-import');
     //console.log(b);
   });
 
