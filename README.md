@@ -6,61 +6,88 @@
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
 [![GitHub license](https://img.shields.io/github/license/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/blob/master/LICENSE)
 
-# Heta compiler JS
+# Heta compiler
 
-Heta compiler JS is Quantitative Systems Pharmacology Programming Platform in JavaScript
+**Heta compiler** is a software tool for the compilation of Heta-based QSP modeling platforms. Heta compiler can also be used as a JavaScript/Node package to develop modeling tools.
 
-This is part of [heta-lang](https://insysbio.github.io/heta-lang/) project.
-
-## Intro
+Read more about Heta format and Heta-based platforms on Heta project homepage: <https://hetalang.github.io/>.
 
 ## Installation
-[NodeJS](https://nodejs.org/en/) is required. Currently NodeJS v8 and newer are supported.
 
-The stable version can be installed from npm
-```bash
-npm i -g heta-compiler
-```
-The latest version can be installed directly from git
-```bash
-npm i -g git+https://github.com/insysbio/heta-compiler.git
-```
+1. Install [NodeJS](https://nodejs.org/en/). Currently NodeJS v8 and newer are supported. Check version after install
+    ```bash
+    node -v
+    ```
 
-## Usage in JavaScript
+2. The latest stable version of Heta compiiler can be installed from npm
+    ```bash
+    npm i -g heta-compiler
+    ```
+    The development version can be installed directly from GitHub
+    ```bash
+    npm i -g git+https://github.com/insysbio/heta-compiler.git
+    ```
+
+## Command line interface (CLI) usage
+
+*More options and examples see in [CLI page](./cli)*
+
+1. Create simple Heta file: *index.heta*
+    ```heta
+    comp1 @Compartment;
+    s1 @Species { compartment: comp1 };
+    r1 @Reaction { actors: s1 => };
+
+    comp1 .= 1;
+    s1 .= 10;
+    r1 := k1*s1*comp1;
+    k1 @Const = 1e-2;
+
+    sbml1 @SBMLExport;
+    ```
+
+2. Compile platform
+    ```bash
+    cd ./path/to/platform/folder
+    heta build
+    ```
+
+3. See results in directory **dist**
+
+
+## Usage in NodeJS packages
+
+*See more information on [API page](./api).*
 
 ```javascript
 const { Container } = require('heta-compiler');
 
-let c = new Container();
-let k1 = c.insert({
-    class: 'Const',
-    id: 'k1',
-    num: 1;
-});
-```
+// platform code in Queue format
+let queue = [
+    {
+        class: 'Const',
+        id: 'k1',
+        num: 1;
+    },
+    {
+        class: 'Record',
+        id: 'p1',
+        assignments: {start_: 0};
+    }
+];
 
-## Console
-To build the dist files from source.
+// compilation
+let c = (new Container)
+    .loadMany(queue)
+    .knitMany()
+    .exportMany();
 
-```bash
-npm i -g heta-compiler
-cd ./path/to/platform/folder
-heta init
-heta build
+// print logs
+console.log(c.logger.toString());
 ```
 
 ## Copyright
 
 Copyright 2019-2020 InSysBio LLC
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-<http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Licensed under the Apache License, Version 2.0;

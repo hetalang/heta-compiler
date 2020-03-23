@@ -31,8 +31,8 @@
 1. FunctionDefinition + function checking
 1. CondSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
+1. heta-compiler windows installer
 
 1. running Heta without platform.js
 1. heta update => npm i heta-compiler
-1. heta-compiler installer
 1. contact the developers if JS error

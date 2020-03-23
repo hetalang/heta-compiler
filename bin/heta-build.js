@@ -12,9 +12,11 @@ program
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
-  .option('-d, --declaration <filename>', 'platform declaration file, search extensions: ["", ".json", ".json5", ".yml"]', 'platform')
+  .option('-d, --declaration <filepath>', 'platform declaration file, search extensions: ["", ".json", ".json5", ".yml"]', 'platform')
   .option('--skip-export', 'do not export files to local directory')
   .option('--log-mode <never|error|always>', 'When to create log file.')
+  .option('-s, --source <filepath>', 'path to main heta module.')
+  .options('--type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
   .parse(process.argv);
 
 // set target directory of platform
@@ -48,10 +50,15 @@ let options = {
   skipExport: program.skipExport,
   logMode: program.logMode
 };
+// === importModule from CLI ===
+let importModule = {
+  source: program.source,
+  type: program.type
+};
 
 // === combine options ===
 let integralDeclaration = _.defaultsDeep(
-  { options: options },
+  { options, importModule },
   declaration
 );
 
