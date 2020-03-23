@@ -16,7 +16,7 @@ program
   .option('--skip-export', 'do not export files to local directory')
   .option('--log-mode <never|error|always>', 'When to create log file.')
   .option('-s, --source <filepath>', 'path to main heta module.')
-  .options('--type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
+  .option('--type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
   .parse(process.argv);
 
 // set target directory of platform
