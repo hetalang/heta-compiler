@@ -57,7 +57,8 @@ Read more about Heta format and Heta-based platforms on Heta project homepage: <
 
 ## Usage in NodeJS packages
 
-*See more information on [API page](./api).*
+*See more information on 
+~~[API page](./api)~~.*
 
 ```javascript
 const { Container } = require('heta-compiler');
@@ -86,8 +87,14 @@ let c = (new Container)
 console.log(c.logger.toString());
 ```
 
-## Copyright
+## Contribute
+
+- [Issue Tracker](https://github.com/insysbio/heta-compiler/issues)
+- [Source Code](https://github.com/insysbio/heta-compiler)
+- See also contributing in [Heta project](https://hetalang.github.io/#/CONTRIBUTING)
+
+## License
+
+Licensed under the Apache License, Version 2.0.
 
 Copyright 2019-2020 InSysBio LLC
-
-Licensed under the Apache License, Version 2.0;

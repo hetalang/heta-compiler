@@ -14,7 +14,7 @@ class _Module {
     
     //checking file exists
     if (!fs.existsSync(mdl.filename)) {
-      mdl.logger.error(`No such file: ${mdl.filename}`, 'FileSystemError');
+      mdl.logger.error(`Module file not found: "${mdl.filename}"`, 'FileSystemError');
       
       return mdl;
     }

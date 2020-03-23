@@ -12,55 +12,59 @@ program
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
-  .option('-d, --declaration <filepath>', 'platform declaration file, search extensions: ["", ".json", ".json5", ".yml"]', 'platform')
+  .option('-d, --declaration <filepath>', 'platform declaration file without extension, search extensions: ["", ".json", ".json5", ".yml"]', 'platform')
+  // options
   .option('--skip-export', 'do not export files to local directory')
   .option('--log-mode <never|error|always>', 'When to create log file.')
-  .option('-s, --source <filepath>', 'path to main heta module.')
+  // moduleImport
+  .option('--source <filepath>', 'path to main heta module.')
   .option('--type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
   .parse(process.argv);
 
 // set target directory of platform
 let targetDir = path.resolve(program.args[0] || '.');
+// set base name of declaration file
+let platformFile = program.declaration;
 
 // === read declaration file ===
 // search
 let searches = ['', '.json', '.json5', '.yml']
-  .map((x) => path.join(targetDir, program.declaration + x));
+  .map((ext) => path.join(targetDir, platformFile + ext));
 let extensionNumber = searches
   .map((x) => fs.existsSync(x))
   .indexOf(true);
-// "no builder file" error
+// is declaration file found ?
 if (extensionNumber === -1) {
-  console.log( 
-    'STOP! Declaration file is not found in paths:\n',
-    JSON.stringify(searches, null, 2)
-  );
-  process.exit(1);
-}
-let declarationText = fs.readFileSync(searches[extensionNumber]);
-try {
-  var declaration = safeLoad(declarationText);
-} catch (e) {
-  console.log('Wrong format of declaration file:', e.message);
-  process.exit(1);
+  var declaration = {};
+  //console.log( 'Declaration file is not found in paths:\n', JSON.stringify(searches, null, 2));
+  console.log('Running compilation without declaration file.');
+} else {
+  let delarationFile = searches[extensionNumber];
+  console.log(`Running compilation with declaration "${delarationFile}"`);
+  let declarationText = fs.readFileSync(delarationFile);
+  try {
+    declaration = safeLoad(declarationText);
+  } catch (e) {
+    console.log('Wrong format of declaration file:', e.message);
+    process.exit(1);
+  }
 }
 
 // === options from CLI ===
-let options = {
-  skipExport: program.skipExport,
-  logMode: program.logMode
-};
-// === importModule from CLI ===
-let importModule = {
-  source: program.source,
-  type: program.type
+let CLIDeclaration = {
+  options: {
+    skipExport: program.skipExport,
+    logMode: program.logMode
+  },
+  importModule: {
+    source: program.source,
+    type: program.type
+  }
 };
 
 // === combine options ===
-let integralDeclaration = _.defaultsDeep(
-  { options, importModule },
-  declaration
-);
+let integralDeclaration = _.defaultsDeep(CLIDeclaration, declaration);
+console.log(integralDeclaration);
 
 // wrong version throws, if no version stated than skip
 let satisfiesVersion = integralDeclaration.builderVersion
@@ -81,7 +85,9 @@ if (builder.logger.hasErrors) {
 builder.run();
 if (builder.logger.hasErrors) {
   console.log('Compilation ERROR! See logs.');
-  options.exitWithoutError ? process.exit(0) : process.exit(1);
+  integralDeclaration.options.exitWithoutError 
+    ? process.exit(0) 
+    : process.exit(1);
 } else {
   console.log('Compilation OK!');
   process.exit(0);

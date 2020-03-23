@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/schema#",
   "description" : "Describes platform.json file in Heta compiler.",
   "type": "object",
-  "required": ["id", "importModule"],
+  "required": ["options", "importModule"],
   "additionalProperties": true,
   "properties": {
     "id": {"type": "string"},
@@ -26,7 +26,7 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "logMode": {"type": "string", "default": "never", "enum": ["never", "error", "always"]},
+        "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
         "logPath": {"type": "string", "default": "build.log"},
         "logLevel": {"type": "string", "default": "info"},
         "skipExport": {"type": "boolean", "default": false},
@@ -48,11 +48,11 @@
     },
     "importModule": {
       "type": "object",
-      "required": ["type", "source"],
+      "required": ["source"],
       "additionalProperties": true,
       "properties": {
-        "type": {"type": "string", "enum": ["heta", "xlsx", "json", "yaml", "sbml"]},
-        "source": {"type": "string"},
+        "type": {"type": "string", "enum": ["heta", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
+        "source": {"type": "string", "default": "index.heta"},
         "sheet": { "type": "integer" },
         "omitRows": { "type": "integer" }
       }
