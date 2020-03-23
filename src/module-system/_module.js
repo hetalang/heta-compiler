@@ -43,7 +43,11 @@ class _Module {
       let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml"].`;
       mdl.logger.error(msg, 'ModuleError');
     }
-    
+
+    if (mdl.parsed.length === 0) {
+      mdl.logger.warn(`Nothing is imported from file "${mdl.filename}"...`);
+    }
+
     return mdl;
   }
   getImportElements(){

@@ -64,7 +64,6 @@ let CLIDeclaration = {
 
 // === combine options ===
 let integralDeclaration = _.defaultsDeep(CLIDeclaration, declaration);
-console.log(integralDeclaration);
 
 // wrong version throws, if no version stated than skip
 let satisfiesVersion = integralDeclaration.builderVersion
