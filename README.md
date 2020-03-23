@@ -65,26 +65,25 @@ const { Container } = require('heta-compiler');
 
 // platform code in Queue format
 let queue = [
-    {
-        class: 'Const',
-        id: 'k1',
-        num: 1;
-    },
-    {
-        class: 'Record',
-        id: 'p1',
-        assignments: {start_: 0};
-    }
+    { class: 'Compartment', id: 'comp1', assignments: {start_: '1'} },
+    { class: 'Species', id: 's1', compartment: 'comp1', assignments: {start_: '10'} },
+    { class: 'Reaction', id: 'r1', actors: 's1 =>', assignments: {ode_: 'k1*s1*comp1'} },
+    { class: 'Const', id: 'r1', actors: 's1 =>', num: 1e-2 },
+    { class: 'SBMLExport', id: 'sbml1' }
 ];
 
 // compilation
 let c = (new Container)
     .loadMany(queue)
-    .knitMany()
-    .exportMany();
+    .knitMany();
+let output = c.select({id: 'sbml1'})
+    .make();
 
-// print logs
-console.log(c.logger.toString());
+// print sbml code
+console.log(output[0].content);
+
+// check errors
+console.log(c.logger.hasErrors);
 ```
 
 ## Contribute
