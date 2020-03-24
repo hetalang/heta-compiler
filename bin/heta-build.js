@@ -16,6 +16,7 @@ program
   // options
   .option('--skip-export', 'do not export files to local directory')
   .option('--log-mode <never|error|always>', 'When to create log file.')
+  .option('--debug', 'If set the raw module output will be stored in "meta".')
   // moduleImport
   .option('--source <filepath>', 'path to main heta module.')
   .option('--type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
@@ -54,7 +55,8 @@ if (extensionNumber === -1) {
 let CLIDeclaration = {
   options: {
     skipExport: program.skipExport,
-    logMode: program.logMode
+    logMode: program.logMode,
+    debuggingMode: program.debug
   },
   importModule: {
     source: program.source,
