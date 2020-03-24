@@ -30,7 +30,7 @@ Read more about Heta format and Heta-based platforms on Heta project homepage: <
 
 ## Command line interface (CLI) usage
 
-*More options and examples see in [CLI page](./cli)*
+*More options and examples see in [CLI page](./docs/cli)*
 
 1. Create simple Heta file: *index.heta*
     ```heta

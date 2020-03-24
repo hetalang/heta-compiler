@@ -32,6 +32,7 @@
 1. CondSwitcher в DBSolve
 1. Assignments A + x*y в DBSolve
 1. heta-compiler windows installer
-
 1. heta update => npm i heta-compiler
+
+1. Export as action
 1. contact the developers if JS error
