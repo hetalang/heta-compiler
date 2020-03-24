@@ -68,6 +68,12 @@ Expression.prototype.toJuliaString = function(){
         .map((arg) => arg.toString(options));
       return `${args[0]} >= 0 ? ${args[1]} : ${args[2]}`;
     }
+    if (node.type === 'ConstantNode' && node.value === Infinity) {
+      return 'Inf';
+    }
+    if (node.type === 'ConstantNode' && Number.isNaN(node.value)) {
+      return 'NaN';
+    }
   };
 
   return this.exprParsed
