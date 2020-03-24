@@ -187,6 +187,7 @@ end
 
 function {{event.switcher.id}}_assignment_(integrator)
     cons = integrator.p.constants
+    t = integrator.t
     ({% for record in staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}) = integrator.p.static
