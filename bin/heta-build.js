@@ -56,7 +56,7 @@ let CLIDeclaration = {
   options: {
     skipExport: program.skipExport,
     logMode: program.logMode,
-    debuggingMode: program.debug
+    debug: program.debug
   },
   importModule: {
     source: program.source,

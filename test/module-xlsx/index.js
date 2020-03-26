@@ -46,7 +46,7 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'panic', debuggingMode: false },
+      options: { logLevel: 'panic', debug: false },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',

@@ -53,7 +53,7 @@ class Builder {
     this.logger.pushMany(ms.logger);
 
     // 2. Modules integration
-    if (this.options.debuggingMode) {
+    if (this.options.debug) {
       _.forOwn(ms.moduleCollection, (value) => {
         let relPath = path.relative(this._coreDirname, value.filename + '.json');
         let absPath = path.join(this._metaDirname, relPath);

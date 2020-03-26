@@ -6,7 +6,7 @@
   "version": "v0.1.0",
   "license": "UNLICENSED",
   "options": {
-    "debuggingMode": false,
+    "debug": false,
     "logs": "output.log",
     "logLevel": "info",
     "skipExport": false

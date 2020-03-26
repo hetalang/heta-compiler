@@ -31,11 +31,11 @@
         "logLevel": {"type": "string", "default": "info"},
         "skipExport": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
-        "debuggingMode": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
+        "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
         "metaDir": {"type": "string", "default": "meta" },
         "exitWithoutError": {"type": "boolean", "default": false}
       },
-      "default": {"debuggingMode": false, "logLevel": "info"}
+      "default": {"debug": false, "logLevel": "info"}
     },
     "scripts": {
       "type": "object",

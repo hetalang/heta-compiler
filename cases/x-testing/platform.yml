@@ -2,7 +2,7 @@ id: mm
 builderVersion: ^0.4
 options:
   logMode: error
-  debuggingMode: true
+  debug: true
 importModule:
   type: heta
   source: src/index.heta

@@ -7,7 +7,7 @@
   "builderVersion": ">=0.4",
   "aux": {},
   "options": {
-    "debuggingMode": false,
+    "debug": false,
     "logLevel": "panic"
   },
   "scripts": {

@@ -7,7 +7,6 @@ const pkg = require('../package');
 let version = pkg.version;
 let descriptionText = `Command line utilities for working with Heta compiler
   version: ${version}
-  author: ${pkg.author}
   license: ${pkg.license}`;
 
 program

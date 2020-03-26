@@ -1,7 +1,7 @@
 {
   "name": "heta-compiler",
   "version": "0.4.31",
-  "description": "Programming platform for Quantitative Systems Pharmacology modeling on NodeJS",
+  "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
     "test:dev": "mocha --recursive --exclude **/*.tmp.js test/core/species.js",

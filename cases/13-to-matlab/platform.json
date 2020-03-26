@@ -6,7 +6,7 @@
   "version": "v0.1.0",
   "license": "UNLICENSED",
   "options": {
-    "debuggingMode": true
+    "debug": true
   },
   "importModule": {
     "type": "heta",
