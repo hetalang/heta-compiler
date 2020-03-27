@@ -9,6 +9,27 @@ const coreComponents = require('../core-components');
 const Logger = require('../logger');
 const _ = require('lodash');
 
+/**
+ * Auxilary class for performing compilation. It is developed to support CLI of Heta compiler.
+ *
+ * @class Builder
+ *
+ * @param {Object} declaration - Object representing options for builder,
+ * see [CLI references](./cli-references) for more information about the structure.
+ * @param {string} coreDirname="." - Path of working directory (WD) for Heta compilation.
+ * Default: WD of a shell.
+ *
+ * @property {string} path String describing hierarchy
+ * @property {ObjectId} _id Unique authomatic identifier from MongoDB
+ * @property {string} id Main identifier (unique for the collection)
+ * @property {string} class=Compartment It is always fixed to "Compartment"
+ * @property {Object.<string,string>} [tags] Object for filering elements by tagFilter
+ * @property {string} [title] Title of the element, any string.
+ * @property {string} [notes] Text with xhtml tags or markdown.
+ * @property {Object.<String,Object>} [aux] Any object to store auxilary information
+ *
+ * @property {string} variableRef Reference to Variable. If not initialized directly than use id value
+ */
 class Builder {
   constructor(declaration, coreDirname = '.'){
     // set logger

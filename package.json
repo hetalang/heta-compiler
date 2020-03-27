@@ -6,7 +6,7 @@
   "scripts": {
     "test:dev": "mocha --recursive --exclude **/*.tmp.js test/core/species.js",
     "test": "mocha test --recursive --exclude **/*.tmp.js",
-    "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d jsdoc src",
+    "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
   },
