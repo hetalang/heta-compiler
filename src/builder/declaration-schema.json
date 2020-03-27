@@ -6,7 +6,6 @@
   "additionalProperties": true,
   "properties": {
     "id": {"type": "string"},
-    "title": {"type": "string"},
     "notes": {"type": "string"},
     "version": {"type": "string"},
     "keywords": {"type": "array", "items": {"type": "string"}},

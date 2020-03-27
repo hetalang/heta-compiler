@@ -11,7 +11,6 @@ const pkg = require('../package');
 const defaultPlatform = {
   '$schema': 'https://github.com/insysbio/heta-compiler#',
   id: 'template',
-  title: 'platform title',
   notes: 'platform notes',
   version: 'v0.1.0',
   keywords: [],
@@ -84,7 +83,7 @@ if(program.silent){
 // prepare platform
 let questions = [
   { type: 'input', name: 'id', message: 'Platform id', default: defaultPlatform.id },
-  { type: 'input', name: 'title', message: 'Platform title', default: defaultPlatform.title },
+  { type: 'input', name: 'notes', message: 'Platform notes', default: defaultPlatform.notes },
   { type: 'input', name: 'version', message: 'Platform version', default: defaultPlatform.version },
   { type: 'input', name: 'license', message: 'Platform license', default: defaultPlatform.license },
   { type: 'confirm', name: 'options', message: 'Set options', default: false },
@@ -93,8 +92,7 @@ let questions = [
 prompt(questions)
   .then((answers) => {
     let platform = Object.assign({
-      builderVersion: defaultPlatform.builderVersion,
-      notes: 'Write platform notes here'
+      builderVersion: defaultPlatform.builderVersion
     }, answers);
     platform.options = answers.options
       ? defaultPlatform.options
