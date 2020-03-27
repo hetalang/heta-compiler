@@ -6,6 +6,7 @@
   "scripts": {
     "test:dev": "mocha --recursive --exclude **/*.tmp.js test/core/species.js",
     "test": "mocha test --recursive --exclude **/*.tmp.js",
+    "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d jsdoc src",
     "test:cov": "nyc --reporter=lcov npm run test",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls"
   },
@@ -48,6 +49,8 @@
     "chai": "^4.2.0",
     "chai-xml": "^0.3.2",
     "coveralls": "^3.0.9",
+    "jsdoc": "^3.6.3",
+    "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "slv-utils": "^0.2.0"

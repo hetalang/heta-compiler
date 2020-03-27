@@ -76,7 +76,7 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
 
 ## Usage of command line interface
 
-*More options and examples see on [CLI references](./docs/cli-references)*
+*More options and examples see on [CLI references](./cli-references)*
 
 The following example creates one Heta module and compiles the model it to SBML format. For example you want to create platform in directory "platform/directory/path/"
 
