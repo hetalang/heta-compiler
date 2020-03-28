@@ -43,26 +43,24 @@ Heta compiler was created to support exporting to different popular modeling for
 
 - DBSolveOptimum .SLV files [link](http://insysbio.com/en/software/db-solve-optimum)
 - SBML L2V4 [link](http://sbml.org/)
-- mrgsolve
 - mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
 - Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
 - Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
 - SimSolver/Julia module
-
 - JSON formatted file
 - YAML formatted file
 - Excel sheets
 
 ## Installation
 
-Before start [NodeJS](https://nodejs.org/en/) must be installed. Currently NodeJS v8 and newer are supported.
+[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v8** and newer are supported.
 
 The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.
 
 1. Check Node version. It should be >= 8.0.0.
     ```bash
     node -v
-    # v8.9.2
+    # v8.0.0 or newer
     ```
 
 2. The latest stable version of Heta compiiler can be installed from npm
@@ -76,11 +74,13 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
 
 ## Usage of command line interface
 
-*More options and examples see on [CLI references](./cli-references)*
+Heta compiler comes with a built-in CLI which can be used to compile files from the command line.
 
-The following example creates one Heta module and compiles the model it to SBML format. For example you want to create platform in directory "platform/directory/path/"
+>To learn more about options, see [CLI references](./cli-references)
 
-1. Create Heta file: *index.heta* in target directory:
+The following is the example where we create a Heta module and compile it into SBML format. For example you want to create platform in directory "/path/to/my-platform" (target directory)
+
+1. Create Heta file: *index.heta* in the target directory:
     ```heta
     comp1 @Compartment;
     s1 @Species { compartment: comp1 };
@@ -91,23 +91,28 @@ The following example creates one Heta module and compiles the model it to SBML 
     r1 := k1*s1*comp1;
     k1 @Const = 1e-2;
 
-    sbml1 @SBMLExport;
+    #export {
+        format: 'SBML',
+        filepath: model
+    };
     ```
 
-2. Be sure you are in target directory: `cd platform/directory/path` if not. Compile platform
+2. Be sure you are in the target directory, use command `cd /path/to/my-platform` or similar if not. Compile the platform:
     ```bash
     heta build
     ```
-Heta builder takes "index.heta" file (module) as default, reads it and transforms to SBML file as declared.
+    Heta builder takes "index.heta" file (module) as default, reads it and transforms to SBML file as declared in *index.heta*.
 
-3. See results in directory **dist**.
+3. See results in directory /path/to/my-platform/**dist**.
 
-Several files can be loaded using `include` statement inside "index.heta", see [specifications](https://hetalang.github.io/#/specifications/include).
+>If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](https://hetalang.github.io/#/specifications/include).
 
 ## Usage in NodeJS packages
 
-*See more information on 
-~~[API references](./api-references)~~.*
+Heta compiler has been written in NodeJS environment and can be used as a package for browser or server-side tools and applications.
+
+> To learn more more, see [API references](./api-references)
+(under development).
 
 ```javascript
 const { Container } = require('heta-compiler');
@@ -137,12 +142,12 @@ console.log(c.logger.hasErrors);
 
 ## Known issues and limitations
 
-The tool is under active development so there ara a lot of features to implement. To help us prioritize them write the issue.
+The tool is under active development so there ara a lot of features to implement. To help us prioritize them write an [issue](https://github.com/insysbio/likelihoodProfiler.jl/issues).
 
 ## Getting help
 
- - Read the documentation of Heta on <https://hetalang.github.io/>
- - Use [Gitter Chatroom](https://gitter.im/hetalang/community?utm_source=readme) to chat.
+ - Read Heta documentation on <https://hetalang.github.io/>
+ - Use [Gitter Chatroom](https://gitter.im/hetalang/community?utm_source=readme).
  - Use [Issue Tracker](https://github.com/insysbio/heta-compiler/issues)
 
 ## Contribute
@@ -157,14 +162,12 @@ Licensed under the Apache License, Version 2.0. See the [LICENSE](./LICENSE) tex
 
 ## Authors and history
 
-The original author of the project is [Evgeny Metelkin](https://github.com/metelkin). The tool was inspired by the idea that large scale dynamical systems used in QSP and SB require the specific tool which allows writing model code in unified formats and transforming them depending on one's needs. Working with large models should be as easy as with the small ones.
+The original author of the project is [Evgeny Metelkin](https://github.com/metelkin). The tool was inspired by the idea that large scale dynamical systems used in QSP and SB require the specific tool which allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with the small ones.
 
-- The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several internal and service [InSysBio LLC](https://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
+- The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several service and and  [InSysBio LLC](https://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
 
-- The next version **qs3p-js** 0.3.x used the updated format of platfrorm components and a new approach for storing them (without database). A set of new exporting formats was supported.
-
-- The **qs3p-js** of version 0.4.x was developed in 2019 to supports Heta code including actions, modules, namespaces. It was used as the main infrastructure for the development of the large- and middle-scale QSP platforms developed in the framework of InSysBio services.
+- The next versions of **qs3p-js** used the updated format of platfrorm components and a new approach for storing them. A set of new exporting formats was supported. The current version supports Heta code including actions, modules, namespaces. It was used as the main infrastructure for the development of the large- and middle-scale QSP platforms developed in the framework of InSysBio services.
 
 - Starting from 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/insysbio/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of [Heta project](https://hetalang.github.io/).
 
-Copyright 2019-2020 InSysBio LLC
+Copyright 2019-2020, InSysBio LLC
