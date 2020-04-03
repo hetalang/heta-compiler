@@ -162,26 +162,25 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
     {% endif -%}
     {% endfor %}
 
-    {%- if event.switcher.instanceOf('TimeSwitcher') and event.switcher.periodObj.num is defined %}
-    {%- set ev_start = event.switcher.getStart() if event.switcher.startObj.num is defined else '0.0' %}
-    {%- set ev_period = event.switcher.getPeriod() if event.switcher.periodObj.num is defined else '0.0' %}
+    {%- if event.switcher.instanceOf('TimeSwitcher')  %}
+    {#- set translated id for Const and number for virtual Const #}
+    {%- set ev_start = pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.num %}
+    {%- set ev_period = pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.num %}
     {%- set ev_repeatCount = event.switcher.getRepeatCount() if event.switcher.repeatCountObj.num is defined else 'Inf' %}
     function flag_(t)
         flag_ = t - {{ ev_start }};
         
-        if flag_ <= 0.
+        if flag_ <= 0. || {{ ev_period if ev_period is defined else '0.0' }} <= 0.0
             res_ = flag_
-        elseif 0. < flag_ && flag_ < {{ ev_repeatCount }} * {{ ev_period }}
-            res_ = flag_ - floor(flag_/{{ ev_period }} + 0.5) * {{ ev_period }}
+        elseif 0. < flag_ && flag_ < {{ ev_repeatCount }} * {{ ev_period if ev_period is defined else '0.0' }}
+            res_ = flag_ - floor(flag_/{{ ev_period if ev_period is defined else '0.0' }} + 0.5) * {{ ev_period if ev_period is defined else '0.0' }}
         else
-            res_ = flag_ - {{ ev_repeatCount }} * {{ ev_period }}
+            res_ = flag_ - {{ ev_repeatCount }} * {{ ev_period if ev_period is defined else '0.0' }}
         end
         return res_
     end
 
     return flag_(t)
-    {%- elif event.switcher.instanceOf('TimeSwitcher') %}
-    return t - {{ event.switcher.startObj.num if event.switcher.startObj.num is defined else '0.0' }}
     {%- elif event.switcher.instanceOf('CondSwitcher') %}
     return {{ event.switcher.condition }}
     {%- endif %}
