@@ -51,9 +51,9 @@
     "coveralls": "^3.0.9",
     "jsdoc": "^3.6.3",
     "jsdoc-to-markdown": "^5.0.3",
-    "mocha": "^6.2.2",
+    "mocha": "^7.1.1",
     "nyc": "^14.1.1",
-    "slv-utils": "^0.2.0"
+    "slv-utils": "^0.2.1"
   },
   "engines": {
     "node": ">=8.0.0"
