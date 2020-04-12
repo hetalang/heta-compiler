@@ -187,7 +187,7 @@ class _Component {
     _.each(req, (rule, prop) => { // iterates through rules
       // required: true
       if(rule.required && !_.has(this, prop)){
-        logger.error(`No required "${prop}" property for ${this.className}.`, 'BindingError');
+        logger.error(`No required "${prop}" property for "${this.index}" of ${this.className}.`, 'BindingError');
       }
       // isReference: true + className
       if(rule.isReference && _.has(this, prop)){
