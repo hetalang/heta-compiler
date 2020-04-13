@@ -6,7 +6,17 @@ const { Builder } = require('../src');
 const { safeLoad } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _ = require('lodash');
 const semver = require('semver');
-const { version } = require('../package');
+const { version, bugs } = require('../package');
+const colors = require('colors');
+
+
+let contactMessage = colors.bgRed(`
+ +----------------------------------------------------------------+ 
+ | Internal Heta-builder error, contact the developers.           | 
+ | Create issue: ${bugs.url} | 
+ | or mail to: ${bugs.email}                                   | 
+ +----------------------------------------------------------------+ 
+`);
 
 program
   .description('Compile Heta based platform and create set of export files.')
@@ -83,7 +93,14 @@ if (builder.logger.hasErrors) {
   process.exit(1);
 }
 
-builder.run();
+// send errors to developer
+try {
+  builder.run();
+} catch(e) {
+  console.log(contactMessage);
+  throw e;
+}
+
 if (builder.logger.hasErrors) {
   console.log('Compilation ERROR! See logs.');
   integralDeclaration.options.exitWithoutError 

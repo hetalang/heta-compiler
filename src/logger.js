@@ -1,5 +1,5 @@
 
-const colors = require('colors');
+const colors = require('colors/safe');
 /*
   Class describing Heta logs
 */
