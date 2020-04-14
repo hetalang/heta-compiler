@@ -21,6 +21,6 @@ class JSONExport extends _Export {
   }
 }
 
-Container.prototype.classes.JSONExport = JSONExport;
+Container.prototype.exports.JSON = JSONExport;
 
 module.exports = { JSONExport };

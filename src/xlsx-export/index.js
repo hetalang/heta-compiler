@@ -102,6 +102,6 @@ class XLSXExport extends _Export {
   }
 }
 
-Container.prototype.classes.XLSXExport = XLSXExport;
+Container.prototype.exports.XLSX = XLSXExport;
 
 module.exports = { XLSXExport };

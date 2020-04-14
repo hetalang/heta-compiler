@@ -122,6 +122,6 @@ class JuliaExport extends _Export {
   }
 }
 
-Container.prototype.classes.JuliaExport = JuliaExport;
+Container.prototype.exports.Julia = JuliaExport;
 
 module.exports = { JuliaExport };

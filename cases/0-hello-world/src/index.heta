@@ -28,10 +28,39 @@ end
   space: mm
 };
 
+#export {
+  format: SBML,
+  filepath: mm_sbml,
+  eventsOff: true
+};
+#export {
+  format: Simbio,
+  filepath: mm_simbio,
+};
+#export {
+  format: JSON,
+  filepath: full_json,
+};
+#export {
+  format: YAML,
+  filepath: full_yaml,
+};
+#export {
+  format: SLV,
+  filepath: mm_slv,
+};
+#export {
+  format: Matlab,
+  filepath: matlab1,
+};
+
+
 mm::mm_sbml @SBMLExport { title: Exported mm model};
+/*
 mm::mm_simbio @SimbioExport;
 mm::full_json @JSONExport;
 mm::full_yaml @YAMLExport;
 mm::mm_slv @SLVExport;
 mm::mm_mrg @MrgsolveExport { title: export to mrgsolve };
 mm::matlab1 @MatlabExport { filepath: matlab };
+*/
