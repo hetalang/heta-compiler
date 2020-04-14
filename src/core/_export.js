@@ -18,6 +18,7 @@ class _Export extends _Component {
   merge(q = {}){
     super.merge(q);
     let validationLogger = _Export.isValid(q);
+    this.format = q.format;
 
     this.logger.pushMany(validationLogger);
     if (!validationLogger.hasErrors) {

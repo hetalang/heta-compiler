@@ -31,6 +31,8 @@ class Container {
     let nameless = new Namespace('nameless');
     nameless._isAbstract = false;
     this._namespaces.set('nameless', nameless);
+    // array to store _Export Instances
+    this.exportStorage = [];
   }
   get namespaces(){
     return this._namespaces;
@@ -324,11 +326,40 @@ class Container {
     return clone;
   }
   */
+  export(q = {}){
+    let logger = new Logger();
+    let space = q.space || 'nameless';
+
+    let namespace = this.namespaces.get(space);
+    if (namespace === undefined)
+      logger.error(`#export action is reffered to namespace "${space}", which is not set.`, 'QueueError');
+
+    if (q.format === undefined) {
+      logger.error('Empty format option in #export', 'QueueError');
+    } else if (typeof this.exports[q.format] !== 'function') {
+      logger.error(`Unknown format "${q.format}" in #export action.`, 'QueueError');
+    }
+
+    if (!logger.hasErrors) {
+      // create export instance
+      let exportInstance = new this.exports[q.format]();
+      exportInstance.merge(q);
+      exportInstance.namespace = namespace;
+      logger.pushMany(exportInstance.logger);
+      // push to storage
+      this.exportStorage.push(exportInstance);
+    }
+
+    this.logger.pushMany(logger);
+  }
   load(q, isCore = false){
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
-    // do action
-    return this[actionName](q, isCore);
+    if (typeof this[actionName] !== 'function') {
+      this.logger.error(`Action #${actionName} is unknown and will be skipped.`, 'QueueError');
+    } else {
+      return this[actionName](q, isCore);
+    }
   }
   loadMany(qArr, isCore = false){
     qArr.forEach((q) => this.load(q, isCore));
@@ -378,6 +409,9 @@ Container.prototype.classes = {
   Const
 };
 
+// storage of Export classes
+Container.prototype.exports = {};
+
 // converts {id: 'k1', space: 'one'} => 'one::k1'
 function getIndexFromQ(q = {}){
   if(q.space!==undefined){
@@ -386,4 +420,5 @@ function getIndexFromQ(q = {}){
     return q.id;
   }
 }
+
 module.exports = Container;

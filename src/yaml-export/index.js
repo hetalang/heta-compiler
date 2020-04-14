@@ -40,6 +40,6 @@ function fromOrderToCompare(order=[]){
   };
 }
 
-Container.prototype.classes.YAMLExport = YAMLExport;
+Container.prototype.exports.YAML = YAMLExport;
 
 module.exports = { YAMLExport };

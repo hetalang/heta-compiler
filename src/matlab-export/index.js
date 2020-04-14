@@ -133,6 +133,6 @@ class MatlabExport extends _Export {
   }
 }
 
-Container.prototype.classes.MatlabExport = MatlabExport;
+Container.prototype.exports.Matlab = MatlabExport;
 
 module.exports = { MatlabExport };

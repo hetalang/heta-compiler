@@ -57,7 +57,7 @@ class SimbioExport extends _Export{
 
 SimbioExport._requirements = { };
 
-Container.prototype.classes.SimbioExport = SimbioExport;
+Container.prototype.exports.Simbio = SimbioExport;
 
 module.exports = {
   SimbioExport

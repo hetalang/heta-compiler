@@ -167,7 +167,7 @@ class SLVExport extends _Export{
 
 SLVExport._requirements = { };
 
-Container.prototype.classes.SLVExport = SLVExport;
+Container.prototype.exports.SLV = SLVExport;
 
 module.exports = {
   SLVExport

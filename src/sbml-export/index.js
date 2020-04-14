@@ -5,7 +5,7 @@ require('./expression');
 const legalUnits = require('./legal-units');
 
 class SBMLExport extends _Export {
-  merge(q={}, skipChecking){
+  merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
 
     return this;
@@ -52,7 +52,7 @@ class SBMLExport extends _Export {
 
 SBMLExport._requirements = { };
 
-Container.prototype.classes.SBMLExport = SBMLExport;
+Container.prototype.exports.SBML = SBMLExport;
 
 module.exports = {
   SBMLExport

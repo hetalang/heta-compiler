@@ -108,13 +108,12 @@ class Builder {
   }
   exportMany(){
     if (!this.options.skipExport) {
-      let exportElements = this.container
-        .toArray()
-        .filter((obj) => obj.instanceOf('_Export'));
+      let exportElements = this.container.exportStorage;
       this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
       exportElements.forEach((exportItem) => {
-        let msg = `Exporting "${exportItem.index}" component of type "${exportItem.className}"...`;
+        let fullPath = path.resolve(this._distDirname, exportItem.filepath);
+        let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
         this.logger.info(msg);
         exportItem.makeAndSave(this._distDirname);
         this.logger.pushMany(exportItem.logger);

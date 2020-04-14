@@ -153,7 +153,7 @@ class GSKXLSXExport extends XLSXExport {
   }
 }
 
-Container.prototype.classes.GSKXLSXExport = GSKXLSXExport;
+Container.prototype.exports.GSKXLSX = GSKXLSXExport;
 
 module.exports = {
   GSKXLSXExport

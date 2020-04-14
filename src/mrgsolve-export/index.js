@@ -97,7 +97,7 @@ class MrgsolveExport extends _Export {
 
 MrgsolveExport._requirements = { };
 
-Container.prototype.classes.MrgsolveExport = MrgsolveExport;
+Container.prototype.exports.Mrgsolve = MrgsolveExport;
 
 module.exports = {
   MrgsolveExport
