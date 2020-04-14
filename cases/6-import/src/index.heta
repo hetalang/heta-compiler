@@ -24,8 +24,8 @@ namespace model begin
   Km_A @Const = 0.8;
 end
 
-model::output_sbml @SBMLExport { version: L2V4 };
-model::output_json @JSONExport;
+#export { format: SBML, version: L2V4, space: model };
+#export { format: JSON, space: model };
 
 #delete RateLaws::mm;
 #delete RateLaws::ma;

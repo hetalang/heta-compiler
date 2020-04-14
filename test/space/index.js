@@ -30,9 +30,9 @@ describe('Testing anonimous space.', () => {
         space: 'one'
       },
       {
-        id: 'json1',
+        action: 'export',
         space: 'one',
-        class: 'JSONExport'
+        format: 'JSON'
       },
       {
         id: 'p1',
@@ -52,6 +52,6 @@ describe('Testing anonimous space.', () => {
       }
     ]);
     
-    expect(c).to.have.property('length', 6);
+    expect(c).to.have.property('length', 5);
   });
 });

@@ -6,4 +6,4 @@ include table.xlsx type xlsx with { sheet: 2, omitRows: 3 }
 
 include table.xlsx type xlsx
 
-output @JSONExport;
+#export {filepath: output, format: JSON};

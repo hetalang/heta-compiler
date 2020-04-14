@@ -715,43 +715,5 @@
     "space": "mm",
     "units": "uM",
     "num": 2.5
-  },
-  {
-    "class": "SBMLExport",
-    "id": "mm_sbml",
-    "space": "mm",
-    "title": "Exported mm model"
-  },
-  {
-    "class": "SimbioExport",
-    "id": "mm_simbio",
-    "space": "mm"
-  },
-  {
-    "class": "JSONExport",
-    "id": "full_json",
-    "space": "mm"
-  },
-  {
-    "class": "YAMLExport",
-    "id": "full_yaml",
-    "space": "mm"
-  },
-  {
-    "class": "SLVExport",
-    "id": "mm_slv",
-    "space": "mm"
-  },
-  {
-    "class": "MrgsolveExport",
-    "id": "mm_mrg",
-    "space": "mm",
-    "title": "export to mrgsolve"
-  },
-  {
-    "class": "MatlabExport",
-    "id": "matlab1",
-    "space": "mm",
-    "filepath": "matlab"
   }
 ]

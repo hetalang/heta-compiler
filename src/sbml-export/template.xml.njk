@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="{{_id}}" metaid="{{_id}}" {% if title %}name="{{title}}"{% endif %}>
+  <model id="{{ namespace.spaceName }}" metaid="{{ namespace.spaceName }}" >
   {% if image.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{image.notesHTML}}</html></notes>{% endif %}
   
   {%- set listOfCompartments = image.population.selectByClassName('Compartment') -%}

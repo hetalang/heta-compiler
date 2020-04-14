@@ -33,10 +33,10 @@ namespace one_comp_saturation begin
   s1 []= 0;
 end
 
-//one_comp::sbml_non_saturable @SBMLExport;
-//one_comp_saturation::sbml_saturable @SBMLExport;
-json @JSONExport;
-one_comp::slv_non_saturable @SLVExport;
-one_comp_saturation::slv_saturable @SLVExport;
-one_comp::on_saturable @MrgsolveExport;
-one_comp_saturation::mrg_saturable @MrgsolveExport;
+//#export {space: one_comp, filepath: sbml_non_saturable, format: SBML};
+//#export {space: one_comp_saturation, filepath: sbml_saturable, format: SBML};
+#export {format: JSON, filepath: json};
+#export {format: SLV, space: one_comp, filepath: slv_non_saturable};
+#export {format: SLV, space: one_comp_saturation, filepath: slv_saturable};
+#export {format: Mrgsolve, space: one_comp, filepath: non_saturable};
+#export {format: Mrgsolve, space: one_comp_saturation, filepath: mrg_saturable};

@@ -14,10 +14,4 @@ abstract namespace one begin
 end
 
 // exports
-//output_sbml @SBMLExport { filepath: sbml, version: L2V4 };
-//output_slv @SLVExport { filepath: model, eventsOff: false };
-one::output_json @JSONExport { filepath: output };
-//output_yaml @YAMLExport { filepath: output };
-//output_simbio @SimbioExport { filepath: simbio };
-//output_mrg @MrgsolveExport { filepath: mrgsolve };
-//output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };
+#export { filepath: output, space: one, format: JSON };

@@ -8,8 +8,9 @@ end
 include non-saturable.heta
 include saturable.heta
 
-//one_comp::sbml_non_saturable @SBMLExport;
-//one_comp_saturation::sbml_saturable @SBMLExport {model: one_comp_saturation};
-json @JSONExport;
-one_comp::slv_non_saturable @SLVExport;
-one_comp_saturation::slv_saturable @SLVExport;
+//#export {space: one_comp, format: SBML, filepath: sbml_non_saturable};
+//#export {space: one_comp_saturation, format: SBML, filepath: sbml_saturable};
+#export { filepath: json, format: JSON };
+#export { filepath: slv_non_saturable, space: one_comp, format: SLV };
+#export { filepath: slv_saturable, space: one_comp_saturation, format: SLV };
+

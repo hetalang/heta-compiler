@@ -5,9 +5,7 @@ k1 @Const = 1.4;
 
 c1 @Compartment .= 1;
 
-excel @XLSXExport { filepath: table, omitRows: 3, sheet: one, splitByClass: true };
-json @JSONExport { filepath: output };
-//yaml @YAMLExport { filepath: output };
-//slv @SLVExport { filepath: model };
+#export { format: XLSX, filepath: table, omitRows: 3, sheet: one, splitByClass: true };
+#export { format: JSON, filepath: output };
 
 include 1.heta type heta
