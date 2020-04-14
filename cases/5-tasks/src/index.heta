@@ -38,8 +38,8 @@ mm::sim_task1 @SimpleTask {
   solver: { dtmax: 12 }
 };
 
-mm::mm_sbml @SBMLExport { title: Exported mm model};
-mm::full_json @JSONExport;
-mm::full_yaml @YAMLExport;
-mm::mm_slv @SLVExport; /* defaultTask: sim_task1 */
-mm::mm_mrg @MrgsolveExport { title: export to mrgsolve };
+#export { space: mm, filepath: mm_sbml, format: SBML };
+#export { space: mm, filepath: full_json, format: JSON };
+#export { space: mm, filepath: full_yaml, format: YAML };
+#export { space: mm, filepath: mm_slv, format: SLV }; /* defaultTask: sim_task1 */
+#export {  space: mm, filepath: mm_mrg, format: Mrgsolve };

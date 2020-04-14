@@ -16,5 +16,4 @@ namespace two begin
   comp1 @Compartment .= 1;
 end
 
-two::output_json @JSONExport;
-
+#export { filepath: output_json, space: two, format: JSON };

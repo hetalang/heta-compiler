@@ -6,7 +6,7 @@
     assignments:
         start_: 1
 -
-    action: upsert
-    class: SBMLExport
-    id: output_sbml
+    action: export
+    format: SBML
+    filepath: output_sbml
     version: L2V4

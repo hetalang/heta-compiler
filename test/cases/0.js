@@ -39,15 +39,14 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @SBMLExport, check and compare.', () => {
-    let sbml_export = b.container.select({id: 'mm_sbml', space: 'mm'});
+    let sbml_export = b.container.exportStorage[0];
     let code = sbml_export.make()[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);
-    //console.log(code);
   });
 
   it('Run @MrgsolveExport, check and compare.', () => {
-    let mm_mrg = b.container.select({id: 'mm_mrg', space: 'mm'});
+    let mm_mrg = b.container.exportStorage[5];
     let code = mm_mrg.make()[0].content;
     let filename = './diagnostics/0/mm_mrg.cpp';
     fs.outputFileSync(filename, code);
@@ -55,11 +54,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.container.classes.JSONExport;
-    let json_export = new JSONExport;
-    json_export._id = 'json_export';
-    json_export.namespace = b.container.namespaces.get('mm');
-
+    let json_export = b.container.exportStorage[2];
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
@@ -67,11 +62,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @YAMLExport, check and compare.', () => {
-    const YAMLExport = b.container.classes.YAMLExport;
-    let yaml_export = new YAMLExport;
-    yaml_export._id = 'yaml_export';
-    yaml_export.namespace = b.container.namespaces.get('mm');
-
+    let yaml_export = b.container.exportStorage[3];
     let code = yaml_export.make()[0].content;
     let obj = safeLoad(code);
     expect(obj).to.be.deep.equal(yaml_correct);
@@ -79,14 +70,11 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run @SLVExport, check and compare.', () => {
-    const SLVExport = b.container.classes.SLVExport;
-    let slv_export = new SLVExport;
-    slv_export._id = 'slv_export';
-    slv_export.namespace = b.container.namespaces.get('mm');
-
+    let slv_export = b.container.exportStorage[4];
     let code = slv_export.make()[0].content;
     let obj = slvParse.parse(code);
     expect(obj).to.be.deep.equal(slv_correct);
     //console.log(obj);
   });
+
 });

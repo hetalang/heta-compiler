@@ -61,15 +61,9 @@ namespace mod1 begin
   };
 end
 
-
-mod1::mod1_sbml @SBMLExport;
-
-mod1::mod1_simbio @SimbioExport;
-
-mod1::json @JSONExport;
-
-mod1::yaml @YAMLExport;
-
-mod1::mod1_slv @SLVExport { eventsOff: false };
-
-mod1::mrg_mod1 @MrgsolveExport;
+#export {space: mod1, filepath: mod1_sbml, format: SBML};
+#export {space: mod1, filepath: mod1_simbio, format: Simbio};
+#export {space: mod1, filepath: json, format: JSON};
+#export {space: mod1, filepath: yaml, format: YAML};
+#export {space: mod1, filepath: mod1_slv, format: SLV};
+#export {space: mod1, filepath: mod1_mrg, format: Mrgsolve};

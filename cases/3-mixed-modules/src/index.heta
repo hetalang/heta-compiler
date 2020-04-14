@@ -18,4 +18,4 @@ include page.md type md with {
   title: hhh
 };
 
-yaml @YAMLExport;
+#export {format: YAML, filepath: yaml};

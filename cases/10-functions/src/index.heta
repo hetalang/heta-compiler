@@ -37,5 +37,5 @@ p28 @Record 'x*y' := x*y;
 p29 @Record 'x/y' := x/y;
 p30 @Record 'x^y' := x^y;
 
-slv1 @SLVExport { fielpath: model.slv };
-sbml1 @SBMLExport { filepath: sbml.xml };
+#export {filepath: model, format: SLV};
+#export {filepath: sbml, format: SBML};

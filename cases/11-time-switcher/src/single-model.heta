@@ -18,9 +18,9 @@ vel := kel*s1*comp1;
 a0 []= 0; // initial value
 s1 []= 0;
 
-//one_comp::sbml @SBMLExport;
-json @JSONExport;
-slv @SLVExport;
+//#export {space: one_comp, filepath: sbml, format: SBML};
+#export {filepath: json, format: JSON};
+#export {filepath: slv, format: SLV};
 
 sw1 @TimeSwitcher {
   start: 0,

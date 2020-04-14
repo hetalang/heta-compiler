@@ -3,7 +3,7 @@ const _ = require('lodash');
 const Logger = require('./logger');
 
 class Namespace extends Map {
-  constructor(spaceName){
+  constructor(spaceName){ 
     super();
     //if (typeof spaceName !== 'string')
     //  throw new TypeError(`spaceName argument must be string, got ${spaceName}`);

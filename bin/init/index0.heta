@@ -12,10 +12,10 @@ include ./qsp-units.heta
 p1 @Record .= 1;
 
 // exports
-output_sbml @SBMLExport { filepath: sbml, version: L2V4 };
-//output_slv @SLVExport { filepath: model, eventsOff: false };
-//output_json @JSONExport { filepath: output };
-//output_yaml @YAMLExport { filepath: output };
-//output_simbio @SimbioExport { filepath: simbio };
-//output_mrg @MrgsolveExport { filepath: mrgsolve };
-//output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };
+#export { format: SBML, filepath: sbml, version: L2V4 };
+//#export { format: SLV, filepath: model, eventsOff: false };
+//#export { format: JSON, filepath: output };
+//#export { format: YAML, filepath: output };
+//#export { format: Simbio, filepath: simbio };
+//#export { format: Mrgsolve, filepath: mrgsolve };
+//#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };

@@ -215,17 +215,5 @@
     "id": "sw1",
     "space": "first",
     "condition": "evt1"
-  },
-  {
-    "class": "SBMLExport",
-    "id": "output_sbml",
-    "space": "first",
-    "filepath": "sbml"
-  },
-  {
-    "class": "JSONExport",
-    "id": "output_json",
-    "space": "first",
-    "filepath": "output"
   }
 ]

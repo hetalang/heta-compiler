@@ -10,10 +10,14 @@ include first-model.json type json
 // include addon.yml type yaml
 
 // exports
-first::output_sbml @SBMLExport { filepath: sbml, version: L2V4, skipMathChecking: true };
-//output_slv @SLVExport { filepath: model, eventsOff: false };
-first::output_json @JSONExport { filepath: output };
-//output_yaml @YAMLExport { filepath: output };
-//output_simbio @SimbioExport { filepath: simbio };
-//output_mrg @MrgsolveExport { filepath: mrgsolve };
-//output_xlsx @XLSXExport { filepath: table, omitRows: 3, splitByClass: true };
+#export {
+  format: SBML,
+  filepath: sbml, 
+  version: L2V4, 
+  skipMathChecking: true
+};
+
+#export {
+  filepath: output,
+  format: JSON
+};

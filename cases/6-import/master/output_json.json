@@ -73,15 +73,5 @@
     "id": "Km_A",
     "space": "model",
     "num": 0.8
-  },
-  {
-    "class": "SBMLExport",
-    "id": "output_sbml",
-    "space": "model"
-  },
-  {
-    "class": "JSONExport",
-    "id": "output_json",
-    "space": "model"
   }
 ]
