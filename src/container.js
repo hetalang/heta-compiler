@@ -48,7 +48,25 @@ class Container {
     if(reservedWords.indexOf(q.id)!==-1)
       logger.error(`${ind} id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`, 'QueueError');
     if(!q.class || typeof q.class !== 'string')
-      logger.error(`${ind} No class or unsuitable class for "insert": ${q.class}`);
+      logger.error(`${ind} No class or unsuitable class for "insert": ${q.class}`, 'QueueError');
+    
+    // STOP
+    if (logger.hasErrors) {
+      this.logger.pushMany(logger);
+      return;
+    }
+    
+    let exportCheck = q.class.match(/^(\w+)Export$/);
+    if (exportCheck !== null) { // check if old export syntax is used
+      logger.warn(`Usage of Export is depricated starting from v0.5.0, use syntax: #export {format: ${exportCheck[1]}, ...}`)
+      this.logger.pushMany(logger);
+      let exportQ = _.omit(q, ['class', 'id']);
+      _.defaults(exportQ, {
+        format: exportCheck[1],
+        filepath: q.id
+      });
+      return this.export(exportQ);
+    }
 
     // check if class is in the list
     let selectedClass = this.classes[q.class];
