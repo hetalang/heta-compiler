@@ -48,7 +48,7 @@ class Builder {
       return;
     }
 
-    // assignments
+    // file paths
     Object.assign(this, declaration);
     this._coreDirname = path.resolve(coreDirname);
     this._distDirname = path.resolve(coreDirname, declaration.options.distDir);
@@ -58,7 +58,14 @@ class Builder {
     // create container
     this.container = new Container();
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
+    
+    // index file not found
+    let indexFilepath = path.resolve(coreDirname, declaration.importModule.source);
+    if (!fs.existsSync(indexFilepath)) {
+      this.logger.error(`index file "${indexFilepath}" does not exist.`, 'BuilderError');
+    }
   }
+
   run(){
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     
