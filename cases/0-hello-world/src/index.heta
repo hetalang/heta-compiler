@@ -65,8 +65,8 @@ end
   filepath: matlab1,
 };
 
-/*
-mm::mm_sbml @SBMExport { title: Exported mm model};
+/* 
+mm::mm_sbml @SBMLExport { title: Exported mm model};
 mm::mm_simbio @SimbioExport;
 mm::full_json @JSONExport;
 mm::full_yaml @YAMLExport;

@@ -22,14 +22,14 @@ program
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
-  .option('-d, --declaration <filepath>', 'platform declaration file without extension, search extensions: ["", ".json", ".json5", ".yml"]', 'platform')
+  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".json5", ".yml"]', 'platform')
   // options
-  .option('--skip-export', 'do not export files to local directory')
-  .option('--log-mode <never|error|always>', 'When to create log file.')
-  .option('--debug', 'If set the raw module output will be stored in "meta".')
+  .option('-S, --skip-export', 'do not export files to local directory')
+  .option('-L, --log-mode <never|error|always>', 'When to create log file.')
+  .option('-d, --debug', 'If set the raw module output will be stored in "meta".')
   // moduleImport
-  .option('--source <filepath>', 'path to main heta module.')
-  .option('--type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
+  .option('-s, --source <filepath>', 'path to main heta module.')
+  .option('-t, --type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
   .parse(process.argv);
 
 // set target directory of platform
@@ -46,17 +46,16 @@ let extensionNumber = searches
   .indexOf(true);
 // is declaration file found ?
 if (extensionNumber === -1) {
+  process.stdout.write('Running compilation without declaration file...\n');
   var declaration = {};
-  //console.log( 'Declaration file is not found in paths:\n', JSON.stringify(searches, null, 2));
-  console.log('Running compilation without declaration file.');
 } else {
-  let delarationFile = searches[extensionNumber];
-  console.log(`Running compilation with declaration "${delarationFile}"`);
-  let declarationText = fs.readFileSync(delarationFile);
+  let declarationFile = searches[extensionNumber];
+  process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
+  let declarationText = fs.readFileSync(declarationFile);
   try {
     declaration = safeLoad(declarationText);
   } catch (e) {
-    console.log('Wrong format of declaration file:', e.message);
+    process.stdout.write(`Wrong format of declaration file: \n"${e.message}"\n`);
     process.exit(1);
   }
 }
@@ -74,7 +73,7 @@ let CLIDeclaration = {
   }
 };
 
-// === combine options ===
+// === combine options CLI => declaration => default index ===
 let integralDeclaration = _.defaultsDeep(CLIDeclaration, declaration);
 
 // wrong version throws, if no version stated than skip
@@ -82,31 +81,35 @@ let satisfiesVersion = integralDeclaration.builderVersion
   ? semver.satisfies(version, integralDeclaration.builderVersion)
   : true;
 if (!satisfiesVersion) {
-  console.log(`Version of declaration file "${integralDeclaration.builderVersion}" does not satisfy current builder.`);
+  process.stdout.write(`Version of declaration file "${integralDeclaration.builderVersion}" does not satisfy current builder.\n`);
   process.exit(1);
 }
 
-// === runBuilder ===
-let builder = new Builder(integralDeclaration, targetDir);
+// === this part uses "send errors to developer" message ===
+try {
+  var builder = new Builder(integralDeclaration, targetDir);
+} catch(e) {
+  process.stdout.write(contactMessage + '\n');
+  throw e;
+}
 if (builder.logger.hasErrors) {
-  console.log('Declaration ERROR! See logs.');
+  process.stdout.write('Declaration ERROR! See logs.\n');
   process.exit(1);
 }
 
-// send errors to developer
 try {
   builder.run();
 } catch(e) {
-  console.log(contactMessage);
+  process.stdout.write(contactMessage + '\n');
   throw e;
 }
-
 if (builder.logger.hasErrors) {
-  console.log('Compilation ERROR! See logs.');
-  integralDeclaration.options.exitWithoutError 
-    ? process.exit(0) 
-    : process.exit(1);
+  process.stdout.write('Compilation ERROR! See logs.\n');
+  if (integralDeclaration.options.exitWithoutError)
+    process.exit(0);
+  else
+    process.exit(1);
 } else {
-  console.log('Compilation OK!');
+  process.stdout.write('Compilation OK!\n');
   process.exit(0);
 }
