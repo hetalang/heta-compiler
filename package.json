@@ -16,7 +16,7 @@
   },
   "bugs": {
     "url": "https://github.com/insysbio/heta-compiler/issues",
-    "email" : "dev@insysbio.com"
+    "email": "dev@insysbio.com"
   },
   "author": "Evgeny Metelkin <evgeny.metelkin@gmail.com> (https://github.com/metelkin)",
   "license": "Apache-2.0",
