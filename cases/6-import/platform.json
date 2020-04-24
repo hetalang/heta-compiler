@@ -1,5 +1,5 @@
 {
-  "builderVersion": "^0.4.5",
+  "builderVersion": "*",
   "id": "use-case",
   "title": "Case for testing use action",
   "notes": "platform notes",

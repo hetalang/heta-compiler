@@ -1,5 +1,5 @@
 {
-  "builderVersion": "^0.4.24",
+  "builderVersion": "*",
   "id": "template",
   "title": "platform title",
   "notes": "platform notes",

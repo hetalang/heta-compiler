@@ -1,5 +1,5 @@
 {
-  "builderVersion": "^0.4.19",
+  "builderVersion": "*",
   "id": "to-sbml",
   "title": "platform title",
   "notes": "platform notes",
