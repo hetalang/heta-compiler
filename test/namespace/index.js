@@ -2,7 +2,6 @@
 const { expect } = require('chai');
 const { Namespace } = require('../../src/namespace');
 const { Record } = require('../../src/core/record');
-const { BindingError } = require('../../src/heta-error');
 
 describe('Namespace sort testing.', () => {
   let x;

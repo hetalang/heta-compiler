@@ -1,6 +1,5 @@
 /* global describe, it */
 const { ReferenceDefinition } = require('../../src/core/reference-definition');
-const { ValidationError } = require('../../src/heta-error');
 const { expect } = require('chai');
 
 describe('Unit test for ReferenceDefinition', () => {

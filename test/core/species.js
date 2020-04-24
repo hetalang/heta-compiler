@@ -1,7 +1,6 @@
 /* global describe, it */
 const { Species } = require('../../src/core/species');
 const { expect } = require('chai');
-const { BindingError } = require('../../src/heta-error');
 
 describe('Testing dependOn() for Record and Species', () => {
   it('for Species isAmount=true', () => {

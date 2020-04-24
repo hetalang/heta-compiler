@@ -1,6 +1,5 @@
 /* global describe, it */
 const { _Component } = require('../../src/core/_component');
-const { ValidationError } = require('../../src/heta-error');
 const { expect } = require('chai');
 
 describe('Unit test for _Component common methods', () => {

@@ -1,6 +1,5 @@
 /* global describe, it */
 const { UnitDef } = require('../../src/core/unit-def');
-const { ValidationError } = require('../../src/heta-error');
 const { expect } = require('chai');
 
 describe('Unit test for UnitDef', () => {

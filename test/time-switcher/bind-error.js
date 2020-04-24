@@ -1,7 +1,6 @@
 /* global describe, it*/
 const { expect } = require('chai');
 const { Container } = require('../../src');
-const { BindingError, ValidationError } = require('../../src/heta-error');
 
 describe('TimeSwitcher errors', () => {
 
