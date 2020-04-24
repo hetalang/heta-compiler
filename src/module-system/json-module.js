@@ -15,7 +15,10 @@ _Module.prototype.setJSONModule = function(){
   return this;
 };
 
-function _JSONParse(filename, ...params){
+function _JSONParse(
+  filename, // used here to display in error message 
+  ...params
+){
   try{
     return JSON.parse(...params);
   }catch(e){
