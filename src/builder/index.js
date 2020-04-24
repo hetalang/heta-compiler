@@ -3,9 +3,8 @@ const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
-const Container = require('../container');
+const { Container, coreComponents } = require('../index');
 const ModuleSystem = require('../module-system');
-const coreComponents = require('../core-components');
 const Logger = require('../logger');
 const _ = require('lodash');
 

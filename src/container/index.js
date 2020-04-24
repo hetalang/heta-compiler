@@ -1,18 +1,18 @@
-const { Record } = require('./core/record');
-const { Compartment } = require('./core/compartment');
-const { Species } = require('./core/species');
-const { Reaction } = require('./core/reaction');
-const { Process } = require('./core/process');
-const { CondSwitcher } = require('./core/cond-switcher');
-const { TimeSwitcher } = require('./core/time-switcher');
-const { ReferenceDefinition } = require('./core/reference-definition');
-const { UnitDef } = require('./core/unit-def');
-const { Page } = require('./core/page');
-const { Const } = require('./core/const');
-const { SimpleTask } = require('./core/simple-task');
+const { Record } = require('../core/record');
+const { Compartment } = require('../core/compartment');
+const { Species } = require('../core/species');
+const { Reaction } = require('../core/reaction');
+const { Process } = require('../core/process');
+const { CondSwitcher } = require('../core/cond-switcher');
+const { TimeSwitcher } = require('../core/time-switcher');
+const { ReferenceDefinition } = require('../core/reference-definition');
+const { UnitDef } = require('../core/unit-def');
+const { Page } = require('../core/page');
+const { Const } = require('../core/const');
+const { SimpleTask } = require('../core/simple-task');
 const _ = require('lodash');
-const { Namespace } = require('./namespace');
-const Logger = require('./logger');
+const { Namespace } = require('../namespace');
+const Logger = require('../logger');
 
 // they cannot be used as id, when 
 const reservedWords = [

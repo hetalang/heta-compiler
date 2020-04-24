@@ -1,6 +1,5 @@
 const Container = require('./container');
-const { Builder } = require('./builder');
-const coreComponents = require('./core-components');
+const coreComponents = require('./container/core-components');
 
 require('./yaml-export');
 require('./json-export');
@@ -15,6 +14,5 @@ require('./julia-export');
 
 module.exports = {
   Container,
-  Builder,
   coreComponents
 };

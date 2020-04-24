@@ -1,6 +1,6 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const {safeDump} = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 
 class YAMLExport extends _Export {
   get className(){

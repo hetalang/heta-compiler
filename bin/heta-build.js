@@ -2,7 +2,7 @@
 const program = require('commander');
 const fs = require('fs');
 const path = require('path');
-const { Builder } = require('../src');
+const { Builder } = require('../src/builder');
 const { safeLoad } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _ = require('lodash');
 const semver = require('semver');

@@ -1,5 +1,5 @@
 id: mm
-builderVersion: ^0.4.21
+builderVersion: '*'
 options:
   logLevel: info
   debug: true

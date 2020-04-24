@@ -1,6 +1,6 @@
 /* global describe, it */
 
-const { Builder } = require('../../src');
+const { Builder } = require('../../src/builder');
 const { expect, use } = require('chai');
 const chaiXml = require('chai-xml');
 use(chaiXml);
