@@ -37,10 +37,13 @@ class Process extends Record {
     
     return this;
   }
+  get processExpr(){
+    return actors2rct(this.actors);
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     res.actors = options.simplifyActors
-      ? actors2rct(this.actors)
+      ? this.processExpr
       : this.actors.map((actor) => {
         return { target: actor.target, stoichiometry: actor.stoichiometry };
       });
