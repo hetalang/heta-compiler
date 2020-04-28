@@ -1,6 +1,4 @@
 const { _Component } = require('./_component');
-const path = require('path');
-const fs = require('fs-extra');
 
 /*
   _Export class
@@ -42,16 +40,6 @@ class _Export extends _Component {
   */
   make(){
     throw new TypeError(`No method make() for "${this.className}"`);
-  }
-  /*
-    save one or several output files to disk
-  */
-  makeAndSave(pathPrefix){
-    this.make().forEach((out) => {
-      let relPath = [this.filepath || this.id, out.pathSuffix].join('');
-      let fullPath = path.join(pathPrefix, relPath);
-      fs.outputFileSync(fullPath, out.content);
-    });
   }
   toQ(options = {}){
     let res = super.toQ(options);

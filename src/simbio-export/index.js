@@ -1,14 +1,7 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('../nunjucks-env');
-const fs = require('fs');
-const path = require('path');
 const legalUnits = require('./legal-units');
-
-const fun = fs.readFileSync(
-  path.join(__dirname, 'fun.m'),
-  'utf8'
-);
 
 class SimbioExport extends _Export{
   merge(q={}, skipChecking){
@@ -30,7 +23,7 @@ class SimbioExport extends _Export{
         type: 'text'
       },
       {
-        content: fun,
+        content: this.getFunCode(),
         pathSuffix: '/fun.m',
         type: 'text'
       }
@@ -45,6 +38,12 @@ class SimbioExport extends _Export{
   getSimbioCode(){
     return nunjucks.render(
       'simbio-export/template.m.njk',
+      this
+    );
+  }
+  getFunCode(){
+    return nunjucks.render(
+      'simbio-export/fun.m',
       this
     );
   }

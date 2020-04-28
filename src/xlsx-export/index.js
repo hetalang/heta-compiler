@@ -1,7 +1,5 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const path = require('path');
-const XLSX = require('xlsx'); // see docs 
 const _ = require('lodash');
 
 class XLSXExport extends _Export {
@@ -14,25 +12,6 @@ class XLSXExport extends _Export {
   }
   get className(){
     return 'XLSXExport';
-  }
-  makeAndSave(pathPrefix){
-    let out = this.make();
-    let relPath = [this.filepath || this.id, '.xlsx'].join('');
-    let fullPath = path.join(pathPrefix, relPath);
-    
-    let wb = XLSX.utils.book_new();
-    out.forEach((x) => {
-      let omitRows = x.omitRows!==undefined
-        ? x.omitRows // use omitRows from out 
-        : this.omitRows;
-      let ws = XLSX.utils.json_to_sheet(
-        _.times(omitRows, {}).concat(x.content),
-        { header: x.headerSeq, skipHeader: x.skipHeader } // XLSX tries to mutate header
-      );
-      XLSX.utils.book_append_sheet(wb, ws, x.name);
-    });
-
-    XLSX.writeFile(wb, fullPath, {});
   }
   make(){
     this.logger.reset();

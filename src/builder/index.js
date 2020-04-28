@@ -7,6 +7,8 @@ const { Container, coreComponents } = require('../index');
 const ModuleSystem = require('../module-system');
 const Logger = require('../logger');
 const _ = require('lodash');
+require('./_export');
+require('./xlsx-export');
 
 /**
  * Auxilary class for performing compilation. It is developed to support CLI of Heta compiler.
