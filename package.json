@@ -43,7 +43,7 @@
     "mathjs": "^5.10.3",
     "mathjs-mathml": "^0.2.1",
     "mathjs-translate": "^0.1.4",
-    "nunjucks": "^3.2.0",
+    "nunjucks": "^3.2.1",
     "random-id": "^1.0.3",
     "semver": "^6.3.0",
     "xlsx": "^0.15.3",
