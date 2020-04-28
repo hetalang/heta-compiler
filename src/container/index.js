@@ -389,10 +389,10 @@ class Container {
       .flatten()
       .value();
   }
-  toQArr(removeCoreComponents = false){
+  toQArr(removeCoreComponents = false, options = {}){
     let qArr = this.toArray()
       .filter((x) => !removeCoreComponents || !x.isCore)
-      .map((x) => x.toQ());
+      .map((x) => x.toQ(options));
     
     return qArr;
   }

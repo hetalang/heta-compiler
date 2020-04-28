@@ -73,8 +73,8 @@ class XLSXExport extends _Export {
       }];
     }
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.omitRows) res.omitRows = this.omitRows;
     if(this.splitByClass) res.splitByClass = this.splitByClass;
     return res;

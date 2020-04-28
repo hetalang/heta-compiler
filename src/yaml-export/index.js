@@ -1,13 +1,16 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
 const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const _ = require('lodash');
 
 class YAMLExport extends _Export {
   get className(){
     return 'YAMLExport';
   }
   make(){
-    let qArr = this.namespace.toQArr(true);
+    let qArr = this.namespace
+      .toQArr(true)
+      .map((q) => this.omit ? _.omit(q, this.omit) : q);
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);
@@ -24,8 +27,8 @@ class YAMLExport extends _Export {
       type: 'text'
     }];
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     return res;
   }
 }

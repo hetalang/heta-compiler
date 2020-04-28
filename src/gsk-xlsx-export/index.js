@@ -146,8 +146,8 @@ class GSKXLSXExport extends XLSXExport {
 
     return [functions, species, parameters, function_units];
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
 
     return res;
   }

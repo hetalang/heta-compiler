@@ -5,7 +5,7 @@ const _ = require('lodash');
 require('./expression');
 
 class SLVExport extends _Export{
-  merge(q={}, skipChecking){
+  merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     
     if(q.eventsOff) this.eventsOff = q.eventsOff;
@@ -156,8 +156,8 @@ class SLVExport extends _Export{
       this
     );
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
     if(this.eventsOff) res.eventsOff = this.eventsOff;
     if(this.defaultTask) res.defaultTask = this.defaultTask;
     

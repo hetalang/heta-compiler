@@ -43,8 +43,8 @@ class SBMLExport extends _Export {
       this
     );
   }
-  toQ(){
-    let res = super.toQ();
+  toQ(options = {}){
+    let res = super.toQ(options);
 
     return res;
   }
