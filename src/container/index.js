@@ -366,9 +366,15 @@ class Container {
       logger.pushMany(exportInstance.logger);
       // push to storage
       this.exportStorage.push(exportInstance);
+      
+      return exportInstance;
+    } else {
+      return;
     }
 
     this.logger.pushMany(logger);
+
+    
   }
   load(q, isCore = false){
     // estimate action, default is upsert
