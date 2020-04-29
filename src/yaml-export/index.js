@@ -4,6 +4,13 @@ const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yam
 const _ = require('lodash');
 
 class YAMLExport extends _Export {
+  merge(q = {}, skipChecking){
+    super.merge(q, skipChecking);
+    
+    if(q.omit) this.omit = q.omit;
+
+    return this;
+  }
   get className(){
     return 'YAMLExport';
   }
