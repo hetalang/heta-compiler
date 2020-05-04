@@ -89,6 +89,12 @@ class _Size extends _Component {
 
     return res;
   }
+  references(){
+    let classSpecificRefs = [];
+
+    return super.references()
+      .concat(classSpecificRefs);
+  }
 }
 
 module.exports = {

@@ -47,16 +47,22 @@ class Species extends Record {
       return this.unitsSBML().toHash();
     }
   }
-  dependOn(context, includeCompatment = false){
+  dependOn(context, includeCompartment = false){
     let deps = super.dependOn(context);
 
-    let useCompartment = includeCompatment 
+    let useCompartment = includeCompartment 
       && this.compartment !== undefined 
       && !this.isAmount 
       && !this.isRule;
     if (useCompartment) deps.push(this.compartment);
 
     return deps;
+  }
+  references(){
+    let classSpecificRefs = [this.compartment];
+
+    return super.references()
+      .concat(classSpecificRefs);
   }
 }
 

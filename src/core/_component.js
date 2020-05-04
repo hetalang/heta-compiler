@@ -254,6 +254,12 @@ class _Component {
       return this.instanceOf.call(this.__proto__, className);
     }
   }
+  /*
+  array of direct references inside component (non-unique)
+  */
+ references(){
+   return [];
+ }
 }
 
 _Component._requirements = {};

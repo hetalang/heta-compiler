@@ -156,6 +156,20 @@ class Record extends _Size {
     //}
     return assignment;
   }
+  references(){
+    let classSpecificRefs = _.chain(this.assignments)
+      .map((expression) => {
+        let deps = expression.exprParsed.getSymbols();
+        _.pull(deps, 't', 'e', 'pi');
+        
+        return deps;
+      })
+      .flatten()
+      .value();
+
+    return super.references()
+      .concat(classSpecificRefs);
+  }
 }
 
 module.exports = {
