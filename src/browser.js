@@ -2,7 +2,7 @@ const Container = require('./container');
 const coreComponents = require('./container/core-components');
 
 // set nunjacks environment
-require('./nunjucks-env')('/views');
+const nunjucksEnv = require('./nunjucks-env')('/templates');
 
 require('./yaml-export');
 require('./json-export');
@@ -17,5 +17,6 @@ require('./julia-export');
 
 module.exports = {
   Container,
-  coreComponents
+  coreComponents,
+  nunjucksEnv
 };
