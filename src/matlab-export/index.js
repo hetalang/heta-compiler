@@ -1,6 +1,6 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const nunjucks = require('../nunjucks-env');
+const nunjucks = require('nunjucks');
 const pkg = require('../../package');
 const _ = require('lodash');
 

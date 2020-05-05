@@ -2,7 +2,7 @@ const Container = require('./container');
 const coreComponents = require('./container/core-components');
 
 // set nunjacks environment
-require('./nunjucks-env')(__dirname + '/templates');
+require('./nunjucks-env')('/views');
 
 require('./yaml-export');
 require('./json-export');

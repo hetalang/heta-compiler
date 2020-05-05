@@ -1,6 +1,6 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
-const nunjucks = require('../nunjucks-env');
+const nunjucks = require('nunjucks');
 require('./expression');
 const legalUnits = require('./legal-units');
 
