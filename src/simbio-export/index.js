@@ -37,13 +37,13 @@ class SimbioExport extends _Export{
   }
   getSimbioCode(){
     return nunjucks.render(
-      'simbio-export/template.m.njk',
+      'template.m.njk',
       this
     );
   }
   getFunCode(){
     return nunjucks.render(
-      'simbio-export/fun.m',
+      'fun.m',
       this
     );
   }

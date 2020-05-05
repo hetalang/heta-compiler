@@ -13,7 +13,7 @@ const env = new nunjucks.Environment(
 // this version will look in "node_packages/heta-compiler/src" in node
 // and https://homepage.com/ in browser
 const env = nunjucks.configure(
-  __dirname,
+  __dirname + '/templates',
   { autoescape: false }
 );
 

@@ -84,7 +84,7 @@ class MrgsolveExport extends _Export {
   }
   getMrgsolveCode(){
     return nunjucks.render(
-      'mrgsolve-export/model.cpp.njk',
+      'model.cpp.njk',
       this
     );
   }

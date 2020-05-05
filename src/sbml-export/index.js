@@ -39,7 +39,7 @@ class SBMLExport extends _Export {
   }
   getSBMLCode(){
     return nunjucks.render(
-      'sbml-export/template.xml.njk',
+      'template.xml.njk',
       this
     );
   }

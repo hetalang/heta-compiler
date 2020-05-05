@@ -109,25 +109,25 @@ class MatlabExport extends _Export {
   }
   getModelCode(image = {}){
     return nunjucks.render(
-      'matlab-export/model.m.njk',
+      'model.m.njk',
       image
     );
   }
   getParamCode(image = {}){
     return nunjucks.render(
-      'matlab-export/param.m.njk',
+      'param.m.njk',
       image
     );
   }
   getRunCode(image = {}){
     return nunjucks.render(
-      'matlab-export/run.m.njk',
+      'run.m.njk',
       image
     );
   }
   getInitCode(image = {}){
     return nunjucks.render(
-      'matlab-export/init.m.njk',
+      'init.m.njk',
       image
     );
   }

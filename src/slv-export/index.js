@@ -152,7 +152,7 @@ class SLVExport extends _Export{
   }
   getSLVCode(){
     return nunjucks.render(
-      'slv-export/blocks-template.slv.njk',
+      'blocks-template.slv.njk',
       this
     );
   }
