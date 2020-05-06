@@ -3,10 +3,12 @@ const { _Export } = require('../core/_export');
 const _ = require('lodash');
 
 class XLSXExport extends _Export {
-  merge(q={}, skipChecking){
+  merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     if(q.omitRows!==undefined) this.omitRows = q.omitRows;
     if(q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
+
+    if(q.omit) this.omit = q.omit;
 
     return this;
   }
@@ -26,6 +28,7 @@ class XLSXExport extends _Export {
       .toArray()
       .filter((x) => !x.isCore)
       .map((x) => x.toFlat())
+      .map((q) => this.omit ? _.omit(q, this.omit) : q)
       .map((x) => {
         // add on property
         x.on = 1;
