@@ -31,11 +31,20 @@ function _toMathExpr(element, useParentheses = false){
     return _.drop(element.elements) // without first element
       .map((x) => _toMathExpr(x, true)).join(' * ');
   } else if(element.name === 'apply' && first.name === 'divide') {
-    return _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true)).join(' / ');
+    // A / B, <divide> for two arguments
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true));
+    return args[0] + ' / ' + args[1];
+  } else if(element.name === 'apply' && first.name === 'minus' && element.elements.length === 2) {
+    // -A, <minus> for one argement
+    let arg1 = element.elements[1];
+    let expr = '-' + _toMathExpr(arg1, true);
+    return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'minus') {
-    let expr = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true)).join(' - ');
+    // A - B, <minus> for two argumets
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true));
+    let expr = args[0] + ' - ' + args[1];
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
     let expr = _.drop(element.elements)

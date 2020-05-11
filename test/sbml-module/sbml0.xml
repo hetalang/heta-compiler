@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+    <model>
+        <listOfRules>
+        <!-- PART 1 -->
+            <assignmentRule variable="p0">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <cn>1</cn>
+                        <cn>2</cn>
+                        <cn>3</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p1">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <ci>a</ci>
+                        <ci>b</ci>
+                        <ci>c</ci>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p2">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <cn>1</cn>
+                        <cn>2</cn>
+                        <cn>3</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p3">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <ci>a</ci>
+                        <ci>b</ci>
+                        <ci>c</ci>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p4">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <times/>
+                        <cn>1</cn>
+                        <cn>2</cn>
+                        <cn>3</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p5">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <cn>1</cn>
+                        <cn>2</cn>
+                        <cn>3</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p6">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p7">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <ci>x</ci>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            
+        <!-- PART 2 -->
+            <assignmentRule variable="p8">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <cn>1</cn>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                        <cn>4</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p9">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <cn>1</cn>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p10">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <times/>
+                        <cn>1</cn>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p11">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <cn>1</cn>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p12">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p13">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <apply>
+                            <plus/>
+                            <cn>1</cn>
+                            <cn>2</cn>
+                        </apply>
+                        <cn>3</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p14">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p15">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <times/>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p16">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <apply>
+                            <plus/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+        <!-- PART 3 -->
+            <assignmentRule variable="p17">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <cn>1</cn>
+                        <cn>-2</cn>
+                        <cn>-3</cn>
+                        <cn>4</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p18">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <cn>1</cn>
+                        <cn>-2</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+             
+            <assignmentRule variable="p19">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <cn>-2</cn>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p20">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <minus/>
+                        <cn>-2</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p21">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <times/>
+                        <cn>1</cn>
+                        <cn>-2</cn>
+                    </apply>
+                </math>
+
+            </assignmentRule>
+                        <assignmentRule variable="p22">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <times/>
+                        <cn>-2</cn>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p23">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <cn>1</cn>
+                        <cn>-2</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p24">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <cn>-2</cn>
+                        <cn>1</cn>
+                    </apply>
+                </math>
+            </assignmentRule>
+        </listOfRules>
+    </model>
+</sbml>
