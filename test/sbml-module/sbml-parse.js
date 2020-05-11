@@ -16,24 +16,29 @@ const master = [
   { expectation: '-1' },
   { expectation: '-x' },
   // PART 2
-  { expectation: '1 + (2 + 3) + 4' }, // => 1 + 2 + 3 + 4
+  { expectation: '1 + 2 + 3 + 4' }, // <= 1 + (2 + 3) + 4
   { expectation: '1 - (2 + 3)' },
   { expectation: '1 * (2 + 3)' },
   { expectation: '1 / (2 + 3)' },
   { expectation: '-(2 + 3)' },
-  { expectation: '(1 + 2) + 3' }, // => 1 + 2 + 3
+  { expectation: '1 + 2 + 3' }, // <= (1 + 2) + 3
   { expectation: '(2 + 3) - 1' }, // => 2 + 3 - 1
   { expectation: '(2 + 3) * 1' },
   { expectation: '(2 + 3) / 1' },
   // PART 3
-  { expectation: '1 + (-2) + (-3) + 4' },
+  { expectation: '1 + (-2) + (-3) + 4' }, // => 1 -2 -3 + 4 
   { expectation: '1 - (-2)' },
-  { expectation: '(-2) - 1' },
+  { expectation: '(-2) - 1' }, // => -2 - 1
   { expectation: '-(-2)' },
   { expectation: '1 * (-2)' },
   { expectation: '(-2) * 1' },
   { expectation: '1 / (-2)' },
   { expectation: '(-2) / 1' },
+  // PART 4
+  { expectation: '1 + 2 * 3 + 4' },
+  { expectation: '2 * 3 + 4' },
+  { expectation: '1 + 2 / 3' },
+  { expectation: '2 / 3 + 1' },
 ]
 
 describe('test sbmlParse() operators', () => {

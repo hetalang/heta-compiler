@@ -28,6 +28,7 @@ function _toMathExpr(element, useParentheses = false){
     let one = _toMathExpr(element.elements[1]);
     return `- (${one})`;
   } else if(element.name === 'apply' && first.name === 'times') {
+    // A * B * C, <times>
     return _.drop(element.elements) // without first element
       .map((x) => _toMathExpr(x, true)).join(' * ');
   } else if(element.name === 'apply' && first.name === 'divide') {
@@ -47,8 +48,9 @@ function _toMathExpr(element, useParentheses = false){
     let expr = args[0] + ' - ' + args[1];
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
+    // A + B + C, <plus>
     let expr = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true)).join(' + ');
+      .map((x) => _toMathExpr(x, false)).join(' + ');
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'power') {
     let expr = _.drop(element.elements)
@@ -203,7 +205,7 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'notanumber') {
     return 'NaN';
   } else {
-    throw new Error('Cannot parse MathML:' + element);
+    throw new Error('Cannot parse MathML:' + JSON.stringify(element, null, 2));
   }
 }
 
