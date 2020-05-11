@@ -22,7 +22,7 @@ const master = [
   { expectation: '1 / (2 + 3)' },
   { expectation: '-(2 + 3)' },
   { expectation: '1 + 2 + 3' }, // <= (1 + 2) + 3
-  { expectation: '(2 + 3) - 1' }, // => 2 + 3 - 1
+  { expectation: '2 + 3 - 1' }, // <=  (2 + 3) - 1
   { expectation: '(2 + 3) * 1' },
   { expectation: '(2 + 3) / 1' },
   // PART 3

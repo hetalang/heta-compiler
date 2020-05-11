@@ -43,9 +43,9 @@ function _toMathExpr(element, useParentheses = false){
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'minus') {
     // A - B, <minus> for two argumets
-    let args = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true));
-    let expr = args[0] + ' - ' + args[1];
+    let arg0 = _toMathExpr(element.elements[1], false)
+    let arg1 = _toMathExpr(element.elements[2], true)
+    let expr = arg0 + ' - ' + arg1;
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
     // A + B + C, <plus>
