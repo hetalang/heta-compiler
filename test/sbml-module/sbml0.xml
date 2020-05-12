@@ -354,6 +354,38 @@
                     </apply>
                 </math>
             </assignmentRule>
+        <!-- PART 5 -->
+            <assignmentRule variable="p29">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <sin/>
+                        <apply>
+                            <plus/>
+                            <ci>a</ci>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+            <assignmentRule variable="p30">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <power/>
+                        <apply>
+                            <plus/>
+                            <ci>a</ci>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                        <apply>
+                            <minus/>
+                            <cn>1</cn>
+                            <cn>2</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
         </listOfRules>
     </model>
 </sbml>

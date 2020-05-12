@@ -39,11 +39,14 @@ const master = [
   { expectation: '2 * 3 + 4' },
   { expectation: '1 + 2 / 3' },
   { expectation: '2 / 3 + 1' },
+  // PART 5
+  { expectation: 'sin(a + 2 + 3)' },
+  { expectation: 'pow(a + 2 + 3, 1 - 2)' },
 ]
 
 describe('test sbmlParse() operators', () => {
   let res = SBMLParse('sbml0', sbml0Text);
-  console.log(res)
+  //console.log(res)
 
   res.forEach((x, i) => {
     it('Expect: ' + master[i].expectation, () => {

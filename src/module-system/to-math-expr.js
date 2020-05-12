@@ -54,18 +54,18 @@ function _toMathExpr(element, useParentheses = false){
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'power') {
     let expr = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true)).join(', ');
+      .map((x) => _toMathExpr(x)).join(', ');
     return `pow(${expr})`;
   } else if(element.name === 'apply' && first.name === 'ceiling') {
     let args = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true));
+      .map((x) => _toMathExpr(x));
     return `ceil(${args[0]})`;
   } else if(element.name === 'apply' && first.name === 'root') {
     let degree = element.elements
       .find(y => y.name === 'degree');
     let args = _.drop(element.elements)
       .filter((x) => x.name !== 'degree')
-      .map((x) => _toMathExpr(x, true));
+      .map((x) => _toMathExpr(x));
     if (degree) {
       let n_element = _.get(degree, 'elements.0');
       let n = _toMathExpr(n_element);
