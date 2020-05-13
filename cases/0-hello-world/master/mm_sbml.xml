@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="mm" metaid="mm" >
-  
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <model 
+    id="mm" 
+    metaid="mm"
+    >
+    
     <listOfCompartments>
       <compartment
         id="default_comp"
@@ -11,7 +18,11 @@
         units="L"
         metaid="mm::default_comp"
         >
-        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Note for the Default compartment</p></html></notes>
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>Note for the Default compartment</p>
+          </html>
+        </notes>
       </compartment>
     </listOfCompartments>
   
@@ -27,7 +38,6 @@
         substanceUnits="uM_L"
         metaid="mm::S"
         >
-        
       </species>
       <species
         id="P"
@@ -40,32 +50,26 @@
         substanceUnits="uM_L"
         metaid="mm::P"
         >
-        
       </species>
     </listOfSpecies>
   
     <listOfParameters>
       <parameter
         id="Vmax"
-        
         constant="true"
         value="0.1"
-        
         metaid="mm::Vmax"
         >
-        
       </parameter>
       <parameter
         id="Km"
-        
         constant="true"
         value="2.5"
         units="uM"
         metaid="mm::Km"
         >
-        
       </parameter>
-  </listOfParameters>
+    </listOfParameters>
   
     <listOfReactions>
       <reaction
@@ -75,17 +79,21 @@
         fast="false"
         metaid="mm::r1"
         >
-        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Transformation of <strong>substate</strong> to <strong>product</strong></p></html></notes>
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>Transformation of <strong>substate</strong> to <strong>product</strong></p>
+          </html>
+        </notes>
         <listOfReactants>
           <speciesReference species="S" stoichiometry="1"/>
           
-          </listOfReactants>
+        </listOfReactants>
         <listOfProducts>
           
           <speciesReference species="P" stoichiometry="1"/>
-          </listOfProducts>
+        </listOfProducts>
         <listOfModifiers>
-          </listOfModifiers>
+        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>Vmax</ci><ci>S</ci></apply><apply><plus/><ci>Km</ci><ci>S</ci></apply></apply><ci>default_comp</ci></apply></math>
         </kineticLaw>

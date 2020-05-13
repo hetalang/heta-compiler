@@ -1,21 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="{{ namespace.spaceName }}" metaid="{{ namespace.spaceName }}" >
-  {% if image.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{image.notesHTML}}</html></notes>{% endif %}
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <model 
+    id="{{ namespace.spaceName }}" 
+    metaid="{{ namespace.spaceName }}"
+    >
+    {% if image.notes is defined %}
+    <notes>
+      <html xmlns="http://www.w3.org/1999/xhtml">
+        {{ image.notesHTML }}
+      </html>
+    </notes>
+  {%- endif %}
   
   {%- set listOfCompartments = image.population.selectByClassName('Compartment') -%}
-  {% if listOfCompartments|length > 0 %}
+  {% if listOfCompartments | length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
       <compartment
-        id="{{record.id}}"
-        {% if record.title %}name="{{record.title}}"{% endif %}
+        id="{{ record.id }}"
+        {%- if record.title %}
+        name="{{ record.title }}"
+        {%- endif %}
         constant="false"
-        {% if record.assignments.start_.num!==undefined -%}size="{{record.assignments.start_.num}}"{%- endif %}
-        {% if record.units!==undefined -%}units="{{ record.unitsHash() }}"{%- endif %}
-        metaid="{{record.index}}"
+        {%- if record.assignments.start_.num is defined %}
+        size="{{ record.assignments.start_.num }}"
+        {%- endif %}
+        {%- if record.units is defined %}
+        units="{{ record.unitsHash() }}"
+        {%- endif %}
+        metaid="{{ record.index }}"
         >
-        {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
+        {%- if record.notes is defined %}
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            {{ record.notesHTML }}
+          </html>
+        </notes>
+        {%- endif %}
       </compartment>
     {%- endfor %}
     </listOfCompartments>
@@ -27,19 +52,29 @@
     {%- for record in listOfSpecies %}
       <species
         id="{{record.id}}"
-        {% if record.title %}name="{{record.title}}"{% endif %}
+        {%- if record.title is defined%}
+        name="{{record.title}}"
+        {%- endif %}
         {#- speciesType="" #}
         compartment="{{record.compartment}}"
         constant="false"
         boundaryCondition="{{ record.boundary===true or record.isRule===true }}"
         hasOnlySubstanceUnits="{{record.isAmount===true}}"
-        {% if record.assignments.start_.num!==undefined -%}
+        {% if record.assignments.start_.num is defined -%}
           {% if record.isAmount===true %}initialAmount{% else %}initialConcentration{% endif %}="{{record.assignments.start_.num}}"
         {%- endif %}
-        {% if record.units!==undefined -%}substanceUnits="{{record.unitsHash(true)}}"{%- endif %}
+        {%- if record.units is defined %}
+        substanceUnits="{{record.unitsHash(true)}}"
+        {%- endif %}
         metaid="{{record.index}}"
         >
-        {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
+        {%- if record.notes is defined %}
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            {{ record.notesHTML }}
+          </html>
+        </notes>
+      {%- endif %}
       </species>
     {%- endfor %}
     </listOfSpecies>
@@ -52,96 +87,138 @@
     <listOfParameters>
     {%- for record in listOfParameters.concat(listOfProcesses) %}
       <parameter
-        id="{{record.id}}"
-        {% if record.title %}name="{{record.title}}"{% endif %}
+        id="{{ record.id }}"
+        {%- if record.title %}
+        name="{{ record.title }}"
+        {%- endif %}
         constant="false"
-        {% if record.assignments.start_.num!==undefined -%}value="{{record.assignments.start_.num}}"{%- endif %}
-        {% if record.units!==undefined -%}units="{{record.unitsHash()}}"{%- endif %}
-        metaid="{{record.index}}"
+        {%- if record.assignments.start_.num is defined %}
+        value="{{ record.assignments.start_.num }}"
+        {%- endif %}
+        {%- if record.units is defined %}
+        units="{{ record.unitsHash() }}"
+        {%- endif %}
+        metaid="{{ record.index }}"
         >
-        {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
+        {%- if record.notes is defined %}
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            {{ record.notesHTML }}
+          </html>
+        </notes>
+        {%- endif %}
       </parameter>
     {%- endfor %}
     {%- for con in listOfConstants %}
       <parameter
-        id="{{con.id}}"
-        {% if record.title %}name="{{con.title}}"{% endif %}
+        id="{{ con.id }}"
+        {%- if record.title %}
+        name="{{ con.title }}"
+        {%- endif %}
         constant="true"
-        {% if con.num!==undefined -%}value="{{con.num}}"{%- endif %}
-        {% if con.units!==undefined -%}units="{{con.unitsHash()}}"{%- endif %}
-        metaid="{{con.index}}"
+        {%- if con.num is defined %}
+        value="{{ con.num }}"
+        {%- endif %}
+        {%- if con.units is defined %}
+        units="{{ con.unitsHash() }}"
+        {%- endif %}
+        metaid="{{ con.index }}"
         >
-        {% if con.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{con.notesHTML}}</html></notes>{% endif %}
+        {%- if con.notes is defined %}
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            {{ con.notesHTML }}
+          </html>
+        </notes>
+        {%- endif %}
       </parameter>
-    {%- endfor %}
-  </listOfParameters>
+      {%- endfor %}
+    </listOfParameters>
   {% endif %}
 
   {%- set listOfReactions = image.population.selectByClassName('Reaction') -%}
-  {% if listOfReactions|length > 0 %}
+  {% if listOfReactions | length > 0 %}
     <listOfReactions>
     {%- for record in listOfReactions %}
       <reaction
-        id="{{record.id}}"
-        {% if record.title %}name="{{record.title}}"{% endif %}
-        reversible="{{ record.aux.reversible!==false }}"
-        fast="{{ record.aux.fast==='true' }}"
+        id="{{ record.id }}"
+        {%- if record.title is defined %}
+        name="{{ record.title }}"
+        {%- endif %}
+        reversible="{{ record.aux.reversible !== false }}"
+        fast="{{ record.aux.fast === 'true' }}"
         metaid="{{record.index}}"
         >
-        {% if record.notes %}<notes><html xmlns="http://www.w3.org/1999/xhtml">{{record.notesHTML}}</html></notes>{% endif %}
+        {%- if record.notes is defined %}
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            {{ record.notesHTML }}
+          </html>
+        </notes>
+        {%- endif %}
         <listOfReactants>
-          {% for actor in record.actors -%}
-          {% if actor.stoichiometry<0 %}<speciesReference species="{{ actor.target }}" stoichiometry="{{ -actor.stoichiometry }}"/>{% endif %}
-          {% endfor -%}
+          {%- for actor in record.actors %}
+          {%- if actor.stoichiometry < 0 %}
+          <speciesReference species="{{ actor.target }}" stoichiometry="{{ -actor.stoichiometry }}"/>
+          {%- endif %}
+          {%- endfor %}
         </listOfReactants>
         <listOfProducts>
-          {% for actor in record.actors -%}
-          {% if actor.stoichiometry>0 %}<speciesReference species="{{ actor.target }}" stoichiometry="{{ actor.stoichiometry }}"/>{% endif %}
-          {% endfor -%}
+          {%- for actor in record.actors %}
+          {%- if actor.stoichiometry > 0 %}
+          <speciesReference species="{{ actor.target }}" stoichiometry="{{ actor.stoichiometry }}"/>
+          {%- endif %}
+          {%- endfor %}
         </listOfProducts>
         <listOfModifiers>
-          {% for modifier in record.modifiers -%}
+          {%- for modifier in record.modifiers %}
           <modifierSpeciesReference species="{{ modifier.target }}"/>
-          {% endfor -%}
+          {%- endfor %}
         </listOfModifiers>
         <kineticLaw>
-          {% if record.assignments.ode_ %}{{record.assignments.ode_.toCMathML()}}{% endif %}
+          {%- if record.assignments.ode_ is defined %}
+          {{ record.assignments.ode_.toCMathML() }}
+          {%- endif %}
         </kineticLaw>
       </reaction>
     {%- endfor %}
-  </listOfReactions>
+    </listOfReactions>
   {% endif %}
 
   {%- set listOfAssignmentRules = image.population.toArray()|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
   {%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
-  {% if listOfAssignmentRules|length+listOfRateRules|length > 0 %}
+  {% if listOfAssignmentRules|length + listOfRateRules|length > 0 %}
   <listOfRules>
   {%- for record in listOfAssignmentRules %}
     <assignmentRule
       variable="{{record.id}}"
-      {% if record.title %}name="{{record.title}}"{% endif %}
+      {%- if record.title is defined %}
+      name="{{record.title}}"
+      {%- endif %}
       metaid="{{record.index}}::ode_"
       >
-      {{record.assignments.ode_.toCMathML()}}
+      {{ record.assignments.ode_.toCMathML() }}
     </assignmentRule>
   {%- endfor %}
 
   {%- for record in listOfRateRules %}
     <rateRule
       variable="{{record.id}}"
-      {% if record.title %}name="{{record.title}}"{% endif %}
-      metaid="{{record.index}}::ode_"
+      {%- if record.title is defined %}
+      name="{{ record.title }}"
+      {%- endif %}
+      metaid="{{ record.index }}::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
           <plus/>
-          {% for ref in record.backReferences %}
+          {%- for ref in record.backReferences %}
           <apply>
             <times/>
             <cn>{{ ref.stoichiometry }}</cn>
             <ci>{{ ref.process }}</ci>
           </apply>
-          {% endfor %}
+          {%- endfor %}
         </apply>
       </math>
     </rateRule>
@@ -155,11 +232,13 @@
     <listOfInitialAssignments>
     {%- for record in listOfInitialAssignments %}
       <initialAssignment
-        symbol="{{record.id}}"
-        metaid="{{record.index}}::start_"
-        {% if record.title %}name="{{record.title}}"{% endif %}
+        symbol="{{ record.id }}"
+        metaid="{{ record.index }}::start_"
+        {%- if record.title is defined %}
+        name="{{ record.title }}"
+        {%- endif %}
         >
-        {{record.assignments.start_.toCMathML()}}
+        {{ record.assignments.start_.toCMathML() }}
       </initialAssignment>
     {%- endfor %}
     </listOfInitialAssignments>
@@ -171,15 +250,19 @@
     <listOfEvents>
       {%- for event in listOfTimeEvents %}
       <event
-        id="{{event.id}}" metaid="{{event.index}}"
+        id="{{event.id}}"
+        metaid="{{event.index}}"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <geq/>
               <ci>t</ci>
-              {% if event.start is defined %}<ci>{{ event.start }}</ci>
-              {%- else %}<cn>{{ event.startObj.num }}</cn>{% endif %}
+              {%- if event.start is defined %}
+              <ci>{{ event.start }}</ci>
+              {%- else %}
+              <cn>{{ event.startObj.num }}</cn>
+              {%- endif %}
             </apply>
           </math>
         </trigger>
@@ -221,14 +304,14 @@
     </listOfEvents>
   {% endif %}
   
-  {%- set listOfUnitDefinitions = image.listOfUnitDefinitions -%}
-  {% if listOfUnitDefinitions|length > 0 %}
+  {%- set listOfUnitDefinitions = image.listOfUnitDefinitions %}
+  {%- if listOfUnitDefinitions | length > 0 %}
     <listOfUnitDefinitions>
     {%- for unitDefinition in listOfUnitDefinitions %}
       {{ unitDefinition }}
     {%- endfor %}
-  </listOfUnitDefinitions>
-  {% endif %}
+    </listOfUnitDefinitions>
+  {%- endif %}
   
   </model>
 </sbml>
