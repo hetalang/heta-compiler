@@ -3,6 +3,7 @@ const { validator } = require('./utilities.js');
 const _ = require('lodash');
 const _uniq = require('lodash/uniq');
 const _cloneDeep = require('lodash/cloneDeep');
+const _cloneWith = require('lodash/cloneWith');
 const { flatten } = require('./utilities');
 const Logger = require('../logger');
 
@@ -70,7 +71,12 @@ class _Component {
   }
   // creates copy of element
   clone(q = {}){
-    let res = _cloneDeep(this);
+    let res = _cloneWith(this, (value, key) => {
+      // do not clone namespace
+      if (key !== 'namespace') {
+        return _cloneDeep(value);
+      }
+    });
 
     // update index
     if(q.id) res._id = q.id;
