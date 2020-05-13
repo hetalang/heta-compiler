@@ -65,7 +65,7 @@ Comments Or Selkov DB record
 
 #dbs#
 The Number of Active P[i] for fitting
-#2
+#{{ freeConstants | length }}
 Relative step
 #1.000000e-01
 Tolerance for fitting sens
@@ -89,7 +89,7 @@ Use Implicit Solving Method  Flag
 Use Experimental Data Flag
 #1
 The Number of Active P[i] for scan
-#2
+#{{ freeConstants | length }}
 Minimum for param scan
 #{% for con in freeConstants %}0.000000e-06{{ ' ' if not loop.last }}{% endfor %}
 Maximum for param scan
