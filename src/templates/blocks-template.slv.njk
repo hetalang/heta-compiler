@@ -18,7 +18,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 =============================== All reactions ======================
 {% block reactionNames %}{% for reaction in _model_.processes %}#{{reaction.id}}
 {% endfor %}{% endblock %}
-=============================== All compounds========================
+=============================== All compounds ========================
 {% block compoundNames %}{% for compound in _model_.variables %}#{{compound.id}}
 {% endfor %}{% endblock %}
 =============================== Stoichiometric Matrix  ============
