@@ -156,7 +156,7 @@ class Record extends _Size {
     //}
     return assignment;
   }
-  references(){
+  _references(){
     let classSpecificRefs = _.chain(this.assignments)
       .map((expression) => {
         let deps = expression.exprParsed.getSymbols();
@@ -167,7 +167,7 @@ class Record extends _Size {
       .flatten()
       .value();
 
-    return super.references()
+    return super._references()
       .concat(classSpecificRefs);
   }
 }

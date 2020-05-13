@@ -58,10 +58,10 @@ class Species extends Record {
 
     return deps;
   }
-  references(){
+  _references(){
     let classSpecificRefs = [this.compartment];
 
-    return super.references()
+    return super._references()
       .concat(classSpecificRefs);
   }
 }

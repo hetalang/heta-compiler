@@ -89,10 +89,10 @@ class _Size extends _Component {
 
     return res;
   }
-  references(){
+  _references(){
     let classSpecificRefs = [];
 
-    return super.references()
+    return super._references()
       .concat(classSpecificRefs);
   }
 }

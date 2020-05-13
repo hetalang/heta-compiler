@@ -1,6 +1,8 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 const _ = require('lodash');
+const _uniq = require('lodash/uniq');
+const _cloneDeep = require('lodash/cloneDeep');
 const { flatten } = require('./utilities');
 const Logger = require('../logger');
 
@@ -28,8 +30,8 @@ class _Component {
     if (!validationLogger.hasErrors) {
       if(q.title) this.title = q.title;
       if(q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
-      if(q.tags) this.tags = _.cloneDeep(q.tags);
-      if(q.aux) this.aux = _.cloneDeep(q.aux);
+      if(q.tags) this.tags = _cloneDeep(q.tags);
+      if(q.aux) this.aux = _cloneDeep(q.aux);
     }
     
     return this;
@@ -68,7 +70,7 @@ class _Component {
   }
   // creates copy of element
   clone(q = {}){
-    let res = _.cloneDeep(this);
+    let res = _cloneDeep(this);
 
     // update index
     if(q.id) res._id = q.id;
@@ -213,8 +215,8 @@ class _Component {
     if(this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
     if(this.title) res.title = this.title;
     if(this.notes) res.notes = this.notes;
-    if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
-    if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
+    if(this.tags.length>0) res.tags = _cloneDeep(this.tags);
+    if(_.size(this.aux)>0) res.aux = _cloneDeep(this.aux);
 
     return res;
   }
@@ -257,9 +259,13 @@ class _Component {
   /*
   array of direct references inside component (non-unique)
   */
- references(){
-   return [];
- }
+  references(){
+    return _uniq(this._references());
+  }
+  /* non-unique references */
+  _references(){
+    return [];
+  }
 }
 
 _Component._requirements = {};

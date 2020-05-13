@@ -50,11 +50,11 @@ class Process extends Record {
 
     return res;
   }
-  references(){
+  _references(){
     let classSpecificRefs = this.actors
       .map((actor) => actor.target);
 
-    return super.references()
+    return super._references()
       .concat(classSpecificRefs);
   }
 }
