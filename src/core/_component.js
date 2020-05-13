@@ -71,15 +71,16 @@ class _Component {
   }
   // creates copy of element
   clone(q = {}){
-    let res = _cloneWith(this, (value, key) => {
-      // do not clone namespace
-      if (key !== 'namespace') {
-        return _cloneDeep(value);
-      }
+    let res = _.cloneDeepWith(this, (value) => {
+      // do not clone but copy namespace
+      let toCopy = value instanceof Map;
+      if (toCopy) return value;
     });
 
     // update index
     if(q.id) res._id = q.id;
+
+    //console.log(res);
 
     return res;
   }
