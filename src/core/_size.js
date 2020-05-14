@@ -21,7 +21,7 @@ class _Size extends _Component {
 
     this.logger.pushMany(validationLogger);
     if (!validationLogger.hasErrors) {
-      if(q.units!==undefined){
+      if (q.units !==  undefined) {
         if (typeof q.units === 'string')
           this.unitsParsed = Unit.parse(q.units);
         else
@@ -32,9 +32,9 @@ class _Size extends _Component {
     return this;
   }
   get units(){
-    if(this.unitsParsed!==undefined){
+    if (this.unitsParsed !== undefined) {
       return this.unitsParsed.toString();
-    }else{
+    } else {
       return undefined;
     }
   }
@@ -42,7 +42,7 @@ class _Size extends _Component {
   bind(namespace){
     let logger = super.bind(namespace);
 
-    if (this.unitsParsed){
+    if (this.unitsParsed) {
       this.unitsParsed.forEach((x) => {
         let target = namespace.get(x.kind);
         
@@ -85,7 +85,13 @@ class _Size extends _Component {
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if (this.unitsParsed) res.units = this.unitsParsed.toQ(options);
+    if (this.unitsParsed) {
+      if (options.noUnitsExpr) {
+        res.units = this.unitsParsed.toQ(options);
+      } else {
+        res.units = this.units;
+      }
+    }
 
     return res;
   }

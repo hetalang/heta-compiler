@@ -6,7 +6,8 @@ class JSONExport extends _Export {
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     
-    if(q.omit) this.omit = q.omit;
+    if (q.omit) this.omit = q.omit;
+    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
 
     return this;
   }
@@ -16,7 +17,7 @@ class JSONExport extends _Export {
   make(){
     this.logger.reset();
     let qArr = this.namespace
-      .toQArr(true)
+      .toQArr(true, { noUnitsExpr: this.noUnitsExpr })
       .map((q) => this.omit ? _.omit(q, this.omit) : q);
     
     return [{

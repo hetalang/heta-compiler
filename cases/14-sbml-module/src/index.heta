@@ -19,4 +19,9 @@ end
 abstract namespace two begin
   include two-compartment-model-result.xml type sbml
 end
-#export { filepath: output_two, space: two, format: JSON };
+#export {
+  filepath: output_two,
+  space: two,
+  format: JSON,
+  noUnitsExpr: true
+};

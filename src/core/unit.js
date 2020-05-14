@@ -30,7 +30,7 @@ class Unit extends Array {
   }
 
   toQ(options = {}){
-    return this.map((x) => _.pick(x, ['kind', 'multiplier','exponent']));
+    return this.map((x) => _.pick(x, ['kind', 'multiplier', 'exponent']));
   }
   // old version of rebase, not used
   rebase0(transformator){

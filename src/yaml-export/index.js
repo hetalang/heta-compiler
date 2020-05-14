@@ -8,6 +8,7 @@ class YAMLExport extends _Export {
     super.merge(q, skipChecking);
     
     if(q.omit) this.omit = q.omit;
+    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
 
     return this;
   }
@@ -16,7 +17,7 @@ class YAMLExport extends _Export {
   }
   make(){
     let qArr = this.namespace
-      .toQArr(true)
+      .toQArr(true, { noUnitsExpr: this.noUnitsExpr })
       .map((q) => this.omit ? _.omit(q, this.omit) : q);
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];

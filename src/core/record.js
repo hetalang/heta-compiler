@@ -103,9 +103,7 @@ class Record extends _Size {
     if (this.boundary) {
       res.boundary = this.boundary;
     }
-    if (this.units) {
-      res.units = this.units;
-    }
+
     return res;
   }
   get isRule(){
