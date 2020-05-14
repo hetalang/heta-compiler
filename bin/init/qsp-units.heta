@@ -76,6 +76,9 @@ ms @UnitDef {
 s @UnitDef {
     units: [ { kind: second } ]
 };
+minute @UnitDef {
+    units: [ { kind: second, multiplier: 60 } ]
+};
 h @UnitDef {
     units: [ { kind: hour, multiplier: 1 } ]
 };

@@ -103,6 +103,10 @@
         "units": [ { "kind": "second" } ]
     },
     {
+        "id": "minute", "class": "UnitDef",
+        "units": [ { "kind": "second", "multiplier": 60 } ]
+    },
+    {
         "id": "h", "class": "UnitDef",
         "units": [ { "kind": "hour", "multiplier": 1 } ]
     },
