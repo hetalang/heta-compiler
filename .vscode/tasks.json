@@ -48,6 +48,12 @@
             "type": "shell",
             "command": "heta build cases/7-importNS",
             "group": "test"
-        }
+        },
+        {
+            "label": "case-14",
+            "type": "shell",
+            "command": "heta build cases/14-sbml-module",
+            "group": "test"
+        },
     ]
 }

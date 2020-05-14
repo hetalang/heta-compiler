@@ -14,26 +14,26 @@ mmole @UnitDef {
     units: [ { kind: mole, multiplier: 1e-3 } ]
 };
 fM @UnitDef {
-    units: [ { kind: mole, multiplier: 1e-15 }, {kind: litre, exponent: -1} ]
+    units: [ { kind: mole, multiplier: 1e-15 }, { kind: litre, exponent: -1} ]
 };
 
 pM @UnitDef {
-    units: [ { kind: mole, multiplier: 1e-12 }, {kind:litre, exponent: -1} ]
+    units: [ { kind: mole, multiplier: 1e-12 }, { kind: litre, exponent: -1} ]
 };
 nM @UnitDef {
-    units: [ { kind: mole, multiplier: 1e-9 }, {kind:litre, exponent: -1} ]
+    units: [ { kind: mole, multiplier: 1e-9 }, { kind: litre, exponent: -1} ]
 };
 uM @UnitDef {
-    units: [ { kind: mole, multiplier: 1e-6 }, {kind:litre, exponent: -1} ]
+    units: [ { kind: mole, multiplier: 1e-6 }, { kind: litre, exponent: -1} ]
 };
 mM @UnitDef {
-    units: [ { kind: mole, multiplier: 1e-3 }, {kind:litre, exponent: -1} ]
+    units: [ { kind: mole, multiplier: 1e-3 }, { kind: litre, exponent: -1} ]
 };
 M @UnitDef {
-    units: [ { kind: mole }, {kind:litre, exponent: -1} ]
+    units: [ { kind: mole }, { kind: litre, exponent: -1} ]
 };
 kM @UnitDef {
-    units: [ { kind: mole, multiplier: 1e3 }, { kind:litre, exponent: -1 } ]
+    units: [ { kind: mole, multiplier: 1e3 }, { kind: litre, exponent: -1 } ]
 };
 
 fL @UnitDef {
@@ -105,44 +105,44 @@ g @UnitDef {
     units: [ { kind: kilogram, multiplier: 1e-3 } ]
 };
 kg @UnitDef {
-    units: [ { kind: kilogram} ]
+    units: [ { kind: kilogram } ]
 };
 
 kat @UnitDef {
-    units: [ { kind: katal} ]
+    units: [ { kind: katal } ]
 };
 
 cell @UnitDef {
-    units: [ { kind: item} ]
+    units: [ { kind: item } ]
 };
 kcell @UnitDef {
     units: [ { kind: item, multiplier: 1e3 } ]
 };
 
 cal @UnitDef {
-    units: [ { kind: joule, multiplier: 4.1868} ]
+    units: [ { kind: joule, multiplier: 4.1868 } ]
 };
 kcal @UnitDef {
-    units: [ { kind: joule, multiplier: 4.1868e3} ]
+    units: [ { kind: joule, multiplier: 4.1868e3 } ]
 };
 
 fm @UnitDef {
-    units: [ { kind: metre, multiplier: 1e-15} ]
+    units: [ { kind: metre, multiplier: 1e-15 } ]
 };
 pm @UnitDef {
-    units: [ { kind: metre, multiplier: 1e-12} ]
+    units: [ { kind: metre, multiplier: 1e-12 } ]
 };
 nm @UnitDef {
-    units: [ { kind: metre, multiplier: 1e-9} ]
+    units: [ { kind: metre, multiplier: 1e-9 } ]
 };
 um @UnitDef {
-    units: [ { kind: metre, multiplier: 1e-6} ]
+    units: [ { kind: metre, multiplier: 1e-6 } ]
 };
 mm @UnitDef {
-    units: [ { kind: metre, multiplier: 1e-13} ]
+    units: [ { kind: metre, multiplier: 1e-13 } ]
 };
 cm @UnitDef {
-    units: [ { kind: metre, multiplier: 1e-2} ]
+    units: [ { kind: metre, multiplier: 1e-2 } ]
 };
 m @UnitDef {
     units: [ { kind: metre } ]

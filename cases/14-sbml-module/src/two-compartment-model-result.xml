@@ -31,7 +31,6 @@
       </compartment>
       <compartment
         id="c2"
-        
         constant="true"
         size="1.5"
         units="L"
@@ -44,13 +43,10 @@
     <listOfSpecies>
       <species
         id="a0"
-        
         hasOnlySubstanceUnits="true"
-        speciesType=""
         compartment="c0"
         constant="false"
         boundaryCondition="false"
-        
         substanceUnits="umole"
         metaid="two_comp.a0"
         >
@@ -58,9 +54,7 @@
       </species>
       <species
         id="s1"
-        
         hasOnlySubstanceUnits="false"
-        speciesType=""
         compartment="c1"
         constant="false"
         boundaryCondition="false"
@@ -72,9 +66,7 @@
       </species>
       <species
         id="s2"
-        
         hasOnlySubstanceUnits="false"
-        speciesType=""
         compartment="c2"
         constant="false"
         boundaryCondition="false"

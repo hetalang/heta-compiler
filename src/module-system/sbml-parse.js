@@ -2,6 +2,10 @@ const _toMathExpr = require('./to-math-expr');
 const _ = require('lodash');
 const { xml2js } = require('xml-js');
 
+
+/*
+  Transforms text content of SBML file to Q Array
+*/
 function SBMLParse(
   filename, // not used here, but can be used for messages
   fileContent
@@ -24,6 +28,21 @@ function jsbmlToQArr(JSBML){
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
 
+  // unit definition
+  let unitDict = _.chain(model.elements)
+    .filter(['name', 'listOfUnitDefinitions'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'unitDefinition'])
+    .map((x) => {
+      let id = _.get(x, 'attributes.id');
+      let units = unitDefinitionToUnits(x);
+
+      return [x.attributes.id, units];
+    })
+    .fromPairs()
+    .value();
+
   // compartments
   let zeroSpatialDimensions = [];
   let compartments = _.chain(model.elements)
@@ -41,7 +60,7 @@ function jsbmlToQArr(JSBML){
       _.set(x, 'attributes.size', '0'); 
     }
 
-    let q = compartmentToQ(x);
+    let q = compartmentToQ(x, unitDict);
     qArr.push(q);
   });
 
@@ -53,7 +72,7 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'species'])
     .value();
   species.forEach((x) => {
-    let q = speciesToQ(x, zeroSpatialDimensions);
+    let q = speciesToQ(x, zeroSpatialDimensions, qArr, unitDict);
     qArr.push(q);
   });
 
@@ -77,7 +96,7 @@ function jsbmlToQArr(JSBML){
     .filter(['name', 'parameter'])
     .value();
   parameters.forEach((x) => {
-    let q = parameterToQ(x);
+    let q = parameterToQ(x, unitDict);
     qArr.push(q);
   });
 
@@ -141,6 +160,27 @@ function jsbmlToQArr(JSBML){
   });
 
   return qArr;
+}
+
+/*
+  transform SBML-like unit definition to Heta-like unit array
+*/
+function unitDefinitionToUnits(x){
+  let units = _.chain(x)
+    .get('elements')
+    .filter(['name', 'listOfUnits'])
+    .get('0.elements')
+    .map((element) => {
+      let { kind, multiplier, scale, exponent } = element.attributes;
+      return {
+        kind: kind,
+        multiplier: (multiplier || 1) * 10**(scale || 0),
+        exponent: parseInt(exponent) || 1
+      };
+    })
+    .value();
+
+  return units;
 }
 
 /*
@@ -237,7 +277,7 @@ function _toAux(elements){
   return elements;
 }
 
-function compartmentToQ(x){
+function compartmentToQ(x, unitDict = {}){
   let q = baseToQ(x);
 
   q.class = 'Compartment';
@@ -245,6 +285,16 @@ function compartmentToQ(x){
   let num = _.get(x, 'attributes.size');
   if (num !== undefined) {
     _.set(q, 'assignments.start_', SBMLValueToNumber(num));
+  }
+  // units
+  let unitDefinitionId = _.get(x, 'attributes.units');
+  if (typeof unitDefinitionId !== 'undefined') {
+    let unitArray = unitDict[unitDefinitionId];
+    if (_.has(unitDict, unitDefinitionId)){
+      q.units = _.get(unitDict, unitDefinitionId)
+    } else {
+      throw new Error(`No unitDeclaration "${unitDefinitionId}" used for compartment "${q.id}"`);
+    }
   }
 
   // compartmentType
@@ -254,7 +304,7 @@ function compartmentToQ(x){
   return q;
 }
 
-function speciesToQ(x, zeroSpatialDimensions = []){
+function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   let q = baseToQ(x);
 
   q.class = 'Species';
@@ -277,6 +327,30 @@ function speciesToQ(x, zeroSpatialDimensions = []){
   // speciesType
   let speciesType = _.get(x, 'attributes.speciesType');
   if (speciesType !== undefined) _.set(q, 'tags.0', speciesType);
+
+  // units
+  let substanceUnitDefinitionId = _.get(x, 'attributes.substanceUnits');
+  if (typeof substanceUnitDefinitionId !== 'undefined') {
+    let unitArray = unitDict[substanceUnitDefinitionId];
+    if (_.has(unitDict, substanceUnitDefinitionId)){
+      let amountUnits = _.get(unitDict, substanceUnitDefinitionId);
+      // find compartment units
+      let compartmentComponent = qArr.find((component) => component.id === q.compartment);
+      if (!compartmentComponent)
+        throw new Error(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
+      // set amount or concentration units
+      if (q.isAmount){
+        q.units = amountUnits;
+      } else if (compartmentComponent.units){
+        let compartmentReverseUnits = compartmentComponent.units.map((y) => {
+          return { kind: y.kind, exponent: (-1) * y.exponent, multiplier: y.multiplier };
+        });
+        q.units = amountUnits.concat(compartmentReverseUnits);
+      }
+    } else {
+      throw new Error(`No unitDeclaration "${substanceUnitDefinitionId}" used for species "${q.id}"`);
+    }
+  }
 
   return q;
 }
@@ -384,7 +458,7 @@ function reactionToQ(x){
   return qArr;
 }
 
-function parameterToQ(x){
+function parameterToQ(x, unitDict = {}){
   let q = baseToQ(x);
 
   let isConstant = _.get(x, 'attributes.constant') === 'true';
@@ -398,6 +472,17 @@ function parameterToQ(x){
     q.class = 'Record';
     if (num !== undefined) {
       _.set(q, 'assignments.start_', SBMLValueToNumber(num));
+    }
+  }
+
+  // units
+  let unitDefinitionId = _.get(x, 'attributes.units');
+  if (typeof unitDefinitionId !== 'undefined') {
+    let unitArray = unitDict[unitDefinitionId];
+    if (_.has(unitDict, unitDefinitionId)){
+      q.units = _.get(unitDict, unitDefinitionId)
+    } else {
+      throw new Error(`No unitDeclaration "${unitDefinitionId}" as required for parameter "${q.id}"`);
     }
   }
 
