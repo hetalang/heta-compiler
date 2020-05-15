@@ -319,11 +319,11 @@ class Unit extends Array {
     return this
       .map((item, i) => {
         let operator = (item.exponent<0)
-          ? ( (i>0) ? ' / ' : '1 / ' ) // 1 for 1/L
-          : ( (i>0) ? '&#183;' : '' ); // no operator for first element
+          ? ( i > 0 ? ' / ' : '1 / ' ) // 1 for 1/L
+          : ( i > 0 ? ' x ' : '' ); // no operator for first element
 
         let expAbs = Math.abs(item.exponent); // absolute value
-        let exponent = (expAbs!==1)
+        let exponent = expAbs !== 1
           ? '<sup>' + expAbs + '</sup>'
           : '';
 
