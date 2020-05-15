@@ -222,7 +222,7 @@ class Unit extends Array {
             .toExponential()
             .replace(/\./, '')
             .replace(/e-/, 'n')
-            .replace(/e+/, 'p');
+            .replace(/e\+/, 'p');
         }
 
         let expAbs = Math.abs(item.exponent); // absolute value
