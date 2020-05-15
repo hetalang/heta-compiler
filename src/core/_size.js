@@ -21,7 +21,7 @@ class _Size extends _Component {
 
     this.logger.pushMany(validationLogger);
     if (!validationLogger.hasErrors) {
-      if (q.units !==  undefined) {
+      if (q.units !== undefined) {
         if (typeof q.units === 'string')
           this.unitsParsed = Unit.parse(q.units);
         else
@@ -48,11 +48,11 @@ class _Size extends _Component {
         
         if(!target){
           let msg = `Unit "${x.kind}" is not found as expected here: `
-            + `${this.index} { unit: ${this.units} };`;
+            + `${this.index} { units: ${this.units} };`;
           logger.error(msg, 'BindingError');
         }else if(!target.instanceOf('UnitDef')){
           let msg = `Unit "${x.kind}" is not of UnitDef class as expected here: `
-            + `${this.index} { unit: ${this.units} };`;
+            + `${this.index} { units: ${this.units} };`;
           logger.error(msg, 'BindingError');
         }else{
           // kindObj can be set here

@@ -25,3 +25,8 @@ end
   format: JSON,
   noUnitsExpr: true
 };
+#export {
+  filepath: sbml_two,
+  space: two,
+  format: SBML
+};

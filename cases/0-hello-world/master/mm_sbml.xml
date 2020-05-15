@@ -15,7 +15,7 @@
         name="Default compartment"
         constant="false"
         size="1"
-        units="L"
+        units="_L"
         metaid="mm::default_comp"
         >
         <notes>
@@ -35,7 +35,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        substanceUnits="uM_L"
+        substanceUnits="_uM_L"
         metaid="mm::S"
         >
       </species>
@@ -47,7 +47,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        substanceUnits="uM_L"
+        substanceUnits="_uM_L"
         metaid="mm::P"
         >
       </species>
@@ -65,7 +65,7 @@
         id="Km"
         constant="true"
         value="2.5"
-        units="uM"
+        units="_uM"
         metaid="mm::Km"
         >
       </parameter>
@@ -86,10 +86,8 @@
         </notes>
         <listOfReactants>
           <speciesReference species="S" stoichiometry="1"/>
-          
         </listOfReactants>
         <listOfProducts>
-          
           <speciesReference species="P" stoichiometry="1"/>
         </listOfProducts>
         <listOfModifiers>
@@ -98,33 +96,32 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>Vmax</ci><ci>S</ci></apply><apply><plus/><ci>Km</ci><ci>S</ci></apply></apply><ci>default_comp</ci></apply></math>
         </kineticLaw>
       </reaction>
-  </listOfReactions>
+    </listOfReactions>
   
     <listOfUnitDefinitions>
-      <unitDefinition id="L" name="L">
+      <unitDefinition id="_L" name="L">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="uM_L" name="uM*L">
+      <unitDefinition id="_uM_L" name="uM*L">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="umole__min" name="umole/min">
+      <unitDefinition id="_umole__min" name="umole/min">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="uM" name="uM">
+      <unitDefinition id="_uM" name="uM">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-  </listOfUnitDefinitions>
-  
+    </listOfUnitDefinitions>
   
   </model>
 </sbml>

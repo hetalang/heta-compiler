@@ -204,22 +204,33 @@ class Unit extends Array {
   /**
    * Serialize unit-object to identificator.
    *
-   * @return {string} of type 'mM2_L\__mg\__h2'
+   * @return {string} of type '\_mM2_L\__mg\__h2'
    */
   toHash(){
     return this.concat([]) // clone array to exclude mutation
-      .sort((x1, x2) => x1.kind > x2.kind ? -1 : 1)
-      .map((item, i) => {
-        let operator = (item.exponent<0)
-          ? '__'
-          : (i>0) ? '_' : ''; // no operator for first element
+      .sort((x1, x2) => x1.kind > x2.kind ? -1 : 1) // sort by kind id
+      .map((item) => {
+        let operator = item.exponent < 0
+          ? '__' // means "/"
+          : '_'; // means "*"
+
+        if (item.multiplier === 1 || typeof item.multiplier === 'undefined') {
+          var multiplier = '';
+        } else {
+          // transforms 1.23e-5 => 123n5
+          multiplier = item.multiplier
+            .toExponential()
+            .replace(/\./, '')
+            .replace(/e-/, 'n')
+            .replace(/e+/, 'p');
+        }
 
         let expAbs = Math.abs(item.exponent); // absolute value
         let exponent = (expAbs!==1)
           ? String(expAbs).replace('.', '_')
           : '';
 
-        return operator + item.kind + exponent;
+        return operator + multiplier + item.kind + exponent;
       })
       .join('');
   }

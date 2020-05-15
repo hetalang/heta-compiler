@@ -14,7 +14,7 @@
         id="comp1"
         name="This is compartment"
         constant="false"
-        units="L"
+        units="_L"
         metaid="first::comp1"
         >
         <notes>
@@ -63,7 +63,7 @@
         id="p2"
         constant="false"
         value="15.223"
-        units="nm__min__fM"
+        units="_nm__min__fM"
         metaid="first::p2"
         >
       </parameter>
@@ -77,7 +77,7 @@
       <parameter
         id="evt1"
         constant="false"
-        units="min"
+        units="_min"
         metaid="first::evt1"
         >
       </parameter>
@@ -92,10 +92,8 @@
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="2"/>
-          
         </listOfReactants>
         <listOfProducts>
-          
           <speciesReference species="s2" stoichiometry="1"/>
         </listOfProducts>
         <listOfModifiers>
@@ -122,7 +120,7 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>28</cn></math>
         </kineticLaw>
       </reaction>
-  </listOfReactions>
+    </listOfReactions>
   
   <listOfRules>
     <assignmentRule

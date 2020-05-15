@@ -50,10 +50,16 @@
             "group": "test"
         },
         {
+            "label": "case-12",
+            "type": "shell",
+            "command": "heta build cases/12-to-sbml",
+            "group": "test"
+        },
+        {
             "label": "case-14",
             "type": "shell",
             "command": "heta build cases/14-sbml-module",
             "group": "test"
-        },
+        }
     ]
 }
