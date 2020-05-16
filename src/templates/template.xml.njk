@@ -306,11 +306,12 @@
   
   {%- set listOfUnitDefinitions = image.listOfUnitDefinitions %}
   {%- if listOfUnitDefinitions | length > 0 %}
-    <listOfUnitDefinitions>
-    {%- for unitDefinition in listOfUnitDefinitions %}
-      {{ unitDefinition }}
-    {%- endfor %}
-    </listOfUnitDefinitions>
+<!-- UNIT DEFINITIONS -->
+<listOfUnitDefinitions>
+{%- for unitDefinition in listOfUnitDefinitions %}
+  {{ unitDefinition }}
+{%- endfor %}
+</listOfUnitDefinitions>
   {%- endif %}
   
   </model>

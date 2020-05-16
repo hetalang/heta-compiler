@@ -318,9 +318,9 @@ class Unit extends Array {
   toHTML(){
     return this
       .map((item, i) => {
-        let operator = (item.exponent<0)
-          ? ( i > 0 ? ' / ' : '1 / ' ) // 1 for 1/L
-          : ( i > 0 ? ' x ' : '' ); // no operator for first element
+        let operator = item.exponent < 0
+          ? ( i > 0 ? '/' : '1/' ) // 1 for 1/L
+          : ( i > 0 ? '&times;' : '' ); // no operator for first element
 
         let expAbs = Math.abs(item.exponent); // absolute value
         let exponent = expAbs !== 1
@@ -330,6 +330,31 @@ class Unit extends Array {
         return operator + item.kind + exponent;
       })
       .join('');
+  }
+
+  toHTML2(){
+    let numBase = this
+      .filter((u) => u.exponent > 0)
+      .map((u) => unitComponentToHTML(u))
+      .join('&times;');
+    let denomBase = this
+      .filter((u) => u.exponent < 0)
+      .map((u) => unitComponentToHTML({
+        kind: u.kind,
+        multiplier: u.multiplier,
+        exponent: (-1)*u.exponent
+      }))
+      .join('&times;');
+    let num = numBase === ''
+      ? '<div>1</div>'
+      : `<div>${numBase}</div>`;
+    
+    if (denomBase === '') {
+      return num;
+    } else {
+      let denom = `<div>${denomBase}</div>`;
+      return `<div class="unit-ratio" style="display:inline-block;text-align:center">${num}<hr/>${denom}</div>`;
+    }
   }
 
   toXmlUnitDefinition(legalUnits = [], options){
@@ -366,6 +391,17 @@ class Unit extends Array {
       + `\n  </listOfUnits>\n</unitDefinition>`;
   }
 
+}
+
+function unitComponentToHTML(u){
+  let base = u.multiplier === 1
+    ? u.kind
+    : `(${u.multiplier.toExponential()} ${u.kind})`;
+  let full = u.exponent === 1
+    ? base
+    : `${base}<sup>${u.exponent}</sup>`;
+
+  return full;
 }
 
 module.exports = {

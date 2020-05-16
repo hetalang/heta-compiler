@@ -56,6 +56,12 @@
             "group": "test"
         },
         {
+            "label": "case-13",
+            "type": "shell",
+            "command": "heta build cases/13-to-matlab",
+            "group": "test"
+        },
+        {
             "label": "case-14",
             "type": "shell",
             "command": "heta build cases/14-sbml-module",
