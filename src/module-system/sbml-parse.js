@@ -1,7 +1,7 @@
 const _toMathExpr = require('./to-math-expr');
 const _ = require('lodash');
 const { xml2js } = require('xml-js');
-
+const { Unit } = require('../core/unit');
 
 /*
   Transforms text content of SBML file to Q Array
@@ -35,7 +35,6 @@ function jsbmlToQArr(JSBML){
     .flatten()
     .filter(['name', 'unitDefinition'])
     .map((x) => {
-      let id = _.get(x, 'attributes.id');
       let units = unitDefinitionToUnits(x);
 
       return [x.attributes.id, units];
@@ -180,7 +179,7 @@ function unitDefinitionToUnits(x){
     })
     .value();
 
-  return units;
+  return Unit.fromQ(units);
 }
 
 /*
@@ -289,9 +288,8 @@ function compartmentToQ(x, unitDict = {}){
   // units
   let unitDefinitionId = _.get(x, 'attributes.units');
   if (typeof unitDefinitionId !== 'undefined') {
-    let unitArray = unitDict[unitDefinitionId];
     if (_.has(unitDict, unitDefinitionId)){
-      q.units = _.get(unitDict, unitDefinitionId)
+      q.units = _.get(unitDict, unitDefinitionId).simplify();
     } else {
       throw new Error(`No unitDeclaration "${unitDefinitionId}" used for compartment "${q.id}"`);
     }
@@ -331,7 +329,6 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   // units
   let substanceUnitDefinitionId = _.get(x, 'attributes.substanceUnits');
   if (typeof substanceUnitDefinitionId !== 'undefined') {
-    let unitArray = unitDict[substanceUnitDefinitionId];
     if (_.has(unitDict, substanceUnitDefinitionId)){
       let amountUnits = _.get(unitDict, substanceUnitDefinitionId);
       // find compartment units
@@ -340,12 +337,11 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
         throw new Error(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
       // set amount or concentration units
       if (q.isAmount){
-        q.units = amountUnits;
+        q.units = amountUnits.simplify();
       } else if (compartmentComponent.units){
-        let compartmentReverseUnits = compartmentComponent.units.map((y) => {
-          return { kind: y.kind, exponent: (-1) * y.exponent, multiplier: y.multiplier };
-        });
-        q.units = amountUnits.concat(compartmentReverseUnits);
+        q.units = amountUnits
+          .divide(compartmentComponent.units)
+          .simplify();
       }
     } else {
       throw new Error(`No unitDeclaration "${substanceUnitDefinitionId}" used for species "${q.id}"`);
@@ -478,9 +474,8 @@ function parameterToQ(x, unitDict = {}){
   // units
   let unitDefinitionId = _.get(x, 'attributes.units');
   if (typeof unitDefinitionId !== 'undefined') {
-    let unitArray = unitDict[unitDefinitionId];
     if (_.has(unitDict, unitDefinitionId)){
-      q.units = _.get(unitDict, unitDefinitionId)
+      q.units = _.get(unitDict, unitDefinitionId).simplify();
     } else {
       throw new Error(`No unitDeclaration "${unitDefinitionId}" as required for parameter "${q.id}"`);
     }

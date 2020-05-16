@@ -158,7 +158,7 @@ class Unit extends Array {
       .toPairs()
       .map(1)
       //.flatten()
-      .filter((x, i) => !(x.kind==='' && x.multiplier===1))
+      .filter((x) => !(x.kind==='' && x.multiplier===1))
       .value();
 
     return Unit.fromQ(group);
