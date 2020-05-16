@@ -13,7 +13,7 @@
 - ModuleSystem
 - _Module
 
-- _Component
+- Component
 - _Size
 - Const
 

@@ -8,15 +8,15 @@ const { flatten } = require('./utilities');
 const Logger = require('../logger');
 
 /*
-  Abstract class _Component
+  class Component
 
   ''' Notes 1 '''
-  component1 @_Component 'title 1' {
+  component1 @Component 'title 1' {
     tags: [tag1, tag2],
     aux: {}
   };
 */
-class _Component {
+class Component {
   constructor(isCore = false){
     this.tags = [];
     this.aux = {};
@@ -25,7 +25,7 @@ class _Component {
   }
   merge(q = {}){
     this.logger.reset();
-    let validationLogger = _Component.isValid(q);
+    let validationLogger = Component.isValid(q);
 
     this.logger.pushMany(validationLogger);
     if (!validationLogger.hasErrors) {
@@ -243,7 +243,7 @@ class _Component {
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
   static requirements(){ 
-    if(this.name === '_Component'){
+    if(this.name === 'Component'){
       return this._requirements;
     }else if(this.hasOwnProperty('_requirements')){
       let deeper = this.requirements.call(this.__proto__);
@@ -275,8 +275,8 @@ class _Component {
   }
 }
 
-_Component._requirements = {};
+Component._requirements = {};
 
 module.exports = {
-  _Component
+  Component
 };

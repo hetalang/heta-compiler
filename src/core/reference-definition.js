@@ -1,8 +1,8 @@
 // const _ = require('lodash');
 
-const { _Component } = require('./_component');
+const { Component } = require('./component');
 
-class ReferenceDefinition extends _Component {
+class ReferenceDefinition extends Component {
   merge(q = {}){
     super.merge(q);
     let validationLogger = ReferenceDefinition.isValid(q);

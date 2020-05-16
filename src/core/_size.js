@@ -1,4 +1,4 @@
-const { _Component } = require('./_component');
+const { Component } = require('./component');
 const { Unit } = require('./unit');
 
 /*
@@ -14,7 +14,7 @@ const { Unit } = require('./unit');
     ] 
   };
 */
-class _Size extends _Component {
+class _Size extends Component {
   merge(q = {}){
     super.merge(q);
     let validationLogger = _Size.isValid(q);

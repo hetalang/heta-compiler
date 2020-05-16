@@ -1,4 +1,4 @@
-const { _Component } = require('./_component');
+const { Component } = require('./component');
 
 /*
   _Switcher abstract class
@@ -7,7 +7,7 @@ const { _Component } = require('./_component');
     // no specific properties
   };
 */
-class _Switcher extends _Component {
+class _Switcher extends Component {
   merge(q = {}){
     super.merge(q);
     let validationLogger = _Switcher.isValid(q);

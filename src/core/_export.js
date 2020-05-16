@@ -1,4 +1,4 @@
-const { _Component } = require('./_component');
+const { Component } = require('./component');
 
 /*
   _Export class
@@ -8,7 +8,7 @@ const { _Component } = require('./_component');
     powTransform: keep // possible values are: keep/operator/function
   };
 */
-class _Export extends _Component {
+class _Export extends Component {
   constructor(isCore = false){
     super(isCore);
     this.powTransform = 'keep';

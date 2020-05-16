@@ -1,7 +1,7 @@
 /* global describe, it */
 const Container = require('../../src/container');
 const { expect } = require('chai');
-const { _Component } = require('../../src/core/_component');
+const { Component } = require('../../src/core/component');
 
 describe('Unit tests for Container', () => {
   var c;
@@ -28,7 +28,7 @@ describe('Unit tests for Container', () => {
         suffix: '/'
       });
       expect(c.logger).to.have.property('hasErrors', false);
-      expect(res).to.be.instanceOf(_Component);
+      expect(res).to.be.instanceOf(Component);
       expect(c.length).to.be.eql(1);
 
       let simple = c.namespaces.get('nameless').get('pmid1');

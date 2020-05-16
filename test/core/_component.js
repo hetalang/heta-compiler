@@ -1,35 +1,35 @@
 /* global describe, it */
-const { _Component } = require('../../src/core/_component');
+const { Component } = require('../../src/core/component');
 const { expect } = require('chai');
 
-describe('Unit test for _Component common methods', () => {
+describe('Unit test for Component common methods', () => {
 
   it('Check static methods', () => {
-    expect(_Component).to.have.property('schemaName', '_ComponentP');
-    expect(_Component).to.have.property('isValid');
+    expect(Component).to.have.property('schemaName', 'ComponentP');
+    expect(Component).to.have.property('isValid');
   });
 
-  it('Create empty _Component', () => {
-    let simple = new _Component;
+  it('Create empty Component', () => {
+    let simple = new Component;
     simple._id = 'ref1';
-    expect(simple).to.have.property('className', '_Component');
+    expect(simple).to.have.property('className', 'Component');
     expect(simple).to.have.property('id', 'ref1');
     expect(simple).to.have.property('index');
     expect(simple).to.have.property('space', undefined);
     expect(simple).to.have.property('merge');
   });
 
-  it('Create empty scoped _Component', () => {
-    let simple = new _Component;
+  it('Create empty scoped Component', () => {
+    let simple = new Component;
     simple._id = 'pg1';
-    expect(simple).to.have.property('className', '_Component');
+    expect(simple).to.have.property('className', 'Component');
     expect(simple).to.have.property('id', 'pg1');
     expect(simple).to.have.property('index');
     expect(simple).to.have.property('merge');
   });
 
   it('Merge with empty', () => {
-    let simple = new _Component;
+    let simple = new Component;
     simple._id = 'ref1';
     simple.merge({});
     expect(simple.logger).to.has.property('hasErrors', false);
@@ -37,7 +37,7 @@ describe('Unit test for _Component common methods', () => {
   });
 
   it('Title property', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       title: 'This is correct title.'
     });
     expect(simple.logger).to.has.property('hasErrors', false);
@@ -45,12 +45,12 @@ describe('Unit test for _Component common methods', () => {
   });
 
   it('Incorrect title property', () => {
-    let simple = (new _Component).merge({title: {}});
+    let simple = (new Component).merge({title: {}});
     expect(simple.logger).to.has.property('hasErrors', true);
   });
 
   it('Tags property', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       tags: ['a', 'b']
     });
     expect(simple.logger).to.has.property('hasErrors', false);
@@ -58,21 +58,21 @@ describe('Unit test for _Component common methods', () => {
   });
 
   it('Incorrect tags property 1', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       tags: {}
     });
     expect(simple.logger).to.has.property('hasErrors', true);
   });
 
   it('Incorrect tags property 2', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       tags: [{}]
     });
     expect(simple.logger).to.has.property('hasErrors', true);
   });
 
   it('Aux property', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       aux: {a: 'a', b: 1, c: []}
     });
     expect(simple.logger).to.has.property('hasErrors', false);
@@ -80,14 +80,14 @@ describe('Unit test for _Component common methods', () => {
   });
 
   it('Incorrect aux property', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       aux: []
     });
     expect(simple.logger).to.has.property('hasErrors', true);
   });
 
   it('Notes property', () => {
-    let simple = new _Component;
+    let simple = new Component;
     expect(simple).not.to.have.property('notes');
     simple.merge({
       notes: 'This is correct **note**.'
@@ -99,7 +99,7 @@ describe('Unit test for _Component common methods', () => {
   });
 
   it('Do not merge unknown properties', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       title: 'This is title', 
       prop: 'property', 
       id: 'xxx', 
@@ -113,7 +113,7 @@ describe('Unit test for _Component common methods', () => {
   });
 
   it('ToQ transformation', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       id: 'pmid2',
       title: 'title',
       notes: 'notes',
@@ -129,12 +129,12 @@ describe('Unit test for _Component common methods', () => {
       notes: 'notes',
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}},
-      class: '_Component'
+      class: 'Component'
     });
   });
 
   it('ToQ transformation', () => {
-    let simple = (new _Component).merge({
+    let simple = (new Component).merge({
       id: 'pg2',
       space: 'two',
       title: 'title',
@@ -151,7 +151,7 @@ describe('Unit test for _Component common methods', () => {
       notes: 'notes',
       tags: ['a', 'b', 'c'],
       aux: {a: 1, b: 'b', c: {}},
-      class: '_Component'
+      class: 'Component'
     });
   });
 });

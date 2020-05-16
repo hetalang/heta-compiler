@@ -95,7 +95,7 @@
       }
     },
 
-    "_ComponentP": {
+    "ComponentP": {
       "type": "object",
       "description": "Abstract class for all top elements.",
       "properties": {
@@ -131,7 +131,7 @@
     "Record": {
       "description": "Class describing numerical value which can be changed in time.",
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/RecordP" },
         {
@@ -147,7 +147,7 @@
 
     "Compartment": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/RecordP" },
         { "$ref": "#/definitions/CompartmentP" },
@@ -173,7 +173,7 @@
 
     "Species": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/RecordP" },
         { "$ref": "#/definitions/SpeciesP" },
@@ -206,7 +206,7 @@
 
     "Process": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/RecordP" },
         { "$ref": "#/definitions/ProcessP" },
@@ -243,7 +243,7 @@
 
     "Reaction": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/RecordP" },
         { "$ref": "#/definitions/ProcessP" },
@@ -268,7 +268,7 @@
 
     "CondSwitcher": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/_SwitcherP" },
         { "$ref": "#/definitions/CondSwitcherP" },
@@ -291,7 +291,7 @@
 
     "TimeSwitcher": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/_SwitcherP" },
         { "$ref": "#/definitions/TimeSwitcherP" },
@@ -314,7 +314,7 @@
 
     "_Export": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ExportP" },
         {
           "required": ["id"],
@@ -362,7 +362,7 @@
 
     "Const": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/ConstP" },
         {
           "required": ["id", "num"],
@@ -387,7 +387,7 @@
 
     "MonteCarloTask": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_ScopedP" },
         { "$ref": "#/definitions/_TaskP" },
         { "$ref": "#/definitions/MonteCarloTaskP" },
@@ -409,7 +409,7 @@
 
     "Page": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/PageP" },
         {
           "required": ["id", "content"],
@@ -426,7 +426,7 @@
 
     "UnitDef": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/_SizeP" },
         { "$ref": "#/definitions/UnitDefP" },
         {
@@ -449,7 +449,7 @@
 
     "FunctionDefinition": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/FunctionDefinitionP" },
         {
           "required": ["id", "args", "expr"],
@@ -468,7 +468,7 @@
 
     "ReferenceDefinition": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/ReferenceDefinitionP" },
         {
           "required": ["id"],
@@ -550,7 +550,7 @@
 
     "Observation": {
       "allOf": [
-        { "$ref": "#/definitions/_ComponentP" },
+        { "$ref": "#/definitions/ComponentP" },
         { "$ref": "#/definitions/ObservationP" },
         {
           "required": ["id", "kind"],

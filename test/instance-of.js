@@ -9,7 +9,7 @@ describe('Test for instanceOf', () => {
     let page1 = new Page;
     expect(page1.instanceOf('Page'))
       .to.be.true;
-    expect(page1.instanceOf('_Component'))
+    expect(page1.instanceOf('Component'))
       .to.be.true;  
     expect(page1.instanceOf('Object'))
       .to.be.true;  

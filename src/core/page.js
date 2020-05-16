@@ -1,6 +1,6 @@
-const { _Component } = require('./_component');
+const { Component } = require('./component');
 
-class Page extends _Component {
+class Page extends Component {
   merge(q = {}){
     super.merge(q);
     let validationLogger = Page.isValid(q);
