@@ -1,3 +1,4 @@
+const { Component } = require('../core/component');
 const { Record } = require('../core/record');
 const { Compartment } = require('../core/compartment');
 const { Species } = require('../core/species');
@@ -419,6 +420,7 @@ class Container {
 }
 
 Container.prototype.classes = {
+  Component,
   Record,
   Compartment,
   Species,
