@@ -36,8 +36,7 @@ class MatlabExport extends _Export {
   }
   getMatlabImage(){
     let builderName = pkg.name + ' of v' + pkg.version;
-    let namespace = this.namespace;
-    let options = this.toQ();
+    
     // constants
     let constants = this.namespace
       .selectByInstanceOf('Const');
@@ -94,8 +93,8 @@ class MatlabExport extends _Export {
 
     return { 
       builderName,
-      options,
-      namespace,
+      options: this,
+      namespace: this.namespace, // set externally in Container
       constants,
       dynamicRecords,
       rhs,

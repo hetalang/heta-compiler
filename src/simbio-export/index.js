@@ -4,7 +4,7 @@ const nunjucks = require('nunjucks');
 const legalUnits = require('./legal-units');
 
 class SimbioExport extends _Export{
-  merge(q={}, skipChecking){
+  merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
 
     return this;
