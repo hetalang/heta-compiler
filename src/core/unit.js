@@ -341,19 +341,19 @@ class Unit extends Array {
       .join('');
   }
 
-  toHTML2(){
+  toHTML2(spaceSymbol = ' ', timesSymbol = '&times;'){
     let numBase = this
       .filter((u) => u.exponent > 0)
-      .map((u) => unitComponentToHTML(u))
-      .join('&times;');
+      .map((u) => unitComponentToHTML(u, spaceSymbol))
+      .join(timesSymbol);
     let denomBase = this
       .filter((u) => u.exponent < 0)
       .map((u) => unitComponentToHTML({
         kind: u.kind,
         multiplier: u.multiplier,
         exponent: (-1)*u.exponent
-      }))
-      .join('&times;');
+      }, spaceSymbol))
+      .join(timesSymbol);
     let num = numBase === ''
       ? '<div>1</div>'
       : `<div>${numBase}</div>`;
@@ -402,10 +402,10 @@ class Unit extends Array {
 
 }
 
-function unitComponentToHTML(u){
+function unitComponentToHTML(u, spaceSymbol = ' '){
   let base = u.multiplier === 1
     ? u.kind
-    : `(${u.multiplier.toExponential()}&nbsp;${u.kind})`;
+    : `(${u.multiplier.toExponential()}${spaceSymbol}${u.kind})`;
   let full = u.exponent === 1
     ? base
     : `${base}<sup>${u.exponent}</sup>`;
