@@ -40,6 +40,15 @@ class Record extends _Size {
     
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (_.size(this.assignments) > 0)
+      clonedComponent.assignments = _.mapValues(this.assignments, (expr) => expr.clone());
+    if (typeof this.boundary !== undefined)
+      clonedComponent.boundary = this.boundary;
+      
+    return clonedComponent;
+  }
   /** change referencies inside expression */
   updateReferences(q = {}){
     super.updateReferences(q);

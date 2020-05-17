@@ -24,6 +24,13 @@ class CondSwitcher extends _Switcher {
     res.condition = this.condition;
     return res;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (typeof this.condition !== 'undefined')
+      clonedComponent.condition = this.condition;
+    
+    return clonedComponent;
+  }
 }
 
 CondSwitcher._requirements = {

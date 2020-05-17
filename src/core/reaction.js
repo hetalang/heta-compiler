@@ -39,6 +39,16 @@ class Reaction extends Process {
     
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+
+    if (this.modifiers.length > 0)
+      clonedComponent.modifiers = this.modifiers.map((modifier) => modifier.clone());
+    if (typeof this.isAmount !== 'undefined')
+      clonedComponent.isAmount = this.isAmount;
+
+    return clonedComponent;
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     if(this.modifiers.length>0){

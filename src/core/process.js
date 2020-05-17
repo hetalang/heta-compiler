@@ -37,6 +37,13 @@ class Process extends Record {
     
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (this.actors.length > 0)
+      clonedComponent.actors = this.actors.map((actor) => actor.clone());
+
+    return clonedComponent;
+  }
   get processExpr(){
     return actors2rct(this.actors);
   }
@@ -71,6 +78,13 @@ class _Effector {
   constructor(q = {}){
     this.target = q.target;
   }
+  clone(){
+    let clonedEffector = new _Effector({
+      target: this.target
+    });
+
+    return clonedEffector;
+  }
 }
 
 class Actor extends _Effector {
@@ -79,6 +93,14 @@ class Actor extends _Effector {
     this.stoichiometry = q.stoichiometry!==undefined
       ? q.stoichiometry
       : 1; // default value
+  }
+  clone(){
+    let clonedActor = new Actor({
+      target: this.target,
+      stoichiometry: this.stoichiometry
+    });
+
+    return clonedActor;
   }
   get className(){
     return 'Actor';

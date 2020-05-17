@@ -68,6 +68,31 @@ class TimeSwitcher extends _Switcher {
 
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (typeof this.start === 'string'){
+      clonedComponent.start = this.start;
+    } else if (typeof this.startObj !== 'undefined') {
+      clonedComponent.startObj = this.startObj.clone();
+    }
+    if (typeof this.stop === 'string'){
+      clonedComponent.stop = this.stop;
+    } else if (typeof this.stopObj !== 'undefined') {
+      clonedComponent.stopObj = this.stopObj.clone();
+    }
+    if (typeof this.period === 'string'){
+      clonedComponent.period = this.period;
+    } else if (typeof this.periodObj !== 'undefined') {
+      clonedComponent.periodObj = this.periodObj.clone();
+    }
+    if (typeof this.repeatCount === 'string'){
+      clonedComponent.repeatCount = this.repeatCount;
+    } else if (typeof this.repeatCountObj !== 'undefined') {
+      clonedComponent.repeatCountObj = this.repeatCountObj.clone();
+    }
+      
+    return clonedComponent;
+  }
   getStart(){
     if (this.start !== undefined) {
       return this.start;

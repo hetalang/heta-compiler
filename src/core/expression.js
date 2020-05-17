@@ -20,6 +20,10 @@ class Expression {
 
     return new Expression(exprParsed);
   }
+  clone(){
+    let clonedMath = math.clone(this.exprParsed);
+    return new Expression(clonedMath);
+  }
   // the same options as in mathjs
   toString(options = {}){
     return this.exprParsed.toString(options);

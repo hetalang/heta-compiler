@@ -12,6 +12,13 @@ class Page extends Component {
     
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (typeof this.content !== 'undefined')
+      clonedComponent.content = this.content;
+    
+    return clonedComponent;
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     if(this.content) res.content = this.content;

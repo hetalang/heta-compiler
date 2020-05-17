@@ -28,9 +28,18 @@ class Unit extends Array {
 
     return res;
   }
-
   toQ(options = {}){
     return this.map((x) => _.pick(x, ['kind', 'multiplier', 'exponent']));
+  }
+  clone(){
+    let clonedUnit = new Unit();
+    this.forEach((u) => clonedUnit.push({
+      kind: u.kind,
+      multiplier: u.multiplier,
+      exponent: u.exponent
+    }));
+
+    return clonedUnit;
   }
   // old version of rebase, not used
   rebase0(transformator){

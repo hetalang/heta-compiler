@@ -31,6 +31,13 @@ class _Size extends Component {
 
     return this;
   }
+  clone(){
+    let componentClone = super.clone();
+    if (this.unitsParsed)
+      componentClone.unitsParsed = this.unitsParsed.clone();
+
+    return componentClone;
+  }
   get units(){
     if (this.unitsParsed !== undefined) {
       return this.unitsParsed.toString();

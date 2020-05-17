@@ -3,7 +3,6 @@ const { validator } = require('./utilities.js');
 const _ = require('lodash');
 const _uniq = require('lodash/uniq');
 const _cloneDeep = require('lodash/cloneDeep');
-const _cloneWith = require('lodash/cloneWith');
 const { flatten } = require('./utilities');
 const Logger = require('../logger');
 
@@ -50,7 +49,7 @@ class Component {
     if (this.namespace) {
       return this.namespace.spaceName;
     } else {
-      return;
+      return undefined;
     }
   }
   static get schemaName(){
@@ -70,19 +69,21 @@ class Component {
     return { id: this.id, space: this.space };
   }
   // creates copy of element
-  clone(q = {}){
-    let res = _.cloneDeepWith(this, (value) => {
-      // do not clone but copy namespace
-      let toCopy = value instanceof Map;
-      if (toCopy) return value;
-    });
+  clone(){
+    let componentClone = new this.constructor();
+    if (this.title)
+      componentClone.title = this.title;
+    if (this.notes)
+      componentClone.notes = this.notes;
+    if (this.tags.length)
+      componentClone.tags = this.tags.map(x => x);
+    if (_.size(this.aux))
+      componentClone.aux = _.cloneDeep(this.aux);
 
-    // update index
-    if(q.id) res._id = q.id;
+    if (this._isCore)
+      componentClone._isCore = true;
 
-    //console.log(res);
-
-    return res;
+    return componentClone;
   }
   /** Change referencies of component based on suffix/prefix/rename */
   updateReferences(q = {}){

@@ -240,7 +240,8 @@ class Container {
         );
   
         // cloning and update references
-        let clone = component.clone({id: newId, space: q.space});
+        let clone = component.clone();
+        clone._id = newId;
         clone.namespace = namespace;
         clone.updateReferences(q);
   
@@ -320,7 +321,8 @@ class Container {
     this.logger.pushMany(logger);
     if (!logger.hasErrors) {
       // cloning and update references
-      let clone = component.clone({id: q.id});
+      let clone = component.clone();
+      clone._id = q.id;
       clone.namespace = namespace;
       clone.updateReferences(q);
 

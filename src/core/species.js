@@ -22,6 +22,15 @@ class Species extends Record {
 
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (typeof this.compartment !== 'undefined')
+      clonedComponent.compartment = this.compartment;
+    if (typeof this.isAmount !== 'undefined')
+      clonedComponent.isAmount = this.isAmount;
+
+    return clonedComponent;
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     if(this.compartment) res.compartment = this.compartment;

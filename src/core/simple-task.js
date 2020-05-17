@@ -37,6 +37,24 @@ class SimpleTask extends Component {
     
     return this;
   }
+  clone(){
+    let clonedComponent = super.clone();
+    if (typeof this.type !== 'undefined')
+      clonedComponent.type = this.type;
+    if (_.size(this.subtasks) > 0 ) {
+      clonedComponent.subtasks = this.subtasks.map((st) => st.clone());
+    }
+    if (typeof this.tspan !== 'undefined') {
+      clonedComponent.tspan = this.tspan;
+    }
+    if (typeof this.reassign !== 'undefined') {
+      clonedComponent.reassign = _.mapValues(this.reassign, (x) => x);
+    }
+    if (typeof this.solver !== 'undefined')
+      clonedComponent.solver = _.cloneDeep(this.solver);
+
+    return clonedComponent;
+  }
   bind(namespace){
     let logger = super.bind(namespace);
 
@@ -81,9 +99,17 @@ SimpleTask._requirements = {
 };
 
 class Subtask {
-  constructor(q={}){
-    if(q.saveat) this.saveat = q.saveat;
-    if(q.output) this.output = q.output;
+  constructor(q = {}){
+    if (q.saveat) this.saveat = q.saveat;
+    if (q.output) this.output = q.output;
+  }
+  clone(){
+    let clonedSubtask = new Subtask({
+      saveat: this.saveat,
+      output: this.output
+    });
+
+    return clonedSubtask;
   }
 }
 
