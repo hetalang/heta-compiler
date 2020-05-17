@@ -53,7 +53,7 @@ describe('Testing operations with complex units', () => {
     });
 
     if (x.targetHTML2) it('toHTML2() method', () => {
-      let res = unit.toHTML2();
+      let res = unit.toHTML2(' ', '&times;');
       expect(res).to.be.equal(x.targetHTML2);
     });
   });

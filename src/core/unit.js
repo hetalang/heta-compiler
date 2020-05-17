@@ -341,7 +341,8 @@ class Unit extends Array {
       .join('');
   }
 
-  toHTML2(spaceSymbol = ' ', timesSymbol = '&times;'){
+  // &nbsp; => &#160; &times; => &#215;
+  toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;'){
     let numBase = this
       .filter((u) => u.exponent > 0)
       .map((u) => unitComponentToHTML(u, spaceSymbol))
