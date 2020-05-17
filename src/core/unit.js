@@ -341,11 +341,11 @@ class Unit extends Array {
       .join('');
   }
 
-  // &nbsp; => &#160; &times; => &#215;
-  toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;'){
+  // &nbsp; => &#160; &times; => &#215; &minus; => &#8722;
+  toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;', minusSymbol = '&#8722;'){
     let numBase = this
       .filter((u) => u.exponent > 0)
-      .map((u) => unitComponentToHTML(u, spaceSymbol))
+      .map((u) => unitComponentToHTML(u, spaceSymbol, minusSymbol))
       .join(timesSymbol);
     let denomBase = this
       .filter((u) => u.exponent < 0)
@@ -353,7 +353,7 @@ class Unit extends Array {
         kind: u.kind,
         multiplier: u.multiplier,
         exponent: (-1)*u.exponent
-      }, spaceSymbol))
+      }, spaceSymbol, minusSymbol))
       .join(timesSymbol);
     let num = numBase === ''
       ? '<div>1</div>'
@@ -403,10 +403,10 @@ class Unit extends Array {
 
 }
 
-function unitComponentToHTML(u, spaceSymbol = ' '){
+function unitComponentToHTML(u, spaceSymbol = '&#160;', minusSymbol = '&#8722;'){
   let base = u.multiplier === 1
     ? u.kind
-    : `(${u.multiplier.toExponential()}${spaceSymbol}${u.kind})`;
+    : `(${u.multiplier.toExponential()}${spaceSymbol}${u.kind})`.replace('-', minusSymbol);
   let full = u.exponent === 1
     ? base
     : `${base}<sup>${u.exponent}</sup>`;
