@@ -19,7 +19,7 @@ const correctUnits = [
     ],
     targetString: '(1e-6 g)/(1e-3 L)',
     targetHash: '_1n6g__1n3L',
-    targetHTML2: '<div class="unit-ratio" style="display:inline-block;text-align:center"><div>(1e-6 g)</div><hr/><div>(1e-3 L)</div></div>'
+    targetHTML2: '<div class="unit-ratio" style="display:inline-block;text-align:center"><div>(1e-6&nbsp;g)</div><hr/><div>(1e-3&nbsp;L)</div></div>'
   },
   {
     source: [
@@ -30,7 +30,7 @@ const correctUnits = [
     ],
     targetString: '(1e-6 g)/(1e-3 L)*kg/(1e-2 m)^2',
     targetHash: '__1n2m2_kg_1n6g__1n3L',
-    targetHTML2: '<div class="unit-ratio" style="display:inline-block;text-align:center"><div>(1e-6 g)&times;kg</div><hr/><div>(1e-3 L)&times;(1e-2 m)<sup>2</sup></div></div>'
+    targetHTML2: '<div class="unit-ratio" style="display:inline-block;text-align:center"><div>(1e-6&nbsp;g)&times;kg</div><hr/><div>(1e-3&nbsp;L)&times;(1e-2&nbsp;m)<sup>2</sup></div></div>'
   }
 ];
 

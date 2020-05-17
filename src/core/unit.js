@@ -405,7 +405,7 @@ class Unit extends Array {
 function unitComponentToHTML(u){
   let base = u.multiplier === 1
     ? u.kind
-    : `(${u.multiplier.toExponential()} ${u.kind})`;
+    : `(${u.multiplier.toExponential()}&nbsp;${u.kind})`;
   let full = u.exponent === 1
     ? base
     : `${base}<sup>${u.exponent}</sup>`;
