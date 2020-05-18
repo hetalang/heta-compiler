@@ -42,6 +42,18 @@ function jsbmlToQArr(JSBML){
     .fromPairs()
     .value();
 
+  // species types, for IRT
+  let speciesTypes = _.chain(model.elements)
+    .filter(['name', 'listOfSpeciesTypes'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'speciesType'])
+    .value();
+  speciesTypes.forEach((x) => {
+    let q = speciesTypeToQ(x);
+    qArr.push(q);
+  });
+
   // compartments
   let zeroSpatialDimensions = [];
   let compartments = _.chain(model.elements)
@@ -274,6 +286,13 @@ function _toMarkdown(elements){
 // TODO: use the same result as in SBMLViewer
 function _toAux(elements){
   return elements;
+}
+
+function speciesTypeToQ(x){
+  let q = baseToQ(x);
+  q.class = 'Component';
+  
+  return q;
 }
 
 function compartmentToQ(x, unitDict = {}){

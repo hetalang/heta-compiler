@@ -1,4 +1,4 @@
-/* global mocha */
+/* global describe, it */
 const { expect } = require('chai');
 const { SBMLParse } = require('../../src/module-system/sbml-parse');
 const fs = require('fs');
@@ -42,7 +42,7 @@ const master = [
   // PART 5
   { expectation: 'sin(a + 2 + 3)' },
   { expectation: 'pow(a + 2 + 3, 1 - 2)' },
-]
+];
 
 describe('test sbmlParse() operators', () => {
   let res = SBMLParse('sbml0', sbml0Text);
@@ -53,4 +53,10 @@ describe('test sbmlParse() operators', () => {
       expect(x).to.have.nested.property('assignments.ode_', master[i].expectation);
     });
   });
+});
+
+const sbml1Text = fs.readFileSync(path.join(__dirname, 'sbml1.xml'), 'utf8');
+describe('parse speciesType', () => {
+  let res = SBMLParse('sbml0', sbml1Text);
+  console.log(res);
 });
