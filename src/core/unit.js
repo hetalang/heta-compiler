@@ -356,13 +356,13 @@ class Unit extends Array {
       }, spaceSymbol, minusSymbol))
       .join(timesSymbol);
     let num = numBase === ''
-      ? '<div>1</div>'
-      : `<div>${numBase}</div>`;
+      ? '<div class="unit-mult" style="display:inline-block">1</div>'
+      : `<div class="unit-mult" style="display:inline-block">${numBase}</div>`;
     
     if (denomBase === '') {
       return num;
     } else {
-      let denom = `<div>${denomBase}</div>`;
+      let denom = `<div class="unit-mult" style="display:inline-block">${denomBase}</div>`;
       return `<div class="unit-ratio" style="display:inline-block;text-align:center">${num}<hr/>${denom}</div>`;
     }
   }
