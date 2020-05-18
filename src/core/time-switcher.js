@@ -126,6 +126,7 @@ class TimeSwitcher extends _Switcher {
     let stop1 = _.get(this, 'stopObj.num', Infinity);
     let period1 = _.get(this, 'periodObj.num', 0);
 
+    // update repeatCount based on stop
     let repeatCount = period1 <= 0
       ? repeatCount0
       : min(repeatCount0, (stop1-this.startObj.num)/period1);

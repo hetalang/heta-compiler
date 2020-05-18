@@ -19,19 +19,22 @@ t_span = [0 100]; % [0:1:100]
 opt = odeset('OutputFcn', out_func, 'Events', events{1}, 'MaxStep', 3); % odeset('Mass',M,'RelTol',1e-4,'AbsTol',[1e-6 1e-10 1e-6], 'Stats','on');
 
 % the next string generates "output" variable
-%[t, y, te, ye, ie] = ode15s(ode_func, t_span, y0, opt);
+%[tout, y, te, ye, ie] = ode15s(ode_func, t_span, y0, opt);
 
 % solution with events
 ti = t_span(1);
 yi = y0;
 tout = [];
-yout = [];
+output = [];
 while ti < t_span(2)
     [t, y, te, ye, ie] = ode15s(ode_func, [ti t_span(2)], yi, opt);
-    
+
+    tout = vertcat(tout, t);
+    if length(te) == 0
+        break
+    end
     ti = t(end);
     yi = events{2}(ti, ye(end,:));
-    tout = vertcat(tout, t);
 end
 
 figure

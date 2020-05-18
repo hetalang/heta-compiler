@@ -26,6 +26,7 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
     %%% Initialization of dynamic records
     function y__ = InitFunc()
         integrator = []; % reset integrator
+        time = 0; % zero time
 
         {%- for record in initRecords %}
         {% if record.getAssignment('start_') is defined -%}
@@ -44,7 +45,7 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
         {%- endfor %}];
     end
 
-    function status = OutputFunc(t, y, flag)
+    function status = OutputFunc(time, y, flag)
         switch flag
             case 'done'
                 assignin('base', 'output', integrator);
@@ -56,7 +57,7 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
         status = 0;
     end
 
-    function dydt = ODEFunc(t, y)
+    function dydt = ODEFunc(time, y)
 
         dydt = zeros({{ dynamicRecords|length }}, 1);
 
@@ -87,15 +88,15 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
     end
 
     {% for event in events -%}
-    function [res, isterminal, direction] = {{ event.switcher.id }}_condition(t, y)
+    function [res, isterminal, direction] = {{ event.switcher.id }}_condition(time, y)
         direction = 1; % [];
         isterminal = 1;
         
         ev_start = {{ event.switcher.startObj.num }};
         ev_period = {{ event.switcher.periodObj.num if event.switcher.periodObj.num is defined else '[]'}};
-        ev_repeatCount = {{ event.switcher.getRepeatCountInt() }};
+        ev_repeatCount = {{ event.switcher.getRepeatCountInt() if event.switcher.getRepeatCountInt() is defined else 'Inf' }};
         
-        flag = (t - ev_start)/ev_period;
+        flag = (time - ev_start)/ev_period;
         
         if flag <= 0.
             res = flag;
@@ -105,7 +106,7 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
             res = flag - ev_repeatCount;
         end
     end
-    function y = {{ event.switcher.id }}_affect(t, y)
+    function y = {{ event.switcher.id }}_affect(time, y)
 
         %%% Records
         {%- for record in outputRecords %}
@@ -122,7 +123,7 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
         shared_values = [{% for record in outputRecords -%}
         {{ record.id }}{{ ', ' if not loop.last }}
         {%- endfor %}];
-        OutputFunc(t, y, 'affect');
+        OutputFunc(time, y, 'affect');
 
         %%% recalculated values
         {%- for assignment in event.affect %}
