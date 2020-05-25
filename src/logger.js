@@ -8,7 +8,8 @@ const levels = [
   'debug', // 0
   'info', // 1
   'warn', // 2
-  'error' // 3
+  'error', // 3
+  'panic' // 4
 ];
 
 class Logger {
@@ -60,16 +61,6 @@ class Logger {
     let numberOfErrors = this._logs.filter((log) => log.level === 'error');
     return numberOfErrors.length > 0;
   }
-  list(useColour = true){
-    return this._logs
-      .map((log) => log.toString(useColour));
-  }
-  toString(useColour = true){
-    return this.list(useColour).join('\n');
-  }
-  pushMany(logger = {logs: []}){
-    this._logs = this._logs.concat(logger.logs);
-  }
   reset(){
     this._logs = [];
   }
@@ -90,8 +81,9 @@ class Transport {
 }
 
 class JSONTransport extends Transport{
-  constructor(showLevel = 'info'){
+  constructor(showLevel = 'info', target = []){
     super(showLevel);
+    this.target = target;
   }
   analyzer(level, msg, opt, levelNum){
     if (levelNum >= this.showLevelNum) {
@@ -107,6 +99,7 @@ class StdoutTransport extends Transport {
       'white',
       'blue',
       'yellow',
+      'red',
       'red'
     ];
     if (levelNum >= this.showLevelNum) {
@@ -117,10 +110,23 @@ class StdoutTransport extends Transport {
   }
 }
 
+class StringTransport extends Transport {
+  constructor(showLevel = 'info', target = []){
+    super(showLevel);
+    this.target = target;
+  }
+  analyzer(level, msg, opt, levelNum){
+    if (levelNum >= this.showLevelNum) {
+      let line = `[${level}]\t${msg}`;
+      this.target.push(line);
+    }
+  }
+}
+
 module.exports = {
   Logger,
   Transport,
   JSONTransport,
-  //stringTransport,
+  StringTransport,
   StdoutTransport
 };

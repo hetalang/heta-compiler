@@ -5,7 +5,7 @@ const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
 const { Container, coreComponents } = require('../index');
 const ModuleSystem = require('../module-system');
-const { StdoutTransport } = require('../logger');
+const { JSONTransport, StdoutTransport } = require('../logger');
 const _ = require('lodash');
 require('./_export');
 require('./xlsx-export');
@@ -37,9 +37,11 @@ class Builder {
     this.container = new Container();
 
     // set transport and logger
-    let consoleTransport = new StdoutTransport('info');
     this.logger = this.container.logger;
-    this.logger.addTransport(consoleTransport);
+    this.logArray = []; // init JSON formatted logs
+    this.logger.addTransport(new JSONTransport('info', this.logArray));
+    let minLogLevel = _.get(declaration, 'options.logLevel', 'info');
+    this.logger.addTransport(new StdoutTransport(minLogLevel));
 
     // check based on schema XXX: move to heta-build.js ?
     let validate = ajv.compile(declarationSchema);
@@ -103,15 +105,21 @@ class Builder {
     this.exportMany();
 
     // 6.save logs if required
-    /*
     let createLog = this.options.logMode === 'always' 
-      || (this.options.logMode === 'error' && this.logger.hasErrors);
+      || (this.options.logMode === 'error' && this.hetaErrors() > 0);
     if (createLog) {
-      this.logger.info(`All logs was saved to file: "${this._logPath}"`)
-      fs.outputFileSync(this._logPath, this.logger.toString(false));
+      this.logger.info(`All logs was saved to file: "${this._logPath}"`);
+      let logs = this.logArray
+        .map(x => `[${x.level}]\t${x.msg}`)
+        .join('\n');
+      fs.outputFileSync(this._logPath, logs);
     }
-    */
     return;
+  }
+  // returns array of errors in heta code
+  hetaErrors(){
+    return this.logArray
+      .filter(x => x.levelNum >= 3);
   }
   exportMany(){
     if (!this.options.skipExport) {
