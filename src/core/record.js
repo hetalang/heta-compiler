@@ -16,7 +16,7 @@ class Record extends _Size {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = Record.isValid(q, logger);
 
     if (valid) {

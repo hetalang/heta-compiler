@@ -4,7 +4,7 @@ const _ = require('lodash');
 class SimpleTask extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = SimpleTask.isValid(q, logger);
 
     if (valid) {

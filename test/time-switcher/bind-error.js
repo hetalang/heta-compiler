@@ -11,7 +11,7 @@ describe('TimeSwitcher errors', () => {
     ]);
     c.knitMany();
 
-    expect(c.logger).to.has.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
   
   it('Wrong reference type', () => {
@@ -20,7 +20,7 @@ describe('TimeSwitcher errors', () => {
     c.loadMany([
       { id: 'sw1', class: 'TimeSwitcher', start: {} }
     ]);
-    expect(c.logger).to.has.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 
   it('No reference', () => {
@@ -31,6 +31,6 @@ describe('TimeSwitcher errors', () => {
     ]);
 
     c.knitMany();
-    expect(c.logger).to.has.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 });

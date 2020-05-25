@@ -13,7 +13,7 @@ class Compartment extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    //let logger = this.namespace.container.logger;
+    //let logger = _.get(this, 'namespace.container.logger');
     //let valid = Compartment.isValid(q, logger);
     
     return this;

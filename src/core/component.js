@@ -1,8 +1,6 @@
 const { markdown } = require('markdown');
 const { validator } = require('./utilities.js');
 const _ = require('lodash');
-const _uniq = require('lodash/uniq');
-const _cloneDeep = require('lodash/cloneDeep');
 const { flatten } = require('./utilities');
 
 /*
@@ -21,14 +19,14 @@ class Component {
     if (isCore) this._isCore = true;
   }
   merge(q = {}){
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = Component.isValid(q, logger);
 
     if (valid) {
       if (q.title) this.title = q.title;
       if (q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
-      if (q.tags) this.tags = _cloneDeep(q.tags);
-      if (q.aux) this.aux = _cloneDeep(q.aux);
+      if (q.tags) this.tags = _.cloneDeep(q.tags);
+      if (q.aux) this.aux = _.cloneDeep(q.aux);
     }
     
     return this;
@@ -150,8 +148,8 @@ class Component {
       let msg = `${ind} Some of properties do not satisfy requirements for class "${this.schemaName}"\n`
         + validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');
-      logger.error(msg, 'ValidationError');
-      logger.warn('Some of component properties will not be updated.');
+      logger && logger.error(msg, 'ValidationError');
+      logger && logger.warn('Some of component properties will not be updated.');
     }
     
     return valid;
@@ -217,8 +215,8 @@ class Component {
     if(this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
     if(this.title) res.title = this.title;
     if(this.notes) res.notes = this.notes;
-    if(this.tags.length>0) res.tags = _cloneDeep(this.tags);
-    if(_.size(this.aux)>0) res.aux = _cloneDeep(this.aux);
+    if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
+    if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
 
     return res;
   }
@@ -262,7 +260,7 @@ class Component {
   array of direct references inside component (non-unique)
   */
   references(){
-    return _uniq(this._references());
+    return _.uniq(this._references());
   }
   /* non-unique references */
   _references(){

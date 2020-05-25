@@ -1,4 +1,5 @@
 const { _Size } = require('./_size');
+const _ = require('lodash');
 
 /*
   size1 @Const {
@@ -10,7 +11,7 @@ const { _Size } = require('./_size');
 class Const extends _Size { // implicit extend Numeric
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = Const.isValid(q, logger);
 
     if (valid) {

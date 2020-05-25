@@ -19,26 +19,26 @@ describe('Check knitMany() for Species', () => {
       assignments: {start_ : 0}
     });
 
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
   });
 
   it('Set no compartment', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.knitMany();
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 
   it('Set lost ref', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     sp1.merge({
       compartment: 'comp1'
     });
     c.knitMany();
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
   
   it('Set wrong ref', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.load({
       class: 'Record',
       id: 'comp1',
@@ -46,11 +46,11 @@ describe('Check knitMany() for Species', () => {
       assignments: {ode_: 1}
     });
     c.knitMany();
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 
   it('Set good ref', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.load({
       class: 'Compartment',
       id: 'comp1',
@@ -75,17 +75,17 @@ describe('Check knitMany() for Reaction', () => {
       actors: 'A=>',
       assignments: {ode_: 1}
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
   });
   
   it('have lost ref', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.knitMany();
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
   
   it('Set wrong ref', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.load({
       class: 'Record',
       id: 'A',
@@ -99,11 +99,11 @@ describe('Check knitMany() for Reaction', () => {
       assignments: {start_: 1.1}
     });
     c.knitMany();
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(2);
   });
 
   it('Set good ref', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.load({
       class: 'Species',
       id: 'A',
@@ -112,7 +112,7 @@ describe('Check knitMany() for Reaction', () => {
       assignments: { ode_: 1 }
     });
     c.knitMany();
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(r1.actors[0]).to.have.property('targetObj');
   });
 });

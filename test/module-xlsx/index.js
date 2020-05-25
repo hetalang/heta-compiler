@@ -56,6 +56,6 @@ describe('Integral test of correct xlsx module', () => {
     let b = new Builder(declaration, __dirname);
     
     b.run();
-    expect(b.logger).to.have.property('hasErrors', true);
+    expect(b.container.hetaErrors()).to.be.lengthOf(1);
   });
 });

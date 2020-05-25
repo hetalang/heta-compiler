@@ -9,7 +9,7 @@ describe('Unit tests for Container load', () => {
     c = new Container();
     c.setNS({space: 'default__'});
     c.setNS({space: 'one'});
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
   });
 
   it('Insert Record k1', () => {
@@ -22,7 +22,7 @@ describe('Unit tests for Container load', () => {
         start_: 1e-3
       }
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(c).to.be.lengthOf(1);
     expect(simple).to.have.property('index', 'default__::k1');
   });
@@ -37,7 +37,7 @@ describe('Unit tests for Container load', () => {
         start: 1.2
       }
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(c).to.be.lengthOf(2);
     expect(simple).to.have.property('index', 'one::k2');
   });
@@ -51,7 +51,7 @@ describe('Unit tests for Container load', () => {
       },
       units: '1/h'
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(c).to.be.lengthOf(2);
     expect(simple).to.have.nested.property('units', '1/h');
     expect(simple).to.have.property('title', 'k1 title');
@@ -66,7 +66,7 @@ describe('Unit tests for Container load', () => {
         start_: 1.4
       }
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(c).to.be.lengthOf(2);
     expect(simple).to.have.nested.property('assignments.start_');
     expect(simple.assignments.start_.toString()).to.be.equal('1.4');
@@ -74,37 +74,31 @@ describe('Unit tests for Container load', () => {
   });
 
   it('Throws wrong insert.', () => {
-    c.logger.reset();
     c.insert({});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
 
-    c.logger.reset();
     c.insert({ class: 'Record' });
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(2);
 
-    c.logger.reset();
     c.insert({ id: 'k0' });
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(3);
   });
 
   it('Throws wrong update.', () => {
-    c.logger.reset();
     c.update({});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(4);
 
-    c.logger.reset();
     c.update({id: 'k0'});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(5);
 
-    c.logger.reset();
     c.update({id: 'k1', class: 'Species'});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(6);
 
     expect(c).to.be.lengthOf(2);
   });
 
   it('upsert acts like insert if class presented.', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.insert({
       class: 'Record',
       id: 'k3',
@@ -118,14 +112,14 @@ describe('Unit tests for Container load', () => {
       id: 'k3',
       title: 'k3 updated title'
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(simple).to.have.property('title', 'k3 updated title');
     expect(simple).not.to.have.property('notes');
     expect(c).to.be.lengthOf(3);
   });
 
   it('upsert acts like update if no class presented.', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.insert({
       class: 'Record',
       id: 'k4',
@@ -138,28 +132,28 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k4 updated title'
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(c).to.be.lengthOf(4);
     expect(simple).to.have.property('title', 'k4 updated title');
     expect(simple).to.have.property('notes', 'k4 notes');
   });
 
   it('Throws wrong upsert', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.upsert({});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
 
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.upsert({class: 'Record'});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
     
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.upsert({id: 'k10'});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 
   it('delete existed element.', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.insert({
       class: 'Record',
       id: 'k5',
@@ -171,26 +165,26 @@ describe('Unit tests for Container load', () => {
       id: 'k5',
       space: 'default__',
     });
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(res).to.be.a('boolean').and.true;
     expect(c).to.be.lengthOf(4);
   });
 
   it('Throws wrong delete', () => {
     // empty
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.delete({});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
 
     // class is not allowed
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.delete({id: 'k3', space: 'default__', class: 'Record'});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
     
     // deleting not existed element is not allowed
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.delete({id: 'k10', space: 'default__'});
-    expect(c.logger).to.have.property('hasErrors', true); 
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 
   it('final length', () => {
@@ -198,28 +192,28 @@ describe('Unit tests for Container load', () => {
   });
 
   it('Select existed element', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     let res = c.select({id: 'k2', space: 'one'});
-    expect(c.logger).to.have.property('hasErrors', false); 
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(res).to.have.property('className', 'Record');
   });
 
   it('Select non existed element', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     let res = c.select({id: 'k99', space: 'one'});
-    expect(c.logger).to.have.property('hasErrors', false); 
+    expect(c.hetaErrors()).to.be.lengthOf(0);
     expect(res).to.be.undefined;
   });
 
   it('Select with empty id throws.', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.select({});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 
   it('Select from not existed namespace throws', () => {
-    c.logger.reset();
+    c.defaultLogs.length = 0;
     c.select({id: 'k1', space: 'error'});
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.be.lengthOf(1);
   });
 });

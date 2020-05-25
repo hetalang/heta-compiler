@@ -1,5 +1,6 @@
 const { Component } = require('./component');
 const { Unit } = require('./unit');
+const _ = require('lodash');
 
 /*
   Abstract class _Size
@@ -17,7 +18,7 @@ const { Unit } = require('./unit');
 class _Size extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = _Size.isValid(q, logger);
 
     if (valid) {

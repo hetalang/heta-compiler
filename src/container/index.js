@@ -137,9 +137,9 @@ class Container {
     return targetComponent;
   }
   upsert(q = {}, isCore = false){
-    if('class' in q){
+    if ('class' in q) {
       return this.insert(q, isCore);
-    }else{
+    } else {
       return this.update(q);
     }
   }

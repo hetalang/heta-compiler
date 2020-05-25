@@ -1,4 +1,5 @@
 const { Process, _Effector, Actor } = require('./process');
+const _ = require('lodash');
 
 /*
   Reaction class
@@ -18,7 +19,7 @@ class Reaction extends Process {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = Reaction.isValid(q, logger);
 
     if (valid) {

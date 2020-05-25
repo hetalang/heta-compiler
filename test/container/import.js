@@ -1,6 +1,5 @@
 /* global describe, it */
 const { Container } = require('../../src');
-const { QueueError } = require('../../src/builder');
 const { expect } = require('chai');
 
 describe('Test correct import', () => {
@@ -23,13 +22,13 @@ describe('Test correct import', () => {
       space: 'two'
     });
 
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.have.lengthOf(0);
     expect(c).to.be.lengthOf(2);
     expect(clone).to.have.property('index', 'two::k2');
   });
 
   it('import of not existed Const', () => {
-    var c = new Container();
+    let c = new Container();
     c.import({
       fromId: 'k1',
       fromSpace: 'one',
@@ -37,7 +36,7 @@ describe('Test correct import', () => {
       space: 'two'
     });
 
-    expect(c.logger).to.have.property('hasErrors', true);
+    expect(c.hetaErrors()).to.have.lengthOf(1);
     expect(c).to.be.lengthOf(0);
   });
 
@@ -65,7 +64,7 @@ describe('Test correct import', () => {
       rename: { y: 'z'}
     });
 
-    expect(c.logger).to.have.property('hasErrors', false);
+    expect(c.hetaErrors()).to.have.lengthOf(0);
     expect(c).to.be.lengthOf(2);
     expect(clone).to.have.property('index', 'two::p2');
     expect(clone.actors[1]).to.have.property('target', 'pr_A_suf');

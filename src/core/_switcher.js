@@ -10,8 +10,8 @@ const { Component } = require('./component');
 class _Switcher extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
-    let valid = _Switcher.isValid(q, logger);
+    //let logger = _.get(this, 'namespace.container.logger');
+    //let valid = _Switcher.isValid(q, logger);
 
     return this;
   }

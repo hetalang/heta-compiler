@@ -58,5 +58,5 @@ describe('test sbmlParse() operators', () => {
 const sbml1Text = fs.readFileSync(path.join(__dirname, 'sbml1.xml'), 'utf8');
 describe('parse speciesType', () => {
   let res = SBMLParse('sbml0', sbml1Text);
-  console.log(res);
+  //console.log(res);
 });

@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const { Component } = require('../../src/core/component');
 
 describe('Unit tests for Container', () => {
-  var c;
+  let c;
 
   it('Creating empty container and three namespaces.', () => {
     c = new Container();
@@ -22,12 +22,12 @@ describe('Unit tests for Container', () => {
       };
       */
       let res = c.insert({
-        id: 'pmid1',
+        id: 'pmid1', // #1
         class: 'ReferenceDefinition',
         prefix: 'https://pubmed.org/',
         suffix: '/'
       });
-      expect(c.logger).to.have.property('hasErrors', false);
+      expect(c.hetaErrors()).to.be.lengthOf(0);
       expect(res).to.be.instanceOf(Component);
       expect(c.length).to.be.eql(1);
 
@@ -40,18 +40,18 @@ describe('Unit tests for Container', () => {
     });
 
     it('Insert components with the same id.', () => {
-      c.insert({
+      c.insert({ 
         class: 'ReferenceDefinition',
-        id: 'pmid2',
+        id: 'pmid2', // #2
         prefix: 'https://pubmed.org/',
         suffix: '/'
       });
-      c.insert({
+      c.insert({ 
         class: 'ReferenceDefinition',
-        id: 'pmid2',
+        id: 'pmid2', // #2
         prefix: 'https://google.com'
       });
-      expect(c.logger).to.have.property('hasErrors', false);
+      expect(c.hetaErrors()).to.be.lengthOf(0);
       let simple = c.namespaces.get('nameless').get('pmid2');
       expect(simple).to.have.property('prefix', 'https://google.com');
       expect(simple).to.have.property('space', 'nameless');
@@ -59,14 +59,14 @@ describe('Unit tests for Container', () => {
     });
 
     it('Insert components with space.', () => {
-      c.insert({
+      c.insert({ 
         class: 'ReferenceDefinition',
-        id: 'pmid4',
+        id: 'pmid4', // #3
         space: 'three',
         prefix: 'xxx',
         suffix: '/'
       });
-      expect(c.logger).to.have.property('hasErrors', false);
+      expect(c.hetaErrors()).to.be.lengthOf(0);
       let component = c.namespaces.get('three').get('pmid4');
       expect(component).to.have.property('prefix', 'xxx');
       expect(component).to.have.property('space', 'three');
@@ -74,12 +74,12 @@ describe('Unit tests for Container', () => {
     });
 
     it('Insert scoped component and check.', () => {
-      c.insert({
+      c.insert({ 
         class: 'Record',
-        id: 'pg1',
+        id: 'pg1', // #4
         space: 'another'
       });
-      expect(c.logger).to.have.property('hasErrors', false);
+      expect(c.hetaErrors()).to.be.lengthOf(0);
       let simple = c.namespaces.get('another').get('pg1');
       expect(simple).to.has.property('space', 'another');
       expect(c.length).to.be.eql(4);
@@ -90,7 +90,7 @@ describe('Unit tests for Container', () => {
     it('Record', () => {
       c.insert({
         class: 'Record',
-        id: 'k1',
+        id: 'k1', // #5
         space: 'default__',
         assignments: {
           start_: 1.2e-2
@@ -101,7 +101,7 @@ describe('Unit tests for Container', () => {
     it('Compartment', () => {
       c.insert({
         class: 'Compartment',
-        id: 'comp1',
+        id: 'comp1', // #6
         space: 'default__',
         assignments: {
           start_: 5.2
@@ -112,7 +112,7 @@ describe('Unit tests for Container', () => {
     it('Species', () => {
       c.insert({
         class: 'Species',
-        id: 's1',
+        id: 's1', // #7
         space: 'default__',
         compartment: 'comp1',
         assignments: {
@@ -124,7 +124,7 @@ describe('Unit tests for Container', () => {
     it('Process', () => {
       c.insert({
         class: 'Process',
-        id: 'pr1',
+        id: 'pr1', // #8
         space: 'default__',
         assignments: {
           ode_: 'k1*s1'
@@ -135,7 +135,7 @@ describe('Unit tests for Container', () => {
     it('Reaction', () => {
       c.insert({
         class: 'Reaction',
-        id: 'r1',
+        id: 'r1', // #9
         space: 'default__',
         actors: [
           {target: 's1', stoichiometry: -1},
@@ -156,21 +156,18 @@ describe('Unit tests for Container', () => {
 
   describe('Test insert() wrong.', () => {
     it('Insert wrong components.', () => {
-      c.logger.reset();
       c.insert({id: 'pmid3', class: 'ReferenceDefinition2'});
-      expect(c.logger).to.have.property('hasErrors', true);
+      expect(c.hetaErrors()).to.be.lengthOf(1);
   
-      c.logger.reset();
       c.insert({id: '1xxx', class: 'ReferenceDefinition'});
-      expect(c.logger).to.have.property('hasErrors', true);
+      expect(c.hetaErrors()).to.be.lengthOf(2);
 
-      expect(c.length).to.be.eql(10);
+      expect(c.length).to.be.eql(9);
     });
 
     it('Insert to wrong namespace', () => {
-      c.logger.reset();
       c.insert({id: 'k1', class: 'Const', space: 'wrong', num: 1});
-      expect(c.logger).to.have.property('hasErrors', true);
+      expect(c.hetaErrors()).to.be.lengthOf(3);
     });
   });
 });

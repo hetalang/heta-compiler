@@ -12,7 +12,7 @@ const _ = require('lodash');
 class Species extends Record {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = Species.isValid(q, logger);
 
     if (valid) {

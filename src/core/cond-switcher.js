@@ -1,4 +1,5 @@
 const { _Switcher } = require('./_switcher');
+const _ = require('lodash');
 
 /*
   CondSwitcher class
@@ -10,7 +11,7 @@ const { _Switcher } = require('./_switcher');
 class CondSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace.container.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = CondSwitcher.isValid(q, logger);
     
     if (valid) {
