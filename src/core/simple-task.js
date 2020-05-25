@@ -4,10 +4,10 @@ const _ = require('lodash');
 class SimpleTask extends Component {
   merge(q = {}){
     super.merge(q);
-    let validationLogger = SimpleTask.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = SimpleTask.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
+    if (valid) {
       if (q.type) this.type = q.type;
       if (q.subtasks) {
         this.subtasks = q.subtasks.map((q) => new Subtask(q));
@@ -56,7 +56,8 @@ class SimpleTask extends Component {
     return clonedComponent;
   }
   bind(namespace){
-    let logger = super.bind(namespace);
+    super.bind(namespace);
+    let logger = this.namespace.container.logger;
 
     // check output refs in SimpleTasks XXX: it seems to be working but ugly and without iterativity
     if(this instanceof SimpleTask && this.subtasks){
@@ -75,16 +76,14 @@ class SimpleTask extends Component {
         });
       });
     }
-
-    return logger;
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if(this.type) res.type = this.type;
-    if(this.subtasks) res.subtasks = this.subtasks;
-    if(_.size(this.reassign)) res.reassign = _.cloneDeep(this.reassign);
-    if(_.size(this.solver)) res.solver = _.cloneDeep(this.solver);
-    if(this.tspan) res.tspan = _.cloneDeep(this.tspan);
+    if (this.type) res.type = this.type;
+    if (this.subtasks) res.subtasks = this.subtasks;
+    if (_.size(this.reassign)) res.reassign = _.cloneDeep(this.reassign);
+    if (_.size(this.solver)) res.solver = _.cloneDeep(this.solver);
+    if (this.tspan) res.tspan = _.cloneDeep(this.tspan);
     return res;
   }
 }

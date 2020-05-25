@@ -10,11 +10,11 @@ const { _Switcher } = require('./_switcher');
 class CondSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
-    let validationLogger = CondSwitcher.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = CondSwitcher.isValid(q, logger);
     
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.condition!==undefined) this.condition = q.condition;
+    if (valid) {
+      if (q.condition!==undefined) this.condition = q.condition;
     }
     
     return this;

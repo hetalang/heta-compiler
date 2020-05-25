@@ -5,7 +5,7 @@ const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
 const { Container, coreComponents } = require('../index');
 const ModuleSystem = require('../module-system');
-const Logger = require('../logger');
+const { StdoutTransport } = require('../logger');
 const _ = require('lodash');
 require('./_export');
 require('./xlsx-export');
@@ -33,10 +33,13 @@ require('./xlsx-export');
  */
 class Builder {
   constructor(declaration, coreDirname = '.'){
-    // set logger
-    let logLevel = _.get(declaration, 'options.logLevel', 'info');
-    global.showLogLevel = ['debug', 'info', 'warn', 'error', 'panic'].indexOf(logLevel);
-    this.logger = new Logger();
+    // create container
+    this.container = new Container();
+
+    // set transport and logger
+    let consoleTransport = new StdoutTransport('info');
+    this.logger = this.container.logger;
+    this.logger.addTransport(consoleTransport);
 
     // check based on schema XXX: move to heta-build.js ?
     let validate = ajv.compile(declarationSchema);
@@ -56,8 +59,6 @@ class Builder {
     this._metaDirname = path.resolve(coreDirname, declaration.options.metaDir);
     this._logPath = path.resolve(coreDirname, declaration.options.logPath);
 
-    // create container
-    this.container = new Container();
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
     
     // index file not found
@@ -73,13 +74,11 @@ class Builder {
     // 0. Load core components
     this.logger.info('Loading core components, total count: ' + coreComponents.length);
     this.container.loadMany(coreComponents, true);
-    this.logger.pushMany(this.container.logger);
 
     // 1. Parsing
-    let ms = new ModuleSystem();
+    let ms = new ModuleSystem(this.container.logger);
     let absFilename = path.join(this._coreDirname, this.importModule.source);
     ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
-    this.logger.pushMany(ms.logger);
 
     // 2. Modules integration
     if (this.options.debug) {
@@ -99,19 +98,19 @@ class Builder {
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.knitMany();
-    this.logger.pushMany(this.container.logger);
     
     // 5. Exports
     this.exportMany();
 
     // 6.save logs if required
+    /*
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.logger.hasErrors);
     if (createLog) {
       this.logger.info(`All logs was saved to file: "${this._logPath}"`)
       fs.outputFileSync(this._logPath, this.logger.toString(false));
     }
-    
+    */
     return;
   }
   exportMany(){
@@ -124,7 +123,6 @@ class Builder {
         let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
         this.logger.info(msg);
         exportItem.makeAndSave(this._distDirname);
-        this.logger.pushMany(exportItem.logger);
       });
     } else {
       this.logger.warn('Exporting skipped as stated in declaration.');

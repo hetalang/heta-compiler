@@ -12,10 +12,10 @@ const _ = require('lodash');
 class Species extends Record {
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Species.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Species.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
+    if (valid) {
       if (q.compartment !== undefined) this.compartment = q.compartment;
       if (q.isAmount !== undefined) this.isAmount = q.isAmount;
     }

@@ -32,10 +32,10 @@ class TimeSwitcher extends _Switcher {
   }
   merge(q = {}){
     super.merge(q);
-    let validationLogger = TimeSwitcher.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = TimeSwitcher.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
+    if (valid) {
       // empty means anon 0 as default
       if (typeof q.start === 'string'){
         this.start = q.start;

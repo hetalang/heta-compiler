@@ -8,15 +8,14 @@ require('./md-module');
 require('./yaml-module');
 require('./xlsx-module');
 require('./sbml-module');
-const Logger = require('../logger');
 
 class ModuleSystem {
-  constructor(){
+  constructor(logger){
     // stores modules in format
     // { filepath : module, ...}
     this.moduleCollection = {};
     this.graph = new TopoSort();
-    this.logger = new Logger();
+    this.logger = logger;
   }
   // entrance to scan
   addModuleDeep(rawAbsFilePath, type, options = {}){
@@ -43,7 +42,7 @@ class ModuleSystem {
   // parse single file without dependencies
   addModule(filename, type='heta', options = {}){
     // parse
-    let mdl = _Module.createModule(filename, type, options);
+    let mdl = _Module.createModule(filename, type, options, this.logger);
     mdl.updateByAbsPaths();
     // push to moduleCollection
     let moduleName = [filename, '#', options.sheet || '1'].join('');
@@ -53,9 +52,6 @@ class ModuleSystem {
       .getImportElements()
       .map((x) => [x.source, '#', x.sheet || 1].join(''));
     this.graph.add(moduleName, paths);
-    
-    // combine loggers
-    this.logger.pushMany(mdl.logger);
 
     return mdl;
   }

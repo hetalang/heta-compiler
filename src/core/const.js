@@ -10,11 +10,11 @@ const { _Size } = require('./_size');
 class Const extends _Size { // implicit extend Numeric
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Const.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Const.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.num!==undefined) this.num = q.num;
+    if (valid) {
+      if (q.num !== undefined) this.num = q.num;
       this.free = q.free ? q.free : false;
     }
 

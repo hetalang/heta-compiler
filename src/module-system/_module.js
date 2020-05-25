@@ -1,12 +1,11 @@
 const path = require('path');
-const Logger = require('../logger');
 const fs = require('fs');
 
 // abstract class for different import types
 class _Module {
-  static createModule(filename, type, options = {}){
+  static createModule(filename, type, options = {}, logger){
     let mdl = new _Module;
-    mdl.logger = new Logger();
+    mdl.logger = logger;
     mdl.filename = path.resolve(filename); // get abs path
     mdl.type = type;
     mdl.options = options;

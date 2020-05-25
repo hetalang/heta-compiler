@@ -3,11 +3,11 @@ const { Component } = require('./component');
 class Page extends Component {
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Page.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Page.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.content) this.content = q.content;
+    if (valid) {
+      if (q.content) this.content = q.content;
     }
     
     return this;

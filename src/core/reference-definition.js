@@ -5,10 +5,10 @@ const { Component } = require('./component');
 class ReferenceDefinition extends Component {
   merge(q = {}){
     super.merge(q);
-    let validationLogger = ReferenceDefinition.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = ReferenceDefinition.isValid(q, valid);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
+    if (valid) {
       if(q.prefix) this.prefix = q.prefix;
       if(q.suffix) this.suffix = q.suffix;
     }

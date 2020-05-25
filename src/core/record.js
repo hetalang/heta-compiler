@@ -16,10 +16,10 @@ class Record extends _Size {
   }
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Record.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Record.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
+    if (valid) {
       if (q.assignments) { // add new assignments from q
         _.forOwn(q.assignments, (x, key) => {
           if (typeof x === 'string' || typeof x === 'number' || 'expr' in x) {
@@ -27,7 +27,7 @@ class Record extends _Size {
               _.set(this.assignments, key, Expression.fromString(x));
             } catch (e) {
               let msg = this.index + ' '+ e.message + ` "${x.toString()}"`;
-              this.logger.error(msg, 'ValidationError');
+              logger.error(msg, 'ValidationError');
             }
           } else {
             throw new Error('Wrong expression argument.'); // if code is OK never throws
@@ -35,7 +35,7 @@ class Record extends _Size {
         });
       }
   
-      if(q.boundary !== undefined) this.boundary = q.boundary;
+      if (q.boundary !== undefined) this.boundary = q.boundary;
     }
     
     return this;
@@ -73,7 +73,8 @@ class Record extends _Size {
     }
   }
   bind(namespace){
-    let logger = super.bind(namespace);
+    super.bind(namespace);
+    let logger = this.namespace.container.logger;
 
     // check initialization
     let hasInit = _.get(this, 'assignments.start_') !== undefined
@@ -101,8 +102,6 @@ class Record extends _Size {
           }
         });
     });
-
-    return logger;
   }
   toQ(options = {}){
     let res = super.toQ(options);

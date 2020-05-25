@@ -14,7 +14,6 @@ class GSKXLSXExport extends XLSXExport {
     return 'GSKXLSXExport';
   }
   make(){
-    this.logger.reset();
     let qArr = this.namespace
       .toArray()
       .filter((x) => !x.isCore)

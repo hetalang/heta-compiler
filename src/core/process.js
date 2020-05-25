@@ -18,15 +18,15 @@ class Process extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Process.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Process.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.actors) {
+    if (valid) {
+      if (q.actors) {
         if(q.actors instanceof Array){
           this.actors = q.actors
             .map((q) => new Actor(q));
-        }else{
+        } else {
           let { targetArray, isReversible } = rct2actors(q.actors);
           this.actors = targetArray
             .map((q) => new Actor(q));

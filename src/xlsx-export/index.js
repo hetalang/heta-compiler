@@ -16,7 +16,6 @@ class XLSXExport extends _Export {
     return 'XLSXExport';
   }
   make(){
-    this.logger.reset();
     let sequense = [
       'on', 'action', 'class', 'space', 'id', 
       'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',

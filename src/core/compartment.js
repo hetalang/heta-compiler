@@ -13,9 +13,8 @@ class Compartment extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Compartment.isValid(q);
-
-    this.logger.pushMany(validationLogger);
+    //let logger = this.namespace.container.logger;
+    //let valid = Compartment.isValid(q, logger);
     
     return this;
   }

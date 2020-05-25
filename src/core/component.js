@@ -4,7 +4,6 @@ const _ = require('lodash');
 const _uniq = require('lodash/uniq');
 const _cloneDeep = require('lodash/cloneDeep');
 const { flatten } = require('./utilities');
-const Logger = require('../logger');
 
 /*
   class Component
@@ -20,18 +19,16 @@ class Component {
     this.tags = [];
     this.aux = {};
     if (isCore) this._isCore = true;
-    this.logger = new Logger();
   }
   merge(q = {}){
-    this.logger.reset();
-    let validationLogger = Component.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Component.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.title) this.title = q.title;
-      if(q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
-      if(q.tags) this.tags = _cloneDeep(q.tags);
-      if(q.aux) this.aux = _cloneDeep(q.aux);
+    if (valid) {
+      if (q.title) this.title = q.title;
+      if (q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
+      if (q.tags) this.tags = _cloneDeep(q.tags);
+      if (q.aux) this.aux = _cloneDeep(q.aux);
     }
     
     return this;
@@ -140,13 +137,12 @@ class Component {
       return undefined;
     }
   }
-  static isValid(q){
-    let validationLogger = new Logger();
+  static isValid(q, logger){
     let ind = q.space ? `${q.space}::` : '' + q.id;
 
     let validate = validator
       .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
-    if(!validate){
+    if (!validate) {
       throw new TypeError(q, `The schema "${this.schemaName}" is not found.`);
     }
     let valid = validate(q);
@@ -154,11 +150,11 @@ class Component {
       let msg = `${ind} Some of properties do not satisfy requirements for class "${this.schemaName}"\n`
         + validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');
-      validationLogger.error(msg, 'ValidationError');
-      validationLogger.warn('Some of component properties will not be updated.');
+      logger.error(msg, 'ValidationError');
+      logger.warn('Some of component properties will not be updated.');
     }
     
-    return validationLogger;
+    return valid;
   }
   /*
     Checking references:
@@ -166,8 +162,8 @@ class Component {
     - create virtual component if local prop refferences to global component
   */
   bind(namespace){
-    let logger = new Logger();
-    if(!namespace)
+    let logger = this.namespace.container.logger;
+    if (!namespace)
       throw new TypeError('"namespace" argument should be set.');
     
     const iterator = (item, path, rule) => {
@@ -180,9 +176,9 @@ class Component {
         logger.error(this.index + ` "${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`, 'BindingError');
       } else {
         // set direct ref
-        if(rule.setTarget) _.set(this, path + 'Obj', target);
+        if (rule.setTarget) _.set(this, path + 'Obj', target);
         // add back references for Record from Process XXX: ugly solution
-        if(this.instanceOf('Process') && item.className === 'Actor' ){
+        if (this.instanceOf('Process') && item.className === 'Actor' ){
           target.backReferences.push({
             process: this.id,
             _process_: this,
@@ -196,25 +192,23 @@ class Component {
     let req = this.constructor.requirements();
     _.each(req, (rule, prop) => { // iterates through rules
       // required: true
-      if(rule.required && !_.has(this, prop)){
+      if (rule.required && !_.has(this, prop)) {
         logger.error(`No required "${prop}" property for "${this.index}" of ${this.className}.`, 'BindingError');
       }
       // isReference: true + className
-      if(rule.isReference && _.has(this, prop)){
-        if(rule.isArray){ // iterates through array
+      if (rule.isReference && _.has(this, prop)) {
+        if (rule.isArray) { // iterates through array
           _.get(this, prop).forEach((item, i) => {
             let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
             iterator(item, fullPath, rule);
           });
-        }else{
+        } else {
           let item = _.get(this, prop);
           let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
           iterator(item, fullPath, rule);
         }
       }
     });
-    
-    return logger;
   }
   toQ(options = {}){
     let res = {};

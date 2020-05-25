@@ -15,7 +15,6 @@ class JSONExport extends _Export {
     return 'JSONExport';
   }
   make(){
-    this.logger.reset();
     let qArr = this.namespace
       .toQArr(true, { noUnitsExpr: this.noUnitsExpr })
       .map((q) => this.omit ? _.omit(q, this.omit) : q);

@@ -13,7 +13,6 @@ class SimbioExport extends _Export{
     return 'SimbioExport';
   }
   make(){
-    this.logger.reset();
     this.image = this._getSimbioImage();
 
     return [

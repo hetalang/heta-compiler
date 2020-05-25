@@ -22,7 +22,6 @@ class SLVExport extends _Export{
    * @return {string} Text code of exported format.
    */
   make(){
-    this.logger.reset();
     this._model_ = this._getSLVImage();
 
     return [{

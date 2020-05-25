@@ -17,10 +17,10 @@ const { Unit } = require('./unit');
 class _Size extends Component {
   merge(q = {}){
     super.merge(q);
-    let validationLogger = _Size.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = _Size.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
+    if (valid) {
       if (q.units !== undefined) {
         if (typeof q.units === 'string')
           this.unitsParsed = Unit.parse(q.units);
@@ -47,28 +47,27 @@ class _Size extends Component {
   }
   /** Additional check of units items */
   bind(namespace){
-    let logger = super.bind(namespace);
+    super.bind(namespace);
+    let logger = this.namespace.container.logger;
 
     if (this.unitsParsed) {
       this.unitsParsed.forEach((x) => {
         let target = namespace.get(x.kind);
         
-        if(!target){
+        if (!target) {
           let msg = `Unit "${x.kind}" is not found as expected here: `
             + `${this.index} { units: ${this.units} };`;
           logger.error(msg, 'BindingError');
-        }else if(!target.instanceOf('UnitDef')){
+        } else if (!target.instanceOf('UnitDef')){
           let msg = `Unit "${x.kind}" is not of UnitDef class as expected here: `
             + `${this.index} { units: ${this.units} };`;
           logger.error(msg, 'BindingError');
-        }else{
+        } else {
           // kindObj can be set here
           x.kindObj = target;
         }
       });
     }
-    
-    return logger;
   }
   /* used only in sbml */
   unitsSBML(){

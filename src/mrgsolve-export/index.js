@@ -14,7 +14,6 @@ class MrgsolveExport extends _Export {
     return 'MrgsolveExport';
   }
   make(){
-    this.logger.reset();
     this._model_ = this._getMrgsolveImage();
 
     return [{

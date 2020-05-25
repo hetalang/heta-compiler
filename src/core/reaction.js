@@ -18,23 +18,23 @@ class Reaction extends Process {
   }
   merge(q = {}){
     super.merge(q);
-    let validationLogger = Reaction.isValid(q);
+    let logger = this.namespace.container.logger;
+    let valid = Reaction.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.modifiers) {
+    if (valid) {
+      if (q.modifiers) {
         this.modifiers = q.modifiers
           .map((mod) => {
-            if(typeof mod==='string'){
+            if (typeof mod==='string') {
               return new Modifier({target: mod});
-            }else{
+            } else {
               return new Modifier(mod);
             }
           });
       }
       
-      if(q.compartment!==undefined) this.compartment = q.compartment;
-      if(q.isAmount!==undefined) this.isAmount = q.isAmount;
+      if (q.compartment !== undefined) this.compartment = q.compartment;
+      if (q.isAmount !== undefined) this.isAmount = q.isAmount;
     }
     
     return this;
@@ -57,8 +57,8 @@ class Reaction extends Process {
         : this.modifiers.map((modifier) => { return { target: modifier.target }; });
     }
 
-    if(this.compartment) res.compartment = this.compartment;
-    if(this.isAmount!==true) res.isAmount = this.isAmount;
+    if (this.compartment) res.compartment = this.compartment;
+    if (this.isAmount!==true) res.isAmount = this.isAmount;
 
     return res;
   }

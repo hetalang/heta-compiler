@@ -14,7 +14,6 @@ class SBMLExport extends _Export {
     return 'SBMLExport';
   }
   make(){
-    this.logger.reset();
     this.image = this._getSBMLImage();
 
     return [{

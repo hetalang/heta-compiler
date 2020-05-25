@@ -15,13 +15,13 @@ class _Export extends Component {
   }
   merge(q = {}){
     super.merge(q);
-    let validationLogger = _Export.isValid(q);
-    this.format = q.format;
+    let logger = this.namespace.container.logger;
+    let valid = _Export.isValid(q, logger);
 
-    this.logger.pushMany(validationLogger);
-    if (!validationLogger.hasErrors) {
-      if(q.filepath) this.filepath = q.filepath;
-      if(q.powTransform) this.powTransform = q.powTransform;
+    if (valid) {
+      this.format = q.format;
+      if (q.filepath) this.filepath = q.filepath;
+      if (q.powTransform) this.powTransform = q.powTransform;
     }
 
     return this;
