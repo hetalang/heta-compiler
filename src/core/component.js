@@ -212,11 +212,11 @@ class Component {
     let res = {};
     res.class = this.className;
     res.id = this.id;
-    if(this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
-    if(this.title) res.title = this.title;
-    if(this.notes) res.notes = this.notes;
-    if(this.tags.length>0) res.tags = _.cloneDeep(this.tags);
-    if(_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
+    if (this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
+    if (this.title) res.title = this.title;
+    if (this.notes) res.notes = this.notes;
+    if (this.tags.length>0) res.tags = _.cloneDeep(this.tags);
+    if (_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
 
     return res;
   }

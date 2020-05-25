@@ -27,7 +27,7 @@ class Record extends _Size {
               _.set(this.assignments, key, Expression.fromString(x));
             } catch (e) {
               let msg = this.index + ' '+ e.message + ` "${x.toString()}"`;
-              logger.error(msg, 'ValidationError');
+              logger && logger.error(msg, 'ValidationError');
             }
           } else {
             throw new Error('Wrong expression argument.'); // if code is OK never throws
