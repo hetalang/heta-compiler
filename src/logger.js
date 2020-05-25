@@ -4,79 +4,58 @@ const colors = require('colors/safe');
   Class describing Heta logs
 */
 
-class _HetaLog {
-  toString(useColour = true){
-    if (useColour) {
-      var levelString = this.color
-        ? colors[this.color](`[${this.level}]`)
-        : `[${this.level}]`;
-    } else{
-      levelString = `[${this.level}]`;
-    }
-    let errorType = this.type !== undefined
-      ? `(${this.type})`
-      : '';
-    return `${levelString}: ${errorType} ${this.message}`;
-  }
-}
+const levels = [
+  'debug', // 0
+  'info', // 1
+  'warn', // 2
+  'error' // 3
+];
 
-class HetaInfo extends _HetaLog {
-  constructor(msg, type){
-    super();
-    this.message = msg;
-    this.type = type;
-    this.level = 'info';
-    this.levelNum = 1;
-    this.color = 'blue';
-  }
-}
-
-class HetaWarn extends _HetaLog {
-  constructor(msg, type){
-    super();
-    this.message = msg;
-    this.type = type;
-    this.level = 'warn';
-    this.levelNum = 2;
-    this.color = 'yellow';
-  }
-}
-
-class HetaError extends _HetaLog {
-  constructor(msg, type){
-    super();
-    this.message = msg;
-    this.type = type;
-    this.level = 'error';
-    this.levelNum = 3;
-    this.color = 'red';
-  }
-}
-
-// XXX: global.showLogLevel is ugly solution but i dont know how to do this
 class Logger {
-  constructor(showLogLevel = global.showLogLevel || 0){
+  constructor(showLogLevel = 'info'){
     this.showLogLevel = showLogLevel;
-    this._logs = [];
+    this._transports = [];
   }
-  get logs(){
-    return this._logs;
+  addTransport(transport = () => {}){
+    let checkTransport = (transport instanceof Transport)
+      || typeof transport === 'function';
+    if (!checkTransport)
+      throw new Error('transport argument should be function or Transport instance.');
+    this._transports.push(transport);
+
+    return this;
   }
-  info(msg, type){
-    let info = new HetaInfo(msg, type);
-    if (this.showLogLevel <= 1) console.log(info.toString());
-    this._logs.push(info);
+  clearTransport(){
+    this._transports = [];
   }
-  warn(msg, type){
-    let warn = new HetaWarn(msg, type);
-    if (this.showLogLevel <= 2) console.log(warn.toString());
-    this._logs.push(warn);
+  log(level, msg, opt){
+    let levelNum = levels.indexOf(level);
+    if (levelNum < 0) {
+      throw new TypeError(`Unknown logger level: "${level}"`);
+    }
+
+    this._transports.forEach((transport) => {
+      if (transport instanceof Transport) {
+        transport.analyzer(level, msg, opt, levelNum);
+      } else {
+        transport(level, msg, opt, levelNum);
+      }
+    });
   }
-  error(msg, type){
-    let error = new HetaError(msg, type);
-    if (this.showLogLevel <= 3) console.log(error.toString());
-    this._logs.push(error);
+  debug(msg, opt){
+    this.log('debug', msg, opt);
   }
+  info(msg, opt){
+    this.log('info', msg, opt);
+  }
+  warn(msg, opt){
+    this.log('warn', msg, opt);
+  }
+  error(msg, opt){
+    this.log('error', msg, opt);
+  }
+
+  /*
   get hasErrors(){
     let numberOfErrors = this._logs.filter((log) => log.level === 'error');
     return numberOfErrors.length > 0;
@@ -94,6 +73,54 @@ class Logger {
   reset(){
     this._logs = [];
   }
+  */
 }
 
-module.exports = Logger;
+class Transport {
+  constructor(showLevel = 'info'){
+    let showLevelNum = levels.indexOf(showLevel);
+    if (showLevelNum < 0) {
+      throw new TypeError(`Unknown logger level: "${showLevelNum}"`);
+    }
+    this.showLevelNum = showLevelNum;
+  }
+  analyzer(){
+    throw new Error('Transport is abstract class');
+  }
+}
+
+class JSONTransport extends Transport{
+  constructor(showLevel = 'info'){
+    super(showLevel);
+  }
+  analyzer(level, msg, opt, levelNum){
+    if (levelNum >= this.showLevelNum) {
+      let obj = { level, msg, opt, levelNum };
+      this.target.push(obj);
+    }
+  }
+}
+
+class StdoutTransport extends Transport {
+  analyzer(level, msg, opt, levelNum){
+    let levelColors = [
+      'white',
+      'blue',
+      'yellow',
+      'red'
+    ];
+    if (levelNum >= this.showLevelNum) {
+      let currentColor = levelColors[levelNum];
+      let lineStart = colors[currentColor](`[${level}] `);
+      console.log(lineStart + msg);
+    }
+  }
+}
+
+module.exports = {
+  Logger,
+  Transport,
+  JSONTransport,
+  //stringTransport,
+  StdoutTransport
+};

@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha --recursive --exclude **/*.tmp.js test/sbml-module",
+    "test:dev": "mocha --recursive --exclude **/*.tmp.js test/logger.js",
     "test": "mocha test --recursive --exclude **/*.tmp.js",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
     "test:cov": "nyc --reporter=lcov npm run test",
