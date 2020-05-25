@@ -6,7 +6,7 @@ class ReferenceDefinition extends Component {
   merge(q = {}){
     super.merge(q);
     let logger = this.namespace.container.logger;
-    let valid = ReferenceDefinition.isValid(q, valid);
+    let valid = ReferenceDefinition.isValid(q, logger);
 
     if (valid) {
       if(q.prefix) this.prefix = q.prefix;

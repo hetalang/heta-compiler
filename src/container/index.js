@@ -13,7 +13,7 @@ const { Const } = require('../core/const');
 const { SimpleTask } = require('../core/simple-task');
 const _ = require('lodash');
 const { Namespace } = require('../namespace');
-const { Logger } = require('../logger');
+const { Logger, JSONTransport } = require('../logger');
 
 // they cannot be used as id, when 
 const reservedWords = [
@@ -26,7 +26,11 @@ const reservedWords = [
 
 class Container {
   constructor(){
+    // logger
     this.logger = new Logger();
+    this.defaultLogs = [];
+    this.logger.addTransport(new JSONTransport('info', this.defaultLogs));
+
     this._namespaces = new Map();
 
     // default namespace
@@ -38,6 +42,11 @@ class Container {
     // array to store _Export Instances
     this.exportStorage = [];
   }
+  // returns array of errors in heta code
+  hetaErrors(){
+    return this.defaultLogs
+      .filter(x => x.levelNum >= 3);
+  }
   get namespaces(){
     return this._namespaces;
   }
@@ -46,8 +55,8 @@ class Container {
 
     let space = q.space || 'nameless';
     // check index
-    if (!q.id || (typeof q.id !== 'string')) {
-      this.logger.error(`${ind} id should be string, but have "${q.id}"`, 'QueueError');
+    if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+      this.logger.error(`${ind} id should be string of type ID, but have "${q.id}"`, 'QueueError');
       return;
     }
     if (reservedWords.indexOf(q.id) !== -1) {
@@ -97,7 +106,7 @@ class Container {
     let ind = getIndexFromQ(q);
 
     let space = q.space || 'nameless';
-    if (!q.id || (typeof q.id !== 'string')) {
+    if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
       this.logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
       return;
     }
@@ -138,7 +147,7 @@ class Container {
     let ind = getIndexFromQ(q);
 
     let space = q.space || 'nameless';
-    if (!q.id || (typeof q.id !== 'string')){
+    if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
       this.logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
       return;
     }
@@ -170,7 +179,7 @@ class Container {
     let ind = getIndexFromQ(q);
 
     let space = q.space || 'nameless';
-    if (!q.id || (typeof q.id !== 'string')){
+    if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
       this.logger.error(`${ind} Id should be string, but have "${q.id}"`, 'QueueError');
       return;
     }
@@ -301,7 +310,7 @@ class Container {
       this.logger.error(`${ind} fromId should be string, but have "${q.fromId}"`, 'QueueError');
       return;
     }
-    if (!q.id || (typeof q.id !== 'string')){
+    if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
       this.logger.error(`${ind} id should be string, but have "${q.id}"`, 'QueueError');
       return;
     }
