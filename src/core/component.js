@@ -1,5 +1,5 @@
 const { markdown } = require('markdown');
-const { validator } = require('./utilities.js');
+const { validator } = require('./utilities');
 const _ = require('lodash');
 const { flatten } = require('./utilities');
 
