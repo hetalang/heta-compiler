@@ -32,8 +32,12 @@ program
   .option('-t, --type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
   .parse(process.argv);
 
-// set target directory of platform
+// set target directory of platform and check if exist
 let targetDir = path.resolve(program.args[0] || '.');
+if (!fs.existsSync(targetDir)) {
+  process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
+  process.exit(1);
+}
 // set base name of declaration file
 let platformFile = program.declaration;
 
@@ -92,7 +96,7 @@ try {
   process.stdout.write(contactMessage + '\n');
   throw e;
 }
-if (builder.logger.hasErrors) {
+if (builder.container.hetaErrors().length > 0) {
   process.stdout.write('Declaration ERROR! See logs.\n');
   process.exit(1);
 }
@@ -103,7 +107,7 @@ try {
   process.stdout.write(contactMessage + '\n');
   throw e;
 }
-if (builder.logger.hasErrors) {
+if (builder.container.hetaErrors().length > 0) {
   process.stdout.write('Compilation ERROR! See logs.\n');
   if (integralDeclaration.options.exitWithoutError)
     process.exit(0);
