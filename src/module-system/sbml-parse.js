@@ -220,7 +220,7 @@ function baseToQ(x){
   return q;
 }
 
-function _toMarkdown(elements){
+function _toMarkdown(elements = []){
   let text = elements.map((x) => {
     if (x.type === 'text') {
       return x.text.replace(/\r*\n/g, '');
