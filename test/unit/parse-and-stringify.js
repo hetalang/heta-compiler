@@ -24,7 +24,7 @@ describe('Testing correct units.', () => {
     describe(`Parsing "${x.str0}"`, () => {
       let unit;
 
-      it('No Errors while parsing.', () => {
+      it('No Errors when parsing.', () => {
         unit = Unit.parse(x.str0);
       });
 

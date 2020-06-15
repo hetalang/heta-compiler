@@ -176,7 +176,7 @@ class Unit extends Array {
   /**
    * Creates Unit object from string.
    *
-   * @param {String} unitString - string of format 'mM^2*L/mg/h2'
+   * @param {String} unitString - string of format 'mM^2*L/mg/h2' or (1e-2 mg)^3/L
    * @return {Unit} A Unit object.
    */
   static parse(unitString){
@@ -186,24 +186,33 @@ class Unit extends Array {
       .replace(/\s*/g, '') // remove blanks
       .match(/(^1\/|\/|\*)?[^*/]+/g);
 
-    if(items===null)
+    if (items === null)
       throw new SyntaxError(`Wrong syntax of unit: "${unitString}"`);
 
     items.forEach((item) => {
-      if(!/^(1\/|\/|\*)?[A-Za-z]+\^?(\d+(\.?\d*)?)?$/.test(item)) // checking "/xxx^12.23"
+      console.log('item : ', item)
+      let shortFormat = /^(1\/|\/|\*)?[A-Za-z]+\^?(\d+(\.?\d*)?)?$/; // checking "/xxx^12.23"
+      // (1/|/|*)? \([A-Za-z]+\) ^? (\d+(.?\d*)?)?
+      let longFormat = /^(1\/|\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?[A-Za-z]+\)\^?(\d+(\.?\d*)?)?$/; // checking "/(1e-2xxx)^12.23"
+
+      if (!shortFormat.test(item) && !longFormat.test(item)) 
         throw new SyntaxError(`Wrong syntax of unit: "${unitString}"`);
 
-      let kind = item.match(/[A-Za-z]+/)[0];
-      let pow = item.match(/[\d.]+$/) && item.match(/[\d.]+$/)[0];
-      let exponent0 = (/(^|\*)[a-zA-Z]+/.test(item)) // searching constructions "1/L", "/L"
-        ? 1
-        : -1;
-      let exponent = exponent0 * (pow || 1);
+      let matcher = /^1?([/*]?)[(]?(\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)?([A-Za-z]+)[)]?\^?(\d+(?:\.?\d*)?)?$/;
+      let mmm = item.match(matcher);
+      //console.log(mmm);
+
+      let kind = mmm[3];
+      let pow = mmm[4] === undefined ? 1 : mmm[4];
+      let exponent = mmm[1] === '/' // searching constructions "1/L", "/L"
+        ? (-1) * pow
+        : 1 * pow;
+      let multiplier = mmm[2] === undefined ? 1 : parseFloat(mmm[2]);
 
       unit.push({
         kind: kind,
         exponent: exponent,
-        multiplier: 1
+        multiplier: multiplier
       });
     });
 
