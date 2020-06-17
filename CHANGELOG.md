@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.5.3
+
+## 0.5.2
+
+- rewrites Heta logs: all logs are stored in container
+- fix Matlab export without event
+- SBML module: support speciesType
+- pretty Unit.toHTML
+- faster clone() method for components
+- support multiplier in Unit's hash
+- minute as qsp unit
+
 ## 0.5.1 - IRT ready
 
 - support {free: true} in #export DBSolve

@@ -1,7 +1,6 @@
 [![Heta project](https://img.shields.io/badge/%CD%B1-Heta_project-blue)](https://hetalang.github.io/)
 [![GitHub issues](https://img.shields.io/github/issues/insysbio/heta-compiler.svg)](https://GitHub.com/insysbio/heta-compiler/issues/)
 [![Autotests](https://github.com/insysbio/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/insysbio/heta-compiler/actions)
-[![Travis](https://travis-ci.org/insysbio/heta-compiler.svg?branch=master)](https://travis-ci.org/insysbio/heta-compiler)
 [![Coverage Status](https://coveralls.io/repos/github/insysbio/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/insysbio/heta-compiler?branch=master)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
 [![GitHub license](https://img.shields.io/github/license/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/blob/master/LICENSE)
@@ -27,11 +26,11 @@ Read more about Heta format and Heta-based platforms on Heta project homepage: <
 
 ## Introduction
 
-**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](https://hetalang.github.io/#/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming into the dynamical model/models of different formats.
+**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](https://hetalang.github.io/#/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming them into the dynamical model/models of different formats.
 
 Quantitative Systems Pharmacology (QSP) is a discipline that uses mathematical computer models to characterize biological systems, disease processes and drug pharmacology. QSP typically deals with mechanism-based dynamical models described by ODE systems. Sometimes the modeling systems includes hundred or thousand of components and developed by a research group involving people with different expertise.
 
-Heta compiler can be used as the framework for a QSP modeling project of any size and complexity. It can be easily integrated with existed infrastructure, workflows or used as a part of the CI/CD strategy. The pre-formulated requirements are:
+Heta compiler can be used as the framework for a QSP modeling project of any size and complexity. It can be easily integrated with existed infrastructure, workflows or used as a part of the CI/CD strategy. The pre-formulated requirements of Heta compiler are:
 
 - storing the QSP models and data in integrated infrastructure;
 - support iterative modeling platform updates (continuous development approach);
@@ -40,7 +39,9 @@ Heta compiler can be used as the framework for a QSP modeling project of any siz
 
 ## Export formats
 
-Heta compiler was created to support exporting to different popular modeling formats. One of the main effort of the developers is to extend a list of supporting formats and allow people to have the same results working in different tools. The current version supports the following formats:
+>for more information see [export formats](export-formats)
+
+Heta compiler was created to support exporting to different popular modeling formats. One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools. The current version supports the following formats:
 
 - DBSolveOptimum .SLV files [link](http://insysbio.com/en/software/db-solve-optimum)
 - SBML L2V4 [link](http://sbml.org/)
@@ -54,7 +55,7 @@ Heta compiler was created to support exporting to different popular modeling for
 
 ## Installation
 
-[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v8/v10** are supported.
+[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v8/v10** are recommended.
 
 The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.
 
@@ -64,7 +65,7 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
     # v8.0.0 or newer
     ```
 
-2. The latest stable version of Heta compiiler can be installed from npm
+2. The latest stable version of Heta compiler can be installed from npm
     ```bash
     npm i -g heta-compiler
     ```
@@ -81,7 +82,7 @@ Heta compiler comes with a built-in CLI which can be used to compile files from 
 
 The following is the example where we create a Heta module and compile it into SBML format. For example you want to create platform in directory "/path/to/my-platform" (target directory)
 
-1. Create Heta file: *index.heta* in the target directory:
+1. Create Heta file: *index.heta* in the target directory with the content:
     ```heta
     comp1 @Compartment;
     s1 @Species { compartment: comp1 };
@@ -104,7 +105,7 @@ The following is the example where we create a Heta module and compile it into S
     ```
     Heta builder takes "index.heta" file (module) as default, reads it and transforms to SBML file as declared in *index.heta*.
 
-3. See results in directory /path/to/my-platform/**dist**.
+3. See results of compilation in directory /path/to/my-platform/**dist**.
 
 >If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](https://hetalang.github.io/#/specifications/include).
 
@@ -124,21 +125,22 @@ let queue = [
     { class: 'Species', id: 's1', compartment: 'comp1', assignments: {start_: '10'} },
     { class: 'Reaction', id: 'r1', actors: 's1 =>', assignments: {ode_: 'k1*s1*comp1'} },
     { class: 'Const', id: 'r1', actors: 's1 =>', num: 1e-2 },
-    { class: 'SBMLExport', id: 'sbml1' }
+    { action: 'export', format: 'SBML', filepath: 'model' }
 ];
 
 // compilation
 let c = (new Container)
     .loadMany(queue)
     .knitMany();
-let output = c.select({id: 'sbml1'})
+// get export element
+let output = c.exportStorage[0]
     .make();
 
-// print sbml code
+// print sbml code to console
 console.log(output[0].content);
 
 // check errors
-console.log(c.logger.hasErrors);
+console.log(c.hetaErrors());
 ```
 
 ## Known issues and limitations

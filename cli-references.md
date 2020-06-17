@@ -1,6 +1,6 @@
 # Command Line Interface
 
-*This page describe how to work with Heta compiler from console (shell).*
+*This page describe how to work with Heta compiler from the console (shell).*
 
 If `heta` command is not available check your Heta compiler [installation](./README) and content of system paths (`PATH` variable in Windows).
 
@@ -14,7 +14,7 @@ If `heta` command is not available check your Heta compiler [installation](./REA
 
 ## "heta" command
 
-`heta` is prefix command for working with the toold. Writing the command alone prints the information about the tool and available options. `heta help` does the same.
+`heta` is the prefix command for working with the tools. Writing the command alone prints the information about the tool and available options. `heta help` does the same.
 
 ```
 $ heta
@@ -50,7 +50,7 @@ The default run of `heta build` (no options set, no configuration file) will do 
 
 CLI options allow setting specific options for build command. Use `heta build -h` to see the list of options.
 
-At the end of command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run. Absolute and relative path are possible here. If not set the shell WD will be used as WD of Heta.
+At the end of command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run instead of shell working directory. Absolute and relative path are possible here. If not set the shell WD will be used as WD of Heta.
 
 List of `heta build` options:
 | option | type | default | description |
@@ -71,7 +71,7 @@ heta build --source src/table.xlsx --type xlsx
 
 #### Example 2
 
-Run compilation without exporting files.
+Run compilation without exporting files using "index.heta" as entry point.
 ```
 heta build --skip-export
 ```

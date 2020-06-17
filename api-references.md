@@ -1,6 +1,6 @@
 # API references
 
-*Heta parser API references is under developments. If you have questoins contact the developers directly.*
+*Heta parser API references page is under developments. If you have questions contact the developers directly.*
 
 ## Classes
 
