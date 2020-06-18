@@ -2,7 +2,7 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
-require('./expression');
+//require('./expression'); // use expression.js from dbsolve-export
 
 class SLVExport extends _Export{
   merge(q = {}, skipChecking){

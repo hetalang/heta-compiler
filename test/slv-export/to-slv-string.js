@@ -1,6 +1,6 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
-require('../../src/slv-export/expression');
+require('../../src/dbsolve-export/expression');
 const { expect } = require('chai');
 
 describe('Expession exports to SLV', () => {

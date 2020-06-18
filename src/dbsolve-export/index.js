@@ -149,7 +149,7 @@ class DBSolveExport extends _Export{
   }
   getSLVCode(image = {}){
     return nunjucks.render(
-      'blocks-model.slv.njk',
+      'model.slv.njk',
       image
     );
   }
