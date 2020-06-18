@@ -190,17 +190,16 @@ class Unit extends Array {
       throw new SyntaxError(`Wrong syntax of unit: "${unitString}"`);
 
     items.forEach((item) => {
-      console.log('item : ', item)
-      let shortFormat = /^(1\/|\/|\*)?[A-Za-z]+\^?(\d+(\.?\d*)?)?$/; // checking "/xxx^12.23"
-      // (1/|/|*)? \([A-Za-z]+\) ^? (\d+(.?\d*)?)?
-      let longFormat = /^(1\/|\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?[A-Za-z]+\)\^?(\d+(\.?\d*)?)?$/; // checking "/(1e-2xxx)^12.23"
+      // checking "/xxx^12.23"
+      let shortFormat = /^(1\/|\/|\*)?[A-Za-z]+\^?(\d+(\.?\d*)?)?$/;
+      // checking "/(1e-2xxx)^12.23"
+      let longFormat = /^(1\/|\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?[A-Za-z]+\)\^?(\d+(\.?\d*)?)?$/; 
 
       if (!shortFormat.test(item) && !longFormat.test(item)) 
         throw new SyntaxError(`Wrong syntax of unit: "${unitString}"`);
 
       let matcher = /^1?([/*]?)[(]?(\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)?([A-Za-z]+)[)]?\^?(\d+(?:\.?\d*)?)?$/;
       let mmm = item.match(matcher);
-      //console.log(mmm);
 
       let kind = mmm[3];
       let pow = mmm[4] === undefined ? 1 : mmm[4];
