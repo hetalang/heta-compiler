@@ -8,7 +8,7 @@ class DBSolveExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     
-    if(q.defaultTask) this.defaultTask = q.defaultTask;
+    if (q.defaultTask) this.defaultTask = q.defaultTask;
 
     return this;
   }
@@ -35,29 +35,32 @@ class DBSolveExport extends _Export{
    * @return {undefined}
    */
   getSLVImage(){
-    // creates empty model image
+    // creates model image
     let image = {
       population: this.namespace
     };
 
     // push active processes
-    image.processes = [];
-    image.population
-      .toArray()
+    image.processes = this.namespace
+      .selectByInstanceOf('Process')
       .filter((x) => {
-        return x.instanceOf('Process')
-          && x.actors.length>0 // process with actors
+        return x.actors.length > 0 // process with actors
           && x.actors.some((actor) => { // true if there is at least non boundary target
             return !actor.targetObj.boundary && !actor.targetObj.isRule;
           });
-      })
-      .forEach((process) => image.processes.push(process));
+      });
     // push non boundary ode variables which are mentioned in processes
-    image.variables = [];
-    image.population
-      .toArray()
-      .filter((x) => x.instanceOf('Record') && x.isDynamic)
-      .forEach((record) => image.variables.push(record));
+    image.dynamicRecords = this.namespace
+      .selectByInstanceOf('Record')
+      .filter((x) => x.isDynamic);
+    /*
+    image.staticRecords = this.namespace
+      .selectByInstanceOf('Record')
+      .filter((x) => !x.isDynamic && !x.isRule);
+    */
+    image.initRecords = this.namespace // XXX: do we need this?
+      .sortExpressionsByContext('start_', true)
+      .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule)); 
     // create matrix
     image.matrix = [];
     image.processes.forEach((process, processNum) => {
@@ -65,30 +68,19 @@ class DBSolveExport extends _Export{
         return !actor.targetObj.boundary
           && !actor.targetObj.isRule;
       }).forEach((actor) => {
-        let variableNum = image.variables.indexOf(actor.targetObj);
+        let variableNum = image.dynamicRecords.indexOf(actor.targetObj);
         image.matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
     });
 
-    // create and sort expressions for RHS
-    image.rhs = image.population
-      .sortExpressionsByContext('ode_')
-      .filter((record) => record.instanceOf('Record') && _.has(record, 'assignments.ode_'));
-    // check that all record in start are not Expression
-    let startExpressions = image.population
-      .selectRecordsByContext('start_')
-      .filter((record) => record.assignments.start_.num===undefined); // check if it is not Number
-    if (startExpressions.length > 0) {
-      let errorMsg = 'DBSolve does not support expressions string in InitialValues.\n'
-        + startExpressions
-          .map((x) => `${x.index} []= ${x.assignments.start_.expr}`)
-          .join('\n');
-      this.logger.error(errorMsg, 'ExportError');
-    }
+    // create and sort expressions for RHS (rules)
+    image.ruleRecords = this.namespace
+      .sortExpressionsByContext('ode_', true)
+      .filter((x) => x.instanceOf('Species') || x.isRule );
 
     // create TimeEvents
     image.events = [];
-    image.population
+    this.namespace
       .selectByClassName('TimeSwitcher')
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
@@ -96,7 +88,7 @@ class DBSolveExport extends _Export{
         let period = switcher.periodObj === undefined || _.get(switcher, 'repeatCountObj.num') === 0
           ? 0
           : switcher.getPeriod();
-        image.population
+        this.namespace
           .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
             let expression = record.assignments[switcher.id];
@@ -123,7 +115,7 @@ class DBSolveExport extends _Export{
               add: add
             });
 
-            if (switcher.stopObj!==undefined){
+            if (switcher.stopObj !== undefined){
               image.events.push({
                 start: switcher.getStop(),
                 period: 0,
@@ -138,13 +130,15 @@ class DBSolveExport extends _Export{
       });
 
     // search for CondSwitcher
-    let bagSwitchers = image.population
+    let bagSwitchers = this.namespace
       .selectByClassName('CondSwitcher')
       .map((switcher) => switcher.id);
-    if(bagSwitchers.length > 0){
+    if (bagSwitchers.length > 0) {
       this.logger.error('CondSwitcher is not supported in format DBSolve: ' + bagSwitchers, 'ExportError');
     }
     
+    image.powTransform = this.powTransform;
+
     return image;
   }
   getSLVCode(image = {}){
