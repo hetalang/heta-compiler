@@ -111,16 +111,8 @@
         "units": [ { "kind": "second", "multiplier": 3600 } ]
     },
     {
-        "id": "day", "class": "UnitDef",
-        "units": [ { "kind": "second", "multiplier": 86400 } ]
-    },
-    {
         "id": "week", "class": "UnitDef",
         "units": [ { "kind": "second", "multiplier": 604800 } ]
-    },
-    {
-        "id": "year", "class": "UnitDef",
-        "units": [ { "kind": "second", "multiplier": 31558208 } ]
     },
 
     {

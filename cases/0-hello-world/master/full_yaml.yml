@@ -36,16 +36,6 @@
     - {target: S, stoichiometry: -1}
     - {target: P, stoichiometry: 1}
 - class: UnitDef
-  id: year
-  space: mm
-  units:
-    - {kind: second, multiplier: 31558208, exponent: 1}
-- class: UnitDef
-  id: day
-  space: mm
-  units:
-    - {kind: second, multiplier: 86400, exponent: 1}
-- class: UnitDef
   id: fmole
   space: mm
   units:

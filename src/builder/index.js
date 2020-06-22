@@ -71,10 +71,6 @@ class Builder {
   run(){
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     
-    // 0. Load core components
-    this.logger.info('Loading core components, total count: ' + coreComponents.length);
-    this.container.loadMany(coreComponents, true);
-
     // 1. Parsing
     let ms = new ModuleSystem(this.container.logger);
     let absFilename = path.join(this._coreDirname, this.importModule.source);
@@ -94,6 +90,16 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(queue, false);
+
+    // 3.5. Load core components into all namespaces
+    [...this.container.namespaces]
+      .forEach((ns) => { 
+        this.logger.info(`Loading core components into "${ns[0]}" namespace, total count: ${coreComponents.length}`);
+        let coreComponents1 = coreComponents.map((q) => {
+          return Object.assign({space: ns[0]}, q);
+        });
+        this.container.loadMany(coreComponents1, true);
+      });
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
