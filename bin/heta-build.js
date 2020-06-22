@@ -12,7 +12,7 @@ const colors = require('colors');
 
 let contactMessage = colors.bgRed(`
  +----------------------------------------------------------------+ 
- | Internal Heta-builder error, contact the developers.           | 
+ | Internal "Heta compiler" error, contact the developers.        | 
  | Create issue: ${bugs.url} | 
  | or mail to: ${bugs.email}                                   | 
  +----------------------------------------------------------------+ 

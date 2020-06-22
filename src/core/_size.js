@@ -75,17 +75,24 @@ class _Size extends Component {
     return this.unitsParsed;
   }
   unitsHash(){
-    if(this.unitsParsed!==undefined){
+    if(this.unitsParsed !== undefined){
       return this.unitsParsed.toHash();
     }else{
       return undefined;
     }
   }
   unitsRebased(legalUnits = [], usePefix = false){
-    if (this.unitsParsed!==undefined){
-      return this.unitsParsed
-        .rebase(legalUnits)
-        .toString(usePefix);
+    if (this.unitsParsed !== undefined){
+      try {
+        return this.unitsParsed
+          .rebase(legalUnits)
+          .toString(usePefix);
+      } catch(err) {
+        let logger = this.namespace.container.logger;
+        let msg = err.message;
+        logger.warn(msg);
+        return undefined;
+      }
     } else {
       return undefined;
     }

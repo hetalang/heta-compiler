@@ -23,14 +23,22 @@ class SBMLExport extends _Export {
     }];
   }
   _getSBMLImage(){
-    let listOfUnitDefinitions = this.namespace.isAbstract 
-      ? [] // do not create unitsDef for abstract ns
-      : this.namespace.getUniqueUnits()
-        .map((units) => {
-          return units
-            .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
-        });
-      
+    let logger = this.namespace.container.logger;
+    if (this.namespace.isAbstract) {
+      var listOfUnitDefinitions = []; 
+    } else {
+      try {
+        listOfUnitDefinitions = this.namespace.getUniqueUnits()
+          .map((units) => {
+            return units
+              .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
+          });
+      } catch(err){
+        logger.warn(err.message);
+        listOfUnitDefinitions = [];
+      }
+    }
+    
     return {
       population: this.namespace,
       listOfUnitDefinitions: listOfUnitDefinitions

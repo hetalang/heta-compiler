@@ -79,7 +79,7 @@ class Namespace extends Map {
     return _
       .chain(this.selectByInstanceOf('Record'))
       .concat(this.selectByInstanceOf('Const'))
-      .filter((record) => record.unitsSBML()!==undefined)
+      .filter((record) => record.unitsSBML() !== undefined)
       .uniqBy((record) => record.unitsHash(true))
       .map((record) => record.unitsSBML())
       .value();
