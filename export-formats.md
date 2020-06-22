@@ -5,6 +5,7 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [JSON](#json)
 - [YAML](#yaml)
 - [SLV](#slv)
+- [DBSolve](#dbsolve)
 - [SBML](#sbml)
 - [Simbio](#simbio)
 - [Mrgsolve](#mrgsolve)
@@ -107,6 +108,38 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 };
 ```
 
+## DBSolve
+
+Export to DBSolve format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
+
+This is the updated version of SLV export format which supports compartment volumes changed in time and initilazing records by arbitrary expressions.
+
+### Properties
+
+| property | type | required | default | ref | description | 
+| ---------|------|----------|---------|-----|-------------|
+| space | string | true | nameless | | Name of namespace to export. |
+| powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
+
+### Output files
+
+**[filepath]/model.slv** : model created based on namespace which can be opened by DBSolveOptimum.
+
+### Known restrictions
+
+- `CondSwitcher` is not supported and will be skipped.
+
+**Example**
+
+```heta
+#export {
+    format: DBSolve,
+    filepath: model, // save results in file "dist/model.slv"
+    space: nameless, // namespace used for model generation
+    powTransform: keep // use x^y and pow(x, y) without changes
+};
+```
+
 ## SBML
 
 Export to [SBML format](http://sbml.org/Main_Page).
@@ -180,7 +213,8 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 
 ### Known restrictions
 
-*Nothing*
+- `CondSwitcher` is not supported and will be skipped.
+- Initialization by MathExpr is not supported. Do not use `S1 .= x * y`.
 
 **Example:**
 
