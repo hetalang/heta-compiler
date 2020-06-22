@@ -84,7 +84,7 @@ class SLVExport extends _Export{
     if (startExpressions.length > 0) {
       let errorMsg = 'DBSolve does not support expressions string in InitialValues.\n'
         + startExpressions
-          .map((x) => `${x.index} []= ${x.assignments.start_.expr}`)
+          .map((x) => `${x.index} []= ${x.assignments.start_.toString()}`)
           .join('\n');
       logger.error(errorMsg, 'ExportError');
     }

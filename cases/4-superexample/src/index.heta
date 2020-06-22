@@ -23,9 +23,9 @@ namespace mod1 begin
   p6 @Record;
   p6 .= 2 * p4;
 
-  comp1 @Compartment {units: litre};
+  comp1 @Compartment { units: litre };
   comp1 .= 5;
-  comp2 @Compartment; //{units: litre};
+  comp2 @Compartment { units: liter };
   comp2 := p1;
 
   sp1 @Species { compartment: comp1, isAmount: false };
