@@ -2,6 +2,9 @@
 
 ## 0.5.3
 
+- Add Export of format DBSolve
+- Fix errors in unit rebase
+
 ## 0.5.2
 
 - rewrites Heta logs: all logs are stored in container
