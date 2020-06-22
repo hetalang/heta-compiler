@@ -11,8 +11,8 @@ comp1 @Compartment;
 vabs @Reaction {actors: a0 -> s1};
 vel @Reaction {actors: s1 ->};
 
-comp0 .= 1;
-comp1 .= 5.2;
+comp0 .= comp0_vol;
+comp1 .= comp1_vol;
 vabs := kabs*a0;
 vel := kel*s1*comp1;
 a0 []= 0; // initial value
@@ -20,7 +20,8 @@ s1 []= 0;
 
 //#export {space: one_comp, filepath: sbml, format: SBML};
 #export {filepath: json, format: JSON};
-#export {filepath: slv, format: SLV};
+//#export {filepath: slv, format: SLV};
+#export {filepath: model, format: DBSolve};
 
 sw1 @TimeSwitcher {
   start: 0,

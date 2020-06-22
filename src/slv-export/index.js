@@ -37,6 +37,7 @@ class SLVExport extends _Export{
    * @return {undefined}
    */
   _getSLVImage(){
+    let logger = _.get(this, 'namespace.container.logger');
     // creates empty model image
     let model = {
       population: this.namespace
@@ -85,7 +86,7 @@ class SLVExport extends _Export{
         + startExpressions
           .map((x) => `${x.index} []= ${x.assignments.start_.expr}`)
           .join('\n');
-      this.logger.error(errorMsg, 'ExportError');
+      logger.error(errorMsg, 'ExportError');
     }
 
     // create TimeEvents

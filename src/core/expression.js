@@ -1,6 +1,7 @@
 const math = require('mathjs');
 const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
+let { OperatorNode, SymbolNode } = math.expression.node;
 
 class Expression {
   constructor(exprParsed){ // string or object
@@ -101,7 +102,6 @@ class Expression {
       });
   }
   linearizeFor(target){
-    let { OperatorNode, SymbolNode } = math.expression.node;
     // estimate a, b from 'a * target + b'
     // b = a*0+b
     let bTree = math.simplify(this.exprParsed, {[target]: 0});
@@ -121,6 +121,17 @@ class Expression {
     let exprParsed = this.exprParsed
       .translate(translator);
     return new Expression(exprParsed);
+  }
+  // return new expression which is the multiplication
+  // of this and expression from argument
+  multiply(multiplier = '1'){
+    let multiplierParsed = math.parse(multiplier);
+    let node = new OperatorNode('*', 'multiply', [
+      this.exprParsed,
+      multiplierParsed
+    ]);
+
+    return new Expression(node);
   }
 }
 

@@ -80,8 +80,9 @@ class DBSolveExport extends _Export{
 
     // create TimeEvents
     image.events = [];
+    image.eventCounter = 0;
     this.namespace
-      .selectByClassName('TimeSwitcher')
+      .selectByInstanceOf('TimeSwitcher')
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
         // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
@@ -91,41 +92,32 @@ class DBSolveExport extends _Export{
         this.namespace
           .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
-            let expression = record.assignments[switcher.id];
-            let [multiply, add] = expression
-              .linearizeFor(record.id)
-              .map((tree) => {
-                if (tree.isSymbolNode) { // a is symbol case, i.e. 'p1'
-                  return tree.toString();
-                } else {
-                  try { // a can be evaluated, i.e. '3/4'
-                    return tree.eval();
-                  } catch (e) { // other cases, i.e. 'p1*2'
-                    this.logger.error(`DBSolveExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, 'ExportError');
-                  }
-                }
-              });
+            let expr = record.instanceOf('Species') && !record.isAmount
+              ? record.getAssignment(switcher.id).multiply(record.compartment)
+              : record.getAssignment(switcher.id);
 
-            image.events.push({
+            let target = record.instanceOf('Species') && !record.isAmount
+              ? record.id + '_'
+              : record.id;
+
+            let evt = {
               start: switcher.getStart(),
               period: period,
               on: switcher.id + '_',
-              target: record.id,
-              multiply: multiply,
-              add: add
-            });
+              target: target,
+              multiply: 0,
+              add: record.id + '_' + switcher.id + '_',
+              expr: expr.toSLVString(this.powTransform)
+            };
 
-            if (switcher.stopObj !== undefined){
-              image.events.push({
-                start: switcher.getStop(),
-                period: 0,
-                on: 1,
-                target: switcher.id + '_',
-                multiply: 0,
-                add: 0
-              });
+            image.events.push(evt);
+            image.eventCounter++;
+
+            if (switcher.stopObj !== undefined) {
+              evt.hasStop = true;
+              evt.startStop = switcher.getStop();
+              image.eventCounter++;
             }
-
           });
       });
 

@@ -275,7 +275,7 @@ FIT Title for Y Axes
 {% endfor -%}
 >Compound Names
 {% for compound in dynamicRecords -%}
-#{{ compound.id }}{{ '_' if compound.instanceOf('Species') and not compound.isAmont }}
+#{{ compound.id }}{{ '_' if compound.instanceOf('Species') and not compound.isAmount }}
 {% endfor -%}
 >Mechanism Rate Low expression -Kinetic or Elementary constants
 #0 0
@@ -443,7 +443,7 @@ if(t==0){
 {%- for record in ruleRecords %}
 {% if record.isRule -%}
 {{ record.id }} = {{ record.getAssignment('ode_').toSLVString(powTransform) }};
-{%- else -%}
+{%- elif record.instanceOf('Species') and not record.isAmount -%}
 {{ record.id }} = {{ record.id }}_ / {{ record.compartment }};
 {%- endif -%}
 {%- endfor %}
@@ -452,6 +452,11 @@ if(t==0){
 {%- for dynamic in dynamicRecords %}
 //!! {{ dynamic.id }} @{{ dynamic.className }} {{ "'"+dynamic.title+"'" if dynamic.title }} {units: {{ dynamic.units|default('?') }}}
 F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
+{%- endfor %}
+
+// calculate events
+{%- for event in events %}
+{{ event.add }} = {{ event.expr }};
 {%- endfor %}
 {%- endblock %}
 #
@@ -492,7 +497,7 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {%- if switchers | length > 0 %}
 //! Switchers for time events, count {{ switchers|length }}
 {% for switcher in switchers %}
-{{ switcher.id }}_ = 1; // @TimeSwitcher {  }
+{{ switcher.id }}_ = 1; // @TimeSwitcher { };
 {% endfor %}
 {% endif %}
 {% endblock %}
@@ -696,7 +701,7 @@ false{% endfor %}
 {{ compartments|length }}{% for compartment in compartments %}
 3{% endfor %}
 {{ dynamicRecords|length }}{% for compound in dynamicRecords %}
-{{ compound.id }}{{ '_' if compound.instanceOf('Species') and not compound.isAmont }}{% endfor %}
+{{ compound.id }}{{ '_' if compound.instanceOf('Species') and not compound.isAmount }}{% endfor %}
 0
 {{ dynamicRecords|length }}{% for compound in dynamicRecords %}
 {% if compound.className !== 'Species' or compound.isAmount -%}
@@ -778,7 +783,7 @@ k1
 1000000
 {{ 0 if eventsOff else 1 }}
 {% block events -%}
-{{ speciesInConc.length + events.length }}
+{{ speciesInConc.length + eventCounter }}
 {%- for spec in speciesInConc %}{# init events #}
 {{ spec.id }}_
 0
@@ -794,6 +799,14 @@ k1
 {{ event.start }}
 {{ event.period }}
 {{ event.on }}
+{%- if event.hasStop %}
+{{ event.on }}
+0
+0
+{{ event.startStop }}
+0
+1
+{%- endif %}
 {%- endfor %}
 {%- endblock %}
 <listModelData>
