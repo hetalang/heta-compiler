@@ -1,11 +1,11 @@
 
-block @Const begin
-  k1 = 0.2;
-  k2 = 0.03;
-end
 pg2 @Page {content: this is content};
 
- namespace mod1 begin
+namespace mod1 begin
+  block @Const begin
+    k1 = 0.2;
+    k2 = 0.03;
+  end
   p1 @Record;
   p1 .= 1;
   p2 @Record;
@@ -13,7 +13,7 @@ pg2 @Page {content: this is content};
   k1 @Record .= 0.1;
   p3 @Record;
   p3 {boundary: true, assignments: {
-    start_: {expr: 1}
+    start_: 1
   }};
   p4 @Record;
   p4 .= 0;
@@ -23,9 +23,9 @@ pg2 @Page {content: this is content};
   p6 @Record;
   p6 .= 2 * p4;
 
-  comp1 @Compartment {units: L};
+  comp1 @Compartment {units: litre};
   comp1 .= 5;
-  comp2 @Compartment {units: mL};
+  comp2 @Compartment; //{units: litre};
   comp2 := p1;
 
   sp1 @Species { compartment: comp1, isAmount: false };

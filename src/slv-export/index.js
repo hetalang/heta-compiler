@@ -112,7 +112,7 @@ class SLVExport extends _Export{
                   try { // a can be evaluated, i.e. '3/4'
                     return tree.eval();
                   } catch (e) { // other cases, i.e. 'p1*2'
-                    this.logger.error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, 'ExportError');
+                    logger.error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, 'ExportError');
                   }
                 }
               });
@@ -145,7 +145,8 @@ class SLVExport extends _Export{
       .selectByClassName('CondSwitcher')
       .map((switcher) => switcher.id);
     if(bagSwitchers.length > 0){
-      this.logger.error('CondSwitcher is not supported in SLVExport: ' + bagSwitchers, 'ExportError');
+      let logger = this.namespace.container.logger;
+      logger.error('CondSwitcher is not supported in SLVExport: ' + bagSwitchers, 'ExportError');
     }
     
     return model;
