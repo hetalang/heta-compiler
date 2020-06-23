@@ -9,7 +9,7 @@ r1 @Reaction { actors: x1->x2 } := k1*x1*comp1;
 
 // switcher
 cond1 @Record := 6-x1;
-sw1 @CondSwitcher {
+sw1 @CSwitcher {
   condition: cond1
 };
 x1 [sw1]= 10;

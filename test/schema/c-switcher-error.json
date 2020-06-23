@@ -1,6 +1,6 @@
 [
   {
-    "class": "CondSwitcher",
+    "class": "CSwitcher",
     "id": "sw6",
     "space": "one",
     "condition": true,
@@ -12,7 +12,7 @@
     }
   },
   {
-    "class": "CondSwitcher",
+    "class": "CSwitcher",
     "id": "sw7",
     "space": "one",
     "condition": 17,

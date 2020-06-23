@@ -121,13 +121,13 @@ class DBSolveExport extends _Export{
           });
       });
 
-    // search for CondSwitcher
+    // search for CSwitcher
     let bagSwitchers = this.namespace
-      .selectByClassName('CondSwitcher')
+      .selectByClassName('CSwitcher')
       .map((switcher) => switcher.id);
     if (bagSwitchers.length > 0) {
       let logger = this.namespace.container.logger;
-      logger.error('CondSwitcher is not supported in format DBSolve: ' + bagSwitchers, 'ExportError');
+      logger.error('CSwitcher is not supported in format DBSolve: ' + bagSwitchers, 'ExportError');
     }
     
     image.powTransform = this.powTransform;

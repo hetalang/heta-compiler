@@ -46,7 +46,7 @@ namespace mod1 begin
   p4[sw3]= 2;
 end
 
-mod1::sw3 @CondSwitcher {
+mod1::sw3 @CSwitcher {
   condition: p1
 };
 

@@ -117,7 +117,7 @@ addrule(
 {% endfor -%}
 {% endfor %}
 
-{% set listOfCondEvents = image.population.selectByClassName("CondSwitcher") %}
+{% set listOfCondEvents = image.population.selectByClassName("CSwitcher") %}
 {{- "% Events" if listOfCondEvents|length > 0 }}
 {% for event in listOfCondEvents -%}
 {{_id}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {

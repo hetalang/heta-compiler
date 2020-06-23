@@ -144,7 +144,7 @@
     ]
   },
   {
-    "class": "CondSwitcher",
+    "class": "CSwitcher",
     "id": "sw1",
     "space": "first",
     "condition": "evt1"

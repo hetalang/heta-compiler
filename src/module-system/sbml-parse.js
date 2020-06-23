@@ -553,7 +553,7 @@ function eventToQ(x){
   let qArr = [];
 
   let switcher = baseToQ(x);
-  switcher.class = 'CondSwitcher';
+  switcher.class = 'CSwitcher';
   if (switcher.id === undefined) switcher.id = 'evt' + eventCounter++;
   qArr.push(switcher);
 

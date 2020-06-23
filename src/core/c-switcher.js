@@ -2,17 +2,17 @@ const { _Switcher } = require('./_switcher');
 const _ = require('lodash');
 
 /*
-  CondSwitcher class
+  CSwitcher class
 
-  cs1 @CondSwitcher {
+  cs1 @CSwitcher {
     condition: cond1
   };
 */
-class CondSwitcher extends _Switcher {
+class CSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
     let logger = _.get(this, 'namespace.container.logger');
-    let valid = CondSwitcher.isValid(q, logger);
+    let valid = CSwitcher.isValid(q, logger);
     
     if (valid) {
       if (q.condition!==undefined) this.condition = q.condition;
@@ -34,7 +34,7 @@ class CondSwitcher extends _Switcher {
   }
 }
 
-CondSwitcher._requirements = {
+CSwitcher._requirements = {
   condition: {
     required: true, 
     isReference: true, class: 'Record', setTarget: false
@@ -42,5 +42,5 @@ CondSwitcher._requirements = {
 };
 
 module.exports = {
-  CondSwitcher
+  CSwitcher
 };

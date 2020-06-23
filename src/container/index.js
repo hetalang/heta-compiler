@@ -5,7 +5,7 @@ const { Species } = require('../core/species');
 const { Reaction } = require('../core/reaction');
 const { Process } = require('../core/process');
 const { DSwitcher } = require('../core/d-switcher');
-const { CondSwitcher } = require('../core/cond-switcher');
+const { CSwitcher } = require('../core/c-switcher');
 const { TimeSwitcher } = require('../core/time-switcher');
 const { ReferenceDefinition } = require('../core/reference-definition');
 const { UnitDef } = require('../core/unit-def');
@@ -439,7 +439,7 @@ Container.prototype.classes = {
   Process,
   Reaction,
   DSwitcher,
-  CondSwitcher,
+  CSwitcher,
   TimeSwitcher,
   SimpleTask,
   ReferenceDefinition,

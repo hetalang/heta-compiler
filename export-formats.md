@@ -93,7 +93,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 ### Known restrictions
 
 - `Compartment` which changes in time may result in wrong ODE.
-- `CondSwitcher` is not supported and will be skipped.
+- `CSwitcher` is not supported and will be skipped.
 - Initialization of `Record` by expression do not work: `x1 .= k1 * A` (not supported).
 
 **Example**
@@ -127,7 +127,7 @@ This is the updated version of SLV export format which supports compartment volu
 
 ### Known restrictions
 
-- `CondSwitcher` is not supported and will be skipped.
+- `CSwitcher` is not supported and will be skipped.
 
 **Example**
 
@@ -158,7 +158,7 @@ Export to [SBML format](http://sbml.org/Main_Page).
 ### Known restrictions
 
 - Currently only Level 2 Version 4 `L2V4` is supported
-- Some `CondSwitcher` exported incorrectly 
+- Some `CSwitcher` exported incorrectly 
 
 **Example:**
 
@@ -213,7 +213,7 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 
 ### Known restrictions
 
-- `CondSwitcher` is not supported and will be skipped.
+- `CSwitcher` is not supported and will be skipped.
 - Initialization by MathExpr is not supported. Do not use `S1 .= x * y`.
 
 **Example:**

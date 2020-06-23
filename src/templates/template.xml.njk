@@ -245,7 +245,7 @@
   {% endif %}
   
   {%- set listOfTimeEvents = image.population.selectByClassName("TimeSwitcher") -%}
-  {%- set listOfCondEvents = image.population.selectByClassName("CondSwitcher") -%}
+  {%- set listOfCondEvents = image.population.selectByClassName("CSwitcher") -%}
   {% if listOfTimeEvents|length + listOfCondEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfTimeEvents %}
