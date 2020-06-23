@@ -22,9 +22,15 @@ class Record extends _Size {
     if (valid) {
       if (q.assignments) { // add new assignments from q
         _.forOwn(q.assignments, (x, key) => {
-          if (typeof x === 'string' || typeof x === 'number' || 'expr' in x) {
+          if (typeof x === 'string' || typeof x === 'number') {
             try { // this is for the cases of wrong ExprString structure
-              _.set(this.assignments, key, Expression.fromString(x));
+              let expr = Expression.fromString(x);
+              if (!expr.hasBooleanResult()) {
+                this.assignments[key] = expr;
+              } else {
+                let msg = `Record assignments "${this.index}" should be a numeric expression.`;
+                logger && logger.error(msg, 'ValidationError');
+              }
             } catch (e) {
               let msg = this.index + ' '+ e.message + ` "${x.toString()}"`;
               logger && logger.error(msg, 'ValidationError');
