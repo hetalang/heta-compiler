@@ -133,6 +133,29 @@ class Expression {
 
     return new Expression(node);
   }
+  hasBooleanResult(){
+    let booleanOperators = [
+      'smaller', 'smallerEq',
+      'larger', 'largerEq',
+      'equal', 'unequal',
+      'and', 'or', 'xor', 'not'
+    ];
+    let expr = _removeParenthesis(this.exprParsed);
+
+    let isBoolean = expr.type === 'OperatorNode'
+      && booleanOperators.indexOf(expr.fn) !== -1; 
+
+    return isBoolean;
+  }
+}
+
+/* remove parenthesis from top */
+function _removeParenthesis(node) {
+  if (node.type === 'ParenthesisNode') {
+    return _removeParenthesis(node.content);
+  } else {
+    return node;
+  }
 }
 
 module.exports = {

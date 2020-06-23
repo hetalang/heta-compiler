@@ -141,7 +141,7 @@ class Component {
     let validate = validator
       .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
     if (!validate) {
-      throw new TypeError(q, `The schema "${this.schemaName}" is not found.`);
+      throw new TypeError(`The schema "${this.schemaName}" is not found.`);
     }
     let valid = validate(q);
     if (!valid) {

@@ -279,6 +279,13 @@
       ]
     },
 
+    "DSwitcherP": {
+      "type": "object",
+      "properties": {
+        "trigger": { "$ref": "#/definitions/ExprString" }
+      }
+    },
+
     "TimeSwitcherP": {
       "type": "object",
       "properties": {

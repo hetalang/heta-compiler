@@ -23,7 +23,7 @@ class Record extends _Size {
       if (q.assignments) { // add new assignments from q
         _.forOwn(q.assignments, (x, key) => {
           if (typeof x === 'string' || typeof x === 'number' || 'expr' in x) {
-            try { // this is for the cases of wrong size structure
+            try { // this is for the cases of wrong ExprString structure
               _.set(this.assignments, key, Expression.fromString(x));
             } catch (e) {
               let msg = this.index + ' '+ e.message + ` "${x.toString()}"`;

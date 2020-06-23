@@ -1,0 +1,17 @@
+{
+  "builderVersion": "^0.5.2",
+  "id": "template",
+  "notes": "platform notes",
+  "version": "v0.1.0",
+  "license": "UNLICENSED",
+  "options": {
+    "debug": false,
+    "logs": "output.log",
+    "logLevel": "info",
+    "skipExport": false
+  },
+  "importModule": {
+    "type": "heta",
+    "source": "src/index.heta"
+  }
+}
