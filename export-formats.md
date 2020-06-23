@@ -93,7 +93,8 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 ### Known restrictions
 
 - `Compartment` which changes in time may result in wrong ODE.
-- `CSwitcher` is not supported and will be skipped.
+- `CSwitcher` is not supported.
+- `DSwitcher` is not supported.
 - Initialization of `Record` by expression do not work: `x1 .= k1 * A` (not supported).
 
 **Example**
@@ -128,6 +129,7 @@ This is the updated version of SLV export format which supports compartment volu
 ### Known restrictions
 
 - `CSwitcher` is not supported and will be skipped.
+- `DSwitcher` is not supported.
 
 **Example**
 
@@ -186,7 +188,7 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ### Known restrictions
 
-*Nothing*
+- `CSwitcher` is not supported.
 
 **Example:**
 ```heta
@@ -213,7 +215,8 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 
 ### Known restrictions
 
-- `CSwitcher` is not supported and will be skipped.
+- `CSwitcher` is not supported.
+- `DSwitcher` is not supported.
 - Initialization by MathExpr is not supported. Do not use `S1 .= x * y`.
 
 **Example:**
@@ -312,6 +315,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 ### Known restrictions
 
 - supports only one switcher per model
+- `DSwitcher` is not supported.
 
 **Example:**
 

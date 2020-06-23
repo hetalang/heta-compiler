@@ -4,6 +4,8 @@
 
 - Add Export of format DBSolve
 - Fix errors in unit rebase
+- Add DSwitcher class
+- Rename CondSwitcher to CSwitcher
 
 ## 0.5.2
 
