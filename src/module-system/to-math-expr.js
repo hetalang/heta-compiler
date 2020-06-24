@@ -4,29 +4,45 @@ function _toMathExpr(element, useParentheses = false){
   let first = _.get(element, 'elements.0');
   if (element.name === 'math') {
     return _toMathExpr(element.elements[0]);
-  } else if(element.name === 'apply' && (first.name === 'gt' || first.name === 'geq' || first.name === 'eq')) {
+  } else if(element.name === 'apply' && first.name === 'gt') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
-    return `${one}-${two}`;
-  } else if(element.name === 'apply' && (first.name === 'lt' || first.name === 'leq' || first.name === 'neq')) {
+    return `${one} > ${two}`;
+  } else if(element.name === 'apply' && first.name === 'geq') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
-    return `${two}-${one}`;
+    return `${one} >= ${two}`;
+  } else if(element.name === 'apply' && first.name === 'eq') {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${one} == ${two}`;
+  } else if(element.name === 'apply' && first.name === 'lt') {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${one} < ${two}`;
+  } else if(element.name === 'apply' && first.name === 'leq') {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${one} <= ${two}`;
+  } else if(element.name === 'apply' && first.name === 'neq') {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${one} != ${two}`;
   } else if(element.name === 'apply' && first.name === 'and') {
     let args = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true)).join(', ');
-    return `min(${args})`;
+      .map((x) => _toMathExpr(x, true)).join(' and ');
+    return args;
   } else if(element.name === 'apply' && first.name === 'or') {
     let args = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, true)).join(', ');
-    return `max(${args})`;
-  } else if(element.name === 'apply' && first.name === 'xor' && element.elements.length === 3) {
-    let one = _toMathExpr(element.elements[1]);
-    let two = _toMathExpr(element.elements[2]);
-    return `max(min(${one}, -(${two})), min(-(${one}), ${two}))`;
+      .map((x) => _toMathExpr(x, true)).join(' or ');
+    return args;
+  } else if(element.name === 'apply' && first.name === 'xor') {
+    let args = _.drop(element.elements)
+      .map((x) => _toMathExpr(x, true)).join(' xor ');
+    return args;
   } else if(element.name === 'apply' && first.name === 'not') {
-    let one = _toMathExpr(element.elements[1]);
-    return `- (${one})`;
+    let one = _toMathExpr(element.elements[1], true);
+    return `not ${one}`;
   } else if(element.name === 'apply' && first.name === 'times') {
     // A * B * C, <times>
     return _.drop(element.elements) // without first element
@@ -43,8 +59,8 @@ function _toMathExpr(element, useParentheses = false){
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'minus') {
     // A - B, <minus> for two argumets
-    let arg0 = _toMathExpr(element.elements[1], false)
-    let arg1 = _toMathExpr(element.elements[2], true)
+    let arg0 = _toMathExpr(element.elements[1], false);
+    let arg1 = _toMathExpr(element.elements[2], true);
     let expr = arg0 + ' - ' + arg1;
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
@@ -129,35 +145,12 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'apply' && first.name === 'arccsch') {
     let arg = _toMathExpr(element.elements[1]);
     return `acsch(${arg})`;
-  // === piecewise ===
   } else if (element.name === 'piecewise' && element.elements.length === 2) {
-    let arg1 = _toMathExpr(_.get(element, 'elements.0.elements.0'));
-    let arg2 = _toMathExpr(_.get(element, 'elements.1.elements.0'));
-    let condName = _.get(first, 'elements.1.elements.0.name');
-    let condElements = _.get(first, 'elements.1.elements');
-    let condArgs = _.drop(condElements)
-      .map((x) => _toMathExpr(x));
-    if (condName === 'lt') {
-      let cond = `${condArgs[1]} - ${condArgs[0]}`;
-      return `ifg0(${cond}, ${arg1}, ${arg2})`;
-    } else if (condName === 'gt') {
-      let cond = `${condArgs[0]} - ${condArgs[1]}`;
-      return `ifg0(${cond}, ${arg1}, ${arg2})`;
-    } else if (condName === 'leq') {
-      let cond = `${condArgs[1]} - ${condArgs[0]}`;
-      return `ifge0(${cond}, ${arg1}, ${arg2})`;
-    } else if (condName === 'geq') {
-      let cond = `${condArgs[0]} - ${condArgs[1]}`;
-      return `ifge0(${cond}, ${arg1}, ${arg2})`;
-    } else if (condName === 'eq') {
-      let cond = `${condArgs[0]} - ${condArgs[1]}`;
-      return `ife0(${cond}, ${arg1}, ${arg2})`;
-    } else if (condName === 'neq') {
-      let cond = `${condArgs[0]} - ${condArgs[1]}`;
-      return `ife0(${cond}, ${arg2}, ${arg1})`;
-    } else {
-      throw new Error('Error in translation MathML piecewise');
-    }
+    let arg1 = _toMathExpr(_.get(element, 'elements.0.elements.0'), true);
+    let arg2 = _toMathExpr(_.get(element, 'elements.1.elements.0'), true);
+    let cond = _toMathExpr(_.get(first, 'elements.1'));
+    // here we always use parenthesis to avoid error with + 
+    return `(${cond} ? ${arg1} : ${arg2})`;
   } else if (element.name === 'piecewise') {
     throw new Error('only one piece is supported in MathML peicewise.');
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
@@ -193,9 +186,9 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'cn') { // regular positive numbers
     return _.get(element, 'elements.0.text');
   } else if (element.name === 'true') {
-    return '1';
+    return 'true';
   } else if (element.name === 'false') {
-    return '-1';
+    return 'false';
   } else if (element.name === 'exponentiale') {
     return 'e';
   } else if (element.name === 'pi') {

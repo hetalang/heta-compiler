@@ -171,7 +171,7 @@
         <exe a="2" b="3"/>
       </example>
     </annotation>
-      <compartment id="Total" name="Total volume" size="100" constant="true" compartmentType="cmp_type" spatialDimensions="1" units="nd" metaid="metaexample" sboTerm="SBO:001">
+      <compartment id="Total" name="Total volume" size="100" constant="true" compartmentType="cmp_type" spatialDimensions="1" metaid="metaexample" sboTerm="SBO:001">
         <notes>This is a test text element.</notes>
     <annotation>
       <example xmlns="example.com">

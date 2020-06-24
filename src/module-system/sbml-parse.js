@@ -310,7 +310,8 @@ function compartmentToQ(x, unitDict = {}){
     if (_.has(unitDict, unitDefinitionId)){
       q.units = _.get(unitDict, unitDefinitionId).simplify();
     } else {
-      throw new Error(`No unitDeclaration "${unitDefinitionId}" used for compartment "${q.id}"`);
+      // XXX: do not throw with undeclared units
+      //throw new Error(`No unitDeclaration "${unitDefinitionId}" used for compartment "${q.id}"`);
     }
   }
 
@@ -363,7 +364,8 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
           .simplify();
       }
     } else {
-      throw new Error(`No unitDeclaration "${substanceUnitDefinitionId}" used for species "${q.id}"`);
+      // XXX: do not throw undeclared "substance"
+      // throw new Error(`No unitDeclaration "${substanceUnitDefinitionId}" used for species "${q.id}"`);
     }
   }
 
@@ -496,7 +498,8 @@ function parameterToQ(x, unitDict = {}){
     if (_.has(unitDict, unitDefinitionId)){
       q.units = _.get(unitDict, unitDefinitionId).simplify();
     } else {
-      throw new Error(`No unitDeclaration "${unitDefinitionId}" as required for parameter "${q.id}"`);
+      // XXX: do not throw undeclared "unit"
+      //throw new Error(`No unitDeclaration "${unitDefinitionId}" as required for parameter "${q.id}"`);
     }
   }
 
@@ -553,7 +556,7 @@ function eventToQ(x){
   let qArr = [];
 
   let switcher = baseToQ(x);
-  switcher.class = 'CSwitcher';
+  switcher.class = 'DSwitcher';
   if (switcher.id === undefined) switcher.id = 'evt' + eventCounter++;
   qArr.push(switcher);
 
@@ -568,13 +571,7 @@ function eventToQ(x){
     && trigger.elements
     && trigger.elements.find((y) => y.name === 'math');
   if (triggerMath) {
-    let condId = switcher.id + '_cond';
-    qArr.push({
-      id: condId,
-      class: 'Record',
-      assignments: {ode_: _toMathExpr(triggerMath)}
-    });
-    switcher.condition = condId;
+    switcher.trigger = _toMathExpr(triggerMath);
   }
 
   // delay : not used

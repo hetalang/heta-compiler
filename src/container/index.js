@@ -203,7 +203,7 @@ class Container {
     }
     // it is possible to update type
     namespace._isAbstract = q.type === 'abstract';
-    let typeString = namespace._isAbstract ? 'abstaract' : 'concrete';
+    let typeString = namespace._isAbstract ? 'abstract' : 'concrete';
     this.logger.info(`Namespace "${q.space}" was set as "${typeString}"`);
   }
   /* 
