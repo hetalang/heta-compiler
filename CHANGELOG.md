@@ -6,6 +6,7 @@
 - Fix errors in unit rebase
 - Add DSwitcher class
 - Rename CondSwitcher to CSwitcher
+- draft DSwitcher in Julia export
 
 ## 0.5.2
 

@@ -1,6 +1,6 @@
 {
   "name": "heta-compiler",
-  "version": "0.5.2",
+  "version": "0.5.3-dev",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
