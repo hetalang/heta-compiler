@@ -183,6 +183,8 @@ function {{event.switcher.id}}_condition_(u, t, integrator)
     return flag_(t)
     {%- elif event.switcher.instanceOf('CSwitcher') %}
     return {{ event.switcher.condition }}
+    {%- elif event.switcher.instanceOf('DSwitcher') %}
+    return {{ event.switcher.trigger.translate(pTranslator).toJuliaString() }} ? 1 : -1
     {%- endif %}
 end
 
