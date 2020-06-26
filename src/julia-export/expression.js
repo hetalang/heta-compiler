@@ -84,6 +84,16 @@ Expression.prototype.toJuliaString = function(){
         .map((arg) => arg.toString(options))
         .join(' || ');
     }
+    if (node.type === 'OperatorNode' && node.fn === 'xor') {
+      let args = node.args
+        .map((arg) => arg.toString(options))
+        .join(', ');
+      return `xor(${args})`;
+    }
+    if (node.type === 'OperatorNode' && node.fn === 'not') {
+      let arg0 = node.args[0].toString(options, true);
+      return `!${arg0}`;
+    }
   };
 
   return this.exprParsed

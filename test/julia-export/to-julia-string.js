@@ -80,4 +80,20 @@ describe('Expession exports to Julia', () => {
     let expr = Expression.fromString('ceil(x*y)');
     expect(expr.toJuliaString()).to.be.equal('ceil(x * y)');
   });
+  it('toJuliaString() for "x and y or a and b"', () => {
+    let expr = Expression.fromString('x and y or a and b');
+    expect(expr.toJuliaString()).to.be.equal('x && y || a && b');
+  });
+  it('toJuliaString() for "true and (y > 0) or false and (1+2<0)"', () => {
+    let expr = Expression.fromString('true and (y > 0) or false and (1+2<0)');
+    expect(expr.toJuliaString()).to.be.equal('true && (y > 0.0) || false && (1.0 + 2.0 < 0.0)');
+  });
+  it('toJuliaString() for "x xor y xor (a<=b)"', () => {
+    let expr = Expression.fromString('x xor y xor (a<=b)');
+    expect(expr.toJuliaString()).to.be.equal('xor(xor(x, y), (a <= b))');
+  });
+  it('toJuliaString() for "not (x+y)"', () => {
+    let expr = Expression.fromString('not (x+y)');
+    expect(expr.toJuliaString()).to.be.equal('!(x + y)');
+  });
 });
