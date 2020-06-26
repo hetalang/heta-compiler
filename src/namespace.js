@@ -50,26 +50,27 @@ class Namespace extends Map {
         graph.add(component.id, deps);
       });
 
-    try{
+    try {
       var sortedGraph = graph
         .sort()
         .reverse(); // independent should be at the beginning
-    }catch(e){ // catch cycling
+    } catch(err) { // catch cycling
       // error changes
-      let infoLine = e.circular
+      let infoLine = err.circular
         .map((id) => {
           let record = this.get(id);
           return `${record.index} [${context}]= ${record.getAssignment(context, includeCompartmentDep).expr};`;
         })
         .join('\n');
       let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
-      error.circular = e.circular;
+      error.circular = err.circular;
       throw error;
     }
 
-    let sorted = _.sortBy(this.toArray(), (record) => sortedGraph.indexOf(record.id)); // if record not in graph than -1 and will be first
+    // if record not in graph than -1 and will be first
+    let sorted = _.sortBy(this.toArray(), (record) => sortedGraph.indexOf(record.id)); 
 
-    return sorted; // sorted is Array, return must be XArray
+    return sorted;
   }
   selectRecordsByContext(context){
     return this.selectByInstanceOf('Record')

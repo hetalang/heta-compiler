@@ -135,21 +135,21 @@ class Record extends _Size {
     if no expression returns dependence from ode
   */
   dependOn(context){
-    if(typeof context !== 'string')
+    if (typeof context !== 'string')
       throw new TypeError('context must be of string type.');
 
     let assignment = _.get(this, 'assignments.' + context);
-    if (assignment !== undefined) {
+    if (this.isRule) {
+      let deps = this.assignments.ode_ // top priority in context
+        .exprParsed
+        .getSymbols();
+      _.pull(deps, 't', 'e', 'pi');
+      return deps;
+    } else if (assignment !== undefined) {
       let deps = assignment
         .exprParsed
         .getSymbols();
       _.pull(deps, 't', 'e', 'pi'); // remove t from dependence
-      return deps;
-    } else if(this.isRule) {
-      let deps = this.assignments.ode_
-        .exprParsed
-        .getSymbols();
-      _.pull(deps, 't', 'e', 'pi');
       return deps;
     } else {
       return [];

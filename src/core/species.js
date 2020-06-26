@@ -59,8 +59,8 @@ class Species extends Record {
   dependOn(context, includeCompartment = false){
     let deps = super.dependOn(context);
 
-    let useCompartment = includeCompartment 
-      && this.compartment !== undefined 
+    let useCompartment = includeCompartment
+      && this.compartment !== undefined
       && !this.isAmount 
       && !this.isRule;
     if (useCompartment) deps.push(this.compartment);
