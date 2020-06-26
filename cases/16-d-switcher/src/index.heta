@@ -6,7 +6,7 @@ r1 := k1*S1*comp1;
 k1 @Const = 0.1;
 
 sw1 @DSwitcher {
-  trigger: (S1 != 0.8) and (S1 > 3)
+  trigger: (S1 != 0.8) and ((S1 > 3) or (k1 <= 100.))
 };
 S1 [sw1]= 10;
 
@@ -19,3 +19,4 @@ S1 [sw1]= 10;
 #export { format: DBSolve, filepath: dbsolve };
 #export { format: Simbio, filepath: simbio };
 #export { format: Mrgsolve, filepath: mrgsolve };
+#export { format: Julia, filepath: julia };

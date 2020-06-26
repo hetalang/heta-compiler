@@ -74,6 +74,16 @@ Expression.prototype.toJuliaString = function(){
     if (node.type === 'ConstantNode' && Number.isNaN(node.value)) {
       return 'NaN';
     }
+    if (node.type === 'OperatorNode' && node.fn === 'and') {
+      return node.args
+        .map((arg) => arg.toString(options))
+        .join(' && ');
+    }
+    if (node.type === 'OperatorNode' && node.fn === 'or') {
+      return node.args
+        .map((arg) => arg.toString(options))
+        .join(' || ');
+    }
   };
 
   return this.exprParsed
