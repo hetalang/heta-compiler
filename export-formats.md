@@ -326,3 +326,28 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
     space: nameless // create model based on nameless namespace
 };
 ```
+
+## Features support
+
+| | SLV | DBSolve | SimSolver/Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
+|--|--|--|--|--|--|--|--|--|--|
+|units transformation                  |na |na |na |na |na |+ |+ |na|na
+|`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ 
+|`@Process` class                      |+  |+  |+  |+  |+  |+ |+ |+ |+ 
+|`@TimeSwitcher` class                 |+  |+  |+  |-  |+  |- |- |+ |+ 
+|Multiple `@Switcher` in one namespace |+  |+  |+  |-  |-  |+ |+ |+ |+ 
+|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |- |+ |+
+|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |- |- |- |- |- |+ |+
+|`@TimeSwitcher {repeatCount: 3}` limit number of repeat |- |- |- |- |+ |- |- |+ |+
+|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+
+|`@CSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
+|`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
+|`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
+|`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
+|multispace `#export`                                    |- |- |+ |- |- |- |- |- |-
+|MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
+|MathExpr: `Infinity`                                    |+ |+ |+ |+ |+ |+ |+ |+ |+
+|MathExpr: `NaN`                                         |+ |+ |+ |+ |+ |+ |+ |+ |+
+|MathExpr: `nthRoot()` function                          |+ |+ |+ |+ |+ |+ |+ |+ |+
+|Const: `NaN`, `Infinity`                                |+ |+ |+ |+ |+ |+ |+ |+ |+
+|Heta base functions transformation                      |+ |+ |+ |+ |+ |+ |+ |+ |+ {.feature-table}
