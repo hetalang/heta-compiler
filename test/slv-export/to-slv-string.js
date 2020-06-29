@@ -29,9 +29,24 @@ describe('Expession exports to SLV', () => {
     let expr = Expression.fromString('pow(n, -1/2)');
     expect(expr.toSLVString('operator')).to.be.equal('n ^ (-1 / 2)');
   });
+  it('toSLVString("operator") for "nthRoot(x)"', () => {
+    let expr = Expression.fromString('nthRoot(x)');
+    expect(expr.toSLVString('operator')).to.be.equal('x ^ (1 / 2)');
+  });
+  it('toSLVString("function") for "nthRoot(x)"', () => {
+    let expr = Expression.fromString('nthRoot(x)');
+    expect(expr.toSLVString('function')).to.be.equal('pow(x, 1 / 2)');
+  });
+  it('toSLVString("operator") for "nthRoot(x, n)"', () => {
+    let expr = Expression.fromString('nthRoot(x, n)');
+    expect(expr.toSLVString('operator')).to.be.equal('x ^ (1 / n)');
+  });
+  it('toSLVString("function") for "nthRoot(x, n)"', () => {
+    let expr = Expression.fromString('nthRoot(x, n)');
+    expect(expr.toSLVString('function')).to.be.equal('pow(x, 1 / n)');
+  });
   it('Wrong powTransform', () => {
     let expr = Expression.fromString('pow(a, b)');
     expect(() => expr.toSLVString('xxx')).Throw(TypeError);
   });
-
 });

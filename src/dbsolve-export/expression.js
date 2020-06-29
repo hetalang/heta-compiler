@@ -75,7 +75,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
         .join(', ');
       return `min3(${args})`;
     }
-    if(node.type==='FunctionNode' && node.fn==='square' && powTransform==='function'){
+    if(node.type==='FunctionNode' && node.fn.name==='square' && powTransform==='function'){
       return `pow(${node.args[0].toString(options)}, 2)`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='square' && powTransform!=='function'){
@@ -87,7 +87,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       }
       return `${arg0} ^ 2`;
     }
-    if(node.type==='FunctionNode' && node.fn==='cube' && powTransform==='function'){
+    if(node.type==='FunctionNode' && node.fn.name==='cube' && powTransform==='function'){
       return `pow(${node.args[0].toString(options)}, 3)`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='cube' && powTransform!=='function'){
@@ -98,6 +98,37 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
         arg0 = node.args[0].toString(options);
       }
       return `${arg0} ^ 3`;
+    }
+    if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform === 'function'){
+      let args = node.args
+        .map((arg, i) => {
+          if (arg.type === 'OperatorNode' && i > 0) {
+            return `(${arg.toString(options)})`;
+          } else {
+            return arg.toString(options);
+          }
+        });
+      if (node.args.length === 1) {
+        return `pow(${args[0]}, 1 / 2)`;
+      } else {
+        return `pow(${args[0]}, 1 / ${args[1]})`;
+      }
+    }
+    if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform !== 'function') {
+      let args = node.args
+        .map((arg) => {
+          if (arg.type === 'OperatorNode') {
+            return `(${arg.toString(options)})`;
+          } else {
+            return arg.toString(options);
+          }
+        });
+
+      if (node.args.length === 1) {
+        return `${args[0]} ^ (1 / 2)`;
+      } else {
+        return `${args[0]} ^ (1 / ${args[1]})`;
+      }
     }
     if(node.type==='FunctionNode' && node.fn.name==='log' && node.args.length===2){
       let args = node.args

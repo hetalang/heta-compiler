@@ -1,8 +1,0 @@
-id: mm
-builderVersion: '*'
-options:
-  logMode: error
-  debug: true
-importModule:
-  type: heta
-  source: src/index.heta

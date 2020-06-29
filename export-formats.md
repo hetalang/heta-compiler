@@ -327,7 +327,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 };
 ```
 
-## Features support
+## Features support {.feature-table}
 
 | | SLV | DBSolve | SimSolver/Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
 |--|--|--|--|--|--|--|--|--|--|
@@ -350,4 +350,5 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |MathExpr: `NaN`                                         |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `nthRoot()` function                          |+ |+ |+ |+ |+ |+ |+ |+ |+
 |Const: `NaN`, `Infinity`                                |+ |+ |+ |+ |+ |+ |+ |+ |+
-|Heta base functions transformation                      |+ |+ |+ |+ |+ |+ |+ |+ |+ {.feature-table}
+|Heta base functions transformation                      |+ |+ |+ |+ |+ |+ |+ |+ |+ 
+
