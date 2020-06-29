@@ -208,6 +208,13 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       }
     }
 
+    // pre-defined constants
+    if (node.type === 'SymbolNode' && node.name === 'e') {
+      return 'exp(1)';
+    }
+    if (node.type === 'SymbolNode' && node.name === 'pi') {
+      return 'acos(-1)';
+    }
   };
 
   return this.exprParsed

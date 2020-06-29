@@ -65,7 +65,11 @@ to07 @Record 'true ? y1 : y2' := true ? y1 : y2;
 to08 @Record 'false? y1 : y2' := false ? y1 : y2;
 
 // boolean operators
-bo01 @Record := (x > y) and (x < z) ? y1 : y2;
+bo01 @Record '(x > y) and (x < z) ? y1 : y2' := (x > y) and (x < z) ? y1 : y2;
+
+// pre-defined constants
+pc01 @Record '2*e' := 2*e;
+pc02 @Record '2*pi' := 2*pi;
 
 #export {filepath: model, format: SLV};
 #export {filepath: sbml, format: SBML};
