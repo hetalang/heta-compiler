@@ -176,6 +176,38 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       ].join(', ');
       return `ifge(${args})`;
     }
+
+    // ternary operator
+    if (node.type === 'ConditionalNode') {
+      //console.log(node)
+      let condition = _removeParenthesis(node.condition);
+      let trueExpr = node.trueExpr.toString(options);
+      let falseExpr = node.falseExpr.toString(options);
+      let args = condition.args && condition.args
+        .map((arg) => arg.toString(options));
+
+      if (condition.fn === 'larger') {
+        return `ifgt(${args[0]}, ${args[1]}, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.fn === 'largerEq') {
+        return `ifge(${args[0]}, ${args[1]}, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.fn === 'smaller') {
+        return `iflt(${args[0]}, ${args[1]}, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.fn === 'smallerEq') {
+        return `ifle(${args[0]}, ${args[1]}, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.fn === 'equal') {
+        return `ifeq(${args[0]}, ${args[1]}, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.fn === 'unequal') {
+        return `ifeq(${args[0]}, ${args[1]}, ${falseExpr}, ${trueExpr})`;
+      } else if (condition.type === 'ConstantNode' && condition.value === true) {
+        return `ifgt(1, 0, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.type === 'ConstantNode' && condition.value === false) {
+        return `ifgt(0, 1, ${trueExpr}, ${falseExpr})`;
+      } else if (condition.type === 'OperatorNode') {
+        //let msg = `SLV format does not support boolean operators: "${node.toString()}"`;
+        //throw new Error(msg);
+      }
+    }
+
   };
 
   return this.exprParsed
@@ -185,3 +217,12 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       handler: SLVStringHandler
     });
 };
+
+/* remove parenthesis from top */
+function _removeParenthesis(node) {
+  if (node.type === 'ParenthesisNode') {
+    return _removeParenthesis(node.content);
+  } else {
+    return node;
+  }
+}

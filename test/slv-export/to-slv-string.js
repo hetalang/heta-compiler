@@ -50,3 +50,39 @@ describe('Expession exports to SLV', () => {
     expect(() => expr.toSLVString('xxx')).Throw(TypeError);
   });
 });
+
+describe('Ternary operator in DBSolve', () => {
+  it('toSLVString("x > y ? y1 : y2")', () => {
+    let expr = Expression.fromString('x > y ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifgt(x, y, y1, y2)');
+  });
+  it('toSLVString("x >= y ? y1 : y2")', () => {
+    let expr = Expression.fromString('x >= y ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifge(x, y, y1, y2)');
+  });
+  it('toSLVString("x < y ? y1 : y2")', () => {
+    let expr = Expression.fromString('x < y ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('iflt(x, y, y1, y2)');
+  });
+  it('toSLVString("x <= y ? y1 : y2")', () => {
+    let expr = Expression.fromString('x <= y ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifle(x, y, y1, y2)');
+  });
+  it('toSLVString("x == y ? y1 : y2")', () => {
+    let expr = Expression.fromString('x == y ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifeq(x, y, y1, y2)');
+  });
+  it('toSLVString("x != y ? y1 : y2")', () => {
+    let expr = Expression.fromString('x != y ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifeq(x, y, y2, y1)');
+  });
+  it('toSLVString("true ? y1 : y2")', () => {
+    let expr = Expression.fromString('true ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifgt(1, 0, y1, y2)');
+  });
+  it('toSLVString("false ? y1 : y2")', () => {
+    let expr = Expression.fromString('false ? y1 : y2');
+    expect(expr.toSLVString()).to.be.equal('ifgt(0, 1, y1, y2)');
+  });
+});
+

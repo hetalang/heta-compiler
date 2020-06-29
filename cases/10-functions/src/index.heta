@@ -55,12 +55,17 @@ o04 @Record 'x/y' := x/y;
 o05 @Record 'x^y' := x^y;
 
 // ternary operators
-to01 @Record 'x > y ? y1 : y2' := x > y ? y1 : y2;  // doesn't work for: SLV, DBSolve
-to02 @Record 'x >= y ? y1 : y2' := x >= y ? y1 : y2; // doesn't work for: SLV, DBSolve
-to03 @Record 'x < y ? y1 : y2' := x < y ? y1 : y2; // doesn't work for: SLV, DBSolve
-to04 @Record 'x <= y ? y1 : y2' := x <= y ? y1 : y2; // doesn't work for: SLV, DBSolve
-to05 @Record 'x == y ? y1 : y2' := x == y ? y1 : y2; // doesn't work for: SLV, DBSolve
-to06 @Record 'x != y ? y1 : y2' := x != y ? y1 : y2; // doesn't work for: SLV, DBSolve
+to01 @Record 'x > y ? y1 : y2' := x > y ? y1 : y2;
+to02 @Record 'x >= y ? y1 : y2' := x >= y ? y1 : y2;
+to03 @Record 'x < y ? y1 : y2' := x < y ? y1 : y2;
+to04 @Record 'x <= y ? y1 : y2' := x <= y ? y1 : y2;
+to05 @Record 'x == y ? y1 : y2' := x == y ? y1 : y2;
+to06 @Record 'x != y ? y1 : y2' := x != y ? y1 : y2;
+to07 @Record 'true ? y1 : y2' := true ? y1 : y2;
+to08 @Record 'false? y1 : y2' := false ? y1 : y2;
+
+// boolean operators
+bo01 @Record := (x > y) and (x < z) ? y1 : y2;
 
 #export {filepath: model, format: SLV};
 #export {filepath: sbml, format: SBML};
