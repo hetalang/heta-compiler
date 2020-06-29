@@ -28,7 +28,6 @@ class JuliaExport extends _Export {
   getJuliaImage(){
     let builderName = pkg.name + ' of v' + pkg.version;
     let namespace = this.namespace;
-    let options = this.toQ();
     // constants
     let constants = this.namespace
       .selectByInstanceOf('Const');
@@ -95,7 +94,7 @@ class JuliaExport extends _Export {
       
     return { 
       builderName,
-      options,
+      options: this,
       namespace,
       constants,
       dynamicRecords,

@@ -99,7 +99,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       }
       return `${arg0} ^ 3`;
     }
-    if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform === 'function'){
+    if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform !== 'operator'){
       let args = node.args
         .map((arg, i) => {
           if (arg.type === 'OperatorNode' && i > 0) {
@@ -114,7 +114,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
         return `pow(${args[0]}, 1 / ${args[1]})`;
       }
     }
-    if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform !== 'function') {
+    if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform === 'operator') {
       let args = node.args
         .map((arg) => {
           if (arg.type === 'OperatorNode') {

@@ -345,10 +345,11 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |multispace `#export`                                    |- |- |+ |- |- |- |- |- |-
+|MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ |+ |+ |+ |+ |+ |+ |+ 
+|MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
+|MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
+|MathExpr: ternary operator                              |+ |+ |- |- |- |- |- |- |-
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `Infinity`                                    |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `NaN`                                         |+ |+ |+ |+ |+ |+ |+ |+ |+
-|MathExpr: `nthRoot()` function                          |+ |+ |+ |+ |+ |+ |+ |+ |+
 |Const: `NaN`, `Infinity`                                |+ |+ |+ |+ |+ |+ |+ |+ |+
-|Heta base functions transformation                      |+ |+ |+ |+ |+ |+ |+ |+ |+ 
-

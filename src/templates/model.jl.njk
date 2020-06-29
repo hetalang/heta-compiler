@@ -19,7 +19,7 @@
     {{ options.title + '.' if options.title}}{{ options.notes }}
 =#
 
-module {{ options.id }}
+module julia {# set here the name of namespace in future #}
 using SimSolver
 
 ### create default constants
@@ -238,6 +238,7 @@ end
   start_,
   ode_,
   [{% for event in events %}({{event.switcher.id}}_condition_, {{event.switcher.id}}_assignment_), {% endfor %}],
+  [], # place for discrete events, not used
   make_saving_,
   constants_
 )
