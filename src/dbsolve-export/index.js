@@ -76,7 +76,7 @@ class DBSolveExport extends _Export{
     // create and sort expressions for RHS (rules)
     image.ruleRecords = this.namespace
       .sortExpressionsByContext('ode_', true)
-      .filter((x) => x.instanceOf('Species') || x.isRule );
+      .filter((x) => x.isDynamic || x.isRule );
 
     // create TimeEvents
     image.events = [];

@@ -7,7 +7,6 @@
 {%- set freeConstants = population.selectByClassName('Const') | selectattr('free') %}
 {%- set constants = population.selectByClassName('Const') %}
 {%- set species = population.selectByInstanceOf('Species') %}
-{%- set speciesInConc = species | exclude2('isAmount', true) -%}
 
 DBSolve Optimum (new parser) 1 Jul 2006
 SLV25.00*
@@ -275,7 +274,7 @@ FIT Title for Y Axes
 {% endfor -%}
 >Compound Names
 {% for compound in dynamicRecords -%}
-#{{ compound.id }}{{ '_' if compound.instanceOf('Species') and not compound.isAmount }}
+#{{ compound.id }}_
 {% endfor -%}
 >Mechanism Rate Low expression -Kinetic or Elementary constants
 #0 0
@@ -434,8 +433,8 @@ if(t==0){
     {%- endif %}
     {%- endfor %}
     // calculate initial amounts
-    {%- for spec in speciesInConc %}
-    {{ spec.id }}_start__ = {{ spec.id }} * {{ spec.compartment }};
+    {%- for dynamic in dynamicRecords %}
+    {{ dynamic.id }}_start__ = {{ dynamic.id }}{{ ' * ' + dynamic.compartment if dynamic.instanceOf('Species') and not dynamic.isAmount }};
     {%- endfor %}
 }else{
 
@@ -443,8 +442,8 @@ if(t==0){
 {%- for record in ruleRecords %}
 {% if record.isRule -%}
 {{ record.id }} = {{ record.getAssignment('ode_').toSLVString(powTransform) }};
-{%- elif record.instanceOf('Species') and not record.isAmount -%}
-{{ record.id }} = {{ record.id }}_ / {{ record.compartment }};
+{%- elif record.isDynamic -%}
+{{ record.id }} = {{ record.id }}_{{ ' / '+ record.compartment if record.instanceOf('Species') and not record.isAmount}};
 {%- endif -%}
 {%- endfor %}
 
@@ -489,9 +488,9 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'" + con.title + "'" if con.title is defined }} {units: {{ con.units|default('?') }}};
 {%- endfor %}
 
-//! Species recalculated to amounts
-{%- for dynamic in speciesInConc %}
-{{ dynamic.id }}_ = 0; // {{ dynamic.id }} { isAmount: false };
+//! Auxilary variables
+{%- for dynamic in dynamicRecords %}
+{{ dynamic.id }}_ = 0; // {{ dynamic.id }};
 {%- endfor %}
 
 {% set switchers = population.selectByClassName('TimeSwitcher') %}
@@ -784,11 +783,11 @@ k1
 1000000
 {{ 0 if eventsOff else 1 }}
 {% block events -%}
-{{ speciesInConc.length + eventCounter }}
-{%- for spec in speciesInConc %}{# init events #}
-{{ spec.id }}_
+{{ dynamicRecords.length + eventCounter }}
+{%- for dynamic in dynamicRecords %}{# init events #}
+{{ dynamic.id }}_
 0
-{{ spec.id }}_start__
+{{ dynamic.id }}_start__
 0
 0
 1
