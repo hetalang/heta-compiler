@@ -425,19 +425,19 @@ InteractionNetwork
 
 //! Initialization at start_
 if(t==0){
-  // initialization of Records
-  {%- for record in initRecords %}
-  {% if record.isRule -%}
-  {{ record.id }} = {{ record.getAssignment('ode_').toSLVString(powTransform) }};
-  {%- else -%}
-  {{ record.id }} = {{ record.getAssignment('start_').toSLVString(powTransform) }};
-  {%- endif %}
-  {%- endfor %}
-  // calculate initial amounts
-  {%- for spec in speciesInConc %}
-  {{ spec.id }}_start__ = {{ spec.id }} * {{ spec.compartment }};
-  {%- endfor %}
-}else{}
+    // initialization of Records
+    {%- for record in initRecords %}
+    {% if record.isRule -%}
+    {{ record.id }} = {{ record.getAssignment('ode_').toSLVString(powTransform) }};
+    {%- else -%}
+    {{ record.id }} = {{ record.getAssignment('start_').toSLVString(powTransform) }};
+    {%- endif %}
+    {%- endfor %}
+    // calculate initial amounts
+    {%- for spec in speciesInConc %}
+    {{ spec.id }}_start__ = {{ spec.id }} * {{ spec.compartment }};
+    {%- endfor %}
+}else{
 
 //! Calculation of ode_ part, count: {{ ruleRecords|length }}
 {%- for record in ruleRecords %}
@@ -448,6 +448,7 @@ if(t==0){
 {%- endif -%}
 {%- endfor %}
 
+}
 //! Differential equations, count: {{ dynamicRecords|length}}
 {%- for dynamic in dynamicRecords %}
 //!! {{ dynamic.id }} @{{ dynamic.className }} {{ "'"+dynamic.title+"'" if dynamic.title }} {units: {{ dynamic.units|default('?') }}}

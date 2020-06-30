@@ -96,6 +96,9 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 - `CSwitcher` is not supported.
 - `DSwitcher` is not supported.
 - Initialization of `Record` by expression do not work: `x1 .= k1 * A` (not supported).
+- repeatCount in `@TimeSwitcher` is not supported
+- `Infinity`, `-Infinity`, `NaN` values is not supported
+- boolean operatiors like `and`, `or`, etc. are not supported
 
 **Example**
 
@@ -130,6 +133,9 @@ This is the updated version of SLV export format which supports compartment volu
 
 - `CSwitcher` is not supported and will be skipped.
 - `DSwitcher` is not supported.
+- repeatCount in `@TimeSwitcher` is not supported
+- `Infinity`, `-Infinity`, `NaN` values is not supported
+- boolean operatiors like `and`, `or`, etc. are not supported
 
 **Example**
 
@@ -350,6 +356,5 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
 |MathExpr: ternary operator                              |+ |+ |- |- |- |- |- |- |-
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
-|MathExpr: `Infinity`                                    |- |- |+ |+ |+ |+ |+ |+ |+
-|MathExpr: `NaN`                                         |- |- |+ |+ |+ |+ |+ |+ |+
-|Const: `NaN`, `Infinity`                                |- |- |+ |+ |+ |+ |+ |+ |+
+|MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
+|Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+
