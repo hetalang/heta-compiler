@@ -333,7 +333,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 };
 ```
 
-## Features support {.feature-table}
+## Features support
 
 | | SLV | DBSolve | SimSolver/Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
 |--|--|--|--|--|--|--|--|--|--|

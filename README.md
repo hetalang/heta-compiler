@@ -144,8 +144,9 @@ console.log(c.hetaErrors());
 ```
 
 ## Known issues and limitations
+Some of Heta features are implemented partialy for different export formats. To see a list of supported features, go to [features support](export-formats#features-support) table.
 
-The tool is under active development so there ara a lot of features to implement. To help us prioritize them write an [issue](https://github.com/insysbio/likelihoodProfiler.jl/issues).
+The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/insysbio/likelihoodProfiler.jl/issues).
 
 ## Getting help
 
