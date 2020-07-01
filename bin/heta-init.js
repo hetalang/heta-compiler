@@ -9,7 +9,7 @@ const pkg = require('../package');
 // we use https://docs.npmjs.com/files/package.json
 
 const defaultPlatform = {
-  '$schema': 'https://github.com/insysbio/heta-compiler#',
+  '$schema': 'https://github.com/hetalang/heta-compiler#',
   id: 'template',
   notes: 'platform notes',
   version: 'v0.1.0',

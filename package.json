@@ -13,10 +13,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/insysbio/heta-compiler.git"
+    "url": "https://github.com/hetalang/heta-compiler.git"
   },
   "bugs": {
-    "url": "https://github.com/insysbio/heta-compiler/issues",
+    "url": "https://github.com/hetalang/heta-compiler/issues",
     "email": "dev@insysbio.com"
   },
   "author": "Evgeny Metelkin <evgeny.metelkin@gmail.com> (https://github.com/metelkin)",

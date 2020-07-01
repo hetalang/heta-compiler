@@ -1,9 +1,9 @@
 [![Heta project](https://img.shields.io/badge/%CD%B1-Heta_project-blue)](https://hetalang.github.io/)
-[![GitHub issues](https://img.shields.io/github/issues/insysbio/heta-compiler.svg)](https://GitHub.com/insysbio/heta-compiler/issues/)
-[![Autotests](https://github.com/insysbio/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/insysbio/heta-compiler/actions)
-[![Coverage Status](https://coveralls.io/repos/github/insysbio/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/insysbio/heta-compiler?branch=master)
+[![GitHub issues](https://img.shields.io/github/issues/hetalang/heta-compiler.svg)](https://GitHub.com/hetalang/heta-compiler/issues/)
+[![Autotests](https://github.com/hetalang/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/hetalang/heta-compiler/actions)
+[![Coverage Status](https://coveralls.io/repos/github/hetalang/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/hetalang/heta-compiler?branch=master)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
-[![GitHub license](https://img.shields.io/github/license/insysbio/heta-compiler.svg)](https://github.com/insysbio/heta-compiler/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)
 
 # Heta compiler
 
@@ -71,7 +71,7 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
     ```
     The development version can be installed directly from GitHub
     ```bash
-    npm i -g git+https://github.com/insysbio/heta-compiler.git
+    npm i -g git+https://github.com/hetalang/heta-compiler.git
     ```
 
 ## Usage of command line interface
@@ -146,18 +146,18 @@ console.log(c.hetaErrors());
 ## Known issues and limitations
 Some of Heta features are implemented partialy for different export formats. To see a list of supported features, go to [features support](export-formats#features-support) table.
 
-The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/insysbio/likelihoodProfiler.jl/issues).
+The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/hetalang/heta-compiler/issues).
 
 ## Getting help
 
  - Read Heta documentation on <https://hetalang.github.io/>
  - Use [Gitter Chatroom](https://gitter.im/hetalang/community?utm_source=readme).
- - Use [Issue Tracker](https://github.com/insysbio/heta-compiler/issues)
+ - Use [Issue Tracker](https://github.com/hetalang/heta-compiler/issues)
 
 ## Contribute
 
-- [Source Code](https://github.com/insysbio/heta-compiler)
-- [Issue Tracker](https://github.com/insysbio/heta-compiler/issues)
+- [Source Code](https://github.com/hetalang/heta-compiler)
+- [Issue Tracker](https://github.com/hetalang/heta-compiler/issues)
 - See also contributing in [Heta project](https://hetalang.github.io/#/CONTRIBUTING)
 
 ## License
@@ -172,6 +172,6 @@ The original author of the project is [Evgeny Metelkin](https://github.com/metel
 
 - The next versions of **qs3p-js** used the updated format of platfrorm components and a new approach for storing them. A set of new exporting formats was supported. The current version supports Heta code including actions, modules, namespaces. It was used as the main infrastructure for the development of the large- and middle-scale QSP platforms developed in the framework of InSysBio services.
 
-- Starting from 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/insysbio/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of [Heta project](https://hetalang.github.io/).
+- Starting from 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/hetalang/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of [Heta project](https://hetalang.github.io/).
 
 Copyright 2019-2020, InSysBio LLC
