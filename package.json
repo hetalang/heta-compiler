@@ -8,7 +8,7 @@
     "test": "mocha test --recursive --exclude **/*.tmp.js",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
     "test:cov": "nyc --reporter=lcov npm run test",
-    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm run test | coveralls",
+    "coveralls": "nyc --reporter=text-lcov npm run test | coveralls",
     "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js"
   },
   "repository": {
