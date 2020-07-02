@@ -53,6 +53,7 @@ CLI options allow setting specific options for build command. Use `heta build -h
 At the end of command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run instead of shell working directory. Absolute and relative path are possible here. If not set the shell WD will be used as WD of Heta.
 
 List of `heta build` options:
+
 | option | type | default | description |
 |--|--|--|--|
 | --source | \<string\>| index.heta | Path to main heta module. This allows using another name and path of index Heta module. |
