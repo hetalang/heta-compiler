@@ -5,12 +5,13 @@ name: Coverall
 
 on:
   push:
+    branches: [ master, '*' ]
+  pull_request:
     branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js 8.x
@@ -18,6 +19,8 @@ jobs:
       with:
         node-version: 8.x
     - run: npm ci
-    - run: npm coveralls
-      env:
-        CI: true
+    - run: npm run test:cov
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
