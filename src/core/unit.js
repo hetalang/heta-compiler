@@ -1,19 +1,19 @@
 const _ = require('lodash');
 const { floor, log10 } = Math;
 const prefixes = {
-  '1e-2':       'centi',
-  '1e-1':       'deci',
-  '1e+1':       'deka',
-  '1e-15':      'femto',
-  '1e+9':       'giga',
-  '1e+2':       'hecto',
-  '1e+3':       'kilo',
-  '1e+6':       'mega',
-  '1e-6':       'micro',
-  '1e-3':       'milli',
-  '1e-9':       'nano',
-  '1e-12':      'pico',
-  '1e+12':      'tera'
+  '1.00000000e-2':       'centi',
+  '1.00000000e-1':       'deci',
+  '1.00000000e+1':       'deka',
+  '1.00000000e-15':      'femto',
+  '1.00000000e+9':       'giga',
+  '1.00000000e+2':       'hecto',
+  '1.00000000e+3':       'kilo',
+  '1.00000000e+6':       'mega',
+  '1.00000000e-6':       'micro',
+  '1.00000000e-3':       'milli',
+  '1.00000000e-9':       'nano',
+  '1.00000000e-12':      'pico',
+  '1.00000000e+12':      'tera'
 };
 
 class Unit extends Array {
@@ -235,12 +235,12 @@ class Unit extends Array {
    */
   toString(usePrefix = false){
     return this
-      .filter((x) => x.kind!=='') // remove unitless
+      .filter((x) => x.kind !== '') // remove unitless
       .map((item, i) => {
-        if(item.multiplier===1){
+        if (item.multiplier === 1) {
           var kindUpd = item.kind;
         } else if (usePrefix) {
-          let exponential = item.multiplier.toExponential();
+          let exponential = item.multiplier.toExponential(8); // round to 8 digits
           let pref = _.get(prefixes, exponential);
           if (pref === undefined) 
             throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
