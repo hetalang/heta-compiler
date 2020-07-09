@@ -12,7 +12,7 @@ require('./dbsolve-export');
 require('./mrgsolve-export');
 require('./simbio-export');
 require('./xlsx-export');
-require('./gsk-xlsx-export');
+require('./another-xlsx-export');
 require('./matlab-export');
 require('./julia-export');
 

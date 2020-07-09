@@ -4,14 +4,14 @@ const _ = require('lodash');
 const { XLSXExport } = require('../xlsx-export');
 require('./_size');
 
-class GSKXLSXExport extends XLSXExport {
+class AnotherXLSXExport extends XLSXExport {
   merge(q={}, skipChecking){
     super.merge(q, skipChecking);
 
     return this;
   }
   get className(){
-    return 'GSKXLSXExport';
+    return 'AnotherXLSXExport';
   }
   make(){
     let qArr = this.namespace
@@ -42,7 +42,7 @@ class GSKXLSXExport extends XLSXExport {
           //q['#'] = counter++;
           q.st = 'f';
 
-          return _.omit(q, ['class', 'units', 'unitsGSK', 'aux.reversible']);
+          return _.omit(q, ['class', 'units', 'unitsAnother', 'aux.reversible']);
         }), 
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
@@ -50,7 +50,7 @@ class GSKXLSXExport extends XLSXExport {
           q.st = 'r';
           if (q.isAmount!==false) q.compartment = 'no';
 
-          return _.omit(q, ['class', 'units', 'unitsGSK', 'aux.reversible']);
+          return _.omit(q, ['class', 'units', 'unitsAnother', 'aux.reversible']);
         })
     );
 
@@ -60,13 +60,13 @@ class GSKXLSXExport extends XLSXExport {
       type: 'sheet',
       name: 'Vs',
       headerSeq: [
-        'tags[]', 'id', 'assignments.start_', 'unitsGSK', 
+        'tags[]', 'id', 'assignments.start_', 'unitsAnother', 
         'notes', 'compartment', 'COM', 'nothing',
         'on'
       ]
     };
     species.content = [{
-      'tags[]': '#', 'id': 'Variable name', 'assignments.start_': 'Value', 'unitsGSK': 'Unit', 
+      'tags[]': '#', 'id': 'Variable name', 'assignments.start_': 'Value', 'unitsAnother': 'Unit', 
       'notes': 'Description', 'compartment': 'Compartment', 'COM': 'COM', 'nothing': '',
       'on': 'Scenario (2/1/0)'
     }];
@@ -85,13 +85,13 @@ class GSKXLSXExport extends XLSXExport {
       type: 'sheet',
       name: 'Ps',
       headerSeq: [
-        'tags[]', 'id', 'num', 'unitsGSK',
+        'tags[]', 'id', 'num', 'unitsAnother',
         'notes', 'nothing', 'nothing2', 'st',
         'on'
       ]
     };
     parameters.content = [{
-      'tags[]': '#', 'id': 'Parameter name', 'num': 'Value', 'unitsGSK': 'Unit',
+      'tags[]': '#', 'id': 'Parameter name', 'num': 'Value', 'unitsAnother': 'Unit',
       'notes': 'Description', 'nothing': '', 'nothing2': '', 'st': 'string type (p/c)',
       'on': 'Scenario (2/1/0)'
     }];
@@ -122,24 +122,24 @@ class GSKXLSXExport extends XLSXExport {
       type: 'sheet',
       name: 'function units',
       headerSeq: [
-        'tags[]', 'st', 'id', 'unitsGSK'
+        'tags[]', 'st', 'id', 'unitsAnother'
       ]
     };
     function_units.content = [{
-      'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'unitsGSK': 'Unit'
+      'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'unitsAnother': 'Unit'
     }];
     function_units.content = function_units.content.concat(
       qArr.filter((q) => q.class === 'Record')
         .map((q) => {
           q.st = 'f';
 
-          return _.pick(q, ['tags[]', 'st', 'id', 'unitsGSK']);
+          return _.pick(q, ['tags[]', 'st', 'id', 'unitsAnother']);
         })/*,
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
           q.st = 'r';
 
-          return _.pick(q, ['tags[]', 'st', 'id', 'unitsGSK']);
+          return _.pick(q, ['tags[]', 'st', 'id', 'unitsAnother']);
         })*/
     );
 
@@ -152,8 +152,8 @@ class GSKXLSXExport extends XLSXExport {
   }
 }
 
-Container.prototype.exports.GSKXLSX = GSKXLSXExport;
+Container.prototype.exports.AnotherXLSX = AnotherXLSXExport;
 
 module.exports = {
-  GSKXLSXExport
+  AnotherXLSXExport
 };
