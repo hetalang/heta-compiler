@@ -170,12 +170,14 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 **Example:**
 
+```heta
 #export {
     format: SBML,
     filepath: model, // save results in file "dist/model.xml"
     space: nameless, // namespace used for model generation
     version: L2V4 // Level 2 Version 4
 };
+```
 
 ## Simbio
 

@@ -6,10 +6,10 @@ If `heta` command is not available check your Heta compiler [installation](./REA
 
 ## Table of contents
 
-- ["heta" command](#"heta"-command)
-- ["heta build" command](#"heta-build"-command)
-- ["heta init" command](#"heta-init"-command)
-- ["heta help" command](#"heta-help"-command)
+- ["heta" command](#quothetaquot-command)
+- ["heta build" command](#quotheta-buildquot-command)
+- ["heta init" command](#quotheta-initquot-command)
+- ["heta help" command](#quotheta-helpquot-command)
 - [Declaration file format](#declaration-file-format)
 
 ## "heta" command
