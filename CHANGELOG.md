@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.5.4
+
+- add AnotherXLSX export
+- fix rounding problems in units with prefixes
+- fix name of container in Simbio export
+
 ## 0.5.3
 
 - Add Export of format DBSolve

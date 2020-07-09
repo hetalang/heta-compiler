@@ -13,11 +13,11 @@ class SimbioExport extends _Export{
     return 'SimbioExport';
   }
   make(){
-    this.image = this._getSimbioImage();
+    let image = this._getSimbioImage();
 
     return [
       {
-        content: this.getSimbioCode(),
+        content: this.getSimbioCode(image),
         pathSuffix: '/model.m',
         type: 'text'
       },
@@ -34,10 +34,10 @@ class SimbioExport extends _Export{
       legalUnits: legalUnits
     };
   }
-  getSimbioCode(){
+  getSimbioCode(image = {}){
     return nunjucks.render(
       'template.m.njk',
-      this
+      image
     );
   }
   getFunCode(){

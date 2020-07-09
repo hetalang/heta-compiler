@@ -1,87 +1,85 @@
 %{
   This model was created by Heta compiler.
   Additional functions and constants for compatibility see in "fun.m"
-  export from : {{_id}} @SimbioExport {...};
-  {{title}}
-  {{notes}}
+  export from : #export { format: Simbio, namespace: {{ population.spaceName }}, ...};
 %}
 
 sbioaddtolibrary(sbiounit('week', 'day', 7));
 
-{% set model_id = _id + "_model" -%}
-{{ model_id }} = sbiomodel('{{_id}}');
+{% set model_id = population.spaceName + "_model" -%}
+{{ model_id }} = sbiomodel('{{ population.spaceName }}');
 
 % Useful parameters
 addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 
-{% set listOfCompartments = image.population.selectByClassName('Compartment') -%}
+{% set listOfCompartments = population.selectByClassName('Compartment') -%}
 {{ "% Compartments" if listOfCompartments|length > 0 }}
 {%- for record in listOfCompartments %}
-{{_id}}.compartment.{{record.id}} = addcompartment(
+{{ population.spaceName }}.compartment.{{record.id}} = addcompartment(
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
-  {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(image.legalUnits, true) }}'{% endif -%}
+  {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
-{% set listOfSpecies = image.population.selectByClassName('Species') -%}
+{% set listOfSpecies = population.selectByClassName('Species') -%}
 {{ "% Species" if listOfSpecies|length > 0 }}
 {%- for record in listOfSpecies %}
-{{_id}}.species.{{record.id}} = addspecies(
-  {{- _id }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
+{{ population.spaceName }}.species.{{record.id}} = addspecies(
+  {{-  population.spaceName  }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
   {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
-  {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(image.legalUnits, true) }}'{% endif -%}
+  {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'BoundaryCondition', {{ record.boundary===true or record.isRule===true -}}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
-{% set listOfParameters = image.population.selectByClassName('Record') -%}
-{% set listOfProcesses = image.population.selectByClassName('Process') -%}
-{% set listOfConstants = image.population.selectByClassName('Const') -%}
+{% set listOfParameters = population.selectByClassName('Record') -%}
+{% set listOfProcesses = population.selectByClassName('Process') -%}
+{% set listOfConstants = population.selectByClassName('Const') -%}
 {{ "% Parameters" if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 }}
 {%- for record in listOfParameters.concat(listOfProcesses) %}
-{{_id}}.parameter.{{record.id}} = addparameter(
+{{ population.spaceName }}.parameter.{{record.id}} = addparameter(
   {{- model_id }}, '{{record.id}}', 'ConstantValue', false
   {%- if record.assignments.start_.num!==undefined %}, 'Value', {{record.assignments.start_.num}}{% endif -%}
-  {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsRebased(image.legalUnits, true) }}'{% endif -%}
+  {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
 {%- endfor %}
 {%- for con in listOfConstants %}
-{{_id}}.parameter.{{con.id}} = addparameter(
+{{ population.spaceName }}.parameter.{{con.id}} = addparameter(
   {{- model_id }}, '{{con.id}}', 'ConstantValue', true
   {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
-  {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(image.legalUnits, true) }}'{% endif -%}
+  {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{con.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
-{% set listOfReactions = image.population.selectByClassName('Reaction') -%}
+{% set listOfReactions = population.selectByClassName('Reaction') -%}
 {{ "% Reactions" if listOfReactions|length > 0 }}
 {%- for record in listOfReactions %}
-{{_id}}.reaction.{{record.id}} = addreaction(
+{{ population.spaceName }}.reaction.{{record.id}} = addreaction(
   {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.aux.reversible!==false}}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
   {%- set fullActors = record.actors.concat(record.modifiers) -%}
   {% set reactants = fullActors|getReactants %}
   {%- if reactants|length > 0 %}
-  addreactant({{_id}}.reaction.{{record.id}}, [
-    {%- for actor in reactants %}{{_id}}.species.{{ actor.target }}, {% endfor -%}
+  addreactant({{ population.spaceName }}.reaction.{{record.id}}, [
+    {%- for actor in reactants %}{{ population.spaceName }}.species.{{ actor.target }}, {% endfor -%}
     ], [
     {%- for actor in reactants %}{{ -actor.stoichiometry if actor.stoichiometry<0 else 1 }}, {% endfor -%}
     ]);
   {%- endif %}
   {%- set products = fullActors|getProducts %}
   {%- if products|length > 0 %}
-  addproduct({{_id}}.reaction.{{record.id}}, [
-    {%- for actor in products %}{{_id}}.species.{{ actor.target }}, {% endfor -%}
+  addproduct({{ population.spaceName }}.reaction.{{record.id}}, [
+    {%- for actor in products %}{{ population.spaceName }}.species.{{ actor.target }}, {% endfor -%}
     ], [
     {%- for actor in products %}{{ actor.stoichiometry if actor.stoichiometry>0 else 1 }}, {% endfor -%}
     ]);
   {%- endif %}
 {%- endfor %}
 
-{% set listOfAssignmentRules = image.population.selectRecordsByContext("ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
-{%- set listOfRateRules = image.population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
+{% set listOfAssignmentRules = population.selectRecordsByContext("ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
+{%- set listOfRateRules = population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
 {{ "% Rules" if listOfAssignmentRules|length + listOfRateRules|length > 0 }}
 {% for record in listOfAssignmentRules -%}
 addrule(
@@ -96,32 +94,32 @@ addrule(
   ', 'rate');
 {%- endfor %}
 
-{%- set listOfInitialAssignments = image.population.selectRecordsByContext("start_")|filter2("assignments.start_.num", undefined) %}
+{%- set listOfInitialAssignments = population.selectRecordsByContext("start_")|filter2("assignments.start_.num", undefined) %}
 {{- "% InitialAssignments" if listOfInitialAssignments|length > 0 -}}
 {% for record in listOfInitialAssignments %}
 addrule(
   {{- model_id }}, '{{record.id}} = {{ record.assignments.start_.toMatlabString() }}', 'initialAssignment');
 {% endfor %}
 
-{%- set listOfTimeEvents = image.population.selectByClassName("TimeSwitcher") %}
+{%- set listOfTimeEvents = population.selectByClassName("TimeSwitcher") %}
 {{- "% Time Events" if listOfTimeEvents|length > 0 }}
 {% for event in listOfTimeEvents -%}
-{%- for record in image.population.selectRecordsByContext(event.id) -%}
-{{_id}}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
-    {{_id}}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
-    {{_id}}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
-    {{_id}}.dose.{{event.id}}.{{record.id}}.Interval = {% if event.period is defined %}'{{event.period}}'{% else %}{{ event.periodObj.num }}{% endif %};
-    {{_id}}.dose.{{event.id}}.{{record.id}}.RepeatCount = {% if event.repeatCount is defined %}'{{event.repeatCount}}'{% else %}{{ event.repeatCountObj.num }}{% endif%};
-    {{_id}}.dose.{{event.id}}.{{record.id}}.StartTime = {% if event.start is defined %}'{{event.start}}'{% else %}{{ event.startObj.num }}{% endif %};
-    {{_id}}.dose.{{event.id}}.{{record.id}}.Active = true;
+{%- for record in population.selectRecordsByContext(event.id) -%}
+{{ population.spaceName }}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Interval = {% if event.period is defined %}'{{event.period}}'{% else %}{{ event.periodObj.num }}{% endif %};
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.RepeatCount = {% if event.repeatCount is defined %}'{{event.repeatCount}}'{% else %}{{ event.repeatCountObj.num }}{% endif%};
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.StartTime = {% if event.start is defined %}'{{event.start}}'{% else %}{{ event.startObj.num }}{% endif %};
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Active = true;
 {% endfor -%}
 {% endfor %}
 
-{% set listOfCondEvents = image.population.selectByClassName("CSwitcher") %}
+{% set listOfCondEvents = population.selectByClassName("CSwitcher") %}
 {{- "% Events" if listOfCondEvents|length > 0 }}
 {% for event in listOfCondEvents -%}
-{{_id}}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
-  {%- for record in image.population.selectRecordsByContext(event.id) -%}
+{{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
+  {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
 {% endfor %}
