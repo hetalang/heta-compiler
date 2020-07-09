@@ -56,12 +56,12 @@ List of `heta build` options:
 
 | option | type | default | description |
 |--|--|--|--|
-| --source | \<string\>| index.heta | Path to main heta module. This allows using another name and path of index Heta module. |
+| --source | \<string\> | index.heta | Path to main heta module. This allows using another name and path of index Heta module. |
 | --type | \<string\> | heta | Type of source file. This option allows to select type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
-| --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory.|
+| --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory. |
 | --skip-export | | | If set no export files will be created. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
-| -d, --declaration| string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.json5/.yml.
+| -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.json5/.yml. |
 
 #### Example 1
 

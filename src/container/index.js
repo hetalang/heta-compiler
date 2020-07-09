@@ -72,7 +72,7 @@ class Container {
     // old style export
     let exportCheck = q.class.match(/^(\w+)Export$/);
     if (exportCheck !== null) { // check if old export syntax is used
-      this.logger.warn(`Usage of Export is depricated starting from v0.5.0, use syntax: #export {format: ${exportCheck[1]}, ...}`)
+      this.logger.warn(`Usage of Export is deprecated starting from v0.5.0, use syntax: #export {format: ${exportCheck[1]}, ...}`)
       let exportQ = _.omit(q, ['class', 'id']);
       _.defaults(exportQ, {
         format: exportCheck[1],
