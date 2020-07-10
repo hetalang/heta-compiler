@@ -363,7 +363,7 @@ class Unit extends Array {
       .map((x) => {
         let scale = floor(log10(x.multiplier));
         let multiplier = x.multiplier / 10 ** scale;
-        return `\n    <unit kind="${x.kind}" exponent="${x.exponent}" scale="${scale}" multiplier="${multiplier}"/>`;
+        return `\n    <unit kind="${x.kind}" exponent="${x.exponent}" scale="${scale}" multiplier="${_round(multiplier, 8)}"/>`;
       })
       .join('');
 
@@ -397,6 +397,13 @@ function unitComponentToHTML(u, spaceSymbol = '&#160;', minusSymbol = '&#8722;')
     : `${base}<sup>${u.exponent}</sup>`;
 
   return full;
+}
+
+/*
+  Auxilary function to round to some digits
+*/
+function _round(x, digits = 0){
+  return +x.toPrecision(digits);
 }
 
 module.exports = {
