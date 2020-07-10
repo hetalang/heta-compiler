@@ -2,8 +2,9 @@
 
 ## 0.5.5 - sbml export
 
-- multiple fixes in SBML export
+- fixes in unit conversion for SBML export
 - support time symbol in SBML export
+- remove name from SBML assignments
 
 ## 0.5.4
 

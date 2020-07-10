@@ -192,9 +192,6 @@
   {%- for record in listOfAssignmentRules %}
     <assignmentRule
       variable="{{record.id}}"
-      {%- if record.title is defined %}
-      name="{{record.title}}"
-      {%- endif %}
       metaid="{{record.index}}::ode_"
       >
       {{ record.assignments.ode_.toCMathML() }}
@@ -204,9 +201,6 @@
   {%- for record in listOfRateRules %}
     <rateRule
       variable="{{record.id}}"
-      {%- if record.title is defined %}
-      name="{{ record.title }}"
-      {%- endif %}
       metaid="{{ record.index }}::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -234,9 +228,6 @@
       <initialAssignment
         symbol="{{ record.id }}"
         metaid="{{ record.index }}::start_"
-        {%- if record.title is defined %}
-        name="{{ record.title }}"
-        {%- endif %}
         >
         {{ record.assignments.start_.toCMathML() }}
       </initialAssignment>

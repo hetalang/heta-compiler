@@ -359,13 +359,19 @@ class Unit extends Array {
       ? this.rebase(legalUnits).simplify()
       : this.rebase(legalUnits);
 
-    let listOfUnits = units
-      .map((x) => {
-        let scale = floor(log10(x.multiplier));
-        let multiplier = x.multiplier / 10 ** scale;
-        return `\n    <unit kind="${x.kind}" exponent="${x.exponent}" scale="${scale}" multiplier="${_round(multiplier, 8)}"/>`;
-      })
-      .join('');
+    // create string content of listOfUnits
+    // if empty, set dimentionless
+    if (units.length > 0) {
+      var listOfUnits = units
+        .map((x) => {
+          let scale = floor(log10(x.multiplier));
+          let multiplier = x.multiplier / 10 ** scale;
+          return `\n    <unit kind="${x.kind || 'dimensionless'}" exponent="${x.exponent}" scale="${scale}" multiplier="${_round(multiplier, 8)}"/>`;
+        })
+        .join('');
+    } else {
+      listOfUnits = '\n    <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>';
+    }
 
     switch (_options.nameStyle) {
     case 'TeX':
