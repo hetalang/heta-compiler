@@ -133,11 +133,10 @@
       variable="evt1"
       metaid="first::evt1::ode_"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>t</ci><cn>12</cn></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>12</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="s2"
-      name="s2 title"
       metaid="first::s2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
@@ -149,7 +148,6 @@
       <initialAssignment
         symbol="comp1"
         metaid="first::comp1::start_"
-        name="This is compartment"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
       </initialAssignment>

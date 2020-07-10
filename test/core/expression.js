@@ -13,6 +13,11 @@ describe('Unit test for Expression.', () => {
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
 
+  it('Conversion of t (time) to CMathML.', () => {
+    expect(Expression.fromString('1 * x * t').toCMathML()).to.be
+      .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>1</cn><ci>x</ci></apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></math>');
+  });
+
   it('Conversion to Q.', () => {
     let expression = Expression.fromString('x*y');
     expect(expression.toString()).to.be.deep.equal('x * y');

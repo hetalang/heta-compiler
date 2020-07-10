@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.5.5 - sbml export
+
+- multiple fixes in SBML export
+- support time symbol in SBML export
+
 ## 0.5.4
 
 - add AnotherXLSX export
