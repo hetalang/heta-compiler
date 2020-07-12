@@ -108,8 +108,12 @@ addrule(
 {{ population.spaceName }}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
     {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
     {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
+    {%- if event.periodObj is defined %}
     {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Interval = {% if event.period is defined %}'{{event.period}}'{% else %}{{ event.periodObj.num }}{% endif %};
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.RepeatCount = {% if event.repeatCount is defined %}'{{event.repeatCount}}'{% else %}{{ event.repeatCountObj.num }}{% endif%};
+    {%- endif %}
+    {%- if event.repeatCountObj is defined %}
+    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.RepeatCount = {% if event.repeatCount is defined %}'{{ event.repeatCount }}'{% else %}{{ event.repeatCountObj.num }}{% endif %};
+    {%- endif %}
     {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.StartTime = {% if event.start is defined %}'{{event.start}}'{% else %}{{ event.startObj.num }}{% endif %};
     {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Active = true;
 {% endfor -%}

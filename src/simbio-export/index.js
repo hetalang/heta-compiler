@@ -29,6 +29,16 @@ class SimbioExport extends _Export{
     ];
   }
   _getSimbioImage(){
+    // check stop in @TimeSwitcher
+    let logger = this.namespace.container.logger;
+    this.namespace
+      .selectByInstanceOf('TimeSwitcher')
+      .filter((ts) => typeof ts.stopObj !== 'undefined')
+      .forEach((ts) => {
+        let msg = `"Simbio" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}". Use repeatCount instead`;
+        logger.warn(msg);
+      });
+
     return {
       population: this.namespace,
       legalUnits: legalUnits

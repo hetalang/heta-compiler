@@ -196,7 +196,8 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ### Known restrictions
 
-- `CSwitcher` is not supported.
+- `stop` property in `@TimeSwitcher` is not supported.
+- `@CSwitcher` is not supported.
 
 **Example:**
 ```heta

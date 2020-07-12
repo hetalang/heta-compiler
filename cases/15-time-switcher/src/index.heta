@@ -41,6 +41,11 @@ p1 [dosage]= dose;
 };
 
 #export {
+  format: Simbio,
+  filepath: model
+};
+
+#export {
   format: JSON,
   filepath: output0
 };
