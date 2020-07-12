@@ -14,31 +14,29 @@ class MrgsolveExport extends _Export {
     return 'MrgsolveExport';
   }
   make(){
-    this._model_ = this._getMrgsolveImage();
+    let image = this.getMrgsolveImage();
 
     return [{
-      content: this.getMrgsolveCode(),
+      content: this.getMrgsolveCode(image),
       pathSuffix: '.cpp',
       type: 'text'
     }];
   }
-  _getMrgsolveImage(){
-    let model = {
-      population: this.namespace
-    };
+  getMrgsolveImage(){
+    let population = this.namespace;
 
     // set dynamic variables
-    model.dynamics = model.population
+    let dynamics = population
       .toArray()
       .filter((component) => {
         return component.instanceOf('Record') 
           && component.isDynamic;
       });
-    let dynamicIds = model.dynamics
+    let dynamicIds = dynamics
       .map((component) => component.id);
 
     // check if initials depends on dynamic initials, than stop
-    model.population
+    population
       .toArray()
       .filter((component) => {
         return component.instanceOf('Record')
@@ -57,13 +55,16 @@ class MrgsolveExport extends _Export {
       });
 
     // set array of output records
-    model.output = model.population
-      .toArray()
-      .filter((component) => component.instanceOf('Record') && component.assignments!==undefined)
-      .filter((component) => !component.instanceOf('Species') || !component.isAmount);
+    let output = population
+      .selectByInstanceOf('Record')
+      .filter((rec) => {
+        // remove all dynamic records written directly
+        return !rec.isDynamic 
+          || (rec.instanceOf('Species') && !rec.isAmount);
+      });
 
     // set sorted array of initials
-    model.start_ = model.population
+    let start_ = population
       .sortExpressionsByContext('start_')
       .filter((component) => {
         return component.instanceOf('Record') 
@@ -72,7 +73,7 @@ class MrgsolveExport extends _Export {
       });
 
     // set sorted array of rules
-    model.ode_ = model.population
+    let ode_ = population
       .sortExpressionsByContext('ode_', true)
       .filter((component) => {
         return component.instanceOf('Record') 
@@ -80,12 +81,19 @@ class MrgsolveExport extends _Export {
           && component.assignments.ode_;
       });
 
-    return model;
+    return {
+      population,
+      dynamics,
+      output,
+      start_,
+      ode_,
+      options: this
+    };
   }
-  getMrgsolveCode(){
+  getMrgsolveCode(image = {}){
     return nunjucks.render(
       'model.cpp.njk',
-      this
+      image
     );
   }
   toQ(options = {}){
