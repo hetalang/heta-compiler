@@ -5,10 +5,11 @@ const _ = require('lodash');
 class XLSXExport extends _Export {
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
-    if(q.omitRows!==undefined) this.omitRows = q.omitRows;
-    if(q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
+    if (q.omitRows!==undefined) this.omitRows = q.omitRows;
+    if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
+    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
 
-    if(q.omit) this.omit = q.omit;
+    if (q.omit) this.omit = q.omit;
 
     return this;
   }
@@ -22,18 +23,25 @@ class XLSXExport extends _Export {
       'compartment', 'isAmount', 'actors', 'modifiers[]',
       'title', 'notes', 'tags[]'
     ];
-
-    let qArr = this.namespace
-      .toArray()
+    // filtered namespaces
+    let nsArray = [...this.container.namespaces]
+      .map((pair) => pair[1]);
+    let nsOutput = typeof this.spaceFilter === 'undefined'
+      ? nsArray
+      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let qArr = _.chain(nsOutput)
+      .map((ns) => ns.toArray())
+      .flatten()
       .filter((x) => !x.isCore)
       .map((x) => x.toFlat())
       .map((q) => this.omit ? _.omit(q, this.omit) : q)
       .map((x) => {
         // add on property
         x.on = 1;
-        // convert boolen to string
+        // convert boolean to string
         return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
-      });
+      })
+      .value();
 
     // split qArr to several sheets
     if (this.splitByClass) {

@@ -250,6 +250,7 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 | omitRows | number | | | | If set this creates empty rows in output sheets. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | splitByClass | boolean | | | | If `true` the components will be splitted by class and saved as several sheets: one sheet per a class. |
+| spaceFilter | ID[] | | | namespace | namespaces out of the list will be skipped. |
 
 ### Output files
 
@@ -265,7 +266,7 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 #export {
     format: XLSX,
     filepath: output, // save result in file "dist/output.xlsx"
-    space: nameless, // output all from nameless namespace
+    spaceFilter: [ nameless ], // output all from nameless namespace
     omitRows: 5, // include 5 empty rows between header and the first line
     omit: [aux.wiki], // omit aux.wiki properties from components
     splitByClass: true // split classed to different sheets
@@ -353,7 +354,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
-|multispace `#export`                                    |- |- |+ |- |- |- |- |+ |-
+|multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+

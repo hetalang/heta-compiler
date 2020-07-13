@@ -9,6 +9,7 @@ class YAMLExport extends _Export {
     
     if(q.omit) this.omit = q.omit;
     if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
+    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
 
     return this;
   }

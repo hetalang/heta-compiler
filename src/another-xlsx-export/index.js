@@ -5,7 +5,7 @@ const { XLSXExport } = require('../xlsx-export');
 require('./_size');
 
 class AnotherXLSXExport extends XLSXExport {
-  merge(q={}, skipChecking){
+  merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
 
     return this;
@@ -14,10 +14,27 @@ class AnotherXLSXExport extends XLSXExport {
     return 'AnotherXLSXExport';
   }
   make(){
-    let qArr = this.namespace
-      .toArray()
+    // filtered namespaces
+    let nsArray = [...this.container.namespaces]
+      .map((pair) => pair[1]);
+    let nsOutput = typeof this.spaceFilter === 'undefined'
+      ? nsArray
+      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let qArr = _.chain(nsOutput)
+      .map((ns) => ns.toArray())
+      .flatten()
       .filter((x) => !x.isCore)
-      .map((x) => x.toFlat());
+      .map((x) => x.toFlat())
+      .map((q) => this.omit ? _.omit(q, this.omit) : q)
+      /*
+      .map((x) => {
+        // add on property
+        x.on = 1;
+        // convert boolean to string
+        return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
+      })
+      */
+      .value();
 
     // main_tab sheet
     let functions = {

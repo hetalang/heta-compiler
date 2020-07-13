@@ -37,7 +37,21 @@ end
   spaceFilter: [ nameless, one ],
   noUnitsExpr: false
 };
-//#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+#export {
+  format: XLSX,
+  filepath: table,
+  omitRows: 3,
+  splitByClass: true,
+  spaceFilter: [ nameless, one ]
+};
+#export {
+  format: AnotherXLSX,
+  filepath: another_table,
+  omitRows: 3,
+  splitByClass: true,
+  spaceFilter: [ nameless, one ]
+};
+
 //#export { format: SBML, filepath: sbml, version: L2V4 };
 //#export { format: SLV, filepath: model, eventsOff: false };
 //#export { format: DBSolve, filepath: dbsolve };
