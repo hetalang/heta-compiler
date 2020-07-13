@@ -20,5 +20,11 @@ XLSXExport.prototype.makeAndSave = function(pathPrefix){
     XLSX.utils.book_append_sheet(wb, ws, x.name);
   });
 
-  XLSX.writeFile(wb, fullPath, {});
+  try {
+    XLSX.writeFile(wb, fullPath, {});
+  } catch (err) {
+    let logger = this.container.logger;
+    let msg =`Heta compiler cannot export to file: "${err.path}" because it is busy.`;
+    logger.error(msg, 'ExportError');
+  }
 };
