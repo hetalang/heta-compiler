@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.5.6 - multispace export
+
+- default export of `units` as UnitExpr in `@UnitDef`
+- multispace for JSON, YAML, XLSX: `spaceFilter` property
+- catch error when XLSX file is busy
+
 ## 0.5.5 - sbml export
 
 - fixes in unit conversion for SBML export
