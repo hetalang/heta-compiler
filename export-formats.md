@@ -30,9 +30,9 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
-| noUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr.  |
+| noUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr. If `true` all unit will be written in Unit array format. |
+| spaceFilter | ID[] | | | namespace | namespaces out of the list will be skipped. |
 
 ### Output files
 
@@ -44,9 +44,9 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
 #export {
     format: JSON,
     filepath: output, // save result in file "dist/output.json"
-    space: nameless, // output all from nameless namespace
     omit: [aux.wiki], // omit aux.wiki properties from components
-    noUnitsExpr: false // save units in format UnitsExpr
+    noUnitsExpr: false, // save units in format UnitsExpr
+    spaceFilter: [ nameless, another ]
 };
 ```
 
@@ -68,9 +68,9 @@ All options is the same as for [JSON format](#json).
 #export {
     format: YAML,
     filepath: output, // save result in file "dist/output.json"
-    space: nameless, // output all from nameless namespace
     omit: [aux.wiki], // omit aux.wiki properties from components
-    noUnitsExpr: false // save units in format UnitsExpr
+    noUnitsExpr: false, // save units in format UnitsExpr
+    spaceFilter: [ nameless, another ]
 };
 ```
 
@@ -353,7 +353,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
-|multispace `#export`                                    |- |- |+ |- |- |- |- |- |-
+|multispace `#export`                                    |- |- |+ |- |- |- |- |+ |-
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+

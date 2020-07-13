@@ -1,0 +1,14 @@
+{
+  "builderVersion": "*",
+  "id": "template",
+  "options": {
+    "debug": false,
+    "logs": "output.log",
+    "logLevel": "info",
+    "skipExport": false
+  },
+  "importModule": {
+    "type": "heta",
+    "source": "src/index.heta"
+  }
+}

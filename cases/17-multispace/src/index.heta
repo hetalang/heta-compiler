@@ -1,0 +1,40 @@
+/*
+  template file for creating platform
+*/
+// add qsp units
+include ./qsp-units.heta
+
+comp1 @Compartment .= 1 { units: L };
+s1 @Species { compartment: comp1, units: uM } .= 10;
+r1 @Reaction {
+  actors: s1 =>
+};
+r1 := k1 * s1 * comp1;
+k1 @Const = 1e-3;
+
+namespace one begin
+  include ./qsp-units.heta
+  comp2 @Compartment .= 1 { units: L };
+  s2 @Species { compartment: comp2, units: uM } .= 10;
+  s3 @Species { compartment: comp2, units: umole, isAmount: true } .= 0;
+  r2 @Reaction {
+    actors: s2 => s3
+  };
+  r2 := k1 * s2 * comp2;
+  k1 @Const = 1e-5;
+end
+
+// exports
+#export {
+  format: JSON,
+  filepath: output,
+  spaceFilter: [ nameless ],
+  noUnitsExpr: false
+};
+//#export { format: YAML, filepath: output };
+//#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+//#export { format: SBML, filepath: sbml, version: L2V4 };
+//#export { format: SLV, filepath: model, eventsOff: false };
+//#export { format: DBSolve, filepath: dbsolve };
+//#export { format: Simbio, filepath: simbio };
+//#export { format: Mrgsolve, filepath: mrgsolve };
