@@ -4,6 +4,8 @@
 // add qsp units
 include ./qsp-units.heta
 
+xxx @UnitDef {units: (1e+1 litre)};
+
 comp1 @Compartment .= 1 { units: L };
 s1 @Species { compartment: comp1, units: uM } .= 10;
 r1 @Reaction {

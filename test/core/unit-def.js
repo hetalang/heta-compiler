@@ -21,9 +21,14 @@ describe('Unit test for UnitDef', () => {
     expect(simple.toQ()).to.be.deep.equal({
       class: 'UnitDef',
       id: 'ud1',
+      units: '(1e+3 g)/mole'
+    });
+    expect(simple.toQ({noUnitsExpr: true})).to.be.deep.equal({
+      class: 'UnitDef',
+      id: 'ud1',
       units: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
-        {kind: 'mole', multiplier: 1, exponent: -1}
+        {kind: 'mole', exponent: -1, multiplier: 1}
       ]
     });
   });
