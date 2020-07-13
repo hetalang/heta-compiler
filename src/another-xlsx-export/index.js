@@ -23,8 +23,8 @@ class AnotherXLSXExport extends XLSXExport {
     let qArr = _.chain(nsOutput)
       .map((ns) => ns.toArray())
       .flatten()
-      .filter((x) => !x.isCore)
-      .map((x) => x.toFlat())
+      .filter((x) => !x.isCore && !x.instanceOf('UnitDef')) // skip core and UnitsDef
+      .map((x) => x.toFlat({useAnotherUnits: true}))
       .map((q) => this.omit ? _.omit(q, this.omit) : q)
       /*
       .map((x) => {
@@ -59,7 +59,7 @@ class AnotherXLSXExport extends XLSXExport {
           //q['#'] = counter++;
           q.st = 'f';
 
-          return _.omit(q, ['class', 'units', 'unitsAnother', 'aux.reversible']);
+          return _.omit(q, ['class', 'units', 'units2', 'aux.reversible']);
         }), 
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
@@ -67,7 +67,7 @@ class AnotherXLSXExport extends XLSXExport {
           q.st = 'r';
           if (q.isAmount!==false) q.compartment = 'no';
 
-          return _.omit(q, ['class', 'units', 'unitsAnother', 'aux.reversible']);
+          return _.omit(q, ['class', 'units', 'units2', 'aux.reversible']);
         })
     );
 
@@ -77,13 +77,13 @@ class AnotherXLSXExport extends XLSXExport {
       type: 'sheet',
       name: 'Vs',
       headerSeq: [
-        'tags[]', 'id', 'assignments.start_', 'unitsAnother', 
+        'tags[]', 'id', 'assignments.start_', 'units2', 
         'notes', 'compartment', 'COM', 'nothing',
         'on'
       ]
     };
     species.content = [{
-      'tags[]': '#', 'id': 'Variable name', 'assignments.start_': 'Value', 'unitsAnother': 'Unit', 
+      'tags[]': '#', 'id': 'Variable name', 'assignments.start_': 'Value', 'units2': 'Unit', 
       'notes': 'Description', 'compartment': 'Compartment', 'COM': 'COM', 'nothing': '',
       'on': 'Scenario (2/1/0)'
     }];
@@ -102,13 +102,13 @@ class AnotherXLSXExport extends XLSXExport {
       type: 'sheet',
       name: 'Ps',
       headerSeq: [
-        'tags[]', 'id', 'num', 'unitsAnother',
+        'tags[]', 'id', 'num', 'units2',
         'notes', 'nothing', 'nothing2', 'st',
         'on'
       ]
     };
     parameters.content = [{
-      'tags[]': '#', 'id': 'Parameter name', 'num': 'Value', 'unitsAnother': 'Unit',
+      'tags[]': '#', 'id': 'Parameter name', 'num': 'Value', 'units2': 'Unit',
       'notes': 'Description', 'nothing': '', 'nothing2': '', 'st': 'string type (p/c)',
       'on': 'Scenario (2/1/0)'
     }];
@@ -139,24 +139,24 @@ class AnotherXLSXExport extends XLSXExport {
       type: 'sheet',
       name: 'function units',
       headerSeq: [
-        'tags[]', 'st', 'id', 'unitsAnother'
+        'tags[]', 'st', 'id', 'units2'
       ]
     };
     function_units.content = [{
-      'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'unitsAnother': 'Unit'
+      'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'units2': 'Unit'
     }];
     function_units.content = function_units.content.concat(
       qArr.filter((q) => q.class === 'Record')
         .map((q) => {
           q.st = 'f';
 
-          return _.pick(q, ['tags[]', 'st', 'id', 'unitsAnother']);
+          return _.pick(q, ['tags[]', 'st', 'id', 'units2']);
         })/*,
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
           q.st = 'r';
 
-          return _.pick(q, ['tags[]', 'st', 'id', 'unitsAnother']);
+          return _.pick(q, ['tags[]', 'st', 'id', 'units2']);
         })*/
     );
 

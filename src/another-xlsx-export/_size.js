@@ -1,13 +1,15 @@
 const { _Size } = require('../core/_size');
-//const legalUnits = require('./legal-units');
+const legalUnits = require('./legal-units');
 
-_Size.prototype.toFlat = function(options = {}){
+// old version
+let _toQ = _Size.prototype.toQ;
+// new version
+_Size.prototype.toQ = function(options = {}){
+  let res = _toQ.call(this, options);
 
-  //let res = super.toFlat(options);
-  let res = _Size.__proto__.prototype.toFlat.call(this, options);
-
-  // res.unitsAnother = this.unitsRebased(legalUnits, usePefix = false); // with unit transformation
-  if (this.units) res.unitsAnother = this.units; // units without transformation
+  // unit with transformation to simbio standard
+  // if (options.useAnotherUnits) res.units2 = this.units;
+  if (options.useAnotherUnits) res.units2 = this.unitsRebased(legalUnits, true);
 
   return res;
 };
