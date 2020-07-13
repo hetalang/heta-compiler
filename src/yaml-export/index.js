@@ -16,9 +16,17 @@ class YAMLExport extends _Export {
     return 'YAMLExport';
   }
   make(){
-    let qArr = this.namespace
-      .toQArr(true, { noUnitsExpr: this.noUnitsExpr })
-      .map((q) => this.omit ? _.omit(q, this.omit) : q);
+    // filtered namespaces
+    let nsArray = [...this.container.namespaces]
+      .map((pair) => pair[1]);
+    let nsOutput = typeof this.spaceFilter === 'undefined'
+      ? nsArray
+      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let qArr = _.chain(nsOutput)
+      .map((ns) => ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr }))
+      .flatten()
+      .map((q) => this.omit ? _.omit(q, this.omit) : q)
+      .value();
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);

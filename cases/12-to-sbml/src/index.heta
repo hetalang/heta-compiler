@@ -20,5 +20,6 @@ include first-model.json type json
 
 #export {
   filepath: output,
-  format: JSON
+  format: JSON,
+  spaceFilter: [first]
 };

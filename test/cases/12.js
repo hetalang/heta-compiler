@@ -48,8 +48,9 @@ describe('Testing "cases/12-to-sbml"', () => {
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.exports.JSON;
     let json_export = new JSONExport;
+    json_export.merge({spaceFilter: 'first'});
     json_export._id = 'json_export';
-    json_export.namespace = b.container.namespaces.get('first');
+    json_export.container = b.container;
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);

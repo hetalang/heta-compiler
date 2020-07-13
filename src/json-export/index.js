@@ -8,6 +8,7 @@ class JSONExport extends _Export {
     
     if (q.omit) this.omit = q.omit;
     if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
+    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
 
     return this;
   }
@@ -15,9 +16,17 @@ class JSONExport extends _Export {
     return 'JSONExport';
   }
   make(){
-    let qArr = this.namespace
-      .toQArr(true, { noUnitsExpr: this.noUnitsExpr })
-      .map((q) => this.omit ? _.omit(q, this.omit) : q);
+    // filtered namespaces
+    let nsArray = [...this.container.namespaces]
+      .map((pair) => pair[1]);
+    let nsOutput = typeof this.spaceFilter === 'undefined'
+      ? nsArray
+      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let qArr = _.chain(nsOutput)
+      .map((ns) => ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr }))
+      .flatten()
+      .map((q) => this.omit ? _.omit(q, this.omit) : q)
+      .value();
     
     return [{
       content: JSON.stringify(qArr, null, 2),

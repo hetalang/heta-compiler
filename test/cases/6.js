@@ -44,8 +44,9 @@ describe('Testing "cases/6-import"', () => {
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.exports.JSON;
     let json_export = new JSONExport;
+    json_export.merge({spaceFilter: 'model'});
     json_export._id = 'output_json';
-    json_export.namespace = b.container.namespaces.get('model');
+    json_export.container = b.container;
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);

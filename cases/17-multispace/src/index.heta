@@ -4,8 +4,6 @@
 // add qsp units
 include ./qsp-units.heta
 
-xxx @UnitDef {units: (1e+1 litre)};
-
 comp1 @Compartment .= 1 { units: L };
 s1 @Species { compartment: comp1, units: uM } .= 10;
 r1 @Reaction {
@@ -30,10 +28,15 @@ end
 #export {
   format: JSON,
   filepath: output,
-  spaceFilter: [ nameless ],
+  spaceFilter: [ nameless, one ],
   noUnitsExpr: false
 };
-//#export { format: YAML, filepath: output };
+#export {
+  format: YAML,
+  filepath: output,
+  spaceFilter: [ nameless, one ],
+  noUnitsExpr: false
+};
 //#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
 //#export { format: SBML, filepath: sbml, version: L2V4 };
 //#export { format: SLV, filepath: model, eventsOff: false };
