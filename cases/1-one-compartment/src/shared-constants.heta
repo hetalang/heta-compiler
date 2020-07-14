@@ -36,7 +36,7 @@ end
 //#export {space: one_comp, filepath: sbml_non_saturable, format: SBML};
 //#export {space: one_comp_saturation, filepath: sbml_saturable, format: SBML};
 #export {format: JSON, filepath: json};
-#export {format: SLV, space: one_comp, filepath: slv_non_saturable};
-#export {format: SLV, space: one_comp_saturation, filepath: slv_saturable};
+#export {format: SLV, spaceFilter: one_comp, filepath: slv_non_saturable};
+#export {format: SLV, spaceFilter: one_comp_saturation, filepath: slv_saturable};
 #export {format: Mrgsolve, space: one_comp, filepath: non_saturable};
 #export {format: Mrgsolve, space: one_comp_saturation, filepath: mrg_saturable};

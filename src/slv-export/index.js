@@ -2,7 +2,6 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
-//require('./expression'); // use expression.js from dbsolve-export
 
 class SLVExport extends _Export{
   merge(q = {}, skipChecking){
@@ -10,6 +9,13 @@ class SLVExport extends _Export{
     
     if(q.eventsOff) this.eventsOff = q.eventsOff;
     if(q.defaultTask) this.defaultTask = q.defaultTask;
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
 
     return this;
   }
@@ -22,10 +28,28 @@ class SLVExport extends _Export{
    * @return {string} Text code of exported format.
    */
   make(){
-    this._model_ = this._getSLVImage();
+    // use only one namespace
+    let logger = this.container.logger;
+    if (this.spaceFilter.length === 0) {
+      let msg = 'spaceFilter for SLV format should include at least one namespace but get empty';
+      logger.err(msg);
+      var content = '';
+    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
+      logger.err(msg);
+      content = '';
+    } else {
+      if (this.spaceFilter.length > 1) {
+        let msg = `SLV format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        logger.warn(msg);
+      }
+      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let image = this.getSLVImage(ns);
+      content = this.getSLVCode(image);
+    }
 
     return [{
-      content: this.getSLVCode(),
+      content: content,
       pathSuffix: '.slv',
       type: 'text'
     }];
@@ -36,11 +60,11 @@ class SLVExport extends _Export{
    *
    * @return {undefined}
    */
-  _getSLVImage(){
+  getSLVImage(ns){
     let logger = _.get(this, 'namespace.container.logger');
     // creates empty model image
     let model = {
-      population: this.namespace
+      population: ns
     };
 
     // push active processes
@@ -145,16 +169,16 @@ class SLVExport extends _Export{
       .selectByClassName('CSwitcher')
       .map((switcher) => switcher.id);
     if(bagSwitchers.length > 0){
-      let logger = this.namespace.container.logger;
+      let logger = ns.container.logger;
       logger.error('CSwitcher is not supported in SLVExport: ' + bagSwitchers, 'ExportError');
     }
     
     return model;
   }
-  getSLVCode(){
+  getSLVCode(image = {}){
     return nunjucks.render(
       'blocks-template.slv.njk',
-      this
+      image
     );
   }
   toQ(options = {}){

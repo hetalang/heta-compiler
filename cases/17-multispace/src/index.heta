@@ -58,7 +58,12 @@ end
   version: L2V4,
   spaceFilter: [one, nameless]
 };
-//#export { format: SLV, filepath: model, eventsOff: false };
+#export {
+  format: SLV,
+  filepath: model,
+  eventsOff: false,
+  //spaceFilter: one
+};
 //#export { format: DBSolve, filepath: dbsolve };
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };

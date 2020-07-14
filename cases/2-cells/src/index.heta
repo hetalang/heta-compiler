@@ -47,8 +47,8 @@ end
 
 #export {space: invitro, format: YAML, filepath: yaml_invitro};
 #export {space: invivo, format: YAML, filepath: yaml_invivo};
-#export {space: invitro, format: SLV, filepath: slv_invitro};
-#export {space: invivo, format: SLV, filepath: slv_invivo};
+#export {spaceFilter: invitro, format: SLV, filepath: slv_invitro};
+#export {spaceFilter: invivo, format: SLV, filepath: slv_invivo};
 #export {space: invitro, format: Mrgsolve, filepath: mrg_invitro};
 #export {space: invivo, format: Mrgsolve, filepath: mrg_invivo};
 #export {space: invitro, format: SBML, filepath: sbml_invitro};

@@ -22,6 +22,6 @@ namespace one_comp begin
 end
 
 //#export {space: one_comp, filepath: sbml, format: SBML};
-#export {space: one_comp, filepath: json, format: JSON};
-#export {space: one_comp, filepath: slv, format: SLV};
+#export {spaceFilter: one_comp, filepath: json, format: JSON};
+#export {spaceFilter: one_comp, filepath: slv, format: SLV};
 

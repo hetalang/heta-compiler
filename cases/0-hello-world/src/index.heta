@@ -50,7 +50,7 @@ end
   filepath: full_yaml,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: SLV,
   filepath: mm_slv,
 };

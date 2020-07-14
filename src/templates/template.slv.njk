@@ -1,10 +1,10 @@
-{%- set compartments = _model_.population.selectByClassName('Compartment') -%}
-{%- set freeConstants = _model_.population.selectByClassName("Const") | selectattr("free") -%}
+{%- set compartments = population.selectByClassName('Compartment') -%}
+{%- set freeConstants = population.selectByClassName("Const") | selectattr("free") -%}
 DBSolve Optimum (new parser) 1 Jul 2006
 SLV25.00*
-Number of rows in matrix (Number of activities) #{{ _model_.processes|length }}
-Number of cols in matrix (Number of compounds) #{{ _model_.variables|length }}
-Initial System dimension #{{ _model_.variables|length }}
+Number of rows in matrix (Number of activities) #{{ processes|length }}
+Number of cols in matrix (Number of compounds) #{{ variables|length }}
+Initial System dimension #{{ variables|length }}
 Selected Variable(Always TIME for ODE) #3
 Maximum Value of the Selected Variable #1.000000e+02
 Minimum Value of the Selected Variable #0.000000e+00
@@ -118,18 +118,18 @@ Indexes of Mechanisms
 #0  0
 Cleland Indexes 1->A 2->B 3->C -1->P -2->Q
 #0 0 0
-Elementary constants{% for reaction in _model_.processes %}
+Elementary constants{% for reaction in processes %}
 #0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00{% endfor %}
-Kinetic constants{% for reaction in _model_.processes %}
+Kinetic constants{% for reaction in processes %}
 #0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00{% endfor %}
 X Concentration
 #0.000000e+00  0.000000e+00  0.000000e+00
 Organism Indexes(only for Enzymes)
 #0 0
 >Tigr_Sequence_IDs
-{% for reaction in _model_.processes %}#
+{% for reaction in processes %}#
 {% endfor %}>E.coli_Ids
-{% for reaction in _model_.processes %}#
+{% for reaction in processes %}#
 {% endfor %}>Similarity_Comment_IDs
 #0 0
 FamilyOption
@@ -288,11 +288,11 @@ Z axis FIT#
 #P[{{ loop.index }}]
 {%- endfor %}
 >Compound Selkov Names
-{% for compound in _model_.variables %}#
+{% for compound in variables %}#
 {% endfor %}>Selkov Location
-{% for compound in _model_.variables %}#
+{% for compound in variables %}#
 {% endfor %}>Selkov ReactionName
-{% for reaction in _model_.processes %}#
+{% for reaction in processes %}#
 {% endfor %}Metabolic Regulation ReactionName
 #0 0
 Metabolic Regulation CompoundName
@@ -329,7 +329,7 @@ InteractionNetwork
 <PIN->Type
 #
 <Metabolic model Dimension
-#{{ _model_.processes|length }} {{ _model_.variables|length }}
+#{{ processes|length }} {{ variables|length }}
 <Total Cellular Model Dimension
 #0 0
 <Total Cellular Process Names
@@ -361,7 +361,7 @@ InteractionNetwork
 <P Index Protein
 #
 <M Reaction Laws
-{% for compound in _model_.variables %}#
+{% for compound in variables %}#
 
 {% endfor %}<P Use User's mechanisms
 #0 0
@@ -528,12 +528,12 @@ PIN->UserLaws
 <P Use User's mechanisms
 #
 FBA internal fluxes constraints
-{% for reaction in _model_.processes %}#0 0.000000e+00  0 0.000000e+00  0 0.000000e+00
+{% for reaction in processes %}#0 0.000000e+00  0 0.000000e+00  0 0.000000e+00
 {% endfor %}External metabolites
 #0  0  0
 Exchange fluxes direction
 #0  0  0
-Exchange fluxes constraints{% for compound in _model_.variables %}
+Exchange fluxes constraints{% for compound in variables %}
 #0 0.000000e+00  0 0.000000e+00  0 0.000000e+00{% endfor %}
 Metabolites biomass composition
 #0  0  0
@@ -615,24 +615,24 @@ false{% endfor %}
 1.00{% endfor %}
 {{ compartments|length }}{% for compartment in compartments %}
 3{% endfor %}
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 {{ compound.id }}{% endfor %}
 0
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 {% if compound.className!=='Species' or compound.isAmount %}default_compartment_{% else %}{{ compound.compartment }}{% endif %}{% endfor %}
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 0.0{% endfor %}
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 0.000000{% endfor %}
 0
 0
 0
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 false{% endfor %}
 0
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 false{% endfor %}
-{{ _model_.variables|length }}{% for compound in _model_.variables %}
+{{ variables|length }}{% for compound in variables %}
 false{% endfor %}
 0
 0
