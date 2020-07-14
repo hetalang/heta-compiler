@@ -60,7 +60,7 @@ end
   filepath: mm_julia,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: DBSolve,
   filepath: mm_dbsolve,
 };

@@ -7,6 +7,14 @@ require('./expression');
 class DBSolveExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
+
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
     
     if (q.defaultTask) this.defaultTask = q.defaultTask;
 
@@ -18,11 +26,29 @@ class DBSolveExport extends _Export{
    * @return {string} Text code of exported format.
    */
   make(){
-    let image = this.getSLVImage();
+    // use only one namespace
+    let logger = this.container.logger;
+    if (this.spaceFilter.length === 0) {
+      let msg = 'spaceFilter for SBML format should include at least one namespace but get empty';
+      logger.err(msg);
+      var content = '';
+    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
+      logger.err(msg);
+      content = '';
+    } else {
+      if (this.spaceFilter.length > 1) {
+        let msg = `SBML format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        logger.warn(msg);
+      }
+      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let image = this.getSLVImage(ns);
+      content = this.getSLVCode(image);
+    }
 
     return [
       {
-        content: this.getSLVCode(image),
+        content: content,
         pathSuffix: '/model.slv',
         type: 'text'
       }
@@ -34,14 +60,14 @@ class DBSolveExport extends _Export{
    *
    * @return {undefined}
    */
-  getSLVImage(){
+  getSLVImage(ns){
     // creates model image
     let image = {
-      population: this.namespace
+      population: ns
     };
 
     // push active processes
-    image.processes = this.namespace
+    image.processes = ns
       .selectByInstanceOf('Process')
       .filter((x) => {
         return x.actors.length > 0 // process with actors
@@ -50,15 +76,15 @@ class DBSolveExport extends _Export{
           });
       });
     // push non boundary ode variables which are mentioned in processes
-    image.dynamicRecords = this.namespace
+    image.dynamicRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => x.isDynamic);
     /*
-    image.staticRecords = this.namespace
+    image.staticRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => !x.isDynamic && !x.isRule);
     */
-    image.initRecords = this.namespace // XXX: do we need this?
+    image.initRecords = ns // XXX: do we need this?
       .sortExpressionsByContext('start_', true)
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule)); 
     // create matrix
@@ -74,14 +100,14 @@ class DBSolveExport extends _Export{
     });
 
     // create and sort expressions for RHS (rules)
-    image.ruleRecords = this.namespace
+    image.ruleRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.isDynamic || x.isRule );
 
     // create TimeEvents
     image.events = [];
     image.eventCounter = 0;
-    this.namespace
+    ns
       .selectByInstanceOf('TimeSwitcher')
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
@@ -89,7 +115,7 @@ class DBSolveExport extends _Export{
         let period = switcher.periodObj === undefined || _.get(switcher, 'repeatCountObj.num') === 0
           ? 0
           : switcher.getPeriod();
-        this.namespace
+        ns
           .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
             let expr = record.instanceOf('Species') && !record.isAmount
@@ -122,11 +148,11 @@ class DBSolveExport extends _Export{
       });
 
     // search for CSwitcher
-    let bagSwitchers = this.namespace
+    let bagSwitchers = ns
       .selectByClassName('CSwitcher')
       .map((switcher) => switcher.id);
     if (bagSwitchers.length > 0) {
-      let logger = this.namespace.container.logger;
+      let logger = this.container.logger;
       logger.error('CSwitcher is not supported in format DBSolve: ' + bagSwitchers, 'ExportError');
     }
     

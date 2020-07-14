@@ -62,8 +62,13 @@ end
   format: SLV,
   filepath: model,
   eventsOff: false,
-  //spaceFilter: one
+  spaceFilter: one
 };
-//#export { format: DBSolve, filepath: dbsolve };
+#export {
+  format: DBSolve,
+  filepath: model_dbs,
+  eventsOff: false,
+  spaceFilter: one
+};
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };
