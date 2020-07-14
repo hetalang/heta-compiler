@@ -6,6 +6,13 @@ const legalUnits = require('./legal-units');
 class SimbioExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
 
     return this;
   }
@@ -13,11 +20,29 @@ class SimbioExport extends _Export{
     return 'SimbioExport';
   }
   make(){
-    let image = this._getSimbioImage();
+    // use only one namespace
+    let logger = this.container.logger;
+    if (this.spaceFilter.length === 0) {
+      let msg = 'spaceFilter for Simbio format should include at least one namespace but get empty';
+      logger.err(msg);
+      var content = '';
+    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
+      logger.err(msg);
+      content = '';
+    } else {
+      if (this.spaceFilter.length > 1) {
+        let msg = `Simbio format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        logger.warn(msg);
+      }
+      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let image = this.getSimbioImage(ns);
+      content = this.getSimbioCode(image);
+    }
 
     return [
       {
-        content: this.getSimbioCode(image),
+        content: content,
         pathSuffix: '/model.m',
         type: 'text'
       },
@@ -28,10 +53,10 @@ class SimbioExport extends _Export{
       }
     ];
   }
-  _getSimbioImage(){
+  getSimbioImage(ns){
     // check stop in @TimeSwitcher
-    let logger = this.namespace.container.logger;
-    this.namespace
+    let logger = ns.container.logger;
+    ns
       .selectByInstanceOf('TimeSwitcher')
       .filter((ts) => typeof ts.stopObj !== 'undefined')
       .forEach((ts) => {
@@ -40,7 +65,7 @@ class SimbioExport extends _Export{
       });
 
     return {
-      population: this.namespace,
+      population: ns,
       legalUnits: legalUnits
     };
   }

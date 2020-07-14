@@ -61,9 +61,9 @@ namespace mod1 begin
   };
 end
 
-#export {space: mod1, filepath: mod1_sbml, format: SBML};
+#export {spaceFilter: mod1, filepath: mod1_sbml, format: SBML};
 #export {space: mod1, filepath: mod1_simbio, format: Simbio};
-#export {space: mod1, filepath: json, format: JSON};
-#export {space: mod1, filepath: yaml, format: YAML};
+#export {spaceFilter: mod1, filepath: json, format: JSON};
+#export {spaceFilter: mod1, filepath: yaml, format: YAML};
 #export {spaceFilter: mod1, filepath: mod1_slv, format: SLV};
 #export {space: mod1, filepath: mod1_mrg, format: Mrgsolve};

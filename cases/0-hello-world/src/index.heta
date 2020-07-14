@@ -35,17 +35,17 @@ end
   eventsOff: true
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: Simbio,
   filepath: mm_simbio,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: JSON,
   filepath: full_json,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: YAML,
   filepath: full_yaml,
 };

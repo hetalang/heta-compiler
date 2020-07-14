@@ -70,5 +70,9 @@ end
   eventsOff: false,
   spaceFilter: one
 };
-//#export { format: Simbio, filepath: simbio };
+#export {
+  format: Simbio,
+  filepath: simbio,
+  spaceFilter: one
+};
 //#export { format: Mrgsolve, filepath: mrgsolve };

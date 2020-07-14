@@ -82,9 +82,9 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
 | eventsOff | boolean | | | | if `eventsOff = true` the switchers will not be exported to DBSolve events. |
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
 
@@ -106,7 +106,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 #export {
     format: SLV,
     filepath: model, // save results in file "dist/model.slv"
-    space: nameless, // namespace used for model generation
+    spaceFilter: nameless, // namespace used for model generation
     eventsOff: false, // all switchers will be transformed to DBSolve events
     powTransform: keep // use x^y and pow(x, y) without changes
 };
@@ -122,8 +122,8 @@ This is the updated version of SLV export format which supports compartment volu
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
 
@@ -143,7 +143,7 @@ This is the updated version of SLV export format which supports compartment volu
 #export {
     format: DBSolve,
     filepath: model, // save results in file "dist/model.slv"
-    space: nameless, // namespace used for model generation
+    spaceFilter: nameless, // namespace used for model generation
     powTransform: keep // use x^y and pow(x, y) without changes
 };
 ```
@@ -156,8 +156,8 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
 | version | string | | L2V4 | | SBML version in format: `L2V4` |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
 
@@ -174,7 +174,7 @@ Export to [SBML format](http://sbml.org/Main_Page).
 #export {
     format: SBML,
     filepath: model, // save results in file "dist/model.xml"
-    space: nameless, // namespace used for model generation
+    spaceFilter: nameless, // namespace used for model generation
     version: L2V4 // Level 2 Version 4
 };
 ```
@@ -187,7 +187,7 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
 
@@ -204,7 +204,7 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 #export {
     format: Simbio,
     filepath: model, // save results in directory "dist/model"
-    space: nameless // namespace used for model generation
+    spaceFilter: nameless // namespace used for model generation
 };
 ```
 
@@ -216,7 +216,7 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
 
@@ -234,7 +234,7 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 #export {
     format: Mrgsolve,
     filepath: model, // save results in file "dist/model.cpp"
-    space: nameless // namespace used for model generation
+    spaceFilter: nameless // namespace used for model generation
 };
 ```
 
@@ -246,7 +246,6 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
 | omitRows | number | | | | If set this creates empty rows in output sheets. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | splitByClass | boolean | | | | If `true` the components will be splitted by class and saved as several sheets: one sheet per a class. |
@@ -281,7 +280,7 @@ Creation of Julia files (.jl) supported by SimSolver.
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Known restrictions
 
@@ -302,7 +301,7 @@ Creation of Julia files (.jl) supported by SimSolver.
 #export {
     format: Julia,
     filepath: julia_code, // save result in directory "dist/julia_code"
-    space: nameless // create model based on nameless namespace
+    spaceFilter: nameless // create model based on nameless namespace
 };
 ```
 
@@ -314,7 +313,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| space | string | true | nameless | | Name of namespace to export. |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
 
@@ -333,7 +332,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 #export {
     format: Matlab,
     filepath: matlab_code, // save result in directory "dist/matlab_code"
-    space: nameless // create model based on nameless namespace
+    spaceFilter: nameless // create model based on nameless namespace
 };
 ```
 
