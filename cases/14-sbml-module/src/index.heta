@@ -27,6 +27,6 @@ end
 };
 #export {
   filepath: sbml_two,
-  space: two,
+  spaceFilter: two,
   format: SBML
 };

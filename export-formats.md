@@ -24,7 +24,7 @@ The general format for all export actions is the following:
 
 ## JSON
 
-Export to [JSON structure](https://www.json.org/) (array) storing the content of selected namespace.
+Export to [JSON structure](https://www.json.org/) (array) storing the content of whole platform or selected namespaces (see spaceFilter option).
 
 ### Properties
 
@@ -32,7 +32,7 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
 | ---------|------|----------|---------|-----|-------------|
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | noUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr. If `true` all unit will be written in Unit array format. |
-| spaceFilter | ID[] | | | namespace | namespaces out of the list will be skipped. |
+| spaceFilter | ID[]/ID | | | namespace | if set, namespaces out of the list will be skipped. |
 
 ### Output files
 
@@ -250,7 +250,7 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 | omitRows | number | | | | If set this creates empty rows in output sheets. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | splitByClass | boolean | | | | If `true` the components will be splitted by class and saved as several sheets: one sheet per a class. |
-| spaceFilter | ID[] | | | namespace | namespaces out of the list will be skipped. |
+| spaceFilter | ID[]/ID | | | namespace | if set, namespaces out of the list will be skipped. |
 
 ### Output files
 
@@ -266,7 +266,7 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 #export {
     format: XLSX,
     filepath: output, // save result in file "dist/output.xlsx"
-    spaceFilter: [ nameless ], // output all from nameless namespace
+    spaceFilter: nameless, // output all from nameless namespace
     omitRows: 5, // include 5 empty rows between header and the first line
     omit: [aux.wiki], // omit aux.wiki properties from components
     splitByClass: true // split classed to different sheets

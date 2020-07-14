@@ -37,7 +37,8 @@ describe('Testing "cases/12-to-sbml"', () => {
   it('Run @SBMLExport, check and compare.', () => {
     const SBMLExport = b.container.exports.SBML;
     let sbml_export = new SBMLExport;
-    sbml_export.namespace = b.container.namespaces.get('first');
+    sbml_export.merge({spaceFilter: 'first'});
+    sbml_export.container = b.container;
 
     let code = sbml_export.make()[0].content;
     expect(code).xml.to.to.be.valid();

@@ -29,7 +29,7 @@ end
 };
 
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: SBML,
   filepath: mm_sbml,
   eventsOff: true

@@ -34,7 +34,7 @@ end
 #export {
   format: YAML,
   filepath: output,
-  spaceFilter: [ nameless, one ],
+  spaceFilter: nameless,
   noUnitsExpr: false
 };
 #export {
@@ -52,7 +52,12 @@ end
   spaceFilter: [ nameless, one ]
 };
 
-//#export { format: SBML, filepath: sbml, version: L2V4 };
+#export {
+  format: SBML,
+  filepath: sbml,
+  version: L2V4,
+  spaceFilter: [one, nameless]
+};
 //#export { format: SLV, filepath: model, eventsOff: false };
 //#export { format: DBSolve, filepath: dbsolve };
 //#export { format: Simbio, filepath: simbio };

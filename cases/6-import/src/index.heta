@@ -24,7 +24,7 @@ namespace model begin
   Km_A @Const = 0.8;
 end
 
-#export { format: SBML, version: L2V4, space: model, filepath: output_sbml };
+#export { format: SBML, version: L2V4, spaceFilter: model, filepath: output_sbml };
 #export { format: JSON, spaceFilter: [model], filepath: output_json };
 
 #delete RateLaws::mm;

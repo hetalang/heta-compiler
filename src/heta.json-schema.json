@@ -317,7 +317,10 @@
         "omitRows": { "type": "number" },
         "splitByClass": { "type": "boolean" },
         "noUnitsExpr": { "type": "boolean" },
-        "spaceFilter": { "type": "array", "items": { "$ref": "#/definitions/ID" } }
+        "spaceFilter": { "oneOf": [
+          { "type": "array", "items": { "$ref": "#/definitions/ID" } },
+          { "$ref": "#/definitions/ID" }
+        ]}
       }
     },
 
