@@ -119,14 +119,7 @@ class MrgsolveExport extends _Export {
       image
     );
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-
-    return res;
-  }
 }
-
-MrgsolveExport._requirements = { };
 
 Container.prototype.exports.Mrgsolve = MrgsolveExport;
 

@@ -37,8 +37,8 @@ describe('Testing "cases/12-to-sbml"', () => {
   it('Run @SBMLExport, check and compare.', () => {
     const SBMLExport = b.container.exports.SBML;
     let sbml_export = new SBMLExport;
-    sbml_export.merge({spaceFilter: 'first'});
     sbml_export.container = b.container;
+    sbml_export.merge({spaceFilter: 'first'});
 
     let code = sbml_export.make()[0].content;
     expect(code).xml.to.to.be.valid();
@@ -49,9 +49,8 @@ describe('Testing "cases/12-to-sbml"', () => {
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.exports.JSON;
     let json_export = new JSONExport;
-    json_export.merge({spaceFilter: 'first'});
-    json_export._id = 'json_export';
     json_export.container = b.container;
+    json_export.merge({spaceFilter: 'first'});
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);

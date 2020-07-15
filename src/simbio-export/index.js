@@ -81,14 +81,7 @@ class SimbioExport extends _Export{
       this
     );
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-
-    return res;
-  }
 }
-
-SimbioExport._requirements = { };
 
 Container.prototype.exports.Simbio = SimbioExport;
 

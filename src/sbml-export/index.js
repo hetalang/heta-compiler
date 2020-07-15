@@ -75,14 +75,7 @@ class SBMLExport extends _Export {
       image
     );
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-
-    return res;
-  }
 }
-
-SBMLExport._requirements = { };
 
 Container.prototype.exports.SBML = SBMLExport;
 

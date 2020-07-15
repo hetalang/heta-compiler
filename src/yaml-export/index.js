@@ -44,10 +44,6 @@ class YAMLExport extends _Export {
       type: 'text'
     }];
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-    return res;
-  }
 }
 
 function fromOrderToCompare(order=[]){

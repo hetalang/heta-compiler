@@ -34,10 +34,6 @@ class JSONExport extends _Export {
       type: 'text'
     }];
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-    return res;
-  }
 }
 
 Container.prototype.exports.JSON = JSONExport;

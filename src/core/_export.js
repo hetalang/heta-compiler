@@ -1,5 +1,4 @@
 const { Component } = require('./component');
-const _ = require('lodash');
 
 /*
   _Export class
@@ -15,8 +14,7 @@ class _Export extends Component {
     this.powTransform = 'keep';
   }
   merge(q = {}){
-    super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.container.logger;
     let valid = _Export.isValid(q, logger);
 
     if (valid) {
@@ -42,20 +40,6 @@ class _Export extends Component {
   make(){
     throw new TypeError(`No method make() for "${this.className}"`);
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-    if(this.filepath) res.filepath = this.filepath;
-    if(this.powTransform!=='keep') res.powTransform = this.powTransform;
-
-    return res;
-  }
 }
-
-_Export._requirements = {
-  defaultTask: { 
-    required: false,
-    isReference: true, targetClass: 'SimpleTask', setTarget: true 
-  }
-};
 
 module.exports = { _Export };

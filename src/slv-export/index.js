@@ -181,16 +181,7 @@ class SLVExport extends _Export{
       image
     );
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-    if(this.eventsOff) res.eventsOff = this.eventsOff;
-    if(this.defaultTask) res.defaultTask = this.defaultTask;
-    
-    return res;
-  }
 }
-
-SLVExport._requirements = { };
 
 Container.prototype.exports.SLV = SLVExport;
 

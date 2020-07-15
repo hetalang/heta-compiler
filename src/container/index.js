@@ -363,12 +363,6 @@ class Container {
   }
   */
   export(q = {}){
-    let space = q.space || 'nameless';
-    let namespace = this.namespaces.get(space); // TODO: this is not required because of multispace export
-    if (namespace === undefined) {
-      this.logger.error(`#export action is reffered to namespace "${space}", which is not set.`, 'QueueError');
-      return;
-    }
     if (q.format === undefined) {
       this.logger.error('Empty format option in #export', 'QueueError');
       return;
@@ -383,9 +377,8 @@ class Container {
     }
 
     // normal flow
-    let exportInstance = new this.exports[q.format]();
+    let exportInstance = new this.exports[q.format];
     exportInstance.container = this;
-    exportInstance.namespace = namespace; // TODO: this is not required because of multispace export
     exportInstance.merge(q);
     // push to storage
     this.exportStorage.push(exportInstance);

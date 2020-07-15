@@ -83,12 +83,6 @@ class XLSXExport extends _Export {
       }];
     }
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-    if(this.omitRows) res.omitRows = this.omitRows;
-    if(this.splitByClass) res.splitByClass = this.splitByClass;
-    return res;
-  }
 }
 
 Container.prototype.exports.XLSX = XLSXExport;
