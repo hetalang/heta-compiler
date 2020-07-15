@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.5.7
+
+- add spaceFilter for SLV, DBSolve, Simbio, Matlab, SBML
+- fix UnitsExpr: empty units prop, dot in string
+- output all dynamic in SLV, DBSolve
+
 ## 0.5.6 - multispace export
 
 - default export of `units` as UnitExpr in `@UnitDef`
