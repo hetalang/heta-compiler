@@ -5,15 +5,52 @@ const pkg = require('../../package');
 const _ = require('lodash');
 
 class MatlabExport extends _Export {
+  merge(q = {}, skipChecking){
+    super.merge(q, skipChecking);
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
+
+    return this;
+  }
   get className(){
     return 'MatlabExport';
   }
   make(){
-    let image = this.getMatlabImage();
+    // use only one namespace
+    let logger = this.container.logger;
+    if (this.spaceFilter.length === 0) {
+      let msg = 'spaceFilter for SBML format should include at least one namespace but get empty';
+      logger.err(msg);
+      var modelContent = '';
+      var paramContent = '';
+      var runContent = '';
+    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
+      logger.err(msg);
+      modelContent = '';
+      paramContent = '';
+      runContent = '';
+    } else {
+      if (this.spaceFilter.length > 1) {
+        let msg = `SBML format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        logger.warn(msg);
+      }
+      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let image = this.getMatlabImage(ns);
+
+      modelContent = this.getModelCode(image);
+      paramContent = this.getParamCode(image);
+      runContent = this.getRunCode(image);
+    }
 
     return [
       {
-        content: this.getModelCode(image),
+        content: modelContent,
         pathSuffix: '/model.m',
         type: 'text'
       },
@@ -23,32 +60,32 @@ class MatlabExport extends _Export {
         type: 'text'
       },*/
       {
-        content: this.getParamCode(image),
+        content: paramContent,
         pathSuffix: '/param.m',
         type: 'text'
       },
       {
-        content: this.getRunCode(image),
+        content: runContent,
         pathSuffix: '/run.m',
         type: 'text'
       }
     ];
   }
-  getMatlabImage(){
+  getMatlabImage(ns){
     let builderName = pkg.name + ' of v' + pkg.version;
     
     // constants
-    let constants = this.namespace
+    let constants = ns
       .selectByInstanceOf('Const');
     // ODE variables
-    let dynamicRecords = this.namespace.toArray()
+    let dynamicRecords = ns.toArray()
       .filter((x) => x.instanceOf('Record') && !x.isRule);
     // initialize at start records
-    let initRecords = this.namespace
+    let initRecords = ns
       .sortExpressionsByContext('start_')
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
     // currently we output all records
-    let outputRecords = this.namespace
+    let outputRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.instanceOf('Record'));
     // RHS of ODE
@@ -79,7 +116,7 @@ class MatlabExport extends _Export {
       .map((x, i) => [x.id, `p(${i+1})`]);
 
     // create events from switchers
-    let events = this.namespace
+    let events = ns
       .selectByInstanceOf('TimeSwitcher')
       .map((switcher) => {
         let affect = switcher.namespace.toArray()
@@ -94,7 +131,7 @@ class MatlabExport extends _Export {
     return { 
       builderName,
       options: this,
-      namespace: this.namespace, // set externally in Container
+      namespace: ns, // set externally in Container
       constants,
       dynamicRecords,
       rhs,

@@ -70,7 +70,7 @@ end
   filepath: mm_mrg,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: Matlab,
   filepath: matlab1,
 };

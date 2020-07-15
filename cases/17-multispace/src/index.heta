@@ -75,4 +75,9 @@ end
   filepath: simbio,
   spaceFilter: one
 };
+#export {
+  format: Matlab,
+  filepath: matlab,
+  spaceFilter: nameless
+};
 //#export { format: Mrgsolve, filepath: mrgsolve };
