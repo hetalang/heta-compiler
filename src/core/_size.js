@@ -22,7 +22,7 @@ class _Size extends Component {
     let valid = _Size.isValid(q, logger);
 
     if (valid) {
-      if (q.units !== undefined) {
+      if (q.units) {
         if (typeof q.units === 'string')
           this.unitsParsed = Unit.parse(q.units);
         else
