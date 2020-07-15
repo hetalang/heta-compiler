@@ -38,8 +38,8 @@ mm::sim_task1 @SimpleTask {
   solver: { dtmax: 12 }
 };
 
-#export { space: mm, filepath: mm_sbml, format: SBML };
-#export { space: mm, filepath: full_json, format: JSON };
-#export { space: mm, filepath: full_yaml, format: YAML };
+#export { spaceFilter: mm, filepath: mm_sbml, format: SBML };
+#export { spaceFilter: mm, filepath: full_json, format: JSON };
+#export { spaceFilter: mm, filepath: full_yaml, format: YAML };
 #export { spaceFilter: mm, filepath: mm_slv, format: SLV }; /* defaultTask: sim_task1 */
-#export { space: mm, filepath: mm_mrg, format: Mrgsolve };
+#export { spaceFilter: mm, filepath: mm_mrg, format: Mrgsolve };

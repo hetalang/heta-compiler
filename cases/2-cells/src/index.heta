@@ -45,12 +45,12 @@ namespace invivo begin
     ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
 
-#export {space: invitro, format: YAML, filepath: yaml_invitro};
-#export {space: invivo, format: YAML, filepath: yaml_invivo};
+#export {spaceFilter: invitro, format: YAML, filepath: yaml_invitro};
+#export {spaceFilter: invivo, format: YAML, filepath: yaml_invivo};
 #export {spaceFilter: invitro, format: SLV, filepath: slv_invitro};
 #export {spaceFilter: invivo, format: SLV, filepath: slv_invivo};
-#export {space: invitro, format: Mrgsolve, filepath: mrg_invitro};
-#export {space: invivo, format: Mrgsolve, filepath: mrg_invivo};
-#export {space: invitro, format: SBML, filepath: sbml_invitro};
-#export {space: invivo, format: SBML, filepath: sbml_invivo};
+#export {spaceFilter: invitro, format: Mrgsolve, filepath: mrg_invitro};
+#export {spaceFilter: invivo, format: Mrgsolve, filepath: mrg_invivo};
+#export {spaceFilter: invitro, format: SBML, filepath: sbml_invitro};
+#export {spaceFilter: invivo, format: SBML, filepath: sbml_invivo};
 

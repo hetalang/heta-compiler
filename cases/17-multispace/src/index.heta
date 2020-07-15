@@ -80,4 +80,8 @@ end
   filepath: matlab,
   spaceFilter: nameless
 };
-//#export { format: Mrgsolve, filepath: mrgsolve };
+#export {
+  format: Mrgsolve,
+  filepath: mrgsolve,
+  spaceFilter: nameless
+};

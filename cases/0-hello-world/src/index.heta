@@ -65,7 +65,7 @@ end
   filepath: mm_dbsolve,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: Mrgsolve,
   filepath: mm_mrg,
 };
