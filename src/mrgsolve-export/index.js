@@ -24,7 +24,7 @@ class MrgsolveExport extends _Export {
     // use only one namespace
     let logger = this.container.logger;
     if (this.spaceFilter.length === 0) {
-      let msg = 'spaceFilter for SBML format should include at least one namespace but get empty';
+      let msg = 'spaceFilter for Mrgsolve format should include at least one namespace but get empty';
       logger.err(msg);
       var content = '';
     } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
@@ -33,7 +33,7 @@ class MrgsolveExport extends _Export {
       content = '';
     } else {
       if (this.spaceFilter.length > 1) {
-        let msg = `SBML format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        let msg = `Mrgsolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
       let ns = this.container.namespaces.get(this.spaceFilter[0]);

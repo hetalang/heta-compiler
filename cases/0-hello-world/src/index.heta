@@ -55,7 +55,7 @@ end
   filepath: mm_slv,
 };
 #export {
-  space: mm,
+  spaceFilter: mm,
   format: Julia,
   filepath: mm_julia,
 };

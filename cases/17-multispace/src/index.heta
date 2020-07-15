@@ -85,3 +85,8 @@ end
   filepath: mrgsolve,
   spaceFilter: nameless
 };
+#export {
+  format: Julia,
+  filepath: julia,
+  spaceFilter: nameless
+};

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.8
+
+- add spaceFilter for Mrgsolve, Julia
+
 ## 0.5.7
 
 - add spaceFilter for SLV, DBSolve, Simbio, Matlab, SBML

@@ -6,45 +6,79 @@ const _ = require('lodash');
 require('./expression'); // to use method toJuliaString()
 
 class JuliaExport extends _Export {
+  merge(q = {}, skipChecking){
+    super.merge(q, skipChecking);
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
+
+    return this;
+  }
   get className(){
     return 'JuliaExport';
   }
   make(){
-    let image = this.getJuliaImage();
+    // use only one namespace
+    let logger = this.container.logger;
+    if (this.spaceFilter.length === 0) {
+      let msg = 'spaceFilter for Julia format should include at least one namespace but get empty';
+      logger.err(msg);
+      var modelContent = '';
+      var runContent = '';
+    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
+      logger.err(msg);
+      modelContent = '';
+      runContent = '';
+    } else {
+      if (this.spaceFilter.length > 1) {
+        let msg = `Julia format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        logger.warn(msg);
+      }
+      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+     
+      let image = this.getJuliaImage(ns);
+      modelContent = this.getModelCode(image);
+      runContent = this.getRunCode(image);
+    }
 
     return [
       {
-        content: this.getModelCode(image),
+        content: modelContent,
         pathSuffix: '/model.jl',
         type: 'text'
       },
       {
-        content: this.getRunCode(image),
+        content: runContent,
         pathSuffix: '/run.jl',
         type: 'text'
       }
     ];
   }
-  getJuliaImage(){
+  getJuliaImage(ns){
     let builderName = pkg.name + ' of v' + pkg.version;
-    let namespace = this.namespace;
+    
     // constants
-    let constants = this.namespace
+    let constants = ns
       .selectByInstanceOf('Const');
     // ODE variables
-    let dynamicRecords = this.namespace.toArray()
+    let dynamicRecords = ns.toArray()
       .filter((x) => x.instanceOf('Record') && x.isDynamic);
-    let notDynamicRecords = this.namespace.toArray()
+    let notDynamicRecords = ns.toArray()
       .filter((x) => x.instanceOf('Record') && !x.isDynamic);
     // initialize at start records
-    let initRecords = this.namespace
+    let initRecords = ns
       .sortExpressionsByContext('start_')
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
     // currently we output all records
-    let ruleRecords = this.namespace
+    let ruleRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.instanceOf('Record'));
-    let staticRecords = this.namespace
+    let staticRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => !x.isDynamic && !x.isRule);
     // RHS of ODE
@@ -77,10 +111,10 @@ class JuliaExport extends _Export {
       });
 
     // create events from switchers
-    let events = this.namespace
+    let events = ns
       .selectByInstanceOf('_Switcher')
       .map((switcher) => {
-        let affect = switcher.namespace.toArray()
+        let affect = ns.toArray()
           .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));
         
         return {
@@ -95,7 +129,7 @@ class JuliaExport extends _Export {
     return { 
       builderName,
       options: this,
-      namespace,
+      namespace: ns,
       constants,
       dynamicRecords,
       notDynamicRecords,
