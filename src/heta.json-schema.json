@@ -316,6 +316,7 @@
         "omitRows": { "type": "number" },
         "splitByClass": { "type": "boolean" },
         "noUnitsExpr": { "type": "boolean" },
+        "version": {"type": "string", "pattern": "^L[123]V[12345]$"},
         "spaceFilter": { "oneOf": [
           { "type": "array", "items": { "$ref": "#/definitions/ID" } },
           { "$ref": "#/definitions/ID" }

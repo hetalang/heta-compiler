@@ -7,6 +7,12 @@ const legalUnits = require('./legal-units');
 class SBMLExport extends _Export {
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
+    if (typeof q.version !== 'undefined') {
+      this.version = q.version;
+    } else {
+      this.version = 'L2V4';
+    } 
+
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -70,10 +76,24 @@ class SBMLExport extends _Export {
     };
   }
   getSBMLCode(image = {}){
-    return nunjucks.render(
-      'sbmlL2V4.xml.njk',
-      image
-    );
+    switch (this.version) {
+      case 'L2V1':
+        return nunjucks.render('sbmlL2V1.xml.njk', image);
+        break;
+      case 'L2V3':
+        return nunjucks.render('sbmlL2V3.xml.njk', image);
+        break;
+      case 'L2V4':
+        return nunjucks.render('sbmlL2V4.xml.njk', image);
+        break;
+      case 'L2V5':
+        return nunjucks.render('sbmlL2V5.xml.njk', image);
+        break;
+      default:
+        this.container.logger.error(`SBML of version "${this.version}" is not supported.`);
+        return '';
+    }
+    
   }
 }
 

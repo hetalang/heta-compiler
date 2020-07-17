@@ -32,7 +32,7 @@ end
   spaceFilter: mm,
   format: SBML,
   filepath: mm_sbml,
-  eventsOff: true
+  version: L2V4
 };
 #export {
   spaceFilter: mm,

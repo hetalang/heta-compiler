@@ -19,9 +19,9 @@ class _Export extends Component {
 
     if (valid) {
       this.format = q.format;
-      if (q.filepath) this.filepath = q.filepath;
       if (q.powTransform) this.powTransform = q.powTransform;
     }
+    if (q.filepath) this.filepath = q.filepath;
 
     return this;
   }
