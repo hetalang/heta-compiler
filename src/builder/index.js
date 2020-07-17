@@ -60,6 +60,7 @@ class Builder {
     this._logPath = path.resolve(coreDirname, declaration.options.logPath);
 
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
+    if (this.id) this.logger.info(`Platform id: "${this.id}"`);
     
     // index file not found
     let indexFilepath = path.resolve(coreDirname, declaration.importModule.source);
