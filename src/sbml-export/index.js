@@ -55,6 +55,28 @@ class SBMLExport extends _Export {
   }
   getSBMLImage(ns){
     let logger = ns.container.logger;
+    // check unsupported properties in @TimeSwitcher
+    ns
+      .selectByInstanceOf('TimeSwitcher')
+      .forEach((ts) => {
+        // check "speriod"
+        if (typeof ts.periodObj !== 'undefined') {
+          let msg = `"SBML" format does not support "period" property in @TimeSwitcher as stated in "${ts.index}".`;
+          logger.warn(msg);
+        }
+        // check "stop"
+        if (typeof ts.stopObj !== 'undefined') {
+          let msg = `"SBML" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}".`;
+          logger.warn(msg);
+        }
+        // check "repeatCount"
+        if (typeof ts.repeatCountObj !== 'undefined') {
+          let msg = `"SSBML" format does not support "repeatCount" property in @TimeSwitcher as stated in "${ts.index}".`;
+          logger.warn(msg);
+        }
+      });
+
+    // set unitDefinitions for concrete namespace
     if (ns.isAbstract) {
       var listOfUnitDefinitions = []; 
     } else {
@@ -77,9 +99,6 @@ class SBMLExport extends _Export {
   }
   getSBMLCode(image = {}){
     switch (this.version) {
-      case 'L2V1':
-        return nunjucks.render('sbmlL2V1.xml.njk', image);
-        break;
       case 'L2V3':
         return nunjucks.render('sbmlL2V3.xml.njk', image);
         break;

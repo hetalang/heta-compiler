@@ -54,14 +54,26 @@ class SimbioExport extends _Export{
     ];
   }
   getSimbioImage(ns){
-    // check stop in @TimeSwitcher
+    // check unsupported properties in @TimeSwitcher
     let logger = ns.container.logger;
     ns
       .selectByInstanceOf('TimeSwitcher')
-      .filter((ts) => typeof ts.stopObj !== 'undefined')
       .forEach((ts) => {
-        let msg = `"Simbio" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}". Use repeatCount instead`;
-        logger.warn(msg);
+        // check "speriod"
+        if (typeof ts.periodObj !== 'undefined') {
+          let msg = `"Simbio" format does not support "period" property in @TimeSwitcher as stated in "${ts.index}".`;
+          logger.warn(msg);
+        }
+        // check "stop"
+        if (typeof ts.stopObj !== 'undefined') {
+          let msg = `"Simbio" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}".`;
+          logger.warn(msg);
+        }
+        // check "repeatCount"
+        if (typeof ts.repeatCountObj !== 'undefined') {
+          let msg = `"Simbio" format does not support "repeatCount" property in @TimeSwitcher as stated in "${ts.index}".`;
+          logger.warn(msg);
+        }
       });
 
     return {
@@ -71,7 +83,7 @@ class SimbioExport extends _Export{
   }
   getSimbioCode(image = {}){
     return nunjucks.render(
-      'template.m.njk',
+      'simbio.m.njk',
       image
     );
   }

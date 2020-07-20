@@ -61,7 +61,7 @@ class SLVExport extends _Export{
    * @return {undefined}
    */
   getSLVImage(ns){
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.container.logger;
     // creates empty model image
     let model = {
       population: ns

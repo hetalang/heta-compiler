@@ -3,6 +3,8 @@
 ## 0.5.8
 
 - add spaceFilter for Mrgsolve, Julia
+- version selection in #export {format: SBML}: support for L2V3, L2V4, L2V5
+- add support @TimeSwitcher as event in SimBiology (instead of doses)
 
 ## 0.5.7
 

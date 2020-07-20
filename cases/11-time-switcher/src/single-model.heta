@@ -1,6 +1,4 @@
 
-comp0_vol @Const = 1; // compartment 0 volume
-comp1_vol @Const = 5.2; // compartment 1 volume
 kabs @Const = 0.01; // constant of absorption
 kel @Const = 0.01; // constant of elimination
 
@@ -11,8 +9,8 @@ comp1 @Compartment;
 vabs @Reaction {actors: a0 -> s1};
 vel @Reaction {actors: s1 ->};
 
-comp0 .= comp0_vol;
-comp1 .= comp1_vol;
+comp0 .= 1;
+comp1 .= 5.2;
 vabs := kabs*a0;
 vel := kel*s1*comp1;
 a0 []= 0; // initial value
@@ -20,8 +18,10 @@ s1 []= 0;
 
 //#export {space: one_comp, filepath: sbml, format: SBML};
 #export {filepath: json, format: JSON};
-//#export {filepath: slv, format: SLV};
+#export {filepath: slv, format: SLV};
 #export {filepath: model, format: DBSolve};
+#export {filepath: simbio, format: Simbio};
+#export {filepath: sbml, format: SBML};
 
 sw1 @TimeSwitcher {
   start: 0,
@@ -30,9 +30,11 @@ sw1 @TimeSwitcher {
   repeatCount: 5
 };
 a0 [sw1]= a0 + 10;
+comp1 [sw1]= 6;
 
+sw2_start @Const = 5;
 sw2 @TimeSwitcher {
-  start: 5,
+  start: sw2_start,
   period: 24
 };
 s1 [sw2]= s1 + 2;

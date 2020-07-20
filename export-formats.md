@@ -156,7 +156,7 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| version | string | | L2V4 | | SBML version in format: `L2V4` |
+| version | string | | L2V4 | | SBML version in format: `L2V4`. Possible values are `L2V3`, `L2V4`, `L2V5` |
 | spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 
 ### Output files
@@ -165,7 +165,7 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 ### Known restrictions
 
-- Currently only Level 2 Version 4 `L2V4` is supported
+- SBML does not support periodic events. `period`, `stop`, `repeatCount` properties of `@TimeSwitcher` are skipped.
 - Some `CSwitcher` exported incorrectly 
 
 **Example:**
@@ -196,7 +196,7 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ### Known restrictions
 
-- `stop` property in `@TimeSwitcher` is not supported.
+- Simbiology does not support periodic events. `period`, `stop`, `repeatCount` properties of `@TimeSwitcher` are skipped.
 - `@CSwitcher` is not supported.
 
 **Example:**
@@ -338,6 +338,8 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 ## Features support
 
+*na* means "not applicable"
+
 | | SLV | DBSolve | SimSolver/Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
 |--|--|--|--|--|--|--|--|--|--|
 |units transformation                  |na |na |na |na |na |+ |+ |na|na
@@ -345,10 +347,12 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@Process` class                      |+  |+  |+  |+  |+  |+ |+ |+ |+ 
 |`@TimeSwitcher` class                 |+  |+  |+  |-  |+  |- |- |+ |+ 
 |Multiple `@Switcher` in one namespace |+  |+  |+  |-  |-  |+ |+ |+ |+ 
+|`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |- |+ |+
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |- |- |- |- |- |+ |+
 |`@TimeSwitcher {repeatCount: 3}` limit number of repeat |- |- |- |- |+ |- |- |+ |+
-|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+
 |`@CSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+

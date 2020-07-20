@@ -101,23 +101,14 @@ addrule(
   {{- model_id }}, '{{record.id}} = {{ record.assignments.start_.toMatlabString() }}', 'initialAssignment');
 {% endfor %}
 
-{%- set listOfTimeEvents = population.selectByClassName("TimeSwitcher") %}
-{{- "% Time Events" if listOfTimeEvents|length > 0 }}
-{% for event in listOfTimeEvents -%}
-{%- for record in population.selectRecordsByContext(event.id) -%}
-{{ population.spaceName }}.dose.{{event.id}}.{{record.id}} = adddose({{- model_id }}, '{{event.id}}');
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.TargetName = '{{record.id}}';
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Amount = '{{record.assignments[event.id].toMatlabString()}}';
-    {%- if event.periodObj is defined %}
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Interval = {% if event.period is defined %}'{{event.period}}'{% else %}{{ event.periodObj.num }}{% endif %};
-    {%- endif %}
-    {%- if event.repeatCountObj is defined %}
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.RepeatCount = {% if event.repeatCount is defined %}'{{ event.repeatCount }}'{% else %}{{ event.repeatCountObj.num }}{% endif %};
-    {%- endif %}
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.StartTime = {% if event.start is defined %}'{{event.start}}'{% else %}{{ event.startObj.num }}{% endif %};
-    {{ population.spaceName }}.dose.{{event.id}}.{{record.id}}.Active = true;
-{% endfor -%}
-{% endfor %}
+{% set listOfTimeEvents = population.selectByClassName("TimeSwitcher") %}
+{{- "% Time Switchers" if listOfTimeEvents | length > 0 }}
+{%- for event in listOfTimeEvents %}
+{{ population.spaceName }}.event.{{event.id}} = addevent({{ model_id }}, 'time >= {{  event.start if event.start is defined else event.startObj.num }}', {
+  {%- for record in population.selectRecordsByContext(event.id) -%}
+  '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
+  }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
+{%- endfor %}
 
 {% set listOfCondEvents = population.selectByClassName("CSwitcher") %}
 {{- "% Events" if listOfCondEvents|length > 0 }}
@@ -125,5 +116,5 @@ addrule(
 {{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
+  }, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
 {% endfor %}
