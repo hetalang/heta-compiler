@@ -55,26 +55,14 @@ class Record extends _Size {
       
     return clonedComponent;
   }
-  /** change referencies inside expression */
+  /*
+    change referencies inside expression
+  */
   updateReferences(q = {}){
     super.updateReferences(q);
     
     // check math expression refs
-    _.each(this.assignments, (mathExpr, key) => {
-      let parsed = mathExpr.exprParsed;
-      parsed.traverse((node /*, path, parent*/) => {
-        if (node.type === 'SymbolNode') { // transform only SymbolNode
-          let oldRef = _.get(node, 'name');
-          let newRef = _.get(
-            q.rename, 
-            oldRef, 
-            [q.prefix, oldRef, q.suffix].join('') // default behaviour
-          );
-
-          _.set(node, 'name', newRef);
-        }
-      });
-    });
+    _.each(this.assignments, (mathExpr) => mathExpr.updateReferences(q));
   }
   bind(namespace){
     super.bind(namespace);

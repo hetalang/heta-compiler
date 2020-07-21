@@ -252,7 +252,7 @@ class Container {
       let newId = _.get(
         q.rename, 
         component.id,
-        [q.prefix, component.id, q.suffix].join('') // default value
+        [q.prefix, component.id, q.suffix].join('') // pref-id-suff as default value
       );
 
       // cloning and update references

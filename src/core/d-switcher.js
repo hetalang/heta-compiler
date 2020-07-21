@@ -48,6 +48,14 @@ class DSwitcher extends _Switcher {
     
     return clonedComponent;
   }
+  updateReferences(q = {}){
+    super.updateReferences(q);
+    
+    // check math expression refs
+    if (typeof this.trigger === 'undefined') {
+      this.trigger.updateReferences(q);
+    }
+  }
 }
 
 DSwitcher._requirements = {

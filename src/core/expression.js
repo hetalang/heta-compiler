@@ -2,6 +2,7 @@ const math = require('mathjs');
 const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
 let { OperatorNode, SymbolNode } = math.expression.node;
+const _ = require('lodash');
 
 class Expression {
   constructor(exprParsed){ // string or object
@@ -24,6 +25,20 @@ class Expression {
   clone(){
     let clonedMath = this.exprParsed.cloneDeep();
     return new Expression(clonedMath);
+  }
+  updateReferences(q = {}){
+    this.exprParsed.traverse((node /*, path, parent*/) => {
+      if (node.type === 'SymbolNode') { // transform only SymbolNode
+        let oldRef = _.get(node, 'name');
+        let newRef = _.get(
+          q.rename, 
+          oldRef, 
+          [q.prefix, oldRef, q.suffix].join('') // default behaviour
+        );
+
+        _.set(node, 'name', newRef);
+      }
+    });
   }
   // the same options as in mathjs
   toString(options = {}){
