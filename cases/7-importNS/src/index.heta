@@ -1,19 +1,47 @@
-namespace one begin
-  k1 @Const = 1e-3;
-  r1 @Reaction {
-    actors: A => 2B
-  };
-  r1 := k1 * A *comp1;
+// create drug pk template in separate namespace
+abstract namespace drug begin
+  gut @Compartment .= 1; // value is not used
+  central @Compartment .= 5.2; // central compartment
+  a0 @Species {compartment: gut, isAmount: true} .= 0;
+  c1 @Species {compartment: central} .= 0;
+  vabs @Reaction {actors: a0 = c1};
+  vabs := kabs * a0;
+  vel @Reaction {actors: c1 = };
+  vel := kel * c1 * central;
 end
 
-namespace two begin
-  #importNS {
-    fromSpace: one,
-    prefix: one_,
-    rename: { comp1: comp1, r1: r1 }
-  };
+// create drug #1 and change compartment name
+#importNS {
+  fromSpace: drug,
+  suffix: _first,
+  rename: {gut: gut, central: blood}
+};
+kabs_first @Const = 1e-3;
+kel_first @Const = 0.1;
 
-  comp1 @Compartment .= 1;
-end
+// create drug #2 and change compartment name
+#importNS {
+  fromSpace: drug,
+  suffix: _second,
+  rename: {gut: gut, central: blood}
+};
+kabs_second @Const = 2e-3;
+kel_second @Const = 0.2;
 
-#export { filepath: output_json, space: two, format: JSON };
+// create drug #3 and change compartment name
+#importNS {
+  fromSpace: drug,
+  suffix: _third,
+  rename: {gut: gut, central: blood}
+};
+kabs_third @Const = 3e-3;
+kel_third @Const = 0.3;
+
+#export {
+  filepath: output_json,
+  format: JSON
+};
+#export {
+  filepath: output_sbml,
+  format: SBML
+};

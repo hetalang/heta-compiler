@@ -60,23 +60,21 @@ class Record extends _Size {
     super.updateReferences(q);
     
     // check math expression refs
-    if(this.assignments){
-      _.each(this.assignments, (mathExpr, key) => {
-        let parsed = mathExpr.exprParsed;
-        parsed.traverse((node /*, path, parent*/) => {
-          if(node.type==='SymbolNode'){ // transform only SymbolNode
-            let oldRef = _.get(node, 'name');
-            let newRef = _.get(
-              q.rename, 
-              oldRef, 
-              [q.prefix, oldRef, q.suffix].join('') // default behaviour
-            );
+    _.each(this.assignments, (mathExpr, key) => {
+      let parsed = mathExpr.exprParsed;
+      parsed.traverse((node /*, path, parent*/) => {
+        if (node.type === 'SymbolNode') { // transform only SymbolNode
+          let oldRef = _.get(node, 'name');
+          let newRef = _.get(
+            q.rename, 
+            oldRef, 
+            [q.prefix, oldRef, q.suffix].join('') // default behaviour
+          );
 
-            _.set(node, 'name', newRef);
-          }
-        });
+          _.set(node, 'name', newRef);
+        }
       });
-    }
+    });
   }
   bind(namespace){
     super.bind(namespace);

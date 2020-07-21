@@ -22,7 +22,7 @@ class Expression {
     return new Expression(exprParsed);
   }
   clone(){
-    let clonedMath = math.clone(this.exprParsed);
+    let clonedMath = this.exprParsed.cloneDeep();
     return new Expression(clonedMath);
   }
   // the same options as in mathjs

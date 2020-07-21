@@ -236,12 +236,10 @@ class Container {
       this.logger.error(`Create namespace "${space}" before use.`, 'QueueError');
       return;
     }
-    
     if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
       this.logger.error(`space should be string, but have "${q.fromSpace}"`, 'QueueError');
       return;
     }
-    
     let fromNamespace = this.namespaces.get(q.fromSpace);
     if (fromNamespace === undefined) {
       this.logger.error(`Create namespace "${q.fromSpace}" before use.`, 'QueueError');
