@@ -93,8 +93,13 @@ function [ode_func, out_func, y0_, events_] = {{ namespace.spaceName }}_Model(p)
         isterminal = 1;
         
         ev_start = {{ event.switcher.startObj.num }};
-        ev_period = {{ event.switcher.periodObj.num if event.switcher.periodObj.num is defined else '[]'}};
-        ev_repeatCount = {{ event.switcher.getRepeatCountInt() if event.switcher.getRepeatCountInt() is defined else 'Inf' }};
+        {% if event.switcher.periodObj is undefined or event.switcher.periodObj.num <= 0 -%}
+        ev_period = 1;
+        ev_repeatCount = 0;
+        {%- else -%}
+        ev_period = {{ event.switcher.periodObj.num }};
+        ev_repeatCount = {{ event.switcher.repeatCountObj.num if event.switcher.repeatCountObj is defined else 'Inf' }};
+        {%- endif %}
         
         flag = (time - ev_start)/ev_period;
         

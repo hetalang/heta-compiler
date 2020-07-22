@@ -21,13 +21,15 @@ s1 []= 0;
 #export {filepath: slv, format: SLV};
 #export {filepath: model, format: DBSolve};
 #export {filepath: simbio, format: Simbio};
+#export {filepath: matlab, format: Matlab};
+#export {filepath: julia, format: Julia};
 #export {filepath: sbml, format: SBML};
 
 sw1 @TimeSwitcher {
-  start: 0,
+  start: 0, // start at zero time
   stop: 120,
   period: 12,
-  repeatCount: 5
+  repeatCount: 5, // remove later
 };
 a0 [sw1]= a0 + 10;
 comp1 [sw1]= 6;

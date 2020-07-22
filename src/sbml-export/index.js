@@ -71,7 +71,7 @@ class SBMLExport extends _Export {
         }
         // check "repeatCount"
         if (typeof ts.repeatCountObj !== 'undefined') {
-          let msg = `"SSBML" format does not support "repeatCount" property in @TimeSwitcher as stated in "${ts.index}".`;
+          let msg = `"SBML" format does not support "repeatCount" property in @TimeSwitcher as stated in "${ts.index}".`;
           logger.warn(msg);
         }
       });

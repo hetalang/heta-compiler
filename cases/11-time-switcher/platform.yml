@@ -5,4 +5,4 @@ options:
   debug: false
 importModule:
   type: heta
-  source: src/single-model.heta
+  source: src/index.heta

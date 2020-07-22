@@ -84,14 +84,14 @@ class Container {
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if (selectedClass === undefined){
-      this.logger.error(`${ind} Unknown class "${q.class}" for the element.`, 'QueueError');
+      this.logger.error(`"${ind}" Unknown class "${q.class}" for the component.`, 'QueueError');
       return;
     }
 
     // get in namespace
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`${ind} create namespace "${space}" before use.`, 'QueueError');
+      this.logger.error(`"${ind}" create namespace "${space}" before use.`, 'QueueError');
       return;
     }
 
