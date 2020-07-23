@@ -110,7 +110,7 @@ class JuliaExport extends _Export {
         }
       });
 
-    // create events from switchers
+    // other switchers
     let events = ns
       .selectByInstanceOf('_Switcher')
       .map((switcher) => {

@@ -357,6 +357,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
+|`@Dose` class                                           |- |- |- |- |- |+ |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+

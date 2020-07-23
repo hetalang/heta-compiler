@@ -28,8 +28,7 @@ s1 []= 0;
 sw1 @TimeSwitcher {
   start: 0, // start at zero time
   stop: 120,
-  period: 12,
-  repeatCount: 5, // remove later
+  period: 12
 };
 a0 [sw1]= a0 + 10;
 comp1 [sw1]= 6;

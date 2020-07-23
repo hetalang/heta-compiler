@@ -21,6 +21,11 @@ class Const extends _Size { // implicit extend Numeric
 
     return this;
   }
+  get numFloat(){
+    return Number.isInteger(this.num)
+      ? this.num.toString() + '.0'
+      : this.num.toString();
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.num !== 'undefined')

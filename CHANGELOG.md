@@ -5,7 +5,9 @@
 - add spaceFilter for Mrgsolve, Julia
 - version selection in #export {format: SBML}: support for L2V3, L2V4, L2V5
 - add support @TimeSwitcher as event in SimBiology (instead of doses)
-- fix bug with not a deep clone in Expression
+- fix bug with "not a deep clone in Expression"
+- fix bug with empty period in Matlab
+- include correct description of TimeSwitcher in Julia
 
 ## 0.5.7
 
