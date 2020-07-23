@@ -8,6 +8,7 @@
 - fix bug with "not a deep clone in Expression"
 - fix bug with empty period in Matlab
 - include correct description of TimeSwitcher in Julia
+- update structure of Julia format
 
 ## 0.5.7
 
