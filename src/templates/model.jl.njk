@@ -150,7 +150,6 @@ function {{ event.switcher.id }}_times_(cons, times = [0.0, 100.0])
     return [{{ ev_start }}]
     {%- else -%}
     return {{ ev_period }} > 0.0 ? collect(range({{ ev_start }}, {{ ev_stop if ev_stop is defined else 'times[2]' }}; step={{ ev_period }})) : [{{ ev_start }}]
-    
     {%- endif %}
 end
 {%- endfor %}

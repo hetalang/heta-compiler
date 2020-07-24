@@ -290,8 +290,7 @@
       "properties": {
         "start": { "$ref" : "#/definitions/ConstInternal" },
         "stop": { "$ref" : "#/definitions/ConstInternal" },
-        "period": { "$ref" : "#/definitions/ConstInternal" },
-        "repeatCount": { "$ref" : "#/definitions/ConstInternal" }
+        "period": { "$ref" : "#/definitions/ConstInternal" }
       }
     },
 

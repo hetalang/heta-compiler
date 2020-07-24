@@ -69,11 +69,6 @@ class SBMLExport extends _Export {
           let msg = `"SBML" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}".`;
           logger.warn(msg);
         }
-        // check "repeatCount"
-        if (typeof ts.repeatCountObj !== 'undefined') {
-          let msg = `"SBML" format does not support "repeatCount" property in @TimeSwitcher as stated in "${ts.index}".`;
-          logger.warn(msg);
-        }
       });
 
     // set unitDefinitions for concrete namespace

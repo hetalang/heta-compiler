@@ -12,11 +12,11 @@ output_names = [
 ];
 
 p = param();
-[ode_func, out_func, y0, events] = model(p);
+[ode_func, out_func, y0, events_conditions, events_affects] = model(p);
 
 %%% default task
 t_span = [0 100]; % [0:1:100]
-opt = odeset('OutputFcn', out_func, 'Events', events{1}, 'MaxStep', 3); % odeset('Mass',M,'RelTol',1e-4,'AbsTol',[1e-6 1e-10 1e-6], 'Stats','on');
+opt = odeset('OutputFcn', out_func, 'Events', events_conditions, 'MaxStep', 1); % odeset(, 'Mass',M,'RelTol',1e-4,'AbsTol',[1e-6 1e-10 1e-6], 'Stats','on');
 
 % the next string generates "output" variable
 %[tout, y, te, ye, ie] = ode15s(ode_func, t_span, y0, opt);
@@ -34,7 +34,8 @@ while ti < t_span(2)
         break
     end
     ti = t(end);
-    yi = events{2}(ti, ye(end,:));
+    ev = events_affects(ie);
+    yi = ev{1}(ti, ye(end,:));
 end
 
 figure

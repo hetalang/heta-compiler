@@ -69,11 +69,6 @@ class SimbioExport extends _Export{
           let msg = `"Simbio" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}".`;
           logger.warn(msg);
         }
-        // check "repeatCount"
-        if (typeof ts.repeatCountObj !== 'undefined') {
-          let msg = `"Simbio" format does not support "repeatCount" property in @TimeSwitcher as stated in "${ts.index}".`;
-          logger.warn(msg);
-        }
       });
 
     return {

@@ -348,11 +348,10 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@TimeSwitcher` class                 |+  |+  |+  |-  |+  |- |- |+ |+ 
 |Multiple `@Switcher` in one namespace |+  |+  |+  |-  |-  |+ |+ |+ |+ 
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+
-|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: 0}`                              |+ |- |+ |+ |- |+ |+ |+ |+
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |- |+ |+
-|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |- |- |- |- |- |+ |+
-|`@TimeSwitcher {repeatCount: 3}` limit number of repeat |- |- |- |- |+ |- |- |+ |+
+|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |- |- |- |+ |+
 |`@CSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |`@DSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
@@ -362,7 +361,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
-|MathExpr: ternary operator                              |+ |+ |- |- |- |- |- |- |-
+|MathExpr: ternary operator                              |+ |+ |? |- |- |- |- |- |-
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+

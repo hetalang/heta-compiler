@@ -8,14 +8,12 @@ const _ = require('lodash');
   ts1 @TimeSwitcher {
     start: 12,
     period: 6,
-    stop: 120,
-    repeatCount: 8
+    stop: 120
   };
   ts2 @TimeSwitcher {
     start: start1, // ref to @Const
     period: period1,
-    stop: stop1,
-    repeatCount: count1
+    stop: stop1
   };
 
   How many times does it switch?
@@ -57,13 +55,6 @@ class TimeSwitcher extends _Switcher {
         delete this.stop;
         this.stopObj = (new Const).merge({ num: q.stop });
       }
-      // empty is the same as Infinity
-      if (typeof q.repeatCount === 'string'){
-        this.repeatCount = q.repeatCount;
-      } else if (typeof q.repeatCount === 'number') {
-        delete this.repeatCount;
-        this.repeatCountObj = (new Const).merge({ num: q.repeatCount });
-      }
     }
 
     return this;
@@ -84,11 +75,6 @@ class TimeSwitcher extends _Switcher {
       clonedComponent.period = this.period;
     } else if (typeof this.periodObj !== 'undefined') {
       clonedComponent.periodObj = this.periodObj.clone();
-    }
-    if (typeof this.repeatCount === 'string'){
-      clonedComponent.repeatCount = this.repeatCount;
-    } else if (typeof this.repeatCountObj !== 'undefined') {
-      clonedComponent.repeatCountObj = this.repeatCountObj.clone();
     }
       
     return clonedComponent;
@@ -114,25 +100,6 @@ class TimeSwitcher extends _Switcher {
       return this.stopObj.num;
     }
   }
-  getRepeatCount(){
-    if (this.repeatCount !== undefined) {
-      return this.repeatCount;
-    } else if (_.has(this, 'repeatCountObj.num')) {
-      return this.repeatCountObj.num;
-    }
-  }
-  getRepeatCountInt(){
-    let repeatCount0 = _.get(this, 'repeatCountObj.num', Infinity);
-    let stop1 = _.get(this, 'stopObj.num', Infinity);
-    let period1 = _.get(this, 'periodObj.num', 0);
-
-    // update repeatCount based on stop
-    let repeatCount = period1 <= 0
-      ? repeatCount0
-      : min(repeatCount0, (stop1-this.startObj.num)/period1);
-
-    return repeatCount === Infinity ? undefined : floor(repeatCount);
-  }
   toQ(options = {}){
     let res = super.toQ(options);
 
@@ -144,9 +111,6 @@ class TimeSwitcher extends _Switcher {
     }
     if (this.stopObj !== undefined) {
       res.stop = this.getStop();
-    }
-    if (this.repeatCountObj !== undefined) {
-      res.repeatCount = this.getRepeatCount();
     }
 
     return res;
@@ -165,11 +129,6 @@ TimeSwitcher._requirements = {
     isReference: true, targetClass: 'Const', setTarget: true
   },
   period: {
-    required: false,
-    isArray: false,
-    isReference: true, targetClass: 'Const', setTarget: true
-  },
-  repeatCount: {
     required: false,
     isArray: false,
     isReference: true, targetClass: 'Const', setTarget: true
