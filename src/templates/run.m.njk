@@ -30,11 +30,11 @@ while ti < t_span(2)
     [t, y, te, ye, ie] = ode15s(ode_func, [ti t_span(2)], yi, opt);
 
     tout = vertcat(tout, t);
-    if length(te) == 0
+    if isempty(ie)
         break
     end
     ti = t(end);
-    ev = events_affects(ie);
+    ev = events_affects(ie(end));
     yi = ev{1}(ti, ye(end,:));
 end
 
