@@ -8,6 +8,7 @@ class DBSolveExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
 
+    if (q.groupConstBy) this.groupConstBy = q.groupConstBy;
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -157,6 +158,12 @@ class DBSolveExport extends _Export{
     }
     
     image.powTransform = this.powTransform;
+
+    // group Const
+    image.grouppedConst = _.groupBy(
+      ns.selectByClassName('Const'),
+      (con) => _.get(con, this.groupConstBy)
+    );
 
     return image;
   }

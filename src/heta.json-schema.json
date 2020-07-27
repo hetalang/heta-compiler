@@ -311,6 +311,7 @@
       "type": "object",
       "properties": {
         "filepath": { "type": "string" },
+        "groupConstBy": { "type": "string", "pattern": "^[\\w\\d.\\[\\]]+$" },
         "powTransform": { "type": "string", "enum": ["keep", "function", "operator"] },
         "omitRows": { "type": "number" },
         "splitByClass": { "type": "boolean" },

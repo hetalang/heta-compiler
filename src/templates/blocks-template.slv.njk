@@ -34,12 +34,14 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 {% endblock %}
 =============================== IV ================================
 {% block iv %}
-{% set constants = population.selectByClassName("Const") %}
-//! Constants, count: {{ constants|length }}
+//! Constants, count: {{ population.selectByClassName("Const") | length }}
+{%- for key, constants in grouppedConst %}
+//
+//!! {{ key if key !== 'undefined' else 'ungroupped' }}
 {%- for con in constants %}
 {{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'"+con.title+"'" if con.title }} {units: {{ con.units|default('?') }}};
-{%- else -%}// nothing here
-{% endfor %}
+{%- endfor %}
+{%- endfor %}
 {% set ivElements = population.toArray()|exclude2("assignments.start_.num", undefined) %}
 //! Initialization at start, count: {{ ivElements|length + 1}}
 {%- for number in ivElements %}

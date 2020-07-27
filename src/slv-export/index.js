@@ -7,8 +7,9 @@ class SLVExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     
-    if(q.eventsOff) this.eventsOff = q.eventsOff;
-    if(q.defaultTask) this.defaultTask = q.defaultTask;
+    if (q.groupConstBy) this.groupConstBy = q.groupConstBy;
+    if (q.eventsOff) this.eventsOff = q.eventsOff;
+    if (q.defaultTask) this.defaultTask = q.defaultTask;
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -172,6 +173,12 @@ class SLVExport extends _Export{
       let logger = ns.container.logger;
       logger.error('CSwitcher is not supported in SLVExport: ' + bagSwitchers, 'ExportError');
     }
+
+    // group Const
+    model.grouppedConst = _.groupBy(
+      ns.selectByClassName('Const'),
+      (con) => _.get(con, this.groupConstBy)
+    );
     
     return model;
   }
