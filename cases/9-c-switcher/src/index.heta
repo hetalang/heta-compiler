@@ -6,6 +6,7 @@ x2 @Species { compartment: comp1 } .= 0;
 r1 @Reaction { actors: x1->x2 } := k1*x1*comp1;
 
 #export { filepath: sbml.xml, format: SBML };
+#export { filepath: julia, format: Julia };
 
 // switcher
 cond1 @Record := 6-x1;

@@ -50,6 +50,12 @@
             "group": "test"
         },
         {
+            "label": "case-9",
+            "type": "shell",
+            "command": "heta build cases/9-c-switcher",
+            "group": "test"
+        },
+        {
             "label": "case-11",
             "type": "shell",
             "command": "heta build cases/11-time-switcher",
