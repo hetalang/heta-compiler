@@ -440,6 +440,10 @@ if(t==0){
 
 //! Calculation of ode_ part, count: {{ ruleRecords|length }}
 {%- for record in ruleRecords %}
+{%- if record.instanceOf('Process') %}
+//
+//!! {{ record.id }}
+{%- endif %}
 {% if record.isRule -%}
 {{ record.id }} = {{ record.getAssignment('ode_').toSLVString(powTransform) }};
 {%- elif record.isDynamic -%}
@@ -450,6 +454,7 @@ if(t==0){
 }
 //! Differential equations, count: {{ dynamicRecords|length}}
 {%- for dynamic in dynamicRecords %}
+//
 //!! {{ dynamic.id }} @{{ dynamic.className }} {{ "'"+dynamic.title+"'" if dynamic.title }} {units: {{ dynamic.units|default('?') }}}
 F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {%- endfor %}

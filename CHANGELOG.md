@@ -3,8 +3,8 @@
 ## 0.5.9
 
 - remove `repeatCount` prop from `@TimeSwitcher`
-- support of multiple `@TimeSwitcher` in Matlab - draft
-- 
+- support of multiple `@TimeSwitcher` in Matlab
+- prettify code in SLV/DBSolve
 
 ## 0.5.8
 
