@@ -8,7 +8,11 @@ class DBSolveExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
 
-    if (q.groupConstBy) this.groupConstBy = q.groupConstBy;
+    if (q.groupConstBy) {
+      this.groupConstBy = q.groupConstBy;
+    } else {
+      this.groupConstBy = 'tags[0]';
+    }
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {

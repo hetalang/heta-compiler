@@ -85,6 +85,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 | eventsOff | boolean | | | | if `eventsOff = true` the switchers will not be exported to DBSolve events. |
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
 | spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+| groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
 
 ### Output files
 
@@ -95,8 +96,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 - `Compartment` which changes in time may result in wrong ODE.
 - `CSwitcher` is not supported.
 - `DSwitcher` is not supported.
-- Initialization of `Record` by expression do not work: `x1 .= k1 * A` (not supported).
-- repeatCount in `@TimeSwitcher` is not supported
+- Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
 - `Infinity`, `-Infinity`, `NaN` values is not supported
 - boolean operatiors like `and`, `or`, etc. are not supported
 
@@ -108,7 +108,8 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
     filepath: model, // save results in file "dist/model.slv"
     spaceFilter: nameless, // namespace used for model generation
     eventsOff: false, // all switchers will be transformed to DBSolve events
-    powTransform: keep // use x^y and pow(x, y) without changes
+    powTransform: keep, // use x^y and pow(x, y) without changes
+    groupConstBy: "tags[1]" // use the second tag
 };
 ```
 
@@ -124,6 +125,7 @@ This is the updated version of SLV export format which supports compartment volu
 | ---------|------|----------|---------|-----|-------------|
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
 | spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+| groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
 
 ### Output files
 
@@ -133,7 +135,6 @@ This is the updated version of SLV export format which supports compartment volu
 
 - `CSwitcher` is not supported and will be skipped.
 - `DSwitcher` is not supported.
-- repeatCount in `@TimeSwitcher` is not supported
 - `Infinity`, `-Infinity`, `NaN` values is not supported
 - boolean operatiors like `and`, `or`, etc. are not supported
 
@@ -165,7 +166,7 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 ### Known restrictions
 
-- SBML does not support periodic events. `period`, `stop`, `repeatCount` properties of `@TimeSwitcher` are skipped.
+- SBML does not support periodic events. `period`, `stop` properties of `@TimeSwitcher` are skipped.
 - Some `CSwitcher` exported incorrectly 
 
 **Example:**
@@ -196,7 +197,7 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ### Known restrictions
 
-- Simbiology does not support periodic events. `period`, `stop`, `repeatCount` properties of `@TimeSwitcher` are skipped.
+- Simbiology does not support periodic events. `period`, `stop` properties of `@TimeSwitcher` are skipped.
 - `@CSwitcher` is not supported.
 
 **Example:**

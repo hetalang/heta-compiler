@@ -7,7 +7,11 @@ class SLVExport extends _Export{
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     
-    if (q.groupConstBy) this.groupConstBy = q.groupConstBy;
+    if (q.groupConstBy) {
+      this.groupConstBy = q.groupConstBy;
+    } else {
+      this.groupConstBy = 'tags[0]';
+    }
     if (q.eventsOff) this.eventsOff = q.eventsOff;
     if (q.defaultTask) this.defaultTask = q.defaultTask;
     if (q.spaceFilter instanceof Array) {

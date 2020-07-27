@@ -87,7 +87,7 @@ let questions = [
   { type: 'input', name: 'version', message: 'Platform version', default: defaultPlatform.version },
   { type: 'input', name: 'license', message: 'Platform license', default: defaultPlatform.license },
   { type: 'confirm', name: 'options', message: 'Set options', default: false },
-  { type: 'list', name: 'importModule', message: 'Select file types', default: 'heta', choices: ['heta', 'heta+xlsx', 'xlsx', 'json', 'yaml']}
+  { type: 'list', name: 'importModule', message: 'Select file types', default: 'heta', choices: ['heta', 'heta+xlsx', 'heta+xlsx extended', 'xlsx', 'json', 'yaml']}
 ];
 prompt(questions)
   .then((answers) => {
@@ -126,6 +126,24 @@ prompt(questions)
       if(!fs.existsSync(xlsxTableFile)){
         fs.copySync(
           path.join(__dirname, './init/table.xlsx'),
+          xlsxTableFile
+        );
+      }
+    } else if (answers.importModule === 'heta+xlsx extended') {
+      platform.importModule = defaultPlatform.importModule;
+      
+      // create files in src
+      let hetaIndexFile = path.join(targetDir, 'src', 'index.heta');
+      if(!fs.existsSync(hetaIndexFile)){
+        fs.copySync(
+          path.join(__dirname, './init/index1.heta'),
+          hetaIndexFile
+        );
+      }
+      let xlsxTableFile = path.join(targetDir, 'src', 'table.xlsx');
+      if(!fs.existsSync(xlsxTableFile)){
+        fs.copySync(
+          path.join(__dirname, './init/table-ext.xlsx'),
           xlsxTableFile
         );
       }
