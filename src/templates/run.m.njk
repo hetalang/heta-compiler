@@ -12,7 +12,7 @@ output_names = [
 ];
 
 p = param();
-[ode_func, out_func, y0, events_conditions, events_affects] = model(p);
+[ode_func, out_func, y0, events_conditions, events_affects, reinit_y0] = model(p);
 
 %%% default task
 t_span = [0 100]; % [0:1:100]
@@ -23,7 +23,7 @@ opt = odeset('OutputFcn', out_func, 'Events', events_conditions, 'MaxStep', 1); 
 
 % solution with events
 ti = t_span(1);
-yi = y0;
+yi = reinit_y0(ti, y0);
 tout = [];
 output = [];
 while ti < t_span(2)
