@@ -127,15 +127,11 @@ class DBSolveExport extends _Export{
               ? record.getAssignment(switcher.id).multiply(record.compartment)
               : record.getAssignment(switcher.id);
 
-            let target = record.instanceOf('Species') && !record.isAmount
-              ? record.id + '_'
-              : record.id;
-
             let evt = {
               start: switcher.getStart(),
               period: period,
               on: switcher.id + '_',
-              target: target,
+              target: record.id + '_',
               multiply: 0,
               add: record.id + '_' + switcher.id + '_',
               expr: expr.toSLVString(this.powTransform)

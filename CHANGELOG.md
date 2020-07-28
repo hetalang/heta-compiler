@@ -6,6 +6,7 @@
 - support of multiple `@TimeSwitcher` in Matlab
 - prettify code in SLV/DBSolve
 - add `groupConstBy` prop to SLV/DBSolve export
+- fix error in DBSolve event target
 
 ## 0.5.8
 

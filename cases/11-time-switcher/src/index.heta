@@ -26,7 +26,7 @@ s1 []= 0;
 #export {filepath: sbml, format: SBML};
 
 sw1 @TimeSwitcher {
-  start: 0.00, // start at zero time
+  start: 0, // start at zero time
   stop: 60,
   period: 12
 };
