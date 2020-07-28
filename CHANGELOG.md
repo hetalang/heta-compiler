@@ -4,8 +4,7 @@
 
 - remove `repeatCount` prop from `@TimeSwitcher`
 - support of multiple `@TimeSwitcher` in Matlab
-- prettify code in SLV/DBSolve
-- add `groupConstBy` prop to SLV/DBSolve export
+- prettify code in SLV/DBSolve with `groupConstBy` prop
 - fix error in DBSolve event target
 
 ## 0.5.8
