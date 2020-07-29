@@ -155,7 +155,7 @@ end
 {%- endfor %}
 
 ### discrete events
-{% for event in events | filter2('switcher.className', 'DSwitcher') -%}
+{%- for event in events | filter2('switcher.className', 'DSwitcher') %}
 function {{ event.switcher.id }}_trigger_(u, t, integrator)
     cons = integrator.p.constants
     ({% for record in staticRecords -%}
@@ -176,12 +176,12 @@ function {{ event.switcher.id }}_trigger_(u, t, integrator)
     {% endif -%}
     {% endfor %}
 
-    return {{ event.switcher.trigger.translate(pTranslator).toJuliaString() }} ? 1 : -1
+    return {{ event.switcher.trigger.translate(pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }} ? 1 : -1
 end
 {%- endfor %}
 
 ### continous events
-{% for event in events | filter2('switcher.className', 'CSwitcher') -%}
+{%- for event in events | filter2('switcher.className', 'CSwitcher') %}
 function {{ event.switcher.id }}_condition_(u, t, integrator)
     cons = integrator.p.constants
     ({% for record in staticRecords -%}

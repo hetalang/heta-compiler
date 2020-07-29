@@ -42,6 +42,17 @@ function jsbmlToQArr(JSBML){
     .fromPairs()
     .value();
 
+  // algebraicRules
+  let functionDefinitions = _.chain(model.elements)
+    .filter(['name', 'listOfFunctionDefinitions'])
+    .map('elements')
+    .flatten()
+    .filter(['name', 'functionDefinition'])
+    .value();
+  if (functionDefinitions.length !== 0) {
+    throw new Error('"functionDefinitions" from SBML module is not supported.');
+  }
+
   // species types, for IRT
   let speciesTypes = _.chain(model.elements)
     .filter(['name', 'listOfSpeciesTypes'])

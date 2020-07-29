@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.5.10
+
+- fix bug when trigger is empty
+- add message about unsupported functionDefinition
+
 ## 0.5.9
 
 - remove `repeatCount` prop from `@TimeSwitcher`
