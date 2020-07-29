@@ -24,6 +24,7 @@ s1 []= 0;
 #export {filepath: matlab, format: Matlab};
 #export {filepath: julia, format: Julia};
 #export {filepath: sbml, format: SBML};
+#export {filepath: mrgsolve, format: Mrgsolve};
 
 sw1 @TimeSwitcher {
   start: 0, // start at zero time

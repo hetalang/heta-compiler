@@ -167,7 +167,6 @@ Export to [SBML format](http://sbml.org/Main_Page).
 ### Known restrictions
 
 - SBML does not support periodic events. `period`, `stop` properties of `@TimeSwitcher` are skipped.
-- Some `CSwitcher` exported incorrectly 
 
 **Example:**
 
@@ -346,9 +345,9 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ 
 |`@Process` class                      |+  |+  |+  |+  |+  |+ |+ |+ |+ 
 |`@TimeSwitcher` class                 |+  |+  |+  |-  |+  |+ |+ |+ |+
-|`@TimeSwitcher {start: 6}`                              |+ |+ |+ |? |+ |+ |+ |+ |+
-|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |? |+ |+ |+ |+ |+
-|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |? |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: 6}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |- |+ |+ |+ |+ |+
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |- |+ |+
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |- |- |+ |+
 |`@CSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+

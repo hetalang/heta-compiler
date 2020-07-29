@@ -26,11 +26,13 @@ class MrgsolveExport extends _Export {
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for Mrgsolve format should include at least one namespace but get empty';
       logger.err(msg);
-      var content = '';
+      var codeContent = '';
+      var runContent = '';
     } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
-      content = '';
+      codeContent = '';
+      runContent = '';
     } else {
       if (this.spaceFilter.length > 1) {
         let msg = `Mrgsolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
@@ -38,14 +40,22 @@ class MrgsolveExport extends _Export {
       }
       let ns = this.container.namespaces.get(this.spaceFilter[0]);
       let image = this.getMrgsolveImage(ns);
-      content = this.getMrgsolveCode(image);
+      codeContent = this.getMrgsolveCode(image);
+      runContent = this.getMrgsolveRun(image);
     }
 
-    return [{
-      content: content,
-      pathSuffix: '.cpp',
-      type: 'text'
-    }];
+    return [
+      {
+        content: codeContent,
+        pathSuffix: '/model.cpp',
+        type: 'text'
+      },
+      {
+        content: runContent,
+        pathSuffix: '/run.r',
+        type: 'text'
+      }
+    ];
   }
   getMrgsolveImage(ns){
     // set dynamic variables
@@ -115,7 +125,13 @@ class MrgsolveExport extends _Export {
   }
   getMrgsolveCode(image = {}){
     return nunjucks.render(
-      'model.cpp.njk',
+      'mrgsolve-model.cpp.njk',
+      image
+    );
+  }
+  getMrgsolveRun(image = {}){
+    return nunjucks.render(
+      'mrgsolve-run.r.njk',
       image
     );
   }
