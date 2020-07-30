@@ -28,6 +28,7 @@
         "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
         "logPath": {"type": "string", "default": "build.log"},
         "logLevel": {"type": "string", "default": "info"},
+        "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "skipExport": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},

@@ -115,7 +115,7 @@ class SLVExport extends _Export{
         + startExpressions
           .map((x) => `${x.index} []= ${x.assignments.start_.toString()}`)
           .join('\n');
-      logger.error(errorMsg, 'ExportError');
+      logger.error(errorMsg, {type: 'ExportError'});
     }
 
     // create TimeEvents
@@ -141,7 +141,7 @@ class SLVExport extends _Export{
                   try { // a can be evaluated, i.e. '3/4'
                     return tree.eval();
                   } catch (e) { // other cases, i.e. 'p1*2'
-                    logger.error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, 'ExportError');
+                    logger.error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, {type: 'ExportError'});
                   }
                 }
               });
@@ -175,7 +175,7 @@ class SLVExport extends _Export{
       .map((switcher) => switcher.id);
     if(bagSwitchers.length > 0){
       let logger = ns.container.logger;
-      logger.error('CSwitcher is not supported in SLVExport: ' + bagSwitchers, 'ExportError');
+      logger.error('CSwitcher is not supported in SLVExport: ' + bagSwitchers, {type: 'ExportError'});
     }
 
     // group Const

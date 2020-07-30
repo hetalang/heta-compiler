@@ -154,7 +154,7 @@ class DBSolveExport extends _Export{
       .map((switcher) => switcher.id);
     if (bagSwitchers.length > 0) {
       let logger = this.container.logger;
-      logger.error('CSwitcher is not supported in format DBSolve: ' + bagSwitchers, 'ExportError');
+      logger.error('CSwitcher is not supported in format DBSolve: ' + bagSwitchers, {type: 'ExportError'});
     }
     
     image.powTransform = this.powTransform;

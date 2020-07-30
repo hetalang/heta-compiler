@@ -40,7 +40,7 @@ class _Module {
       break;
     default:
       let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml"].`;
-      mdl.logger.error(msg, 'ModuleError');
+      mdl.logger.error(msg, {type: 'ModuleError'});
     }
 
     if (mdl.parsed.length === 0) {

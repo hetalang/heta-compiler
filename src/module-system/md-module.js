@@ -16,7 +16,7 @@ _Module.prototype.setMdModule = function(){
   } catch(e) {
     this.parsed = [];
     let msg = e.message + ` when converting module "${this.filename}"`;
-    this.logger.error(msg, 'ModuleError');
+    this.logger.error(msg, {type: 'ModuleError'});
   }
 
   return this;

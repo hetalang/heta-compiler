@@ -83,7 +83,7 @@ class MrgsolveExport extends _Export {
           let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
             + `${record.id}$${record.space} []= ${record.assignments.start_.toString()}`;
             
-          logger.error(errorMsg, 'ExportError');
+          logger.error(errorMsg, {type: 'ExportError'});
         }
       });
 

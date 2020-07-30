@@ -47,7 +47,7 @@ class Builder {
     if (!valid) {
       // convert validation errors to heta errors
       validate.errors.forEach((x) => {
-        this.logger.error(`${x.dataPath} ${x.message}`, 'BuilderError');
+        this.logger.error(`${x.dataPath} ${x.message}`, {type: 'BuilderError'});
       });
       return;
     }
@@ -65,7 +65,7 @@ class Builder {
     // index file not found
     let indexFilepath = path.resolve(coreDirname, declaration.importModule.source);
     if (!fs.existsSync(indexFilepath)) {
-      this.logger.error(`index file "${indexFilepath}" does not exist.`, 'BuilderError');
+      this.logger.error(`index file "${indexFilepath}" does not exist.`, {type: 'BuilderError'});
     }
   }
 
@@ -113,12 +113,18 @@ class Builder {
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {
-      this.logger.info(`All logs was saved to file: "${this._logPath}"`);
-      let logs = this.container
-        .defaultLogs
-        .map(x => `[${x.level}]\t${x.msg}`)
-        .join('\n');
+      switch (this.options.logFormat) {
+        case 'json':
+          var logs = JSON.stringify(this.container.defaultLogs, null, 2);
+          break
+        default: 
+          logs = this.container.defaultLogs
+            .map(x => `[${x.level}]\t${x.msg}`)
+            .join('\n');  
+      }
+
       fs.outputFileSync(this._logPath, logs);
+      this.logger.info(`All logs was saved to file: "${this._logPath}"`);
     }
     return;
   }
