@@ -3,7 +3,8 @@
 ## 0.5.10
 
 - fix bug when trigger is empty
-- add message about unsupported functionDefinition
+- add message about unsupported SBML features
+- add logFormat for saving logs in JSON
 
 ## 0.5.9
 
