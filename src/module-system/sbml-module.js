@@ -9,7 +9,7 @@ _Module.prototype.setSBMLModule = function(){
   } catch (e) {
     this.parsed = [];
     let msg = e.message + ` when converting module "${this.filename}"`;
-    this.logger.error(msg, {type: 'ModuleError'});
+    this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
   }
 
   return this;

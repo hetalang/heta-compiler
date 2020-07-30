@@ -29,11 +29,11 @@ class Record extends _Size {
                 this.assignments[key] = expr;
               } else {
                 let msg = `Record assignments "${this.index}" should be a numeric expression.`;
-                logger && logger.error(msg, {type: 'ValidationError'});
+                logger && logger.error(msg, {type: 'ValidationError', space: this.space});
               }
             } catch (e) {
               let msg = this.index + ' '+ e.message + ` "${x.toString()}"`;
-              logger && logger.error(msg, {type: 'ValidationError'});
+              logger && logger.error(msg, {type: 'ValidationError', space: this.space});
             }
           } else {
             throw new Error('Wrong expression argument.'); // if code is OK never throws
@@ -73,7 +73,7 @@ class Record extends _Size {
       || _.get(this, 'assignments.ode_') !== undefined;
     if (!hasInit) {
       let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`
-      logger.error(msg, {type: 'BindingError'});
+      logger.error(msg, {type: 'BindingError', space: this.space});
     }
     
     // check math expression refs
@@ -86,11 +86,11 @@ class Record extends _Size {
           if(!target){
             let msg = `Component "${id}" is not found in space "${this.space}" as expected in expression: `
                   + `${this.index} [${key}]= ${mathExpr.toString()};`;
-            logger.error(msg, {type: 'BindingError'});
+            logger.error(msg, {type: 'BindingError', space: this.space});
           }else if(!target.instanceOf('Const') && !target.instanceOf('Record')){
             let msg = `Component "${id}" is not a Const or Record class as expected in expression: `
               + `${this.index} [${key}]= ${mathExpr.toString()};`;
-            logger.error(msg, {type: 'BindingError'});
+            logger.error(msg, {type: 'BindingError', space: this.space});
           }
         });
     });

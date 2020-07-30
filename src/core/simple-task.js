@@ -66,12 +66,12 @@ class SimpleTask extends Component {
           let _record_ = namespace.get(out);
           if (!_record_) {
             let msg = `Property "output" has lost reference for "${out}".`;
-            logger.error(msg, {type: 'BindingError'});
+            logger.error(msg, {type: 'BindingError', space: this.space});
           } else if (_record_.instanceOf('Record')){
             // do not attach
           } else {
             let msg = `"output" prop must be reffered to Record but now on ${_record_.className}.`;
-            logger.error(msg, {type: 'BindingError'})
+            logger.error(msg, {type: 'BindingError', space: this.space});
           }
         });
       });

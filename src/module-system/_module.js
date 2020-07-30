@@ -13,7 +13,7 @@ class _Module {
     
     //checking file exists
     if (!fs.existsSync(mdl.filename)) {
-      mdl.logger.error(`Module file not found: "${mdl.filename}"`, 'FileSystemError');
+      mdl.logger.error(`Module file not found: "${mdl.filename}"`, {type: 'FileSystemError', filename: mdl.filename});
       
       return mdl;
     }
@@ -40,7 +40,7 @@ class _Module {
       break;
     default:
       let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml"].`;
-      mdl.logger.error(msg, {type: 'ModuleError'});
+      mdl.logger.error(msg, {type: 'ModuleError', filename: this.filename});
     }
 
     if (mdl.parsed.length === 0) {

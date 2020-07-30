@@ -148,7 +148,7 @@ class Component {
       let msg = `${ind} Some of properties do not satisfy requirements for class "${this.schemaName}"\n`
         + validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');
-      logger && logger.error(msg, {type: 'ValidationError'});
+      logger && logger.error(msg, {type: 'ValidationError', space: q.space});
       logger && logger.warn('Some of component properties will not be updated.');
     }
     
@@ -169,9 +169,15 @@ class Component {
       let target = namespace.get(targetId);
 
       if (!target) {
-        logger.error(this.index + ` Property "${path}" has lost reference "${targetId}".`, {type: 'BindingError'});
+        logger.error(
+          this.index + ` Property "${path}" has lost reference "${targetId}".`,
+          {type: 'BindingError', space: this.space}
+        );
       } else if(rule.targetClass && !target.instanceOf(rule.targetClass)) {
-        logger.error(this.index + ` "${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`, {type: 'BindingError'});
+        logger.error(
+          this.index + ` "${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`,
+          {type: 'BindingError', space: this.space}
+        );
       } else {
         // set direct ref
         if (rule.setTarget) _.set(this, path + 'Obj', target);
@@ -191,7 +197,10 @@ class Component {
     _.each(req, (rule, prop) => { // iterates through rules
       // required: true
       if (rule.required && !_.has(this, prop)) {
-        logger.error(`No required "${prop}" property for "${this.index}" of ${this.className}.`, {type: 'BindingError'});
+        logger.error(
+          `No required "${prop}" property for "${this.index}" of ${this.className}.`,
+          {type: 'BindingError', space: this.space}
+        );
       }
       // isReference: true + className
       if (rule.isReference && _.has(this, prop)) {

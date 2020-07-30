@@ -20,7 +20,7 @@ _Module.prototype.setXLSXModule = function(){
     rawData.splice(0, options.omitRows); // remove rows
   } catch (e) {
     let msg = e.message + ` when converting module "${this.filename}"`;
-    this.logger.error(msg, {type: 'ModuleError'});
+    this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
   }
 
   let dataFiltered = rawData

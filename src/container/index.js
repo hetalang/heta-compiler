@@ -57,15 +57,24 @@ class Container {
     let space = q.space || 'nameless';
     // check index
     if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
-      this.logger.error(`${ind} id should be string of type ID, but have "${q.id}"`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} id should be string of type ID, but have "${q.id}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (reservedWords.indexOf(q.id) !== -1) {
-      this.logger.error(`${ind} id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (!q.class || typeof q.class !== 'string'){
-      this.logger.error(`${ind} No class or unsuitable class for "insert": ${q.class}`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} No class or unsuitable class for "insert": ${q.class}`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
@@ -84,14 +93,20 @@ class Container {
     // check if class is in the list
     let selectedClass = this.classes[q.class];
     if (selectedClass === undefined){
-      this.logger.error(`"${ind}" Unknown class "${q.class}" for the component.`, {type: 'QueueError'});
+      this.logger.error(
+        `"${ind}" Unknown class "${q.class}" for the component.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
     // get in namespace
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`"${ind}" create namespace "${space}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `"${ind}" create namespace "${space}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
@@ -108,28 +123,43 @@ class Container {
 
     let space = q.space || 'nameless';
     if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
-      this.logger.error(`${ind} Id should be string, but have "${q.id}"`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Id should be string, but have "${q.id}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (q.class){
-      this.logger.error(`${ind} Class property is not allowed for "update": ${q.class}`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Class property is not allowed for "update": ${q.class}`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     // set component
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`${ind} Create namespace "${space}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Create namespace "${space}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
     let targetComponent = namespace.get(q.id);
     // creation of new components is not allowed
     if (targetComponent === undefined) {
-      this.logger.error(`${ind} component does not exist which is not allowed for "update" strategy.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} component does not exist which is not allowed for "update" strategy.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (targetComponent.isCore) {
-      this.logger.error(`${ind} Core component is read-only and cannot be updated.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Core component is read-only and cannot be updated.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
@@ -149,27 +179,42 @@ class Container {
 
     let space = q.space || 'nameless';
     if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
-      this.logger.error(`${ind} Id should be string, but have "${q.id}"`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Id should be string, but have "${q.id}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (q.class){
-      this.logger.error(`${ind} Class property is not allowed for "delete": ${q.class}`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Class property is not allowed for "delete": ${q.class}`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     // set component
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`${ind} Create namespace "${space}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Create namespace "${space}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     
     var targetComponent = namespace.get(q.id);
     if (!targetComponent) { // if targetComponent===false, element is not exist
-      this.logger.error(`${ind} Element with id "${q.id}" does not exist and cannot be deleted.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Element with id "${q.id}" does not exist and cannot be deleted.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if(targetComponent.isCore){
-      this.logger.error(`${ind} Core component is read-only and cannot be deleted.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Core component is read-only and cannot be deleted.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     
@@ -181,12 +226,18 @@ class Container {
 
     let space = q.space || 'nameless';
     if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
-      this.logger.error(`${ind} Id should be string, but have "${q.id}"`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Id should be string, but have "${q.id}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`${ind} Create namespace "${space}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} Create namespace "${space}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     
@@ -224,7 +275,10 @@ class Container {
 
     let space = q.space || 'nameless';
     if (q.fromId) {
-      this.logger.error(`fromId must not be set for #importNS, but have "${q.fromId}"`, {type: 'QueueError'});
+      this.logger.error(
+        `fromId must not be set for #importNS, but have "${q.fromId}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (q.id) {
@@ -233,16 +287,25 @@ class Container {
     }
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`Create namespace "${space}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `Create namespace "${space}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
-      this.logger.error(`space should be string, but have "${q.fromSpace}"`, {type: 'QueueError'});
+      this.logger.error(
+        `space should be string, but have "${q.fromSpace}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     let fromNamespace = this.namespaces.get(q.fromSpace);
     if (fromNamespace === undefined) {
-      this.logger.error(`Create namespace "${q.fromSpace}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `Create namespace "${q.fromSpace}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
@@ -306,35 +369,53 @@ class Container {
     let space = q.space || 'nameless';
     // checking arguments
     if (!q.fromId || (typeof q.fromId !== 'string')) {
-      this.logger.error(`${ind} fromId should be string, but have "${q.fromId}"`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} fromId should be string, but have "${q.fromId}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
-      this.logger.error(`${ind} id should be string, but have "${q.id}"`, {type: 'QueueError'});
+      this.logger.error(
+        `${ind} id should be string, but have "${q.id}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
     let namespace = this.namespaces.get(space);
     if (namespace === undefined) {
-      this.logger.error(`Create namespace "${space}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `Create namespace "${space}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
     if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
-      this.logger.error(`fromSpace should be string, but have "${q.fromSpace}"`, {type: 'QueueError'});
+      this.logger.error(
+        `fromSpace should be string, but have "${q.fromSpace}"`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
     let fromNamespace = this.namespaces.get(q.fromSpace);
     if (fromNamespace === undefined) {
-      this.logger.error(`Create namespace "${q.fromSpace}" before use.`, {type: 'QueueError'});
+      this.logger.error(
+        `Create namespace "${q.fromSpace}" before use.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
     
     // select component to copy
     let component = fromNamespace.get(q.fromId);
     if (!component) {
-      this.logger.error(`Element with ${q.fromSpace}::${q.fromId} does not exist and cannot be imported.`, {type: 'QueueError'});
+      this.logger.error(
+        `Element with ${q.fromSpace}::${q.fromId} does not exist and cannot be imported.`,
+        {type: 'QueueError', space: space}
+      );
       return;
     }
 
@@ -362,15 +443,24 @@ class Container {
   */
   export(q = {}){
     if (q.format === undefined) {
-      this.logger.error('Empty format option in #export', {type: 'QueueError'});
+      this.logger.error(
+        'Empty format option in #export',
+        {type: 'QueueError'}
+      );
       return;
     }
     if (typeof this.exports[q.format] !== 'function') {
-      this.logger.error(`Unknown format "${q.format}" in #export action.`, {type: 'QueueError'});
+      this.logger.error(
+        `Unknown format "${q.format}" in #export action.`,
+        {type: 'QueueError'}
+      );
       return;
     }
     if (typeof q.filepath !== 'string') {
-      this.logger.error('"filepath" option in #export is skipped or not a string', {type: 'QueueError'});
+      this.logger.error(
+        '"filepath" option in #export is skipped or not a string',
+        {type: 'QueueError'}
+      );
       return;
     }
 
@@ -387,7 +477,10 @@ class Container {
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
     if (typeof this[actionName] !== 'function') {
-      this.logger.error(`Action #${actionName} is unknown and will be skipped.`, {type: 'QueueError'});
+      this.logger.error(
+        `Action #${actionName} is unknown and will be skipped.`,
+        {type: 'QueueError', action: actionName}
+      );
       return;
     }
     

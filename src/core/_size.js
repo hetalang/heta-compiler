@@ -58,11 +58,11 @@ class _Size extends Component {
         if (!target) {
           let msg = `Unit "${x.kind}" is not found as expected here: `
             + `${this.index} { units: ${this.units} };`;
-          logger.error(msg, {type: 'BindingError'});
+          logger.error(msg, {type: 'BindingError', space: this.space});
         } else if (!target.instanceOf('UnitDef')){
           let msg = `Unit "${x.kind}" is not of UnitDef class as expected here: `
             + `${this.index} { units: ${this.units} };`;
-          logger.error(msg, {type: 'BindingError'});
+          logger.error(msg, {type: 'BindingError', space: this.space});
         } else {
           // kindObj can be set here
           x.kindObj = target;

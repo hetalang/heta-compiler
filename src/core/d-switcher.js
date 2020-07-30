@@ -25,11 +25,11 @@ class DSwitcher extends _Switcher {
             this.trigger = expr; 
           } else {
             let msg = `DSwitcher trigger "${this.index}" should be a boolean expression.`;
-            logger && logger.error(msg, {type: 'ValidationError'});
+            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
           }
         } catch (err) {
           let msg = this.index + ' '+ err.message + ` "${q.trigger}"`;
-          logger && logger.error(msg, {type: 'ValidationError'});
+          logger && logger.error(msg, {type: 'ValidationError', space: this.space});
         }
       }
     }
