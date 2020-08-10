@@ -154,19 +154,18 @@ class SLVExport extends _Export{
               multiply: multiply,
               add: add
             });
-
-            if (switcher.stopObj!==undefined){
-              model.events.push({
-                start: switcher.getStop(),
-                period: 0,
-                on: 1,
-                target: switcher.id + '_',
-                multiply: 0,
-                add: 0
-              });
-            }
-
           });
+        // transform `stop` to `event`
+        if (switcher.stopObj !== undefined) {
+          model.events.push({
+            start: switcher.getStop(),
+            period: 0,
+            on: 1,
+            target: switcher.id + '_',
+            multiply: 0,
+            add: 0
+          });
+        }
       });
 
     // search for CSwitcher

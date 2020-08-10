@@ -131,21 +131,29 @@ class DBSolveExport extends _Export{
               start: switcher.getStart(),
               period: period,
               on: switcher.id + '_',
-              target: record.id + '_',
+              target: record.id + (record.isDynamic ? '_' : ''),
               multiply: 0,
               add: record.id + '_' + switcher.id + '_',
               expr: expr.toSLVString(this.powTransform)
             };
-
             image.events.push(evt);
             image.eventCounter++;
-
-            if (switcher.stopObj !== undefined) {
-              evt.hasStop = true;
-              evt.startStop = switcher.getStop();
-              image.eventCounter++;
-            }
           });
+
+        // transform `stop` to `event`
+        if (switcher.stopObj !== undefined) {
+          let evt = {
+            start: switcher.getStop(),
+            period: 0,
+            on: 1,
+            target: switcher.id + '_',
+            multiply: 0,
+            add: 0,
+            isStop: true // if false then do not put in RHS
+          };
+          image.events.push(evt);
+          image.eventCounter++;
+        }
       });
 
     // search for CSwitcher

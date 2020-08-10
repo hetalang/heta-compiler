@@ -459,7 +459,7 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {%- endfor %}
 
 // calculate events
-{%- for event in events %}
+{%- for event in events | exclude2("isStop", true) %}
 {{ event.add }} = {{ event.expr }};
 {%- endfor %}
 {%- endblock %}
@@ -793,7 +793,7 @@ k1
 {% block events -%}
 {{ dynamicRecords.length + eventCounter }}
 {%- for dynamic in dynamicRecords %}{# init events #}
-{{ dynamic.id }}_
+{{ dynamic.id }}
 0
 {{ dynamic.id }}_start__
 0
@@ -807,14 +807,6 @@ k1
 {{ event.start }}
 {{ event.period }}
 {{ event.on }}
-{%- if event.hasStop %}
-{{ event.on }}
-0
-0
-{{ event.startStop }}
-0
-1
-{%- endif %}
 {%- endfor %}
 {%- endblock %}
 <listModelData>

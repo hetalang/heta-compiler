@@ -2,9 +2,10 @@
 
 ## 0.5.10
 
-- fix bug when trigger is empty
-- add message about unsupported SBML features
-- add logFormat for saving logs in JSON
+- fix bug when `trigger` is empty
+- add messages about unsupported SBML features
+- add `logFormat` builder option for saving logs in JSON
+- fix slv/dbsolve multiple `stop`
 
 ## 0.5.9
 

@@ -32,7 +32,7 @@ sw1 @TimeSwitcher {
   period: 12
 };
 a0 [sw1]= a0 + 10;
-//comp1 [sw1]= 6;
+comp1 [sw1]= 6;
 
 sw2_start @Const = 5;
 sw2 @TimeSwitcher {
