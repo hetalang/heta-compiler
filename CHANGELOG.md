@@ -1,11 +1,13 @@
 # Change Log
 
-## 0.5.10
+## 0.5.11
 
 - fix bug when `trigger` is empty
 - add messages about unsupported SBML features
 - add `logFormat` builder option for saving logs in JSON
 - fix slv/dbsolve multiple `stop`
+
+## 0.5.10 - skipped
 
 ## 0.5.9
 
