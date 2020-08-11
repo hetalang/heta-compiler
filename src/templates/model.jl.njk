@@ -42,10 +42,10 @@ function start_(cons)
     # Heta initialize
     t = 0.0 # initial time
     {% for record in initRecords -%}
-    {% if record.getAssignment('start_') is defined -%}
-    {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toJuliaString() }}
-    {%- else -%}
+    {% if record.isRule -%}
     {{ record.id }} = {{ record.getAssignment('ode_').translate(pTranslator).toJuliaString() }}
+    {%- else -%}
+    {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toJuliaString() }}
     {%- endif %}
     {% endfor %}
     # save results
@@ -237,7 +237,9 @@ function {{event.switcher.id}}_assignment_(integrator)
     
     # save results
 
-    integrator.u .= [{% for record in dynamicRecords %}
+    integrator.u .= [
+    {{ '0.0' if dynamicRecords | length == 0 }}
+    {%- for record in dynamicRecords %}
     {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
         {{ record.id }} * {{ record.compartment }}, 
     {%- else %}

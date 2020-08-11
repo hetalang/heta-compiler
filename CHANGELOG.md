@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.12
+
+- fix transformation in Julia: nthRoot, exponentiale, zero dynamic, ode_ priority
+
 ## 0.5.11
 
 - fix bug when `trigger` is empty

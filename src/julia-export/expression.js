@@ -94,6 +94,9 @@ Expression.prototype.toJuliaString = function(){
       let arg0 = node.args[0].toString(options, true);
       return `!${arg0}`;
     }
+    if (node.type === 'SymbolNode' && node.name === 'e') {
+      return 'exp(1.0)';
+    }
   };
 
   return this.exprParsed

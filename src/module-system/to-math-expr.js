@@ -84,8 +84,8 @@ function _toMathExpr(element, useParentheses = false){
       .map((x) => _toMathExpr(x));
     if (degree) {
       let n_element = _.get(degree, 'elements.0');
-      let n = _toMathExpr(n_element);
-      return `nthRoot(${args[0]}, ${n})`;
+      let n = _toMathExpr(n_element, true);
+      return `pow(${args[0]}, 1.0/${n})`;
     } else {
       return `sqrt(${args[0]})`;
     }
@@ -167,7 +167,8 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/time') {
     return 't';
   } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/delay') {
-    return 'delay';
+    // return 'delay';
+    throw new Error('"delay" symbol in expression (SBML module) is not supported');
   } else if (element.name === 'csymbol') {
     return _.get(element, 'elements.0.text');
   } else if (element.name === 'cn' && _.get(element, 'attributes.type') === 'rational' && _.get(element, 'elements.1.name') === 'sep') { // rational numbers: 1/1000
