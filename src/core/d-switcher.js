@@ -56,12 +56,36 @@ class DSwitcher extends _Switcher {
       this.trigger.updateReferences(q);
     }
   }
+  bind(namespace){
+    super.bind(namespace);
+    let logger = this.namespace.container.logger;
+
+    // get list of 
+    let deps = this.trigger
+      .exprParsed
+      .getSymbols();
+    _.pull(deps, 't', 'e', 'pi');
+
+    deps.forEach((id) => {
+      let target = namespace.get(id);
+
+      if (!target) {
+        let msg = `Component "${id}" is not found in space "${this.space}" as expected in DSwitcher: "${this.index}"`
+              + `\n\t${this.trigger.toString()};`;
+        logger.error(msg, {type: 'BindingError', space: this.space});
+      } else if (!target.instanceOf('Const') && !target.instanceOf('Record')) {
+        let msg = `Component "${id}" is not a Const or Record class as expected in expression: `
+          + `${this.trigger.toString()};`;
+        logger.error(msg, {type: 'BindingError', space: this.space});
+      }
+    });
+  }
 }
 
 DSwitcher._requirements = {
   trigger: {
     required: true, 
-    isReference: false, 
+    isReference: false
   }
 };
 

@@ -6,7 +6,7 @@ r1 := k1*S1*comp1;
 k1 @Const = 0.1;
 
 sw1 @DSwitcher {
-  trigger: (S1 != 0.8) and ((S1 > 3) or (k1 <= 100.))
+  trigger: (S1 != 0.8) and (S1 > 3)
 };
 S1 [sw1]= 10;
 

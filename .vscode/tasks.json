@@ -78,6 +78,12 @@
             "type": "shell",
             "command": "heta build cases/14-sbml-module",
             "group": "test"
+        },
+        {
+            "label": "case-16",
+            "type": "shell",
+            "command": "heta build cases/16-d-switcher",
+            "group": "test"
         }
     ]
 }
