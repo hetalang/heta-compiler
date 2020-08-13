@@ -458,11 +458,26 @@ if(t==0){
 F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {%- endfor %}
 
-// calculate events
+{{ '//! Time events' if events | length > 0 }}
 {%- for event in events | exclude2("isStop", true) %}
 {{ event.add }} = {{ event.expr }};
 {%- endfor %}
 {%- endblock %}
+{{ '//! Discrete events' if discreteEvents | length > 0 }}
+{%- for evt in discreteEvents %}
+if({{ evt.switcher.id }}_>0){
+  if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){
+    {%- for assign in evt.assignments %}
+    {{ assign.target }} = {{ assign.expr.toSLVString(powTransform) }};
+    {%- endfor %}
+    {{ evt.switcher.id }}_ = 0;
+  }else{}
+}else{
+  if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){}else{
+    {{ evt.switcher.id }}_ = 1;
+  }
+}
+{%- endfor %}
 #
 
 <RHS 2
@@ -508,6 +523,12 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {{ switcher.id }}_ = 1; // @TimeSwitcher { };
 {% endfor %}
 {% endif %}
+{%- if discreteEvents | length > 0 %}
+//! Switchers for discrete events, count {{ discreteEvents | length }}
+{%- for evt in discreteEvents %}
+{{ evt.switcher.id }}_ = 1; // @DSwitcher {  }
+{%- endfor %}
+{%- endif %}
 {% endblock %}
 #
 
@@ -791,7 +812,7 @@ k1
 1000000
 {{ 0 if eventsOff else 1 }}
 {% block events -%}
-{{ dynamicRecords.length + eventCounter }}
+{{ dynamicRecords.length + events.length }}
 {%- for dynamic in dynamicRecords %}{# init events #}
 {{ dynamic.id }}_
 0

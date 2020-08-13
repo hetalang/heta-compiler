@@ -66,13 +66,10 @@ class DBSolveExport extends _Export{
    * @return {undefined}
    */
   getSLVImage(ns){
-    // creates model image
-    let image = {
-      population: ns
-    };
+    let logger = this.container.logger;
 
     // push active processes
-    image.processes = ns
+    let processes = ns
       .selectByInstanceOf('Process')
       .filter((x) => {
         return x.actors.length > 0 // process with actors
@@ -81,37 +78,36 @@ class DBSolveExport extends _Export{
           });
       });
     // push non boundary ode variables which are mentioned in processes
-    image.dynamicRecords = ns
+    let dynamicRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => x.isDynamic);
     /*
-    image.staticRecords = ns
+    let staticRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => !x.isDynamic && !x.isRule);
     */
-    image.initRecords = ns // XXX: do we need this?
+    let initRecords = ns // XXX: do we need this?
       .sortExpressionsByContext('start_', true)
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule)); 
     // create matrix
-    image.matrix = [];
-    image.processes.forEach((process, processNum) => {
+    let matrix = [];
+    processes.forEach((process, processNum) => {
       process.actors.filter((actor) => {
         return !actor.targetObj.boundary
           && !actor.targetObj.isRule;
       }).forEach((actor) => {
-        let variableNum = image.dynamicRecords.indexOf(actor.targetObj);
-        image.matrix.push([processNum, variableNum, actor.stoichiometry]);
+        let variableNum = dynamicRecords.indexOf(actor.targetObj);
+        matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
     });
 
     // create and sort expressions for RHS (rules)
-    image.ruleRecords = ns
+    let ruleRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.isDynamic || x.isRule );
 
     // create TimeEvents
-    image.events = [];
-    image.eventCounter = 0;
+    let timeEvents = [];
     ns
       .selectByInstanceOf('TimeSwitcher')
       .forEach((switcher) => { // scan for switch
@@ -123,7 +119,7 @@ class DBSolveExport extends _Export{
         ns
           .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
-            let expr = record.instanceOf('Species') && !record.isAmount
+            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
               ? record.getAssignment(switcher.id).multiply(record.compartment)
               : record.getAssignment(switcher.id);
 
@@ -136,8 +132,7 @@ class DBSolveExport extends _Export{
               add: record.id + '_' + switcher.id + '_',
               expr: expr.toSLVString(this.powTransform)
             };
-            image.events.push(evt);
-            image.eventCounter++;
+            timeEvents.push(evt);
           });
 
         // transform `stop` to `event`
@@ -151,29 +146,66 @@ class DBSolveExport extends _Export{
             add: 0,
             isStop: true // if false then do not put in RHS
           };
-          image.events.push(evt);
-          image.eventCounter++;
+          timeEvents.push(evt);
         }
       });
 
     // search for CSwitcher
-    let bagSwitchers = ns
+    let unsupportedSwitchers = ns
       .selectByClassName('CSwitcher')
       .map((switcher) => switcher.id);
-    if (bagSwitchers.length > 0) {
-      let logger = this.container.logger;
-      logger.error('CSwitcher is not supported in format DBSolve: ' + bagSwitchers, {type: 'ExportError'});
+    if (unsupportedSwitchers.length > 0) {
+      let msg = 'CSwitcher is not supported in format DBSolve: ' + unsupportedSwitchers;
+      logger.error(msg, {type: 'ExportError'});
     }
-    
-    image.powTransform = this.powTransform;
+
+    // Discrete Events
+    let discreteEvents = ns
+      .selectByClassName('DSwitcher')
+      .map((switcher) => {
+        // check boolean expression in trigger
+        if (!switcher.trigger.isComparison) {
+          let msg = `DBSolve supports only simple comparison operators in DSwitcher trigger but get: "${switcher.trigger.toString()}"`;
+          logger.error(msg, {type: 'ExportError'});
+        }       
+        
+        let assignments = ns
+          .selectRecordsByContext(switcher.id)
+          .map((record) => {
+            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+              ? record.getAssignment(switcher.id).multiply(record.compartment)
+              : record.getAssignment(switcher.id);
+
+            return {
+              target: record.id + (record.isDynamic ? '_' : ''),
+              expr: expr
+            };
+          });
+          
+        return {
+          switcher,
+          assignments
+        };
+      });
 
     // group Const
-    image.grouppedConst = _.groupBy(
+    let grouppedConst = _.groupBy(
       ns.selectByClassName('Const'),
       (con) => _.get(con, this.groupConstBy)
     );
 
-    return image;
+    return {
+      population: ns,
+      processes,
+      dynamicRecords,
+      initRecords,
+      matrix,
+      ruleRecords,
+      events: timeEvents,
+      powTransform: this.powTransform,
+      discreteEvents,
+      grouppedConst
+    };
   }
   getSLVCode(image = {}){
     return nunjucks.render(

@@ -1,16 +1,22 @@
 
 comp1 @Compartment .= 1;
 S1 @Species { compartment: comp1 } .= 10;
+S2 @Species { compartment: comp1 } .= 10;
 r1 @Reaction { actors: S1 => };
 r1 := k1*S1*comp1;
 k1 @Const = 0.1;
-out @Record .= 0;
+x1 @Record .= 0;
+x2 @Record .= 0;
+pr1 @Process { actors: => x1 };
+pr1 := 0.1;
 
 sw1 @DSwitcher {
   trigger: S1<6
 };
-S1 [sw1]= S1 + 10; // reassign dynamic 
-out [sw1]= out + 100; // reassign static
+S1 [sw1]= S1 + 10; // reassign dynamic species
+S2 [sw1]= S2 + 10; // reassign static species
+x1 [sw1]= x1 + 100; // reassign dynamic record
+x2 [sw1]= x2 + 100; // reassign static record
 
 // exports
 #export { format: JSON, filepath: output };

@@ -4,6 +4,7 @@ kel @Const = 0.01; // constant of elimination
 
 a0 @Species {compartment: comp0, isAmount: true};
 s1 @Species {compartment: comp1};
+s2 @Species {compartment: comp1};
 comp0 @Compartment;
 comp1 @Compartment;
 vabs @Reaction {actors: a0 -> s1};
@@ -15,6 +16,7 @@ vabs := kabs*a0;
 vel := kel*s1*comp1;
 a0 []= 0; // initial value
 s1 []= 0;
+s2 []= 0; // static
 
 //#export {space: one_comp, filepath: sbml, format: SBML};
 #export {filepath: json, format: JSON};
@@ -40,3 +42,4 @@ sw2 @TimeSwitcher {
   period: 24
 };
 s1 [sw2]= s1 + 2;
+s2 [sw2]= s2 + 2;

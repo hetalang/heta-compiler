@@ -95,7 +95,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 
 - `Compartment` which changes in time may result in wrong ODE.
 - `CSwitcher` is not supported.
-- `DSwitcher` is not supported.
+- `DSwitcher` does not work for dynamic Records.
 - Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
 - `Infinity`, `-Infinity`, `NaN` values is not supported
 - boolean operatiors like `and`, `or`, etc. are not supported
@@ -134,7 +134,7 @@ This is the updated version of SLV export format which supports compartment volu
 ### Known restrictions
 
 - `CSwitcher` is not supported and will be skipped.
-- `DSwitcher` is not supported.
+- `DSwitcher` does not work for dynamic Records.
 - `Infinity`, `-Infinity`, `NaN` values is not supported
 - boolean operatiors like `and`, `or`, etc. are not supported
 
@@ -352,7 +352,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |- |- |+ |+
 |`@CSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
-|`@DSwitcher` class                                      |+ ~~dynamic records~~ |- |+ |- |- |+ |+ |+ |+
+|`@DSwitcher` class                                      |+ ~~dynamic records~~ |+ ~~dynamic records~~ |+ |- |- |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
 |`@Dose` class                                           |- |- |- |- |- |- |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
