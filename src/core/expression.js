@@ -149,7 +149,7 @@ class Expression {
     return new Expression(node);
   }
   hasBooleanResult(){
-    let booleanOperators = [
+    let operators = [
       'smaller', 'smallerEq',
       'larger', 'largerEq',
       'equal', 'unequal',
@@ -158,9 +158,22 @@ class Expression {
     let expr = _removeParenthesis(this.exprParsed);
 
     let isBoolean = expr.type === 'OperatorNode'
-      && booleanOperators.indexOf(expr.fn) !== -1; 
+      && operators.indexOf(expr.fn) !== -1; 
 
     return isBoolean;
+  }
+  // check if expression includes boolean operators: "and", "or", etc. 
+  get isComparison(){
+    let booleanOperators = [
+      'smaller', 'smallerEq',
+      'larger', 'largerEq',
+      'equal', 'unequal'
+    ];
+
+    let res = this.exprParsed.type === 'OperatorNode'
+      && booleanOperators.indexOf(this.exprParsed.fn) !== -1;
+
+    return res;
   }
 }
 

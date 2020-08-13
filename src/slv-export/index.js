@@ -67,14 +67,10 @@ class SLVExport extends _Export{
    */
   getSLVImage(ns){
     let logger = this.container.logger;
-    // creates empty model image
-    let model = {
-      population: ns
-    };
 
     // push active processes
-    model.processes = [];
-    model.population
+    let processes = [];
+    ns
       .toArray()
       .filter((x) => {
         return x.instanceOf('Process')
@@ -83,35 +79,35 @@ class SLVExport extends _Export{
             return !actor.targetObj.boundary && !actor.targetObj.isRule;
           });
       })
-      .forEach((process) => model.processes.push(process));
+      .forEach((process) => processes.push(process));
     // push non boundary ode variables which are mentioned in processes
-    model.variables = [];
-    model.population
+    let variables = [];
+    ns
       .toArray()
       .filter((x) => x.instanceOf('Record') && x.isDynamic)
-      .forEach((record) => model.variables.push(record));
+      .forEach((record) => variables.push(record));
     // create matrix
-    model.matrix = [];
-    model.processes.forEach((process, processNum) => {
+    let matrix = [];
+    processes.forEach((process, processNum) => {
       process.actors.filter((actor) => {
         return !actor.targetObj.boundary
           && !actor.targetObj.isRule;
       }).forEach((actor) => {
-        let variableNum = model.variables.indexOf(actor.targetObj);
-        model.matrix.push([processNum, variableNum, actor.stoichiometry]);
+        let variableNum = variables.indexOf(actor.targetObj);
+        matrix.push([processNum, variableNum, actor.stoichiometry]);
       });
     });
 
     // create and sort expressions for RHS
-    model.rhs = model.population
+    let rhs = ns
       .sortExpressionsByContext('ode_')
       .filter((record) => record.instanceOf('Record') && _.has(record, 'assignments.ode_'));
     // check that all record in start are not Expression
-    let startExpressions = model.population
+    let startExpressions = ns
       .selectRecordsByContext('start_')
       .filter((record) => record.assignments.start_.num===undefined); // check if it is not Number
     if (startExpressions.length > 0) {
-      let errorMsg = 'DBSolve does not support expressions string in InitialValues.\n'
+      let errorMsg = 'SLV does not support expressions string in InitialValues.\n'
         + startExpressions
           .map((x) => `${x.index} []= ${x.assignments.start_.toString()}`)
           .join('\n');
@@ -119,8 +115,8 @@ class SLVExport extends _Export{
     }
 
     // create TimeEvents
-    model.events = [];
-    model.population
+    let timeEvents = [];
+    ns
       .selectByClassName('TimeSwitcher')
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
@@ -128,7 +124,7 @@ class SLVExport extends _Export{
         let period = switcher.periodObj === undefined || _.get(switcher, 'repeatCountObj.num') === 0
           ? 0
           : switcher.getPeriod();
-        model.population
+        ns
           .selectRecordsByContext(switcher.id)
           .forEach((record) => { // scan for records in switch
             let expression = record.assignments[switcher.id];
@@ -141,12 +137,12 @@ class SLVExport extends _Export{
                   try { // a can be evaluated, i.e. '3/4'
                     return tree.eval();
                   } catch (e) { // other cases, i.e. 'p1*2'
-                    logger.error(`SLVExport cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, {type: 'ExportError'});
+                    logger.error(`SLV format cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, {type: 'ExportError'});
                   }
                 }
               });
 
-            model.events.push({
+            timeEvents.push({
               start: switcher.getStart(),
               period: period,
               on: switcher.id + '_',
@@ -157,7 +153,7 @@ class SLVExport extends _Export{
           });
         // transform `stop` to `event`
         if (switcher.stopObj !== undefined) {
-          model.events.push({
+          timeEvents.push({
             start: switcher.getStop(),
             period: 0,
             on: 1,
@@ -169,21 +165,48 @@ class SLVExport extends _Export{
       });
 
     // search for CSwitcher
-    let bagSwitchers = model.population
+    let unsupportedSwitchers = ns
       .selectByClassName('CSwitcher')
       .map((switcher) => switcher.id);
-    if(bagSwitchers.length > 0){
-      let logger = ns.container.logger;
-      logger.error('CSwitcher is not supported in SLVExport: ' + bagSwitchers, {type: 'ExportError'});
+    if (unsupportedSwitchers.length > 0) {
+      logger.error('CSwitcher is not supported in SLVExport: ' + unsupportedSwitchers, {type: 'ExportError'});
     }
 
+    // Discrete Events
+    let discreteEvents = ns
+      .selectByClassName('DSwitcher')
+      .map((switcher) => {
+        // check boolean expression in trigger
+        if (!switcher.trigger.isComparison) {
+          let msg = `SLV supports only simple comparison operators in DSwitcher trigger but get: "${switcher.trigger.toString()}"`;
+          logger.error(msg, {type: 'ExportError'});
+        }       
+        
+        let assignments = ns
+          .selectRecordsByContext(switcher.id);
+          
+        return {
+          switcher,
+          assignments
+        };
+      });
+
     // group Const
-    model.grouppedConst = _.groupBy(
+    let grouppedConst = _.groupBy(
       ns.selectByClassName('Const'),
       (con) => _.get(con, this.groupConstBy)
     );
     
-    return model;
+    return {
+      population: ns,
+      processes,
+      variables,
+      matrix,
+      rhs,
+      events: timeEvents,
+      discreteEvents,
+      grouppedConst: grouppedConst
+    };
   }
   getSLVCode(image = {}){
     return nunjucks.render(

@@ -4,11 +4,13 @@ S1 @Species { compartment: comp1 } .= 10;
 r1 @Reaction { actors: S1 => };
 r1 := k1*S1*comp1;
 k1 @Const = 0.1;
+out @Record .= 0;
 
 sw1 @DSwitcher {
-  trigger: (S1 != 0.8) and (S1 > 3)
+  trigger: S1<6
 };
-S1 [sw1]= 10;
+S1 [sw1]= S1 + 10; // reassign dynamic 
+out [sw1]= out + 100; // reassign static
 
 // exports
 #export { format: JSON, filepath: output };

@@ -56,6 +56,12 @@ default_compartment_ = 1; // {units: UL} This is fake compartment to support com
 {{ switcher.id }}_ = 1; // @TimeSwitcher {  }
 {% endfor %}
 {% endif %}
+{%- if discreteEvents | length > 0 %}
+//! Switchers for discrete events, count {{ discreteEvents | length }}
+{%- for evt in discreteEvents %}
+{{ evt.switcher.id }}_ = 1; // @DSwitcher {  }
+{%- endfor %}
+{%- endif %}
 {% endblock %}
 =============================== RHS ================================
 {% macro diff(backReferences=[]) -%}
@@ -84,5 +90,20 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {%- else -%}
 F[{{ loop.index }}] = ( {{ diff(dynamic.backReferences) }} ) / {{ dynamic.compartment|default('default_compartment_') }};
 {%- endif %}
+{%- endfor %}
+{{ '//! Discrete events' if discreteEvents | length > 0 }}
+{%- for evt in discreteEvents %}
+if({{ evt.switcher.id }}_>0){
+  if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){
+    {%- for assign in evt.assignments %}
+    {{ assign.id }} = {{ assign.getAssignment(evt.switcher.id).toSLVString(powTransform) }};
+    {%- endfor %}
+    {{ evt.switcher.id }}_ = 0;
+  }else{}
+}else{
+  if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){}else{
+    {{ evt.switcher.id }}_ = 1;
+  }
+}
 {%- endfor %}
 {% endblock %}
