@@ -74,7 +74,7 @@ describe('Expession exports to Julia', () => {
   });
   it('toJuliaString() for "factorial(x*y)"', () => {
     let expr = Expression.fromString('factorial(x*y)');
-    expect(expr.toJuliaString()).to.be.equal('factorial(ceil(Int, x * y))');
+    expect(expr.toJuliaString()).to.be.equal('fact(x * y)');
   });
   it('toJuliaString() for "ceil(x*y)"', () => {
     let expr = Expression.fromString('ceil(x*y)');
