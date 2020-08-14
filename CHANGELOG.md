@@ -4,7 +4,7 @@
 
 - fix transformation in Julia: nthRoot, exponentiale, zero dynamic, ode_ priority, factorial
 - add bind() method to `DSwitcher`
-- export `DSwitcher` to formats: SLV, DBSolve
+- export `DSwitcher` to formats: SLV, DBSolve, Matlab
 
 ## 0.5.11
 

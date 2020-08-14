@@ -110,7 +110,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects, reinit_y0]
         {%- endfor %}
     end
 
-    {%- for event in events %}
+    {% for event in events | filter2('switcher.className', 'TimeSwitcher') %}
     function res = {{ event.switcher.id }}_condition(time, y)
         {%- set ev_start = pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
         {%- set ev_period = pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
@@ -128,6 +128,51 @@ function [ode_func, out_func, y0_, events_conditions, events_affects, reinit_y0]
         end
         {%- endif %}
     end
+    {%- endfor %}
+
+    {%- for event in events | filter2('switcher.className', 'DSwitcher') %}
+    function res = {{ event.switcher.id }}_condition(time, y)
+ 
+        %%% Records
+        {%- for record in outputRecords %}
+        % {{ record.title }} ({{ record.units }}) {{ record.notes }}
+        {% if record.isRule -%}
+        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {%- elif record.instanceOf('Species') and not record.isAmount -%}
+        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {%- else -%}
+        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {%- endif -%}
+        {%- endfor %}
+
+        if ({{ event.switcher.trigger.translate(pTranslator).toMatlabString() if event.switcher.trigger is defined else 'false' }})
+            res = 1;
+        else 
+            res = -1;
+        end
+    end
+    {%- endfor %}
+
+    {%- for event in events | filter2('switcher.className', 'CSwitcher') %}
+    function res = {{ event.switcher.id }}_condition(time, y)
+ 
+        %%% Records
+        {%- for record in outputRecords %}
+        % {{ record.title }} ({{ record.units }}) {{ record.notes }}
+        {% if record.isRule -%}
+        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {%- elif record.instanceOf('Species') and not record.isAmount -%}
+        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {%- else -%}
+        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {%- endif -%}
+        {%- endfor %}
+
+        res = {{ event.switcher.trigger.translate(pTranslator).toMatlabString() if event.switcher.trigger is defined else '-1' }};
+    end
+    {%- endfor %}
+
+    {%- for event in events %}
     function y = {{ event.switcher.id }}_affect(time, y)
 
         %%% Records

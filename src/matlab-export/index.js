@@ -54,11 +54,6 @@ class MatlabExport extends _Export {
         pathSuffix: '/model.m',
         type: 'text'
       },
-      /*{
-        content: this.getInitCode(image),
-        pathSuffix: '/init.m',
-        type: 'text'
-      },*/
       {
         content: paramContent,
         pathSuffix: '/param.m',
@@ -117,10 +112,13 @@ class MatlabExport extends _Export {
 
     // create events from switchers
     let events = ns
-      .selectByInstanceOf('TimeSwitcher')
+      .selectByInstanceOf('_Switcher')
       .map((switcher) => {
         let affect = switcher.namespace.toArray()
-          .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));
+          .filter((x) => {
+            return x.instanceOf('Record') 
+              && _.has(x, 'assignments.' + switcher.id);
+          });
         
         return {
           switcher,

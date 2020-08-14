@@ -323,7 +323,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 ### Known restrictions
 
-- `DSwitcher` is not supported.
+- `CSwitcher` is not supported.
 
 **Example:**
 
@@ -352,8 +352,8 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |- |- |+ |+
 |`@CSwitcher` class                                      |- |- |+ |- |- |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
-|`@DSwitcher` class                                      |+ ~~dynamic records~~ |+ ~~dynamic records~~ |+ |- |- |+ |+ |+ |+
-|`@DSwitcher` with interpolation                         |- |- |+ |- |- |+ |na|na|na
+|`@DSwitcher` class                                      |+ ~~dynamic records~~ |+ ~~dynamic records~~ |+ |- |+ |+ |+ |+ |+
+|`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
 |`@Dose` class                                           |- |- |- |- |- |- |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
