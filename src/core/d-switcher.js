@@ -62,8 +62,8 @@ class DSwitcher extends _Switcher {
 
     // get list of 
     let deps = this.trigger
-      .exprParsed
-      .getSymbols();
+      ? this.trigger.exprParsed.getSymbols()
+      : [];
     _.pull(deps, 't', 'e', 'pi');
 
     deps.forEach((id) => {
