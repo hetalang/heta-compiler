@@ -51,7 +51,7 @@ Expression.prototype.toJuliaString = function(){
     if(node.type==='FunctionNode' && node.fn.name==='factorial'){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `factorial(ceil(Int, ${args[0]}))`;
+      return `fact(${args[0]})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
       let args = node.args

@@ -2,7 +2,7 @@
 
 ## 0.5.12
 
-- fix transformation in Julia: nthRoot, exponentiale, zero dynamic, ode_ priority
+- fix transformation in Julia: nthRoot, exponentiale, zero dynamic, ode_ priority, factorial
 - add bind() method to `DSwitcher`
 - export `DSwitcher` to formats: SLV, DBSolve
 
