@@ -110,9 +110,18 @@ addrule(
   }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
-{% set listOfCondEvents = population.selectByClassName("CSwitcher") %}
-{{- "% Events" if listOfCondEvents|length > 0 }}
-{% for event in listOfCondEvents -%}
+{% set listOfDEvents = population.selectByClassName("DSwitcher") %}
+{{- "% Discrete Events" if listOfDEvents | length > 0 }}
+{%- for event in listOfDEvents %}
+{{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() if event.trigger is defined else 'false' }}', {
+  {%- for record in population.selectRecordsByContext(event.id) -%}
+  '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
+  }, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
+{%- endfor %}
+
+{% set listOfCEvents = population.selectByClassName("CSwitcher") %}
+{{- "% Conditional Events" if listOfCEvents | length > 0 }}
+{% for event in listOfCEvents -%}
 {{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}

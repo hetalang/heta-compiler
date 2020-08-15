@@ -197,7 +197,6 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 ### Known restrictions
 
 - Simbiology does not support periodic events. `period`, `stop` properties of `@TimeSwitcher` are skipped.
-- `@CSwitcher` is not supported.
 
 **Example:**
 ```heta
