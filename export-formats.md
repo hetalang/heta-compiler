@@ -279,7 +279,7 @@ Creation of Julia files (.jl) supported by SimSolver.
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+| spaceFilter | ID[]/ID | | | namespace | the namespase to export |
 
 ### Known restrictions
 

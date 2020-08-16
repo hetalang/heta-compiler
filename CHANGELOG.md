@@ -5,6 +5,7 @@
 - fix transformation in Julia: nthRoot, exponentiale, zero dynamic, ode_ priority, factorial
 - add bind() method to `DSwitcher`
 - export `DSwitcher` to formats: SLV, DBSolve, Matlab, Simbiology
+- multispace Julia export
 
 ## 0.5.11
 

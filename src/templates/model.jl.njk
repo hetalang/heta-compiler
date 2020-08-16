@@ -1,10 +1,3 @@
-{% macro idOrSynonim(component) %}{# if no Synonim in yTranslator, than use id #}
-{%- if yTranslator.symbolName[component.id] -%}
-{{ yTranslator.symbolName[component.id] }}
-{%- else -%}
-{{ component.id }}
-{%- endif -%}
-{% endmacro -%}
 {#-
   constants : all constants
   initRecords : all records SORTED by start_ and have start_ or isRule
@@ -12,6 +5,12 @@
   ruleRecords : all records SORTED by ode_
   staticRecords : records which is not dynamic nor rule
   events : array of {switcher, array of assignments with [switcher]}
+  builderName
+  options
+  namespace
+  notDynamicRecords
+  rhs
+  pTranslator
 -#}
 
 #= 
@@ -22,38 +21,40 @@
 module julia {# set here the name of namespace in future #}
 using SimSolver
 
+{%- for img in nsImages %}
+{% set id = img.namespace.spaceName %}
 ### create default constants
-constants_ = NamedTuple{(
-  {% for con in constants -%}
+{{ id }}_constants_ = NamedTuple{(
+  {% for con in img.constants -%}
     :{{ con.id }}, 
   {%- endfor %}
 )}(Float64[
-  {% for con in constants -%}
+  {% for con in img.constants -%}
     {{ con.num }},
   {%- endfor %}
 ])
 
 ### initialization of ODE variables and Records
-function start_(cons)
-    #({% for con in constants -%}
+function {{ id }}_start_(cons)
+    #({% for con in img.constants -%}
     {{ con.id }}, 
     {%- endfor %}) = cons
 
     # Heta initialize
     t = 0.0 # initial time
-    {% for record in initRecords -%}
+    {% for record in img.initRecords -%}
     {% if record.isRule -%}
-    {{ record.id }} = {{ record.getAssignment('ode_').translate(pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.getAssignment('ode_').translate(img.pTranslator).toJuliaString() }}
     {%- else -%}
-    {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.getAssignment('start_').translate(img.pTranslator).toJuliaString() }}
     {%- endif %}
     {% endfor %}
     # save results
 
     return (
-        {%- if dynamicRecords|length > 0 %}
+        {%- if img.dynamicRecords | length > 0 %}
         [
-        {%- for record in dynamicRecords %}
+        {%- for record in img.dynamicRecords %}
         {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
             {{ record.id }} * {{ record.compartment }}, 
         {%- else %}
@@ -65,7 +66,7 @@ function start_(cons)
         [ 0.0 ], # init for fake variable
         {%- endif %}
         [
-        {%- for record in staticRecords %}
+        {%- for record in img.staticRecords %}
             {{ record.id }}, 
         {%- endfor %}
         ]
@@ -73,31 +74,31 @@ function start_(cons)
 end
 
 ### calculate RHS of ODE
-function ode_(du, u, p, t)
+function {{ id }}_ode_(du, u, p, t)
     cons = p.constants
-    ({% for record in staticRecords -%}
+    ({% for record in img.staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}) = p.static
-    ({% for record in dynamicRecords -%}
+    ({% for record in img.dynamicRecords -%}
     {{ record.id }}_, 
     {%- endfor %}) = u {# TODO: replace by u[index] #}
 
     # Heta rules
-    {% for record in ruleRecords %}
+    {% for record in img.ruleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
     {{ record.id }} = {{ record.id }}_
     {% endif -%}
     {% endfor %}
-    #p.static .= [{% for record in staticRecords -%}
+    #p.static .= [{% for record in img.staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}]
-    {%- if dynamicRecords|length > 0 %}
-    du .= [{% for record in dynamicRecords %}
-      {{ rhs[loop.index0] }},  # d{{ record.id }}_/dt
+    {%- if img.dynamicRecords | length > 0 %}
+    du .= [{% for record in img.dynamicRecords %}
+      {{ img.rhs[loop.index0] }},  # d{{ record.id }}_/dt
     {%- endfor %}
     ]
     {%- else %}
@@ -106,20 +107,20 @@ function ode_(du, u, p, t)
 end
 
 ### output function
-function make_saving_(outputIds::Vector{Symbol})
+function {{ id }}_make_saving_(outputIds::Vector{Symbol})
     function saving_(u, t, integrator)
         cons = integrator.p.constants
-        ({% for record in staticRecords -%}
+        ({% for record in img.staticRecords -%}
         {{ record.id }}, 
         {%- endfor %}) = integrator.p.static
-        ({% for record in dynamicRecords -%}
+        ({% for record in img.dynamicRecords -%}
         {{ record.id }}_, 
         {%- endfor %}) = u{# TODO: replace by u[index] #}
 
         # Heta rules
-        {% for record in ruleRecords %}
+        {% for record in img.ruleRecords %}
         {%- if record.isRule -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
+        {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
         {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
         {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
         {% elif record.isDynamic -%}
@@ -127,7 +128,7 @@ function make_saving_(outputIds::Vector{Symbol})
         {% endif -%}
         {% endfor %}
         # calculate amounts
-        {%- for record in notDynamicRecords %}
+        {%- for record in img.notDynamicRecords %}
         {%- if record.instanceOf('Species') and not record.isAmount %}
         {{ record.id }}_ = {{ record.id }} * {{ record.compartment }}
         {%- else %}
@@ -141,11 +142,11 @@ function make_saving_(outputIds::Vector{Symbol})
 end
 
 ### time events
-{%- for event in events | filter2('switcher.className', 'TimeSwitcher') %}
-function {{ event.switcher.id }}_times_(cons, times = [0.0, 100.0])
-    {%- set ev_start = pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
-    {%- set ev_period = pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
-    {%- set ev_stop = pTranslator.symbolName[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
+{%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
+function {{ id }}_{{ event.switcher.id }}_times_(cons, times = [0.0, 100.0])
+    {%- set ev_start = img.pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
+    {%- set ev_period = img.pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
+    {%- set ev_stop = img.pTranslator.symbolName[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
     {% if ev_period is undefined -%}
     return [{{ ev_start }}]
     {%- else -%}
@@ -155,20 +156,20 @@ end
 {%- endfor %}
 
 ### discrete events
-{%- for event in events | filter2('switcher.className', 'DSwitcher') %}
-function {{ event.switcher.id }}_trigger_(u, t, integrator)
+{%- for event in img.events | filter2('switcher.className', 'DSwitcher') %}
+function {{ id }}_{{ event.switcher.id }}_trigger_(u, t, integrator)
     cons = integrator.p.constants
-    ({% for record in staticRecords -%}
+    ({% for record in img.staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}) = integrator.p.static
-    ({% for record in dynamicRecords -%}
+    ({% for record in img.dynamicRecords -%}
     {{ record.id }}_, 
     {%- endfor %}) = u
 
     # Heta rules
-    {% for record in ruleRecords %}
+    {% for record in img.ruleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
@@ -176,25 +177,25 @@ function {{ event.switcher.id }}_trigger_(u, t, integrator)
     {% endif -%}
     {% endfor %}
 
-    return {{ event.switcher.trigger.translate(pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }} ? 1 : -1
+    return {{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }} ? 1 : -1
 end
 {%- endfor %}
 
 ### continous events
-{%- for event in events | filter2('switcher.className', 'CSwitcher') %}
-function {{ event.switcher.id }}_condition_(u, t, integrator)
+{%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
+function {{ id }}_{{ event.switcher.id }}_condition_(u, t, integrator)
     cons = integrator.p.constants
-    ({% for record in staticRecords -%}
+    ({% for record in img.staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}) = integrator.p.static
-    ({% for record in dynamicRecords -%}
+    ({% for record in img.dynamicRecords -%}
     {{ record.id }}_, 
     {%- endfor %}) = u
 
     # Heta rules
-    {% for record in ruleRecords %}
+    {% for record in img.ruleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
@@ -207,21 +208,21 @@ end
 {%- endfor %}
 
 ### event assignments
-{% for event in events -%}
-function {{event.switcher.id}}_assignment_(integrator)
+{% for event in img.events -%}
+function {{ id }}_{{ event.switcher.id }}_assignment_(integrator)
     cons = integrator.p.constants
     t = integrator.t
-    ({% for record in staticRecords -%}
+    ({% for record in img.staticRecords -%}
     {{ record.id }}, 
     {%- endfor %}) = integrator.p.static
-    ({% for record in dynamicRecords -%}
+    ({% for record in img.dynamicRecords -%}
     {{ record.id }}_, 
     {%- endfor %}) = integrator.u
 
     # Heta rules
-    {% for record in ruleRecords %}
+    {% for record in img.ruleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% elif record.isDynamic -%}
@@ -232,50 +233,55 @@ function {{event.switcher.id}}_assignment_(integrator)
     ({%- for assignment in event.affect -%}
     {{ assignment.id }}, 
     {%- endfor %}) = ({%- for assignment in event.affect -%}
-    {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toJuliaString() }}, 
+    {{ assignment.getAssignment(event.switcher.id).translate(img.pTranslator).toJuliaString() }}, 
     {%- endfor %})
     
     # save results
 
     integrator.u .= [
-    {{ '0.0' if dynamicRecords | length == 0 }}
-    {%- for record in dynamicRecords %}
-    {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
+    {{ '0.0' if img.dynamicRecords | length == 0 }}
+    {%- for record in img.dynamicRecords %}
+        {% if record.instanceOf('Species') and not record.isAmount and not record.isRule -%}
         {{ record.id }} * {{ record.compartment }}, 
-    {%- else %}
+        {%- else -%}
         {{ record.id }}, 
-    {%- endif %}
+        {%- endif %}
     {%- endfor %}
     ]
     
-    integrator.p.static .= [{% for record in staticRecords -%}
-    {{ record.id }}, 
-    {%- endfor %}]
+    integrator.p.static .= [
+        {%- for record in img.staticRecords %}
+        {{ record.id }}, 
+        {%- endfor %}
+    ]
 end
 {% endfor %}
 
 ### OUTPUT ###
 
-{{namespace.spaceName}} = Model(
-  start_,
-  ode_,
+{{ id }}_model_ = Model(
+  {{ id }}_start_,
+  {{ id }}_ode_,
   [
-      {%- for event in events %}
+      {%- for event in img.events %}
       {% if event.switcher.instanceOf('TimeSwitcher') -%}
-      TimeEvent({{ event.switcher.id }}_times_, {{event.switcher.id}}_assignment_),
+      TimeEvent({{ id }}_{{ event.switcher.id }}_times_, {{ id }}_{{event.switcher.id}}_assignment_),
       {%- elif event.switcher.instanceOf('DSwitcher') -%}
-      DEvent({{ event.switcher.id }}_trigger_, {{event.switcher.id}}_assignment_),
+      DEvent({{ id }}_{{ event.switcher.id }}_trigger_, {{ id }}_{{event.switcher.id}}_assignment_),
       {%- elif event.switcher.instanceOf('CSwitcher') -%}
-      CEvent({{ event.switcher.id }}_condition_, {{event.switcher.id}}_assignment_),
+      CEvent({{ id }}_{{ event.switcher.id }}_condition_, {{ id }}_{{event.switcher.id}}_assignment_),
       {%- endif %}
       {%- endfor %}
   ],
-  make_saving_,
-  constants_
+  {{ id }}_make_saving_,
+  {{ id }}_constants_
 )
+{%- endfor %}{# img #}
 
 models = (
-    {{namespace.spaceName}} = {{namespace.spaceName}}
+    {%- for img in nsImages %}
+    {{ img.namespace.spaceName }} = {{ img.namespace.spaceName }}_model_,
+    {%- endfor %}
 )
 tasks = ()
 
