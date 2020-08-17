@@ -122,7 +122,7 @@ addrule(
 {% set listOfCEvents = population.selectByClassName("CSwitcher") %}
 {{- "% Conditional Events" if listOfCEvents | length > 0 }}
 {% for event in listOfCEvents -%}
-{{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.condition }} >= 0', {
+{{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() + '>=0' if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Notes', '{{ event.notesHTML }}', 'Tag', '');

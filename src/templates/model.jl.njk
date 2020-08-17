@@ -203,7 +203,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_(u, t, integrator)
     {% endif -%}
     {% endfor %}
 
-    return {{ event.switcher.condition }}
+    return {{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else '-1' }}
 end
 {%- endfor %}
 

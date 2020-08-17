@@ -575,7 +575,7 @@ function eventToQ(x){
   let useValuesFromTriggerTime = _.get(x, 'attributes.useValuesFromTriggerTime') !== 'false';
   //console.log(useValuesFromTriggerTime);
 
-  // condition
+  // trigger
   let trigger = x.elements
     && x.elements.find((y) => y.name === 'trigger');
   let triggerMath = trigger

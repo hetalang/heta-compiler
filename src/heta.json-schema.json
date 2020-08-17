@@ -261,7 +261,7 @@
     "CSwitcherP": {
       "type": "object",
       "properties": {
-        "condition": { "$ref": "#/definitions/ID" }
+        "trigger": { "$ref": "#/definitions/ExprString" }
       }
     },
 
@@ -272,7 +272,7 @@
         { "$ref": "#/definitions/_SwitcherP" },
         { "$ref": "#/definitions/CSwitcherP" },
         {
-          "required": ["id", "space", "condition"],
+          "required": ["id", "space", "trigger"],
           "properties": { "class": { "const": "CSwitcher" } }
         }
       ]
