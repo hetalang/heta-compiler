@@ -238,8 +238,9 @@
   {% endif %}
   
   {%- set listOfTimeEvents = population.selectByClassName("TimeSwitcher") -%}
-  {%- set listOfCondEvents = population.selectByClassName("CSwitcher") -%}
-  {% if listOfTimeEvents|length + listOfCondEvents|length > 0 %}
+  {%- set listOfDEvents = population.selectByClassName("DSwitcher") -%}
+  {%- set listOfCEvents = population.selectByClassName("CSwitcher") -%}
+  {% if listOfTimeEvents|length + listOfCEvents|length  + listOfDEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfTimeEvents %}
       <event
@@ -270,7 +271,7 @@
         </listOfEventAssignments>
       </event>
       {%- endfor %}
-      {%- for event in listOfCondEvents %}
+      {%- for event in listOfCEvents %}
       <event
         id="{{event.id}}" metaid="{{event.index}}"
         >
@@ -278,10 +279,28 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply>
               <geq/>
-              <ci>{{ event.condition }}</ci>
+              {{ event.trigger.toCMathML(true) }}
               <cn>0</cn>
             </apply>
           </math>
+        </trigger>
+        <listOfEventAssignments>
+          {% for record in population.selectRecordsByContext(event.id) %}
+          <eventAssignment
+            variable="{{ record.id }}"
+            metaid="{{record.index}}::{{event.id}}">
+            {{ record.assignments[event.id].toCMathML() }}
+          </eventAssignment>
+          {% endfor %}
+        </listOfEventAssignments>
+      </event>
+      {%- endfor %}
+      {%- for event in listOfDEvents %}
+      <event
+        id="{{ event.id }}" metaid="{{ event.index }}"
+        >
+        <trigger>
+          {{ event.trigger.toCMathML() }}
         </trigger>
         <listOfEventAssignments>
           {% for record in population.selectRecordsByContext(event.id) %}

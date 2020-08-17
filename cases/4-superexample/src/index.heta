@@ -47,7 +47,7 @@ namespace mod1 begin
 end
 
 mod1::sw3 @CSwitcher {
-  condition: p1
+  trigger: p1
 };
 
 namespace mod1 begin

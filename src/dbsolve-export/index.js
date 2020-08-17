@@ -150,15 +150,6 @@ class DBSolveExport extends _Export{
         }
       });
 
-    // search for CSwitcher
-    let unsupportedSwitchers = ns
-      .selectByClassName('CSwitcher')
-      .map((switcher) => switcher.id);
-    if (unsupportedSwitchers.length > 0) {
-      let msg = 'CSwitcher is not supported in format DBSolve: ' + unsupportedSwitchers;
-      logger.error(msg, {type: 'ExportError'});
-    }
-
     // Discrete Events
     let discreteEvents = ns
       .selectByClassName('DSwitcher')
@@ -188,6 +179,28 @@ class DBSolveExport extends _Export{
         };
       });
 
+    // Continuous Events
+    let continuousEvents = ns
+      .selectByClassName('CSwitcher')
+      .map((switcher) => {
+        let assignments = ns
+          .selectRecordsByContext(switcher.id)
+          .map((record) => {
+            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+              ? record.getAssignment(switcher.id).multiply(record.compartment)
+              : record.getAssignment(switcher.id);
+
+            return {
+              target: record.id + (record.isDynamic ? '_' : ''),
+              expr: expr
+            };
+          });
+          
+        return {
+          switcher,
+          assignments
+        };
+      });
     // group Const
     let grouppedConst = _.groupBy(
       ns.selectByClassName('Const'),
@@ -204,6 +217,7 @@ class DBSolveExport extends _Export{
       events: timeEvents,
       powTransform: this.powTransform,
       discreteEvents,
+      continuousEvents,
       grouppedConst
     };
   }

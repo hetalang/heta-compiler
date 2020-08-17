@@ -28,7 +28,7 @@ class DSwitcher extends _Switcher {
             logger && logger.error(msg, {type: 'ValidationError', space: this.space});
           }
         } catch (err) {
-          let msg = this.index + ' '+ err.message + ` "${q.trigger}"`;
+          let msg = this.index + ' ' + err.message + ` "${q.trigger}"`;
           logger && logger.error(msg, {type: 'ValidationError', space: this.space});
         }
       }

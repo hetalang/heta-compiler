@@ -3,6 +3,6 @@
     "class": "CSwitcher",
     "id": "sw1",
     "space": "one",
-    "condition": "xxx"
+    "trigger": "xxx"
   }
 ]

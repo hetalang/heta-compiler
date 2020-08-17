@@ -8,8 +8,9 @@ const csymbols = {
   t: 'http://www.sbml.org/sbml/symbols/time'
 };
 
-Expression.prototype.toCMathML = function(){
+Expression.prototype.toCMathML = function(skipHeader = false){
 
-  return this.exprParsed
-    .toCMathML(csymbols);
+  return !skipHeader
+    ? this.exprParsed.toCMathML(csymbols)
+    : this.exprParsed.toCMathMLNode(csymbols); // without <math>...</math>
 };

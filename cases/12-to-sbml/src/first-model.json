@@ -147,6 +147,6 @@
     "class": "CSwitcher",
     "id": "sw1",
     "space": "first",
-    "condition": "evt1"
+    "trigger": "evt1"
   }
 ]

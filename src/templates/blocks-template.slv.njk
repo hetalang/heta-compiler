@@ -62,6 +62,12 @@ default_compartment_ = 1; // {units: UL} This is fake compartment to support com
 {{ evt.switcher.id }}_ = 1; // @DSwitcher {  }
 {%- endfor %}
 {%- endif %}
+{%- if continuousEvents | length > 0 %}
+//! Switchers for continuous events, count {{ continuousEvents | length }}
+{%- for evt in continuousEvents %}
+{{ evt.switcher.id }}_ = 1; // @CSwitcher {  }
+{%- endfor %}
+{%- endif %}
 {% endblock %}
 =============================== RHS ================================
 {% macro diff(backReferences=[]) -%}
@@ -102,6 +108,21 @@ if({{ evt.switcher.id }}_>0){
   }else{}
 }else{
   if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){}else{
+    {{ evt.switcher.id }}_ = 1;
+  }
+}
+{%- endfor %}
+{{ '//! Continuous events' if continuousEvents | length > 0 }}
+{%- for evt in continuousEvents %}
+if({{ evt.switcher.id }}_>0){
+  if({{ evt.switcher.trigger.toSLVString(powTransform) + '>=0' if evt.switcher.trigger is defined }}){
+    {%- for assign in evt.assignments %}
+    {{ assign.id }} = {{ assign.getAssignment(evt.switcher.id).toSLVString(powTransform) }};
+    {%- endfor %}
+    {{ evt.switcher.id }}_ = 0;
+  }else{}
+}else{
+  if({{ evt.switcher.trigger.toSLVString(powTransform) + '>=0' if evt.switcher.trigger is defined }}){}else{
     {{ evt.switcher.id }}_ = 1;
   }
 }

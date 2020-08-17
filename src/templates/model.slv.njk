@@ -478,6 +478,21 @@ if({{ evt.switcher.id }}_>0){
   }
 }
 {%- endfor %}
+{{ '//! Continuous events' if continuousEvents | length > 0 }}
+{%- for evt in continuousEvents %}
+if({{ evt.switcher.id }}_>0){
+  if({{ evt.switcher.trigger.toSLVString(powTransform) + '>=0' if evt.switcher.trigger is defined }}){
+    {%- for assign in evt.assignments %}
+    {{ assign.target }} = {{ assign.expr.toSLVString(powTransform) }};
+    {%- endfor %}
+    {{ evt.switcher.id }}_ = 0;
+  }else{}
+}else{
+  if({{ evt.switcher.trigger.toSLVString(powTransform) + '>=0' if evt.switcher.trigger is defined }}){}else{
+    {{ evt.switcher.id }}_ = 1;
+  }
+}
+{%- endfor %}
 #
 
 <RHS 2
@@ -527,6 +542,12 @@ if({{ evt.switcher.id }}_>0){
 //! Switchers for discrete events, count {{ discreteEvents | length }}
 {%- for evt in discreteEvents %}
 {{ evt.switcher.id }}_ = 1; // @DSwitcher {  }
+{%- endfor %}
+{%- endif %}
+{%- if continuousEvents | length > 0 %}
+//! Switchers for continuous events, count {{ continuousEvents | length }}
+{%- for evt in continuousEvents %}
+{{ evt.switcher.id }}_ = 1; // @CSwitcher {  }
 {%- endfor %}
 {%- endif %}
 {% endblock %}

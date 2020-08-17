@@ -15,7 +15,7 @@ const monteCarloTaskError = require('./monteCarloTask-error');
 const page = require('./page');
 const pageError = require('./page-error');
 const switcher = require('./c-switcher');
-const switcherError = require('./c-switcher-error');
+//const switcherError = require('./c-switcher-error');
 const timeSwitcher = require('./timeSwitcher');
 const timeSwitcherError = require('./timeSwitcher-error');
 
@@ -29,7 +29,7 @@ const observation = require('./observation');
 // scoped
 singleTest('Record', record, recordError);
 singleTest('Process', process, processError);
-singleTest('CSwitcher', switcher, switcherError);
+//singleTest('CSwitcher', switcher, switcherError);
 singleTest('MonteCarloTask', monteCarloTask, monteCarloTaskError);
 singleTest('Page', page, pageError);
 singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);

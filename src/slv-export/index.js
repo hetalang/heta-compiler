@@ -164,14 +164,6 @@ class SLVExport extends _Export{
         }
       });
 
-    // search for CSwitcher
-    let unsupportedSwitchers = ns
-      .selectByClassName('CSwitcher')
-      .map((switcher) => switcher.id);
-    if (unsupportedSwitchers.length > 0) {
-      logger.error('CSwitcher is not supported in SLVExport: ' + unsupportedSwitchers, {type: 'ExportError'});
-    }
-
     // Discrete Events
     let discreteEvents = ns
       .selectByClassName('DSwitcher')
@@ -182,6 +174,19 @@ class SLVExport extends _Export{
           logger.error(msg, {type: 'ExportError'});
         }       
         
+        let assignments = ns
+          .selectRecordsByContext(switcher.id);
+          
+        return {
+          switcher,
+          assignments
+        };
+      });
+
+    // Contunuous Events
+    let continuousEvents = ns
+      .selectByClassName('CSwitcher')
+      .map((switcher) => {
         let assignments = ns
           .selectRecordsByContext(switcher.id);
           
@@ -205,6 +210,7 @@ class SLVExport extends _Export{
       rhs,
       events: timeEvents,
       discreteEvents,
+      continuousEvents,
       grouppedConst: grouppedConst
     };
   }
