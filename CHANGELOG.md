@@ -6,7 +6,7 @@
 - add bind() method to `DSwitcher`
 - export `DSwitcher` to formats: SLV, DBSolve, Matlab, Simbiology, SBML
 - multispace Julia export
-- export `CSwitcher` to formats: SLV, DBSolve, SBML
+- export `CSwitcher` to formats: SLV, DBSolve, Matlab, SBML
 
 ## 0.5.11
 
