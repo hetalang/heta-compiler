@@ -25,11 +25,11 @@ using SimSolver
 {% set id = img.namespace.spaceName %}
 ### create default constants
 {{ id }}_constants_ = NamedTuple{(
-  {% for con in img.constants -%}
+  {% for con in img.constants | exclude2('num', undefined) -%}{#exclude const without num#}
     :{{ con.id }}, 
   {%- endfor %}
 )}(Float64[
-  {% for con in img.constants -%}
+  {% for con in img.constants | exclude2('num', undefined) -%}
     {{ con.num }},
   {%- endfor %}
 ])
