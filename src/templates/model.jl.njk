@@ -25,14 +25,21 @@ using SimSolver
 {% set id = img.namespace.spaceName %}
 ### create default constants
 {{ id }}_constants_ = NamedTuple{(
-  {% for con in img.constants | exclude2('num', undefined) -%}{#exclude const without num#}
-    :{{ con.id }}, 
+  {% for con in img.constants | exclude2('num', undefined) -%}{# exclude const without num -#}
+    :{{ con.id }},
   {%- endfor %}
 )}(Float64[
   {% for con in img.constants | exclude2('num', undefined) -%}
     {{ con.num }},
   {%- endfor %}
 ])
+
+### create default output
+{{ id }}_output_ = (
+  {% for rec in img.namespace.selectByInstanceOf('Record') -%}
+  :{{ rec.id }},
+  {%- endfor %}
+)
 
 ### initialization of ODE variables and Records
 function {{ id }}_start_(cons)
@@ -257,7 +264,7 @@ function {{ id }}_{{ event.switcher.id }}_assignment_(integrator)
 end
 {% endfor %}
 
-### OUTPUT ###
+### model
 
 {{ id }}_model_ = Model(
   {{ id }}_start_,
@@ -274,16 +281,41 @@ end
       {%- endfor %}
   ],
   {{ id }}_make_saving_,
-  {{ id }}_constants_
+  {{ id }}_constants_,
+  #{{ id }}_output_
+)
+
+### default task
+
+{{ id }}_default_ = SimpleSTask(
+    {{ id }}_model_,    # model
+    NamedTuple(),       # constants
+    SubTask(            # subtasks
+        collect(range(0., step=5.0, stop=100.)), # 
+        NamedTuple()                             # output ids
+    ),
+    (0.0, 100.0),       # tspan
+    Dict(               # solver
+        :alg => :Tsit5,
+        :reltol => 1e-3,
+        :abstol => 1e-6
+    ),
+    evt_save = (true, true)
 )
 {%- endfor %}{# img #}
+
+### OUTPUT
 
 models = (
     {%- for img in nsImages %}
     {{ img.namespace.spaceName }} = {{ img.namespace.spaceName }}_model_,
     {%- endfor %}
 )
-tasks = ()
+tasks = (
+    {%- for img in nsImages %}
+    {{ img.namespace.spaceName }}_default = {{ img.namespace.spaceName }}_default_,
+    {%- endfor %}
+)
 
 export models, tasks
 

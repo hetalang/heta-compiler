@@ -69,7 +69,7 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
     ```bash
     npm i -g heta-compiler
     ```
-    The development version can be installed directly from GitHub
+    **OR** The development version can be installed directly from GitHub
     ```bash
     npm i -g git+https://github.com/hetalang/heta-compiler.git
     ```

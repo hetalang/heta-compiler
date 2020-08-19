@@ -1,11 +1,16 @@
 # Change Log
 
+## 0.5.13
+
+- add default tasks to Julia export
+
 ## 0.5.12
 
 - fix transformation in Julia: nthRoot, exponentiale, zero dynamic, ode_ priority, factorial
 - add bind() method to `DSwitcher`
 - export `DSwitcher` to formats: SLV, DBSolve, Matlab, Simbiology, SBML
 - multispace Julia export
+- use `trigger` instead of `condition` in `CSwitcher`
 - export `CSwitcher` to formats: SLV, DBSolve, Matlab, Simbiology, SBML
 
 ## 0.5.11
