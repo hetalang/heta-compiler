@@ -292,10 +292,14 @@ end
     NamedTuple(),       # constants
     SubTask(            # subtasks
         collect(range(0., step=5.0, stop=100.)), # 
-        NamedTuple()                             # output ids
+        [
+        {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
+        :{{ rec.id }},
+        {%- endfor -%}
+        ]                             # output ids
     ),
     (0.0, 100.0),       # tspan
-    Dict(               # solver
+    solver = Dict(               # solver
         :alg => :Tsit5,
         :reltol => 1e-3,
         :abstol => 1e-6
