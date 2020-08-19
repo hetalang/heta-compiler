@@ -10,7 +10,7 @@ using Main.SimSolverPlatform
 
 ### use first model in platform
 {{ firstId }} = models.{{ firstId }}
-{{ firstId }}_default = models.{{ firstId }}_default
+{{ firstId }}_default = tasks.{{ firstId }}_default
 
 ### solve and plot default
 solution = solve_task({{ firstId }}_default)
