@@ -292,7 +292,7 @@ end
     NamedTuple(),       # constants
     SubTask(            # subtasks
         collect(range(0., step=5.0, stop=100.)), # 
-        [
+        Symbol[
         {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
         :{{ rec.id }},
         {%- endfor -%}
