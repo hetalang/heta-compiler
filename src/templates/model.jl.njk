@@ -60,7 +60,7 @@ function {{ id }}_start_(cons)
 
     return (
         {%- if img.dynamicRecords | length > 0 %}
-        [
+        Float64[
         {%- for record in img.dynamicRecords %}
         {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
             {{ record.id }} * {{ record.compartment }}, 
@@ -72,10 +72,10 @@ function {{ id }}_start_(cons)
         {% else %}
         [ 0.0 ], # init for fake variable
         {%- endif %}
-        [
+        Float64[
         {%- for record in img.staticRecords %}
             {{ record.id }}, 
-        {%- endfor %}
+        {% endfor -%}
         ]
     )
 end
