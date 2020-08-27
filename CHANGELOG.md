@@ -3,6 +3,7 @@
 ## 0.5.13
 
 - add default tasks to Julia export
+- notify in limitation in SBML module: stoichiometryMath, EventWithDelay
 
 ## 0.5.12
 

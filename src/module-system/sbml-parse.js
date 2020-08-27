@@ -438,6 +438,13 @@ function reactionToQ(x){
     var actors0 = products.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
+        // check stoichiometry as an expression
+        let stoicheometryExpr = _.get(y, 'elements', [])
+          .filter((z) => z.name === 'stoichiometryMath');
+        if (stoicheometryExpr.length > 0)
+          throw new Error('"stoichiometryMath" from SBML module is not supported.');
+
+        // get constant stoichiometry
         let stoichiometry = _.get(y, 'attributes.stoichiometry', '1');
         return {
           target: _.get(y, 'attributes.species'),
@@ -455,6 +462,13 @@ function reactionToQ(x){
     var actors1 = reactants.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
+        // check stoichiometry as an expression
+        let stoicheometryExpr = _.get(y, 'elements', [])
+          .filter((z) => z.name === 'stoichiometryMath');
+        if (stoicheometryExpr.length > 0)
+          throw new Error('"stoichiometryMath" from SBML module is not supported.');
+
+        // get constant stoichiometry
         let stoichiometry = _.get(y, 'attributes.stoichiometry', '1');
         return {
           target: _.get(y, 'attributes.species'),
@@ -585,16 +599,22 @@ function eventToQ(x){
     switcher.trigger = _toMathExpr(triggerMath);
   }
 
-  // delay : not used
+  // check if delay is presented, should we include it to Heta standard?
   let delay = x.elements
     && x.elements.find((y) => y.name === 'delay');
+  // currently not used
+  /*
   let delayMath = delay
     && delay.elements
     && delay.elements.find((y) => y.name === 'math');
   if (delayMath) {
     let delayExpr = _toMathExpr(delayMath);
     //console.log(delayExpr);
+
   }
+  */
+  if (delay)
+    throw new Error('"delay" in event is not supported in SBML module'); 
 
   // assignments
   let assignments = x.elements 
