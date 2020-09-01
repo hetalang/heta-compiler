@@ -426,10 +426,15 @@ function reactionToQ(x){
     _.set(q, 'assignments.ode_', expr);
   }
 
+  // check if reversible
   let reversible = _.get(x, 'attributes.reversible') !== 'false' ;
   _.set(q, 'aux.reversible', reversible);
+  // check if fast
   let fast = _.get(x, 'attributes.fast') === 'true' ;
-  _.set(q, 'aux.fast', fast);
+  //_.set(q, 'aux.fast', fast);
+  if (fast) {
+    throw new Error(`"fast" reactions "${q.id}" is not supported in SBML module.`);
+  }
 
   // products
   let products = x.elements
