@@ -1,0 +1,45 @@
+/*
+  checking different types of records for switching
+*/
+
+// === implicit boundary, static ===
+
+// aux
+k1 @Const = 1e-3;
+k2 @Const = 1e-2;
+
+// switching record
+rec1 @Record .= 0;
+rec1 [sw1]= 12;
+
+// switching both compartment and species
+comp1 @Compartment .= 1;
+spec_amt1 @Species { compartment: comp1, isAmount: true }.= 0;
+spec_conc1 @Species { compartment: comp1 }.= 1;
+comp1 [sw1]= 10;
+spec_amt1 [sw1]= 8;
+spec_conc1 [sw1]= 6;
+
+// switching only species
+comp2 @Compartment .= 1;
+spec_amt2 @Species { compartment: comp2, isAmount: true }.= 0;
+spec_conc2 @Species { compartment: comp2 }.= 1;
+spec_amt2 [sw1]= 8;
+spec_conc2 [sw1]= 6;
+
+// switching only compartment
+comp3 @Compartment .= 1;
+spec_amt3 @Species { compartment: comp3, isAmount: true }.= 0;
+spec_conc3 @Species { compartment: comp3 }.= 1;
+comp3 [sw1]= 10;
+
+// switcher
+sw1 @TimeSwitcher {
+  start: 10
+};
+
+// exports
+#export {
+  format: Julia,
+  filepath: julia_model
+};
