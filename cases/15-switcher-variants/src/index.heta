@@ -33,7 +33,33 @@ spec_amt3 @Species { compartment: comp3, isAmount: true }.= 0;
 spec_conc3 @Species { compartment: comp3 }.= 1;
 comp3 [sw1]= 10;
 
-// switcher
+// === dynamic ===
+
+// switching both compartment and species
+comp4 @Compartment .= 1;
+spec_amt4 @Species { compartment: comp4, isAmount: true }.= 0;
+spec_conc4 @Species { compartment: comp4 }.= 1;
+comp4 [sw1]= 10;
+spec_amt4 [sw1]= 8;
+spec_conc4 [sw1]= 6;
+r4 @Reaction { actors: = spec_amt4 + spec_conc4 } := 0.1;
+
+// switching only species
+comp5 @Compartment .= 1;
+spec_amt5 @Species { compartment: comp5, isAmount: true }.= 0;
+spec_conc5 @Species { compartment: comp5 }.= 1;
+spec_amt5 [sw1]= 8;
+spec_conc5 [sw1]= 6;
+r5 @Reaction { actors: = spec_amt5 + spec_conc5 } := 0.1;
+
+// switching only compartment
+comp6 @Compartment .= 1;
+spec_amt6 @Species { compartment: comp6, isAmount: true }.= 0;
+spec_conc6 @Species { compartment: comp6 }.= 1;
+comp6 [sw1]= 10;
+r6 @Reaction { actors: = spec_amt6 + spec_conc6 } := 0.1;
+
+// === switcher ===
 sw1 @TimeSwitcher {
   start: 10
 };

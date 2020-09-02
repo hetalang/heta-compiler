@@ -2,13 +2,12 @@
   constants : all constants
   initRecords : all records SORTED by start_ and have start_ or isRule
   dynamicRecords : records with isDynamic = true, i.e. no rules, no boundary, have reactions
-  ruleRecords : all records SORTED by ode_
+  extendedRuleRecords : all records SORTED by ode_
   staticRecords : records which is not dynamic nor rule
   events : array of {switcher, array of assignments with [switcher]}
   builderName
   options
   namespace
-  notDynamicRecords
   rhs
   pTranslator
 -#}
@@ -69,13 +68,13 @@ function {{ id }}_start_(cons)
         {%- endif %}
         {%- endfor %}
         ],
-        {% else %}
+        {%- else -%}
         [ 0.0 ], # init for fake variable
         {%- endif %}
         Float64[
         {%- for record in img.staticRecords %}
-            {{ record.id }}, 
-        {% endfor -%}
+            {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }},
+        {%- endfor %}
         ]
     )
 end
@@ -84,24 +83,22 @@ end
 function {{ id }}_ode_(du, u, p, t)
     cons = p.constants
     ({% for record in img.staticRecords -%}
-    {{ record.id }}, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = p.static
     ({% for record in img.dynamicRecords -%}
-    {{ record.id }}_, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = u {# TODO: replace by u[index] #}
 
     # Heta rules
-    {% for record in img.ruleRecords %}
+    {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
-    {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+    {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
-    {% elif record.isDynamic -%}
-    {{ record.id }} = {{ record.id }}_
     {% endif -%}
     {% endfor %}
     #p.static .= [{% for record in img.staticRecords -%}
-    {{ record.id }}, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}]
     {%- if img.dynamicRecords | length > 0 %}
     du .= [{% for record in img.dynamicRecords %}
@@ -118,31 +115,20 @@ function {{ id }}_make_saving_(outputIds::Vector{Symbol})
     function saving_(u, t, integrator)
         cons = integrator.p.constants
         ({% for record in img.staticRecords -%}
-        {{ record.id }}, 
+        {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = integrator.p.static
         ({% for record in img.dynamicRecords -%}
-        {{ record.id }}_, 
+        {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = u{# TODO: replace by u[index] #}
 
         # Heta rules
-        {% for record in img.ruleRecords %}
+        {% for record in img.extendedRuleRecords %}
         {%- if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
-        {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+        {% elif record.instanceOf('Species') and not record.isAmount -%}
         {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
-        {% elif record.isDynamic -%}
-        {{ record.id }} = {{ record.id }}_
         {% endif -%}
         {% endfor %}
-        # calculate amounts
-        {%- for record in img.notDynamicRecords %}
-        {%- if record.instanceOf('Species') and not record.isAmount %}
-        {{ record.id }}_ = {{ record.id }} * {{ record.compartment }}
-        {%- else %}
-        {{ record.id }}_ = {{ record.id }}
-        {%- endif %}
-        {%- endfor %}
-
         d = Base.@locals
         return [d[id] for id in outputIds]
     end
@@ -167,20 +153,18 @@ end
 function {{ id }}_{{ event.switcher.id }}_trigger_(u, t, integrator)
     cons = integrator.p.constants
     ({% for record in img.staticRecords -%}
-    {{ record.id }}, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = integrator.p.static
     ({% for record in img.dynamicRecords -%}
-    {{ record.id }}_, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = u
 
     # Heta rules
-    {% for record in img.ruleRecords %}
+    {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
-    {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+    {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
-    {% elif record.isDynamic -%}
-    {{ record.id }} = {{ record.id }}_
     {% endif -%}
     {% endfor %}
 
@@ -193,20 +177,18 @@ end
 function {{ id }}_{{ event.switcher.id }}_condition_(u, t, integrator)
     cons = integrator.p.constants
     ({% for record in img.staticRecords -%}
-    {{ record.id }}, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = integrator.p.static
     ({% for record in img.dynamicRecords -%}
-    {{ record.id }}_, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = u
 
     # Heta rules
-    {% for record in img.ruleRecords %}
+    {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
-    {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+    {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
-    {% elif record.isDynamic -%}
-    {{ record.id }} = {{ record.id }}_
     {% endif -%}
     {% endfor %}
 
@@ -220,45 +202,54 @@ function {{ id }}_{{ event.switcher.id }}_assignment_(integrator)
     cons = integrator.p.constants
     t = integrator.t
     ({% for record in img.staticRecords -%}
-    {{ record.id }}, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = integrator.p.static
     ({% for record in img.dynamicRecords -%}
-    {{ record.id }}_, 
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = integrator.u
 
     # Heta rules
-    {% for record in img.ruleRecords %}
+    {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
-    {% elif record.instanceOf('Species') and record.isDynamic and not record.isAmount -%}
+    {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
-    {% elif record.isDynamic -%}
-    {{ record.id }} = {{ record.id }}_
     {% endif -%}
     {% endfor %}
     # recalculated values
-    ({%- for assignment in event.affect -%}
+    (
+    {%- for assignment in event.affect -%}
     {{ assignment.id }}, 
-    {%- endfor %}) = ({%- for assignment in event.affect -%}
+    {%- endfor -%}
+    ) = (
+    {%- for assignment in event.affect -%}
     {{ assignment.getAssignment(event.switcher.id).translate(img.pTranslator).toJuliaString() }}, 
-    {%- endfor %})
+    {%- endfor -%}
+    )
     
     # save results
-
-    integrator.u .= [
-    {{ '0.0' if img.dynamicRecords | length == 0 }}
-    {%- for record in img.dynamicRecords %}
-        {% if record.instanceOf('Species') and not record.isAmount and not record.isRule -%}
-        {{ record.id }} * {{ record.compartment }}, 
-        {%- else -%}
-        {{ record.id }}, 
-        {%- endif %}
-    {%- endfor %}
+    {% if img.dynamicRecords | length == 0 -%}
+    integrator.u[[1]] = [
+        0.0,
     ]
-    
-    integrator.p.static .= [
-        {%- for record in img.staticRecords %}
-        {{ record.id }}, 
+    {%- else -%}
+    integrator.u[[
+        {%- for record in img.dynamicRecords -%}
+        {{ loop.index + ',' if record.getAssignment(event.switcher.id) is defined }}
+        {%- endfor -%}
+    ]] = [  
+        {%- for record in img.dynamicRecords | exclude2('assignments.' + event.switcher.id, undefined) %}
+        {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }}, 
+        {%- endfor %}
+    ]
+    {%- endif %}
+    integrator.p.static[[
+        {%- for record in img.staticRecords -%}
+        {{ loop.index + ',' if record.getAssignment(event.switcher.id) is defined }}
+        {%- endfor -%}
+    ]] = [
+        {%- for record in img.staticRecords | exclude2('assignments.' + event.switcher.id, undefined) %}
+        {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}
     ]
 end

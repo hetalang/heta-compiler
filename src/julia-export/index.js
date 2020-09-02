@@ -57,16 +57,15 @@ class JuliaExport extends _Export {
     let constants = ns
       .selectByInstanceOf('Const');
     // ODE variables
-    let dynamicRecords = ns.toArray()
-      .filter((x) => x.instanceOf('Record') && x.isDynamic);
-    let notDynamicRecords = ns.toArray()
-      .filter((x) => x.instanceOf('Record') && !x.isDynamic);
+    let dynamicRecords = ns
+      .selectByInstanceOf('Record')
+      .filter((x) => x.isDynamic);
     // initialize at start records
     let initRecords = ns
       .sortExpressionsByContext('start_')
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
     // currently we output all records
-    let ruleRecords = ns
+    let extendedRuleRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.instanceOf('Record'));
     let staticRecords = ns
@@ -121,11 +120,10 @@ class JuliaExport extends _Export {
       namespace: ns,
       constants,
       dynamicRecords,
-      notDynamicRecords,
       staticRecords,
       rhs,
       initRecords,
-      ruleRecords,
+      extendedRuleRecords,
       events,
       pTranslator: { symbolName: _.fromPairs(pTranslatorArray)},
     };

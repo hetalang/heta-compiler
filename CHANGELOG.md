@@ -4,6 +4,7 @@
 
 - add default tasks to Julia export
 - notify in limitation in SBML module: StoichiometryMath, EventWithDelay, FastReaction
+- fix Julia export for static and dynamic when switches compartment
 
 ## 0.5.12
 
