@@ -128,7 +128,12 @@ function {{ id }}_make_saving_(outputIds::Vector{Symbol})
         {% elif record.instanceOf('Species') and not record.isAmount -%}
         {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
         {% endif -%}
-        {% endfor %}
+        {%- endfor %}
+        # force amount
+        {%- for record in img.namespace.selectByInstanceOf('Species') | filter2('isAmount', true) %}
+        {{ record.id }}_ = {{ record.id }}
+        {%- endfor %}
+
         d = Base.@locals
         return [d[id] for id in outputIds]
     end
