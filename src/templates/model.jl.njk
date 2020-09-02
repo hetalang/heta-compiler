@@ -133,6 +133,9 @@ function {{ id }}_make_saving_(outputIds::Vector{Symbol})
         {%- for record in img.namespace.selectByInstanceOf('Species') | filter2('isAmount', true) %}
         {{ record.id }}_ = {{ record.id }}
         {%- endfor %}
+        {%- for record in img.namespace.selectByInstanceOf('Species') | filter2('isRule', true) %}
+        {{ record.id }}_ = {{ record.id }}{{ '*' + record.compartment if not record.isAmount }}
+        {%- endfor %}
 
         d = Base.@locals
         return [d[id] for id in outputIds]
