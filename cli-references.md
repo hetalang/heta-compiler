@@ -61,8 +61,8 @@ List of `heta build` options:
 | --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory. |
 | --skip-export | | | If set no export files will be created. |
 | --julia-only | | | Run in SimSolver supporting mode: skip declared exports, add default export to SimSolver. |
-| --dist-dir | \<string\> | dist |  Set export directory path, where to store distributives. |
-| --meta-dir | \<string\> | meta |  Set meta directory path. |
+| --dist-dir | \<string\> | |  Set export directory path, where to store distributives. |
+| --meta-dir | \<string\> | |  Set meta directory path. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
 | -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.json5/.yml. |
 
