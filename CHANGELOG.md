@@ -1,10 +1,12 @@
 # Change Log
 
-## 0.5.13
+## 0.5.13 - SimSolver support
 
 - add default tasks to Julia export
 - notify in limitation in SBML module: StoichiometryMath, EventWithDelay, FastReaction
 - fix Julia export for static and dynamic when switches compartment
+- add --distDir, --metaDir, --juliaOnly to CLI options
+- add "opptions.juliaOnly" to declaration
 
 ## 0.5.12
 

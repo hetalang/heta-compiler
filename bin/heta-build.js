@@ -27,6 +27,9 @@ program
   .option('-S, --skip-export', 'do not export files to local directory')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
   .option('-d, --debug', 'If set the raw module output will be stored in "meta".')
+  .option('--julia-only', 'Run in SimSolver supporting mode: skip declared exports, add default export to SimSolver.')
+  .option('--dist-dir <filepath>', 'Set export directory path, where to store distributives.', 'dist')
+  .option('--meta-dir <filepath>', 'Set meta directory path.', 'meta')
   // moduleImport
   .option('-s, --source <filepath>', 'path to main heta module.')
   .option('-t, --type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
@@ -69,7 +72,10 @@ let CLIDeclaration = {
   options: {
     skipExport: program.skipExport,
     logMode: program.logMode,
-    debug: program.debug
+    debug: program.debug,
+    juliaOnly: program.juliaOnly,
+    distDir: program.distDir,
+    metaDir: program.metaDir
   },
   importModule: {
     source: program.source,

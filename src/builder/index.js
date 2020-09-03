@@ -107,20 +107,27 @@ class Builder {
     this.container.knitMany();
     
     // 5. Exports
-    this.exportMany();
+    if (this.options.skipExport) {
+      this.logger.warn('Exporting skipped as stated in declaration.');
+    } else if (this.options.juliaOnly) {
+      this.logger.warn('"julia only" mode');
+      this.exportJuliaOnly();
+    } else {
+      this.exportMany();
+    }
 
     // 6.save logs if required
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {
       switch (this.options.logFormat) {
-        case 'json':
-          var logs = JSON.stringify(this.container.defaultLogs, null, 2);
-          break
-        default: 
-          logs = this.container.defaultLogs
-            .map(x => `[${x.level}]\t${x.msg}`)
-            .join('\n');  
+      case 'json':
+        var logs = JSON.stringify(this.container.defaultLogs, null, 2);
+        break;
+      default: 
+        logs = this.container.defaultLogs
+          .map(x => `[${x.level}]\t${x.msg}`)
+          .join('\n');  
       }
 
       fs.outputFileSync(this._logPath, logs);
@@ -129,19 +136,29 @@ class Builder {
     return;
   }
   exportMany(){
-    if (!this.options.skipExport) {
-      let exportElements = this.container.exportStorage;
-      this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
+    let exportElements = this.container.exportStorage;
+    this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
-      exportElements.forEach((exportItem) => {
-        let fullPath = path.resolve(this._distDirname, exportItem.filepath);
-        let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
-        this.logger.info(msg);
-        exportItem.makeAndSave(this._distDirname);
-      });
-    } else {
-      this.logger.warn('Exporting skipped as stated in declaration.');
-    }
+    exportElements.forEach((exportItem) => {
+      let fullPath = path.resolve(this._distDirname, exportItem.filepath);
+      let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
+      this.logger.info(msg);
+      exportItem.makeAndSave(this._distDirname);
+    });
+  }
+  exportJuliaOnly(){
+    // create export without putting it to exportStorage
+    let exportItem = new this.container.exports['Julia'];
+    exportItem.container = this.container;
+    exportItem.merge({
+      format: 'Julia',
+      filepath: 'platform'
+    });
+
+    let fullPath = path.resolve(this._distDirname, exportItem.filepath);
+    let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
+    this.logger.info(msg);
+    exportItem.makeAndSave(this._distDirname);
   }
 }
 

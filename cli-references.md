@@ -36,7 +36,7 @@ Commands:
 
 ## "heta build" command
 
-`heta build` will run the compilation of the platform.
+`heta build` runs the compilation of the platform.
 It uses the main source file (index) as an initial point to compile the platform.
 
 The default run of `heta build` (no options set, no configuration file) will do the following:
@@ -50,7 +50,7 @@ The default run of `heta build` (no options set, no configuration file) will do 
 
 CLI options allow setting specific options for build command. Use `heta build -h` to see the list of options.
 
-At the end of command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run instead of shell working directory. Absolute and relative path are possible here. If not set the shell WD will be used as WD of Heta.
+At the end of the command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run instead of shell working directory. Absolute and relative path are possible here. If the path not set the shell WD will be used as WD of Heta.
 
 List of `heta build` options:
 
@@ -60,6 +60,9 @@ List of `heta build` options:
 | --type | \<string\> | heta | Type of source file. This option allows to select type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
 | --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory. |
 | --skip-export | | | If set no export files will be created. |
+| --julia-only | | | Run in SimSolver supporting mode: skip declared exports, add default export to SimSolver. |
+| --dist-dir | \<string\> | dist |  Set export directory path, where to store distributives. |
+| --meta-dir | \<string\> | meta |  Set meta directory path. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
 | -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.json5/.yml. |
 
@@ -75,6 +78,13 @@ heta build --source src/table.xlsx --type xlsx
 Run compilation without exporting files using "index.heta" as entry point.
 ```
 heta build --skip-export
+```
+
+#### Example 3
+
+Declaring working directory (WD) inside command line. 
+```
+heta build y:/my-platform
 ```
 
 ### Running build with declaration file
@@ -172,9 +182,10 @@ There are properties in declaration file which do not change compilation process
 | options.logLevel | string | | info | When parsing the compiler prints the messages to the shell. Here you can set a level of printing messages. Possible values: "info", "warning", "error". For example if you set "warn", only warnings and errors will be printed. |
 | options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
 | options.skipExport | boolean | --skip-export | false | If `true` no export files will be created. |
-| options.distDir | string | | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
+| options.juliaOnly | boolean | --julia-only | false | If `true` the compilation will run SimSolver supporting mode. |
+| options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
 | options.debug | boolean | --debug | false | Working in debugging mode. All parsed modules will be saved in JSON files in meta directory. |
-| options.metaDir | string | | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
+| options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
 | options.exitWithoutError | boolean | | false | If there are errors in compilation the `heta build` command return status 1 to console (which means error). If you set true this will return 0. This can be helpful for using autotesting and CI/CD automatization. |
 
 Using neither declaration file nor CLI options is equivalent to the following declaration:
@@ -190,6 +201,7 @@ Using neither declaration file nor CLI options is equivalent to the following de
         "metaDir": "meta",
         "debug": false,
         "skipExport": false,
+        "juliaOnly": false,
         "exitWithoutError": false
     },
     "importModule": {
