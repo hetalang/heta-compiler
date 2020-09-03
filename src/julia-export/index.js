@@ -74,30 +74,27 @@ class JuliaExport extends _Export {
     // RHS of ODE
     let rhs = dynamicRecords
       .map((record) => {
-        if (!record.isDynamic) {
-          return 0;
-        } else { 
-          return record.backReferences.map((ref, i) => {
-            if (ref.stoichiometry === -1) {
-              var st = '-';
-            } else if (ref.stoichiometry < 0) {
-              st = ref.stoichiometry + '*';
-            } else if (ref.stoichiometry === 1){
-              st = i === 0 ? '' : '+';
-            } else { // ref.stoichiometry >= 0
-              st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
-            }
-            
-            let isCompartmentRequired = ref._process_.className === 'Process' 
-              && record.instanceOf('Species') 
-              && !record.isAmount;
-            if (isCompartmentRequired) {
-              return st + ref.process + '*' + record.compartment;
-            } else {
-              return st + ref.process;
-            }
-          }).join('');
-        }
+        return record.backReferences.map((ref, i) => {
+          if (ref.stoichiometry === -1) {
+            var st = '-';
+          } else if (ref.stoichiometry < 0) {
+            st = ref.stoichiometry + '*';
+          } else if (ref.stoichiometry === 1){
+            st = i === 0 ? '' : '+';
+          } else { // ref.stoichiometry >= 0
+            st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
+          }
+          
+          // XXX this is wrong solution because it results in problem d(comp1*S1)/dt = r1*comp1
+          let isCompartmentRequired = ref._process_.className === 'Process' 
+            && record.instanceOf('Species') 
+            && !record.isAmount;
+          if (isCompartmentRequired) {
+            return st + ref.process + '*' + record.compartment;
+          } else {
+            return st + ref.process;
+          }
+        }).join('');
       });
 
     // other switchers

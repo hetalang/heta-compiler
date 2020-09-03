@@ -575,7 +575,7 @@ function rateRuleToQ(x){
     && x.elements.find((y) => y.name === 'math');
   if (math) _.set(q0, 'assignments.ode_', _toMathExpr(math));
 
-  // remove boundary for Species
+  // remove boundary for Species, because Heta does not change boundary species, but SBML does.
   let q1 = { id: target, boundary: false };
 
   return [q0, q1];

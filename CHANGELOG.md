@@ -6,7 +6,7 @@
 - notify in limitation in SBML module: StoichiometryMath, EventWithDelay, FastReaction
 - fix Julia export for static and dynamic when switches compartment
 - add --distDir, --metaDir, --juliaOnly to CLI options
-- add "opptions.juliaOnly" to declaration
+- add "options.juliaOnly" to declaration
 
 ## 0.5.12
 
