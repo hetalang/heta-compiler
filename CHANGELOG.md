@@ -7,6 +7,7 @@
 - fix Julia export for static and dynamic when switches compartment
 - add --distDir, --metaDir, --juliaOnly to CLI options
 - add "options.juliaOnly" to declaration
+- week unit support in Matlab
 
 ## 0.5.12
 
