@@ -15,6 +15,16 @@
 
 function [ode_func, out_func, y0_, events_conditions, events_affects, reinit_y0] = {{ namespace.spaceName }}_Model(p)
 
+    %%% auxilary
+    % ternary operator
+    function out = tern__(cond, x, y)
+        if cond
+            out = x;
+        else
+            out = y;
+        end
+    end
+
     ode_func = @ODEFunc;
     out_func = @OutputFunc;
     events_conditions = @Conditions;

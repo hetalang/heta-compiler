@@ -60,17 +60,17 @@ describe('Expession exports to Julia', () => {
     let expr = Expression.fromString('log10(100)');
     expect(expr.toJuliaString()).to.be.equal('log10(100.0)');
   });
-  it('toJuliaString() for "ifg0(x-y, 1,2)"', () => {
-    let expr = Expression.fromString('ifg0(x-y, 1,2)');
-    expect(expr.toJuliaString()).to.be.equal('x - y > 0 ? 1.0 : 2.0');
+  it('toJuliaString() for "ifgt(x-y, 0, 1,2)"', () => {
+    let expr = Expression.fromString('ifgt(x-y, 0, 1,2)');
+    expect(expr.toJuliaString()).to.be.equal('x - y > 0.0 ? 1.0 : 2.0');
   });
-  it('toJuliaString() for "ife0(x-y, 1,2)"', () => {
-    let expr = Expression.fromString('ife0(x-y, 1,2)');
-    expect(expr.toJuliaString()).to.be.equal('x - y == 0 ? 1.0 : 2.0');
+  it('toJuliaString() for "ifeq(x-y, 0, 1,2)"', () => {
+    let expr = Expression.fromString('ifeq(x-y, 0, 1,2)');
+    expect(expr.toJuliaString()).to.be.equal('x - y == 0.0 ? 1.0 : 2.0');
   });
-  it('toJuliaString() for "ifge0(x-y, 1,2)"', () => {
-    let expr = Expression.fromString('ifge0(x-y, 1,2)');
-    expect(expr.toJuliaString()).to.be.equal('x - y >= 0 ? 1.0 : 2.0');
+  it('toJuliaString() for "ifge(x-y, 0, 1, 2)"', () => {
+    let expr = Expression.fromString('ifge(x-y, 0, 1, 2)');
+    expect(expr.toJuliaString()).to.be.equal('x - y >= 0.0 ? 1.0 : 2.0');
   });
   it('toJuliaString() for "factorial(x*y)"', () => {
     let expr = Expression.fromString('factorial(x*y)');

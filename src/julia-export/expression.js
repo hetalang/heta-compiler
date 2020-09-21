@@ -53,20 +53,30 @@ Expression.prototype.toJuliaString = function(){
         .map((arg) => arg.toString(options));
       return `fact(${args[0]})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ifg0'){
+    if(node.type==='FunctionNode' && node.fn.name==='ifgt'){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `${args[0]} > 0 ? ${args[1]} : ${args[2]}`;
+      return `${args[0]} > ${args[1]} ? ${args[2]} : ${args[3]}`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ife0'){
+    if(node.type==='FunctionNode' && node.fn.name==='ifge'){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `${args[0]} == 0 ? ${args[1]} : ${args[2]}`;
+      return `${args[0]} >= ${args[1]} ? ${args[2]} : ${args[3]}`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='ifge0'){
+    if(node.type==='FunctionNode' && node.fn.name==='iflt'){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `${args[0]} >= 0 ? ${args[1]} : ${args[2]}`;
+      return `${args[0]} < ${args[1]} ? ${args[2]} : ${args[3]}`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='ifle'){
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `${args[0]} <= ${args[1]} ? ${args[2]} : ${args[3]}`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='ifeq'){
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `${args[0]} == ${args[1]} ? ${args[2]} : ${args[3]}`;
     }
     if (node.type === 'ConstantNode' && node.value === Infinity) {
       return 'Inf';

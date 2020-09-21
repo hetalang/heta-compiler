@@ -3,6 +3,8 @@
 ## 0.5.14
 
 - update matlab run
+- ternary operators support in Matlab
+- remove ifg0 support
 
 ## 0.5.13 - SimSolver support
 

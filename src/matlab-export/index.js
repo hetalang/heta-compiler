@@ -3,6 +3,7 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const pkg = require('../../package');
 const _ = require('lodash');
+require('./expression'); // to use method toMatlabString()
 
 class MatlabExport extends _Export {
   merge(q = {}, skipChecking){

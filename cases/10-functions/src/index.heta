@@ -43,9 +43,9 @@ p22 @Record 'min(x, y, z)' := min(x, y, z);
 p23 @Record 'max(x, y)' := max(x, y);
 p24 @Record 'max(x, y, z)' := max(x, y, z);
 p25 @Record 'factorial(n)' := factorial(n);  // doesn't work for: SLV, DBSolve
-p26 @Record 'ifg0(x, y1, y2)' := ifg0(x, y1, y2);
-p27 @Record 'ife0(x, y1, y2)' := ife0(x, y1, y2);
-p28 @Record 'ifge0(x, y1, y2)' := ifge0(x, y1, y2);
+p26 @Record 'ifgt(x, 0, y1, y2)' := ifgt(x, 0, y1, y2);
+p27 @Record 'ifge(x, 0, y1, y2)' := ifge(x, 0, y1, y2);
+p28 @Record 'ifge0(x, 0, y1, y2)' := ifeq(x, 0, y1, y2);
 
 // operators
 o01 @Record 'x+y' := x+y;

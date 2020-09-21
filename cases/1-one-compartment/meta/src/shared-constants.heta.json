@@ -197,25 +197,25 @@
   {
     "action": "export",
     "format": "SLV",
-    "space": "one_comp",
+    "spaceFilter": "one_comp",
     "filepath": "slv_non_saturable"
   },
   {
     "action": "export",
     "format": "SLV",
-    "space": "one_comp_saturation",
+    "spaceFilter": "one_comp_saturation",
     "filepath": "slv_saturable"
   },
   {
     "action": "export",
     "format": "Mrgsolve",
-    "space": "one_comp",
+    "spaceFilter": "one_comp",
     "filepath": "non_saturable"
   },
   {
     "action": "export",
     "format": "Mrgsolve",
-    "space": "one_comp_saturation",
+    "spaceFilter": "one_comp_saturation",
     "filepath": "mrg_saturable"
   }
 ]
