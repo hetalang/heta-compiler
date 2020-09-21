@@ -150,19 +150,19 @@ class MatlabExport extends _Export {
   }
   getParamCode(image = {}){
     return nunjucks.render(
-      'param.m.njk',
+      'matlab-param.m.njk',
       image
     );
   }
   getRunCode(image = {}){
     return nunjucks.render(
-      'run.m.njk',
+      'matlab-run.m.njk',
       image
     );
   }
   getInitCode(image = {}){
     return nunjucks.render(
-      'init.m.njk',
+      'matlab-init.m.njk',
       image
     );
   }
