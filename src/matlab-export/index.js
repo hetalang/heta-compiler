@@ -144,7 +144,7 @@ class MatlabExport extends _Export {
   }
   getModelCode(image = {}){
     return nunjucks.render(
-      'model.m.njk',
+      'matlab-model.m.njk',
       image
     );
   }
@@ -157,12 +157,6 @@ class MatlabExport extends _Export {
   getRunCode(image = {}){
     return nunjucks.render(
       'matlab-run.m.njk',
-      image
-    );
-  }
-  getInitCode(image = {}){
-    return nunjucks.render(
-      'matlab-init.m.njk',
       image
     );
   }
