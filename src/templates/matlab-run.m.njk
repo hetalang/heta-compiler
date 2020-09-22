@@ -10,10 +10,6 @@ output_names = [
 "{{ record.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}
 ];
-show_names = [
-{%- for record in outputRecords -%}
-"{{ record.id }}"{{ ', ' if not loop.last }}
-{%- endfor -%}];
 
 p = param();
 [ode_func, out_func, y0, events_conditions, events_affects] = model(p);
@@ -21,8 +17,6 @@ p = param();
 %%% default task
 t_span = [0 100]; % [0:1:100]
 opt = odeset('OutputFcn', out_func, 'Events', events_conditions, 'MaxStep', 1); % odeset(, 'Mass',M,'RelTol',1e-4,'AbsTol',[1e-6 1e-10 1e-6], 'Stats','on');
-
-% the next string generates "output" variable
 
 % solution without events
 %[tout, y] = ode15s(ode_func, t_span, y0, opt);
@@ -45,6 +39,10 @@ while ti < t_span(2)
 end
 
 %  plot all outputs from show_names
+show_names = [
+{%- for record in outputRecords -%}
+"{{ record.id }}"{{ ', ' if not loop.last }}
+{%- endfor -%}];
 [idx, loc] = ismember(show_names, output_names);
 figure
 hold on
