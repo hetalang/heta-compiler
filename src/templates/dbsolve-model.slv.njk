@@ -5,7 +5,7 @@
 {%- endmacro %}
 {%- set compartments = population.selectByClassName('Compartment') %}
 {%- set freeConstants = population.selectByClassName('Const') | selectattr('free') %}
-{%- set species = population.selectByInstanceOf('Species') %}
+{%- set species = population.selectByInstanceOf('Species') -%}
 
 DBSolve Optimum (new parser) 1 Jul 2006
 SLV25.00*

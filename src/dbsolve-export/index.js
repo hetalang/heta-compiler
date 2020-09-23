@@ -223,7 +223,7 @@ class DBSolveExport extends _Export{
   }
   getSLVCode(image = {}){
     return nunjucks.render(
-      'model.slv.njk',
+      'dbsolve-model.slv.njk',
       image
     );
   }

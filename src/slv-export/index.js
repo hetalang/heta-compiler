@@ -216,7 +216,7 @@ class SLVExport extends _Export{
   }
   getSLVCode(image = {}){
     return nunjucks.render(
-      'blocks-template.slv.njk',
+      'slv-blocks-template.slv.njk',
       image
     );
   }
