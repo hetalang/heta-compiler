@@ -1,6 +1,6 @@
 {
   "name": "heta-compiler",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
@@ -31,33 +31,33 @@
   },
   "dependencies": {
     "@insysbio/topo-sort": "^1.0.1",
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
     "colors": "^1.4.0",
     "commander": "^2.20.3",
     "fs-extra": "^7.0.1",
-    "heta-parser": "^0.3.7",
-    "inquirer": "^7.1.0",
-    "js-yaml": "^3.13.1",
-    "lodash": "^4.17.19",
+    "heta-parser": "^0.3.10",
+    "inquirer": "^7.3.3",
+    "js-yaml": "^3.14.0",
+    "lodash": "^4.17.20",
     "markdown": "^0.5.0",
     "mathjs": "^5.10.3",
     "mathjs-mathml": "^0.2.2",
-    "mathjs-translate": "^0.1.8",
-    "nunjucks": "^3.2.1",
-    "random-id": "^1.0.3",
+    "mathjs-translate": "^0.1.9",
+    "nunjucks": "^3.2.2",
+    "random-id": "^1.0.4",
     "semver": "^6.3.0",
-    "xlsx": "^0.15.3",
+    "xlsx": "^0.15.6",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-xml": "^0.3.2",
-    "jsdoc": "^3.6.3",
+    "jsdoc": "^3.6.6",
     "jsdoc-to-markdown": "^5.0.3",
-    "mocha": "^7.1.1",
+    "mocha": "^7.2.0",
     "nyc": "^14.1.1",
-    "slv-utils": "^0.3.1"
+    "slv-utils": "^0.3.2"
   },
   "engines": {
     "node": ">=8.0.0"
