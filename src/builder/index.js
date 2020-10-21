@@ -152,7 +152,7 @@ class Builder {
     exportItem.container = this.container;
     exportItem.merge({
       format: 'Julia',
-      filepath: 'platform'
+      filepath: '_julia'
     });
 
     let fullPath = path.resolve(this._distDirname, exportItem.filepath);
