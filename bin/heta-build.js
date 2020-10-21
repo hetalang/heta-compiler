@@ -37,7 +37,7 @@ program
 
 // set target directory of platform and check if exist
 let targetDir = path.resolve(program.args[0] || '.');
-if (!fs.existsSync(targetDir)) {
+if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a dicrectory
   process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
   process.exit(1);
 }
@@ -49,7 +49,7 @@ let platformFile = program.declaration;
 let searches = ['', '.json', '.json5', '.yml']
   .map((ext) => path.join(targetDir, platformFile + ext));
 let extensionNumber = searches
-  .map((x) => fs.existsSync(x))
+  .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
   .indexOf(true);
 // is declaration file found ?
 if (extensionNumber === -1) {
