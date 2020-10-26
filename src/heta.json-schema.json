@@ -165,7 +165,8 @@
         },
         "isAmount": {
           "description": "If it is false then the value represents the concentration, i.e. normalized to compartment.",
-          "type": "boolean", "default": false
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -255,7 +256,14 @@
     },
 
     "_SwitcherP": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "atStart": {
+          "description": "If true than the condition will be checked at start_",
+          "type": "boolean",
+          "default": false
+         }
+      }
     },
 
     "CSwitcherP": {

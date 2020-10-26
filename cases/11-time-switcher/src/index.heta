@@ -31,7 +31,8 @@ s2 []= 0; // static
 sw1 @TimeSwitcher {
   start: 0, // start at zero time
   stop: 60,
-  period: 12
+  period: 12,
+  atStart: true
 };
 a0 [sw1]= a0 + 10;
 comp1 [sw1]= 6;
@@ -39,7 +40,8 @@ comp1 [sw1]= 6;
 sw2_start @Const = 5;
 sw2 @TimeSwitcher {
   start: sw2_start,
-  period: 24
+  period: 24,
+  atStart: false
 };
 s1 [sw2]= s1 + 2;
 s2 [sw2]= s2 + 2;
