@@ -104,7 +104,7 @@ addrule(
 {% set listOfTimeEvents = population.selectByClassName("TimeSwitcher") %}
 {{- "% Time Switchers" if listOfTimeEvents | length > 0 }}
 {%- for event in listOfTimeEvents %}
-{{ population.spaceName }}.event.{{event.id}} = addevent({{ model_id }}, 'time >= {{  event.start if event.start is defined else event.startObj.num }}', {
+{{ population.spaceName }}.event.{{event.id}} = addevent({{ model_id }}, 'time > {{  event.start if event.start is defined else event.startObj.num }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
