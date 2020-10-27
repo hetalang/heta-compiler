@@ -14,8 +14,8 @@ Read more about Heta format and Heta-based platforms on Heta project homepage: <
 ## Table of contents
 
 - [Introduction](#introduction)
-- [Export formats](#export-formats)
 - [Installation](#installation)
+- [Supported tools](#export-formats)
 - [Usage of command line interface](#usage-of-command-line-interface)
 - [Usage in NodeJS packages](#usage-in-nodejs-packages)
 - [Known issues and limitations](#known-issues-and-limitations)
@@ -37,22 +37,6 @@ Heta compiler can be used as the framework for a QSP modeling project of any siz
 - support of models written in human-readable text and table formats;
 - export models and data to different popular formats on the fly.
 
-## Export formats
-
->for more information see [export formats](export-formats)
-
-Heta compiler was created to support exporting to different popular modeling formats. One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools. The current version supports the following formats:
-
-- DBSolveOptimum .SLV files [link](http://insysbio.com/en/software/db-solve-optimum)
-- SBML L2V4 [link](http://sbml.org/)
-- mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
-- Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
-- Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
-- SimSolver/Julia module
-- JSON formatted file
-- YAML formatted file
-- Excel sheets
-
 ## Installation
 
 [NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v8/v10** are recommended.
@@ -73,6 +57,24 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
     ```bash
     npm i -g git+https://github.com/hetalang/heta-compiler.git
     ```
+
+## Supported tools
+
+>for more information see [export formats](export-formats)
+
+Heta compiler was created to support exporting to different popular modeling formats.
+One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools.
+The current version supports the following formats:
+
+- DBSolveOptimum .SLV files [link](http://insysbio.com/en/software/db-solve-optimum)
+- SBML L2V4 [link](http://sbml.org/)
+- mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
+- Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
+- Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
+- SimSolver/Julia module
+- JSON formatted file
+- YAML formatted file
+- Excel sheets
 
 ## Usage of command line interface
 

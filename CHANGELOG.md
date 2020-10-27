@@ -3,6 +3,7 @@
 ## 0.5.15
 
 - use > instead of >= in SBML and Simbio events to support run at start
+- add `atStart` prop to `_Switcher`
 - minor bug fixess
 
 ## 0.5.14
