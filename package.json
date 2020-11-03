@@ -4,8 +4,8 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha --recursive --exclude **/*.tmp.js test/clone",
-    "test": "mocha test --recursive --exclude **/*.tmp.js",
+    "test:dev": "mocha test/clone --config=./test/.mocharc.json",
+    "test": "mocha test --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
     "test:cov": "nyc --reporter=lcov npm run test",
     "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js"
