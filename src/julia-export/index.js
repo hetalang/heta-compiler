@@ -127,13 +127,13 @@ class JuliaExport extends _Export {
   }
   getModelCode(image = []){
     return nunjucks.render(
-      'model.jl.njk',
+      'julia-model.jl.njk',
       image
     );
   }
   getRunCode(image = []){
     return nunjucks.render(
-      'run.jl.njk',
+      'julia-run.jl.njk',
       image
     );
   }

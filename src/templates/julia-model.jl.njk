@@ -271,11 +271,11 @@ end
   [
       {%- for event in img.events %}
       {% if event.switcher.instanceOf('TimeSwitcher') -%}
-      TimeEvent({{ id }}_{{ event.switcher.id }}_times_, {{ id }}_{{event.switcher.id}}_assignment_),
+      TimeEvent({{ id }}_{{ event.switcher.id }}_times_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}),
       {%- elif event.switcher.instanceOf('DSwitcher') -%}
-      DEvent({{ id }}_{{ event.switcher.id }}_trigger_, {{ id }}_{{event.switcher.id}}_assignment_),
+      DEvent({{ id }}_{{ event.switcher.id }}_trigger_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}),
       {%- elif event.switcher.instanceOf('CSwitcher') -%}
-      CEvent({{ id }}_{{ event.switcher.id }}_condition_, {{ id }}_{{event.switcher.id}}_assignment_),
+      CEvent({{ id }}_{{ event.switcher.id }}_condition_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}),
       {%- endif %}
       {%- endfor %}
   ],
