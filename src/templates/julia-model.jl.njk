@@ -290,8 +290,8 @@ end
     {{ id }}_model_,    # model
     NamedTuple(),       # constants
     SubTask(            # subtasks
-        collect(range(0., step=5.0, stop=100.)), # 
-        Symbol[
+        0:100; 
+        output_ids = Symbol[
         {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
         :{{ rec.id }},
         {%- endfor -%}
