@@ -284,27 +284,6 @@ end
   {{ id }}_output_
 )
 
-### default task
-
-{{ id }}_default_ = SimpleSTask(
-    {{ id }}_model_,    # model
-    NamedTuple(),       # constants
-    SubTask(            # subtasks
-        0:100; 
-        output_ids = Symbol[
-        {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
-        :{{ rec.id }},
-        {%- endfor -%}
-        ]                             # output ids
-    ),
-    (0.0, 100.0),       # tspan
-    solver = Dict(               # solver
-        :alg => :Tsit5,
-        :reltol => 1e-3,
-        :abstol => 1e-6
-    ),
-    evt_save = (true, true)
-)
 {%- endfor %}{# img #}
 
 ### OUTPUT
@@ -314,11 +293,7 @@ models = (
     {{ img.namespace.spaceName }} = {{ img.namespace.spaceName }}_model_,
     {%- endfor %}
 )
-tasks = (
-    {%- for img in nsImages %}
-    {{ img.namespace.spaceName }}_default = {{ img.namespace.spaceName }}_default_,
-    {%- endfor %}
-)
+tasks = ()
 
 export models, tasks
 
