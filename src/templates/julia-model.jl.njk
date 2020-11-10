@@ -34,11 +34,11 @@ using SimSolver
 ])
 
 ### create default output
-{{ id }}_output_ = (
+{{ id }}_output_ = Symbol[
   {% for rec in img.namespace.selectByInstanceOf('Record') -%}
   :{{ rec.id }},
   {%- endfor %}
-)
+]
 
 ### initialization of ODE variables and Records
 function {{ id }}_start_(cons)

@@ -5,7 +5,8 @@
 - add scope prop in julia's events
 - use > instead of >= in SBML and Simbio events to support run at start
 - add `atStart` prop to `_Switcher`
-- minor bug fixess
+- extend julia format
+- minor bug fixes
 
 ## 0.5.14
 
