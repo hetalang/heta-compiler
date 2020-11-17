@@ -5,7 +5,7 @@ const pkg = require('../../package');
 const _ = require('lodash');
 require('./expression'); // to use method toJuliaString()
 
-class JuliaExport extends _Export {
+class SimSolverExport extends _Export {
   merge(q = {}, skipChecking){
     super.merge(q, skipChecking);
     if (q.spaceFilter instanceof Array) {
@@ -17,7 +17,7 @@ class JuliaExport extends _Export {
     return this;
   }
   get className(){
-    return 'JuliaExport';
+    return 'SimSolverExport';
   }
   make(){
     let logger = this.container.logger;
@@ -139,6 +139,6 @@ class JuliaExport extends _Export {
   }
 }
 
-Container.prototype.exports.Julia = JuliaExport;
+Container.prototype.exports.SimSolver = SimSolverExport;
 
-module.exports = { JuliaExport };
+module.exports = { SimSolverExport };

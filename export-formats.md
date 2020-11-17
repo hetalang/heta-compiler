@@ -10,7 +10,7 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [Simbio](#simbio)
 - [Mrgsolve](#mrgsolve)
 - [XLSX](#xlsx)
-- [Julia](#julia)
+- [SimSolver](#simsolver)
 - [Matlab](#matlab)
 
 The general format for all export actions is the following:
@@ -271,7 +271,7 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 };
 ```
 
-## Julia
+## SimSolver
 
 Creation of Julia files (.jl) supported by SimSolver.
 
@@ -298,7 +298,7 @@ Creation of Julia files (.jl) supported by SimSolver.
 
 ```heta
 #export {
-    format: Julia,
+    format: SimSolver,
     filepath: julia_code, // save result in directory "dist/julia_code"
     spaceFilter: nameless // create model based on nameless namespace
 };

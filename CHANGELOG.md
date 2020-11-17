@@ -7,6 +7,7 @@
 - add `atStart` prop to `_Switcher`
 - extend julia format
 - minor bug fixes
+- rename #export Julia to SimSolver
 
 ## 0.5.14
 

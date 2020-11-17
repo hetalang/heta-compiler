@@ -24,7 +24,7 @@ s2 []= 0; // static
 #export {filepath: model, format: DBSolve};
 #export {filepath: simbio, format: Simbio};
 #export {filepath: matlab, format: Matlab};
-#export {filepath: julia, format: Julia};
+#export {filepath: julia, format: SimSolver};
 #export {filepath: sbml, format: SBML};
 #export {filepath: mrgsolve, format: Mrgsolve};
 

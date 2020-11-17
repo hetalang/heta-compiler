@@ -14,7 +14,7 @@ require('./simbio-export');
 require('./xlsx-export');
 require('./another-xlsx-export');
 require('./matlab-export');
-require('./julia-export');
+require('./sim-solver-export');
 
 module.exports = {
   Container,

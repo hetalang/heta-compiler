@@ -1,6 +1,6 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
-require('../../src/julia-export/expression');
+require('../../src/sim-solver-export/expression');
 const { expect } = require('chai');
 
 describe('Expession exports to Julia', () => {

@@ -86,7 +86,7 @@ end
   spaceFilter: nameless
 };
 #export {
-  format: Julia,
+  format: SimSolver,
   filepath: julia,
   spaceFilter: nameless
 };

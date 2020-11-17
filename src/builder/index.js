@@ -109,9 +109,9 @@ class Builder {
     // 5. Exports
     if (this.options.skipExport) {
       this.logger.warn('Exporting skipped as stated in declaration.');
-    } else if (this.options.juliaOnly) {
-      this.logger.warn('"julia only" mode');
-      this.exportJuliaOnly();
+    } else if (this.options.ssOnly) {
+      this.logger.warn('"ss only" mode');
+      this.exportSSOnly();
     } else {
       this.exportMany();
     }
@@ -146,12 +146,12 @@ class Builder {
       exportItem.makeAndSave(this._distDirname);
     });
   }
-  exportJuliaOnly(){
+  exportSSOnly(){
     // create export without putting it to exportStorage
-    let exportItem = new this.container.exports['Julia'];
+    let exportItem = new this.container.exports['SimSolver'];
     exportItem.container = this.container;
     exportItem.merge({
-      format: 'Julia',
+      format: 'SimSolver',
       filepath: '_julia'
     });
 

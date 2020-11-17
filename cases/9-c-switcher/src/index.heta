@@ -8,7 +8,7 @@ r1 @Reaction { actors: x1->x2 } := k1*x1*comp1;
 #export { filepath: sbml.xml, format: SBML };
 #export { filepath: model, format: SLV };
 #export { filepath: model, format: DBSolve };
-#export { filepath: julia, format: Julia };
+#export { filepath: julia, format: SimSolver };
 #export { filepath: matlab, format: Matlab };
 #export { filepath: simbio, format: Simbio };
 
