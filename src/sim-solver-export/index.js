@@ -28,7 +28,7 @@ class SimSolverExport extends _Export {
           || this.spaceFilter.indexOf(pair[0]) !== -1;
         return allowedByFilter && !pair[1].isAbstract;
       })
-      .map((pair) => this.getJuliaImage(pair[1]));
+      .map((pair) => this.getSimSolverImage(pair[1]));
 
     // create Content
     let image = {
@@ -52,7 +52,7 @@ class SimSolverExport extends _Export {
       }
     ];
   }
-  getJuliaImage(ns){
+  getSimSolverImage(ns){
     // constants
     let constants = ns
       .selectByInstanceOf('Const');
@@ -127,13 +127,13 @@ class SimSolverExport extends _Export {
   }
   getModelCode(image = []){
     return nunjucks.render(
-      'julia-model.jl.njk',
+      'sim-solver-model.jl.njk',
       image
     );
   }
   getRunCode(image = []){
     return nunjucks.render(
-      'julia-run.jl.njk',
+      'sim-solver-run.jl.njk',
       image
     );
   }
