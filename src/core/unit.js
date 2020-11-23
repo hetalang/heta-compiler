@@ -41,6 +41,8 @@ class Unit extends Array {
 
     return clonedUnit;
   }
+  // transform any proper complex units to the another unit structure which includes only units from the list
+  // 
   rebase(legalUnits = []){
     let unit = new Unit();
 
@@ -48,14 +50,14 @@ class Unit extends Array {
       throw new TypeError('Cannot use rebase for empty Unit');
 
     this.forEach((x) => {
-      if (legalUnits.indexOf(x.kind) !== -1) { // any legal
+      if (legalUnits.indexOf(x.kind) !== -1) { // is legal? just push without refs!
         let clearedUnit =_.pick(x, ['kind', 'exponent', 'multiplier']);
         unit.push(clearedUnit);
       } else {
         if (typeof x.kindObj === 'undefined') {
           throw new TypeError(`Cannot rebase unknown unit: "${x.kind}"`);
         }
-        let unitDefRebased = x.kindObj
+        let unitDefRebased = x.kindObj // is not legal? analyze refs and concat!
           .unitsParsed
           .rebase(legalUnits)
           .map((y) => {
