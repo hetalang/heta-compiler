@@ -345,9 +345,13 @@
 
     "ConstP": {
       "type": "object",
+      "description": "Input value. Upper and lower describes possiple values. Scale describes transformation for fitting.",
       "properties": {
         "free": { "type": "boolean" },
-        "num": { "type": "number" }
+        "num": { "type": "number" },
+        "scale": { "type": "string", "enum": ["direct", "log", "logit"], "default": "direct" },
+        "upper": { "type": "number" },
+        "lower": { "type": "number" }
       }
      },
 

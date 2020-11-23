@@ -281,7 +281,18 @@ end
   ],
   {{ id }}_make_saving_,
   {{ id }}_constants_,
-  {{ id }}_output_
+  {{ id }}_output_;
+  title = "{{ id }}",
+  {% set free_constants = img.constants | filter2("free", true) | exclude2('num', undefined)-%}
+  free_constants = NamedTuple{(
+    {%- for con in free_constants %}
+    :{{ con.id }},
+    {%- endfor %}
+  )}([
+    {%- for con in free_constants %}
+    (num = {{ con.num }}, lower={{ con.lower | default("1e-6") }}, upper={{ con.upper | default("1e6") }}, scale=:{{ con.scale | default(log)}},){{"," if not loop.last }}
+    {%- endfor %}
+  ])
 )
 
 {%- endfor %}{# img #}

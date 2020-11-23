@@ -1,0 +1,19 @@
+/*
+  MM reaction
+*/
+comp1 @Compartment .= 1;
+A @Species { compartment: comp1 } .= 5;
+B @Species { compartment: comp1 } .= 0;
+
+r1 @Reaction { actors: A => B } := Vmax * A / (A + Km) * comp1;
+
+// free constants
+block @Const { free: true, scale: log, lower: 1e-9, upper: 1e9 } begin
+  Vmax = 1.2;
+  Km = 3.2;
+end
+
+cond1 @Const = 1.2;
+
+#export { format: SimSolver, filepath: julia };
+#export { format: JSON, filepath: json };

@@ -4,11 +4,18 @@ const _ = require('lodash');
 /*
   size1 @Const {
     num: 1.0,
-    free: true
+    free: true,
+    scale: direct,
+    lower: -6,
+    upper: 6
   };
 */
 
 class Const extends _Size { // implicit extend Numeric
+  constructor(isCore = false){
+    super(isCore);
+    this.scale = 'direct';
+  } 
   merge(q = {}){
     super.merge(q);
     let logger = _.get(this, 'namespace.container.logger');
@@ -16,7 +23,10 @@ class Const extends _Size { // implicit extend Numeric
 
     if (valid) {
       if (q.num !== undefined) this.num = q.num;
-      this.free = q.free ? q.free : false;
+      if (q.free !== undefined) this.free = q.free;
+      if (q.scale !== undefined) this.scale = q.scale;
+      if (q.lower !== undefined) this.lower = q.lower;
+      if (q.upper !== undefined) this.upper = q.upper;
     }
 
     return this;
@@ -39,6 +49,9 @@ class Const extends _Size { // implicit extend Numeric
     let res = super.toQ(options);
     if (this.num !== undefined) res.num = this.num;
     if (this.free) res.free = true;
+    if (this.scale !== undefined && this.scale !== 'direct') res.scale = this.scale;
+    if (this.lower !== undefined) res.lower = this.lower;
+    if (this.upper !== undefined) res.upper = this.upper;
 
     return res;
   }
@@ -47,6 +60,15 @@ class Const extends _Size { // implicit extend Numeric
 Const._requirements = {
   num: {
     required: true
+  },
+  scale: {
+    required: false
+  },
+  lower: {
+    required: false
+  },
+  upper: {
+    required: false
   }
 };
 
