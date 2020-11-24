@@ -6,8 +6,9 @@
 - use > instead of >= in SBML and Simbio events to support run at start
 - add `atStart` prop to `_Switcher`
 - extend julia format
-- minor bug fixes
 - rename #export Julia to SimSolver
+- add properties to @Const: scale, lower, upper
+- minor bug fixes
 
 ## 0.5.14
 

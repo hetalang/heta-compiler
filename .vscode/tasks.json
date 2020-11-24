@@ -84,6 +84,12 @@
             "type": "shell",
             "command": "heta build cases/16-d-switcher",
             "group": "test"
+        },
+        {
+            "label": "case-18",
+            "type": "shell",
+            "command": "heta build cases/18-julia-fitting",
+            "group": "test"
         }
     ]
 }
