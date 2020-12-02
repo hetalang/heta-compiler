@@ -74,6 +74,12 @@ end
   format: Matlab,
   filepath: matlab1,
 };
+#export {
+  spaceFilter: mm,
+  format: XLSX,
+  filepath: table,
+  splitByClass: true
+};
 
 /* 
 mm::mm_sbml @SBMLExport { title: Exported mm model};

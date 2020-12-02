@@ -9,7 +9,10 @@ const propSequence = [
   'title', 'notes', 'tags[]'
 ];
 // how to order scheets in file
-const scheetSequence = ['Compartment', 'Species', 'Reaction', 'Record', 'Const'];
+const scheetSequence = [
+  'Compartment', 'Species', 'Reaction', 'Record', 'Const',
+  'Identification', 'UnitDef'
+];
 
 class XLSXExport extends _Export {
   merge(q = {}, skipChecking){
@@ -66,7 +69,12 @@ class XLSXExport extends _Export {
             headerSeq: sequense_i
           };
         })
-        .values()
+        .toPairs()
+        .sortBy((x) => { // sort in pre-defined order
+          let order = scheetSequence.indexOf(x[0]);
+          return order !== -1 ? order : 999;
+        })
+        .map(1)
         .value();
       return splitted;
     } else {
