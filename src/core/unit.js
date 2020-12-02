@@ -147,11 +147,10 @@ class Unit extends Array {
       })
       .toPairs()
       .map(1)
-      //.flatten()
-      .filter((x) => !(x.kind===dimensionlessKind && x.multiplier===1))
+      .filter((x) => !(x.kind===dimensionlessKind && x.multiplier===1)) // this may result in empty unit array
       .value();
 
-    return Unit.fromQ(group);
+    return Unit.fromQ(group.length > 0 ? group : [{kind: dimensionlessKind}]);
   }
   
   /**

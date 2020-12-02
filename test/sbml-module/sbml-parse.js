@@ -77,7 +77,7 @@ describe('parse units', () => {
   it('Use base units', () => {
     expect(res[7])
       .to.have.property('units').and
-      .to.be.equal('second');
+      .to.be.deep.equal([{ kind: 'second', exponent: 1, multiplier: 1 }]);
   });
 
   it('Use units that can be simplified', () => {
@@ -111,5 +111,16 @@ describe('parse units', () => {
         { kind: 'mole', exponent: 1, multiplier: 1e-6 },
         { kind: 'litre', exponent: -1, multiplier: 1e-3 }
       ]);
-});
+
+    expect(res[9])
+      .to.have.property('units').and
+      .to.be.deep.equal([
+        { kind: 'dimensionless', exponent: 1, multiplier: 1 }
+      ]);
+    expect(res[10])
+      .to.have.property('units').and
+      .to.be.deep.equal([
+        { kind: 'dimensionless', exponent: 1, multiplier: 1 }
+      ]);
+  });
 });

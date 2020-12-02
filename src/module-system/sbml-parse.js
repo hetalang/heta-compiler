@@ -545,8 +545,8 @@ function parameterToQ(x, unitDict = {}){
   if (typeof unitId !== 'undefined') {
     let legalUnitIndex = legalUnits.indexOf(unitId); //
     if (legalUnitIndex !== -1) { // if id in legal unit list
-      q.units = unitId;
-    } else if (_.has(unitDict, unitId)){ // if id in unitDefinitions
+      q.units = Unit.fromQ([{ kind: unitId }]);
+    } else if (_.has(unitDict, unitId)) { // if id in unitDefinitions
       q.units = _.get(unitDict, unitId).simplify('dimensionless');
     } else {
       // XXX: do not throw undeclared "unit"

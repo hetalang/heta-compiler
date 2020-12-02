@@ -27,6 +27,16 @@
                 units="cell_per_kcell"
                 value="1000"
             />
+            <parameter
+                id="k4"
+                units="dimensionless"
+                value="1000"
+            />
+            <parameter
+                id="k5"
+                units="UL"
+                value="1000"
+            />
         </listOfParameters>
         <listOfUnitDefinitions>
             <unitDefinition id="_second">
@@ -48,6 +58,11 @@
             <unitDefinition id="umole">
                 <listOfUnits>
                     <unit kind="mole" scale="-6"/>
+                </listOfUnits>  
+            </unitDefinition>
+            <unitDefinition id="UL">
+                <listOfUnits>
+                    <unit kind="dimensionless"/>
                 </listOfUnits>  
             </unitDefinition>
         </listOfUnitDefinitions>

@@ -1,6 +1,15 @@
 const Container = require('../container');
 const { _Export } = require('../core/_export');
 const _ = require('lodash');
+// how to order columns in scheets
+const propSequence = [
+  'on', 'action', 'class', 'space', 'id', 
+  'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',
+  'compartment', 'isAmount', 'actors', 'modifiers[]',
+  'title', 'notes', 'tags[]'
+];
+// how to order scheets in file
+const scheetSequence = ['Compartment', 'Species', 'Reaction', 'Record', 'Const'];
 
 class XLSXExport extends _Export {
   merge(q = {}, skipChecking){
@@ -17,12 +26,6 @@ class XLSXExport extends _Export {
     return 'XLSXExport';
   }
   make(){
-    let sequense = [
-      'on', 'action', 'class', 'space', 'id', 
-      'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',
-      'compartment', 'isAmount', 'actors', 'modifiers[]',
-      'title', 'notes', 'tags[]'
-    ];
     // filtered namespaces
     let nsArray = [...this.container.namespaces]
       .map((pair) => pair[1]);
@@ -53,7 +56,7 @@ class XLSXExport extends _Export {
             .flatten()
             .uniq()
             .value();
-          let sequense_i = _.intersection(sequense, keys);
+          let sequense_i = _.intersection(propSequence, keys);
 
           return {
             content:  value,
@@ -72,7 +75,7 @@ class XLSXExport extends _Export {
         .flatten()
         .uniq()
         .value();
-      let sequense_out = _.intersection(sequense, keys);
+      let sequense_out = _.intersection(propSequence, keys);
 
       return [{
         content:  qArr,
