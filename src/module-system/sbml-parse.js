@@ -2,6 +2,7 @@ const _toMathExpr = require('./to-math-expr');
 const _ = require('lodash');
 const { xml2js } = require('xml-js');
 const { Unit } = require('../core/unit');
+const legalUnits = require('../legal-sbml-units');
 
 /*
   Transforms text content of SBML file to Q Array
@@ -316,13 +317,16 @@ function compartmentToQ(x, unitDict = {}){
     _.set(q, 'assignments.start_', SBMLValueToNumber(num));
   }
   // units
-  let unitDefinitionId = _.get(x, 'attributes.units');
-  if (typeof unitDefinitionId !== 'undefined') {
-    if (_.has(unitDict, unitDefinitionId)){
-      q.units = _.get(unitDict, unitDefinitionId).simplify();
+  let unitId = _.get(x, 'attributes.units');
+  if (typeof unitId !== 'undefined') {
+    let legalUnitIndex = legalUnits.indexOf(unitId); //
+    if (legalUnitIndex !== -1) { // if id in legal unit list
+      q.units = Unit.fromQ([{ kind: unitId }]);
+    } else if (_.has(unitDict, unitId)){
+      q.units = _.get(unitDict, unitId).simplify('dimensionless');
     } else {
       // XXX: do not throw with undeclared units
-      //throw new Error(`No unitDeclaration "${unitDefinitionId}" used for compartment "${q.id}"`);
+      //throw new Error(`No unitDeclaration "${unitId}" used for compartment "${q.id}"`);
     }
   }
 
@@ -358,25 +362,39 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   if (speciesType !== undefined) _.set(q, 'tags.0', speciesType);
 
   // units
-  let substanceUnitDefinitionId = _.get(x, 'attributes.substanceUnits');
-  if (typeof substanceUnitDefinitionId !== 'undefined') {
-    if (_.has(unitDict, substanceUnitDefinitionId)){
-      let amountUnits = _.get(unitDict, substanceUnitDefinitionId);
-      // find compartment units
-      let compartmentComponent = qArr.find((component) => component.id === q.compartment);
-      if (!compartmentComponent)
-        throw new Error(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
-      // set amount or concentration units
-      if (q.isAmount){
-        q.units = amountUnits.simplify();
-      } else if (compartmentComponent.units){
+  let substanceUnitId = _.get(x, 'attributes.substanceUnits');
+  if (typeof substanceUnitId !== 'undefined') {
+    // find compartment units
+    let compartmentComponent = qArr.find((component) => component.id === q.compartment);
+    if (!compartmentComponent)
+      throw new Error(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
+    let compartmentUnits = compartmentComponent.units;
+
+    // set species units
+    let legalUnitIndex = legalUnits.indexOf(substanceUnitId);
+    if (legalUnitIndex !== -1) { // if id in legal unit list
+      let amountUnits = Unit.fromQ([{ kind: substanceUnitId }]);
+      if (q.isAmount) {
+        q.units = amountUnits;
+      } else if (compartmentUnits !== undefined) {
         q.units = amountUnits
-          .divide(compartmentComponent.units)
-          .simplify();
+          .divide(compartmentUnits)
+          .simplify('dimensionless');
+      }
+    } else if (_.has(unitDict, substanceUnitId)) {
+      let amountUnits = _.get(unitDict, substanceUnitId);
+      // set amount or concentration units
+      if (q.isAmount) {
+        q.units = amountUnits
+          .simplify('dimensionless');
+      } else if (compartmentUnits !== undefined) {
+        q.units = amountUnits
+          .divide(compartmentUnits)
+          .simplify('dimensionless');
       }
     } else {
       // XXX: do not throw undeclared "substance"
-      // throw new Error(`No unitDeclaration "${substanceUnitDefinitionId}" used for species "${q.id}"`);
+      // throw new Error(`No unitDeclaration "${substanceUnitId}" used for species "${q.id}"`);
     }
   }
 
@@ -523,13 +541,16 @@ function parameterToQ(x, unitDict = {}){
   }
 
   // units
-  let unitDefinitionId = _.get(x, 'attributes.units');
-  if (typeof unitDefinitionId !== 'undefined') {
-    if (_.has(unitDict, unitDefinitionId)){
-      q.units = _.get(unitDict, unitDefinitionId).simplify();
+  let unitId = _.get(x, 'attributes.units');
+  if (typeof unitId !== 'undefined') {
+    let legalUnitIndex = legalUnits.indexOf(unitId); //
+    if (legalUnitIndex !== -1) { // if id in legal unit list
+      q.units = unitId;
+    } else if (_.has(unitDict, unitId)){ // if id in unitDefinitions
+      q.units = _.get(unitDict, unitId).simplify('dimensionless');
     } else {
       // XXX: do not throw undeclared "unit"
-      //throw new Error(`No unitDeclaration "${unitDefinitionId}" as required for parameter "${q.id}"`);
+      //throw new Error(`No unitDeclaration "${unitId}" as required for parameter "${q.id}"`);
     }
   }
 

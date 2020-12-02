@@ -8,6 +8,8 @@
 - extend julia format
 - rename #export Julia to SimSolver
 - add properties to @Const: scale, lower, upper
+- sbml-module: use dimensionless for simplified units
+- sbml-module: suport base units
 - minor bug fixes
 
 ## 0.5.14

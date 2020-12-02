@@ -26,6 +26,7 @@
 
 ## features
 
+- Export to SBML without standard units like _litre
 - add `scale`, `upper`, `lower` to `@Const` for fitting
 - Check units for Simbiology
 - Check units in expressions

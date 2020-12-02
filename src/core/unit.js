@@ -108,15 +108,17 @@ class Unit extends Array {
   }
   
   /**
-   * Normalize units.
+   * Simplify unit expression if it is possible.
    *
-   * @return {Unit} Simplified version of units.
+   * @dimensionlessKind {String} What to set if we want to simplify litre/litre
+   * 
+   * @return {Unit} Simplified version of units. 
+   * If if exponent == 0, create dimensionless element to store multiplier
+   * if dimensionless element is trivial remove it
    */
-  simplify() {
+  simplify(dimensionlessKind = '') {
     // group by kind, combine elements inside kind
     // then transform to regular array
-    // if exponent == 0, create dimentionless element to store multiplier
-    // if dimentionless element is trivial remove it
     let group = _.chain(this)
       .groupBy((x) => x.kind)
       .map((x, key) => {
@@ -125,7 +127,7 @@ class Unit extends Array {
           let tmp = _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
           let multiplier = 10 ** (tmp);
           var res = {
-            kind: '',
+            kind: dimensionlessKind,
             exponent: 1,
             multiplier: multiplier
           };
@@ -146,7 +148,7 @@ class Unit extends Array {
       .toPairs()
       .map(1)
       //.flatten()
-      .filter((x) => !(x.kind==='' && x.multiplier===1))
+      .filter((x) => !(x.kind===dimensionlessKind && x.multiplier===1))
       .value();
 
     return Unit.fromQ(group);
@@ -237,7 +239,7 @@ class Unit extends Array {
    */
   toString(usePrefix = false){
     return this
-      .filter((x) => x.kind !== '') // remove unitless
+      //.filter((x) => x.kind !== '') // remove unitless
       .map((item, i) => {
         if (item.multiplier === 1) {
           var kindUpd = item.kind;

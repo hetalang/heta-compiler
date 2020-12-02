@@ -2,7 +2,7 @@ const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 require('./expression');
-const legalUnits = require('./legal-units');
+const legalUnits = require('../legal-sbml-units');
 
 class SBMLExport extends _Export {
   merge(q = {}, skipChecking){

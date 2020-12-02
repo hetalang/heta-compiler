@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+    <model>
+        <listOfCompartments>
+            <compartment id="comp1" size="1e-2" units="litre"/>
+            <compartment id="comp2" size="1e-2" units="mL"/>
+        </listOfCompartments>
+        <listOfSpecies>
+            <species id="s1" compartment="comp1" initialConcentration="0" substanceUnits="mole"/>
+            <species id="s2" compartment="comp2" initialConcentration="0" substanceUnits="mole"/>
+            <species id="s3" compartment="comp1" initialConcentration="0" substanceUnits="umole"/>
+            <species id="s4" compartment="comp2" initialConcentration="0" substanceUnits="umole"/>
+        </listOfSpecies>
+        <listOfParameters>
+            <parameter
+                id="k1"
+                units="_second"
+                value="1.2"
+            />
+            <parameter
+                id="k2"
+                units="second"
+                value="1.3"
+            />
+            <parameter
+                id="k3"
+                units="cell_per_kcell"
+                value="1000"
+            />
+        </listOfParameters>
+        <listOfUnitDefinitions>
+            <unitDefinition id="_second">
+                <listOfUnits>
+                    <unit kind="second" multiplier="1"/>
+                </listOfUnits>  
+            </unitDefinition>
+            <unitDefinition id="cell_per_kcell">
+                <listOfUnits>
+                    <unit kind="item"/>
+                    <unit kind="item" exponent="-1" scale="3"/>
+                </listOfUnits>  
+            </unitDefinition>
+            <unitDefinition id="mL">
+                <listOfUnits>
+                    <unit kind="litre" scale="-3"/>
+                </listOfUnits>  
+            </unitDefinition>
+            <unitDefinition id="umole">
+                <listOfUnits>
+                    <unit kind="mole" scale="-6"/>
+                </listOfUnits>  
+            </unitDefinition>
+        </listOfUnitDefinitions>
+    </model>
+</sbml>

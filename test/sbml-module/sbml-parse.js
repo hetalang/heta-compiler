@@ -57,6 +57,59 @@ describe('test sbmlParse() operators', () => {
 
 const sbml1Text = fs.readFileSync(path.join(__dirname, 'sbml1.xml'), 'utf8');
 describe('parse speciesType', () => {
-  let res = SBMLParse('sbml0', sbml1Text);
-  //console.log(res);
+  let res = SBMLParse('sbml1', sbml1Text);
+  // console.log(res);
+  it('Should be of class "Component"', () => {
+    expect(res[0]).to.have.property('class', 'Component');
+  })
+});
+
+const sbml2Text = fs.readFileSync(path.join(__dirname, 'sbml2.xml'), 'utf8');
+describe('parse units', () => {
+  let res = SBMLParse('sbml2', sbml2Text);
+
+  it('Use units from unitDef', () => {
+    expect(res[6])
+      .to.have.property('units').and
+      .to.be.deep.equal([{ kind: 'second', exponent: 1, multiplier: 1 }]);
+  });
+
+  it('Use base units', () => {
+    expect(res[7])
+      .to.have.property('units').and
+      .to.be.equal('second');
+  });
+
+  it('Use units that can be simplified', () => {
+    expect(res[8])
+      .to.have.property('units').and
+      .to.be.deep.equal([{ kind: 'dimensionless', exponent: 1, multiplier: 0.001 }]);
+  });
+
+  it('Check different units for Species', () => {
+    expect(res[2])
+      .to.have.property('units').and
+      .to.be.deep.equal([
+        { kind: 'mole', exponent: 1, multiplier: 1 },
+        { kind: 'litre', exponent: -1, multiplier: 1 }
+      ]);
+    expect(res[3])
+      .to.have.property('units').and
+      .to.be.deep.equal([
+        { kind: 'mole', exponent: 1, multiplier: 1 },
+        { kind: 'litre', exponent: -1, multiplier: 1e-3 }
+      ]);
+    expect(res[4])
+      .to.have.property('units').and
+      .to.be.deep.equal([
+        { kind: 'mole', exponent: 1, multiplier: 1e-6 },
+        { kind: 'litre', exponent: -1, multiplier: 1 }
+      ]);
+    expect(res[5])
+      .to.have.property('units').and
+      .to.be.deep.equal([
+        { kind: 'mole', exponent: 1, multiplier: 1e-6 },
+        { kind: 'litre', exponent: -1, multiplier: 1e-3 }
+      ]);
+});
 });
