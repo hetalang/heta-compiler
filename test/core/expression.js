@@ -7,6 +7,11 @@ describe('Unit test for Expression.', () => {
     let expression = Expression.fromString('x*y');
     expect(expression.toString()).be.equal('x * y');
   });
+  
+  it('Check to String for expression "x/(2*3)".', () => {
+    let expression = Expression.fromString('x/(2*3)');
+    expect(expression.toString()).be.equal('x / (2 * 3)');
+  });
 
   it('Conversion to CMathML.', () => {
     expect(Expression.fromString('x*y').toCMathML()).to.be

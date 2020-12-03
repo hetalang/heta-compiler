@@ -386,6 +386,20 @@
                     </apply>
                 </math>
             </assignmentRule>
+
+            <assignmentRule variable="p31">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <divide/>
+                        <ci>x</ci>
+                        <apply>
+                            <times/>
+                            <cn>2</cn>
+                            <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
         </listOfRules>
     </model>
 </sbml>

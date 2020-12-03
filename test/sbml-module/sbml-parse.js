@@ -42,6 +42,8 @@ const master = [
   // PART 5
   { expectation: 'sin(a + 2 + 3)' },
   { expectation: 'pow(a + 2 + 3, 1 - 2)' },
+  // PART 6
+  { expectation: 'x / (2 * 3)' },
 ];
 
 describe('test sbmlParse() operators', () => {

@@ -45,13 +45,14 @@ function _toMathExpr(element, useParentheses = false){
     return `not ${one}`;
   } else if(element.name === 'apply' && first.name === 'times') {
     // A * B * C, <times>
-    return _.drop(element.elements) // without first element
-      .map((x) => _toMathExpr(x, true)).join(' * ');
+    let expr = _.drop(element.elements) // without first element
+      .map((x) => _toMathExpr(x, true)).join(' * '); 
+    return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'divide') {
     // A / B, <divide> for two arguments
     let args = _.drop(element.elements)
       .map((x) => _toMathExpr(x, true));
-    return args[0] + ' / ' + args[1];
+    return args[0] + ' / ' + args[1]; 
   } else if(element.name === 'apply' && first.name === 'minus' && element.elements.length === 2) {
     // -A, <minus> for one argement
     let arg1 = element.elements[1];
