@@ -85,7 +85,10 @@ describe('parse units', () => {
   it('Use units that can be simplified', () => {
     expect(res[8])
       .to.have.property('units').and
-      .to.be.deep.equal([{ kind: 'dimensionless', exponent: 1, multiplier: 0.001 }]);
+      .to.be.deep.equal([
+        { kind: 'item', exponent: 1, multiplier: 1 },
+        { kind: 'item', exponent: -1, multiplier: 1000 }
+      ]);
   });
 
   it('Check different units for Species', () => {

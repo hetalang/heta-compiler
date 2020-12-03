@@ -547,7 +547,8 @@ function parameterToQ(x, unitDict = {}){
     if (legalUnitIndex !== -1) { // if id in legal unit list
       q.units = Unit.fromQ([{ kind: unitId }]);
     } else if (_.has(unitDict, unitId)) { // if id in unitDefinitions
-      q.units = _.get(unitDict, unitId).simplify('dimensionless');
+      // I removed simplify here to support pretty units in IRT
+      q.units = _.get(unitDict, unitId); //.simplify('dimensionless'); 
     } else {
       // XXX: do not throw undeclared "unit"
       //throw new Error(`No unitDeclaration "${unitId}" as required for parameter "${q.id}"`);
