@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.5.16
+
+- fix bugs in sbml-module: unary minus in <>plus
+
 ## 0.5.15
 
 - add scope prop in julia's events
