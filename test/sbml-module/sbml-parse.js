@@ -13,14 +13,14 @@ const master = [
   { expectation: 'a - b' },
   { expectation: '1 * 2 * 3' },
   { expectation: '1 / 2' },
-  { expectation: '-1' },
-  { expectation: '-x' },
+  { expectation: '(-1)' },
+  { expectation: '(-x)' },
   // PART 2
   { expectation: '1 + 2 + 3 + 4' }, // <= 1 + (2 + 3) + 4
   { expectation: '1 - (2 + 3)' },
   { expectation: '1 * (2 + 3)' },
   { expectation: '1 / (2 + 3)' },
-  { expectation: '-(2 + 3)' },
+  { expectation: '(-(2 + 3))' },
   { expectation: '1 + 2 + 3' }, // <= (1 + 2) + 3
   { expectation: '2 + 3 - 1' }, // <=  (2 + 3) - 1
   { expectation: '(2 + 3) * 1' },
@@ -29,7 +29,7 @@ const master = [
   { expectation: '1 + (-2) + (-3) + 4' }, // => 1 -2 -3 + 4 
   { expectation: '1 - (-2)' },
   { expectation: '(-2) - 1' }, // => -2 - 1
-  { expectation: '-(-2)' },
+  { expectation: '(-(-2))' },
   { expectation: '1 * (-2)' },
   { expectation: '(-2) * 1' },
   { expectation: '1 / (-2)' },
@@ -44,6 +44,8 @@ const master = [
   { expectation: 'pow(a + 2 + 3, 1 - 2)' },
   // PART 6
   { expectation: 'x / (2 * 3)' },
+  { expectation: '1 + (-2)' },
+  { expectation: 'x + (-y)' }
 ];
 
 describe('test sbmlParse() operators', () => {

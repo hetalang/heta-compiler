@@ -387,6 +387,8 @@
                 </math>
             </assignmentRule>
 
+        <!-- PART 6 -->
+
             <assignmentRule variable="p31">
                 <math xmlns="http://www.w3.org/1998/Math/MathML">
                     <apply>
@@ -396,6 +398,32 @@
                             <times/>
                             <cn>2</cn>
                             <cn>3</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p32">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <cn>1</cn>
+                        <apply>
+                            <minus/>
+                            <cn>2</cn>
+                        </apply>
+                    </apply>
+                </math>
+            </assignmentRule>
+            
+            <assignmentRule variable="p33">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <apply>
+                        <plus/>
+                        <cn>x</cn>
+                        <apply>
+                            <minus/>
+                            <cn>y</cn>
                         </apply>
                     </apply>
                 </math>

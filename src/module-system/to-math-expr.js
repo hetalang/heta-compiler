@@ -1,5 +1,10 @@
 const _ = require('lodash');
 
+/*
+  Transformation of json formatted <math> element to expression string.
+  
+  useParentheses = true is used when operators may require explicit parentheses (...)
+*/
 function _toMathExpr(element, useParentheses = false){
   let first = _.get(element, 'elements.0');
   if (element.name === 'math') {
@@ -54,35 +59,35 @@ function _toMathExpr(element, useParentheses = false){
       .map((x) => _toMathExpr(x, true));
     return args[0] + ' / ' + args[1]; 
   } else if(element.name === 'apply' && first.name === 'minus' && element.elements.length === 2) {
-    // -A, <minus> for one argement
+    // -A, <minus> for one argument
     let arg1 = element.elements[1];
     let expr = '-' + _toMathExpr(arg1, true);
-    return useParentheses ? `(${expr})` : expr;
+    return `(${expr})`; // () cannot be skipped in 2d, 3d,... place of sum
   } else if(element.name === 'apply' && first.name === 'minus') {
     // A - B, <minus> for two argumets
-    let arg0 = _toMathExpr(element.elements[1], false);
+    let arg0 = _toMathExpr(element.elements[1], false); // skip ()
     let arg1 = _toMathExpr(element.elements[2], true);
     let expr = arg0 + ' - ' + arg1;
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
     // A + B + C, <plus>
     let expr = _.drop(element.elements)
-      .map((x) => _toMathExpr(x, false)).join(' + ');
+      .map((x) => _toMathExpr(x, false)).join(' + '); // skip ()
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'power') {
     let expr = _.drop(element.elements)
-      .map((x) => _toMathExpr(x)).join(', ');
+      .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `pow(${expr})`;
   } else if(element.name === 'apply' && first.name === 'ceiling') {
     let args = _.drop(element.elements)
-      .map((x) => _toMathExpr(x));
+      .map((x) => _toMathExpr(x)); // skip ()
     return `ceil(${args[0]})`;
   } else if(element.name === 'apply' && first.name === 'root') {
     let degree = element.elements
       .find(y => y.name === 'degree');
     let args = _.drop(element.elements)
       .filter((x) => x.name !== 'degree')
-      .map((x) => _toMathExpr(x));
+      .map((x) => _toMathExpr(x)); // skip ()
     if (degree) {
       let n_element = _.get(degree, 'elements.0');
       let n = _toMathExpr(n_element, true);
@@ -92,20 +97,20 @@ function _toMathExpr(element, useParentheses = false){
     }
   } else if(element.name === 'apply' && first.name === 'ln') {
     let expr = _.drop(element.elements)
-      .map((x) => _toMathExpr(x));
+      .map((x) => _toMathExpr(x));  // skip ()
     return `ln(${expr[0]})`;
   } else if(element.name === 'apply' && first.name === 'log') {
     let logbase = element.elements
       .find(y => y.name === 'logbase');
     let expr = _.drop(element.elements)
       .filter((x) => x.name !== 'logbase')
-      .map((x) => _toMathExpr(x));
+      .map((x) => _toMathExpr(x));  // skip ()
     if (logbase === undefined) {
       return `log10(${expr[0]})`;
     } else if (_.get(logbase, 'elements.0.elements.0.text') === '2') {
       return `log2(${expr[0]})`;
     } else {
-      let base = _toMathExpr(logbase.elements[0]);
+      let base = _toMathExpr(logbase.elements[0]);  // skip ()
       return `log(${expr[0]}, ${base})`;
     }
   // === trigonometry ===
@@ -151,13 +156,13 @@ function _toMathExpr(element, useParentheses = false){
     let arg2 = _toMathExpr(_.get(element, 'elements.1.elements.0'), true);
     let cond = _toMathExpr(_.get(first, 'elements.1'));
     // here we always use parenthesis to avoid error with + 
-    return `(${cond} ? ${arg1} : ${arg2})`;
+    return `(${cond} ? ${arg1} : ${arg2})`; // always in ()
   } else if (element.name === 'piecewise') {
     throw new Error('only one piece is supported in MathML peicewise.');
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
     let args = _.drop(element.elements)
-      .map((x) => _toMathExpr(x)).join(', ');
+      .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `${funcName}(${args})`;
   } else if (element.name === 'apply') { // all other internal mathml functions
     let args = _.drop(element.elements)
