@@ -9,8 +9,8 @@ namespace mm begin
   default_comp @Compartment { title: Default compartment, units: L };
   default_comp .= 1;
 
-  S @Species { title: substrate, compartment: default_comp, units: uM };
-  P @Species { title: product,  compartment: default_comp, units: uM };
+  S @Species { title: substrate, compartment: default_comp, units: uM, output: true };
+  P @Species { title: product,  compartment: default_comp, units: uM, output: true };
   ''' Transformation of __substate__ to __product__ '''
   r1 @Reaction {
     title: Michaelis-Menten reaction,

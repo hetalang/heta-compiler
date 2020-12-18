@@ -5,7 +5,8 @@ const _ = require('lodash');
 /*
   record1 @Record {
     assignments: { start_: x*y },
-    boundary: true
+    boundary: true,
+    output: true
   };
 */
 class Record extends _Size {
@@ -42,6 +43,7 @@ class Record extends _Size {
       }
   
       if (q.boundary !== undefined) this.boundary = q.boundary;
+      if (q.output !== undefined) this.output = q.output;
     }
     
     return this;
@@ -52,6 +54,8 @@ class Record extends _Size {
       clonedComponent.assignments = _.mapValues(this.assignments, (expr) => expr.clone());
     if (typeof this.boundary !== undefined)
       clonedComponent.boundary = this.boundary;
+    if (typeof this.output !== undefined)
+      clonedComponent.output = this.output;
       
     return clonedComponent;
   }
@@ -102,6 +106,9 @@ class Record extends _Size {
     }
     if (this.boundary) {
       res.boundary = this.boundary;
+    }
+    if (this.output) {
+      res.output = this.output;
     }
 
     return res;

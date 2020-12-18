@@ -35,7 +35,8 @@ describe('Unit tests for Record.', () => {
     let simple = (new Record).merge({
       title: 'complex record',
       assignments: { ode_: 'm*c^2' },
-      units: 'J'
+      units: 'J',
+      output: true
     });
     simple._id = 'r1';
     expect(simple.toQ()).to.be.deep.equal({
@@ -43,7 +44,8 @@ describe('Unit tests for Record.', () => {
       id: 'r1',
       title: 'complex record',
       assignments: { ode_: 'm * c ^ 2' },
-      units: 'J'
+      units: 'J',
+      output: true
     });
   });
 });

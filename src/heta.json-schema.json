@@ -123,6 +123,10 @@
         "boundary": {
           "type": "boolean", "default": false,
           "description": "If it is true the record cannot be changed by any process, only byexpression in assignments."
+        },
+        "output": {
+          "type": "boolean",
+          "description": "Should be the record listed as an output"
         }
       }
     },

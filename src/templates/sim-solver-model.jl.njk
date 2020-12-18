@@ -34,7 +34,7 @@ function Platform()
 
 ### create default output
 {{ id }}_output_ = Symbol[
-  {% for rec in img.namespace.selectByInstanceOf('Record') -%}
+  {% for rec in img.namespace.selectByInstanceOf('Record') | filter2('output', true) -%}
   :{{ rec.id }},
   {%- endfor %}
 ]
