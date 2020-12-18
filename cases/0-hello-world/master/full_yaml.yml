@@ -13,6 +13,7 @@
   units: uM
   assignments:
     start_: '10'
+  output: true
   compartment: default_comp
 - class: Species
   id: P
@@ -21,6 +22,7 @@
   units: uM
   assignments:
     start_: '0'
+  output: true
   compartment: default_comp
 - class: Reaction
   id: r1

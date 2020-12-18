@@ -19,6 +19,7 @@
     "assignments": {
       "start_": "10"
     },
+    "output": true,
     "compartment": "default_comp"
   },
   {
@@ -30,6 +31,7 @@
     "assignments": {
       "start_": "0"
     },
+    "output": true,
     "compartment": "default_comp"
   },
   {
