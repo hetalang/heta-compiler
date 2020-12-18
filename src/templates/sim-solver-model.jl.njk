@@ -17,8 +17,7 @@
     {{ options.title + '.' if options.title}}{{ options.notes }}
 =#
 
-module SimSolverPlatform {# set here the name of platform in future #}
-using SimSolver
+function Platform()
 
 {%- for img in nsImages %}
 {% set id = img.namespace.spaceName %}
@@ -306,6 +305,6 @@ models = (
 )
 tasks = ()
 
-export models, tasks
+return (models, tasks,)
 
 end

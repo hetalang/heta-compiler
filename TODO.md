@@ -23,15 +23,18 @@
 - dat (DBSolve)
 - heta-standard (Heta)
 - ModelingToolkit (Julia)
+- ODEs in markdown/latex/ascii
+
+## bugs
+
+- lost ref in actors
+- error for slv export step
 
 ## features
 
+- test empty assignments for @Record + to specifications
 - Export to SBML without standard units like _litre
-- add `scale`, `upper`, `lower` to `@Const` for fitting
-- Check units for Simbiology
-- Check units in expressions
 - #move, #moveNS
-- FunctionDefinition + function checking
 - heta update => npm i heta-compiler
 - automatic creation of modifiers in SBML
 - parameter switching: see "parameter-swithcing.md"
@@ -40,11 +43,13 @@
 
 ## ideas
 
-- Is it better to develop the specific tools in all languages instead of supporting the third-party software? 
-  1. Julia (SimSolver.jl)
-  2. Matlab (SimSolver.m)
-  3. R (SimSolver.r)
-  4. GUI
+- support null for properties: highlight, parse, heta standard, 
+- remove UnitDef from components 
+- check units for expressions after compilation
+- stoichiometry as @Const and @Record
+- add {output: true} for @Record
+- FunctionDef + function checking
+- updating properties: `one::s1.assignments.start_ 5.5;`
 
 ### Dose class
 

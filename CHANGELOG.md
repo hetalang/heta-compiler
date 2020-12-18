@@ -1,8 +1,12 @@
 # Change Log
 
+## 0.5.17
+
+- replace SimSolverPlatform by Platform function in SimSolver export
+
 ## 0.5.16
 
-- fix bugs in sbml-module: unary minus in <>plus
+- fix bugs in sbml-module: unary minus in <plus>
 
 ## 0.5.15
 
