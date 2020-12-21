@@ -3,6 +3,10 @@
 ## 0.5.17
 
 - replace SimSolverPlatform by Platform function in SimSolver export
+- output property in @Record
+- support `output` prop for SimSolver
+- support `output` prop for DBSolve, SLV
+- support `output` prop for mrgsolve
 
 ## 0.5.16
 

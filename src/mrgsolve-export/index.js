@@ -90,6 +90,7 @@ class MrgsolveExport extends _Export {
     // set array of output records
     let output = ns
       .selectByInstanceOf('Record')
+      .filter((rec) => rec.output) // only output: true
       .filter((rec) => {
         // remove all dynamic records written directly
         return !rec.isDynamic 
