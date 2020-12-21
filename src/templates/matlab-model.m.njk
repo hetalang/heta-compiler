@@ -36,7 +36,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     y0_ = InitFunc();
 
     % shared variable
-    shared_values = zeros(1, {{ outputRecords|length }});
+    shared_values = zeros(1, {{ sharedRecords|length }});
     integrator = [];
 
     %%% Initialization of dynamic records
@@ -103,7 +103,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- endfor %}
 
         %%% Output records
-        {%- for record in outputRecords %}
+        {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
@@ -113,7 +113,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
         {%- endif -%}
         {%- endfor %}
-        shared_values = [{% for record in outputRecords -%}
+        shared_values = [{% for record in sharedRecords -%}
         {{ record.id }}{{ ', ' if not loop.last }}
         {%- endfor %}];
 
@@ -147,7 +147,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function res = {{ event.switcher.id }}_condition(time, y)
  
         %%% Records
-        {%- for record in outputRecords %}
+        {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
@@ -170,7 +170,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function res = {{ event.switcher.id }}_condition(time, y)
  
         %%% Records
-        {%- for record in outputRecords %}
+        {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
@@ -189,7 +189,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function y = {{ event.switcher.id }}_affect(time, y)
 
         %%% Records
-        {%- for record in outputRecords %}
+        {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
@@ -202,7 +202,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
 
         if time ~= 0
             shared_values = [
-            {%- for record in outputRecords -%}
+            {%- for record in sharedRecords -%}
             {{ record.id }}{{ ', ' if not loop.last }}
             {%- endfor -%}
             ];

@@ -81,7 +81,7 @@ class MatlabExport extends _Export {
       .sortExpressionsByContext('start_')
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
     // currently we output all records
-    let outputRecords = ns
+    let sharedRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((x) => x.instanceOf('Record'));
     // RHS of ODE
@@ -135,7 +135,7 @@ class MatlabExport extends _Export {
       dynamicRecords,
       rhs,
       initRecords,
-      outputRecords,
+      sharedRecords,
       yTranslator: { symbolName: _.fromPairs(yTranslator)},
       pTranslator: { symbolName: _.fromPairs(pTranslator)},
       translator: { symbolName: _.fromPairs(yTranslator.concat(pTranslator))},

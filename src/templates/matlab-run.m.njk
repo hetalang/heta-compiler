@@ -1,16 +1,19 @@
 clear; clc; close all;
 
+% full list of records which are able to be outputted, see show_names
+output_ids = [
+{%- for record in sharedRecords -%}
+"{{ record.id }}"{{ ', ' if not loop.last }}
+{%- endfor -%}
+];
+% full list of constants, not used
 p_names = [
 {%- for con in constants -%}
 "{{ con.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}
 ];
-output_names = [
-{%- for record in outputRecords -%}
-"{{ record.id }}"{{ ', ' if not loop.last }}
-{%- endfor -%}
-];
 
+% initialization of constants and model
 p = param();
 [ode_func, out_func, y0, events_conditions, events_affects] = model(p);
 
@@ -38,19 +41,21 @@ while ti < t_span(2)
     yi = ev{1}(ti, ye(end,:));
 end
 
-%  plot all outputs from show_names
-show_names = [
-{%- for record in outputRecords -%}
+%  list of record to plot
+show_ids = [
+{%- for record in sharedRecords | filter2('output', true) -%}
 "{{ record.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}];
-[idx, loc] = ismember(show_names, output_names);
+
+% plot records
 figure
 hold on
+[idx, loc] = ismember(show_ids, output_ids);
 for i = loc
     plot(tout, output(:, i), '-', 'Linewidth', 1)
 end
 title('Default plot','Fontsize', 14)
 xlabel('t', 'Fontsize', 14)
 ylabel('records', 'Fontsize', 14)
-legend(show_names)
+legend(show_ids)
 hold off

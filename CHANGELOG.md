@@ -6,7 +6,8 @@
 - output property in @Record
 - support `output` prop for SimSolver
 - support `output` prop for DBSolve, SLV
-- support `output` prop for mrgsolve
+- support `output` prop for Mrgsolve
+- support `output` prop for Matlab
 
 ## 0.5.16
 
