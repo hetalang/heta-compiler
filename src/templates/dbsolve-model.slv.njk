@@ -55,7 +55,7 @@ ABsolute Fitting
 #1
 Variables for FileOutput
 #{# output #}
-{%- for out in dynamicRecords -%}
+{%- for out in population.selectByInstanceOf('Record') | filter2('output', true) -%}
 {{ out.id + '  '}}
 {%- endfor -%}
 t   #####

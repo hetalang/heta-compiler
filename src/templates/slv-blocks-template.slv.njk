@@ -5,8 +5,6 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
   {{ rule.id }} = {{ rule.rhs }};{% endfor %}
 }else{}
 {% endfor %}{% endblock %}
-============================ output ======================
-{% block outputVars %}{% for out in variables %}{{ out.id }}  {% endfor %}t  {% endblock %}
 ================================ Events ============================
 {% block events %}{{ events.length }}{% for event in events %}
 {{ event.target }}

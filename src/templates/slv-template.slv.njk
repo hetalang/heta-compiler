@@ -43,7 +43,11 @@ Number of scan parameters
 ABsolute Fitting
 #1
 Variables for FileOutput
-#{% block outputVars %}{% endblock %} #####
+#{# output #}
+{%- for out in population.selectByInstanceOf('Record') | filter2('output', true) -%}
+{{ out.id + '  '}}
+{%- endfor -%}
+t   #####
 Variables for FileOutputOn
 # #####
 (Internal) Temporary Print Option
