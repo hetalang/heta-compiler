@@ -1,5 +1,6 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
+const { flatten } = require('./core/utilities');
 
 class Namespace extends Map {
   constructor(spaceName){ 
@@ -34,6 +35,12 @@ class Namespace extends Map {
       type: this.isAbstract ? 'abstract' : 'concrete',
       space: this.spaceName
     };
+
+    return res; 
+  }
+  toFlat(options = {}){
+    let q = this.toQ(options);
+    let res = flatten(q);
 
     return res; 
   }

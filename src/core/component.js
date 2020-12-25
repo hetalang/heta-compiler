@@ -1,7 +1,6 @@
 const { markdown } = require('markdown');
-const { validator } = require('./utilities');
+const { validator, flatten } = require('./utilities');
 const _ = require('lodash');
-const { flatten } = require('./utilities');
 
 /*
   class Component

@@ -32,26 +32,25 @@ class XLSXExport extends _Export {
     // filtered namespaces
     let nsArray = [...this.container.namespaces]
       .map((pair) => pair[1]);
-    let nsOutput = typeof this.spaceFilter === 'undefined'
+    let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
       ? nsArray
       : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
-    let qArr = _.chain(nsOutput)
-      .map((ns) => ns.toArray())
-      .flatten()
-      .filter((x) => !x.isCore)
-      .map((x) => x.toFlat())
-      .map((q) => this.omit ? _.omit(q, this.omit) : q)
-      .map((x) => {
-        // add on property
-        x.on = 1;
-        // convert boolean to string
-        return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
-      })
-      .value();
+    
+    // create array of flat
+    let fArr_full = nsArrayFiltered.reduce((accumulator, ns) => {
+      let fArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toFlat()];
+      let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
+      return accumulator.concat(fArr_setns, fArr_components);
+    }, []).map((x) => {
+      x.on = 1;
+      return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
+    });
+
+    let fArr = this.omit ? fArr_full.map((q) => _.omit(q, this.omit)) : fArr_full;
 
     // split qArr to several sheets
     if (this.splitByClass) {
-      let splitted = _.chain(qArr)
+      let splitted = _.chain(fArr)
         .groupBy((q) => q.class)
         .mapValues((value, prop) => {
           let keys = _.chain(value) // store unique keys
@@ -78,7 +77,7 @@ class XLSXExport extends _Export {
         .value();
       return splitted;
     } else {
-      let keys = _.chain(qArr) // store unique keys
+      let keys = _.chain(fArr) // store unique keys
         .map((x) => _.keys(x))
         .flatten()
         .uniq()
@@ -86,7 +85,7 @@ class XLSXExport extends _Export {
       let sequense_out = _.intersection(propSequence, keys);
 
       return [{
-        content:  qArr,
+        content: fArr,
         pathSuffix: '',
         type: 'sheet',
         name: this.space,
