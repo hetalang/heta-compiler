@@ -1,5 +1,10 @@
 [
   {
+    "action": "setNS",
+    "type": "abstract",
+    "space": "first"
+  },
+  {
     "class": "UnitDef",
     "id": "min",
     "space": "first",

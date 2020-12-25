@@ -23,10 +23,19 @@ class Namespace extends Map {
   }
   toQArr(removeCoreComponents = false, options = {}){
     let qArr = this.toArray()
-      .filter((x) => !removeCoreComponents || !x.isCore)
+      .filter((x) => !(removeCoreComponents && x.isCore))
       .map((x) => x.toQ(options));
     
     return qArr;
+  }
+  toQ(options = {}){
+    let res = {
+      action: 'setNS',
+      type: this.isAbstract ? 'abstract' : 'concrete',
+      space: this.spaceName
+    };
+
+    return res; 
   }
   selectByClassName(className){
     return this

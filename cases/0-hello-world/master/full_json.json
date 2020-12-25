@@ -1,5 +1,10 @@
 [
   {
+    "action": "setNS",
+    "type": "concrete",
+    "space": "mm"
+  },
+  {
     "class": "Compartment",
     "id": "default_comp",
     "space": "mm",

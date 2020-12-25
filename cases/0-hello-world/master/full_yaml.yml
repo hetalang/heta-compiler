@@ -1,3 +1,6 @@
+- space: mm
+  action: setNS
+  type: concrete
 - class: Compartment
   id: default_comp
   space: mm

@@ -19,14 +19,19 @@ class JSONExport extends _Export {
     // filtered namespaces
     let nsArray = [...this.container.namespaces]
       .map((pair) => pair[1]);
-    let nsOutput = typeof this.spaceFilter === 'undefined'
+    let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
       ? nsArray
       : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
-    let qArr = _.chain(nsOutput)
-      .map((ns) => ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr }))
-      .flatten()
-      .map((q) => this.omit ? _.omit(q, this.omit) : q)
-      .value();
+
+    // create qArr from NS
+    let qArr_full = nsArrayFiltered.reduce((accumulator, ns) => {
+      let qArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toQ()]; // skip default NS
+      let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
+      return accumulator.concat(qArr_setns, qArr_components);
+    }, []);
+
+    // remove unnecessary properties
+    let qArr = this.omit ? qArr_full.map((q) => _.omit(q, this.omit)) : qArr_full;
     
     return [{
       content: JSON.stringify(qArr, null, 2),
