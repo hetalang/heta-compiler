@@ -40,6 +40,7 @@
 - parameter switching: see "parameter-swithcing.md"
 - @Dose class to use with simbiology/mrgsolve/nonmem doses
 - Check latest version at start
+- atStart to exports: SimSolver, Matlab, DBSolve
 
 ## ideas
 

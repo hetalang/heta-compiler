@@ -25,14 +25,5 @@
         "class": "Compartment",
         "id": "c1",
         "assignments": {"start_": "0.099"}
-    },
-    {
-        "class": "Const",
-        "space": "one",
-        "id": "k1",
-        "num": 1.2,
-        "title": "I am a title",
-        "notes": "I am **notes**",
-        "free": true
     }
 ]

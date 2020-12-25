@@ -491,19 +491,6 @@ class Container {
     qArr.forEach((q) => this.load(q, isCore));
     return this;
   }
-  toArray(){
-    return _.chain([...this.namespaces])
-      .map((x) => x[1].toArray())
-      .flatten()
-      .value();
-  }
-  toQArr(removeCoreComponents = false, options = {}){
-    let qArr = this.toArray()
-      .filter((x) => !removeCoreComponents || !x.isCore)
-      .map((x) => x.toQ(options));
-    
-    return qArr;
-  }
   get length(){
     return _.sumBy([...this.namespaces], (x) => x[1].size);
   }
