@@ -24,6 +24,8 @@ const yaml_correct = safeLoad(yaml_correct_text);
 const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
 const slv_correct = slvParse.parse(slv_correct_text);
 const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/table.xlsx');
+const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mm_mrg/model.cpp','utf8');
+const simsolver_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model.jl','utf8');
 
 describe('Testing "cases/0-hello-world"', () => {
   let b;
@@ -105,10 +107,20 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Mrgsolve}, check and compare.', () => {
+    let mm_mrg = b.container.exportStorage[7];
+    let code = mm_mrg.make();
+    // compare model.cpp text content
+    expect(code[0].pathSuffix).to.be.equal('/model.cpp');
+    expect(code[0].type).to.be.equal('text');
+    expect(code[0].content).to.be.equal(mrgsolve_correct);
+  });
+
+  it('Run #export {format: SimSolver}, check and compare.', () => {
     let mm_mrg = b.container.exportStorage[5];
-    let code = mm_mrg.make()[0].content;
-    let filename = './diagnostics/0/mm_mrg.cpp';
-    fs.outputFileSync(filename, code);
-    // the simulations will be checked later in R
+    let code = mm_mrg.make();
+    // compare model.js text content
+    expect(code[0].pathSuffix).to.be.equal('/model.jl');
+    expect(code[0].type).to.be.equal('text');
+    expect(code[0].content).to.be.equal(simsolver_correct);
   });
 });
