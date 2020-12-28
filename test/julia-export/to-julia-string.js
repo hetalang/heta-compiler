@@ -12,9 +12,29 @@ describe('Expession exports to Julia', () => {
     let expr = Expression.fromString('x*y');
     expect(expr.toJuliaString()).to.be.equal('x * y');
   });
+  it('toJuliaString() for "multiply(x,y)"', () => {
+    let expr = Expression.fromString('multiply(x,y)');
+    expect(expr.toJuliaString()).to.be.equal('*(x, y)');
+  });
+  it('toJuliaString() for "substract(x,y)"', () => {
+    let expr = Expression.fromString('substract(x,y)');
+    expect(expr.toJuliaString()).to.be.equal('-(x, y)');
+  });
+  it('toJuliaString() for "divide(x,y)"', () => {
+    let expr = Expression.fromString('divide(x,y)');
+    expect(expr.toJuliaString()).to.be.equal('/(x, y)');
+  });
   it('toJuliaString() for "plus(x,y)"', () => {
     let expr = Expression.fromString('plus(x,y)');
     expect(expr.toJuliaString()).to.be.equal('+(x, y)');
+  });
+  it('toJuliaString() for "square(x)"', () => {
+    let expr = Expression.fromString('square(x)');
+    expect(expr.toJuliaString()).to.be.equal('^(x, 2)');
+  });
+  it('toJuliaString() for "cube(x)"', () => {
+    let expr = Expression.fromString('cube(x)');
+    expect(expr.toJuliaString()).to.be.equal('^(x, 3)');
   });
   it('toJuliaString() for 1.1', () => {
     let expr = Expression.fromString(1.1);
@@ -95,5 +115,33 @@ describe('Expession exports to Julia', () => {
   it('toJuliaString() for "not (x+y)"', () => {
     let expr = Expression.fromString('not (x+y)');
     expect(expr.toJuliaString()).to.be.equal('!(x + y)');
+  });
+  it('toJuliaString() for "ifgt(1, 2, 3, 4)"', () => {
+    let expr = Expression.fromString('ifgt(1, 2, 3, 4)');
+    expect(expr.toJuliaString()).to.be.equal('1.0 > 2.0 ? 3.0 : 4.0');
+  });
+  it('toJuliaString() for "ifge(1, 2, 3, 4)"', () => {
+    let expr = Expression.fromString('ifge(1, 2, 3, 4)');
+    expect(expr.toJuliaString()).to.be.equal('1.0 >= 2.0 ? 3.0 : 4.0');
+  });
+  it('toJuliaString() for "iflt(1, 2, 3, 4)"', () => {
+    let expr = Expression.fromString('iflt(1, 2, 3, 4)');
+    expect(expr.toJuliaString()).to.be.equal('1.0 < 2.0 ? 3.0 : 4.0');
+  });
+  it('toJuliaString() for "ifle(1, 2, 3, 4)"', () => {
+    let expr = Expression.fromString('ifle(1, 2, 3, 4)');
+    expect(expr.toJuliaString()).to.be.equal('1.0 <= 2.0 ? 3.0 : 4.0');
+  });
+  it('toJuliaString() for "Infinity/4"', () => {
+    let expr = Expression.fromString('Infinity/4');
+    expect(expr.toJuliaString()).to.be.equal('Inf / 4.0');
+  });
+  it('toJuliaString() for "NaN*2"', () => {
+    let expr = Expression.fromString('NaN*2');
+    expect(expr.toJuliaString()).to.be.equal('NaN * 2.0');
+  });
+  it('toJuliaString() for "1*e/4"', () => {
+    let expr = Expression.fromString('1*e/4');
+    expect(expr.toJuliaString()).to.be.equal('1.0 * exp(1.0) / 4.0');
   });
 });
