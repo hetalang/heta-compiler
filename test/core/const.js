@@ -9,7 +9,7 @@ describe('Unit tests for Const.', () => {
       class: 'Const',
       num: 1.5
     });
-    con._id = 'k1'
+    con._id = 'k1';
     expect(con.toQ()).to.be.deep.equal({
       class: 'Const',
       id: 'k1',
@@ -25,7 +25,7 @@ describe('Unit tests for Const.', () => {
       lower: 1e-9,
       upper: 1e9
     });
-    con._id = 'k1'
+    con._id = 'k1';
     expect(con.toQ()).to.be.deep.equal({
       class: 'Const',
       id: 'k1',
