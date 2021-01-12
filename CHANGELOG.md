@@ -8,6 +8,7 @@
 - support `output` prop for DBSolve, SLV
 - support `output` prop for Mrgsolve
 - support `output` prop for Matlab
+- bug fix in XLSX module
 
 ## 0.5.16
 

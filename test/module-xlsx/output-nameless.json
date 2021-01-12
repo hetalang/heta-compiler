@@ -19,11 +19,13 @@
         "id": "s1",
         "isAmount": true,
         "compartment": "c1",
-        "assignments": {"start_": "12"}
+        "assignments": {"start_": "12"},
+        "aux": {"pmid": ["123", "321"]}
     },
     {
         "class": "Compartment",
         "id": "c1",
-        "assignments": {"start_": "0.099"}
+        "assignments": {"start_": "0.099"},
+        "aux": {"pmid": ["1111"]}
     }
 ]
