@@ -32,18 +32,19 @@
 
 ## features
 
+- Check latest version at start
+- #setUnit instead of @UnitDef 
 - test empty assignments for @Record + to specifications
 - Export to SBML without standard units like _litre
 - #move, #moveNS
-- heta update => npm i heta-compiler
 - automatic creation of modifiers in SBML
 - parameter switching: see "parameter-swithcing.md"
-- @Dose class to use with simbiology/mrgsolve/nonmem doses
-- Check latest version at start
 - atStart to exports: SimSolver, Matlab, DBSolve
 
 ## ideas
 
+- @Dose class to use with simbiology/mrgsolve/nonmem doses
+- heta update => npm i heta-compiler
 - support null for properties: highlight, parse, heta standard, 
 - remove UnitDef from components 
 - check units for expressions after compilation

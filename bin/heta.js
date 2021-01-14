@@ -13,5 +13,6 @@ program
   .version(version, '-v, --version')
   .description(descriptionText)
   .command('build [dir]', 'Compile Heta based platform and create set of export files.')
-  .command('init [dir]', 'Create template platform files in directory')
+  .command('init [dir]', 'Create template platform files in directory.')
+  .command('check', 'Check if the latest version is installed.')
   .parse(process.argv);

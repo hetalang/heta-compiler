@@ -25,9 +25,7 @@
     "heta": "bin/heta.js",
     "heta-build": "bin/heta-build.js",
     "heta-init": "bin/heta-init.js",
-    "qs3p": "bin/heta.js",
-    "qs3p-build": "bin/heta-build.js",
-    "qs3p-init": "bin/heta-init.js"
+    "heta-check": "bin/heta-check.js"
   },
   "dependencies": {
     "@insysbio/topo-sort": "^1.0.1",
@@ -44,6 +42,7 @@
     "mathjs": "^5.10.3",
     "mathjs-mathml": "^0.2.2",
     "mathjs-translate": "^0.1.9",
+    "npm": "^6.14.11",
     "nunjucks": "^3.2.2",
     "random-id": "^1.0.4",
     "semver": "^6.3.0",
