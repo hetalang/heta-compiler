@@ -19,7 +19,9 @@ class SimSolverExport extends _Export {
   get className(){
     return 'SimSolverExport';
   }
-  make(){
+  // skipVersionCode means that the version will not be printed in output
+  // this is required for autotests
+  make(skipVersionCode = false){
     let logger = this.container.logger;
     // create image for multiple namespaces
     let nsImages = [...this.container.namespaces]
@@ -32,7 +34,9 @@ class SimSolverExport extends _Export {
 
     // create Content
     let image = {
-      builderName: pkg.name + ' of v' + pkg.version,
+      builderName: skipVersionCode 
+        ? 'test version' 
+        : (pkg.name + ' of v' + pkg.version),
       options: this,
       nsImages
     };

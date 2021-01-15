@@ -21,7 +21,10 @@ class MatlabExport extends _Export {
   get className(){
     return 'MatlabExport';
   }
-  make(){
+  // TODO: skipVersionCode does not work
+  // skipVersionCode means that the version will not be printed in output
+  // this is required for autotests
+  make(skipVersionCode = false){
     // use only one namespace
     let logger = this.container.logger;
     if (this.spaceFilter.length === 0) {

@@ -15,7 +15,7 @@ describe('Testing "cases/6-import"', () => {
   it('Create builder.', () => {
     let declaration = {
       id: 'test',
-      builderVersion: '^0.4.21',
+      builderVersion: '*',
       options: {
         logLevel: 'panic',
         skipExport: true
