@@ -28,7 +28,6 @@
 ## bugs
 
 - lost ref in actors
-- error at slv export if errors in compilation
 - multispace export in Matlab
 
 ## features

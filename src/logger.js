@@ -1,8 +1,7 @@
-
-const colors = require('colors/safe');
 /*
   Class describing Heta logs
 */
+const colors = require('colors/safe');
 
 const levels = [
   'debug', // 0
@@ -16,6 +15,7 @@ class Logger {
   constructor(showLogLevel = 'info'){
     this.showLogLevel = showLogLevel;
     this._transports = [];
+    this._hasErrors = false;
   }
   addTransport(transport = () => {}){
     let checkTransport = (transport instanceof Transport)
@@ -33,6 +33,9 @@ class Logger {
     let levelNum = levels.indexOf(level);
     if (levelNum < 0) {
       throw new TypeError(`Unknown logger level: "${level}"`);
+    }
+    if (levelNum >= 3) { // error and panic
+      this._hasErrors = true;
     }
 
     this._transports.forEach((transport) => {
@@ -55,12 +58,10 @@ class Logger {
   error(msg, opt){
     this.log('error', msg, opt);
   }
-
-  /*
   get hasErrors(){
-    let numberOfErrors = this._logs.filter((log) => log.level === 'error');
-    return numberOfErrors.length > 0;
+    return this._hasErrors;
   }
+  /*
   reset(){
     this._logs = [];
   }

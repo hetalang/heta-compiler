@@ -107,7 +107,9 @@ class Builder {
     this.container.knitMany();
     
     // 5. Exports
-    if (this.options.skipExport) {
+    if (this.logger.hasErrors) { // check if errors
+      this.logger.warn('Export skipped because of errors in compilation.');
+    } else if (this.options.skipExport) {
       this.logger.warn('Exporting skipped as stated in declaration.');
     } else if (this.options.ssOnly) {
       this.logger.warn('"ss only" mode');

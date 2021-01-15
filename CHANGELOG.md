@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.5.18
+
+- Message for user to install the latest version
+- Stop export if errors exists
+
 ## 0.5.17
 
 - replace SimSolverPlatform by Platform function in SimSolver export
