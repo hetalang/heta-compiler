@@ -28,13 +28,13 @@
 ## bugs
 
 - lost ref in actors
-- error for slv export step
+- error at slv export if errors in compilation
 - multispace export in Matlab
 
 ## features
 
-- Check latest version at start
-- #setUnit instead of @UnitDef 
+- check units for expressions after compilation
+- #setUnit instead of @UnitDef
 - test empty assignments for @Record + to specifications
 - Export to SBML without standard units like _litre
 - #move, #moveNS
@@ -46,12 +46,9 @@
 
 - @Dose class to use with simbiology/mrgsolve/nonmem doses
 - heta update => npm i heta-compiler
-- support null for properties: highlight, parse, heta standard, 
-- remove UnitDef from components 
-- check units for expressions after compilation
+- support null for properties: highlight, parse, heta standard
 - stoichiometry as @Const and @Record
-- add {output: true} for @Record
-- FunctionDef + function checking
+- #setFunction + function checking
 - updating properties: `one::s1.assignments.start_ 5.5;`
 
 ### Dose class
