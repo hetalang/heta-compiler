@@ -24,8 +24,7 @@
   "bin": {
     "heta": "bin/heta.js",
     "heta-build": "bin/heta-build.js",
-    "heta-init": "bin/heta-init.js",
-    "heta-check": "bin/heta-check.js"
+    "heta-init": "bin/heta-init.js"
   },
   "dependencies": {
     "@insysbio/topo-sort": "^1.0.1",

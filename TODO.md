@@ -27,11 +27,10 @@
 
 ## bugs
 
-- lost ref in actors
-- multispace export in Matlab
 
 ## features
 
+- multispace export in Matlab
 - check units for expressions after compilation
 - #setUnit instead of @UnitDef
 - test empty assignments for @Record + to specifications
