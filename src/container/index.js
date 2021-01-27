@@ -15,6 +15,7 @@ const { SimpleTask } = require('../core/simple-task');
 const _ = require('lodash');
 const { Namespace } = require('../namespace');
 const { Logger, JSONTransport } = require('../logger');
+const coreItems = require('./core-items.json');
 
 // they cannot be used as id, when 
 const reservedWords = [
@@ -42,6 +43,11 @@ class Container {
 
     // array to store _Export Instances
     this.exportStorage = [];
+    // storage for units
+    this._unitDefStorage = new Map();
+
+    // load core items
+    this.loadMany(coreItems, true);
   }
   // returns array of errors in heta code
   hetaErrors(){
@@ -473,6 +479,20 @@ class Container {
     
     return exportInstance;
   }
+  unitDef(q = {}, isCore = false){
+    // check arguments here
+    if (typeof q.id === 'undefined') {
+      this.logger.error('Id for #unitDef should be string, got ' + q.id, {type: 'QueueError'});
+      return;
+    }
+    // normal flow
+    let unitDefInstance = new UnitDef(q, isCore, this.logger); // TODO: create class
+    //let unitDefInstance = q;
+    this._unitDefStorage.set(q.id, unitDefInstance);
+    //console.log(`"${q.id}" was added`)
+
+    return unitDefInstance;
+  }
   load(q, isCore = false){
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');
@@ -518,7 +538,6 @@ Container.prototype.classes = {
   TimeSwitcher,
   SimpleTask,
   ReferenceDefinition,
-  UnitDef,
   Page,
   Const
 };

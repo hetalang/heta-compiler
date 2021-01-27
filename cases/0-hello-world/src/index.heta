@@ -1,4 +1,4 @@
-include ./qsp-units.json type json
+include ./qsp-units.heta type heta
 
 Vmax @Const = 0.1; // this is global constant available for any scoped equation
 Km @Const = 2.5 {units: uM};

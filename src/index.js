@@ -1,5 +1,5 @@
 const Container = require('./container');
-const coreComponents = require('./container/core-components');
+const coreItems = require('./container/core-items');
 
 // set nunjacks environment
 const nunjucksEnv = require('./nunjucks-env')(__dirname + '/templates');
@@ -18,6 +18,6 @@ require('./sim-solver-export');
 
 module.exports = {
   Container,
-  coreComponents,
+  coreItems,
   nunjucksEnv 
 };

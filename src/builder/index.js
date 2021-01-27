@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
-const { Container, coreComponents } = require('../index');
+const { Container } = require('../index');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 const _ = require('lodash');
@@ -91,16 +91,7 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(queue, false);
-
-    // 3.5. Load core components into all namespaces
-    [...this.container.namespaces]
-      .forEach((ns) => { 
-        this.logger.info(`Loading core components into "${ns[0]}" namespace, total count: ${coreComponents.length}`);
-        let coreComponents1 = coreComponents.map((q) => {
-          return Object.assign({space: ns[0]}, q);
-        });
-        this.container.loadMany(coreComponents1, true);
-      });
+    console.log([...this.container._unitDefStorage]); // XXX: debugging
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
