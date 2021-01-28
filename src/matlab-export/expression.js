@@ -36,27 +36,27 @@ Expression.prototype.toMatlabString = function(){
     if (node.type==='FunctionNode' && node.fn.name==='ifgt') {
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `tern__(${args[0]}>${args[1]}, ${args[2]}, ${args[3]}})`;
+      return `tern__(${args[0]}>${args[1]}, ${args[2]}, ${args[3]})`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='ifge') {
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `tern__(${args[0]}>=${args[1]}, ${args[2]}, ${args[3]}})`;
+      return `tern__(${args[0]}>=${args[1]}, ${args[2]}, ${args[3]})`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='iflt') {
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `tern__(${args[0]}<${args[1]}, ${args[2]}, ${args[3]}})`;
+      return `tern__(${args[0]}<${args[1]}, ${args[2]}, ${args[3]})`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='ifle') {
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `tern__(${args[0]}<=${args[1]}, ${args[2]}, ${args[3]}})`;
+      return `tern__(${args[0]}<=${args[1]}, ${args[2]}, ${args[3]})`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='ifeq') {
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `tern__(${args[0]}==${args[1]}, ${args[2]}, ${args[3]}})`;
+      return `tern__(${args[0]}==${args[1]}, ${args[2]}, ${args[3]})`;
     }
     // ternary operator
     if (node.type === 'ConditionalNode') {

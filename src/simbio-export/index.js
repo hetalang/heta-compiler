@@ -48,7 +48,7 @@ class SimbioExport extends _Export{
       },
       {
         content: this.getFunCode(),
-        pathSuffix: '/fun.m',
+        pathSuffix: '/tern__.m',
         type: 'text'
       }
     ];
@@ -84,7 +84,7 @@ class SimbioExport extends _Export{
   }
   getFunCode(){
     return nunjucks.render(
-      'fun.m',
+      'simbio-tern__.m',
       this
     );
   }

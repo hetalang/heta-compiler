@@ -358,7 +358,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
-|MathExpr: ternary operator                              |+ |+ |? |- |+ |- |- |- |-
+|MathExpr: ternary operator                              |+ |+ |? |- |+ |+ |- |- |-
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+

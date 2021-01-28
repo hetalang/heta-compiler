@@ -4,6 +4,7 @@
 
 - Message for user to install the latest version
 - Stop export if errors exists
+- support of ternary operator in Simbio
 
 ## 0.5.17
 
