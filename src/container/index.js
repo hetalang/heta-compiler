@@ -1,4 +1,7 @@
+// Top classes
 const { Top } = require('../core/top');
+const { UnitDef } = require('../core/unit-def');
+// Component classes
 const { Component } = require('../core/component');
 const { Record } = require('../core/record');
 const { Compartment } = require('../core/compartment');
@@ -9,10 +12,10 @@ const { DSwitcher } = require('../core/d-switcher');
 const { CSwitcher } = require('../core/c-switcher');
 const { TimeSwitcher } = require('../core/time-switcher');
 const { ReferenceDefinition } = require('../core/reference-definition');
-const { UnitDef } = require('../core/unit-def');
 const { Page } = require('../core/page');
 const { Const } = require('../core/const');
 const { SimpleTask } = require('../core/simple-task');
+// other
 const _ = require('lodash');
 const { Namespace } = require('../namespace');
 const { Logger, JSONTransport } = require('../logger');
@@ -32,6 +35,7 @@ class Container {
   constructor(){
     // set back refs
     this.Top.prototype._container = this; // this line modifies copy of Top class
+    this.UnitDef.prototype._container = this;
 
     // logger
     this.logger = new Logger();
@@ -51,8 +55,8 @@ class Container {
     // storage for units
     this._unitDefStorage = new Map();
 
-    // load core items
-    this.loadMany(coreItems, true);
+    // load core items XXX: temporally commented
+    //this.loadMany(coreItems, true);
   }
   // returns array of errors in heta code
   hetaErrors(){
@@ -550,6 +554,7 @@ Container.prototype.classes = {
 /* assign classes as container properties */
 Object.assign(Container.prototype, {
   Top: class extends Top {}, // original class does not inherit updated properties like _container
+  UnitDef: class extends UnitDef {},
 });
 
 // storage of Export classes

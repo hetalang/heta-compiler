@@ -1,32 +1,106 @@
+const { Top } = require('./top');
 const { Unit } = require('./unit');
+
+// TODO: move this to utilites later
+const Ajv = require('ajv');
+const ajv = new Ajv({allErrors: true, jsonPointers: true});
+require('ajv-errors')(ajv);
+
+const validate = ajv.compile({
+  type: 'object',
+  required: ['id'],
+  properties: {
+    units: { anyOf: [
+       { '$ref': "#/definitions/UnitsExpr" },
+       { type: "array", items: { '$ref': "#/definitions/UnitComponent" } }
+    ] }
+  },
+
+  definitions: {
+    ID: {
+      description: "First character is letter, others are letter, digit or underscore.",
+      type: "string",
+      minLength: 1,
+      pattern: "^[_a-zA-Z][_a-zA-Z0-9]*$",
+      example: "x_12_"
+    },
+
+    UnitsExpr: {
+      description: "Unit expression, see qsp-units project.",
+      type: "string",
+      pattern: "^[_a-zA-Z0-9./*^ ()+-]*$",
+      example: "1/h * ms"
+    },
+
+    UnitComponent: {
+      type: "object",
+      required: ["kind"],
+      properties: {
+        kind: { '$ref': "#/definitions/ID" },
+        multiplier: { type: "number", exclusiveMinimum: 0 },
+        exponent: { type: "number" }
+      },
+      example: { kind: "mole", multiplier: 1e-6, exponent: 1 }
+    },
+  }
+});
 
 /*
   // example:  unitDef1 = nM / kg3
-  unitDef1 #unitDef { units: [
+  unitDef1 #defineUnit { units: [
     { kind: nM, multiplier: 1, exponent: 1 },
     { kind: kg, multiplier: 1, exponent: -3 }
   ]};
 */
-class UnitDef {
-  constructor(q, isCore = false, logger){
-    this.unitsParsed = new Unit(); // [] means the unit is base
+class UnitDef extends Top {
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    this.unitsParsed = new Unit();
 
     // check arguments here
+    let logger = this._container.logger;
     let valid = UnitDef.isValid(q, logger);
 
     if (valid) {
-      if (q.units) {
-        if (typeof q.units === 'string')
-          this.unitsParsed = Unit.parse(q.units);
-        else
-          this.unitsParsed = Unit.fromQ(q.units);
+      if (q.units && typeof q.units === 'string') {
+        this.unitsParsed = Unit.parse(q.units);
+      } else if (q.units && q.units instanceof Array) {
+        this.unitsParsed = Unit.fromQ(q.units);
       }
     }
 
     return this;
   }
-  static isValid(q, logger){ // TODO: 
-    return true;
+  get units(){
+    if (this.unitsParsed !== undefined) {
+      return this.unitsParsed.toString();
+    } else {
+      return undefined;
+    }
+  }
+  static get validate(){
+    return validate;
+  }
+  _toQ(options = {}){
+      let q = super._toQ(options);
+
+      if (this.unitsParsed) {
+        if (options.noUnitsExpr) {
+          q.units = this.unitsParsed.toQ(options);
+        } else {
+          q.units = this.unitsParsed.toString();
+        }
+      }
+      return q;
+  }
+  toQ(options = {}){
+      let q = this._toQ(options);
+      q.action = 'defineUnit';
+
+      return q;
+  }
+  static get schema(){
+    return schema;
   }
 }
 
