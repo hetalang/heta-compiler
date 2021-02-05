@@ -15,7 +15,7 @@ namespace mm begin
   r1 @Reaction {
     title: Michaelis-Menten reaction,
     actors: S -> P,
-    units: umole/min
+    units: umole/minute
   };
 
   r1 := Vmax*S/(Km+S)*default_comp; // S is used here but assigned below

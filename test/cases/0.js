@@ -52,14 +52,14 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SBML}, check and compare.', () => {
-    let sbml_export = b.container.exportStorage[0];
+    let sbml_export = b.container._exportStorage[0];
     let code = sbml_export.make(true)[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);
   });
 
   it('Run #export {format: JSON}, check and compare.', () => {
-    let json_export = b.container.exportStorage[2];
+    let json_export = b.container._exportStorage[2];
     let code = json_export.make(true)[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
@@ -67,7 +67,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: YAML}, check and compare.', () => {
-    let yaml_export = b.container.exportStorage[3];
+    let yaml_export = b.container._exportStorage[3];
     let code = yaml_export.make(true)[0].content;
     let obj = safeLoad(code);
     expect(obj).to.be.deep.equal(yaml_correct);
@@ -75,7 +75,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SLV}, check and compare.', () => {
-    let slv_export = b.container.exportStorage[4];
+    let slv_export = b.container._exportStorage[4];
     let code = slv_export.make(true)[0].content;
     let obj = slvParse.parse(code);
     expect(obj).to.be.deep.equal(slv_correct);
@@ -83,7 +83,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: XLSX}, check and compare.', () => {
-    let xlsx_export = b.container.exportStorage[9];
+    let xlsx_export = b.container._exportStorage[9];
     let code = xlsx_export.make(true); // check only sheet #0
 
     // check number of sheets
@@ -107,7 +107,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Mrgsolve}, check and compare.', () => {
-    let mm_mrg = b.container.exportStorage[7];
+    let mm_mrg = b.container._exportStorage[7];
     let code = mm_mrg.make(true);
     // compare model.cpp text content
     expect(code[0].pathSuffix).to.be.equal('/model.cpp');
@@ -116,7 +116,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SimSolver}, check and compare.', () => {
-    let mm_mrg = b.container.exportStorage[5];
+    let mm_mrg = b.container._exportStorage[5];
     let code = mm_mrg.make(true);
     // compare model.js text content
     expect(code[0].pathSuffix).to.be.equal('/model.jl');

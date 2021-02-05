@@ -51,12 +51,12 @@ class Container {
     this._namespaces.set('nameless', nameless);
 
     // array to store _Export Instances
-    this.exportStorage = [];
+    this._exportStorage = [];
     // storage for units
     this._unitDefStorage = new Map();
 
     // load core items XXX: temporally commented
-    //this.loadMany(coreItems, true);
+    this.loadMany(coreItems, true);
   }
   // returns array of errors in heta code
   hetaErrors(){
@@ -484,7 +484,7 @@ class Container {
     exportInstance.container = this;
     exportInstance.merge(q);
     // push to storage
-    this.exportStorage.push(exportInstance);
+    this._exportStorage.push(exportInstance);
     
     return exportInstance;
   }
@@ -519,10 +519,15 @@ class Container {
     return this;
   }
   get length(){
-    return _.sumBy([...this.namespaces], (x) => x[1].size);
+    return _.sumBy([...this.namespaces], (x) => x[1].size)
+      + this._unitDefStorage.size // global element
+      + this._exportStorage.length; // global element
   }
   // check all namespaces
   knitMany(){
+    // knit unitDefs TODO: checking for circular UnitDef
+    [...this._unitDefStorage].forEach((x) => x[1].bind());
+    // knit components
     [...this.namespaces].forEach((x) => {
       let ns = x[1];
       // knit only concrete namespace

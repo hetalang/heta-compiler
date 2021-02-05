@@ -1,5 +1,7 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
+require('../../src/sbml-export/expression');
+require('../../src/matlab-export/expression');
 const { expect } = require('chai');
 
 describe('Unit test for Expression.', () => {
@@ -14,7 +16,8 @@ describe('Unit test for Expression.', () => {
   });
 
   it('Conversion to CMathML.', () => {
-    expect(Expression.fromString('x*y').toCMathML()).to.be
+    let expr = Expression.fromString('x*y');
+    expect(expr.toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
 

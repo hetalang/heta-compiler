@@ -1,10 +1,10 @@
 {
   "name": "heta-compiler",
-  "version": "0.5.18",
+  "version": "0.6.0",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha test/core/unit-def.js --config=./test/.mocharc.json",
+    "test:dev": "mocha test/core/expression.js --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
     "test:cov": "nyc --reporter=lcov npm run test",

@@ -135,7 +135,7 @@ let c = (new Container)
     .loadMany(queue)
     .knitMany();
 // get export element
-let output = c.exportStorage[0]
+let output = c._exportStorage[0]
     .make();
 
 // print sbml code to console

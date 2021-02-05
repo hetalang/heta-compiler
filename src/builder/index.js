@@ -129,7 +129,7 @@ class Builder {
     return;
   }
   exportMany(){
-    let exportElements = this.container.exportStorage;
+    let exportElements = this.container._exportStorage;
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
     exportElements.forEach((exportItem) => {
@@ -140,7 +140,7 @@ class Builder {
     });
   }
   exportSSOnly(){
-    // create export without putting it to exportStorage
+    // create export without putting it to _exportStorage
     let exportItem = new this.container.exports['SimSolver'];
     exportItem.container = this.container;
     exportItem.merge({

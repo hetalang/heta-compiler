@@ -78,6 +78,25 @@ class UnitDef extends Top {
       return undefined;
     }
   }
+  bind(){
+    // super.bind();
+    let logger = this._container.logger;
+    let storage = this._container._unitDefStorage;
+
+    if (this.unitsParsed) {
+      this.unitsParsed.forEach((x) => {
+        let target = storage.get(x.kind);
+        
+        if (!target) {
+          let msg = `UnitDef "${x.kind}" is not found as expected here: `
+            + `${this.index} { units: ${this.units} };`;
+          logger.error(msg, {type: 'BindingError'});
+        } else {
+          x.kindObj = target;
+        }
+      });
+    }
+  }
   static get validate(){
     return validate;
   }

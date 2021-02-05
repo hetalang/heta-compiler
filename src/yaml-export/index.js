@@ -25,11 +25,15 @@ class YAMLExport extends _Export {
       : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
 
     // create qArr from NS
-    let qArr_full = nsArrayFiltered.reduce((accumulator, ns) => {
+    let qArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {
       let qArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toQ()]; // skip default NS
       let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
       return accumulator.concat(qArr_setns, qArr_components);
     }, []);
+    let qArr_unitDef = [...this.container._unitDefStorage]
+      .filter((x) => !x[1].isCore)
+      .map((x) => x[1].toQ());
+    let qArr_full = [].concat(qArr_ns, qArr_unitDef);
 
     // remove unnecessary properties
     let qArr = this.omit ? qArr_full.map((q) => _.omit(q, this.omit)) : qArr_full;

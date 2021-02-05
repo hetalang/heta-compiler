@@ -44,10 +44,11 @@ class Top { // or const Top = class {...}
     /*
     new Top({id: 'ttt1'});
     */
-    constructor(q = {}){
+    constructor(q = {}, isCore = false){
         let logger = this._container.logger;
         let valid = Top.isValid(q, logger);
 
+        if (isCore) this.isCore = true;
         if (valid) {
           if (typeof q.id !== 'undefined') {
             this._id = q.id;
@@ -61,7 +62,7 @@ class Top { // or const Top = class {...}
     get id(){
         return this._id;
     }
-    get ind(){
+    get index(){
         return this._id;
     }
     static get validate(){
