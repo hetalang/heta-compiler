@@ -91,7 +91,7 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(queue, false);
-    console.log([...this.container._unitDefStorage]); // XXX: debugging
+    //console.log([...this.container._unitDefStorage]); // XXX: debugging
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);

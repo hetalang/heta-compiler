@@ -72,7 +72,7 @@ const sbml2Text = fs.readFileSync(path.join(__dirname, 'sbml2.xml'), 'utf8');
 describe('parse units', () => {
   let res = SBMLParse('sbml2', sbml2Text);
 
-  it('Use units from unitDef', () => {
+  it('Use units from UnitDef', () => {
     expect(res[6])
       .to.have.property('units').and
       .to.be.deep.equal([{ kind: 'second', exponent: 1, multiplier: 1 }]);

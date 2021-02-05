@@ -1,153 +1,153 @@
-fmole #unitDef {
+fmole #defineUnit {
     units: [ { kind: mole, multiplier: 1e-15 } ]
 };
-pmole #unitDef {
+pmole #defineUnit {
     units: [ { kind: mole, multiplier: 1e-12 } ]
 };
-nmole #unitDef {
+nmole #defineUnit {
     units: [ { kind: mole, multiplier: 1e-9 } ]
 };
-umole #unitDef {
+umole #defineUnit {
     units: [ { kind: mole, multiplier: 1e-6 } ]
 };
-mmole #unitDef {
+mmole #defineUnit {
     units: [ { kind: mole, multiplier: 1e-3 } ]
 };
-fM #unitDef {
+fM #defineUnit {
     units: [ { kind: mole, multiplier: 1e-15 }, { kind: litre, exponent: -1} ]
 };
 
-pM #unitDef {
+pM #defineUnit {
     units: [ { kind: mole, multiplier: 1e-12 }, { kind: litre, exponent: -1} ]
 };
-nM #unitDef {
+nM #defineUnit {
     units: [ { kind: mole, multiplier: 1e-9 }, { kind: litre, exponent: -1} ]
 };
-uM #unitDef {
+uM #defineUnit {
     units: [ { kind: mole, multiplier: 1e-6 }, { kind: litre, exponent: -1} ]
 };
-mM #unitDef {
+mM #defineUnit {
     units: [ { kind: mole, multiplier: 1e-3 }, { kind: litre, exponent: -1} ]
 };
-M #unitDef {
+M #defineUnit {
     units: [ { kind: mole }, { kind: litre, exponent: -1} ]
 };
-kM #unitDef {
+kM #defineUnit {
     units: [ { kind: mole, multiplier: 1e3 }, { kind: litre, exponent: -1 } ]
 };
 
-fL #unitDef {
+fL #defineUnit {
     units: [ { kind: litre, multiplier: 1e-15 } ]
 };
-pL #unitDef {
+pL #defineUnit {
     units: [ { kind: litre, multiplier: 1e-12 } ]
 };
-nL #unitDef {
+nL #defineUnit {
     units: [ { kind: litre, multiplier: 1e-9 } ]
 };
-uL #unitDef {
+uL #defineUnit {
     units: [ { kind: litre, multiplier: 1e-6 } ]
 };
-mL #unitDef {
+mL #defineUnit {
     units: [ { kind: litre, multiplier: 1e-3 } ]
 };
-dL #unitDef {
+dL #defineUnit {
     units: [ { kind: litre, multiplier: 1e-1 } ]
 };
-L #unitDef {
+L #defineUnit {
     units: [ { kind: litre } ]
 };
 
-fs #unitDef {
+fs #defineUnit {
     units: [ { kind: second, multiplier: 1e-15 } ]
 };
-ps #unitDef {
+ps #defineUnit {
     units: [ { kind: second, multiplier: 1e-12 } ]
 };
-ns #unitDef {
+ns #defineUnit {
     units: [ { kind: second, multiplier: 1e-9 } ]
 };
-us #unitDef {
+us #defineUnit {
     units: [ { kind: second, multiplier: 1e-6 } ]
 };
-ms #unitDef {
+ms #defineUnit {
     units: [ { kind: second, multiplier: 1e-3 } ]
 };
-s #unitDef {
+s #defineUnit {
     units: [ { kind: second } ]
 };
-h #unitDef {
+h #defineUnit {
     units: [ { kind: hour, multiplier: 1 } ]
 };
-week #unitDef {
+week #defineUnit {
     units: [ { kind: day, multiplier: 7 } ]
 };
 
-fg #unitDef {
+fg #defineUnit {
     units: [ { kind: kilogram, multiplier: 1e-18 } ]
 };
-pg #unitDef {
+pg #defineUnit {
     units: [ { kind: kilogram, multiplier: 1e-15 } ]
 };
-ng #unitDef {
+ng #defineUnit {
     units: [ { kind: kilogram, multiplier: 1e-12 } ]
 };
-ug #unitDef {
+ug #defineUnit {
     units: [ { kind: kilogram, multiplier: 1e-9 } ]
 };
-mg #unitDef {
+mg #defineUnit {
     units: [ { kind: kilogram, multiplier: 1e-6 } ]
 };
-g #unitDef {
+g #defineUnit {
     units: [ { kind: kilogram, multiplier: 1e-3 } ]
 };
-kg #unitDef {
+kg #defineUnit {
     units: [ { kind: kilogram } ]
 };
 
-kat #unitDef {
+kat #defineUnit {
     units: [ { kind: katal } ]
 };
 
-cell #unitDef {
+cell #defineUnit {
     units: [ { kind: item } ]
 };
-kcell #unitDef {
+kcell #defineUnit {
     units: [ { kind: item, multiplier: 1e3 } ]
 };
 
-cal #unitDef {
+cal #defineUnit {
     units: [ { kind: joule, multiplier: 4.1868 } ]
 };
-kcal #unitDef {
+kcal #defineUnit {
     units: [ { kind: joule, multiplier: 4.1868e3 } ]
 };
 
-fm #unitDef {
+fm #defineUnit {
     units: [ { kind: metre, multiplier: 1e-15 } ]
 };
-pm #unitDef {
+pm #defineUnit {
     units: [ { kind: metre, multiplier: 1e-12 } ]
 };
-nm #unitDef {
+nm #defineUnit {
     units: [ { kind: metre, multiplier: 1e-9 } ]
 };
-um #unitDef {
+um #defineUnit {
     units: [ { kind: metre, multiplier: 1e-6 } ]
 };
-mm #unitDef {
+mm #defineUnit {
     units: [ { kind: metre, multiplier: 1e-13 } ]
 };
-cm #unitDef {
+cm #defineUnit {
     units: [ { kind: metre, multiplier: 1e-2 } ]
 };
-m #unitDef {
+m #defineUnit {
     units: [ { kind: metre } ]
 };
 
-UL #unitDef {
+UL #defineUnit {
     units: [ { kind: dimensionless } ]
 };
-percent #unitDef {
+percent #defineUnit {
     units: [ { kind: dimensionless, multiplier: 1e-2 } ]
 };

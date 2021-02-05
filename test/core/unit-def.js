@@ -1,9 +1,9 @@
 /* global describe, it */
 const Container = require('../../src/container');
-const p = new Container();
 const { expect } = require('chai');
 
 describe('Unit test for UnitDef', () => {
+  const p = new Container();
   it('Error: Empty UnitDef', () => {
     let simple = new p.UnitDef();
 
@@ -55,5 +55,41 @@ describe('Unit test for UnitDef', () => {
     });
     expect(simple2._container.logger).to.has.property('hasErrors', true);
     simple2._container.logger.resetErrors();
+  });
+});
+
+let input0 = [
+  {
+    action: 'defineUnit',
+    id: 'base'
+  },
+  {
+    action: 'defineUnit',
+    id: 'L'
+  },
+  {
+    action: 'defineUnit',
+    id: 'mbase',
+    units: [
+      { kind: 'base', multiplier: 1e-3, exponent: 1 }
+    ]
+  },
+  {
+    action: 'defineUnit',
+    id: 'mbase_per_L2',
+    units: [
+      { kind: 'base', multiplier: 1e-3, exponent: 1 },
+      { kind: 'L', multiplier: 1, exponent: -2 }
+    ]
+  }
+];
+
+describe('Testing loading UnitDef', () => {
+  const p = new Container();
+
+  it('Load UnitDef', () => {
+    p.loadMany(input0);
+    expect(p._unitDefStorage).to.be.property('size', 4);
+    //console.log([...p._unitDefStorage].map(x=>x[1].unitsParsed))
   });
 });

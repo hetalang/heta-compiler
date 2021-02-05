@@ -488,20 +488,18 @@ class Container {
     
     return exportInstance;
   }
-  unitDef(q = {}, isCore = false){
-    // check arguments here
-    if (typeof q.id === 'undefined') {
-      this.logger.error('Id for #unitDef should be string, got ' + q.id, {type: 'QueueError'});
-      return;
-    }
+  // === ACTIONS ===
+  // #defineUnit
+  defineUnit(q = {}, isCore = false){
     // normal flow
-    let unitDefInstance = new UnitDef(q, isCore, this.logger); // TODO: create class
-    //let unitDefInstance = q;
-    this._unitDefStorage.set(q.id, unitDefInstance);
-    //console.log(`"${q.id}" was added`)
+    let unitDefInstance = new this.UnitDef(q, isCore);
+    if (unitDefInstance.id) { // actually id is always presented
+      this._unitDefStorage.set(unitDefInstance.id, unitDefInstance);
+    }
 
     return unitDefInstance;
   }
+  // === OTHER ===
   load(q, isCore = false){
     // estimate action, default is upsert
     let actionName = _.get(q, 'action', 'upsert');

@@ -139,7 +139,7 @@ class Unit extends Array {
             exponent: exponent,
             multiplier: multiplier
           };
-          // if there is reference to unitDef, than copy it
+          // if there is reference to UnitDef, than copy it
           if (x[0].kindObj) res.kindObj = x[0].kindObj;
         }
 
