@@ -1,3 +1,4 @@
+const { Top } = require('../core/top');
 const { Component } = require('../core/component');
 const { Record } = require('../core/record');
 const { Compartment } = require('../core/compartment');
@@ -27,7 +28,11 @@ const reservedWords = [
 ];
 
 class Container {
+  /* constructor can be run many times */
   constructor(){
+    // set back refs
+    this.Top.prototype._container = this; // this line modifies copy of Top class
+
     // logger
     this.logger = new Logger();
     this.defaultLogs = [];
@@ -541,6 +546,11 @@ Container.prototype.classes = {
   Page,
   Const
 };
+
+/* assign classes as container properties */
+Object.assign(Container.prototype, {
+  Top: class extends Top {}, // original class does not inherit updated properties like _container
+});
 
 // storage of Export classes
 Container.prototype.exports = {};
