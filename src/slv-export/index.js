@@ -4,8 +4,8 @@ const nunjucks = require('nunjucks');
 const _ = require('lodash');
 
 class SLVExport extends _Export{
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
     
     if (q.groupConstBy) {
       this.groupConstBy = q.groupConstBy;
@@ -24,9 +24,6 @@ class SLVExport extends _Export{
 
     return this;
   }
-  get className(){
-    return 'SLVExport';
-  }
   /**
    * The method creates text code to save as SLV file.
    *
@@ -34,12 +31,12 @@ class SLVExport extends _Export{
    */
   make(){
     // use only one namespace
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for SLV format should include at least one namespace but get empty';
       logger.err(msg);
       var content = '';
-    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaces.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       content = '';
@@ -48,7 +45,7 @@ class SLVExport extends _Export{
         let msg = `SLV format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaces.get(this.spaceFilter[0]);
       let image = this.getSLVImage(ns);
       content = this.getSLVCode(image);
     }
@@ -66,7 +63,7 @@ class SLVExport extends _Export{
    * @return {undefined}
    */
   getSLVImage(ns){
-    let logger = this.container.logger;
+    let logger = this._container.logger;
 
     // push active processes
     let processes = [];

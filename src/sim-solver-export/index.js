@@ -6,8 +6,9 @@ const _ = require('lodash');
 require('./expression'); // to use method toJuliaString()
 
 class SimSolverExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -22,9 +23,9 @@ class SimSolverExport extends _Export {
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   make(skipVersionCode = false){
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     // create image for multiple namespaces
-    let nsImages = [...this.container.namespaces]
+    let nsImages = [...this._container.namespaces]
       .filter((pair) => {
         let allowedByFilter = typeof this.spaceFilter === 'undefined'
           || this.spaceFilter.indexOf(pair[0]) !== -1;

@@ -129,7 +129,7 @@ class Builder {
     return;
   }
   exportMany(){
-    let exportElements = this.container.exportStorage;
+    let exportElements = [...this.container.exportStorage].map((x) => x[1]);
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
     exportElements.forEach((exportItem) => {

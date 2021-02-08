@@ -4,8 +4,8 @@ const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yam
 const _ = require('lodash');
 
 class YAMLExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
     
     if(q.omit) this.omit = q.omit;
     if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
@@ -13,12 +13,9 @@ class YAMLExport extends _Export {
 
     return this;
   }
-  get className(){
-    return 'YAMLExport';
-  }
   make(){
     // filtered namespaces
-    let nsArray = [...this.container.namespaces]
+    let nsArray = [...this._container.namespaces]
       .map((pair) => pair[1]);
     let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
       ? nsArray
@@ -30,7 +27,7 @@ class YAMLExport extends _Export {
       let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
       return accumulator.concat(qArr_setns, qArr_components);
     }, []);
-    let qArr_unitDef = [...this.container.unitDefStorage]
+    let qArr_unitDef = [...this._container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
     let qArr_full = [].concat(qArr_ns, qArr_unitDef);

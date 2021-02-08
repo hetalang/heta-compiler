@@ -38,6 +38,11 @@ class Container {
     this.Top.prototype._container = this;
     this.UnitDef = class extends UnitDef {};
     this.UnitDef.prototype._container = this;
+    // "export" classes
+    _.forEach(this.exports, (value, key) => {
+      this[key] = class extends value {};
+      this[key].prototype._container = this;
+    });
     
     // logger
     this.logger = new Logger();
@@ -53,7 +58,7 @@ class Container {
     this._namespaces.set('nameless', nameless);
 
     // array to store _Export Instances
-    this.exportStorage = [];
+    this.exportStorage = new Map();
     // storage for units
     this.unitDefStorage = new Map();
 
@@ -458,7 +463,10 @@ class Container {
     return clone;
   }
   */
-  export(q = {}){
+  // === ACTIONS ===
+  // #export
+  export(q = {}, isCore = false){
+    /*
     if (q.format === undefined) {
       this.logger.error(
         'Empty format option in #export',
@@ -480,17 +488,17 @@ class Container {
       );
       return;
     }
-
+*/
     // normal flow
-    let exportInstance = new this.exports[q.format];
-    exportInstance.container = this;
-    exportInstance.merge(q);
+    //let exportInstance = new this.exports[q.format];
+    //exportInstance.container = this;
+    //exportInstance.merge(q);
     // push to storage
-    this.exportStorage.push(exportInstance);
+    let exportInstance = new this[q.format](q, isCore);
+    this.exportStorage.set(exportInstance.id, exportInstance);
     
     return exportInstance;
   }
-  // === ACTIONS ===
   // #defineUnit
   defineUnit(q = {}, isCore = false){
     // normal flow
@@ -523,7 +531,7 @@ class Container {
   get length(){
     return _.sumBy([...this.namespaces], (x) => x[1].size)
       + this.unitDefStorage.size // global element
-      + this.exportStorage.length; // global element
+      + this.exportStorage.size; // global element
   }
   // check all namespaces
   knitMany(){

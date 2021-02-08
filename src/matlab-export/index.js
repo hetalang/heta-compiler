@@ -6,8 +6,9 @@ const _ = require('lodash');
 require('./expression'); // to use method toMatlabString()
 
 class MatlabExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -26,14 +27,14 @@ class MatlabExport extends _Export {
   // this is required for autotests
   make(skipVersionCode = false){
     // use only one namespace
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for Matlab format should include at least one namespace but get empty';
       logger.err(msg);
       var modelContent = '';
       var paramContent = '';
       var runContent = '';
-    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaces.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       modelContent = '';
@@ -44,7 +45,7 @@ class MatlabExport extends _Export {
         let msg = `Matlab format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaces.get(this.spaceFilter[0]);
       let image = this.getMatlabImage(ns);
 
       modelContent = this.getModelCode(image);

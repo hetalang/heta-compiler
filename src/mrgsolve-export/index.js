@@ -5,8 +5,9 @@ const _ = require('lodash');
 require('./expression');
 
 class MrgsolveExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -22,13 +23,13 @@ class MrgsolveExport extends _Export {
   }
   make(){
     // use only one namespace
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for Mrgsolve format should include at least one namespace but get empty';
       logger.err(msg);
       var codeContent = '';
       var runContent = '';
-    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaces.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       codeContent = '';
@@ -38,7 +39,7 @@ class MrgsolveExport extends _Export {
         let msg = `Mrgsolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaces.get(this.spaceFilter[0]);
       let image = this.getMrgsolveImage(ns);
       codeContent = this.getMrgsolveCode(image);
       runContent = this.getMrgsolveRun(image);

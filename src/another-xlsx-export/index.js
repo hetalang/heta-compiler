@@ -5,8 +5,8 @@ const { XLSXExport } = require('../xlsx-export');
 require('./_size');
 
 class AnotherXLSXExport extends XLSXExport {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
 
     return this;
   }
@@ -15,7 +15,7 @@ class AnotherXLSXExport extends XLSXExport {
   }
   make(){
     // filtered namespaces
-    let nsArray = [...this.container.namespaces]
+    let nsArray = [...this._container.namespaces]
       .map((pair) => pair[1]);
     let nsOutput = typeof this.spaceFilter === 'undefined'
       ? nsArray

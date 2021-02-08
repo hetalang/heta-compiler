@@ -15,8 +15,9 @@ const scheetSequence = [
 ];
 
 class XLSXExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+
     if (q.omitRows!==undefined) this.omitRows = q.omitRows;
     if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
     if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
@@ -25,12 +26,9 @@ class XLSXExport extends _Export {
 
     return this;
   }
-  get className(){
-    return 'XLSXExport';
-  }
   make(){
     // filtered namespaces
-    let nsArray = [...this.container.namespaces]
+    let nsArray = [...this._container.namespaces]
       .map((pair) => pair[1]);
     let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
       ? nsArray
@@ -42,7 +40,7 @@ class XLSXExport extends _Export {
       let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
       return accumulator.concat(fArr_setns, fArr_components);
     }, []);
-    let fArr_unitDef = [...this.container.unitDefStorage]
+    let fArr_unitDef = [...this._container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
     let fArr_full = [].concat(fArr_ns, fArr_unitDef).map((x) => {

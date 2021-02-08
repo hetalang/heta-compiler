@@ -118,9 +118,6 @@ class UnitDef extends Top {
 
       return q;
   }
-  static get schema(){
-    return schema;
-  }
 }
 
 module.exports = {

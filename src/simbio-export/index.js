@@ -4,8 +4,9 @@ const nunjucks = require('nunjucks');
 const legalUnits = require('./legal-units');
 
 class SimbioExport extends _Export{
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -21,12 +22,12 @@ class SimbioExport extends _Export{
   }
   make(){
     // use only one namespace
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for Simbio format should include at least one namespace but get empty';
       logger.err(msg);
       var content = '';
-    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaces.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       content = '';
@@ -35,7 +36,7 @@ class SimbioExport extends _Export{
         let msg = `Simbio format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaces.get(this.spaceFilter[0]);
       let image = this.getSimbioImage(ns);
       content = this.getSimbioCode(image);
     }
