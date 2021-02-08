@@ -33,10 +33,12 @@ const reservedWords = [
 class Container {
   /* constructor can be run many times */
   constructor(){
-    // set back refs
-    this.Top.prototype._container = this; // this line modifies copy of Top class
+    // create classes and set back refs
+    this.Top = class extends Top {};
+    this.Top.prototype._container = this;
+    this.UnitDef = class extends UnitDef {};
     this.UnitDef.prototype._container = this;
-
+    
     // logger
     this.logger = new Logger();
     this.defaultLogs = [];
@@ -555,10 +557,14 @@ Container.prototype.classes = {
 };
 
 /* assign classes as container properties */
+/*
 Object.assign(Container.prototype, {
   Top: class extends Top {}, // original class does not inherit updated properties like _container
   UnitDef: class extends UnitDef {},
 });
+*/
+//Container.prototype.Top = class extends Top {};
+//Container.prototype.UnitDef = class extends UnitDef {};
 
 // storage of Export classes
 Container.prototype.exports = {};
