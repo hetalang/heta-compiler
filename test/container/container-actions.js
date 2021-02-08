@@ -22,9 +22,9 @@ describe('Unit tests for Container load', () => {
         start_: 1e-3
       }
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
-    expect(c).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.false;
     expect(simple).to.have.property('index', 'default__::k1');
+    c.logger.resetErrors();
   });
 
   it('Insert Record k2 with space', () => {
@@ -37,9 +37,9 @@ describe('Unit tests for Container load', () => {
         start: 1.2
       }
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
-    expect(c).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.false;
     expect(simple).to.have.property('index', 'one::k2');
+    c.logger.resetErrors();
   });
 
   it('Update Record k1', () => {
@@ -51,10 +51,10 @@ describe('Unit tests for Container load', () => {
       },
       units: '1/h'
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
-    expect(c).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.false;
     expect(simple).to.have.nested.property('units', '1/h');
     expect(simple).to.have.property('title', 'k1 title');
+    c.logger.resetErrors();
   });
 
   it('Insert Record k2 with replace', () => {
@@ -66,35 +66,39 @@ describe('Unit tests for Container load', () => {
         start_: 1.4
       }
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
-    expect(c).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.false;
     expect(simple).to.have.nested.property('assignments.start_');
     expect(simple.assignments.start_.toString()).to.be.equal('1.4');
     expect(simple).not.to.have.property('title');
+    c.logger.resetErrors();
   });
 
   it('Throws wrong insert.', () => {
     c.insert({});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
 
     c.insert({ class: 'Record' });
-    expect(c.hetaErrors()).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
 
     c.insert({ id: 'k0' });
-    expect(c.hetaErrors()).to.be.lengthOf(3);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
   });
 
   it('Throws wrong update.', () => {
     c.update({});
-    expect(c.hetaErrors()).to.be.lengthOf(4);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
 
     c.update({id: 'k0'});
-    expect(c.hetaErrors()).to.be.lengthOf(5);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
 
     c.update({id: 'k1', class: 'Species'});
-    expect(c.hetaErrors()).to.be.lengthOf(6);
-
-    expect(c).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
   });
 
   it('upsert acts like insert if class presented.', () => {
@@ -112,10 +116,10 @@ describe('Unit tests for Container load', () => {
       id: 'k3',
       title: 'k3 updated title'
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
+    expect(c.logger.hasErrors).to.be.false;
     expect(simple).to.have.property('title', 'k3 updated title');
     expect(simple).not.to.have.property('notes');
-    expect(c).to.be.lengthOf(3);
+    c.logger.resetErrors();
   });
 
   it('upsert acts like update if no class presented.', () => {
@@ -132,88 +136,82 @@ describe('Unit tests for Container load', () => {
       space: 'default__',
       title: 'k4 updated title'
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
-    expect(c).to.be.lengthOf(4);
+    expect(c.logger.hasErrors).to.be.false;
     expect(simple).to.have.property('title', 'k4 updated title');
     expect(simple).to.have.property('notes', 'k4 notes');
+    c.logger.resetErrors();
   });
 
   it('Throws wrong upsert', () => {
-    c.defaultLogs.length = 0;
     c.upsert({});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
 
-    c.defaultLogs.length = 0;
     c.upsert({class: 'Record'});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
     
-    c.defaultLogs.length = 0;
     c.upsert({id: 'k10'});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
   });
 
   it('delete existed element.', () => {
-    c.defaultLogs.length = 0;
     c.insert({
       class: 'Record',
       id: 'k5',
       space: 'default__',
       title: 'k5 title',
     });
-    expect(c).to.be.lengthOf(5);
     let res = c.delete({
       id: 'k5',
       space: 'default__',
     });
-    expect(c.hetaErrors()).to.be.lengthOf(0);
+    expect(c.logger.hasErrors).to.be.false;
     expect(res).to.be.a('boolean').and.true;
-    expect(c).to.be.lengthOf(4);
+    c.logger.resetErrors();
   });
 
   it('Throws wrong delete', () => {
     // empty
-    c.defaultLogs.length = 0;
     c.delete({});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
 
     // class is not allowed
-    c.defaultLogs.length = 0;
     c.delete({id: 'k3', space: 'default__', class: 'Record'});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
     
     // deleting not existed element is not allowed
-    c.defaultLogs.length = 0;
     c.delete({id: 'k10', space: 'default__'});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
-  });
-
-  it('final length', () => {
-    expect(c).to.be.lengthOf(4);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
   });
 
   it('Select existed element', () => {
-    c.defaultLogs.length = 0;
     let res = c.select({id: 'k2', space: 'one'});
-    expect(c.hetaErrors()).to.be.lengthOf(0);
+    expect(c.logger.hasErrors).to.be.false;
     expect(res).to.have.property('className', 'Record');
+    c.logger.resetErrors();
   });
 
   it('Select non existed element', () => {
-    c.defaultLogs.length = 0;
     let res = c.select({id: 'k99', space: 'one'});
-    expect(c.hetaErrors()).to.be.lengthOf(0);
+    expect(c.logger.hasErrors).to.be.false;
     expect(res).to.be.undefined;
+    c.logger.resetErrors();
   });
 
   it('Select with empty id throws.', () => {
-    c.defaultLogs.length = 0;
     c.select({});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
   });
 
   it('Select from not existed namespace throws', () => {
-    c.defaultLogs.length = 0;
     c.select({id: 'k1', space: 'error'});
-    expect(c.hetaErrors()).to.be.lengthOf(1);
+    expect(c.logger.hasErrors).to.be.true;
+    c.logger.resetErrors();
   });
 });

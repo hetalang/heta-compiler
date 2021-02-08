@@ -86,10 +86,11 @@ let input0 = [
 
 describe('Testing loading UnitDef', () => {
   const p = new Container();
+  let counter = p._unitDefStorage.size;
 
   it('Load UnitDef', () => {
     p.loadMany(input0);
-    expect(p._unitDefStorage).to.be.property('size', 4);
+    expect(p._unitDefStorage.size - counter).to.be.eq(4);
     //console.log([...p._unitDefStorage].map(x=>x[1].unitsParsed))
   });
 });

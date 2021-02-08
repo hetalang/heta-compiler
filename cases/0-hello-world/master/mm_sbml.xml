@@ -3,6 +3,7 @@
   xmlns="http://www.sbml.org/sbml/level2/version4" 
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   level="2" version="4"
+
   >
   <model 
     id="mm" 
@@ -98,30 +99,31 @@
       </reaction>
     </listOfReactions>
   
-    <listOfUnitDefinitions>
-      <unitDefinition id="_L" name="L">
+<!-- UNIT DEFINITIONS -->
+<listOfUnitDefinitions>
+  <unitDefinition id="_L" name="L">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="_uM_L" name="uM*L">
+  <unitDefinition id="_uM_L" name="uM*L">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="_umole__min" name="umole/min">
+  <unitDefinition id="_umole__minute" name="umole/minute">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
   </listOfUnits>
 </unitDefinition>
-      <unitDefinition id="_uM" name="uM">
+  <unitDefinition id="_uM" name="uM">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    </listOfUnitDefinitions>
+</listOfUnitDefinitions>
   
   </model>
 </sbml>

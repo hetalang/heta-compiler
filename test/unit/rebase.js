@@ -43,7 +43,6 @@ describe('unit transformation 0', () => {
     expect(res0.toString()).to.be.equal('(1e-1 meter)^3');
   });
 
-  
   it('Simple unit tranformation error.', () => {
     let liter = c.select({id: 'liter'});
     expect(() => liter.unitsParsed.rebase(['liter', 'kilogram']))

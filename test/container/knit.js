@@ -6,9 +6,11 @@ const { expect } = require('chai');
 
 describe('Test All()', () => {
   let c; // for Container
+  let counter = 0;
 
   it('Creating good platform.', () => {
     c = new Container();
+    counter = c.length;
     c.setNS({space: 'one'});
     c.loadMany([
       {class: 'Const', id: 'k1', num: 1}, // 1
@@ -32,11 +34,11 @@ describe('Test All()', () => {
       {class: 'Species', id: 's2', space: 'one', compartment: 'comp1', assignments: { start_: 0 }} // 1
     ]);
     
-    expect(c).to.have.property('length', 15);
+    expect(c.length - counter).to.be.eq(15);
   });
 
   it('knitMany good platform.', () => {
     c.knitMany();
-    expect(c).to.have.property('length', 15);
+    expect(c.length - counter).to.be.eq(15);
   });
 });

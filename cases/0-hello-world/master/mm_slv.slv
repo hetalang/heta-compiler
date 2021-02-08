@@ -393,7 +393,7 @@ InteractionNetwork
 //! Initialization at ode, count: 1
 //
 //!! r1
-r1 = Vmax * S / (Km + S) * default_comp; // @Reaction 'Michaelis-Menten reaction' {units: umole/min}
+r1 = Vmax * S / (Km + S) * default_comp; // @Reaction 'Michaelis-Menten reaction' {units: umole/minute}
 //! Differential equations, count: 2
 //
 //!! S  @Species 'substrate' {units: uM}
@@ -401,6 +401,8 @@ F[1] = ( -1*r1 ) / default_comp;
 //
 //!! P  @Species 'product' {units: uM}
 F[2] = ( 1*r1 ) / default_comp;
+
+
 
 #
 

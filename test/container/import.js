@@ -8,6 +8,7 @@ describe('Test correct import', () => {
     var c = new Container();
     c.setNS({space: 'one'});
     c.setNS({space: 'two'});
+    let counter = c.length; //set number of components
     c.load({
       action: 'insert',
       class: 'Const',
@@ -22,13 +23,15 @@ describe('Test correct import', () => {
       space: 'two'
     });
 
-    expect(c.hetaErrors()).to.have.lengthOf(0);
-    expect(c).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.false;
+    expect(c.length - counter).to.be.eq(2);
     expect(clone).to.have.property('index', 'two::k2');
+    c.logger.resetErrors();
   });
 
   it('import of not existed Const', () => {
     let c = new Container();
+    let counter = c.length;
     c.import({
       fromId: 'k1',
       fromSpace: 'one',
@@ -36,14 +39,16 @@ describe('Test correct import', () => {
       space: 'two'
     });
 
-    expect(c.hetaErrors()).to.have.lengthOf(1);
-    expect(c).to.be.lengthOf(0);
+    expect(c.logger.hasErrors).to.be.true;
+    expect(c.length - counter).to.be.eq(0);
+    c.logger.resetErrors();
   });
 
   it('Create and import Process', () => {
     var c = new Container();
     c.setNS({space: 'one'});
     c.setNS({space: 'two'});
+    let counter = c.length;
     c.load({
       action: 'insert',
       class: 'Process',
@@ -64,12 +69,13 @@ describe('Test correct import', () => {
       rename: { y: 'z'}
     });
 
-    expect(c.hetaErrors()).to.have.lengthOf(0);
-    expect(c).to.be.lengthOf(2);
+    expect(c.logger.hasErrors).to.be.false;
+    expect(c.length - counter).to.be.eq(2);
     expect(clone).to.have.property('index', 'two::p2');
     expect(clone.actors[1]).to.have.property('target', 'pr_A_suf');
     expect(clone.actors[0]).to.have.property('target', 'z');
     expect(clone.assignments.ode_.toString()).to.be.equal('pr_x_suf * z');
+    c.logger.resetErrors();
   });
 });
 /*

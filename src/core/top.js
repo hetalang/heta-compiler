@@ -2,12 +2,12 @@
     Top class for all other items of platform
 */
 
-//const _ = require('lodash');
+const _ = require('lodash');
 const randomId = require('random-id');
 const Ajv = require('ajv');
 const ajv = new Ajv({allErrors: true, jsonPointers: true});
 require('ajv-errors')(ajv);
-//ajvErrors(validate);
+const { flatten } = require('./utilities');
 
 // options
 const lengthRandom = 9;
@@ -90,6 +90,19 @@ class Top { // or const Top = class {...}
         q.action = 'defineTop';
 
         return q;
+    } 
+    toFlat(options = {}){
+      // set defaults
+      _.defaults(options, {
+        simplifyModifiers: true,
+        simplifyActors: true,
+        simplifyExpressions: true
+      });
+
+      let q = this.toQ(options);
+      let res = flatten(q);
+
+      return res;
     }
 }
 

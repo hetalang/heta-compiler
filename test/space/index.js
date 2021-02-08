@@ -6,6 +6,7 @@ const { Container } = require('../../src');
 describe('Testing anonimous space.', () => {
   it('Create element in global.', () => {
     let c = new Container;
+    let counter = c.length;
 
     c.loadMany([
       {
@@ -52,6 +53,6 @@ describe('Testing anonimous space.', () => {
       }
     ]);
     
-    expect(c).to.have.property('length', 5);
+    expect(c.length - counter).to.be.eq(5);
   });
 });

@@ -37,11 +37,15 @@ class XLSXExport extends _Export {
       : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
     
     // create array of flat
-    let fArr_full = nsArrayFiltered.reduce((accumulator, ns) => {
+    let fArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {
       let fArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toFlat()];
       let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
       return accumulator.concat(fArr_setns, fArr_components);
-    }, []).map((x) => {
+    }, []);
+    let fArr_unitDef = [...this.container._unitDefStorage]
+      .filter((x) => !x[1].isCore)
+      .map((x) => x[1].toFlat());
+    let fArr_full = [].concat(fArr_ns, fArr_unitDef).map((x) => {
       x.on = 1;
       return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
     });
