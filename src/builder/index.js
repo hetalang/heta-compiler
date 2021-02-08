@@ -91,7 +91,7 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(queue, false);
-    //console.log([...this.container._unitDefStorage]); // XXX: debugging
+    //console.log([...this.container.unitDefStorage]); // XXX: debugging
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
@@ -129,7 +129,7 @@ class Builder {
     return;
   }
   exportMany(){
-    let exportElements = this.container._exportStorage;
+    let exportElements = this.container.exportStorage;
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
     exportElements.forEach((exportItem) => {
@@ -140,7 +140,7 @@ class Builder {
     });
   }
   exportSSOnly(){
-    // create export without putting it to _exportStorage
+    // create export without putting it to exportStorage
     let exportItem = new this.container.exports['SimSolver'];
     exportItem.container = this.container;
     exportItem.merge({

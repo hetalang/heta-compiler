@@ -34,7 +34,7 @@ describe('Testing "cases/6-import"', () => {
   });
 
   it('Run @SBMLExport, check and compare.', () => {
-    let sbml_export = b.container._exportStorage[0];
+    let sbml_export = b.container.exportStorage[0];
     let code = sbml_export.make()[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);

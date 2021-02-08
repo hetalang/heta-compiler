@@ -15,7 +15,7 @@ include first-model.json type json
   spaceFilter: first,
   filepath: sbml, 
   version: L2V4, 
-  skipMathChecking: true
+  skipMathChecking: false
 };
 
 #export {

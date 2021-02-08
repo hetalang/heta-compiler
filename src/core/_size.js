@@ -50,7 +50,7 @@ class _Size extends Component {
   bind(namespace){
     super.bind(namespace);
     let logger = this.namespace.container.logger;
-    let storage = this.namespace.container._unitDefStorage;
+    let storage = this.namespace.container.unitDefStorage;
 
     if (this.unitsParsed) {
       this.unitsParsed.forEach((x) => {

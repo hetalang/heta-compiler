@@ -1,34 +1,34 @@
 [
   {
-    "id": "min", "class": "UnitDef",
+    "id": "min", "action": "defineUnit",
     "units": [ { "kind": "second", "multiplier": 60 } ]
   },
   {
-      "id": "nm", "class": "UnitDef",
+      "id": "nm", "action": "defineUnit",
       "units": [ { "kind": "metre", "multiplier": 1e-9 } ]
   },
   {
-      "id": "m", "class": "UnitDef",
+      "id": "m", "action": "defineUnit",
       "units": [ { "kind": "metre" } ]
   },
   {
-      "id": "uM", "class": "UnitDef",
+      "id": "uM", "action": "defineUnit",
       "units": [ { "kind": "mole", "multiplier": 1e-6 }, {"kind":"litre", "exponent": -1} ]
   },
   {
-     "id": "fM", "class": "UnitDef",
+     "id": "fM", "action": "defineUnit",
      "units": [ { "kind": "mole", "multiplier": 1e-15 }, {"kind":"litre", "exponent": -1} ]
   },
   {
-      "id": "h", "class": "UnitDef",
+      "id": "h", "action": "defineUnit",
       "units": [ { "kind": "second", "multiplier": 3600 } ]
   },
   {
-      "id": "L", "class": "UnitDef",
+      "id": "L", "action": "defineUnit",
       "units": [ { "kind": "litre" } ]
   },
   {
-      "id": "umole", "class": "UnitDef",
+      "id": "umole", "action": "defineUnit",
       "units": [ { "kind": "mole", "multiplier": 1e-6 } ]
   },
   {

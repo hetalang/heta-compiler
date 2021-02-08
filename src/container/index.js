@@ -51,9 +51,9 @@ class Container {
     this._namespaces.set('nameless', nameless);
 
     // array to store _Export Instances
-    this._exportStorage = [];
+    this.exportStorage = [];
     // storage for units
-    this._unitDefStorage = new Map();
+    this.unitDefStorage = new Map();
 
     // load core items XXX: temporally commented
     this.loadMany(coreItems, true);
@@ -484,7 +484,7 @@ class Container {
     exportInstance.container = this;
     exportInstance.merge(q);
     // push to storage
-    this._exportStorage.push(exportInstance);
+    this.exportStorage.push(exportInstance);
     
     return exportInstance;
   }
@@ -494,7 +494,7 @@ class Container {
     // normal flow
     let unitDefInstance = new this.UnitDef(q, isCore);
     if (unitDefInstance.id) { // actually id is always presented
-      this._unitDefStorage.set(unitDefInstance.id, unitDefInstance);
+      this.unitDefStorage.set(unitDefInstance.id, unitDefInstance);
     }
 
     return unitDefInstance;
@@ -520,13 +520,13 @@ class Container {
   }
   get length(){
     return _.sumBy([...this.namespaces], (x) => x[1].size)
-      + this._unitDefStorage.size // global element
-      + this._exportStorage.length; // global element
+      + this.unitDefStorage.size // global element
+      + this.exportStorage.length; // global element
   }
   // check all namespaces
   knitMany(){
     // knit unitDefs TODO: checking for circular UnitDef
-    [...this._unitDefStorage].forEach((x) => x[1].bind());
+    [...this.unitDefStorage].forEach((x) => x[1].bind());
     // knit components
     [...this.namespaces].forEach((x) => {
       let ns = x[1];

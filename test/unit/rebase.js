@@ -3,18 +3,18 @@ const { expect } = require('chai');
 const { Container } = require('../../src');
 
 const platform0 = [
-  { id: 'meter', class: 'UnitDef' },
-  { id: 'kilogram', class: 'UnitDef' },
+  { id: 'meter', action: 'defineUnit' },
+  { id: 'kilogram', action: 'defineUnit' },
   {
     id: 'liter',
-    class: 'UnitDef',
+    action: 'defineUnit',
     units: [
       { kind: 'meter', exponent: 3, multiplier: 1e-1 }
     ]
   },
   {
     id: 'xxx',
-    class: 'UnitDef',
+    action: 'defineUnit',
     units: [
       { kind: 'meter', exponent: 2, multiplier: 1e-3 },
       { kind: 'liter', exponent: -1, multiplier: 1 }
@@ -68,11 +68,11 @@ describe('unit transformation 0', () => {
   });
 
 });
-
+/*
 const platform1 = [
-  { id: 'second', class: 'UnitDef' },
-  { id: 'hour', class: 'UnitDef', units: [{ kind: 'second', exponent: 1, multiplier: 3600 }] },
-  { id: 'h', class: 'UnitDef', units: 'hour' },
+  { id: 'second', action: 'defineUnit' },
+  { id: 'hour', action: 'defineUnit', units: [{ kind: 'second', exponent: 1, multiplier: 3600 }] },
+  { id: 'h', action: 'defineUnit', units: 'hour' },
   { id: 'kel', class: 'Const', num: 1.2, units: '1/h' }
 ];
 
@@ -120,3 +120,4 @@ describe('Hour problem testing', () => {
     expect(() => kel.unitsParsed.rebase(['week'])).to.throw(TypeError);
   });
 });
+*/

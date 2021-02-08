@@ -42,7 +42,7 @@ class XLSXExport extends _Export {
       let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
       return accumulator.concat(fArr_setns, fArr_components);
     }, []);
-    let fArr_unitDef = [...this.container._unitDefStorage]
+    let fArr_unitDef = [...this.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
     let fArr_full = [].concat(fArr_ns, fArr_unitDef).map((x) => {

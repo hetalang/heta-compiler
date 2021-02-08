@@ -81,7 +81,7 @@ class UnitDef extends Top {
   bind(){
     // super.bind();
     let logger = this._container.logger;
-    let storage = this._container._unitDefStorage;
+    let storage = this._container.unitDefStorage;
 
     if (this.unitsParsed) {
       this.unitsParsed.forEach((x) => {
