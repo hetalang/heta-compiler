@@ -1,23 +1,39 @@
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const legalUnits = require('./legal-units');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+  }
+};
 
 class SimbioExport extends _Export{
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = SimbioExport.isValid(q, logger);
+
+    if (valid) {
+      if (q.spaceFilter instanceof Array) {
+        this.spaceFilter = q.spaceFilter;
+      } else if (typeof q.spaceFilter === 'string') {
+        this.spaceFilter = [q.spaceFilter];
+      } else {
+        this.spaceFilter = ['nameless'];
+      }
     }
 
     return this;
   }
   get className(){
     return 'SimbioExport';
+  }
+  get format(){
+    return 'Simbio'
   }
   make(){
     // use only one namespace
@@ -87,6 +103,9 @@ class SimbioExport extends _Export{
       'fun.m',
       this
     );
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
 }
 

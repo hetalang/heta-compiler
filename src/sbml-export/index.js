@@ -2,26 +2,49 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 require('./expression');
 const legalUnits = require('../legal-sbml-units');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    version: {type: 'string', pattern: '^L[123]V[12345]$'},
+  }
+};
 
 class SBMLExport extends _Export {
   constructor(q = {}, isCore = false){
     super(q, isCore);
 
-    if (typeof q.version !== 'undefined') {
-      this.version = q.version;
-    } else {
-      this.version = 'L2V4';
-    } 
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = SBMLExport.isValid(q, logger);
 
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
+    if (valid) {
+      if (typeof q.version !== 'undefined') {
+        this.version = q.version;
+      } else {
+        this.version = 'L2V4';
+      } 
+
+      if (q.spaceFilter instanceof Array) {
+        this.spaceFilter = q.spaceFilter;
+      } else if (typeof q.spaceFilter === 'string') {
+        this.spaceFilter = [q.spaceFilter];
+      } else {
+        this.spaceFilter = ['nameless'];
+      }
     }
 
     return this;
+  }
+  get className(){
+    return 'SBMLExport';
+  }
+  get format(){
+    return 'SBML'
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
   make(){
     // use only one namespace

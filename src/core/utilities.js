@@ -1,3 +1,5 @@
+// TODO: replace nesessary content to /src/utils.js
+
 const schema = require('../heta.json-schema');
 const Ajv = require('ajv');
 const _ = require('lodash');

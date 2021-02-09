@@ -2,23 +2,42 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
 require('./expression');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+  }
+};
 
 class MrgsolveExport extends _Export {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = MrgsolveExport.isValid(q, logger);
+
+    if (valid) {
+      if (q.spaceFilter instanceof Array) {
+        this.spaceFilter = q.spaceFilter;
+      } else if (typeof q.spaceFilter === 'string') {
+        this.spaceFilter = [q.spaceFilter];
+      } else {
+        this.spaceFilter = ['nameless'];
+      }
     }
 
     return this;
   }
   get className(){
     return 'MrgsolveExport';
+  }
+  get format(){
+    return 'Mrgsolve'
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
   make(){
     // use only one namespace

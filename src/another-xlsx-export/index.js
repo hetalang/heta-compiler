@@ -8,6 +8,12 @@ class AnotherXLSXExport extends XLSXExport {
 
     return this;
   }
+  get className(){
+    return 'AnotherXLSXExport';
+  }
+  get format(){
+    return 'Another';
+  }
   make(){
     // filtered namespaces
     let nsArray = [...this._container.namespaceStorage]
@@ -156,11 +162,6 @@ class AnotherXLSXExport extends XLSXExport {
     );
 
     return [functions, species, parameters, function_units];
-  }
-  toQ(options = {}){
-    let res = super.toQ(options);
-
-    return res;
   }
 }
 

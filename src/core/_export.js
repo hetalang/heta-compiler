@@ -1,21 +1,11 @@
 const { Top } = require('./top');
+const { ajv } = require('../utils');
 
-// TODO: move this to utilites later
-const Ajv = require('ajv');
-const ajv = new Ajv({allErrors: true, jsonPointers: true});
-require('ajv-errors')(ajv);
-
-const validate = ajv.compile({
+const schema = {
   type: 'object',
-  required: ['format', 'filepath'],
+  required: ['filepath'],
   properties: {
-    filepath: {type: 'string'},
-    groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
-    powTransform: {type: 'string', enum: ['keep', 'function', 'operator'] },
-    omitRows: {type: 'number'},
-    splitByClass: {type: 'boolean'},
-    noUnitsExpr: {type: 'boolean'},
-    version: {type: 'string', pattern: '^L[123]V[12345]$'},
+    filepath: {type: 'string', pattern: '^[\\w\\d\\\\/._!-]+$'},
     spaceFilter: { oneOf: [
       { type: 'array', items: { '$ref': '#/definitions/ID' } },
       { '$ref': '#/definitions/ID' }
@@ -30,7 +20,7 @@ const validate = ajv.compile({
       example: 'x_12_'
     },
   }
-});
+};
 
 /*
   _Export class
@@ -43,7 +33,6 @@ const validate = ajv.compile({
 class _Export extends Top {
   constructor(q = {}, isCore = false){
     super(q, isCore);
-    this.powTransform = 'keep';
 
     // check arguments here
     let logger = this._container.logger;
@@ -51,11 +40,12 @@ class _Export extends Top {
 
     if (valid) {
       if (q.filepath) this.filepath = q.filepath;
-      this.format = q.format;
-      if (q.powTransform) this.powTransform = q.powTransform;
     }
 
     return this;
+  } 
+  get className(){
+    return '_Export';
   }
   /*
     Method creates exported files.
@@ -70,7 +60,7 @@ class _Export extends Top {
     throw new TypeError(`No method make() for "${this.className}"`);
   }
   static get validate(){
-    return validate;
+    return ajv.compile(schema);
   }
 }
 

@@ -1,27 +1,51 @@
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
+    eventsOff: {type: 'boolean'},
+    powTransform: {type: 'string', enum: ['keep', 'function', 'operator'] },
+  }
+};
 
 class SLVExport extends _Export{
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    if (q.groupConstBy) {
-      this.groupConstBy = q.groupConstBy;
-    } else {
-      this.groupConstBy = 'tags[0]';
-    }
-    if (q.eventsOff) this.eventsOff = q.eventsOff;
-    if (q.defaultTask) this.defaultTask = q.defaultTask;
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
+    
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = SLVExport.isValid(q, logger);
+
+    if (valid) {
+      this.powTransform = q.powTransform ? q.powTransform : 'keep';
+      if (q.groupConstBy) {
+        this.groupConstBy = q.groupConstBy;
+      } else {
+        this.groupConstBy = 'tags[0]';
+      }
+      if (q.eventsOff) this.eventsOff = q.eventsOff;
+      if (q.defaultTask) this.defaultTask = q.defaultTask;
+      if (q.spaceFilter instanceof Array) {
+        this.spaceFilter = q.spaceFilter;
+      } else if (typeof q.spaceFilter === 'string') {
+        this.spaceFilter = [q.spaceFilter];
+      } else {
+        this.spaceFilter = ['nameless'];
+      }
     }
 
     return this;
+  }
+  get className(){
+    return 'SLVExport';
+  }
+  get format(){
+    return 'SLV'
   }
   /**
    * The method creates text code to save as SLV file.
@@ -215,6 +239,9 @@ class SLVExport extends _Export{
       'slv-blocks-template.slv.njk',
       image
     );
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
 }
 

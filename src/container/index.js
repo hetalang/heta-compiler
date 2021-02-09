@@ -466,34 +466,22 @@ class Container {
   // === ACTIONS ===
   // #export
   export(q = {}, isCore = false){
-    /*
     if (q.format === undefined) {
       this.logger.error(
-        'Empty format option in #export',
+        'Empty "format" option in #export',
         {type: 'QueueError'}
       );
       return;
     }
-    if (typeof this.exports[q.format] !== 'function') {
+    if (typeof this.classes[q.format] !== 'function') {
       this.logger.error(
         `Unknown format "${q.format}" in #export action.`,
         {type: 'QueueError'}
       );
       return;
     }
-    if (typeof q.filepath !== 'string') {
-      this.logger.error(
-        '"filepath" option in #export is skipped or not a string',
-        {type: 'QueueError'}
-      );
-      return;
-    }
-*/
-    // normal flow
-    //let exportInstance = new this.exports[q.format];
-    //exportInstance.container = this;
-    //exportInstance.merge(q);
-    // push to storage
+
+    // create and push to storage
     let exportInstance = new this.classes[q.format](q, isCore);
     this.exportStorage.set(exportInstance.id, exportInstance);
     

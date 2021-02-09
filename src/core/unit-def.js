@@ -1,12 +1,8 @@
 const { Top } = require('./top');
 const { Unit } = require('./unit');
+const { ajv } = require('../utils');
 
-// TODO: move this to utilites later
-const Ajv = require('ajv');
-const ajv = new Ajv({allErrors: true, jsonPointers: true});
-require('ajv-errors')(ajv);
-
-const validate = ajv.compile({
+const schema = {
   type: 'object',
   required: ['id'],
   properties: {
@@ -43,7 +39,7 @@ const validate = ajv.compile({
       example: { kind: "mole", multiplier: 1e-6, exponent: 1 }
     },
   }
-});
+};
 
 /*
   // example:  unitDef1 = nM / kg3
@@ -97,8 +93,11 @@ class UnitDef extends Top {
       });
     }
   }
+  get className(){
+    return 'UnitDef';
+  }
   static get validate(){
-    return validate;
+    return ajv.compile(schema);
   }
   _toQ(options = {}){
       let q = super._toQ(options);

@@ -1,15 +1,39 @@
 const { _Export } = require('../core/_export');
+const { ajv } = require('../utils');
 const _ = require('lodash');
+
+const schema = {
+  type: 'object',
+  properties: {
+    omit: {type: 'array', items: { type: 'string' }},
+    noUnitsExpr: {type: 'boolean'}
+  }
+};
 
 class JSONExport extends _Export {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    if (q.omit) this.omit = q.omit;
-    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
-    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = JSONExport.isValid(q, logger);
+
+    if (valid) {
+      if (q.omit) this.omit = q.omit;
+      if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
+      if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
+    }
 
     return this;
+  }
+  get className(){
+    return 'JSONExport';
+  }
+  get format(){
+    return 'JSON'
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
   make(){
     // filtered namespaces

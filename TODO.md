@@ -30,11 +30,11 @@
 
 ## features
 
+- Export to SBML without standard units like _litre
+- xlsx module: many tables in one #include, table numeration from 0
 - multispace export in Matlab
 - check units for expressions after compilation
-- #setUnit instead of @UnitDef
 - test empty assignments for @Record + to specifications
-- Export to SBML without standard units like _litre
 - #move, #moveNS
 - automatic creation of modifiers in SBML
 - parameter switching: see "parameter-swithcing.md"

@@ -2,25 +2,41 @@ const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
 require('./expression');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
+    powTransform: {type: 'string', enum: ['keep', 'function', 'operator'] },
+  }
+};
 
 class DBSolveExport extends _Export{
   constructor(q = {}, isCore = false){
     super(q, isCore);
 
-    if (q.groupConstBy) {
-      this.groupConstBy = q.groupConstBy;
-    } else {
-      this.groupConstBy = 'tags[0]';
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = DBSolveExport.isValid(q, logger);
+
+    if (valid) {
+      this.powTransform = q.powTransform ? q.powTransform : 'keep';
+      if (q.groupConstBy) {
+        this.groupConstBy = q.groupConstBy;
+      } else {
+        this.groupConstBy = 'tags[0]';
+      }
+      if (q.spaceFilter instanceof Array) {
+        this.spaceFilter = q.spaceFilter;
+      } else if (typeof q.spaceFilter === 'string') {
+        this.spaceFilter = [q.spaceFilter];
+      } else {
+        this.spaceFilter = ['nameless'];
+      }
+      
+      if (q.defaultTask) this.defaultTask = q.defaultTask;
     }
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
-    }
-    
-    if (q.defaultTask) this.defaultTask = q.defaultTask;
 
     return this;
   }
@@ -225,6 +241,15 @@ class DBSolveExport extends _Export{
       'dbsolve-model.slv.njk',
       image
     );
+  }
+  get className(){
+    return 'DBSolveExport';
+  }
+  get format(){
+    return 'DBSolve'
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
 }
 

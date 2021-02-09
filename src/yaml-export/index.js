@@ -1,16 +1,37 @@
 const { _Export } = require('../core/_export');
 const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _ = require('lodash');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    omit: {type: 'array', items: { type: 'string' }},
+    noUnitsExpr: {type: 'boolean'}
+  }
+};
 
 class YAMLExport extends _Export {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    if(q.omit) this.omit = q.omit;
-    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
-    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = YAMLExport.isValid(q, logger);
+
+    if (valid) {
+      if (q.omit) this.omit = q.omit;
+      if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
+      if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
+    }
 
     return this;
+  }
+  get className(){
+    return 'YAMLExport';
+  }
+  get format(){
+    return 'YAML'
   }
   make(){
     // filtered namespaces
@@ -48,6 +69,9 @@ class YAMLExport extends _Export {
       pathSuffix: '.yml',
       type: 'text'
     }];
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
 }
 

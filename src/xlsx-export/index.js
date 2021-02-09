@@ -1,5 +1,7 @@
 const { _Export } = require('../core/_export');
 const _ = require('lodash');
+const { ajv } = require('../utils');
+
 // how to order columns in scheets
 const propSequence = [
   'on', 'action', 'class', 'space', 'id', 
@@ -13,17 +15,38 @@ const scheetSequence = [
   'Identification', 'UnitDef'
 ];
 
+const schema = {
+  type: 'object',
+  properties: {
+    omitRows: {type: 'number'},
+    omit: {type: 'array', items: { type: 'string' }},
+    splitByClass: {type: 'boolean'},
+  }
+};
+
 class XLSXExport extends _Export {
   constructor(q = {}, isCore = false){
     super(q, isCore);
 
-    if (q.omitRows!==undefined) this.omitRows = q.omitRows;
-    if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
-    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = XLSXExport.isValid(q, logger);
 
-    if (q.omit) this.omit = q.omit;
+    if (valid) {
+      if (q.omitRows!==undefined) this.omitRows = q.omitRows;
+      if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
+      if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
+
+      if (q.omit) this.omit = q.omit;
+    }
 
     return this;
+  }
+  get className(){
+    return 'XLSXExport';
+  }
+  get format(){
+    return 'XLSX'
   }
   make(){
     // filtered namespaces
@@ -93,6 +116,9 @@ class XLSXExport extends _Export {
         headerSeq: sequense_out
       }];
     }
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
 }
 

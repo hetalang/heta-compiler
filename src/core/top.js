@@ -4,16 +4,14 @@
 
 const _ = require('lodash');
 const randomId = require('random-id');
-const Ajv = require('ajv');
-const ajv = new Ajv({allErrors: true, jsonPointers: true});
-require('ajv-errors')(ajv);
+const { ajv } = require('../utils');
 const { flatten } = require('./utilities');
 
 // options
 const lengthRandom = 9;
 const patternRandom = 'aA0';
 
-const validate = ajv.compile({
+const schema = {
   type: 'object',
   properties: {
     id: { '$ref': "#/definitions/ID" }
@@ -28,7 +26,7 @@ const validate = ajv.compile({
       example: "x_12_"
     }
   }
-});
+};
 
 /*
   class Top
@@ -65,8 +63,11 @@ class Top { // or const Top = class {...}
     get index(){
         return this._id;
     }
+    get className(){
+      return 'Top';
+    }
     static get validate(){
-      return validate;
+      return ajv.compile(schema);
     }
     static isValid(q, logger){
       let valid = this.validate(q);

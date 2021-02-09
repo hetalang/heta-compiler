@@ -3,23 +3,42 @@ const nunjucks = require('nunjucks');
 const pkg = require('../../package');
 const _ = require('lodash');
 require('./expression'); // to use method toMatlabString()
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+  }
+};
 
 class MatlabExport extends _Export {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = MatlabExport.isValid(q, logger);
+
+    if (valid) {
+      if (q.spaceFilter instanceof Array) {
+        this.spaceFilter = q.spaceFilter;
+      } else if (typeof q.spaceFilter === 'string') {
+        this.spaceFilter = [q.spaceFilter];
+      } else {
+        this.spaceFilter = ['nameless'];
+      }
     }
 
     return this;
   }
   get className(){
     return 'MatlabExport';
+  }
+  get format(){
+    return 'Matlab'
+  }
+  static get validate(){
+    return ajv.compile(schema);
   }
   // TODO: skipVersionCode does not work
   // skipVersionCode means that the version will not be printed in output
