@@ -18,14 +18,11 @@ class YAMLExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = YAMLExport.isValid(q, logger);
+    if (!valid) return;
 
-    if (valid) {
-      if (q.omit) this.omit = q.omit;
-      if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
-      if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
-    }
-
-    return this;
+    if (q.omit) this.omit = q.omit;
+    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
+    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
   }
   get className(){
     return 'YAMLExport';

@@ -5,8 +5,6 @@ require('./_size');
 class AnotherXLSXExport extends XLSXExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
-
-    return this;
   }
   get className(){
     return 'AnotherXLSXExport';

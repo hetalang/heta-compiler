@@ -45,16 +45,15 @@ class Top { // or const Top = class {...}
     constructor(q = {}, isCore = false){
         let logger = this._container.logger;
         let valid = Top.isValid(q, logger);
+        if (!valid) return;
 
         if (isCore) this.isCore = true;
-        if (valid) {
-          if (typeof q.id !== 'undefined') {
-            this._id = q.id;
-            this.isRandomId = false;
-          } else {
-            this._id = 'rand_' + randomId(lengthRandom, patternRandom);
-            this.isRandomId = true;
-          }
+        if (typeof q.id !== 'undefined') {
+          this._id = q.id;
+          this.isRandomId = false;
+        } else {
+          this._id = 'rand_' + randomId(lengthRandom, patternRandom);
+          this.isRandomId = true;
         }
     }
     get id(){

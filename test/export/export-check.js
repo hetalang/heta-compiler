@@ -81,6 +81,7 @@ describe('General argument checking', () => {
       omit: 'xxx'
     });
     expect(p.logger).to.have.property('hasErrors').true;
+    expect(json_export).to.not.have.property('omit');
     expect(json_export).to.be.instanceOf(p.classes.JSON);
     p.logger.resetErrors();
   });

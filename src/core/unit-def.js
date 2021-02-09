@@ -50,22 +50,20 @@ const schema = {
 */
 class UnitDef extends Top {
   constructor(q = {}, isCore = false){
-    super(q, isCore);
+    let res = super(q, isCore);
+
     this.unitsParsed = new Unit();
 
     // check arguments here
     let logger = this._container.logger;
     let valid = UnitDef.isValid(q, logger);
+    if (!valid) return;
 
-    if (valid) {
-      if (q.units && typeof q.units === 'string') {
-        this.unitsParsed = Unit.parse(q.units);
-      } else if (q.units && q.units instanceof Array) {
-        this.unitsParsed = Unit.fromQ(q.units);
-      }
+    if (q.units && typeof q.units === 'string') {
+      this.unitsParsed = Unit.parse(q.units);
+    } else if (q.units && q.units instanceof Array) {
+      this.unitsParsed = Unit.fromQ(q.units);
     }
-
-    return this;
   }
   get units(){
     if (this.unitsParsed !== undefined) {

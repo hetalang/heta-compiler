@@ -19,26 +19,23 @@ class DBSolveExport extends AbstractExport{
     // check arguments here
     let logger = this._container.logger;
     let valid = DBSolveExport.isValid(q, logger);
+    if (!valid) return;
 
-    if (valid) {
-      this.powTransform = q.powTransform ? q.powTransform : 'keep';
-      if (q.groupConstBy) {
-        this.groupConstBy = q.groupConstBy;
-      } else {
-        this.groupConstBy = 'tags[0]';
-      }
-      if (q.spaceFilter instanceof Array) {
-        this.spaceFilter = q.spaceFilter;
-      } else if (typeof q.spaceFilter === 'string') {
-        this.spaceFilter = [q.spaceFilter];
-      } else {
-        this.spaceFilter = ['nameless'];
-      }
-      
-      if (q.defaultTask) this.defaultTask = q.defaultTask;
+    this.powTransform = q.powTransform ? q.powTransform : 'keep';
+    if (q.groupConstBy) {
+      this.groupConstBy = q.groupConstBy;
+    } else {
+      this.groupConstBy = 'tags[0]';
     }
-
-    return this;
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
+    
+    if (q.defaultTask) this.defaultTask = q.defaultTask;
   }
   /**
    * The method creates text code to save as SLV file.

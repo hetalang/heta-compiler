@@ -16,30 +16,26 @@ class SLVExport extends AbstractExport{
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
-    
     // check arguments here
     let logger = this._container.logger;
     let valid = SLVExport.isValid(q, logger);
+    if (!valid) return;
 
-    if (valid) {
-      this.powTransform = q.powTransform ? q.powTransform : 'keep';
-      if (q.groupConstBy) {
-        this.groupConstBy = q.groupConstBy;
-      } else {
-        this.groupConstBy = 'tags[0]';
-      }
-      if (q.eventsOff) this.eventsOff = q.eventsOff;
-      if (q.defaultTask) this.defaultTask = q.defaultTask;
-      if (q.spaceFilter instanceof Array) {
-        this.spaceFilter = q.spaceFilter;
-      } else if (typeof q.spaceFilter === 'string') {
-        this.spaceFilter = [q.spaceFilter];
-      } else {
-        this.spaceFilter = ['nameless'];
-      }
+    this.powTransform = q.powTransform ? q.powTransform : 'keep';
+    if (q.groupConstBy) {
+      this.groupConstBy = q.groupConstBy;
+    } else {
+      this.groupConstBy = 'tags[0]';
     }
-
-    return this;
+    if (q.eventsOff) this.eventsOff = q.eventsOff;
+    if (q.defaultTask) this.defaultTask = q.defaultTask;
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
+    }
   }
   get className(){
     return 'SLVExport';

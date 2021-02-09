@@ -6,7 +6,7 @@ describe('Unit test for UnitDef', () => {
   const p = new Container();
   it('Error: Empty UnitDef', () => {
     let simple = new p.classes.UnitDef();
-
+    
     expect(simple._container.logger).property('hasErrors').true;
     simple._container.logger.resetErrors();
   });
@@ -44,7 +44,7 @@ describe('Unit test for UnitDef', () => {
       id: 'u1',
       units: ['xxx']
     });
-
+    
     expect(simple1._container.logger).to.has.property('hasErrors').true;
     simple1._container.logger.resetErrors();
   });

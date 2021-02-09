@@ -18,24 +18,21 @@ class SBMLExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = SBMLExport.isValid(q, logger);
+    if (!valid) return;
 
-    if (valid) {
-      if (typeof q.version !== 'undefined') {
-        this.version = q.version;
-      } else {
-        this.version = 'L2V4';
-      } 
+    if (typeof q.version !== 'undefined') {
+      this.version = q.version;
+    } else {
+      this.version = 'L2V4';
+    } 
 
-      if (q.spaceFilter instanceof Array) {
-        this.spaceFilter = q.spaceFilter;
-      } else if (typeof q.spaceFilter === 'string') {
-        this.spaceFilter = [q.spaceFilter];
-      } else {
-        this.spaceFilter = ['nameless'];
-      }
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
+    } else {
+      this.spaceFilter = ['nameless'];
     }
-
-    return this;
   }
   get className(){
     return 'SBMLExport';

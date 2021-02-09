@@ -18,16 +18,13 @@ class SimSolverExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = SimSolverExport.isValid(q, logger);
+    if (!valid) return;
 
-    if (valid) {
-      if (q.spaceFilter instanceof Array) {
-        this.spaceFilter = q.spaceFilter;
-      } else if (typeof q.spaceFilter === 'string') {
-        this.spaceFilter = [q.spaceFilter];
-      }
+    if (q.spaceFilter instanceof Array) {
+      this.spaceFilter = q.spaceFilter;
+    } else if (typeof q.spaceFilter === 'string') {
+      this.spaceFilter = [q.spaceFilter];
     }
-
-    return this;
   }
   get className(){
     return 'SimSolverExport';
