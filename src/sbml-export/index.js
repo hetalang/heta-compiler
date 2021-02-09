@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 require('./expression');
 const legalUnits = require('../legal-sbml-units');
@@ -11,7 +11,7 @@ const schema = {
   }
 };
 
-class SBMLExport extends _Export {
+class SBMLExport extends AbstractExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
 

@@ -1,7 +1,7 @@
 // Top classes
 const { Top } = require('../core/top');
 const { UnitDef } = require('../core/unit-def');
-// const { _Export } = require('../core/_export');
+// const { AbstractExport } = require('../core/abstract-export');
 // Component classes
 const { Component } = require('../core/component');
 const { Record } = require('../core/record');
@@ -52,7 +52,7 @@ class Container {
     this.defaultLogs = []; // storing logs in JSON-like format here
     this.logger.addTransport(new JSONTransport('info', this.defaultLogs));
 
-    // storage of _Export Instances
+    // storage of AbstractExport Instances
     this.exportStorage = new Map();
     // storage for UnitDef
     this.unitDefStorage = new Map();

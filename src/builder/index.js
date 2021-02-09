@@ -7,7 +7,7 @@ const { Container } = require('../index');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 const _ = require('lodash');
-require('./_export');
+require('./abstract-export');
 require('./xlsx-export');
 
 /**

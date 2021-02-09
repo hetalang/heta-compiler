@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
 require('./expression');
@@ -12,7 +12,7 @@ const schema = {
   }
 };
 
-class DBSolveExport extends _Export{
+class DBSolveExport extends AbstractExport{
   constructor(q = {}, isCore = false){
     super(q, isCore);
 

@@ -319,34 +319,6 @@
       ]
     },
 
-    "_ExportP": {
-      "type": "object",
-      "properties": {
-        "filepath": { "type": "string" },
-        "groupConstBy": { "type": "string", "pattern": "^[\\w\\d.\\[\\]]+$" },
-        "powTransform": { "type": "string", "enum": ["keep", "function", "operator"] },
-        "omitRows": { "type": "number" },
-        "splitByClass": { "type": "boolean" },
-        "noUnitsExpr": { "type": "boolean" },
-        "version": {"type": "string", "pattern": "^L[123]V[12345]$"},
-        "spaceFilter": { "oneOf": [
-          { "type": "array", "items": { "$ref": "#/definitions/ID" } },
-          { "$ref": "#/definitions/ID" }
-        ]}
-      }
-    },
-
-    "_Export": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ExportP" },
-        {
-          "required": ["id"],
-          "properties": { "class": { "type": "string", "pattern": "[A-Z].*Export"} }
-        }
-      ]
-    },
-
     "ConstP": {
       "type": "object",
       "description": "Input value. Upper and lower describes possiple values. Scale describes transformation for fitting.",
@@ -553,75 +525,6 @@
             }
           }
         }
-      }
-    },
-
-    "ObservationP": {
-      "type": "object",
-      "properties": {
-        "kind": { "type": "string", "enum": ["kinetics"] },
-        "indepDataMarker": { "$ref": "#/definitions/ID" },
-        "depDataMarkers": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/ID" }
-        },
-        "indepData": {
-          "type": "array",
-          "items": { "type": "number" }
-        },
-        "depData": {
-          "type": "array",
-          "items": { "type": "array", "items": { "type": "number" } }
-        }
-      }
-    },
-
-    "Observation": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/ObservationP" },
-        {
-          "required": ["id", "kind"],
-          "properties": { "class": { "const": "Observation" } }
-        }
-      ]
-    },
-
-    "Insert": {
-      "type": "object",
-      "description": "Insert new element. Currently properties are not being checked.",
-      "required": ["action", "class", "id"],
-      "properties": {
-        "action": { "const": "insert" },
-        "class": { "type": "string", "pattern": "^[A-Z]" },
-        "id": { "$ref": "#/definitions/ID" }
-      }
-    },
-
-    "Update": {
-      "type": "object",
-      "description": "Update existed element. Currently properties are not being checked.",
-      "required": ["action", "id"],
-      "properties": {
-        "action": { "const": "update" },
-        "id": { "$ref": "#/definitions/ID" }
-      }
-    },
-
-    "Upsert": {
-      "anyOf": [
-        { "$ref": "#/definitions/Update" },
-        { "$ref": "#/definitions/Insert" }
-      ]
-    },
-
-    "Delete": {
-      "type": "object",
-      "description": "Delete existed element. Currently properties are not being checked.",
-      "required": ["action", "id"],
-      "properties": {
-        "action": { "const": "delete" },
-        "id": { "$ref": "#/definitions/ID" }
       }
     }
 

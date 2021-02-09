@@ -23,7 +23,6 @@ const timeSwitcherError = require('./timeSwitcher-error');
 const functionDefinition = require('./function-definition');
 const referenceDefinition = require('./reference-definition');
 const const_ = require('./const');
-const observation = require('./observation');
 
 // scoped
 singleTest('Record', record, recordError);
@@ -37,7 +36,6 @@ singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
 singleTest('FunctionDefinition', functionDefinition);
 singleTest('ReferenceDefinition', referenceDefinition);
 singleTest('Const', const_);
-singleTest('Observation', observation);
 
 function singleTest(className, checkedArray, errorArray){
   describe(`Test ${className} instances.`, () => {

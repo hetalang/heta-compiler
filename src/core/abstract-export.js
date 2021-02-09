@@ -23,20 +23,20 @@ const schema = {
 };
 
 /*
-  _Export class
+  AbstractExport class
 
-  export1 @_Export {
+  export1 @AbstractExport {
     filepath: ../dir1,
     powTransform: keep // possible values are: keep/operator/function
   };
 */
-class _Export extends Top {
+class AbstractExport extends Top {
   constructor(q = {}, isCore = false){
     super(q, isCore);
 
     // check arguments here
     let logger = this._container.logger;
-    let valid = _Export.isValid(q, logger);
+    let valid = AbstractExport.isValid(q, logger);
 
     if (valid) {
       if (q.filepath) this.filepath = q.filepath;
@@ -45,7 +45,7 @@ class _Export extends Top {
     return this;
   } 
   get className(){
-    return '_Export';
+    return 'AbstractExport';
   }
   /*
     Method creates exported files.
@@ -64,4 +64,4 @@ class _Export extends Top {
   }
 }
 
-module.exports = { _Export };
+module.exports = { AbstractExport };

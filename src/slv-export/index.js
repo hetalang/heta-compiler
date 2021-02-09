@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
 const { ajv } = require('../utils');
@@ -12,7 +12,7 @@ const schema = {
   }
 };
 
-class SLVExport extends _Export{
+class SLVExport extends AbstractExport{
   constructor(q = {}, isCore = false){
     super(q, isCore);
     

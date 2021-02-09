@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const pkg = require('../../package');
 const _ = require('lodash');
@@ -11,7 +11,7 @@ const schema = {
   }
 };
 
-class MatlabExport extends _Export {
+class MatlabExport extends AbstractExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     

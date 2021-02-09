@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _ = require('lodash');
 const { ajv } = require('../utils');
@@ -11,7 +11,7 @@ const schema = {
   }
 };
 
-class YAMLExport extends _Export {
+class YAMLExport extends AbstractExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     

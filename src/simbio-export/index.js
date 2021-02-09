@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const legalUnits = require('./legal-units');
 const { ajv } = require('../utils');
@@ -9,7 +9,7 @@ const schema = {
   }
 };
 
-class SimbioExport extends _Export{
+class SimbioExport extends AbstractExport{
   constructor(q = {}, isCore = false){
     super(q, isCore);
     

@@ -1,4 +1,4 @@
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const _ = require('lodash');
 const { ajv } = require('../utils');
 
@@ -24,7 +24,7 @@ const schema = {
   }
 };
 
-class XLSXExport extends _Export {
+class XLSXExport extends AbstractExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
 
