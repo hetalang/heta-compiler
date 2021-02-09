@@ -45,7 +45,7 @@ class Top { // or const Top = class {...}
     constructor(q = {}, isCore = false){
         let logger = this._container.logger;
         let valid = Top.isValid(q, logger);
-        if (!valid) return;
+        if (!valid) { this.errored = true; return; }
 
         if (isCore) this.isCore = true;
         if (typeof q.id !== 'undefined') {

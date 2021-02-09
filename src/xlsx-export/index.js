@@ -31,7 +31,7 @@ class XLSXExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = XLSXExport.isValid(q, logger);
-    if (!valid) return;
+    if (!valid) { this.errored = true; return; }
 
     if (q.omitRows!==undefined) this.omitRows = q.omitRows;
     if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;

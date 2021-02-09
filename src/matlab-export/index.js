@@ -18,7 +18,7 @@ class MatlabExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = MatlabExport.isValid(q, logger);
-    if (!valid) return;
+    if (!valid) { this.errored = true; return; }
 
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;

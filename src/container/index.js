@@ -483,7 +483,7 @@ class Container {
 
     // create and push to storage
     let exportInstance = new this.classes[q.format](q, isCore);
-    this.exportStorage.set(exportInstance.id, exportInstance);
+    if (!exportInstance.errored) this.exportStorage.set(exportInstance.id, exportInstance);
     
     return exportInstance;
   }
@@ -491,9 +491,7 @@ class Container {
   defineUnit(q = {}, isCore = false){
     // normal flow
     let unitDefInstance = new this.classes.UnitDef(q, isCore);
-    if (unitDefInstance.id) { // actually id is always presented
-      this.unitDefStorage.set(unitDefInstance.id, unitDefInstance);
-    }
+    if (!unitDefInstance.errored) this.unitDefStorage.set(unitDefInstance.id, unitDefInstance);
 
     return unitDefInstance;
   }

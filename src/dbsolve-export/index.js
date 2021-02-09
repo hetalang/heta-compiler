@@ -19,7 +19,7 @@ class DBSolveExport extends AbstractExport{
     // check arguments here
     let logger = this._container.logger;
     let valid = DBSolveExport.isValid(q, logger);
-    if (!valid) return;
+    if (!valid) { this.errored = true; return; }
 
     this.powTransform = q.powTransform ? q.powTransform : 'keep';
     if (q.groupConstBy) {

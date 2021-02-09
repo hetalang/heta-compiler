@@ -37,12 +37,9 @@ class AbstractExport extends Top {
     // check arguments here
     let logger = this._container.logger;
     let valid = AbstractExport.isValid(q, logger);
+    if (!valid) { this.errored = true; return; }
 
-    if (valid) {
-      if (q.filepath) this.filepath = q.filepath;
-    }
-
-    return this;
+    if (q.filepath) this.filepath = q.filepath;
   } 
   get className(){
     return 'AbstractExport';

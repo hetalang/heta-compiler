@@ -18,7 +18,7 @@ class YAMLExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = YAMLExport.isValid(q, logger);
-    if (!valid) return;
+    if (!valid) { this.errored = true; return; }
 
     if (q.omit) this.omit = q.omit;
     if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;

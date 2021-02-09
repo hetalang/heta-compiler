@@ -18,7 +18,7 @@ class SBMLExport extends AbstractExport {
     // check arguments here
     let logger = this._container.logger;
     let valid = SBMLExport.isValid(q, logger);
-    if (!valid) return;
+    if (!valid) { this.errored = true; return; }
 
     if (typeof q.version !== 'undefined') {
       this.version = q.version;

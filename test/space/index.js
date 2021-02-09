@@ -33,7 +33,8 @@ describe('Testing anonimous space.', () => {
       {
         action: 'export', // 5
         space: 'one',
-        format: 'JSON'
+        format: 'JSON',
+        filepath: '1.json'
       },
       {
         id: 'p1', // 5

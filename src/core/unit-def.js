@@ -57,7 +57,7 @@ class UnitDef extends Top {
     // check arguments here
     let logger = this._container.logger;
     let valid = UnitDef.isValid(q, logger);
-    if (!valid) return;
+    if (!valid) { this.errored = true; return; }
 
     if (q.units && typeof q.units === 'string') {
       this.unitsParsed = Unit.parse(q.units);
