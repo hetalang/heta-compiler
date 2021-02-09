@@ -14,7 +14,7 @@ class YAMLExport extends _Export {
   }
   make(){
     // filtered namespaces
-    let nsArray = [...this._container.namespaces]
+    let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);
     let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
       ? nsArray

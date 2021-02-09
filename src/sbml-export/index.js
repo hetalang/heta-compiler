@@ -30,7 +30,7 @@ class SBMLExport extends _Export {
       let msg = 'spaceFilter for SBML format should include at least one namespace but get empty';
       logger.err(msg);
       var content = '';
-    } else if (!this._container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       content = '';
@@ -39,7 +39,7 @@ class SBMLExport extends _Export {
         let msg = `SBML format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this._container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
       let image = this.getSBMLImage(ns);
       content = this.getSBMLCode(image);
     }

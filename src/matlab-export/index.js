@@ -33,7 +33,7 @@ class MatlabExport extends _Export {
       var modelContent = '';
       var paramContent = '';
       var runContent = '';
-    } else if (!this._container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       modelContent = '';
@@ -44,7 +44,7 @@ class MatlabExport extends _Export {
         let msg = `Matlab format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this._container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
       let image = this.getMatlabImage(ns);
 
       modelContent = this.getModelCode(image);

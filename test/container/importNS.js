@@ -54,8 +54,8 @@ describe('Test correct importNS', () => {
     expect(clone[1].actors[0]).to.have.property('target', 'one_A');
     expect(clone[1].assignments.ode_.toString()).to.be.equal('one_k1 * one_A * comp1');
 
-    expect(c.namespaces.get('one')).to.be.lengthOf(2);
-    expect(c.namespaces.get('two')).to.be.lengthOf(3);
+    expect(c.namespaceStorage.get('one')).to.be.lengthOf(2);
+    expect(c.namespaceStorage.get('two')).to.be.lengthOf(3);
   });
 });
 

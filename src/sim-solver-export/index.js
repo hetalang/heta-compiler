@@ -24,7 +24,7 @@ class SimSolverExport extends _Export {
   make(skipVersionCode = false){
     let logger = this._container.logger;
     // create image for multiple namespaces
-    let nsImages = [...this._container.namespaces]
+    let nsImages = [...this._container.namespaceStorage]
       .filter((pair) => {
         let allowedByFilter = typeof this.spaceFilter === 'undefined'
           || this.spaceFilter.indexOf(pair[0]) !== -1;

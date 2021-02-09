@@ -10,7 +10,7 @@ class AnotherXLSXExport extends XLSXExport {
   }
   make(){
     // filtered namespaces
-    let nsArray = [...this._container.namespaces]
+    let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);
     let nsOutput = typeof this.spaceFilter === 'undefined'
       ? nsArray

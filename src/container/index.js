@@ -34,45 +34,42 @@ const reservedWords = [
 class Container {
   /* constructor can be run many times */
   constructor(){
-    // create classes and set back refs
+    // create classes bound to this container
     this.Top = class extends Top {};
     this.Top.prototype._container = this;
     this.UnitDef = class extends UnitDef {};
     this.UnitDef.prototype._container = this;
-    // "export" classes
-    _.forEach(Container._exportClasses, (value, key) => {
-      this[key] = class extends value {};
+    // create "export" classes bound to this container
+    _.forEach(Container._exportClasses, (_Class, key) => {
+      this[key] = class extends _Class {};
       this[key].prototype._container = this;
     });
     
     // logger
     this.logger = new Logger();
-    this.defaultLogs = [];
+    this.defaultLogs = []; // storing logs in JSON-like format here
     this.logger.addTransport(new JSONTransport('info', this.defaultLogs));
 
-    this._namespaces = new Map();
+    // storage of _Export Instances
+    this.exportStorage = new Map();
+    // storage for UnitDef
+    this.unitDefStorage = new Map();
+    // storage of Namespace
+    this.namespaceStorage = new Map();
 
     // default namespace
     let nameless = new Namespace('nameless');
     nameless.container = this;
     nameless._isAbstract = false;
-    this._namespaces.set('nameless', nameless);
+    this.namespaceStorage.set('nameless', nameless);
 
-    // array to store _Export Instances
-    this.exportStorage = new Map();
-    // storage for units
-    this.unitDefStorage = new Map();
-
-    // load core items XXX: temporally commented
+    // load core items
     this.loadMany(coreItems, true);
   }
   // returns array of errors in heta code
   hetaErrors(){
     return this.defaultLogs
       .filter(x => x.levelNum >= 3);
-  }
-  get namespaces(){
-    return this._namespaces;
   }
   insert(q = {}, isCore = false){
     let ind = getIndexFromQ(q);
@@ -124,7 +121,7 @@ class Container {
     }
 
     // get in namespace
-    let namespace = this.namespaces.get(space);
+    let namespace = this.namespaceStorage.get(space);
     if (namespace === undefined) {
       this.logger.error(
         `"${ind}" create namespace "${space}" before use.`,
@@ -160,7 +157,7 @@ class Container {
       return;
     }
     // set component
-    let namespace = this.namespaces.get(space);
+    let namespace = this.namespaceStorage.get(space);
     if (namespace === undefined) {
       this.logger.error(
         `${ind} Create namespace "${space}" before use.`,
@@ -216,7 +213,7 @@ class Container {
       return;
     }
     // set component
-    let namespace = this.namespaces.get(space);
+    let namespace = this.namespaceStorage.get(space);
     if (namespace === undefined) {
       this.logger.error(
         `${ind} Create namespace "${space}" before use.`,
@@ -255,7 +252,7 @@ class Container {
       );
       return;
     }
-    let namespace = this.namespaces.get(space);
+    let namespace = this.namespaceStorage.get(space);
     if (namespace === undefined) {
       this.logger.error(
         `${ind} Create namespace "${space}" before use.`,
@@ -269,11 +266,11 @@ class Container {
   }
   setNS(q = {}){
     // create namespace if not exists
-    let namespace = this.namespaces.get(q.space);
+    let namespace = this.namespaceStorage.get(q.space);
     if (namespace === undefined){
       namespace = new Namespace(q.space);
       namespace.container = this; // set parent
-      this._namespaces.set(q.space, namespace);
+      this.namespaceStorage.set(q.space, namespace);
     }
     // it is possible to update type
     namespace._isAbstract = q.type === 'abstract';
@@ -308,7 +305,7 @@ class Container {
       this.logger.error(`id must not be set for #importNS, but have "${q.id}"`);
       return;
     }
-    let namespace = this.namespaces.get(space);
+    let namespace = this.namespaceStorage.get(space);
     if (namespace === undefined) {
       this.logger.error(
         `Create namespace "${space}" before use.`,
@@ -323,7 +320,7 @@ class Container {
       );
       return;
     }
-    let fromNamespace = this.namespaces.get(q.fromSpace);
+    let fromNamespace = this.namespaceStorage.get(q.fromSpace);
     if (fromNamespace === undefined) {
       this.logger.error(
         `Create namespace "${q.fromSpace}" before use.`,
@@ -406,7 +403,7 @@ class Container {
       return;
     }
 
-    let namespace = this.namespaces.get(space);
+    let namespace = this.namespaceStorage.get(space);
     if (namespace === undefined) {
       this.logger.error(
         `Create namespace "${space}" before use.`,
@@ -423,7 +420,7 @@ class Container {
       return;
     }
 
-    let fromNamespace = this.namespaces.get(q.fromSpace);
+    let fromNamespace = this.namespaceStorage.get(q.fromSpace);
     if (fromNamespace === undefined) {
       this.logger.error(
         `Create namespace "${q.fromSpace}" before use.`,
@@ -530,7 +527,7 @@ class Container {
     return this;
   }
   get length(){
-    return _.sumBy([...this.namespaces], (x) => x[1].size)
+    return _.sumBy([...this.namespaceStorage], (x) => x[1].size)
       + this.unitDefStorage.size // global element
       + this.exportStorage.size; // global element
   }
@@ -539,7 +536,7 @@ class Container {
     // knit unitDefs TODO: checking for circular UnitDef
     [...this.unitDefStorage].forEach((x) => x[1].bind());
     // knit components
-    [...this.namespaces].forEach((x) => {
+    [...this.namespaceStorage].forEach((x) => {
       let ns = x[1];
       // knit only concrete namespace
       if (!ns.isAbstract) ns.knit();

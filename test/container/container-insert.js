@@ -30,7 +30,7 @@ describe('Unit tests for Container', () => {
       expect(c.logger.hasErrors).to.be.false;
       expect(res).to.be.instanceOf(Component);
 
-      let simple = c.namespaces.get('nameless').get('pmid1');
+      let simple = c.namespaceStorage.get('nameless').get('pmid1');
       expect(simple).to.has.property('prefix', 'https://pubmed.org/');
       expect(simple).to.has.property('suffix', '/');
       expect(simple).to.has.property('className', 'ReferenceDefinition');
@@ -52,7 +52,7 @@ describe('Unit tests for Container', () => {
         prefix: 'https://google.com'
       });
       expect(c.logger.hasErrors).to.be.false;
-      let simple = c.namespaces.get('nameless').get('pmid2');
+      let simple = c.namespaceStorage.get('nameless').get('pmid2');
       expect(simple).to.have.property('prefix', 'https://google.com');
       expect(simple).to.have.property('space', 'nameless');
       c.logger.resetErrors();
@@ -67,7 +67,7 @@ describe('Unit tests for Container', () => {
         suffix: '/'
       });
       expect(c.logger.hasErrors).to.be.false;
-      let component = c.namespaces.get('three').get('pmid4');
+      let component = c.namespaceStorage.get('three').get('pmid4');
       expect(component).to.have.property('prefix', 'xxx');
       expect(component).to.have.property('space', 'three');
       c.logger.resetErrors();
@@ -80,7 +80,7 @@ describe('Unit tests for Container', () => {
         space: 'another'
       });
       expect(c.logger.hasErrors).to.be.false;
-      let simple = c.namespaces.get('another').get('pg1');
+      let simple = c.namespaceStorage.get('another').get('pg1');
       expect(simple).to.has.property('space', 'another');
       c.logger.resetErrors();
     });
