@@ -16,7 +16,7 @@ const { ReferenceDefinition } = require('../core/reference-definition');
 const { Page } = require('../core/page');
 const { Const } = require('../core/const');
 const { SimpleTask } = require('../core/simple-task');
-// other
+// external
 const _ = require('lodash');
 const { Namespace } = require('../namespace');
 const { Logger, JSONTransport } = require('../logger');
@@ -34,15 +34,17 @@ const reservedWords = [
 class Container {
   /* constructor can be run many times */
   constructor(){
+    // create personal storage for all bound classes
+    this.classes = {};
     // create classes bound to this container
-    this.Top = class extends Top {};
-    this.Top.prototype._container = this;
-    this.UnitDef = class extends UnitDef {};
-    this.UnitDef.prototype._container = this;
+    this.classes.Top = class extends Top {}; // only for testing
+    this.classes.Top.prototype._container = this; // only for testing
+    this.classes.UnitDef = class extends UnitDef {};
+    this.classes.UnitDef.prototype._container = this;
     // create "export" classes bound to this container
     _.forEach(Container._exportClasses, (_Class, key) => {
-      this[key] = class extends _Class {};
-      this[key].prototype._container = this;
+      this.classes[key] = class extends _Class {};
+      this.classes[key].prototype._container = this;
     });
     
     // logger
@@ -492,7 +494,7 @@ class Container {
     //exportInstance.container = this;
     //exportInstance.merge(q);
     // push to storage
-    let exportInstance = new this[q.format](q, isCore);
+    let exportInstance = new this.classes[q.format](q, isCore);
     this.exportStorage.set(exportInstance.id, exportInstance);
     
     return exportInstance;
@@ -500,7 +502,7 @@ class Container {
   // #defineUnit
   defineUnit(q = {}, isCore = false){
     // normal flow
-    let unitDefInstance = new this.UnitDef(q, isCore);
+    let unitDefInstance = new this.classes.UnitDef(q, isCore);
     if (unitDefInstance.id) { // actually id is always presented
       this.unitDefStorage.set(unitDefInstance.id, unitDefInstance);
     }
@@ -546,6 +548,7 @@ class Container {
   }
 }
 
+// only component classes are stored
 Container.prototype._componentClasses = {
   Component,
   Record,

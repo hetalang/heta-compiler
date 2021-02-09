@@ -5,14 +5,14 @@ const { expect } = require('chai');
 describe('Unit test for UnitDef', () => {
   const p = new Container();
   it('Error: Empty UnitDef', () => {
-    let simple = new p.UnitDef();
+    let simple = new p.classes.UnitDef();
 
     expect(simple._container.logger).property('hasErrors').true;
     simple._container.logger.resetErrors();
   });
 
   it('Correct UnitDef', () => {
-    let simple = new p.UnitDef({
+    let simple = new p.classes.UnitDef({
       id: 'ud1',
       units: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
@@ -40,7 +40,7 @@ describe('Unit test for UnitDef', () => {
   });
 
   it('Error: wrong input 1.', () => {
-    let simple1 = new p.UnitDef({
+    let simple1 = new p.classes.UnitDef({
       id: 'u1',
       units: ['xxx']
     });
@@ -50,7 +50,7 @@ describe('Unit test for UnitDef', () => {
   });
 
   it('Error: wrong input 2.', () => {
-    let simple2 = new p.UnitDef({
+    let simple2 = new p.classes.UnitDef({
       units: [{}]
     });
     expect(simple2._container.logger).to.has.property('hasErrors', true);

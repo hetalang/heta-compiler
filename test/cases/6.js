@@ -44,7 +44,7 @@ describe('Testing "cases/6-import"', () => {
   });
 
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.container.JSON;
+    const JSONExport = b.container.classes.JSON;
     let json_export = new JSONExport({spaceFilter: 'model'});
 
     let code = json_export.make()[0].content;
