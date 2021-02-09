@@ -1,6 +1,7 @@
 // Top classes
 const { Top } = require('../core/top');
 const { UnitDef } = require('../core/unit-def');
+// const { _Export } = require('../core/_export');
 // Component classes
 const { Component } = require('../core/component');
 const { Record } = require('../core/record');
@@ -39,7 +40,7 @@ class Container {
     this.UnitDef = class extends UnitDef {};
     this.UnitDef.prototype._container = this;
     // "export" classes
-    _.forEach(this.exports, (value, key) => {
+    _.forEach(Container._exportClasses, (value, key) => {
       this[key] = class extends value {};
       this[key].prototype._container = this;
     });
@@ -563,19 +564,6 @@ Container.prototype.classes = {
   Page,
   Const
 };
-
-/* assign classes as container properties */
-/*
-Object.assign(Container.prototype, {
-  Top: class extends Top {}, // original class does not inherit updated properties like _container
-  UnitDef: class extends UnitDef {},
-});
-*/
-//Container.prototype.Top = class extends Top {};
-//Container.prototype.UnitDef = class extends UnitDef {};
-
-// storage of Export classes
-Container.prototype.exports = {};
 
 // converts {id: 'k1', space: 'one'} => 'one::k1'
 function getIndexFromQ(q = {}){

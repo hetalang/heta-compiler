@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
@@ -229,8 +228,4 @@ class DBSolveExport extends _Export{
   }
 }
 
-Container.prototype.exports.DBSolve = DBSolveExport;
-
-module.exports = {
-  DBSolveExport
-};
+module.exports = DBSolveExport;

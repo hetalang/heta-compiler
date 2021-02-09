@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const pkg = require('../../package');
@@ -144,6 +143,4 @@ class SimSolverExport extends _Export {
   }
 }
 
-Container.prototype.exports.SimSolver = SimSolverExport;
-
-module.exports = { SimSolverExport };
+module.exports = SimSolverExport;

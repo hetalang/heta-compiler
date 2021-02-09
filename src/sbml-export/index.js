@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 require('./expression');
@@ -109,8 +108,4 @@ class SBMLExport extends _Export {
   }
 }
 
-Container.prototype.exports.SBML = SBMLExport;
-
-module.exports = {
-  SBMLExport
-};
+module.exports = SBMLExport;

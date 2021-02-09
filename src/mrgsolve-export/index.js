@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
@@ -139,8 +138,4 @@ class MrgsolveExport extends _Export {
   }
 }
 
-Container.prototype.exports.Mrgsolve = MrgsolveExport;
-
-module.exports = {
-  MrgsolveExport
-};
+module.exports = MrgsolveExport;

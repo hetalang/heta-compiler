@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const pkg = require('../../package');
@@ -166,6 +165,4 @@ class MatlabExport extends _Export {
   }
 }
 
-Container.prototype.exports.Matlab = MatlabExport;
-
-module.exports = { MatlabExport };
+module.exports = MatlabExport;

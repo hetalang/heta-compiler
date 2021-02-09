@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const _ = require('lodash');
 
@@ -42,6 +41,4 @@ class JSONExport extends _Export {
   }
 }
 
-Container.prototype.exports.JSON = JSONExport;
-
-module.exports = { JSONExport };
+module.exports = JSONExport;

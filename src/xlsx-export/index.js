@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const _ = require('lodash');
 // how to order columns in scheets
@@ -97,6 +96,4 @@ class XLSXExport extends _Export {
   }
 }
 
-Container.prototype.exports.XLSX = XLSXExport;
-
-module.exports = { XLSXExport };
+module.exports = XLSXExport;

@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
@@ -219,8 +218,4 @@ class SLVExport extends _Export{
   }
 }
 
-Container.prototype.exports.SLV = SLVExport;
-
-module.exports = {
-  SLVExport
-};
+module.exports = SLVExport;

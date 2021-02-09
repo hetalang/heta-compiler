@@ -1,7 +1,5 @@
-const Container = require('../container');
-//const XLSX = require('xlsx'); // see docs https://docs.sheetjs.com/
 const _ = require('lodash');
-const { XLSXExport } = require('../xlsx-export');
+const XLSXExport = require('../xlsx-export');
 require('./_size');
 
 class AnotherXLSXExport extends XLSXExport {
@@ -9,9 +7,6 @@ class AnotherXLSXExport extends XLSXExport {
     super(q, isCore);
 
     return this;
-  }
-  get className(){
-    return 'AnotherXLSXExport';
   }
   make(){
     // filtered namespaces
@@ -169,8 +164,4 @@ class AnotherXLSXExport extends XLSXExport {
   }
 }
 
-Container.prototype.exports.AnotherXLSX = AnotherXLSXExport;
-
-module.exports = {
-  AnotherXLSXExport
-};
+module.exports = AnotherXLSXExport;

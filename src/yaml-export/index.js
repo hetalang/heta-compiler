@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _ = require('lodash');
@@ -62,6 +61,4 @@ function fromOrderToCompare(order=[]){
   };
 }
 
-Container.prototype.exports.YAML = YAMLExport;
-
-module.exports = { YAMLExport };
+module.exports = YAMLExport;

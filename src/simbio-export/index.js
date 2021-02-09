@@ -1,4 +1,3 @@
-const Container = require('../container');
 const { _Export } = require('../core/_export');
 const nunjucks = require('nunjucks');
 const legalUnits = require('./legal-units');
@@ -91,8 +90,4 @@ class SimbioExport extends _Export{
   }
 }
 
-Container.prototype.exports.Simbio = SimbioExport;
-
-module.exports = {
-  SimbioExport
-};
+module.exports = SimbioExport;
