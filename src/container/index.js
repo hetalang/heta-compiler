@@ -111,7 +111,7 @@ class Container {
     }
 
     // check if class is in the list
-    let selectedClass = this.classes[q.class];
+    let selectedClass = this._componentClasses[q.class];
     if (selectedClass === undefined){
       this.logger.error(
         `"${ind}" Unknown class "${q.class}" for the component.`,
@@ -546,7 +546,7 @@ class Container {
   }
 }
 
-Container.prototype.classes = {
+Container.prototype._componentClasses = {
   Component,
   Record,
   Compartment,
