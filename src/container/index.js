@@ -65,8 +65,10 @@ class Container {
     nameless._isAbstract = false;
     this.namespaceStorage.set('nameless', nameless);
 
-    // load core items
+    // XXX: this is bad solution because if errors exist then will be errors without logs
+    // load core items 
     this.loadMany(coreItems, true);
+    //console.log(this.defaultLogs)
   }
   // returns array of errors in heta code
   hetaErrors(){
@@ -506,7 +508,6 @@ class Container {
       );
       return;
     }
-    
     // normal flow
     return this[actionName](q, isCore);
   }

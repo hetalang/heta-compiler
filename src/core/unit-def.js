@@ -1,5 +1,6 @@
 const { Top } = require('./top');
 const { Unit } = require('./unit');
+const { UnitTerm } = require('./unit-term');
 const { ajv } = require('../utils');
 
 const schema = {
@@ -8,8 +9,12 @@ const schema = {
   properties: {
     units: { anyOf: [
        { '$ref': "#/definitions/UnitsExpr" },
-       { type: "array", items: { '$ref': "#/definitions/UnitComponent" } }
-    ] }
+       { type: "array", items: { '$ref': "#/definitions/UnitItem" } }
+    ] },
+    terms: {
+      type: "array",
+      items: { '$ref': "#/definitions/UnitTermItem" }
+    }
   },
 
   definitions: {
@@ -28,7 +33,7 @@ const schema = {
       example: "1/h * ms"
     },
 
-    UnitComponent: {
+    UnitItem: {
       type: "object",
       required: ["kind"],
       properties: {
@@ -38,6 +43,16 @@ const schema = {
       },
       example: { kind: "mole", multiplier: 1e-6, exponent: 1 }
     },
+
+    UnitTermItem: {
+      type: "object",
+      required: ["kind"],
+      properties: {
+        kind: { type: 'string', enum: ['amount', 'length', 'time', 'mass', 'current', 'temperature'] },
+        exponent: { type: "number" }
+      },
+      example: { kind: "time", exponent: 1 }
+    }
   }
 };
 
@@ -52,18 +67,29 @@ class UnitDef extends Top {
   constructor(q = {}, isCore = false){
     let res = super(q, isCore);
 
-    this.unitsParsed = new Unit();
+    //this.unitsParsed = new Unit(); // XXX: I am not sure maybe this was important
 
     // check arguments here
     let logger = this._container.logger;
     let valid = UnitDef.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
+    // units or terms are required but not both
+    if (q.units && q.terms) {
+      logger.error(`UnitDef "${q.id}" must include "units" or "terms" property but not both`, {type: 'ValidationError'});
+      this.errored = true;
+    } else if (!q.units && !q.terms) {
+      logger.error(`UnitDef "${q.id}" must include "units" or "terms" property`, {type: 'ValidationError'});
+      this.errored = true;
+    }
+
     if (q.units && typeof q.units === 'string') {
       this.unitsParsed = Unit.parse(q.units);
     } else if (q.units && q.units instanceof Array) {
       this.unitsParsed = Unit.fromQ(q.units);
     }
+
+    if (q.terms) this.terms = new UnitTerm(q.terms);
   }
   get units(){
     if (this.unitsParsed !== undefined) {
@@ -78,6 +104,7 @@ class UnitDef extends Top {
     let storage = this._container.unitDefStorage;
 
     if (this.unitsParsed) {
+      // set kindObj
       this.unitsParsed.forEach((x) => {
         let target = storage.get(x.kind);
         

@@ -87,7 +87,7 @@
     },
     {
         "id": "kelvin", "action": "defineUnit",
-        "terms": {"kind": "temperature", "exponent": 1}
+        "terms": [{"kind": "temperature", "exponent": 1}]
     },
     {
         "id": "lumen", "action": "defineUnit",

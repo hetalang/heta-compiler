@@ -61,11 +61,13 @@ describe('Unit test for UnitDef', () => {
 let input0 = [
   {
     action: 'defineUnit',
-    id: 'base'
+    id: 'base',
+    terms: []
   },
   {
     action: 'defineUnit',
-    id: 'L'
+    id: 'L',
+    terms: []
   },
   {
     action: 'defineUnit',
@@ -92,5 +94,30 @@ describe('Testing loading UnitDef', () => {
     p.loadMany(input0);
     expect(p.unitDefStorage.size - counter).to.be.eq(4);
     //console.log([...p.unitDefStorage].map(x=>x[1].unitsParsed))
+    p.logger.resetErrors();
+  });
+});
+
+describe('Testing UnitDef with "terms"', () => {
+  const p = new Container();
+
+  it('Error: units without "units" and "terms"', () => {
+    let ud0 = new p.classes.UnitDef({id: 'ud0'});
+    expect(ud0).to.have.property('errored').true;
+  });
+
+  it('Error: units with "terms" only', () => {
+    let ud1 = new p.classes.UnitDef({id: 'ud1', terms: [{kind: 'time'}]});
+    expect(ud1).to.not.have.property('errored').true;
+  });
+
+  it('Error: units with "units" and "terms"', () => {
+    let ud2 = new p.classes.UnitDef({id: 'ud2', terms: [{kind: 'time'}], units: [{kind: 'litre'}]});
+    expect(ud2).to.have.property('errored').true;
+  });
+  
+  it('UnitDef with empty "terms"', () => {
+    let ud3 = new p.classes.UnitDef({id: 'ud3', terms: []});
+    expect(ud3).to.not.have.property('errored').true;
   });
 });

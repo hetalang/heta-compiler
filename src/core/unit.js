@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const { floor, log10 } = Math;
+const { UnitTerm } = require('./unit-term');
 const prefixes = {
   '1.00000000e-2':       'centi',
   '1.00000000e-1':       'deci',
@@ -42,7 +43,7 @@ class Unit extends Array {
     return clonedUnit;
   }
   // transform any proper complex units to the another unit structure which includes only units from the list
-  // 
+  // only for bound units !
   rebase(legalUnits = []){
     let unit = new Unit();
 
@@ -108,7 +109,7 @@ class Unit extends Array {
   }
   
   /**
-   * Simplify unit expression if it is possible.
+   * Simplify unit expression if it is possible. // only for bound units !
    *
    * @dimensionlessKind {String} What to set if we want to simplify litre/litre
    * 
@@ -394,7 +395,28 @@ class Unit extends Array {
       + listOfUnits
       + `\n  </listOfUnits>\n</unitDefinition>`;
   }
+  // only for bound units !
+  // calculate term for unit based on "kindObj" and "exponent"
+  // TODO: what if term is undefined
+  toTerm(){
+    let res = new UnitTerm();
 
+    // the alternative is the throw new Error
+    let failStatus = this.map((x) => {
+      if (typeof x.kindObj === 'undefined') return true; // break
+      if (typeof x.kindObj.terms !== 'undefined') {
+        var term_i = x.kindObj.terms; // get directly
+      } else if (typeof x.kindObj.unitsParsed !== 'undefined') {
+        term_i = x.kindObj.unitsParsed.toTerm(); // recursion
+        if (!term_i) return true;  // break
+      } else {
+        throw new Error('Neither "terms" nor "units" in Unit.prototype.toTerm()');
+      }
+      res = res.concat(term_i.power(x.exponent));
+    });
+
+    return failStatus.some((x) => x) ? undefined : res;
+  }
 }
 
 function unitComponentToHTML(u, spaceSymbol = '&#160;', minusSymbol = '&#8722;'){

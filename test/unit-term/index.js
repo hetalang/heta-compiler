@@ -11,7 +11,7 @@ describe('Simple testing of UnitTerm', () => {
       {kind: 'mass'},
       {kind: 'current', exponent: 0}
     ]);
-    expect(ut).to.be.lengthOf(4);
+    expect(ut).to.be.lengthOf(5);
     expect(ut[1]).to.have.property('kind', 'length');
     expect(ut[1]).to.have.property('exponent', 2);
   });
@@ -39,6 +39,29 @@ describe('Simple testing of UnitTerm', () => {
     expect(mult).to.be.deep.equal([
       {kind: 'length', exponent: 2},
       {kind: 'time', exponent: 1}
+    ]);
+  });
+
+  it('power()', () => {
+    let ut = new UnitTerm([
+      {kind: 'amount', exponent: 1},
+      {kind: 'length', exponent: 2},
+      {kind: 'amount', exponent: 2},
+      {kind: 'time', exponent: -2},
+      {kind: 'mass'},
+      {kind: 'mass', exponent: -1},
+      {kind: 'current', exponent: 0}
+    ]);
+    let res = ut.power(-2);
+    expect(res).to.be.instanceOf(UnitTerm);
+    expect(res).to.be.deep.equal([
+      {kind: 'amount', exponent: -2},
+      {kind: 'length', exponent: -4},
+      {kind: 'amount', exponent: -4},
+      {kind: 'time', exponent: 4},
+      {kind: 'mass', exponent: -2},
+      {kind: 'mass', exponent: 2},
+      {kind: 'current', exponent: -0}
     ]);
   });
 

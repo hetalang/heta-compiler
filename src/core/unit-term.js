@@ -18,12 +18,12 @@ const termNames = [
 class UnitTerm extends Array {
   constructor(obj = []){
     super();
-    obj.length && obj.filter((x) => x.exponent !== 0).forEach((x) => {
+    obj.length && obj.forEach((x) => { // filter((x) => x.exponent !== 0)
       if (termNames.indexOf(x.kind) === -1)
         throw new TypeError('"kind" property of UnitTerm\'s item should one of reserved words, got ' + x.kind);
       this.push({
         kind: x.kind,
-        exponent: x.exponent || 1
+        exponent: (typeof x.exponent !== 'undefined') ? x.exponent : 1
       });
     });
   }
@@ -36,6 +36,18 @@ class UnitTerm extends Array {
     });
 
     return this.concat(newUt);
+  }
+  power(n = 1){
+    if (typeof n !== 'number') throw new TypeError('n in power must be a Number');
+
+    let res = this.map((x) => {
+      return {
+        kind: x.kind,
+        exponent: n * x.exponent
+      };
+    });
+
+    return res;
   }
   simplify() {
     let obj = _.chain(this)
