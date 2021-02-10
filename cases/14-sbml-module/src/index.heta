@@ -1,32 +1,9 @@
 /*
   template file for creating platform
 */
-// add qsp units
-//include ./qsp-units.heta
 
-// include module.heta type heta
-// include table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
-// include addon.json type json
-// include addon.yml type yaml
-//include ./00026-sbml-l2v4.xml type sbml
+_h #defineUnit {units: 1/hour};
 
-/*
-abstract namespace one begin
-  include ./00026-sbml-l2v4.xml type sbml
-end
-#export { filepath: output_one, space: one, format: JSON };
-*/
-abstract namespace two begin
-  include two-compartment-model-result.xml type sbml
-end
-#export {
-  filepath: output_two,
-  space: two,
-  format: JSON,
-  noUnitsExpr: true
-};
-#export {
-  filepath: sbml_two,
-  spaceFilter: two,
-  format: SBML
-};
+include 00026-sbml-l2v4.xml type sbml
+
+json_export #export { filepath: output, format: JSON };
