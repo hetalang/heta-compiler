@@ -274,7 +274,6 @@ class Unit extends Array {
    * @return {string} with TeX '\frac{mM^{2} \cdot L}{mg \cdot h^{2}}'
    */
   toTex(){
-    let res = '';
     let numerator = this
       .filter((item) => item.exponent > 0)
       .map((item) => {
@@ -297,13 +296,13 @@ class Unit extends Array {
       })
       .join(' \\cdot ');
 
-    if(denominator!=='' && numerator!==''){ // \frac{num}{den}
+    if (denominator!=='' && numerator!=='') { // \frac{num}{den}
       return '\\frac{' + numerator + '}{' + denominator + '}';
-    }else if(denominator==='' && numerator!==''){ // num
+    } else if(denominator==='' && numerator!=='') { // num
       return numerator;
-    }else if(denominator!=='' && numerator===''){ // \frac{1}{den}
+    } else if(denominator!=='' && numerator==='') { // \frac{1}{den}
       return '\\frac{1}{' + denominator + '}';
-    }else{
+    } else {
       return ''; // unitless
     }
   }
@@ -393,29 +392,28 @@ class Unit extends Array {
 
     return `<unitDefinition id="${this.toHash()}"${nameAttr}>\n  <listOfUnits>`
       + listOfUnits
-      + `\n  </listOfUnits>\n</unitDefinition>`;
+      + '\n  </listOfUnits>\n</unitDefinition>';
   }
   // only for bound units !
   // calculate term for unit based on "kindObj" and "exponent"
-  // TODO: what if term is undefined
   toTerm(){
     let res = new UnitTerm();
 
     // the alternative is the throw new Error
-    let failStatus = this.map((x) => {
-      if (typeof x.kindObj === 'undefined') return true; // break
+    for (let x of this) {
+      if (typeof x.kindObj === 'undefined') return; // break
       if (typeof x.kindObj.terms !== 'undefined') {
         var term_i = x.kindObj.terms; // get directly
       } else if (typeof x.kindObj.unitsParsed !== 'undefined') {
         term_i = x.kindObj.unitsParsed.toTerm(); // recursion
-        if (!term_i) return true;  // break
+        if (!term_i) return; // break
       } else {
         throw new Error('Neither "terms" nor "units" in Unit.prototype.toTerm()');
       }
       res = res.concat(term_i.power(x.exponent));
-    });
+    }
 
-    return failStatus.some((x) => x) ? undefined : res;
+    return res;
   }
 }
 
