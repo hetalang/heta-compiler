@@ -71,4 +71,42 @@ describe('Namespace sort testing.', () => {
       cycle.sortExpressionsByContext('ode_');
     }).to.throw(Error); // ExportError?
   });
+
+  it('cycle in "ode_" 2', () => {
+    let cycle = new Namespace('one');
+    let rec1 = (new Record).merge({
+      assignments: {
+        ode_: '2*p1'
+      }
+    });
+    rec1._id = 'p1';
+    rec1.namespace = cycle;
+    cycle.set(rec1._id, rec1);
+    expect(() => {
+      cycle.sortExpressionsByContext('ode_');
+    }).to.throw(Error); // ExportError?
+  });
+  
+  it('cycle in "start_"', () => {
+    let cycle = new Namespace('one');
+    let rec1 = (new Record).merge({
+      assignments: {
+        start_: 'p2'
+      }
+    });
+    rec1._id = 'p1';
+    rec1.namespace = cycle;
+    cycle.set(rec1._id, rec1);
+    let rec2 = (new Record).merge({
+      assignments: {
+        start_: 'p1'
+      }
+    });
+    rec2._id = 'p2';
+    rec2.namespace = cycle;
+    cycle.set(rec2._id, rec2);
+    expect(() => {
+      cycle.sortExpressionsByContext('start_');
+    }).to.throw(Error); // ExportError?
+  });
 });
