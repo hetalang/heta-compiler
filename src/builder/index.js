@@ -41,7 +41,8 @@ class Builder {
     let minLogLevel = _.get(declaration, 'options.logLevel', 'info');
     this.logger.addTransport(new StdoutTransport(minLogLevel));
 
-    // check based on schema XXX: move to heta-build.js ?
+    // check based on schema 
+    // XXX: move to heta-build.js ?
     let validate = ajv.compile(declarationSchema);
     let valid = validate(declaration);
     if (!valid) {
@@ -96,8 +97,12 @@ class Builder {
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.knitMany();
+
+    // 5. Units checking
+    this.logger.info('Checking unit\'s terms consistency.');
+    this.container.checkTerms();
     
-    // 5. Exports
+    // 6. Exports
     if (this.logger.hasErrors) { // check if errors
       this.logger.warn('Export skipped because of errors in compilation.');
     } else if (this.options.skipExport) {
@@ -109,7 +114,7 @@ class Builder {
       this.exportMany();
     }
 
-    // 6.save logs if required
+    // 7.save logs if required
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {
