@@ -1,4 +1,5 @@
 const { Record } = require('./record');
+const { UnitTerm } = require('./unit-term');
 const _ = require('lodash');
 
 /* 
@@ -82,6 +83,20 @@ Species._requirements = {
     isReference: true, targetClass: 'Compartment', setTarget: true 
   }
 };
+
+Species.legalTerms = [
+  new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -1}]),
+  new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -2}]),
+  new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -3}]),
+  new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -1}]),
+  new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -2}]),
+  new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -3}])
+];
+
+Species.legalTermsAmount = [
+  new UnitTerm([{kind: 'amount'}]),
+  new UnitTerm([{kind: 'mass'}]),
+];
 
 module.exports = {
   Species

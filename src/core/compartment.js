@@ -1,4 +1,5 @@
 const { Record } = require('./record');
+const { UnitTerm } = require('./unit-term');
 
 /*
   Compartment class
@@ -24,6 +25,12 @@ class Compartment extends Record {
     return res;
   }
 }
+
+Compartment.legalTerms = [
+  new UnitTerm([{kind: 'length', exponent: 3}]),
+  new UnitTerm([{kind: 'length', exponent: 2}]),
+  new UnitTerm([{kind: 'length', exponent: 1}])
+];
 
 module.exports = {
   Compartment

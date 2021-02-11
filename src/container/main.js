@@ -92,10 +92,9 @@ class Container {
   // check all namespaces
   knitMany(){
     // knit unitDefs TODO: checking for circular UnitDef
-    [...this.unitDefStorage].forEach((x) => x[1].bind());
+    this.unitDefStorage.forEach((ns) => ns.bind());
     // knit components
-    [...this.namespaceStorage].forEach((x) => {
-      let ns = x[1];
+    this.namespaceStorage.forEach((ns) => {
       // knit only concrete namespace
       if (!ns.isAbstract) ns.knit();
     });
@@ -104,7 +103,69 @@ class Container {
   }
   // compare Compartment, Species, Reaction with correct terms
   checkTerms(){
-    // TODO: not finished
+    this.namespaceStorage.forEach((value) => {
+      // check Compartment from concrete namespace
+      value.isAbstract || value.selectByClassName('Compartment')
+        .filter((rec) => typeof rec.unitsParsed !== 'undefined')
+        .forEach((rec) => {
+          let term = rec.unitsParsed.toTerm();
+          // check if Term cannot be estimated
+          if (typeof term === 'undefined') {
+            let msg = `Unit term cannot be estimated for Compartment "${rec.index}"`;
+            this.logger.warn(msg, {type: 'UnitError'});
+            return; // break
+          }
+          let isLegal = Compartment.legalTerms.some((x) => term.equal(x)); // one of them is legal
+          if (!isLegal) {
+            let msg = `Compartment "${rec.index}" has wrong unit term. It must be "length", "square" or "volume".`;
+            this.logger.warn(msg, {type: 'UnitError'});
+          }
+        });
+      
+      // check Species from concrete namespace
+      value.isAbstract || value.selectByClassName('Species')
+        .filter((rec) => typeof rec.unitsParsed !== 'undefined')
+        .forEach((rec) => {
+          let term = rec.unitsParsed.toTerm();
+          // check if Term cannot be estimated
+          if (typeof term === 'undefined') {
+            let msg = `Unit term cannot be estimated for Species "${rec.index}"`;
+            this.logger.warn(msg, {type: 'UnitError'});
+            return; // break
+          }
+          if (rec.isAmount){
+            let isLegal = Species.legalTermsAmount.some((x) => term.equal(x)); // one of them is legal
+            if (!isLegal) {
+              let msg = `Species {isAmount: true} "${rec.index}" has wrong unit term. It must be "amount"`;
+              this.logger.warn(msg, {type: 'UnitError'});
+            }
+          } else {
+            let isLegal = Species.legalTerms.some((x) => term.equal(x)); // one of them is legal
+            if (!isLegal) {
+              let msg = `Species {isAmount: false} "${rec.index}" has wrong unit term. It must be "amount/length", "amount/square" or "amount/volume"`;
+              this.logger.warn(msg, {type: 'UnitError'});
+            }
+          }
+        });
+
+      // check Reaction from concrete namespace
+      value.isAbstract || value.selectByClassName('Reaction')
+        .filter((rec) => typeof rec.unitsParsed !== 'undefined')
+        .forEach((rec) => {
+          let term = rec.unitsParsed.toTerm();
+          // check if Term cannot be estimated
+          if (typeof term === 'undefined') {
+            let msg = `Unit term cannot be estimated for Reaction "${rec.index}"`;
+            this.logger.warn(msg, {type: 'UnitError'});
+            return; // break
+          }
+          let isLegal = Reaction.legalTerms.some((x) => term.equal(x)); // one of them is legal
+          if (!isLegal) {
+            let msg = `Reaction "${rec.index}" has wrong unit term. It must be "amount/time", "mass/time"`;
+            this.logger.warn(msg, {type: 'UnitError'});
+          }
+        });
+    });
   }
 }
 
