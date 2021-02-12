@@ -153,6 +153,17 @@ class Unit extends Array {
 
     return Unit.fromQ(group.length > 0 ? group : [{kind: dimensionlessKind}]);
   }
+  equal(unit) {
+    if (!(unit instanceof Unit)) {
+      throw new TypeError('You must use Unit to check equality, got ' + unit);
+    }
+    let res = this.divide(unit).simplify();
+    
+    return res.length === 1 
+      && res[0].kind === '' 
+      && res[0].multiplier === 1 
+      && res[0].exponent === 1;
+  }
   
   /**
    * Creates Unit object from string.

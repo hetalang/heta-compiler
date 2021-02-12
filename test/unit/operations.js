@@ -62,3 +62,36 @@ describe('Test operations for Unit', () => {
     expect(res).to.be.deep.equal(res2);
   });
 });
+
+describe('Test Units equality', () => {
+  it('The same', () => {
+    let unit0 = Unit.parse('kg/L');
+    let unit1 = Unit.parse('kg/L');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
+  it('Same with variations', () => {
+    let unit0 = Unit.parse('kg/L');
+    let unit1 = Unit.parse('1/L*kg');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
+  it('Not equal', () => {
+    let unit0 = Unit.parse('kg/L');
+    let unit1 = Unit.parse('kg2/L');
+    expect(unit0.equal(unit1)).to.be.false;
+  });
+  it('With multiplier equal', () => {
+    let unit0 = Unit.parse('(1e-3kg)/L');
+    let unit1 = Unit.parse('/L*(1e-3kg)');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
+  it('With multiplier not equal', () => {
+    let unit0 = Unit.parse('(1e-3kg)/L');
+    let unit1 = Unit.parse('/L*kg');
+    expect(unit0.equal(unit1)).to.be.false;
+  });
+  it('Argument error', () => {
+    let unit0 = Unit.parse('kg/L');
+    let unit1 = 'kg2/L';
+    expect(() => unit0.equal(unit1)).to.throw(TypeError);
+  });
+});

@@ -99,10 +99,14 @@ class Builder {
     this.container.knitMany();
 
     // 5. Units checking
-    this.logger.info('Checking unit\'s terms consistency.');
+    this.logger.info('Checking unit\'s consistency.');
+    this.container.checkUnits();
+
+    // 6. Terms checking
+    this.logger.info('Checking unit\'s terms.');
     this.container.checkTerms();
-    
-    // 6. Exports
+
+    // 7. Exports
     if (this.logger.hasErrors) { // check if errors
       this.logger.warn('Export skipped because of errors in compilation.');
     } else if (this.options.skipExport) {
@@ -114,7 +118,7 @@ class Builder {
       this.exportMany();
     }
 
-    // 7.save logs if required
+    // 8.save logs if required
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {

@@ -101,6 +101,27 @@ class Container {
 
     return this;
   }
+  // check left and right part of record
+  // TODO: not finished yet
+  checkUnits(){
+    this.namespaceStorage.forEach((value) => {
+      if (!value.isAbstract) {
+        value.selectByInstanceOf('Record')
+          .filter((rec) => typeof rec.unitsParsed !== 'undefined')
+          .forEach((rec) => {
+            let leftSideUnit = rec.unitsParsed;
+            for (const scope in rec.assignments) {
+              let rightSideExpr = rec.assignments[scope];
+              if (typeof rightSideExpr.num === 'undefined') {
+                //let rightSideUnit = rightSideExpr.calcUnit();
+                //let isEqual = leftSideUnit.equal(rightSideUnit);
+                //console.log(rightSideUnit);
+              }
+            }
+          });
+      }
+    });
+  }
   // compare Compartment, Species, Reaction with correct terms
   checkTerms(){
     this.namespaceStorage.forEach((value) => {
