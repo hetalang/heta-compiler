@@ -266,6 +266,7 @@ class Component {
   }
   /*
   array of direct references inside component (non-unique)
+  ? used insite irt-nav
   */
   references(){
     return _.uniq(this._references());

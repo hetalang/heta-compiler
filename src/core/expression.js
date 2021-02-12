@@ -114,6 +114,22 @@ class Expression {
 
     return res;
   }
+  /*
+  Get array of unuque ids from expression
+  */
+  dependOn(){
+    let res = this.dependOnNodes().map((node) => node.name);
+    return _.uniq(res);
+  }
+  /*
+  Get array of all internal elements
+  Approximately the same ad dependsOn() but return Array of objects
+  */
+  dependOnNodes(){
+    return this.exprParsed
+      .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
+      .filter((node) => ['t', 'e', 'pi'].indexOf(node.name) === -1);
+  }
 }
 
 /* remove parenthesis from top */

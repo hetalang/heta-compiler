@@ -60,9 +60,8 @@ class CSwitcher extends _Switcher {
 
     // get list of 
     let deps = this.trigger
-      ? this.trigger.exprParsed.getSymbols()
+      ? this.trigger.dependOn()
       : [];
-    _.pull(deps, 't', 'e', 'pi');
 
     deps.forEach((id) => {
       let target = namespace.get(id);

@@ -81,23 +81,26 @@ class Record extends _Size {
     }
     
     // check math expression refs
-    _.each(this.assignments, (mathExpr, key) => {
-      this
-        .dependOn(key)
-        .forEach((id) => {
-          let target = namespace.get(id);
-
+    for (const key in this.assignments) {
+      let mathExpr = this.assignments[key];
+      mathExpr.dependOnNodes()
+        .forEach((node) => {
+          let target = namespace.get(node.name);
           if (!target) {
-            let msg = `Component "${id}" is not found in space "${this.space}" as expected in expression: `
+            let msg = `Component "${target.id}" is not found in space "${this.space}" as expected in expression: `
                   + `${this.index} [${key}]= ${mathExpr.toString()};`;
             logger.error(msg, {type: 'BindingError', space: this.space});
+            this.errored = true;
           } else if (!target.instanceOf('Const') && !target.instanceOf('Record')) {
-            let msg = `Component "${id}" is not a Const or Record class as expected in expression: `
+            let msg = `Component "${target.id}" is not a Const or Record class as expected in expression: `
               + `${this.index} [${key}]= ${mathExpr.toString()};`;
             logger.error(msg, {type: 'BindingError', space: this.space});
+            this.errored = true;
+          } else {
+            node.nameObj = target;
           }
         });
-    });
+    }
   }
   toQ(options = {}){
     let res = super.toQ(options);
@@ -133,17 +136,9 @@ class Record extends _Size {
 
     let assignment = _.get(this, 'assignments.' + context);
     if (this.isRule) {
-      let deps = this.assignments.ode_ // top priority in context
-        .exprParsed
-        .getSymbols();
-      _.pull(deps, 't', 'e', 'pi');
-      return deps;
+      return this.assignments.ode_.dependOn(); // top priority in context
     } else if (assignment !== undefined) {
-      let deps = assignment
-        .exprParsed
-        .getSymbols();
-      _.pull(deps, 't', 'e', 'pi'); // remove t from dependence
-      return deps;
+      return assignment.dependOn(); // remove t from dependence
     } else {
       return [];
     }
@@ -163,12 +158,7 @@ class Record extends _Size {
   }
   _references(){
     let classSpecificRefs = _.chain(this.assignments)
-      .map((expression) => {
-        let deps = expression.exprParsed.getSymbols();
-        _.pull(deps, 't', 'e', 'pi');
-        
-        return deps;
-      })
+      .map((expression) => expression.dependOn())
       .flatten()
       .value();
 
