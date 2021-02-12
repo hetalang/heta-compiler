@@ -59,21 +59,23 @@ class CSwitcher extends _Switcher {
     let logger = this.namespace.container.logger;
 
     // get list of 
-    let deps = this.trigger
-      ? this.trigger.dependOn()
-      : [];
+    let deps = this.trigger ? this.trigger.dependOnNodes() : [];
 
-    deps.forEach((id) => {
-      let target = namespace.get(id);
+    deps.forEach((node) => {
+      let target = namespace.get(node.name);
 
       if (!target) {
-        let msg = `Component "${id}" is not found in space "${this.space}" as expected in CSwitcher: "${this.index}"`
+        let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in CSwitcher: "${this.index}"`
               + `\n\t${this.trigger.toString()};`;
         logger.error(msg, {type: 'BindingError', space: this.space});
+        this.errored = true;
       } else if (!target.instanceOf('Const') && !target.instanceOf('Record')) {
-        let msg = `Component "${id}" is not a Const or Record class as expected in expression: `
+        let msg = `Component "${node.name}" is not a Const or Record class as expected in expression: `
           + `${this.trigger.toString()};`;
         logger.error(msg, {type: 'BindingError', space: this.space});
+        this.errored = true;
+      } else {
+        node.nameObj = target;
       }
     });
   }

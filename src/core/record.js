@@ -87,12 +87,12 @@ class Record extends _Size {
         .forEach((node) => {
           let target = namespace.get(node.name);
           if (!target) {
-            let msg = `Component "${target.id}" is not found in space "${this.space}" as expected in expression: `
+            let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in expression: `
                   + `${this.index} [${key}]= ${mathExpr.toString()};`;
             logger.error(msg, {type: 'BindingError', space: this.space});
             this.errored = true;
           } else if (!target.instanceOf('Const') && !target.instanceOf('Record')) {
-            let msg = `Component "${target.id}" is not a Const or Record class as expected in expression: `
+            let msg = `Component "${node.name}" is not a Const or Record class as expected in expression: `
               + `${this.index} [${key}]= ${mathExpr.toString()};`;
             logger.error(msg, {type: 'BindingError', space: this.space});
             this.errored = true;
