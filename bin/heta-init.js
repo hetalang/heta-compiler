@@ -24,7 +24,8 @@ const defaultPlatform = {
     debug: false,
     logs: 'output.log',
     logLevel: 'info',
-    skipExport: false
+    skipExport: false,
+    skipUnitsCheck: false
   },
   //script: {
   //  afterInit: null,

@@ -99,8 +99,12 @@ class Builder {
     this.container.knitMany();
 
     // 5. Units checking
-    this.logger.info('Checking unit\'s consistency.');
-    this.container.checkUnits();
+    if (this.options.skipUnitsCheck) {
+      this.logger.warn('Checking unit\'s skipped as stated in declaration.');
+    } else {
+      this.logger.info('Checking unit\'s consistency.');
+      this.container.checkUnits();
+    }
 
     // 6. Terms checking
     this.logger.info('Checking unit\'s terms.');
