@@ -99,6 +99,7 @@ class Builder {
     this.container.knitMany();
 
     // 5. Units checking
+    this.container.checkCircUnitDef();
     if (this.options.skipUnitsCheck) {
       this.logger.warn('Checking unit\'s skipped as stated in declaration.');
     } else {
@@ -106,23 +107,26 @@ class Builder {
       this.container.checkUnits();
     }
 
-    // 6. Terms checking
-    this.logger.info('Checking unit\'s terms.');
-    this.container.checkTerms();
+    // === STOP if errors ===
+    if (!this.logger.hasErrors) {
+      // 6. Terms checking
+      this.logger.info('Checking unit\'s terms.');
+      this.container.checkTerms();
 
-    // 7. Exports
-    if (this.logger.hasErrors) { // check if errors
-      this.logger.warn('Export skipped because of errors in compilation.');
-    } else if (this.options.skipExport) {
-      this.logger.warn('Exporting skipped as stated in declaration.');
-    } else if (this.options.ssOnly) {
-      this.logger.warn('"ss only" mode');
-      this.exportSSOnly();
+      // 7. Exports
+      if (this.options.skipExport) {
+        this.logger.warn('Exporting skipped as stated in declaration.');
+      } else if (this.options.ssOnly) {
+        this.logger.warn('"ss only" mode');
+        this.exportSSOnly();
+      } else {
+        this.exportMany();
+      }
     } else {
-      this.exportMany();
+      this.logger.warn('Export skipped because of errors in compilation.');
     }
 
-    // 8.save logs if required
+    // 8. save logs if required
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {

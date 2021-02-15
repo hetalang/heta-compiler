@@ -21,6 +21,7 @@ const _ = require('lodash');
 const { Namespace } = require('../namespace');
 const { Logger, JSONTransport } = require('../logger');
 const coreItems = require('./core-items.json');
+const TopoSort = require('@insysbio/topo-sort');
 
 
 class Container {
@@ -100,6 +101,28 @@ class Container {
     });
 
     return this;
+  }
+  // check circular ref in UnitDef
+  checkCircUnitDef(){
+    // the same method as for sortExpressionsByContext()
+    let graph = new TopoSort();
+    this.unitDefStorage.forEach((unitDef) => {
+      if (typeof unitDef.unitsParsed !== 'undefined') {
+        let deps = unitDef.unitsParsed.map((x) => x.kind);
+        graph.add(unitDef.id, deps);
+      }
+    });
+
+    try {
+      graph.sort(); // independent will be at the end
+    } catch (err) { // catch cycling
+      let infoLine = err.circular.map((id) => {
+        let unitDef = this.unitDefStorage.get(id);
+        return `\t{ ${id} = ${unitDef.units} }`;
+      }).join('\n');
+      let msg = 'Circular dependency in UnitDef: \n' + infoLine;
+      this.logger.error(msg, {type: 'CircularError'});
+    }
   }
   // check left and right part of record
   // TODO: not finished yet

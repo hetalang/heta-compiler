@@ -65,7 +65,7 @@ const schema = {
 */
 class UnitDef extends Top {
   constructor(q = {}, isCore = false){
-    let res = super(q, isCore);
+    super(q, isCore);
 
     //this.unitsParsed = new Unit(); // XXX: I am not sure maybe this was important
 
@@ -125,22 +125,22 @@ class UnitDef extends Top {
     return ajv.compile(schema);
   }
   _toQ(options = {}){
-      let q = super._toQ(options);
+    let q = super._toQ(options);
 
-      if (this.unitsParsed) {
-        if (options.noUnitsExpr) {
-          q.units = this.unitsParsed.toQ(options);
-        } else {
-          q.units = this.unitsParsed.toString();
-        }
+    if (this.unitsParsed) {
+      if (options.noUnitsExpr) {
+        q.units = this.unitsParsed.toQ(options);
+      } else {
+        q.units = this.unitsParsed.toString();
       }
-      return q;
+    }
+    return q;
   }
   toQ(options = {}){
-      let q = this._toQ(options);
-      q.action = 'defineUnit';
+    let q = this._toQ(options);
+    q.action = 'defineUnit';
 
-      return q;
+    return q;
   }
 }
 
