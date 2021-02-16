@@ -76,7 +76,37 @@ class Unit extends Array {
 
     return unit;
   }
+  // primitive units are units without internal "units" property
+  rebaseToPrimitive(){
+    let unit = new Unit();
 
+    if (this.length === 0)
+      throw new TypeError('Cannot use rebase for empty Unit');
+
+    this.forEach((x) => {
+      if (typeof x.kindObj === 'undefined') {
+        throw new TypeError(`Cannot rebase unknown unit: "${x.kind}"`);
+      }
+      let parsed = x.kindObj.unitsParsed;
+      if (typeof parsed === 'undefined') { // is primitive? just push without refs!
+        unit.push({kind: x.kind, exponent: x.exponent, multiplier: x.multiplier});
+      } else {
+        parsed // is not primitive? analyze refs and push!
+          .rebaseToPrimitive()
+          .forEach((y) => {
+            // combine deep units with the current: 
+            // unit = (mult_x*u2)^exp_x = (mult_x * (mult_y*u3)^exp_y)^exp_x
+            unit.push({
+              kind: y.kind,
+              exponent: y.exponent * x.exponent,
+              multiplier: y.multiplier * x.multiplier**(1/y.exponent)
+            });
+          });
+      }
+    });
+
+    return unit;
+  }
   /**
    * Multiply two units.
    *
