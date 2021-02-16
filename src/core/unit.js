@@ -47,9 +47,6 @@ class Unit extends Array {
   rebase(legalUnits = []){
     let unit = new Unit();
 
-    if (this.length === 0)
-      throw new TypeError('Cannot use rebase for empty Unit');
-
     this.forEach((x) => {
       if (legalUnits.indexOf(x.kind) !== -1) { // is legal? just push without refs!
         let clearedUnit =_.pick(x, ['kind', 'exponent', 'multiplier']);
@@ -80,12 +77,9 @@ class Unit extends Array {
   rebaseToPrimitive(){
     let unit = new Unit();
 
-    if (this.length === 0)
-      throw new TypeError('Cannot use rebase for empty Unit');
-
     this.forEach((x) => {
       if (typeof x.kindObj === 'undefined') {
-        throw new TypeError(`Cannot rebase unknown unit: "${x.kind}"`);
+        throw new TypeError(`Cannot rebase unbound unit: "${x.kind}"`);
       }
       let parsed = x.kindObj.unitsParsed;
       if (typeof parsed === 'undefined') { // is primitive? just push without refs!
@@ -181,7 +175,7 @@ class Unit extends Array {
       .filter((x) => !(x.kind===dimensionlessKind && x.multiplier===1)) // this may result in empty unit array
       .value();
 
-    return Unit.fromQ(group.length > 0 ? group : [{kind: dimensionlessKind}]);
+    return Unit.fromQ(group);
   }
   equal(unit, rebase = false) {
     if (!(unit instanceof Unit)) {
@@ -191,10 +185,7 @@ class Unit extends Array {
     let right = !rebase ? unit : unit.rebaseToPrimitive();
     let res = left.divide(right).simplify();
     
-    return res.length === 1 
-      && res[0].kind === '' 
-      && res[0].multiplier === 1 
-      && res[0].exponent === 1;
+    return res.length === 0;
   }
   
   /**

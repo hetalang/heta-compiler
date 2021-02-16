@@ -24,7 +24,7 @@ module.exports = [
     path: 'expression.node.ConstantNode.prototype',
     factory: function() {
       return function(record){
-        return Unit.fromQ([{kind: 'dimensionless'}]);
+        return new Unit(); // dimensionless
       };
     }
   },
