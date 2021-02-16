@@ -67,6 +67,7 @@
     "class": "Const",
     "id": "Vmax",
     "space": "mm",
+    "units": "uM/minute",
     "num": 0.1
   },
   {
