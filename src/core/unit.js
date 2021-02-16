@@ -183,11 +183,13 @@ class Unit extends Array {
 
     return Unit.fromQ(group.length > 0 ? group : [{kind: dimensionlessKind}]);
   }
-  equal(unit) {
+  equal(unit, rebase = false) {
     if (!(unit instanceof Unit)) {
       throw new TypeError('You must use Unit to check equality, got ' + unit);
     }
-    let res = this.divide(unit).simplify();
+    let left = !rebase ? this : this.rebaseToPrimitive();
+    let right = !rebase ? unit : unit.rebaseToPrimitive();
+    let res = left.divide(right).simplify();
     
     return res.length === 1 
       && res[0].kind === '' 

@@ -156,6 +156,31 @@ class Record extends _Size {
     //}
     return assignment;
   }
+  /*
+  Check units recursively for mathematical expressions
+  Works only for binded records
+  */
+  checkUnits(){
+    let logger = this.namespace.container.logger;
+    if (typeof this.unitsParsed === 'undefined') {
+      logger.warn(`No units for "${this.index}"`);
+    } else {
+      let leftSideUnit = this.unitsParsed;
+      for (const scope in this.assignments) {
+        let rightSideExpr = this.assignments[scope];
+        if (typeof rightSideExpr.num === 'undefined') { // skip numbers
+          let rightSideUnit = rightSideExpr.exprParsed.calcUnit(this);
+          if (typeof rightSideUnit === 'undefined') {
+            logger.warn(`Cannot calculate right side units in "${this.index}" for scope "${scope}".`);
+          } else if (!leftSideUnit.equal(rightSideUnit, true)) {
+            let leftUnitString = leftSideUnit.toString();
+            let rightUnitString = rightSideUnit.simplify().toString();
+            logger.warn(`Units inconsistency in "${this.index}" for scope "${scope}". Left: "${leftUnitString}". Right: "${rightUnitString}"`);
+          }
+        }
+      }
+    }
+  }
   _references(){
     let classSpecificRefs = _.chain(this.assignments)
       .map((expression) => expression.dependOn())

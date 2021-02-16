@@ -1,6 +1,8 @@
 const math = require('mathjs');
 const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
+const mathCalcUnits = require('./math-calc-unit');
+math.import(mathCalcUnits);
 let { OperatorNode, SymbolNode } = math.expression.node;
 const _ = require('lodash');
 
