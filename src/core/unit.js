@@ -131,7 +131,19 @@ class Unit extends Array {
     let res = this.concat(newUnit);
     return res;
   }
-  
+  power(n = 1){
+    if (typeof n !== 'number') throw new TypeError('n in power must be a Number, got' + n);
+
+    let res = this.map((x) => {
+      return {
+        kind: x.kind,
+        multiplier: x.multiplier,
+        exponent: n * x.exponent
+      };
+    });
+
+    return res;
+  }
   /**
    * Simplify unit expression if it is possible. // only for bound units !
    *
@@ -239,6 +251,8 @@ class Unit extends Array {
    * @return {string} of type '\_mM2_L\__mg\__h2'
    */
   toHash(){
+    if (this.length === 0) return '_dimensionless';
+
     return this.concat([]) // clone array to exclude mutation
       .sort((x1, x2) => x1.kind > x2.kind ? -1 : 1) // sort by kind id
       .map((item) => {
@@ -272,6 +286,8 @@ class Unit extends Array {
    * @return {string} of format: 'mM2*L/mg/h2'
    */
   toString(usePrefix = false){
+    if (this.length === 0) return 'dimensionless'; // brake
+
     return this
       //.filter((x) => x.kind !== '') // remove unitless
       .map((item, i) => {
@@ -308,6 +324,8 @@ class Unit extends Array {
    * @return {string} with TeX '\frac{mM^{2} \cdot L}{mg \cdot h^{2}}'
    */
   toTex(){
+    if (this.length === 0) return '1';
+
     let numerator = this
       .filter((item) => item.exponent > 0)
       .map((item) => {
@@ -347,6 +365,8 @@ class Unit extends Array {
    * @return {string} of format: 'mM<sup>2</sup> * L / mg / h<sup>2</sup>'
    */
   toHTML(){
+    if (this.length === 0) return '1';
+
     return this
       .map((item, i) => {
         let operator = item.exponent < 0
@@ -365,6 +385,8 @@ class Unit extends Array {
 
   // &nbsp; => &#160; &times; => &#215; &minus; => &#8722;
   toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;', minusSymbol = '&#8722;'){
+    if (this.length === 0) return '<div class="unit-mult" style="display:inline-block">1</div>';
+
     let numBase = this
       .filter((u) => u.exponent > 0)
       .map((u) => unitComponentToHTML(u, spaceSymbol, minusSymbol))

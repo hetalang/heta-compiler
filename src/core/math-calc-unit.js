@@ -33,8 +33,13 @@ module.exports = [
     path: 'expression.node.OperatorNode.prototype',
     factory: function() {
       return function(record){
+        const logger = record.namespace.container.logger;
+
         let argUnit = this.args
           .map((node) => node.calcUnit(record));
+
+        let argUnitDimensionless = argUnit
+          .map((node) => node.equal(new Unit(), true));
 
         // check arguments
         let isUndefined = argUnit
@@ -54,10 +59,23 @@ module.exports = [
             if (i > 0) res = res.divide(unit);
           });
           return res;
-        } else if (this.fn === 'add' || this.fn === 'minus') {
+        } else if (this.fn === 'add' || this.fn === 'subtract') {
           let firstUnit = argUnit[0];
-          // TODO: check other args for equality
-          
+          argUnit.forEach((unit, i) => {
+            if (i > 0) {
+              let isEqual = firstUnit.equal(unit, true);
+              if (!isEqual) {
+                let unitsExpr = argUnit.map((x) => x.toString()).join(' vs ');
+                logger.warn(`Units inconsistency for "${record.index}" inside expression part "${this.toString()}" : "${unitsExpr}"`);
+              }
+            }
+          });
+          return argUnit[0];
+        } else if (this.fn === 'pow') {
+          let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
+          if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+            logger.warn(`Units inconsistency for "${record.index}", power can be dimentionless "${this.toString()}" : "${unitExpr}"`);
+          }
           return argUnit[0];
         } else {
           throw new Error(`No method calcUnit() for the operator : "${this.fn}"`);
@@ -67,7 +85,7 @@ module.exports = [
   },
   {
     name: 'calcUnit',
-    path: 'expression.node.SymbolNode.prototype',
+    path: 'expression.node.SymbolNode.prototype', 
     factory: function() {
       return function(record){
         const logger = record.namespace.container.logger;

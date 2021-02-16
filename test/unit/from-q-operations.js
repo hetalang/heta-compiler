@@ -4,6 +4,12 @@ const { Unit } = require('../../src/core/unit');
 
 const correctUnits = [
   {
+    source: [],
+    targetString: 'dimensionless',
+    targetHash: '_dimensionless',
+    targetHTML2: '<div class="unit-mult" style="display:inline-block">1</div>'
+  },
+  {
     source: [
       { kind: 'g' },
       { kind: 'L', exponent: -1 }
