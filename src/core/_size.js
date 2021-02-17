@@ -20,15 +20,18 @@ class _Size extends Component {
     super.merge(q);
     let logger = _.get(this, 'namespace.container.logger');
     let valid = _Size.isValid(q, logger);
-
     if (valid) {
       if (q.units) {
-        if (typeof q.units === 'string')
+        if (q.units === 1) {
+          this.unitsParsed = new Unit();
+        } else if (typeof q.units === 'string') {
           this.unitsParsed = Unit.parse(q.units);
-        else
+        } else {
           this.unitsParsed = Unit.fromQ(q.units);
+        }
       }
     }
+    
 
     return this;
   }

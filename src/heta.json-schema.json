@@ -346,6 +346,7 @@
        "type": "object",
        "properties": {
          "units": { "anyOf": [
+            { "type": "number", "enum": [1] },
             { "$ref": "#/definitions/UnitsExpr" },
             { "type": "array", "items": { "$ref": "#/definitions/UnitComponent" } }
          ] }

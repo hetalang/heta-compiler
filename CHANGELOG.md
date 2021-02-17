@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.6.0 - new Heta standard 
+
+- supporting of units in format [], 1, (1e-3)
+
+
 ## 0.5.18
 
 - Message for user to install the latest version

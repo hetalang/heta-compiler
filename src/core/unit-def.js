@@ -8,8 +8,9 @@ const schema = {
   required: ['id'],
   properties: {
     units: { anyOf: [
-       { '$ref': "#/definitions/UnitsExpr" },
-       { type: "array", items: { '$ref': "#/definitions/UnitItem" } }
+      { type: 'number', enum: [1]},
+      { '$ref': "#/definitions/UnitsExpr" },
+      { type: "array", items: { '$ref': "#/definitions/UnitItem" } }
     ] },
     terms: {
       type: "array",
@@ -83,7 +84,9 @@ class UnitDef extends Top {
       this.errored = true;
     }
 
-    if (q.units && typeof q.units === 'string') {
+    if (q.units && q.units === 1) {
+      this.unitsParsed = new Unit();
+    } else if (q.units && typeof q.units === 'string') {
       this.unitsParsed = Unit.parse(q.units);
     } else if (q.units && q.units instanceof Array) {
       this.unitsParsed = Unit.fromQ(q.units);
