@@ -89,6 +89,11 @@ describe('Test Units equality', () => {
     let unit1 = Unit.parse('/L*kg');
     expect(unit0.equal(unit1)).to.be.false;
   });
+  it('compare unitless', () => {
+    let unit0 = Unit.parse('unitless');
+    let unit1 = Unit.parse('unitless');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
   it('Argument error', () => {
     let unit0 = Unit.parse('kg/L');
     let unit1 = 'kg2/L';
