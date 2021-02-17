@@ -45,20 +45,20 @@ describe('Check Unit.rebaseToPrimitive()', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     expect(k1.units).to.be.equal('dimensionless');
     let rebased = k1.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('dimensionless');
+    expect(rebased.toString()).to.be.equal('1');
   });
   
   it('UL to primitive', () => {
     let k2 = p.namespaceStorage.get('nameless').get('k2');
     expect(k2.units).to.be.equal('UL');
     let rebased = k2.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('dimensionless');
+    expect(rebased.toString()).to.be.equal('1');
   });
   
   it('[] to primitive', () => {
     let k3 = p.namespaceStorage.get('nameless').get('k3');
-    expect(k3.units).to.be.equal('dimensionless');
+    expect(k3.units).to.be.equal('1');
     let rebased = k3.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('dimensionless');
+    expect(rebased.toString()).to.be.equal('1');
   });
 });

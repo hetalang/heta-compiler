@@ -3,8 +3,12 @@ const { expect } = require('chai');
 const { Unit } = require('../../src/core/unit');
 
 const correctUnits = [
+  {str0: '1', str: '1', hash: '_1', tex: '1', html: '1'},
+  {str0: '1*1', str: '1', hash: '_1', tex: '1', html: '1'},
+  {str0: '1/1', str: '1', hash: '_1', tex: '1', html: '1'},
+  {str0: '1^2', str: '1', hash: '_1', tex: '1', html: '1'},
   {str0: 'L', str: 'L', hash: '_L', tex: 'L', html: 'L'},
-  {str0: 'mg', str: 'mg', hash: '_mg', tex: 'mg', html: 'mg'},
+  {str0: '1*mg', str: 'mg', hash: '_mg', tex: 'mg', html: 'mg'},
   {str0: 'M', str: 'M', hash: '_M', tex: 'M', html: 'M'},
   {str0: 'nM', str: 'nM', hash: '_nM', tex: 'nM', html: 'nM'},
   {str0: 'nM2', str: 'nM^2', hash: '_nM2', tex: 'nM^{2}', html: 'nM<sup>2</sup>'},

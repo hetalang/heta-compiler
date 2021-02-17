@@ -4,6 +4,24 @@ const { Unit } = require('../../src/core/unit');
 
 const correctUnits = [
   {
+    str0: '(1)',
+    q: [],
+    str: '1',
+    strPrefix: '1'
+  },
+  {
+    str0: '(1)^2*(1)',
+    q: [],
+    str: '1',
+    strPrefix: '1'
+  },
+  {
+    str0: '(1e-3)^2',
+    q: [{kind: '', multiplier: 1e-3, exponent: 2}],
+    str: '(1e-3 )^2',
+    strPrefix: 'milli^2'
+  },
+  {
     str0: 'L*mg2',
     q: [{kind: 'L', exponent: 1, multiplier: 1}, {kind: 'mg', exponent: 2, multiplier: 1}],
     str: 'L*mg^2',

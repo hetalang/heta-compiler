@@ -33,7 +33,7 @@
     },
     {
         "id": "dimensionless", "action": "defineUnit",
-        "terms": []
+        "units": []
     },
     {
         "id": "watt", "action": "defineUnit",
