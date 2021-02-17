@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const { Unit } = require('../../src/core/unit');
 
 const correctUnits = [
+  {str0: 1, str: '1', hash: '_1', tex: '1', html: '1'},
   {str0: '1', str: '1', hash: '_1', tex: '1', html: '1'},
   {str0: '1*1', str: '1', hash: '_1', tex: '1', html: '1'},
   {str0: '1/1', str: '1', hash: '_1', tex: '1', html: '1'},

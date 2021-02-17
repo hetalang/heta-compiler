@@ -221,6 +221,9 @@ class Unit extends Array {
   static parse(unitString){
     let unit = new Unit();
 
+    // create string from number
+    unitString += '';
+
     let items = unitString // split to parts
       .replace(/\s*/g, '') // remove blanks
       .match(/.[^*/]*/g);
