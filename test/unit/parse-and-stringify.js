@@ -7,6 +7,7 @@ const correctUnits = [
   {str0: '1*1', str: '1', hash: '_1', tex: '1', html: '1'},
   {str0: '1/1', str: '1', hash: '_1', tex: '1', html: '1'},
   {str0: '1^2', str: '1', hash: '_1', tex: '1', html: '1'},
+  {str0: '(1e-3)', str: '(1e-3 )', hash: '_1n3', tex: '(1e-3 )', html: '(1e-3 )'},
   {str0: 'L', str: 'L', hash: '_L', tex: 'L', html: 'L'},
   {str0: '1*mg', str: 'mg', hash: '_mg', tex: 'mg', html: 'mg'},
   {str0: 'M', str: 'M', hash: '_M', tex: 'M', html: 'M'},

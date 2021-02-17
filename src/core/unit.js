@@ -24,13 +24,18 @@ class Unit extends Array {
     obj.forEach((x) => {
       if (typeof x.kind !== 'string')
         throw new TypeError('kind property must be string.');
-      
+      /* TODO: this is better solution but it does not work
       if (!(x.kind === '' && (x.multiplier === 1 || x.multiplier === undefined))) { // do not push unitless
         res.push({
           kind: x.kind,
           multiplier: x.multiplier !== undefined ? x.multiplier : 1,
           exponent: x.exponent !== undefined ? x.exponent : 1,
         });
+      }
+      */
+      if (!(x.kind === '' && (x.multiplier === 1 || x.multiplier === undefined))) { // do not push unitless
+        _.defaults(x, { multiplier: 1, exponent: 1 });
+        res.push(x);
       }
     });
 
@@ -60,7 +65,7 @@ class Unit extends Array {
         unit.push(clearedUnit);
       } else {
         if (typeof x.kindObj === 'undefined') {
-          throw new TypeError(`Cannot rebase unknown unit: "${x.kind}"`);
+          throw new TypeError(`Cannot rebase the unbound unit: "${x.kind}"`);
         }
         let unitDefRebased = x.kindObj // is not legal? analyze refs and concat!
           .unitsParsed
@@ -225,7 +230,7 @@ class Unit extends Array {
 
     items.forEach((item) => {
       // checking "/xxx^12.23" or "1" or "/1"
-      let shortFormat = /^(\/|\*)?[A-Za-z1-9]+\^?(\d+(\.?\d*)?)?$/;
+      let shortFormat = /^(\/|\*)?[A-Za-z1]+\^?(\d+(\.?\d*)?)?$/;
       // checking "/(1e-2xxx)^12.23"
       let longFormat = /^(\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?[A-Za-z]*\)\^?(\d+(\.?\d*)?)?$/;
       
@@ -328,7 +333,7 @@ class Unit extends Array {
           return operator + kindUpd + exponent;
         })
         .join('');
-      }
+    }
   }
   
   /**
@@ -337,38 +342,43 @@ class Unit extends Array {
    * @return {string} with TeX '\frac{mM^{2} \cdot L}{mg \cdot h^{2}}'
    */
   toTex(){
-    if (this.length === 0) return '1';
-
-    let numerator = this
-      .filter((item) => item.exponent > 0)
-      .map((item) => {
-        let expAbs = Math.abs(item.exponent); // absolute value
-        let exponent = (expAbs!==1)
-          ? '^{' + expAbs + '}'
-          : '';
-        return item.kind + exponent;
-      })
-      .join(' \\cdot ');
-
-    let denominator = this
-      .filter((item) => item.exponent < 0)
-      .map((item) => {
-        let expAbs = Math.abs(item.exponent); // absolute value
-        let exponent = (expAbs!==1)
-          ? '^{' + expAbs + '}'
-          : '';
-        return item.kind + exponent;
-      })
-      .join(' \\cdot ');
-
-    if (denominator!=='' && numerator!=='') { // \frac{num}{den}
-      return '\\frac{' + numerator + '}{' + denominator + '}';
-    } else if(denominator==='' && numerator!=='') { // num
-      return numerator;
-    } else if(denominator!=='' && numerator==='') { // \frac{1}{den}
-      return '\\frac{1}{' + denominator + '}';
+    if (this.length === 0) {
+      return '1';
     } else {
-      return ''; // unitless
+      let numerator = this
+        .filter((item) => item.exponent > 0)
+        .map((item) => {
+          let expAbs = Math.abs(item.exponent); // absolute value
+          let multKind = (item.multiplier === 1 || item.multiplier === undefined)
+            ? item.kind
+            : `(${item.multiplier.toExponential()} ${item.kind})`;
+          let exponent = (expAbs !== 1)
+            ? '^{' + expAbs + '}'
+            : '';
+          return multKind + exponent;
+        })
+        .join(' \\cdot ');
+
+      let denominator = this
+        .filter((item) => item.exponent < 0)
+        .map((item) => {
+          let expAbs = Math.abs(item.exponent); // absolute value
+          let exponent = (expAbs!==1)
+            ? '^{' + expAbs + '}'
+            : '';
+          return item.kind + exponent;
+        })
+        .join(' \\cdot ');
+
+      if (denominator !== '' && numerator !== '') { // \frac{num}{den}
+        return '\\frac{' + numerator + '}{' + denominator + '}';
+      } else if (denominator === '' && numerator !== '') { // num
+        return numerator;
+      } else if (denominator!=='' && numerator==='') { // \frac{1}{den}
+        return '\\frac{1}{' + denominator + '}';
+      } else {
+        return '1'; // dimensionless
+      }
     }
   }
   
@@ -378,22 +388,28 @@ class Unit extends Array {
    * @return {string} of format: 'mM<sup>2</sup> * L / mg / h<sup>2</sup>'
    */
   toHTML(){
-    if (this.length === 0) return '1';
+    if (this.length === 0) {
+      return '1';
+    } else {
+      return this
+        .map((item, i) => {
+          let operator = item.exponent < 0
+            ? ( i > 0 ? '/' : '1/' ) // 1 for 1/L
+            : ( i > 0 ? '&times;' : '' ); // no operator for first element
 
-    return this
-      .map((item, i) => {
-        let operator = item.exponent < 0
-          ? ( i > 0 ? '/' : '1/' ) // 1 for 1/L
-          : ( i > 0 ? '&times;' : '' ); // no operator for first element
+          let multKind = (item.multiplier === 1 || item.multiplier === undefined)
+            ? item.kind
+            : `(${item.multiplier.toExponential()} ${item.kind})`;
+          let expAbs = Math.abs(item.exponent); // absolute value
+          let exponent = expAbs !== 1
+            ? '<sup>' + expAbs + '</sup>'
+            : '';
 
-        let expAbs = Math.abs(item.exponent); // absolute value
-        let exponent = expAbs !== 1
-          ? '<sup>' + expAbs + '</sup>'
-          : '';
+          return operator + multKind + exponent;
+        })
+        .join('');
+    }
 
-        return operator + item.kind + exponent;
-      })
-      .join('');
   }
 
   // &nbsp; => &#160; &times; => &#215; &minus; => &#8722;
