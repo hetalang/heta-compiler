@@ -83,20 +83,26 @@ module.exports = [
           }
           return new Unit();
         } else if (this.fn === 'pow') {
-          let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
-          if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
-            logger.warn(`Units inconsistency for "${record.index}", power operator is not dimensionless here "${this.toString()}" : "${unitExpr}"`);
+          if (this.args[1].type === 'ConstantNode') { // pow(x, 3)
+            let n = this.args[1].value;
+            return argUnit[0].power(n);
+          } else { // pow(x, y)
+            if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+              let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
+              logger.warn(`Units inconsistency for "${record.index}": power arguments must be dimensionless or second argument should be a number: "${this.toString()}" : "${unitExpr}"`);
+            }
+
+            return argUnit[0];
           }
-          return argUnit[0];
         } else {
           throw new Error(`No method calcUnit() for the operator : "${this.fn}"`);
         }
       };
     }
   },
-  { // TODO: not finished cube, divide, exp, ln, log(,), log, log10, log2, multiply, pow, sign, sqrt, nthRoot, nthRoot(,), square, factorial, ifgt
+  {
     name: 'calcUnit',
-    path: 'expression.node.FunctionNode.prototype', 
+    path: 'expression.node.FunctionNode.prototype',
     factory: function(){
       return function(record){
         const logger = record.namespace.container.logger;
@@ -115,7 +121,7 @@ module.exports = [
           .map((node) => node.equal(new Unit(), true));
 
         // return based on operators 
-        if (this.fn.name === 'abs' || this.fn.name === 'ceil' || this.fn.name === 'floor') { // one argument, result as argument
+        if (this.fn.name === 'abs' || this.fn.name === 'ceil' || this.fn.name === 'floor') { // one argument, result units as in argument
           return argUnit[0];
         } else if (this.fn.name === 'add' || this.fn.name === 'subtract' || this.fn.name === 'max' || this.fn.name === 'min') { // many arguments with equal units, result as first argument
           let firstUnit = argUnit[0];
@@ -127,6 +133,73 @@ module.exports = [
             }
           });
           return argUnit[0];
+        } else if (this.fn.name === 'multiply') { // multiply()
+          return argUnit.slice(1).reduce(
+            (accumulator, unit) => accumulator.multiply(unit),
+            argUnit[0]
+          );
+        } else if (this.fn.name === 'divide') { // divide()
+          return argUnit.slice(1).reduce(
+            (accumulator, unit) => accumulator.divide(unit),
+            argUnit[0]
+          );
+        } else if (this.fn.name === 'square') { // square()
+          return argUnit[0].power(2);
+        } else if (this.fn.name === 'cube') { // cube()
+          return argUnit[0].power(3);
+        } else if (this.fn.name === 'sqrt') { // sqrt()
+          return argUnit[0].power(0.5);
+        } else if (this.fn.name === 'pow') { // pow()
+          if (this.args[1].type === 'ConstantNode') { // pow(x, 2)
+            let n = this.args[1].value;
+            return argUnit[0].power(n);
+          } else { // pow(x, y)
+            if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+              let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
+              logger.warn(`Units inconsistency for "${record.index}": pow() arguments must be dimensionless or second argument should be a number: "${this.toString()}" : "${unitExpr}"`);
+            }
+
+            return argUnit[0];
+          }
+        } else if (this.fn.name === 'nthRoot' && this.args.length === 1) { // nthRoot()
+          return argUnit[0].power(0.5);
+        } else if (this.fn.name === 'nthRoot') {
+          if (this.args[1].type === 'ConstantNode') { // nthRoot(x, 3)
+            let n = this.args[1].value;
+            return argUnit[0].power(1/n);
+          } else { // nthRoot(x, y)
+            if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+              let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
+              logger.warn(`Units inconsistency for "${record.index}": nthRoot() arguments must be dimensionless or second argument should be a number: "${this.toString()}" : "${unitExpr}"`);
+            }
+
+            return argUnit[0];
+          }
+        } else if (this.fn.name === 'log' || this.fn.name === 'ln' || this.fn.name === 'log10' || this.fn.name === 'log2' ) {
+          if (this.args.length > 1 && !argUnitDimensionless[1]) {
+            let unitExpr = `log(${argUnit[0].toString()}, ${argUnit[1].toString()})`;
+            logger.warn(`Units inconsistency for "${record.index}": second arguments of log() must be dimensionless "${this.toString()}" => "${unitExpr}"`);
+          }
+          return new Unit();
+        } else if (this.fn.name === 'sign') { // sign()
+          return new Unit();
+        } else if (this.fn.name === 'exp' || this.fn.name === 'factorial') { // argument must be dimentionless, result is dimentionless
+          if (!argUnitDimensionless[0]) {
+            logger.warn(`Units inconsistency for "${record.index}": the argument must be dimensionless here "${this.toString()}", got "${argUnit[0]}"`);
+          }
+          return new Unit();
+        } else if (this.fn.name === 'ifgt' || this.fn.name === 'ifge' || this.fn.name === 'iflt' || this.fn.name === 'ifle' || this.fn.name === 'ifeq') {
+          let isEqual0 = argUnit[0].equal(argUnit[1], true);
+          if (!isEqual0) {
+            let unitsExpr = `${argUnit[0].toString()} vs ${argUnit[1].toString()}`;
+            logger.warn(`Units inconsistency in ifgt-like finction for "${record.index}" here "${this.toString()}" : "${unitsExpr}"`);
+          }
+          let isEqual = argUnit[2].equal(argUnit[3], true);
+          if (!isEqual) {
+            let unitsExpr = `${argUnit[2].toString()} vs ${argUnit[3].toString()}`;
+            logger.warn(`Units inconsistency in ifgt-like finction for "${record.index}" here "${this.toString()}" : "${unitsExpr}"`);
+          }
+          return argUnit[2];
         } else {
           throw new Error(`No method calcUnit() for the function : "${this.fn}"`);
         }

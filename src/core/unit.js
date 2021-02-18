@@ -146,15 +146,9 @@ class Unit extends Array {
   power(n = 1){
     if (typeof n !== 'number') throw new TypeError('n in power must be a Number, got' + n);
 
-    let res = this.map((x) => {
-      return {
-        kind: x.kind,
-        multiplier: x.multiplier,
-        exponent: n * x.exponent
-      };
+    return this.map((item) => {
+      return Object.assign({}, item, {exponent: n * item.exponent});
     });
-
-    return res;
   }
   /**
    * Simplify unit expression if it is possible. // only for bound units !

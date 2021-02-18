@@ -27,6 +27,10 @@
 
 ## bugs
 
+- check and, or, xor, not operators
+- test #export for units like 1, [], (1e-3)
+- check boolean or numeric expression in switchers and ternary
+- undeclared record/const in expression result in failure
 
 ## features
 
