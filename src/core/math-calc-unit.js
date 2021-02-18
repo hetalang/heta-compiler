@@ -183,11 +183,6 @@ module.exports = [
           return new Unit();
         } else if (this.fn.name === 'sign') { // sign()
           return new Unit();
-        } else if (this.fn.name === 'exp' || this.fn.name === 'factorial') { // argument must be dimentionless, result is dimentionless
-          if (!argUnitDimensionless[0]) {
-            logger.warn(`Units inconsistency for "${record.index}": the argument must be dimensionless here "${this.toString()}", got "${argUnit[0]}"`);
-          }
-          return new Unit();
         } else if (this.fn.name === 'ifgt' || this.fn.name === 'ifge' || this.fn.name === 'iflt' || this.fn.name === 'ifle' || this.fn.name === 'ifeq') {
           let isEqual0 = argUnit[0].equal(argUnit[1], true);
           if (!isEqual0) {
@@ -200,8 +195,11 @@ module.exports = [
             logger.warn(`Units inconsistency in ifgt-like finction for "${record.index}" here "${this.toString()}" : "${unitsExpr}"`);
           }
           return argUnit[2];
-        } else {
-          throw new Error(`No method calcUnit() for the function : "${this.fn}"`);
+        } else { // first argument must be dimentionless, result is dimentionless: exp, factorial
+          if (!argUnitDimensionless[0]) {
+            logger.warn(`Units inconsistency for "${record.index}": the argument must be dimensionless here "${this.toString()}", got "${argUnit[0]}"`);
+          }
+          return new Unit();
         }
       };
     }
