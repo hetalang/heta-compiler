@@ -75,7 +75,7 @@ module.exports = [
             }
           });
           return argUnit[0];
-        } else if (this.fn === 'larger' || this.fn === 'smaller' || this.fn === 'largerEq' || this.fn === 'smallerEq' || this.fn === 'unequal') { // ">" "<" ">=" "<=" "!="
+        } else if (this.fn === 'larger' || this.fn === 'smaller' || this.fn === 'largerEq' || this.fn === 'smallerEq' || this.fn === 'unequal' || this.fn === 'equal') { // ">" "<" ">=" "<=" "!="
           let isEqual = argUnit[0].equal(argUnit[1], true);
           if (!isEqual) {
             let unitsExpr = argUnit.map((x) => x.toString()).join(' vs ');
@@ -83,6 +83,10 @@ module.exports = [
           }
           return new Unit();
         } else if (this.fn === 'and' || this.fn === 'or' || this.fn === 'xor' || this.fn === 'not') {
+          let someNotUL = argUnitDimensionless.some((x) => !x);
+          if (someNotUL) {
+            logger.warn(`Units inconsistency for "${record.index}" for logical operators here"${this.toString()}", some of them is not dimensionless : "${argUnit}"`);
+          }
           return new Unit();
         } else if (this.fn === 'pow') {
           if (this.args[1].type === 'ConstantNode') { // pow(x, 3)
