@@ -82,6 +82,8 @@ module.exports = [
             logger.warn(`Units inconsistency for "${record.index}" for comparison here "${this.toString()}" : "${unitsExpr}"`);
           }
           return new Unit();
+        } else if (this.fn === 'and' || this.fn === 'or' || this.fn === 'xor' || this.fn === 'not') {
+          return new Unit();
         } else if (this.fn === 'pow') {
           if (this.args[1].type === 'ConstantNode') { // pow(x, 3)
             let n = this.args[1].value;
