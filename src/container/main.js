@@ -128,7 +128,14 @@ class Container {
   checkUnits(){
     this.namespaceStorage.forEach((value) => {
       if (!value.isAbstract) {
+        // check Record.assignments
         value.selectByInstanceOf('Record')
+          .forEach((rec) => rec.checkUnits());
+        // check DSwitcher.trigger
+        value.selectByInstanceOf('DSwitcher')
+          .forEach((rec) => rec.checkUnits());
+        // check CSwitcher.trigger
+        value.selectByInstanceOf('CSwitcher')
           .forEach((rec) => rec.checkUnits());
       }
     });

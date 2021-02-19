@@ -8,7 +8,7 @@ const { Expression } = require('./expression');
   Switcher describing discrete events.
 
   ds1 @DSwitcher {
-    trigger: cond1
+    trigger: S>P
   };
 */
 class DSwitcher extends _Switcher {
@@ -19,6 +19,7 @@ class DSwitcher extends _Switcher {
     
     if (valid) {
       if (typeof q.trigger !== 'undefined') {
+        q.trigger += '';
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
           if (expr.hasBooleanResult()) {
@@ -80,6 +81,20 @@ class DSwitcher extends _Switcher {
         node.nameObj = target;
       }
     });
+  }
+  /*
+  Check units recursively for mathematical expressions
+  Works only for bound switchers
+  */
+  checkUnits(){
+    let logger = this.namespace.container.logger;
+
+    if (typeof this.trigger !== 'undefined') { // skip empty
+      let rightSideUnit = this.trigger.exprParsed.calcUnit(this);
+      if (typeof rightSideUnit === 'undefined') {
+        logger.warn(`Cannot calculate trigger units in "${this.index}".`);
+      }
+    }
   }
 }
 

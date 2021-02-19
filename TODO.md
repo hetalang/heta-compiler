@@ -29,11 +29,11 @@
 
 - support of logical operators in export 
 - test #export for units like 1, [], (1e-3)
-- check boolean or numeric expression in switchers and ternary
-- undeclared record/const in expression result in failure
+- check boolean or numeric expression in Record and ternary
 
 ## features
 
+- AnyUnit for zero numbers
 - Export to SBML without standard units like _litre
 - xlsx module: many tables in one #include, table numeration from 0
 - multispace export in Matlab

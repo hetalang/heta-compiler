@@ -158,7 +158,7 @@ class Record extends _Size {
   }
   /*
   Check units recursively for mathematical expressions
-  Works only for binded records
+  Works only for bound records
   */
   checkUnits(){
     let logger = this.namespace.container.logger;
@@ -180,7 +180,6 @@ class Record extends _Size {
         }
       }
     }
-
   }
   _references(){
     let classSpecificRefs = _.chain(this.assignments)

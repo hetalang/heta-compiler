@@ -214,9 +214,7 @@ module.exports = [
         const logger = record.namespace.container.logger;
         if (this.name === 'e' || this.name === 'pi')
           return new Unit(); // dimensionless
-        if (typeof this.nameObj === 'undefined') // XXX: maybe logger.warn is better solution
-          throw new Error(`No reference to _Size for id ${this.name} inside the expression.`);
-        if (typeof this.nameObj.unitsParsed === 'undefined') {
+        if (!this.nameObj || typeof this.nameObj.unitsParsed === 'undefined') {
           logger.warn(`Cannot check units consistency for "${record.index}" because no units found for "${this.name}"`);
           return undefined; // BRAKE
         } else {

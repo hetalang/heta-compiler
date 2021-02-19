@@ -98,10 +98,12 @@ class Expression {
     ];
     let expr = _removeParenthesis(this.exprParsed);
 
-    let isBoolean = expr.type === 'OperatorNode'
-      && operators.indexOf(expr.fn) !== -1; 
+    let isBooleanOperator = expr.type === 'OperatorNode'
+      && operators.indexOf(expr.fn) !== -1;
+    let isBooleanValue = expr.type === 'ConstantNode'
+      && [true, false].indexOf(expr.value) !== -1;
 
-    return isBoolean;
+    return isBooleanOperator || isBooleanValue;
   }
   // check if expression includes boolean operators: "and", "or", etc. 
   get isComparison(){

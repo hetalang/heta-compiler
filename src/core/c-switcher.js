@@ -79,6 +79,20 @@ class CSwitcher extends _Switcher {
       }
     });
   }
+  /*
+  Check units recursively for mathematical expressions
+  Works only for bound switchers
+  */
+  checkUnits(){
+    let logger = this.namespace.container.logger;
+
+    if (typeof this.trigger !== 'undefined') { // skip empty
+      let rightSideUnit = this.trigger.exprParsed.calcUnit(this);
+      if (typeof rightSideUnit === 'undefined') {
+        logger.warn(`Cannot calculate trigger units in "${this.index}".`);
+      }
+    }
+  }
 }
 
 CSwitcher._requirements = {

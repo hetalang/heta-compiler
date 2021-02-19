@@ -293,7 +293,12 @@
     "DSwitcherP": {
       "type": "object",
       "properties": {
-        "trigger": { "$ref": "#/definitions/ExprString" }
+        "trigger": {
+          "oneOf": [
+            { "$ref": "#/definitions/ExprString" },
+            { "type": "boolean" }
+          ]
+        }
       }
     },
 
