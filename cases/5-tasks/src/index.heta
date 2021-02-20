@@ -2,13 +2,14 @@
   This case is based on 0-hello-world but with @Task
 */
 
-// this block unites element with the same class
-block @Const begin
-  Vmax = 0.1; // this is global constant available for any scoped equation
-  Km = 2.5;
-end
+#include {source: qsp-units.heta};
 
 namespace mm begin
+  block @Const begin
+    Vmax = 0.1 {units: uM/minute}; // this is global constant available for any scoped equation
+    Km = 2.5 {units: uM};
+  end
+
   '''Note for the Default compartment'''
   default_comp @Compartment { title: Default compartment, units: L };
   default_comp .= 1;
@@ -19,7 +20,7 @@ namespace mm begin
   r1 @Reaction {
     title: Michaelis-Menten reaction,
     actors: S -> P,
-    units: umole/min
+    units: umole/minute
   };
 
   r1 := Vmax*S/(Km+S)*default_comp; // S is used here but assigned below

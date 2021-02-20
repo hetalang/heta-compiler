@@ -29,6 +29,11 @@
   },
   {
     "space": "one_comp",
+    "action": "importNS",
+    "fromSpace": "nameless"
+  },
+  {
+    "space": "one_comp",
     "id": "a0",
     "class": "Species",
     "compartment": "comp0",
@@ -112,6 +117,11 @@
   },
   {
     "space": "one_comp_saturation",
+    "action": "importNS",
+    "fromSpace": "nameless"
+  },
+  {
+    "space": "one_comp_saturation",
     "id": "a0",
     "class": "Species",
     "compartment": "comp0",
@@ -169,7 +179,7 @@
     "space": "one_comp_saturation",
     "id": "vel",
     "assignments": {
-      "ode_": "Vmax*s1*comp1/(Km+s1)"
+      "ode_": "Vmax*s1*comp1/(Km + s1)"
     },
     "action": "upsert"
   },

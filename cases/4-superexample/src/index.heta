@@ -25,7 +25,7 @@ namespace mod1 begin
 
   comp1 @Compartment { units: litre };
   comp1 .= 5;
-  comp2 @Compartment { units: liter };
+  comp2 @Compartment { units: litre };
   comp2 := p1;
 
   sp1 @Species { compartment: comp1, isAmount: false };
@@ -65,5 +65,5 @@ end
 #export {spaceFilter: mod1, filepath: mod1_simbio, format: Simbio};
 #export {spaceFilter: mod1, filepath: json, format: JSON};
 #export {spaceFilter: mod1, filepath: yaml, format: YAML};
-#export {spaceFilter: mod1, filepath: mod1_slv, format: SLV};
+#export {spaceFilter: mod1, filepath: mod1_slv, format: DBSolve};
 #export {spaceFilter: mod1, filepath: mod1_mrg, format: Mrgsolve};

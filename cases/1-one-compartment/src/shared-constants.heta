@@ -6,6 +6,8 @@ block @Const begin
 end
 
 namespace one_comp begin
+  #importNS {fromSpace: nameless};
+
   a0 @Species {compartment: comp0, isAmount: true};
   s1 @Species {compartment: comp1};
   comp0 @Compartment .= 1;
@@ -20,6 +22,8 @@ namespace one_comp begin
 end
 
 namespace one_comp_saturation begin
+  #importNS {fromSpace: nameless};
+  
   a0 @Species {compartment: comp0, isAmount: true};
   s1 @Species {compartment: comp1};
   comp0 @Compartment .= 1;

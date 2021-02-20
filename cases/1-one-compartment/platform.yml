@@ -3,6 +3,7 @@ builderVersion: '*'
 options:
   logLevel: info
   debug: true
+  skipUnitsCheck: true
 importModule:
   type: heta
   source: src/shared-constants.heta
