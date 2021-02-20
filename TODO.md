@@ -27,7 +27,7 @@
 
 ## bugs
 
-- support of logical operators in export 
+- support of logical operators in export
 - test #export for units like 1, [], (1e-3)
 - check boolean or numeric expression in Record and ternary
 

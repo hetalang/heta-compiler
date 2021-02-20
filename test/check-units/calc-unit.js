@@ -119,14 +119,14 @@ describe('Testing checkUnits() for components', () => {
     expect(unit).to.be.equal('1');
   });
 
-  it('functions: pabs ceil floor', () => {
+  it('functions: abs ceil floor', () => {
     let y4 = p.namespaceStorage.get('nameless').get('y4');
     let expr = y4.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y4).toString();
     expect(unit).to.be.equal('mM');
   });
 
-  it('functions: pabs ceil floor', () => {
+  it('functions: max min', () => {
     let y5 = p.namespaceStorage.get('nameless').get('y5');
     let expr = y5.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y5).toString();
@@ -154,7 +154,7 @@ describe('Testing checkUnits() for components', () => {
     expect(unit).to.be.equal('1');
   });
 
-  it('functions: log', () => {
+  it('functions: sign', () => {
     let y9 = p.namespaceStorage.get('nameless').get('y9');
     let expr = y9.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y9).toString();

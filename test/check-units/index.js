@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const { Container } = require('../../src');
 
 let qArr = [
-  {action: 'defineUnit', id: 'mM', units: '(1e-6 mole)/litre'},
+  {action: 'defineUnit', id: 'mM', units: '(1e-3 mole)/litre'},
   {id: 'k1', class: 'Const', units: '1', num:  1e-3},
   {id: 'k2', class: 'Const', units: 'mM', num:  1.5},
   {id: 'x1', class: 'Record', units: 'mM', assignments: {start_: 1}},
