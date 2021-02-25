@@ -114,7 +114,7 @@ describe('Testing warnings of checkUnits()', () => {
     let x2 = p.namespaceStorage.get('nameless').get('x2b');
     let expr = x2.assignments.start_.exprParsed;
     let unit = expr.calcUnit(x2);
-    expect(unit.toString()).to.be.equal('1');
+    expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // power arguments must be dimensionless
     p.defaultLogs.length = 0; // RESET
   });
@@ -123,7 +123,7 @@ describe('Testing warnings of checkUnits()', () => {
     let x5 = p.namespaceStorage.get('nameless').get('x5');
     let expr = x5.assignments.start_.exprParsed;
     let unit = expr.calcUnit(x5);
-    expect(unit.simplify().toString()).to.be.equal('(1e-3 )');
+    expect(unit.simplify().toString()).to.be.equal('(1e-3 dimensionless)');
     expect(p.defaultLogs).to.be.lengthOf(1);
     p.defaultLogs.length = 0; // RESET
   });
@@ -132,7 +132,7 @@ describe('Testing warnings of checkUnits()', () => {
     let sw3 = p.namespaceStorage.get('nameless').get('sw3');
     let expr = sw3.trigger.exprParsed;
     let unit = expr.calcUnit(sw3);
-    expect(unit.toString()).to.be.equal('1');
+    expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(2); // inconsistency "mM vs 1" "mM vs mole/litre"
     p.defaultLogs.length = 0; // RESET
   });
@@ -195,7 +195,7 @@ describe('Testing warnings of checkUnits()', () => {
     let y2 = p.namespaceStorage.get('nameless').get('y2b');
     let expr = y2.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y2);
-    expect(unit.toString()).to.be.equal('1');
+    expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // power arguments must be dimensionless
     p.defaultLogs.length = 0; // RESET
   });
@@ -231,7 +231,7 @@ describe('Testing warnings of checkUnits()', () => {
     let y7 = p.namespaceStorage.get('nameless').get('y7');
     let expr = y7.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y7);
-    expect(unit.toString()).to.be.equal('1');
+    expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // arguments must be dimensionless
     p.defaultLogs.length = 0; // RESET
   });
@@ -240,7 +240,7 @@ describe('Testing warnings of checkUnits()', () => {
     let y8 = p.namespaceStorage.get('nameless').get('y8');
     let expr = y8.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y8);
-    expect(unit.toString()).to.be.equal('1');
+    expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); //second arguments of log() must be dimensionless
     p.defaultLogs.length = 0; // RESET
   });
@@ -249,7 +249,7 @@ describe('Testing warnings of checkUnits()', () => {
     let y9 = p.namespaceStorage.get('nameless').get('y9');
     let expr = y9.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y9).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // "(1e-3 mole)/litre vs 1"
     p.defaultLogs.length = 0; // RESET
   });

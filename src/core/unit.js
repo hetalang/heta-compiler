@@ -24,19 +24,8 @@ class Unit extends Array {
     obj.forEach((x) => {
       if (typeof x.kind !== 'string')
         throw new TypeError('kind property must be string.');
-      /* TODO: this is better solution but it does not work
-      if (!(x.kind === '' && (x.multiplier === 1 || x.multiplier === undefined))) { // do not push unitless
-        res.push({
-          kind: x.kind,
-          multiplier: x.multiplier !== undefined ? x.multiplier : 1,
-          exponent: x.exponent !== undefined ? x.exponent : 1,
-        });
-      }
-      */
-      if (!(x.kind === '' && (x.multiplier === 1 || x.multiplier === undefined))) { // do not push unitless
-        _.defaults(x, { multiplier: 1, exponent: 1 });
-        res.push(x);
-      }
+      _.defaults(x, { multiplier: 1, exponent: 1 });
+      res.push(x);
     });
 
     return res;
@@ -56,6 +45,7 @@ class Unit extends Array {
   }
   // transform any proper complex units to the another unit structure which includes only units from the list
   // only for bound units !
+  // rebased units are not bound
   rebase(legalUnits = []){
     let unit = new Unit();
 
@@ -86,6 +76,7 @@ class Unit extends Array {
     return unit;
   }
   // primitive units are units without internal "units" property
+  // only for bound units !
   rebaseToPrimitive(){
     let unit = new Unit();
 
@@ -159,7 +150,7 @@ class Unit extends Array {
    * If if exponent == 0, create dimensionless element to store multiplier
    * if dimensionless element is trivial remove it
    */
-  simplify(dimensionlessKind = '') {
+  simplify(dimensionlessKind = 'dimensionless') {
     // group by kind, combine elements inside kind
     // then transform to regular array
     let group = _.chain(this)
@@ -237,14 +228,14 @@ class Unit extends Array {
       let matcher = /^([/*]?)[(]?(\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)?([A-Za-z]*)[)]?\^?(\d+(?:\.?\d*)?)?$/;
       let mmm = item.match(matcher);
 
-      let kind = mmm[3];
+      let kind = mmm[3] === '' ? 'dimensionless' : mmm[3];
       let pow = mmm[4] === undefined ? 1 : mmm[4];
       let exponent = mmm[1] === '/' // searching constructions "1/L", "/L"
         ? (-1) * pow
         : 1 * pow;
       let multiplier = mmm[2] === undefined ? 1 : parseFloat(mmm[2]);
 
-      if (!(kind === '' && multiplier === 1)) { // skip dimentionless without multiplier
+      if (!(kind === 'dimensionless' && multiplier === 1)) { // skip dimensionless without multiplier
         unit.push({
           kind: kind,
           exponent: exponent,
@@ -257,13 +248,13 @@ class Unit extends Array {
   }
 
   /**
-   * Serialize unit-object to identificator.
+   * Serialize unit-object to identifier.
    *
    * @return {string} of type '\_mM2_L\__mg\__h2'
    */
   toHash(){
     if (this.length === 0) {
-      return '_1';
+      return '_dimensionless';
     } else {
       return this.concat([]) // clone array to exclude mutation
         .sort((x1, x2) => x1.kind > x2.kind ? -1 : 1) // sort by kind id
@@ -299,38 +290,49 @@ class Unit extends Array {
    * @return {string} of format: 'mM2*L/mg/h2'
    */
   toString(usePrefix = false){
-    if (this.length === 0) {
-      return '1';
-    } else {
-      return this
-        //.filter((x) => x.kind !== '') // remove unitless
-        .map((item, i) => {
-          if (item.multiplier === 1) {
+
+    // set an element not to be empty
+    let normalizedUnit = this.length === 0 
+      ? [{kind: 'dimensionless', multiplier: 1, exponent: 1}] // not a Unit actually
+      : this;
+
+    return normalizedUnit
+      .map((item, i) => {
+        if (!usePrefix) { // without prefix
+          // currently all outputs normalized to dimensionless
+          /*if (item.kind === 'dimensionless' && item.multiplier === 1) {
+            kindUpd = '1';
+          } else if (item.kind === 'dimensionless') {
+            kindUpd = '(' + item.multiplier.toExponential() + ' )'; // TODO: remove space if kind is empty
+          } else */if (item.multiplier === 1) { 
             var kindUpd = item.kind;
-          } else if (usePrefix) {
+          } else {
+            kindUpd = '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
+          }
+        } else { // with prefix
+          if (item.multiplier === 1) {
+            kindUpd = item.kind;
+          } else {
             let exponential = item.multiplier.toExponential(8); // round to 8 digits
             let pref = _.get(prefixes, exponential);
             if (pref === undefined) 
               throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
-
             kindUpd = pref + item.kind;
-          } else {
-            kindUpd = '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
           }
+        }
 
-          let operator = (item.exponent<0)
-            ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
-            : ( (i>0) ? '*' : '' ); // no operator for first element
+        let operator = item.exponent < 0
+          ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
+          : ( (i>0) ? '*' : '' ); // no operator for first element
 
-          let expAbs = Math.abs(item.exponent); // absolute value
-          let exponent = (expAbs!==1)
-            ? '^' + expAbs
-            : '';
+        let expAbs = Math.abs(item.exponent); // absolute value
+        let exponent = (expAbs!==1)
+          ? '^' + expAbs
+          : '';
 
-          return operator + kindUpd + exponent;
-        })
-        .join('');
-    }
+        return operator + kindUpd + exponent;
+      })
+      .join('');
   }
   
   /**
@@ -346,9 +348,15 @@ class Unit extends Array {
         .filter((item) => item.exponent > 0)
         .map((item) => {
           let expAbs = Math.abs(item.exponent); // absolute value
-          let multKind = (item.multiplier === 1 || item.multiplier === undefined)
-            ? item.kind
-            : `(${item.multiplier.toExponential()} ${item.kind})`;
+          if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
+            var multKind = '1';
+          } else if (item.kind === 'dimensionless') {
+            multKind = `(${item.multiplier.toExponential()})`;
+          } else if (item.multiplier === 1 || item.multiplier === undefined) {
+            multKind = item.kind;
+          } else {
+            multKind = `(${item.multiplier.toExponential()} ${item.kind})`;
+          }
           let exponent = (expAbs !== 1)
             ? '^{' + expAbs + '}'
             : '';
@@ -360,10 +368,19 @@ class Unit extends Array {
         .filter((item) => item.exponent < 0)
         .map((item) => {
           let expAbs = Math.abs(item.exponent); // absolute value
+          if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
+            var multKind = '1';
+          } else if (item.kind === 'dimensionless') {
+            multKind = `(${item.multiplier.toExponential()})`;
+          } else if (item.multiplier === 1 || item.multiplier === undefined) {
+            multKind = item.kind;
+          } else {
+            multKind = `(${item.multiplier.toExponential()} ${item.kind})`;
+          }
           let exponent = (expAbs!==1)
             ? '^{' + expAbs + '}'
             : '';
-          return item.kind + exponent;
+          return multKind + exponent;
         })
         .join(' \\cdot ');
 
@@ -394,9 +411,16 @@ class Unit extends Array {
             ? ( i > 0 ? '/' : '1/' ) // 1 for 1/L
             : ( i > 0 ? '&times;' : '' ); // no operator for first element
 
-          let multKind = (item.multiplier === 1 || item.multiplier === undefined)
-            ? item.kind
-            : `(${item.multiplier.toExponential()} ${item.kind})`;
+          if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
+            var multKind = '1';
+          } else if (item.kind === 'dimensionless') {
+            multKind = `(${item.multiplier.toExponential()})`;
+          } else if (item.multiplier === 1 || item.multiplier === undefined) {
+            multKind = item.kind;
+          } else {
+            multKind = `(${item.multiplier.toExponential()} ${item.kind})`;
+          }
+
           let expAbs = Math.abs(item.exponent); // absolute value
           let exponent = expAbs !== 1
             ? '<sup>' + expAbs + '</sup>'
@@ -499,13 +523,20 @@ class Unit extends Array {
   }
 }
 
-function unitComponentToHTML(u, spaceSymbol = '&#160;', minusSymbol = '&#8722;'){
-  let base = u.multiplier === 1
-    ? u.kind
-    : `(${u.multiplier.toExponential()}${spaceSymbol}${u.kind})`.replace('-', minusSymbol);
-  let full = u.exponent === 1
-    ? base
-    : `${base}<sup>${u.exponent}</sup>`;
+function unitComponentToHTML(item, spaceSymbol = '&#160;', minusSymbol = '&#8722;'){
+  
+  if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
+    var multKind = '1';
+  } else if (item.kind === 'dimensionless') {
+    multKind = `(${item.multiplier.toExponential()})`;
+  } else if (item.multiplier === 1 || item.multiplier === undefined) {
+    multKind = item.kind;
+  } else {
+    multKind = `(${item.multiplier.toExponential()}${spaceSymbol}${item.kind})`;
+  }
+  let full = item.exponent === 1
+    ? multKind
+    : `${multKind}<sup>${item.exponent}</sup>`;
 
   return full;
 }

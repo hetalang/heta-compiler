@@ -60,7 +60,7 @@ describe('Testing checkUnits() for components', () => {
     let x2 = p.namespaceStorage.get('nameless').get('x3');
     let expr = x2.assignments.start_.exprParsed;
     let unit = expr.calcUnit(x2).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
   
   it('number in expression: 15*k2', () => {
@@ -74,28 +74,28 @@ describe('Testing checkUnits() for components', () => {
     let x5 = p.namespaceStorage.get('nameless').get('x5');
     let expr = x5.assignments.start_.exprParsed;
     let unit = expr.calcUnit(x5).simplify().toString();
-    expect(unit).to.be.equal('(1e-3 )');
+    expect(unit).to.be.equal('(1e-3 dimensionless)');
   });
 
   it('operators: and or xor not', () => {
     let sw1 = p.namespaceStorage.get('nameless').get('sw1');
     let expr = sw1.trigger.exprParsed;
     let unit = expr.calcUnit(sw1).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
 
   it('constants: true false', () => {
     let sw2 = p.namespaceStorage.get('nameless').get('sw2');
     let expr = sw2.trigger.exprParsed;
     let unit = expr.calcUnit(sw2).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
   
   it('constants: > < >= <= == !=', () => {
     let sw3 = p.namespaceStorage.get('nameless').get('sw3');
     let expr = sw3.trigger.exprParsed;
     let unit = expr.calcUnit(sw3).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
   
   it('functions: add, substract, multiply, divide', () => {
@@ -116,7 +116,7 @@ describe('Testing checkUnits() for components', () => {
     let y3 = p.namespaceStorage.get('nameless').get('y3');
     let expr = y3.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y3).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
 
   it('functions: abs ceil floor', () => {
@@ -151,14 +151,14 @@ describe('Testing checkUnits() for components', () => {
     let y8 = p.namespaceStorage.get('nameless').get('y8');
     let expr = y8.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y8).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
 
   it('functions: sign', () => {
     let y9 = p.namespaceStorage.get('nameless').get('y9');
     let expr = y9.assignments.start_.exprParsed;
     let unit = expr.calcUnit(y9).toString();
-    expect(unit).to.be.equal('1');
+    expect(unit).to.be.equal('dimensionless');
   });
 
   it('functions: ifgt etc', () => {

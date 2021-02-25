@@ -6,20 +6,20 @@ const correctUnits = [
   {
     str0: '(1)',
     q: [],
-    str: '1',
-    strPrefix: '1'
+    str: 'dimensionless',
+    strPrefix: 'dimensionless'
   },
   {
     str0: '(1)^2*(1)',
     q: [],
-    str: '1',
-    strPrefix: '1'
+    str: 'dimensionless',
+    strPrefix: 'dimensionless'
   },
   {
     str0: '(1e-3)^2',
-    q: [{kind: '', multiplier: 1e-3, exponent: 2}],
-    str: '(1e-3 )^2',
-    strPrefix: 'milli^2'
+    q: [{kind: 'dimensionless', multiplier: 1e-3, exponent: 2}],
+    str: '(1e-3 dimensionless)^2',
+    strPrefix: 'millidimensionless^2'
   },
   {
     str0: 'L*mg2',

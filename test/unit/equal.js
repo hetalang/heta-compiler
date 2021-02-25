@@ -55,44 +55,44 @@ describe('Check Unit.equal(...)', () => {
     expect(isEqual).to.be.true;
   });
 
-  // dimentionless units
+  // dimensionless units
 
-  it('dimentionless equal no rebase', () => {
+  it('dimensionless equal no rebase', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     let k2 = p.namespaceStorage.get('nameless').get('k2');
     let isEqual = k1.unitsParsed.equal(k2.unitsParsed, false);
     expect(isEqual).to.be.true;
   });
 
-  it('dimentionless not equal no rebase', () => {
+  it('dimensionless not equal no rebase', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     let k3 = p.namespaceStorage.get('nameless').get('k3');
     let isEqual = k1.unitsParsed.equal(k3.unitsParsed, false);
     expect(isEqual).to.be.false;
   });
 
-  it('dimentionless not equal no rebase 2', () => {
+  it('dimensionless not equal no rebase 2', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     let k4 = p.namespaceStorage.get('nameless').get('k4');
     let isEqual = k1.unitsParsed.equal(k4.unitsParsed, false);
-    expect(isEqual).to.be.false;
+    expect(isEqual).to.be.true;
   });
   
-  it('dimentionless equal rebase', () => {
+  it('dimensionless equal rebase', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     let k2 = p.namespaceStorage.get('nameless').get('k2');
     let isEqual = k1.unitsParsed.equal(k2.unitsParsed, true);
     expect(isEqual).to.be.true;
   });
 
-  it('dimentionless equal rebase 2', () => {
+  it('dimensionless equal rebase 2', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     let k3 = p.namespaceStorage.get('nameless').get('k3');
     let isEqual = k1.unitsParsed.equal(k3.unitsParsed, true);
     expect(isEqual).to.be.true;
   });
 
-  it('dimentionless equal rebase 3', () => {
+  it('dimensionless equal rebase 3', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     let k4 = p.namespaceStorage.get('nameless').get('k4');
     let isEqual = k1.unitsParsed.equal(k4.unitsParsed, true);

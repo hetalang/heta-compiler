@@ -47,7 +47,7 @@ describe('Test operations for Unit', () => {
       { kind: 'kg', multiplier: 1e3, exponent: 1 }, // (1e3 kg)
       { kind: 'kg', multiplier: 1e-1, exponent: -1 } // 1/(1e-1 kg)
     ],
-    res2: [{ kind: '', multiplier: 1e4, exponent: 1 }], // 1e4
+    res2: [{ kind: 'dimensionless', multiplier: 1e4, exponent: 1 }], // 1e4
   };
 
   it('Check simplify 1:', () => {

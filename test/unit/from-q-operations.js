@@ -5,21 +5,21 @@ const { Unit } = require('../../src/core/unit');
 const correctUnits = [
   {
     source: [],
-    targetString: '1',
-    targetHash: '_1',
+    targetString: 'dimensionless',
+    targetHash: '_dimensionless',
     targetHTML2: '<div class="unit-mult" style="display:inline-block">1</div>'
   },
   {
-    source: [{kind: ''}],
-    targetString: '1',
-    targetHash: '_1',
+    source: [{kind: 'dimensionless'}],
+    targetString: 'dimensionless',
+    targetHash: '_dimensionless',
     targetHTML2: '<div class="unit-mult" style="display:inline-block">1</div>'
   },
   {
-    source: [{kind: '', multiplier: 1e-3}],
-    targetString: '(1e-3 )',
-    targetHash: '_1n3',
-    targetHTML2: '<div class="unit-mult" style="display:inline-block">(1e-3 )</div>'
+    source: [{kind: 'dimensionless', multiplier: 1e-3}],
+    targetString: '(1e-3 dimensionless)',
+    targetHash: '_1n3dimensionless',
+    targetHTML2: '<div class="unit-mult" style="display:inline-block">(1e-3)</div>'
   },
   {
     source: [

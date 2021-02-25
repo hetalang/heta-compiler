@@ -8,7 +8,9 @@ const qArr = [
   {action: 'insert', class: 'Const', id: 'k1', num: 1, units: [{kind: 'dimensionless'}]},
   {action: 'insert', class: 'Const', id: 'k2', num: 1, units: [{kind: 'UL'}]},
   {action: 'insert', class: 'Const', id: 'k3', num: 1, units: []},
-  {action: 'defineUnit', id: 'UL', units: [{kind: 'dimensionless'}]}
+  {action: 'defineUnit', id: 'UL', units: [{kind: 'dimensionless'}]},
+  {action: 'defineUnit', id: 'percent', units: [{kind: 'dimensionless', multiplier: 1e-2}]},
+  {action: 'insert', class: 'Const', id: 'k4', num: 2, units: 'percent'}
 ];
 
 describe('Check Unit.rebaseToPrimitive()', () => {
@@ -41,24 +43,31 @@ describe('Check Unit.rebaseToPrimitive()', () => {
     expect(rebased.toString()).to.be.equal('(1e-3 mole)^2/litre^2');
   });
   
-  it('dimentionless to primitive', () => {
+  it('dimensionless to primitive', () => {
     let k1 = p.namespaceStorage.get('nameless').get('k1');
     expect(k1.units).to.be.equal('dimensionless');
     let rebased = k1.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('1');
+    expect(rebased.toString()).to.be.equal('dimensionless');
   });
   
   it('UL to primitive', () => {
     let k2 = p.namespaceStorage.get('nameless').get('k2');
     expect(k2.units).to.be.equal('UL');
     let rebased = k2.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('1');
+    expect(rebased.toString()).to.be.equal('dimensionless');
   });
   
   it('[] to primitive', () => {
     let k3 = p.namespaceStorage.get('nameless').get('k3');
-    expect(k3.units).to.be.equal('1');
+    expect(k3.units).to.be.equal('dimensionless');
     let rebased = k3.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('1');
+    expect(rebased.toString()).to.be.equal('dimensionless');
+  });
+
+  it('percent to primitive', () => {
+    let k4 = p.namespaceStorage.get('nameless').get('k4');
+    expect(k4.units).to.be.equal('percent');
+    let rebased = k4.unitsParsed.rebaseToPrimitive();
+    expect(rebased.toString()).to.be.equal('(1e-2 dimensionless)');
   });
 });
