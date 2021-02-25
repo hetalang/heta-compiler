@@ -81,23 +81,26 @@ class Record extends _Size {
     }
     
     // check math expression refs
-    _.each(this.assignments, (mathExpr, key) => {
-      this
-        .dependOn(key)
-        .forEach((id) => {
-          let target = namespace.get(id);
-
+    for (const key in this.assignments) {
+      let mathExpr = this.assignments[key];
+      mathExpr.dependOnNodes()
+        .forEach((node) => {
+          let target = namespace.get(node.name);
           if (!target) {
-            let msg = `Component "${id}" is not found in space "${this.space}" as expected in expression: `
+            let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in expression: `
                   + `${this.index} [${key}]= ${mathExpr.toString()};`;
             logger.error(msg, {type: 'BindingError', space: this.space});
+            this.errored = true;
           } else if (!target.instanceOf('Const') && !target.instanceOf('Record')) {
-            let msg = `Component "${id}" is not a Const or Record class as expected in expression: `
+            let msg = `Component "${node.name}" is not a Const or Record class as expected in expression: `
               + `${this.index} [${key}]= ${mathExpr.toString()};`;
             logger.error(msg, {type: 'BindingError', space: this.space});
+            this.errored = true;
+          } else {
+            node.nameObj = target;
           }
         });
-    });
+    }
   }
   toQ(options = {}){
     let res = super.toQ(options);
@@ -133,17 +136,9 @@ class Record extends _Size {
 
     let assignment = _.get(this, 'assignments.' + context);
     if (this.isRule) {
-      let deps = this.assignments.ode_ // top priority in context
-        .exprParsed
-        .getSymbols();
-      _.pull(deps, 't', 'e', 'pi');
-      return deps;
+      return this.assignments.ode_.dependOn(); // top priority in context
     } else if (assignment !== undefined) {
-      let deps = assignment
-        .exprParsed
-        .getSymbols();
-      _.pull(deps, 't', 'e', 'pi'); // remove t from dependence
-      return deps;
+      return assignment.dependOn(); // remove t from dependence
     } else {
       return [];
     }
@@ -161,14 +156,34 @@ class Record extends _Size {
     //}
     return assignment;
   }
+  /*
+  Check units recursively for mathematical expressions
+  Works only for bound records
+  */
+  checkUnits(){
+    let logger = this.namespace.container.logger;
+
+    let leftSideUnit = this.unitsParsed;
+    if (typeof leftSideUnit === 'undefined') {
+      logger.warn(`No units set for "${this.index}"`);
+    }
+    for (const scope in this.assignments) {
+      let rightSideExpr = this.assignments[scope];
+      if (typeof rightSideExpr.num === 'undefined') { // skip numbers
+        let rightSideUnit = rightSideExpr.exprParsed.calcUnit(this);
+        if (typeof rightSideUnit === 'undefined') {
+          logger.warn(`Cannot calculate right side units in "${this.index}" for scope "${scope}".`);
+        } else if (leftSideUnit && !leftSideUnit.equal(rightSideUnit, true)) {
+          let leftUnitString = leftSideUnit.toString();
+          let rightUnitString = rightSideUnit.simplify().toString();
+          logger.warn(`Units inconsistency in "${this.index}" for scope "${scope}". Left: "${leftUnitString}". Right: "${rightUnitString}"`);
+        }
+      }
+    }
+  }
   _references(){
     let classSpecificRefs = _.chain(this.assignments)
-      .map((expression) => {
-        let deps = expression.exprParsed.getSymbols();
-        _.pull(deps, 't', 'e', 'pi');
-        
-        return deps;
-      })
+      .map((expression) => expression.dependOn())
       .flatten()
       .value();
 

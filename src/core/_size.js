@@ -20,15 +20,18 @@ class _Size extends Component {
     super.merge(q);
     let logger = _.get(this, 'namespace.container.logger');
     let valid = _Size.isValid(q, logger);
-
     if (valid) {
       if (q.units) {
-        if (typeof q.units === 'string')
+        if (q.units === 1) {
+          this.unitsParsed = new Unit();
+        } else if (typeof q.units === 'string') {
           this.unitsParsed = Unit.parse(q.units);
-        else
+        } else {
           this.unitsParsed = Unit.fromQ(q.units);
+        }
       }
     }
+    
 
     return this;
   }
@@ -50,21 +53,17 @@ class _Size extends Component {
   bind(namespace){
     super.bind(namespace);
     let logger = this.namespace.container.logger;
+    let storage = this.namespace.container.unitDefStorage;
 
     if (this.unitsParsed) {
       this.unitsParsed.forEach((x) => {
-        let target = namespace.get(x.kind);
+        let target = storage.get(x.kind);
         
         if (!target) {
-          let msg = `Unit "${x.kind}" is not found as expected here: `
+          let msg = `UnitDef "${x.kind}" is not found as expected here: `
             + `${this.index} { units: ${this.units} };`;
-          logger.error(msg, {type: 'BindingError', space: this.space});
-        } else if (!target.instanceOf('UnitDef')){
-          let msg = `Unit "${x.kind}" is not of UnitDef class as expected here: `
-            + `${this.index} { units: ${this.units} };`;
-          logger.error(msg, {type: 'BindingError', space: this.space});
+          logger.error(msg, {type: 'BindingError'});
         } else {
-          // kindObj can be set here
           x.kindObj = target;
         }
       });

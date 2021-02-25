@@ -3,8 +3,14 @@ const { expect } = require('chai');
 const { Unit } = require('../../src/core/unit');
 
 const correctUnits = [
+  {str0: 1, str: 'dimensionless', hash: '_dimensionless', tex: '1', html: '1'},
+  {str0: '1*1', str: 'dimensionless', hash: '_dimensionless', tex: '1', html: '1'},
+  {str0: '1/1', str: 'dimensionless', hash: '_dimensionless', tex: '1', html: '1'},
+  {str0: '1^2', str: 'dimensionless', hash: '_dimensionless', tex: '1', html: '1'},
+  {str0: '(1e-3)', str: '(1e-3 dimensionless)', hash: '_1n3dimensionless', tex: '(1e-3)', html: '(1e-3)'},
+  {str0: '1/(1e-3)', str: '1/(1e-3 dimensionless)', hash: '__1n3dimensionless', tex: '\\frac{1}{(1e-3)}', html: '1/(1e-3)'},
   {str0: 'L', str: 'L', hash: '_L', tex: 'L', html: 'L'},
-  {str0: 'mg', str: 'mg', hash: '_mg', tex: 'mg', html: 'mg'},
+  {str0: '1*mg', str: 'mg', hash: '_mg', tex: 'mg', html: 'mg'},
   {str0: 'M', str: 'M', hash: '_M', tex: 'M', html: 'M'},
   {str0: 'nM', str: 'nM', hash: '_nM', tex: 'nM', html: 'nM'},
   {str0: 'nM2', str: 'nM^2', hash: '_nM2', tex: 'nM^{2}', html: 'nM<sup>2</sup>'},

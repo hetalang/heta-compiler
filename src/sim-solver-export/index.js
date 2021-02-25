@@ -1,30 +1,46 @@
-const Container = require('../container');
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const pkg = require('../../package');
 const _ = require('lodash');
 require('./expression'); // to use method toJuliaString()
+const { ajv } = require('../utils');
 
-class SimSolverExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+const schema = {
+  type: 'object',
+  properties: {
+  }
+};
+
+class SimSolverExport extends AbstractExport {
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = SimSolverExport.isValid(q, logger);
+    if (!valid) { this.errored = true; return; }
+
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
       this.spaceFilter = [q.spaceFilter];
     }
-
-    return this;
   }
   get className(){
     return 'SimSolverExport';
   }
+  get format(){
+    return 'SimSolver'
+  }
+  static get validate(){
+    return ajv.compile(schema);
+  }
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   make(skipVersionCode = false){
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     // create image for multiple namespaces
-    let nsImages = [...this.container.namespaces]
+    let nsImages = [...this._container.namespaceStorage]
       .filter((pair) => {
         let allowedByFilter = typeof this.spaceFilter === 'undefined'
           || this.spaceFilter.indexOf(pair[0]) !== -1;
@@ -143,6 +159,4 @@ class SimSolverExport extends _Export {
   }
 }
 
-Container.prototype.exports.SimSolver = SimSolverExport;
-
-module.exports = { SimSolverExport };
+module.exports = SimSolverExport;

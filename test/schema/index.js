@@ -14,17 +14,14 @@ const monteCarloTask = require('./monteCarloTask');
 const monteCarloTaskError = require('./monteCarloTask-error');
 const page = require('./page');
 const pageError = require('./page-error');
-const switcher = require('./c-switcher');
 //const switcherError = require('./c-switcher-error');
 const timeSwitcher = require('./timeSwitcher');
 const timeSwitcherError = require('./timeSwitcher-error');
 
 // unscoped
-const unitDef = require('./unit-def');
 const functionDefinition = require('./function-definition');
 const referenceDefinition = require('./reference-definition');
 const const_ = require('./const');
-const observation = require('./observation');
 
 // scoped
 singleTest('Record', record, recordError);
@@ -35,11 +32,9 @@ singleTest('Page', page, pageError);
 singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
 
 // unscoped
-singleTest('UnitDef', unitDef);
 singleTest('FunctionDefinition', functionDefinition);
 singleTest('ReferenceDefinition', referenceDefinition);
 singleTest('Const', const_);
-singleTest('Observation', observation);
 
 function singleTest(className, checkedArray, errorArray){
   describe(`Test ${className} instances.`, () => {

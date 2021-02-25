@@ -9,7 +9,8 @@
     "debug": false,
     "logs": "output.log",
     "logLevel": "info",
-    "skipExport": false
+    "skipExport": false,
+    "skipUnitsCheck": true
   },
   "importModule": {
     "type": "heta",

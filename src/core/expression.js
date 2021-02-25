@@ -1,6 +1,8 @@
 const math = require('mathjs');
 const mathjsTranslate = require('mathjs-translate');
 math.import(mathjsTranslate);
+const mathCalcUnits = require('./math-calc-unit');
+math.import(mathCalcUnits);
 let { OperatorNode, SymbolNode } = math.expression.node;
 const _ = require('lodash');
 
@@ -96,10 +98,12 @@ class Expression {
     ];
     let expr = _removeParenthesis(this.exprParsed);
 
-    let isBoolean = expr.type === 'OperatorNode'
-      && operators.indexOf(expr.fn) !== -1; 
+    let isBooleanOperator = expr.type === 'OperatorNode'
+      && operators.indexOf(expr.fn) !== -1;
+    let isBooleanValue = expr.type === 'ConstantNode'
+      && [true, false].indexOf(expr.value) !== -1;
 
-    return isBoolean;
+    return isBooleanOperator || isBooleanValue;
   }
   // check if expression includes boolean operators: "and", "or", etc. 
   get isComparison(){
@@ -113,6 +117,22 @@ class Expression {
       && booleanOperators.indexOf(this.exprParsed.fn) !== -1;
 
     return res;
+  }
+  /*
+  Get array of unuque ids from expression
+  */
+  dependOn(){
+    let res = this.dependOnNodes().map((node) => node.name);
+    return _.uniq(res);
+  }
+  /*
+  Get array of all internal elements
+  Approximately the same ad dependsOn() but return Array of objects
+  */
+  dependOnNodes(){
+    return this.exprParsed
+      .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
+      .filter((node) => ['t', 'e', 'pi'].indexOf(node.name) === -1);
   }
 }
 

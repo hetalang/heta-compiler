@@ -135,7 +135,7 @@ class Component {
     }
   }
   static isValid(q, logger){
-    let ind = q.space ? `${q.space}::` : '' + q.id;
+    let ind = q.space ? `${q.space}::${q.id}` : q.id;
 
     let validate = validator
       .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
@@ -266,6 +266,7 @@ class Component {
   }
   /*
   array of direct references inside component (non-unique)
+  ? used insite irt-nav
   */
   references(){
     return _.uniq(this._references());

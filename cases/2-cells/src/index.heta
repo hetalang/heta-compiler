@@ -5,6 +5,8 @@ block @Const begin
 end
 
 namespace invitro begin
+    AXP_neu #import {fromId: AXP_neu, fromSpace: nameless};
+
     include neu.heta
     tot_vol @Compartment []= 0.1; // <L>
 
@@ -21,6 +23,9 @@ namespace invitro begin
 end
 
 namespace invivo begin
+    plasma #import {fromId: plasma, fromSpace: nameless};
+    k_prol #import {fromId: k_prol, fromSpace: nameless};
+
     include neu.heta
 
     blood @Compartment .= 5.2;
@@ -47,8 +52,8 @@ end
 
 #export {spaceFilter: invitro, format: YAML, filepath: yaml_invitro};
 #export {spaceFilter: invivo, format: YAML, filepath: yaml_invivo};
-#export {spaceFilter: invitro, format: SLV, filepath: slv_invitro};
-#export {spaceFilter: invivo, format: SLV, filepath: slv_invivo};
+#export {spaceFilter: invitro, format: DBSolve, filepath: slv_invitro};
+#export {spaceFilter: invivo, format: DBSolve, filepath: slv_invivo};
 #export {spaceFilter: invitro, format: Mrgsolve, filepath: mrg_invitro};
 #export {spaceFilter: invivo, format: Mrgsolve, filepath: mrg_invivo};
 #export {spaceFilter: invitro, format: SBML, filepath: sbml_invitro};

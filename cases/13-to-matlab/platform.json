@@ -6,7 +6,8 @@
   "version": "v0.1.0",
   "license": "UNLICENSED",
   "options": {
-    "debug": true
+    "debug": true,
+    "skipUnitsCheck": true
   },
   "importModule": {
     "type": "heta",

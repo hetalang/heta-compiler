@@ -1,13 +1,8 @@
 /*
   template file for creating platform
 */
-// add qsp units
-//include ./qsp-units.heta
 
-// include module.heta type heta
-// include table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
 include first-model.json type json
-// include addon.yml type yaml
 
 // exports
 #export {
@@ -15,11 +10,10 @@ include first-model.json type json
   spaceFilter: first,
   filepath: sbml, 
   version: L2V4, 
-  skipMathChecking: true
+  skipMathChecking: false
 };
 
 #export {
   filepath: output,
-  format: JSON,
-  spaceFilter: [first]
+  format: JSON
 };

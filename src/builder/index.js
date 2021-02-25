@@ -3,11 +3,11 @@ const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
-const { Container, coreComponents } = require('../index');
+const { Container } = require('../index');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 const _ = require('lodash');
-require('./_export');
+require('./abstract-export');
 require('./xlsx-export');
 
 /**
@@ -41,7 +41,8 @@ class Builder {
     let minLogLevel = _.get(declaration, 'options.logLevel', 'info');
     this.logger.addTransport(new StdoutTransport(minLogLevel));
 
-    // check based on schema XXX: move to heta-build.js ?
+    // check based on schema 
+    // XXX: move to heta-build.js ?
     let validate = ajv.compile(declarationSchema);
     let valid = validate(declaration);
     if (!valid) {
@@ -91,34 +92,41 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(queue, false);
-
-    // 3.5. Load core components into all namespaces
-    [...this.container.namespaces]
-      .forEach((ns) => { 
-        this.logger.info(`Loading core components into "${ns[0]}" namespace, total count: ${coreComponents.length}`);
-        let coreComponents1 = coreComponents.map((q) => {
-          return Object.assign({space: ns[0]}, q);
-        });
-        this.container.loadMany(coreComponents1, true);
-      });
+    //console.log([...this.container.unitDefStorage]); // XXX: debugging
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.knitMany();
-    
-    // 5. Exports
-    if (this.logger.hasErrors) { // check if errors
-      this.logger.warn('Export skipped because of errors in compilation.');
-    } else if (this.options.skipExport) {
-      this.logger.warn('Exporting skipped as stated in declaration.');
-    } else if (this.options.ssOnly) {
-      this.logger.warn('"ss only" mode');
-      this.exportSSOnly();
+
+    // 5. Units checking
+    this.container.checkCircUnitDef();
+    if (this.options.skipUnitsCheck) {
+      this.logger.warn('Checking unit\'s skipped as stated in declaration.');
     } else {
-      this.exportMany();
+      this.logger.info('Checking unit\'s consistency.');
+      this.container.checkUnits();
     }
 
-    // 6.save logs if required
+    // === STOP if errors ===
+    if (!this.logger.hasErrors) {
+      // 6. Terms checking
+      this.logger.info('Checking unit\'s terms.');
+      this.container.checkTerms();
+
+      // 7. Exports
+      if (this.options.skipExport) {
+        this.logger.warn('Exporting skipped as stated in declaration.');
+      } else if (this.options.ssOnly) {
+        this.logger.warn('"ss only" mode');
+        this.exportSSOnly();
+      } else {
+        this.exportMany();
+      }
+    } else {
+      this.logger.warn('Export skipped because of errors in compilation.');
+    }
+
+    // 8. save logs if required
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {
@@ -138,7 +146,7 @@ class Builder {
     return;
   }
   exportMany(){
-    let exportElements = this.container.exportStorage;
+    let exportElements = [...this.container.exportStorage].map((x) => x[1]);
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
     exportElements.forEach((exportItem) => {

@@ -27,14 +27,15 @@
 
 ## bugs
 
+- support of logical operators in export
+- test #export for units like 1, [], (1e-3)
+- check boolean or numeric expression in Record and ternary
 
 ## features
 
-- multispace export in Matlab
-- check units for expressions after compilation
-- #setUnit instead of @UnitDef
-- test empty assignments for @Record + to specifications
 - Export to SBML without standard units like _litre
+- multi-space export in Matlab
+- test empty assignments for @Record + to specifications
 - #move, #moveNS
 - automatic creation of modifiers in SBML
 - parameter switching: see "parameter-swithcing.md"
@@ -42,6 +43,8 @@
 
 ## ideas
 
+- AnyUnit for zero numbers
+- xlsx module: many tables in one #include
 - @Dose class to use with simbiology/mrgsolve/nonmem doses
 - heta update => npm i heta-compiler
 - support null for properties: highlight, parse, heta standard

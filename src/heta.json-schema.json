@@ -13,7 +13,7 @@
      "UnitsExpr": {
        "description": "Unit expression, see qsp-units project.",
        "type": "string",
-       "pattern": "^[_a-zA-Z0-9./*^ ()+-]*$",
+       "pattern": "^[_a-zA-Z0-9./*^ ()+-]+$",
        "example": "1/h * ms"
      },
 
@@ -33,19 +33,6 @@
       "pattern": "[a-zA-Z0-9. -+/*^()]*$"
     },
 
-    "Expression": {
-      "type": "object",
-      "required": ["expr"],
-      "properties": {
-        "expr": {
-          "oneOf": [
-            { "$ref": "#/definitions/ExprString" },
-            { "type": "number"}
-          ]
-        }
-      }
-    },
-
     "AssignmentDict": {
       "description": "Stores initializations as key/value dictionary. Key is switcher when to use. Key is one of Switcher id.",
       "type": "object",
@@ -53,8 +40,7 @@
       "additionalProperties": {
         "oneOf": [
           { "$ref": "#/definitions/ExprString" },
-          { "type": "number"},
-          { "$ref": "#/definitions/Expression" }
+          { "type": "number"}
         ]
       },
       "example": {
@@ -122,7 +108,7 @@
         },
         "boundary": {
           "type": "boolean", "default": false,
-          "description": "If it is true the record cannot be changed by any process, only byexpression in assignments."
+          "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
         },
         "output": {
           "type": "boolean",
@@ -293,7 +279,12 @@
     "DSwitcherP": {
       "type": "object",
       "properties": {
-        "trigger": { "$ref": "#/definitions/ExprString" }
+        "trigger": {
+          "oneOf": [
+            { "$ref": "#/definitions/ExprString" },
+            { "type": "boolean" }
+          ]
+        }
       }
     },
 
@@ -315,34 +306,6 @@
         {
           "required": ["id", "space", "start"],
           "properties": { "class": { "const": "TimeSwitcher" } }
-        }
-      ]
-    },
-
-    "_ExportP": {
-      "type": "object",
-      "properties": {
-        "filepath": { "type": "string" },
-        "groupConstBy": { "type": "string", "pattern": "^[\\w\\d.\\[\\]]+$" },
-        "powTransform": { "type": "string", "enum": ["keep", "function", "operator"] },
-        "omitRows": { "type": "number" },
-        "splitByClass": { "type": "boolean" },
-        "noUnitsExpr": { "type": "boolean" },
-        "version": {"type": "string", "pattern": "^L[123]V[12345]$"},
-        "spaceFilter": { "oneOf": [
-          { "type": "array", "items": { "$ref": "#/definitions/ID" } },
-          { "$ref": "#/definitions/ID" }
-        ]}
-      }
-    },
-
-    "_Export": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ExportP" },
-        {
-          "required": ["id"],
-          "properties": { "class": { "type": "string", "pattern": "[A-Z].*Export"} }
         }
       ]
     },
@@ -374,6 +337,7 @@
        "type": "object",
        "properties": {
          "units": { "anyOf": [
+            { "type": "number", "enum": [1] },
             { "$ref": "#/definitions/UnitsExpr" },
             { "type": "array", "items": { "$ref": "#/definitions/UnitComponent" } }
          ] }
@@ -553,75 +517,6 @@
             }
           }
         }
-      }
-    },
-
-    "ObservationP": {
-      "type": "object",
-      "properties": {
-        "kind": { "type": "string", "enum": ["kinetics"] },
-        "indepDataMarker": { "$ref": "#/definitions/ID" },
-        "depDataMarkers": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/ID" }
-        },
-        "indepData": {
-          "type": "array",
-          "items": { "type": "number" }
-        },
-        "depData": {
-          "type": "array",
-          "items": { "type": "array", "items": { "type": "number" } }
-        }
-      }
-    },
-
-    "Observation": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/ObservationP" },
-        {
-          "required": ["id", "kind"],
-          "properties": { "class": { "const": "Observation" } }
-        }
-      ]
-    },
-
-    "Insert": {
-      "type": "object",
-      "description": "Insert new element. Currently properties are not being checked.",
-      "required": ["action", "class", "id"],
-      "properties": {
-        "action": { "const": "insert" },
-        "class": { "type": "string", "pattern": "^[A-Z]" },
-        "id": { "$ref": "#/definitions/ID" }
-      }
-    },
-
-    "Update": {
-      "type": "object",
-      "description": "Update existed element. Currently properties are not being checked.",
-      "required": ["action", "id"],
-      "properties": {
-        "action": { "const": "update" },
-        "id": { "$ref": "#/definitions/ID" }
-      }
-    },
-
-    "Upsert": {
-      "anyOf": [
-        { "$ref": "#/definitions/Update" },
-        { "$ref": "#/definitions/Insert" }
-      ]
-    },
-
-    "Delete": {
-      "type": "object",
-      "description": "Delete existed element. Currently properties are not being checked.",
-      "required": ["action", "id"],
-      "properties": {
-        "action": { "const": "delete" },
-        "id": { "$ref": "#/definitions/ID" }
       }
     }
 

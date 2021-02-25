@@ -42,10 +42,10 @@ describe('Testing "cases/7-importNS"', () => {
   });
 */
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.container.classes.JSONExport;
+    const JSONExport = b.container._componentClasses.JSONExport;
     let json_export = new JSONExport;
     json_export._id = 'output_json';
-    json_export.namespace = b.container.namespaces.get('two');
+    json_export.namespace = b.container.namespaceStorage.get('two');
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);

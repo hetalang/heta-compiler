@@ -18,7 +18,7 @@ describe('TimeSwitcher uses referencies.', () => {
   });
 
   it('Bound period and start', () => {
-    let sw1 = c.namespaces.get('nameless').get('sw1');
+    let sw1 = c.namespaceStorage.get('nameless').get('sw1');
 
     expect(sw1).to.have.property('start', 'start');
     expect(sw1).to.have.property('startObj').which.has.property('id', 'start');
@@ -36,7 +36,7 @@ describe('TimeSwitcher uses referencies.', () => {
   });
 
   it('Anon period and start', () => {
-    let sw2 = c.namespaces.get('nameless').get('sw2');
+    let sw2 = c.namespaceStorage.get('nameless').get('sw2');
 
     expect(sw2).to.not.have.property('start');
     expect(sw2).to.have.property('startObj').which.has.property('num', 12);
@@ -55,7 +55,7 @@ describe('TimeSwitcher uses referencies.', () => {
 
   
   it('No properties', () => {
-    let sw3 = c.namespaces.get('nameless').get('sw3');
+    let sw3 = c.namespaceStorage.get('nameless').get('sw3');
 
     expect(sw3).to.not.have.property('start');
     expect(sw3).to.have.property('startObj').which.has.property('num', 0);

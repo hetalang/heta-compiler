@@ -325,7 +325,8 @@ function compartmentToQ(x, unitDict = {}){
     } else if (_.has(unitDict, unitId)){
       q.units = _.get(unitDict, unitId).simplify('dimensionless');
     } else {
-      // XXX: do not throw with undeclared units
+      q.units = Unit.fromQ([{ kind: unitId }]);
+      // the alternative solution is to throw undeclared units
       //throw new Error(`No unitDeclaration "${unitId}" used for compartment "${q.id}"`);
     }
   }
@@ -379,21 +380,29 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
       } else if (compartmentUnits !== undefined) {
         q.units = amountUnits
           .divide(compartmentUnits)
-          .simplify('dimensionless');
+          .simplify();
       }
     } else if (_.has(unitDict, substanceUnitId)) {
       let amountUnits = _.get(unitDict, substanceUnitId);
       // set amount or concentration units
       if (q.isAmount) {
         q.units = amountUnits
-          .simplify('dimensionless');
+          .simplify();
       } else if (compartmentUnits !== undefined) {
         q.units = amountUnits
           .divide(compartmentUnits)
-          .simplify('dimensionless');
+          .simplify();
       }
     } else {
-      // XXX: do not throw undeclared "substance"
+      let amountUnits = Unit.fromQ([{ kind: substanceUnitId }]);
+      if (q.isAmount) {
+        q.units = amountUnits;
+      } else if (compartmentUnits !== undefined) {
+        q.units = amountUnits
+          .divide(compartmentUnits)
+          .simplify();
+      }
+      // alternative solution is to throw error for undeclared "substance"
       // throw new Error(`No unitDeclaration "${substanceUnitId}" used for species "${q.id}"`);
     }
   }
@@ -548,9 +557,10 @@ function parameterToQ(x, unitDict = {}){
       q.units = Unit.fromQ([{ kind: unitId }]);
     } else if (_.has(unitDict, unitId)) { // if id in unitDefinitions
       // I removed simplify here to support pretty units in IRT
-      q.units = _.get(unitDict, unitId); //.simplify('dimensionless'); 
+      q.units = _.get(unitDict, unitId); //.simplify(); 
     } else {
-      // XXX: do not throw undeclared "unit"
+      q.units = Unit.fromQ([{ kind: unitId }]);
+      // alternative solution is to throw undeclared "unit"
       //throw new Error(`No unitDeclaration "${unitId}" as required for parameter "${q.id}"`);
     }
   }

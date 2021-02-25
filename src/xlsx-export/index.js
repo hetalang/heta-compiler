@@ -1,47 +1,68 @@
-const Container = require('../container');
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const _ = require('lodash');
-// how to order columns in scheets
+const { ajv } = require('../utils');
+
+// how to order columns in sheets
 const propSequence = [
   'on', 'action', 'class', 'space', 'id', 
   'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',
   'compartment', 'isAmount', 'actors', 'modifiers[]',
   'title', 'notes', 'tags[]'
 ];
-// how to order scheets in file
-const scheetSequence = [
+// how to order sheets in file
+const sheetSequence = [
   'Compartment', 'Species', 'Reaction', 'Record', 'Const',
   'Identification', 'UnitDef'
 ];
 
-class XLSXExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+const schema = {
+  type: 'object',
+  properties: {
+    omitRows: {type: 'number'},
+    omit: {type: 'array', items: { type: 'string' }},
+    splitByClass: {type: 'boolean'},
+  }
+};
+
+class XLSXExport extends AbstractExport {
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = XLSXExport.isValid(q, logger);
+    if (!valid) { this.errored = true; return; }
+
     if (q.omitRows!==undefined) this.omitRows = q.omitRows;
     if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
     if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
 
     if (q.omit) this.omit = q.omit;
-
-    return this;
   }
   get className(){
     return 'XLSXExport';
   }
+  get format(){
+    return 'XLSX'
+  }
   make(){
     // filtered namespaces
-    let nsArray = [...this.container.namespaces]
+    let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);
     let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
       ? nsArray
       : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
     
     // create array of flat
-    let fArr_full = nsArrayFiltered.reduce((accumulator, ns) => {
+    let fArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {
       let fArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toFlat()];
       let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
       return accumulator.concat(fArr_setns, fArr_components);
-    }, []).map((x) => {
+    }, []);
+    let fArr_unitDef = [...this._container.unitDefStorage]
+      .filter((x) => !x[1].isCore)
+      .map((x) => x[1].toFlat());
+    let fArr_full = [].concat(fArr_ns, fArr_unitDef).map((x) => {
       x.on = 1;
       return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
     });
@@ -70,7 +91,7 @@ class XLSXExport extends _Export {
         })
         .toPairs()
         .sortBy((x) => { // sort in pre-defined order
-          let order = scheetSequence.indexOf(x[0]);
+          let order = sheetSequence.indexOf(x[0]);
           return order !== -1 ? order : 999;
         })
         .map(1)
@@ -93,8 +114,9 @@ class XLSXExport extends _Export {
       }];
     }
   }
+  static get validate(){
+    return ajv.compile(schema);
+  }
 }
 
-Container.prototype.exports.XLSX = XLSXExport;
-
-module.exports = { XLSXExport };
+module.exports = XLSXExport;

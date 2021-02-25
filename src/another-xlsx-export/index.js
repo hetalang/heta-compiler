@@ -1,21 +1,20 @@
-const Container = require('../container');
-//const XLSX = require('xlsx'); // see docs https://docs.sheetjs.com/
 const _ = require('lodash');
-const { XLSXExport } = require('../xlsx-export');
+const XLSXExport = require('../xlsx-export');
 require('./_size');
 
 class AnotherXLSXExport extends XLSXExport {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
-
-    return this;
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
   }
   get className(){
     return 'AnotherXLSXExport';
   }
+  get format(){
+    return 'Another';
+  }
   make(){
     // filtered namespaces
-    let nsArray = [...this.container.namespaces]
+    let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);
     let nsOutput = typeof this.spaceFilter === 'undefined'
       ? nsArray
@@ -162,15 +161,6 @@ class AnotherXLSXExport extends XLSXExport {
 
     return [functions, species, parameters, function_units];
   }
-  toQ(options = {}){
-    let res = super.toQ(options);
-
-    return res;
-  }
 }
 
-Container.prototype.exports.AnotherXLSX = AnotherXLSXExport;
-
-module.exports = {
-  AnotherXLSXExport
-};
+module.exports = AnotherXLSXExport;

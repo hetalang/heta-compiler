@@ -61,11 +61,9 @@ class Logger {
   get hasErrors(){
     return this._hasErrors;
   }
-  /*
-  reset(){
-    this._logs = [];
+  resetErrors(){ // should be used only for testing properties
+    this._hasErrors = false;
   }
-  */
 }
 
 class Transport {

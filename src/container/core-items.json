@@ -1,0 +1,149 @@
+[
+    {
+        "id": "mole", "action": "defineUnit",
+        "terms": [{"kind": "amount", "exponent": 1}]
+    },
+    {
+        "id": "litre", "action": "defineUnit",
+        "terms": [{"kind": "length", "exponent": 3}]
+    },
+    {
+        "id": "second", "action": "defineUnit",
+        "terms": [{"kind": "time"}]
+    },
+    {
+        "id": "kilogram", "action": "defineUnit",
+        "units": [{ "kind": "gram", "multiplier": 1e3, "exponent": 1 }]
+    },
+    {
+        "id": "katal", "action": "defineUnit",
+        "units": [{ "kind": "mole", "multiplier": 1 }, { "kind": "second", "multiplier": 1, "exponent": -1 }]
+    },
+    {
+        "id": "item", "action": "defineUnit",
+        "terms": [{"kind": "amount", "exponent": 1}]
+    },
+    {
+        "id": "joule", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 2}, {"kind": "time", "exponent": -2}]
+    },
+    {
+        "id": "metre", "action": "defineUnit",
+        "terms": [{"kind": "length", "exponent": 1}]
+    },
+    {
+        "id": "dimensionless", "action": "defineUnit",
+        "terms": []
+    },
+    {
+        "id": "watt", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 2}, {"kind": "time", "exponent": -3}]
+    },
+    {
+        "id": "volt", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 2}, {"kind": "time", "exponent": -3}, {"kind": "current", "exponent": -1}]
+    },
+    {
+        "id": "ampere", "action": "defineUnit",
+        "terms": [{"kind": "current", "exponent": 1}]
+    },
+    {
+        "id": "newton", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 1}, {"kind": "time", "exponent": -2}]
+    },
+    
+
+    {
+        "id": "becquerel", "action": "defineUnit",
+        "units": [{ "kind": "second", "multiplier": 1, "exponent": -1 }]
+    },
+    {
+        "id": "candela", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": -1}, {"kind": "length", "exponent": -2}, {"kind": "time", "exponent": 3}]
+    },
+    {
+        "id": "coulomb", "action": "defineUnit",
+        "units": [{ "kind": "ampere", "multiplier": 1 }, { "kind": "second", "multiplier": 1 }]
+    },
+    {
+        "id": "farad", "action": "defineUnit",
+        "terms": [{"kind": "time", "exponent": 4}, {"kind": "current", "exponent": 2}, {"kind": "length", "exponent": -2}, {"kind": "mass", "exponent": -1}]
+    },
+    {
+        "id": "gram", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}]
+    },
+    {
+        "id": "gray", "action": "defineUnit",
+        "units": [{ "kind": "metre", "multiplier": 1, "exponent": 2 }, { "kind": "second", "multiplier": 1, "exponent": -2 }]
+    },
+    {
+        "id": "henry", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 2}, {"kind": "time", "exponent": -2}, {"kind": "current", "exponent": -2}]
+    },
+    {
+        "id": "hertz", "action": "defineUnit",
+        "units": [{ "kind": "second", "multiplier": 1, "exponent": -1 }]
+    },
+    {
+        "id": "kelvin", "action": "defineUnit",
+        "terms": [{"kind": "temperature", "exponent": 1}]
+    },
+    {
+        "id": "lumen", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": -1}, {"kind": "length", "exponent": -2}, {"kind": "time", "exponent": 3}]
+    },
+    {
+        "id": "lux", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": -1}, {"kind": "length", "exponent": -2}, {"kind": "time", "exponent": 3}]
+    },
+    {
+        "id": "ohm", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 2}, {"kind": "time", "exponent": -3}, {"kind": "current", "exponent": -2}]
+    },
+    {
+        "id": "pascal", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": -1}, {"kind": "time", "exponent": -2}]
+    },
+    {
+        "id": "radian", "action": "defineUnit",
+        "terms": []
+    },
+    {
+        "id": "siemens", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": -1}, {"kind": "length", "exponent": -2}, {"kind": "time", "exponent": 3}, {"kind": "current", "exponent": 2}]
+    },
+    {
+        "id": "sievert", "action": "defineUnit",
+        "units": [{ "kind": "metre", "multiplier": 1, "exponent": 2 }, { "kind": "second", "multiplier": 1, "exponent": -2 }]
+    },
+    {
+        "id": "steradian", "action": "defineUnit",
+        "terms": []
+    },
+    {
+        "id": "tesla", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "current", "exponent": -1}, {"kind": "time", "exponent": -2}]
+    },
+    {
+        "id": "weber", "action": "defineUnit",
+        "terms": [{"kind": "mass", "exponent": 1}, {"kind": "length", "exponent": 2}, {"kind": "current", "exponent": -1}, {"kind": "time", "exponent": -2}]
+    },
+
+    {
+        "id": "year", "action": "defineUnit",
+        "units": [{ "kind": "second", "multiplier": 31557600 }]
+    },
+    {
+        "id": "day", "action": "defineUnit",
+        "units": [{ "kind": "second", "multiplier": 86400 }]
+    },
+    {
+        "id": "hour", "action": "defineUnit",
+        "units": [{ "kind": "second", "multiplier": 3600 }]
+    },
+    {
+        "id": "minute", "action": "defineUnit",
+        "units": [{ "kind": "second", "multiplier": 60 }]
+    }
+]

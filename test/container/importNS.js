@@ -6,6 +6,7 @@ const { expect } = require('chai');
 describe('Test correct importNS', () => {
   it('Two namespaces', () => {
     var c = new Container();
+    let counter = c.length;
     c.setNS({space: 'one'});
     c.load({
       action: 'insert',
@@ -45,7 +46,7 @@ describe('Test correct importNS', () => {
       assignments: { start_: '1' }
     });
 
-    expect(c).to.be.lengthOf(5);
+    expect(c.length - counter).to.be.eq(5);
     expect(clone).to.be.lengthOf(2);
     expect(clone[0]).to.have.property('index', 'two::one_k1');
 
@@ -53,8 +54,8 @@ describe('Test correct importNS', () => {
     expect(clone[1].actors[0]).to.have.property('target', 'one_A');
     expect(clone[1].assignments.ode_.toString()).to.be.equal('one_k1 * one_A * comp1');
 
-    expect(c.namespaces.get('one')).to.be.lengthOf(2);
-    expect(c.namespaces.get('two')).to.be.lengthOf(3);
+    expect(c.namespaceStorage.get('one')).to.be.lengthOf(2);
+    expect(c.namespaceStorage.get('two')).to.be.lengthOf(3);
   });
 });
 

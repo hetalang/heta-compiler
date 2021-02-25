@@ -11,6 +11,7 @@ const json_correct = require('../../cases/6-import/master/output_json.json');
 
 describe('Testing "cases/6-import"', () => {
   let b;
+  let exportArray;
 
   it('Create builder.', () => {
     let declaration = {
@@ -31,10 +32,11 @@ describe('Testing "cases/6-import"', () => {
 
   it('Run include', () => {
     b.run();
+    exportArray = [...b.container.exportStorage].map((x) => x[1]);
   });
 
   it('Run @SBMLExport, check and compare.', () => {
-    let sbml_export = b.container.exportStorage[0];
+    let sbml_export = exportArray[0];
     let code = sbml_export.make()[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);
@@ -42,10 +44,8 @@ describe('Testing "cases/6-import"', () => {
   });
 
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.container.exports.JSON;
-    let json_export = new JSONExport;
-    json_export.container = b.container;
-    json_export.merge({spaceFilter: 'model'});
+    const JSONExport = b.container.classes.JSON;
+    let json_export = new JSONExport({spaceFilter: 'model'});
 
     let code = json_export.make()[0].content;
     let obj = JSON.parse(code);

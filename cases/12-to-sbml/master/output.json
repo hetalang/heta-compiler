@@ -5,54 +5,6 @@
     "space": "first"
   },
   {
-    "class": "UnitDef",
-    "id": "min",
-    "space": "first",
-    "units": "(6e+1 second)"
-  },
-  {
-    "class": "UnitDef",
-    "id": "nm",
-    "space": "first",
-    "units": "(1e-9 metre)"
-  },
-  {
-    "class": "UnitDef",
-    "id": "m",
-    "space": "first",
-    "units": "metre"
-  },
-  {
-    "class": "UnitDef",
-    "id": "uM",
-    "space": "first",
-    "units": "(1e-6 mole)/litre"
-  },
-  {
-    "class": "UnitDef",
-    "id": "fM",
-    "space": "first",
-    "units": "(1e-15 mole)/litre"
-  },
-  {
-    "class": "UnitDef",
-    "id": "h",
-    "space": "first",
-    "units": "(3.6e+3 second)"
-  },
-  {
-    "class": "UnitDef",
-    "id": "L",
-    "space": "first",
-    "units": "litre"
-  },
-  {
-    "class": "UnitDef",
-    "id": "umole",
-    "space": "first",
-    "units": "(1e-6 mole)"
-  },
-  {
     "class": "Compartment",
     "id": "comp1",
     "space": "first",
@@ -162,5 +114,45 @@
     "id": "sw1",
     "space": "first",
     "trigger": "evt1"
+  },
+  {
+    "id": "min",
+    "units": "(6e+1 second)",
+    "action": "defineUnit"
+  },
+  {
+    "id": "nm",
+    "units": "(1e-9 metre)",
+    "action": "defineUnit"
+  },
+  {
+    "id": "m",
+    "units": "metre",
+    "action": "defineUnit"
+  },
+  {
+    "id": "uM",
+    "units": "(1e-6 mole)/litre",
+    "action": "defineUnit"
+  },
+  {
+    "id": "fM",
+    "units": "(1e-15 mole)/litre",
+    "action": "defineUnit"
+  },
+  {
+    "id": "h",
+    "units": "(3.6e+3 second)",
+    "action": "defineUnit"
+  },
+  {
+    "id": "L",
+    "units": "litre",
+    "action": "defineUnit"
+  },
+  {
+    "id": "umole",
+    "units": "(1e-6 mole)",
+    "action": "defineUnit"
   }
 ]

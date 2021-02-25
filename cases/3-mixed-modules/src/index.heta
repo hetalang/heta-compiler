@@ -2,6 +2,8 @@
   This modul imports different types of modules
 */
 
+#setNS {space: one, type: abstract};
+
 include json.json type json
 
 include heta.heta type heta
@@ -9,7 +11,7 @@ include heta.heta type heta
 include yaml.yml type yaml
 
 include xlsx.xlsx type xlsx with {
-  options: { sheetNum: [1, 2], omitRows: 3 }
+  options: { sheetNum: [0, 1], omitRows: 3 }
 }
 
 include page.md type md with {

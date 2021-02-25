@@ -1,0 +1,74 @@
+[
+  {
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": "litre",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true
+  },
+  {
+    "class": "Species",
+    "id": "S1",
+    "title": "S1",
+    "units": "mole/litre",
+    "assignments": {
+      "start_": "1 / compartment",
+      "event1": "1"
+    },
+    "compartment": "compartment"
+  },
+  {
+    "class": "Species",
+    "id": "S2",
+    "title": "S2",
+    "units": "(1e-6 mole)/litre",
+    "assignments": {
+      "start_": "0 / compartment"
+    },
+    "compartment": "compartment"
+  },
+  {
+    "class": "Reaction",
+    "id": "reaction1",
+    "title": "reaction1",
+    "aux": {
+      "reversible": false
+    },
+    "assignments": {
+      "ode_": "compartment * k1 * S1"
+    },
+    "actors": [
+      {
+        "target": "S2",
+        "stoichiometry": 1
+      },
+      {
+        "target": "S1",
+        "stoichiometry": -1
+      }
+    ]
+  },
+  {
+    "class": "Record",
+    "id": "k1",
+    "title": "k1",
+    "units": "_h",
+    "assignments": {
+      "start_": "1"
+    }
+  },
+  {
+    "class": "DSwitcher",
+    "id": "event1",
+    "title": "event1",
+    "trigger": "S1 < 0.1"
+  },
+  {
+    "id": "_h",
+    "units": "1/hour",
+    "action": "defineUnit"
+  }
+]

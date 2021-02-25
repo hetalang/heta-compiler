@@ -1,23 +1,25 @@
 const Container = require('./container');
-const coreComponents = require('./container/core-components');
+const coreItems = require('./container/core-items');
 
 // set nunjacks environment
 const nunjucksEnv = require('./nunjucks-env')('templates');
 
-require('./yaml-export');
-require('./json-export');
-require('./sbml-export');
-require('./slv-export');
-require('./dbsolve-export');
-require('./mrgsolve-export');
-require('./simbio-export');
-require('./xlsx-export');
-require('./another-xlsx-export');
-require('./matlab-export');
-require('./sim-solver-export');
+Container._exportClasses = {
+  DBSolve: require('./dbsolve-export'),
+  YAML: require('./yaml-export'),
+  JSON: require('./json-export'),
+  SBML: require('./sbml-export'),
+  SLV: require('./slv-export'),
+  Mrgsolve: require('./mrgsolve-export'),
+  Simbio: require('./simbio-export'),
+  XLSX: require('./xlsx-export'),
+  AnotherXLSX: require('./another-xlsx-export'),
+  Matlab: require('./matlab-export'),
+  SimSolver: require('./sim-solver-export')
+};
 
 module.exports = {
   Container,
-  coreComponents,
+  coreItems,
   nunjucksEnv
 };

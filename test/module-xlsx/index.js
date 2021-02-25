@@ -14,15 +14,15 @@ describe('Integral test of correct xlsx module', () => {
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
-        sheet: 1,
+        sheet: 0,
         omitRows: 2
       }
     };
     let b = new Builder(declaration, __dirname);
     b.run();
-    let resultNameless = b.container.namespaces.get('nameless').toQArr(true);
+    let resultNameless = b.container.namespaceStorage.get('nameless').toQArr(true);
     expect(resultNameless).to.be.deep.equal(outputNameless);
-    let resultOne = b.container.namespaces.get('one').toQArr(true);
+    let resultOne = b.container.namespaceStorage.get('one').toQArr(true);
     expect(resultOne).to.be.deep.equal(outputOne);
   });
 
@@ -35,12 +35,12 @@ describe('Integral test of correct xlsx module', () => {
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
-        sheet: 2
+        sheet: 1
       }
     };
     let b = new Builder(declaration, __dirname);
     b.run();
-    let resultNameless = b.container.namespaces.get('nameless').toQArr(true);
+    let resultNameless = b.container.namespaceStorage.get('nameless').toQArr(true);
     expect(resultNameless).to.be.deep.equal(outputNameless);
   });
 
@@ -53,7 +53,7 @@ describe('Integral test of correct xlsx module', () => {
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
-        sheet: 10
+        sheet: 9
       }
     };
     let b = new Builder(declaration, __dirname);

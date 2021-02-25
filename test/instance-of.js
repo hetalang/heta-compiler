@@ -1,7 +1,7 @@
 /* global describe, it */
 const { Container } = require('../src');
 let c = new Container();
-const { Page } = c.classes;
+const { Page } = c._componentClasses;
 const { expect } = require('chai');
 
 describe('Test for instanceOf', () => {

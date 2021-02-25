@@ -34,214 +34,163 @@
   notes: Transformation of __substate__ to __product__
   aux:
     reversible: false
-  units: umole/min
+  units: umole/minute
   assignments:
     ode_: Vmax * S / (Km + S) * default_comp
   actors:
     - {target: S, stoichiometry: -1}
     - {target: P, stoichiometry: 1}
-- class: UnitDef
-  id: fmole
-  space: mm
-  units: (1e-15 mole)
-- class: UnitDef
-  id: pmole
-  space: mm
-  units: (1e-12 mole)
-- class: UnitDef
-  id: nmole
-  space: mm
-  units: (1e-9 mole)
-- class: UnitDef
-  id: umole
-  space: mm
-  units: (1e-6 mole)
-- class: UnitDef
-  id: mmole
-  space: mm
-  units: (1e-3 mole)
-- class: UnitDef
-  id: fM
-  space: mm
-  units: (1e-15 mole)/litre
-- class: UnitDef
-  id: pM
-  space: mm
-  units: (1e-12 mole)/litre
-- class: UnitDef
-  id: nM
-  space: mm
-  units: (1e-9 mole)/litre
-- class: UnitDef
-  id: uM
-  space: mm
-  units: (1e-6 mole)/litre
-- class: UnitDef
-  id: mM
-  space: mm
-  units: (1e-3 mole)/litre
-- class: UnitDef
-  id: M
-  space: mm
-  units: mole/litre
-- class: UnitDef
-  id: kM
-  space: mm
-  units: (1e+3 mole)/litre
-- class: UnitDef
-  id: fL
-  space: mm
-  units: (1e-15 litre)
-- class: UnitDef
-  id: pL
-  space: mm
-  units: (1e-12 litre)
-- class: UnitDef
-  id: nL
-  space: mm
-  units: (1e-9 litre)
-- class: UnitDef
-  id: uL
-  space: mm
-  units: (1e-6 litre)
-- class: UnitDef
-  id: mL
-  space: mm
-  units: (1e-3 litre)
-- class: UnitDef
-  id: dL
-  space: mm
-  units: (1e-1 litre)
-- class: UnitDef
-  id: L
-  space: mm
-  units: litre
-- class: UnitDef
-  id: fs
-  space: mm
-  units: (1e-15 second)
-- class: UnitDef
-  id: ps
-  space: mm
-  units: (1e-12 second)
-- class: UnitDef
-  id: ns
-  space: mm
-  units: (1e-9 second)
-- class: UnitDef
-  id: us
-  space: mm
-  units: (1e-6 second)
-- class: UnitDef
-  id: ms
-  space: mm
-  units: (1e-3 second)
-- class: UnitDef
-  id: s
-  space: mm
-  units: second
-- class: UnitDef
-  id: min
-  space: mm
-  units: (6e+1 second)
-- class: UnitDef
-  id: h
-  space: mm
-  units: (3.6e+3 second)
-- class: UnitDef
-  id: week
-  space: mm
-  units: (6.048e+5 second)
-- class: UnitDef
-  id: fg
-  space: mm
-  units: (1e-18 kilogram)
-- class: UnitDef
-  id: pg
-  space: mm
-  units: (1e-15 kilogram)
-- class: UnitDef
-  id: ng
-  space: mm
-  units: (1e-12 kilogram)
-- class: UnitDef
-  id: ug
-  space: mm
-  units: (1e-9 kilogram)
-- class: UnitDef
-  id: mg
-  space: mm
-  units: (1e-6 kilogram)
-- class: UnitDef
-  id: g
-  space: mm
-  units: (1e-3 kilogram)
-- class: UnitDef
-  id: kg
-  space: mm
-  units: kilogram
-- class: UnitDef
-  id: kat
-  space: mm
-  units: katal
-- class: UnitDef
-  id: cell
-  space: mm
-  units: item
-- class: UnitDef
-  id: kcell
-  space: mm
-  units: (1e+3 item)
-- class: UnitDef
-  id: cal
-  space: mm
-  units: (4.1868e+0 joule)
-- class: UnitDef
-  id: kcal
-  space: mm
-  units: (4.1868e+3 joule)
-- class: UnitDef
-  id: fm
-  space: mm
-  units: (1e-15 metre)
-- class: UnitDef
-  id: pm
-  space: mm
-  units: (1e-12 metre)
-- class: UnitDef
-  id: nm
-  space: mm
-  units: (1e-9 metre)
-- class: UnitDef
-  id: um
-  space: mm
-  units: (1e-6 metre)
-- class: UnitDef
-  id: mm
-  space: mm
-  units: (1e-13 metre)
-- class: UnitDef
-  id: cm
-  space: mm
-  units: (1e-2 metre)
-- class: UnitDef
-  id: m
-  space: mm
-  units: metre
-- class: UnitDef
-  id: UL
-  space: mm
-  units: dimensionless
-- class: UnitDef
-  id: percent
-  space: mm
-  units: (1e-2 dimensionless)
 - class: Const
   id: Vmax
   space: mm
+  units: uM/minute
   num: 0.1
 - class: Const
   id: Km
   space: mm
   units: uM
   num: 2.5
+- id: fmole
+  units: (1e-15 mole)
+  action: defineUnit
+- id: pmole
+  units: (1e-12 mole)
+  action: defineUnit
+- id: nmole
+  units: (1e-9 mole)
+  action: defineUnit
+- id: umole
+  units: (1e-6 mole)
+  action: defineUnit
+- id: mmole
+  units: (1e-3 mole)
+  action: defineUnit
+- id: fM
+  units: (1e-15 mole)/litre
+  action: defineUnit
+- id: pM
+  units: (1e-12 mole)/litre
+  action: defineUnit
+- id: nM
+  units: (1e-9 mole)/litre
+  action: defineUnit
+- id: uM
+  units: (1e-6 mole)/litre
+  action: defineUnit
+- id: mM
+  units: (1e-3 mole)/litre
+  action: defineUnit
+- id: M
+  units: mole/litre
+  action: defineUnit
+- id: kM
+  units: (1e+3 mole)/litre
+  action: defineUnit
+- id: fL
+  units: (1e-15 litre)
+  action: defineUnit
+- id: pL
+  units: (1e-12 litre)
+  action: defineUnit
+- id: nL
+  units: (1e-9 litre)
+  action: defineUnit
+- id: uL
+  units: (1e-6 litre)
+  action: defineUnit
+- id: mL
+  units: (1e-3 litre)
+  action: defineUnit
+- id: dL
+  units: (1e-1 litre)
+  action: defineUnit
+- id: L
+  units: litre
+  action: defineUnit
+- id: fs
+  units: (1e-15 second)
+  action: defineUnit
+- id: ps
+  units: (1e-12 second)
+  action: defineUnit
+- id: ns
+  units: (1e-9 second)
+  action: defineUnit
+- id: us
+  units: (1e-6 second)
+  action: defineUnit
+- id: ms
+  units: (1e-3 second)
+  action: defineUnit
+- id: s
+  units: second
+  action: defineUnit
+- id: h
+  units: hour
+  action: defineUnit
+- id: week
+  units: (7e+0 day)
+  action: defineUnit
+- id: fg
+  units: (1e-18 kilogram)
+  action: defineUnit
+- id: pg
+  units: (1e-15 kilogram)
+  action: defineUnit
+- id: ng
+  units: (1e-12 kilogram)
+  action: defineUnit
+- id: ug
+  units: (1e-9 kilogram)
+  action: defineUnit
+- id: mg
+  units: (1e-6 kilogram)
+  action: defineUnit
+- id: g
+  units: (1e-3 kilogram)
+  action: defineUnit
+- id: kg
+  units: kilogram
+  action: defineUnit
+- id: kat
+  units: katal
+  action: defineUnit
+- id: cell
+  units: item
+  action: defineUnit
+- id: kcell
+  units: (1e+3 item)
+  action: defineUnit
+- id: cal
+  units: (4.1868e+0 joule)
+  action: defineUnit
+- id: kcal
+  units: (4.1868e+3 joule)
+  action: defineUnit
+- id: fm
+  units: (1e-15 metre)
+  action: defineUnit
+- id: pm
+  units: (1e-12 metre)
+  action: defineUnit
+- id: nm
+  units: (1e-9 metre)
+  action: defineUnit
+- id: um
+  units: (1e-6 metre)
+  action: defineUnit
+- id: mm
+  units: (1e-13 metre)
+  action: defineUnit
+- id: cm
+  units: (1e-2 metre)
+  action: defineUnit
+- id: m
+  units: metre
+  action: defineUnit
+- id: UL
+  units: dimensionless
+  action: defineUnit
+- id: percent
+  units: (1e-2 dimensionless)
+  action: defineUnit

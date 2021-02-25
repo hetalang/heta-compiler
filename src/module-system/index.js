@@ -25,9 +25,9 @@ class ModuleSystem {
     
     return mdl;
   }
-  // scan module dependences recursively
+  // scan module dependence recursively
   _addModuleDeep(absFilePath, type, options = {}){
-    let moduleName = [absFilePath, '#', options.sheet || '1'].join('');
+    let moduleName = [absFilePath, '#', options.sheet || '0'].join('');
     if(!(moduleName in this.moduleCollection)){ // new file
       let mdl = this.addModule(absFilePath, type, options);
       mdl.getImportElements().forEach((importItem) => {
@@ -45,12 +45,12 @@ class ModuleSystem {
     let mdl = _Module.createModule(filename, type, options, this.logger);
     mdl.updateByAbsPaths();
     // push to moduleCollection
-    let moduleName = [filename, '#', options.sheet || '1'].join('');
+    let moduleName = [filename, '#', options.sheet || '0'].join('');
     this.moduleCollection[moduleName] = mdl;
     // set in graph
     let paths = mdl
       .getImportElements()
-      .map((x) => [x.source, '#', x.sheet || 1].join(''));
+      .map((x) => [x.source, '#', x.sheet || 0].join(''));
     this.graph.add(moduleName, paths);
 
     return mdl;
@@ -72,7 +72,7 @@ class ModuleSystem {
       }).forEach((x) => {
         x._integrated = x.parsed.reduce((acc, current) => {
           if(current.action==='include'){
-            let moduleName = [current.source, '#', current.sheet || '1'].join('');
+            let moduleName = [current.source, '#', current.sheet || '0'].join('');
             let childIntegrated = this.moduleCollection[moduleName]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);

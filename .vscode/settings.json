@@ -1,3 +1,8 @@
 {
-    "julia.environmentPath": "y:\\SimSolver.jl"
+    "julia.environmentPath": "y:\\SimSolver.jl",
+    "cSpell.words": [
+        "heta",
+        "sbml",
+        "simbio"
+    ]
 }

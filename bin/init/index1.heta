@@ -5,15 +5,15 @@
 include ./qsp-units.heta
 
 // @Const
-include ./table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
+include ./table.xlsx type xlsx with { sheet: 0, omitRows: 3 }
 // @Record
-include ./table.xlsx type xlsx with { sheet: 2, omitRows: 3 }
+include ./table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
 // @Compartment
-include ./table.xlsx type xlsx with { sheet: 3, omitRows: 3 }
+include ./table.xlsx type xlsx with { sheet: 2, omitRows: 3 }
 // @Species
-include ./table.xlsx type xlsx with { sheet: 4, omitRows: 3 }
+include ./table.xlsx type xlsx with { sheet: 3, omitRows: 3 }
 // @Reaction
-include ./table.xlsx type xlsx with { sheet: 5, omitRows: 3 }
+include ./table.xlsx type xlsx with { sheet: 4, omitRows: 3 }
 
 // include addon.json type json
 // include addon.yml type yaml

@@ -1,13 +1,27 @@
-const Container = require('../container');
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
 require('./expression');
+const { ajv } = require('../utils');
 
-class DBSolveExport extends _Export{
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+const schema = {
+  type: 'object',
+  properties: {
+    groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
+    powTransform: {type: 'string', enum: ['keep', 'function', 'operator'] },
+  }
+};
 
+class DBSolveExport extends AbstractExport{
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = DBSolveExport.isValid(q, logger);
+    if (!valid) { this.errored = true; return; }
+
+    this.powTransform = q.powTransform ? q.powTransform : 'keep';
     if (q.groupConstBy) {
       this.groupConstBy = q.groupConstBy;
     } else {
@@ -22,8 +36,6 @@ class DBSolveExport extends _Export{
     }
     
     if (q.defaultTask) this.defaultTask = q.defaultTask;
-
-    return this;
   }
   /**
    * The method creates text code to save as SLV file.
@@ -32,12 +44,12 @@ class DBSolveExport extends _Export{
    */
   make(){
     // use only one namespace
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for DBSolve format should include at least one namespace but get empty';
       logger.err(msg);
       var content = '';
-    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       content = '';
@@ -46,7 +58,7 @@ class DBSolveExport extends _Export{
         let msg = `DBSolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
       let image = this.getSLVImage(ns);
       content = this.getSLVCode(image);
     }
@@ -66,7 +78,7 @@ class DBSolveExport extends _Export{
    * @return {undefined}
    */
   getSLVImage(ns){
-    let logger = this.container.logger;
+    let logger = this._container.logger;
 
     // push active processes
     let processes = ns
@@ -227,10 +239,15 @@ class DBSolveExport extends _Export{
       image
     );
   }
+  get className(){
+    return 'DBSolveExport';
+  }
+  get format(){
+    return 'DBSolve'
+  }
+  static get validate(){
+    return ajv.compile(schema);
+  }
 }
 
-Container.prototype.exports.DBSolve = DBSolveExport;
-
-module.exports = {
-  DBSolveExport
-};
+module.exports = DBSolveExport;

@@ -181,6 +181,7 @@ There are properties in declaration file which do not change compilation process
 | options.logPath | string | | build.log | Filepath where the log file should be created. |
 | options.logLevel | string | | info | When parsing the compiler prints the messages to the shell. Here you can set a level of printing messages. Possible values: "info", "warning", "error". For example if you set "warn", only warnings and errors will be printed. |
 | options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
+| options.skipUnitsCheck | boolean | | false | If `true` units checking will be skipped. |
 | options.skipExport | boolean | --skip-export | false | If `true` no export files will be created. |
 | options.ssOnly | boolean | --ss-only | false | If `true` the compilation will run SimSolver supporting mode. |
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
@@ -200,6 +201,7 @@ Using neither declaration file nor CLI options is equivalent to the following de
         "distDir": "dist",
         "metaDir": "meta",
         "debug": false,
+        "skipUnitsCheck": false,
         "skipExport": false,
         "ssOnly": false,
         "exitWithoutError": false

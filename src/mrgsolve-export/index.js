@@ -1,12 +1,24 @@
-const Container = require('../container');
-const { _Export } = require('../core/_export');
+const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const _ = require('lodash');
 require('./expression');
+const { ajv } = require('../utils');
 
-class MrgsolveExport extends _Export {
-  merge(q = {}, skipChecking){
-    super.merge(q, skipChecking);
+const schema = {
+  type: 'object',
+  properties: {
+  }
+};
+
+class MrgsolveExport extends AbstractExport {
+  constructor(q = {}, isCore = false){
+    super(q, isCore);
+    
+    // check arguments here
+    let logger = this._container.logger;
+    let valid = MrgsolveExport.isValid(q, logger);
+    if (!valid) { this.errored = true; return; }
+
     if (q.spaceFilter instanceof Array) {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
@@ -14,21 +26,25 @@ class MrgsolveExport extends _Export {
     } else {
       this.spaceFilter = ['nameless'];
     }
-
-    return this;
   }
   get className(){
     return 'MrgsolveExport';
   }
+  get format(){
+    return 'Mrgsolve'
+  }
+  static get validate(){
+    return ajv.compile(schema);
+  }
   make(){
     // use only one namespace
-    let logger = this.container.logger;
+    let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for Mrgsolve format should include at least one namespace but get empty';
       logger.err(msg);
       var codeContent = '';
       var runContent = '';
-    } else if (!this.container.namespaces.has(this.spaceFilter[0])) {
+    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       codeContent = '';
@@ -38,7 +54,7 @@ class MrgsolveExport extends _Export {
         let msg = `Mrgsolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
-      let ns = this.container.namespaces.get(this.spaceFilter[0]);
+      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
       let image = this.getMrgsolveImage(ns);
       codeContent = this.getMrgsolveCode(image);
       runContent = this.getMrgsolveRun(image);
@@ -138,8 +154,4 @@ class MrgsolveExport extends _Export {
   }
 }
 
-Container.prototype.exports.Mrgsolve = MrgsolveExport;
-
-module.exports = {
-  MrgsolveExport
-};
+module.exports = MrgsolveExport;
