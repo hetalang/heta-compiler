@@ -380,18 +380,18 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
       } else if (compartmentUnits !== undefined) {
         q.units = amountUnits
           .divide(compartmentUnits)
-          .simplify('dimensionless');
+          .simplify();
       }
     } else if (_.has(unitDict, substanceUnitId)) {
       let amountUnits = _.get(unitDict, substanceUnitId);
       // set amount or concentration units
       if (q.isAmount) {
         q.units = amountUnits
-          .simplify('dimensionless');
+          .simplify();
       } else if (compartmentUnits !== undefined) {
         q.units = amountUnits
           .divide(compartmentUnits)
-          .simplify('dimensionless');
+          .simplify();
       }
     } else {
       let amountUnits = Unit.fromQ([{ kind: substanceUnitId }]);
@@ -400,7 +400,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
       } else if (compartmentUnits !== undefined) {
         q.units = amountUnits
           .divide(compartmentUnits)
-          .simplify('dimensionless');
+          .simplify();
       }
       // alternative solution is to throw error for undeclared "substance"
       // throw new Error(`No unitDeclaration "${substanceUnitId}" used for species "${q.id}"`);
@@ -557,7 +557,7 @@ function parameterToQ(x, unitDict = {}){
       q.units = Unit.fromQ([{ kind: unitId }]);
     } else if (_.has(unitDict, unitId)) { // if id in unitDefinitions
       // I removed simplify here to support pretty units in IRT
-      q.units = _.get(unitDict, unitId); //.simplify('dimensionless'); 
+      q.units = _.get(unitDict, unitId); //.simplify(); 
     } else {
       q.units = Unit.fromQ([{ kind: unitId }]);
       // alternative solution is to throw undeclared "unit"

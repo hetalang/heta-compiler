@@ -181,7 +181,7 @@ class Unit extends Array {
       })
       .toPairs()
       .map(1)
-      .filter((x) => !(x.kind===dimensionlessKind && x.multiplier===1)) // this may result in empty unit array
+      .filter((x) => !(x.kind === dimensionlessKind && x.multiplier === 1)) // this may result in empty unit array
       .value();
 
     return Unit.fromQ(group);
