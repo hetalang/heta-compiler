@@ -7,7 +7,7 @@ _Module.prototype.setXLSXModule = function(){
   let rawData = [];
   // TODO: checking arguments is required
   const options = _.defaults(this.options, {
-    sheet: 1,
+    sheet: 0,
     omitRows: 0
   });
 

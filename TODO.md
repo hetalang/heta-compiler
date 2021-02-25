@@ -34,7 +34,6 @@
 ## features
 
 - Export to SBML without standard units like _litre
-- xlsx module: many tables in one #include, table numeration from 0
 - multi-space export in Matlab
 - test empty assignments for @Record + to specifications
 - #move, #moveNS
@@ -45,6 +44,7 @@
 ## ideas
 
 - AnyUnit for zero numbers
+- xlsx module: many tables in one #include
 - @Dose class to use with simbiology/mrgsolve/nonmem doses
 - heta update => npm i heta-compiler
 - support null for properties: highlight, parse, heta standard

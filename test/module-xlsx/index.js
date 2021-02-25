@@ -14,7 +14,7 @@ describe('Integral test of correct xlsx module', () => {
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
-        sheet: 1,
+        sheet: 0,
         omitRows: 2
       }
     };
@@ -35,7 +35,7 @@ describe('Integral test of correct xlsx module', () => {
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
-        sheet: 2
+        sheet: 1
       }
     };
     let b = new Builder(declaration, __dirname);
@@ -53,7 +53,7 @@ describe('Integral test of correct xlsx module', () => {
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
-        sheet: 10
+        sheet: 9
       }
     };
     let b = new Builder(declaration, __dirname);

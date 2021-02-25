@@ -2,7 +2,7 @@
 comp1 @Compartment 'First Compartment' .= 1.1 {units: L};
 comp2 @Compartment .= 2.2;
 
-s1 @Species { compartment: comp1, isAmount: true } .= 10;
+s1 @Species { compartment: comp1, isAmount: true, units: mole } .= 10;
 s2 @Species { compartment: comp2 } .= s2_0;
 s3 @Species { compartment: comp2 } .= 0;
 s4 @Species { compartment: comp2 } .= 5;

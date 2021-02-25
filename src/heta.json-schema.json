@@ -33,19 +33,6 @@
       "pattern": "[a-zA-Z0-9. -+/*^()]*$"
     },
 
-    "Expression": {
-      "type": "object",
-      "required": ["expr"],
-      "properties": {
-        "expr": {
-          "oneOf": [
-            { "$ref": "#/definitions/ExprString" },
-            { "type": "number"}
-          ]
-        }
-      }
-    },
-
     "AssignmentDict": {
       "description": "Stores initializations as key/value dictionary. Key is switcher when to use. Key is one of Switcher id.",
       "type": "object",
@@ -53,8 +40,7 @@
       "additionalProperties": {
         "oneOf": [
           { "$ref": "#/definitions/ExprString" },
-          { "type": "number"},
-          { "$ref": "#/definitions/Expression" }
+          { "type": "number"}
         ]
       },
       "example": {
@@ -122,7 +108,7 @@
         },
         "boundary": {
           "type": "boolean", "default": false,
-          "description": "If it is true the record cannot be changed by any process, only byexpression in assignments."
+          "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
         },
         "output": {
           "type": "boolean",

@@ -2,15 +2,15 @@ const { AbstractExport } = require('../core/abstract-export');
 const _ = require('lodash');
 const { ajv } = require('../utils');
 
-// how to order columns in scheets
+// how to order columns in sheets
 const propSequence = [
   'on', 'action', 'class', 'space', 'id', 
   'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary',
   'compartment', 'isAmount', 'actors', 'modifiers[]',
   'title', 'notes', 'tags[]'
 ];
-// how to order scheets in file
-const scheetSequence = [
+// how to order sheets in file
+const sheetSequence = [
   'Compartment', 'Species', 'Reaction', 'Record', 'Const',
   'Identification', 'UnitDef'
 ];
@@ -91,7 +91,7 @@ class XLSXExport extends AbstractExport {
         })
         .toPairs()
         .sortBy((x) => { // sort in pre-defined order
-          let order = scheetSequence.indexOf(x[0]);
+          let order = sheetSequence.indexOf(x[0]);
           return order !== -1 ? order : 999;
         })
         .map(1)

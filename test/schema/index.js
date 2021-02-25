@@ -14,7 +14,6 @@ const monteCarloTask = require('./monteCarloTask');
 const monteCarloTaskError = require('./monteCarloTask-error');
 const page = require('./page');
 const pageError = require('./page-error');
-const switcher = require('./c-switcher');
 //const switcherError = require('./c-switcher-error');
 const timeSwitcher = require('./timeSwitcher');
 const timeSwitcherError = require('./timeSwitcher-error');

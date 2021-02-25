@@ -135,7 +135,7 @@ class Component {
     }
   }
   static isValid(q, logger){
-    let ind = q.space ? `${q.space}::` : '' + q.id;
+    let ind = q.space ? `${q.space}::${q.id}` : q.id;
 
     let validate = validator
       .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
