@@ -175,7 +175,7 @@ class Container {
           if (rec.isAmount){
             let isLegal = Species.legalTermsAmount.some((x) => term.equal(x)); // one of them is legal
             if (!isLegal) {
-              let msg = `Species {isAmount: true} "${rec.index}" has wrong unit term. It must be "amount"`;
+              let msg = `Species {isAmount: true} "${rec.index}" has wrong unit term. It must be "amount" or "mass"`;
               this.logger.warn(msg, {type: 'UnitError'});
             }
           } else {
