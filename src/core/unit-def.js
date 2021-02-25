@@ -9,50 +9,50 @@ const schema = {
   properties: {
     units: { anyOf: [
       { type: 'number', enum: [1]},
-      { '$ref': "#/definitions/UnitsExpr" },
-      { type: "array", items: { '$ref': "#/definitions/UnitItem" } }
+      { '$ref': '#/definitions/UnitsExpr' },
+      { type: 'array', items: { '$ref': '#/definitions/UnitItem' } }
     ] },
     terms: {
-      type: "array",
-      items: { '$ref': "#/definitions/UnitTermItem" }
+      type: 'array',
+      items: { '$ref': '#/definitions/UnitTermItem' }
     }
   },
 
   definitions: {
     ID: {
-      description: "First character is letter, others are letter, digit or underscore.",
-      type: "string",
+      description: 'First character is letter, others are letter, digit or underscore.',
+      type: 'string',
       minLength: 1,
-      pattern: "^[_a-zA-Z][_a-zA-Z0-9]*$",
-      example: "x_12_"
+      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      example: 'x_12_'
     },
 
     UnitsExpr: {
-      description: "Unit expression, see qsp-units project.",
-      type: "string",
-      pattern: "^[_a-zA-Z0-9./*^ ()+-]*$",
-      example: "1/h * ms"
+      description: 'Unit expression, see qsp-units project.',
+      type: 'string',
+      pattern: '^[_a-zA-Z0-9./*^ ()+-]+$',
+      example: '1/h * ms'
     },
 
     UnitItem: {
-      type: "object",
-      required: ["kind"],
+      type: 'object',
+      required: ['kind'],
       properties: {
-        kind: { '$ref': "#/definitions/ID" },
-        multiplier: { type: "number", exclusiveMinimum: 0 },
-        exponent: { type: "number" }
+        kind: { '$ref': '#/definitions/ID' },
+        multiplier: { type: 'number', exclusiveMinimum: 0 },
+        exponent: { type: 'number' }
       },
-      example: { kind: "mole", multiplier: 1e-6, exponent: 1 }
+      example: { kind: 'mole', multiplier: 1e-6, exponent: 1 }
     },
 
     UnitTermItem: {
-      type: "object",
-      required: ["kind"],
+      type: 'object',
+      required: ['kind'],
       properties: {
         kind: { type: 'string', enum: ['amount', 'length', 'time', 'mass', 'current', 'temperature'] },
-        exponent: { type: "number" }
+        exponent: { type: 'number' }
       },
-      example: { kind: "time", exponent: 1 }
+      example: { kind: 'time', exponent: 1 }
     }
   }
 };
