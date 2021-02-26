@@ -24,6 +24,7 @@ program
   .usage('[options] [dir]')
   .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".json5", ".yml"]', 'platform')
   // options
+  .option('--units-check', 'Check all Records for unit consistency.')
   .option('-S, --skip-export', 'do not export files to local directory')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
   .option('-d, --debug', 'If set the raw module output will be stored in "meta".')
@@ -74,6 +75,7 @@ program
   // === options from CLI ===
   let CLIDeclaration = {
     options: {
+      unitsCheck: program.unitsCheck,
       skipExport: program.skipExport,
       logMode: program.logMode,
       debug: program.debug,

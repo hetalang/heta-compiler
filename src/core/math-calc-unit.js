@@ -100,6 +100,8 @@ module.exports = [
 
             return argUnit[0];
           }
+        } else if (this.fn === 'unaryMinus') {
+          return argUnit[0];
         } else {
           throw new Error(`No method calcUnit() for the operator : "${this.fn}"`);
         }

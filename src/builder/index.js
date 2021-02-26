@@ -100,11 +100,11 @@ class Builder {
 
     // 5. Units checking
     this.container.checkCircUnitDef();
-    if (this.options.skipUnitsCheck) {
-      this.logger.warn('Checking unit\'s skipped as stated in declaration.');
-    } else {
+    if (this.options.unitsCheck) {
       this.logger.info('Checking unit\'s consistency.');
       this.container.checkUnits();
+    } else {
+      this.logger.warn('Checking unit\'s skipped as stated in declaration.');
     }
 
     // === STOP if errors ===

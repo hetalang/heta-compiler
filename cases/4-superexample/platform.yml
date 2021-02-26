@@ -3,7 +3,7 @@ builderVersion: '*'
 options:
   logLevel: info
   debug: false
-  skipUnitsCheck: true
+  unitsCheck: false
 importModule:
   type: heta
   source: src/index.heta

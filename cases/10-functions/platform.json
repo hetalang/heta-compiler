@@ -10,7 +10,7 @@
     "logs": "output.log",
     "logLevel": "info",
     "skipExport": false,
-    "skipUnitsCheck": true
+    "unitsCheck": false
   },
   "importModule": {
     "type": "heta",

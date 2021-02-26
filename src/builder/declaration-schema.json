@@ -29,7 +29,7 @@
         "logPath": {"type": "string", "default": "build.log"},
         "logLevel": {"type": "string", "default": "info"},
         "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
-        "skipUnitsCheck": {"type": "boolean", "default": false},
+        "unitsCheck": {"type": "boolean", "default": false},
         "skipExport": {"type": "boolean", "default": false},
         "ssOnly": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },

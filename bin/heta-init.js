@@ -18,14 +18,14 @@ const defaultPlatform = {
   //repository: {url: '', type: 'git'},
   license: 'UNLICENSED', // for not published
   //private: false,
-  constributors: [],
+  contributors: [],
   builderVersion: '^' + pkg.version,
   options: {
     debug: false,
     logs: 'output.log',
     logLevel: 'info',
     skipExport: false,
-    skipUnitsCheck: false
+    unitsCheck: false
   },
   //script: {
   //  afterInit: null,
@@ -97,7 +97,7 @@ prompt(questions)
     }, answers);
     platform.options = answers.options
       ? defaultPlatform.options
-      : undefined;
+      : {};
 
     // select files
     if (answers.importModule==='heta') {
