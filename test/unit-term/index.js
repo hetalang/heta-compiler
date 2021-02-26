@@ -14,6 +14,7 @@ describe('Simple testing of UnitTerm', () => {
     expect(ut).to.be.lengthOf(5);
     expect(ut[1]).to.have.property('kind', 'length');
     expect(ut[1]).to.have.property('exponent', 2);
+    expect(ut.toString()).to.be.equal('amount*length^2/time^2*mass*current^0');
   });
 
   it('Error: wrong "kind" prop', () => {
@@ -29,6 +30,7 @@ describe('Simple testing of UnitTerm', () => {
       {kind: 'length', exponent: 2},
       {kind: 'time', exponent: -1}
     ]);
+    expect(mult.toString()).to.be.equal('length^2/time');
   });
   
   it('divide()', () => {

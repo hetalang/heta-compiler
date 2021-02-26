@@ -156,7 +156,8 @@ class Container {
           }
           let isLegal = Compartment.legalTerms.some((x) => term.equal(x)); // one of them is legal
           if (!isLegal) {
-            let msg = `Compartment "${rec.index}" has wrong unit term. It must be "length", "square" or "volume".`;
+            let termString = term.toString();
+            let msg = `Compartment "${rec.index}" has wrong unit term. It must be "length", "square" or "volume"., got "${termString}"`;
             this.logger.warn(msg, {type: 'UnitError'});
           }
         });
@@ -175,13 +176,15 @@ class Container {
           if (rec.isAmount){
             let isLegal = Species.legalTermsAmount.some((x) => term.equal(x)); // one of them is legal
             if (!isLegal) {
-              let msg = `Species {isAmount: true} "${rec.index}" has wrong unit term. It must be "amount" or "mass"`;
+              let termString = term.toString();
+              let msg = `Species {isAmount: true} "${rec.index}" has wrong unit term. It must be "amount" or "mass", got "${termString}".`;
               this.logger.warn(msg, {type: 'UnitError'});
             }
           } else {
             let isLegal = Species.legalTerms.some((x) => term.equal(x)); // one of them is legal
             if (!isLegal) {
-              let msg = `Species {isAmount: false} "${rec.index}" has wrong unit term. It must be "amount/length", "amount/square" or "amount/volume"`;
+              let termString = term.toString();
+              let msg = `Species {isAmount: false} "${rec.index}" has wrong unit term. It must be "amount/length", "amount/square" or "amount/volume", got "${termString}"`;
               this.logger.warn(msg, {type: 'UnitError'});
             }
           }
@@ -200,7 +203,8 @@ class Container {
           }
           let isLegal = Reaction.legalTerms.some((x) => term.equal(x)); // one of them is legal
           if (!isLegal) {
-            let msg = `Reaction "${rec.index}" has wrong unit term. It must be "amount/time", "mass/time"`;
+            let termString = term.toString();
+            let msg = `Reaction "${rec.index}" has wrong unit term. It must be "amount/time", "mass/time", got "${termString}"`;
             this.logger.warn(msg, {type: 'UnitError'});
           }
         });

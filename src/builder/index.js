@@ -104,7 +104,7 @@ class Builder {
       this.logger.info('Checking unit\'s consistency.');
       this.container.checkUnits();
     } else {
-      this.logger.warn('Checking unit\'s skipped as stated in declaration.');
+      this.logger.warn('Units checking skipped. To turn it on set "unitsCheck: true" in declaration.');
     }
 
     // === STOP if errors ===

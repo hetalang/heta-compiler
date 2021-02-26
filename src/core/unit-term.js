@@ -67,6 +67,23 @@ class UnitTerm extends Array {
   equal(ut) {
     return this.divide(ut).simplify().length === 0;
   }
+  toString(){
+    return this.map((item, i) => {
+      let exponentString = (item.exponent === 1 || item.exponent === -1)
+        ? ''
+        : '^' + Math.abs(item.exponent);
+      let kindExponentString = item.kind + exponentString;
+      if (i === 0 && item.exponent > 0) {
+        var sign = '';
+      } else if (item.exponent < 0) {
+        sign = '/';
+      } else {
+        sign = '*';
+      }
+
+      return sign + kindExponentString;
+    }).join('');
+  }
 }
 
 module.exports = {

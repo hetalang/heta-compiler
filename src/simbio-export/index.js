@@ -63,7 +63,8 @@ class SimbioExport extends AbstractExport{
           let term = species.unitsParsed.toTerm();
           let isLegal = Species.legalTermsAmount.some((x) => term.equal(x));
           if (!isLegal) {
-            let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass".`;
+            let termString = term.toString();
+            let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass", got "${termString}".`;
             logger.error(msg, {type: 'UnitError'});
             return true; // BRAKE
           }
