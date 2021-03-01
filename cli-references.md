@@ -179,7 +179,7 @@ There are properties in declaration file which do not change compilation process
 | options | object | | {} | A set of compiler options. |
 | options.logMode | string | --log-mode | error | The rule in which case the log file should be created. Possible values are: never/error/always. |
 | options.logPath | string | | build.log | Filepath where the log file should be created. |
-| options.logLevel | string | | info | When parsing the compiler prints the messages to the shell. Here you can set a level of printing messages. Possible values: "info", "warning", "error". For example if you set "warn", only warnings and errors will be printed. |
+| options.logLevel | string | | info | When parsing the compiler prints the messages to the shell. Here you can set a level of printing messages. Possible values: "info", "warn", "error". For example if you set "warn", only warnings and errors will be printed. |
 | options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
 | options.unitsCheck | boolean | --units-check | false | If `true` all Record will be checked for units consistency. |
 | options.skipExport | boolean | --skip-export | false | If `true` no export files will be created. |
