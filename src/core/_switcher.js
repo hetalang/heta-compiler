@@ -9,6 +9,10 @@ const _ = require('lodash');
   };
 */
 class _Switcher extends Component {
+  constructor(isCore = false){
+    super(isCore);
+    this.active = true;
+  }
   merge(q = {}){
     super.merge(q);
     let logger = _.get(this, 'namespace.container.logger');
@@ -18,6 +22,9 @@ class _Switcher extends Component {
       if (typeof q.atStart !== 'undefined') {
         this.atStart = q.atStart;
       }
+      if (q.active === false) {
+        this.active = false;
+      }
     }
 
     return this;
@@ -26,12 +33,15 @@ class _Switcher extends Component {
     let clonedComponent = super.clone();
     if (typeof this.atStart !== 'undefined')
       clonedComponent.atStart = this.atStart;
-      
+    if (typeof this.active !== 'undefined')
+      clonedComponent.active = this.active;
+
     return clonedComponent;
   }
   toQ(options = {}){
     let res = super.toQ(options);
     if (this.atStart) res.atStart = true;
+    if (this.active === false) res.active = false;
 
     return res;
   }

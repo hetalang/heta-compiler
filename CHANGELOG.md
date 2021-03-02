@@ -10,6 +10,7 @@
 - excel sheets numeration from 0 not from 1
 - optional "id" property for #export
 - advanced units checking for #export {format: Simbio, ...}
+- support @_Switcher {active: false}
 - minor bugs fix
 
 ## 0.5.18

@@ -535,19 +535,19 @@ if({{ evt.switcher.id }}_>0){
 {%- if switchers | length > 0 %}
 //! Switchers for time events, count {{ switchers|length }}
 {% for switcher in switchers %}
-{{ switcher.id }}_ = 1; // @TimeSwitcher { };
+{{ switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @TimeSwitcher { };
 {% endfor %}
 {% endif %}
 {%- if discreteEvents | length > 0 %}
 //! Switchers for discrete events, count {{ discreteEvents | length }}
 {%- for evt in discreteEvents %}
-{{ evt.switcher.id }}_ = 1; // @DSwitcher {  }
+{{ evt.switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @DSwitcher {  }
 {%- endfor %}
 {%- endif %}
 {%- if continuousEvents | length > 0 %}
 //! Switchers for continuous events, count {{ continuousEvents | length }}
 {%- for evt in continuousEvents %}
-{{ evt.switcher.id }}_ = 1; // @CSwitcher {  }
+{{ evt.switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @CSwitcher {  }
 {%- endfor %}
 {%- endif %}
 {% endblock %}
