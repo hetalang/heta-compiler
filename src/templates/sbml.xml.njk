@@ -249,6 +249,7 @@
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
+            {% if not event.active %}<apply><and/><false/>{% endif %}
             <apply>
               <gt/>
               <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
@@ -258,6 +259,7 @@
               <cn>{{ event.startObj.num }}</cn>
               {%- endif %}
             </apply>
+            {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
         <listOfEventAssignments>
@@ -277,11 +279,13 @@
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
+            {% if not event.active %}<apply><and/><false/>{% endif %}
             <apply>
               <geq/>
               {{ event.trigger.toCMathML(true) }}
               <cn>0</cn>
             </apply>
+            {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
         <listOfEventAssignments>
@@ -300,7 +304,11 @@
         id="{{ event.id }}" metaid="{{ event.index }}"
         >
         <trigger>
-          {{ event.trigger.toCMathML() }}
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            {% if not event.active %}<apply><and/><false/>{% endif %}
+            {{ event.trigger.toCMathML(true) }}
+            {% if not event.active %}</apply>{% endif %}
+          </math>
         </trigger>
         <listOfEventAssignments>
           {% for record in population.selectRecordsByContext(event.id) %}
