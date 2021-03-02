@@ -24,8 +24,12 @@ class Unit extends Array {
     obj.forEach((x) => {
       if (typeof x.kind !== 'string')
         throw new TypeError('kind property must be string.');
-      _.defaults(x, { multiplier: 1, exponent: 1 });
-      res.push(x);
+      //res.push(Object.assign({multiplier: 1, exponent: 1}, x)); // to copy all properties from x
+      res.push({
+        kind: x.kind,
+        multiplier: x.multiplier !== undefined ? x.multiplier : 1,
+        exponent: x.exponent !== undefined ? x.exponent : 1
+      });
     });
 
     return res;
@@ -82,7 +86,7 @@ class Unit extends Array {
 
     this.forEach((x) => {
       if (typeof x.kindObj === 'undefined') {
-        throw new TypeError(`Cannot rebase unbound unit: "${x.kind}"`);
+        throw new TypeError(`Cannot rebase the unbound unit: "${x.kind}"`);
       }
       let parsed = x.kindObj.unitsParsed;
       if (typeof parsed === 'undefined') { // is primitive? just push without refs!
@@ -183,8 +187,8 @@ class Unit extends Array {
       .map(1)
       .filter((x) => !(x.kind === dimensionlessKind && x.multiplier === 1)) // this may result in empty unit array
       .value();
-
-    return Unit.fromQ(group);
+      
+    return (new Unit()).concat(group);
   }
   equal(unit, rebase = false) {
     if (!(unit instanceof Unit)) {
@@ -523,7 +527,7 @@ class Unit extends Array {
   }
 }
 
-function unitComponentToHTML(item, spaceSymbol = '&#160;', minusSymbol = '&#8722;'){
+function unitComponentToHTML(item, spaceSymbol = '&#160;'){ //, minusSymbol = '&#8722;'
   
   if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
     var multKind = '1';
