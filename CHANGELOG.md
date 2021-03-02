@@ -1,14 +1,21 @@
 # Change Log
 
-## 0.6.0 - new Heta standard 
+## 0.6.0 - supports Heta standard of v0.4
 
-- supporting of units in format [], 1, (1e-3)
-
+- add #defineUnit instead of @UnitDef class
+- checking terms for @Compartment, @Species, @Reaction
+- checking units consistency for all @Record's assignments
+- options.unitsCheck in declaration file
+- supporting of dimensionless units in format [], 1, (1e-3)
+- excel sheets numeration from 0 not from 1
+- optional "id" property for #export
+- advanced units checking for #export {format: Simbio, ...}
+- minor bugs fix
 
 ## 0.5.18
 
 - Message for user to install the latest version
-- Stop export if errors exists
+- Stop export if compilation errors exist
 - support of ternary operator in Simbio
 
 ## 0.5.17
@@ -34,7 +41,7 @@
 - rename #export Julia to SimSolver
 - add properties to @Const: scale, lower, upper
 - sbml-module: use dimensionless for simplified units
-- sbml-module: suport base units
+- sbml-module: support base units
 - minor bug fixes
 
 ## 0.5.14
@@ -135,12 +142,12 @@
 - update _Component.clone() method to exclude cloning of namespace
 - fixes to sbmlParse() function for clear math expressions
 - "src/browser.js" is an entry point for browser apps and webpack
-- methos references() to _Component
+- method references() to _Component
 - add "omit" property to #export formats: JSON, YAML, XLSX
 - exclude "fs" and "path" libs from core code for browser support
-- updates to nunjucks temmplates for easy usage in browser apps
+- updates to nunjucks templates for easy usage in browser apps
 - remove specific JS errors from Container and components
-- multiple dependensies updates
+- multiple dependencies updates
 
 ## 0.5.0 - first public
 

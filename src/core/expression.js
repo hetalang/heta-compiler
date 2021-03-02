@@ -57,7 +57,7 @@ class Expression {
       return undefined;
     }
   }
-  linearizeFor(target){
+  lianerizeFor(target){
     // estimate a, b from 'a * target + b'
     // b = a*0+b
     let bTree = math.simplify(this.exprParsed, {[target]: 0});

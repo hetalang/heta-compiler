@@ -46,7 +46,7 @@ class DBSolveExport extends AbstractExport{
     // use only one namespace
     let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
-      let msg = 'spaceFilter for DBSolve format should include at least one namespace but get empty';
+      let msg = 'spaceFilter for DBSolve format should include at least one namespace, got empty.';
       logger.err(msg);
       var content = '';
     } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
@@ -55,7 +55,7 @@ class DBSolveExport extends AbstractExport{
       content = '';
     } else {
       if (this.spaceFilter.length > 1) {
-        let msg = `DBSolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        let msg = `DBSolve format does not support multi-space export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
       let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
@@ -168,7 +168,7 @@ class DBSolveExport extends AbstractExport{
       .map((switcher) => {
         // check boolean expression in trigger
         if (!switcher.trigger.isComparison) {
-          let msg = `DBSolve supports only simple comparison operators in DSwitcher trigger but get: "${switcher.trigger.toString()}"`;
+          let msg = `DBSolve supports only simple comparison operators in DSwitcher trigger, got: "${switcher.trigger.toString()}"`;
           logger.error(msg, {type: 'ExportError'});
         }       
         
@@ -214,7 +214,7 @@ class DBSolveExport extends AbstractExport{
         };
       });
     // group Const
-    let grouppedConst = _.groupBy(
+    let groupedConst = _.groupBy(
       ns.selectByClassName('Const'),
       (con) => _.get(con, this.groupConstBy)
     );
@@ -230,7 +230,7 @@ class DBSolveExport extends AbstractExport{
       powTransform: this.powTransform,
       discreteEvents,
       continuousEvents,
-      grouppedConst
+      groupedConst
     };
   }
   getSLVCode(image = {}){

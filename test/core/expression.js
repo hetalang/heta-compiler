@@ -82,28 +82,28 @@ describe('Linearization for Expression', () => {
   it('Linearization of y = a*y + b', () => {
     let expr = Expression.fromString('a*y + b');
     let res = expr
-      .linearizeFor('y')
+      .lianerizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['a', 'b']);
   });
   it('Linearization of y = a*y', () => {
     let expr = Expression.fromString('a*y');
     let res = expr
-      .linearizeFor('y')
+      .lianerizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['a', '0']);
   });
   it('Linearization of y = b', () => {
     let expr = Expression.fromString('b');
     let res = expr
-      .linearizeFor('y')
+      .lianerizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['0', 'b']);
   });
   it('Linearization of y = a*y^2 + b', () => {
     let expr = Expression.fromString('a*y^2 + b');
     let res = expr
-      .linearizeFor('y')
+      .lianerizeFor('y')
       .map((expression) => expression.toString());
     expect(res).to.deep.equal(['y * a', 'b']);
   });

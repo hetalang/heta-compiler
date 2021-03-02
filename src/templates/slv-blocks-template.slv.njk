@@ -33,7 +33,7 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 =============================== IV ================================
 {% block iv %}
 //! Constants, count: {{ population.selectByClassName("Const") | length }}
-{%- for key, constants in grouppedConst %}
+{%- for key, constants in groupedConst %}
 //
 //!! {{ key if key !== 'undefined' else 'ungroupped' }}
 {%- for con in constants %}

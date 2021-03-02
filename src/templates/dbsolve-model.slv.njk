@@ -518,7 +518,7 @@ if({{ evt.switcher.id }}_>0){
 */
 {% block iv %}
 //! Constants, count: {{ population.selectByClassName('Const') | length }}
-{%- for key, constants in grouppedConst %}
+{%- for key, constants in groupedConst %}
 //
 //!! {{ key if key !== 'undefined' else 'ungroupped' }}
 {%- for con in constants %}
