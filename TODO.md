@@ -33,12 +33,11 @@
 
 ## features
 
-- Export to SBML without standard units like _litre
 - multi-space export in Matlab
 - test empty assignments for @Record + to specifications
 - #move, #moveNS
 - automatic creation of modifiers in SBML
-- parameter switching: see "parameter-swithcing.md"
+- parameter switching: see "parameter-switching.md"
 - atStart to exports: SimSolver, Matlab, DBSolve
 
 ## ideas
@@ -49,8 +48,8 @@
 - heta update => npm i heta-compiler
 - support null for properties: highlight, parse, heta standard
 - stoichiometry as @Const and @Record
-- #setFunction + function checking
-- updating properties: `one::s1.assignments.start_ 5.5;`
+- #defineFunction + function checking
+- updating properties with `one::s1.assignments.start_ 5.5;`
 
 ### Dose class
 

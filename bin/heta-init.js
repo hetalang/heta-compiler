@@ -152,7 +152,7 @@ prompt(questions)
       platform.importModule = {
         type: 'xlsx',
         source: 'src/table.xlsx',
-        sheet: 1,
+        sheet: 0,
         omitRows: 3
       };
 

@@ -58,7 +58,7 @@ class _Module {
     let absDirPath = path.dirname(this.filename);
     this.getImportElements().forEach((q) => {
       if(typeof q.source !== 'string') {
-        throw new TypeError(`Property "source" in include inside "${this.filename}" must be string`);
+        throw new TypeError(`Property "source" in "${this.filename}" must be string`);
       }
       q.source = path.resolve(absDirPath, q.source);
     });
