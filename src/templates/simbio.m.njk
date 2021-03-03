@@ -107,7 +107,7 @@ addrule(
 {{ population.spaceName }}.event.{{event.id}} = addevent({{ model_id }}, 'time > {{  event.start if event.start is defined else event.startObj.num }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Notes', '{{event.notesHTML}}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{event.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfDEvents = population.selectByClassName("DSwitcher") %}
@@ -116,7 +116,7 @@ addrule(
 {{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfCEvents = population.selectByClassName("CSwitcher") %}
@@ -125,5 +125,5 @@ addrule(
 {{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() + '>=0' if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
 {% endfor %}
