@@ -50,9 +50,7 @@ class SimSolverExport extends AbstractExport {
 
     // create Content
     let image = {
-      builderName: skipVersionCode 
-        ? 'test version' 
-        : (pkg.name + ' of v' + pkg.version),
+      builderVersion: skipVersionCode ? '*' : pkg.version,
       options: this,
       nsImages
     };
