@@ -11,7 +11,7 @@
 - optional "id" property for #export
 - advanced units checking for #export {format: Simbio, ...}
 - support @_Switcher {active: false}
-- minor bugs fix
+- fix support of logical operators: and, or, not, xor
 
 ## 0.5.18
 

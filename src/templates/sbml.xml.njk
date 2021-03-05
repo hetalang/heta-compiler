@@ -305,9 +305,9 @@
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            {% if not event.active %}<apply><and/><false/>{% endif %}
+            {% if not event.active %}<apply><and/><false/>{% endif -%}
             {{ event.trigger.toCMathML(true) }}
-            {% if not event.active %}</apply>{% endif %}
+            {%- if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
         <listOfEventAssignments>

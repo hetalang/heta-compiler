@@ -175,7 +175,7 @@ function {{ id }}_{{ event.switcher.id }}_trigger_(u, t, integrator)
     {% endif -%}
     {% endfor %}
 
-    return {{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }} ? 1 : -1
+    return ({{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }}) ? 1 : -1
 end
 {%- endfor %}
 

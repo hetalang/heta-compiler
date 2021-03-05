@@ -58,6 +58,27 @@ Expression.prototype.toMatlabString = function(){
         .map((arg) => arg.toString(options));
       return `tern__(${args[0]}==${args[1]}, ${args[2]}, ${args[3]})`;
     }
+    // operators
+    if (node.type === 'OperatorNode' && node.fn === 'and') {
+      return node.args
+        .map((arg) => arg.toString(options))
+        .join(' & ');
+    }
+    if (node.type === 'OperatorNode' && node.fn === 'or') {
+      return node.args
+        .map((arg) => arg.toString(options))
+        .join(' | ');
+    }
+    if (node.type === 'OperatorNode' && node.fn === 'xor') {
+      let args = node.args
+        .map((arg) => arg.toString(options))
+        .join(', ');
+      return `xor(${args})`;
+    }
+    if (node.type === 'OperatorNode' && node.fn === 'not') {
+      let arg0 = node.args[0].toString(options, true);
+      return `~${arg0}`;
+    }
     // ternary operator
     if (node.type === 'ConditionalNode') {
       //console.log(node);
