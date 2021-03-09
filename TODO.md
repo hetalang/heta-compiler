@@ -27,12 +27,11 @@
 
 ## bugs
 
-- test #export for units like 1, [], (1e-3)
-- check boolean or numeric expression in Record and ternary
+- ternary in dbsolve
 
 ## features
 
-- multi-space export in Matlab
+- multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - test empty assignments for @Record + to specifications
 - #move, #moveNS
 - automatic creation of modifiers in SBML

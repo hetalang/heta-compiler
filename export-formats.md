@@ -13,6 +13,8 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [SimSolver](#simsolver)
 - [Matlab](#matlab)
 
+See also [Features support table](#features-support)
+
 The general format for all export actions is the following:
 ```heta
 #export {

@@ -6,21 +6,76 @@ math.import(mathCalcUnits);
 let { OperatorNode, SymbolNode } = math.expression.node;
 const _ = require('lodash');
 
+/* remove parenthesis from top */
+function _removeParenthesis(node) {
+  if (node.type === 'ParenthesisNode') {
+    return _removeParenthesis(node.content);
+  } else {
+    return node;
+  }
+}
+
+/*
+  To check if mathjs.Node instance has boolean or numeric result
+*/
+math.import({
+  name: 'hasBooleanResult',
+  path: 'expression.node.Node.prototype',
+  factory: function(){
+    let operators = [
+      'smaller', 'smallerEq',
+      'larger', 'largerEq',
+      'equal', 'unequal',
+      'and', 'or', 'xor', 'not'
+    ];
+
+    return function(){
+      let expr = _removeParenthesis(this);
+  
+      let isBooleanOperator = expr.type === 'OperatorNode'
+        && operators.indexOf(expr.fn) !== -1;
+      let isBooleanValue = expr.type === 'ConstantNode'
+        && [true, false].indexOf(expr.value) !== -1;
+  
+      return isBooleanOperator || isBooleanValue;
+    };
+  }
+});
+
+/*
+  To store mathematical expressions with additional methods
+*/
 class Expression {
-  constructor(exprParsed){ // string or object
+  /*
+    exprParsed: <mathjs.Node>
+  */
+  constructor(exprParsed){ 
     this.exprParsed = exprParsed;
   }
-  static fromString(q){ // string or object
-    if (typeof q!=='string' && typeof q!=='number')
-      throw new TypeError('Expected <string> or <number>, but get ' + JSON.stringify(q));
+  /*
+    q: <String> || <Number>
+  */
+  static fromString(expr){
+    if (typeof expr !== 'string' && typeof expr !== 'number')
+      throw new TypeError('Expected <string> or <number>, got ' + JSON.stringify(expr));
 
-    let exprString = q.toString();
+    let exprString = expr.toString();
 
     try {
       var exprParsed = math.parse(exprString);
     } catch(e) {
       throw new TypeError('Cannot parse MathExpr properly. ' + e.message);
     }
+
+    // check that ternary has boolean expression
+    exprParsed.filter((node) => node.type === 'ConditionalNode')
+      .forEach((node) => {
+        let cond = node.condition;
+        if (!cond.hasBooleanResult()) {
+          let msg = `Ternary operator must have a boolean condition, got "${cond.toString()}"`;
+          throw new TypeError(msg);
+        }
+      });
 
     return new Expression(exprParsed);
   }
@@ -89,22 +144,6 @@ class Expression {
 
     return new Expression(node);
   }
-  hasBooleanResult(){
-    let operators = [
-      'smaller', 'smallerEq',
-      'larger', 'largerEq',
-      'equal', 'unequal',
-      'and', 'or', 'xor', 'not'
-    ];
-    let expr = _removeParenthesis(this.exprParsed);
-
-    let isBooleanOperator = expr.type === 'OperatorNode'
-      && operators.indexOf(expr.fn) !== -1;
-    let isBooleanValue = expr.type === 'ConstantNode'
-      && [true, false].indexOf(expr.value) !== -1;
-
-    return isBooleanOperator || isBooleanValue;
-  }
   // check if expression includes boolean operators: "and", "or", etc. 
   get isComparison(){
     let booleanOperators = [
@@ -119,7 +158,7 @@ class Expression {
     return res;
   }
   /*
-  Get array of unuque ids from expression
+  Get array of unique ids from expression
   */
   dependOn(){
     let res = this.dependOnNodes().map((node) => node.name);
@@ -133,15 +172,6 @@ class Expression {
     return this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
       .filter((node) => ['t', 'e', 'pi'].indexOf(node.name) === -1);
-  }
-}
-
-/* remove parenthesis from top */
-function _removeParenthesis(node) {
-  if (node.type === 'ParenthesisNode') {
-    return _removeParenthesis(node.content);
-  } else {
-    return node;
   }
 }
 

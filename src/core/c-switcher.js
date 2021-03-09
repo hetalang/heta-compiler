@@ -19,8 +19,8 @@ class CSwitcher extends _Switcher {
       if (typeof q.trigger !== 'undefined') {
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
-          if (!expr.hasBooleanResult()) {
-            this.trigger = expr; 
+          if (!expr.exprParsed.hasBooleanResult()) {
+            this.trigger = expr;
           } else {
             let msg = `CSwitcher trigger "${this.index}" should be a numeric expression.`;
             logger && logger.error(msg, {type: 'ValidationError', space: this.space});
