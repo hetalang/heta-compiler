@@ -45,9 +45,6 @@
     "space": "mm",
     "title": "Michaelis-Menten reaction",
     "notes": "Transformation of __substate__ to __product__",
-    "aux": {
-      "reversible": false
-    },
     "units": "umole/minute",
     "assignments": {
       "ode_": "Vmax * S / (Km + S) * default_comp"
@@ -61,7 +58,8 @@
         "target": "P",
         "stoichiometry": 1
       }
-    ]
+    ],
+    "reversible": false
   },
   {
     "class": "Const",

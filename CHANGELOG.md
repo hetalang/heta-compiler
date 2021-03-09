@@ -12,6 +12,7 @@
 - advanced units checking for #export {format: Simbio, ...}
 - support @_Switcher {active: false}
 - fix support of logical operators: and, or, not, xor
+- add `reversible` property (default `true`) to `@Process`
 
 ## 0.5.18
 

@@ -454,8 +454,8 @@ function reactionToQ(x){
   }
 
   // check if reversible
-  let reversible = _.get(x, 'attributes.reversible') !== 'false' ;
-  _.set(q, 'aux.reversible', reversible);
+  q.reversible = _.get(x, 'attributes.reversible') !== 'false' ;
+  
   // check if fast
   let fast = _.get(x, 'attributes.fast') === 'true' ;
   //_.set(q, 'aux.fast', fast);
@@ -471,9 +471,9 @@ function reactionToQ(x){
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
         // check stoichiometry as an expression
-        let stoicheometryExpr = _.get(y, 'elements', [])
+        let stoichiometryExpr = _.get(y, 'elements', [])
           .filter((z) => z.name === 'stoichiometryMath');
-        if (stoicheometryExpr.length > 0)
+        if (stoichiometryExpr.length > 0)
           throw new Error('"stoichiometryMath" from SBML module is not supported.');
 
         // get constant stoichiometry
@@ -495,9 +495,9 @@ function reactionToQ(x){
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
         // check stoichiometry as an expression
-        let stoicheometryExpr = _.get(y, 'elements', [])
+        let stoichiometryExpr = _.get(y, 'elements', [])
           .filter((z) => z.name === 'stoichiometryMath');
-        if (stoicheometryExpr.length > 0)
+        if (stoichiometryExpr.length > 0)
           throw new Error('"stoichiometryMath" from SBML module is not supported.');
 
         // get constant stoichiometry

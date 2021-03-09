@@ -27,8 +27,6 @@
 
 ## bugs
 
-- ternary in dbsolve
-
 ## features
 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
@@ -48,6 +46,7 @@
 - stoichiometry as @Const and @Record
 - #defineFunction + function checking
 - updating properties with `one::s1.assignments.start_ 5.5;`
+- remove `isAmount`, `compartment` properties from `@Reaction`
 
 ### Dose class
 

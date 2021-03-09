@@ -56,7 +56,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {{ "% Reactions" if listOfReactions|length > 0 }}
 {%- for record in listOfReactions %}
 {{ population.spaceName }}.reaction.{{record.id}} = addreaction(
-  {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.aux.reversible!==false}}
+  {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.reversible!==false}}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
   , 'Notes', '{{record.notesHTML}}', 'Tag', '');
   {%- set fullActors = record.actors.concat(record.modifiers) -%}

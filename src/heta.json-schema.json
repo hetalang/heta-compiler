@@ -168,7 +168,7 @@
         { "$ref": "#/definitions/RecordP" },
         { "$ref": "#/definitions/SpeciesP" },
         {
-          "required": ["id", "space", "compartement"],
+          "required": ["id", "space", "compartment"],
           "properties": { "class": { "const": "Species" } }
         }
       ]
@@ -210,6 +210,7 @@
     "ReactionP": {
       "type": "object",
       "properties": {
+        "reversible": { "type": "boolean", "default": true },
         "modifiers": {
           "type": "array",
           "items": {

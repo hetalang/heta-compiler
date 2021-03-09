@@ -34,9 +34,6 @@
     "class": "Reaction",
     "id": "reaction1",
     "title": "reaction1",
-    "aux": {
-      "reversible": false
-    },
     "assignments": {
       "ode_": "compartment * k1 * S1"
     },
@@ -49,7 +46,8 @@
         "target": "S1",
         "stoichiometry": -1
       }
-    ]
+    ],
+    "reversible": false
   },
   {
     "class": "Record",

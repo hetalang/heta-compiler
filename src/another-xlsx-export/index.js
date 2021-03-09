@@ -58,7 +58,7 @@ class AnotherXLSXExport extends XLSXExport {
           //q['#'] = counter++;
           q.st = 'f';
 
-          return _.omit(q, ['class', 'units', 'units2', 'aux.reversible']);
+          return _.omit(q, ['class', 'units', 'units2', 'reversible']);
         }), 
       qArr.filter((q) => q.class === 'Reaction')
         .map((q) => {
@@ -66,7 +66,7 @@ class AnotherXLSXExport extends XLSXExport {
           q.st = 'r';
           if (q.isAmount!==false) q.compartment = 'no';
 
-          return _.omit(q, ['class', 'units', 'units2', 'aux.reversible']);
+          return _.omit(q, ['class', 'units', 'units2', 'reversible']);
         })
     );
 

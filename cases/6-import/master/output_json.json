@@ -51,9 +51,6 @@
     "id": "r1",
     "space": "model",
     "notes": "Mikhaelis-Menten reaction",
-    "aux": {
-      "reversible": false
-    },
     "assignments": {
       "ode_": "k1 * enzyme * A / (Km_A + A) * comp"
     },
@@ -71,7 +68,8 @@
       {
         "target": "enzyme"
       }
-    ]
+    ],
+    "reversible": false
   },
   {
     "class": "Const",

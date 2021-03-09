@@ -15,6 +15,7 @@ class Process extends Record {
   constructor(isCore = false){
     super(isCore);
     this.actors = [];
+    this.reversible = true;
   }
   merge(q = {}){
     super.merge(q);
@@ -30,17 +31,20 @@ class Process extends Record {
           let { targetArray, isReversible } = rct2actors(q.actors);
           this.actors = targetArray
             .map((q) => new Actor(q));
-          _.set(this, 'aux.reversible', isReversible);
+          this.reversible = isReversible;
         }
       }
+      if (q.reversible !== undefined) this.reversible = q.reversible;
     }
     
     return this;
   }
   clone(){
     let clonedComponent = super.clone();
-    if (this.actors.length > 0)
+    if (this.actors !== undefined)
       clonedComponent.actors = this.actors.map((actor) => actor.clone());
+
+    clonedComponent.reversible = this.reversible;
 
     return clonedComponent;
   }
@@ -54,6 +58,7 @@ class Process extends Record {
       : this.actors.map((actor) => {
         return { target: actor.target, stoichiometry: actor.stoichiometry };
       });
+    if (this.reversible !== true) res.reversible = this.reversible;
 
     return res;
   }

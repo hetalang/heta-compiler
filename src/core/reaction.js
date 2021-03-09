@@ -60,7 +60,7 @@ class Reaction extends Process {
     }
 
     if (this.compartment) res.compartment = this.compartment;
-    if (this.isAmount!==true) res.isAmount = this.isAmount;
+    if (this.isAmount !== true) res.isAmount = this.isAmount;
 
     return res;
   }
