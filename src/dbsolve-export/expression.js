@@ -166,10 +166,9 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
       } else if (condition.type === 'ConstantNode' && condition.value === false) {
         return `ifgt(0, 1, ${trueExpr}, ${falseExpr})`;
       } else if (condition.type === 'OperatorNode') {
-        // TODO: when more complex conditions are used warning or error is required
-        // It can be done if logger is available from parent Record/_Switcher
-        //let msg = `SLV format does not support boolean operators: "${node.toString()}"`;
-        //throw new Error(msg);
+        let msg = `SLV format does not support boolean operators, got "${node.toString()}"`;
+        this._logger.error(msg);
+        return `ifgt([error], [error], ${trueExpr}, ${falseExpr})`;
       }
     }
 

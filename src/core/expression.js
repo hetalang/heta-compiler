@@ -48,6 +48,10 @@ math.import({
 class Expression {
   /*
     exprParsed: <mathjs.Node>
+
+    XXX: currently Expression instances have _logger property
+    which is set after expression creation
+    in future versions it should be resolved by automatic addition of __platform__ property 
   */
   constructor(exprParsed){ 
     this.exprParsed = exprParsed;
@@ -55,11 +59,11 @@ class Expression {
   /*
     q: <String> || <Number>
   */
-  static fromString(expr){
-    if (typeof expr !== 'string' && typeof expr !== 'number')
-      throw new TypeError('Expected <string> or <number>, got ' + JSON.stringify(expr));
+  static fromString(exprStringOrNumber){
+    if (typeof exprStringOrNumber !== 'string' && typeof exprStringOrNumber !== 'number')
+      throw new TypeError('Expected <string> or <number>, got ' + JSON.stringify(exprStringOrNumber));
 
-    let exprString = expr.toString();
+    let exprString = exprStringOrNumber.toString();
 
     try {
       var exprParsed = math.parse(exprString);
@@ -81,7 +85,10 @@ class Expression {
   }
   clone(){
     let clonedMath = this.exprParsed.cloneDeep();
-    return new Expression(clonedMath);
+    let expr = new Expression(clonedMath);
+    expr._logger = this._logger;
+
+    return expr;
   }
   updateReferences(q = {}){
     this.exprParsed.traverse((node /*, path, parent*/) => {
@@ -131,7 +138,10 @@ class Expression {
   translate(translator = {}){
     let exprParsed = this.exprParsed
       .translate(translator);
-    return new Expression(exprParsed);
+    let expr = new Expression(exprParsed); 
+    expr._logger = this._logger; // set the same logger
+
+    return expr;
   }
   // return new expression which is the multiplication
   // of this and expression from argument
@@ -142,7 +152,10 @@ class Expression {
       multiplierParsed
     ]);
 
-    return new Expression(node);
+    let expr = new Expression(node);
+    expr._logger = this._logger; // set the same logger
+
+    return expr;
   }
   // check if expression includes boolean operators: "and", "or", etc. 
   get isComparison(){

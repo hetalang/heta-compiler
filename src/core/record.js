@@ -26,6 +26,7 @@ class Record extends _Size {
           if (typeof x === 'string' || typeof x === 'number') {
             try { // this is for the cases of wrong ExprString structure
               let expr = Expression.fromString(x);
+              expr._logger = logger;
               if (!expr.exprParsed.hasBooleanResult()) {
                 this.assignments[key] = expr;
               } else {

@@ -19,6 +19,7 @@ class CSwitcher extends _Switcher {
       if (typeof q.trigger !== 'undefined') {
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
+          expr._logger = logger;
           if (!expr.exprParsed.hasBooleanResult()) {
             this.trigger = expr;
           } else {
