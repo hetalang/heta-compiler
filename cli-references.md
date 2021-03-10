@@ -127,9 +127,12 @@ After running the command a developer should answer to series of questions about
 | -s, --silent || Run initialization in silent mode with default options. |
 
 #### Example
+
+The current working directory is "Y:\my-folder". We are going to create a new heta project creating subdirectory "test".
+
 ```
 $ heta init -f test
-Creating a template platform in directory: "Y:\qs3p-js\test"...
+Creating a template platform in directory: "Y:\my-folder\test"...
 ? Platform id test-platform       
 ? Platform notes Temporal platform to test initialization
 ? Platform version v0.1.0
@@ -142,6 +145,17 @@ Platform template is created.
 }
 DONE.
 ```
+
+If we check the content of the created "test" directory we will see the following:
+
+**src/index.heta** : the default heta file containing platform template. [index.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/index.heta ':target=_blank :download')
+
+**src/qsp-units.heta** : pre-defined list of units. You didn't have to use it. [qsp-units.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/qsp-units.heta ':target=_blank :download')
+
+**platform.json** : default declaration file.
+
+**.gitattributes, .gitignore** : templates to help working with [Git](https://git-scm.com/)
+
 
 ## "heta help" command
 

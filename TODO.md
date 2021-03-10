@@ -36,6 +36,7 @@
 - automatic creation of modifiers in SBML
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: SimSolver, Matlab, DBSolve
+- check file type for modules
 
 ## ideas
 
