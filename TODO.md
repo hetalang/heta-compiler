@@ -29,6 +29,7 @@
 
 ## features
 
+- check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - test empty assignments for @Record + to specifications
 - #move, #moveNS
