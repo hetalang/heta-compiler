@@ -155,20 +155,22 @@ class Unit extends Array {
    * if dimensionless element is trivial remove it
    */
   simplify(dimensionlessKind = 'dimensionless') {
+    // analyze only dimensionless
+    // multiplier integrating all dimensionless multipliers
+    let commonLogMultiplier = this
+      .filter((x) => x.kind === dimensionlessKind)
+      .reduce((acc, x) => acc + x.exponent * log10(x.multiplier), 0);
+
     // group by kind, combine elements inside kind
     // then transform to regular array
     let group = _.chain(this)
+      .filter((x) => x.kind !== dimensionlessKind)
       .groupBy((x) => x.kind)
       .map((x, key) => {
         let exponent = _.sumBy(x, (y) => y.exponent);
-        if (exponent===0) {
-          let tmp = _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
-          let multiplier = 10 ** (tmp);
-          var res = {
-            kind: dimensionlessKind,
-            exponent: 1,
-            multiplier: multiplier
-          };
+        if (exponent === 0) { // add to multiplier
+          commonLogMultiplier += _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
+          var res = undefined;
         } else {
           let tmp = _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
           let multiplier = 10 ** (tmp / exponent);
@@ -183,10 +185,17 @@ class Unit extends Array {
 
         return res;
       })
+      .filter((x) => typeof x !== 'undefined')
       .toPairs()
       .map(1)
-      .filter((x) => !(x.kind === dimensionlessKind && x.multiplier === 1)) // this may result in empty unit array
       .value();
+
+    // push dimensionless if multiplier !== 1
+    if (commonLogMultiplier !== 0) group.push({
+      kind: dimensionlessKind,
+      exponent: 1,
+      multiplier: 10 ** commonLogMultiplier
+    });
       
     return (new Unit()).concat(group);
   }

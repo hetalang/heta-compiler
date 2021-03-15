@@ -69,6 +69,21 @@ describe('Test Units equality', () => {
     let unit1 = Unit.parse('kg/L');
     expect(unit0.equal(unit1)).to.be.true;
   });
+  it('The same complex units equality', () => {
+    let unit0 = Unit.parse('(1e-9 mole)/litre');
+    let unit1 = Unit.parse('(1e-9 gram)/gram*mole/litre');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
+  it('The same complex units equality 2', () => {
+    let unit0 = Unit.parse('(1e-9 gram)');
+    let unit1 = Unit.parse('(1e-2 dimensionless)^3*(1e-3 gram)');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
+  it('The same dimensionless', () => {
+    let unit0 = Unit.parse('(1e-9 dimensionless)');
+    let unit1 = Unit.parse('(0.000000001 dimensionless)');
+    expect(unit0.equal(unit1)).to.be.true;
+  });
   it('Same with variations', () => {
     let unit0 = Unit.parse('kg/L');
     let unit1 = Unit.parse('1/L*kg');

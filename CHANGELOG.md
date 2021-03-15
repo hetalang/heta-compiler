@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.1
+
+- fix bug with units checking and dimensionless
+
 ## 0.6.0 - supports Heta standard of v0.4
 
 - add #defineUnit instead of @UnitDef class
