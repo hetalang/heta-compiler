@@ -44,7 +44,7 @@ You don't need it for newly created platform.
     Da #defineUnit { units: g/mole };
     ```
 
-1. The numeration of tables in XLSX module starts from zero. Update the code if you use them.
+1. Now the numeration of sheets in module of XLSX type starts from zero. Update the code if you use them.
 
     **include statement for xlsx type**
 
