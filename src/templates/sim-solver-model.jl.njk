@@ -291,8 +291,7 @@ end
     {%- for con in free_constants %}
     (num = {{ con.num }}, lower={{ con.lower | default("1e-6") }}, upper={{ con.upper | default("1e6") }}, scale=:{{ con.scale | default(log)}},){{"," if not loop.last }}
     {%- endfor %}
-  ]),
-  builderVersion = "{{ builderVersion }}"
+  ])
 )
 
 {%- endfor %}{# img #}
@@ -306,6 +305,6 @@ models = (
 )
 tasks = ()
 
-return (models, tasks,)
+return (models, tasks, "{{ builderVersion }}")
 
 end

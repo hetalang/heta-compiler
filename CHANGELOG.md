@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.2
+
+- update to support SimSolver v0.3
+
 ## 0.6.1
 
 - fix bug with units checking and dimensionless
