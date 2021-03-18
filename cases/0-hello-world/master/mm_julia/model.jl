@@ -100,8 +100,7 @@ mm_model_ = Model(
   title = "mm",
   free_constants = NamedTuple{(
   )}([
-  ]),
-  builderVersion = "*"
+  ])
 )
 
 ### OUTPUT
@@ -111,6 +110,6 @@ models = (
 )
 tasks = ()
 
-return (models, tasks,)
+return (models, tasks, "*")
 
 end
