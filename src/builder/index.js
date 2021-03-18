@@ -158,9 +158,8 @@ class Builder {
   }
   exportSSOnly(){
     // create export without putting it to exportStorage
-    let exportItem = new this.container.exports['SimSolver'];
-    exportItem.container = this.container;
-    exportItem.merge({
+    let SimSolver = this.container.classes['SimSolver'];
+    let exportItem = new SimSolver({
       format: 'SimSolver',
       filepath: '_julia'
     });
