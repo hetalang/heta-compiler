@@ -98,7 +98,11 @@ class Builder {
     this.logger.info('Setting references in elements, total length ' + this.container.length);
     this.container.knitMany();
 
-    // 5. Units checking
+    // 5. Circular start_ and ode_
+    this.logger.info('Checking for circular references in Records.');
+    this.container.checkCircRecord();
+
+    // 6. Units checking
     this.container.checkCircUnitDef();
     if (this.options.unitsCheck) {
       this.logger.info('Checking unit\'s consistency.');
@@ -109,11 +113,11 @@ class Builder {
 
     // === STOP if errors ===
     if (!this.logger.hasErrors) {
-      // 6. Terms checking
+      // 7. Terms checking
       this.logger.info('Checking unit\'s terms.');
       this.container.checkTerms();
 
-      // 7. Exports
+      // 8. Exports
       if (this.options.skipExport) {
         this.logger.warn('Exporting skipped as stated in declaration.');
       } else if (this.options.ssOnly) {
@@ -126,7 +130,7 @@ class Builder {
       this.logger.warn('Export skipped because of errors in compilation.');
     }
 
-    // 8. save logs if required
+    // 9. save logs if required
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
     if (createLog) {

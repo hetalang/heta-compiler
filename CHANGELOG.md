@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.6.3
+
+- check expressions for (=) sign
+- bug fix: JS error in case of circular refs
+
 ## 0.6.2
 
 - update to support SimSolver v0.3

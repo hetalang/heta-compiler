@@ -92,7 +92,7 @@ class Container {
   }
   // check all namespaces
   knitMany(){
-    // knit unitDefs TODO: checking for circular UnitDef
+    // knit unitDef
     this.unitDefStorage.forEach((ns) => ns.bind());
     // knit components
     this.namespaceStorage.forEach((ns) => {
@@ -209,6 +209,18 @@ class Container {
           }
         });
     });
+  }
+  checkCircRecord(){
+    // knit components
+    this.namespaceStorage
+      .forEach((ns) => {
+        if (!ns.isAbstract) {
+          ns.checkCircRecord('start_', true);
+          ns.checkCircRecord('ode_', true);
+        }
+      });
+
+    return this;
   }
 }
 

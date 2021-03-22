@@ -71,15 +71,19 @@ class Expression {
       throw new TypeError('Cannot parse MathExpr properly. ' + e.message);
     }
 
-    // check that ternary has boolean expression
-    exprParsed.filter((node) => node.type === 'ConditionalNode')
-      .forEach((node) => {
+    // additional check of expressions
+    exprParsed.traverse((node) => { // recursive forEach
+      if (node.type === 'ConditionalNode') { // check that ternary has boolean expression
         let cond = node.condition;
         if (!cond.hasBooleanResult()) {
           let msg = `Ternary operator must have a boolean condition, got "${cond.toString()}"`;
           throw new TypeError(msg);
         }
-      });
+      } else if (node.type === 'AssignmentNode') { // check = sign
+        let msg = `Assign (=) symbol must not be in expression, got "${exprParsed.toString()}"`;
+        throw new TypeError(msg);
+      }
+    });
 
     return new Expression(exprParsed);
   }

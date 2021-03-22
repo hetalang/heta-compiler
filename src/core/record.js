@@ -34,7 +34,7 @@ class Record extends _Size {
                 logger && logger.error(msg, {type: 'ValidationError', space: this.space});
               }
             } catch (e) {
-              let msg = this.index + ' '+ e.message + ` in "${x.toString()}"`;
+              let msg = this.index + ': '+ e.message + ` in "${x.toString()}"`;
               logger && logger.error(msg, {type: 'ValidationError', space: this.space});
             }
           } else {

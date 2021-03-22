@@ -2,6 +2,7 @@ const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 const { flatten } = require('./core/utilities');
 
+// implicit property container, XXX: should be renamed to _container
 class Namespace extends Map {
   constructor(spaceName){ 
     super();
@@ -75,7 +76,7 @@ class Namespace extends Map {
       let infoLine = err.circular
         .map((id) => {
           let record = this.get(id);
-          return `${record.index} [${context}]= ${record.getAssignment(context, includeCompartmentDep).expr};`;
+          return `${record.index} [${context}]= ${record.getAssignment(context, includeCompartmentDep).toString()};`;
         })
         .join('\n');
       let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
@@ -107,6 +108,15 @@ class Namespace extends Map {
     });
     
     return this;
+  }
+  // This will be done again in _Export.getXXXImage()
+  checkCircRecord(scope, includeCompartmentDep = false){
+    let logger = this.container.logger;
+    try {
+      this.sortExpressionsByContext(scope, includeCompartmentDep);
+    } catch (e) {
+      logger.error(e.message, {type: 'CircularError'});
+    }
   }
 }
 

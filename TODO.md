@@ -40,6 +40,7 @@
 
 ## ideas
 
+- avoid insert for existed elements: get warning or #forceInsert 
 - AnyUnit for zero numbers
 - xlsx module: many tables in one #include
 - @Dose class to use with simbiology/mrgsolve/nonmem doses

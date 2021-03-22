@@ -98,7 +98,7 @@ class DBSolveExport extends AbstractExport{
       .selectByInstanceOf('Record')
       .filter((x) => !x.isDynamic && !x.isRule);
     */
-    let initRecords = ns // XXX: do we need this?
+    let initRecords = ns
       .sortExpressionsByContext('start_', true)
       .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule)); 
     // create matrix
