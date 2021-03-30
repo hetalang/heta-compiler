@@ -27,8 +27,12 @@
 
 ## bugs
 
+- checking modifiers and actors in reaction to be species
+
 ## features
 
+- new @TimeScale Class
+- informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - test empty assignments for @Record + to specifications
@@ -37,6 +41,7 @@
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: SimSolver, Matlab, DBSolve
 - check file type for modules
+- support of comments inside dictionary and array
 
 ## ideas
 
