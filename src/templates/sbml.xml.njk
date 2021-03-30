@@ -268,16 +268,19 @@
                       {{ periodMathML }}
                     </apply>
                     <apply><floor/>
-                      <apply><divide/>
-                        <apply><minus/>
-                          <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-                          {{ startMathML }}
+                      <apply><plus/>
+                        <apply><divide/>
+                          <apply><minus/>
+                            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                            {{ startMathML }}
+                          </apply>
+                          {{ periodMathML }}
                         </apply>
-                        {{ periodMathML }}
+                        <cn>0.5</cn>
                       </apply>
                     </apply>
                   </apply>
-                  <cn>0.5</cn>
+                  <cn>0</cn>
                 </apply>
               {% endif %}
               {% if event.stop is defined or event.stopObj is defined %}

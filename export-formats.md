@@ -349,18 +349,18 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
 |`@TimeSwitcher {start: 0}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |- |+ |+ |+ |+ |+
-|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |- |+ |+
-|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |- |- |+ |+
+|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |+ |+ |+
+|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |- |+ |+ |+
 |`@CSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |- |+ |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
 |`@DSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |- |+ |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|`@Dose` class                                           |- |- |- |- |- |- |- |- |-
+|`@Dose` class (experimental)                            |- |- |- |- |- |- |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
 |MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
-|MathExpr: ternary operator                              |+ |+ |? |- |+ |+ |- |- |-
+|MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |- |- |-
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+
