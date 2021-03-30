@@ -75,7 +75,7 @@ Reaction._requirements = {
   modifiers: {
     required: false, 
     isArray: true, path: 'target', 
-    isReference: true, class: 'Species', setTarget: true 
+    isReference: true, targetClass: 'Species', setTarget: true 
   },
   compartment: {
     required: false,

@@ -94,7 +94,7 @@ SimpleTask._requirements = {
     isReference: false
   },
   // temporaly excluded because cannot analyse arrays of objects
-  //'subtasks.output': {required: true, isArray: true, isReference: true, class: 'Record'}
+  //'subtasks.output': {required: true, isArray: true, isReference: true, targetClass: 'Record'}
 };
 
 class Subtask {

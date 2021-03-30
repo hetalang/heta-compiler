@@ -27,8 +27,6 @@
 
 ## bugs
 
-- checking modifiers and actors in reaction to be species
-
 ## features
 
 - new @TimeScale Class
