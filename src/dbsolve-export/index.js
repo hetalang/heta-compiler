@@ -8,7 +8,7 @@ const schema = {
   type: 'object',
   properties: {
     groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
-    powTransform: {type: 'string', enum: ['keep', 'function', 'operator'] },
+    powTransform: {type: 'string', enum: ['keep', 'operator', 'function'] },
   }
 };
 
@@ -243,7 +243,7 @@ class DBSolveExport extends AbstractExport{
     return 'DBSolveExport';
   }
   get format(){
-    return 'DBSolve'
+    return 'DBSolve';
   }
   static get validate(){
     return ajv.compile(schema);

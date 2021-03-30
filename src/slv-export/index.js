@@ -8,7 +8,7 @@ const schema = {
   properties: {
     groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
     eventsOff: {type: 'boolean'},
-    powTransform: {type: 'string', enum: ['keep', 'function', 'operator'] },
+    powTransform: {type: 'string', enum: ['keep', 'operator', 'function'] },
   }
 };
 
@@ -227,7 +227,8 @@ class SLVExport extends AbstractExport{
       events: timeEvents,
       discreteEvents,
       continuousEvents,
-      groupedConst: groupedConst
+      groupedConst: groupedConst,
+      powTransform: this.powTransform
     };
   }
   getSLVCode(image = {}){
