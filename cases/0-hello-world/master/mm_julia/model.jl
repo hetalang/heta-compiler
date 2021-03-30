@@ -100,7 +100,8 @@ mm_model_ = Model(
   title = "mm",
   free_constants = NamedTuple{(
   )}([
-  ])
+  ]),
+  default_events = Pair{Symbol,Bool}[]
 )
 
 ### OUTPUT
