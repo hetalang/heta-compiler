@@ -22,7 +22,7 @@ s2 []= 0; // static
 #export {filepath: json, format: JSON};
 #export {filepath: slv, format: SLV};
 #export {filepath: model, format: DBSolve};
-#export {filepath: simbio, format: Simbio};
+//#export {filepath: simbio, format: Simbio};
 #export {filepath: matlab, format: Matlab};
 #export {filepath: julia, format: SimSolver};
 #export {filepath: sbml, format: SBML};
@@ -32,7 +32,8 @@ sw1 @TimeSwitcher {
   start: 0, // start at zero time
   stop: 60,
   period: 12,
-  atStart: true
+  atStart: true,
+  active: false
 };
 a0 [sw1]= a0 + 10;
 comp1 [sw1]= 6;
@@ -40,8 +41,7 @@ comp1 [sw1]= 6;
 sw2_start @Const = 5;
 sw2 @TimeSwitcher {
   start: sw2_start,
-  period: 24,
-  atStart: false
+  period: 24
 };
 s1 [sw2]= s1 + 2;
 s2 [sw2]= s2 + 2;

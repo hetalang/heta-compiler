@@ -270,11 +270,11 @@ end
   [
       {%- for event in img.events %}
       {% if event.switcher.instanceOf('TimeSwitcher') -%}
-      TimeEvent({{ id }}_{{ event.switcher.id }}_times_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}, {{ event.switcher.active }}),
+      TimeEvent({{ id }}_{{ event.switcher.id }}_times_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
       {%- elif event.switcher.instanceOf('DSwitcher') -%}
-      DEvent({{ id }}_{{ event.switcher.id }}_trigger_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}, {{ event.switcher.active }}),
+      DEvent({{ id }}_{{ event.switcher.id }}_trigger_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
       {%- elif event.switcher.instanceOf('CSwitcher') -%}
-      CEvent({{ id }}_{{ event.switcher.id }}_condition_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}, {{ event.switcher.active }}),
+      CEvent({{ id }}_{{ event.switcher.id }}_condition_, {{ id }}_{{event.switcher.id}}_assignment_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
       {%- endif %}
       {%- endfor %}
   ],
@@ -291,7 +291,12 @@ end
     {%- for con in free_constants %}
     (num = {{ con.num }}, lower={{ con.lower | default("1e-6") }}, upper={{ con.upper | default("1e6") }}, scale=:{{ con.scale | default(log)}},){{"," if not loop.last }}
     {%- endfor %}
-  ])
+  ]),
+  default_events = Pair{Symbol,Bool}[
+  {%- for event in img.events -%}
+    :{{ event.switcher.id }}=>{{ event.switcher.active }},
+  {%- endfor -%}
+  ]
 )
 
 {%- endfor %}{# img #}
