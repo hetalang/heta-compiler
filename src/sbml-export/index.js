@@ -72,11 +72,12 @@ class SBMLExport extends AbstractExport {
   }
   getSBMLImage(ns){
     let logger = ns.container.logger;
-    // check unsupported properties in @TimeSwitcher
+    // check unsupported properties in @TimeSwitcher, delete later
+    /*
     ns
       .selectByInstanceOf('TimeSwitcher')
       .forEach((ts) => {
-        // check "speriod"
+        // check "period"
         if (typeof ts.periodObj !== 'undefined') {
           let msg = `"SBML" format does not support "period" property in @TimeSwitcher as stated in "${ts.index}".`;
           logger.warn(msg);
@@ -87,7 +88,7 @@ class SBMLExport extends AbstractExport {
           logger.warn(msg);
         }
       });
-
+    */
     // set unitDefinitions for concrete namespace
     if (ns.isAbstract) {
       var listOfUnitDefinitions = []; 

@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.6.4
+
+- support periodic @TimeEvent in SBML
+- bug fix: temporally remove support of {active: false} events in Matlab
+- bug fix: powTransform in SLV
+- atStart and {active: true} in SimSolver
+
 ## 0.6.3
 
 - check expressions for (=) sign

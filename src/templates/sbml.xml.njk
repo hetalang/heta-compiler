@@ -242,24 +242,52 @@
   {%- set listOfCEvents = population.selectByClassName("CSwitcher") -%}
   {% if listOfTimeEvents|length + listOfCEvents|length  + listOfDEvents|length > 0 %}
     <listOfEvents>
-      {%- for event in listOfTimeEvents %}
+      {%- for event in listOfTimeEvents -%}
+      {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}}
       <event
         id="{{event.id}}"
         metaid="{{event.index}}"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            {% if not event.active %}<apply><and/><false/>{% endif %}
-            <apply>
-              <gt/>
-              <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-              {%- if event.start is defined %}
-              <ci>{{ event.start }}</ci>
-              {%- else %}
-              <cn>{{ event.startObj.num }}</cn>
-              {%- endif %}
+            <apply><and/>
+              {{ '<true/>' if event.active else '<false/>' }}
+              <apply><geq/>
+                <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                {{ startMathML }}
+              </apply>
+              {% if event.period is defined or event.periodObj is defined %}
+                {%- set periodMathML = '<ci>' + event.period + '</ci>' if event.period is defined else '<cn>'+ event.periodObj.num + '</cn>'-%}}
+                <apply><geq/>
+                  <apply><minus/>
+                    <apply><divide/>
+                      <apply><minus/>
+                        <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                        {{ startMathML }}
+                      </apply>
+                      {{ periodMathML }}
+                    </apply>
+                    <apply><floor/>
+                      <apply><divide/>
+                        <apply><minus/>
+                          <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                          {{ startMathML }}
+                        </apply>
+                        {{ periodMathML }}
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn>0.5</cn>
+                </apply>
+              {% endif %}
+              {% if event.stop is defined or event.stopObj is defined %}
+                {%- set stopMathML = '<ci>' + event.stop + '</ci>' if event.stop is defined else '<cn>'+ event.stopObj.num + '</cn>'-%}}
+                <apply><leq/>
+                  <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                  {{ stopMathML }}
+              </apply>
+              {% endif %}}
             </apply>
-            {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
         <listOfEventAssignments>

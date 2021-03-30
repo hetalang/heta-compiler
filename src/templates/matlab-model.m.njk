@@ -28,8 +28,8 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     ode_func = @ODEFunc;
     out_func = @OutputFunc;
     events_conditions = @Conditions;
-    events_affects = {
-    {%- for event in events | filter2('switcher.active', true) -%}
+    events_affects = { {# | filter2('switcher.active', true) #}
+    {%- for event in events -%}
         @{{ event.switcher.id }}_affect{{ ', ' if not loop.last }}
     {%- endfor -%}
     };
@@ -224,8 +224,8 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function [res,isterminal,direction] = Conditions(time, y)
         direction = ones({{ events|length }}, 1);
         isterminal = ones({{ events|length }}, 1);
-        res = [
-            {%- for event in events  | filter2('switcher.active', true) -%}
+        res = [ {#  | filter2('switcher.active', true)  #}
+            {%- for event in events -%}
                 {{ event.switcher.id }}_condition(time, y){{ '; ' if not loop.last }}
             {%- endfor -%}
         ];     

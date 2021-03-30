@@ -29,23 +29,24 @@
 
 ## features
 
+- support @Switcher {active: false} in Matlab
+- period in Simbio
+- check file type for modules
 - new @TimeScale Class
 - informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
-- test empty assignments for @Record + to specifications
 - #move, #moveNS
 - automatic creation of modifiers in SBML
 - parameter switching: see "parameter-switching.md"
-- atStart to exports: SimSolver, Matlab, DBSolve
-- check file type for modules
-- support of comments inside dictionary and array
+- atStart to exports: Matlab, DBSolve
+- support of comments inside Heta dictionary and array
+- add CSV module
 
 ## ideas
 
 - avoid insert for existed elements: get warning or #forceInsert 
 - AnyUnit for zero numbers
-- xlsx module: many tables in one #include
 - @Dose class to use with simbiology/mrgsolve/nonmem doses
 - heta update => npm i heta-compiler
 - support null for properties: highlight, parse, heta standard
