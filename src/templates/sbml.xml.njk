@@ -252,7 +252,7 @@
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             <apply><and/>
               {{ '<true/>' if event.active else '<false/>' }}
-              <apply><geq/>
+              <apply>{{ '<gt/>' if event.atStart else '<geq/>'}}
                 <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
                 {{ startMathML }}
               </apply>

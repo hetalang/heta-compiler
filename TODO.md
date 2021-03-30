@@ -30,7 +30,6 @@
 ## features
 
 - support @Switcher {active: false} in Matlab
-- period in Simbio
 - check file type for modules
 - new @TimeScale Class
 - informative output when critical error

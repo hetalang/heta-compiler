@@ -2,7 +2,7 @@
 
 ## 0.6.4
 
-- support periodic @TimeEvent in SBML
+- support periodic @TimeEvent in SBML and Simbio
 - bug fix: temporally remove support of {active: false} events in Matlab
 - bug fix: powTransform in SLV
 - atStart and {active: true} in SimSolver
