@@ -347,10 +347,10 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@Process` class                      |+  |+  |+  |+  |+  |+ |+ |+ |+ 
 |`@TimeSwitcher` class                 |+  |+  |+  |-  |+  |+ |+ |+ |+
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
-|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
+|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |- |+ |- |+ |+ |+
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |- |+ |+ |+ |+ |+
-|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |- |+ |+ |+
-|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |- |+ |+ |+
+|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |+ |+ |+ |+
+|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |+ |+ |+ |+
 |`@CSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |- |+ |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
 |`@DSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |- |+ |+ |+ |+ |+
