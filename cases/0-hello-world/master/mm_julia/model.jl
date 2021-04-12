@@ -12,11 +12,6 @@ mm_constants_ = NamedTuple{(
   0.1,2.5,
 ])
 
-### create default output
-mm_output_ = Symbol[
-  :S,:P,
-]
-
 ### initialization of ODE variables and Records
 function mm_start_(cons)
     #(Vmax,Km,) = cons
@@ -96,12 +91,13 @@ mm_model_ = Model(
   ],
   mm_make_saving_,
   mm_constants_,
-  mm_output_;
+  Symbol[:S, :P, ]; # default observables
   title = "mm",
   free_constants = NamedTuple{(
   )}([
   ]),
-  default_events = Pair{Symbol,Bool}[]
+  default_events = Pair{Symbol,Bool}[],
+  all_observables = Symbol[:default_comp,:S,:P,:r1,]
 )
 
 ### OUTPUT

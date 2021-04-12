@@ -32,13 +32,6 @@ function Platform()
   {%- endfor %}
 ])
 
-### create default output
-{{ id }}_output_ = Symbol[
-  {% for rec in img.namespace.selectByInstanceOf('Record') | filter2('output', true) -%}
-  :{{ rec.id }},
-  {%- endfor %}
-]
-
 ### initialization of ODE variables and Records
 function {{ id }}_start_(cons)
     #({% for con in img.constants -%}
@@ -280,7 +273,10 @@ end
   ],
   {{ id }}_make_saving_,
   {{ id }}_constants_,
-  {{ id }}_output_;
+  Symbol[
+    {%- for rec in img.namespace.selectByInstanceOf('Record') | filter2('output', true) -%}
+    :{{ rec.id }}, {% endfor -%}
+  ]; # default observables
   title = "{{ id }}",
   {% set free_constants = img.constants | filter2("free", true) | exclude2('num', undefined)-%}
   free_constants = NamedTuple{(
@@ -296,6 +292,10 @@ end
   {%- for event in img.events -%}
     :{{ event.switcher.id }}=>{{ event.switcher.active }},
   {%- endfor -%}
+  ],
+  all_observables = Symbol[
+  {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
+  :{{ rec.id }}, {%- endfor -%}
   ]
 )
 

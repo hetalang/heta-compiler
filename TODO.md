@@ -29,21 +29,21 @@
 
 ## features
 
+- add CSV module
+- new @TimeScale Class
 - support @Switcher {active: false} in Matlab
 - check file type for modules
-- new @TimeScale Class
 - informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - #move, #moveNS
-- automatic creation of modifiers in SBML
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: Matlab, DBSolve
 - support of comments inside Heta dictionary and array
-- add CSV module
 
 ## ideas
 
+- automatic creation of modifiers in SBML
 - avoid insert for existed elements: get warning or #forceInsert 
 - AnyUnit for zero numbers
 - @Dose class to use with simbiology/mrgsolve/nonmem doses
