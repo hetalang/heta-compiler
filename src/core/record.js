@@ -128,7 +128,7 @@ class Record extends _Size {
   }
   /*
     returns array of ids which depends on
-    t (time), e, pi are not included
+    e, pi are not included
     if no expression returns dependence from ode
   */
   dependOn(context){
@@ -139,7 +139,7 @@ class Record extends _Size {
     if (this.isRule) {
       return this.assignments.ode_.dependOn(); // top priority in context
     } else if (assignment !== undefined) {
-      return assignment.dependOn(); // remove t from dependence
+      return assignment.dependOn();
     } else {
       return [];
     }

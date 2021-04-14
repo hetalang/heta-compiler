@@ -318,13 +318,22 @@
 
     "ConstP": {
       "type": "object",
-      "description": "Input value. Upper and lower describes possiple values. Scale describes transformation for fitting.",
+      "description": "Input value. Upper and lower describes possible values. Scale describes transformation for fitting.",
       "properties": {
         "free": { "type": "boolean" },
         "num": { "type": "number" },
         "scale": { "type": "string", "enum": ["direct", "log", "logit"], "default": "direct" },
         "upper": { "type": "number" },
         "lower": { "type": "number" }
+      }
+     },
+
+     "TimeScaleP": {
+      "type": "object",
+      "description": "t and other time scales",
+      "properties": {
+        "slope": { "type": "number", "exclusiveMinimum": 0 },
+        "intercept": { "type": "number" }
       }
      },
 

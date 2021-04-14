@@ -3,7 +3,7 @@
 const { expect } = require('chai');
 const { Container } = require('../../src');
 
-describe('Testing anonimous space.', () => {
+describe('Testing anonymous space.', () => {
   it('Create element in global.', () => {
     let c = new Container;
     let counter = c.length;
@@ -54,6 +54,6 @@ describe('Testing anonimous space.', () => {
       }
     ]);
     
-    expect(c.length - counter).to.be.eq(6);
+    expect(c.length - counter).to.be.eq(6 + 1); // + t @TimeScale
   });
 });

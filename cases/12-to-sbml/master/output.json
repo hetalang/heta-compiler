@@ -5,6 +5,11 @@
     "space": "first"
   },
   {
+    "class": "TimeScale",
+    "id": "t",
+    "space": "first"
+  },
+  {
     "class": "Compartment",
     "id": "comp1",
     "space": "first",

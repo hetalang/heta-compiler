@@ -2,6 +2,7 @@
 
 ## 0.6.4
 
+- @TimeScale component
 - support periodic @TimeEvent in SBML and Simbio
 - bug fix: temporally remove support of {active: false} events in Matlab
 - bug fix: powTransform in SLV

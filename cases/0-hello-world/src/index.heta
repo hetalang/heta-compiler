@@ -21,6 +21,8 @@ namespace mm begin
   r1 := Vmax*S/(Km+S)*default_comp; // S is used here but assigned below
   S .= 10; // S should be initialialized after creation
   P .= 0;
+
+  t {units: second};
 end
 
 #importNS {

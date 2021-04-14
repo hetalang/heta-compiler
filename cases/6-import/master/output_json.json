@@ -5,6 +5,11 @@
     "space": "model"
   },
   {
+    "class": "TimeScale",
+    "id": "t",
+    "space": "model"
+  },
+  {
     "class": "Const",
     "id": "k1",
     "space": "model",
@@ -64,12 +69,12 @@
         "stoichiometry": 1
       }
     ],
+    "reversible": false,
     "modifiers": [
       {
         "target": "enzyme"
       }
-    ],
-    "reversible": false
+    ]
   },
   {
     "class": "Const",

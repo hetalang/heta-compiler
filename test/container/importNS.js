@@ -46,16 +46,16 @@ describe('Test correct importNS', () => {
       assignments: { start_: '1' }
     });
 
-    expect(c.length - counter).to.be.eq(5);
-    expect(clone).to.be.lengthOf(2);
-    expect(clone[0]).to.have.property('index', 'two::one_k1');
+    expect(c.length - counter).to.be.eq(5 + 2);
+    expect(clone).to.be.lengthOf(2 + 1);
+    expect(clone[1]).to.have.property('index', 'two::one_k1');
 
-    expect(clone[1]).to.have.property('index', 'two::r1');
-    expect(clone[1].actors[0]).to.have.property('target', 'one_A');
-    expect(clone[1].assignments.ode_.toString()).to.be.equal('one_k1 * one_A * comp1');
+    expect(clone[2]).to.have.property('index', 'two::r1');
+    expect(clone[2].actors[0]).to.have.property('target', 'one_A');
+    expect(clone[2].assignments.ode_.toString()).to.be.equal('one_k1 * one_A * comp1');
 
-    expect(c.namespaceStorage.get('one')).to.be.lengthOf(2);
-    expect(c.namespaceStorage.get('two')).to.be.lengthOf(3);
+    expect(c.namespaceStorage.get('one')).to.be.lengthOf(2 + 1);
+    expect(c.namespaceStorage.get('two')).to.be.lengthOf(3 + 1);
   });
 });
 

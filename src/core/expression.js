@@ -190,7 +190,7 @@ class Expression {
   dependOnNodes(){
     return this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
-      .filter((node) => ['t', 'e', 'pi'].indexOf(node.name) === -1);
+      .filter((node) => ['e', 'pi'].indexOf(node.name) === -1);
   }
 }
 
