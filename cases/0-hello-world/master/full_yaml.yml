@@ -1,6 +1,10 @@
 - space: mm
   action: setNS
   type: concrete
+- class: TimeScale
+  id: t
+  space: mm
+  units: second
 - class: Compartment
   id: default_comp
   space: mm

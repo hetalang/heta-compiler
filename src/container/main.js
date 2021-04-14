@@ -15,6 +15,7 @@ const { TimeSwitcher } = require('../core/time-switcher');
 const { ReferenceDefinition } = require('../core/reference-definition');
 const { Page } = require('../core/page');
 const { Const } = require('../core/const');
+const { TimeScale } = require('../core/time-scale');
 const { SimpleTask } = require('../core/simple-task');
 // external
 const _ = require('lodash');
@@ -59,7 +60,7 @@ class Container {
     this.namespaceStorage.set('nameless', nameless);
 
     // XXX: this is bad solution because if errors exist then will be errors without logs
-    // load core items 
+    // load core items
     this.loadMany(coreItems, true);
     //console.log(this.defaultLogs)
   }
@@ -238,7 +239,8 @@ Container.prototype._componentClasses = {
   SimpleTask,
   ReferenceDefinition,
   Page,
-  Const
+  Const,
+  TimeScale
 };
 
 module.exports = Container;

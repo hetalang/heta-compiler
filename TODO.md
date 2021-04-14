@@ -27,12 +27,13 @@
 
 ## bugs
 
+- #importNS renames log
+
 ## features
 
 - add CSV module
-- new @TimeScale Class
 - support @Switcher {active: false} in Matlab
-- check file type for modules
+- check file format for modules
 - informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver

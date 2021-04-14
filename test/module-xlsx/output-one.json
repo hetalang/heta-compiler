@@ -1,5 +1,10 @@
 [
     {
+        "class": "TimeScale",
+        "id": "t",
+        "space": "one"
+    },
+    {
         "class": "Const",
         "space": "one",
         "id": "k1",

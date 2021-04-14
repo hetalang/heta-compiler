@@ -146,7 +146,7 @@ Container.prototype.update = function(q = {}){
   // creation of new components is not allowed
   if (targetComponent === undefined) {
     this.logger.error(
-      `${ind} component does not exist which is not allowed for "update" strategy.`,
+      `${ind} component does not exist which is not allowed for the "update" action.`,
       {type: 'QueueError', space: space}
     );
     return;
@@ -230,6 +230,9 @@ Container.prototype.setNS = function(q = {}){
     namespace = new Namespace(q.space);
     namespace.container = this; // set parent
     this.namespaceStorage.set(q.space, namespace);
+    
+    // set default t @TimeScale in all namespaces
+    this.insert({id: 't', space: q.space, class: 'TimeScale'});
   }
   // it is possible to update type
   namespace._isAbstract = q.type === 'abstract';
@@ -292,12 +295,16 @@ Container.prototype.importNS = function(q = {}){
 
   // normal flow
   let clones = fromNamespace.toArray().map((component) => {
-    // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
-    let newId = _.get(
-      q.rename, 
-      component.id,
-      [q.prefix, component.id, q.suffix].join('') // pref-id-suff as default value
-    );
+    if (component.instanceOf('TimeScale')) {
+      var newId = component.id;
+    } else {
+      // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
+      newId = _.get(
+        q.rename, 
+        component.id,
+        [q.prefix, component.id, q.suffix].join('') // prefix-id-suffix as default value
+      );
+    }
 
     // cloning and update references
     let clone = component.clone();

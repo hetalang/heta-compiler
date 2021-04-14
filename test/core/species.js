@@ -16,7 +16,7 @@ describe('Testing dependOn() for Record and Species', () => {
     let deps2 = species.dependOn('evt1');
     let deps3 = species.dependOn('evt2');
     let deps4 = species.dependOn('evt3');
-    expect(deps1).to.have.members(['x', 'y', 'z']);
+    expect(deps1).to.have.members(['x', 'y', 'z', 't']);
     expect(deps2).to.have.members(['x', 'y', 'z']);
     expect(deps3).to.be.deep.equal([]);
     expect(deps4).to.be.lengthOf(0);

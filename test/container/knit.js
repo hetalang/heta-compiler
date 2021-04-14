@@ -34,11 +34,11 @@ describe('Test All()', () => {
       {class: 'Species', id: 's2', space: 'one', compartment: 'comp1', assignments: { start_: 0 }} // 1
     ]);
     
-    expect(c.length - counter).to.be.eq(15);
+    expect(c.length - counter).to.be.eq(15 + 1); // t @TimeScale creates automatically
   });
 
   it('knitMany good platform.', () => {
     c.knitMany();
-    expect(c.length - counter).to.be.eq(15);
+    expect(c.length - counter).to.be.eq(15 + 1); // t @TimeScale creates automatically
   });
 });
