@@ -113,7 +113,7 @@ class Expression {
     return this.exprParsed.toString(options);
   }
   /* number if expression can be directly transformed to number, undefined otherwice*/
-  get num(){ // if it is constant than return number or undefined otherwice
+  get num(){ // if it is constant than return number or undefined otherwise
     let tree = this.exprParsed;
     if(tree.isConstantNode){
       return tree.value;
@@ -140,9 +140,11 @@ class Expression {
     return [aTreeSimplified, bTree];
   }
   translate(translator = {}){
-    let exprParsed = this.exprParsed
-      .translate(translator);
+    //console.log(this.toString())
+    let exprParsed = this.exprParsed.translate(translator);
     let expr = new Expression(exprParsed); 
+    //console.log(expr.toString())
+    //console.log('')
     expr._logger = this._logger; // set the same logger
 
     return expr;

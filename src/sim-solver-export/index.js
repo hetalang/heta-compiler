@@ -30,7 +30,7 @@ class SimSolverExport extends AbstractExport {
     return 'SimSolverExport';
   }
   get format(){
-    return 'SimSolver'
+    return 'SimSolver';
   }
   static get validate(){
     return ajv.compile(schema);
