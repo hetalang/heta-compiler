@@ -90,6 +90,12 @@
             "type": "shell",
             "command": "heta build cases/18-julia-fitting",
             "group": "test"
+        },
+        {
+            "label": "case-19",
+            "type": "shell",
+            "command": "heta build cases/19-time-scale",
+            "group": "test"
         }
     ]
 }

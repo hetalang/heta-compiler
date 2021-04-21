@@ -11,7 +11,7 @@ namespace mm begin
 
   S @Species { title: substrate, compartment: default_comp, units: uM, output: true };
   P @Species { title: product,  compartment: default_comp, units: uM, output: true };
-  ''' Transformation of __substate__ to __product__ '''
+  ''' Transformation of __substrate__ to __product__ '''
   r1 @Reaction {
     title: Michaelis-Menten reaction,
     actors: S -> P,

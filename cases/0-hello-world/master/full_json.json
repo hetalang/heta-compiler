@@ -50,7 +50,7 @@
     "id": "r1",
     "space": "mm",
     "title": "Michaelis-Menten reaction",
-    "notes": "Transformation of __substate__ to __product__",
+    "notes": "Transformation of __substrate__ to __product__",
     "units": "umole/minute",
     "assignments": {
       "ode_": "Vmax * S / (Km + S) * default_comp"
