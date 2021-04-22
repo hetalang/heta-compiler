@@ -2,28 +2,29 @@
 
 ## modules:
 
-+ xlsx
-? markdown -> Page
-+ json
-+ yaml
-+ sbml
+[x] xlsx
+[x] json
+[x] yaml
+[x] sbml
+[ ] markdown -> Page
+[ ] csv
 
 ## exports
 
-+ DBSolve & SLV (DBSolve)
-+ JSON + YAML
-+ SBML L2
-+ mrgsolve (R)
-+ simbio (Matlab)
-+ simsolver (Julia)
-+ xlsx (Heta)
-+ another xlsx
-+ matlab
-- rxode (R)
-- dat (DBSolve)
-- heta-standard (Heta)
-- ModelingToolkit (Julia)
-- ODEs in markdown/latex/ascii
+[x] DBSolve & SLV (DBSolve)
+[x] JSON + YAML
+[x] SBML L2
+[x] mrgsolve (R)
+[x] simbio (Matlab)
+[x] simsolver (Julia)
+[x] xlsx (Heta)
+[x] another xlsx
+[x] matlab
+[ ] rxode (R)
+[ ] dat (DBSolve)
+[ ] heta-standard (Heta)
+[ ] ModelingToolkit (Julia)
+[ ] ODEs in markdown/latex/ascii
 
 ## bugs
 
@@ -31,7 +32,6 @@
 
 ## features
 
-- add CSV module
 - support @Switcher {active: false} in Matlab
 - check file format for modules
 - informative output when critical error

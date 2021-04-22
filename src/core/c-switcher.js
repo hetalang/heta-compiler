@@ -70,8 +70,8 @@ class CSwitcher extends _Switcher {
               + `\n\t${this.trigger.toString()};`;
         logger.error(msg, {type: 'BindingError', space: this.space});
         this.errored = true;
-      } else if (!target.instanceOf('Const') && !target.instanceOf('Record')) {
-        let msg = `Component "${node.name}" is not a Const or Record class as expected in expression: `
+      } else if (!target.instanceOf('_Size')) {
+        let msg = `Component "${node.name}" is not a Const/Record/TimeScale class as expected in expression: `
           + `${this.trigger.toString()};`;
         logger.error(msg, {type: 'BindingError', space: this.space});
         this.errored = true;

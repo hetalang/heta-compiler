@@ -4,7 +4,9 @@
   "notes": "platform notes",
   "version": "v0.1.0",
   "license": "UNLICENSED",
-  "options": {},
+  "options": {
+    "unitsCheck": true
+  },
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"

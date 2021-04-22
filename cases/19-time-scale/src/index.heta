@@ -2,23 +2,24 @@
   testing @TimeScale
 */
 
-// include ./qsp-units.heta
+namespace zzz begin
 
-//namespace xxx begin
+comp1 @Compartment {units: litre} .= 1.1;
+s1 @Species {compartment: comp1, isAmount: true, units: mole} .= 12;
+s2 @Species {compartment: comp1, units: mole/litre} .= 1;
+s3 @Species {compartment: comp1, units: mole/litre} := s3_0*exp(t/tau);
+r1 @Reaction {actors: s1=s2, units: mole/hour} := k1 * s1^2;
 
-comp1 @Compartment .= 1.1;
-s1 @Species {compartment: comp1, isAmount: true, units: litre} .= 12;
-s2 @Species {compartment: comp1, units: gram} .= 1;
+t {units: hour};
 
-r1 @Reaction {actors: s1=s2, units: litre} := k1 * s1^2;
+k1 @Const {units: 1/hour/mole} = 1e-3;
+tau @Const {units: hour} = 12;
+s3_0 @Const {units: mole/litre} = 15;
 
-k1 @Const = 1e-3;
+x1 @Record {units: mole^2/litre} := s1*s2;
+x2 @Record {units: hour} := t/2;
 
-t {units: metre};
-
-x1 @Record {units: metre} := s1*s2;
-
-//end
+end
 
 // exports
 #export { format: JSON, filepath: output };
