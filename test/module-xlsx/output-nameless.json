@@ -1,4 +1,8 @@
-[
+[         
+    {
+        "class": "TimeScale",
+        "id": "t"
+    },
     {
         "class": "Const",
         "id": "k3",

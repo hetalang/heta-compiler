@@ -1,8 +1,5 @@
 include ./qsp-units.heta type heta
 
-Vmax @Const = 0.1 {units: uM/minute}; // this is global constant available for any scoped equation
-Km @Const = 2.5 {units: uM};
-
 // this block unites elements with the same space
 namespace mm begin
   '''Note for the Default compartment'''
@@ -23,12 +20,9 @@ namespace mm begin
   P .= 0;
 
   t {units: second};
+  Vmax @Const = 0.1 {units: uM/minute}; // this is global constant available for any scoped equation
+  Km @Const = 2.5 {units: uM};
 end
-
-#importNS {
-  fromSpace: nameless, 
-  space: mm
-};
 
 #export {
   spaceFilter: mm,

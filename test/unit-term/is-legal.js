@@ -23,12 +23,13 @@ describe('Testing correct terms for Species', () => {
     p.knitMany();
     expect(p.logger).to.have.property('hasErrors').true; // error in xxx UnitDefinition
     p.logger.resetErrors();
+    p.defaultLogs.length = 0;
   });
 
   it('Check legal terms', () => {
     p.checkTerms();
-    expect(p.logger).to.have.property('hasErrors').false; // error in xxx UnitDefinition
-    expect(p.defaultLogs).to.be.lengthOf(3); // XXX: bad solution, one error and three 
+    expect(p.logger).to.have.property('hasErrors').false;
     //console.log(p.defaultLogs);
+    expect(p.defaultLogs).to.be.lengthOf(2);
   });
 });

@@ -50,14 +50,17 @@ class Container {
     this.exportStorage = new Map();
     // storage for UnitDef
     this.unitDefStorage = new Map();
-    // storage of Namespace
+    // storage of Namespaces
     this.namespaceStorage = new Map();
 
-    // default namespace
+    // create default namespace
+    /*
     let nameless = new Namespace('nameless');
     nameless.container = this;
     nameless._isAbstract = false;
     this.namespaceStorage.set('nameless', nameless);
+    */
+    this.setNS({space: 'nameless'});
 
     // XXX: this is bad solution because if errors exist then will be errors without logs
     // load core items

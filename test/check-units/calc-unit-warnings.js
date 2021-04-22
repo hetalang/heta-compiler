@@ -45,6 +45,7 @@ describe('Testing warnings of checkUnits()', () => {
     p.loadMany(qArr);
     p.knitMany();
     expect(p.logger).to.have.property('hasErrors').false;
+    p.defaultLogs.length = 0; // RESET
   });
 
   it('operators: mM + mM - M', () => {
