@@ -74,6 +74,23 @@ class Species extends Record {
     return super._references()
       .concat(classSpecificRefs);
   }
+  get legalTerms(){
+    if (this.isAmount) {
+      return [
+        new UnitTerm([{kind: 'amount'}]),
+        new UnitTerm([{kind: 'mass'}]),
+      ];
+    } else {
+      return [
+        new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -1}]),
+        new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -2}]),
+        new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -3}]),
+        new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -1}]),
+        new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -2}]),
+        new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -3}])
+      ];
+    }
+  }
 }
 
 Species._requirements = {
@@ -83,20 +100,6 @@ Species._requirements = {
     isReference: true, targetClass: 'Compartment', setTarget: true 
   }
 };
-
-Species.legalTerms = [
-  new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -1}]),
-  new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -2}]),
-  new UnitTerm([{kind: 'amount'}, {kind: 'length', exponent: -3}]),
-  new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -1}]),
-  new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -2}]),
-  new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -3}])
-];
-
-Species.legalTermsAmount = [
-  new UnitTerm([{kind: 'amount'}]),
-  new UnitTerm([{kind: 'mass'}]),
-];
 
 module.exports = {
   Species

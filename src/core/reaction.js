@@ -64,6 +64,12 @@ class Reaction extends Process {
 
     return res;
   }
+  get legalTerms(){
+    return [
+      new UnitTerm([{kind: 'amount'}, {kind: 'time', exponent: -1}]),
+      new UnitTerm([{kind: 'mass'}, {kind: 'time', exponent: -1}])
+    ];
+  }
 }
 
 Reaction._requirements = {
@@ -83,11 +89,6 @@ Reaction._requirements = {
     isReference: true, targetClass: 'Compartment', setTarget: true 
   }
 };
-
-Reaction.legalTerms = [
-  new UnitTerm([{kind: 'amount'}, {kind: 'time', exponent: -1}]),
-  new UnitTerm([{kind: 'mass'}, {kind: 'time', exponent: -1}])
-];
 
 class Modifier extends _Effector {
 }

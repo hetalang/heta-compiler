@@ -1,6 +1,4 @@
 const { AbstractExport } = require('../core/abstract-export');
-const { Species } = require('../core/species');
-const { Reaction } = require('../core/reaction');
 const nunjucks = require('nunjucks');
 const legalUnits = require('./legal-units');
 const { ajv } = require('../utils');
@@ -61,7 +59,7 @@ class SimbioExport extends AbstractExport{
             return true; // BRAKE
           }
           let term = species.unitsParsed.toTerm();
-          let isLegal = Species.legalTermsAmount.some((x) => term.equal(x));
+          let isLegal = species.legalTerms.some((x) => term.equal(x));
           if (!isLegal) {
             let termString = term.toString();
             let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass", got "${termString}".`;
@@ -81,7 +79,7 @@ class SimbioExport extends AbstractExport{
             return true; // BRAKE
           }
           let term = units.toTerm(); 
-          let isLegal = Reaction.legalTerms.some((x) => term.equal(x));
+          let isLegal = reaction.legalTerms.some((x) => term.equal(x));
           if (!isLegal) {
             let msg = `Reaction "${reaction.index}" has wrong CALCULATED unit term. It must be "amount/time" or "mass/time".`;
             logger.error(msg, {type: 'UnitError'});

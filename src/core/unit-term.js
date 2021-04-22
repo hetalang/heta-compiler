@@ -1,5 +1,5 @@
 /*
-  UnitTerm is aproximately the same as Unit but simplier.
+  UnitTerm is approximately the same as Unit but simpler.
   It was created to supply checking of unit consistency
 */
 const _ = require('lodash');

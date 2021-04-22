@@ -24,13 +24,14 @@ class Compartment extends Record {
     // nothing
     return res;
   }
+  get legalTerms(){
+    return [
+      new UnitTerm([{kind: 'length', exponent: 3}]),
+      new UnitTerm([{kind: 'length', exponent: 2}]),
+      new UnitTerm([{kind: 'length', exponent: 1}])
+    ];
+  }
 }
-
-Compartment.legalTerms = [
-  new UnitTerm([{kind: 'length', exponent: 3}]),
-  new UnitTerm([{kind: 'length', exponent: 2}]),
-  new UnitTerm([{kind: 'length', exponent: 1}])
-];
 
 module.exports = {
   Compartment

@@ -7,12 +7,16 @@
 //namespace xxx begin
 
 comp1 @Compartment .= 1.1;
-s1 @Species {compartment: comp1} .= 12;
-s2 @Species {compartment: comp1} .= 1;
+s1 @Species {compartment: comp1, isAmount: true, units: litre} .= 12;
+s2 @Species {compartment: comp1, units: gram} .= 1;
 
-r1 @Reaction {actors: s1=s2} := k1 * s1^2;
+r1 @Reaction {actors: s1=s2, units: litre} := k1 * s1^2;
 
 k1 @Const = 1e-3;
+
+t {units: metre};
+
+x1 @Record {units: metre} := s1*s2;
 
 //end
 

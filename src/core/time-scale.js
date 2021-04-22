@@ -1,4 +1,5 @@
 const { _Size } = require('./_size');
+const { UnitTerm } = require('./unit-term');
 const _ = require('lodash');
 
 /*
@@ -43,6 +44,11 @@ class TimeScale extends _Size { // implicit extend Numeric
     if (this.intercept !== 0) res.intercept = this.intercept;
 
     return res;
+  }
+  get legalTerms(){
+    return [
+      new UnitTerm([{kind: 'time'}])
+    ]
   }
 }
 

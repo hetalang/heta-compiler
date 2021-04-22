@@ -144,76 +144,38 @@ class Container {
       }
     });
   }
-  // compare Compartment, Species, Reaction with correct terms
+  // compare TimeScale, Compartment, Species, Reaction with correct terms
   checkTerms(){
     this.namespaceStorage.forEach((value) => {
-      // check Compartment from concrete namespace
-      value.isAbstract || value.selectByClassName('Compartment')
-        .filter((rec) => typeof rec.unitsParsed !== 'undefined')
-        .forEach((rec) => {
-          let term = rec.unitsParsed.toTerm();
+      // check TimeScale from concrete namespace
+      value.isAbstract || value.selectByInstanceOf('_Size')
+        .filter((size) => { // check if units exists and legalTerms are set
+          return size.unitsParsed !== undefined
+            && size.legalTerms !== undefined
+            && size.legalTerms.length !== 0;
+        })
+        .forEach((size) => {
+          let constructorName = size.constructor.name;
+          let term = size.unitsParsed.toTerm();
           // check if Term cannot be estimated
           if (typeof term === 'undefined') {
-            let msg = `Unit term cannot be estimated for Compartment "${rec.index}"`;
+            let msg = `Unit term cannot be estimated for @${constructorName} "${size.index}"`;
             this.logger.warn(msg, {type: 'UnitError'});
             return; // break
           }
-          let isLegal = Compartment.legalTerms.some((x) => term.equal(x)); // one of them is legal
+          let isLegal = size.legalTerms.some((x) => term.equal(x)); // one of them is legal
           if (!isLegal) {
             let termString = term.toString();
-            let msg = `Compartment "${rec.index}" has wrong unit term. It must be "length", "square" or "volume"., got "${termString}"`;
-            this.logger.warn(msg, {type: 'UnitError'});
-          }
-        });
-      
-      // check Species from concrete namespace
-      value.isAbstract || value.selectByClassName('Species')
-        .filter((rec) => typeof rec.unitsParsed !== 'undefined')
-        .forEach((rec) => {
-          let term = rec.unitsParsed.toTerm();
-          // check if Term cannot be estimated
-          if (typeof term === 'undefined') {
-            let msg = `Unit term cannot be estimated for Species "${rec.index}"`;
-            this.logger.warn(msg, {type: 'UnitError'});
-            return; // break
-          }
-          if (rec.isAmount){
-            let isLegal = Species.legalTermsAmount.some((x) => term.equal(x)); // one of them is legal
-            if (!isLegal) {
-              let termString = term.toString();
-              let msg = `Species {isAmount: true} "${rec.index}" has wrong unit term. It must be "amount" or "mass", got "${termString}".`;
-              this.logger.warn(msg, {type: 'UnitError'});
-            }
-          } else {
-            let isLegal = Species.legalTerms.some((x) => term.equal(x)); // one of them is legal
-            if (!isLegal) {
-              let termString = term.toString();
-              let msg = `Species {isAmount: false} "${rec.index}" has wrong unit term. It must be "amount/length", "amount/square" or "amount/volume", got "${termString}"`;
-              this.logger.warn(msg, {type: 'UnitError'});
-            }
-          }
-        });
-
-      // check Reaction from concrete namespace
-      value.isAbstract || value.selectByClassName('Reaction')
-        .filter((rec) => typeof rec.unitsParsed !== 'undefined')
-        .forEach((rec) => {
-          let term = rec.unitsParsed.toTerm();
-          // check if Term cannot be estimated
-          if (typeof term === 'undefined') {
-            let msg = `Unit term cannot be estimated for Reaction "${rec.index}"`;
-            this.logger.warn(msg, {type: 'UnitError'});
-            return; // break
-          }
-          let isLegal = Reaction.legalTerms.some((x) => term.equal(x)); // one of them is legal
-          if (!isLegal) {
-            let termString = term.toString();
-            let msg = `Reaction "${rec.index}" has wrong unit term. It must be "amount/time", "mass/time", got "${termString}"`;
+            let legalTermStrings = size.legalTerms
+              .map((term) => `"${term.toString()}"`)
+              .join(', ');
+            let msg = `@${constructorName} "${size.index}" has wrong unit term. It must be ${legalTermStrings}, got "${termString}"`;
             this.logger.warn(msg, {type: 'UnitError'});
           }
         });
     });
   }
+  // check circular dependencies in Records
   checkCircRecord(){
     // knit components
     this.namespaceStorage
