@@ -11,6 +11,8 @@ s3 @Species {compartment: comp1, units: mole/litre} := s3_0*exp(t/tau);
 r1 @Reaction {actors: s1=s2, units: mole/hour} := k1 * s1^2;
 
 t {units: hour};
+'''Time in days'''
+tid @TimeScale {units: day, slope: 0.041667}; // tid = t/24 + 0
 
 k1 @Const {units: 1/hour/mole} = 1e-3;
 tau @Const {units: hour} = 12;
@@ -23,9 +25,9 @@ end
 
 // exports
 #export { format: JSON, filepath: output };
-//#export { format: YAML, filepath: output };
-//#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
-//#export { format: SBML, filepath: sbml, version: L2V4 };
+#export { format: YAML, filepath: output };
+#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+#export { format: SBML, filepath: sbml, version: L2V4, spaceFilter: zzz };
 //#export { format: SLV, filepath: model, eventsOff: false };
 //#export { format: DBSolve, filepath: dbsolve };
 //#export { format: Simbio, filepath: simbio };

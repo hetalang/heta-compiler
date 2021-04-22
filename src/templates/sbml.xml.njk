@@ -85,7 +85,8 @@
   {%- set listOfParameters = population.selectByClassName('Record') -%}
   {%- set listOfProcesses = population.selectByClassName('Process') -%}
   {%- set listOfConstants = population.selectByClassName('Const') -%}
-  {% if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 %}
+  {%- set listOfTimeScales = population.selectByClassName('TimeScale') | exclude2('id', 't') -%}
+  {% if listOfParameters|length + listOfConstants|length + listOfProcesses|length + listOfTimeScales|length > 0 %}
     <listOfParameters>
     {%- for record in listOfParameters.concat(listOfProcesses) %}
       <parameter
@@ -130,6 +131,30 @@
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">
             {{ con.notesHTML }}
+          </html>
+        </notes>
+        {%- endif %}
+      </parameter>
+      {%- endfor %}
+      {%- for ts in listOfTimeScales %}
+      <parameter
+        id="{{ ts.id }}"
+        {%- if record.title %}
+        name="{{ ts.title }}"
+        {%- endif %}
+        constant="false"
+        {%- if ts.num is defined %}
+        value="{{ ts.num }}"
+        {%- endif %}
+        {%- if ts.units is defined %}
+        units="{{ ts.unitsHash() }}"
+        {%- endif %}
+        metaid="{{ ts.index }}"
+        >
+        {%- if ts.notes is defined %}
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            {{ ts.notesHTML }}
           </html>
         </notes>
         {%- endif %}
@@ -197,6 +222,22 @@
       metaid="{{record.index}}::ode_"
       >
       {{ record.assignments.ode_.toCMathML() }}
+    </assignmentRule>
+  {%- endfor %}
+  {%- for ts in listOfTimeScales %}
+    <assignmentRule
+      variable="{{ts.id}}"
+      metaid="{{ts.index}}::assignment"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply><plus/>
+          <apply><times/>
+            <cn> {{ ts.slope }} </cn>
+            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+          </apply>
+          <cn> {{ ts.intercept }} </cn>
+        </apply>
+      </math>
     </assignmentRule>
   {%- endfor %}
 
