@@ -28,7 +28,7 @@ end
 #export { format: YAML, filepath: output };
 #export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
 #export { format: SBML, filepath: sbml, version: L2V4, spaceFilter: zzz };
-//#export { format: SLV, filepath: model, eventsOff: false };
-//#export { format: DBSolve, filepath: dbsolve };
-//#export { format: Simbio, filepath: simbio };
-//#export { format: Mrgsolve, filepath: mrgsolve };
+#export { format: SLV, filepath: model, spaceFilter: zzz };
+#export { format: DBSolve, filepath: dbsolve, spaceFilter: zzz };
+#export { format: Simbio, filepath: simbio, spaceFilter: zzz };
+#export { format: Mrgsolve, filepath: mrgsolve, spaceFilter: zzz };

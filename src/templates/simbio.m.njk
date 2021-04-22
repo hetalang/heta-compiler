@@ -36,6 +36,7 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 {% set listOfParameters = population.selectByClassName('Record') -%}
 {% set listOfProcesses = population.selectByClassName('Process') -%}
 {% set listOfConstants = population.selectByClassName('Const') -%}
+{% set listOfTimeScales = population.selectByClassName('TimeScale') | exclude2('id', 't') -%}
 {{ "% Parameters" if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 }}
 {%- for record in listOfParameters.concat(listOfProcesses) %}
 {{ population.spaceName }}.parameter.{{record.id}} = addparameter(
@@ -50,6 +51,12 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
   {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
   {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{con.notesHTML}}', 'Tag', '');
+{%- endfor %}
+{%- for ts in listOfTimeScales %}
+{{ population.spaceName }}.parameter.{{ts.id}} = addparameter(
+  {{- model_id }}, '{{ts.id}}', 'ConstantValue', false
+  {%- if ts.units!==undefined -%}, 'ValueUnits', '{{ ts.unitsRebased(legalUnits, true) }}'{% endif -%}
+  , 'Notes', '{{ts.notesHTML}}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfReactions = population.selectByClassName('Reaction') -%}
@@ -80,18 +87,22 @@ addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
 
 {% set listOfAssignmentRules = population.selectRecordsByContext("ode_")|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
 {%- set listOfRateRules = population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
-{{ "% Rules" if listOfAssignmentRules|length + listOfRateRules|length > 0 }}
-{% for record in listOfAssignmentRules -%}
+{{ "% Rules" if listOfAssignmentRules|length + listOfRateRules|length + listOfTimeScales|length > 0 }}
+{%- for record in listOfAssignmentRules %}
 addrule(
   {{- model_id }}, '{{record.id}} = {{ record.assignments.ode_.toMatlabString() }}', 'repeatedAssignment');
-{% endfor %}
-{% for record in listOfRateRules -%}
+{%- endfor %}
+{%- for record in listOfRateRules %}
 addrule(
   {{- model_id }}, '{{record.id}} = 
   {%- for ref in record.backReferences -%}
     {{ " " + ref.stoichiometry if ref.stoichiometry<0 or loop.first else " + " + ref.stoichiometry }}*{{ ref.process }}
   {%- endfor -%}
   ', 'rate');
+{%- endfor %}
+{%- for ts in listOfTimeScales %}
+addrule(
+  {{- model_id }}, '{{ts.id}} = time * {{ ts.slope }} + {{ ts.intercept }}', 'repeatedAssignment');
 {%- endfor %}
 
 {%- set listOfInitialAssignments = population.selectRecordsByContext("start_")|filter2("assignments.start_.num", undefined) %}

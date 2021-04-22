@@ -6,6 +6,7 @@
 {%- set compartments = population.selectByClassName('Compartment') %}
 {%- set freeConstants = population.selectByClassName('Const') | selectattr('free') %}
 {%- set species = population.selectByInstanceOf('Species') -%}
+{%- set timeScales = population.selectByInstanceOf('TimeScale') | exclude2('id', 't') -%}
 
 DBSolve Optimum (new parser) 1 Jul 2006
 SLV25.00*
@@ -423,6 +424,10 @@ InteractionNetwork
 
 //! Initialization at start_
 if(t==0){
+    // initialization of TimeScales
+    {%- for ts in timeScales %}
+    {{ ts.id }} = {{ ts.slope }} * t + {{ ts.intercept }}; // @{{ ts.className }} {{ "'"+ts.title+"'" if ts.title }} {units: {{ ts.units|default('?') }}}
+    {%- endfor %}
     // initialization of Records
     {%- for record in initRecords %}
     {% if record.isRule -%}
@@ -437,7 +442,10 @@ if(t==0){
     {%- endfor %}
 }else{
 
-//! Calculation of ode_ part, count: {{ ruleRecords|length }}
+//! Calculation of ode_ part, count: {{ ruleRecords|length + timeScales|length }}
+{%- for ts in timeScales %}
+{{ ts.id }} = {{ ts.slope }} * t + {{ ts.intercept }}; // @{{ ts.className }} {{ "'"+ts.title+"'" if ts.title }} {units: {{ ts.units|default('?') }}}
+{%- endfor %}
 {%- for record in ruleRecords %}
 {%- if record.instanceOf('Process') %}
 //

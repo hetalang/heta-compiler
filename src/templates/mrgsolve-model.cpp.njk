@@ -43,6 +43,10 @@ $MAIN
 {%- endfor %}
 
 $ODE
+{%- for ts in population.selectByClassName('TimeScale') | exclude2('id', 't') %}
+// @{{ ts.className }} '{{ ts.title }}'
+double {{ ts.id }} = {{ ts.slope }} * SOLVERTIME + {{ ts.intercept }};
+{%- endfor %}
 {%- for record in ode_ %}
 // @{{ record.className }} '{{ record.title }}'
 {{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.toCString() }};
