@@ -33,3 +33,4 @@ end
 #export { format: Simbio, filepath: simbio, spaceFilter: zzz };
 #export { format: Mrgsolve, filepath: mrgsolve, spaceFilter: zzz };
 #export { format: Matlab, filepath: matlab, spaceFilter: zzz };
+#export { format: SimSolver, filepath: julia, spaceFilter: zzz };

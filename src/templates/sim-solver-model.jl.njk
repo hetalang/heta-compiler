@@ -7,7 +7,7 @@
   events : array of {switcher, array of assignments with [switcher]}
   builderName
   options
-  namespace
+  namespace: whole namespace
   rhs
   pTranslator
 -#}
@@ -18,8 +18,8 @@
 =#
 
 function Platform()
-
-{%- for img in nsImages %}
+{% for img in nsImages %}
+{%- set timeScales = img.namespace.selectByClassName('TimeScale') | exclude2('id', 't') -%}
 {% set id = img.namespace.spaceName %}
 ### create default constants
 {{ id }}_constants_ = NamedTuple{(
@@ -40,6 +40,9 @@ function {{ id }}_start_(cons)
 
     # Heta initialize
     t = 0.0 # initial time
+    {%- for ts in timeScales %}
+    {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+    {%- endfor %}
     {% for record in img.initRecords -%}
     {% if record.isRule -%}
     {{ record.id }} = {{ record.getAssignment('ode_').translate(img.pTranslator).toJuliaString() }}
@@ -82,6 +85,9 @@ function {{ id }}_ode_(du, u, p, t)
     {%- endfor %}) = u {# TODO: replace by u[index] #}
 
     # Heta rules
+    {%- for ts in timeScales %}
+    {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+    {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
@@ -114,6 +120,9 @@ function {{ id }}_make_saving_(outputIds::Vector{Symbol})
         {%- endfor %}) = u{# TODO: replace by u[index] #}
 
         # Heta rules
+        {%- for ts in timeScales %}
+        {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+        {%- endfor %}
         {% for record in img.extendedRuleRecords %}
         {%- if record.isRule -%}
         {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
@@ -160,6 +169,9 @@ function {{ id }}_{{ event.switcher.id }}_trigger_(u, t, integrator)
     {%- endfor %}) = u
 
     # Heta rules
+    {%- for ts in timeScales %}
+    {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+    {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
@@ -184,6 +196,9 @@ function {{ id }}_{{ event.switcher.id }}_condition_(u, t, integrator)
     {%- endfor %}) = u
 
     # Heta rules
+    {%- for ts in timeScales %}
+    {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+    {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
@@ -209,6 +224,9 @@ function {{ id }}_{{ event.switcher.id }}_assignment_(integrator)
     {%- endfor %}) = integrator.u
 
     # Heta rules
+    {%- for ts in timeScales %}
+    {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+    {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
@@ -274,8 +292,12 @@ end
   {{ id }}_make_saving_,
   {{ id }}_constants_,
   Symbol[
+    {%- for ts in timeScales | filter2('output', true) -%}
+    :{{ts.id}},
+    {%- endfor %}
     {%- for rec in img.namespace.selectByInstanceOf('Record') | filter2('output', true) -%}
-    :{{ rec.id }}, {% endfor -%}
+    :{{ rec.id }},
+    {%- endfor -%}
   ]; # default observables
   title = "{{ id }}",
   {% set free_constants = img.constants | filter2("free", true) | exclude2('num', undefined)-%}
@@ -294,8 +316,12 @@ end
   {%- endfor -%}
   ],
   all_observables = Symbol[
+  {%- for ts in timeScales -%}
+  :{{ts.id}},
+  {%- endfor %}
   {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
-  :{{ rec.id }}, {%- endfor -%}
+  :{{ rec.id }},
+  {%- endfor -%}
   ]
 )
 

@@ -91,7 +91,7 @@ mm_model_ = Model(
   ],
   mm_make_saving_,
   mm_constants_,
-  Symbol[:S, :P, ]; # default observables
+  Symbol[:S,:P,]; # default observables
   title = "mm",
   free_constants = NamedTuple{(
   )}([
