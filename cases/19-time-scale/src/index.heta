@@ -5,14 +5,14 @@
 namespace zzz begin
 
 comp1 @Compartment {units: litre} .= 1.1;
-s1 @Species {compartment: comp1, isAmount: true, units: mole} .= 12;
-s2 @Species {compartment: comp1, units: mole/litre} .= 1;
-s3 @Species {compartment: comp1, units: mole/litre} := s3_0*exp(t/tau);
-r1 @Reaction {actors: s1=s2, units: mole/hour} := k1 * s1^2;
+s1 @Species {compartment: comp1, isAmount: true, units: mole, output: true} .= 12;
+s2 @Species {compartment: comp1, units: mole/litre, output: true} .= 1;
+s3 @Species {compartment: comp1, units: mole/litre, output: true} := s3_0*exp(t/tau);
+r1 @Reaction {actors: s1=s2, units: mole/hour, output: true} := k1 * s1^2;
 
 t {units: hour};
 '''Time in days'''
-tid @TimeScale {units: day, slope: 0.041667}; // tid = t/24 + 0
+tid @TimeScale {units: day, slope: 0.041667, output: true}; // tid = t/24 + 0
 
 k1 @Const {units: 1/hour/mole} = 1e-3;
 tau @Const {units: hour} = 12;
@@ -32,3 +32,4 @@ end
 #export { format: DBSolve, filepath: dbsolve, spaceFilter: zzz };
 #export { format: Simbio, filepath: simbio, spaceFilter: zzz };
 #export { format: Mrgsolve, filepath: mrgsolve, spaceFilter: zzz };
+#export { format: Matlab, filepath: matlab, spaceFilter: zzz };

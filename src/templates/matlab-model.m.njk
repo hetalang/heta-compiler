@@ -5,6 +5,7 @@
 {{ component.id }}
 {%- endif -%}
 {% endmacro -%}
+{%- set timeScales = namespace.selectByClassName('TimeScale') | exclude2('id', 't') -%}
 {#-
   constants : all constants
   initRecords : all records SORTED by start_ and have start_ or isRule
@@ -43,8 +44,10 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function y__ = InitFunc()
         integrator = []; % reset integrator
         time = 0; % zero time
-
-        {%- for record in initRecords %}
+        {%- for ts in timeScales %}
+        {{ts.id}} = {{ ts.slope }} * time {# XXX #} + {{ ts.intercept }};
+        {%- endfor %}
+        {% for record in initRecords %}
         {% if record.getAssignment('start_') is defined -%}
         {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
         {%- else -%}
@@ -103,6 +106,10 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- endfor %}
 
         %%% Output records
+        {%- for ts in timeScales %}
+        % {{ ts.title }} ({{ ts.units }}) {{ ts.notes }}
+        {{ts.id}} = {{ ts.slope }} * time {# XXX #} + {{ ts.intercept }};
+        {%- endfor %}
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
@@ -113,9 +120,14 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
         {%- endif -%}
         {%- endfor %}
-        shared_values = [{% for record in sharedRecords -%}
-        {{ record.id }}{{ ', ' if not loop.last }}
-        {%- endfor %}];
+        shared_values = [
+            {%- for ts in timeScales -%}
+            {{ ts.id }}{{ ', ' }}
+            {%- endfor -%}
+            {%- for record in sharedRecords -%}
+            {{ record.id }}{{ ', ' if not loop.last }}
+            {%- endfor -%}
+        ];
 
         %%% Differential equations
         {%- for record in dynamicRecords %}
@@ -170,6 +182,10 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function res = {{ event.switcher.id }}_condition(time, y)
  
         %%% Records
+        {%- for ts in timeScales %}
+        % {{ ts.title }} ({{ ts.units }}) {{ ts.notes }}
+        {{ts.id}} = {{ ts.slope }} * time {# XXX #} + {{ ts.intercept }};
+        {%- endfor %}
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
@@ -189,6 +205,10 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     function y = {{ event.switcher.id }}_affect(time, y)
 
         %%% Records
+        {%- for ts in timeScales %}
+        % {{ ts.title }} ({{ ts.units }}) {{ ts.notes }}
+        {{ts.id}} = {{ ts.slope }} * time {# XXX #} + {{ ts.intercept }};
+        {%- endfor %}
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}

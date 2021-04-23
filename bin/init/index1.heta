@@ -29,3 +29,5 @@ p1 @Record .= 1;
 //#export { format: DBSolve, filepath: dbsolve };
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };
+//#export { format: Matlab, filepath: matlab };
+//#export { format: Julia, filepath: julia };

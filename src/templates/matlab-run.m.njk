@@ -1,7 +1,11 @@
+{%- set timeScales = namespace.selectByClassName('TimeScale') | exclude2('id', 't') -%}
 clear; clc; close all;
 
 % full list of records which are able to be outputted, see show_names
 output_ids = [
+{%- for ts in timeScales -%}
+"{{ ts.id }}"{{ ', ' }}
+{%- endfor -%}
 {%- for record in sharedRecords -%}
 "{{ record.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}
@@ -43,6 +47,9 @@ end
 
 %  list of record to plot
 show_ids = [
+{%- for ts in timeScales | filter2('output', true) -%}
+"{{ ts.id }}"{{ ', ' }}
+{%- endfor -%}
 {%- for record in sharedRecords | filter2('output', true) -%}
 "{{ record.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}];

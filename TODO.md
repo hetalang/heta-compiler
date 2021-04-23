@@ -20,6 +20,7 @@
 [x] xlsx (Heta)
 [x] another xlsx
 [x] matlab
+[ ] csv
 [ ] rxode (R)
 [ ] dat (DBSolve)
 [ ] heta-standard (Heta)
@@ -33,12 +34,13 @@
 
 ## features
 
+- Export to Julia new format
+- #move, #moveNS
 - support @Switcher {active: false} in Matlab
 - check file format for modules
 - informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
-- #move, #moveNS
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: Matlab, DBSolve
 - support of comments inside Heta dictionary and array

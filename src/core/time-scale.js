@@ -6,7 +6,8 @@ const _ = require('lodash');
   time_in_minutes @TimeScale {
     units: (60 seconds),
     slope: 0.0167,
-    intercept: 0
+    intercept: 0,
+    output: true
   };
 
   time_in_minutes = t * slope + intercept
@@ -26,6 +27,7 @@ class TimeScale extends _Size { // implicit extend Numeric
     if (valid) {
       if (q.slope !== undefined) this.slope = q.slope;
       if (q.intercept !== undefined) this.intercept = q.intercept;
+      if (q.output !== undefined) this.output = q.output;
     }
 
     return this;
@@ -35,6 +37,7 @@ class TimeScale extends _Size { // implicit extend Numeric
 
     clonedComponent.slope = this.slope;
     clonedComponent.intercept = this.intercept;
+    clonedComponent.output = this.output;
       
     return clonedComponent;
   }
@@ -42,13 +45,14 @@ class TimeScale extends _Size { // implicit extend Numeric
     let res = super.toQ(options);
     if (this.slope !== 1) res.slope = this.slope;
     if (this.intercept !== 0) res.intercept = this.intercept;
+    if (this.output === true) res.output = this.output;
 
     return res;
   }
   get legalTerms(){
     return [
       new UnitTerm([{kind: 'time'}])
-    ]
+    ];
   }
 }
 
