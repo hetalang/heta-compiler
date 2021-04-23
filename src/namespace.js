@@ -95,8 +95,7 @@ class Namespace extends Map {
   }
   getUniqueUnits(){
     return _
-      .chain(this.selectByInstanceOf('Record'))
-      .concat(this.selectByInstanceOf('Const'))
+      .chain(this.selectByInstanceOf('_Size'))
       .filter((record) => record.unitsSBML() !== undefined)
       .uniqBy((record) => record.unitsHash(true))
       .map((record) => record.unitsSBML())

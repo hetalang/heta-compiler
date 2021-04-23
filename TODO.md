@@ -30,13 +30,13 @@
 ## bugs
 
 - day unit export to SBML
-- #importNS renames log
+- `#importNS` renames log
 
 ## features
 
 - Export to Julia new format
-- #move, #moveNS
-- support @Switcher {active: false} in Matlab
+- `#move`, `#moveNS`
+- support `@Switcher {active: false}` in Matlab
 - check file format for modules
 - informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
@@ -47,19 +47,22 @@
 
 ## ideas
 
+- do not translate base units in SBML export like second => _second
+- export to SBML L3 + timeUnits from `@TimeScale`
 - automatic creation of modifiers in SBML
 - avoid insert for existed elements: get warning or #forceInsert 
 - AnyUnit for zero numbers
-- @Dose class to use with simbiology/mrgsolve/nonmem doses
-- heta update => npm i heta-compiler
+- `@Dose` class to use with simbiology/mrgsolve/nonmem doses
+- `heta update` => `npm i heta-compiler`
 - support null for properties: highlight, parse, heta standard
-- stoichiometry as @Const and @Record
+- stoichiometry as `@Const` and `@Record`
 - #defineFunction + function checking
 - updating properties with `one::s1.assignments.start_ 5.5;`
 - remove `isAmount`, `compartment` properties from `@Reaction`
 
 ### Dose class
 
+```heta
 dose1 @Dose {
   target: A,
   amount: 100,
@@ -77,3 +80,4 @@ dose2 @Dose {
   repeatCount: 4,
   rate: rate1 // for injection
 };
+```

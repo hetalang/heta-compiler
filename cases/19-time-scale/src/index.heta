@@ -13,6 +13,7 @@ r1 @Reaction {actors: s1=s2, units: mole/hour, output: true} := k1 * s1^2;
 t {units: hour};
 '''Time in days'''
 tid @TimeScale {units: day, slope: 0.041667, output: true}; // tid = t/24 + 0
+//tid2 @Record {units: day, output: true} :=  t/24;
 
 k1 @Const {units: 1/hour/mole} = 1e-3;
 tau @Const {units: hour} = 12;

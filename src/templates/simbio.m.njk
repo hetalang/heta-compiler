@@ -9,9 +9,6 @@ sbioaddtolibrary(sbiounit('week', 'day', 7));
 {% set model_id = population.spaceName + "_model" -%}
 {{ model_id }} = sbiomodel('{{ population.spaceName }}');
 
-% Useful parameters
-addparameter({{ model_id }}, 'timeOne', 1, 'ValueUnits', 'hour');
-
 {% set listOfCompartments = population.selectByClassName('Compartment') -%}
 {{ "% Compartments" if listOfCompartments|length > 0 }}
 {%- for record in listOfCompartments %}
@@ -145,4 +142,12 @@ addrule(
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
-{% endfor %}
+{%- endfor %}
+
+% Update simulation config
+{%- set defaultTimeScale = population.get("t") %}
+{{ population.spaceName }}.config = getconfigset({{ model_id }})
+set({{ population.spaceName }}.config.SolverOptions, 'AbsoluteToleranceScaling', false)
+{%- if defaultTimeScale is defined and defaultTimeScale.units is defined %}
+set({{ population.spaceName }}.config, 'TimeUnits', '{{ defaultTimeScale.unitsRebased(legalUnits, true) }}')
+{%- endif %}
