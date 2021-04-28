@@ -20,6 +20,7 @@
 [x] xlsx (Heta)
 [x] another xlsx
 [x] matlab
+[ ] Julia
 [ ] csv
 [ ] rxode (R)
 [ ] dat (DBSolve)

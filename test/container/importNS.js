@@ -36,7 +36,7 @@ describe('Test correct importNS', () => {
       space: 'two',
 
       prefix: 'one_',
-      rename: { comp1: 'comp1', r1: 'r1' }
+      rename: { comp1: 'comp1', r1: 'r1', t: 't' }
     });
     c.load({
       action: 'insert',
