@@ -243,7 +243,7 @@ Container.prototype.setNS = function(q = {}){
 
 // #importNS
 /* 
-  clone all components to another space
+  clone all components to another space and rename components: @Record, @Const 
   #importNS two::* {
     fromSpace: one,
     prefix: '',
@@ -261,14 +261,14 @@ Container.prototype.importNS = function(q = {}){
   let space = q.space || 'nameless';
   if (q.fromId) {
     this.logger.error(
-      `fromId must not be set for #importNS, but have "${q.fromId}"`,
+      `fromId must not be set for #importNS, got "${q.fromId}"`,
       {type: 'QueueError', space: space}
     );
-    return;
+    return; // BRAKE
   }
   if (q.id) {
-    this.logger.error(`id must not be set for #importNS, but have "${q.id}"`);
-    return;
+    this.logger.error(`id must not be set for #importNS, got "${q.id}"`);
+    return; // BRAKE
   }
   let namespace = this.namespaceStorage.get(space);
   if (namespace === undefined) {
@@ -280,7 +280,7 @@ Container.prototype.importNS = function(q = {}){
   }
   if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
     this.logger.error(
-      `space should be string, but have "${q.fromSpace}"`,
+      `space should be string, got "${q.fromSpace}"`,
       {type: 'QueueError', space: space}
     );
     return;
@@ -296,16 +296,12 @@ Container.prototype.importNS = function(q = {}){
 
   // normal flow
   let clones = fromNamespace.toArray().map((component) => {
-    if (component.instanceOf('TimeScale')) {
-      var newId = component.id;
-    } else {
-      // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
-      newId = _.get(
-        q.rename, 
-        component.id,
-        [q.prefix, component.id, q.suffix].join('') // prefix-id-suffix as default value
-      );
-    }
+    // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
+    let newId = _.get(
+      q.rename, 
+      component.id,
+      [q.prefix, component.id, q.suffix].join('') // prefix-id-suffix as default value
+    );
 
     // cloning and update references
     let clone = component.clone();

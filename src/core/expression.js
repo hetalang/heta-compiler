@@ -95,16 +95,12 @@ class Expression {
     return expr;
   }
   updateReferences(q = {}){
-    this.exprParsed.traverse((node /*, path, parent*/) => {
-      if (node.type === 'SymbolNode') { // transform only SymbolNode
-        let oldRef = _.get(node, 'name');
-        let newRef = _.get(
-          q.rename, 
-          oldRef, 
-          [q.prefix, oldRef, q.suffix].join('') // default behaviour
-        );
+    this.exprParsed.traverse((node , path/*, parent*/) => {
+      if (node.type === 'SymbolNode' && path !== 'fn') { // transform only SymbolNode
+        let oldRef = node.name;
+        let newRef = q.rename[oldRef] || [q.prefix, oldRef, q.suffix].join('');
 
-        _.set(node, 'name', newRef);
+        node.name = newRef;
       }
     });
   }

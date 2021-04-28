@@ -61,7 +61,7 @@ class Record extends _Size {
     return clonedComponent;
   }
   /*
-    change referencies inside expression
+    change references inside expression
   */
   updateReferences(q = {}){
     super.updateReferences(q);

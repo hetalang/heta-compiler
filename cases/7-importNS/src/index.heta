@@ -8,6 +8,7 @@ abstract namespace drug begin
   vabs := kabs * a0;
   vel @Reaction {actors: c1 = };
   vel := kel * c1 * central;
+  x1 @Record := sin(1.2*t);
 end
 
 // create drug #1 and change compartment name

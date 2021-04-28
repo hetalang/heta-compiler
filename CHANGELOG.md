@@ -7,6 +7,7 @@
 - bug fix: temporally remove support of `{active: false}` events in Matlab
 - bug fix: `powTransform` in SLV
 - `atStart` and` {active: true}` in SimSolver
+- fix renaming of function names
 
 ## 0.6.3
 

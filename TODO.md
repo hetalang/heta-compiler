@@ -29,8 +29,6 @@
 
 ## bugs
 
-- day unit export to SBML
-- `#importNS` renames log
 
 ## features
 
