@@ -66,6 +66,6 @@ sw1 @TimeSwitcher {
 
 // exports
 #export {
-  format: SimSolver,
+  format: Julia,
   filepath: julia_model
 };

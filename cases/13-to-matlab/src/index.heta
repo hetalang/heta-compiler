@@ -14,4 +14,4 @@ include model.heta
 #export { filepath: matlab, format: Matlab };
 #export { filepath: output, format: JSON };
 #export { filepath: simbio, format: Simbio };
-#export { filepath: julia, format: SimSolver };
+#export { filepath: julia, format: Julia };

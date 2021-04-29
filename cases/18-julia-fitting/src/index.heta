@@ -15,5 +15,5 @@ end
 
 cond1 @Const = 1.2;
 
-#export { format: SimSolver, filepath: julia };
+#export { format: Julia, filepath: julia };
 #export { format: JSON, filepath: json };

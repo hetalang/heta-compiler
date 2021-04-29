@@ -71,7 +71,7 @@ The current version supports the following formats:
 - mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
 - Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
 - Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
-- SimSolver/Julia module
+- Julia module
 - JSON formatted file
 - YAML formatted file
 - Excel sheets

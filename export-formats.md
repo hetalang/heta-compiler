@@ -10,6 +10,7 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [Simbio](#simbio)
 - [Mrgsolve](#mrgsolve)
 - [XLSX](#xlsx)
+- [Julia](#julia)
 - [SimSolver](#simsolver)
 - [Matlab](#matlab)
 
@@ -273,6 +274,35 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 };
 ```
 
+## Julia
+
+Creation of Julia files (.jl).
+
+### Properties
+
+| property | type | required | default | ref | description | 
+| ---------|------|----------|---------|-----|-------------|
+| spaceFilter | ID[]/ID | | | namespace | the namespase to export |
+
+### Output files
+
+**[filepath]/model.jl** : File storing model code.
+**[filepath]/run.jl** : Code to run model.
+
+### Known restrictions
+
+*Nothing*
+
+**Example:**
+
+```heta
+#export {
+    format: Julia,
+    filepath: julia_code, // save result in directory "dist/julia_code"
+    spaceFilter: nameless // create model based on nameless namespace
+};
+```
+
 ## SimSolver
 
 Creation of Julia files (.jl) supported by SimSolver.
@@ -340,7 +370,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 *na* means "not applicable"
 
-| | SLV | DBSolve | SimSolver/Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
+| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
 |--|--|--|--|--|--|--|--|--|--|
 |units transformation                  |na |na |na |na |na |+ |+ |na|na
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ 

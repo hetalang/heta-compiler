@@ -1,9 +1,9 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
-require('../../src/sim-solver-export/expression');
+require('../../src/julia-export/expression');
 const { expect } = require('chai');
 
-describe('Expession exports to Julia', () => {
+describe('Expression exports to Julia', () => {
   it('toJuliaString() for "abs(-1/2)"', () => {
     let expr = Expression.fromString('abs(-1/2)');
     expect(expr.toJuliaString()).to.be.equal('abs(-1.0 / 2.0)');

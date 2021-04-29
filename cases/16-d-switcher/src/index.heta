@@ -27,5 +27,5 @@ x2 [sw1]= x2 + 100; // reassign static record
 #export { format: DBSolve, filepath: dbsolve };
 #export { format: Simbio, filepath: simbio };
 #export { format: Mrgsolve, filepath: mrgsolve };
-#export { format: SimSolver, filepath: julia };
+#export { format: Julia, filepath: julia };
 #export { format: Matlab, filepath: matlab };

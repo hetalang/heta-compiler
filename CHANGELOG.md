@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.5
+
+- Update `JuliaExport` format
+
 ## 0.6.4
 
 - `@TimeScale` component and time terms checking

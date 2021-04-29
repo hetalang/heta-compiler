@@ -2,6 +2,7 @@ const { AbstractExport } = require('../core/abstract-export');
 const nunjucks = require('nunjucks');
 const pkg = require('../../package');
 const _ = require('lodash');
+require('./expression'); // to use method toJuliaString()
 const { ajv } = require('../utils');
 
 const schema = {
@@ -10,13 +11,13 @@ const schema = {
   }
 };
 
-class SimSolverExport extends AbstractExport {
+class JuliaExport extends AbstractExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
     // check arguments here
     let logger = this._container.logger;
-    let valid = SimSolverExport.isValid(q, logger);
+    let valid = JuliaExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
     if (q.spaceFilter instanceof Array) {
@@ -26,10 +27,10 @@ class SimSolverExport extends AbstractExport {
     }
   }
   get className(){
-    return 'SimSolverExport';
+    return 'JuliaExport';
   }
   get format(){
-    return 'SimSolver';
+    return 'Julia';
   }
   static get validate(){
     return ajv.compile(schema);
@@ -45,7 +46,7 @@ class SimSolverExport extends AbstractExport {
           || this.spaceFilter.indexOf(pair[0]) !== -1;
         return allowedByFilter && !pair[1].isAbstract;
       })
-      .map((pair) => this.getSimSolverImage(pair[1]));
+      .map((pair) => this.getJuliaImage(pair[1]));
 
     // create Content
     let image = {
@@ -69,7 +70,7 @@ class SimSolverExport extends AbstractExport {
       }
     ];
   }
-  getSimSolverImage(ns){
+  getJuliaImage(ns){
     // constants
     let constants = ns
       .selectByInstanceOf('Const');
@@ -144,16 +145,16 @@ class SimSolverExport extends AbstractExport {
   }
   getModelCode(image = []){
     return nunjucks.render(
-      'sim-solver-model.jl.njk',
+      'julia-model.jl.njk',
       image
     );
   }
   getRunCode(image = []){
     return nunjucks.render(
-      'sim-solver-run.jl.njk',
+      'julia-run.jl.njk',
       image
     );
   }
 }
 
-module.exports = SimSolverExport;
+module.exports = JuliaExport;

@@ -52,7 +52,7 @@ end
 };
 #export {
   spaceFilter: mm,
-  format: SimSolver,
+  format: Julia,
   filepath: mm_julia,
 };
 #export {

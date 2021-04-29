@@ -25,7 +25,7 @@ const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv'
 const slv_correct = slvParse.parse(slv_correct_text);
 const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/table.xlsx');
 const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mm_mrg/model.cpp','utf8');
-const simsolver_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model.jl','utf8');
+const julia_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model.jl','utf8');
 
 describe('Testing "cases/0-hello-world"', () => {
   let b;
@@ -117,12 +117,12 @@ describe('Testing "cases/0-hello-world"', () => {
     expect(code[0].content).to.be.equal(mrgsolve_correct);
   });
 
-  it('Run #export {format: SimSolver}, check and compare.', () => {
+  it('Run #export {format: Julia}, check and compare.', () => {
     let mm_mrg = exportArray[5];
     let code = mm_mrg.make(true);
     // compare model.js text content
     expect(code[0].pathSuffix).to.be.equal('/model.jl');
     expect(code[0].type).to.be.equal('text');
-    expect(code[0].content).to.be.equal(simsolver_correct);
+    expect(code[0].content).to.be.equal(julia_correct);
   });
 });

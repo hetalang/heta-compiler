@@ -122,7 +122,7 @@ class Builder {
         this.logger.warn('Exporting skipped as stated in declaration.');
       } else if (this.options.ssOnly) {
         this.logger.warn('"ss only" mode');
-        this.exportSSOnly();
+        this.exportJuliaOnly();
       } else {
         this.exportMany();
       }
@@ -160,7 +160,7 @@ class Builder {
       exportItem.makeAndSave(this._distDirname);
     });
   }
-  exportSSOnly(){
+  exportJuliaOnly(){
     // create export without putting it to exportStorage
     let SimSolver = this.container.classes['SimSolver'];
     let exportItem = new SimSolver({
