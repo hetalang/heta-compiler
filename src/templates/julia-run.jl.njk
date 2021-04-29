@@ -2,9 +2,9 @@
 #=
   default run
 =#
-using SimSolver, Plots
+using HetaSimulator, Plots
 
 model = load_jlmodel("./model.jl")
 
 ### default simulations
-simulate(model, tspan = (0,100)) |> plot
+sim(model, tspan = (0,100)) |> plot
