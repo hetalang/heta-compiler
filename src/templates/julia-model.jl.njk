@@ -50,11 +50,15 @@ function Platform()
 ])
 
 ### create default events
-{{ id }}_events_active_ = Pair{Symbol,Bool}[
-  {%- for event in img.events -%}
-    :{{ event.switcher.id }}=>{{ event.switcher.active }},
-  {%- endfor -%}
-]
+{{ id }}_events_active_ = NamedTuple{(
+  {% for event in img.events -%}
+    :{{ event.switcher.id }},
+  {%- endfor %}
+)}(Bool[
+  {% for event in img.events -%}
+    {{ event.switcher.active }},
+  {%- endfor %}
+])
 
 ### initialization of ODE variables and Records
 function {{ id }}_init_func_(cons)
@@ -99,7 +103,7 @@ function {{ id }}_init_func_(cons)
 end
 
 ### calculate RHS of ODE
-function {{ id }}_ode_(du, u, p, t)
+function {{ id }}_ode_func_(du, u, p, t)
     cons = p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
@@ -297,58 +301,42 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(integrator)
 end
 {% endfor %}
 
-### model
+### MODELS ###
 
 {{ id }}_model_ = Model(
   {{ id }}_init_func_,
-  {{ id }}_ode_,
-  [
-      {%- for event in img.events %}
-      {% if event.switcher.instanceOf('TimeSwitcher') -%}
-      TimeEvent({{ id }}_{{ event.switcher.id }}_tstops_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
-      {%- elif event.switcher.instanceOf('DSwitcher') -%}
-      CEvent({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
-      {%- elif event.switcher.instanceOf('CSwitcher') -%}
-      CEvent({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
-      {%- endif %}
-      {%- endfor %}
-  ],
-  {{ id }}_saving_generator_,
-  {{ id }}_constants_num_,
-  Symbol[
-    {%- for ts in timeScales | filter2('output', true) -%}
-    :{{ts.id}},
-    {%- endfor %}
-    {%- for rec in img.namespace.selectByInstanceOf('Record') | filter2('output', true) -%}
-    :{{ rec.id }},
-    {%- endfor -%}
-  ]; # default observables
-  title = "{{ id }}",
-  {% set free_constants = img.constants | filter2("free", true) | exclude2('num', undefined)-%}
-  free_constants = NamedTuple{(
-    {%- for con in free_constants %}
-    :{{ con.id }},
+  {{ id }}_ode_func_,
+  NamedTuple{(
+    {%- for event in img.events %}
+    :{{ event.switcher.id }},
     {%- endfor %}
   )}([
-    {%- for con in free_constants %}
-    (num = {{ con.num }}, lower={{ con.lower | default("1e-6") }}, upper={{ con.upper | default("1e6") }}, scale=:{{ con.scale | default(log)}},){{"," if not loop.last }}
+    {%- for event in img.events %}
+    {% if event.switcher.instanceOf('TimeSwitcher') -%}
+    TimeEvent({{ id }}_{{ event.switcher.id }}_tstops_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
+    {%- elif event.switcher.instanceOf('DSwitcher') or event.switcher.instanceOf('CSwitcher') -%}
+    CEvent({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
+    {%- endif %}
     {%- endfor %}
   ]),
-  default_events = {{ id }}_events_active_,
+  {{ id }}_saving_generator_;
+  constants_num = {{ id }}_constants_num_,
+  events_active = {{ id }}_events_active_,
   records_output = {{ id }}_records_output_
 )
 
 {%- endfor %}{# img #}
 
-### OUTPUT
+### OUTPUT ###
 
-models = (
+return (
+  (
     {%- for img in nsImages %}
     {{ img.namespace.spaceName }} = {{ img.namespace.spaceName }}_model_,
     {%- endfor %}
+  ),
+  (),
+  "{{ builderVersion }}"
 )
-tasks = ()
-
-return (models, tasks, "{{ builderVersion }}")
 
 end

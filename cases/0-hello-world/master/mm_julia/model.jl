@@ -20,7 +20,11 @@ mm_records_output_ = NamedTuple{(
 ])
 
 ### create default events
-mm_events_active_ = Pair{Symbol,Bool}[]
+mm_events_active_ = NamedTuple{(
+  
+)}(Bool[
+  
+])
 
 ### initialization of ODE variables and Records
 function mm_init_func_(cons)
@@ -47,7 +51,7 @@ function mm_init_func_(cons)
 end
 
 ### calculate RHS of ODE
-function mm_ode_(du, u, p, t)
+function mm_ode_func_(du, u, p, t)
     cons = p.constants
     (default_comp,) = p.static
     (S_,P_,) = u 
@@ -92,31 +96,28 @@ end
 ### event assignments
 
 
-### model
+### MODELS ###
 
 mm_model_ = Model(
   mm_init_func_,
-  mm_ode_,
-  [
-  ],
-  mm_saving_generator_,
-  mm_constants_num_,
-  Symbol[:S,:P,]; # default observables
-  title = "mm",
-  free_constants = NamedTuple{(
+  mm_ode_func_,
+  NamedTuple{(
   )}([
   ]),
-  default_events = mm_events_active_,
+  mm_saving_generator_;
+  constants_num = mm_constants_num_,
+  events_active = mm_events_active_,
   records_output = mm_records_output_
 )
 
-### OUTPUT
+### OUTPUT ###
 
-models = (
+return (
+  (
     mm = mm_model_,
+  ),
+  (),
+  "*"
 )
-tasks = ()
-
-return (models, tasks, "*")
 
 end
