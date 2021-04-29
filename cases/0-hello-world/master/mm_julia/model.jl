@@ -3,7 +3,7 @@
     
 =#
 
-function Platform()
+__platform__ = (function()
 
 ### create default constants
 mm_constants_num_ = NamedTuple{(
@@ -87,27 +87,28 @@ function mm_saving_generator_(outputIds::Vector{Symbol})
     end
 end
 
-### time events
+### TIME EVENTS ###
 
-### discrete events
-
-### continuous events
+### D EVENTS ###
 
 ### event assignments
 
 
 ### MODELS ###
 
-mm_model_ = Model(
+mm_model_ = (
   mm_init_func_,
   mm_ode_func_,
   NamedTuple{(
   )}([
   ]),
-  mm_saving_generator_;
-  constants_num = mm_constants_num_,
-  events_active = mm_events_active_,
-  records_output = mm_records_output_
+  NamedTuple{(
+  )}([
+  ]),
+  mm_saving_generator_,
+  mm_constants_num_,
+  mm_events_active_,
+  mm_records_output_
 )
 
 ### OUTPUT ###
@@ -121,3 +122,4 @@ return (
 )
 
 end
+)()
