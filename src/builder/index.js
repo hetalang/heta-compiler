@@ -11,7 +11,7 @@ require('./abstract-export');
 require('./xlsx-export');
 
 /**
- * Auxilary class for performing compilation. It is developed to support CLI of Heta compiler.
+ * Auxiliary class for performing compilation. It is developed to support CLI of Heta compiler.
  *
  * @class Builder
  *
@@ -21,13 +21,13 @@ require('./xlsx-export');
  * Default: WD of a shell.
  *
  * @property {string} path String describing hierarchy
- * @property {ObjectId} _id Unique authomatic identifier from MongoDB
+ * @property {ObjectId} _id Unique automatic identifier from MongoDB
  * @property {string} id Main identifier (unique for the collection)
  * @property {string} class=Compartment It is always fixed to "Compartment"
- * @property {Object.<string,string>} [tags] Object for filering elements by tagFilter
+ * @property {Object.<string,string>} [tags] Object for filtering elements by tagFilter
  * @property {string} [title] Title of the element, any string.
  * @property {string} [notes] Text with xhtml tags or markdown.
- * @property {Object.<String,Object>} [aux] Any object to store auxilary information
+ * @property {Object.<String,Object>} [aux] Any object to store auxiliary information
  *
  * @property {string} variableRef Reference to Variable. If not initialized directly than use id value
  */
@@ -120,8 +120,8 @@ class Builder {
       // 8. Exports
       if (this.options.skipExport) {
         this.logger.warn('Exporting skipped as stated in declaration.');
-      } else if (this.options.ssOnly) {
-        this.logger.warn('"ss only" mode');
+      } else if (this.options.juliaOnly) {
+        this.logger.warn('"Julia only" mode');
         this.exportJuliaOnly();
       } else {
         this.exportMany();
@@ -162,9 +162,9 @@ class Builder {
   }
   exportJuliaOnly(){
     // create export without putting it to exportStorage
-    let SimSolver = this.container.classes['SimSolver'];
-    let exportItem = new SimSolver({
-      format: 'SimSolver',
+    let Julia = this.container.classes['Julia'];
+    let exportItem = new Julia({
+      format: 'Julia',
       filepath: '_julia'
     });
 

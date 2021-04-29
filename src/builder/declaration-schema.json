@@ -31,7 +31,7 @@
         "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "unitsCheck": {"type": "boolean", "default": false},
         "skipExport": {"type": "boolean", "default": false},
-        "ssOnly": {"type": "boolean", "default": false},
+        "juliaOnly": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
         "metaDir": {"type": "string", "default": "meta" },

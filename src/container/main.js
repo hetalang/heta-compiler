@@ -19,7 +19,6 @@ const { TimeScale } = require('../core/time-scale');
 const { SimpleTask } = require('../core/simple-task');
 // external
 const _ = require('lodash');
-const { Namespace } = require('../namespace');
 const { Logger, JSONTransport } = require('../logger');
 const coreItems = require('./core-items.json');
 const TopoSort = require('@insysbio/topo-sort');

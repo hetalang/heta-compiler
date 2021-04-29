@@ -42,7 +42,7 @@ program
 
   // set target directory of platform and check if exist
   let targetDir = path.resolve(program.args[0] || '.');
-  if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a dicrectory
+  if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(1);
   }
@@ -79,7 +79,7 @@ program
       skipExport: program.skipExport,
       logMode: program.logMode,
       debug: program.debug,
-      ssOnly: program.ssOnly,
+      juliaOnly: program.juliaOnly,
       distDir: program.distDir,
       metaDir: program.metaDir
     },

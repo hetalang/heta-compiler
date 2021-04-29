@@ -217,7 +217,7 @@ Using neither declaration file nor CLI options is equivalent to the following de
         "debug": false,
         "unitsCheck": false,
         "skipExport": false,
-        "ssOnly": false,
+        "juliaOnly": false,
         "exitWithoutError": false
     },
     "importModule": {
