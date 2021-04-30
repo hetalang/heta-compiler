@@ -145,7 +145,7 @@ end
 
 ### time events
 {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_times_(cons, times = [0.0, 100.0])
+function {{ id }}_{{ event.switcher.id }}_times_(cons, times)
     {%- set ev_start = img.pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
     {%- set ev_period = img.pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
     {%- set ev_stop = img.pTranslator.symbolName[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
