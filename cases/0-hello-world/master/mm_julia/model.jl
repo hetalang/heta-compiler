@@ -91,6 +91,8 @@ end
 
 ### D EVENTS ###
 
+### STOP EVENTS ###
+
 ### event assignments
 
 
@@ -99,6 +101,9 @@ end
 mm_model_ = (
   mm_init_func_,
   mm_ode_func_,
+  NamedTuple{(
+  )}([
+  ]),
   NamedTuple{(
   )}([
   ]),

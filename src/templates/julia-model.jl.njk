@@ -239,8 +239,36 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
 end
 {%- endfor %}
 
+### STOP EVENTS ###
+
+{%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
+function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
+    cons = integrator.p.constants
+    ({% for record in img.staticRecords -%}
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
+    {%- endfor %}) = integrator.p.static
+    ({% for record in img.dynamicRecords -%}
+    {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
+    {%- endfor %}) = u
+
+    # Heta rules
+    {%- for ts in timeScales %}
+    {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
+    {%- endfor %}
+    {% for record in img.extendedRuleRecords %}
+    {%- if record.isRule -%}
+    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
+    {% elif record.instanceOf('Species') and not record.isAmount -%}
+    {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
+    {% endif -%}
+    {% endfor %}
+
+    return {{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }}
+end
+{%- endfor %}
+
 ### event assignments
-{% for event in img.events -%}
+{% for event in img.events | exclude2('switcher.className', 'StopSwitcher') -%}
 function {{ id }}_{{ event.switcher.id }}_affect_func_(integrator)
     cons = integrator.p.constants
     t = integrator.t
@@ -316,12 +344,21 @@ end
     {%- endfor %}
   ]),
   NamedTuple{(
-    {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') %}
+    {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') | exclude2('switcher.className', 'StopSwitcher') %}
     :{{ event.switcher.id }},
     {%- endfor %}
   )}([
-    {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') %}
+    {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') | exclude2('switcher.className', 'StopSwitcher') %}
     ({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
+    {%- endfor %}
+  ]),
+  NamedTuple{(
+    {%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
+    :{{ event.switcher.id }},
+    {%- endfor %}
+  )}([
+    {%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
+    ({{ id }}_{{ event.switcher.id }}_condition_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
     {%- endfor %}
   ]),
   {{ id }}_saving_generator_,

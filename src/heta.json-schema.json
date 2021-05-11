@@ -294,6 +294,18 @@
       }
     },
 
+    "StopSwitcherP": {
+      "type": "object",
+      "properties": {
+        "trigger": {
+          "oneOf": [
+            { "$ref": "#/definitions/ExprString" },
+            { "type": "boolean" }
+          ]
+        }
+      }
+    },
+
     "TimeSwitcherP": {
       "type": "object",
       "properties": {

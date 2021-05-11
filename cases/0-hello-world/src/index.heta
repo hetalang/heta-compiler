@@ -22,6 +22,9 @@ namespace mm begin
   t {units: second};
   Vmax @Const = 0.1 {units: uM/minute}; // this is global constant available for any scoped equation
   Km @Const = 2.5 {units: uM};
+
+  //ss1 @StopSwitcher {trigger: t > 10};
+  //ss2 @StopSwitcher {trigger: S < P};
 end
 
 #export {

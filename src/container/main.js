@@ -10,6 +10,7 @@ const { Species } = require('../core/species');
 const { Reaction } = require('../core/reaction');
 const { Process } = require('../core/process');
 const { DSwitcher } = require('../core/d-switcher');
+const { StopSwitcher } = require('../core/stop-switcher');
 const { CSwitcher } = require('../core/c-switcher');
 const { TimeSwitcher } = require('../core/time-switcher');
 const { ReferenceDefinition } = require('../core/reference-definition');
@@ -137,6 +138,9 @@ class Container {
         // check DSwitcher.trigger
         value.selectByInstanceOf('DSwitcher')
           .forEach((rec) => rec.checkUnits());
+        // check StopSwitcher.trigger
+        value.selectByInstanceOf('StopSwitcher')
+          .forEach((rec) => rec.checkUnits());
         // check CSwitcher.trigger
         value.selectByInstanceOf('CSwitcher')
           .forEach((rec) => rec.checkUnits());
@@ -198,6 +202,7 @@ Container.prototype._componentClasses = {
   Process,
   Reaction,
   DSwitcher,
+  StopSwitcher,
   CSwitcher,
   TimeSwitcher,
   SimpleTask,
