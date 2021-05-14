@@ -20,7 +20,7 @@
 [x] xlsx (Heta)
 [x] another xlsx
 [x] matlab
-[ ] Julia
+[x] Julia
 [ ] csv
 [ ] rxode (R)
 [ ] dat (DBSolve)
@@ -30,10 +30,11 @@
 
 ## bugs
 
+- support of comments inside Heta dictionary and array
+- allow trailing commas in dictionary
 
 ## features
 
-- Export to Julia new format
 - `#move`, `#moveNS`
 - support `@Switcher {active: false}` in Matlab
 - check file format for modules
@@ -42,10 +43,11 @@
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: Matlab, DBSolve
-- support of comments inside Heta dictionary and array
 
 ## ideas
 
+- syntax highlight in web
+- add "ignoreCompartment" property in Species
 - do not translate base units in SBML export like second => _second
 - export to SBML L3 + timeUnits from `@TimeScale`
 - automatic creation of modifiers in SBML

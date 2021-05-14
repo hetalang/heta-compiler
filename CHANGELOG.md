@@ -2,7 +2,7 @@
 
 ## 0.6.5
 
-- Update `JuliaExport` format
+- Added `JuliaExport` format
 - Add `@StopSwitcher` class as experimental
 
 ## 0.6.4
