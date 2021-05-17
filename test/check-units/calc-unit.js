@@ -44,133 +44,133 @@ describe('Testing checkUnits() for components', () => {
 
   it('operators: + - * /', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1).toString();
     expect(unit).to.be.equal('(1e-3 mole)/litre');
   });
 
   it('operators: ^', () => {
     let x2 = p.namespaceStorage.get('nameless').get('x2');
-    let expr = x2.assignments.start_.exprParsed;
+    let expr = x2.assignments.start_;
     let unit = expr.calcUnit(x2).toString();
     expect(unit).to.be.equal('(1e-3 mole)^1.2/litre^1.2');
   });
 
   it('single number', () => {
     let x2 = p.namespaceStorage.get('nameless').get('x3');
-    let expr = x2.assignments.start_.exprParsed;
+    let expr = x2.assignments.start_;
     let unit = expr.calcUnit(x2).toString();
     expect(unit).to.be.equal('dimensionless');
   });
   
   it('number in expression: 15*k2', () => {
     let x4 = p.namespaceStorage.get('nameless').get('x4');
-    let expr = x4.assignments.start_.exprParsed;
+    let expr = x4.assignments.start_;
     let unit = expr.calcUnit(x4).toString();
     expect(unit).to.be.equal('mM');
   });
 
   it('not standard dimensionless', () => {
     let x5 = p.namespaceStorage.get('nameless').get('x5');
-    let expr = x5.assignments.start_.exprParsed;
+    let expr = x5.assignments.start_;
     let unit = expr.calcUnit(x5).simplify().toString();
     expect(unit).to.be.equal('(1e-3 dimensionless)');
   });
 
   it('operators: and or xor not', () => {
     let sw1 = p.namespaceStorage.get('nameless').get('sw1');
-    let expr = sw1.trigger.exprParsed;
+    let expr = sw1.trigger;
     let unit = expr.calcUnit(sw1).toString();
     expect(unit).to.be.equal('dimensionless');
   });
 
   it('constants: true false', () => {
     let sw2 = p.namespaceStorage.get('nameless').get('sw2');
-    let expr = sw2.trigger.exprParsed;
+    let expr = sw2.trigger;
     let unit = expr.calcUnit(sw2).toString();
     expect(unit).to.be.equal('dimensionless');
   });
   
   it('constants: > < >= <= == !=', () => {
     let sw3 = p.namespaceStorage.get('nameless').get('sw3');
-    let expr = sw3.trigger.exprParsed;
+    let expr = sw3.trigger;
     let unit = expr.calcUnit(sw3).toString();
     expect(unit).to.be.equal('dimensionless');
   });
   
   it('functions: add, substract, multiply, divide', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1');
-    let expr = y1.assignments.start_.exprParsed;
+    let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1).toString();
     expect(unit).to.be.equal('(1e-3 mole)/litre');
   });
   
   it('functions: pow(mM,1)', () => {
     let y2 = p.namespaceStorage.get('nameless').get('y2');
-    let expr = y2.assignments.start_.exprParsed;
+    let expr = y2.assignments.start_;
     let unit = expr.calcUnit(y2).toString();
     expect(unit).to.be.equal('(1e-3 mole)^1.2/litre^1.2');
   });
 
   it('functions: pow(1,k1)', () => {
     let y3 = p.namespaceStorage.get('nameless').get('y3');
-    let expr = y3.assignments.start_.exprParsed;
+    let expr = y3.assignments.start_;
     let unit = expr.calcUnit(y3).toString();
     expect(unit).to.be.equal('dimensionless');
   });
 
   it('functions: abs ceil floor', () => {
     let y4 = p.namespaceStorage.get('nameless').get('y4');
-    let expr = y4.assignments.start_.exprParsed;
+    let expr = y4.assignments.start_;
     let unit = expr.calcUnit(y4).toString();
     expect(unit).to.be.equal('mM');
   });
 
   it('functions: max min', () => {
     let y5 = p.namespaceStorage.get('nameless').get('y5');
-    let expr = y5.assignments.start_.exprParsed;
+    let expr = y5.assignments.start_;
     let unit = expr.calcUnit(y5).toString();
     expect(unit).to.be.equal('mM');
   });
 
   it('functions: square cube sqrt', () => {
     let y6 = p.namespaceStorage.get('nameless').get('y6');
-    let expr = y6.assignments.start_.exprParsed;
+    let expr = y6.assignments.start_;
     let unit = expr.calcUnit(y6).toString();
     expect(unit).to.be.equal('mM^2*mM^3*mM^0.5');
   });
 
   it('functions: nthRoot', () => {
     let y7 = p.namespaceStorage.get('nameless').get('y7');
-    let expr = y7.assignments.start_.exprParsed;
+    let expr = y7.assignments.start_;
     let unit = expr.calcUnit(y7).toString();
     expect(unit).to.be.equal('mM^0.5*mM^0.25');
   });
 
   it('functions: log', () => {
     let y8 = p.namespaceStorage.get('nameless').get('y8');
-    let expr = y8.assignments.start_.exprParsed;
+    let expr = y8.assignments.start_;
     let unit = expr.calcUnit(y8).toString();
     expect(unit).to.be.equal('dimensionless');
   });
 
   it('functions: sign', () => {
     let y9 = p.namespaceStorage.get('nameless').get('y9');
-    let expr = y9.assignments.start_.exprParsed;
+    let expr = y9.assignments.start_;
     let unit = expr.calcUnit(y9).toString();
     expect(unit).to.be.equal('dimensionless');
   });
 
   it('functions: ifgt etc', () => {
     let y10 = p.namespaceStorage.get('nameless').get('y10');
-    let expr = y10.assignments.start_.exprParsed;
+    let expr = y10.assignments.start_;
     let unit = expr.calcUnit(y10).toString();
     expect(unit).to.be.equal('(1e-3 mole)/litre');
   });
 
   it('ternary operator', () => {
     let y11 = p.namespaceStorage.get('nameless').get('y11');
-    let expr = y11.assignments.start_.exprParsed;
+    let expr = y11.assignments.start_;
     let unit = expr.calcUnit(y11).toString();
     expect(unit).to.be.equal('(1e-3 mole)/litre');
   });

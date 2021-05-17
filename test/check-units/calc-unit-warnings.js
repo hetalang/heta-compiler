@@ -50,7 +50,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: mM + mM - M', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1a');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(1); // (1e-3 mole)/litre vs mole/litre
@@ -59,7 +59,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: mM + mM - undefined', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1b');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -68,7 +68,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: mM + mM - undefined', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1b');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -77,7 +77,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: mM * undefined', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1c');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -86,7 +86,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: mM + 1', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1d');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(1); // (1e-3 mole)/litre vs 1
@@ -95,7 +95,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: undefined/mM', () => {
     let x1 = p.namespaceStorage.get('nameless').get('x1e');
-    let expr = x1.assignments.start_.exprParsed;
+    let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -104,7 +104,7 @@ describe('Testing warnings of checkUnits()', () => {
   
   it('operators: k3^k1', () => {
     let x2 = p.namespaceStorage.get('nameless').get('x2a');
-    let expr = x2.assignments.start_.exprParsed;
+    let expr = x2.assignments.start_;
     let unit = expr.calcUnit(x2);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(1); // second argument should be a number
@@ -113,7 +113,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('operators: k1^k3', () => {
     let x2 = p.namespaceStorage.get('nameless').get('x2b');
-    let expr = x2.assignments.start_.exprParsed;
+    let expr = x2.assignments.start_;
     let unit = expr.calcUnit(x2);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // power arguments must be dimensionless
@@ -122,7 +122,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('not standard dimensionless', () => {
     let x5 = p.namespaceStorage.get('nameless').get('x5');
-    let expr = x5.assignments.start_.exprParsed;
+    let expr = x5.assignments.start_;
     let unit = expr.calcUnit(x5);
     expect(unit.simplify().toString()).to.be.equal('(1e-3 dimensionless)');
     expect(p.defaultLogs).to.be.lengthOf(1);
@@ -131,7 +131,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('constants: > < >= <= == !=', () => {
     let sw3 = p.namespaceStorage.get('nameless').get('sw3');
-    let expr = sw3.trigger.exprParsed;
+    let expr = sw3.trigger;
     let unit = expr.calcUnit(sw3);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(2); // inconsistency "mM vs 1" "mM vs mole/litre"
@@ -140,7 +140,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: mM + (mM - M)', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1a');
-    let expr = y1.assignments.start_.exprParsed;
+    let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(1); // mM vs mole/litre
@@ -149,7 +149,7 @@ describe('Testing warnings of checkUnits()', () => {
   
   it('functions: mM + (mM - undefined)', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1b');
-    let expr = y1.assignments.start_.exprParsed;
+    let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -158,7 +158,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: mM * undefined', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1c');
-    let expr = y1.assignments.start_.exprParsed;
+    let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -167,7 +167,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: mM + 1', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1d');
-    let expr = y1.assignments.start_.exprParsed;
+    let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(1); // (1e-3 mole)/litre vs 1
@@ -176,7 +176,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: undefined/mM', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1e');
-    let expr = y1.assignments.start_.exprParsed;
+    let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
@@ -185,7 +185,7 @@ describe('Testing warnings of checkUnits()', () => {
   
   it('functions: pow(k3,k1)', () => {
     let y2 = p.namespaceStorage.get('nameless').get('y2a');
-    let expr = y2.assignments.start_.exprParsed;
+    let expr = y2.assignments.start_;
     let unit = expr.calcUnit(y2);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(1); // second argument should be a number
@@ -194,7 +194,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: pow(k1,k3)', () => {
     let y2 = p.namespaceStorage.get('nameless').get('y2b');
-    let expr = y2.assignments.start_.exprParsed;
+    let expr = y2.assignments.start_;
     let unit = expr.calcUnit(y2);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // power arguments must be dimensionless
@@ -203,7 +203,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: abs ceil floor', () => {
     let y4 = p.namespaceStorage.get('nameless').get('y4');
-    let expr = y4.assignments.start_.exprParsed;
+    let expr = y4.assignments.start_;
     let unit = expr.calcUnit(y4);
     expect(unit).to.be.undefined;
     expect(p.defaultLogs).to.be.lengthOf(2); // no units found for "k5"
@@ -212,7 +212,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: max min', () => {
     let y5 = p.namespaceStorage.get('nameless').get('y5');
-    let expr = y5.assignments.start_.exprParsed;
+    let expr = y5.assignments.start_;
     let unit = expr.calcUnit(y5);
     expect(unit.toString()).to.be.equal('mM');
     expect(p.defaultLogs).to.be.lengthOf(2); // "mM vs mM vs 1", "mM vs mM vs 1"
@@ -221,7 +221,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: square cube sqrt', () => {
     let y6 = p.namespaceStorage.get('nameless').get('y6');
-    let expr = y6.assignments.start_.exprParsed;
+    let expr = y6.assignments.start_;
     let unit = expr.calcUnit(y6);
     expect(unit.toString()).to.be.equal('mM^2*mM^3*mM^0.5');
     expect(p.defaultLogs).to.be.lengthOf(1); // "mM vs 1"
@@ -230,7 +230,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: nthRoot', () => {
     let y7 = p.namespaceStorage.get('nameless').get('y7');
-    let expr = y7.assignments.start_.exprParsed;
+    let expr = y7.assignments.start_;
     let unit = expr.calcUnit(y7);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // arguments must be dimensionless
@@ -239,7 +239,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: log', () => {
     let y8 = p.namespaceStorage.get('nameless').get('y8');
-    let expr = y8.assignments.start_.exprParsed;
+    let expr = y8.assignments.start_;
     let unit = expr.calcUnit(y8);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); //second arguments of log() must be dimensionless
@@ -248,7 +248,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: sign', () => {
     let y9 = p.namespaceStorage.get('nameless').get('y9');
-    let expr = y9.assignments.start_.exprParsed;
+    let expr = y9.assignments.start_;
     let unit = expr.calcUnit(y9).toString();
     expect(unit).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); // "(1e-3 mole)/litre vs 1"
@@ -257,7 +257,7 @@ describe('Testing warnings of checkUnits()', () => {
 
   it('functions: ifgt etc', () => {
     let y10 = p.namespaceStorage.get('nameless').get('y10');
-    let expr = y10.assignments.start_.exprParsed;
+    let expr = y10.assignments.start_;
     let unit = expr.calcUnit(y10);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
     expect(p.defaultLogs).to.be.lengthOf(2); // "1 vs mM" "(1e-3 mole)/litre vs mole/litre"

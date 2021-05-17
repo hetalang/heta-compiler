@@ -1,6 +1,5 @@
 const math = require('mathjs');
-const mathCalcUnits = require('./math-calc-unit');
-math.import(mathCalcUnits);
+const _calcUnit = require('./math-calc-unit');
 let { OperatorNode, SymbolNode } = math.expression.node;
 const _ = require('lodash');
 
@@ -173,6 +172,9 @@ class Expression {
       && [true, false].indexOf(node.value) !== -1;
 
     return isBooleanOperator || isBooleanValue;
+  }
+  calcUnit(record){
+    return _calcUnit(this.exprParsed, record);
   }
 }
 

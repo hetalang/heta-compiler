@@ -91,7 +91,7 @@ class DSwitcher extends _Switcher {
     let logger = this.namespace.container.logger;
 
     if (typeof this.trigger !== 'undefined') { // skip empty
-      let rightSideUnit = this.trigger.exprParsed.calcUnit(this);
+      let rightSideUnit = this.trigger.calcUnit(this);
       if (typeof rightSideUnit === 'undefined') {
         logger.warn(`Cannot calculate trigger units in "${this.index}".`);
       }

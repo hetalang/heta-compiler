@@ -171,7 +171,7 @@ class Record extends _Size {
     for (const scope in this.assignments) {
       let rightSideExpr = this.assignments[scope];
       if (typeof rightSideExpr.num === 'undefined') { // skip numbers
-        let rightSideUnit = rightSideExpr.exprParsed.calcUnit(this);
+        let rightSideUnit = rightSideExpr.calcUnit(this);
         if (typeof rightSideUnit === 'undefined') {
           logger.warn(`Cannot calculate right side units in "${this.index}" for scope "${scope}".`);
         } else if (leftSideUnit && !leftSideUnit.equal(rightSideUnit, true)) {

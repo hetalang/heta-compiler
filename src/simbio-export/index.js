@@ -71,8 +71,7 @@ class SimbioExport extends AbstractExport{
       // checking unitTerm for Reaction
       ns.selectByInstanceOf('Reaction')
         .forEach((reaction) => {
-          let expr = reaction.assignments.ode_.exprParsed;
-          let units = expr.calcUnit(reaction);
+          let units = reaction.assignments.ode_.calcUnit(reaction);
           if (typeof units === 'undefined') {
             //let msg = `Cannot calculate units for Reaction "${reaction.index}" which is not allowed for Simbio.`; // OK if cannot calculate
             //logger.error(msg, {type: 'UnitError'});
