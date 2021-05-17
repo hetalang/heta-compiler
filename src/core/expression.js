@@ -1,9 +1,10 @@
-const math = require('mathjs');
+// const math = require('mathjs');
+const { create, all } = require('mathjs');
+const math = create(all);
 const _calcUnit = require('./math-calc-unit');
-let { OperatorNode, SymbolNode } = math.expression.node;
 const _ = require('lodash');
 
-/*
+/* 
   To store mathematical expressions with additional methods
 */
 class Expression {
@@ -86,12 +87,12 @@ class Expression {
     // b = a*0+b
     let bTree = math.simplify(this.exprParsed, {[target]: 0});
     // a = (a*y+b - b)/y
-    let aTree = new OperatorNode('/', 'divide', [
-      new OperatorNode('-', 'subtract', [
+    let aTree = new math.OperatorNode('/', 'divide', [
+      new math.OperatorNode('-', 'subtract', [
         this.exprParsed,
         bTree
       ]),
-      new SymbolNode(target)
+      new math.SymbolNode(target)
     ]);
 
     let aTreeSimplified = math.simplify(aTree);
@@ -117,7 +118,7 @@ class Expression {
   // of this and expression from argument
   multiply(multiplier = '1'){
     let multiplierParsed = math.parse(multiplier);
-    let node = new OperatorNode('*', 'multiply', [
+    let node = new math.OperatorNode('*', 'multiply', [
       this.exprParsed,
       multiplierParsed
     ]);

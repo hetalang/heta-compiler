@@ -35,6 +35,7 @@
 
 ## features
 
+- replace npm package by something lighter
 - `#move`, `#moveNS`
 - support `@Switcher {active: false}` in Matlab
 - check file format for modules

@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha test/unit/operations.js --config=./test/.mocharc.json",
+    "test:dev": "mocha test/core/expression.js --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
     "test:cov": "nyc --reporter=lcov npm run test",
@@ -38,7 +38,7 @@
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.21",
     "markdown": "^0.5.0",
-    "mathjs": "^5.10.3",
+    "mathjs": "^9.4.0",
     "mathjs-mathml": "^0.3.0",
     "npm": "^6.14.12",
     "nunjucks": "^3.2.3",
@@ -50,7 +50,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-xml": "^0.3.2",
-    "jsdoc": "^3.6.6",
+    "jsdoc": "^3.6.7",
     "jsdoc-to-markdown": "^7.0.1",
     "mocha": "^7.2.0",
     "nyc": "^14.1.1",
