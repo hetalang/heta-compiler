@@ -155,9 +155,9 @@ class MatlabExport extends AbstractExport {
       rhs,
       initRecords,
       sharedRecords,
-      yTranslator: { symbolName: _.fromPairs(yTranslator)},
-      pTranslator: { symbolName: _.fromPairs(pTranslator)},
-      translator: { symbolName: _.fromPairs(yTranslator.concat(pTranslator))},
+      yTranslator: _.fromPairs(yTranslator),
+      pTranslator: _.fromPairs(pTranslator),
+      translator: _.fromPairs(yTranslator.concat(pTranslator)),
       events
     };
   }

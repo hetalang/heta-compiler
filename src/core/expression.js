@@ -136,12 +136,12 @@ class Expression {
   /*
     Renames all symbols except function names
   */
-  translate(translator = {}){
+  translateSymbol(translator = {}){
     let expr = this.clone();
     expr.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
       .filter((node) => {
-        let newName = translator.symbolName && translator.symbolName[node.name];
+        let newName = translator[node.name];
         if (newName){
           node.name = newName;
         }

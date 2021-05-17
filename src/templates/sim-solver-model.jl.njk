@@ -45,9 +45,9 @@ function {{ id }}_start_(cons)
     {%- endfor %}
     {% for record in img.initRecords -%}
     {% if record.isRule -%}
-    {{ record.id }} = {{ record.getAssignment('ode_').translate(img.pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.getAssignment('ode_').translateSymbol(img.pTranslator).toJuliaString() }}
     {%- else -%}
-    {{ record.id }} = {{ record.getAssignment('start_').translate(img.pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.getAssignment('start_').translateSymbol(img.pTranslator).toJuliaString() }}
     {%- endif %}
     {% endfor %}
     # save results
@@ -90,7 +90,7 @@ function {{ id }}_ode_(du, u, p, t)
     {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
@@ -125,7 +125,7 @@ function {{ id }}_make_saving_(outputIds::Vector{Symbol})
         {%- endfor %}
         {% for record in img.extendedRuleRecords %}
         {%- if record.isRule -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
+        {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
         {% elif record.instanceOf('Species') and not record.isAmount -%}
         {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
         {% endif -%}
@@ -146,9 +146,9 @@ end
 ### time events
 {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_times_(cons, times)
-    {%- set ev_start = img.pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
-    {%- set ev_period = img.pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
-    {%- set ev_stop = img.pTranslator.symbolName[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
+    {%- set ev_start = img.pTranslator[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
+    {%- set ev_period = img.pTranslator[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
+    {%- set ev_stop = img.pTranslator[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
     {% if ev_period is undefined -%}
     return [{{ ev_start }}]
     {%- else -%}
@@ -174,13 +174,13 @@ function {{ id }}_{{ event.switcher.id }}_trigger_(u, t, integrator)
     {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
 
-    return ({{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }}) ? 1 : -1
+    return ({{ event.switcher.trigger.translateSymbol(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else 'false' }}) ? 1 : -1
 end
 {%- endfor %}
 
@@ -201,13 +201,13 @@ function {{ id }}_{{ event.switcher.id }}_condition_(u, t, integrator)
     {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
 
-    return {{ event.switcher.trigger.translate(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else '-1' }}
+    return {{ event.switcher.trigger.translateSymbol(img.pTranslator).toJuliaString() if event.switcher.trigger is defined else '-1' }}
 end
 {%- endfor %}
 
@@ -229,7 +229,7 @@ function {{ id }}_{{ event.switcher.id }}_assignment_(integrator)
     {%- endfor %}
     {% for record in img.extendedRuleRecords %}
     {%- if record.isRule -%}
-    {{ record.id }} = {{ record.assignments.ode_.translate(img.pTranslator).toJuliaString() }}
+    {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
@@ -241,7 +241,7 @@ function {{ id }}_{{ event.switcher.id }}_assignment_(integrator)
     {%- endfor -%}
     ) = (
     {%- for assignment in event.affect -%}
-    {{ assignment.getAssignment(event.switcher.id).translate(img.pTranslator).toJuliaString() }}, 
+    {{ assignment.getAssignment(event.switcher.id).translateSymbol(img.pTranslator).toJuliaString() }}, 
     {%- endfor -%}
     )
     

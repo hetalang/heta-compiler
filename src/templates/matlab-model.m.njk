@@ -1,6 +1,6 @@
 {% macro idOrSynonim(component) %}{# if no Synonim in yTranslator, than use id #}
-{%- if yTranslator.symbolName[component.id] -%}
-{{ yTranslator.symbolName[component.id] }}
+{%- if yTranslator[component.id] -%}
+{{ yTranslator[component.id] }}
 {%- else -%}
 {{ component.id }}
 {%- endif -%}
@@ -49,9 +49,9 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- endfor %}
         {% for record in initRecords %}
         {% if record.getAssignment('start_') is defined -%}
-        {{ record.id }} = {{ record.getAssignment('start_').translate(pTranslator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
+        {{ record.id }} = {{ record.getAssignment('start_').translateSymbol(pTranslator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
         {%- else -%}
-        {{ record.id }} = {{ record.getAssignment('ode_').translate(pTranslator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
+        {{ record.id }} = {{ record.getAssignment('ode_').translateSymbol(pTranslator).toMatlabString() }}; % {{ record.id }}, {{ record.title }} ({{ record.units }})
         {%- endif -%}
         {%- endfor %}
 
@@ -113,11 +113,11 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {{ record.id }} = {{ record.assignments.ode_.translateSymbol(pTranslator).toMatlabString() }};
         {%- elif record.instanceOf('Species') and not record.isAmount -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {{ record.id }} = {{ yTranslator[record.id] }} / {{ record.compartment }};
         {%- else -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {{ record.id }} = {{ yTranslator[record.id] }};
         {%- endif -%}
         {%- endfor %}
         shared_values = [
@@ -137,9 +137,9 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
 
     {% for event in events | filter2('switcher.className', 'TimeSwitcher') %}
     function res = {{ event.switcher.id }}_condition(time, y)
-        {%- set ev_start = pTranslator.symbolName[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
-        {%- set ev_period = pTranslator.symbolName[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
-        {%- set ev_stop = pTranslator.symbolName[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
+        {%- set ev_start = pTranslator[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
+        {%- set ev_period = pTranslator[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
+        {%- set ev_stop = pTranslator[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
 
         {% if ev_period is undefined -%}
         res = time - {{ ev_start }};
@@ -162,15 +162,15 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {{ record.id }} = {{ record.assignments.ode_.translateSymbol(pTranslator).toMatlabString() }};
         {%- elif record.instanceOf('Species') and not record.isAmount -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {{ record.id }} = {{ yTranslator[record.id] }} / {{ record.compartment }};
         {%- else -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {{ record.id }} = {{ yTranslator[record.id] }};
         {%- endif -%}
         {%- endfor %}
 
-        if ({{ event.switcher.trigger.translate(pTranslator).toMatlabString() if event.switcher.trigger is defined else 'false' }})
+        if ({{ event.switcher.trigger.translateSymbol(pTranslator).toMatlabString() if event.switcher.trigger is defined else 'false' }})
             res = 1;
         else 
             res = -1;
@@ -189,15 +189,15 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {{ record.id }} = {{ record.assignments.ode_.translateSymbol(pTranslator).toMatlabString() }};
         {%- elif record.instanceOf('Species') and not record.isAmount -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {{ record.id }} = {{ yTranslator[record.id] }} / {{ record.compartment }};
         {%- else -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {{ record.id }} = {{ yTranslator[record.id] }};
         {%- endif -%}
         {%- endfor %}
 
-        res = {{ event.switcher.trigger.translate(pTranslator).toMatlabString() if event.switcher.trigger is defined else '-1' }};
+        res = {{ event.switcher.trigger.translateSymbol(pTranslator).toMatlabString() if event.switcher.trigger is defined else '-1' }};
     end
     {%- endfor %}
 
@@ -212,11 +212,11 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         {%- for record in sharedRecords %}
         % {{ record.title }} ({{ record.units }}) {{ record.notes }}
         {% if record.isRule -%}
-        {{ record.id }} = {{ record.assignments.ode_.translate(pTranslator).toMatlabString() }};
+        {{ record.id }} = {{ record.assignments.ode_.translateSymbol(pTranslator).toMatlabString() }};
         {%- elif record.instanceOf('Species') and not record.isAmount -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }} / {{ record.compartment }};
+        {{ record.id }} = {{ yTranslator[record.id] }} / {{ record.compartment }};
         {%- else -%}
-        {{ record.id }} = {{ yTranslator.symbolName[record.id] }};
+        {{ record.id }} = {{ yTranslator[record.id] }};
         {%- endif -%}
         {%- endfor %}
 
@@ -232,9 +232,9 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         %%% recalculated values
         {%- for assignment in event.affect %}
         {% if assignment.instanceOf('Species') and not assignment.isAmount and not assignment.isRule -%}
-        {{ idOrSynonim(assignment) }} = ({{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }}) * {{ assignment.compartment }};
+        {{ idOrSynonim(assignment) }} = ({{ assignment.getAssignment(event.switcher.id).translateSymbol(pTranslator).toMatlabString() }}) * {{ assignment.compartment }};
         {%- else -%}
-        {{ idOrSynonim(assignment) }} = {{ assignment.getAssignment(event.switcher.id).translate(pTranslator).toMatlabString() }};
+        {{ idOrSynonim(assignment) }} = {{ assignment.getAssignment(event.switcher.id).translateSymbol(pTranslator).toMatlabString() }};
         {%- endif -%}
         {%- endfor %}
         

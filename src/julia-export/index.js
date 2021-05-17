@@ -140,7 +140,7 @@ class JuliaExport extends AbstractExport {
       initRecords,
       extendedRuleRecords,
       events,
-      pTranslator: { symbolName: _.fromPairs(pTranslatorArray)},
+      pTranslator: _.fromPairs(pTranslatorArray),
     };
   }
   getModelCode(image = []){
