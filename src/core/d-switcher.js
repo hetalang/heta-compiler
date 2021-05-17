@@ -23,7 +23,7 @@ class DSwitcher extends _Switcher {
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
           expr._logger = logger;
-          if (expr.exprParsed.hasBooleanResult()) {
+          if (expr.hasBooleanResult()) {
             this.trigger = expr; 
           } else {
             let msg = `DSwitcher trigger "${this.index}" should be a boolean expression.`;

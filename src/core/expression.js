@@ -4,42 +4,6 @@ math.import(mathCalcUnits);
 let { OperatorNode, SymbolNode } = math.expression.node;
 const _ = require('lodash');
 
-/* remove parenthesis from top */
-function _removeParenthesis(node) {
-  if (node.type === 'ParenthesisNode') {
-    return _removeParenthesis(node.content);
-  } else {
-    return node;
-  }
-}
-
-/*
-  To check if mathjs.Node instance has boolean or numeric result
-*/
-math.import({
-  name: 'hasBooleanResult',
-  path: 'expression.node.Node.prototype',
-  factory: function(){
-    let operators = [
-      'smaller', 'smallerEq',
-      'larger', 'largerEq',
-      'equal', 'unequal',
-      'and', 'or', 'xor', 'not'
-    ];
-
-    return function(){
-      let expr = _removeParenthesis(this);
-  
-      let isBooleanOperator = expr.type === 'OperatorNode'
-        && operators.indexOf(expr.fn) !== -1;
-      let isBooleanValue = expr.type === 'ConstantNode'
-        && [true, false].indexOf(expr.value) !== -1;
-  
-      return isBooleanOperator || isBooleanValue;
-    };
-  }
-});
-
 /*
   To store mathematical expressions with additional methods
 */
@@ -71,13 +35,14 @@ class Expression {
 
     // additional check of expressions
     exprParsed.traverse((node) => { // recursive forEach
-      if (node.type === 'ConditionalNode') { // check that ternary has boolean expression
+      /*if (node.type === 'ConditionalNode') { // check that ternary has boolean expression
         let cond = node.condition;
         if (!cond.hasBooleanResult()) {
           let msg = `Ternary operator must have a boolean condition, got "${cond.toString()}"`;
           throw new TypeError(msg);
         }
-      } else if (node.type === 'AssignmentNode') { // check = sign
+      } else */
+      if (node.type === 'AssignmentNode') { // check = sign
         let msg = `Assign (=) symbol must not be in expression, got "${exprParsed.toString()}"`;
         throw new TypeError(msg);
       }
@@ -191,6 +156,32 @@ class Expression {
     return this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
       .filter((node) => ['e', 'pi'].indexOf(node.name) === -1);
+  }
+  hasBooleanResult(){
+    const operators = [
+      'smaller', 'smallerEq',
+      'larger', 'largerEq',
+      'equal', 'unequal',
+      'and', 'or', 'xor', 'not'
+    ];
+
+    let node = _removeParenthesis(this.exprParsed);
+
+    let isBooleanOperator = node.type === 'OperatorNode'
+      && operators.indexOf(node.fn) !== -1;
+    let isBooleanValue = node.type === 'ConstantNode'
+      && [true, false].indexOf(node.value) !== -1;
+
+    return isBooleanOperator || isBooleanValue;
+  }
+}
+
+/* remove parenthesis from top */
+function _removeParenthesis(node) {
+  if (node.type === 'ParenthesisNode') {
+    return _removeParenthesis(node.content);
+  } else {
+    return node;
   }
 }
 

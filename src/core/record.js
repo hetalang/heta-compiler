@@ -27,7 +27,7 @@ class Record extends _Size {
             try { // this is for the cases of wrong ExprString structure
               let expr = Expression.fromString(x);
               expr._logger = logger;
-              if (!expr.exprParsed.hasBooleanResult()) {
+              if (!expr.hasBooleanResult()) {
                 this.assignments[key] = expr;
               } else {
                 let msg = `Record assignments "${this.index}" should be a numeric expression.`;
