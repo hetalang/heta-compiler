@@ -92,7 +92,6 @@ Expression.prototype.toMatlabString = function(){
   };
 
   return this.exprParsed
-    //.translate(math.expression.translator.to['dbsolve'])
     .toString({
       parenthesis: 'keep',
       implicit: 'show',   

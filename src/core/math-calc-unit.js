@@ -2,7 +2,6 @@
 This module calculates units based on expressions
 Records of the expressions must be bound before running this method
 they extends "mathjs" package
-Should be loaded with math.import()
 */
 const { Unit } = require('./unit');
 

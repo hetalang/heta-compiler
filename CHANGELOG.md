@@ -4,6 +4,7 @@
 
 - Added `JuliaExport` format
 - Add `@StopSwitcher` class as experimental
+- Remove mathjs-translate deps
 
 ## 0.6.4
 

@@ -1,6 +1,4 @@
 const math = require('mathjs');
-const mathjsTranslate = require('mathjs-translate');
-math.import(mathjsTranslate);
 const mathCalcUnits = require('./math-calc-unit');
 math.import(mathCalcUnits);
 let { OperatorNode, SymbolNode } = math.expression.node;
@@ -135,13 +133,19 @@ class Expression {
     let aTreeSimplified = math.simplify(aTree);
     return [aTreeSimplified, bTree];
   }
+  /*
+    Renames all symbols except function names
+  */
   translate(translator = {}){
-    //console.log(this.toString())
-    let exprParsed = this.exprParsed.translate(translator);
-    let expr = new Expression(exprParsed); 
-    //console.log(expr.toString())
-    //console.log('')
-    expr._logger = this._logger; // set the same logger
+    let expr = this.clone();
+    expr.exprParsed
+      .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
+      .filter((node) => {
+        let newName = translator.symbolName && translator.symbolName[node.name];
+        if (newName){
+          node.name = newName;
+        }
+      });
 
     return expr;
   }
