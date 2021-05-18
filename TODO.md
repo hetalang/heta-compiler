@@ -31,7 +31,6 @@
 ## bugs
 
 - support of comments inside Heta dictionary and array
-- allow trailing commas in dictionary
 
 ## features
 

@@ -1,0 +1,29 @@
+/*
+  template file for creating platform
+*/
+// add qsp units
+//include ./qsp-units.heta
+
+c1 @Compartment .= 1;
+s1 @Species {compartment: c1,} .= 10;
+m1 @species {
+  compartment: c1,
+} .= 0;
+r1 @Reaction {
+  actors: s1=>,
+  modifiers: [m1],
+} := k1 * s1 * c1;
+
+k1 @Const = 1e-3;
+
+// exports
+#export { format: JSON, filepath: output };
+//#export { format: YAML, filepath: output };
+//#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+//#export { format: SBML, filepath: sbml, version: L2V4 };
+//#export { format: SLV, filepath: model, eventsOff: false };
+//#export { format: DBSolve, filepath: dbsolve };
+//#export { format: Simbio, filepath: simbio };
+//#export { format: Mrgsolve, filepath: mrgsolve };
+//#export { format: Matlab, filepath: matlab };
+//#export { format: Julia, filepath: julia };
