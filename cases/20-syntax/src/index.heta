@@ -4,15 +4,15 @@
 // add qsp units
 //include ./qsp-units.heta
 
-c1 @Compartment .= 1;
+c1 @Compartment {}.= 1;
 s1 @Species {compartment: c1,} .= 10;
-m1 @species {
-  compartment: c1,
+m1 @species { /* comment 0 */
+  compartment: c1, // comment
 } .= 0;
-r1 @Reaction {
-  actors: s1=>,
-  modifiers: [m1],
-} := k1 * s1 * c1;
+r1 @Reaction { // comment 0
+  actors: s1=>, // comment 1
+  modifiers: [m1], // comment 2
+} := k1 * s1 * c1; // comment 3
 
 k1 @Const = 1e-3;
 

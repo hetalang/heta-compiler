@@ -30,7 +30,7 @@
 
 ## bugs
 
-- support of comments inside Heta dictionary and array
+- support of multiline comments in Heta dictionary and array + highlight
 
 ## features
 

@@ -96,6 +96,12 @@
             "type": "shell",
             "command": "heta build cases/19-time-scale",
             "group": "test"
+        },
+        {
+            "label": "case-20",
+            "type": "shell",
+            "command": "heta build cases/20-syntax",
+            "group": "test"
         }
     ]
 }
