@@ -30,7 +30,8 @@
 
 ## bugs
 
-- support of multiline comments in Heta dictionary and array + highlight
+- highlight multiline comments in Heta dictionary and array (with/without comma)
+- do not allow arrows `<-`, `<=`
 
 ## features
 

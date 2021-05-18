@@ -12,6 +12,15 @@ m1 @species { /* comment 0 */
 r1 @Reaction { // comment 0
   actors: s1=>, // comment 1
   modifiers: [m1], // comment 2
+  aux: { // one comment
+    one: Hello // one comment
+    two: World!, // two comment
+    array: [ // cm 0
+      one, // cm 1
+      two, // cm 2
+      three // cm3
+    ]
+  }
 } := k1 * s1 * c1; // comment 3
 
 k1 @Const = 1e-3;
