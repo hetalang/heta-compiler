@@ -30,11 +30,10 @@
 
 ## bugs
 
-- highlight multiline comments in Heta dictionary and array (with/without comma)
-- do not allow arrows `<-`, `<=`
 
 ## features
 
+- highlight multiline comments in Heta dictionary and array (with/without comma)
 - replace npm package by something lighter
 - `#move`, `#moveNS`
 - support `@Switcher {active: false}` in Matlab

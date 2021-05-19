@@ -5,6 +5,8 @@
 - Added `JuliaExport` format
 - Add `@StopSwitcher` class as experimental
 - Remove mathjs-translate deps
+- Fix bug in comments inside dictionary
+- ban `<-` syntax in Process expression
 
 ## 0.6.4
 

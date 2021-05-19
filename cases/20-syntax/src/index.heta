@@ -25,6 +25,8 @@ r1 @Reaction { // comment 0
 
 k1 @Const = 1e-3;
 
+r2 @Reaction {actors: <=>s1} := 1e-2;
+
 // exports
 #export { format: JSON, filepath: output };
 //#export { format: YAML, filepath: output };
