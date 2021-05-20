@@ -5,7 +5,11 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "plugins": ["you-dont-need-lodash-underscore"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:you-dont-need-lodash-underscore/compatible"
+    ],
     "parserOptions": {
         "ecmaVersion": 2017,
         "sourceType": "module"

@@ -59,6 +59,38 @@
 - updating properties with `one::s1.assignments.start_ 5.5;`
 - remove `isAmount`, `compartment` properties from `@Reaction`
 
+## remove lodash
+
+https://medium.com/swlh/are-we-ready-to-replace-lodash-60cd651f6c58
+https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
+
+- merge
+- sortBy
+- has
+- get
+- set
+- flatten => flat
+- omit
+- forOwn
+- times
+- defaults
+- forEach(::Object)
+- sumBy
+- trim => trim
+- cloneDeep !
+- size
+- unique
+- each
+- mapValues
+- groupBy
+- pick
+- fromPairs
+- drop
+- cloneDeepWith
+- intersection
+- keys => Object.keys(value || {})]
+- 
+
 ### Dose class
 
 ```heta
