@@ -22,12 +22,12 @@ program
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
-  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".json5", ".yml"]', 'platform')
+  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".json5", ".yml"]')
   // options
   .option('--units-check', 'Check all Records for unit consistency.')
   .option('-S, --skip-export', 'do not export files to local directory')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
-  .option('-d, --debug', 'If set the raw module output will be stored in "meta".')
+  .option('--debug', 'If set the raw module output will be stored in "meta".')
   .option('--julia-only', 'Run in Julia supporting mode: skip declared exports.')
   .option('--dist-dir <filepath>', 'Set export directory path, where to store distributives.')
   .option('--meta-dir <filepath>', 'Set meta directory path.')
@@ -44,31 +44,35 @@ program
   let targetDir = path.resolve(program.args[0] || '.');
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
-    process.exit(1);
+    process.exit(1); // BRAKE
   }
-  // set base name of declaration file
-  let platformFile = program.declaration;
 
   // === read declaration file ===
   // search
   let searches = ['', '.json', '.json5', '.yml']
-    .map((ext) => path.join(targetDir, platformFile + ext));
+    .map((ext) => path.join(targetDir, (program.declaration || 'platform') + ext));
   let extensionNumber = searches
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
-  if (extensionNumber === -1) {
-    process.stdout.write('Running compilation without declaration file...\n');
+  if (!program.declaration && extensionNumber === -1) {
+    process.stdout.write('No declaration file, running with defaults...\n');
     var declaration = {};
+  } else if (extensionNumber === -1) {
+    process.stdout.write(`Declaration file "${program.declaration}" not found.\nSTOP!`);
+    process.exit(1); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
     process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
       declaration = safeLoad(declarationText);
+      if (typeof declaration !== 'object'){
+        throw new Error('Not an object.');
+      }
     } catch (e) {
       process.stdout.write(`Wrong format of declaration file: \n"${e.message}"\n`);
-      process.exit(1);
+      process.exit(1); // BRAKE
     }
   }
 
@@ -89,39 +93,31 @@ program
     }
   };
 
-  // === combine options CLI => declaration => default index ===
-  let integralDeclaration = _.defaultsDeep(CLIDeclaration, declaration);
+  // === update declaration ===
+  _.merge(declaration, CLIDeclaration);
 
-  // wrong version throws, if no version stated than skip
-  let satisfiesVersion = integralDeclaration.builderVersion
-    ? semver.satisfies(version, integralDeclaration.builderVersion)
+  // === wrong version throws, if no version stated than skip ===
+  let satisfiesVersion = declaration.builderVersion
+    ? semver.satisfies(version, declaration.builderVersion)
     : true;
   if (!satisfiesVersion) {
-    process.stdout.write(`Version of declaration file "${integralDeclaration.builderVersion}" does not satisfy current builder.\n`);
-    process.exit(1);
+    process.stdout.write(`Version "${declaration.builderVersion}" stated in declaration file is not supported by the builder.\n`);
+    process.exit(1); // BRAKE
   }
 
-  // === this part uses "send errors to developer" message ===
+  // === this part displays "send errors to developer" message ===
   try {
-    var builder = new Builder(integralDeclaration, targetDir);
-  } catch(e) {
-    process.stdout.write(contactMessage + '\n');
-    throw e;
-  }
-  if (builder.container.hetaErrors().length > 0) {
-    process.stdout.write('Declaration ERROR! See logs.\n');
-    process.exit(1);
-  }
-
-  try {
+    var builder = new Builder(declaration, targetDir);
     builder.run();
-  } catch(e) {
+  } catch(error) {
     process.stdout.write(contactMessage + '\n');
-    throw e;
+    process.stdout.write(error.stack);
+    process.exit(1);
+    //throw error;
   }
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
-    if (integralDeclaration.options.exitWithoutError)
+    if (declaration.options.exitWithoutError)
       process.exit(0);
     else
       process.exit(1);

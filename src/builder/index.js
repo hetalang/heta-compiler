@@ -64,10 +64,10 @@ class Builder {
     if (this.id) this.logger.info(`Platform id: "${this.id}"`);
     
     // index file not found
-    let indexFilepath = path.resolve(coreDirname, declaration.importModule.source);
-    if (!fs.existsSync(indexFilepath)) {
-      this.logger.error(`index file "${indexFilepath}" does not exist.`, {type: 'BuilderError'});
-    }
+    //let indexFilepath = path.resolve(coreDirname, declaration.importModule.source);
+    //if (!fs.existsSync(indexFilepath)) {
+    //  this.logger.error(`Index file "${indexFilepath}" does not exist.`, {type: 'BuilderError'});
+    //}
   }
 
   run(){

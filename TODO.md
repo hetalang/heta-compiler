@@ -34,22 +34,20 @@
 ## features
 
 - highlight multiline comments in Heta dictionary and array (with/without comma)
-- replace npm package by something lighter
 - `#move`, `#moveNS`
 - support `@Switcher {active: false}` in Matlab
 - check file format for modules
-- informative output when critical error
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: Matlab, DBSolve
+- export to SBML L3 + timeUnits from `@TimeScale`
 
 ## ideas
 
 - syntax highlight in web
 - add "ignoreCompartment" property in Species
 - do not translate base units in SBML export like second => _second
-- export to SBML L3 + timeUnits from `@TimeScale`
 - automatic creation of modifiers in SBML
 - avoid insert for existed elements: get warning or #forceInsert 
 - AnyUnit for zero numbers

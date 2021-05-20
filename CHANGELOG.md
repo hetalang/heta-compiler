@@ -7,6 +7,8 @@
 - Remove mathjs-translate deps
 - Fix bug in comments inside dictionary
 - ban `<-` syntax in Process expression
+- remove npm dependance
+- prettify internal errors
 
 ## 0.6.4
 
