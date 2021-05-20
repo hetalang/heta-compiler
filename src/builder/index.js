@@ -102,17 +102,17 @@ class Builder {
     this.logger.info('Checking for circular references in Records.');
     this.container.checkCircRecord();
 
-    // 6. Units checking
-    this.container.checkCircUnitDef();
-    if (this.options.unitsCheck) {
-      this.logger.info('Checking unit\'s consistency.');
-      this.container.checkUnits();
-    } else {
-      this.logger.warn('Units checking skipped. To turn it on set "unitsCheck: true" in declaration.');
-    }
-
     // === STOP if errors ===
     if (!this.logger.hasErrors) {
+      // 6. Units checking
+      this.container.checkCircUnitDef();
+      if (this.options.unitsCheck) {
+        this.logger.info('Checking unit\'s consistency.');
+        this.container.checkUnits();
+      } else {
+        this.logger.warn('Units checking skipped. To turn it on set "unitsCheck: true" in declaration.');
+      }
+
       // 7. Terms checking
       this.logger.info('Checking unit\'s terms.');
       this.container.checkTerms();
@@ -127,7 +127,7 @@ class Builder {
         this.exportMany();
       }
     } else {
-      this.logger.warn('Export skipped because of errors in compilation.');
+      this.logger.warn('Units checking and export were skipped because of errors in compilation.');
     }
 
     // 9. save logs if required

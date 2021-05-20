@@ -9,6 +9,7 @@
 - ban `<-` syntax in Process expression
 - remove npm dependance
 - prettify internal errors
+- skip units check if errors on previous stages
 
 ## 0.6.4
 
