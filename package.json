@@ -50,6 +50,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-xml": "^0.3.2",
+    "eslint": "^7.26.0",
     "eslint-plugin-you-dont-need-lodash-underscore": "^6.12.0",
     "jsdoc": "^3.6.7",
     "jsdoc-to-markdown": "^7.0.1",
