@@ -25,14 +25,6 @@ class AnotherXLSXExport extends XLSXExport {
       .filter((x) => !x.isCore && !x.instanceOf('UnitDef')) // skip core and UnitsDef
       .map((x) => x.toFlat({useAnotherUnits: true}))
       .map((q) => this.omit ? _.omit(q, this.omit) : q)
-      /*
-      .map((x) => {
-        // add on property
-        x.on = 1;
-        // convert boolean to string
-        return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
-      })
-      */
       .value();
 
     // main_tab sheet
@@ -150,13 +142,7 @@ class AnotherXLSXExport extends XLSXExport {
           q.st = 'f';
 
           return _.pick(q, ['tags[]', 'st', 'id', 'units2']);
-        })/*,
-      qArr.filter((q) => q.class === 'Reaction')
-        .map((q) => {
-          q.st = 'r';
-
-          return _.pick(q, ['tags[]', 'st', 'id', 'units2']);
-        })*/
+        })
     );
 
     return [functions, species, parameters, function_units];

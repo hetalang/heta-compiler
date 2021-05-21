@@ -17,7 +17,6 @@ const { ReferenceDefinition } = require('../core/reference-definition');
 const { Page } = require('../core/page');
 const { Const } = require('../core/const');
 const { TimeScale } = require('../core/time-scale');
-const { SimpleTask } = require('../core/simple-task');
 // external
 const _ = require('lodash');
 const { Logger, JSONTransport } = require('../logger');
@@ -36,11 +35,12 @@ class Container {
     this.classes.UnitDef = class extends UnitDef {};
     this.classes.UnitDef.prototype._container = this;
     // create "export" classes bound to this container
-    _.forEach(Container._exportClasses, (_Class, key) => {
-      this.classes[key] = class extends _Class {};
-      this.classes[key].prototype._container = this;
-    });
-    
+    Object.entries(Container._exportClasses)
+      .forEach(([key, _Class]) => {
+        this.classes[key] = class extends _Class {};
+        this.classes[key].prototype._container = this;
+      });
+
     // logger
     this.logger = new Logger();
     this.defaultLogs = []; // storing logs in JSON-like format here
@@ -90,9 +90,10 @@ class Container {
     return this;
   }
   get length(){
-    return _.sumBy([...this.namespaceStorage], (x) => x[1].size)
-      + this.unitDefStorage.size // global element
-      + this.exportStorage.size; // global element
+    return [...this.namespaceStorage]
+      .reduce((acc, x) => acc + x[1].size, 0)
+        + this.unitDefStorage.size // global element
+        + this.exportStorage.size; // global element
   }
   // check all namespaces
   knitMany(){
@@ -205,7 +206,6 @@ Container.prototype._componentClasses = {
   StopSwitcher,
   CSwitcher,
   TimeSwitcher,
-  SimpleTask,
   ReferenceDefinition,
   Page,
   Const,

@@ -495,58 +495,6 @@
           "properties": { "class": { "const": "ReferenceDefinition" } }
         }
       ]
-    },
-
-    "SimpleTaskP": {
-      "type": "object",
-      "properties": {
-        "type": { "type": "string", "enum": ["simulation"], "default": "simulation" },
-        "subtasks": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "properties": {
-              "saveat": {"type": "array", "items": {}, "example": [1,2,3] },
-              "output": {"type": "array", "items": { "$ref": "#/definitions/ID" } }
-            },
-            "required": ["saveat", "output"]
-          }
-        },
-        "tspan": {
-          "type": "array",
-          "items": [
-            {},
-            {}
-          ],
-          "additionalItems": false
-        },
-        "reassign": {
-          "type": "object",
-          "items": {
-            "type": "object",
-            "propertyNames": { "$ref": "#/definitions/ID" },
-            "additionalProperties": { "type": "number" }
-          }
-        },
-        "solver": {
-          "type": "object",
-          "properties": {
-            "alg": { "type": "string" },
-            "reltol": { "type": "number", "minimum": 0 },
-            "abstol": { "type": "number", "minimum": 0 },
-            "maxiters": { "type": "number", "minimum": 0 },
-            "dt": { "type": "number", "minimum": 0 },
-            "dtmin": { "type": "number", "minimum": 0 },
-            "dtmax": { "type": "number", "minimum": 0 },
-            "tstops": {
-              "type": "array",
-              "items": { "type": "number" }
-            }
-          }
-        }
-      }
     }
-
    }
 }

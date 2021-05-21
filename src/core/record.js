@@ -22,7 +22,7 @@ class Record extends _Size {
 
     if (valid) {
       if (q.assignments) { // add new assignments from q
-        _.forOwn(q.assignments, (x, key) => {
+        Object.entries(q.assignments).forEach(([key, x]) => {
           if (typeof x === 'string' || typeof x === 'number') {
             try { // this is for the cases of wrong ExprString structure
               let expr = Expression.fromString(x);
@@ -51,8 +51,7 @@ class Record extends _Size {
   }
   clone(){
     let clonedComponent = super.clone();
-    if (_.size(this.assignments) > 0)
-      clonedComponent.assignments = _.mapValues(this.assignments, (expr) => expr.clone());
+    clonedComponent.assignments = _.mapValues(this.assignments, (expr) => expr.clone());
     if (typeof this.boundary !== undefined)
       clonedComponent.boundary = this.boundary;
     if (typeof this.output !== undefined)
@@ -67,7 +66,8 @@ class Record extends _Size {
     super.updateReferences(q);
     
     // check math expression refs
-    _.each(this.assignments, (mathExpr) => mathExpr.updateReferences(q));
+    Object.values(this.assignments)
+      .forEach((mathExpr) => mathExpr.updateReferences(q));
   }
   bind(namespace){
     super.bind(namespace);
@@ -105,9 +105,7 @@ class Record extends _Size {
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if (_.size(this.assignments)) {
-      res.assignments = _.mapValues(this.assignments, (x) => x.toString(options));
-    }
+    res.assignments = _.mapValues(this.assignments, (x) => x.toString(options));
     if (this.boundary) {
       res.boundary = this.boundary;
     }

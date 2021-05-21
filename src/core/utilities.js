@@ -13,7 +13,7 @@ function flatten(o){
     throw new TypeError('Object required.');
   
   let res = {};
-  _.each(o, (value, key) => {
+  Object.entries(o).forEach(([key, value]) => {
     if(value instanceof Array) {
       res[key + '[]'] = value.map((x) => {
         if(typeof x === 'object'){
@@ -26,9 +26,8 @@ function flatten(o){
       res[key] = value;
     } else {
       let flat = flatten(value);
-      _.each(flat, (valueDeep, keyDeep) => {
-        res[key + '.' + keyDeep] = valueDeep;
-      });
+      Object.entries(flat)
+        .forEach(([keyDeep, valueDeep]) => res[key + '.' + keyDeep] = valueDeep);
     }
   });
 

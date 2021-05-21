@@ -167,12 +167,12 @@ class Unit extends Array {
       .filter((x) => x.kind !== dimensionlessKind)
       .groupBy((x) => x.kind)
       .map((x, key) => {
-        let exponent = _.sumBy(x, (y) => y.exponent);
+        let exponent = x.reduce((acc, y) => acc + y.exponent, 0);
         if (exponent === 0) { // add to multiplier
-          commonLogMultiplier += _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
+          commonLogMultiplier += x.reduce((acc, y) => acc + y.exponent * log10(y.multiplier), 0);
           var res = undefined;
         } else {
-          let tmp = _.sumBy(x, (y) => y.exponent * log10(y.multiplier));
+          let tmp = x.reduce((acc, y) => acc + y.exponent * log10(y.multiplier), 0);
           let multiplier = 10 ** (tmp / exponent);
           res = {
             kind: key,

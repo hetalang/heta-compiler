@@ -71,7 +71,7 @@ class Component {
       componentClone.notes = this.notes;
     if (this.tags.length)
       componentClone.tags = this.tags.map(x => x);
-    if (_.size(this.aux))
+    if (this.aux !== undefined)
       componentClone.aux = _.cloneDeep(this.aux);
 
     if (this._isCore)
@@ -101,21 +101,22 @@ class Component {
     };
     // search ref in requirements
     let req = this.constructor.requirements();
-    _.each(req, (rule, prop) => { // iterates through rules
-      // isReference: true
-      if(rule.isReference && _.has(this, prop)){
-        if(rule.isArray){ // iterates through array
-          _.get(this, prop).forEach((item, i) => {
-            let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
+    Object.entries(req)
+      .forEach(([prop, rule]) => { // iterates through rules
+        // isReference: true
+        if(rule.isReference && _.has(this, prop)){
+          if(rule.isArray){ // iterates through array
+            _.get(this, prop).forEach((item, i) => {
+              let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
+              iterator(item, fullPath, rule);
+            });
+          }else{
+            let item = _.get(this, prop);
+            let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
             iterator(item, fullPath, rule);
-          });
-        }else{
-          let item = _.get(this, prop);
-          let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
-          iterator(item, fullPath, rule);
+          }
         }
-      }
-    });
+      });
 
     return this;
   }
@@ -193,7 +194,7 @@ class Component {
 
     // check requirements
     let req = this.constructor.requirements();
-    _.each(req, (rule, prop) => { // iterates through rules
+    Object.entries(req).forEach(([prop, rule]) => { // iterates through rules
       // required: true
       if (rule.required && !_.has(this, prop)) {
         logger.error(
@@ -224,7 +225,7 @@ class Component {
     if (this.title) res.title = this.title;
     if (this.notes) res.notes = this.notes;
     if (this.tags.length>0) res.tags = _.cloneDeep(this.tags);
-    if (_.size(this.aux)>0) res.aux = _.cloneDeep(this.aux);
+    if (Object.keys(this.aux).length > 0) res.aux = _.cloneDeep(this.aux);
 
     return res;
   }

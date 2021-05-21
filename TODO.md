@@ -36,7 +36,6 @@
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - `#move`, `#moveNS`
 - support `@Switcher {active: false}` in Matlab
-- check file format for modules
 - check unit consistency for Species: amount/area if compartment is area 
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - parameter switching: see "parameter-switching.md"
@@ -45,6 +44,7 @@
 
 ## ideas
 
+- check file format for modules
 - syntax highlight in web
 - add "ignoreCompartment" property in Species
 - do not translate base units in SBML export like second => _second
@@ -65,31 +65,24 @@ https://medium.com/swlh/are-we-ready-to-replace-lodash-60cd651f6c58
 https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
 
 - merge
+- defaults
 - sortBy
 - has
 - get
 - set
 - flatten => flat
 - omit
-- forOwn
+- pick
 - times
-- defaults
-- forEach(::Object)
-- sumBy
 - trim => trim
 - cloneDeep !
-- size
 - unique
-- each
 - mapValues
 - groupBy
-- pick
 - fromPairs
 - drop
 - cloneDeepWith
 - intersection
-- keys => Object.keys(value || {})]
-- 
 
 ### Dose class
 

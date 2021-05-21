@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.6
+
+- remove `@SimpleTask` Class
+
 ## 0.6.5
 
 - Added `JuliaExport` format

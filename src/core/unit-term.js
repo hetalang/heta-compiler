@@ -55,7 +55,7 @@ class UnitTerm extends Array {
       .map((x, key) => {
         return {
           kind: key,
-          exponent: _.sumBy(x, (y) => y.exponent)
+          exponent: x.reduce((acc, y) => acc + y.exponent, 0)
         };
       })
       .filter((x) => x.exponent !== 0)

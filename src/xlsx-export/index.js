@@ -75,18 +75,18 @@ class XLSXExport extends AbstractExport {
         .groupBy((q) => q.class)
         .mapValues((value, prop) => {
           let keys = _.chain(value) // store unique keys
-            .map((x) => _.keys(x))
+            .map((x) => Object.keys(x))
             .flatten()
             .uniq()
             .value();
-          let sequense_i = _.intersection(propSequence, keys);
+          let sequence_i = _.intersection(propSequence, keys);
 
           return {
             content:  value,
             pathSuffix: '',
             type: 'sheet',
             name: prop,
-            headerSeq: sequense_i
+            headerSeq: sequence_i
           };
         })
         .toPairs()
@@ -99,7 +99,7 @@ class XLSXExport extends AbstractExport {
       return splitted;
     } else {
       let keys = _.chain(fArr) // store unique keys
-        .map((x) => _.keys(x))
+        .map((x) => Object.keys(x))
         .flatten()
         .uniq()
         .value();
