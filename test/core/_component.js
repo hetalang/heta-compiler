@@ -94,7 +94,6 @@ describe('Unit test for Component common methods', () => {
     });
     //expect(simple.logger).to.has.property('hasErrors', false);
     expect(simple).to.have.property('notes');
-    expect(simple).to.have.property('notesMdTree').with.instanceOf(Array);
     expect(simple).to.have.property('notesHTML').with.a('string');
   });
 

@@ -4,6 +4,7 @@
 
 - remove `@SimpleTask` Class
 - export to SBML L3 + timeUnits from `@TimeScale`
+- replace "markdown" package by "marked"
 
 ## 0.6.5
 
