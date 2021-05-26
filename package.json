@@ -37,7 +37,7 @@
     "inquirer": "^7.3.3",
     "js-yaml": "^3.14.0",
     "lodash": "^4.17.21",
-    "marked": "^2.0.5",
+    "markdown-it": "^12.0.6",
     "mathjs": "^9.4.0",
     "mathjs-mathml": "^0.3.0",
     "node-fetch": "^2.6.1",

@@ -38,7 +38,7 @@ class JuliaExport extends AbstractExport {
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   make(skipVersionCode = false){
-    let logger = this._container.logger;
+    //let logger = this._container.logger;
     // create image for multiple namespaces
     let nsImages = [...this._container.namespaceStorage]
       .filter((pair) => {
