@@ -27,6 +27,10 @@ namespace mm begin
   //ss2 @StopSwitcher {trigger: S < P};
 end
 
+heta_code #export {
+  format: HetaCode,
+  filepath: heta_code
+};
 mm_sbml_l2v4 #export {
   spaceFilter: mm,
   format: SBML,
