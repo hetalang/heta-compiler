@@ -6,9 +6,11 @@
   level="2" version="4"
 {%- endblock %}
   >
-  <model 
+  <model
     id="{{ population.spaceName }}" 
     metaid="{{ population.spaceName }}"
+{%- block modelHeader %}
+{%- endblock %}
     >
     {% if notes is defined %}
     <notes>

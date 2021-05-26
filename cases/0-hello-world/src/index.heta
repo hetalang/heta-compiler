@@ -27,53 +27,59 @@ namespace mm begin
   //ss2 @StopSwitcher {trigger: S < P};
 end
 
-#export {
+mm_sbml_l2v4 #export {
   spaceFilter: mm,
   format: SBML,
-  filepath: mm_sbml,
+  filepath: mm_sbml_l2v4,
   version: L2V4
 };
-#export {
+mm_sbml_l3v1 #export {
+  spaceFilter: mm,
+  format: SBML,
+  filepath: mm_sbml_l3v1,
+  version: L3V1
+};
+mm_simbio #export {
   spaceFilter: mm,
   format: Simbio,
   filepath: mm_simbio,
 };
-#export {
+full_json #export {
   spaceFilter: mm,
   format: JSON,
   filepath: full_json,
 };
-#export {
+full_yaml #export {
   spaceFilter: mm,
   format: YAML,
   filepath: full_yaml,
 };
-#export {
+mm_slv #export {
   spaceFilter: mm,
   format: SLV,
   filepath: mm_slv,
 };
-#export {
+mm_julia #export {
   spaceFilter: mm,
   format: Julia,
   filepath: mm_julia,
 };
-#export {
+mm_dbsolve #export {
   spaceFilter: mm,
   format: DBSolve,
   filepath: mm_dbsolve,
 };
-#export {
+mm_mrg #export {
   spaceFilter: mm,
   format: Mrgsolve,
   filepath: mm_mrg,
 };
-#export {
+matlab1 #export {
   spaceFilter: mm,
   format: Matlab,
   filepath: matlab1,
 };
-#export {
+table #export {
   spaceFilter: mm,
   format: XLSX,
   filepath: table,

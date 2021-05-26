@@ -1,0 +1,13 @@
+{% extends "sbml.xml.njk" %}
+
+{% block sbmlHeader %}
+  xmlns="http://www.sbml.org/sbml/level3/version1/core" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="3" version="2"
+{%- endblock %}
+
+{% block modelHeader %}
+  {%- if population.get('t').units is defined %}
+    timeUnits="{{ population.get('t').unitsHash() }}"
+  {%- endif %}
+{%- endblock %}

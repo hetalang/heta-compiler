@@ -17,7 +17,8 @@ const fs = require('fs-extra');
 const { slvParse } = require('slv-utils');
 const XLSX = require('xlsx'); 
 
-const sbml_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml.xml','utf8');
+const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4.xml','utf8');
+const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1.xml','utf8');
 const json_correct = require('../../cases/0-hello-world/master/full_json.json');
 const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
 const yaml_correct = safeLoad(yaml_correct_text);
@@ -29,7 +30,6 @@ const julia_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model
 
 describe('Testing "cases/0-hello-world"', () => {
   let b;
-  let exportArray;
 
   it('Create builder.', () => {
     let declaration = {
@@ -50,18 +50,24 @@ describe('Testing "cases/0-hello-world"', () => {
 
   it('Run include', () => {
     b.run();
-    exportArray = [...b.container.exportStorage].map((x) => x[1]);
   });
 
   it('Run #export {format: SBML}, check and compare.', () => {
-    let sbml_export = exportArray[0];
+    let sbml_export = b.container.exportStorage.get('mm_sbml_l2v4');
     let code = sbml_export.make(true)[0].content;
     expect(code).xml.to.to.be.valid();
-    expect(code).xml.be.deep.equal(sbml_correct);
+    expect(code).xml.be.deep.equal(sbml_l2v4_correct);
+  });
+
+  it('Run #export {format: SBML}, check and compare.', () => {
+    let sbml_export = b.container.exportStorage.get('mm_sbml_l3v1');
+    let code = sbml_export.make(true)[0].content;
+    expect(code).xml.to.to.be.valid();
+    expect(code).xml.be.deep.equal(sbml_l3v1_correct);
   });
 
   it('Run #export {format: JSON}, check and compare.', () => {
-    let json_export = exportArray[2];
+    let json_export = b.container.exportStorage.get('full_json');
     let code = json_export.make(true)[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
@@ -69,7 +75,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: YAML}, check and compare.', () => {
-    let yaml_export = exportArray[3];
+    let yaml_export = b.container.exportStorage.get('full_yaml');
     let code = yaml_export.make(true)[0].content;
     let obj = safeLoad(code);
     expect(obj).to.be.deep.equal(yaml_correct);
@@ -77,7 +83,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SLV}, check and compare.', () => {
-    let slv_export = exportArray[4];
+    let slv_export = b.container.exportStorage.get('mm_slv');
     let code = slv_export.make(true)[0].content;
     let obj = slvParse.parse(code);
     expect(obj).to.be.deep.equal(slv_correct);
@@ -85,7 +91,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: XLSX}, check and compare.', () => {
-    let xlsx_export = exportArray[9];
+    let xlsx_export = b.container.exportStorage.get('table');
     let code = xlsx_export.make(true); // check only sheet #0
 
     // check number of sheets
@@ -109,7 +115,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Mrgsolve}, check and compare.', () => {
-    let mm_mrg = exportArray[7];
+    let mm_mrg = b.container.exportStorage.get('mm_mrg');
     let code = mm_mrg.make(true);
     // compare model.cpp text content
     expect(code[0].pathSuffix).to.be.equal('/model.cpp');
@@ -118,7 +124,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Julia}, check and compare.', () => {
-    let mm_mrg = exportArray[5];
+    let mm_mrg = b.container.exportStorage.get('mm_julia');
     let code = mm_mrg.make(true);
     // compare model.js text content
     expect(code[0].pathSuffix).to.be.equal('/model.jl');

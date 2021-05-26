@@ -14,6 +14,7 @@
 [x] DBSolve & SLV (DBSolve)
 [x] JSON + YAML
 [x] SBML L2
+[x] SBML L3
 [x] mrgsolve (R)
 [x] simbio (Matlab)
 [x] simsolver (Julia)
@@ -40,7 +41,6 @@
 - multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
 - parameter switching: see "parameter-switching.md"
 - atStart to exports: Matlab, DBSolve
-- export to SBML L3 + timeUnits from `@TimeScale`
 
 ## ideas
 

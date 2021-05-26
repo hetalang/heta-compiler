@@ -121,6 +121,12 @@ class SBMLExport extends AbstractExport {
     case 'L2V5':
       return nunjucks.render('sbmlL2V5.xml.njk', image);
       break;
+    case 'L3V1':
+      return nunjucks.render('sbmlL3V1.xml.njk', image);
+      break;
+    case 'L3V2':
+      return nunjucks.render('sbmlL3V2.xml.njk', image);
+      break;
     default:
       this._container.logger.error(`SBML of version "${this.version}" is not supported.`);
       return '';

@@ -3,6 +3,7 @@
 ## 0.6.6
 
 - remove `@SimpleTask` Class
+- export to SBML L3 + timeUnits from `@TimeScale`
 
 ## 0.6.5
 
