@@ -1,10 +1,5 @@
-const marked = require('marked');
-marked.setOptions({
-  breaks: false,
-  smartLists: false,
-  smartypants: false,
-  xhtml: true
-});
+const MarkdownIt = require('markdown-it');
+const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
 const { validator, flatten } = require('./utilities');
 const _ = require('lodash');
@@ -131,7 +126,7 @@ class Component {
     if (this.notes === undefined) {
       return undefined;
     }
-    return marked(this.notes);
+    return md.render(this.notes);
   }
   static isValid(q, logger){
     let ind = q.space ? `${q.space}::${q.id}` : q.id;
