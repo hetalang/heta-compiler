@@ -147,13 +147,13 @@ class SLVExport extends AbstractExport{
             let [multiply, add] = expression
               .lianerizeFor(record.id)
               .map((tree) => {
-                if (tree.isSymbolNode) { // a is symbol case, i.e. 'p1'
+                if (tree.type === 'SymbolNode') { // a is symbol case, i.e. 'p1'
                   return tree.toString();
                 } else {
                   try { // a can be evaluated, i.e. '3/4'
-                    return tree.eval();
+                    return tree.evaluate();
                   } catch (e) { // other cases, i.e. 'p1*2'
-                    logger.error(`SLV format cannot export expression "${record.id} [${switcher.id}]= ${expression.expr}". Use only expressions of type: 'a * ${record.id} + b'`, {type: 'ExportError'});
+                    logger.error(`SLV format cannot export expression "${record.id} [${switcher.id}]= ${expression.toString()}". Use only expressions of type: 'a * ${record.id} + b'`, {type: 'ExportError'});
                   }
                 }
               });

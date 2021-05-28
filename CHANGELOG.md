@@ -4,7 +4,9 @@
 
 - remove `@SimpleTask` Class
 - export to SBML L3 + timeUnits from `@TimeScale`
-- replace "markdown" package by "marked"
+- replace "markdown" package by "markdown-it"
+- support HetaCode export
+- fix error with SLV events export
 
 ## 0.6.5
 

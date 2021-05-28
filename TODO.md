@@ -22,7 +22,7 @@
 [x] another xlsx
 [x] matlab
 [x] Julia
-[ ] heta-standard (Heta)
+[ ] Heta-code (Heta)
 [ ] csv
 [ ] rxode (R)
 [ ] dat (DBSolve)
