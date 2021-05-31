@@ -22,7 +22,7 @@
 [x] another xlsx
 [x] matlab
 [x] Julia
-[ ] Heta-code (Heta)
+[x] Heta-code (Heta)
 [ ] csv
 [ ] rxode (R)
 [ ] dat (DBSolve)
@@ -30,6 +30,8 @@
 [ ] ODEs in markdown/latex/ascii
 
 ## bugs
+
+- wrong highlight
 
 
 ## features

@@ -2,7 +2,7 @@
   template file for creating platform
 */
 // add qsp units
-//include ./qsp-units.heta
+include ./qsp-units.heta
 
 c1 @Compartment {}.= 1;
 s1 @Species {compartment: c1,} .= 10;

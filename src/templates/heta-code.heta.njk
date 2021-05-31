@@ -56,6 +56,12 @@
   {%- endfor %}
 {%- endmacro -%}
 
+{%- for id, unitDef in unitDefStorage.entries() %}
+{%-  if not unitDef.isCore %}
+{{ id }} #defineUnit { units: {{ unitDef.units }}, };
+{%- endif %}
+{%- endfor %}
+
 {%- for spaceId, namespace in namespaceStorage.entries() %}
 
 {{ 'abstract ' if namespace.isAbstract }}namespace {{ spaceId }} begin
