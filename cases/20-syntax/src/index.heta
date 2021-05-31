@@ -27,8 +27,32 @@ k1 @Const = 1e-3;
 
 r2 @Reaction {actors: <=>s1} := 1e-2;
 
+// Switcher
+ts1 @TimeSwitcher {
+  start: 12,
+  period: 24,
+  stop: 100,
+  atStart: true
+};
+s1 [ts1]= s1*2 + 1.1;
+c1 [ts1]= 1.1;
+
+period2 @Const = 22;
+ts2 @TimeSwitcher {
+  start: 0,
+  period: period2,
+  atStart: false
+};
+
+cs1 @CSwitcher {
+  trigger: k1 - 1
+};
+
+ss1 @StopSwitcher { trigger: s1>k1};
+
 // exports
 #export { format: JSON, filepath: output };
+#export { format: HetaCode, filepath: output };
 //#export { format: YAML, filepath: output };
 //#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
 //#export { format: SBML, filepath: sbml, version: L2V4 };

@@ -11,10 +11,17 @@
   {{- ' compartment: ' + component.compartment + ',' if component.compartment is defined }}
   {{- ' actors: ' + component.actors + ',' if component.actors.length > 0 }}
   {{- ' modifiers: ' + hetaArray(component.modifiers) + ',' if component.modifiers.length > 0 }}
+  {{- ' reversible: ' + component.reversible + ',' if component.reversible === false }}
   {{- ' isAmount: ' + component.isAmount + ',' if component.isAmount is defined }}
   {{- ' output: ' + component.output + ',' if component.output is defined }}
   {{- ' slope: ' + component.slope + ',' if component.slope is defined and component.slope !== 1 }}
   {{- ' intercept: ' + component.intercept + ',' if component.intercept is defined and component.intercept !== 0 }}
+  {{- ' trigger: ' + component.trigger + ',' if component.trigger is defined }}
+  {{- ' start: ' + component.start + ',' if component.start is defined }}
+  {{- ' period: ' + component.period + ',' if component.period is defined }}
+  {{- ' stop: ' + component.stop + ',' if component.stop is defined }}
+  {{- ' atStart: ' + component.atStart + ',' if component.atStart is defined }}
+  {{- ' aux: ' + hetaObject(component.aux) + ',' if component.aux is defined and component.aux|length > 0}}
   {{- ' }' }}
 {%- endmacro -%}
 {%- macro notes(component={}) %}
@@ -22,9 +29,6 @@
 {%- endmacro %}
 {%- macro start_(component={}) %}
   {{- ' .= ' + component.assignments.start_ if component.assignments.start_ is defined -}}
-{%- endmacro %}
-{%- macro ode_(component={}) %}
-  {{- ' := ' + component.assignments.ode_ if component.assignments.ode_ is defined -}}
 {%- endmacro %}
 {%- macro num(component={}) %}
   {{- ' = ' + component.num if component.num is defined -}}
@@ -38,6 +42,19 @@
 {%- macro hetaArray(array=[]) -%}
   [{{ array.join(', ') }}]
 {%- endmacro %}
+{%- macro hetaObject(object={}) -%}
+  { {{- object|dump -}} }
+{%- endmacro %}
+{%- macro assignments(record) -%}
+  {%- for key, value in record.assignments %}
+  {%- if key ==='start_' %}
+  {%- elseif key ==='ode_' %}
+  {{ record.id }} := {{ value }};
+  {%- else %}
+  {{ record.id }} [{{ key }}]= {{ value }};
+  {%- endif %}
+  {%- endfor %}
+{%- endmacro -%}
 
 {%- for spaceId, namespace in namespaceStorage.entries() %}
 
@@ -50,6 +67,7 @@
   {{- title(component) }}
   {{- dict(component) }}
   {{- ';' }}
+  {{- '\n' if loop.last }}
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Compartment') %}
@@ -59,8 +77,9 @@
   {{- title(component) }}
   {{- dict(component) }}
   {{- start_(component) }}
-  {{- ode_(component) }}
   {{- ';' }}
+  {{- assignments(component) }}
+  {{- '\n' if loop.last }}
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Species') %}
@@ -70,8 +89,9 @@
   {{- title(component) }}
   {{- dict(component) }}
   {{- start_(component) }}
-  {{- ode_(component) }}
   {{- ';' }}
+  {{- assignments(component) }}
+  {{- '\n' if loop.last }}
 {%- endfor %}
 
 {%- for component in namespace.selectByInstanceOf('Process') %}
@@ -81,8 +101,9 @@
   {{- title(component) }}
   {{- dict(component.toQ({simplifyModifiers: true, simplifyActors: true})) }}
   {{- start_(component) }}
-  {{- ode_(component) }}
-  {{- ';' -}}
+  {{- ';' }}
+  {{- assignments(component) }}
+  {{- '\n' if loop.last }}
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Record') %}
@@ -92,8 +113,9 @@
   {{- title(component) }}
   {{- dict(component) }}
   {{- start_(component) }}
-  {{- ode_(component) }}
-  {{- ';' -}}
+  {{- ';' }}
+  {{- assignments(component) }}
+  {{- '\n' if loop.last }}
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Const') %}
@@ -103,7 +125,18 @@
   {{- title(component) }}
   {{- dict(component) }}
   {{- num(component) }}
-  {{- ';' -}}
+  {{- ';' }}
+  {{- '\n' if loop.last }}
 {%- endfor %}
+
+{%- for component in namespace.selectByInstanceOf('_Switcher') %}
+  {{- notes(component) }}
+  {{ component.id }}
+  {{- class(component) }}
+  {{- title(component) }}
+  {{- dict(component.toQ()) }}
+  {{- ';' }}
+  {{- '\n' if loop.last }}
+{%- endfor -%}
 end
 {%- endfor %}
