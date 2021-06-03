@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: 8.x
     - run: npm ci
-    - run: npm run test:cov
+    - run: npm run jsdoc
     - name: Deploy to "gh-pages"
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
