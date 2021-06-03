@@ -15,7 +15,7 @@ Read more about Heta format and Heta-based platforms on Heta project homepage: <
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [Supported tools](#export-formats)
+- [Supported tools](#supported-tools)
 - [Usage of command line interface](#usage-of-command-line-interface)
 - [Usage in NodeJS packages](#usage-in-nodejs-packages)
 - [Known issues and limitations](#known-issues-and-limitations)
@@ -115,7 +115,7 @@ The following is the example where we create a Heta module and compile it into S
 
 Heta compiler has been written in NodeJS environment and can be used as a package for browser or server-side tools and applications.
 
-> To learn more more, see [API references](./api-references)
+> To learn more more, see [API references](https://hetalang.github.io/heta-compiler/)
 (under development).
 
 ```javascript
@@ -146,7 +146,7 @@ console.log(c.hetaErrors());
 ```
 
 ## Known issues and limitations
-Some of Heta features are implemented partialy for different export formats. To see a list of supported features, go to [features support](export-formats#features-support) table.
+Some of Heta features are implemented partially for different export formats. To see a list of supported features, go to [features support](export-formats#features-support) table.
 
 The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/hetalang/heta-compiler/issues).
 
