@@ -131,8 +131,9 @@ class Builder {
     }
 
     // 9. save logs if required
+    let hetaErrors = this.container.hetaErrors();
     let createLog = this.options.logMode === 'always' 
-      || (this.options.logMode === 'error' && this.container.hetaErrors() > 0);
+      || (this.options.logMode === 'error' && hetaErrors.length > 0);
     if (createLog) {
       switch (this.options.logFormat) {
       case 'json':

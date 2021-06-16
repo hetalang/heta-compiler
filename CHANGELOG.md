@@ -7,6 +7,7 @@
 - replace "markdown" package by "markdown-it"
 - support HetaCode export
 - fix error with SLV events export
+- fix log file
 
 ## 0.6.5
 
