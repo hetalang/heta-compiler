@@ -97,7 +97,7 @@ The following is the example where we create a Heta module and compile it into S
     k1 @Const = 1e-2;
 
     #export {
-        format: 'SBML',
+        format: SBML,
         filepath: model
     };
     ```
