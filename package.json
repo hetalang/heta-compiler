@@ -6,7 +6,7 @@
   "scripts": {
     "test:dev": "mocha test/core/expression.js --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
-    "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs src",
+    "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs/dev src",
     "test:cov": "nyc --reporter=lcov npm run test",
     "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js"
   },
