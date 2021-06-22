@@ -370,7 +370,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 *na* means "not applicable"
 
-| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML L2 | JSON, YAML | XLSX |
+| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML | JSON, YAML | XLSX |
 |--|--|--|--|--|--|--|--|--|--|
 |units transformation                  |na |na |na |na |na |+ |+ |na|na
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ 
@@ -391,6 +391,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |- |- |-
+|MathExpr: `piecewise` function                          |- |- |- |- |+ |+ |+ |+ |+
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+

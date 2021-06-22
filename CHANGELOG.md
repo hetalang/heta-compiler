@@ -8,6 +8,7 @@
 - support HetaCode export
 - fix error with SLV events export
 - fix log file
+- support `piecewise` function in SBML export
 
 ## 0.6.5
 
