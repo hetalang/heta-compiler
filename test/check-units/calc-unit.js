@@ -29,7 +29,11 @@ let qArr = [
   {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3)'}},
   {id: 'y10', class: 'Record', assignments: {start_: 'ifge(x1,k2,k3,k2)'}},
   // ternary operator,
-  {id: 'y11', class: 'Record', assignments: {start_: 'x1>=k2 ? k3 : k2'}}
+  {id: 'y11', class: 'Record', assignments: {start_: 'x1>=k2 ? k3 : k2'}},
+  // piecewise function
+  {id: 'y12', class: 'Record', assignments: {start_: 'piecewise(k3, x1 >= k2, k2)'}},
+  {id: 'y13', class: 'Record', assignments: {start_: 'piecewise(k3, x1 >= k2)'}},
+  {id: 'y14', class: 'Record', assignments: {start_: 'piecewise(1, x1 >= k2, 2, x1 >= 2*k2, 0)'}},
 ];
 
 describe('Testing checkUnits() for components', () => {
@@ -175,9 +179,30 @@ describe('Testing checkUnits() for components', () => {
     expect(unit).to.be.equal('(1e-3 mole)/litre');
   });
 
+  it('piecewise operator 3 arguments', () => {
+    let y12 = p.namespaceStorage.get('nameless').get('y12');
+    let expr = y12.assignments.start_;
+    let unit = expr.calcUnit(y12).toString();
+    expect(unit).to.be.equal('(1e-3 mole)/litre');
+  });
+
+  it('piecewise operator 2 arguments', () => {
+    let y13 = p.namespaceStorage.get('nameless').get('y13');
+    let expr = y13.assignments.start_;
+    let unit = expr.calcUnit(y13).toString();
+    expect(unit).to.be.equal('(1e-3 mole)/litre');
+  });
+  
+  it('piecewise operator 5 arguments', () => {
+    let y14 = p.namespaceStorage.get('nameless').get('y14');
+    let expr = y14.assignments.start_;
+    let unit = expr.calcUnit(y14).toString();
+    expect(unit).to.be.equal('dimensionless');
+  });
+
   it('No warnings', () => {
     let warnings = p.defaultLogs.filter(x=>x.level==='warn');
-    // console.log(p.defaultLogs)
+    //console.log(p.defaultLogs)
     expect(warnings).to.be.lengthOf(0);
   });
 });

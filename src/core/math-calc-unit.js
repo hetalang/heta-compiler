@@ -169,6 +169,25 @@ function _calcUnit(_this, record){
         logger.warn(`Units inconsistency in ifgt-like finction for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
       }
       return argUnit[2];
+    } else if (_this.fn.name === 'piecewise') {
+      let firstUnit = argUnit[0];
+      // check values
+      let isCondition = true;
+      for (let i = 1; i < argUnit.length; i++) {
+        if (isCondition) {
+          if (!argUnitDimensionless[i]) {
+            logger.warn(`Units inconsistency for "${record.index}": booleam argument "${_this.args[i]}" must be dimensionless "${_this.toString()}", got "${argUnit[i]}"`);
+          }
+        } else {
+          let isEqual = firstUnit.equal(argUnit[i], true);
+          if (!isEqual) {
+            let unitsExpr = `${firstUnit.toString()} vs ${argUnit[i]}`;
+            logger.warn(`Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+          }
+        }
+        isCondition = !isCondition;
+      }
+      return firstUnit;
     } else { // first argument must be dimensionless, result is dimensionless: exp, factorial
       if (!argUnitDimensionless[0]) {
         logger.warn(`Units inconsistency for "${record.index}": the argument must be dimensionless here "${_this.toString()}", got "${argUnit[0]}"`);

@@ -64,4 +64,4 @@ ss1 @StopSwitcher { trigger: s1>k1};
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };
 //#export { format: Matlab, filepath: matlab };
-//#export { format: Julia, filepath: julia };
+#export { format: Julia, filepath: julia };

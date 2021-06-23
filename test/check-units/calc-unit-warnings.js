@@ -34,7 +34,8 @@ let qArr = [
   {id: 'y7', class: 'Record', assignments: {start_: 'nthRoot(4,x4)'}},
   {id: 'y8', class: 'Record', assignments: {start_: 'log(2,k2)'}},
   {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3 + 1.1)'}},
-  {id: 'y10', class: 'Record', assignments: {start_: 'ifge(k1,k2,k3,k4)'}}
+  {id: 'y10', class: 'Record', assignments: {start_: 'ifge(k1,k2,k3,k4)'}},
+  {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2,k3,k4)'}}
 ];
 
 describe('Testing warnings of checkUnits()', () => {
@@ -264,6 +265,15 @@ describe('Testing warnings of checkUnits()', () => {
     p.defaultLogs.length = 0; // RESET
   });
   
+  it('functions: piecewise', () => {
+    let y10 = p.namespaceStorage.get('nameless').get('y11');
+    let expr = y10.assignments.start_;
+    let unit = expr.calcUnit(y10);
+    expect(unit.toString()).to.be.equal('dimensionless');
+    expect(p.defaultLogs).to.be.lengthOf(3);
+    p.defaultLogs.length = 0; // RESET
+  });
+
   it('temp', () => {
     //console.log(p.defaultLogs);
   });
