@@ -64,6 +64,7 @@ class Namespace extends Map {
       .selectByInstanceOf('Record')
       .forEach((component) => {
         let deps = component.dependOn(context, includeCompartmentDep);
+        //console.log(component.id, ' => ', deps)
         graph.add(component.id, deps);
       });
 
@@ -72,11 +73,19 @@ class Namespace extends Map {
         .sort()
         .reverse(); // independent should be at the beginning
     } catch(err) { // catch cycling
-      // error changes
+      // remove constants and records with num
       let infoLine = err.circular
-        .map((id) => {
-          let record = this.get(id);
-          return `${record.index} [${context}]= ${record.getAssignment(context, includeCompartmentDep).toString()};`;
+        .map((id) => this.get(id))
+        .filter((component) => {
+          return component.instanceOf('Record')
+            && (
+              (component.getAssignment(context) !== undefined && component.getAssignment(context).num === undefined)
+              || (component.getAssignment('ode_') !== undefined && component.getAssignment('ode_').num === undefined)
+            ); 
+        })
+        .map((record) => {
+          let assignment = record.getAssignment(context) || record.getAssignment('ode_');
+          return `  ${record.index} <= ${assignment};`;
         })
         .join('\n');
       let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);

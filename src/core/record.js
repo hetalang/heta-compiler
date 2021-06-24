@@ -127,15 +127,15 @@ class Record extends _Size {
   /*
     returns array of ids which depends on
     e, pi are not included
-    if no expression returns dependence from ode
+    if rule returns dependence from ode_ scope
   */
   dependOn(context){
     if (typeof context !== 'string')
       throw new TypeError('context must be of string type.');
 
-    let assignment = _.get(this, 'assignments.' + context);
+    let assignment = this.assignments[context];
     if (this.isRule) {
-      return this.assignments.ode_.dependOn(); // top priority in context
+      return this.assignments['ode_'].dependOn(); // top priority
     } else if (assignment !== undefined) {
       return assignment.dependOn();
     } else {
@@ -147,7 +147,7 @@ class Record extends _Size {
     if(typeof context !== 'string')
       throw new TypeError('context argument must be of string type.');
     
-    let assignment = _.get(this, 'assignments.' + context);
+    let assignment = this.assignments[context];
     //if (assignment !== undefined) {
     //  return assignment;
     //} else {
