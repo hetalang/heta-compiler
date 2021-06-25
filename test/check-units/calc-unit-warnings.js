@@ -35,7 +35,10 @@ let qArr = [
   {id: 'y8', class: 'Record', assignments: {start_: 'log(2,k2)'}},
   {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3 + 1.1)'}},
   {id: 'y10', class: 'Record', assignments: {start_: 'ifge(k1,k2,k3,k4)'}},
-  {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2,k3,k4)'}}
+  {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2,k3,k4)'}},
+  // no units set
+  {id: 'theta1', class: 'Const', num: 1.1},
+  {id: 'p1', class: 'Record', assignments: {ode_: '10*theta1'}}
 ];
 
 describe('Testing warnings of checkUnits()', () => {
@@ -271,6 +274,16 @@ describe('Testing warnings of checkUnits()', () => {
     let unit = expr.calcUnit(y10);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(3);
+    p.defaultLogs.length = 0; // RESET
+  });
+
+  
+  it('no units set', () => {
+    let p1 = p.namespaceStorage.get('nameless').get('p1');
+    let expr = p1.assignments.ode_;
+    let unit = expr.calcUnit(p1);
+    expect(unit).to.be.undefined;
+    expect(p.defaultLogs).to.be.lengthOf(1);
     p.defaultLogs.length = 0; // RESET
   });
 

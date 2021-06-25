@@ -61,8 +61,7 @@ class SimbioExport extends AbstractExport{
           let term = species.unitsParsed.toTerm();
           let isLegal = species.legalTerms.some((x) => term.equal(x));
           if (!isLegal) {
-            let termString = term.toString();
-            let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass", got "${termString}".`;
+            let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass", got "${term}".`;
             logger.error(msg, {type: 'UnitError'});
             return true; // BRAKE
           }
@@ -71,7 +70,7 @@ class SimbioExport extends AbstractExport{
       // checking unitTerm for Reaction
       ns.selectByInstanceOf('Reaction')
         .forEach((reaction) => {
-          let units = reaction.assignments.ode_.calcUnit(reaction);
+          let units = reaction.assignments['ode_'].calcUnit(reaction);
           if (typeof units === 'undefined') {
             //let msg = `Cannot calculate units for Reaction "${reaction.index}" which is not allowed for Simbio.`; // OK if cannot calculate
             //logger.error(msg, {type: 'UnitError'});
@@ -80,7 +79,7 @@ class SimbioExport extends AbstractExport{
           let term = units.toTerm(); 
           let isLegal = reaction.legalTerms.some((x) => term.equal(x));
           if (!isLegal) {
-            let msg = `Reaction "${reaction.index}" has wrong CALCULATED unit term. It must be "amount/time" or "mass/time".`;
+            let msg = `Reaction "${reaction.index}" has wrong CALCULATED unit term. It must be "amount/time" or "mass/time", got ${term}`;
             logger.error(msg, {type: 'UnitError'});
             return true; // BRAKE
           }

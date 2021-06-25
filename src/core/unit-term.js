@@ -68,6 +68,10 @@ class UnitTerm extends Array {
     return this.divide(ut).simplify().length === 0;
   }
   toString(){
+    if (this.length === 0) {
+      return '-'; // BRAKE
+    }
+
     return this.map((item, i) => {
       let exponentString = (item.exponent === 1 || item.exponent === -1)
         ? ''
