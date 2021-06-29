@@ -98,10 +98,10 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 
 - `Compartment` which changes in time may result in wrong ODE.
 - `CSwitcher` is not supported.
-- `DSwitcher` does not work for dynamic Records.
+- `DSwitcher` does not work for dynamic (ode variables) Records.
 - Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
 - `Infinity`, `-Infinity`, `NaN` values is not supported
-- boolean operatiors like `and`, `or`, etc. are not supported
+- boolean operators like `and`, `or`, etc. are not supported
 
 **Example**
 
@@ -137,9 +137,9 @@ This is the updated version of SLV export format which supports compartment volu
 ### Known restrictions
 
 - `CSwitcher` is not supported and will be skipped.
-- `DSwitcher` does not work for dynamic Records.
+- `DSwitcher` does not work for dynamic (ode variables) Records.
 - `Infinity`, `-Infinity`, `NaN` values is not supported
-- boolean operatiors like `and`, `or`, etc. are not supported
+- boolean operators like `and`, `or`, etc. are not supported
 
 **Example**
 
@@ -167,10 +167,6 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 **[filepath].xml** : SBML formatted model
 
-### Known restrictions
-
-- SBML does not support periodic events. `period`, `stop` properties of `@TimeSwitcher` are skipped.
-
 **Example:**
 
 ```heta
@@ -196,10 +192,6 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 **[filepath]/model.m** : Code which can be run in Matlab environment to generate Simbio model.
 **[filepath]/fun.m** : Auxilary mathematical functions to support Simbio code. This code should be placed in the same directory as simbio project.
-
-### Known restrictions
-
-- Simbiology does not support periodic events. `period`, `stop` properties of `@TimeSwitcher` are skipped.
 
 **Example:**
 ```heta
@@ -257,10 +249,6 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 
 **[filepath].xlsx** : File which can be opened in Excel.
 
-### Known restrictions
-
-*Nothing*
-
 **Example:**
 
 ```heta
@@ -289,10 +277,6 @@ Creation of Julia files (.jl).
 **[filepath]/model.jl** : File storing model code.
 **[filepath]/run.jl** : Code to run model.
 
-### Known restrictions
-
-*Nothing*
-
 **Example:**
 
 ```heta
@@ -313,18 +297,10 @@ Creation of Julia files (.jl) supported by SimSolver.
 | ---------|------|----------|---------|-----|-------------|
 | spaceFilter | ID[]/ID | | | namespace | the namespase to export |
 
-### Known restrictions
-
-*Nothing*
-
 ### Output files
 
 **[filepath]/model.jl** : File storing model code.
 **[filepath]/run.jl** : Code to run model.
-
-### Known restrictions
-
-*Nothing*
 
 **Example:**
 
@@ -372,9 +348,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 | | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML | JSON, YAML | XLSX |
 |--|--|--|--|--|--|--|--|--|--|
-|units transformation                  |na |na |na |na |na |+ |+ |na|na
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ 
-|`@Process` class                      |+  |+  |+  |+  |+  |+ |+ |+ |+ 
 |`@TimeSwitcher` class                 |+  |+  |+  |-  |+  |+ |+ |+ |+
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |- |+ |+ |+ |+ |+
 |`@TimeSwitcher {start: 0}`                              |+ |+ |+ |- |+ |- |+ |+ |+
@@ -387,12 +361,10 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
 |`@Dose` class (experimental)                            |- |- |- |- |- |- |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
-|MathExpr: arithmetic functions                          |+ ~~factorial()~~|+ ~~factorial()~~ |+ |+ |+ |+ |+ |+ |+ 
-|MathExpr: numeric operators                             |+ |+ |+ |+ |+ |+ |+ |+ |+
+|MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+
 |MathExpr: `piecewise` function                          |- |- |+ |- |+ |+ |+ |+ |+
 |MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+
-|@TimeScale class                                        |+ |+ |+ |+ |+ |+ |+ |+ |+
