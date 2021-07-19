@@ -7,9 +7,10 @@
 - replace "markdown" package by "markdown-it"
 - support HetaCode export
 - fix error with SLV events export
-- fix log file
-- fix message in case of circular assignments
-- support `piecewise` function in SBML export
+- fix log file creation
+- fix error message in case of circular assignments
+- support `piecewise` function
+- remove unsupported period in Simbio message
 
 ## 0.6.5
 

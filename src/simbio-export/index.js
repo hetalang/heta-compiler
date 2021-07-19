@@ -103,23 +103,6 @@ class SimbioExport extends AbstractExport{
     ];
   }
   getSimbioImage(ns){
-    // check unsupported properties in @TimeSwitcher
-    let logger = ns.container.logger;
-    ns
-      .selectByInstanceOf('TimeSwitcher')
-      .forEach((ts) => {
-        // check "speriod"
-        if (typeof ts.periodObj !== 'undefined') {
-          let msg = `"Simbio" format does not support "period" property in @TimeSwitcher as stated in "${ts.index}".`;
-          logger.warn(msg);
-        }
-        // check "stop"
-        if (typeof ts.stopObj !== 'undefined') {
-          let msg = `"Simbio" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}".`;
-          logger.warn(msg);
-        }
-      });
-
     return {
       population: ns,
       legalUnits: legalUnits

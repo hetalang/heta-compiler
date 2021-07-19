@@ -72,23 +72,7 @@ class SBMLExport extends AbstractExport {
   }
   getSBMLImage(ns){
     let logger = ns.container.logger;
-    // check unsupported properties in @TimeSwitcher, delete later
-    /*
-    ns
-      .selectByInstanceOf('TimeSwitcher')
-      .forEach((ts) => {
-        // check "period"
-        if (typeof ts.periodObj !== 'undefined') {
-          let msg = `"SBML" format does not support "period" property in @TimeSwitcher as stated in "${ts.index}".`;
-          logger.warn(msg);
-        }
-        // check "stop"
-        if (typeof ts.stopObj !== 'undefined') {
-          let msg = `"SBML" format does not support "stop" property in @TimeSwitcher as stated in "${ts.index}".`;
-          logger.warn(msg);
-        }
-      });
-    */
+
     // set unitDefinitions for concrete namespace
     if (ns.isAbstract) {
       var listOfUnitDefinitions = []; 
