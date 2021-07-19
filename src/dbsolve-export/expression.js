@@ -140,6 +140,14 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
         .map((arg) => arg.toString(options));
       return `log(${args[0]}) / log(2)`;
     }
+    // piecewise function
+    if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
+      let msg = `DBSolve format does not support "piecewise" function, got "${node.toString()}"`;
+      this._logger.error(msg);
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `piecewise(${args.join(',')})`;
+    }
     // ternary operator
     if (node.type === 'ConditionalNode') {
       let condition = _removeParenthesis(node.condition);

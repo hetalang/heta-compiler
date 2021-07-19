@@ -158,7 +158,7 @@ function _toMathExpr(element, useParentheses = false){
     // here we always use parenthesis to avoid error with + 
     return `(${cond} ? ${arg1} : ${arg2})`; // always in ()
   } else if (element.name === 'piecewise') {
-    throw new Error('only one piece is supported in MathML peicewise.');
+    throw new Error('only one piece is supported in MathML piecewise.');
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
     let args = _.drop(element.elements)
