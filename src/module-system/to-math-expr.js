@@ -151,14 +151,28 @@ function _toMathExpr(element, useParentheses = false){
   } else if (element.name === 'apply' && first.name === 'arccsch') {
     let arg = _toMathExpr(element.elements[1]);
     return `acsch(${arg})`;
-  } else if (element.name === 'piecewise' && element.elements.length === 2) {
-    let arg1 = _toMathExpr(_.get(element, 'elements.0.elements.0'), true);
-    let arg2 = _toMathExpr(_.get(element, 'elements.1.elements.0'), true);
-    let cond = _toMathExpr(_.get(first, 'elements.1'));
-    // here we always use parenthesis to avoid error with + 
-    return `(${cond} ? ${arg1} : ${arg2})`; // always in ()
-  } else if (element.name === 'piecewise') {
-    throw new Error('only one piece is supported in MathML piecewise.');
+  } else if (element.name === 'piecewise') { // return ternary if possible, or piecewise
+    let args = [];
+    // iterate through pieces
+    element.elements
+      .filter((x) => x.name === 'piece')
+      .forEach((x) => {
+        args.push(_toMathExpr(x.elements[0], false));
+        args.push(_toMathExpr(x.elements[1], false));
+      });
+    let otherwise = element.elements
+      .filter((x) => x.name === 'otherwise');
+    if (otherwise.length > 0) {
+      let otherwiseExpr = _toMathExpr(otherwise[0].elements[0], false);
+      // in case of one piece and one otherwise
+      if (args.length === 2) {
+        return `(${args[1]} ? ${args[0]} : ${otherwiseExpr})`; // BRAKE
+      }
+      // all other cases
+      args.push(otherwiseExpr);
+    }
+
+    return `piecewise(${args.join(', ')})`;
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
     let args = _.drop(element.elements)

@@ -428,6 +428,69 @@
                     </apply>
                 </math>
             </assignmentRule>
+
+        <!-- PART 7 -->
+            <assignmentRule variable="p34">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <piecewise>
+                        <piece>
+                            <cn>666</cn>
+                            <apply><gt/>
+                                <ci>a</ci>
+                                <cn>10</cn>
+                            </apply>
+                        </piece>
+                        <otherwise>
+                            <cn>0</cn>
+                        </otherwise>
+                    </piecewise>
+                </math>
+            </assignmentRule>
+
+            <assignmentRule variable="p35">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <piecewise>
+                        <piece>
+                            <cn>666</cn>
+                            <apply><gt/>
+                                <ci>a</ci>
+                                <cn>10</cn>
+                            </apply>
+                        </piece>
+                        <piece>
+                            <cn>777</cn>
+                            <apply><gt/>
+                                <ci>a</ci>
+                                <cn>11</cn>
+                            </apply>
+                        </piece>
+                        <otherwise>
+                            <cn>0</cn>
+                        </otherwise>
+                    </piecewise>
+                </math>
+            </assignmentRule>
+        
+            <assignmentRule variable="p36">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <piecewise>
+                        <piece>
+                            <cn>666</cn>
+                            <apply><gt/>
+                                <ci>a</ci>
+                                <cn>10</cn>
+                            </apply>
+                        </piece>
+                        <piece>
+                            <cn>777</cn>
+                            <apply><gt/>
+                                <ci>a</ci>
+                                <cn>11</cn>
+                            </apply>
+                        </piece>
+                    </piecewise>
+                </math>
+            </assignmentRule>
         </listOfRules>
     </model>
 </sbml>

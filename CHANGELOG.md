@@ -9,7 +9,8 @@
 - fix error with SLV events export
 - fix log file creation
 - fix error message in case of circular assignments
-- support `piecewise` function
+- support `piecewise` function in SBML, Matlab, Simbio, Julia
+- support `piecewise` function in SBML module
 - remove unsupported period in Simbio message
 
 ## 0.6.5

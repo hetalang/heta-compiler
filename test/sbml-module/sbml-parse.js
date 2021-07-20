@@ -45,7 +45,11 @@ const master = [
   // PART 6
   { expectation: 'x / (2 * 3)' },
   { expectation: '1 + (-2)' },
-  { expectation: 'x + (-y)' }
+  { expectation: 'x + (-y)' },
+  // PART 7
+  { expectation: '(a > 10 ? 666 : 0)'},
+  { expectation: 'piecewise(666, a > 10, 777, a > 11, 0)'},
+  { expectation: 'piecewise(666, a > 10, 777, a > 11)'}
 ];
 
 describe('test sbmlParse() operators', () => {
@@ -65,7 +69,7 @@ describe('parse speciesType', () => {
   // console.log(res);
   it('Should be of class "Component"', () => {
     expect(res[0]).to.have.property('class', 'Component');
-  })
+  });
 });
 
 const sbml2Text = fs.readFileSync(path.join(__dirname, 'sbml2.xml'), 'utf8');
