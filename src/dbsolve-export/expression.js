@@ -142,7 +142,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep'){
     }
     // piecewise function
     if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
-      let msg = `DBSolve format does not support "piecewise" function, got "${node.toString()}"`;
+      let msg = `DBS and SLV formats do not support "piecewise" function, got "${node.toString()}"`;
       this._logger.error(msg);
       let args = node.args
         .map((arg) => arg.toString(options));
