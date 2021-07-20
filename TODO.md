@@ -33,7 +33,6 @@
 
 ## features
 
-- piecewise: Mrgsolve, DBSolve, SLV, 
 - checking legal functions inside Expressions and its arguments
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - `#move`, `#moveNS`
