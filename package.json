@@ -44,7 +44,7 @@
     "nunjucks": "^3.2.3",
     "random-id": "^1.0.4",
     "semver": "^6.3.0",
-    "xlsx": "^0.15.6",
+    "xlsx": "^0.17.0",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
