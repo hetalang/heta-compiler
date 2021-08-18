@@ -145,7 +145,7 @@ class SLVExport extends AbstractExport{
           .forEach((record) => { // scan for records in switch
             let expression = record.assignments[switcher.id];
             let [multiply, add] = expression
-              .lianerizeFor(record.id)
+              .linearizeFor(record.id)
               .map((tree) => {
                 if (tree.type === 'SymbolNode') { // a is symbol case, i.e. 'p1'
                   return tree.toString();
