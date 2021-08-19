@@ -83,7 +83,7 @@ k1 @Const = 1e-3;
 
 ```
 
-# Feature overview
+# Features overview
 
 `Heta compiler` was created to support exporting to different popular modeling formats. One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools. The current version supports the following formats:
 -	DBSolveOptimum .SLV files
