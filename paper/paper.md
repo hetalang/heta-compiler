@@ -1,5 +1,5 @@
 ---
-title: 'Heta compiler: a software tool for the development of large-scale QSP models and compilation into different formats'
+title: 'Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats'
 tags:
   - systems biology
   - quantitative systems pharmacology
@@ -39,6 +39,12 @@ The pre-formulated requirements are:
 - providing interface for storing several models in a single platform,
 -	export models and data to different popular formats out-of-the-box.
 
+
+The WDPM distributes simulated water over a digital elevation model (DEM), which is an array of land surface elevations. The program has three modules:  
+- **add**, which adds specified depth of water to the DEM. Addition of water can be caused by rainfall, but in the Canadian Prairies, it is dominantly due to the melt of snow trapped in depressions and from runoff from adjacent areas [@hayashiWaterSoluteTransfer1998].  
+- **subtract**, which subtracts a specified depth of water from the DEM. Subtraction of water may be caused by infiltration to the soils, but in the Canadian Prairies, it is dominantly due to evaporation [@hayashiWaterSoluteTransfer1998].  
+- **drain**, which drains water from the lowest point in the DEM.  
+
 # Heta formats
 
 `Heta compiler` has been evolving alongside the Heta language [@metelkin2019] formalism. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats. 
@@ -57,7 +63,7 @@ The most important features of the Heta formats:
 
 Code in \autoref{fig:model-code} is an example of the Heta code describing a simple one-compartment model. The metabolic scheme of the model can be found in \autoref{fig:model-scheme}.
 
-![Model code in Heta format: `index.heta` file. \label{fig:models-code}](model-code.png){ width=60% }
+![Model code in Heta format: `index.heta` file. \label{fig:model-code}](model-code.png){ width=60% }
 
 ![One compartment model with two metabolites and one reaction.\label{fig:model-scheme}](model-scheme.png){ width=60% }
 
