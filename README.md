@@ -3,7 +3,7 @@
 [![Autotests](https://github.com/hetalang/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/hetalang/heta-compiler/actions)
 [![Coverage Status](https://coveralls.io/repos/github/hetalang/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/hetalang/heta-compiler?branch=master)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
-[![api-docs](https://img.shields.io/website?down_color=yellow&label=api-docs&up_color=green&url=https%3A%2F%2Fhetalang.github.io%2Fheta-compiler%2Fdev%2F)](https://hetalang.github.io/heta-compiler/dev/)
+[![api-docs](https://img.shields.io/website?down_color=yellow&label=Docs&up_color=green&url=https%3A%2F%2Fhetalang.github.io%2F#%2Fheta-compiler%2F)](https://hetalang.github.io/#/heta-compiler/)
 [![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)
 
 # Heta compiler
