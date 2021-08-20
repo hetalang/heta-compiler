@@ -31,7 +31,7 @@ The large and still growing QSP/SB modeling community utilizes a variety of soft
 This paper presents Heta compiler which provides a convenient and flexible way for the development of dynamic large-scale models based on the __Heta language__ code. The compiler translates the source modeling code into a variety of formats to be run in simulation software tools. Heta compiler also provides the information on errors in a model and can be used for debugging process.
 
 This tool is an effort to resolve the typical problems in a QSP project by creating a controllable working environment.
-The pre-formulated requirements are: 
+The pre-formulated requirements are:  
 -	store QSP models and data in integrated infrastructure, 
 -	support iterative platform updates, 
 -	support of models written in human-readable formats as well as in tables, 
@@ -39,17 +39,11 @@ The pre-formulated requirements are:
 - providing interface for storing several models in a single platform,
 -	export models and data to different popular formats out-of-the-box.
 
-
-The WDPM distributes simulated water over a digital elevation model (DEM), which is an array of land surface elevations. The program has three modules:  
-- **add**, which adds specified depth of water to the DEM. Addition of water can be caused by rainfall, but in the Canadian Prairies, it is dominantly due to the melt of snow trapped in depressions and from runoff from adjacent areas [@hayashiWaterSoluteTransfer1998].  
-- **subtract**, which subtracts a specified depth of water from the DEM. Subtraction of water may be caused by infiltration to the soils, but in the Canadian Prairies, it is dominantly due to evaporation [@hayashiWaterSoluteTransfer1998].  
-- **drain**, which drains water from the lowest point in the DEM.  
-
 # Heta formats
 
 `Heta compiler` has been evolving alongside the Heta language [@metelkin2019] formalism. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats. 
 
-The most important features of the Heta formats:
+The most important features of the Heta formats:  
 -	Human-readable/writable code can be used for model development or modification.
 - Any format from the list must be represented in the rest of the formats.
 -	Easy code parsing.
