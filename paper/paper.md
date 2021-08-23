@@ -32,6 +32,7 @@ This paper presents Heta compiler which provides a convenient and flexible way f
 
 This tool is an effort to resolve the typical problems in a QSP project by creating a controllable working environment.
 The pre-formulated requirements are:  
+
 -	store QSP models and data in integrated infrastructure, 
 -	support iterative platform updates, 
 -	support of models written in human-readable formats as well as in tables, 
@@ -44,6 +45,7 @@ The pre-formulated requirements are:
 `Heta compiler` has been evolving alongside the Heta language [@metelkin2019] formalism. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats. 
 
 The most important features of the Heta formats:  
+
 -	Human-readable/writable code can be used for model development or modification.
 - Any format from the list must be represented in the rest of the formats.
 -	Easy code parsing.
@@ -66,7 +68,8 @@ When the size of a model code is large it is recommended to subdivide it into mo
 # Features overview
 
 `Heta compiler` includes parser of the Heta formats and supports all features of the [Heta specifications](https://hetalang.github.io/#/specifications/) of version 0.4.1. 
-It was designed to support exporting to different popular modeling formats. The current version supports the following formats:
+It was designed to support exporting to different popular modeling formats. The current version supports the following formats: 
+
 -	DBSolveOptimum
 -	SBML of levels 2 and 3
 -	mrgsolve
