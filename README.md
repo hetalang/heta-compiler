@@ -3,7 +3,7 @@
 [![Autotests](https://github.com/hetalang/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/hetalang/heta-compiler/actions)
 [![Coverage Status](https://coveralls.io/repos/github/hetalang/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/hetalang/heta-compiler?branch=master)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
-[![api-docs](https://img.shields.io/website?down_color=yellow&label=api-docs&up_color=green&url=https%3A%2F%2Fhetalang.github.io%2Fheta-compiler%2Fdev%2F)](https://hetalang.github.io/heta-compiler/dev/)
+[![Documentation](https://img.shields.io/website?down_color=yellow&label=Documentation&up_color=green&url=https%3A%2F%2Fhetalang.github.io%2F#%2Fheta-compiler%2F)](https://hetalang.github.io/#/heta-compiler/)
 [![status](https://joss.theoj.org/papers/ebff76c368d3adb720afe414ef6b29fb/status.svg)](https://joss.theoj.org/papers/ebff76c368d3adb720afe414ef6b29fb)
 [![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)
 
@@ -11,7 +11,7 @@
 
 **Heta compiler** is a software tool for the compilation of Heta-based QSP modeling platforms. Heta compiler can also be used as a JavaScript/Node package to develop modeling tools.
 
-Read more about Heta format and Heta-based platforms on Heta project homepage: <https://hetalang.github.io/>.
+To read the full documentation, visit the Heta project homepage: <https://hetalang.github.io/#/heta-compiler/>.
 
 ## Table of contents
 
@@ -73,7 +73,7 @@ The current version supports the following formats:
 - mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
 - Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
 - Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
-- Julia module
+- Julia format
 - JSON formatted file
 - YAML formatted file
 - Excel sheets
@@ -148,7 +148,8 @@ console.log(c.hetaErrors());
 ```
 
 ## Known issues and limitations
-Some of Heta features are implemented partially for different export formats. To see a list of supported features, go to [features support](export-formats#features-support) table.
+
+To see a list of the supported format features, go to [features support](export-formats#features-support) table.
 
 The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/hetalang/heta-compiler/issues).
 
