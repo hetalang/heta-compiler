@@ -11,25 +11,31 @@ require('./abstract-export');
 require('./xlsx-export');
 
 /**
- * Auxiliary class for performing compilation. It is developed to support CLI of Heta compiler.
+ * Auxiliary class for performing compilation. 
+ * The main purpose is a support of Heta compiler's CLI mode.
  *
+ * The main method of the class is {@link Builder#run} which stores a platform's options and 
+ * runs a sequence of compilation steps.
+ * 
  * @class Builder
  *
  * @param {Object} declaration - Object representing options for builder,
- * see [CLI references](./cli-references) for more information about the structure.
- * @param {string} coreDirname="." - Path of working directory (WD) for Heta compilation.
- * Default: WD of a shell.
+ *  see [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references}
+ *  for more information about the structure.
+ * @param {string} coreDirname="." - Path of working directory of a Heta platform. Default: working directory of a shell.
  *
- * @property {string} path String describing hierarchy
- * @property {ObjectId} _id Unique automatic identifier from MongoDB
- * @property {string} id Main identifier (unique for the collection)
- * @property {string} class=Compartment It is always fixed to "Compartment"
- * @property {Object.<string,string>} [tags] Object for filtering elements by tagFilter
- * @property {string} [title] Title of the element, any string.
- * @property {string} [notes] Text with xhtml tags or markdown.
- * @property {Object.<String,Object>} [aux] Any object to store auxiliary information
- *
- * @property {string} variableRef Reference to Variable. If not initialized directly than use id value
+ * @property {Container} container This is the reference to the main platform storage. 
+ * @property {Logger} logger Reference to logger object of platform. This object can also be called with `this.container.logger`
+ * @property {string} _coreDirname Absolute path of the core directory. Calculated from `coreDirname` parameter.
+ * @property {string} _distDirname Absolute path of the directory for exporting files.
+ *    Calculated from `declaration.options.distDir` property.
+ * @property {string} _metaDirname Absolute path of the directory for storing meta files.
+ *    Calculated from `declaration.options.metaDir`.
+ * @property {string} _logPath Absolute path of log file.
+ *    Calculated from `declaration.options.logPath`.
+ * @property ... Other properties inherit from `declaration` object, see 
+ *   [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references?id=declaration-file-format}
+ * 
  */
 class Builder {
   constructor(declaration, coreDirname = '.'){
@@ -70,6 +76,27 @@ class Builder {
     //}
   }
 
+  /**
+   * The method runs building of a platform declared with `Builder` object.
+   * If the execution throws an error platform building will stop.
+   * 
+   * The sequence of operations is following:
+   * 
+   * 1. Read and parse platform modules (files).
+   * 1. Modules integration. Creation meta files if required.
+   * 1. Loading integrated structures into `Platform`.
+   * 1. Setting cross-references in platform's elements.
+   * 1. Checking circular references in mathematical expressions.
+   * 1. Checking circular unitDef references.
+   * 1. Checking left and right side units compatibility for mathematical expressions.
+   * 1. Checking unit\'s terms.
+   * 1. Export of a platform to series of formats. 
+   *    Depending on the declaration file it runs {@link Builder#exportMany} or {@link Builder#exportJuliaOnly}.
+   * 1. Saving logs if required
+   * 
+   * @method Builder#run
+   * 
+   */
   run(){
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     
@@ -150,6 +177,12 @@ class Builder {
     }
     return;
   }
+
+  /**
+   * Run exporting of files based on components of `this.container.exportStorage`.
+   * 
+   * @method Builder#exportMany
+   */
   exportMany(){
     let exportElements = [...this.container.exportStorage].map((x) => x[1]);
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
@@ -161,6 +194,13 @@ class Builder {
       exportItem.makeAndSave(this._distDirname);
     });
   }
+
+  /**
+   * Run exporting of files for Julia only.
+   * It was created to support HetaSimulator.jl package.
+   * 
+   * @method Builder#exportJuliaOnly
+   */
   exportJuliaOnly(){
     // create export without putting it to exportStorage
     let Julia = this.container.classes['Julia'];

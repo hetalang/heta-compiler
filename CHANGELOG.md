@@ -2,6 +2,8 @@
 
 ## 0.6.7
 
+- 
+- extend api documentation
 
 ## 0.6.6
 

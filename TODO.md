@@ -31,6 +31,10 @@
 
 ## bugs
 
+- critical error when units id is "xxx_yyy"
+- calculate units for pow function
+- AnyUnit for zero numbers
+
 ## features
 
 - checking legal functions inside Expressions and its arguments
@@ -49,7 +53,6 @@
 - do not translate base units in SBML export like second => _second
 - automatic creation of modifiers in SBML
 - avoid insert for existed elements: get warning or #forceInsert 
-- AnyUnit for zero numbers
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
 - `heta update` => `npm i heta-compiler`
 - support null for properties: highlight, parse, heta standard
