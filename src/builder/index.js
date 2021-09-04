@@ -11,10 +11,10 @@ require('./abstract-export');
 require('./xlsx-export');
 
 /**
- * Auxiliary class for performing compilation. 
+ * Auxiliary class for performing compilation and storing a platform's options. 
  * The main purpose is a support of Heta compiler's CLI mode.
  *
- * The main method of the class is {@link Builder#run} which stores a platform's options and 
+ * The main method of the class is {@link Builder#run} which  
  * runs a sequence of compilation steps.
  * 
  * @class Builder
@@ -35,7 +35,6 @@ require('./xlsx-export');
  *    Calculated from `declaration.options.logPath`.
  * @property ... Other properties inherit from `declaration` object, see 
  *   [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references?id=declaration-file-format}
- * 
  */
 class Builder {
   constructor(declaration, coreDirname = '.'){

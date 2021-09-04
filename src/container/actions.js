@@ -12,7 +12,16 @@ const reservedWords = [
   'time', 'SOLVERTIME'
 ];
 
-// #export
+/**
+ * Creates one of inheritors of `AbstractExport` and put it in `container.exportStorage`.
+ * The inheritor depends on `q.format` property.
+ * For example `{id: 'output', format: 'JSON', ...}` creates the object of `JSONExport` type.
+ * 
+ * @param {object} q The `#export` statement in JS object format.
+ * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * 
+ * @returns {AbstractExport} The created object.
+ */
 Container.prototype.export = function(q = {}, isCore = false){
   if (q.format === undefined) {
     this.logger.error(
@@ -37,6 +46,14 @@ Container.prototype.export = function(q = {}, isCore = false){
 };
 
 // #defineUnit
+/**
+ * Creates `UnitDef` instance and puts it in `container.unitDefStorage`.
+ * 
+ * @param {object} q The `#defineUnit` statement in JS object format.
+ * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * 
+ * @returns {UnitDef} The created object.
+ */
 Container.prototype.defineUnit = function(q = {}, isCore = false){
   // normal flow
   let unitDefInstance = new this.classes.UnitDef(q, isCore);
@@ -45,7 +62,17 @@ Container.prototype.defineUnit = function(q = {}, isCore = false){
   return unitDefInstance;
 };
 
-// #insert
+/**
+ * Creates one of inheritors of `Component` and put it in a namespace.
+ * The inheritor depends on `q.class` property.
+ * For example `{id: 'k1', class: 'Const', namespace: 'one'}` creates the object of `Const` type
+ * and puts it into namespace `one`.
+ * 
+ * @param {object} q The `#insert` statement in JS object format.
+ * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * 
+ * @returns {Component} The created object.
+ */
 Container.prototype.insert = function(q = {}, isCore = false){
   let ind = getIndexFromQ(q);
 
@@ -334,7 +361,7 @@ Container.prototype.moveNS = function(q = {}){
 
 // #import
 /* 
-  clones element updating id, space and referencies
+  clones element updating id, space and references.
   #import two::k2 {
     fromId: k1
     fromSpace: one,
@@ -456,7 +483,13 @@ Container.prototype.select = function(q = {}){
   return namespace.get(q.id);
 };
 
-// converts {id: 'k1', space: 'one'} => 'one::k1'
+/**
+ * Calculates component index in string format.
+ * Exampel: `{id: 'k1', space: 'one'}` => `'one::k1'`
+ * 
+ * @param {object} q Heta's element in queue format.
+ * @returns {string} Get index of a component.
+ */
 function getIndexFromQ(q = {}){
   if (q.space !== undefined) {
     return `${q.space}::${q.id}`;
