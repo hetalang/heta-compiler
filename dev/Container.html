@@ -999,6 +999,160 @@ for all components where namespace name is not set.</p></td>
     
 
     
+    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Deletes the <code>Component</code> with the index. If it is not exist it throws an error.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#delete</code> action in JS object format.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Deleted component.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="export"><span class="type-signature"></span>export<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {AbstractExport}</span></h4>
     
 
@@ -1274,6 +1428,348 @@ For example <code>{id: 'output', format: 'JSON', ...}</code> creates the object 
     
 
 
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="import"><span class="type-signature"></span>import<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Clone a component to another space.
+It also renames id and references stored in a component.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#import</code> action in JS object format.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Cloned component.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>```
+q = {
+   action: 'import',
+   id: 'k2',
+   space: 'two'
+   fromId: k1,
+   fromSpace: one,
+   prefix: '',
+   suffix: '',
+   rename: {}
+};
+
+container.import(q);
+```</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="importNS"><span class="type-signature"></span>importNS<span class="signature">(q)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Component.html">Component</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Clones and rename all components to another space.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#importNS</code> action in JS object format.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Array of cloned components.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="Component.html">Component</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>```
+let q = {
+  action: 'importNS'
+  space: 'two',
+  fromSpace: 'one',
+  prefix: '',
+  suffix: '',
+  rename: {}
+};
+container.importNS(q);
+```</code></pre>
 
 
 
@@ -1945,6 +2441,471 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="setNS"><span class="type-signature"></span>setNS<span class="signature">(The)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates namespace with id from <code>q.space</code> and push it to <code>container.namespaceStorage</code>.
+If the namespace already exists it does not create anything but updates namespace properties.
+It can also change <code>type</code> of a namespace.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>The</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p><code>#setNS</code> action in JS object format.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Searches a component with the index and updates its properties.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#update</code> action in JS object format.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Updated component.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="upsert"><span class="type-signature"></span>upsert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>If <code>q.class</code> property is set it acts as <code>#insert</code> action. If not it works as <code>#update</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#update</code> or <code>#insert</code> action in JS object format.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isCore</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Updated or inserted component.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1966,7 +2927,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sat Sep 04 2021 20:37:15 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Sep 05 2021 06:24:24 GMT+0000 (UTC)
 </footer>
 
 <script> prettyPrint(); </script>
