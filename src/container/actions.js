@@ -45,7 +45,6 @@ Container.prototype.export = function(q = {}, isCore = false){
   return exportInstance;
 };
 
-// #defineUnit
 /**
  * Creates `UnitDef` instance and puts it in `container.unitDefStorage`.
  * 
@@ -141,7 +140,13 @@ Container.prototype.insert = function(q = {}, isCore = false){
   return component;
 };
 
-// #update
+/**
+ * Searches a component with the index and updates its properties.
+ * 
+ * @param {object} q The `#update` action in JS object format.
+ * 
+ * @returns {Component} Updated component.
+ */
 Container.prototype.update = function(q = {}){
   let ind = getIndexFromQ(q);
 
@@ -192,7 +197,14 @@ Container.prototype.update = function(q = {}){
   return targetComponent;
 };
 
-// #upsert
+/**
+ * If `q.class` property is set it acts as `#insert` action. If not it works as `#update`.
+ * 
+ * @param {object} q The `#update` or `#insert` action in JS object format.
+ * @param  {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * 
+ * @returns {Component} Updated or inserted component.
+ */
 Container.prototype.upsert = function(q = {}, isCore = false){
   if ('class' in q) {
     return this.insert(q, isCore);
@@ -201,7 +213,13 @@ Container.prototype.upsert = function(q = {}, isCore = false){
   }
 };
 
-// #delete
+/**
+ * Deletes the `Component` with the index. If it is not exist it throws an error.
+ * 
+ * @param {*} q The `#delete` action in JS object format.
+ * 
+ * @returns {Component} Deleted component.
+ */
 Container.prototype.delete = function(q = {}){
   let ind = getIndexFromQ(q);
 
@@ -250,7 +268,13 @@ Container.prototype.delete = function(q = {}){
   return namespace.delete(q.id);
 };
 
-// #setNS
+/**
+ * Creates namespace with id from `q.space` and push it to `container.namespaceStorage`.
+ * If the namespace already exists it does not create anything but updates namespace properties.
+ * It can also change `type` of a namespace. 
+ * 
+ * @param {object} The `#setNS` action in JS object format. 
+ */
 Container.prototype.setNS = function(q = {}){
   // create namespace if not exists
   let namespace = this.namespaceStorage.get(q.space);
@@ -268,16 +292,26 @@ Container.prototype.setNS = function(q = {}){
   this.logger.info(`Namespace "${q.space}" was set as "${typeString}"`);
 };
 
-// #importNS
-/* 
-  clone all components to another space and rename components: @Record, @Const 
-  #importNS two::* {
-    fromSpace: one,
-    prefix: '',
-    suffix: '',
-    rename: {}
-  };
-*/
+/**
+ * Clones and rename all components to another space.
+ * 
+ * @example
+ * ```
+ * let q = {
+ *   action: 'importNS'
+ *   space: 'two',
+ *   fromSpace: 'one',
+ *   prefix: '',
+ *   suffix: '',
+ *   rename: {}
+ * };
+ * container.importNS(q);
+ * ```
+ * 
+ * @param {object} q The `#importNS` action in JS object format. 
+ * 
+ * @returns {Component[]} Array of cloned components.
+ */
 Container.prototype.importNS = function(q = {}){
   _.defaults(q, {
     prefix: '',
@@ -360,17 +394,30 @@ Container.prototype.moveNS = function(q = {}){
 */
 
 // #import
-/* 
-  clones element updating id, space and references.
-  #import two::k2 {
-    fromId: k1
-    fromSpace: one,
-    // from: one::k1
-    prefix: '',
-    suffix: '',
-    rename: {}
-  };
-*/
+/**
+ * Clone a component to another space.
+ * It also renames id and references stored in a component.
+ * 
+ * @example
+ * ```
+ * q = {
+ *    action: 'import',
+ *    id: 'k2',
+ *    space: 'two'
+ *    fromId: k1,
+ *    fromSpace: one,
+ *    prefix: '',
+ *    suffix: '',
+ *    rename: {}
+ * };
+ * 
+ * container.import(q);
+ * ```
+ * 
+ * @param {object} q The `#import` action in JS object format.  
+ * 
+ * @returns {Component} Cloned component.
+ */
 Container.prototype.import = function(q = {}){
   let ind = getIndexFromQ(q);
 
@@ -484,7 +531,7 @@ Container.prototype.select = function(q = {}){
 };
 
 /**
- * Calculates component index in string format.
+ * Calculates string formatted index.
  * Exampel: `{id: 'k1', space: 'one'}` => `'one::k1'`
  * 
  * @param {object} q Heta's element in queue format.
