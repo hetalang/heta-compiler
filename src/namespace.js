@@ -8,6 +8,10 @@ class Namespace extends Map {
    * 
    * @extends Map
    * 
+   * @property {Container} container Parent container.
+   * @property {string} _spaceName String identifier for namespace.
+   * @property {boolean} _isAbstract `true` if  namespace is abstract. `false` otherwise.
+   * 
    * @param {string} spaceName Space identifier.
    */
   constructor(spaceName){ 

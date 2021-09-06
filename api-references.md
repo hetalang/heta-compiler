@@ -6,17 +6,29 @@ For users guidance and CLI references see the main [documentation site](https://
 
 *Under developments. If you have questions contact the developers directly.*
 
-## Classes
+## Main classes
 
 - [Builder]{@link Builder}
 - [Container]{@link Container}
 - [Namespace]{@link Namespace}
-- [Logger]{@link Logger}
-- [Unit]{@link Unit}
-- [Expression]{@link Expression}
+
+## Modules
+
 - [ModuleSystem]{@link ModuleSystem}
 - [_Module]{@link _Module}
 
-- Component
-- _Size
-- Const
+## Elements
+
+- [Top]{@link Top}
+- [Component]{@link Component}
+- [Const]{@link Const}
+- [Unit]{@link Unit}
+- [Expression]{@link Expression}
+
+## Auxiliary
+
+- [Logger]{@link Logger}
+- [Transport]{@link Transport}
+- [JSONTransport]{@link JSONTransport}
+- [StdoutTransport]{@link StdoutTransport}
+- [StringTransport]{@link StringTransport}
