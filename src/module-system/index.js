@@ -10,6 +10,17 @@ require('./xlsx-module');
 require('./sbml-module');
 
 class ModuleSystem {
+  /**
+   * Object storing Heta modules and methods to combine them.
+   * 
+   * @param {Logger} logger Object to analyze log events.
+   * 
+   * @property {object<string,_Module>} moduleCollection Map-like storage for modules.
+   *     Key is a file id (filename), value is a `Module`.
+   * @property {TopoSort} graph An instance of `TopoSort` class borrowed from *topo-sort* package.
+   * @property {Logger} logger Object to analyze log events.
+   * @property {_Module} _top Top-level module. Usually created from `index.heta` file.
+   */
   constructor(logger){
     // stores modules in format
     // { filepath : module, ...}
@@ -17,7 +28,16 @@ class ModuleSystem {
     this.graph = new TopoSort();
     this.logger = logger;
   }
-  // entrance to scan
+  
+  /**
+   * Load top-level module to `ModuleSystem`.
+   * 
+   * @param {string} rawAbsFilePath Relative or absolute module path.
+   * @param {string} type A module type.
+   * @param {object} options additional options.
+   * 
+   * @returns {_Module} Created module.
+   */
   addModuleDeep(rawAbsFilePath, type, options = {}){
     let absFilePath = path.normalize(rawAbsFilePath);
     let mdl = this._addModuleDeep(absFilePath, type, options);
@@ -25,21 +45,39 @@ class ModuleSystem {
     
     return mdl;
   }
-  // scan module dependence recursively
+ 
+  /**
+   * It scan module dependence recursively.
+   * 
+   * @param {string} absFilePath Absolute module path.
+   * @param {string} type A module type.
+   * @param {object} options additional options.
+   * 
+   * @returns {_Module} Created module.
+   */
   _addModuleDeep(absFilePath, type, options = {}){
     let moduleName = [absFilePath, '#', options.sheet || '0'].join('');
-    if(!(moduleName in this.moduleCollection)){ // new file
+    if (!(moduleName in this.moduleCollection)) { // new file
       let mdl = this.addModule(absFilePath, type, options);
       mdl.getImportElements().forEach((importItem) => {
         this._addModuleDeep(importItem.source, importItem.type, importItem);
       });
       
       return mdl;
-    }else{ // if file already in moduleCollection do nothing
+    } else { // if file already in moduleCollection do nothing
       return;
     }
   }
-  // parse single file without dependencies
+
+  /**
+   * Parse single file without dependencies.
+   * 
+   * @param {string} filename File path of module file.
+   * @param {string} type A module type.
+   * @param {object} options additional options.
+   * 
+   * @returns {_Module} Created module.
+   */
   addModule(filename, type='heta', options = {}){
     // parse
     let mdl = _Module.createModule(filename, type, options, this.logger);
@@ -55,14 +93,25 @@ class ModuleSystem {
 
     return mdl;
   }
-  // other
+  
+  /**
+   * Sort modules before integration. If there is circular references then throw an error.
+   * 
+   * @returns {string[]} Array of modules ids.
+   */
   sortedPaths(){
-    try{
+    try {
       return this.graph.sort();
-    }catch(error){
+    } catch (error) {
       throw new Error(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
     }
   }
+
+  /**
+   * Composes parsed modules into single platform.
+   * 
+   * @returns {object[]} integrated queue array.
+   */
   integrate(){
     this
       .sortedPaths()
@@ -86,7 +135,14 @@ class ModuleSystem {
   }
 }
 
-// temporal version of composer
+/**
+ * Method that set merging of Heta elements.
+ * 
+ * @param {object} obj This should be merged.
+ * @param {object[]} arr Array to merge.
+ * 
+ * @returns {object} merged queue array.
+ */
 function compose(obj, arr){
   let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type', 'sheet']);
   return arr.map((x) => {
