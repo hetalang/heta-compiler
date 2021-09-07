@@ -1,5 +1,5 @@
 const fs = require('fs');
-const _Module = require('./_module');
+const _Module = require('./module');
 
 _Module.prototype.setJSONModule = function(){
   //checking file exists

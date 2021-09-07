@@ -1,7 +1,7 @@
 const path = require('path');
 const _ = require('lodash');
 const TopoSort = require('@insysbio/topo-sort');
-const _Module = require('./_module');
+const _Module = require('./module');
 require('./heta-module');
 require('./json-module');
 require('./md-module');

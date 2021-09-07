@@ -1,8 +1,29 @@
 const path = require('path');
 const fs = require('fs');
 
-// abstract class for different import types
+/**
+ * Abstract class representing general Heta module.
+ * 
+ * @class _Module
+ * @abstract
+ * 
+ * @property {object[]} parsed Array of queue objects.
+ * @property {string} filename File name (absolute) associated with the module.
+ * @property {Logger} logger Object to analyze log events.
+ * @property {string} type One of module types: heta, json, yaml, xlsx, sbml
+ * @property {object} options Additional module options.
+ */
 class _Module {
+  /**
+   * Constructor to create a module of a specific type.
+   * 
+   * @param {string} filename Relative or absolute path of a module file.
+   * @param {string} type Module type.
+   * @param {object} options Additional module options.
+   * @param {Logger} logger Object to analyze log events.
+   * 
+   * @returns {_Module} Created module.
+   */
   static createModule(filename, type, options = {}, logger){
     let mdl = new _Module;
     mdl.logger = logger;
@@ -49,11 +70,20 @@ class _Module {
 
     return mdl;
   }
+
+  /**
+   * Select only `#include` actions from the queue array.
+   * 
+   * @returns {object[]} Array of `#include actions`.
+   */
   getImportElements(){
     return this.parsed
       .filter((q) => q.action==='include');
   }
-  // replace relative paths by absolute ones
+  
+  /**
+   * Search for `source` property in `#import` and replace replace relative paths by absolute ones.
+   */
   updateByAbsPaths(){
     let absDirPath = path.dirname(this.filename);
     this.getImportElements().forEach((q) => {

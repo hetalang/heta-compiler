@@ -1,6 +1,6 @@
 const fs = require('fs');
 const hetaParser = require('heta-parser');
-const _Module = require('./_module');
+const _Module = require('./module');
 
 _Module.prototype.setHetaModule = function(){
   try {

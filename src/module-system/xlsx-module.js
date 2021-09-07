@@ -1,4 +1,4 @@
-const _Module = require('./_module');
+const _Module = require('./module');
 const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
 

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const _Module = require('./_module');
+const _Module = require('./module');
 const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 
 _Module.prototype.setYAMLModule = function(){

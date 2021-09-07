@@ -1,6 +1,6 @@
 const fs = require('fs');
 const _ = require('lodash');
-const _Module = require('./_module');
+const _Module = require('./module');
 
 _Module.prototype.setMdModule = function(){
   try {
