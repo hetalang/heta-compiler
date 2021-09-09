@@ -2,6 +2,13 @@ const _Module = require('./module');
 const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
 
+/**
+ * To initialize a Heta module of the "xlsx" type.
+ * It includes reading and parsing file formatted as Heta-tables,
+ * see [Heta specifications](https://hetalang.github.io/#/specifications/modules?id=xlsx-module)
+ * 
+ * @returns {Module} Self.
+ */
 _Module.prototype.setXLSXModule = function(){
   // default results
   let rawData = [];

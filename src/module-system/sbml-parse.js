@@ -4,9 +4,13 @@ const { xml2js } = require('xml-js');
 const { Unit } = require('../core/unit');
 const legalUnits = require('../legal-sbml-units');
 
-/*
-  Transforms text content of SBML file to Q Array
-*/
+/**
+ * Transforms text content of SBML file to Q-array.
+ * 
+ * @param {string} filename Reserved for future releases.
+ * @param {string} fileContent SBML file content.
+ * @returns {array} Parsed content in Q-array format.
+ */
 function SBMLParse(
   filename, // not used here, but can be used for messages
   fileContent

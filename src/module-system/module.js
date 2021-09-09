@@ -5,7 +5,6 @@ const fs = require('fs');
  * Abstract class representing general Heta module.
  * 
  * @class _Module
- * @abstract
  * 
  * @property {object[]} parsed Array of queue objects.
  * @property {string} filename File name (absolute) associated with the module.
