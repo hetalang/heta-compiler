@@ -114,10 +114,10 @@ class Builder {
         this.logger.info(`Meta file was saved to ${absPath}`);
       });
     }
-    let queue = ms.integrate();
+    let qArr = ms.integrate();
 
     // 3. Translation
-    this.container.loadMany(queue, false);
+    this.container.loadMany(qArr, false);
     //console.log([...this.container.unitDefStorage]); // XXX: debugging
 
     // 4. Binding

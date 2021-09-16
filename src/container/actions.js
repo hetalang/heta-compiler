@@ -534,7 +534,7 @@ Container.prototype.select = function(q = {}){
  * Calculates string formatted index.
  * Exampel: `{id: 'k1', space: 'one'}` => `'one::k1'`
  * 
- * @param {object} q Heta's element in queue format.
+ * @param {object} q Heta's element in Q-object format.
  * @returns {string} Get index of a component.
  */
 function getIndexFromQ(q = {}){

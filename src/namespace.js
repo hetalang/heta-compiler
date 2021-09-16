@@ -44,12 +44,12 @@ class Namespace extends Map {
     return [...this].map((x) => x[1]);
   }
   /**
-   * Converts namespace into queue array.
+   * Converts namespace into Q-array.
    * 
    * @param {boolean} removeCoreComponents=true 
    * @param {object} options Options passed to {@link Top#toQ} method
    * 
-   * @returns {object[]} Array of JS objects in queue format.
+   * @returns {object[]} Q-array format.
    */
   toQArr(removeCoreComponents = false, options = {}){
     let qArr = this.toArray()
@@ -59,10 +59,10 @@ class Namespace extends Map {
     return qArr;
   }
   /**
-   * Representation of namespace in queue format.
+   * Representation of namespace into Q-object format.
    * 
    * @param {object} options reserved for future versions.
-   * @returns {object} JS object in queue format.
+   * @returns {object} JS object in Q-object format.
    */
   toQ(options = {}){
     let res = {
@@ -75,11 +75,11 @@ class Namespace extends Map {
   }
 
   /**
-   * Representation of namespace in flat queue format.
+   * Representation of namespace in flat Q-object format.
    * 
    * @param {object} options reserved for future versions.
    * 
-   * @returns {object} JS object in flat queue format.
+   * @returns {object} flat Q-object format.
    */
   toFlat(options = {}){
     let q = this.toQ(options);

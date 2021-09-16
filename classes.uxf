@@ -1,0 +1,77 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes
+</help_text><element><id>UMLClass</id><coordinates><x>10</x><y>370</y><w>280</w><h>350</h></coordinates><panel_attributes>Container
+{}
+--
+- classes: Object.&lt;String,Constructor&gt;
+- logger: Logger
+- defaultLogs: Array.&lt;object&gt;
+- exportStorage: Map.&lt;string, _Export&gt;
+- unitDefStorage: Map.&lt;string, UnitDef&gt;
+- namespaceStorage: Map.&lt;string, Namespace&gt;
+- _componentClasses: &lt;String,Constructor&gt;
+- _exportClasses: &lt;String,Constructor&gt;
+
+--
+
+#export()
+#defineUnit()
+#insert()
+#update()
+#upsert()
+#delete()
+#import()
+#setNS()
+#importNS()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>360</x><y>520</y><w>210</w><h>110</h></coordinates><panel_attributes>Namespace extends Map
+{}
+--
+- _spaceName: String
+- container: Container
+- isAbstract: Boolean = false
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>480</y><w>210</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;190;10;190;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>580</x><y>0</y><w>210</w><h>220</h></coordinates><panel_attributes>Top (Element)
+{}
+--
+- isCore: Boolean
+- _id: String
+- isRandomId: Boolean = false
+- _container: Container
+
+--
+
+#id
+#index
+#className
+#toQ()
+#toFlat()
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>610</x><y>570</y><w>210</w><h>360</h></coordinates><panel_attributes>Component
+{}
+--
+- _id: String
+- namespace: Namespace
+- _isCore: Boolean = false
+- tags: Array.&lt;String&gt;
+- aux: Object
+- title: String
+- notes: String
+
+--
+
+#id
+#space
+#index
+#className
+#indexObj
+#notesHTML
+#clone()
+#updateReferences()
+#bind()
+#toQ()
+#toFlat()
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>530</y><w>110</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;10;90;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>280</y><w>160</w><h>70</h></coordinates><panel_attributes>_Export
+{}
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>360</y><w>160</w><h>70</h></coordinates><panel_attributes>UnitDef
+{}
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>340</y><w>150</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;110;130;110;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>420</y><w>270</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;50;250;50;250;10</additional_attributes></element><element><id>Relation</id><coordinates><x>410</x><y>210</y><w>280</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>260;10;260;40;10;40;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>520</x><y>210</y><w>210</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>190;10;190;50;10;50;10;150</additional_attributes></element></diagram>

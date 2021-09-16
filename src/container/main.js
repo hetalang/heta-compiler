@@ -32,7 +32,7 @@ const TopoSort = require('@insysbio/topo-sort');
  * 
  * @property {object} classes Map-like storage for all element constructors that can be created inside platform.
  *    For example the element of the type `UnitsDef` can be created as follows:
- *    ```let new_unit = new c.UnitDef({id: 'new', units: 'g/litre'})```
+ *    ```let new_unit = new c.classes.UnitDef({id: 'new', units: 'g/litre'})```
  *    The `new_unit` element will be automatically bound to the container and pushed to `unitDefStorage`.
  * @property {Logger} logger object providing transport of errors, warnings and info messages on Heta platform level.
  * @property {object[]} defaultLogs Default storage of errors which will be used for diagnostics.
@@ -42,7 +42,8 @@ const TopoSort = require('@insysbio/topo-sort');
  * @property {Map<string,Namespace>} namespaceStorage Storage for `Namespace` instances. Key is a string identifier.
  *    There is a default namespace with identifier `nameless` which will be used as a default namespace 
  *    for all components where namespace name is not set.
- * @property {object} _componentClasses map-like structure for storing all available classes describing `Component`s.
+ * @property {object} _componentClasses map-like structure for storing all available constructors for `Component`s.
+ * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
  */
 class Container {
   /* constructor can be run many times */
@@ -105,7 +106,7 @@ class Container {
    * If `q.action` is not set than apply "upsert".
    * An "action" name should be set as a name of the `Container` method. 
    * 
-   * This is the main method to convert from elements of "queue" into platform elements.
+   * This is the main method to convert from Q-object into platform elements.
    * 
    * @param {object} q Simple object with the same structure as Heta plain format.
    * @param {boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
@@ -129,7 +130,7 @@ class Container {
   /**
    * Runs {@link Container#load} method many times for each element of `qArr` vector sequentially.
    * 
-   * @param {object[]} qArr Array of "queue" formatted elements.
+   * @param {object[]} qArr Q-array.
    * @param {boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
    * 
    * @returns {Container} This function returns the container.

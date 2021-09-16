@@ -27,7 +27,7 @@ _Module.prototype.setHetaModule = function(){
  * 
  * @param {string} filename File to parse. It is used only for log messages.
  * @param  {...any} params Additional parameters passed to `parse()` method.
- * @returns {array} Queue array format.
+ * @returns {array} Module content in Q-array format.
  */
 function _hetaParse(filename, ...params){
   try {

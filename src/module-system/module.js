@@ -6,7 +6,7 @@ const fs = require('fs');
  * 
  * @class _Module
  * 
- * @property {object[]} parsed Array of queue objects.
+ * @property {object[]} parsed Q-array.
  * @property {string} filename File name (absolute) associated with the module.
  * @property {Logger} logger Object to analyze log events.
  * @property {string} type One of module types: heta, json, yaml, xlsx, sbml
@@ -71,7 +71,7 @@ class _Module {
   }
 
   /**
-   * Select only `#include` actions from the queue array.
+   * Select only `#include` actions from the Q-array.
    * 
    * @returns {object[]} Array of `#include actions`.
    */

@@ -110,7 +110,7 @@ class ModuleSystem {
   /**
    * Composes parsed modules into single platform.
    * 
-   * @returns {object[]} integrated queue array.
+   * @returns {object[]} integrated Q-array.
    */
   integrate(){
     this
@@ -141,7 +141,7 @@ class ModuleSystem {
  * @param {object} obj This should be merged.
  * @param {object[]} arr Array to merge.
  * 
- * @returns {object} merged queue array.
+ * @returns {object} merged Q-array.
  */
 function compose(obj, arr){
   let cleanedObj = _.omit(obj, ['action', 'id', 'class', 'source', 'type', 'sheet']);

@@ -123,8 +123,8 @@ Heta compiler has been written in NodeJS environment and can be used as a packag
 ```javascript
 const { Container } = require('heta-compiler');
 
-// platform code in Queue format
-let queue = [
+// platform code in Q-array format
+let qArr = [
     { class: 'Compartment', id: 'comp1', assignments: {start_: '1'} },
     { class: 'Species', id: 's1', compartment: 'comp1', assignments: {start_: '10'} },
     { class: 'Reaction', id: 'r1', actors: 's1 =>', assignments: {ode_: 'k1*s1*comp1'} },
@@ -134,7 +134,7 @@ let queue = [
 
 // compilation
 let c = (new Container)
-    .loadMany(queue)
+    .loadMany(qArr)
     .knitMany();
 // get export element
 let output = c.exportStorage[0]
