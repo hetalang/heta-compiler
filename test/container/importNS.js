@@ -1,6 +1,6 @@
 /* global describe, it */
 const { Container } = require('../../src');
-//const { QueueError } = require('../../src/builder');
+//const { QError } = require('../../src/builder');
 const { expect } = require('chai');
 
 describe('Test correct importNS', () => {

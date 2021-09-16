@@ -119,7 +119,7 @@ class Container {
     if (typeof this[actionName] !== 'function') {
       this.logger.error(
         `Action #${actionName} is unknown and will be skipped.`,
-        {type: 'QueueError', action: actionName}
+        {type: 'QError', action: actionName}
       );
       return;
     }
