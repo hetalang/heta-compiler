@@ -1,6 +1,7 @@
 const { AbstractExport } = require('../core/abstract-export');
 const { ajv } = require('../utils');
 const _ = require('lodash');
+const { concat } = require('lodash');
 
 const schema = {
   type: 'object',
@@ -49,7 +50,11 @@ class JSONExport extends AbstractExport {
     let qArr_unitDef = [...this._container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
-    let qArr_full = [].concat(qArr_ns, qArr_unitDef);
+    let qArr_scenario = [...this._container.scenarioStorage]
+      .filter((x) => !x[1].isCore)
+      .map((x) => x[1].toQ());
+    
+    let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_scenario);
 
     // remove unnecessary properties
     let qArr = this.omit ? qArr_full.map((q) => _.omit(q, this.omit)) : qArr_full;

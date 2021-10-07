@@ -1,0 +1,37 @@
+/*
+  template file for creating platform
+*/
+
+p1 @Record .= 1;
+
+x1 @Record .= 10;
+x2 @Record .=0;
+
+pr1 @Process {actors: x1 = x2} := k1 * x1;
+
+k1 @Const = 1e-2;
+
+scn1 #setScenario {
+  tspan: [0, 200]
+}; 
+
+scn2 #setScenario {
+  model: mouse,
+  parameters: {weight: 20, kel: 1e-3},
+  saveat: [0, 1, 2, 4, 6, 8, 10, 12],
+  observables: [A0, C1, C2],
+  events_active: {sw1: false, sw2: true},
+  events_save: {sw2: [true, false]}
+};
+
+// exports
+#export { format: JSON, filepath: output };
+#export { format: YAML, filepath: output };
+#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+//#export { format: SBML, filepath: sbml, version: L2V4 };
+//#export { format: SLV, filepath: model, eventsOff: false };
+//#export { format: DBSolve, filepath: dbsolve };
+//#export { format: Simbio, filepath: simbio };
+//#export { format: Mrgsolve, filepath: mrgsolve };
+//#export { format: Matlab, filepath: matlab };
+//#export { format: Julia, filepath: julia };

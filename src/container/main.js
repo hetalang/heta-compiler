@@ -40,6 +40,7 @@ const TopoSort = require('@insysbio/topo-sort');
  *    The {@link JSONTransport} is used here.
  * @property {Map<string,_Export>} exportStorage Storage for `_Export` instances. Key is a string identifier.
  * @property {Map<string,UnitDef>} unitDefStorage Storage for `UnitDef` instances. Key is a string identifier.
+ * @property {Map<string,Scenario>} scenarioStorage Storage for `Scenario` instances. Key is a string identifier.
  * @property {Map<string,Namespace>} namespaceStorage Storage for `Namespace` instances. Key is a string identifier.
  *    There is a default namespace with identifier `nameless` which will be used as a default namespace 
  *    for all components where namespace name is not set.
@@ -153,8 +154,9 @@ class Container {
   get length(){
     return [...this.namespaceStorage]
       .reduce((acc, x) => acc + x[1].size, 0)
-        + this.unitDefStorage.size // global element
-        + this.exportStorage.size; // global element
+        + this.unitDefStorage.size // global elements
+        + this.scenarioStorage.size
+        + this.exportStorage.size;
   }
 
   /**

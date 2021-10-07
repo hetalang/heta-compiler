@@ -102,6 +102,12 @@
             "type": "shell",
             "command": "heta build cases/20-syntax",
             "group": "test"
+        },
+        {
+            "label": "case-21",
+            "type": "shell",
+            "command": "heta build cases/21-scenario",
+            "group": "test"
         }
     ]
 }
