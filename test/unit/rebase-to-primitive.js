@@ -1,4 +1,5 @@
 /* global describe, it */
+// checking conversion to core units
 const { expect } = require('chai');
 const { Container } = require('../../src');
 

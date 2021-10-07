@@ -1,6 +1,7 @@
 // Top classes
 const { Top } = require('../core/top');
 const { UnitDef } = require('../core/unit-def');
+const { Scenario } = require('../core/scenario');
 // const { AbstractExport } = require('../core/abstract-export');
 // Component classes
 const { Component } = require('../core/component');
@@ -55,8 +56,10 @@ class Container {
     this.classes.Top.prototype._container = this; // only for testing
     this.classes.UnitDef = class extends UnitDef {};
     this.classes.UnitDef.prototype._container = this;
+    this.classes.Scenario = class extends Scenario {};
+    this.classes.Scenario.prototype._container = this;
     // create "export" classes bound to this container
-    Object.entries(Container._exportClasses)
+    Container._exportClasses && Object.entries(Container._exportClasses)
       .forEach(([key, _Class]) => {
         this.classes[key] = class extends _Class {};
         this.classes[key].prototype._container = this;
@@ -71,6 +74,8 @@ class Container {
     this.exportStorage = new Map();
     // storage for UnitDef
     this.unitDefStorage = new Map();
+    // storage for Scenario
+    this.scenarioStorage = new Map();
     // storage of Namespaces
     this.namespaceStorage = new Map();
 

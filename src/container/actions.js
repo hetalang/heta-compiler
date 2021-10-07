@@ -60,6 +60,22 @@ Container.prototype.defineUnit = function(q = {}, isCore = false){
 };
 
 /**
+ * Creates `Scenario` instance and puts it in `container.scenarioStorage`.
+ * 
+ * @param {object} q The `#setScenario` statement in JS object format.
+ * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * 
+ * @returns {Scenario} The created object.
+ */
+Container.prototype.setScenario = function(q = {}, isCore = false){
+  // normal flow
+  let scenarioInstance = new this.classes.Scenario(q, isCore);
+  if (!scenarioInstance.errored) this.scenarioStorage.set(scenarioInstance.id, scenarioInstance);
+
+  return scenarioInstance;
+};
+
+/**
  * Creates one of inheritors of `Component` and put it in a namespace.
  * The inheritor depends on `q.class` property.
  * For example `{id: 'k1', class: 'Const', namespace: 'one'}` creates the object of `Const` type
