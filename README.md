@@ -113,6 +113,38 @@ The following is the example where we create a Heta module and compile it into S
 
 >If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](https://hetalang.github.io/#/specifications/include).
 
+## Creating a Heta platform template
+
+Heta compiler provides the tool for creating a modeling platform template.
+The `heta init` console application runs a questionary about the required formats.
+
+The result of the execution will be a draft platform including supplementary files and directories which are ready to use including the `platform.js` file, and files for __git__ repository.
+
+>For more information see the [CLI references](./cli-references?id=quotheta-initquot-command) documentation.
+
+```
+heta init
+$ heta init
+Creating a template platform in directory: "Y:\draft"...
+? Platform id (template) draft
+? Platform id draft
+? Platform notes (platform notes)
+? Platform notes platform notes
+? Platform version (v0.1.0)
+? Platform version v0.1.0
+? Platform license (UNLICENSED)
+? Platform license UNLICENSED
+? Set options (y/N)
+? Set options No
+? Select file types (Use arrow keys)
+> heta
+  heta+xlsx
+  heta+xlsx extended
+  xlsx
+  json
+  yaml
+```
+
 ## Usage in NodeJS packages
 
 Heta compiler has been written in NodeJS environment and can be used as a package for browser or server-side tools and applications.
