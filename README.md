@@ -115,10 +115,10 @@ The following is the example where we create a Heta module and compile it into S
 
 ## Creating a Heta platform template
 
-Heta compiler provides the tool for creating a modeling platform template.
-The `heta init` console application runs a questionary about the required formats.
+Platform can be structured using a prepared template of folders and pre-constructed embedded files.
+Heta compiler provides the `heta init` tool for creating a such a modeling platform template.
 
-The result of the execution will be a draft platform including supplementary files and directories which are ready to use including the `platform.js` file, and files for __git__ repository.
+The tool creates a draft platform including supplementary files and directories including the `platform.js` file, and files for __git__ repository.
 
 >For more information see the [CLI references](./cli-references?id=quotheta-initquot-command) documentation.
 
