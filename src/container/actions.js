@@ -290,20 +290,23 @@ Container.prototype.delete = function(q = {}){
  * @param {object} The `#setNS` action in JS object format. 
  */
 Container.prototype.setNS = function(q = {}){
+  // default space
+  let space = q.space !== undefined ? q.space : 'nameless';
+
   // create namespace if not exists
-  let namespace = this.namespaceStorage.get(q.space);
+  let namespace = this.namespaceStorage.get(space);
   if (namespace === undefined){
-    namespace = new Namespace(q.space);
+    namespace = new Namespace(space);
     namespace.container = this; // set parent
-    this.namespaceStorage.set(q.space, namespace);
+    this.namespaceStorage.set(space, namespace);
     
     // set default t @TimeScale in all namespaces
-    this.insert({id: 't', space: q.space, class: 'TimeScale'});
+    this.insert({id: 't', space: space, class: 'TimeScale'});
   }
   // it is possible to update type
   namespace._isAbstract = q.type === 'abstract';
   let typeString = namespace._isAbstract ? 'abstract' : 'concrete';
-  this.logger.info(`Namespace "${q.space}" was set as "${typeString}"`);
+  this.logger.info(`Namespace "${space}" was set as "${typeString}"`);
 };
 
 /**
@@ -546,7 +549,7 @@ Container.prototype.select = function(q = {}){
 
 /**
  * Calculates string formatted index.
- * Exampel: `{id: 'k1', space: 'one'}` => `'one::k1'`
+ * Example: `{id: 'k1', space: 'one'}` => `'one::k1'`
  * 
  * @param {object} q Heta's element in Q-object format.
  * @returns {string} Get index of a component.
