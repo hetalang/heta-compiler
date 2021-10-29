@@ -22,13 +22,13 @@ bibliography: paper.bib
 
 # Summary
 
-Today the mathematical modeling is becoming more and more popular in biomedicine and drug development. __Quantitative systems pharmacology__ (QSP) been a relatively new research discipline is devoted to complex models describing organisms, diseases, and drug dynamics. The mission of the approach implies a set of challenging methodological problems like managing a huge amount of data, dealing with large-scale models, time-consuming calculations, etc. __Heta compiler__ is a small and fast software tool written in JavaScript which manages infrastructure for QSP modeling projects. The purpose of the tool is to build and integrate QSP platform modules, to check their completeness and consistency, and then to compile everything into runnable code that will be executed in simulation software. A user can apply a command-line interface to run the model building process. Alternatively, Heta compiler can be used as a package for developing a web-based application or be integrated with simulation software.
+Today mathematical modeling is becoming more and more popular in biomedicine and drug development. __Quantitative systems pharmacology__ (QSP), a relatively new research discipline, is devoted to complex models describing organisms, diseases, and drug dynamics. Designing these models presents a set of challenging methodological problems like managing a huge amount of data, dealing with large-scale models, time-consuming calculations, etc. __Heta compiler__ is a small and fast software tool written in JavaScript which manages infrastructure for QSP modeling projects. The purpose of the tool is to build and integrate QSP platform modules, to check their completeness and consistency, and then to compile everything into runnable code that will be executed in simulation software. A user can apply a command-line interface to run the model building process. Alternatively, Heta compiler can be used as a package for developing web-based applications or be integrated with simulation software.
 
 # Statement of need
 
-The large and still growing QSP/SB modeling community utilizes a variety of software tools for simulation and data analysis [@Stephanou2018; @Mentre2020; @Knight-Schrijver2016]. Usually, the modelers solve the algebraic-differential equations or perform parameters identification or sensitivity analysis. Having good facilities for tackling specific problems a particular software often has no user-friendly way for routine operations like step-by-step model creation and update. Furthermore, different tools have their own internal model format which cannot be reused.
+The large and still growing QSP/SB modeling community utilizes a variety of software tools for simulation and data analysis [@Stephanou2018; @Mentre2020; @Knight-Schrijver2016]. Usually, the modelers solve the algebraic-differential equations or perform parameters identification or sensitivity analysis. While being useful for tackling specific problems, each software tool often has no user-friendly way for routine operations like step-by-step model creation and maintenance. Furthermore, different tools have their own internal model format which cannot be reused.
 
-This paper presents Heta compiler which provides a convenient and flexible way for the development of dynamic large-scale models based on the __Heta language__ code. The compiler translates the source modeling code into a variety of formats to be run in simulation software tools. Heta compiler also provides the information on errors in a model and can be used for debugging process.
+This paper presents Heta compiler which provides a convenient and flexible way for the development of dynamic large-scale models based on the __Heta language__ code. The compiler translates the source modeling code into a variety of formats to be run in simulation software tools. Heta compiler also provides information on errors in a model which can be used to debug.
 
 This tool is an effort to resolve the typical problems in a QSP project by creating a controllable working environment.
 The pre-formulated requirements are:  
@@ -37,17 +37,17 @@ The pre-formulated requirements are:
 -	support iterative platform updates, 
 -	support of models written in human-readable formats as well as in tables, 
 -	help for model code reuse and sharing,
-- providing interface for storing several models in a single platform,
--	export models and data to different popular formats out-of-the-box.
+- provide interface for storing several models in a single platform,
+-	export models and data to different popular formats so it can be used out-of-the-box.
 
 # Heta formats
 
-`Heta compiler` has been evolving alongside the Heta language [@metelkin2019] formalism. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats. 
+`Heta compiler` has been evolving alongside the Heta language [@metelkin2019] specification. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats. 
 
-The most important features of the Heta formats:  
+The most important features of the Heta format are:  
 
--	Human-readable/writable code can be used for model development or modification.
-- Any format from the list must be represented in the rest of the formats.
+-	Human-readable/writable code that can be used for model development or modification.
+- Any supported format must be representable in the rest of the formats.
 -	Easy code parsing.
 -	Modularity: QSP/SB platform can be subdivided into several files and spaces for better project management.
 -	Reusability: modeling platforms should be easily extended for other projects.
@@ -67,7 +67,7 @@ When the size of a model code is large it is recommended to subdivide it into mo
 
 # Features overview
 
-`Heta compiler` includes parser of the Heta formats and supports all features of the [Heta specifications](https://hetalang.github.io/#/specifications/) of version 0.4.1. 
+`Heta compiler` includes the parser of the Heta formats and supports all features of the [Heta specifications](https://hetalang.github.io/#/specifications/) of version 0.4.1. 
 It was designed to support exporting to different popular modeling formats. The current version supports the following formats: 
 
 -	DBSolveOptimum
@@ -97,7 +97,7 @@ The list of them can be shown with `heta build -h` command in a shell.
 `Heta compiler` has also been used for the development of web applications like the [Immune Response Template](https://irt.insysbio.com/) navigator and "PK/RO simulator" R-Shiny application [@mAb-app].
 
 The Heta-based formats are friendly for version control systems like Git and SVN because of the modular structure and the text-based representation.
-Heta compiler can easily be integrated with existed modeling infrastructure, workflows or used as a part of the CI/CD strategy.
+Heta compiler can easily be integrated with existing modeling infrastructure, workflows or used as a part of a CI/CD workflow.
 
 `Heta compiler` is a part of the Heta project which is an initiative for the development of full-cycle infrastructure for modeling in pharmacology and biology: <https://hetalang.github.io>.
 
