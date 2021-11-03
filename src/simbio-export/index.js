@@ -33,15 +33,19 @@ class SimbioExport extends AbstractExport{
     return 'Simbio';
   }
   make(){
-    // use only one namespace
+    // XXX: currently we use only one namespace
     let logger = this._container.logger;
     if (this.spaceFilter.length === 0) { // check non-empty space filter
-      let msg = 'spaceFilter for Simbio format should include at least one namespace but get empty';
+      let msg = 'spaceFilter for Simbio format should include at least one namespace but is empty';
       logger.error(msg);
       var content = '';
     } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) { // check namespace existence
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.err(msg);
+      logger.error(msg);
+      content = '';
+    } else if (this._container.namespaceStorage.get(this.spaceFilter[0]).isAbstract) { // if abstract
+      let msg = `Abstract Namespace "${this.spaceFilter[0]}" cannot be used for Simbio export.`;
+      logger.error(msg);
       content = '';
     } else {
       if (this.spaceFilter.length > 1) { // check multi-space
@@ -59,6 +63,11 @@ class SimbioExport extends AbstractExport{
             return true; // BRAKE
           }
           let term = species.unitsParsed.toTerm();
+          if (term === undefined) {
+            let msg = `Unit term cannot be calculated for species "${species.index}" that is not allowed for Simbio format when {isAmount: true}.`;
+            logger.error(msg, {type: 'UnitError'});
+            return true; // BRAKE
+          }
           let isLegal = species.legalTerms.some((x) => term.equal(x));
           if (!isLegal) {
             let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass", got "${term}".`;

@@ -53,6 +53,10 @@ class DBSolveExport extends AbstractExport{
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
       logger.err(msg);
       content = '';
+    } else if (this._container.namespaceStorage.get(this.spaceFilter[0]).isAbstract) { // if abstract
+      let msg = `Abstract Namespace "${this.spaceFilter[0]}" cannot be used for DBSolve export.`;
+      logger.error(msg);
+      content = '';
     } else {
       if (this.spaceFilter.length > 1) {
         let msg = `DBSolve format does not support multi-space export. Only first namespace "${this.spaceFilter[0]}" will be used.`;

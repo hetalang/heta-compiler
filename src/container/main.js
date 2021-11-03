@@ -161,7 +161,7 @@ class Container {
   knitMany(){
     // knit unitDef
     this.unitDefStorage.forEach((ns) => ns.bind());
-    // knit components
+    // knit components, only for concrete namespace
     this.namespaceStorage.forEach((ns) => {
       // knit only concrete namespace
       if (!ns.isAbstract) ns.knit();
@@ -200,24 +200,24 @@ class Container {
   }
 
   /**
-   * Checks units in left and right part of `Record`, `DSwitcher`, `CSwitcher`, `StopSwitcher`.
+   * Compare left and right side of `Record`, `DSwitcher`, `CSwitcher`, `StopSwitcher`.
    * 
    * @returns {Container} This function returns the container.
    */
   checkUnits(){
-    this.namespaceStorage.forEach((value) => {
-      if (!value.isAbstract) {
+    this.namespaceStorage.forEach((ns) => {
+      if (!ns.isAbstract) {
         // check Record.assignments
-        value.selectByInstanceOf('Record')
+        ns.selectByInstanceOf('Record')
           .forEach((rec) => rec.checkUnits());
         // check DSwitcher.trigger
-        value.selectByInstanceOf('DSwitcher')
+        ns.selectByInstanceOf('DSwitcher')
           .forEach((rec) => rec.checkUnits());
         // check StopSwitcher.trigger
-        value.selectByInstanceOf('StopSwitcher')
+        ns.selectByInstanceOf('StopSwitcher')
           .forEach((rec) => rec.checkUnits());
         // check CSwitcher.trigger
-        value.selectByInstanceOf('CSwitcher')
+        ns.selectByInstanceOf('CSwitcher')
           .forEach((rec) => rec.checkUnits());
       }
     });
@@ -226,38 +226,40 @@ class Container {
   }
 
   /**
-   * Compares TimeScale, Compartment, Species, Reaction with correct terms.
+   * check TimeScale, Compartment, Species, Reaction for correct terms.
    * 
    * @returns {Container} This function returns the container.
    */
   checkTerms(){
-    this.namespaceStorage.forEach((value) => {
+    this.namespaceStorage.forEach((ns) => {
       // check TimeScale from concrete namespace
-      value.isAbstract || value.selectByInstanceOf('_Size')
-        .filter((size) => { // check if units exists and legalTerms are set
-          return size.unitsParsed !== undefined
-            && size.legalTerms !== undefined
-            && size.legalTerms.length !== 0;
-        })
-        .forEach((size) => {
-          let constructorName = size.constructor.name;
-          let term = size.unitsParsed.toTerm();
-          // check if Term cannot be estimated
-          if (typeof term === 'undefined') {
-            let msg = `Unit term cannot be estimated for @${constructorName} "${size.index}"`;
-            this.logger.warn(msg, {type: 'UnitError'});
-            return; // break
-          }
-          let isLegal = size.legalTerms.some((x) => term.equal(x)); // one of them is legal
-          if (!isLegal) {
-            let termString = term.toString();
-            let legalTermStrings = size.legalTerms
-              .map((term) => `"${term.toString()}"`)
-              .join(', ');
-            let msg = `@${constructorName} "${size.index}" has wrong unit term. It must be ${legalTermStrings}, got "${termString}"`;
-            this.logger.warn(msg, {type: 'UnitError'});
-          }
-        });
+      if (!ns.isAbstract) {
+        ns.selectByInstanceOf('_Size')
+          .filter((size) => { // check if units exists and legalTerms are set
+            return size.unitsParsed !== undefined
+              && size.legalTerms !== undefined
+              && size.legalTerms.length !== 0;
+          })
+          .forEach((size) => {
+            let constructorName = size.constructor.name;
+            let term = size.unitsParsed.toTerm();
+            // check if Term cannot be estimated
+            if (typeof term === 'undefined') {
+              let msg = `Unit term cannot be estimated for @${constructorName} "${size.index}"`;
+              this.logger.warn(msg, {type: 'UnitError'});
+              return; // break
+            }
+            let isLegal = size.legalTerms.some((x) => term.equal(x)); // one of them is legal
+            if (!isLegal) {
+              let termString = term.toString();
+              let legalTermStrings = size.legalTerms
+                .map((term) => `"${term.toString()}"`)
+                .join(', ');
+              let msg = `@${constructorName} "${size.index}" has wrong unit term. It must be ${legalTermStrings}, got "${termString}"`;
+              this.logger.warn(msg, {type: 'UnitError'});
+            }
+          });
+      }
     });
     
     return this;
