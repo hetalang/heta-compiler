@@ -7,7 +7,9 @@ let qArr = [
   {action: 'defineUnit', id: 'yyy', units: 'xxx/item'},
   {action: 'defineUnit', id: 'zzz', units: 'xxx/kilogram'},
   {action: 'defineUnit', id: 'ooo', units: 'xxx/wrong'},
-  {action: 'defineUnit', id: 'www', units: 'litre/ooo'}
+  {action: 'defineUnit', id: 'www', units: 'litre/ooo'},
+  {action: 'defineUnit', id: 'ng', units: [{kind: 'gram', multiplier: 1e-9}]},
+  {action: 'defineUnit', id: 'ttt1', units: 'ng'}
 ];
 
 describe('Testing creation of UnitTerm from Unit', () => {
@@ -59,5 +61,14 @@ describe('Testing creation of UnitTerm from Unit', () => {
     let ud0 = p.unitDefStorage.get('www');
     let ut0 = ud0.unitsParsed.toTerm();
     expect(ut0).to.be.undefined;
+  });
+  
+  it('Check ttt1 UnitDefinition', () => {
+    let ud0 = p.unitDefStorage.get('ttt1');
+    let ut0 = ud0.unitsParsed.toTerm();
+    console.log(ut0);
+    expect(ut0).to.be.deep.equal([
+      {kind: 'mass', exponent: 1}
+    ]);
   });
 });
