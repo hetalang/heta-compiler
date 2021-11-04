@@ -4,12 +4,10 @@ const _ = require('lodash');
 
 // they cannot be used as id, when 
 const reservedWords = [
-  'nameless',
   'include', 'block', 'namespace', 'abstract', 'concrete', 'begin', 'end',
   'NaN', 'Infinity',
-  'e', 'E',
-  'pi', 'PI',
-  'time', 'SOLVERTIME'
+  'e', 'E', 'pi', 'PI',
+  'time', 'SOLVERTIME', 'default' // mrgsolve specific reserved words
 ];
 
 /**
@@ -86,7 +84,7 @@ Container.prototype.insert = function(q = {}, isCore = false){
   }
   if (reservedWords.indexOf(q.id) !== -1) {
     this.logger.error(
-      `${ind} id cannot be one of reserved word, but have "${q.id}". reservedWords = [${reservedWords}]`,
+      `id must not be a reserved word, got "${ind}". Reserved words list: \n\t ${reservedWords.join(', ')}`,
       {type: 'QError', space: space}
     );
     return;
