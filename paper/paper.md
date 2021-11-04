@@ -42,14 +42,14 @@ The pre-formulated requirements are:
 
 # Heta formats
 
-`Heta compiler` has been evolving alongside the Heta language [@metelkin2019] specification. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats. 
+`Heta compiler` has been evolving alongside the Heta language [@metelkin2019] specification. Heta is a series of human-readable and writable formats for QSP and Systems Biology projects: Heta code, table representation, JSON, and YAML notation. Heta describes dynamic models in the process-description format i.e., as interacting components that describe volumes, concentrations, amounts, rates. On the other side, it was designed to be easily transformed into ODEs or other formats.
 
-The most important features of the Heta format are:  
+The standardization of process-description modeling notation was also pursued in formats like SBML, CellML, Antimony. However the Heta standard can be distinguished by the specific features:  
 
 -	Human-readable/writable code that can be used for model development or modification.
-- Any supported format must be representable in the rest of the formats.
 -	Easy code parsing.
 -	Modularity: QSP/SB platform can be subdivided into several files and spaces for better project management.
+- Multiple interchangeable representation: human-readable code, tables, JSON, YAML.
 -	Reusability: modeling platforms should be easily extended for other projects.
 -	Reach annotation capabilities for better model code revision.
 -	Simple transformation to popular modeling formats or general-purpose ODEs.
