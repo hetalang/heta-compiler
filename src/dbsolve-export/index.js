@@ -47,11 +47,11 @@ class DBSolveExport extends AbstractExport{
     let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for DBSolve format should include at least one namespace, got empty.';
-      logger.err(msg);
+      logger.error(msg);
       var content = '';
     } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.err(msg);
+      logger.error(msg);
       content = '';
     } else if (this._container.namespaceStorage.get(this.spaceFilter[0]).isAbstract) { // if abstract
       let msg = `Abstract Namespace "${this.spaceFilter[0]}" cannot be used for DBSolve export.`;
@@ -170,6 +170,15 @@ class DBSolveExport extends AbstractExport{
     let discreteEvents = ns
       .selectByClassName('DSwitcher')
       .map((switcher) => {
+        let dynamicRecords = ns
+          .selectRecordsByContext(switcher.id)
+          .filter((record) => record.isDynamic)
+          .map((record) => record.index);
+        if (dynamicRecords.length > 0) {
+          let msg = `DBSolve doesn't support ${switcher.className} for dynamic records: ${dynamicRecords.join(', ')}.`;
+          logger.error(msg, {type: 'ExportError'});
+        }
+        
         // check boolean expression in trigger
         if (!switcher.trigger.isComparison) {
           let msg = `DBSolve supports only simple comparison operators in DSwitcher trigger, got: "${switcher.trigger.toString()}"`;
@@ -199,6 +208,15 @@ class DBSolveExport extends AbstractExport{
     let continuousEvents = ns
       .selectByClassName('CSwitcher')
       .map((switcher) => {
+        let dynamicRecords = ns
+          .selectRecordsByContext(switcher.id)
+          .filter((record) => record.isDynamic)
+          .map((record) => record.index);
+        if (dynamicRecords.length > 0) {
+          let msg = `DBSolve doesn't support ${switcher.className} for dynamic records: ${dynamicRecords.join(', ')}.`;
+          logger.error(msg, {type: 'ExportError'});
+        }
+
         let assignments = ns
           .selectRecordsByContext(switcher.id)
           .map((record) => {

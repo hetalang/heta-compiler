@@ -53,11 +53,11 @@ class SLVExport extends AbstractExport{
     let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for SLV format should include at least one namespace, got empty.';
-      logger.err(msg);
+      logger.error(msg);
       var content = '';
     } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.err(msg);
+      logger.error(msg);
       content = '';
     } else {
       if (this.spaceFilter.length > 1) {
@@ -193,6 +193,15 @@ class SLVExport extends AbstractExport{
         let assignments = ns
           .selectRecordsByContext(switcher.id);
           
+        // unsupported events for dynamic
+        let dynamicRecords = assignments
+          .filter((record) => record.isDynamic)
+          .map((record) => record.index);
+        if (dynamicRecords.length > 0) {
+          let msg = `SLV doesn't support ${switcher.className} for dynamic records: ${dynamicRecords.join(', ')}.`;
+          logger.error(msg, {type: 'ExportError'});
+        }
+        
         return {
           switcher,
           assignments
@@ -205,7 +214,16 @@ class SLVExport extends AbstractExport{
       .map((switcher) => {
         let assignments = ns
           .selectRecordsByContext(switcher.id);
-          
+
+        // unsupported events for dynamic
+        let dynamicRecords = assignments
+          .filter((record) => record.isDynamic)
+          .map((record) => record.index);
+        if (dynamicRecords.length > 0) {
+          let msg = `SLV doesn't support ${switcher.className} for dynamic records: ${dynamicRecords.join(', ')}.`;
+          logger.error(msg, {type: 'ExportError'});
+        }
+
         return {
           switcher,
           assignments

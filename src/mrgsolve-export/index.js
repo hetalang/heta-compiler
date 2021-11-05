@@ -31,7 +31,7 @@ class MrgsolveExport extends AbstractExport {
     return 'MrgsolveExport';
   }
   get format(){
-    return 'Mrgsolve'
+    return 'Mrgsolve';
   }
   static get validate(){
     return ajv.compile(schema);
@@ -40,18 +40,18 @@ class MrgsolveExport extends AbstractExport {
     // use only one namespace
     let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
-      let msg = 'spaceFilter for Mrgsolve format should include at least one namespace but get empty';
-      logger.err(msg);
+      let msg = 'spaceFilter for Mrgsolve format should include at least one namespace, got empty.';
+      logger.error(msg);
       var codeContent = '';
       var runContent = '';
     } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.err(msg);
+      logger.error(msg);
       codeContent = '';
       runContent = '';
     } else {
       if (this.spaceFilter.length > 1) {
-        let msg = `Mrgsolve format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
+        let msg = `Mrgsolve format does not support multi-space export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
         logger.warn(msg);
       }
       let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
@@ -102,6 +102,15 @@ class MrgsolveExport extends AbstractExport {
           logger.error(errorMsg, {type: 'ExportError'});
         }
       });
+
+    // check if there are unsupported _Switcher components
+    let switchers = ns.selectByInstanceOf('_Switcher');
+    if (switchers.length > 0) {
+      let logger = ns.container.logger;
+      let switcherIds = switchers.map((sw) => sw.index).join(', ');
+      let msg = `Mrgsolve doesn't support Swichers, the following events will be skipped: ${switcherIds}.`;
+      logger.error(msg, {type: 'ExportError'});
+    }
 
     // set array of output records
     let output = ns

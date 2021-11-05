@@ -48,11 +48,11 @@ class SBMLExport extends AbstractExport {
     let logger = this._container.logger;
     if (this.spaceFilter.length === 0) {
       let msg = 'spaceFilter for SBML format should include at least one namespace but get empty';
-      logger.err(msg);
+      logger.error(msg);
       var content = '';
     } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
       let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.err(msg);
+      logger.error(msg);
       content = '';
     } else {
       if (this.spaceFilter.length > 1) {
