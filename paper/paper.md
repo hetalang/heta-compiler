@@ -26,7 +26,7 @@ Today mathematical modeling is becoming more and more popular in biomedicine and
 
 # Statement of need
 
-The large and still growing QSP/SB modeling community utilizes a variety of software tools for simulation and data analysis [@Stephanou2018; @Mentre2020; @Knight-Schrijver2016]. Usually, the modelers solve the algebraic-differential equations or perform parameters identification or sensitivity analysis. While being useful for tackling specific problems, each software tool often has no user-friendly way for routine operations like step-by-step model creation and maintenance. Furthermore, different tools have their own internal model format which cannot be reused.
+The large and still growing Systems Biology (SB) and Systems Pharmacology modeling communities utilize a variety of software tools for simulation and data analysis [@Stephanou2018; @Mentre2020; @Knight-Schrijver2016]. Usually, the modelers solve the algebraic-differential equations or perform parameters identification or sensitivity analysis. While being useful for tackling specific problems, each software tool often has no user-friendly way for routine operations like step-by-step model creation and maintenance. Furthermore, different tools have their own internal model format which cannot be reused.
 
 This paper presents Heta compiler which provides a convenient and flexible way for the development of dynamic large-scale models based on the __Heta language__ code. The compiler translates the source modeling code into a variety of formats to be run in simulation software tools. Heta compiler also provides information on errors in a model which can be used to debug.
 
