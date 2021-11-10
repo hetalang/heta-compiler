@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.8
+
+- support `#setScenario` and `Scenario`
+
 ## 0.6.7 - ready for JOSS
 
 - error messages for unsupported switchers in SLV, DBSolve, mrgsolve
