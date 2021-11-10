@@ -1,9 +1,11 @@
 # Change Log
 
-## 0.6.7
+## 0.6.7 - ready for JOSS
 
-- 
+- error messages for unsupported switchers in SLV, DBSolve, mrgsolve
+- update reserved words list with "default" (to support mrgsolve)
 - extend api documentation
+- export only concrete namespaces in Simbio
 
 ## 0.6.6
 
