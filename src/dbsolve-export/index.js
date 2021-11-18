@@ -243,13 +243,13 @@ class DBSolveExport extends AbstractExport{
 
     return {
       population: ns,
-      processes,
       dynamicRecords,
       initRecords,
-      matrix,
       ruleRecords,
-      events: timeEvents,
+      processes,
+      matrix,
       powTransform: this.powTransform,
+      timeEvents,
       discreteEvents,
       continuousEvents,
       groupedConst

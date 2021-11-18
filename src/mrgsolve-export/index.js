@@ -75,13 +75,10 @@ class MrgsolveExport extends AbstractExport {
   }
   getMrgsolveImage(ns){
     // set dynamic variables
-    let dynamics = ns
-      .toArray()
-      .filter((component) => {
-        return component.instanceOf('Record') 
-          && component.isDynamic;
-      });
-    let dynamicIds = dynamics
+    let dynamicRecords = ns
+      .selectByInstanceOf('Record')
+      .filter((x) => x.isDynamic);
+    let dynamicIds = dynamicRecords
       .map((component) => component.id);
 
     // check if initials depends on dynamic initials, than stop
@@ -104,11 +101,11 @@ class MrgsolveExport extends AbstractExport {
       });
 
     // check if there are unsupported _Switcher components
-    let switchers = ns.selectByInstanceOf('_Switcher');
+    let switchers = ns.selectByInstanceOf('TimeSwitcher');
     if (switchers.length > 0) {
       let logger = ns.container.logger;
       let switcherIds = switchers.map((sw) => sw.index).join(', ');
-      let msg = `Mrgsolve doesn't support Swichers, the following events will be skipped: ${switcherIds}.`;
+      let msg = `Mrgsolve doesn't support TimeSwichers, the following events will be skipped: ${switcherIds}.`;
       logger.error(msg, {type: 'ExportError'});
     }
 
@@ -123,7 +120,7 @@ class MrgsolveExport extends AbstractExport {
       });
 
     // set sorted array of initials
-    let start_ = ns
+    let initRecords = ns
       .sortExpressionsByContext('start_')
       .filter((component) => {
         return component.instanceOf('Record') 
@@ -132,7 +129,7 @@ class MrgsolveExport extends AbstractExport {
       });
 
     // set sorted array of rules
-    let ode_ = ns
+    let ruleRecords = ns
       .sortExpressionsByContext('ode_', true)
       .filter((component) => {
         return component.instanceOf('Record') 
@@ -140,12 +137,41 @@ class MrgsolveExport extends AbstractExport {
           && component.assignments.ode_;
       });
 
+    // Continuous Events
+    let continuousEvents = ns
+      .selectByClassName('CSwitcher')
+      .map((switcher) => {
+        let assignments = ns
+          .selectRecordsByContext(switcher.id)
+          .map((record) => {
+            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+              ? record.getAssignment(switcher.id).multiply(record.compartment)
+              : record.getAssignment(switcher.id);
+
+            // find number of dynamic record (compartment)
+            // -1 means non-dynamic
+            let num = dynamicIds.indexOf(record.id);
+
+            return {
+              target: record.id,
+              expr,
+              num
+            };
+          });
+          
+        return {
+          switcher,
+          assignments
+        };
+      });
+
     return {
       population: ns,
-      dynamics,
+      dynamicRecords,
+      initRecords,
+      ruleRecords,
+      continuousEvents,
       output,
-      start_,
-      ode_,
       options: this
     };
   }

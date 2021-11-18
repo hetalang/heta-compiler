@@ -1,9 +1,10 @@
 k1 @Const = 0.01;
 
 comp1 @Compartment .= 1;
-x1 @Species { compartment: comp1 } .= 10;
-x2 @Species { compartment: comp1 } .= 0;
+x1 @Species { compartment: comp1 , output: true} .= 10;
+x2 @Species { compartment: comp1, output: true } .= 0;
 r1 @Reaction { actors: x1->x2 } := k1*x1*comp1;
+p1 @Record {output: true} .= 10;
 
 #export { filepath: sbml.xml, format: SBML };
 #export { filepath: model, format: SLV };
@@ -18,4 +19,5 @@ cond1 @Record := 6-x1;
 sw1 @CSwitcher {
   trigger: cond1
 };
-x1 [sw1]= 10;
+x1 [sw1]= x1 + 10;
+p1 [sw1]= x1*2;
