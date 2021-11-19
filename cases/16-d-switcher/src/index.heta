@@ -1,12 +1,12 @@
 
 comp1 @Compartment .= 1;
-S1 @Species { compartment: comp1 } .= 10;
-S2 @Species { compartment: comp1 } .= 10;
+S1 @Species { compartment: comp1, output: true } .= 10;
+S2 @Species { compartment: comp1, output: true } .= 10;
 r1 @Reaction { actors: S1 => };
 r1 := k1*S1*comp1;
 k1 @Const = 0.1;
-x1 @Record .= 0;
-x2 @Record .= 0;
+x1 @Record { output: true } .= 0;
+x2 @Record { output: true }.= 0;
 pr1 @Process { actors: => x1 };
 pr1 := 0.1;
 

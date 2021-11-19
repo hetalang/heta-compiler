@@ -50,17 +50,20 @@ $MAIN
 $TABLE
 {%- for evt in continuousEvents %}
 // {{ evt.switcher.id }} @{{ evt.switcher.className }}
-if ({{ evt.switcher.id }}_==1.0 && {{ evt.switcher.trigger.toCString() }}>=0.0{{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
+{%- set evtCondition =  evt.switcher.trigger.toCString({timeVariable: 'TIME'}) + '>=0.0' 
+  if evt.switcher.className == 'CSwitcher'
+  else evt.switcher.trigger.toCString({timeVariable: 'TIME'}) %}
+if ({{ evt.switcher.id }}_==1.0 && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
   {%- for assign in evt.assignments %}
   {%- if assign.num >= 0 %} {# for synamic #}
   {%- set evtId = 'evt_' + assign.target + '_' %}
   mrg::evdata {{ evtId }}(TIME, 8);
-  {{ evtId }}.amt = {{ assign.expr.toCString() }};
+  {{ evtId }}.amt = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
   {{ evtId }}.cmt = {{ assign.num + 1}};
   {{ evtId }}.now = true;
   self.mevector.push_back({{ evtId }});
   {%- else %} {# for static #}
-  {{ assign.target }} = {{ assign.expr.toCString() }};
+  {{ assign.target }} = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
   {%- endif %}
   {%- endfor %}
 }
@@ -74,7 +77,7 @@ double {{ ts.id }} = {{ ts.slope }} * SOLVERTIME + {{ ts.intercept }};
 {%- endfor %}
 {%- for record in ruleRecords %}
 // @{{ record.className }} '{{ record.title }}'
-{{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.toCString() }};
+{{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.toCString({timeVariable: 'SOLVERTIME'}) }};
 {%- endfor %}
 {% for variable in dynamicRecords %}
 dxdt_{{ variable.id }}{{ "_amt_" if variable.className==="Species" and not variable.isAmount }} =

@@ -139,7 +139,11 @@ class MrgsolveExport extends AbstractExport {
 
     // Continuous Events
     let continuousEvents = ns
-      .selectByClassName('CSwitcher')
+      .selectByInstanceOf('_Switcher')
+      .filter((switcher) => {
+        return switcher.className === 'CSwitcher' 
+          || switcher.className === 'DSwitcher';
+      })
       .map((switcher) => {
         let assignments = ns
           .selectRecordsByContext(switcher.id)

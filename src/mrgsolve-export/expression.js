@@ -1,6 +1,10 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toCString = function(){
+Expression.prototype.toCString = function(options = {}){
+  // set defaults
+  Object.assign(options, {
+    timeVariable: 'SOLVERTIME'
+  });
 
   let CStringHandler = (node, options) => {
     if (node.type === 'ConstantNode' && Number.isInteger(node.value)) {
@@ -25,7 +29,7 @@ Expression.prototype.toCString = function(){
       return `std::min(${args})`;
     }
     if (node.type === 'SymbolNode' && node.name === 't') {
-      return 'SOLVERTIME';
+      return options.timeVariable;
     }
     // piecewise function
     if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
