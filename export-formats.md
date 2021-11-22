@@ -355,9 +355,9 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |- |+ |+ |+ |+ |+
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |- |+ |+ |+ |+ |+
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |- |+ |+ |+ |+ |+
-|`@CSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |- |+ |+ |+ |+ |+
+|`@CSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |+ |+ |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|`@DSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |- |+ |+ |+ |+ |+
+|`@DSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |+ |+ |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
 |`@Dose` class (experimental)                            |- |- |- |- |- |- |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+

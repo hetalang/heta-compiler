@@ -18,7 +18,7 @@ $PARAM @annotated
 {%- endfor %}
 {%- for evt in continuousEvents %}
 // @{{ evt.switcher.className }} {{ "'"+evt.switcher.title+"'" if evt.switcher.title is defined }}
-{{ evt.switcher.id }}_ : {{ '1.0' if evt.switcher.active==true else '0.0' }} : 
+{{ evt.switcher.id }} : {{ '1' if evt.switcher.active==true else '0' }} : 
 {%- endfor %}
 
 $CMT @annotated
@@ -40,6 +40,9 @@ $PREAMBLE
 {%- for record in initRecords %}
 {{ "//" if record.isDynamic }}double {{ record.id }} = {{ record.assignments.start_.toCString() }}; 
 {%- endfor %}
+{%- for evt in continuousEvents %}
+bool {{ evt.switcher.id }}_down_ = false;
+{%- endfor %}
 
 $MAIN
 {%- for variable in initRecords | filter2("isDynamic", true) %}
@@ -53,7 +56,9 @@ $TABLE
 {%- set evtCondition =  evt.switcher.trigger.toCString({timeVariable: 'TIME'}) + '>=0.0' 
   if evt.switcher.className == 'CSwitcher'
   else evt.switcher.trigger.toCString({timeVariable: 'TIME'}) %}
-if ({{ evt.switcher.id }}_==1.0 && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
+if ({{ evt.switcher.id }} && !{{ evt.switcher.id }}_down_ && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
+  {{ evt.switcher.id }}_down_ = true;
+
   {%- for assign in evt.assignments %}
   {%- if assign.num >= 0 %} {# for synamic #}
   {%- set evtId = 'evt_' + assign.target + '_' %}
@@ -66,6 +71,8 @@ if ({{ evt.switcher.id }}_==1.0 && ({{ evtCondition }}){{ ' && TIME>0.0' if not 
   {{ assign.target }} = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
   {%- endif %}
   {%- endfor %}
+} else {
+  {{ evt.switcher.id }}_down_ = false;
 }
 {%- endfor %}
 {%- endif %}
