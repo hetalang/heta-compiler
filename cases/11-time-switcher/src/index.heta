@@ -5,8 +5,8 @@ kel @Const = 0.01; // constant of elimination
 a0 @Species {compartment: comp0, isAmount: true, units: mole};
 s1 @Species {compartment: comp1, output: true};
 s2 @Species {compartment: comp1, output: true};
-comp0 @Compartment;
-comp1 @Compartment;
+comp0 @Compartment {output: true};
+comp1 @Compartment {output: true};
 vabs @Reaction {actors: a0 -> s1};
 vel @Reaction {actors: s1 ->};
 

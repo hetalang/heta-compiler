@@ -1,6 +1,5 @@
 const { _Switcher } = require('./_switcher');
 const { Const } = require('./const');
-const { floor, min } = Math;
 const _ = require('lodash');
 /*
   TimeSwitcher class

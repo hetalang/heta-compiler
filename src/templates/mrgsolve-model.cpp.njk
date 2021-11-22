@@ -16,6 +16,10 @@ $PARAM @annotated
 // @{{ constant.className }} {{ "'"+constant.title+"'" if constant.title is defined }}
 {{ constant.id }} : {{ constant.num }} : {% if constant.units %}({{ constant.units }}){% endif %}
 {%- endfor %}
+{%- for evt in timeEvents %}
+// @{{ evt.switcher.className }} {{ "'"+evt.switcher.title+"'" if evt.switcher.title is defined }}
+{{ evt.switcher.id }} : {{ '1' if evt.switcher.active==true else '0' }} : 
+{%- endfor %}
 {%- for evt in continuousEvents %}
 // @{{ evt.switcher.className }} {{ "'"+evt.switcher.title+"'" if evt.switcher.title is defined }}
 {{ evt.switcher.id }} : {{ '1' if evt.switcher.active==true else '0' }} : 
@@ -43,17 +47,44 @@ $PREAMBLE
 {%- for evt in continuousEvents %}
 bool {{ evt.switcher.id }}_down_ = false;
 {%- endfor %}
+{%- for evt in timeEvents %}
+self.mevent({{ evt.switcher.getStart() | default('0.0')}}, {{ loop.index0 + 10 }});
+{%- endfor %}
 
 $MAIN
 {%- for variable in initRecords | filter2("isDynamic", true) %}
 {{  variable.id }}{{ "_amt_" if (variable.className==="Species" and not variable.isAmount) }}_0 = ({{ variable.assignments.start_.toCString() }}){% if variable.className==="Species" and not variable.isAmount %} * {{ variable.compartment }}{% endif %}; 
 {%- endfor %}
 
-{% if continuousEvents|length > 0 -%}
+{% if continuousEvents|length + timeEvents|length > 0 -%}
 $TABLE
+{%- for evt in timeEvents %}
+// {{ evt.switcher.id }} @{{ evt.switcher.className }}
+if ({{ evt.switcher.id }} && EVID=={{ loop.index0 + 10 }}{{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
+  {%- for assign in evt.assignments %}
+  {%- if assign.num >= 0 %} {# for synamic #}
+  {%- set evtId = 'evt_' + assign.target + '_' %}
+  mrg::evdata {{ evtId }}(TIME, 8);
+  {{ evtId }}.amt = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
+  {{ evtId }}.cmt = {{ assign.num + 1}};
+  {{ evtId }}.now = true;
+  self.mevector.push_back({{ evtId }});
+  {%- else %} {# for static #}
+  {{ assign.target }} = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
+  {%- endif %}
+  {%- endfor %}
+  {%- if evt.switcher.getPeriod() is defined %}
+  // next event
+  {% if evt.switcher.getStop() is defined -%}
+  if(TIME < {{ evt.switcher.getStop() }})
+  {%- endif -%}
+  self.mevent(TIME + {{ evt.switcher.getPeriod() }}, {{ loop.index0 + 10 }});
+  {%- endif %}
+}
+{%- endfor %}
 {%- for evt in continuousEvents %}
 // {{ evt.switcher.id }} @{{ evt.switcher.className }}
-{%- set evtCondition =  evt.switcher.trigger.toCString({timeVariable: 'TIME'}) + '>=0.0' 
+{%- set evtCondition = evt.switcher.trigger.toCString({timeVariable: 'TIME'}) + '>=0.0' 
   if evt.switcher.className == 'CSwitcher'
   else evt.switcher.trigger.toCString({timeVariable: 'TIME'}) %}
 if ({{ evt.switcher.id }} && !{{ evt.switcher.id }}_down_ && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {

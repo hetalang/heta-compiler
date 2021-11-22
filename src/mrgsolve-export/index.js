@@ -100,15 +100,6 @@ class MrgsolveExport extends AbstractExport {
         }
       });
 
-    // check if there are unsupported _Switcher components
-    let switchers = ns.selectByInstanceOf('TimeSwitcher');
-    if (switchers.length > 0) {
-      let logger = ns.container.logger;
-      let switcherIds = switchers.map((sw) => sw.index).join(', ');
-      let msg = `Mrgsolve doesn't support TimeSwichers, the following events will be skipped: ${switcherIds}.`;
-      logger.error(msg, {type: 'ExportError'});
-    }
-
     // set array of output records
     let output = ns
       .selectByInstanceOf('Record')
@@ -135,6 +126,35 @@ class MrgsolveExport extends AbstractExport {
         return component.instanceOf('Record') 
           && component.assignments 
           && component.assignments.ode_;
+      });
+
+    // Time Events
+    let timeEvents = ns
+      .selectByInstanceOf('_Switcher')
+      .filter((switcher) => switcher.className === 'TimeSwitcher')
+      .map((switcher) => {
+        let assignments = ns
+          .selectRecordsByContext(switcher.id)
+          .map((record) => {
+            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+              ? record.getAssignment(switcher.id).multiply(record.compartment)
+              : record.getAssignment(switcher.id);
+
+            // find number of dynamic record (compartment)
+            // -1 means non-dynamic
+            let num = dynamicIds.indexOf(record.id);
+
+            return {
+              target: record.id,
+              expr,
+              num
+            };
+          });
+          
+        return {
+          switcher,
+          assignments
+        };
       });
 
     // Continuous Events
@@ -174,6 +194,7 @@ class MrgsolveExport extends AbstractExport {
       dynamicRecords,
       initRecords,
       ruleRecords,
+      timeEvents,
       continuousEvents,
       output,
       options: this
