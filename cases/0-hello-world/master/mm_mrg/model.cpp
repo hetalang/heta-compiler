@@ -12,9 +12,9 @@ $PROB
 $SET end=120, delta=0.1, hmax=0.01, hmin=0, rtol=1e-3, atol=1e-6
 
 $PARAM @annotated
-// @Const ''
+// @Const 
 Vmax : 0.1 : (uM/minute)
-// @Const ''
+// @Const 
 Km : 2.5 : (uM)
 
 $CMT @annotated
@@ -35,6 +35,8 @@ double default_comp = 1.0;
 $MAIN
 P_amt__0 = (0.0) * default_comp;
 S_amt__0 = (10.0) * default_comp;
+
+
 
 $ODE
 // @Reaction 'Michaelis-Menten reaction'
