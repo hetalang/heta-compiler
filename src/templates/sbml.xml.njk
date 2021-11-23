@@ -19,9 +19,19 @@
       </html>
     </notes>
   {%- endif %}
+
+  {%- if listOfUnitDefinitions | length > 0 %}
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    {%- for unitDefinition in listOfUnitDefinitions %}
+    {{ unitDefinition }}
+    {%- endfor %}
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+  {%- endif %}
   
-  {%- set listOfCompartments = population.selectByClassName('Compartment') -%}
-  {% if listOfCompartments | length > 0 %}
+  {% set listOfCompartments = population.selectByClassName('Compartment') %}
+  {%- if listOfCompartments | length > 0 %}
     <listOfCompartments>
     {%- for record in listOfCompartments %}
       <compartment
@@ -165,6 +175,76 @@
     </listOfParameters>
   {% endif %}
 
+  {%- set listOfInitialAssignments = population.toArray()|exclude2("assignments.start_", undefined)|filter2("assignments.start_.num", undefined) -%}
+  {% if listOfInitialAssignments|length > 0 %}
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+    {%- for record in listOfInitialAssignments %}
+      <initialAssignment
+        symbol="{{ record.id }}"
+        metaid="{{ record.index }}::start_"
+        >
+        {{ record.assignments.start_.toCMathML() }}
+      </initialAssignment>
+    {%- endfor %}
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  {% endif %}
+  
+  {%- set listOfAssignmentRules = population.toArray()|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
+  {%- set listOfRateRules = population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
+  {% if listOfAssignmentRules|length + listOfRateRules|length > 0 %}
+<!-- BEGIN RULES -->
+  <listOfRules>
+  {%- for record in listOfAssignmentRules %}
+    <assignmentRule
+      variable="{{record.id}}"
+      metaid="{{record.index}}::ode_"
+      >
+      {{ record.assignments.ode_.toCMathML() }}
+    </assignmentRule>
+  {%- endfor %}
+  {%- for ts in listOfTimeScales %}
+    <assignmentRule
+      variable="{{ts.id}}"
+      metaid="{{ts.index}}::assignment"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply><plus/>
+          <apply><times/>
+            <cn> {{ ts.slope }} </cn>
+            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+          </apply>
+          <cn> {{ ts.intercept }} </cn>
+        </apply>
+      </math>
+    </assignmentRule>
+  {%- endfor %}
+
+  {%- for record in listOfRateRules %}
+    <rateRule
+      variable="{{record.id}}"
+      metaid="{{ record.index }}::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          {%- for ref in record.backReferences %}
+          <apply>
+            <times/>
+            <cn>{{ ref.stoichiometry }}</cn>
+            <ci>{{ ref.process }}</ci>
+          </apply>
+          {%- endfor %}
+        </apply>
+      </math>
+    </rateRule>
+  {% endfor %}
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  {% endif %}
+
   {%- set listOfReactions = population.selectByClassName('Reaction') -%}
   {% if listOfReactions | length > 0 %}
     <listOfReactions>
@@ -214,72 +294,6 @@
     </listOfReactions>
   {% endif %}
 
-  {%- set listOfAssignmentRules = population.toArray()|exclude2("assignments.ode_", undefined)|exclude2("className","Reaction") -%} {# all ode_ but not reactions #}
-  {%- set listOfRateRules = population.selectByClassName('Record')|exclude2("boundary", true)|exclude2("isRule", true)|exclude2("backReferences.length", 0) -%}
-  {% if listOfAssignmentRules|length + listOfRateRules|length > 0 %}
-  <listOfRules>
-  {%- for record in listOfAssignmentRules %}
-    <assignmentRule
-      variable="{{record.id}}"
-      metaid="{{record.index}}::ode_"
-      >
-      {{ record.assignments.ode_.toCMathML() }}
-    </assignmentRule>
-  {%- endfor %}
-  {%- for ts in listOfTimeScales %}
-    <assignmentRule
-      variable="{{ts.id}}"
-      metaid="{{ts.index}}::assignment"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <apply><plus/>
-          <apply><times/>
-            <cn> {{ ts.slope }} </cn>
-            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-          </apply>
-          <cn> {{ ts.intercept }} </cn>
-        </apply>
-      </math>
-    </assignmentRule>
-  {%- endfor %}
-
-  {%- for record in listOfRateRules %}
-    <rateRule
-      variable="{{record.id}}"
-      metaid="{{ record.index }}::ode_"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <apply>
-          <plus/>
-          {%- for ref in record.backReferences %}
-          <apply>
-            <times/>
-            <cn>{{ ref.stoichiometry }}</cn>
-            <ci>{{ ref.process }}</ci>
-          </apply>
-          {%- endfor %}
-        </apply>
-      </math>
-    </rateRule>
-  {% endfor %}
-  
-  </listOfRules>
-  {% endif %}
-  
-  {%- set listOfInitialAssignments = population.toArray()|exclude2("assignments.start_", undefined)|filter2("assignments.start_.num", undefined) -%}
-  {% if listOfInitialAssignments|length > 0 %}
-    <listOfInitialAssignments>
-    {%- for record in listOfInitialAssignments %}
-      <initialAssignment
-        symbol="{{ record.id }}"
-        metaid="{{ record.index }}::start_"
-        >
-        {{ record.assignments.start_.toCMathML() }}
-      </initialAssignment>
-    {%- endfor %}
-    </listOfInitialAssignments>
-  {% endif %}
-  
   {%- set listOfTimeEvents = population.selectByClassName("TimeSwitcher") -%}
   {%- set listOfDEvents = population.selectByClassName("DSwitcher") -%}
   {%- set listOfCEvents = population.selectByClassName("CSwitcher") -%}
@@ -397,16 +411,6 @@
       {%- endfor %}
     </listOfEvents>
   {% endif %}
-  
-  {%- set listOfUnitDefinitions = listOfUnitDefinitions %}
-  {%- if listOfUnitDefinitions | length > 0 %}
-<!-- UNIT DEFINITIONS -->
-<listOfUnitDefinitions>
-{%- for unitDefinition in listOfUnitDefinitions %}
-  {{ unitDefinition }}
-{%- endfor %}
-</listOfUnitDefinitions>
-  {%- endif %}
   
   </model>
 </sbml>
