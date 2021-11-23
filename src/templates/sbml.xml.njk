@@ -286,7 +286,7 @@
   {% if listOfTimeEvents|length + listOfCEvents|length  + listOfDEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfTimeEvents -%}
-      {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}}
+      {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}
       <event
         id="{{event.id}}"
         metaid="{{event.index}}"
@@ -300,7 +300,7 @@
                 {{ startMathML }}
               </apply>
               {% if event.period is defined or event.periodObj is defined %}
-                {%- set periodMathML = '<ci>' + event.period + '</ci>' if event.period is defined else '<cn>'+ event.periodObj.num + '</cn>'-%}}
+                {%- set periodMathML = '<ci>' + event.period + '</ci>' if event.period is defined else '<cn>'+ event.periodObj.num + '</cn>'-%}
                 <apply><geq/>
                   <apply><minus/>
                     <apply><divide/>
@@ -327,12 +327,12 @@
                 </apply>
               {% endif %}
               {% if event.stop is defined or event.stopObj is defined %}
-                {%- set stopMathML = '<ci>' + event.stop + '</ci>' if event.stop is defined else '<cn>'+ event.stopObj.num + '</cn>'-%}}
+                {%- set stopMathML = '<ci>' + event.stop + '</ci>' if event.stop is defined else '<cn>'+ event.stopObj.num + '</cn>'-%}
                 <apply><leq/>
                   <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
                   {{ stopMathML }}
               </apply>
-              {% endif %}}
+              {% endif %}
             </apply>
           </math>
         </trigger>
