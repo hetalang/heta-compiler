@@ -139,6 +139,73 @@ class Scenario extends Top {
 
     return q;
   }
+  /*
+    This method checks scenario properties.
+    Called by Container.prototype.knitMany()
+  */
+  bind(){
+    let logger = this._container.logger;
+
+    // set model/namespace
+    if (this._container.namespaceStorage.has(this.model)) {
+      this.modelObj = this._container.namespaceStorage.get(this.model);
+    } else {
+      let msg = `Scenario's ${this.id} "model" property must refer to a namespace, got "${this.model}".`;
+      logger.error(msg, {type: 'BindingError'});
+      return; // BRAKE
+    }
+
+    // check parameters
+    if (this.parameters !== undefined) {
+      Object.getOwnPropertyNames(this.parameters)
+        .forEach((key) => {
+          // search in constants
+          let foundComponent = this.modelObj.get(key);
+          if (foundComponent === undefined || foundComponent.instanceOf('Const')) {
+            let msg = `"${key}" key in Scenario "${this.id}.parameters" must refer to Const.`;
+            logger.error(msg, {type: 'BindingError'});
+          }
+        });
+    }
+
+    // check observables
+    if (this.observables !== undefined) {
+      this.observables.forEach((key) => {
+        // search in records
+        let foundComponent = this.modelObj.get(key);
+        if (foundComponent === undefined || foundComponent.instanceOf('Record')) {
+          let msg = `"${key}" value in Scenario "${this.id}.observables" must refer to Record.`;
+          logger.error(msg, {type: 'BindingError'});
+        }
+      });
+    }
+
+    // check events_active
+    if (this.events_active !== undefined) {
+      Object.getOwnPropertyNames(this.events_active)
+        .forEach((key) => {
+          // search in switchers
+          let foundComponent = this.modelObj.get(key);
+          if (foundComponent === undefined || foundComponent.instanceOf('_Switcher')) {
+            let msg = `"${key}" key in Scenario "${this.id}.events_active" must refer to Switcher.`;
+            logger.error(msg, {type: 'BindingError'});
+          }
+        });
+    }
+
+    // check events_save
+    if (this.events_active !== undefined) {
+      Object.getOwnPropertyNames(this.events_active)
+        .forEach((key) => {
+          // search in switchers
+          let foundComponent = this.modelObj.get(key);
+          if (foundComponent === undefined || foundComponent.instanceOf('_Switcher')) {
+            let msg = `"${key}" key in Scenario "${this.id}.events_active" must refer to Switcher.`;
+            logger.error(msg, {type: 'BindingError'});
+          }
+        });
+    }
+  }
 }
 
 module.exports = {

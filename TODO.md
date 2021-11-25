@@ -32,11 +32,11 @@
 ## bugs
 
 - critical error when units id is "xxx_yyy"
-- calculate units for pow function
-- AnyUnit for zero numbers
 
 ## features
 
+- calculate units for pow function
+- AnyUnit for zero numbers
 - checking legal functions inside Expressions and its arguments
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - `#move`, `#moveNS`

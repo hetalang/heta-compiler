@@ -13,15 +13,19 @@ k1 @Const = 1e-2;
 
 scn1 #setScenario {
   tspan: [0, 200]
-}; 
+};
 
 scn2 #setScenario {
   model: mouse,
-  parameters: {weight: 20, kel: 1e-3},
+  parameters: {p1: 20, k1: 1e-3, xxx: 2},
   saveat: [0, 1, 2, 4, 6, 8, 10, 12],
-  observables: [A0, C1, C2],
+  observables: [A0, x1, k1],
   events_active: {sw1: false, sw2: true},
   events_save: {sw2: [true, false]}
+};
+
+scn3 #setScenario {
+  tspan: [0,12]
 };
 
 // exports
@@ -34,4 +38,4 @@ scn2 #setScenario {
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };
 //#export { format: Matlab, filepath: matlab };
-//#export { format: Julia, filepath: julia };
+#export { format: Julia, filepath: julia };

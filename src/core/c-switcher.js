@@ -51,7 +51,7 @@ class CSwitcher extends _Switcher {
     super.updateReferences(q);
     
     // check math expression refs
-    if (typeof this.trigger === 'undefined') {
+    if (typeof this.trigger !== 'undefined') {
       this.trigger.updateReferences(q);
     }
   }

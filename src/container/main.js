@@ -167,12 +167,14 @@ class Container {
    */
   knitMany(){
     // knit unitDef
-    this.unitDefStorage.forEach((ns) => ns.bind());
+    this.unitDefStorage.forEach((ud) => ud.bind());
     // knit components, only for concrete namespace
     this.namespaceStorage.forEach((ns) => {
       // knit only concrete namespace
       if (!ns.isAbstract) ns.knit();
     });
+    // knit scenario
+    this.scenarioStorage.forEach((sc) => sc.bind());
 
     return this;
   }
