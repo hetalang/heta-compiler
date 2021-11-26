@@ -2,7 +2,10 @@
 
 ## 0.6.8
 
-- support `#setScenario` and `Scenario`
+- `TimeSwitcher`, `DSwitcher`, `CSwitcher` support in mrgsolve
+- support `#setScenario` and `Scenario` (no export)
+- sbml export: proper sequence of listOf, remove garbage
+- remove `SimSolver` export
 
 ## 0.6.7 - ready for JOSS
 

@@ -11,7 +11,6 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [Mrgsolve](#mrgsolve)
 - [XLSX](#xlsx)
 - [Julia](#julia)
-- [SimSolver](#simsolver)
 - [Matlab](#matlab)
 
 See also [Features support table](#features-support)
@@ -287,31 +286,6 @@ Creation of Julia files (.jl).
 };
 ```
 
-## SimSolver
-
-Creation of Julia files (.jl) supported by SimSolver.
-
-### Properties
-
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| spaceFilter | ID[]/ID | | | namespace | the namespase to export |
-
-### Output files
-
-**[filepath]/model.jl** : File storing model code.
-**[filepath]/run.jl** : Code to run model.
-
-**Example:**
-
-```heta
-#export {
-    format: SimSolver,
-    filepath: julia_code, // save result in directory "dist/julia_code"
-    spaceFilter: nameless // create model based on nameless namespace
-};
-```
-
 ## Matlab
 
 Creation of Matlab files (.m) which represent ODE and code to run ODE.
@@ -359,7 +333,6 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
 |`@DSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |+ |+ |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|`@Dose` class (experimental)                            |- |- |- |- |- |- |- |- |-
 |multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+

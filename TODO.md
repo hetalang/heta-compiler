@@ -17,7 +17,6 @@
 [x] SBML L3
 [x] mrgsolve (R)
 [x] simbio (Matlab)
-[x] simsolver (Julia)
 [x] xlsx (Heta)
 [x] another xlsx
 [x] matlab
@@ -42,7 +41,7 @@
 - `#move`, `#moveNS`
 - support `@Switcher {active: false}` in Matlab
 - check unit consistency for Species: amount/area if compartment is area 
-- multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, SimSolver
+- multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, Julia
 - atStart to exports: Matlab, DBSolve
 
 ## ideas

@@ -16,6 +16,7 @@ To read the full documentation, visit the Heta project homepage: <https://hetala
 ## Table of contents
 
 - [Introduction](#introduction)
+- [How to cite](#how-to-cite)
 - [Installation](#installation)
 - [Supported tools](#supported-tools)
 - [Usage of command line interface](#usage-of-command-line-interface)
@@ -38,6 +39,10 @@ Heta compiler can be used as the framework for a QSP modeling project of any siz
 - support iterative modeling platform updates (continuous development approach);
 - support of models written in human-readable text and table formats;
 - export models and data to different popular formats on the fly.
+
+## How to cite
+
+Metelkin, E., (2021). Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats. __Journal of Open Source Software, 6(67), 3708__, [DOI: 10.21105/joss.03708](https://doi.org/10.21105/joss.03708)
 
 ## Installation
 
