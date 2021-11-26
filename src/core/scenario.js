@@ -161,7 +161,7 @@ class Scenario extends Top {
         .forEach((key) => {
           // search in constants
           let foundComponent = this.modelObj.get(key);
-          if (foundComponent === undefined || foundComponent.instanceOf('Const')) {
+          if (foundComponent === undefined || !foundComponent.instanceOf('Const')) {
             let msg = `"${key}" key in Scenario "${this.id}.parameters" must refer to Const.`;
             logger.error(msg, {type: 'BindingError'});
           }
@@ -173,7 +173,7 @@ class Scenario extends Top {
       this.observables.forEach((key) => {
         // search in records
         let foundComponent = this.modelObj.get(key);
-        if (foundComponent === undefined || foundComponent.instanceOf('Record')) {
+        if (foundComponent === undefined || !foundComponent.instanceOf('Record')) {
           let msg = `"${key}" value in Scenario "${this.id}.observables" must refer to Record.`;
           logger.error(msg, {type: 'BindingError'});
         }
@@ -186,7 +186,7 @@ class Scenario extends Top {
         .forEach((key) => {
           // search in switchers
           let foundComponent = this.modelObj.get(key);
-          if (foundComponent === undefined || foundComponent.instanceOf('_Switcher')) {
+          if (foundComponent === undefined || !foundComponent.instanceOf('_Switcher')) {
             let msg = `"${key}" key in Scenario "${this.id}.events_active" must refer to Switcher.`;
             logger.error(msg, {type: 'BindingError'});
           }
@@ -194,12 +194,12 @@ class Scenario extends Top {
     }
 
     // check events_save
-    if (this.events_active !== undefined) {
-      Object.getOwnPropertyNames(this.events_active)
+    if (this.events_save !== undefined) {
+      Object.getOwnPropertyNames(this.events_save)
         .forEach((key) => {
           // search in switchers
           let foundComponent = this.modelObj.get(key);
-          if (foundComponent === undefined || foundComponent.instanceOf('_Switcher')) {
+          if (foundComponent === undefined || !foundComponent.instanceOf('_Switcher')) {
             let msg = `"${key}" key in Scenario "${this.id}.events_active" must refer to Switcher.`;
             logger.error(msg, {type: 'BindingError'});
           }
