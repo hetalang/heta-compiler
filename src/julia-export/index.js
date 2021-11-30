@@ -114,6 +114,13 @@ class JuliaExport extends AbstractExport {
       }).join('');
     });
 
+    // select only rules to calculate ode
+    // TODO: maybe it is betted to calculate only active Processes
+    let odeDeps = ns
+      .selectByInstanceOf('Process')
+      .map((x) => x.id);
+    let odeRules = _minimalRuleList(extendedRuleRecords, uniqBy(odeDeps));
+
     // other switchers
     let events = ns
       .selectByInstanceOf('_Switcher')
@@ -155,6 +162,7 @@ class JuliaExport extends AbstractExport {
       rhs,
       initRecords,
       extendedRuleRecords,
+      odeRules,
       events,
       pTranslator: _.fromPairs(pTranslatorArray),
     };

@@ -116,7 +116,7 @@ function {{ id }}_ode_func_(du, u, p, t)
     {%- for ts in timeScales %}
     {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
     {%- endfor %}
-    {% for record in img.extendedRuleRecords %}
+    {% for record in img.odeRules %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
