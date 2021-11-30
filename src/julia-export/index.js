@@ -122,23 +122,23 @@ class JuliaExport extends AbstractExport {
           .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));
 
         // find all unique dependencies inside assignments
-        let deps = [];
+        let affectDeps = [];
         affect.forEach((x) => {
-          x.dependOn(switcher.id, true).forEach((y) => {
-            if (deps.indexOf(y) === -1) deps.push(y);
-          });
+          let dep = x.dependOn(switcher.id, true);
+          affectDeps.push(...dep);
         });
         
-        // calculate number of rules to include
-        let extendedRuleIds = extendedRuleRecords.map((x) => x.id);
-        let extendedRuleNum = deps.map((x) => extendedRuleIds.indexOf(x));
-        let rulesMaxIndex = Math.max(...extendedRuleNum);
-
         // select rules required for affect
-        let affectRules = extendedRuleRecords.slice(0, rulesMaxIndex + 1);
-        
+        let affectRules = _minimalRuleList(extendedRuleRecords, uniqBy(affectDeps));
+
+        // find all unique dependencies inside trigger
+        let triggerDeps = switcher.trigger.dependOn();
+        // select rules required for switcher
+        let triggerRules = _minimalRuleList(extendedRuleRecords, uniqBy(triggerDeps));
+
         return {
           switcher,
+          triggerRules,
           affect,
           affectRules
         };
@@ -174,3 +174,41 @@ class JuliaExport extends AbstractExport {
 }
 
 module.exports = JuliaExport;
+
+// select sub-array from rulesList which describes deps
+function _minimalRuleList(rulesList, deps = []){
+  // calculate number of rules to include
+  let rulesListIds = rulesList.map((x) => x.id);
+  let rulesListNum = deps.map((x) => rulesListIds.indexOf(x));
+  let rulesMaxIndex = Math.max(...rulesListNum);
+
+  // select rules required
+  return rulesList.slice(0, rulesMaxIndex + 1);
+}
+
+// return array of elements by the selector
+function uniqBy(array, selector = (x) => x) {
+  let indexes = [];
+  let output = [];
+  array.forEach((x) => {
+    let ind = selector(x);
+    if (indexes.indexOf(ind) === -1) {
+      indexes.push(ind);
+      output.push(x);
+    }
+  });
+
+  return output;
+}
+
+/* shorter but slower version
+function uniqBy(array, selector = (x) => x) {
+  let output = [];
+  array.forEach((x) => {
+    let x_ind = output.findIndex((y) => selector(y) === selector(x))
+    if (x_ind === -1) output.push(x);
+  });
+
+  return output;
+}
+*/

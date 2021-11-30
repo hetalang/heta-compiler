@@ -201,7 +201,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
     {%- for ts in timeScales %}
     {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
     {%- endfor %}
-    {% for record in img.extendedRuleRecords %}
+    {% for record in event.triggerRules %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
@@ -227,7 +227,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
     {%- for ts in timeScales %}
     {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
     {%- endfor %}
-    {% for record in img.extendedRuleRecords %}
+    {% for record in event.triggerRules %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
@@ -255,7 +255,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
     {%- for ts in timeScales %}
     {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
     {%- endfor %}
-    {% for record in img.extendedRuleRecords %}
+    {% for record in event.triggerRules %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
