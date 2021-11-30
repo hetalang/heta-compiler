@@ -78,10 +78,6 @@ class JuliaExport extends AbstractExport {
     let dynamicRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => x.isDynamic);
-    // initialize at start records
-    let initRecords = ns
-      .sortExpressionsByContext('start_')
-      .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
     // currently we output all records
     let extendedRuleRecords = ns
       .sortExpressionsByContext('ode_', true)
@@ -114,6 +110,19 @@ class JuliaExport extends AbstractExport {
       }).join('');
     });
 
+    // initialize at start records
+    let initRecordsRaw = ns
+      .sortExpressionsByContext('start_')
+      .filter((x) => x.instanceOf('Record') && (x.assignments['start_'] !== undefined || x.isRule));
+    /* shorter version of rules, but not sure it's effective
+    let initDeps = [].concat(
+      dynamicRecords.map(x => x.id),
+      staticRecords.map(x => x.id)
+    );
+    let initRecords = _minimalRuleList(initRecordsRaw, initDeps);
+    */
+    let initRecords = initRecordsRaw;
+
     // select only rules to calculate ode
     // TODO: maybe it is betted to calculate only active Processes
     let odeDeps = ns
@@ -139,7 +148,7 @@ class JuliaExport extends AbstractExport {
         let affectRules = _minimalRuleList(extendedRuleRecords, uniqBy(affectDeps));
 
         // find all unique dependencies inside trigger
-        let triggerDeps = switcher.trigger.dependOn();
+        let triggerDeps = switcher.trigger ? switcher.trigger.dependOn() : [];
         // select rules required for switcher
         let triggerRules = _minimalRuleList(extendedRuleRecords, uniqBy(triggerDeps));
 
