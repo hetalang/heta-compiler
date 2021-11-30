@@ -115,8 +115,20 @@ class Record extends _Size {
 
     return res;
   }
+  /**
+   * Check if a record is calculated based on rule (repeated assignment) in each time point.
+   * 
+   * When record is of the rule type only `assignments.ode_` property is working. 
+   * 
+   * @getter
+   */
   get isRule(){
-    return _.has(this, 'assignments.ode_'); // this is rule
+    return this.assignments.ode_ !== undefined;
+  }
+  // check if the record will used as a rule in Julia-like formats
+  // this is the same as `isRule` for many Records
+  get isExtendedRule(){
+    return this.assignments.ode_ !== undefined;
   }
   // works properly only after knit()
   get isDynamic(){

@@ -85,35 +85,34 @@ class JuliaExport extends AbstractExport {
     // currently we output all records
     let extendedRuleRecords = ns
       .sortExpressionsByContext('ode_', true)
-      .filter((x) => x.instanceOf('Record'));
+      .filter((x) => x.isExtendedRule);
     let staticRecords = ns
       .selectByInstanceOf('Record')
       .filter((x) => !x.isDynamic && !x.isRule);
     // RHS of ODE
-    let rhs = dynamicRecords
-      .map((record) => {
-        return record.backReferences.map((ref, i) => {
-          if (ref.stoichiometry === -1) {
-            var st = '-';
-          } else if (ref.stoichiometry < 0) {
-            st = ref.stoichiometry + '*';
-          } else if (ref.stoichiometry === 1){
-            st = i === 0 ? '' : '+';
-          } else { // ref.stoichiometry >= 0
-            st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
-          }
-          
-          // XXX this is wrong solution because it results in problem d(comp1*S1)/dt = r1*comp1
-          let isCompartmentRequired = ref._process_.className === 'Process' 
-            && record.instanceOf('Species') 
-            && !record.isAmount;
-          if (isCompartmentRequired) {
-            return st + ref.process + '*' + record.compartment;
-          } else {
-            return st + ref.process;
-          }
-        }).join('');
-      });
+    let rhs = dynamicRecords.map((record) => {
+      return record.backReferences.map((ref, i) => {
+        if (ref.stoichiometry === -1) {
+          var st = '-';
+        } else if (ref.stoichiometry < 0) {
+          st = ref.stoichiometry + '*';
+        } else if (ref.stoichiometry === 1) {
+          st = i === 0 ? '' : '+';
+        } else { // ref.stoichiometry >= 0
+          st = i === 0 ? ref.stoichiometry + '*' : '+' + ref.stoichiometry + '*';
+        }
+        
+        // XXX this is wrong solution because it results in problem d(comp1*S1)/dt = r1*comp1
+        let isCompartmentRequired = ref._process_.className === 'Process' 
+          && record.instanceOf('Species') 
+          && !record.isAmount;
+        if (isCompartmentRequired) {
+          return st + ref.process + '*' + record.compartment;
+        } else {
+          return st + ref.process;
+        }
+      }).join('');
+    });
 
     // other switchers
     let events = ns
@@ -121,10 +120,27 @@ class JuliaExport extends AbstractExport {
       .map((switcher) => {
         let affect = ns.toArray()
           .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));
+
+        // find all unique dependencies inside assignments
+        let deps = [];
+        affect.forEach((x) => {
+          x.dependOn(switcher.id, true).forEach((y) => {
+            if (deps.indexOf(y) === -1) deps.push(y);
+          });
+        });
+        
+        // calculate number of rules to include
+        let extendedRuleIds = extendedRuleRecords.map((x) => x.id);
+        let extendedRuleNum = deps.map((x) => extendedRuleIds.indexOf(x));
+        let rulesMaxIndex = Math.max(...extendedRuleNum);
+
+        // select rules required for affect
+        let affectRules = extendedRuleRecords.slice(0, rulesMaxIndex + 1);
         
         return {
           switcher,
-          affect
+          affect,
+          affectRules
         };
       });
 

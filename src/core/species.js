@@ -68,6 +68,10 @@ class Species extends Record {
 
     return deps;
   }
+  get isExtendedRule(){
+    return this.assignments.ode_ !== undefined
+      || !this.isAmount;
+  }
   _references(){
     let classSpecificRefs = [this.compartment];
 

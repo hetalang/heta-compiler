@@ -3,7 +3,7 @@
   initRecords : all records SORTED by start_ and have start_ or isRule
   dynamicRecords : records with isDynamic = true, i.e. no rules, no boundary, have reactions
   extendedRuleRecords : all records SORTED by ode_
-  staticRecords : records which is not dynamic nor rule
+  staticRecords : records which are not dynamic nor rule
   events : array of {switcher, array of assignments with [switcher]}
   builderName
   options
@@ -283,7 +283,7 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(integrator)
     {%- for ts in timeScales %}
     {{ts.id}} = {{ ts.slope }} * t {# XXX #} + {{ ts.intercept }}
     {%- endfor %}
-    {% for record in img.extendedRuleRecords %}
+    {% for record in event.affectRules %}
     {%- if record.isRule -%}
     {{ record.id }} = {{ record.assignments.ode_.translateSymbol(img.pTranslator).toJuliaString() }}
     {% elif record.instanceOf('Species') and not record.isAmount -%}
