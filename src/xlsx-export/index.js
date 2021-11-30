@@ -1,6 +1,6 @@
 const { AbstractExport } = require('../core/abstract-export');
 const _ = require('lodash');
-const { ajv } = require('../utils');
+const { ajv, uniqBy } = require('../utils');
 
 // how to order columns in sheets
 const propSequence = [
@@ -80,9 +80,8 @@ class XLSXExport extends AbstractExport {
           let keys = _.chain(value) // store unique keys
             .map((x) => Object.keys(x))
             .flatten()
-            .uniq()
             .value();
-          let sequence_i = _.intersection(propSequence, keys);
+          let sequence_i = _.intersection(propSequence, uniqBy(keys));
 
           return {
             content:  value,
@@ -104,16 +103,15 @@ class XLSXExport extends AbstractExport {
       let keys = _.chain(fArr) // store unique keys
         .map((x) => Object.keys(x))
         .flatten()
-        .uniq()
         .value();
-      let sequense_out = _.intersection(propSequence, keys);
+      let sequence_out = _.intersection(propSequence, uniqBy(keys));
 
       return [{
         content: fArr,
         pathSuffix: '',
         type: 'sheet',
         name: this.space,
-        headerSeq: sequense_out
+        headerSeq: sequence_out
       }];
     }
   }

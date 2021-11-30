@@ -1,6 +1,7 @@
 const TopoSort = require('@insysbio/topo-sort');
 const _ = require('lodash');
 const { flatten } = require('./core/utilities');
+const { uniqBy } = require('./utils');
 
 class Namespace extends Map {
   /**
@@ -174,7 +175,7 @@ class Namespace extends Map {
    */
   selectRecordsByContext(context){
     return this.selectByInstanceOf('Record')
-      .filter((record) => _.has(record, 'assignments.' + context));
+      .filter((record) => record.assignments[context] !== undefined);
   }
 
   /**
@@ -183,12 +184,11 @@ class Namespace extends Map {
    * @returns {Unit[]} Array of units.
    */
   getUniqueUnits(){
-    return _
-      .chain(this.selectByInstanceOf('_Size'))
-      .filter((record) => record.unitsSBML() !== undefined)
-      .uniqBy((record) => record.unitsHash(true))
-      .map((record) => record.unitsSBML())
-      .value();
+    let sizesWithUnits = this.selectByInstanceOf('_Size')
+      .filter((record) => record.unitsSBML() !== undefined);
+
+    return uniqBy(sizesWithUnits, (record) => record.unitsHash(true))
+      .map((record) => record.unitsSBML());
   }
 
   /**

@@ -2,7 +2,6 @@
 
 const schema = require('../heta.json-schema');
 const Ajv = require('ajv');
-const _ = require('lodash');
 
 const validator = new Ajv({allErrors: true, jsonPointers: true})
   .addSchema(schema);

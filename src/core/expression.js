@@ -2,7 +2,7 @@
 const { create, all } = require('mathjs');
 const math = create(all);
 const _calcUnit = require('./math-calc-unit');
-const _ = require('lodash');
+const { uniqBy } = require('../utils');
 
 /* 
   To store mathematical expressions with additional methods
@@ -146,7 +146,7 @@ class Expression {
   */
   dependOn(){
     let res = this.dependOnNodes().map((node) => node.name);
-    return _.uniq(res);
+    return uniqBy(res);
   }
   /*
   Get array of all internal elements
