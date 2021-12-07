@@ -64,7 +64,7 @@ end
   format: SBML,
   filepath: sbml,
   version: L2V4,
-  spaceFilter: [two, one]
+  spaceFilter: []
 };
 
 

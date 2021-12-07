@@ -2,6 +2,8 @@
 
 ## 0.6.9
 
+- multispace export for `format: SBML`
+- `spaceFilter` prop for `format: HetaCode` 
 - remove unnecessary rules from `format: Julia`
 
 ## 0.6.8
