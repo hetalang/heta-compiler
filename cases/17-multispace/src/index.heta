@@ -64,10 +64,15 @@ end
   format: SBML,
   filepath: sbml,
   version: L2V4,
-  spaceFilter: []
+  spaceFilter: [one,two]
+};
+#export {
+  format: Simbio,
+  filepath: simbio,
+  //spaceFilter: [one,two]
 };
 
-
+// export 3
 #export {
   format: SLV,
   filepath: model,
@@ -78,11 +83,6 @@ end
   format: DBSolve,
   filepath: model_dbs,
   eventsOff: false,
-  spaceFilter: one
-};
-#export {
-  format: Simbio,
-  filepath: simbio,
   spaceFilter: one
 };
 #export {

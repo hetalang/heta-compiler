@@ -22,8 +22,6 @@ class SimbioExport extends AbstractExport{
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
       this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
     }
   }
   get className(){
@@ -33,26 +31,36 @@ class SimbioExport extends AbstractExport{
     return 'Simbio';
   }
   make(){
-    // XXX: currently we use only one namespace
     let logger = this._container.logger;
-    if (this.spaceFilter.length === 0) { // check non-empty space filter
-      let msg = 'spaceFilter for Simbio format should include at least one namespace but is empty';
-      logger.error(msg);
-      var content = '';
-    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) { // check namespace existence
-      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.error(msg);
-      content = '';
-    } else if (this._container.namespaceStorage.get(this.spaceFilter[0]).isAbstract) { // if abstract
-      let msg = `Abstract Namespace "${this.spaceFilter[0]}" cannot be used for Simbio export.`;
-      logger.error(msg);
-      content = '';
-    } else {
-      if (this.spaceFilter.length > 1) { // check multi-space
-        let msg = `Simbio format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
-        logger.warn(msg);
+
+    if (this.spaceFilter !== undefined) {
+      // empty namespace is not allowed
+      if (this.spaceFilter.length === 0) { // check non-empty space filter
+        let msg = 'spaceFilter for Simbio format should include at least one namespace but is empty';
+        logger.error(msg);
+        return []; // BRAKE
       }
-      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
+
+      // check if namespaces exists
+      let lostNamespaces = this.spaceFilter.filter((x) => {
+        let ns = this._container.namespaceStorage.get(x);
+        return !ns || ns.isAbstract;
+      });
+      if (lostNamespaces.length > 0) {
+        let msg = `Namespaces: ${lostNamespaces.join(', ')} either do not exist or are abstract. Simbio export stopped.`;
+        logger.error(msg);
+        return []; // BRAKE
+      }
+    }
+
+    // filter namespaces if set
+    let selectedNamespaces = this.spaceFilter !== undefined 
+      ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
+      : [...this._container.namespaceStorage].filter((x) => !x[1].isAbstract);
+
+    let results = selectedNamespaces.map((x) => {
+      let spaceName = x[0];
+      let ns = x[1];
 
       // checking unitTerm for Species
       ns.selectByInstanceOf('Species')
@@ -95,21 +103,22 @@ class SimbioExport extends AbstractExport{
         });
 
       let image = this.getSimbioImage(ns);
-      content = this.getSimbioCode(image);
-    }
+      let content = this.getSimbioCode(image);
 
-    return [
-      {
+      return {
         content: content,
-        pathSuffix: '/model.m',
+        pathSuffix: `/${spaceName}.m`,
         type: 'text'
-      },
-      {
-        content: this.getFunCode(),
-        pathSuffix: '/tern__.m',
-        type: 'text'
-      }
-    ];
+      };
+    });
+
+    results.push({
+      content: this.getFunCode(),
+      pathSuffix: '/tern__.m',
+      type: 'text'
+    });
+
+    return results;
   }
   getSimbioImage(ns){
     return {

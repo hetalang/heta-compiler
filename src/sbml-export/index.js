@@ -74,7 +74,7 @@ class SBMLExport extends AbstractExport {
 
       if (ns.isAbstract) {
         let msg = `UnitDefinitions in SBML will be skipped for the abstract namespace "${spaceName}".`;
-        logger.warn(msg);
+        logger.info(msg);
       }
       
       return {
