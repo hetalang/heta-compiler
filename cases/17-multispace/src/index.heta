@@ -23,17 +23,27 @@ namespace one begin
   k1 @Const = 1e-5 {units: 1/minute};
 end
 
+abstract namespace two begin
+  s2 @Species { compartment: comp2, units: uM } .= 10;
+  s3 @Species { compartment: comp2, units: umole, isAmount: true } .= 0;
+  r2 @Reaction {
+    actors: s2 => s3
+  };
+  r2 := k1 * s2 * comp2;
+  k1 @Const = 1e-5 {units: 1/minute};
+end
+
 // exports
 #export {
   format: JSON,
   filepath: output,
-  spaceFilter: [ nameless, one ],
+  spaceFilter: [ nameless, one, two ],
   noUnitsExpr: false
 };
 #export {
   format: YAML,
   filepath: output,
-  spaceFilter: nameless,
+  spaceFilter: one,
   noUnitsExpr: false
 };
 #export {
@@ -41,21 +51,19 @@ end
   filepath: table,
   omitRows: 3,
   splitByClass: true,
-  spaceFilter: [ nameless, one ]
+  spaceFilter: one
 };
 #export {
-  format: AnotherXLSX,
-  filepath: another_table,
-  omitRows: 3,
-  splitByClass: true,
-  spaceFilter: [ nameless, one ]
+  format: HetaCode,
+  filepath: heta-generated,
+  spaceFilter: [one,two]
 };
 
 #export {
   format: SBML,
   filepath: sbml,
   version: L2V4,
-  spaceFilter: [one, nameless]
+  spaceFilter: [two,one]
 };
 #export {
   format: SLV,

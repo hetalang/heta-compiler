@@ -1,7 +1,6 @@
 const { AbstractExport } = require('../core/abstract-export');
 const { ajv } = require('../utils');
 const _ = require('lodash');
-const { concat } = require('lodash');
 
 const schema = {
   type: 'object',
@@ -28,7 +27,7 @@ class JSONExport extends AbstractExport {
     return 'JSONExport';
   }
   get format(){
-    return 'JSON'
+    return 'JSON';
   }
   static get validate(){
     return ajv.compile(schema);
