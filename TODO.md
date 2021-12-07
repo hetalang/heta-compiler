@@ -27,6 +27,7 @@
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)
 [ ] ODEs in markdown/latex/ascii
+[ ] DOT language / Graphviz
 
 ## bugs
 

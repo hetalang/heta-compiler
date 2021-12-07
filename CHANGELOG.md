@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.9
+
+- remove unnecessary rules from `format: Julia`
+
 ## 0.6.8
 
 - `TimeSwitcher`, `DSwitcher`, `CSwitcher` support in mrgsolve
