@@ -33,7 +33,7 @@ abstract namespace two begin
   k1 @Const = 1e-5 {units: 1/minute};
 end
 
-// exports
+// exports 1
 #export {
   format: JSON,
   filepath: output,
@@ -59,12 +59,15 @@ end
   spaceFilter: [one,two]
 };
 
+// exports 2
 #export {
   format: SBML,
   filepath: sbml,
   version: L2V4,
-  spaceFilter: [two,one]
+  spaceFilter: [two, one]
 };
+
+
 #export {
   format: SLV,
   filepath: model,

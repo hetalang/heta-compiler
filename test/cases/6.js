@@ -6,7 +6,7 @@ const chaiXml = require('chai-xml');
 use(chaiXml);
 const fs = require('fs-extra');
 
-const sbml_correct = fs.readFileSync('cases/6-import/master/output_sbml.xml','utf8');
+const sbml_correct = fs.readFileSync('cases/6-import/master/output_sbml/model.xml','utf8');
 const json_correct = require('../../cases/6-import/master/output_json.json');
 
 describe('Testing "cases/6-import"', () => {

@@ -38,7 +38,7 @@ class SBMLExport extends AbstractExport {
     return 'SBMLExport';
   }
   get format(){
-    return 'SBML'
+    return 'SBML';
   }
   static get validate(){
     return ajv.compile(schema);
@@ -66,7 +66,7 @@ class SBMLExport extends AbstractExport {
 
     return [{
       content: content,
-      pathSuffix: '.xml',
+      pathSuffix: '/model.xml',
       type: 'text'
     }];
   }

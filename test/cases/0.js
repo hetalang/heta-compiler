@@ -17,8 +17,8 @@ const fs = require('fs-extra');
 const { slvParse } = require('slv-utils');
 const XLSX = require('xlsx'); 
 
-const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4.xml','utf8');
-const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1.xml','utf8');
+const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4/model.xml','utf8');
+const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/model.xml','utf8');
 const json_correct = require('../../cases/0-hello-world/master/full_json.json');
 const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
 const yaml_correct = safeLoad(yaml_correct_text);
