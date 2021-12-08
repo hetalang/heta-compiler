@@ -76,24 +76,26 @@ end
 #export {
   format: Mrgsolve,
   filepath: mrgsolve,
-  spaceFilter: [nameless,one]
+  spaceFilter: [nameless, one]
 };
+
 #export {
   format: SLV,
-  filepath: model,
+  filepath: model_slv,
   eventsOff: false,
-  spaceFilter: one
+  spaceFilter: [one]
 };
 #export {
   format: DBSolve,
   filepath: model_dbs,
   eventsOff: false,
-  spaceFilter: one
+  spaceFilter: [one]
 };
+
 #export {
   format: Matlab,
   filepath: matlab,
-  spaceFilter: nameless
+  spaceFilter: [nameless, one]
 };
 #export {
   format: Julia,

@@ -2,8 +2,9 @@
 
 ## 0.6.9
 
+- multispace export for `format: Mrgsolve`, `format: DBSolve`, `format: SLV`
 - multispace export for `format: SBML`, `format: Simbio`
-- `spaceFilter` prop for `format: HetaCode` 
+- `spaceFilter` prop for `format: HetaCode`
 - remove unnecessary rules from `format: Julia`
 
 ## 0.6.8

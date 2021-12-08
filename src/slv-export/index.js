@@ -33,8 +33,6 @@ class SLVExport extends AbstractExport{
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
       this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
     }
   }
   get className(){
@@ -49,31 +47,49 @@ class SLVExport extends AbstractExport{
    * @return {string} Text code of exported format.
    */
   make(){
-    // use only one namespace
     let logger = this._container.logger;
-    if (this.spaceFilter.length === 0) {
-      let msg = 'spaceFilter for SLV format should include at least one namespace, got empty.';
-      logger.error(msg);
-      var content = '';
-    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
-      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.error(msg);
-      content = '';
-    } else {
-      if (this.spaceFilter.length > 1) {
-        let msg = `SLV format does not support multi-space export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
-        logger.warn(msg);
+
+    if (this.spaceFilter !== undefined) {
+      // empty namespace is not allowed
+      if (this.spaceFilter.length === 0) {
+        let msg = 'spaceFilter for SLV format should include at least one namespace, got empty.';
+        logger.error(msg);
+        return []; // BRAKE
       }
-      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
-      let image = this.getSLVImage(ns);
-      content = this.getSLVCode(image);
+
+      // check if namespaces exists
+      let lostNamespaces = this.spaceFilter.filter((x) => {
+        let ns = this._container.namespaceStorage.get(x);
+        return !ns || ns.isAbstract;
+      });
+
+      if (lostNamespaces.length > 0) {
+        let msg = `Namespaces: ${lostNamespaces.join(', ')} either do not exist or are abstract. Simbio export stopped.`;
+        logger.error(msg);
+        return []; // BRAKE
+      }
     }
 
-    return [{
-      content: content,
-      pathSuffix: '.slv',
-      type: 'text'
-    }];
+    // filter namespaces if set
+    let selectedNamespaces = this.spaceFilter !== undefined 
+      ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
+      : [...this._container.namespaceStorage].filter((x) => !x[1].isAbstract);
+
+    let results = selectedNamespaces.map((x) => {
+      let spaceName = x[0];
+      let ns = x[1];
+
+      let image = this.getSLVImage(ns);
+      let content = this.getSLVCode(image);
+        
+      return {
+        content: content,
+        pathSuffix: `/${spaceName}.slv`,
+        type: 'text'
+      };
+    });
+
+    return results;
   }
   /**
    * Creates model image by necessary components based on space.

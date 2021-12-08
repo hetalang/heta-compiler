@@ -66,7 +66,6 @@ describe('Testing creation of UnitTerm from Unit', () => {
   it('Check ttt1 UnitDefinition', () => {
     let ud0 = p.unitDefStorage.get('ttt1');
     let ut0 = ud0.unitsParsed.toTerm();
-    console.log(ut0);
     expect(ut0).to.be.deep.equal([
       {kind: 'mass', exponent: 1}
     ]);
