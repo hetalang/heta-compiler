@@ -1,11 +1,13 @@
 # preamble
 library('mrgsolve')
 
-# load model
-{{ population.spaceName }}_model <- mrgsolve::mread(model = '{{ population.spaceName }}', file = 'model.cpp')
+# load models
+{%- for ns in selectedNamespaces %}
+{{ ns[0] }}_model <- mrgsolve::mread(model = '{{ ns[0] }}', file = '{{ ns[0] }}.cpp')
+{%-endfor %}
 
-# run model
-sim <- {{ population.spaceName }}_model %>%
+# run first model
+sim <- {{ selectedNamespaces[0][0] }}_model %>%
   mrgsim(
     delta = 1,
     hmax = 0,

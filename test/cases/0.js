@@ -25,7 +25,7 @@ const yaml_correct = safeLoad(yaml_correct_text);
 const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
 const slv_correct = slvParse.parse(slv_correct_text);
 const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/table.xlsx');
-const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mm_mrg/model.cpp','utf8');
+const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mm_mrg/mm.cpp','utf8');
 const julia_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model.jl','utf8');
 
 describe('Testing "cases/0-hello-world"', () => {
@@ -118,7 +118,7 @@ describe('Testing "cases/0-hello-world"', () => {
     let mm_mrg = b.container.exportStorage.get('mm_mrg');
     let code = mm_mrg.make(true);
     // compare model.cpp text content
-    expect(code[0].pathSuffix).to.be.equal('/model.cpp');
+    expect(code[0].pathSuffix).to.be.equal('/mm.cpp');
     expect(code[0].type).to.be.equal('text');
     expect(code[0].content).to.be.equal(mrgsolve_correct);
   });

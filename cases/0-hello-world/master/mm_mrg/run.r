@@ -2,7 +2,7 @@
 library('mrgsolve')
 
 # load model
-mm_model <- mrgsolve::mread(model = 'mm', file = 'model.cpp')
+mm_model <- mrgsolve::mread(model = 'mm', file = 'mm.cpp')
 
 # run model
 sim <- mm_model %>%

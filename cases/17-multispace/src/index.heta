@@ -74,6 +74,11 @@ end
 
 // export 3
 #export {
+  format: Mrgsolve,
+  filepath: mrgsolve,
+  spaceFilter: [nameless,one]
+};
+#export {
   format: SLV,
   filepath: model,
   eventsOff: false,
@@ -88,11 +93,6 @@ end
 #export {
   format: Matlab,
   filepath: matlab,
-  spaceFilter: nameless
-};
-#export {
-  format: Mrgsolve,
-  filepath: mrgsolve,
   spaceFilter: nameless
 };
 #export {
