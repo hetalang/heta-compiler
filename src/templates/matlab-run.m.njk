@@ -18,8 +18,8 @@ p_names = [
 ];
 
 % initialization of constants and model
-p = param();
-[ode_func, out_func, y0, events_conditions, events_affects] = model(p);
+p = {{ namespace.spaceName }}_param();
+[ode_func, out_func, y0, events_conditions, events_affects] = {{ namespace.spaceName }}_model(p);
 
 %%% default task
 t_span = [0 100]; % [0:1:100]

@@ -4,8 +4,8 @@
 // add qsp units
 include ./qsp-units.heta
 
-comp1 @Compartment .= 1 { units: L };
-s1 @Species { compartment: comp1, units: uM } .= 10;
+comp1 @Compartment .= 1 { units: L, output: true };
+s1 @Species { compartment: comp1, units: uM, output: true } .= 10;
 r1 @Reaction {
   actors: s1 =>
 };
@@ -13,8 +13,8 @@ r1 := k1 * s1 * comp1;
 k1 @Const = 1e-3 {units: 1/minute};
 
 namespace one begin
-  comp2 @Compartment .= 1 { units: L };
-  s2 @Species { compartment: comp2, units: uM } .= 10;
+  comp2 @Compartment .= 1 { units: L, output: true };
+  s2 @Species { compartment: comp2, units: uM, output: true } .= 10;
   s3 @Species { compartment: comp2, units: umole, isAmount: true } .= 0;
   r2 @Reaction {
     actors: s2 => s3

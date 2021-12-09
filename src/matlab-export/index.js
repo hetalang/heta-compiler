@@ -24,8 +24,6 @@ class MatlabExport extends AbstractExport {
       this.spaceFilter = q.spaceFilter;
     } else if (typeof q.spaceFilter === 'string') {
       this.spaceFilter = [q.spaceFilter];
-    } else {
-      this.spaceFilter = ['nameless'];
     }
   }
   get className(){
@@ -41,50 +39,66 @@ class MatlabExport extends AbstractExport {
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   make(skipVersionCode = false){
-    // use only one namespace
     let logger = this._container.logger;
-    if (this.spaceFilter.length === 0) {
-      let msg = 'spaceFilter for Matlab format should include at least one namespace but get empty';
-      logger.error(msg);
-      var modelContent = '';
-      var paramContent = '';
-      var runContent = '';
-    } else if (!this._container.namespaceStorage.has(this.spaceFilter[0])) {
-      let msg = `Namespace "${this.spaceFilter[0]}" does not exist.`;
-      logger.error(msg);
-      modelContent = '';
-      paramContent = '';
-      runContent = '';
-    } else {
-      if (this.spaceFilter.length > 1) {
-        let msg = `Matlab format does not support multispace export. Only first namespace "${this.spaceFilter[0]}" will be used.`;
-        logger.warn(msg);
-      }
-      let ns = this._container.namespaceStorage.get(this.spaceFilter[0]);
-      let image = this.getMatlabImage(ns);
 
-      modelContent = this.getModelCode(image);
-      paramContent = this.getParamCode(image);
-      runContent = this.getRunCode(image);
+    if (this.spaceFilter !== undefined) {
+      // empty namespace is not allowed
+      if (this.spaceFilter.length === 0) {
+        let msg = 'spaceFilter for Matlab format should include at least one namespace but get empty';
+        logger.error(msg);
+        return []; // BRAKE
+      }
+
+      // check if namespaces exists
+      let lostNamespaces = this.spaceFilter.filter((x) => {
+        let ns = this._container.namespaceStorage.get(x);
+        return !ns || ns.isAbstract;
+      });
+      if (lostNamespaces.length > 0) {
+        let msg = `Namespaces: ${lostNamespaces.join(', ')} either do not exist or are abstract. Simbio export stopped.`;
+        logger.error(msg);
+        return []; // BRAKE
+      }
     }
 
-    return [
-      {
+    // filter namespaces if set
+    let selectedNamespaces = this.spaceFilter !== undefined 
+      ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
+      : [...this._container.namespaceStorage].filter((x) => !x[1].isAbstract);
+
+    let results = [];
+
+    selectedNamespaces.forEach((x) => {
+      let spaceName = x[0];
+      let ns = x[1];
+
+      let image = this.getMatlabImage(ns);
+
+      let modelContent = this.getModelCode(image);
+      let paramContent = this.getParamCode(image);
+      let runContent = this.getRunCode(image);
+      
+
+      results.push({
         content: modelContent,
-        pathSuffix: '/model.m',
+        pathSuffix: `/${spaceName}_model.m`,
         type: 'text'
-      },
-      {
+      });
+
+      results.push({
         content: paramContent,
-        pathSuffix: '/param.m',
+        pathSuffix: `/${spaceName}_param.m`,
         type: 'text'
-      },
-      {
+      });
+
+      results.push({
         content: runContent,
-        pathSuffix: '/run.m',
+        pathSuffix: `/${spaceName}_run.m`,
         type: 'text'
-      }
-    ];
+      });
+    });
+
+    return results;
   }
   getMatlabImage(ns){
     let builderName = pkg.name + ' of v' + pkg.version;
