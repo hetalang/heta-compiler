@@ -47,6 +47,11 @@ class TimeScale extends _Size { // implicit extend Numeric
     if (this.intercept !== 0) res.intercept = this.intercept;
     if (this.output === true) res.output = this.output;
 
+    // for t only
+    if (this.id === 't') {
+      delete res.class;
+    }
+
     return res;
   }
   get legalTerms(){

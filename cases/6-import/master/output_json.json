@@ -5,7 +5,6 @@
     "space": "model"
   },
   {
-    "class": "TimeScale",
     "id": "t",
     "space": "model"
   },
