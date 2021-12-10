@@ -44,7 +44,7 @@ class MatlabExport extends AbstractExport {
     if (this.spaceFilter !== undefined) {
       // empty namespace is not allowed
       if (this.spaceFilter.length === 0) {
-        let msg = 'spaceFilter for Matlab format should include at least one namespace but get empty';
+        let msg = 'spaceFilter for Matlab format should include at least one namespace, got empty';
         logger.error(msg);
         return []; // BRAKE
       }
@@ -139,11 +139,6 @@ class MatlabExport extends AbstractExport {
         }
       });
 
-    let yTranslator = dynamicRecords
-      .map((x, i) => [x.id, `y(${i+1})`]);
-    let pTranslator = constants
-      .map((x, i) => [x.id, `p(${i+1})`]);
-
     // create events from switchers
     let events = ns
       .selectByInstanceOf('_Switcher')
@@ -159,6 +154,14 @@ class MatlabExport extends AbstractExport {
           affect
         };
       });
+
+    let yTranslator = dynamicRecords
+      .map((x, i) => [x.id, `y(${i+1})`]);
+    let pTranslator = constants
+      .map((x, i) => [x.id, `p(${i+1})`]);
+    // add from events
+    let const_len = constants.length;
+    events.forEach((x, i) => pTranslator.push([x.switcher.id + '_', `p(${const_len + i + 1})`]));
 
     return { 
       builderName,

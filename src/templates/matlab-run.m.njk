@@ -10,11 +10,10 @@ output_ids = [
 "{{ record.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}
 ];
-% full list of constants, not used
+% full list of constants (not used)
 p_names = [
-{%- for con in constants -%}
-"{{ con.id }}"{{ ', ' if not loop.last }}
-{%- endfor -%}
+{%- for con in constants %}"{{ con.id }}", {% endfor -%}
+{%- for evt in events %}"{{ evt.switcher.id }}_", {% endfor -%}
 ];
 
 % initialization of constants and model
