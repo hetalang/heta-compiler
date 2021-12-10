@@ -40,9 +40,7 @@
 - checking legal functions inside Expressions and its arguments
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - `#move`, `#moveNS`
-- support `@Switcher {active: false}` in Matlab
 - check unit consistency for Species: amount/area if compartment is area 
-- multi-space export in Matlab, DBSolve, SLV, SBML, Simbio, Mrgsolve, Julia
 - atStart to exports: Matlab, DBSolve
 
 ## ideas

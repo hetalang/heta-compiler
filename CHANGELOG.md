@@ -2,6 +2,7 @@
 
 ## 0.6.9
 
+- support active/inactive events for `format: Matlab` 
 - multispace export for `format: Matlab`
 - multispace export for `format: Mrgsolve`, `format: DBSolve`, `format: SLV`
 - multispace export for `format: SBML`, `format: Simbio`
