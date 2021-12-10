@@ -127,7 +127,8 @@ class Component {
     if (this.notes === undefined) {
       return undefined;
     }
-    return md.render(this.notes);
+    let renderedOutput = md.render(this.notes);
+    return renderedOutput.trim();
   }
   static isValid(q, logger){
     let ind = q.space ? `${q.space}::${q.id}` : q.id;
