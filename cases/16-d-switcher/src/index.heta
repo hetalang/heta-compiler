@@ -23,7 +23,7 @@ x2 [sw1]= x2 + 100; // reassign static record
 #export { format: YAML, filepath: output };
 #export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
 #export { format: SBML, filepath: sbml, version: L2V4 };
-#export { format: SLV, filepath: model, eventsOff: false };
+#export { format: SLV, filepath: slv, eventsOff: false };
 #export { format: DBSolve, filepath: dbsolve };
 #export { format: Simbio, filepath: simbio };
 #export { format: Mrgsolve, filepath: mrgsolve };

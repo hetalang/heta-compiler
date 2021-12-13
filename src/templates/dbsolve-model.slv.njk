@@ -473,33 +473,37 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 {%- endblock %}
 {{ '//! Discrete events' if discreteEvents | length > 0 }}
 {%- for evt in discreteEvents %}
-if({{ evt.switcher.id }}_>0){
+if({{ evt.switcher.id }}_ > 0){
+if({{ evt.switcher.id }}_down_ == 0){
   if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){
     {%- for assign in evt.assignments %}
     {{ assign.target }} = {{ assign.expr.toSLVString(powTransform) }};
     {%- endfor %}
-    {{ evt.switcher.id }}_ = 0;
+    {{ evt.switcher.id }}_down_ = 1;
   }else{}
 }else{
   if({{ evt.switcher.trigger.toSLVString(powTransform) if evt.switcher.trigger is defined }}){}else{
-    {{ evt.switcher.id }}_ = 1;
+    {{ evt.switcher.id }}_down_ = 0;
   }
 }
+}else{}
 {%- endfor %}
 {{ '//! Continuous events' if continuousEvents | length > 0 }}
 {%- for evt in continuousEvents %}
-if({{ evt.switcher.id }}_>0){
+if({{ evt.switcher.id }}_ > 0){
+if({{ evt.switcher.id }}_down_ == 0){
   if({{ evt.switcher.trigger.toSLVString(powTransform) + '>=0' if evt.switcher.trigger is defined }}){
     {%- for assign in evt.assignments %}
     {{ assign.target }} = {{ assign.expr.toSLVString(powTransform) }};
     {%- endfor %}
-    {{ evt.switcher.id }}_ = 0;
+    {{ evt.switcher.id }}_down_ = 1;
   }else{}
 }else{
   if({{ evt.switcher.trigger.toSLVString(powTransform) + '>=0' if evt.switcher.trigger is defined }}){}else{
-    {{ evt.switcher.id }}_ = 1;
+    {{ evt.switcher.id }}_down_ = 0;
   }
 }
+}else{}
 {%- endfor %}
 #
 
@@ -549,13 +553,15 @@ if({{ evt.switcher.id }}_>0){
 {%- if discreteEvents | length > 0 %}
 //! Switchers for discrete events, count {{ discreteEvents | length }}
 {%- for evt in discreteEvents %}
-{{ evt.switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @DSwitcher {  }
+{{ evt.switcher.id }}_ = {{ 1 if evt.switcher.active else 0 }}; // @DSwitcher {  }
+{{ evt.switcher.id }}_down_ = 0;
 {%- endfor %}
 {%- endif %}
 {%- if continuousEvents | length > 0 %}
 //! Switchers for continuous events, count {{ continuousEvents | length }}
 {%- for evt in continuousEvents %}
-{{ evt.switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @CSwitcher {  }
+{{ evt.switcher.id }}_ = {{ 1 if evt.switcher.active else 0 }}; // @CSwitcher {  }
+{{ evt.switcher.id }}_down_ = 0;
 {%- endfor %}
 {%- endif %}
 {% endblock %}
