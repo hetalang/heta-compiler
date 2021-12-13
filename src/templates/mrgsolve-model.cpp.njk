@@ -18,11 +18,11 @@ $PARAM @annotated
 {%- endfor %}
 {%- for evt in timeEvents %}
 // @{{ evt.switcher.className }} {{ "'"+evt.switcher.title+"'" if evt.switcher.title is defined }}
-{{ evt.switcher.id }} : {{ '1' if evt.switcher.active==true else '0' }} : 
+{{ evt.switcher.id }}_ : {{ '1' if evt.switcher.active==true else '0' }} : 
 {%- endfor %}
 {%- for evt in continuousEvents %}
 // @{{ evt.switcher.className }} {{ "'"+evt.switcher.title+"'" if evt.switcher.title is defined }}
-{{ evt.switcher.id }} : {{ '1' if evt.switcher.active==true else '0' }} : 
+{{ evt.switcher.id }}_ : {{ '1' if evt.switcher.active==true else '0' }} : 
 {%- endfor %}
 
 $CMT @annotated
@@ -60,7 +60,7 @@ $MAIN
 $TABLE
 {%- for evt in timeEvents %}
 // {{ evt.switcher.id }} @{{ evt.switcher.className }}
-if ({{ evt.switcher.id }} && EVID=={{ loop.index0 + 10 }}{{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
+if ({{ evt.switcher.id }}_ && EVID=={{ loop.index0 + 10 }}{{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
   {%- for assign in evt.assignments %}
   {%- if assign.num >= 0 %} {# for synamic #}
   {%- set evtId = 'evt_' + assign.target + '_' %}
@@ -87,7 +87,7 @@ if ({{ evt.switcher.id }} && EVID=={{ loop.index0 + 10 }}{{ ' && TIME>0.0' if no
 {%- set evtCondition = evt.switcher.trigger.toCString({timeVariable: 'TIME'}) + '>=0.0' 
   if evt.switcher.className == 'CSwitcher'
   else evt.switcher.trigger.toCString({timeVariable: 'TIME'}) %}
-if ({{ evt.switcher.id }} && !{{ evt.switcher.id }}_down_ && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
+if ({{ evt.switcher.id }}_ && !{{ evt.switcher.id }}_down_ && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
   {{ evt.switcher.id }}_down_ = true;
 
   {%- for assign in evt.assignments %}
