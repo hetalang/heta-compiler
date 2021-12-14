@@ -8,8 +8,8 @@ p1 @Record {output: true} .= 10;
 x3 @Species { compartment: comp1, output: true } .= 12.12;
 
 #export { filepath: sbml, format: SBML };
-#export { filepath: model, format: SLV };
-#export { filepath: model, format: DBSolve };
+#export { filepath: slv, format: SLV };
+#export { filepath: dbsolve, format: DBSolve };
 #export { filepath: julia, format: Julia };
 #export { filepath: matlab, format: Matlab };
 #export { filepath: simbio, format: Simbio };

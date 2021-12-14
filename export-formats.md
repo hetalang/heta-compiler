@@ -96,8 +96,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 ### Known restrictions
 
 - `Compartment` which changes in time may result in wrong ODE.
-- `CSwitcher` is not supported.
-- `DSwitcher` does not work for dynamic (ode variables) Records.
+- `CSwitcher` and `DSwitcher` are not supported.
 - Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
 - `Infinity`, `-Infinity`, `NaN` values is not supported
 - boolean operators like `and`, `or`, etc. are not supported
@@ -119,14 +118,14 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 
 Export to DBSolve format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
 
-This is the updated version of SLV export format which supports compartment volumes changed in time and initilazing records by arbitrary expressions.
+This is the updated version of SLV export format which supports compartment volumes changed in time and initializing records by arbitrary expressions.
 
 ### Properties
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+| spaceFilter | ID[]/ID | | nameless | namespace | the namespace to export |
 | groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
 
 ### Output files
@@ -135,8 +134,6 @@ This is the updated version of SLV export format which supports compartment volu
 
 ### Known restrictions
 
-- `CSwitcher` is not supported and will be skipped.
-- `DSwitcher` does not work for dynamic (ode variables) Records.
 - `Infinity`, `-Infinity`, `NaN` values is not supported
 - boolean operators like `and`, `or`, etc. are not supported
 
@@ -329,11 +326,10 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |+ |+ |+ |+ |+ |+
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+
-|`@CSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |+ |+ |+ |+ |+ |+
+|`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+
 |`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|`@DSwitcher` class                                      |+ (for static only) |+ (for static only) |+ |+ |+ |+ |+ |+ |+
+|`@DSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+
 |`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|multispace `#export`                                    |- |- |+ |- |- |- |- |+ |+
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+
