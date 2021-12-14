@@ -196,55 +196,23 @@ class SLVExport extends AbstractExport{
         }
       });
 
-    // Discrete Events
-    let discreteEvents = ns
+    // DEvents
+    let dSwitchers = ns
       .selectByClassName('DSwitcher')
-      .map((switcher) => {
-        // check boolean expression in trigger
-        if (!switcher.trigger.isComparison) {
-          let msg = `SLV supports only simple comparison operators in DSwitcher trigger, got: "${switcher.trigger.toString()}"`;
-          logger.error(msg, {type: 'ExportError'});
-        }       
-        
-        let assignments = ns
-          .selectRecordsByContext(switcher.id);
-          
-        // unsupported events for dynamic
-        let dynamicRecords = assignments
-          .filter((record) => record.isDynamic)
-          .map((record) => record.index);
-        if (dynamicRecords.length > 0) {
-          let msg = `SLV doesn't support ${switcher.className} for dynamic records: ${dynamicRecords.join(', ')}.`;
-          logger.error(msg, {type: 'ExportError'});
-        }
-        
-        return {
-          switcher,
-          assignments
-        };
-      });
+      .map((x) => x.id);
+    if (dSwitchers.length > 0) {
+      let msg = `SLV doesn't support @DSwitchers: ${dSwitchers.join(', ')}.`;
+      logger.error(msg, {type: 'ExportError'});
+    }
 
-    // Continuous Events
-    let continuousEvents = ns
+    // CEvents
+    let cSwitchers = ns
       .selectByClassName('CSwitcher')
-      .map((switcher) => {
-        let assignments = ns
-          .selectRecordsByContext(switcher.id);
-
-        // unsupported events for dynamic
-        let dynamicRecords = assignments
-          .filter((record) => record.isDynamic)
-          .map((record) => record.index);
-        if (dynamicRecords.length > 0) {
-          let msg = `SLV doesn't support ${switcher.className} for dynamic records: ${dynamicRecords.join(', ')}.`;
-          logger.error(msg, {type: 'ExportError'});
-        }
-
-        return {
-          switcher,
-          assignments
-        };
-      });
+      .map((x) => x.id);
+    if (cSwitchers.length > 0) {
+      let msg = `SLV doesn't support @CSwitchers: ${cSwitchers.join(', ')}.`;
+      logger.error(msg, {type: 'ExportError'});
+    }
 
     // group Const
     let groupedConst = _.groupBy(
@@ -259,8 +227,6 @@ class SLVExport extends AbstractExport{
       matrix,
       rhs,
       events: timeEvents,
-      discreteEvents,
-      continuousEvents,
       groupedConst: groupedConst,
       powTransform: this.powTransform
     };

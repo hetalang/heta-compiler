@@ -2,6 +2,7 @@
 
 ## 0.6.9
 
+- remove support of `DSwitcher`, `CSwitcher` in `{format: SLV}`
 - support of `CSwitcher`, `DSwitcher` in `{format: DBSolve}`
 - support active/inactive events for `format: Matlab` 
 - multispace export for `format: Matlab`
