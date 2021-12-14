@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.6.9
+## 0.6.9 - multispace
 
 - remove support of `DSwitcher`, `CSwitcher` in `{format: SLV}`
 - support of `CSwitcher`, `DSwitcher` in `{format: DBSolve}`

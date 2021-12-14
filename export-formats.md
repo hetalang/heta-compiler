@@ -20,6 +20,7 @@ The general format for all export actions is the following:
 #export {
     format: JSON, // or other supported formats, required
     filepath: path/to/output, // Relative or absolute path to generated directory or file
+    spaceFilter: [nameless, another] // [] if set, namespaces out of the list will be skipped.
     ... // other options
 };
 ```
@@ -34,7 +35,6 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
 | ---------|------|----------|---------|-----|-------------|
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | noUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr. If `true` all unit will be written in Unit array format. |
-| spaceFilter | ID[]/ID | | | namespace | if set, namespaces out of the list will be skipped. |
 
 ### Output files
 
@@ -86,12 +86,11 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 | ---------|------|----------|---------|-----|-------------|
 | eventsOff | boolean | | | | if `eventsOff = true` the switchers will not be exported to DBSolve events. |
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
 | groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
 
 ### Output files
 
-**[filepath].slv** : model created based on namespace which can be opened by DBSolveOptimum.
+**[filepath]/[namespace].slv** : model created based on namespace which can be opened by DBSolveOptimum.
 
 ### Known restrictions
 
@@ -125,12 +124,11 @@ This is the updated version of SLV export format which supports compartment volu
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespace to export |
 | groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
 
 ### Output files
 
-**[filepath]/model.slv** : model created based on namespace which can be opened by DBSolveOptimum.
+**[filepath]/[namespace].slv** : model created based on namespace which can be opened by DBSolveOptimum.
 
 ### Known restrictions
 
@@ -156,12 +154,11 @@ Export to [SBML format](http://sbml.org/Main_Page).
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
-| version | string | | L2V4 | | SBML version in format: `L2V4`. Possible values are `L2V3`, `L2V4`, `L2V5` |
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+| version | string | | L2V4 | | SBML version in format: `L2V4`. Possible values are `L2V3`, `L2V4`, `L2V5`, `L3V1`, `L3V2` |
 
 ### Output files
 
-**[filepath].xml** : SBML formatted model
+**[filepath]/[namespace].xml** : SBML formatted model
 
 **Example:**
 
@@ -180,13 +177,11 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ### Properties
 
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+-
 
 ### Output files
 
-**[filepath]/model.m** : Code which can be run in Matlab environment to generate Simbio model.
+**[filepath]/[namespace].m** : Code which can be run in Matlab environment to generate Simbio model.
 **[filepath]/fun.m** : Auxilary mathematical functions to support Simbio code. This code should be placed in the same directory as simbio project.
 
 **Example:**
@@ -204,13 +199,12 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 
 ### Properties
 
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+- 
 
 ### Output files
 
-**[filepath]/model.cpp** : Code which can be run in mrgsolve environment.
+**[filepath]/[namespace].cpp** : Code which can be run in mrgsolve environment.
+**[filepath]/run.cpp** : Code for fast run.
 
 ### Known restrictions
 
@@ -239,7 +233,6 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 | omitRows | number | | | | If set this creates empty rows in output sheets. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | splitByClass | boolean | | | | If `true` the components will be splitted by class and saved as several sheets: one sheet per a class. |
-| spaceFilter | ID[]/ID | | | namespace | if set, namespaces out of the list will be skipped. |
 
 ### Output files
 
@@ -264,9 +257,7 @@ Creation of Julia files (.jl).
 
 ### Properties
 
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| spaceFilter | ID[]/ID | | | namespace | the namespase to export |
+- 
 
 ### Output files
 
@@ -289,9 +280,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 ### Properties
 
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| spaceFilter | ID[]/ID | | nameless | namespace | the namespase to export |
+- 
 
 ### Output files
 
