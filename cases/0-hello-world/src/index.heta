@@ -89,3 +89,7 @@ table #export {
   filepath: table,
   splitByClass: true
 };
+graph #export {
+  format: Dot,
+  filepath: graph
+};

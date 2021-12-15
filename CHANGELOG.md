@@ -2,6 +2,7 @@
 
 ## 0.6.9 - multispace
 
+- add `format: Dot` support
 - remove support of `DSwitcher`, `CSwitcher` in `{format: SLV}`
 - support of `CSwitcher`, `DSwitcher` in `{format: DBSolve}`
 - support active/inactive events for `format: Matlab` 

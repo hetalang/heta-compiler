@@ -1,0 +1,20 @@
+digraph G {
+    graph [layout=neato, label="{{ ns.spaceName }}", labelloc="t", fontsize="25"]
+
+    // processes
+    {%- for process in ns.selectByInstanceOf('Process') %}
+    {{ process.id }} [shape=circle,width=.1,height=.1,label="",xlabel="{{ process.id }}"]
+    {%- for actor in process.actors %}
+    {%- if actor.stoichiometry < 0 %}
+    {{ actor.target }} -> {{ process.id }} [arrowhead=none]
+    {%- else %}
+    {{ process.id }} -> {{ actor.target }}
+    {%- endif %}
+    {%- endfor %}
+    {%- endfor %}
+    
+    // dynamic records
+    {%- for record in ns.selectByInstanceOf('Record') | filter2('isDynamic', true) %}
+    {{ record.id }} [shape=box]
+    {%- endfor %}
+}

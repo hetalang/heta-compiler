@@ -16,7 +16,8 @@ Container._exportClasses = {
   XLSX: require('./xlsx-export'),
   AnotherXLSX: require('./another-xlsx-export'),
   Matlab: require('./matlab-export'),
-  Julia: require('./julia-export')
+  Julia: require('./julia-export'),
+  Dot: require('./dot-export'),
 };
 
 module.exports = {

@@ -58,4 +58,5 @@ end
 #export {spaceFilter: invivo, format: Mrgsolve, filepath: mrg_invivo};
 #export {spaceFilter: invitro, format: SBML, filepath: sbml_invitro};
 #export {spaceFilter: invivo, format: SBML, filepath: sbml_invivo};
+#export {format: Dot, filepath: graph};
 
