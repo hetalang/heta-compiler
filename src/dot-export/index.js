@@ -74,8 +74,37 @@ class DotExport extends AbstractExport{
     return results;
   }
   getDotImage(ns){
+    // group by clusters
+    let clustersDict = {_: []};
+    ns.selectByInstanceOf('Compartment')
+      .forEach((comp) => clustersDict[comp.id] = []);
+    ns.selectByInstanceOf('Process')
+      .forEach((proc) => {
+        let substrates = proc.actors
+          .filter((x) => x.stoichiometry < 0);
+        let hasFirstSubstrate = substrates.length > 0 
+          && substrates[0].targetObj !== undefined
+          && substrates[0].targetObj.compartment !== undefined;
+        if (hasFirstSubstrate) {
+          let mainComp = substrates[0].targetObj.compartment;
+          clustersDict[mainComp].push(proc);
+        } else {
+          clustersDict['_'].push(proc);
+        }
+      });
+    ns.selectByInstanceOf('Record')
+      .filter((rec) => rec.isDynamic)
+      .forEach((rec) => {
+        if (rec.compartment !== undefined) {
+          clustersDict[rec.compartment].push(rec);
+        } else {
+          clustersDict['_'].push(rec);
+        }
+      });
+
     return {
-      ns
+      ns,
+      clustersDict
     };
   }
   getDotCode(image = {}){

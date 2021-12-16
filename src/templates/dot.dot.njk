@@ -1,20 +1,38 @@
 digraph G {
-    graph [layout=neato, label="{{ ns.spaceName }}", labelloc="t", fontsize="25"]
+    layout=dot // neato
+    label="{{ ns.spaceName }}"
+    labelloc="t"
+    fontsize="25"
 
-    // processes
-    {%- for process in ns.selectByInstanceOf('Process') %}
-    {{ process.id }} [shape=circle,width=.1,height=.1,label="",xlabel="{{ process.id }}"]
-    {%- for actor in process.actors %}
+    // = compartments =
+
+    {%- for key, val in clustersDict %}
+    {{ 'subgraph cluster_' + key if key != '_' }}
+    {
+        // bgcolor="lightyellow"
+        label="{{ key }}"
+        fontsize="15"
+        fontname="times-italic"
+        labeljust=r
+        //
+        {%- for component in val %}
+        {%- if component.instanceOf('Process') %}
+        {{ component.id }} [shape=circle,width=.1,height=.1,label="",xlabel="{{ component.id }}"]
+        {%- else %}
+        {{ component.id }} [shape=box]
+        {%- endif %}
+        {%- endfor %}
+    }
+    {%- endfor %}
+
+    // = processes =
+    {% for proc in ns.selectByInstanceOf('Process') %}
+    {%- for actor in proc.actors %}
     {%- if actor.stoichiometry < 0 %}
-    {{ actor.target }} -> {{ process.id }} [arrowhead=none]
+    {{ actor.target }} -> {{ proc.id }} [arrowhead=none]
     {%- else %}
-    {{ process.id }} -> {{ actor.target }}
-    {%- endif %}
+    {{ proc.id }} -> {{ actor.target }}
+    {% endif %}
     {%- endfor %}
-    {%- endfor %}
-    
-    // dynamic records
-    {%- for record in ns.selectByInstanceOf('Record') | filter2('isDynamic', true) %}
-    {{ record.id }} [shape=box]
     {%- endfor %}
 }
