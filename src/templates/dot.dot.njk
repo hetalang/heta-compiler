@@ -1,23 +1,27 @@
-digraph G {
-    layout=dot // neato
-    label="{{ ns.spaceName }}"
+// see details here: https://graphviz.org/
+digraph {{ ns.spaceName }} {
+    layout=dot // neato, fdp
+    label="{{ ns.spaceName }} model"
     labelloc="t"
     fontsize="25"
+    nodesep=0.5
+    ranksep=0.5
+
+    node [style=filled, fillcolor=lightgray,margin="0.1,0"] // color=white, pad="1"
+    graph [penwidth=2, fontsize="12", fontname="times-bold", labeljust=r]
 
     // = compartments =
 
     {%- for key, val in clustersDict %}
-    {{ 'subgraph cluster_' + key if key != '_' }}
+    {{ 'subgraph cluster_' + key if key != '_' -}}
     {
         // bgcolor="lightyellow"
         label="{{ key }}"
-        fontsize="15"
-        fontname="times-italic"
-        labeljust=r
+        tooltip="{{ key }}"
         //
         {%- for component in val %}
         {%- if component.instanceOf('Process') %}
-        {{ component.id }} [shape=circle,width=.1,height=.1,label="",xlabel="{{ component.id }}"]
+        {{ component.id }} [shape=circle,width=.1,height=.1,label=""] // xlabel="{{ component.id }}"
         {%- else %}
         {{ component.id }} [shape=box]
         {%- endif %}
