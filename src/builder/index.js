@@ -82,16 +82,16 @@ class Builder {
    * The sequence of operations is following:
    * 
    * 1. Read and parse platform modules (files).
-   * 1. Modules integration. Creation meta files if required.
-   * 1. Loading integrated structures into `Platform`.
-   * 1. Setting cross-references in platform's elements.
-   * 1. Checking circular references in mathematical expressions.
-   * 1. Checking circular unitDef references.
-   * 1. Checking left and right side units compatibility for mathematical expressions.
-   * 1. Checking unit\'s terms.
-   * 1. Export of a platform to series of formats. 
+   * 2. Modules integration. Creation meta files if required.
+   * 3. Loading integrated structures into `Platform`.
+   * 4. Setting cross-references in platform's elements.
+   * 5. Checking circular references in mathematical expressions.
+   * 6. Checking circular unitDef references.
+   * 7. Checking left and right side units compatibility for mathematical expressions.
+   * 8. Checking unit\'s terms.
+   * 9. Export of a platform to series of formats. 
    *    Depending on the declaration file it runs {@link Builder#exportMany} or {@link Builder#exportJuliaOnly}.
-   * 1. Saving logs if required
+   * 10. Saving logs if required
    * 
    * @method Builder#run
    * 
@@ -128,10 +128,13 @@ class Builder {
     this.logger.info('Checking for circular references in Records.');
     this.container.checkCircRecord();
 
+    // 6. check circ UnitDef
+    this.container.checkCircUnitDef();
+
     // === STOP if errors ===
     if (!this.logger.hasErrors) {
-      // 6. Units checking
-      this.container.checkCircUnitDef();
+
+      // 7. Units checking
       if (this.options.unitsCheck) {
         this.logger.info('Checking unit\'s consistency.');
         this.container.checkUnits();
@@ -139,11 +142,11 @@ class Builder {
         this.logger.warn('Units checking skipped. To turn it on set "unitsCheck: true" in declaration.');
       }
 
-      // 7. Terms checking
+      // 8. Terms checking
       this.logger.info('Checking unit\'s terms.');
       this.container.checkTerms();
 
-      // 8. Exports
+      // 9. Exports
       if (this.options.skipExport) {
         this.logger.warn('Exporting skipped as stated in declaration.');
       } else if (this.options.juliaOnly) {
@@ -156,7 +159,7 @@ class Builder {
       this.logger.warn('Units checking and export were skipped because of errors in compilation.');
     }
 
-    // 9. save logs if required
+    // 10. save logs if required
     let hetaErrors = this.container.hetaErrors();
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && hetaErrors.length > 0);

@@ -188,7 +188,7 @@ class Container {
     // the same method as for sortExpressionsByContext()
     let graph = new TopoSort();
     this.unitDefStorage.forEach((unitDef) => {
-      if (typeof unitDef.unitsParsed !== 'undefined') {
+      if (unitDef.unitsParsed !== undefined) {
         let deps = unitDef.unitsParsed.map((x) => x.kind);
         graph.add(unitDef.id, deps);
       }

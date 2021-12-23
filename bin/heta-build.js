@@ -29,7 +29,7 @@ program
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
   .option('--debug', 'If set the raw module output will be stored in "meta".')
   .option('--julia-only', 'Run in Julia supporting mode: skip declared exports.')
-  .option('--dist-dir <filepath>', 'Set export directory path, where to store distributives.')
+  .option('--dist-dir <filepath>', 'Set export directory path, where to store exported files.')
   .option('--meta-dir <filepath>', 'Set meta directory path.')
   // moduleImport
   .option('-s, --source <filepath>', 'path to main heta module.')

@@ -27,20 +27,20 @@
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)
 [ ] ODEs in markdown/latex/ascii
-[ ] DOT language / Graphviz
+[x] DOT language / Graphviz
 
 ## bugs
 
 - critical error when units id is "xxx_yyy"
+- calculate units for pow function
 
 ## features
 
-- calculate units for pow function
+- check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers
 - checking legal functions inside Expressions and its arguments
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - `#move`, `#moveNS`
-- check unit consistency for Species: amount/area if compartment is area 
 - atStart to exports: Matlab, DBSolve
 
 ## ideas
