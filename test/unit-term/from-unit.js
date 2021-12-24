@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const { Container } = require('../../src');
 
 let qArr = [
-  {action: 'defineUnit', id: 'xxx', units: 'item2/litre'},
+  {action: 'defineUnit', id: 'xxx', units: 'item^2/litre'},
   {action: 'defineUnit', id: 'yyy', units: 'xxx/item'},
   {action: 'defineUnit', id: 'zzz', units: 'xxx/kilogram'},
   {action: 'defineUnit', id: 'ooo', units: 'xxx/wrong'},

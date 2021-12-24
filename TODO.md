@@ -31,11 +31,11 @@
 
 ## bugs
 
-- critical error when units id is "xxx_yyy"
 - calculate units for pow function
 
 ## features
 
+- checking units for diff eq
 - check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers
 - checking legal functions inside Expressions and its arguments

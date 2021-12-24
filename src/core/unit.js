@@ -231,17 +231,17 @@ class Unit extends Array {
 
     items.forEach((item) => {
       // checking "/xxx^12.23" or "1" or "/1"
-      let shortFormat = /^(\/|\*)?[A-Za-z1]+\^?(\d+(\.?\d*)?)?$/;
+      let shortFormat = /^(\/|\*)?[_A-Za-z1][_A-Za-z0-9]*\^?(\d+(\.?\d*)?)?$/;
       // checking "/(1e-2xxx)^12.23"
-      let longFormat = /^(\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?[A-Za-z]*\)\^?(\d+(\.?\d*)?)?$/;
+      let longFormat = /^(\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?([_A-Za-z][_A-Za-z0-9]*)?\)\^?(\d+(\.?\d*)?)?$/;
       
       if (!shortFormat.test(item) && !longFormat.test(item)) 
         throw new SyntaxError(`Wrong syntax of unit's item: "${unitString}"`);
 
-      let matcher = /^([/*]?)[(]?(\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)?([A-Za-z]*)[)]?\^?(\d+(?:\.?\d*)?)?$/;
+      let matcher = /^([/*]?)[(]?(\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)?([_A-Za-z][_A-Za-z0-9]*)?[)]?\^?(\d+(?:\.?\d*)?)?$/;
       let mmm = item.match(matcher);
 
-      let kind = mmm[3] === '' ? 'dimensionless' : mmm[3];
+      let kind = mmm[3] === undefined ? 'dimensionless' : mmm[3];
       let pow = mmm[4] === undefined ? 1 : mmm[4];
       let exponent = mmm[1] === '/' // searching constructions "1/L", "/L"
         ? (-1) * pow
@@ -361,14 +361,16 @@ class Unit extends Array {
         .filter((item) => item.exponent > 0)
         .map((item) => {
           let expAbs = Math.abs(item.exponent); // absolute value
+          let kindString = item.kind.replace('_', '\\_');
+
           if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
             var multKind = '1';
           } else if (item.kind === 'dimensionless') {
             multKind = `(${item.multiplier.toExponential()})`;
           } else if (item.multiplier === 1 || item.multiplier === undefined) {
-            multKind = item.kind;
+            multKind = kindString;
           } else {
-            multKind = `(${item.multiplier.toExponential()} ${item.kind})`;
+            multKind = `(${item.multiplier.toExponential()} ${kindString})`;
           }
           let exponent = (expAbs !== 1)
             ? '^{' + expAbs + '}'
@@ -381,14 +383,16 @@ class Unit extends Array {
         .filter((item) => item.exponent < 0)
         .map((item) => {
           let expAbs = Math.abs(item.exponent); // absolute value
+          let kindString = item.kind.replace('_', '\\_');
+
           if (item.kind === 'dimensionless' && (item.multiplier === 1 || item.multiplier === undefined)) {
             var multKind = '1';
           } else if (item.kind === 'dimensionless') {
             multKind = `(${item.multiplier.toExponential()})`;
           } else if (item.multiplier === 1 || item.multiplier === undefined) {
-            multKind = item.kind;
+            multKind = kindString;
           } else {
-            multKind = `(${item.multiplier.toExponential()} ${item.kind})`;
+            multKind = `(${item.multiplier.toExponential()} ${kindString})`;
           }
           let exponent = (expAbs!==1)
             ? '^{' + expAbs + '}'

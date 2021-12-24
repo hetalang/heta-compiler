@@ -5,9 +5,9 @@ const { Container } = require('../../src');
 const qArr = [
   {action: 'defineUnit', id: 'mM', units: [{kind: 'mole', multiplier: 1e-3}, {kind: 'litre', exponent: -1}]},
   {action: 'defineUnit', id: 'UL', units: [{kind: 'dimensionless'}]},
-  {action: 'insert', class: 'Const', id: 'c1', num: 1, units: 'mM2'},
-  {action: 'insert', class: 'Const', id: 'c2', num: 1, units: 'mM2'},
-  {action: 'insert', class: 'Const', id: 'c3', num: 1, units: '(1e-3 mole)2/litre2'},
+  {action: 'insert', class: 'Const', id: 'c1', num: 1, units: 'mM^2'},
+  {action: 'insert', class: 'Const', id: 'c2', num: 1, units: 'mM^2'},
+  {action: 'insert', class: 'Const', id: 'c3', num: 1, units: '(1e-3 mole)^2/litre^2'},
   {action: 'insert', class: 'Const', id: 'k1', num: 1, units: [{kind: 'dimensionless'}]},
   {action: 'insert', class: 'Const', id: 'k2', num: 1, units: 'dimensionless'},
   {action: 'insert', class: 'Const', id: 'k3', num: 1, units: 'UL'},

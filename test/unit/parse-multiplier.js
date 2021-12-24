@@ -22,23 +22,23 @@ const correctUnits = [
     strPrefix: 'millidimensionless^2'
   },
   {
-    str0: 'L*mg2',
+    str0: 'L*mg^2',
     q: [{kind: 'L', exponent: 1, multiplier: 1}, {kind: 'mg', exponent: 2, multiplier: 1}],
     str: 'L*mg^2',
     strPrefix: 'L*mg^2'
   },
   {
-    str0: '(1e0 L)^1/(1.1 mg)2',
+    str0: '(1e0 L)^1/(1.1 mg)^2',
     q: [{kind: 'L', exponent: 1, multiplier: 1}, {kind: 'mg', exponent: -2, multiplier: 1.1}],
     str: 'L/(1.1e+0 mg)^2'
   },
   {
-    str0: '(1e2 L)^1.3/(1.1e-3 mg)2.2',
+    str0: '(1e2 L)^1.3/(1.1e-3 mg)^2.2',
     q: [{kind: 'L', exponent: 1.3, multiplier: 1e2}, {kind: 'mg', exponent: -2.2, multiplier: 1.1e-3}],
     str: '(1e+2 L)^1.3/(1.1e-3 mg)^2.2'
   },
   {
-    str0: '(1e-3 L)^1.3/(1.000000000001e-6 g)2.2',
+    str0: '(1e-3 L)^1.3/(1.000000000001e-6 g)^2.2',
     q: [{kind: 'L', exponent: 1.3, multiplier: 1e-3}, {kind: 'g', exponent: -2.2, multiplier: 1.000000000001e-6}],
     str: '(1e-3 L)^1.3/(1.000000000001e-6 g)^2.2',
     strPrefix: 'milliL^1.3/microg^2.2'

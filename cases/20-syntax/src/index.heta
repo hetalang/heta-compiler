@@ -4,6 +4,9 @@
 // add qsp units
 include ./qsp-units.heta
 
+ud1_xxx #defineUnit {units: mole/L};
+rec1 @Record {units: ud1_xxx} .= 12;
+
 c1 @Compartment {}.= 1;
 s1 @Species {compartment: c1,} .= 10;
 m1 @species { /* comment 0 */
