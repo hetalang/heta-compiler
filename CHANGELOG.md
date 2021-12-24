@@ -3,6 +3,7 @@
 ## 0.6.10
 
 - add `format: Dot` support
+- do not support units syntax like this `{units: mL2}`
 
 ## 0.6.9 - multispace
 
