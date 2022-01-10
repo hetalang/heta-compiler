@@ -28,6 +28,10 @@ s2 []= 0; // static
 #export {filepath: sbml, format: SBML};
 #export {filepath: mrgsolve, format: Mrgsolve};
 
+sw0 @TimeSwitcher {
+  start: 40
+};
+
 sw1 @TimeSwitcher {
   start: 0, // start at zero time
   stop: 60,

@@ -7,12 +7,13 @@
 sbioaddtolibrary(sbiounit('week', 'day', 7));
 
 {% set model_id = population.spaceName + "_model" -%}
+{% set storage_id = population.spaceName + "_ns" -%}
 {{ model_id }} = sbiomodel('{{ population.spaceName }}');
 
 {% set listOfCompartments = population.selectByClassName('Compartment') -%}
 {{ "% Compartments" if listOfCompartments|length > 0 }}
 {%- for record in listOfCompartments %}
-{{ population.spaceName }}.compartment.{{record.id}} = addcompartment(
+{{ storage_id }}.compartment.{{record.id}} = addcompartment(
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
   {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
@@ -22,8 +23,8 @@ sbioaddtolibrary(sbiounit('week', 'day', 7));
 {% set listOfSpecies = population.selectByClassName('Species') -%}
 {{ "% Species" if listOfSpecies|length > 0 }}
 {%- for record in listOfSpecies %}
-{{ population.spaceName }}.species.{{record.id}} = addspecies(
-  {{-  population.spaceName  }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
+{{ storage_id }}.species.{{record.id}} = addspecies(
+  {{-  storage_id  }}.compartment.{{record.compartment}}, '{{record.id}}', 'ConstantAmount', false
   {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'BoundaryCondition', {{ record.boundary===true or record.isRule===true -}}
@@ -36,21 +37,21 @@ sbioaddtolibrary(sbiounit('week', 'day', 7));
 {% set listOfTimeScales = population.selectByClassName('TimeScale') | exclude2('id', 't') -%}
 {{ "% Parameters" if listOfParameters|length + listOfConstants|length + listOfProcesses|length > 0 }}
 {%- for record in listOfParameters.concat(listOfProcesses) %}
-{{ population.spaceName }}.parameter.{{record.id}} = addparameter(
+{{ storage_id }}.parameter.{{record.id}} = addparameter(
   {{- model_id }}, '{{record.id}}', 'ConstantValue', false
   {%- if record.assignments.start_.num!==undefined %}, 'Value', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{ record.notesHTML }}', 'Tag', '');
 {%- endfor %}
 {%- for con in listOfConstants %}
-{{ population.spaceName }}.parameter.{{con.id}} = addparameter(
+{{ storage_id }}.parameter.{{con.id}} = addparameter(
   {{- model_id }}, '{{con.id}}', 'ConstantValue', true
   {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
   {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{ con.notesHTML }}', 'Tag', '');
 {%- endfor %}
 {%- for ts in listOfTimeScales %}
-{{ population.spaceName }}.parameter.{{ts.id}} = addparameter(
+{{ storage_id }}.parameter.{{ts.id}} = addparameter(
   {{- model_id }}, '{{ts.id}}', 'ConstantValue', false
   {%- if ts.units!==undefined -%}, 'ValueUnits', '{{ ts.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{ ts.notesHTML }}', 'Tag', '');
@@ -59,23 +60,23 @@ sbioaddtolibrary(sbiounit('week', 'day', 7));
 {% set listOfReactions = population.selectByClassName('Reaction') -%}
 {{ "% Reactions" if listOfReactions|length > 0 }}
 {%- for record in listOfReactions %}
-{{ population.spaceName }}.reaction.{{record.id}} = addreaction(
+{{ storage_id }}.reaction.{{record.id}} = addreaction(
   {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.reversible!==false}}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
   , 'Notes', '{{ record.notesHTML }}', 'Tag', '');
   {%- set fullActors = record.actors.concat(record.modifiers) -%}
   {% set reactants = fullActors|getReactants %}
   {%- if reactants|length > 0 %}
-  addreactant({{ population.spaceName }}.reaction.{{record.id}}, [
-    {%- for actor in reactants %}{{ population.spaceName }}.species.{{ actor.target }}, {% endfor -%}
+  addreactant({{ storage_id }}.reaction.{{record.id}}, [
+    {%- for actor in reactants %}{{ storage_id }}.species.{{ actor.target }}, {% endfor -%}
     ], [
     {%- for actor in reactants %}{{ -actor.stoichiometry if actor.stoichiometry<0 else 1 }}, {% endfor -%}
     ]);
   {%- endif %}
   {%- set products = fullActors|getProducts %}
   {%- if products|length > 0 %}
-  addproduct({{ population.spaceName }}.reaction.{{record.id}}, [
-    {%- for actor in products %}{{ population.spaceName }}.species.{{ actor.target }}, {% endfor -%}
+  addproduct({{ storage_id }}.reaction.{{record.id}}, [
+    {%- for actor in products %}{{ storage_id }}.species.{{ actor.target }}, {% endfor -%}
     ], [
     {%- for actor in products %}{{ actor.stoichiometry if actor.stoichiometry>0 else 1 }}, {% endfor -%}
     ]);
@@ -113,8 +114,8 @@ addrule(
 {{- "% Time Events" if listOfTimeEvents | length > 0 }}
 {%- for event in listOfTimeEvents %}
 {%- set startValue = event.start if event.start is defined else event.startObj.num %}
-{{ population.spaceName }}.event.{{event.id}} = addevent({{ model_id }}, 'time >{{'=' if not event.atStart }} {{ startValue -}}
-  {%- if event.start is defined or event.startObj is defined -%}
+{{ storage_id }}.event.{{event.id}} = addevent({{ model_id }}, 'time >{{'=' if not event.atStart }} {{ startValue -}}
+  {%- if event.period is defined or event.periodObj is defined -%}
     {%- set periodValue = event.period if event.period is defined else event.periodObj.num %} && (time - {{ startValue }}) / {{ periodValue }} - floor((time - {{ startValue }}) / {{ periodValue }} + 0.5) >= 0
   {%- endif -%}
   {%- if event.stop is defined or event.stopObj is defined -%}
@@ -129,7 +130,7 @@ addrule(
 {% set listOfDEvents = population.selectByClassName("DSwitcher") %}
 {{- "% Discrete Events" if listOfDEvents | length > 0 }}
 {%- for event in listOfDEvents %}
-{{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() if event.trigger is defined else 'false' }}', {
+{{ storage_id }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
@@ -138,7 +139,7 @@ addrule(
 {% set listOfCEvents = population.selectByClassName("CSwitcher") %}
 {{- "% Conditional Events" if listOfCEvents | length > 0 }}
 {% for event in listOfCEvents -%}
-{{ population.spaceName }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() + '>=0' if event.trigger is defined else 'false' }}', {
+{{ storage_id }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() + '>=0' if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
   }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
@@ -146,8 +147,8 @@ addrule(
 
 % Update simulation config
 {%- set defaultTimeScale = population.get("t") %}
-{{ population.spaceName }}.config = getconfigset({{ model_id }})
-set({{ population.spaceName }}.config.SolverOptions, 'AbsoluteToleranceScaling', false)
+{{ storage_id }}.config = getconfigset({{ model_id }})
+set({{ storage_id }}.config.SolverOptions, 'AbsoluteToleranceScaling', false)
 {%- if defaultTimeScale is defined and defaultTimeScale.units is defined %}
-set({{ population.spaceName }}.config, 'TimeUnits', '{{ defaultTimeScale.unitsRebased(legalUnits, true) }}')
+set({{ storage_id }}.config, 'TimeUnits', '{{ defaultTimeScale.unitsRebased(legalUnits, true) }}')
 {%- endif %}
