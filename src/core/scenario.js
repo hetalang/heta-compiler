@@ -200,7 +200,7 @@ class Scenario extends Top {
           // search in switchers
           let foundComponent = this.modelObj.get(key);
           if (foundComponent === undefined || !foundComponent.instanceOf('_Switcher')) {
-            let msg = `"${key}" key in Scenario "${this.id}.events_active" must refer to Switcher.`;
+            let msg = `"${key}" key in Scenario "${this.id}.events_save" must refer to Switcher.`;
             logger.error(msg, {type: 'BindingError'});
           }
         });

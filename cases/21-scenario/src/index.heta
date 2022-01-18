@@ -5,23 +5,24 @@
 p1 @Record .= 1;
 
 x1 @Record .= 10;
-x2 @Record .=0;
+x2 @Record .= 0;
 
 pr1 @Process {actors: x1 = x2} := k1 * x1;
 
 k1 @Const = 1e-2;
+xxx @Const = 1224;
 
 scn1 #setScenario {
   tspan: [0, 200]
 };
 
 scn2 #setScenario {
-  model: mouse,
-  parameters: {p1: 20, k1: 1e-3, xxx: 2},
+  model: nameless,
+  parameters: {k1: 1e-3, xxx: 2},
   saveat: [0, 1, 2, 4, 6, 8, 10, 12],
-  observables: [A0, x1, k1],
-  events_active: {sw1: false, sw2: true},
-  events_save: {sw2: [true, false]}
+  observables: [x1, x2],
+  //events_active: {sw1: false, sw2: true},
+  //events_save: {sw2: [true, false]}
 };
 
 scn3 #setScenario {
