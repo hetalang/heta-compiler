@@ -16,8 +16,8 @@ describe('Expression exports to Julia', () => {
     let expr = Expression.fromString('multiply(x,y)');
     expect(expr.toJuliaString()).to.be.equal('*(x, y)');
   });
-  it('toJuliaString() for "substract(x,y)"', () => {
-    let expr = Expression.fromString('substract(x,y)');
+  it('toJuliaString() for "subtract(x,y)"', () => {
+    let expr = Expression.fromString('subtract(x,y)');
     expect(expr.toJuliaString()).to.be.equal('-(x, y)');
   });
   it('toJuliaString() for "divide(x,y)"', () => {
@@ -30,11 +30,11 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "square(x)"', () => {
     let expr = Expression.fromString('square(x)');
-    expect(expr.toJuliaString()).to.be.equal('^(x, 2)');
+    expect(expr.toJuliaString()).to.be.equal('pow(x, 2)');
   });
   it('toJuliaString() for "cube(x)"', () => {
     let expr = Expression.fromString('cube(x)');
-    expect(expr.toJuliaString()).to.be.equal('^(x, 3)');
+    expect(expr.toJuliaString()).to.be.equal('pow(x, 3)');
   });
   it('toJuliaString() for 1.1', () => {
     let expr = Expression.fromString(1.1);
@@ -54,7 +54,7 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "pow(x, y) + x^y"', () => {
     let expr = Expression.fromString('pow(x, y) + x^y');
-    expect(expr.toJuliaString()).to.be.equal('^(x, y) + x ^ y');
+    expect(expr.toJuliaString()).to.be.equal('pow(x, y) + pow(x, y)');
   });
   it('toJuliaString() for "max(1, 2, 3) + min(1, 2, 3)"', () => {
     let expr = Expression.fromString('max(1, 2, 3) + min(1, 2, 3)');

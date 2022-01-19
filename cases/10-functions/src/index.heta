@@ -73,3 +73,4 @@ pc02 @Record '2*pi' := 2*pi;
 
 #export {filepath: model, format: SLV};
 #export {filepath: sbml, format: SBML};
+#export {filepath: julia, format: Julia};

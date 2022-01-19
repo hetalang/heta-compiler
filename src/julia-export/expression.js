@@ -11,7 +11,7 @@ Expression.prototype.toJuliaString = function(){
         .join(', ');
       return `+(${args})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='substract'){
+    if(node.type==='FunctionNode' && node.fn.name==='subtract'){
       let args = node.args
         .map((arg) => arg.toString(options))
         .join(', ');
@@ -30,13 +30,13 @@ Expression.prototype.toJuliaString = function(){
       return `/(${args})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='cube'){
-      return `^(${node.args[0].toString(options)}, 3)`;
+      return `pow(${node.args[0].toString(options)}, 3)`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='square'){
-      return `^(${node.args[0].toString(options)}, 2)`;
+      return `pow(${node.args[0].toString(options)}, 2)`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='pow'){
-      return `^(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
+      return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='ln'){
       let args = node.args
@@ -84,6 +84,7 @@ Expression.prototype.toJuliaString = function(){
     if (node.type === 'ConstantNode' && Number.isNaN(node.value)) {
       return 'NaN';
     }
+    
     if (node.type === 'OperatorNode' && node.fn === 'and') {
       return node.args
         .map((arg) => arg.toString(options))
@@ -104,6 +105,11 @@ Expression.prototype.toJuliaString = function(){
       let arg0 = node.args[0].toString(options, true);
       return `!${arg0}`;
     }
+    
+    if (node.type === 'OperatorNode' && node.fn === 'pow') { // to support NaNMath.pow
+      return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
+    }
+
     if (node.type === 'SymbolNode' && node.name === 'e') {
       return 'exp(1.0)';
     }
