@@ -35,6 +35,7 @@
 
 ## features
 
+- remove unnecessary rules
 - checking units for diff eq
 - check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers

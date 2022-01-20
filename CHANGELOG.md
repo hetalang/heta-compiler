@@ -6,6 +6,7 @@
 - do not support units syntax like this `{units: mL2}`
 - fix bug: Simbio event without period
 - Simbio storage name: nameless => nameless_ns
+- use NaNMath in Julia export
 
 ## 0.6.9 - multispace
 
