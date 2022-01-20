@@ -102,7 +102,7 @@ describe('Testing checkUnits() for components', () => {
     expect(unit).to.be.equal('dimensionless');
   });
   
-  it('functions: add, substract, multiply, divide', () => {
+  it('functions: add, subtract, multiply, divide', () => {
     let y1 = p.namespaceStorage.get('nameless').get('y1');
     let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1).toString();
