@@ -38,7 +38,8 @@ class _Module {
       return mdl;
     }
 
-    mdl.logger.info(`Reading module of type "${type}" from file "${mdl.filename}"...`);
+    let tabNum = mdl.options.sheet !== undefined ? ('#' + mdl.options.sheet) : ''; // for xlsx only
+    mdl.logger.info(`Reading module of type "${type}" from file "${mdl.filename}${tabNum}"...`);
     switch (type) {
     case 'heta':
       mdl.setHetaModule();
@@ -64,7 +65,7 @@ class _Module {
     }
 
     if (mdl.parsed.length === 0) {
-      mdl.logger.warn(`Nothing is imported from file "${mdl.filename}"...`);
+      mdl.logger.warn(`Nothing is imported from the module: "${mdl.filename}#${tabNum}"...`);
     }
 
     return mdl;
