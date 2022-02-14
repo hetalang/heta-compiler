@@ -9,6 +9,7 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [SBML](#sbml)
 - [Simbio](#simbio)
 - [Mrgsolve](#mrgsolve)
+- [Table](#table)
 - [XLSX](#xlsx)
 - [Julia](#julia)
 - [Matlab](#matlab)
@@ -222,9 +223,14 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 };
 ```
 
-## XLSX
+## Table
 
-Creation of Excel file (.xlsx) which contains components of namespace.
+To export platform content in tabular format: CSV, Excel, etc.
+The format of tables corresponds to the tabular (xlsx) heta module. 
+It can be loaded as a module in another projects.
+
+This statement combines a series of formats supported by <https://www.npmjs.com/package/xlsx> library.
+For the list of supported files see the docs <https://github.com/SheetJS/sheetjs#supported-output-formats>.
 
 ### Properties
 
@@ -232,7 +238,45 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 | ---------|------|----------|---------|-----|-------------|
 | omitRows | number | | | | If set this creates empty rows in output sheets. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
-| splitByClass | boolean | | | | If `true` the components will be splitted by class and saved as several sheets: one sheet per a class. |
+| bookType | string[] | | `csv` | | One of the supported file types, see xlsx docs. |
+
+### Output files
+
+**[filepath].???** : Table file. The extension depends on `bookType` property.
+
+**Example 1:**
+
+```heta
+// save a platform in CSV
+#export {
+    format: Table,
+    filepath: platform
+};
+```
+
+**Example 2:**
+
+```heta
+#export {
+    format: Table,
+    filepath: output, // save result in file "dist/output.xlsx"
+    spaceFilter: nameless, // output everything from nameless namespace
+    omitRows: 5, // include 5 empty rows between header and the first line
+    omit: [aux.wiki], // omit aux.wiki properties from components
+    bookType: html // save as HTML table
+};
+```
+
+## XLSX
+
+Creation of Excel file (.xlsx).
+This works in the same way as the `Table` format with `bookType: xlsx` but it also has an additional `splitByClass` property.
+
+### Properties
+
+| property | type | required | default | ref | description | 
+| ---------|------|----------|---------|-----|-------------|
+| splitByClass | boolean | | | | If `true` the components will be split by class and saved as several sheets: one sheet per a class. |
 
 ### Output files
 
@@ -244,8 +288,7 @@ Creation of Excel file (.xlsx) which contains components of namespace.
 #export {
     format: XLSX,
     filepath: output, // save result in file "dist/output.xlsx"
-    spaceFilter: nameless, // output all from nameless namespace
-    omitRows: 5, // include 5 empty rows between header and the first line
+    omitRows: 3, // include 3 empty rows between header and the first line
     omit: [aux.wiki], // omit aux.wiki properties from components
     splitByClass: true // split classed to different sheets
 };
