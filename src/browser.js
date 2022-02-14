@@ -13,6 +13,7 @@ Container._exportClasses = {
   SLV: require('./slv-export'),
   Mrgsolve: require('./mrgsolve-export'),
   Simbio: require('./simbio-export'),
+  Table: require('./table-export'),
   XLSX: require('./xlsx-export'),
   AnotherXLSX: require('./another-xlsx-export'),
   Matlab: require('./matlab-export'),

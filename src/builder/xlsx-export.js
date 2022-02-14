@@ -21,7 +21,7 @@ XLSXExport.prototype.makeAndSave = function(pathPrefix){
   });
 
   try {
-    XLSX.writeFile(wb, fullPath, {});
+    XLSX.writeFile(wb, fullPath, {bookType: 'xlsx'});
   } catch (err) {
     let logger = this._container.logger;
     let msg =`Heta compiler cannot export to file: "${err.path}" because it is busy.`;

@@ -6,8 +6,8 @@
 [x] json
 [x] yaml
 [x] sbml
+[x] Table
 [ ] markdown -> Page
-[ ] csv
 
 ## exports
 
@@ -31,10 +31,11 @@
 
 ## bugs
 
-- calculate units for pow function
+- check abs and relative path for export
 
 ## features
 
+- calculate units for pow function
 - remove unnecessary rules
 - checking units for diff eq
 - check unit consistency for Species: amount/area if compartment is area

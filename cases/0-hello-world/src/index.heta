@@ -89,6 +89,12 @@ table #export {
   filepath: table,
   splitByClass: true
 };
+table2 #export {
+  spaceFilter: mm,
+  format: Table,
+  filepath: table2,
+  bookType: biff8
+};
 graph #export {
   format: Dot,
   filepath: graph
