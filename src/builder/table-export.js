@@ -34,7 +34,7 @@ TableExport.prototype.makeAndSave = function(pathPrefix){
 
   let out = this.make();
   let relPath = [this.filepath || this.id, fileExt].join('');
-  let fullPath = path.join(pathPrefix, relPath);
+  let fullPath = path.resolve(pathPrefix, relPath);
   
   let wb = XLSX.utils.book_new();
   out.forEach((x) => {

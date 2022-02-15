@@ -8,7 +8,7 @@ const fs = require('fs-extra');
 AbstractExport.prototype.makeAndSave = function(pathPrefix){
   this.make().forEach((out) => {
     let relPath = [this.filepath || this.id, out.pathSuffix].join('');
-    let fullPath = path.join(pathPrefix, relPath);
+    let fullPath = path.resolve(pathPrefix, relPath);
     fs.outputFileSync(fullPath, out.content);
   });
 };

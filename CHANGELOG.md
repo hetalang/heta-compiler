@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.11
+
+- Implement export to CSV and other tabular formats
+
 ## 0.6.10
 
 - add `format: Dot` support
