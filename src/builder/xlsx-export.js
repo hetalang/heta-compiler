@@ -2,6 +2,7 @@ const XLSX = require('xlsx');
 const path = require('path');
 const XLSXExport = require('../xlsx-export');
 const _ = require('lodash');
+const fs = require('fs-extra');
 
 XLSXExport.prototype.makeAndSave = function(pathPrefix){
   let out = this.make();
@@ -20,6 +21,9 @@ XLSXExport.prototype.makeAndSave = function(pathPrefix){
     XLSX.utils.book_append_sheet(wb, ws, x.name);
   });
 
+  // force create directory if not exists
+  let filedir = path.dirname(fullPath);
+  fs.ensureDir(filedir);
   try {
     XLSX.writeFile(wb, fullPath, {bookType: 'xlsx'});
   } catch (err) {

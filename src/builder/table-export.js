@@ -2,6 +2,7 @@ const XLSX = require('xlsx');
 const path = require('path');
 const TableExport = require('../table-export');
 const _ = require('lodash');
+const fs = require('fs-extra');
 
 const bookTypes = {
   xlsx: {fileExt: '.xlsx', containerSheets: 'ZIP', description: 'multiExcel 2007+ XML Format'},
@@ -48,6 +49,9 @@ TableExport.prototype.makeAndSave = function(pathPrefix){
     XLSX.utils.book_append_sheet(wb, ws, x.name);
   });
 
+  // force create directory if not exists
+  let filedir = path.dirname(fullPath);
+  fs.ensureDir(filedir);
   try {
     XLSX.writeFile(wb, fullPath, {bookType: this.bookType});
   } catch (err) {

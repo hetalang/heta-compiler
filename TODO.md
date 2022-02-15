@@ -31,8 +31,6 @@
 
 ## bugs
 
-- check abs and relative path for export
-
 ## features
 
 - calculate units for pow function
