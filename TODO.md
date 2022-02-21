@@ -2,11 +2,10 @@
 
 ## modules:
 
-[x] xlsx
 [x] json
 [x] yaml
 [x] sbml
-[x] Table
+[x] table
 [ ] markdown -> Page
 
 ## exports
@@ -22,7 +21,7 @@
 [x] matlab
 [x] Julia
 [x] Heta-code (Heta)
-[ ] csv
+[x] csv
 [ ] rxode (R)
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)

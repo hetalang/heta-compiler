@@ -2,6 +2,7 @@
 
 ## 0.6.11
 
+- Implement `include ... type table`
 - Implement export to CSV and other tabular formats
 
 ## 0.6.10
