@@ -53,14 +53,15 @@ class _Module {
     case 'yaml':
       mdl.setYAMLModule();
       break;
-    case 'xlsx':
-      mdl.setXLSXModule();
+    case 'xlsx': // to support older syntax
+    case 'table':
+      mdl.setTableModule();
       break;
     case 'sbml':
       mdl.setSBMLModule();
       break;
     default:
-      let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml"].`;
+      let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml", "table"].`;
       mdl.logger.error(msg, {type: 'ModuleError', filename: this.filename});
     }
 

@@ -5,7 +5,7 @@
 include ./qsp-units.heta
 
 // include module.heta type heta
-// include table.xlsx type xlsx with { sheet: 0, omitRows: 3 }
+// include table.xlsx type table with { sheet: 0, omitRows: 3 }
 // include addon.json type json
 // include addon.yml type yaml
 

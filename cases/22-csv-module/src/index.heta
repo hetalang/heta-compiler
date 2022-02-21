@@ -1,27 +1,12 @@
 /*
   template file for creating platform
 */
-// add qsp units
-include ./qsp-units.heta
 
-// @Const
-include ./table.xlsx type table with { sheet: 0, omitRows: 3 }
-// @Record
-include ./table.xlsx type table with { sheet: 1, omitRows: 3 }
-// @Compartment
-include ./table.xlsx type table with { sheet: 2, omitRows: 3 }
-// @Species
-include ./table.xlsx type table with { sheet: 3, omitRows: 3 }
-// @Reaction
-include ./table.xlsx type table with { sheet: 4, omitRows: 3 }
-
-// include addon.json type json
-// include addon.yml type yaml
-
-p1 @Record .= 1;
+include ./table.csv type table
 
 // exports
 #export { format: JSON, filepath: output };
+
 //#export { format: YAML, filepath: output };
 //#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
 //#export { format: SBML, filepath: sbml, version: L2V4 };

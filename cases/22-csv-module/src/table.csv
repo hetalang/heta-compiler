@@ -1,0 +1,5 @@
+﻿on,class,id,num,assignments.start_,assignments.ode_,,compartment,actors
+1,Const,k1,0.1,,,,,
+1,Species,s1,,1.1,,,comp1,
+1,Reaction,r1,,,k1*s1*comp1,,,s1=>
+1,Compartment,comp1,,5.5,,,,

@@ -6,7 +6,7 @@ require('./heta-module');
 require('./json-module');
 require('./md-module');
 require('./yaml-module');
-require('./xlsx-module');
+require('./table-module');
 require('./sbml-module');
 
 class ModuleSystem {
