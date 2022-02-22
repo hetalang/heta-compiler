@@ -138,6 +138,22 @@ end
 
 ### output function
 function {{ id }}_saving_generator_(outputIds::Vector{Symbol})
+    # XXX: currently force amounts: s1_, s2_ are not supported
+    __actual_indexes__ = indexin(outputIds, [
+      {%- for ts in timeScales -%}
+      :{{ts.id}},
+      {%- endfor %}
+      {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
+      :{{ rec.id }},
+      {%- endfor -%}
+    ])
+    # check nothing in actual_indexes
+    wrongIndexes = findall(x -> x===nothing, __actual_indexes__)
+    if length(wrongIndexes) > 0
+      wrongIds = outputIds[wrongIndexes]
+      throw("Wrong identifiers: $(wrongIds)")
+    end
+
     function saving_(u, t, integrator)
         cons = integrator.p.constants
         ({% for record in img.staticRecords -%}
@@ -166,8 +182,14 @@ function {{ id }}_saving_generator_(outputIds::Vector{Symbol})
         {{ record.id }}_ = {{ record.id }}{{ '*' + record.compartment if not record.isAmount }}
         {%- endfor %}
 
-        d = Base.@locals
-        return [d[id] for id in outputIds]
+        return [
+          {%- for ts in timeScales -%}
+          {{ts.id}},
+          {%- endfor %}
+          {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
+          {{ rec.id }},
+          {%- endfor -%}
+        ][__actual_indexes__]
     end
 end
 
