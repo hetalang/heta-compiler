@@ -2,6 +2,7 @@
 
 ## 0.6.11
 
+- optimize saving_generator in julia export
 - Implement `include ... type table`
 - Implement export to CSV and other tabular formats
 

@@ -70,6 +70,15 @@ end
 
 ### output function
 function mm_saving_generator_(outputIds::Vector{Symbol})
+    # XXX: currently force amounts: s1_, s2_ are not supported
+    __actual_indexes__ = indexin(outputIds, [:default_comp,:S,:P,:r1,])
+    # check nothing in actual_indexes
+    wrongIndexes = findall(x -> x===nothing, __actual_indexes__)
+    if length(wrongIndexes) > 0
+      wrongIds = outputIds[wrongIndexes]
+      throw("Wrong identifiers: $(wrongIds)")
+    end
+
     function saving_(u, t, integrator)
         cons = integrator.p.constants
         (default_comp,) = integrator.p.static
@@ -82,8 +91,7 @@ function mm_saving_generator_(outputIds::Vector{Symbol})
         
         # force amount
 
-        d = Base.@locals
-        return [d[id] for id in outputIds]
+        return [default_comp,S,P,r1,][__actual_indexes__]
     end
 end
 
