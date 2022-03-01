@@ -56,7 +56,7 @@
     "jsdoc-to-markdown": "^7.1.0",
     "mocha": "^9.2.0",
     "nyc": "^15.1.0",
-    "slv-utils": "^0.4.0"
+    "slv-utils": "^0.5.1"
   },
   "engines": {
     "node": ">=8.0.0"
