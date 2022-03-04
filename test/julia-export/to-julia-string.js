@@ -30,11 +30,11 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "square(x)"', () => {
     let expr = Expression.fromString('square(x)');
-    expect(expr.toJuliaString()).to.be.equal('pow(x, 2)');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.pow(x, 2)');
   });
   it('toJuliaString() for "cube(x)"', () => {
     let expr = Expression.fromString('cube(x)');
-    expect(expr.toJuliaString()).to.be.equal('pow(x, 3)');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.pow(x, 3)');
   });
   it('toJuliaString() for 1.1', () => {
     let expr = Expression.fromString(1.1);
@@ -54,7 +54,7 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "pow(x, y) + x^y"', () => {
     let expr = Expression.fromString('pow(x, y) + x^y');
-    expect(expr.toJuliaString()).to.be.equal('pow(x, y) + pow(x, y)');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.pow(x, y) + NaNMath.pow(x, y)');
   });
   it('toJuliaString() for "max(1, 2, 3) + min(1, 2, 3)"', () => {
     let expr = Expression.fromString('max(1, 2, 3) + min(1, 2, 3)');
@@ -66,19 +66,19 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "ln(x*y)"', () => {
     let expr = Expression.fromString('ln(x*y)');
-    expect(expr.toJuliaString()).to.be.equal('log(x * y)');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.log(x * y)');
   });
   it('toJuliaString() for "log(exp(1))"', () => {
     let expr = Expression.fromString('log(exp(1))');
-    expect(expr.toJuliaString()).to.be.equal('log(exp(1.0))');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.log(exp(1.0))');
   });
   it('toJuliaString() for "log(8, 2)"', () => {
     let expr = Expression.fromString('log(8, 2)');
-    expect(expr.toJuliaString()).to.be.equal('log(2.0, 8.0)');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.log(2.0, 8.0)');
   });
   it('toJuliaString() for "log10(100)"', () => {
     let expr = Expression.fromString('log10(100)');
-    expect(expr.toJuliaString()).to.be.equal('log10(100.0)');
+    expect(expr.toJuliaString()).to.be.equal('NaNMath.log10(100.0)');
   });
   it('toJuliaString() for "ifgt(x-y, 0, 1,2)"', () => {
     let expr = Expression.fromString('ifgt(x-y, 0, 1,2)');

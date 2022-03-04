@@ -5,6 +5,7 @@
 - optimize saving_generator in julia export
 - Implement `include ... type table`
 - Implement export to CSV and other tabular formats
+- Julia export: log10, log2, log, pow, sqrt => NaNMath.log10, etc.
 
 ## 0.6.10
 

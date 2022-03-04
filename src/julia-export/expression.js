@@ -30,23 +30,49 @@ Expression.prototype.toJuliaString = function(){
       return `/(${args})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='cube'){
-      return `pow(${node.args[0].toString(options)}, 3)`;
+      return `NaNMath.pow(${node.args[0].toString(options)}, 3)`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='square'){
-      return `pow(${node.args[0].toString(options)}, 2)`;
+      return `NaNMath.pow(${node.args[0].toString(options)}, 2)`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='pow'){
-      return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
+      return `NaNMath.pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='sqrt'){
+      return `NaNMath.sqrt(${node.args[0].toString(options)})`;
+    }
+    
+    if(node.type==='FunctionNode' && node.fn.name==='nthRoot' && node.args.length === 1){
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `NaNMath.sqrt(${args[0]})`;
+    }
+    
+    if(node.type==='FunctionNode' && node.fn.name==='nthRoot' && node.args.length >= 2){
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `NaNMath.pow(${args[0]}, 1/(${args[1]}))`; // TODO: check here
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='log10'){
+      return `NaNMath.log10(${node.args[0].toString(options)})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='log2'){
+      return `NaNMath.log2(${node.args[0].toString(options)})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='ln'){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `log(${args[0]})`;
+      return `NaNMath.log(${args[0]})`;
+    }
+    if(node.type==='FunctionNode' && node.fn.name==='log' && node.args.length === 1){
+      let args = node.args
+        .map((arg) => arg.toString(options));
+      return `NaNMath.log(${args[0]})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='log' && node.args.length >= 2){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `log(${args[1]}, ${args[0]})`;
+      return `NaNMath.log(${args[1]}, ${args[0]})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='factorial'){
       let args = node.args
@@ -107,7 +133,7 @@ Expression.prototype.toJuliaString = function(){
     }
     
     if (node.type === 'OperatorNode' && node.fn === 'pow') { // to support NaNMath.pow
-      return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
+      return `NaNMath.pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
     }
 
     if (node.type === 'SymbolNode' && node.name === 'e') {
