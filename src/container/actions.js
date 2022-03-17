@@ -162,19 +162,24 @@ Container.prototype.insert = function(q = {}, isCore = false){
  * @returns {Component} Updated component.
  */
 Container.prototype.update = function(q = {}){
-  let ind = getIndexFromQ(q);
-
   let space = q.space || 'nameless';
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  if (!q.id) {
     this.logger.error(
-      `${ind} Id should be string, but have "${q.id}"`,
+      `"id" property is not set in "#update" action: ${JSON.stringify(q)}`,
+      {type: 'QError', space: space}
+    );
+    return;
+  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+    this.logger.error(
+      `"id" property should be string in "#update" action, got "${q.id}"`,
       {type: 'QError', space: space}
     );
     return;
   }
+  let ind = getIndexFromQ(q);
   if (q.class){
     this.logger.error(
-      `${ind} Class property is not allowed for "update": ${q.class}`,
+      `${ind} "class" property is not allowed for "update": ${q.class}`,
       {type: 'QError', space: space}
     );
     return;
@@ -235,19 +240,25 @@ Container.prototype.upsert = function(q = {}, isCore = false){
  * @returns {Component} Deleted component.
  */
 Container.prototype.delete = function(q = {}){
-  let ind = getIndexFromQ(q);
-
   let space = q.space || 'nameless';
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
+
+  if (!q.id) {
     this.logger.error(
-      `${ind} Id should be string, but have "${q.id}"`,
+      `"id" property is not set in "#delete" action: ${JSON.stringify(q)}`,
+      {type: 'QError', space: space}
+    );
+    return;
+  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+    this.logger.error(
+      `"id" property should be string in "#delete" action, got "${q.id}"`,
       {type: 'QError', space: space}
     );
     return;
   }
+  let ind = getIndexFromQ(q);
   if (q.class){
     this.logger.error(
-      `${ind} Class property is not allowed for "delete": ${q.class}`,
+      `${ind} "class" property is not allowed for "delete": ${q.class}`,
       {type: 'QError', space: space}
     );
     return;
@@ -524,17 +535,24 @@ Container.prototype.move = function(q = {}){
 // #select
 // XXX: don't really used
 Container.prototype.select = function(q = {}){
-  let ind = getIndexFromQ(q);
 
   let space = q.space || 'nameless';
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
+  if (!q.id) {
     this.logger.error(
-      `${ind} Id should be string, but have "${q.id}"`,
+      `"id" property is not set in "#select" action: ${JSON.stringify(q)}`,
+      {type: 'QError', space: space}
+    );
+    return;
+  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+    this.logger.error(
+      `"id" property should be string in "#select" action, got "${q.id}"`,
       {type: 'QError', space: space}
     );
     return;
   }
+
   let namespace = this.namespaceStorage.get(space);
+  let ind = getIndexFromQ(q);
   if (namespace === undefined) {
     this.logger.error(
       `${ind} Create namespace "${space}" before use.`,
