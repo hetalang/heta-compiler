@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.6.12
+
+- fix NaNMath problem in julia export
+- display error if `id` is not set
+
 ## 0.6.11
 
 - optimize saving_generator in julia export
