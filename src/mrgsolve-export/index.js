@@ -94,19 +94,17 @@ class MrgsolveExport extends AbstractExport {
       .map((component) => component.id);
 
     // check if initials depends on dynamic initials, than stop
-    ns
-      .toArray()
+    ns.toArray()
       .filter((component) => {
         return component.instanceOf('Record')
-          && component.assignments 
-          && component.assignments.start_;
+          && !component.isRule;
       }).forEach((record) => {
         let deps = record.dependOn('start_', true);
         let diff = _.intersection(dynamicIds, deps);
         if (diff.length > 0) {
           let logger = ns.container.logger;
           let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
-            + `${record.id}$${record.space} []= ${record.assignments.start_.toString()}`;
+            + `${record.index} .= ${record.assignments.start_.toString()}`;
             
           logger.error(errorMsg, {type: 'ExportError'});
         }
