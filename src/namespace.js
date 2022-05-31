@@ -151,7 +151,7 @@ class Namespace extends Map {
         })
         .map((record) => {
           let assignment = record.getAssignment(context) || record.getAssignment('ode_');
-          return `  ${record.index} <= ${assignment};`;
+          return `  ${record.index} ~ ${assignment};`;
         })
         .join('\n');
       let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);

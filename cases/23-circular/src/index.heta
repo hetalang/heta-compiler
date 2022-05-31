@@ -1,0 +1,24 @@
+comp1 @Compartment .= 1.1;
+s1 @Species {compartment: comp1} .= 10;
+r1 @Reaction {actors: s1=} := k1 * s1 * comp1;
+k1 @Const = 1e-1;
+
+x1 @Record := x3 * k1;
+x2 @Record := x1^2 * k1;
+x3 @Record := x1 * x2 / 3;
+
+y1 @Record .= y3 * k1;
+y2 @Record .= y1^2 * k1;
+y3 @Record .= y1 * y2 / 3;
+
+// exports
+#export { format: JSON, filepath: output };
+//#export { format: YAML, filepath: output };
+//#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+//#export { format: SBML, filepath: sbml, version: L2V4 };
+//#export { format: SLV, filepath: model, eventsOff: false };
+//#export { format: DBSolve, filepath: dbsolve };
+//#export { format: Simbio, filepath: simbio };
+//#export { format: Mrgsolve, filepath: mrgsolve };
+//#export { format: Matlab, filepath: matlab };
+//#export { format: Julia, filepath: julia };
