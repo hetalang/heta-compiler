@@ -14,16 +14,16 @@ const patternRandom = 'aA0';
 const schema = {
   type: 'object',
   properties: {
-    id: { '$ref': "#/definitions/ID" }
+    id: { '$ref': '#/definitions/ID' }
   },
 
   definitions: {
     ID: {
-      description: "First character is letter, others are letter, digit or underscore.",
-      type: "string",
+      description: 'First character is letter, others are letter, digit or underscore.',
+      type: 'string',
       minLength: 1,
-      pattern: "^[_a-zA-Z][_a-zA-Z0-9]*$",
-      example: "x_12_"
+      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      example: 'x_12_'
     }
   }
 };

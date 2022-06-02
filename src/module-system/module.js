@@ -9,7 +9,7 @@ const fs = require('fs');
  * @property {object[]} parsed Q-array.
  * @property {string} filename File name (absolute) associated with the module.
  * @property {Logger} logger Object to analyze log events.
- * @property {string} type One of module types: heta, json, yaml, xlsx, sbml
+ * @property {string} type One of module types: heta, json, yaml, table, xlsx, sbml
  * @property {object} options Additional module options.
  */
 class _Module {

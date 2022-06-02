@@ -22,28 +22,33 @@
 [x] Julia
 [x] Heta-code (Heta)
 [x] csv
+[x] DOT language / Graphviz
+[ ] ODEs in markdown/latex/ascii
 [ ] rxode (R)
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)
-[ ] ODEs in markdown/latex/ascii
-[x] DOT language / Graphviz
 
 ## bugs
 
 ## features
 
+- checking legal functions inside Expressions and its arguments
+- `#defineFunction`
 - calculate units for pow function
-- remove unnecessary rules
+- remove unnecessary rules in export
 - checking units for diff eq
 - check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers
-- checking legal functions inside Expressions and its arguments
 - highlight multiline comments in Heta dictionary and array (with/without comma)
-- `#move`, `#moveNS`
 - atStart to exports: Matlab, DBSolve
+- remove `isAmount`, `compartment` properties from `@Reaction`
 
 ## ideas
 
+- `#move`, `#moveNS`
+- `#deleteNS` action
+- `#move`, `#moveNS`
+- remove support of `include` statement, use only `#include` action
 - check file format for modules
 - syntax highlight in web
 - add "ignoreCompartment" property in Species
@@ -54,9 +59,7 @@
 - `heta update` => `npm i heta-compiler`
 - support null for properties: highlight, parse, heta standard
 - stoichiometry as `@Const` and `@Record`
-- #defineFunction + function checking
 - updating properties with `one::s1.assignments.start_ 5.5;`
-- remove `isAmount`, `compartment` properties from `@Reaction`
 
 ## remove lodash
 

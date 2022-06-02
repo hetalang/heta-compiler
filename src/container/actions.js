@@ -60,6 +60,22 @@ Container.prototype.defineUnit = function(q = {}, isCore = false){
 };
 
 /**
+ * Creates `FunctionDef` instance and puts it in `container.functionDefStorage`.
+ * 
+ * @param {object} q The `#defineFunction` statement in JS object format.
+ * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * 
+ * @returns {FunctionDef} The created object.
+ */
+Container.prototype.defineFunction = function(q = {}, isCore = false){
+  // normal flow
+  let functionDefInstance = new this.classes.FunctionDef(q, isCore);
+  if (!functionDefInstance.errored) this.functionDefStorage.set(functionDefInstance.id, functionDefInstance);
+
+  return functionDefInstance;
+};
+
+/**
  * Creates `Scenario` instance and puts it in `container.scenarioStorage`.
  * 
  * @param {object} q The `#setScenario` statement in JS object format.

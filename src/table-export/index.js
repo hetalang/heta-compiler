@@ -70,10 +70,13 @@ class TableExport extends AbstractExport {
     let fArr_unitDef = [...this._container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
+    let fArr_functionDef = [...this._container.functionDefStorage]
+      .filter((x) => !x[1].isCore)
+      .map((x) => x[1].toFlat());
     let fArr_scenario = [...this._container.scenarioStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
-    let fArr_full = [].concat(fArr_ns, fArr_unitDef, fArr_scenario).map((x) => {
+    let fArr_full = [].concat(fArr_ns, fArr_unitDef, fArr_functionDef, fArr_scenario).map((x) => {
       x.on = 1;
       return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
     });

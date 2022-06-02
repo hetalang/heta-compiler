@@ -33,7 +33,7 @@ program
   .option('--meta-dir <filepath>', 'Set meta directory path.')
   // moduleImport
   .option('-s, --source <filepath>', 'path to main heta module.')
-  .option('-t, --type <heta|xlsx|json|yaml|sbml>', 'type of source file.')
+  .option('-t, --type <heta|table|xlsx|json|yaml|sbml>', 'type of source file.')
   .parse(process.argv);
 
 (async () => {

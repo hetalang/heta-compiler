@@ -53,7 +53,7 @@
       "required": ["source"],
       "additionalProperties": true,
       "properties": {
-        "type": {"type": "string", "enum": ["heta", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
+        "type": {"type": "string", "enum": ["heta", "table", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
         "source": {"type": "string", "default": "index.heta"},
         "sheet": { "type": "integer" },
         "omitRows": { "type": "integer" }

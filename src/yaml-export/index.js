@@ -28,7 +28,7 @@ class YAMLExport extends AbstractExport {
     return 'YAMLExport';
   }
   get format(){
-    return 'YAML'
+    return 'YAML';
   }
   make(){
     // filtered namespaces
@@ -47,11 +47,14 @@ class YAMLExport extends AbstractExport {
     let qArr_unitDef = [...this._container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
+    let qArr_functionDef = [...this._container.functionDefStorage]
+      .filter((x) => !x[1].isCore)
+      .map((x) => x[1].toQ());
     let qArr_scenario = [...this._container.scenarioStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
       
-    let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_scenario);
+    let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_functionDef, qArr_scenario);
 
     // remove unnecessary properties
     let qArr = this.omit ? qArr_full.map((q) => _.omit(q, this.omit)) : qArr_full;

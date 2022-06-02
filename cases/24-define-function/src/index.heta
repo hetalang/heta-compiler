@@ -1,0 +1,26 @@
+/*
+  testing #defineFunction action
+*/
+
+#defineFunction pow7 {
+  arguments: [x],
+  math: "pow(x, 7)"
+};
+
+c1 @Compartment .= 2;
+s1 @Species {compartment: c1} .= 100;
+r1 @Reaction {actors: s1=} := k1 * pow7(s1) * c1;
+
+k1 @Const = 0.1;
+
+// exports
+#export { format: JSON, filepath: output };
+#export { format: YAML, filepath: output };
+#export { format: Table, filepath: table, omitRows: 3, splitByClass: true };
+#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+//#export { format: SBML, filepath: sbml, version: L2V4 };
+#export { format: DBSolve, filepath: dbsolve };
+//#export { format: Simbio, filepath: simbio };
+//#export { format: Mrgsolve, filepath: mrgsolve };
+//#export { format: Matlab, filepath: matlab };
+//#export { format: Julia, filepath: julia };

@@ -1,6 +1,7 @@
 // Top classes
 const { Top } = require('../core/top');
 const { UnitDef } = require('../core/unit-def');
+const { FunctionDef } = require('../core/function-def');
 const { Scenario } = require('../core/scenario');
 // const { AbstractExport } = require('../core/abstract-export');
 // Component classes
@@ -40,6 +41,7 @@ const TopoSort = require('@insysbio/topo-sort');
  *    The {@link JSONTransport} is used here.
  * @property {Map<string,_Export>} exportStorage Storage for `_Export` instances. Key is a string identifier.
  * @property {Map<string,UnitDef>} unitDefStorage Storage for `UnitDef` instances. Key is a string identifier.
+ * @property {Map<string,FunctionDef>} functionDefStorage Storage for `FunctionDef` instances. Key is a string identifier.
  * @property {Map<string,Scenario>} scenarioStorage Storage for `Scenario` instances. Key is a string identifier.
  * @property {Map<string,Namespace>} namespaceStorage Storage for `Namespace` instances. Key is a string identifier.
  *    There is a default namespace with identifier `nameless` which will be used as a default namespace 
@@ -57,6 +59,8 @@ class Container {
     this.classes.Top.prototype._container = this; // only for testing
     this.classes.UnitDef = class extends UnitDef {};
     this.classes.UnitDef.prototype._container = this;
+    this.classes.FunctionDef = class extends FunctionDef {};
+    this.classes.FunctionDef.prototype._container = this;
     this.classes.Scenario = class extends Scenario {};
     this.classes.Scenario.prototype._container = this;
     // create "export" classes bound to this container
@@ -75,6 +79,8 @@ class Container {
     this.exportStorage = new Map();
     // storage for UnitDef
     this.unitDefStorage = new Map();
+    // storage for FunctionDef
+    this.functionDefStorage = new Map();
     // storage for Scenario
     this.scenarioStorage = new Map();
     // storage of Namespaces
@@ -149,12 +155,13 @@ class Container {
   /**
    * Get number of total elements of a platform.
    * 
-   * @returns {number} Total number of components + `UnitDef` + `_Export` instances.
+   * @returns {number} Total number of components + `UnitDef` + `Functiondef` + `_Export` instances.
    */
   get length(){
     return [...this.namespaceStorage]
       .reduce((acc, x) => acc + x[1].size, 0)
         + this.unitDefStorage.size // global elements
+        + this.functionDefStorage.size
         + this.scenarioStorage.size
         + this.exportStorage.size;
   }
