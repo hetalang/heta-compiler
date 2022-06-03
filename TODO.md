@@ -33,7 +33,7 @@
 ## features
 
 - checking legal functions inside Expressions and its arguments
-- `#defineFunction`
+- `#defineFunction`: autotest, circular, SBML export, different exports
 - calculate units for pow function
 - remove unnecessary rules in export
 - checking units for diff eq

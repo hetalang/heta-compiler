@@ -15,7 +15,7 @@ _Module.prototype.setSBMLModule = function(){
     this.parsed = SBMLParse(this.filename, fileContent);
   } catch (e) {
     this.parsed = [];
-    let msg = e.message + ` when converting module "${this.filename}"`;
+    let msg = e.message + `, converting module "${this.filename}"`;
     this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
   }
 

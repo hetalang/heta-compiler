@@ -48,15 +48,17 @@ function jsbmlToQArr(JSBML){
     .value();
 
   // algebraicRules
+  
   let functionDefinitions = _.chain(model.elements)
     .filter(['name', 'listOfFunctionDefinitions'])
     .map('elements')
     .flatten()
     .filter(['name', 'functionDefinition'])
     .value();
-  if (functionDefinitions.length !== 0) {
-    throw new Error('"functionDefinitions" from SBML module is not supported.');
-  }
+  functionDefinitions.forEach((x) => {
+    let q = functionDefinitionToQ(x);
+    qArr.push(q);
+  });
 
   // species types, for IRT
   let speciesTypes = _.chain(model.elements)
@@ -208,6 +210,37 @@ function unitDefinitionToUnits(x){
     .value();
 
   return Unit.fromQ(units);
+}
+
+
+/*
+  transform SBML-like function definition to Heta-like unit array
+*/
+function functionDefinitionToQ(x){
+
+  let mathElement = x.elements
+    && x.elements.find((y) => y.name === 'math');
+  let lambdaElement = mathElement.elements
+    && mathElement.elements.find((y) => y.name === 'lambda');
+
+  // get argument ids
+  let args = lambdaElement.elements && lambdaElement.elements
+    .filter((y) => y.name === 'bvar')
+    .map((y) => y.elements && y.elements.find((z) => z.name === 'ci'))
+    .map((y) => y.elements && y.elements.find((z) => z.type === 'text'))
+    .map((y) => y.text.trim());
+
+  // get expression
+  let notBvarElement = lambdaElement.elements 
+    && lambdaElement.elements.find((y) => y.name !== 'bvar');
+  let math = _toMathExpr(notBvarElement);
+
+  return {
+    action: 'defineFunction',
+    id: x.attributes.id,
+    arguments: args,
+    math: math
+  };
 }
 
 /*
