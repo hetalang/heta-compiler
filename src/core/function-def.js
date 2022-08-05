@@ -56,7 +56,7 @@ class FunctionDef extends Top {
     
     if (q.math) {
       try {
-        let expr = Expression.fromString(q.math);
+        var expr = Expression.fromString(q.math);
         expr._logger = logger;
         if (!expr.hasBooleanResult()) {
           this.math = expr;
@@ -67,6 +67,15 @@ class FunctionDef extends Top {
         }
       } catch (e) {
         let msg = this.id + ': '+ e.message + ` in "${q.math.toString()}"`;
+        logger && logger.error(msg, {type: 'ValidationError'});
+        this.errored = true;
+      }
+
+      // check that identifiers in `math` correspond to `arguments`
+      let lostVariables = expr.dependOn()
+        .filter((v) => this.arguments.indexOf(v) === -1);
+      if (lostVariables.length > 0) {
+        let msg = this.id + ': '+ `variables [${lostVariables.join(', ')}] are presented in math but not in arguments.`;
         logger && logger.error(msg, {type: 'ValidationError'});
         this.errored = true;
       }
