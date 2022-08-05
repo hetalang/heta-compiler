@@ -23,7 +23,7 @@ k1 @Const = 0.1;
 #export { format: YAML, filepath: output };
 #export { format: Table, filepath: table, omitRows: 3, splitByClass: true };
 #export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
-//#export { format: SBML, filepath: sbml, version: L2V4 };
+#export { format: SBML, filepath: sbml, version: L2V4 };
 #export { format: DBSolve, filepath: dbsolve };
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };

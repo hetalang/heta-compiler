@@ -32,8 +32,8 @@
 
 ## features
 
-- checking legal functions inside Expressions and its arguments
-- `#defineFunction`: autotest, circular, SBML export, different exports
+- checking legal functions inside Expressions and functionDefinitian
+- `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - calculate units for pow function
 - remove unnecessary rules in export
 - checking units for diff eq

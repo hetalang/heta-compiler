@@ -30,6 +30,25 @@
 <!-- END UNIT DEFINITIONS -->
   {%- endif %}
   
+  {%- if listOfFunctionDefinitions | length > 0 %}
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+    {%- for functionDefinition in listOfFunctionDefinitions %}
+      <functionDefinition id="{{ functionDefinition.id }}">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            {%- for argument in functionDefinition.arguments %}
+            <bvar><ci> {{ argument }} </ci></bvar>
+            {%- endfor %}
+            {{ functionDefinition.math.toCMathML(true) }}
+          </lambda>
+        </math>
+      </functionDefinition>
+    {%- endfor %}
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+  {%- endif %}
+
   {% set listOfCompartments = population.selectByClassName('Compartment') %}
   {%- if listOfCompartments | length > 0 %}
     <listOfCompartments>

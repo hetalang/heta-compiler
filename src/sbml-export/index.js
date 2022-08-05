@@ -105,10 +105,14 @@ class SBMLExport extends AbstractExport {
         listOfUnitDefinitions = [];
       }
     }
+
+    // set functionDefinition
+    let listOfFunctionDefinitions = [...ns.container.functionDefStorage.values()];
     
     return {
       population: ns,
-      listOfUnitDefinitions: listOfUnitDefinitions
+      listOfUnitDefinitions,
+      listOfFunctionDefinitions
     };
   }
   getSBMLCode(image = {}){
