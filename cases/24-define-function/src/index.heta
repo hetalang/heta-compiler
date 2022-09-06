@@ -12,6 +12,15 @@
   math: sqrt(x1^2 + x2^2 + x3^2)
 };
 
+#defineFunction f4 {
+  arguments: [],
+  math: 15*2
+};
+
+#defineUnit u1 {
+  units: litre^2,
+};
+
 c1 @Compartment .= 2;
 s1 @Species {compartment: c1} .= 100;
 r1 @Reaction {actors: s1=} := k1 * pow7(s1) * c1;
@@ -25,6 +34,7 @@ k1 @Const = 0.1;
 #export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
 #export { format: SBML, filepath: sbml, version: L2V4 };
 #export { format: DBSolve, filepath: dbsolve };
+#export { format: HetaCode, filepath: heta };
 //#export { format: Simbio, filepath: simbio };
 //#export { format: Mrgsolve, filepath: mrgsolve };
 //#export { format: Matlab, filepath: matlab };

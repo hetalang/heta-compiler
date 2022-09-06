@@ -62,6 +62,14 @@
 {%- endif %}
 {%- endfor %}
 
+{%- for id, functionDef in functionDefStorage %}
+{%-  if not functionDef.isCore %}
+{{ id }} #defineFunction { arguments: [{{ functionDef.arguments | join(', ') }}],
+{%- if functionDef.math is defined %} math: {{ functionDef.math.toString() }}, {% endif -%}
+};
+{%- endif %}
+{%- endfor %}
+
 {%- for spaceId, namespace in namespaceStorage %}
 
 {{ 'abstract ' if namespace.isAbstract }}namespace {{ spaceId }} begin

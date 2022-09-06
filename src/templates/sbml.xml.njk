@@ -35,6 +35,7 @@
     <listOfFunctionDefinitions>
     {%- for functionDefinition in listOfFunctionDefinitions %}
       <functionDefinition id="{{ functionDefinition.id }}">
+      {%- if functionDefinition.math is defined %}
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <lambda>
             {%- for argument in functionDefinition.arguments %}
@@ -43,6 +44,7 @@
             {{ functionDefinition.math.toCMathML(true) }}
           </lambda>
         </math>
+      {%- endif %}
       </functionDefinition>
     {%- endfor %}
     </listOfFunctionDefinitions>

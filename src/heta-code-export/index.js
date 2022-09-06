@@ -55,6 +55,7 @@ class HetaCodeExport extends AbstractExport{
       : [...container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1);
     
     return {
+      functionDefStorage: [...container.functionDefStorage],
       unitDefStorage: [...container.unitDefStorage],
       namespaceStorage: filteredNamespaceStorage
     };
