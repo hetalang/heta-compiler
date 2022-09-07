@@ -61,10 +61,10 @@ __platform__ = (function()
 ])
 
 ### initialization of ODE variables and Records
-function {{ id }}_init_func_(cons)
+function {{ id }}_init_func_(__cons__)
     #({% for con in img.constants -%}
     {{ con.id }}, 
-    {%- endfor %}) = cons
+    {%- endfor %}) = __cons__
 
     # Heta initialize
     t = 0.0 # initial time
@@ -103,14 +103,14 @@ function {{ id }}_init_func_(cons)
 end
 
 ### calculate RHS of ODE
-function {{ id }}_ode_func_(du, u, p, t)
-    cons = p.constants
+function {{ id }}_ode_func_(__du__, __u__, __p__, t)
+    __cons__ = __p__.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = p.static
+    {%- endfor %}) = __p__.static
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = u {# TODO: replace by u[index] #}
+    {%- endfor %}) = __u__ {# TODO: replace by __u__[index] #}
 
     # Heta rules
     {%- for ts in timeScales %}
@@ -123,23 +123,23 @@ function {{ id }}_ode_func_(du, u, p, t)
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
-    #p.static .= [{% for record in img.staticRecords -%}
+    #__p__.static .= [{% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}]
     {%- if img.dynamicRecords | length > 0 %}
-    du .= [{% for record in img.dynamicRecords %}
+    __du__ .= [{% for record in img.dynamicRecords %}
       {{ img.rhs[loop.index0] }},  # d{{ record.id }}_/dt
     {%- endfor %}
     ]
     {%- else %}
-    du .= [ 1.0 ] # RHS for fake variable
+    __du__ .= [ 1.0 ] # RHS for fake variable
     {%- endif %}
 end
 
 ### output function
-function {{ id }}_saving_generator_(outputIds::Vector{Symbol})
+function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
     # XXX: currently force amounts: s1_, s2_ are not supported
-    __actual_indexes__ = indexin(outputIds, [
+    __actual_indexes__ = indexin(__outputIds__, [
       {%- for ts in timeScales -%}
       :{{ts.id}},
       {%- endfor %}
@@ -147,21 +147,21 @@ function {{ id }}_saving_generator_(outputIds::Vector{Symbol})
       :{{ rec.id }},
       {%- endfor -%}
     ])
-    # check nothing in actual_indexes
-    wrongIndexes = findall(x -> x===nothing, __actual_indexes__)
-    if length(wrongIndexes) > 0
-      wrongIds = outputIds[wrongIndexes]
-      throw("Wrong identifiers: $(wrongIds)")
+    # check nothing in __actual_indexes__
+    __wrongIndexes__ = findall(x -> x===nothing, __actual_indexes__)
+    if length(__wrongIndexes__) > 0
+      __wrongIds__ = __outputIds__[__wrongIndexes__]
+      throw("Wrong identifiers: $(__wrongIds__)")
     end
 
-    function saving_(u, t, integrator)
-        cons = integrator.p.constants
+    function saving_(__u__, t, __integrator__)
+        __cons__ = __integrator__.p.constants
         ({% for record in img.staticRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-        {%- endfor %}) = integrator.p.static
+        {%- endfor %}) = __integrator__.p.static
         ({% for record in img.dynamicRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-        {%- endfor %}) = u{# TODO: replace by u[index] #}
+        {%- endfor %}) = __u__{# TODO: replace by __u__[index] #}
 
         # Heta rules
         {%- for ts in timeScales %}
@@ -195,14 +195,14 @@ end
 
 ### TIME EVENTS ###
 {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_tstops_func_(cons, times)
+function {{ id }}_{{ event.switcher.id }}_tstops_func_(__cons__, __times__)
     {%- set ev_start = img.pTranslator[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
     {%- set ev_period = img.pTranslator[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
     {%- set ev_stop = img.pTranslator[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
     {% if ev_period is undefined -%}
     return [{{ ev_start }}]
     {%- else -%}
-    return {{ ev_period }} > 0.0 ? collect(range({{ ev_start }}, {{ ev_stop if ev_stop is defined else 'times[2]' }}; step={{ ev_period }})) : [{{ ev_start }}]
+    return {{ ev_period }} > 0.0 ? collect(range({{ ev_start }}, {{ ev_stop if ev_stop is defined else '__times__[2]' }}; step={{ ev_period }})) : [{{ ev_start }}]
     {%- endif %}
 end
 {%- endfor %}
@@ -210,14 +210,14 @@ end
 ### D EVENTS ###
 
 {%- for event in img.events | filter2('switcher.className', 'DSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
-    cons = integrator.p.constants
+function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
+    __cons__ = __integrator__.p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = integrator.p.static
+    {%- endfor %}) = __integrator__.p.static
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = u
+    {%- endfor %}) = __u__
 
     # Heta rules
     {%- for ts in timeScales %}
@@ -236,14 +236,14 @@ end
 {%- endfor %}
 
 {%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
-    cons = integrator.p.constants
+function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
+    __cons__ = __integrator__.p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = integrator.p.static
+    {%- endfor %}) = __integrator__.p.static
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = u
+    {%- endfor %}) = __u__
 
     # Heta rules
     {%- for ts in timeScales %}
@@ -264,14 +264,14 @@ end
 ### STOP EVENTS ###
 
 {%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_condition_func_(u, t, integrator)
-    cons = integrator.p.constants
+function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
+    __cons__ = __integrator__.p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = integrator.p.static
+    {%- endfor %}) = __integrator__.p.static
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = u
+    {%- endfor %}) = __u__
 
     # Heta rules
     {%- for ts in timeScales %}
@@ -291,15 +291,15 @@ end
 
 ### event assignments
 {% for event in img.events | exclude2('switcher.className', 'StopSwitcher') -%}
-function {{ id }}_{{ event.switcher.id }}_affect_func_(integrator)
-    cons = integrator.p.constants
-    t = integrator.t
+function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
+    __cons__ = __integrator__.p.constants
+    t = __integrator__.t
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = integrator.p.static
+    {%- endfor %}) = __integrator__.p.static
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = integrator.u
+    {%- endfor %}) = __integrator__.u
 
     # Heta rules
     {%- for ts in timeScales %}
@@ -325,11 +325,11 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(integrator)
     
     # save results
     {% if img.dynamicRecords | length == 0 -%}
-    integrator.u[[1]] = [
+    __integrator__.u[[1]] = [
         0.0,
     ]
     {%- else -%}
-    integrator.u[[
+    __integrator__.u[[
         {%- for record in img.dynamicRecords -%}
         {{ loop.index + ',' if record.getAssignment(event.switcher.id) is defined }}
         {%- endfor -%}
@@ -339,7 +339,7 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(integrator)
         {%- endfor %}
     ]
     {%- endif %}
-    integrator.p.static[[
+    __integrator__.p.static[[
         {%- for record in img.staticRecords -%}
         {{ loop.index + ',' if record.getAssignment(event.switcher.id) is defined }}
         {%- endfor -%}
