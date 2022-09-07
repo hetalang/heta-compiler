@@ -27,15 +27,15 @@ mm_events_active_ = NamedTuple{(
 ])
 
 ### initialization of ODE variables and Records
-function mm_init_func_(cons)
-    #(Vmax,Km,) = cons
+function mm_init_func_(__cons__)
+    #(Vmax,Km,) = __cons__
 
     # Heta initialize
     t = 0.0 # initial time
     P = 0.0
     S = 10.0
     default_comp = 1.0
-    r1 = cons[1] * S / (cons[2] + S) * default_comp
+    r1 = __cons__[1] * S / (__cons__[2] + S) * default_comp
     
     # save results
 
@@ -51,43 +51,43 @@ function mm_init_func_(cons)
 end
 
 ### calculate RHS of ODE
-function mm_ode_func_(du, u, p, t)
-    cons = p.constants
-    (default_comp,) = p.static
-    (S_,P_,) = u 
+function mm_ode_func_(__du__, __u__, __p__, t)
+    __cons__ = __p__.constants
+    (default_comp,) = __p__.static
+    (S_,P_,) = __u__ 
 
     # Heta rules
     P = P_ / default_comp
     S = S_ / default_comp
-    r1 = cons[1] * S / (cons[2] + S) * default_comp
+    r1 = __cons__[1] * S / (__cons__[2] + S) * default_comp
     
-    #p.static .= [default_comp,]
-    du .= [
+    #__p__.static .= [default_comp,]
+    __du__ .= [
       -r1,  # dS_/dt
       r1,  # dP_/dt
     ]
 end
 
 ### output function
-function mm_saving_generator_(outputIds::Vector{Symbol})
+function mm_saving_generator_(__outputIds__::Vector{Symbol})
     # XXX: currently force amounts: s1_, s2_ are not supported
-    __actual_indexes__ = indexin(outputIds, [:default_comp,:S,:P,:r1,])
-    # check nothing in actual_indexes
-    wrongIndexes = findall(x -> x===nothing, __actual_indexes__)
-    if length(wrongIndexes) > 0
-      wrongIds = outputIds[wrongIndexes]
-      throw("Wrong identifiers: $(wrongIds)")
+    __actual_indexes__ = indexin(__outputIds__, [:default_comp,:S,:P,:r1,])
+    # check nothing in __actual_indexes__
+    __wrongIndexes__ = findall(x -> x===nothing, __actual_indexes__)
+    if length(__wrongIndexes__) > 0
+      __wrongIds__ = __outputIds__[__wrongIndexes__]
+      throw("Wrong identifiers: $(__wrongIds__)")
     end
 
-    function saving_(u, t, integrator)
-        cons = integrator.p.constants
-        (default_comp,) = integrator.p.static
-        (S_,P_,) = u
+    function saving_(__u__, t, __integrator__)
+        __cons__ = __integrator__.p.constants
+        (default_comp,) = __integrator__.p.static
+        (S_,P_,) = __u__
 
         # Heta rules
         P = P_ / default_comp
         S = S_ / default_comp
-        r1 = cons[1] * S / (cons[2] + S) * default_comp
+        r1 = __cons__[1] * S / (__cons__[2] + S) * default_comp
         
         # force amount
 

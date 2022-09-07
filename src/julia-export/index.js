@@ -161,7 +161,7 @@ class JuliaExport extends AbstractExport {
       });
 
     let pTranslatorArray = constants
-      .map((x, i) => [x.id, `cons[${i+1}]`]);
+      .map((x, i) => [x.id, `__cons__[${i+1}]`]);
       
     return {
       namespace: ns,
