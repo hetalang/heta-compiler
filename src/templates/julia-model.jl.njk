@@ -61,10 +61,10 @@ __platform__ = (function()
 ])
 
 ### initialization of ODE variables and Records
-function {{ id }}_init_func_(__cons__)
+function {{ id }}_init_func_(__constants__)
     #({% for con in img.constants -%}
     {{ con.id }}, 
-    {%- endfor %}) = __cons__
+    {%- endfor %}) = __constants__
 
     # Heta initialize
     t = 0.0 # initial time
@@ -104,7 +104,7 @@ end
 
 ### calculate RHS of ODE
 function {{ id }}_ode_func_(__du__, __u__, __p__, t)
-    __cons__ = __p__.constants
+    __constants__ = __p__.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __p__.static
@@ -155,7 +155,7 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
     end
 
     function saving_(__u__, t, __integrator__)
-        __cons__ = __integrator__.p.constants
+        __constants__ = __integrator__.p.constants
         ({% for record in img.staticRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __integrator__.p.static
@@ -195,7 +195,7 @@ end
 
 ### TIME EVENTS ###
 {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_tstops_func_(__cons__, __times__)
+function {{ id }}_{{ event.switcher.id }}_tstops_func_(__p__, __times__)
     {%- set ev_start = img.pTranslator[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
     {%- set ev_period = img.pTranslator[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
     {%- set ev_stop = img.pTranslator[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
@@ -211,7 +211,7 @@ end
 
 {%- for event in img.events | filter2('switcher.className', 'DSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
-    __cons__ = __integrator__.p.constants
+    __constants__ = __integrator__.p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.static
@@ -237,7 +237,7 @@ end
 
 {%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
-    __cons__ = __integrator__.p.constants
+    __constants__ = __integrator__.p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.static
@@ -265,7 +265,7 @@ end
 
 {%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
-    __cons__ = __integrator__.p.constants
+    __constants__ = __integrator__.p.constants
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.static
@@ -292,7 +292,7 @@ end
 ### event assignments
 {% for event in img.events | exclude2('switcher.className', 'StopSwitcher') -%}
 function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
-    __cons__ = __integrator__.p.constants
+    __constants__ = __integrator__.p.constants
     t = __integrator__.t
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
@@ -362,7 +362,7 @@ end
     {%- endfor %}
   )}([
     {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
-    ({{ id }}_{{ event.switcher.id }}_tstops_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
+    ({{ id }}_{{ event.switcher.id }}_tstops_func_, {{ id }}_{{event.switcher.id}}_affect_func_, {{ event.switcher.atStart | default('false') }}),
     {%- endfor %}
   ]),
   NamedTuple{(
@@ -371,7 +371,7 @@ end
     {%- endfor %}
   )}([
     {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') | exclude2('switcher.className', 'StopSwitcher') %}
-    ({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
+    ({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, {{ event.switcher.atStart | default('false') }}),
     {%- endfor %}
   ]),
   NamedTuple{(
@@ -380,7 +380,7 @@ end
     {%- endfor %}
   )}([
     {%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
-    ({{ id }}_{{ event.switcher.id }}_condition_func_, :{{event.switcher.id}}, {{ event.switcher.atStart | default('false') }}),
+    ({{ id }}_{{ event.switcher.id }}_condition_func_, {{ event.switcher.atStart | default('false') }}),
     {%- endfor %}
   ]),
   {{ id }}_saving_generator_,
