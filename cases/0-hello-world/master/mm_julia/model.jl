@@ -27,15 +27,15 @@ mm_events_active_ = NamedTuple{(
 ])
 
 ### initialization of ODE variables and Records
-function mm_init_func_(__cons__)
-    #(Vmax,Km,) = __cons__
+function mm_init_func_(__constants__)
+    #(Vmax,Km,) = __constants__
 
     # Heta initialize
     t = 0.0 # initial time
-    P = 0.0
-    S = 10.0
-    default_comp = 1.0
-    r1 = __cons__[1] * S / (__cons__[2] + S) * default_comp
+    P = 0e+0
+    S = 1e+1
+    default_comp = 1e+0
+    r1 = __constants__[1] * S / (__constants__[2] + S) * default_comp
     
     # save results
 
@@ -52,14 +52,14 @@ end
 
 ### calculate RHS of ODE
 function mm_ode_func_(__du__, __u__, __p__, t)
-    __cons__ = __p__.constants
+    __constants__ = __p__.constants
     (default_comp,) = __p__.static
     (S_,P_,) = __u__ 
 
     # Heta rules
     P = P_ / default_comp
     S = S_ / default_comp
-    r1 = __cons__[1] * S / (__cons__[2] + S) * default_comp
+    r1 = __constants__[1] * S / (__constants__[2] + S) * default_comp
     
     #__p__.static .= [default_comp,]
     __du__ .= [
@@ -80,14 +80,14 @@ function mm_saving_generator_(__outputIds__::Vector{Symbol})
     end
 
     function saving_(__u__, t, __integrator__)
-        __cons__ = __integrator__.p.constants
+        __constants__ = __integrator__.p.constants
         (default_comp,) = __integrator__.p.static
         (S_,P_,) = __u__
 
         # Heta rules
         P = P_ / default_comp
         S = S_ / default_comp
-        r1 = __cons__[1] * S / (__cons__[2] + S) * default_comp
+        r1 = __constants__[1] * S / (__constants__[2] + S) * default_comp
         
         # force amount
 

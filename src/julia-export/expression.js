@@ -3,7 +3,7 @@ const { Expression } = require('../core/expression');
 Expression.prototype.toJuliaString = function(){
   let juliaStringHandler = (node, options) => {
     if(node.type==='ConstantNode' && Number.isInteger(node.value)){
-      return node.value + '.0';
+      return node.value.toExponential(); // to display 6 => 6e0; 6e23 => 6e+23
     }
     if(node.type==='FunctionNode' && node.fn.name==='plus'){
       let args = node.args
