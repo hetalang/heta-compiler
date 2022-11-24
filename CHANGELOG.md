@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.6.13 - draft defineFunction
+
+- `#defineFunction` support for imports: SBML, Heta,
+- `#defineFunction` supports for exports: HetaCode, SBML
+- minor fixes for Julia export for big numbers like 6e+23 
+- minor updates to mrgsolve export
+
 ## 0.6.12
 
 - fix NaNMath problem in julia export
