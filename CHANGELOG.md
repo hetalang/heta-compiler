@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.14
+
+- update Julia export format
+
 ## 0.6.13 - draft defineFunction
 
 - `#defineFunction` support for imports: SBML, Heta,
