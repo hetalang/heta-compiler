@@ -62,10 +62,6 @@ __platform__ = (function()
 
 ### initialization of ODE variables and Records
 function {{ id }}_init_func_(__constants__)
-    #({% for con in img.constants -%}
-    {{ con.id }}, 
-    {%- endfor %}) = __constants__
-
     # Heta initialize
     t = 0.0 # initial time
     {%- for ts in timeScales %}
@@ -95,19 +91,21 @@ function {{ id }}_init_func_(__constants__)
         [ 0.0 ], # init for fake variable
         {%- endif %}
         Float64[
+            __constants__...,
         {%- for record in img.staticRecords %}
             {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }},
         {%- endfor %}
         ]
     )
 end
-
+{% set constantMaxIndex = img.constants | length %}
+{%- set staticMaxIndex = img.staticRecords | length %}
 ### calculate RHS of ODE
 function {{ id }}_ode_func_(__du__, __u__, __p__, t)
-    __constants__ = __p__.constants
+    __constants__ = __p__[1:{{ constantMaxIndex }}]
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __p__.static
+    {%- endfor %}) = __p__[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__ {# TODO: replace by __u__[index] #}
@@ -123,7 +121,7 @@ function {{ id }}_ode_func_(__du__, __u__, __p__, t)
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
-    #__p__.static .= [{% for record in img.staticRecords -%}
+    #__p__[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}] .= [{% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}]
     {%- if img.dynamicRecords | length > 0 %}
@@ -155,10 +153,10 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
     end
 
     function saving_(__u__, t, __integrator__)
-        __constants__ = __integrator__.p.constants
+        __constants__ = __integrator__.p[1:{{ img.constants | length }}]
         ({% for record in img.staticRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-        {%- endfor %}) = __integrator__.p.static
+        {%- endfor %}) = __integrator__.p[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}]
         ({% for record in img.dynamicRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __u__{# TODO: replace by __u__[index] #}
@@ -211,10 +209,10 @@ end
 
 {%- for event in img.events | filter2('switcher.className', 'DSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
-    __constants__ = __integrator__.p.constants
+    __constants__ = __integrator__.p[1:{{ img.constants | length }}]
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p.static
+    {%- endfor %}) = __integrator__.p[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
@@ -237,10 +235,10 @@ end
 
 {%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
-    __constants__ = __integrator__.p.constants
+    __constants__ = __integrator__.p[1:{{ img.constants | length }}]
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p.static
+    {%- endfor %}) = __integrator__.p[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
@@ -265,10 +263,10 @@ end
 
 {%- for event in img.events | filter2('switcher.className', 'StopSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
-    __constants__ = __integrator__.p.constants
+    __constants__ = __integrator__.p[1:{{ img.constants | length }}]
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p.static
+    {%- endfor %}) = __integrator__.p[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
@@ -292,11 +290,11 @@ end
 ### event assignments
 {% for event in img.events | exclude2('switcher.className', 'StopSwitcher') -%}
 function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
-    __constants__ = __integrator__.p.constants
     t = __integrator__.t
+    __constants__ = __integrator__.p[1:{{ img.constants | length }}]
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p.static
+    {%- endfor %}) = __integrator__.p[{{ constantMaxIndex + 1 }}:{{ constantMaxIndex + staticMaxIndex }}]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.u
@@ -339,9 +337,9 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
         {%- endfor %}
     ]
     {%- endif %}
-    __integrator__.p.static[[
+    __integrator__.p[[
         {%- for record in img.staticRecords -%}
-        {{ loop.index + ',' if record.getAssignment(event.switcher.id) is defined }}
+        {{ loop.index + constantMaxIndex + ',' if record.getAssignment(event.switcher.id) is defined }}
         {%- endfor -%}
     ]] = [
         {%- for record in img.staticRecords | exclude2('assignments.' + event.switcher.id, undefined) %}

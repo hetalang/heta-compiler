@@ -8,4 +8,4 @@ model = load_jlmodel("./model.jl")
 
 ### default simulations
 
-sim(model, (0, 100)) |> plot
+Scenario(model, (0, 100)) |> sim |> plot

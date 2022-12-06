@@ -6,4 +6,5 @@ using HetaSimulator, Plots
 model = load_jlmodel("./model.jl")
 
 ### default simulations
-sim(model, tspan = (0,100)) |> plot
+
+Scenario(model, (0, 100)) |> sim |> plot
