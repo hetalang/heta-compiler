@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.15
+
+- fix bug in Julia export: use `__constants__` in `tstops`
+
 ## 0.6.14
 
 - update Julia export format

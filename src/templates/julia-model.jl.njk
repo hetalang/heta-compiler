@@ -193,7 +193,7 @@ end
 
 ### TIME EVENTS ###
 {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
-function {{ id }}_{{ event.switcher.id }}_tstops_func_(__p__, __times__)
+function {{ id }}_{{ event.switcher.id }}_tstops_func_(__constants__, __times__)
     {%- set ev_start = img.pTranslator[event.switcher.start] if event.switcher.start is defined else event.switcher.startObj.numFloat %}
     {%- set ev_period = img.pTranslator[event.switcher.period] if event.switcher.period is defined else event.switcher.periodObj.numFloat %}
     {%- set ev_stop = img.pTranslator[event.switcher.stop] if event.switcher.stop is defined else event.switcher.stopObj.numFloat %}
