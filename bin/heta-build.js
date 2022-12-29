@@ -34,11 +34,13 @@ program
   // moduleImport
   .option('-s, --source <filepath>', 'path to main heta module.')
   .option('-t, --type <heta|table|xlsx|json|yaml|sbml>', 'type of source file.')
+  // checking newer version of heta-compiler
+  .option('--skip-updates', 'Skip checking newer version of heta-compiler.')
   .parse(process.argv);
 
 (async () => {
   // print newer version message
-  await printVersionMessage();
+  if (!program.skipUpdates) await printVersionMessage();
 
   // set target directory of platform and check if exist
   let targetDir = path.resolve(program.args[0] || '.');

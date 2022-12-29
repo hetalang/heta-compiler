@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.16
+
+- add option `heta build --skip-updates`
+
 ## 0.6.15
 
 - fix bug in Julia export: use `__constants__` in `tstops`
