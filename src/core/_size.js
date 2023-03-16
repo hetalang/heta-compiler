@@ -25,7 +25,12 @@ class _Size extends Component {
         if (q.units === 1) {
           this.unitsParsed = new Unit();
         } else if (typeof q.units === 'string') {
-          this.unitsParsed = Unit.parse(q.units);
+          try {
+            this.unitsParsed = Unit.parse(q.units);
+          } catch (e) {
+            let msg = this.index + ': '+ e.message;
+            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+          }
         } else {
           this.unitsParsed = Unit.fromQ(q.units);
         }

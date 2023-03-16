@@ -87,7 +87,12 @@ class UnitDef extends Top {
     if (q.units && q.units === 1) {
       this.unitsParsed = new Unit();
     } else if (q.units && typeof q.units === 'string') {
-      this.unitsParsed = Unit.parse(q.units);
+      try {
+        this.unitsParsed = Unit.parse(q.units);
+      } catch (e) {
+        let msg = this.index + ': '+ e.message;
+        logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+      }
     } else if (q.units && q.units instanceof Array) {
       this.unitsParsed = Unit.fromQ(q.units);
     }
