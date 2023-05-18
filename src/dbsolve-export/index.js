@@ -42,7 +42,6 @@ class DBSolveExport extends AbstractExport{
    */
   make(){
     let logger = this._container.logger;
-
     
     if (this.spaceFilter !== undefined) {
       // empty namespace is not allowed
@@ -62,6 +61,12 @@ class DBSolveExport extends AbstractExport{
         logger.error(msg);
         return []; // BRAKE
       }
+    }
+
+    // display that function definition is not supported
+    let functionsNames = [...this._container.functionDefStorage.keys()];
+    if (functionsNames.length > 0) {
+      logger.warn(`"FunctionDef" object: ${functionsNames.join(', ')} are presented in platform but not supported by DBSolve export.`);
     }
 
     // filter namespaces if set
@@ -86,7 +91,7 @@ class DBSolveExport extends AbstractExport{
     return results;
   }
   /**
-   * Creates model image by nesessary components based on space.
+   * Creates single model image by nesessary components based on space.
    * @param {string} targetSpace - Model image to update.
    *
    * @return {undefined}

@@ -70,6 +70,12 @@ class SLVExport extends AbstractExport{
       }
     }
 
+    // display that function definition is not supported
+    let functionsNames = [...this._container.functionDefStorage.keys()];
+    if (functionsNames.length > 0) {
+      logger.warn(`"FunctionDef" object: ${functionsNames.join(', ')} are presented in platform but not supported by SLV export.`);
+    }
+
     // filter namespaces if set
     let selectedNamespaces = this.spaceFilter !== undefined 
       ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
