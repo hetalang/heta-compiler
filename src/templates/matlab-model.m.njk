@@ -26,6 +26,12 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
         end
     end
 
+    {%- for functionDefinition in functionDefArray %}
+    function out = {{ functionDefinition.id }}({{ functionDefinition.arguments.join(', ') }})
+        out = {{ functionDefinition.math.toMatlabString() }}
+    end
+    {%- endfor %}
+
     ode_func = @ODEFunc;
     out_func = @OutputFunc;
     events_conditions = @Conditions;

@@ -163,6 +163,8 @@ class MatlabExport extends AbstractExport {
     let const_len = constants.length;
     events.forEach((x, i) => pTranslator.push([x.switcher.id + '_', `p(${const_len + i + 1})`]));
 
+    let functionDefArray = [...ns.container.functionDefStorage.values()];
+
     return { 
       builderName,
       options: this,
@@ -175,7 +177,8 @@ class MatlabExport extends AbstractExport {
       yTranslator: _.fromPairs(yTranslator),
       pTranslator: _.fromPairs(pTranslator),
       translator: _.fromPairs(yTranslator.concat(pTranslator)),
-      events
+      events,
+      functionDefArray
     };
   }
   getModelCode(image = {}){
