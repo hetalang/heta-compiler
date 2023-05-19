@@ -37,6 +37,6 @@ k1 @Const = 0.1;
 #export { format: SLV, filepath: slv };
 #export { format: HetaCode, filepath: heta };
 #export { format: Simbio, filepath: simbio };
-//#export { format: Mrgsolve, filepath: mrgsolve };
-//#export { format: Matlab, filepath: matlab };
+#export { format: Mrgsolve, filepath: mrgsolve };
+#export { format: Matlab, filepath: matlab };
 //#export { format: Julia, filepath: julia };

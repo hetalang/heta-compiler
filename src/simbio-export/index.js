@@ -102,6 +102,12 @@ class SimbioExport extends AbstractExport{
           }
         });
 
+      // display that function definition is not supported
+      let functionsNames = [...this._container.functionDefStorage.keys()];
+      if (functionsNames.length > 0) {
+        logger.warn(`"FunctionDef" object: ${functionsNames.join(', ')} are presented in platform but not supported by Simbio export.`);
+      }
+
       let image = this.getSimbioImage(ns);
       let content = this.getSimbioCode(image);
 
@@ -121,9 +127,13 @@ class SimbioExport extends AbstractExport{
     return results;
   }
   getSimbioImage(ns){
+    // set functionDefinition
+    let listOfFunctionDefinitions = [...ns.container.functionDefStorage.values()];
+
     return {
       population: ns,
-      legalUnits: legalUnits
+      legalUnits,
+      listOfFunctionDefinitions // currently not used
     };
   }
   getSimbioCode(image = {}){

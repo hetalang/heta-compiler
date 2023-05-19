@@ -62,6 +62,12 @@ class MrgsolveExport extends AbstractExport {
       ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
       : [...this._container.namespaceStorage].filter((x) => !x[1].isAbstract);
 
+    // display that function definition is not supported
+    let functionsNames = [...this._container.functionDefStorage.keys()];
+    if (functionsNames.length > 0) {
+      logger.warn(`"FunctionDef" object: ${functionsNames.join(', ')} are presented in platform but not supported by Mrgsolve export.`);
+    }
+
     let results = selectedNamespaces.map((x) => {
       let spaceName = x[0];
       let ns = x[1];
