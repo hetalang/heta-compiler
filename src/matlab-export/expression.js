@@ -9,7 +9,11 @@ Expression.prototype.toMatlabString = function(){
       let args = node.args
         .map((arg) => arg.toString(options))
         .join(', ');
-      return `max([${args}])`;
+      if (node.args.length <= 2) {
+        return `max(${args})`;
+      } else {
+        return `max([${args}])`;
+      }
     }
     if (node.type==='FunctionNode' && node.fn.name==='min') {
       let args = node.args

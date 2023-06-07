@@ -4,7 +4,7 @@
   export from : #export { format: Simbio, namespace: {{ population.spaceName }}, ...};
 %}
 
-sbioaddtolibrary(sbiounit('week', 'day', 7));
+%sbioaddtolibrary(sbiounit('week', 'day', 7));
 
 {% set model_id = population.spaceName + "_model" -%}
 {% set storage_id = population.spaceName + "_ns" -%}
