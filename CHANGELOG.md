@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.6.18
+
+- support for Node 12 and newer
+
 ## 0.6.17
 
 - fix fatal error for wrong unit syntax
