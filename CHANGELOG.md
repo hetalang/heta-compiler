@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.6.17
+
+- fix fatal error for wrong unit syntax
+- `functionDef` warning for unsupported languages
+- minor `Matlab` code fixes: `max(), min()`
+
 ## 0.6.16
 
 - add option `heta build --skip-updates`
