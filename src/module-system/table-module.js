@@ -9,7 +9,7 @@ const _ = require('lodash');
  * 
  * @returns {Module} Self.
  */
-_Module.prototype.setTableModule = function(){
+_Module.prototype.setTableModule = function(fileHandler){
   // default results
   let rawData = [];
   // TODO: checking arguments is required

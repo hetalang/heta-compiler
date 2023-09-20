@@ -21,12 +21,13 @@ class ModuleSystem {
    * @property {Logger} logger Object to analyze log events.
    * @property {_Module} _top Top-level module. Usually created from `index.heta` file.
    */
-  constructor(logger){
+  constructor(logger, fileHandler){
     // stores modules in format
     // { filepath : module, ...}
     this.moduleCollection = {};
     this.graph = new TopoSort();
     this.logger = logger;
+    this.fileHandler = fileHandler;
   }
   
   /**
@@ -80,7 +81,7 @@ class ModuleSystem {
    */
   addModule(filename, type='heta', options = {}){
     // parse
-    let mdl = _Module.createModule(filename, type, options, this.logger);
+    let mdl = _Module.createModule(filename, type, options, this.logger, this.fileHandler);
     mdl.updateByAbsPaths();
     // push to moduleCollection
     let moduleName = [filename, '#', options.sheet || '0'].join('');

@@ -1,4 +1,3 @@
-const fs = require('fs');
 const hetaParser = require('heta-parser');
 const _Module = require('./module');
 
@@ -9,9 +8,10 @@ const _Module = require('./module');
  * 
  * @returns {Module} Self.
  */
-_Module.prototype.setHetaModule = function(){
+_Module.prototype.setHetaModule = function(fileHandler){
   try {
-    let fileContent = fs.readFileSync(this.filename, 'utf8');
+    //let fileContent = fs.readFileSync(this.filename, 'utf8');
+    let fileContent = fileHandler(this.filename);
     this.parsed = _hetaParse(this.filename, fileContent);
   } catch(e) {
     this.parsed = [];

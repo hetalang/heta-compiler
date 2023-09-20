@@ -1,4 +1,3 @@
-const fs = require('fs');
 const _Module = require('./module');
 const { SBMLParse } = require('./sbml-parse');
 
@@ -9,8 +8,8 @@ const { SBMLParse } = require('./sbml-parse');
  * 
  * @returns {_Module} Self.
  */
-_Module.prototype.setSBMLModule = function(){
-  let fileContent = fs.readFileSync(this.filename, 'utf8');
+_Module.prototype.setSBMLModule = function(fileHandler){
+  let fileContent = fileHandler(this.filename);
   try {
     this.parsed = SBMLParse(this.filename, fileContent);
   } catch (e) {

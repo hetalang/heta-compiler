@@ -1,4 +1,3 @@
-const fs = require('fs');
 const _Module = require('./module');
 const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 
@@ -9,9 +8,9 @@ const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
  * 
  * @returns {Module} Self.
  */
-_Module.prototype.setYAMLModule = function(){
+_Module.prototype.setYAMLModule = function(fileHandler){
   try {
-    let fileContent = fs.readFileSync(this.filename, 'utf8');
+    let fileContent = fileHandler(this.filename);
     this.parsed = jsYAML.safeLoad(fileContent);
   } catch(e) {
     this.parsed = [];

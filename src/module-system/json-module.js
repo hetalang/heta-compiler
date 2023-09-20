@@ -1,4 +1,3 @@
-const fs = require('fs');
 const _Module = require('./module');
 
 /**
@@ -8,9 +7,9 @@ const _Module = require('./module');
  * 
  * @returns {Module} Self.
  */
-_Module.prototype.setJSONModule = function(){
+_Module.prototype.setJSONModule = function(fileHandler){
   //checking file exists
-  let fileContent = fs.readFileSync(this.filename, 'utf8');
+  let fileContent = fileHandler(this.filename);
   try {
     this.parsed = _JSONParse(this.filename, fileContent);
   } catch(e) {

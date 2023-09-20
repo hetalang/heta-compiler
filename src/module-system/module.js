@@ -23,7 +23,7 @@ class _Module {
    * 
    * @returns {_Module} Created module.
    */
-  static createModule(filename, type, options = {}, logger){
+  static createModule(filename, type, options = {}, logger, fileHandler){
     let mdl = new _Module;
     mdl.logger = logger;
     mdl.filename = path.resolve(filename); // get abs path
@@ -42,23 +42,23 @@ class _Module {
     mdl.logger.info(`Reading module of type "${type}" from file "${mdl.filename}${tabNum}"...`);
     switch (type) {
     case 'heta':
-      mdl.setHetaModule();
+      mdl.setHetaModule(fileHandler);
       break;
     case 'json':
-      mdl.setJSONModule();
+      mdl.setJSONModule(fileHandler);
       break;
     case 'md':
-      mdl.setMdModule();
+      mdl.setMdModule(fileHandler);
       break;
     case 'yaml':
-      mdl.setYAMLModule();
+      mdl.setYAMLModule(fileHandler);
       break;
     case 'xlsx': // to support older syntax
     case 'table':
-      mdl.setTableModule();
+      mdl.setTableModule(fileHandler);
       break;
     case 'sbml':
-      mdl.setSBMLModule();
+      mdl.setSBMLModule(fileHandler);
       break;
     default:
       let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml", "table"].`;
@@ -83,7 +83,7 @@ class _Module {
   }
   
   /**
-   * Search for `source` property in `#import` and replace replace relative paths by absolute ones.
+   * Search for `source` property in `#import` and replace relative paths by absolute ones.
    */
   updateByAbsPaths(){
     let absDirPath = path.dirname(this.filename);

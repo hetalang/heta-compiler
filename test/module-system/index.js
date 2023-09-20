@@ -6,13 +6,14 @@ const path = require('path');
 //const { writeFileSync } = require('fs');
 const expected = require('./expected');
 const noImportOutput = require('./no-include');
+const fs = require('fs');
 
 // create logger
 let logger = new Logger();
 
 describe('ModuleSystem without include.', () => {
   it('Add module.', () => {
-    let ms = new ModuleSystem(logger);
+    let ms = new ModuleSystem(logger, (filename) => fs.readFileSync(filename, 'utf8'));
     let filepath = path.join(__dirname, 'no-include.heta');
     let mdl = ms.addModuleDeep(filepath, 'heta', {});
     
@@ -22,7 +23,7 @@ describe('ModuleSystem without include.', () => {
 
 describe('Run normal ModuleSystem.', () => {
   it('Add module.', () => {
-    let ms = new ModuleSystem(logger);
+    let ms = new ModuleSystem(logger, (filename) => fs.readFileSync(filename, 'utf8'));
     let filepath = path.join(__dirname, './normal-a.heta');
     let mdl = ms.addModuleDeep(filepath, 'heta', {});
     //writeFileSync('res0-new.json', JSON.stringify(ms, null, 2));
