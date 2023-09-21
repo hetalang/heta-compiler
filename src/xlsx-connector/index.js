@@ -8,15 +8,15 @@ const _ = require('lodash');
     - sync working instead of async methods
 */
 
-function convertExcelSync(src, dst = null, options = {}){
-  _.defaults(options, {
+function convertExcelSync(src, dst = null, _options = {}){
+  let options = Object.assign({
     sheet: 0, // first sheet
     omitRows: 0,
     omitEmptyFields: true // not used
-  });
+  }, _options);
 
   // reading file
-  let workbook = XLSX.readFile(src);
+  let workbook = XLSX.read(src, {type: 'buffer'});
   if (options.sheet >= workbook.SheetNames.length)
     throw new Error(`There is no sheet #${options.sheet} in ${src}`);
 

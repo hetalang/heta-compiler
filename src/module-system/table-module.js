@@ -9,7 +9,7 @@ const _mapValues = require('lodash/mapValues');
  * 
  * @returns {Module} Self.
  */
-function tableLoader(filename, fileHandler, _options){
+function tableLoader(fileContent, _options){
   // default results
   let rawData = [];
   // TODO: checking arguments is required
@@ -19,7 +19,7 @@ function tableLoader(filename, fileHandler, _options){
   }, _options);
 
   rawData = convertExcelSync(
-    filename,
+    fileContent,
     null, 
     { sheet: options.sheet, omitEmptyFields: true }
   );

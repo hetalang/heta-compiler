@@ -101,7 +101,7 @@ class Builder {
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     
     // 1. Parsing
-    let fileHandler = (filename) => fs.readFileSync(filename, 'utf8');
+    let fileHandler = (filename) => fs.readFileSync(filename);
     let ms = new ModuleSystem(this.container.logger, fileHandler);
     let absFilename = path.join(this._coreDirname, this.importModule.source);
     ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);

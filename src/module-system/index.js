@@ -135,7 +135,8 @@ class ModuleSystem {
       throw new Error(`Module loader must be a function, got "${typeof loader}"`);
     }
     try {
-      var parsed = loader(filename, this.fileHandler, options);
+      let fileContent = this.fileHandler(filename);
+      var parsed = loader(fileContent, options);
     } catch (e) {
       let msg = e.message/* + ` when converting module "${filename}"`*/;
       this.logger.error(msg, {type: 'ModuleError', filename: filename});

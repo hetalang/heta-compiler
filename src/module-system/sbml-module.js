@@ -7,9 +7,9 @@ const { SBMLParse } = require('./sbml-parse');
  * 
  * @returns {_Module} Self.
  */
-function sbmlLoader(filename, fileHandler){
-  let fileContent = fileHandler(filename);
-  let parsed = SBMLParse(filename, fileContent);
+function sbmlLoader(fileContent){
+  let fileText = fileContent.toString('utf-8');
+  let parsed = SBMLParse(fileText);
 
   return parsed;
 }

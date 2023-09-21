@@ -7,9 +7,9 @@ const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
  * 
  * @returns {Module} Self.
  */
-function yamlLoader(filename, fileHandler){
-  let fileContent = fileHandler(filename);
-  let parsed = jsYAML.safeLoad(fileContent);
+function yamlLoader(fileContent){
+  let fileText = fileContent.toString('utf-8');
+  let parsed = jsYAML.safeLoad(fileText);
   
   return parsed;
 }

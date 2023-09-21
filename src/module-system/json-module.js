@@ -5,9 +5,9 @@
  * 
  * @returns {Module} Self.
  */
-function jsonLoader(filename, fileHandler) {
-  let fileContent = fileHandler(filename);
-  let parsed = _JSONParse(filename, fileContent);
+function jsonLoader(fileContent) {
+  let fileText = fileContent.toString('utf-8');
+  let parsed = _JSONParse(fileText);
 
   return parsed;
 }
@@ -22,7 +22,6 @@ function jsonLoader(filename, fileHandler) {
  * @returns {array} An object representing JSON file content.
  */
 function _JSONParse(
-  filename, // used here to display in error message 
   ...params
 ){
   try {
@@ -38,10 +37,9 @@ function _JSONParse(
       e.coordinate = {
         line: splittedText.length,
         column: substringToShow.length,
-        position: pos,
-        filename: filename
+        position: pos
       };
-      e.message = `(${e.coordinate.line}:${e.coordinate.column} in "${e.coordinate.filename}") ` + e.message;
+      e.message = `(${e.coordinate.line}:${e.coordinate.column} in JSON) ` + e.message;
     }
     throw e;
   }

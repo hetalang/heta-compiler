@@ -7,15 +7,11 @@ const legalUnits = require('../legal-sbml-units');
 /**
  * Transforms text content of SBML file to Q-array.
  * 
- * @param {string} filename Reserved for future releases.
  * @param {string} fileContent SBML file content.
  * @returns {array} Parsed content in Q-array format.
  */
-function SBMLParse(
-  filename, // not used here, but can be used for messages
-  fileContent
-){
-  let JSBML = xml2js(fileContent, { compact: false });
+function SBMLParse(fileText){
+  let JSBML = xml2js(fileText, { compact: false });
   
   return jsbmlToQArr(JSBML);
 }

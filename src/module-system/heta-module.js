@@ -7,9 +7,9 @@ const hetaParser = require('heta-parser');
  * 
  * @returns {Module} Self.
  */
-function hetaLoader(filename, fileHandler) {
-  let fileContent = fileHandler(filename);
-  var parsed = _hetaParse(filename, fileContent);
+function hetaLoader(fileContent) {
+  let fileText = fileContent.toString('utf-8');
+  var parsed = _hetaParse(fileText);
   
   return parsed;
 }
@@ -21,7 +21,7 @@ function hetaLoader(filename, fileHandler) {
  * @param  {...any} params Additional parameters passed to `parse()` method.
  * @returns {array} Module content in Q-array format.
  */
-function _hetaParse(filename, ...params){
+function _hetaParse(...params){
   try {
     return hetaParser.parse(...params);
   } catch(e) {
@@ -29,7 +29,7 @@ function _hetaParse(filename, ...params){
       e.name = 'HetaParsingError';
       let loc = e.location;
       let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}`;
-      e.message = `(${coord} in "${filename}") ` + e.message;
+      e.message = `(${coord} in Heta file) ` + e.message;
     }
     throw e;
   }

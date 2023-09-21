@@ -53,7 +53,7 @@ const master = [
 ];
 
 describe('test sbmlParse() operators', () => {
-  let res = SBMLParse('sbml0', sbml0Text);
+  let res = SBMLParse(sbml0Text);
   //console.log(res)
 
   res.forEach((x, i) => {
@@ -65,7 +65,7 @@ describe('test sbmlParse() operators', () => {
 
 const sbml1Text = fs.readFileSync(path.join(__dirname, 'sbml1.xml'), 'utf8');
 describe('parse speciesType', () => {
-  let res = SBMLParse('sbml1', sbml1Text);
+  let res = SBMLParse(sbml1Text);
   // console.log(res);
   it('Should be of class "Component"', () => {
     expect(res[0]).to.have.property('class', 'Component');
@@ -74,7 +74,7 @@ describe('parse speciesType', () => {
 
 const sbml2Text = fs.readFileSync(path.join(__dirname, 'sbml2.xml'), 'utf8');
 describe('parse units', () => {
-  let res = SBMLParse('sbml2', sbml2Text);
+  let res = SBMLParse(sbml2Text);
 
   it('Use units from UnitDef', () => {
     expect(res[6])

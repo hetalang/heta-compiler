@@ -1,14 +1,14 @@
-function mdLoader(filename, fileHandler, _options){
+function mdLoader(fileContent, _options){
   // defaults
   let options = Object.assign({
     pageId: 'undefined'
   }, _options);
 
-  let fileContent = fileHandler(filename);
+  let fileText = fileContent.toString('utf-8');
   let parsed = [{
     id: options.pageId,
     class: 'Page',
-    content: fileContent
+    content: fileText
   }];
 
   return parsed;

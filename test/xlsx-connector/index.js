@@ -1,6 +1,7 @@
 /* global describe, it */
 const { expect } = require('chai');
 const { convertExcelSync } = require('../../src/xlsx-connector');
+const fs = require('fs');
 
 let fullPath = __dirname + '/' + 'test.xlsx';
 let sheet1 = [
@@ -57,11 +58,10 @@ let sheet1 = [
 
 describe('XLSX connector', () => {
   it('Read table 1', () => {
-    let res = convertExcelSync(fullPath, null);
+    let fileContent = fs.readFileSync(fullPath);
+    let res = convertExcelSync(fileContent, null);
     expect(res).to.be.lengthOf(4);
     expect(res).to.be.deep.equal(sheet1);
-
-
 
     let json = JSON.stringify(res, null, 2);
     //console.log(json);
