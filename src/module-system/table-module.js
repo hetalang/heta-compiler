@@ -1,5 +1,6 @@
 const { convertExcelSync } = require('../xlsx-connector');
-const _ = require('lodash');
+const _cloneDeepWith = require('lodash/cloneDeepWith');
+const _mapValues = require('lodash/mapValues');
 
 /**
  * To initialize a Heta module of the "table" type.
@@ -12,10 +13,10 @@ function tableLoader(filename, fileHandler, _options){
   // default results
   let rawData = [];
   // TODO: checking arguments is required
-  const options = _.defaults(_options, {
+  const options = Object.assign({
     sheet: 0,
     omitRows: 0
-  });
+  }, _options);
 
   rawData = convertExcelSync(
     filename,
@@ -27,7 +28,7 @@ function tableLoader(filename, fileHandler, _options){
   let parsed = rawData
     .filter((x) => x.on) // ignore rows
     .map((x) => {
-      let cleaned = _.cloneDeepWith(x, (value) => {
+      let cleaned = _cloneDeepWith(x, (value) => {
         if (value != null && typeof value.valueOf() === 'string') {
           return clean(value);
         }
@@ -53,7 +54,7 @@ function tableLoader(filename, fileHandler, _options){
         }
       };
 
-      return _.mapValues(cleaned, (value, key) => {
+      return _mapValues(cleaned, (value, key) => {
         if (booleanProperties.indexOf(key) !== -1) {
           return forceBool(value);
         } else {
