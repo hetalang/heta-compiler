@@ -17,7 +17,7 @@ describe('ModuleSystem without include.', () => {
     let filepath = path.join(__dirname, 'no-include.heta');
     let mdl = ms.addModuleDeep(filepath, 'heta', {});
     
-    expect(mdl.parsed).to.be.deep.equal(noImportOutput);
+    expect(mdl).to.be.deep.equal(noImportOutput);
   });
 });
 
@@ -28,9 +28,7 @@ describe('Run normal ModuleSystem.', () => {
     let mdl = ms.addModuleDeep(filepath, 'heta', {});
     //writeFileSync('res0-new.json', JSON.stringify(ms, null, 2));
 
-    expect(mdl).to.have.property('filename').with.a('string');
-    expect(mdl).to.have.property('type', 'heta');
-    expect(mdl).to.have.property('parsed').with.a('Array').lengthOf(3);
+    expect(mdl).to.be.with.a('Array').lengthOf(3);
 
     expect(Object.keys(ms.moduleCollection)).to.have.property('length', 5);
     expect(Object.keys(ms.graph.map)).to.have.property('length', 5);

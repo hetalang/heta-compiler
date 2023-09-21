@@ -1,4 +1,3 @@
-const _Module = require('./module');
 const { SBMLParse } = require('./sbml-parse');
 
 /**
@@ -8,15 +7,11 @@ const { SBMLParse } = require('./sbml-parse');
  * 
  * @returns {_Module} Self.
  */
-_Module.prototype.setSBMLModule = function(fileHandler){
-  let fileContent = fileHandler(this.filename);
-  try {
-    this.parsed = SBMLParse(this.filename, fileContent);
-  } catch (e) {
-    this.parsed = [];
-    let msg = e.message + `, converting module "${this.filename}"`;
-    this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
-  }
+function sbmlLoader(filename, fileHandler){
+  let fileContent = fileHandler(filename);
+  let parsed = SBMLParse(filename, fileContent);
 
-  return this;
-};
+  return parsed;
+}
+
+module.exports = sbmlLoader;

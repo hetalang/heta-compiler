@@ -13,7 +13,7 @@ const { printVersionMessage } = require('./print-version-message');
 let contactMessage = colors.bgRed(`
  +----------------------------------------------------------------+ 
  | Internal "Heta compiler" error, contact the developers.        | 
- | Create issue: ${bugs.url} | 
+ | Create an issue: ${bugs.url} | 
  | or mail to: ${bugs.email}                                   | 
  +----------------------------------------------------------------+ 
 `);

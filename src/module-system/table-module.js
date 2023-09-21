@@ -1,4 +1,3 @@
-const _Module = require('./module');
 const { convertExcelSync } = require('../xlsx-connector');
 const _ = require('lodash');
 
@@ -9,28 +8,23 @@ const _ = require('lodash');
  * 
  * @returns {Module} Self.
  */
-_Module.prototype.setTableModule = function(fileHandler){
+function tableLoader(filename, fileHandler, _options){
   // default results
   let rawData = [];
   // TODO: checking arguments is required
-  const options = _.defaults(this.options, {
+  const options = _.defaults(_options, {
     sheet: 0,
     omitRows: 0
   });
 
-  try {
-    rawData = convertExcelSync(
-      this.filename,
-      null, 
-      { sheet: options.sheet, omitEmptyFields: true }
-    );
-    rawData.splice(0, options.omitRows); // remove rows
-  } catch (e) {
-    let msg = e.message + ` when converting module "${this.filename}"`;
-    this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
-  }
+  rawData = convertExcelSync(
+    filename,
+    null, 
+    { sheet: options.sheet, omitEmptyFields: true }
+  );
+  rawData.splice(0, options.omitRows); // remove rows
 
-  let dataFiltered = rawData
+  let parsed = rawData
     .filter((x) => x.on) // ignore rows
     .map((x) => {
       let cleaned = _.cloneDeepWith(x, (value) => {
@@ -68,10 +62,8 @@ _Module.prototype.setTableModule = function(fileHandler){
       });
     });
 
-  this.parsed = dataFiltered;
-
-  return this;
-};
+  return parsed;
+}
 
 // remove blanks and new lines symbols
 function clean(string){
@@ -79,3 +71,5 @@ function clean(string){
     .replace(/_x000D_\n/g, '')
     .replace(/\r*\n+/g, '');
 }
+
+module.exports = tableLoader;

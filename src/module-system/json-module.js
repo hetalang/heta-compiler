@@ -1,5 +1,3 @@
-const _Module = require('./module');
-
 /**
  * To initialize a Heta module of the "json" type.
  * It includes reading and parsing file formatted as Heta-JSON,
@@ -7,19 +5,12 @@ const _Module = require('./module');
  * 
  * @returns {Module} Self.
  */
-_Module.prototype.setJSONModule = function(fileHandler){
-  //checking file exists
-  let fileContent = fileHandler(this.filename);
-  try {
-    this.parsed = _JSONParse(this.filename, fileContent);
-  } catch(e) {
-    this.parsed = [];
-    let msg = e.message + ` when converting module "${this.filename}"`;
-    this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
-  }
+function jsonLoader(filename, fileHandler) {
+  let fileContent = fileHandler(filename);
+  let parsed = _JSONParse(filename, fileContent);
 
-  return this;
-};
+  return parsed;
+}
 
 /**
  * Auxillary function to parse JSON file in {@link _Module#setJSONModule} method.
@@ -55,3 +46,5 @@ function _JSONParse(
     throw e;
   }
 }
+
+module.exports = jsonLoader;

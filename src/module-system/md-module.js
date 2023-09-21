@@ -1,22 +1,23 @@
 const _ = require('lodash');
-const _Module = require('./module');
 
-_Module.prototype.setMdModule = function(fileHandler){
+function mdLoader(filename, fileHandler){
   try {
-    let options = _.defaultsDeep(this.options, {
+    let options = _.defaultsDeep(options, {
       pageId: 'undefined'
     });
-    let fileContent = fileHandler(this.filename);
-    this.parsed = [{
+    let fileContent = fileHandler(filename);
+    var parsed = [{
       id: options.pageId,
       class: 'Page',
       content: fileContent
     }];
   } catch(e) {
-    this.parsed = [];
-    let msg = e.message + ` when converting module "${this.filename}"`;
-    this.logger.error(msg, {type: 'ModuleError', filename: this.filename});
+    parsed = [];
+    let msg = e.message + ` when converting module "${filename}"`;
+    //this.logger.error(msg, {type: 'ModuleError', filename: filename});
   }
 
-  return this;
-};
+  return parsed;
+}
+
+module.exports = mdLoader;

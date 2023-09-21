@@ -1,13 +1,22 @@
 const path = require('path');
 const _ = require('lodash');
 const TopoSort = require('@insysbio/topo-sort');
-const _Module = require('./module');
-require('./heta-module');
-require('./json-module');
-require('./md-module');
-require('./yaml-module');
-require('./table-module');
-require('./sbml-module');
+// module loaders
+const hetaLoader = require('./heta-module');
+const jsonLoader = require('./json-module');
+const mdLoader = require('./md-module');
+const yamlLoader = require('./yaml-module');
+const tableLoader = require('./table-module');
+const sbmlLoader = require('./sbml-module');
+const moduleLoaders = {
+  heta: hetaLoader,
+  json: jsonLoader,
+  md: mdLoader,
+  yaml: yamlLoader,
+  xlsx: tableLoader,
+  table: tableLoader,
+  sbml: sbmlLoader,
+};
 
 class ModuleSystem {
   /**
@@ -41,10 +50,10 @@ class ModuleSystem {
    */
   addModuleDeep(rawAbsFilePath, type, options = {}){
     let absFilePath = path.normalize(rawAbsFilePath);
-    let mdl = this._addModuleDeep(absFilePath, type, options);
-    this._top = mdl;
+    let parsed = this._addModuleDeep(absFilePath, type, options);
+    this._top = parsed;
     
-    return mdl;
+    return parsed;
   }
  
   /**
@@ -59,12 +68,14 @@ class ModuleSystem {
   _addModuleDeep(absFilePath, type, options = {}){
     let moduleName = [absFilePath, '#', options.sheet || '0'].join('');
     if (!(moduleName in this.moduleCollection)) { // new file
-      let mdl = this.addModule(absFilePath, type, options);
-      mdl.getImportElements().forEach((importItem) => {
-        this._addModuleDeep(importItem.source, importItem.type, importItem);
-      });
+      let parsed = this.addModule(absFilePath, type, options);
+      parsed
+        .filter((q) => q.action==='include')
+        .forEach((importItem) => {
+          this._addModuleDeep(importItem.source, importItem.type, importItem);
+        });
       
-      return mdl;
+      return parsed;
     } else { // if file already in moduleCollection do nothing
       return;
     }
@@ -81,18 +92,56 @@ class ModuleSystem {
    */
   addModule(filename, type='heta', options = {}){
     // parse
-    let mdl = _Module.createModule(filename, type, options, this.logger, this.fileHandler);
-    mdl.updateByAbsPaths();
+    let parsed = this.createModule(filename, type, options);
+
+    // update by abs paths
+    let absDirPath = path.dirname(filename);
+    parsed
+      .filter((q) => q.action==='include')
+      .forEach((q) => {
+        if(typeof q.source !== 'string') {
+          throw new TypeError(`Property "source" in "${filename}" must be string`);
+        }
+        q.source = path.resolve(absDirPath, q.source);
+      });
+
     // push to moduleCollection
     let moduleName = [filename, '#', options.sheet || '0'].join('');
-    this.moduleCollection[moduleName] = mdl;
+    this.moduleCollection[moduleName] = parsed;
     // set in graph
-    let paths = mdl
-      .getImportElements()
+    let paths = parsed
+      .filter((q) => q.action==='include')
       .map((x) => [x.source, '#', x.sheet || 0].join(''));
     this.graph.add(moduleName, paths);
 
-    return mdl;
+    return parsed;
+  }
+
+  createModule(_filename, type, options = {}) {
+    let filename = path.resolve(_filename); // get abs path
+
+    let tabNum = options.sheet !== undefined ? ('#' + options.sheet) : ''; // for xlsx only
+    this.logger.info(`Reading module of type "${type}" from file "${filename}${tabNum}"...`);
+
+    // run loader
+    let loader = moduleLoaders[type];
+    if (loader === undefined) {
+      let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml", "table"].`;
+      this.logger.error(msg, {type: 'ModuleError', filename: filename});
+      return [];
+    }
+    if (typeof loader !== 'function') {
+      throw new Error(`Module loader must be a function, got "${typeof loader}"`);
+    }
+    try {
+      var parsed = loader(filename, this.fileHandler, options);
+    } catch (e) {
+      let msg = e.message/* + ` when converting module "${filename}"`*/;
+      this.logger.error(msg, {type: 'ModuleError', filename: filename});
+      return [];
+    }
+
+    return parsed;
   }
   
   /**
@@ -120,7 +169,7 @@ class ModuleSystem {
       .map((y) => {
         return this.moduleCollection[y];
       }).forEach((x) => {
-        x._integrated = x.parsed.reduce((acc, current) => {
+        x._integrated = x.reduce((acc, current) => {
           if(current.action==='include'){
             let moduleName = [current.source, '#', current.sheet || '0'].join('');
             let childIntegrated = this.moduleCollection[moduleName]._integrated;
