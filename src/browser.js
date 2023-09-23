@@ -1,6 +1,6 @@
 const Container = require('./container');
 const coreItems = require('./container/core-items');
-const ModuleSystem = require('./container/module-system');
+const ModuleSystem = require('./module-system');
 const { Transport } = require('./logger');
 
 // set nunjacks environment
