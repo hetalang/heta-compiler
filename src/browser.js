@@ -1,5 +1,7 @@
 const Container = require('./container');
 const coreItems = require('./container/core-items');
+const ModuleSystem = require('./container/module-system');
+const { Transport } = require('./logger');
 
 // set nunjacks environment
 const nunjucksEnv = require('./nunjucks-env')('templates');
@@ -24,5 +26,7 @@ Container._exportClasses = {
 module.exports = {
   Container,
   coreItems,
-  nunjucksEnv
+  nunjucksEnv,
+  ModuleSystem,
+  Transport,
 };
