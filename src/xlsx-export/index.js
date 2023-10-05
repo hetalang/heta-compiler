@@ -18,6 +18,7 @@ class XLSXExport extends TableExport {
     if (!valid) { this.errored = true; return; }
 
     if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
+    this.bookType = 'xlsx';
   }
   get className(){
     return 'XLSXExport';

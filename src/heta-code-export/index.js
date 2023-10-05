@@ -29,7 +29,7 @@ class HetaCodeExport extends AbstractExport{
    *
    * @return {string} Text code of exported format.
    */
-  make(){
+  makeText(){
     // let logger = this._container.logger;
 
     let image = this.getHetaCodeImage(this._container);

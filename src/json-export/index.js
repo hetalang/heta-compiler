@@ -32,7 +32,7 @@ class JSONExport extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
-  make(){
+  makeText(){
     // filtered namespaces
     let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);

@@ -8,8 +8,6 @@ const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 const _ = require('lodash');
 require('./abstract-export');
-require('./table-export');
-require('./xlsx-export');
 
 /**
  * Auxiliary class for performing compilation and storing a platform's options. 

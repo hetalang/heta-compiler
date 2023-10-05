@@ -30,7 +30,7 @@ class SimbioExport extends AbstractExport{
   get format(){
     return 'Simbio';
   }
-  make(){
+  makeText(){
     let logger = this._container.logger;
 
     if (this.spaceFilter !== undefined) {

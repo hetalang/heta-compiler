@@ -41,7 +41,7 @@ class SBMLExport extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
-  make(){
+  makeText(){
     let logger = this._container.logger;
 
     if (this.spaceFilter !== undefined) {

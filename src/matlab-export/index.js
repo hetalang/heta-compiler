@@ -38,7 +38,7 @@ class MatlabExport extends AbstractExport {
   // TODO: skipVersionCode does not work
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
-  make(skipVersionCode = false){
+  makeText(skipVersionCode = false){
     let logger = this._container.logger;
 
     if (this.spaceFilter !== undefined) {

@@ -30,7 +30,7 @@ class YAMLExport extends AbstractExport {
   get format(){
     return 'YAML';
   }
-  make(){
+  makeText(){
     // filtered namespaces
     let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);

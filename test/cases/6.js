@@ -37,7 +37,7 @@ describe('Testing "cases/6-import"', () => {
 
   it('Run @SBMLExport, check and compare.', () => {
     let sbml_export = exportArray[0];
-    let code = sbml_export.make()[0].content;
+    let code = sbml_export.makeText()[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_correct);
     //console.log(code);
@@ -47,7 +47,7 @@ describe('Testing "cases/6-import"', () => {
     const JSONExport = b.container.classes.JSON;
     let json_export = new JSONExport({spaceFilter: 'model'});
 
-    let code = json_export.make()[0].content;
+    let code = json_export.makeText()[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
     //console.log(obj);

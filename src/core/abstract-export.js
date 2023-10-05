@@ -40,7 +40,7 @@ class AbstractExport extends Top {
     if (!valid) { this.errored = true; return; }
 
     if (q.filepath) this.filepath = q.filepath;
-  } 
+  }
   get className(){
     return 'AbstractExport';
   }
@@ -53,8 +53,20 @@ class AbstractExport extends Top {
       type: 'text' // currently support only text
     }]
   */
-  make(){
-    throw new TypeError(`No method make() for "${this.className}"`);
+  makeText(){
+    throw new TypeError(`No method makeText() for "${this.className}"`);
+  }
+  make(){ // Buffer
+    let text = this.makeText();
+    let buffer = text.map((x) => {
+      return {
+        content: Buffer.from(x.content, 'utf-8'),
+        pathSuffix: x.pathSuffix,
+        type: 'buffer'
+      };
+    });
+    
+    return buffer;
   }
   static get validate(){
     return ajv.compile(schema);
