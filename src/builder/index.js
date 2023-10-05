@@ -7,7 +7,6 @@ const { Container } = require('../index');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 const _ = require('lodash');
-require('./abstract-export');
 
 /**
  * Auxiliary class for performing compilation and storing a platform's options. 
@@ -189,12 +188,7 @@ class Builder {
     let exportElements = [...this.container.exportStorage].map((x) => x[1]);
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
-    exportElements.forEach((exportItem) => {
-      let fullPath = path.resolve(this._distDirname, exportItem.filepath);
-      let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
-      this.logger.info(msg);
-      exportItem.makeAndSave(this._distDirname);
-    });
+    exportElements.forEach((exportItem) => _makeAndSave(exportItem, this._distDirname));
   }
 
   /**
@@ -211,11 +205,25 @@ class Builder {
       filepath: '_julia'
     });
 
-    let fullPath = path.resolve(this._distDirname, exportItem.filepath);
-    let msg = `Exporting to "${fullPath}" of format "${exportItem.format}"...`;
-    this.logger.info(msg);
-    exportItem.makeAndSave(this._distDirname);
+    _makeAndSave(exportItem, this._distDirname);
   }
+}
+
+function _makeAndSave(exportItem, pathPrefix){
+  let logger = exportItem._container.logger;
+  let absPath = path.resolve(pathPrefix, exportItem.filepath);
+  let msg = `Exporting to "${absPath}" of format "${exportItem.format}"...`;
+  logger.info(msg);
+
+  exportItem.make().forEach((out) => {
+    let filePath = [absPath, out.pathSuffix].join('');
+    try {
+      fs.outputFileSync(filePath, out.content);
+    } catch (err) {
+      let msg =`Heta compiler cannot export to file: "${err.path}" because it is busy.`;
+      logger.error(msg, {type: 'ExportError'});
+    }
+  });
 }
 
 module.exports = {

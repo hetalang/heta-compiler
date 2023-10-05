@@ -40,7 +40,7 @@ class DBSolveExport extends AbstractExport{
    *
    * @return {string} Text code of exported format.
    */
-  make(){
+  makeText(){
     let logger = this._container.logger;
     
     if (this.spaceFilter !== undefined) {

@@ -12,7 +12,7 @@ class AnotherXLSXExport extends XLSXExport {
   get format(){
     return 'Another';
   }
-  make(){
+  makeSheet(){
     // filtered namespaces
     let nsArray = [...this._container.namespaceStorage]
       .map((pair) => pair[1]);

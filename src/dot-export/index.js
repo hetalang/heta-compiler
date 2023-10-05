@@ -29,7 +29,7 @@ class DotExport extends AbstractExport{
   get format(){
     return 'Dot';
   }
-  make(){
+  makeText(){
     let logger = this._container.logger;
 
     if (this.spaceFilter !== undefined) {
