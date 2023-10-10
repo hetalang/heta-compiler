@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 require('./expression');
 const legalUnits = require('../legal-sbml-units');
 const { ajv } = require('../utils');
@@ -118,19 +118,19 @@ class SBMLExport extends AbstractExport {
   getSBMLCode(image = {}){
     switch (this.version) {
     case 'L2V3':
-      return nunjucks.render('sbmlL2V3.xml.njk', image);
+      return compiledTemplates['sbmlL2V3.xml.njk'](image);
       break;
     case 'L2V4':
-      return nunjucks.render('sbmlL2V4.xml.njk', image);
+      return compiledTemplates['sbmlL2V4.xml.njk'].render(image);
       break;
     case 'L2V5':
-      return nunjucks.render('sbmlL2V5.xml.njk', image);
+      return compiledTemplates['sbmlL2V5.xml.njk'].render(image);
       break;
     case 'L3V1':
-      return nunjucks.render('sbmlL3V1.xml.njk', image);
+      return compiledTemplates['sbmlL3V1.xml.njk'].render(image);
       break;
     case 'L3V2':
-      return nunjucks.render('sbmlL3V2.xml.njk', image);
+      return compiledTemplates['sbmlL3V2.xml.njk'].render(image);
       break;
     default:
       this._container.logger.error(`SBML of version "${this.version}" is not supported.`);

@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const _ = require('lodash');
 require('./expression');
 const { ajv } = require('../utils');
@@ -217,16 +217,10 @@ class MrgsolveExport extends AbstractExport {
     };
   }
   getMrgsolveCode(image = {}){
-    return nunjucks.render(
-      'mrgsolve-model.cpp.njk',
-      image
-    );
+    return compiledTemplates['mrgsolve-model.cpp.njk'].render(image);
   }
   getMrgsolveRun(selectedNamespaces){
-    return nunjucks.render(
-      'mrgsolve-run.r.njk',
-      {selectedNamespaces}
-    );
+    return compiledTemplates['mrgsolve-run.r.njk'].render({selectedNamespaces});
   }
 }
 

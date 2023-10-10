@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const legalUnits = require('./legal-units');
 const { ajv } = require('../utils');
 
@@ -137,16 +137,10 @@ class SimbioExport extends AbstractExport{
     };
   }
   getSimbioCode(image = {}){
-    return nunjucks.render(
-      'simbio.m.njk',
-      image
-    );
+    return compiledTemplates['simbio.m.njk'].render(image);
   }
   getFunCode(){
-    return nunjucks.render(
-      'simbio-tern__.m',
-      this
-    );
+    return compiledTemplates['simbio-tern__.m.njk'].render(this);
   }
   static get validate(){
     return ajv.compile(schema);

@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const pkg = require('../../package');
 const _ = require('lodash');
 require('./expression'); // to use method toJuliaString()
@@ -177,16 +177,10 @@ class JuliaExport extends AbstractExport {
     };
   }
   getModelCode(image = []){
-    return nunjucks.render(
-      'julia-model.jl.njk',
-      image
-    );
+    return compiledTemplates['julia-model.jl.njk'].render(image);
   }
   getRunCode(image = []){
-    return nunjucks.render(
-      'julia-run.jl.njk',
-      image
-    );
+    return compiledTemplates['julia-run.jl.njk'].render(image);
   }
 }
 

@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const { ajv } = require('../utils');
 
 const schema = {
@@ -61,7 +61,7 @@ class HetaCodeExport extends AbstractExport{
     };
   }
   getHetaCodeCode(image = {}){
-    return nunjucks.render('heta-code.heta.njk', image);
+    return compiledTemplates['heta-code.heta.njk'].render(image);
   }
   static get validate(){
     return ajv.compile(schema);

@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const _ = require('lodash');
 const { ajv } = require('../utils');
 
@@ -238,10 +238,8 @@ class SLVExport extends AbstractExport{
     };
   }
   getSLVCode(image = {}){
-    return nunjucks.render(
-      'slv-blocks-template.slv.njk',
-      image
-    );
+    console.log
+    return compiledTemplates['slv-blocks-template.slv.njk'].render(image);
   }
   static get validate(){
     return ajv.compile(schema);

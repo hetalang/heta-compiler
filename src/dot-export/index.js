@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const { ajv } = require('../utils');
 
 const schema = {
@@ -108,10 +108,7 @@ class DotExport extends AbstractExport{
     };
   }
   getDotCode(image = {}){
-    return nunjucks.render(
-      'dot.dot.njk',
-      image
-    );
+    return compiledTemplates['dot.dot.njk'].render(image);
   }
   static get validate(){
     return ajv.compile(schema);

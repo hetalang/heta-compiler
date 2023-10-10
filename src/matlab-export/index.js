@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const pkg = require('../../package');
 const _ = require('lodash');
 require('./expression'); // to use method toMatlabString()
@@ -182,22 +182,13 @@ class MatlabExport extends AbstractExport {
     };
   }
   getModelCode(image = {}){
-    return nunjucks.render(
-      'matlab-model.m.njk',
-      image
-    );
+    return compiledTemplates['matlab-model.m.njk'].render(image);
   }
   getParamCode(image = {}){
-    return nunjucks.render(
-      'matlab-param.m.njk',
-      image
-    );
+    return compiledTemplates['matlab-param.m.njk'].render(image);
   }
   getRunCode(image = {}){
-    return nunjucks.render(
-      'matlab-run.m.njk',
-      image
-    );
+    return compiledTemplates['matlab-run.m.njk'].render(image);
   }
 }
 

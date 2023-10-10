@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
-const nunjucks = require('nunjucks');
+/* global compiledTemplates */
 const _ = require('lodash');
 require('./expression');
 const { ajv } = require('../utils');
@@ -253,10 +253,7 @@ class DBSolveExport extends AbstractExport{
     };
   }
   getSLVCode(image = {}){
-    return nunjucks.render(
-      'dbsolve-model.slv.njk',
-      image
-    );
+    return compiledTemplates['dbsolve-model.slv.njk'].render(image);
   }
   get className(){
     return 'DBSolveExport';
