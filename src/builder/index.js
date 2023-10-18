@@ -220,7 +220,7 @@ function _makeAndSave(exportItem, pathPrefix){
     try {
       fs.outputFileSync(filePath, out.content);
     } catch (err) {
-      let msg =`Heta compiler cannot export to file: "${err.path}" because it is busy.`;
+      let msg =`Heta compiler cannot export to file: "${err.path}": ${err.message}`;
       logger.error(msg, {type: 'ExportError'});
     }
   });
