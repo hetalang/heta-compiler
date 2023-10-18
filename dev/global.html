@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="SBMLParse"><span class="type-signature"></span>SBMLParse<span class="signature">(filename, fileContent)</span><span class="type-signature"> &rarr; {array}</span></h4>
+    <h4 class="name" id="SBMLParse"><span class="type-signature"></span>SBMLParse<span class="signature">(fileContent)</span><span class="type-signature"> &rarr; {array}</span></h4>
     
 
     
@@ -144,29 +144,6 @@
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>filename</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Reserved for future releases.</p></td>
-        </tr>
-
     
 
         <tr>
@@ -289,7 +266,7 @@
 
 
 <div class="description">
-    <p>Auxillary function to parse JSON file in <a href="-_Module.html#setJSONModule"><code>_Module#setJSONModule</code></a> method.
+    <p>Auxillary function to parse JSON file in <code>_Module#setJSONModule</code> method.
 This function is a wrapper of <code>JSON.parse()</code> method to get more clear description of errors.</p>
 </div>
 
@@ -1003,6 +980,541 @@ Example: <code>{id: 'k1', space: 'one'}</code> =&gt; <code>'one::k1'</code></p>
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="hetaLoader"><span class="type-signature"></span>hetaLoader<span class="signature">()</span><span class="type-signature"> &rarr; {Module}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>To initialize a Heta module of the &quot;heta&quot; type.
+It includes reading and parsing file formatted as Heta code,
+see <a href="https://hetalang.github.io/#/specifications/modules?id=heta-module">Heta specifications</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Self.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Module</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="jsonLoader"><span class="type-signature"></span>jsonLoader<span class="signature">()</span><span class="type-signature"> &rarr; {Module}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>To initialize a Heta module of the &quot;json&quot; type.
+It includes reading and parsing file formatted as Heta-JSON,
+see <a href="https://hetalang.github.io/#/specifications/modules?id=json-module">Heta specifications</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Self.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Module</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sbmlLoader"><span class="type-signature"></span>sbmlLoader<span class="signature">()</span><span class="type-signature"> &rarr; {_Module}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>To initialize a Heta module of the &quot;sbml&quot; type.
+It includes reading and parsing SBML file and representing it into Q-object,
+see <a href="https://hetalang.github.io/#/specifications/modules?id=sbml-module">Heta specifications</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Self.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">_Module</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="tableLoader"><span class="type-signature"></span>tableLoader<span class="signature">()</span><span class="type-signature"> &rarr; {Module}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>To initialize a Heta module of the &quot;table&quot; type.
+It includes reading and parsing of file formatted as Heta-tables,
+see <a href="https://hetalang.github.io/#/specifications/modules?id=table-module">Heta specifications</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Self.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Module</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="yamlLoader"><span class="type-signature"></span>yamlLoader<span class="signature">()</span><span class="type-signature"> &rarr; {Module}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>To initialize a Heta module of the &quot;yaml&quot; type.
+It includes reading and parsing file formatted as Heta-YAML,
+see <a href="https://hetalang.github.io/#/specifications/modules?id=yaml-module">Heta specifications</a></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Self.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Module</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1018,13 +1530,13 @@ Example: <code>{id: 'k1', space: 'one'}</code> =&gt; <code>'one::k1'</code></p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Builder.html">Builder</a></li><li><a href="Container.html">Container</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Transport.html">Transport</a></li><li><a href="-_Module.html">_Module</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Builder.html">Builder</a></li><li><a href="Container.html">Container</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Transport.html">Transport</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Sep 13 2023 15:59:54 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Oct 18 2023 16:08:11 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
