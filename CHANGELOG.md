@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.6.19
+
+- update syntax of RCT A > B together with A => B
+- adaptation for webpack
+- remove 'fs' lib from core
+
 ## 0.6.18
 
 - support for Node 12 and newer
