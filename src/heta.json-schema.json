@@ -19,7 +19,7 @@
 
      "ProcessExpr": {
        "type": "string",
-       "pattern": "^((\\d*\\s*\\*?\\s*\\w+)\\s*\\+?\\s*)*([=-]|[=-]>|<[=-]>)((\\d*\\s*\\*?\\s*\\w+)\\s*\\+?\\s*)*$",
+       "pattern": "^((\\d*\\s*\\*?\\s*\\w+)\\s*\\+?\\s*)*([=-]|[=-]>|<[=-]>|<>|>)((\\d*\\s*\\*?\\s*\\w+)\\s*\\+?\\s*)*$",
        "example": "2*S -> 3P1+P2",
        "errorMessage": {
          "pattern": "should be in format: \"2*S -> 3P1+P2\""

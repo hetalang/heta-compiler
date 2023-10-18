@@ -1,5 +1,4 @@
 const { Record } = require('./record');
-const _ = require('lodash');
 
 /*
   Process class
@@ -19,7 +18,7 @@ class Process extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Process.isValid(q, logger);
 
     if (valid) {
@@ -113,8 +112,9 @@ class Actor extends _Effector {
 }
 
 function rct2actors(rct){
-  let matches = /^([\w\d\s*+]*)(<)?[=-]+(>)?([\w\d\s*+]*)$/m.exec(rct);
+  let matches = /^([\w\d\s*+]*)(<)?[=-]?(>)?([\w\d\s*+]*)$/m.exec(rct);
   if(matches===null) throw new TypeError('Wrong ProcessExpr string:', rct);
+  console.log(matches)
 
   let substrates = matches[1];
   let products = matches[4];
