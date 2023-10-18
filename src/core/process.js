@@ -1,4 +1,5 @@
 const { Record } = require('./record');
+const _ = require('lodash');
 
 /*
   Process class
@@ -18,7 +19,7 @@ class Process extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = _.get(this, 'namespace.container.logger');
     let valid = Process.isValid(q, logger);
 
     if (valid) {
