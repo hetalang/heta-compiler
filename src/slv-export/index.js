@@ -238,7 +238,6 @@ class SLVExport extends AbstractExport{
     };
   }
   getSLVCode(image = {}){
-    console.log
     return compiledTemplates['slv-blocks-template.slv.njk'].render(image);
   }
   static get validate(){

@@ -31,7 +31,6 @@
 ## bugs
 
 - Remove references to class names for better webpack support schemaName
-- garbage info in output (Tatiana's problem) 
 
 ## features
 
