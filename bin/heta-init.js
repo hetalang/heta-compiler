@@ -72,8 +72,13 @@ if(program.silent){
   fs.outputJsonSync(filePath, platform, {spaces: 2});
   // saving .gitignore
   fs.copySync(
-    path.join(__dirname, './init/.gitignore'),
+    path.join(__dirname, './init/template.gitignore'),
     path.join(targetDir, '.gitignore')
+  );
+  // saving .gitattributes
+  fs.copySync(
+    path.join(__dirname, './init/template.gitattributes'),
+    path.join(targetDir, '.gitattributes')
   );
 
   console.log('Platform template is created in silent mode.');
