@@ -29,6 +29,9 @@ class _Switcher extends Component {
 
     return this;
   }
+  get className() {
+    return '_Switcher';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.atStart !== 'undefined')

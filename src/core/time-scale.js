@@ -32,6 +32,9 @@ class TimeScale extends _Size { // implicit extend Numeric
 
     return this;
   }
+  get className() {
+    return 'TimeScale';
+  }
   clone(){
     let clonedComponent = super.clone();
 

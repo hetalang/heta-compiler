@@ -49,6 +49,9 @@ class Record extends _Size {
     
     return this;
   }
+  get className() {
+    return 'Record';
+  }
   clone(){
     let clonedComponent = super.clone();
     clonedComponent.assignments = _.mapValues(this.assignments, (expr) => expr.clone());

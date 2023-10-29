@@ -53,7 +53,7 @@ class Component {
     return this.name + 'P';
   }
   get className(){
-    return this.constructor.name;
+    return 'Component';
   }
   get index(){
     if(this.space !== 'nameless'){

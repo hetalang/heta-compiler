@@ -53,6 +53,9 @@ class Dose extends _Size {
 
     return this;
   }
+  get className() {
+    return 'Dose';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.start === 'string'){

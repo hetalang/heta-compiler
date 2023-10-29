@@ -13,6 +13,9 @@ class Page extends Component {
     
     return this;
   }
+  get className() {
+    return 'Page';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.content !== 'undefined')

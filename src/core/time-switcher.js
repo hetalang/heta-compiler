@@ -58,6 +58,9 @@ class TimeSwitcher extends _Switcher {
 
     return this;
   }
+  get className() {
+    return 'TimeSwitcher';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.start === 'string'){

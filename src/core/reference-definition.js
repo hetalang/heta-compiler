@@ -15,6 +15,9 @@ class ReferenceDefinition extends Component {
 
     return this;
   }
+  get className() {
+    return 'ReferenceDefinition';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.prefix !== 'undefined')

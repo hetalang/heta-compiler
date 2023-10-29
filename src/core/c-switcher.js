@@ -35,6 +35,9 @@ class CSwitcher extends _Switcher {
     
     return this;
   }
+  get className() {
+    return 'CSwitcher';
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     if (this.trigger) res.trigger = this.trigger.toString();

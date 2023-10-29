@@ -39,6 +39,9 @@ class Process extends Record {
     
     return this;
   }
+  get className() {
+    return 'Process';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (this.actors !== undefined)

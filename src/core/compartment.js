@@ -19,6 +19,9 @@ class Compartment extends Record {
     
     return this;
   }
+  get className() {
+    return 'Compartment';
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     // nothing

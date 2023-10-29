@@ -38,6 +38,9 @@ class StopSwitcher extends _Switcher {
     
     return this;
   }
+  get className() {
+    return 'StopSwitcher';
+  }
   toQ(options = {}){
     let res = super.toQ(options);
     if (this.trigger) res.trigger = this.trigger.toString();

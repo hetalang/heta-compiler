@@ -41,6 +41,9 @@ class Reaction extends Process {
     
     return this;
   }
+  get className() {
+    return 'Reaction';
+  }
   clone(){
     let clonedComponent = super.clone();
 

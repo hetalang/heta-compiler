@@ -31,6 +31,9 @@ class Const extends _Size { // implicit extend Numeric
 
     return this;
   }
+  get className() {
+    return 'Const';
+  }
   get numFloat(){
     return Number.isInteger(this.num)
       ? this.num.toString() + '.0'

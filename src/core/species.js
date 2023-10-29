@@ -23,6 +23,9 @@ class Species extends Record {
 
     return this;
   }
+  get className() {
+    return 'Species';
+  }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.compartment !== 'undefined')

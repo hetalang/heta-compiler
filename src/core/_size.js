@@ -36,9 +36,11 @@ class _Size extends Component {
         }
       }
     }
-    
 
     return this;
+  }
+  get className() {
+    return '_Size';
   }
   clone(){
     let componentClone = super.clone();
