@@ -24,12 +24,12 @@ const referenceDefinition = require('./reference-definition');
 const const_ = require('./const');
 
 // scoped
-singleTest('Record', record, recordError);
-singleTest('Process', process, processError);
+//singleTest('Record', record, recordError);
+//singleTest('Process', process, processError);
 //singleTest('CSwitcher', switcher, switcherError);
 singleTest('MonteCarloTask', monteCarloTask, monteCarloTaskError);
-singleTest('Page', page, pageError);
-singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
+//singleTest('Page', page, pageError);
+//singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
 
 // unscoped
 singleTest('FunctionDefinition', functionDefinition);

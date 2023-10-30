@@ -5,7 +5,7 @@ const { expect } = require('chai');
 describe('Unit test for Component common methods', () => {
 
   it('Check static methods', () => {
-    expect(Component).to.have.property('schemaName', 'ComponentP');
+    expect(Component).to.have.property('schemaName', 'Component');
     expect(Component).to.have.property('isValid');
   });
 

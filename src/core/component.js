@@ -50,7 +50,7 @@ class Component {
     }
   }
   static get schemaName(){
-    return this.name + 'P';
+    return this.prototype.className;
   }
   get className(){
     return 'Component';

@@ -80,7 +80,7 @@
       }
     },
 
-    "ComponentP": {
+    "Component": {
       "type": "object",
       "description": "Abstract class for all top elements.",
       "properties": {
@@ -93,14 +93,14 @@
       }
     },
 
-    "_ScopedP": {
+    "_Scoped": {
       "description": "Abstract class for Records and other classes with space.",
       "properties": {
         "space": { "$ref": "#/definitions/ID" }
       }
     },
 
-    "RecordP": {
+    "Record": {
       "type": "object",
       "properties": {
         "assignments": {
@@ -117,37 +117,14 @@
       }
     },
 
-    "Record": {
-      "description": "Class describing numerical value which can be changed in time.",
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/RecordP" },
-        {
-          "required": ["id", "space"],
-          "properties": { "class": { "const": "Record" } }
-        }
-      ]
-    },
 
-    "CompartmentP": {
+
+    "Compartment": {
       "type": "object"
     },
 
-    "Compartment": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/RecordP" },
-        { "$ref": "#/definitions/CompartmentP" },
-        {
-          "required": ["id", "space"],
-          "properties": { "class": { "const": "Compartment" } }
-        }
-      ]
-    },
 
-    "SpeciesP": {
+    "Species": {
       "type": "object",
       "properties": {
         "compartment": {
@@ -161,20 +138,9 @@
       }
     },
 
-    "Species": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/RecordP" },
-        { "$ref": "#/definitions/SpeciesP" },
-        {
-          "required": ["id", "space", "compartment"],
-          "properties": { "class": { "const": "Species" } }
-        }
-      ]
-    },
 
-    "ProcessP": {
+
+    "Process": {
       "type": "object",
       "properties": {
         "assignments": {
@@ -194,20 +160,9 @@
       }
     },
 
-    "Process": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/RecordP" },
-        { "$ref": "#/definitions/ProcessP" },
-        {
-          "required": ["id", "space", "actors"],
-          "properties": { "class": { "const": "Process" } }
-        }
-      ]
-    },
 
-    "ReactionP": {
+
+    "Reaction": {
       "type": "object",
       "properties": {
         "reversible": { "type": "boolean", "default": true },
@@ -232,21 +187,9 @@
       }
     },
 
-    "Reaction": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/RecordP" },
-        { "$ref": "#/definitions/ProcessP" },
-        { "$ref": "#/definitions/ReactionP" },
-        {
-          "required": ["id", "space", "actors", "modifiers"],
-          "properties": { "class": { "const": "Reaction" } }
-        }
-      ]
-    },
 
-    "_SwitcherP": {
+
+    "_Switcher": {
       "type": "object",
       "properties": {
         "atStart": {
@@ -262,27 +205,16 @@
       }
     },
 
-    "CSwitcherP": {
+    "CSwitcher": {
       "type": "object",
       "properties": {
         "trigger": { "$ref": "#/definitions/ExprString" }
       }
     },
 
-    "CSwitcher": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/_SwitcherP" },
-        { "$ref": "#/definitions/CSwitcherP" },
-        {
-          "required": ["id", "space", "trigger"],
-          "properties": { "class": { "const": "CSwitcher" } }
-        }
-      ]
-    },
 
-    "DSwitcherP": {
+
+    "DSwitcher": {
       "type": "object",
       "properties": {
         "trigger": {
@@ -294,7 +226,7 @@
       }
     },
 
-    "StopSwitcherP": {
+    "StopSwitcher": {
       "type": "object",
       "properties": {
         "trigger": {
@@ -306,7 +238,7 @@
       }
     },
 
-    "TimeSwitcherP": {
+    "TimeSwitcher": {
       "type": "object",
       "properties": {
         "start": { "$ref" : "#/definitions/ConstInternal" },
@@ -315,20 +247,9 @@
       }
     },
 
-    "TimeSwitcher": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/_SwitcherP" },
-        { "$ref": "#/definitions/TimeSwitcherP" },
-        {
-          "required": ["id", "space", "start"],
-          "properties": { "class": { "const": "TimeSwitcher" } }
-        }
-      ]
-    },
 
-    "ConstP": {
+
+    "Const": {
       "type": "object",
       "description": "Input value. Upper and lower describes possible values. Scale describes transformation for fitting.",
       "properties": {
@@ -340,7 +261,7 @@
       }
      },
 
-     "TimeScaleP": {
+     "TimeScale": {
       "type": "object",
       "description": "t and other time scales",
       "properties": {
@@ -361,7 +282,7 @@
       "example": { "kind": "mole", "multiplier": 1e-6, "exponent": 1 }
     },
 
-     "_SizeP": {
+     "_Size": {
        "type": "object",
        "properties": {
          "units": { "anyOf": [
@@ -374,28 +295,19 @@
 
      "ConstInternal": {
       "anyOf": [
-        { "allOf": [ { "$ref": "#/definitions/ConstP" }, { "required": ["num"] } ] },
+        { "allOf": [ { "$ref": "#/definitions/Const" }, { "required": ["num"] } ] },
         { "$ref": "#/definitions/ID" },
         { "type": "number" }
       ]
      },
 
-    "Const": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/ConstP" },
-        {
-          "required": ["id", "num"],
-          "properties": { "class": { "const": "Const" } }
-        }
-      ]
-    },
 
-    "_TaskP": {
+
+    "_Task": {
       "type": "object"
     },
 
-    "MonteCarloTaskP": {
+    "MonteCarloTask": {
       "type": "object",
       "properties": {
         "statistics": {
@@ -405,20 +317,9 @@
       }
     },
 
-    "MonteCarloTask": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_ScopedP" },
-        { "$ref": "#/definitions/_TaskP" },
-        { "$ref": "#/definitions/MonteCarloTaskP" },
-        {
-          "required": ["id", "space", "statistics"],
-          "properties": { "class": { "const": "MonteCarloTask" } }
-        }
-      ]
-    },
 
-    "PageP": {
+
+    "Page": {
       "type": "object",
       "properties": {
         "content": {
@@ -427,36 +328,17 @@
       }
     },
 
-    "Page": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/PageP" },
-        {
-          "required": ["id", "content"],
-          "properties": { "class": { "const": "Page" } }
-        }
-      ]
-    },
 
-    "UnitDefP": {
+
+    "UnitDef": {
       "type": "object",
       "properties": {
       }
     },
 
-    "UnitDef": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/_SizeP" },
-        { "$ref": "#/definitions/UnitDefP" },
-        {
-          "required": ["id"],
-          "properties": { "class": { "const": "UnitDef" } }
-        }
-      ]
-    },
 
-    "FunctionDefinitionP": {
+
+    "FunctionDefinition": {
       "type": "object",
       "properties": {
         "args": {
@@ -467,34 +349,14 @@
       }
     },
 
-    "FunctionDefinition": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/FunctionDefinitionP" },
-        {
-          "required": ["id", "args", "expr"],
-          "properties": { "class": { "const": "FunctionDefinition" } }
-        }
-      ]
-    },
 
-    "ReferenceDefinitionP": {
+
+    "ReferenceDefinition": {
       "type": "object",
       "properties": {
         "prefix": { "type": "string" },
         "suffix": { "type": "string" }
       }
-    },
-
-    "ReferenceDefinition": {
-      "allOf": [
-        { "$ref": "#/definitions/ComponentP" },
-        { "$ref": "#/definitions/ReferenceDefinitionP" },
-        {
-          "required": ["id"],
-          "properties": { "class": { "const": "ReferenceDefinition" } }
-        }
-      ]
     }
-   }
+  }
 }
