@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.6.20
+
+- support webpack: do not use constructor.name
+- fix `heta init -s`
+- more info when id is skipped
+- fix meta files in `heta build`
+
 ## 0.6.19
 
 - update syntax of RCT A > B together with A => B
