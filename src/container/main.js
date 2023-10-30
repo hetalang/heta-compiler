@@ -257,11 +257,10 @@ class Container {
               && size.legalTerms.length !== 0;
           })
           .forEach((size) => {
-            let constructorName = size.constructor.name;
             let term = size.unitsParsed.toTerm();
             // check if Term cannot be estimated
             if (typeof term === 'undefined') {
-              let msg = `Unit term cannot be estimated for @${constructorName} "${size.index}"`;
+              let msg = `Unit term cannot be estimated for @${size.className} "${size.index}"`;
               this.logger.warn(msg, {type: 'UnitError'});
               return; // break
             }
@@ -271,7 +270,7 @@ class Container {
               let legalTermStrings = size.legalTerms
                 .map((term) => `"${term.toString()}"`)
                 .join(', ');
-              let msg = `@${constructorName} "${size.index}" has wrong unit term. It must be ${legalTermStrings}, got "${termString}"`;
+              let msg = `@${size.className} "${size.index}" has wrong unit term. It must be ${legalTermStrings}, got "${termString}"`;
               this.logger.warn(msg, {type: 'UnitError'});
             }
           });

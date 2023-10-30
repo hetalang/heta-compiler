@@ -240,23 +240,23 @@ class Component {
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
   static requirements(){ 
-    if(this.name === 'Component'){
+    if (this.name === 'Component') {
       return this._requirements;
-    }else if(this.hasOwnProperty('_requirements')){
+    } else if (this.hasOwnProperty('_requirements')) {
       let deeper = this.requirements.call(this.__proto__);
       return Object.assign({}, deeper, this._requirements);
-    }else{
+    } else {
       let deeper = this.requirements.call(this.__proto__);
       return deeper;
     }
   }
   /* recursively check class names */
   instanceOf(className){
-    if(this.constructor.name === className){
+    if (this.className === className) {
       return true;
-    }else if(this.constructor.name === 'Object'){
+    } else if (!this.className) {
       return false;
-    }else{
+    } else {
       return this.instanceOf.call(this.__proto__, className);
     }
   }
