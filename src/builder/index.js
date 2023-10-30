@@ -105,10 +105,10 @@ class Builder {
 
     // 2. Modules integration
     if (this.options.debug) {
-      Object.values(ms.moduleCollection).forEach((value) => {
-        let relPath = path.relative(this._coreDirname, value.filename + '.json');
+      Object.getOwnPropertyNames(ms.moduleCollection).forEach((name) => {
+        let relPath = path.relative(this._coreDirname, name + '.json');
         let absPath = path.join(this._metaDirname, relPath);
-        let str = JSON.stringify(value.parsed, null, 2);
+        let str = JSON.stringify(ms.moduleCollection[name], null, 2);
         fs.outputFileSync(absPath, str);
         this.logger.info(`Meta file was saved to ${absPath}`);
       });
