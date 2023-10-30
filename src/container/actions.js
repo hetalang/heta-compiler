@@ -109,7 +109,7 @@ Container.prototype.insert = function(q = {}, isCore = false){
   // check index
   if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
     this.logger.error(
-      `${ind} id should be string of type ID, but have "${q.id}"`,
+      `${ind} id should be string of type ID, but have "${q.id}"\n\t- ${JSON.stringify(q)}`,
       {type: 'QError', space: space}
     );
     return;
@@ -181,7 +181,7 @@ Container.prototype.update = function(q = {}){
   let space = q.space || 'nameless';
   if (!q.id) {
     this.logger.error(
-      `"id" property is not set in "#update" action: ${JSON.stringify(q)}`,
+      `"id" property is not set in "#update" action:\n\t- ${JSON.stringify(q)}`,
       {type: 'QError', space: space}
     );
     return;
@@ -260,7 +260,7 @@ Container.prototype.delete = function(q = {}){
 
   if (!q.id) {
     this.logger.error(
-      `"id" property is not set in "#delete" action: ${JSON.stringify(q)}`,
+      `"id" property is not set in "#delete" action:\n\t- ${JSON.stringify(q)}`,
       {type: 'QError', space: space}
     );
     return;
@@ -555,7 +555,7 @@ Container.prototype.select = function(q = {}){
   let space = q.space || 'nameless';
   if (!q.id) {
     this.logger.error(
-      `"id" property is not set in "#select" action: ${JSON.stringify(q)}`,
+      `"id" property is not set in "#select" action:\n\t- ${JSON.stringify(q)}`,
       {type: 'QError', space: space}
     );
     return;
