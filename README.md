@@ -46,14 +46,14 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 ## Installation
 
-[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v8/v10** are recommended.
+[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v14 and newer** are supported.
 
 The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.
 
-1. Check Node version. It should be >= 8.0.0.
+1. Check Node version.
     ```bash
     node -v
-    # v8.0.0 or newer
+    # must be v14.0.0 or newer
     ```
 
 2. The latest stable version of Heta compiler can be installed from npm
@@ -216,4 +216,4 @@ The original author of the project is [Evgeny Metelkin](https://github.com/metel
 
 - In 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/hetalang/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of [Heta project](https://hetalang.github.io/).
 
-Copyright 2019-2021, InSysBio LLC
+Copyright 2019-2023, InSysBio LLC
