@@ -135,7 +135,11 @@ class JuliaExport extends AbstractExport {
       .selectByInstanceOf('_Switcher')
       .map((switcher) => {
         let affect = ns.toArray()
-          .filter((x) => x.instanceOf('Record') && _.has(x, 'assignments.' + switcher.id));
+          .filter((x) => {
+            return x.instanceOf('Record') 
+              && x.assignments !== undefined 
+              && x.assignments[switcher.id] !== undefined;
+          });
 
         // find all unique dependencies inside assignments
         let affectDeps = [];

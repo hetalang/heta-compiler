@@ -1,6 +1,5 @@
 const { _Switcher } = require('./_switcher');
 const { Const } = require('./const');
-const _ = require('lodash');
 /*
   TimeSwitcher class
 
@@ -84,21 +83,21 @@ class TimeSwitcher extends _Switcher {
   getStart(){
     if (this.start !== undefined) {
       return this.start;
-    } else if (_.has(this, 'startObj.num')) {
+    } else if (this.startObj?.num !== undefined) {
       return this.startObj.num;
     }
   }
   getPeriod(){
     if (this.period !== undefined) {
       return this.period;
-    } else if (_.has(this, 'periodObj.num')) {
+    } else if (this.periodObj?.num !== undefined) {
       return this.periodObj.num;
     }
   }
   getStop(){
     if (this.stop !== undefined) {
       return this.stop;
-    } else if (_.has(this, 'stopObj.num')) {
+    } else if (this.stopObj?.num !== undefined) {
       return this.stopObj.num;
     }
   }

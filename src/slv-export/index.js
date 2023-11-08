@@ -140,7 +140,7 @@ class SLVExport extends AbstractExport{
     // create and sort expressions for RHS
     let rhs = ns
       .sortExpressionsByContext('ode_', false)
-      .filter((record) => record.instanceOf('Record') && _.has(record, 'assignments.ode_'));
+      .filter((record) => record.instanceOf('Record') && record.assignments?.ode_ !== undefined);
     // check that all record in start are not Expression
     let startExpressions = ns
       .selectRecordsByContext('start_')

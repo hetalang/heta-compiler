@@ -105,13 +105,13 @@ class Component {
     Object.entries(req)
       .forEach(([prop, rule]) => { // iterates through rules
         // isReference: true
-        if(rule.isReference && _.has(this, prop)){
-          if(rule.isArray){ // iterates through array
+        if (rule.isReference && this[prop] !== undefined) {
+          if (rule.isArray) { // iterates through array
             this[prop].forEach((item, i) => {
               let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
               iterator(item, fullPath, rule);
             });
-          }else{
+          } else {
             let item = this[prop];
             let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
             iterator(item, fullPath, rule);
@@ -189,14 +189,14 @@ class Component {
     let req = this.constructor.requirements();
     Object.entries(req).forEach(([prop, rule]) => { // iterates through rules
       // required: true
-      if (rule.required && !_.has(this, prop)) {
+      if (rule.required && this[prop] === undefined) {
         logger.error(
           `No required "${prop}" property for "${this.index}" of ${this.className}.`,
           {type: 'BindingError', space: this.space}
         );
       }
       // isReference: true + className
-      if (rule.isReference && _.has(this, prop)) {
+      if (rule.isReference && this[prop] !== undefined) {
         if (rule.isArray) { // iterates through array
           this[prop].forEach((item, i) => {
             let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;

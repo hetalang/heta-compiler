@@ -1,7 +1,7 @@
 const { _Size } = require('./_size');
 const { Const } = require('./const');
 const { floor, min } = Math;
-const _ = require('lodash');
+
 /*
   Dose class
 */
@@ -84,28 +84,28 @@ class Dose extends _Size {
   getStart(){
     if (this.start !== undefined) {
       return this.start;
-    } else if (_.has(this, 'startObj.num')) {
+    } else if (this.startObj?.num !== undefined) {
       return this.startObj.num;
     }
   }
   getPeriod(){
     if (this.period !== undefined) {
       return this.period;
-    } else if (_.has(this, 'periodObj.num')) {
+    } else if (this.periodObj?.num !== undefined) {
       return this.periodObj.num;
     }
   }
   getStop(){
     if (this.stop !== undefined) {
       return this.stop;
-    } else if (_.has(this, 'stopObj.num')) {
+    } else if (this.stopObj?.num !== undefined) {
       return this.stopObj.num;
     }
   }
   getRepeatCount(){
     if (this.repeatCount !== undefined) {
       return this.repeatCount;
-    } else if (_.has(this, 'repeatCountObj.num')) {
+    } else if (this.repeatCountObj?.num !== undefined) {
       return this.repeatCountObj.num;
     }
   }

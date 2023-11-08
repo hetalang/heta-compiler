@@ -112,7 +112,10 @@ class MatlabExport extends AbstractExport {
     // initialize at start records
     let initRecords = ns
       .sortExpressionsByContext('start_')
-      .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule));
+      .filter((x) => {
+        return x.instanceOf('Record') 
+          && (x.assignments?.start_ !== undefined || x.isRule);
+      });
     // currently we output all records
     let sharedRecords = ns
       .sortExpressionsByContext('ode_', true)
@@ -145,8 +148,9 @@ class MatlabExport extends AbstractExport {
       .map((switcher) => {
         let affect = switcher.namespace.toArray()
           .filter((x) => {
-            return x.instanceOf('Record') 
-              && _.has(x, 'assignments.' + switcher.id);
+            return x.instanceOf('Record')
+              && x.assignments !== undefined
+              && x.assignments[switcher.id] !== undefined;
           });
         
         return {

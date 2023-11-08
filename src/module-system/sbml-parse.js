@@ -355,7 +355,7 @@ function compartmentToQ(x, unitDict = {}){
     let legalUnitIndex = legalUnits.indexOf(unitId); //
     if (legalUnitIndex !== -1) { // if id in legal unit list
       q.units = Unit.fromQ([{ kind: unitId }]);
-    } else if (_.has(unitDict, unitId)){
+    } else if (unitDict[unitId] !== undefined){
       q.units = unitDict[unitId].simplify('dimensionless');
     } else {
       q.units = Unit.fromQ([{ kind: unitId }]);
@@ -415,7 +415,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
           .divide(compartmentUnits)
           .simplify();
       }
-    } else if (_.has(unitDict, substanceUnitId)) {
+    } else if (unitDict[substanceUnitId] !== undefined) {
       let amountUnits = unitDict[substanceUnitId];
       // set amount or concentration units
       if (q.isAmount) {
@@ -499,7 +499,7 @@ function reactionToQ(x){
   // products
   let products = x.elements
     && x.elements.find((y) => y.name === 'listOfProducts');
-  if (_.has(products, 'elements')) {
+  if (products.elements !== undefined) {
     var actors0 = products.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
@@ -523,7 +523,7 @@ function reactionToQ(x){
   // reactants
   let reactants = x.elements
     && x.elements.find((y) => y.name === 'listOfReactants');
-  if (_.has(reactants, 'elements')) {
+  if (reactants.elements !== undefined) {
     var actors1 = reactants.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
@@ -545,17 +545,11 @@ function reactionToQ(x){
   }
 
   // modifiers
-  let modifiers = x.elements
-    && x.elements.find((y) => y.name === 'listOfModifiers');
-  if (_.has(modifiers, 'elements')) {
-    var modifiers1 = modifiers.elements
-      .filter((y) => y.name === 'modifierSpeciesReference')
-      .map((y) => {
-        return { target: y.attributes?.species };
-      });
-  } else {
-    modifiers1 = [];
-  }
+  let modifiers1 = (x.elements?.find((y) => y.name === 'listOfModifiers')?.elements || [])
+    .filter((y) => y.name === 'modifierSpeciesReference')
+    .map((y) => {
+      return { target: y.attributes?.species };
+    });
 
   q.actors = actors0.concat(actors1);
   q.modifiers = modifiers1;
@@ -588,7 +582,7 @@ function parameterToQ(x, unitDict = {}){
     let legalUnitIndex = legalUnits.indexOf(unitId); //
     if (legalUnitIndex !== -1) { // if id in legal unit list
       q.units = Unit.fromQ([{ kind: unitId }]);
-    } else if (_.has(unitDict, unitId)) { // if id in unitDefinitions
+    } else if (unitDict[unitId] !== undefined) { // if id in unitDefinitions
       // I removed simplify here to support pretty units in IRT
       q.units = unitDict[unitId]; //.simplify(); 
     } else {
@@ -688,7 +682,7 @@ function eventToQ(x){
   // assignments
   let assignments = x.elements 
     && x.elements.find((y) => y.name === 'listOfEventAssignments');
-  if (_.has(assignments, 'elements')) {
+  if (assignments.elements !== undefined) {
     assignments.elements
       .filter((y) => y.name === 'eventAssignment')
       .forEach((y) => {

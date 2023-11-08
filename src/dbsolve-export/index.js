@@ -120,7 +120,10 @@ class DBSolveExport extends AbstractExport{
     */
     let initRecords = ns
       .sortExpressionsByContext('start_', true)
-      .filter((x) => x.instanceOf('Record') && (_.has(x, 'assignments.start_') || x.isRule)); 
+      .filter((x) => {
+        return x.instanceOf('Record') 
+          && (x.assignments?.start_ !== undefined || x.isRule);
+      }); 
     // create matrix
     let matrix = [];
     processes.forEach((process, processNum) => {
