@@ -2,7 +2,6 @@
     Top class for all other items of platform
 */
 
-const _ = require('lodash');
 const randomId = require('random-id');
 const { ajv } = require('../utils');
 const { flatten } = require('./utilities');
@@ -91,13 +90,13 @@ class Top { // or const Top = class {...}
 
     return q;
   } 
-  toFlat(options = {}){
+  toFlat(_options = {}){
     // set defaults
-    _.defaults(options, {
+    let options = Object.assign({
       simplifyModifiers: true,
       simplifyActors: true,
       simplifyExpressions: true
-    });
+    }, _options);
 
     let q = this.toQ(options);
     let res = flatten(q);

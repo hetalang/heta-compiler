@@ -84,13 +84,13 @@ class Component {
     return componentClone;
   }
   /** Change referencies of component based on suffix/prefix/rename */
-  updateReferences(q = {}){
+  updateReferences(_q = {}){
     // set defaults
-    _.defaults(q, {
+    let q = Object.assign({
       prefix: '',
       suffix: '',
       rename: {}
-    });
+    }, _q);
 
     // change references
     const iterator = (item, path) => { // Actor { target: 'y', stoichiometry: -1 }, actors[0].target
@@ -222,13 +222,13 @@ class Component {
 
     return res;
   }
-  toFlat(options = {}){
+  toFlat(_options = {}){
     // set defaults
-    _.defaults(options, {
+    let options = Object.assign({
       simplifyModifiers: true,
       simplifyActors: true,
       simplifyExpressions: true
-    });
+    }, _options);
 
     let q = this.toQ(options);
     let res = flatten(q);

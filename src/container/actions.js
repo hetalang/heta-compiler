@@ -133,11 +133,11 @@ Container.prototype.insert = function(q = {}, isCore = false){
   let exportCheck = q.class.match(/^(\w+)Export$/);
   if (exportCheck !== null) { // check if old export syntax is used
     this.logger.warn(`Usage of Export is deprecated starting from v0.5.0, use syntax: #export {format: ${exportCheck[1]}, ...}`)
-    let exportQ = _.omit(q, ['class', 'id']);
-    _.defaults(exportQ, {
+    let _exportQ = _.omit(q, ['class', 'id']);
+    let exportQ = Object.assign({
       format: exportCheck[1],
       filepath: q.id
-    });
+    }, _exportQ);
     return this.export(exportQ);
   }
 
@@ -356,12 +356,12 @@ Container.prototype.setNS = function(q = {}){
  * 
  * @returns {Component[]} Array of cloned components.
  */
-Container.prototype.importNS = function(q = {}){
-  _.defaults(q, {
+Container.prototype.importNS = function(_q = {}){
+  let q = Object.assign({
     prefix: '',
     suffix: '',
     rename: {}
-  });
+  }, _q);
 
   let space = q.space || 'nameless';
   if (q.fromId) {
@@ -459,14 +459,14 @@ Container.prototype.moveNS = function(q = {}){
  * 
  * @returns {Component} Cloned component.
  */
-Container.prototype.import = function(q = {}){
-  let ind = getIndexFromQ(q);
+Container.prototype.import = function(_q = {}){
+  let ind = getIndexFromQ(_q);
 
-  _.defaults(q, {
+  let q = Object.assign({
     prefix: '',
     suffix: '',
     rename: {}
-  });
+  }, _q);
 
   let space = q.space || 'nameless';
   // checking arguments
