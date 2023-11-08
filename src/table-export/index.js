@@ -105,7 +105,11 @@ class TableExport extends AbstractExport {
       .map((x) => x[1].toFlat());
     let fArr_full = [].concat(fArr_ns, fArr_unitDef, fArr_functionDef, fArr_scenario).map((x) => {
       x.on = 1;
-      return _.mapValues(x, (value) => typeof value === 'boolean' ? value.toString() : value);
+      let res = {};
+      Object.entries(x).forEach(([key, value]) => {
+        res[key] = typeof value === 'boolean' ? value.toString() : value;
+      });
+      return res;
     });
 
     if (this.omit) {

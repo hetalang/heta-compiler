@@ -54,7 +54,10 @@ class Record extends _Size {
   }
   clone(){
     let clonedComponent = super.clone();
-    clonedComponent.assignments = _.mapValues(this.assignments, (expr) => expr.clone());
+    clonedComponent.assignments = {};
+    Object.entries(this.assignments).forEach(([key, expr]) => {
+      clonedComponent.assignments[key] = expr.clone();
+    });
     if (typeof this.boundary !== undefined)
       clonedComponent.boundary = this.boundary;
     if (typeof this.output !== undefined)
@@ -108,7 +111,10 @@ class Record extends _Size {
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    res.assignments = _.mapValues(this.assignments, (x) => x.toString(options));
+    res.assignments = {};
+    Object.entries(this.assignments).forEach(([key, value]) => {
+      res.assignments[key] = value.toString();
+    });
     if (this.boundary) {
       res.boundary = this.boundary;
     }
