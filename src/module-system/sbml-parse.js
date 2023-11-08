@@ -78,9 +78,9 @@ function jsbmlToQArr(JSBML){
     .value();
   compartments.forEach((x) => {
     // collect compartments with zero dimention
-    let isZero = _.get(x, 'attributes.spatialDimensions') === '0';
+    let isZero = x.attributes?.spatialDimensions === '0';
     if (isZero) {
-      zeroSpatialDimensions.push(_.get(x, 'attributes.id'));
+      zeroSpatialDimensions.push(x.attributes?.id);
       // set zero initial size
       _.set(x, 'attributes.size', '0'); 
     }
@@ -244,14 +244,14 @@ function functionDefinitionToQ(x){
 */
 function baseToQ(x){
   let q = {
-    id: _.get(x, 'attributes.id'),
-    title: _.get(x, 'attributes.name')
+    id: x.attributes?.id,
+    title: x.attributes?.name
   };
   // set metaid
-  let metaid = _.get(x, 'attributes.metaid');
+  let metaid = x.attributes?.metaid;
   if (metaid !== undefined) _.set(q, 'aux.metaid', metaid);
   // set sboTerm
-  let sboTerm = _.get(x, 'attributes.sboTerm');
+  let sboTerm = x.attributes?.sboTerm;
   if (sboTerm !== undefined) _.set(q, 'aux.sboTerm', sboTerm);
   // take only first notes
   let notes = x.elements
@@ -296,8 +296,8 @@ function _toMarkdown(elements = []){
         break;
       }
       case 'a': {
-        let href = _.get(x, 'attributes.href');
-        let title = _.get(x, 'attributes.title');
+        let href = x.attributes?.href;
+        let title = x.attributes?.title;
         return '[' + _toMarkdown(x.elements) + '](' + href + ')';
         break;
       }
@@ -344,19 +344,19 @@ function compartmentToQ(x, unitDict = {}){
   let q = baseToQ(x);
 
   q.class = 'Compartment';
-  q.boundary = _.get(x, 'attributes.constant') !== 'false';
-  let num = _.get(x, 'attributes.size');
+  q.boundary = x.attributes?.constant !== 'false';
+  let num = x.attributes?.size;
   if (num !== undefined) {
     _.set(q, 'assignments.start_', SBMLValueToNumber(num));
   }
   // units
-  let unitId = _.get(x, 'attributes.units');
+  let unitId = x.attributes?.units;
   if (typeof unitId !== 'undefined') {
     let legalUnitIndex = legalUnits.indexOf(unitId); //
     if (legalUnitIndex !== -1) { // if id in legal unit list
       q.units = Unit.fromQ([{ kind: unitId }]);
     } else if (_.has(unitDict, unitId)){
-      q.units = _.get(unitDict, unitId).simplify('dimensionless');
+      q.units = unitDict[unitId].simplify('dimensionless');
     } else {
       q.units = Unit.fromQ([{ kind: unitId }]);
       // the alternative solution is to throw undeclared units
@@ -365,7 +365,7 @@ function compartmentToQ(x, unitDict = {}){
   }
 
   // compartmentType
-  let compartmentType = _.get(x, 'attributes.compartmentType');
+  let compartmentType = x.attributes?.compartmentType;
   if (compartmentType !== undefined) _.set(q, 'tags.0', compartmentType);
 
   return q;
@@ -375,13 +375,13 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   let q = baseToQ(x);
 
   q.class = 'Species';
-  q.boundary = _.get(x, 'attributes.constant') === 'true' 
-    || _.get(x, 'attributes.boundaryCondition') === 'true';
-  q.compartment = _.get(x, 'attributes.compartment');
-  q.isAmount = _.get(x, 'attributes.hasOnlySubstanceUnits') === 'true'
+  q.boundary = x.attributes?.constant === 'true' 
+    || x.attributes?.boundaryCondition === 'true';
+  q.compartment = x.attributes?.compartment;
+  q.isAmount = x.attributes?.hasOnlySubstanceUnits === 'true'
     || zeroSpatialDimensions.indexOf(q.compartment) >= 0;
-  let concentration = _.get(x, 'attributes.initialConcentration');
-  let amount = _.get(x, 'attributes.initialAmount');
+  let concentration = x.attributes?.initialConcentration;
+  let amount = x.attributes?.initialAmount;
   if (concentration !== undefined && !q.isAmount) {
     _.set(q, 'assignments.start_', SBMLValueToNumber(concentration));
   } else if (concentration !== undefined && q.isAmount) {
@@ -392,11 +392,11 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
     _.set(q, 'assignments.start_', SBMLValueToNumber(amount));
   }
   // speciesType
-  let speciesType = _.get(x, 'attributes.speciesType');
+  let speciesType = x.attributes?.speciesType;
   if (speciesType !== undefined) _.set(q, 'tags.0', speciesType);
 
   // units
-  let substanceUnitId = _.get(x, 'attributes.substanceUnits');
+  let substanceUnitId = x.attributes?.substanceUnits;
   if (typeof substanceUnitId !== 'undefined') {
     // find compartment units
     let compartmentComponent = qArr.find((component) => component.id === q.compartment);
@@ -416,7 +416,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
           .simplify();
       }
     } else if (_.has(unitDict, substanceUnitId)) {
-      let amountUnits = _.get(unitDict, substanceUnitId);
+      let amountUnits = unitDict[substanceUnitId];
       // set amount or concentration units
       if (q.isAmount) {
         q.units = amountUnits
@@ -461,7 +461,7 @@ function reactionToQ(x){
     let parameters = listOfParameters.elements
       .filter((y) => y.name = 'parameter');
     parameters.forEach((y) => {
-      let id = _.get(y, 'attributes.id');
+      let id = y.attributes?.id;
       let newId = id + '__' + q.id + '_local';
       // set translator
       localConstTranslate.push({id, newId});
@@ -469,7 +469,7 @@ function reactionToQ(x){
       qArr.push({
         class: 'Const',
         id: newId,
-        num: Number.parseFloat(_.get(y, 'attributes.value'))
+        num: Number.parseFloat(y.attributes?.value)
       });
     });
   }
@@ -487,10 +487,10 @@ function reactionToQ(x){
   }
 
   // check if reversible
-  q.reversible = _.get(x, 'attributes.reversible') !== 'false' ;
+  q.reversible = x.attributes?.reversible !== 'false' ;
   
   // check if fast
-  let fast = _.get(x, 'attributes.fast') === 'true' ;
+  let fast = x.attributes?.fast === 'true' ;
   //_.set(q, 'aux.fast', fast);
   if (fast) {
     throw new Error(`"fast" reactions "${q.id}" is not supported in SBML module.`);
@@ -504,15 +504,15 @@ function reactionToQ(x){
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
         // check stoichiometry as an expression
-        let stoichiometryExpr = _.get(y, 'elements', [])
+        let stoichiometryExpr = (y.elements || [])
           .filter((z) => z.name === 'stoichiometryMath');
         if (stoichiometryExpr.length > 0)
           throw new Error('"stoichiometryMath" from SBML module is not supported.');
 
         // get constant stoichiometry
-        let stoichiometry = _.get(y, 'attributes.stoichiometry', '1');
+        let stoichiometry = y.attributes?.stoichiometry || '1';
         return {
-          target: _.get(y, 'attributes.species'),
+          target: y.attributes?.species,
           stoichiometry: Number.parseFloat(stoichiometry)
         };
       });
@@ -528,15 +528,15 @@ function reactionToQ(x){
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
         // check stoichiometry as an expression
-        let stoichiometryExpr = _.get(y, 'elements', [])
+        let stoichiometryExpr = (y.elements || [])
           .filter((z) => z.name === 'stoichiometryMath');
         if (stoichiometryExpr.length > 0)
           throw new Error('"stoichiometryMath" from SBML module is not supported.');
 
         // get constant stoichiometry
-        let stoichiometry = _.get(y, 'attributes.stoichiometry', '1');
+        let stoichiometry = y.attributes?.stoichiometry || '1';
         return {
-          target: _.get(y, 'attributes.species'),
+          target: y.attributes?.species,
           stoichiometry: (-1) * Number.parseFloat(stoichiometry)
         };
       });
@@ -551,7 +551,7 @@ function reactionToQ(x){
     var modifiers1 = modifiers.elements
       .filter((y) => y.name === 'modifierSpeciesReference')
       .map((y) => {
-        return { target: _.get(y, 'attributes.species') };
+        return { target: y.attributes?.species };
       });
   } else {
     modifiers1 = [];
@@ -568,8 +568,8 @@ function reactionToQ(x){
 function parameterToQ(x, unitDict = {}){
   let q = baseToQ(x);
 
-  let isConstant = _.get(x, 'attributes.constant') === 'true';
-  let num = _.get(x, 'attributes.value');
+  let isConstant = x.attributes?.constant === 'true';
+  let num = x.attributes?.value;
   if (isConstant) {
     q.class = 'Const';
     if (num !== undefined) {
@@ -583,14 +583,14 @@ function parameterToQ(x, unitDict = {}){
   }
 
   // units
-  let unitId = _.get(x, 'attributes.units');
+  let unitId = x.attributes?.units;
   if (typeof unitId !== 'undefined') {
     let legalUnitIndex = legalUnits.indexOf(unitId); //
     if (legalUnitIndex !== -1) { // if id in legal unit list
       q.units = Unit.fromQ([{ kind: unitId }]);
     } else if (_.has(unitDict, unitId)) { // if id in unitDefinitions
       // I removed simplify here to support pretty units in IRT
-      q.units = _.get(unitDict, unitId); //.simplify(); 
+      q.units = unitDict[unitId]; //.simplify(); 
     } else {
       q.units = Unit.fromQ([{ kind: unitId }]);
       // alternative solution is to throw undeclared "unit"
@@ -603,7 +603,7 @@ function parameterToQ(x, unitDict = {}){
 
 function initialAssignmentToQ(x){
   let q = {
-    id: _.get(x, 'attributes.symbol'),
+    id: x.attributes?.symbol,
   };
 
   let math = x.elements
@@ -615,7 +615,7 @@ function initialAssignmentToQ(x){
 
 function assignmentRuleToQ(x){
   let q = {
-    id: _.get(x, 'attributes.variable'),
+    id: x.attributes?.variable
   };
 
   let math = x.elements
@@ -628,7 +628,7 @@ function assignmentRuleToQ(x){
 function rateRuleToQ(x){
   let q0 = baseToQ(x);
 
-  let target = _.get(x, 'attributes.variable');
+  let target = x.attributes?.variable;
   q0.id = target + '_proc';
   q0.class = 'Process';
   q0.actors = [{
@@ -656,8 +656,7 @@ function eventToQ(x){
   qArr.push(switcher);
 
   // useValuesFromTriggerTime
-  let useValuesFromTriggerTime = _.get(x, 'attributes.useValuesFromTriggerTime') !== 'false';
-  //console.log(useValuesFromTriggerTime);
+  let useValuesFromTriggerTime = x.attributes?.useValuesFromTriggerTime !== 'false';
 
   // trigger
   let trigger = x.elements
@@ -694,7 +693,7 @@ function eventToQ(x){
       .filter((y) => y.name === 'eventAssignment')
       .forEach((y) => {
         let assign = {
-          id: _.get(y, 'attributes.variable')
+          id: y.attributes?.variable
         };
 
         let math = y.elements

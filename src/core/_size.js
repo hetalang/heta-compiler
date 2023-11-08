@@ -18,7 +18,7 @@ const _ = require('lodash');
 class _Size extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = _Size.isValid(q, logger);
     if (valid) {
       if (q.units) {

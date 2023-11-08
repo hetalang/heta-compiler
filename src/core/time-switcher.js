@@ -29,7 +29,7 @@ class TimeSwitcher extends _Switcher {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = TimeSwitcher.isValid(q, logger);
 
     if (valid) {

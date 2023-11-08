@@ -4,6 +4,7 @@ const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 const { validator, flatten } = require('./utilities');
 const { uniqBy } = require('../utils');
 const _ = require('lodash');
+const _get = require('lodash/get');
 
 /*
   class Component
@@ -21,7 +22,7 @@ class Component {
     if (isCore) this._isCore = true;
   }
   merge(q = {}){
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Component.isValid(q, logger);
 
     if (valid) {
@@ -93,12 +94,9 @@ class Component {
 
     // change references
     const iterator = (item, path) => { // Actor { target: 'y', stoichiometry: -1 }, actors[0].target
-      let oldRef = _.get(this, path);
-      let newRef = _.get(
-        q.rename, 
-        oldRef,
-        [q.prefix, oldRef, q.suffix].join('') // default behaviour
-      );
+      let oldRef = _get(this, path);
+      let newRef = q.rename[oldRef] 
+        || [q.prefix, oldRef, q.suffix].join(''); // default behaviour
 
       _.set(this, path, newRef);
     };
@@ -109,12 +107,12 @@ class Component {
         // isReference: true
         if(rule.isReference && _.has(this, prop)){
           if(rule.isArray){ // iterates through array
-            _.get(this, prop).forEach((item, i) => {
+            this[prop].forEach((item, i) => {
               let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
               iterator(item, fullPath, rule);
             });
           }else{
-            let item = _.get(this, prop);
+            let item = this[prop];
             let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
             iterator(item, fullPath, rule);
           }
@@ -160,7 +158,7 @@ class Component {
       throw new TypeError('"namespace" argument should be set.');
     
     const iterator = (item, path, rule) => {
-      let targetId = _.get(this, path);
+      let targetId = _get(this, path);
       let target = namespace.get(targetId);
 
       if (!target) {
@@ -200,12 +198,12 @@ class Component {
       // isReference: true + className
       if (rule.isReference && _.has(this, prop)) {
         if (rule.isArray) { // iterates through array
-          _.get(this, prop).forEach((item, i) => {
+          this[prop].forEach((item, i) => {
             let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
             iterator(item, fullPath, rule);
           });
         } else {
-          let item = _.get(this, prop);
+          let item = this[prop];
           let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
           iterator(item, fullPath, rule);
         }

@@ -1,6 +1,7 @@
 const { AbstractExport } = require('../core/abstract-export');
 /* global compiledTemplates */
 const _ = require('lodash');
+const _get = require('lodash/get');
 require('./expression');
 const { ajv } = require('../utils');
 
@@ -144,7 +145,7 @@ class DBSolveExport extends AbstractExport{
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
         // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
-        let period = switcher.periodObj === undefined || _.get(switcher, 'repeatCountObj.num') === 0
+        let period = switcher.periodObj === undefined || switcher.repeatCountObj?.num === 0
           ? 0
           : switcher.getPeriod();
         ns
@@ -235,7 +236,7 @@ class DBSolveExport extends AbstractExport{
     // group Const
     let groupedConst = _.groupBy(
       ns.selectByClassName('Const'),
-      (con) => _.get(con, this.groupConstBy)
+      (constant) => _get(constant, this.groupConstBy)
     );
 
     return {

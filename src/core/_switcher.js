@@ -15,7 +15,7 @@ class _Switcher extends Component {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = _Switcher.isValid(q, logger);
 
     if (valid) {

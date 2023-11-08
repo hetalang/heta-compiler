@@ -5,7 +5,7 @@ const { Component } = require('./component');
 class ReferenceDefinition extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = ReferenceDefinition.isValid(q, logger);
 
     if (valid) {

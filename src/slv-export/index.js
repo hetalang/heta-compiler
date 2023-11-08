@@ -1,6 +1,7 @@
 const { AbstractExport } = require('../core/abstract-export');
 /* global compiledTemplates */
 const _ = require('lodash');
+const _get = require('lodash/get');
 const { ajv } = require('../utils');
 
 const schema = {
@@ -159,7 +160,7 @@ class SLVExport extends AbstractExport{
       .forEach((switcher) => { // scan for switch
         // if period===undefined or period===0 or repeatCount===0 => single dose
         // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
-        let period = switcher.periodObj === undefined || _.get(switcher, 'repeatCountObj.num') === 0
+        let period = switcher.periodObj === undefined || switcher.repeatCountObj?.num === 0
           ? 0
           : switcher.getPeriod();
         ns
@@ -223,7 +224,7 @@ class SLVExport extends AbstractExport{
     // group Const
     let groupedConst = _.groupBy(
       ns.selectByClassName('Const'),
-      (con) => _.get(con, this.groupConstBy)
+      (con) => _get(con, this.groupConstBy)
     );
     
     return {

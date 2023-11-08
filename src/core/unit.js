@@ -327,7 +327,7 @@ class Unit extends Array {
             kindUpd = item.kind;
           } else {
             let exponential = item.multiplier.toExponential(8); // round to 8 digits
-            let pref = _.get(prefixes, exponential);
+            let pref = prefixes[exponential];
             if (pref === undefined) 
               throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
             kindUpd = pref + item.kind;

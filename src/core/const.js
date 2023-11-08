@@ -18,7 +18,7 @@ class Const extends _Size { // implicit extend Numeric
   } 
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Const.isValid(q, logger);
 
     if (valid) {

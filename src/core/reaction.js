@@ -20,7 +20,7 @@ class Reaction extends Process {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Reaction.isValid(q, logger);
 
     if (valid) {

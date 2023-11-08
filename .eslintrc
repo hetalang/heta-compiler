@@ -2,7 +2,7 @@
     "globals": {
     },
     "env": {
-        "es6": true,
+        "browser": true,
         "node": true
     },
     "plugins": ["you-dont-need-lodash-underscore"],
@@ -11,7 +11,7 @@
         "plugin:you-dont-need-lodash-underscore/compatible"
     ],
     "parserOptions": {
-        "ecmaVersion": 2017,
+        "ecmaVersion": 2020,
         "sourceType": "module"
     },
     "rules": {

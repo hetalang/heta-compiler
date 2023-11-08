@@ -115,7 +115,7 @@ class AnotherXLSXExport extends XLSXExport {
         .map((q, i) => {
           //q['#'] = i + 1;
           q.st = 'p';
-          q.num = _.get(q, 'assignments.start_', '');
+          q.num = q.assignments?.start_ || '';
 
           return _.omit(q, ['class', 'units', 'assignments.start_']);
         })

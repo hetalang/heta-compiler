@@ -41,7 +41,7 @@ class Builder {
 
     // set transport and logger
     this.logger = this.container.logger;
-    let minLogLevel = _.get(declaration, 'options.logLevel', 'info');
+    let minLogLevel = declaration.options?.logLevel || 'info';
     this.logger.addTransport(new StdoutTransport(minLogLevel));
 
     // check based on schema 

@@ -127,7 +127,7 @@ class Container {
    */
   load(q, isCore = false){
     // estimate action, default is upsert
-    let actionName = _.get(q, 'action', 'upsert');
+    let actionName = q.action || 'upsert';
     if (typeof this[actionName] !== 'function') {
       this.logger.error(
         `Action #${actionName} is unknown and will be skipped.`,

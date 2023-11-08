@@ -14,7 +14,7 @@ const { Expression } = require('./expression');
 class DSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = DSwitcher.isValid(q, logger);
     
     if (valid) {

@@ -13,7 +13,7 @@ const _ = require('lodash');
 class Species extends Record {
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Species.isValid(q, logger);
 
     if (valid) {
@@ -42,7 +42,7 @@ class Species extends Record {
     return res;
   }
   unitsSBML(){
-    let compartmentUnits = _.get(this, 'compartmentObj.unitsParsed');
+    let compartmentUnits = this.compartmentObj?.unitsParsed;
     if (!this.isAmount && compartmentUnits!==undefined && this.unitsParsed!==undefined) {
       return this.unitsParsed
         .multiply(compartmentUnits)

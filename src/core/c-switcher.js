@@ -12,7 +12,7 @@ const { Expression } = require('./expression');
 class CSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = CSwitcher.isValid(q, logger);
     
     if (valid) {

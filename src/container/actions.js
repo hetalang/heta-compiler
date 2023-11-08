@@ -402,11 +402,8 @@ Container.prototype.importNS = function(q = {}){
   // normal flow
   let clones = fromNamespace.toArray().map((component) => {
     // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
-    let newId = _.get(
-      q.rename, 
-      component.id,
-      [q.prefix, component.id, q.suffix].join('') // prefix-id-suffix as default value
-    );
+    let newId = q.rename[component.id] 
+      || [q.prefix, component.id, q.suffix].join(''); // prefix-id-suffix as default value
 
     // cloning and update references
     let clone = component.clone();

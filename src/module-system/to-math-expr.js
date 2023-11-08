@@ -6,7 +6,7 @@ const _ = require('lodash');
   useParentheses = true is used when operators may require explicit parentheses (...)
 */
 function _toMathExpr(element, useParentheses = false){
-  let first = _.get(element, 'elements.0');
+  let first = element.elements[0];
   if (element.name === 'math') {
     return _toMathExpr(element.elements[0]);
   } else if(element.name === 'apply' && first.name === 'gt') {
@@ -89,7 +89,7 @@ function _toMathExpr(element, useParentheses = false){
       .filter((x) => x.name !== 'degree')
       .map((x) => _toMathExpr(x)); // skip ()
     if (degree) {
-      let n_element = _.get(degree, 'elements.0');
+      let n_element = degree.elements[0];
       let n = _toMathExpr(n_element, true);
       return `pow(${args[0]}, 1.0/${n})`;
     } else {
@@ -104,13 +104,13 @@ function _toMathExpr(element, useParentheses = false){
       .find(y => y.name === 'logbase');
     let expr = _.drop(element.elements)
       .filter((x) => x.name !== 'logbase')
-      .map((x) => _toMathExpr(x));  // skip ()
+      .map((x) => _toMathExpr(x)); // skip ()
     if (logbase === undefined) {
       return `log10(${expr[0]})`;
-    } else if (_.get(logbase, 'elements.0.elements.0.text') === '2') {
+    } else if (logbase.elements[0]?.elements[0]?.text === '2') {
       return `log2(${expr[0]})`;
     } else {
-      let base = _toMathExpr(logbase.elements[0]);  // skip ()
+      let base = _toMathExpr(logbase.elements[0]); // skip ()
       return `log(${expr[0]}, ${base})`;
     }
   // === trigonometry ===
@@ -174,7 +174,7 @@ function _toMathExpr(element, useParentheses = false){
 
     return `piecewise(${args.join(', ')})`;
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
-    let funcName = _toMathExpr(first); // _.get(first, 'elements.0.text');
+    let funcName = _toMathExpr(first); // first.elements[0]?.text;
     let args = _.drop(element.elements)
       .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `${funcName}(${args})`;
@@ -183,29 +183,29 @@ function _toMathExpr(element, useParentheses = false){
       .map((x) => _toMathExpr(x)).join(', ');
     return `${first.name}(${args})`;
   } else if (element.name === 'ci') {
-    return _.get(element, 'elements.0.text');
-  } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/time') {
+    return element.elements[0]?.text;
+  } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/time') {
     return 't';
-  } else if (element.name === 'csymbol' && _.get(element, 'attributes.definitionURL') === 'http://www.sbml.org/sbml/symbols/delay') {
+  } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/delay') {
     // return 'delay';
     throw new Error('"delay" symbol in expression (SBML module) is not supported');
   } else if (element.name === 'csymbol') {
-    return _.get(element, 'elements.0.text');
-  } else if (element.name === 'cn' && _.get(element, 'attributes.type') === 'rational' && _.get(element, 'elements.1.name') === 'sep') { // rational numbers: 1/1000
-    let numerator = _.get(element, 'elements.0.text');
-    let denominator = _.get(element, 'elements.2.text');
+    return element.elements[0]?.text;
+  } else if (element.name === 'cn' && element.attributes?.type === 'rational' && element.elements[1]?.name === 'sep') { // rational numbers: 1/1000
+    let numerator = element.elements[0]?.text;
+    let denominator = element.elements[2]?.text;
     let sign = (numerator >= 0 && denominator > 0) || (numerator <= 0 && denominator < 0)
       ? ''
       : '-';
     return `(${sign}${Math.abs(numerator)}/${Math.abs(denominator)})`;
-  } else if (element.name === 'cn' && _.get(element, 'attributes.type') === 'e-notation' && _.get(element, 'elements.1.name') === 'sep') { // rational numbers: 1.1*10^-3
-    let mantissa = _.get(element, 'elements.0.text').trim();
-    let power = _.get(element, 'elements.2.text').trim();
+  } else if (element.name === 'cn' && element.attributes?.type === 'e-notation' && element.elements[1]?.name === 'sep') { // rational numbers: 1.1*10^-3
+    let mantissa = element.elements[0]?.text?.trim();
+    let power = element.elements[2]?.text?.trim();
     return `(${mantissa}e${power})`;
-  } else if (element.name === 'cn' && _.get(element, 'elements.0.text') < 0) { // negative number requires (-2)
-    return `(${_.get(element, 'elements.0.text')})`;
+  } else if (element.name === 'cn' && element.elements[0]?.text < 0) { // negative number requires (-2)
+    return `(${element.elements[0]?.text})`;
   } else if (element.name === 'cn') { // regular positive numbers
-    return _.get(element, 'elements.0.text');
+    return element.elements[0]?.text;
   } else if (element.name === 'true') {
     return 'true';
   } else if (element.name === 'false') {

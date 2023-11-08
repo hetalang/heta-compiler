@@ -14,7 +14,7 @@ const { Expression } = require('./expression');
 class StopSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = StopSwitcher.isValid(q, logger);
     
     if (valid) {

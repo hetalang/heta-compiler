@@ -13,7 +13,7 @@ class Dose extends _Size {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Dose.isValid(q, logger);
 
     if (valid) {
@@ -110,9 +110,13 @@ class Dose extends _Size {
     }
   }
   getRepeatCountInt(){
-    let repeatCount0 = _.get(this, 'repeatCountObj.num', Infinity);
-    let stop1 = _.get(this, 'stopObj.num', Infinity);
-    let period1 = _.get(this, 'periodObj.num', 0);
+    let repeatCount0 = this.repeatCountObj?.num !== undefined
+      ? this.repeatCountObj.num
+      : Infinity;
+    let stop1 = this.stopObj?.num !== undefined
+      ? this.stopObj.num
+      : Infinity;
+    let period1 = this.periodObj?.num || 0;
 
     // update repeatCount based on stop
     let repeatCount = period1 <= 0

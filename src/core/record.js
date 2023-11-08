@@ -17,7 +17,7 @@ class Record extends _Size {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = _.get(this, 'namespace.container.logger');
+    let logger = this.namespace?.container?.logger;
     let valid = Record.isValid(q, logger);
 
     if (valid) {
@@ -77,8 +77,8 @@ class Record extends _Size {
     let logger = this.namespace.container.logger;
 
     // check initialization
-    let hasInit = _.get(this, 'assignments.start_') !== undefined
-      || _.get(this, 'assignments.ode_') !== undefined;
+    let hasInit = this.assignments?.start_ !== undefined
+      || this.assignments?.ode_ !== undefined;
     if (!hasInit) {
       let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`
       logger.error(msg, {type: 'BindingError', space: this.space});
@@ -166,7 +166,7 @@ class Record extends _Size {
     //if (assignment !== undefined) {
     //  return assignment;
     //} else {
-    //  return _.get(this, 'assignments.ode_');
+    //  return this.assignments?.ode_;
     //}
     return assignment;
   }
