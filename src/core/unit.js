@@ -35,7 +35,13 @@ class Unit extends Array {
     return res;
   }
   toQ(options = {}){
-    return this.map((x) => _.pick(x, ['kind', 'multiplier', 'exponent']));
+    return this.map((x) => {
+      return {
+        kind: x.kind,
+        multiplier: x.multiplier,
+        exponent: x.exponent
+      };
+    });
   }
   clone(){
     let clonedUnit = new Unit();
@@ -55,8 +61,11 @@ class Unit extends Array {
 
     this.forEach((x) => {
       if (legalUnits.indexOf(x.kind) !== -1) { // is legal? just push without refs!
-        let clearedUnit =_.pick(x, ['kind', 'exponent', 'multiplier']);
-        unit.push(clearedUnit);
+        unit.push({
+          kind: x.kind,
+          multiplier: x.multiplier,
+          exponent: x.exponent
+        });
       } else {
         if (typeof x.kindObj === 'undefined') {
           throw new TypeError(`Cannot rebase the unbound unit: "${x.kind}"`);

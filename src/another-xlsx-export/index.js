@@ -153,12 +153,14 @@ class AnotherXLSXExport extends XLSXExport {
       'tags[]': '#', 'st': '[r/f/c]?', 'id': 'ID', 'units2': 'Unit'
     }];
     function_units.content = function_units.content.concat(
-      qArr.filter((q) => q.class === 'Record')
-        .map((q) => {
-          q.st = 'f';
-
-          return _.pick(q, ['tags[]', 'st', 'id', 'units2']);
-        })
+      qArr.filter((q) => q.class === 'Record').map((q) => {
+        return {
+          st: 'f',
+          'tags[]': q['tags[]'],
+          id: q.id,
+          units2: q.units2
+        };
+      })
     );
 
     return [functions, species, parameters, function_units];
