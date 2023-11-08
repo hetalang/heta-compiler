@@ -1,5 +1,5 @@
-const XLSX = require('xlsx'); 
-const _ = require('lodash');
+const XLSX = require('xlsx');
+const _set = require('lodash/set');
 
 /*
   This script mimics the behavior of function convertExcel() from "excel-as-json", see https://www.npmjs.com/package/excel-as-json
@@ -38,10 +38,10 @@ function _toDeepPaths(o){
       let searchArray = /^(.+)\[\]$/;
       if (searchArray.test(key)) { // checking if path looks like this "one.two.three[]"
         let keyPart = key.match(searchArray)[1];
-        let valuesPart = value.toString().split(';').filter((x) => _.trim(x) !== '');
-        _.set(output, keyPart, valuesPart);
+        let valuesPart = value.toString().split(';').filter((x) => x.trim() !== '');
+        _set(output, keyPart, valuesPart);
       } else {
-        _.set(output, key, value);
+        _set(output, key, value);
       }
     });
 

@@ -82,7 +82,7 @@ function jsbmlToQArr(JSBML){
     if (isZero) {
       zeroSpatialDimensions.push(x.attributes?.id);
       // set zero initial size
-      _.set(x, 'attributes.size', '0'); 
+      x.attributes = Object.assign({}, x.attributes, {size: 0});
     }
 
     let q = compartmentToQ(x, unitDict);
@@ -245,14 +245,15 @@ function functionDefinitionToQ(x){
 function baseToQ(x){
   let q = {
     id: x.attributes?.id,
-    title: x.attributes?.name
+    title: x.attributes?.name,
+    aux: {}
   };
   // set metaid
   let metaid = x.attributes?.metaid;
-  if (metaid !== undefined) _.set(q, 'aux.metaid', metaid);
+  if (metaid !== undefined) q.aux.metaid = metaid;
   // set sboTerm
   let sboTerm = x.attributes?.sboTerm;
-  if (sboTerm !== undefined) _.set(q, 'aux.sboTerm', sboTerm);
+  if (sboTerm !== undefined) q.aux.sboTerm = sboTerm;
   // take only first notes
   let notes = x.elements
     && x.elements.find((y) => y.name === 'notes');
@@ -260,7 +261,7 @@ function baseToQ(x){
   // annotation
   let annotation = x.elements
     && x.elements.find((y) => y.name === 'annotation');
-  if (annotation) _.set(q, 'aux.annotation', _toAux(annotation.elements));
+  if (annotation) q.aux.annotation = _toAux(annotation.elements);
 
   return q;
 }
@@ -347,7 +348,7 @@ function compartmentToQ(x, unitDict = {}){
   q.boundary = x.attributes?.constant !== 'false';
   let num = x.attributes?.size;
   if (num !== undefined) {
-    _.set(q, 'assignments.start_', SBMLValueToNumber(num));
+    q.assignments = { start_: SBMLValueToNumber(num) };
   }
   // units
   let unitId = x.attributes?.units;
@@ -366,7 +367,9 @@ function compartmentToQ(x, unitDict = {}){
 
   // compartmentType
   let compartmentType = x.attributes?.compartmentType;
-  if (compartmentType !== undefined) _.set(q, 'tags.0', compartmentType);
+  if (compartmentType !== undefined) {
+    q.tags = [compartmentType];
+  }
 
   return q;
 }
@@ -383,17 +386,17 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   let concentration = x.attributes?.initialConcentration;
   let amount = x.attributes?.initialAmount;
   if (concentration !== undefined && !q.isAmount) {
-    _.set(q, 'assignments.start_', SBMLValueToNumber(concentration));
+    q.assignments = { start_: SBMLValueToNumber(concentration) };
   } else if (concentration !== undefined && q.isAmount) {
-    _.set(q, 'assignments.start_', SBMLValueToNumber(concentration) + '*' + q.compartment);
+    q.assignments = { start_: SBMLValueToNumber(concentration) + '*' + q.compartment };
   } else if (amount !== undefined && !q.isAmount) {
-    _.set(q, 'assignments.start_', SBMLValueToNumber(amount) + '/' + q.compartment);
+    q.assignments = { start_: SBMLValueToNumber(amount) + '/' + q.compartment };
   } else if (amount !== undefined && q.isAmount) {
-    _.set(q, 'assignments.start_', SBMLValueToNumber(amount));
+    q.assignments = { start_: SBMLValueToNumber(amount) };
   }
   // speciesType
   let speciesType = x.attributes?.speciesType;
-  if (speciesType !== undefined) _.set(q, 'tags.0', speciesType);
+  if (speciesType !== undefined) q.tags = [speciesType];
 
   // units
   let substanceUnitId = x.attributes?.substanceUnits;
@@ -483,7 +486,7 @@ function reactionToQ(x){
       let regexp = new RegExp(`\\b${y.id}\\b`, 'g');
       expr = expr.replace(regexp, y.newId);
     });
-    _.set(q, 'assignments.ode_', expr);
+    q.assignments = { ode_: expr };
   }
 
   // check if reversible
@@ -491,7 +494,7 @@ function reactionToQ(x){
   
   // check if fast
   let fast = x.attributes?.fast === 'true' ;
-  //_.set(q, 'aux.fast', fast);
+  // q.aux.fast = fast;
   if (fast) {
     throw new Error(`"fast" reactions "${q.id}" is not supported in SBML module.`);
   }
@@ -572,7 +575,7 @@ function parameterToQ(x, unitDict = {}){
   } else {
     q.class = 'Record';
     if (num !== undefined) {
-      _.set(q, 'assignments.start_', SBMLValueToNumber(num));
+      q.assignments = { start_: SBMLValueToNumber(num) };
     }
   }
 
@@ -600,9 +603,10 @@ function initialAssignmentToQ(x){
     id: x.attributes?.symbol,
   };
 
-  let math = x.elements
-    && x.elements.find((y) => y.name === 'math');
-  if (math) _.set(q, 'assignments.start_', _toMathExpr(math));
+  let math = x.elements?.find((y) => y.name === 'math');
+  if (math !== undefined) {
+    q.assignments = {start_: _toMathExpr(math)};
+  }
 
   return q;
 }
@@ -612,9 +616,10 @@ function assignmentRuleToQ(x){
     id: x.attributes?.variable
   };
 
-  let math = x.elements
-    && x.elements.find((y) => y.name === 'math');
-  if (math) _.set(q, 'assignments.ode_', _toMathExpr(math));
+  let math = x.elements?.find((y) => y.name === 'math');
+  if (math !== undefined) {
+    q.assignments = { ode_: _toMathExpr(math) };
+  }
 
   return q;
 }
@@ -630,9 +635,10 @@ function rateRuleToQ(x){
     target: target
   }];
 
-  let math = x.elements
-    && x.elements.find((y) => y.name === 'math');
-  if (math) _.set(q0, 'assignments.ode_', _toMathExpr(math));
+  let math = x.elements?.find((y) => y.name === 'math');
+  if (math !== undefined) {
+    q0.assignments = { ode_: _toMathExpr(math) };
+  }
 
   // remove boundary for Species, because Heta does not change boundary species, but SBML does.
   let q1 = { id: target, boundary: false };
@@ -663,8 +669,7 @@ function eventToQ(x){
   }
 
   // check if delay is presented, should we include it to Heta standard?
-  let delay = x.elements
-    && x.elements.find((y) => y.name === 'delay');
+  let delay = x.elements?.find((y) => y.name === 'delay');
   // currently not used
   /*
   let delayMath = delay
@@ -676,23 +681,24 @@ function eventToQ(x){
 
   }
   */
-  if (delay)
+  if (delay !== undefined) {
     throw new Error('"delay" in event is not supported in SBML module'); 
-
+  }
   // assignments
-  let assignments = x.elements 
-    && x.elements.find((y) => y.name === 'listOfEventAssignments');
+  let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');
   if (assignments.elements !== undefined) {
     assignments.elements
       .filter((y) => y.name === 'eventAssignment')
       .forEach((y) => {
         let assign = {
-          id: y.attributes?.variable
+          id: y.attributes?.variable,
+          assignments: {}
         };
 
-        let math = y.elements
-          && y.elements.find((z) => z.name === 'math');
-        if (math) _.set(assign, 'assignments.' + switcher.id, _toMathExpr(math));
+        let math = y.elements?.find((z) => z.name === 'math');
+        if (math !== undefined) {
+          assign.assignments[switcher.id] = _toMathExpr(math);
+        }
         qArr.push(assign);
       });
   }

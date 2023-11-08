@@ -5,6 +5,7 @@ const { validator, flatten } = require('./utilities');
 const { uniqBy } = require('../utils');
 const _ = require('lodash');
 const _get = require('lodash/get');
+const _set = require('lodash/set');
 
 /*
   class Component
@@ -27,7 +28,7 @@ class Component {
 
     if (valid) {
       if (q.title) this.title = q.title;
-      if (q.notes) this.notes = _.trim(q.notes); // remove trailing symbols
+      if (q.notes) this.notes = q.notes.trim(); // remove trailing symbols
       if (q.tags) this.tags = _.cloneDeep(q.tags);
       if (q.aux) this.aux = _.cloneDeep(q.aux);
     }
@@ -98,7 +99,7 @@ class Component {
       let newRef = q.rename[oldRef] 
         || [q.prefix, oldRef, q.suffix].join(''); // default behaviour
 
-      _.set(this, path, newRef);
+      _set(this, path, newRef);
     };
     // search ref in requirements
     let req = this.constructor.requirements();
@@ -173,7 +174,7 @@ class Component {
         );
       } else {
         // set direct ref
-        if (rule.setTarget) _.set(this, path + 'Obj', target);
+        if (rule.setTarget) _set(this, path + 'Obj', target);
         // add back references for Record from Process XXX: ugly solution
         if (this.instanceOf('Process') && item.className === 'Actor' ){
           target.backReferences.push({

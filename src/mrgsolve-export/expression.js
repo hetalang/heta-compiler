@@ -1,10 +1,10 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toCString = function(mathOptions = {}){
+Expression.prototype.toCString = function(_mathOptions = {}){
   // set defaults
-  Object.assign(mathOptions, {
+  let mathOptions = Object.assign({
     timeVariable: 'SOLVERTIME'
-  });
+  }, _mathOptions);
 
   let CStringHandler = (node, options) => {
     if (node.type === 'ConstantNode' && Number.isInteger(node.value)) {

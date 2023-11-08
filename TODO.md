@@ -30,6 +30,8 @@
 
 ## bugs
 
+- do not display error in sbml-parse module
+
 ## features
 
 - checking legal functions inside Expressions and functionDefinitian
