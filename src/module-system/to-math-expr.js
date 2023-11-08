@@ -1,4 +1,3 @@
-const _ = require('lodash');
 
 /*
   Transformation of json formatted <math> element to expression string.

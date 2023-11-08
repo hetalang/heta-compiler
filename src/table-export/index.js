@@ -169,11 +169,11 @@ class TableExport extends AbstractExport {
     
     let wb = XLSX.utils.book_new();
     out.forEach((x) => {
-      let omitRows = x.omitRows!==undefined
+      let omitRows = x.omitRows !== undefined
         ? x.omitRows // use omitRows from out
         : this.omitRows;
       let ws = XLSX.utils.json_to_sheet(
-        _.times(omitRows, {}).concat(x.content),
+        Array(omitRows).fill({}).concat(x.content),
         { header: x.headerSeq, skipHeader: x.skipHeader } // XLSX tries to mutate header
       );
       XLSX.utils.book_append_sheet(wb, ws, x.name);
