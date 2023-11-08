@@ -243,10 +243,14 @@ class Component {
     if (this.name === 'Component') {
       return this._requirements;
     } else if (this.hasOwnProperty('_requirements')) {
-      let deeper = this.requirements.call(this.__proto__);
+      let proto = Object.getPrototypeOf(this);
+      let deeper = this.requirements.call(proto);
+      //let deeper = Object.getPrototypeOf(this).requirements();
       return Object.assign({}, deeper, this._requirements);
     } else {
-      let deeper = this.requirements.call(this.__proto__);
+      let proto = Object.getPrototypeOf(this);
+      let deeper = this.requirements.call(proto);
+      //let deeper = Object.getPrototypeOf(this).requirements();
       return deeper;
     }
   }
@@ -257,7 +261,10 @@ class Component {
     } else if (!this.className) {
       return false;
     } else {
-      return this.instanceOf.call(this.__proto__, className);
+      let proto = Object.getPrototypeOf(this);
+      let isInstance = this.instanceOf.call(proto, className);
+      //let isInstance = Object.getPrototypeOf(this).instanceOf(className);
+      return isInstance;
     }
   }
   /*

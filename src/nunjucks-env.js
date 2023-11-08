@@ -1,6 +1,10 @@
 const _ = require('lodash');
 
 module.exports = function(env) {
+  // this is required for webpack when Environment is external and opts cannot be set with { autoescape: false }
+  env.opts.autoescape = false;
+
+  // add Filteers for Environment
   env.addFilter('filter2', function(arr, path, value) {
     return arr.filter((x) => _.get(x, path)===value);
   });
