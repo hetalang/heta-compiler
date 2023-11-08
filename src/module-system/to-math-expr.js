@@ -34,15 +34,15 @@ function _toMathExpr(element, useParentheses = false){
     let two = _toMathExpr(element.elements[2], true);
     return `${one} != ${two}`;
   } else if(element.name === 'apply' && first.name === 'and') {
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true)).join(' and ');
     return args;
   } else if(element.name === 'apply' && first.name === 'or') {
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true)).join(' or ');
     return args;
   } else if(element.name === 'apply' && first.name === 'xor') {
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true)).join(' xor ');
     return args;
   } else if(element.name === 'apply' && first.name === 'not') {
@@ -50,12 +50,12 @@ function _toMathExpr(element, useParentheses = false){
     return `not ${one}`;
   } else if(element.name === 'apply' && first.name === 'times') {
     // A * B * C, <times>
-    let expr = _.drop(element.elements) // without first element
+    let expr = element.elements.slice(1) // without first element
       .map((x) => _toMathExpr(x, true)).join(' * '); 
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'divide') {
     // A / B, <divide> for two arguments
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true));
     return args[0] + ' / ' + args[1]; 
   } else if(element.name === 'apply' && first.name === 'minus' && element.elements.length === 2) {
@@ -71,21 +71,21 @@ function _toMathExpr(element, useParentheses = false){
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'plus') {
     // A + B + C, <plus>
-    let expr = _.drop(element.elements)
+    let expr = element.elements.slice(1)
       .map((x) => _toMathExpr(x, false)).join(' + '); // skip ()
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && first.name === 'power') {
-    let expr = _.drop(element.elements)
+    let expr = element.elements.slice(1)
       .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `pow(${expr})`;
   } else if(element.name === 'apply' && first.name === 'ceiling') {
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x)); // skip ()
     return `ceil(${args[0]})`;
   } else if(element.name === 'apply' && first.name === 'root') {
     let degree = element.elements
       .find(y => y.name === 'degree');
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .filter((x) => x.name !== 'degree')
       .map((x) => _toMathExpr(x)); // skip ()
     if (degree) {
@@ -96,13 +96,13 @@ function _toMathExpr(element, useParentheses = false){
       return `sqrt(${args[0]})`;
     }
   } else if(element.name === 'apply' && first.name === 'ln') {
-    let expr = _.drop(element.elements)
+    let expr = element.elements.slice(1)
       .map((x) => _toMathExpr(x));  // skip ()
     return `ln(${expr[0]})`;
   } else if(element.name === 'apply' && first.name === 'log') {
     let logbase = element.elements
       .find(y => y.name === 'logbase');
-    let expr = _.drop(element.elements)
+    let expr = element.elements.slice(1)
       .filter((x) => x.name !== 'logbase')
       .map((x) => _toMathExpr(x)); // skip ()
     if (logbase === undefined) {
@@ -175,11 +175,11 @@ function _toMathExpr(element, useParentheses = false){
     return `piecewise(${args.join(', ')})`;
   } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
     let funcName = _toMathExpr(first); // first.elements[0]?.text;
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `${funcName}(${args})`;
   } else if (element.name === 'apply') { // all other internal mathml functions
-    let args = _.drop(element.elements)
+    let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x)).join(', ');
     return `${first.name}(${args})`;
   } else if (element.name === 'ci') {
