@@ -3,7 +3,6 @@ const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
 const { validator, flatten } = require('./utilities');
 const { uniqBy } = require('../utils');
-const _ = require('lodash');
 const _get = require('lodash/get');
 const _set = require('lodash/set');
 
@@ -29,8 +28,8 @@ class Component {
     if (valid) {
       if (q.title) this.title = q.title;
       if (q.notes) this.notes = q.notes.trim(); // remove trailing symbols
-      if (q.tags) this.tags = _.cloneDeep(q.tags);
-      if (q.aux) this.aux = _.cloneDeep(q.aux);
+      if (q.tags) this.tags = q.tags.map((tag) => tag); // clone
+      if (q.aux) this.aux = _cloneDeep(q.aux);
     }
     
     return this;
@@ -77,7 +76,7 @@ class Component {
     if (this.tags.length)
       componentClone.tags = this.tags.map(x => x);
     if (this.aux !== undefined)
-      componentClone.aux = _.cloneDeep(this.aux);
+      componentClone.aux = _cloneDeep(this.aux);
 
     if (this._isCore)
       componentClone._isCore = true;
@@ -218,8 +217,8 @@ class Component {
     if (this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
     if (this.title) res.title = this.title;
     if (this.notes) res.notes = this.notes;
-    if (this.tags.length>0) res.tags = _.cloneDeep(this.tags);
-    if (Object.keys(this.aux).length > 0) res.aux = _.cloneDeep(this.aux);
+    if (this.tags.length > 0) res.tags = this.tags.map((tag) => tag);
+    if (Object.keys(this.aux).length > 0) res.aux = _cloneDeep(this.aux);
 
     return res;
   }
@@ -284,3 +283,22 @@ Component._requirements = {};
 module.exports = {
   Component
 };
+
+// clone all own properties and arrays
+function _cloneDeep(o) {
+  if (o instanceof Object) {
+    var clone;
+    if (o instanceof Array) {
+      clone = o.map((key) => _cloneDeep(key));
+    } else {
+      clone = {};
+      Object.keys(o).forEach((key) => {
+        clone[key] = _cloneDeep(o[key]);
+      });
+    }
+    
+    return clone;
+  } else {
+    return o;
+  }
+}
