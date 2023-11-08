@@ -1,6 +1,5 @@
 const Container = require('./main');
 const { Namespace } = require('../namespace');
-const _ = require('lodash');
 
 // they cannot be used as id, when 
 const reservedWords = [
@@ -133,11 +132,12 @@ Container.prototype.insert = function(q = {}, isCore = false){
   let exportCheck = q.class.match(/^(\w+)Export$/);
   if (exportCheck !== null) { // check if old export syntax is used
     this.logger.warn(`Usage of Export is deprecated starting from v0.5.0, use syntax: #export {format: ${exportCheck[1]}, ...}`)
-    let _exportQ = _.omit(q, ['class', 'id']);
     let exportQ = Object.assign({
       format: exportCheck[1],
       filepath: q.id
-    }, _exportQ);
+    }, q);
+    delete exportQ.class;
+    delete exportQ.id;
     return this.export(exportQ);
   }
 

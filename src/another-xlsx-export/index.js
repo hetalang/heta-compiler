@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const _omit = require('lodash/omit');
 const XLSXExport = require('../xlsx-export');
 require('./_size');
 
@@ -24,7 +25,7 @@ class AnotherXLSXExport extends XLSXExport {
       .flatten()
       .filter((x) => !x.isCore && !x.instanceOf('UnitDef')) // skip core and UnitsDef
       .map((x) => x.toFlat({useAnotherUnits: true}))
-      .map((q) => this.omit ? _.omit(q, this.omit) : q)
+      .map((q) => this.omit ? _omit(q, this.omit) : q)
       .value();
 
     // main_tab sheet
@@ -46,19 +47,27 @@ class AnotherXLSXExport extends XLSXExport {
     //let counter = 1;
     functions.content = functions.content.concat(
       qArr.filter((q) => q.class === 'Record')
-        .map((q) => {
+        .map((_q) => {
           //q['#'] = counter++;
-          q.st = 'f';
+          let q = {st: 'f', ..._q};
+          delete q.class;
+          delete q.units;
+          delete q.units2;
+          delete q.reversible;
 
-          return _.omit(q, ['class', 'units', 'units2', 'reversible']);
+          return q;
         }), 
       qArr.filter((q) => q.class === 'Reaction')
-        .map((q) => {
+        .map((_q) => {
           //q['#'] = counter++;
-          q.st = 'r';
-          if (q.isAmount!==false) q.compartment = 'no';
+          let q = {st: 'r', ..._q};
+          if (q.isAmount !== false) q.compartment = 'no';
+          delete q.class;
+          delete q.units;
+          delete q.units2;
+          delete q.reversible;
 
-          return _.omit(q, ['class', 'units', 'units2', 'reversible']);
+          return q;
         })
     );
 
@@ -80,10 +89,13 @@ class AnotherXLSXExport extends XLSXExport {
     }];
     species.content = species.content.concat(
       qArr.filter((q) => q.class === 'Species')
-        .map((q, i) => {
+        .map((_q, i) => {
           //q['#'] = i + 1;
+          let q = {..._q};
+          delete q.class;
+          delete q.units;
 
-          return _.omit(q, ['class', 'units']);
+          return q;
         })
     );
 
@@ -105,19 +117,23 @@ class AnotherXLSXExport extends XLSXExport {
     }];
     parameters.content = parameters.content.concat(
       qArr.filter((q) => q.class === 'Const')
-        .map((q, i) => {
+        .map((_q, i) => {
           //q['#'] = i + 1;
-          q.st = 'p';
+          let q = {st: 'p', ..._q};
+          delete q.class;
+          delete q.units;
 
-          return _.omit(q, ['class', 'units']);
+          return q;
         }),
       qArr.filter((q) => q.class === 'Compartment')
-        .map((q, i) => {
+        .map((_q, i) => {
           //q['#'] = i + 1;
-          q.st = 'p';
-          q.num = q.assignments?.start_ || '';
+          let q = {st: 'p', num: (q.assignments?.start_ || ''), ..._q};
+          delete q.class;
+          delete q.units;
+          delete q.assignments?.start_;
 
-          return _.omit(q, ['class', 'units', 'assignments.start_']);
+          return q;
         })
     );
 

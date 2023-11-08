@@ -1,5 +1,6 @@
 const { AbstractExport } = require('../core/abstract-export');
 const _ = require('lodash');
+const _omit = require('lodash/omit');
 const { ajv, uniqBy } = require('../utils');
 const XLSX = require('xlsx');
 
@@ -109,7 +110,7 @@ class TableExport extends AbstractExport {
 
     if (this.omit) {
       var fArr = fArr_full.map((q) => {
-        return _.omit(q, this.omit);
+        return _omit(q, this.omit);
       });
     } else {
       fArr = fArr_full;
