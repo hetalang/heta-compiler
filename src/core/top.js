@@ -3,8 +3,7 @@
 */
 
 const randomId = require('random-id');
-const { ajv } = require('../utils');
-const { flatten } = require('./utilities');
+const { ajv, flatten } = require('../utils');
 
 // options
 const lengthRandom = 9;

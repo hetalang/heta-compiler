@@ -1,6 +1,5 @@
 const TopoSort = require('@insysbio/topo-sort');
-const { flatten } = require('./core/utilities');
-const { uniqBy } = require('./utils');
+const { uniqBy, flatten } = require('./utils');
 
 class Namespace extends Map {
   /**
@@ -85,7 +84,7 @@ class Namespace extends Map {
     let q = this.toQ(options);
     let res = flatten(q);
 
-    return res; 
+    return res;
   }
 
   /**

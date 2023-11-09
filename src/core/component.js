@@ -1,8 +1,7 @@
 const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
-const { validator, flatten } = require('./utilities');
-const { uniqBy } = require('../utils');
+const { uniqBy, validator, flatten } = require('../utils');
 const _get = require('lodash/get');
 const _set = require('lodash/set');
 

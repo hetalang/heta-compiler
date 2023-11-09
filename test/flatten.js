@@ -1,7 +1,7 @@
 /* global describe, it */
 
 const { expect } = require('chai');
-const { flatten } = require('../src/core/utilities');
+const { flatten } = require('../src/utils');
 
 let test = {
   aux: {x: [1,2,3], y: {a: 1, b: 1}},

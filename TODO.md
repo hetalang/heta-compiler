@@ -71,8 +71,8 @@ https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
 - _get
 - _set
 - _omit
-- _intersection
-- flatten => flat
+- _.chain
+- _.flatten(a) => a.flat(Infinity), _.flatten(a, 1) => a.flat()
 
 ### Dose class
 
