@@ -1,7 +1,6 @@
 const { AbstractExport } = require('../core/abstract-export');
 /* global compiledTemplates */
 const pkg = require('../../package');
-const _ = require('lodash');
 require('./expression'); // to use method toMatlabString()
 const { ajv } = require('../utils');
 

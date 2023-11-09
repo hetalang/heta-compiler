@@ -1,6 +1,5 @@
 const { _Size } = require('./_size');
 const { UnitTerm } = require('./unit-term');
-const _ = require('lodash');
 
 /*
   time_in_minutes @TimeScale {

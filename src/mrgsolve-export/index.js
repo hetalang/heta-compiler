@@ -1,8 +1,7 @@
 const { AbstractExport } = require('../core/abstract-export');
 /* global compiledTemplates */
-const _intersection = require('lodash/intersection');
 require('./expression');
-const { ajv } = require('../utils');
+const { ajv, intersection } = require('../utils');
 
 const schema = {
   type: 'object',
@@ -106,7 +105,7 @@ class MrgsolveExport extends AbstractExport {
           && !component.isRule;
       }).forEach((record) => {
         let deps = record.dependOn('start_', true);
-        let diff = _intersection(dynamicIds, deps);
+        let diff = intersection(dynamicIds, deps);
         if (diff.length > 0) {
           let logger = ns.container.logger;
           let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`

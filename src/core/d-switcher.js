@@ -1,5 +1,4 @@
 const { _Switcher } = require('./_switcher');
-const _ = require('lodash');
 const { Expression } = require('./expression');
 
 /*

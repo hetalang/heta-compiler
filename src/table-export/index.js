@@ -1,8 +1,7 @@
 const { AbstractExport } = require('../core/abstract-export');
 const _ = require('lodash');
 const _omit = require('lodash/omit');
-const _intersection = require('lodash/intersection');
-const { ajv, uniqBy } = require('../utils');
+const { ajv, uniqBy, intersection } = require('../utils');
 const XLSX = require('xlsx');
 
 // how to order columns in sheets
@@ -130,7 +129,7 @@ class TableExport extends AbstractExport {
             .map((x) => Object.keys(x))
             .flatten()
             .value();
-          let sequence_i = _intersection(propSequence, uniqBy(keys));
+          let sequence_i = intersection(propSequence, uniqBy(keys));
 
           return {
             content:  value,
@@ -153,7 +152,7 @@ class TableExport extends AbstractExport {
         .map((x) => Object.keys(x))
         .flatten()
         .value();
-      let sequence_out = _intersection(propSequence, uniqBy(keys));
+      let sequence_out = intersection(propSequence, uniqBy(keys));
 
       return [{
         content: fArr,

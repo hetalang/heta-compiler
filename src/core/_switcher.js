@@ -1,5 +1,4 @@
 const { Component } = require('./component');
-const _ = require('lodash');
 
 /*
   _Switcher abstract class

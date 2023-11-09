@@ -1,5 +1,4 @@
 const TopoSort = require('@insysbio/topo-sort');
-const _ = require('lodash');
 const { flatten } = require('./core/utilities');
 const { uniqBy } = require('./utils');
 

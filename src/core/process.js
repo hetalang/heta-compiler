@@ -1,5 +1,4 @@
 const { Record } = require('./record');
-const _ = require('lodash');
 
 /*
   Process class

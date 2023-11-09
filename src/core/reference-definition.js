@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 const { Component } = require('./component');
 
 class ReferenceDefinition extends Component {

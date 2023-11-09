@@ -1,6 +1,5 @@
 const { Component } = require('./component');
 const { Unit } = require('./unit');
-const _ = require('lodash');
 
 /*
   Abstract class _Size

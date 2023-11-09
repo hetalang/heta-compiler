@@ -1,6 +1,5 @@
 const { Process, _Effector, Actor } = require('./process');
 const { UnitTerm } = require('./unit-term');
-const _ = require('lodash');
 
 /*
   Reaction class

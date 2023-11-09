@@ -1,6 +1,5 @@
 const { Record } = require('./record');
 const { UnitTerm } = require('./unit-term');
-const _ = require('lodash');
 
 /* 
   Species class

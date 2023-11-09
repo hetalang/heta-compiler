@@ -20,7 +20,6 @@ const { Page } = require('../core/page');
 const { Const } = require('../core/const');
 const { TimeScale } = require('../core/time-scale');
 // external
-const _ = require('lodash');
 const { Logger, JSONTransport } = require('../logger');
 const coreItems = require('./core-items.json');
 const TopoSort = require('@insysbio/topo-sort');

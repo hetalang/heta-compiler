@@ -1,5 +1,4 @@
 const { _Size } = require('./_size');
-const _ = require('lodash');
 
 /*
   size1 @Const {

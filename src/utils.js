@@ -23,8 +23,28 @@ function uniqBy(array, selector = (x) => x) {
   return output;
 }
 
+function intersection(array1, array2) {
+  if (array1.length < array2.length) {
+    var arrayA = array1; // shorter
+    var arrayB = array2;
+  } else {
+    arrayA = array2;
+    arrayB = array1;
+  }
+
+  let intersect = [];
+  arrayA.forEach((value) => {
+    if (arrayB.indexOf(value) !== -1 && intersect.indexOf(value) === -1) {
+      intersect.push(value);
+    }
+  });
+
+  return intersect;
+}
+
 module.exports = {
   ajv,
-  uniqBy
+  uniqBy,
+  intersection
 };
 

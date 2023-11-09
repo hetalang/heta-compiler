@@ -6,7 +6,6 @@ const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
 const { Container } = require('../index');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
-const _ = require('lodash');
 
 /**
  * Auxiliary class for performing compilation and storing a platform's options. 

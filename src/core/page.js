@@ -1,5 +1,4 @@
 const { Component } = require('./component');
-const _ = require('lodash');
 
 class Page extends Component {
   merge(q = {}){
