@@ -68,25 +68,13 @@
 https://medium.com/swlh/are-we-ready-to-replace-lodash-60cd651f6c58
 https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
 
-- merge
-- defaults
-- sortBy
-- has
-- get
-- set
+- _get
+- _set
+- _omit
+- _intersection
+- _cloneDeepWith
+- _mapValues
 - flatten => flat
-- omit
-- pick
-- times
-- trim => trim
-- cloneDeep !
-- unique
-- mapValues
-- groupBy
-- fromPairs
-- drop
-- cloneDeepWith
-- intersection
 
 ### Dose class
 

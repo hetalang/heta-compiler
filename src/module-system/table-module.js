@@ -1,6 +1,5 @@
 const { convertExcelSync } = require('../xlsx-connector');
 const _cloneDeepWith = require('lodash/cloneDeepWith');
-const _mapValues = require('lodash/mapValues');
 
 /**
  * To initialize a Heta module of the "table" type.
@@ -43,24 +42,17 @@ function tableLoader(fileContent, _options){
         'isAmount', 'free', 'boundary', 'output', 'reversible',
         'active', 'atStart'
       ];
-      // converts 0/'0' -> false, 1/'1' -> true
-      let forceBool = (x) => {
-        if (typeof x === 'string' && (x.trim() === 'true' || x.trim() === 'false')) {
-          return x.trim() !== 'false';
-        } else if (typeof x === 'number') {
-          return x !== 0;
-        } else {
-          return x;
-        }
-      };
 
-      return _mapValues(cleaned, (value, key) => {
-        if (booleanProperties.indexOf(key) !== -1) {
-          return forceBool(value);
+      let normalized = {};
+      Object.entries(cleaned).forEach(([key, value]) => {
+        if (booleanProperties.indexOf(key) !== -1) { // in the list
+          normalized[key] = forceBool(value);
         } else {
-          return value;
+          normalized[key] = value;
         }
       });
+
+      return normalized;
     });
 
   return parsed;
@@ -71,6 +63,17 @@ function clean(string){
   return string.trim()
     .replace(/_x000D_\n/g, '')
     .replace(/\r*\n+/g, '');
+}
+
+// converts 0/'0' -> false, 1/'1' -> true
+function forceBool(x) {
+  if (typeof x === 'string' && (x.trim() === 'true' || x.trim() === 'false')) {
+    return x.trim() !== 'false';
+  } else if (typeof x === 'number') {
+    return x !== 0;
+  } else {
+    return x;
+  }
 }
 
 module.exports = tableLoader;
