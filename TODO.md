@@ -72,8 +72,6 @@ https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
 - _set
 - _omit
 - _intersection
-- _cloneDeepWith
-- _mapValues
 - flatten => flat
 
 ### Dose class

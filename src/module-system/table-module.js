@@ -1,5 +1,4 @@
 const { convertExcelSync } = require('../xlsx-connector');
-const _cloneDeepWith = require('lodash/cloneDeepWith');
 
 /**
  * To initialize a Heta module of the "table" type.
@@ -26,15 +25,15 @@ function tableLoader(fileContent, _options){
 
   let parsed = rawData
     .filter((x) => x.on) // ignore rows
-    .map((x) => {
+    .map((x) => {      
       let cleaned = _cloneDeepWith(x, (value) => {
-        if (value != null && typeof value.valueOf() === 'string') {
+        if (typeof value?.valueOf() === 'string') {
           return clean(value);
-        }
-        if (Array.isArray(value)) {
-          return value
-            .map((y) => clean(y))
+        } else if (Array.isArray(value)) {
+          return value.map((y) => clean(y))
             .filter((y) => y !== ''); // removes empty strings from array
+        } else {
+          return value;
         }
       });
 
@@ -73,6 +72,25 @@ function forceBool(x) {
     return x !== 0;
   } else {
     return x;
+  }
+}
+
+// clone all own properties and arrays
+function _cloneDeepWith(o, handler = (x) => x) {
+  if (o instanceof Object) {
+    var clone;
+    if (o instanceof Array) {
+      clone = o.map((key) => _cloneDeepWith(key, handler));
+    } else {
+      clone = {};
+      Object.entries(o).forEach(([key, value]) => {
+        clone[key] = _cloneDeepWith(value, handler);
+      });
+    }
+    
+    return handler(clone);
+  } else {
+    return handler(o);
   }
 }
 
