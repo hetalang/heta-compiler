@@ -160,9 +160,10 @@ class Namespace extends Map {
     }
 
     // if record not in graph than -1 and will be first
-    let sorted = _.sortBy(this.toArray(), (record) => sortedGraph.indexOf(record.id)); 
-
-    return sorted;
+    let sortedSizes = this.toArray()
+      .sort((a, b) => sortedGraph.indexOf(a.id) - sortedGraph.indexOf(b.id));
+    
+    return sortedSizes;
   }
 
   /**
