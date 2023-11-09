@@ -1,6 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
 /* global compiledTemplates */
-const _ = require('lodash');
 const _get = require('lodash/get');
 require('./expression');
 const { ajv } = require('../utils');
@@ -10,6 +9,7 @@ const schema = {
   properties: {
     groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
     powTransform: {type: 'string', enum: ['keep', 'operator', 'function'] },
+    version: {enum: ['25', '26', 25, 26]},
   }
 };
 
@@ -33,6 +33,7 @@ class DBSolveExport extends AbstractExport{
     } else if (typeof q.spaceFilter === 'string') {
       this.spaceFilter = [q.spaceFilter];
     }
+    this.version = q.version ? q.version + '' : '26'; // force string
     
     if (q.defaultTask) this.defaultTask = q.defaultTask;
   }
@@ -254,10 +255,11 @@ class DBSolveExport extends AbstractExport{
       processes,
       matrix,
       powTransform: this.powTransform,
+      version: this.version,
       timeEvents,
       discreteEvents,
       continuousEvents,
-      groupedConst
+      groupedConst,
     };
   }
   getSLVCode(image = {}){

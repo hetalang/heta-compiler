@@ -170,7 +170,9 @@ class MatlabExport extends AbstractExport {
     });
     // add from events
     let const_len = constants.length;
-    events.forEach((x, i) => pTranslator.push([x.switcher.id + '_', `p(${const_len + i + 1})`]));
+    events.forEach((x, i) => {
+      pTranslator[x.switcher.id + '_'] = `p(${const_len + i + 1})`;
+    });
 
     let functionDefArray = [...ns.container.functionDefStorage.values()];
 

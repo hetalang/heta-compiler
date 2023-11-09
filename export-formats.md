@@ -126,6 +126,7 @@ This is the updated version of SLV export format which supports compartment volu
 | ---------|------|----------|---------|-----|-------------|
 | powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
 | groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
+| version | string | | `26` | | SLV file version: `26` (for DBSolveOptimum 2020) or `25` (for earlier versions) |
 
 ### Output files
 
