@@ -236,7 +236,7 @@ class DBSolveExport extends AbstractExport{
           assignments
         };
       });
-    // group Const, instead of _.groupBy
+    // group Const, instead of groupBy
     let groupedConst = {}; // {group1: [const1, const2], group2: [const3, const4]}
     ns.selectByClassName('Const').forEach((constant) => {
       let key = _get(constant, this.groupConstBy) + '';

@@ -159,10 +159,15 @@ class MatlabExport extends AbstractExport {
         };
       });
 
-    let yTranslator = dynamicRecords
-      .map((x, i) => [x.id, `y(${i+1})`]);
-    let pTranslator = constants
-      .map((x, i) => [x.id, `p(${i+1})`]);
+    let yTranslator = {};
+    dynamicRecords.forEach((x, i) => {
+      yTranslator[x.id] = `y(${i+1})`;
+    });
+    
+    let pTranslator = {};
+    constants.forEach((x, i) => {
+      pTranslator[x.id] = `p(${i+1})`;
+    });
     // add from events
     let const_len = constants.length;
     events.forEach((x, i) => pTranslator.push([x.switcher.id + '_', `p(${const_len + i + 1})`]));
@@ -178,9 +183,9 @@ class MatlabExport extends AbstractExport {
       rhs,
       initRecords,
       sharedRecords,
-      yTranslator: _.fromPairs(yTranslator),
-      pTranslator: _.fromPairs(pTranslator),
-      translator: _.fromPairs(yTranslator.concat(pTranslator)),
+      yTranslator,
+      pTranslator,
+      translator: Object.assign({}, yTranslator, pTranslator),
       events,
       functionDefArray
     };

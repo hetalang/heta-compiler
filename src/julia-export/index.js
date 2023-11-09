@@ -164,8 +164,10 @@ class JuliaExport extends AbstractExport {
         };
       });
 
-    let pTranslatorArray = constants
-      .map((x, i) => [x.id, `__constants__[${i+1}]`]);
+    let pTranslatorObject = {};
+    constants.forEach((constant, i) => {
+      pTranslatorObject[constant.id] = `__constants__[${i+1}]`;
+    });
       
     return {
       namespace: ns,
@@ -177,7 +179,7 @@ class JuliaExport extends AbstractExport {
       extendedRuleRecords,
       odeRules,
       events,
-      pTranslator: _.fromPairs(pTranslatorArray),
+      pTranslator: pTranslatorObject,
     };
   }
   getModelCode(image = []){
