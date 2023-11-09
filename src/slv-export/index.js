@@ -1,6 +1,5 @@
 const { AbstractExport } = require('../core/abstract-export');
 /* global compiledTemplates */
-const _ = require('lodash');
 const _get = require('lodash/get');
 const { ajv } = require('../utils');
 
@@ -10,6 +9,7 @@ const schema = {
     groupConstBy: {type: 'string', pattern: '^[\\w\\d.\\[\\]]+$'},
     eventsOff: {type: 'boolean'},
     powTransform: {type: 'string', enum: ['keep', 'operator', 'function'] },
+    version: {enum: ['25', '26', 25, 26]},
   }
 };
 
@@ -35,6 +35,7 @@ class SLVExport extends AbstractExport{
     } else if (typeof q.spaceFilter === 'string') {
       this.spaceFilter = [q.spaceFilter];
     }
+    this.version = q.version ? q.version + '' : '26'; // force string
   }
   get className(){
     return 'SLVExport';
@@ -239,7 +240,8 @@ class SLVExport extends AbstractExport{
       rhs,
       events: timeEvents,
       groupedConst: groupedConst,
-      powTransform: this.powTransform
+      powTransform: this.powTransform,
+      version: this.version,
     };
   }
   getSLVCode(image = {}){

@@ -1,7 +1,12 @@
 {%- set compartments = population.selectByClassName('Compartment') -%}
 {%- set freeConstants = population.selectByClassName("Const") | selectattr("free") -%}
+{% if version == '26' -%}
+DBSolve Optimum 2020 (new parser) 1 Jul 2006
+SLV26.00*
+{%- else -%}
 DBSolve Optimum (new parser) 1 Jul 2006
 SLV25.00*
+{%- endif %}
 Number of rows in matrix (Number of activities) #{{ processes|length }}
 Number of cols in matrix (Number of compounds) #{{ variables|length }}
 Initial System dimension #{{ variables|length }}
@@ -697,6 +702,12 @@ k1
 1
 0.000010
 1000000
+{%- if version == '26' %}
+p1
+0.000000
+0.000000
+10
+{%- endif %}
 {{ 0 if eventsOff else 1 }}
 {% block events %}{% endblock %}
 <listModelData>

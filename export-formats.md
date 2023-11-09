@@ -4,8 +4,8 @@ Following [Heta specifications](specifications/) exporting to different formats 
 
 - [JSON](#json)
 - [YAML](#yaml)
-- [SLV](#slv)
 - [DBSolve](#dbsolve)
+- [SLV](#slv)
 - [SBML](#sbml)
 - [Simbio](#simbio)
 - [Mrgsolve](#mrgsolve)
@@ -77,43 +77,6 @@ All options is the same as for [JSON format](#json).
 };
 ```
 
-## SLV
-
-Export to SLV format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
-
-### Properties
-
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| eventsOff | boolean | | | | if `eventsOff = true` the switchers will not be exported to DBSolve events. |
-| powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
-| groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
-
-### Output files
-
-**[filepath]/[namespace].slv** : model created based on namespace which can be opened by DBSolveOptimum.
-
-### Known restrictions
-
-- `Compartment` which changes in time may result in wrong ODE.
-- `CSwitcher` and `DSwitcher` are not supported.
-- Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
-- `Infinity`, `-Infinity`, `NaN` values is not supported
-- boolean operators like `and`, `or`, etc. are not supported
-
-**Example**
-
-```heta
-#export {
-    format: SLV,
-    filepath: model, // save results in file "dist/model.slv"
-    spaceFilter: nameless, // namespace used for model generation
-    eventsOff: false, // all switchers will be transformed to DBSolve events
-    powTransform: keep, // use x^y and pow(x, y) without changes
-    groupConstBy: "tags[1]" // use the second tag
-};
-```
-
 ## DBSolve
 
 Export to DBSolve format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
@@ -145,6 +108,45 @@ This is the updated version of SLV export format which supports compartment volu
     filepath: model, // save results in file "dist/model.slv"
     spaceFilter: nameless, // namespace used for model generation
     powTransform: keep // use x^y and pow(x, y) without changes
+    version: "25"
+};
+```
+
+## SLV
+
+Export to SLV format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
+
+### Properties
+
+| property | type | required | default | ref | description | 
+| ---------|------|----------|---------|-----|-------------|
+| eventsOff | boolean | | | | if `eventsOff = true` the switchers will not be exported to DBSolve events. |
+| powTransform | "keep" / "operator" / "function" | | "keep" | | This is option describing if the transformation of x^y and pow(x, y) is required. |
+| groupConstBy | string/path | | `tags[0]` | | How to group const in Initial Values of DBSolve file. Should be written in format of JSON path |
+| version | string | | `26` | | SLV file version: `26` (for DBSolveOptimum 2020) or `25` (for earlier versions) |
+
+### Output files
+
+**[filepath]/[namespace].slv** : model created based on namespace which can be opened by DBSolveOptimum.
+
+### Known restrictions
+
+- `Compartment` which changes in time may result in wrong ODE.
+- `CSwitcher` and `DSwitcher` are not supported.
+- Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
+- `Infinity`, `-Infinity`, `NaN` values is not supported
+- boolean operators like `and`, `or`, etc. are not supported
+
+**Example**
+
+```heta
+#export {
+    format: SLV,
+    filepath: model, // save results in file "dist/model.slv"
+    spaceFilter: nameless, // namespace used for model generation
+    eventsOff: false, // all switchers will be transformed to DBSolve events
+    powTransform: keep, // use x^y and pow(x, y) without changes
+    groupConstBy: "tags[1]" // use the second tag
 };
 ```
 
