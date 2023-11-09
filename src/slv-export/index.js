@@ -221,11 +221,15 @@ class SLVExport extends AbstractExport{
       logger.error(msg, {type: 'ExportError'});
     }
 
-    // group Const
-    let groupedConst = _.groupBy(
-      ns.selectByClassName('Const'),
-      (con) => _get(con, this.groupConstBy)
-    );
+    // group Const, instead of _.groupBy
+    let groupedConst = {}; // {group1: [const1, const2], group2: [const3, const4]}
+    ns.selectByClassName('Const').forEach((constant) => {
+      let key = _get(constant, this.groupConstBy) + '';
+      if (!groupedConst.hasOwnProperty(key)) {
+        groupedConst[key] = [];
+      }
+      groupedConst[key].push(constant);
+    });
     
     return {
       population: ns,
