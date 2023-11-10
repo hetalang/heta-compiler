@@ -1,5 +1,4 @@
 const _toMathExpr = require('./to-math-expr');
-const _ = require('lodash');
 const { xml2js } = require('xml-js');
 const { Unit } = require('../core/unit');
 const legalUnits = require('../legal-sbml-units');
@@ -30,159 +29,145 @@ function jsbmlToQArr(JSBML){
     .find((x) => x.name === 'model'); // <model>
 
   // unit definition
-  let unitDict = _.chain(model.elements)
-    .filter(['name', 'listOfUnitDefinitions'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'unitDefinition'])
-    .map((x) => {
-      let units = unitDefinitionToUnits(x);
-
-      return [x.attributes.id, units];
-    })
-    .fromPairs()
-    .value();
+  let unitDict = {};
+  model.elements
+    .filter((x) => x.name === 'listOfUnitDefinitions')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'unitDefinition')
+    .forEach((x) => {
+      unitDict[x.attributes.id] = unitDefinitionToUnits(x);
+    });
 
   // algebraicRules
   
-  let functionDefinitions = _.chain(model.elements)
-    .filter(['name', 'listOfFunctionDefinitions'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'functionDefinition'])
-    .value();
-  functionDefinitions.forEach((x) => {
-    let q = functionDefinitionToQ(x);
-    qArr.push(q);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfFunctionDefinitions')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'functionDefinition')
+    .forEach((x) => {
+      let q = functionDefinitionToQ(x);
+      qArr.push(q);
+    });
 
   // species types, for IRT
-  let speciesTypes = _.chain(model.elements)
-    .filter(['name', 'listOfSpeciesTypes'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'speciesType'])
-    .value();
-  speciesTypes.forEach((x) => {
-    let q = speciesTypeToQ(x);
-    qArr.push(q);
-  });
+  model.elements
+    .filter((x) => x.name ==='listOfSpeciesTypes')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'speciesType')
+    .forEach((x) => {
+      let q = speciesTypeToQ(x);
+      qArr.push(q);
+    });
 
   // compartments
   let zeroSpatialDimensions = [];
-  let compartments = _.chain(model.elements)
-    .filter(['name', 'listOfCompartments'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'compartment'])
-    .value();
-  compartments.forEach((x) => {
-    // collect compartments with zero dimention
-    let isZero = x.attributes?.spatialDimensions === '0';
-    if (isZero) {
-      zeroSpatialDimensions.push(x.attributes?.id);
-      // set zero initial size
-      x.attributes = Object.assign({}, x.attributes, {size: 0});
-    }
+  model.elements
+    .filter((x) => x.name === 'listOfCompartments')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'compartment')
+    .forEach((x) => {
+      // collect compartments with zero dimention
+      let isZero = x.attributes?.spatialDimensions === '0';
+      if (isZero) {
+        zeroSpatialDimensions.push(x.attributes?.id);
+        // set zero initial size
+        x.attributes = Object.assign({}, x.attributes, {size: 0});
+      }
 
-    let q = compartmentToQ(x, unitDict);
-    qArr.push(q);
-  });
+      let q = compartmentToQ(x, unitDict);
+      qArr.push(q);
+    });
 
   // species
-  let species = _.chain(model.elements)
-    .filter(['name', 'listOfSpecies'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'species'])
-    .value();
-  species.forEach((x) => {
-    let q = speciesToQ(x, zeroSpatialDimensions, qArr, unitDict);
-    qArr.push(q);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfSpecies')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'species')
+    .forEach((x) => {
+      let q = speciesToQ(x, zeroSpatialDimensions, qArr, unitDict);
+      qArr.push(q);
+    });
 
   // reactions
-  let reactions = _.chain(model.elements)
-    .filter(['name', 'listOfReactions'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'reaction'])
-    .value();
-  reactions.forEach((x) => {
-    let qArr_add = reactionToQ(x);
-    qArr = qArr.concat(qArr_add);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfReactions')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'reaction')
+    .forEach((x) => {
+      let qArr_add = reactionToQ(x);
+      qArr = qArr.concat(qArr_add);
+    });
 
   // parameters
-  let parameters = _.chain(model.elements)
-    .filter(['name', 'listOfParameters'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'parameter'])
-    .value();
-  parameters.forEach((x) => {
-    let q = parameterToQ(x, unitDict);
-    qArr.push(q);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfParameters')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'parameter')
+    .forEach((x) => {
+      let q = parameterToQ(x, unitDict);
+      qArr.push(q);
+    });
 
   // initialAssignments
-  let initialAssignments = _.chain(model.elements)
-    .filter(['name', 'listOfInitialAssignments'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'initialAssignment'])
-    .value();
-  initialAssignments.forEach((x) => {
-    let q = initialAssignmentToQ(x);
-    qArr.push(q);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfInitialAssignments')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'initialAssignment')
+    .forEach((x) => {
+      let q = initialAssignmentToQ(x);
+      qArr.push(q);
+    });
 
   // assignmentRules
-  let assignmentRules = _.chain(model.elements)
-    .filter(['name', 'listOfRules'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'assignmentRule'])
-    .value();
-  assignmentRules.forEach((x) => {
-    let q = assignmentRuleToQ(x);
-    qArr.push(q);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfRules')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'assignmentRule')
+    .forEach((x) => {
+      let q = assignmentRuleToQ(x);
+      qArr.push(q);
+    });
 
   // algebraicRules
-  let algebraicRules = _.chain(model.elements)
-    .filter(['name', 'listOfRules'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'algebraicRule'])
-    .value();
+  let algebraicRules = model.elements
+    .filter((x) => x.name === 'listOfRules')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'algebraicRule');
   if (algebraicRules.length !== 0) {
     throw new Error('"algebraicRule" from SBML module is not supported.');
   }
 
   // rateRules
-  let rateRules = _.chain(model.elements)
-    .filter(['name', 'listOfRules'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'rateRule'])
-    .value();
-  rateRules.forEach((x) => {
-    let qArr_add = rateRuleToQ(x);
-    qArr = qArr.concat(qArr_add);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfRules')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'rateRule')
+    .forEach((x) => {
+      let qArr_add = rateRuleToQ(x);
+      qArr = qArr.concat(qArr_add);
+    });
 
   // events
-  let events = _.chain(model.elements)
-    .filter(['name', 'listOfEvents'])
-    .map('elements')
-    .flatten()
-    .filter(['name', 'event'])
-    .value();
-  events.forEach((x) => {
-    let qs = eventToQ(x);
-    qArr = qArr.concat(qs);
-  });
+  model.elements
+    .filter((x) => x.name === 'listOfEvents')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'event')
+    .forEach((x) => {
+      let qs = eventToQ(x);
+      qArr = qArr.concat(qs);
+    });
 
   return qArr;
 }
@@ -191,10 +176,9 @@ function jsbmlToQArr(JSBML){
   transform SBML-like unit definition to Heta-like unit array
 */
 function unitDefinitionToUnits(x){
-  let units = _.chain(x)
-    .get('elements')
-    .filter(['name', 'listOfUnits'])
-    .get('0.elements')
+  let units = x.elements
+    .filter((x) => x.name === 'listOfUnits')[0]
+    .elements
     .map((element) => {
       let { kind, multiplier, scale, exponent } = element.attributes;
       return {
@@ -202,8 +186,7 @@ function unitDefinitionToUnits(x){
         multiplier: (multiplier || 1) * 10**(scale || 0),
         exponent: parseInt(exponent) || 1
       };
-    })
-    .value();
+    });
 
   return Unit.fromQ(units);
 }

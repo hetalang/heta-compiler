@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const _omit = require('lodash/omit');
 const XLSXExport = require('../xlsx-export');
 require('./_size');
@@ -20,13 +19,13 @@ class AnotherXLSXExport extends XLSXExport {
     let nsOutput = typeof this.spaceFilter === 'undefined'
       ? nsArray
       : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
-    let qArr = _.chain(nsOutput)
+
+    let qArr = nsOutput
       .map((ns) => ns.toArray())
-      .flatten()
-      .filter((x) => !x.isCore && !x.instanceOf('UnitDef')) // skip core and UnitsDef
+      .flat(Infinity)
+      .filter((x) => !x.isCore && !x.instanceOf('UnitDef'))
       .map((x) => x.toFlat({useAnotherUnits: true}))
-      .map((q) => this.omit ? _omit(q, this.omit) : q)
-      .value();
+      .map((q) => this.omit ? _omit(q, this.omit) : q);
 
     // main_tab sheet
     let functions = {
@@ -128,7 +127,7 @@ class AnotherXLSXExport extends XLSXExport {
       qArr.filter((q) => q.class === 'Compartment')
         .map((_q, i) => {
           //q['#'] = i + 1;
-          let q = {st: 'p', num: (q.assignments?.start_ || ''), ..._q};
+          let q = {st: 'p', num: (_q.assignments?.start_ || ''), ..._q};
           delete q.class;
           delete q.units;
           delete q.assignments?.start_;

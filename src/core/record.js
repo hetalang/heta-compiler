@@ -1,6 +1,5 @@
 const { _Size } = require('./_size');
 const { Expression } = require('./expression');
-const _ = require('lodash');
 
 /*
   record1 @Record {
@@ -202,10 +201,9 @@ class Record extends _Size {
     }
   }
   _references(){
-    let classSpecificRefs = _.chain(this.assignments)
-      .map((expression) => expression.dependOn())
-      .flatten()
-      .value();
+    let classSpecificRefs = Object.entries(this.assignments)
+      .map(([key, expression]) => expression.dependOn())
+      .flat(1);
 
     return super._references()
       .concat(classSpecificRefs);

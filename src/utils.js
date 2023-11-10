@@ -75,10 +75,30 @@ function flatten(o){
   return res;
 }
 
+// clone all own properties and arrays
+function cloneDeep(o) {
+  if (o instanceof Object) {
+    var clone;
+    if (o instanceof Array) {
+      clone = o.map((key) => cloneDeep(key));
+    } else {
+      clone = {};
+      Object.keys(o).forEach((key) => {
+        clone[key] = cloneDeep(o[key]);
+      });
+    }
+    
+    return clone;
+  } else {
+    return o;
+  }
+}
+
 module.exports = {
   validator,
   ajv,
   uniqBy,
   intersection,
-  flatten
+  flatten,
+  cloneDeep
 };

@@ -2,7 +2,6 @@
   UnitTerm is approximately the same as Unit but simpler.
   It was created to supply checking of unit consistency
 */
-const _ = require('lodash');
 
 // legal term names
 // empty term [] means dimensionless
@@ -50,18 +49,21 @@ class UnitTerm extends Array {
     return res;
   }
   simplify() {
-    let obj = _.chain(this)
-      .groupBy((x) => x.kind)
-      .map((x, key) => {
+    let obj = this.reduce((accumulator, value) => {
+      !accumulator[value.kind] && (accumulator[value.kind] = []);
+      accumulator[value.kind].push(value);
+      return accumulator;
+    }, {});
+    let arr = Object.entries(obj)
+      .map(([key, x]) => {
         return {
           kind: key,
           exponent: x.reduce((acc, y) => acc + y.exponent, 0)
         };
       })
-      .filter((x) => x.exponent !== 0)
-      .value();
+      .filter((x) => x.exponent !== 0);
 
-    return new UnitTerm(obj);
+    return new UnitTerm(arr);
   }
   // return true if "this" contains the same components as "ut"
   equal(ut) {

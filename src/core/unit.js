@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const { floor, log10 } = Math;
 const { UnitTerm } = require('./unit-term');
 const prefixes = {
@@ -172,10 +171,15 @@ class Unit extends Array {
 
     // group by kind, combine elements inside kind
     // then transform to regular array
-    let group = _.chain(this)
+    let groupObj = this
       .filter((x) => x.kind !== dimensionlessKind)
-      .groupBy((x) => x.kind)
-      .map((x, key) => {
+      .reduce((accumulator, value) => {
+        !accumulator[value.kind] && (accumulator[value.kind] = []);
+        accumulator[value.kind].push(value); 
+        return accumulator;
+      }, {});
+    let group = Object.entries(groupObj)
+      .map(([key, x]) => {
         let exponent = x.reduce((acc, y) => acc + y.exponent, 0);
         if (exponent === 0) { // add to multiplier
           commonLogMultiplier += x.reduce((acc, y) => acc + y.exponent * log10(y.multiplier), 0);
@@ -194,10 +198,7 @@ class Unit extends Array {
 
         return res;
       })
-      .filter((x) => typeof x !== 'undefined')
-      .toPairs()
-      .map(1)
-      .value();
+      .filter((x) => typeof x !== 'undefined');
 
     // push dimensionless if multiplier !== 1
     if (commonLogMultiplier !== 0) group.push({

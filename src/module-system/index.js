@@ -1,7 +1,7 @@
 const path = require('path');
-const _ = require('lodash');
-const _omit = require('lodash/omit');
 const TopoSort = require('@insysbio/topo-sort');
+const { cloneDeep } = require('../utils');
+
 // module loaders
 const hetaLoader = require('./heta-module');
 const jsonLoader = require('./json-module');
@@ -195,14 +195,12 @@ class ModuleSystem {
  * 
  * @returns {object} merged Q-array.
  */
-function compose(obj, arr){
-  let cleanedObj = _omit(obj, ['action', 'id', 'class', 'source', 'type', 'sheet']);
+function compose(obj, arr) {
+  let {action, id, source, type, sheet, ...cleanedObj} = obj;
+  delete cleanedObj.class;
+
   return arr.map((x) => {
-    return _.chain(x)
-      .cloneDeep()
-      // transform each element here based on obj
-      .assign(cleanedObj)
-      .value();
+    return Object.assign({}, cloneDeep(x), cleanedObj);
   });
 }
 

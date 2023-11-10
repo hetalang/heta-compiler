@@ -34,6 +34,7 @@
 
 ## features
 
+- regular expression for spaceFilter
 - checking legal functions inside Expressions and functionDefinitian
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - calculate units for pow function
@@ -71,8 +72,6 @@ https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
 - _get
 - _set
 - _omit
-- _.chain
-- _.flatten(a) => a.flat(Infinity), _.flatten(a, 1) => a.flat()
 
 ### Dose class
 

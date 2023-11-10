@@ -1,7 +1,6 @@
 const { AbstractExport } = require('../core/abstract-export');
-const _ = require('lodash');
 const _omit = require('lodash/omit');
-const { ajv, uniqBy, intersection } = require('../utils');
+const { ajv, intersection } = require('../utils');
 const XLSX = require('xlsx');
 
 // how to order columns in sheets
@@ -14,7 +13,7 @@ const propSequence = [
 // how to order sheets in file
 const sheetSequence = [
   'Compartment', 'Species', 'Reaction', 'Record', 'Const',
-  'Identification', 'UnitDef'
+  'Identification'
 ];
 
 const schema = {
@@ -122,37 +121,42 @@ class TableExport extends AbstractExport {
 
     // split qArr to several sheets
     if (this.splitByClass) {
-      let splitted = _.chain(fArr)
-        .groupBy((q) => q.class)
-        .mapValues((value, prop) => {
-          let keys = _.chain(value) // store unique keys
-            .map((x) => Object.keys(x))
-            .flatten()
-            .value();
-          let sequence_i = intersection(propSequence, uniqBy(keys));
+      let splittedObj = fArr.reduce((accumulator, value) => {
+        let c = value.class + '';
+        !accumulator[c] && (accumulator[c] = []);
+        accumulator[c].push(value);
+        return accumulator;
+      }, {});
+      let splitted = Object.entries(splittedObj)
+        .sort((a, b) => { // soft but unknown element will be last
+          let indexA = sheetSequence.indexOf(a[0]);
+          let indexB = sheetSequence.indexOf(b[0]);
+          if (indexA === -1 && indexB !== -1) {
+            return 1;
+          } else if (indexA !== -1 && indexB === -1) {
+            return -1;
+          } else {
+            return indexA - indexB;
+          }
+        })
+        .map(([name, value]) => {
+          let keys = value.map((x) => Object.keys(x)).flat(); // all headers
 
           return {
             content:  value,
             pathSuffix: '',
             type: 'sheet',
-            name: prop,
-            headerSeq: sequence_i
+            name: name,
+            headerSeq: intersection(propSequence, keys)
           };
-        })
-        .toPairs()
-        .sortBy((x) => { // sort in pre-defined order
-          let order = sheetSequence.indexOf(x[0]);
-          return order !== -1 ? order : 999;
-        })
-        .map(1)
-        .value();
+        });
+
       return splitted;
     } else {
-      let keys = _.chain(fArr) // store unique keys
+      let keys = fArr // store unique keys
         .map((x) => Object.keys(x))
-        .flatten()
-        .value();
-      let sequence_out = intersection(propSequence, uniqBy(keys));
+        .flat();
+      let sequence_out = intersection(propSequence, keys);
 
       return [{
         content: fArr,
