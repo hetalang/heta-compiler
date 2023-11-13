@@ -128,19 +128,6 @@ Container.prototype.insert = function(q = {}, isCore = false){
     return;
   }
 
-  // old style export
-  let exportCheck = q.class.match(/^(\w+)Export$/);
-  if (exportCheck !== null) { // check if old export syntax is used
-    this.logger.warn(`Usage of Export is deprecated starting from v0.5.0, use syntax: #export {format: ${exportCheck[1]}, ...}`)
-    let exportQ = Object.assign({
-      format: exportCheck[1],
-      filepath: q.id
-    }, q);
-    delete exportQ.class;
-    delete exportQ.id;
-    return this.export(exportQ);
-  }
-
   // check if class is in the list
   let selectedClass = this._componentClasses[q.class];
   if (selectedClass === undefined){
