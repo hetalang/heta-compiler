@@ -75,6 +75,9 @@ class TableExport extends AbstractExport {
   get className(){
     return 'TableExport';
   }
+  get defaultFilepath() {
+    return 'table';
+  }
   get format(){
     return 'Table';
   }

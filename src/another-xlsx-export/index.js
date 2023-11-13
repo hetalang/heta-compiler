@@ -12,6 +12,9 @@ class AnotherXLSXExport extends XLSXExport {
   get format(){
     return 'Another';
   }
+  get defaultFilepath() {
+    return 'another-xlsx';
+  }
   makeSheet(){
     // filtered namespaces
     let nsOutput = [...this._container.namespaceStorage]

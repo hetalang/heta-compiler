@@ -21,6 +21,9 @@ class SimbioExport extends AbstractExport{
   get className(){
     return 'SimbioExport';
   }
+  get defaultFilepath() {
+    return 'simbio';
+  }
   get format(){
     return 'Simbio';
   }

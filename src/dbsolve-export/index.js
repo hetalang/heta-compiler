@@ -36,6 +36,9 @@ class DBSolveExport extends AbstractExport{
   get requireConcrete() {
     return true;
   }
+  get defaultFilepath() {
+    return 'dbsolve';
+  }
   /**
    * The method creates text code to save as SLV file.
    *

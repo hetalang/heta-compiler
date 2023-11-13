@@ -23,6 +23,9 @@ class DotExport extends AbstractExport{
   get format(){
     return 'Dot';
   }
+  get defaultFilepath() {
+    return 'dot';
+  }
   makeText(){
     let logger = this._container.logger;
 

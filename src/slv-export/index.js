@@ -35,6 +35,9 @@ class SLVExport extends AbstractExport{
   get className(){
     return 'SLVExport';
   }
+  get defaultFilepath() {
+    return 'slv';
+  }
   get format(){
     return 'SLV';
   }

@@ -25,6 +25,9 @@ class JSONExport extends AbstractExport {
   get className(){
     return 'JSONExport';
   }
+  get defaultFilepath() {
+    return 'json';
+  }
   get format(){
     return 'JSON';
   }

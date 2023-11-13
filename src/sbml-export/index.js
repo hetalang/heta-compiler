@@ -29,6 +29,9 @@ class SBMLExport extends AbstractExport {
   get className(){
     return 'SBMLExport';
   }
+  get defaultFilepath() {
+    return 'sbml';
+  }
   get format(){
     return 'SBML';
   }

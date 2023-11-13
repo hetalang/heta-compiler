@@ -59,7 +59,8 @@ describe('General argument checking', () => {
     let json_export = p.export({
       format: 'JSON'
     });
-    expect(p.logger).to.have.property('hasErrors').true;
+    expect(p.logger).to.have.property('hasErrors').false;
+    expect(json_export).to.have.property('filepath', 'json');
     expect(json_export).to.be.instanceOf(p.classes.JSON);
     p.logger.resetErrors();
   });

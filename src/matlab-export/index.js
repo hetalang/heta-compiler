@@ -22,6 +22,9 @@ class MatlabExport extends AbstractExport {
   get className(){
     return 'MatlabExport';
   }
+  get defaultFilepath() {
+    return 'matlab';
+  }
   get format(){
     return 'Matlab';
   }

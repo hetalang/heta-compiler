@@ -23,6 +23,9 @@ class HetaCodeExport extends AbstractExport{
   get format(){
     return 'heta';
   }
+  get defaultFilepath() {
+    return 'heta-code';
+  }
   /**
    * The method creates text code to save as Heta code file.
    *

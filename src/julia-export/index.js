@@ -31,6 +31,9 @@ class JuliaExport extends AbstractExport {
   get requireConcrete() {
     return true;
   }
+  get defaultFilepath() {
+    return 'julia';
+  }
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   makeText(skipVersionCode = false){

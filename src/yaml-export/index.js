@@ -26,6 +26,9 @@ class YAMLExport extends AbstractExport {
   get className(){
     return 'YAMLExport';
   }
+  get defaultFilepath() {
+    return 'yaml';
+  }
   get format(){
     return 'YAML';
   }

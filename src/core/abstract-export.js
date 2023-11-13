@@ -3,7 +3,6 @@ const { ajv } = require('../utils');
 
 const schema = {
   type: 'object',
-  required: ['filepath'],
   properties: {
     filepath: {type: 'string', pattern: '^[\\w\\d\\\\/._!-]+$'},
     spaceFilter: { type: 'string' }
@@ -36,7 +35,7 @@ class AbstractExport extends Top {
     let valid = AbstractExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
-    if (q.filepath) this.filepath = q.filepath;
+    this.filepath = q.filepath || this.defaultFilepath;
     
     this.spaceFilter = q.spaceFilter || '.+';
   }

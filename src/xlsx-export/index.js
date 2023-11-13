@@ -23,6 +23,9 @@ class XLSXExport extends TableExport {
   get className(){
     return 'XLSXExport';
   }
+  get defaultFilepath() {
+    return 'xlsx';
+  }
   get format(){
     return 'XLSX';
   }

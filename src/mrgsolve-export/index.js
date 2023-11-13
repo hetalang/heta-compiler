@@ -21,6 +21,9 @@ class MrgsolveExport extends AbstractExport {
   get className(){
     return 'MrgsolveExport';
   }
+  get defaultFilepath() {
+    return 'mrgsolve';
+  }
   get format(){
     return 'Mrgsolve';
   }
