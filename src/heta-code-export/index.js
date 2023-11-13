@@ -31,6 +31,7 @@ class HetaCodeExport extends AbstractExport{
   makeText(){
     // let logger = this._container.logger;
 
+    // XXX: do not filter namespaces
     let image = this.getHetaCodeImage(this._container);
     let content = this.getHetaCodeCode(image);
 

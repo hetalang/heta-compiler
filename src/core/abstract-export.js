@@ -52,10 +52,30 @@ class AbstractExport extends Top {
       type: 'text' // currently support only text
     }]
   */
-  makeText(){
+  makeText() {
     throw new TypeError(`No method makeText() for "${this.className}"`);
   }
-  make(){ // Buffer
+  get requireConcrete() {
+    return false;
+  }
+  selectedNamespaces() {
+    let logger = this._container.logger;
+    // filter namespaces if set
+    let namespaces0 = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
+      
+    let namespaces1 = this.requireConcrete 
+      ? namespaces0.filter(([spaceName, ns]) => !ns.isAbstract)
+      : namespaces0;
+
+    if (namespaces1.length === 0) {
+      let msg = `Nothing was exported because there is no concrete namespaces matching spaceFilter in "${this.format}".`;
+      logger.warn(msg, {});
+    }
+
+    return namespaces1;
+  }
+  make() { // Buffer
     let text = this.makeText();
     let buffer = text.map((x) => {
       return {
@@ -67,7 +87,7 @@ class AbstractExport extends Top {
     
     return buffer;
   }
-  static get validate(){
+  static get validate() {
     return ajv.compile(schema);
   }
 }

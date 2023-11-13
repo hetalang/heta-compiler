@@ -24,14 +24,14 @@ class SimbioExport extends AbstractExport{
   get format(){
     return 'Simbio';
   }
+  get requireConcrete() {
+    return true;
+  }
   makeText(){
     let logger = this._container.logger;
 
-    // filter namespaces if set
-    let selectedNamespaces = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .filter(([spaceName, ns]) => !ns.isAbstract);
-    
+    let selectedNamespaces = this.selectedNamespaces();
+
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       // checking unitTerm for Species
       ns.selectByInstanceOf('Species')

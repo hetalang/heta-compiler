@@ -33,6 +33,9 @@ class DBSolveExport extends AbstractExport{
     
     if (q.defaultTask) this.defaultTask = q.defaultTask;
   }
+  get requireConcrete() {
+    return true;
+  }
   /**
    * The method creates text code to save as SLV file.
    *
@@ -47,13 +50,10 @@ class DBSolveExport extends AbstractExport{
       logger.warn(`"FunctionDef" object: ${functionsNames.join(', ')} are presented in platform but not supported by DBSolve export.`);
     }
 
-    // filter namespaces if set
-    let selectedNamespaces = [...this._container.namespaceStorage]
-      .filter(([spaceName, space]) => new RegExp(this.spaceFilter).test(spaceName))
-      .filter(([spaceName, space]) => !space.isAbstract);
+    let selectedNamespaces = this.selectedNamespaces();
 
-    let results = selectedNamespaces.map(([spaceName, namespace]) => {
-      let image = this.getSLVImage(namespace);
+    let results = selectedNamespaces.map(([spaceName, ns]) => {
+      let image = this.getSLVImage(ns);
       let content = this.getSLVCode(image);
 
       return {

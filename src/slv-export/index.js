@@ -38,6 +38,9 @@ class SLVExport extends AbstractExport{
   get format(){
     return 'SLV';
   }
+  get requireConcrete() {
+    return true;
+  }
   /**
    * The method creates text code to save as SLV file.
    *
@@ -53,9 +56,7 @@ class SLVExport extends AbstractExport{
     }
 
     // filter namespaces if set
-    let selectedNamespaces = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .filter(([spaceName, ns]) => !ns.isAbstract);
+    let selectedNamespaces = this.selectedNamespaces();
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = this.getSLVImage(ns);

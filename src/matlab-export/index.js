@@ -28,6 +28,9 @@ class MatlabExport extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
+  get requireConcrete() {
+    return true;
+  }
   // TODO: skipVersionCode does not work
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
@@ -35,9 +38,7 @@ class MatlabExport extends AbstractExport {
     let logger = this._container.logger;
 
     // filter namespaces if set
-    let selectedNamespaces = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .filter(([spaceName, ns]) => !ns.isAbstract);
+    let selectedNamespaces = this.selectedNamespaces();
 
     let results = [];
 

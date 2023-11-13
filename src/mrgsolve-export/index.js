@@ -27,13 +27,14 @@ class MrgsolveExport extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
+  get requireConcrete() {
+    return true;
+  }
   makeText(){
     let logger = this._container.logger;
 
     // filter namespaces if set
-    let selectedNamespaces = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .filter(([spaceName, ns]) => !ns.isAbstract);
+    let selectedNamespaces = this.selectedNamespaces();
 
     // display that function definition is not supported
     let functionsNames = [...this._container.functionDefStorage.keys()];

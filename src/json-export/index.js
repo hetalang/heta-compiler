@@ -33,12 +33,10 @@ class JSONExport extends AbstractExport {
   }
   makeText(){
     // filtered namespaces
-    let nsArrayFiltered = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .map(([spaceName, ns]) => ns);
+    let nsArrayFiltered = this.selectedNamespaces();
 
     // create qArr from NS
-    let qArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {
+    let qArr_ns = nsArrayFiltered.reduce((accumulator, [spaceName, ns]) => {
       let qArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toQ()]; // skip default NS
       let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
       return accumulator.concat(qArr_setns, qArr_components);

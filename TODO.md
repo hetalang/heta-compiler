@@ -32,7 +32,6 @@
 
 ## features
 
-- check empty exports
 - default `filepath` for Export
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units

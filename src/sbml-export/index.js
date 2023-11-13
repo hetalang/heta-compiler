@@ -39,8 +39,7 @@ class SBMLExport extends AbstractExport {
     let logger = this._container.logger;
 
     // filter namespaces if set
-    let selectedNamespaces = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
+    let selectedNamespaces = this.selectedNamespaces();
     
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = this.getSBMLImage(ns);

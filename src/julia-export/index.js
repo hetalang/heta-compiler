@@ -28,14 +28,15 @@ class JuliaExport extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
+  get requireConcrete() {
+    return true;
+  }
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   makeText(skipVersionCode = false){
     //let logger = this._container.logger;
     // create image for multiple namespaces
-    let nsImages = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .filter(([spaceName, ns]) => !ns.isAbstract)
+    let nsImages = this.selectedNamespaces()
       .map(([spaceName, ns]) => this.getJuliaImage(ns));
 
     // create Content
