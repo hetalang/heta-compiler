@@ -18,12 +18,6 @@ class MatlabExport extends AbstractExport {
     let logger = this._container.logger;
     let valid = MatlabExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
-
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    }
   }
   get className(){
     return 'MatlabExport';
@@ -40,37 +34,14 @@ class MatlabExport extends AbstractExport {
   makeText(skipVersionCode = false){
     let logger = this._container.logger;
 
-    if (this.spaceFilter !== undefined) {
-      // empty namespace is not allowed
-      if (this.spaceFilter.length === 0) {
-        let msg = 'spaceFilter for Matlab format should include at least one namespace, got empty';
-        logger.error(msg);
-        return []; // BRAKE
-      }
-
-      // check if namespaces exists
-      let lostNamespaces = this.spaceFilter.filter((x) => {
-        let ns = this._container.namespaceStorage.get(x);
-        return !ns || ns.isAbstract;
-      });
-      if (lostNamespaces.length > 0) {
-        let msg = `Namespaces: ${lostNamespaces.join(', ')} either do not exist or are abstract. Simbio export stopped.`;
-        logger.error(msg);
-        return []; // BRAKE
-      }
-    }
-
     // filter namespaces if set
-    let selectedNamespaces = this.spaceFilter !== undefined 
-      ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
-      : [...this._container.namespaceStorage].filter((x) => !x[1].isAbstract);
+    let selectedNamespaces = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
+      .filter(([spaceName, ns]) => !ns.isAbstract);
 
     let results = [];
 
-    selectedNamespaces.forEach((x) => {
-      let spaceName = x[0];
-      let ns = x[1];
-
+    selectedNamespaces.forEach(([spaceName, ns]) => {
       let image = this.getMatlabImage(ns);
 
       let modelContent = this.getModelCode(image);

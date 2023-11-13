@@ -14,11 +14,9 @@ class AnotherXLSXExport extends XLSXExport {
   }
   makeSheet(){
     // filtered namespaces
-    let nsArray = [...this._container.namespaceStorage]
-      .map((pair) => pair[1]);
-    let nsOutput = typeof this.spaceFilter === 'undefined'
-      ? nsArray
-      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let nsOutput = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
+      .map(([spaceName, ns]) => ns);
 
     let qArr = nsOutput
       .map((ns) => ns.toArray())

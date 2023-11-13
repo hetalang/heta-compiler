@@ -30,11 +30,6 @@ class SLVExport extends AbstractExport{
     }
     if (q.eventsOff) this.eventsOff = q.eventsOff;
     if (q.defaultTask) this.defaultTask = q.defaultTask;
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    }
     this.version = q.version ? q.version + '' : '26'; // force string
   }
   get className(){
@@ -51,27 +46,6 @@ class SLVExport extends AbstractExport{
   makeText(){
     let logger = this._container.logger;
 
-    if (this.spaceFilter !== undefined) {
-      // empty namespace is not allowed
-      if (this.spaceFilter.length === 0) {
-        let msg = 'spaceFilter for SLV format should include at least one namespace, got empty.';
-        logger.error(msg);
-        return []; // BRAKE
-      }
-
-      // check if namespaces exists
-      let lostNamespaces = this.spaceFilter.filter((x) => {
-        let ns = this._container.namespaceStorage.get(x);
-        return !ns || ns.isAbstract;
-      });
-
-      if (lostNamespaces.length > 0) {
-        let msg = `Namespaces: ${lostNamespaces.join(', ')} either do not exist or are abstract. Simbio export stopped.`;
-        logger.error(msg);
-        return []; // BRAKE
-      }
-    }
-
     // display that function definition is not supported
     let functionsNames = [...this._container.functionDefStorage.keys()];
     if (functionsNames.length > 0) {
@@ -79,14 +53,11 @@ class SLVExport extends AbstractExport{
     }
 
     // filter namespaces if set
-    let selectedNamespaces = this.spaceFilter !== undefined 
-      ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
-      : [...this._container.namespaceStorage].filter((x) => !x[1].isAbstract);
+    let selectedNamespaces = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
+      .filter(([spaceName, ns]) => !ns.isAbstract);
 
-    let results = selectedNamespaces.map((x) => {
-      let spaceName = x[0];
-      let ns = x[1];
-
+    let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = this.getSLVImage(ns);
       let content = this.getSLVCode(image);
         

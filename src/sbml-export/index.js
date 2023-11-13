@@ -25,12 +25,6 @@ class SBMLExport extends AbstractExport {
     } else {
       this.version = 'L2V4';
     } 
-
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    }
   }
   get className(){
     return 'SBMLExport';
@@ -44,31 +38,11 @@ class SBMLExport extends AbstractExport {
   makeText(){
     let logger = this._container.logger;
 
-    if (this.spaceFilter !== undefined) {
-      // empty namespace is not allowed
-      if (this.spaceFilter.length === 0) {
-        let msg = 'spaceFilter for SBML format should include at least one namespace, got empty';
-        logger.error(msg);
-        return []; // BRAKE
-      }
-      
-      // check if namespaces exists
-      let lostNamespaces = this.spaceFilter.filter((x) => !this._container.namespaceStorage.has(x));
-      if (lostNamespaces.length > 0) {
-        let msg = `Namespaces: ${lostNamespaces.join(', ')} do not exist. SBML export stopped.`;
-        logger.error(msg);
-        return []; // BRAKE
-      }
-    }
-
     // filter namespaces if set
-    let selectedNamespaces = this.spaceFilter !== undefined 
-      ? [...this._container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1)
-      : [...this._container.namespaceStorage];
+    let selectedNamespaces = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
     
-    let results = selectedNamespaces.map((x) => {
-      let spaceName = x[0];
-      let ns = x[1];
+    let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = this.getSBMLImage(ns);
       var content = this.getSBMLCode(image);
 

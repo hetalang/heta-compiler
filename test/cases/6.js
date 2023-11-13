@@ -45,7 +45,8 @@ describe('Testing "cases/6-import"', () => {
 
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.container.classes.JSON;
-    let json_export = new JSONExport({spaceFilter: 'model'});
+    let json_export = new JSONExport({spaceFilter: 'model', filepath: 'xxx'});
+    expect(json_export).not.to.have.property('errored', true);
 
     let code = json_export.makeText()[0].content;
     let obj = JSON.parse(code);

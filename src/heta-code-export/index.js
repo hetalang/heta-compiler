@@ -16,7 +16,6 @@ class HetaCodeExport extends AbstractExport{
     let logger = this._container.logger;
     let valid = HetaCodeExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
-    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
   }
   get className(){
     return 'HetaExport';
@@ -50,9 +49,8 @@ class HetaCodeExport extends AbstractExport{
   getHetaCodeImage(container){
     // let logger = this._container.logger;
 
-    let filteredNamespaceStorage = this.spaceFilter === undefined
-      ? [...container.namespaceStorage]
-      : [...container.namespaceStorage].filter((x) => this.spaceFilter.indexOf(x[0]) !== -1);
+    let filteredNamespaceStorage = [...container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
     
     return {
       functionDefStorage: [...container.functionDefStorage],

@@ -21,7 +21,7 @@ The general format for all export actions is the following:
 #export {
     format: JSON, // or other supported formats, required
     filepath: path/to/output, // Relative or absolute path to generated directory or file
-    spaceFilter: [nameless, another] // [] if set, namespaces out of the list will be skipped.
+    spaceFilter: "regex-expression" // only filtered namespaces will be exported, see RegExp rules
     ... // other options
 };
 ```
@@ -73,7 +73,7 @@ All options is the same as for [JSON format](#json).
     filepath: output, // save result in file "dist/output.json"
     omit: [aux.wiki], // omit aux.wiki properties from components
     noUnitsExpr: false, // save units in format UnitsExpr
-    spaceFilter: [ nameless, another ]
+    spaceFilter: ".+" // all namespaces
 };
 ```
 
@@ -143,7 +143,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 #export {
     format: SLV,
     filepath: model, // save results in file "dist/model.slv"
-    spaceFilter: nameless, // namespace used for model generation
+    spaceFilter: "^nameless$", // namespace used for model generation
     eventsOff: false, // all switchers will be transformed to DBSolve events
     powTransform: keep, // use x^y and pow(x, y) without changes
     groupConstBy: "tags[1]" // use the second tag
@@ -344,7 +344,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 #export {
     format: Matlab,
     filepath: matlab_code, // save result in directory "dist/matlab_code"
-    spaceFilter: nameless // create model based on nameless namespace
+    spaceFilter: (nameless|another_one) // create model based on nameless namespace
 };
 ```
 

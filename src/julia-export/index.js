@@ -18,12 +18,6 @@ class JuliaExport extends AbstractExport {
     let logger = this._container.logger;
     let valid = JuliaExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
-
-    if (q.spaceFilter instanceof Array) {
-      this.spaceFilter = q.spaceFilter;
-    } else if (typeof q.spaceFilter === 'string') {
-      this.spaceFilter = [q.spaceFilter];
-    }
   }
   get className(){
     return 'JuliaExport';
@@ -40,12 +34,9 @@ class JuliaExport extends AbstractExport {
     //let logger = this._container.logger;
     // create image for multiple namespaces
     let nsImages = [...this._container.namespaceStorage]
-      .filter((pair) => {
-        let allowedByFilter = typeof this.spaceFilter === 'undefined'
-          || this.spaceFilter.indexOf(pair[0]) !== -1;
-        return allowedByFilter && !pair[1].isAbstract;
-      })
-      .map((pair) => this.getJuliaImage(pair[1]));
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
+      .filter(([spaceName, ns]) => !ns.isAbstract)
+      .map(([spaceName, ns]) => this.getJuliaImage(ns));
 
     // create Content
     let image = {

@@ -6,10 +6,7 @@ const schema = {
   required: ['filepath'],
   properties: {
     filepath: {type: 'string', pattern: '^[\\w\\d\\\\/._!-]+$'},
-    spaceFilter: { oneOf: [
-      { type: 'array', items: { '$ref': '#/definitions/ID' } },
-      { '$ref': '#/definitions/ID' }
-    ]}
+    spaceFilter: { type: 'string' }
   },
   definitions: {
     ID: {
@@ -40,6 +37,8 @@ class AbstractExport extends Top {
     if (!valid) { this.errored = true; return; }
 
     if (q.filepath) this.filepath = q.filepath;
+    
+    this.spaceFilter = q.spaceFilter || '.+';
   }
   get className(){
     return 'AbstractExport';

@@ -11,7 +11,7 @@ describe('General argument checking', () => {
       filepath: './1.json',
       omit: ['num'],
       noUnitsExpr: true,
-      spaceFilter: ['one'],
+      spaceFilter: 'one',
       powTransform: 'function'
     });
     expect(p.logger).to.have.property('hasErrors').false;
@@ -20,7 +20,7 @@ describe('General argument checking', () => {
     expect(json_export).to.have.property('format', 'JSON');
     expect(json_export).to.have.deep.property('omit', ['num']);
     expect(json_export).to.have.property('noUnitsExpr', true);
-    expect(json_export).to.have.deep.property('spaceFilter', ['one']);
+    expect(json_export).to.have.deep.property('spaceFilter', 'one');
     p.logger.resetErrors();
   });
 
@@ -101,7 +101,7 @@ describe('General argument checking', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './1.txt',
-      spaceFilter: [12]
+      spaceFilter: 12
     });
     expect(p.logger).to.have.property('hasErrors').true;
     expect(json_export).to.be.instanceOf(p.classes.JSON);

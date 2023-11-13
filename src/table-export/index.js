@@ -68,7 +68,6 @@ class TableExport extends AbstractExport {
     if (!valid) { this.errored = true; return; }
 
     if (q.omitRows!==undefined) this.omitRows = q.omitRows;
-    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
     this.bookType = q.bookType ? q.bookType : 'csv';
 
     if (q.omit) this.omit = q.omit;
@@ -81,11 +80,9 @@ class TableExport extends AbstractExport {
   }
   makeSheet(){
     // filtered namespaces
-    let nsArray = [...this._container.namespaceStorage]
-      .map((pair) => pair[1]);
-    let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
-      ? nsArray
-      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let nsArrayFiltered = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
+      .map(([spaceName, ns]) => ns);
     
     // create array of flat
     let fArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {

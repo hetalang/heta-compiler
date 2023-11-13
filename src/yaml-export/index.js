@@ -22,7 +22,6 @@ class YAMLExport extends AbstractExport {
 
     if (q.omit) this.omit = q.omit;
     if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
-    if (q.spaceFilter) this.spaceFilter = q.spaceFilter;
   }
   get className(){
     return 'YAMLExport';
@@ -32,11 +31,9 @@ class YAMLExport extends AbstractExport {
   }
   makeText(){
     // filtered namespaces
-    let nsArray = [...this._container.namespaceStorage]
-      .map((pair) => pair[1]);
-    let nsArrayFiltered = typeof this.spaceFilter === 'undefined'
-      ? nsArray
-      : nsArray.filter((ns) => this.spaceFilter.indexOf(ns.spaceName) !== -1);
+    let nsArrayFiltered = [...this._container.namespaceStorage]
+      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
+      .map(([spaceName, ns]) => ns);
 
     // create qArr from NS
     let qArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {
