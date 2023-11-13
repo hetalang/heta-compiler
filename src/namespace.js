@@ -1,5 +1,6 @@
 const TopoSort = require('@insysbio/topo-sort');
 const { uniqBy, flatten } = require('./utils');
+const HetaLevelError = require('./heta-level-error');
 
 class Namespace extends Map {
   /**
@@ -152,7 +153,7 @@ class Namespace extends Map {
           return `  ${record.index} ~ ${assignment};`;
         })
         .join('\n');
-      let error = new Error(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
+      let error = new HetaLevelError(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
       error.circular = err.circular;
       throw error;
     }

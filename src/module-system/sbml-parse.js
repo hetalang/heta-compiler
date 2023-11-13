@@ -2,6 +2,7 @@ const _toMathExpr = require('./to-math-expr');
 const { xml2js } = require('xml-js');
 const { Unit } = require('../core/unit');
 const legalUnits = require('../legal-sbml-units');
+const HetaLevelError = require('../heta-level-error');
 
 /**
  * Transforms text content of SBML file to Q-array.
@@ -144,7 +145,7 @@ function jsbmlToQArr(JSBML){
     .flat(1)
     .filter((x) => x.name === 'algebraicRule');
   if (algebraicRules.length !== 0) {
-    throw new Error('"algebraicRule" from SBML module is not supported.');
+    throw new HetaLevelError('"algebraicRule" from SBML module is not supported.');
   }
 
   // rateRules
@@ -344,7 +345,7 @@ function compartmentToQ(x, unitDict = {}){
     } else {
       q.units = Unit.fromQ([{ kind: unitId }]);
       // the alternative solution is to throw undeclared units
-      //throw new Error(`No unitDeclaration "${unitId}" used for compartment "${q.id}"`);
+      //throw new HetaLevelError(`No unitDeclaration "${unitId}" used for compartment "${q.id}"`);
     }
   }
 
@@ -387,7 +388,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
     // find compartment units
     let compartmentComponent = qArr.find((component) => component.id === q.compartment);
     if (!compartmentComponent)
-      throw new Error(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
+      throw new HetaLevelError(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
     let compartmentUnits = compartmentComponent.units;
 
     // set species units
@@ -422,7 +423,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
           .simplify();
       }
       // alternative solution is to throw error for undeclared "substance"
-      // throw new Error(`No unitDeclaration "${substanceUnitId}" used for species "${q.id}"`);
+      // throw new HetaLevelError(`No unitDeclaration "${substanceUnitId}" used for species "${q.id}"`);
     }
   }
 
@@ -479,7 +480,7 @@ function reactionToQ(x){
   let fast = x.attributes?.fast === 'true' ;
   // q.aux.fast = fast;
   if (fast) {
-    throw new Error(`"fast" reactions "${q.id}" is not supported in SBML module.`);
+    throw new HetaLevelError(`"fast" reactions "${q.id}" is not supported in SBML module.`);
   }
 
   // products
@@ -493,7 +494,7 @@ function reactionToQ(x){
         let stoichiometryExpr = (y.elements || [])
           .filter((z) => z.name === 'stoichiometryMath');
         if (stoichiometryExpr.length > 0)
-          throw new Error('"stoichiometryMath" from SBML module is not supported.');
+          throw new HetaLevelError('"stoichiometryMath" from SBML module is not supported.');
 
         // get constant stoichiometry
         let stoichiometry = y.attributes?.stoichiometry || '1';
@@ -517,7 +518,7 @@ function reactionToQ(x){
         let stoichiometryExpr = (y.elements || [])
           .filter((z) => z.name === 'stoichiometryMath');
         if (stoichiometryExpr.length > 0)
-          throw new Error('"stoichiometryMath" from SBML module is not supported.');
+          throw new HetaLevelError('"stoichiometryMath" from SBML module is not supported.');
 
         // get constant stoichiometry
         let stoichiometry = y.attributes?.stoichiometry || '1';
@@ -574,7 +575,7 @@ function parameterToQ(x, unitDict = {}){
     } else {
       q.units = Unit.fromQ([{ kind: unitId }]);
       // alternative solution is to throw undeclared "unit"
-      //throw new Error(`No unitDeclaration "${unitId}" as required for parameter "${q.id}"`);
+      //throw new HetaLevelError(`No unitDeclaration "${unitId}" as required for parameter "${q.id}"`);
     }
   }
 
@@ -665,7 +666,7 @@ function eventToQ(x){
   }
   */
   if (delay !== undefined) {
-    throw new Error('"delay" in event is not supported in SBML module'); 
+    throw new HetaLevelError('"delay" in event is not supported in SBML module'); 
   }
   // assignments
   let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');

@@ -1,6 +1,7 @@
 const path = require('path');
 const TopoSort = require('@insysbio/topo-sort');
 const { cloneDeep } = require('../utils');
+const HetaLevelError = require('../heta-level-error');
 
 // module loaders
 const hetaLoader = require('./heta-module');
@@ -134,13 +135,18 @@ class ModuleSystem {
     if (typeof loader !== 'function') {
       throw new Error(`Module loader must be a function, got "${typeof loader}"`);
     }
+    
     try {
       let fileContent = this.fileHandler(filename);
       var parsed = loader(fileContent, options);
     } catch (e) {
-      let msg = e.message/* + ` when converting module "${filename}"`*/;
-      this.logger.error(msg, {type: 'ModuleError', filename: filename});
-      return [];
+      if (e.name === 'HetaLevelError') {
+        let msg = e.message + ` when converting module "${filename}"`;
+        this.logger.error(msg, {type: 'ModuleError', filename: filename});
+        return [];
+      } else {
+        throw e;
+      }
     }
 
     return parsed;
@@ -155,7 +161,7 @@ class ModuleSystem {
     try {
       return this.graph.sort();
     } catch (error) {
-      throw new Error(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
+      throw new HetaLevelError(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
     }
   }
 

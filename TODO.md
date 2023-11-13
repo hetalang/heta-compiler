@@ -30,12 +30,10 @@
 
 ## bugs
 
-- do not display error in sbml-parse module
-
 ## features
 
 - regular expression for spaceFilter
-- checking legal functions inside Expressions and functionDefinitian
+- checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - calculate units for pow function
 - remove unnecessary rules in export
@@ -51,7 +49,7 @@
 - `#move`, `#moveNS`
 - `#deleteNS` action
 - `#move`, `#moveNS`
-- remove support of `include` statement, use only `#include` action
+- remove support of `include` statement is deprecated, use `#include` action (v0.7.0)
 - check file format for modules
 - syntax highlight in web
 - add "ignoreCompartment" property in Species

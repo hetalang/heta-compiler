@@ -1,5 +1,6 @@
 const XLSX = require('xlsx');
 const _set = require('lodash/set');
+const HetaLevelError = require('../heta-level-error');
 
 /*
   This script mimics the behavior of function convertExcel() from "excel-as-json", see https://www.npmjs.com/package/excel-as-json
@@ -18,7 +19,7 @@ function convertExcelSync(src, dst = null, _options = {}){
   // reading file
   let workbook = XLSX.read(src, {type: 'buffer'});
   if (options.sheet >= workbook.SheetNames.length)
-    throw new Error(`There is no sheet #${options.sheet} in ${src}`);
+    throw new HetaLevelError(`There is no sheet #${options.sheet} in ${src}`);
 
   // get raw Objects
   let sheetName = workbook.SheetNames[options.sheet];
