@@ -30,6 +30,8 @@
 
 ## bugs
 
+- spaceFilter for HetaCode
+
 ## features
 
 - split by classes in table
@@ -46,7 +48,8 @@
 
 ## ideas
 
-- anather approach to check heta-compiler new version (for no internet connection)
+- another approach to check heta-compiler new version (for no internet connection)
+- usage of 0, 1 for Boolean type
 - deprecated `include` statement
 - `#move`, `#moveNS`
 - `#deleteNS` action

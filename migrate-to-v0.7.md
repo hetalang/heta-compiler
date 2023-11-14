@@ -111,6 +111,6 @@ Starting from Heta compiler v0.7.0 `spaceFilter` is an regular expression which 
 
     Keep in mind that abstract namespaces will not be exported for such formats as `DBSolve`, `SLV`, `Matlab`, `Mrgsolve`, `Simbio`.
 
-1. Delete __dist__ directory to avoid storing old exports. Try not to delete important files. Storing something important in the dist directory is a bed idea anyway.
+1. Delete __dist__ directory to avoid storing old exports. Try not to delete important files. Storing something important in the dist directory is a bad idea anyway.
 
 1. Check building with `heta build` and make a commit if you use git.
