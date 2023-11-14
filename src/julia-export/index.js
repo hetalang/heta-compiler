@@ -1,4 +1,4 @@
-const { AbstractExport } = require('../core/abstract-export');
+const { AbstractExport } = require('../abstract-export');
 /* global compiledTemplates */
 const pkg = require('../../package');
 require('./expression'); // to use method toJuliaString()

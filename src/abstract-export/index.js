@@ -1,4 +1,4 @@
-const { Top } = require('./top');
+const { Top } = require('../core/top');
 const { ajv } = require('../utils');
 
 const schema = {

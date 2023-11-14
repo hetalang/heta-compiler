@@ -3,7 +3,7 @@ const { Top } = require('../core/top');
 const { UnitDef } = require('../core/unit-def');
 const { FunctionDef } = require('../core/function-def');
 const { Scenario } = require('../core/scenario');
-// const { AbstractExport } = require('../core/abstract-export');
+// const { AbstractExport } = require('../abstract-export');
 // Component classes
 const { Component } = require('../core/component');
 const { Record } = require('../core/record');

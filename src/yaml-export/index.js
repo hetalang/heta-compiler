@@ -1,4 +1,4 @@
-const { AbstractExport } = require('../core/abstract-export');
+const { AbstractExport } = require('../abstract-export');
 const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _omit = require('lodash/omit');
 const { ajv } = require('../utils');

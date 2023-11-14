@@ -1,4 +1,4 @@
-const { AbstractExport } = require('../core/abstract-export');
+const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../utils');
 const _omit = require('lodash/omit');
 

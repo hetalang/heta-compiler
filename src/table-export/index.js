@@ -1,4 +1,4 @@
-const { AbstractExport } = require('../core/abstract-export');
+const { AbstractExport } = require('../abstract-export');
 const _omit = require('lodash/omit');
 const { ajv, intersection } = require('../utils');
 const XLSX = require('xlsx');

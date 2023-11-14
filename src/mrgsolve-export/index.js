@@ -1,4 +1,4 @@
-const { AbstractExport } = require('../core/abstract-export');
+const { AbstractExport } = require('../abstract-export');
 /* global compiledTemplates */
 require('./expression');
 const { ajv, intersection } = require('../utils');
