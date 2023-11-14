@@ -17,12 +17,10 @@ class AnotherXLSXExport extends XLSXExport {
   }
   makeSheet(){
     // filtered namespaces
-    let nsOutput = [...this._container.namespaceStorage]
-      .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
-      .map(([spaceName, ns]) => ns);
+    let nsOutput = this.selectedNamespaces();
 
     let qArr = nsOutput
-      .map((ns) => ns.toArray())
+      .map(([spaceName, ns]) => ns.toArray())
       .flat(Infinity)
       .filter((x) => !x.isCore && !x.instanceOf('UnitDef'))
       .map((x) => x.toFlat({useAnotherUnits: true}))

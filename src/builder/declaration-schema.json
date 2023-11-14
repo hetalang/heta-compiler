@@ -55,7 +55,7 @@
         "type": {"type": "string", "enum": ["heta", "table", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
         "source": {"type": "string", "default": "index.heta"},
         "sheet": { "type": "integer" },
-        "omitRows": { "type": "integer" }
+        "omitRows": { "type": "integer", "minimum": 0 }
       }
     }
   }

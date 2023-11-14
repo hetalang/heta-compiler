@@ -61,7 +61,7 @@ class JSONExport extends AbstractExport {
     
     return [{
       content: JSON.stringify(qArr, null, 2),
-      pathSuffix: '.json',
+      pathSuffix: '/output.json',
       type: 'text'
     }];
   }

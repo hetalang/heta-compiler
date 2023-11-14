@@ -40,7 +40,7 @@ class HetaCodeExport extends AbstractExport{
 
     return [{
       content: content,
-      pathSuffix: '.heta',
+      pathSuffix: '/output.heta',
       type: 'text'
     }];
   }

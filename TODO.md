@@ -32,6 +32,7 @@
 
 ## features
 
+- split by classes in table
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - calculate units for pow function

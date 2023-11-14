@@ -19,7 +19,7 @@ const sheetSequence = [
 const schema = {
   type: 'object',
   properties: {
-    omitRows: {type: 'number'},
+    omitRows: {type: 'integer', minimum: 0},
     omit: {type: 'array', items: { type: 'string' }},
     splitByClass: {type: 'boolean'},
     bookType: {
@@ -67,8 +67,8 @@ class TableExport extends AbstractExport {
     let valid = TableExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
-    if (q.omitRows!==undefined) this.omitRows = q.omitRows;
-    this.bookType = q.bookType ? q.bookType : 'csv';
+    this.omitRows = q.omitRows || 0;
+    this.bookType = q.bookType || 'csv';
 
     if (q.omit) this.omit = q.omit;
   }
@@ -139,12 +139,12 @@ class TableExport extends AbstractExport {
             return indexA - indexB;
           }
         })
-        .map(([name, value]) => {
+        .map(([name, value], i) => {
           let keys = value.map((x) => Object.keys(x)).flat(); // all headers
 
           return {
             content:  value,
-            pathSuffix: '',
+            pathSuffix: `#${i}`, // starting from 0
             type: 'sheet',
             name: name,
             headerSeq: intersection(propSequence, keys)
@@ -160,7 +160,7 @@ class TableExport extends AbstractExport {
 
       return [{
         content: fArr,
-        pathSuffix: '',
+        pathSuffix: '#0',
         type: 'sheet',
         name: this.space,
         headerSeq: sequence_out
@@ -173,11 +173,8 @@ class TableExport extends AbstractExport {
     
     let wb = XLSX.utils.book_new();
     out.forEach((x) => {
-      let omitRows = x.omitRows !== undefined
-        ? x.omitRows // use omitRows from out
-        : this.omitRows;
       let ws = XLSX.utils.json_to_sheet(
-        Array(omitRows).fill({}).concat(x.content),
+        Array(this.omitRows).fill({}).concat(x.content),
         { header: x.headerSeq, skipHeader: x.skipHeader } // XLSX tries to mutate header
       );
       XLSX.utils.book_append_sheet(wb, ws, x.name);
@@ -186,7 +183,7 @@ class TableExport extends AbstractExport {
     return [{
       content: XLSX.write(wb, { type: 'buffer', bookType: this.bookType}),
       type: 'buffer',
-      pathSuffix: bookTypes[this.bookType].fileExt
+      pathSuffix: '/output' + bookTypes[this.bookType].fileExt
     }];
   }
 

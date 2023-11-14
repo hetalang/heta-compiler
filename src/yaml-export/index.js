@@ -68,7 +68,7 @@ class YAMLExport extends AbstractExport {
     
     return [{
       content: yaml,
-      pathSuffix: '.yml',
+      pathSuffix: '/output.yml',
       type: 'text'
     }];
   }
