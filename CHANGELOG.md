@@ -1,5 +1,19 @@
 # Change Log
 
+## 0.7.0 - export interface updates
+
+- supports heta standard of v0.4.4
+- Support of SLV26, fix issues with lost events
+- set default `filepath` for export formats
+- store export files in personal folders
+- remove support of deprecated `@Export` class
+- `spaceFilter` as regular expression
+- check and display empty export
+- minor code refactoring
+- remove unnecessary lodash dependences
+- node support starting from 14
+- update and fix deps
+
 ## 0.6.20
 
 - support webpack: do not use constructor.name

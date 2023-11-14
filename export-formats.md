@@ -20,11 +20,13 @@ The general format for all export actions is the following:
 ```heta
 #export {
     format: JSON, // or other supported formats, required
-    filepath: path/to/output, // Relative or absolute path to generated directory or file
+    filepath: path/to/output, // Relative or absolute path to generated directory or file, not required
     spaceFilter: "regex-expression" // only filtered namespaces will be exported, see RegExp rules
     ... // other options
 };
 ```
+
+See also [Regular expressions syntax](https://en.wikipedia.org/wiki/Regular_expression).
 
 ## JSON
 
@@ -49,7 +51,7 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
     filepath: output, // save result in file "dist/output.json"
     omit: [aux.wiki], // omit aux.wiki properties from components
     noUnitsExpr: false, // save units in format UnitsExpr
-    spaceFilter: [ nameless, another ]
+    spaceFilter: "nameless|another"
 };
 ```
 
@@ -344,7 +346,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 #export {
     format: Matlab,
     filepath: matlab_code, // save result in directory "dist/matlab_code"
-    spaceFilter: (nameless|another_one) // create model based on nameless namespace
+    spaceFilter: (nameless|another_one) // create two models based on namespaces
 };
 ```
 

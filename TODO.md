@@ -46,6 +46,7 @@
 
 ## ideas
 
+- anather approach to check heta-compiler new version (for no internet connection)
 - deprecated `include` statement
 - `#move`, `#moveNS`
 - `#deleteNS` action
