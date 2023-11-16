@@ -35,7 +35,7 @@ class Reaction extends Process {
       }
       
       if (q.compartment !== undefined) this.compartment = q.compartment;
-      if (q.isAmount !== undefined) this.isAmount = q.isAmount;
+      if (q.isAmount !== undefined) this.isAmount = !!q.isAmount;
     }
     
     return this;

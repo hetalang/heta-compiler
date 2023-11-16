@@ -107,11 +107,11 @@
           "$ref": "#/definitions/AssignmentDict"
         },
         "boundary": {
-          "type": "boolean", "default": false,
+          "enum": [true, false, 1, 0], "default": false,
           "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
         },
         "output": {
-          "type": "boolean",
+          "enum": [true, false, 1, 0],
           "description": "Should be the record listed as an output"
         }
       }
@@ -132,7 +132,7 @@
         },
         "isAmount": {
           "description": "If it is false then the value represents the concentration, i.e. normalized to compartment.",
-          "type": "boolean",
+          "enum": [true, false, 1, 0],
           "default": false
         }
       }
@@ -165,7 +165,7 @@
     "Reaction": {
       "type": "object",
       "properties": {
-        "reversible": { "type": "boolean", "default": true },
+        "reversible": { "enum": [true, false, 1, 0], "default": true },
         "modifiers": {
           "type": "array",
           "items": {
@@ -175,7 +175,7 @@
             ]
           }
         },
-        "isAmount": { "type": "boolean" },
+        "isAmount": { "enum": [true, false, 1, 0] },
         "compartment": {
           "$ref": "#/definitions/ID"
         }
@@ -194,12 +194,12 @@
       "properties": {
         "atStart": {
           "description": "If true than the condition will be checked at start_",
-          "type": "boolean",
+          "enum": [true, false, 1, 0],
           "default": false
         },
         "active": {
           "description": "if false the event will not run.",
-          "type": "boolean",
+          "enum": [true, false, 1, 0],
           "default": true
         }
       }
@@ -220,7 +220,7 @@
         "trigger": {
           "oneOf": [
             { "$ref": "#/definitions/ExprString" },
-            { "type": "boolean" }
+            { "enum": [true, false, 1, 0] }
           ]
         }
       }
@@ -232,7 +232,7 @@
         "trigger": {
           "oneOf": [
             { "$ref": "#/definitions/ExprString" },
-            { "type": "boolean" }
+            { "enum": [true, false, 1, 0] }
           ]
         }
       }
@@ -253,7 +253,7 @@
       "type": "object",
       "description": "Input value. Upper and lower describes possible values. Scale describes transformation for fitting.",
       "properties": {
-        "free": { "type": "boolean" },
+        "free": { "enum": [true, false, 1, 0] },
         "num": { "type": "number" },
         "scale": { "type": "string", "enum": ["direct", "log", "logit"], "default": "direct" },
         "upper": { "type": "number" },
@@ -267,7 +267,7 @@
       "properties": {
         "slope": { "type": "number", "exclusiveMinimum": 0 },
         "intercept": { "type": "number" },
-        "output": { "type": "boolean" }
+        "output": { "enum": [true, false, 1, 0] }
       }
      },
 

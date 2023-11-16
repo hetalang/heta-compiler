@@ -42,8 +42,8 @@ class Record extends _Size {
         });
       }
   
-      if (q.boundary !== undefined) this.boundary = q.boundary;
-      if (q.output !== undefined) this.output = q.output;
+      if (q.boundary !== undefined) this.boundary = !!q.boundary;
+      if (q.output !== undefined) this.output = !!q.output;
     }
     
     return this;

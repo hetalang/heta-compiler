@@ -33,7 +33,7 @@ class Process extends Record {
           this.reversible = isReversible;
         }
       }
-      if (q.reversible !== undefined) this.reversible = q.reversible;
+      if (q.reversible !== undefined) this.reversible = !!q.reversible;
     }
     
     return this;

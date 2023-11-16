@@ -26,7 +26,7 @@ class TimeScale extends _Size { // implicit extend Numeric
     if (valid) {
       if (q.slope !== undefined) this.slope = q.slope;
       if (q.intercept !== undefined) this.intercept = q.intercept;
-      if (q.output !== undefined) this.output = q.output;
+      if (q.output !== undefined) this.output = !!q.output;
     }
 
     return this;

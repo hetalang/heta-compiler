@@ -22,7 +22,7 @@ class Const extends _Size { // implicit extend Numeric
 
     if (valid) {
       if (q.num !== undefined) this.num = q.num;
-      if (q.free !== undefined) this.free = q.free;
+      if (q.free !== undefined) this.free = !!q.free;
       if (q.scale !== undefined) this.scale = q.scale;
       if (q.lower !== undefined) this.lower = q.lower;
       if (q.upper !== undefined) this.upper = q.upper;

@@ -19,11 +19,9 @@ class _Switcher extends Component {
 
     if (valid) {
       if (typeof q.atStart !== 'undefined') {
-        this.atStart = q.atStart;
+        this.atStart = !!q.atStart;
       }
-      if (q.active === false) {
-        this.active = false;
-      }
+      q.active !== undefined && (this.active = !!q.active);
     }
 
     return this;

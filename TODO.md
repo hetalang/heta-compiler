@@ -34,6 +34,7 @@
 
 ## features
 
+- генерация init c platform.yaml
 - split by classes in table
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
@@ -49,7 +50,6 @@
 ## ideas
 
 - another approach to check heta-compiler new version (for no internet connection)
-- usage of 0, 1 for Boolean type
 - deprecated `include` statement
 - `#move`, `#moveNS`
 - `#deleteNS` action
