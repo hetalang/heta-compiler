@@ -144,6 +144,10 @@ class ModuleSystem {
         let msg = e.message + ` when converting module "${filename}"`;
         this.logger.error(msg, {type: 'ModuleError', filename: filename});
         return [];
+      } else if (e.code === 'ENOENT') {
+        let msg = e.message;
+        this.logger.error(msg, {type: 'ModuleError', filename: filename});
+        return [];
       } else {
         throw e;
       }

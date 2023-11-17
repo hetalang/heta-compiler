@@ -23,11 +23,11 @@
     "builderVersion": {"type": "string", "default": "*"},
     "options": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
         "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
         "logPath": {"type": "string", "default": "build.log"},
-        "logLevel": {"type": "string", "default": "info"},
+        "logLevel": {"type": "string", "default": "info", "enum": ["panic", "info", "warn", "error"]},
         "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "unitsCheck": {"type": "boolean", "default": false},
         "skipExport": {"type": "boolean", "default": false},

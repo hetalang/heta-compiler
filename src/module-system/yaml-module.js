@@ -9,7 +9,7 @@ const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
  */
 function yamlLoader(fileContent){
   let fileText = fileContent.toString('utf-8');
-  let parsed = jsYAML.safeLoad(fileText);
+  let parsed = jsYAML.load(fileText);
   
   return parsed;
 }

@@ -35,7 +35,7 @@
     "fs-extra": "^7.0.1",
     "heta-parser": "^0.3.16",
     "inquirer": "^7.3.3",
-    "js-yaml": "^3.14.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "markdown-it": "^12.3.2",
     "mathjs": "^9.4.0",

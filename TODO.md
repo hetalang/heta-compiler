@@ -46,10 +46,11 @@
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - atStart to exports: Matlab, DBSolve
 - remove `isAmount`, `compartment` properties from `@Reaction`
+- another approach to check heta-compiler new version (for no internet connection)
 
 ## ideas
 
-- another approach to check heta-compiler new version (for no internet connection)
+- use the syntax 1//3 for rational numbers
 - deprecated `include` statement
 - `#move`, `#moveNS`
 - `#deleteNS` action

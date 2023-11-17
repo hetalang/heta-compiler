@@ -3,7 +3,7 @@ const program = require('commander');
 const fs = require('fs');
 const path = require('path');
 const { Builder } = require('../src/builder');
-const { safeLoad } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const { load } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _ = require('lodash');
 const semver = require('semver');
 const { version, bugs } = require('../package');
@@ -68,7 +68,7 @@ program
     process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
-      declaration = safeLoad(declarationText);
+      declaration = load(declarationText);
       if (typeof declaration !== 'object'){
         throw new Error('Not an object.');
       }

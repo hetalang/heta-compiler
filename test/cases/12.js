@@ -3,7 +3,7 @@ const { Builder } = require('../../src/builder');
 const { expect, use } = require('chai');
 const chaiXml = require('chai-xml');
 use(chaiXml);
-//const { safeLoad } = require('js-yaml');
+//const { load } = require('js-yaml');
 const fs = require('fs-extra');
 //const { slvParse } = require('slv-utils');
 

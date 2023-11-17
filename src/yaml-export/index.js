@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../abstract-export');
-const { safeDump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const { dump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _omit = require('lodash/omit');
 const { ajv } = require('../utils');
 
@@ -59,7 +59,7 @@ class YAMLExport extends AbstractExport {
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);
-    let yaml = safeDump(qArr, {
+    let yaml = dump(qArr, {
       skipInvalid: true, // TOFIX: ???
       flowLevel: 3,
       sortKeys: compareFunction,
