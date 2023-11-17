@@ -19,6 +19,7 @@ jobs:
         node-version: 14.x
     - run: npm ci
     - run: npm run jsdoc
+    - run: cp -f src/builder/declaration-schema.json docs
     - name: Deploy to "gh-pages"
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
