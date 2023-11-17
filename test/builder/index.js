@@ -13,15 +13,21 @@ describe('Test Builder.', () => {
 
 describe('Errors in declaration.', () => {
   it('Empty declaration throws.', () => {
-    let b = new Builder({options: {logLevel: 'panic'}});
-    expect(b.container.hetaErrors()).to.be.lengthOf(1);
+    expect(() => {
+      let b = new Builder({options: {logLevel: 'panic'}});
+    }).to.throw();
+    //expect(b.container.hetaErrors()).to.be.lengthOf(1);
   });
   it('Wrong prop type.', () => {
-    let b = new Builder({id: 'test', notes: 1.1, options: {logLevel: 'panic'}});
-    expect(b.container.hetaErrors()).to.be.lengthOf(1);
+    expect(() => {
+      let b = new Builder({id: 'test', notes: 1.1, options: {logLevel: 'panic'}});
+    }).to.throw();
+    //expect(b.container.hetaErrors()).to.be.lengthOf(1);
   });
   it('Wrong version format.', () => {
-    let b = new Builder({id: 'test', builderVersion: '0.100.0', options: {logLevel: 'panic'}});
-    expect(b.container.hetaErrors()).to.be.lengthOf(1);
+    expect(() => {
+      let b = new Builder({id: 'test', builderVersion: '0.100.0', options: {logLevel: 'panic'}});
+    }).to.throw();
+    //expect(b.container.hetaErrors()).to.be.lengthOf(1);
   });
 });
