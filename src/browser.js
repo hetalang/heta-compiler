@@ -14,6 +14,7 @@ const coreItems = require('./container/core-items');
 const ModuleSystem = require('./module-system');
 const { Transport } = require('./logger');
 const nunjucks = require('nunjucks');
+const HetaLevelError = require('./heta-level-error');
 
 // set nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(new nunjucks.WebLoader('/templates'), { autoescape: false });
@@ -65,4 +66,5 @@ module.exports = {
   nunjucksEnv,
   ModuleSystem,
   Transport,
+  HetaLevelError,
 };

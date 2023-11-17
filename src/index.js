@@ -2,6 +2,7 @@ const Container = require('./container');
 const coreItems = require('./container/core-items');
 const ModuleSystem = require('./module-system');
 const { Transport } = require('./logger');
+const HetaLevelError = require('./heta-level-error');
 const nunjucks = require('nunjucks');
 
 // set nunjucks environment
@@ -54,4 +55,5 @@ module.exports = {
   nunjucksEnv,
   ModuleSystem,
   Transport,
+  HetaLevelError,
 };
