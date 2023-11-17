@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
-const { Container } = require('../index');
+const { Container, HetaLevelError } = require('../index');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 
@@ -52,7 +52,7 @@ class Builder {
       validate.errors.forEach((x) => {
         this.logger.error(`${x.dataPath} ${x.message}`, {type: 'BuilderError'});
       });
-      return;
+      throw new HetaLevelError('Wrong structure of platform file.');
     }
 
     // file paths

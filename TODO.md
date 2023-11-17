@@ -34,7 +34,8 @@
 
 ## features
 
-- генерация init c platform.yaml
+- https://github.com/hetalang/heta-compiler/declaration-schema.json
+- write reusable `Build` class
 - split by classes in table
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
@@ -50,6 +51,7 @@
 
 ## ideas
 
+- generarion of 'platform.yml' by `heta init`
 - use the syntax 1//3 for rational numbers
 - deprecated `include` statement
 - `#move`, `#moveNS`

@@ -112,10 +112,13 @@ program
     var builder = new Builder(declaration, targetDir);
     builder.run();
   } catch(error) {
-    process.stdout.write(contactMessage + '\n');
-    process.stdout.write(error.stack);
+    if (error.name === 'HetaLevelError') {
+      process.stdout.write(error.message + '\nSTOP!\n');
+    } else {
+      process.stdout.write(contactMessage + '\n');
+      process.stdout.write(error.stack);
+    }
     process.exit(1);
-    //throw error;
   }
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
