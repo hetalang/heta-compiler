@@ -34,7 +34,6 @@
 
 ## features
 
-- https://github.com/hetalang/heta-compiler/declaration-schema.json
 - write reusable `Build` class
 - split by classes in table
 - checking legal functions inside Expressions and functionDefinition
