@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "description" : "Describes platform.json file in Heta compiler.",
+  "type": "object",
+  "required": ["options", "importModule"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {"type": "string"},
+    "notes": {"type": "string"},
+    "version": {"type": "string"},
+    "keywords": {"type": "array", "items": {"type": "string"}},
+    "homepage": {"type": "string"},
+    "repository": {
+      "type": "object",
+      "properties": {
+        "type": {"type": "string"},
+        "url": {"type": "string"}
+      }
+    },
+    "license" : {"type": "string", "default": "UNLICENSED", "description": "see https://spdx.org/licenses/"},
+    "private": {"type": "boolean"},
+    "contributors": {"type": "array", "items": {"type": "string", "example": "Your Name <email@example.com> (http://example.com)"}},
+    "builderVersion": {"type": "string", "default": "*"},
+    "options": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
+        "logPath": {"type": "string", "default": "build.log"},
+        "logLevel": {"type": "string", "default": "info", "enum": ["panic", "info", "warn", "error"]},
+        "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
+        "unitsCheck": {"type": "boolean", "default": false},
+        "skipExport": {"type": "boolean", "default": false},
+        "juliaOnly": {"type": "boolean", "default": false},
+        "distDir": {"type": "string", "default": "dist" },
+        "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
+        "metaDir": {"type": "string", "default": "meta" },
+        "exitWithoutError": {"type": "boolean", "default": false}
+      },
+      "default": {"debug": false, "logLevel": "info"}
+    },
+    "scripts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "afterInit": {"type": "string"},
+        "afterImports": {"type": "string"},
+        "afterExports": {"type": "string"}
+      }
+    },
+    "importModule": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "type": {"type": "string", "enum": ["heta", "table", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
+        "source": {"type": "string", "default": "index.heta"},
+        "sheet": { "type": "integer" },
+        "omitRows": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
