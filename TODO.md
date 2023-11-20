@@ -30,12 +30,9 @@
 
 ## bugs
 
-- spaceFilter for HetaCode
-
 ## features
 
 - write reusable `Build` class
-- split by classes in table
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - calculate units for pow function
@@ -46,7 +43,6 @@
 - highlight multiline comments in Heta dictionary and array (with/without comma)
 - atStart to exports: Matlab, DBSolve
 - remove `isAmount`, `compartment` properties from `@Reaction`
-- another approach to check heta-compiler new version (for no internet connection)
 
 ## ideas
 
@@ -70,9 +66,6 @@
 - updating properties with `one::s1.assignments.start_ 5.5;`
 
 ## remove lodash
-
-https://medium.com/swlh/are-we-ready-to-replace-lodash-60cd651f6c58
-https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
 
 - _get
 - _set

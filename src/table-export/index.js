@@ -34,16 +34,16 @@ const schema = {
 };
 
 const bookTypes = {
-  xlsx: {fileExt: '.xlsx', containerSheets: 'ZIP', description: 'multiExcel 2007+ XML Format'},
-  xlsm: {fileExt: '.xlsm', containerSheets: 'ZIP', description: 'multiExcel 2007+ Macro XML Format'},
-  xlsb: {fileExt: '.xlsb', containerSheets: 'ZIP', description: 'multiExcel 2007+ Binary Format'},
-  biff8: {fileExt: '.xls', containerSheets: 'CFB', description: 'multiExcel 97-2004 Workbook Format'},
-  biff5: {fileExt: '.xls', containerSheets: 'CFB', description: 'multiExcel 5.0/95 Workbook Format'},
-  biff4: {fileExt: '.xls', containerSheets: 'none', description: 'singleExcel 4.0 Worksheet Format'},
-  biff3: {fileExt: '.xls', containerSheets: 'none', description: 'singleExcel 3.0 Worksheet Format'},
-  biff2: {fileExt: '.xls', containerSheets: 'none', description: 'singleExcel 2.0 Worksheet Format'},
-  xlml: {fileExt: '.xls', containerSheets: 'none', description: 'multiExcel 2003-2004 (SpreadsheetML)'},
-  ods: {fileExt: '.ods', containerSheets: 'ZIP', description: 'multiOpenDocument Spreadsheet'},
+  xlsx: {fileExt: '.xlsx', containerSheets: 'ZIP', description: 'multiExcel 2007+ XML Format', multischeet: true},
+  xlsm: {fileExt: '.xlsm', containerSheets: 'ZIP', description: 'multiExcel 2007+ Macro XML Format', multischeet: true},
+  xlsb: {fileExt: '.xlsb', containerSheets: 'ZIP', description: 'multiExcel 2007+ Binary Format', multischeet: true},
+  biff8: {fileExt: '.xls', containerSheets: 'CFB', description: 'multiExcel 97-2004 Workbook Format', multischeet: true},
+  biff5: {fileExt: '.xls', containerSheets: 'CFB', description: 'multiExcel 5.0/95 Workbook Format', multischeet: true},
+  biff4: {fileExt: '.xls', containerSheets: 'none', description: 'singleExcel 4.0 Worksheet Format', multischeet: true},
+  biff3: {fileExt: '.xls', containerSheets: 'none', description: 'singleExcel 3.0 Worksheet Format', multischeet: true},
+  biff2: {fileExt: '.xls', containerSheets: 'none', description: 'singleExcel 2.0 Worksheet Format', multischeet: true},
+  xlml: {fileExt: '.xls', containerSheets: 'none', description: 'multiExcel 2003-2004 (SpreadsheetML)', multischeet: true},
+  ods: {fileExt: '.ods', containerSheets: 'ZIP', description: 'multiOpenDocument Spreadsheet', multischeet: true},
   fods: {fileExt: '.fods', containerSheets: 'none', description: 'multiFlat OpenDocument Spreadsheet'},
   wk3: {fileExt: '.wk3', containerSheets: 'none', description: 'singleLotus Workbook (WK3)'},
   csv: {fileExt: '.csv', containerSheets: 'none', description: 'singleComma Separated Values'},
@@ -69,6 +69,7 @@ class TableExport extends AbstractExport {
 
     this.omitRows = q.omitRows || 0;
     this.bookType = q.bookType || 'csv';
+    if (q.splitByClass!==undefined) this.splitByClass = q.splitByClass;
 
     if (q.omit) this.omit = q.omit;
   }
@@ -162,7 +163,7 @@ class TableExport extends AbstractExport {
         content: fArr,
         pathSuffix: '#0',
         type: 'sheet',
-        name: this.space,
+        name: 'output',
         headerSeq: sequence_out
       }];
     }
@@ -179,12 +180,26 @@ class TableExport extends AbstractExport {
       );
       XLSX.utils.book_append_sheet(wb, ws, x.name);
     });
+
+    let bookType = bookTypes[this.bookType];
+
+    if (bookType.multischeet) {
+      return [{
+        content: XLSX.write(wb, { type: 'buffer', bookType: this.bookType}),
+        type: 'buffer',
+        pathSuffix: '/output' + bookType.fileExt
+      }];
+    } else {
+      return wb.SheetNames.map((key, i) => {
+        return {
+          content: XLSX.write(wb, { type: 'buffer', bookType: this.bookType, sheet: i}),
+          type: 'buffer',
+          pathSuffix: '/' + key + bookType.fileExt
+        };
+      });
+    }
   
-    return [{
-      content: XLSX.write(wb, { type: 'buffer', bookType: this.bookType}),
-      type: 'buffer',
-      pathSuffix: '/output' + bookTypes[this.bookType].fileExt
-    }];
+
   }
 
   static get validate(){
