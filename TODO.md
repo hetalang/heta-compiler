@@ -30,6 +30,9 @@
 
 ## bugs
 
+- wrong figures for abstract namespaces in DOT: no references to compartment
+- nothing is dislayed if you use wrong cli command: `heta builds`
+
 ## features
 
 - write reusable `Build` class

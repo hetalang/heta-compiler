@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.7.1
+
+- use 1/0 as boolean
+- fix errors if platform.json is incorrect
+- `splitByClass` for table export
+- update deps
+
 ## 0.7.0 - export interface updates
 
 - supports heta standard of v0.4.4
