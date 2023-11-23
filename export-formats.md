@@ -13,6 +13,7 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [XLSX](#xlsx)
 - [Julia](#julia)
 - [Matlab](#matlab)
+- [DOT](#dot)
 
 See also [Features support table](#features-support)
 
@@ -31,6 +32,7 @@ See also [Regular expressions syntax](https://en.wikipedia.org/wiki/Regular_expr
 ## JSON
 
 Export to [JSON structure](https://www.json.org/) (array) storing the content of whole platform or selected namespaces (see spaceFilter option).
+Can work with `abstract` namespaces.
 
 ### Properties
 
@@ -41,7 +43,7 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
 
 ### Output files
 
-**[filepath].json** : all content created for selected space.
+**[filepath]/output.json** : all content created for selected space.
 
 **Example**
 
@@ -58,6 +60,7 @@ Export to [JSON structure](https://www.json.org/) (array) storing the content of
 ## YAML
 
 Export to [YAML structure](https://yaml.org/) (array) representing the content of namespace.
+Can work with `abstract` namespaces.
 
 ### Properties
 
@@ -65,7 +68,7 @@ All options is the same as for [JSON format](#json).
 
 ### Output files
 
-**[filepath].yml** : all content created for selected space.
+**[filepath]/output.yml** : all content created for selected space.
 
 **Example**
 
@@ -155,6 +158,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 ## SBML
 
 Export to [SBML format](http://sbml.org/Main_Page).
+Can work with `abstract` namespaces.
 
 ### Properties
 
@@ -233,6 +237,7 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 To export platform content in tabular format: CSV, Excel, etc.
 The format of tables corresponds to the tabular (xlsx) heta module. 
 It can be loaded as a module in another projects.
+Can work with `abstract` namespaces.
 
 This statement combines a series of formats supported by <https://www.npmjs.com/package/xlsx> library.
 For the list of supported files see the docs <https://github.com/SheetJS/sheetjs#supported-output-formats>.
@@ -244,10 +249,13 @@ For the list of supported files see the docs <https://github.com/SheetJS/sheetjs
 | omitRows | number | | | | If set this creates empty rows in output sheets. |
 | omit | string[] | | | | Array of properties paths to exclude from output. |
 | bookType | string[] | | `csv` | | One of the supported file types, see xlsx docs. |
+| splitByClass | boolean | | | | If `true` the components will be split by class and saved as several sheets: one sheet/file per a class. |
 
 ### Output files
 
-**[filepath].???** : Table file. The extension depends on `bookType` property.
+**[filepath]/output.[extension]** : Table file. The extension depends on `bookType` property.
+or
+**[filepath]/[Class].[extension]** : If you use CSV and similar one-page file types.
 
 **Example 1:**
 
@@ -275,17 +283,16 @@ For the list of supported files see the docs <https://github.com/SheetJS/sheetjs
 ## XLSX
 
 Creation of Excel file (.xlsx).
-This works in the same way as the `Table` format with `bookType: xlsx` but it also has an additional `splitByClass` property.
+This works in the same way as the `Table` format with `bookType: xlsx`.
+Can work with `abstract` namespaces.
 
 ### Properties
 
-| property | type | required | default | ref | description | 
-| ---------|------|----------|---------|-----|-------------|
-| splitByClass | boolean | | | | If `true` the components will be split by class and saved as several sheets: one sheet per a class. |
+-
 
 ### Output files
 
-**[filepath].xlsx** : File which can be opened in Excel.
+**[filepath]/output.xlsx** : File which can be opened in Excel.
 
 **Example:**
 
@@ -309,7 +316,7 @@ Creation of Julia files (.jl).
 
 ### Output files
 
-**[filepath]/model.jl** : File storing model code.
+**[filepath]/model.jl** : File storing model code for all namespaces.
 **[filepath]/run.jl** : Code to run model.
 
 **Example:**
@@ -350,28 +357,50 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 };
 ```
 
+## Dot
+
+Export namespaces to the graph in format (See detaild in https://graphviz.org/).
+Each namespace in separate file.
+
+### Properties
+
+-
+
+### Output files
+
+**[filepath]/[namespace].m** : File storing model code.
+
+**Example:**
+
+```heta
+#export {
+    format: Dot,
+    filepath: schemes, // save result in directory "dist/schemes"
+};
+```
+
 ## Features support
 
 *na* means "not applicable"
 
-| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML | JSON, YAML | XLSX |
-|--|--|--|--|--|--|--|--|--|--|
-|`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ 
-|`@TimeSwitcher` class                 |+  |+  |+  |+  |+  |+ |+ |+ |+
-|`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+
-|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |- |+ |+ |+
-|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+
-|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |+ |+ |+ |+ |+ |+
-|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+
-|`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+
-|`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|`@DSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+
-|`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na
-|MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+
-|MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+
-|MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+
-|MathExpr: `piecewise` function                          |- |- |+ |- |+ |+ |+ |+ |+
-|MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+
-|MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+
-|Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+
-|`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+
+| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML | JSON, YAML | Table | Dot
+|--|--|--|--|--|--|--|--|--|--|--|
+|`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ |na 
+|`@TimeSwitcher` class                 |+  |+  |+  |+  |+  |+ |+ |+ |+ |na 
+|`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |- |+ |+ |+ |na 
+|`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|`@CSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na |na |na |na 
+|`@DSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|`@DSwitcher` with interpolation                         |- |- |+ |- |+ |+ |na|na|na |na 
+|MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na 
+|MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na 
+|MathExpr: `piecewise` function                          |- |- |+ |- |+ |+ |+ |+ |+ |na 
+|MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+ |na 
+|MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+ |na 
+|Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+ |na 
+|`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+ |na

@@ -70,6 +70,13 @@ Starting from Heta compiler v0.7.0 `spaceFilter` is an regular expression which 
 
     *If you use Git you should commit the latest changes before updating formats.*
 
+1. Check Node version
+
+    ```bash
+    node -v
+    # must be 14.0.0 or newer
+    ```
+
 1. Install the latest version of **Heta compiler**.
 
     ```bash
