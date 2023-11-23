@@ -251,6 +251,14 @@ For the list of supported files see the docs <https://github.com/SheetJS/sheetjs
 | bookType | string[] | | `csv` | | One of the supported file types, see xlsx docs. |
 | splitByClass | boolean | | | | If `true` the components will be split by class and saved as several sheets: one sheet/file per a class. |
 
+**bookType**
+
+| Multi-scheets formats | Single-scheet format |
+| --------------------- | -------------------- |
+| xlsx (.xlsx), xlsm (.xlsm), xlsb (.xlsb), biff8 (.xls), | wk3 (.wk3), csv (.csv), txt (.txt), sylk (.sylk), |
+  biff5 (.xls), biff4 (.xls), biff3 (.xls), biff2 (.xls), | html (.html), dif (.dif), dbf (.dbf), wk1 (.dbf), |
+  xlml (.xls), ods (.ods), fods (.fods)                   | rtf (.rtf), prn (.prn), eth (.eth) |  
+
 ### Output files
 
 **[filepath]/output.[extension]** : Table file. The extension depends on `bookType` property.
