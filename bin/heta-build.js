@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const program = require('commander');
+const { Command } = require('commander');
+const program = new Command();
 const fs = require('fs');
 const path = require('path');
 const { Builder } = require('../src/builder');
@@ -19,6 +20,7 @@ let contactMessage = colors.bgRed(`
 `);
 
 program
+  .name('heta build')
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
@@ -39,11 +41,13 @@ program
   .parse(process.argv);
 
 (async () => {
+  let args = program.args;
+  let opts = program.opts();
   // print newer version message
-  if (!program.skipUpdates) await printVersionMessage();
+  if (!opts.skipUpdates) await printVersionMessage();
 
   // set target directory of platform and check if exist
-  let targetDir = path.resolve(program.args[0] || '.');
+  let targetDir = path.resolve(args[0] || '.');
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(1); // BRAKE
@@ -52,16 +56,16 @@ program
   // === read declaration file ===
   // search
   let searches = ['', '.json', '.json5', '.yml']
-    .map((ext) => path.join(targetDir, (program.declaration || 'platform') + ext));
+    .map((ext) => path.join(targetDir, (opts.declaration || 'platform') + ext));
   let extensionNumber = searches
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
-  if (!program.declaration && extensionNumber === -1) {
+  if (!opts.declaration && extensionNumber === -1) {
     process.stdout.write('No declaration file, running with defaults...\n');
     var declaration = {};
   } else if (extensionNumber === -1) {
-    process.stdout.write(`Declaration file "${program.declaration}" not found.\nSTOP!`);
+    process.stdout.write(`Declaration file "${opts.declaration}" not found.\nSTOP!`);
     process.exit(1); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
@@ -81,17 +85,17 @@ program
   // === options from CLI ===
   let CLIDeclaration = {
     options: {
-      unitsCheck: program.unitsCheck,
-      skipExport: program.skipExport,
-      logMode: program.logMode,
-      debug: program.debug,
-      juliaOnly: program.juliaOnly,
-      distDir: program.distDir,
-      metaDir: program.metaDir
+      unitsCheck: opts.unitsCheck,
+      skipExport: opts.skipExport,
+      logMode: opts.logMode,
+      debug: opts.debug,
+      juliaOnly: opts.juliaOnly,
+      distDir: opts.distDir,
+      metaDir: opts.metaDir
     },
     importModule: {
-      source: program.source,
-      type: program.type
+      source: opts.source,
+      type: opts.type
     }
   };
 

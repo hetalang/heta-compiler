@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
-
-const program = require('commander');
+const { Command } = require('commander');
+const program = new Command('heta');
 const pkg = require('../package');
 
 let version = pkg.version;

@@ -31,7 +31,7 @@
     "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
     "colors": "^1.4.0",
-    "commander": "^2.20.3",
+    "commander": "^11.1.0",
     "fs-extra": "^7.0.1",
     "heta-parser": "^0.3.16",
     "inquirer": "^7.3.3",

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const program = require('commander');
+const { Command } = require('commander');
+const program = new Command();
 const fs = require('fs-extra');
 const path = require('path');
 const { prompt } = require('inquirer');
@@ -39,33 +40,37 @@ const defaultPlatform = {
 };
 
 program
+  .name('heta init')
   .description('Creates template heta platform files in directory')
   .usage('[options] [dir]')
   .option('-f, --force', 'rewrite files in target directory')
   .option('-s, --silent', 'use silent mode with default options')
   .parse(process.argv);
 
+let args = program.args;
+let opts = program.opts();
+
 // initialize file paths
-let targetDir = path.resolve(program.args[0] || '.');
+let targetDir = path.resolve(args[0] || '.');
 let filePath = path.join(targetDir, 'platform.json');
 console.log('Creating a template platform in directory: "' + targetDir + '"...');
 
 // directory does not exist
-if(!program.force && !fs.existsSync(targetDir)){
+if(!opts.force && !fs.existsSync(targetDir)){
   console.log(`Directory ${targetDir} does not exist. Use --force option to create directory.`);
   console.log('STOP.');
   process.exit(1);
 }
 
 // files already exists
-if(!program.force && fs.existsSync(filePath)){
+if(!opts.force && fs.existsSync(filePath)){
   console.log('"platform.json" file already exists. Use --force option to rewrite file.');
   console.log('STOP.');
   process.exit(1);
 }
 
 // silent mode
-if(program.silent){
+if(opts.silent){
   let platform = defaultPlatform;
 
   // saving files
