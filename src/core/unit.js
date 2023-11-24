@@ -150,7 +150,14 @@ class Unit extends Array {
     if (typeof n !== 'number') throw new TypeError('n in power must be a Number, got' + n);
 
     return this.map((item) => {
-      return Object.assign({}, item, {exponent: n * item.exponent});
+      return Object.assign({}, item, {exponent: item.exponent * n});
+    });
+  }
+  root(n = 1) {
+    if (typeof n !== 'number') throw new TypeError('n in power must be a Number, got' + n);
+
+    return this.map((item) => {
+      return Object.assign({}, item, {exponent: item.exponent / n});
     });
   }
   /**

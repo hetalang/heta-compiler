@@ -47,7 +47,6 @@
 ## ideas
 
 - generarion of 'platform.yml' by `heta init`
-- use the syntax 1//3 for rational numbers
 - deprecated `include` statement
 - `#move`, `#moveNS`
 - `#deleteNS` action

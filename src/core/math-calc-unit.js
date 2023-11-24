@@ -63,11 +63,15 @@ function _calcUnit(_this, record){
         logger.warn(`Units inconsistency for "${record.index}" for logical operators here"${_this.toString()}", some of them is not dimensionless : "${argUnit}"`);
       }
       return new Unit();
-    } else if (_this.fn === 'pow') {
-      if (_this.args[1].type === 'ConstantNode') { // pow(x, 3)
-        let n = _this.args[1].value;
-        return argUnit[0].power(n);
-      } else { // pow(x, y)
+    } else if (_this.fn === 'pow') { // ^
+      let pArg = _this.args[1];
+      if (pArg.type === 'ConstantNode') { // x ^ 3
+        return argUnit[0].power(pArg.value);
+      } else if (pArg.type === 'ParenthesisNode' && pArg.content?.fn === 'divide' && pArg.content.args[0]?.type === 'ConstantNode' && pArg.content.args[1]?.type === 'ConstantNode') { // x ^ (1/2)
+        let numerator = pArg.content.args[0].value;
+        let denominator = pArg.content.args[1].value;
+        return argUnit[0].power(numerator).root(denominator);
+      } else { // x ^ y
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
           logger.warn(`Units inconsistency for "${record.index}": power arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
@@ -122,11 +126,15 @@ function _calcUnit(_this, record){
     } else if (_this.fn.name === 'cube') { // cube()
       return argUnit[0].power(3);
     } else if (_this.fn.name === 'sqrt') { // sqrt()
-      return argUnit[0].power(0.5);
+      return argUnit[0].root(2);
     } else if (_this.fn.name === 'pow') { // pow()
-      if (_this.args[1].type === 'ConstantNode') { // pow(x, 2)
-        let n = _this.args[1].value;
-        return argUnit[0].power(n);
+      let pArg = _this.args[1];
+      if (pArg.type === 'ConstantNode') { // pow(x, 2)
+        return argUnit[0].power(pArg.value);
+      } else if (pArg.fn === 'divide' && pArg.args[0]?.type === 'ConstantNode' && pArg.args[1]?.type === 'ConstantNode') { // pow(x, 1/2)
+        let numerator = pArg.args[0].value;
+        let denominator = pArg.args[1].value;
+        return argUnit[0].power(numerator).root(denominator);
       } else { // pow(x, y)
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
@@ -136,11 +144,11 @@ function _calcUnit(_this, record){
         return argUnit[0];
       }
     } else if (_this.fn.name === 'nthRoot' && _this.args.length === 1) { // nthRoot()
-      return argUnit[0].power(0.5);
+      return argUnit[0].root(2);
     } else if (_this.fn.name === 'nthRoot') {
       if (_this.args[1].type === 'ConstantNode') { // nthRoot(x, 3)
         let n = _this.args[1].value;
-        return argUnit[0].power(1/n);
+        return argUnit[0].root(n);
       } else { // nthRoot(x, y)
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();

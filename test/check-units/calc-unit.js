@@ -34,6 +34,10 @@ let qArr = [
   {id: 'y12', class: 'Record', assignments: {start_: 'piecewise(k3, x1 >= k2, k2)'}},
   {id: 'y13', class: 'Record', assignments: {start_: 'piecewise(k3, x1 >= k2)'}},
   {id: 'y14', class: 'Record', assignments: {start_: 'piecewise(1, x1 >= k2, 2, x1 >= 2*k2, 0)'}},
+  // fraction in power
+  {id: 'x6', class: 'Record', units: 'metre^3', assignments: {start_: '1'}},
+  {id: 'y15', class: 'Record', assignments: {start_: 'x6^(2/3)'}},
+  {id: 'y16', class: 'Record', assignments: {start_: 'pow(x6, 2/3)'}},
 ];
 
 describe('Testing checkUnits() for components', () => {
@@ -198,6 +202,20 @@ describe('Testing checkUnits() for components', () => {
     let expr = y14.assignments.start_;
     let unit = expr.calcUnit(y14).toString();
     expect(unit).to.be.equal('dimensionless');
+  });
+
+  it('pow with fractions x^(1/2)', () => {
+    let y15 = p.namespaceStorage.get('nameless').get('y15');
+    let expr = y15.assignments.start_;
+    let unit = expr.calcUnit(y15).toString();
+    expect(unit).to.be.equal('metre^2');
+  });
+  
+  it('pow with fractions pow(x , 1/2)', () => {
+    let y16 = p.namespaceStorage.get('nameless').get('y16');
+    let expr = y16.assignments.start_;
+    let unit = expr.calcUnit(y16).toString();
+    expect(unit).to.be.equal('metre^2');
   });
 
   it('No warnings', () => {
