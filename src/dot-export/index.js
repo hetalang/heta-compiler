@@ -51,20 +51,19 @@ class DotExport extends AbstractExport{
       .forEach((comp) => clustersDict[comp.id] = []);
     ns.selectByInstanceOf('Process')
       .forEach((proc) => {
-        let substrates = proc.actors
-          .filter((x) => x.stoichiometry < 0);
-        let hasFirstSubstrate = substrates.length > 0 
-          && substrates[0].targetObj !== undefined
-          && substrates[0].targetObj.compartment !== undefined;
-        if (hasFirstSubstrate) {
-          let mainComp = substrates[0].targetObj.compartment;
-          clustersDict[mainComp].push(proc);
-        } else {
-          clustersDict['_'].push(proc);
-        }
+        let substrates = proc.actors.filter((x) => x.stoichiometry < 0);
+        // push records
+        proc.actors.forEach((actor) => {
+          let record = ns.get(actor.target) || { id: actor.target }; // use fake record
+          let compartmentId = record.compartment || '_';
+          clustersDict[compartmentId]?.push(record) || (clustersDict[compartmentId] = [record]);
+        });
+        // push process
+        let compartmentOfFirstSubstrate = ns.get(substrates[0]?.target)?.compartment || '_';
+        clustersDict[compartmentOfFirstSubstrate]?.push(proc);
       });
+    /* display all records
     ns.selectByInstanceOf('Record')
-      .filter((rec) => rec.isDynamic)
       .forEach((rec) => {
         if (rec.compartment !== undefined) {
           clustersDict[rec.compartment].push(rec);
@@ -72,7 +71,7 @@ class DotExport extends AbstractExport{
           clustersDict['_'].push(rec);
         }
       });
-
+    */
     return {
       ns,
       clustersDict

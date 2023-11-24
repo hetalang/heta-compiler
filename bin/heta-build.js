@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { Builder } = require('../src/builder');
 const { load } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
-const _ = require('lodash');
+const _merge = require('lodash/merge');
 const semver = require('semver');
 const { version, bugs } = require('../package');
 const colors = require('colors');
@@ -100,7 +100,7 @@ program
   };
 
   // === update declaration ===
-  _.merge(declaration, CLIDeclaration);
+  _merge(declaration, CLIDeclaration);
 
   // === wrong version throws, if no version stated than skip ===
   let satisfiesVersion = declaration.builderVersion

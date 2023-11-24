@@ -20,7 +20,7 @@ digraph {{ ns.spaceName }} {
         tooltip="{{ key }}"
         //
         {%- for component in val %}
-        {%- if component.instanceOf('Process') %}
+        {%- if component.instanceOf and component.instanceOf('Process') %}
         {{ component.id }} [shape=circle,width=.1,height=.1,label=""] // xlabel="{{ component.id }}"
         {%- else %}
         {{ component.id }} [shape=box]
