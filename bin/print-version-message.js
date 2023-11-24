@@ -27,7 +27,7 @@ async function printVersionMessage(){
     let msg = [
       colors.magenta.italic('FYI. Newer version of heta-compiler is available.'),
       colors.magenta.italic(`See changes here: ${changelogLink}`),
-      colors.magenta(`Run "npm i -g heta-compiler" to update ${currentVersion} => ${latestVersion}`),
+      colors.magenta(`Run "heta update" to update ${currentVersion} => ${latestVersion}`),
       '',''
     ];
     process.stdout.write(msg.join('\n'));

@@ -46,7 +46,7 @@
 
 ## ideas
 
-- generarion of 'platform.yml' by `heta init`
+- generation of 'platform.yml' by `heta init`
 - deprecated `include` statement
 - `#move`, `#moveNS`
 - `#deleteNS` action
@@ -57,9 +57,8 @@
 - add "ignoreCompartment" property in Species
 - do not translate base units in SBML export like second => _second
 - automatic creation of modifiers in SBML
-- avoid insert for existed elements: get warning or #forceInsert 
+- avoid insert for existed elements: get warning or #forceInsert
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
-- `heta update` => `npm i heta-compiler`
 - support null for properties: highlight, parse, heta standard
 - stoichiometry as `@Const` and `@Record`
 - updating properties with `one::s1.assignments.start_ 5.5;`
@@ -69,6 +68,7 @@
 - _get
 - _set
 - _omit
+- _merge
 
 ### Dose class
 
