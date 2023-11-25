@@ -215,3 +215,29 @@ describe('Unit tests for Container load', () => {
     c.logger.resetErrors();
   });
 });
+
+describe('Test deleting NS', () => {
+  let c = new Container();
+
+  it('Create NS', () => {
+    c.setNS({space: 'one'});
+    c.setNS({space: 'two'});
+
+    expect(c.namespaceStorage.size).to.equal(3);
+  });
+
+  it('Delete NS one', () => {
+    c.deleteNS({space: 'one'});
+
+    expect(c.namespaceStorage.size).to.equal(2);
+  });
+
+  it('Delete not existed NS', () => {
+    c.deleteNS({space: 'one'});
+    c.deleteNS({space: 'three'});
+
+    expect(c.logger.hasErrors).to.be.true;
+    expect(c.namespaceStorage.size).to.equal(2);
+  });
+
+});

@@ -30,30 +30,27 @@
 
 ## bugs
 
+- highlight multiline comments in Heta dictionary and array (with/without comma)
+- multiple single-line comments in dict result in error
+
 ## features
 
-- write reusable `Build` class
+- atStart to exports: Matlab, DBSolve
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
-- calculate units for pow function
+- write reusable `Build` class
 - remove unnecessary rules in export
 - checking units for diff eq
 - check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers
-- highlight multiline comments in Heta dictionary and array (with/without comma)
-- atStart to exports: Matlab, DBSolve
 - remove `isAmount`, `compartment` properties from `@Reaction`
 
 ## ideas
 
 - generation of 'platform.yml' by `heta init`
-- deprecated `include` statement
 - `#move`, `#moveNS`
-- `#deleteNS` action
-- `#move`, `#moveNS`
-- remove support of `include` statement is deprecated, use `#include` action (v0.7.0)
+- `include` statement is deprecated, use `#include` action (v0.8.0)
 - check file format for modules
-- syntax highlight in web
 - add "ignoreCompartment" property in Species
 - do not translate base units in SBML export like second => _second
 - automatic creation of modifiers in SBML

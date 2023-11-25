@@ -72,6 +72,14 @@ class SBMLExport extends AbstractExport {
     } else {
       try {
         listOfUnitDefinitions = ns.getUniqueUnits()
+          /*
+          .filter((units) => {
+            return units.length !== 1 
+              || legalUnits.indexOf(units[0].kind) < 0
+              || units[0].exponent !== 1
+              || units[0].multiplier !== 1;
+          })
+          */
           .map((units) => {
             return units
               .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
