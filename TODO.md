@@ -48,7 +48,6 @@
 ## ideas
 
 - generation of 'platform.yml' by `heta init`
-- `#move`, `#moveNS`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
 - check file format for modules
 - add "ignoreCompartment" property in Species

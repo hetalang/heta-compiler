@@ -418,21 +418,6 @@ Container.prototype.importNS = function(_q = {}){
   return clones;
 };
 
-// #moveNS
-/*
-  the same as importNS but delete all elements from source namespace
-Container.prototype.moveNS = function(q = {}){
-  let toClone = this.storage.selectBySpace(q.fromSpace);
-  let clones = this.importNS(q);
-
-  toClone.forEach((component) => {
-    this.storage.delete(component.index);
-  });
-
-  return clones;
-};
-*/
-
 // #import
 /**
  * Clone a component to another space.
@@ -529,20 +514,6 @@ Container.prototype.import = function(_q = {}){
 
   return clone;
 };
-
-// #move
-/*
-  the same as import but delete source component
-
-Container.prototype.move = function(q = {}){
-  let clone = this.import(q);
-
-  // delete component
-  this.delete({id: q.fromId, space: q.fromSpace});
-
-  return clone;
-}
-*/
 
 // #select
 // XXX: don't really used

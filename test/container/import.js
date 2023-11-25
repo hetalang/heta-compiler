@@ -78,27 +78,3 @@ describe('Test correct import', () => {
     c.logger.resetErrors();
   });
 });
-/*
-describe('Test correct move', () => {
-
-  it('Create and move Const', () => {
-    var c = new Container();
-    c.load({
-      action: 'insert',
-      class: 'Const',
-      id: 'k1',
-      space: 'one',
-      num: 1
-    });
-    let clone = c.move({
-      fromId: 'k1',
-      fromSpace: 'one',
-      id: 'k2',
-      space: 'two'
-    });
-
-    expect(c).to.be.lengthOf(1);
-    expect(clone).to.have.property('index', 'two::k2');
-  });
-});
-*/
