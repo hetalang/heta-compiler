@@ -31,7 +31,6 @@
 ## bugs
 
 - highlight multiline comments in Heta dictionary and array (with/without comma)
-- multiple single-line comments in dict result in error
 
 ## features
 
@@ -39,7 +38,6 @@
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - write reusable `Build` class
-- remove unnecessary rules in export
 - checking units for diff eq
 - check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers
@@ -47,6 +45,7 @@
 
 ## ideas
 
+- remove unnecessary rules in export
 - generation of 'platform.yml' by `heta init`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
 - check file format for modules
