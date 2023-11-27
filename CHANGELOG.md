@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.7.2
+
+- `#export {format: dot}` for abstract namespace
+- calculate units for `pow(x, 2/3)`, `x ^ (2/3)`
+- `heta update` for CLI
+- `#deleteNS`
+- update heta-parser to use comments in dictionary
+- update deps to the latees possible versions
+
 ## 0.7.1
 
 - use 1/0 as boolean
