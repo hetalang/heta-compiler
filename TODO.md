@@ -30,17 +30,16 @@
 
 ## bugs
 
-- highlight multiline comments in Heta dictionary and array (with/without comma)
-
 ## features
+
+- checking units for diff eq
+- check unit consistency for Species: amount/area if compartment is area
+- AnyUnit for zero numbers
 
 - atStart to exports: Matlab, DBSolve
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - write reusable `Build` class
-- checking units for diff eq
-- check unit consistency for Species: amount/area if compartment is area
-- AnyUnit for zero numbers
 - remove `isAmount`, `compartment` properties from `@Reaction`
 
 ## ideas

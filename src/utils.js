@@ -6,11 +6,11 @@
 
 const Ajv = require('ajv');
 
-const ajv = new Ajv({allErrors: true, jsonPointers: true});
+const ajv = new Ajv({allErrors: true}); // jsonPointers: true
 require('ajv-errors')(ajv);
 
 const schema = require('./heta.json-schema');
-const validator = new Ajv({allErrors: true, jsonPointers: true}) // maybe combine with previous
+const validator = new Ajv({allErrors: true}) // maybe combine with previous
   .addSchema(schema);
 require('ajv-errors')(validator);
 
