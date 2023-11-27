@@ -5,15 +5,11 @@
 // preparation of Ajv
 
 const Ajv = require('ajv');
-
-const ajv = new Ajv({allErrors: true}); // jsonPointers: true
-require('ajv-errors')(ajv);
-
 const schema = require('./heta.json-schema');
-const validator = new Ajv({allErrors: true}) // maybe combine with previous
-  .addSchema(schema);
-require('ajv-errors')(validator);
 
+const ajv = new Ajv({allErrors: true, jsonPointers: true})
+  .addSchema(schema); // for Component instances
+require('ajv-errors')(ajv);
 
 // return array of elements by the selector
 function uniqBy(array, selector = (x) => x) {
@@ -95,7 +91,6 @@ function cloneDeep(o) {
 }
 
 module.exports = {
-  validator,
   ajv,
   uniqBy,
   intersection,

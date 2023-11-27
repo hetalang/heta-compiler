@@ -1,7 +1,7 @@
 const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
-const { uniqBy, validator, flatten, cloneDeep } = require('../utils');
+const { uniqBy, ajv, flatten, cloneDeep } = require('../utils');
 const _get = require('lodash/get');
 const _set = require('lodash/set');
 
@@ -130,7 +130,7 @@ class Component {
   static isValid(q, logger){
     let ind = q.space ? `${q.space}::${q.id}` : q.id;
 
-    let validate = validator
+    let validate = ajv
       .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
     if (!validate) {
       throw new TypeError(`The schema "${this.schemaName}" is not found.`);
