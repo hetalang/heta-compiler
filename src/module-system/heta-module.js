@@ -1,4 +1,5 @@
 const hetaParser = require('heta-parser');
+const HetaLevelError = require('../heta-level-error');
 
 /**
  * To initialize a Heta module of the "heta" type.
@@ -25,13 +26,14 @@ function _hetaParse(...params){
   try {
     return hetaParser.parse(...params);
   } catch(e) {
-    if((e instanceof hetaParser.SyntaxError)){
-      e.name = 'HetaParsingError';
+    if (e instanceof hetaParser.SyntaxError) {
       let loc = e.location;
       let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}`;
-      e.message = `(${coord} in Heta file) ` + e.message;
+
+      throw new HetaLevelError(`(${coord} in Heta file) ` + e.message);
+    } else {
+      throw e;
     }
-    throw e;
   }
 }
 
