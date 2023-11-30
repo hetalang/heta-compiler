@@ -7,7 +7,7 @@ end
 namespace invitro begin
     AXP_neu #import {fromId: AXP_neu, fromSpace: nameless};
 
-    include neu.heta
+    include neu.heta;
     tot_vol @Compartment []= 0.1; // <L>
 
     P1_mean @Record := ( P1_ext * ext + P1_neu * neu_vol ) / tot_vol;
@@ -26,7 +26,7 @@ namespace invivo begin
     plasma #import {fromId: plasma, fromSpace: nameless};
     k_prol #import {fromId: k_prol, fromSpace: nameless};
 
-    include neu.heta
+    include neu.heta;
 
     blood @Compartment .= 5.2;
     neu_count @Species {compartment: blood};

@@ -1,9 +1,9 @@
 
-// include module.heta type: heta
-include table.xlsx type xlsx with { sheet: 0, omitRows: 3 }
+// include module.heta type: heta;
+include table.xlsx type xlsx with { sheet: 0, omitRows: 3 };
 
-include table.xlsx type xlsx with { sheet: 1, omitRows: 3 }
+include table.xlsx type xlsx with { sheet: 1, omitRows: 3 };
 
-include table.xlsx type xlsx
+include table.xlsx type xlsx;
 
 #export {filepath: output, format: JSON};

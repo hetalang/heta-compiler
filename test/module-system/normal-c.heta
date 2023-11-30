@@ -1,4 +1,4 @@
 k3 @Const;
 k3 = 1.2;
 
-include ./normal-e.yml type yaml
+include ./normal-e.yml type yaml;

@@ -4,6 +4,6 @@ one::k1 @Record {
   title: hello world
 };
 
-include normal-b.heta
+include normal-b.heta;
 
-include ../module-system/normal-c.heta
+include ../module-system/normal-c.heta;

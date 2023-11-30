@@ -1,6 +1,6 @@
 
-include ./cycle-a.heta
+include ./cycle-a.heta;
 
-include ./cycle-c.heta
+include ./cycle-c.heta;
 
 y := x;

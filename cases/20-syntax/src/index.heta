@@ -2,7 +2,7 @@
   template file for creating platform
 */
 // add qsp units
-include ./qsp-units.heta
+include ./qsp-units.heta;
 
 ud1_xxx #defineUnit {units: mole/L};
 rec1 @Record {units: ud1_xxx} .= 12;

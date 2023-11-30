@@ -1,4 +1,4 @@
-include ./qsp-units.heta type heta
+include ./qsp-units.heta type heta;
 
 // this block unites elements with the same space
 namespace mm begin

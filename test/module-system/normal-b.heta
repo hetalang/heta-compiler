@@ -1,6 +1,6 @@
 k2 @Const;
 k2 = 1.2;
 
-include ./normal-c.heta
+include ./normal-c.heta;
 
-include ./normal-d.json type json
+include ./normal-d.json type json;

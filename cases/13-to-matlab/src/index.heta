@@ -2,12 +2,12 @@
   template file for creating platform
 */
 // add qsp units
-include ./qsp-units.heta
+include ./qsp-units.heta;
 
-include model.heta
-// include table.xlsx type xlsx with { sheet: 0, omitRows: 3 }
-// include addon.json type json
-// include addon.yml type yaml
+include model.heta;
+// include table.xlsx type xlsx with { sheet: 0, omitRows: 3 };
+// include addon.json type json;
+// include addon.yml type yaml;
 
 // exports
 #export { filepath: sbml, version: L2V4, format: SBML };

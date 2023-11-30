@@ -2,7 +2,7 @@
   template file for creating platform
 */
 
-include ./table.csv type table
+include ./table.csv type table;
 
 // exports
 #export { format: JSON, filepath: output };

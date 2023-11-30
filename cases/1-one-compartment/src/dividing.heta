@@ -5,8 +5,8 @@ block @Const begin
   Km = 1.1;
 end
 
-include non-saturable.heta
-include saturable.heta
+include non-saturable.heta;
+include saturable.heta;
 
 //#export {space: one_comp, format: SBML, filepath: sbml_non_saturable};
 //#export {space: one_comp_saturation, format: SBML, filepath: sbml_saturable};

@@ -56,6 +56,8 @@
 - support null for properties: highlight, parse, heta standard
 - stoichiometry as `@Const` and `@Record`
 - updating properties with `one::s1.assignments.start_ 5.5;`
+- highlight for Vim https://ezpzdev.medium.com/create-a-vim-plugin-for-your-next-programming-language-structure-and-syntax-highlight-1dc0823a6b92
+- highlight for notepad++ https://npp-user-manual.org/docs/user-defined-language-system/ https://ivan-radic.github.io/udl-documentation/numbers/ 
 
 ## remove lodash
 
