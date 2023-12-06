@@ -27,8 +27,12 @@
 [ ] rxode (R)
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)
+[ ] PGF and TikZ
 
 ## bugs
+
+- `--skip-updates` in docs
+- `heta update` in docs
 
 ## features
 
@@ -44,6 +48,7 @@
 
 ## ideas
 
+- `heta update --dev`
 - remove unnecessary rules in export
 - generation of 'platform.yml' by `heta init`
 - `include` statement is deprecated, use `#include` action (v0.8.0)

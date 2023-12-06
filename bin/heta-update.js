@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 const { name, version } = require('../package.json');
 
 program
-  .name('heta init')
+  .name('heta update')
   .description('Update heta-compiler to the latest version.')
   .parse(process.argv);
 

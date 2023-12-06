@@ -2,12 +2,11 @@
 'use strict';
 const { Command } = require('commander');
 const program = new Command('heta');
-const pkg = require('../package');
+const { version } = require('../package');
 
-let version = pkg.version;
 let descriptionText = `Command line utilities for working with Heta compiler
-  version: ${version}
-  license: ${pkg.license}`;
+  Version: ${version}
+  Node: ${process.version}`;
 
 program
   .version(version, '-v, --version')
