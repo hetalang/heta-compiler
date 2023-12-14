@@ -23,7 +23,7 @@ const defaultPlatform = {
   builderVersion: '^' + pkg.version,
   options: {
     debug: false,
-    logs: 'output.log',
+    logPath: 'output.log',
     logLevel: 'info',
     skipExport: false,
     unitsCheck: false
