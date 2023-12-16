@@ -1,8 +1,7 @@
-const { AbstractExport } = require('../abstract-export');
 /* global compiledTemplates */
-require('./expression');
-const legalUnits = require('../legal-sbml-units');
+const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../utils');
+require('./namespace');
 
 const schema = {
   type: 'object',
@@ -45,13 +44,8 @@ class SBMLExport extends AbstractExport {
     let selectedNamespaces = this.selectedNamespaces();
     
     let results = selectedNamespaces.map(([spaceName, ns]) => {
-      let image = this.getSBMLImage(ns);
+      let image = ns.getSBMLImage();
       var content = this.getSBMLCode(image);
-
-      if (ns.isAbstract) {
-        let msg = `UnitDefinitions in SBML will be skipped for the abstract namespace "${spaceName}".`;
-        logger.info(msg);
-      }
       
       return {
         content: content,
@@ -60,45 +54,9 @@ class SBMLExport extends AbstractExport {
       };
     });
 
-
     return results;
   }
-  getSBMLImage(ns){
-    let logger = ns.container.logger;
 
-    // set unitDefinitions for concrete namespace
-    if (ns.isAbstract) {
-      var listOfUnitDefinitions = []; 
-    } else {
-      try {
-        listOfUnitDefinitions = ns.getUniqueUnits()
-          /*
-          .filter((units) => {
-            return units.length !== 1 
-              || legalUnits.indexOf(units[0].kind) < 0
-              || units[0].exponent !== 1
-              || units[0].multiplier !== 1;
-          })
-          */
-          .map((units) => {
-            return units
-              .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
-          });
-      } catch(err){
-        logger.warn(err.message);
-        listOfUnitDefinitions = [];
-      }
-    }
-
-    // set functionDefinition
-    let listOfFunctionDefinitions = [...ns.container.functionDefStorage.values()];
-    
-    return {
-      population: ns,
-      listOfUnitDefinitions,
-      listOfFunctionDefinitions
-    };
-  }
   getSBMLCode(image = {}){
     switch (this.version) {
     case 'L2V3':

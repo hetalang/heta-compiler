@@ -1,6 +1,7 @@
-const { AbstractExport } = require('../abstract-export');
 /* global compiledTemplates */
+const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../utils');
+require('./namespace');
 
 const schema = {
   type: 'object',

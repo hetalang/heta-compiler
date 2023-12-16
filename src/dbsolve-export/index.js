@@ -1,7 +1,7 @@
-const { AbstractExport } = require('../abstract-export');
 /* global compiledTemplates */
-const _get = require('lodash/get');
+const { AbstractExport } = require('../abstract-export');
 require('./expression');
+require('./namespace');
 const { ajv } = require('../utils');
 
 const schema = {
@@ -14,7 +14,7 @@ const schema = {
 };
 
 class DBSolveExport extends AbstractExport{
-  constructor(q = {}, isCore = false){
+  constructor(q = {}, isCore = false) {
     super(q, isCore);
 
     // check arguments here
@@ -44,7 +44,7 @@ class DBSolveExport extends AbstractExport{
    *
    * @return {string} Text code of exported format.
    */
-  makeText(){
+  makeText() {
     let logger = this._container.logger;
 
     // display that function definition is not supported
@@ -56,7 +56,7 @@ class DBSolveExport extends AbstractExport{
     let selectedNamespaces = this.selectedNamespaces();
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
-      let image = this.getSLVImage(ns);
+      let image = ns.getDBSolveImage(this.powTransform, this.groupConstBy, this.version);
       let content = this.getSLVCode(image);
 
       return {
@@ -68,186 +68,16 @@ class DBSolveExport extends AbstractExport{
 
     return results;
   }
-  /**
-   * Creates single model image by nesessary components based on space.
-   * @param {string} targetSpace - Model image to update.
-   *
-   * @return {undefined}
-   */
-  getSLVImage(ns){
-    let logger = this._container.logger;
-
-    // push active processes
-    let processes = ns
-      .selectByInstanceOf('Process')
-      .filter((x) => {
-        return x.actors.length > 0 // process with actors
-          && x.actors.some((actor) => { // true if there is at least non boundary target
-            return !actor.targetObj.boundary && !actor.targetObj.isRule;
-          });
-      });
-    // push non boundary ode variables which are mentioned in processes
-    let dynamicRecords = ns
-      .selectByInstanceOf('Record')
-      .filter((x) => x.isDynamic);
-    /*
-    let staticRecords = ns
-      .selectByInstanceOf('Record')
-      .filter((x) => !x.isDynamic && !x.isRule);
-    */
-    let initRecords = ns
-      .sortExpressionsByContext('start_', true)
-      .filter((x) => {
-        return x.instanceOf('Record') 
-          && (x.assignments?.start_ !== undefined || x.isRule);
-      }); 
-    // create matrix
-    let matrix = [];
-    processes.forEach((process, processNum) => {
-      process.actors.filter((actor) => {
-        return !actor.targetObj.boundary
-          && !actor.targetObj.isRule;
-      }).forEach((actor) => {
-        let variableNum = dynamicRecords.indexOf(actor.targetObj);
-        matrix.push([processNum, variableNum, actor.stoichiometry]);
-      });
-    });
-
-    // create and sort expressions for RHS (rules)
-    let ruleRecords = ns
-      .sortExpressionsByContext('ode_', true)
-      .filter((x) => x.isDynamic || x.isRule );
-
-    // create TimeEvents
-    let timeEvents = [];
-    ns
-      .selectByInstanceOf('TimeSwitcher')
-      .forEach((switcher) => { // scan for switch
-        // if period===undefined or period===0 or repeatCount===0 => single dose
-        // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
-        let period = switcher.periodObj === undefined || switcher.repeatCountObj?.num === 0
-          ? 0
-          : switcher.getPeriod();
-        ns
-          .selectRecordsByContext(switcher.id)
-          .forEach((record) => { // scan for records in switch
-            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
-              ? record.getAssignment(switcher.id).multiply(record.compartment)
-              : record.getAssignment(switcher.id);
-
-            let evt = {
-              start: switcher.getStart(),
-              period: period,
-              on: switcher.id + '_',
-              target: record.id + (record.isDynamic ? '_' : ''),
-              multiply: 0,
-              add: record.id + '_' + switcher.id + '_',
-              expr: expr.toSLVString(this.powTransform)
-            };
-            timeEvents.push(evt);
-          });
-
-        // transform `stop` to `event`
-        if (switcher.stopObj !== undefined) {
-          let evt = {
-            start: switcher.getStop(),
-            period: 0,
-            on: 1,
-            target: switcher.id + '_',
-            multiply: 0,
-            add: 0,
-            isStop: true // if false then do not put in RHS
-          };
-          timeEvents.push(evt);
-        }
-      });
-
-    // Discrete Events
-    let discreteEvents = ns
-      .selectByClassName('DSwitcher')
-      .map((switcher) => {
-        // check boolean expression in trigger
-        if (!switcher.trigger.isComparison) {
-          let msg = `DBSolve supports only simple comparison operators in DSwitcher trigger, got: "${switcher.trigger.toString()}"`;
-          logger.error(msg, {type: 'ExportError'});
-        }       
-        
-        let assignments = ns
-          .selectRecordsByContext(switcher.id)
-          .map((record) => {
-            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
-              ? record.getAssignment(switcher.id).multiply(record.compartment)
-              : record.getAssignment(switcher.id);
-
-            return {
-              targetObj: record,
-              expr: expr
-            };
-          });
-          
-        return {
-          switcher,
-          assignments
-        };
-      });
-
-    // Continuous Events
-    let continuousEvents = ns
-      .selectByClassName('CSwitcher')
-      .map((switcher) => {
-        let assignments = ns
-          .selectRecordsByContext(switcher.id)
-          .map((record) => {
-            let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
-              ? record.getAssignment(switcher.id).multiply(record.compartment)
-              : record.getAssignment(switcher.id);
-
-            return {
-              targetObj: record,
-              expr: expr
-            };
-          });
-          
-        return {
-          switcher,
-          assignments
-        };
-      });
-    // group Const, instead of groupBy
-    let groupedConst = {}; // {group1: [const1, const2], group2: [const3, const4]}
-    ns.selectByClassName('Const').forEach((constant) => {
-      let key = _get(constant, this.groupConstBy) + '';
-      if (!groupedConst.hasOwnProperty(key)) {
-        groupedConst[key] = [];
-      }
-      groupedConst[key].push(constant);
-    });
-
-    return {
-      population: ns,
-      dynamicRecords,
-      initRecords,
-      ruleRecords,
-      processes,
-      matrix,
-      powTransform: this.powTransform,
-      version: this.version,
-      timeEvents,
-      discreteEvents,
-      continuousEvents,
-      groupedConst,
-    };
-  }
-  getSLVCode(image = {}){
+  getSLVCode(image = {}) {
     return compiledTemplates['dbsolve-model.slv.njk'].render(image);
   }
-  get className(){
+  get className() {
     return 'DBSolveExport';
   }
-  get format(){
+  get format() {
     return 'DBSolve';
   }
-  static get validate(){
+  static get validate() {
     return ajv.compile(schema);
   }
 }

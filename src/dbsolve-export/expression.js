@@ -1,6 +1,6 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toSLVString = function(powTransform = 'keep'){
+Expression.prototype.toSLVString = function(powTransform = 'keep') {
   if (['keep', 'operator', 'function'].indexOf(powTransform) === -1) {
     throw new TypeError('powTransform must be one of values: "keep", "operator", "function".');
   }
