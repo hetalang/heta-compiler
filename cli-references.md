@@ -66,6 +66,7 @@ List of `heta build` options:
 | --meta-dir | \<string\> | |  Set meta directory path. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
 | -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.json5/.yml. |
+| --skip-updates | | | Do not check available new version in npm. |
 
 #### Example 1
 
@@ -157,6 +158,21 @@ If we check the content of the created "test" directory we will see the followin
 
 **.gitattributes, .gitignore** : templates to help working with [Git](https://git-scm.com/)
 
+## "heta update" command
+
+`heta update` installs the latest version of heta-compiler available on NPM.
+
+If the additional argument `[version]` is set then it will install the selected version.
+
+The command is equivalen to `npm install --global heta-compiler`.
+
+#### Example
+
+To install the selected version.
+
+```bash
+heta update 0.7.1
+```
 
 ## "heta help" command
 

@@ -31,8 +31,6 @@
 
 ## bugs
 
-- `--skip-updates` in docs
-- `heta update` in docs
 
 ## features
 
