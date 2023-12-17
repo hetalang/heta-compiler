@@ -6,10 +6,13 @@ const { name, version } = require('../package.json');
 
 program
   .name('heta update')
-  .description('Update heta-compiler to the latest version.')
+  .description('Update heta-compiler to the latest version, or selected version if argument is set.')
+  .usage('[version]')
   .parse(process.argv);
 
-exec(`npm install --global ${name}`, (err, stdout, stderr) => {
+let forceVersion = program.args[0] || 'latest';
+
+exec(`npm install --global ${name}@${forceVersion}`, (err, stdout, stderr) => {
   if (stderr) {
     process.stdout.write(stderr);
     process.exit(1); // BRAKE
