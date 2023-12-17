@@ -40,7 +40,7 @@ class JSONExport extends AbstractExport {
 
     // create qArr from NS
     let qArr_ns = nsArrayFiltered.reduce((accumulator, [spaceName, ns]) => {
-      let qArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toQ()]; // skip default NS
+      let qArr_setns = ns.spaceName === 'nameless' && !ns.isAbstract ? [] : [ns.toQ()]; // skip #setNS {space: nameless};
       let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
       return accumulator.concat(qArr_setns, qArr_components);
     }, []);

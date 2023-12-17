@@ -1,7 +1,6 @@
 /* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../utils');
-require('./namespace');
 
 const schema = {
   type: 'object',
@@ -32,10 +31,9 @@ class HetaCodeExport extends AbstractExport{
    *
    * @return {string} Text code of exported format.
    */
-  makeText(){
-    // let logger = this._container.logger;
+  makeText() {
+    // let { logger } = this._container;
 
-    // XXX: do not filter namespaces
     let image = this.getHetaCodeImage(this._container);
     let content = this.getHetaCodeCode(image);
 
@@ -51,15 +49,15 @@ class HetaCodeExport extends AbstractExport{
    *
    * @return {undefined}
    */
-  getHetaCodeImage(container){
-    // let logger = this._container.logger;
+  getHetaCodeImage() {
+    let { namespaceStorage, functionDefStorage, unitDefStorage, logger } = this._container;
 
-    let filteredNamespaceStorage = [...container.namespaceStorage]
+    let filteredNamespaceStorage = [...namespaceStorage]
       .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
     
     return {
-      functionDefStorage: [...container.functionDefStorage],
-      unitDefStorage: [...container.unitDefStorage],
+      functionDefStorage: [...functionDefStorage],
+      unitDefStorage: [...unitDefStorage],
       namespaceStorage: filteredNamespaceStorage
     };
   }
