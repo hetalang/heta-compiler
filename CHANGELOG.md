@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.7.3
+
+- extend `heta update to select version`
+- fix logPath in init
+- Node version in default `heta` cli
+- use ; at the end of include statements
+
 ## 0.7.2
 
 - `#export {format: dot}` for abstract namespace
