@@ -10,13 +10,15 @@ Namespace.prototype.getDotImage = function() {
       let substrates = proc.actors.filter((x) => x.stoichiometry < 0);
       // push records
       proc.actors.forEach((actor) => {
-        let record = this.get(actor.target) || { id: actor.target }; // use fake record
+        let record = this.get(actor.target) || { id: actor.target }; // use target record or fake record for abstract NS
         let compartmentId = record.compartment || '_';
         clustersDict[compartmentId]?.push(record) || (clustersDict[compartmentId] = [record]);
       });
       // push process
-      let compartmentOfFirstSubstrate = this.get(substrates[0]?.target)?.compartment || '_';
-      clustersDict[compartmentOfFirstSubstrate]?.push(proc);
+      let compartmentOfReaction = proc.compartment // use explicit compartment, first substrate compartment, or empty
+        || this.get(substrates[0]?.target)?.compartment 
+        || '_';
+      clustersDict[compartmentOfReaction]?.push(proc);
     });
   /* display all records
   this.selectByInstanceOf('Record')

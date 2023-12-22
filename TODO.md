@@ -42,7 +42,7 @@
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units
 - write reusable `Build` class
-- remove `isAmount`, `compartment` properties from `@Reaction`
+- remove `isAmount` properties from `@Reaction`
 
 ## ideas
 
