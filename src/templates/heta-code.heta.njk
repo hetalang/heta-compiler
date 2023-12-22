@@ -8,6 +8,7 @@
   {{- ' {' }}
   {{- ' units: ' + component.units + ',' if component.units is defined }}
   {{- ' boundary: ' + component.boundary + ',' if component.boundary is defined }}
+  {{- ' ss: ' + component.ss + ',' if component.ss is defined }}
   {{- ' compartment: ' + component.compartment + ',' if component.compartment is defined }}
   {{- ' actors: ' + component.actors + ',' if component.actors.length > 0 }}
   {{- ' modifiers: ' + hetaArray(component.modifiers) + ',' if component.modifiers.length > 0 }}

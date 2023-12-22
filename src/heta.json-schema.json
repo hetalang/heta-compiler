@@ -110,6 +110,10 @@
           "enum": [true, false, 1, 0], "default": false,
           "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
         },
+        "ss": {
+          "enum": [true, false, 1, 0],
+          "description": "Steady-State variable"
+        },
         "output": {
           "enum": [true, false, 1, 0],
           "description": "Should be the record listed as an output"

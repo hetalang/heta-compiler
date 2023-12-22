@@ -5,6 +5,7 @@ const { Expression } = require('./expression');
   record1 @Record {
     assignments: { start_: x*y },
     boundary: true,
+    ss:false,
     output: true
   };
 */
@@ -43,6 +44,7 @@ class Record extends _Size {
       }
   
       if (q.boundary !== undefined) this.boundary = !!q.boundary;
+      if (q.ss !== undefined) this.ss = !!q.ss;
       if (q.output !== undefined) this.output = !!q.output;
     }
     
@@ -59,6 +61,8 @@ class Record extends _Size {
     });
     if (typeof this.boundary !== undefined)
       clonedComponent.boundary = this.boundary;
+    if (typeof this.ss !== undefined)
+      clonedComponent.ss = this.ss;
     if (typeof this.output !== undefined)
       clonedComponent.output = this.output;
       
@@ -117,6 +121,7 @@ class Record extends _Size {
     if (this.boundary) {
       res.boundary = this.boundary;
     }
+    this.ss && (res.ss = this.ss);
     if (this.output) {
       res.output = this.output;
     }

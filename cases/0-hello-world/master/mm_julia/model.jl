@@ -25,6 +25,13 @@ mm_events_active_ = NamedTuple{(
   
 ])
 
+### vector of non-steady-state
+mm_dynamic_nonss_ = NamedTuple{(
+  :S,:P,
+)}(Bool[
+  true,true,
+])
+
 ### initialization of ODE variables and Records
 function mm_init_func_(__constants__)
     # Heta initialize
@@ -119,7 +126,8 @@ mm_model_ = (
   mm_saving_generator_,
   mm_constants_num_,
   mm_events_active_,
-  mm_records_output_
+  mm_records_output_,
+  mm_dynamic_nonss_
 )
 
 ### OUTPUT ###

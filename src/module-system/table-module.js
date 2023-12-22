@@ -38,7 +38,7 @@ function tableLoader(fileContent, _options){
       });
 
       let booleanProperties = [
-        'isAmount', 'free', 'boundary', 'output', 'reversible',
+        'isAmount', 'free', 'boundary', 'ss', 'output', 'reversible',
         'active', 'atStart'
       ];
 

@@ -59,6 +59,17 @@ __platform__ = (function()
   {%- endfor %}
 ])
 
+### vector of non-steady-state
+{{ id }}_dynamic_nonss_ = NamedTuple{(
+  {% for record in img.dynamicRecords -%}
+    :{{ record.id }},
+  {%- endfor %}
+)}(Bool[
+  {% for record in img.dynamicRecords -%}
+    {{ not record.ss }},
+  {%- endfor %}
+])
+
 ### initialization of ODE variables and Records
 function {{ id }}_init_func_(__constants__)
     # Heta initialize
@@ -125,7 +136,7 @@ function {{ id }}_ode_func_(__du__, __u__, __p__, t)
     {%- endfor %}]
     {%- if img.dynamicRecords | length > 0 %}
     __du__ .= [{% for record in img.dynamicRecords %}
-      {{ img.rhs[loop.index0] }},  # d{{ record.id }}_/dt
+      {{ img.rhs[loop.index0] }},  # d{{ record.id }}_/dt{{ ' SS!' if record.ss }}
     {%- endfor %}
     ]
     {%- else %}
@@ -383,7 +394,8 @@ end
   {{ id }}_saving_generator_,
   {{ id }}_constants_num_,
   {{ id }}_events_active_,
-  {{ id }}_records_output_
+  {{ id }}_records_output_,
+  {{ id }}_dynamic_nonss_
 )
 
 {%- endfor %}{# img #}
