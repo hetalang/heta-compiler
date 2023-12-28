@@ -412,3 +412,4 @@ Each namespace in separate file.
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+ |na 
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+ |na 
 |`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+ |na
+|`@Record {ss: true, ...}`                               |- |- |+ |- |- |- |- |+ |+ |na

@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.7.4
+
+- use `@Reaction {compartment: comp1, ...}` in DOT format if set
+- Add `ss` property in `@Record` to describe algebraic equations
+- check unit consistency for Species - amount/area if compartment is area
+- Julia format update to include ss
+
 ## 0.7.3
 
 - extend `heta update to select version`
@@ -14,7 +21,7 @@
 - `heta update` for CLI
 - `#deleteNS`
 - update heta-parser to use comments in dictionary
-- update deps to the latees possible versions
+- update deps to the latest possible versions
 
 ## 0.7.1
 
