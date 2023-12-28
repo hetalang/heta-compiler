@@ -21,9 +21,9 @@ jobs:
     - run: npm run jsdoc
     - run: cp -f src/builder/declaration-schema.json docs
     - name: Deploy to "gh-pages"
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: docs # The folder the action should deploy.
-        CLEAN: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages # The branch the action should deploy to.
+        folder: docs # The folder the action should deploy.
+        clean: true
