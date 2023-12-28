@@ -35,9 +35,7 @@
 ## features
 
 - checking units for diff eq
-- check unit consistency for Species: amount/area if compartment is area
 - AnyUnit for zero numbers
-
 - atStart to exports: Matlab, DBSolve
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: circular dependences within functions, internal functions, different exports, functionDef vs units

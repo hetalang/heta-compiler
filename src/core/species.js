@@ -80,11 +80,18 @@ class Species extends Record {
     return super._references()
       .concat(classSpecificRefs);
   }
-  get legalTerms(){
+  get legalTerms() {
+    let actualCompartmentTerm = this.compartmentObj?.unitsParsed?.toTerm();
+    
     if (this.isAmount) {
       return [
         new UnitTerm([{kind: 'amount'}]),
         new UnitTerm([{kind: 'mass'}]),
+      ];
+    } else if (actualCompartmentTerm !== undefined) {
+      return [
+        new UnitTerm([{kind: 'amount'}]).divide(actualCompartmentTerm),
+        new UnitTerm([{kind: 'mass'}]).divide(actualCompartmentTerm)
       ];
     } else {
       return [
