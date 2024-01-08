@@ -8,7 +8,8 @@
     "test": "mocha test --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme api-references.md -d docs/dev src",
     "test:cov": "nyc --reporter=lcov npm run test",
-    "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js"
+    "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js",
+    "pkg": "npx pkg . --compress GZip"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
   "bin": {
     "heta": "bin/heta.js",
     "heta-build": "bin/heta-build.js",
-    "heta-init": "bin/heta-init.js"
+    "heta-init": "bin/heta-init.js",
+    "heta-update": "bin/heta-update.js"
   },
   "dependencies": {
     "@insysbio/topo-sort": "^1.0.1",
@@ -56,10 +58,24 @@
     "jsdoc-to-markdown": "^8.0.0",
     "mocha": "^10.1.0",
     "nyc": "^15.1.0",
+    "pkg": "^5.8.1",
     "slv-utils": "^0.5.1"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "pkg": {
+    "scripts": [
+      "bin/heta-build.js",
+      "bin/heta-init.js"
+    ],
+    "targets": [
+      "node14-win-x64",
+      "node14-linux-x64",
+      "node14-macos-x64"
+    ],
+    "assets": ["src/templates/*"],
+    "outputPath": "dist"
   },
   "private": false
 }

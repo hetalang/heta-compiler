@@ -26,6 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm test
+    - name: Autotest
+      run: npm test
       env:
         CI: true
+    - name: Build standalone apps
+      run: npm run pkg
