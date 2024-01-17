@@ -40,7 +40,7 @@ const schema = {
   };
 */
 class FunctionDef extends Top {
-  constructor(q = {}, isCore = false){
+  constructor(q = {}, isCore = false) {
     super(q, isCore);
 
     // check arguments here
@@ -84,10 +84,30 @@ class FunctionDef extends Top {
   get className(){
     return 'FunctionDef';
   }
-  static get validate(){
+  static get validate() {
     return ajv.compile(schema);
   }
-  _toQ(options = {}){
+  bind() {
+    // super.bind();
+    let logger = this._container.logger;
+    let storage = this._container.functionDefStorage;
+
+    if (this.math) { // if math is presented then it is user-defined functions
+      // find and set symbolObj
+      let list = this.math.functionList().forEach((symbolNode) => {
+        let target = storage.get(symbolNode.name);
+
+        if (!target) {
+          let msg = `FunctionDef "${symbolNode.name}" is not found as expected here: `
+          + `${this.index} { math: ${this.math} };`;
+          logger.error(msg, {type: 'BindingError'});
+        } else {
+          symbolNode.symbolObj = target;
+        }
+      });
+    }
+  }
+  _toQ(options = {}) {
     let q = super._toQ(options);
 
     if (this.arguments && this.arguments.length > 0) {
@@ -99,7 +119,7 @@ class FunctionDef extends Top {
 
     return q;
   }
-  toQ(options = {}){
+  toQ(options = {}) {
     let q = this._toQ(options);
     q.action = 'defineFunction';
 

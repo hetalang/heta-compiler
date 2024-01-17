@@ -145,5 +145,114 @@
     {
         "id": "minute", "action": "defineUnit",
         "units": [{ "kind": "second", "multiplier": 60 }]
+    },
+
+    {
+        "id": "abs", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "add", "action": "defineFunction",
+        "arguments": ["x", "y"]
+    },
+    {
+        "id": "ceil", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "cube", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "divide", "action": "defineFunction",
+        "arguments": ["x", "y"]
+    },
+    {
+        "id": "exp", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "floor", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "ln", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "log", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "log", "action": "defineFunction",
+        "arguments": ["x", "base"]
+    },
+    {
+        "id": "log10", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "log2", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "multiply", "action": "defineFunction",
+        "arguments": ["x", "y"]
+    },
+    {
+        "id": "pow", "action": "defineFunction",
+        "arguments": ["x", "y"]
+    },
+    {
+        "id": "sign", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "sqrt", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "nthRoot", "action": "defineFunction",
+        "arguments": ["x", "n"]
+    },
+    {
+        "id": "square", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "subtract", "action": "defineFunction",
+        "arguments": ["x", "y"]
+    },
+    {
+        "id": "max", "action": "defineFunction",
+        "arguments": ["x", "y", "z"]
+    },
+    {
+        "id": "min", "action": "defineFunction",
+        "arguments": ["x", "y", "z"]
+    },
+    {
+        "id": "factorial", "action": "defineFunction",
+        "arguments": ["n"]
+    },
+    {
+        "id": "ifgt", "action": "defineFunction",
+        "arguments": ["x", "y", "z1", "z2"]
+    },
+    {
+        "id": "ifge", "action": "defineFunction",
+        "arguments": ["x", "y", "z1", "z2"]
+    },
+    {
+        "id": "iflt", "action": "defineFunction",
+        "arguments": ["x", "y", "z1", "z2"]
+    },
+    {
+        "id": "ifle", "action": "defineFunction",
+        "arguments": ["x", "y", "z1", "z2"]
+    },
+    {
+        "id": "ifeq", "action": "defineFunction",
+        "arguments": ["x", "y", "z1", "z2"]
     }
 ]

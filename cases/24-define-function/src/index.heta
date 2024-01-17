@@ -17,6 +17,29 @@
   math: 15*2
 };
 
+// ref to defined function
+#defineFunction f5 {
+  arguments: [x,y],
+  math: f4(x)^2
+};
+
+/*
+// ref to wrong function
+#defineFunction f7 {
+  arguments: [x,y],
+  math: sss(x)^2
+};
+
+// circular functions
+#defineFunction f8 {
+  arguments: [x,y],
+  math: f9(x)^2
+};
+#defineFunction f9 {
+  arguments: [x,y],
+  math: f8(x)*f8(x)
+};
+*/
 #defineUnit u1 {
   units: litre^2,
 };
@@ -31,7 +54,7 @@ k1 @Const = 0.1;
 #export { format: JSON, filepath: output };
 #export { format: YAML, filepath: output };
 #export { format: Table, filepath: table, omitRows: 3, splitByClass: true };
-#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
+#export { format: XLSX, filepath: xlsx, omitRows: 3, splitByClass: true };
 #export { format: SBML, filepath: sbml, version: L2V4 };
 #export { format: DBSolve, filepath: dbsolve };
 #export { format: SLV, filepath: slv };

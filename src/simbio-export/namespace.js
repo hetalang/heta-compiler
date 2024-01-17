@@ -44,7 +44,8 @@ Namespace.prototype.getSimbioImage = function() {
       }
     });
 
-  let listOfFunctionDefinitions = [...functionDefStorage.values()];
+  let listOfFunctionDefinitions = [...functionDefStorage.values()]
+    .filter((functionDef) => !functionDef.isCore);
   return {
     population: this,
     legalUnits,

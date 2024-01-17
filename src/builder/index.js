@@ -126,8 +126,9 @@ class Builder {
     this.logger.info('Checking for circular references in Records.');
     this.container.checkCircRecord();
 
-    // 6. check circ UnitDef
+    // 6. check circ UnitDef & FunctionDef
     this.container.checkCircUnitDef();
+    this.container.checkCircFunctionDef();
 
     // === STOP if errors ===
     if (!this.logger.hasErrors) {

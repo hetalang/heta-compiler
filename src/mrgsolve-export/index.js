@@ -40,9 +40,11 @@ class MrgsolveExport extends AbstractExport {
     let selectedNamespaces = this.selectedNamespaces();
 
     // display that function definition is not supported
-    let functionsNames = [...this._container.functionDefStorage.keys()];
-    if (functionsNames.length > 0) {
-      logger.warn(`"FunctionDef" object: ${functionsNames.join(', ')} are presented in platform but not supported by Mrgsolve export.`);
+    let userDefinedFunctions = [...this._container.functionDefStorage]
+      .filter(([id, functionDef]) => !functionDef.isCore)
+      .map(([id, functionDef]) => id);
+    if (userDefinedFunctions.length > 0) {
+      logger.warn(`User defined functions: ${userDefinedFunctions.join(', ')} are presented in platform but not supported by Mrgsolve export.`);
     }
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {

@@ -160,6 +160,15 @@ class Expression {
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
       .filter((node) => ['e', 'pi'].indexOf(node.name) === -1);
   }
+  /*
+  Get array of function names
+  */
+  functionList() {
+    let list = this.exprParsed
+      .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path === 'fn');
+
+    return uniqBy(list, (x) => x.name);
+  }
   hasBooleanResult(){
     const operators = [
       'smaller', 'smallerEq',

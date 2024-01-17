@@ -174,6 +174,8 @@ class Container {
   knitMany(){
     // knit unitDef
     this.unitDefStorage.forEach((ud) => ud.bind());
+    // knit functionDef
+    this.functionDefStorage.forEach((fd) => fd.bind());
     // knit components, only for concrete namespace
     this.namespaceStorage.forEach((ns) => {
       // knit only concrete namespace
@@ -208,6 +210,36 @@ class Container {
         return `\t{ ${id} = ${unitDef.units} }`;
       }).join('\n');
       let msg = 'Circular dependency in UnitDef: \n' + infoLine;
+      this.logger.error(msg, {type: 'CircularError'});
+    }
+
+    return this;
+  }
+
+  /**
+   * Checks circular ref in FunctionDef
+   * 
+   * @returns {Container} This function returns the container.
+   */
+  checkCircFunctionDef() {
+    let graph = new TopoSort();
+    this.functionDefStorage.forEach((functionDef) => {
+      if (!functionDef.isCore) {
+        let functionIds = functionDef.math
+          .functionList()
+          .map((x) => x.name);
+        functionIds.length > 0 && graph.add(functionDef.id, functionIds);
+      }
+    });
+
+    try {
+      graph.sort(); // independent will be at the end
+    } catch (err) { // catch cycling
+      let infoLine = err.circular.map((id) => {
+        let functionDef = this.functionDefStorage.get(id);
+        return `\t${id} = ${functionDef.math}`;
+      }).join('\n');
+      let msg = 'Circular dependency in functionDef: \n' + infoLine;
       this.logger.error(msg, {type: 'CircularError'});
     }
 

@@ -35,7 +35,8 @@ Namespace.prototype.getSBMLImage = function() {
   }
 
   // set functionDefinition
-  let listOfFunctionDefinitions = [...functionDefStorage.values()];
+  let listOfFunctionDefinitions = [...functionDefStorage.values()]
+    .filter((functionDef) => !functionDef.isCore);
 
   return {
     population: this,

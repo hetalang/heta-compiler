@@ -75,7 +75,8 @@ Namespace.prototype.getMatlabImage = function() {
     pTranslator[x.switcher.id + '_'] = `p(${const_len + i + 1})`;
   });
 
-  let functionDefArray = [...this.container.functionDefStorage.values()];
+  let functionDefArray = [...this.container.functionDefStorage.values()]
+    .filter((functionDef) => !functionDef.isCore);
 
   return { 
     builderName,
