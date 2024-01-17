@@ -254,5 +254,104 @@
     {
         "id": "ifeq", "action": "defineFunction",
         "arguments": ["x", "y", "z1", "z2"]
+    },
+
+    {
+        "id": "acos", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "acot", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "acsc", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "asec", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "asin", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "atan", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "cos", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "cot", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "csc", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "sec", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "sin", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "tan", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+
+
+    {
+        "id": "acosh", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "acoth", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "acsch", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "asech", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "asinh", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "atanh", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "cosh", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "coth", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "csch", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "sech", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "sinh", "action": "defineFunction",
+        "arguments": ["x"]
+    },
+    {
+        "id": "tanh", "action": "defineFunction",
+        "arguments": ["x"]
     }
 ]

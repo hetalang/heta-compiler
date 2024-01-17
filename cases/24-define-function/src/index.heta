@@ -39,7 +39,21 @@
   arguments: [x,y],
   math: f8(x)*f8(x)
 };
+
+// lost argument
+#defineFunction f10 {
+  arguments: [x],
+  math: f8(x)*sin(y)
+};
 */
+
+// lost argument in internal function
+#defineFunction f11 {
+  arguments: [x,y],
+  math: "f5()*pow(x)"
+};
+
+
 #defineUnit u1 {
   units: litre^2,
 };
