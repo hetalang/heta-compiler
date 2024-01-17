@@ -11,7 +11,7 @@ const { Expression } = require('./expression');
   };
 */
 class StopSwitcher extends _Switcher {
-  merge(q = {}){
+  merge(q = {}) {
     super.merge(q);
     let logger = this.namespace?.container?.logger;
     let valid = StopSwitcher.isValid(q, logger);
@@ -62,12 +62,10 @@ class StopSwitcher extends _Switcher {
   }
   bind(namespace){
     super.bind(namespace);
-    let logger = this.namespace.container.logger;
+    let {logger, functionDefStorage} = this.namespace.container;
 
     // get list of 
-    let deps = this.trigger ? this.trigger.dependOnNodes() : [];
-
-    deps.forEach((node) => {
+    this.trigger && this.trigger.dependOnNodes().forEach((node) => {
       let target = namespace.get(node.name);
 
       if (!target) {
@@ -82,6 +80,25 @@ class StopSwitcher extends _Switcher {
         this.errored = true;
       } else {
         node.nameObj = target;
+      }
+    });
+
+    // check references to function definitions
+    this.trigger && this.trigger.functionList().forEach((functionNode) => {
+      // find target functionDef
+      let target = functionDefStorage.get(functionNode.fn.name);
+      if (!target) {
+        let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
+          + `${this.index} { trigger: ${this.trigger} };`;
+        logger.error(msg, {type: 'BindingError'});
+      } else {
+        // functionNode.functionObj = target; // not used
+      }
+
+      // check arguments in functionNode
+      if (target?.arguments && functionNode.args.length < target.arguments.length) {
+        let msg = `StopSwitcher "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
+        logger.error(msg, {type: 'BindingError'});
       }
     });
   }

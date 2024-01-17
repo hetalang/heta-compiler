@@ -45,14 +45,18 @@
   arguments: [x],
   math: f8(x)*sin(y)
 };
-*/
 
-// lost argument in internal function
+// no arguments
 #defineFunction f11 {
-  arguments: [x,y],
   math: "f5()*pow(x)"
 };
 
+// lost argument in internal function
+#defineFunction f12 {
+  arguments: [x,y],
+  math: "f5()*pow(x,y)"
+};
+*/
 
 #defineUnit u1 {
   units: litre^2,
@@ -60,7 +64,7 @@
 
 c1 @Compartment .= 2;
 s1 @Species {compartment: c1} .= 100;
-r1 @Reaction {actors: s1=} := k1 * pow7(s1) * c1;
+r1 @Reaction {actors: s1=} := k1 * pow7() * c1;
 
 k1 @Const = 0.1;
 

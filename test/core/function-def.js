@@ -60,11 +60,13 @@ let input0 = [
   {
     action: 'defineFunction',
     id: 'fun2',
+    arguments: [],
     math: '1'
   },
   {
     action: 'defineFunction',
     id: 'fun3',
+    arguments: [],
     math: '1'
   },
   {

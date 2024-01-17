@@ -48,10 +48,13 @@ class FunctionDef extends Top {
     let valid = FunctionDef.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
+    // undefined arguments means it can be anything (for core elements)
     if (q.arguments) {
       this.arguments = q.arguments;
-    } else {
-      this.arguments = [];
+    } else if (q.math) {
+      let msg = `The FunctionDef ${q.id} with "math" property must have "arguments".`;
+      logger && logger.error(msg, {type: 'ValidationError'});
+      this.errored = true;
     }
     
     if (q.math) {
@@ -73,7 +76,7 @@ class FunctionDef extends Top {
 
       // check that identifiers in `math` correspond to `arguments`
       let lostVariables = expr.dependOn()
-        .filter((v) => this.arguments.indexOf(v) === -1);
+        .filter((v) => this.arguments?.indexOf(v) === -1);
       if (lostVariables.length > 0) {
         let msg = this.id + ': '+ `variables [${lostVariables.join(', ')}] are presented in math but not in arguments.`;
         logger && logger.error(msg, {type: 'ValidationError'});
@@ -89,20 +92,25 @@ class FunctionDef extends Top {
   }
   bind() {
     // super.bind();
-    let logger = this._container.logger;
-    let storage = this._container.functionDefStorage;
+    let {logger, functionDefStorage} = this._container;
 
     if (this.math) { // if math is presented then it is user-defined functions
-      // find and set symbolObj
-      let list = this.math.functionList().forEach((symbolNode) => {
-        let target = storage.get(symbolNode.name);
-
+      // find and set reference to other functions
+      this.math.functionList().forEach((functionNode) => {
+        // find target functionDef
+        let target = functionDefStorage.get(functionNode.fn.name);
         if (!target) {
-          let msg = `FunctionDef "${symbolNode.name}" is not found as expected here: `
+          let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
           + `${this.index} { math: ${this.math} };`;
           logger.error(msg, {type: 'BindingError'});
         } else {
-          symbolNode.symbolObj = target;
+          // functionNode.functionObj = target; // not used
+        }
+
+        // check arguments in functionNode
+        if (target && functionNode.args.length < target.arguments.length) {
+          let msg = `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
+          logger.error(msg, {type: 'BindingError'});
         }
       });
     }

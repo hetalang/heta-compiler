@@ -227,7 +227,7 @@ class Container {
       if (!functionDef.isCore) {
         let functionIds = functionDef.math
           .functionList()
-          .map((x) => x.name);
+          .map((x) => x.fn.name);
         functionIds.length > 0 && graph.add(functionDef.id, functionIds);
       }
     });

@@ -165,7 +165,7 @@ class Expression {
   */
   functionList() {
     let list = this.exprParsed
-      .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path === 'fn');
+      .filter((node, path/*, parent*/) => node.type === 'FunctionNode');
 
     return uniqBy(list, (x) => x.name);
   }

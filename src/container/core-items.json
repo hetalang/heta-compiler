@@ -184,8 +184,7 @@
         "arguments": ["x"]
     },
     {
-        "id": "log", "action": "defineFunction",
-        "arguments": ["x", "base"]
+        "id": "log", "action": "defineFunction"
     },
     {
         "id": "log10", "action": "defineFunction",
@@ -212,8 +211,7 @@
         "arguments": ["x"]
     },
     {
-        "id": "nthRoot", "action": "defineFunction",
-        "arguments": ["x", "n"]
+        "id": "nthRoot", "action": "defineFunction"
     },
     {
         "id": "square", "action": "defineFunction",
@@ -224,12 +222,10 @@
         "arguments": ["x", "y"]
     },
     {
-        "id": "max", "action": "defineFunction",
-        "arguments": ["x", "y", "z"]
+        "id": "max", "action": "defineFunction"
     },
     {
-        "id": "min", "action": "defineFunction",
-        "arguments": ["x", "y", "z"]
+        "id": "min", "action": "defineFunction"
     },
     {
         "id": "factorial", "action": "defineFunction",
@@ -353,5 +349,8 @@
     {
         "id": "tanh", "action": "defineFunction",
         "arguments": ["x"]
+    },
+    {
+        "id": "piecewise", "action": "defineFunction"
     }
 ]

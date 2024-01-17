@@ -80,7 +80,7 @@ class Record extends _Size {
   }
   bind(namespace){
     super.bind(namespace);
-    let logger = this.namespace.container.logger;
+    let {logger, functionDefStorage} = this.namespace.container;
 
     // check initialization
     let hasInit = this.assignments?.start_ !== undefined
@@ -93,23 +93,43 @@ class Record extends _Size {
     // check math expression refs
     for (const key in this.assignments) {
       let mathExpr = this.assignments[key];
-      mathExpr.dependOnNodes()
-        .forEach((node) => {
-          let target = namespace.get(node.name);
-          if (!target) {
-            let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in expression: `
-                  + `${this.index} [${key}]= ${mathExpr.toString()};`;
-            logger.error(msg, {type: 'BindingError', space: this.space});
-            this.errored = true;
-          } else if (!target.instanceOf('_Size')) {
-            let msg = `Component "${node.name}" is not a Const/Record/TimeScale class as expected in expression: `
-              + `${this.index} [${key}]= ${mathExpr.toString()};`;
-            logger.error(msg, {type: 'BindingError', space: this.space});
-            this.errored = true;
-          } else {
-            node.nameObj = target;
-          }
-        });
+
+      // check references to components
+      mathExpr.dependOnNodes().forEach((node) => {
+        let target = namespace.get(node.name);
+        if (!target) {
+          let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in expression: `
+                + `${this.index} [${key}]= ${mathExpr.toString()};`;
+          logger.error(msg, {type: 'BindingError', space: this.space});
+          this.errored = true;
+        } else if (!target.instanceOf('_Size')) {
+          let msg = `Component "${node.name}" is not a Const/Record/TimeScale class as expected in expression: `
+            + `${this.index} [${key}]= ${mathExpr.toString()};`;
+          logger.error(msg, {type: 'BindingError', space: this.space});
+          this.errored = true;
+        } else {
+          node.nameObj = target;
+        }
+      });
+
+      // check references to function definitions
+      mathExpr.functionList().forEach((functionNode) => {
+        // find target functionDef
+        let target = functionDefStorage.get(functionNode.fn.name);
+        if (!target) {
+          let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
+            + `${this.index} { math: ${this.math} };`;
+          logger.error(msg, {type: 'BindingError'});
+        } else {
+          // functionNode.functionObj = target; // not used
+        }
+
+        // check arguments in functionNode
+        if (target?.arguments && functionNode.args.length < target.arguments.length) {
+          let msg = `Record "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
+          logger.error(msg, {type: 'BindingError'});
+        }
+      });
     }
   }
   toQ(options = {}){
