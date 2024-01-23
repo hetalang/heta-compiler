@@ -27,11 +27,18 @@ describe('Unit test for FunctionDef', () => {
     });
     
     expect(simple._container.logger).property('hasErrors').false;
-
     simple._container.logger.resetErrors();
   });
 
-  it('Error: wrong input 1.', () => {
+  it('defineFunction without math is ok.', () => {
+    let simple = new p.classes.FunctionDef({
+      id: 'ud1',
+      arguments: ['x']
+    });
+    expect(simple._container.logger).to.has.property('hasErrors', false);
+  });
+
+  it('Error: wrong input 1 (bad arguments).', () => {
     let simple1 = new p.classes.FunctionDef({
       id: 'u1',
       arguments: 'xxx'
@@ -41,12 +48,21 @@ describe('Unit test for FunctionDef', () => {
     simple1._container.logger.resetErrors();
   });
 
-  it('Error: wrong input 2.', () => {
+  it('Error: wrong input 2 (no id).', () => {
     let simple2 = new p.classes.FunctionDef({
       arguments: ['xxx']
     });
     expect(simple2._container.logger).to.has.property('hasErrors', true);
     simple2._container.logger.resetErrors();
+  });
+
+  it('Error: error input 3 (math without arguments).', () => {
+    let simple3 = new p.classes.FunctionDef({
+      id: 'u3',
+      math: '1*1'
+    });
+    expect(simple3._container.logger).to.has.property('hasErrors', true);
+    simple3._container.logger.resetErrors();
   });
 });
 
