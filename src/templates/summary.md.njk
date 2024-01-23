@@ -1,0 +1,74 @@
+# Summary for platform 
+
+## #defineFunction elements
+
+Total count: {{ functionDefStorage | length }}
+
+### Core
+
+{% for key, value in functionDefStorage | filter2('1.isCore', true) %}{{ value.id }}, {% endfor %}
+
+### User-defined
+
+{% set userFunctionDef = functionDefStorage | exclude2('1.isCore', true) %}
+{{- '-' if not userFunctionDef.length }}
+{%- for key, value in userFunctionDef %}{{ value.id }}, {% endfor %}
+
+## #defineUnit elements
+
+Total count: {{ unitDefStorage | length }}
+
+### Core
+
+{% for key, value in unitDefStorage | filter2('1.isCore', true) %}{{ value.id }}, {% endfor %}
+
+### User-defined
+
+{% set userUnitDef = unitDefStorage | exclude2('1.isCore', true) %}
+{{- '-' if not userUnitDef.length }}
+{%- for key, value in userUnitDef %}{{ value.id }}, {% endfor %}
+
+## #setNS elements
+
+Totalcount: {{ namespaceStorage | length }}
+
+{% for key, value in namespaceStorage %}{{ key }}, {% endfor %}
+
+{% for name, ns in selectedNamespaces %}
+## "{{ name }}" namespace ({{ 'abstract' if ns.isAbstract else 'concrete' }})
+
+Total count: {{ ns.size }}
+
+## @TimeScale
+
+{% for key, value in ns | filter2('1.className', 'TimeScale') %}{{ key }}, {% endfor %}
+
+## @Const
+
+{% for key, value in ns | filter2('1.className', 'Const') %}{{ key }}, {% endfor %}
+
+## @Record
+
+{% for key, value in ns | filter2('1.className', 'Record') %}{{ key }}, {% endfor %}
+
+## @Process
+
+{% for key, value in ns | filter2('1.className', 'Process') %}{{ key }}, {% endfor %}
+
+## @Compartment
+
+{% for key, value in ns | filter2('1.className', 'Compartment') %}{{ key }}, {% endfor %}
+
+## @Species
+
+{% for key, value in ns | filter2('1.className', 'Species') %}{{ key }}, {% endfor %}
+
+## @Reaction
+
+{% for key, value in ns | filter2('1.className', 'Reaction') %}{{ key }}, {% endfor %}
+
+## @TimeSwitcher
+
+{% for key, value in ns | filter2('1.className', 'TimeSwitcher') %}{{ key }}, {% endfor %}
+{# CSwitcher, DSwitcher, StopSwitcher, Dose, Page, #}
+{% endfor %}

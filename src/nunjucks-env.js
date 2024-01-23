@@ -6,10 +6,10 @@ module.exports = function(env) {
 
   // add Filteers for Environment
   env.addFilter('filter2', function(arr, path, value) {
-    return arr.filter((x) => _get(x, path)===value);
+    return [...arr].filter((x) => _get(x, path)===value);
   });
   env.addFilter('exclude2', function(arr, path, value) {
-    return arr.filter((x) => _get(x, path)!==value);
+    return [...arr].filter((x) => _get(x, path)!==value);
   });
   env.addFilter('getReactants', function(effectors) {
     return effectors

@@ -28,6 +28,7 @@ global.compiledTemplates = {
   'heta-code.heta.njk': require('./templates/heta-code.heta.njk'),
   'dbsolve-model.slv.njk': require('./templates/dbsolve-model.slv.njk'),
   'dot.dot.njk': require('./templates/dot.dot.njk'),
+  'summary.md.njk': require('summary.md.njk'),
   'julia-model.jl.njk': require('./templates/julia-model.jl.njk'),
   'julia-run.jl.njk': require('./templates/julia-run.jl.njk'),
   'matlab-model.m.njk': require('./templates/matlab-model.m.njk'),
@@ -63,6 +64,7 @@ Container._exportClasses = {
   Matlab: require('./matlab-export'),
   Julia: require('./julia-export'),
   Dot: require('./dot-export'),
+  Summary: require('./summary-export'),
 };
 
 module.exports = {

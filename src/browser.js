@@ -23,6 +23,7 @@ global.compiledTemplates = {
   'heta-code.heta.njk': nunjucksEnv.getTemplate('heta-code.heta.njk'),
   'dbsolve-model.slv.njk': nunjucksEnv.getTemplate('dbsolve-model.slv.njk'),
   'dot.dot.njk': nunjucksEnv.getTemplate('dot.dot.njk'),
+  'summary.md.njk': nunjucksEnv.getTemplate('summary.md.njk'),
   'julia-model.jl.njk': nunjucksEnv.getTemplate('julia-model.jl.njk'),
   'julia-run.jl.njk': nunjucksEnv.getTemplate('julia-run.jl.njk'),
   'matlab-model.m.njk': nunjucksEnv.getTemplate('matlab-model.m.njk'),
@@ -58,6 +59,7 @@ Container._exportClasses = {
   Matlab: require('./matlab-export'),
   Julia: require('./julia-export'),
   Dot: require('./dot-export'),
+  Summary: require('./summary-export'),
 };
 
 module.exports = {
