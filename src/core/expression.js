@@ -186,8 +186,8 @@ class Expression {
 
     return isBooleanOperator || isBooleanValue;
   }
-  calcUnit(record){
-    return _calcUnit(this.exprParsed, record);
+  calcUnit(component) { // component here is used for logger and index
+    return _calcUnit(this.exprParsed, component);
   }
 }
 

@@ -1,6 +1,6 @@
 /*
 This module calculates units based on expressions
-Records of the expressions must be bound before running this method
+Records of the expressions must be bound before running the method
 */
 const { Unit } = require('./unit');
 
@@ -8,7 +8,7 @@ const { Unit } = require('./unit');
   _this : Node
   record : Record
 */
-function _calcUnit(_this, record){
+function _calcUnit(_this, record) {
   const logger = record.namespace.container.logger;
 
   if (_this.type === 'ParenthesisNode') {

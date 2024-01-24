@@ -254,6 +254,11 @@ class Container {
   checkUnits(){
     this.namespaceStorage.forEach((ns) => {
       if (!ns.isAbstract) {
+        // check units for t
+        let timeUnits = ns.get('t').unitsParsed;
+        if (!timeUnits) {
+          this.logger.warn('No units set for "t", cannot check ODE units.');
+        }
         // check Record.assignments
         ns.selectByInstanceOf('Record')
           .forEach((rec) => rec.checkUnits());

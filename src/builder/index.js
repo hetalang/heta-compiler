@@ -83,7 +83,7 @@ class Builder {
    * 3. Loading integrated structures into `Platform`.
    * 4. Setting cross-references in platform's elements.
    * 5. Checking circular references in mathematical expressions.
-   * 6. Checking circular unitDef references.
+   * 6. Checking circular unitDef references. Checking circular functionDef rferences.
    * 7. Checking left and right side units compatibility for mathematical expressions.
    * 8. Checking unit\'s terms.
    * 9. Export of a platform to series of formats. 
@@ -116,7 +116,6 @@ class Builder {
 
     // 3. Translation
     this.container.loadMany(qArr, false);
-    //console.log([...this.container.unitDefStorage]); // XXX: debugging
 
     // 4. Binding
     this.logger.info('Setting references in elements, total length ' + this.container.length);

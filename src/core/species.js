@@ -80,6 +80,56 @@ class Species extends Record {
     return super._references()
       .concat(classSpecificRefs);
   }
+  /*
+  Check units for left and right side of ODE
+  Works only for bound records
+  */
+  checkUnits() {
+    super.checkUnits();
+
+    let logger = this.namespace?.container?.logger;
+
+    // if not in processes do not check
+    let processes = this.backReferences.map(x => x._process_);
+    if (!processes.length) {
+      return; // BRAKE
+    }
+
+    // if no units for t skip check, message in Container.checkUnits()
+    let timeUnits = this.namespace.get('t').unitsParsed;
+    if (!timeUnits) {
+      return; // BRAKE
+    }
+
+    let compartmentUnits = this.compartmentObj?.unitsParsed;
+    if (!compartmentUnits && !this.isAmount) {
+      logger.warn(`No units set for compartment "${this.compartment}", cannot check units for "${this.index}" associated ODE.`);
+      return; // BRAKE
+    }
+
+    let speciesUnits = this.unitsParsed;
+    if (!speciesUnits) {
+      logger.warn(`No units set for "${this.index}", cannot check units for associated ODE.`);
+      return; // BRAKE
+    }
+
+    // d(s*c)/dt
+    let leftSideUnits = speciesUnits
+      .multiply(compartmentUnits)
+      .divide(timeUnits)
+      .simplify();
+    // r1 + r2 + r3
+    processes.forEach((proc) => {
+      let processUnits = proc.unitsParsed;
+      if (!processUnits) {
+        // message was in Process.checkUnits
+        return; // BRAKE
+      }
+      if (!leftSideUnits.equal(processUnits, true)) {
+        logger.warn(`Unit inconsistency for ${this.id} associated ODE. Left: ${leftSideUnits.toString()}. Right: ${processUnits.toString()} (${proc.id})`);
+      }
+    });
+  }
   get legalTerms() {
     let actualCompartmentTerm = this.compartmentObj?.unitsParsed?.toTerm();
     
