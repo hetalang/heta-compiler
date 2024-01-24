@@ -1,8 +1,6 @@
 # Summary for platform 
 
-## #defineFunction elements
-
-Total count: {{ functionDefStorage | length }}
+## FunctionDef elements ({{ functionDefStorage | length }})
 
 ### Core
 
@@ -14,9 +12,7 @@ Total count: {{ functionDefStorage | length }}
 {{- '-' if not userFunctionDef.length }}
 {%- for key, value in userFunctionDef %}{{ value.id }}, {% endfor %}
 
-## #defineUnit elements
-
-Total count: {{ unitDefStorage | length }}
+## UnitDef elements ({{ unitDefStorage | length }})
 
 ### Core
 
@@ -28,47 +24,40 @@ Total count: {{ unitDefStorage | length }}
 {{- '-' if not userUnitDef.length }}
 {%- for key, value in userUnitDef %}{{ value.id }}, {% endfor %}
 
-## #setNS elements
-
-Totalcount: {{ namespaceStorage | length }}
+## Namespace elements ({{ namespaceStorage | length }})
 
 {% for key, value in namespaceStorage %}{{ key }}, {% endfor %}
 
-{% for name, ns in selectedNamespaces %}
-## "{{ name }}" namespace ({{ 'abstract' if ns.isAbstract else 'concrete' }})
+{% for img in nsImages %}{% set ns = img.ns %}
+## "{{ ns.spaceName }}" {{ 'abstract' if ns.isAbstract else 'concrete' }} namespace ({{ ns.size }})
 
-Total count: {{ ns.size }}
+### By classes
 
-## @TimeScale
+TimeScale: {% for key, value in ns | filter2('1.className', 'TimeScale') %}{{ key }}, {% endfor %}
 
-{% for key, value in ns | filter2('1.className', 'TimeScale') %}{{ key }}, {% endfor %}
+Const: {% for key, value in ns | filter2('1.className', 'Const') %}{{ key }}, {% endfor %}
 
-## @Const
+Record: {% for key, value in ns | filter2('1.className', 'Record') %}{{ key }}, {% endfor %}
 
-{% for key, value in ns | filter2('1.className', 'Const') %}{{ key }}, {% endfor %}
+Process: {% for key, value in ns | filter2('1.className', 'Process') %}{{ key }}, {% endfor %}
 
-## @Record
+Compartment: {% for key, value in ns | filter2('1.className', 'Compartment') %}{{ key }}, {% endfor %}
 
-{% for key, value in ns | filter2('1.className', 'Record') %}{{ key }}, {% endfor %}
+Species: {% for key, value in ns | filter2('1.className', 'Species') %}{{ key }}, {% endfor %}
 
-## @Process
+Reaction: {% for key, value in ns | filter2('1.className', 'Reaction') %}{{ key }}, {% endfor %}
 
-{% for key, value in ns | filter2('1.className', 'Process') %}{{ key }}, {% endfor %}
-
-## @Compartment
-
-{% for key, value in ns | filter2('1.className', 'Compartment') %}{{ key }}, {% endfor %}
-
-## @Species
-
-{% for key, value in ns | filter2('1.className', 'Species') %}{{ key }}, {% endfor %}
-
-## @Reaction
-
-{% for key, value in ns | filter2('1.className', 'Reaction') %}{{ key }}, {% endfor %}
-
-## @TimeSwitcher
-
-{% for key, value in ns | filter2('1.className', 'TimeSwitcher') %}{{ key }}, {% endfor %}
+TimeSwitcher: {% for key, value in ns | filter2('1.className', 'TimeSwitcher') %}{{ key }}, {% endfor %}
 {# CSwitcher, DSwitcher, StopSwitcher, Dose, Page, #}
+### Orphan (unused) components
+
+Const: {% for x in img.orphanConsts %}{{ x }}, {% endfor %}{{ '-' if not img.orphanConsts | length }}
+
+Record: {% for x in img.orphanRecords %}{{ x }}, {% endfor %}{{ '-' if not img.orphanRecords | length }}
+
+Switcher: {% for x in img.orphanSwitchers %}{{ x }}, {% endfor %}{{ '-' if not img.orphanSwitchers | length }}
+
+### Lost (absent) components
+
+{% for x in img.lostComponents %}{{ x }}, {% endfor %}{{ '-' if not img.lostComponents | length }}
 {% endfor %}

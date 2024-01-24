@@ -34,8 +34,8 @@ class SummaryExport extends AbstractExport {
     let image = {
       unitDefStorage: this._container.unitDefStorage,
       functionDefStorage: this._container.functionDefStorage,
-      selectedNamespaces: selectedNamespaces,
-      namespaceStorage: this._container.namespaceStorage
+      namespaceStorage: this._container.namespaceStorage,
+      nsImages: selectedNamespaces.map((x) => x[1].getSummaryImage())
     };
     let content = this.getDotCode(image);
 

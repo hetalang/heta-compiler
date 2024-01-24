@@ -45,6 +45,18 @@ function intersection(array1, array2) {
   return intersect;
 }
 
+function differenceBy(array1, array2, selector = (x) => x) {
+  let result = [];
+  array1.forEach((x) => {
+    let selected1 = selector(x);
+    if (array2.map(selector).indexOf(selected1) === -1) {
+      result.push(x);
+    }
+  });
+
+  return result;
+}
+
 function flatten(o){
   if (typeof o!== 'object')
     throw new TypeError('Object required.');
@@ -94,6 +106,7 @@ module.exports = {
   ajv,
   uniqBy,
   intersection,
+  differenceBy,
   flatten,
   cloneDeep
 };
