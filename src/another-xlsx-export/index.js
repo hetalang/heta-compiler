@@ -59,7 +59,6 @@ class AnotherXLSXExport extends XLSXExport {
         .map((_q) => {
           //q['#'] = counter++;
           let q = {st: 'r', ..._q};
-          if (q.isAmount !== false) q.compartment = 'no';
           delete q.class;
           delete q.units;
           delete q.units2;

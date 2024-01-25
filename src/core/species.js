@@ -36,8 +36,8 @@ class Species extends Record {
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if(this.compartment) res.compartment = this.compartment;
-    if(this.isAmount) res.isAmount = this.isAmount;
+    if (this.compartment) res.compartment = this.compartment;
+    if (this.isAmount) res.isAmount = this.isAmount;
     return res;
   }
   unitsSBML(){

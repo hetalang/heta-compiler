@@ -178,10 +178,6 @@
               { "$ref": "#/definitions/ID" }
             ]
           }
-        },
-        "isAmount": { "enum": [true, false, 1, 0] },
-        "compartment": {
-          "$ref": "#/definitions/ID"
         }
       },
       "errorMessage": {

@@ -14,7 +14,6 @@ const { UnitTerm } = require('./unit-term');
 class Reaction extends Process {
   constructor(isCore = false){
     super(isCore);
-    this.isAmount = true;
     this.modifiers = [];
   }
   merge(q = {}){
@@ -35,7 +34,6 @@ class Reaction extends Process {
       }
       
       if (q.compartment !== undefined) this.compartment = q.compartment;
-      if (q.isAmount !== undefined) this.isAmount = !!q.isAmount;
     }
     
     return this;
@@ -46,10 +44,9 @@ class Reaction extends Process {
   clone(){
     let clonedComponent = super.clone();
 
-    if (this.modifiers.length > 0)
+    if (this.modifiers.length > 0) {
       clonedComponent.modifiers = this.modifiers.map((modifier) => modifier.clone());
-    if (typeof this.isAmount !== 'undefined')
-      clonedComponent.isAmount = this.isAmount;
+    }
 
     return clonedComponent;
   }
@@ -62,7 +59,6 @@ class Reaction extends Process {
     }
 
     if (this.compartment !== undefined) res.compartment = this.compartment;
-    if (this.isAmount !== true) res.isAmount = this.isAmount;
 
     return res;
   }

@@ -42,7 +42,6 @@
 - checking legal functions inside Expressions and functionDefinition
 - `#defineFunction`: different exports, functionDef vs units
 - write reusable `Build` class
-- remove `isAmount` properties from `@Reaction`
 
 ## ideas
 

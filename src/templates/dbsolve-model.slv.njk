@@ -1,6 +1,6 @@
 {% macro diff(backReferences = []) -%}
 {% for br in backReferences|exclude2('stoichiometry', undefined) -%}
-{% if br.stoichiometry > 0 and not loop.first %}+{% endif %}{{ br.stoichiometry + '*'}}{{ br.process }}{{ '' if br._process_.isAmount!==false else '*' + br._process_.compartment }}
+{% if br.stoichiometry > 0 and not loop.first %}+{% endif %}{{ br.stoichiometry + '*'}}{{ br.process }}
 {%- endfor %}
 {%- endmacro %}
 {%- set compartments = population.selectByClassName('Compartment') %}
