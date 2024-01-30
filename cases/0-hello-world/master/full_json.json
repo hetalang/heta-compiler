@@ -7,7 +7,7 @@
   {
     "id": "t",
     "space": "mm",
-    "units": "second"
+    "units": "minute"
   },
   {
     "class": "Compartment",

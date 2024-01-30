@@ -19,7 +19,7 @@ namespace mm begin
   S .= 10; // S should be initialialized after creation
   P .= 0;
 
-  t {units: second};
+  t {units: minute};
   Vmax @Const = 0.1 {units: uM/minute}; // this is global constant available for any scoped equation
   Km @Const = 2.5 {units: uM};
 

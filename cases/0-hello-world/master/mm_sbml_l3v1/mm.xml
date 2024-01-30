@@ -7,9 +7,49 @@
   <model
     id="mm" 
     metaid="mm"
-    timeUnits="_second"
+    timeUnits="_minute"
     >
     
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_minute" name="minute">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="1" multiplier="6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_L" name="L">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_uM_L" name="uM*L">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_umole__minute" name="umole/minute">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_uM__minute" name="uM/minute">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+    <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_uM" name="uM">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
     <listOfCompartments>
       <compartment
         id="default_comp"
@@ -100,43 +140,6 @@
       </reaction>
     </listOfReactions>
   
-<!-- UNIT DEFINITIONS -->
-<listOfUnitDefinitions>
-  <unitDefinition id="_second" name="second">
-  <listOfUnits>
-    <unit kind="second" exponent="1" scale="0" multiplier="1"/>
-  </listOfUnits>
-</unitDefinition>
-  <unitDefinition id="_L" name="L">
-  <listOfUnits>
-    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
-  </listOfUnits>
-</unitDefinition>
-  <unitDefinition id="_uM_L" name="uM*L">
-  <listOfUnits>
-    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
-  </listOfUnits>
-</unitDefinition>
-  <unitDefinition id="_umole__minute" name="umole/minute">
-  <listOfUnits>
-    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
-    <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
-  </listOfUnits>
-</unitDefinition>
-  <unitDefinition id="_uM__minute" name="uM/minute">
-  <listOfUnits>
-    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
-    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
-    <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
-  </listOfUnits>
-</unitDefinition>
-  <unitDefinition id="_uM" name="uM">
-  <listOfUnits>
-    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
-    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
-  </listOfUnits>
-</unitDefinition>
-</listOfUnitDefinitions>
   
   </model>
 </sbml>

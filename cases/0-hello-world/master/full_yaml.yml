@@ -3,7 +3,7 @@
   type: concrete
 - id: t
   space: mm
-  units: second
+  units: minute
 - class: Compartment
   id: default_comp
   space: mm
