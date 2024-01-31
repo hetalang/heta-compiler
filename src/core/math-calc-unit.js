@@ -209,23 +209,29 @@ function _calcUnit(_this, record) {
       }
       return firstUnit;
     }
-    if (_this.fn.name === 'exp' || _this.fn.name === 'factorial') { // first argument must be dimensionless, result is dimensionless 
+    let simpleFunctions = [
+      'exp', 'factorial',
+      'acos', 'acot', 'acsc', 'asec', 'asin', 'atan', 'cos', 'cot', 'csc', 'sec', 'sin', 'tan',
+      'acosh', 'acoth', 'acsch', 'asech', 'asinh', 'atanh', 'cosh', 'coth', 'csch', 'sech', 'sinh', 'tanh'
+    ];
+    if (simpleFunctions.indexOf(_this.fn.name) >=0 ) { // first argument must be dimensionless, result is dimensionless 
       if (!argUnitDimensionless[0]) {
         logger.warn(`Units inconsistency for "${record.index}": the argument must be dimensionless here "${_this.toString()}", got "${argUnit[0]}"`);
       }
       return new Unit();
-    } // user-defined functions
+    }
     if (_this.fnObj && _this.fnObj.math) { // user-defined functions
       // set units for internal FunctionDef arguments
       let newNode = _this.fnObj.math.exprParsed.clone();
       newNode.traverse((node, path) => {
         if (node.isSymbolNode && path !== 'fn') {
-          let ind = _this.fnObj.arguments.indexOf(node.name);
-          let u = _this.args[ind].nameObj.unitsParsed; // unit of argument
+          let ind = _this.fnObj.arguments.indexOf(node.name); // [x, y].indexOf(y)
+
+          let u = argUnit[ind];
           node.nameObj = { unitsParsed: u };
         }
       });
-
+      
       return _calcUnit(newNode, record);
     }
     // else

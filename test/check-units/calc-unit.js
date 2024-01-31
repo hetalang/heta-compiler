@@ -38,6 +38,14 @@ let qArr = [
   {id: 'x6', class: 'Record', units: 'metre^3', assignments: {start_: '1'}},
   {id: 'y15', class: 'Record', assignments: {start_: 'x6^(2/3)'}},
   {id: 'y16', class: 'Record', assignments: {start_: 'pow(x6, 2/3)'}},
+  // define function
+  {id: 'xxx', action: 'defineFunction', arguments: ['x', 'y'], math: 'sin(x)*pow(y, 3)'},
+  {id: 'yyy', action: 'defineFunction', arguments: ['x', 'y'], math: '1 * sin(x) * y^3'},
+  {id: 'k21', class: 'Const', num: 1, units: 'metre'},
+  {id: 'k22', class: 'Const', num: 1, units: 'mole'},
+  {id: 'y21', class: 'Record', units: 'metre^3', assignments: {ode_: 'k21^3 + xxx(1, k21)'}},
+  {id: 'y22', class: 'Record', units: 'mole^3', assignments: {ode_: 'k22^3 + xxx(1, k22)'}},
+  {id: 'y23', class: 'Record', units: 'metre^3', assignments: {ode_: 'k21^3 + yyy(1.1*2.2, k21)'}},
 ];
 
 describe('Testing checkUnits() for components', () => {
@@ -46,6 +54,7 @@ describe('Testing checkUnits() for components', () => {
   it('Create and knit', () => {
     p = new Container();
     p.loadMany(qArr);
+    //p.checkCircFunctionDef();
     p.knitMany();
     expect(p.logger).to.have.property('hasErrors').false;
   });
@@ -216,6 +225,27 @@ describe('Testing checkUnits() for components', () => {
     let expr = y16.assignments.start_;
     let unit = expr.calcUnit(y16).toString();
     expect(unit).to.be.equal('metre^2');
+  });
+
+  it('FunctionDef 1', () => {
+    let y21 = p.namespaceStorage.get('nameless').get('y21');
+    let expr = y21.assignments.ode_;
+    let unit = expr.calcUnit(y21).toString();
+    expect(unit).to.be.equal('metre^3');
+  });
+  
+  it('FunctionDef 2', () => {
+    let y22 = p.namespaceStorage.get('nameless').get('y22');
+    let expr = y22.assignments.ode_;
+    let unit = expr.calcUnit(y22).toString();
+    expect(unit).to.be.equal('mole^3');
+  });
+
+  it('FunctionDef 3', () => {
+    let y23 = p.namespaceStorage.get('nameless').get('y23');
+    let expr = y23.assignments.ode_;
+    let unit = expr.calcUnit(y23).toString();
+    expect(unit).to.be.equal('metre^3');
   });
 
   it('No warnings', () => {
