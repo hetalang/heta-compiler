@@ -20,7 +20,12 @@ d(s1*c1)/dt = - r1; left: mMole*L/minute, right: 1/h*mMole*h !!!
 d(s2*c2)/dt = r1;   left: mMole*mL/minute, right: 1/h*mMole*h !!!
 */
 
+#defineFunction pow7 {arguments: [x, y], math: "2*(x*pow(x, 7))"};
+#defineFunction xxx {arguments: [x, y], math: "x^8 + pow7(x, 1)"};
+p2 @Record {units: mM*h^7} := 23*s1/xxx(k1, 3);
+
 k1 @Const = 1e-3 {units: 1/h};
+k2 @Const = 1.1 {units: UL};
 
 // exports
 #export { format: JSON, filepath: output };

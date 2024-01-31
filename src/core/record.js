@@ -121,7 +121,7 @@ class Record extends _Size {
             + `${this.index} { math: ${this.math} };`;
           logger.error(msg, {type: 'BindingError'});
         } else {
-          // functionNode.functionObj = target; // not used
+          functionNode.fnObj = target; // used in units checking
         }
 
         // check arguments in functionNode
