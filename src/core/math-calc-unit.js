@@ -222,7 +222,9 @@ function _calcUnit(_this, record) {
     }
     if (_this.fnObj && _this.fnObj.math) { // user-defined functions
       // set units for internal FunctionDef arguments
-      let newNode = _this.fnObj.math.exprParsed.clone();
+      // TODO: need to rewrite with transform, because
+      // traverse mutates Symbol nodes in FunctionDef but cloneDeep losts the nameObj, fnObj properties
+      let newNode = _this.fnObj.math.exprParsed;
       newNode.traverse((node, path) => {
         if (node.isSymbolNode && path !== 'fn') {
           let ind = _this.fnObj.arguments.indexOf(node.name); // [x, y].indexOf(y)
