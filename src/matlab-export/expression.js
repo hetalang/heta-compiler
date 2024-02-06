@@ -19,7 +19,11 @@ Expression.prototype.toMatlabString = function(){
       let args = node.args
         .map((arg) => arg.toString(options))
         .join(', ');
-      return `min([${args}])`;
+      if (node.args.length <= 2) {
+        return `min(${args})`;
+      } else {
+        return `min([${args}])`;
+      }
     }
     if (node.type==='FunctionNode' && node.fn.name==='log') {
       if(node.args.length===1){

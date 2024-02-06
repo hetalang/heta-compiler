@@ -64,7 +64,7 @@
 
 c1 @Compartment .= 2;
 s1 @Species {compartment: c1} .= 100;
-r1 @Reaction {actors: s1=} := k1 * pow7() * c1;
+r1 @Reaction {actors: s1=} := k1 * pow7(1.1) * c1;
 
 k1 @Const = 0.1;
 

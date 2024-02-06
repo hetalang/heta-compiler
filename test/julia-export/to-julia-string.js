@@ -24,8 +24,8 @@ describe('Expression exports to Julia', () => {
     let expr = Expression.fromString('divide(x,y)');
     expect(expr.toJuliaString()).to.be.equal('/(x, y)');
   });
-  it('toJuliaString() for "plus(x,y)"', () => {
-    let expr = Expression.fromString('plus(x,y)');
+  it('toJuliaString() for "add(x,y)"', () => {
+    let expr = Expression.fromString('add(x,y)');
     expect(expr.toJuliaString()).to.be.equal('+(x, y)');
   });
   it('toJuliaString() for "square(x)"', () => {
