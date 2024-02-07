@@ -32,7 +32,7 @@ let qArr = [
   {id: 'y5', class: 'Record', assignments: {start_: 'max(k2, x4, k1) + min(k2, x4, 1)'}},
   {id: 'y6', class: 'Record', assignments: {start_: 'square(k2+k1)*cube(x4)*sqrt(x1a)'}},
   {id: 'y7', class: 'Record', assignments: {start_: 'nthRoot(4,x4)'}},
-  {id: 'y8', class: 'Record', assignments: {start_: 'log(2,k2)'}},
+  {id: 'y8', class: 'Record', assignments: {start_: 'logbase(k2, 2)'}},
   {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3 + 1.1)'}},
   {id: 'y10', class: 'Record', assignments: {start_: 'ifge(k1,k2,k3,k4)'}},
   {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2,k3,k4)'}},

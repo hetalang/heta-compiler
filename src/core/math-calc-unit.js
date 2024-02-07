@@ -167,9 +167,12 @@ function _calcUnit(_this, record) {
       }
     }
     if (_this.fn.name === 'log' || _this.fn.name === 'ln' || _this.fn.name === 'log10' || _this.fn.name === 'log2' ) {
-      if (args.length > 1 && !argUnitDimensionless[1]) {
-        let unitExpr = `log(${argUnit[0].toString()}, ${argUnit[1].toString()})`;
-        logger.warn(`Units inconsistency for "${record.index}": second arguments of log() must be dimensionless "${_this.toString()}" => "${unitExpr}"`);
+      return new Unit();
+    }
+    if (_this.fn.name === 'logbase') {
+      if (!argUnitDimensionless[0]) {
+        let unitExpr = `logbase(${argUnit[0].toString()}, ${argUnit[1].toString()})`;
+        logger.warn(`Units inconsistency for "${record.index}": first arguments of logbase() must be dimensionless "${_this.toString()}" => "${unitExpr}"`);
       }
       return new Unit();
     }

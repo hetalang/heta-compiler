@@ -64,15 +64,15 @@ Expression.prototype.toJuliaString = function(){
         .map((arg) => arg.toString(options));
       return `NaNMath.log(${args[0]})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='log' && node.args.length === 1){
+    if(node.type==='FunctionNode' && node.fn.name==='log'){
       let args = node.args
         .map((arg) => arg.toString(options));
       return `NaNMath.log(${args[0]})`;
     }
-    if(node.type==='FunctionNode' && node.fn.name==='log' && node.args.length >= 2){
+    if(node.type==='FunctionNode' && node.fn.name==='logbase'){
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `NaNMath.log(${args[1]}, ${args[0]})`;
+      return `NaNMath.log(${args[0]}, ${args[1]})`;
     }
     if(node.type==='FunctionNode' && node.fn.name==='factorial'){
       let args = node.args

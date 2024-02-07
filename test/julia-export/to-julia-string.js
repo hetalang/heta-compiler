@@ -72,8 +72,8 @@ describe('Expression exports to Julia', () => {
     let expr = Expression.fromString('log(exp(1))');
     expect(expr.toJuliaString()).to.be.equal('NaNMath.log(exp(1e+0))');
   });
-  it('toJuliaString() for "log(8, 2)"', () => {
-    let expr = Expression.fromString('log(8, 2)');
+  it('toJuliaString() for "logbase(2, 8)"', () => {
+    let expr = Expression.fromString('logbase(2, 8)');
     expect(expr.toJuliaString()).to.be.equal('NaNMath.log(2e+0, 8e+0)');
   });
   it('toJuliaString() for "log10(100)"', () => {

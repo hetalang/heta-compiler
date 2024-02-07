@@ -430,7 +430,7 @@ _Skipped cell means no conversion_
 |`floor(x)`| | | | |
 |`ln(x)`| |`NaNMath.log(x)`| | |
 |`log(x)`| |`NaNMath.log(x)`| |`log(x)`|
-|`log(x, base)`|`log(x) / log(base)`|`NaNMath.log(base, x)`| |`(log(x)/log(base))`|
+|`logbase(base, x)`|`log(x) / log(base)`|`NaNMath.log(base, x)`| |`(log(x)/log(base))`|
 |`log10(x)`| |`NaNMath.log10(x)`| | |
 |`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`| |`(log(x)/log(2))`|
 |`multiply(x, y)`|`x * y`|`*(x, y)`| | |
@@ -457,8 +457,8 @@ _Skipped cell means no conversion_
 |`Infinity`| |`Inf`| | |
 |`NaN`| |`NaN`| | |
 |`t`| | |`SOLVERTIME`|`time`|
-|`a and b`| |`a && b`| |`&`|
-|`a or b`| |`a \|\| b`| |`\|`|
+|`a and b`| |`a && b`| |`a & b`|
+|`a or b`| |`a \|\| b`| |`a \| b`|
 |`a xor b`| |`xor(a, b)`| |`xor(a, b)`|
 |`not a`| |`!a`| |`~a`|
 |`b1 < b2 ? x : y`| `ifgt(b1, b2, x, y)`| | |`tern__(b1 < b2, x, y)`|
@@ -479,7 +479,7 @@ _Conversion to SBML's MathML_
 |`floor(x)`|`<apply><floor/>(x)</apply>`|
 |`ln(x)`|`<apply><ln/>(x)</apply>`|
 |`log(x)`|`<apply><log/>(x)</apply>`|
-|`log(x, base)`|`<apply><log/><logbase>(base)</logbase>(x)</apply>`|
+|`logbase(base, x)`|`<apply><log/><logbase>(base)</logbase>(x)</apply>`|
 |`log10(x)`|`<apply><log/>(x)</apply>`|
 |`log2(x)`|`<apply><log/><logbase><cn>2</cn></logbase>(x)</apply>`|
 |`multiply(x, y)`|`<apply><times/>(x) (y)</apply>`|

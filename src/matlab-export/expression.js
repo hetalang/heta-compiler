@@ -26,14 +26,10 @@ Expression.prototype.toMatlabString = function(){
       }
     }
     if (node.type==='FunctionNode' && node.fn.name==='log') {
-      if(node.args.length===1){
-        return `log(${node.args[0].toString(options)})`;
-      }else if(node.args.length===2){ // converts log(a, b) => log(a)/log(b)
-        let args = node.args
-          .map((arg) => `log(${arg.toString(options)})`)
-          .join('/');
-        return `(${args})`;
-      }
+      return `log(${node.args[0].toString(options)})`;
+    }
+    if (node.type==='FunctionNode' && node.fn.name==='logbase') {
+      return `(log(${node.args[1].toString(options)})/log(${node.args[0].toString(options)}))`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='log2') {
       return `(log(${node.args[0].toString(options)})/log(2))`;
