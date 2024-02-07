@@ -33,6 +33,18 @@ class Expression {
       throw new TypeError('Cannot parse MathExpr properly. ' + e.message);
     }
 
+    // Check BlockNode and other unsupported syntax
+    let supportedNodeTypes = [
+      'SymbolNode', 'OperatorNode', 'FunctionNode', 'ConstantNode', 'ParenthesisNode',
+      'ConditionalNode',
+    ];
+    let unsupportedNodes = exprParsed.filter((node) => {
+      return supportedNodeTypes.indexOf(node.type) === -1;
+    });
+    if (unsupportedNodes.length > 0) {
+      throw new TypeError('Unsupported MathExpr syntax');
+    }
+
     // additional check of expressions
     exprParsed.traverse((node) => { // recursive forEach
       /*if (node.type === 'ConditionalNode') { // check that ternary has boolean expression
