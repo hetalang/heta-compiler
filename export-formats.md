@@ -476,7 +476,7 @@ _Conversion to SBML's MathML_
 |`exp(x)`|`<apply><exp/>(x)</apply>`|
 |`floor(x)`|`<apply><floor/>(x)</apply>`|
 |`ln(x)`|`<apply><ln/>(x)</apply>`|
-|`log(x)`|`<apply><log/>(x)</apply>`|
+|`log(x)`|`<apply><ln/>(x)</apply>`|
 |`logbase(base, x)`|`<apply><log/><logbase>(base)</logbase>(x)</apply>`|
 |`log10(x)`|`<apply><log/>(x)</apply>`|
 |`log2(x)`|`<apply><log/><logbase><cn>2</cn></logbase>(x)</apply>`|
@@ -484,7 +484,7 @@ _Conversion to SBML's MathML_
 |`pow(x, y)`|`<apply><power/>(x) (y)</apply>`|
 |`sign(x)`|`<apply><sign/>(x)</apply>`|
 |`sqrt(x)`|`<apply><root/>(x)</apply>`|
-|`nthRoot(x, n)`|not supported|
+|`nthRoot(x, n)`|`<apply><root/><degree>(n)</degree>(x)</apply>`|
 |`square(x)`|`<apply><power/>(x)<cn>2</cn></apply>`|
 |`subtract(x, y)`|`<apply><minus/>(x) (y)</apply>`|
 |`max(x, y)`|`<apply><max/>(x) (y)</apply>`|
@@ -498,15 +498,15 @@ _Conversion to SBML's MathML_
 |`ifle(x, y, z1, z2)`|not supported|
 |`ifeq(x, y, z1, z2)`|not supported|
 |`x ^ y`|`<apply><pow/>(x) (y)</apply>`|
-|`e`|not supported|
-|`pi`|not supported|
-|`Infinity`|not supported|
-|`NaN`|not supported|
+|`e`|`<exponentiale/>`|
+|`pi`|`<pi/>`|
+|`Infinity`|`<infinity/>`|
+|`NaN`|`<notanumber/>`|
 |`t`|`<csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>`|
-|`a and b`|`<apply><and/>(x) (y)</apply>`|
-|`a or b`|`<apply><or/>(x) (y)</apply>`|
-|`a xor b`|`<apply><xor>(x) (y)</apply>`|
-|`not a`|`<apply><not>(x)</apply>`|
-|`b1 < b2 ? x : y`|`<piecewise><piece>(x)<apply><smaller/>(b1) (b2)</apply></piece><otherwise>(y)</otherwise></piecewise>`|
+|`a and b`|`<apply><and/>(a) (b)</apply>`|
+|`a or b`|`<apply><or/>(a) (b)</apply>`|
+|`a xor b`|`<apply><xor>(a) (b)</apply>`|
+|`not a`|`<apply><not>(a)</apply>`|
+|`b1 < b2 ? x : y`|`<piecewise><piece>(x)<apply><lt/>(b1) (b2)</apply></piece><otherwise>(y)</otherwise></piecewise>`|
 |`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|`<piecewise><piece>(value1) (cond1)</piece><piece>(value2) (cond2)</piece><otherwise>(otherwise)</otherwise></piecewise>`|
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`|`<apply><arccos/>(x)</apply>`...|
