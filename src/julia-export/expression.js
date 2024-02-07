@@ -41,14 +41,7 @@ Expression.prototype.toJuliaString = function(){
     if(node.type==='FunctionNode' && node.fn.name==='sqrt'){
       return `NaNMath.sqrt(${node.args[0].toString(options)})`;
     }
-    
-    if(node.type==='FunctionNode' && node.fn.name==='nthRoot' && node.args.length === 1){
-      let args = node.args
-        .map((arg) => arg.toString(options));
-      return `NaNMath.sqrt(${args[0]})`;
-    }
-    
-    if(node.type==='FunctionNode' && node.fn.name==='nthRoot' && node.args.length >= 2){
+    if(node.type==='FunctionNode' && node.fn.name==='nthRoot'){
       let args = node.args
         .map((arg) => arg.toString(options));
       return `NaNMath.pow(${args[0]}, 1/(${args[1]}))`; // TODO: check here

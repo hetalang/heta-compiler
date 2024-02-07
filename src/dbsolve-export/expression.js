@@ -108,11 +108,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep') {
             return arg.toString(options);
           }
         });
-      if (node.args.length === 1) {
-        return `pow(${args[0]}, 1 / 2)`;
-      } else {
-        return `pow(${args[0]}, 1 / ${args[1]})`;
-      }
+      return `pow(${args[0]}, 1 / ${args[1]})`;
     }
     if (node.type === 'FunctionNode' && node.fn.name === 'nthRoot' && powTransform === 'operator') {
       let args = node.args
@@ -124,11 +120,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep') {
           }
         });
 
-      if (node.args.length === 1) {
-        return `${args[0]} ^ (1 / 2)`;
-      } else {
-        return `${args[0]} ^ (1 / ${args[1]})`;
-      }
+      return `${args[0]} ^ (1 / ${args[1]})`;
     }
     if (node.type === 'FunctionNode' && node.fn.name === 'logbase') {
       let args = node.args

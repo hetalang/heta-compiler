@@ -29,13 +29,13 @@ describe('Expression exports to SLV', () => {
     let expr = Expression.fromString('pow(n, -1/2)');
     expect(expr.toSLVString('operator')).to.be.equal('n ^ (-1 / 2)');
   });
-  it('toSLVString("operator") for "nthRoot(x)"', () => {
-    let expr = Expression.fromString('nthRoot(x)');
-    expect(expr.toSLVString('operator')).to.be.equal('x ^ (1 / 2)');
+  it('toSLVString("operator") for "sqrt(x)"', () => {
+    let expr = Expression.fromString('sqrt(x)');
+    expect(expr.toSLVString('operator')).to.be.equal('sqrt(x)');
   });
-  it('toSLVString("function") for "nthRoot(x)"', () => {
-    let expr = Expression.fromString('nthRoot(x)');
-    expect(expr.toSLVString('function')).to.be.equal('pow(x, 1 / 2)');
+  it('toSLVString("function") for "sqrt(x)"', () => {
+    let expr = Expression.fromString('sqrt(x)');
+    expect(expr.toSLVString('function')).to.be.equal('sqrt(x)');
   });
   it('toSLVString("operator") for "nthRoot(x, n)"', () => {
     let expr = Expression.fromString('nthRoot(x, n)');

@@ -150,9 +150,6 @@ function _calcUnit(_this, record) {
         return argUnit[0];
       }
     }
-    if (_this.fn.name === 'nthRoot' && args.length === 1) { // nthRoot()
-      return argUnit[0].root(2);
-    }
     if (_this.fn.name === 'nthRoot') {
       if (args[1].type === 'ConstantNode') { // nthRoot(x, 3)
         let n = args[1].value;

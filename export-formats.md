@@ -437,7 +437,6 @@ _Skipped cell means no conversion_
 |`pow(x, y)`| `pow(x, y)` or `x ^ y`|`NaNMath.pow(x, y)`| |`power(x, y)`|
 |`sign(x)`| | | | |
 |`sqrt(x)`| |`NaNMath.sqrt(x)`| | |
-|`nthRoot(x)`|`pow(x, 1/2)` or `x ^ (1/2)`|`NaNMath.sqrt(x)`| | |
 |`nthRoot(x, n)`|`pow(x, 1/n)` or `x ^ (1/n)`|`NaNMath.pow(x, (1/n))`| | |
 |`square(x)`|`pow(x, 2)` or `x ^ 2`|`NaNMath.pow(x, 2)`| | |
 |`subtract(x, y)`|`x - y`|`-(x, y)`| | |
@@ -486,7 +485,6 @@ _Conversion to SBML's MathML_
 |`pow(x, y)`|`<apply><power/>(x) (y)</apply>`|
 |`sign(x)`|`<apply><sign/>(x)</apply>`|
 |`sqrt(x)`|`<apply><root/>(x)</apply>`|
-|`nthRoot(x)`|not supported|
 |`nthRoot(x, n)`|not supported|
 |`square(x)`|`<apply><power/>(x)<cn>2</cn></apply>`|
 |`subtract(x, y)`|`<apply><minus/>(x) (y)</apply>`|

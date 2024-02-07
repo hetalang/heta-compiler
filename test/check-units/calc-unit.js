@@ -24,7 +24,7 @@ let qArr = [
   {id: 'y4', class: 'Record', assignments: {start_: 'abs(k2) + ceil(k2) + floor(k2)'}},
   {id: 'y5', class: 'Record', assignments: {start_: 'max(k2, x4, x1) + min(k2, x4, x1)'}},
   {id: 'y6', class: 'Record', assignments: {start_: 'square(k2)*cube(x4)*sqrt(x1)'}},
-  {id: 'y7', class: 'Record', assignments: {start_: 'nthRoot(k2)*nthRoot(x4,4)*nthRoot(12,k1)'}},
+  {id: 'y7', class: 'Record', assignments: {start_: 'sqrt(k2)*nthRoot(x4,4)*nthRoot(12,k1)'}},
   {id: 'y8', class: 'Record', assignments: {start_: 'log(k1) + log(k2,2) + log2(k3) + log10(k4) + ln(x1)'}},
   {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3)'}},
   {id: 'y10', class: 'Record', assignments: {start_: 'ifge(x1,k2,k3,k2)'}},

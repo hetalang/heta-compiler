@@ -213,7 +213,7 @@
     },
     {
         "id": "nthRoot", "action": "defineFunction",
-        "arguments": ["x"]
+        "arguments": ["x", "n"]
     },
     {
         "id": "square", "action": "defineFunction",
