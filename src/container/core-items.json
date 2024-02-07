@@ -185,7 +185,7 @@
     },
     {
         "id": "logbase", "action": "defineFunction",
-        "arguments": ["logbase", "x"]
+        "arguments": ["x", "base"]
     },
     {
         "id": "log10", "action": "defineFunction",

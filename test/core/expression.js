@@ -147,7 +147,7 @@ describe('Expession exports', () => {
     expect(expr.toMatlabString()).to.be.equal('log(x)');
   });
   it('toMatlabString() for "log(b, x)"', () => {
-    let expr = Expression.fromString('logbase(b, x)');
+    let expr = Expression.fromString('logbase(x, b)');
     expect(expr.toMatlabString()).to.be.equal('(log(x)/log(b))');
   });
   it('toMatlabString() for "log10(x)"', () => {

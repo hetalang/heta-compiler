@@ -167,9 +167,9 @@ function _calcUnit(_this, record) {
       return new Unit();
     }
     if (_this.fn.name === 'logbase') {
-      if (!argUnitDimensionless[0]) {
+      if (!argUnitDimensionless[1]) {
         let unitExpr = `logbase(${argUnit[0].toString()}, ${argUnit[1].toString()})`;
-        logger.warn(`Units inconsistency for "${record.index}": first arguments of logbase() must be dimensionless "${_this.toString()}" => "${unitExpr}"`);
+        logger.warn(`Units inconsistency for "${record.index}": second arguments of logbase() must be dimensionless "${_this.toString()}" => "${unitExpr}"`);
       }
       return new Unit();
     }

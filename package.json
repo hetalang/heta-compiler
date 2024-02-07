@@ -41,7 +41,7 @@
     "lodash": "^4.17.21",
     "markdown-it": "^13.0.2",
     "mathjs": "^11.12.0",
-    "mathjs-mathml": "^0.3.2",
+    "mathjs-mathml": "^0.3.3",
     "node-fetch": "^2.7.0",
     "nunjucks": "^3.2.4",
     "random-id": "^1.0.4",
@@ -74,7 +74,9 @@
       "node14-linux-x64",
       "node14-macos-x64"
     ],
-    "assets": ["src/templates/*"],
+    "assets": [
+      "src/templates/*"
+    ],
     "outputPath": "dist"
   },
   "private": false

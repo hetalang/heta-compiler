@@ -110,7 +110,7 @@ function _toMathExpr(element, useParentheses = false){
       return `log2(${expr[0]})`;
     } else {
       let base = _toMathExpr(logbase.elements[0]); // skip ()
-      return `logbase(${base}, ${expr[0]})`;
+      return `logbase(${expr[0]}, ${base})`;
     }
   // === trigonometry ===
   } else if (element.name === 'apply' && first.name === 'arcsin') {

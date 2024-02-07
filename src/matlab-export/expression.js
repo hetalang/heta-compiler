@@ -29,7 +29,7 @@ Expression.prototype.toMatlabString = function(){
       return `log(${node.args[0].toString(options)})`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='logbase') {
-      return `(log(${node.args[1].toString(options)})/log(${node.args[0].toString(options)}))`;
+      return `(log(${node.args[0].toString(options)})/log(${node.args[1].toString(options)}))`;
     }
     if (node.type==='FunctionNode' && node.fn.name==='log2') {
       return `(log(${node.args[0].toString(options)})/log(2))`;

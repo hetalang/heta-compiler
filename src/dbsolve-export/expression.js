@@ -125,7 +125,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep') {
     if (node.type === 'FunctionNode' && node.fn.name === 'logbase') {
       let args = node.args
         .map((arg) => arg.toString(options));
-      return `log(${args[1]}) / log(${args[0]})`;
+      return `log(${args[0]}) / log(${args[1]})`;
     }
     if (node.type === 'FunctionNode' && node.fn.name === 'log2') {
       let args = node.args
