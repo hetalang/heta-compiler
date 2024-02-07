@@ -463,7 +463,6 @@ _Skipped cell means no conversion_
 |`b1 < b2 ? x : y`| `ifgt(b1, b2, x, y)`| | |`tern__(b1 < b2, x, y)`|
 |`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|not supported| |not supported| |
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`| | | | |
-|`acosh(x)`, `acoth(x)`, `acsch(x)`, `asech(x)`, `asinh(x)`, `atanh(x)`, `cosh(x)`, `coth(x)`, `csch(x)`, `sech(x)`, `sinh(x)`, `tanh(x)`| | | | |
 
 _Conversion to SBML's MathML_
 
@@ -511,4 +510,3 @@ _Conversion to SBML's MathML_
 |`b1 < b2 ? x : y`|`<piecewise><piece>(x)<apply><smaller/>(b1) (b2)</apply></piece><otherwise>(y)</otherwise></piecewise>`|
 |`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|`<piecewise><piece>(value1) (cond1)</piece><piece>(value2) (cond2)</piece><otherwise>(otherwise)</otherwise></piecewise>`|
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`|`<apply><arccos/>(x)</apply>`...|
-|`acosh(x)`, `acoth(x)`, `acsch(x)`, `asech(x)`, `asinh(x)`, `atanh(x)`, `cosh(x)`, `coth(x)`, `csch(x)`, `sech(x)`, `sinh(x)`, `tanh(x)`|not supported|
