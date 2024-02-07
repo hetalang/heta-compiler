@@ -413,3 +413,104 @@ Each namespace in separate file.
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+ |na 
 |`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+ |na
 |`@Record {ss: true, ...}`                               |- |- |+ |- |- |- |- |+ |+ |na
+|`#defineFunction` support                               |- |- |- |- |+ |- |+ |+ |+ |na
+
+## Math expressions conversions
+
+_Skipped cell means no conversion_
+
+| | SLV/DBSolve | Julia | Mrgsolve/R | Simbio/Matlab |
+|--|--|--|--|--|
+|`abs(x)`| | |`fabs(x)`| |
+|`add(x, y)`|`x + y`|`+(x, y)`| | |
+|`ceil(x)`| | | | |
+|`cube(x)`|`pow(x, 3) or x ^ 3`|`NaNMath.pow(x, 3)`| | |
+|`divide(x, y)`|`x / y`|`/(x, y)`| | |
+|`exp(x)`| | | | |
+|`floor(x)`| | | | |
+|`ln(x)`| |`NaNMath.log(x)`| | |
+|`log(x)`| |`NaNMath.log(x)`| |`log(x)`|
+|`log(x, base)`|`log(x) / log(base)`|`NaNMath.log(base, x)`| |`(log(x)/log(base))`|
+|`log10(x)`| |`NaNMath.log10(x)`| | |
+|`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`| |`(log(x)/log(2))`|
+|`multiply(x, y)`|`x * y`|`*(x, y)`| | |
+|`pow(x, y)`| `pow(x, y)` or `x ^ y`|`NaNMath.pow(x, y)`| |`power(x, y)`|
+|`sign(x)`| | | | |
+|`sqrt(x)`| |`NaNMath.sqrt(x)`| | |
+|`nthRoot(x)`|`pow(x, 1/2)` or `x ^ (1/2)`|`NaNMath.sqrt(x)`| | |
+|`nthRoot(x, n)`|`pow(x, 1/n)` or `x ^ (1/n)`|`NaNMath.pow(x, (1/n))`| | |
+|`square(x)`|`pow(x, 2)` or `x ^ 2`|`NaNMath.pow(x, 2)`| | |
+|`subtract(x, y)`|`x - y`|`-(x, y)`| | |
+|`max(x, y)`|`max2(x, y)`| |`std::max(x, y)`|`max(x, y)`|
+|`max(x, y, z)`|`max3(x, y, z)`| |`std::max(x, y, z)`|`max([x, y, z])`|
+|`min(x, y)`|`min2(x, y)`| |`std::min(x, y)`|`min(x, y)`|
+|`min(x, y, z)`|`min3(x, y, z)`| |`std::min(x, y, z)`|`min([x, y, z])`|
+|`factorial(n)`| |`fact(n)`| | |
+|`ifgt(x, y, z1, z2)`| |`x > y ? z1 : z2`| |`tern__(x>y, z1, z2)`|
+|`ifge(x, y, z1, z2)`| |`x >= y ? z1 : z2`| |`tern__(x>=y, z1, z2)`|
+|`iflt(x, y, z1, z2)`| |`x < y ? z1 : z2`| |`tern__(x<y, z1, z2)`|
+|`ifle(x, y, z1, z2)`| |`x <= y ? z1 : z2`| |`tern__(x<=y, z1, z2)`|
+|`ifeq(x, y, z1, z2)`| |`x == y ? z1 : z2`| |`tern__(x==y, z1, z2)`|
+|`x ^ y`|`x ^ y` or `pow(x, y)`|`NaNMath.pow(x, y)`|`pow(x, y)`| |
+|`e`|`exp(1)`|`exp(1.0)`| | |
+|`pi`|`acos(-1)` | | | |
+|`Infinity`| |`Inf`| | |
+|`NaN`| |`NaN`| | |
+|`t`| | |`SOLVERTIME`|`time`|
+|`a and b`| |`a && b`| |`&`|
+|`a or b`| |`a \|\| b`| |`\|`|
+|`a xor b`| |`xor(a, b)`| |`xor(a, b)`|
+|`not a`| |`!a`| |`~a`|
+|`b1 < b2 ? x : y`| `ifgt(b1, b2, x, y)`| | |`tern__(b1 < b2, x, y)`|
+|`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|not supported| |not supported| |
+|`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`| | | | |
+|`acosh(x)`, `acoth(x)`, `acsch(x)`, `asech(x)`, `asinh(x)`, `atanh(x)`, `cosh(x)`, `coth(x)`, `csch(x)`, `sech(x)`, `sinh(x)`, `tanh(x)`| | | | |
+
+_Conversion to SBML's MathML_
+
+| | SBML |
+|--|--|
+|`abs(x)`|`<apply><abs/>(x)</apply>`|
+|`add(x, y)`|`<apply><plus/>(x) (y)</apply>`|
+|`ceil(x)`|`<apply><ceiling/>(x)</apply>`|
+|`cube(x)`|`<apply><power/>(x)<cn>3</cn></apply>`|
+|`divide(x, y)`|`<apply><divide/>(x) (y)</apply>`|
+|`exp(x)`|`<apply><exp/>(x)</apply>`|
+|`floor(x)`|`<apply><floor/>(x)</apply>`|
+|`ln(x)`|`<apply><ln/>(x)</apply>`|
+|`log(x)`|`<apply><log/>(x)</apply>`|
+|`log(x, base)`|`<apply><log/><logbase>(base)</logbase>(x)</apply>`|
+|`log10(x)`|`<apply><log/>(x)</apply>`|
+|`log2(x)`|`<apply><log/><logbase><cn>2</cn></logbase>(x)</apply>`|
+|`multiply(x, y)`|`<apply><times/>(x) (y)</apply>`|
+|`pow(x, y)`|`<apply><power/>(x) (y)</apply>`|
+|`sign(x)`|`<apply><sign/>(x)</apply>`|
+|`sqrt(x)`|`<apply><root/>(x)</apply>`|
+|`nthRoot(x)`|not supported|
+|`nthRoot(x, n)`|not supported|
+|`square(x)`|`<apply><power/>(x)<cn>2</cn></apply>`|
+|`subtract(x, y)`|`<apply><minus/>(x) (y)</apply>`|
+|`max(x, y)`|`<apply><max/>(x) (y)</apply>`|
+|`max(x, y, z)`|`<apply><max/>(x) (y) (z)</apply>`|
+|`min(x, y)`|`<apply><min/>(x) (y)</apply>`|
+|`min(x, y, z)`|`<apply><min/>(x) (y) (z)</apply>`|
+|`factorial(n)`|`<apply><factorial/>(x)</apply>`|
+|`ifgt(x, y, z1, z2)`|not supported|
+|`ifge(x, y, z1, z2)`|not supported|
+|`iflt(x, y, z1, z2)`|not supported|
+|`ifle(x, y, z1, z2)`|not supported|
+|`ifeq(x, y, z1, z2)`|not supported|
+|`x ^ y`|`<apply><pow/>(x) (y)</apply>`|
+|`e`|not supported|
+|`pi`|not supported|
+|`Infinity`|not supported|
+|`NaN`|not supported|
+|`t`|`<csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>`|
+|`a and b`|`<apply><and/>(x) (y)</apply>`|
+|`a or b`|`<apply><or/>(x) (y)</apply>`|
+|`a xor b`|`<apply><xor>(x) (y)</apply>`|
+|`not a`|`<apply><not>(x)</apply>`|
+|`b1 < b2 ? x : y`|`<piecewise><piece>(x)<apply><smaller/>(b1) (b2)</apply></piece><otherwise>(y)</otherwise></piecewise>`|
+|`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|`<piecewise><piece>(value1) (cond1)</piece><piece>(value2) (cond2)</piece><otherwise>(otherwise)</otherwise></piecewise>`|
+|`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`|`<apply><arccos/>(x)</apply>`...|
+|`acosh(x)`, `acoth(x)`, `acsch(x)`, `asech(x)`, `asinh(x)`, `atanh(x)`, `cosh(x)`, `coth(x)`, `csch(x)`, `sech(x)`, `sinh(x)`, `tanh(x)`|not supported|

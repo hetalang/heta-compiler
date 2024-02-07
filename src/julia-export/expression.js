@@ -5,7 +5,7 @@ Expression.prototype.toJuliaString = function(){
     if(node.type==='ConstantNode' && Number.isInteger(node.value)){
       return node.value.toExponential(); // to display 6 => 6e0; 6e23 => 6e+23
     }
-    if(node.type==='FunctionNode' && node.fn.name==='plus'){
+    if(node.type==='FunctionNode' && node.fn.name==='add'){
       let args = node.args
         .map((arg) => arg.toString(options))
         .join(', ');
