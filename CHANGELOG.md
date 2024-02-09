@@ -1,5 +1,19 @@
 # Change Log
 
+## 0.8.0
+
+- update Julia format: p vector structure
+- additional check of expresions parsed: use only allowed Nodes
+- replace `log(x, base)` by `logbase(x, base)`
+- remove `nthRoot(x)` support
+- remove hyperbolic functions support
+- fix bug with SBML import without products
+- extend units check for generated ODE and `defineFunction`
+- check number of arguments in `defineFunction`
+- export of format `Summary`: lost and orphan components, units
+- set defineFunction for core elements
+- build standalone heta
+
 ## 0.7.4
 
 - use `@Reaction {compartment: comp1, ...}` in DOT format if set
