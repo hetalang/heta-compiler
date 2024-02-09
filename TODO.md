@@ -28,7 +28,7 @@
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)
 [ ] PGF and TikZ
-[ ] Statistics
+[x] Statistics
 
 ## bugs
 
@@ -36,11 +36,9 @@
 ## features
 
 - check and warning if core component was replaced
-- checking units for diff eq
 - AnyUnit for zero numbers
 - atStart to exports: Matlab, DBSolve
-- checking legal functions inside Expressions and functionDefinition
-- `#defineFunction`: different exports, functionDef vs units
+- `#defineFunction`: different exports
 - write reusable `Build` class
 
 ## ideas

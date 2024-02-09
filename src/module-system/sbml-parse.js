@@ -198,10 +198,8 @@ function unitDefinitionToUnits(x){
 */
 function functionDefinitionToQ(x){
 
-  let mathElement = x.elements
-    && x.elements.find((y) => y.name === 'math');
-  let lambdaElement = mathElement.elements
-    && mathElement.elements.find((y) => y.name === 'lambda');
+  let mathElement = x.elements?.find((y) => y.name === 'math');
+  let lambdaElement = mathElement?.elements?.find((y) => y.name === 'lambda');
 
   // get argument ids
   let args = lambdaElement.elements && lambdaElement.elements
@@ -239,12 +237,10 @@ function baseToQ(x){
   let sboTerm = x.attributes?.sboTerm;
   if (sboTerm !== undefined) q.aux.sboTerm = sboTerm;
   // take only first notes
-  let notes = x.elements
-    && x.elements.find((y) => y.name === 'notes');
+  let notes = x.elements?.find((y) => y.name === 'notes');
   if (notes) q.notes = _toMarkdown(notes.elements);
   // annotation
-  let annotation = x.elements
-    && x.elements.find((y) => y.name === 'annotation');
+  let annotation = x.elements?.find((y) => y.name === 'annotation');
   if (annotation) q.aux.annotation = _toAux(annotation.elements);
 
   return q;
@@ -437,13 +433,10 @@ function reactionToQ(x){
 
   q.class = 'Reaction';
 
-  let kineticLaw = x.elements
-    && x.elements.find((y) => y.name === 'kineticLaw');
+  let kineticLaw = x.elements?.find((y) => y.name === 'kineticLaw');
   
   // local parameters
-  let listOfParameters = kineticLaw 
-    && kineticLaw.elements
-    && kineticLaw.elements.find((y) => y.name === 'listOfParameters');
+  let listOfParameters = kineticLaw?.elements?.find((y) => y.name === 'listOfParameters');
   if (listOfParameters) {
     let parameters = listOfParameters.elements
       .filter((y) => y.name = 'parameter');
@@ -461,9 +454,7 @@ function reactionToQ(x){
     });
   }
   // math
-  let math = kineticLaw 
-    && kineticLaw.elements
-    && kineticLaw.elements.find((y) => y.name === 'math');
+  let math = kineticLaw?.elements?.find((y) => y.name === 'math');
   if (math) {
     let expr = _toMathExpr(math);
     localConstTranslate.forEach((y) => {
@@ -484,9 +475,8 @@ function reactionToQ(x){
   }
 
   // products
-  let products = x.elements
-    && x.elements.find((y) => y.name === 'listOfProducts');
-  if (products.elements !== undefined) {
+  let products = x.elements?.find((y) => y.name === 'listOfProducts');
+  if (products?.elements) {
     var actors0 = products.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
@@ -508,9 +498,8 @@ function reactionToQ(x){
   }
 
   // reactants
-  let reactants = x.elements
-    && x.elements.find((y) => y.name === 'listOfReactants');
-  if (reactants.elements !== undefined) {
+  let reactants = x.elements?.find((y) => y.name === 'listOfReactants');
+  if (reactants?.elements) {
     var actors1 = reactants.elements
       .filter((y) => y.name === 'speciesReference')
       .map((y) => {
@@ -643,11 +632,8 @@ function eventToQ(x){
   let useValuesFromTriggerTime = x.attributes?.useValuesFromTriggerTime !== 'false';
 
   // trigger
-  let trigger = x.elements
-    && x.elements.find((y) => y.name === 'trigger');
-  let triggerMath = trigger
-    && trigger.elements
-    && trigger.elements.find((y) => y.name === 'math');
+  let trigger = x.elements?.find((y) => y.name === 'trigger');
+  let triggerMath = trigger?.elements?.find((y) => y.name === 'math');
   if (triggerMath) {
     switcher.trigger = _toMathExpr(triggerMath);
   }

@@ -505,8 +505,8 @@ _Conversion to SBML's MathML_
 |`t`|`<csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>`|
 |`a and b`|`<apply><and/>(a) (b)</apply>`|
 |`a or b`|`<apply><or/>(a) (b)</apply>`|
-|`a xor b`|`<apply><xor>(a) (b)</apply>`|
-|`not a`|`<apply><not>(a)</apply>`|
+|`a xor b`|`<apply><xor/>(a) (b)</apply>`|
+|`not a`|`<apply><not/>(a)</apply>`|
 |`b1 < b2 ? x : y`|`<piecewise><piece>(x)<apply><lt/>(b1) (b2)</apply></piece><otherwise>(y)</otherwise></piecewise>`|
 |`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|`<piecewise><piece>(value1) (cond1)</piece><piece>(value2) (cond2)</piece><otherwise>(otherwise)</otherwise></piecewise>`|
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`|`<apply><arccos/>(x)</apply>`...|
