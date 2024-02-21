@@ -13,7 +13,7 @@
 
 To read the full documentation, visit the Heta project homepage: <https://hetalang.github.io/#/heta-compiler/>.
 
-See also [Migrate to v0.6](./migrate-to-v0.6) and [Migrate to 0.7](./migrate-to-v0.7).
+See also [Migrate to v0.6](./migrate-to-v0.6), [Migrate to 0.7](./migrate-to-v0.7), [Migrate to 0.8](./migrate-to-v0.8).
 
 ## Table of contents
 
@@ -218,4 +218,4 @@ The original author of the project is [Evgeny Metelkin](https://github.com/metel
 
 - In 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/hetalang/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of [Heta project](https://hetalang.github.io/).
 
-Copyright 2019-2023, InSysBio LLC
+Copyright 2019-2024, Heta project
