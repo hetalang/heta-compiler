@@ -18,10 +18,17 @@ exec(`npm install --global ${name}@${forceVersion}`, (err, stdout, stderr) => {
     process.exit(1); // BRAKE
   }
 
-  let newVersion = stdout.match(/\w+@([\d.]*)/)[1]; // '0.99.0';
-  if (newVersion === version) {
-    process.stdout.write(`${name} is already up to date ${version}\n`);
-  } else {
-    process.stdout.write(`${name} was updated from ${version} to ${newVersion}\n`);
-  }
+  exec(`npm view ${name} version`, (err, stdout, stderr) => {
+    if (stderr) {
+      process.stdout.write(stderr);
+      process.exit(1); // BRAKE
+    }
+    let newVersion = stdout.trim(); // '0.99.0';
+    if (newVersion === version) {
+      process.stdout.write(`${name} of version ${version} was not updated\n`);
+    } else {
+      process.stdout.write(`${name} was updated from ${version} to ${newVersion}\n`);
+    }
+
+  });
 });
