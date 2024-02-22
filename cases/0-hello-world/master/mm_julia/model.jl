@@ -74,17 +74,13 @@ function mm_ode_func_(__du__, __u__, __p__, t)
 end
 
 ### output function
+# XXX: currently force amounts: s1_, s2_ are not supported
 function mm_saving_generator_(__outputIds__::Vector{Symbol})
-    # XXX: currently force amounts: s1_, s2_ are not supported
-    __actual_indexes__ = indexin(__outputIds__, [:default_comp,:S,:P,:r1,])
-    # check nothing in __actual_indexes__
-    __wrongIndexes__ = findall(x -> x===nothing, __actual_indexes__)
-    if length(__wrongIndexes__) > 0
-      __wrongIds__ = __outputIds__[__wrongIndexes__]
-      throw("Wrong identifiers: $(__wrongIds__)")
-    end
+    __wrongIds__ = setdiff(__outputIds__, [:default_comp,:S,:P,:r1,])
+    !isempty(__wrongIds__) && throw("The following observables have not been found in the model's Records: $(__wrongIds__)")
 
-    function saving_(__u__, t, __integrator__)
+    __out_expr__ = Expr(:vect, __outputIds__...)
+    @eval function(__u__, t, __integrator__)
         (default_comp,) = __integrator__.p[1:1]
         __constants__ = __integrator__.p[2:3]
         (S_,P_,) = __u__
@@ -96,7 +92,7 @@ function mm_saving_generator_(__outputIds__::Vector{Symbol})
         
         # force amount
 
-        return [default_comp,S,P,r1,][__actual_indexes__]
+        return return $(__out_expr__)
     end
 end
 

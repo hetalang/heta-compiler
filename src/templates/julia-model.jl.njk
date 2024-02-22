@@ -145,9 +145,9 @@ function {{ id }}_ode_func_(__du__, __u__, __p__, t)
 end
 
 ### output function
+# XXX: currently force amounts: s1_, s2_ are not supported
 function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
-    # XXX: currently force amounts: s1_, s2_ are not supported
-    __actual_indexes__ = indexin(__outputIds__, [
+    __wrongIds__ = setdiff(__outputIds__, [
       {%- for ts in timeScales -%}
       :{{ts.id}},
       {%- endfor %}
@@ -155,14 +155,10 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
       :{{ rec.id }},
       {%- endfor -%}
     ])
-    # check nothing in __actual_indexes__
-    __wrongIndexes__ = findall(x -> x===nothing, __actual_indexes__)
-    if length(__wrongIndexes__) > 0
-      __wrongIds__ = __outputIds__[__wrongIndexes__]
-      throw("Wrong identifiers: $(__wrongIds__)")
-    end
+    !isempty(__wrongIds__) && throw("The following observables have not been found in the model's Records: $(__wrongIds__)")
 
-    function saving_(__u__, t, __integrator__)
+    __out_expr__ = Expr(:vect, __outputIds__...)
+    @eval function(__u__, t, __integrator__)
         ({% for record in img.staticRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
@@ -190,14 +186,7 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
         {{ record.id }}_ = {{ record.id }}{{ '*' + record.compartment if not record.isAmount }}
         {%- endfor %}
 
-        return [
-          {%- for ts in timeScales -%}
-          {{ts.id}},
-          {%- endfor %}
-          {%- for rec in img.namespace.selectByInstanceOf('Record') -%}
-          {{ rec.id }},
-          {%- endfor -%}
-        ][__actual_indexes__]
+        return return $(__out_expr__)
     end
 end
 
