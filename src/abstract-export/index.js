@@ -4,7 +4,7 @@ const { ajv } = require('../utils');
 const schema = {
   type: 'object',
   properties: {
-    filepath: {type: 'string', pattern: '^[\\w\\d\\\\/._!-]+$'},
+    filepath: {type: 'string', pattern: '^[\\w\\d\\\\/._!-:]+$'},
     spaceFilter: { type: 'string' }
   },
   definitions: {
