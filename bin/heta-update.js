@@ -6,7 +6,7 @@ const { name, version } = require('../package.json');
 
 program
   .name('heta update')
-  .description('Update heta-compiler to the latest version, or selected version if argument is set.')
+  .description('Update heta-compiler to the latest version published in NPM, or selected version if argument is set.')
   .usage('[version]')
   .parse(process.argv);
 

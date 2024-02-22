@@ -48,7 +48,7 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 ## Installation
 
-[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently **NodeJS v14 and newer** are supported.
+[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently the recommended version is **NodeJS v16 and newer**, but NodeJS v14 is also supported.
 
 The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.
 

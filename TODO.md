@@ -35,6 +35,7 @@
 
 ## features
 
+- `heta update br` installs br branch from github
 - check and warning if core component was replaced
 - AnyUnit for zero numbers
 - atStart to exports: Matlab, DBSolve
