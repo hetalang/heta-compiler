@@ -10,8 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  multios:
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x, 20.x]
@@ -30,5 +29,19 @@ jobs:
       run: npm test
       env:
         CI: true
+  standalone:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    - run: npm ci
     - name: Build standalone apps
       run: npm run pkg
+    - name: Save distributives as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: standalone-distributives
+        path: dist
