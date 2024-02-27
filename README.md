@@ -48,6 +48,32 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 ## Installation
 
+### Installation in Windows
+
+[Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install.
+
+### Installation in Linux and Macos
+
+For all users (requires sudo previleges)
+
+```bash
+# replace [Required version] by value, i.e. 0.8.1
+sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
+```
+
+For single user without sudo previleges
+
+```bash
+# replace [Required version] by value, i.e. 0.8.1
+mkdir -p ~/bin
+wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-linux-x64
+chmod +x ~/bin/heta
+echo "export PATH=$PATH:~/bin" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Installation in NodeJS environment
+
 [NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently the recommended version is **NodeJS v16 and newer**, but NodeJS v14 is also supported.
 
 The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.

@@ -6,7 +6,7 @@ on:
 
 jobs:
     upload-release-asset:
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
         steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-node@v3
@@ -16,14 +16,51 @@ jobs:
         - name: Build standalone apps
           run: npm run pkg
 
+        - name: Get package version
+          id: package_version
+          run: | # deprecated
+            $version = node -p "require('./package.json').version"
+            echo "::set-output name=VERSION::$version"
+    
+        - name: Install WiX Toolset
+          run: |
+            choco install wixtoolset
+        - name: Generate new GUID
+          id: new_guid
+          run: | # deprecated
+            $guid = [guid]::NewGuid().ToString().ToUpper()
+            echo "::set-output name=NewGUID::$guid"
+        - name: Update .wxs file with new Product Id
+          run: |
+            echo "GUID: ${{ steps.new_guid.outputs.NewGUID }}"
+            $pathToWxs = "build-win-installer/perUser.wxs"
+            $content = Get-Content $pathToWxs -Raw
+            $newContent1 = $content -replace '(?<=Product\s+Id=")[^"]*', "${{ steps.new_guid.outputs.NewGUID }}"
+            $newContent2 = $newContent1 -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.VERSION }}"
+            $newContent2 | Set-Content $pathToWxs
+        - name: Build windows installer
+          run: |
+            & ${env:WIX}bin\candle.exe -o dist/ build-win-installer/perUser.wxs
+            & ${env:WIX}bin\light.exe -o dist/heta-compiler-win-x64-installer.msi dist/perUser.wixobj -ext WixUIExtension
+
         - name: Upload Release Asset Win
           uses: actions/upload-release-asset@v1
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            upload_url: ${{ github.event.release.upload_url }} # This is part of the GitHub Actions context
+            upload_url: ${{ github.event.release.upload_url }} # part of the GitHub Actions context
+            asset_path: dist/heta-compiler-win-x64-installer.msi
+            asset_name: heta-compiler-${{ steps.package_version.outputs.VERSION }}-win-x64-installer.msi
+            asset_content_type: application/octet-stream
+  
+        - name: Upload Release Asset Win
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-win.exe
-            asset_name: heta-compiler-win.exe
+            asset_name: heta-compiler-win-x64.exe
             asset_content_type: application/octet-stream
 
         - name: Upload Release Asset Linux
@@ -31,9 +68,9 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            upload_url: ${{ github.event.release.upload_url }} # This is part of the GitHub Actions context
+            upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-linux
-            asset_name: heta-compiler-linux
+            asset_name: heta-compiler-linux-x64
             asset_content_type: application/octet-stream
 
         - name: Upload Release Asset Macos
@@ -41,7 +78,7 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            upload_url: ${{ github.event.release.upload_url }} # This is part of the GitHub Actions context
+            upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-macos
-            asset_name: heta-compiler-macos
+            asset_name: heta-compiler-macos-x64
             asset_content_type: application/octet-stream

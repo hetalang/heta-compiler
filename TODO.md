@@ -41,6 +41,7 @@
 - atStart to exports: Matlab, DBSolve
 - `#defineFunction`: different exports
 - write reusable `Build` class
+- alternative solution https://nodejs.org/api/single-executable-applications.html
 
 ## ideas
 

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+candle.exe -o dist/ build-win-installer/perUser.wxs
+light.exe -o dist/heta-compiler-win-x64-installer.msi dist/perUser.wixobj -ext WixUIExtension -ext WixUtilExtension
+
+update code: Product/@Id, Product/@Version
+
+perMachine: requires elevated privileges to install. Sets the ALLUSERS property to 1.
+perUser: does not require elevated privileges to install. Sets the package's InstallPrivileges attribute to "limited."
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product 
+        Id="c3f66490-971b-4b85-b407-455a7a145a7c"
+        Name="heta-compiler"
+        Version="0.0.0"
+        Manufacturer="Heta project"
+        UpgradeCode="0ab2e391-808f-481d-a423-1a64c0140b23"
+        Language="1033"
+        >
+        <!-- 
+            InstallPrivileges="limited"
+        -->
+        <Package
+            InstallerVersion="200"
+            Compressed="yes"
+            InstallScope="perUser"
+            Platform="x64"
+            />
+        <Condition Message="This application is only supported on 64-bit systems.">
+            <![CDATA[VersionNT64]]>
+        </Condition>
+
+        <Property Id="WIXUI_INSTALLDIR" Value="INSTALL_HERE"/>
+        <UIRef Id="MyWixUI_InstallDir"/>
+
+        <MajorUpgrade DowngradeErrorMessage="A newer version of MyApplication is already installed." />
+        <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes" />
+
+        <Feature Id="ProductFeature" Title="heta-compiler" Level="1">
+            <ComponentGroupRef Id="ProductComponents" />
+        </Feature>
+    </Product>
+
+    <Fragment>
+        <UI Id="MyWixUI_InstallDir">
+            <UIRef Id="WixUI_InstallDir"/>
+            
+            <!-- Replace WixUI_InstallDir's welcome dialog with InstallScopeDialog -->
+            <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallScopeDialog">1</Publish>
+            <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="InstallScopeDialog">1</Publish>
+        </UI>
+    </Fragment>
+
+    <Fragment>
+        <Property Id="EVERYBODY" Value="no"/>
+        <UI>
+            <Dialog Id="InstallScopeDialog" Width="370" Height="270" Title="Select Installation Scope">
+                <Control Id="InstallScopeDescription" Type="Text" X="25" Y="25" Width="320" Height="15" Text="Select the installation scope for this application:" />
+                <Control Id="ScopeType" Type="RadioButtonGroup" X="25" Y="65" Width="320" Height="40" Property="EVERYBODY">
+                    <RadioButtonGroup Property="EVERYBODY">
+                        <RadioButton Value="yes" X="0" Y="0" Width="300" Height="17" Text="All users (requires administrative rights)" />
+                        <RadioButton Value="no" X="0" Y="20" Width="300" Height="17" Text="Just me" />
+                    </RadioButtonGroup>
+                </Control>
+                <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Text="Back">
+                    <Publish Event="NewDialog" Value="WelcomeDlg">1</Publish>
+                </Control>
+                <Control Id="Next" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Text="Next">
+                    <Publish Event="NewDialog" Value="InstallDirDlg">1</Publish>
+                    <Publish Property="ALLUSERS" Value="1">EVERYBODY="yes"</Publish>
+                    <Publish Property="WIXUI_INSTALLDIR" Value="INSTALL_HERE_ALL">EVERYBODY="yes"</Publish>
+                    <Publish Property="ALLUSERS" Value="{}">EVERYBODY="no"</Publish>
+                    <Publish Property="WIXUI_INSTALLDIR" Value="INSTALL_HERE">EVERYBODY="no"</Publish>
+                </Control>
+                <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Text="Cancel">
+                    <Publish Event="SpawnDialog" Value="CancelDlg">1</Publish>
+                </Control>
+            </Dialog>
+        </UI>
+    </Fragment>
+
+    <Fragment>
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="LocalAppDataFolder" Name="MyAppData">   
+                <!--<Directory Id="COMPANYFOLDER" Name="Heta project">-->
+                    <Directory Id="INSTALL_HERE" Name="heta-compiler">
+                        <Directory Id="BINFOLDER" Name="bin" />
+                    </Directory>
+                <!--</Directory>-->
+            </Directory>
+            <Directory Id="ProgramFiles64Folder">
+                <Directory Id="INSTALL_HERE_ALL" Name="heta-compiler">
+                    <Directory Id="BINFOLDER_ALL" Name="bin" />
+                </Directory>
+            </Directory>
+        </Directory>
+    </Fragment>
+
+    <Fragment>
+        <ComponentGroup Id="ProductComponents" >
+            <Component Id="HetCompilerRun" Guid="ba0b0d51-06a2-4f2e-b606-83ade9cb6234" Win64="yes" Directory="BINFOLDER">
+                <Condition>NOT ALLUSERS</Condition>
+                <RemoveFolder Id="RemoveInstallHere" On="uninstall" />
+                <RegistryKey Root="HKCU" Key="Software\[Manufacturer]\[ProductName]\Settings">
+                    <RegistryValue Type="string" Name="InstallationFlag" Value="Installed" KeyPath="yes"/>
+                </RegistryKey>
+                <File
+                    Id="HetaCompilerExe"
+                    Name= "heta.exe"
+                    Source="dist/heta-compiler-win.exe"
+                    Checksum="yes"
+                    />
+                <Environment
+                    Id="UpdatePath"
+                    Name="Path"
+                    Value="[BINFOLDER]"
+                    Permanent="no"
+                    Part="last"
+                    Action="set"
+                    System="no"
+                    />
+            </Component>
+            <Component Id="HetCompilerDocs" Guid="c82525f0-c708-48ab-95d9-d5b19a01ae80" Win64="yes" Directory="INSTALL_HERE">
+                <Condition>NOT ALLUSERS</Condition>
+                <RemoveFolder Id="RemoveInstallHere2" On="uninstall" />
+                <RegistryKey Root="HKCU" Key="Software\[Manufacturer]\[ProductName]\Settings">
+                    <RegistryValue Type="string" Name="InstallationFlag" Value="Installed" KeyPath="yes"/>
+                </RegistryKey>
+                <File
+                    Id="ReadmeMd"
+                    Name= "README.md"
+                    Source="README.md"
+                    Checksum="yes"
+                    />
+                <File
+                    Id="License"
+                    Name= "LICENSE"
+                    Source="LICENSE"
+                    Checksum="yes"
+                    />
+                <File
+                    Id="ChangelogMd"
+                    Name="CHANGELOG.md"
+                    Source="CHANGELOG.md"
+                    Checksum="yes"
+                    />
+            </Component>
+
+            <Component Id="HetCompilerRunAll" Guid="2dbdc5d9-a3cd-4a17-a17c-c6ff5c243b59" Win64="yes" Directory="BINFOLDER_ALL">
+                <Condition>ALLUSERS</Condition>
+                <RemoveFolder Id="RemoveInstallHereAll" On="uninstall" />
+                <!-- Define the registry key and value in HKCU to use as the KeyPath -->
+                <RegistryKey Root="HKLM" Key="Software\[Manufacturer]\[ProductName]\Settings">
+                    <RegistryValue Type="string" Name="InstallationFlag" Value="Installed" KeyPath="yes"/>
+                </RegistryKey>
+                <File
+                    Id="HetaCompilerExeAll"
+                    Name= "heta.exe"
+                    Source="dist/heta-compiler-win.exe"
+                    Checksum="yes"
+                    />
+                <Environment
+                    Id="UpdatePathAll"
+                    Name="Path"
+                    Value="[BINFOLDER_ALL]"
+                    Permanent="no"
+                    Part="last"
+                    Action="set"
+                    System="yes"
+                    />
+            </Component>
+            <Component Id="HetCompilerDocsAll" Guid="d5f140de-988e-4c4f-955f-ab159f13f39f" Win64="yes" Directory="INSTALL_HERE_ALL">
+                <Condition>ALLUSERS</Condition>
+                <RemoveFolder Id="RemoveInstallHere2All" On="uninstall" />
+                <RegistryKey Root="HKLM" Key="Software\[Manufacturer]\[ProductName]\Settings">
+                    <RegistryValue Type="string" Name="InstallationFlag" Value="Installed" KeyPath="yes"/>
+                </RegistryKey>
+                <File
+                    Id="ReadmeMdAll"
+                    Name= "README.md"
+                    Source="README.md"
+                    Checksum="yes"
+                    />
+                <File
+                    Id="LicenseAll"
+                    Name= "LICENSE"
+                    Source="LICENSE"
+                    Checksum="yes"
+                    />
+                <File
+                    Id="ChangelogMdAll"
+                    Name="CHANGELOG.md"
+                    Source="CHANGELOG.md"
+                    Checksum="yes"
+                    />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
