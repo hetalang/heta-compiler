@@ -1,5 +1,6 @@
 const { Record } = require('./record');
 const { UnitTerm } = require('./unit-term');
+const { Unit } = require('./unit');
 
 /* 
   Species class
@@ -115,7 +116,7 @@ class Species extends Record {
 
     // d(s*c)/dt
     let leftSideUnits = speciesUnits
-      .multiply(compartmentUnits)
+      .multiply(this.isAmount ? new Unit() : compartmentUnits) // multiply only for concentrations
       .divide(timeUnits)
       .simplify();
     // r1 + r2 + r3
