@@ -79,8 +79,10 @@ function mm_saving_generator_(__outputIds__::Vector{Symbol})
     __wrongIds__ = setdiff(__outputIds__, [:default_comp,:S,:P,:r1,])
     !isempty(__wrongIds__) && throw("The following observables have not been found in the model's Records: $(__wrongIds__)")
 
-    __out_expr__ = Expr(:vect, __outputIds__...)
-    @eval function(__u__, t, __integrator__)
+    __out_expr__ = Expr(:block)
+    [push!(__out_expr__.args, :(__out__[$i] = $obs)) for (i,obs) in enumerate(__outputIds__)]
+
+    @eval function(__out__, __u__, t, __integrator__)
         (default_comp,) = __integrator__.p[1:1]
         __constants__ = __integrator__.p[2:3]
         (S_,P_,) = __u__
@@ -92,7 +94,8 @@ function mm_saving_generator_(__outputIds__::Vector{Symbol})
         
         # force amount
 
-        return return $(__out_expr__)
+        $(__out_expr__)
+        return nothing
     end
 end
 
