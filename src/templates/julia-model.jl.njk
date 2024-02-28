@@ -157,8 +157,10 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
     ])
     !isempty(__wrongIds__) && throw("The following observables have not been found in the model's Records: $(__wrongIds__)")
 
-    __out_expr__ = Expr(:vect, __outputIds__...)
-    @eval function(__u__, t, __integrator__)
+    __out_expr__ = Expr(:block)
+    [push!(__out_expr__.args, :(__out__[$i] = $obs)) for (i,obs) in enumerate(__outputIds__)]
+
+    @eval function(__out__, __u__, t, __integrator__)
         ({% for record in img.staticRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
@@ -186,7 +188,8 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
         {{ record.id }}_ = {{ record.id }}{{ '*' + record.compartment if not record.isAmount }}
         {%- endfor %}
 
-        return return $(__out_expr__)
+        $(__out_expr__)
+        return nothing
     end
 end
 
