@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.8.1
+
+- fix bug with checking units for `isAmount: true` and ODE
+- julia format changes `saving_generator`
+- add windows MSI generation
+- documention for standalone installation
+- fix path regexp in export to allow `C:\xxx`
+
 ## 0.8.0
 
 - update Julia format: p vector structure
