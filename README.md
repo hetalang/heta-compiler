@@ -52,21 +52,41 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 [Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install.
 
-### Installation in Linux and Macos
+### Installation in Linux
 
 For all users (requires sudo previleges)
 
 ```bash
-# replace [Required version] by value, i.e. 0.8.1
+# replace [Required version] by value, i.e. v0.8.1
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 For single user without sudo previleges
 
 ```bash
-# replace [Required version] by value, i.e. 0.8.1
+# replace [Required version] by value, i.e. v0.8.1
 mkdir -p ~/bin
 wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-linux-x64
+chmod +x ~/bin/heta
+echo "export PATH=$PATH:~/bin" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Installation in Macos
+
+For all users (requires sudo previleges)
+
+```bash
+# replace [Required version] by value, i.e. v0.8.1
+sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
+```
+
+For single user without sudo previleges
+
+```bash
+# replace [Required version] by value, i.e. v0.8.1
+mkdir -p ~/bin
+wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-macos-x64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
