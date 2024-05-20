@@ -35,7 +35,7 @@
 
 ## features
 
-- `heta update br` installs br branch from github
+- `heta update br` installs br branch from github, `heta update --dev`
 - check and warning if core component was replaced
 - AnyUnit for zero numbers
 - atStart to exports: Matlab, DBSolve
@@ -45,7 +45,6 @@
 
 ## ideas
 
-- `heta update --dev`
 - remove unnecessary rules in export
 - generation of 'platform.yml' by `heta init`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
