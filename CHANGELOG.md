@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.2
+
+- fix error with comments in base syntax
+- fix error in webpack entry
+
 ## 0.8.1
 
 - fix bug with checking units for `isAmount: true` and ODE
