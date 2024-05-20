@@ -50,6 +50,17 @@ class Process extends Record {
 
     return clonedComponent;
   }
+  bind(namespace) {
+    super.bind(namespace);
+    let {logger} = this.namespace.container;
+
+    // check and warn if actors is empty
+    if (this.actors.length === 0) {
+      let msg = `Process "${this.index}" has no actors.`
+      logger.warn(msg, {type: 'BindingError', space: this.space});
+    }
+
+  }
   get processExpr(){
     return actors2rct(this.actors);
   }
