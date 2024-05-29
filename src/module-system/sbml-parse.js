@@ -76,7 +76,7 @@ function jsbmlToQArr(JSBML){
       if (isZero) {
         zeroSpatialDimensions.push(x.attributes?.id);
         // set zero initial size
-        x.attributes = Object.assign({}, x.attributes, {size: 0});
+        x.attributes = Object.assign({}, x.attributes, {size: '0'});
       }
 
       let q = compartmentToQ(x, unitDict);
@@ -327,6 +327,7 @@ function compartmentToQ(x, unitDict = {}){
   q.class = 'Compartment';
   q.boundary = x.attributes?.constant !== 'false';
   let num = x.attributes?.size;
+  
   if (num !== undefined) {
     q.assignments = { start_: SBMLValueToNumber(num) };
   }
@@ -676,7 +677,7 @@ function eventToQ(x){
   return qArr;
 }
 
-function SBMLValueToNumber(value){
+function SBMLValueToNumber(value) {
   if (value.replace(/ /g, '') === 'INF') {
     return Infinity;
   } else if (value.replace(/ /g, '') === '-INF') {
