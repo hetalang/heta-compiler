@@ -218,7 +218,6 @@ There are properties in declaration file which do not change compilation process
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
 | options.debug | boolean | --debug | false | Working in debugging mode. All parsed modules will be saved in JSON files in meta directory. |
 | options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
-| options.exitWithoutError | boolean | | false | If there are errors in compilation the `heta build` command return status 1 to console (which means error). If you set true this will return 0. This can be helpful for using autotesting and CI/CD automatization. |
 
 Using neither declaration file nor CLI options is equivalent to the following declaration:
 ```json
@@ -234,8 +233,7 @@ Using neither declaration file nor CLI options is equivalent to the following de
         "debug": false,
         "unitsCheck": false,
         "skipExport": false,
-        "juliaOnly": false,
-        "exitWithoutError": false
+        "juliaOnly": false
     },
     "importModule": {
         "source": "index.heta",

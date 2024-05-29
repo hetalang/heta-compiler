@@ -118,18 +118,16 @@ program
   } catch(error) {
     if (error.name === 'HetaLevelError') {
       process.stdout.write(error.message + '\nSTOP!\n');
+      process.exit(3);
     } else {
       process.stdout.write(contactMessage + '\n');
       process.stdout.write(error.stack);
+      process.exit(1); // unexpected error
     }
-    process.exit(1);
   }
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
-    if (declaration.options.exitWithoutError)
-      process.exit(0);
-    else
-      process.exit(1);
+    process.exit(2);
   } else {
     process.stdout.write('Compilation OK!\n');
     process.exit(0);

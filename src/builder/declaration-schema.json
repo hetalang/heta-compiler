@@ -34,8 +34,7 @@
         "juliaOnly": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
-        "metaDir": {"type": "string", "default": "meta" },
-        "exitWithoutError": {"type": "boolean", "default": false}
+        "metaDir": {"type": "string", "default": "meta" }
       },
       "default": {"debug": false, "logLevel": "info"}
     },

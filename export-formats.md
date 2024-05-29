@@ -27,7 +27,7 @@ The general format for all export actions is the following:
 };
 ```
 
-See also [Regular expressions syntax](https://en.wikipedia.org/wiki/Regular_expression).
+See also [Regular expressions' syntax](https://en.wikipedia.org/wiki/Regular_expression).
 
 ## JSON
 
@@ -461,7 +461,7 @@ _Skipped cell means no conversion_
 |`a xor b`| |`xor(a, b)`| |`xor(a, b)`|
 |`not a`| |`!a`| |`~a`|
 |`b1 < b2 ? x : y`| `ifgt(b1, b2, x, y)`| | |`tern__(b1 < b2, x, y)`|
-|`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|not supported| |not supported| |
+|`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|not supported| + |not supported| |
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`| | | | |
 
 _Conversion to SBML's MathML_
