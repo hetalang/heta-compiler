@@ -4,84 +4,86 @@
   
   useParentheses = true is used when operators may require explicit parentheses (...)
 */
-function _toMathExpr(element, useParentheses = false){
-  let first = element.elements[0];
+
+const HetaLevelError = require('../heta-level-error');
+
+function _toMathExpr(element, useParentheses = false) {
   if (element.name === 'math') {
     return _toMathExpr(element.elements[0]);
-  } else if(element.name === 'apply' && first.name === 'gt') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'gt') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} > ${two}`;
-  } else if(element.name === 'apply' && first.name === 'geq') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'geq') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} >= ${two}`;
-  } else if(element.name === 'apply' && first.name === 'eq') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'eq') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} == ${two}`;
-  } else if(element.name === 'apply' && first.name === 'lt') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'lt') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} < ${two}`;
-  } else if(element.name === 'apply' && first.name === 'leq') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'leq') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} <= ${two}`;
-  } else if(element.name === 'apply' && first.name === 'neq') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'neq') {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} != ${two}`;
-  } else if(element.name === 'apply' && first.name === 'and') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'and') {
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true)).join(' and ');
     return args;
-  } else if(element.name === 'apply' && first.name === 'or') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'or') {
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true)).join(' or ');
     return args;
-  } else if(element.name === 'apply' && first.name === 'xor') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'xor') {
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true)).join(' xor ');
     return args;
-  } else if(element.name === 'apply' && first.name === 'not') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'not') {
     let one = _toMathExpr(element.elements[1], true);
     return `not ${one}`;
-  } else if(element.name === 'apply' && first.name === 'times') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'times') {
     // A * B * C, <times>
     let expr = element.elements.slice(1) // without first element
       .map((x) => _toMathExpr(x, true)).join(' * '); 
     return useParentheses ? `(${expr})` : expr;
-  } else if(element.name === 'apply' && first.name === 'divide') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'divide') {
     // A / B, <divide> for two arguments
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x, true));
     return args[0] + ' / ' + args[1]; 
-  } else if(element.name === 'apply' && first.name === 'minus' && element.elements.length === 2) {
+  } else if(element.name === 'apply' && element.elements[0].name === 'minus' && element.elements.length === 2) {
     // -A, <minus> for one argument
     let arg1 = element.elements[1];
     let expr = '-' + _toMathExpr(arg1, true);
     return `(${expr})`; // () cannot be skipped in 2d, 3d,... place of sum
-  } else if(element.name === 'apply' && first.name === 'minus') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'minus') {
     // A - B, <minus> for two argumets
     let arg0 = _toMathExpr(element.elements[1], false); // skip ()
     let arg1 = _toMathExpr(element.elements[2], true);
     let expr = arg0 + ' - ' + arg1;
     return useParentheses ? `(${expr})` : expr;
-  } else if(element.name === 'apply' && first.name === 'plus') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'plus') {
     // A + B + C, <plus>
     let expr = element.elements.slice(1)
       .map((x) => _toMathExpr(x, false)).join(' + '); // skip ()
     return useParentheses ? `(${expr})` : expr;
-  } else if(element.name === 'apply' && first.name === 'power') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'power') {
     let expr = element.elements.slice(1)
       .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `pow(${expr})`;
-  } else if(element.name === 'apply' && first.name === 'ceiling') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'ceiling') {
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x)); // skip ()
     return `ceil(${args[0]})`;
-  } else if(element.name === 'apply' && first.name === 'root') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'root') {
     let degree = element.elements
       .find(y => y.name === 'degree');
     let args = element.elements.slice(1)
@@ -94,11 +96,11 @@ function _toMathExpr(element, useParentheses = false){
     } else {
       return `sqrt(${args[0]})`;
     }
-  } else if(element.name === 'apply' && first.name === 'ln') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'ln') {
     let expr = element.elements.slice(1)
       .map((x) => _toMathExpr(x));  // skip ()
     return `ln(${expr[0]})`;
-  } else if(element.name === 'apply' && first.name === 'log') {
+  } else if(element.name === 'apply' && element.elements[0].name === 'log') {
     let logbase = element.elements
       .find(y => y.name === 'logbase');
     let expr = element.elements.slice(1)
@@ -113,41 +115,41 @@ function _toMathExpr(element, useParentheses = false){
       return `logbase(${expr[0]}, ${base})`;
     }
   // === trigonometry ===
-  } else if (element.name === 'apply' && first.name === 'arcsin') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arcsin') {
     let arg = _toMathExpr(element.elements[1]);
     return `asin(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arccos') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arccos') {
     let arg = _toMathExpr(element.elements[1]);
     return `acos(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arctan') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arctan') {
     let arg = _toMathExpr(element.elements[1]);
     return `atan(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arccot') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arccot') {
     let arg = _toMathExpr(element.elements[1]);
     return `acot(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arccsc') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arccsc') {
     let arg = _toMathExpr(element.elements[1]);
     return `acsc(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arcsec') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arcsec') {
     let arg = _toMathExpr(element.elements[1]);
     return `asec(${arg})`;
   // hyperbolic arccsch(x)
-  } else if (element.name === 'apply' && first.name === 'arcsinh') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arcsinh') {
     let arg = _toMathExpr(element.elements[1]);
     return `asinh(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arccosh') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arccosh') {
     let arg = _toMathExpr(element.elements[1]);
     return `acosh(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arctanh') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arctanh') {
     let arg = _toMathExpr(element.elements[1]);
     return `atanh(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arccoth') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arccoth') {
     let arg = _toMathExpr(element.elements[1]);
     return `acoth(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arcsech') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arcsech') {
     let arg = _toMathExpr(element.elements[1]);
     return `asech(${arg})`;
-  } else if (element.name === 'apply' && first.name === 'arccsch') {
+  } else if (element.name === 'apply' && element.elements[0].name === 'arccsch') {
     let arg = _toMathExpr(element.elements[1]);
     return `acsch(${arg})`;
   } else if (element.name === 'piecewise') { // return ternary if possible, or piecewise
@@ -172,22 +174,22 @@ function _toMathExpr(element, useParentheses = false){
     }
 
     return `piecewise(${args.join(', ')})`;
-  } else if (element.name === 'apply' && (first.name === 'ci' || first.name === 'csymbol')) { // some user defined functions
-    let funcName = _toMathExpr(first); // first.elements[0]?.text;
+  } else if (element.name === 'apply' && (element.elements[0].name === 'ci' || element.elements[0].name === 'csymbol')) { // some user defined functions
+    let funcName = _toMathExpr(element.elements[0]); // first.elements[0]?.text;
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x)).join(', '); // skip ()
     return `${funcName}(${args})`;
   } else if (element.name === 'apply') { // all other internal mathml functions
     let args = element.elements.slice(1)
       .map((x) => _toMathExpr(x)).join(', ');
-    return `${first.name}(${args})`;
+    return `${element.elements[0].name}(${args})`;
   } else if (element.name === 'ci') {
     return element.elements[0]?.text;
   } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/time') {
     return 't';
   } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/delay') {
     // return 'delay';
-    throw new Error('"delay" symbol in expression (SBML module) is not supported');
+    throw new HetaLevelError('"delay" symbol in expression (SBML module) is not supported');
   } else if (element.name === 'csymbol') {
     return element.elements[0]?.text;
   } else if (element.name === 'cn' && element.attributes?.type === 'rational' && element.elements[1]?.name === 'sep') { // rational numbers: 1/1000
