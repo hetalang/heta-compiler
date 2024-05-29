@@ -26,6 +26,8 @@ const correctUnits = [
   {str0: 'xxx_yyy', str: 'xxx_yyy', hash: '_xxx_yyy', tex: 'xxx\\_yyy', html: 'xxx_yyy'},
   {str0: 'xxx_yyy*aaa_bbb^2', str: 'xxx_yyy*aaa_bbb^2', hash: '_xxx_yyy_aaa_bbb2', tex: 'xxx\\_yyy \\cdot aaa\\_bbb^{2}', html: 'xxx_yyy&times;aaa_bbb<sup>2</sup>'},
   {str0: 'u12x', str: 'u12x', hash: '_u12x', tex: 'u12x', html: 'u12x'},
+  {str0: '(L)', str: 'L', hash: '_L', tex: 'L', html: 'L'},
+  {str0: '(metre)^2', str: 'metre^2', hash: '_metre2', tex: 'metre^{2}', html: 'metre<sup>2</sup>'},
 ];
 
 describe('Testing correct units.', () => {

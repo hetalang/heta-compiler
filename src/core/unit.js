@@ -233,7 +233,7 @@ class Unit extends Array {
    * @param {String} unitString - string of format 'mM^2*L/mg/h2' or (1e-2 mg)^3/L
    * @return {Unit} A Unit object.
    */
-  static parse(unitString){
+  static parse(unitString) {
     let unit = new Unit();
 
     // create string from number
@@ -250,7 +250,7 @@ class Unit extends Array {
       // checking "/xxx^12.23" or "1" or "/1"
       let shortFormat = /^(\/|\*)?[_A-Za-z1][_A-Za-z0-9]*\^?(\d+(\.?\d*)?)?$/;
       // checking "/(1e-2xxx)^12.23"
-      let longFormat = /^(\/|\*)?\(\d+(\.\d*)?([eE][+-]?\d+)?([_A-Za-z][_A-Za-z0-9]*)?\)\^?(\d+(\.?\d*)?)?$/;
+      let longFormat = /^(\/|\*)?\((\d+(\.\d*)?)?([eE][+-]?\d+)?([_A-Za-z][_A-Za-z0-9]*)?\)\^?(\d+(\.?\d*)?)?$/;
       
       if (!shortFormat.test(item) && !longFormat.test(item)) 
         throw new SyntaxError(`Wrong syntax of unit's item: "${unitString}"`);
