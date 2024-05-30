@@ -72,6 +72,7 @@ class FunctionDef extends Top {
         let msg = this.id + ': '+ e.message + ` in "${q.math.toString()}"`;
         logger && logger.error(msg, {type: 'ValidationError'});
         this.errored = true;
+        return; // BRAKE
       }
 
       // check that identifiers in `math` correspond to `arguments`
