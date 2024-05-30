@@ -1,0 +1,153 @@
+fmole #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-15 } ]
+};
+pmole #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-12 } ]
+};
+nmole #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-9 } ]
+};
+umole #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-6 } ]
+};
+mmole #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-3 } ]
+};
+fM #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-15 }, { kind: litre, exponent: -1} ]
+};
+
+pM #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-12 }, { kind: litre, exponent: -1} ]
+};
+nM #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-9 }, { kind: litre, exponent: -1} ]
+};
+uM #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-6 }, { kind: litre, exponent: -1} ]
+};
+mM #defineUnit {
+    units: [ { kind: mole, multiplier: 1e-3 }, { kind: litre, exponent: -1} ]
+};
+M #defineUnit {
+    units: [ { kind: mole }, { kind: litre, exponent: -1} ]
+};
+kM #defineUnit {
+    units: [ { kind: mole, multiplier: 1e3 }, { kind: litre, exponent: -1 } ]
+};
+
+fL #defineUnit {
+    units: [ { kind: litre, multiplier: 1e-15 } ]
+};
+pL #defineUnit {
+    units: [ { kind: litre, multiplier: 1e-12 } ]
+};
+nL #defineUnit {
+    units: [ { kind: litre, multiplier: 1e-9 } ]
+};
+uL #defineUnit {
+    units: [ { kind: litre, multiplier: 1e-6 } ]
+};
+mL #defineUnit {
+    units: [ { kind: litre, multiplier: 1e-3 } ]
+};
+dL #defineUnit {
+    units: [ { kind: litre, multiplier: 1e-1 } ]
+};
+L #defineUnit {
+    units: [ { kind: litre } ]
+};
+
+fs #defineUnit {
+    units: [ { kind: second, multiplier: 1e-15 } ]
+};
+ps #defineUnit {
+    units: [ { kind: second, multiplier: 1e-12 } ]
+};
+ns #defineUnit {
+    units: [ { kind: second, multiplier: 1e-9 } ]
+};
+us #defineUnit {
+    units: [ { kind: second, multiplier: 1e-6 } ]
+};
+ms #defineUnit {
+    units: [ { kind: second, multiplier: 1e-3 } ]
+};
+s #defineUnit {
+    units: [ { kind: second } ]
+};
+h #defineUnit {
+    units: [ { kind: hour, multiplier: 1 } ]
+};
+week #defineUnit {
+    units: [ { kind: day, multiplier: 7 } ]
+};
+
+fg #defineUnit {
+    units: [ { kind: kilogram, multiplier: 1e-18 } ]
+};
+pg #defineUnit {
+    units: [ { kind: kilogram, multiplier: 1e-15 } ]
+};
+ng #defineUnit {
+    units: [ { kind: kilogram, multiplier: 1e-12 } ]
+};
+ug #defineUnit {
+    units: [ { kind: kilogram, multiplier: 1e-9 } ]
+};
+mg #defineUnit {
+    units: [ { kind: kilogram, multiplier: 1e-6 } ]
+};
+g #defineUnit {
+    units: [ { kind: kilogram, multiplier: 1e-3 } ]
+};
+kg #defineUnit {
+    units: [ { kind: kilogram } ]
+};
+
+kat #defineUnit {
+    units: [ { kind: katal } ]
+};
+
+cell #defineUnit {
+    units: [ { kind: item } ]
+};
+kcell #defineUnit {
+    units: [ { kind: item, multiplier: 1e3 } ]
+};
+
+cal #defineUnit {
+    units: [ { kind: joule, multiplier: 4.1868 } ]
+};
+kcal #defineUnit {
+    units: [ { kind: joule, multiplier: 4.1868e3 } ]
+};
+
+fm #defineUnit {
+    units: [ { kind: metre, multiplier: 1e-15 } ]
+};
+pm #defineUnit {
+    units: [ { kind: metre, multiplier: 1e-12 } ]
+};
+nm #defineUnit {
+    units: [ { kind: metre, multiplier: 1e-9 } ]
+};
+um #defineUnit {
+    units: [ { kind: metre, multiplier: 1e-6 } ]
+};
+mm #defineUnit {
+    units: [ { kind: metre, multiplier: 1e-13 } ]
+};
+cm #defineUnit {
+    units: [ { kind: metre, multiplier: 1e-2 } ]
+};
+m #defineUnit {
+    units: [ { kind: metre } ]
+};
+
+UL #defineUnit {
+    units: [ { kind: dimensionless } ]
+};
+percent #defineUnit {
+    units: [ { kind: dimensionless, multiplier: 1e-2 } ]
+};
