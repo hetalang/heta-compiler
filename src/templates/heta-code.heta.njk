@@ -25,8 +25,8 @@
   {{- ' aux: ' + hetaObject(component.aux) + ',' if component.aux is defined and component.aux|length > 0}}
   {{- ' }' }}
 {%- endmacro -%}
-{%- macro notes(component={}) %}
-  {{- '\n  \'\'\'' + component.notes + '\'\'\'' if component.notes is defined }}
+{%- macro notes(component={}, indentation='') %}
+  {{- '\n' + indentation + '\'\'\'' + component.notes + '\'\'\'' if component.notes is defined }}
 {%- endmacro %}
 {%- macro start_(component={}) %}
   {{- ' .= ' + component.assignments.start_ if component.assignments.start_ is defined -}}
@@ -46,11 +46,11 @@
 {%- macro hetaObject(object={}) -%}
   { {{- object|dump -}} }
 {%- endmacro %}
-{%- macro assignments(record) -%}
+{%- macro assignments(record, indentation) -%}
   {%- for key, value in record.assignments %}
   {%- if key ==='start_' %}
   {%- elseif key ==='ode_' %}
-  {{ record.id }} := {{ value }};
+{{ indentation }}{{ record.id }} := {{ value }};
   {%- else %}
   {{ record.id }} [{{ key }}]= {{ value }};
   {%- endif %}
@@ -72,12 +72,14 @@
 {%- endfor %}
 
 {%- for spaceId, namespace in namespaceStorage %}
-
+{% set indentation = '' if spaceId=='nameless' else '  ' %}
+{%- if spaceId!='nameless' or namespace.isAbstract %}
 {{ 'abstract ' if namespace.isAbstract }}namespace {{ spaceId }} begin
+{%- endif %}
 
 {%- for component in namespace.selectByClassName('TimeScale') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{- component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component) }}
@@ -86,8 +88,8 @@
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Compartment') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{ component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component) }}
@@ -98,8 +100,8 @@
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Species') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{ component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component) }}
@@ -110,20 +112,20 @@
 {%- endfor %}
 
 {%- for component in namespace.selectByInstanceOf('Process') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{ component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component.toQ({simplifyModifiers: true, simplifyActors: true})) }}
   {{- start_(component) }}
   {{- ';' }}
-  {{- assignments(component) }}
+  {{- assignments(component, indentation) }}
   {{- '\n' if loop.last }}
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Record') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{ component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component) }}
@@ -134,8 +136,8 @@
 {%- endfor %}
 
 {%- for component in namespace.selectByClassName('Const') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{ component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component) }}
@@ -145,13 +147,15 @@
 {%- endfor %}
 
 {%- for component in namespace.selectByInstanceOf('_Switcher') %}
-  {{- notes(component) }}
-  {{ component.id }}
+  {{- notes(component, indentation) }}
+{{ indentation }}{{ component.id }}
   {{- class(component) }}
   {{- title(component) }}
   {{- dict(component.toQ()) }}
   {{- ';' }}
   {{- '\n' if loop.last }}
 {%- endfor -%}
+{%- if spaceId!='nameless' %}
 end
+{%- endif %}
 {%- endfor %}
