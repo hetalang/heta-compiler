@@ -52,7 +52,7 @@
   {%- elseif key ==='ode_' %}
 {{ indentation }}{{ record.id }} := {{ value }};
   {%- else %}
-  {{ record.id }} [{{ key }}]= {{ value }};
+{{ indentation }}{{ record.id }} [{{ key }}]= {{ value }};
   {%- endif %}
   {%- endfor %}
 {%- endmacro -%}
