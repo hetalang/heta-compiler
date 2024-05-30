@@ -7,14 +7,14 @@
 {%- macro dict(component={}) %}
   {{- ' {' }}
   {{- ' units: ' + component.units + ',' if component.units is defined }}
-  {{- ' boundary: ' + component.boundary + ',' if component.boundary is defined }}
-  {{- ' ss: ' + component.ss + ',' if component.ss is defined }}
+  {{- ' boundary: ' + component.boundary + ',' if component.boundary }}
+  {{- ' ss: ' + component.ss + ',' if component.ss }}
   {{- ' compartment: ' + component.compartment + ',' if component.compartment is defined }}
   {{- ' actors: ' + component.actors + ',' if component.actors.length > 0 }}
   {{- ' modifiers: ' + hetaArray(component.modifiers) + ',' if component.modifiers.length > 0 }}
   {{- ' reversible: ' + component.reversible + ',' if component.reversible === false }}
-  {{- ' isAmount: ' + component.isAmount + ',' if component.isAmount is defined }}
-  {{- ' output: ' + component.output + ',' if component.output is defined }}
+  {{- ' isAmount: ' + component.isAmount + ',' if component.isAmount }}
+  {{- ' output: ' + component.output + ',' if component.output }}
   {{- ' slope: ' + component.slope + ',' if component.slope is defined and component.slope !== 1 }}
   {{- ' intercept: ' + component.intercept + ',' if component.intercept is defined and component.intercept !== 0 }}
   {{- ' trigger: ' + component.trigger + ',' if component.trigger is defined }}
