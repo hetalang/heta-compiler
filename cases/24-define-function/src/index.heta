@@ -23,6 +23,10 @@
   math: f4(x)^2
 };
 
+// throws error
+#defineFunction f6 {
+};
+
 /*
 // ref to wrong function
 #defineFunction f7 {

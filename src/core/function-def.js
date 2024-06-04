@@ -48,11 +48,11 @@ class FunctionDef extends Top {
     let valid = FunctionDef.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
-    // undefined arguments means it can be anything (for core elements)
+    // undefined arguments means it can vary (for core elements)
     if (q.arguments) {
       this.arguments = q.arguments;
-    } else if (q.math) {
-      let msg = `The FunctionDef ${q.id} with "math" property must have "arguments".`;
+    } else if (!isCore) {
+      let msg = `The #defineFunction ${q.id} must have "arguments".`;
       logger && logger.error(msg, {type: 'ValidationError'});
       this.errored = true;
     }
@@ -83,6 +83,10 @@ class FunctionDef extends Top {
         logger && logger.error(msg, {type: 'ValidationError'});
         this.errored = true;
       }
+    } else if (!isCore) {
+      let msg = `The #defineFunction ${q.id} must have "math".`;
+      logger && logger.error(msg, {type: 'ValidationError'});
+      this.errored = true;
     }
   }
   get className(){

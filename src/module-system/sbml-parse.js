@@ -196,29 +196,34 @@ function unitDefinitionToUnits(x){
 /*
   transform SBML-like function definition to Heta-like unit array
 */
-function functionDefinitionToQ(x){
+function functionDefinitionToQ(x) {
+
+  let q = {
+    action: 'defineFunction',
+    id: x.attributes.id
+  };
 
   let mathElement = x.elements?.find((y) => y.name === 'math');
   let lambdaElement = mathElement?.elements?.find((y) => y.name === 'lambda');
 
+  if (!mathElement || !lambdaElement ) {
+    throw new HetaLevelError(`Heta does not support empty <math> or <lambda> "${q.id}" elements in FunctionDefinition,`);
+  }
+
   // get argument ids
-  let args = lambdaElement.elements && lambdaElement.elements
-    .filter((y) => y.name === 'bvar')
+  q.args = lambdaElement.elements
+    ?.filter((y) => y.name === 'bvar')
     .map((y) => y.elements && y.elements.find((z) => z.name === 'ci'))
     .map((y) => y.elements && y.elements.find((z) => z.type === 'text'))
     .map((y) => y.text.trim());
 
   // get expression
-  let notBvarElement = lambdaElement.elements 
-    && lambdaElement.elements.find((y) => y.name !== 'bvar');
-  let math = _toMathExpr(notBvarElement);
+  let notBvarElement = lambdaElement.elements
+    ?.find((y) => y.name !== 'bvar');
+  q.math = _toMathExpr(notBvarElement);
 
-  return {
-    action: 'defineFunction',
-    id: x.attributes.id,
-    arguments: args,
-    math: math
-  };
+
+  return q;
 }
 
 /*
@@ -657,7 +662,7 @@ function eventToQ(x){
   }
   // assignments
   let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');
-  if (assignments.elements !== undefined) {
+  if (assignments?.elements !== undefined) {
     assignments.elements
       .filter((y) => y.name === 'eventAssignment')
       .forEach((y) => {

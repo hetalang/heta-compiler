@@ -30,12 +30,13 @@ describe('Unit test for FunctionDef', () => {
     simple._container.logger.resetErrors();
   });
 
-  it('defineFunction without math is ok.', () => {
+  it('defineFunction without math is not ok.', () => {
     let simple = new p.classes.FunctionDef({
       id: 'ud1',
       arguments: ['x']
     });
-    expect(simple._container.logger).to.has.property('hasErrors', false);
+    expect(simple._container.logger).to.has.property('hasErrors', true);
+    simple._container.logger.resetErrors();
   });
 
   it('Error: wrong input 1 (bad arguments).', () => {
@@ -99,7 +100,7 @@ describe('Testing loading FunctionDef', () => {
 
   it('Load FunctionDef', () => {
     p.loadMany(input0);
-    expect(p.functionDefStorage.size - counter).to.be.eq(4);
+    expect(p.functionDefStorage.size - counter).to.be.eq(3);
     //console.log([...p.functionDefStorage])
     p.logger.resetErrors();
   });

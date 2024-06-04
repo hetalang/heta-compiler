@@ -224,12 +224,10 @@
         "arguments": ["x", "y"]
     },
     {
-        "id": "max", "action": "defineFunction",
-        "arguments": ["x"]
+        "id": "max", "action": "defineFunction"
     },
     {
-        "id": "min", "action": "defineFunction",
-        "arguments": ["x"]
+        "id": "min", "action": "defineFunction"
     },
     {
         "id": "factorial", "action": "defineFunction",
@@ -306,7 +304,6 @@
     },
 
     {
-        "id": "piecewise", "action": "defineFunction",
-        "arguments": ["x"]
+        "id": "piecewise", "action": "defineFunction"
     }
 ]
