@@ -29,6 +29,7 @@ function jsbmlToQArr(JSBML){
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
 
+
   // unit definition
   let unitDict = {};
   model.elements
@@ -40,8 +41,22 @@ function jsbmlToQArr(JSBML){
       unitDict[x.attributes.id] = unitDefinitionToUnits(x);
     });
 
-  // algebraicRules
-  
+  // get time units
+  let timeUnits = model.attributes?.timeUnits;
+  if (typeof timeUnits !== 'undefined') {
+    let q = { action: 'update', id: 't' };
+    let legalUnitIndex = legalUnits.indexOf(timeUnits);
+    if (legalUnitIndex !== -1) { // if id in legal unit list
+      q.units = Unit.fromQ([{ kind: timeUnits }]);
+    } else if (unitDict[timeUnits] !== undefined) { // if id in unitDefinitions
+      q.units = unitDict[timeUnits]; //.simplify(); 
+    } else {
+      q.units = Unit.fromQ([{ kind: timeUnits }]);
+    }
+    qArr.push(q); // add only if units presented
+  }
+
+  // function definitions
   model.elements
     .filter((x) => x.name === 'listOfFunctionDefinitions')
     .map((x) => x.elements)
