@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.8.3
+
+- Update syntax of units `(m)^2`
+- Fix multiple issues with critical build error
+- remove exitWithoutError option in Builder settings
+- fig issues in SBML module: zero dimentions, delay, defineFunction, csymbol
+- add time units import from SBML L3
+- add qsp-functions.heta file in init
+- prettify HetaCode export
+- defineFunction rules: do not allow empty math and arguments
+
 ## 0.8.2
 
 - fix error with comments in base syntax
