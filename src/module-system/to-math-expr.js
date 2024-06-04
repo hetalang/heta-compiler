@@ -190,8 +190,10 @@ function _toMathExpr(element, useParentheses = false) {
   } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/delay') {
     // return 'delay';
     throw new HetaLevelError('"delay" symbol in expression (SBML module) is not supported');
+  } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/avogadro') {
+    return '6.02214076e23';
   } else if (element.name === 'csymbol') {
-    return element.elements[0]?.text;
+    throw new HetaLevelError(`csymbol with url ${element.attributes?.definitionURL} in expression (SBML module) is not supported`);
   } else if (element.name === 'cn' && element.attributes?.type === 'rational' && element.elements[1]?.name === 'sep') { // rational numbers: 1/1000
     let numerator = element.elements[0]?.text;
     let denominator = element.elements[2]?.text;
