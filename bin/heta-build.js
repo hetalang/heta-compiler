@@ -40,17 +40,17 @@ program
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.')
   .parse(process.argv);
 
-(async () => {
+async function main() {
   let args = program.args;
   let opts = program.opts();
   // print newer version message
-  if (!opts.skipUpdates) await printVersionMessage();
+  //if (!opts.skipUpdates) await printVersionMessage();
 
   // set target directory of platform and check if exist
   let targetDir = path.resolve(args[0] || '.');
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
-    process.exit(1); // BRAKE
+    process.exit(2); // BRAKE
   }
 
   // === read declaration file ===
@@ -66,7 +66,7 @@ program
     var declaration = {};
   } else if (extensionNumber === -1) {
     process.stdout.write(`Declaration file "${opts.declaration}" not found.\nSTOP!`);
-    process.exit(1); // BRAKE
+    process.exit(2); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
     process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
@@ -78,7 +78,7 @@ program
       }
     } catch (e) {
       process.stdout.write(`Wrong format of declaration file: \n"${e.message}"\n`);
-      process.exit(1); // BRAKE
+      process.exit(2); // BRAKE
     }
   }
 
@@ -108,23 +108,20 @@ program
     : true;
   if (!satisfiesVersion) {
     process.stdout.write(`Version "${declaration.builderVersion}" stated in declaration file is not supported by the builder.\n`);
-    process.exit(1); // BRAKE
+    process.exit(2); // BRAKE
   }
 
-  // === this part displays "send errors to developer" message ===
-  try {
-    var builder = new Builder(declaration, targetDir);
-    builder.run();
-  } catch(error) {
-    if (error.name === 'HetaLevelError') {
-      process.stdout.write(error.message + '\nSTOP!\n');
-      process.exit(3);
-    } else {
-      process.stdout.write(contactMessage + '\n');
-      process.stdout.write(error.stack);
-      process.exit(1); // unexpected error
-    }
-  }
+  let builder = new Builder(declaration, targetDir);
+  builder.run();
+
+  return builder;
+}
+
+// simulatanious run
+Promise.all([
+  main(),
+  !program.opts().skipUpdates && printVersionMessage()
+]).then(([builder]) => {
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
     process.exit(2);
@@ -132,5 +129,13 @@ program
     process.stdout.write('Compilation OK!\n');
     process.exit(0);
   }
-
-})();
+}).catch((error) => {
+  if (error.name === 'HetaLevelError') {
+    process.stdout.write(error.message + '\nSTOP!\n');
+    process.exit(2);
+  } else {
+    process.stdout.write(contactMessage + '\n');
+    process.stdout.write(error.stack);
+    process.exit(1); // unexpected error
+  }
+});
