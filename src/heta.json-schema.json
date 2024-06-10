@@ -341,11 +341,11 @@
     "FunctionDefinition": {
       "type": "object",
       "properties": {
-        "args": {
+        "arguments": {
           "type": "array",
           "items": { "$ref": "#/definitions/ID" }
         },
-        "expr": { "$ref": "#/definitions/ExprString" }
+        "math": { "$ref": "#/definitions/ExprString" }
       }
     },
 

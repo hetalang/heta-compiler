@@ -226,7 +226,7 @@ function functionDefinitionToQ(x) {
   }
 
   // get argument ids
-  q.args = lambdaElement.elements
+  q.arguments = lambdaElement.elements
     ?.filter((y) => y.name === 'bvar')
     .map((y) => y.elements && y.elements.find((z) => z.name === 'ci'))
     .map((y) => y.elements && y.elements.find((z) => z.type === 'text'))
