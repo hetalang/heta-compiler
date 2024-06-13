@@ -457,7 +457,7 @@ function reactionToQ(x){
   let kineticLaw = x.elements?.find((y) => y.name === 'kineticLaw');
   
   // local parameters
-  let listOfParameters = kineticLaw?.elements?.find((y) => y.name === 'listOfParameters');
+  let listOfParameters = kineticLaw?.elements?.find((y) => y.name === 'listOfParameters' || y.name === 'listOfLocalParameters');
   if (listOfParameters) {
     let parameters = listOfParameters.elements
       .filter((y) => y.name = 'parameter');
