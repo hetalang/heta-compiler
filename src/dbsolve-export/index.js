@@ -45,8 +45,7 @@ class DBSolveExport extends AbstractExport{
    * @return {string} Text code of exported format.
    */
   makeText() {
-    let logger = this._container.logger;
-
+    //let logger = this._container.logger;
 
     let selectedNamespaces = this.selectedNamespaces();
 
