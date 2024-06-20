@@ -1,10 +1,12 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toCString = function(_mathOptions = {}){
+Expression.prototype.toCString = function(_mathOptions = {}, substituteByDefinitions = true){
   // set defaults
   let mathOptions = Object.assign({
     timeVariable: 'SOLVERTIME'
   }, _mathOptions);
+
+  let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
 
   let CStringHandler = (node, options) => {
     if (node.type === 'ConstantNode' && Number.isInteger(node.value)) {
@@ -41,10 +43,9 @@ Expression.prototype.toCString = function(_mathOptions = {}){
     }
   };
 
-  return this.exprParsed
-    .toString({
-      parenthesis: 'keep',
-      implicit: 'show',   
-      handler: CStringHandler
-    });
+  return tree.toString({
+    parenthesis: 'keep',
+    implicit: 'show',   
+    handler: CStringHandler
+  });
 };
