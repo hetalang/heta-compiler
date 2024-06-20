@@ -413,7 +413,7 @@ Each namespace in separate file.
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+ |na 
 |`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+ |na
 |`@Record {ss: true, ...}`                               |- |- |+ |- |- |- |- |+ |+ |na
-|`#defineFunction`, (sub) means substitution             |+ (sub) |+ (sub) |+ |+ |+ |- |+ |+ |+ |na
+|`#defineFunction`, (sub) means substitution             |+(sub) |+(sub) |+ |+(sub) |+ |+(sub) |+ |+ |+ |na
 
 ## Math expressions conversions
 

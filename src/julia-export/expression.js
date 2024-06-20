@@ -1,6 +1,8 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toJuliaString = function(){
+Expression.prototype.toJuliaString = function(substituteByDefinitions) {
+  let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
+
   let juliaStringHandler = (node, options) => {
     if(node.type==='ConstantNode' && Number.isInteger(node.value)){
       return node.value.toExponential(); // to display 6 => 6e0; 6e23 => 6e+23
@@ -134,12 +136,11 @@ Expression.prototype.toJuliaString = function(){
     }
   };
 
-  return this.exprParsed
-    .toString({
-      parenthesis: 'keep',
-      implicit: 'show',
-      handler: juliaStringHandler
-    });
+  return tree.toString({
+    parenthesis: 'keep',
+    implicit: 'show',
+    handler: juliaStringHandler
+  });
 };
 
 module.exports = Expression;

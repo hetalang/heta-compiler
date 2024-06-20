@@ -1,6 +1,8 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toMatlabString = function(){
+Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
+  let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
+
   let matlabStringHandler = (node, options) => {
     if (node.type==='FunctionNode' && node.fn.name==='pow') {
       return `power(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
@@ -95,12 +97,11 @@ Expression.prototype.toMatlabString = function(){
     }
   };
 
-  return this.exprParsed
-    .toString({
-      parenthesis: 'keep',
-      implicit: 'show',   
-      handler: matlabStringHandler
-    });
+  return tree.toString({
+    parenthesis: 'keep',
+    implicit: 'show',   
+    handler: matlabStringHandler
+  });
 };
 
 module.exports = Expression;
