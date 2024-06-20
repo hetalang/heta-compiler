@@ -129,19 +129,23 @@ class Expression {
   }
   /*
     Renames all symbols except function names
+    It works like a deep copy of expression with renaming
+    translator: <Object> {oldName: newName}
+    XXX: it must also save fnObj for user-defined functions to use "substitute" later BUT it doesn't
   */
-  translateSymbol(translator = {}){
-    let expr = this.clone();
-    expr.exprParsed
-      .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
-      .filter((node) => {
-        let newName = translator[node.name];
-        if (newName){
-          node.name = newName;
-        }
-      });
+  translateSymbol(translator = {}) {
+    let tree = this.exprParsed.transform((node, path) => {
+      let newName = translator[node.name];
+      if (node.type === 'SymbolNode' && path !== 'fn' && newName) {
+        return new math.SymbolNode(newName);
+      } else if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
+        return node;
+      } else {
+        return node;
+      }
+    });
 
-    return expr;
+    return new Expression(tree);
   }
   // return new expression which is the multiplication
   // of this and expression from argument
