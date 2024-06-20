@@ -36,7 +36,7 @@ class JuliaExport extends AbstractExport {
   }
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
-  makeText(skipVersionCode = false){
+  makeText(skipVersionCode = false) {
     //let logger = this._container.logger;
     // create image for multiple namespaces
     let nsImages = this.selectedNamespaces()
@@ -46,7 +46,8 @@ class JuliaExport extends AbstractExport {
     let image = {
       builderVersion: skipVersionCode ? '*' : pkg.version,
       options: this,
-      nsImages
+      nsImages,
+      functionDefArray: [...this._container.functionDefStorage.values()].filter((fd) => !fd.isCore)
     };
     let modelContent = this.getModelCode(image);
     let runContent = this.getRunCode(image);

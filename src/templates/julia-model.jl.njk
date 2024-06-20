@@ -17,7 +17,13 @@
 =#
 
 __platform__ = (function()
-{% for img in nsImages %}
+{% for fd in functionDefArray %}
+function {{ fd.id }}({% for a in fd.arguments %}{{ a }}, {% endfor %}__args__...)
+  return {{ fd.math.toJuliaString() }}
+end
+{%- endfor %}
+
+{%- for img in nsImages %}
 {%- set timeScales = img.namespace.selectByClassName('TimeScale') | exclude2('id', 't') -%}
 {% set id = img.namespace.spaceName %}
 ### create default constants
