@@ -69,10 +69,24 @@ class Expression {
     let clonedMath = this.exprParsed.cloneDeep();
     let expr = new Expression(clonedMath);
     expr._logger = this._logger;
+    return expr;
+  }
+  // substitute user defined functions by their content, return Expression 
+  substituteByDefinitions() {
+    let transformed = this.exprParsed.transform((node) => {
+      if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
+        return node.fnObj.substitute(node.args);
+      } else {
+        return node;
+      }
+    });
+
+    let expr = new Expression(transformed);
+    expr._logger = this._logger;
 
     return expr;
   }
-  updateReferences(q = {}){
+  updateReferences(q = {}) {
     this.exprParsed.traverse((node , path/*, parent*/) => {
       if (node.type === 'SymbolNode' && path !== 'fn') { // transform only SymbolNode
         let oldRef = node.name;

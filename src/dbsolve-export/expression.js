@@ -1,14 +1,20 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toSLVString = function(powTransform = 'keep') {
+Expression.prototype.toSLVString = function(powTransform = 'keep', substituteByDefinitions = true) {
+  let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
+
   if (['keep', 'operator', 'function'].indexOf(powTransform) === -1) {
     throw new TypeError('powTransform must be one of values: "keep", "operator", "function".');
   }
 
   let SLVStringHandler = (node, options) => {
+
+    // OperatorNode
     if (node.type==='OperatorNode' && node.fn==='pow' && powTransform==='function') {
       return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
     }
+
+    // FunctionNode
     if (node.type==='FunctionNode' && node.fn.name==='pow' && powTransform==='operator') {
       if (node.args[0].type==='OperatorNode') {
         var arg0 = `(${node.args[0].toString(options)})`;
@@ -132,7 +138,6 @@ Expression.prototype.toSLVString = function(powTransform = 'keep') {
         .map((arg) => arg.toString(options));
       return `log(${args[0]}) / log(2)`;
     }
-    // piecewise function
     if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
       let msg = `DBS and SLV formats do not support "piecewise" function, got "${node.toString()}"`;
       this._logger.error(msg);
@@ -140,7 +145,8 @@ Expression.prototype.toSLVString = function(powTransform = 'keep') {
         .map((arg) => arg.toString(options));
       return `piecewise(${args.join(',')})`;
     }
-    // ternary operator
+    
+    // ConditionalNode: ternary operator
     if (node.type === 'ConditionalNode') {
       let condition = _removeParenthesis(node.condition);
       let trueExpr = node.trueExpr.toString(options);
@@ -181,12 +187,11 @@ Expression.prototype.toSLVString = function(powTransform = 'keep') {
     }
   };
 
-  return this.exprParsed
-    .toString({
-      parenthesis: 'keep',
-      implicit: 'show',   
-      handler: SLVStringHandler
-    });
+  return tree.toString({
+    parenthesis: 'keep',
+    implicit: 'show',   
+    handler: SLVStringHandler
+  });
 };
 
 /* remove parenthesis from top */

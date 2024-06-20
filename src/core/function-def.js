@@ -95,6 +95,27 @@ class FunctionDef extends Top {
   static get validate() {
     return ajv.compile(schema);
   }
+  // get Node (from mathjs) by substitution 
+  substitute(nodes = []) {
+    // check arguments
+    if (this.arguments.length > nodes.length) {
+      throw new TypeError(`Function "${this.id}" requires minimum ${this.arguments.length} arguments, got ${nodes.length}`);
+    }
+
+    // substitute arguments by nodes
+    let transformed = this.math.exprParsed.transform((node) => {
+      let argIndex = this.arguments.indexOf(node.name);
+      if (node.type === 'SymbolNode' && argIndex !== -1) {
+        return nodes[argIndex];
+      } else if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
+        return node.fnObj.substitute(node.args);
+      } else {
+        return node;
+      }
+    });
+
+    return transformed;
+  }
   bind() {
     // super.bind();
     let {logger, functionDefStorage} = this._container;
