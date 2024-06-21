@@ -1,8 +1,22 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toJuliaString = function(substituteByDefinitions) {
-  let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
+Expression.prototype.toJuliaString = function(substituteByDefinitions = true, translator = {}) {
+  //substitute user defined functions by their content
+  let tree = substituteByDefinitions 
+    ? this.substituteByDefinitions().exprParsed 
+    : this.exprParsed.cloneDeep();
 
+  // if translator is not empty, then change variable names
+  if (!!Object.keys(translator).length) {
+    tree.traverse((node, path) => {
+      let newName = translator[node.name];
+      if (node.type === 'SymbolNode' && path !== 'fn' && newName) {
+        node.name = newName;
+      }
+    });
+  }
+
+  // to modify syntax as required for Julia
   let juliaStringHandler = (node, options) => {
     if(node.type==='ConstantNode' && Number.isInteger(node.value)){
       return node.value.toExponential(); // to display 6 => 6e0; 6e23 => 6e+23

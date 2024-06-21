@@ -28,29 +28,29 @@
 [ ] dat (DBSolve)
 [ ] ModelingToolkit (Julia)
 [ ] PGF and TikZ
-[x] Statistics
+[x] Summary
+[ ] Berkley Madonna
 
 ## bugs
 
 
 ## features
 
-- `heta update br` installs br branch from github, `heta update --dev`
+- remove `Expression` class, use only mathjs expressions with set of methods
 - check and warning if core component was replaced
 - AnyUnit for zero numbers
 - atStart to exports: Matlab, DBSolve
-- `#defineFunction`: different exports
 - write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
 
 ## ideas
 
+- support SBML's delay
 - remove unnecessary rules in export
 - generation of 'platform.yml' by `heta init`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
 - check file format for modules
 - add "ignoreCompartment" property in Species
-- do not translate base units in SBML export like second => _second
 - automatic creation of modifiers in SBML
 - avoid insert for existed elements: get warning or #forceInsert
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
