@@ -6,6 +6,7 @@ const semver = require('semver');
 const currentVersion = pkg.version;
 const changelogLink = 'https://hetalang.github.io/#/heta-compiler/CHANGELOG';
 const NPM_REF = 'http://registry.npmjs.org/-/package/heta-compiler/dist-tags';
+const installLink = 'https://hetalang.github.io/#/heta-compiler/?id=installation';
 
 async function getLatestVersionAsync(){
   try {
@@ -27,7 +28,7 @@ async function printVersionMessage(){
     let msg = [
       colors.magenta.italic('FYI. Newer version of heta-compiler is available.'),
       colors.magenta.italic(`See changes here: ${changelogLink}`),
-      colors.magenta(`Run "heta update" to update ${currentVersion} => ${latestVersion}`),
+      colors.magenta(`To reinstall ${currentVersion} => ${latestVersion}: ${installLink}`),
       '',''
     ];
     process.stdout.write(msg.join('\n'));

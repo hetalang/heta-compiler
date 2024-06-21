@@ -57,16 +57,14 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 For all users (requires sudo previleges)
 
 ```bash
-# replace [Required version] by value, i.e. v0.8.1
-sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
+sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 For single user without sudo previleges
 
 ```bash
-# replace [Required version] by value, i.e. v0.8.1
 mkdir -p ~/bin
-wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-linux-x64
+wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
@@ -77,16 +75,14 @@ source ~/.bashrc
 For all users (requires sudo previleges)
 
 ```bash
-# replace [Required version] by value, i.e. v0.8.1
-sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
+sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 For single user without sudo previleges
 
 ```bash
-# replace [Required version] by value, i.e. v0.8.1
 mkdir -p ~/bin
-wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/download/[Required version]/heta-compiler-macos-x64
+wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
