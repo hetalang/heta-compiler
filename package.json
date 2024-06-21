@@ -1,6 +1,6 @@
 {
   "name": "heta-compiler",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
@@ -25,8 +25,7 @@
   "bin": {
     "heta": "bin/heta.js",
     "heta-build": "bin/heta-build.js",
-    "heta-init": "bin/heta-init.js",
-    "heta-update": "bin/heta-update.js"
+    "heta-init": "bin/heta-init.js"
   },
   "dependencies": {
     "@insysbio/topo-sort": "^1.0.1",

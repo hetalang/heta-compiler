@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.8.4
+
+- support `defineFunction` in all exports
+- fix SBML import: local parameters for L2, avogadro, bugs
+- update uproach for checking next heta version
+- remove `heta update` command
+
 ## 0.8.3
 
 - Update syntax of units `(m)^2`
