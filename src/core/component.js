@@ -237,7 +237,7 @@ class Component {
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
   static requirements(){ 
-    if (this.name === 'Component') {
+    if (this.prototype.className === 'Component') {
       return this._requirements;
     } else if (this.hasOwnProperty('_requirements')) {
       let proto = Object.getPrototypeOf(this);
