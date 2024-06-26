@@ -21,7 +21,6 @@ class DSwitcher extends _Switcher {
         q.trigger += '';
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
-          expr._logger = logger;
           if (expr.hasBooleanResult()) {
             this.trigger = expr; 
           } else {

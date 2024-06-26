@@ -42,7 +42,7 @@ $GLOBAL
 
 $PREAMBLE
 {%- for record in initRecords %}
-{{ "//" if record.isDynamic }}double {{ record.id }} = {{ record.assignments.start_.toCString() }}; 
+{{ "//" if record.isDynamic }}double {{ record.id }} = {{ record.assignments.start_.toCString(logger) }}; 
 {%- endfor %}
 {%- for evt in continuousEvents %}
 bool {{ evt.switcher.id }}_down_ = false;
@@ -53,7 +53,7 @@ self.mevent({{ evt.switcher.getStart() | default('0.0')}}, {{ loop.index0 + 10 }
 
 $MAIN
 {%- for variable in initRecords | filter2("isDynamic", true) %}
-{{  variable.id }}{{ "_amt_" if (variable.className==="Species" and not variable.isAmount) }}_0 = ({{ variable.assignments.start_.toCString() }}){% if variable.className==="Species" and not variable.isAmount %} * {{ variable.compartment }}{% endif %}; 
+{{  variable.id }}{{ "_amt_" if (variable.className==="Species" and not variable.isAmount) }}_0 = ({{ variable.assignments.start_.toCString(logger) }}){% if variable.className==="Species" and not variable.isAmount %} * {{ variable.compartment }}{% endif %}; 
 {%- endfor %}
 
 {% if continuousEvents|length + timeEvents|length > 0 -%}
@@ -65,12 +65,12 @@ if ({{ evt.switcher.id }}_ && EVID=={{ loop.index0 + 10 }}{{ ' && TIME>0.0' if n
   {%- if assign.num >= 0 %} {# for synamic #}
   {%- set evtId = 'evt_' + assign.target + '_' %}
   mrg::evdata {{ evtId }}(TIME, 8);
-  {{ evtId }}.amt = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
+  {{ evtId }}.amt = {{ assign.expr.toCString(logger, {timeVariable: 'TIME'}) }};
   {{ evtId }}.cmt = {{ assign.num + 1}};
   {{ evtId }}.now = true;
   self.mevector.push_back({{ evtId }});
   {%- else %} {# for static #}
-  {{ assign.target }} = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
+  {{ assign.target }} = {{ assign.expr.toCString(logger, {timeVariable: 'TIME'}) }};
   {%- endif %}
   {%- endfor %}
   {%- if evt.switcher.getPeriod() is defined %}
@@ -84,9 +84,9 @@ if ({{ evt.switcher.id }}_ && EVID=={{ loop.index0 + 10 }}{{ ' && TIME>0.0' if n
 {%- endfor %}
 {%- for evt in continuousEvents %}
 // {{ evt.switcher.id }} @{{ evt.switcher.className }}
-{%- set evtCondition = evt.switcher.trigger.toCString({timeVariable: 'TIME'}) + '>=0.0' 
+{%- set evtCondition = evt.switcher.trigger.toCString(logger, {timeVariable: 'TIME'}) + '>=0.0' 
   if evt.switcher.className == 'CSwitcher'
-  else evt.switcher.trigger.toCString({timeVariable: 'TIME'}) %}
+  else evt.switcher.trigger.toCString(logger, {timeVariable: 'TIME'}) %}
 if ({{ evt.switcher.id }}_ && !{{ evt.switcher.id }}_down_ && ({{ evtCondition }}){{ ' && TIME>0.0' if not evt.switcher.atStart }}) {
   {{ evt.switcher.id }}_down_ = true;
 
@@ -94,12 +94,12 @@ if ({{ evt.switcher.id }}_ && !{{ evt.switcher.id }}_down_ && ({{ evtCondition }
   {%- if assign.num >= 0 %} {# for synamic #}
   {%- set evtId = 'evt_' + assign.target + '_' %}
   mrg::evdata {{ evtId }}(TIME, 8);
-  {{ evtId }}.amt = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
+  {{ evtId }}.amt = {{ assign.expr.toCString(logger, {timeVariable: 'TIME'}) }};
   {{ evtId }}.cmt = {{ assign.num + 1}};
   {{ evtId }}.now = true;
   self.mevector.push_back({{ evtId }});
   {%- else %} {# for static #}
-  {{ assign.target }} = {{ assign.expr.toCString({timeVariable: 'TIME'}) }};
+  {{ assign.target }} = {{ assign.expr.toCString(logger, {timeVariable: 'TIME'}) }};
   {%- endif %}
   {%- endfor %}
 } else {
@@ -115,7 +115,7 @@ double {{ ts.id }} = {{ ts.slope }} * SOLVERTIME + {{ ts.intercept }};
 {%- endfor %}
 {%- for record in ruleRecords %}
 // @{{ record.className }} '{{ record.title }}'
-{{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.toCString({timeVariable: 'SOLVERTIME'}) }};
+{{ "double " if not record.assignments.start_ }}{{ record.id }} = {{  record.assignments.ode_.toCString(logger) }};
 {%- endfor %}
 {% for variable in dynamicRecords %}
 dxdt_{{ variable.id }}{{ "_amt_" if variable.className==="Species" and not variable.isAmount }} =

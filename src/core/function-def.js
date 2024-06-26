@@ -60,7 +60,6 @@ class FunctionDef extends Top {
     if (q.math) {
       try {
         var expr = Expression.fromString(q.math);
-        expr._logger = logger;
         if (!expr.hasBooleanResult()) {
           this.math = expr;
         } else {

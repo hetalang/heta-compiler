@@ -10,10 +10,6 @@ const { uniqBy } = require('../utils');
 class Expression {
   /*
     exprParsed: <mathjs.Node>
-
-    XXX: currently Expression instances have _logger property
-    which is set after expression creation
-    in future versions it should be resolved by automatic addition of __platform__ property 
   */
   constructor(exprParsed){ 
     this.exprParsed = exprParsed;
@@ -68,7 +64,6 @@ class Expression {
   clone(){
     let clonedMath = this.exprParsed.cloneDeep();
     let expr = new Expression(clonedMath);
-    expr._logger = this._logger;
     return expr;
   }
   // substitute user defined functions by their content, return Expression 
@@ -82,7 +77,6 @@ class Expression {
     });
 
     let expr = new Expression(transformed);
-    expr._logger = this._logger;
 
     return expr;
   }
@@ -157,7 +151,6 @@ class Expression {
     ]);
 
     let expr = new Expression(node);
-    expr._logger = this._logger; // set the same logger
 
     return expr;
   }

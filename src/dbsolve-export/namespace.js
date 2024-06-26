@@ -75,7 +75,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
             target: record.id + (record.isDynamic ? '_' : ''),
             multiply: 0,
             add: record.id + '_' + switcher.id + '_',
-            expr: expr.toSLVString(powTransform)
+            expr: expr.toSLVString(logger, powTransform)
           };
           timeEvents.push(evt);
         });
@@ -169,5 +169,6 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
     discreteEvents,
     continuousEvents,
     groupedConst,
+    logger
   };
 };

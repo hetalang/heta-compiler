@@ -3,6 +3,7 @@ require('./expression');
 const { intersection } = require('../utils');
 
 Namespace.prototype.getMrgsolveImage = function() {
+  let { logger } = this.container;
   // set dynamic variables
   let dynamicRecords = this
     .selectByInstanceOf('Record')
@@ -19,7 +20,6 @@ Namespace.prototype.getMrgsolveImage = function() {
       let deps = record.dependOn('start_', true);
       let diff = intersection(dynamicIds, deps);
       if (diff.length > 0) {
-        let logger = this.container.logger;
         let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
           + `${record.index} .= ${record.assignments.start_.toString()}`;
           
@@ -123,6 +123,7 @@ Namespace.prototype.getMrgsolveImage = function() {
     ruleRecords,
     timeEvents,
     continuousEvents,
-    output
+    output,
+    logger
   };
 };

@@ -1,6 +1,6 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toCString = function(_mathOptions = {}, substituteByDefinitions = true){
+Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteByDefinitions = true){
   // set defaults
   let mathOptions = Object.assign({
     timeVariable: 'SOLVERTIME'
@@ -36,7 +36,7 @@ Expression.prototype.toCString = function(_mathOptions = {}, substituteByDefinit
     // piecewise function
     if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
       let msg = `mrgsolve format does not support "piecewise" function, got "${node.toString()}"`;
-      this._logger.error(msg);
+      logger && logger.error(msg);
       let args = node.args
         .map((arg) => arg.toString(options));
       return `piecewise(${args.join(',')})`;

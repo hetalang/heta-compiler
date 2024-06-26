@@ -1,6 +1,6 @@
 const { Expression } = require('../core/expression');
 
-Expression.prototype.toSLVString = function(powTransform = 'keep', substituteByDefinitions = true) {
+Expression.prototype.toSLVString = function(logger, powTransform = 'keep', substituteByDefinitions = true) {
   let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
 
   if (['keep', 'operator', 'function'].indexOf(powTransform) === -1) {
@@ -140,7 +140,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep', substituteByD
     }
     if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
       let msg = `DBS and SLV formats do not support "piecewise" function, got "${node.toString()}"`;
-      this._logger.error(msg);
+      logger && logger.error(msg);
       let args = node.args
         .map((arg) => arg.toString(options));
       return `piecewise(${args.join(',')})`;
@@ -173,7 +173,7 @@ Expression.prototype.toSLVString = function(powTransform = 'keep', substituteByD
         return `ifgt(0, 1, ${trueExpr}, ${falseExpr})`;
       } else if (condition.type === 'OperatorNode') {
         let msg = `SLV format does not support boolean operators, got "${node.toString()}"`;
-        this._logger.error(msg);
+        logger && logger.error(msg);
         return `ifgt([error], [error], ${trueExpr}, ${falseExpr})`;
       }
     }

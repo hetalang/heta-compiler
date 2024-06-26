@@ -75,7 +75,7 @@ default_compartment_ = 1; // {units: UL} This is fake compartment to support com
 //
 //!! {{ rule.id }}
 {%- endif %}
-{{ rule.id }} = {{ rule.assignments.ode_.toSLVString(powTransform) }}; // @{{ rule.className }} {{ "'"+rule.title+"'" if rule.title }} {units: {{ rule.units|default('?') }}}
+{{ rule.id }} = {{ rule.assignments.ode_.toSLVString(logger, powTransform) }}; // @{{ rule.className }} {{ "'"+rule.title+"'" if rule.title }} {units: {{ rule.units|default('?') }}}
 {%- endfor %}
 //! Differential equations, count: {{ variables|length}}
 {%- for dynamic in variables %}
