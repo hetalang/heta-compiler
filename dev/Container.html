@@ -1683,6 +1683,186 @@ For example <code>{id: 'output', format: 'JSON', ...}</code> creates the object 
     
 
     
+    <h4 class="name" id="forceInsert"><span class="type-signature"></span>forceInsert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates one of inheritors of <code>Component</code> and put it in a namespace.
+The inheritor depends on <code>q.class</code> property.
+For example <code>{id: 'k1', class: 'Const', namespace: 'one'}</code> creates the object of <code>Const</code> type
+and puts it into namespace <code>one</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#forceInsert</code> statement in JS object format.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isCore</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The created object.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="hetaErrors"><span class="type-signature"></span>hetaErrors<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;object>}</span></h4>
     
 
@@ -2121,186 +2301,6 @@ let q = {
 };
 container.importNS(q);
 ```</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="insert"><span class="type-signature"></span>insert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Creates one of inheritors of <code>Component</code> and put it in a namespace.
-The inheritor depends on <code>q.class</code> property.
-For example <code>{id: 'k1', class: 'Const', namespace: 'one'}</code> creates the object of <code>Const</code> type
-and puts it into namespace <code>one</code>.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>q</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The <code>#insert</code> statement in JS object format.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>isCore</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>The created object.</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Component.html">Component</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
 
 
 
@@ -3455,7 +3455,7 @@ It can also change <code>type</code> of a namespace.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jun 26 2024 13:36:08 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Jun 28 2024 11:15:22 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
