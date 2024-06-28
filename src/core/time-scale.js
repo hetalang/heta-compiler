@@ -24,9 +24,21 @@ class TimeScale extends _Size { // implicit extend Numeric
     let valid = TimeScale.isValid(q, logger);
 
     if (valid) {
-      if (q.slope !== undefined) this.slope = q.slope;
-      if (q.intercept !== undefined) this.intercept = q.intercept;
-      if (q.output !== undefined) this.output = !!q.output;
+      if (q.slope === null) {
+        this.slope = 1;
+      } else if (q.slope !== undefined) {
+        this.slope = q.slope;
+      }
+      if (q.intercept === null) {
+        this.intercept = 0;
+      } else if (q.intercept !== undefined) {
+        this.intercept = q.intercept;
+      }
+      if (q.output === null) {
+        delete this.output;
+      } else if (q.output !== undefined) {
+        this.output = !!q.output;
+      }
     }
 
     return this;

@@ -18,10 +18,16 @@ class _Switcher extends Component {
     let valid = _Switcher.isValid(q, logger);
 
     if (valid) {
-      if (typeof q.atStart !== 'undefined') {
+      if (q.atStart === null) {
+        delete this.atStart;
+      } else if (typeof q.atStart !== 'undefined') {
         this.atStart = !!q.atStart;
       }
-      q.active !== undefined && (this.active = !!q.active);
+      if (q.active === null) {
+        delete this.active;
+      } else if (q.active !== undefined) {
+        this.active = !!q.active;
+      }
     }
 
     return this;

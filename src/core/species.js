@@ -17,8 +17,16 @@ class Species extends Record {
     let valid = Species.isValid(q, logger);
 
     if (valid) {
-      if (q.compartment !== undefined) this.compartment = q.compartment;
-      if (q.isAmount !== undefined) this.isAmount = !!q.isAmount;
+      if (q.compartment === null) {
+        delete this.compartment;
+      } else if (q.compartment !== undefined) {
+        this.compartment = q.compartment;
+      }
+      if (q.isAmount === null) {
+        delete this.isAmount;
+      } else if (q.isAmount !== undefined) {
+        this.isAmount = !!q.isAmount;
+      }
     }
 
     return this;

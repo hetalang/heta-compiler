@@ -36,15 +36,29 @@ class Record extends _Size {
               let msg = this.index + ': '+ e.message + ` in "${x.toString()}"`;
               logger && logger.error(msg, {type: 'ValidationError', space: this.space});
             }
+          } else if (x === null) {
+            delete this.assignments[key];
           } else {
             throw new Error('Wrong expression argument.'); // if code is OK never throws
           }
         });
       }
   
-      if (q.boundary !== undefined) this.boundary = !!q.boundary;
-      if (q.ss !== undefined) this.ss = !!q.ss;
-      if (q.output !== undefined) this.output = !!q.output;
+      if (q.boundary === null) {
+        delete this.boundary;
+      } else if (q.boundary !== undefined) {
+        this.boundary = !!q.boundary;
+      }
+      if (q.ss === null) {
+        delete this.ss;
+      } else if (q.ss !== undefined) {
+        this.ss = !!q.ss;
+      }
+      if (q.output === null) {
+        delete this.output;
+      } else if (q.output !== undefined) {
+        this.output = !!q.output;
+      } 
     }
     
     return this;

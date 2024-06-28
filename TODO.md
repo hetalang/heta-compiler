@@ -41,7 +41,7 @@
 - write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
   wait until Node.js 22 will be released
-- support `null` for properties: highlight, parse, heta standard
+- support `null` for properties: highlight, heta standard
 
 ## ideas
 

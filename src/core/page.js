@@ -7,7 +7,11 @@ class Page extends Component {
     let valid = Page.isValid(q, logger);
 
     if (valid) {
-      if (q.content) this.content = q.content;
+      if (q.content === null) {
+        delete this.content;
+      } else if (q.content !== undefined) {
+        this.content = q.content;
+      }
     }
     
     return this;

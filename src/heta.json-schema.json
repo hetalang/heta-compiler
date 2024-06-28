@@ -40,7 +40,8 @@
       "additionalProperties": {
         "oneOf": [
           { "$ref": "#/definitions/ExprString" },
-          { "type": "number"}
+          { "type": "number"},
+          { "type": "null" }
         ]
       },
       "example": {
@@ -86,10 +87,22 @@
       "properties": {
         "class": { "type": "string" },
         "id": { "$ref": "#/definitions/ID" },
-        "title": { "type": "string" },
-        "notes": { "type": "string" },
-        "tags": { "type": "array", "items": { "type": "string" } },
-        "aux": { "type": "object" }
+        "title": {"oneOf": [
+          { "type": "null" },
+          { "type": "string" }
+        ]},
+        "notes": {"oneOf": [
+          { "type": "null" },
+          { "type": "string" }
+        ]},
+        "tags": {"oneOf": [
+          { "type": "null" },
+          { "type": "array", "items": { "type": "string" } }
+        ]},
+        "aux": {"oneOf": [
+          { "type": "null" },
+          { "type": "object" }
+        ]}
       }
     },
 
@@ -106,54 +119,60 @@
         "assignments": {
           "$ref": "#/definitions/AssignmentDict"
         },
-        "boundary": {
-          "enum": [true, false, 1, 0], "default": false,
-          "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
-        },
-        "ss": {
-          "enum": [true, false, 1, 0],
-          "description": "Steady-State variable"
-        },
-        "output": {
-          "enum": [true, false, 1, 0],
-          "description": "Should be the record listed as an output"
-        }
+        "boundary": {"oneOf": [
+          {
+            "enum": [true, false, 1, 0], "default": false,
+            "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
+          },
+          { "type": "null" }
+        ]},
+        "ss": {"oneOf": [
+          {
+            "enum": [true, false, 1, 0],
+            "description": "Steady-State variable"
+          },
+          { "type": "null" }
+        ]},
+        "output": {"oneOf": [
+          {
+            "enum": [true, false, 1, 0],
+            "description": "Should be the record listed as an output"
+          },
+          { "type": "null" }
+        ]}
       }
     },
-
-
 
     "Compartment": {
       "type": "object"
     },
 
-
     "Species": {
       "type": "object",
       "properties": {
-        "compartment": {
-          "$ref": "#/definitions/ID"
-        },
-        "isAmount": {
-          "description": "If it is false then the value represents the concentration, i.e. normalized to compartment.",
-          "enum": [true, false, 1, 0],
-          "default": false
-        }
+        "compartment": {"oneOf": [
+          { "$ref": "#/definitions/ID" },
+          { "type": "null" }
+        ]},
+        "isAmount": {"oneOf": [
+          {
+            "description": "If it is false then the value represents the concentration, i.e. normalized to compartment.",
+            "enum": [true, false, 1, 0],
+            "default": false
+          },
+          { "type": "null" }
+        ]}
       }
     },
-
-
 
     "Process": {
       "type": "object",
       "properties": {
-        "assignments": {
-          "required": ["ode_"]
-        },
         "actors": {
           "oneOf": [
             { "type": "array", "items": {"$ref": "#/definitions/Actor"}, "errorMessage":  {"type": "should be an array of actors."}},
-            { "$ref": "#/definitions/ProcessExpr" }
+            { "$ref": "#/definitions/ProcessExpr" },
+            { "type": "null"}
           ]
         }
       },
@@ -164,21 +183,25 @@
       }
     },
 
-
-
     "Reaction": {
       "type": "object",
       "properties": {
-        "reversible": { "enum": [true, false, 1, 0], "default": true },
-        "modifiers": {
-          "type": "array",
-          "items": {
-            "oneOf": [
-              { "$ref": "#/definitions/Effector" },
-              { "$ref": "#/definitions/ID" }
-            ]
-          }
-        }
+        "reversible": {"oneOf": [
+          { "enum": [true, false, 1, 0], "default": true },
+          { "type": "null" }
+        ]},
+        "modifiers": {"oneOf": [
+          {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                { "$ref": "#/definitions/Effector" },
+                { "$ref": "#/definitions/ID" }
+              ]
+            }
+          },
+          { "type": "null" }
+        ]}
       },
       "errorMessage": {
         "properties": {
@@ -192,23 +215,32 @@
     "_Switcher": {
       "type": "object",
       "properties": {
-        "atStart": {
-          "description": "If true than the condition will be checked at start_",
-          "enum": [true, false, 1, 0],
-          "default": false
-        },
-        "active": {
-          "description": "if false the event will not run.",
-          "enum": [true, false, 1, 0],
-          "default": true
-        }
+        "atStart": {"oneOf": [
+          {
+            "description": "If true than the condition will be checked at start_",
+            "enum": [true, false, 1, 0],
+            "default": false
+          },
+          { "type": "null" }
+        ]},
+        "active": {"oneOf": [
+          {
+            "description": "if false the event will not run.",
+            "enum": [true, false, 1, 0],
+            "default": true
+          },
+          { "type": "null" }
+        ]}
       }
     },
 
     "CSwitcher": {
       "type": "object",
       "properties": {
-        "trigger": { "$ref": "#/definitions/ExprString" }
+        "trigger": {"oneOf": [
+          { "$ref": "#/definitions/ExprString" },
+          { "type": "null" }
+        ]}
       }
     },
 
@@ -217,10 +249,10 @@
     "DSwitcher": {
       "type": "object",
       "properties": {
-        "trigger": {
-          "oneOf": [
+        "trigger": {"oneOf": [
             { "$ref": "#/definitions/ExprString" },
-            { "enum": [true, false, 1, 0] }
+            { "enum": [true, false, 1, 0] },
+            { "type": "null" }
           ]
         }
       }
@@ -229,10 +261,10 @@
     "StopSwitcher": {
       "type": "object",
       "properties": {
-        "trigger": {
-          "oneOf": [
+        "trigger": {"oneOf": [
             { "$ref": "#/definitions/ExprString" },
-            { "enum": [true, false, 1, 0] }
+            { "enum": [true, false, 1, 0] },
+            { "type": "null" }
           ]
         }
       }
@@ -241,9 +273,18 @@
     "TimeSwitcher": {
       "type": "object",
       "properties": {
-        "start": { "$ref" : "#/definitions/ConstInternal" },
-        "stop": { "$ref" : "#/definitions/ConstInternal" },
-        "period": { "$ref" : "#/definitions/ConstInternal" }
+        "start": {"oneOf": [
+          { "$ref" : "#/definitions/ConstInternal" },
+          { "type": "null" }
+        ]},
+        "stop": {"oneOf": [
+          { "$ref" : "#/definitions/ConstInternal" },
+          { "type": "null" }
+        ]},
+        "period": {"oneOf": [
+          { "$ref" : "#/definitions/ConstInternal" },
+          { "type": "null" }
+        ]}
       }
     },
 
@@ -253,25 +294,49 @@
       "type": "object",
       "description": "Input value. Upper and lower describes possible values. Scale describes transformation for fitting.",
       "properties": {
-        "free": { "enum": [true, false, 1, 0] },
-        "num": { "type": "number" },
-        "scale": { "type": "string", "enum": ["direct", "log", "logit"], "default": "direct" },
-        "upper": { "type": "number" },
-        "lower": { "type": "number" }
+        "free": {"oneOf": [
+          { "enum": [true, false, 1, 0] },
+          { "type": "null" }
+        ]},
+        "num": {"oneOf": [
+          { "type": "number" },
+          { "type": "null" }
+        ]},
+        "scale": {"oneOf": [
+          { "type": "string", "enum": ["direct", "log", "logit"], "default": "direct" },
+          { "type": "null" }
+        ]},
+        "upper": {"oneOf": [
+          { "type": "number" },
+          { "type": "null" }
+        ]},
+        "lower": {"oneOf": [
+          { "type": "number" },
+          { "type": "null" }
+        ]}
       }
      },
 
-     "TimeScale": {
+    "TimeScale": {
       "type": "object",
       "description": "t and other time scales",
       "properties": {
-        "slope": { "type": "number", "exclusiveMinimum": 0 },
-        "intercept": { "type": "number" },
-        "output": { "enum": [true, false, 1, 0] }
+        "slope": {"oneOf": [
+          { "type": "number", "exclusiveMinimum": 0 },
+          { "type": "null" }
+        ]},
+        "intercept": {"oneOf": [
+          { "type": "number" },
+          { "type": "null" }
+        ]},
+        "output": {"oneOf": [
+          { "enum": [true, false, 1, 0] },
+          { "type": "null" }
+        ]}
       }
      },
 
-     "UnitComponent": {
+    "UnitComponent": {
       "type": "object",
       "required": ["kind"],
       "properties": {
@@ -282,74 +347,35 @@
       "example": { "kind": "mole", "multiplier": 1e-6, "exponent": 1 }
     },
 
-     "_Size": {
+    "_Size": {
        "type": "object",
        "properties": {
          "units": { "anyOf": [
             { "type": "number", "enum": [1] },
             { "$ref": "#/definitions/UnitsExpr" },
-            { "type": "array", "items": { "$ref": "#/definitions/UnitComponent" } }
+            { "type": "array", "items": { "$ref": "#/definitions/UnitComponent" } },
+            { "type": "null" }
          ] }
        }
-      },
+    },
 
-     "ConstInternal": {
-      "anyOf": [
+    "ConstInternal": {"anyOf": [
         { "allOf": [ { "$ref": "#/definitions/Const" }, { "required": ["num"] } ] },
         { "$ref": "#/definitions/ID" },
-        { "type": "number" }
+        { "type": "number" },
+        { "type": "null" }
       ]
-     },
-
-
-
-    "_Task": {
-      "type": "object"
     },
-
-    "MonteCarloTask": {
-      "type": "object",
-      "properties": {
-        "statistics": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/Statistics" }
-        }
-      }
-    },
-
-
 
     "Page": {
       "type": "object",
       "properties": {
-        "content": {
-          "type": "string"
-        }
+        "content": {"anyOf": [
+          { "type": "string" },
+          { "type": "null" }
+        ]}
       }
     },
-
-
-
-    "UnitDef": {
-      "type": "object",
-      "properties": {
-      }
-    },
-
-
-
-    "FunctionDefinition": {
-      "type": "object",
-      "properties": {
-        "arguments": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/ID" }
-        },
-        "math": { "$ref": "#/definitions/ExprString" }
-      }
-    },
-
-
 
     "ReferenceDefinition": {
       "type": "object",

@@ -20,7 +20,7 @@ class _Size extends Component {
     let logger = this.namespace?.container?.logger;
     let valid = _Size.isValid(q, logger);
     if (valid) {
-      if (q.units) {
+      if (q.units !== undefined) {
         if (q.units === 1) {
           this.unitsParsed = new Unit();
         } else if (typeof q.units === 'string') {
@@ -30,6 +30,8 @@ class _Size extends Component {
             let msg = this.index + ': '+ e.message;
             logger && logger.error(msg, {type: 'ValidationError', space: this.space});
           }
+        } else if (q.unit === null) {
+          delete this.unitsParsed;
         } else {
           this.unitsParsed = Unit.fromQ(q.units);
         }

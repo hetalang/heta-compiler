@@ -7,8 +7,16 @@ class ReferenceDefinition extends Component {
     let valid = ReferenceDefinition.isValid(q, logger);
 
     if (valid) {
-      if(q.prefix) this.prefix = q.prefix;
-      if(q.suffix) this.suffix = q.suffix;
+      if (q.prefix === null) {
+        delete this.prefix;
+      } else if (q.prefix !== undefined) {
+        this.prefix = q.prefix;
+      }
+      if (q.suffix === null) {
+        delete this.suffix;
+      } else if (q.suffix !== undefined) {
+        this.suffix = q.suffix;
+      }
     }
 
     return this;

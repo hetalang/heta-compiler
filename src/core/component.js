@@ -25,10 +25,26 @@ class Component {
     let valid = Component.isValid(q, logger);
 
     if (valid) {
-      if (q.title) this.title = q.title;
-      if (q.notes) this.notes = q.notes.trim(); // remove trailing symbols
-      if (q.tags) this.tags = q.tags.map((tag) => tag); // clone
-      if (q.aux) this.aux = cloneDeep(q.aux);
+      if (q.title === null) {
+        delete this.title;
+      } else if (q.title !== undefined) {
+        this.title = q.title;
+      }
+      if (q.notes === null) {
+        delete this.notes;
+      } else if (q.notes !== undefined) { 
+        this.notes = q.notes.trim(); // remove trailing symbols
+      }
+      if (q.tags === null) {
+        this.tags = [];
+      } else if (q.tags !== undefined) {
+        this.tags = q.tags.map((tag) => tag); // clone
+      }
+      if (q.aux === null) {
+        this.aux = {};
+      } else if (q.aux) {
+        this.aux = cloneDeep(q.aux);
+      }
     }
     
     return this;

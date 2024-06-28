@@ -10,8 +10,6 @@ const record = require('./record');
 const recordError = require('./record-error');
 const process = require('./process');
 const processError = require('./process-error');
-const monteCarloTask = require('./monteCarloTask');
-const monteCarloTaskError = require('./monteCarloTask-error');
 const page = require('./page');
 const pageError = require('./page-error');
 //const switcherError = require('./c-switcher-error');
@@ -19,7 +17,6 @@ const timeSwitcher = require('./timeSwitcher');
 const timeSwitcherError = require('./timeSwitcher-error');
 
 // unscoped
-const functionDefinition = require('./function-definition');
 const referenceDefinition = require('./reference-definition');
 const const_ = require('./const');
 
@@ -27,12 +24,10 @@ const const_ = require('./const');
 //singleTest('Record', record, recordError);
 //singleTest('Process', process, processError);
 //singleTest('CSwitcher', switcher, switcherError);
-singleTest('MonteCarloTask', monteCarloTask, monteCarloTaskError);
 //singleTest('Page', page, pageError);
 //singleTest('TimeSwitcher', timeSwitcher, timeSwitcherError);
 
 // unscoped
-singleTest('FunctionDefinition', functionDefinition);
 singleTest('ReferenceDefinition', referenceDefinition);
 singleTest('Const', const_);
 

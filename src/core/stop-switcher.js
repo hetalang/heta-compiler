@@ -17,7 +17,9 @@ class StopSwitcher extends _Switcher {
     let valid = StopSwitcher.isValid(q, logger);
     
     if (valid) {
-      if (typeof q.trigger !== 'undefined') {
+      if (q.trigger === null) {
+        delete this.trigger;
+      } else if (typeof q.trigger !== 'undefined') {
         q.trigger += '';
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);

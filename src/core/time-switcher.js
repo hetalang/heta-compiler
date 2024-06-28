@@ -33,21 +33,30 @@ class TimeSwitcher extends _Switcher {
 
     if (valid) {
       // empty means anon 0 as default
-      if (typeof q.start === 'string'){
+      if (q.start === null) {
+        delete this.start;
+        this.startObj = (new Const).merge({ num: 0 });
+      } else if (typeof q.start === 'string') {
         this.start = q.start;
       } else if (typeof q.start === 'number') {
         delete this.start;
         this.startObj = (new Const).merge({ num: q.start });
       }
       // empty is same as 0
-      if (typeof q.period === 'string'){
+      if (q.period === null) {
+        delete this.period;
+        delete this.periodObj;
+      } else if (typeof q.period === 'string'){
         this.period = q.period;
       } else if (typeof q.period === 'number') {
         delete this.period;
         this.periodObj = (new Const).merge({ num: q.period });
       }
       // empty is the same as Infinity
-      if (typeof q.stop === 'string'){
+      if (q.stop === null) {
+        delete this.stop;
+        delete this.stopObj;
+      } else if (typeof q.stop === 'string'){
         this.stop = q.stop;
       } else if (typeof q.stop === 'number') {
         delete this.stop;

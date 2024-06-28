@@ -22,18 +22,23 @@ class Reaction extends Process {
     let valid = Reaction.isValid(q, logger);
 
     if (valid) {
-      if (q.modifiers) {
-        this.modifiers = q.modifiers
-          .map((mod) => {
-            if (typeof mod==='string') {
-              return new Modifier({target: mod});
-            } else {
-              return new Modifier(mod);
-            }
-          });
+      if (q.modifiers === null) {
+        this.modifiers = [];
+      } else if (q.modifiers !== undefined) {
+        this.modifiers = q.modifiers.map((mod) => {
+          if (typeof mod==='string') {
+            return new Modifier({target: mod});
+          } else {
+            return new Modifier(mod);
+          }
+        });
       }
       
-      if (q.compartment !== undefined) this.compartment = q.compartment;
+      if (q.compartment === null) {
+        delete this.compartment;
+      } else if (q.compartment !== undefined) {
+        this.compartment = q.compartment;
+      }
     }
     
     return this;

@@ -1,0 +1,19 @@
+/*
+  template file for creating platform
+*/
+
+#defineFunction xxx {
+  arguments: [x,y,z],
+  math: null
+};
+
+p1 @Record 'This is title' .= 1;
+p1 := 2;
+
+p1 {title: null};
+p1 .= null;
+//p1 := null;
+p1 [xxx]= null;
+
+// exports
+#export { format: JSON, filepath: output };

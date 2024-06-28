@@ -21,11 +21,31 @@ class Const extends _Size { // implicit extend Numeric
     let valid = Const.isValid(q, logger);
 
     if (valid) {
-      if (q.num !== undefined) this.num = q.num;
-      if (q.free !== undefined) this.free = !!q.free;
-      if (q.scale !== undefined) this.scale = q.scale;
-      if (q.lower !== undefined) this.lower = q.lower;
-      if (q.upper !== undefined) this.upper = q.upper;
+      if (q.num === null) {
+        delete this.num;
+      } else if (q.num !== undefined) {
+        this.num = q.num
+      };
+      if (q.free === null) {
+        delete this.free;
+      } else if (q.free !== undefined) {
+        this.free = !!q.free;
+      }
+      if (q.scale === null) {
+        delete this.scale;
+      } else if (q.scale !== undefined) {
+        this.scale = q.scale;
+      }
+      if (q.lower === null) {
+        delete this.lower;
+      } else if (q.lower !== undefined) {
+        this.lower = q.lower;
+      }
+      if (q.upper === null) {
+        delete this.upper;
+      } else if (q.upper !== undefined) {
+        this.upper = q.upper;
+      }
     }
 
     return this;

@@ -34,7 +34,7 @@
     "colors": "^1.4.0",
     "commander": "^11.1.0",
     "fs-extra": "^11.1.1",
-    "heta-parser": "^0.3.18",
+    "heta-parser": "^0.4.0",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",

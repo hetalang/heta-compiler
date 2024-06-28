@@ -22,10 +22,12 @@ class Process extends Record {
     let valid = Process.isValid(q, logger);
 
     if (valid) {
-      if (q.actors) {
-        if(q.actors instanceof Array){
+      if (q.actors !== undefined) {
+        if (q.actors instanceof Array) {
           this.actors = q.actors
             .map((q) => new Actor(q));
+        } else if (q.actors === null) {
+          this.actors = [];
         } else {
           let { targetArray, isReversible } = rct2actors(q.actors);
           this.actors = targetArray
@@ -33,7 +35,11 @@ class Process extends Record {
           this.reversible = isReversible;
         }
       }
-      if (q.reversible !== undefined) this.reversible = !!q.reversible;
+      if (q.reversible === null) {
+        this.reversible = true;
+      } else if (q.reversible !== undefined) {
+        this.reversible = !!q.reversible;
+      }
     }
     
     return this;
