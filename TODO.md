@@ -36,27 +36,26 @@
 
 ## features
 
-- remove `Expression` class, use only mathjs expressions with set of methods
-- check and warning if core component was replaced
 - AnyUnit for zero numbers
 - atStart to exports: Matlab, DBSolve
 - write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
+  wait until Node.js 22 will be released
+- support `null` for properties: highlight, parse, heta standard
 
 ## ideas
 
 - support SBML's delay
+- updating properties with `one::s1.assignments.start_ 5.5;`
+- check and warning if core component was replaced
 - remove unnecessary rules in export
 - generation of 'platform.yml' by `heta init`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
 - check file format for modules
 - add "ignoreCompartment" property in Species
 - automatic creation of modifiers in SBML
-- avoid insert for existed elements: get warning or #forceInsert
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
-- support null for properties: highlight, parse, heta standard
 - stoichiometry as `@Const` and `@Record`
-- updating properties with `one::s1.assignments.start_ 5.5;`
 - highlight for Vim https://ezpzdev.medium.com/create-a-vim-plugin-for-your-next-programming-language-structure-and-syntax-highlight-1dc0823a6b92
 - highlight for notepad++ https://npp-user-manual.org/docs/user-defined-language-system/ https://ivan-radic.github.io/udl-documentation/numbers/ 
 

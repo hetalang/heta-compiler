@@ -90,18 +90,42 @@ Container.prototype.setScenario = function(q = {}, isCore = false){
   return scenarioInstance;
 };
 
+Container.prototype.insert = function(q = {}, isCore = false) {
+  let ind = getIndexFromQ(q);
+  let space = q.space || 'nameless';
+
+  let namespace = this.namespaceStorage.get(space);
+  if (namespace === undefined) {
+    this.logger.error(
+      `"${ind}" create namespace "${space}" before use.`,
+      {type: 'QError', space: space}
+    );
+    return;
+  }
+
+  let isExist = namespace.has(q.id);
+  if (isExist) {
+    let old = namespace.get(q.id);
+    this.logger.warn(
+      `"${ind}" Component "${old.id} @${old.className}" is substituted by "${q.id} @${q.class}", use #forceInsert to avoid this warning.`,
+      {space: space}
+    );
+  }
+  return this.forceInsert(q, isCore);
+}
+
 /**
  * Creates one of inheritors of `Component` and put it in a namespace.
  * The inheritor depends on `q.class` property.
  * For example `{id: 'k1', class: 'Const', namespace: 'one'}` creates the object of `Const` type
  * and puts it into namespace `one`.
  * 
- * @param {object} q The `#insert` statement in JS object format.
+ * @param {object} q The `#forceInsert` statement in JS object format.
  * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
  * 
  * @returns {Component} The created object.
  */
-Container.prototype.insert = function(q = {}, isCore = false){
+Container.prototype.forceInsert = function(q = {}, isCore = false){
   let ind = getIndexFromQ(q);
 
   let space = q.space || 'nameless';
