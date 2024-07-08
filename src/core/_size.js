@@ -30,7 +30,7 @@ class _Size extends Component {
             let msg = this.index + ': '+ e.message;
             logger && logger.error(msg, {type: 'ValidationError', space: this.space});
           }
-        } else if (q.unit === null) {
+        } else if (q.units === null) {
           delete this.unitsParsed;
         } else {
           this.unitsParsed = Unit.fromQ(q.units);

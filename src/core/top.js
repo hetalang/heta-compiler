@@ -41,7 +41,7 @@ class Top { // or const Top = class {...}
   new Top({id: 'ttt1'});
   */
   constructor(q = {}, isCore = false){
-    let logger = this._container.logger;
+    let logger = this._container?.logger;
     let valid = Top.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -72,7 +72,7 @@ class Top { // or const Top = class {...}
       let msg = `${q.id} Some of properties do not satisfy requirements for class "${this.name}"\n`
         + this.validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');
-      logger.error(msg, {type: 'ValidationError', space: q.space});
+      logger?.error(msg, {type: 'ValidationError', space: q.space});
     }
     
     return valid;

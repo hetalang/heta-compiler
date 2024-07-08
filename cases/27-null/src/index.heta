@@ -14,6 +14,7 @@ p1 {title: null};
 p1 .= null;
 //p1 := null;
 p1 [xxx]= null;
+p1 {units: null};
 
 // exports
 #export { format: JSON, filepath: output };

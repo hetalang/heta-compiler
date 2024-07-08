@@ -71,16 +71,16 @@ class UnitDef extends Top {
     //this.unitsParsed = new Unit(); // XXX: I am not sure maybe this was important
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._container?.logger;
     let valid = UnitDef.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
     // units or terms are required but not both
     if (q.units && q.terms) {
-      logger.error(`UnitDef "${q.id}" must include "units" or "terms" property but not both`, {type: 'ValidationError'});
+      logger?.error(`UnitDef "${q.id}" must include "units" or "terms" property but not both`, {type: 'ValidationError'});
       this.errored = true;
     } else if (!q.units && !q.terms) {
-      logger.error(`UnitDef "${q.id}" must include "units" or "terms" property`, {type: 'ValidationError'});
+      logger?.error(`UnitDef "${q.id}" must include "units" or "terms" property`, {type: 'ValidationError'});
       this.errored = true;
     }
 

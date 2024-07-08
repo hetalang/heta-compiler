@@ -36,12 +36,13 @@
 
 ## features
 
+- support `null` for properties: highlight, heta standard
 - AnyUnit for zero numbers
 - atStart to exports: Matlab, DBSolve
 - write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
   wait until Node.js 22 will be released
-- support `null` for properties: highlight, heta standard
+- use `Component` as a subclass of `Top`
 
 ## ideas
 

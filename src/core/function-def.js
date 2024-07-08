@@ -44,7 +44,7 @@ class FunctionDef extends Top {
     super(q, isCore);
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._container?.logger;
     let valid = FunctionDef.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 

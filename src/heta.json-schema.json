@@ -101,7 +101,12 @@
         ]},
         "aux": {"oneOf": [
           { "type": "null" },
-          { "type": "object" }
+          {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [ { "type": "string" }, { "type": "number" }, {"type": "array"}, { "type": "object" }, { "type": "boolean"} ]
+            }
+          }
         ]}
       }
     },
