@@ -36,8 +36,7 @@
 
 ## features
 
-- support `null` for properties: highlight, heta standard
-- AnyUnit for zero numbers
+- support `null` for properties: highlight
 - atStart to exports: Matlab, DBSolve
 - write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
@@ -47,6 +46,7 @@
 ## ideas
 
 - support SBML's delay
+- AnyUnit for zero numbers
 - updating properties with `one::s1.assignments.start_ 5.5;`
 - check and warning if core component was replaced
 - remove unnecessary rules in export

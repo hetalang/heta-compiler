@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.8.5
+
+- fix bug with class names for easy renaming of class by webpack
+- support `#forceInsert` action
+- support `null` as values of Component properties
+
 ## 0.8.4
 
 - support `defineFunction` in all exports
