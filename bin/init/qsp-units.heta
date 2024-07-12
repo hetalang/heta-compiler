@@ -136,7 +136,7 @@ um #defineUnit {
     units: [ { kind: metre, multiplier: 1e-6 } ]
 };
 mm #defineUnit {
-    units: [ { kind: metre, multiplier: 1e-13 } ]
+    units: [ { kind: metre, multiplier: 1e-3 } ]
 };
 cm #defineUnit {
     units: [ { kind: metre, multiplier: 1e-2 } ]
