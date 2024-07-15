@@ -17,7 +17,7 @@
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
   {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
-  , 'Notes', '{{ record.notesHTML }}', 'Tag', '');
+  , 'Notes', '{{ record.notesHTML | replace("'", "''")}}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfSpecies = population.selectByClassName('Species') -%}
@@ -28,7 +28,7 @@
   {%- if record.assignments.start_.num!==undefined %}, 'InitialAmount', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'InitialAmountUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'BoundaryCondition', {{ record.boundary===true or record.isRule===true -}}
-  , 'Notes', '{{ record.notesHTML }}', 'Tag', '');
+  , 'Notes', '{{ record.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfParameters = population.selectByClassName('Record') -%}
@@ -41,20 +41,20 @@
   {{- model_id }}, '{{record.id}}', 'ConstantValue', false
   {%- if record.assignments.start_.num!==undefined %}, 'Value', {{record.assignments.start_.num}}{% endif -%}
   {%- if record.units!==undefined -%}, 'ValueUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
-  , 'Notes', '{{ record.notesHTML }}', 'Tag', '');
+  , 'Notes', '{{ record.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 {%- for con in listOfConstants %}
 {{ storage_id }}.parameter.{{con.id}} = addparameter(
   {{- model_id }}, '{{con.id}}', 'ConstantValue', true
   {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
   {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(legalUnits, true) }}'{% endif -%}
-  , 'Notes', '{{ con.notesHTML }}', 'Tag', '');
+  , 'Notes', '{{ con.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 {%- for ts in listOfTimeScales %}
 {{ storage_id }}.parameter.{{ts.id}} = addparameter(
   {{- model_id }}, '{{ts.id}}', 'ConstantValue', false
   {%- if ts.units!==undefined -%}, 'ValueUnits', '{{ ts.unitsRebased(legalUnits, true) }}'{% endif -%}
-  , 'Notes', '{{ ts.notesHTML }}', 'Tag', '');
+  , 'Notes', '{{ ts.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfReactions = population.selectByClassName('Reaction') -%}
@@ -63,7 +63,7 @@
 {{ storage_id }}.reaction.{{record.id}} = addreaction(
   {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.reversible!==false}}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
-  , 'Notes', '{{ record.notesHTML }}', 'Tag', '');
+  , 'Notes', '{{ record.notesHTML | replace("'", "''") }}', 'Tag', '');
   {%- set fullActors = record.actors.concat(record.modifiers) -%}
   {% set reactants = fullActors|getReactants %}
   {%- if reactants|length > 0 %}
@@ -124,7 +124,7 @@ addrule(
 ', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfDEvents = population.selectByClassName("DSwitcher") %}
@@ -133,7 +133,7 @@ addrule(
 {{ storage_id }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 
 {% set listOfCEvents = population.selectByClassName("CSwitcher") %}
@@ -142,7 +142,7 @@ addrule(
 {{ storage_id }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() + '>=0' if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML }}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML | replace("'", "''") }}', 'Tag', '');
 {%- endfor %}
 
 % Update simulation config

@@ -140,8 +140,10 @@ class Component {
     if (this.notes === undefined) {
       return undefined;
     }
-    let renderedOutput = md.render(this.notes);
-    return renderedOutput.trim();
+    let renderedOutput = md.render(this.notes)
+      .replace(/\n+\r*/g, ' ')
+      .trim();
+    return renderedOutput;
   }
   static isValid(q, logger){
     let ind = q.space ? `${q.space}::${q.id}` : q.id;
