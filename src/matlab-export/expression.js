@@ -36,6 +36,9 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
     if (node.type==='FunctionNode' && node.fn.name==='log2') {
       return `(log(${node.args[0].toString(options)})/log(2))`;
     }
+    if (node.type==='FunctionNode' && node.fn.name==='ln') {
+      return `log(${node.args[0].toString(options)})`;
+    }
     if (node.type==='SymbolNode' && node.name === 't') {
       return 'time';
     }

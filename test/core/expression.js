@@ -162,4 +162,8 @@ describe('Expession exports', () => {
     let expr = Expression.fromString('exp(-kel*t)');
     expect(expr.toMatlabString()).to.be.equal('exp(-kel * time)');
   });
+  it('toMatlabString() for "ln(x)"', () => {
+    let expr = Expression.fromString('ln(x)');
+    expect(expr.toMatlabString()).to.be.equal('log(x)');
+  });
 });
