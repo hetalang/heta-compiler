@@ -26,7 +26,7 @@
 [ ] ODEs in markdown/latex/ascii
 [ ] rxode (R)
 [ ] dat (DBSolve)
-[ ] ModelingToolkit (Julia)
+[x] ModelingToolkit (Julia)
 [ ] PGF and TikZ
 [x] Summary
 [ ] Berkley Madonna
@@ -36,7 +36,6 @@
 
 ## features
 
-- support `null` for properties: highlight
 - atStart to exports: Matlab, DBSolve
 - write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
