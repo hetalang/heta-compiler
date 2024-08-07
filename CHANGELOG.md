@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.8.6
+
+- fix bug in qsp-units.heta: wrong `#defineUnits` for `mm`
+- fix strings for Simbio export
+- replace `ln` to `log` for Matlab/Simbio
+
 ## 0.8.5
 
 - fix bug with class names for easy renaming of class by webpack
