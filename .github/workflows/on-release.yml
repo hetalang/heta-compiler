@@ -18,8 +18,10 @@ jobs:
             npm run pkg
             cd ./dist
             cp -f heta-compiler-linux heta-compiler
+            chmod 775 heta-compiler
             tar -czvf ./heta-compiler-linux.tar.gz ./heta-compiler
             cp -f heta-compiler-macos heta-compiler
+            chmod 775 heta-compiler
             tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
             cp -f heta-compiler-win.exe heta-compiler.exe
             tar -czvf ./heta-compiler-windows.tar.gz ./heta-compiler.exe
