@@ -14,7 +14,16 @@ jobs:
             node-version: 20.x
         - run: npm ci
         - name: Build standalone apps
-          run: npm run pkg
+          run: |
+            npm run pkg
+            cd ./dist
+            cp -f heta-compiler-linux heta-compiler
+            tar -czvf ./heta-compiler-linux.tar.gz ./heta-compiler
+            cp -f heta-compiler-macos heta-compiler
+            tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
+            cp -f heta-compiler-win.exe heta-compiler.exe
+            tar -czvf ./heta-compiler-windows.tar.gz ./heta-compiler.exe
+            cd ..
 
         - name: Get package version
           id: package_version
@@ -81,4 +90,34 @@ jobs:
             upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-macos
             asset_name: heta-compiler-macos-x64
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Windows
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-windows.tar.gz
+            asset_name: heta-compiler-windows.tar.gz
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Linux
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-linux.tar.gz
+            asset_name: heta-compiler-linux.tar.gz
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Macos
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-macos.tar.gz
+            asset_name: heta-compiler-macos.tar.gz
             asset_content_type: application/octet-stream
