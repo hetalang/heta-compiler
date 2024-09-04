@@ -76,7 +76,7 @@ jobs:
           run: |
             npx pkg . -t win --compress GZip
             cd ./dist
-            cp -f heta-compiler-win.exe heta-compiler.exe
+            cp -Force heta-compiler-win.exe heta-compiler.exe
             tar -czvf ./heta-compiler-windows.tar.gz ./heta-compiler.exe
             cd ..
 
