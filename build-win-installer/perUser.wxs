@@ -107,7 +107,7 @@ perUser: does not require elevated privileges to install. Sets the package's Ins
                 <File
                     Id="HetaCompilerExe"
                     Name= "heta.exe"
-                    Source="dist/heta-compiler-win.exe"
+                    Source="dist/heta-compiler-win-x64.exe"
                     Checksum="yes"
                     />
                 <Environment
@@ -156,7 +156,7 @@ perUser: does not require elevated privileges to install. Sets the package's Ins
                 <File
                     Id="HetaCompilerExeAll"
                     Name= "heta.exe"
-                    Source="dist/heta-compiler-win.exe"
+                    Source="dist/heta-compiler-win-x64.exe"
                     Checksum="yes"
                     />
                 <Environment
