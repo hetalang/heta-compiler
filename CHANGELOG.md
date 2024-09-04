@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.8.7
+
+- check and warn context without Switchers
+- build win and linux,macos distributives separately
+
 ## 0.8.6
 
 - fix bug in qsp-units.heta: wrong `#defineUnits` for `mm`
