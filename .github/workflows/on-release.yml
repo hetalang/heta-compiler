@@ -6,6 +6,65 @@ on:
 
 jobs:
     upload-release-asset:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 20.x
+        - run: npm ci
+        - name: Build standalone apps
+          run: |
+            npx pkg . -t linux,macos --compress GZip
+            cd ./dist
+            cp -f heta-compiler-linux heta-compiler
+            chmod 775 heta-compiler
+            tar -czvf ./heta-compiler-linux.tar.gz ./heta-compiler
+            cp -f heta-compiler-macos heta-compiler
+            chmod 775 heta-compiler
+            tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
+            cd ..
+
+        - name: Upload Release Asset Linux
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-linux
+            asset_name: heta-compiler-linux-x64
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release Asset Macos
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-macos
+            asset_name: heta-compiler-macos-x64
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Linux
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-linux.tar.gz
+            asset_name: heta-compiler-linux.tar.gz
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Macos
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-macos.tar.gz
+            asset_name: heta-compiler-macos.tar.gz
+            asset_content_type: application/octet-stream
+    upload-windows-release-asset:
         runs-on: windows-latest
         steps:
         - uses: actions/checkout@v4
@@ -15,14 +74,8 @@ jobs:
         - run: npm ci
         - name: Build standalone apps
           run: |
-            npm run pkg
+            npx pkg . -t win --compress GZip
             cd ./dist
-            cp -f heta-compiler-linux heta-compiler
-            chmod 775 heta-compiler
-            tar -czvf ./heta-compiler-linux.tar.gz ./heta-compiler
-            cp -f heta-compiler-macos heta-compiler
-            chmod 775 heta-compiler
-            tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
             cp -f heta-compiler-win.exe heta-compiler.exe
             tar -czvf ./heta-compiler-windows.tar.gz ./heta-compiler.exe
             cd ..
@@ -54,7 +107,7 @@ jobs:
             & ${env:WIX}bin\candle.exe -o dist/ build-win-installer/perUser.wxs
             & ${env:WIX}bin\light.exe -o dist/heta-compiler-win-x64-installer.msi dist/perUser.wixobj -ext WixUIExtension
 
-        - name: Upload Release Asset Win
+        - name: Upload Release Asset Win MSI
           uses: actions/upload-release-asset@v1
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,7 +117,7 @@ jobs:
             asset_name: heta-compiler-${{ steps.package_version.outputs.VERSION }}-win-x64-installer.msi
             asset_content_type: application/octet-stream
   
-        - name: Upload Release Asset Win
+        - name: Upload Release Asset Win EXE
           uses: actions/upload-release-asset@v1
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -72,26 +125,6 @@ jobs:
             upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-win.exe
             asset_name: heta-compiler-win-x64.exe
-            asset_content_type: application/octet-stream
-
-        - name: Upload Release Asset Linux
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-linux
-            asset_name: heta-compiler-linux-x64
-            asset_content_type: application/octet-stream
-
-        - name: Upload Release Asset Macos
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-macos
-            asset_name: heta-compiler-macos-x64
             asset_content_type: application/octet-stream
 
         - name: Upload Release TAR.GZ Windows
@@ -102,24 +135,4 @@ jobs:
             upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-windows.tar.gz
             asset_name: heta-compiler-windows.tar.gz
-            asset_content_type: application/octet-stream
-
-        - name: Upload Release TAR.GZ Linux
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-linux.tar.gz
-            asset_name: heta-compiler-linux.tar.gz
-            asset_content_type: application/octet-stream
-
-        - name: Upload Release TAR.GZ Macos
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-macos.tar.gz
-            asset_name: heta-compiler-macos.tar.gz
             asset_content_type: application/octet-stream
