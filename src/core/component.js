@@ -283,8 +283,8 @@ class Component {
     }
   }
   /*
-  array of direct references inside component (non-unique)
-  ? used inside irt-nav
+  array of direct references inside component to another _Size
+  it is used inside irt-nav
   */
   references(){
     return uniqBy(this._references());

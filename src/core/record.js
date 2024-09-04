@@ -102,6 +102,17 @@ class Record extends _Size {
       let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`
       logger.error(msg, {type: 'BindingError', space: this.space});
     }
+
+    // check additional context key and corresponding _Switcher
+    Object.keys(this.assignments).forEach((key) => {
+      if (key !== 'start_' && key !== 'ode_') {
+        let switcher = namespace.get(key);
+        if (!switcher) {
+          let msg = `"${this.index} @${this.className}" has reference to Switcher "${key}" but corresponding switcher is not found.`;
+          logger.warn(msg, {space: this.space});
+        }
+      }
+    });
     
     // check math expression refs
     for (const key in this.assignments) {

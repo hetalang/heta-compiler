@@ -1,0 +1,37 @@
+/*
+  template file for creating platform
+*/
+
+p1 @Record .= 1;
+p2 @Record := k1*x1;
+
+x1 @Record .= 0;
+pr1 @Process {actors: x1 =} := k1 * x1;
+
+k1 @Const = 0.1;
+
+sw1 @TimeSwitcher {
+  start: 5,
+  stop: 1000,
+  period: 10,
+};
+
+sw2 @CSwitcher {
+  trigger: x1 - 10
+};
+
+x1 [sw1]= 10;
+x1 [sw2]= 20;
+x1 [sw3]= 30;
+
+// exports
+#export { format: JSON, filepath: output };
+//#export { format: YAML };
+//#export { format: XLSX, omitRows: 3, splitByClass: true };
+//#export { format: SBML, version: L2V4 };
+//#export { format: SLV, eventsOff: false };
+//#export { format: DBSolve };
+//#export { format: Simbio };
+//#export { format: Mrgsolve };
+//#export { format: Matlab };
+//#export { format: Julia };
