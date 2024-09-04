@@ -76,7 +76,7 @@ jobs:
           run: |
             npx pkg . -t win --compress GZip
             cd ./dist
-            cp -Force heta-compiler-win.exe heta-compiler.exe
+            cp -Force heta-compiler.exe heta-compiler-win-x64.exe
             tar -czvf ./heta-compiler-windows.tar.gz ./heta-compiler.exe
             cd ..
 
@@ -93,7 +93,7 @@ jobs:
           id: new_guid
           run: | # deprecated
             $guid = [guid]::NewGuid().ToString().ToUpper()
-            echo "::set-output name=NewGUID::$guid"
+            echo "NewGUID=$guid" >> $GITHUB_OUTPUT
         - name: Update .wxs file with new Product Id
           run: |
             echo "GUID: ${{ steps.new_guid.outputs.NewGUID }}"
@@ -116,23 +116,12 @@ jobs:
             asset_path: dist/heta-compiler-win-x64-installer.msi
             asset_name: heta-compiler-${{ steps.package_version.outputs.VERSION }}-win-x64-installer.msi
             asset_content_type: application/octet-stream
-  
-        - name: Upload Release Asset Win EXE
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-win.exe
-            asset_name: heta-compiler-win-x64.exe
-            asset_content_type: application/octet-stream
 
         - name: Upload Release TAR.GZ Windows
-          uses: actions/upload-release-asset@v1
+          uses: softprops/action-gh-release@v2
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-windows.tar.gz
-            asset_name: heta-compiler-windows.tar.gz
-            asset_content_type: application/octet-stream
+            files: |
+              dist/heta-compiler-windows.tar.gz
+              dist/heta-compiler-win-x64.exe
