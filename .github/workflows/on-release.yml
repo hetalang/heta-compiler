@@ -93,7 +93,7 @@ jobs:
           id: new_guid
           run: | # deprecated
             $guid = [guid]::NewGuid().ToString().ToUpper()
-            echo "NewGUID=$guid" >> $GITHUB_OUTPUT
+            echo "::set-output name=NewGUID::$guid"
         - name: Update .wxs file with new Product Id
           run: |
             echo "GUID: ${{ steps.new_guid.outputs.NewGUID }}"
