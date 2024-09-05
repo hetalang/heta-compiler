@@ -53,7 +53,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SBML}, check and compare.', () => {
-    let sbml_export = b.container.exportArray
+    let sbml_export = b.exportArray
       .find(x => x.filepath === 'mm_sbml_l2v4');
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
@@ -61,7 +61,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SBML}, check and compare.', () => {
-    let sbml_export = b.container.exportArray
+    let sbml_export = b.exportArray
       .find(x => x.filepath === 'mm_sbml_l3v1');
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
@@ -69,7 +69,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: JSON}, check and compare.', () => {
-    let json_export = b.container.exportArray
+    let json_export = b.exportArray
       .find(x => x.filepath === 'full_json');
     let code = json_export.makeText(true)[0].content;
     let obj = JSON.parse(code);
@@ -78,7 +78,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: YAML}, check and compare.', () => {
-    let yaml_export = b.container.exportArray.find(x => x.filepath === 'full_yaml');
+    let yaml_export = b.exportArray.find(x => x.filepath === 'full_yaml');
     let code = yaml_export.makeText(true)[0].content;
     let obj = load(code);
     expect(obj).to.be.deep.equal(yaml_correct);
@@ -86,7 +86,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SLV}, check and compare.', () => {
-    let slv_export = b.container.exportArray.find(x => x.filepath === 'mm_slv');
+    let slv_export = b.exportArray.find(x => x.filepath === 'mm_slv');
     let code = slv_export.makeText(true)[0].content;
     let obj = slvParse.parse(code);
     expect(obj).to.be.deep.equal(slv_correct);
@@ -94,7 +94,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: XLSX}, check and compare.', () => {
-    let xlsx_export = b.container.exportArray.find(x => x.filepath === 'table');
+    let xlsx_export = b.exportArray.find(x => x.filepath === 'table');
     let code = xlsx_export.makeSheet(true); // check only sheet #0
 
     // check number of sheets
@@ -118,7 +118,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Mrgsolve}, check and compare.', () => {
-    let mm_mrg = b.container.exportArray.find(x => x.filepath === 'mm_mrg');
+    let mm_mrg = b.exportArray.find(x => x.filepath === 'mm_mrg');
     let code = mm_mrg.makeText(true);
     // compare model.cpp text content
     expect(code[0].pathSuffix).to.be.equal('/mm.cpp');
@@ -127,7 +127,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Julia}, check and compare.', () => {
-    let mm_mrg = b.container.exportArray.find(x => x.filepath === 'mm_julia');
+    let mm_mrg = b.exportArray.find(x => x.filepath === 'mm_julia');
     let code = mm_mrg.makeText(true);
     // compare model.js text content
     expect(code[0].pathSuffix).to.be.equal('/model.jl');

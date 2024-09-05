@@ -5,7 +5,7 @@ const { Container } = require('../../src');
 
 describe('Testing anonymous space.', () => {
   it('Create element in global.', () => {
-    let c = new Container;
+    let c = new Container();
     let counter = c.length;
 
     c.loadMany([
@@ -31,12 +31,6 @@ describe('Testing anonymous space.', () => {
         space: 'one'
       },
       {
-        action: 'export', // 5
-        space: 'one',
-        format: 'JSON',
-        filepath: '1.json'
-      },
-      {
         id: 'p1', // 5
         space: 'one',
         class: 'Record',
@@ -54,6 +48,6 @@ describe('Testing anonymous space.', () => {
       }
     ]);
     
-    expect(c.length - counter).to.be.eq(6 + 1); // + t @TimeScale
+    expect(c.length - counter).to.be.eq(5 + 1); // + t @TimeScale
   });
 });

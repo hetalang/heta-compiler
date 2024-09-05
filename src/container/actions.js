@@ -20,26 +20,29 @@ const reservedWords = [
  * 
  * @returns {AbstractExport} The created object.
  */
-Container.prototype.export = function(q = {}, isCore = false){
+// TODO: this is part which will be removed later
+// invisible => deprecated => removed
+Container.prototype.export = function(q = {}, isCore = false) {
+  let { exportClasses, exportArray } = this._builder;
   if (q.format === undefined) {
     this.logger.error(
       'Empty "format" option in #export',
       {type: 'QError'}
     );
-    return;
+    return; // BRAKE
   }
-  if (typeof this.classes[q.format] !== 'function') {
-    this.logger.error(
-      `Unknown format "${q.format}" in #export action.`,
-      {type: 'QError'}
-    );
-    return;
+  if (typeof exportClasses[q.format] !== 'function') {
+    this.logger.error(`Unknown format "${q.format}" in #export action.`, {type: 'QError'});
+
+    return; // BRAKE
   }
 
   // create and push to storage
-  let exportInstance = new this.classes[q.format](q, isCore);
-  if (!exportInstance.errored) this.exportArray.push(exportInstance);
-  
+  let exportInstance = new exportClasses[q.format](q, isCore);
+  if (!exportInstance.errored) {
+    exportArray.push(exportInstance);
+  }
+
   return exportInstance;
 };
 

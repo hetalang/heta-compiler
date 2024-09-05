@@ -3,7 +3,8 @@ const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
-const { Container, HetaLevelError } = require('../index');
+const Container = require('../container');
+const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
 const { StdoutTransport } = require('../logger');
 
@@ -32,16 +33,20 @@ const { StdoutTransport } = require('../logger');
  *    Calculated from `declaration.options.logPath`.
  * @property ... Other properties inherit from `declaration` object, see 
  *   [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references?id=declaration-file-format}
+ * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
+ * @property {object[]} export Storage for `_Export` instances.
  */
 class Builder {
   constructor(declaration, coreDirname = '.'){
     // create container
     this.container = new Container();
+    this.container._builder = this; // back reference to parent builder
     this.export = []; // storing Export objects
+    this.exportClasses = {}; // storing Export classes bound to builder (XXX: maybe it must be static)
 
     // set transport and logger
     this.logger = this.container.logger;
-    let minLogLevel = declaration.options?.logLevel || 'info';
+    let minLogLevel = declaration?.options?.logLevel || 'info';
     this.logger.addTransport(new StdoutTransport(minLogLevel));
 
     // check based on schema 
@@ -66,12 +71,27 @@ class Builder {
     this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
     if (this.id) this.logger.info(`Platform id: "${this.id}"`);
     
-    // index file not found
-    //let indexFilepath = path.resolve(coreDirname, declaration.importModule.source);
-    //if (!fs.existsSync(indexFilepath)) {
-    //  this.logger.error(`Index file "${indexFilepath}" does not exist.`, {type: 'BuilderError'});
-    //}
+    // create "export" classes bound to this container
+    Builder._exportClasses && Object.entries(Builder._exportClasses).forEach(([key, _Class]) => {
+      this.exportClasses[key] = class extends _Class {};
+      this.exportClasses[key].prototype._builder = this; // XXX: not sure it required
+      this.exportClasses[key].prototype._container = this.container; // XXX: not sure it required
+    });
+    
+    this.exportArray = [];
+    // create "export" instances
+    declaration.export && declaration.export.forEach((exportItem) => {
+      let ExportClass = this.exportClasses.hasOwnProperty(exportItem.format) 
+        && this.exportClasses[exportItem.format];
+      if (ExportClass) {
+        this.exportArray.push(new ExportClass(exportItem));
+      } else {
+        this.logger.error(`Export format "${exportItem.format}" is not supported.`, {type: 'BuilderError'});
+      }
+    });
   }
+
+  static _exportClasses = {}; // storing abstract Export classes
 
   /**
    * The method runs building of a platform declared with `Builder` object.
@@ -184,11 +204,10 @@ class Builder {
    * 
    * @method Builder#exportMany
    */
-  exportMany(){
-    let exportElements = this.container.exportArray;
-    this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
+  exportMany() {
+    this.logger.info(`Start exporting to files, total: ${this.exportArray.length}.`);
 
-    exportElements.forEach((exportItem) => _makeAndSave(exportItem, this._distDirname));
+    this.exportArray.forEach((exportItem) => _makeAndSave(exportItem, this._distDirname));
   }
 
   /**
@@ -199,7 +218,7 @@ class Builder {
    */
   exportJuliaOnly(){
     // create export without putting it to exportArray
-    let Julia = this.container.classes['Julia'];
+    let Julia = this.exportClasses['Julia'];
     let exportItem = new Julia({
       format: 'Julia',
       filepath: '_julia'
@@ -209,7 +228,7 @@ class Builder {
   }
 }
 
-function _makeAndSave(exportItem, pathPrefix){
+function _makeAndSave(exportItem, pathPrefix) {
   let logger = exportItem._container.logger;
   let absPath = path.resolve(pathPrefix, exportItem.filepath);
   let msg = `Exporting to "${absPath}" of format "${exportItem.format}"...`;

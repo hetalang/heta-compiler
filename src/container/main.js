@@ -3,7 +3,6 @@ const { Top } = require('../core/top');
 const { UnitDef } = require('../core/unit-def');
 const { FunctionDef } = require('../core/function-def');
 const { Scenario } = require('../core/scenario');
-// const { AbstractExport } = require('../abstract-export');
 // Component classes
 const { Component } = require('../core/component');
 const { Record } = require('../core/record');
@@ -38,7 +37,6 @@ const TopoSort = require('@insysbio/topo-sort');
  * @property {Logger} logger object providing transport of errors, warnings and info messages on Heta platform level.
  * @property {object[]} defaultLogs Default storage of errors which will be used for diagnostics.
  *    The {@link JSONTransport} is used here.
- * @property {object[]} exportArray Storage for `_Export` instances.
  * @property {Map<string,UnitDef>} unitDefStorage Storage for `UnitDef` instances. Key is a string identifier.
  * @property {Map<string,FunctionDef>} functionDefStorage Storage for `FunctionDef` instances. Key is a string identifier.
  * @property {Map<string,Scenario>} scenarioStorage Storage for `Scenario` instances. Key is a string identifier.
@@ -46,7 +44,7 @@ const TopoSort = require('@insysbio/topo-sort');
  *    There is a default namespace with identifier `nameless` which will be used as a default namespace 
  *    for all components where namespace name is not set.
  * @property {object} _componentClasses map-like structure for storing all available constructors for `Component`s.
- * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
+ * @property {object} _builder reference to the parent builder object (if exists).
  */
 class Container {
   /* constructor can be run many times */
@@ -62,12 +60,6 @@ class Container {
     this.classes.FunctionDef.prototype._container = this;
     this.classes.Scenario = class extends Scenario {};
     this.classes.Scenario.prototype._container = this;
-    // create "export" classes bound to this container
-    Container._exportClasses && Object.entries(Container._exportClasses)
-      .forEach(([key, _Class]) => {
-        this.classes[key] = class extends _Class {};
-        this.classes[key].prototype._container = this;
-      });
 
     // logger
     this.logger = new Logger();

@@ -35,7 +35,7 @@ describe('Testing "cases/12-to-sbml"', () => {
   });
 
   it('Run @SBMLExport, check and compare.', () => {
-    const SBMLExport = b.container.classes.SBML;
+    const SBMLExport = b.exportClasses.SBML;
     let sbml_export = new SBMLExport({spaceFilter: 'first', filepath: 'yyy'});
     expect(sbml_export).not.to.has.property('errored', true);
 
@@ -46,7 +46,7 @@ describe('Testing "cases/12-to-sbml"', () => {
   });
 
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.container.classes.JSON;
+    const JSONExport = b.exportClasses.JSON;
     let json_export = new JSONExport({spaceFilter: 'first', filepath: 'xxx'});
     expect(json_export).not.to.has.property('errored', true);
 

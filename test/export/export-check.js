@@ -1,12 +1,13 @@
 /* global describe, it */
-const { Container } = require('../../src');
+const { Builder } = require('../../src');
 const { expect } = require('chai');
 
 describe('General argument checking', () => {
-  const p = new Container();
+  const b = new Builder({importModule: {}});
+  const p = b.container;
 
   it('Create JSON Export directly', () => {
-    let json_export = new p.classes.JSON({
+    let json_export = new b.exportClasses.JSON({
       id: 'json_export',
       filepath: './1.json',
       omit: ['num'],
@@ -32,7 +33,7 @@ describe('General argument checking', () => {
     expect(p.logger).to.have.property('hasErrors').false;
     expect(json_export).to.have.property('filepath', './_1.json');
     expect(json_export).to.have.property('format', 'JSON');
-    expect(json_export).to.be.instanceOf(p.classes.JSON);
+    expect(json_export).to.be.instanceOf(b.exportClasses.JSON);
     p.logger.resetErrors();
   });
   
@@ -61,7 +62,7 @@ describe('General argument checking', () => {
     });
     expect(p.logger).to.have.property('hasErrors').false;
     expect(json_export).to.have.property('filepath', 'json');
-    expect(json_export).to.be.instanceOf(p.classes.JSON);
+    expect(json_export).to.be.instanceOf(b.exportClasses.JSON);
     p.logger.resetErrors();
   });
 
@@ -71,7 +72,7 @@ describe('General argument checking', () => {
       filepath: './@1.xxx'
     });
     expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.instanceOf(p.classes.JSON);
+    expect(json_export).to.be.instanceOf(b.exportClasses.JSON);
     p.logger.resetErrors();
   });
   
@@ -83,7 +84,7 @@ describe('General argument checking', () => {
     });
     expect(p.logger).to.have.property('hasErrors').true;
     expect(json_export).to.not.have.property('omit');
-    expect(json_export).to.be.instanceOf(p.classes.JSON);
+    expect(json_export).to.be.instanceOf(b.exportClasses.JSON);
     p.logger.resetErrors();
   });
 
@@ -94,7 +95,7 @@ describe('General argument checking', () => {
       noUnitsExpr: 12
     });
     expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.instanceOf(p.classes.JSON);
+    expect(json_export).to.be.instanceOf(b.exportClasses.JSON);
     p.logger.resetErrors();
   });
   
@@ -105,7 +106,7 @@ describe('General argument checking', () => {
       spaceFilter: 12
     });
     expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.instanceOf(p.classes.JSON);
+    expect(json_export).to.be.instanceOf(b.exportClasses.JSON);
     p.logger.resetErrors();
   });
 });

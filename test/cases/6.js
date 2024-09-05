@@ -32,7 +32,7 @@ describe('Testing "cases/6-import"', () => {
 
   it('Run include', () => {
     b.run();
-    exportArray = b.container.exportArray;
+    exportArray = b.exportArray;
   });
 
   it('Run @SBMLExport, check and compare.', () => {
@@ -44,7 +44,7 @@ describe('Testing "cases/6-import"', () => {
   });
 
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.container.classes.JSON;
+    const JSONExport = b.exportClasses.JSON;
     let json_export = new JSONExport({spaceFilter: 'model', filepath: 'xxx'});
     expect(json_export).not.to.have.property('errored', true);
 

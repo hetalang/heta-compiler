@@ -1,3 +1,4 @@
+const { Builder } = require('./builder');
 const Container = require('./container');
 const coreItems = require('./container/core-items');
 const ModuleSystem = require('./module-system');
@@ -33,7 +34,7 @@ global.compiledTemplates = {
   'slv-template.slv.njk': nunjucksEnv.getTemplate('slv-template.slv.njk'),
 };
 
-Container._exportClasses = {
+Builder._exportClasses = {
   DBSolve: require('./dbsolve-export'),
   YAML: require('./yaml-export'),
   JSON: require('./json-export'),
@@ -52,6 +53,7 @@ Container._exportClasses = {
 };
 
 module.exports = {
+  Builder,
   Container,
   coreItems,
   nunjucksEnv,

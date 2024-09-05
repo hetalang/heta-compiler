@@ -26,7 +26,7 @@ describe('Case #14: testing SBML module with units', () => {
   });
 
   it('compare JSON export', () => {
-    let json_export = b.container.exportArray[0];
+    let json_export = b.exportArray[0];
     let code = json_export.make(true)[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
