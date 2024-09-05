@@ -37,6 +37,7 @@ class Builder {
   constructor(declaration, coreDirname = '.'){
     // create container
     this.container = new Container();
+    this.export = []; // storing Export objects
 
     // set transport and logger
     this.logger = this.container.logger;

@@ -56,6 +56,20 @@
         "sheet": { "type": "integer" },
         "omitRows": { "type": "integer", "minimum": 0 }
       }
+    },
+    "export": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["format"],
+        "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string" },
+          "format": { "type": "string" },
+          "filepath": { "type": "string" },
+          "spaceFilter": { "type": "string" }
+        }
+      }      
     }
   }
 }

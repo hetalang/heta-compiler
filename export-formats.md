@@ -14,6 +14,7 @@ Following [Heta specifications](specifications/) exporting to different formats 
 - [Julia](#julia)
 - [Matlab](#matlab)
 - [DOT](#dot)
+- [Summary](#summary)
 
 See also [Features support table](#features-support)
 
@@ -384,6 +385,27 @@ Each namespace in separate file.
 #export {
     format: Dot,
     filepath: schemes, // save result in directory "dist/schemes"
+};
+```
+
+## Summary
+
+Summarize model content and present statistics of the model components. It also can be used to debug the model.
+
+### Properties
+
+-
+
+### Output files
+
+**[filepath]/summary.md** : File storing model summary.
+
+**Example:**
+
+```heta
+#export {
+    format: Summary,
+    filepath: summary, // save result in file "dist/summary.md"
 };
 ```
 

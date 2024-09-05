@@ -48,7 +48,6 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(b);
   });
 
-  var exportArray = [];
   it('Run include', () => {
     b.run();
   });
