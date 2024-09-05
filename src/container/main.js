@@ -66,8 +66,6 @@ class Container {
     this.defaultLogs = []; // storing logs in JSON-like format here
     this.logger.addTransport(new JSONTransport('info', this.defaultLogs));
 
-    // storage of AbstractExport Instances
-    this.exportArray = [];
     // storage for UnitDef
     this.unitDefStorage = new Map();
     // storage for FunctionDef
@@ -146,15 +144,14 @@ class Container {
   /**
    * Get number of total elements of a platform.
    * 
-   * @returns {number} Total number of components + `UnitDef` + `Functiondef` + `_Export` instances.
+   * @returns {number} Total number of components + `UnitDef` + `Functiondef` + `Scenario`.
    */
   get length(){
     return [...this.namespaceStorage]
       .reduce((acc, x) => acc + x[1].size, 0)
         + this.unitDefStorage.size // global elements
         + this.functionDefStorage.size
-        + this.scenarioStorage.size
-        + this.exportArray.length;
+        + this.scenarioStorage.size;
   }
 
   /**

@@ -14,7 +14,7 @@ class SimbioExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = SimbioExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -32,7 +32,7 @@ class SimbioExport extends AbstractExport {
   }
   // return text for all namespaces
   makeText() {
-    //let logger = this._container.logger;
+    //let { logger } = this._builder;
 
     let results = this.selectedNamespaces().map(([spaceName, ns]) => {
 

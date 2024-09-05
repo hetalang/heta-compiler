@@ -14,7 +14,7 @@ class SummaryExport extends AbstractExport {
     super(q, isCore);
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = SummaryExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -28,13 +28,14 @@ class SummaryExport extends AbstractExport {
     return 'summary';
   }
   makeText() {
-    let logger = this._container.logger;
+    let { logger } = this._builder;
     let selectedNamespaces = this.selectedNamespaces();
+    const { unitDefStorage, functionDefStorage, namespaceStorage } = this._builder.container;
 
     let image = {
-      unitDefStorage: this._container.unitDefStorage,
-      functionDefStorage: this._container.functionDefStorage,
-      namespaceStorage: this._container.namespaceStorage,
+      unitDefStorage,
+      functionDefStorage,
+      namespaceStorage,
       nsImages: selectedNamespaces.map((x) => x[1].getSummaryImage())
     };
     let content = this.getDotCode(image);

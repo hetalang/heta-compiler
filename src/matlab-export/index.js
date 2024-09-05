@@ -15,7 +15,7 @@ class MatlabExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let { logger } = this._builder;
     let valid = MatlabExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -38,7 +38,7 @@ class MatlabExport extends AbstractExport {
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   makeText(skipVersionCode = false){
-    let logger = this._container.logger;
+    let { logger } = this._builder.container;
 
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();

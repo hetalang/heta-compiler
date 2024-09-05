@@ -14,7 +14,7 @@ class MrgsolveExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = MrgsolveExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -34,7 +34,7 @@ class MrgsolveExport extends AbstractExport {
     return true;
   }
   makeText() {
-    //let logger = this._container.logger;
+    //let { logger } = this._builder;
 
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();

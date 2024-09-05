@@ -13,7 +13,7 @@ class HetaCodeExport extends AbstractExport{
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = HetaCodeExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -32,9 +32,9 @@ class HetaCodeExport extends AbstractExport{
    * @return {string} Text code of exported format.
    */
   makeText() {
-    // let { logger } = this._container;
+    // let { logger } = this._builder;
 
-    let image = this.getHetaCodeImage(this._container);
+    let image = this.getHetaCodeImage(this._builder.container);
     let content = this.getHetaCodeCode(image);
 
     return [{
@@ -50,7 +50,7 @@ class HetaCodeExport extends AbstractExport{
    * @return {undefined}
    */
   getHetaCodeImage() {
-    let { namespaceStorage, functionDefStorage, unitDefStorage, logger } = this._container;
+    let { namespaceStorage, functionDefStorage, unitDefStorage, logger } = this._builder.container;
 
     let filteredNamespaceStorage = [...namespaceStorage]
       .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));

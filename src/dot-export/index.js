@@ -14,7 +14,7 @@ class DotExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = DotExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -28,7 +28,7 @@ class DotExport extends AbstractExport {
     return 'dot';
   }
   makeText(){
-    let logger = this._container.logger;
+    let { logger } = this._builder;
 
     let selectedNamespaces = this.selectedNamespaces();
 

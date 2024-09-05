@@ -15,7 +15,7 @@ class SBMLExport extends AbstractExport {
     super(q, isCore);
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = SBMLExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -38,7 +38,7 @@ class SBMLExport extends AbstractExport {
     return ajv.compile(schema);
   }
   makeText(){
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
 
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();
@@ -75,7 +75,7 @@ class SBMLExport extends AbstractExport {
       return compiledTemplates['sbmlL3V2.xml.njk'].render(image);
       break;
     default:
-      this._container.logger.error(`SBML of version "${this.version}" is not supported.`);
+      this._builder.logger.error(`SBML of version "${this.version}" is not supported.`);
       return '';
     }
     

@@ -63,7 +63,7 @@ class TableExport extends AbstractExport {
     super(q, isCore);
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = TableExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -84,7 +84,7 @@ class TableExport extends AbstractExport {
   }
   makeSheet(){
     // filtered namespaces
-    let nsArrayFiltered = [...this._container.namespaceStorage]
+    let nsArrayFiltered = [...this._builder.container.namespaceStorage]
       .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName))
       .map(([spaceName, ns]) => ns);
     
@@ -94,13 +94,13 @@ class TableExport extends AbstractExport {
       let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
       return accumulator.concat(fArr_setns, fArr_components);
     }, []);
-    let fArr_unitDef = [...this._container.unitDefStorage]
+    let fArr_unitDef = [...this._builder.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
-    let fArr_functionDef = [...this._container.functionDefStorage]
+    let fArr_functionDef = [...this._builder.container.functionDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
-    let fArr_scenario = [...this._container.scenarioStorage]
+    let fArr_scenario = [...this._builder.container.scenarioStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());
     let fArr_full = [].concat(fArr_ns, fArr_unitDef, fArr_functionDef, fArr_scenario).map((x) => {

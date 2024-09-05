@@ -18,7 +18,7 @@ class DBSolveExport extends AbstractExport{
     super(q, isCore);
 
     // check arguments here
-    let { logger } = this._container;
+    let { logger } = this._builder;
     let valid = DBSolveExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -45,7 +45,7 @@ class DBSolveExport extends AbstractExport{
    * @return {string} Text code of exported format.
    */
   makeText() {
-    //let { logger } = this._container;
+    //let { logger } = this._builder;
 
     let selectedNamespaces = this.selectedNamespaces();
 

@@ -74,8 +74,7 @@ class Builder {
     // create "export" classes bound to this container
     Builder._exportClasses && Object.entries(Builder._exportClasses).forEach(([key, _Class]) => {
       this.exportClasses[key] = class extends _Class {};
-      this.exportClasses[key].prototype._builder = this; // XXX: not sure it required
-      this.exportClasses[key].prototype._container = this.container; // XXX: not sure it required
+      this.exportClasses[key].prototype._builder = this;
     });
     
     this.exportArray = [];
@@ -229,7 +228,7 @@ class Builder {
 }
 
 function _makeAndSave(exportItem, pathPrefix) {
-  let logger = exportItem._container.logger;
+  let { logger } = exportItem._builder;
   let absPath = path.resolve(pathPrefix, exportItem.filepath);
   let msg = `Exporting to "${absPath}" of format "${exportItem.format}"...`;
   logger.info(msg);

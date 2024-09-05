@@ -15,7 +15,7 @@ class JSONExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = JSONExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -44,13 +44,13 @@ class JSONExport extends AbstractExport {
       let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
       return accumulator.concat(qArr_setns, qArr_components);
     }, []);
-    let qArr_unitDef = [...this._container.unitDefStorage]
+    let qArr_unitDef = [...this._builder.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
-    let qArr_functionDef = [...this._container.functionDefStorage]
+    let qArr_functionDef = [...this._builder.container.functionDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
-    let qArr_scenario = [...this._container.scenarioStorage]
+    let qArr_scenario = [...this._builder.container.scenarioStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
     

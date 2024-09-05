@@ -15,7 +15,7 @@ class JuliaExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = JuliaExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
@@ -37,7 +37,7 @@ class JuliaExport extends AbstractExport {
   // skipVersionCode means that the version will not be printed in output
   // this is required for autotests
   makeText(skipVersionCode = false) {
-    //let logger = this._container.logger;
+    //let logger = this._builder.logger;
     // create image for multiple namespaces
     let nsImages = this.selectedNamespaces()
       .map(([spaceName, ns]) => ns.getJuliaImage());
@@ -47,7 +47,7 @@ class JuliaExport extends AbstractExport {
       builderVersion: skipVersionCode ? '*' : pkg.version,
       options: this,
       nsImages,
-      functionDefArray: [...this._container.functionDefStorage.values()].filter((fd) => !fd.isCore)
+      functionDefArray: [...this._builder.container.functionDefStorage.values()].filter((fd) => !fd.isCore)
     };
     let modelContent = this.getModelCode(image);
     let runContent = this.getRunCode(image);

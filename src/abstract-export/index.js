@@ -31,7 +31,7 @@ class AbstractExport extends Top {
     super(q, isCore);
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     let valid = AbstractExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -58,9 +58,9 @@ class AbstractExport extends Top {
     return false;
   }
   selectedNamespaces() {
-    let logger = this._container.logger;
+    let logger = this._builder.logger;
     // filter namespaces if set
-    let namespaces0 = [...this._container.namespaceStorage]
+    let namespaces0 = [...this._builder.container.namespaceStorage]
       .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
       
     let namespaces1 = this.requireConcrete 
