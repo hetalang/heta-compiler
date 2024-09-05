@@ -11,7 +11,7 @@ const reservedWords = [
 ];
 
 /**
- * Creates one of inheritors of `AbstractExport` and put it in `container.exportStorage`.
+ * Creates one of inheritors of `AbstractExport` and put it in `container.exportArray`.
  * The inheritor depends on `q.format` property.
  * For example `{id: 'output', format: 'JSON', ...}` creates the object of `JSONExport` type.
  * 
@@ -38,7 +38,7 @@ Container.prototype.export = function(q = {}, isCore = false){
 
   // create and push to storage
   let exportInstance = new this.classes[q.format](q, isCore);
-  if (!exportInstance.errored) this.exportStorage.set(exportInstance.id, exportInstance);
+  if (!exportInstance.errored) this.exportArray.push(exportInstance);
   
   return exportInstance;
 };

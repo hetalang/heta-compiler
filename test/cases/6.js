@@ -32,7 +32,7 @@ describe('Testing "cases/6-import"', () => {
 
   it('Run include', () => {
     b.run();
-    exportArray = [...b.container.exportStorage].map((x) => x[1]);
+    exportArray = b.container.exportArray;
   });
 
   it('Run @SBMLExport, check and compare.', () => {

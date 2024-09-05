@@ -38,7 +38,7 @@ const TopoSort = require('@insysbio/topo-sort');
  * @property {Logger} logger object providing transport of errors, warnings and info messages on Heta platform level.
  * @property {object[]} defaultLogs Default storage of errors which will be used for diagnostics.
  *    The {@link JSONTransport} is used here.
- * @property {Map<string,_Export>} exportStorage Storage for `_Export` instances. Key is a string identifier.
+ * @property {object[]} exportArray Storage for `_Export` instances.
  * @property {Map<string,UnitDef>} unitDefStorage Storage for `UnitDef` instances. Key is a string identifier.
  * @property {Map<string,FunctionDef>} functionDefStorage Storage for `FunctionDef` instances. Key is a string identifier.
  * @property {Map<string,Scenario>} scenarioStorage Storage for `Scenario` instances. Key is a string identifier.
@@ -75,7 +75,7 @@ class Container {
     this.logger.addTransport(new JSONTransport('info', this.defaultLogs));
 
     // storage of AbstractExport Instances
-    this.exportStorage = new Map();
+    this.exportArray = [];
     // storage for UnitDef
     this.unitDefStorage = new Map();
     // storage for FunctionDef
@@ -162,7 +162,7 @@ class Container {
         + this.unitDefStorage.size // global elements
         + this.functionDefStorage.size
         + this.scenarioStorage.size
-        + this.exportStorage.size;
+        + this.exportArray.length;
   }
 
   /**

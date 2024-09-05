@@ -27,79 +27,79 @@ namespace mm begin
   //ss2 @StopSwitcher {trigger: S < P};
 end
 
-heta_code #export {
+#export {
   format: HetaCode,
   filepath: heta_code
 };
-mm_sbml_l2v4 #export {
+#export {
   spaceFilter: mm,
   format: SBML,
   filepath: mm_sbml_l2v4,
   version: L2V4
 };
-mm_sbml_l3v1 #export {
+#export {
   spaceFilter: mm,
   format: SBML,
   filepath: mm_sbml_l3v1,
   version: L3V1
 };
-mm_simbio #export {
+#export {
   spaceFilter: mm,
   format: Simbio,
   filepath: mm_simbio,
 };
-full_json #export {
+#export {
   spaceFilter: mm,
   format: JSON,
   filepath: full_json,
 };
-full_yaml #export {
+#export {
   spaceFilter: mm,
   format: YAML,
   filepath: full_yaml,
 };
-mm_slv #export {
+#export {
   spaceFilter: mm,
   format: SLV,
   filepath: mm_slv,
   version: 25
 };
-mm_julia #export {
+#export {
   spaceFilter: mm,
   format: Julia,
   filepath: mm_julia,
 };
-mm_dbsolve #export {
+#export {
   spaceFilter: mm,
   format: DBSolve,
   filepath: mm_dbsolve,
 };
-mm_mrg #export {
+#export {
   spaceFilter: mm,
   format: Mrgsolve,
   filepath: mm_mrg,
 };
-matlab1 #export {
+#export {
   spaceFilter: mm,
   format: Matlab,
   filepath: matlab1,
 };
-table #export {
+#export {
   spaceFilter: mm,
   format: XLSX,
   filepath: table,
   splitByClass: true
 };
-table2 #export {
+#export {
   spaceFilter: mm,
   format: Table,
   filepath: table2,
   bookType: biff8
 };
-graph #export {
+#export {
   format: Dot,
   filepath: graph
 };
-summary0 #export {
+#export {
   format: Summary
 };

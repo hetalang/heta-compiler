@@ -179,12 +179,12 @@ class Builder {
   }
 
   /**
-   * Run exporting of files based on components of `this.container.exportStorage`.
+   * Run exporting of files based on components of `this.container.exportArray`.
    * 
    * @method Builder#exportMany
    */
   exportMany(){
-    let exportElements = [...this.container.exportStorage].map((x) => x[1]);
+    let exportElements = this.container.exportArray;
     this.logger.info(`Start exporting to files, total: ${exportElements.length}.`);
 
     exportElements.forEach((exportItem) => _makeAndSave(exportItem, this._distDirname));
@@ -197,7 +197,7 @@ class Builder {
    * @method Builder#exportJuliaOnly
    */
   exportJuliaOnly(){
-    // create export without putting it to exportStorage
+    // create export without putting it to exportArray
     let Julia = this.container.classes['Julia'];
     let exportItem = new Julia({
       format: 'Julia',
