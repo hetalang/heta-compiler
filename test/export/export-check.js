@@ -24,7 +24,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
 
-  it('Create JSON Export with #export', () => {
+  it('Create JSON Export with export', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './_1.json'
@@ -36,7 +36,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
   
-  it('Error in #export: no "format"', () => {
+  it('Error in export: no "format"', () => {
     let json_export = p.export({
       filepath: './1.json'
     });
@@ -45,7 +45,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
   
-  it('Error in #export: wrong "format"', () => {
+  it('Error in export: wrong "format"', () => {
     let json_export = p.export({
       format: 'XXX',
       filepath: '1'
@@ -55,7 +55,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
 
-  it('Error in #export: no "filepath"', () => {
+  it('Error in export: no "filepath"', () => {
     let json_export = p.export({
       format: 'JSON'
     });
@@ -65,7 +65,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
 
-  it('Error in #export: wrong "filepath"', () => {
+  it('Error in export: wrong "filepath"', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './@1.xxx'
@@ -75,7 +75,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
   
-  it('Error in #export: wrong "omit"', () => {
+  it('Error in export: wrong "omit"', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './1.txt',
@@ -87,7 +87,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
 
-  it('Error in #export: wrong "noUnitsExpr"', () => {
+  it('Error in export: wrong "noUnitsExpr"', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './1.txt',
@@ -98,7 +98,7 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
   
-  it('Error in #export: wrong "spaceFilter"', () => {
+  it('Error in export: wrong "spaceFilter"', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './1.txt',

@@ -23,7 +23,7 @@ program
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
-  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".json5", ".yml"]')
+  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
   // options
   .option('--units-check', 'Check all Records for unit consistency.')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
@@ -33,7 +33,7 @@ program
   // moduleImport
   .option('-s, --source <filepath>', 'path to main heta module.')
   .option('-t, --type <heta|table|xlsx|json|yaml|sbml>', 'type of source file.')
-  .option('-e, --export <formats>', 'format names or structures: "JSON,XLSX" or "{format:JSON},{format:XLSX,omitRows:3}"')
+  .option('-e, --export <formats>', 'export formats: "JSON,XLSX" or "{format:JSON},{format:XLSX,omitRows:3}"')
   // checking newer version of heta-compiler
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.')
   .parse(process.argv);
@@ -53,7 +53,7 @@ async function main() {
 
   // === read declaration file ===
   // search
-  let searches = ['', '.json', '.json5', '.yml']
+  let searches = ['', '.json', '.yml']
     .map((ext) => path.join(targetDir, (opts.declaration || 'platform') + ext));
   let extensionNumber = searches
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file

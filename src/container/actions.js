@@ -15,7 +15,7 @@ const reservedWords = [
  * The inheritor depends on `q.format` property.
  * For example `{id: 'output', format: 'JSON', ...}` creates the object of `JSONExport` type.
  * 
- * @param {object} q The `#export` statement in JS object format.
+ * @param {object} q The `export` object in JS object format.
  * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
  * 
  * @returns {AbstractExport} The created object.
@@ -25,14 +25,11 @@ const reservedWords = [
 Container.prototype.export = function(q = {}, isCore = false) {
   let { exportClasses, exportArray } = this._builder;
   if (q.format === undefined) {
-    this.logger.error(
-      'Empty "format" option in #export',
-      {type: 'QError'}
-    );
+    this.logger.error('Empty "format" option in export', {type: 'QError'});
     return; // BRAKE
   }
   if (typeof exportClasses[q.format] !== 'function') {
-    this.logger.error(`Unknown format "${q.format}" in #export action.`, {type: 'QError'});
+    this.logger.error(`Unknown format "${q.format}" in export.`, {type: 'QError'});
 
     return; // BRAKE
   }

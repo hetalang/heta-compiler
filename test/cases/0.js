@@ -59,21 +59,21 @@ describe('Testing "cases/0-hello-world"', () => {
     b.run();
   });
 
-  it('Run #export {format: SBML}, check and compare.', () => {
+  it('Run {format: SBML}, check and compare.', () => {
     let sbml_export = b.exportArray[0];
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_l2v4_correct);
   });
 
-  it('Run #export {format: SBML}, check and compare.', () => {
+  it('Run export {format: SBML}, check and compare.', () => {
     let sbml_export = b.exportArray[1];
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_l3v1_correct);
   });
 
-  it('Run #export {format: JSON}, check and compare.', () => {
+  it('Run export {format: JSON}, check and compare.', () => {
     let json_export = b.exportArray[2];
     let code = json_export.makeText(true)[0].content;
     let obj = JSON.parse(code);
@@ -81,7 +81,7 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(obj);
   });
 
-  it('Run #export {format: YAML}, check and compare.', () => {
+  it('Run export {format: YAML}, check and compare.', () => {
     let yaml_export = b.exportArray[3];
     let code = yaml_export.makeText(true)[0].content;
     let obj = load(code);
@@ -89,7 +89,7 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(code);
   });
 
-  it('Run #export {format: SLV}, check and compare.', () => {
+  it('Run export {format: SLV}, check and compare.', () => {
     let slv_export = b.exportArray[4];
     let code = slv_export.makeText(true)[0].content;
     let obj = slvParse.parse(code);
@@ -97,7 +97,7 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(obj);
   });
 
-  it('Run #export {format: XLSX}, check and compare.', () => {
+  it('Run export {format: XLSX}, check and compare.', () => {
     let xlsx_export = b.exportArray[5];
     let code = xlsx_export.makeSheet(true); // check only sheet #0
 
@@ -121,7 +121,7 @@ describe('Testing "cases/0-hello-world"', () => {
     //console.log(correctJSON_0);
   });
 
-  it('Run #export {format: Mrgsolve}, check and compare.', () => {
+  it('Run export {format: Mrgsolve}, check and compare.', () => {
     let mm_mrg = b.exportArray[6];
     let code = mm_mrg.makeText(true);
     // compare model.cpp text content
@@ -130,7 +130,7 @@ describe('Testing "cases/0-hello-world"', () => {
     expect(code[0].content).to.be.equal(mrgsolve_correct);
   });
 
-  it('Run #export {format: Julia}, check and compare.', () => {
+  it('Run export {format: Julia}, check and compare.', () => {
     let mm_mrg = b.exportArray[7];
     let code = mm_mrg.makeText(true);
     // compare model.js text content
