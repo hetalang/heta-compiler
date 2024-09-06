@@ -38,11 +38,11 @@ class SBMLExport extends AbstractExport {
     return ajv.compile(schema);
   }
   makeText(){
-    let logger = this._builder.logger;
-
+    //let { logger } = this._builder;
+    
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();
-    
+
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = ns.getSBMLImage();
       var content = this.getSBMLCode(image);

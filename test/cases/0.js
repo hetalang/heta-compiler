@@ -8,7 +8,7 @@
   - SLV
   - XLSX
 */
-const { Builder } = require('../../src/builder');
+const { Builder } = require('../../src');
 const { expect, use } = require('chai');
 const chaiXml = require('chai-xml');
 use(chaiXml);
@@ -41,10 +41,18 @@ describe('Testing "cases/0-hello-world"', () => {
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      }
+      },
+      export: [
+        {format: 'SBML', version: 'L2V4', filepath: 'mm_sbml_l2v4', spaceFilter: '^mm$'},
+        {format: 'SBML', version: 'L3V1', filepath: 'mm_sbml_l3v1', spaceFilter: '^mm$'},
+        {format: 'JSON', spaceFilter: '^mm$'},
+        {format: 'YAML', spaceFilter: '^mm$'},
+        {format: 'SLV', version: '25', spaceFilter: '^mm$'},
+        {format: 'XLSX', splitByClass: true, spaceFilter: '^mm$'},
+        {format: 'Mrgsolve', spaceFilter: '^mm$'},
+        {format: 'Julia', spaceFilter: '^mm$'}]
     };
     b = new Builder(declaration, 'cases/0-hello-world');
-    //console.log(b);
   });
 
   it('Run include', () => {
@@ -52,24 +60,21 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SBML}, check and compare.', () => {
-    let sbml_export = b.exportArray
-      .find(x => x.filepath === 'mm_sbml_l2v4');
+    let sbml_export = b.exportArray[0];
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_l2v4_correct);
   });
 
   it('Run #export {format: SBML}, check and compare.', () => {
-    let sbml_export = b.exportArray
-      .find(x => x.filepath === 'mm_sbml_l3v1');
+    let sbml_export = b.exportArray[1];
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
     expect(code).xml.be.deep.equal(sbml_l3v1_correct);
   });
 
   it('Run #export {format: JSON}, check and compare.', () => {
-    let json_export = b.exportArray
-      .find(x => x.filepath === 'full_json');
+    let json_export = b.exportArray[2];
     let code = json_export.makeText(true)[0].content;
     let obj = JSON.parse(code);
     expect(obj).to.be.deep.equal(json_correct);
@@ -77,7 +82,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: YAML}, check and compare.', () => {
-    let yaml_export = b.exportArray.find(x => x.filepath === 'full_yaml');
+    let yaml_export = b.exportArray[3];
     let code = yaml_export.makeText(true)[0].content;
     let obj = load(code);
     expect(obj).to.be.deep.equal(yaml_correct);
@@ -85,7 +90,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: SLV}, check and compare.', () => {
-    let slv_export = b.exportArray.find(x => x.filepath === 'mm_slv');
+    let slv_export = b.exportArray[4];
     let code = slv_export.makeText(true)[0].content;
     let obj = slvParse.parse(code);
     expect(obj).to.be.deep.equal(slv_correct);
@@ -93,7 +98,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: XLSX}, check and compare.', () => {
-    let xlsx_export = b.exportArray.find(x => x.filepath === 'table');
+    let xlsx_export = b.exportArray[5];
     let code = xlsx_export.makeSheet(true); // check only sheet #0
 
     // check number of sheets
@@ -117,7 +122,7 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Mrgsolve}, check and compare.', () => {
-    let mm_mrg = b.exportArray.find(x => x.filepath === 'mm_mrg');
+    let mm_mrg = b.exportArray[6];
     let code = mm_mrg.makeText(true);
     // compare model.cpp text content
     expect(code[0].pathSuffix).to.be.equal('/mm.cpp');
@@ -126,11 +131,12 @@ describe('Testing "cases/0-hello-world"', () => {
   });
 
   it('Run #export {format: Julia}, check and compare.', () => {
-    let mm_mrg = b.exportArray.find(x => x.filepath === 'mm_julia');
+    let mm_mrg = b.exportArray[7];
     let code = mm_mrg.makeText(true);
     // compare model.js text content
     expect(code[0].pathSuffix).to.be.equal('/model.jl');
     expect(code[0].type).to.be.equal('text');
     expect(code[0].content).to.be.equal(julia_correct);
   });
+
 });

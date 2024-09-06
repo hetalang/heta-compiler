@@ -201,23 +201,6 @@ class Builder {
 
     this.exportArray.forEach((exportItem) => _makeAndSave(exportItem, this._distDirname));
   }
-
-  /**
-   * Run exporting of files for Julia only.
-   * It was created to support HetaSimulator.jl package.
-   * 
-   * @method Builder#exportJuliaOnly
-   */
-  exportJuliaOnly(){
-    // create export without putting it to exportArray
-    let Julia = this.exportClasses['Julia'];
-    let exportItem = new Julia({
-      format: 'Julia',
-      filepath: '_julia'
-    });
-
-    _makeAndSave(exportItem, this._distDirname);
-  }
 }
 
 function _makeAndSave(exportItem, pathPrefix) {
