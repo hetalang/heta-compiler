@@ -9,9 +9,3 @@ include model.heta;
 // include addon.json type json;
 // include addon.yml type yaml;
 
-// exports
-#export { filepath: sbml, version: L2V4, format: SBML };
-#export { filepath: matlab, format: Matlab };
-#export { filepath: output, format: JSON };
-#export { filepath: simbio, format: Simbio };
-#export { filepath: julia, format: Julia };

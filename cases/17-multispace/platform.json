@@ -3,11 +3,24 @@
   "id": "template",
   "options": {
     "debug": false,
-    "logs": "output.log",
+    "logPath": "output.log",
     "logLevel": "info"
   },
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    {"format": "JSON", "filepath": "output", "spaceFilter": "(nameless)|(one)|(two)", "noUnitsExpr": false},
+    {"format": "YAML", "filepath": "output", "spaceFilter": "one", "noUnitsExpr": false},
+    {"format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true, "spaceFilter": "one"},
+    {"format": "HetaCode", "filepath": "heta-generated", "spaceFilter": "(one)|(two)"},
+    {"format": "SBML", "filepath": "sbml", "version": "L2V4", "spaceFilter": "(one)|(two)"},
+    {"format": "Simbio", "filepath": "simbio"},
+    {"format": "Mrgsolve", "filepath": "mrgsolve", "spaceFilter": "(nameless)|(one)"},
+    {"format": "SLV", "filepath": "model_slv", "eventsOff": false, "spaceFilter": "one"},
+    {"format": "DBSolve", "filepath": "model_dbs", "eventsOff": false, "spaceFilter": "one"},
+    {"format": "Matlab", "filepath": "matlab", "spaceFilter": "(nameless)|(one)"},
+    {"format": "Julia", "filepath": "julia", "spaceFilter": "nameless"}
+  ]
 }

@@ -18,16 +18,6 @@ a0 []= 0; // initial value
 s1 []= 0;
 s2 []= 0; // static
 
-//#export {space: one_comp, filepath: sbml, format: SBML};
-#export {filepath: json, format: JSON};
-#export {filepath: slv, format: SLV};
-#export {filepath: model, format: DBSolve};
-#export {filepath: simbio, format: Simbio};
-#export {filepath: matlab, format: Matlab};
-#export {filepath: julia, format: Julia};
-#export {filepath: sbml, format: SBML};
-#export {filepath: mrgsolve, format: Mrgsolve};
-
 sw0 @TimeSwitcher {
   start: 40
 };

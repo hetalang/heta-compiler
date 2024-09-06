@@ -17,15 +17,3 @@ S1 [sw1]= S1 + 10; // reassign dynamic species
 S2 [sw1]= S2 + 10; // reassign static species
 x1 [sw1]= x1 + 100; // reassign dynamic record
 x2 [sw1]= x2 + 100; // reassign static record
-
-// exports
-#export { format: JSON, filepath: output };
-#export { format: YAML, filepath: output };
-#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
-#export { format: SBML, filepath: sbml, version: L2V4 };
-#export { format: SLV, filepath: slv, eventsOff: false };
-#export { format: DBSolve, filepath: dbsolve };
-#export { format: Simbio, filepath: simbio };
-#export { format: Mrgsolve, filepath: mrgsolve };
-#export { format: Julia, filepath: julia };
-#export { format: Matlab, filepath: matlab };

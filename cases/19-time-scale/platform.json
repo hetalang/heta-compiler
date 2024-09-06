@@ -10,5 +10,17 @@
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    {"format": "JSON", "filepath": "output"},
+    {"format": "YAML", "filepath": "output"},
+    {"format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true},
+    {"format": "SBML", "filepath": "sbml", "version": "L2V4", "spaceFilter": "zzz"},
+    {"format": "SLV", "filepath": "model", "spaceFilter": "zzz"},
+    {"format": "DBSolve", "filepath": "dbsolve", "spaceFilter": "zzz"},
+    {"format": "Simbio", "filepath": "simbio", "spaceFilter": "zzz"},
+    {"format": "Mrgsolve", "filepath": "mrgsolve", "spaceFilter": "zzz"},
+    {"format": "Matlab", "filepath": "matlab", "spaceFilter": "zzz"},
+    {"format": "Julia", "filepath": "julia", "spaceFilter": "zzz"}
+  ]
 }

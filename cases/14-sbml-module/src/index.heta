@@ -11,5 +11,3 @@ include 00025-sbml-l2v4.xml type sbml;
 
 #defineUnit _h {units: 1/hour};
 include 00026-sbml-l2v4.xml type sbml;
-
-json_export #export { filepath: output, format: JSON };

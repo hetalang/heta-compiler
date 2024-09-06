@@ -7,11 +7,21 @@
   "license": "UNLICENSED",
   "options": {
     "debug": false,
-    "logs": "output.log",
+    "logPath": "output.log",
     "logLevel": "info"
   },
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "JSON", "filepath": "json" },
+    { "format": "SLV", "filepath": "slv" },
+    { "format": "DBSolve", "filepath": "model" },
+    { "format": "Simbio", "filepath": "simbio" },
+    { "format": "Matlab", "filepath": "matlab" },
+    { "format": "Julia", "filepath": "julia" },
+    { "format": "SBML", "filepath": "sbml" },
+    { "format": "Mrgsolve", "filepath": "mrgsolve" }
+  ]
 }

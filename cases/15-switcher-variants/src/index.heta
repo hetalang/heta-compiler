@@ -63,9 +63,3 @@ r6 @Reaction { actors: = spec_amt6 + spec_conc6 } := 0.1;
 sw1 @TimeSwitcher {
   start: 10
 };
-
-// exports
-#export {
-  format: Julia,
-  filepath: julia_model
-};

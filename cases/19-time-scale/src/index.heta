@@ -23,15 +23,3 @@ x1 @Record {units: mole^2/litre} := s1*s2;
 x2 @Record {units: hour} := t/2;
 
 end
-
-// exports
-#export { format: JSON, filepath: output };
-#export { format: YAML, filepath: output };
-#export { format: XLSX, filepath: table, omitRows: 3, splitByClass: true };
-#export { format: SBML, filepath: sbml, version: L2V4, spaceFilter: zzz };
-#export { format: SLV, filepath: model, spaceFilter: zzz };
-#export { format: DBSolve, filepath: dbsolve, spaceFilter: zzz };
-#export { format: Simbio, filepath: simbio, spaceFilter: zzz };
-#export { format: Mrgsolve, filepath: mrgsolve, spaceFilter: zzz };
-#export { format: Matlab, filepath: matlab, spaceFilter: zzz };
-#export { format: Julia, filepath: julia, spaceFilter: zzz };

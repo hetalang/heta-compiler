@@ -11,5 +11,8 @@
   },
   "options": {
     "debug": true
-  }
+  },
+  "export": [
+    { "format": "SBML", "filepath": "output" }
+  ]
 }

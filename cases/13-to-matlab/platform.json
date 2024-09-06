@@ -12,5 +12,12 @@
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "SBML", "filepath": "sbml", "version": "L2V4" },
+    { "format": "Matlab", "filepath": "matlab" },
+    { "format": "JSON", "filepath": "output" },
+    { "format": "Simbio", "filepath": "simbio" },
+    { "format": "Julia", "filepath": "julia" }
+  ]
 }

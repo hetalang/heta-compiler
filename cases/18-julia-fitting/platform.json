@@ -10,5 +10,9 @@
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "Julia", "filepath": "julia" },
+    { "format": "JSON", "filepath": "json" }
+  ]
 }

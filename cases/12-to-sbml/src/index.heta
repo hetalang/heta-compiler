@@ -3,17 +3,3 @@
 */
 
 include first-model.json type json;
-
-// exports
-#export {
-  format: SBML,
-  spaceFilter: first,
-  filepath: sbml, 
-  version: L2V4, 
-  skipMathChecking: false
-};
-
-#export {
-  filepath: output,
-  format: JSON
-};

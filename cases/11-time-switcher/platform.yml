@@ -7,3 +7,13 @@ options:
 importModule:
   type: heta
   source: src/index.heta
+export:
+  - {filepath: json, format: JSON}
+  - {filepath: slv, format: SLV}
+  - {filepath: model, format: DBSolve}
+  - {filepath: simbio, format: Simbio}
+  - {filepath: matlab, format: Matlab}
+  - {filepath: julia, format: Julia}
+  - {filepath: sbml, format: SBML}
+  - {filepath: mrgsolve, format: Mrgsolve}
+  

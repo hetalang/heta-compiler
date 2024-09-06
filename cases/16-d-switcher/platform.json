@@ -6,12 +6,24 @@
   "license": "UNLICENSED",
   "options": {
     "debug": false,
-    "logs": "output.log",
+    "logPath": "output.log",
     "logLevel": "info",
     "unitsCheck": false
   },
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "JSON", "filepath": "output" },
+    { "format": "YAML", "filepath": "output" },
+    { "format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true },
+    { "format": "SBML", "filepath": "sbml", "version": "L2V4" },
+    { "format": "SLV", "filepath": "slv", "eventsOff": false },
+    { "format": "DBSolve", "filepath": "dbsolve" },
+    { "format": "Simbio", "filepath": "simbio" },
+    { "format": "Mrgsolve", "filepath": "mrgsolve" },
+    { "format": "Julia", "filepath": "julia" },
+    { "format": "Matlab", "filepath": "matlab" }
+  ]
 }
