@@ -7,3 +7,30 @@ options:
 importModule:
   type: heta
   source: src/index.heta
+export:
+  - format: YAML
+    filepath: yaml_invitro
+    spaceFilter: invitro
+  - format: YAML
+    filepath: yaml_invivo
+    spaceFilter: invivo
+  - format: DBSolve
+    filepath: slv_invitro
+    spaceFilter: invitro
+  - format: DBSolve
+    filepath: slv_invivo
+    spaceFilter: invivo
+  - format: Mrgsolve
+    filepath: mrg_invitro
+    spaceFilter: invitro
+  - format: Mrgsolve
+    filepath: mrg_invivo
+    spaceFilter: invivo
+  - format: SBML  
+    filepath: sbml_invitro
+    spaceFilter: invitro
+  - format: SBML
+    filepath: sbml_invivo
+    spaceFilter: invivo
+  - format: Dot
+    filepath: graph

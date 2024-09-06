@@ -1,7 +1,7 @@
 block @Const begin
     plasma = 2.5;
     k_prol = 1e-4;
-    AXP_neu =  0.1;
+    AXP_neu = 0.1;
 end
 
 namespace invitro begin
@@ -49,14 +49,3 @@ namespace invivo begin
     ATP_neu .= AXP_neu * K_eq_ADP / (1 + K_eq_ADP);
     ADP_neu .= AXP_neu / (1 + K_eq_ADP);
 end
-
-#export {spaceFilter: invitro, format: YAML, filepath: yaml_invitro};
-#export {spaceFilter: invivo, format: YAML, filepath: yaml_invivo};
-#export {spaceFilter: invitro, format: DBSolve, filepath: slv_invitro};
-#export {spaceFilter: invivo, format: DBSolve, filepath: slv_invivo};
-#export {spaceFilter: invitro, format: Mrgsolve, filepath: mrg_invitro};
-#export {spaceFilter: invivo, format: Mrgsolve, filepath: mrg_invivo};
-#export {spaceFilter: invitro, format: SBML, filepath: sbml_invitro};
-#export {spaceFilter: invivo, format: SBML, filepath: sbml_invivo};
-#export {format: Dot, filepath: graph};
-

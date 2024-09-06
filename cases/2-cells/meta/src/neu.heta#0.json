@@ -1,0 +1,180 @@
+[
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "neu_size",
+    "num": 1e-12
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "K_eq_ADP",
+    "num": 10
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ksyn_ATP",
+    "num": 0.0001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ksyn_P1",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km_S1",
+    "num": 1.2
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k_tr_P1",
+    "num": 0.013
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ATP_neu",
+    "num": 10000
+  },
+  {
+    "action": "setNS",
+    "space": "abstract_neu"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "tot_vol",
+    "class": "Compartment"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "S1",
+    "class": "Species",
+    "compartment": "tot_vol"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "neu_count",
+    "class": "Species",
+    "compartment": "tot_vol",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "neu_vol",
+    "class": "Compartment"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "neu_vol",
+    "assignments": {
+      "ode_": "neu_count * neu_size"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "ATP_neu",
+    "class": "Species",
+    "compartment": "neu_vol"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "ADP_neu",
+    "class": "Species",
+    "compartment": "neu_vol"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "P1_neu",
+    "class": "Species",
+    "compartment": "neu_vol"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "ext",
+    "class": "Compartment"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "ext",
+    "assignments": {
+      "ode_": "tot_vol - neu_vol"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "P1_ext",
+    "class": "Species",
+    "compartment": "ext"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "IL15_ext",
+    "class": "Species",
+    "compartment": "ext"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "r_syn_ATP",
+    "class": "Reaction",
+    "actors": "ADP_neu -> ATP_neu"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "r_syn_ATP",
+    "assignments": {
+      "ode_": "ksyn_ATP * neu_vol * (ADP_neu - ATP_neu/K_eq_ADP)"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "r_syn_P1",
+    "class": "Reaction",
+    "actors": "2ATP_neu + S1 -> 2ADP_neu + P1_neu",
+    "modifiers": [
+      "IL15_ext"
+    ]
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "r_syn_P1",
+    "assignments": {
+      "ode_": "ksyn_P1 * neu_vol * S1 / (S1 + Km_S1) * ATP_neu^2"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "r_tr_P1",
+    "class": "Reaction",
+    "actors": "P1_neu -> P1_ext"
+  },
+  {
+    "action": "upsert",
+    "space": "abstract_neu",
+    "id": "r_tr_P1",
+    "assignments": {
+      "ode_": "k_tr_P1 * neu_vol * (P1_neu - P1_ext)"
+    }
+  }
+]

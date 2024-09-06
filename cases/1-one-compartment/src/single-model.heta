@@ -20,8 +20,3 @@ namespace one_comp begin
   a0 []= 10; // initial value
   s1 []= 0;
 end
-
-//#export {space: one_comp, filepath: sbml, format: SBML};
-#export {spaceFilter: one_comp, filepath: json, format: JSON};
-#export {spaceFilter: one_comp, filepath: slv, format: SLV};
-

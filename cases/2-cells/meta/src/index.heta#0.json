@@ -1,0 +1,272 @@
+[
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "plasma",
+    "num": 2.5
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k_prol",
+    "num": 0.0001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "AXP_neu",
+    "num": 0.1
+  },
+  {
+    "action": "setNS",
+    "space": "invitro"
+  },
+  {
+    "action": "import",
+    "space": "invitro",
+    "id": "AXP_neu",
+    "fromId": "AXP_neu",
+    "fromSpace": "nameless"
+  },
+  {
+    "action": "include",
+    "space": "invitro",
+    "source": "Y:\\heta-compiler\\cases\\2-cells\\src\\neu.heta"
+  },
+  {
+    "action": "upsert",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "tot_vol",
+    "class": "Compartment",
+    "assignments": {
+      "start_": 0.1
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "P1_mean",
+    "class": "Record",
+    "assignments": {
+      "ode_": "( P1_ext * ext + P1_neu * neu_vol ) / tot_vol"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "ext",
+    "assignments": {
+      "start_": 1
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "S1",
+    "assignments": {
+      "start_": 150
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "IL15_ext",
+    "assignments": {
+      "start_": 0
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "neu_count",
+    "assignments": {
+      "start_": 1000000
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "P1_ext",
+    "assignments": {
+      "start_": 0
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "P1_neu",
+    "assignments": {
+      "start_": 0
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "ATP_neu",
+    "assignments": {
+      "start_": "AXP_neu * K_eq_ADP / (1 + K_eq_ADP)"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invitro",
+    "id": "ADP_neu",
+    "assignments": {
+      "start_": "AXP_neu / (1 + K_eq_ADP)"
+    }
+  },
+  {
+    "action": "setNS",
+    "space": "invivo"
+  },
+  {
+    "action": "import",
+    "space": "invivo",
+    "id": "plasma",
+    "fromId": "plasma",
+    "fromSpace": "nameless"
+  },
+  {
+    "action": "import",
+    "space": "invivo",
+    "id": "k_prol",
+    "fromId": "k_prol",
+    "fromSpace": "nameless"
+  },
+  {
+    "action": "include",
+    "space": "invivo",
+    "source": "Y:\\heta-compiler\\cases\\2-cells\\src\\neu.heta"
+  },
+  {
+    "action": "upsert",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "blood",
+    "class": "Compartment",
+    "assignments": {
+      "start_": 5.2
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "neu_count",
+    "class": "Species",
+    "compartment": "blood"
+  },
+  {
+    "action": "update",
+    "space": "invivo",
+    "id": "S1",
+    "compartment": "blood"
+  },
+  {
+    "action": "delete",
+    "space": "invivo",
+    "id": "tot_vol"
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "ext",
+    "assignments": {
+      "ode_": "plasma"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "AXP_neu",
+    "class": "Record",
+    "assignments": {
+      "start_": 0.1
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "IL15_ext",
+    "assignments": {
+      "start_": 0
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "neu_count",
+    "assignments": {
+      "start_": 1e-9
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "r_prol_neu",
+    "class": "Reaction",
+    "actors": "-> neu_count"
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "r_prol_neu",
+    "assignments": {
+      "ode_": "k_prol * neu_count"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "S1",
+    "assignments": {
+      "start_": 10
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "P1_ext",
+    "assignments": {
+      "start_": 0
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "P1_neu",
+    "assignments": {
+      "start_": 0
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "ATP_neu",
+    "assignments": {
+      "start_": "AXP_neu * K_eq_ADP / (1 + K_eq_ADP)"
+    }
+  },
+  {
+    "action": "upsert",
+    "space": "invivo",
+    "id": "ADP_neu",
+    "assignments": {
+      "start_": "AXP_neu / (1 + K_eq_ADP)"
+    }
+  }
+]

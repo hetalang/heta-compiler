@@ -2,8 +2,24 @@ id: mm
 builderVersion: '*'
 options:
   logLevel: info
-  debug: true
+  debug: false
   unitsCheck: false
 importModule:
   type: heta
   source: src/shared-constants.heta
+export:
+  - format: JSON
+    filepath: json
+  - format: SLV
+    filepath: slv
+    spaceFilter: one_comp
+  - format: SLV
+    filepath: slv_saturable
+    spaceFilter: one_comp_saturation
+  - format: Mrgsolve
+    filepath: non_saturable
+    spaceFilter: one_comp
+  - format: Mrgsolve
+    filepath: mrg_saturable
+    spaceFilter: one_comp_saturation
+
