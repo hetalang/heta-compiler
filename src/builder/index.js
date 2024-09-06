@@ -165,12 +165,7 @@ class Builder {
       this.container.checkTerms();
 
       // 9. Exports
-      if (this.options.juliaOnly) {
-        this.logger.warn('"Julia only" mode');
-        this.exportJuliaOnly();
-      } else {
-        this.exportMany();
-      }
+      this.exportMany();
     } else {
       this.logger.warn('Units checking and export were skipped because of errors in compilation.');
     }

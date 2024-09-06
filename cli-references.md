@@ -60,7 +60,6 @@ List of `heta build` options:
 | --type | \<string\> | heta | Type of source file. This option allows to select type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
 | --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory. |
 | --units-check | | | If set all records will be checked for units consistency. |
-| --julia-only | | | Run in Julia supporting mode: skip declared exports, add default export to Julia. |
 | --dist-dir | \<string\> | |  Set export directory path, where to store exported files. |
 | --meta-dir | \<string\> | |  Set meta directory path. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
@@ -205,7 +204,6 @@ There are properties in declaration file which do not change compilation process
 | options.logLevel | string | | info | When parsing the compiler prints the messages to the shell. Here you can set a level of printing messages. Possible values: "info", "warn", "error". For example if you set "warn", only warnings and errors will be printed. |
 | options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
 | options.unitsCheck | boolean | --units-check | false | If `true` all Record will be checked for units consistency. |
-| options.juliaOnly | boolean | --julia-only | false | If `true` the compilation will run Julia supporting mode. |
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
 | options.debug | boolean | --debug | false | Working in debugging mode. All parsed modules will be saved in JSON files in meta directory. |
 | options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
@@ -222,8 +220,7 @@ Using neither declaration file nor CLI options is equivalent to the following de
         "distDir": "dist",
         "metaDir": "meta",
         "debug": false,
-        "unitsCheck": false,
-        "juliaOnly": false
+        "unitsCheck": false
     },
     "importModule": {
         "source": "index.heta",

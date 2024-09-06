@@ -29,7 +29,6 @@ program
   .option('--units-check', 'Check all Records for unit consistency.')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
   .option('--debug', 'If set the raw module output will be stored in "meta".')
-  .option('--julia-only', 'Run in Julia supporting mode: skip declared exports.')
   .option('--dist-dir <filepath>', 'Set export directory path, where to store exported files.')
   .option('--meta-dir <filepath>', 'Set meta directory path.')
   // moduleImport
@@ -87,7 +86,6 @@ async function main() {
       unitsCheck: opts.unitsCheck,
       logMode: opts.logMode,
       debug: opts.debug,
-      juliaOnly: opts.juliaOnly,
       distDir: opts.distDir,
       metaDir: opts.metaDir
     },
