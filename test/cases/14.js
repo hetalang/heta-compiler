@@ -18,7 +18,10 @@ describe('Case #14: testing SBML module with units', () => {
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      }
+      },
+      export: [
+        {format: 'JSON'}
+      ]
     }, 'cases/14-sbml-module');
     b.run();
     expect(b.container.logger).to.have.property('hasErrors').false;

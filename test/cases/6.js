@@ -23,7 +23,10 @@ describe('Testing "cases/6-import"', () => {
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      }
+      },
+      export: [
+        {format: 'SBML', spaceFilter: 'model'},
+      ]
     };
     b = new Builder(declaration, 'cases/6-import');
     //console.log(b);
