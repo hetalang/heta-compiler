@@ -37,12 +37,3 @@ kel_second @Const = 0.2;
 };
 kabs_third @Const = 3e-3;
 kel_third @Const = 0.3;
-
-#export {
-  filepath: output_json,
-  format: JSON
-};
-#export {
-  filepath: output_sbml,
-  format: SBML
-};

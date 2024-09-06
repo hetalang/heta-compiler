@@ -7,12 +7,17 @@
   "license": "UNLICENSED",
   "options": {
     "debug": false,
-    "logs": "output.log",
+    "logPath": "output.log",
     "logLevel": "info",
     "unitsCheck": false
   },
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "SLV", "filepath": "model" },
+    { "format": "SBML", "filepath": "sbml" },
+    { "format": "Julia", "filepath": "julia" }
+  ]
 }

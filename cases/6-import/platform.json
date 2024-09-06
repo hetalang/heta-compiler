@@ -11,5 +11,9 @@
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "SBML", "version": "L2V4", "spaceFilter": "model", "filepath": "output_sbml" },
+    { "format": "JSON", "spaceFilter": "model", "filepath": "output_json" }
+  ]
 }

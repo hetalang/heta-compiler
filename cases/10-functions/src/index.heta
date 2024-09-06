@@ -70,7 +70,3 @@ bo01 @Record '(x > y) and (x < z) ? y1 : y2' := (x > y) and (x < z) ? y1 : y2;
 // pre-defined constants
 pc01 @Record '2*e' := 2*e;
 pc02 @Record '2*pi' := 2*pi;
-
-#export {filepath: model, format: SLV};
-#export {filepath: sbml, format: SBML};
-#export {filepath: julia, format: Julia};
