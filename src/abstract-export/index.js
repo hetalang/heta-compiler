@@ -1,4 +1,3 @@
-const { Top } = require('../core/top');
 const { ajv } = require('../utils');
 
 const schema = {
@@ -6,15 +5,6 @@ const schema = {
   properties: {
     filepath: {type: 'string', pattern: '^[\\w\\d\\\\/._!-:]+$'},
     spaceFilter: { type: 'string' }
-  },
-  definitions: {
-    ID: {
-      description: 'First character is letter, others are letter, digit or underscore.',
-      type: 'string',
-      minLength: 1,
-      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
-      example: 'x_12_'
-    },
   }
 };
 
@@ -26,12 +16,11 @@ const schema = {
     powTransform: keep // possible values are: keep/operator/function
   };
 */
-class AbstractExport extends Top {
-  constructor(q = {}, isCore = false){
-    super(q, isCore);
+class AbstractExport {
+  constructor(q = {}){
 
     // check arguments here
-    let logger = this._builder.logger;
+    let { logger } = this._builder;
     let valid = AbstractExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
@@ -58,23 +47,24 @@ class AbstractExport extends Top {
     return false;
   }
   selectedNamespaces() {
-    let logger = this._builder.logger;
+    let { container, logger } = this._builder;
     // filter namespaces if set
-    let namespaces0 = [...this._builder.container.namespaceStorage]
+    let filteredNS = [...container.namespaceStorage]
       .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
-      
-    let namespaces1 = this.requireConcrete 
-      ? namespaces0.filter(([spaceName, ns]) => !ns.isAbstract)
-      : namespaces0;
+    
+    // select only concrete namespaces
+    let concreteNS = this.requireConcrete 
+      ? filteredNS.filter(([spaceName, ns]) => !ns.isAbstract)
+      : filteredNS;
 
-    if (namespaces1.length === 0) {
+    if (concreteNS.length === 0) {
       let msg = `Nothing was exported because there is no concrete namespaces matching spaceFilter in "${this.format}".`;
       logger.warn(msg, {});
     }
 
-    return namespaces1;
+    return concreteNS;
   }
-  make() { // Buffer
+  make() {
     let text = this.makeText();
     let buffer = text.map((x) => {
       return {
@@ -88,6 +78,17 @@ class AbstractExport extends Top {
   }
   static get validate() {
     return ajv.compile(schema);
+  }
+  static isValid(q, logger) {
+    let valid = this.validate(q);
+    if (!valid) {
+      let msg = `Some of properties do not satisfy requirements for "${this.name}"\n`
+        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
+          .join('\n');
+      logger?.error(msg, {type: 'ValidationError'});
+    }
+    
+    return valid;
   }
 }
 

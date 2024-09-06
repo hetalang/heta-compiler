@@ -13,7 +13,7 @@ const schema = {
   }
 };
 
-class DBSolveExport extends AbstractExport{
+class DBSolveExport extends AbstractExport {
   constructor(q = {}, isCore = false) {
     super(q, isCore);
 

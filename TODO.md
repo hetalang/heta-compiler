@@ -37,11 +37,11 @@
 ## features
 
 - atStart to exports: Matlab, DBSolve
-- write reusable `Build` class
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
   wait until Node.js 22 will be released
 - use `Component` as a subclass of `Top`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
+- automatic creation of modifiers in SBML
 
 ## ideas
 
@@ -53,7 +53,6 @@
 - generation of 'platform.yml' by `heta init`
 - check file format for modules
 - add "ignoreCompartment" property in Species
-- automatic creation of modifiers in SBML
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
 - stoichiometry as `@Const` and `@Record`
 - highlight for Vim https://ezpzdev.medium.com/create-a-vim-plugin-for-your-next-programming-language-structure-and-syntax-highlight-1dc0823a6b92

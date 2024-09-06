@@ -16,7 +16,6 @@ describe('General argument checking', () => {
       powTransform: 'function'
     });
     expect(p.logger).to.have.property('hasErrors').false;
-    expect(json_export).to.have.property('id', 'json_export');
     expect(json_export).to.have.property('filepath', './1.json');
     expect(json_export).to.have.property('format', 'JSON');
     expect(json_export).to.have.deep.property('omit', ['num']);
