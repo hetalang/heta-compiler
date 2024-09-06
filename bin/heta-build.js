@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const { Builder } = require('../src');
 const { load } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
-const _merge = require('lodash/merge');
 const semver = require('semver');
 const { version, bugs } = require('../package');
 const colors = require('colors');
@@ -34,6 +33,7 @@ program
   // moduleImport
   .option('-s, --source <filepath>', 'path to main heta module.')
   .option('-t, --type <heta|table|xlsx|json|yaml|sbml>', 'type of source file.')
+  .option('-e, --export <formats>', 'format names or structures: "JSON,XLSX" or "{format:JSON},{format:XLSX,omitRows:3}"')
   // checking newer version of heta-compiler
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.')
   .parse(process.argv);
@@ -59,9 +59,9 @@ async function main() {
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
+  let declaration = {options: {}, importModule: {}, export: []}; // default declaration
   if (!opts.declaration && extensionNumber === -1) {
     process.stdout.write('No declaration file, running with defaults...\n');
-    var declaration = {};
   } else if (extensionNumber === -1) {
     process.stdout.write(`Declaration file "${opts.declaration}" not found.\nSTOP!`);
     process.exit(2); // BRAKE
@@ -70,33 +70,41 @@ async function main() {
     process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
-      declaration = load(declarationText);
-      if (typeof declaration !== 'object'){
+      let declarationFromFile = load(declarationText);
+      if (typeof declarationFromFile !== 'object'){
         throw new Error('Not an object.');
       }
+      Object.assign(declaration, declarationFromFile);
     } catch (e) {
       process.stdout.write(`Wrong format of declaration file: \n"${e.message}"\n`);
       process.exit(2); // BRAKE
     }
   }
 
-  // === options from CLI ===
-  let CLIDeclaration = {
-    options: {
-      unitsCheck: opts.unitsCheck,
-      logMode: opts.logMode,
-      debug: opts.debug,
-      distDir: opts.distDir,
-      metaDir: opts.metaDir
-    },
-    importModule: {
-      source: opts.source,
-      type: opts.type
-    }
-  };
+  // parse export
+  let export1 = opts.export?.replace(/:/g, ': ');
+  try {
+    var formats = load(`[${export1}]`).map((x) => {
+      if (typeof x === 'string') {
+        return { format: x };
+      } else {
+        return x;
+      }
+    }); 
+  } catch (e) {
+    process.stdout.write(`Wrong format of export option: "${formats}"\n`);
+    process.exit(2); // BRAKE
+  }
 
   // === update declaration ===
-  _merge(declaration, CLIDeclaration);
+  opts.unitsCheck !== undefined && (declaration.options.unitsCheck = opts.unitsCheck);
+  opts.logMode !== undefined && (declaration.options.logMode = opts.logMode);
+  opts.debug !== undefined && (declaration.options.debug = opts.debug);
+  opts.distDir !== undefined && (declaration.options.distDir = opts.distDir);
+  opts.metaDir !== undefined && (declaration.options.metaDir = opts.metaDir);
+  opts.source !== undefined && (declaration.importModule.source = opts.source);
+  opts.type !== undefined && (declaration.importModule.type = opts.type);
+  opts.export !== undefined && (declaration.export = formats);
 
   // === wrong version throws, if no version stated than skip ===
   let satisfiesVersion = declaration.builderVersion
