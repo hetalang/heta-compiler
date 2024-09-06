@@ -4,8 +4,7 @@
   "options": {
     "debug": false,
     "logs": "output.log",
-    "logLevel": "info",
-    "skipExport": false
+    "logLevel": "info"
   },
   "importModule": {
     "type": "heta",

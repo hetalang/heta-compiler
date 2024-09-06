@@ -30,7 +30,6 @@
         "logLevel": {"type": "string", "default": "info", "enum": ["panic", "info", "warn", "error"]},
         "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "unitsCheck": {"type": "boolean", "default": false},
-        "skipExport": {"type": "boolean", "default": false},
         "juliaOnly": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
@@ -57,19 +56,22 @@
         "omitRows": { "type": "integer", "minimum": 0 }
       }
     },
-    "export": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["format"],
-        "additionalProperties": true,
-        "properties": {
-          "id": { "type": "string" },
-          "format": { "type": "string" },
-          "filepath": { "type": "string" },
-          "spaceFilter": { "type": "string" }
+    "export": { "oneOf": [
+      { "type": "null" },
+      {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["format"],
+          "additionalProperties": true,
+          "properties": {
+            "id": { "type": "string" },
+            "format": { "type": "string" },
+            "filepath": { "type": "string" },
+            "spaceFilter": { "type": "string" }
+          }
         }
-      }      
-    }
+      }
+    ]}
   }
 }

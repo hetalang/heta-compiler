@@ -8,7 +8,6 @@
     "debug": false,
     "logs": "output.log",
     "logLevel": "info",
-    "skipExport": false,
     "unitsCheck": false
   },
   "importModule": {

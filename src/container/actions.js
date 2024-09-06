@@ -39,7 +39,7 @@ Container.prototype.export = function(q = {}, isCore = false) {
 
   // create and push to storage
   let exportInstance = new exportClasses[q.format](q, isCore);
-  if (!exportInstance.errored) {
+  if (!exportInstance.errored && this._builder.export !== null) { // TODO: remove second check later
     exportArray.push(exportInstance);
   }
 

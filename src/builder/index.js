@@ -165,9 +165,7 @@ class Builder {
       this.container.checkTerms();
 
       // 9. Exports
-      if (this.options.skipExport) {
-        this.logger.warn('Exporting skipped as stated in declaration.');
-      } else if (this.options.juliaOnly) {
+      if (this.options.juliaOnly) {
         this.logger.warn('"Julia only" mode');
         this.exportJuliaOnly();
       } else {

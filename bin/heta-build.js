@@ -27,7 +27,6 @@ program
   .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".json5", ".yml"]')
   // options
   .option('--units-check', 'Check all Records for unit consistency.')
-  .option('-S, --skip-export', 'do not export files to local directory')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
   .option('--debug', 'If set the raw module output will be stored in "meta".')
   .option('--julia-only', 'Run in Julia supporting mode: skip declared exports.')
@@ -86,7 +85,6 @@ async function main() {
   let CLIDeclaration = {
     options: {
       unitsCheck: opts.unitsCheck,
-      skipExport: opts.skipExport,
       logMode: opts.logMode,
       debug: opts.debug,
       juliaOnly: opts.juliaOnly,

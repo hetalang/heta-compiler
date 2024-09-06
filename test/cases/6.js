@@ -18,13 +18,13 @@ describe('Testing "cases/6-import"', () => {
       id: 'test',
       builderVersion: '*',
       options: {
-        logLevel: 'panic',
-        skipExport: true
+        logLevel: 'panic'
       },
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      }
+      },
+      export: null
     };
     b = new Builder(declaration, 'cases/6-import');
     //console.log(b);

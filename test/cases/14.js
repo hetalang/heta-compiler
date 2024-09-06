@@ -13,13 +13,13 @@ describe('Case #14: testing SBML module with units', () => {
       id: 'test',
       builderVersion: '*',
       options: {
-        logLevel: 'panic',
-        skipExport: true
+        logLevel: 'panic'
       },
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      }
+      },
+      export: null
     }, 'cases/14-sbml-module');
     b.run();
     expect(b.container.logger).to.have.property('hasErrors').false;
