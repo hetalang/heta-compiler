@@ -72,16 +72,3 @@ r1 @Reaction {actors: s1=} := k1 * f5(1.1, k1) * pow(1.1, 2) * c1;
 
 k1 @Const = 0.1;
 
-// exports
-#export { format: JSON, filepath: output };
-#export { format: YAML, filepath: output };
-#export { format: Table, filepath: table, omitRows: 3, splitByClass: true };
-#export { format: XLSX, filepath: xlsx, omitRows: 3, splitByClass: true };
-#export { format: SBML, filepath: sbml, version: L2V4 };
-#export { format: DBSolve, filepath: dbsolve };
-#export { format: SLV, filepath: slv };
-#export { format: HetaCode, filepath: heta };
-#export { format: Simbio, filepath: simbio };
-#export { format: Mrgsolve, filepath: mrgsolve };
-#export { format: Matlab, filepath: matlab };
-#export { format: Julia, filepath: julia };

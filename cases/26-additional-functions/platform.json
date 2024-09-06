@@ -8,5 +8,8 @@
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "JSON", "filepath": "output" }
+  ]
 }

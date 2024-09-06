@@ -23,15 +23,3 @@ sw2 @CSwitcher {
 x1 [sw1]= 10;
 x1 [sw2]= 20;
 x1 [sw3]= 30;
-
-// exports
-#export { format: JSON, filepath: output };
-//#export { format: YAML };
-//#export { format: XLSX, omitRows: 3, splitByClass: true };
-//#export { format: SBML, version: L2V4 };
-//#export { format: SLV, eventsOff: false };
-//#export { format: DBSolve };
-//#export { format: Simbio };
-//#export { format: Mrgsolve };
-//#export { format: Matlab };
-//#export { format: Julia };

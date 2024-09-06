@@ -8,5 +8,11 @@
   "importModule": {
     "type": "heta",
     "source": "src/index.heta"
-  }
+  },
+  "export": [
+    { "format": "JSON", "filepath": "output" },
+    { "format": "YAML", "filepath": "output" },
+    { "format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true },
+    { "format": "Julia", "filepath": "julia" }
+  ]
 }

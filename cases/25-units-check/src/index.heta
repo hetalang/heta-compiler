@@ -33,15 +33,3 @@ k21 @Const = 1 {units: metre};
 k22 @Const = 1 {units: mole};
 y21 @Record {units: metre^3} := k21^3 + xxx(1.1*2.2, k21);
 y22 @Record {units: metre^3} := k21^3 + zzz(k21, 3.1415);
-
-// exports
-#export { format: JSON, filepath: output };
-//#export { format: YAML };
-//#export { format: XLSX, omitRows: 3, splitByClass: true };
-//#export { format: SBML, version: L2V4 };
-//#export { format: SLV, eventsOff: false };
-//#export { format: DBSolve };
-//#export { format: Simbio };
-//#export { format: Mrgsolve };
-//#export { format: Matlab };
-//#export { format: Julia };

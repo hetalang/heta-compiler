@@ -17,6 +17,3 @@ p1 [xxx]= null;
 p1 {units: null};
 
 null @Record 'This is title' .= 1;
-
-// exports
-#export { format: JSON, filepath: output };
