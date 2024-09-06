@@ -23,8 +23,7 @@ describe('Testing "cases/12-to-sbml"', () => {
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      },
-      export: null
+      }
     };
     b = new Builder(declaration, 'cases/12-to-sbml');
     //console.log(b);

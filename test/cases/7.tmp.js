@@ -22,8 +22,7 @@ describe('Testing "cases/7-importNS"', () => {
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      },
-      export: null
+      }
     };
     b = new Builder(declaration, 'cases/7-importNS');
     //console.log(b);

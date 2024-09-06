@@ -41,8 +41,7 @@ describe('Testing "cases/0-hello-world"', () => {
       importModule: {
         type: 'heta',
         source: 'src/index.heta'
-      },
-      export: null
+      }
     };
     b = new Builder(declaration, 'cases/0-hello-world');
     //console.log(b);
