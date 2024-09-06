@@ -60,10 +60,3 @@ namespace mod1 begin
     repeatCount: 3
   };
 end
-
-#export {spaceFilter: mod1, filepath: mod1_sbml, format: SBML};
-#export {spaceFilter: mod1, filepath: mod1_simbio, format: Simbio};
-#export {spaceFilter: mod1, filepath: json, format: JSON};
-#export {spaceFilter: mod1, filepath: yaml, format: YAML};
-#export {spaceFilter: mod1, filepath: mod1_slv, format: DBSolve};
-#export {spaceFilter: mod1, filepath: mod1_mrg, format: Mrgsolve};

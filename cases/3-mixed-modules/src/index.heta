@@ -19,5 +19,3 @@ include page.md type md with {
   id: yyy,
   title: hhh
 };
-
-#export {format: YAML, filepath: yaml};

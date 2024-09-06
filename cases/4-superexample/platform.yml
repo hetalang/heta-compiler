@@ -7,3 +7,22 @@ options:
 importModule:
   type: heta
   source: src/index.heta
+export:
+  - format: SBML
+    filepath: mod1_sbml
+    spaceFilter: mod1
+  - format: Simbio
+    filepath: mod1_simbio
+    spaceFilter: mod1
+  - format: JSON
+    filepath: json
+    spaceFilter: mod1
+  - format: YAML
+    filepath: yaml
+    spaceFilter: mod1
+  - format: DBSolve
+    filepath: mod1_slv
+    spaceFilter: mod1
+  - format: Mrgsolve
+    filepath: mod1_mrg
+    spaceFilter: mod1
