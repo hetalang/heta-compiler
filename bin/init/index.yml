@@ -5,8 +5,4 @@
     id: p1
     assignments:
         start_: 1
--
-    action: export
-    format: SBML
-    filepath: output_sbml
-    version: L2V4
+

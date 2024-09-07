@@ -10,15 +10,3 @@ include ./qsp-units.heta;
 // include addon.yml type yaml;
 
 p1 @Record .= 1;
-
-// exports
-#export { format: JSON, filepath: output };
-//#export { format: YAML };
-//#export { format: XLSX, omitRows: 3, splitByClass: true };
-//#export { format: SBML, version: L2V4 };
-//#export { format: SLV, eventsOff: false };
-//#export { format: DBSolve };
-//#export { format: Simbio };
-//#export { format: Mrgsolve };
-//#export { format: Matlab };
-//#export { format: Julia };

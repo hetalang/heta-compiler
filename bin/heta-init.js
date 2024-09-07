@@ -35,7 +35,19 @@ const defaultPlatform = {
   importModule: {
     type: 'heta',
     source: 'src/index.heta'
-  }
+  },
+  export: [
+    '{ format: JSON, filepath: output.json }',
+    '#{ format: YAML }',
+    '#{ format: XLSX, omitRows: 3, splitByClass: true }',
+    '#{ format: SBML, version: L2V4 }',
+    '#{ format: SLV, eventsOff: false }',
+    '#{ format: DBSolve }',
+    '#{ format: Simbio }',
+    '#{ format: Mrgsolve }',
+    '#{ format: Matlab }',
+    '#{ format: Julia }'
+  ]
 };
 
 program
@@ -51,7 +63,7 @@ let opts = program.opts();
 
 // initialize file paths
 let targetDir = path.resolve(args[0] || '.');
-let filePath = path.join(targetDir, 'platform.json');
+let filePath = path.join(targetDir, 'platform.yml');
 console.log('Creating a template platform in directory: "' + targetDir + '"...');
 
 // directory does not exist
@@ -69,11 +81,10 @@ if(!opts.force && fs.existsSync(filePath)){
 }
 
 // silent mode
-if(opts.silent){
+if (opts.silent) {
   let platform = defaultPlatform;
 
   // saving files
-  fs.outputJsonSync(filePath, platform, {spaces: 2});
   // saving .gitignore
   fs.copySync(
     path.join(__dirname, './init/template.gitignore'),
@@ -84,6 +95,27 @@ if(opts.silent){
     path.join(__dirname, './init/template.gitattributes'),
     path.join(targetDir, '.gitattributes')
   );
+  // create files in src
+  let hetaIndexFile = path.join(targetDir, 'src', 'index.heta');
+  fs.copySync(
+    path.join(__dirname, './init/index0.heta'),
+    hetaIndexFile
+  );
+
+  // saving qsp-units.heta and qsp-functions.heta
+  fs.copySync(
+    path.join(__dirname, './init/qsp-units.heta'),
+    path.join(targetDir, 'src/qsp-units.heta')
+  );
+  fs.copySync(
+    path.join(__dirname, './init/qsp-functions.heta'),
+    path.join(targetDir, 'src/qsp-functions.heta')
+  );
+
+  //fs.outputJsonSync(filePath, platform, {spaces: 2});
+  let json = JSON.stringify(platform, null, 2);
+  let yaml = json.replace(/"/g, '');
+  fs.writeFileSync(filePath, yaml);
 
   console.log('Platform template is created in silent mode.');
   console.log('DONE.');
@@ -203,6 +235,9 @@ prompt(questions)
       }
     }
 
+    // add export formats
+    platform.export = defaultPlatform.export;
+
     // saving qsp-units.heta and qsp-functions.heta
     fs.copySync(
       path.join(__dirname, './init/qsp-units.heta'),
@@ -213,7 +248,10 @@ prompt(questions)
       path.join(targetDir, 'src/qsp-functions.heta')
     );
     // saving platform file
-    fs.outputJsonSync(filePath, platform, {spaces: 2});
+    //fs.outputJsonSync(filePath, platform, {spaces: 2});
+    let json = JSON.stringify(platform, null, 2);
+    let yaml = json.replace(/"/g, '');
+    fs.writeFileSync(filePath, yaml);
     // saving .gitignore
     fs.copySync(
       path.join(__dirname, './init/template.gitignore'),
