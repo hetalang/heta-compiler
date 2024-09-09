@@ -3,7 +3,7 @@ const { Builder } = require('../../src');
 const { expect } = require('chai');
 
 describe('General argument checking', () => {
-  const b = new Builder({importModule: {}});
+  const b = new Builder();
   const p = b.container;
 
   it('Create JSON Export directly', () => {

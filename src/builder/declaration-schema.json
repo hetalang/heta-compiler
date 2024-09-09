@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/schema#",
   "description" : "Describes platform.json file in Heta compiler.",
   "type": "object",
-  "required": ["options", "importModule"],
+  "required": ["options", "importModule", "export"],
   "additionalProperties": true,
   "properties": {
     "id": {"type": "string"},
@@ -47,6 +47,7 @@
     },
     "importModule": {
       "type": "object",
+      "default": {"type": "heta", "source": "index.heta"},
       "additionalProperties": true,
       "properties": {
         "type": {"type": "string", "enum": ["heta", "table", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
@@ -55,22 +56,20 @@
         "omitRows": { "type": "integer", "minimum": 0 }
       }
     },
-    "export": { "oneOf": [
-      { "type": "null" },
-      {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "required": ["format"],
-          "additionalProperties": true,
-          "properties": {
-            "id": { "type": "string" },
-            "format": { "type": "string" },
-            "filepath": { "type": "string" },
-            "spaceFilter": { "type": "string" }
-          }
+    "export": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": ["format"],
+        "additionalProperties": true,
+        "properties": {
+          "id": { "type": "string" },
+          "format": { "type": "string" },
+          "filepath": { "type": "string" },
+          "spaceFilter": { "type": "string" }
         }
       }
-    ]}
+    }
   }
 }

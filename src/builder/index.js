@@ -34,63 +34,65 @@ const { StdoutTransport } = require('../logger');
  * @property ... Other properties inherit from `declaration` object, see 
  *   [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references?id=declaration-file-format}
  * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
- * @property {object[]} export Storage for `_Export` instances.
+ * @property {object} exportClasses the same as `_exportClasses` but bound to this builder.
+ * @property {object[]} exportArray Storage for `_Export` instances.
  */
 class Builder {
-  constructor(declaration, coreDirname = '.'){
+  constructor(declaration = {}, coreDirname = '.') {
+
     // create container
     this.container = new Container();
     this.container._builder = this; // back reference to parent builder
-    this.export = []; // storing Export objects
-    this.exportClasses = {}; // storing Export classes bound to builder (XXX: maybe it must be static)
 
     // set transport and logger
-    this.logger = this.container.logger;
-    let minLogLevel = declaration?.options?.logLevel || 'info';
-    this.logger.addTransport(new StdoutTransport(minLogLevel));
+    let logger = this.logger = this.container.logger;
+    let minLogLevel = declaration?.options?.logLevel || 'info'; // use logLevel before declaration check
+    logger.addTransport(new StdoutTransport(minLogLevel));
 
-    // check based on schema 
-    // XXX: move to heta-build.js ?
+    // check based on schema, use default values from schema
     let validate = ajv.compile(declarationSchema);
     let valid = validate(declaration);
     if (!valid) {
       // convert validation errors to heta errors
       validate.errors.forEach((x) => {
-        this.logger.error(`${x.dataPath} ${x.message}`, {type: 'BuilderError'});
+        logger.error(`${x.dataPath} ${x.message}`, {type: 'BuilderError'});
       });
       throw new HetaLevelError('Wrong structure of platform file.');
     }
 
-    // file paths
+    // assign from declaration
     Object.assign(this, declaration);
+
+    // resolve file paths to absolute
     this._coreDirname = path.resolve(coreDirname);
     this._distDirname = path.resolve(coreDirname, declaration.options.distDir);
     this._metaDirname = path.resolve(coreDirname, declaration.options.metaDir);
     this._logPath = path.resolve(coreDirname, declaration.options.logPath);
 
-    this.logger.info(`Builder initialized in directory "${this._coreDirname}".`);
-    if (this.id) this.logger.info(`Platform id: "${this.id}"`);
+    logger.info(`Builder initialized in directory "${this._coreDirname}".`);
+    if (this.id) logger.info(`Platform id: "${this.id}"`);
     
     // create "export" classes bound to this container
-    Builder._exportClasses && Object.entries(Builder._exportClasses).forEach(([key, _Class]) => {
+    Object.entries(Builder._exportClasses).forEach(([key, _Class]) => {
       this.exportClasses[key] = class extends _Class {};
       this.exportClasses[key].prototype._builder = this;
     });
     
     this.exportArray = [];
     // create "export" instances
-    declaration.export && declaration.export.forEach((exportItem) => {
+    declaration.export.forEach((exportItem) => {
       let ExportClass = this.exportClasses.hasOwnProperty(exportItem.format) 
         && this.exportClasses[exportItem.format];
       if (ExportClass) {
         this.exportArray.push(new ExportClass(exportItem));
       } else {
-        this.logger.error(`Export format "${exportItem.format}" is not supported.`, {type: 'BuilderError'});
+        logger.error(`Export format "${exportItem.format}" is not supported.`, {type: 'BuilderError'});
       }
     });
   }
 
   static _exportClasses = {}; // storing abstract Export classes
+  exportClasses = {}; // storing Export classes bound to builder
 
   /**
    * The method runs building of a platform declared with `Builder` object.

@@ -4,7 +4,7 @@ const program = new Command();
 const fs = require('fs');
 const path = require('path');
 const { Builder } = require('../src');
-const { load } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const semver = require('semver');
 const { version, bugs } = require('../package');
 const colors = require('colors');
@@ -70,7 +70,7 @@ async function main() {
     process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
-      let declarationFromFile = load(declarationText);
+      let declarationFromFile = YAML.load(declarationText);
       if (typeof declarationFromFile !== 'object'){
         throw new Error('Not an object.');
       }
@@ -82,9 +82,9 @@ async function main() {
   }
 
   // parse export
-  let export1 = opts.export?.replace(/:/g, ': ');
+  let exportYAML = '[' + opts.export?.replace(/:/g, ': ') + ']';
   try {
-    var formats = load(`[${export1}]`).map((x) => {
+    var exportItems = YAML.load(exportYAML).map((x) => {
       if (typeof x === 'string') {
         return { format: x };
       } else {
@@ -92,7 +92,7 @@ async function main() {
       }
     }); 
   } catch (e) {
-    process.stdout.write(`Wrong format of export option: "${formats}"\n`);
+    process.stdout.write(`Wrong format of export option: "${exportYAML}"\n`);
     process.exit(2); // BRAKE
   }
 
@@ -104,7 +104,7 @@ async function main() {
   opts.metaDir !== undefined && (declaration.options.metaDir = opts.metaDir);
   opts.source !== undefined && (declaration.importModule.source = opts.source);
   opts.type !== undefined && (declaration.importModule.type = opts.type);
-  opts.export !== undefined && (declaration.export = formats);
+  opts.export !== undefined && (declaration.export = exportItems);
 
   // === wrong version throws, if no version stated than skip ===
   let satisfiesVersion = declaration.builderVersion
