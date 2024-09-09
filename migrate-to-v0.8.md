@@ -11,7 +11,7 @@ See also [Migrate to v0.6](./migrate-to-v0.6), [Migrate to v0.7](./migrate-to-v0
 The most critical changes in heta-compiler refers to list of supported mathematical functions.
 It follows the new Heta standard v0.4.5, see details [here](https://hetalang.github.io/#/specifications/math?id=list-of-functions). 
 
-### Update of units check
+## Update of units check
 
 The new version extends checking units of measurements, namely it checks units consintency not only in left and right sides of expressions but also in ODEs which will be producesed after compilation.
 
