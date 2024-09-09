@@ -23,6 +23,8 @@ const reservedWords = [
 // TODO: this is part which will be removed later
 // invisible => deprecated => removed
 Container.prototype.export = function(q = {}, isCore = false) {
+  this.logger.warn('Inline #export is deprecated and will be removed in the future. Use export property in platform configuration.');
+  
   let { exportClasses, exportArray } = this._builder;
   if (q.format === undefined) {
     this.logger.error('Empty "format" option in export', {type: 'QError'});
@@ -36,9 +38,11 @@ Container.prototype.export = function(q = {}, isCore = false) {
 
   // create and push to storage
   let exportInstance = new exportClasses[q.format](q, isCore);
-  let ignoreInlineExport = this._builder.export?.length; // TODO: remove at version 0.10.0
+  let ignoreInlineExport = this._builder.export.length > 0; // TODO: remove at version 0.10.0
   if (!exportInstance.errored && !ignoreInlineExport) { // TODO: remove second check later
     exportArray.push(exportInstance);
+  } else if (!exportInstance.errored) {
+    this.logger.warn(`inline #export {format: ${q.format}} will not be applied because export was set in platform configuration.`);
   }
 
   return exportInstance;
