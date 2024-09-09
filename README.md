@@ -13,7 +13,12 @@
 
 To read the full documentation, visit the Heta project homepage: <https://hetalang.github.io/#/heta-compiler/>.
 
-See also [Migrate to v0.6](./migrate-to-v0.6), [Migrate to 0.7](./migrate-to-v0.7), [Migrate to 0.8](./migrate-to-v0.8).
+See also:
+
+- [Migrate to v0.6](./migrate-to-v0.6);
+- [Migrate to v0.7](./migrate-to-v0.7);
+- [Migrate to v0.8](./migrate-to-v0.8);
+- [Migrate to v0.9](./migrate-to-v0.9).
 
 ## Table of contents
 

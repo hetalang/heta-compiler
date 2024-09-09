@@ -1,6 +1,6 @@
 # Export formats
 
-Following [Heta specifications](specifications/) exporting to different formats can be done by `#export` action. The following formats are implemented in Heta compiler.
+The following formats are implemented in Heta compiler.
 
 - [JSON](#json)
 - [YAML](#yaml)
@@ -18,17 +18,55 @@ Following [Heta specifications](specifications/) exporting to different formats 
 
 See also [Features support table](#features-support)
 
-The general format for all export actions is the following:
+## Inline export (deprecated)
+
+Heta of versions 0.4.6 and earlier supported inline export.
+It was removed in version 0.5.0. 
+
+The inline export to different formats could be done in heta code by using `#export` action.
+
+Example 1
+
 ```heta
-#export {
-    format: JSON, // or other supported formats, required
-    filepath: path/to/output, // Relative or absolute path to generated directory or file, not required
-    spaceFilter: "regex-expression" // only filtered namespaces will be exported, see RegExp rules
-    ... // other options
-};
+#export {format: JSON, filepath: output};
 ```
 
-See also [Regular expressions' syntax](https://en.wikipedia.org/wiki/Regular_expression).
+Example 2
+
+```heta
+#export {format: SBML, version: L2V4, filepath: model};
+```
+
+Starting from heta-compiler version 0.9.0 the inline export is supported but it is deprecated.
+One should use `export` property in declaration file or use CLI `--export` property.
+See [migrate to v0.9](./migrate-to-v0.9.md) and [CLI references](./cli-references.md) for details.
+
+```yaml
+
+## Declaration exports
+
+There are two reccomended ways to export models in Heta compiler: using [`export` property](./cli-references.md#declaration-file-format) in declaration file or using CLI [`--export` property](./cli-references.md#running-build-with CLI-options). If no --export option is set, the compiler will use the `export` property from the declaration file.
+
+The `export` property is an array of objects with `format` property and other format-specific properties.
+
+```yaml
+{
+    export: [
+        {
+            format: JSON,
+            filepath: output,
+            omit: ['aux.wiki'],
+            noUnitsExpr: false,
+            spaceFilter: "nameless|another"
+        },
+        {
+            format: SBML,
+            version: L2V4,
+            filepath: model
+        }
+    ]
+}
+```
 
 ## JSON
 
@@ -48,14 +86,14 @@ Can work with `abstract` namespaces.
 
 **Example**
 
-```heta
-#export {
+```yaml
+{
     format: JSON,
     filepath: output, // save result in file "dist/output.json"
     omit: [aux.wiki], // omit aux.wiki properties from components
     noUnitsExpr: false, // save units in format UnitsExpr
     spaceFilter: "nameless|another"
-};
+}
 ```
 
 ## YAML
@@ -73,14 +111,14 @@ All options is the same as for [JSON format](#json).
 
 **Example**
 
-```heta
-#export {
+```yaml
+{
     format: YAML,
     filepath: output, // save result in file "dist/output.json"
     omit: [aux.wiki], // omit aux.wiki properties from components
     noUnitsExpr: false, // save units in format UnitsExpr
     spaceFilter: ".+" // all namespaces
-};
+}
 ```
 
 ## DBSolve
@@ -108,14 +146,14 @@ This is the updated version of SLV export format which supports compartment volu
 
 **Example**
 
-```heta
-#export {
+```yaml
+{
     format: DBSolve,
     filepath: model, // save results in file "dist/model.slv"
     spaceFilter: nameless, // namespace used for model generation
     powTransform: keep // use x^y and pow(x, y) without changes
     version: "25"
-};
+}
 ```
 
 ## SLV
@@ -145,15 +183,15 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 
 **Example**
 
-```heta
-#export {
+```yaml
+{
     format: SLV,
     filepath: model, // save results in file "dist/model.slv"
     spaceFilter: "^nameless$", // namespace used for model generation
     eventsOff: false, // all switchers will be transformed to DBSolve events
     powTransform: keep, // use x^y and pow(x, y) without changes
     groupConstBy: "tags[1]" // use the second tag
-};
+}
 ```
 
 ## SBML
@@ -173,13 +211,13 @@ Can work with `abstract` namespaces.
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: SBML,
     filepath: model, // save results in file "dist/model.xml"
     spaceFilter: nameless, // namespace used for model generation
     version: L2V4 // Level 2 Version 4
-};
+}
 ```
 
 ## Simbio
@@ -196,12 +234,12 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 **[filepath]/fun.m** : Auxilary mathematical functions to support Simbio code. This code should be placed in the same directory as simbio project.
 
 **Example:**
-```heta
-#export {
+```yaml
+{
     format: Simbio,
     filepath: model, // save results in directory "dist/model"
     spaceFilter: nameless // namespace used for model generation
-};
+}
 ```
 
 ## Mrgsolve
@@ -225,12 +263,12 @@ Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: Mrgsolve,
     filepath: model, // save results in file "dist/model.cpp"
     spaceFilter: nameless // namespace used for model generation
-};
+}
 ```
 
 ## Table
@@ -268,25 +306,24 @@ or
 
 **Example 1:**
 
-```heta
-// save a platform in CSV
-#export {
+```yaml
+{
     format: Table,
     filepath: platform
-};
+}
 ```
 
 **Example 2:**
 
-```heta
-#export {
+```yaml
+{
     format: Table,
     filepath: output, // save result in file "dist/output.xlsx"
     spaceFilter: nameless, // output everything from nameless namespace
     omitRows: 5, // include 5 empty rows between header and the first line
     omit: [aux.wiki], // omit aux.wiki properties from components
     bookType: html // save as HTML table
-};
+}
 ```
 
 ## XLSX
@@ -305,14 +342,14 @@ Can work with `abstract` namespaces.
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: XLSX,
     filepath: output, // save result in file "dist/output.xlsx"
     omitRows: 3, // include 3 empty rows between header and the first line
     omit: [aux.wiki], // omit aux.wiki properties from components
     splitByClass: true // split classed to different sheets
-};
+}
 ```
 
 ## Julia
@@ -330,12 +367,12 @@ Creation of Julia files (.jl).
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: Julia,
     filepath: julia_code, // save result in directory "dist/julia_code"
     spaceFilter: nameless // create model based on nameless namespace
-};
+}
 ```
 
 ## Matlab
@@ -358,12 +395,12 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: Matlab,
     filepath: matlab_code, // save result in directory "dist/matlab_code"
     spaceFilter: (nameless|another_one) // create two models based on namespaces
-};
+}
 ```
 
 ## Dot
@@ -381,11 +418,11 @@ Each namespace in separate file.
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: Dot,
     filepath: schemes, // save result in directory "dist/schemes"
-};
+}
 ```
 
 ## Summary
@@ -402,11 +439,11 @@ Summarize model content and present statistics of the model components. It also 
 
 **Example:**
 
-```heta
-#export {
+```yaml
+{
     format: Summary,
     filepath: summary, // save result in file "dist/summary.md"
-};
+}
 ```
 
 ## Features support

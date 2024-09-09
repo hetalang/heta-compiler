@@ -50,7 +50,7 @@ The default run of `heta build` (no options set, no configuration file) will do 
 
 CLI options allow setting specific options for build command. Use `heta build -h` to see the list of options.
 
-At the end of the command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run instead of shell working directory. Absolute and relative path are possible here. If the path not set the shell WD will be used as WD of Heta.
+At the end of the command line you can set **[dir]** path which will be used as a working directory (WD) of Heta compiler run instead of shell working directory. Absolute and relative path are possible here.
 
 List of `heta build` options:
 
@@ -63,14 +63,22 @@ List of `heta build` options:
 | --dist-dir | \<string\> | |  Set export directory path, where to store exported files. |
 | --meta-dir | \<string\> | |  Set meta directory path. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
-| -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.json5/.yml. |
+| -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
 | --skip-updates | | | Do not check available new version in npm. |
+| -e, --export | \<string\> | | List of export formats to run divided by colon. It should be in single quotation. It can be list of format names or objects including settings for export. see more details in [export-formats](./export-formats.md). |
 
 #### Example 1
 
 Let's our shell working directory is **/path/to/my-platform/**. Our Heta module is located in **src/table.xlsx** subdirectory and has a type xlsx (Excel sheet). To run compilation and save export files you should use the command.
 ```
 heta build --source src/table.xlsx --type xlsx
+```
+
+#### Example 2
+
+Setting export formats. The following command will create two export directories: **table** and **json** in **dist** directory.
+```
+heta build -e '{format:Table,bookType:xlsx,omitRows:3},JSON'
 ```
 
 #### Example 3
@@ -82,15 +90,15 @@ heta build y:/my-platform
 
 ### Running build with declaration file
 
-Declaration is a file in specific format which is located in working directory of modeling platform. As default it has a name **platform.json** and it is JSON formatted. It has two purposes:
+Declaration is a file in specific format which is located in working directory of modeling platform. As default it has a name **platform.yml** and it is JSON formatted. It has two purposes:
 - It annotates the developed modeling platform by some specific properties like id, notes, constibutors, repository, etc.
 - To customize compiler's behavior: files location, outputs, etc. It can be used instead of CLI options.
 
 >To use the arbitrary name of declaration file use `--declaration [filename]` option.
 
-The declaration file can be in one of the following formats:  [JSON](https://en.wikipedia.org/wiki/JSON), [JSON5](https://json5.org/), [YAML](https://en.wikipedia.org/wiki/YAML) with the same schema.
+The declaration file can be in one of the following formats:  [JSON](https://en.wikipedia.org/wiki/JSON), [YAML](https://en.wikipedia.org/wiki/YAML) with the same schema.
 
->It is a good idea to start the model development from creation of **platform.json** file. If declaration file is set you have not to use additional options in `heta build`.
+>It is a good idea to start the model development from creation of **platform.yml** file. If declaration file is set you have not to use additional options in `heta build`.
 
 To create a draft declaration file use ["heta init" command](#"heta-init"-command). To learn all properties of declaration file see [declaration file format](#declaration-file-format).
 
@@ -145,11 +153,13 @@ If we check the content of the created "test" directory we will see the followin
 
 **src/qsp-units.heta** : pre-defined list of units. You didn't have to use it. [qsp-units.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/qsp-units.heta ':target=_blank :download')
 
-**platform.json** : default declaration file.
+**platform.yml** : default declaration file.
 
 **.gitattributes, .gitignore** : templates to help working with [Git](https://git-scm.com/)
 
 ## "heta update" command
+
+*Experimental*
 
 `heta update` installs the latest version of heta-compiler available on NPM.
 
@@ -207,11 +217,12 @@ There are properties in declaration file which do not change compilation process
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
 | options.debug | boolean | --debug | false | Working in debugging mode. All parsed modules will be saved in JSON files in meta directory. |
 | options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
+| export | object[] | -e, --export | `[]` | List of export formats to run divided by colon. Each component includes `format` option and optional settings. see more details in [export-formats](./export-formats.md). |
 
 Using neither declaration file nor CLI options is equivalent to the following declaration:
 ```json
 {
-    "builderVersion": "*",
+    "builderVersion": "<current buider version>",
     "options": {
         "logMode": "error",
         "logPath": "build.log",
@@ -225,6 +236,7 @@ Using neither declaration file nor CLI options is equivalent to the following de
     "importModule": {
         "source": "index.heta",
         "type": "heta"
-    }
+    },
+    "export": []
 }
 ```
