@@ -14,7 +14,7 @@ class DotExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._builder.logger;
+    let { logger } = this._builder;
     let valid = DotExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }

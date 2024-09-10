@@ -15,7 +15,7 @@ class JSONExport extends AbstractExport {
     super(q, isCore);
     
     // check arguments here
-    let logger = this._builder.logger;
+    let { logger } = this._builder;
     let valid = JSONExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 

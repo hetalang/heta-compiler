@@ -14,7 +14,7 @@ class SummaryExport extends AbstractExport {
     super(q, isCore);
 
     // check arguments here
-    let logger = this._builder.logger;
+    let { logger } = this._builder;
     let valid = SummaryExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
