@@ -1,15 +1,13 @@
 const path = require('path');
-const fs = require('fs-extra');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
 const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
 const Container = require('../container');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
-const { StdoutTransport } = require('../logger');
 
 /**
- * Auxiliary class for performing compilation and storing a platform's options. 
+ * Auxiliary class for performing compilation and storing a platform's options.
  * The main purpose is a support of Heta compiler's CLI mode.
  *
  * The main method of the class is {@link Builder#run} which  
