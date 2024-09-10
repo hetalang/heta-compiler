@@ -1,7 +1,8 @@
 const path = require('path');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
-const ajv = new Ajv({ useDefaults: true }); //.addSchema(declarationSchema);
+const ajv = new Ajv({ useDefaults: true, allErrors: true }); //.addSchema(declarationSchema);
+require('ajv-errors')(ajv);
 const Container = require('../container');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
@@ -61,7 +62,7 @@ class Builder {
     if (!valid) {
       // convert validation errors to heta errors
       validate.errors.forEach((x) => {
-        logger.error(`${x.dataPath} ${x.message}`, {type: 'BuilderError'});
+        logger.error(`${x.message} (${x.dataPath})`, {type: 'BuilderError', params: x.params});
       });
       throw new HetaLevelError('Wrong structure of platform file.');
     }

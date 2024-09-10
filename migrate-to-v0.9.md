@@ -47,12 +47,21 @@ The old inline export syntax will be supported in the current version (as depric
     }
     ```
 
+1. Remove unnecessary properties from the declaration file if you used them before:
+    
+        - `options.skipExport`: use `export: []` instead
+        - `options.juliaOnly`: use `export: [{format: Julia}]` instead
+
+1. If you used command line options to supress export with `heta build --no-export` then you should use now `heta build --export ''`.
+
+If you used line options to build julia code only with `heta build --julia-only` then you should use now `heta build --export 'Julia'`.
+
 1. Remove all inline `#export` actions from the .heta files and add them to the `export` array in the declaration file.
 
 See details in [export formats](./export-formats.md)
 
     **Before**
-    ```heta
+    ```hetas
     // in index.heta
     #export {format: DBSolve, filepath: model, powTransform: function};
     #export {format: SBML, version: L3V2};
@@ -77,9 +86,5 @@ See details in [export formats](./export-formats.md)
         {"format": "SBML", "version": "L3V2"}
     ]
     ```
-
-1. If you used command line options to supress export with `heta build --no-export` then you should use now `heta build --export ''`.
-
-If you used line options to build julia code only with `heta build --julia-only` then you should use now `heta build --export 'Julia'`.
 
 1. Check building with `heta build` and make a commit if you use git.

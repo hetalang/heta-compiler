@@ -23,7 +23,10 @@
     "builderVersion": {"type": "string", "default": "*"},
     "options": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": {
+        "not": true,
+        "errorMessage": "${0#} is unknown key in options"
+      },
       "properties": {
         "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
         "logPath": {"type": "string", "default": "build.log"},
