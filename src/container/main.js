@@ -117,7 +117,7 @@ class Container {
   load(q, isCore = false){
     // estimate action, default is upsert
     let actionName = q.action || 'upsert';
-    if (typeof this[actionName] !== 'function') {
+    if (!this[actionName] || typeof this[actionName] !== 'function') {
       this.logger.error(
         `Action #${actionName} is unknown and will be skipped.`,
         {type: 'QError', action: actionName}
@@ -147,11 +147,10 @@ class Container {
    * @returns {number} Total number of components + `UnitDef` + `Functiondef` + `Scenario`.
    */
   get length(){
-    return [...this.namespaceStorage]
-      .reduce((acc, x) => acc + x[1].size, 0)
-        + this.unitDefStorage.size // global elements
-        + this.functionDefStorage.size
-        + this.scenarioStorage.size;
+    return [...this.namespaceStorage].reduce((acc, x) => acc + x[1].size, 0) // number of components in all namespaces
+        + this.unitDefStorage.size // number of UnitDef
+        + this.functionDefStorage.size // number of FunctionDef
+        + this.scenarioStorage.size; // number of Scenario
   }
 
   /**
@@ -166,10 +165,7 @@ class Container {
     // knit functionDef
     this.functionDefStorage.forEach((fd) => fd.bind());
     // knit components, only for concrete namespace
-    this.namespaceStorage.forEach((ns) => {
-      // knit only concrete namespace
-      if (!ns.isAbstract) ns.knit();
-    });
+    this.namespaceStorage.forEach((ns) => !ns.isAbstract && ns.knit());
     // knit scenario
     this.scenarioStorage.forEach((sc) => sc.bind());
 

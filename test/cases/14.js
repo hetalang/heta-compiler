@@ -1,6 +1,6 @@
 /* global describe, it */
 
-const { Builder } = require('../../src/builder');
+const { Builder } = require('../../src');
 const { expect, use } = require('chai');
 
 const json_correct = require('../../cases/14-sbml-module/master/output.json');

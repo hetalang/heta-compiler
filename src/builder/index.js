@@ -38,8 +38,12 @@ const { StdoutTransport } = require('../logger');
  * @property {object[]} exportArray Storage for `_Export` instances.
  */
 class Builder {
-  constructor(declaration = {}, coreDirname = '.') {
-
+  constructor(
+    declaration = {},
+    coreDirname = '.',
+    fileReadHandler = (fn) => fs.readFileSync(fn), // return text
+    fileWriteHandler = (fn, text) => fs.outputFileSync(fn, text) // return undefined
+  ) {
     // create container
     this.container = new Container();
     this.container._builder = this; // back reference to parent builder
@@ -48,6 +52,10 @@ class Builder {
     let logger = this.logger = this.container.logger;
     let minLogLevel = declaration?.options?.logLevel || 'info'; // use logLevel before declaration check
     logger.addTransport(new StdoutTransport(minLogLevel));
+
+    // file handlers
+    this.fileReadHandler = fileReadHandler;
+    this.fileWriteHandler = fileWriteHandler;
 
     // check based on schema, use default values from schema
     let validate = ajv.compile(declarationSchema);
@@ -115,12 +123,11 @@ class Builder {
    * @method Builder#run
    * 
    */
-  run(){
+  run() {
     this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
     
     // 1. Parsing
-    let fileHandler = (filename) => fs.readFileSync(filename);
-    let ms = new ModuleSystem(this.container.logger, fileHandler);
+    let ms = new ModuleSystem(this.logger, this.fileReadHandler);
     let absFilename = path.join(this._coreDirname, this.importModule.source);
     ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
 
@@ -130,7 +137,7 @@ class Builder {
         let relPath = path.relative(this._coreDirname, name + '.json');
         let absPath = path.join(this._metaDirname, relPath);
         let str = JSON.stringify(ms.moduleCollection[name], null, 2);
-        fs.outputFileSync(absPath, str);
+        this.fileWriteHandler(absPath, str);
         this.logger.info(`Meta file was saved to ${absPath}`);
       });
     }
@@ -187,7 +194,7 @@ class Builder {
           .join('\n');  
       }
 
-      fs.outputFileSync(this._logPath, logs);
+      this.fileWriteHandler(this._logPath, logs);
       this.logger.info(`All logs was saved to file: "${this._logPath}"`);
     }
     return;
@@ -206,7 +213,7 @@ class Builder {
 }
 
 function _makeAndSave(exportItem, pathPrefix) {
-  let { logger } = exportItem._builder;
+  let { logger, fileWriteHandler } = exportItem._builder;
   let absPath = path.resolve(pathPrefix, exportItem.filepath);
   let msg = `Exporting to "${absPath}" of format "${exportItem.format}"...`;
   logger.info(msg);
@@ -214,7 +221,7 @@ function _makeAndSave(exportItem, pathPrefix) {
   exportItem.make().forEach((out) => {
     let filePath = [absPath, out.pathSuffix].join('');
     try {
-      fs.outputFileSync(filePath, out.content);
+      fileWriteHandler(filePath, out.content);
     } catch (err) {
       let msg =`Heta compiler cannot export to file: "${err.path}": ${err.message}`;
       logger.error(msg, {type: 'ExportError'});
