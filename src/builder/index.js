@@ -41,17 +41,17 @@ class Builder {
   constructor(
     declaration = {},
     coreDirname = '.',
-    fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // return text
-    fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); } // return undefined
+    fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // must return text
+    fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); }, // must return undefined
+    transportArray = [] // Builder-level Transport
   ) {
     // create container
     this.container = new Container();
     this.container._builder = this; // back reference to parent builder
 
-    // set transport and logger
+    // set logger and transports
     let logger = this.logger = this.container.logger;
-    let minLogLevel = declaration?.options?.logLevel || 'info'; // use logLevel before declaration check
-    logger.addTransport(new StdoutTransport(minLogLevel));
+    transportArray.forEach((...args) => logger.addTransport(...args));
 
     // file handlers
     this.fileReadHandler = fileReadHandler;

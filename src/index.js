@@ -2,7 +2,7 @@ const { Builder } = require('./builder');
 const Container = require('./container');
 const coreItems = require('./container/core-items');
 const ModuleSystem = require('./module-system');
-const { Transport } = require('./logger');
+const { Transport, StdoutTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 const nunjucks = require('nunjucks');
 
@@ -60,4 +60,5 @@ module.exports = {
   ModuleSystem,
   Transport,
   HetaLevelError,
+  StdoutTransport
 };

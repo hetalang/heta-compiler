@@ -3,7 +3,7 @@ const { Command } = require('commander');
 const program = new Command();
 const fs = require('fs-extra');
 const path = require('path');
-const { Builder } = require('../src');
+const { Builder, StdoutTransport } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const semver = require('semver');
 const { version, bugs } = require('../package');
@@ -115,11 +115,14 @@ async function main() {
     process.exit(2); // BRAKE
   }
 
+  let minLogLevel = declaration?.options?.logLevel || 'info'; // set logLevel before declaration check
+
   let builder = new Builder(
     declaration,
     targetDir,
     fs.readFileSync,
-    fs.outputFileSync
+    fs.outputFileSync,
+    [new StdoutTransport(minLogLevel)]
   ).run();
 
   return builder;

@@ -48,7 +48,7 @@ describe('Testing warnings of checkUnits()', () => {
     p = new Container();
     p.loadMany(qArr);
     p.knitMany();
-    console.log(p.defaultLogs); // TEMP
+    //console.log(p.defaultLogs); // TEMP
     expect(p.logger).to.have.property('hasErrors').false;
     p.defaultLogs.length = 0; // RESET
   });
