@@ -3,9 +3,7 @@ const { Builder } = require('../../src/builder');
 const { expect, use } = require('chai');
 const chaiXml = require('chai-xml');
 use(chaiXml);
-//const { load } = require('js-yaml');
 const fs = require('fs-extra');
-//const { slvParse } = require('slv-utils');
 
 const sbml_correct = fs.readFileSync('cases/12-to-sbml/master/sbml/first.xml','utf8');
 const json_correct = require('../../cases/12-to-sbml/master/output.json');
@@ -25,7 +23,7 @@ describe('Testing "cases/12-to-sbml"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/12-to-sbml');
+    b = new Builder(declaration, 'cases/12-to-sbml', fs.readFileSync, () => {});
     //console.log(b);
   });
 

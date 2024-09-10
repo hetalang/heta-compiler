@@ -15,7 +15,7 @@ use(chaiXml);
 const { load } = require('js-yaml');
 const fs = require('fs-extra');
 const { slvParse } = require('slv-utils');
-const XLSX = require('xlsx'); 
+const XLSX = require('xlsx');
 
 const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4/mm.xml','utf8');
 const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/mm.xml','utf8');
@@ -52,7 +52,7 @@ describe('Testing "cases/0-hello-world"', () => {
         {format: 'Mrgsolve', spaceFilter: '^mm$'},
         {format: 'Julia', spaceFilter: '^mm$'}]
     };
-    b = new Builder(declaration, 'cases/0-hello-world');
+    b = new Builder(declaration, 'cases/0-hello-world', fs.readFileSync, () => {});
   });
 
   it('Run include', () => {

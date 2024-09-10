@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const { Builder } = require('../../src/builder');
 const outputNameless = require('./output-nameless');
 const outputOne = require('./output-one');
+const fs = require('fs-extra');
 
 describe('Integral test of correct xlsx module', () => {
   it('Create platform for single XLSX sheet.', () => {
@@ -18,7 +19,7 @@ describe('Integral test of correct xlsx module', () => {
         omitRows: 2
       }
     };
-    let b = new Builder(declaration, __dirname);
+    let b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
     b.run();
     let resultNameless = b.container.namespaceStorage.get('nameless').toQArr(true);
     expect(resultNameless).to.be.deep.equal(outputNameless);
@@ -38,7 +39,7 @@ describe('Integral test of correct xlsx module', () => {
         sheet: 1
       }
     };
-    let b = new Builder(declaration, __dirname);
+    let b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
     b.run();
     let resultNameless = b.container.namespaceStorage.get('nameless').toQArr(true);
     expect(resultNameless).to.be.deep.equal(outputNameless);
@@ -56,7 +57,7 @@ describe('Integral test of correct xlsx module', () => {
         sheet: 9
       }
     };
-    let b = new Builder(declaration, __dirname);
+    let b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
     
     b.run();
     expect(b.container.hetaErrors()).to.be.lengthOf(1);

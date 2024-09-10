@@ -3,7 +3,6 @@ const { expect } = require('chai');
 const ModuleSystem = require('../../src/module-system');
 const { Logger } = require('../../src/logger');
 const path = require('path');
-//const { writeFileSync } = require('fs');
 const expected = require('./expected');
 const noImportOutput = require('./no-include');
 const fs = require('fs');
@@ -26,7 +25,6 @@ describe('Run normal ModuleSystem.', () => {
     let ms = new ModuleSystem(logger, (filename) => fs.readFileSync(filename));
     let filepath = path.join(__dirname, './normal-a.heta');
     let mdl = ms.addModuleDeep(filepath, 'heta', {});
-    //writeFileSync('res0-new.json', JSON.stringify(ms, null, 2));
 
     expect(mdl).to.be.with.a('Array').lengthOf(3);
 
@@ -34,7 +32,6 @@ describe('Run normal ModuleSystem.', () => {
     expect(Object.keys(ms.graph.map)).to.have.property('length', 5);
 
     let arr = ms.integrate();
-    //writeFileSync('res-new.json', JSON.stringify(arr, null, 2));
     expect(arr).to.be.deep.equal(expected);
   });
 });

@@ -41,8 +41,8 @@ class Builder {
   constructor(
     declaration = {},
     coreDirname = '.',
-    fileReadHandler = (fn) => fs.readFileSync(fn), // return text
-    fileWriteHandler = (fn, text) => fs.outputFileSync(fn, text) // return undefined
+    fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // return text
+    fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); } // return undefined
   ) {
     // create container
     this.container = new Container();
@@ -197,7 +197,8 @@ class Builder {
       this.fileWriteHandler(this._logPath, logs);
       this.logger.info(`All logs was saved to file: "${this._logPath}"`);
     }
-    return;
+
+    return this;
   }
 
   /**

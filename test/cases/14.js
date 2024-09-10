@@ -2,6 +2,7 @@
 
 const { Builder } = require('../../src');
 const { expect, use } = require('chai');
+const fs = require('fs-extra');
 
 const json_correct = require('../../cases/14-sbml-module/master/output.json');
 
@@ -22,7 +23,7 @@ describe('Case #14: testing SBML module with units', () => {
       export: [
         {format: 'JSON'}
       ]
-    }, 'cases/14-sbml-module');
+    }, 'cases/14-sbml-module', fs.readFileSync, () => {});
     b.run();
     expect(b.container.logger).to.have.property('hasErrors').false;
   });

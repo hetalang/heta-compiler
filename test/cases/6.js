@@ -28,7 +28,7 @@ describe('Testing "cases/6-import"', () => {
         {format: 'SBML', spaceFilter: 'model'},
       ]
     };
-    b = new Builder(declaration, 'cases/6-import');
+    b = new Builder(declaration, 'cases/6-import', fs.readFileSync, () => {});
     //console.log(b);
   });
 

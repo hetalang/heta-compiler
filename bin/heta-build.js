@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const { Command } = require('commander');
 const program = new Command();
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const { Builder } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
@@ -115,8 +115,12 @@ async function main() {
     process.exit(2); // BRAKE
   }
 
-  let builder = new Builder(declaration, targetDir);
-  builder.run();
+  let builder = new Builder(
+    declaration,
+    targetDir,
+    fs.readFileSync,
+    fs.outputFileSync
+  ).run();
 
   return builder;
 }
