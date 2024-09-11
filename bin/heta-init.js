@@ -37,16 +37,19 @@ const defaultPlatform = {
     source: 'src/index.heta'
   },
   export: [
-    '{ format: JSON, filepath: output.json }',
-    '#{ format: YAML }',
-    '#{ format: XLSX, omitRows: 3, splitByClass: true }',
+    '{ format: JSON, omit: [], noUnitsExpr: false }',
+    '#{ format: YAML, omit: [], noUnitsExpr: false }',
+    '#{ format: DBSolve, powTransform: keep, version: 26 }',
+    '#{ format: SLV, eventsOff: false, powTransform: keep, version: 26 }',
     '#{ format: SBML, version: L2V4 }',
-    '#{ format: SLV, eventsOff: false }',
-    '#{ format: DBSolve }',
     '#{ format: Simbio }',
     '#{ format: Mrgsolve }',
+    '#{ format: Table, omitRows: 0, omit: [], bookType: csv, splitByClass: false }',
+    '#{ format: XLSX, omitRows: 0, omit: [], splitByClass: true }',
+    '#{ format: Julia }',
     '#{ format: Matlab }',
-    '#{ format: Julia }'
+    '#{ format: Dot }',
+    '#{ format: Summary }'
   ]
 };
 
