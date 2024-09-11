@@ -77,7 +77,9 @@ class Builder {
       : true;
     if (!satisfiesVersion) {
       let msg = `Version "${declaration.builderVersion}" stated in declaration file is not supported by the heta-compiler ${version}.`;
-      throw new HetaLevelError(msg);
+      logger.error(msg, {type: 'BuilderError'});
+
+      throw new HetaLevelError('Version incompatibility.');
     }
 
     // assign from declaration

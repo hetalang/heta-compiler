@@ -132,7 +132,7 @@ Promise.all([
   }
 }).catch((error) => {
   if (error.name === 'HetaLevelError') {
-    process.stdout.write(error.message + '\nSTOP!\n');
+    process.stdout.write('Error: ' + error.message + '\nSTOP!\n');
     process.exit(2);
   } else {
     process.stdout.write(contactMessage + '\n');
