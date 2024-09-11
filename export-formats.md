@@ -13,7 +13,7 @@ The following formats are implemented in Heta compiler.
 - [XLSX](#xlsx)
 - [Julia](#julia)
 - [Matlab](#matlab)
-- [DOT](#dot)
+- [Dot](#dot)
 - [Summary](#summary)
 
 See also [Features support table](#features-support)
