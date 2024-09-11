@@ -7,6 +7,8 @@ ajv.addKeyword({keyword: "example"});
 const Container = require('../container');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
+const semver = require('semver');
+const { version } = require('../../package');
 
 /**
  * Auxiliary class for performing compilation and storing a platform's options.
@@ -45,6 +47,7 @@ class Builder {
     fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); }, // must return undefined
     transportArray = [] // Builder-level Transport
   ) {
+
     // create container
     this.container = new Container();
     this.container._builder = this; // back reference to parent builder
@@ -66,6 +69,15 @@ class Builder {
         logger.error(`${x.message} (${x.dataPath})`, {type: 'BuilderError', params: x.params});
       });
       throw new HetaLevelError('Wrong structure of platform file.');
+    }
+    
+    // === wrong version throws, if no version stated than skip ===
+    let satisfiesVersion = declaration.builderVersion
+      ? semver.satisfies(version, declaration.builderVersion)
+      : true;
+    if (!satisfiesVersion) {
+      let msg = `Version "${declaration.builderVersion}" stated in declaration file is not supported by the heta-compiler ${version}.`;
+      throw new HetaLevelError(msg);
     }
 
     // assign from declaration

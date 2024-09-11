@@ -5,8 +5,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const { Builder, StdoutTransport } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
-const semver = require('semver');
-const { version, bugs } = require('../package');
+const { bugs } = require('../package');
 const colors = require('colors');
 const { printVersionMessage } = require('./print-version-message');
 
@@ -105,15 +104,6 @@ async function main() {
   opts.source !== undefined && (declaration.importModule.source = opts.source);
   opts.type !== undefined && (declaration.importModule.type = opts.type);
   opts.export !== undefined && (declaration.export = exportItems);
-
-  // === wrong version throws, if no version stated than skip ===
-  let satisfiesVersion = declaration.builderVersion
-    ? semver.satisfies(version, declaration.builderVersion)
-    : true;
-  if (!satisfiesVersion) {
-    process.stdout.write(`Version "${declaration.builderVersion}" stated in declaration file is not supported by the builder.\n`);
-    process.exit(2); // BRAKE
-  }
 
   let minLogLevel = declaration?.options?.logLevel || 'info'; // set logLevel before declaration check
 
