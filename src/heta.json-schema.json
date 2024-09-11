@@ -64,6 +64,7 @@
       "allOf": [
         { "$ref": "#/definitions/Effector" },
         {
+          "type": "object",
           "properties": {
             "stoichiometry": { "type": "number" }
           }
@@ -365,7 +366,7 @@
     },
 
     "ConstInternal": {"anyOf": [
-        { "allOf": [ { "$ref": "#/definitions/Const" }, { "required": ["num"] } ] },
+        { "allOf": [ { "$ref": "#/definitions/Const" }, { "type": "object", "required": ["num"] } ] },
         { "$ref": "#/definitions/ID" },
         { "type": "number" },
         { "type": "null" }

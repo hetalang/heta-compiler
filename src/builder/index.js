@@ -1,8 +1,9 @@
 const path = require('path');
 const declarationSchema = require('./declaration-schema');
 const Ajv = require('ajv');
-const ajv = new Ajv({ useDefaults: true, allErrors: true }); //.addSchema(declarationSchema);
+const ajv = new Ajv({ useDefaults: true, allErrors: true}); //.addSchema(declarationSchema);
 require('ajv-errors')(ajv);
+ajv.addKeyword({keyword: "example"});
 const Container = require('../container');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');

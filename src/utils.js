@@ -7,9 +7,9 @@
 const Ajv = require('ajv');
 const schema = require('./heta.json-schema');
 
-const ajv = new Ajv({allErrors: true, jsonPointers: true})
-  .addSchema(schema); // for Component instances
+const ajv = new Ajv({allErrors: true}).addSchema(schema); // for Component instances
 require('ajv-errors')(ajv);
+ajv.addKeyword({keyword: "example"});
 
 // return array of elements by the selector
 function uniqBy(array, selector = (x) => x) {
