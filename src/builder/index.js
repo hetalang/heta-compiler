@@ -85,11 +85,11 @@ class Builder {
     // assign from declaration
     Object.assign(this, declaration);
 
-    // resolve file paths to absolute
-    this._coreDirname = path.resolve(coreDirname);
-    this._distDirname = path.resolve(coreDirname, declaration.options.distDir);
-    this._metaDirname = path.resolve(coreDirname, declaration.options.metaDir);
-    this._logPath = path.resolve(coreDirname, declaration.options.logPath);
+    // all relative or absolute depending on coreDirname
+    this._coreDirname = coreDirname; // already normalized
+    this._distDirname = path.join(this._coreDirname, declaration.options.distDir); // TODO: HOW TO MAKE relative from absolute
+    this._metaDirname = path.join(this._coreDirname, declaration.options.metaDir);
+    this._logPath = path.join(this._coreDirname, declaration.options.logPath);
 
     logger.info(`Builder initialized in directory "${this._coreDirname}".`);
     if (this.id) logger.info(`Platform id: "${this.id}"`);
@@ -229,7 +229,7 @@ class Builder {
 
 function _makeAndSave(exportItem, pathPrefix) {
   let { logger, fileWriteHandler } = exportItem._builder;
-  let absPath = path.resolve(pathPrefix, exportItem.filepath);
+  let absPath = path.join(pathPrefix, exportItem.filepath);
   let msg = `Exporting to "${absPath}" of format "${exportItem.format}"...`;
   logger.info(msg);
 

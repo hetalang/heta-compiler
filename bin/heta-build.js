@@ -44,7 +44,7 @@ async function main() {
   //if (!opts.skipUpdates) await printVersionMessage();
 
   // set target directory of platform and check if exist
-  let targetDir = path.resolve(args[0] || '.');
+  let targetDir = path.normalize(args[0] || '.');
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(2); // BRAKE
@@ -66,7 +66,7 @@ async function main() {
     process.exit(2); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
-    process.stdout.write(`Running compilation with declaration file "${declarationFile}"...\n`);
+    process.stdout.write(`Running compilation with declaration file "${path.resolve(declarationFile)}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
       let declarationFromFile = YAML.load(declarationText);

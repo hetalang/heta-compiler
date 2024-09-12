@@ -65,7 +65,7 @@ let args = program.args;
 let opts = program.opts();
 
 // initialize file paths
-let targetDir = path.resolve(args[0] || '.');
+let targetDir = path.normalize(args[0] || '.');
 let filePath = path.join(targetDir, 'platform.yml');
 console.log('Creating a template platform in directory: "' + targetDir + '"...');
 

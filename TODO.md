@@ -33,13 +33,10 @@
 
 ## bugs
 
-
 ## features
 
-- atStart to exports: Matlab, DBSolve
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
   wait until Node.js 22 will be released
-- use `Component` as a subclass of `Top`
 - `include` statement is deprecated, use `#include` action (v0.8.0)
 - automatic creation of modifiers in SBML
 
@@ -50,7 +47,6 @@
 - updating properties with `one::s1.assignments.start_ 5.5;`
 - check and warning if core component was replaced
 - remove unnecessary rules in export
-- generation of 'platform.yml' by `heta init`
 - check file format for modules
 - add "ignoreCompartment" property in Species
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses

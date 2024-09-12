@@ -104,7 +104,7 @@ class ModuleSystem {
         if(typeof q.source !== 'string') {
           throw new TypeError(`Property "source" in "${filename}" must be string`);
         }
-        q.source = path.resolve(absDirPath, q.source);
+        q.source = path.join(absDirPath, q.source);
       });
 
     // push to moduleCollection
@@ -119,9 +119,7 @@ class ModuleSystem {
     return parsed;
   }
 
-  createModule(_filename, type, options = {}) {
-    let filename = path.resolve(_filename); // get abs path
-
+  createModule(filename, type, options = {}) {
     let tabNum = options.sheet !== undefined ? ('#' + options.sheet) : ''; // for xlsx only
     this.logger.info(`Reading module of type "${type}" from file "${filename}${tabNum}"...`);
 
