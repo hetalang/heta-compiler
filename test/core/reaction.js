@@ -5,6 +5,7 @@ const { expect } = require('chai');
 describe('Unit tests for Reaction.', () => {
   it('Check toQ.', () => {
     let simple = (new Reaction).merge({
+      id: 'r1',
       class: 'Reaction',
       actors: [
         {target: 's1', stoichiometry: -1},
@@ -18,7 +19,6 @@ describe('Unit tests for Reaction.', () => {
       assignments: { ode_: 'k1*s1' },
       units: 'umole/h'
     });
-    simple._id = 'r1';
 
     expect(simple.toQ()).to.be.deep.equal({
       class: 'Reaction',

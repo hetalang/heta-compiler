@@ -6,6 +6,7 @@ const { Species } = require('../../src/core/species');
 describe('Clone components', () => {
   it('clone @Record without rename', () => {
     let record = new Record().merge({
+      id: 'test_id',
       title: 'test title',
       notes: '**test** notes',
       tags: ['a', 'b', 'c'],
@@ -30,6 +31,7 @@ describe('Clone components', () => {
 
   it('clone @Record with rename', () => {
     let record = new Species().merge({
+      id: 'test_id',
       compartment: 'comp1',
       title: 'test title',
       aux: {x: 1.1, y: 'qwerty', z: {}},

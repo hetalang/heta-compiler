@@ -2,6 +2,35 @@ const { Record } = require('./record');
 const { UnitTerm } = require('./unit-term');
 const { Unit } = require('./unit');
 
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    compartment: {oneOf: [
+      { '$ref': '#/definitions/ID' },
+      { type: 'null' }
+    ]},
+    isAmount: {oneOf: [
+      {
+        description: 'If it is false then the value represents the concentration, i.e. normalized to compartment.',
+        enum: [true, false, 1, 0],
+        default: false
+      },
+      { type: 'null' }
+    ]}
+  },
+  definitions: {
+    ID: {
+      description: 'First character is letter, others are letter, digit or lodash.',
+      type: 'string',
+      minLength: 1,
+      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      example: 'x_12_'
+    }
+  }
+};
+
 /* 
   Species class
 
@@ -13,7 +42,7 @@ const { Unit } = require('./unit');
 class Species extends Record {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Species.isValid(q, logger);
 
     if (valid) {
@@ -83,11 +112,10 @@ class Species extends Record {
     return this.assignments.ode_ !== undefined
       || !this.isAmount;
   }
-  _references(){
-    let classSpecificRefs = [this.compartment];
-
-    return super._references()
-      .concat(classSpecificRefs);
+  _references() {
+    return super._references().concat([
+      this.compartment
+    ]);
   }
   /*
   Check units for left and right side of ODE
@@ -96,7 +124,7 @@ class Species extends Record {
   checkUnits() {
     super.checkUnits();
 
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
 
     // if not in processes do not check
     let processes = this.backReferences.map(x => x._process_);
@@ -162,6 +190,9 @@ class Species extends Record {
         new UnitTerm([{kind: 'mass'}, {kind: 'length', exponent: -3}])
       ];
     }
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

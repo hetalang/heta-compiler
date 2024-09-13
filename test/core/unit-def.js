@@ -5,14 +5,14 @@ const { expect } = require('chai');
 describe('Unit test for UnitDef', () => {
   const p = new Container();
   it('Error: Empty UnitDef', () => {
-    let simple = new p.classes.UnitDef();
+    let simple = new p.classes.UnitDef().merge({});
     
     expect(simple._container.logger).property('hasErrors').true;
     simple._container.logger.resetErrors();
   });
 
   it('Correct UnitDef', () => {
-    let simple = new p.classes.UnitDef({
+    let simple = new p.classes.UnitDef().merge({
       id: 'ud1',
       units: [
         {kind: 'g', multiplier: 1e3, exponent: 1},
@@ -40,7 +40,7 @@ describe('Unit test for UnitDef', () => {
   });
 
   it('Error: wrong input 1.', () => {
-    let simple1 = new p.classes.UnitDef({
+    let simple1 = new p.classes.UnitDef().merge({
       id: 'u1',
       units: ['xxx']
     });
@@ -50,7 +50,7 @@ describe('Unit test for UnitDef', () => {
   });
 
   it('Error: wrong input 2.', () => {
-    let simple2 = new p.classes.UnitDef({
+    let simple2 = new p.classes.UnitDef().merge({
       units: [{}]
     });
     expect(simple2._container.logger).to.has.property('hasErrors', true);
@@ -102,22 +102,22 @@ describe('Testing UnitDef with "terms"', () => {
   const p = new Container();
 
   it('Error: units without "units" and "terms"', () => {
-    let ud0 = new p.classes.UnitDef({id: 'ud0'});
+    let ud0 = new p.classes.UnitDef().merge({id: 'ud0'});
     expect(ud0).to.have.property('errored').true;
   });
 
   it('Error: units with "terms" only', () => {
-    let ud1 = new p.classes.UnitDef({id: 'ud1', terms: [{kind: 'time'}]});
+    let ud1 = new p.classes.UnitDef().merge({id: 'ud1', terms: [{kind: 'time'}]});
     expect(ud1).to.not.have.property('errored').true;
   });
 
   it('Error: units with "units" and "terms"', () => {
-    let ud2 = new p.classes.UnitDef({id: 'ud2', terms: [{kind: 'time'}], units: [{kind: 'litre'}]});
+    let ud2 = new p.classes.UnitDef().merge({id: 'ud2', terms: [{kind: 'time'}], units: [{kind: 'litre'}]});
     expect(ud2).to.have.property('errored').true;
   });
   
   it('UnitDef with empty "terms"', () => {
-    let ud3 = new p.classes.UnitDef({id: 'ud3', terms: []});
+    let ud3 = new p.classes.UnitDef().merge({id: 'ud3', terms: []});
     expect(ud3).to.not.have.property('errored').true;
   });
 });

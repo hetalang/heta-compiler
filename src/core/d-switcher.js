@@ -1,5 +1,26 @@
 const { _Switcher } = require('./_switcher');
 const { Expression } = require('./expression');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    trigger: {oneOf: [
+        { '$ref': '#/definitions/ExprString' },
+        { enum: [true, false, 1, 0] },
+        { type: 'null' }
+      ]
+    }
+  },
+  definitions: {
+    ExprString: {
+      description: 'Expression as string. Currently pattern does not analyze expressions.',
+      type: 'string',
+      minLength: 1,
+      pattern: '[a-zA-Z0-9. -+/*^()]*$'
+    }
+  }
+};
 
 /*
   DSwitcher class
@@ -13,7 +34,7 @@ const { Expression } = require('./expression');
 class DSwitcher extends _Switcher {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = DSwitcher.isValid(q, logger);
     
     if (valid) {
@@ -63,7 +84,7 @@ class DSwitcher extends _Switcher {
   }
   bind(namespace){
     super.bind(namespace);
-    let {logger, functionDefStorage} = this.namespace.container;
+    let {logger, functionDefStorage} = this._container;
 
     // get list of 
     this.trigger && this.trigger.dependOnNodes().forEach((node) => {
@@ -108,7 +129,7 @@ class DSwitcher extends _Switcher {
   Works only for bound switchers
   */
   checkUnits(){
-    let logger = this.namespace.container.logger;
+    let logger = this._container?.logger;
 
     if (typeof this.trigger !== 'undefined') { // skip empty
       let rightSideUnit = this.trigger.calcUnit(this);
@@ -116,6 +137,9 @@ class DSwitcher extends _Switcher {
         logger.warn(`Cannot calculate trigger units in "${this.index}".`);
       }
     }
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

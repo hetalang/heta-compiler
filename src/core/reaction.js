@@ -1,5 +1,62 @@
 const { Process, _Effector, Actor } = require('./process');
 const { UnitTerm } = require('./unit-term');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    reversible: {oneOf: [
+      { enum: [true, false, 1, 0], default: true },
+      { type: 'null' }
+    ]},
+    modifiers: {oneOf: [
+      {
+        type: 'array',
+        items: {
+          oneOf: [
+            { '$ref': '#/definitions/Effector' },
+            { '$ref': '#/definitions/ID' }
+          ]
+        }
+      },
+      { type: 'null' }
+    ]}
+  },
+  errorMessage: {
+    properties: {
+      modifiers:  'is not an array of ids or modifiers.'
+    }
+  },
+  definitions: {
+    Effector: {
+      description: 'Abstract class for modifiers and actors',
+      type: 'object',
+      required: ['target'],
+      properties: {
+        target: { '$ref': '#/definitions/ID' }
+      }
+    },
+    Actor: {
+      allOf: [
+        { '$ref': '#/definitions/Effector' },
+        {
+          type: 'object',
+          properties: {
+            stoichiometry: { type: 'number' }
+          }
+        }
+      ],
+      example: { target: 'x1', stoichiometry: -1 }
+    },
+    ID: {
+      description: 'First character is letter, others are letter, digit or lodash.',
+      type: 'string',
+      minLength: 1,
+      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      example: 'x_12_'
+    }
+  }
+};
 
 /*
   Reaction class
@@ -18,7 +75,7 @@ class Reaction extends Process {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Reaction.isValid(q, logger);
 
     if (valid) {
@@ -72,6 +129,9 @@ class Reaction extends Process {
       new UnitTerm([{kind: 'amount'}, {kind: 'time', exponent: -1}]),
       new UnitTerm([{kind: 'mass'}, {kind: 'time', exponent: -1}])
     ];
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

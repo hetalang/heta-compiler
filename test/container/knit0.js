@@ -34,6 +34,7 @@ describe('Check knitMany() for Species', () => {
       compartment: 'comp1'
     });
     c.knitMany();
+    console.log(c.hetaErrors());
     expect(c.hetaErrors()).to.be.lengthOf(1);
   });
   

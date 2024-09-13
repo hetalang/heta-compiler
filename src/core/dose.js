@@ -2,6 +2,12 @@ const { _Size } = require('./_size');
 const { Const } = require('./const');
 const { floor, min } = Math;
 
+const { ajv } = require('../utils');
+
+const schema = {
+  // TODO: add validation
+};
+
 /*
   Dose class
 */
@@ -13,7 +19,7 @@ class Dose extends _Size {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Dose.isValid(q, logger);
 
     if (valid) {
@@ -142,6 +148,9 @@ class Dose extends _Size {
     }
 
     return res;
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

@@ -6,7 +6,7 @@ describe('Unit test for Scenario', () => {
   const c = new Container();
 
   it('Minimal correct scenario', () => {
-    let scn1 = new c.classes.Scenario({
+    let scn1 = new c.classes.Scenario().merge({
       id: 'scn1',
       tspan: [0, 120]
     });
@@ -25,7 +25,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Maximal correct scenario', () => {
-    let scn2 = new c.classes.Scenario({
+    let scn2 = new c.classes.Scenario().merge({
       id: 'scn2',
       model: 'mouse',
       parameters: {weight: 20, kel: 1e-3},
@@ -51,7 +51,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Wrong "model" property', () => {
-    let scn3 = new c.classes.Scenario({
+    let scn3 = new c.classes.Scenario().merge({
       id: 'scn3',
       model: '123'
     });
@@ -61,7 +61,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Wrong "parameters" argument', () => {
-    let scn4 = new c.classes.Scenario({
+    let scn4 = new c.classes.Scenario().merge({
       id: 'scn4',
       parameters: []
     });
@@ -71,7 +71,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('No "saveat" or "tspan" arguments', () => {
-    let scn5 = new c.classes.Scenario({
+    let scn5 = new c.classes.Scenario().merge({
       id: 'scn5'
     });
 
@@ -80,7 +80,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Wrong "saveat" argument', () => {
-    let scn6 = new c.classes.Scenario({
+    let scn6 = new c.classes.Scenario().merge({
       id: 'scn6',
       saveat: ['a']
     });
@@ -90,7 +90,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Wrong "tspan" argument', () => {
-    let scn7 = new c.classes.Scenario({
+    let scn7 = new c.classes.Scenario().merge({
       id: 'scn7',
       tspan: []
     });
@@ -100,7 +100,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Wrong "tspan" argument', () => {
-    let scn8 = new c.classes.Scenario({
+    let scn8 = new c.classes.Scenario().merge({
       id: 'scn8',
       tspan: [10, 0]
     });
@@ -110,7 +110,7 @@ describe('Unit test for Scenario', () => {
   });
 
   it('Wrong "observables" argument', () => {
-    let scn9 = new c.classes.Scenario({
+    let scn9 = new c.classes.Scenario().merge({
       id: 'scn9',
       observables: [0, 0]
     });

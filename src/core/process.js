@@ -1,4 +1,23 @@
 const { Record } = require('./record');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    actors: {
+      oneOf: [
+        { type: "array", items: {'$ref': "#/definitions/Actor"}, errorMessage:  {type: 'should be an array of actors.'}},
+        { '$ref': '#/definitions/ProcessExpr' },
+        { type: 'null'}
+      ]
+    }
+  },
+  errorMessage: {
+    properties: {
+      actors: 'is not string or array.'
+    }
+  }
+};
 
 /*
   Process class
@@ -18,7 +37,7 @@ class Process extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Process.isValid(q, logger);
 
     if (valid) {
@@ -58,7 +77,7 @@ class Process extends Record {
   }
   bind(namespace) {
     super.bind(namespace);
-    let {logger} = this.namespace.container;
+    let {logger} = this._container;
 
     // check and warn if actors is empty
     if (this.actors.length === 0) {
@@ -81,12 +100,10 @@ class Process extends Record {
 
     return res;
   }
-  _references(){
-    let classSpecificRefs = this.actors
-      .map((actor) => actor.target);
+  _references() {
+    let classSpecificRefs = this.actors.map((actor) => actor.target);
 
-    return super._references()
-      .concat(classSpecificRefs);
+    return super._references().concat(classSpecificRefs);
   }
 }
 
@@ -128,6 +145,9 @@ class Actor extends _Effector {
   }
   get className(){
     return 'Actor';
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

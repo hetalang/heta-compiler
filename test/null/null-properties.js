@@ -7,13 +7,13 @@ const { expect } = require('chai');
 describe('Unit tests for null properties.', () => {
     it('Set all null properties', () => {
         let rec = (new Record).merge({
+            id: 'x1',
             title: null,
             notes: null,
             assignments: {start_: null, ode_: null, xxx: null},
             tags: null,
             aux: null
         });
-        rec._id = 'x1';
 
         expect(rec.toQ()).to.be.deep.equal({
             class: 'Record',
@@ -24,6 +24,7 @@ describe('Unit tests for null properties.', () => {
 
     it('Set all properties, than delete by null', () => {
         let rec = (new Record).merge({
+            id: 'x1',
             title: 'Title',
             notes: 'Notes',
             units: 'mm',
@@ -31,7 +32,6 @@ describe('Unit tests for null properties.', () => {
             tags: ['tag1', 'tag2'],
             aux: {a: 1, b: 2}
         });
-        rec._id = 'x1';
 
         rec.merge({
             title: null,

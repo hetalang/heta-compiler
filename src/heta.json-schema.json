@@ -51,28 +51,6 @@
       }
     },
 
-    "Effector": {
-      "description": "Abstract class for modifiers and actors",
-      "type": "object",
-      "required": ["target"],
-      "properties": {
-        "target": { "$ref": "#/definitions/ID" }
-      }
-    },
-
-    "Actor": {
-      "allOf": [
-        { "$ref": "#/definitions/Effector" },
-        {
-          "type": "object",
-          "properties": {
-            "stoichiometry": { "type": "number" }
-          }
-        }
-      ],
-      "example": { "target": "x1", "stoichiometry": -1 }
-    },
-
     "Statistics": {
       "description": "Describes different outputs for monte-carlo problem.",
       "type": "object",
@@ -82,185 +60,10 @@
       }
     },
 
-    "Component": {
-      "type": "object",
-      "description": "Abstract class for all top elements.",
-      "properties": {
-        "class": { "type": "string" },
-        "id": { "$ref": "#/definitions/ID" },
-        "title": {"oneOf": [
-          { "type": "null" },
-          { "type": "string" }
-        ]},
-        "notes": {"oneOf": [
-          { "type": "null" },
-          { "type": "string" }
-        ]},
-        "tags": {"oneOf": [
-          { "type": "null" },
-          { "type": "array", "items": { "type": "string" } }
-        ]},
-        "aux": {"oneOf": [
-          { "type": "null" },
-          {
-            "type": "object",
-            "additionalProperties": {
-              "oneOf": [ { "type": "string" }, { "type": "number" }, {"type": "array"}, { "type": "object" }, { "type": "boolean"} ]
-            }
-          }
-        ]}
-      }
-    },
-
     "_Scoped": {
       "description": "Abstract class for Records and other classes with space.",
       "properties": {
         "space": { "$ref": "#/definitions/ID" }
-      }
-    },
-
-    "Record": {
-      "type": "object",
-      "properties": {
-        "assignments": {
-          "$ref": "#/definitions/AssignmentDict"
-        },
-        "boundary": {"oneOf": [
-          {
-            "enum": [true, false, 1, 0], "default": false,
-            "description": "If it is true the record cannot be changed by any process, only by expression in assignments."
-          },
-          { "type": "null" }
-        ]},
-        "ss": {"oneOf": [
-          {
-            "enum": [true, false, 1, 0],
-            "description": "Steady-State variable"
-          },
-          { "type": "null" }
-        ]},
-        "output": {"oneOf": [
-          {
-            "enum": [true, false, 1, 0],
-            "description": "Should be the record listed as an output"
-          },
-          { "type": "null" }
-        ]}
-      }
-    },
-
-    "Compartment": {
-      "type": "object"
-    },
-
-    "Species": {
-      "type": "object",
-      "properties": {
-        "compartment": {"oneOf": [
-          { "$ref": "#/definitions/ID" },
-          { "type": "null" }
-        ]},
-        "isAmount": {"oneOf": [
-          {
-            "description": "If it is false then the value represents the concentration, i.e. normalized to compartment.",
-            "enum": [true, false, 1, 0],
-            "default": false
-          },
-          { "type": "null" }
-        ]}
-      }
-    },
-
-    "Process": {
-      "type": "object",
-      "properties": {
-        "actors": {
-          "oneOf": [
-            { "type": "array", "items": {"$ref": "#/definitions/Actor"}, "errorMessage":  {"type": "should be an array of actors."}},
-            { "$ref": "#/definitions/ProcessExpr" },
-            { "type": "null"}
-          ]
-        }
-      },
-      "errorMessage": {
-        "properties": {
-          "actors": "is not string or array."
-        }
-      }
-    },
-
-    "Reaction": {
-      "type": "object",
-      "properties": {
-        "reversible": {"oneOf": [
-          { "enum": [true, false, 1, 0], "default": true },
-          { "type": "null" }
-        ]},
-        "modifiers": {"oneOf": [
-          {
-            "type": "array",
-            "items": {
-              "oneOf": [
-                { "$ref": "#/definitions/Effector" },
-                { "$ref": "#/definitions/ID" }
-              ]
-            }
-          },
-          { "type": "null" }
-        ]}
-      },
-      "errorMessage": {
-        "properties": {
-          "modifiers":  "is not an array of ids or modifiers."
-        }
-      }
-    },
-
-
-
-    "_Switcher": {
-      "type": "object",
-      "properties": {
-        "atStart": {"oneOf": [
-          {
-            "description": "If true than the condition will be checked at start_",
-            "enum": [true, false, 1, 0],
-            "default": false
-          },
-          { "type": "null" }
-        ]},
-        "active": {"oneOf": [
-          {
-            "description": "if false the event will not run.",
-            "enum": [true, false, 1, 0],
-            "default": true
-          },
-          { "type": "null" }
-        ]}
-      }
-    },
-
-    "CSwitcher": {
-      "type": "object",
-      "properties": {
-        "trigger": {"oneOf": [
-          { "$ref": "#/definitions/ExprString" },
-          { "type": "null" }
-        ]}
-      }
-    },
-
-
-
-    "DSwitcher": {
-      "type": "object",
-      "properties": {
-        "trigger": {"oneOf": [
-            { "$ref": "#/definitions/ExprString" },
-            { "enum": [true, false, 1, 0] },
-            { "type": "null" }
-          ]
-        }
       }
     },
 
@@ -275,53 +78,6 @@
         }
       }
     },
-
-    "TimeSwitcher": {
-      "type": "object",
-      "properties": {
-        "start": {"oneOf": [
-          { "$ref" : "#/definitions/ConstInternal" },
-          { "type": "null" }
-        ]},
-        "stop": {"oneOf": [
-          { "$ref" : "#/definitions/ConstInternal" },
-          { "type": "null" }
-        ]},
-        "period": {"oneOf": [
-          { "$ref" : "#/definitions/ConstInternal" },
-          { "type": "null" }
-        ]}
-      }
-    },
-
-
-
-    "Const": {
-      "type": "object",
-      "description": "Input value. Upper and lower describes possible values. Scale describes transformation for fitting.",
-      "properties": {
-        "free": {"oneOf": [
-          { "enum": [true, false, 1, 0] },
-          { "type": "null" }
-        ]},
-        "num": {"oneOf": [
-          { "type": "number" },
-          { "type": "null" }
-        ]},
-        "scale": {"oneOf": [
-          { "type": "string", "enum": ["direct", "log", "logit"], "default": "direct" },
-          { "type": "null" }
-        ]},
-        "upper": {"oneOf": [
-          { "type": "number" },
-          { "type": "null" }
-        ]},
-        "lower": {"oneOf": [
-          { "type": "number" },
-          { "type": "null" }
-        ]}
-      }
-     },
 
     "TimeScale": {
       "type": "object",
@@ -351,44 +107,6 @@
         "exponent": { "type": "number" }
       },
       "example": { "kind": "mole", "multiplier": 1e-6, "exponent": 1 }
-    },
-
-    "_Size": {
-       "type": "object",
-       "properties": {
-         "units": { "anyOf": [
-            { "type": "number", "enum": [1] },
-            { "$ref": "#/definitions/UnitsExpr" },
-            { "type": "array", "items": { "$ref": "#/definitions/UnitComponent" } },
-            { "type": "null" }
-         ] }
-       }
-    },
-
-    "ConstInternal": {"anyOf": [
-        { "allOf": [ { "$ref": "#/definitions/Const" }, { "type": "object", "required": ["num"] } ] },
-        { "$ref": "#/definitions/ID" },
-        { "type": "number" },
-        { "type": "null" }
-      ]
-    },
-
-    "Page": {
-      "type": "object",
-      "properties": {
-        "content": {"anyOf": [
-          { "type": "string" },
-          { "type": "null" }
-        ]}
-      }
-    },
-
-    "ReferenceDefinition": {
-      "type": "object",
-      "properties": {
-        "prefix": { "type": "string" },
-        "suffix": { "type": "string" }
-      }
     }
   }
 }

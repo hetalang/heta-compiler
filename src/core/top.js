@@ -36,29 +36,37 @@ const schema = {
   }
 
 */
-class Top { // or const Top = class {...}
-  /*
-  new Top({id: 'ttt1'});
-  */
-  constructor(q = {}, isCore = false){
+class Top {
+  constructor(isCore = false) {
+    if (isCore) this._isCore = true;
+    
+    this._id = 'rand_' + randomId(lengthRandom, patternRandom);
+    this.isRandomId = true;
+  }
+  merge(q = {}) {
     let logger = this._container?.logger;
     let valid = Top.isValid(q, logger);
-    if (!valid) { this.errored = true; return; }
 
-    if (isCore) this.isCore = true;
-    if (typeof q.id !== 'undefined') {
-      this._id = q.id;
-      this.isRandomId = false;
-    } else {
-      this._id = 'rand_' + randomId(lengthRandom, patternRandom);
-      this.isRandomId = true;
+    if (!valid) {
+      this.errored = true;
+      return this;
     }
+
+    if (!!q.id) {
+      this._id = q.id;
+      delete this.isRandomId;
+    }
+
+    return this;
   }
   get id(){
     return this._id;
   }
   get index(){
     return this._id;
+  }
+  get isCore(){
+    return this._isCore;
   }
   get className(){
     return 'Top';
@@ -68,7 +76,9 @@ class Top { // or const Top = class {...}
   }
   static isValid(q, logger){
     let valid = this.validate(q);
+    
     if (!valid) {
+      console.log(q, valid);
       let msg = `${q.id} Some of properties do not satisfy requirements for class "${this.name}"\n`
         + this.validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');
@@ -77,14 +87,12 @@ class Top { // or const Top = class {...}
     
     return valid;
   }
-  _toQ(options = {}){
-    let q = {};
-    if (!this.isRandomId) q.id = this.id;
-
-    return q;
-  }
   toQ(options = {}){
-    let q = this._toQ(options);
+    let q = {};
+    if (!this.isRandomId) {
+      q.id = this.id
+    };
+
     q.action = 'defineTop';
 
     return q;
@@ -101,6 +109,19 @@ class Top { // or const Top = class {...}
     let res = flatten(q);
 
     return res;
+  }
+  /* recursively check class names */
+  instanceOf(className){
+    if (this.className === className) {
+      return true;
+    } else if (!this.className) {
+      return false;
+    } else {
+      let proto = Object.getPrototypeOf(this);
+      let isInstance = this.instanceOf.call(proto, className);
+      //let isInstance = Object.getPrototypeOf(this).instanceOf(className);
+      return isInstance;
+    }
   }
 }
 

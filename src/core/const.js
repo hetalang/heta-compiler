@@ -1,4 +1,32 @@
 const { _Size } = require('./_size');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  description: 'Input value. Upper and lower describes possible values. Scale describes transformation for fitting.',
+  properties: {
+    free: {oneOf: [
+      { enum: [true, false, 1, 0] },
+      { type: 'null' }
+    ]},
+    num: {oneOf: [
+      { type: 'number' },
+      { type: 'null' }
+    ]},
+    scale: {oneOf: [
+      { type: 'string', enum: ['direct', 'log', 'logit'], default: 'direct' },
+      { type: 'null' }
+    ]},
+    upper: {oneOf: [
+      { type: 'number' },
+      { type: 'null' }
+    ]},
+    lower: {oneOf: [
+      { type: 'number' },
+      { type: 'null' }
+    ]}
+  }
+};
 
 /*
   size1 @Const {
@@ -17,7 +45,7 @@ class Const extends _Size { // implicit extend Numeric
   } 
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Const.isValid(q, logger);
 
     if (valid) {
@@ -62,7 +90,7 @@ class Const extends _Size { // implicit extend Numeric
   // It checks lower<=num<=upper, 0<num if scale=='log', 0<num<1 if scale=='logit'
   bind(namespace){
     super.bind(namespace);
-    let logger = this.namespace.container.logger;
+    let logger = this._container?.logger;
 
     // should be: lower <= num
     if (this.lower !== undefined && this.lower > this.num) {
@@ -109,6 +137,9 @@ class Const extends _Size { // implicit extend Numeric
     if (this.upper !== undefined) res.upper = this.upper;
 
     return res;
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

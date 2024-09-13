@@ -2,10 +2,10 @@ const { _Size } = require('../core/_size');
 const legalUnits = require('./legal-units');
 
 // old version
-let _toQ = _Size.prototype.toQ;
+let oldToQ = _Size.prototype.toQ;
 // new version
 _Size.prototype.toQ = function(options = {}){
-  let res = _toQ.call(this, options);
+  let res = oldToQ.call(this, options);
 
   // unit with transformation to simbio standard
   // if (options.useAnotherUnits) res.units2 = this.units;

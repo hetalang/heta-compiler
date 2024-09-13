@@ -18,9 +18,10 @@ describe('Check Top class', () => {
     });
 
     it('Top with id', () => {
-        let t1 = new p.classes.Top({id: 'xxx'});
+        let t1 = new p.classes.Top().merge({id: 'xxx'});
+        
         expect(t1).to.have.property('_id', 'xxx');
-        expect(t1).property('isRandomId').to.be.false;
+        expect(t1).to.not.have.property('isRandomId');
         expect(t1).to.have.property('id', 'xxx');
         expect(t1.toQ()).to.be.deep.equal({id: 'xxx', action: 'defineTop'});
         expect(t1._container).to.be.instanceOf(Container);
@@ -29,13 +30,13 @@ describe('Check Top class', () => {
         p.logger.resetErrors();
     });
     it('Error: not a string id', () => {
-        let t1 = new p.classes.Top({id: 123});
+        let t1 = new p.classes.Top().merge({id: 123});
 
         expect(p.logger).property('hasErrors').true;
         p.logger.resetErrors();
     });
     it('Error: wrong id string', () => {
-        let t1 = new p.classes.Top({id: '123'});
+        let t1 = new p.classes.Top().merge({id: '123'});
         
         expect(p.logger).property('hasErrors').true;
         p.logger.resetErrors();

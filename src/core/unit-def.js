@@ -65,15 +65,16 @@ const schema = {
   ]};
 */
 class UnitDef extends Top {
-  constructor(q = {}, isCore = false){
-    super(q, isCore);
-
-    //this.unitsParsed = new Unit(); // XXX: I am not sure maybe this was important
+  merge(q = {}) {
+    super.merge(q);
 
     // check arguments here
     let logger = this._container?.logger;
     let valid = UnitDef.isValid(q, logger);
-    if (!valid) { this.errored = true; return; }
+    if (!valid) {
+      this.errored = true;
+      return this;
+    }
 
     // units or terms are required but not both
     if (q.units && q.terms) {
@@ -91,27 +92,29 @@ class UnitDef extends Top {
         this.unitsParsed = Unit.parse(q.units);
       } catch (e) {
         let msg = this.index + ': '+ e.message;
-        logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+        logger?.error(msg, {type: 'ValidationError', space: this.space});
       }
     } else if (q.units && q.units instanceof Array) {
       this.unitsParsed = Unit.fromQ(q.units);
     }
 
     if (q.terms) this.terms = new UnitTerm(q.terms);
+
+    return this;
   }
   get units(){
-    if (this.unitsParsed !== undefined) {
+    if (!!this.unitsParsed) {
       return this.unitsParsed.toString();
     } else {
       return undefined;
     }
   }
-  bind(){
+  bind() {
     // super.bind();
-    let logger = this._container.logger;
-    let storage = this._container.unitDefStorage;
+    let logger = this._container?.logger;
+    let storage = this._container?.unitDefStorage;
 
-    if (this.unitsParsed) {
+    if (!!this.unitsParsed) {
       // set kindObj
       this.unitsParsed.forEach((x) => {
         let target = storage.get(x.kind);
@@ -119,7 +122,7 @@ class UnitDef extends Top {
         if (!target) {
           let msg = `UnitDef "${x.kind}" is not found as expected here: `
             + `${this.index} { units: ${this.units} };`;
-          logger.error(msg, {type: 'BindingError'});
+          logger?.error(msg, {type: 'BindingError'});
         } else {
           x.kindObj = target;
         }
@@ -132,8 +135,9 @@ class UnitDef extends Top {
   static get validate(){
     return ajv.compile(schema);
   }
-  _toQ(options = {}){
-    let q = super._toQ(options);
+  toQ(options = {}){
+    let q = super.toQ(options);
+    q.action = 'defineUnit';
 
     if (this.unitsParsed) {
       if (options.noUnitsExpr) {
@@ -142,11 +146,6 @@ class UnitDef extends Top {
         q.units = this.unitsParsed.toString();
       }
     }
-    return q;
-  }
-  toQ(options = {}){
-    let q = this._toQ(options);
-    q.action = 'defineUnit';
 
     return q;
   }

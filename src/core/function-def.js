@@ -40,36 +40,39 @@ const schema = {
   };
 */
 class FunctionDef extends Top {
-  constructor(q = {}, isCore = false) {
-    super(q, isCore);
+  merge(q = {}) {
+    super.merge(q);
 
     // check arguments here
     let logger = this._container?.logger;
     let valid = FunctionDef.isValid(q, logger);
-    if (!valid) { this.errored = true; return; }
+    if (!valid) {
+      this.errored = true;
+      return this;
+    }
 
     // undefined arguments means it can vary (for core elements)
-    if (q.arguments) {
+    if (!!q.arguments) {
       this.arguments = q.arguments;
-    } else if (!isCore) {
+    } else if (!this.isCore) {
       let msg = `The #defineFunction ${q.id} must have "arguments".`;
-      logger && logger.error(msg, {type: 'ValidationError'});
+      logger?.error(msg, {type: 'ValidationError'});
       this.errored = true;
     }
     
-    if (q.math) {
+    if (!!q.math) {
       try {
         var expr = Expression.fromString(q.math);
         if (!expr.hasBooleanResult()) {
           this.math = expr;
         } else {
           let msg = `Function math "${this.id}" should be a numeric expression.`;
-          logger && logger.error(msg, {type: 'ValidationError'});
+          logger?.error(msg, {type: 'ValidationError'});
           this.errored = true;
         }
       } catch (e) {
         let msg = this.id + ': '+ e.message + ` in "${q.math.toString()}"`;
-        logger && logger.error(msg, {type: 'ValidationError'});
+        logger?.error(msg, {type: 'ValidationError'});
         this.errored = true;
         return; // BRAKE
       }
@@ -79,14 +82,16 @@ class FunctionDef extends Top {
         .filter((v) => this.arguments?.indexOf(v) === -1);
       if (lostVariables.length > 0) {
         let msg = this.id + ': '+ `variables [${lostVariables.join(', ')}] are presented in math but not in arguments.`;
-        logger && logger.error(msg, {type: 'ValidationError'});
+        logger?.error(msg, {type: 'ValidationError'});
         this.errored = true;
       }
-    } else if (!isCore) {
+    } else if (!this.isCore) {
       let msg = `The #defineFunction ${q.id} must have "math".`;
-      logger && logger.error(msg, {type: 'ValidationError'});
+      logger?.error(msg, {type: 'ValidationError'});
       this.errored = true;
     }
+
+    return this;
   }
   get className(){
     return 'FunctionDef';
@@ -119,29 +124,28 @@ class FunctionDef extends Top {
     // super.bind();
     let {logger, functionDefStorage} = this._container;
 
-    if (this.math) { // if math is presented then it is user-defined functions
-      // find and set reference to other functions
-      this.math.functionList().forEach((functionNode) => {
-        // find target functionDef
-        let target = functionDefStorage.get(functionNode.fn.name);
-        if (!target) {
-          let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
-          + `${this.index} { math: ${this.math} };`;
-          logger.error(msg, {type: 'BindingError'});
-        } else {
-          functionNode.fnObj = target; // used for units checking
-        }
+    // find and set reference to other functions
+    this.math?.functionList().forEach((functionNode) => {
+      // find target functionDef
+      let target = functionDefStorage.get(functionNode.fn.name);
+      if (!target) {
+        let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
+        + `${this.index} { math: ${this.math} };`;
+        logger?.error(msg, {type: 'BindingError'});
+      } else {
+        functionNode.fnObj = target; // used for units checking
+      }
 
-        // check arguments in functionNode
-        if (target && functionNode.args.length < target.arguments.length) {
-          let msg = `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
-          logger.error(msg, {type: 'BindingError'});
-        }
-      });
-    }
+      // check arguments in functionNode
+      if (target && functionNode.args.length < target.arguments.length) {
+        let msg = `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
+        logger?.error(msg, {type: 'BindingError'});
+      }
+    });
   }
-  _toQ(options = {}) {
-    let q = super._toQ(options);
+  toQ(options = {}) {
+    let q = super.toQ(options);
+    q.action = 'defineFunction';
 
     if (this.arguments && this.arguments.length > 0) {
       q.arguments = this.arguments.map((x) => x);
@@ -149,12 +153,6 @@ class FunctionDef extends Top {
     if (this.math) {
       q.math = this.math.toString(options);
     }
-
-    return q;
-  }
-  toQ(options = {}) {
-    let q = this._toQ(options);
-    q.action = 'defineFunction';
 
     return q;
   }

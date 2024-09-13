@@ -30,7 +30,7 @@ describe('Unit tests for wrong null properties.', () => {
     });
 
     it('Cannot set null for math FunctionDef', () => {
-        let fd = new FunctionDef({
+        let fd = new FunctionDef().merge({
             id: 'f1',
             math: null
         });
@@ -39,7 +39,7 @@ describe('Unit tests for wrong null properties.', () => {
     });
 
     it('Cannot set null for arguments FunctionDef 1', () => {
-        let fd = new FunctionDef({
+        let fd = new FunctionDef().merge({
             id: 'f1',
             arguments: null,
             math: '15'
@@ -49,7 +49,7 @@ describe('Unit tests for wrong null properties.', () => {
     });
 
     it('Cannot set null for arguments FunctionDef 2', () => {
-        let fd = new FunctionDef({
+        let fd = new FunctionDef().merge({
             id: 'f1',
             arguments: [null, 'x1', 'x2'],
             math: 'x1 + x2'
@@ -59,7 +59,7 @@ describe('Unit tests for wrong null properties.', () => {
     });
 
     it('Cannot set null for units UnitDef', () => {
-        let ud = new UnitDef({
+        let ud = new UnitDef().merge({
             id: 'u1',
             units: null
         });

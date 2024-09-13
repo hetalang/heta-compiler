@@ -58,7 +58,7 @@ Container.prototype.export = function(q = {}, isCore = false) {
  */
 Container.prototype.defineUnit = function(q = {}, isCore = false){
   // normal flow
-  let unitDefInstance = new this.classes.UnitDef(q, isCore);
+  let unitDefInstance = new this.classes.UnitDef(isCore).merge(q);
   if (!unitDefInstance.errored) this.unitDefStorage.set(unitDefInstance.id, unitDefInstance);
 
   return unitDefInstance;
@@ -74,7 +74,7 @@ Container.prototype.defineUnit = function(q = {}, isCore = false){
  */
 Container.prototype.defineFunction = function(q = {}, isCore = false){
   // normal flow
-  let functionDefInstance = new this.classes.FunctionDef(q, isCore);
+  let functionDefInstance = new this.classes.FunctionDef(isCore).merge(q);
   if (!functionDefInstance.errored) this.functionDefStorage.set(functionDefInstance.id, functionDefInstance);
 
   return functionDefInstance;
@@ -90,7 +90,7 @@ Container.prototype.defineFunction = function(q = {}, isCore = false){
  */
 Container.prototype.setScenario = function(q = {}, isCore = false){
   // normal flow
-  let scenarioInstance = new this.classes.Scenario(q, isCore);
+  let scenarioInstance = new this.classes.Scenario(isCore).merge(q);
   if (!scenarioInstance.errored) this.scenarioStorage.set(scenarioInstance.id, scenarioInstance);
 
   return scenarioInstance;
@@ -159,7 +159,7 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
   }
 
   // check if class is in the list
-  let selectedClass = this._componentClasses[q.class];
+  let selectedClass = this.classes[q.class];
   if (selectedClass === undefined){
     this.logger.error(
       `"${ind}" Unknown class "${q.class}" for the component.`,
@@ -179,10 +179,8 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
   }
 
   // normal flow
-  let component = new selectedClass(isCore);
-  component._id = q.id;
+  let component = new selectedClass(isCore).merge(q);
   component.namespace = namespace; // set parent space directly to component
-  component.merge(q);
   namespace.set(q.id, component);
   return component;
 };
@@ -435,8 +433,7 @@ Container.prototype.importNS = function(_q = {}){
       || [q.prefix, component.id, q.suffix].join(''); // prefix-id-suffix as default value
 
     // cloning and update references
-    let clone = component.clone();
-    clone._id = newId;
+    let clone = component.clone().merge({id: newId});
     clone.namespace = namespace;
     clone.updateReferences(q);
 
@@ -536,8 +533,7 @@ Container.prototype.import = function(_q = {}){
   }
 
   // normal flow
-  let clone = component.clone();
-  clone._id = q.id;
+  let clone = component.clone().merge({id: q.id});
   clone.namespace = namespace;
   clone.updateReferences(q);
   namespace.set(q.id, clone);

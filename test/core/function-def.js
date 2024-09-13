@@ -5,14 +5,14 @@ const { expect } = require('chai');
 describe('Unit test for FunctionDef', () => {
   const p = new Container();
   it('Error: Empty FunctionDef', () => {
-    let simple = new p.classes.FunctionDef();
+    let simple = new p.classes.FunctionDef().merge({});
     
     expect(simple._container.logger).property('hasErrors').true;
     simple._container.logger.resetErrors();
   });
 
   it('Correct FunctionDef', () => {
-    let simple = new p.classes.FunctionDef({
+    let simple = new p.classes.FunctionDef().merge({
       id: 'ud1',
       arguments: ['x1', 'x2'],
       math: 'sqrt(x1^2 + x2^2)'
@@ -31,7 +31,7 @@ describe('Unit test for FunctionDef', () => {
   });
 
   it('defineFunction without math is not ok.', () => {
-    let simple = new p.classes.FunctionDef({
+    let simple = new p.classes.FunctionDef().merge({
       id: 'ud1',
       arguments: ['x']
     });
@@ -40,7 +40,7 @@ describe('Unit test for FunctionDef', () => {
   });
 
   it('Error: wrong input 1 (bad arguments).', () => {
-    let simple1 = new p.classes.FunctionDef({
+    let simple1 = new p.classes.FunctionDef().merge({
       id: 'u1',
       arguments: 'xxx'
     });
@@ -50,7 +50,7 @@ describe('Unit test for FunctionDef', () => {
   });
 
   it('Error: wrong input 2 (no id).', () => {
-    let simple2 = new p.classes.FunctionDef({
+    let simple2 = new p.classes.FunctionDef().merge({
       arguments: ['xxx']
     });
     expect(simple2._container.logger).to.has.property('hasErrors', true);
@@ -58,7 +58,7 @@ describe('Unit test for FunctionDef', () => {
   });
 
   it('Error: error input 3 (math without arguments).', () => {
-    let simple3 = new p.classes.FunctionDef({
+    let simple3 = new p.classes.FunctionDef().merge({
       id: 'u3',
       math: '1*1'
     });
@@ -111,7 +111,7 @@ describe('Testing arguments vs math', () => {
   const p = new Container();
 
   it('3 vs 3', () => {
-    let simple = new p.classes.FunctionDef({
+    let simple = new p.classes.FunctionDef().merge({
       id: 'ud1',
       arguments: ['x1', 'x2', 'x3'],
       math: 'sqrt(x1^2 + x2^2 + x3^2 + x3^2)'
@@ -122,7 +122,7 @@ describe('Testing arguments vs math', () => {
   });
 
   it('3 vs 2', () => {
-    let simple = new p.classes.FunctionDef({
+    let simple = new p.classes.FunctionDef().merge({
       id: 'ud1',
       arguments: ['x1', 'x2', 'x3'],
       math: 'sqrt(x1^2 + x2^2)'
@@ -133,7 +133,7 @@ describe('Testing arguments vs math', () => {
   });
 
   it('Error: 2 vs 3', () => {
-    let simple = new p.classes.FunctionDef({
+    let simple = new p.classes.FunctionDef().merge({
       id: 'ud1',
       arguments: ['x1', 'x2'],
       math: 'sqrt(x1^2 + x2^2 + x3^2 + x3^2)'
@@ -145,7 +145,7 @@ describe('Testing arguments vs math', () => {
 
   
   it('Error: 3 vs 3 but wrong', () => {
-    let simple = new p.classes.FunctionDef({
+    let simple = new p.classes.FunctionDef().merge({
       id: 'ud1',
       arguments: ['x1', 'x2', 'x666'],
       math: 'sqrt(x1^2 + x2^2 + x3^2 + x3^2)'

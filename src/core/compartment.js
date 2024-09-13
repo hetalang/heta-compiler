@@ -1,5 +1,10 @@
 const { Record } = require('./record');
 const { UnitTerm } = require('./unit-term');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object'
+};
 
 /*
   Compartment class
@@ -14,7 +19,7 @@ class Compartment extends Record {
   }
   merge(q = {}){
     super.merge(q);
-    //let logger = this.namespace?.container?.logger;
+    //let logger = this._container?.logger;
     //let valid = Compartment.isValid(q, logger);
     
     return this;
@@ -33,6 +38,9 @@ class Compartment extends Record {
       new UnitTerm([{kind: 'length', exponent: 2}]),
       new UnitTerm([{kind: 'length', exponent: 1}])
     ];
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

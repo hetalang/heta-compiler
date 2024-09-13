@@ -33,12 +33,12 @@ describe('Unit tests for Record.', () => {
 
   it('Check toQ for expression Record.', () => {
     let simple = (new Record).merge({
+      id: 'r1',
       title: 'complex record',
       assignments: { ode_: 'm*c^2' },
       units: 'J',
       output: true
     });
-    simple._id = 'r1';
     expect(simple.toQ()).to.be.deep.equal({
       class: 'Record',
       id: 'r1',

@@ -1,9 +1,18 @@
 const { Component } = require('./component');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    prefix: { type: 'string' },
+    suffix: { type: 'string' }
+  }
+};
 
 class ReferenceDefinition extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = ReferenceDefinition.isValid(q, logger);
 
     if (valid) {
@@ -39,6 +48,9 @@ class ReferenceDefinition extends Component {
     if(this.suffix) res.suffix = this.suffix;
 
     return res;
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

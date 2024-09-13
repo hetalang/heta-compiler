@@ -1,5 +1,25 @@
 const { _Size } = require('./_size');
 const { UnitTerm } = require('./unit-term');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  description: 't and other time scales',
+  properties: {
+    slope: {oneOf: [
+      { type: 'number', exclusiveMinimum: 0 },
+      { type: 'null' }
+    ]},
+    intercept: {oneOf: [
+      { type: 'number' },
+      { type: 'null' }
+    ]},
+    output: {oneOf: [
+      { enum: [true, false, 1, 0] },
+      { type: 'null' }
+    ]}
+  }
+};
 
 /*
   time_in_minutes @TimeScale {
@@ -20,7 +40,7 @@ class TimeScale extends _Size { // implicit extend Numeric
   } 
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = TimeScale.isValid(q, logger);
 
     if (valid) {
@@ -72,6 +92,9 @@ class TimeScale extends _Size { // implicit extend Numeric
     return [
       new UnitTerm([{kind: 'time'}])
     ];
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

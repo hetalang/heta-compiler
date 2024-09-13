@@ -1,9 +1,39 @@
+const { Top } = require('./top');
 const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
-const { uniqBy, ajv, flatten, cloneDeep } = require('../utils');
+const { uniqBy, ajv, cloneDeep } = require('../utils');
 const _get = require('lodash/get');
 const _set = require('lodash/set');
+
+const schema = {
+  type: "object",
+  description: "Abstract class for all top elements.",
+  properties: {
+    class: { type: "string" },
+    title: {oneOf: [
+      { type: "null" },
+      { type: "string" }
+    ]},
+    notes: {oneOf: [
+      { type: "null" },
+      { type: "string" }
+    ]},
+    tags: {oneOf: [
+      { type: "null" },
+      { type: "array", "items": { "type": "string" } }
+    ]},
+    aux: {oneOf: [
+      { type: "null" },
+      {
+        type: "object",
+        additionalProperties: {
+          oneOf: [ { "type": "string" }, { "type": "number" }, {"type": "array"}, { "type": "object" }, { "type": "boolean"} ]
+        }
+      }
+    ]}
+  }
+};
 
 /*
   class Component
@@ -14,16 +44,19 @@ const _set = require('lodash/set');
     aux: {}
   };
 */
-class Component {
-  constructor(isCore = false){
+class Component extends Top {
+  constructor(isCore = false) {
+    super(isCore);
+
     this.tags = [];
     this.aux = {};
-    if (isCore) this._isCore = true;
   }
-  merge(q = {}){
-    let logger = this.namespace?.container?.logger;
-    let valid = Component.isValid(q, logger);
+  merge(q = {}) {
+    super.merge(q);
 
+    let logger = this._container?.logger;
+    let valid = Component.isValid(q, logger);
+    
     if (valid) {
       if (q.title === null) {
         delete this.title;
@@ -49,16 +82,10 @@ class Component {
     
     return this;
   }
-  get isCore(){
-    return this._isCore;
-  }
-  get id(){
-    return this._id;
-  }
   // if NS not set, than undefined
   // if set any, than spaceName
   // if set nameless, than 'nameless'
-  get space(){
+  get space() {
     if (this.namespace) {
       return this.namespace.spaceName;
     } else {
@@ -82,7 +109,7 @@ class Component {
     return { id: this.id, space: this.space };
   }
   // creates copy of element
-  clone(){
+  clone() {
     let componentClone = new this.constructor();
     if (this.title)
       componentClone.title = this.title;
@@ -99,7 +126,7 @@ class Component {
     return componentClone;
   }
   /** Change referencies of component based on suffix/prefix/rename */
-  updateReferences(_q = {}){
+  updateReferences(_q = {}) {
     // set defaults
     let q = Object.assign({
       prefix: '',
@@ -145,32 +172,17 @@ class Component {
       .trim();
     return renderedOutput;
   }
-  static isValid(q, logger){
-    let ind = q.space ? `${q.space}::${q.id}` : q.id;
-
-    let validate = ajv
-      .getSchema('https://hetalang.github.io#/definitions/' + this.schemaName);
-    if (!validate) {
-      throw new TypeError(`The schema "${this.schemaName}" is not found.`);
-    }
-    let valid = validate(q);
-    if (!valid) {
-      let msg = `${ind} Some of properties do not satisfy requirements for class "${this.schemaName}"\n`
-        + validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
-          .join('\n');
-      logger && logger.error(msg, {type: 'ValidationError', space: q.space});
-      logger && logger.warn('Some of component properties will not be updated.');
-    }
-    
-    return valid;
+  static get validate() {
+    return ajv.compile(schema);
   }
   /*
     Checking references:
     - check properties based on requirements(): required, find by symbol link
     - create virtual component if local prop refferences to global component
   */
-  bind(namespace){
-    let logger = this.namespace.container.logger;
+  bind(namespace) {
+
+    let logger = this._container?.logger;
     if (!namespace)
       throw new TypeError('"namespace" argument should be set.');
     
@@ -227,34 +239,22 @@ class Component {
       }
     });
   }
-  toQ(options = {}){
-    let res = {};
-    res.class = this.className;
-    res.id = this.id;
-    if (this.namespace && this.namespace.spaceName !== 'nameless') res.space = this.space;
-    if (this.title) res.title = this.title;
-    if (this.notes) res.notes = this.notes;
-    if (this.tags.length > 0) res.tags = this.tags.map((tag) => tag);
-    if (Object.keys(this.aux).length > 0) res.aux = cloneDeep(this.aux);
+  toQ(options = {}) {
+    let q = super.toQ(options);
+    delete q.action;
 
-    return res;
-  }
-  toFlat(_options = {}){
-    // set defaults
-    let options = Object.assign({
-      simplifyModifiers: true,
-      simplifyActors: true,
-      simplifyExpressions: true
-    }, _options);
+    q.class = this.className;
+    if (this.namespace && this.namespace.spaceName !== 'nameless') q.space = this.space;
+    if (this.title) q.title = this.title;
+    if (this.notes) q.notes = this.notes;
+    if (this.tags.length > 0) q.tags = this.tags.map((tag) => tag);
+    if (Object.keys(this.aux).length > 0) q.aux = cloneDeep(this.aux);
 
-    let q = this.toQ(options);
-    let res = flatten(q);
-
-    return res;
+    return q;
   }
   /* recursively create requirements from _requirements, 
   currently it is not optimal */
-  static requirements(){ 
+  static requirements() { 
     if (this.prototype.className === 'Component') {
       return this._requirements;
     } else if (this.hasOwnProperty('_requirements')) {
@@ -269,29 +269,17 @@ class Component {
       return deeper;
     }
   }
-  /* recursively check class names */
-  instanceOf(className){
-    if (this.className === className) {
-      return true;
-    } else if (!this.className) {
-      return false;
-    } else {
-      let proto = Object.getPrototypeOf(this);
-      let isInstance = this.instanceOf.call(proto, className);
-      //let isInstance = Object.getPrototypeOf(this).instanceOf(className);
-      return isInstance;
-    }
+  /* non-unique references */
+  _references() {
+    return [];
   }
   /*
-  array of direct references inside component to another _Size
+  array of direct references inside component to another components
   it is used inside irt-nav
   */
-  references(){
-    return uniqBy(this._references());
-  }
-  /* non-unique references */
-  _references(){
-    return [];
+  references() {
+    let nonUnique = this._references();
+    return uniqBy(nonUnique);
   }
 }
 

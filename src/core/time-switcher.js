@@ -1,5 +1,68 @@
 const { _Switcher } = require('./_switcher');
 const { Const } = require('./const');
+
+const { ajv } = require('../utils');
+
+
+const schema = {
+  type: 'object',
+  properties: {
+    start: {oneOf: [
+      { '$ref' : '#/definitions/ConstInternal' },
+      { type: "null" }
+    ]},
+    stop: {oneOf: [
+      { '$ref' : '#/definitions/ConstInternal' },
+      { type: "null" }
+    ]},
+    period: {oneOf: [
+      { '$ref' : '#/definitions/ConstInternal' },
+      { type: 'null' }
+    ]}
+  },
+  definitions: {
+    Const: {
+      type: 'object',
+      description: 'Input value. Upper and lower describes possible values. Scale describes transformation for fitting.',
+      properties: {
+        free: {oneOf: [
+          { enum: [true, false, 1, 0] },
+          { type: 'null' }
+        ]},
+        num: {oneOf: [
+          { type: 'number' },
+          { type: 'null' }
+        ]},
+        scale: {oneOf: [
+          { type: 'string', enum: ['direct', 'log', 'logit'], default: 'direct' },
+          { type: 'null' }
+        ]},
+        upper: {oneOf: [
+          { type: 'number' },
+          { type: 'null' }
+        ]},
+        lower: {oneOf: [
+          { type: 'number' },
+          { type: 'null' }
+        ]}
+      }
+    },
+    ConstInternal: {anyOf: [
+      { allOf: [ { '$ref': '#/definitions/Const' }, { type: 'object', required: ['num'] } ] },
+      { '$ref': '#/definitions/ID' },
+      { type: 'number' },
+      { type: 'null' }
+    ]},
+    ID: {
+      description: 'First character is letter, others are letter, digit or lodash.',
+      type: 'string',
+      minLength: 1,
+      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      example: 'x_12_'
+    }
+  }
+};
+
 /*
   TimeSwitcher class
 
@@ -28,8 +91,9 @@ class TimeSwitcher extends _Switcher {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = TimeSwitcher.isValid(q, logger);
+    console.log(this)
 
     if (valid) {
       // empty means anon 0 as default
@@ -124,6 +188,9 @@ class TimeSwitcher extends _Switcher {
     }
 
     return res;
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

@@ -32,7 +32,7 @@ const TopoSort = require('@insysbio/topo-sort');
  * 
  * @property {object} classes Map-like storage for all element constructors that can be created inside platform.
  *    For example the element of the type `UnitsDef` can be created as follows:
- *    ```let new_unit = new c.classes.UnitDef({id: 'new', units: 'g/litre'})```
+ *    ```let new_unit = new c.classes.UnitDef().merge({id: 'new', units: 'g/litre'})```
  *    The `new_unit` element will be automatically bound to the container and pushed to `unitDefStorage`.
  * @property {Logger} logger object providing transport of errors, warnings and info messages on Heta platform level.
  * @property {object[]} defaultLogs Default storage of errors which will be used for diagnostics.
@@ -43,7 +43,6 @@ const TopoSort = require('@insysbio/topo-sort');
  * @property {Map<string,Namespace>} namespaceStorage Storage for `Namespace` instances. Key is a string identifier.
  *    There is a default namespace with identifier `nameless` which will be used as a default namespace 
  *    for all components where namespace name is not set.
- * @property {object} _componentClasses map-like structure for storing all available constructors for `Component`s.
  * @property {object} _builder reference to the parent builder object (if exists).
  */
 class Container {
@@ -60,6 +59,35 @@ class Container {
     this.classes.FunctionDef.prototype._container = this;
     this.classes.Scenario = class extends Scenario {};
     this.classes.Scenario.prototype._container = this;
+    //
+    this.classes.Component = class extends Component {};
+    this.classes.Component.prototype._container = this;
+    this.classes.Record = class extends Record {};
+    this.classes.Record.prototype._container = this;
+    this.classes.Compartment = class extends Compartment {};
+    this.classes.Compartment.prototype._container = this;
+    this.classes.Species = class extends Species {};
+    this.classes.Species.prototype._container = this;
+    this.classes.Reaction = class extends Reaction {};
+    this.classes.Reaction.prototype._container = this;
+    this.classes.Process = class extends Process {};
+    this.classes.Process.prototype._container = this;
+    this.classes.DSwitcher = class extends DSwitcher {};
+    this.classes.DSwitcher.prototype._container = this;
+    this.classes.StopSwitcher = class extends StopSwitcher {};
+    this.classes.StopSwitcher.prototype._container = this;
+    this.classes.CSwitcher = class extends CSwitcher {};
+    this.classes.CSwitcher.prototype._container = this;
+    this.classes.TimeSwitcher = class extends TimeSwitcher {};
+    this.classes.TimeSwitcher.prototype._container = this;
+    this.classes.ReferenceDefinition = class extends ReferenceDefinition {};
+    this.classes.ReferenceDefinition.prototype._container = this;
+    this.classes.Page = class extends Page {};
+    this.classes.Page.prototype._container = this;
+    this.classes.Const = class extends Const {};
+    this.classes.Const.prototype._container = this;
+    this.classes.TimeScale = class extends TimeScale {};
+    this.classes.TimeScale.prototype._container = this;  
 
     // logger
     this.logger = new Logger();
@@ -321,22 +349,5 @@ class Container {
 }
 
 // only component classes are stored
-
-Container.prototype._componentClasses = {
-  Component,
-  Record,
-  Compartment,
-  Species,
-  Process,
-  Reaction,
-  DSwitcher,
-  StopSwitcher,
-  CSwitcher,
-  TimeSwitcher,
-  ReferenceDefinition,
-  Page,
-  Const,
-  TimeScale
-};
 
 module.exports = Container;

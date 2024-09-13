@@ -54,13 +54,16 @@ const schema = {
 };
 
 class Scenario extends Top {
-  constructor(q = {}, isCore = false){
-    super(q, isCore);
+  merge(q = {}){
+    super.merge(q);
 
     // check arguments here
-    let logger = this._container.logger;
+    let logger = this._container?.logger;
     let valid = Scenario.isValid(q, logger);
-    if (!valid) { this.errored = true; return; }
+    if (!valid) {
+      this.errored = true;
+      return this;
+    }
 
     // set properties
     if (q.model) {
@@ -100,6 +103,8 @@ class Scenario extends Top {
     if (q.events_save) {
       this.events_save = q.events_save;
     }
+
+    return this;
   }
   get className(){
     return 'Scenario';
@@ -107,8 +112,10 @@ class Scenario extends Top {
   static get validate(){
     return ajv.compile(schema);
   }
-  _toQ(options = {}){
-    let q = super._toQ(options);
+  toQ(options = {}){
+    let q = super.toQ(options);
+    q.action = 'setScenario';
+
     if (this.model !== 'nameless') {
       q.model = this.model;
     }
@@ -130,12 +137,6 @@ class Scenario extends Top {
     if (this.events_save) {
       q.events_save = this.events_save;
     }
-    
-    return q;
-  }
-  toQ(options = {}){
-    let q = this._toQ(options);
-    q.action = 'setScenario';
 
     return q;
   }
@@ -144,11 +145,11 @@ class Scenario extends Top {
     Called by Container.prototype.knitMany()
   */
   bind(){
-    let logger = this._container.logger;
+    let logger = this._container?.logger;
 
     // set model/namespace
-    if (this._container.namespaceStorage.has(this.model)) {
-      this.modelObj = this._container.namespaceStorage.get(this.model);
+    if (this._container?.namespaceStorage.has(this.model)) {
+      this.modelObj = this._container?.namespaceStorage.get(this.model);
     } else {
       let msg = `Scenario's ${this.id} "model" property must refer to a namespace, got "${this.model}".`;
       logger.error(msg, {type: 'BindingError'});

@@ -1,4 +1,27 @@
 const { Component } = require('./component');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    atStart: {oneOf: [
+      {
+        description: 'If true than the condition will be checked at start_',
+        enum: [true, false, 1, 0],
+        default: false
+      },
+      { type: 'null' }
+    ]},
+    active: {oneOf: [
+      {
+        description: 'if false the event will not run.',
+        enum: [true, false, 1, 0],
+        default: true
+      },
+      { type: 'null' }
+    ]}
+  }
+};
 
 /*
   _Switcher abstract class
@@ -14,7 +37,7 @@ class _Switcher extends Component {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = _Switcher.isValid(q, logger);
 
     if (valid) {
@@ -50,6 +73,9 @@ class _Switcher extends Component {
     if (this.active === false) res.active = false;
 
     return res;
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

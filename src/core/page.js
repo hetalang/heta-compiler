@@ -1,9 +1,20 @@
 const { Component } = require('./component');
+const { ajv } = require('../utils');
+
+const schema = {
+  type: 'object',
+  properties: {
+    content: { anyOf: [
+      { type: 'string' },
+      { type: 'null' }
+    ]}
+  }
+};
 
 class Page extends Component {
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Page.isValid(q, logger);
 
     if (valid) {
@@ -30,6 +41,9 @@ class Page extends Component {
     let res = super.toQ(options);
     if(this.content) res.content = this.content;
     return res;
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 

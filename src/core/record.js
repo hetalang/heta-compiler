@@ -1,5 +1,69 @@
 const { _Size } = require('./_size');
 const { Expression } = require('./expression');
+const { ajv } = require('../utils');
+
+
+const schema = {
+  type: 'object',
+  properties: {
+    assignments: {
+      '$ref': '#/definitions/AssignmentDict'
+    },
+    boundary: {oneOf: [
+      {
+        enum: [true, false, 1, 0], default: false,
+        description: 'If it is true the record cannot be changed by any process, only by expression in assignments.'
+      },
+      { type: 'null' }
+    ]},
+    ss: {oneOf: [
+      {
+        enum: [true, false, 1, 0],
+        description: 'Steady-State variable'
+      },
+      { type: 'null' }
+    ]},
+    output: {oneOf: [
+      {
+        enum: [true, false, 1, 0],
+        description: 'Should be the record listed as an output.'
+      },
+      { type: 'null' }
+    ]}
+  },
+  definitions: {
+    AssignmentDict: {
+      description: 'Stores initializations as key/value dictionary. Key is switcher when to use. Key is one of Switcher id.',
+      type: 'object',
+      propertyNames: { '$ref': '#/definitions/ID' },
+      additionalProperties: {
+        oneOf: [
+          { '$ref': '#/definitions/ExprString' },
+          { type: 'number'},
+          { type: 'null' }
+        ]
+      },
+      example: {
+        start_: { expr: 1.2 },
+        ode_: { expr: 'x * y' },
+        evt1: { expr: 'z + 1.2' }
+      }
+    },
+    ID: {
+      description: 'First character is letter, others are letter, digit or lodash.',
+      type: 'string',
+      minLength: 1,
+      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      example: 'x_12_'
+    },
+    ExprString: {
+      description: 'Expression as string. Currently pattern does not analyze expressions.',
+      type: 'string',
+      minLength: 1,
+      pattern: '[a-zA-Z0-9. -+/*^()]*$'
+    }
+  }
+};
 
 /*
   record1 @Record {
@@ -17,7 +81,7 @@ class Record extends _Size {
   }
   merge(q = {}){
     super.merge(q);
-    let logger = this.namespace?.container?.logger;
+    let logger = this._container?.logger;
     let valid = Record.isValid(q, logger);
 
     if (valid) {
@@ -93,7 +157,7 @@ class Record extends _Size {
   }
   bind(namespace){
     super.bind(namespace);
-    let {logger, functionDefStorage} = this.namespace.container;
+    let {logger, functionDefStorage} = this._container;
 
     // check initialization
     let hasInit = this.assignments?.start_ !== undefined
@@ -229,7 +293,7 @@ class Record extends _Size {
   Works only for bound records
   */
   checkUnits(){
-    let logger = this.namespace.container.logger;
+    let logger = this._container?.logger;
 
     let leftSideUnit = this.unitsParsed;
     if (typeof leftSideUnit === 'undefined') {
@@ -249,13 +313,15 @@ class Record extends _Size {
       }
     }
   }
-  _references(){
+  _references() {
     let classSpecificRefs = Object.entries(this.assignments)
       .map(([key, expression]) => expression.dependOn())
       .flat(1);
 
-    return super._references()
-      .concat(classSpecificRefs);
+    return super._references().concat(classSpecificRefs);
+  }
+  static get validate() {
+    return ajv.compile(schema);
   }
 }
 
