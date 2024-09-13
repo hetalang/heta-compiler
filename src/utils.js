@@ -5,9 +5,7 @@
 // preparation of Ajv
 
 const Ajv = require('ajv');
-const schema = require('./heta.json-schema');
-
-const ajv = new Ajv({allErrors: true}).addSchema(schema); // for Component instances
+const ajv = new Ajv({allErrors: true, useDefaults: true});
 require('ajv-errors')(ajv);
 ajv.addKeyword({keyword: "example"});
 

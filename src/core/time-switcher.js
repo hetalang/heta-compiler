@@ -93,7 +93,6 @@ class TimeSwitcher extends _Switcher {
     super.merge(q);
     let logger = this._container?.logger;
     let valid = TimeSwitcher.isValid(q, logger);
-    console.log(this)
 
     if (valid) {
       // empty means anon 0 as default
