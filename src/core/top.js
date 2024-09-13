@@ -78,7 +78,6 @@ class Top {
     let valid = this.validate(q);
     
     if (!valid) {
-      console.log(q, valid);
       let msg = `${q.id} Some of properties do not satisfy requirements for class "${this.name}"\n`
         + this.validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
           .join('\n');

@@ -207,30 +207,29 @@ Heta compiler has been written in NodeJS environment and can be used as a packag
 (under development).
 
 ```javascript
-const { Container } = require('heta-compiler');
+const { Builder } = require('./src');
+let builder = new Builder();
 
 // platform code in Q-array format
 let qArr = [
     { class: 'Compartment', id: 'comp1', assignments: {start_: '1'} },
     { class: 'Species', id: 's1', compartment: 'comp1', assignments: {start_: '10'} },
     { class: 'Reaction', id: 'r1', actors: 's1 =>', assignments: {ode_: 'k1*s1*comp1'} },
-    { class: 'Const', id: 'r1', actors: 's1 =>', num: 1e-2 },
-    { action: 'export', format: 'SBML', filepath: 'model' }
+    { class: 'Const', id: 'r1', actors: 's1 =>', num: 1e-2 }
 ];
 
 // compilation
-let c = (new Container)
+builder.container
     .loadMany(qArr)
     .knitMany();
-// get export element
-let output = c.exportArray[0]
-    .make();
 
-// print sbml code to console
-console.log(output[0].content);
+// export to SBML
+let sbmlExport = new builder.exportClasses.SBML();
+let sbmlOutput = sbmlExport.makeText();
+console.log(sbmlOutput[0].content);
 
 // check errors
-console.log(c.hetaErrors());
+console.log(builder.container.hetaErrors());
 ```
 
 ## Known issues and limitations
