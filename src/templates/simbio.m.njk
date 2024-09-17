@@ -17,7 +17,7 @@
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
   {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
-  , 'Notes', '{{ record.notesHTML | replace("'", "''")}}', 'Tag', '');
+  , 'Notes', '{{ record.notesHTML | replace("'", "''")}}', 'Tag', '', 'UserData', {{ record.aux | toStruct }});
 {%- endfor %}
 
 {% set listOfSpecies = population.selectByClassName('Species') -%}
