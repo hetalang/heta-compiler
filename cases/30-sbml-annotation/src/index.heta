@@ -1,0 +1,7 @@
+/*
+  template file for creating platform
+*/
+//include ./qsp-units.heta;
+//include ./qsp-functions.heta;
+
+include BIOMD0000000512.xml type sbml;

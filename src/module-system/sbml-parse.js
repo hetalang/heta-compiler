@@ -1,5 +1,6 @@
 const _toMathExpr = require('./to-math-expr');
 const { xml2js } = require('xml-js');
+const { encodeXML } = require('entities');
 const { Unit } = require('../core/unit');
 const legalUnits = require('../legal-sbml-units');
 const HetaLevelError = require('../heta-level-error');
@@ -10,9 +11,17 @@ const HetaLevelError = require('../heta-level-error');
  * @param {string} fileContent SBML file content.
  * @returns {array} Parsed content in Q-array format.
  */
-function SBMLParse(fileText){
-  let JSBML = xml2js(fileText, { compact: false });
+function SBMLParse(fileText) {
   
+  let fileTextNoAnnotation = fileText.replace(/<annotation>([\s\S]*?)<\/annotation>/g, (match, p1) => {
+    let res =  encodeXML(p1)
+      .replace(/[\t\r\n]+/g, '');
+    return `<annotation>${res}</annotation>`;
+  });
+  let JSBML = xml2js(fileTextNoAnnotation, { compact: false });
+  
+ //let JSBML = xml2js(fileText, { compact: false });
+
   return jsbmlToQArr(JSBML);
 }
 
@@ -261,7 +270,8 @@ function baseToQ(x){
   if (notes) q.notes = _toMarkdown(notes.elements);
   // annotation
   let annotation = x.elements?.find((y) => y.name === 'annotation');
-  if (annotation) q.aux.annotation = _toAux(annotation.elements);
+  annotation && (q.aux.annotation = _toAux(annotation?.elements[0]?.text));
+  //annotation && (q.aux.annotation = _toAux(annotation.elements));
 
   return q;
 }
