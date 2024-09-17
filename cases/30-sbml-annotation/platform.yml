@@ -22,7 +22,7 @@
     #{ format: YAML, omit: [], noUnitsExpr: false },
     #{ format: DBSolve, powTransform: keep, version: 26 },
     #{ format: SLV, eventsOff: false, powTransform: keep, version: 26 },
-    #{ format: SBML, version: L2V4 },
+    { format: SBML, version: L2V4 },
     { format: Simbio },
     #{ format: Mrgsolve },
     { format: Table, omitRows: 0, omit: [], bookType: csv, splitByClass: false },

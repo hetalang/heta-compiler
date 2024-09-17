@@ -1,5 +1,4 @@
 const { Namespace } = require('../namespace');
-require('./expression');
 const legalUnits = require('../legal-sbml-units');
 
 Namespace.prototype.getSBMLImage = function() {

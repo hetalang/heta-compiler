@@ -18,8 +18,12 @@
         {{ notesHTML }}
       </html>
     </notes>
-  {%- endif %}
-
+    {%- endif %}
+    {%- if annotation is defined %}
+    <annotation>
+      {{ annotation }}
+    </annotation>
+    {%- endif %}
   {%- if listOfUnitDefinitions | length > 0 %}
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
@@ -76,6 +80,11 @@
           </html>
         </notes>
         {%- endif %}
+        {%- if record.aux.annotation is defined %}
+        <annotation>
+          {{ record.aux.annotation }}
+        </annotation>
+        {%- endif %}
       </compartment>
     {%- endfor %}
     </listOfCompartments>
@@ -109,7 +118,12 @@
             {{ record.notesHTML }}
           </html>
         </notes>
-      {%- endif %}
+        {%- endif %}
+        {%- if record.aux.annotation is defined %}
+        <annotation>
+          {{ record.aux.annotation }}
+        </annotation>
+        {%- endif %}
       </species>
     {%- endfor %}
     </listOfSpecies>
@@ -143,6 +157,11 @@
           </html>
         </notes>
         {%- endif %}
+        {%- if record.aux.annotation is defined %}
+        <annotation>
+          {{ record.aux.annotation }}
+        </annotation>
+        {%- endif %}
       </parameter>
     {%- endfor %}
     {%- for con in listOfConstants %}
@@ -167,6 +186,11 @@
           </html>
         </notes>
         {%- endif %}
+        {%- if con.aux.annotation is defined %}
+        <annotation>
+          {{ con.aux.annotation }}
+        </annotation>
+        {%- endif %}
       </parameter>
       {%- endfor %}
       {%- for ts in listOfTimeScales %}
@@ -190,6 +214,11 @@
             {{ ts.notesHTML }}
           </html>
         </notes>
+        {%- endif %}
+        {%- if ts.aux.annotation is defined %}
+        <annotation>
+          {{ ts.aux.annotation }}
+        </annotation>
         {%- endif %}
       </parameter>
       {%- endfor %}
@@ -285,6 +314,11 @@
             {{ record.notesHTML }}
           </html>
         </notes>
+        {%- endif %}
+        {%- if record.aux.annotation is defined %}
+        <annotation>
+          {{ record.aux.annotation }}
+        </annotation>
         {%- endif %}
         <listOfReactants>
           {%- for actor in record.actors %}
