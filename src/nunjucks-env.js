@@ -25,20 +25,53 @@ module.exports = function(env) {
   env.addFilter('toStruct', function(obj) {
     return _toStruct(obj);
   });
+  env.addFilter('toYAML', function(obj) {
+    return _toYAML(obj);
+  });
 
   return env;
 };
 
+// for Matlab structures
 function _toStruct(obj) {
   if (Array.isArray(obj)) {
-    return '[' + obj.map(_toStruct).join(',') + ']';
+    return '[' + obj.map(_toStruct).join(', ') + ']';
   } else if (typeof obj === 'object') {
-    let pairs = Object.entries(obj).map(([key, value]) => `'${key}', ${_toStruct(value)}`);
+    let pairs = Object.entries(obj)
+      .filter(([key, value]) => value !== undefined)
+      .map(([key, value]) => `'${key}', ${_toStruct(value)}`);
     return `struct(${pairs.join(', ')})`;
   } else if (typeof obj === 'string') {
     return `'${obj}'`;
   } else if (typeof obj === 'number') {
     return obj;
+  } else if (typeof obj === 'boolean') {
+    return obj;
+  } else if (obj === null) {
+    return '[]';
+  } else {
+    throw new Error('Unsupported type');
+  }
+}
+
+// for Heta aux property
+function _toYAML(obj) {
+  if (Array.isArray(obj)) {
+    return '[' + obj.map(_toYAML).join(', ') + ']';
+  } else if (typeof obj === 'object') {
+    let pairs = Object.entries(obj)
+      .filter(([key, value]) => value !== undefined)
+      .map(([key, value]) => `${key}: ${_toYAML(value)}`);
+    return `{${pairs.join(', ')}}`;
+  } else if (typeof obj === 'string') {
+    let safeString = obj.replace(/"/g, '\\"');
+    return `"${safeString}"`;
+  } else if (typeof obj === 'number') {
+    return obj;
+  } else if (typeof obj === 'boolean') {
+    return obj;
+  } else if (obj === null) {
+    return 'null';
   } else {
     throw new Error('Unsupported type');
   }

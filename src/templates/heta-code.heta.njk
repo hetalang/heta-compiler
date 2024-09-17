@@ -21,7 +21,7 @@
   {{- ' period: ' + component.period + ',' if component.period is defined }}
   {{- ' stop: ' + component.stop + ',' if component.stop is defined }}
   {{- ' atStart: ' + component.atStart + ',' if component.atStart is defined }}
-  {{- ' aux: ' + hetaObject(component.aux) + ',' if component.aux is defined and component.aux|length > 0}}
+  {{- ' aux: ' + component.aux | toYAML + ',' if component.aux is defined and component.aux|length > 0}}
   {{- ' }' }}
 {%- endmacro -%}
 {%- macro notes(component={}, indentation='') %}
@@ -41,9 +41,6 @@
 {%- endmacro %}
 {%- macro hetaArray(array=[]) -%}
   [{{ array.join(', ') }}]
-{%- endmacro %}
-{%- macro hetaObject(object={}) -%}
-  { {{- object|dump -}} }
 {%- endmacro %}
 {%- macro assignments(record, indentation) -%}
   {%- for key, value in record.assignments %}
