@@ -21,7 +21,7 @@
     {%- endif %}
     {%- if annotation is defined %}
     <annotation>
-      {{ annotation }}
+      {{ xmlAnnotation }}
     </annotation>
     {%- endif %}
   {%- if listOfUnitDefinitions | length > 0 %}
@@ -80,9 +80,9 @@
           </html>
         </notes>
         {%- endif %}
-        {%- if record.aux.annotation is defined %}
+        {%- if record.xmlAnnotation is defined %}
         <annotation>
-          {{ record.aux.annotation }}
+          {{ record.xmlAnnotation }}
         </annotation>
         {%- endif %}
       </compartment>
@@ -119,9 +119,9 @@
           </html>
         </notes>
         {%- endif %}
-        {%- if record.aux.annotation is defined %}
+        {%- if record.xmlAnnotation is defined %}
         <annotation>
-          {{ record.aux.annotation }}
+          {{ record.xmlAnnotation }}
         </annotation>
         {%- endif %}
       </species>
@@ -157,9 +157,9 @@
           </html>
         </notes>
         {%- endif %}
-        {%- if record.aux.annotation is defined %}
+        {%- if record.xmlAnnotation is defined %}
         <annotation>
-          {{ record.aux.annotation }}
+          {{ record.xmlAnnotation }}
         </annotation>
         {%- endif %}
       </parameter>
@@ -186,9 +186,9 @@
           </html>
         </notes>
         {%- endif %}
-        {%- if con.aux.annotation is defined %}
+        {%- if con.xmlAnnotation is defined %}
         <annotation>
-          {{ con.aux.annotation }}
+          {{ con.xmlAnnotation }}
         </annotation>
         {%- endif %}
       </parameter>
@@ -215,9 +215,9 @@
           </html>
         </notes>
         {%- endif %}
-        {%- if ts.aux.annotation is defined %}
+        {%- if ts.xmlAnnotation is defined %}
         <annotation>
-          {{ ts.aux.annotation }}
+          {{ ts.xmlAnnotation }}
         </annotation>
         {%- endif %}
       </parameter>
@@ -315,9 +315,9 @@
           </html>
         </notes>
         {%- endif %}
-        {%- if record.aux.annotation is defined %}
+        {%- if record.xmlAnnotation is defined %}
         <annotation>
-          {{ record.aux.annotation }}
+          {{ record.xmlAnnotation }}
         </annotation>
         {%- endif %}
         <listOfReactants>

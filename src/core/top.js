@@ -12,7 +12,8 @@ const patternRandom = 'aA0';
 const schema = {
   type: 'object',
   properties: {
-    id: { '$ref': '#/definitions/ID' }
+    id: { '$ref': '#/definitions/ID' },
+    xmlAnnotation: { type: 'string' }
   },
 
   definitions: {
@@ -56,6 +57,10 @@ class Top {
       this._id = q.id;
       delete this.isRandomId;
     }
+    if (!!q.xmlAnnotation) {
+      // TODO: validate XML?
+      this.xmlAnnotation = q.xmlAnnotation;
+    }
 
     return this;
   }
@@ -90,7 +95,10 @@ class Top {
     let q = {};
     if (!this.isRandomId) {
       q.id = this.id
-    };
+    }
+    if (!!this.xmlAnnotation) {
+      q.xmlAnnotation = this.xmlAnnotation;
+    }
 
     q.action = 'defineTop';
 

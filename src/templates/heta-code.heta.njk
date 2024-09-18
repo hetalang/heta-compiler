@@ -22,6 +22,7 @@
   {{- ' stop: ' + component.stop + ',' if component.stop is defined }}
   {{- ' atStart: ' + component.atStart + ',' if component.atStart is defined }}
   {{- ' aux: ' + component.aux | toYAML + ',' if component.aux is defined and component.aux|length > 0}}
+  {{- ' xmlAnnotation: ' + component.xmlAnnotation | toYAML + ',' if component.xmlAnnotation is defined }}
   {{- ' }' }}
 {%- endmacro -%}
 {%- macro notes(component={}, indentation='') %}

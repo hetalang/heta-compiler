@@ -269,9 +269,10 @@ function baseToQ(x){
   let notes = x.elements?.find((y) => y.name === 'notes');
   if (notes) q.notes = _toMarkdown(notes.elements);
   // annotation
-  let annotation = x.elements?.find((y) => y.name === 'annotation');
-  annotation && (q.aux.annotation = _toAux(annotation?.elements[0]?.text));
   //annotation && (q.aux.annotation = _toAux(annotation.elements));
+  let annotation = x.elements?.find((y) => y.name === 'annotation');
+  let annotationContent = annotation?.elements?.map((x) => x.text).join('');
+  !!annotationContent && (q.xmlAnnotation = annotationContent);
 
   return q;
 }
