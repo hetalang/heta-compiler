@@ -1,3 +1,8 @@
+{%- macro toAuxHtml(obj) %}
+{%- if (obj | length > 0) and auxAsNotes %}
+<code>{{- obj | toJSON }}</code>
+{%- endif %}
+{%- endmacro %}
 %{
   This model was created by Heta compiler.
   Additional functions see in the directory
@@ -17,7 +22,7 @@
   {{- model_id }}, '{{record.id}}', 'ConstantCapacity', false
   {%- if record.assignments.start_.num!==undefined %}, 'Capacity', {{record.assignments.start_.num}}{% endif %}
   {%- if record.units!==undefined %}, 'CapacityUnits', '{{ record.unitsRebased(legalUnits, true) }}'{% endif -%}
-  , 'Notes', '{{ record.notesHTML | replace("'", "''")}}', 'Tag', '', 'UserData', {{ record.aux | toStruct }});
+  , 'Notes', '{{ record.notesHTML | replace("'", "''")}}{{ toAuxHtml(record.aux) }}', 'Tag', '', 'UserData', {{ record.aux | toStruct }});
 {%- endfor %}
 
 {% set listOfSpecies = population.selectByClassName('Species') -%}
@@ -142,7 +147,7 @@ addrule(
 {{ storage_id }}.event.{{event.id}} = addevent({{- model_id }}, '{{ event.trigger.toMatlabString() + '>=0' if event.trigger is defined else 'false' }}', {
   {%- for record in population.selectRecordsByContext(event.id) -%}
   '{{- record.id }} = {{ record.assignments[event.id].toMatlabString() }}', {% endfor -%}
-  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML | replace("'", "''") }}', 'Tag', '');
+  }, 'Active', {{ event.active }}, 'Notes', '{{ event.notesHTML | replace("'", "''") }}{{ events.aux | toJSON if events.aux | length > 0 }}', 'Tag', '');
 {%- endfor %}
 
 % Update simulation config

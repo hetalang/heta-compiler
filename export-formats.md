@@ -226,7 +226,10 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ### Properties
 
--
+
+| property | type | required | default | ref | description | 
+| ---------|------|----------|---------|-----|-------------|
+| auxAsNotes | boolean | | `false` | | If `true`, `aux` content will be appended to Simbio `Notes` as JSON object |
 
 ### Output files
 

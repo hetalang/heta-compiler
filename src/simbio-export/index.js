@@ -6,6 +6,7 @@ require('./namespace');
 const schema = {
   type: 'object',
   properties: {
+    auxAsNotes: { type: 'boolean', default: false }
   }
 };
 
@@ -17,6 +18,8 @@ class SimbioExport extends AbstractExport {
     let { logger } = this._builder;
     let valid = SimbioExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
+
+    this.auxAsNotes = q.auxAsNotes;
   }
   get className(){
     return 'SimbioExport';
@@ -37,6 +40,7 @@ class SimbioExport extends AbstractExport {
     let results = this.selectedNamespaces().map(([spaceName, ns]) => {
 
       let image = ns.getSimbioImage();
+      image.auxAsNotes = this.auxAsNotes;
       let modelCode = compiledTemplates['simbio.m.njk'].render(image);
 
       return {
