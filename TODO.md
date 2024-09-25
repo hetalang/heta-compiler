@@ -42,6 +42,7 @@
 
 ## ideas
 
+- allow to use const expressions in `TimeSwitcher.start` and `TimeSwitcher.end`
 - support SBML's delay
 - AnyUnit for zero numbers
 - updating properties with `one::s1.assignments.start_ 5.5;`

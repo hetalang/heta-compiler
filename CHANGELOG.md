@@ -1,5 +1,20 @@
 # Change Log
 
+## 0.9.0
+
+- Added support for Heta standard v0.4.5.
+- Fixed minor parser bugs.
+- **SimbioExport**: Introduced the `ausAsNotes` option and added `aux` as UserData.
+- **Component**: Added `xmlAnnotation` property for SBML Annotation.
+- Fixed issues with `HetaCodeExport` related to the `aux` property.
+- **API**: Made `Component` a subclass of `Top`.
+- Enhanced error messages for JSON schema validation.
+- **Builder API**: Now supports both backend and frontend.
+- All file paths are now relative.
+- Moved export statements to `platform.yml`.
+- Replaced `platform.json` with `platform.yml`.
+- **CLI**: Removed `--skip-export` and `--julia-only`, added the new `--export` option.
+
 ## 0.8.7
 
 - check and warn context without Switchers
