@@ -28,7 +28,10 @@ function tableLoader(fileContent, _options){
     .map((x) => {      
       let cleaned = _cloneDeepWith(x, (value) => {
         if (typeof value?.valueOf() === 'string') {
-          return clean(value);
+          let s = clean(value);
+          if (s !== '') { // if empty string return undefined
+            return s;
+          }
         } else if (Array.isArray(value)) {
           return value.map((y) => clean(y))
             .filter((y) => y !== ''); // removes empty strings from array
@@ -58,8 +61,13 @@ function tableLoader(fileContent, _options){
 }
 
 // remove blanks and new lines symbols
-function clean(string){
-  return string.trim()
+// return x if not a string
+function clean(x) {
+  if (typeof x !== 'string') {
+    return x;
+  }
+
+  return x.trim()
     .replace(/_x000D_\n/g, '')
     .replace(/\r*\n+/g, '');
 }
@@ -77,16 +85,19 @@ function forceBool(x) {
 
 // clone all own properties and arrays
 function _cloneDeepWith(o, handler = (x) => x) {
-  if (o instanceof Object) {
-    var clone;
-    if (o instanceof Array) {
-      clone = o.map((key) => _cloneDeepWith(key, handler));
-    } else {
-      clone = {};
-      Object.entries(o).forEach(([key, value]) => {
-        clone[key] = _cloneDeepWith(value, handler);
-      });
-    }
+  if (o instanceof Array) {
+    let clone = o.map((key) => _cloneDeepWith(key, handler));
+
+    return handler(clone);
+  } else if (o instanceof Object) {
+    let clone = {};
+    
+    Object.entries(o).forEach(([key, value]) => {
+      let propertyValue = _cloneDeepWith(value, handler);
+      if (propertyValue !== undefined) { // do not clone undefined properties
+        clone[key] = propertyValue;
+      }
+    });
     
     return handler(clone);
   } else {
