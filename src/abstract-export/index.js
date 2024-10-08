@@ -83,7 +83,7 @@ class AbstractExport {
     let valid = this.validate(q);
     if (!valid) {
       let msg = `Some of properties do not satisfy requirements for "${this.name}"\n`
-        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
+        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.instancePath} ${x.message}`)
           .join('\n');
       logger?.error(msg, {type: 'ValidationError'});
     }

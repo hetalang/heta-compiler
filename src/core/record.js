@@ -37,11 +37,12 @@ const schema = {
       type: 'object',
       propertyNames: { '$ref': '#/definitions/ID' },
       additionalProperties: {
-        oneOf: [
-          { '$ref': '#/definitions/ExprString' },
+        anyOf: [
           { type: 'number'},
-          { type: 'null' }
-        ]
+          { type: 'null' },
+          { '$ref': '#/definitions/ExprString' }
+        ],
+        errorMessage: 'should be a string, number or null.'
       },
       example: {
         start_: { expr: 1.2 },
@@ -60,7 +61,10 @@ const schema = {
       description: 'Expression as string. Currently pattern does not analyze expressions.',
       type: 'string',
       minLength: 1,
-      pattern: '[a-zA-Z0-9. -+/*^()]*$'
+      pattern: '[a-zA-Z0-9. -+/*^()]*$',
+      errorMessage: {
+        minLength: 'should not be empty string.'
+      }
     }
   }
 };

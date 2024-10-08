@@ -84,7 +84,7 @@ class Top {
     
     if (!valid) {
       let msg = `${q.id} Some of properties do not satisfy requirements for class "${this.name}"\n`
-        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.dataPath} ${x.message}`)
+        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.instancePath} ${x.message}`)
           .join('\n');
       logger?.error(msg, {type: 'ValidationError', space: q.space});
     }
