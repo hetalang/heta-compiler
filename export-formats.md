@@ -41,11 +41,9 @@ Starting from heta-compiler version 0.9.0 the inline export is supported but it 
 One should use `export` property in declaration file or use CLI `--export` property.
 See [migrate to v0.9](./migrate-to-v0.9.md) and [CLI references](./cli-references.md) for details.
 
-```yaml
-
 ## Declaration exports
 
-There are two reccomended ways to export models in Heta compiler: using [`export` property](./cli-references.md#declaration-file-format) in declaration file or using CLI [`--export` property](./cli-references.md#running-build-with CLI-options). If no --export option is set, the compiler will use the `export` property from the declaration file.
+There are two recommended ways to export models in Heta compiler: using [`export` property](./cli-references.md#declaration-file-format) in declaration file or using CLI [`--export` property](./cli-references.md#running-build-with CLI-options). If no --export option is set, the compiler will use the `export` property from the declaration file.
 
 The `export` property is an array of objects with `format` property and other format-specific properties.
 

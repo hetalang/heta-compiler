@@ -2,7 +2,7 @@
 
 ## 0.9.0
 
-- Added support for Heta standard v0.4.5.
+- Added support for Heta standard v0.5.0.
 - Fixed minor parser bugs.
 - **SimbioExport**: Introduced the `ausAsNotes` option and added `aux` as UserData.
 - **Component**: Added `xmlAnnotation` property for SBML Annotation.
