@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.1
+
+- more information in error messages
+- bug fix: return `undefined` for empty string in table-module, clean only strings
+- velnurability fix: update xlsx module
+
 ## 0.9.0
 
 - Added support for Heta standard v0.5.0.

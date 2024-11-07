@@ -93,6 +93,14 @@ echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
 ```
 
+Troubleshooting:
+
+In some cases you may need to install Rosetta to run the tool on MacOS. To install Rosetta, run the following command in the terminal:
+
+```bash
+softwareupdate --install-rosetta
+```
+
 ### Installation in NodeJS environment
 
 [NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently the recommended version is **NodeJS v16 and newer**, but NodeJS v14 is also supported.
