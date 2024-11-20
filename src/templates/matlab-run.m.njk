@@ -2,19 +2,19 @@
 clear; clc; close all;
 
 % full list of records which are able to be outputted, see show_names
-output_ids = [
+output_ids = string([
 {%- for ts in timeScales -%}
 "{{ ts.id }}"{{ ', ' }}
 {%- endfor -%}
 {%- for record in sharedRecords -%}
 "{{ record.id }}"{{ ', ' if not loop.last }}
 {%- endfor -%}
-];
+]);
 % full list of constants (not used)
-p_names = [
+p_names = string([
 {%- for con in constants %}"{{ con.id }}", {% endfor -%}
 {%- for evt in events %}"{{ evt.switcher.id }}_", {% endfor -%}
-];
+]);
 
 % initialization of constants and model
 p = {{ namespace.spaceName }}_param();
@@ -45,13 +45,13 @@ while ti < t_span(2)
 end
 
 %  list of record to plot
-show_ids = [
+show_ids = string([
 {%- for ts in timeScales | filter2('output', true) -%}
 "{{ ts.id }}"{{ ', ' }}
 {%- endfor -%}
 {%- for record in sharedRecords | filter2('output', true) -%}
 "{{ record.id }}"{{ ', ' if not loop.last }}
-{%- endfor -%}];
+{%- endfor -%}]);
 
 % plot records
 figure
