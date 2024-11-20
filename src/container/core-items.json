@@ -4,6 +4,10 @@
         "terms": [{"kind": "amount", "exponent": 1}]
     },
     {
+        "id": "avogadro", "action": "defineUnit",
+        "units": [{ "kind": "mole" }]
+    },
+    {
         "id": "litre", "action": "defineUnit",
         "terms": [{"kind": "length", "exponent": 3}]
     },
