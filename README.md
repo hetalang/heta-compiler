@@ -124,7 +124,7 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
 
 ## Supported tools
 
->for more information see [export formats](export-formats)
+>for more information see [export formats](./export-formats)
 
 Heta compiler was created to support exporting to different popular modeling formats.
 One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools.
@@ -242,7 +242,7 @@ console.log(builder.container.hetaErrors());
 
 ## Known issues and limitations
 
-To see a list of the supported format features, go to [features support](export-formats#features-support) table.
+To see a list of the supported format features, go to [features support](./export-formats#features-support) table.
 
 The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/hetalang/heta-compiler/issues).
 
