@@ -64,7 +64,7 @@ function _toYAML(obj) {
       .map(([key, value]) => `${key}: ${_toYAML(value)}`);
     return `{${pairs.join(', ')}}`;
   } else if (typeof obj === 'string') {
-    let safeString = obj.replace(/"/g, '\\"');
+    let safeString = obj.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
     return `"${safeString}"`;
   } else if (typeof obj === 'number') {
     return obj;
