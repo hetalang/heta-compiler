@@ -38,6 +38,14 @@ function jsbmlToQArr(JSBML){
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
 
+  // preliminary analyses listOfInitialAssignments to get variables to init in the beginning
+  // it is applied for parameters which are @Records, not @Const
+  let initialAssignmentsSymbols = model.elements
+    .filter((x) => x.name === 'listOfInitialAssignments')
+    .map((x) => x.elements)
+    .flat(1)
+    .filter((x) => x.name === 'initialAssignment')
+    .map((x) => x.attributes?.symbol);
 
   // unit definition
   let unitDict = {};
@@ -136,7 +144,8 @@ function jsbmlToQArr(JSBML){
     .flat(1)
     .filter((x) => x.name === 'parameter')
     .forEach((x) => {
-      let q = parameterToQ(x, unitDict);
+      let forceRecord = initialAssignmentsSymbols.indexOf(x.attributes?.id) >= 0;
+      let q = parameterToQ(x, unitDict, forceRecord);
       qArr.push(q);
     });
 
@@ -567,16 +576,22 @@ function reactionToQ(x){
   return qArr;
 }
 
-function parameterToQ(x, unitDict = {}){
+function parameterToQ(x, unitDict = {}, forceRecord = false){
   let q = baseToQ(x);
 
   let isConstant = x.attributes?.constant === 'true';
   let num = x.attributes?.value;
-  if (isConstant) {
+  if (isConstant && !forceRecord) {
     q.class = 'Const';
     if (num !== undefined) {
       q.num = SBMLValueToNumber(num);
     }
+  } else if (isConstant) {
+    q.class = 'Record';
+    if (num !== undefined) {
+      q.assignments = { start_: SBMLValueToNumber(num) };
+    }
+    q.boundary = true;
   } else {
     q.class = 'Record';
     if (num !== undefined) {

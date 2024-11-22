@@ -6,7 +6,8 @@
 
 // include module.heta type heta;
 // include table.xlsx type table with { sheet: 0, omitRows: 3 };
-include sbml.xml type sbml;
+//#setNS {space: nameless, type: abstract};
+include sbml2.xml type sbml;
 // include addon.json type json;
 // include addon.yml type yaml;
 
