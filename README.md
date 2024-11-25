@@ -13,7 +13,7 @@
 
 To read the full documentation, visit the Heta project homepage: <https://hetalang.github.io/#/heta-compiler/>.
 
-## General information
+## General info
 
 - [Introduction](#introduction)
 - [How to cite](#how-to-cite)
@@ -27,7 +27,7 @@ To read the full documentation, visit the Heta project homepage: <https://hetala
 - [License](#license)
 - [Authors and history](#authors-and-history)
 
-## Additional information
+## Additional info
 
 - [Export formats](./export-formats)
 - [CLI references](./cli-references)
