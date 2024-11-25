@@ -182,7 +182,7 @@ The following is the example where we create a Heta module and compile it into S
 
 3. See results of compilation in directory /path/to/my-platform/**dist**.
 
->If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](https://hetalang.github.io/#/specifications/include){target=_self}.
+>If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](https://hetalang.github.io/#/specifications/actions?id=include){target=_self}.
 
 ## Creating a Heta platform template
 
