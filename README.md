@@ -13,14 +13,7 @@
 
 To read the full documentation, visit the Heta project homepage: <https://hetalang.github.io/#/heta-compiler/>.
 
-See also:
-
-- [Migrate to v0.6](./migrate-to-v0.6);
-- [Migrate to v0.7](./migrate-to-v0.7);
-- [Migrate to v0.8](./migrate-to-v0.8);
-- [Migrate to v0.9](./migrate-to-v0.9).
-
-## Table of contents
+## General information
 
 - [Introduction](#introduction)
 - [How to cite](#how-to-cite)
@@ -33,6 +26,22 @@ See also:
 - [Contribute](#contribute)
 - [License](#license)
 - [Authors and history](#authors-and-history)
+
+## Additional information
+
+- [Export formats](./export-formats)
+- [CLI references](./cli-references)
+- [qsp-functions.heta](./qsp-functions.heta)
+- [qsp-units.heta](./qsp-units.heta)
+- [API docs](https://hetalang.github.io/heta-compiler/dev)
+- [Changelog](./CHANGELOG.md)
+
+## Migration from previous versions
+
+- [Migrate to v0.6](./migrate-to-v0.6);
+- [Migrate to v0.7](./migrate-to-v0.7);
+- [Migrate to v0.8](./migrate-to-v0.8);
+- [Migrate to v0.9](./migrate-to-v0.9).
 
 ## Introduction
 
