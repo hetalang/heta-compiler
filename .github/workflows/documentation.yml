@@ -17,9 +17,12 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 18.x
-    - run: npm ci
-    - run: npm run jsdoc
-    - run: cp -f src/builder/declaration-schema.json docs
+    - name: Create files
+      run: |
+        npm ci
+        npm run jsdoc
+        cp -f src/builder/declaration-schema.json docs
+        touch docs/.nojekyll
     - name: Deploy to "gh-pages"
       uses: JamesIves/github-pages-deploy-action@v4
       with:
