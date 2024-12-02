@@ -13,7 +13,7 @@ const { Builder } = require('./builder');
 const Container = require('./container');
 const coreItems = require('./container/core-items');
 const ModuleSystem = require('./module-system');
-const { Transport } = require('./logger');
+const { Transport, StringTransport } = require('./logger');
 const nunjucks = require('nunjucks');
 const HetaLevelError = require('./heta-level-error');
 
@@ -70,5 +70,6 @@ module.exports = {
   nunjucksEnv,
   ModuleSystem,
   Transport,
+  StringTransport,
   HetaLevelError,
 };
