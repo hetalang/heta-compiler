@@ -30,14 +30,13 @@
       "properties": {
         "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
         "logPath": {"type": "string", "default": "build.log"},
-        "logLevel": {"type": "string", "default": "info", "enum": ["panic", "info", "warn", "error"]},
         "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "unitsCheck": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},
         "metaDir": {"type": "string", "default": "meta" }
       },
-      "default": {"debug": false, "logLevel": "info"}
+      "default": {"debug": false}
     },
     "scripts": {
       "type": "object",
