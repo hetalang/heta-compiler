@@ -14,7 +14,6 @@ describe('Case #14: testing SBML module with units', () => {
       id: 'test',
       builderVersion: '*',
       options: {
-        logLevel: 'panic'
       },
       importModule: {
         type: 'heta',

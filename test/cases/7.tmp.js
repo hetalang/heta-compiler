@@ -17,7 +17,6 @@ describe('Testing "cases/7-importNS"', () => {
       id: 'test',
       builderVersion: '*',
       options: {
-        logLevel: 'panic'
       },
       importModule: {
         type: 'heta',

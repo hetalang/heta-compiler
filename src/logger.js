@@ -8,7 +8,7 @@ const levels = [
   'info', // 1
   'warn', // 2
   'error', // 3
-  'panic' // 4
+  'crit' // 4
 ];
 
 class Logger {
@@ -50,7 +50,7 @@ class Logger {
    * To add a new log event to logger.
    * This event will be then sent to all transports.
    * 
-   * @param {string} level Log level: 'debug', 'info', 'warn', 'error', 'panic'
+   * @param {string} level Log level: 'debug', 'info', 'warn', 'error', 'crit'
    * @param {string} msg Log message.
    * @param {object} opt Options for transport.
    */
@@ -59,7 +59,7 @@ class Logger {
     if (levelNum < 0) {
       throw new TypeError(`Unknown logger level: "${level}"`);
     }
-    if (levelNum >= 3) { // error and panic
+    if (levelNum >= 3) { // error and crit
       this._hasErrors = true;
     }
 
@@ -136,7 +136,7 @@ class Transport {
    * See also {@link Logger}.
    * 
    * @param {string} showLevel If level is equal or higher than the value it will be analyzed.
-   *    Possible values: 'debug', 'info', 'warn', 'error', 'panic'
+   *    Possible values: 'debug', 'info', 'warn', 'error', 'crit'
    * 
    * @property {number} showLevelNum Numeric identifier of showLevel value: 0, 1, 2, 3, 4.
    */

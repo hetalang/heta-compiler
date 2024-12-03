@@ -23,6 +23,7 @@ program
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
   .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
+  .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.')
   // options
   .option('--units-check', 'Check all Records for unit consistency.')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.')
@@ -38,10 +39,8 @@ program
   .parse(process.argv);
 
 async function main() {
-  let args = program.args;
-  let opts = program.opts();
-  // print newer version message
-  //if (!opts.skipUpdates) await printVersionMessage();
+  let args = program.args;   // target directory
+  let opts = program.opts(); // cli declaration + name of declaration file
 
   // set target directory of platform and check if exist
   let targetDir = path.normalize(args[0] || '.');
@@ -50,7 +49,13 @@ async function main() {
     process.exit(2); // BRAKE
   }
 
-  // === read declaration file ===
+  // set minimal log level
+  let logLevel = opts.logLevel || 'info';
+
+  // 0. empty declaration
+  let declaration = {options: {}, importModule: {}, export: []};
+
+  // 1. declaration from file
   // search
   let searches = ['', '.json', '.yml']
     .map((ext) => path.join(targetDir, (opts.declaration || 'platform') + ext));
@@ -58,7 +63,6 @@ async function main() {
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
-  let declaration = {options: {}, importModule: {}, export: []}; // default declaration
   if (!opts.declaration && extensionNumber === -1) {
     process.stdout.write('No declaration file, running with defaults...\n');
   } else if (extensionNumber === -1) {
@@ -80,22 +84,16 @@ async function main() {
     }
   }
 
+  // 2. declaration from cli
   // parse export
-  let exportYAML = '[' + opts.export?.replace(/:/g, ': ') + ']';
   try {
-    var exportItems = YAML.load(exportYAML).map((x) => {
-      if (typeof x === 'string') {
-        return { format: x };
-      } else {
-        return x;
-      }
-    }); 
+    var exportItems = parseExportOption(opts.export);
   } catch (e) {
-    process.stdout.write(`Wrong format of export option: "${exportYAML}"\n`);
+    process.stdout.write(`Wrong format of export option: "${opts.export}"\n`);
     process.exit(2); // BRAKE
   }
 
-  // === update declaration ===
+  // update declaration
   opts.unitsCheck !== undefined && (declaration.options.unitsCheck = opts.unitsCheck);
   opts.logMode !== undefined && (declaration.options.logMode = opts.logMode);
   opts.debug !== undefined && (declaration.options.debug = opts.debug);
@@ -105,17 +103,29 @@ async function main() {
   opts.type !== undefined && (declaration.importModule.type = opts.type);
   opts.export !== undefined && (declaration.export = exportItems);
 
-  let minLogLevel = declaration?.options?.logLevel || 'info'; // set logLevel before declaration check
-
+  // 3. run builder (set declaration defaults internally)
   let builder = new Builder(
     declaration,
     targetDir,
     fs.readFileSync,
     fs.outputFileSync,
-    [new StdoutTransport(minLogLevel)]
+    [new StdoutTransport(logLevel)]
   ).run();
 
   return builder;
+}
+
+function parseExportOption(value) {
+  let exportYAML = '[' + value.replace(/:/g, ': ') + ']';
+  var exportItems = YAML.load(exportYAML).map((x) => {
+    if (typeof x === 'string') {
+      return { format: x };
+    } else {
+      return x;
+    }
+  });
+
+  return exportItems;
 }
 
 // simulatanious run

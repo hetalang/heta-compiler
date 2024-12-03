@@ -11,7 +11,8 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'panic' },
+      options: {
+      },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
@@ -32,7 +33,8 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'panic' },
+      options: {
+      },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',
@@ -50,7 +52,7 @@ describe('Integral test of correct xlsx module', () => {
       id: 'test',
       title: 'Test',
       builderVersion: '>=0.4',
-      options: { logLevel: 'panic', debug: false },
+      options: { debug: false },
       importModule: {
         type: 'xlsx',
         source: 'table.xlsx',

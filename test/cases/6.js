@@ -18,7 +18,6 @@ describe('Testing "cases/6-import"', () => {
       id: 'test',
       builderVersion: '*',
       options: {
-        logLevel: 'panic'
       },
       importModule: {
         type: 'heta',

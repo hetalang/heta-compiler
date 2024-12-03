@@ -64,6 +64,7 @@ List of `heta build` options:
 | --meta-dir | \<string\> | |  Set meta directory path. |
 | --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
 | -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
+| --log-level | string | error | The level of log information to display. Possible values are: error/warn/info/debug. |
 | --skip-updates | | | Do not check available new version in npm. |
 | -e, --export | \<string\> | | List of export formats to run divided by colon. It should be in single quotation. It can be list of format names or objects including settings for export. see more details in [export-formats](./export-formats.md). |
 
@@ -104,14 +105,13 @@ To create a draft declaration file use ["heta init" command](#"heta-init"-comman
 
 #### Example
 
-The following declaration file changes the default **dist** directory and displays only Heta error in console.
+The following declaration file changes the default **dist** directory.
 
 ```json
 {
   "id": "test",
   "options": {
-    "distDir": "output",
-    "logLevel": "error"
+    "distDir": "output"
   }
 }
 ```
@@ -211,7 +211,6 @@ There are properties in declaration file which do not change compilation process
 | options | object | | {} | A set of compiler options. |
 | options.logMode | string | --log-mode | error | The rule in which case the log file should be created. Possible values are: never/error/always. |
 | options.logPath | string | | build.log | Filepath where the log file should be created. |
-| options.logLevel | string | | info | When parsing the compiler prints the messages to the shell. Here you can set a level of printing messages. Possible values: "info", "warn", "error". For example if you set "warn", only warnings and errors will be printed. |
 | options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
 | options.unitsCheck | boolean | --units-check | false | If `true` all Record will be checked for units consistency. |
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
@@ -226,7 +225,6 @@ Using neither declaration file nor CLI options is equivalent to the following de
     "options": {
         "logMode": "error",
         "logPath": "build.log",
-        "logLevel": "info",
         "logFormat": "string",
         "distDir": "dist",
         "metaDir": "meta",

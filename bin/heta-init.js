@@ -24,7 +24,6 @@ const defaultPlatform = {
   options: {
     debug: false,
     logPath: 'output.log',
-    logLevel: 'info',
     unitsCheck: false
   },
   //script: {

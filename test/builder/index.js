@@ -15,7 +15,7 @@ describe('Test Builder.', () => {
 describe('Errors in declaration.', () => {
   it('Wrong prop type.', () => {
     expect(() => {
-      let b = new Builder({id: 'test', notes: 1.1, options: {logLevel: 'panic'}});
+      let b = new Builder({id: 'test', notes: 1.1, options: {}});
     }).to.throw();
     //expect(b.container.hetaErrors()).to.be.lengthOf(1);
   });

@@ -16,7 +16,6 @@ describe('Testing "cases/12-to-sbml"', () => {
       id: 'test',
       builderVersion: '*',
       options: {
-        logLevel: 'panic'
       },
       importModule: {
         type: 'heta',

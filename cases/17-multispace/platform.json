@@ -3,8 +3,7 @@
   "id": "template",
   "options": {
     "debug": false,
-    "logPath": "output.log",
-    "logLevel": "info"
+    "logPath": "output.log"
   },
   "importModule": {
     "type": "heta",

@@ -1,7 +1,6 @@
 id: mm
 builderVersion: '*'
 options:
-  logLevel: info
   debug: false
   unitsCheck: false
 importModule:

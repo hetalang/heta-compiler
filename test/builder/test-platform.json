@@ -7,8 +7,7 @@
   "builderVersion": ">=0.4",
   "aux": {},
   "options": {
-    "debug": false,
-    "logLevel": "panic"
+    "debug": false
   },
   "scripts": {
     "afterInit": "script0.js",
