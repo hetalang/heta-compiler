@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+
+// error codes for CLI
+// 0 - OK
+// 1 - unexpected error
+// 2 - error because of wrong input
+
 const { Command } = require('commander');
 const program = new Command();
 const fs = require('fs-extra');
@@ -40,7 +46,7 @@ program
 
 async function main() {
   let args = program.args;   // target directory
-  let opts = program.opts(); // cli declaration + name of declaration file
+  let cliOptions = program.opts(); // cli declaration + name of declaration file + log level
 
   // set target directory of platform and check if exist
   let targetDir = path.normalize(args[0] || '.');
@@ -50,7 +56,7 @@ async function main() {
   }
 
   // set minimal log level
-  let logLevel = opts.logLevel || 'info';
+  let logLevel = cliOptions.logLevel || 'info';
 
   // 0. empty declaration
   let declaration = {options: {}, importModule: {}, export: []};
@@ -58,15 +64,15 @@ async function main() {
   // 1. declaration from file
   // search
   let searches = ['', '.json', '.yml']
-    .map((ext) => path.join(targetDir, (opts.declaration || 'platform') + ext));
+    .map((ext) => path.join(targetDir, (cliOptions.declaration || 'platform') + ext));
   let extensionNumber = searches
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
-  if (!opts.declaration && extensionNumber === -1) {
+  if (!cliOptions.declaration && extensionNumber === -1) {
     process.stdout.write('No declaration file, running with defaults...\n');
   } else if (extensionNumber === -1) {
-    process.stdout.write(`Declaration file "${opts.declaration}" not found.\nSTOP!`);
+    process.stdout.write(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
     process.exit(2); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
@@ -87,21 +93,21 @@ async function main() {
   // 2. declaration from cli
   // parse export
   try {
-    var exportItems = parseExportOption(opts.export);
+    var exportItems = parseExportOption(cliOptions.export);
   } catch (e) {
-    process.stdout.write(`Wrong format of export option: "${opts.export}"\n`);
+    process.stdout.write(`Wrong format of export option: "${cliOptions.export}"\n`);
     process.exit(2); // BRAKE
   }
 
   // update declaration
-  opts.unitsCheck !== undefined && (declaration.options.unitsCheck = opts.unitsCheck);
-  opts.logMode !== undefined && (declaration.options.logMode = opts.logMode);
-  opts.debug !== undefined && (declaration.options.debug = opts.debug);
-  opts.distDir !== undefined && (declaration.options.distDir = opts.distDir);
-  opts.metaDir !== undefined && (declaration.options.metaDir = opts.metaDir);
-  opts.source !== undefined && (declaration.importModule.source = opts.source);
-  opts.type !== undefined && (declaration.importModule.type = opts.type);
-  opts.export !== undefined && (declaration.export = exportItems);
+  cliOptions.unitsCheck !== undefined && (declaration.options.unitsCheck = cliOptions.unitsCheck);
+  cliOptions.logMode !== undefined && (declaration.options.logMode = cliOptions.logMode);
+  cliOptions.debug !== undefined && (declaration.options.debug = cliOptions.debug);
+  cliOptions.distDir !== undefined && (declaration.options.distDir = cliOptions.distDir);
+  cliOptions.metaDir !== undefined && (declaration.options.metaDir = cliOptions.metaDir);
+  cliOptions.source !== undefined && (declaration.importModule.source = cliOptions.source);
+  cliOptions.type !== undefined && (declaration.importModule.type = cliOptions.type);
+  cliOptions.export !== undefined && (declaration.export = exportItems);
 
   // 3. run builder (set declaration defaults internally)
   let builder = new Builder(
@@ -115,7 +121,7 @@ async function main() {
   return builder;
 }
 
-function parseExportOption(value) {
+function parseExportOption(value = '') {
   let exportYAML = '[' + value.replace(/:/g, ': ') + ']';
   var exportItems = YAML.load(exportYAML).map((x) => {
     if (typeof x === 'string') {
