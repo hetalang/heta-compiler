@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.9.2
+
+- remove logLevel option from `platform.yaml`, use `--log-level info` instead in CLI
+- fix bug with SBML import when use `<initialAssignment>`
+- fix bug with Simbio export with zero outputs
+- add Avogadro as base unit
+
+- documentation updates
+
 ## 0.9.1
 
 - more information in error messages
