@@ -33,6 +33,10 @@
 
 ## bugs
 
+- update libs
+  - mathjs => 12.4.3 => 13.2.3 => 14.0.0
+  - inquirer => 12.1.0
+
 ## features
 
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
