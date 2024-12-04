@@ -88,8 +88,7 @@ class Builder {
     this._metaDirname = path.join(this._coreDirname, declaration.options.metaDir);
     this._logPath = path.join(this._coreDirname, declaration.options.logPath);
 
-    logger.info(`Builder initialized in directory "${this._coreDirname}".`);
-    if (this.id) logger.info(`Platform id: "${this.id}"`);
+    logger.info(`Builder initialized for the platform "${this.id}"`);
     
     // create "export" classes bound to this container
     Object.entries(Builder._exportClasses).forEach(([key, _Class]) => {
@@ -135,8 +134,6 @@ class Builder {
    * 
    */
   run() {
-    this.logger.info(`Compilation of module "${this.importModule.source}" of type "${this.importModule.type}"...`);
-    
     // 1. Parsing
     let ms = new ModuleSystem(this.logger, this.fileReadHandler);
     let absFilename = path.join(this._coreDirname, this.importModule.source);

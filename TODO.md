@@ -37,8 +37,8 @@
 
 - alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
   wait until Node.js 22 will be released
-- `include` statement is deprecated, use `#include` action (v0.8.0)
 - automatic creation of modifiers in SBML
+- use relative paths in logs
 
 ## ideas
 

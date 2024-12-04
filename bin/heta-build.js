@@ -54,6 +54,7 @@ async function main() {
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(2); // BRAKE
   }
+  process.stdout.write(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
 
   // set minimal log level
   let logLevel = cliOptions.logLevel || 'info';
@@ -64,8 +65,9 @@ async function main() {
   // 1. declaration from file
   // search
   let searches = ['', '.json', '.yml']
-    .map((ext) => path.join(targetDir, (cliOptions.declaration || 'platform') + ext));
+    .map((ext) => (cliOptions.declaration || 'platform') + ext);
   let extensionNumber = searches
+    .map((filename) => path.join(targetDir, filename)) // add targetDir
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
@@ -76,8 +78,8 @@ async function main() {
     process.exit(2); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
-    process.stdout.write(`Running compilation with declaration file "${path.resolve(declarationFile)}"...\n`);
-    let declarationText = fs.readFileSync(declarationFile);
+    process.stdout.write(`Reading declaration file "${declarationFile}"...\n`);
+    let declarationText = fs.readFileSync(path.join(targetDir, declarationFile));
     try {
       let declarationFromFile = YAML.load(declarationText);
       if (typeof declarationFromFile !== 'object'){
