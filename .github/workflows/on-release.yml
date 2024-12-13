@@ -24,6 +24,13 @@ jobs:
             chmod 775 heta-compiler
             tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
             cd ..
+        -name: Create .deb package
+          run: |
+            mkdir -p dist/heta-compiler/DEBIAN
+            cp build-deb/control dist/heta-compiler/DEBIAN/
+            mkdir -p dist/heta-compiler/usr/local/bin
+            cp dist/heta-compiler-linux dist/heta-compiler/usr/local/bin/
+            dpkg-deb --build dist/heta-compiler
 
         - name: Upload Release Asset Linux
           uses: actions/upload-release-asset@v1
@@ -63,6 +70,16 @@ jobs:
             upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-macos.tar.gz
             asset_name: heta-compiler-macos.tar.gz
+            asset_content_type: application/octet-stream
+        
+        - name: Upload Release DEB Linux
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler.deb
+            asset_name: heta-compiler-linux-x64.deb
             asset_content_type: application/octet-stream
     upload-windows-release-asset:
         runs-on: windows-latest
