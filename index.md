@@ -64,16 +64,27 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 [Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install.
 
-### Installation in Linux
+### Installation in Ubuntu/Debian Linux
+
+Install as .deb package
+```bash
+wget https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-x64.deb
+sudo dpkg -i heta-compiler-x64.deb
+```
+
+Uninstall .deb package
+```bash
+sudo dpkg -r heta-compiler
+```
+
+### Installation in other Linux systems
 
 For all users (requires sudo previleges)
-
 ```bash
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 For single user without sudo previleges
-
 ```bash
 mkdir -p ~/bin
 wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64
@@ -85,13 +96,11 @@ source ~/.bashrc
 ### Installation in Macos
 
 For all users (requires sudo previleges)
-
 ```bash
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 For single user without sudo previleges
-
 ```bash
 mkdir -p ~/bin
 wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64
