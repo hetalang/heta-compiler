@@ -24,7 +24,7 @@ jobs:
             chmod 775 heta-compiler
             tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
             cd ..
-        -name: Create .deb package
+        - name: Create .deb package
           run: |
             mkdir -p dist/heta-compiler/DEBIAN
             cp build-deb/control dist/heta-compiler/DEBIAN/
