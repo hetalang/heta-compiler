@@ -3,10 +3,26 @@
   <metadata>
     <id>heta-compiler</id>
     <version>0.9.2</version>
-    <title>heta-compiler</title>
-    <authors>Heta project</authors>
+    <title>Heta Compiler - Command-Line Tool for Systems Biology</title>
+    <iconUrl>https://hetalang.github.io/assets/img/logo.svg</iconUrl>
+    <packageSourceUrl>https://github.com/hetalang/heta-compiler</packageSourceUrl>
+    <docsUrl>https://hetalang.github.io/#/heta-compiler/</docsUrl>
+    <bugTrackerUrl>https://github.com/hetalang/heta-compiler/issues</bugTrackerUrl>
+    <authors>Evgeny Metelkin</authors>
     <owners>Heta project</owners>
-    <description>CLI tool for Heta language</description>
+    <description>
+**Heta Compiler** is a tool for developing Quantitative Systems Pharmacology (QSP) and Systems Biology platforms. It integrates modules in formats like [Heta language code](https://hetalang.github.io/#/specifications/), Excel, JSON/YAML, or [SBML](http://sbml.org/) and transforms them into dynamical models.
+
+Designed for scalability, Heta Compiler supports iterative updates, human-readable formats, and on-the-fly exports to popular simulation formats. It seamlessly integrates into existing workflows and CI/CD strategies.
+
+## Features
+- Combines diverse modules into unified QSP models.
+- Supports iterative updates and collaborative workflows.
+- Exports models to widely-used simulation formats.
+
+## Citation
+Metelkin, E., (2021). Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats. *Journal of Open Source Software, 6(67), 3708*, [DOI: 10.21105/joss.03708](https://doi.org/10.21105/joss.03708).
+    </description>
     <releaseNotes>Initial release.</releaseNotes>
     <summary>Heta Compiler is a tool for developing Quantitative Systems Pharmacology (QSP) and Systems Biology platforms. It integrates modules in formats like Heta language code, Excel, JSON/YAML, or SBML and transforms them into dynamical models.</summary>
     <language>en-US</language>
