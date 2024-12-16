@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>heta-compiler</id>
+    <version>0.9.2</version>
+    <title>heta-compiler</title>
+    <authors>Heta project</authors>
+    <owners>Heta project</owners>
+    <description>CLI tool for Heta language</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <summary>Heta Compiler is a tool for developing Quantitative Systems Pharmacology (QSP) and Systems Biology platforms. It integrates modules in formats like Heta language code, Excel, JSON/YAML, or SBML and transforms them into dynamical models.</summary>
+    <language>en-US</language>
+    <projectUrl>https://hetalang.github.io/#/heta-compiler/</projectUrl>
+    <licenseUrl>https://github.com/hetalang/heta-compiler/blob/master/LICENSE</licenseUrl>
+    <tags>heta cli tools windows</tags>
+    <dependencies />
+  </metadata>
+</package>
