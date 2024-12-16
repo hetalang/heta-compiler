@@ -11,35 +11,17 @@
 
 **Heta compiler** is a software tool for the compilation of Heta-based QSP modeling platforms. Heta compiler can also be used as a JavaScript/Node package to develop modeling tools.
 
-**General info**
-
-- [Introduction](#introduction)
-- [How to cite](#how-to-cite)
-- [Installation](#installation)
-- [Supported tools](#supported-tools)
-- [Usage of command line interface](#usage-of-command-line-interface)
-- [Usage in NodeJS packages](#usage-in-nodejs-packages)
-- [Known issues and limitations](#known-issues-and-limitations)
-- [Getting help](#getting-help)
-- [Contribute](#contribute)
-- [License](#license)
-- [Authors and history](#authors-and-history)
-
-**Additional info**
-
+- **General info**
 - [Export formats](./export-formats)
 - [CLI references](./cli-references)
 - [qsp-functions.heta](./qsp-functions.heta)
 - [qsp-units.heta](./qsp-units.heta)
 - [API docs](https://hetalang.github.io/heta-compiler/dev)
-- [Change log](./CHANGELOG.md)
-
-**Migration from previous versions**
-
-- [Migrate to v0.6](./migrate-to-v0.6);
-- [Migrate to v0.7](./migrate-to-v0.7);
-- [Migrate to v0.8](./migrate-to-v0.8);
-- [Migrate to v0.9](./migrate-to-v0.9).
+- [Change log](./CHANGELOG)
+- [Migrate to v0.6](./migrate-to-v0.6)
+- [Migrate to v0.7](./migrate-to-v0.7)
+- [Migrate to v0.8](./migrate-to-v0.8)
+- [Migrate to v0.9](./migrate-to-v0.9)
 
 ## Introduction
 
