@@ -27,3 +27,21 @@ choco apikey --key <your-api-key> --source https://push.chocolatey.org/
 choco push heta-compiler.0.9.2.nupkg --source https://push.chocolatey.org/
 #choco push heta-compiler.0.9.2.nupkg --source=https://push.chocolatey.org/ --api-key=<your-api-key>
 ```
+
+## Installation
+
+```ps1
+choco install heta-compiler
+```
+
+## Update
+
+```ps1
+choco upgrade heta-compiler
+```
+
+## Uninstall
+
+```ps1
+choco uninstall heta-compiler
+```

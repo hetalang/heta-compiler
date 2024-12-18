@@ -48,7 +48,7 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 ### Installation in Ubuntu/Debian Linux
 
-Install as .deb package
+Install/Update as .deb package
 ```bash
 wget https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-x64.deb
 sudo dpkg -i heta-compiler-x64.deb
@@ -73,6 +73,25 @@ wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/dow
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
+```
+
+### Installation with Homebrew in MacOS
+
+If you have [Homebrew installed](https://brew.sh/), you can install Heta compiler using the following commands:
+```bash
+brew tap hetalang/heta-compiler
+brew install heta-compiler
+```
+
+Update Heta compiler
+```bash
+brew update
+brew upgrade heta-compiler
+```
+
+Uninstall Heta compiler
+```bash
+brew uninstall heta-compiler
 ```
 
 ### Installation in Macos
