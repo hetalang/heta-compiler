@@ -44,7 +44,7 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 ### Installation in Windows
 
-[Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install.
+[Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install or update.
 
 ### Installation in Ubuntu/Debian Linux
 
@@ -61,18 +61,28 @@ sudo dpkg -r heta-compiler
 
 ### Installation in other Linux systems
 
-For all users (requires sudo previleges)
+Install/Update for all users (requires sudo previleges)
 ```bash
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
-For single user without sudo previleges
+Uninstall for all users
+```bash
+sudo rm /usr/local/bin/heta
+```
+
+Install/Update for single user without sudo previleges
 ```bash
 mkdir -p ~/bin
 wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
+```
+
+Uninstall for single user
+```bash
+rm ~/bin/heta
 ```
 
 ### Installation with Homebrew in MacOS
@@ -96,18 +106,28 @@ brew uninstall heta-compiler
 
 ### Installation in Macos
 
-For all users (requires sudo previleges)
+Install/Update for all users (requires sudo previleges)
 ```bash
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
 ```
 
-For single user without sudo previleges
+Uninstall for all users
+```bash
+sudo rm /usr/local/bin/heta
+```
+
+Install/Update for single user without sudo previleges
 ```bash
 mkdir -p ~/bin
 wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
+```
+
+Uninstall for single user
+```bash
+rm ~/bin/heta
 ```
 
 Troubleshooting:
