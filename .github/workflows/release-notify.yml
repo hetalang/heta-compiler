@@ -25,10 +25,7 @@ jobs:
             \"sections\": [{
               \"activityTitle\": \"**Release: [${RELEASE_NAME}](${RELEASE_URL})**\",
               \"activitySubtitle\": \"Repository: [${REPO_NAME}](${REPO_URL})\",
-              \"text\": \"${RELEASE_BODY}\",
-              \"facts\": [
-                {\"name\": \"Tag\", \"value\": \"${RELEASE_TAG}\"}
-              ]
+              \"text\": \"${RELEASE_BODY}\"
             }]
           }" \
           $WEBHOOK_URL
