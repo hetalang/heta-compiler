@@ -89,7 +89,7 @@ rm ~/bin/heta
 
 If you have [Homebrew installed](https://brew.sh/), you can install Heta compiler using the following commands:
 ```bash
-brew tap hetalang/heta-compiler
+brew tap hetalang/heta-compiler https://github.com/hetalang/heta-compiler
 brew install heta-compiler
 ```
 
