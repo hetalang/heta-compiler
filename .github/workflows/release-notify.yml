@@ -19,16 +19,16 @@ jobs:
         REPO_URL: ${{ github.event.repository.html_url }}
         RELEASE_URL: ${{ github.event.release.html_url }}
       run: |
-        curl -H "Content-Type: application/json" \
-          -d '{
-                "text": "🚀 A new release has been published!",
-                "sections": [{
-                  "activityTitle": "**Release: [${RELEASE_NAME}](${RELEASE_URL})**",
-                  "activitySubtitle": "Repository: [${REPO_NAME}](${REPO_URL})",
-                  "text": "${RELEASE_BODY}",
-                  "facts": [
-                    {"name": "Tag", "value": "${RELEASE_TAG}"}
-                  ]
-                }]
-              }' \
+        curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"text\": \"🚀 A new release has been published!\",
+            \"sections\": [{
+              \"activityTitle\": \"**Release: [${RELEASE_NAME}](${RELEASE_URL})**\",
+              \"activitySubtitle\": \"Repository: [${REPO_NAME}](${REPO_URL})\",
+              \"text\": \"${RELEASE_BODY}\",
+              \"facts\": [
+                {\"name\": \"Tag\", \"value\": \"${RELEASE_TAG}\"}
+              ]
+            }]
+          }" \
           $WEBHOOK_URL
