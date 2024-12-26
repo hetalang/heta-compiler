@@ -1,0 +1,34 @@
+name: Notify Teams on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify-teams:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send notification to Microsoft Teams
+      env:
+        WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK }}
+        RELEASE_TAG: ${{ github.event.release.tag_name }}
+        RELEASE_NAME: ${{ github.event.release.name }}
+        RELEASE_BODY: ${{ github.event.release.body }}
+        REPO_NAME: ${{ github.repository }}
+        REPO_URL: ${{ github.event.repository.html_url }}
+        RELEASE_URL: ${{ github.event.release.html_url }}
+      run: |
+        curl -H "Content-Type: application/json" \
+          -d '{
+                "text": "🚀 A new release has been published!",
+                "sections": [{
+                  "activityTitle": "**Release: [${RELEASE_NAME}](${RELEASE_URL})**",
+                  "activitySubtitle": "Repository: [${REPO_NAME}](${REPO_URL})",
+                  "text": "${RELEASE_BODY}",
+                  "facts": [
+                    {"name": "Tag", "value": "${RELEASE_TAG}"}
+                  ]
+                }]
+              }' \
+          $WEBHOOK_URL
