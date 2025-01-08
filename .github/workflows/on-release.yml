@@ -5,7 +5,7 @@ on:
         types: [created]
 
 jobs:
-    upload-release-asset:
+    upload-macos-release-asset:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v4
@@ -15,32 +15,11 @@ jobs:
         - run: npm ci
         - name: Build standalone apps
           run: |
-            npx pkg . -t linux,macos --compress GZip
+            npx pkg . -t macos --compress GZip
             cd ./dist
-            cp -f heta-compiler-linux heta-compiler
-            chmod 775 heta-compiler
-            tar -czvf ./heta-compiler-linux.tar.gz ./heta-compiler
-            cp -f heta-compiler-macos heta-compiler
             chmod 775 heta-compiler
             tar -czvf ./heta-compiler-macos.tar.gz ./heta-compiler
             cd ..
-        - name: Create .deb package
-          run: |
-            mkdir -p dist/heta-compiler-deb/DEBIAN
-            cp build-deb/control dist/heta-compiler-deb/DEBIAN/
-            mkdir -p dist/heta-compiler-deb/usr/local/bin
-            cp dist/heta-compiler-linux dist/heta-compiler-deb/usr/local/bin/heta
-            dpkg-deb --build dist/heta-compiler-deb
-
-        - name: Upload Release Asset Linux
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-linux
-            asset_name: heta-compiler-linux-x64
-            asset_content_type: application/octet-stream
 
         - name: Upload Release Asset Macos
           uses: actions/upload-release-asset@v1
@@ -48,18 +27,8 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-macos
+            asset_path: dist/heta-compiler
             asset_name: heta-compiler-macos-x64
-            asset_content_type: application/octet-stream
-
-        - name: Upload Release TAR.GZ Linux
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-linux.tar.gz
-            asset_name: heta-compiler-linux.tar.gz
             asset_content_type: application/octet-stream
 
         - name: Upload Release TAR.GZ Macos
@@ -70,6 +39,72 @@ jobs:
             upload_url: ${{ github.event.release.upload_url }}
             asset_path: dist/heta-compiler-macos.tar.gz
             asset_name: heta-compiler-macos.tar.gz
+            asset_content_type: application/octet-stream
+
+        - name: Configure SSH
+          run: |
+            mkdir -p ~/.ssh
+            echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+          env:
+            DEPLOY_KEY: ${{ secrets.DEPLOY_HOMEBREW_HETA_COMPILER }}
+
+        - name: Commit to homebrew-heta-compiler repos
+          run: |
+            git clone git@github.com:hetalang/homebrew-heta-compiler.git
+            cd homebrew-heta-compiler
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            mkdir -p Formula
+            cp -f ../build-homebrew/heta-compiler.template.rb Formula/heta-compiler.rb # copy the new formula and replace the old one
+            sed -i "s|\$VERSION|${{ github.event.release.tag_name }}|" Formula/heta-compiler.rb
+            SHA=$(sha256sum ../dist/heta-compiler-macos.tar.gz | awk '{print $1}')
+            sed -i "s|\$SHA256|$SHA|" Formula/heta-compiler.rb
+            git add .
+            git commit -m "Automated update from source repository based on release ${{ github.event.release.tag_name }}"
+            git push origin master
+    upload-linux-release-asset:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 18.x
+        - run: npm ci
+        - name: Build standalone apps
+          run: |
+            npx pkg . -t linux --compress GZip
+            cd ./dist
+            chmod 775 heta-compiler
+            tar -czvf ./heta-compiler-linux.tar.gz ./heta-compiler
+            cd ..
+        - name: Create .deb package
+          run: |
+            mkdir -p dist/heta-compiler-deb/DEBIAN
+            cp build-deb/control dist/heta-compiler-deb/DEBIAN/
+            mkdir -p dist/heta-compiler-deb/usr/local/bin
+            cp dist/heta-compiler dist/heta-compiler-deb/usr/local/bin/heta
+            dpkg-deb --build dist/heta-compiler-deb
+
+        - name: Upload Release Asset Linux
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler
+            asset_name: heta-compiler-linux-x64
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Linux
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-linux.tar.gz
+            asset_name: heta-compiler-linux.tar.gz
             asset_content_type: application/octet-stream
         
         - name: Upload Release DEB Linux
