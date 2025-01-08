@@ -6,6 +6,8 @@ class HetaCompiler < Formula
     license "Apache-2.0"
   
     def install
+      # Rename the file from `heta-compiler` to `heta` and install it
+      mv "heta-compiler", "heta"
       bin.install "heta"
     end
 
