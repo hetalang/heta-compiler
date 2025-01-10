@@ -83,10 +83,16 @@ class Builder {
     Object.assign(this, declaration);
 
     // all relative or absolute depending on coreDirname
-    this._coreDirname = coreDirname; // already normalized
-    this._distDirname = path.join(this._coreDirname, declaration.options.distDir); // TODO: HOW TO MAKE relative from absolute
-    this._metaDirname = path.join(this._coreDirname, declaration.options.metaDir);
-    this._logPath = path.join(this._coreDirname, declaration.options.logPath);
+    this._coreDirname = coreDirname;                               // relative to the shell or absolute
+    this._distDirname = path.isAbsolute(declaration.options.distDir)
+      ? declaration.options.distDir                                // absolute path
+      : path.join(this._coreDirname, declaration.options.distDir); // relative to the shell
+    this._metaDirname = path.isAbsolute(declaration.options.metaDir)
+      ? declaration.options.metaDir                                // absolute path
+      : path.join(this._coreDirname, declaration.options.metaDir); // relative to the shell
+    this._logPath = path.isAbsolute(declaration.options.logPath)
+      ? declaration.options.logPath                                // absolute path
+      : path.join(this._coreDirname, declaration.options.logPath); // relative to the shell
 
     logger.info(`Builder initialized for the platform "${this.id}"`);
     
@@ -136,7 +142,9 @@ class Builder {
   run() {
     // 1. Parsing
     let ms = new ModuleSystem(this.logger, this.fileReadHandler);
-    let absFilename = path.join(this._coreDirname, this.importModule.source);
+    let absFilename = path.isAbsolute(this.importModule.source)
+      ? this.importModule.source // absolute path
+      : path.join(this._coreDirname, this.importModule.source); // relative to the shell
     ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
 
     // 2. Modules integration
