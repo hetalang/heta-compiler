@@ -23,7 +23,7 @@ perUser: does not require elevated privileges to install. Sets the package's Ins
         <Package
             InstallerVersion="200"
             Compressed="yes"
-            InstallScope="perUser"
+            InstallScope="perMachine"
             Platform="x64"
             />
         <Condition Message="This application is only supported on 64-bit systems.">

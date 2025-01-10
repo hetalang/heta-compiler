@@ -136,7 +136,7 @@ jobs:
           id: package_version
           run: | # deprecated
             $version = node -p "require('./package.json').version"
-            echo "::set-output name=VERSION::$version"
+            echo "VERSION=$version" >> $env:GITHUB_OUTPUT
     
         - name: Install WiX Toolset
           run: |
@@ -145,7 +145,7 @@ jobs:
           id: new_guid
           run: | # deprecated
             $guid = [guid]::NewGuid().ToString().ToUpper()
-            echo "::set-output name=NewGUID::$guid"
+            echo "NewGUID=$guid" >> $env:GITHUB_OUTPUT
         - name: Update .wxs file with new Product Id
           run: |
             echo "GUID: ${{ steps.new_guid.outputs.NewGUID }}"
