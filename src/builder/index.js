@@ -148,10 +148,12 @@ class Builder {
   run() {
     // 1. Parsing
     let ms = new ModuleSystem(this.logger, this.fileReadHandler);
-    let absFilename = path.isAbsolute(this.importModule.source)
-      ? this.importModule.source // absolute path
-      : path.join(this._coreDirname, this.importModule.source); // relative to the shell
-    ms.addModuleDeep(absFilename, this.importModule.type, this.importModule);
+    if (path.isAbsolute(this.importModule.source)) {
+      this.logger.error(`Import module source must be relative, got "${this.importModule.source}".`, {type: 'BuilderError'});
+      throw new HetaLevelError('Import module source must be relative.');
+    }
+    let sourcePath = path.join(this._coreDirname, this.importModule.source);
+    ms.addModuleDeep(sourcePath, this.importModule.type, this.importModule);
 
     // 2. Modules integration
     if (this.options.debug) {
@@ -182,7 +184,6 @@ class Builder {
 
     // === STOP if errors ===
     if (!this.logger.hasErrors) {
-
       // 7. Units checking
       if (this.options.unitsCheck) {
         this.logger.info('Checking unit\'s consistency.');

@@ -50,9 +50,9 @@ class ModuleSystem {
    * 
    * @returns {_Module} Created module.
    */
-  addModuleDeep(rawAbsFilePath, type, options = {}){
-    let absFilePath = path.normalize(rawAbsFilePath);
-    let parsed = this._addModuleDeep(absFilePath, type, options);
+  addModuleDeep(rawModulePath, type, options = {}){
+    let modulePath = path.normalize(rawModulePath);
+    let parsed = this._addModuleDeep(modulePath, type, options);
     this._top = parsed;
     
     return parsed;
@@ -61,16 +61,16 @@ class ModuleSystem {
   /**
    * It scan module dependence recursively.
    * 
-   * @param {string} absFilePath Absolute module path.
+   * @param {string} modulePath Absolute module path.
    * @param {string} type A module type.
    * @param {object} options additional options.
    * 
    * @returns {_Module} Created module.
    */
-  _addModuleDeep(absFilePath, type, options = {}){
-    let moduleName = [absFilePath, '#', options.sheet || '0'].join('');
+  _addModuleDeep(modulePath, type, options = {}){
+    let moduleName = [modulePath, '#', options.sheet || '0'].join('');
     if (!(moduleName in this.moduleCollection)) { // new file
-      let parsed = this.addModule(absFilePath, type, options);
+      let parsed = this.addModule(modulePath, type, options);
       parsed
         .filter((q) => q.action==='include')
         .forEach((importItem) => {
@@ -101,9 +101,17 @@ class ModuleSystem {
     parsed
       .filter((q) => q.action==='include')
       .forEach((q) => {
-        if(typeof q.source !== 'string') {
+        if (typeof q.source !== 'string') {
           throw new TypeError(`Property "source" in "${filename}" must be string`);
         }
+        if (path.isAbsolute(q.source)) {
+          this.logger.error(
+            `include statement does not suport absolute path in "${filename}", got "${q.source}".`,
+            {type: 'ModuleError', filename: filename}
+          );
+          //throw new HetaLevelError('Absolute path in include statement');
+        }
+        // update source
         q.source = path.join(absDirPath, q.source);
       });
 
