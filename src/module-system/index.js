@@ -98,31 +98,28 @@ class ModuleSystem {
 
     // update by abs paths
     let absDirPath = path.dirname(filename);
-    parsed
-      .filter((q) => q.action==='include')
-      .forEach((q) => {
-        if (typeof q.source !== 'string') {
-          throw new TypeError(`Property "source" in "${filename}" must be string`);
-        }
-        if (path.isAbsolute(q.source)) {
-          this.logger.error(
-            `include statement does not suport absolute path in "${filename}", got "${q.source}".`,
-            {type: 'ModuleError', filename: filename}
-          );
-          //throw new HetaLevelError('Absolute path in include statement');
-        }
-        // update source
-        q.source = path.join(absDirPath, q.source);
-      });
 
     // push to moduleCollection
     let moduleName = [filename, '#', options.sheet || '0'].join('');
     this.moduleCollection[moduleName] = parsed;
     // set in graph
-    let paths = parsed
+    let includePaths = parsed
       .filter((q) => q.action==='include')
+      .filter((q) => {
+        if (path.isAbsolute(q.source)) {
+          this.logger.error(
+            `include statement does not suport absolute path in "${filename}", got "${q.source}".`,
+            {type: 'ModuleError', filename: filename}
+          );
+          q.source = '';
+          return false;
+        }
+        // update source
+        q.source = path.join(absDirPath, q.source);
+        return true;
+      })
       .map((x) => [x.source, '#', x.sheet || 0].join(''));
-    this.graph.add(moduleName, paths);
+    this.graph.add(moduleName, includePaths);
 
     return parsed;
   }
@@ -130,6 +127,11 @@ class ModuleSystem {
   createModule(filename, type, options = {}) {
     let tabNum = options.sheet !== undefined ? ('#' + options.sheet) : ''; // for xlsx only
     this.logger.info(`Reading module of type "${type}" from file "${filename}${tabNum}"...`);
+
+    if (!filename) { // in case of empty filename or absolute path
+      //this.logger.error(`No filename set for include of type "${type}"`, {type: 'ModuleError', filename: filename});
+      return [];
+    }
 
     // run loader
     let loader = moduleLoaders[type];
@@ -193,7 +195,7 @@ class ModuleSystem {
             let childIntegrated = this.moduleCollection[moduleName]._integrated;
             let composition = compose(current, childIntegrated);
             acc = acc.concat(composition);
-          }else{
+          } else {
             acc.push(current);
           }
           return acc;
@@ -211,7 +213,7 @@ class ModuleSystem {
  * 
  * @returns {object} merged Q-array.
  */
-function compose(obj, arr) {
+function compose(obj, arr = []) {
   let {action, id, source, type, sheet, ...cleanedObj} = obj;
   delete cleanedObj.class;
 
