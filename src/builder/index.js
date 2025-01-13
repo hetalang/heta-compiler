@@ -94,7 +94,7 @@ class Builder {
       ? declaration.options.logPath                                // absolute path
       : path.join(this._coreDirname, declaration.options.logPath); // relative to the shell
 
-    logger.info(`Builder initialized for the platform "${this.id}"`);
+    logger.info(`Heta compiler v${version} is initialized for the platform "${this.id}"`);
     
     // create "export" classes bound to this container
     Object.entries(Builder._exportClasses).forEach(([key, _Class]) => {
