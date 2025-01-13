@@ -167,20 +167,24 @@ class Builder {
     }
     let qArr = ms.integrate();
 
-    // 3. Translation
-    this.container.loadMany(qArr, false);
+    if (qArr.length > 0) {
+      // 3. Translation
+      this.container.loadMany(qArr, false);
 
-    // 4. Binding
-    this.logger.info('Setting references in elements, total length ' + this.container.length);
-    this.container.knitMany();
+      // 4. Binding
+      this.logger.info('Setting references in elements, total length ' + this.container.length);
+      this.container.knitMany();
 
-    // 5. Circular start_ and ode_
-    this.logger.info('Checking for circular references in Records.');
-    this.container.checkCircRecord();
+      // 5. Circular start_ and ode_
+      this.logger.info('Checking for circular references in Records.');
+      this.container.checkCircRecord();
 
-    // 6. check circ UnitDef & FunctionDef
-    this.container.checkCircUnitDef();
-    this.container.checkCircFunctionDef();
+      // 6. check circ UnitDef & FunctionDef
+      this.container.checkCircUnitDef();
+      this.container.checkCircFunctionDef();
+    } else {
+      this.logger.warn('Empty platform. No elements were loaded.');
+    }
 
     // === STOP if errors ===
     if (!this.logger.hasErrors) {
