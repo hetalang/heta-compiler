@@ -60,9 +60,9 @@ List of `heta build` options:
 | --type | \<string\> | heta | Type of source file. This option allows to select type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
 | --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory. |
 | --units-check | | | If set all records will be checked for units consistency. |
-| --dist-dir | \<string\> | |  Set export directory path, where to store exported files. |
-| --meta-dir | \<string\> | |  Set meta directory path. |
-| --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always |
+| --dist-dir | \<string\> | |  Set export directory path, where to store exported files. Path can be absolute or relative to the project directory. |
+| --meta-dir | \<string\> | |  Set meta directory path. Path can be absolute or relative to the project directory.|
+| --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always. Path can be absolute or relative to the project directory. |
 | -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
 | --log-level | string | error | The level of log information to display. Possible values are: error/warn/info/debug. |
 | --skip-updates | | | Do not check available new version in npm. |
@@ -157,24 +157,6 @@ If we check the content of the created "test" directory we will see the followin
 
 **.gitattributes, .gitignore** : templates to help working with [Git](https://git-scm.com/)
 
-## "heta update" command
-
-*Experimental*
-
-`heta update` installs the latest version of heta-compiler available on NPM.
-
-If the additional argument `[version]` is set then it will install the selected version.
-
-The command is equivalen to `npm install --global heta-compiler`.
-
-#### Example
-
-To install the selected version.
-
-```bash
-heta update 0.7.1
-```
-
 ## "heta help" command
 
 To obtain a list of options and command description one can use command help.
@@ -218,7 +200,7 @@ There are properties in declaration file which do not change compilation process
 | options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
 | export | object[] | -e, --export | `[]` | List of export formats to run divided by colon. Each component includes `format` option and optional settings. see more details in [export-formats](./export-formats.md). |
 
-Using neither declaration file nor CLI options is equivalent to the following declaration:
+Using neither declaration file nor CLI options is equivalent to the following declaration file:
 ```json
 {
     "builderVersion": "<current buider version>",

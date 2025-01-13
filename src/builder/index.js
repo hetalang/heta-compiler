@@ -105,6 +105,12 @@ class Builder {
     this.exportArray = [];
     // create "export" instances
     declaration.export.forEach((exportItem) => {
+      // check the filepath
+      if (!!exportItem.filepath && path.isAbsolute(exportItem.filepath)) {
+        logger.error(`Export item property "filepath" must be relative, got ${JSON.stringify(exportItem)}.`, {type: 'BuilderError'});
+      }
+
+      // check if format is supported
       let ExportClass = this.exportClasses.hasOwnProperty(exportItem.format) 
         && this.exportClasses[exportItem.format];
       if (ExportClass) {

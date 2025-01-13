@@ -45,7 +45,12 @@ See [migrate to v0.9](./migrate-to-v0.9.md) and [CLI references](./cli-reference
 
 There are two recommended ways to export models in Heta compiler: using [`export` property](./cli-references.md#declaration-file-format) in declaration file or using CLI [`--export` property](./cli-references.md#running-build-with CLI-options). If no --export option is set, the compiler will use the `export` property from the declaration file.
 
-The `export` property is an array of objects with `format` property and other format-specific properties.
+The `export` property is an array of objects with the `format` and `filepath` properties and other format-specific properties.
+
+- `format` is a case-sensitive string with the name of the format. The list of supported formats is below.
+- `filepath` is an *optional* property, which is a string with the path to the output directory. The path is relative to the output (`dist`) directory.
+
+**Example**
 
 ```yaml
 {
@@ -61,9 +66,20 @@ The `export` property is an array of objects with `format` property and other fo
             format: SBML,
             version: L2V4,
             filepath: model
+        },
+        {
+            format: Table
         }
     ]
 }
+```
+
+Instead of `export` property in the declaration file, one can use CLI `--export` option. The option is an comma-separated list of format names. The list ai also supports structures in JSON format. If the `--export` option is set, the compiler will ignore the `export` property in the declaration file.
+
+**Example**
+
+```bash
+heta build --export '{format: JSON, filepath: output, omit: ["aux.wiki"], spaceFilter: "nameless|another"}, {format: SBML, version: L2V4, filepath: model}, Table'
 ```
 
 ## JSON
