@@ -51,11 +51,13 @@ describe('Testing "cases/0-hello-world"', () => {
         {format: 'Mrgsolve', spaceFilter: '^mm$'},
         {format: 'Julia', spaceFilter: '^mm$'}]
     };
-    b = new Builder(declaration, 'cases/0-hello-world', fs.readFileSync, () => {});
+    process.chdir('cases/0-hello-world');
+    b = new Builder(declaration, fs.readFileSync, () => {});
   });
 
   it('Run include', () => {
     b.run();
+    process.chdir('../..');
   });
 
   it('Run {format: SBML}, check and compare.', () => {

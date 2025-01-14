@@ -10,6 +10,7 @@ describe('Case #14: testing SBML module with units', () => {
   let b;
 
   it('Build platform', () => {
+    process.chdir('cases/14-sbml-module');
     b = new Builder({
       id: 'test',
       builderVersion: '*',
@@ -22,8 +23,9 @@ describe('Case #14: testing SBML module with units', () => {
       export: [
         {format: 'JSON'}
       ]
-    }, 'cases/14-sbml-module', fs.readFileSync, () => {});
+    }, fs.readFileSync, () => {});
     b.run();
+    process.chdir('../..');
     expect(b.container.logger).to.have.property('hasErrors').false;
   });
 

@@ -6,8 +6,7 @@
   "version": "v0.1.0",
   "license": "UNLICENSED",
   "options": {
-    "debug": false,
-    "logPath": "output.log"
+    "debug": false
   },
   "importModule": {
     "type": "heta",

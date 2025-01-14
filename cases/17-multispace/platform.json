@@ -2,8 +2,7 @@
   "builderVersion": "*",
   "id": "template",
   "options": {
-    "debug": false,
-    "logPath": "output.log"
+    "debug": false
   },
   "importModule": {
     "type": "heta",

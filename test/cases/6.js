@@ -27,12 +27,14 @@ describe('Testing "cases/6-import"', () => {
         {format: 'SBML', spaceFilter: 'model'},
       ]
     };
-    b = new Builder(declaration, 'cases/6-import', fs.readFileSync, () => {});
+    process.chdir('cases/6-import');
+    b = new Builder(declaration, fs.readFileSync, () => {});
     //console.log(b);
   });
 
   it('Run include', () => {
     b.run();
+    process.chdir('../..');
     exportArray = b.exportArray;
   });
 

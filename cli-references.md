@@ -62,7 +62,8 @@ List of `heta build` options:
 | --units-check | | | If set all records will be checked for units consistency. |
 | --dist-dir | \<string\> | |  Set export directory path, where to store exported files. Path can be absolute or relative to the project directory. |
 | --meta-dir | \<string\> | |  Set meta directory path. Path can be absolute or relative to the project directory.|
-| --log-mode | string | error | The rule in which case the log file should be created. Possible values are: never/error/always. Path can be absolute or relative to the project directory. |
+| --log-mode | string | error | The rule in which case the log file should be saved to file. Possible values are: never/error/always. Path can be absolute or relative to the project directory. |
+| --log-path | string | build.log | Filepath where the log file should be saved. Path can be absolute or relative to the project directory. |
 | -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
 | --log-level | string | error | The level of log information to display. Possible values are: error/warn/info/debug. |
 | --skip-updates | | | Do not check available new version in npm. |
@@ -191,8 +192,6 @@ There are properties in declaration file which do not change compilation process
 | importModule.source | string | --source | index.heta | Path to index heta module. Absolute and relative filepaths are applicable. Example: "src/table.xlsx" |
 | importModule.type | string | --type | heta | Type of source file. This option set type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
 | options | object | | {} | A set of compiler options. |
-| options.logMode | string | --log-mode | error | The rule in which case the log file should be created. Possible values are: never/error/always. |
-| options.logPath | string | | build.log | Filepath where the log file should be created. |
 | options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
 | options.unitsCheck | boolean | --units-check | false | If `true` all Record will be checked for units consistency. |
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
@@ -205,8 +204,6 @@ Using neither declaration file nor CLI options is equivalent to the following de
 {
     "builderVersion": "<current buider version>",
     "options": {
-        "logMode": "error",
-        "logPath": "build.log",
         "logFormat": "string",
         "distDir": "dist",
         "metaDir": "meta",

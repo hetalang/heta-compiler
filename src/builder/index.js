@@ -19,17 +19,13 @@ const { version } = require('../../package');
  * @param {Object} declaration - Object representing options for builder,
  *  see [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references}
  *  for more information about the structure.
- * @param {string} coreDirname="." - Path of working directory of a Heta platform. Default: working directory of a shell.
  *
  * @property {Container} container This is the reference to the main platform storage. 
  * @property {Logger} logger Reference to logger object of platform. This object can also be called with `this.container.logger`
- * @property {string} _coreDirname Absolute path of the core directory. Calculated from `coreDirname` parameter.
  * @property {string} _distDirname Absolute path of the directory for exporting files.
  *    Calculated from `declaration.options.distDir` property.
  * @property {string} _metaDirname Absolute path of the directory for storing meta files.
  *    Calculated from `declaration.options.metaDir`.
- * @property {string} _logPath Absolute path of log file.
- *    Calculated from `declaration.options.logPath`.
  * @property ... Other properties inherit from `declaration` object, see 
  *   [CLI references]{@link https://hetalang.github.io/#/heta-compiler/cli-references?id=declaration-file-format}
  * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
@@ -39,7 +35,6 @@ const { version } = require('../../package');
 class Builder {
   constructor(
     declaration = {},
-    coreDirname = '.',
     fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // must return text
     fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); }, // must return undefined
     transportArray = [] // Builder-level Transport
@@ -82,17 +77,9 @@ class Builder {
     // assign from declaration
     Object.assign(this, declaration);
 
-    // all relative or absolute depending on coreDirname
-    this._coreDirname = coreDirname;                               // relative to the shell or absolute
-    this._distDirname = path.isAbsolute(declaration.options.distDir)
-      ? declaration.options.distDir                                // absolute path
-      : path.join(this._coreDirname, declaration.options.distDir); // relative to the shell
-    this._metaDirname = path.isAbsolute(declaration.options.metaDir)
-      ? declaration.options.metaDir                                // absolute path
-      : path.join(this._coreDirname, declaration.options.metaDir); // relative to the shell
-    this._logPath = path.isAbsolute(declaration.options.logPath)
-      ? declaration.options.logPath                                // absolute path
-      : path.join(this._coreDirname, declaration.options.logPath); // relative to the shell
+    // set directories
+    this._distDirname = declaration.options.distDir;
+    this._metaDirname = declaration.options.metaDir;
 
     logger.info(`Heta compiler v${version} is initialized for the platform "${this.id}"`);
     
@@ -152,17 +139,15 @@ class Builder {
       this.logger.error(`Import module source must be relative, got "${this.importModule.source}".`, {type: 'BuilderError'});
       throw new HetaLevelError('Import module source must be relative.');
     }
-    let sourcePath = path.join(this._coreDirname, this.importModule.source);
-    ms.addModuleDeep(sourcePath, this.importModule.type, this.importModule);
+    ms.addModuleDeep(this.importModule.source, this.importModule.type, this.importModule);
 
     // 2. Modules integration
     if (this.options.debug) {
-      Object.getOwnPropertyNames(ms.moduleCollection).forEach((name) => {
-        let relPath = path.relative(this._coreDirname, name + '.json');
-        let absPath = path.join(this._metaDirname, relPath);
+      Object.getOwnPropertyNames(ms.moduleCollection).forEach((sourcePath) => { // relative path, i.e. src/index.heta
+        let fullPath = path.join(this._metaDirname, sourcePath + '.json');
         let str = JSON.stringify(ms.moduleCollection[name], null, 2);
-        this.fileWriteHandler(absPath, str);
-        this.logger.info(`Meta file was saved to ${absPath}`);
+        this.fileWriteHandler(fullPath, str);
+        this.logger.info(`Meta file was saved to ${fullPath}`);
       });
     }
     let qArr = ms.integrate();
@@ -207,6 +192,7 @@ class Builder {
     }
 
     // 10. save logs if required
+    /*
     let hetaErrors = this.container.hetaErrors();
     let createLog = this.options.logMode === 'always' 
       || (this.options.logMode === 'error' && hetaErrors.length > 0);
@@ -224,6 +210,7 @@ class Builder {
       this.fileWriteHandler(this._logPath, logs);
       this.logger.info(`All logs was saved to file: "${this._logPath}"`);
     }
+    */
 
     return this;
   }

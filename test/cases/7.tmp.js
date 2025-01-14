@@ -23,7 +23,9 @@ describe('Testing "cases/7-importNS"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/7-importNS', fs.readFileSync, () => {});
+    process.chdir('cases/7-importNS');
+    b = new Builder(declaration, fs.readFileSync, () => {});
+    process.chdir('../..');
     //console.log(b);
   });
 

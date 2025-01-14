@@ -9,7 +9,7 @@ const { Command } = require('commander');
 const program = new Command();
 const fs = require('fs-extra');
 const path = require('path');
-const { Builder, StdoutTransport } = require('../src');
+const { Builder, StdoutTransport, Transport } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const { bugs } = require('../package');
 const colors = require('colors');
@@ -32,7 +32,6 @@ program
   .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.')
   // options
   .option('--units-check', 'Check all Records for unit consistency.')
-  .option('-L, --log-mode <never|error|always>', 'When to create log file.')
   .option('--debug', 'If set the raw module output will be stored in "meta".')
   .option('--dist-dir <filepath>', 'Set export directory path, where to store exported files.')
   .option('--meta-dir <filepath>', 'Set meta directory path.')
@@ -42,6 +41,8 @@ program
   .option('-e, --export <formats>', 'export formats: "JSON,XLSX" or "{format:JSON},{format:XLSX,omitRows:3}"')
   // checking newer version of heta-compiler
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.')
+  .option('-L, --log-mode <never|error|always>', 'When to create log file.', 'error')
+  .option('--log-path <filepath>', 'Set log file path.', 'build.log')
   .parse(process.argv);
 
 async function main() {
@@ -56,6 +57,9 @@ async function main() {
   }
   process.stdout.write(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
 
+  // set targetDir as working directory
+  process.chdir(targetDir);
+
   // set minimal log level
   let logLevel = cliOptions.logLevel || 'info';
 
@@ -67,7 +71,6 @@ async function main() {
   let searches = ['', '.json', '.yml']
     .map((ext) => (cliOptions.declaration || 'platform') + ext);
   let extensionNumber = searches
-    .map((filename) => path.join(targetDir, filename)) // add targetDir
     .map((x) => fs.existsSync(x) && fs.statSync(x).isFile() ) // check if it exist and is file
     .indexOf(true);
   // is declaration file found ?
@@ -79,7 +82,7 @@ async function main() {
   } else {
     let declarationFile = searches[extensionNumber];
     process.stdout.write(`Reading declaration file "${declarationFile}"...\n`);
-    let declarationText = fs.readFileSync(path.join(targetDir, declarationFile));
+    let declarationText = fs.readFileSync(declarationFile);
     try {
       let declarationFromFile = YAML.load(declarationText);
       if (typeof declarationFromFile !== 'object'){
@@ -103,7 +106,6 @@ async function main() {
 
   // update declaration
   cliOptions.unitsCheck !== undefined && (declaration.options.unitsCheck = cliOptions.unitsCheck);
-  cliOptions.logMode !== undefined && (declaration.options.logMode = cliOptions.logMode);
   cliOptions.debug !== undefined && (declaration.options.debug = cliOptions.debug);
   cliOptions.distDir !== undefined && (declaration.options.distDir = cliOptions.distDir);
   cliOptions.metaDir !== undefined && (declaration.options.metaDir = cliOptions.metaDir);
@@ -114,13 +116,28 @@ async function main() {
   // 3. run builder (set declaration defaults internally)
   let builder = new Builder(
     declaration,
-    targetDir,
     fs.readFileSync,
     fs.outputFileSync,
-    [new StdoutTransport(logLevel)]
+    [
+      new StdoutTransport(logLevel), // log to stdout
+      new FileTransport('debug', cliOptions.logPath) // log to file
+    ]
   ).run();
 
   return builder;
+}
+
+class FileTransport extends Transport {
+  constructor(level, filepath) {
+    super(level);
+    this.logStream = fs.createWriteStream(filepath, { flags: 'w' }); // or 'a' to append
+  }
+  analyzer(level, msg, opt, levelNum) {
+    if (levelNum >= this.showLevelNum) {
+      let line = `[${level}]\t${msg}`;
+      this.logStream.write(line + '\n');
+    }
+  }
 }
 
 function parseExportOption(value = '') {
@@ -141,20 +158,26 @@ Promise.all([
   main(),
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
+  const {logMode, logPath} = program.opts();
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
+    logMode !== 'never' && fs.removeSync(logPath);
     process.exit(2);
   } else {
     process.stdout.write('Compilation OK!\n');
+    logMode !== 'always' && fs.removeSync(logPath);
     process.exit(0);
   }
 }).catch((error) => {
+  const {logMode, logPath} = program.opts();
   if (error.name === 'HetaLevelError') {
     process.stdout.write('Error: ' + error.message + '\nSTOP!\n');
+    logMode !== 'never' && fs.removeSync(logPath);
     process.exit(2);
   } else {
     process.stdout.write(contactMessage + '\n');
     process.stdout.write(error.stack);
+    logMode !== 'never' && fs.removeSync(logPath);
     process.exit(1); // unexpected error
   }
 });

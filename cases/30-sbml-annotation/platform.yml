@@ -9,7 +9,6 @@
   builderVersion: ^0.8.7,
   options: {
     debug: false,
-    logPath: output.log,
     unitsCheck: false
   },
   importModule: {

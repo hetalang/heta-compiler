@@ -7,8 +7,10 @@ const fs = require('fs-extra');
 describe('Test Builder.', () => {
   let b;
   it('Create Builder object and run.', () => {
-    b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
+    process.chdir(__dirname);
+    b = new Builder(declaration, fs.readFileSync, () => {});
     b.run();
+    process.chdir('../..');
   });
 });
 

@@ -6,7 +6,6 @@
   "license": "UNLICENSED",
   "options": {
     "debug": false,
-    "logPath": "output.log",
     "unitsCheck": false
   },
   "importModule": {

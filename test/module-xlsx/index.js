@@ -20,8 +20,10 @@ describe('Integral test of correct xlsx module', () => {
         omitRows: 2
       }
     };
-    let b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
+    process.chdir(__dirname);
+    let b = new Builder(declaration, fs.readFileSync, () => {});
     b.run();
+    process.chdir('../..');
     let resultNameless = b.container.namespaceStorage.get('nameless').toQArr(true);
     expect(resultNameless).to.be.deep.equal(outputNameless);
     let resultOne = b.container.namespaceStorage.get('one').toQArr(true);
@@ -41,8 +43,10 @@ describe('Integral test of correct xlsx module', () => {
         sheet: 1
       }
     };
-    let b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
+    process.chdir(__dirname);
+    let b = new Builder(declaration, fs.readFileSync, () => {});
     b.run();
+    process.chdir('../..');
     let resultNameless = b.container.namespaceStorage.get('nameless').toQArr(true);
     expect(resultNameless).to.be.deep.equal(outputNameless);
   });
@@ -59,9 +63,10 @@ describe('Integral test of correct xlsx module', () => {
         sheet: 9
       }
     };
-    let b = new Builder(declaration, __dirname, fs.readFileSync, () => {});
-    
+    process.chdir(__dirname);
+    let b = new Builder(declaration, fs.readFileSync, () => {});
     b.run();
+    process.chdir('../..');
     expect(b.container.hetaErrors()).to.be.lengthOf(1);
   });
 });

@@ -58,7 +58,7 @@ perUser: does not require elevated privileges to install. Sets the package's Ins
                 <Control Id="InstallScopeDescription" Type="Text" X="25" Y="25" Width="320" Height="15" Text="Select the installation scope for this application:" />
                 <Control Id="ScopeType" Type="RadioButtonGroup" X="25" Y="65" Width="320" Height="40" Property="EVERYBODY">
                     <RadioButtonGroup Property="EVERYBODY">
-                        <RadioButton Value="yes" X="0" Y="0" Width="300" Height="17" Text="All users (requires administrative rights)" />
+                        <RadioButton Value="yes" X="0" Y="0" Width="300" Height="17" Text="All users (requires administrative permission)" />
                         <RadioButton Value="no" X="0" Y="20" Width="300" Height="17" Text="Just me" />
                     </RadioButtonGroup>
                 </Control>

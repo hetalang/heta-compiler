@@ -22,12 +22,14 @@ describe('Testing "cases/12-to-sbml"', () => {
         source: 'src/index.heta'
       }
     };
-    b = new Builder(declaration, 'cases/12-to-sbml', fs.readFileSync, () => {});
+    process.chdir('cases/12-to-sbml');
+    b = new Builder(declaration, fs.readFileSync, () => {});
     //console.log(b);
   });
 
   it('Run include', () => {
     b.run();
+    process.chdir('../..');
   });
 
   it('Run @SBMLExport, check and compare.', () => {
