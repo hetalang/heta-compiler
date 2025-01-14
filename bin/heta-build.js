@@ -45,6 +45,8 @@ program
   .option('--log-path <filepath>', 'Set log file path.', 'build.log')
   .parse(process.argv);
 
+let logStream = null;
+
 async function main() {
   let args = program.args;   // target directory
   let cliOptions = program.opts(); // cli declaration + name of declaration file + log level
@@ -55,7 +57,12 @@ async function main() {
     process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(2); // BRAKE
   }
+  
+  // init logging to file
+  logStream = fs.createWriteStream(cliOptions.logPath, { flags: 'w' }); // or 'a' to append
+
   process.stdout.write(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
+  logStream.write(`Running compilation in directory "${path.resolve(targetDir)}"...\n`);
 
   // set targetDir as working directory
   process.chdir(targetDir);
@@ -76,12 +83,15 @@ async function main() {
   // is declaration file found ?
   if (!cliOptions.declaration && extensionNumber === -1) {
     process.stdout.write('No declaration file, running with defaults...\n');
+    logStream.write('No declaration file, running with defaults...\n');
   } else if (extensionNumber === -1) {
     process.stdout.write(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
+    logStream.write(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
     process.exit(2); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
     process.stdout.write(`Reading declaration file "${declarationFile}"...\n`);
+    logStream.write(`Reading declaration file "${declarationFile}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
       let declarationFromFile = YAML.load(declarationText);
@@ -91,6 +101,7 @@ async function main() {
       Object.assign(declaration, declarationFromFile);
     } catch (e) {
       process.stdout.write(`Wrong format of declaration file: \n"${e.message}"\n`);
+      logStream.write(`Wrong format of declaration file: \n"${e.message}"\n`);
       process.exit(2); // BRAKE
     }
   }
@@ -101,6 +112,7 @@ async function main() {
     var exportItems = parseExportOption(cliOptions.export);
   } catch (e) {
     process.stdout.write(`Wrong format of export option: "${cliOptions.export}"\n`);
+    logStream.write(`Wrong format of export option: "${cliOptions.export}"\n`);
     process.exit(2); // BRAKE
   }
 
@@ -120,7 +132,7 @@ async function main() {
     fs.outputFileSync,
     [
       new StdoutTransport(logLevel), // log to stdout
-      new FileTransport('debug', cliOptions.logPath) // log to file
+      new FileTransport('debug', logStream) // log to file
     ]
   ).run();
 
@@ -128,9 +140,9 @@ async function main() {
 }
 
 class FileTransport extends Transport {
-  constructor(level, filepath) {
+  constructor(level, logStream) {
     super(level);
-    this.logStream = fs.createWriteStream(filepath, { flags: 'w' }); // or 'a' to append
+    this.logStream = logStream;
   }
   analyzer(level, msg, opt, levelNum) {
     if (levelNum >= this.showLevelNum) {
@@ -158,25 +170,30 @@ Promise.all([
   main(),
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
-  const {logMode, logPath} = program.opts();
+  const { logMode } = program.opts();
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
+    logStream?.write('Compilation ERROR! See logs.\n');
     logMode !== 'never' && fs.removeSync(logPath);
     process.exit(2);
   } else {
     process.stdout.write('Compilation OK!\n');
+    logStream?.write('Compilation OK!\n');
     logMode !== 'always' && fs.removeSync(logPath);
     process.exit(0);
   }
 }).catch((error) => {
-  const {logMode, logPath} = program.opts();
+  const { logMode } = program.opts();
   if (error.name === 'HetaLevelError') {
     process.stdout.write('Error: ' + error.message + '\nSTOP!\n');
+    logStream?.write('Error: ' + error.message + '\nSTOP!\n');
     logMode !== 'never' && fs.removeSync(logPath);
     process.exit(2);
   } else {
     process.stdout.write(contactMessage + '\n');
     process.stdout.write(error.stack);
+    logStream?.write(contactMessage + '\n');
+    logStream?.write(error.stack);
     logMode !== 'never' && fs.removeSync(logPath);
     process.exit(1); // unexpected error
   }
