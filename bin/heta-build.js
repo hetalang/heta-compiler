@@ -170,7 +170,7 @@ Promise.all([
   main(),
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
-  const { logMode } = program.opts();
+  const { logMode, logPath } = program.opts();
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
     logStream?.write('Compilation ERROR! See logs.\n');
@@ -183,7 +183,7 @@ Promise.all([
     process.exit(0);
   }
 }).catch((error) => {
-  const { logMode } = program.opts();
+  const { logMode, logPath } = program.opts();
   if (error.name === 'HetaLevelError') {
     process.stdout.write('Error: ' + error.message + '\nSTOP!\n');
     logStream?.write('Error: ' + error.message + '\nSTOP!\n');
