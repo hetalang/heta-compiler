@@ -28,8 +28,6 @@
         "errorMessage": "${0#} is unknown key in options"
       },
       "properties": {
-        "logMode": {"type": "string", "default": "error", "enum": ["never", "error", "always"]},
-        "logPath": {"type": "string", "default": "build.log"},
         "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "unitsCheck": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
