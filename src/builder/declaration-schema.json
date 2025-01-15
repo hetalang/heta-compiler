@@ -28,7 +28,6 @@
         "errorMessage": "${0#} is unknown key in options"
       },
       "properties": {
-        "logFormat": {"type": "string", "default": "string", "enum": ["string", "json"]},
         "unitsCheck": {"type": "boolean", "default": false},
         "distDir": {"type": "string", "default": "dist" },
         "debug": {"type": "boolean", "default": false, "description": "Should we put parsed modules to meta?"},

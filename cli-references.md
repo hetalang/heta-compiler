@@ -192,7 +192,6 @@ There are properties in declaration file which do not change compilation process
 | importModule.source | string | --source | index.heta | Path to index heta module. Absolute and relative filepaths are applicable. Example: "src/table.xlsx" |
 | importModule.type | string | --type | heta | Type of source file. This option set type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
 | options | object | | {} | A set of compiler options. |
-| options.logFormat | string | | `string` | The format of saving logs to file. The default value is `string` which corresponds the format similar to console. Full list of options is : `string`, `json`.|
 | options.unitsCheck | boolean | --units-check | false | If `true` all Record will be checked for units consistency. |
 | options.distDir | string | --dist-dir | dist | At default all export files are created inside **dist** directory. The option can set the another target for storing outputs. |
 | options.debug | boolean | --debug | false | Working in debugging mode. All parsed modules will be saved in JSON files in meta directory. |
@@ -204,7 +203,6 @@ Using neither declaration file nor CLI options is equivalent to the following de
 {
     "builderVersion": "<current buider version>",
     "options": {
-        "logFormat": "string",
         "distDir": "dist",
         "metaDir": "meta",
         "debug": false,

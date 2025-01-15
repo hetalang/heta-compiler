@@ -127,7 +127,6 @@ class Builder {
    * 8. Checking unit\'s terms.
    * 9. Export of a platform to series of formats. 
    *    Depending on the declaration file it runs {@link Builder#exportMany} or {@link Builder#exportJuliaOnly}.
-   * 10. Saving logs if required
    * 
    * @method Builder#run
    * 
@@ -190,27 +189,6 @@ class Builder {
     } else {
       this.logger.warn('Units checking and export were skipped because of errors in compilation.');
     }
-
-    // 10. save logs if required
-    /*
-    let hetaErrors = this.container.hetaErrors();
-    let createLog = this.options.logMode === 'always' 
-      || (this.options.logMode === 'error' && hetaErrors.length > 0);
-    if (createLog) {
-      switch (this.options.logFormat) {
-      case 'json':
-        var logs = JSON.stringify(this.container.defaultLogs, null, 2);
-        break;
-      default: 
-        logs = this.container.defaultLogs
-          .map(x => `[${x.level}]\t${x.msg}`)
-          .join('\n');  
-      }
-
-      this.fileWriteHandler(this._logPath, logs);
-      this.logger.info(`All logs was saved to file: "${this._logPath}"`);
-    }
-    */
 
     return this;
   }

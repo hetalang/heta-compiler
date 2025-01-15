@@ -28,8 +28,6 @@ program
   .description('Compile Heta based platform and create set of export files.')
   //.arguments('<cmd> [dir]')
   .usage('[options] [dir]')
-  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
-  .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.')
   // options
   .option('--units-check', 'Check all Records for unit consistency.')
   .option('--debug', 'If set the raw module output will be stored in "meta".')
@@ -39,13 +37,20 @@ program
   .option('-s, --source <filepath>', 'path to main heta module.')
   .option('-t, --type <heta|table|xlsx|json|yaml|sbml>', 'type of source file.')
   .option('-e, --export <formats>', 'export formats: "JSON,XLSX" or "{format:JSON},{format:XLSX,omitRows:3}"')
-  // checking newer version of heta-compiler
-  .option('--skip-updates', 'Skip checking newer version of heta-compiler.')
+  // cli level
+  .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
+  .option('--skip-updates', 'Skip checking newer version of heta-compiler.') // checking newer version of heta-compiler
+  .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.', 'error')
   .option('--log-path <filepath>', 'Set log file path.', 'build.log')
+  //.options('--log-format <json|text>', 'Set log format.', 'text') // not implemented
   .parse(process.argv);
 
 let logStream = null;
+function message(message) {
+  process.stdout.write(message + '\n');
+  logStream?.write(message + '\n');
+}
 
 async function main() {
   let args = program.args;   // target directory
@@ -54,15 +59,14 @@ async function main() {
   // set target directory of platform and check if exist
   let targetDir = path.normalize(args[0] || '.');
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
-    process.stdout.write(`Target directory "${targetDir}" does not exist.\nSTOP!`);
+    message(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(2); // BRAKE
   }
   
   // init logging to file
   logStream = fs.createWriteStream(cliOptions.logPath, { flags: 'w' }); // or 'a' to append
 
-  process.stdout.write(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
-  logStream.write(`Running compilation in directory "${path.resolve(targetDir)}"...\n`);
+  message(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
 
   // set targetDir as working directory
   process.chdir(targetDir);
@@ -82,16 +86,13 @@ async function main() {
     .indexOf(true);
   // is declaration file found ?
   if (!cliOptions.declaration && extensionNumber === -1) {
-    process.stdout.write('No declaration file, running with defaults...\n');
-    logStream.write('No declaration file, running with defaults...\n');
+    message('No declaration file, running with defaults...\n');
   } else if (extensionNumber === -1) {
-    process.stdout.write(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
-    logStream.write(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
+    message(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
     process.exit(2); // BRAKE
   } else {
     let declarationFile = searches[extensionNumber];
-    process.stdout.write(`Reading declaration file "${declarationFile}"...\n`);
-    logStream.write(`Reading declaration file "${declarationFile}"...\n`);
+    message(`Reading declaration file "${declarationFile}"...\n`);
     let declarationText = fs.readFileSync(declarationFile);
     try {
       let declarationFromFile = YAML.load(declarationText);
@@ -100,8 +101,7 @@ async function main() {
       }
       Object.assign(declaration, declarationFromFile);
     } catch (e) {
-      process.stdout.write(`Wrong format of declaration file: \n"${e.message}"\n`);
-      logStream.write(`Wrong format of declaration file: \n"${e.message}"\n`);
+      message(`Wrong format of declaration file: \n"${e.message}"\n`);
       process.exit(2); // BRAKE
     }
   }
@@ -111,8 +111,7 @@ async function main() {
   try {
     var exportItems = parseExportOption(cliOptions.export);
   } catch (e) {
-    process.stdout.write(`Wrong format of export option: "${cliOptions.export}"\n`);
-    logStream.write(`Wrong format of export option: "${cliOptions.export}"\n`);
+    message(`Wrong format of export option: "${cliOptions.export}"\n`);
     process.exit(2); // BRAKE
   }
 
@@ -132,7 +131,7 @@ async function main() {
     fs.outputFileSync,
     [
       new StdoutTransport(logLevel), // log to stdout
-      new FileTransport('debug', logStream) // log to file
+      new FileTransport(logLevel, logStream) // log to file
     ]
   ).run();
 
@@ -140,14 +139,14 @@ async function main() {
 }
 
 class FileTransport extends Transport {
-  constructor(level, logStream) {
+  constructor(level, stream) {
     super(level);
-    this.logStream = logStream;
+    this.stream = stream;
   }
   analyzer(level, msg, opt, levelNum) {
     if (levelNum >= this.showLevelNum) {
       let line = `[${level}]\t${msg}`;
-      this.logStream.write(line + '\n');
+      this.stream?.write(line + '\n');
     }
   }
 }
