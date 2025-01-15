@@ -92,7 +92,7 @@ class ModuleSystem {
    * 
    * @returns {_Module} Created module.
    */
-  addModule(filename, type='heta', options = {}){
+  addModule(filename, type = 'heta', options = {}){
     // parse
     let parsed = this.createModule(filename, type, options);
 

@@ -40,7 +40,7 @@ program
   // cli level
   .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.') // checking newer version of heta-compiler
-  .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.')
+  .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.', 'info')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.', 'error')
   .option('--log-path <filepath>', 'Set log file path.', 'build.log')
   //.options('--log-format <json|text>', 'Set log format.', 'text') // not implemented
@@ -70,9 +70,6 @@ async function main() {
 
   // set targetDir as working directory
   process.chdir(targetDir);
-
-  // set minimal log level
-  let logLevel = cliOptions.logLevel || 'info';
 
   // 0. empty declaration
   let declaration = {options: {}, importModule: {}, export: []};
@@ -130,8 +127,8 @@ async function main() {
     fs.readFileSync,
     fs.outputFileSync,
     [
-      new StdoutTransport(logLevel), // log to stdout
-      new FileTransport(logLevel, logStream) // log to file
+      new StdoutTransport(cliOptions.logLevel), // log to stdout
+      new FileTransport(cliOptions.logLevel, logStream) // log to file
     ]
   ).run();
 
