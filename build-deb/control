@@ -1,5 +1,5 @@
 Package: heta-compiler
-Version: 0.9.2
+Version: 0.9.3
 Section: utils
 Priority: optional
 Architecture: amd64

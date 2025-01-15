@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.9.3
+
+- build debinan package
+- build cholatatey package
+- build homebrew package
+- update .MSI build
+- display error if absolute paths in include and export
+- remove `logFormat`, `logPath`, `logLevel`, `logMode` from `platform.yaml`
+- display heta version in logs
+- write full logs into `build.log`
+- add `--log-mode` option to CLI
+- rewrite build process to exclude absolute paths
+
 ## 0.9.2
 
 - remove logLevel option from `platform.yaml`, use `--log-level info` instead in CLI
