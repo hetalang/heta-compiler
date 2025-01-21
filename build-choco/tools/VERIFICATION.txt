@@ -6,5 +6,5 @@ Verification Instructions for heta-compiler.exe
    `Get-FileHash -Path .\heta-compiler.exe -Algorithm SHA256`
 3. The source repository includes detailed build instructions to ensure integrity.
 
-Build Timestamp: 2024-12-16
+Build Timestamp: 2025-01-15
 Maintainer: Heta project team

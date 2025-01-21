@@ -297,7 +297,7 @@ The tool is under active development so there are a lot of features to implement
 
 ## License
 
-Licensed under the Apache License, Version 2.0. See the [LICENSE](./LICENSE) text.
+Licensed under the Apache License, Version 2.0. See the [LICENSE](https://raw.githubusercontent.com/hetalang/heta-compiler/refs/heads/master/LICENSE) text.
 
 ## Authors and history
 

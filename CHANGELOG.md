@@ -2,7 +2,7 @@
 
 ## 0.9.3
 
-- build debinan package
+- build debian package
 - build cholatatey package
 - build homebrew package
 - update .MSI build
