@@ -144,7 +144,7 @@ class Builder {
     if (this.options.debug) {
       Object.getOwnPropertyNames(ms.moduleCollection).forEach((sourcePath) => { // relative path, i.e. src/index.heta
         let fullPath = path.join(this._metaDirname, sourcePath + '.json');
-        let str = JSON.stringify(ms.moduleCollection[name], null, 2);
+        let str = JSON.stringify(ms.moduleCollection[sourcePath], null, 2);
         this.fileWriteHandler(fullPath, str);
         this.logger.info(`Meta file was saved to ${fullPath}`);
       });
