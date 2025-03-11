@@ -48,6 +48,7 @@ global.compiledTemplates = {
   'simbio.m.njk': require('./templates/simbio.m.njk'),
   'slv-blocks-template.slv.njk': require('./templates/slv-blocks-template.slv.njk'),
   'slv-template.slv.njk': require('./templates/slv-template.slv.njk'),
+  'mt-model.jl.njk': require('./templates/mt-model.jl.njk'),
 };
 
 Builder._exportClasses = {
@@ -66,6 +67,7 @@ Builder._exportClasses = {
   Julia: require('./julia-export'),
   Dot: require('./dot-export'),
   Summary: require('./summary-export'),
+  MT: require('./mt-export'),
 };
 
 module.exports = {

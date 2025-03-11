@@ -39,10 +39,9 @@
 
 ## features
 
-- alternative solution to substitute "pkg": Node.js 21 https://nodejs.org/api/single-executable-applications.html
-  wait until Node.js 22 will be released
+- alternative solution to substitute "pkg":
+  Node.js 22 https://nodejs.org/api/single-executable-applications.html
 - automatic creation of modifiers in SBML
-- use relative paths in logs
 
 ## ideas
 
@@ -51,13 +50,10 @@
 - AnyUnit for zero numbers
 - updating properties with `one::s1.assignments.start_ 5.5;`
 - check and warning if core component was replaced
-- remove unnecessary rules in export
 - check file format for modules
 - add "ignoreCompartment" property in Species
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
 - stoichiometry as `@Const` and `@Record`
-- highlight for Vim https://ezpzdev.medium.com/create-a-vim-plugin-for-your-next-programming-language-structure-and-syntax-highlight-1dc0823a6b92
-- highlight for notepad++ https://npp-user-manual.org/docs/user-defined-language-system/ https://ivan-radic.github.io/udl-documentation/numbers/ 
 
 ## remove lodash
 

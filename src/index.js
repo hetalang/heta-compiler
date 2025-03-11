@@ -32,6 +32,7 @@ global.compiledTemplates = {
   'simbio.m.njk': nunjucksEnv.getTemplate('simbio.m.njk'),
   'slv-blocks-template.slv.njk': nunjucksEnv.getTemplate('slv-blocks-template.slv.njk'),
   'slv-template.slv.njk': nunjucksEnv.getTemplate('slv-template.slv.njk'),
+  'mt-model.jl.njk': nunjucksEnv.getTemplate('mt-model.jl.njk'),
 };
 
 Builder._exportClasses = {
@@ -50,6 +51,7 @@ Builder._exportClasses = {
   Julia: require('./julia-export'),
   Dot: require('./dot-export'),
   Summary: require('./summary-export'),
+  MT: require('./mt-export'),
 };
 
 module.exports = {

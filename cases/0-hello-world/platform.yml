@@ -53,3 +53,4 @@ export:
   - format: Dot
     filepath: graph
   - format: Summary
+  - format: MT
