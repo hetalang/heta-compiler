@@ -17,3 +17,8 @@ S1 [sw1]= S1 + 10; // reassign dynamic species
 S2 [sw1]= S2 + 10; // reassign static species
 x1 [sw1]= x1 + 100; // reassign dynamic record
 x2 [sw1]= x2 + 100; // reassign static record
+
+sw2 @DSwitcher {
+    trigger: (S1 < 10) and (t > 400000)
+};
+//switch_tr [sw1]= switch_tr + 1;

@@ -34,8 +34,8 @@
 ## bugs
 
 - update libs
-  - mathjs => 12.4.3 => 13.2.3 => 14.0.0
-  - inquirer => 12.1.0
+  - mathjs => 12.4.3 => 13.2.3 => 14.3.1, requires node > 16
+  - inquirer => 9.3.6 => 12.4.3, requires node > 14
 
 ## features
 
@@ -60,7 +60,6 @@
 - _get
 - _set
 - _omit
-- _merge
 
 ### Dose class
 
