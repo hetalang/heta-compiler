@@ -61,7 +61,7 @@ Switcher: {% for x in img.orphanSwitchers %}{{ x }}, {% endfor %}{{ '-' if not i
 
 {% for x in img.lostComponents %}{{ x }}, {% endfor %}{{ '-' if not img.lostComponents | length }}
 
-### Const, Record and TimeScale with no units
+### Const, Record, and TimeScale with no units
 {% set noUnits = ns.selectByInstanceOf('_Size') | filter2('units') %}
 {% for size in noUnits %}{{ size.id }}, {% endfor %}{{ '-' if not noUnits | length }}
 

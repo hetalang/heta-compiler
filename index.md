@@ -27,7 +27,7 @@
 
 **Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](../specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming them into the dynamical model/models of different formats.
 
-Quantitative Systems Pharmacology (QSP) is a discipline that uses mathematical computer models to characterize biological systems, disease processes and drug pharmacology. QSP typically deals with mechanism-based dynamical models described by ODE systems. Sometimes the modeling systems includes hundred or thousand of components and developed by a research group involving people with different expertise.
+Quantitative Systems Pharmacology (QSP) is a discipline that uses mathematical computer models to characterize biological systems, disease processes, and drug pharmacology. QSP typically deals with mechanism-based dynamical models described by ODE systems. Sometimes the modeling systems include hundreds or thousands of components and are developed by a research group involving people with different expertise.
 
 Heta compiler can be used as the framework for a QSP modeling project of any size and complexity. It can be easily integrated with existed infrastructure, workflows or used as a part of the CI/CD strategy. The pre-formulated requirements of Heta compiler are:
 
@@ -46,6 +46,23 @@ Metelkin, E., (2021). Heta compiler: a software tool for the development of larg
 
 [Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install or update.
 
+### Installation with Chocolatey in Windows
+
+If you have [Chocolatey](https://chocolatey.org/) installed, you can install Heta compiler using the following commands:
+```powershell
+choco install heta-compiler
+```
+
+Update Heta compiler
+```powershell
+choco upgrade heta-compiler
+```
+
+Uninstall Heta compiler
+```powershell
+choco uninstall heta-compiler
+```
+
 ### Installation in Ubuntu/Debian Linux
 
 Install/Update as .deb package
@@ -61,7 +78,7 @@ sudo dpkg -r heta-compiler
 
 ### Installation in other Linux systems
 
-Install/Update for all users (requires sudo previleges)
+Install/Update for all users (requires sudo privileges)
 ```bash
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
 ```
@@ -106,7 +123,7 @@ brew uninstall heta-compiler
 
 ### Installation in Macos
 
-Install/Update for all users (requires sudo previleges)
+Install/Update for all users (requires sudo privileges)
 ```bash
 sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
 ```
@@ -217,7 +234,7 @@ The following is the example where we create a Heta module and compile it into S
 Platform can be structured using a prepared template of folders and pre-constructed embedded files.
 Heta compiler provides the `heta init` tool for creating a such a modeling platform template.
 
-The tool creates a draft platform including supplementary files and directories including the `platform.js` file, and files for __git__ repository.
+The tool creates a draft platform including supplementary files and directories, such as the `platform.js` file, and files for the __git__ repository.
 
 >For more information see the [CLI references](./cli-references?id=quotheta-initquot-command) documentation.
 
@@ -248,7 +265,7 @@ Creating a template platform in directory: "Y:\draft"...
 
 Heta compiler has been written in NodeJS environment and can be used as a package for browser or server-side tools and applications.
 
-> To learn more more, see [API docs](https://hetalang.github.io/heta-compiler/dev)
+> To learn more, see [API docs](https://hetalang.github.io/heta-compiler/dev)
 (under development).
 
 ```javascript
@@ -281,7 +298,7 @@ console.log(builder.container.hetaErrors());
 
 To see a list of the supported format features, go to [features support](./export-formats#features-support) table.
 
-The tool is under active development so there are a lot of features to implement. To help us prioritize them write an [issue](https://github.com/hetalang/heta-compiler/issues).
+The tool is under active development, so there are many features to implement. To help us prioritize them, write an [issue](https://github.com/hetalang/heta-compiler/issues).
 
 ## Getting help
 
@@ -301,7 +318,7 @@ Licensed under the Apache License, Version 2.0. See the [LICENSE](https://raw.gi
 
 ## Authors and history
 
-The original author of the project is [Evgeny Metelkin](https://github.com/metelkin). The tool was inspired by the idea that large scale dynamical systems used in QSP and SB require the specific tool which allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with the small ones.
+The original author of the project is [Evgeny Metelkin](https://github.com/metelkin). The tool was inspired by the idea that large-scale dynamical systems used in QSP and SB require a specific tool that allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with small ones.
 
 - The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several [InSysBio LLC](http://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
 
@@ -309,4 +326,4 @@ The original author of the project is [Evgeny Metelkin](https://github.com/metel
 
 - In 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/hetalang/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of **Heta project**.
 
-Copyright 2019-2024, Heta project
+Copyright 2019-2025, Heta project

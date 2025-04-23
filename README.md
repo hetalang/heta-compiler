@@ -36,4 +36,4 @@ Licensed under the Apache License 2.0. See the [LICENSE](./LICENSE) for details.
 
 This software is provided "as is", without any warranties or guarantees. Use it at your own risk. The author is not responsible for any issues, data loss, or damages resulting from its use.
 
-Copyright 2019-2024, Heta project
+Copyright 2019-2025, Heta project
