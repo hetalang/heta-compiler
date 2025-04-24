@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>heta-compiler</id>
-    <version>0.9.3</version>
+    <version>$VERSION</version>
     <title>Heta Compiler - Command-Line Tool for Systems Biology</title>
     <iconUrl>https://hetalang.github.io/assets/img/logo.svg</iconUrl>
     <packageSourceUrl>https://github.com/hetalang/heta-compiler</packageSourceUrl>
@@ -23,7 +23,7 @@ Designed for scalability, Heta Compiler supports iterative updates, human-readab
 ## Citation
 Metelkin, E., (2021). Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats. *Journal of Open Source Software, 6(67), 3708*, [DOI: 10.21105/joss.03708](https://doi.org/10.21105/joss.03708).
     </description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <releaseNotes>$RELEASE_NOTES</releaseNotes>
     <summary>Heta Compiler is a tool for developing Quantitative Systems Pharmacology (QSP) and Systems Biology platforms. It integrates modules in formats like Heta language code, Excel, JSON/YAML, or SBML and transforms them into dynamical models.</summary>
     <language>en-US</language>
     <projectUrl>https://hetalang.github.io/#/heta-compiler/</projectUrl>

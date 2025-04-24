@@ -1,10 +1,10 @@
 Verification Instructions for heta-compiler.exe
 
 1. The `heta.exe` file was built from the source code located at: https://github.com/hetalang/heta-compiler
-2. The SHA256 hash of the executable is: 215DD3E9A763797C94F938A115F5C80D9737F2813009D30A71EE33D2185A50EE
+2. The SHA256 hash of the executable is: $SHA256
    You can verify the hash using a tool like PowerShell:
    `Get-FileHash -Path .\heta-compiler.exe -Algorithm SHA256`
 3. The source repository includes detailed build instructions to ensure integrity.
 
-Build Timestamp: 2025-01-15
+Build Timestamp: $BUILD_TIMESTAMP
 Maintainer: Heta project team

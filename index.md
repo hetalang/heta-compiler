@@ -53,6 +53,11 @@ If you have [Chocolatey](https://chocolatey.org/) installed, you can install Het
 choco install heta-compiler
 ```
 
+Or install a specific version:
+```
+choco install heta-compiler --version=0.9.3
+```
+
 Update Heta compiler
 ```powershell
 choco upgrade heta-compiler
