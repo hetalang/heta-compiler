@@ -114,14 +114,13 @@ function {{ id }}_init_func_(__constants__)
         ]
     )
 end
-{% set constantMaxIndex = img.constants | length %}
-{%- set staticMaxIndex = img.staticRecords | length %}
+
 ### calculate RHS of ODE
 function {{ id }}_ode_func_(__du__, __u__, __p__, t)
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __p__[1:{{ staticMaxIndex }}]
-    __constants__ = __p__[{{ staticMaxIndex + 1 }}:{{ staticMaxIndex + constantMaxIndex }}]
+    {%- endfor %}) = __p__.x[1]
+    __constants__ = __p__.x[2]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__ {# TODO: replace by __u__[index] #}
@@ -137,7 +136,7 @@ function {{ id }}_ode_func_(__du__, __u__, __p__, t)
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
-    #__p__[1:{{ staticMaxIndex }}] .= [{% for record in img.staticRecords -%}
+    #__p__.x[1] .= [{% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}]
     {%- if img.dynamicRecords | length > 0 %}
@@ -169,8 +168,8 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
     @eval function(__out__, __u__, t, __integrator__)
         ({% for record in img.staticRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-        {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
-        __constants__ = __integrator__.p[{{ staticMaxIndex + 1 }}:{{ staticMaxIndex + constantMaxIndex }}]
+        {%- endfor %}) = __integrator__.p.x[1]
+        __constants__ = __integrator__.p.x[2]
         ({% for record in img.dynamicRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __u__{# TODO: replace by __u__[index] #}
@@ -219,8 +218,8 @@ end
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
-    __constants__ = __integrator__.p[{{ staticMaxIndex + 1 }}:{{ staticMaxIndex + constantMaxIndex }}]
+    {%- endfor %}) = __integrator__.p.x[1]
+    __constants__ = __integrator__.p.x[2]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
@@ -245,8 +244,8 @@ end
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
-    __constants__ = __integrator__.p[{{ staticMaxIndex + 1}}:{{ staticMaxIndex + constantMaxIndex }}]
+    {%- endfor %}) = __integrator__.p.x[1]
+    __constants__ = __integrator__.p.x[2]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
@@ -273,8 +272,8 @@ end
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
-    __constants__ = __integrator__.p[{{ staticMaxIndex + 1 }}:{{ staticMaxIndex + constantMaxIndex }}]
+    {%- endfor %}) = __integrator__.p.x[1]
+    __constants__ = __integrator__.p.x[2]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
@@ -301,8 +300,8 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
     t = __integrator__.t
     ({% for record in img.staticRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
-    {%- endfor %}) = __integrator__.p[1:{{ staticMaxIndex }}]
-    __constants__ = __integrator__.p[{{ staticMaxIndex + 1 }}:{{ staticMaxIndex + constantMaxIndex }}]
+    {%- endfor %}) = __integrator__.p.x[1]
+    __constants__ = __integrator__.p.x[2]
     ({% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.u

@@ -57,8 +57,8 @@ end
 
 ### calculate RHS of ODE
 function mm_ode_func_(__du__, __u__, __p__, t)
-    (default_comp,) = __p__[1:1]
-    __constants__ = __p__[2:3]
+    (default_comp,) = __p__.x[1]
+    __constants__ = __p__.x[2]
     (S_,P_,) = __u__ 
 
     # Heta rules
@@ -66,7 +66,7 @@ function mm_ode_func_(__du__, __u__, __p__, t)
     S = S_ / default_comp
     r1 = __constants__[1] * S / (__constants__[2] + S) * default_comp
     
-    #__p__[1:1] .= [default_comp,]
+    #__p__.x[1] .= [default_comp,]
     __du__ .= [
       -r1,  # dS_/dt
       r1,  # dP_/dt
@@ -83,8 +83,8 @@ function mm_saving_generator_(__outputIds__::Vector{Symbol})
     [push!(__out_expr__.args, :(__out__[$i] = $obs)) for (i,obs) in enumerate(__outputIds__)]
 
     @eval function(__out__, __u__, t, __integrator__)
-        (default_comp,) = __integrator__.p[1:1]
-        __constants__ = __integrator__.p[2:3]
+        (default_comp,) = __integrator__.p.x[1]
+        __constants__ = __integrator__.p.x[2]
         (S_,P_,) = __u__
 
         # Heta rules
