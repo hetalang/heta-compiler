@@ -11,8 +11,7 @@ const HetaLevelError = require('../heta-level-error');
  * @param {string} fileContent SBML file content.
  * @returns {array} Parsed content in Q-array format.
  */
-function SBMLParse(fileText) {
-  
+function SBMLParse(fileText, options = {}) {
   let fileTextNoAnnotation = fileText.replace(/<annotation>([\s\S]*?)<\/annotation>/g, (match, p1) => {
     let res =  encodeXML(p1)
       .replace(/[\t\r\n]+/g, '');
@@ -22,13 +21,13 @@ function SBMLParse(fileText) {
   
  //let JSBML = xml2js(fileText, { compact: false });
 
-  return jsbmlToQArr(JSBML);
+  return jsbmlToQArr(JSBML, options);
 }
 
 /*
   Converst of JSON image of SBML to Heta array
 */
-function jsbmlToQArr(JSBML){
+function jsbmlToQArr(JSBML, options = {}) {
   let qArr = [];
   eventCounter = 0; // reset event counter
 
@@ -199,7 +198,7 @@ function jsbmlToQArr(JSBML){
     .flat(1)
     .filter((x) => x.name === 'event')
     .forEach((x) => {
-      let qs = eventToQ(x);
+      let qs = eventToQ(x, options);
       qArr = qArr.concat(qs);
     });
 
@@ -667,10 +666,11 @@ function rateRuleToQ(x){
 }
 
 let eventCounter = 0;
-function eventToQ(x){
+function eventToQ(x, options = {}){
   let qArr = [];
 
   let switcher = baseToQ(x);
+  // TODO: in future convert to `CSwitcher` trigger if options.useCSwitcher === true`
   switcher.class = 'DSwitcher';
   if (switcher.id === undefined) switcher.id = 'evt' + eventCounter++;
   qArr.push(switcher);
@@ -682,7 +682,10 @@ function eventToQ(x){
   let trigger = x.elements?.find((y) => y.name === 'trigger');
   let triggerMath = trigger?.elements?.find((y) => y.name === 'math');
   if (triggerMath) {
-    switcher.trigger = _toMathExpr(triggerMath);
+    let booleanTrigger = _toMathExpr(triggerMath);
+
+    // TODO: in future convert to `CSwitcher` trigger if options.useCSwitcher === true`
+    switcher.trigger = booleanTrigger;
   }
 
   // check if delay is presented, should we include it to Heta standard?

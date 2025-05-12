@@ -7,9 +7,15 @@ const { SBMLParse } = require('./sbml-parse');
  * 
  * @returns {_Module} Self.
  */
-function sbmlLoader(fileContent){
+function sbmlLoader(fileContent, _options){
+  // set defaults
+  const options = Object.assign({
+    useCSwitcher: false, // TODO: implement
+  }, _options);
+
   let fileText = fileContent.toString('utf-8');
-  let parsed = SBMLParse(fileText);
+
+  let parsed = SBMLParse(fileText, options);
 
   return parsed;
 }

@@ -10,4 +10,4 @@ include 00025-sbml-l2v4.xml type sbml;
 */
 
 #defineUnit _h {units: 1/hour};
-include 00026-sbml-l2v4.xml type sbml;
+#include {source: 00026-sbml-l2v4.xml, type: sbml, useCSwitcher: false};
