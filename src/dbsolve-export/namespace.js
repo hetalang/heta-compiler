@@ -128,6 +128,10 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
   let continuousEvents = this
     .selectByClassName('CSwitcher')
     .map((switcher) => {
+      // CSWitcher is not supported in DBsolve
+      let msg = `DBSolve does not support CSwitcher, got: "${switcher.id}. It will be transformed to DSwitcher"`;
+      logger.warn(msg, {type: 'ExportWarning'});
+
       let assignments = this
         .selectRecordsByContext(switcher.id)
         .map((record) => {

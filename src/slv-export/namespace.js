@@ -111,7 +111,7 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     .selectByClassName('DSwitcher')
     .map((x) => x.id);
   if (dSwitchers.length > 0) {
-    let msg = `SLV doesn't support @DSwitchers: ${dSwitchers.join(', ')}.`;
+    let msg = `SLV doesn't support @DSwitchers, got ${dSwitchers.join(', ')}.`;
     logger.error(msg, {type: 'ExportError'});
   }
 
@@ -120,7 +120,7 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     .selectByClassName('CSwitcher')
     .map((x) => x.id);
   if (cSwitchers.length > 0) {
-    let msg = `SLV doesn't support @CSwitchers: ${cSwitchers.join(', ')}.`;
+    let msg = `SLV doesn't support @CSwitchers, got ${cSwitchers.join(', ')}.`;
     logger.error(msg, {type: 'ExportError'});
   }
 
