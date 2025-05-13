@@ -235,10 +235,11 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
-
-    return ({{ event.switcher.trigger.toJuliaString(false, img.pTranslator) if event.switcher.trigger is defined else 'false' }}) ? 1 : -1
+    return {{ event.switcher.trigger.toJuliaString(false, img.pTranslator) if event.switcher.trigger is defined else 'false' }}
 end
 {%- endfor %}
+
+### C EVENTS ###
 
 {%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
 function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator__)
@@ -261,7 +262,6 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
-
     return {{ event.switcher.trigger.toJuliaString(false, img.pTranslator) if event.switcher.trigger is defined else '-1' }}
 end
 {%- endfor %}
@@ -371,11 +371,20 @@ end
     {%- endfor %}
   ]),
   NamedTuple{(
-    {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') | exclude2('switcher.className', 'StopSwitcher') %}
+    {%- for event in img.events | filter2('switcher.className', 'DSwitcher') %}
     :{{ event.switcher.id }},
     {%- endfor %}
   )}([
-    {%- for event in img.events | exclude2('switcher.className', 'TimeSwitcher') | exclude2('switcher.className', 'StopSwitcher') %}
+    {%- for event in img.events | filter2('switcher.className', 'DSwitcher') %}
+    ({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, {{ event.switcher.atStart | default('false') }}),
+    {%- endfor %}
+  ]),
+  NamedTuple{(
+    {%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
+    :{{ event.switcher.id }},
+    {%- endfor %}
+  )}([
+    {%- for event in img.events | filter2('switcher.className', 'CSwitcher') %}
     ({{ id }}_{{ event.switcher.id }}_condition_func_, {{ id }}_{{event.switcher.id}}_affect_func_, {{ event.switcher.atStart | default('false') }}),
     {%- endfor %}
   ]),
