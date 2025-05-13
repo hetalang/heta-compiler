@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.4
+
+- fix bug with wrong path in debug mode
+- optimize julia export code: faster parameter access
+- chocolatey package for Windows
+
 ## 0.9.3
 
 - build debian package

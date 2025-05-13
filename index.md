@@ -55,7 +55,7 @@ choco install heta-compiler
 
 Or install a specific version:
 ```
-choco install heta-compiler --version=0.9.3
+choco install heta-compiler --version=0.9.4
 ```
 
 Update Heta compiler
