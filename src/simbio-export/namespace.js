@@ -46,6 +46,21 @@ Namespace.prototype.getSimbioImage = function() {
 
   let listOfFunctionDefinitions = [...functionDefStorage.values()]
     .filter((functionDef) => !functionDef.isCore);
+
+  // warn about TimeSwitcher and CSwitcher
+  let timeSwitchersIds = this.selectByClassName('TimeSwitcher')
+    .map((x) => x.id);
+  if (timeSwitchersIds.length > 0) {
+    let msg = `TimeSwitcher is not supported in Simbio, got ${timeSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    logger.warn(msg);
+  }
+  let cSwitchersIds = this.selectByClassName('CSwitcher')
+    .map((x) => x.id);
+  if (cSwitchersIds.length > 0) {
+    let msg = `CSwitcher is not supported in Simbio, got ${cSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    logger.warn(msg);
+  }
+
   return {
     population: this,
     legalUnits,

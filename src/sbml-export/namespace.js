@@ -37,6 +37,20 @@ Namespace.prototype.getSBMLImage = function() {
   let listOfFunctionDefinitions = [...functionDefStorage.values()]
     .filter((functionDef) => !functionDef.isCore);
 
+  // warn about TimeSwitcher and CSwitcher
+  let timeSwitchersIds = this.selectByClassName('TimeSwitcher')
+    .map((x) => x.id);
+  if (timeSwitchersIds.length > 0) {
+    let msg = `TimeSwitcher is not supported in SBML, got ${timeSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    logger.warn(msg);
+  }
+  let cSwitchersIds = this.selectByClassName('CSwitcher')
+    .map((x) => x.id);
+  if (cSwitchersIds.length > 0) {
+    let msg = `CSwitcher is not supported in SBML, got ${cSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    logger.warn(msg);
+  }
+
   return {
     population: this,
     listOfUnitDefinitions,
