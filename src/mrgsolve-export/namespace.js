@@ -88,7 +88,7 @@ Namespace.prototype.getMrgsolveImage = function() {
   let cSwitchersIds = this.selectByClassName('CSwitcher')
     .map((x) => x.id);
   if (cSwitchersIds.length > 0) {
-    let msg = `CSwitcher is not supported in mrgsolve, got ${cSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    let msg = `CSwitcher is not supported in mrgsolve, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
     logger.warn(msg);
   }
 

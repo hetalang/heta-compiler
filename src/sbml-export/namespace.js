@@ -41,13 +41,13 @@ Namespace.prototype.getSBMLImage = function() {
   let timeSwitchersIds = this.selectByClassName('TimeSwitcher')
     .map((x) => x.id);
   if (timeSwitchersIds.length > 0) {
-    let msg = `TimeSwitcher is not supported in SBML, got ${timeSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    let msg = `TimeSwitcher is not supported in SBML, got ${timeSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
     logger.warn(msg);
   }
   let cSwitchersIds = this.selectByClassName('CSwitcher')
     .map((x) => x.id);
   if (cSwitchersIds.length > 0) {
-    let msg = `CSwitcher is not supported in SBML, got ${cSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    let msg = `CSwitcher is not supported in SBML, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
     logger.warn(msg);
   }
 
