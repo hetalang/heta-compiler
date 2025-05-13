@@ -84,7 +84,15 @@ Namespace.prototype.getMrgsolveImage = function() {
       };
     });
 
-  // Continuous Events
+  // warn about CSwitcher
+  let cSwitchersIds = this.selectByClassName('CSwitcher')
+    .map((x) => x.id);
+  if (cSwitchersIds.length > 0) {
+    let msg = `CSwitcher is not supported in mrgsolve, got ${cSwitchersIds.join(', ')}. They will transformed to DSwitcher.`;
+    logger.warn(msg);
+  }
+
+  // Descrete Events
   let continuousEvents = this
     .selectByInstanceOf('_Switcher')
     .filter((switcher) => {
