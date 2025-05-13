@@ -187,8 +187,15 @@ jobs:
             $SHA256 = (Get-FileHash -Path .\dist\build-choco\tools\heta.exe -Algorithm SHA256).Hash
             $RELEASE_NOTES = "See https://raw.githubusercontent.com/hetalang/heta-compiler/refs/heads/master/CHANGELOG.md"
             $BUILD_TIMESTAMP = (Get-Date).ToString("yyyy-MM-dd")
-            (Get-Content build-choco/tools/VERIFICATION.tempate.txt) -replace '\$SHA256', $SHA256 -replace '\$BUILD_TIMESTAMP', $BUILD_TIMESTAMP | Set-Content dist/build-choco/tools/VERIFICATION.txt
-            (Get-Content build-choco/heta-compiler.template.nuspec) -replace '\$VERSION', $VERSION -replace '\$RELEASE_NOTES', $RELEASE_NOTES | Set-Content dist/build-choco/heta-compiler.nuspec
+            (Get-Content build-choco/tools/VERIFICATION.tempate.txt) `
+              -replace '\$SHA256', $SHA256 `
+              -replace '\$VERSION', $VERSION `
+              -replace '\$BUILD_TIMESTAMP', $BUILD_TIMESTAMP |
+              Set-Content dist/build-choco/tools/VERIFICATION.txt
+            (Get-Content build-choco/heta-compiler.template.nuspec) `
+              -replace '\$VERSION', $VERSION `
+              -replace '\$RELEASE_NOTES', $RELEASE_NOTES |
+              Set-Content dist/build-choco/heta-compiler.nuspec
             
         - name: Build for choco and publish
           env:
