@@ -82,7 +82,8 @@ jobs:
         - name: Create .deb package
           run: |
             mkdir -p dist/heta-compiler-deb/DEBIAN
-            cp build-deb/control dist/heta-compiler-deb/DEBIAN/
+            cp build-deb/control.template dist/heta-compiler-deb/DEBIAN/control
+            sed -i "s|\$VERSION|${{ github.event.release.tag_name }}|" dist/heta-compiler-deb/DEBIAN/control
             mkdir -p dist/heta-compiler-deb/usr/local/bin
             cp dist/heta-compiler dist/heta-compiler-deb/usr/local/bin/heta
             dpkg-deb --build dist/heta-compiler-deb
