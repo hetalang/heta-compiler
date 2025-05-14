@@ -29,7 +29,7 @@ function SBMLParse(fileText, options = {}) {
 */
 function jsbmlToQArr(JSBML, options = {}) {
   let qArr = [];
-  eventCounter = 0; // reset event counter
+  let eventCounter = 0; // reset event counter
 
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
@@ -198,7 +198,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'event')
     .forEach((x) => {
-      let qs = eventToQ(x, options);
+      let qs = eventToQ(x, eventCounter++, options);
       qArr = qArr.concat(qs);
     });
 
@@ -665,14 +665,13 @@ function rateRuleToQ(x){
   return [q0, q1];
 }
 
-let eventCounter = 0;
-function eventToQ(x, options = {}){
+function eventToQ(x, eventCounter, options = {}){
   let qArr = [];
 
   let switcher = baseToQ(x);
   // TODO: in future convert to `CSwitcher` trigger if options.useCSwitcher === true`
   switcher.class = 'DSwitcher';
-  if (switcher.id === undefined) switcher.id = 'evt' + eventCounter++;
+  if (switcher.id === undefined) switcher.id = 'evt' + eventCounter;
   qArr.push(switcher);
 
   // useValuesFromTriggerTime
