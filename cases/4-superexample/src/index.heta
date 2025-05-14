@@ -56,7 +56,6 @@ namespace mod1 begin
   };
   sw2 @TimeSwitcher {
     start: 12,
-    period: 6,
-    repeatCount: 3
+    period: 6
   };
 end

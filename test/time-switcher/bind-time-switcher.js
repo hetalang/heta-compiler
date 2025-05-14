@@ -63,7 +63,6 @@ describe('TimeSwitcher uses referencies.', () => {
     expect(sw3).to.not.have.property('periodObj');
     expect(sw3).to.not.have.property('stop');
     expect(sw3).to.not.have.property('stopObj');
-    expect(sw3).to.not.have.property('repeatCount');
     expect(sw3).to.not.have.property('repeatCountObj');
     
     expect(sw3.toQ()).to.be.deep.equal({

@@ -78,10 +78,10 @@ const schema = {
   };
 
   How many times does it switch?
-  if (repeatCount < 0 || stop-start < 0) return 0;
-  if (period <= 0 || 0 <= repeatCount < 1 || 0 <= (stop-start)/period < 1) return 1;
-  if (period > 0 && 1 <= repeatCount && 1 <= (stop-start)/period) return n;
-  if (period > 0 && repeatCount === Infinity/undefined && stop === Infinity/undefined) return Infinity;
+  if (stop-start < 0) return 0;
+  if (period <= 0 || 0 <= (stop-start)/period < 1) return 1;
+  if (period > 0 && 1 <= (stop-start)/period) return n;
+  if (period > 0 && stop === Infinity/undefined) return Infinity;
 */
 class TimeSwitcher extends _Switcher {
   constructor(isCore = false){

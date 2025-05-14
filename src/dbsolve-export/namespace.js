@@ -56,8 +56,8 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
   this
     .selectByInstanceOf('TimeSwitcher')
     .forEach((switcher) => { // scan for switch
-      // if period===undefined or period===0 or repeatCount===0 => single dose
-      // if period > 0 and (repeatCount > 0 or repeatCount===undefined) => multiple dose
+      // if period===undefined or period===0 => single dose
+      // if period > 0 => multiple dose
       let period = switcher.periodObj === undefined || switcher.repeatCountObj?.num === 0
         ? 0
         : switcher.getPeriod();

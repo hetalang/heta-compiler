@@ -25,12 +25,12 @@ Keq3 @Const = 4.0;
 PS @Const = 1e-1;
 s2_0 @Const = 0.3;
 
-AUC_s3 @Record .= 0;
+AUC_s3 {output: true} @Record .= 0;
 pr1 @Process { actors: => AUC_s3 };
 pr1 := s3;
 
 // Record in start and ode
-x1 @Record .= rec1;
+x1 @Record {output: true} .= rec1;
 rec1 @Record := k1 * s1 * PS;
 rec1 .= 0;
 
@@ -38,8 +38,7 @@ rec1 .= 0;
 sw1 @TimeSwitcher {
     start: 12,
     period: 6,
-    stop: 60,
-    repeatCount: 3
+    stop: 60
 };
 s1 [sw1]= s1 + dose;
 dose @Const = 10;
