@@ -226,4 +226,54 @@ function _toMathExpr(element, useParentheses = false) {
   }
 }
 
-module.exports = _toMathExpr;
+// same as _toMathExpr but converts boolean operations to numeric
+// which are sutable for CSwitcher triggers
+// a > b -> a - b
+// a < b -> b - a
+// a == b -> throws
+// a != b -> throws
+// not(a>b) -> b - a
+// a>b and c>d -> min(a - b, c - d)
+// a>b or c>d -> max(a - b, c - d)
+function _toNumericExpr(element, useParentheses = false) {
+  //console.log(element);
+  // transform all boolean, other expressions are the same
+  if (element.name === 'math') {
+    return _toNumericExpr(element.elements[0]);
+  }
+  if (element.name === 'apply' && element.elements[0].name in ['gt', 'geq']) {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${one} - ${two}`;
+  }
+  if (element.name === 'apply' && (element.elements[0].name === 'lt' || element.elements[0].name === 'leq')) {
+    let one = _toMathExpr(element.elements[1], true);
+    let two = _toMathExpr(element.elements[2], true);
+    return `${two} - ${one}`;
+  }
+  if (element.name === 'apply' && element.elements[0].name === 'neq') {
+    throw new HetaLevelError('!= operator in expression (SBML module) is not supported');
+  }
+  if (element.name === 'apply' && element.elements[0].name === 'eq') {
+    throw new HetaLevelError('== operator in expression (SBML module) is not supported');
+  }
+  if (element.name === 'apply' && element.elements[0].name === 'and') {
+    let args = element.elements.slice(1)
+      .map((x) => _toNumericExpr(x)).join(', ');
+    return `min(${args})`;
+  }
+  if (element.name === 'apply' && element.elements[0].name === 'or') {
+    let args = element.elements.slice(1)
+      .map((x) => _toNumericExpr(x)).join(', ');
+    return `max(${args})`;
+  }
+  if (element.name === 'apply' && element.elements[0].name === 'not') {
+    let one = _toNumericExpr(element.elements[1], true);
+    return `-(${one})`;
+  }
+  
+  // all other cases
+  return _toMathExpr(element);
+}
+
+module.exports = { _toMathExpr, _toNumericExpr };

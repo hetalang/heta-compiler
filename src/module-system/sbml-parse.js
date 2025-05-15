@@ -1,4 +1,4 @@
-const _toMathExpr = require('./to-math-expr');
+const { _toMathExpr, _toNumericExpr } = require('./to-math-expr');
 const { xml2js } = require('xml-js');
 const { encodeXML } = require('entities');
 const { Unit } = require('../core/unit');
@@ -669,8 +669,8 @@ function eventToQ(x, eventCounter, options = {}){
   let qArr = [];
 
   let switcher = baseToQ(x);
-  // TODO: in future convert to `CSwitcher` trigger if options.useCSwitcher === true`
-  switcher.class = 'DSwitcher';
+  // convert to `CSwitcher`
+  switcher.class = options.useCSwitcher ? 'CSwitcher' : 'DSwitcher';
   if (switcher.id === undefined) switcher.id = 'evt' + eventCounter;
   qArr.push(switcher);
 
@@ -681,10 +681,10 @@ function eventToQ(x, eventCounter, options = {}){
   let trigger = x.elements?.find((y) => y.name === 'trigger');
   let triggerMath = trigger?.elements?.find((y) => y.name === 'math');
   if (triggerMath) {
-    let booleanTrigger = _toMathExpr(triggerMath);
-
-    // TODO: in future convert to `CSwitcher` trigger if options.useCSwitcher === true`
-    switcher.trigger = booleanTrigger;
+    let trigger = options.useCSwitcher
+      ? _toNumericExpr(triggerMath)
+      : _toMathExpr(triggerMath);
+    switcher.trigger = trigger;
   }
 
   // check if delay is presented, should we include it to Heta standard?

@@ -13,6 +13,7 @@
     "debug": true
   },
   "export": [
-    { "format": "SBML", "filepath": "output" }
+    { "format": "SBML", "filepath": "output" },
+    { "format": "JSON"}
   ]
 }
