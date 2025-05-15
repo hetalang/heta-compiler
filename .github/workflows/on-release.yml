@@ -82,7 +82,7 @@ jobs:
             cd ..
         - name: Create .deb package
           run: |
-            VERSION = $(node -p "require('./package.json').version")
+            VERSION=$(node -p "require('./package.json').version")
             mkdir -p dist/heta-compiler-deb/DEBIAN
             cp build-deb/control.template dist/heta-compiler-deb/DEBIAN/control
             sed -i "s|\$VERSION|$VERSION|" dist/heta-compiler-deb/DEBIAN/control
