@@ -63,13 +63,13 @@ async function main() {
     process.exit(2); // BRAKE
   }
   
+  // set targetDir as working directory
+  process.chdir(targetDir);
+  
   // init logging to file
   logStream = fs.createWriteStream(cliOptions.logPath, { flags: 'w' }); // or 'a' to append
 
   message(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
-
-  // set targetDir as working directory
-  process.chdir(targetDir);
 
   // 0. empty declaration
   let declaration = {options: {}, importModule: {}, export: []};
@@ -166,31 +166,33 @@ Promise.all([
   main(),
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
-  const { logMode, logPath } = program.opts();
   if (builder.container.hetaErrors().length > 0) {
     process.stdout.write('Compilation ERROR! See logs.\n');
-    logStream?.write('Compilation ERROR! See logs.\n');
-    logMode !== 'never' && fs.removeSync(logPath);
-    process.exit(2);
+    logStream?.write('Compilation ERROR! See logs.\n'); 
+    process.exitCode = 2; // ERROR
   } else {
     process.stdout.write('Compilation OK!\n');
     logStream?.write('Compilation OK!\n');
-    logMode !== 'always' && fs.removeSync(logPath);
-    process.exit(0);
+    process.exitCode = 0; // OK
   }
 }).catch((error) => {
-  const { logMode, logPath } = program.opts();
   if (error.name === 'HetaLevelError') {
     process.stdout.write('Error: ' + error.message + '\nSTOP!\n');
     logStream?.write('Error: ' + error.message + '\nSTOP!\n');
-    logMode !== 'never' && fs.removeSync(logPath);
-    process.exit(2);
+    process.exitCode = 2;
   } else {
     process.stdout.write(contactMessage + '\n');
     process.stdout.write(error.stack);
     logStream?.write(contactMessage + '\n');
     logStream?.write(error.stack);
-    logMode !== 'never' && fs.removeSync(logPath);
-    process.exit(1); // unexpected error
+    process.exitCode = 1; // unexpected error
   }
+}).finally(() => {
+  const { logMode, logPath } = program.opts();
+
+  let toDelete = logMode === 'never' 
+      || (logMode === 'error' && process.exitCode === 0);
+  toDelete && fs.removeSync(logPath);
+  
+  process.exit();
 });

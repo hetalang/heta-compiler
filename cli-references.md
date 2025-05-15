@@ -42,9 +42,8 @@ It uses the main source file (index) as an initial point to compile the platform
 The default run of `heta build` (no options set, no configuration file) will do the following:
 
 1. Looking for **index.heta** in parent working directory of shell.
-2. Running parsing of index file as module of type "heta" and all files (modules) mentioned by `include` statement inside `index.heta`.
-4. Creation of export files declared by `#export` actions to **dist/** directory.
-5. If there are compiling errors the file **build.log** will be created in working directory.
+2. Running parsing of index.heta file as module of type "heta" and all files (modules) mentioned by `#include` action inside `index.heta`.
+3. If there are compiling errors the file **build.log** will be created in working directory.
 
 ### Running build with CLI options
 
