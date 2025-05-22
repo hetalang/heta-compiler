@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.9.5
+
+- implement new standard for `DSwitcher` based on heta-specifications v0.5.1
+- optional transformation of `DSwitcher` to `CSwitcher` in SBML module (`useCSwitcher` option)
+- minor release worklow updates in GH actions
+
 ## 0.9.4
 
 - fix bug with wrong path in debug mode
