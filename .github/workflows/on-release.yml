@@ -51,6 +51,7 @@ jobs:
             DEPLOY_KEY: ${{ secrets.DEPLOY_HOMEBREW_HETA_COMPILER }}
 
         - name: Commit to homebrew-heta-compiler repos
+          if: ${{ github.event.release.prerelease == false }}
           run: |
             git clone git@github.com:hetalang/homebrew-heta-compiler.git
             cd homebrew-heta-compiler
@@ -81,9 +82,10 @@ jobs:
             cd ..
         - name: Create .deb package
           run: |
+            VERSION=$(node -p "require('./package.json').version")
             mkdir -p dist/heta-compiler-deb/DEBIAN
             cp build-deb/control.template dist/heta-compiler-deb/DEBIAN/control
-            sed -i "s|\$VERSION|${{ github.event.release.tag_name }}|" dist/heta-compiler-deb/DEBIAN/control
+            sed -i "s|\$VERSION|$VERSION|" dist/heta-compiler-deb/DEBIAN/control
             mkdir -p dist/heta-compiler-deb/usr/local/bin
             cp dist/heta-compiler dist/heta-compiler-deb/usr/local/bin/heta
             dpkg-deb --build dist/heta-compiler-deb
@@ -199,6 +201,7 @@ jobs:
               Set-Content dist/build-choco/heta-compiler.nuspec
             
         - name: Build for choco and publish
+          if: ${{ github.event.release.prerelease == false }}
           env:
             CHOCO_API_KEY: ${{ secrets.DEPLOY_CHOCO_HETA_COMPILER }}
           run: |
