@@ -35,7 +35,7 @@
     "commander": "^12.1.0",
     "entities": "^5.0.0",
     "fs-extra": "^11.2.0",
-    "heta-parser": "^0.4.2",
+    "heta-parser": "^0.4.3",
     "inquirer": "^8.2.6",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
