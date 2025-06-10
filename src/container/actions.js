@@ -268,7 +268,7 @@ Container.prototype.upsert = function(q = {}, isCore = false){
  * 
  * @param {*} q The `#delete` action in JS object format.
  * 
- * @returns {Component} Deleted component.
+ * @returns {boolean} `true` if component existed and was deleted, `false` otherwise.
  */
 Container.prototype.delete = function(q = {}){
   let space = q.space || 'nameless';
