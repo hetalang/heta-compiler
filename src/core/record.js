@@ -2,7 +2,6 @@ const { _Size } = require('./_size');
 const { Expression } = require('./expression');
 const { ajv } = require('../utils');
 
-
 const schema = {
   type: 'object',
   properties: {
@@ -140,11 +139,11 @@ class Record extends _Size {
     Object.entries(this.assignments).forEach(([key, expr]) => {
       clonedComponent.assignments[key] = expr.clone();
     });
-    if (typeof this.boundary !== undefined)
+    if (typeof this.boundary !== 'undefined')
       clonedComponent.boundary = this.boundary;
-    if (typeof this.ss !== undefined)
+    if (typeof this.ss !== 'undefined')
       clonedComponent.ss = this.ss;
-    if (typeof this.output !== undefined)
+    if (typeof this.output !== 'undefined')
       clonedComponent.output = this.output;
       
     return clonedComponent;

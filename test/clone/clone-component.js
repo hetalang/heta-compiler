@@ -27,6 +27,10 @@ describe('Clone components', () => {
     expect(clonedComponent.assignments.evt1.toString()).to.be.equal('x / y');
 
     expect(clonedComponent).to.have.property('units', 'kg/mole*min');
+
+    expect(clonedComponent).to.not.have.property('boundary');
+    expect(clonedComponent).to.not.have.property('ss');
+    expect(clonedComponent).to.not.have.property('output');
   });
 
   it('clone @Record with rename', () => {
@@ -64,4 +68,20 @@ describe('Clone components', () => {
     expect(clonedComponent.assignments.evt1.toString()).to.be.equal('x2 / y2');
     expect(clonedComponent).to.have.property('units', 'kg/mole*min');
   });  
+
+  it('clone @Record with boundary/ss/output', () => {
+    let record = new Record().merge({
+      id: 'test_id',
+      assignments: {start_: '1'},
+      boundary: true,
+      ss: true,
+      output: true
+    });
+
+    let clonedComponent = record.clone();
+
+    expect(clonedComponent).to.have.property('boundary', true);
+    expect(clonedComponent).to.have.property('ss', true);
+    expect(clonedComponent).to.have.property('output', true);
+  });
 });
