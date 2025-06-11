@@ -63,12 +63,20 @@ describe('XLSX connector', () => {
     expect(res).to.be.lengthOf(4);
     expect(res).to.be.deep.equal(sheet1);
 
-    let json = JSON.stringify(res, null, 2);
+    //let json = JSON.stringify(res, null, 2);
     //console.log(json);
   });
 
-  it('Read not existed table', () => {
+  it('Reading not existed table throws', () => {
     let fullPath = __dirname + '/' + 'test.xlsx';
-    expect( () => convertExcelSync(fullPath, null, { sheet:4 })).to.throw(Error);
+    expect( () => convertExcelSync(fullPath, null, { sheet: 4 })).to.throw(Error);
+  });
+
+  it('Read table 2 with transposition', () => {
+    let fileContent = fs.readFileSync(fullPath);
+    let res = convertExcelSync(fileContent, null, { sheet: 1, transpose: true });
+    
+    expect(res).to.be.lengthOf(4);
+    expect(res).to.be.deep.equal(sheet1);
   });
 });

@@ -7,21 +7,11 @@ const { convertExcelSync } = require('../xlsx-connector');
  * 
  * @returns {Module} Self.
  */
-function tableLoader(fileContent, _options){
-  // default results
-  let rawData = [];
+function tableLoader(fileContent, { sheet = 0, omitRows = 0, transpose = false } = {}) {
   // TODO: checking arguments is required
-  const options = Object.assign({
-    sheet: 0,
-    omitRows: 0
-  }, _options);
 
-  rawData = convertExcelSync(
-    fileContent,
-    null, 
-    { sheet: options.sheet, omitEmptyFields: true }
-  );
-  rawData.splice(0, options.omitRows); // remove rows
+  let rawData = convertExcelSync(fileContent, null, { sheet, transpose });
+  rawData.splice(0, omitRows); // remove rows
 
   let parsed = rawData
     .filter((x) => x.on) // ignore rows
