@@ -10,6 +10,10 @@ mm_constants_num_ = NamedTuple{(
 )}(Float64[
   0.1,2.5,
 ])
+### create static ids
+mm_statics_id_ = (
+    :default_comp,
+)
 
 ### create default observables
 mm_records_output_ = NamedTuple{(
@@ -33,7 +37,7 @@ mm_dynamic_nonss_ = NamedTuple{(
 ])
 
 ### initialization of ODE variables and Records
-function mm_init_func_(__constants__)
+function mm_init_func_!(__u0__, __p0__, __constants__)
     # Heta initialize
     t = 0.0 # initial time
     P = 0e+0
@@ -42,17 +46,16 @@ function mm_init_func_(__constants__)
     r1 = __constants__[1] * S / (__constants__[2] + S) * default_comp
     
     # save results
-
-    return (
-        Float64[
-            S * default_comp,
-            P * default_comp,
-        ],
-        Float64[
-            default_comp,
-            __constants__...
-        ]
+    __u0__ .= (
+        S * default_comp,
+        P * default_comp,
     )
+
+    __p0__ .= (
+        default_comp,
+    )
+
+    return nothing
 end
 
 ### calculate RHS of ODE
@@ -113,7 +116,7 @@ end
 ### MODELS ###
 
 mm_model_ = (
-  mm_init_func_,
+  mm_init_func_!,
   mm_ode_func_,
   NamedTuple{(
   )}([
@@ -129,6 +132,7 @@ mm_model_ = (
   ]),
   mm_saving_generator_,
   mm_constants_num_,
+  mm_statics_id_,
   mm_events_active_,
   mm_records_output_,
   mm_dynamic_nonss_
