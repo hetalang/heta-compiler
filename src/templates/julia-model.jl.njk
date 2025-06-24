@@ -111,9 +111,11 @@ function {{ id }}_init_func_!(__u0__, __p0__, __constants__)
       {%- endif %}
     )
 
-    __p0__ .= ({% for record in img.staticRecords %}
+    __p0__ .= (
+      {%- for record in img.staticRecords %}
         {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }},
-    {% endfor %})
+      {%- endfor %}
+    )
 
     return nothing
 end
