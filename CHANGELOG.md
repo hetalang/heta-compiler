@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.9.6
+
+- update to Julia format: static_id, init_func!
+- add `transpose` option in table module
+- fix issues with parsing ids starting from reserved words: begin, end, etc.
+- minor docs updates
+- security updates
+
 ## 0.9.5
 
 - implement new standard for `DSwitcher` based on heta-specifications v0.5.1
