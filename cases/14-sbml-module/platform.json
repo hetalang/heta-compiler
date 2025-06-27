@@ -14,6 +14,7 @@
   },
   "export": [
     { "format": "SBML", "filepath": "output" },
-    { "format": "JSON"}
+    { "format": "JSON"},
+    { "format": "Julia"}
   ]
 }

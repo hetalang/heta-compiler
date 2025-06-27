@@ -36,6 +36,12 @@ end
     {{ con.num }},
   {%- endfor %}
 ])
+### create static ids
+{{ id }}_statics_id_ = (
+  {%- for rec in img.staticRecords %}
+    :{{ rec.id }}{{ '_' if rec.instanceOf('Species') and not rec.isAmount }},
+  {%- endfor %}
+)
 
 ### create default observables
 {{ id }}_records_output_ = NamedTuple{(
@@ -77,7 +83,7 @@ end
 ])
 
 ### initialization of ODE variables and Records
-function {{ id }}_init_func_(__constants__)
+function {{ id }}_init_func_!(__u0__, __p0__, __constants__)
     # Heta initialize
     t = 0.0 # initial time
     {%- for ts in timeScales %}
@@ -91,28 +97,27 @@ function {{ id }}_init_func_(__constants__)
     {%- endif %}
     {% endfor %}
     # save results
-
-    return (
-        {%- if img.dynamicRecords | length > 0 %}
-        Float64[
+    __u0__ .= (
+      {%- if img.dynamicRecords | length > 0 -%}
         {%- for record in img.dynamicRecords %}
         {%- if record.instanceOf('Species') and not record.isAmount and not record.isRule %}
-            {{ record.id }} * {{ record.compartment }}, 
+        {{ record.id }} * {{ record.compartment }}, 
         {%- else %}
-            {{ record.id }}, 
+        {{ record.id }}, 
         {%- endif %}
         {%- endfor %}
-        ],
-        {%- else -%}
-        [ 0.0 ], # init for fake variable
-        {%- endif %}
-        Float64[
-        {%- for record in img.staticRecords %}
-            {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }},
-        {%- endfor %}
-            __constants__...
-        ]
+      {%- else -%}
+        0.0,
+      {%- endif %}
     )
+
+    __p0__ .= (
+      {%- for record in img.staticRecords %}
+        {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }},
+      {%- endfor %}
+    )
+
+    return nothing
 end
 
 ### calculate RHS of ODE
@@ -359,7 +364,7 @@ end
 ### MODELS ###
 
 {{ id }}_model_ = (
-  {{ id }}_init_func_,
+  {{ id }}_init_func_!,
   {{ id }}_ode_func_,
   NamedTuple{(
     {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
@@ -399,6 +404,7 @@ end
   ]),
   {{ id }}_saving_generator_,
   {{ id }}_constants_num_,
+  {{ id }}_statics_id_,
   {{ id }}_events_active_,
   {{ id }}_records_output_,
   {{ id }}_dynamic_nonss_
