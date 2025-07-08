@@ -17,7 +17,6 @@
 - [qsp-functions.heta](./qsp-functions.heta)
 - [qsp-units.heta](./qsp-units.heta)
 - [API docs](https://hetalang.github.io/heta-compiler/dev)
-- [Change log](./CHANGELOG)
 - [Migrate to v0.6](./migrate-to-v0.6)
 - [Migrate to v0.7](./migrate-to-v0.7)
 - [Migrate to v0.8](./migrate-to-v0.8)
@@ -25,7 +24,7 @@
 
 ## Introduction
 
-**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](../specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming them into the dynamical model/models of different formats.
+**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming them into the dynamical model/models of different formats.
 
 Quantitative Systems Pharmacology (QSP) is a discipline that uses mathematical computer models to characterize biological systems, disease processes, and drug pharmacology. QSP typically deals with mechanism-based dynamical models described by ODE systems. Sometimes the modeling systems include hundreds or thousands of components and are developed by a research group involving people with different expertise.
 
