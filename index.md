@@ -314,7 +314,7 @@ The tool is under active development, so there are many features to implement. T
 
 - [Source Code](https://github.com/hetalang/heta-compiler)
 - [Issue Tracker](https://github.com/hetalang/heta-compiler/issues)
-- See also contributing in [Heta project](../CONTRIBUTING)
+- See also contributing in [Heta project](/contributing)
 
 ## License
 
