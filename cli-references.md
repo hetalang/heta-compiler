@@ -149,9 +149,9 @@ DONE.
 
 If we check the content of the created "test" directory we will see the following:
 
-**src/index.heta** : the default heta file containing platform template. [index.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/index.heta){:download}
+**src/index.heta** : the default heta file containing platform template. [index.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/index.heta){download}
 
-**src/qsp-units.heta** : pre-defined list of units. You didn't have to use it. [qsp-units.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/qsp-units.heta){:download}
+**src/qsp-units.heta** : pre-defined list of units. You didn't have to use it. [qsp-units.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/qsp-units.heta){download}
 
 **platform.yml** : default declaration file.
 
