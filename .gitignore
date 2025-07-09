@@ -1,7 +1,14 @@
 node_modules
-/dist
-/draft
 *.tmp
 ~$*.*
 *.log
 .nyc_output
+
+# build output
+/dist
+
+# user-specific files
+/draft
+
+# jsdoc
+/docs/dev
