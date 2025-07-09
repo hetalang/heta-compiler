@@ -2,7 +2,7 @@
 
 Heta compiler of **version 0.6** follows the [Heta standard](/specifications/) of **version 0.4**.
 
-The new Heta specifications has several incompatibilities. To use the newer Heta compiler you should make some updates to thee platform files. To see the other updates see [change log](./CHANGELOG).
+The new Heta specifications has several incompatibilities. To use the newer Heta compiler you should make some updates to thee platform files. To see the other updates see [change log](https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md).
 
 You don't need it for newly created platform.
 

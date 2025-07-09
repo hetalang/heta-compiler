@@ -2,14 +2,14 @@
 
 Heta compiler of **version 0.8** follows the [Heta standard](/specifications/) of **version 0.4.5**.
 
-To use the newer Heta compiler you should make some updates to the platform files. To see the other updates see [change log](./CHANGELOG).
+To use the newer Heta compiler you should make some updates to the platform files. To see the other updates see [change log](https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md).
 
 See also [Migrate to v0.6](./migrate-to-v0.6), [Migrate to v0.7](./migrate-to-v0.7).
 
 ## Changes in core mathematical functions
 
 The most critical changes in heta-compiler refers to list of supported mathematical functions.
-It follows the new Heta standard v0.4.5, see details [here](https://hetalang.github.io/#/specifications/math?id=list-of-functions). 
+It follows the new Heta standard v0.4.5, see details [here](/specifications/math?id=list-of-functions). 
 
 ## Update of units check
 

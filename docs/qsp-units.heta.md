@@ -10,9 +10,9 @@ The `qsp-units.heta` file provides a pre-defined set of units tailored for QSP (
 
 ## Base Units and Units definitions in Heta Specification
 
-Heta specification defines a set of **core units** that serve as the foundation for creating and using units in models. These include fundamental units for quantities like time, mass, and volume. For a detailed list of these core units, refer to the [Heta Core Units](https://hetalang.github.io/#/specifications/units?id=core-units) documentation.
+Heta specification defines a set of **core units** that serve as the foundation for creating and using units in models. These include fundamental units for quantities like time, mass, and volume. For a detailed list of these core units, refer to the [Heta Core Units](/specifications/units?id=core-units) documentation.
 
-Heta allows users to define their own units using the [`#defineUnit`](https://hetalang.github.io/#/specifications/actions?id=defineunit) action. The `qsp-units.heta` file leverages this capability to provide an extended set of units while maintaining compatibility with the core units.
+Heta allows users to define their own units using the [`#defineUnit`](/specifications/actions?id=defineunit) action. The `qsp-units.heta` file leverages this capability to provide an extended set of units while maintaining compatibility with the core units.
 
 ## Included Units
 

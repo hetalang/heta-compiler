@@ -3,9 +3,9 @@
 
 The v0.9 release of Heta includes improvements in export flexibility, support for new formats, and better tooling for the declaration files.
 
-The **v0.9** version of the Heta compiler adheres to the [Heta standard](https://hetalang.github.io/#/specifications/) **v0.5.0**.
+The **v0.9** version of the Heta compiler adheres to the [Heta standard](/specifications/) **v0.5.0**.
 
-To use the latest Heta compiler, you will need to update some platform files. For other updates, refer to the [changelog](./CHANGELOG).
+To use the latest Heta compiler, you will need to update some platform files. For other updates, refer to the [change log](https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md).
 
 You may also want to check the previous migration guides: [Migrate to v0.6](./migrate-to-v0.6), [Migrate to v0.7](./migrate-to-v0.7), and [Migrate to v0.8](./migrate-to-v0.8).
 

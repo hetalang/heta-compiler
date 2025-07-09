@@ -2,7 +2,7 @@
 
 Heta compiler of **version 0.7** follows the [Heta standard](/specifications/) of **version 0.4.4**.
 
-To use the newer Heta compiler you should make some updates to the platform files. To see the other updates see [change log](./CHANGELOG).
+To use the newer Heta compiler you should make some updates to the platform files. To see the other updates see [change log](https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md).
 
 See also [Migrate to v0.6](./migrate-to-v0.6).
 

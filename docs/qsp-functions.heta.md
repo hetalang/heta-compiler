@@ -9,11 +9,11 @@ The `qsp-functions.heta` file serves as a container for additional custom functi
 
 ## Defining Custom Functions
 
-Heta provides the flexibility to define your own functions. For details on how to create custom functions, refer to the [`#defineFunction`](https://hetalang.github.io/#/specifications/actions?id=definefunction) specification.
+Heta provides the flexibility to define your own functions. For details on how to create custom functions, refer to the [`#defineFunction`](/specifications/actions?id=definefunction) specification.
 
 ## Included Functions
 
-The `qsp-functions.heta` file contains a curated list of additional functions specifically tailored for Heta platforms. These functions are not part of the [base function list](https://hetalang.github.io/#/specifications/math?id=list-of-functions), but they extend the platform's functionality. 
+The `qsp-functions.heta` file contains a curated list of additional functions specifically tailored for Heta platforms. These functions are not part of the [base function list](/specifications/math?id=list-of-functions), but they extend the platform's functionality. 
 
 ## Best Practices
 
