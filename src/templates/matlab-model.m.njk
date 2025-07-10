@@ -35,11 +35,12 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     ode_func = @ODEFunc;
     out_func = @OutputFunc;
     events_conditions = @Conditions;
-    events_affects = {
+    events_affects_full = {
     {%- for event in events -%}
         @{{ event.switcher.id }}_affect{{ ', ' if not loop.last }}
     {%- endfor -%}
     };
+    events_affects = events_affects_full({{ constants|length + 1 }}:{{ constants|length + events|length }});
     y0_ = InitFunc();
 
     % shared variable
