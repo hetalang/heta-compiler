@@ -35,12 +35,15 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     ode_func = @ODEFunc;
     out_func = @OutputFunc;
     events_conditions = @Conditions;
+
+    vec = p({{ constants|length + 1 }}:{{ constants|length + events|length }}) ~= 0;
     events_affects_full = {
     {%- for event in events -%}
         @{{ event.switcher.id }}_affect{{ ', ' if not loop.last }}
     {%- endfor -%}
     };
-    events_affects = events_affects_full({{ constants|length + 1 }}:{{ constants|length + events|length }});
+    % reduce to number of active events
+    events_affects = events_affects_full(vec);
     y0_ = InitFunc();
 
     % shared variable
@@ -78,6 +81,7 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
     %%% Check events conditions at `zero`
     function y__ = ReinitY0(time, y0)
         
+        % size is number of active events
         cond_zero = Conditions(time, y0);
         ev_idxs = find(cond_zero==0, 1);
         
@@ -259,7 +263,8 @@ function [ode_func, out_func, y0_, events_conditions, events_affects] = {{ names
             {%- for event in events -%}
                 {{ event.switcher.id }}_condition(time, y){{ '; ' if not loop.last }}
             {%- endfor -%}
-        ];     
-        res = res_full(vec); % only active events
+        ];
+        % reduce to number of active events
+        res = res_full(vec);
     end
 end
