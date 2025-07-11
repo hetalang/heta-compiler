@@ -63,9 +63,9 @@ jobs:
             git config user.email "actions@github.com"
             mkdir -p Formula
             cp -f ../build-homebrew/heta-compiler.template.rb Formula/heta-compiler.rb # copy the new formula and replace the old one
-            sed -i "s|\$VERSION|${{ github.event.release.tag_name }}|" Formula/heta-compiler.rb
-            SHA=$(sha256sum ../dist/heta-compiler-macos-arm64.tar.gz | awk '{print $1}')
-            sed -i "s|\$SHA256|$SHA|" Formula/heta-compiler.rb
+            sed -i '' "s|\$VERSION|${{ github.event.release.tag_name }}|" Formula/heta-compiler.rb
+            SHA=$(shasum -a 256 ../dist/heta-compiler-macos-arm64.tar.gz | awk '{print $1}')
+            sed -i '' "s|\$SHA256|$SHA|" Formula/heta-compiler.rb
             git add .
             git commit -m "Automated update from source repository based on release ${{ github.event.release.tag_name }}"
             git push origin master
