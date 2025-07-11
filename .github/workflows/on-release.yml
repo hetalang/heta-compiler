@@ -208,7 +208,7 @@ jobs:
           run: |
             npx pkg . -t win --compress GZip
             cd ./dist
-            cp -Force heta-compiler.exe heta-compiler-windows-x64.exe
+            cp -Force heta-compiler.exe heta-compiler-win-x64.exe
             tar -czvf ./heta-compiler-windows-x64.tar.gz ./heta-compiler.exe
             cd ..
 
@@ -256,7 +256,7 @@ jobs:
           with:
             files: |
               dist/heta-compiler-windows-x64.tar.gz
-              dist/heta-compiler-windows-x64.exe
+              dist/heta-compiler-win-x64.exe
 
         - name: Prepare files to publish in choco
           run: |
