@@ -11,17 +11,6 @@
 
 **Heta compiler** is a software tool for the compilation of Heta-based QSP modeling platforms. Heta compiler can also be used as a JavaScript/Node package to develop modeling tools.
 
-- **General info**
-- [Export formats](./export-formats)
-- [CLI references](./cli-references)
-- [qsp-functions.heta](./qsp-functions.heta)
-- [qsp-units.heta](./qsp-units.heta)
-- [API docs](https://hetalang.github.io/heta-compiler/dev)
-- [Migrate to v0.6](./migrate-to-v0.6)
-- [Migrate to v0.7](./migrate-to-v0.7)
-- [Migrate to v0.8](./migrate-to-v0.8)
-- [Migrate to v0.9](./migrate-to-v0.9)
-
 ## Introduction
 
 **Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming them into the dynamical model/models of different formats.
