@@ -5,7 +5,7 @@ Verification Instructions for heta.exe
    You can verify the hash using a tool like PowerShell:
    `Get-FileHash -Path .\heta-compiler.exe -Algorithm SHA256`
 3. The original executable is also available at the official GitHub release page:
-   https://github.com/hetalang/heta-compiler/releases/download/$VERSION/heta-compiler-win-x64.exe
+   https://github.com/hetalang/heta-compiler/releases/download/$VERSION/heta-compiler-windows-x64.exe
    This is the exact same binary used in this Chocolatey package.
 4. The source repository includes detailed build instructions to ensure integrity.
 

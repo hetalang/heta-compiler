@@ -8,6 +8,10 @@ on:
     branches: [ master ]
   pull_request:
 
+permissions:
+  contents: write
+  pull-requests: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,6 +28,7 @@ jobs:
         cp -f src/builder/declaration-schema.json docs
         touch docs/.nojekyll
     - name: Deploy to "gh-pages"
+      if: github.event_name == 'push'
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}

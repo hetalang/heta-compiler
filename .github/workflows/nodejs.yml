@@ -9,6 +9,10 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   multios:
     strategy:
@@ -38,10 +42,7 @@ jobs:
       with:
         node-version: 18.x
     - run: npm ci
-    - name: Build standalone apps
-      run: npm run pkg
-    - name: Save distributives as artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: standalone-distributives
-        path: dist
+    - name: Build and check package
+      run: |
+        npm run pkg
+        dist/heta-compiler-linux --version
