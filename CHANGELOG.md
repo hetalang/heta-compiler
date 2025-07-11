@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.9.7
+
+- fix issue with `events_affects` in Matlab export
+- fix issue with `initialAssignment` for rules in Simbio
+- support application build for Linux arm64, macOS x64
+- rename assets in releases, unification of assets names
+
 ## 0.9.6
 
 - update to Julia format: static_id, init_func!
