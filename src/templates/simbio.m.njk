@@ -108,12 +108,18 @@ addrule(
   {{- model_id }}, '{{ts.id}} = time * {{ ts.slope }} + {{ ts.intercept }}', 'repeatedAssignment');
 {%- endfor %}
 
-{%- set listOfInitialAssignments = population.selectRecordsByContext("start_")|filter2("assignments.start_.num", undefined) %}
+{# do not apply initialAssignment for rules #}
+{% 
+  set listOfInitialAssignments = population.selectRecordsByContext("start_") 
+  | filter2("assignments.start_.num", undefined) 
+  | exclude2("className", "Reaction") 
+  | filter2("assignments.ode_", undefined)
+%}
 {{- "% InitialAssignments" if listOfInitialAssignments|length > 0 -}}
-{% for record in listOfInitialAssignments %}
+{%- for record in listOfInitialAssignments %}
 addrule(
   {{- model_id }}, '{{record.id}} = {{ record.assignments.start_.toMatlabString() }}', 'initialAssignment');
-{% endfor %}
+{%- endfor %}
 
 {% set listOfTimeEvents = population.selectByClassName("TimeSwitcher") %}
 {{- "% Time Events" if listOfTimeEvents | length > 0 }}
