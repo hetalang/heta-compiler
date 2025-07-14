@@ -1,10 +1,5 @@
-[![Heta project](https://img.shields.io/badge/%CD%B1-Heta_project-blue)](https://hetalang.github.io/)
 [![GitHub issues](https://img.shields.io/github/issues/hetalang/heta-compiler.svg)](https://GitHub.com/hetalang/heta-compiler/issues/)
 [![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)
-[![status](https://joss.theoj.org/papers/ebff76c368d3adb720afe414ef6b29fb/status.svg)](https://joss.theoj.org/papers/ebff76c368d3adb720afe414ef6b29fb)
-
-[![Autotests](https://github.com/hetalang/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/hetalang/heta-compiler/actions)
-[![Coverage Status](https://coveralls.io/repos/github/hetalang/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/hetalang/heta-compiler?branch=master)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
 
 # Heta compiler
@@ -257,9 +252,6 @@ Creating a template platform in directory: "Y:\draft"...
 ## Usage in NodeJS packages
 
 Heta compiler has been written in NodeJS environment and can be used as a package for browser or server-side tools and applications.
-
-> To learn more, see [API docs](https://hetalang.github.io/heta-compiler/dev)
-(under development).
 
 ```javascript
 const { Builder } = require('./src');
