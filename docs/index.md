@@ -8,7 +8,7 @@
 
 ## Introduction
 
-**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](http://sbml.org/) and transforming them into the dynamical model/models of different formats.
+**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](https://sbml.org/) and transforming them into the dynamical model/models of different formats.
 
 Quantitative Systems Pharmacology (QSP) is a discipline that uses mathematical computer models to characterize biological systems, disease processes, and drug pharmacology. QSP typically deals with mechanism-based dynamical models described by ODE systems. Sometimes the modeling systems include hundreds or thousands of components and are developed by a research group involving people with different expertise.
 
@@ -168,12 +168,12 @@ The next steps should be taken using console (shell): **cmd**, **PowerShell**, *
 
 >for more information see [export formats](./export-formats)
 
-Heta compiler was created to support exporting to different popular modeling formats.
+Heta compiler was created to support exporting to different popular modeling and analysis formats.
 One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools.
 The current version supports the following formats:
 
-- DBSolveOptimum .SLV files [link](http://insysbio.com/en/software/db-solve-optimum)
-- SBML L2V4 [link](http://sbml.org/)
+- DBSolveOptimum .SLV files [link](https://insysbio.com/en/software/db-solve-optimum)
+- SBML L2V4 [link](https://sbml.org/)
 - mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
 - Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
 - Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
@@ -181,6 +181,7 @@ The current version supports the following formats:
 - JSON formatted file
 - YAML formatted file
 - Excel sheets
+- Dot language files (Graphviz) [link](https://graphviz.org/)
 
 ## Usage of command line interface
 
@@ -279,12 +280,6 @@ console.log(sbmlOutput[0].content);
 console.log(builder.container.hetaErrors());
 ```
 
-## Known issues and limitations
-
-To see a list of the supported format features, go to [features support](./export-formats#features-support) table.
-
-The tool is under active development, so there are many features to implement. To help us prioritize them, write an [issue](https://github.com/hetalang/heta-compiler/issues).
-
 ## Getting help
 
  - Read Heta documentation on <https://hetalang.github.io/>
@@ -305,7 +300,7 @@ Licensed under the Apache License, Version 2.0. See the [LICENSE](https://raw.gi
 
 The original author of the project is [Evgeny Metelkin](https://github.com/metelkin). The tool was inspired by the idea that large-scale dynamical systems used in QSP and SB require a specific tool that allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with small ones.
 
-- The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several [InSysBio LLC](http://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
+- The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several [InSysBio](https://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
 
 - The next versions of **qs3p-js** used the updated format of platform components and a new approach for storing them. A set of new exporting formats was supported. The current version supports Heta code including actions, modules, namespaces. It was used as the main infrastructure for the development of the large- and middle-scale QSP platforms developed in the framework of InSysBio services.
 

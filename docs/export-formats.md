@@ -137,7 +137,7 @@ All options is the same as for [JSON format](#json).
 
 ## DBSolve
 
-Export to DBSolve format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
+Export to DBSolve format which is the model format for [DBSolveOptimum](https://insysbio.com/en/software/db-solve-optimum).
 
 This is the updated version of SLV export format which supports compartment volumes changed in time and initializing records by arbitrary expressions.
 
@@ -172,7 +172,7 @@ This is the updated version of SLV export format which supports compartment volu
 
 ## SLV
 
-Export to SLV format which is the model format for [DBSolveOptimum](http://insysbio.com/en/software/db-solve-optimum).
+Export to SLV format which is the model format for [DBSolveOptimum](https://insysbio.com/en/software/db-solve-optimum).
 
 ### Properties
 
@@ -210,7 +210,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](http://insys
 
 ## SBML
 
-Export to [SBML format](http://sbml.org/Main_Page).
+Export to [SBML format](https://sbml.org/).
 Can work with `abstract` namespaces.
 
 ### Properties
@@ -261,7 +261,7 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ## Mrgsolve
 
-Export to [mrgsolve](http://mrgsolve.github.io/) model format (cpp file).
+Export to [mrgsolve](https://mrgsolve.github.io/) model format (cpp file).
 
 ### Properties
 
