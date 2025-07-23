@@ -1,0 +1,38 @@
+name: Test install
+
+on:
+  workflow_run:
+    workflows: ['On release']
+    types:
+      - completed
+  workflow_dispatch: {}
+
+jobs:
+  test_macos:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install jq
+        run: brew install jq
+
+      - name: Get version
+        id: get_version
+        run: |
+          VERSION=$(jq -r .version package.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Install Heta Compiler
+        run: |
+          echo "Installing latest Heta Compiler"
+          brew tap hetalang/heta-compiler
+          brew install heta-compiler
+
+      - name: Check version
+        run: |
+          echo "Checking installed version"
+          if [[ "$(heta --version)" != *"$VERSION"* ]]; then
+            echo "Version mismatch: expected $VERSION, got $(heta --version)"
+            exit 1
+          fi
