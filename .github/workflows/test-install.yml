@@ -14,7 +14,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Get version
-        id: get_version
         run: |
           VERSION=$(jq -r .version package.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
@@ -42,7 +41,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Get version
-        id: get_version
         run: |
           VERSION=$(jq -r .version package.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
@@ -68,7 +66,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get version
-        id: get_version
+        shell: bash
         run: |
           VERSION=$(jq -r .version package.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
