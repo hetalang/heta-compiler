@@ -144,6 +144,26 @@ function _getByPathArray(pathArray = []) {
   return current;
 }
 
+// MUTABLE function
+// take path of type 'a[1].b' and set value, add missing properties
+function _setByPathArray(pathArray = [], value) {
+  let current = this;
+
+  for (let i = 0; i < pathArray.length; i++) {
+    let part = pathArray[i];
+    if (i === pathArray.length - 1) { // last part, set value
+      current[part] = value;
+    } else {
+      if (typeof pathArray[i + 1] === 'number' && !Array.isArray(current[part])) {
+        current[part] = []; // next is number, so it is an array
+      } else if (typeof current[part] !== 'object' || current[part] === null) {
+        current[part] = {}; // next is string, so it is an object
+      }
+      current = current[part];
+    }
+  }
+}
+
 module.exports = {
   uniqBy,
   intersection,
@@ -151,5 +171,6 @@ module.exports = {
   flatten,
   cloneDeep,
   _parsePath, // just to test
-  _getByPathArray // just to test
+  _getByPathArray, // just to test
+  _setByPathArray // just to test
 };

@@ -4,7 +4,7 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "scripts": {
-    "test:dev": "mocha test/utils --config=./test/.mocharc.json",
+    "test:dev": "mocha test/xlsx-connector --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -r -c .jsdoc.json --readme docs/api-references.md -d docs/dev src",
     "test:cov": "nyc --reporter=lcov npm run test",

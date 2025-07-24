@@ -57,7 +57,6 @@
 
 ## remove lodash
 
-- _set
 - _omit
 
 ### Dose class

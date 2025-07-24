@@ -8,12 +8,7 @@ let sheet1 = [
   {},
   {
     'a': 1,
-    'one': {
-      '1': 'we',
-      'two': {
-        'three': 'a'
-      }
-    },
+    'one': [undefined, 'we'],
     'two': 'xxx',
     'arr': {        
       'arr': [      

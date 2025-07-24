@@ -4,7 +4,6 @@ const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
 const { uniqBy, cloneDeep } = require('../utils');
 const { ajv } = require('../ajv');
-const _set = require('lodash/set');
 
 const schema = {
   type: "object",
@@ -140,7 +139,7 @@ class Component extends Top {
       let newRef = q.rename[oldRef] 
         || [q.prefix, oldRef, q.suffix].join(''); // default behaviour
 
-      _set(this, path, newRef);
+      this.setProperty(path, newRef);
     };
     // search ref in requirements
     let req = this.constructor.requirements();
@@ -202,7 +201,9 @@ class Component extends Top {
         );
       } else {
         // set direct ref
-        if (rule.setTarget) _set(this, path + 'Obj', target);
+        if (rule.setTarget) {
+          this.setProperty(`${path}Obj`, target);
+        }
         // add back references for Record from Process XXX: ugly solution
         if (this.instanceOf('Process') && item.className === 'Actor' ){
           target.backReferences.push({

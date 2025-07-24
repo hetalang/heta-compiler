@@ -1,6 +1,6 @@
 const XLSX = require('xlsx');
-const _set = require('lodash/set');
 const HetaLevelError = require('../heta-level-error');
+const { _parsePath, _setByPathArray } = require('../utils');
 
 /*
   This script mimics the behavior of function convertExcel() from "excel-as-json", see https://www.npmjs.com/package/excel-as-json
@@ -45,17 +45,18 @@ function convertExcelSync(src, dst = null, { sheet = 0, transpose = false } = {}
 
 function _toDeepPaths(o){
   let output = {};
-  Object.entries(o)
-    .forEach(([key, value]) => {
-      let searchArray = /^(.+)\[\]$/;
-      if (searchArray.test(key)) { // checking if path looks like this "one.two.three[]"
-        let keyPart = key.match(searchArray)[1];
-        let valuesPart = value.toString().split(';').filter((x) => x.trim() !== '');
-        _set(output, keyPart, valuesPart);
-      } else {
-        _set(output, key, value);
-      }
-    });
+  Object.entries(o).forEach(([key, value]) => {
+    let searchArray = /^(.+)\[\]$/;
+    if (searchArray.test(key)) { // checking if path looks like this "one.two.three[]"
+      var keyClean = key.match(searchArray)[1];
+      var valueClean = value.toString().split(';').filter((x) => x.trim() !== '');
+    } else {
+      keyClean = key;
+      valueClean = value;
+    }
+    let pathArray = _parsePath(keyClean);
+    _setByPathArray.call(output, pathArray, valueClean);
+  });
 
   return output;
 }

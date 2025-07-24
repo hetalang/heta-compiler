@@ -3,7 +3,7 @@
 */
 
 const randomId = require('random-id');
-const { flatten, _getByPathArray, _parsePath } = require('../utils');
+const { flatten, _parsePath, _getByPathArray, _setByPathArray } = require('../utils');
 const { ajv } = require('../ajv');
 
 // options to generate random id
@@ -134,6 +134,10 @@ class Top {
   getProperty(path) {
     let pathArray = _parsePath(path);
     return _getByPathArray.call(this, pathArray);
+  }
+  setProperty(path, value) {
+    let pathArray = _parsePath(path);
+    return _setByPathArray.call(this, pathArray, value);
   }
 }
 
