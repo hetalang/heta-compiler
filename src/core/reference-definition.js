@@ -1,5 +1,5 @@
 const { Component } = require('./component');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

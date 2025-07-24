@@ -1,5 +1,5 @@
 const { _Size } = require('./_size');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

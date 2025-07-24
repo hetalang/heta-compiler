@@ -1,7 +1,7 @@
 const { AbstractExport } = require('../abstract-export');
 const { dump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const _omit = require('lodash/omit');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

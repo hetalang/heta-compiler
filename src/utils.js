@@ -2,13 +2,6 @@
   auxiliary functions and objects
 */
 
-// preparation of Ajv
-
-const Ajv = require('ajv');
-const ajv = new Ajv({allErrors: true, useDefaults: true});
-require('ajv-errors')(ajv);
-ajv.addKeyword({keyword: "example"});
-
 // return array of elements by the selector
 function uniqBy(array, selector = (x) => x) {
   let indexes = [];
@@ -101,7 +94,6 @@ function cloneDeep(o) {
 }
 
 module.exports = {
-  ajv,
   uniqBy,
   intersection,
   differenceBy,

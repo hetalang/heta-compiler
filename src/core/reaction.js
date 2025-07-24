@@ -1,6 +1,6 @@
 const { Process, _Effector, Actor } = require('./process');
 const { UnitTerm } = require('./unit-term');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

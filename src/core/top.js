@@ -3,9 +3,10 @@
 */
 
 const randomId = require('random-id');
-const { ajv, flatten } = require('../utils');
+const { flatten } = require('../utils');
+const { ajv } = require('../ajv');
 
-// options
+// options to generate random id
 const lengthRandom = 9;
 const patternRandom = 'aA0';
 

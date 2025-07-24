@@ -1,6 +1,6 @@
 const { _Switcher } = require('./_switcher');
 const { Expression } = require('./expression');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

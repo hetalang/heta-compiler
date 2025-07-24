@@ -1,6 +1,6 @@
 const { Component } = require('./component');
 const { Unit } = require('./unit');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: "object",

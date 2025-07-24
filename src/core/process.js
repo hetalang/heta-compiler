@@ -1,5 +1,5 @@
 const { Record } = require('./record');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

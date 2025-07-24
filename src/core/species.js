@@ -2,7 +2,7 @@ const { Record } = require('./record');
 const { UnitTerm } = require('./unit-term');
 const { Unit } = require('./unit');
 
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

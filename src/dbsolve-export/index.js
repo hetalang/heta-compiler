@@ -2,7 +2,7 @@
 const { AbstractExport } = require('../abstract-export');
 require('./expression');
 require('./namespace');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',

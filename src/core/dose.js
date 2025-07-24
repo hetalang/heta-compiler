@@ -2,7 +2,7 @@ const { _Size } = require('./_size');
 const { Const } = require('./const');
 const { floor, min } = Math;
 
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 const schema = {
   // TODO: add validation

@@ -1,6 +1,6 @@
 /* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 require('./expression');
 require('./namespace');
 

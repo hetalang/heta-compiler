@@ -2,7 +2,8 @@ const { Top } = require('./top');
 const MarkdownIt = require('markdown-it');
 const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
-const { uniqBy, ajv, cloneDeep } = require('../utils');
+const { uniqBy, cloneDeep } = require('../utils');
+const { ajv } = require('../ajv');
 const _get = require('lodash/get');
 const _set = require('lodash/set');
 

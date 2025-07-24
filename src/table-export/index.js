@@ -1,6 +1,7 @@
 const { AbstractExport } = require('../abstract-export');
 const _omit = require('lodash/omit');
-const { ajv, intersection } = require('../utils');
+const { intersection } = require('../utils');
+const { ajv } = require('../ajv');
 const XLSX = require('xlsx');
 
 // how to order columns in sheets

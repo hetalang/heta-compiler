@@ -1,7 +1,7 @@
 const { _Switcher } = require('./_switcher');
 const { Const } = require('./const');
 
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 
 
 const schema = {

@@ -1,5 +1,5 @@
 const { AbstractExport } = require('../abstract-export');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 const _omit = require('lodash/omit');
 
 const schema = {

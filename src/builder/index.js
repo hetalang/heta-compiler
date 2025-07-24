@@ -1,6 +1,6 @@
 const path = require('path');
 const declarationSchema = require('./declaration-schema');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 const Container = require('../container');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');

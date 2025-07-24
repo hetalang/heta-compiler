@@ -1,7 +1,7 @@
 /* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');
-const { ajv } = require('../utils');
+const { ajv } = require('../ajv');
 const { re } = require('mathjs');
 require('./namespace');
 
