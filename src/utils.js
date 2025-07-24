@@ -93,10 +93,63 @@ function cloneDeep(o) {
   }
 }
 
+// take path of type 'a[1].b' and return array of parts
+// e.g. ['a', 1, 'b']
+function _parsePath(path) {
+  // check if path is valid
+  if (typeof path !== 'string') {
+    throw new TypeError(`Path must be a string, got ${typeof path}.`);
+  }
+
+  // parse string sequentially
+  let pathArray = [];
+  if (path === '') {
+    return pathArray; // empty path
+  }
+  
+  let parts1 = path.split('.');
+  for (let part of parts1) {
+    let regExpr = /^([a-zA-Z_][a-zA-Z0-9_]*)?(\[[0-9]+\])*$/;
+    if (!regExpr.test(part)) {
+      throw new TypeError(`Path "${part}" is not valid.`);
+    }
+
+    let parts2 = part.split('[');
+    if (parts2[0] !== '') {
+      pathArray.push(parts2[0]); // add property name
+    }
+    if (parts2.length > 1) {
+      for (let i = 1; i < parts2.length; i++) {
+        let subPart = parts2[i].replace(']', ''); // remove trailing ]
+        if (subPart) {
+          pathArray.push(Number(subPart)); // convert to number
+        }
+      }
+    }
+  }
+  
+  return pathArray;
+}
+
+// take path of type ['a', 1, 'b'] and return value or undefined
+function _getByPathArray(pathArray = []) {
+  let current = this;
+
+  for (let part of pathArray) {
+    current = current[part];
+    if (current === undefined) {
+      return undefined;
+    }
+  }
+  return current;
+}
+
 module.exports = {
   uniqBy,
   intersection,
   differenceBy,
   flatten,
-  cloneDeep
+  cloneDeep,
+  _parsePath, // just to test
+  _getByPathArray // just to test
 };
