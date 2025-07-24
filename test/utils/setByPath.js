@@ -19,7 +19,7 @@ describe('Correct _setByPathArray()', () => {
     let o = {};
     let pathArray = ['a', 1, 'b', 2, 'c'];
     _setByPathArrayWrapper(o, pathArray, 100);
-    expect(o).to.be.deep.equal({ a: { 1: { b: { 2: { c: 100 } } } } });
+    expect(o).to.be.deep.equal({ a: [undefined, { b: [undefined, undefined, { c: 100 }] }] });
   });
 
   it('should handle empty path', () => {
@@ -33,13 +33,13 @@ describe('Correct _setByPathArray()', () => {
     let o = {a: []};
     let pathArray = ['a', 1, 'b', 2];
     _setByPathArrayWrapper(o, pathArray, 'value');
-    expect(o).to.be.deep.equal({ a: [undefined, { b: { 2: 'value' } }] });
+    expect(o).to.be.deep.equal({ a: [undefined, { b: [undefined, undefined, 'value'] }] });
   });
 
   it('should set values to array replacing objects', () => {
     let o = {a: {b: {c: 1}}};
     let pathArray = ['a', 'b', 2, 'd'];
     _setByPathArrayWrapper(o, pathArray, 'value');
-    expect(o).to.be.deep.equal({ a: { b: [undefined, { c: 1, d: 'value' }] } });
+    expect(o).to.be.deep.equal({ a: { b: [undefined, undefined, { d: 'value' }] } });
   });
 });

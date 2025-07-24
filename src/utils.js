@@ -164,13 +164,52 @@ function _setByPathArray(pathArray = [], value) {
   }
 }
 
+// MUTABLE function
+// return copy of object with omitted properties by path
+function _omitByPathArray(pathArray = []) {
+  let current = this;
+
+  for (let i = 0; i < pathArray.length; i++) {
+    let part = pathArray[i];
+    if (i === pathArray.length - 1) { // last part, delete property
+      delete current[part];
+    } else {
+      if (current[part] === undefined) {
+        return this; // nothing to omit
+      }
+      current = current[part];
+    }
+  }
+  
+  return this; // return modified object
+}
+
+// path is an array of paths
+function omitByPaths(o, paths) {
+  let result = cloneDeep(o);
+
+  paths.forEach((path) => {
+    if (typeof path === 'string') {
+      path = _parsePath(path);
+    } else {
+      throw new TypeError(`Path must be a string or an array, got ${typeof path}.`);
+    }
+    
+    _omitByPathArray.call(result, path);
+  });
+
+  return result;
+}
+
 module.exports = {
   uniqBy,
   intersection,
   differenceBy,
   flatten,
   cloneDeep,
-  _parsePath, // just to test
-  _getByPathArray, // just to test
-  _setByPathArray // just to test
+  _parsePath,
+  _getByPathArray,
+  _setByPathArray,
+  _omitByPathArray,
+  omitByPaths
 };

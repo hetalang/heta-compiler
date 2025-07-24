@@ -1,6 +1,5 @@
 const { AbstractExport } = require('../abstract-export');
-const _omit = require('lodash/omit');
-const { intersection } = require('../utils');
+const { intersection, omitByPaths } = require('../utils');
 const { ajv } = require('../ajv');
 const XLSX = require('xlsx');
 
@@ -115,7 +114,7 @@ class TableExport extends AbstractExport {
 
     if (this.omit) {
       var fArr = fArr_full.map((q) => {
-        return _omit(q, this.omit);
+        return omitByPaths(q, this.omit);
       });
     } else {
       fArr = fArr_full;

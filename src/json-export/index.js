@@ -1,6 +1,6 @@
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
-const _omit = require('lodash/omit');
+const { omitByPaths } = require('../utils');
 
 const schema = {
   type: 'object',
@@ -57,8 +57,8 @@ class JSONExport extends AbstractExport {
     let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_functionDef, qArr_scenario);
 
     // remove unnecessary properties
-    let qArr = this.omit ? qArr_full.map((q) => _omit(q, this.omit)) : qArr_full;
-    
+    let qArr = this.omit ? qArr_full.map((q) => omitByPaths(q, this.omit)) : qArr_full;
+
     return [{
       content: JSON.stringify(qArr, null, 2),
       pathSuffix: '/output.json',

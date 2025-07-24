@@ -1,6 +1,6 @@
-const _omit = require('lodash/omit');
 const XLSXExport = require('../xlsx-export');
 require('./_size');
+const { omitByPaths } = require('../utils');
 
 class AnotherXLSXExport extends XLSXExport {
   constructor(q = {}, isCore = false){
@@ -24,7 +24,7 @@ class AnotherXLSXExport extends XLSXExport {
       .flat(Infinity)
       .filter((x) => !x.isCore && !x.instanceOf('UnitDef'))
       .map((x) => x.toFlat({useAnotherUnits: true}))
-      .map((q) => this.omit ? _omit(q, this.omit) : q);
+      .map((q) => this.omit ? omitByPaths(q, this.omit) : q);
 
     // main_tab sheet
     let functions = {

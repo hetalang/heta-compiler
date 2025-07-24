@@ -1,7 +1,7 @@
 const { AbstractExport } = require('../abstract-export');
 const { dump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
-const _omit = require('lodash/omit');
 const { ajv } = require('../ajv');
+const { omitByPaths } = require('../utils');
 
 const schema = {
   type: 'object',
@@ -55,7 +55,7 @@ class YAMLExport extends AbstractExport {
     let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_functionDef, qArr_scenario);
 
     // remove unnecessary properties
-    let qArr = this.omit ? qArr_full.map((q) => _omit(q, this.omit)) : qArr_full;
+    let qArr = this.omit ? qArr_full.map((q) => omitByPaths(q, this.omit)) : qArr_full;
 
     let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);

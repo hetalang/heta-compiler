@@ -55,10 +55,6 @@
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
 - stoichiometry as `@Const` and `@Record`
 
-## remove lodash
-
-- _omit
-
 ### Dose class
 
 ```heta
