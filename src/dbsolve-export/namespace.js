@@ -1,5 +1,4 @@
 const { Namespace } = require('../namespace');
-const _get = require('lodash/get');
 
 /**
  * Creates single model image by nesessary components based on space.
@@ -153,7 +152,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
   // group Const, instead of groupBy
   let groupedConst = {}; // {group1: [const1, const2], group2: [const3, const4]}
   this.selectByClassName('Const').forEach((constant) => {
-    let key = _get(constant, groupConstBy) + '';
+    let key = constant.getProperty(groupConstBy) + '';
     if (!groupedConst.hasOwnProperty(key)) {
       groupedConst[key] = [];
     }

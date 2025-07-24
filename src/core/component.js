@@ -4,7 +4,6 @@ const md = new MarkdownIt({html: true, xhtmlOut: false, linkify: true});
 
 const { uniqBy, cloneDeep } = require('../utils');
 const { ajv } = require('../ajv');
-const _get = require('lodash/get');
 const _set = require('lodash/set');
 
 const schema = {
@@ -137,7 +136,7 @@ class Component extends Top {
 
     // change references
     const iterator = (item, path) => { // Actor { target: 'y', stoichiometry: -1 }, actors[0].target
-      let oldRef = _get(this, path);
+      let oldRef = this.getProperty(path);
       let newRef = q.rename[oldRef] 
         || [q.prefix, oldRef, q.suffix].join(''); // default behaviour
 
@@ -188,7 +187,7 @@ class Component extends Top {
       throw new TypeError('"namespace" argument should be set.');
     
     const iterator = (item, path, rule) => {
-      let targetId = _get(this, path);
+      let targetId = this.getProperty(path);
       let target = namespace.get(targetId);
 
       if (!target) {

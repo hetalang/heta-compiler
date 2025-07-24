@@ -57,7 +57,6 @@
 
 ## remove lodash
 
-- _get
 - _set
 - _omit
 

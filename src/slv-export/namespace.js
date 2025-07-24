@@ -1,5 +1,4 @@
 const { Namespace } = require('../namespace');
-const _get = require('lodash/get');
 
 /**
  * Creates model image by necessary components based on space.
@@ -127,7 +126,7 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
   // group Const, instead of groupBy
   let groupedConst = {}; // {group1: [const1, const2], group2: [const3, const4]}
   this.selectByClassName('Const').forEach((constant) => {
-    let key = _get(constant, groupConstBy) + '';
+    let key = constant.getProperty(groupConstBy) + '';
     if (!groupedConst.hasOwnProperty(key)) {
       groupedConst[key] = [];
     }
