@@ -247,6 +247,11 @@ class Unit extends Array {
       throw new SyntaxError(`Wrong syntax of unit: "${unitString}"`);
 
     items.forEach((item) => {
+      // long item may reult in unsafe behavior, too long
+      if (item.length > 100) {
+        throw new SyntaxError(`Unit item is too long: "${item}"`);
+      }
+
       // checking "/xxx^12.23" or "1" or "/1"
       let shortFormat = /^(\/|\*)?[_A-Za-z1][_A-Za-z0-9]*\^?(\d+(\.?\d*)?)?$/;
       // checking "/(1e-2xxx)^12.23"

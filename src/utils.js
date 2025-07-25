@@ -120,7 +120,7 @@ function _parsePath(path) {
     }
     if (parts2.length > 1) {
       for (let i = 1; i < parts2.length; i++) {
-        let subPart = parts2[i].replace(']', ''); // remove trailing ]
+        let subPart = parts2[i].replace(/\]/, ''); // remove trailing ]
         if (subPart) {
           pathArray.push(Number(subPart)); // convert to number
         }
