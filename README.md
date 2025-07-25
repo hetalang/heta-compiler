@@ -9,11 +9,11 @@
 
 # Heta Compiler
 
-**Heta Compiler** is a tool for developing Quantitative Systems Pharmacology (QSP) and Systems Biology platforms. It integrates modules in formats like [Heta language code](https://hetalang.github.io/#/specifications/), Excel, JSON/YAML, or [SBML](https://sbml.org/) and transforms them into dynamical models.
+**Heta Compiler** is a tool for developing Quantitative Systems Pharmacology (QSP) and Systems Biology platforms. It integrates modules in formats like [Heta language code](https://hetalang.github.io/specifications/), Excel, JSON/YAML, or [SBML](https://sbml.org/) and transforms them into dynamical models.
 
 Designed for scalability, Heta Compiler supports iterative updates, human-readable formats, and on-the-fly exports to popular simulation formats. It seamlessly integrates into existing workflows and CI/CD strategies.
 
-To learn more, visit the [documentation](https://hetalang.github.io/#/heta-compiler/).
+To learn more, visit the [documentation](https://hetalang.github.io/hetacompiler/).
 
 ## Features
 - Combines diverse modules into unified QSP models.

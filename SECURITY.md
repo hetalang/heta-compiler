@@ -28,7 +28,6 @@ We take security issues seriously and appreciate your efforts to disclose vulner
 4. **Resolution**: If the issue is confirmed, we will:
    - Develop and test a fix.
    - Provide a timeline for the release of the fix.
-   - Credit you (if desired) for reporting the vulnerability.
 
 5. **Follow-Up**: If your report is not accepted as a valid vulnerability, we will provide an explanation.
 
