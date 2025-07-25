@@ -76,3 +76,17 @@ dose2 @Dose {
   rate: rate1 // for injection
 };
 ```
+
+## check license
+
+license-checker --json > licenses.json
+license-checker --production --onlyAllow "MIT;Apache-2.0;ISC;Python-2.0;BSD-2-Clause;BSD-3-Clause;0BSD"
+license-checker --production --summary
+├─ MIT: 82
+├─ ISC: 7
+├─ Apache-2.0: 6
+├─ BSD-2-Clause: 4
+├─ BSD-3-Clause: 2
+├─ Python-2.0: 1
+├─ 0BSD: 1
+└─ (MIT OR CC0-1.0): 1
