@@ -298,7 +298,7 @@ Licensed under the Apache License, Version 2.0. See the [LICENSE](https://raw.gi
 
 ## Authors and history
 
-The original author of the project is [Evgeny Metelkin](https://github.com/metelkin). The tool was inspired by the idea that large-scale dynamical systems used in QSP and SB require a specific tool that allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with small ones.
+The original author of the project is [Evgeny Metelkin](https://metelkin.me). The tool was inspired by the idea that large-scale dynamical systems used in QSP and SB require a specific tool that allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with small ones.
 
 - The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several [InSysBio](https://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
 
