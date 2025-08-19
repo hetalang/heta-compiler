@@ -68,6 +68,9 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
       return `tern__(${args[0]}==${args[1]}, ${args[2]}, ${args[3]})`;
     }
     // operators
+    if (node.type === 'OperatorNode' && node.fn === 'pow') {
+      return `(${node.args[0].toString(options)} ^ ${node.args[1].toString(options)})`;
+    }
     if (node.type === 'OperatorNode' && node.fn === 'and') {
       return node.args
         .map((arg) => arg.toString(options))
