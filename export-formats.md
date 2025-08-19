@@ -526,7 +526,7 @@ _Skipped cell means no conversion_
 |`iflt(x, y, z1, z2)`| |`x < y ? z1 : z2`| |`tern__(x<y, z1, z2)`|
 |`ifle(x, y, z1, z2)`| |`x <= y ? z1 : z2`| |`tern__(x<=y, z1, z2)`|
 |`ifeq(x, y, z1, z2)`| |`x == y ? z1 : z2`| |`tern__(x==y, z1, z2)`|
-|`x ^ y`|`x ^ y` or `pow(x, y)`|`NaNMath.pow(x, y)`|`pow(x, y)`| |
+|`x ^ y`|`x ^ y` or `pow(x, y)`|`NaNMath.pow(x, y)`|`pow(x, y)`| `(x ^ y)` |
 |`e`|`exp(1)`|`exp(1.0)`| | |
 |`pi`|`acos(-1)` | | | |
 |`Infinity`| |`Inf`| | |
