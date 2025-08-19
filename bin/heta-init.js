@@ -9,6 +9,8 @@ const pkg = require('../package');
 // for the development of JSON schema
 // we use https://docs.npmjs.com/files/package.json
 
+let oldestVersion = '^' + pkg.version.replace(/^(\d+)\.(\d+)\.(\d+).*$/, '$1.$2.0');
+
 const defaultPlatform = {
   '$schema': 'https://hetalang.github.io/heta-compiler/declaration-schema.json',
   id: 'template',
@@ -20,7 +22,7 @@ const defaultPlatform = {
   license: 'UNLICENSED', // for not published
   //private: false,
   contributors: [],
-  builderVersion: '^' + pkg.version,
+  builderVersion: oldestVersion,
   options: {
     debug: false,
     unitsCheck: false
