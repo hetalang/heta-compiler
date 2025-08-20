@@ -45,6 +45,7 @@
 
 ## ideas
 
+- use MathJSON https://mathlive.io/math-json/ or OpenMath https://openmath.org/ format for export
 - allow to use const expressions in `TimeSwitcher.start` and `TimeSwitcher.end`
 - support SBML's delay
 - AnyUnit for zero numbers
