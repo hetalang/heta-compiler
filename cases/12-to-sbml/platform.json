@@ -1,0 +1,25 @@
+{
+  "builderVersion": "*",
+  "id": "to-sbml",
+  "title": "platform title",
+  "notes": "platform notes",
+  "version": "v0.1.0",
+  "license": "UNLICENSED",
+  "options": {
+    "debug": false
+  },
+  "importModule": {
+    "type": "heta",
+    "source": "src/index.heta"
+  },
+  "export": [
+    { "format": "JSON", "filepath": "json" },
+    { "format": "SLV", "filepath": "slv" },
+    { "format": "DBSolve", "filepath": "model" },
+    { "format": "Simbio", "filepath": "simbio" },
+    { "format": "Matlab", "filepath": "matlab" },
+    { "format": "Julia", "filepath": "julia" },
+    { "format": "SBML", "filepath": "sbml" },
+    { "format": "Mrgsolve", "filepath": "mrgsolve" }
+  ]
+}

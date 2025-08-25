@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <model 
+    id="first" 
+    metaid="first"
+    >
+    
+    <listOfCompartments>
+      <compartment
+        id="comp1"
+        name="This is compartment"
+        constant="false"
+        units="_L"
+        metaid="first::comp1"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>This is just text. <em>italic</em>, <strong>bold</strong></p>
+
+<p>another line</p>
+          </html>
+        </notes>
+      </compartment>
+      <compartment
+        id="comp2"
+        constant="false"
+        size="3.2"
+        metaid="first::comp2"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="s1"
+        compartment="comp2"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1.1"
+        metaid="first::s1"
+        >
+      </species>
+      <species
+        id="s2"
+        name="s2 title"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="true"
+        hasOnlySubstanceUnits="false"
+        
+        metaid="first::s2"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="p2"
+        constant="false"
+        value="15.223"
+        units="_nm__min__fM"
+        metaid="first::p2"
+        >
+      </parameter>
+      <parameter
+        id="p3"
+        constant="false"
+        units="__h__L"
+        metaid="first::p3"
+        >
+      </parameter>
+      <parameter
+        id="evt1"
+        constant="false"
+        units="_min"
+        metaid="first::evt1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="r2"
+        reversible="true"
+        fast="false"
+        metaid="first::r2"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="2"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="s2" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="s2"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>p2</ci><ci>comp1</ci></apply><ci>s1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="r3"
+        reversible="true"
+        fast="false"
+        metaid="first::r3"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="s2"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>28</cn></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  <listOfRules>
+    <assignmentRule
+      variable="p3"
+      metaid="first::p3::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="evt1"
+      metaid="first::evt1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>12</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="s2"
+      metaid="first::s2::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+  
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="comp1"
+        metaid="first::comp1::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+  
+    <listOfEvents>
+      <event
+        id="sw1" metaid="first::sw1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <ci>evt1</ci>
+              <cn>0</cn>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="s1"
+            metaid="first::s1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.5</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

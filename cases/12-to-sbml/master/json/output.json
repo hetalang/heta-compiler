@@ -1,0 +1,162 @@
+[
+  {
+    "action": "setNS",
+    "type": "abstract",
+    "space": "first"
+  },
+  {
+    "id": "t",
+    "space": "first"
+  },
+  {
+    "id": "comp1",
+    "class": "Compartment",
+    "space": "first",
+    "title": "This is compartment",
+    "notes": "This is just text. *italic*, **bold**\n\nanother line",
+    "units": "L",
+    "assignments": {
+      "start_": "x * y"
+    }
+  },
+  {
+    "id": "comp2",
+    "class": "Compartment",
+    "space": "first",
+    "assignments": {
+      "start_": "3.2"
+    }
+  },
+  {
+    "id": "p2",
+    "class": "Record",
+    "space": "first",
+    "units": "1/min/fM*nm",
+    "assignments": {
+      "start_": "15.223"
+    }
+  },
+  {
+    "id": "p3",
+    "class": "Record",
+    "space": "first",
+    "units": "1/L/h",
+    "assignments": {
+      "ode_": "xxx * yyy"
+    }
+  },
+  {
+    "id": "evt1",
+    "class": "Record",
+    "space": "first",
+    "units": "min",
+    "assignments": {
+      "ode_": "t - 12"
+    }
+  },
+  {
+    "id": "s1",
+    "class": "Species",
+    "space": "first",
+    "assignments": {
+      "start_": "1.1",
+      "sw1": "1.5"
+    },
+    "compartment": "comp2"
+  },
+  {
+    "id": "s2",
+    "class": "Species",
+    "space": "first",
+    "title": "s2 title",
+    "assignments": {
+      "ode_": "x * y"
+    },
+    "boundary": true,
+    "compartment": "comp1"
+  },
+  {
+    "id": "r2",
+    "class": "Reaction",
+    "space": "first",
+    "assignments": {
+      "ode_": "p2 * comp1 * s1"
+    },
+    "actors": [
+      {
+        "target": "s1",
+        "stoichiometry": -2
+      },
+      {
+        "target": "s2",
+        "stoichiometry": 1
+      }
+    ],
+    "modifiers": [
+      {
+        "target": "s2"
+      }
+    ]
+  },
+  {
+    "id": "r3",
+    "class": "Reaction",
+    "space": "first",
+    "units": "mole/L",
+    "assignments": {
+      "ode_": "28"
+    },
+    "actors": [],
+    "modifiers": [
+      {
+        "target": "s2"
+      }
+    ]
+  },
+  {
+    "id": "sw1",
+    "class": "CSwitcher",
+    "space": "first",
+    "trigger": "evt1"
+  },
+  {
+    "id": "min",
+    "action": "defineUnit",
+    "units": "(6e+1 second)"
+  },
+  {
+    "id": "nm",
+    "action": "defineUnit",
+    "units": "(1e-9 metre)"
+  },
+  {
+    "id": "m",
+    "action": "defineUnit",
+    "units": "metre"
+  },
+  {
+    "id": "uM",
+    "action": "defineUnit",
+    "units": "(1e-6 mole)/litre"
+  },
+  {
+    "id": "fM",
+    "action": "defineUnit",
+    "units": "(1e-15 mole)/litre"
+  },
+  {
+    "id": "h",
+    "action": "defineUnit",
+    "units": "(3.6e+3 second)"
+  },
+  {
+    "id": "L",
+    "action": "defineUnit",
+    "units": "litre"
+  },
+  {
+    "id": "umole",
+    "action": "defineUnit",
+    "units": "(1e-6 mole)"
+  }
+]

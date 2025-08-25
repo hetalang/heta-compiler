@@ -6,7 +6,7 @@ use(chaiXml);
 const fs = require('fs-extra');
 
 const sbml_correct = fs.readFileSync('cases/12-to-sbml/master/sbml/first.xml','utf8');
-const json_correct = require('../../cases/12-to-sbml/master/output.json');
+const json_correct = require('../../cases/12-to-sbml/master/json/output.json');
 
 describe('Testing "cases/12-to-sbml"', () => {
   let b;

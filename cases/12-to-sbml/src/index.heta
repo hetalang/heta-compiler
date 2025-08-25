@@ -1,14 +1,5 @@
 /*
-  To check simple unit conversion to SBML
+  template file for creating platform
 */
 
-t {units: second};
-
-comp1 @Compartment {units: litre} .= 1.0;
-
-x1 @Species {compartment: comp1, units: mole/litre} .= 1.0;
-x2 @Species {compartment: comp1, units: mole/litre} .= 0;
-
-r1 @Reaction {actors: x1 => x2, units: mole/second} := k1 * x1 * comp1;
-
-k1 @Const {units: 1/second} = 1e-2;
+include first-model.json type json;
