@@ -54,3 +54,4 @@ export:
     filepath: graph
   - format: Summary
   - format: MT
+  - format: CanonicalJSON
