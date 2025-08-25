@@ -49,6 +49,18 @@ describe('Correct _parsePath()', () => {
     let res = _parsePath(path);
     expect(res).to.be.deep.equal([1]);
   });
+
+  it('should parse path with array index only 2', () => {
+    let path = '[1].b';
+    let res = _parsePath(path);
+    expect(res).to.be.deep.equal([1, 'b']);
+  });
+
+  it('should parse path with number as property', () => {
+    let path = '1.b';
+    let res = _parsePath(path);
+    expect(res).to.be.deep.equal(['1', 'b']);
+  });
 });
 
 describe('Wrong _parsePath()', () => {

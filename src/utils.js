@@ -93,8 +93,8 @@ function cloneDeep(o) {
   }
 }
 
-// take path of type 'a[1].b' and return array of parts
-// e.g. ['a', 1, 'b']
+// take path of type 'a[1].b' or '[1].b' and return array of parts
+// e.g. ['a', 1, 'b'] or [1, 'b']
 function _parsePath(path) {
   // check if path is valid
   if (typeof path !== 'string') {
@@ -109,7 +109,7 @@ function _parsePath(path) {
   
   let parts1 = path.split('.');
   for (let part of parts1) {
-    let regExpr = /^([a-zA-Z_][a-zA-Z0-9_]*)?(\[[0-9]+\])*$/;
+    let regExpr = /^([a-zA-Z0-9_]*)?(\[[0-9]+\])*$/;
     if (!regExpr.test(part)) {
       throw new TypeError(`Path "${part}" is not valid.`);
     }

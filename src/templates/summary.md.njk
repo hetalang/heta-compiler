@@ -4,11 +4,11 @@
 
 ### Core
 
-{% for key, value in functionDefStorage | filter2('1.isCore', true) %}{{ value.id }}, {% endfor %}
+{% for key, value in functionDefStorage | filter2('[1].isCore', true) %}{{ value.id }}, {% endfor %}
 
 ### User-defined
 
-{% set userFunctionDef = functionDefStorage | exclude2('1.isCore', true) %}
+{% set userFunctionDef = functionDefStorage | exclude2('[1].isCore', true) %}
 {{- '-' if not userFunctionDef.length }}
 {%- for key, value in userFunctionDef %}{{ value.id }}, {% endfor %}
 
@@ -16,11 +16,11 @@
 
 ### Core
 
-{% for key, value in unitDefStorage | filter2('1.isCore', true) %}{{ value.id }}, {% endfor %}
+{% for key, value in unitDefStorage | filter2('[1].isCore', true) %}{{ value.id }}, {% endfor %}
 
 ### User-defined
 
-{% set userUnitDef = unitDefStorage | exclude2('1.isCore', true) %}
+{% set userUnitDef = unitDefStorage | exclude2('[1].isCore', true) %}
 {{- '-' if not userUnitDef.length }}
 {%- for key, value in userUnitDef %}{{ value.id }}, {% endfor %}
 
@@ -33,21 +33,21 @@
 
 ### By classes
 
-TimeScale: {% for key, value in ns | filter2('1.className', 'TimeScale') %}{{ key }}, {% endfor %}
+TimeScale: {% for key, value in ns | filter2('[1].className', 'TimeScale') %}{{ key }}, {% endfor %}
 
-Const: {% for key, value in ns | filter2('1.className', 'Const') %}{{ key }}, {% endfor %}
+Const: {% for key, value in ns | filter2('[1].className', 'Const') %}{{ key }}, {% endfor %}
 
-Record: {% for key, value in ns | filter2('1.className', 'Record') %}{{ key }}, {% endfor %}
+Record: {% for key, value in ns | filter2('[1].className', 'Record') %}{{ key }}, {% endfor %}
 
-Process: {% for key, value in ns | filter2('1.className', 'Process') %}{{ key }}, {% endfor %}
+Process: {% for key, value in ns | filter2('[1].className', 'Process') %}{{ key }}, {% endfor %}
 
-Compartment: {% for key, value in ns | filter2('1.className', 'Compartment') %}{{ key }}, {% endfor %}
+Compartment: {% for key, value in ns | filter2('[1].className', 'Compartment') %}{{ key }}, {% endfor %}
 
-Species: {% for key, value in ns | filter2('1.className', 'Species') %}{{ key }}, {% endfor %}
+Species: {% for key, value in ns | filter2('[1].className', 'Species') %}{{ key }}, {% endfor %}
 
-Reaction: {% for key, value in ns | filter2('1.className', 'Reaction') %}{{ key }}, {% endfor %}
+Reaction: {% for key, value in ns | filter2('[1].className', 'Reaction') %}{{ key }}, {% endfor %}
 
-TimeSwitcher: {% for key, value in ns | filter2('1.className', 'TimeSwitcher') %}{{ key }}, {% endfor %}
+TimeSwitcher: {% for key, value in ns | filter2('[1].className', 'TimeSwitcher') %}{{ key }}, {% endfor %}
 {# CSwitcher, DSwitcher, StopSwitcher, Dose, Page, #}
 ### Orphan (unused) components
 
