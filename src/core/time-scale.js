@@ -81,7 +81,7 @@ class TimeScale extends _Size { // implicit extend Numeric
     if (this.intercept !== 0) res.intercept = this.intercept;
     if (this.output === true) res.output = this.output;
 
-    // for t only
+    // if base time scale than we "update" not "insert"
     if (this.id === 't') {
       delete res.class;
     }

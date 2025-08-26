@@ -37,8 +37,8 @@ const defaultPlatform = {
     source: 'src/index.heta'
   },
   export: [
-    '{ format: JSON, omit: [], noUnitsExpr: false }',
-    '#{ format: YAML, omit: [], noUnitsExpr: false }',
+    '{ format: JSON, omit: [], useUnitsExpr: false }',
+    '#{ format: YAML, omit: [], useUnitsExpr: false }',
     '#{ format: DBSolve, powTransform: keep, version: 26 }',
     '#{ format: SLV, eventsOff: false, powTransform: keep, version: 26 }',
     '#{ format: SBML, version: L2V4 }',

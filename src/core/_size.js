@@ -149,7 +149,7 @@ class _Size extends Component {
     let res = super.toQ(options);
     
     if (this.unitsParsed) {
-      if (options.noUnitsExpr) {
+      if (options.useUnitsExpr) {
         res.units = this.unitsParsed.toQ(options);
       } else {
         res.units = this.units;

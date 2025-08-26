@@ -23,10 +23,12 @@ export:
     spaceFilter: mm
   - format: JSON
     filepath: full_json
-    spaceFilter: mm 
+    spaceFilter: mm
+    useUnitsExpr: false
   - format: YAML
     filepath: full_yaml
     spaceFilter: mm
+    useUnitsExpr: false
   - format: SLV
     filepath: mm_slv
     version: 25

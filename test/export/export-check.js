@@ -11,7 +11,7 @@ describe('General argument checking', () => {
       id: 'json_export',
       filepath: './1.json',
       omit: ['num'],
-      noUnitsExpr: true,
+      useUnitsExpr: true,
       spaceFilter: 'one',
       powTransform: 'function'
     });
@@ -19,7 +19,7 @@ describe('General argument checking', () => {
     expect(json_export).to.have.property('filepath', './1.json');
     expect(json_export).to.have.property('format', 'JSON');
     expect(json_export).to.have.deep.property('omit', ['num']);
-    expect(json_export).to.have.property('noUnitsExpr', true);
+    expect(json_export).to.have.property('useUnitsExpr', true);
     expect(json_export).to.have.deep.property('spaceFilter', 'one');
     p.logger.resetErrors();
   });
@@ -87,11 +87,11 @@ describe('General argument checking', () => {
     p.logger.resetErrors();
   });
 
-  it('Error in export: wrong "noUnitsExpr"', () => {
+  it('Error in export: wrong "useUnitsExpr"', () => {
     let json_export = p.export({
       format: 'JSON',
       filepath: './1.txt',
-      noUnitsExpr: 12
+      useUnitsExpr: 12
     });
     expect(p.logger).to.have.property('hasErrors').true;
     expect(json_export).to.be.instanceOf(b.exportClasses.JSON);

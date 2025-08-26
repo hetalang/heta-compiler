@@ -9,8 +9,8 @@
     "source": "src/index.heta"
   },
   "export": [
-    {"format": "JSON", "filepath": "output", "spaceFilter": "(nameless)|(one)|(two)", "noUnitsExpr": false},
-    {"format": "YAML", "filepath": "output", "spaceFilter": "one", "noUnitsExpr": false},
+    {"format": "JSON", "filepath": "output", "spaceFilter": "(nameless)|(one)|(two)", "useUnitsExpr": false},
+    {"format": "YAML", "filepath": "output", "spaceFilter": "one", "useUnitsExpr": false},
     {"format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true, "spaceFilter": "one"},
     {"format": "HetaCode", "filepath": "heta-generated", "spaceFilter": "(one)|(two)"},
     {"format": "SBML", "filepath": "sbml", "version": "L2V4", "spaceFilter": "(one)|(two)"},

@@ -6,7 +6,7 @@ const schema = {
   type: 'object',
   properties: {
     omit: {type: 'array', items: { type: 'string' }},
-    noUnitsExpr: {type: 'boolean'}
+    useUnitsExpr: {type: 'boolean'}
   }
 };
 
@@ -20,7 +20,7 @@ class JSONExport extends AbstractExport {
     if (!valid) { this.errored = true; return; }
 
     if (q.omit) this.omit = q.omit;
-    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
+    if (q.useUnitsExpr) this.useUnitsExpr = q.useUnitsExpr;
   }
   get className(){
     return 'JSONExport';
@@ -41,12 +41,12 @@ class JSONExport extends AbstractExport {
     // create qArr from NS
     let qArr_ns = nsArrayFiltered.reduce((accumulator, [spaceName, ns]) => {
       let qArr_setns = ns.spaceName === 'nameless' && !ns.isAbstract ? [] : [ns.toQ()]; // skip #setNS {space: nameless};
-      let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
+      let qArr_components = ns.toQArr(true, { useUnitsExpr: this.useUnitsExpr });
       return accumulator.concat(qArr_setns, qArr_components);
     }, []);
     let qArr_unitDef = [...this._builder.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toQ());
+      .map((x) => x[1].toQ({ useUnitsExpr: this.useUnitsExpr }));
     let qArr_functionDef = [...this._builder.container.functionDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());

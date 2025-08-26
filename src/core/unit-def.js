@@ -140,7 +140,7 @@ class UnitDef extends Top {
     q.action = 'defineUnit';
 
     if (this.unitsParsed) {
-      if (options.noUnitsExpr) {
+      if (options.useUnitsExpr) {
         q.units = this.unitsParsed.toQ(options);
       } else {
         q.units = this.unitsParsed.toString();

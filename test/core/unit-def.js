@@ -26,7 +26,7 @@ describe('Unit test for UnitDef', () => {
       id: 'ud1',
       units: '(1e+3 g)/mole'
     });
-    expect(simple.toQ({noUnitsExpr: true})).to.be.deep.equal({
+    expect(simple.toQ({useUnitsExpr: true})).to.be.deep.equal({
       action: 'defineUnit',
       id: 'ud1',
       units: [

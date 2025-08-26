@@ -5,8 +5,7 @@ const { omitByPaths } = require('../utils');
 const schema = {
   type: 'object',
   properties: {
-    omit: {type: 'array', items: { type: 'string' }},
-    noUnitsExpr: {type: 'boolean'}
+    omit: {type: 'array', items: { type: 'string' }}
   }
 };
 
@@ -20,7 +19,6 @@ class CanonicalJSONExport extends AbstractExport {
     if (!valid) { this.errored = true; return; }
 
     if (q.omit) this.omit = q.omit;
-    if (q.noUnitsExpr) this.noUnitsExpr = q.noUnitsExpr;
   }
   get className(){
     return 'CanonicalJSONExport';
@@ -41,12 +39,13 @@ class CanonicalJSONExport extends AbstractExport {
     // create qArr from NS
     let qArr_ns = nsArrayFiltered.reduce((accumulator, [spaceName, ns]) => {
       let qArr_setns = ns.spaceName === 'nameless' && !ns.isAbstract ? [] : [ns.toQ()]; // skip #setNS {space: nameless};
-      let qArr_components = ns.toQArr(true, { noUnitsExpr: this.noUnitsExpr });
+      let qArr_components = ns.toQArr(true, { useUnitsExpr: true });
+
       return accumulator.concat(qArr_setns, qArr_components);
     }, []);
     let qArr_unitDef = [...this._builder.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toQ());
+      .map((x) => x[1].toQ({ useUnitsExpr: true }));
     let qArr_functionDef = [...this._builder.container.functionDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());
