@@ -4,14 +4,6 @@
 
 If `heta` command is not available check your Heta compiler [installation](./index) and content of system paths (`PATH` variable in Windows).
 
-## Table of contents
-
-- ["heta" command](#quothetaquot-command)
-- ["heta build" command](#quotheta-buildquot-command)
-- ["heta init" command](#quotheta-initquot-command)
-- ["heta help" command](#quotheta-helpquot-command)
-- [Declaration file format](#declaration-file-format)
-
 ## "heta" command
 
 `heta` is the prefix command for working with the tools. Writing the command alone prints the information about the tool and available options. `heta help` does the same.
@@ -36,12 +28,11 @@ Commands:
 
 ## "heta build" command
 
-`heta build` runs the compilation of the platform.
-It uses the main source file (index) as an initial point to compile the platform.
+`heta build` runs the compilation of the platform with the default settings.
 
-The default run of `heta build` (no options set, no configuration file) will do the following:
+The default run of `heta build` (no options set, no `platform.yml` declaration file) will do the following:
 
-1. Looking for **index.heta** in parent working directory of shell.
+1. Looking for **index.heta** in working directory (current directory for shell).
 2. Running parsing of index.heta file as module of type "heta" and all files (modules) mentioned by `#include` action inside `index.heta`.
 3. If there are compiling errors the file **build.log** will be created in working directory.
 
@@ -91,7 +82,7 @@ heta build y:/my-platform
 
 ### Running build with declaration file
 
-Declaration is a file in specific format which is located in working directory of modeling platform. As default it has a name **platform.yml** and it is JSON formatted. It has two purposes:
+Declaration is a file in specific format which is located in working directory of modeling platform. As default it has a name **platform.yml** and it is YAML/JSON formatted. It has two purposes:
 - It annotates the developed modeling platform by some specific properties like id, notes, constibutors, repository, etc.
 - To customize compiler's behavior: files location, outputs, etc. It can be used instead of CLI options.
 
@@ -105,7 +96,7 @@ To create a draft declaration file use ["heta init" command](#"heta-init"-comman
 
 #### Example
 
-The following declaration file changes the default **dist** directory.
+The following declaration file uses non-default **dist** directory.
 
 ```json
 {
@@ -120,11 +111,11 @@ The following declaration file changes the default **dist** directory.
 
 `heta init` creates template files for QSP platform. Running the command without options will create template in current working directory. You can set another directory for creating template using optional path **[dir]** at the end of command line.
 
-After running the command a developer should answer to series of questions about the initialized platform in prompt mode. To create the default platform use `--silent` option.
+After running the command a developer should answer to series of questions about the initialized platform in prompt mode. To use the default setting without prompts use `--silent` option.
 
 | option | type | description |
 |--|--|--|
-| -f, --force || This option allows rewriting the existed files and directories. |
+| -f, --force || This option allows rewriting the existed files and directories or creates new ones. |
 | -s, --silent || Run initialization in silent mode with default options. |
 
 #### Example
@@ -154,6 +145,8 @@ If we check the content of the created "test" directory we will see the followin
 **src/qsp-units.heta** : pre-defined list of units. You don't have to use it. [qsp-units.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/qsp-units.heta)
 
 **src/qsp-functions.heta** : pre-defined set of additional functions. You may not need it. [qsp-functions.heta](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/qsp-functions.heta)
+
+**src/table.xlsx** : pre-defined [table module](/specifications/tabular-format.html) template. It is created only if you select the "table" file type initializing directory. [table.xlsx](https://raw.githubusercontent.com/hetalang/heta-compiler/master/bin/init/table.xlsx)
 
 **platform.yml** : default declaration file.
 

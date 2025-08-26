@@ -34,8 +34,7 @@
 ## bugs
 
 - update libs
-  - mathjs => 12.4.3 => 13.2.3 => 14.3.1, requires node > 16
-  - inquirer => 9.3.6 => 12.4.3, requires node > 14
+  - mathjs => 12.4.3 => 13.2.3 => 14.3.1
 
 ## features
 
