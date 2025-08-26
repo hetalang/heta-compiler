@@ -1,5 +1,16 @@
 # Change Log
 
+### 0.9.8
+
+- fix bug with Matlab/Simbio ^ symbol: additional brackets
+- fix bug with summary export: throwed each time
+- use oldest compartible version of heta-compiler in init
+- replace and fix `noUnitsExpr` to `useUnitsExpr` and fix in json/yaml
+- remove support for Node < 18
+- CI/CD publish fix
+- draft hash generation for platform
+- docs minor updates
+
 ## 0.9.7
 
 - fix issue with `events_affects` in Matlab export
