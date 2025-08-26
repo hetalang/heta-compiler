@@ -36,7 +36,7 @@ The `export` property is an array of objects with the `format` and `filepath` pr
             format: JSON,
             filepath: output,
             omit: ['aux.wiki'],
-            noUnitsExpr: false,
+            useUnitsExpr: false,
             spaceFilter: "nameless|another"
         },
         {
@@ -92,7 +92,7 @@ Can work with `abstract` namespaces.
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
 | omit | string[] | | | | Array of properties paths to exclude from output. |
-| noUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr. If `true` all unit will be written in Unit array format. |
+| useUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr. If `true` all unit will be written in Unit array format. |
 
 ### Output files
 
@@ -105,7 +105,7 @@ Can work with `abstract` namespaces.
     format: JSON,
     filepath: output, // save result in file "dist/output.json"
     omit: [aux.wiki], // omit aux.wiki properties from components
-    noUnitsExpr: false, // save units in format UnitsExpr
+    useUnitsExpr: false, // save units in format UnitsExpr
     spaceFilter: "nameless|another"
 }
 ```
@@ -130,7 +130,7 @@ All options is the same as for [JSON format](#json).
     format: YAML,
     filepath: output, // save result in file "dist/output.json"
     omit: [aux.wiki], // omit aux.wiki properties from components
-    noUnitsExpr: false, // save units in format UnitsExpr
+    useUnitsExpr: false, // save units in format UnitsExpr
     spaceFilter: ".+" // all namespaces
 }
 ```
