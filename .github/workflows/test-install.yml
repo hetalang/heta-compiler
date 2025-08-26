@@ -76,9 +76,12 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Install Heta Compiler
+        shell: bash
         run: |
-          echo "Installing latest Heta Compiler"
-          choco install heta-compiler --version=$VERSION -y
+          echo "Installing Heta Compiler $VERSION"
+          sleep 15
+          choco list heta-compiler --exact --all-versions
+          choco install heta-compiler --version="$VERSION" -y --no-progress
 
       - name: Check version
         shell: bash
