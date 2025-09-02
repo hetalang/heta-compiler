@@ -4,9 +4,9 @@ const pkg = require('../package');
 const semver = require('semver');
 
 const currentVersion = pkg.version;
-const changelogLink = 'https://hetalang.github.io/#/heta-compiler/CHANGELOG';
+const changelogLink = 'https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md';
 const NPM_REF = 'http://registry.npmjs.org/-/package/heta-compiler/dist-tags';
-const installLink = 'https://hetalang.github.io/#/heta-compiler/?id=installation';
+const installLink = 'https://hetalang.github.io/hetacompiler/#installation';
 
 async function getLatestVersionAsync(){
   try {
