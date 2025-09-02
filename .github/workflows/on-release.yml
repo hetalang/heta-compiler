@@ -11,6 +11,8 @@ permissions:
 jobs:
     upload-macos-x64-release-asset:
         runs-on: macos-13
+        outputs:
+          sha_x64: ${{ steps.sha_x64.outputs.sha }}
         steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-node@v4
@@ -51,6 +53,7 @@ jobs:
 
     upload-macos-arm64-release-asset:
         runs-on: macos-latest
+        needs: upload-macos-x64-release-asset
         steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-node@v4
@@ -101,7 +104,7 @@ jobs:
         - name: Commit to homebrew-heta-compiler repos
           if: ${{ github.event.release.prerelease == false }}
           env:
-            SHA_ARM64: ${{ needs.upload-macos-arm64-release-asset.outputs.sha_arm64 }}
+            SHA_ARM64: ${{ steps.sha_arm64.outputs.sha }}
             SHA_X64:   ${{ needs.upload-macos-x64-release-asset.outputs.sha_x64 }}
           run: |
             git clone git@github.com:hetalang/homebrew-heta-compiler.git
