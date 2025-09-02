@@ -9,6 +9,46 @@ permissions:
   pull-requests: read
 
 jobs:
+    upload-macos-x64-release-asset:
+        runs-on: macos-13
+        steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: 18.x
+        - run: npm ci
+        - name: Build standalone apps
+          run: |
+            npx pkg . -t macos-x64 --compress GZip
+            cd ./dist
+            chmod 775 heta-compiler
+            tar -czvf ./heta-compiler-macos-x64.tar.gz ./heta-compiler
+            cd ..
+
+        - name: Compute SHA256 (x64)
+          id: sha_x64
+          run: echo "sha=$(shasum -a 256 ./dist/heta-compiler-macos-x64.tar.gz | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+        - name: Upload Release Asset Macos
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler
+            asset_name: heta-compiler-macos-x64
+            asset_content_type: application/octet-stream
+
+        - name: Upload Release TAR.GZ Macos
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ github.event.release.upload_url }}
+            asset_path: dist/heta-compiler-macos-x64.tar.gz
+            asset_name: heta-compiler-macos-x64.tar.gz
+            asset_content_type: application/octet-stream
+
     upload-macos-arm64-release-asset:
         runs-on: macos-latest
         steps:
@@ -24,6 +64,10 @@ jobs:
             chmod 775 heta-compiler
             tar -czvf ./heta-compiler-macos-arm64.tar.gz ./heta-compiler
             cd ..
+
+        - name: Compute SHA256 (arm64)
+          id: sha_arm64
+          run: echo "sha=$(shasum -a 256 ./dist/heta-compiler-macos-arm64.tar.gz | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
         - name: Upload Release Asset Macos
           uses: actions/upload-release-asset@v1
@@ -56,6 +100,9 @@ jobs:
 
         - name: Commit to homebrew-heta-compiler repos
           if: ${{ github.event.release.prerelease == false }}
+          env:
+            SHA_ARM64: ${{ needs.upload-macos-arm64-release-asset.outputs.sha_arm64 }}
+            SHA_X64:   ${{ needs.upload-macos-x64-release-asset.outputs.sha_x64 }}
           run: |
             git clone git@github.com:hetalang/homebrew-heta-compiler.git
             cd homebrew-heta-compiler
@@ -64,47 +111,13 @@ jobs:
             mkdir -p Formula
             cp -f ../build-homebrew/heta-compiler.template.rb Formula/heta-compiler.rb # copy the new formula and replace the old one
             sed -i '' "s|\$VERSION|${{ github.event.release.tag_name }}|" Formula/heta-compiler.rb
-            SHA=$(shasum -a 256 ../dist/heta-compiler-macos-arm64.tar.gz | awk '{print $1}')
-            sed -i '' "s|\$SHA256|$SHA|" Formula/heta-compiler.rb
+            sed -i '' "s|\$SHA256ARM64|$SHA_ARM64|" Formula/heta-compiler.rb
+            sed -i '' "s|\$SHA256X64|$SHA_X64|" Formula/heta-compiler.rb
+            echo "$SHA_ARM64"
+            echo "$SHA_X64"
             git add .
             git commit -m "Automated update from source repository based on release ${{ github.event.release.tag_name }}"
             git push origin master
-
-    upload-macos-x64-release-asset:
-        runs-on: macos-13
-        steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
-          with:
-            node-version: 18.x
-        - run: npm ci
-        - name: Build standalone apps
-          run: |
-            npx pkg . -t macos-x64 --compress GZip
-            cd ./dist
-            chmod 775 heta-compiler
-            tar -czvf ./heta-compiler-macos-x64.tar.gz ./heta-compiler
-            cd ..
-
-        - name: Upload Release Asset Macos
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler
-            asset_name: heta-compiler-macos-x64
-            asset_content_type: application/octet-stream
-
-        - name: Upload Release TAR.GZ Macos
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ github.event.release.upload_url }}
-            asset_path: dist/heta-compiler-macos-x64.tar.gz
-            asset_name: heta-compiler-macos-x64.tar.gz
-            asset_content_type: application/octet-stream
 
     upload-linux-x64-release-asset:
         runs-on: ubuntu-latest
