@@ -54,7 +54,15 @@ function _toDeepPaths(o){
       keyClean = key;
       valueClean = value;
     }
-    let pathArray = _parsePath(keyClean);
+    try {
+      var pathArray = _parsePath(keyClean);
+    } catch (e) {
+      if (e instanceof TypeError) {
+        throw new HetaLevelError(`Invalid header (first raw) "${keyClean}" in table`);
+      } else {
+        throw e;
+      }
+    }
     _setByPathArray.call(output, pathArray, valueClean);
   });
 

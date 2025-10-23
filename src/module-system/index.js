@@ -149,7 +149,7 @@ class ModuleSystem {
       var parsed = loader(fileContent, options);
     } catch (e) {
       if (e.name === 'HetaLevelError') {
-        let msg = e.message + ` when converting module "${filename}"`;
+        let msg = e.message + ` when converting module "${filename}${tabNum}"`;
         this.logger.error(msg, {type: 'ModuleError', filename: filename});
         return [];
       } else if (e.code === 'ENOENT') {
