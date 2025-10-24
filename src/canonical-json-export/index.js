@@ -10,23 +10,23 @@ const schema = {
   }
 };
 
-class CanonicalJSONExport extends AbstractExport {
+class CanonicalExport extends AbstractExport {
   constructor(q = {}, isCore = false){
     super(q, isCore);
     
     // check arguments here
     let { logger } = this._builder;
-    let valid = CanonicalJSONExport.isValid(q, logger);
+    let valid = CanonicalExport.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
   }
   get className(){
-    return 'CanonicalJSONExport';
+    return 'CanonicalExport';
   }
   get defaultFilepath() {
     return 'canonical';
   }
   get format(){
-    return 'CanonicalJSON';
+    return 'Canonical';
   }
   static get validate(){
     return ajv.compile(schema);
@@ -90,7 +90,7 @@ class CanonicalJSONExport extends AbstractExport {
 
     return [{
       content: JSON.stringify(qArr_final, null, 2),
-      pathSuffix: '/output.json',
+      pathSuffix: '/output.heta.json',
       type: 'text'
     }];
   }
@@ -116,4 +116,4 @@ function _sortKeys(o) {
   return o;
 }
 
-module.exports = CanonicalJSONExport;
+module.exports = CanonicalExport;
