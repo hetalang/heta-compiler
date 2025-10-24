@@ -74,10 +74,13 @@ class CanonicalExport extends AbstractExport {
       .digest('hex');
 
     let qArr_final = [{
-      action: 'setMeta',
-      builderVersion: pkg.version,
+      action: 'hasMeta',
+      toolName: pkg.name,
+      toolVersion: pkg.version,
       createdAt: new Date().toISOString(),
-      format: this.format,
+      platformId: this._builder.id,
+      platformVersion: this._builder.version,
+      format: 'JSON',
       canonical: true,
       hashSum: hash,
       hashAlgorithm: 'sha256'

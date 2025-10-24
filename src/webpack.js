@@ -55,7 +55,7 @@ Builder._exportClasses = {
   DBSolve: require('./dbsolve-export'),
   YAML: require('./yaml-export'),
   JSON: require('./json-export'),
-  Canonical: require('./canonical-json-export'),
+  Canonical: require('./canonical-export'),
   HetaCode: require('./heta-code-export'),
   SBML: require('./sbml-export'),
   SLV: require('./slv-export'),
