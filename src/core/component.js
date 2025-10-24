@@ -251,6 +251,8 @@ class Component extends Top {
     if (this.tags.length > 0) q.tags = this.tags.map((tag) => tag);
     if (Object.keys(this.aux).length > 0) q.aux = cloneDeep(this.aux);
 
+    options.canon && (q.action = 'upsert');
+
     return q;
   }
   /* recursively create requirements from _requirements, 

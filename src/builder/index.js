@@ -6,7 +6,6 @@ const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
 const semver = require('semver');
 const { version } = require('../../package');
-const { createHash } = require('node:crypto');
 
 /**
  * Auxiliary class for performing compilation and storing a platform's options.
@@ -159,13 +158,8 @@ class Builder {
       // 3.5 Get platform hash
       // creates temporal canonical representation and make hash
       let canonicalItem = new this.exportClasses['CanonicalJSON']({});
-      let canonicalObject = canonicalItem.make()[0];
-      let canonicalString = canonicalObject.content.toString('utf8');
-      const hash = createHash('sha256')
-        .update(canonicalString, 'utf8') // canonical JSON
-        .update(`heta-compiler: ${version}`, 'utf8') // heta-compiler version
-        .digest('hex');
-      this.logger.info(`Platform hash: ${hash}`);
+      let canonicalFull = canonicalItem.makeFullObject();
+      this.logger.info(`Platform hash: ${canonicalFull[0].hashSum}`);
 
       // 4. Binding
       this.logger.info('Setting references in elements, total length ' + this.container.length);
