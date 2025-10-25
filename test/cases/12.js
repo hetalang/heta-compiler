@@ -6,7 +6,7 @@ use(chaiXml);
 const fs = require('fs-extra');
 
 const sbml_correct = fs.readFileSync('cases/12-to-sbml/master/sbml/first.xml','utf8');
-const json_correct = require('../../cases/12-to-sbml/master/json/output.json');
+const json_correct = require('../../cases/12-to-sbml/master/json/output.heta.json');
 
 describe('Testing "cases/12-to-sbml"', () => {
   let b;
@@ -49,8 +49,8 @@ describe('Testing "cases/12-to-sbml"', () => {
     expect(json_export).not.to.has.property('errored', true);
 
     let code = json_export.makeText()[0].content;
-    let obj = JSON.parse(code);
-    expect(obj).to.be.deep.equal(json_correct);
+    let obj = JSON.parse(code).slice(1); // skip meta
+    expect(obj).to.be.deep.equal(json_correct.slice(1));
   });
 
 });

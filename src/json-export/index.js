@@ -1,4 +1,5 @@
 const { AbstractExport } = require('../abstract-export');
+const pkg = require('../../package');
 const { ajv } = require('../ajv');
 const { omitByPaths } = require('../utils');
 
@@ -34,7 +35,7 @@ class JSONExport extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
-  makeText(){
+  makeObject() {
     // filtered namespaces
     let nsArrayFiltered = this.selectedNamespaces();
 
@@ -56,12 +57,27 @@ class JSONExport extends AbstractExport {
     
     let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_functionDef, qArr_scenario);
 
+    return qArr_full;
+  }
+  makeText(){
+    let qArr_full = this.makeObject();
+    
     // remove unnecessary properties
     let qArr = this.omit ? qArr_full.map((q) => omitByPaths(q, this.omit)) : qArr_full;
 
+    let qArr_final = [{
+      action: 'hasMeta',
+      toolName: pkg.name,
+      toolVersion: pkg.version,
+      createdAt: new Date().toISOString(),
+      platformId: this._builder.id,
+      platformVersion: this._builder.version,
+      format: 'JSON'
+    }].concat(qArr);
+
     return [{
-      content: JSON.stringify(qArr, null, 2),
-      pathSuffix: '/output.json',
+      content: JSON.stringify(qArr_final, null, 2),
+      pathSuffix: '/output.heta.json',
       type: 'text'
     }];
   }

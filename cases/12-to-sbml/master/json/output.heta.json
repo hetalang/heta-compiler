@@ -1,5 +1,14 @@
 [
   {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.9.8",
+    "createdAt": "2025-10-25T13:00:39.948Z",
+    "platformId": "to-sbml",
+    "platformVersion": "v0.1.0",
+    "format": "JSON"
+  },
+  {
     "action": "setNS",
     "type": "abstract",
     "space": "first"

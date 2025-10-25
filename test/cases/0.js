@@ -19,7 +19,7 @@ const XLSX = require('xlsx');
 
 const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4/mm.xml','utf8');
 const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/mm.xml','utf8');
-const json_correct = require('../../cases/0-hello-world/master/full_json.json');
+const json_correct = require('../../cases/0-hello-world/master/output.heta.json');
 const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
 const yaml_correct = load(yaml_correct_text);
 const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
@@ -77,8 +77,8 @@ describe('Testing "cases/0-hello-world"', () => {
   it('Run export {format: JSON}, check and compare.', () => {
     let json_export = b.exportArray[2];
     let code = json_export.makeText(true)[0].content;
-    let obj = JSON.parse(code);
-    expect(obj).to.be.deep.equal(json_correct);
+    let obj = JSON.parse(code).slice(1); // skip meta
+    expect(obj).to.be.deep.equal(json_correct.slice(1));
     //console.log(obj);
   });
 

@@ -1,5 +1,14 @@
 [
   {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.9.8",
+    "createdAt": "2025-10-25T13:05:52.304Z",
+    "platformId": "use-case",
+    "platformVersion": "v0.1.0",
+    "format": "JSON"
+  },
+  {
     "action": "setNS",
     "type": "concrete",
     "space": "model"
@@ -9,22 +18,22 @@
     "space": "model"
   },
   {
-    "class": "Const",
     "id": "k1",
+    "class": "Const",
     "space": "model",
     "num": 0.001
   },
   {
-    "class": "Compartment",
     "id": "comp",
+    "class": "Compartment",
     "space": "model",
     "assignments": {
       "start_": "1"
     }
   },
   {
-    "class": "Species",
     "id": "A",
+    "class": "Species",
     "space": "model",
     "assignments": {
       "start_": "10"
@@ -32,8 +41,8 @@
     "compartment": "comp"
   },
   {
-    "class": "Species",
     "id": "B",
+    "class": "Species",
     "space": "model",
     "assignments": {
       "start_": "0"
@@ -41,8 +50,8 @@
     "compartment": "comp"
   },
   {
-    "class": "Species",
     "id": "enzyme",
+    "class": "Species",
     "space": "model",
     "assignments": {
       "start_": "1e-8"
@@ -51,8 +60,8 @@
     "compartment": "comp"
   },
   {
-    "class": "Reaction",
     "id": "r1",
+    "class": "Reaction",
     "space": "model",
     "notes": "Mikhaelis-Menten reaction",
     "assignments": {
@@ -76,8 +85,8 @@
     ]
   },
   {
-    "class": "Const",
     "id": "Km_A",
+    "class": "Const",
     "space": "model",
     "num": 0.8
   }

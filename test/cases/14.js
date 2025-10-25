@@ -4,7 +4,7 @@ const { Builder } = require('../../src');
 const { expect, use } = require('chai');
 const fs = require('fs-extra');
 
-const json_correct = require('../../cases/14-sbml-module/master/output.json');
+const json_correct = require('../../cases/14-sbml-module/master/output.heta.json');
 
 describe('Case #14: testing SBML module with units', () => {
   let b;
@@ -32,7 +32,7 @@ describe('Case #14: testing SBML module with units', () => {
   it('compare JSON export', () => {
     let json_export = b.exportArray[0];
     let code = json_export.make(true)[0].content;
-    let obj = JSON.parse(code);
-    expect(obj).to.be.deep.equal(json_correct);
+    let obj = JSON.parse(code).slice(1); // remove meta
+    expect(obj).to.be.deep.equal(json_correct.slice(1));
   });
 });

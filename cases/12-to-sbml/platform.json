@@ -13,7 +13,7 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "JSON", "filepath": "json" },
+    { "format": "JSON", "filepath": "json", "spaceFilter": "first" },
     { "format": "SLV", "filepath": "slv" },
     { "format": "DBSolve", "filepath": "model" },
     { "format": "Simbio", "filepath": "simbio" },

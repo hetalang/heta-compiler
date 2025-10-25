@@ -1,0 +1,331 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.9.8",
+    "createdAt": "2025-10-24T20:24:28.622Z",
+    "platformId": "test",
+    "format": "JSON"
+  },
+  {
+    "action": "setNS",
+    "type": "concrete",
+    "space": "mm"
+  },
+  {
+    "id": "t",
+    "space": "mm",
+    "units": "minute"
+  },
+  {
+    "id": "default_comp",
+    "class": "Compartment",
+    "space": "mm",
+    "title": "Default compartment",
+    "notes": "Note for the Default compartment",
+    "units": "L",
+    "assignments": {
+      "start_": "1"
+    }
+  },
+  {
+    "id": "S",
+    "class": "Species",
+    "space": "mm",
+    "title": "substrate",
+    "units": "uM",
+    "assignments": {
+      "start_": "10"
+    },
+    "output": true,
+    "compartment": "default_comp"
+  },
+  {
+    "id": "P",
+    "class": "Species",
+    "space": "mm",
+    "title": "product",
+    "units": "uM",
+    "assignments": {
+      "start_": "0"
+    },
+    "output": true,
+    "compartment": "default_comp"
+  },
+  {
+    "id": "r1",
+    "class": "Reaction",
+    "space": "mm",
+    "title": "Michaelis-Menten reaction",
+    "notes": "Transformation of __substrate__ to __product__",
+    "units": "umole/minute",
+    "assignments": {
+      "ode_": "Vmax * S / (Km + S) * default_comp"
+    },
+    "actors": [
+      {
+        "target": "S",
+        "stoichiometry": -1
+      },
+      {
+        "target": "P",
+        "stoichiometry": 1
+      }
+    ],
+    "reversible": false
+  },
+  {
+    "id": "Vmax",
+    "class": "Const",
+    "space": "mm",
+    "units": "uM/minute",
+    "num": 0.1
+  },
+  {
+    "id": "Km",
+    "class": "Const",
+    "space": "mm",
+    "units": "uM",
+    "num": 2.5
+  },
+  {
+    "id": "fmole",
+    "action": "defineUnit",
+    "units": "(1e-15 mole)"
+  },
+  {
+    "id": "pmole",
+    "action": "defineUnit",
+    "units": "(1e-12 mole)"
+  },
+  {
+    "id": "nmole",
+    "action": "defineUnit",
+    "units": "(1e-9 mole)"
+  },
+  {
+    "id": "umole",
+    "action": "defineUnit",
+    "units": "(1e-6 mole)"
+  },
+  {
+    "id": "mmole",
+    "action": "defineUnit",
+    "units": "(1e-3 mole)"
+  },
+  {
+    "id": "fM",
+    "action": "defineUnit",
+    "units": "(1e-15 mole)/litre"
+  },
+  {
+    "id": "pM",
+    "action": "defineUnit",
+    "units": "(1e-12 mole)/litre"
+  },
+  {
+    "id": "nM",
+    "action": "defineUnit",
+    "units": "(1e-9 mole)/litre"
+  },
+  {
+    "id": "uM",
+    "action": "defineUnit",
+    "units": "(1e-6 mole)/litre"
+  },
+  {
+    "id": "mM",
+    "action": "defineUnit",
+    "units": "(1e-3 mole)/litre"
+  },
+  {
+    "id": "M",
+    "action": "defineUnit",
+    "units": "mole/litre"
+  },
+  {
+    "id": "kM",
+    "action": "defineUnit",
+    "units": "(1e+3 mole)/litre"
+  },
+  {
+    "id": "fL",
+    "action": "defineUnit",
+    "units": "(1e-15 litre)"
+  },
+  {
+    "id": "pL",
+    "action": "defineUnit",
+    "units": "(1e-12 litre)"
+  },
+  {
+    "id": "nL",
+    "action": "defineUnit",
+    "units": "(1e-9 litre)"
+  },
+  {
+    "id": "uL",
+    "action": "defineUnit",
+    "units": "(1e-6 litre)"
+  },
+  {
+    "id": "mL",
+    "action": "defineUnit",
+    "units": "(1e-3 litre)"
+  },
+  {
+    "id": "dL",
+    "action": "defineUnit",
+    "units": "(1e-1 litre)"
+  },
+  {
+    "id": "L",
+    "action": "defineUnit",
+    "units": "litre"
+  },
+  {
+    "id": "fs",
+    "action": "defineUnit",
+    "units": "(1e-15 second)"
+  },
+  {
+    "id": "ps",
+    "action": "defineUnit",
+    "units": "(1e-12 second)"
+  },
+  {
+    "id": "ns",
+    "action": "defineUnit",
+    "units": "(1e-9 second)"
+  },
+  {
+    "id": "us",
+    "action": "defineUnit",
+    "units": "(1e-6 second)"
+  },
+  {
+    "id": "ms",
+    "action": "defineUnit",
+    "units": "(1e-3 second)"
+  },
+  {
+    "id": "s",
+    "action": "defineUnit",
+    "units": "second"
+  },
+  {
+    "id": "h",
+    "action": "defineUnit",
+    "units": "hour"
+  },
+  {
+    "id": "week",
+    "action": "defineUnit",
+    "units": "(7e+0 day)"
+  },
+  {
+    "id": "fg",
+    "action": "defineUnit",
+    "units": "(1e-18 kilogram)"
+  },
+  {
+    "id": "pg",
+    "action": "defineUnit",
+    "units": "(1e-15 kilogram)"
+  },
+  {
+    "id": "ng",
+    "action": "defineUnit",
+    "units": "(1e-12 kilogram)"
+  },
+  {
+    "id": "ug",
+    "action": "defineUnit",
+    "units": "(1e-9 kilogram)"
+  },
+  {
+    "id": "mg",
+    "action": "defineUnit",
+    "units": "(1e-6 kilogram)"
+  },
+  {
+    "id": "g",
+    "action": "defineUnit",
+    "units": "(1e-3 kilogram)"
+  },
+  {
+    "id": "kg",
+    "action": "defineUnit",
+    "units": "kilogram"
+  },
+  {
+    "id": "kat",
+    "action": "defineUnit",
+    "units": "katal"
+  },
+  {
+    "id": "cell",
+    "action": "defineUnit",
+    "units": "item"
+  },
+  {
+    "id": "kcell",
+    "action": "defineUnit",
+    "units": "(1e+3 item)"
+  },
+  {
+    "id": "cal",
+    "action": "defineUnit",
+    "units": "(4.1868e+0 joule)"
+  },
+  {
+    "id": "kcal",
+    "action": "defineUnit",
+    "units": "(4.1868e+3 joule)"
+  },
+  {
+    "id": "fm",
+    "action": "defineUnit",
+    "units": "(1e-15 metre)"
+  },
+  {
+    "id": "pm",
+    "action": "defineUnit",
+    "units": "(1e-12 metre)"
+  },
+  {
+    "id": "nm",
+    "action": "defineUnit",
+    "units": "(1e-9 metre)"
+  },
+  {
+    "id": "um",
+    "action": "defineUnit",
+    "units": "(1e-6 metre)"
+  },
+  {
+    "id": "mm",
+    "action": "defineUnit",
+    "units": "(1e-13 metre)"
+  },
+  {
+    "id": "cm",
+    "action": "defineUnit",
+    "units": "(1e-2 metre)"
+  },
+  {
+    "id": "m",
+    "action": "defineUnit",
+    "units": "metre"
+  },
+  {
+    "id": "UL",
+    "action": "defineUnit",
+    "units": "dimensionless"
+  },
+  {
+    "id": "percent",
+    "action": "defineUnit",
+    "units": "(1e-2 dimensionless)"
+  }
+]

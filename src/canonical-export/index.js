@@ -1,7 +1,6 @@
 const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');
 const { ajv } = require('../ajv');
-const { create } = require('mathjs');
 const { createHash } = require('node:crypto');
 
 const schema = {

@@ -1,10 +1,19 @@
 [
   {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.9.8",
+    "createdAt": "2025-10-25T13:02:04.415Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON"
+  },
+  {
     "id": "t"
   },
   {
-    "class": "Compartment",
     "id": "compartment",
+    "class": "Compartment",
     "title": "compartment",
     "units": "litre",
     "assignments": {
@@ -13,8 +22,8 @@
     "boundary": true
   },
   {
-    "class": "Species",
     "id": "S1",
+    "class": "Species",
     "title": "S1",
     "units": "mole/litre",
     "assignments": {
@@ -24,8 +33,8 @@
     "compartment": "compartment"
   },
   {
-    "class": "Species",
     "id": "S2",
+    "class": "Species",
     "title": "S2",
     "units": "(1e-6 mole)/litre",
     "assignments": {
@@ -34,8 +43,8 @@
     "compartment": "compartment"
   },
   {
-    "class": "Reaction",
     "id": "reaction1",
+    "class": "Reaction",
     "title": "reaction1",
     "assignments": {
       "ode_": "compartment * k1 * S1"
@@ -53,8 +62,8 @@
     "reversible": false
   },
   {
-    "class": "Record",
     "id": "k1",
+    "class": "Record",
     "title": "k1",
     "units": "_h",
     "assignments": {
@@ -62,14 +71,14 @@
     }
   },
   {
-    "class": "DSwitcher",
     "id": "event1",
+    "class": "DSwitcher",
     "title": "event1",
     "trigger": "S1 < 0.1"
   },
   {
     "id": "_h",
-    "units": "1/hour",
-    "action": "defineUnit"
+    "action": "defineUnit",
+    "units": "1/hour"
   }
 ]
