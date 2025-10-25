@@ -85,16 +85,16 @@ describe('Testing "cases/0-hello-world"', () => {
   it('Run export {format: YAML}, check and compare.', () => {
     let yaml_export = b.exportArray[3];
     let code = yaml_export.makeText(true)[0].content;
-    let obj = load(code);
-    expect(obj).to.be.deep.equal(yaml_correct);
+    let obj = load(code).slice(1); // skip meta
+    expect(obj).to.be.deep.equal(yaml_correct.slice(1));
     //console.log(code);
   });
 
   it('Run export {format: SLV}, check and compare.', () => {
     let slv_export = b.exportArray[4];
     let code = slv_export.makeText(true)[0].content;
-    let obj = slvParse.parse(code).slice(1); // skip meta
-    expect(obj).to.be.deep.equal(slv_correct.slice(1));
+    let obj = slvParse.parse(code);
+    expect(obj).to.be.deep.equal(slv_correct);
     //console.log(obj);
   });
 
