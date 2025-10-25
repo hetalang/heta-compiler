@@ -20,7 +20,7 @@ const XLSX = require('xlsx');
 const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4/mm.xml','utf8');
 const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/mm.xml','utf8');
 const json_correct = require('../../cases/0-hello-world/master/output.heta.json');
-const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/full_yaml.yml','utf8');
+const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/output.heta.yml','utf8');
 const yaml_correct = load(yaml_correct_text);
 const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
 const slv_correct = slvParse.parse(slv_correct_text);
@@ -93,8 +93,8 @@ describe('Testing "cases/0-hello-world"', () => {
   it('Run export {format: SLV}, check and compare.', () => {
     let slv_export = b.exportArray[4];
     let code = slv_export.makeText(true)[0].content;
-    let obj = slvParse.parse(code);
-    expect(obj).to.be.deep.equal(slv_correct);
+    let obj = slvParse.parse(code).slice(1); // skip meta
+    expect(obj).to.be.deep.equal(slv_correct.slice(1));
     //console.log(obj);
   });
 

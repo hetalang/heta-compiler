@@ -1,4 +1,5 @@
 const { AbstractExport } = require('../abstract-export');
+const pkg = require('../../package');
 const { dump } = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const { ajv } = require('../ajv');
 const { omitByPaths } = require('../utils');
@@ -32,7 +33,7 @@ class YAMLExport extends AbstractExport {
   get format(){
     return 'YAML';
   }
-  makeText(){
+  makeObject() {
     // filtered namespaces
     let nsArrayFiltered = this.selectedNamespaces();
 
@@ -54,12 +55,27 @@ class YAMLExport extends AbstractExport {
       
     let qArr_full = [].concat(qArr_ns, qArr_unitDef, qArr_functionDef, qArr_scenario);
 
+    return qArr_full;
+  }
+  makeText() {
+    let qArr_full = this.makeObject();
+  
     // remove unnecessary properties
     let qArr = this.omit ? qArr_full.map((q) => omitByPaths(q, this.omit)) : qArr_full;
 
-    let order = ['class', 'id', 'space', 'title', 'notes', 'tags', 'aux'];
+    let qArr_final = [{
+      action: 'hasMeta',
+      toolName: pkg.name,
+      toolVersion: pkg.version,
+      createdAt: new Date().toISOString(),
+      platformId: this._builder.id,
+      platformVersion: this._builder.version,
+      format: 'YAML'
+    }].concat(qArr);
+
+    let order = ['action', 'space', 'id', 'class', 'title', 'notes', 'tags', 'aux'];
     let compareFunction = fromOrderToCompare(order);
-    let yaml = dump(qArr, {
+    let yaml = dump(qArr_final, {
       skipInvalid: true, // TOFIX: ???
       flowLevel: 3,
       sortKeys: compareFunction,
@@ -68,7 +84,7 @@ class YAMLExport extends AbstractExport {
     
     return [{
       content: yaml,
-      pathSuffix: '/output.yml',
+      pathSuffix: '/output.heta.yml',
       type: 'text'
     }];
   }
