@@ -574,6 +574,11 @@ Container.prototype.select = function(q = {}){
   return namespace.get(q.id);
 };
 
+Container.prototype.hasMeta = function(q = {}) {
+  // do nothing, just for store meta info
+  return;
+}
+
 /**
  * Calculates string formatted index.
  * Example: `{id: 'k1', space: 'one'}` => `'one::k1'`

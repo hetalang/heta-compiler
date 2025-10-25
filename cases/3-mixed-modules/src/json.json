@@ -1,5 +1,9 @@
 [
   {
+    "action": "hasMeta",
+    "author": "system"
+  },
+  {
     "id": "p1",
     "space": "one",
     "class": "Record",
