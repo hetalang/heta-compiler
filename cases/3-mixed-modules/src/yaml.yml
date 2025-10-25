@@ -1,3 +1,5 @@
+- action: hasMeta
+  author: system
 - id: p3
   space: one
   class: Record

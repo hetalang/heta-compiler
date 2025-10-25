@@ -8,7 +8,14 @@ const { convertExcelSync } = require('../xlsx-connector');
  * @returns {Module} Self.
  */
 function tableLoader(fileContent, { sheet = 0, omitRows = 0, transpose = false } = {}) {
-  // TODO: checking arguments is required
+  // check sheet is non negative integer
+  if (typeof sheet !== 'number' || !Number.isInteger(sheet) || sheet < 0) {
+    throw new TypeError(`Table module option 'sheet' must be a non-negative integer, got: ${sheet}`);
+  }
+  // check omitRows is non negative integer
+  if (typeof omitRows !== 'number' || !Number.isInteger(omitRows) || omitRows < 0) {
+    throw new TypeError(`Table module option 'omitRows' must be a non-negative integer, got: ${omitRows}`);
+  }
 
   let rawData = convertExcelSync(fileContent, null, { sheet, transpose });
   rawData.splice(0, omitRows); // remove rows

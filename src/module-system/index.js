@@ -156,6 +156,9 @@ class ModuleSystem {
         let msg = e.message;
         this.logger.error(msg, {type: 'ModuleError', filename: filename});
         return [];
+      } else if (e instanceof TypeError) {
+        this.logger.error(e.message, {type: 'ModuleError', filename: filename});
+        return [];
       } else {
         throw e;
       }

@@ -7,5 +7,4 @@ importModule:
   type: heta
   source: src/index.heta
 export:
-  - format: YAML
-    filepath: yaml_invitro
+  - format: JSON
