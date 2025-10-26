@@ -24,7 +24,7 @@ const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/output.het
 const yaml_correct = load(yaml_correct_text);
 const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
 const slv_correct = slvParse.parse(slv_correct_text);
-const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/table.xlsx');
+const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/output.heta.xlsx');
 const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mm_mrg/mm.cpp','utf8');
 const julia_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model.jl','utf8');
 
@@ -114,8 +114,10 @@ describe('Testing "cases/0-hello-world"', () => {
     // check other parts
     code.forEach((x, i) => {
       let worksheet_i = xlsx_correct.Sheets[correctSheetNames[i]];
-      let correctJSON_i = XLSX.utils.sheet_to_json(worksheet_i, { blankrows: true });
-      expect(x.content).to.be.deep.equal(correctJSON_i);
+      let correctJSON_i = XLSX.utils.sheet_to_json(worksheet_i, { blankrows: true })
+        .filter(x => x.action !== 'hasMeta'); // remove meta row
+      let content = x.content.filter(x => x.action !== 'hasMeta'); // remove meta row
+      expect(content).to.be.deep.equal(correctJSON_i);
     });
 
     //console.log(code[0]);

@@ -47,6 +47,7 @@ export:
     spaceFilter: mm  
   - format: XLSX
     filepath: table
+    splitByClass: true
     spaceFilter: mm
   - format: Table
     filepath: table2

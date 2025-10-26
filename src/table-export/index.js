@@ -1,4 +1,5 @@
 const { AbstractExport } = require('../abstract-export');
+const pkg = require('../../package');
 const { intersection, omitByPaths } = require('../utils');
 const { ajv } = require('../ajv');
 const XLSX = require('xlsx');
@@ -120,9 +121,19 @@ class TableExport extends AbstractExport {
       fArr = fArr_full;
     }
 
+    let fArr_final = [{
+      action: 'hasMeta',
+      toolName: pkg.name,
+      toolVersion: pkg.version,
+      createdAt: new Date().toISOString(),
+      platformId: this._builder.id,
+      platformVersion: this._builder.version,
+      format: 'Table',
+    }].concat(fArr);
+
     // split qArr to several sheets
     if (this.splitByClass) {
-      let splittedObj = fArr.reduce((accumulator, value) => {
+      let splittedObj = fArr_final.reduce((accumulator, value) => {
         let c = value.class + '';
         !accumulator[c] && (accumulator[c] = []);
         accumulator[c].push(value);
@@ -154,13 +165,13 @@ class TableExport extends AbstractExport {
 
       return splitted;
     } else {
-      let keys = fArr // store unique keys
+      let keys = fArr_final // store unique keys
         .map((x) => Object.keys(x))
         .flat();
       let sequence_out = intersection(propSequence, keys);
 
       return [{
-        content: fArr,
+        content: fArr_final,
         pathSuffix: '#0',
         type: 'sheet',
         name: 'output',
@@ -187,14 +198,14 @@ class TableExport extends AbstractExport {
       return [{
         content: XLSX.write(wb, { type: 'buffer', bookType: this.bookType}),
         type: 'buffer',
-        pathSuffix: '/output' + bookType.fileExt
+        pathSuffix: '/output.heta' + bookType.fileExt
       }];
     } else {
       return wb.SheetNames.map((key, i) => {
         return {
           content: XLSX.write(wb, { type: 'buffer', bookType: this.bookType, sheet: i}),
           type: 'buffer',
-          pathSuffix: '/' + key + bookType.fileExt
+          pathSuffix: '/' + key + '.heta' + bookType.fileExt
         };
       });
     }
