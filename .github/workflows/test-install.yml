@@ -5,6 +5,12 @@ on:
     workflows: ['On release']
     types:
       - completed
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Heta Compiler version to install'
+        required: false
+        default: 'latest'
       
 permissions:
   contents: read
@@ -80,7 +86,7 @@ jobs:
         run: |
           echo "Installing Heta Compiler $VERSION"
           sleep 15
-          choco list heta-compiler --exact --all-versions
+          choco search heta-compiler --exact --verbose
           choco install heta-compiler --version="$VERSION" -y --no-progress
 
       - name: Check version
