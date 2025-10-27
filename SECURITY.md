@@ -6,9 +6,9 @@ The table below outlines which versions of the project are actively supported wi
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.9.x   | :white_check_mark: |
-| 0.8.x   | :x: |
-| < 0.8.0 | :x:                |
+| 0.10.x  | :white_check_mark: |
+| 0.9.x   | :x: |
+| < 0.9.0 | :x: |
 
 We recommend upgrading to the latest version to ensure you receive critical security updates.
 

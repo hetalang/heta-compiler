@@ -11,6 +11,7 @@ node_modules
 .nyc_output
 
 /docs
+/paper
 
 /.github
 /.vscode
