@@ -1,5 +1,14 @@
 # Change Log
 
+### 0.10.0
+
+- Julia export format update to support Julia 12
+- export `Canonical`: sort keys, metaData, hashSum
+- `#hasMeta` action support
+- `hasMeta` in JSON/YAML/Table exports
+- fix `bug` in md module, missing `id`
+- Check table headers in `Table` module
+
 ### 0.9.8
 
 - fix bug with Matlab/Simbio ^ symbol: additional brackets
