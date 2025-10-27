@@ -6,7 +6,7 @@ function mdLoader(fileContent, _options){
 
   let fileText = fileContent.toString('utf-8');
   let parsed = [{
-    id: options.pageId,
+    id: options.id,
     class: 'Page',
     content: fileText
   }];
