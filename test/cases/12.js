@@ -45,7 +45,7 @@ describe('Testing "cases/12-to-sbml"', () => {
 
   it('Run @JSONExport, check and compare.', () => {
     const JSONExport = b.exportClasses.JSON;
-    let json_export = new JSONExport({spaceFilter: 'first', filepath: 'xxx'});
+    let json_export = new JSONExport({spaceFilter: 'first', filepath: 'xxx', useUnitsExpr: true});
     expect(json_export).not.to.has.property('errored', true);
 
     let code = json_export.makeText()[0].content;

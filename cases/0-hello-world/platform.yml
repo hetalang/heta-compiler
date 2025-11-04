@@ -24,11 +24,11 @@ export:
   - format: JSON
     filepath: full_json
     spaceFilter: mm
-    useUnitsExpr: false
+    useUnitsExpr: true
   - format: YAML
     filepath: full_yaml
     spaceFilter: mm
-    useUnitsExpr: false
+    useUnitsExpr: true
   - format: SLV
     filepath: mm_slv
     version: 25

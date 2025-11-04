@@ -20,7 +20,7 @@ describe('Unit tests for Reaction.', () => {
       units: 'umole/h'
     });
 
-    expect(simple.toQ()).to.be.deep.equal({
+    expect(simple.toQ({useUnitsExpr: true})).to.be.deep.equal({
       class: 'Reaction',
       id: 'r1',
       actors: [

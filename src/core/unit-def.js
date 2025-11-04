@@ -141,9 +141,9 @@ class UnitDef extends Top {
 
     if (this.unitsParsed) {
       if (options.useUnitsExpr) {
-        q.units = this.unitsParsed.toQ(options);
-      } else {
         q.units = this.unitsParsed.toString();
+      } else {
+        q.units = this.unitsParsed.toQ(options);
       }
     }
 

@@ -150,9 +150,9 @@ class _Size extends Component {
     
     if (this.unitsParsed) {
       if (options.useUnitsExpr) {
-        res.units = this.unitsParsed.toQ(options);
+        res.units = this.unitsParsed.toString();
       } else {
-        res.units = this.units;
+        res.units = this.unitsParsed.toQ(options);
       }
     }
 

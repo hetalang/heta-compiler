@@ -44,8 +44,8 @@ describe('Testing "cases/0-hello-world"', () => {
       export: [
         {format: 'SBML', version: 'L2V4', filepath: 'mm_sbml_l2v4', spaceFilter: '^mm$'},
         {format: 'SBML', version: 'L3V1', filepath: 'mm_sbml_l3v1', spaceFilter: '^mm$'},
-        {format: 'JSON', spaceFilter: '^mm$'},
-        {format: 'YAML', spaceFilter: '^mm$'},
+        {format: 'JSON', spaceFilter: '^mm$', useUnitsExpr: true},
+        {format: 'YAML', spaceFilter: '^mm$', useUnitsExpr: true},
         {format: 'SLV', version: '25', spaceFilter: '^mm$'},
         {format: 'XLSX', splitByClass: true, spaceFilter: '^mm$'},
         {format: 'Mrgsolve', spaceFilter: '^mm$'},

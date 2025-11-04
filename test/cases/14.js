@@ -21,7 +21,7 @@ describe('Case #14: testing SBML module with units', () => {
         source: 'src/index.heta'
       },
       export: [
-        {format: 'JSON'}
+        {format: 'JSON', useUnitsExpr: true}
       ]
     }, fs.readFileSync, () => {});
     b.run();

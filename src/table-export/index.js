@@ -92,12 +92,12 @@ class TableExport extends AbstractExport {
     // create array of flat
     let fArr_ns = nsArrayFiltered.reduce((accumulator, ns) => {
       let fArr_setns = ns.spaceName === 'nameless' ? [] : [ns.toFlat()];
-      let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat());
+      let fArr_components = ns.toArray().filter((x) => !x.isCore).map((x) => x.toFlat({ useUnitsExpr: true }));
       return accumulator.concat(fArr_setns, fArr_components);
     }, []);
     let fArr_unitDef = [...this._builder.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toFlat());
+      .map((x) => x[1].toFlat({ useUnitsExpr: true }));
     let fArr_functionDef = [...this._builder.container.functionDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toFlat());

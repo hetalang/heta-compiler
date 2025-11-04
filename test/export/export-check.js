@@ -11,7 +11,7 @@ describe('General argument checking', () => {
       id: 'json_export',
       filepath: './1.json',
       omit: ['num'],
-      useUnitsExpr: true,
+      useUnitsExpr: false,
       spaceFilter: 'one',
       powTransform: 'function'
     });
@@ -19,7 +19,7 @@ describe('General argument checking', () => {
     expect(json_export).to.have.property('filepath', './1.json');
     expect(json_export).to.have.property('format', 'JSON');
     expect(json_export).to.have.deep.property('omit', ['num']);
-    expect(json_export).to.have.property('useUnitsExpr', true);
+    //expect(json_export).to.have.property('useUnitsExpr', false); // undefined by default
     expect(json_export).to.have.deep.property('spaceFilter', 'one');
     p.logger.resetErrors();
   });

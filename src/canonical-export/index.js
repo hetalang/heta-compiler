@@ -39,11 +39,11 @@ class CanonicalExport extends AbstractExport {
     let qArr_ns = nsArray
       .map(([spaceName, ns]) => ns.toQ({canon: true}));
     let qArr_components = nsArray
-      .map(([spaceName, ns]) => ns.toQArr(true, { useUnitsExpr: true, canon: true }))
+      .map(([spaceName, ns]) => ns.toQArr(true, { useUnitsExpr: false, canon: true })) // remove core components, `toQ` options
       .flat();
     let qArr_unitDef = [...this._builder.container.unitDefStorage]
       .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toQ({ useUnitsExpr: true }));
+      .map((x) => x[1].toQ({ useUnitsExpr: false }));
     let qArr_functionDef = [...this._builder.container.functionDefStorage]
       .filter((x) => !x[1].isCore)
       .map((x) => x[1].toQ());

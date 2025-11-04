@@ -21,12 +21,12 @@ describe('Unit test for UnitDef', () => {
     });
     
     expect(simple._container.logger).to.has.property('hasErrors', false);
-    expect(simple.toQ()).to.be.deep.equal({
+    expect(simple.toQ({useUnitsExpr: true})).to.be.deep.equal({
       action: 'defineUnit',
       id: 'ud1',
       units: '(1e+3 g)/mole'
     });
-    expect(simple.toQ({useUnitsExpr: true})).to.be.deep.equal({
+    expect(simple.toQ({useUnitsExpr: false})).to.be.deep.equal({
       action: 'defineUnit',
       id: 'ud1',
       units: [
