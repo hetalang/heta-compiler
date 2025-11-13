@@ -282,6 +282,34 @@ class Unit extends Array {
     return unit;
   }
 
+  // XXX: need to clarify should we need this method or not
+  // transform to canonical array, combine same kinds
+  // differ from simplify(): return Array not Unit, do not use bound sub-units
+  toCanon(){
+    let first = {kind: 'dimensionless', multiplier: 1, exponent: 1};
+    let result = [first];
+
+    this
+      .sort((x1, x2) => x1.kind > x2.kind ? -1 : 1)
+      .forEach((value) => {
+        // combine multipliers
+        first.multiplier *= value.multiplier ** value.exponent; // update dimensionless
+
+        // combine exponents
+        let ind = result.findIndex((x) => x.kind === value.kind);
+        if (ind !== -1) {
+          result[ind].exponent += value.exponent;
+        } else {
+          result.push({kind: value.kind, multiplier: 1, exponent: value.exponent});
+        }
+      });
+    // set exponent for dimensionless
+    first.exponent = 1;
+    
+    // filter zero exponents
+    return result.filter((x) => x.exponent !== 0);
+  }
+
   /**
    * Serialize unit-object to identifier.
    *
@@ -331,43 +359,41 @@ class Unit extends Array {
       ? [{kind: 'dimensionless', multiplier: 1, exponent: 1}] // not a Unit actually
       : this;
 
-    return normalizedUnit
-      .map((item, i) => {
-        if (!usePrefix) { // without prefix
-          // currently all outputs normalized to dimensionless
-          /*if (item.kind === 'dimensionless' && item.multiplier === 1) {
-            kindUpd = '1';
-          } else if (item.kind === 'dimensionless') {
-            kindUpd = '(' + item.multiplier.toExponential() + ' )'; // TODO: remove space if kind is empty
-          } else */if (item.multiplier === 1) { 
-            var kindUpd = item.kind;
-          } else {
-            kindUpd = '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
-          }
-        } else { // with prefix
-          if (item.multiplier === 1) {
-            kindUpd = item.kind;
-          } else {
-            let exponential = item.multiplier.toExponential(8); // round to 8 digits
-            let pref = prefixes[exponential];
-            if (pref === undefined) 
-              throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
-            kindUpd = pref + item.kind;
-          }
+    return normalizedUnit.map((item, i) => {
+      if (!usePrefix) { // without prefix
+        // currently all outputs normalized to dimensionless
+        /*if (item.kind === 'dimensionless' && item.multiplier === 1) {
+          kindUpd = '1';
+        } else if (item.kind === 'dimensionless') {
+          kindUpd = '(' + item.multiplier.toExponential() + ' )'; // TODO: remove space if kind is empty
+        } else */if (item.multiplier === 1) { 
+          var kindUpd = item.kind;
+        } else {
+          kindUpd = '(' + item.multiplier.toExponential() + ' ' + item.kind + ')';
         }
+      } else { // with prefix
+        if (item.multiplier === 1) {
+          kindUpd = item.kind;
+        } else {
+          let exponential = item.multiplier.toExponential(8); // round to 8 digits
+          let pref = prefixes[exponential];
+          if (pref === undefined) 
+            throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
+          kindUpd = pref + item.kind;
+        }
+      }
 
-        let operator = item.exponent < 0
-          ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
-          : ( (i>0) ? '*' : '' ); // no operator for first element
+      let operator = item.exponent < 0
+        ? ( (i>0) ? '/' : '1/' ) // 1 for 1/L
+        : ( (i>0) ? '*' : '' ); // no operator for first element
 
-        let expAbs = Math.abs(item.exponent); // absolute value
-        let exponent = (expAbs!==1)
-          ? '^' + expAbs
-          : '';
+      let expAbs = Math.abs(item.exponent); // absolute value
+      let exponent = (expAbs!==1)
+        ? '^' + expAbs
+        : '';
 
-        return operator + kindUpd + exponent;
-      })
-      .join('');
+      return operator + kindUpd + exponent;
+    }).join('');
   }
   
   /**
