@@ -239,16 +239,17 @@ jobs:
             choco install wixtoolset
         - name: Generate new GUID
           id: new_guid
-          run: | # deprecated
-            $guid = [guid]::NewGuid().ToString().ToUpper()
-            echo "NewGUID=$guid" >> $env:GITHUB_OUTPUT
+          run: | # deprecated, removed fo autogeneration
+            #$guid = [guid]::NewGuid().ToString().ToUpper()
+            #echo "NewGUID=$guid" >> $env:GITHUB_OUTPUT
         - name: Update .wxs file with new Product Id
           run: |
-            echo "GUID: ${{ steps.new_guid.outputs.NewGUID }}"
+            #echo "GUID: ${{ steps.new_guid.outputs.NewGUID }}"
             $pathToWxs = "build-win-installer/perUser.wxs"
             $content = Get-Content $pathToWxs -Raw
-            $newContent1 = $content -replace '(?<=Product\s+Id=")[^"]*', "${{ steps.new_guid.outputs.NewGUID }}"
-            $newContent2 = $newContent1 -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.VERSION }}"
+            #$newContent1 = $content -replace '(?<=Product\s+Id=")[^"]*', "${{ steps.new_guid.outputs.NewGUID }}"
+            #$newContent2 = $newContent1 -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.VERSION }}"
+            $newContent2 = $content -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.VERSION }}"
             $newContent2 | Set-Content $pathToWxs
         - name: Build windows installer
           run: |

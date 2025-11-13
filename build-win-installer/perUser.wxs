@@ -9,8 +9,9 @@ perMachine: requires elevated privileges to install. Sets the ALLUSERS property 
 perUser: does not require elevated privileges to install. Sets the package's InstallPrivileges attribute to "limited."
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <!-- Do not change UpgradeCode value, it is important for version update -->
     <Product 
-        Id="c3f66490-971b-4b85-b407-455a7a145a7c"
+        Id="*"
         Name="heta-compiler"
         Version="0.0.0"
         Manufacturer="Heta project"
@@ -33,7 +34,7 @@ perUser: does not require elevated privileges to install. Sets the package's Ins
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALL_HERE"/>
         <UIRef Id="MyWixUI_InstallDir"/>
 
-        <MajorUpgrade DowngradeErrorMessage="A newer version of MyApplication is already installed." />
+        <MajorUpgrade DowngradeErrorMessage="A newer version of heta-compiler is already installed." />
         <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes" />
 
         <Feature Id="ProductFeature" Title="heta-compiler" Level="1">
