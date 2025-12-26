@@ -34,8 +34,9 @@ comp1 [sw1]= 6;
 
 sw2_start @Const = 5; 
 sw2 @TimeSwitcher {
-  start: sw2_start,
-  period: 24
+  start: sw2_start, // ??? error
+  period: 24,
+  //stop: 150
 };
 s1 [sw2]= s1 + 2;
 s2 [sw2]= s2 + 2;

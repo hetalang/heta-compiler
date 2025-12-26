@@ -15,4 +15,5 @@ export:
   - {filepath: julia, format: Julia}
   - {filepath: sbml, format: SBML}
   - {filepath: mrgsolve, format: Mrgsolve}
+  - {format: MT}
   

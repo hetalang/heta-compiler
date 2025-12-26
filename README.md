@@ -6,6 +6,7 @@
 [![Autotests](https://github.com/hetalang/heta-compiler/workflows/Autotests/badge.svg)](https://github.com/hetalang/heta-compiler/actions)
 [![Coverage Status](https://coveralls.io/repos/github/hetalang/heta-compiler/badge.svg?branch=master)](https://coveralls.io/github/hetalang/heta-compiler?branch=master)
 [![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
+[![CodeQL](https://github.com/hetalang/heta-compiler/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/hetalang/heta-compiler/actions/workflows/github-code-scanning/codeql)
 
 # Heta Compiler
 
