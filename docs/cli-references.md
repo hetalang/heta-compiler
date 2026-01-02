@@ -46,16 +46,16 @@ List of `heta build` options:
 
 | option | type | default | description |
 |--|--|--|--|
-| --source | \<string\> | index.heta | Path to main heta module. This allows using another name and path of index Heta module. |
-| --type | \<string\> | heta | Type of source file. This option allows to select type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
+| --source | \<string\> | `index.heta` | Path to main heta module. This allows using another name and path of index Heta module. |
+| --type | \<string\> | `heta` | Type of source file. This option allows to select type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
 | --debug | | | Working in debugging mode. All parsed files will be saved in JSON files in **meta** directory. |
 | --units-check | | | If set all records will be checked for units consistency. |
 | --dist-dir | \<string\> | |  Set export directory path, where to store exported files. Path can be absolute or relative to the project directory. |
 | --meta-dir | \<string\> | |  Set meta directory path. Path can be absolute or relative to the project directory.|
-| --log-mode | string | error | The rule in which case the log file should be saved to file. Possible values are: never/error/always. Path can be absolute or relative to the project directory. |
-| --log-path | string | build.log | Filepath where the log file should be saved. Path can be absolute or relative to the project directory. |
-| -d, --declaration | string | platform | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
-| --log-level | string | error | The level of log information to display. Possible values are: error/warn/info/debug. |
+| --log-mode | string | `error` | The rule in which case the log file should be saved to file. Possible values are: never/error/always. Path can be absolute or relative to the project directory. |
+| --log-path | string | `build.log` | Filepath where the log file should be saved. Path can be absolute or relative to the project directory. |
+| -d, --declaration | string | `platform` | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
+| --log-level | string | `info` | The level of log information to display. Possible values are: crit/error/warn/info/debug. |
 | --skip-updates | | | Do not check available new version in npm. |
 | -e, --export | \<string\> | | List of export formats to run divided by colon. It should be in single quotation. It can be list of format names or objects including settings for export. see more details in [export-formats](./export-formats.md). |
 
