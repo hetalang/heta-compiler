@@ -167,24 +167,19 @@ Promise.all([
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
   if (builder.container.hetaErrors().length > 0) {
-    process.stdout.write('Compilation ERROR! See logs.\n');
-    logStream?.write('Compilation ERROR! See logs.\n'); 
+    message('Compilation ERROR! See logs.\n'); 
     process.exitCode = 2; // ERROR
   } else {
-    process.stdout.write('Compilation OK!\n');
-    logStream?.write('Compilation OK!\n');
+    message('Compilation OK!\n');
     process.exitCode = 0; // OK
   }
 }).catch((error) => {
   if (error.name === 'HetaLevelError') {
-    process.stdout.write('Error: ' + error.message + '\nSTOP!\n');
-    logStream?.write('Error: ' + error.message + '\nSTOP!\n');
+    message('Error: ' + error.message + '\nSTOP!\n');
     process.exitCode = 2;
   } else {
-    process.stdout.write(contactMessage + '\n');
-    process.stdout.write(error.stack);
-    logStream?.write(contactMessage + '\n');
-    logStream?.write(error.stack);
+    message(contactMessage + '\n');
+    message(error.stack);
     process.exitCode = 1; // unexpected error
   }
 }).finally(() => {
@@ -194,5 +189,9 @@ Promise.all([
       || (logMode === 'error' && process.exitCode === 0);
   toDelete && fs.removeSync(logPath);
   
-  process.exit();
+  if (logStream) {
+    logStream.end(() => process.exit());
+  } else {
+    process.exit();
+  }
 });
