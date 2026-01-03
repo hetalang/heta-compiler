@@ -37,19 +37,19 @@ class CanonicalExport extends AbstractExport {
 
     // create qArr from NS
     let qArr_ns = nsArray
-      .map(([spaceName, ns]) => ns.toQ({canon: true}));
+      .map(([spaceName, ns]) => ns.toQ({ canon: true }));
     let qArr_components = nsArray
       .map(([spaceName, ns]) => ns.toQArr(true, { useUnitsExpr: false, canon: true })) // remove core components, `toQ` options
       .flat();
     let qArr_unitDef = [...this._builder.container.unitDefStorage]
-      .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toQ({ useUnitsExpr: false }));
+      .filter(([id, unitDef]) => !unitDef.isCore)
+      .map(([id, unitDef]) => unitDef.toQ({ useUnitsExpr: false }));
     let qArr_functionDef = [...this._builder.container.functionDefStorage]
-      .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toQ());
+      .filter(([id, functionDef]) => !functionDef.isCore)
+      .map(([id, functionDef]) => functionDef.toQ());
     let qArr_scenario = [...this._builder.container.scenarioStorage]
-      .filter((x) => !x[1].isCore)
-      .map((x) => x[1].toQ());
+      .filter(([id, scenario]) => !scenario.isCore)
+      .map(([id, scenario]) => scenario.toQ());
     
     let qArr_full = [].concat(
       _sortElements(qArr_ns),
@@ -98,7 +98,7 @@ class CanonicalExport extends AbstractExport {
   }
 }
 
-// Sort Elements by action/space/id
+// Return array of elements sorted by action/space/id
 function _sortElements(array) {
   return array.sort((x, y) => {
     let keyA = x.action + '::' + (x.space || '') + '::' + (x.id || '');
@@ -107,7 +107,7 @@ function _sortElements(array) {
   });
 }
 
-// only for sorting object keys
+// Return object with sorted properties (keys)
 function _sortKeys(o) {
   if (Array.isArray(o)) return o.map(_sortKeys);
   if (o && typeof o === 'object') {

@@ -34,13 +34,20 @@ class Unit extends Array {
     return res;
   }
   toQ(options = {}){
-    return this.map((x) => {
+    let res = this.map((x) => {
       return {
         kind: x.kind,
         multiplier: x.multiplier,
         exponent: x.exponent
       };
     });
+
+    // sort by kind
+    if (options.canon) {
+      res = res.sort((a, b) => a.kind.localeCompare(b.kind));
+    }
+
+    return res;
   }
   clone(){
     let clonedUnit = new Unit();
@@ -282,10 +289,9 @@ class Unit extends Array {
     return unit;
   }
 
-  // XXX: need to clarify should we need this method or not
-  // transform to canonical array, combine same kinds
-  // differ from simplify(): return Array not Unit, do not use bound sub-units
-  toCanon(){
+  // XXX: draft canonical serialization methods
+  /*
+  toCanon() {
     let first = {kind: 'dimensionless', multiplier: 1, exponent: 1};
     let result = [first];
 
@@ -309,6 +315,7 @@ class Unit extends Array {
     // filter zero exponents
     return result.filter((x) => x.exponent !== 0);
   }
+  */
 
   /**
    * Serialize unit-object to identifier.
