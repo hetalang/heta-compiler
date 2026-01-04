@@ -17,8 +17,10 @@ const fs = require('fs-extra');
 const { slvParse } = require('slv-utils');
 const XLSX = require('xlsx');
 
-const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4/mm.xml','utf8');
-const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/mm.xml','utf8');
+const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2v4/mm.xml','utf8')
+  .replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, ''); // to skip sbml/annotation comparison
+const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/mm.xml','utf8')
+  .replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, ''); // to skip sbml/annotation comparison
 const json_correct = require('../../cases/0-hello-world/master/output.heta.json');
 const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/output.heta.yml','utf8');
 const yaml_correct = load(yaml_correct_text);
@@ -64,6 +66,8 @@ describe('Testing "cases/0-hello-world"', () => {
     let sbml_export = b.exportArray[0];
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
+    // to skip sbml/annotation comparison
+    code = code.replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, '');
     expect(code).xml.be.deep.equal(sbml_l2v4_correct);
   });
 
@@ -71,22 +75,24 @@ describe('Testing "cases/0-hello-world"', () => {
     let sbml_export = b.exportArray[1];
     let code = sbml_export.makeText(true)[0].content;
     expect(code).xml.to.to.be.valid();
+    // to skip sbml/annotation comparison
+    code = code.replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, '');
     expect(code).xml.be.deep.equal(sbml_l3v1_correct);
   });
 
   it('Run export {format: JSON}, check and compare.', () => {
     let json_export = b.exportArray[2];
     let code = json_export.makeText(true)[0].content;
-    let obj = JSON.parse(code).slice(1); // skip meta
-    expect(obj).to.be.deep.equal(json_correct.slice(1));
+    let obj = JSON.parse(code).slice(1); // skip hasMeta
+    expect(obj).to.be.deep.equal(json_correct.slice(1)); // skip hasMeta
     //console.log(obj);
   });
 
   it('Run export {format: YAML}, check and compare.', () => {
     let yaml_export = b.exportArray[3];
     let code = yaml_export.makeText(true)[0].content;
-    let obj = load(code).slice(1); // skip meta
-    expect(obj).to.be.deep.equal(yaml_correct.slice(1));
+    let obj = load(code).slice(1); // skip hasMeta
+    expect(obj).to.be.deep.equal(yaml_correct.slice(1)); // skip hasMeta
     //console.log(code);
   });
 

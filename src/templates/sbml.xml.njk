@@ -6,6 +6,11 @@
   level="2" version="4"
 {%- endblock %}
   >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">
+      {{- hasMeta | dump -}}
+    </hetalang:hasMeta> 
+  </annotation>
   <model
     id="{{ population.spaceName }}" 
     metaid="{{ population.spaceName }}"

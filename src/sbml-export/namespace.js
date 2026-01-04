@@ -1,5 +1,6 @@
 const { Namespace } = require('../namespace');
 const legalUnits = require('../legal-sbml-units');
+const pkg = require('../../package.json');
 
 Namespace.prototype.getSBMLImage = function() {
   let { logger, functionDefStorage } = this.container;
@@ -51,9 +52,20 @@ Namespace.prototype.getSBMLImage = function() {
     logger.warn(msg);
   }
 
+  let hasMeta = {
+    toolName: pkg.name,
+    toolVersion: pkg.version,
+    createdAt: new Date().toISOString(),
+    platformId: this.container._builder.id,
+    platformVersion: this.container._builder.version,
+    namespaceId: this.spaceName,
+    format: 'SBML'
+  };
+
   return {
     population: this,
     listOfUnitDefinitions,
-    listOfFunctionDefinitions
+    listOfFunctionDefinitions,
+    hasMeta
   };
 };

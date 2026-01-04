@@ -4,6 +4,9 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   level="3" version="1"
   >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.10.0","createdAt":"2026-01-04T16:25:53.988Z","platformId":"mm","namespaceId":"mm","format":"SBML"}</hetalang:hasMeta> 
+  </annotation>
   <model
     id="mm" 
     metaid="mm"

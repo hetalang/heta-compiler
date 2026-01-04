@@ -1,110 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<sbml xmlns="http://www.sbml.org/sbml/level2/version4" xmlns:xhtml="http://www.w3.org/1999/xhtml" level="2" version="4">
-  <model id="model" metaid="model" >
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.10.0","createdAt":"2026-01-04T16:51:31.897Z","platformId":"use-case","platformVersion":"v0.1.0","namespaceId":"model","format":"SBML"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="model" 
+    metaid="model"
+    >
+    
+
   
     <listOfCompartments>
       <compartment
         id="comp"
-        
         constant="false"
         size="1"
-        
         metaid="model::comp"
         >
-        
       </compartment>
     </listOfCompartments>
   
     <listOfSpecies>
       <species
         id="A"
-        
         compartment="comp"
         constant="false"
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        
         metaid="model::A"
         >
-        
       </species>
       <species
         id="B"
-        
         compartment="comp"
         constant="false"
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        
         metaid="model::B"
         >
-        
       </species>
       <species
         id="enzyme"
-        
         compartment="comp"
         constant="false"
         boundaryCondition="true"
         hasOnlySubstanceUnits="false"
         initialConcentration="1e-8"
-        
         metaid="model::enzyme"
         >
-        
       </species>
     </listOfSpecies>
   
     <listOfParameters>
       <parameter
         id="k1"
-        
         constant="true"
         value="0.001"
-        
         metaid="model::k1"
         >
-        
       </parameter>
       <parameter
         id="Km_A"
-        
         constant="true"
         value="0.8"
-        
         metaid="model::Km_A"
         >
-        
       </parameter>
-  </listOfParameters>
+    </listOfParameters>
   
     <listOfReactions>
       <reaction
         id="r1"
-        
         reversible="false"
         fast="false"
         metaid="model::r1"
         >
-        <notes><html xmlns="http://www.w3.org/1999/xhtml"><p>Mikhaelis-Menten reaction</p></html></notes>
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>Mikhaelis-Menten reaction</p>
+          </html>
+        </notes>
         <listOfReactants>
           <speciesReference species="A" stoichiometry="1"/>
-          
-          </listOfReactants>
+        </listOfReactants>
         <listOfProducts>
-          
           <speciesReference species="B" stoichiometry="1"/>
-          </listOfProducts>
+        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="enzyme"/>
-          </listOfModifiers>
+        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><apply><times/><ci>k1</ci><ci>enzyme</ci></apply><ci>A</ci></apply><apply><plus/><ci>Km_A</ci><ci>A</ci></apply></apply><ci>comp</ci></apply></math>
         </kineticLaw>
       </reaction>
-  </listOfReactions>
+    </listOfReactions>
   
   
   </model>

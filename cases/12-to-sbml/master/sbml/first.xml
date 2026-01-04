@@ -4,11 +4,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   level="2" version="4"
   >
-  <model 
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.10.0","createdAt":"2026-01-04T16:55:36.510Z","platformId":"to-sbml","platformVersion":"v0.1.0","namespaceId":"first","format":"SBML"}</hetalang:hasMeta> 
+  </annotation>
+  <model
     id="first" 
     metaid="first"
     >
     
+
+  
     <listOfCompartments>
       <compartment
         id="comp1"
@@ -19,9 +24,7 @@
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">
-            <p>This is just text. <em>italic</em>, <strong>bold</strong></p>
-
-<p>another line</p>
+            <p>This is just text. <em>italic</em>, <strong>bold</strong></p> <p>another line</p>
           </html>
         </notes>
       </compartment>
@@ -83,6 +86,41 @@
       </parameter>
     </listOfParameters>
   
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="comp1"
+        metaid="first::comp1::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="p3"
+      metaid="first::p3::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="evt1"
+      metaid="first::evt1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>12</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="s2"
+      metaid="first::s2::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
     <listOfReactions>
       <reaction
         id="r2"
@@ -122,48 +160,19 @@
       </reaction>
     </listOfReactions>
   
-  <listOfRules>
-    <assignmentRule
-      variable="p3"
-      metaid="first::p3::ode_"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>xxx</ci><ci>yyy</ci></apply></math>
-    </assignmentRule>
-    <assignmentRule
-      variable="evt1"
-      metaid="first::evt1::ode_"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>12</cn></apply></math>
-    </assignmentRule>
-    <assignmentRule
-      variable="s2"
-      metaid="first::s2::ode_"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
-    </assignmentRule>
-  
-  </listOfRules>
-  
-    <listOfInitialAssignments>
-      <initialAssignment
-        symbol="comp1"
-        metaid="first::comp1::start_"
-        >
-        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
-      </initialAssignment>
-    </listOfInitialAssignments>
-  
     <listOfEvents>
       <event
         id="sw1" metaid="first::sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
+            
             <apply>
               <geq/>
               <ci>evt1</ci>
               <cn>0</cn>
             </apply>
+            
           </math>
         </trigger>
         <listOfEventAssignments>
