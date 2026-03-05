@@ -1,7 +1,7 @@
 /**
  * To initialize a Heta module of the "json" type.
  * It includes reading and parsing file formatted as Heta-JSON,
- * see [Heta specifications](https://hetalang.github.io/#/specifications/modules?id=json-module)
+ * see [Heta specifications](https://hetalang.github.io/specifications/modules#json-module)
  * 
  * @returns {Module} Self.
  */

@@ -1,7 +1,7 @@
 /*
   Testing Heta MathExpr base function transformation
   see export-formats.md#features-support
-  see https://hetalang.github.io/#/specifications/math
+  see https://hetalang.github.io/specifications/math
 */
 
 k1 @Const = 1e-3;

@@ -9,7 +9,7 @@ See also [Migrate to v0.6](./migrate-to-v0.6), [Migrate to v0.7](./migrate-to-v0
 ## Changes in core mathematical functions
 
 The most critical changes in heta-compiler refers to list of supported mathematical functions.
-It follows the new Heta standard v0.4.5, see details [here](/specifications/math?id=list-of-functions). 
+It follows the new Heta standard v0.4.5, see details [here](/specifications/math#list-of-functions). 
 
 ## Update of units check
 

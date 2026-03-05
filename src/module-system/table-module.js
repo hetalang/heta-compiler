@@ -3,7 +3,7 @@ const { convertExcelSync } = require('../xlsx-connector');
 /**
  * To initialize a Heta module of the "table" type.
  * It includes reading and parsing of file formatted as Heta-tables,
- * see [Heta specifications](https://hetalang.github.io/#/specifications/modules?id=table-module)
+ * see [Heta specifications](https://hetalang.github.io/specifications/modules#table-module)
  * 
  * @returns {Module} Self.
  */

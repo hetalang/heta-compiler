@@ -4,7 +4,7 @@ const HetaLevelError = require('../heta-level-error');
 /**
  * To initialize a Heta module of the "heta" type.
  * It includes reading and parsing file formatted as Heta code,
- * see [Heta specifications](https://hetalang.github.io/#/specifications/modules?id=heta-module)
+ * see [Heta specifications](https://hetalang.github.io/specifications/modules#heta-module)
  * 
  * @returns {Module} Self.
  */

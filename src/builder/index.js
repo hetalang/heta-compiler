@@ -27,7 +27,7 @@ const { version } = require('../../package');
  * @property {string} _metaDirname Absolute path of the directory for storing meta files.
  *    Calculated from `declaration.options.metaDir`.
  * @property ... Other properties inherit from `declaration` object, see 
- *   [CLI references]{@link https://hetalang.github.io/hetacompiler/cli-references?id=declaration-file-format}
+ *   [CLI references]{@link https://hetalang.github.io/hetacompiler/cli-references#declaration-file-format}
  * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
  * @property {object} exportClasses the same as `_exportClasses` but bound to this builder.
  * @property {object[]} exportArray Storage for `_Export` instances.

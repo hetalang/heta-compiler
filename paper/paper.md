@@ -67,7 +67,7 @@ When the size of a model code is large it is recommended to subdivide it into mo
 
 # Features overview
 
-`Heta compiler` includes the parser of the Heta formats and supports all features of the [Heta specifications](https://hetalang.github.io/#/specifications/) of version 0.4.1. 
+`Heta compiler` includes the parser of the Heta formats and supports all features of the [Heta specifications](https://hetalang.github.io/specifications/) of version 0.4.1. 
 It was designed to support exporting to different popular modeling formats. The current version supports the following formats: 
 
 -	DBSolveOptimum
