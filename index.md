@@ -23,147 +23,6 @@ Heta compiler can be used as the framework for a QSP modeling project of any siz
 
 Metelkin, E., (2021). Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats. __Journal of Open Source Software, 6(67), 3708__, [DOI: 10.21105/joss.03708](https://doi.org/10.21105/joss.03708)
 
-## Installation
-
-### Installation in Windows
-
-[Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install or update.
-
-### Installation with Chocolatey in Windows
-
-If you have [Chocolatey](https://chocolatey.org/) installed, you can install Heta compiler using the following commands:
-```powershell
-choco install heta-compiler
-```
-
-Or install a specific version:
-```
-choco install heta-compiler --version=0.9.5
-```
-
-Update Heta compiler
-```powershell
-choco upgrade heta-compiler
-```
-
-Uninstall Heta compiler
-```powershell
-choco uninstall heta-compiler
-```
-
-### Installation in Ubuntu/Debian Linux
-
-Install/Update as .deb package
-```bash
-wget https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-x64.deb
-sudo dpkg -i heta-compiler-x64.deb
-```
-
-Uninstall .deb package
-```bash
-sudo dpkg -r heta-compiler
-```
-
-### Installation in other Linux systems
-
-Install/Update for all users (requires sudo privileges)
-```bash
-sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64 && sudo chmod +x /usr/local/bin/heta
-```
-
-Uninstall for all users
-```bash
-sudo rm /usr/local/bin/heta
-```
-
-Install/Update for single user without sudo previleges
-```bash
-mkdir -p ~/bin
-wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64
-chmod +x ~/bin/heta
-echo "export PATH=$PATH:~/bin" >> ~/.bashrc
-source ~/.bashrc
-```
-
-Uninstall for single user
-```bash
-rm ~/bin/heta
-```
-
-### Installation with Homebrew in MacOS
-
-If you have [Homebrew installed](https://brew.sh/), you can install Heta compiler using the following commands:
-```bash
-brew tap hetalang/heta-compiler
-brew install heta-compiler
-```
-
-Update Heta compiler
-```bash
-brew update
-brew upgrade heta-compiler
-```
-
-Uninstall Heta compiler
-```bash
-brew uninstall heta-compiler
-```
-
-### Installation in Macos
-
-Install/Update for all users (requires sudo privileges)
-```bash
-sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
-```
-
-Uninstall for all users
-```bash
-sudo rm /usr/local/bin/heta
-```
-
-Install/Update for single user without sudo previleges
-```bash
-mkdir -p ~/bin
-wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64
-chmod +x ~/bin/heta
-echo "export PATH=$PATH:~/bin" >> ~/.bashrc
-source ~/.bashrc
-```
-
-Uninstall for single user
-```bash
-rm ~/bin/heta
-```
-
-Troubleshooting:
-
-In some cases you may need to install Rosetta to run the tool on MacOS. To install Rosetta, run the following command in the terminal:
-
-```bash
-softwareupdate --install-rosetta
-```
-
-### Installation in NodeJS environment
-
-[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently the recommended version is **NodeJS v16 and newer**, but NodeJS v14 is also supported.
-
-The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.
-
-1. Check Node version.
-    ```bash
-    node -v
-    # must be v14.0.0 or newer
-    ```
-
-2. The latest stable version of Heta compiler can be installed from npm
-    ```bash
-    npm i -g heta-compiler
-    ```
-    **OR** The development version can be installed directly from GitHub
-    ```bash
-    npm i -g git+https://github.com/hetalang/heta-compiler.git
-    ```
-
 ## Supported tools
 
 >for more information see [export formats](./export-formats)
@@ -216,7 +75,7 @@ The following is the example where we create a Heta module and compile it into S
 
 3. See results of compilation in directory /path/to/my-platform/**dist**.
 
->If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](/specifications/actions?id=include).
+>If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](/specifications/actions#include).
 
 ## Creating a Heta platform template
 
@@ -225,7 +84,7 @@ Heta compiler provides the `heta init` tool for creating a such a modeling platf
 
 The tool creates a draft platform including supplementary files and directories, such as the `platform.js` file, and files for the __git__ repository.
 
->For more information see the [CLI references](./cli-references?id=quotheta-initquot-command) documentation.
+>For more information see the [CLI references](./cli-references#heta-init-command) documentation.
 
 ```
 heta init
@@ -306,4 +165,4 @@ The original author of the project is [Evgeny Metelkin](https://metelkin.me). Th
 
 - In 2020 the tool was renamed to **Heta compiler** and published as a Free Open Source project on [GitHub](https://GitHub.com/hetalang/heta-compiler) under Apache 2.0 license. Since then Heta compiler has been developed in the framework of **Heta project**.
 
-Copyright 2019-2025, Heta project
+Copyright 2019-2026, Heta project
