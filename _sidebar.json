@@ -4,10 +4,11 @@
         "items": [
             { "text": "Intro", "link": "/hetacompiler/" },
             { "text": "Installation", "link": "/hetacompiler/installation" },
+            { "text": "Console commands", "link": "/hetacompiler/cli-references" },
+            { "text": "Platform declaration file", "link": "/hetacompiler/platform-file" },
             { "text": "Export formats", "link": "/hetacompiler/export-formats" },
-            { "text": "CLI references", "link": "/hetacompiler/cli-references" },
-            { "text": "qsp-functions.heta", "link": "/hetacompiler/qsp-functions.heta" },
             { "text": "qsp-units.heta", "link": "/hetacompiler/qsp-units.heta" },
+            { "text": "qsp-functions.heta", "link": "/hetacompiler/qsp-functions.heta" },
             { 
                 "text": "Migration guides",
                 "items": [

@@ -1,54 +1,26 @@
-[![GitHub issues](https://img.shields.io/github/issues/hetalang/heta-compiler.svg)](https://GitHub.com/hetalang/heta-compiler/issues/)
-[![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)
-[![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
+[![GitHub issues](https://img.shields.io/github/issues/hetalang/heta-compiler.svg)](https://GitHub.com/hetalang/heta-compiler/issues/)[![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)[![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
 
 # Heta compiler
 
-**Heta compiler** is a software tool for the compilation of Heta-based QSP modeling platforms. Heta compiler can also be used as a JavaScript/Node package to develop modeling tools.
+**Heta compiler** is a tool for building QSP modeling platforms and compiling [Heta models](/) into different simulation formats.
 
-## Introduction
+> See also [Heta online](https://heta-online.insysbio.com/) - a web application based on Heta compiler
 
-**Heta compiler** is a tool for the development of Quantitative Systems Pharmacology and Systems Biology platforms. It allows combining modules written in different formats like: [Heta language code](/specifications/), Excel sheets, [JSON](https://en.wikipedia.org/wiki/JSON)/[YAML](https://en.wikipedia.org/wiki/YAML) formatted structures, [SBML](https://sbml.org/) and transforming them into the dynamical model/models of different formats.
+## What it does
 
-Quantitative Systems Pharmacology (QSP) is a discipline that uses mathematical computer models to characterize biological systems, disease processes, and drug pharmacology. QSP typically deals with mechanism-based dynamical models described by ODE systems. Sometimes the modeling systems include hundreds or thousands of components and are developed by a research group involving people with different expertise.
-
-Heta compiler can be used as the framework for a QSP modeling project of any size and complexity. It can be easily integrated with existed infrastructure, workflows or used as a part of the CI/CD strategy. The pre-formulated requirements of Heta compiler are:
-
-- storing the QSP models and data in integrated infrastructure;
-- support iterative modeling platform updates (continuous development approach);
-- support of models written in human-readable text and table formats;
-- export models and data to different popular formats on the fly.
+- checks syntax and semantics of Heta code
+- combines model modules from multiple formats
+- resolves dependencies and builds a complete model
+- exports models to multiple simulation formats
+- integrates with development workflows and CI pipelines
 
 ## How to cite
 
 Metelkin, E., (2021). Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats. __Journal of Open Source Software, 6(67), 3708__, [DOI: 10.21105/joss.03708](https://doi.org/10.21105/joss.03708)
 
-## Supported tools
+## Quick start
 
->for more information see [export formats](./export-formats)
-
-Heta compiler was created to support exporting to different popular modeling and analysis formats.
-One of the main development effort is to extend a list of supporting formats and allow people to have the same results working in different tools.
-The current version supports the following formats:
-
-- DBSolveOptimum .SLV files [link](https://insysbio.com/en/software/db-solve-optimum)
-- SBML L2V4 [link](https://sbml.org/)
-- mrgsolve .CPP files [link](https://mrgsolve.github.io/user_guide/)
-- Simbiology/Matlab .M files [link](https://www.mathworks.com/products/simbiology.html)
-- Matlab describing ODEs file [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
-- Julia format
-- JSON formatted file
-- YAML formatted file
-- Excel sheets
-- Dot language files (Graphviz) [link](https://graphviz.org/)
-
-## Usage of command line interface
-
-Heta compiler comes with a built-in CLI which can be used to compile files from the command line.
-
->To learn more about options, see [CLI references](./cli-references)
-
-The following is the example where we create a Heta module and compile it into SBML format. For example you want to create platform in directory "/path/to/my-platform" (target directory)
+Create platform in directory "/path/to/my-platform" (target directory)
 
 1. Create Heta file: *index.heta* in the target directory with the content:
     ```heta
@@ -60,58 +32,40 @@ The following is the example where we create a Heta module and compile it into S
     s1 .= 10;
     r1 := k1*s1*comp1;
     k1 @Const = 1e-2;
-
-    #export {
-        format: SBML,
-        filepath: model
-    };
     ```
 
-2. Be sure you are in the target directory, use command `cd /path/to/my-platform` or similar if not. Compile the platform:
+2. Compile the code into SBML format using the command line tool:
     ```bash
-    heta build
+    heta build --export=SBML
     ```
-    Heta builder takes "index.heta" file (module) as default, reads it and transforms to SBML file as declared in *index.heta*.
 
-3. See results of compilation in directory /path/to/my-platform/**dist**.
+3. The compiled model will appear in directory: /path/to/my-platform/**dist**.
 
->If you would like to load the platform form several files using `include` statement inside "index.heta", see [specifications](/specifications/actions#include).
+## Supported export formats
 
-## Creating a Heta platform template
+- SBML L2/L3 [link](https://sbml.org/)
+- Simbiology [link](https://www.mathworks.com/products/simbiology.html)
+- DBSolveOptimum [link](https://insysbio.com/en/software/db-solve-optimum)
+- mrgsolve [link](https://mrgsolve.github.io/user_guide/)
+- Matlab [link](https://www.mathworks.com/help/matlab/ordinary-differential-equations.html)
+- Julia [link](https://julialang.org/)
+- DOT / Graphviz [link](https://graphviz.org/)
+- JSON / YAML
+- XLSX / CSV / TSV
+- Model summary reports
 
-Platform can be structured using a prepared template of folders and pre-constructed embedded files.
-Heta compiler provides the `heta init` tool for creating a such a modeling platform template.
+## How to use
 
-The tool creates a draft platform including supplementary files and directories, such as the `platform.js` file, and files for the __git__ repository.
+- [Installation](./installation)
+- [Console commands](./cli-references)
+- [Platform declaration file](./platform-file)
+- [Export formats](./export-formats)
+- [qsp-units.heta file](./qsp-units.heta)
+- [qsp-functions.heta file](./qsp-functions.heta)
 
->For more information see the [CLI references](./cli-references#heta-init-command) documentation.
+## JavaScript API
 
-```
-heta init
-$ heta init
-Creating a template platform in directory: "Y:\draft"...
-? Platform id (template) draft
-? Platform id draft
-? Platform notes (platform notes)
-? Platform notes platform notes
-? Platform version (v0.1.0)
-? Platform version v0.1.0
-? Platform license (UNLICENSED)
-? Platform license UNLICENSED
-? Set options (y/N)
-? Set options No
-? Select file types (Use arrow keys)
-> heta
-  heta+xlsx
-  heta+xlsx extended
-  xlsx
-  json
-  yaml
-```
-
-## Usage in NodeJS packages
-
-Heta compiler has been written in NodeJS environment and can be used as a package for browser or server-side tools and applications.
+Heta compiler has been written in Node.js environment and can be used as a package for browser or server-side tools.
 
 ```javascript
 const { Builder } = require('./src');
@@ -122,7 +76,7 @@ let qArr = [
     { class: 'Compartment', id: 'comp1', assignments: {start_: '1'} },
     { class: 'Species', id: 's1', compartment: 'comp1', assignments: {start_: '10'} },
     { class: 'Reaction', id: 'r1', actors: 's1 =>', assignments: {ode_: 'k1*s1*comp1'} },
-    { class: 'Const', id: 'r1', actors: 's1 =>', num: 1e-2 }
+    { class: 'Const', id: 'k1', num: 1e-2 }
 ];
 
 // compilation
@@ -139,17 +93,11 @@ console.log(sbmlOutput[0].content);
 console.log(builder.container.hetaErrors());
 ```
 
-## Getting help
+## Support and contributing
 
- - Read Heta documentation on <https://hetalang.github.io/>
- - Use [Gitter Chatroom](https://gitter.im/hetalang/community?utm_source=readme).
- - Use [Issue Tracker](https://github.com/hetalang/heta-compiler/issues)
-
-## Contribute
-
+- Use [Issue Tracker](https://github.com/hetalang/heta-compiler/issues)
+- Heta project documentation: <https://hetalang.github.io/>
 - [Source Code](https://github.com/hetalang/heta-compiler)
-- [Issue Tracker](https://github.com/hetalang/heta-compiler/issues)
-- See also contributing in [Heta project](/contributing)
 
 ## License
 
@@ -157,7 +105,7 @@ Licensed under the Apache License, Version 2.0. See the [LICENSE](https://raw.gi
 
 ## Authors and history
 
-The original author of the project is [Evgeny Metelkin](https://metelkin.me). The tool was inspired by the idea that large-scale dynamical systems used in QSP and SB require a specific tool that allows writing model code in unified formats and transforming them depending on one's needs: to database-like format or ODEs. Working with large models should be as easy as with small ones.
+The original author of the project is [Evgeny Metelkin](https://metelkin.me). The tool was inspired by the idea that large-scale dynamical systems used in QSP and SB require a specific tool that allows writing model code in unified formats and transforming them depending on the user's needs: to database-like format or ODEs. Working with large models should be as easy as with small ones.
 
 - The initial prototype 0.1.x was developed in 2017 and named as **qs3p** (quantitative systems pharmacology programming platform). It was used in several [InSysBio](https://insysbio.com) projects including [IRT](https://irt.insysbio.com/) and **Alzheimer disease consortium**.
 
