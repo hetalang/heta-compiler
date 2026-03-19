@@ -85,7 +85,7 @@ builder.container
     .knitMany();
 
 // export to SBML
-let sbmlExport = new builder.exportClasses.SBML();
+let sbmlExport = new builder.exportClasses['sbml']();
 let sbmlOutput = sbmlExport.makeText();
 console.log(sbmlOutput[0].content);
 
