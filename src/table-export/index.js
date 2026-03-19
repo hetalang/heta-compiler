@@ -81,7 +81,7 @@ class TableExport extends AbstractExport {
     return 'table';
   }
   get format(){
-    return 'Table';
+    return 'table';
   }
   makeSheet(){
     // filtered namespaces
@@ -128,7 +128,7 @@ class TableExport extends AbstractExport {
       createdAt: new Date().toISOString(),
       platformId: this._builder.id,
       platformVersion: this._builder.version,
-      format: 'Table',
+      format: 'table',
     }].concat(fArr);
 
     // split qArr to several sheets

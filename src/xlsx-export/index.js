@@ -13,7 +13,7 @@ class XLSXExport extends TableExport {
     return 'xlsx';
   }
   get format() {
-    return 'XLSX';
+    return 'xlsx';
   }
 }
 

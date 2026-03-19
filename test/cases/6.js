@@ -25,7 +25,7 @@ describe('Testing "cases/6-import"', () => {
         source: 'src/index.heta'
       },
       export: [
-        {format: 'SBML', spaceFilter: 'model'},
+        {format: 'sbml', spaceFilter: 'model'},
       ]
     };
     process.chdir('cases/6-import');
@@ -50,7 +50,7 @@ describe('Testing "cases/6-import"', () => {
   });
 
   it('Run @JSONExport, check and compare.', () => {
-    const JSONExport = b.exportClasses.JSON;
+    const JSONExport = b.exportClasses['json'];
     let json_export = new JSONExport({spaceFilter: 'model', filepath: 'xxx'});
     expect(json_export).not.to.have.property('errored', true);
 

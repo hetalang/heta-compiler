@@ -10,7 +10,7 @@ class AnotherXLSXExport extends XLSXExport {
     return 'AnotherXLSXExport';
   }
   get format(){
-    return 'Another';
+    return 'anotherxlsx';
   }
   get defaultFilepath() {
     return 'another-xlsx';

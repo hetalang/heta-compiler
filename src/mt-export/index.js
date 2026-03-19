@@ -24,7 +24,7 @@ class MTExport extends AbstractExport {
     return 'MTExport';
   }
   get format(){
-    return 'MT';
+    return 'mt';
   }
   static get validate(){
     return ajv.compile(schema);

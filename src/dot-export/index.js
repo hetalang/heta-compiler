@@ -22,7 +22,7 @@ class DotExport extends AbstractExport {
     return 'DotExport';
   }
   get format(){
-    return 'Dot';
+    return 'dot';
   }
   get defaultFilepath() {
     return 'dot';

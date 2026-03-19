@@ -69,7 +69,7 @@ class DBSolveExport extends AbstractExport {
     return 'DBSolveExport';
   }
   get format() {
-    return 'DBSolve';
+    return 'dbsolve';
   }
   static get validate() {
     return ajv.compile(schema);

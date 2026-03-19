@@ -25,7 +25,7 @@ class CanonicalExport extends AbstractExport {
     return 'canonical';
   }
   get format(){
-    return 'Canonical';
+    return 'canonical';
   }
   static get validate(){
     return ajv.compile(schema);

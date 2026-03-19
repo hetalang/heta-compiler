@@ -22,7 +22,7 @@ class SummaryExport extends AbstractExport {
     return 'SummaryExport';
   }
   get format(){
-    return 'Summary';
+    return 'summary';
   }
   get defaultFilepath() {
     return 'summary';

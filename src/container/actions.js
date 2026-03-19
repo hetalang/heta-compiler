@@ -13,7 +13,7 @@ const reservedWords = [
 /**
  * Creates one of inheritors of `AbstractExport` and put it in `container.exportArray`.
  * The inheritor depends on `q.format` property.
- * For example `{id: 'output', format: 'JSON', ...}` creates the object of `JSONExport` type.
+ * For example `{id: 'output', format: 'json', ...}` creates the object of `JSONExport` type.
  * 
  * @param {object} q The `export` object in JS object format.
  * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.

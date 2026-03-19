@@ -28,7 +28,7 @@ class SimbioExport extends AbstractExport {
     return 'simbio';
   }
   get format(){
-    return 'Simbio';
+    return 'simbio';
   }
   get requireConcrete() {
     return true;

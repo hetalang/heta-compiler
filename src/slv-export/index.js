@@ -39,7 +39,7 @@ class SLVExport extends AbstractExport{
     return 'slv';
   }
   get format(){
-    return 'SLV';
+    return 'slv';
   }
   get requireConcrete() {
     return true;

@@ -33,7 +33,7 @@ class SBMLExport extends AbstractExport {
     return 'sbml';
   }
   get format(){
-    return 'SBML';
+    return 'sbml';
   }
   static get validate(){
     return ajv.compile(schema);

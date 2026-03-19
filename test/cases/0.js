@@ -44,14 +44,14 @@ describe('Testing "cases/0-hello-world"', () => {
         source: 'src/index.heta'
       },
       export: [
-        {format: 'SBML', version: 'L2V4', filepath: 'mm_sbml_l2v4', spaceFilter: '^mm$'},
-        {format: 'SBML', version: 'L3V1', filepath: 'mm_sbml_l3v1', spaceFilter: '^mm$'},
-        {format: 'JSON', spaceFilter: '^mm$', useUnitsExpr: true},
-        {format: 'YAML', spaceFilter: '^mm$', useUnitsExpr: true},
-        {format: 'SLV', version: '25', spaceFilter: '^mm$'},
-        {format: 'XLSX', splitByClass: true, spaceFilter: '^mm$'},
-        {format: 'Mrgsolve', spaceFilter: '^mm$'},
-        {format: 'Julia', spaceFilter: '^mm$'}]
+        {format: 'sbml', version: 'L2V4', filepath: 'mm_sbml_l2v4', spaceFilter: '^mm$'},
+        {format: 'sbml', version: 'L3V1', filepath: 'mm_sbml_l3v1', spaceFilter: '^mm$'},
+        {format: 'json', spaceFilter: '^mm$', useUnitsExpr: true},
+        {format: 'yaml', spaceFilter: '^mm$', useUnitsExpr: true},
+        {format: 'slv', version: '25', spaceFilter: '^mm$'},
+        {format: 'xlsx', splitByClass: true, spaceFilter: '^mm$'},
+        {format: 'mrgsolve', spaceFilter: '^mm$'},
+        {format: 'julia', spaceFilter: '^mm$'}]
     };
     process.chdir('cases/0-hello-world');
     b = new Builder(declaration, fs.readFileSync, () => {});

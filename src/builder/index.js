@@ -97,9 +97,11 @@ class Builder {
         logger.error(`Export item property "filepath" must be relative, got ${JSON.stringify(exportItem)}.`, {type: 'BuilderError'});
       }
 
+      // convert format to lower case to make it case insensitive
+      let exportFormat = exportItem.format.toLowerCase();
       // check if format is supported
-      let ExportClass = this.exportClasses.hasOwnProperty(exportItem.format) 
-        && this.exportClasses[exportItem.format];
+      let ExportClass = this.exportClasses.hasOwnProperty(exportFormat) 
+        && this.exportClasses[exportFormat];
       if (ExportClass) {
         this.exportArray.push(new ExportClass(exportItem));
       } else {
@@ -157,7 +159,7 @@ class Builder {
 
       // 3.5 Get platform hash
       // creates temporal canonical representation and make hash
-      let canonicalItem = new this.exportClasses['Canonical']({});
+      let canonicalItem = new this.exportClasses['canonical']({});
       let canonicalFull = canonicalItem.makeFullObject();
       this.logger.info(`Platform hash: ${canonicalFull[0].hashSum}`);
 

@@ -59,7 +59,7 @@ Namespace.prototype.getSBMLImage = function() {
     platformId: this.container._builder.id,
     platformVersion: this.container._builder.version,
     namespaceId: this.spaceName,
-    format: 'SBML'
+    format: 'sbml'
   };
 
   return {

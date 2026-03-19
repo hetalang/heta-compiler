@@ -23,7 +23,7 @@ class JuliaExport extends AbstractExport {
     return 'JuliaExport';
   }
   get format(){
-    return 'Julia';
+    return 'julia';
   }
   static get validate(){
     return ajv.compile(schema);

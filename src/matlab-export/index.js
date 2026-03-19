@@ -26,7 +26,7 @@ class MatlabExport extends AbstractExport {
     return 'matlab';
   }
   get format(){
-    return 'Matlab';
+    return 'matlab';
   }
   static get validate(){
     return ajv.compile(schema);

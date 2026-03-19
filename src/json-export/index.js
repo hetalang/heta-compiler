@@ -30,7 +30,7 @@ class JSONExport extends AbstractExport {
     return 'json';
   }
   get format(){
-    return 'JSON';
+    return 'json';
   }
   static get validate(){
     return ajv.compile(schema);
@@ -72,7 +72,7 @@ class JSONExport extends AbstractExport {
       createdAt: new Date().toISOString(),
       platformId: this._builder.id,
       platformVersion: this._builder.version,
-      format: 'JSON'
+      format: 'json'
     }].concat(qArr);
 
     return [{

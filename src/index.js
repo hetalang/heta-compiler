@@ -35,24 +35,25 @@ global.compiledTemplates = {
   'mt-model.jl.njk': nunjucksEnv.getTemplate('mt-model.jl.njk'),
 };
 
+// case-insensitive export names
 Builder._exportClasses = {
-  DBSolve: require('./dbsolve-export'),
-  YAML: require('./yaml-export'),
-  JSON: require('./json-export'),
-  Canonical: require('./canonical-export'),
-  HetaCode: require('./heta-code-export'),
-  SBML: require('./sbml-export'),
-  SLV: require('./slv-export'),
-  Mrgsolve: require('./mrgsolve-export'),
-  Simbio: require('./simbio-export'),
-  Table: require('./table-export'),
-  XLSX: require('./xlsx-export'),
-  AnotherXLSX: require('./another-xlsx-export'),
-  Matlab: require('./matlab-export'),
-  Julia: require('./julia-export'),
-  Dot: require('./dot-export'),
-  Summary: require('./summary-export'),
-  MT: require('./mt-export'),
+  dbsolve: require('./dbsolve-export'),
+  yaml: require('./yaml-export'),
+  json: require('./json-export'),
+  canonical: require('./canonical-export'),
+  hetacode: require('./heta-code-export'),
+  sbml: require('./sbml-export'),
+  slv: require('./slv-export'),
+  mrgsolve: require('./mrgsolve-export'),
+  simbio: require('./simbio-export'),
+  table: require('./table-export'),
+  xlsx: require('./xlsx-export'),
+  anotherxlsx: require('./another-xlsx-export'),
+  matlab: require('./matlab-export'),
+  julia: require('./julia-export'),
+  dot: require('./dot-export'),
+  summary: require('./summary-export'),
+  mt: require('./mt-export'),
 };
 
 module.exports = {

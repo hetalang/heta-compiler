@@ -31,7 +31,7 @@ class YAMLExport extends AbstractExport {
     return 'yaml';
   }
   get format(){
-    return 'YAML';
+    return 'yaml';
   }
   makeObject() {
     // filtered namespaces
@@ -70,7 +70,7 @@ class YAMLExport extends AbstractExport {
       createdAt: new Date().toISOString(),
       platformId: this._builder.id,
       platformVersion: this._builder.version,
-      format: 'YAML'
+      format: 'yaml'
     }].concat(qArr);
 
     let order = ['action', 'space', 'id', 'class', 'title', 'notes', 'tags', 'aux'];

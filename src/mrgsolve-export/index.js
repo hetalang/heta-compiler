@@ -25,7 +25,7 @@ class MrgsolveExport extends AbstractExport {
     return 'mrgsolve';
   }
   get format(){
-    return 'Mrgsolve';
+    return 'mrgsolve';
   }
   static get validate(){
     return ajv.compile(schema);
