@@ -7,6 +7,16 @@ const { Namespace } = require('../namespace');
  * @return {undefined}
  */
 Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, version) {
+  /* 
+    Conventions:
+    X              // X = X_shift__ + X_offset__ 
+                   // or X = (X_shift_amt__ + X_offset__) / compartment
+                   // for all rules, static amounts
+    X_amt__        // X * compartment (for static concentrations)
+    X_offset__     // offset calculated at 0 time, always amount
+    X_shift__      // X - X_offset__ (for dynamic amounts)
+    X_shift_amt__  // X * compartment - X_offset__ (for dynamic concentrations)
+  */
   let { logger } = this.container;
 
   // push active processes
@@ -18,6 +28,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
           return !actor.targetObj.boundary && !actor.targetObj.isRule;
         });
     });
+
   // push non boundary ode variables which are mentioned in processes
   let dynamicRecords = this
     .selectByInstanceOf('Record')
@@ -48,7 +59,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
   // create and sort expressions for RHS (rules)
   let ruleRecords = this
     .sortExpressionsByContext('ode_', true)
-    .filter((x) => x.isDynamic || x.isRule );
+    .filter((x) => x.instanceOf('Record')); //.filter((x) => x.isDynamic || x.isRule );
 
   // create TimeEvents
   let timeEvents = [];
@@ -63,7 +74,8 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
       this
         .selectRecordsByContext(switcher.id)
         .forEach((record) => { // scan for records in switch
-          let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+          let needCompartment = !record.isRule && record.instanceOf('Species') && !record.isAmount;
+          let expr = needCompartment
             ? record.getAssignment(switcher.id).multiply(record.compartment)
             : record.getAssignment(switcher.id);
 
@@ -74,7 +86,8 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
             target: record.id + (record.isDynamic ? '_' : ''),
             multiply: 0,
             add: record.id + '_' + switcher.id + '_',
-            expr: expr.toSLVString(logger, powTransform)
+            exprString: expr.toSLVString(logger, powTransform),
+            targetObj: record,
           };
           timeEvents.push(evt);
         });
@@ -107,13 +120,13 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
       let assignments = this
         .selectRecordsByContext(switcher.id)
         .map((record) => {
-          let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+          let expr = !record.isRule && record.instanceOf('Species') && !record.isAmount
             ? record.getAssignment(switcher.id).multiply(record.compartment)
             : record.getAssignment(switcher.id);
 
           return {
             targetObj: record,
-            expr: expr
+            exprString: expr.toSLVString(logger, powTransform)
           };
         });
         
@@ -127,20 +140,20 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
   let continuousEvents = this
     .selectByClassName('CSwitcher')
     .map((switcher) => {
-      // CSWitcher is not supported in DBsolve
+      // CSWitcher is not fully supported in DBsolve
       let msg = `DBSolve does not support CSwitcher, got: "${switcher.id}. It will be transformed to DSwitcher"`;
       logger.warn(msg, {type: 'ExportWarning'});
 
       let assignments = this
         .selectRecordsByContext(switcher.id)
         .map((record) => {
-          let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
+          let expr = !record.isRule && record.instanceOf('Species') && !record.isAmount
             ? record.getAssignment(switcher.id).multiply(record.compartment)
             : record.getAssignment(switcher.id);
 
           return {
             targetObj: record,
-            expr: expr
+            exprString: expr.toSLVString(logger, powTransform)
           };
         });
         
@@ -166,7 +179,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
     ruleRecords,
     processes,
     matrix,
-    powTransform: powTransform,
+    powTransform,
     version: version,
     timeEvents,
     discreteEvents,

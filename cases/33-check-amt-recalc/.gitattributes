@@ -1,0 +1,34 @@
+### Basic .gitattributes for a Heta repo.
+# Note that binary is a macro for -text -diff.
+
+* text=auto
+
+# main files
+# to have heta files in linux style line endings
+*.heta text eol=lf
+*.xlsx binary
+
+# auxilary files
+*.bash text eol=lf
+*.sh text eol=lf
+*.xlsm binary
+*.xls binary
+*.pptx binary
+*.ppt binary
+
+# code
+*.md text
+*.m text
+# -diff
+*.slv text eol=crlf diff=slv
+*.dat text eol=crlf diff=dat
+*.cpp text
+*.svg text diff=xml
+*.xml text diff=xml
+*.sbml text diff=xml
+
+# LFS (large files)
+large/* filter=lfs diff=lfs merge=lfs -text
+literature/* filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.rar filter=lfs diff=lfs merge=lfs -text

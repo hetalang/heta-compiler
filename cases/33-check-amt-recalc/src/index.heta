@@ -1,0 +1,35 @@
+c1 @Compartment .= 5.5;
+
+A @Species {compartment: c1, isAmount: false} .= 2.0;
+B @Species {compartment: c1} .= 0.0;
+C @Species {compartment: c1} .= 0.0;
+
+r1 @Reaction {actors: A -> B} := k1 * A * c1;
+r2 @Reaction {actors: B -> C} := k2 * B * c1;
+
+k1 @Const = 0.1;
+k2 @Const = 0.05;
+
+// new part
+D @Species {compartment: c1} .= 0.0;
+r3 @Reaction {actors: A -> D } := k3 * A * c1;
+k3 @Const = 0.02;
+
+// event
+sw1 @TimeSwitcher { start: 24, period: 24 };
+sw2 @CSwitcher { trigger: "t-48" };
+A [sw1]= A + 1.0 / c1;
+A [sw2]= A + 1.0 / c1;
+
+x1 @Record .= 10;
+x1 [sw1]= x1 + 1;
+x1 [sw2]= x1 + 1;   
+
+F @Species {compartment: c1} := 10;
+F [sw1]= F + 1.0/c1;
+F [sw2]= F + 1.0/c1;
+
+var1 @Record .= 5;
+pr1 @Process {actors: var1=>} := 1e-4 * var1;
+var1 [sw1]= var1 + 1;
+var1 [sw2]= var1 + 1;

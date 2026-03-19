@@ -278,7 +278,7 @@ FIT Title for Y Axes
 {% endfor -%}
 >Compound Names
 {% for compound in dynamicRecords -%}
-#{{ compound.id }}_
+#{{ compound.id }}{{'_amt' if compound.instanceOf('Species') and not compound.isAmount else '' }}_shift__
 {% endfor -%}
 >Mechanism Rate Low expression -Kinetic or Elementary constants
 #0 0
@@ -440,9 +440,13 @@ if(t == 0){
     {{ record.id }} = {{ record.getAssignment('start_').toSLVString(logger, powTransform) }};
     {%- endif %}
     {%- endfor %}
-    // calculate initial amounts
+    // calculate offsets for dynamic 
     {%- for dynamic in dynamicRecords %}
-    {{ dynamic.id }}_start__ = {{ dynamic.id }}{{ ' * ' + dynamic.compartment if dynamic.instanceOf('Species') and not dynamic.isAmount }};
+    {{ dynamic.id }}_offset__ = {{ dynamic.id }}{{ ' * ' + dynamic.compartment if dynamic.instanceOf('Species') and not dynamic.isAmount }};
+    {%- endfor %}
+    // calculate amount from concentrations
+    {%- for spec in species | exclude2('isDynamic', true) | exclude2('isRule', true) %}
+    {{ spec.id }}_amt__ = {{ spec.id }} * {{ spec.compartment }};
     {%- endfor %}
 }else{}
 
@@ -457,8 +461,12 @@ if(t == 0){
 {%- endif %}
 {% if record.isRule -%}
 {{ record.id }} = {{ record.getAssignment('ode_').toSLVString(logger, powTransform) }};
+{%- elif record.isDynamic and record.instanceOf('Species') and not record.isAmount -%}
+{{ record.id }} = ({{ record.id }}_amt_shift__ + {{ record.id }}_offset__) / {{ record.compartment }};
 {%- elif record.isDynamic -%}
-{{ record.id }} = ({{ record.id }}_ + {{ record.id }}_start__){{ ' / '+ record.compartment if record.instanceOf('Species') and not record.isAmount}};
+{{ record.id }} = {{ record.id }}_shift__ + {{ record.id }}_offset__;
+{% elif record.instanceOf('Species') and not record.isAmount -%}
+{{ record.id }} = {{ record.id }}_amt__ / {{ record.compartment }};
 {%- endif -%}
 {%- endfor %}
 
@@ -471,7 +479,15 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 
 {{ '//! Time events' if timeEvents | length > 0 }}
 {%- for event in timeEvents | exclude2("isStop", true) %}
-{{ event.add }} = {{ event.expr }} - {{ event.target }}start__;
+{%- if event.targetObj.isDynamic and event.targetObj.instanceOf('Species') and not event.targetObj.isAmount %}
+{{ event.add }} = {{ event.exprString }} - {{ event.targetObj.id}} * {{ event.targetObj.compartment }} + {{ event.targetObj.id }}_offset__;
+{%- elif event.targetObj.isDynamic %}
+{{ event.add }} = {{ event.exprString }} - {{ event.targetObj.id }} + {{ event.targetObj.id }}_offset__;
+{%- elif event.targetObj.instanceOf('Species') and not event.targetObj.isAmount %}
+{{ event.add }} = {{ event.exprString }};
+{%- else %}
+{{ event.add }} = {{ event.exprString }};
+{%- endif %}
 {%- endfor %}
 {%- endblock %}
 {{ '//! Discrete events' if discreteEvents | length > 0 }}
@@ -480,12 +496,14 @@ if({{ evt.switcher.id }}_ > 0){
 if({{ evt.switcher.id }}_down_ == 0){
   if({{ evt.switcher.trigger.toSLVString(logger, powTransform) if evt.switcher.trigger is defined }}){
     {%- for assign in evt.assignments %}
-    {%- if assign.targetObj.isDynamic %}
-    {{ assign.targetObj.id }}_start__ = {{ assign.expr.toSLVString(logger, powTransform) -}} 
-      - ({{ assign.targetObj.id }}){{ ' * '+ assign.targetObj.compartment if assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount -}}
-      + {{ assign.targetObj.id }}_start__;
+    {%- if assign.targetObj.isDynamic and assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
+    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} * {{ assign.targetObj.compartment }} + {{ assign.targetObj.id }}_offset__;
+    {%- elif assign.targetObj.isDynamic %}
+    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} + {{ assign.targetObj.id }}_offset__;
+    {%- elif assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
+    {{ assign.targetObj.id }}_amt__ = {{ assign.exprString }};
     {%- else %}
-    {{ assign.targetObj.id }} = {{ assign.expr.toSLVString(logger, powTransform) }};
+    {{ assign.targetObj.id }} = {{ assign.exprString }};
     {%- endif %}
     {%- endfor %}
     {{ evt.switcher.id }}_down_ = 1;
@@ -503,12 +521,14 @@ if({{ evt.switcher.id }}_ > 0){
 if({{ evt.switcher.id }}_down_ == 0){
   if({{ evt.switcher.trigger.toSLVString(logger, powTransform) + '>=0' if evt.switcher.trigger is defined }}){
     {%- for assign in evt.assignments %}
-    {%- if assign.targetObj.isDynamic %}
-    {{ assign.targetObj.id }}_start__ = {{ assign.expr.toSLVString(logger, powTransform) -}} 
-      - ({{ assign.targetObj.id }}){{ ' * '+ assign.targetObj.compartment if assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount -}}
-      + {{ assign.targetObj.id }}_start__;
+    {%- if assign.targetObj.isDynamic and assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
+    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} * {{ assign.targetObj.compartment }} + {{ assign.targetObj.id }}_offset__;
+    {%- elif assign.targetObj.isDynamic %}
+    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} + {{ assign.targetObj.id }}_offset__;
+    {%- elif assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
+    {{ assign.targetObj.id }}_amt__ = {{ assign.exprString }};
     {%- else %}
-    {{ assign.targetObj.id }} = {{ assign.expr.toSLVString(logger, powTransform) }};
+    {{ assign.targetObj.id }} = {{ assign.exprString }};
     {%- endif %}
     {%- endfor %}
     {{ evt.switcher.id }}_down_ = 1;
@@ -549,33 +569,33 @@ if({{ evt.switcher.id }}_down_ == 0){
 //
 //!! {{ key if key !== 'undefined' else 'ungroupped' }}
 {%- for con in constants %}
-{{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'" + con.title + "'" if con.title is defined }} {units: {{ con.units|default('?') }}};
+{{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'" + con.title + "'" if con.title is defined }} {units: {{ con.units|default('?') }}}
 {%- endfor %}
 {%- endfor %}
 
 //! Auxilary variables
 {%- for dynamic in dynamicRecords %}
-{{ dynamic.id }}_ = 0; // {{ dynamic.id }};
+{{ dynamic.id }}{{ '_amt' if dynamic.instanceOf('Species') and not dynamic.isAmount else '' }}_shift__ = 0; // {{ dynamic.id }} @{{ dynamic.className }}
 {%- endfor %}
 
 {% set switchers = population.selectByClassName('TimeSwitcher') %}
 {%- if switchers | length > 0 %}
 //! Switchers for time events, count {{ switchers|length }}
 {% for switcher in switchers %}
-{{ switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @TimeSwitcher { };
+{{ switcher.id }}_ = {{ 1 if switcher.active else 0 }}; // @TimeSwitcher { }
 {% endfor %}
 {% endif %}
 {%- if discreteEvents | length > 0 %}
 //! Switchers for discrete events, count {{ discreteEvents | length }}
 {%- for evt in discreteEvents %}
-{{ evt.switcher.id }}_ = {{ 1 if evt.switcher.active else 0 }}; // @DSwitcher {  }
+{{ evt.switcher.id }}_ = {{ 1 if evt.switcher.active else 0 }}; // @DSwitcher { }
 {{ evt.switcher.id }}_down_ = 0;
 {%- endfor %}
 {%- endif %}
 {%- if continuousEvents | length > 0 %}
 //! Switchers for continuous events, count {{ continuousEvents | length }}
 {%- for evt in continuousEvents %}
-{{ evt.switcher.id }}_ = {{ 1 if evt.switcher.active else 0 }}; // @CSwitcher {  }
+{{ evt.switcher.id }}_ = {{ 1 if evt.switcher.active else 0 }}; // @CSwitcher { }
 {{ evt.switcher.id }}_down_ = 0;
 {%- endfor %}
 {%- endif %}
@@ -869,8 +889,14 @@ p1
 {{ 0 if eventsOff else 1 }}
 {% block events -%}
 {{ timeEvents.length }}
-{%- for event in timeEvents %}{# true events #}
-{{ event.target }}
+{%- for event in timeEvents %}
+{% if event.targetObj.isDynamic %}
+{{- event.targetObj.id }}_offset__
+{%- elif event.targetObj.instanceOf('Species') and not event.targetObj.isAmount %}
+{{- event.targetObj.id }}_amt__
+{%- else %}
+{{- event.target }}
+{%- endif %}
 {{ event.multiply }}
 {{ event.add }}
 {{ event.start }}
