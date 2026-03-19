@@ -43,15 +43,18 @@ class Process extends Record {
     if (valid) {
       if (q.actors !== undefined) {
         if (q.actors instanceof Array) {
-          this.actors = q.actors
-            .map((q) => new Actor(q));
+          this.actors = q.actors.map((q) => new Actor(q));
         } else if (q.actors === null) {
           this.actors = [];
         } else {
-          let { targetArray, isReversible } = rct2actors(q.actors);
-          this.actors = targetArray
-            .map((q) => new Actor(q));
-          this.reversible = isReversible;
+          try {
+            let { targetArray, isReversible } = rct2actors(q.actors);
+            this.actors = targetArray.map((q) => new Actor(q));
+            this.reversible = isReversible;
+          } catch (e) {
+            let msg = `Wrong ProcessExpr string: ${q.actors} in "${this.index}".`;
+            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+          }
         }
       }
       if (q.reversible === null) {
