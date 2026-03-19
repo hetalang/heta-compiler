@@ -73,6 +73,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
         : switcher.getPeriod();
       this
         .selectRecordsByContext(switcher.id)
+        .filter((record) => !record.isRule)
         .forEach((record) => { // scan for records in switch
           let needCompartment = !record.isRule && record.instanceOf('Species') && !record.isAmount;
           let expr = needCompartment
@@ -119,6 +120,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
       
       let assignments = this
         .selectRecordsByContext(switcher.id)
+        .filter((record) => !record.isRule)
         .map((record) => {
           let expr = !record.isRule && record.instanceOf('Species') && !record.isAmount
             ? record.getAssignment(switcher.id).multiply(record.compartment)
@@ -146,6 +148,7 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
 
       let assignments = this
         .selectRecordsByContext(switcher.id)
+        .filter((record) => !record.isRule)
         .map((record) => {
           let expr = !record.isRule && record.instanceOf('Species') && !record.isAmount
             ? record.getAssignment(switcher.id).multiply(record.compartment)
