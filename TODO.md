@@ -25,7 +25,6 @@
 [x] DOT language / Graphviz
 [ ] ODEs in markdown/latex/ascii
 [ ] rxode (R)
-[ ] dat (DBSolve)
 [x] ModelingToolkit (Julia)
 [ ] PGF and TikZ
 [x] Summary

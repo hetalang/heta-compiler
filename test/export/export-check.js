@@ -1,12 +1,12 @@
 /* global describe, it */
+const { exp } = require('mathjs');
 const { Builder } = require('../../src');
 const { expect } = require('chai');
 
 describe('General argument checking', () => {
-  const b = new Builder();
-  const p = b.container;
-
   it('Create JSON Export directly', () => {
+    const b = new Builder();
+    const p = b.container;
     let json_export = new b.exportClasses['json']({
       id: 'json_export',
       filepath: './1.json',
@@ -23,89 +23,57 @@ describe('General argument checking', () => {
     expect(json_export).to.have.deep.property('spaceFilter', 'one');
     p.logger.resetErrors();
   });
-
+  
   it('Create JSON Export with export', () => {
-    let json_export = p.export({
-      format: 'json',
-      filepath: './_1.json'
-    });
-    expect(p.logger).to.have.property('hasErrors').false;
+    const b = new Builder({export: [{ format: 'json', filepath: './_1.json'}]});
+    let { logger } = b.container;
+    json_export = b.exportArray[0];
+    expect(logger).to.have.property('hasErrors').false;
     expect(json_export).to.have.property('filepath', './_1.json');
     expect(json_export).to.have.property('format', 'json');
     expect(json_export).to.be.instanceOf(b.exportClasses['json']);
-    p.logger.resetErrors();
   });
-  
+ 
   it('Error in export: no "format"', () => {
-    let json_export = p.export({
-      filepath: './1.json'
-    });
-    expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.undefined;
-    p.logger.resetErrors();
+    expect(() => new Builder({export: [{ filepath: './1.json'}]})).to.throw(/Wrong structure/);
   });
   
   it('Error in export: wrong "format"', () => {
-    let json_export = p.export({
-      format: 'xxx',
-      filepath: '1'
-    });
-    expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.undefined;
-    p.logger.resetErrors();
+    let b = new Builder({export: [{ format: 'xxx', filepath: './1.json'}]})
+    let { logger } = b.container;
+    expect(logger).to.have.property('hasErrors').true;
   });
 
   it('Error in export: no "filepath"', () => {
-    let json_export = p.export({
-      format: 'json'
-    });
-    expect(p.logger).to.have.property('hasErrors').false;
+    let b = new Builder({export: [{ format: 'json'}]});
+    let { logger } = b.container;
+    expect(logger).to.have.property('hasErrors').false;
+    let json_export = b.exportArray[0];
     expect(json_export).to.have.property('filepath', 'json');
+    expect(json_export).to.have.property('format', 'json');
     expect(json_export).to.be.instanceOf(b.exportClasses['json']);
-    p.logger.resetErrors();
   });
 
   it('Error in export: wrong "filepath"', () => {
-    let json_export = p.export({
-      format: 'json',
-      filepath: './@1.xxx'
-    });
-    expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.instanceOf(b.exportClasses['json']);
-    p.logger.resetErrors();
+    let b = new Builder({export: [{ format: 'json', filepath: '/@1.xxx'}]});
+    //expect(() => new Builder({export: [{ format: 'json', filepath: './@1.json'}]})).to.throw();
+    let { logger } = b.container;
+    expect(logger).to.have.property('hasErrors').true;
   });
   
   it('Error in export: wrong "omit"', () => {
-    let json_export = p.export({
-      format: 'json',
-      filepath: './1.txt',
-      omit: 'xxx'
-    });
-    expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.not.have.property('omit');
-    expect(json_export).to.be.instanceOf(b.exportClasses['json']);
-    p.logger.resetErrors();
+    let b = new Builder({export: [{ format: 'json', filepath: './1.json', omit: 'xxx'}]});
+    let { logger } = b.container;
+    expect(logger).to.have.property('hasErrors').true;
   });
-
+  
   it('Error in export: wrong "useUnitsExpr"', () => {
-    let json_export = p.export({
-      format: 'json',
-      filepath: './1.txt',
-      useUnitsExpr: 12
-    });
-    expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.instanceOf(b.exportClasses['json']);
-    p.logger.resetErrors();
+    let b = new Builder({export: [{ format: 'json', filepath: './1.json', useUnitsExpr: 12}]} );
+    let { logger } = b.container;
+    expect(logger).to.have.property('hasErrors').true;
   });
   
   it('Error in export: wrong "spaceFilter"', () => {
-    let json_export = p.export({
-      format: 'json',
-      filepath: './1.txt',
-      spaceFilter: 12
-    });
-    expect(p.logger).to.have.property('hasErrors').true;
-    expect(json_export).to.be.instanceOf(b.exportClasses['json']);
-    p.logger.resetErrors();
+    expect(() => new Builder({export: [{ format: 'json', filepath: './1.json', spaceFilter: 12}]})).to.throw(/Wrong structure/);
   });
 });

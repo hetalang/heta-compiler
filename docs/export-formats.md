@@ -20,7 +20,7 @@ See also [Features support table](#features-support)
 
 ## Declaration exports
 
-There are two recommended ways to export models in Heta compiler: using [`export` property](./cli-references.md#declaration-file-format) in declaration file or using CLI [`--export` property](./cli-references.md#running-build-with-CLI-options). If no --export option is set, the compiler will use the `export` property from the declaration file.
+There are two ways to export models in Heta compiler: using [`export` property](./cli-references.md#declaration-file-format) in declaration file or using CLI [`--export` property](./cli-references.md#running-build-with-CLI-options). If no --export option is set, the compiler will use the `export` property from the declaration file.
 
 The `export` property is an array of objects with the `format` and `filepath` properties and other format-specific properties.
 
@@ -59,10 +59,9 @@ Instead of `export` property in the declaration file, one can use CLI `--export`
 heta build --export '{format: JSON, filepath: output, omit: ["aux.wiki"], spaceFilter: "nameless|another"}, {format: SBML, version: L2V4, filepath: model}, Table'
 ```
 
-## Inline export (deprecated)
+## Inline export (end of support)
 
 Heta of versions 0.4.6 and earlier supported inline export.
-It was removed in version 0.5.0. 
 
 The inline export to different formats could be done in heta code by using `#export` action.
 
@@ -72,13 +71,7 @@ Example 1
 #export {format: JSON, filepath: output};
 ```
 
-Example 2
-
-```heta
-#export {format: SBML, version: L2V4, filepath: model};
-```
-
-Starting from heta-compiler version 0.9.0 the inline export is supported but it is deprecated.
+Starting from heta-compiler version 0.9.0 the inline export is deprecated. Starting from heta-compiler version 0.11.0 the inline export is not supported anymore.
 One should use `export` property in declaration file or use CLI `--export` property.
 See [migrate to v0.9](./migrate-to-v0.9.md) and [CLI references](./cli-references.md) for details.
 

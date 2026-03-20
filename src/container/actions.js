@@ -11,44 +11,6 @@ const reservedWords = [
 ];
 
 /**
- * Creates one of inheritors of `AbstractExport` and put it in `container.exportArray`.
- * The inheritor depends on `q.format` property.
- * For example `{id: 'output', format: 'json', ...}` creates the object of `JSONExport` type.
- * 
- * @param {object} q The `export` object in JS object format.
- * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
- * 
- * @returns {AbstractExport} The created object.
- */
-// TODO: this is part which will be removed later
-// invisible => deprecated => removed
-Container.prototype.export = function(q = {}, isCore = false) {
-  this.logger.warn('Inline #export is deprecated and will be removed in the future. Use export property in platform configuration.');
-  
-  let { exportClasses, exportArray } = this._builder;
-  if (q.format === undefined) {
-    this.logger.error('Empty "format" option in export', {type: 'QError'});
-    return; // BRAKE
-  }
-  if (typeof exportClasses[q.format] !== 'function') {
-    this.logger.error(`Unknown format "${q.format}" in export.`, {type: 'QError'});
-
-    return; // BRAKE
-  }
-
-  // create and push to storage
-  let exportInstance = new exportClasses[q.format](q, isCore);
-  let ignoreInlineExport = this._builder.export.length > 0; // TODO: remove at version 0.10.0
-  if (!exportInstance.errored && !ignoreInlineExport) { // TODO: remove second check later
-    exportArray.push(exportInstance);
-  } else if (!exportInstance.errored) {
-    this.logger.warn(`inline #export {format: ${q.format}} will not be applied because export was set in platform configuration.`);
-  }
-
-  return exportInstance;
-};
-
-/**
  * Creates `UnitDef` instance and puts it in `container.unitDefStorage`.
  * 
  * @param {object} q The `#defineUnit` statement in JS object format.
