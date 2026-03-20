@@ -14,7 +14,7 @@ describe('Integral test of correct xlsx module', () => {
       options: {
       },
       importModule: {
-        type: 'xlsx',
+        type: 'table',
         source: 'table.xlsx',
         sheet: 0,
         omitRows: 2
@@ -38,7 +38,7 @@ describe('Integral test of correct xlsx module', () => {
       options: {
       },
       importModule: {
-        type: 'xlsx',
+        type: 'table',
         source: 'table.xlsx',
         sheet: 1
       }
@@ -58,7 +58,7 @@ describe('Integral test of correct xlsx module', () => {
       builderVersion: '>=0.4',
       options: { debug: false },
       importModule: {
-        type: 'xlsx',
+        type: 'table',
         source: 'table.xlsx',
         sheet: 9
       }

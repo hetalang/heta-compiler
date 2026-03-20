@@ -194,7 +194,7 @@ prompt(questions)
       }
     } else if (answers.importModule==='xlsx') {
       platform.importModule = {
-        type: 'xlsx',
+        type: 'table',
         source: 'src/table.xlsx',
         sheet: 0,
         omitRows: 3
