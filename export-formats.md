@@ -59,11 +59,9 @@ Instead of `export` property in the declaration file, one can use CLI `--export`
 heta build --export '{format: JSON, filepath: output, omit: ["aux.wiki"], spaceFilter: "nameless|another"}, {format: SBML, version: L2V4, filepath: model}, Table'
 ```
 
-## Inline export (end of support)
+## Inline export (deprecated)
 
 Heta of versions 0.4.6 and earlier supported inline export.
-
-The inline export to different formats could be done in heta code by using `#export` action.
 
 Example 1
 
@@ -71,7 +69,7 @@ Example 1
 #export {format: JSON, filepath: output};
 ```
 
-Starting from heta-compiler version 0.9.0 the inline export is deprecated. Starting from heta-compiler version 0.11.0 the inline export is not supported anymore.
+Starting from heta-compiler version 0.9.0 the inline export is deprecated.
 One should use `export` property in declaration file or use CLI `--export` property.
 See [migrate to v0.9](./migrate-to-v0.9.md) and [CLI references](./cli-references.md) for details.
 
