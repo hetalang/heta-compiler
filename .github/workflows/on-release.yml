@@ -10,7 +10,7 @@ permissions:
 
 jobs:
     upload-macos-x64-release-asset:
-        runs-on: macos-13
+        runs-on: macos-latest
         outputs:
           sha_x64: ${{ steps.sha_x64.outputs.sha }}
         steps:
@@ -301,4 +301,4 @@ jobs:
           run: |
             $VERSION = node -p "require('./package.json').version"
             choco pack dist/build-choco/heta-compiler.nuspec --output-directory dist --version $VERSION
-            choco push dist/heta-compiler.$VERSION.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
+#            choco push dist/heta-compiler.$VERSION.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
