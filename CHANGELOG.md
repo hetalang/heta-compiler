@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.11.0
+
+- Made the `format` property in modules case-insensitive.
+- Fixed a critical error caused by invalid process expressions
+- Fixed DBSolve export issues, including incorrect events for non-zero initial values and proper handling of `{boundary: true}`.
+- Added support for `#hasMeta` in SBML export.
+- Fixed `{useUnitsExpr: true}` in JSON, YAML, and Table exports.
+- Applied security updates.
+- Updated the documentation.
+
 ### 0.10.0
 
 - Julia export format update to support Julia 12
