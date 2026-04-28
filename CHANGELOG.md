@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.11.1
+
+- fix units check issue when parsing `x++y` expressions
+- Update dependencies to address known security vulnerabilities
+
 ## 0.11.0
 
 - Made the `format` property in modules case-insensitive.
