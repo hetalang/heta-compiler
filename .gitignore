@@ -8,7 +8,8 @@ node_modules
 /dist
 
 # user-specific files
-/draft
+/_drafts
+/coverage
 
 # jsdoc
 /docs/dev

@@ -1,6 +1,6 @@
 node_modules
 /dist
-/draft
+/_drafts
 /tmp
 /coverage
 /diagnostics
