@@ -144,4 +144,8 @@ describe('Expression exports to Julia', () => {
     let expr = Expression.fromString('1*e/4');
     expect(expr.toJuliaString()).to.be.equal('1e+0 * exp(1.0) / 4e+0');
   });
+  it('toJuliaString() for "x++y"', () => {
+    let expr = Expression.fromString('x++y');
+    expect(expr.toJuliaString()).to.be.equal('x + y');
+  });
 });

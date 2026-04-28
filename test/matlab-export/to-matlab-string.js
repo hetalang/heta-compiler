@@ -53,4 +53,8 @@ describe('Expession exports', () => {
     let expr = Expression.fromString('z * x ^ y');
     expect(expr.toMatlabString()).to.be.equal('z * (x ^ y)');
   });
+  it('toMatlabString() for "x++y"', () => {
+    let expr = Expression.fromString('x++y');
+    expect(expr.toMatlabString()).to.be.equal('x + y');
+  });
 });

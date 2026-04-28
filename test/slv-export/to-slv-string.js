@@ -84,6 +84,10 @@ describe('Ternary operator in DBSolve', () => {
     let expr = Expression.fromString('false ? y1 : y2');
     expect(expr.toSLVString(null)).to.be.equal('ifgt(0, 1, y1, y2)');
   });
+  it('toSLVString("x++y")', () => {
+    let expr = Expression.fromString('x++y');
+    expect(expr.toSLVString(null)).to.be.equal('x + y');
+  });
 });
 
 

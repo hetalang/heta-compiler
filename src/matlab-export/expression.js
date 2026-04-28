@@ -98,7 +98,7 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
         let arg0 = node.args[0].toString(options, true);
         return `~${arg0}`;
       }
-      if (node.fn === 'urinaryPlus') {
+      if (node.fn === 'unaryPlus') {
         return node.args[0].toString(options);
       }
     }
