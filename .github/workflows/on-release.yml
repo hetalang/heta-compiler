@@ -14,8 +14,8 @@ jobs:
         outputs:
           sha_x64: ${{ steps.sha_x64.outputs.sha }}
         steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
+        - uses: actions/checkout@v6
+        - uses: actions/setup-node@v6
           with:
             node-version: 18.x
         - run: npm ci
@@ -55,8 +55,8 @@ jobs:
         runs-on: macos-latest
         needs: upload-macos-x64-release-asset
         steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
+        - uses: actions/checkout@v6
+        - uses: actions/setup-node@v6
           with:
             node-version: 18.x
         - run: npm ci
@@ -125,8 +125,8 @@ jobs:
     upload-linux-x64-release-asset:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
+        - uses: actions/checkout@v6
+        - uses: actions/setup-node@v6
           with:
             node-version: 18.x
         - run: npm ci
@@ -180,8 +180,8 @@ jobs:
     upload-linux-arm64-release-asset:
         runs-on: ubuntu-22.04-arm
         steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
+        - uses: actions/checkout@v6
+        - uses: actions/setup-node@v6
           with:
             node-version: 18.x
         - run: npm ci
@@ -215,8 +215,8 @@ jobs:
     upload-windows-x64-release-asset:
         runs-on: windows-latest
         steps:
-        - uses: actions/checkout@v4
-        - uses: actions/setup-node@v4
+        - uses: actions/checkout@v6
+        - uses: actions/setup-node@v6
           with:
             node-version: 18.x
         - run: npm ci
