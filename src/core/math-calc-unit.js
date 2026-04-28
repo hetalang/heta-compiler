@@ -79,6 +79,8 @@ function _calcUnit(_this, record) {
 
         return argUnit[0];
       }
+    } else if (_this.fn === 'unaryPlus') {
+      return argUnit[0];
     } else if (_this.fn === 'unaryMinus') {
       return argUnit[0];
     } else {
