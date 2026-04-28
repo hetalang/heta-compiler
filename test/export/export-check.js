@@ -1,5 +1,4 @@
 /* global describe, it */
-const { exp } = require('mathjs');
 const { Builder } = require('../../src');
 const { expect } = require('chai');
 
