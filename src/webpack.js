@@ -70,6 +70,7 @@ Builder._exportClasses = {
   dot: require('./dot-export'),
   summary: require('./summary-export'),
   mt: require('./mt-export'),
+  dynms: require('./dynms-export'),
 };
 
 module.exports = {

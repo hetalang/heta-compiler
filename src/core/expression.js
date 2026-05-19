@@ -224,5 +224,6 @@ function _removeParenthesis(node) {
 }
 
 module.exports = {
-  Expression
+  Expression,
+  math
 };

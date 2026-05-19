@@ -41,7 +41,7 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
 
   // create and sort expressions for RHS
   let rhs = this
-    .sortExpressionsByContext('ode_', false)
+    .sortExpressionsByContext('ode_', true) // previous version was `false`, but I don't understand why
     .filter((record) => record.instanceOf('Record') && record.assignments?.ode_ !== undefined);
   // check that all record in start are not Expression
   let startExpressions = this

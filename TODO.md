@@ -24,11 +24,13 @@
 [x] csv
 [x] DOT language / Graphviz
 [ ] ODEs in markdown/latex/ascii
-[ ] rxode (R)
+[ ] rxode2 (R)
+[ ] deSolve (R)
 [x] ModelingToolkit (Julia)
 [ ] PGF and TikZ
 [x] Summary
 [ ] Berkley Madonna
+[ ] DynMS (JSON)
 
 ## bugs
 
