@@ -1,0 +1,7 @@
+c1 @Compartment .= 5;
+x1 @Species { compartment: c1 } .= 1;
+x2 @Species { compartment: c1 } .= 2;
+
+pr1 @Reaction {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;
