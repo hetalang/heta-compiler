@@ -3,7 +3,6 @@ const { Expression, math } = require('../core/expression');
 const TopoSort = require('@insysbio/topo-sort');
 const HetaLevelError = require('../heta-level-error');
 
-require('./namespace');
 /*
     Function converting concrete Namespace to DynMS format.
     Chosen solution:

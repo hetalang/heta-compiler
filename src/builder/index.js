@@ -159,8 +159,7 @@ class Builder {
 
       // 3.5 Get platform hash
       // creates temporal canonical representation and make hash
-      let canonicalItem = new this.exportClasses['canonical']({});
-      let canonicalFull = canonicalItem.makeFullObject();
+      let canonicalFull = this.container.makeCanonicalFull();
       this.logger.info(`Platform hash: ${canonicalFull[0].hashSum}`);
 
       // 4. Binding
