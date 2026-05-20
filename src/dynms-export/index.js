@@ -55,7 +55,7 @@ class DynMS extends AbstractExport {
     };
 
     DynMSObj.models = this.selectedNamespaces().map(([spaceName, ns]) => {
-      let model = ns.getDynMSModel();
+      let model = ns.makeDynMSModel();
         
       return model;
     });

@@ -3,6 +3,9 @@ const { Expression, math } = require('../core/expression');
 const TopoSort = require('@insysbio/topo-sort');
 const HetaLevelError = require('../heta-level-error');
 
+// XXX: Still not sure if Expression clone() is required here
+// Currently I do not use it.
+
 /*
     Function converting concrete Namespace to DynMS format.
     Chosen solution:
@@ -14,7 +17,7 @@ const HetaLevelError = require('../heta-level-error');
     - we create a new states with _amt_ suffix
     - we do not create new parameters
 */
-Namespace.prototype.getDynMSModel = function() {
+Namespace.prototype.makeDynMSModel = function() {
     let { logger } = this.container;
 
     // generate parameters list
@@ -34,10 +37,10 @@ Namespace.prototype.getDynMSModel = function() {
 
             if (isConcentration) {
                 var stateId = x.id + '_amt_';
-                var expr = initialAssignment.clone().multiply(x.compartment);
+                var expr = initialAssignment.multiply(x.compartment);
             } else {
                 stateId = x.id;
-                expr = initialAssignment.clone();
+                expr = initialAssignment;
             }
             
             if (typeof num === 'number' && !isConcentration) {
@@ -55,7 +58,7 @@ Namespace.prototype.getDynMSModel = function() {
         .filter((x) => x.isRule || (x.instanceOf('Species') && !x.isAmount))
         .map((x) => {
             if (x.isRule) {
-                let rawExpr = x.assignments['ode_'].clone();
+                let rawExpr = x.assignments['ode_'];
                 var expr = _substitute_functions(rawExpr, this.container);
             } else {
                 expr = Expression.fromString(`${x.id}_amt_ / ${x.compartment}`);
@@ -102,7 +105,7 @@ Namespace.prototype.getDynMSModel = function() {
     };
 };
 
-// XXX: just a placeholder for now
+// TODO: add simplification maybe
 /*
   Function for calculation of initial values for "states" depending on "parameters" only.
   1. Find all dependency paths from parameters to states

@@ -27,7 +27,7 @@ describe('DynMS test sets', () => {
             let b = new Builder(declaration, fs.readFileSync, () => {}).run();
 
             let ns = b.container.namespaceStorage.get('nameless');
-            let generated = ns.getDynMSModel();
+            let generated = ns.makeDynMSModel();
 
             let expected = require(`./${testCase.output}`);
             expect(_normalize(generated)).to.deep.equal(expected);
