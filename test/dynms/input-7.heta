@@ -1,0 +1,12 @@
+/* rule sequence */
+x1 @Record .= 1;
+x2 @Record .= rule3;
+
+rule1 @Record := x1;
+rule2 @Record := 1.5 * rule3;
+rule3 @Record := 1.5*pr1 + 0.5*rule1;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;
+x1_0 @Const = 1;

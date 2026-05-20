@@ -1,0 +1,8 @@
+/* initial value as parameter */
+x1 @Record .= x1_0;
+x2 @Record .= 2;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;
+x1_0 @Const = 1;

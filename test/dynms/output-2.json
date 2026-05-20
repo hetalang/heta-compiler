@@ -1,0 +1,68 @@
+{
+  "id": "nameless",
+  "parameters": [
+    {
+      "id": "k1",
+      "value": 0.001
+    },
+    {
+      "id": "k2",
+      "value": 0.0001
+    }
+  ],
+  "states": [
+    {
+      "id": "x1",
+      "value": 1
+    },
+    {
+      "id": "x2",
+      "value": 2
+    },
+    {
+      "id": "x3",
+      "value": 0
+    }
+  ],
+  "assignments": [
+    {
+      "variable": "pr1",
+      "rhs": {
+        "expr": "k1 * x1 ^ 2 * x2 ^ 3",
+        "format": "heta"
+      }
+    },
+    {
+      "variable": "pr2",
+      "rhs": {
+        "expr": "k2 * x3",
+        "format": "heta"
+      }
+    }
+  ],
+  "derivatives": [
+    {
+      "variable": "x1",
+      "rhs": {
+        "expr": "-2 * pr1 + pr2",
+        "format": "heta"
+      }
+    },
+    {
+      "variable": "x2",
+      "rhs": {
+        "expr": "-3 * pr1",
+        "format": "heta"
+      }
+    },
+    {
+      "variable": "x3",
+      "rhs": {
+        "expr": "+4 * pr1 - pr2",
+        "format": "heta"
+      }
+    }
+  ],
+  "events": [],
+  "observables": []
+}

@@ -6,8 +6,6 @@ const pkg = require('../../package');
 const { ajv } = require('../ajv');
 const { omitByPaths } = require('../utils');
 
-require('./namespace');
-
 const schema = {
   type: 'object',
   properties: {
@@ -57,9 +55,9 @@ class DynMS extends AbstractExport {
     };
 
     DynMSObj.models = this.selectedNamespaces().map(([spaceName, ns]) => {
-      let image = ns.getDynMSImage();
+      let model = ns.getDynMSModel();
         
-      return image;
+      return model;
     });
 
     return [{

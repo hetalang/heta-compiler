@@ -1,0 +1,10 @@
+/* initial value depend on rule */
+x1 @Record .= rule1;
+x2 @Record .= 2;
+
+rule1 @Record := 1.5*x1_0;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;
+x1_0 @Const = 1;

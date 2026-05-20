@@ -8,10 +8,14 @@ require('./namespace');
     Function converting concrete Namespace to DynMS format.
     Chosen solution:
     - initial values for `states` can be either numbers or expressions depending on parameters only.
-    - when converting initial expressions for `states` we substitute: other states with parameters, or with numbers
-    - we can create a new states with _amt_ suffix but we do not create new parameters
+    - when converting init expressions for `states` we substitute: 
+        - other states by init expressions
+        - rules by their expressions
+        - parameters stay as they are
+    - we create a new states with _amt_ suffix
+    - we do not create new parameters
 */
-Namespace.prototype.getDynMSImage = function() {
+Namespace.prototype.getDynMSModel = function() {
     let { logger } = this.container;
 
     // generate parameters list
@@ -108,11 +112,14 @@ Namespace.prototype.getDynMSImage = function() {
   4. Return Expression object
 */
 function _substitute_and_simplify(expr, namespace) {
-  return _substitute(expr, namespace);
+    let node = _substitute(expr.exprParsed, namespace);
+
+    return new Expression(node);
 }
 
-function _substitute(expr, namespace) {
-    let result = expr.exprParsed.transform((node, path, parent) => {
+// takes node return node
+function _substitute(topNode, namespace) {
+    return topNode.transform((node, path, parent) => {
         if (node.isSymbolNode) {
             let componentObj = namespace.get(node.name);
             if (componentObj.instanceOf('Record')) {
@@ -122,19 +129,17 @@ function _substitute(expr, namespace) {
                     if (typeof num === 'number') { // for numbers
                         return new math.ConstantNode(num);
                     } else { // for expressions
-                        return _substitute(initialAssignment, namespace).exprParsed;
+                        return _substitute(initialAssignment.exprParsed, namespace);
                     }
                 } else {
                     let odeAssignment = componentObj.assignments['ode_'];
-                    return _substitute(odeAssignment, namespace).exprParsed;
+                    return _substitute(odeAssignment.exprParsed, namespace);
                 }
             }
         }
         // for the rest
         return node;
     });
-
-    return result;
 }
 
 // XXX: just a placeholder for now

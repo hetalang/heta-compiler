@@ -1,5 +1,6 @@
 const Container = require('./main');
 const { Namespace } = require('../namespace');
+require('../dynms');
 
 // they cannot be used as id, when 
 const reservedWords = [

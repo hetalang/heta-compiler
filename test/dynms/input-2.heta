@@ -1,0 +1,9 @@
+x1 @Record .= 1;
+x2 @Record .= 2;
+x3 @Record .= 0;
+
+pr1 @Process {actors: 2x1+3x2 => 4x3} := k1 * x1^2 * x2^3;
+pr2 @Process {actors: x3 => x1} := k2 * x3;
+
+k1 @Const = 1e-3;
+k2 @Const = 1e-4;
