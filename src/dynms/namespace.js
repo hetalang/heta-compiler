@@ -20,6 +20,17 @@ const HetaLevelError = require('../heta-level-error');
 Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
     let { logger } = this.container;
 
+    // select expression string generator
+    if (exprFormat === 'c') {
+        var renderExpr = (expr) => expr.toCString();
+    } else if (exprFormat === 'heta') {
+        renderExpr = (expr) => expr.toString();
+    } else if (exprFormat === 'julia') {
+        renderExpr = (expr) => expr.toJuliaString();
+    } else {
+        throw new HetaLevelError(`Unsupported expression format: ${exprFormat}`);
+    }
+
     // generate constants list
     let constants = this.selectByClassName('Const')
         .map((x) => {
@@ -48,7 +59,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, initial: {expr: substitutedExpr.toString(), format: exprFormat}, static: static };
+                return { id: stateId, initial: {expr: renderExpr(substitutedExpr), format: exprFormat}, static: static };
             }
         });
 
@@ -67,7 +78,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr]) => {
-        return { id: id, rhs: { expr: expr.toString(), format: exprFormat } };
+        return { id: id, rhs: { expr: renderExpr(expr), format: exprFormat } };
     });
 
     let derivatives = this.selectByInstanceOf('Record')
@@ -90,7 +101,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             }).join('');
             let expr = Expression.fromString(exprString);
 
-            return { state: stateId, rhs: { expr: expr.toString(), format: exprFormat } };
+            return { state: stateId, rhs: { expr: renderExpr(expr), format: exprFormat } };
         });
 
     // all events in single list
@@ -110,7 +121,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             action.state = record.id;
             expr = scopedAssignment;
         }
-        action.rhs.expr = expr.substituteByDefinitions().toString();
+        action.rhs.expr = renderExpr(expr.substituteByDefinitions());
         action.rhs.format = exprFormat;
 
         return action;
@@ -157,7 +168,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             event.id = switcher.id;
             let triggerExpr = switcher.trigger.substituteByDefinitions();
             event.trigger = {
-                "expr": triggerExpr.toString(),
+                "expr": renderExpr(triggerExpr),
                 "format": exprFormat
             };
             event.actions = this.selectRecordsByContext(switcher.id)

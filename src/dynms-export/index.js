@@ -9,7 +9,7 @@ const { omitByPaths } = require('../utils');
 const schema = {
   type: 'object',
   properties: {
-    exprFormat: {type: 'string', enum: ['heta'], default: 'heta'},
+    exprFormat: {type: 'string', enum: ['heta', 'c', 'julia'], default: 'heta'},
   }
 };
 
