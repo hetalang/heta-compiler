@@ -67,6 +67,7 @@ class Expression {
     return expr;
   }
   // substitute user defined functions by their content, return Expression
+  // TODO: it was a bad idea to implement fnObj property, should be fixed later
   substituteByDefinitions() {
     let transformed = this.exprParsed.transform((node) => {
       if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {

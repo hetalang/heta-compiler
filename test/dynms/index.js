@@ -5,7 +5,7 @@ const fs = require('fs');
 let { Builder } = require('../../src');
 
 // to generate expected output, run 
-// heta build test/dynms --source=input-5.heta --export=DynMS
+// heta build test/dynms --source=input-10.heta --export=DynMS
 let testCases = [
     { input: 'input-01.heta', output: 'output-01.json' },
     { input: 'input-02.heta', output: 'output-02.json' },
@@ -15,7 +15,10 @@ let testCases = [
     { input: 'input-06.heta', output: 'output-06.json' },
     { input: 'input-07.heta', output: 'output-07.json' },
     { input: 'input-08.heta', output: 'output-08.json' },
-    { input: 'input-09.heta', output: 'output-09.json' }
+    { input: 'input-09.heta', output: 'output-09.json' },
+    { input: 'input-10.heta', output: 'output-10.json' },
+    { input: 'input-11.heta', output: 'output-11.json' },
+    { input: 'input-12.heta', output: 'output-12.json' },
 ];
 
 describe('DynMS test sets', () => {

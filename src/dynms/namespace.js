@@ -4,7 +4,7 @@ const TopoSort = require('@insysbio/topo-sort');
 const HetaLevelError = require('../heta-level-error');
 
 // XXX: Still not sure if Expression clone() is required here
-// Currently I do not use it.
+// Currently I do not use clone().
 
 /*
     Function converting concrete Namespace to DynMS format.
@@ -46,10 +46,9 @@ Namespace.prototype.makeDynMSModel = function() {
             if (typeof num === 'number' && !isConcentration) {
                 return { id: stateId, value: num, static: static };
             } else {
-                let substitutedExpr = _substitute_functions(expr, this.container);
-                let simpleExpr = _substitute_and_simplify(substitutedExpr, this);
+                let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, value: {expr: simpleExpr.toString(), format: 'heta'}, static: static };
+                return { id: stateId, value: {expr: substitutedExpr.toString(), format: 'heta'}, static: static };
             }
         });
 
@@ -59,7 +58,7 @@ Namespace.prototype.makeDynMSModel = function() {
         .map((x) => {
             if (x.isRule) {
                 let rawExpr = x.assignments['ode_'];
-                var expr = _substitute_functions(rawExpr, this.container);
+                var expr = rawExpr.substituteByDefinitions();
             } else {
                 expr = Expression.fromString(`${x.id}_amt_ / ${x.compartment}`);
             }
@@ -114,15 +113,16 @@ Namespace.prototype.makeDynMSModel = function() {
   4. Return Expression object
 */
 function _substitute_and_simplify(expr, namespace) {
-    let node = _substitute(expr.exprParsed, namespace);
+    let noUserDefinedFunc = expr.substituteByDefinitions();
+    let substitutedNode = _substitute(noUserDefinedFunc.exprParsed, namespace);
 
-    return new Expression(node);
+    return new Expression(substitutedNode);
 }
 
 // takes node return node
 function _substitute(topNode, namespace) {
     return topNode.transform((node, path, parent) => {
-        if (node.isSymbolNode) {
+        if (node.isSymbolNode && path !== 'fn') {
             let componentObj = namespace.get(node.name);
             if (componentObj.instanceOf('Record')) {
                 if (!componentObj.isRule) {
@@ -131,25 +131,18 @@ function _substitute(topNode, namespace) {
                     if (typeof num === 'number') { // for numbers
                         return new math.ConstantNode(num);
                     } else { // for expressions
-                        return _substitute(initialAssignment.exprParsed, namespace);
+                        return _substitute(initialAssignment.substituteByDefinitions().exprParsed, namespace);
                     }
                 } else {
                     let odeAssignment = componentObj.assignments['ode_'];
-                    return _substitute(odeAssignment.exprParsed, namespace);
+                    return _substitute(odeAssignment.substituteByDefinitions().exprParsed, namespace);
                 }
             }
         }
-        // for the rest
+
+        // for the rest just return without changes
         return node;
     });
-}
-
-// XXX: just a placeholder for now
-/*
-  Function for substitution of function definitions
-*/
-function _substitute_functions(expr, container) {
-    return expr;
 }
 
 // exprs is an array of pairs [String, Expression]

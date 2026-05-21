@@ -1,0 +1,18 @@
+#defineFunction fun1 {
+    arguments: [a, b],
+    math: "a + b"
+};
+#defineFunction fun2 {
+    arguments: [x],
+    math: "fun1(x^2, x^3)"
+};
+
+c1 @Compartment .= fun1(1, 2);
+x1 @Species { compartment: c1 } .= dose1 * F;
+x2 @Species { compartment: c1 } .= 2;
+
+pr1 @Reaction {actors: x1=>x2} := k1 * fun2(x1);
+
+k1 @Const = 1e-3;
+dose1 @Const = 10;
+F @Const = 0.9;
