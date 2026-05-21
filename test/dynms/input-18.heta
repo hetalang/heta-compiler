@@ -1,0 +1,14 @@
+x1 @Record .= 1;
+x2 @Record .= 2;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+dose1 @Record .= 15;
+
+k1 @Const = 1e-3;
+
+sw1 @TimeSwitcher {
+    start: start1
+};
+
+x1 [sw1]= x1 + dose1;
+start1 @Const = 12;

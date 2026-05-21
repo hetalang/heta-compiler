@@ -93,7 +93,53 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             return { variable: stateId, rhs: { expr: expr.toString(), format: exprFormat } };
         });
 
-    let events = [];
+    // implementing time events (switches)
+    let events = this.selectByInstanceOf('TimeSwitcher')
+        .map((switcher) => {
+            let event = {};
+            event.id = switcher.id;
+            if (typeof switcher.start === 'string') {
+                event.start = {"expr": switcher.start, "format": exprFormat}; 
+            } else if (switcher.startObj?.num !== undefined) {
+                event.start = switcher.startObj?.num;
+            }
+            if (typeof switcher.period === 'string') {
+                event.period = {"expr": switcher.period, "format": exprFormat}; 
+            } else {
+                event.period = switcher.periodObj?.num;
+            }
+            if (typeof switcher.stop === 'string') {
+                event.stop = {"expr": switcher.stop, "format": exprFormat}; 
+            } else {
+                event.stop = switcher.stopObj?.num;
+            }
+            event.atStart = switcher.atStart;
+            // TODO: currently Heta does not support priority
+            event.priority = switcher.priority || 0;
+
+            event.actions = this.selectRecordsByContext(switcher.id)
+                .filter((record) => !record.isRule)
+                .map((record) => {
+                    let isConcentration = record.instanceOf('Species') && !record.isAmount; 
+                    
+                    let action = {};
+                    action.rhs = {};
+                    let scopedAssignment = record.getAssignment(switcher.id);
+                    if (isConcentration) {
+                        action.variable = record.id + '_amt_';
+                        var expr = scopedAssignment.multiply(record.compartment);
+                    } else {
+                        action.variable = record.id;
+                        expr = scopedAssignment;
+                    }
+                    action.rhs.expr = expr.substituteByDefinitions().toString();
+                    action.rhs.format = exprFormat;
+
+                    return action;
+                });
+
+            return event;
+        });
 
     let observables = this.selectByInstanceOf('Record')
         .filter((x) => x.output)
