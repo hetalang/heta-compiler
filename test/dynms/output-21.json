@@ -1,21 +1,10 @@
+
 {
   "id": "nameless",
   "parameters": [
     {
       "id": "k1",
       "value": 0.001
-    },
-    {
-      "id": "start1",
-      "value": 12
-    },
-    {
-      "id": "period1",
-      "value": 24
-    },
-    {
-      "id": "stop1",
-      "value": 100
     }
   ],
   "states": [
@@ -57,12 +46,40 @@
     {
       "id": "sw1",
       "type": "time",
-      "start": {"expr": "start1", "format": "heta"},
+      "start": 12,
+      "period": 24,
+      "stop": 100,
       "priority": 0,
-      "active": true,
       "actions": [
-        { "variable": "x1", "rhs": {"expr": "x1 + 10", "format": "heta"} }
-      ]
+        {
+          "rhs": {
+            "expr": "x1 + 10",
+            "format": "heta"
+          },
+          "variable": "x1"
+        }
+      ],
+      "atStart": true,
+      "active": false
+    },
+    {
+      "type": "continuous",
+      "id": "sw2",
+      "trigger": {
+        "expr": "x1 - 100",
+        "format": "heta"
+      },
+      "actions": [
+        {
+          "rhs": {
+            "expr": "0",
+            "format": "heta"
+          },
+          "variable": "x1"
+        }
+      ],
+      "atStart": true,
+      "active": true
     }
   ],
   "observables": []

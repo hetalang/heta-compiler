@@ -68,11 +68,13 @@
   "events": [
     {
       "id": "sw1",
+      "type": "time",
       "start": {
         "expr": "start1",
         "format": "heta"
       },
       "priority": 0,
+      "active": true,
       "actions": [
         {
           "rhs": {

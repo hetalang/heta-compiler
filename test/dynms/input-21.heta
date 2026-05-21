@@ -1,0 +1,24 @@
+x1 @Record .= 1;
+x2 @Record .= 2;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;
+
+sw1 @TimeSwitcher {
+    start: 12,
+    period: 24,
+    stop: 100,
+    atStart: true,
+    active: false
+};
+
+x1 [sw1]= x1 + 10;
+
+sw2 @CSwitcher {
+    trigger: "x1 - 100",
+    atStart: true,
+    active: true
+};
+
+x1 [sw2]= 0;

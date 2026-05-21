@@ -53,11 +53,13 @@
   "events": [
     {
       "id": "sw1",
+      "type": "time",
       "start": {
         "expr": "start1",
         "format": "heta"
       },
       "priority": 0,
+      "active": true,
       "actions": [
         { "variable": "x1", "rhs": {"expr": "x1 + dose1", "format": "heta"} }
       ]

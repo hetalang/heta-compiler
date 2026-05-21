@@ -93,13 +93,37 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             return { variable: stateId, rhs: { expr: expr.toString(), format: exprFormat } };
         });
 
-    // implementing time events (switches)
-    let events = this.selectByInstanceOf('TimeSwitcher')
-        .map((switcher) => {
+    // all events in single list
+    let events = [];
+
+    // actions handler
+    let actionHandler = (record, switcherId) => {
+        let isConcentration = record.instanceOf('Species') && !record.isAmount; 
+        
+        let action = {};
+        action.rhs = {};
+        let scopedAssignment = record.getAssignment(switcherId);
+        if (isConcentration) {
+            action.variable = record.id + '_amt_';
+            var expr = scopedAssignment.multiply(record.compartment);
+        } else {
+            action.variable = record.id;
+            expr = scopedAssignment;
+        }
+        action.rhs.expr = expr.substituteByDefinitions().toString();
+        action.rhs.format = exprFormat;
+
+        return action;
+    }
+
+    // implementing time events (switchers)
+    this.selectByInstanceOf('TimeSwitcher')
+        .forEach((switcher) => {
             let event = {};
+            event.type = 'time';
             event.id = switcher.id;
             if (typeof switcher.start === 'string') {
-                event.start = {"expr": switcher.start, "format": exprFormat}; 
+                event.start = {"expr": switcher.start, "format": exprFormat};
             } else if (switcher.startObj?.num !== undefined) {
                 event.start = switcher.startObj?.num;
             }
@@ -113,32 +137,38 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             } else {
                 event.stop = switcher.stopObj?.num;
             }
-            event.atStart = switcher.atStart;
             // TODO: currently Heta does not support priority
             event.priority = switcher.priority || 0;
 
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
-                .map((record) => {
-                    let isConcentration = record.instanceOf('Species') && !record.isAmount; 
-                    
-                    let action = {};
-                    action.rhs = {};
-                    let scopedAssignment = record.getAssignment(switcher.id);
-                    if (isConcentration) {
-                        action.variable = record.id + '_amt_';
-                        var expr = scopedAssignment.multiply(record.compartment);
-                    } else {
-                        action.variable = record.id;
-                        expr = scopedAssignment;
-                    }
-                    action.rhs.expr = expr.substituteByDefinitions().toString();
-                    action.rhs.format = exprFormat;
+                .map((record) => actionHandler(record, switcher.id));
+            event.atStart = switcher.atStart;
+            event.active = switcher.active;
 
-                    return action;
-                });
+            events.push(event);
+        });
 
-            return event;
+    // implementing continuous events (switchers)
+    this.selectByInstanceOf('CSwitcher')
+        .forEach((switcher) => {
+            let event = {};
+            event.type = 'continuous';
+            event.id = switcher.id;
+            //console.log(switcher.trigger);
+            let triggerExpr = switcher.trigger.substituteByDefinitions();
+            //console.log(triggerExpr);
+            event.trigger = {
+                "expr": triggerExpr.toString(),
+                "format": exprFormat
+            };
+            event.actions = this.selectRecordsByContext(switcher.id)
+                .filter((record) => !record.isRule)
+                .map((record) => actionHandler(record, switcher.id));
+            event.atStart = switcher.atStart;
+            event.active = switcher.active;
+
+            events.push(event);
         });
 
     let observables = this.selectByInstanceOf('Record')
