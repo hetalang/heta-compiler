@@ -66,11 +66,11 @@ class Expression {
     let expr = new Expression(clonedMath);
     return expr;
   }
-  // substitute user defined functions by their content, return Expression 
+  // substitute user defined functions by their content, return Expression
   substituteByDefinitions() {
     let transformed = this.exprParsed.transform((node) => {
       if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
-        return node.fnObj.substitute(node.args);
+        return _substituteFunctionDef(node.fnObj, node.args);
       } else {
         return node;
       }
@@ -221,6 +221,29 @@ function _removeParenthesis(node) {
   } else {
     return node;
   }
+}
+
+// Return mathjs Node with substituted arguments.
+// User-defined functions in this body are expanded recursively.
+function _substituteFunctionDef(fnDef, argNodes = []) {
+  // check arguments
+  if (fnDef.arguments.length > argNodes.length) {
+    throw new TypeError(`Function "${fnDef.id}" requires minimum ${fnDef.arguments.length} arguments, got ${argNodes.length}`);
+  }
+
+  // substitute arguments by nodes
+  let transformed = fnDef.math.exprParsed.transform((node) => {
+    let argIndex = fnDef.arguments.indexOf(node.name);
+    if (node.type === 'SymbolNode' && argIndex !== -1) {
+      return argNodes[argIndex];
+    } else if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
+      return _substituteFunctionDef(node.fnObj, node.args);
+    } else {
+      return node;
+    }
+  });
+
+  return transformed;
 }
 
 module.exports = {
