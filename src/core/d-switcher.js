@@ -114,7 +114,7 @@ class DSwitcher extends _Switcher {
           + `${this.index} { trigger: ${this.trigger} };`;
         logger.error(msg, {type: 'BindingError'});
       } else {
-        // functionNode.functionObj = target; // not used
+        functionNode.fnObj = target; // not used
       }
 
       // check arguments in functionNode
