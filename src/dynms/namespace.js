@@ -92,6 +92,14 @@ Namespace.prototype.makeDynMSModel = function() {
 
             return { variable: stateId, rhs: { expr: expr.toString(), format: 'heta' } };
         });
+
+    let events = [];
+
+    let observables = this.selectByInstanceOf('Record')
+        .filter((x) => x.output)
+        .map((x) => {
+            return { symbol: x.id };
+        });
     
     return {
         id: this.spaceName,
@@ -99,8 +107,8 @@ Namespace.prototype.makeDynMSModel = function() {
         states,
         assignments,
         derivatives,
-        events: [],
-        observables: []
+        events,
+        observables
     };
 };
 
@@ -109,8 +117,9 @@ Namespace.prototype.makeDynMSModel = function() {
   Function for calculation of initial values for "states" depending on "parameters" only.
   1. Find all dependency paths from parameters to states
   2. Check for cycles in the dependency graph
-  3. Substitute parameters into states and simplify expressions
-  4. Return Expression object
+  3. Substitute user defined functions
+  4. Substitute parameters into states and simplify expressions
+  5. Return Expression object
 */
 function _substitute_and_simplify(expr, namespace) {
     let noUserDefinedFunc = expr.substituteByDefinitions();
