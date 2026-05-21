@@ -1,7 +1,7 @@
 
 {
   "id": "nameless",
-  "parameters": [
+  "constants": [
     {
       "id": "k1",
       "value": 0.001
@@ -18,7 +18,7 @@
   "states": [
     {
       "id": "c1",
-      "value": {
+      "initial": {
         "expr": "1 + 2",
         "format": "heta"
       },
@@ -26,14 +26,14 @@
     },
     {
       "id": "x1_amt_",
-      "value": {
+      "initial": {
         "expr": "dose1 * F * (1 + 2)",
         "format": "heta"
       }
     },
     {
       "id": "x2_amt_",
-      "value": {
+      "initial": {
         "expr": "2 * (1 + 2)",
         "format": "heta"
       }
@@ -41,21 +41,21 @@
   ],
   "assignments": [
     {
-      "variable": "x1",
+      "id": "x1",
       "rhs": {
         "expr": "x1_amt_ / c1",
         "format": "heta"
       }
     },
     {
-      "variable": "x2",
+      "id": "x2",
       "rhs": {
         "expr": "x2_amt_ / c1",
         "format": "heta"
       }
     },
     {
-      "variable": "pr1",
+      "id": "pr1",
       "rhs": {
         "expr": "k1 * (x ^ 2 + x ^ 3)",
         "format": "heta"
@@ -64,14 +64,14 @@
   ],
   "derivatives": [
     {
-      "variable": "x1_amt_",
+      "state": "x1_amt_",
       "rhs": {
         "expr": "-pr1",
         "format": "heta"
       }
     },
     {
-      "variable": "x2_amt_",
+      "state": "x2_amt_",
       "rhs": {
         "expr": "+pr1",
         "format": "heta"

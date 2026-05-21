@@ -42,8 +42,7 @@ class DynMS extends AbstractExport {
     let DynMSObj = {
       '$schema': DYNMS_SCHEMA,
       dynms: DYNMS_VERSION,
-      toolName: pkg.name,
-      toolVersion: pkg.version,
+      generator: {name: pkg.name, version: pkg.version},
       created: new Date().toISOString(),
       platformId: this._builder.id,
       platformVersion: this._builder.version,

@@ -9,19 +9,19 @@ const HetaLevelError = require('../heta-level-error');
 /*
     Function converting concrete Namespace to DynMS format.
     Chosen solution:
-    - initial values for `states` can be either numbers or expressions depending on parameters only.
+    - initial values for `states` can be either numbers or expressions depending on constants only.
     - when converting init expressions for `states` we substitute: 
         - other states by init expressions
         - rules by their expressions
-        - parameters stay as they are
+        - constants stay as they are
     - we create a new states with _amt_ suffix
-    - we do not create new parameters
+    - we do not create new constants
 */
 Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
     let { logger } = this.container;
 
-    // generate parameters list
-    let parameters = this.selectByClassName('Const')
+    // generate constants list
+    let constants = this.selectByClassName('Const')
         .map((x) => {
             return { id: x.id, value: x.num };
         });
@@ -44,11 +44,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             }
             
             if (typeof num === 'number' && !isConcentration) {
-                return { id: stateId, value: num, static: static };
+                return { id: stateId, initial: num, static: static };
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, value: {expr: substitutedExpr.toString(), format: exprFormat}, static: static };
+                return { id: stateId, initial: {expr: substitutedExpr.toString(), format: exprFormat}, static: static };
             }
         });
 
@@ -67,7 +67,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr]) => {
-        return { variable: id, rhs: { expr: expr.toString(), format: exprFormat } };
+        return { id: id, rhs: { expr: expr.toString(), format: exprFormat } };
     });
 
     let derivatives = this.selectByInstanceOf('Record')
@@ -90,7 +90,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             }).join('');
             let expr = Expression.fromString(exprString);
 
-            return { variable: stateId, rhs: { expr: expr.toString(), format: exprFormat } };
+            return { state: stateId, rhs: { expr: expr.toString(), format: exprFormat } };
         });
 
     // all events in single list
@@ -104,10 +104,10 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
         action.rhs = {};
         let scopedAssignment = record.getAssignment(switcherId);
         if (isConcentration) {
-            action.variable = record.id + '_amt_';
+            action.state = record.id + '_amt_';
             var expr = scopedAssignment.multiply(record.compartment);
         } else {
-            action.variable = record.id;
+            action.state = record.id;
             expr = scopedAssignment;
         }
         action.rhs.expr = expr.substituteByDefinitions().toString();
@@ -155,9 +155,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             let event = {};
             event.type = 'continuous';
             event.id = switcher.id;
-            //console.log(switcher.trigger);
             let triggerExpr = switcher.trigger.substituteByDefinitions();
-            //console.log(triggerExpr);
             event.trigger = {
                 "expr": triggerExpr.toString(),
                 "format": exprFormat
@@ -179,7 +177,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
     
     return {
         id: this.spaceName,
-        parameters,
+        constants,
         states,
         assignments,
         derivatives,
@@ -190,11 +188,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
 
 // TODO: add simplification maybe
 /*
-  Function for calculation of initial values for "states" depending on "parameters" only.
-  1. Find all dependency paths from parameters to states
+  Function for calculation of initial values for "states" depending on "constants" only.
+  1. Find all dependency paths from constants to states
   2. Check for cycles in the dependency graph
   3. Substitute user defined functions
-  4. Substitute parameters into states and simplify expressions
+  4. Substitute constants into states and simplify expressions
   5. Return Expression object
 */
 function _substitute_and_simplify(expr, namespace) {

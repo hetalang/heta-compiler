@@ -1,7 +1,7 @@
 
 {
   "id": "nameless",
-  "parameters": [
+  "constants": [
     {
       "id": "k1",
       "value": 0.001
@@ -14,37 +14,37 @@
   "states": [
     {
       "id": "x1",
-      "value": 1
+      "initial": 1
     },
     {
       "id": "x2",
-      "value": 2
+      "initial": 2
     }
   ],
   "assignments": [
     {
-      "variable": "pr1",
+      "id": "pr1",
       "rhs": {
         "expr": "k1 * x1",
         "format": "heta"
       }
     },
     {
-      "variable": "rule1",
+      "id": "rule1",
       "rhs": {
         "expr": "x1 * x2",
         "format": "heta"
       }
     },
     {
-      "variable": "rule3",
+      "id": "rule3",
       "rhs": {
         "expr": "1.5 * pr1 + 0.5 * rule1",
         "format": "heta"
       }
     },
     {
-      "variable": "rule2",
+      "id": "rule2",
       "rhs": {
         "expr": "1.5 * rule3",
         "format": "heta"
@@ -53,14 +53,14 @@
   ],
   "derivatives": [
     {
-      "variable": "x1",
+      "state": "x1",
       "rhs": {
         "expr": "-pr1",
         "format": "heta"
       }
     },
     {
-      "variable": "x2",
+      "state": "x2",
       "rhs": {
         "expr": "+pr1",
         "format": "heta"
