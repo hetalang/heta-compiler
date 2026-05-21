@@ -17,7 +17,7 @@ const HetaLevelError = require('../heta-level-error');
     - we create a new states with _amt_ suffix
     - we do not create new parameters
 */
-Namespace.prototype.makeDynMSModel = function() {
+Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
     let { logger } = this.container;
 
     // generate parameters list
@@ -48,7 +48,7 @@ Namespace.prototype.makeDynMSModel = function() {
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, value: {expr: substitutedExpr.toString(), format: 'heta'}, static: static };
+                return { id: stateId, value: {expr: substitutedExpr.toString(), format: exprFormat}, static: static };
             }
         });
 
@@ -67,7 +67,7 @@ Namespace.prototype.makeDynMSModel = function() {
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr]) => {
-        return { variable: id, rhs: { expr: expr.toString(), format: 'heta' } };
+        return { variable: id, rhs: { expr: expr.toString(), format: exprFormat } };
     });
 
     let derivatives = this.selectByInstanceOf('Record')
@@ -90,7 +90,7 @@ Namespace.prototype.makeDynMSModel = function() {
             }).join('');
             let expr = Expression.fromString(exprString);
 
-            return { variable: stateId, rhs: { expr: expr.toString(), format: 'heta' } };
+            return { variable: stateId, rhs: { expr: expr.toString(), format: exprFormat } };
         });
 
     let events = [];

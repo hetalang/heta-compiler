@@ -104,12 +104,6 @@ class Container {
     this.namespaceStorage = new Map();
 
     // create default namespace
-    /*
-    let nameless = new Namespace('nameless');
-    nameless.container = this;
-    nameless._isAbstract = false;
-    this.namespaceStorage.set('nameless', nameless);
-    */
     this.setNS({space: 'nameless'});
 
     // XXX: this is bad solution because if errors exist then will be errors without logs

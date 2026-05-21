@@ -24,7 +24,7 @@ class Namespace extends Map {
    * `true` if namespace is abstract, `false` if concrete.
    */
   get isAbstract(){
-    return this._isAbstract;
+    return !!this._isAbstract;
   }
   /**
    * Identifier of a namespace.

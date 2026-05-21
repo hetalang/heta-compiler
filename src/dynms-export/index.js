@@ -9,8 +9,7 @@ const { omitByPaths } = require('../utils');
 const schema = {
   type: 'object',
   properties: {
-    omit: {type: 'array', items: { type: 'string' }},
-    useUnitsExpr: {type: 'boolean'}
+    exprFormat: {type: 'string', enum: ['heta'], default: 'heta'},
   }
 };
 
@@ -23,8 +22,7 @@ class DynMS extends AbstractExport {
     let valid = DynMS.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
-    if (q.omit) this.omit = q.omit;
-    if (q.useUnitsExpr) this.useUnitsExpr = q.useUnitsExpr;
+    this.exprFormat = q.exprFormat || 'heta';
   }
   get className(){
     return 'DynMS';
@@ -40,6 +38,7 @@ class DynMS extends AbstractExport {
   }
   
   makeText(){
+    // meta information
     let DynMSObj = {
       '$schema': DYNMS_SCHEMA,
       dynms: DYNMS_VERSION,
@@ -51,14 +50,14 @@ class DynMS extends AbstractExport {
       platformNotes: this._builder.notes,
       license: this._builder.license,
       models: [],
-      scenarios: []
+      // scenarios: []
     };
 
-    DynMSObj.models = this.selectedNamespaces().map(([spaceName, ns]) => {
-      let model = ns.makeDynMSModel();
-        
-      return model;
-    });
+    DynMSObj.models = this.selectedNamespaces()
+      .filter(([spaceName, ns]) => !ns.isAbstract)
+      .map(([spaceName, ns]) => {
+        return ns.makeDynMSModel(this.exprFormat);
+      });
 
     return [{
       content: JSON.stringify(DynMSObj, null, 2),
