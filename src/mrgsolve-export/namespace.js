@@ -5,7 +5,7 @@ require('./expression');
 Namespace.prototype.getMrgsolveImage = function() {
   let { logger } = this.container;
   
-  let image = this.makeDynMSModel('c');
+  let image = this.makeDynMSModel('mrgsolve', (expr) => expr.toCString(logger, {timeVariable: 'TIME'}));
 
   // a specific dictionary required for "compartment" enumeration in mrgsolve
   // started from 1 for compatibility with mrgsolve

@@ -17,19 +17,8 @@ const HetaLevelError = require('../heta-level-error');
     - we create a new states with _amt_ suffix
     - we do not create new constants
 */
-Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
+Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer = (expr) => expr.toString()) {
     let { logger } = this.container;
-
-    // select expression string generator
-    if (exprFormat === 'c') {
-        var renderExpr = (expr) => expr.toCString();
-    } else if (exprFormat === 'heta') {
-        renderExpr = (expr) => expr.toString();
-    } else if (exprFormat === 'julia') {
-        renderExpr = (expr) => expr.toJuliaString();
-    } else {
-        throw new HetaLevelError(`Unsupported expression format: ${exprFormat}`);
-    }
 
     // generate constants list
     let constants = this.selectByClassName('Const')
@@ -60,7 +49,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, initial: {expr: renderExpr(substitutedExpr), format: exprFormat}, static: static, title: title };
+                return { id: stateId, initial: {expr: expRenderer(substitutedExpr), format: exprFormat}, static: static, title: title };
             }
         });
 
@@ -79,7 +68,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr, title]) => {
-        return { id: id, rhs: { expr: renderExpr(expr), format: exprFormat }, title: title };
+        return { id: id, rhs: { expr: expRenderer(expr), format: exprFormat }, title: title };
     });
 
     let derivatives = this.selectByInstanceOf('Record')
@@ -102,7 +91,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             }).join('');
             let expr = Expression.fromString(exprString);
 
-            return { state: stateId, rhs: { expr: renderExpr(expr), format: exprFormat } };
+            return { state: stateId, rhs: { expr: expRenderer(expr), format: exprFormat } };
         });
 
     // all events in single list
@@ -122,7 +111,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             action.state = record.id;
             expr = scopedAssignment;
         }
-        action.rhs.expr = renderExpr(expr.substituteByDefinitions());
+        action.rhs.expr = expRenderer(expr.substituteByDefinitions());
         action.rhs.format = exprFormat;
 
         return action;
@@ -170,7 +159,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             event.id = switcher.id;
             let triggerExpr = switcher.trigger.substituteByDefinitions();
             event.trigger = {
-                "expr": renderExpr(triggerExpr),
+                "expr": expRenderer(triggerExpr),
                 "format": exprFormat
             };
             event.actions = this.selectRecordsByContext(switcher.id)

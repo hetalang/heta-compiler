@@ -40,6 +40,8 @@ class DynMS extends AbstractExport {
     return true;
   }
   makeText(){
+    let { logger } = this._builder;
+
     // meta information
     let DynMSObj = {
       '$schema': DYNMS_SCHEMA,
@@ -54,9 +56,21 @@ class DynMS extends AbstractExport {
       // scenarios: []
     };
 
+    // select expression string generator
+    if (this.exprFormat === 'c') {
+        var expRenderer = (expr) => expr.toCString(logger);
+    } else if (this.exprFormat === 'heta') {
+        expRenderer = (expr) => expr.toString();
+    } else if (this.exprFormat === 'julia') {
+        expRenderer = (expr) => expr.toJuliaString(logger);
+    } else {
+        let msg = `Unsupported expression format: ${this.exprFormat}`;
+        logger.error(msg, {});
+    }
+
     DynMSObj.models = this.selectedNamespaces()
       .map(([spaceName, ns]) => {
-        return ns.makeDynMSModel(this.exprFormat);
+        return ns.makeDynMSModel(this.exprFormat, expRenderer);
       });
 
     return [{
