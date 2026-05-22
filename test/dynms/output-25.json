@@ -1,0 +1,53 @@
+{
+  "id": "nameless",
+  "constants": [
+    {
+      "id": "k1",
+      "value": 0.001
+    }
+  ],
+  "states": [
+    {
+      "id": "x1",
+      "initial": 1
+    },
+    {
+      "id": "x2",
+      "initial": 2
+    }
+  ],
+  "assignments": [
+    {
+      "id": "pr1",
+      "rhs": {
+        "expr": "k1 * x1",
+        "format": "heta"
+      }
+    },
+    {
+      "id": "ts1",
+      "rhs": {
+        "expr": "0.001 * t + 5",
+        "format": "heta"
+      }
+    }
+  ],
+  "derivatives": [
+    {
+      "state": "x1",
+      "rhs": {
+        "expr": "-pr1",
+        "format": "heta"
+      }
+    },
+    {
+      "state": "x2",
+      "rhs": {
+        "expr": "+pr1",
+        "format": "heta"
+      }
+    }
+  ],
+  "events": [],
+  "observables": []
+}

@@ -66,6 +66,14 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
 
             return [x.id, expr, x.title];
         });
+    // add TimeScale as regular rule
+    this.selectByInstanceOf('TimeScale')
+        .filter((ts) => ts.id !== 't')
+        .forEach((ts) => {
+            let expr = Expression.fromString(`${ts.slope} * t + ${ts.intercept}`);
+            unsortedAssignments.push([ts.id, expr, ts.title]);
+            //console.log([ts.id, expr, ts.title])
+        });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr, title]) => {
         return { id: id, rhs: { expr: expRenderer(expr), format: exprFormat }, title: title };
