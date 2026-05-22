@@ -36,23 +36,25 @@ double {{ state.id }} = 0.0; // {{ state.title | default('-') }}
 {%- for event in events | filter2('type', 'continuous') %}
 bool {{ event.id }}__down__ = false;
 {%- endfor %}
-// time events
-{%- for event in events | filter2('type', 'time') %}
-self.mevent({{ event.start }}, {{ loop.index0 + 10 }});
-{%- endfor %}
 
 $MAIN
 // dynamic states initializations
 {%- for state in states | exclude2('static', true) %}
+{%- if state.initial is not number %}
 {{ state.id }}_0 = {{ state.initial.expr }};
+{%- endif %}
 {%- endfor %}
-// static states initializations
 if (NEWIND <= 1) {
+// static states initializations
 {%- for state in states | filter2('static', true) %}
 {{ state.id }} = {{ state.initial if state.initial is number else state.initial.expr }};
 {%- endfor %}
 {%- for event in events | filter2('type', 'continuous') %}
 {{ event.id }}__down__ = false;
+{%- endfor %}
+// time events
+{%- for event in events | filter2('type', 'time') %}
+self.mevent({{ event.start if event.start is number else event.start.expr }}, {{ timeEventIndex[event.id] }});
 {%- endfor %}
 }
 
@@ -76,7 +78,26 @@ $TABLE
 {%- for event in events %}
 
 {%- if event.type == 'time' %}
-{{ event.id  }}
+// {{ event.id  }} // {{ event.title | default('-') }}
+if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}{{ ' && TIME>0.0' if not event.atStart }}) {
+  {%- for action in event.actions %}
+  {%- if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
+  {%- set evtId = 'evt_' + action.state + '_' %}
+  mrg::evdata {{ evtId }}(TIME, 8);
+  {{ evtId }}.amt = {{ action.rhs.expr }};
+  {{ evtId }}.cmt = {{ dynamicStatesIndex[action.state] }};
+  {{ evtId }}.now = true;
+  self.mevector.push_back({{ evtId }});
+  {%- else %} {# for static #}
+  {{ action.state }} = {{ action.rhs.expr }};
+  {%- endif %}
+  {%- endfor %}
+  {%- if event.period is defined %}
+  // next event
+  {% if event.stop is defined -%}
+  if (TIME < {{ event.stop }}) {% endif -%}
+  self.mevent(TIME + {{ event.period }}, {{ timeEventIndex[event.id] }});{% endif %}
+}
 
 {%- elif event.type == 'continuous' %}
 // {{ event.id }} // {{ event.title | default('-') }}

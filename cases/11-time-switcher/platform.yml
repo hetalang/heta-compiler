@@ -9,7 +9,7 @@ importModule:
 export:
   - {filepath: json, format: JSON}
   - {filepath: slv, format: SLV}
-  - {filepath: model, format: DBSolve}
+#  - {filepath: model, format: DBSolve}
   - {filepath: simbio, format: Simbio}
   - {filepath: matlab, format: Matlab}
   - {filepath: julia, format: Julia}

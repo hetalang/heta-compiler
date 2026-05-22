@@ -13,6 +13,11 @@ Namespace.prototype.getMrgsolveImage = function() {
   image.states.filter((state) => !state.static).forEach((state, i) => {
     image.dynamicStatesIndex[state.id] = i + 1;
   });
+  // started from 10 to not conflict with reserved numbers 0-4
+  image.timeEventIndex = {};
+  image.events.filter((event) => event.type === 'time').forEach((event, i) => {
+    image.timeEventIndex[event.id] = i + 10;
+  });
 
   return image;
 };
