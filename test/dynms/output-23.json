@@ -1,0 +1,94 @@
+
+{
+  "id": "nameless",
+  "constants": [
+    {
+      "id": "k1",
+      "value": 0.001
+    }
+  ],
+  "states": [
+    {
+      "id": "c1",
+      "initial": 5,
+      "static": true
+    },
+    {
+      "id": "x1_amt_",
+      "initial": {
+        "expr": "1 * 5",
+        "format": "heta"
+      }
+    },
+    {
+      "id": "x2",
+      "initial": 2
+    },
+    {
+      "id": "x3_amt_",
+      "initial": {
+        "expr": "3 * 5",
+        "format": "heta"
+      },
+      "static": true
+    }
+  ],
+  "assignments": [
+    {
+      "id": "x3",
+      "rhs": {
+        "expr": "x3_amt_ / c1",
+        "format": "heta"
+      }
+    },
+    {
+      "id": "x1",
+      "rhs": {
+        "expr": "x1_amt_ / c1",
+        "format": "heta"
+      }
+    },
+    {
+      "id": "pr1",
+      "rhs": {
+        "expr": "k1 * x1",
+        "format": "heta"
+      }
+    }
+  ],
+  "derivatives": [
+    {
+      "state": "x1_amt_",
+      "rhs": {
+        "expr": "-pr1",
+        "format": "heta"
+      }
+    },
+    {
+      "state": "x2",
+      "rhs": {
+        "expr": "+pr1",
+        "format": "heta"
+      }
+    }
+  ],
+  "events": [
+    {
+      "type": "time",
+      "id": "sw1",
+      "start": 12,
+      "priority": 0,
+      "actions": [
+        {
+          "rhs": {
+            "expr": "(x3 * c1 + 10) / c1 * c1",
+            "format": "heta"
+          },
+          "state": "x3_amt_"
+        }
+      ],
+      "active": true
+    }
+  ],
+  "observables": []
+}

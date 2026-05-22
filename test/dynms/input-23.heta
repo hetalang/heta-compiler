@@ -1,0 +1,13 @@
+c1 @Compartment .= 5;
+x1 @Species { compartment: c1 } .= 1;
+x2 @Species { compartment: c1, isAmount: true } .= 2;
+x3 @Species { compartment: c1, boundary: true } .= 3;
+
+pr1 @Reaction {actors: x1=>x2+x3} := k1 * x1;
+
+k1 @Const = 1e-3;
+
+sw1 @TimeSwitcher {
+    start: 12
+};
+x3 [sw1]= (x3*c1 + 10)/c1;

@@ -34,7 +34,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
     // generate constants list
     let constants = this.selectByClassName('Const')
         .map((x) => {
-            return { id: x.id, value: x.num };
+            return { id: x.id, value: x.num, title: x.title };
         });
 
     // generate states list: not only dynamic, but also static
@@ -45,6 +45,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             let initialAssignment = x.assignments['start_'];
             let num = initialAssignment.num; // use getter from Expression
             let static = !x.isDynamic ? true : undefined;
+            let title = x.title;
 
             if (isConcentration) {
                 var stateId = x.id + '_amt_';
@@ -55,11 +56,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
             }
             
             if (typeof num === 'number' && !isConcentration) {
-                return { id: stateId, initial: num, static: static };
+                return { id: stateId, initial: num, static: static, title: title };
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, initial: {expr: renderExpr(substitutedExpr), format: exprFormat}, static: static };
+                return { id: stateId, initial: {expr: renderExpr(substitutedExpr), format: exprFormat}, static: static, title: title };
             }
         });
 
@@ -74,11 +75,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
                 expr = Expression.fromString(`${x.id}_amt_ / ${x.compartment}`);
             }
 
-            return [x.id, expr];
+            return [x.id, expr, x.title];
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
-    let assignments = sortedAssignments.map(([id, expr]) => {
-        return { id: id, rhs: { expr: renderExpr(expr), format: exprFormat } };
+    let assignments = sortedAssignments.map(([id, expr, title]) => {
+        return { id: id, rhs: { expr: renderExpr(expr), format: exprFormat }, title: title };
     });
 
     let derivatives = this.selectByInstanceOf('Record')
@@ -156,6 +157,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
                 .map((record) => actionHandler(record, switcher.id));
             event.atStart = switcher.atStart;
             event.active = switcher.active;
+            event.titel = switcher.title;
 
             events.push(event);
         });
@@ -176,6 +178,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta') {
                 .map((record) => actionHandler(record, switcher.id));
             event.atStart = switcher.atStart;
             event.active = switcher.active;
+            event.title = switcher.title;
 
             events.push(event);
         });

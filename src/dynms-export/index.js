@@ -36,7 +36,9 @@ class DynMS extends AbstractExport {
   static get validate(){
     return ajv.compile(schema);
   }
-  
+  get requireConcrete() {
+    return true;
+  }
   makeText(){
     // meta information
     let DynMSObj = {
@@ -53,7 +55,6 @@ class DynMS extends AbstractExport {
     };
 
     DynMSObj.models = this.selectedNamespaces()
-      .filter(([spaceName, ns]) => !ns.isAbstract)
       .map(([spaceName, ns]) => {
         return ns.makeDynMSModel(this.exprFormat);
       });
