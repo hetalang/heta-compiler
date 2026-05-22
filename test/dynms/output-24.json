@@ -1,0 +1,89 @@
+
+{
+  "id": "nameless",
+  "constants": [
+    {
+      "id": "k1",
+      "value": 0.001
+    }
+  ],
+  "states": [
+    {
+      "id": "x1",
+      "initial": 1
+    },
+    {
+      "id": "x2",
+      "initial": 2
+    }
+  ],
+  "assignments": [
+    {
+      "id": "pr1",
+      "rhs": {
+        "expr": "k1 * x1",
+        "format": "heta"
+      }
+    }
+  ],
+  "derivatives": [
+    {
+      "state": "x1",
+      "rhs": {
+        "expr": "-pr1",
+        "format": "heta"
+      }
+    },
+    {
+      "state": "x2",
+      "rhs": {
+        "expr": "+pr1",
+        "format": "heta"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "sw1",
+      "type": "time",
+      "start": 12,
+      "period": 24,
+      "stop": 100,
+      "priority": 0,
+      "actions": [
+        {
+          "rhs": {
+            "expr": "x1 + 10",
+            "format": "heta"
+          },
+          "state": "x1"
+        }
+      ],
+      "atStart": true,
+      "active": false
+    },
+    {
+      "type": "continuous",
+      "id": "sw2",
+      "trigger": {
+        "rhs": {"expr": "x1 > 100", "format": "heta"},
+        "kind": "conditional",
+        "direction": "up",
+        "detection": "step"
+      },
+      "priority": 0,
+      "actions": [
+        {
+          "rhs": {
+            "expr": "0",
+            "format": "heta"
+          },
+          "state": "x1"
+        }
+      ],
+      "atStart": true,
+      "active": true
+    }
+  ],
+  "observables": []
+}

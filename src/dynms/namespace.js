@@ -174,6 +174,28 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
 
             events.push(event);
         });
+    this.selectByInstanceOf('DSwitcher')
+        .forEach((switcher) => {
+            let event = {};
+            event.type = 'continuous';
+            event.id = switcher.id;
+            let triggerRhs = switcher.trigger.substituteByDefinitions();
+            event.trigger = {
+                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                kind: 'conditional',
+                direction: 'up',
+                detection: 'step'
+            };
+            event.priority = switcher.priority || 0;
+            event.actions = this.selectRecordsByContext(switcher.id)
+                .filter((record) => !record.isRule)
+                .map((record) => actionHandler(record, switcher.id));
+            event.atStart = switcher.atStart;
+            event.active = switcher.active;
+            event.title = switcher.title;
+
+            events.push(event);
+        });
 
     let observables = this.selectByInstanceOf('Record')
         .filter((x) => x.output)

@@ -101,7 +101,7 @@ if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}{{ ' && TIME
 
 {%- elif event.type == 'continuous' %}
 // {{ event.id }} // {{ event.title | default('-') }}
-if ({{ event.id }}__active__ && !{{ event.id }}__down__ && ({{ event.trigger.rhs.expr }} >= 0.0){{ ' && TIME > 0.0' if not event.atStart }}) {
+if ({{ event.id }}__active__ && !{{ event.id }}__down__ && ({{ event.trigger.rhs.expr }}{{ ' >= 0.0' if event.trigger.kind == 'crossing'}}){{ ' && TIME > 0.0' if not event.atStart }}) {
   {{ event.id }}__down__ = true;
   {%- for action in event.actions %}
   {% if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}

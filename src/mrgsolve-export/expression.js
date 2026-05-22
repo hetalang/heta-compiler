@@ -16,6 +16,26 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
 
     // OperatorNode
     if (node.type === 'OperatorNode') {
+      if (node.fn === 'and') {
+        return node.args
+          .map((arg) => arg.toString(options))
+          .join(' && ');
+      }
+      if (node.fn === 'or') {
+        return node.args
+          .map((arg) => arg.toString(options))
+          .join(' || ');
+      }
+      if (node.fn === 'xor') {
+        let args = node.args
+          .map((arg) => arg.toString(options))
+          .join(', ');
+        return `xor(${args})`;
+      }
+      if (node.fn === 'not') {
+        let arg0 = node.args[0].toString(options, true);
+        return `!${arg0}`;
+      }
       if (node.fn === 'pow') {
         return `pow(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
       }
