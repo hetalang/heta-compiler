@@ -19,6 +19,7 @@
     {"format": "Julia", "filepath": "julia"},
     {"format": "Matlab", "filepath": "matlab"},
     {"format": "Simbio", "filepath": "simbio"},
-    {"format": "Mrgsolve", "filepath": "mrgsolve"}
+    {"format": "Mrgsolve", "filepath": "mrgsolve"},
+    {"format": "DynMS", "filepath": "dynms"}
   ]
 }

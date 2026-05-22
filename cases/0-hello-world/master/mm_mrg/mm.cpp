@@ -26,15 +26,15 @@ $PREAMBLE
 // static states
 double default_comp = 0.0; // Default compartment
 // continuous events
-// time events
 
 $MAIN
 // dynamic states initializations
 S_amt__0 = 10.0 * 1.0;
 P_amt__0 = 0.0 * 1.0;
-// static states initializations
 if (NEWIND <= 1) {
+// static states initializations
 default_comp = 1;
+// time events
 }
 
 $ODE

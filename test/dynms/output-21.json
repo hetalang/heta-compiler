@@ -66,9 +66,12 @@
       "type": "continuous",
       "id": "sw2",
       "trigger": {
-        "expr": "x1 - 100",
-        "format": "heta"
+        "rhs": {"expr": "x1 - 100", "format": "heta"},
+        "kind": "crossing",
+        "direction": "up",
+        "detection": "root"
       },
+      "priority": 0,
       "actions": [
         {
           "rhs": {

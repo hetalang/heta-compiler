@@ -157,11 +157,14 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
             let event = {};
             event.type = 'continuous';
             event.id = switcher.id;
-            let triggerExpr = switcher.trigger.substituteByDefinitions();
+            let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
-                "expr": expRenderer(triggerExpr),
-                "format": exprFormat
+                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                kind: 'crossing', // conditional
+                direction: 'up', // down
+                detection: 'root' // step
             };
+            event.priority = switcher.priority || 0;
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
                 .map((record) => actionHandler(record, switcher.id));
