@@ -32,8 +32,12 @@ $PREAMBLE
 {%- for state in states | filter2('static', true) %}
 double {{ state.id }} = 0.0; // {{ state.title | default('-') }}
 {%- endfor %}
-// continuous events
-{%- for event in events | filter2('type', 'continuous') %}
+// crossing events
+{%- for event in events | filter2('trigger.type', 'crossing') %}
+bool {{ event.id }}__down__ = false;
+{%- endfor %}
+// conditional events
+{%- for event in events | filter2('trigger.type', 'conditional') %}
 bool {{ event.id }}__down__ = false;
 {%- endfor %}
 
@@ -49,12 +53,15 @@ if (NEWIND <= 1) {
 {%- for state in states | filter2('static', true) %}
 {{ state.id }} = {{ state.initial if state.initial is number else state.initial.expr }};
 {%- endfor %}
-{%- for event in events | filter2('type', 'continuous') %}
+{%- for event in events | filter2('trigger.type', 'crossing') %}
+{{ event.id }}__down__ = false;
+{%- endfor %}
+{%- for event in events | filter2('trigger.type', 'conditional') %}
 {{ event.id }}__down__ = false;
 {%- endfor %}
 // time events
-{%- for event in events | filter2('type', 'time') %}
-self.mevent({{ event.start if event.start is number else event.start.expr }}, {{ timeEventIndex[event.id] }});
+{%- for event in events | filter2('trigger.type', 'time') %}
+self.mevent({{ event.trigger.start if event.trigger.start is number else event.trigger.start.expr }}, {{ timeEventIndex[event.id] }});
 {%- endfor %}
 }
 
@@ -79,9 +86,9 @@ $CAPTURE @annotated
 $TABLE
 {%- for event in events %}
 
-{%- if event.type == 'time' %}
+{%- if event.trigger.type == 'time' %}
 // {{ event.id  }} // {{ event.title | default('-') }}
-if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}{{ ' && TIME>0.0' if not event.atStart }}) {
+if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}{{ ' && TIME>0.0' if not event.trigger.atStart }}) {
   {%- for action in event.actions %}
   {%- if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
   {%- set evtId = 'evt_' + action.state + '_' %}
@@ -94,16 +101,16 @@ if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}{{ ' && TIME
   {{ action.state }} = {{ action.rhs.expr }};
   {%- endif %}
   {%- endfor %}
-  {%- if event.period is defined %}
+  {%- if event.trigger.period is defined %}
   // next event
-  {% if event.stop is defined -%}
-  if (TIME < {{ event.stop }}) {% endif -%}
-  self.mevent(TIME + {{ event.period }}, {{ timeEventIndex[event.id] }});{% endif %}
+  {% if event.trigger.stop is defined -%}
+  if (TIME < {{ event.trigger.stop }}) {% endif -%}
+  self.mevent(TIME + {{ event.trigger.period }}, {{ timeEventIndex[event.id] }});{% endif %}
 }
 
-{%- elif event.type == 'continuous' %}
+{%- elif (event.trigger.type in ['crossing', 'conditional']) %}
 // {{ event.id }} // {{ event.title | default('-') }}
-if ({{ event.id }}__active__ && !{{ event.id }}__down__ && ({{ event.trigger.rhs.expr }}{{ ' >= 0.0' if event.trigger.kind == 'crossing'}}){{ ' && TIME > 0.0' if not event.atStart }}) {
+if ({{ event.id }}__active__ && !{{ event.id }}__down__ && ({{ event.trigger.rhs.expr }}{{ ' >= 0.0' if event.trigger.type == 'crossing'}}){{ ' && TIME > 0.0' if not event.trigger.atStart }}) {
   {{ event.id }}__down__ = true;
   {%- for action in event.actions %}
   {% if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}

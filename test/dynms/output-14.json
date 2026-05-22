@@ -44,11 +44,13 @@
   "events": [
     {
       "id": "sw1",
-      "type": "time",
-      "start": 12,
-      "period": 24,
-      "stop": 100,
-      "atStart": true,
+      "trigger": {
+        "type": "time",
+        "start": 12,
+        "period": 24,
+        "stop": 100,
+        "atStart": true
+      },
       "priority": 0,
       "active": true,
       "actions": [

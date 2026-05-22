@@ -129,32 +129,33 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
     this.selectByInstanceOf('TimeSwitcher')
         .forEach((switcher) => {
             let event = {};
-            event.type = 'time';
             event.id = switcher.id;
+            event.trigger = {};
+            event.trigger.type = 'time';
             if (typeof switcher.start === 'string') {
-                event.start = {"expr": switcher.start, "format": exprFormat};
+                event.trigger.start = {"expr": switcher.start, "format": exprFormat};
             } else if (switcher.startObj?.num !== undefined) {
-                event.start = switcher.startObj?.num;
+                event.trigger.start = switcher.startObj?.num;
             }
             if (typeof switcher.period === 'string') {
-                event.period = {"expr": switcher.period, "format": exprFormat}; 
+                event.trigger.period = {"expr": switcher.period, "format": exprFormat}; 
             } else {
-                event.period = switcher.periodObj?.num;
+                event.trigger.period = switcher.periodObj?.num;
             }
             if (typeof switcher.stop === 'string') {
-                event.stop = {"expr": switcher.stop, "format": exprFormat}; 
+                event.trigger.stop = {"expr": switcher.stop, "format": exprFormat}; 
             } else {
-                event.stop = switcher.stopObj?.num;
+                event.trigger.stop = switcher.stopObj?.num;
             }
+            event.trigger.atStart = switcher.atStart;
             // TODO: currently Heta does not support priority
             event.priority = switcher.priority || 0;
 
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
                 .map((record) => actionHandler(record, switcher.id));
-            event.atStart = switcher.atStart;
             event.active = switcher.active;
-            event.titel = switcher.title;
+            event.title = switcher.title;
 
             events.push(event);
         });
@@ -163,20 +164,20 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
     this.selectByInstanceOf('CSwitcher')
         .forEach((switcher) => {
             let event = {};
-            event.type = 'continuous';
             event.id = switcher.id;
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
+                type: 'crossing',
                 rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
-                kind: 'crossing', // conditional
-                direction: 'up', // down
-                detection: 'root' // step
+                //kind: 'crossing', // conditional
+                // direction: 'up', // down
+                detection: 'root', // step
+                atStart: switcher.atStart
             };
             event.priority = switcher.priority || 0;
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
                 .map((record) => actionHandler(record, switcher.id));
-            event.atStart = switcher.atStart;
             event.active = switcher.active;
             event.title = switcher.title;
 
@@ -185,20 +186,20 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
     this.selectByInstanceOf('DSwitcher')
         .forEach((switcher) => {
             let event = {};
-            event.type = 'continuous';
             event.id = switcher.id;
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
+                type: 'conditional',
                 rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
-                kind: 'conditional',
-                direction: 'up',
-                detection: 'step'
+                //kind: 'conditional',
+                // direction: 'up',
+                detection: 'step',
+                atStart: switcher.atStart
             };
             event.priority = switcher.priority || 0;
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
                 .map((record) => actionHandler(record, switcher.id));
-            event.atStart = switcher.atStart;
             event.active = switcher.active;
             event.title = switcher.title;
 

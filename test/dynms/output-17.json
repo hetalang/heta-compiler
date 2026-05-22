@@ -56,8 +56,10 @@
   "events": [
     {
       "id": "sw1",
-      "type": "time",
-      "start": 0,
+      "trigger": {
+        "type": "time",
+        "start": 0
+      },
       "priority": 0,
       "active": true,
       "actions": [

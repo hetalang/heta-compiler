@@ -45,10 +45,13 @@
   "events": [
     {
       "id": "sw1",
-      "type": "time",
-      "start": 12,
-      "period": 24,
-      "stop": 100,
+      "trigger": {
+        "type": "time",
+        "start": 12,
+        "period": 24,
+        "stop": 100,
+        "atStart": true
+      },
       "priority": 0,
       "actions": [
         {
@@ -59,17 +62,15 @@
           "state": "x1"
         }
       ],
-      "atStart": true,
       "active": false
     },
     {
-      "type": "continuous",
       "id": "sw2",
       "trigger": {
+        "type": "conditional",
         "rhs": {"expr": "x1 > 100", "format": "heta"},
-        "kind": "conditional",
-        "direction": "up",
-        "detection": "step"
+        "detection": "step",
+        "atStart": true
       },
       "priority": 0,
       "actions": [
@@ -81,7 +82,6 @@
           "state": "x1"
         }
       ],
-      "atStart": true,
       "active": true
     }
   ],

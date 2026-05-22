@@ -25,7 +25,8 @@ P_amt_ : 0 : product
 $PREAMBLE
 // static states
 double default_comp = 0.0; // Default compartment
-// continuous events
+// crossing events
+// conditional events
 
 $MAIN
 // dynamic states initializations
