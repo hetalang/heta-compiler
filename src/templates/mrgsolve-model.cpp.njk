@@ -70,7 +70,9 @@ dxdt_{{ derivative.state }} = {{ derivative.rhs if derivative.rhs is number else
 
 $CAPTURE @annotated
 {%- for observable in observables %}
+{%- if dynamicStatesIndex[observable.symbol] is not defined %}{# exclude dynamic states #}
 {{ observable.symbol }} : {{ observable.title | default('-') }}
+{%- endif %}
 {%- endfor %}
 
 {% if events | length > 0 -%}
