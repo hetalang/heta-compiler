@@ -1,137 +1,18 @@
+const { index } = require('mathjs');
 const { Namespace } = require('../namespace');
 require('./expression');
-const { intersection } = require('../utils');
 
 Namespace.prototype.getMrgsolveImage = function() {
   let { logger } = this.container;
-  // set dynamic variables
-  let dynamicRecords = this
-    .selectByInstanceOf('Record')
-    .filter((x) => x.isDynamic);
-  let dynamicIds = dynamicRecords
-    .map((component) => component.id);
+  
+  let image = this.makeDynMSModel('c');
 
-  // check if initials depends on dynamic initials, than stop
-  this.toArray()
-    .filter((component) => {
-      return component.instanceOf('Record')
-        && !component.isRule;
-    }).forEach((record) => {
-      let deps = record.dependOn('start_', true);
-      let diff = intersection(dynamicIds, deps);
-      if (diff.length > 0) {
-        let errorMsg = `Mrgsolve does not support when initial assignments depends on dynamic values: ${diff}\n`
-          + `${record.index} .= ${record.assignments.start_.toString()}`;
-          
-        logger.error(errorMsg, {type: 'ExportError'});
-      }
-    });
+  // a specific dictionary required for "compartment" enumeration in mrgsolve
+  // started from 1 for compatibility with mrgsolve
+  image.dynamicStatesIndex = {};
+  image.states.filter((state) => !state.static).forEach((state, i) => {
+    image.dynamicStatesIndex[state.id] = i + 1;
+  });
 
-  // set array of output records
-  let output = this
-    .selectByInstanceOf('Record')
-    .filter((rec) => rec.output) // only output: true
-    .filter((rec) => {
-      // remove all dynamic records written directly
-      return !rec.isDynamic 
-        || (rec.instanceOf('Species') && !rec.isAmount);
-    });
-
-  // set sorted array of initials
-  let initRecords = this
-    .sortExpressionsByContext('start_')
-    .filter((component) => {
-      return component.instanceOf('Record') 
-        && component.assignments 
-        && component.assignments.start_;
-    });
-
-  // set sorted array of rules
-  let ruleRecords = this
-    .sortExpressionsByContext('ode_', true)
-    .filter((component) => {
-      return component.instanceOf('Record') 
-        && component.assignments 
-        && component.assignments.ode_;
-    });
-
-  // Time Events
-  let timeEvents = this
-    .selectByInstanceOf('_Switcher')
-    .filter((switcher) => switcher.className === 'TimeSwitcher')
-    .map((switcher) => {
-      let assignments = this
-        .selectRecordsByContext(switcher.id)
-        .map((record) => {
-          let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
-            ? record.getAssignment(switcher.id).multiply(record.compartment)
-            : record.getAssignment(switcher.id);
-
-          // find number of dynamic record (compartment)
-          // -1 means non-dynamic
-          let num = dynamicIds.indexOf(record.id);
-
-          return {
-            target: record.id,
-            expr,
-            num
-          };
-        });
-        
-      return {
-        switcher,
-        assignments
-      };
-    });
-
-  // warn about CSwitcher
-  let cSwitchersIds = this.selectByClassName('CSwitcher')
-    .map((x) => x.id);
-  if (cSwitchersIds.length > 0) {
-    let msg = `CSwitcher is not supported in mrgsolve, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
-    logger.warn(msg);
-  }
-
-  // Descrete Events
-  let continuousEvents = this
-    .selectByInstanceOf('_Switcher')
-    .filter((switcher) => {
-      return switcher.className === 'CSwitcher' 
-        || switcher.className === 'DSwitcher';
-    })
-    .map((switcher) => {
-      let assignments = this
-        .selectRecordsByContext(switcher.id)
-        .map((record) => {
-          let expr = record.isDynamic && record.instanceOf('Species') && !record.isAmount
-            ? record.getAssignment(switcher.id).multiply(record.compartment)
-            : record.getAssignment(switcher.id);
-
-          // find number of dynamic record (compartment)
-          // -1 means non-dynamic
-          let num = dynamicIds.indexOf(record.id);
-
-          return {
-            target: record.id,
-            expr,
-            num
-          };
-        });
-        
-      return {
-        switcher,
-        assignments
-      };
-    });
-
-  return {
-    population: this,
-    dynamicRecords,
-    initRecords,
-    ruleRecords,
-    timeEvents,
-    continuousEvents,
-    output,
-    logger
-  };
+  return image;
 };

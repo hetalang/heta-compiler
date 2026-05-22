@@ -5,8 +5,7 @@ require('./namespace');
 
 const schema = {
   type: 'object',
-  properties: {
-  }
+  properties: {}
 };
 
 class MrgsolveExport extends AbstractExport {
@@ -40,8 +39,8 @@ class MrgsolveExport extends AbstractExport {
     let selectedNamespaces = this.selectedNamespaces();
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
-      let image = ns.getMrgsolveImage();
-      var codeContent = this.getMrgsolveCode(image);
+      let mrgsolveImage = ns.getMrgsolveImage();
+      let codeContent = this.getMrgsolveCode(mrgsolveImage);
 
       return {
         content: codeContent,
@@ -50,7 +49,7 @@ class MrgsolveExport extends AbstractExport {
       };
     });
 
-    var runContent = this.getMrgsolveRun(selectedNamespaces);
+    let runContent = this.getMrgsolveRun(selectedNamespaces);
     results.push({
       content: runContent,
       pathSuffix: '/run.r',
@@ -59,8 +58,8 @@ class MrgsolveExport extends AbstractExport {
 
     return results;
   }
-  getMrgsolveCode(image = {}){
-    return compiledTemplates['mrgsolve-model.cpp.njk'].render(image);
+  getMrgsolveCode(DynMSModel = {}){
+    return compiledTemplates['mrgsolve-model.cpp.njk'].render(DynMSModel);
   }
   getMrgsolveRun(selectedNamespaces){
     return compiledTemplates['mrgsolve-run.r.njk'].render({selectedNamespaces});

@@ -9,42 +9,44 @@ $PROB
   ev(amt=10) %>% mrgsim %>% plot
 ```
 
-$SET end=120, delta=0.1, hmax=0.01, hmin=0, rtol=1e-3, atol=1e-6
+$SET end=120, delta=0.1, hmax=0.01, hmin=0.0, rtol=1e-3, atol=1e-6
 
 $PARAM @annotated
-// @Const 
-Vmax : 0.1 : (uM/minute)
-// @Const 
-Km : 2.5 : (uM)
+// constants
+Vmax : 0.1 : -
+Km : 2.5 : -
+// events active
 
-$CMT @annotated
-// @Species 'substrate'
-S_amt_ : as amount
-// @Species 'product'
-P_amt_ : as amount
-
-$GLOBAL
-#define S (S_amt_ / default_comp)
-#define P (P_amt_ / default_comp)
+$INIT @annotated
+// dynamic states
+S_amt_ : 0 : substrate
+P_amt_ : 0 : product
 
 $PREAMBLE
-//double P = 0.0;
-//double S = 10.0;
-double default_comp = 1.0;
+// static states
+double default_comp = 0.0; // Default compartment
+// continuous events
+// time events
 
 $MAIN
-P_amt__0 = (0.0) * default_comp;
-S_amt__0 = (10.0) * default_comp;
-
-
+// dynamic states initializations
+S_amt__0 = 10.0 * 1.0;
+P_amt__0 = 0.0 * 1.0;
+// static states initializations
+if (NEWIND <= 1) {
+default_comp = 1;
+}
 
 $ODE
-// @Reaction 'Michaelis-Menten reaction'
-double r1 = Vmax * S / (Km + S) * default_comp;
-
-dxdt_S_amt_ = (-1)*r1;
-dxdt_P_amt_ = (1)*r1;
+// assignments
+double P = P_amt_ / default_comp; // product
+double S = S_amt_ / default_comp; // substrate
+double r1 = Vmax * S / (Km + S) * default_comp; // Michaelis-Menten reaction
+// derivatives
+dxdt_S_amt_ = -r1;
+dxdt_P_amt_ = r1;
 
 $CAPTURE @annotated
-S : substrate (uM)
-P : product (uM)
+S : -
+P : -
+
