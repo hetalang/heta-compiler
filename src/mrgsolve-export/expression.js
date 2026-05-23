@@ -3,7 +3,7 @@ const { Expression } = require('../core/expression');
 Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteByDefinitions = true){
   // set defaults
   let mathOptions = Object.assign({
-    timeVariable: 'SOLVERTIME'
+    timeVariable: 'TIME' // default time variable name, can be overridden by options
   }, _mathOptions);
 
   let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;

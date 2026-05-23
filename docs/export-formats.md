@@ -319,6 +319,8 @@ _No additional properties_
 ### Known restrictions
 
 - `CSwitcher` work without root finding.
+- Both `CSwitcher` and `DSwitcher` can trigger only with `delta` precision. So you need to set `delta` to a small value to have more precise switching time. For example, `delta = 1e-6` will give you microsecond precision for switching time.
+- If expressions inside `@Record` depend explicitly on time `t`, the simulation may give incorrect results. To fix it, you should replace `TIME` variable in `$ODE` block by `SOLVERTIME` manually in **model.cpp**. It will be fixed in future versions.
 
 **Example:**
 

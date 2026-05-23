@@ -38,7 +38,7 @@ describe('Expession exports to mrgsolve', () => {
   });
   it('toCString() for "exp(-kel*t)"', () => {
     let expr = Expression.fromString('exp(-kel*t)');
-    expect(expr.toCString()).to.be.equal('exp(-kel * SOLVERTIME)');
+    expect(expr.toCString()).to.be.equal('exp(-kel * TIME)');
   });
   it('toCString() for "x++y"', () => {
     let expr = Expression.fromString('x++y');
