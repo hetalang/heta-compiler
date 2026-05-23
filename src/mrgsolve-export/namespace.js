@@ -15,7 +15,7 @@ Namespace.prototype.getMrgsolveImage = function() {
   });
   // started from 10 to not conflict with reserved numbers 0-4
   image.timeEventIndex = {};
-  image.events.filter((event) => event.type === 'time').forEach((event, i) => {
+  image.events.filter((event) => event.trigger.type === 'time').forEach((event, i) => {
     image.timeEventIndex[event.id] = i + 10;
   });
 

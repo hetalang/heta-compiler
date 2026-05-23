@@ -4,6 +4,8 @@ The following formats are implemented in Heta compiler.
 
 - [JSON](#json)
 - [YAML](#yaml)
+- [Canonical](#canonical)
+- [DynMS](#dynms)
 - [DBSolve](#dbsolve)
 - [SLV](#slv)
 - [SBML](#sbml)
@@ -87,14 +89,14 @@ Can work with `abstract` namespaces.
 
 ### Output files
 
-**[filepath]/output.json** : all content created for selected space.
+**[filepath]/output.heta.json** : all content created for selected space.
 
 **Example**
 
 ```yaml
 {
     format: JSON,
-    filepath: output, // save result in file "dist/output.json"
+    filepath: output, // save result in file "dist/output"
     omit: [aux.wiki], // omit aux.wiki properties from components
     useUnitsExpr: false, // save units in format UnitsExpr
     spaceFilter: "nameless|another"
@@ -108,21 +110,73 @@ Can work with `abstract` namespaces.
 
 ### Properties
 
-All options is the same as for [JSON format](#json).
+| property | type | required | default | ref | description | 
+| ---------|------|----------|---------|-----|-------------|
+| omit | string[] | | | | Array of properties paths to exclude from output. |
+| useUnitsExpr | boolean | | false | | If `false` or not set all units will be written in format of UnitsExpr. If `true` all unit will be written in Unit array format. |
 
 ### Output files
 
-**[filepath]/output.yml** : all content created for selected space.
+**[filepath]/output.heta.yml** : all content created for selected space.
 
 **Example**
 
 ```yaml
 {
     format: YAML,
-    filepath: output, // save result in file "dist/output.json"
-    omit: [aux.wiki], // omit aux.wiki properties from components
+    filepath: output,    // rewrite target directory to "dist/output"
+    omit: [aux.wiki],    // omit aux.wiki properties from components
     useUnitsExpr: false, // save units in format UnitsExpr
-    spaceFilter: ".+" // all namespaces
+    spaceFilter: ".+"    // all namespaces
+}
+```
+
+## Canonical
+
+Export the whole platform content in canonical JSON format. The output is the same as for JSON format but the components and internal properties are groupped and sorted.
+Useful for debugging and comparing models, it generates the same output for the same model independently on the order of components in declaration files and other factors.
+
+### Properties
+
+_No additional properties_
+
+### Output files
+
+**[filepath]/output.heta.json** : all content created for selected spaces.
+
+### Known restrictions
+
+- Math expressions are presented as strings without any transformations. For example, `x^y` will be exported as `x^y` and not transformed to canonical form `pow(x, y)`.
+- Units are presented in format of `UnitsExpr` and not transformed or substituted by the values of `#defineUnit`.
+
+**Example**
+
+```yaml
+{ format: Canonical, filepath: canonical } # result in dist/canonical
+```
+
+## DynMS
+
+Export to **DynMS** (Dynamic Model Specifications) format which is an experimental format for executable dynamic models, designed to support reproducible mechanistic workflows, code generation, and interoperability across simulation tools.
+
+### Properties
+
+| property | type | required | default | ref | description |
+| ---------|------|----------|---------|-----|-------------|
+| exprFormat | "heta" / "c" / "julia" | | "heta" | | The format of mathematical expressions in exported model. "heta" means that the expressions will be exported in the same format as they are defined in Heta. |
+
+### Output files
+
+**[filepath]/output.dynms.json** : all content created for selected spaces in DynMS format.
+
+**Example**
+
+```yaml
+{
+    format: DynMS,
+    filepath: dynms,       // save result in file "dist/dynms"
+    spaceFilter: nameless, // output everything from nameless namespace
+    exprFormat: julia      // export math expressions in format of Julia code
 }
 ```
 
@@ -154,7 +208,7 @@ This is the updated version of SLV export format which supports compartment volu
 ```yaml
 {
     format: DBSolve,
-    filepath: model, // save results in file "dist/model.slv"
+    filepath: model, // save results in file "dist/model"
     spaceFilter: nameless, // namespace used for model generation
     powTransform: keep // use x^y and pow(x, y) without changes
     version: "25"
@@ -191,7 +245,7 @@ Export to SLV format which is the model format for [DBSolveOptimum](https://insy
 ```yaml
 {
     format: SLV,
-    filepath: model, // save results in file "dist/model.slv"
+    filepath: model, // save results in file "dist/model"
     spaceFilter: "^nameless$", // namespace used for model generation
     eventsOff: false, // all switchers will be transformed to DBSolve events
     powTransform: keep, // use x^y and pow(x, y) without changes
@@ -219,7 +273,7 @@ Can work with `abstract` namespaces.
 ```yaml
 {
     format: SBML,
-    filepath: model, // save results in file "dist/model.xml"
+    filepath: model, // save results in file "dist/model"
     spaceFilter: nameless, // namespace used for model generation
     version: L2V4 // Level 2 Version 4
 }
@@ -230,7 +284,6 @@ Can work with `abstract` namespaces.
 Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matlab code (m files). The code can be run to create simbiology project.
 
 ### Properties
-
 
 | property | type | required | default | ref | description | 
 | ---------|------|----------|---------|-----|-------------|
@@ -252,11 +305,11 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 ## Mrgsolve
 
-Export to [mrgsolve](https://mrgsolve.github.io/) model format (cpp file).
+Export to [mrgsolve](https://mrgsolve.github.io/) model format.
 
 ### Properties
 
-- 
+_No additional properties_
 
 ### Output files
 
@@ -265,16 +318,14 @@ Export to [mrgsolve](https://mrgsolve.github.io/) model format (cpp file).
 
 ### Known restrictions
 
-- `CSwitcher` is not supported.
-- `DSwitcher` is not supported.
-- Initialization by MathExpr is not supported. Do not use `S1 .= x * y`.
+- `CSwitcher` work without root finding.
 
 **Example:**
 
 ```yaml
 {
     format: Mrgsolve,
-    filepath: model, // save results in file "dist/model.cpp"
+    filepath: model,      // save results in file "dist/model"
     spaceFilter: nameless // namespace used for model generation
 }
 ```
@@ -308,17 +359,14 @@ For the list of supported files see the docs <https://github.com/SheetJS/sheetjs
 
 ### Output files
 
-**[filepath]/output.[extension]** : Table file. The extension depends on `bookType` property.
+**[filepath]/output.heta.[extension]** : Table file. The extension depends on `bookType` property.
 or
-**[filepath]/[Class].[extension]** : If you use CSV and similar one-page file types.
+**[filepath]/[Class].heta.[extension]** : If you use CSV and similar one-page file types.
 
 **Example 1:**
 
 ```yaml
-{
-    format: Table,
-    filepath: platform
-}
+{ format: Table, filepath: platform }
 ```
 
 **Example 2:**
@@ -342,18 +390,18 @@ Can work with `abstract` namespaces.
 
 ### Properties
 
--
+_No additional properties_
 
 ### Output files
 
-**[filepath]/output.xlsx** : File which can be opened in Excel.
+**[filepath]/output.heta.xlsx** : File which can be opened in Excel.
 
 **Example:**
 
 ```yaml
 {
     format: XLSX,
-    filepath: output, // save result in file "dist/output.xlsx"
+    filepath: output, // save result in file "dist/output"
     omitRows: 3, // include 3 empty rows between header and the first line
     omit: [aux.wiki], // omit aux.wiki properties from components
     splitByClass: true // split classed to different sheets
@@ -366,7 +414,7 @@ Creation of Julia files (.jl).
 
 ### Properties
 
-- 
+_No additional properties_
 
 ### Output files
 
@@ -389,7 +437,7 @@ Creation of Matlab files (.m) which represent ODE and code to run ODE.
 
 ### Properties
 
-- 
+_No additional properties_
 
 ### Output files
 
@@ -418,7 +466,7 @@ Each namespace in separate file.
 
 ### Properties
 
--
+_No additional properties_
 
 ### Output files
 
@@ -439,7 +487,7 @@ Summarize model content and present statistics of the model components. It also 
 
 ### Properties
 
--
+_No additional properties_
 
 ### Output files
 
@@ -448,10 +496,7 @@ Summarize model content and present statistics of the model components. It also 
 **Example:**
 
 ```yaml
-{
-    format: Summary,
-    filepath: summary, // save result in file "dist/summary.md"
-}
+{ format: Summary, filepath: summary }
 ```
 
 ## Features support
