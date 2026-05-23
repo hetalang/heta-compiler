@@ -890,9 +890,9 @@ p1
 {% block events -%}
 {{ timeEvents.length }}
 {%- for event in timeEvents %}
-{% if event.targetObj.isDynamic %}
+{% if event.targetObj and event.targetObj.isDynamic %}{# no targetObj for generated stop event #}
 {{- event.targetObj.id }}_offset__
-{%- elif event.targetObj.instanceOf('Species') and not event.targetObj.isAmount %}
+{%- elif event.targetObj and event.targetObj.instanceOf('Species') and not event.targetObj.isAmount %}
 {{- event.targetObj.id }}_amt__
 {%- else %}
 {{- event.target }}
