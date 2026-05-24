@@ -1,0 +1,298 @@
+[
+  {
+    "string": "0",
+    "mathjson": 0
+  },
+  {
+    "string": "-1",
+    "mathjson": -1
+  },
+  {
+    "string": "1.5",
+    "mathjson": 1.5
+  },
+  {
+    "string": "1e-3",
+    "mathjson": 0.001
+  },
+  {
+    "string": "Infinity",
+    "mathjson": { "num": "+Infinity" }
+  },
+  {
+    "string": "-Infinity",
+    "mathjson": { "num": "-Infinity" }
+  },
+  {
+    "string": "NaN",
+    "mathjson": { "num": "NaN" }
+  },
+  {
+    "string": "true",
+    "mathjson": "True"
+  },
+  {
+    "string": "false",
+    "mathjson": "False"
+  },
+  {
+    "string": "pi",
+    "mathjson": "Pi"
+  },
+  {
+    "string": "e",
+    "mathjson": "ExponentialE"
+  },
+  {
+    "string": "x",
+    "mathjson": "x"
+  },
+  {
+    "string": "x * y",
+    "mathjson": ["Multiply", "x", "y"]
+  },
+  {
+    "string": "multiply(x, y, z)",
+    "mathjson": ["Multiply", "x", "y", "z"]
+  },
+  {
+    "string": "x ^ y",
+    "mathjson": ["Power", "x", "y"]
+  },
+  {
+    "string": "pow(x, y)",
+    "mathjson": ["Power", "x", "y"]
+  },
+  {
+    "string": "x + y + z",
+    "mathjson": ["Add", "x", "y", "z"]
+  },
+  {
+    "string": "add(x, y, z)",
+    "mathjson": ["Add", "x", "y", "z"]
+  },
+  {
+    "string": "x - y",
+    "mathjson": ["Add", "x", ["Negate", "y"]]
+  },
+  {
+    "string": "subtract(x, y)",
+    "mathjson": ["Add", "x", ["Negate", "y"]]
+  },
+  {
+    "string": "-x",
+    "mathjson": ["Negate", "x"]
+  },
+  {
+    "string": "x / y",
+    "mathjson": ["Divide", "x", "y"]
+  },
+  {
+    "string": "divide(x, y)",
+    "mathjson": ["Divide", "x", "y"]
+  },
+  {
+    "string": "x ^ y ^ z",
+    "mathjson": ["Power", "x", ["Power", "y", "z"]]
+  },
+  {
+    "string": "(x + y) * z",
+    "mathjson": ["Multiply", ["Add", "x", "y"], "z"]
+  },
+  {
+    "string": "abs(x)",
+    "mathjson": ["Abs", "x"]
+  },
+  {
+    "string": "ceil(x)",
+    "mathjson": ["Ceil", "x"]
+  },
+  {
+    "string": "floor(x)",
+    "mathjson": ["Floor", "x"]
+  },
+  {
+    "string": "exp(x)",
+    "mathjson": ["Exp", "x"]
+  },
+  {
+    "string": "ln(x)",
+    "mathjson": ["Ln", "x"]
+  },
+  {
+    "string": "log(x)",
+    "mathjson": ["Ln", "x"]
+  },
+  {
+    "string": "logbase(x, 2)",
+    "mathjson": ["Log", "x", 2]
+  },
+  {
+    "string": "log10(x)",
+    "mathjson": ["Lg", "x"]
+  },
+  {
+    "string": "log2(x)",
+    "mathjson": ["Lb", "x"]
+  },
+  {
+    "string": "sqrt(x)",
+    "mathjson": ["Sqrt", "x"]
+  },
+  {
+    "string": "nthRoot(x, 3)",
+    "mathjson": ["Root", "x", 3]
+  },
+  {
+    "string": "square(x)",
+    "mathjson": ["Square", "x"]
+  },
+  {
+    "string": "cube(x)",
+    "mathjson": ["Power", "x", 3]
+  },
+  {
+    "string": "sign(x)",
+    "mathjson": ["Sign", "x"]
+  },
+  {
+    "string": "max(x, y, z)",
+    "mathjson": ["Max", "x", "y", "z"]
+  },
+  {
+    "string": "min(x, y, z)",
+    "mathjson": ["Min", "x", "y", "z"]
+  },
+  {
+    "string": "factorial(x)",
+    "mathjson": ["Factorial", "x"]
+  },
+  {
+    "string": "x > y",
+    "mathjson": ["Greater", "x", "y"]
+  },
+  {
+    "string": "x >= y",
+    "mathjson": ["GreaterEqual", "x", "y"]
+  },
+  {
+    "string": "x == y",
+    "mathjson": ["Equal", "x", "y"]
+  },
+  {
+    "string": "x != y",
+    "mathjson": ["NotEqual", "x", "y"]
+  },
+  {
+    "string": "x < y",
+    "mathjson": ["Less", "x", "y"]
+  },
+  {
+    "string": "x <= y",
+    "mathjson": ["LessEqual", "x", "y"]
+  },
+  {
+    "string": "x and y and z",
+    "mathjson": ["And", "x", "y", "z"]
+  },
+  {
+    "string": "x or y or z",
+    "mathjson": ["Or", "x", "y", "z"]
+  },
+  {
+    "string": "x xor y xor z",
+    "mathjson": ["Xor", "x", "y", "z"]
+  },
+  {
+    "string": "not x",
+    "mathjson": ["Not", "x"]
+  },
+  {
+    "string": "x > y ? a : b",
+    "mathjson": ["If", ["Greater", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "ifgt(x, y, a, b)",
+    "mathjson": ["If", ["Greater", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "ifge(x, y, a, b)",
+    "mathjson": ["If", ["GreaterEqual", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "iflt(x, y, a, b)",
+    "mathjson": ["If", ["Less", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "ifle(x, y, a, b)",
+    "mathjson": ["If", ["LessEqual", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "ifeq(x, y, a, b)",
+    "mathjson": ["If", ["Equal", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "piecewise(a, x > y)",
+    "mathjson": ["If", ["Greater", "x", "y"], "a", { "num": "NaN" }]
+  },
+  {
+    "string": "piecewise(a, x > y, b)",
+    "mathjson": ["If", ["Greater", "x", "y"], "a", "b"]
+  },
+  {
+    "string": "piecewise(a, x > y, b, x < y)",
+    "mathjson": ["Which", ["Greater", "x", "y"], "a", ["Less", "x", "y"], "b", "True", { "num": "NaN" }]
+  },
+  {
+    "string": "piecewise(a, x > y, b, x < y, c)",
+    "mathjson": ["Which", ["Greater", "x", "y"], "a", ["Less", "x", "y"], "b", "True", "c"]
+  },
+  {
+    "string": "sin(x)",
+    "mathjson": ["Sin", "x"]
+  },
+  {
+    "string": "cos(x)",
+    "mathjson": ["Cos", "x"]
+  },
+  {
+    "string": "tan(x)",
+    "mathjson": ["Tan", "x"]
+  },
+  {
+    "string": "asin(x)",
+    "mathjson": ["Arcsin", "x"]
+  },
+  {
+    "string": "acos(x)",
+    "mathjson": ["Arccos", "x"]
+  },
+  {
+    "string": "atan(x)",
+    "mathjson": ["Arctan", "x"]
+  },
+  {
+    "string": "sec(x)",
+    "mathjson": ["Sec", "x"]
+  },
+  {
+    "string": "csc(x)",
+    "mathjson": ["Csc", "x"]
+  },
+  {
+    "string": "cot(x)",
+    "mathjson": ["Cot", "x"]
+  },
+  {
+    "string": "asec(x)",
+    "mathjson": ["Arcsec", "x"]
+  },
+  {
+    "string": "acsc(x)",
+    "mathjson": ["Arccsc", "x"]
+  },
+  {
+    "string": "acot(x)",
+    "mathjson": ["Arccot", "x"]
+  }
+]

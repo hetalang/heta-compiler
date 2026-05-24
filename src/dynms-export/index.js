@@ -9,7 +9,7 @@ const { omitByPaths } = require('../utils');
 const schema = {
   type: 'object',
   properties: {
-    exprFormat: {type: 'string', enum: ['heta', 'c', 'julia'], default: 'heta'},
+    exprFormat: {type: 'string', enum: ['math-json', 'heta', 'c', 'julia']},
   }
 };
 
@@ -63,6 +63,8 @@ class DynMS extends AbstractExport {
         expRenderer = (expr) => expr.toString();
     } else if (this.exprFormat === 'julia') {
         expRenderer = (expr) => expr.toJuliaString(logger);
+    } else if (this.exprFormat === 'math-json') {
+        expRenderer = (expr) => expr.toMathJSON(logger);
     } else {
         let msg = `Unsupported expression format: ${this.exprFormat}`;
         logger.error(msg, {});
