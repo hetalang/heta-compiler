@@ -147,7 +147,6 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
             } else {
                 event.trigger.stop = switcher.stopObj?.num;
             }
-            event.trigger.atStart = switcher.atStart;
             // TODO: currently Heta does not support priority
             event.priority = switcher.priority || 0;
 

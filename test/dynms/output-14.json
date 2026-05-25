@@ -48,8 +48,7 @@
         "type": "time",
         "start": 12,
         "period": 24,
-        "stop": 100,
-        "atStart": true
+        "stop": 100
       },
       "priority": 0,
       "active": true,

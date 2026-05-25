@@ -22,7 +22,7 @@ class DynMS extends AbstractExport {
     let valid = DynMS.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
 
-    this.exprFormat = q.exprFormat || 'heta';
+    this.exprFormat = q.exprFormat || 'math-json';
   }
   get className(){
     return 'DynMS';

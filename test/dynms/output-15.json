@@ -60,8 +60,7 @@
       "type": "time",
         "start": {"expr": "start1", "format": "heta"},
         "period": {"expr": "period1", "format": "heta"},
-        "stop": {"expr": "stop1", "format": "heta"},
-        "atStart": true
+        "stop": {"expr": "stop1", "format": "heta"}
       },
       "priority": 0,
       "active": true,
