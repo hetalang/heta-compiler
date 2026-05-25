@@ -8,7 +8,15 @@ const schema = {
     trigger: {oneOf: [
       { '$ref': '#/definitions/ExprString' },
       { type: "null" }
-    ]}
+    ]},
+    atStart: {oneOf: [
+      {
+        description: 'If true than the condition will be checked at start_',
+        enum: [true, false, 1, 0],
+        default: false
+      },
+      { type: 'null' }
+    ]},
   },
   definitions: {
     ExprString: {
@@ -24,7 +32,8 @@ const schema = {
   CSwitcher class
 
   cs1 @CSwitcher {
-    trigger: cond1
+    trigger: cond1,
+    atStart: true
   };
 */
 class CSwitcher extends _Switcher {
@@ -50,6 +59,12 @@ class CSwitcher extends _Switcher {
           logger && logger.error(msg, {type: 'ValidationError', space: this.space});
         }
       }
+      
+      if (q.atStart === null) {
+        delete this.atStart;
+      } else if (typeof q.atStart !== 'undefined') {
+        this.atStart = !!q.atStart;
+      }
     }
     
     return this;
@@ -60,12 +75,16 @@ class CSwitcher extends _Switcher {
   toQ(options = {}){
     let res = super.toQ(options);
     if (this.trigger) res.trigger = this.trigger.toString();
+    if (this.atStart) res.atStart = true;
     return res;
   }
   clone(){
     let clonedComponent = super.clone();
     if (typeof this.trigger !== 'undefined')
       clonedComponent.trigger = this.trigger.clone();
+    
+    if (typeof this.atStart !== 'undefined')
+      clonedComponent.atStart = this.atStart;
     
     return clonedComponent;
   }
@@ -141,6 +160,10 @@ class CSwitcher extends _Switcher {
 CSwitcher._requirements = {
   trigger: {
     required: true, 
+    isReference: false
+  },
+  atStart: {
+    required: false, 
     isReference: false
   }
 };

@@ -10,7 +10,15 @@ const schema = {
         { enum: [true, false, 1, 0] },
         { type: 'null' }
       ]
-    }
+    },
+    atStart: {oneOf: [
+      {
+        description: 'If true than the condition will be checked at start_',
+        enum: [true, false, 1, 0],
+        default: false
+      },
+      { type: 'null' }
+    ]}
   },
   definitions: {
     ExprString: {
@@ -28,7 +36,8 @@ const schema = {
   Switcher describing discrete events.
 
   ds1 @DSwitcher {
-    trigger: S>P
+    trigger: S>P,
+    atStart: true
   };
 */
 class DSwitcher extends _Switcher {
@@ -54,6 +63,12 @@ class DSwitcher extends _Switcher {
           let msg = this.index + ' ' + err.message + ` "${q.trigger}"`;
           logger && logger.error(msg, {type: 'ValidationError', space: this.space});
         }
+
+        if (q.atStart === null) {
+          delete this.atStart;
+        } else if (typeof q.atStart !== 'undefined') {
+          this.atStart = !!q.atStart;
+        }  
       }
     }
     
@@ -65,6 +80,7 @@ class DSwitcher extends _Switcher {
   toQ(options = {}){
     let res = super.toQ(options);
     if (this.trigger) res.trigger = this.trigger.toString();
+    if (this.atStart) res.atStart = true;
     return res;
   }
   clone(){
@@ -72,6 +88,9 @@ class DSwitcher extends _Switcher {
     if (typeof this.trigger !== 'undefined')
       clonedComponent.trigger = this.trigger.clone();
     
+    if (typeof this.atStart !== 'undefined')
+      clonedComponent.atStart = this.atStart;
+
     return clonedComponent;
   }
   updateReferences(q = {}){
@@ -146,6 +165,10 @@ class DSwitcher extends _Switcher {
 DSwitcher._requirements = {
   trigger: {
     required: true, 
+    isReference: false
+  },
+  atStart: {
+    required: false, 
     isReference: false
   }
 };

@@ -88,7 +88,7 @@ $TABLE
 
 {%- if event.trigger.type == 'time' %}
 // {{ event.id  }} // {{ event.title | default('-') }}
-if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}{{ ' && TIME>0.0' if not event.trigger.atStart }}) {
+if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}) {
   {%- for action in event.actions %}
   {%- if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
   {%- set evtId = 'evt_' + action.state + '_' %}

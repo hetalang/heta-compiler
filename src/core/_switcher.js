@@ -4,14 +4,6 @@ const { ajv } = require('../ajv');
 const schema = {
   type: 'object',
   properties: {
-    atStart: {oneOf: [
-      {
-        description: 'If true than the condition will be checked at start_',
-        enum: [true, false, 1, 0],
-        default: false
-      },
-      { type: 'null' }
-    ]},
     active: {oneOf: [
       {
         description: 'if false the event will not run.',
@@ -27,7 +19,7 @@ const schema = {
   _Switcher abstract class
 
   _switcher @_Switcher {
-    atStart: true
+    active: true
   };
 */
 class _Switcher extends Component {
@@ -41,11 +33,6 @@ class _Switcher extends Component {
     let valid = _Switcher.isValid(q, logger);
 
     if (valid) {
-      if (q.atStart === null) {
-        delete this.atStart;
-      } else if (typeof q.atStart !== 'undefined') {
-        this.atStart = !!q.atStart;
-      }
       if (q.active === null) {
         delete this.active;
       } else if (q.active !== undefined) {
@@ -60,8 +47,6 @@ class _Switcher extends Component {
   }
   clone(){
     let clonedComponent = super.clone();
-    if (typeof this.atStart !== 'undefined')
-      clonedComponent.atStart = this.atStart;
     if (typeof this.active !== 'undefined')
       clonedComponent.active = this.active;
 
@@ -69,7 +54,6 @@ class _Switcher extends Component {
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if (this.atStart) res.atStart = true;
     if (this.active === false) res.active = false;
 
     return res;
@@ -79,12 +63,7 @@ class _Switcher extends Component {
   }
 }
 
-_Switcher._requirements = {
-  atStart: {
-    required: false, 
-    isReference: false
-  }
-};
+_Switcher._requirements = {};
 
 module.exports = {
   _Switcher
