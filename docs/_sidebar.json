@@ -7,6 +7,7 @@
             { "text": "Console commands", "link": "/hetacompiler/cli-references" },
             { "text": "Platform declaration file", "link": "/hetacompiler/platform-file" },
             { "text": "Export formats", "link": "/hetacompiler/export-formats" },
+            { "text": "DynMS format", "link": "/hetacompiler/dynms" },
             { "text": "qsp-units.heta", "link": "/hetacompiler/qsp-units.heta" },
             { "text": "qsp-functions.heta", "link": "/hetacompiler/qsp-functions.heta" },
             { 

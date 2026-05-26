@@ -1,0 +1,383 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "title": "DynMS document",
+  "description": "Dynamic Model Specification (DynMS) document schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dynms", "models"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "dynms": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "generator": {
+      "$ref": "#/$defs/generator"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "platformId": {
+      "type": "string"
+    },
+    "platformVersion": {
+      "type": "string"
+    },
+    "platformNotes": {
+      "type": "string"
+    },
+    "license": {
+      "type": "string"
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/model"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "constants", "states", "assignments", "derivatives", "events", "observables"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "constants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/constant"
+          }
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/state"
+          }
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assignment"
+          }
+        },
+        "derivatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/derivative"
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        },
+        "observables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/observable"
+          }
+        }
+      }
+    },
+    "constant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "value"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "value": {
+          "$ref": "#/$defs/value"
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "initial"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "initial": {
+          "$ref": "#/$defs/value"
+        },
+        "static": {
+          "type": "boolean",
+          "default": false
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "assignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "rhs"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "rhs": {
+          "$ref": "#/$defs/expression"
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "derivative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "rhs"],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/identifier"
+        },
+        "rhs": {
+          "$ref": "#/$defs/expression"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "trigger", "actions"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "trigger": {
+          "$ref": "#/$defs/eventTrigger"
+        },
+        "priority": {
+          "type": "integer",
+          "default": 0
+        },
+        "active": {
+          "type": "boolean",
+          "default": true
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/eventAction"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "eventTrigger": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/timeTrigger"
+        },
+        {
+          "$ref": "#/$defs/crossingTrigger"
+        },
+        {
+          "$ref": "#/$defs/conditionalTrigger"
+        }
+      ]
+    },
+    "timeTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "start"],
+      "properties": {
+        "type": {
+          "const": "time"
+        },
+        "start": {
+          "$ref": "#/$defs/value"
+        },
+        "period": {
+          "$ref": "#/$defs/value"
+        },
+        "stop": {
+          "$ref": "#/$defs/value"
+        }
+      }
+    },
+    "crossingTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "rhs"],
+      "properties": {
+        "type": {
+          "const": "crossing"
+        },
+        "rhs": {
+          "$ref": "#/$defs/expression"
+        },
+        "detection": {
+          "type": "string",
+          "enum": ["root", "step"],
+          "default": "root"
+        },
+        "atStart": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "conditionalTrigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "rhs"],
+      "properties": {
+        "type": {
+          "const": "conditional"
+        },
+        "rhs": {
+          "$ref": "#/$defs/expression"
+        },
+        "detection": {
+          "type": "string",
+          "enum": ["root", "step"],
+          "default": "step"
+        },
+        "atStart": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "eventAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "rhs"],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/identifier"
+        },
+        "rhs": {
+          "$ref": "#/$defs/expression"
+        }
+      }
+    },
+    "observable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["symbol"],
+      "properties": {
+        "symbol": {
+          "$ref": "#/$defs/identifier"
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "value": {
+      "oneOf": [
+        {
+          "type": "number"
+        },
+        {
+          "$ref": "#/$defs/expression"
+        }
+      ]
+    },
+    "expression": {
+      "oneOf": [
+        { "$ref": "#/$defs/mathjsonExpression" },
+        { "$ref": "#/$defs/lineExpression" }
+      ]
+    },
+    "lineExpression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expr", "format"],
+      "properties": {
+        "expr": {
+          "type": "string",
+          "minLength": 1
+        },
+        "format": {
+          "type": "string",
+          "enum": ["heta", "c", "mrgsolve", "julia"]
+        }
+      }
+    },
+    "mathjsonExpression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expr", "format"],
+      "properties": {
+        "expr": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "array",
+              "minLength": 1
+            }
+          ]
+        },
+        "format": {
+          "type": "string",
+          "const": "math-json"
+        }
+      }
+    }
+  }
+}
