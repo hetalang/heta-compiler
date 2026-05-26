@@ -68,7 +68,7 @@ Constants are externally configurable scalar values, model inputs.
 }
 ```
 
-Constants initialized by number and do not change during simulation unless modified by backend-specific mechanisms.
+Constants initialized by number (never by expressions) and do not change during simulation unless modified by backend-specific mechanisms.
 
 ---
 
@@ -168,6 +168,7 @@ Events modify model states during simulation.
     "priority": 0,
     "active": true,
 }
+```
 
 - `trigger` defines event activation conditions;
 - `actions` is an array of state modifications executed when the event is triggered;
