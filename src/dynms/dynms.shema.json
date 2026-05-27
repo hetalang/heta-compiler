@@ -181,6 +181,10 @@
         },
         "rhs": {
           "$ref": "#/$defs/expression"
+        },
+        "algebraic": {
+          "type": "boolean",
+          "default": false
         }
       }
     },

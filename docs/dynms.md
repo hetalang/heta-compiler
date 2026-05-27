@@ -87,7 +87,7 @@ Dynamic states are integrated by the solver so the corresponding derivative must
 
 Static states are marked with `static: true` and can be modified by events only. If `derivative` is defined for a static state, it is ignored.
 
-If `static` is not specified, the state is dynamic by default.
+If `static` is not specified, the state is dynamic (not static) by default.
 
 ```json
 {
@@ -154,6 +154,23 @@ Derivatives define ordinary differential equations.
 ```
 
 Each non-static state may have at most one derivative, if not defined, it is an error.
+
+In some backends, it is possible to calculate dynamic states as steady-state values by defining algebraic equations instead of derivatives. In this case, the `algebraic` field should be set to `true` in the derivative definition. It is a subset of DAE (Differential-Algebraic Equations) problem having the important practical applications.
+
+```json
+{
+  "state": "x",
+  "rhs": {
+    "expr": "-k1 * x1 + k2 * x2",
+    "format": "heta"
+   },
+   "algebraic": true
+}
+```
+
+This means that the state `x` is calculated as an algebraic variable based on the equation `0 = -k1 * x1 + k2 * x2`.
+
+In backends that do not support algebraic equations, the workaround is to set use the equation like `dx/dt = k_large * (-k1 * x1 + k2 * x2)` where `k_large` is a large constant, like `1e15`. It is not the same as solution matrix approach, but it allows to approximate algebraic behavior.
 
 ---
 
@@ -407,3 +424,5 @@ For the specific converter or backend, additional validation rules may apply, su
 - supporting specific trigger types;
 - supporting specific event, like `root` detection for crossing triggers;
 - supporting initial state expressions;
+- supporting algebraic equations;
+- etc.

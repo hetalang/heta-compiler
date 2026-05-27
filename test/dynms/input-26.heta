@@ -1,0 +1,6 @@
+x1 @Record {ss: true}.= 1;
+x2 @Record .= 2;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;

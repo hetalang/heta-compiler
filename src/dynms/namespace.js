@@ -84,6 +84,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
         .map((x) => {
             let isConcentration = x.instanceOf('Species') && !x.isAmount;
             let stateId = isConcentration ? x.id + '_amt_' : x.id;
+            let algebraic = x.ss;
 
             // stoichiometry
             let exprString = x.backReferences.map((ref, i) => {
@@ -99,7 +100,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
             }).join('');
             let expr = Expression.fromString(exprString);
 
-            return { state: stateId, rhs: { expr: expRenderer(expr), format: exprFormat } };
+            return { state: stateId, rhs: { expr: expRenderer(expr), format: exprFormat }, algebraic: algebraic };
         });
 
     // all events in single list
