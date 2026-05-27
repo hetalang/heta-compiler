@@ -25,8 +25,7 @@ P_amt_ : 0 : product
 $PREAMBLE
 // static states
 double default_comp = 0.0; // Default compartment
-// crossing events
-// conditional events
+// triggers
 
 $MAIN
 // dynamic states initializations
@@ -43,6 +42,7 @@ $ODE
 double P = P_amt_ / default_comp; // product
 double S = S_amt_ / default_comp; // substrate
 double r1 = Vmax * S / (Km + S) * default_comp; // Michaelis-Menten reaction
+// triggers
 // derivatives
 dxdt_S_amt_ = -r1;
 dxdt_P_amt_ = r1;
