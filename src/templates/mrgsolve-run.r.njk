@@ -9,8 +9,8 @@ library('mrgsolve')
 # run first model
 sim <- {{ selectedNamespaces[0][0] }}_model %>%
   mrgsim(
-    delta = 1,
-    hmax = 0,
+    delta = 0.1,
+    hmax = 1e-3,
     maxsteps = 1e9,
     atol = 1e-7,
     rtol = 1e-4,

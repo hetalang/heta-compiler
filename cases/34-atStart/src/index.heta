@@ -1,0 +1,54 @@
+/* 
+  testing different combination of atStart for Switchers
+*/
+
+c1 @Compartment .= 1;
+threeshold @Const = 1.5;
+
+// TimeSwitcher first event at time 0
+s1 @Species { compartment: c1 } .= 1;
+r1 @Reaction { actors: s1 => } := k1 * s1 * c1;
+k1 @Const = 1e-3;
+
+sw1 @TimeSwitcher { start: 0, period: 12 };
+s1 [sw1]= s1 + 1 / c1;
+
+// TimeSwitcher first event at time 1
+s2 @Species { compartment: c1 } .= 1;
+r2 @Reaction { actors: s2 => } := k2 * s2 * c1;
+k2 @Const = 1e-3;
+
+sw2 @TimeSwitcher { start: 1, period: 12 };
+s2 [sw2]= s2 + 1 / c1;
+
+// CSwitcher first event at time 0
+s3 @Species { compartment: c1 } .= 1;
+r3 @Reaction { actors: s3 => } := k3 * s3 * c1;
+k3 @Const = 1e-3;
+
+sw3 @CSwitcher { trigger: "threeshold - s3", atStart: true };
+s3 [sw3]= s3 + 1 / c1;
+
+// CSwitcher with atStart: false
+s4 @Species { compartment: c1 } .= 1;
+r4 @Reaction { actors: s4 => } := k4 * s4 * c1;
+k4 @Const = 1e-3;
+
+sw4 @CSwitcher { trigger: "threeshold - s4", atStart: false };
+s4 [sw4]= s4 + 1 / c1;
+
+// DSwitcher first event at time 0
+s5 @Species { compartment: c1 } .= 1;
+r5 @Reaction { actors: s5 => } := k5 * s5 * c1;
+k5 @Const = 1e-3;
+
+sw5 @DSwitcher { trigger: "s5 < threeshold", atStart: true };
+s5 [sw5]= s5 + 1 / c1;
+
+// DSwitcher with atStart: false
+s6 @Species { compartment: c1 } .= 1;
+r6 @Reaction { actors: s6 => } := k6 * s6 * c1;
+k6 @Const = 1e-3;
+
+sw6 @DSwitcher { trigger: "s6 < threeshold", atStart: false };
+s6 [sw6]= s6 + 1 / c1;

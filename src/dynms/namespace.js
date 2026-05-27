@@ -169,7 +169,6 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
             event.trigger = {
                 type: 'crossing',
                 rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
-                //kind: 'crossing', // conditional
                 // direction: 'up', // down
                 detection: 'root', // step
                 atStart: switcher.atStart

@@ -32,13 +32,10 @@ $PREAMBLE
 {%- for state in states | filter2('static', true) %}
 double {{ state.id }} = 0.0; // {{ state.title | default('-') }}
 {%- endfor %}
-// crossing events
-{%- for event in events | filter2('trigger.type', 'crossing') %}
-bool {{ event.id }}__down__ = false;
-{%- endfor %}
-// conditional events
-{%- for event in events | filter2('trigger.type', 'conditional') %}
-bool {{ event.id }}__down__ = false;
+// triggers
+{%- for event in events | exclude2('trigger.type', 'time') %}
+bool {{ event.id }}__pull__ = false;
+int {{ event.id }}__charge__ = 0;
 {%- endfor %}
 
 $MAIN
@@ -53,11 +50,9 @@ if (NEWIND <= 1) {
 {%- for state in states | filter2('static', true) %}
 {{ state.id }} = {{ state.initial if state.initial is number else state.initial.expr }};
 {%- endfor %}
-{%- for event in events | filter2('trigger.type', 'crossing') %}
-{{ event.id }}__down__ = false;
-{%- endfor %}
-{%- for event in events | filter2('trigger.type', 'conditional') %}
-{{ event.id }}__down__ = false;
+{%- for event in events | exclude2('trigger.type', 'time') %}
+{{ event.id }}__pull__ = {{ not event.trigger.atStart }};
+{{ event.id }}__charge__ = 0;
 {%- endfor %}
 // time events
 {%- for event in events | filter2('trigger.type', 'time') %}
@@ -69,6 +64,17 @@ $ODE
 // assignments
 {%- for assignment in assignments %}
 double {{ assignment.id }} = {{ assignment.rhs if assignment.rhs is number else assignment.rhs.expr }}; // {{ assignment.title | default('-') }}
+{%- endfor %}
+// triggers
+{%- for event in events | exclude2('trigger.type', 'time') %}
+bool {{ event.id }}__trigger__ = ({{ event.trigger.rhs if event.trigger.rhs is number else event.trigger.rhs.expr }}){{ ' >= 0.0' if event.trigger.type == 'crossing'}};
+if ({{ event.id }}__trigger__ && !{{ event.id }}__pull__ && {{ event.id }}__active__) {
+  {{ event.id }}__pull__ = true;
+  {{ event.id }}__charge__++;
+}
+if (!{{ event.id }}__trigger__) {
+  {{ event.id }}__pull__ = false;
+}
 {%- endfor %}
 // derivatives
 {%- for derivative in derivatives %}
@@ -110,10 +116,10 @@ if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}) {
 
 {%- elif (event.trigger.type in ['crossing', 'conditional']) %}
 // {{ event.id }} // {{ event.title | default('-') }}
-if ({{ event.id }}__active__ && !{{ event.id }}__down__ && ({{ event.trigger.rhs.expr }}{{ ' >= 0.0' if event.trigger.type == 'crossing'}}){{ ' && TIME > 0.0' if not event.trigger.atStart }}) {
-  {{ event.id }}__down__ = true;
+// XXX: the problem here is that amt updates by the same amount each time
+for (int {{ event.id }}__i__ = 0; {{ event.id }}__i__ < {{ event.id }}__charge__; {{ event.id }}__i__++) {
   {%- for action in event.actions %}
-  {% if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
+  {%- if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
   {%- set evtId = 'evt_' + action.state + '_' %}
   mrg::evdata {{ evtId }}(TIME, 8);
   {{ evtId }}.amt = {{ action.rhs.expr }};
@@ -124,9 +130,8 @@ if ({{ event.id }}__active__ && !{{ event.id }}__down__ && ({{ event.trigger.rhs
   {{ action.state }} = {{ action.rhs.expr }};
   {%- endif %}
   {%- endfor %}
-} else {
-  {{ event.id }}__down__ = false;
 }
+{{ event.id }}__charge__ = 0;
 
 {%- endif %}
 {%- endfor %}
