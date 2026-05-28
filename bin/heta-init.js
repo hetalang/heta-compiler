@@ -38,6 +38,7 @@ const defaultPlatform = {
   },
   export: [
     '{ format: JSON, omit: [], useUnitsExpr: false }',
+    '#{ format: Canonical }',
     '#{ format: YAML, omit: [], useUnitsExpr: false }',
     '#{ format: DBSolve, powTransform: keep, version: 26 }',
     '#{ format: SLV, eventsOff: false, powTransform: keep, version: 26 }',
@@ -49,7 +50,8 @@ const defaultPlatform = {
     '#{ format: Julia }',
     '#{ format: Matlab }',
     '#{ format: Dot }',
-    '#{ format: Summary }'
+    '#{ format: Summary }',
+    '#{ format: DynMS }'
   ]
 };
 
