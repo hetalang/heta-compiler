@@ -367,12 +367,7 @@
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <apply><and/>
-              {{ '<true/>' if event.active else '<false/>' }}
-              <apply>{{ '<gt/>' if event.atStart else '<geq/>'}}
-                <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-                {{ startMathML }}
-              </apply>
+              {% if not event.active %}<apply><and/><false/>{% endif %}
               {% if event.period is defined or event.periodObj is defined %}
                 {%- set periodMathML = '<ci>' + event.period + '</ci>' if event.period is defined else '<cn>'+ event.periodObj.num + '</cn>'-%}
                 <apply><geq/>
@@ -408,6 +403,7 @@
               </apply>
               {% endif %}
             </apply>
+            {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
         <listOfEventAssignments>

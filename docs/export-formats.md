@@ -270,6 +270,12 @@ Export to [SBML format](https://sbml.org/).
 
 **[filepath]/[namespace].xml** : SBML formatted model
 
+### Known restrictions
+
+- SBML of older versions may not support all the features of Heta. The compartibility was checked for L3V2.
+- SBML format don't support `TimeSwitcher` and `CSwitcher`. They will be transformed to `DSwitcher` with the settingswhich give approximate behavior.
+- In SBML there is no way to clarify if the switcher work in a "root finding" mode. So we assume that the switcher works in "step" mode. But the implementation may exist in SBML ecosystem.
+
 **Example:**
 
 ```yaml
@@ -505,21 +511,19 @@ _No additional properties_
 
 ## Features support
 
-*na* means "not applicable"
-
-| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML | JSON, YAML | Table | Dot | DynMS |
+| | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML (L3V2) | JSON, YAML | Table | Dot | DynMS |
 |--|--|--|--|--|--|--|--|--|--|--|--|
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ |na |na |
-|`@TimeSwitcher` class                 |+  |+  |+  |+  |+  |+ |+ |+ |+ |na |+ |
+|`@TimeSwitcher` class                 |+  |+  |+  |+  |+  |+ |+ (converts to DSwitcher) |+ |+ |na |+ |
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |- |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`@CSwitcher` root finding                               |- |- |+ |- |+ |+ |na |na |na |na |+ |
+|`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+(converts to DSwitcher) |+ |+ |na |+ |
+|`@CSwitcher` root finding                               |- |- |+ |- |+ |+ |- |na |na |na |+ |
 |`@DSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`atStart` in `@CSwitcher` and `@DSwitcher`              |? |? |? |+ |? |? |? |+ |+ |na |+ |
+|`atStart` in `@CSwitcher` and `@DSwitcher`              |(?) |(?) |(?) |+ |(?) |(?) |- |+ |+ |na |+ |
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na |+ |
@@ -529,7 +533,13 @@ _No additional properties_
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+ |na |- |
 |`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+ |na |- |
 |`@Record {ss: true, ...}`                               |- |- |+ |- |- |- |- |+ |+ |na |+ |
-|`#defineFunction`, (sub) means substitution             |+(sub) |+(sub) |+ |+(sub) |+ |+(sub) |+ |+ |+ |na |+(sub) |
+|`#defineFunction`                                       |+(sub) |+(sub) |+ |+(sub) |+ |+(sub) |+ |+ |+ |na |+(sub) |
+
+**(sub)** means that the function will be substituted by its body in the output code.
+
+**(?)** means that the support depends on the specific case or need to be checked.
+
+**na** means "not applicable", for example, `@Scenario` or `@UnitDef` is not applicable for DBSolve.
 
 ## Math expressions conversions
 
