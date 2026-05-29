@@ -6,7 +6,7 @@
   "scripts": {
     "test:dev": "mocha test/math-json --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
-    "jsdoc": "jsdoc -r -c .jsdoc.json --readme docs/api-references.md -d docs/dev src",
+    "jsdoc": "jsdoc -c .jsdoc.json",
     "test:cov": "nyc --reporter=lcov npm run test",
     "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js",
     "pkg": "npx pkg . --compress GZip"

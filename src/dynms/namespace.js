@@ -33,7 +33,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
             let isConcentration = x.instanceOf('Species') && !x.isAmount;
             let initialAssignment = x.assignments['start_'];
             let num = initialAssignment.num; // use getter from Expression
-            let static = !x.isDynamic ? true : undefined;
+            let isStatic = !x.isDynamic ? true : undefined;
             let title = x.title;
 
             if (isConcentration) {
@@ -45,11 +45,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
             }
             
             if (typeof num === 'number' && !isConcentration) {
-                return { id: stateId, initial: num, static: static, title: title };
+                return { id: stateId, initial: num, static: isStatic, title: title };
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, initial: {expr: expRenderer(substitutedExpr), format: exprFormat}, static: static, title: title };
+                return { id: stateId, initial: {expr: expRenderer(substitutedExpr), format: exprFormat}, static: isStatic, title: title };
             }
         });
 

@@ -1,7 +1,13 @@
 {
     "plugins": ["plugins/markdown"],
+    "opts": {
+        "destination": "docs/dev",
+        "readme": "docs/api-references.md",
+        "recurse": true
+    },
     "recurseDepth": 10,
     "source": {
+        "include": ["src"],
         "includePattern": ".+\\.js(doc|x)?$",
         "excludePattern": "(^|\\/|\\\\)_"
     },
@@ -13,8 +19,8 @@
     "templates": {
         "cleverLinks": false,
         "monospaceLinks": true,
-		"default": {
-			"outputSourceFiles": false
-		}
+        "default": {
+            "outputSourceFiles": false
+        }
     }
 }
