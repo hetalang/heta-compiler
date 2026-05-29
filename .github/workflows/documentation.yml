@@ -25,6 +25,7 @@ jobs:
       run: |
         npm ci
         npm run jsdoc
+        npm run jsdoc:sitemap
         cp -f src/builder/declaration-schema.json docs
         touch docs/.nojekyll
     - name: Deploy to "gh-pages"
