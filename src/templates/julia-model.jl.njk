@@ -372,7 +372,7 @@ end
     {%- endfor %}
   )}([
     {%- for event in img.events | filter2('switcher.className', 'TimeSwitcher') %}
-    ({{ id }}_{{ event.switcher.id }}_tstops_func_, {{ id }}_{{event.switcher.id}}_affect_func_, {{ event.switcher.atStart | default('false') }}),
+    ({{ id }}_{{ event.switcher.id }}_tstops_func_, {{ id }}_{{event.switcher.id}}_affect_func_, true), {# for TimeSwitcher atStart doesn't exist#}
     {%- endfor %}
   ]),
   NamedTuple{(
