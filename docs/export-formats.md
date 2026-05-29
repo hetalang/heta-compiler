@@ -273,7 +273,8 @@ Export to [SBML format](https://sbml.org/).
 ### Known restrictions
 
 - SBML of older versions may not support all the features of Heta. The compartibility was checked for L3V2.
-- SBML format don't support `TimeSwitcher` and `CSwitcher`. They will be transformed to `DSwitcher` with the settingswhich give approximate behavior.
+- SBML format don't support `TimeSwitcher` and `CSwitcher`. They will be transformed to `DSwitcher` with the settings which give approximate behavior.
+- SBML older than L3V1 does not support `initialValue` in `<trigger>` so `atStart` property of `CSwitcher` and `DSwitcher` will not be applied.
 - In SBML there is no way to clarify if the switcher work in a "root finding" mode. So we assume that the switcher works in "step" mode. But the implementation may exist in SBML ecosystem.
 
 **Example:**
@@ -301,6 +302,11 @@ Export to [Simbiology](https://www.mathworks.com/products/simbiology.html)/Matla
 
 **[filepath]/[namespace].m** : Code which can be run in Matlab environment to generate Simbio model.
 **[filepath]/fun.m** : Auxilary mathematical functions to support Simbio code. This code should be placed in the same directory as simbio project.
+
+### Known restrictions
+
+- `TimeSwitcher` and `CSwitcher` are transformed to `DSwitcher` with the settings which give approximate behavior. The precision of switching time depends on `maxstep` parameter of solver. So you may need to set `maxstep` to a small value to have more precise switching time.
+- `DSwitcher` in Simbio does not support `atStart` property. The solver always act as it set to `false`.
 
 **Example:**
 ```yaml
@@ -516,14 +522,14 @@ _No additional properties_
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ |na |na |
 |`@TimeSwitcher` class                 |+  |+  |+  |+  |+  |+ |+ (converts to DSwitcher) |+ |+ |na |+ |
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |- |+ |+ |+ |na |+ |
+|`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+(converts to DSwitcher) |+ |+ |na |+ |
 |`@CSwitcher` root finding                               |- |- |+ |- |+ |+ |- |na |na |na |+ |
 |`@DSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`atStart` in `@CSwitcher` and `@DSwitcher`              |(?) |(?) |(?) |+ |(?) |(?) |- |+ |+ |na |+ |
+|`atStart` in `@CSwitcher` and `@DSwitcher`              |(?) |(?) |(?) |+ |(?) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na |+ |

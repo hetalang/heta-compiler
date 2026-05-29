@@ -16,7 +16,7 @@
     #{ format: SLV, eventsOff: false, powTransform: keep, version: 26 },
     { format: SBML, version: L2V4, filepath: 'sbml-L2V4' },
     { format: SBML, version: L3V1, filepath: 'sbml-L3V1' },
-    #{ format: Simbio },
+    { format: Simbio },
     { format: Mrgsolve },
     #{ format: Table, omitRows: 0, omit: [], bookType: csv, splitByClass: false },
     #{ format: XLSX, omitRows: 0, omit: [], splitByClass: true },
