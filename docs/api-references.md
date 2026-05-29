@@ -1,34 +1,34 @@
-# API references
+# JavaScript API
 
-This is a documentation for the JavaScript interface of __Heta compiler__.
+This section is generated from inline JSDoc comments in the Heta compiler source code.
 
-For users guidance and CLI references see the main [documentation site](./).
+For user guides, CLI usage, and export formats, see the main [Heta compiler documentation](./).
 
-*Under developments. If you have questions contact the developers directly.*
-
-## Main classes
+## Primary API
 
 - [Builder]{@link Builder}
 - [Container]{@link Container}
 - [Namespace]{@link Namespace}
 
-## Modules
+## Module loading
 
 - [ModuleSystem]{@link ModuleSystem}
 - [_Module]{@link _Module}
 
-## Elements
-
-- [Top]{@link Top}
-- [Component]{@link Component}
-- [Const]{@link Const}
-- [Unit]{@link Unit}
-- [Expression]{@link Expression}
-
-## Auxiliary
+## Logging
 
 - [Logger]{@link Logger}
 - [Transport]{@link Transport}
 - [JSONTransport]{@link JSONTransport}
 - [StdoutTransport]{@link StdoutTransport}
 - [StringTransport]{@link StringTransport}
+
+## Core model objects
+
+Some core classes are referenced by the public API and may appear in method signatures before they receive dedicated reference pages.
+
+- [Top]{@link Top}
+- [Component]{@link Component}
+- [Const]{@link Const}
+- [Unit]{@link Unit}
+- [Expression]{@link Expression}

@@ -3,15 +3,16 @@
     "opts": {
         "destination": "docs/dev",
         "readme": "docs/api-references.md",
-        "recurse": true
+        "recurse": true,
+        "template": "templates/default"
     },
     "recurseDepth": 10,
     "source": {
         "include": ["src"],
-        "includePattern": ".+\\.js(doc|x)?$",
+        "includePattern": "\\.js$",
         "excludePattern": "(^|\\/|\\\\)_"
     },
-    "sourceType": "module",
+    "sourceType": "script",
     "tags": {
         "allowUnknownTags": true,
         "dictionaries": ["jsdoc", "closure"]
