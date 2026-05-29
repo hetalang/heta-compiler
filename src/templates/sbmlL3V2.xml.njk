@@ -11,3 +11,9 @@
     timeUnits="{{ population.get('t').unitsHash() }}"
   {%- endif %}
 {%- endblock %}
+
+{% block timeEventTriggerAttributes %} initialValue="false"{% endblock %}
+
+{% block cEventTriggerAttributes %} initialValue="{{ 'false' if event.atStart else 'true' }}"{% endblock %}
+
+{% block dEventTriggerAttributes %} initialValue="{{ 'false' if event.atStart else 'true' }}"{% endblock %}

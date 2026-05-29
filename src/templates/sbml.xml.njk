@@ -365,7 +365,7 @@
         id="{{event.id}}"
         metaid="{{event.index}}"
         >
-        <trigger>
+        <trigger{% block timeEventTriggerAttributes %}{% endblock %}>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
               {% if not event.active %}<apply><and/><false/>{% endif %}
               {% if event.period is defined or event.periodObj is defined %}
@@ -420,7 +420,7 @@
       <event
         id="{{event.id}}" metaid="{{event.index}}"
         >
-        <trigger>
+        <trigger{% block cEventTriggerAttributes %}{% endblock %}>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             {% if not event.active %}<apply><and/><false/>{% endif %}
             <apply>
@@ -446,7 +446,7 @@
       <event
         id="{{ event.id }}" metaid="{{ event.index }}"
         >
-        <trigger>
+        <trigger{% block dEventTriggerAttributes %}{% endblock %}>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
             {% if not event.active %}<apply><and/><false/>{% endif -%}
             {{ event.trigger.toCMathML(true) }}
