@@ -463,7 +463,9 @@ _No additional properties_
 
 ### Known restrictions
 
-- `CSwitcher` is not supported.
+- `DSwitcher` and `TimeSwicher` does not supported directly. They are transformed to `CSwitcher` with the settings which give approximate behavior.
+- `atStart` property is not supported for `CSwitcher` and `DSwitcher`. The solver always act as it set to `false`.
+- Unstable behavior may occure when two or more switcher run simulataneously.
 
 **Example:**
 
@@ -520,7 +522,7 @@ _No additional properties_
 | | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML (L3V2) | JSON, YAML | Table | Dot | DynMS |
 |--|--|--|--|--|--|--|--|--|--|--|--|
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ |na |na |
-|`@TimeSwitcher` class                 |+  |+  |+  |+  |+  |+ |+ (converts to DSwitcher) |+ |+ |na |+ |
+|`@TimeSwitcher` class                 |+  |+  |+  |+  |+ (converts to DSwitcher) |+ |+ (converts to DSwitcher) |+ |+ |na |+ |
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
@@ -528,8 +530,8 @@ _No additional properties_
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+(converts to DSwitcher) |+ |+ |na |+ |
 |`@CSwitcher` root finding                               |- |- |+ |- |+ |+ |- |na |na |na |+ |
-|`@DSwitcher` class                                      |- |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`atStart` in `@CSwitcher` and `@DSwitcher`              |(?) |(?) |(?) |+ |(?) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
+|`@DSwitcher` class                                      |- |+ |+ |+ |+ (converts to DSwitcher) |+ |+ |+ |+ |na |+ |
+|`atStart` in `@CSwitcher` and `@DSwitcher`              |(?) |(?) |(?) |+ |- (never run at 0) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na |+ |
