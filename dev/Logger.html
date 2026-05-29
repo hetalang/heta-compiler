@@ -49,8 +49,7 @@
 
 
 <div class="description">
-    <p>Object to work with several logging transports simultaneously.
-This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">https://github.com/winstonjs/winston</a> package but much simpler.</p>
+    <p>Minimal logger that forwards events to one or more transports.</p>
 </div>
 
 
@@ -107,7 +106,7 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
 
             
 
-            <td class="description last"><p>storage for different log transports.</p></td>
+            <td class="description last"><p>Registered transports.</p></td>
         </tr>
 
     
@@ -130,7 +129,7 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
 
             
 
-            <td class="description last"><p>Value is equal to <code>true</code> if there is at least one log of level 'error' or higher.</p></td>
+            <td class="description last"><p><code>true</code> after any <code>error</code> or <code>crit</code> event.</p></td>
         </tr>
 
     
@@ -220,7 +219,7 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
 
 
 <div class="description">
-    <p>To check if there is a log event of level 'error' or higher.</p>
+    <p><code>true</code> when at least one <code>error</code> or <code>crit</code> event was logged.</p>
 </div>
 
 
@@ -289,7 +288,7 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
 
 
 <div class="description">
-    <p>To attach another transport to a logger.</p>
+    <p>Adds a transport.</p>
 </div>
 
 
@@ -315,8 +314,6 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
         
 
         
-        <th>Default</th>
-        
 
         <th class="last">Description</th>
     </tr>
@@ -334,6 +331,9 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
             
                 
 <span class="param-type"><a href="Transport.html">Transport</a></span>
+|
+
+<span class="param-type">function</span>
 
 
             
@@ -342,14 +342,8 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
             
 
             
-                <td class="default">
-                
-                    ()
-                
-                </td>
-            
 
-            <td class="description last"><p>=&gt; {} <code>Transport</code> instance of function.</p></td>
+            <td class="description last"><p>Transport instance or callback.</p></td>
         </tr>
 
     
@@ -443,7 +437,7 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
     
 
     
-    <h4 class="name" id="clearTransport"><span class="type-signature"></span>clearTransport<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="clearTransport"><span class="type-signature"></span>clearTransport<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -451,7 +445,7 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
 
 
 <div class="description">
-    <p>Remove all transports from a logger.</p>
+    <p>Removes all transports.</p>
 </div>
 
 
@@ -515,167 +509,24 @@ This class was inspired by <a href="https:%5C/%5C/github.com/winstonjs/winston">
 
 
 
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="debug"><span class="type-signature"></span>debug<span class="signature">(msg, opt)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>To add a 'debug' level message to logger.
-This is just a shortened version of the general log interface:</p>
-<pre class="prettyprint source lang-js"><code>logger.debug('Something happens.')
-</code></pre>
-<p>which is the same as</p>
-<pre class="prettyprint source lang-js"><code>logger.log('debug', 'Something happens.')
-</code></pre>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
+<h5>Returns:</h5>
 
         
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>msg</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+<span class="param-type">void</span>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Log message.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>opt</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Options for transport.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -687,7 +538,7 @@ This is just a shortened version of the general log interface:</p>
     
 
     
-    <h4 class="name" id="error"><span class="type-signature"></span>error<span class="signature">(msg, opt)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="debug"><span class="type-signature"></span>debug<span class="signature">(msg, opt)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -695,8 +546,7 @@ This is just a shortened version of the general log interface:</p>
 
 
 <div class="description">
-    <p>To add a 'error' level message to logger.
-This is just a shortened version of the general log interface:</p>
+    <p>Adds a <code>debug</code> event.</p>
 </div>
 
 
@@ -832,6 +682,24 @@ This is just a shortened version of the general log interface:</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -843,7 +711,7 @@ This is just a shortened version of the general log interface:</p>
     
 
     
-    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">(msg, opt)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="error"><span class="type-signature"></span>error<span class="signature">(msg, opt)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -851,8 +719,7 @@ This is just a shortened version of the general log interface:</p>
 
 
 <div class="description">
-    <p>To add a 'info' level message to logger.
-This is just a shortened version of the general log interface:</p>
+    <p>Adds an <code>error</code> event.</p>
 </div>
 
 
@@ -988,6 +855,24 @@ This is just a shortened version of the general log interface:</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -999,7 +884,7 @@ This is just a shortened version of the general log interface:</p>
     
 
     
-    <h4 class="name" id="log"><span class="type-signature"></span>log<span class="signature">(level, msg, opt)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="info"><span class="type-signature"></span>info<span class="signature">(msg, opt)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -1007,8 +892,180 @@ This is just a shortened version of the general log interface:</p>
 
 
 <div class="description">
-    <p>To add a new log event to logger.
-This event will be then sent to all transports.</p>
+    <p>Adds an <code>info</code> event.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Log message.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>opt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Options for transport.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="log"><span class="type-signature"></span>log<span class="signature">(level, msg, opt)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds a log event and sends it to all transports.</p>
 </div>
 
 
@@ -1060,7 +1117,7 @@ This event will be then sent to all transports.</p>
 
             
 
-            <td class="description last"><p>Log level: 'debug', 'info', 'warn', 'error', 'crit'</p></td>
+            <td class="description last"><p>Log level: <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, or <code>crit</code>.</p></td>
         </tr>
 
     
@@ -1167,6 +1224,24 @@ This event will be then sent to all transports.</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1178,7 +1253,7 @@ This event will be then sent to all transports.</p>
     
 
     
-    <h4 class="name" id="warn"><span class="type-signature"></span>warn<span class="signature">(msg, opt)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="warn"><span class="type-signature"></span>warn<span class="signature">(msg, opt)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -1186,8 +1261,7 @@ This event will be then sent to all transports.</p>
 
 
 <div class="description">
-    <p>To add a 'warn' level message to logger.
-This is just a shortened version of the general log interface:</p>
+    <p>Adds a <code>warn</code> event.</p>
 </div>
 
 
@@ -1323,6 +1397,24 @@ This is just a shortened version of the general log interface:</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1344,13 +1436,13 @@ This is just a shortened version of the general log interface:</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Builder.html">Builder</a></li><li><a href="Container.html">Container</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Transport.html">Transport</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractExport.html">AbstractExport</a></li><li><a href="Builder.html">Builder</a></li><li><a href="Component.html">Component</a></li><li><a href="Container.html">Container</a></li><li><a href="Expression.html">Expression</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Top.html">Top</a></li><li><a href="Transport.html">Transport</a></li><li><a href="Unit.html">Unit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Apr 28 2026 15:30:27 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri May 29 2026 16:48:48 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Builder<span class="signature">(declaration)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Builder<span class="signature">(declaration, fileReadHandler, fileWriteHandler, transportArray)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="Builder"><span class="type-signature"></span>new Builder<span class="signature">(declaration)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Builder"><span class="type-signature"></span>new Builder<span class="signature">(declaration, fileReadHandler, fileWriteHandler, transportArray)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,10 +49,10 @@
 
 
 <div class="description">
-    <p>Auxiliary class for performing compilation and storing a platform's options.
-The main purpose is a support of Heta compiler's CLI mode.</p>
-<p>The main method of the class is <a href="Builder.html#run"><code>Builder#run</code></a> which<br>
-runs a sequence of compilation steps.</p>
+    <p>Compiles a Heta platform from a declaration object.</p>
+<p><code>Builder</code> owns the main <a href="Container.html"><code>Container</code></a>, reads modules through the supplied
+file handler, validates the platform declaration, and writes export outputs.
+It is also the main class used by the Heta compiler CLI.</p>
 </div>
 
 
@@ -94,7 +94,7 @@ runs a sequence of compilation steps.</p>
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -104,9 +104,77 @@ runs a sequence of compilation steps.</p>
 
             
 
-            <td class="description last"><p>Object representing options for builder,
-see <a href="https://hetalang.github.io/hetacompiler/cli-references">CLI references</a>
-for more information about the structure.</p></td>
+            <td class="description last"><p>Platform declaration object. See the
+<a href="https://hetalang.github.io/heta-compiler/platform-file">platform file format</a>.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fileReadHandler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Reads module content by filename and returns text.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fileWriteHandler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Writes exported content by filename.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>transportArray</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;<a href="Transport.html">Transport</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Logger transports attached to the builder logger.</p></td>
         </tr>
 
     
@@ -160,7 +228,7 @@ for more information about the structure.</p></td>
 
             
 
-            <td class="description last"><p>This is the reference to the main platform storage.</p></td>
+            <td class="description last"><p>Main platform storage.</p></td>
         </tr>
 
     
@@ -183,7 +251,7 @@ for more information about the structure.</p></td>
 
             
 
-            <td class="description last"><p>Reference to logger object of platform. This object can also be called with <code>this.container.logger</code></p></td>
+            <td class="description last"><p>Logger shared with <code>container.logger</code>.</p></td>
         </tr>
 
     
@@ -206,8 +274,7 @@ for more information about the structure.</p></td>
 
             
 
-            <td class="description last"><p>Absolute path of the directory for exporting files.
-Calculated from <code>declaration.options.distDir</code> property.</p></td>
+            <td class="description last"><p>Directory where export files are written, from <code>declaration.options.distDir</code>.</p></td>
         </tr>
 
     
@@ -230,50 +297,7 @@ Calculated from <code>declaration.options.distDir</code> property.</p></td>
 
             
 
-            <td class="description last"><p>Absolute path of the directory for storing meta files.
-Calculated from <code>declaration.options.metaDir</code>.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>...</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Other properties inherit from <code>declaration</code> object, see
-<a href="https://hetalang.github.io/hetacompiler/cli-references#declaration-file-format">CLI references</a></p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>_exportClasses</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>map-like structure for storing all available constructors describing <code>_Export</code>s.</p></td>
+            <td class="description last"><p>Directory where debug meta files are written, from <code>declaration.options.metaDir</code>.</p></td>
         </tr>
 
     
@@ -286,7 +310,7 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">object.&lt;string, function()></span>
 
 
             
@@ -296,7 +320,7 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
 
             
 
-            <td class="description last"><p>the same as <code>_exportClasses</code> but bound to this builder.</p></td>
+            <td class="description last"><p>Export constructors bound to this builder.</p></td>
         </tr>
 
     
@@ -319,7 +343,7 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
 
             
 
-            <td class="description last"><p>Storage for <code>_Export</code> instances.</p></td>
+            <td class="description last"><p>Export instances created from the declaration.</p></td>
         </tr>
 
     
@@ -409,7 +433,7 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
     
 
     
-    <h4 class="name" id="exportMany"><span class="type-signature"></span>exportMany<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="exportMany"><span class="type-signature"></span>exportMany<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -417,7 +441,7 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
 
 
 <div class="description">
-    <p>Run exporting of files based on components of <code>this.container.exportArray</code>.</p>
+    <p>Writes all exports configured in the platform declaration.</p>
 </div>
 
 
@@ -481,6 +505,24 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -492,7 +534,7 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
     
 
     
-    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Builder.html">Builder</a>}</span></h4>
     
 
     
@@ -500,21 +542,10 @@ Calculated from <code>declaration.options.metaDir</code>.</p></td>
 
 
 <div class="description">
-    <p>The method runs building of a platform declared with <code>Builder</code> object.
-If the execution throws an error platform building will stop.</p>
-<p>The sequence of operations is following:</p>
-<ol>
-<li>Read and parse platform modules (files).</li>
-<li>Modules integration. Creation meta files if required.</li>
-<li>Loading integrated structures into <code>Platform</code>.</li>
-<li>Setting cross-references in platform's elements.</li>
-<li>Checking circular references in mathematical expressions.</li>
-<li>Checking circular unitDef references. Checking circular functionDef references.</li>
-<li>Checking left and right side units compatibility for mathematical expressions.</li>
-<li>Checking unit's terms.</li>
-<li>Export of a platform to series of formats.
-Depending on the declaration file it runs <a href="Builder.html#exportMany"><code>Builder#exportMany</code></a> or <code>Builder#exportJuliaOnly</code>.</li>
-</ol>
+    <p>Runs the full build pipeline.</p>
+<p>The pipeline reads and integrates modules, optionally writes debug meta
+files, loads the resulting Q-array, binds references, checks circular
+dependencies, checks units and terms, and writes configured exports.</p>
 </div>
 
 
@@ -578,6 +609,28 @@ Depending on the declaration file it runs <a href="Builder.html#exportMany"><cod
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This builder.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Builder.html">Builder</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -599,13 +652,13 @@ Depending on the declaration file it runs <a href="Builder.html#exportMany"><cod
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Builder.html">Builder</a></li><li><a href="Container.html">Container</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Transport.html">Transport</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractExport.html">AbstractExport</a></li><li><a href="Builder.html">Builder</a></li><li><a href="Component.html">Component</a></li><li><a href="Container.html">Container</a></li><li><a href="Expression.html">Expression</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Top.html">Top</a></li><li><a href="Transport.html">Transport</a></li><li><a href="Unit.html">Unit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Apr 28 2026 15:30:27 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri May 29 2026 16:48:48 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

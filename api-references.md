@@ -1,31 +1,34 @@
-# API references
+# JavaScript API
 
-This is a documentation for the JavaScript interface of __Heta compiler__.
+This section is generated from inline JSDoc comments in the Heta compiler source code.
 
-For users guidance and CLI references see the main [documentation site](./).
+For installation, CLI usage, platform files, and export formats, see the main
+[Heta compiler documentation](./).
 
-*Under developments. If you have questions contact the developers directly.*
+Most applications start with [Builder]{@link Builder}. Lower-level tools can
+work directly with [Container]{@link Container}, [Namespace]{@link Namespace},
+and Q-object arrays.
 
-## Main classes
+## Primary API
 
 - [Builder]{@link Builder}
 - [Container]{@link Container}
 - [Namespace]{@link Namespace}
 
-## Modules
-
-- [ModuleSystem]{@link ModuleSystem}
-- [_Module]{@link _Module}
-
-## Elements
+## Core Model Objects
 
 - [Top]{@link Top}
 - [Component]{@link Component}
-- [Const]{@link Const}
 - [Unit]{@link Unit}
 - [Expression]{@link Expression}
 
-## Auxiliary
+## Modules And Exports
+
+- [ModuleSystem]{@link ModuleSystem}
+- [_Module]{@link _Module}
+- [AbstractExport]{@link AbstractExport}
+
+## Logging
 
 - [Logger]{@link Logger}
 - [Transport]{@link Transport}

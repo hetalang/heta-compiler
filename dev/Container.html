@@ -49,8 +49,9 @@
 
 
 <div class="description">
-    <p>The main class storing a modeling platform and it's methods.</p>
-<p>It is highly recommended to use only one container instance in developed code.</p>
+    <p>Stores platform elements and provides actions for loading, binding, checking, and exporting them.</p>
+<p>A container owns namespaces, unit definitions, function definitions, scenarios, and a logger.
+A typical platform uses one container instance.</p>
 </div>
 
 
@@ -433,7 +434,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Checks circular ref in FunctionDef</p>
+    <p>Checks circular dependencies between user-defined functions and logs errors.</p>
 </div>
 
 
@@ -501,7 +502,7 @@ for all components where namespace name is not set.</p></td>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -538,7 +539,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Checks circular dependencies in all instances of <code>Record</code>.</p>
+    <p>Checks circular dependencies in record assignments across concrete namespaces.</p>
 </div>
 
 
@@ -606,7 +607,7 @@ for all components where namespace name is not set.</p></td>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -643,7 +644,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Checks circular ref in UnitDef</p>
+    <p>Checks circular dependencies between unit definitions and logs errors.</p>
 </div>
 
 
@@ -711,7 +712,7 @@ for all components where namespace name is not set.</p></td>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -748,7 +749,8 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>check TimeScale, Compartment, Species, Reaction for correct terms.</p>
+    <p>Checks whether units use terms allowed for <code>TimeScale</code>, <code>Compartment</code>,
+<code>Species</code>, and <code>Reaction</code>-like size components.</p>
 </div>
 
 
@@ -816,7 +818,7 @@ for all components where namespace name is not set.</p></td>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -853,7 +855,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Compare left and right side of <code>Record</code>, <code>DSwitcher</code>, <code>CSwitcher</code>, <code>StopSwitcher</code>.</p>
+    <p>Checks unit consistency in records and switcher expressions.</p>
 </div>
 
 
@@ -921,7 +923,7 @@ for all components where namespace name is not set.</p></td>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -958,7 +960,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Creates <code>FunctionDef</code> instance and puts it in <code>container.functionDefStorage</code>.</p>
+    <p>Creates a <code>FunctionDef</code> and stores it by id.</p>
 </div>
 
 
@@ -1023,7 +1025,7 @@ for all components where namespace name is not set.</p></td>
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -1033,7 +1035,7 @@ for all components where namespace name is not set.</p></td>
 
             
 
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+            <td class="description last"><p>Marks the function definition as read-only.</p></td>
         </tr>
 
     
@@ -1135,7 +1137,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Creates <code>UnitDef</code> instance and puts it in <code>container.unitDefStorage</code>.</p>
+    <p>Creates a <code>UnitDef</code> and stores it by id.</p>
 </div>
 
 
@@ -1200,7 +1202,7 @@ for all components where namespace name is not set.</p></td>
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -1210,7 +1212,7 @@ for all components where namespace name is not set.</p></td>
 
             
 
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+            <td class="description last"><p>Marks the unit definition as read-only.</p></td>
         </tr>
 
     
@@ -1304,7 +1306,7 @@ for all components where namespace name is not set.</p></td>
     
 
     
-    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(q)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="delete"><span class="type-signature"></span>delete<span class="signature">(q)</span><span class="type-signature"> &rarr; {boolean|undefined}</span></h4>
     
 
     
@@ -1312,7 +1314,7 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Deletes the <code>Component</code> with the index. If it is not exist it throws an error.</p>
+    <p>Deletes an existing component from a namespace.</p>
 </div>
 
 
@@ -1354,7 +1356,7 @@ for all components where namespace name is not set.</p></td>
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">object</span>
 
 
             
@@ -1429,7 +1431,7 @@ for all components where namespace name is not set.</p></td>
 
         
 <div class="param-desc">
-    <p><code>true</code> if component existed and was deleted, <code>false</code> otherwise.</p>
+    <p><code>true</code> if the component was deleted, otherwise <code>undefined</code>.</p>
 </div>
 
 
@@ -1441,6 +1443,9 @@ for all components where namespace name is not set.</p></td>
     <dd>
         
 <span class="param-type">boolean</span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -1458,7 +1463,7 @@ for all components where namespace name is not set.</p></td>
     
 
     
-    <h4 class="name" id="export"><span class="type-signature"></span>export<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {AbstractExport}</span></h4>
+    <h4 class="name" id="deleteNS"><span class="type-signature"></span>deleteNS<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Container.html">Container</a>}</span></h4>
     
 
     
@@ -1466,9 +1471,163 @@ for all components where namespace name is not set.</p></td>
 
 
 <div class="description">
-    <p>Creates one of inheritors of <code>AbstractExport</code> and put it in <code>container.exportArray</code>.
-The inheritor depends on <code>q.format</code> property.
-For example <code>{id: 'output', format: 'json', ...}</code> creates the object of <code>JSONExport</code> type.</p>
+    <p>Deletes a namespace by <code>q.space</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The namespace selector.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>This container.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Container.html">Container</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="export"><span class="type-signature"></span>export<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="AbstractExport.html">AbstractExport</a>|undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates an export instance from an inline <code>#export</code> action.</p>
+<p>The export class is selected by <code>q.format</code>, for example <code>format: &quot;json&quot;</code>
+creates a JSON export instance.</p>
 </div>
 
 
@@ -1533,7 +1692,7 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -1543,7 +1702,7 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
 
             
 
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+            <td class="description last"><p>Kept for action compatibility.</p></td>
         </tr>
 
     
@@ -1571,6 +1730,8 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
 
     
 
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Use the `export` section in the platform declaration instead.</li></ul></dd>
     
 
     
@@ -1608,7 +1769,7 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
 
         
 <div class="param-desc">
-    <p>The created object.</p>
+    <p>The created export, or <code>undefined</code> if validation fails.</p>
 </div>
 
 
@@ -1619,7 +1780,10 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
     </dt>
     <dd>
         
-<span class="param-type">AbstractExport</span>
+<span class="param-type"><a href="AbstractExport.html">AbstractExport</a></span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -1637,7 +1801,7 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
     
 
     
-    <h4 class="name" id="forceInsert"><span class="type-signature"></span>forceInsert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    <h4 class="name" id="forceInsert"><span class="type-signature"></span>forceInsert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>|undefined}</span></h4>
     
 
     
@@ -1645,10 +1809,9 @@ For example <code>{id: 'output', format: 'json', ...}</code> creates the object 
 
 
 <div class="description">
-    <p>Creates one of inheritors of <code>Component</code> and put it in a namespace.
-The inheritor depends on <code>q.class</code> property.
-For example <code>{id: 'k1', class: 'Const', namespace: 'one'}</code> creates the object of <code>Const</code> type
-and puts it into namespace <code>one</code>.</p>
+    <p>Creates a component of <code>q.class</code> and stores it in a namespace.</p>
+<p>For example <code>{id: &quot;k1&quot;, class: &quot;Const&quot;, space: &quot;one&quot;}</code> creates a <code>Const</code>
+component in namespace <code>one</code>.</p>
 </div>
 
 
@@ -1713,7 +1876,7 @@ and puts it into namespace <code>one</code>.</p>
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -1723,7 +1886,7 @@ and puts it into namespace <code>one</code>.</p>
 
             
 
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+            <td class="description last"><p>Marks the component as read-only.</p></td>
         </tr>
 
     
@@ -1788,7 +1951,7 @@ and puts it into namespace <code>one</code>.</p>
 
         
 <div class="param-desc">
-    <p>The created object.</p>
+    <p>The created component, or <code>undefined</code> if validation fails.</p>
 </div>
 
 
@@ -1800,6 +1963,159 @@ and puts it into namespace <code>one</code>.</p>
     <dd>
         
 <span class="param-type"><a href="Component.html">Component</a></span>
+|
+
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="hasMeta"><span class="type-signature"></span>hasMeta<span class="signature">(q)</span><span class="type-signature"> &rarr; {undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Accepts metadata records without changing the container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Metadata object.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -1922,7 +2238,7 @@ and puts it into namespace <code>one</code>.</p>
     
 
     
-    <h4 class="name" id="import"><span class="type-signature"></span>import<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    <h4 class="name" id="import"><span class="type-signature"></span>import<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>|undefined}</span></h4>
     
 
     
@@ -1930,8 +2246,7 @@ and puts it into namespace <code>one</code>.</p>
 
 
 <div class="description">
-    <p>Clone a component to another space.
-It also renames id and references stored in a component.</p>
+    <p>Clones one component from another namespace and rewrites its references.</p>
 </div>
 
 
@@ -2048,7 +2363,7 @@ It also renames id and references stored in a component.</p>
 
         
 <div class="param-desc">
-    <p>Cloned component.</p>
+    <p>Cloned component, or <code>undefined</code> if validation fails.</p>
 </div>
 
 
@@ -2060,6 +2375,9 @@ It also renames id and references stored in a component.</p>
     <dd>
         
 <span class="param-type"><a href="Component.html">Component</a></span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -2095,7 +2413,7 @@ container.import(q);
     
 
     
-    <h4 class="name" id="importNS"><span class="type-signature"></span>importNS<span class="signature">(q)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Component.html">Component</a>>}</span></h4>
+    <h4 class="name" id="importNS"><span class="type-signature"></span>importNS<span class="signature">(q)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="Component.html">Component</a>>|undefined}</span></h4>
     
 
     
@@ -2103,7 +2421,7 @@ container.import(q);
 
 
 <div class="description">
-    <p>Clones and rename all components to another space.</p>
+    <p>Clones all components from one namespace into another namespace.</p>
 </div>
 
 
@@ -2220,7 +2538,7 @@ container.import(q);
 
         
 <div class="param-desc">
-    <p>Array of cloned components.</p>
+    <p>Array of cloned components, or <code>undefined</code> if validation fails.</p>
 </div>
 
 
@@ -2232,6 +2550,9 @@ container.import(q);
     <dd>
         
 <span class="param-type">Array.&lt;<a href="Component.html">Component</a>></span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -2264,6 +2585,186 @@ container.importNS(q);
     
 
     
+    <h4 class="name" id="insert"><span class="type-signature"></span>insert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>|undefined}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Inserts a component and logs a warning when an existing component is replaced.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The component object in Q-object format.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isCore</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Marks the component as read-only.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The inserted component, or <code>undefined</code> if validation fails.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+|
+
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="knitMany"><span class="type-signature"></span>knitMany<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Container.html">Container</a>}</span></h4>
     
 
@@ -2272,7 +2773,7 @@ container.importNS(q);
 
 
 <div class="description">
-    <p>Creates references between elements in a platform.
+    <p>Creates references between platform elements.
 It includes all concrete namespaces and <code>UnitDef</code> instances.</p>
 </div>
 
@@ -2341,7 +2842,7 @@ It includes all concrete namespaces and <code>UnitDef</code> instances.</p>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -2370,7 +2871,7 @@ It includes all concrete namespaces and <code>UnitDef</code> instances.</p>
     
 
     
-    <h4 class="name" id="load"><span class="type-signature"></span>load<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Container.html">Container</a>}</span></h4>
+    <h4 class="name" id="load"><span class="type-signature"></span>load<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {*}</span></h4>
     
 
     
@@ -2378,10 +2879,9 @@ It includes all concrete namespaces and <code>UnitDef</code> instances.</p>
 
 
 <div class="description">
-    <p>Runs an action (like creating a component) based on <code>q.action</code> property.
-If <code>q.action</code> is not set than apply &quot;upsert&quot;.
-An &quot;action&quot; name should be set as a name of the <code>Container</code> method.</p>
-<p>This is the main method to convert from Q-object into platform elements.</p>
+    <p>Runs a container action described by <code>q.action</code>.</p>
+<p>If <code>q.action</code> is not set, <code>upsert</code> is used. This is the main entry point
+for converting Q-objects into platform elements.</p>
 </div>
 
 
@@ -2533,7 +3033,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>Result returned by the invoked action, or <code>undefined</code> if the action is invalid.</p>
 </div>
 
 
@@ -2544,7 +3044,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
     </dt>
     <dd>
         
-<span class="param-type"><a href="Container.html">Container</a></span>
+<span class="param-type">*</span>
 
 
     </dd>
@@ -2570,7 +3070,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
 
 
 <div class="description">
-    <p>Runs <a href="Container.html#load"><code>Container#load</code></a> method many times for each element of <code>qArr</code> vector sequentially.</p>
+    <p>Loads a Q-array sequentially.</p>
 </div>
 
 
@@ -2722,7 +3222,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
 
         
 <div class="param-desc">
-    <p>This function returns the container.</p>
+    <p>This container.</p>
 </div>
 
 
@@ -2751,7 +3251,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
     
 
     
-    <h4 class="name" id="setNS"><span class="type-signature"></span>setNS<span class="signature">(The)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="select"><span class="type-signature"></span>select<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>|undefined}</span></h4>
     
 
     
@@ -2759,9 +3259,7 @@ An &quot;action&quot; name should be set as a name of the <code>Container</code>
 
 
 <div class="description">
-    <p>Creates namespace with id from <code>q.space</code> and push it to <code>container.namespaceStorage</code>.
-If the namespace already exists it does not create anything but updates namespace properties.
-It can also change <code>type</code> of a namespace.</p>
+    <p>Selects a component by id and namespace.</p>
 </div>
 
 
@@ -2797,7 +3295,7 @@ It can also change <code>type</code> of a namespace.</p>
 
         <tr>
             
-                <td class="name"><code>The</code></td>
+                <td class="name"><code>q</code></td>
             
 
             <td class="type">
@@ -2813,7 +3311,7 @@ It can also change <code>type</code> of a namespace.</p>
 
             
 
-            <td class="description last"><p><code>#setNS</code> action in JS object format.</p></td>
+            <td class="description last"><p>Component selector in Q-object format.</p></td>
         </tr>
 
     
@@ -2874,6 +3372,184 @@ It can also change <code>type</code> of a namespace.</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Selected component, or <code>undefined</code> if validation fails.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Component.html">Component</a></span>
+|
+
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="setNS"><span class="type-signature"></span>setNS<span class="signature">(q)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates or updates a namespace.</p>
+<p>If the namespace is new, a default <code>t @TimeScale</code> component is inserted.
+Existing namespaces keep their components and can switch between
+<code>abstract</code> and <code>concrete</code> type.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>q</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>#setNS</code> action in JS object format.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2893,7 +3569,7 @@ It can also change <code>type</code> of a namespace.</p>
 
 
 <div class="description">
-    <p>Creates <code>Scenario</code> instance and puts it in <code>container.scenarioStorage</code>.</p>
+    <p>Creates a <code>Scenario</code> and stores it by id.</p>
 </div>
 
 
@@ -2958,7 +3634,7 @@ It can also change <code>type</code> of a namespace.</p>
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -2968,7 +3644,7 @@ It can also change <code>type</code> of a namespace.</p>
 
             
 
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+            <td class="description last"><p>Marks the scenario as read-only.</p></td>
         </tr>
 
     
@@ -3062,7 +3738,7 @@ It can also change <code>type</code> of a namespace.</p>
     
 
     
-    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(q)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>|undefined}</span></h4>
     
 
     
@@ -3070,7 +3746,7 @@ It can also change <code>type</code> of a namespace.</p>
 
 
 <div class="description">
-    <p>Searches a component with the index and updates its properties.</p>
+    <p>Updates an existing component.</p>
 </div>
 
 
@@ -3187,7 +3863,7 @@ It can also change <code>type</code> of a namespace.</p>
 
         
 <div class="param-desc">
-    <p>Updated component.</p>
+    <p>Updated component, or <code>undefined</code> if validation fails.</p>
 </div>
 
 
@@ -3199,6 +3875,9 @@ It can also change <code>type</code> of a namespace.</p>
     <dd>
         
 <span class="param-type"><a href="Component.html">Component</a></span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -3216,7 +3895,7 @@ It can also change <code>type</code> of a namespace.</p>
     
 
     
-    <h4 class="name" id="upsert"><span class="type-signature"></span>upsert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>}</span></h4>
+    <h4 class="name" id="upsert"><span class="type-signature"></span>upsert<span class="signature">(q, isCore)</span><span class="type-signature"> &rarr; {<a href="Component.html">Component</a>|undefined}</span></h4>
     
 
     
@@ -3224,7 +3903,7 @@ It can also change <code>type</code> of a namespace.</p>
 
 
 <div class="description">
-    <p>If <code>q.class</code> property is set it acts as <code>#insert</code> action. If not it works as <code>#update</code>.</p>
+    <p>Inserts a component when <code>q.class</code> is present, otherwise updates an existing component.</p>
 </div>
 
 
@@ -3289,7 +3968,7 @@ It can also change <code>type</code> of a namespace.</p>
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -3299,7 +3978,7 @@ It can also change <code>type</code> of a namespace.</p>
 
             
 
-            <td class="description last"><p>Set element as a &quot;core&quot; which means you cannot rewrite or delete it.</p></td>
+            <td class="description last"><p>Marks inserted components as read-only.</p></td>
         </tr>
 
     
@@ -3376,6 +4055,9 @@ It can also change <code>type</code> of a namespace.</p>
     <dd>
         
 <span class="param-type"><a href="Component.html">Component</a></span>
+|
+
+<span class="param-type">undefined</span>
 
 
     </dd>
@@ -3403,13 +4085,13 @@ It can also change <code>type</code> of a namespace.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Builder.html">Builder</a></li><li><a href="Container.html">Container</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Transport.html">Transport</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AbstractExport.html">AbstractExport</a></li><li><a href="Builder.html">Builder</a></li><li><a href="Component.html">Component</a></li><li><a href="Container.html">Container</a></li><li><a href="Expression.html">Expression</a></li><li><a href="JSONTransport.html">JSONTransport</a></li><li><a href="Logger.html">Logger</a></li><li><a href="ModuleSystem.html">ModuleSystem</a></li><li><a href="Namespace.html">Namespace</a></li><li><a href="StdoutTransport.html">StdoutTransport</a></li><li><a href="StringTransport.html">StringTransport</a></li><li><a href="Top.html">Top</a></li><li><a href="Transport.html">Transport</a></li><li><a href="Unit.html">Unit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#SBMLParse">SBMLParse</a></li><li><a href="global.html#_JSONParse">_JSONParse</a></li><li><a href="global.html#_hetaParse">_hetaParse</a></li><li><a href="global.html#compose">compose</a></li><li><a href="global.html#getIndexFromQ">getIndexFromQ</a></li><li><a href="global.html#hetaLoader">hetaLoader</a></li><li><a href="global.html#jsonLoader">jsonLoader</a></li><li><a href="global.html#sbmlLoader">sbmlLoader</a></li><li><a href="global.html#tableLoader">tableLoader</a></li><li><a href="global.html#yamlLoader">yamlLoader</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Apr 28 2026 15:30:27 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Fri May 29 2026 16:48:48 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
