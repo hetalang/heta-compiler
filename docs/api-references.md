@@ -2,7 +2,12 @@
 
 This section is generated from inline JSDoc comments in the Heta compiler source code.
 
-For user guides, CLI usage, and export formats, see the main [Heta compiler documentation](./).
+For installation, CLI usage, platform files, and export formats, see the main
+[Heta compiler documentation](./).
+
+Most applications start with [Builder]{@link Builder}. Lower-level tools can
+work directly with [Container]{@link Container}, [Namespace]{@link Namespace},
+and Q-object arrays.
 
 ## Primary API
 
@@ -10,10 +15,18 @@ For user guides, CLI usage, and export formats, see the main [Heta compiler docu
 - [Container]{@link Container}
 - [Namespace]{@link Namespace}
 
-## Module loading
+## Core Model Objects
+
+- [Top]{@link Top}
+- [Component]{@link Component}
+- [Unit]{@link Unit}
+- [Expression]{@link Expression}
+
+## Modules And Exports
 
 - [ModuleSystem]{@link ModuleSystem}
 - [_Module]{@link _Module}
+- [AbstractExport]{@link AbstractExport}
 
 ## Logging
 
@@ -22,13 +35,3 @@ For user guides, CLI usage, and export formats, see the main [Heta compiler docu
 - [JSONTransport]{@link JSONTransport}
 - [StdoutTransport]{@link StdoutTransport}
 - [StringTransport]{@link StringTransport}
-
-## Core model objects
-
-Some core classes are referenced by the public API and may appear in method signatures before they receive dedicated reference pages.
-
-- [Top]{@link Top}
-- [Component]{@link Component}
-- [Const]{@link Const}
-- [Unit]{@link Unit}
-- [Expression]{@link Expression}

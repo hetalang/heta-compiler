@@ -4,9 +4,17 @@ const math = create(all);
 const _calcUnit = require('./math-calc-unit');
 const { uniqBy } = require('../utils');
 
-/* 
-  To store mathematical expressions with additional methods
-*/
+/**
+ * Wrapper around a mathjs expression tree used by Heta model elements.
+ *
+ * @class Expression
+ *
+ * @param {math.Node} exprParsed Parsed mathjs expression node.
+ *
+ * @property {math.Node} exprParsed Parsed mathjs expression node.
+ * @property {number|undefined} num Numeric value for constant expressions.
+ * @property {boolean} isComparison `true` for comparison expressions.
+ */
 class Expression {
   /*
     exprParsed: <mathjs.Node>
@@ -14,9 +22,13 @@ class Expression {
   constructor(exprParsed){ 
     this.exprParsed = exprParsed;
   }
-  /*
-    q: <String> || <Number>
-  */
+  /**
+   * Parses a string or number into an `Expression`.
+   *
+   * @param {string|number} exprStringOrNumber Expression source.
+   *
+   * @returns {Expression} Parsed expression.
+   */
   static fromString(exprStringOrNumber){
     if (typeof exprStringOrNumber !== 'string' && typeof exprStringOrNumber !== 'number')
       throw new TypeError('Expected <string> or <number>, got ' + JSON.stringify(exprStringOrNumber));
@@ -61,13 +73,21 @@ class Expression {
 
     return new Expression(exprParsed);
   }
+  /**
+   * Creates a deep clone of this expression.
+   *
+   * @returns {Expression} Cloned expression.
+   */
   clone(){
     let clonedMath = this.exprParsed.cloneDeep();
     let expr = new Expression(clonedMath);
     return expr;
   }
-  // substitute user defined functions by their content, return Expression
-  // TODO: it was a bad idea to implement fnObj property, should be fixed later
+  /**
+   * Expands non-core user-defined function calls.
+   *
+   * @returns {Expression} Expression with function bodies substituted.
+   */
   substituteByDefinitions() {
     let transformed = this.exprParsed.transform((node) => {
       if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
@@ -81,6 +101,13 @@ class Expression {
 
     return expr;
   }
+  /**
+   * Rewrites symbol references using `prefix`, `suffix`, and `rename`.
+   *
+   * @param {object} q Import options.
+   *
+   * @returns {void}
+   */
   updateReferences(q = {}) {
     this.exprParsed.traverse((node , path/*, parent*/) => {
       if (node.type === 'SymbolNode' && path !== 'fn') { // transform only SymbolNode
@@ -91,7 +118,13 @@ class Expression {
       }
     });
   }
-  // the same options as in mathjs
+  /**
+   * Serializes the expression with mathjs formatting options.
+   *
+   * @param {object} options mathjs `toString` options.
+   *
+   * @returns {string} Expression string.
+   */
   toString(options = {}){
     return this.exprParsed.toString(options);
   }
@@ -106,6 +139,13 @@ class Expression {
       return undefined;
     }
   }
+  /**
+   * Linearizes the expression by a target symbol.
+   *
+   * @param {string} target Symbol name.
+   *
+   * @returns {math.Node[]} Pair `[slope, intercept]` as mathjs nodes.
+   */
   linearizeFor(target){
     // estimate a, b from 'a * target + b'
     // b = a*0+b
@@ -122,12 +162,16 @@ class Expression {
     let aTreeSimplified = math.simplify(aTree);
     return [aTreeSimplified, bTree];
   }
-  /*
-    Renames all symbols except function names
-    It works like a deep copy of expression with renaming
-    translator: <Object> {oldName: newName}
-    XXX: it must also save fnObj for user-defined functions to use "substitute" later BUT it doesn't
-  */
+  /**
+   * Creates a translated copy with renamed symbols.
+   *
+   * Function names are not renamed. Existing user-defined function nodes are
+   * kept as-is so their `fnObj` metadata remains attached.
+   *
+   * @param {object<string,string>} translator Map from old symbol names to new names.
+   *
+   * @returns {Expression} Translated expression.
+   */
   translateSymbol(translator = {}) {
     let tree = this.exprParsed.transform((node, path) => {
       let newName = translator[node.name];
@@ -142,8 +186,13 @@ class Expression {
 
     return new Expression(tree);
   }
-  // return new expression which is the multiplication
-  // of this and expression from argument
+  /**
+   * Creates an expression equal to this expression multiplied by `multiplier`.
+   *
+   * @param {string|number} multiplier Multiplier expression.
+   *
+   * @returns {Expression} Product expression.
+   */
   multiply(multiplier = '1'){
     let multiplierParsed = math.parse(multiplier);
     let node = new math.OperatorNode('*', 'multiply', [
@@ -168,31 +217,41 @@ class Expression {
 
     return res;
   }
-  /*
-  Get array of unique ids from expression
-  */
+  /**
+   * Lists unique symbols used by the expression.
+   *
+   * @returns {string[]} Symbol names excluding function names and constants `e`, `pi`.
+   */
   dependOn(){
     let res = this.dependOnNodes().map((node) => node.name);
     return uniqBy(res);
   }
-  /*
-  Get array of all internal elements
-  Approximately the same ad dependsOn() but return Array of objects
-  */
+  /**
+   * Lists symbol nodes used by the expression.
+   *
+   * @returns {math.SymbolNode[]} Symbol nodes excluding function names and constants `e`, `pi`.
+   */
   dependOnNodes(){
     return this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
       .filter((node) => ['e', 'pi'].indexOf(node.name) === -1);
   }
-  /*
-  Get array of function names
-  */
+  /**
+   * Lists function calls used by the expression.
+   *
+   * @returns {math.FunctionNode[]} Unique function nodes.
+   */
   functionList() {
     let list = this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'FunctionNode');
 
     return uniqBy(list, (x) => x.name);
   }
+  /**
+   * Checks whether the expression has a boolean result.
+   *
+   * @returns {boolean} `true` for boolean operators or boolean constants.
+   */
   hasBooleanResult(){
     const operators = [
       'smaller', 'smallerEq',
@@ -210,6 +269,13 @@ class Expression {
 
     return isBooleanOperator || isBooleanValue;
   }
+  /**
+   * Calculates expression units in the context of a model component.
+   *
+   * @param {Component} component Component used for reference lookup and logging.
+   *
+   * @returns {Unit|undefined} Calculated unit, if it can be inferred.
+   */
   calcUnit(component) { // component here is used for logger and index
     return _calcUnit(this.exprParsed, component);
   }

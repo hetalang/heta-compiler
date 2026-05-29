@@ -40,9 +40,9 @@ class DBSolveExport extends AbstractExport {
     return 'dbsolve';
   }
   /**
-   * The method creates text code to save as SLV file.
+   * Creates DBSolve SLV text outputs.
    *
-   * @return {string} Text code of exported format.
+   * @returns {object[]} Text outputs with `content`, `pathSuffix`, and `type`.
    */
   makeText() {
     //let { logger } = this._builder;

@@ -27,9 +27,9 @@ class HetaCodeExport extends AbstractExport{
     return 'heta-code';
   }
   /**
-   * The method creates text code to save as Heta code file.
+   * Creates Heta code text outputs.
    *
-   * @return {string} Text code of exported format.
+   * @returns {object[]} Text outputs with `content`, `pathSuffix`, and `type`.
    */
   makeText() {
     // let { logger } = this._builder;
@@ -44,10 +44,9 @@ class HetaCodeExport extends AbstractExport{
     }];
   }
   /**
-   * Creates model image by necessary components based on container.
-   * @param {string} container - Model image to update.
+   * Creates the model image used by the Heta code template.
    *
-   * @return {undefined}
+   * @returns {object} Template image.
    */
   getHetaCodeImage() {
     let { namespaceStorage, functionDefStorage, unitDefStorage, logger } = this._builder.container;

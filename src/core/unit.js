@@ -16,7 +16,22 @@ const prefixes = {
   '1.00000000e+12':      'tera'
 };
 
+/**
+ * Unit expression represented as an array of unit factors.
+ *
+ * Each factor has `kind`, `multiplier`, and `exponent` fields.
+ *
+ * @class Unit
+ * @extends Array
+ */
 class Unit extends Array {
+  /**
+   * Creates a unit from Q-array representation.
+   *
+   * @param {object[]} obj Unit factors.
+   *
+   * @returns {Unit} Unit instance.
+   */
   static fromQ(obj = []){
     let res = new Unit;
 
@@ -33,6 +48,13 @@ class Unit extends Array {
 
     return res;
   }
+  /**
+   * Converts this unit to Q-array representation.
+   *
+   * @param {object} options Serialization options.
+   *
+   * @returns {object[]} Unit factors.
+   */
   toQ(options = {}){
     let res = this.map((x) => {
       return {
@@ -49,6 +71,11 @@ class Unit extends Array {
 
     return res;
   }
+  /**
+   * Creates a deep copy of this unit.
+   *
+   * @returns {Unit} Cloned unit.
+   */
   clone(){
     let clonedUnit = new Unit();
     this.forEach((u) => clonedUnit.push({
@@ -59,9 +86,16 @@ class Unit extends Array {
 
     return clonedUnit;
   }
-  // transform any proper complex units to the another unit structure which includes only units from the list
-  // only for bound units !
-  // rebased units are not bound
+  /**
+   * Expands non-legal units into legal units.
+   *
+   * This method requires bound unit definitions. The returned unit is not
+   * bound to unit definition objects.
+   *
+   * @param {string[]} legalUnits Allowed unit ids.
+   *
+   * @returns {Unit} Rebasing result.
+   */
   rebase(legalUnits = []){
     let unit = new Unit();
 
@@ -94,8 +128,14 @@ class Unit extends Array {
 
     return unit;
   }
-  // primitive units are units without internal "units" property
-  // only for bound units !
+  /**
+   * Expands all derived units into primitive units.
+   *
+   * Primitive units are unit definitions without their own `units` property.
+   * This method requires bound unit definitions.
+   *
+   * @returns {Unit} Primitive-unit representation.
+   */
   rebaseToPrimitive(){
     let unit = new Unit();
 
@@ -124,11 +164,11 @@ class Unit extends Array {
     return unit;
   }
   /**
-   * Multiply two units.
+   * Multiplies this unit by another unit.
    *
-   * @param {Unit} unit - the second unit
+   * @param {Unit} unit Unit to multiply by.
    *
-   * @returns {Unit} result of multiplying
+   * @returns {Unit} Product unit.
    */
   multiply(unit) {
     let res = this.concat(unit);
@@ -137,11 +177,11 @@ class Unit extends Array {
   }
 
   /**
-   * Divide two units.
+   * Divides this unit by another unit.
    *
-   * @param {Unit} unit - the second unit
+   * @param {Unit} unit Divisor unit.
    *
-   * @returns {Unit} Result of division.
+   * @returns {Unit} Quotient unit.
    */
   divide(unit) {
     let newUnit = unit.map((item) => {
@@ -153,6 +193,13 @@ class Unit extends Array {
     let res = this.concat(newUnit);
     return res;
   }
+  /**
+   * Multiplies all exponents by `n`.
+   *
+   * @param {number} n Power value.
+   *
+   * @returns {object[]} Powered unit factors.
+   */
   power(n = 1){
     if (typeof n !== 'number') throw new TypeError('n in power must be a Number, got' + n);
 
@@ -160,6 +207,13 @@ class Unit extends Array {
       return Object.assign({}, item, {exponent: item.exponent * n});
     });
   }
+  /**
+   * Divides all exponents by `n`.
+   *
+   * @param {number} n Root value.
+   *
+   * @returns {object[]} Rooted unit factors.
+   */
   root(n = 1) {
     if (typeof n !== 'number') throw new TypeError('n in power must be a Number, got' + n);
 
@@ -168,13 +222,12 @@ class Unit extends Array {
     });
   }
   /**
-   * Simplify unit expression if it is possible. // only for bound units !
+   * Simplifies unit factors by combining equal kinds and canceling exponents.
+   * Canceled factors contribute their multiplier to the dimensionless factor.
    *
-   * @dimensionlessKind {String} What to set if we want to simplify litre/litre
+   * @param {string} dimensionlessKind Unit kind used to store dimensionless multipliers.
    * 
-   * @return {Unit} Simplified version of units. 
-   * If if exponent == 0, create dimensionless element to store multiplier
-   * if dimensionless element is trivial remove it
+   * @returns {Unit} Simplified unit.
    */
   simplify(dimensionlessKind = 'dimensionless') {
     // analyze only dimensionless
@@ -223,6 +276,14 @@ class Unit extends Array {
       
     return (new Unit()).concat(group);
   }
+  /**
+   * Checks unit equality.
+   *
+   * @param {Unit} unit Unit to compare with.
+   * @param {boolean} rebase Compare through primitive units when `true`.
+   *
+   * @returns {boolean} `true` if units are equal.
+   */
   equal(unit, rebase = false) {
     if (!(unit instanceof Unit)) {
       throw new TypeError('You must use Unit to check equality, got ' + unit);
@@ -235,10 +296,11 @@ class Unit extends Array {
   }
   
   /**
-   * Creates Unit object from string.
+   * Parses a unit string.
    *
-   * @param {String} unitString - string of format 'mM^2*L/mg/h2' or (1e-2 mg)^3/L
-   * @return {Unit} A Unit object.
+   * @param {string} unitString String such as `mM^2*L/mg/h2` or `(1e-2 mg)^3/L`.
+   *
+   * @returns {Unit} Parsed unit.
    */
   static parse(unitString) {
     let unit = new Unit();
@@ -318,9 +380,9 @@ class Unit extends Array {
   */
 
   /**
-   * Serialize unit-object to identifier.
+   * Serializes this unit to a stable identifier.
    *
-   * @return {string} of type '\_mM2_L\__mg\__h2'
+   * @returns {string} Identifier such as `_mM2_L__mg__h2`.
    */
   toHash(){
     if (this.length === 0) {
@@ -355,9 +417,11 @@ class Unit extends Array {
     }
   }
   /**
-   * Serialize Unit object to string.
+   * Serializes this unit to compact text.
    *
-   * @return {string} of format: 'mM2*L/mg/h2'
+   * @param {boolean} usePrefix Use known SI prefixes for multipliers.
+   *
+   * @returns {string} String such as `mM^2*L/mg/h2`.
    */
   toString(usePrefix = false){
 
@@ -404,9 +468,9 @@ class Unit extends Array {
   }
   
   /**
-   * Serialize unit-object to Tex format.
+   * Serializes this unit to TeX.
    *
-   * @return {string} with TeX '\frac{mM^{2} \cdot L}{mg \cdot h^{2}}'
+   * @returns {string} TeX expression.
    */
   toTex(){
     if (this.length === 0) {
@@ -469,9 +533,9 @@ class Unit extends Array {
   }
   
   /**
-   * Serialize Unit object to HTML code.
+   * Serializes this unit to inline HTML.
    *
-   * @return {string} of format: 'mM<sup>2</sup> * L / mg / h<sup>2</sup>'
+   * @returns {string} HTML fragment.
    */
   toHTML(){
     if (this.length === 0) {
@@ -506,6 +570,15 @@ class Unit extends Array {
   }
 
   // &nbsp; => &#160; &times; => &#215; &minus; => &#8722;
+  /**
+   * Serializes this unit to fraction-style HTML.
+   *
+   * @param {string} spaceSymbol HTML space symbol.
+   * @param {string} timesSymbol HTML multiplication symbol.
+   * @param {string} minusSymbol HTML minus symbol.
+   *
+   * @returns {string} HTML fragment.
+   */
   toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;', minusSymbol = '&#8722;'){
     if (this.length === 0) return '<div class="unit-mult" style="display:inline-block">1</div>';
 
@@ -533,6 +606,14 @@ class Unit extends Array {
     }
   }
 
+  /**
+   * Serializes this unit as an SBML `unitDefinition` XML fragment.
+   *
+   * @param {string[]} legalUnits Allowed SBML unit ids.
+   * @param {object} options Serialization options.
+   *
+   * @returns {string} XML fragment.
+   */
   toXmlUnitDefinition(legalUnits = [], options){
     // set default options
     let _options = Object.assign({nameStyle: 'string', simplify: true}, options);
@@ -572,8 +653,13 @@ class Unit extends Array {
       + listOfUnits
       + '\n  </listOfUnits>\n</unitDefinition>';
   }
-  // only for bound units !
-  // calculate term for unit based on "kindObj" and "exponent"
+  /**
+   * Calculates the physical term represented by this unit.
+   *
+   * This method requires bound unit definitions.
+   *
+   * @returns {UnitTerm|undefined} Unit term, or `undefined` if it cannot be calculated.
+   */
   toTerm(){
     let res = new UnitTerm();
 

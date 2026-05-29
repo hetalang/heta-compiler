@@ -22,15 +22,17 @@ const moduleLoaders = {
 
 class ModuleSystem {
   /**
-   * Object storing Heta modules and methods to combine them.
+   * Loads platform modules and integrates include dependencies into one Q-array.
    * 
-   * @param {Logger} logger Object to analyze log events.
+   * @class ModuleSystem
+   *
+   * @param {Logger} logger Logger used for module diagnostics.
+   * @param {Function} fileReadHandler Reads module content by filename.
    * 
-   * @property {object<string,_Module>} moduleCollection Map-like storage for modules.
-   *     Key is a file id (filename), value is a `Module`.
-   * @property {TopoSort} graph An instance of `TopoSort` class borrowed from *topo-sort* package.
-   * @property {Logger} logger Object to analyze log events.
-   * @property {_Module} _top Top-level module. Usually created from `index.heta` file.
+   * @property {object<string,_Module>} moduleCollection Map-like storage for modules keyed by `filename#sheet`.
+   * @property {TopoSort} graph Include dependency graph.
+   * @property {Logger} logger Logger used for module diagnostics.
+   * @property {_Module} _top Top-level parsed module.
    */
   constructor(logger, fileReadHandler){
     // stores modules in format
@@ -42,13 +44,13 @@ class ModuleSystem {
   }
   
   /**
-   * Load top-level module to `ModuleSystem`.
+   * Loads a top-level module and its include tree.
    * 
-   * @param {string} rawAbsFilePath Relative or absolute module path.
-   * @param {string} type A module type.
-   * @param {object} options additional options.
+   * @param {string} rawModulePath Relative or absolute module path.
+   * @param {string} type Module type: `heta`, `json`, `md`, `yaml`, `xlsx`, `sbml`, or `table`.
+   * @param {object} options Loader options.
    * 
-   * @returns {_Module} Created module.
+   * @returns {_Module} Parsed top-level module.
    */
   addModuleDeep(rawModulePath, type, options = {}){
     let modulePath = path.normalize(rawModulePath);
@@ -59,13 +61,13 @@ class ModuleSystem {
   }
  
   /**
-   * It scan module dependence recursively.
+   * Recursively loads a module and its includes.
    * 
-   * @param {string} modulePath Absolute module path.
-   * @param {string} type A module type.
-   * @param {object} options additional options.
+   * @param {string} modulePath Module path.
+   * @param {string} type Module type.
+   * @param {object} options Loader options.
    * 
-   * @returns {_Module} Created module.
+   * @returns {_Module|undefined} Parsed module, or `undefined` if it was already loaded.
    */
   _addModuleDeep(modulePath, type, options = {}){
     let moduleName = [modulePath, '#', options.sheet || '0'].join('');
@@ -84,13 +86,13 @@ class ModuleSystem {
   }
 
   /**
-   * Parse single file without dependencies.
+   * Parses one module file and registers its direct includes.
    * 
-   * @param {string} filename File path of module file.
-   * @param {string} type A module type.
-   * @param {object} options additional options.
+   * @param {string} filename Module filename.
+   * @param {string} type Module type.
+   * @param {object} options Loader options.
    * 
-   * @returns {_Module} Created module.
+   * @returns {_Module} Parsed module.
    */
   addModule(filename, type = 'heta', options = {}){
     // parse
@@ -124,6 +126,15 @@ class ModuleSystem {
     return parsed;
   }
 
+  /**
+   * Parses one module file with the loader selected by `type`.
+   *
+   * @param {string} filename Module filename.
+   * @param {string} type Module type.
+   * @param {object} options Loader options.
+   *
+   * @returns {_Module} Parsed module, or an empty module when a recoverable error is logged.
+   */
   createModule(filename, type, options = {}) {
     let tabNum = options.sheet !== undefined ? ('#' + options.sheet) : ''; // for xlsx only
     this.logger.info(`Reading module of type "${type}" from file "${filename}${tabNum}"...`);
@@ -168,7 +179,7 @@ class ModuleSystem {
   }
   
   /**
-   * Sort modules before integration. If there is circular references then throw an error.
+   * Sorts module ids by include dependencies.
    * 
    * @returns {string[]} Array of modules ids.
    */
@@ -181,7 +192,7 @@ class ModuleSystem {
   }
 
   /**
-   * Composes parsed modules into single platform.
+   * Composes parsed modules into one integrated Q-array.
    * 
    * @returns {object[]} integrated Q-array.
    */
@@ -209,12 +220,15 @@ class ModuleSystem {
 }
 
 /**
- * Method that set merging of Heta elements.
+ * Applies include-level modifiers to every Q-object from an included module.
+ *
+ * The include action fields (`action`, `id`, `source`, `type`, `sheet`, `class`)
+ * are removed before the remaining properties are merged into included objects.
  * 
- * @param {object} obj This should be merged.
- * @param {object[]} arr Array to merge.
+ * @param {object} obj Include Q-object with modifiers.
+ * @param {object[]} arr Q-array to modify.
  * 
- * @returns {object} merged Q-array.
+ * @returns {object[]} Modified Q-array.
  */
 function compose(obj, arr = []) {
   let {action, id, source, type, sheet, ...cleanedObj} = obj;

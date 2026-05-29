@@ -4,13 +4,14 @@ const HetaLevelError = require('./heta-level-error');
 
 class Namespace extends Map {
   /**
-   * Namespace is a `Map` which stores components.
+   * Map-like storage for components belonging to one Heta namespace.
    * 
+   * @class Namespace
    * @extends Map
    * 
    * @property {Container} container Parent container.
    * @property {string} _spaceName String identifier for namespace.
-   * @property {boolean} _isAbstract `true` if  namespace is abstract. `false` otherwise.
+   * @property {boolean} _isAbstract `true` for abstract namespaces.
    * 
    * @param {string} spaceName Space identifier.
    */
@@ -36,7 +37,7 @@ class Namespace extends Map {
     return super.set(key, value);
   }
   /**
-   * Converts namespace into array of components.
+   * Converts this namespace into an array of components.
    * 
    * @returns {Component[]} All components in array format.
    */
@@ -44,10 +45,10 @@ class Namespace extends Map {
     return [...this].map((x) => x[1]);
   }
   /**
-   * Converts namespace into Q-array.
+   * Converts this namespace into Q-array format.
    * 
-   * @param {boolean} removeCoreComponents=true 
-   * @param {object} options Options passed to {@link Top#toQ} method
+   * @param {boolean} removeCoreComponents Exclude read-only core components when `true`.
+   * @param {object} options Options passed to {@link Top#toQ}.
    * 
    * @returns {object[]} Q-array format.
    */
@@ -59,9 +60,9 @@ class Namespace extends Map {
     return qArr;
   }
   /**
-   * Representation of namespace into Q-object format.
+   * Converts this namespace to a `setNS` Q-object.
    * 
-   * @param {object} options reserved for future versions.
+   * @param {object} options Reserved for future versions.
    * @returns {object} JS object in Q-object format.
    */
   toQ(options = {}){
@@ -75,9 +76,9 @@ class Namespace extends Map {
   }
 
   /**
-   * Representation of namespace in flat Q-object format.
+   * Converts this namespace to flat Q-object format.
    * 
-   * @param {object} options reserved for future versions.
+   * @param {object} options Reserved for future versions.
    * 
    * @returns {object} flat Q-object format.
    */
@@ -89,7 +90,7 @@ class Namespace extends Map {
   }
 
   /**
-   * Components of the particular class.
+   * Selects components with the exact Heta class name.
    * 
    * @param {string} className One of available Heta classes: 'Const', 'Record', etc.
    * 
@@ -102,7 +103,7 @@ class Namespace extends Map {
   }
 
   /**
-   * Components of the class and its inheritors.
+   * Selects components that inherit from a Heta class.
    * 
    * @param {string} className One of available Heta classes: 'Const', 'Record', etc.
    * 
@@ -115,12 +116,12 @@ class Namespace extends Map {
   }
 
   /**
-   * Select all records from namespace and sort them by the scope.
+   * Sorts namespace components by expression dependencies in one assignment context.
    * 
-   * @param {string} context scope of `Record`.
-   * @param {boolean} includeCompartmentDep=true
+   * @param {string} context Assignment context such as `start_` or `ode_`.
+   * @param {boolean} includeCompartmentDep Include species compartment dependencies.
    * 
-   * @returns {Component[]} Records in scope order.
+   * @returns {Component[]} Components sorted by dependency order.
    */
   sortExpressionsByContext(context, includeCompartmentDep = false){
     // create topo-sort tree
@@ -167,9 +168,9 @@ class Namespace extends Map {
 
   /**
    * 
-   * Select all records which have the scope.
+   * Selects records that have an assignment in the requested context.
    * 
-   * @param {string} context scope of `Record`.
+   * @param {string} context Assignment context.
    * 
    * @returns {Component[]} Records that have the assignment associated with scope.
    */
@@ -179,7 +180,7 @@ class Namespace extends Map {
   }
 
   /**
-   * Select all units mentioned in namespace.
+   * Selects unique SBML units used by size-like components in this namespace.
    * 
    * @returns {Unit[]} Array of units.
    */
@@ -192,7 +193,7 @@ class Namespace extends Map {
   }
 
   /**
-   * Sequential checking and binding components.
+   * Binds all components in this namespace.
    * 
    * @returns {Namespace} Self.
    */
@@ -206,11 +207,12 @@ class Namespace extends Map {
 
   // This will be done again in _Export.getXXXImage()
   /**
-   * Check if there are circular assignments for the `scope`.
-   * Write errors in logger.
+   * Checks circular assignments for a context and writes errors to the container logger.
    * 
-   * @param {string} scope selected assignment scope.
-   * @param {boolean} includeCompartmentDep=true To take into account Compartment (for `Species` only).
+   * @param {string} scope Assignment context.
+   * @param {boolean} includeCompartmentDep Include species compartment dependencies.
+   *
+   * @returns {void}
    */
   checkCircRecord(scope, includeCompartmentDep = false){
     let logger = this.container.logger;

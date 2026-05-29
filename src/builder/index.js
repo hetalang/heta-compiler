@@ -8,29 +8,26 @@ const semver = require('semver');
 const { version } = require('../../package');
 
 /**
- * Auxiliary class for performing compilation and storing a platform's options.
- * The main purpose is a support of Heta compiler's CLI mode.
+ * Compiles a Heta platform from a declaration object.
  *
- * The main method of the class is {@link Builder#run} which  
- * runs a sequence of compilation steps.
+ * `Builder` owns the main {@link Container}, reads modules through the supplied
+ * file handler, validates the platform declaration, and writes export outputs.
+ * It is also the main class used by the Heta compiler CLI.
  * 
  * @class Builder
  *
- * @param {Object} declaration - Object representing options for builder,
- *  see [CLI references]{@link https://hetalang.github.io/hetacompiler/cli-references}
- *  for more information about the structure.
+ * @param {object} declaration Platform declaration object. See the
+ * [platform file format]{@link https://hetalang.github.io/heta-compiler/platform-file}.
+ * @param {Function} fileReadHandler Reads module content by filename and returns text.
+ * @param {Function} fileWriteHandler Writes exported content by filename.
+ * @param {Transport[]} transportArray Logger transports attached to the builder logger.
  *
- * @property {Container} container This is the reference to the main platform storage. 
- * @property {Logger} logger Reference to logger object of platform. This object can also be called with `this.container.logger`
- * @property {string} _distDirname Absolute path of the directory for exporting files.
- *    Calculated from `declaration.options.distDir` property.
- * @property {string} _metaDirname Absolute path of the directory for storing meta files.
- *    Calculated from `declaration.options.metaDir`.
- * @property ... Other properties inherit from `declaration` object, see 
- *   [CLI references]{@link https://hetalang.github.io/hetacompiler/cli-references#declaration-file-format}
- * @property {object} _exportClasses map-like structure for storing all available constructors describing `_Export`s.
- * @property {object} exportClasses the same as `_exportClasses` but bound to this builder.
- * @property {object[]} exportArray Storage for `_Export` instances.
+ * @property {Container} container Main platform storage.
+ * @property {Logger} logger Logger shared with `container.logger`.
+ * @property {string} _distDirname Directory where export files are written, from `declaration.options.distDir`.
+ * @property {string} _metaDirname Directory where debug meta files are written, from `declaration.options.metaDir`.
+ * @property {object<string,Function>} exportClasses Export constructors bound to this builder.
+ * @property {object[]} exportArray Export instances created from the declaration.
  */
 class Builder {
   constructor(
@@ -114,24 +111,13 @@ class Builder {
   exportClasses = {}; // storing Export classes bound to builder
 
   /**
-   * The method runs building of a platform declared with `Builder` object.
-   * If the execution throws an error platform building will stop.
+   * Runs the full build pipeline.
    * 
-   * The sequence of operations is following:
+   * The pipeline reads and integrates modules, optionally writes debug meta
+   * files, loads the resulting Q-array, binds references, checks circular
+   * dependencies, checks units and terms, and writes configured exports.
    * 
-   * 1. Read and parse platform modules (files).
-   * 2. Modules integration. Creation meta files if required.
-   * 3. Loading integrated structures into `Platform`.
-   * 4. Setting cross-references in platform's elements.
-   * 5. Checking circular references in mathematical expressions.
-   * 6. Checking circular unitDef references. Checking circular functionDef references.
-   * 7. Checking left and right side units compatibility for mathematical expressions.
-   * 8. Checking unit\'s terms.
-   * 9. Export of a platform to series of formats. 
-   *    Depending on the declaration file it runs {@link Builder#exportMany} or {@link Builder#exportJuliaOnly}.
-   * 
-   * @method Builder#run
-   * 
+   * @returns {Builder} This builder.
    */
   run() {
     // 1. Parsing
@@ -201,9 +187,9 @@ class Builder {
   }
 
   /**
-   * Run exporting of files based on components of `this.container.exportArray`.
+   * Writes all exports configured in the platform declaration.
    * 
-   * @method Builder#exportMany
+   * @returns {void}
    */
   exportMany() {
     this.logger.info(`Start exporting to files, total: ${this.exportArray.length}.`);

@@ -34,15 +34,24 @@ const schema = {
   }
 };
 
-/*
-  class Component
-
-  ''' Notes 1 '''
-  component1 @Component 'title 1' {
-    tags: [tag1, tag2],
-    aux: {}
-  };
-*/
+/**
+ * Base class for namespace components.
+ *
+ * Components extend {@link Top} with namespace membership, title, notes, tags,
+ * auxiliary data, reference binding, and cloning.
+ *
+ * In Heta code, component metadata can be written as notes, title, tags, and
+ * auxiliary properties on concrete component classes.
+ *
+ * @class Component
+ * @extends Top
+ *
+ * @param {boolean} isCore Marks the component as read-only.
+ *
+ * @property {string|undefined} space Namespace id.
+ * @property {string} className Heta class name.
+ * @property {object} indexObj `{ id, space }` selector for the component.
+ */
 class Component extends Top {
   constructor(isCore = false) {
     super(isCore);
@@ -50,6 +59,13 @@ class Component extends Top {
     this.tags = [];
     this.aux = {};
   }
+  /**
+   * Merges component fields from a Q-object.
+   *
+   * @param {object} q Q-object fragment.
+   *
+   * @returns {Component} This component.
+   */
   merge(q = {}) {
     super.merge(q);
 
@@ -107,7 +123,11 @@ class Component extends Top {
   get indexObj(){
     return { id: this.id, space: this.space };
   }
-  // creates copy of element
+  /**
+   * Creates a component clone with base metadata fields copied.
+   *
+   * @returns {Component} Cloned component.
+   */
   clone() {
     let componentClone = new this.constructor();
     if (this.title)
@@ -124,7 +144,16 @@ class Component extends Top {
 
     return componentClone;
   }
-  /** Change referencies of component based on suffix/prefix/rename */
+  /**
+   * Rewrites component references using `prefix`, `suffix`, and `rename`.
+   *
+   * This is used by namespace import actions to keep references consistent
+   * after component ids are renamed.
+   *
+   * @param {object} q Import options.
+   *
+   * @returns {Component} This component.
+   */
   updateReferences(_q = {}) {
     // set defaults
     let q = Object.assign({
@@ -162,6 +191,11 @@ class Component extends Top {
 
     return this;
   }
+  /**
+   * Renders markdown notes to compact HTML.
+   *
+   * @returns {string|undefined} HTML string, or `undefined` when notes are absent.
+   */
   get notesHTML() {
     if (this.notes === undefined) {
       return undefined;
@@ -179,6 +213,13 @@ class Component extends Top {
     - check properties based on requirements(): required, find by symbol link
     - create virtual component if local prop refferences to global component
   */
+  /**
+   * Validates references and binds direct object references.
+   *
+   * @param {Namespace} namespace Namespace used to resolve references.
+   *
+   * @returns {void}
+   */
   bind(namespace) {
 
     let logger = this._container?.logger;
@@ -240,6 +281,13 @@ class Component extends Top {
       }
     });
   }
+  /**
+   * Converts this component to Q-object format.
+   *
+   * @param {object} options Serialization options.
+   *
+   * @returns {object} Q-object representation.
+   */
   toQ(options = {}) {
     let q = super.toQ(options);
     delete q.action;
@@ -255,8 +303,11 @@ class Component extends Top {
 
     return q;
   }
-  /* recursively create requirements from _requirements, 
-  currently it is not optimal */
+  /**
+   * Returns merged reference and validation requirements for this component class.
+   *
+   * @returns {object} Requirement map.
+   */
   static requirements() { 
     if (this.prototype.className === 'Component') {
       return this._requirements;
@@ -276,10 +327,11 @@ class Component extends Top {
   _references() {
     return [];
   }
-  /*
-  array of direct references inside component to another components
-  it is used inside irt-nav
-  */
+  /**
+   * Returns unique direct references from this component.
+   *
+   * @returns {string[]} Component ids referenced by this component.
+   */
   references() {
     let nonUnique = this._references();
     return uniqBy(nonUnique);

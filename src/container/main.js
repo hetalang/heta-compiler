@@ -24,9 +24,10 @@ const coreItems = require('./core-items.json');
 const TopoSort = require('@insysbio/topo-sort');
 
 /**
- * The main class storing a modeling platform and it's methods.
+ * Stores platform elements and provides actions for loading, binding, checking, and exporting them.
  * 
- * It is highly recommended to use only one container instance in developed code.
+ * A container owns namespaces, unit definitions, function definitions, scenarios, and a logger.
+ * A typical platform uses one container instance.
  * 
  * @class Container
  * 
@@ -125,16 +126,15 @@ class Container {
   }
 
   /**
-   * Runs an action (like creating a component) based on `q.action` property.
-   * If `q.action` is not set than apply "upsert".
-   * An "action" name should be set as a name of the `Container` method. 
+   * Runs a container action described by `q.action`.
    * 
-   * This is the main method to convert from Q-object into platform elements.
+   * If `q.action` is not set, `upsert` is used. This is the main entry point
+   * for converting Q-objects into platform elements.
    * 
    * @param {object} q Simple object with the same structure as Heta plain format.
    * @param {boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {*} Result returned by the invoked action, or `undefined` if the action is invalid.
    */
   load(q, isCore = false){
     // estimate action, default is upsert
@@ -151,12 +151,12 @@ class Container {
   }
 
   /**
-   * Runs {@link Container#load} method many times for each element of `qArr` vector sequentially.
+   * Loads a Q-array sequentially.
    * 
    * @param {object[]} qArr Q-array.
    * @param {boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   loadMany(qArr, isCore = false){
     qArr.forEach((q) => this.load(q, isCore));
@@ -176,10 +176,10 @@ class Container {
   }
 
   /**
-   * Creates references between elements in a platform.
+   * Creates references between platform elements.
    * It includes all concrete namespaces and `UnitDef` instances.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   knitMany(){
     // knit unitDef
@@ -195,9 +195,9 @@ class Container {
   }
 
   /**
-   * Checks circular ref in UnitDef
+   * Checks circular dependencies between unit definitions and logs errors.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   checkCircUnitDef(){
     // the same method as for sortExpressionsByContext()
@@ -224,9 +224,9 @@ class Container {
   }
 
   /**
-   * Checks circular ref in FunctionDef
+   * Checks circular dependencies between user-defined functions and logs errors.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   checkCircFunctionDef() {
     let graph = new TopoSort();
@@ -254,9 +254,9 @@ class Container {
   }
 
   /**
-   * Compare left and right side of `Record`, `DSwitcher`, `CSwitcher`, `StopSwitcher`.
+   * Checks unit consistency in records and switcher expressions.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   checkUnits(){
     this.namespaceStorage.forEach((ns) => {
@@ -285,9 +285,10 @@ class Container {
   }
 
   /**
-   * check TimeScale, Compartment, Species, Reaction for correct terms.
+   * Checks whether units use terms allowed for `TimeScale`, `Compartment`,
+   * `Species`, and `Reaction`-like size components.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   checkTerms(){
     this.namespaceStorage.forEach((ns) => {
@@ -324,9 +325,9 @@ class Container {
   }
 
   /**
-   * Checks circular dependencies in all instances of `Record`.
+   * Checks circular dependencies in record assignments across concrete namespaces.
    * 
-   * @returns {Container} This function returns the container.
+   * @returns {Container} This container.
    */
   checkCircRecord(){
     // knit components

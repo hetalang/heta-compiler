@@ -8,14 +8,19 @@ const schema = {
   }
 };
 
-/*
-  AbstractExport class
-
-  export1 @AbstractExport {
-    filepath: ../dir1,
-    powTransform: keep // possible values are: keep/operator/function
-  };
-*/
+/**
+ * Base class for all export formats.
+ *
+ * Concrete exporters implement {@link AbstractExport#makeText}; `make` wraps
+ * text outputs into UTF-8 buffers for file writing.
+ *
+ * @class AbstractExport
+ *
+ * @param {object} q Export declaration object.
+ *
+ * @property {string} filepath Base output filepath.
+ * @property {string} spaceFilter Regular expression used to select namespaces.
+ */
 class AbstractExport {
   constructor(q = {}){
 
@@ -31,21 +36,27 @@ class AbstractExport {
   get className(){
     return 'AbstractExport';
   }
-  /*
-    Method creates exported files.
-    return in format 
-    [{
-      content: <String>, // output text file
-      pathSuffix: <String>, // relative path to output file
-      type: 'text' // currently support only text
-    }]
-  */
+  /**
+   * Creates text export outputs.
+   *
+   * @returns {object[]} Text outputs with `content`, `pathSuffix`, and `type`.
+   */
   makeText() {
     throw new TypeError(`No method makeText() for "${this.className}"`);
   }
+  /**
+   * Whether the exporter requires concrete namespaces only.
+   *
+   * @returns {boolean} `true` if abstract namespaces must be excluded.
+   */
   get requireConcrete() {
     return false;
   }
+  /**
+   * Selects namespaces matching `spaceFilter`.
+   *
+   * @returns {Array[]} Pairs of `[spaceName, namespace]`.
+   */
   selectedNamespaces() {
     let { container, logger } = this._builder;
     // filter namespaces if set
@@ -64,6 +75,11 @@ class AbstractExport {
 
     return concreteNS;
   }
+  /**
+   * Creates buffer export outputs ready for file writing.
+   *
+   * @returns {object[]} Buffer outputs with `content`, `pathSuffix`, and `type`.
+   */
   make() {
     let text = this.makeText();
     let buffer = text.map((x) => {
@@ -79,6 +95,14 @@ class AbstractExport {
   static get validate() {
     return ajv.compile(schema);
   }
+  /**
+   * Validates an export declaration.
+   *
+   * @param {object} q Export declaration object.
+   * @param {Logger} logger Logger used for validation errors.
+   *
+   * @returns {boolean} `true` when valid.
+   */
   static isValid(q, logger) {
     let valid = this.validate(q);
     if (!valid) {

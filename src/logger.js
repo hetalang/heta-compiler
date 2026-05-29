@@ -14,20 +14,21 @@ const levels = [
 class Logger {
   /**
    * 
-   * Object to work with several logging transports simultaneously.
-   * This class was inspired by <https://github.com/winstonjs/winston> package but much simpler.
+   * Minimal logger that forwards events to one or more transports.
    * 
-   * @property {Transport[]} _transports storage for different log transports.
-   * @property {boolean} _hasErrors Value is equal to `true` if there is at least one log of level 'error' or higher.
+   * @class Logger
+   *
+   * @property {Transport[]} _transports Registered transports.
+   * @property {boolean} _hasErrors `true` after any `error` or `crit` event.
    */
   constructor(){
     this._transports = [];
     this._hasErrors = false;
   }
   /**
-   * To attach another transport to a logger.
+   * Adds a transport.
    * 
-   * @param {Transport} transport=() => {} `Transport` instance of function.
+   * @param {Transport|function} transport Transport instance or callback.
    * 
    * @returns {Logger} Self.
    */
@@ -41,18 +42,21 @@ class Logger {
     return this;
   }
   /**
-   * Remove all transports from a logger.
+   * Removes all transports.
+   *
+   * @returns {void}
    */
   clearTransport(){
     this._transports = [];
   }
   /**
-   * To add a new log event to logger.
-   * This event will be then sent to all transports.
+   * Adds a log event and sends it to all transports.
    * 
-   * @param {string} level Log level: 'debug', 'info', 'warn', 'error', 'crit'
+   * @param {string} level Log level: `debug`, `info`, `warn`, `error`, or `crit`.
    * @param {string} msg Log message.
    * @param {object} opt Options for transport.
+   *
+   * @returns {void}
    */
   log(level, msg, opt){
     let levelNum = levels.indexOf(level);
@@ -72,54 +76,51 @@ class Logger {
     });
   }
   /**
-   * To add a 'debug' level message to logger.
-   * This is just a shortened version of the general log interface:
-   * ```js
-   * logger.debug('Something happens.')
-   * ```
-   * 
-   * which is the same as 
-   * ```js
-   * logger.log('debug', 'Something happens.')
-   * ```
+   * Adds a `debug` event.
+   *
    * @param {string} msg Log message.
    * @param {object} opt Options for transport.
+   *
+   * @returns {void}
    */
   debug(msg, opt){
     this.log('debug', msg, opt);
   }
   /**
-   * To add a 'info' level message to logger.
-   * This is just a shortened version of the general log interface:
+   * Adds an `info` event.
 
    * @param {string} msg Log message.
    * @param {object} opt Options for transport.
+   *
+   * @returns {void}
    */
   info(msg, opt){
     this.log('info', msg, opt);
   }
   /**
-   * To add a 'warn' level message to logger.
-   * This is just a shortened version of the general log interface:
+   * Adds a `warn` event.
 
    * @param {string} msg Log message.
    * @param {object} opt Options for transport.
+   *
+   * @returns {void}
    */
   warn(msg, opt){
     this.log('warn', msg, opt);
   }
   /**
-   * To add a 'error' level message to logger.
-   * This is just a shortened version of the general log interface:
+   * Adds an `error` event.
 
    * @param {string} msg Log message.
    * @param {object} opt Options for transport.
+   *
+   * @returns {void}
    */
   error(msg, opt){
     this.log('error', msg, opt);
   }
   /**
-   * To check if there is a log event of level 'error' or higher.
+   * `true` when at least one `error` or `crit` event was logged.
    */
   get hasErrors(){
     return this._hasErrors;
@@ -132,13 +133,13 @@ class Logger {
 
 class Transport {
   /**
-   * Ways to analyze log events. Each transport does something with log event: prints to console, store in file, etc.
-   * See also {@link Logger}.
+   * Base class for log transports.
    * 
-   * @param {string} showLevel If level is equal or higher than the value it will be analyzed.
-   *    Possible values: 'debug', 'info', 'warn', 'error', 'crit'
+   * @class Transport
+   *
+   * @param {string} showLevel Minimum level to analyze.
    * 
-   * @property {number} showLevelNum Numeric identifier of showLevel value: 0, 1, 2, 3, 4.
+   * @property {number} showLevelNum Numeric level threshold.
    */
   constructor(showLevel = 'info'){
     let showLevelNum = levels.indexOf(showLevel);
@@ -148,7 +149,9 @@ class Transport {
     this.showLevelNum = showLevelNum;
   }
   /**
-   * Actions to perform when call log in parent `Logger`.
+   * Handles one log event.
+   *
+   * @returns {void}
    */
   analyzer(){
     throw new Error('Transport is abstract class');
@@ -157,11 +160,12 @@ class Transport {
 
 class JSONTransport extends Transport{
   /**
-   * Transport type storing everything in a JS array.
+   * Transport that stores log events as objects in an array.
    * 
+   * @class JSONTransport
    * @extends Transport
    * 
-   * @param {string} showLevel If level is equal or higher than the value it will be analyzed.
+   * @param {string} showLevel Minimum level to store.
    * @param {object[]} target Array to store logs.
    */
   constructor(showLevel = 'info', target = []){
@@ -177,11 +181,12 @@ class JSONTransport extends Transport{
 }
 
 /**
- * Transport type sending colored messages into console.
+ * Transport that writes colored log lines to stdout.
  * 
+ * @class StdoutTransport
  * @extends Transport
  * 
- * @param {string} showLevel If level is equal or higher than the value it will be analyzed.
+ * @param {string} showLevel Minimum level to print.
  */
 class StdoutTransport extends Transport {
   analyzer(level, msg, opt, levelNum){
@@ -201,12 +206,13 @@ class StdoutTransport extends Transport {
 }
 
 /**
- * Transport type sending strings into array.
+ * Transport that stores formatted log lines in an array.
  * 
+ * @class StringTransport
  * @extends Transport
  * 
- * @param {string} showLevel If level is equal or higher than the value it will be analyzed.
- * @param {object[]} target Array to store logs.
+ * @param {string} showLevel Minimum level to store.
+ * @param {string[]} target Array to store formatted log lines.
  */
 class StringTransport extends Transport {
   constructor(showLevel = 'info', target = []){

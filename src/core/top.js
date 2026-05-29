@@ -28,16 +28,17 @@ const schema = {
   }
 };
 
-/*
-  class Top
-
-  properties: {
-      _id: <string>,
-      randomId: <boolean>,
-      _container: <Container>
-  }
-
-*/
+/**
+ * Base class for all Heta platform objects.
+ *
+ * @class Top
+ *
+ * @param {boolean} isCore Marks the object as read-only.
+ *
+ * @property {string} id Object identifier.
+ * @property {string} index Object index used in diagnostics.
+ * @property {boolean} isCore `true` for read-only core objects.
+ */
 class Top {
   constructor(isCore = false) {
     if (isCore) this._isCore = true;
@@ -45,6 +46,13 @@ class Top {
     this._id = 'rand_' + randomId(lengthRandom, patternRandom);
     this.isRandomId = true;
   }
+  /**
+   * Merges a Q-object into this object after schema validation.
+   *
+   * @param {object} q Q-object fragment.
+   *
+   * @returns {Top} This object.
+   */
   merge(q = {}) {
     let logger = this._container?.logger;
     let valid = Top.isValid(q, logger);
@@ -80,6 +88,14 @@ class Top {
   static get validate(){
     return ajv.compile(schema);
   }
+  /**
+   * Checks whether a Q-object satisfies this class schema.
+   *
+   * @param {object} q Q-object fragment.
+   * @param {Logger} logger Logger used for validation errors.
+   *
+   * @returns {boolean} `true` when the object is valid.
+   */
   static isValid(q, logger){
     let valid = this.validate(q);
     
@@ -92,6 +108,13 @@ class Top {
     
     return valid;
   }
+  /**
+   * Converts this object to Q-object format.
+   *
+   * @param {object} options Serialization options.
+   *
+   * @returns {object} Q-object representation.
+   */
   toQ(options = {}){
     let q = {};
     if (!this.isRandomId) {
@@ -105,6 +128,13 @@ class Top {
 
     return q;
   } 
+  /**
+   * Converts this object to flat Q-object format.
+   *
+   * @param {object} options Serialization options.
+   *
+   * @returns {object} Flat object representation.
+   */
   toFlat(_options = {}){
     // set defaults
     let options = Object.assign({
@@ -119,6 +149,13 @@ class Top {
     return res;
   }
   /* recursively check class names */
+  /**
+   * Checks class inheritance by Heta class name.
+   *
+   * @param {string} className Heta class name.
+   *
+   * @returns {boolean} `true` if this object is an instance of the class.
+   */
   instanceOf(className){
     if (this.className === className) {
       return true;
@@ -131,10 +168,25 @@ class Top {
       return isInstance;
     }
   }
+  /**
+   * Reads a nested property by path.
+   *
+   * @param {string} path Property path, for example `assignments.start_`.
+   *
+   * @returns {*} Property value.
+   */
   getProperty(path) {
     let pathArray = _parsePath(path);
     return _getByPathArray.call(this, pathArray);
   }
+  /**
+   * Writes a nested property by path.
+   *
+   * @param {string} path Property path.
+   * @param {*} value Value to set.
+   *
+   * @returns {*} Assigned value.
+   */
   setProperty(path, value) {
     let pathArray = _parsePath(path);
     return _setByPathArray.call(this, pathArray, value);

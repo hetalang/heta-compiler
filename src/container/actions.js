@@ -11,14 +11,17 @@ const reservedWords = [
 ];
 
 /**
- * Creates one of inheritors of `AbstractExport` and put it in `container.exportArray`.
- * The inheritor depends on `q.format` property.
- * For example `{id: 'output', format: 'json', ...}` creates the object of `JSONExport` type.
+ * Creates an export instance from an inline `#export` action.
+ *
+ * The export class is selected by `q.format`, for example `format: "json"`
+ * creates a JSON export instance.
+ *
+ * @deprecated Use the `export` section in the platform declaration instead.
  * 
  * @param {object} q The `export` object in JS object format.
- * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * @param {boolean} isCore Kept for action compatibility.
  * 
- * @returns {AbstractExport} The created object.
+ * @returns {AbstractExport|undefined} The created export, or `undefined` if validation fails.
  */
 // TODO: this is part which will be removed later
 // invisible => deprecated => removed
@@ -50,10 +53,10 @@ Container.prototype.export = function(q = {}, isCore = false) {
 };
 
 /**
- * Creates `UnitDef` instance and puts it in `container.unitDefStorage`.
+ * Creates a `UnitDef` and stores it by id.
  * 
  * @param {object} q The `#defineUnit` statement in JS object format.
- * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * @param {boolean} isCore Marks the unit definition as read-only.
  * 
  * @returns {UnitDef} The created object.
  */
@@ -66,10 +69,10 @@ Container.prototype.defineUnit = function(q = {}, isCore = false){
 };
 
 /**
- * Creates `FunctionDef` instance and puts it in `container.functionDefStorage`.
+ * Creates a `FunctionDef` and stores it by id.
  * 
  * @param {object} q The `#defineFunction` statement in JS object format.
- * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * @param {boolean} isCore Marks the function definition as read-only.
  * 
  * @returns {FunctionDef} The created object.
  */
@@ -82,10 +85,10 @@ Container.prototype.defineFunction = function(q = {}, isCore = false){
 };
 
 /**
- * Creates `Scenario` instance and puts it in `container.scenarioStorage`.
+ * Creates a `Scenario` and stores it by id.
  * 
  * @param {object} q The `#setScenario` statement in JS object format.
- * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * @param {boolean} isCore Marks the scenario as read-only.
  * 
  * @returns {Scenario} The created object.
  */
@@ -97,6 +100,14 @@ Container.prototype.setScenario = function(q = {}, isCore = false){
   return scenarioInstance;
 };
 
+/**
+ * Inserts a component and logs a warning when an existing component is replaced.
+ *
+ * @param {object} q The component object in Q-object format.
+ * @param {boolean} isCore Marks the component as read-only.
+ *
+ * @returns {Component|undefined} The inserted component, or `undefined` if validation fails.
+ */
 Container.prototype.insert = function(q = {}, isCore = false) {
   let ind = getIndexFromQ(q);
   let space = q.space || 'nameless';
@@ -122,15 +133,15 @@ Container.prototype.insert = function(q = {}, isCore = false) {
 }
 
 /**
- * Creates one of inheritors of `Component` and put it in a namespace.
- * The inheritor depends on `q.class` property.
- * For example `{id: 'k1', class: 'Const', namespace: 'one'}` creates the object of `Const` type
- * and puts it into namespace `one`.
+ * Creates a component of `q.class` and stores it in a namespace.
+ *
+ * For example `{id: "k1", class: "Const", space: "one"}` creates a `Const`
+ * component in namespace `one`.
  * 
  * @param {object} q The `#forceInsert` statement in JS object format.
- * @param {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * @param {boolean} isCore Marks the component as read-only.
  * 
- * @returns {Component} The created object.
+ * @returns {Component|undefined} The created component, or `undefined` if validation fails.
  */
 Container.prototype.forceInsert = function(q = {}, isCore = false){
   let ind = getIndexFromQ(q);
@@ -187,11 +198,11 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
 };
 
 /**
- * Searches a component with the index and updates its properties.
+ * Updates an existing component.
  * 
  * @param {object} q The `#update` action in JS object format.
  * 
- * @returns {Component} Updated component.
+ * @returns {Component|undefined} Updated component, or `undefined` if validation fails.
  */
 Container.prototype.update = function(q = {}){
   let space = q.space || 'nameless';
@@ -249,12 +260,12 @@ Container.prototype.update = function(q = {}){
 };
 
 /**
- * If `q.class` property is set it acts as `#insert` action. If not it works as `#update`.
+ * Inserts a component when `q.class` is present, otherwise updates an existing component.
  * 
  * @param {object} q The `#update` or `#insert` action in JS object format.
- * @param  {Boolean} isCore Set element as a "core" which means you cannot rewrite or delete it.
+ * @param {boolean} isCore Marks inserted components as read-only.
  * 
- * @returns {Component} Updated or inserted component.
+ * @returns {Component|undefined} Updated or inserted component.
  */
 Container.prototype.upsert = function(q = {}, isCore = false){
   if ('class' in q) {
@@ -265,11 +276,11 @@ Container.prototype.upsert = function(q = {}, isCore = false){
 };
 
 /**
- * Deletes the `Component` with the index. If it is not exist it throws an error.
+ * Deletes an existing component from a namespace.
  * 
- * @param {*} q The `#delete` action in JS object format.
+ * @param {object} q The `#delete` action in JS object format.
  * 
- * @returns {boolean} `true` if component existed and was deleted, `false` otherwise.
+ * @returns {boolean|undefined} `true` if the component was deleted, otherwise `undefined`.
  */
 Container.prototype.delete = function(q = {}){
   let space = q.space || 'nameless';
@@ -326,11 +337,15 @@ Container.prototype.delete = function(q = {}){
 };
 
 /**
- * Creates namespace with id from `q.space` and push it to `container.namespaceStorage`.
- * If the namespace already exists it does not create anything but updates namespace properties.
- * It can also change `type` of a namespace. 
+ * Creates or updates a namespace.
+ *
+ * If the namespace is new, a default `t @TimeScale` component is inserted.
+ * Existing namespaces keep their components and can switch between
+ * `abstract` and `concrete` type.
  * 
- * @param {object} The `#setNS` action in JS object format. 
+ * @param {object} q The `#setNS` action in JS object format.
+ *
+ * @returns {void}
  */
 Container.prototype.setNS = function(q = {}){
   // default space
@@ -352,6 +367,13 @@ Container.prototype.setNS = function(q = {}){
   this.logger.info(`Namespace "${space}" was set as "${typeString}"`);
 };
 
+/**
+ * Deletes a namespace by `q.space`.
+ *
+ * @param {object} q The namespace selector.
+ *
+ * @returns {Container} This container.
+ */
 Container.prototype.deleteNS = function(_q = {}) {
   let q = Object.assign({space: 'nameless'}, _q);
   if (this.namespaceStorage.has(q.space)) {
@@ -365,7 +387,7 @@ Container.prototype.deleteNS = function(_q = {}) {
 };
 
 /**
- * Clones and rename all components to another space.
+ * Clones all components from one namespace into another namespace.
  * 
  * @example
  * ```
@@ -382,7 +404,7 @@ Container.prototype.deleteNS = function(_q = {}) {
  * 
  * @param {object} q The `#importNS` action in JS object format. 
  * 
- * @returns {Component[]} Array of cloned components.
+ * @returns {Component[]|undefined} Array of cloned components, or `undefined` if validation fails.
  */
 Container.prototype.importNS = function(_q = {}){
   let q = Object.assign({
@@ -448,8 +470,7 @@ Container.prototype.importNS = function(_q = {}){
 
 // #import
 /**
- * Clone a component to another space.
- * It also renames id and references stored in a component.
+ * Clones one component from another namespace and rewrites its references.
  * 
  * @example
  * ```
@@ -469,7 +490,7 @@ Container.prototype.importNS = function(_q = {}){
  * 
  * @param {object} q The `#import` action in JS object format.  
  * 
- * @returns {Component} Cloned component.
+ * @returns {Component|undefined} Cloned component, or `undefined` if validation fails.
  */
 Container.prototype.import = function(_q = {}){
   let ind = getIndexFromQ(_q);
@@ -542,8 +563,13 @@ Container.prototype.import = function(_q = {}){
   return clone;
 };
 
-// #select
-// XXX: don't really used
+/**
+ * Selects a component by id and namespace.
+ *
+ * @param {object} q Component selector in Q-object format.
+ *
+ * @returns {Component|undefined} Selected component, or `undefined` if validation fails.
+ */
 Container.prototype.select = function(q = {}){
 
   let space = q.space || 'nameless';
@@ -575,6 +601,13 @@ Container.prototype.select = function(q = {}){
   return namespace.get(q.id);
 };
 
+/**
+ * Accepts metadata records without changing the container.
+ *
+ * @param {object} q Metadata object.
+ *
+ * @returns {undefined}
+ */
 Container.prototype.hasMeta = function(q = {}) {
   // do nothing, just for store meta info
   return;
