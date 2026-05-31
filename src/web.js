@@ -13,8 +13,12 @@ const { Transport, StringTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 
 // load templates
-const { templates } = require('./compiled-templates');
-Builder._templates = templates;
+const templatesPath = './compiled-templates';
+try {
+  Builder._templates = require(templatesPath).templates;
+} catch (error) {
+  throw new Error(`Failed to load templates from "${templatesPath}". Cannot find or load the compiled .njk templates. Original error: ${error.message}`);
+}
 
 // case-insensitive export names
 Builder._exportClasses = {
