@@ -2,6 +2,8 @@ const nunjucks = require('nunjucks');
 const nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader(__dirname), { autoescape: false });
 require('./nunjucks-env')(nunjucksEnv);
 
+// XXX: maybe this list should be created externally in ./templates/list.json and imported here
+// This file could be used also in `npm run precompile` to know which templates to precompile.
 const templates = {
   'heta-code.heta.njk': nunjucksEnv.getTemplate('heta-code.heta.njk'),
   'dbsolve-model.slv.njk': nunjucksEnv.getTemplate('dbsolve-model.slv.njk'),

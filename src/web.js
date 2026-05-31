@@ -12,7 +12,7 @@ const ModuleSystem = require('./module-system');
 const { Transport, StringTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 
-// load templates
+// always load compiled templates
 const templatesPath = './compiled-templates';
 try {
   Builder._templates = require(templatesPath).templates;

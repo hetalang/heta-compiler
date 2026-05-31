@@ -30,6 +30,9 @@ module.exports = function(env) {
   env.addFilter('toYAML', function(obj) {
     return _toYAML(obj);
   });
+  env.addFilter('toHetaDict', function(obj) {
+    return _toHetaDict(obj);
+  });
 
   return env;
 };
@@ -77,4 +80,48 @@ function _toYAML(obj) {
   } else {
     throw new Error('Unsupported type');
   }
+}
+
+function _toHetaDict(component = {}) {
+  let pairs = [];
+  let add = (key, value, condition = value !== undefined) => {
+    if (condition) pairs.push(`${key}: ${value}`);
+  };
+
+  add('units', component.units);
+  add('boundary', component.boundary, !!component.boundary);
+  add('ss', component.ss, !!component.ss);
+  add('compartment', component.compartment);
+  if (_hasHetaLength(component.actors)) {
+    add('actors', component.actors);
+  }
+  if (Array.isArray(component.modifiers) && component.modifiers.length > 0) {
+    add('modifiers', _toHetaArray(component.modifiers));
+  }
+  add('reversible', component.reversible, component.reversible === false);
+  add('isAmount', component.isAmount, !!component.isAmount);
+  add('output', component.output, !!component.output);
+  add('slope', component.slope, component.slope !== undefined && component.slope !== 1);
+  add('intercept', component.intercept, component.intercept !== undefined && component.intercept !== 0);
+  add('trigger', component.trigger);
+  add('start', component.start);
+  add('period', component.period);
+  add('stop', component.stop);
+  add('atStart', component.atStart);
+  if (component.aux !== undefined && Object.keys(component.aux).length > 0) {
+    add('aux', _toYAML(component.aux));
+  }
+  if (component.xmlAnnotation !== undefined) {
+    add('xmlAnnotation', _toYAML(component.xmlAnnotation));
+  }
+
+  return pairs.length > 0 ? ` { ${pairs.join(', ')} }` : '';
+}
+
+function _toHetaArray(array = []) {
+  return `[${array.join(', ')}]`;
+}
+
+function _hasHetaLength(value) {
+  return (Array.isArray(value) || typeof value === 'string') && value.length > 0;
 }

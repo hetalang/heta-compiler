@@ -1,0 +1,35 @@
+#defineUnit helperUnit { units: mole };
+#defineUnit usedUnit { units: helperUnit };
+#defineUnit rateUnit { units: usedUnit/hour };
+#defineUnit unusedUnit { units: second };
+
+#defineFunction helperFun { arguments: [x], math: x + 1 };
+#defineFunction usedFun { arguments: [x], math: helperFun(x) };
+#defineFunction unusedFun { arguments: [x], math: x - 1 };
+
+namespace rich begin
+  t { units: hour, output: true };
+
+  '''main compartment note'''
+  cell @Compartment 'Central' { units: litre } .= 3;
+
+  drug @Species 'Drug amount' { compartment: cell, units: usedUnit, isAmount: true, output: true } .= dose0;
+  metabolite @Species { compartment: cell, units: usedUnit, isAmount: true } .= 0;
+  enzyme @Species { compartment: cell, units: usedUnit, isAmount: true } .= 1;
+
+  conversion @Reaction 'conversion' { actors: drug => metabolite, modifiers: [enzyme], compartment: cell, units: rateUnit } := usedFun(kcat) * drug * scaleFactor;
+  loss @Process { actors: metabolite ->, units: rateUnit } := kclear * metabolite;
+
+  exposure @Record { units: usedUnit, output: true, boundary: true } .= 0;
+  exposure [pulse]= exposure + dose0;
+
+  dose0 @Const { units: usedUnit, aux: {source: "fixture", flags: [true, 2]} } = 10;
+  kcat @Const { units: 1/hour } = 0.3;
+  kclear @Const { units: 1/hour } = 0.1;
+  scaleFactor @Const = 1;
+
+  sample @TimeSwitcher { start: 0, period: 1, stop: 24 };
+  pulse @DSwitcher { trigger: t >= 2, atStart: true };
+  threshold @CSwitcher { trigger: drug - metabolite };
+  endSim @StopSwitcher { trigger: t >= 24 };
+end

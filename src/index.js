@@ -10,6 +10,7 @@ const ModuleSystem = require('./module-system');
 const { Transport, StdoutTransport, StringTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 
+// select which templates raw or compiled to load
 const { HETA_TEMPLATES_MODE } = process.env;
 let templatesPath = HETA_TEMPLATES_MODE && HETA_TEMPLATES_MODE.toLowerCase() === 'raw'
   ? './templates'           // raw templates

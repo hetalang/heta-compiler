@@ -48,14 +48,14 @@ class HetaCodeExport extends AbstractExport{
    * @returns {object} Template image.
    */
   getHetaCodeImage() {
-    let { namespaceStorage, functionDefStorage, unitDefStorage, logger } = this._builder.container;
+    let { namespaceStorage, functionDefStorage, unitDefStorage } = this._builder.container;
 
     let filteredNamespaceStorage = [...namespaceStorage]
       .filter(([spaceName, ns]) => new RegExp(this.spaceFilter).test(spaceName));
     
     return {
-      functionDefStorage: [...functionDefStorage],
-      unitDefStorage: [...unitDefStorage],
+      functionDefStorage: filterUsedFunctionDefs(functionDefStorage, filteredNamespaceStorage),
+      unitDefStorage: filterUsedUnitDefs(unitDefStorage, filteredNamespaceStorage),
       namespaceStorage: filteredNamespaceStorage
     };
   }
@@ -65,6 +65,76 @@ class HetaCodeExport extends AbstractExport{
   static get validate(){
     return ajv.compile(schema);
   }
+}
+
+function filterUsedFunctionDefs(functionDefStorage, namespaceStorage) {
+  let usedFunctionIds = new Set();
+
+  let addFromExpression = (expression) => {
+    if (!expression || typeof expression.functionList !== 'function') return;
+
+    expression.functionList().forEach((functionNode) => {
+      let id = functionNode.fn?.name || functionNode.name;
+      addFunction(id);
+    });
+  };
+
+  let addFunction = (id) => {
+    let functionDef = functionDefStorage.get(id);
+    if (!functionDef || functionDef.isCore || usedFunctionIds.has(id)) return;
+
+    usedFunctionIds.add(id);
+    addFromExpression(functionDef.math);
+  };
+
+  namespaceStorage.forEach(([, namespace]) => {
+    namespace.toArray().forEach((component) => {
+      getComponentExpressions(component).forEach(addFromExpression);
+    });
+  });
+
+  return [...functionDefStorage]
+    .filter(([id, functionDef]) => !functionDef.isCore && usedFunctionIds.has(id));
+}
+
+function filterUsedUnitDefs(unitDefStorage, namespaceStorage) {
+  let usedUnitIds = new Set();
+
+  let addFromUnit = (unit) => {
+    if (!unit || typeof unit.forEach !== 'function') return;
+
+    unit.forEach((unitItem) => addUnitDef(unitItem.kind));
+  };
+
+  let addUnitDef = (id) => {
+    let unitDef = unitDefStorage.get(id);
+    if (!unitDef || unitDef.isCore || usedUnitIds.has(id)) return;
+
+    usedUnitIds.add(id);
+    addFromUnit(unitDef.unitsParsed);
+  };
+
+  namespaceStorage.forEach(([, namespace]) => {
+    namespace.toArray().forEach((component) => {
+      addFromUnit(component.unitsParsed);
+    });
+  });
+
+  return [...unitDefStorage]
+    .filter(([id, unitDef]) => !unitDef.isCore && usedUnitIds.has(id));
+}
+
+function getComponentExpressions(component) {
+  let expressions = [];
+
+  if (component.assignments) {
+    expressions.push(...Object.values(component.assignments));
+  }
+  if (component.trigger) {
+    expressions.push(component.trigger);
+  }
+
+  return expressions;
 }
 
 module.exports = HetaCodeExport;
