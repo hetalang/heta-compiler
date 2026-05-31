@@ -1,5 +1,6 @@
 /*
- Entry file for web page
+  Entry file for web applications:
+  DEPRICATED! Use src/web.js instead of this file.
 */
 
 /*

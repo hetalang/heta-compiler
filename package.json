@@ -3,6 +3,7 @@
   "version": "0.11.1",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
+  "browser": "./src/web.js",
   "scripts": {
     "test:dev": "mocha test/math-json --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",

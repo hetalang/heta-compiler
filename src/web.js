@@ -1,20 +1,19 @@
 /*
-  Entry file for Node.js applications.
-  Other variants are: web.js, browser.js (deprecated).
+  Entry file for web applications.
+  You must run `npm run precompile` to precompile templates before using this file.
+  It does not use specific Node.js features like:
+  - StdoutTransport
 */
 
 const { Builder } = require('./builder');
 const Container = require('./container');
 const coreItems = require('./container/core-items');
 const ModuleSystem = require('./module-system');
-const { Transport, StdoutTransport, StringTransport } = require('./logger');
+const { Transport, StringTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 
-// load raw templates
-const { templates } = require('./templates');
-// load compiled templates
-//const { templates } = require('./compiled-templates');
-
+// load templates
+const { templates } = require('./compiled-templates');
 Builder._templates = templates;
 
 // case-insensitive export names
@@ -45,7 +44,6 @@ module.exports = {
   coreItems,
   ModuleSystem,
   Transport,
-  HetaLevelError,
-  StdoutTransport,
   StringTransport,
+  HetaLevelError
 };
