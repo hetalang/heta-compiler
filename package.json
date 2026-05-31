@@ -9,7 +9,7 @@
     "jsdoc": "jsdoc -c .jsdoc.json",
     "jsdoc:sitemap": "node scripts/generate-jsdoc-sitemap.js",
     "test:cov": "nyc --reporter=lcov npm run test",
-    "precompile": "nunjucks-precompile --include [\"\\.hjk$\"] src/templates > compiled-templates.js",
+    "precompile": "node scripts/precompile-templates.js",
     "pkg": "npx pkg . --compress GZip"
   },
   "repository": {

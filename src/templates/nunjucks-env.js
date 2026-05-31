@@ -1,4 +1,4 @@
-const { _parsePath, _getByPathArray } = require('./utils');
+const { _parsePath, _getByPathArray } = require('../utils');
 
 module.exports = function(env) {
   // this is required for webpack when Environment is external and opts cannot be set with { autoescape: false }

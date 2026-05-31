@@ -61,7 +61,7 @@ class SBMLExport extends AbstractExport {
   getSBMLCode(image = {}){
     switch (this.version) {
     case 'L2V3':
-      return compiledTemplates['sbmlL2V3.xml.njk'](image);
+      return compiledTemplates['sbmlL2V3.xml.njk'].render(image);
       break;
     case 'L2V4':
       return compiledTemplates['sbmlL2V4.xml.njk'].render(image);
