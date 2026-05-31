@@ -4,6 +4,11 @@
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
   "browser": "./src/web.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./cli": "./src/index.js",
+    "./web": "./dist/web.js"
+  },
   "scripts": {
     "test:dev": "mocha test/math-json --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
@@ -39,6 +44,7 @@
     "fs-extra": "^11.3.0",
     "heta-parser": "^0.4.3",
     "inquirer": "^8.2.7",
+    "js-sha256": "^0.11.1",
     "js-yaml": "^4.1.0",
     "markdown-it": "^14.1.0",
     "mathjs": "^11.12.0",

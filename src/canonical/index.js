@@ -1,6 +1,6 @@
 const Container = require('../container/main');
 const pkg = require('../../package');
-const { createHash } = require('node:crypto');
+const { sha256 } = require('js-sha256');
 
 Container.prototype.makeCanonicalObject = function() {
     let nsArray = [...this.namespaceStorage];
@@ -39,9 +39,7 @@ Container.prototype.makeCanonicalFull = function() {
     // create canonical string
     let canonicalString = JSON.stringify(qArr_full);
     // create hash sum
-    const hash = createHash('sha256')
-      .update(canonicalString, 'utf8') // canonical JSON
-      .digest('hex');
+    const hash = sha256(canonicalString); // canonical JSON, hex digest
 
     let qArr_final = [{
       action: 'hasMeta',
