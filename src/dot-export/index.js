@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
 require('./namespace');
@@ -46,7 +45,7 @@ class DotExport extends AbstractExport {
     return results;
   }
   getDotCode(image = {}){
-    return compiledTemplates['dot.dot.njk'].render(image);
+    return this.renderTemplate('dot.dot.njk', image);
   }
   static get validate(){
     return ajv.compile(schema);

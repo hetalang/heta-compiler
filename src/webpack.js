@@ -10,7 +10,7 @@ module: {
                 test: /\.(njk|nunjucks)$/,
                 loader: 'nunjucks-loader',
                 options: {
-                    config: __dirname + '/node_modules/heta-compiler/src/nunjucks-env',
+                    config: __dirname + '/node_modules/heta-compiler/src/templates/nunjucks-env',
                     //quiet: true
                 }
             }
@@ -25,7 +25,7 @@ const { Transport, StringTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 
 // set nunjucks environment
-global.compiledTemplates = {
+Builder._templates = {
   'heta-code.heta.njk': require('./templates/heta-code.heta.njk'),
   'dbsolve-model.slv.njk': require('./templates/dbsolve-model.slv.njk'),
   'dot.dot.njk': require('./templates/dot.dot.njk'),

@@ -10,7 +10,7 @@ const { templates } = require('./templates');
 // load compiled templates
 //const { templates } = require('./compiled-templates');
 
-global.compiledTemplates = templates;
+Builder._templates = templates;
 
 // case-insensitive export names
 Builder._exportClasses = {

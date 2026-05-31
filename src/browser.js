@@ -19,8 +19,8 @@ const HetaLevelError = require('./heta-level-error');
 
 // set nunjucks environment
 const nunjucksEnv = new nunjucks.Environment(new nunjucks.WebLoader('/templates'), { autoescape: false });
-require('./nunjucks-env')(nunjucksEnv);
-global.compiledTemplates = {
+require('./templates/nunjucks-env')(nunjucksEnv);
+Builder._templates = {
   'heta-code.heta.njk': nunjucksEnv.getTemplate('heta-code.heta.njk'),
   'dbsolve-model.slv.njk': nunjucksEnv.getTemplate('dbsolve-model.slv.njk'),
   'dot.dot.njk': nunjucksEnv.getTemplate('dot.dot.njk'),

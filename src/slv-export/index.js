@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
 require('./namespace');
@@ -69,7 +68,7 @@ class SLVExport extends AbstractExport{
     return results;
   }
   getSLVCode(image = {}){
-    return compiledTemplates['slv-blocks-template.slv.njk'].render(image);
+    return this.renderTemplate('slv-blocks-template.slv.njk', image);
   }
   static get validate(){
     return ajv.compile(schema);

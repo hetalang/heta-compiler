@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
 
@@ -61,7 +60,7 @@ class HetaCodeExport extends AbstractExport{
     };
   }
   getHetaCodeCode(image = {}){
-    return compiledTemplates['heta-code.heta.njk'].render(image);
+    return this.renderTemplate('heta-code.heta.njk', image);
   }
   static get validate(){
     return ajv.compile(schema);

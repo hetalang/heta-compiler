@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');
 const { ajv } = require('../ajv');
@@ -53,7 +52,7 @@ class MTExport extends AbstractExport {
     return results;
   }
   getModelCode(image = []){
-    return compiledTemplates['mt-model.jl.njk'].render(image);
+    return this.renderTemplate('mt-model.jl.njk', image);
   }
 }
 

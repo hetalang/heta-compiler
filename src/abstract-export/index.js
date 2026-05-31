@@ -45,6 +45,22 @@ class AbstractExport {
     throw new TypeError(`No method makeText() for "${this.className}"`);
   }
   /**
+   * Renders a named template from the builder runtime.
+   *
+   * @param {string} name Template filename.
+   * @param {object} data Template render context.
+   *
+   * @returns {string} Rendered template output.
+   */
+  renderTemplate(name, data = {}) {
+    let template = this._builder.templates && this._builder.templates[name];
+    if (!template) {
+      throw new Error(`Template "${name}" is not available for "${this.className}".`);
+    }
+
+    return template.render(data);
+  }
+  /**
    * Whether the exporter requires concrete namespaces only.
    *
    * @returns {boolean} `true` if abstract namespaces must be excluded.

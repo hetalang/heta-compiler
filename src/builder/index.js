@@ -34,7 +34,7 @@ class Builder {
     declaration = {},
     fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // must return text
     fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); }, // must return undefined
-    transportArray = [] // Builder-level Transport
+    transportArray = [], // Builder-level Transport
   ) {
 
     // create container
@@ -48,6 +48,9 @@ class Builder {
     // file handlers
     this.fileReadHandler = fileReadHandler;
     this.fileWriteHandler = fileWriteHandler;
+
+    // load templates
+    this.templates = Builder._templates;
 
     // check based on schema, use default values from schema
     let validate = ajv.compile(declarationSchema);
@@ -108,6 +111,7 @@ class Builder {
   }
 
   static _exportClasses = {}; // storing abstract Export classes
+  static _templates = {}; // storing template registry for text exporters
   exportClasses = {}; // storing Export classes bound to builder
 
   /**

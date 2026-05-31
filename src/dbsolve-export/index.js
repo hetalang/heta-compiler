@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 require('./expression');
 require('./namespace');
@@ -63,7 +62,7 @@ class DBSolveExport extends AbstractExport {
     return results;
   }
   getSLVCode(image = {}) {
-    return compiledTemplates['dbsolve-model.slv.njk'].render(image);
+    return this.renderTemplate('dbsolve-model.slv.njk', image);
   }
   get className() {
     return 'DBSolveExport';

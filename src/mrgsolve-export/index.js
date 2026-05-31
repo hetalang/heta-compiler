@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
 require('./namespace');
@@ -59,10 +58,10 @@ class MrgsolveExport extends AbstractExport {
     return results;
   }
   getMrgsolveCode(DynMSModel = {}){
-    return compiledTemplates['mrgsolve-model.cpp.njk'].render(DynMSModel);
+    return this.renderTemplate('mrgsolve-model.cpp.njk', DynMSModel);
   }
   getMrgsolveRun(selectedNamespaces){
-    return compiledTemplates['mrgsolve-run.r.njk'].render({selectedNamespaces});
+    return this.renderTemplate('mrgsolve-run.r.njk', {selectedNamespaces});
   }
 }
 

@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 require('./expression'); // to use method toMatlabString()
 require('./namespace');
@@ -74,13 +73,13 @@ class MatlabExport extends AbstractExport {
     return results;
   }
   getModelCode(image = {}){
-    return compiledTemplates['matlab-model.m.njk'].render(image);
+    return this.renderTemplate('matlab-model.m.njk', image);
   }
   getParamCode(image = {}){
-    return compiledTemplates['matlab-param.m.njk'].render(image);
+    return this.renderTemplate('matlab-param.m.njk', image);
   }
   getRunCode(image = {}){
-    return compiledTemplates['matlab-run.m.njk'].render(image);
+    return this.renderTemplate('matlab-run.m.njk', image);
   }
 }
 

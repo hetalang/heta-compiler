@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
 require('./namespace');
@@ -41,7 +40,7 @@ class SimbioExport extends AbstractExport {
 
       let image = ns.getSimbioImage();
       image.auxAsNotes = this.auxAsNotes;
-      let modelCode = compiledTemplates['simbio.m.njk'].render(image);
+      let modelCode = this.renderTemplate('simbio.m.njk', image);
 
       return {
         content: modelCode,
@@ -51,7 +50,7 @@ class SimbioExport extends AbstractExport {
     });
 
     // add function definitions code
-    let functionsCode = compiledTemplates['simbio-tern__.m.njk'].render(this);
+    let functionsCode = this.renderTemplate('simbio-tern__.m.njk', this);
 
     results.push({
       content: functionsCode,

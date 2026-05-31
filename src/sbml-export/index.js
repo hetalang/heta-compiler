@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
 require('./expression');
@@ -61,19 +60,19 @@ class SBMLExport extends AbstractExport {
   getSBMLCode(image = {}){
     switch (this.version) {
     case 'L2V3':
-      return compiledTemplates['sbmlL2V3.xml.njk'].render(image);
+      return this.renderTemplate('sbmlL2V3.xml.njk', image);
       break;
     case 'L2V4':
-      return compiledTemplates['sbmlL2V4.xml.njk'].render(image);
+      return this.renderTemplate('sbmlL2V4.xml.njk', image);
       break;
     case 'L2V5':
-      return compiledTemplates['sbmlL2V5.xml.njk'].render(image);
+      return this.renderTemplate('sbmlL2V5.xml.njk', image);
       break;
     case 'L3V1':
-      return compiledTemplates['sbmlL3V1.xml.njk'].render(image);
+      return this.renderTemplate('sbmlL3V1.xml.njk', image);
       break;
     case 'L3V2':
-      return compiledTemplates['sbmlL3V2.xml.njk'].render(image);
+      return this.renderTemplate('sbmlL3V2.xml.njk', image);
       break;
     default:
       this._builder.logger.error(`SBML of version "${this.version}" is not supported.`);

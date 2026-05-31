@@ -1,4 +1,3 @@
-/* global compiledTemplates */
 const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');
 const { ajv } = require('../ajv');
@@ -66,10 +65,10 @@ class JuliaExport extends AbstractExport {
     ];
   }
   getModelCode(image = []){
-    return compiledTemplates['julia-model.jl.njk'].render(image);
+    return this.renderTemplate('julia-model.jl.njk', image);
   }
   getRunCode(image = []){
-    return compiledTemplates['julia-run.jl.njk'].render(image);
+    return this.renderTemplate('julia-run.jl.njk', image);
   }
 }
 
