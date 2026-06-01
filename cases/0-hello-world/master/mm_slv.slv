@@ -403,8 +403,6 @@ F[1] = ( -1*r1 ) / default_comp;
 //!! P  @Species 'product' {units: uM}
 F[2] = ( 1*r1 ) / default_comp;
 
-
-
 #
 
 <RHS 2

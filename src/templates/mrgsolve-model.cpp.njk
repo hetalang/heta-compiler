@@ -50,6 +50,7 @@ if (NEWIND <= 1) {
 {%- for state in states | filter2('static', true) %}
 {{ state.id }} = {{ state.initial if state.initial is number else state.initial.expr }};
 {%- endfor %}
+// triggers
 {%- for event in events | exclude2('trigger.type', 'time') %}
 {{ event.id }}__pull__ = {{ not event.trigger.atStart }};
 {{ event.id }}__charge__ = 0;

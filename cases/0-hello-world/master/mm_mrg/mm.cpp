@@ -34,6 +34,7 @@ P_amt__0 = 0.0 * 1.0;
 if (NEWIND <= 1) {
 // static states initializations
 default_comp = 1;
+// triggers
 // time events
 }
 
