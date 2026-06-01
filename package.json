@@ -48,7 +48,7 @@
     "js-yaml": "^4.1.0",
     "markdown-it": "^14.1.0",
     "mathjs": "^11.12.0",
-    "mathjs-mathml": "^0.3.3",
+    "mathjs-mathml": "^0.4.0",
     "node-fetch": "^2.7.0",
     "nunjucks": "^3.2.4",
     "random-id": "^1.0.4",
