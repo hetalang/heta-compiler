@@ -218,9 +218,10 @@ This is the recommended version of SLV export format which supports compartment 
 
 ## SLV
 
-**Deprecated** old version
+**Deprecated** old version. Use [DBSolve](#dbsolve) export when possible.
 
 Export to SLV format which is the model format for [DBSolveOptimum](https://insysbio.com/en/software/db-solve-optimum).
+This exporter keeps the older SLV structure and supports only a limited subset of Heta models.
 
 ### Properties
 
@@ -238,8 +239,10 @@ Export to SLV format which is the model format for [DBSolveOptimum](https://insy
 ### Known restrictions
 
 - `Compartment` which changes in time may result in wrong ODE.
-- `CSwitcher` and `DSwitcher` are not supported.
-- Initialization of `Record` by expression does not work: `x1 .= k1 * A` (not supported).
+- `CSwitcher` and `DSwitcher` are not supported and are ignored in the generated SLV file.
+- `TimeSwitcher` supports only event assignments which can be represented as `a * x + b`, where `x` is the target record and `a`, `b` are numbers or direct identifiers. For example, `x [sw1] = 2 * x + 1` is supported, but `x [sw1] = x + 1 / c1` is not supported.
+- Unsupported switchers or event assignments are reported as export errors, but the generated SLV structure is kept valid.
+- Initialization of `Record` by expression does not work: `x1 .= k1 * A` is not supported.
 - `Infinity`, `-Infinity`, `NaN` values are not supported
 - boolean operators like `and`, `or`, etc. are not supported
 
@@ -522,7 +525,7 @@ _No additional properties_
 | | SLV | DBSolve | Julia | Mrgsolve/R | Matlab | Simbio/Matlab | SBML (L3V2) | JSON, YAML | Table | Dot | DynMS |
 |--|--|--|--|--|--|--|--|--|--|--|--|
 |`@UnitDef` class                      |na |na |na |na |na |+ |+ |+ |+ |na |na |
-|`@TimeSwitcher` class                 |+  |+  |+  |+  |+ (converts to DSwitcher) |+ |+ (converts to DSwitcher) |+ |+ |na |+ |
+|`@TimeSwitcher` class                 |+ (limited assignments) |+  |+  |+  |+ (converts to DSwitcher) |+ |+ (converts to DSwitcher) |+ |+ |na |+ |
 |`@TimeSwitcher {start: 6}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: 0}`                              |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
@@ -531,7 +534,7 @@ _No additional properties_
 |`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+(converts to DSwitcher) |+ |+ |na |+ |
 |`@CSwitcher` root finding                               |- |- |+ |- |+ |+ |- |na |na |na |+ |
 |`@DSwitcher` class                                      |- |+ |+ |+ |+ (converts to DSwitcher) |+ |+ |+ |+ |na |+ |
-|`atStart` in `@CSwitcher` and `@DSwitcher`              |(?) |(?) |(?) |+ |- (never run at 0) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
+|`atStart` in `@CSwitcher` and `@DSwitcher`              |- |(?) |(?) |+ |- (never run at 0) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na |+ |
