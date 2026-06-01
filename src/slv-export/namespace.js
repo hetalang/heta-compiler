@@ -71,17 +71,13 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
           let expression = record.assignments[switcher.id];
           let [multiply, add] = expression
             .linearizeFor(record.id)
-            .map((tree) => {
-              if (tree.type === 'SymbolNode') { // a is symbol case, i.e. 'p1'
-                return tree.toString();
-              } else {
-                try { // a can be evaluated, i.e. '3/4'
-                  return tree.evaluate();
-                } catch (e) { // other cases, i.e. 'p1*2'
-                  logger.error(`SLV format cannot export expression "${record.id} [${switcher.id}]= ${expression.toString()}". Use only expressions of type: 'a * ${record.id} + b'`, {type: 'ExportError'});
-                }
-              }
-            });
+            .map((tree) => _getSLVEventTerm(tree));
+
+          if (multiply === undefined || add === undefined) {
+            let msg = `SLV format cannot export expression "${record.id} [${switcher.id}]= ${expression.toString()}". Use only expressions of type: 'a * ${record.id} + b'. This event will be ignored.`;
+            logger.error(msg, {type: 'ExportError'});
+            return;
+          }
 
           timeEvents.push({
             start: switcher.getStart(),
@@ -110,7 +106,7 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     .selectByClassName('DSwitcher')
     .map((x) => x.id);
   if (dSwitchers.length > 0) {
-    let msg = `SLV doesn't support @DSwitchers, got ${dSwitchers.join(', ')}.`;
+    let msg = `SLV doesn't support @DSwitchers, got ${dSwitchers.join(', ')}. They will be ignored.`;
     logger.error(msg, {type: 'ExportError'});
   }
 
@@ -119,7 +115,7 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     .selectByClassName('CSwitcher')
     .map((x) => x.id);
   if (cSwitchers.length > 0) {
-    let msg = `SLV doesn't support @CSwitchers, got ${cSwitchers.join(', ')}.`;
+    let msg = `SLV doesn't support @CSwitchers, got ${cSwitchers.join(', ')}. They will be ignored.`;
     logger.error(msg, {type: 'ExportError'});
   }
 
@@ -145,3 +141,16 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     version: version,
   };
 };
+
+function _getSLVEventTerm(tree) {
+  if (tree.type === 'SymbolNode') {
+    return tree.toString();
+  }
+
+  try {
+    let value = tree.evaluate();
+    return Number.isFinite(value) ? value : undefined;
+  } catch (e) {
+    return undefined;
+  }
+}

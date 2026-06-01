@@ -1,5 +1,6 @@
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
+require('../dbsolve-export/expression');
 require('./namespace');
 
 const schema = {
@@ -56,6 +57,7 @@ class SLVExport extends AbstractExport{
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = ns.getSLVImage(this.groupConstBy, this.powTransform, this.version);
+      image.eventsOff = !!this.eventsOff;
       let content = this.getSLVCode(image);
         
       return {
