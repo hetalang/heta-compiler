@@ -66,6 +66,9 @@
     "sitemap": "^8.0.3",
     "slv-utils": "^0.5.1"
   },
+  "overrides": {
+    "serialize-javascript": "^7.0.5"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
