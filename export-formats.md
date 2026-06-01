@@ -201,8 +201,10 @@ This is the recommended version of SLV export format which supports compartment 
 
 ### Known restrictions
 
-- `Infinity`, `-Infinity`, `NaN` values is not supported
+- `Infinity`, `-Infinity`, `NaN` values are not supported
 - boolean operators like `and`, `or`, etc. are not supported
+- `DSwitcher` supports only simple comparison operators in `trigger`.
+- `CSwitcher` is transformed to `DSwitcher`-like step detection, so root finding is not supported.
 
 **Example**
 
@@ -531,10 +533,10 @@ _No additional properties_
 |`@TimeSwitcher {start: time_start}` with ref to `@Const`|+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {period: 12}` infinite repeat            |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |`@TimeSwitcher {stop: 120}` stop time for repeat        |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
-|`@CSwitcher` class                                      |- |+ |+ |+ |+ |+ |+(converts to DSwitcher) |+ |+ |na |+ |
+|`@CSwitcher` class                                      |- |+ (converts to DSwitcher) |+ |+ |+ |+ |+(converts to DSwitcher) |+ |+ |na |+ |
 |`@CSwitcher` root finding                               |- |- |+ |- |+ |+ |- |na |na |na |+ |
 |`@DSwitcher` class                                      |- |+ |+ |+ |+ (converts to DSwitcher) |+ |+ |+ |+ |na |+ |
-|`atStart` in `@CSwitcher` and `@DSwitcher`              |- |(?) |(?) |+ |- (never run at 0) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
+|`atStart` in `@CSwitcher` and `@DSwitcher`              |- |+ |(?) |+ |- (never run at 0) |- (never run at 0) |+ (use initialValue in trigger) |+ |+ |na |+ |
 |MathExpr: arithmetic functions                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na |+ |
