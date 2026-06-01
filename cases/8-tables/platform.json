@@ -14,7 +14,8 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "JSON", "filepath": "output_json" }
+    {
+      "format": "JSON"
+    }
   ]
 }
-

@@ -14,13 +14,13 @@
     "source": "src/index.heta"
   },
   "export": [
-    #{ "format": "JSON", "filepath": "json" },
-    #{ "format": "SLV", "filepath": "slv" },
-    #{ "format": "DBSolve", "filepath": "model" },
-    #{ "format": "Simbio", "filepath": "simbio" },
-    #{ "format": "Matlab", "filepath": "matlab" },
-    #{ "format": "Julia", "filepath": "julia" },
+    #{ "format": "JSON" },
+    #{ "format": "SLV" },
+    #{ "format": "DBSolve" },
+    #{ "format": "Simbio" },
+    #{ "format": "Matlab" },
+    #{ "format": "Julia" },
     { "format": "SBML" },
-    #{ "format": "Mrgsolve", "filepath": "mrgsolve" }
+    #{ "format": "Mrgsolve" }
   ]
 }

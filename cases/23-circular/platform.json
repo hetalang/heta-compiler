@@ -9,8 +9,9 @@
     "type": "heta",
     "source": "src/index.heta"
   },
-  "output": [
-    { "format": "JSON", "filepath": "output" }
+  "export": [
+    {
+      "format": "JSON"
+    }
   ]
 }
-

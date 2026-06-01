@@ -8,7 +8,6 @@ importModule:
   source: src/shared-constants.heta
 export:
   - format: JSON
-    filepath: json
   - format: SLV
     filepath: slv
     spaceFilter: one_comp

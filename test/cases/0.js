@@ -1,6 +1,6 @@
 /* global describe, it */
 /*
-  It compiles the platform located in /cases/0-hello-world/ and compare the exported fils with /cases/0-hello-world/master content
+  It compiles the platform located in /cases/0-hello-world/ and compare the exported files with /cases/0-hello-world/master content
   Tested export formats:
   - JSON
   - YAML
@@ -21,14 +21,14 @@ const sbml_l2v4_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l2
   .replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, ''); // to skip sbml/annotation comparison
 const sbml_l3v1_correct = fs.readFileSync('cases/0-hello-world/master/mm_sbml_l3v1/mm.xml','utf8')
   .replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, ''); // to skip sbml/annotation comparison
-const json_correct = require('../../cases/0-hello-world/master/output.heta.json');
-const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/output.heta.yml','utf8');
+const json_correct = require('../../cases/0-hello-world/master/json/output.heta.json');
+const yaml_correct_text = fs.readFileSync('cases/0-hello-world/master/yaml/output.heta.yml','utf8');
 const yaml_correct = load(yaml_correct_text);
-const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/mm_slv.slv','utf8');
+const slv_correct_text = fs.readFileSync('cases/0-hello-world/master/slv/mm.slv','utf8');
 const slv_correct = slvParse.parse(slv_correct_text);
-const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/output.heta.xlsx');
-const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mm_mrg/mm.cpp','utf8');
-const julia_correct = fs.readFileSync('cases/0-hello-world/master/mm_julia/model.jl','utf8');
+const xlsx_correct = XLSX.readFile('cases/0-hello-world/master/xlsx/output.heta.xlsx');
+const mrgsolve_correct = fs.readFileSync('cases/0-hello-world/master/mrgsolve/mm.cpp','utf8');
+const julia_correct = fs.readFileSync('cases/0-hello-world/master/julia/model.jl','utf8');
 
 describe('Testing "cases/0-hello-world"', () => {
   let b;

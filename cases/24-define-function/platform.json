@@ -9,18 +9,47 @@
     "type": "heta",
     "source": "src/index.heta"
   },
-  "output": [
-    { "format": "JSON", "filepath": "output" },
-    { "format": "YAML", "filepath": "output" },
-    { "format": "Table", "filepath": "table", "omitRows": 3, "splitByClass": true },
-    { "format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true },
-    { "format": "SBML", "filepath": "sbml", "version": "L2V4" },
-    { "format": "DBSolve", "filepath": "dbsolve" },
-    { "format": "SLV", "filepath": "slv" },
-    { "format": "HetaCode", "filepath": "heta" },
-    { "format": "Simbio", "filepath": "simbio" },
-    { "format": "Mrgsolve", "filepath": "mrgsolve" },
-    { "format": "Matlab", "filepath": "matlab" },
-    { "format": "Julia", "filepath": "julia" }
+  "export": [
+    {
+      "format": "JSON"
+    },
+    {
+      "format": "YAML"
+    },
+    {
+      "format": "Table",
+      "omitRows": 3,
+      "splitByClass": true
+    },
+    {
+      "format": "XLSX",
+      "omitRows": 3,
+      "splitByClass": true
+    },
+    {
+      "format": "SBML",
+      "version": "L2V4"
+    },
+    {
+      "format": "DBSolve"
+    },
+    {
+      "format": "SLV"
+    },
+    {
+      "format": "HetaCode"
+    },
+    {
+      "format": "Simbio"
+    },
+    {
+      "format": "Mrgsolve"
+    },
+    {
+      "format": "Matlab"
+    },
+    {
+      "format": "Julia"
+    }
   ]
 }

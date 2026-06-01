@@ -6,9 +6,9 @@ const chaiXml = require('chai-xml');
 use(chaiXml);
 const fs = require('fs-extra');
 
-const sbml_correct = fs.readFileSync('cases/6-import/master/output_sbml/model.xml','utf8')
+const sbml_correct = fs.readFileSync('cases/6-import/master/sbml/model.xml','utf8')
   .replace(/<hetalang:hasMeta.*<\/hetalang:hasMeta>/, ''); // to skip sbml/annotation comparison
-const json_correct = require('../../cases/6-import/master/output_json/output.heta.json');
+const json_correct = require('../../cases/6-import/master/json/output.heta.json');
 
 describe('Testing "cases/6-import"', () => {
   let b;
@@ -60,4 +60,3 @@ describe('Testing "cases/6-import"', () => {
     //console.log(obj);
   });
 });
-  

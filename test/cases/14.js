@@ -4,7 +4,7 @@ const { Builder } = require('../../src');
 const { expect, use } = require('chai');
 const fs = require('fs-extra');
 
-const json_correct = require('../../cases/14-sbml-module/master/output.heta.json');
+const json_correct = require('../../cases/14-sbml-module/master/json/output.heta.json');
 
 describe('Case #14: testing SBML module with units', () => {
   let b;

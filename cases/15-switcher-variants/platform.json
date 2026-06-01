@@ -12,7 +12,8 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "Julia", "filepath": "julia_model" }
+    {
+      "format": "Julia"
+    }
   ]
 }
-

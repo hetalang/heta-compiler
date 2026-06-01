@@ -14,8 +14,14 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "SLV", "filepath": "model" },
-    { "format": "SBML", "filepath": "sbml" },
-    { "format": "Julia", "filepath": "julia" }
+    {
+      "format": "SLV"
+    },
+    {
+      "format": "SBML"
+    },
+    {
+      "format": "Julia"
+    }
   ]
 }

@@ -32,4 +32,3 @@ export:
     filepath: sbml_invivo
     spaceFilter: invivo
   - format: Dot
-    filepath: graph

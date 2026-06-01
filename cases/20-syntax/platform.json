@@ -13,15 +13,39 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "JSON", "filepath": "output" },
-    { "format": "YAML", "filepath": "output" },
-    { "format": "XLSX", "filepath": "table", "omitRows": 3, "splitByClass": true },
-    { "format": "SBML", "filepath": "sbml", "version": "L2V4" },
-    { "format": "SLV", "filepath": "slv", "eventsOff": false },
-    { "format": "DBSolve", "filepath": "dbsolve" },
-    { "format": "Simbio", "filepath": "simbio" },
-    { "format": "Mrgsolve", "filepath": "mrgsolve" },
-    { "format": "Julia", "filepath": "julia" },
-    { "format": "Matlab", "filepath": "matlab" }
+    {
+      "format": "JSON"
+    },
+    {
+      "format": "YAML"
+    },
+    {
+      "format": "XLSX",
+      "omitRows": 3,
+      "splitByClass": true
+    },
+    {
+      "format": "SBML",
+      "version": "L2V4"
+    },
+    {
+      "format": "SLV",
+      "eventsOff": false
+    },
+    {
+      "format": "DBSolve"
+    },
+    {
+      "format": "Simbio"
+    },
+    {
+      "format": "Mrgsolve"
+    },
+    {
+      "format": "Julia"
+    },
+    {
+      "format": "Matlab"
+    }
   ]
 }

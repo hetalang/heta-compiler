@@ -12,7 +12,11 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "Julia", "filepath": "julia" },
-    { "format": "JSON", "filepath": "json" }
+    {
+      "format": "Julia"
+    },
+    {
+      "format": "JSON"
+    }
   ]
 }

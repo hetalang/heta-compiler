@@ -6,7 +6,7 @@
   keywords: [],
   license: UNLICENSED,
   contributors: [],
-  builderVersion: ^0.8.7,
+  builderVersion: '*',
   options: {
     debug: false,
     unitsCheck: false

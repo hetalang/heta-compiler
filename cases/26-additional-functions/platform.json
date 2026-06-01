@@ -1,5 +1,5 @@
 {
-  "builderVersion": "^0.8.2",
+  "builderVersion": "*",
   "id": "template",
   "notes": "platform notes",
   "version": "v0.1.0",
@@ -10,6 +10,8 @@
     "source": "src/index.heta"
   },
   "export": [
-    { "format": "JSON", "filepath": "output" }
+    {
+      "format": "JSON"
+    }
   ]
 }

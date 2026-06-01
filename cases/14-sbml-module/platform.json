@@ -13,8 +13,14 @@
     "debug": true
   },
   "export": [
-    { "format": "SBML", "filepath": "output" },
-    { "format": "JSON"},
-    { "format": "Julia"}
+    {
+      "format": "SBML"
+    },
+    {
+      "format": "JSON"
+    },
+    {
+      "format": "Julia"
+    }
   ]
 }
