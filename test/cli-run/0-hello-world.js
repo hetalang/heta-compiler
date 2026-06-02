@@ -4,6 +4,6 @@ const { execSync } = require('child_process');
 
 describe('Run build from CLI', () => {
   it('should build for all export without errors', () => {
-    execSync('npx heta build --log-level=error --log-mode=never cases/0-hello-world --skip-updates', { stdio: 'inherit' });
+    execSync('node bin/heta.js build --log-level=error --log-mode=never cases/0-hello-world --skip-updates', { stdio: 'inherit' });
   });
 });
