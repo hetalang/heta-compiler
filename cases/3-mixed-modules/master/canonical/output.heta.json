@@ -1,0 +1,73 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:34:18.573Z",
+    "platformId": "mm",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "bb89c8cef02240771a413a908d0adea5629fcdb68a82e0a61d1e32481924dc76",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "one",
+    "type": "abstract"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Page",
+    "content": "# title\r\nldalklas\r\nkalkdlsa\r\n\r\nksaldklsa\r\nl;adsl;lds\r\n",
+    "id": "yyy",
+    "title": "hhh"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "p1",
+    "space": "one"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "x * y"
+    },
+    "class": "Record",
+    "id": "p2",
+    "space": "one"
+  },
+  {
+    "action": "upsert",
+    "assignments": {},
+    "class": "Record",
+    "id": "p3",
+    "space": "one",
+    "title": "I am title"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "one"
+  },
+  {
+    "action": "upsert",
+    "assignments": {},
+    "class": "Record",
+    "id": "x1",
+    "space": "one",
+    "title": "I am title"
+  }
+]

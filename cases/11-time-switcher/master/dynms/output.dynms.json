@@ -1,0 +1,244 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:36:58.135Z",
+  "platformId": "mm",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "kabs",
+          "value": 0.01
+        },
+        {
+          "id": "kel",
+          "value": 0.01
+        },
+        {
+          "id": "sw2_start",
+          "value": 5
+        }
+      ],
+      "states": [
+        {
+          "id": "a0",
+          "initial": 0
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        },
+        {
+          "id": "comp0",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "comp1",
+          "initial": 5.2,
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s2_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vabs",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs",
+              "a0"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vel",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kel",
+              "s1",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "a0",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "vabs"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vabs",
+              [
+                "Negate",
+                "vel"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "sw0",
+          "trigger": {
+            "type": "time",
+            "start": 40
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true
+        },
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "time",
+            "start": 0,
+            "period": 12,
+            "stop": 60
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "a0",
+                  10
+                ],
+                "format": "math-json"
+              },
+              "state": "a0"
+            },
+            {
+              "rhs": {
+                "expr": 6,
+                "format": "math-json"
+              },
+              "state": "comp1"
+            }
+          ],
+          "active": false
+        },
+        {
+          "id": "sw2",
+          "trigger": {
+            "type": "time",
+            "start": {
+              "expr": "sw2_start",
+              "format": "math-json"
+            },
+            "period": 24
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s1",
+                    2
+                  ],
+                  "comp1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s1_amt_"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s2",
+                    2
+                  ],
+                  "comp1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s2_amt_"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": [
+        {
+          "symbol": "s1"
+        },
+        {
+          "symbol": "s2"
+        },
+        {
+          "symbol": "comp0"
+        },
+        {
+          "symbol": "comp1"
+        }
+      ]
+    }
+  ]
+}

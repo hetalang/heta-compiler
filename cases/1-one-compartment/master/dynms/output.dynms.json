@@ -1,0 +1,271 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:33:50.648Z",
+  "platformId": "mm",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "kabs",
+          "value": 0.01
+        },
+        {
+          "id": "kel",
+          "value": 0.01
+        },
+        {
+          "id": "Vmax",
+          "value": 1.2
+        },
+        {
+          "id": "Km",
+          "value": 1.1
+        }
+      ],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "one_comp",
+      "constants": [
+        {
+          "id": "kabs",
+          "value": 0.01
+        },
+        {
+          "id": "kel",
+          "value": 0.01
+        },
+        {
+          "id": "Vmax",
+          "value": 1.2
+        },
+        {
+          "id": "Km",
+          "value": 1.1
+        }
+      ],
+      "states": [
+        {
+          "id": "a0",
+          "initial": 10
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "comp0",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "comp1",
+          "initial": 5.2,
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "vabs",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs",
+              "a0"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vel",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kel",
+              "s1",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "a0",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "vabs"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vabs",
+              [
+                "Negate",
+                "vel"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "one_comp_saturation",
+      "constants": [
+        {
+          "id": "kabs",
+          "value": 0.01
+        },
+        {
+          "id": "kel",
+          "value": 0.01
+        },
+        {
+          "id": "Vmax",
+          "value": 1.2
+        },
+        {
+          "id": "Km",
+          "value": 1.1
+        }
+      ],
+      "states": [
+        {
+          "id": "a0",
+          "initial": 10
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "comp0",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "comp1",
+          "initial": 5.2,
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "vabs",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs",
+              "a0"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vel",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "Vmax",
+                "s1",
+                "comp1"
+              ],
+              [
+                "Add",
+                "Km",
+                "s1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "a0",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "vabs"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vabs",
+              [
+                "Negate",
+                "vel"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

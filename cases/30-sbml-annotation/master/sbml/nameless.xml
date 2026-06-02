@@ -1,0 +1,3407 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:43:56.824Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="Default"
+        constant="false"
+        size="1"
+        metaid="Default"
+        >
+      </compartment>
+      <compartment
+        id="BRAIN"
+        constant="false"
+        size="1.45000004768372"
+        metaid="BRAIN"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#c5d5f910-b33d-4575-8655-77584b2387b7"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/bto/BTO:0000142"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment
+        id="PLASMA"
+        constant="false"
+        size="2.6489999294281"
+        metaid="PLASMA"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_3814be8d-f98d-4237-a1f0-6199d8656da2"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/bto/BTO:0000131"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment
+        id="ROB"
+        constant="false"
+        size="65.3000030517578"
+        metaid="ROB"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#ec95a668-de88-4790-a703-5aa813aa27dc"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/fma/FMA:76445"/><rdf:li rdf:resource="http://identifiers.org/fma/FMA:70779"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </compartment>
+      <compartment
+        id="MEC"
+        constant="false"
+        size="0.0000149999996210681"
+        metaid="MEC"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_6b86b7ec-ec8e-43b8-801a-737acc17073f"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/bto/BTO:0003123"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="A_b"
+        name="A_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.7493309"
+        metaid="A_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_4eb1d495-ebcf-464d-890d-49e205c3ce00"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:2700"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="O_b"
+        name="O_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="20.77858"
+        metaid="O_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#f5413978-e7a4-4520-9aea-087468e3131c"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71466"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="P_b"
+        name="P_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="6.541209"
+        metaid="P_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#da3e5bce-d4da-462d-890d-3edd70c599ea"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71464"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="L_b"
+        name="L_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="2.319571"
+        metaid="L_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#b56b4858-18e7-41f2-8f33-f9269a478ecc"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64032"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="S_b"
+        name="S_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="3.427807"
+        metaid="S_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_437aa3ab-93bc-4c23-a598-91cd19e0971b"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/pubchem.compound/27902"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NAPE_b"
+        name="NAPE_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.00003879041"
+        metaid="NAPE_b"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of anandamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_4d9d1a84-b67e-4686-90a8-e0b9512013cc"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:2700"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NOPE_b"
+        name="NOPE_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.0008814287"
+        metaid="NOPE_b"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of oleoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#eee60154-c81c-495b-8fba-c4735b6bceb1"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71466"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NPPE_b"
+        name="NPPE_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.0001732296"
+        metaid="NPPE_b"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of palmitoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#ba824261-973d-430a-85a9-59c3dd5dc938"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71464"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NLPE_b"
+        name="NLPE_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.00007550331"
+        metaid="NLPE_b"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of linoleoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#a3bbda0c-9b3d-4915-be7c-ae8f6cbdda0d"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64032"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NSPE_b"
+        name="NSPE_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.0001272629"
+        metaid="NSPE_b"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of stearoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_38af81ec-3554-41af-a73a-d9ebcb9c65fd"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/pubchem.compound/27902"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="FAAH_b"
+        name="FAAH_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="15.366"
+        metaid="FAAH_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_9a104541-76c3-4ae3-973d-c9fcb73a0ce0"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/uniprot/O00519"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="FAAHinh_b"
+        name="FAAHinh_b"
+        compartment="BRAIN"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="FAAHinh_b"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#a7eb8f5a-020d-4f96-9543-6c277a77beef"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64033"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="A_r"
+        name="A_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.5419204"
+        metaid="A_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_37f62694-8341-4408-ad0e-cd6e548817b0"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:2700"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="O_r"
+        name="O_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="14.23822"
+        metaid="O_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#adb700fd-e656-4a92-b892-da44ee2ea062"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71466"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="P_r"
+        name="P_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="4.121915"
+        metaid="P_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_67cc664f-84d9-4d58-b35b-cfca5f670698"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71464"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="L_r"
+        name="L_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1.705466"
+        metaid="L_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_2f5ba53d-6887-4478-b996-40b8faaffd4b"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64032"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="S_r"
+        name="S_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="2.515968"
+        metaid="S_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_4489c711-4799-4c74-9e42-6e90bcf81db5"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/pubchem.compound/27902"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NAPE_r"
+        name="NAPE_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.000004241633"
+        metaid="NAPE_r"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of anandamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_4013b448-ba6e-4fff-a166-18d6c034b6ef"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:2700"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NOPE_r"
+        name="NOPE_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.00009638198"
+        metaid="NOPE_r"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of oleoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_8f30b012-a656-47ce-bbb5-bd9923322989"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71466"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NPPE_r"
+        name="NPPE_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.00001894222"
+        metaid="NPPE_r"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of palmitoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_1b24c37d-e1f7-4f75-baf6-13cbfe8820f2"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71464"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NLPE_r"
+        name="NLPE_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.000008256095"
+        metaid="NLPE_r"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of linoleoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#faa7ac0a-916d-4065-932e-fedfe378da08"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64032"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="NSPE_r"
+        name="NSPE_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.00001391587"
+        metaid="NSPE_r"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>precursor of stearoyl ethanolamide</p>
+          </html>
+        </notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#d60cccf8-e0ee-440d-b117-34001f535e6a"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/pubchem.compound/27902"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="FAAH_r"
+        name="FAAH_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="2.165868"
+        metaid="FAAH_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_8bee10c3-bf24-437a-828e-9a46952ab068"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/uniprot/O00519"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="FAAHinh_r"
+        name="FAAHinh_r"
+        compartment="ROB"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="FAAHinh_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#c8d7133c-c8ca-4ae2-9c8d-cfc80b22ab89"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64033"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="A_m"
+        name="A_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.97761"
+        metaid="A_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_6c8adffd-27e7-4913-9e62-0d13dd2aef1f"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:2700"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="O_m"
+        name="O_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="16.3219"
+        metaid="O_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#c6d9b256-e470-4750-a993-122992486d97"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71466"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="P_m"
+        name="P_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="5.809415"
+        metaid="P_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_2e7f84d3-b524-43e0-a07d-776981d0ba0f"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71464"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="L_m"
+        name="L_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="L_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_504643df-4c23-4fd3-a2ef-9ed507244bee"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64032"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="S_m"
+        name="S_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="2.968774"
+        metaid="S_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#d10a9966-a8e2-4702-94de-b9958c0a2090"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/pubchem.compound/27902"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="FAAH_m"
+        name="FAAH_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10.686"
+        metaid="FAAH_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_8697acf4-68d5-46cb-b78f-e00461a909ab"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/uniprot/O00519"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="FAAHinh_m"
+        name="FAAHinh_m"
+        compartment="MEC"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="FAAHinh_m"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_504b1e98-45ff-45c7-8ae9-c22673bbcb5b"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64033"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="A_p"
+        name="A_p"
+        compartment="PLASMA"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.8740574"
+        metaid="A_p"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#da7521fd-956f-4ec3-82ec-bfc88b037857"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:2700"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="O_p"
+        name="O_p"
+        compartment="PLASMA"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="5.085073"
+        metaid="O_p"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_946b3d4f-019b-4365-94d0-b162bd0e7c08"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71466"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="P_p"
+        name="P_p"
+        compartment="PLASMA"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="4.849307"
+        metaid="P_p"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_9bd3db7a-124a-422a-bc16-b8fbf02ffe87"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:71464"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="L_p"
+        name="L_p"
+        compartment="PLASMA"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1.916254"
+        metaid="L_p"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#ef6a377e-4091-471b-98a0-dd455c5fd1f0"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:64032"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="S_p"
+        name="S_p"
+        compartment="PLASMA"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0.273772"
+        metaid="S_p"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#c6872c44-4502-4b2b-bc41-47e63a14ef0a"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/pubchem.compound/27902"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="PFM_gut"
+        name="PFM_gut"
+        compartment="Default"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="PFM_gut"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_979112d3-5f3f-4a5d-b56e-77df43f74382"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chembl.compound/CHEMBL1651534"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="PFM_p"
+        name="PFM_p"
+        compartment="Default"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="PFM_p"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_7b6c8b18-d1de-4a72-8c26-a3c41528cd0f"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chembl.compound/CHEMBL1651534"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+      <species
+        id="PFM_r"
+        name="PFM_r"
+        compartment="Default"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="PFM_r"
+        >
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"><rdf:Description rdf:about="#_155b86c9-e16d-45aa-ac96-045e59af75fa"><bqbiol:isVersionOf><rdf:Bag><rdf:li rdf:resource="http://identifiers.org/chembl.compound/CHEMBL1651534"/></rdf:Bag></bqbiol:isVersionOf></rdf:Description></rdf:RDF>
+        </annotation>
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="AG2_b"
+        constant="false"
+        value="0"
+        metaid="AG2_b"
+        >
+      </parameter>
+      <parameter
+        id="Dose"
+        constant="false"
+        value="10"
+        metaid="Dose"
+        >
+      </parameter>
+      <parameter
+        id="ED50"
+        constant="false"
+        value="0.53"
+        metaid="ED50"
+        >
+      </parameter>
+      <parameter
+        id="Emax_PFM"
+        constant="false"
+        value="0.773"
+        metaid="Emax_PFM"
+        >
+      </parameter>
+      <parameter
+        id="FAAH_t"
+        constant="false"
+        value="78"
+        metaid="FAAH_t"
+        >
+      </parameter>
+      <parameter
+        id="Gut"
+        constant="false"
+        value="1.65"
+        metaid="Gut"
+        >
+      </parameter>
+      <parameter
+        id="H"
+        constant="false"
+        value="0.48"
+        metaid="H"
+        >
+      </parameter>
+      <parameter
+        id="Heart"
+        constant="false"
+        value="0.31"
+        metaid="Heart"
+        >
+      </parameter>
+      <parameter
+        id="Kd_AG2"
+        constant="false"
+        value="3424"
+        metaid="Kd_AG2"
+        >
+      </parameter>
+      <parameter
+        id="Kd_CB1_A"
+        constant="false"
+        value="239.2"
+        metaid="Kd_CB1_A"
+        >
+      </parameter>
+      <parameter
+        id="Ki_A"
+        constant="false"
+        value="230"
+        metaid="Ki_A"
+        >
+      </parameter>
+      <parameter
+        id="Ki_L"
+        constant="false"
+        value="1000"
+        metaid="Ki_L"
+        >
+      </parameter>
+      <parameter
+        id="Ki_O"
+        constant="false"
+        value="240"
+        metaid="Ki_O"
+        >
+      </parameter>
+      <parameter
+        id="Ki_P"
+        constant="false"
+        value="6700"
+        metaid="Ki_P"
+        >
+      </parameter>
+      <parameter
+        id="Ki_S"
+        constant="false"
+        value="840"
+        metaid="Ki_S"
+        >
+      </parameter>
+      <parameter
+        id="Kidney"
+        constant="false"
+        value="0.28"
+        metaid="Kidney"
+        >
+      </parameter>
+      <parameter
+        id="Km_FAAH_A"
+        constant="false"
+        value="8200"
+        metaid="Km_FAAH_A"
+        >
+      </parameter>
+      <parameter
+        id="Km_FAAH_L"
+        constant="false"
+        value="10800"
+        metaid="Km_FAAH_L"
+        >
+      </parameter>
+      <parameter
+        id="Km_FAAH_O"
+        constant="false"
+        value="52200"
+        metaid="Km_FAAH_O"
+        >
+      </parameter>
+      <parameter
+        id="Km_FAAH_P"
+        constant="false"
+        value="543000"
+        metaid="Km_FAAH_P"
+        >
+      </parameter>
+      <parameter
+        id="Km_FAAH_S"
+        constant="false"
+        value="10000"
+        metaid="Km_FAAH_S"
+        >
+      </parameter>
+      <parameter
+        id="Km_NA_PE"
+        constant="false"
+        value="2800"
+        metaid="Km_NA_PE"
+        >
+      </parameter>
+      <parameter
+        id="Km_NL_PE"
+        constant="false"
+        value="1000"
+        metaid="Km_NL_PE"
+        >
+      </parameter>
+      <parameter
+        id="Km_NO_PE"
+        constant="false"
+        value="2900"
+        metaid="Km_NO_PE"
+        >
+      </parameter>
+      <parameter
+        id="Km_NP_PE"
+        constant="false"
+        value="3300"
+        metaid="Km_NP_PE"
+        >
+      </parameter>
+      <parameter
+        id="Km_NS_PE"
+        constant="false"
+        value="3400"
+        metaid="Km_NS_PE"
+        >
+      </parameter>
+      <parameter
+        id="Km_PFM"
+        constant="false"
+        value="26.1"
+        metaid="Km_PFM"
+        >
+      </parameter>
+      <parameter
+        id="Km_p_m_A"
+        constant="false"
+        value="1"
+        metaid="Km_p_m_A"
+        >
+      </parameter>
+      <parameter
+        id="Kp_b_PF"
+        constant="false"
+        value="1.3"
+        metaid="Kp_b_PF"
+        >
+      </parameter>
+      <parameter
+        id="Kp_m_PF"
+        constant="false"
+        value="1.3"
+        metaid="Kp_m_PF"
+        >
+      </parameter>
+      <parameter
+        id="Kp_r_PF"
+        constant="false"
+        value="1.5"
+        metaid="Kp_r_PF"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_m_A"
+        constant="false"
+        value="1.89"
+        metaid="Ktr_p_m_A"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_m_L"
+        constant="false"
+        value="2.77"
+        metaid="Ktr_p_m_L"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_m_O"
+        constant="false"
+        value="9.07"
+        metaid="Ktr_p_m_O"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_m_P"
+        constant="false"
+        value="2.65"
+        metaid="Ktr_p_m_P"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_m_S"
+        constant="false"
+        value="30.01"
+        metaid="Ktr_p_m_S"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_r_A"
+        constant="false"
+        value="0.62"
+        metaid="Ktr_p_r_A"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_r_L"
+        constant="false"
+        value="0.89"
+        metaid="Ktr_p_r_L"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_r_O"
+        constant="false"
+        value="2.8"
+        metaid="Ktr_p_r_O"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_r_P"
+        constant="false"
+        value="0.85"
+        metaid="Ktr_p_r_P"
+        >
+      </parameter>
+      <parameter
+        id="Ktr_p_r_S"
+        constant="false"
+        value="9.19"
+        metaid="Ktr_p_r_S"
+        >
+      </parameter>
+      <parameter
+        id="LEU"
+        constant="false"
+        value="0.025"
+        metaid="LEU"
+        >
+      </parameter>
+      <parameter
+        id="LIVER"
+        constant="false"
+        value="1.69"
+        metaid="LIVER"
+        >
+      </parameter>
+      <parameter
+        id="Leucocytes"
+        constant="false"
+        value="0.025"
+        metaid="Leucocytes"
+        >
+      </parameter>
+      <parameter
+        id="Lungs"
+        constant="false"
+        value="1.172"
+        metaid="Lungs"
+        >
+      </parameter>
+      <parameter
+        id="M_A"
+        constant="false"
+        value="347.5"
+        metaid="M_A"
+        >
+      </parameter>
+      <parameter
+        id="M_L"
+        constant="false"
+        value="323.5"
+        metaid="M_L"
+        >
+      </parameter>
+      <parameter
+        id="M_O"
+        constant="false"
+        value="325.5"
+        metaid="M_O"
+        >
+      </parameter>
+      <parameter
+        id="M_P"
+        constant="false"
+        value="299.5"
+        metaid="M_P"
+        >
+      </parameter>
+      <parameter
+        id="M_PF"
+        constant="false"
+        value="455.4"
+        metaid="M_PF"
+        >
+      </parameter>
+      <parameter
+        id="M_S"
+        constant="false"
+        value="321.5"
+        metaid="M_S"
+        >
+      </parameter>
+      <parameter
+        id="Muscles"
+        constant="false"
+        value="35"
+        metaid="Muscles"
+        >
+      </parameter>
+      <parameter
+        id="PLD_b"
+        constant="false"
+        value="10000000"
+        metaid="PLD_b"
+        >
+      </parameter>
+      <parameter
+        id="PLD_r"
+        constant="false"
+        value="10000000"
+        metaid="PLD_r"
+        >
+      </parameter>
+      <parameter
+        id="Pancreas"
+        constant="false"
+        value="0.077"
+        metaid="Pancreas"
+        >
+      </parameter>
+      <parameter
+        id="R_PF"
+        constant="false"
+        value="0.6"
+        metaid="R_PF"
+        >
+      </parameter>
+      <parameter
+        id="Spleen"
+        constant="false"
+        value="0.192"
+        metaid="Spleen"
+        >
+      </parameter>
+      <parameter
+        id="Testis"
+        constant="false"
+        value="0.036"
+        metaid="Testis"
+        >
+      </parameter>
+      <parameter
+        id="Thymus"
+        constant="false"
+        value="0.029"
+        metaid="Thymus"
+        >
+      </parameter>
+      <parameter
+        id="Vm_PFM"
+        constant="false"
+        value="1511"
+        metaid="Vm_PFM"
+        >
+      </parameter>
+      <parameter
+        id="Vmax_NAT"
+        constant="false"
+        value="300"
+        metaid="Vmax_NAT"
+        >
+      </parameter>
+      <parameter
+        id="Vss_PFM"
+        constant="false"
+        value="58.328"
+        metaid="Vss_PFM"
+        >
+      </parameter>
+      <parameter
+        id="a_FAAH_A"
+        constant="false"
+        value="1"
+        metaid="a_FAAH_A"
+        >
+      </parameter>
+      <parameter
+        id="a_FAAH_L"
+        constant="false"
+        value="1.15"
+        metaid="a_FAAH_L"
+        >
+      </parameter>
+      <parameter
+        id="a_FAAH_O"
+        constant="false"
+        value="5.7"
+        metaid="a_FAAH_O"
+        >
+      </parameter>
+      <parameter
+        id="a_FAAH_P"
+        constant="false"
+        value="37.8"
+        metaid="a_FAAH_P"
+        >
+      </parameter>
+      <parameter
+        id="a_FAAH_S"
+        constant="false"
+        value="1"
+        metaid="a_FAAH_S"
+        >
+      </parameter>
+      <parameter
+        id="a_NAT_A"
+        constant="false"
+        value="1"
+        metaid="a_NAT_A"
+        >
+      </parameter>
+      <parameter
+        id="a_NAT_L"
+        constant="false"
+        value="8.6"
+        metaid="a_NAT_L"
+        >
+      </parameter>
+      <parameter
+        id="a_NAT_O"
+        constant="false"
+        value="13"
+        metaid="a_NAT_O"
+        >
+      </parameter>
+      <parameter
+        id="a_NAT_P"
+        constant="false"
+        value="0.42"
+        metaid="a_NAT_P"
+        >
+      </parameter>
+      <parameter
+        id="a_NAT_S"
+        constant="false"
+        value="1"
+        metaid="a_NAT_S"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Brain"
+        constant="false"
+        value="0.197"
+        metaid="b_FAAH_Brain"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Gut"
+        constant="false"
+        value="0.034"
+        metaid="b_FAAH_Gut"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Kidney"
+        constant="false"
+        value="0.069"
+        metaid="b_FAAH_Kidney"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Leucocytes"
+        constant="false"
+        value="0"
+        metaid="b_FAAH_Leucocytes"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Liver"
+        constant="false"
+        value="1"
+        metaid="b_FAAH_Liver"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Lungs"
+        constant="false"
+        value="0.032"
+        metaid="b_FAAH_Lungs"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_MEC"
+        constant="false"
+        value="0.137"
+        metaid="b_FAAH_MEC"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Spleen"
+        constant="false"
+        value="0.03"
+        metaid="b_FAAH_Spleen"
+        >
+      </parameter>
+      <parameter
+        id="b_FAAH_Testis"
+        constant="false"
+        value="0.126"
+        metaid="b_FAAH_Testis"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Brain"
+        constant="false"
+        value="0.6"
+        metaid="b_NAAA_Brain"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Gut"
+        constant="false"
+        value="0.2"
+        metaid="b_NAAA_Gut"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Heart"
+        constant="false"
+        value="0.2"
+        metaid="b_NAAA_Heart"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Kidney"
+        constant="false"
+        value="0.6"
+        metaid="b_NAAA_Kidney"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Liver"
+        constant="false"
+        value="1"
+        metaid="b_NAAA_Liver"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Lungs"
+        constant="false"
+        value="14"
+        metaid="b_NAAA_Lungs"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Spleen"
+        constant="false"
+        value="8"
+        metaid="b_NAAA_Spleen"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Testis"
+        constant="false"
+        value="0.6"
+        metaid="b_NAAA_Testis"
+        >
+      </parameter>
+      <parameter
+        id="b_NAAA_Thymus"
+        constant="false"
+        value="4"
+        metaid="b_NAAA_Thymus"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Brain"
+        constant="false"
+        value="1.667"
+        metaid="b_NAT_Brain"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Heart"
+        constant="false"
+        value="1"
+        metaid="b_NAT_Heart"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Kidney"
+        constant="false"
+        value="0.667"
+        metaid="b_NAT_Kidney"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Leucocytes"
+        constant="false"
+        value="0"
+        metaid="b_NAT_Leucocytes"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Lungs"
+        constant="false"
+        value="0.033"
+        metaid="b_NAT_Lungs"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Muscles"
+        constant="false"
+        value="0.333"
+        metaid="b_NAT_Muscles"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Pancreas"
+        constant="false"
+        value="0.333"
+        metaid="b_NAT_Pancreas"
+        >
+      </parameter>
+      <parameter
+        id="b_NAT_Testis"
+        constant="false"
+        value="0.667"
+        metaid="b_NAT_Testis"
+        >
+      </parameter>
+      <parameter
+        id="e1"
+        constant="false"
+        value="0"
+        metaid="e1"
+        >
+      </parameter>
+      <parameter
+        id="k_NA_PE"
+        constant="false"
+        value="202"
+        metaid="k_NA_PE"
+        >
+      </parameter>
+      <parameter
+        id="k_NL_PE"
+        constant="false"
+        value="100"
+        metaid="k_NL_PE"
+        >
+      </parameter>
+      <parameter
+        id="k_NO_PE"
+        constant="false"
+        value="230"
+        metaid="k_NO_PE"
+        >
+      </parameter>
+      <parameter
+        id="k_NP_PE"
+        constant="false"
+        value="270"
+        metaid="k_NP_PE"
+        >
+      </parameter>
+      <parameter
+        id="k_NS_PE"
+        constant="false"
+        value="280"
+        metaid="k_NS_PE"
+        >
+      </parameter>
+      <parameter
+        id="k_deg_FAAH"
+        constant="false"
+        value="0.0051"
+        metaid="k_deg_FAAH"
+        >
+      </parameter>
+      <parameter
+        id="k_inh"
+        constant="false"
+        value="1.1"
+        metaid="k_inh"
+        >
+      </parameter>
+      <parameter
+        id="kabs_PFM"
+        constant="false"
+        value="2.2"
+        metaid="kabs_PFM"
+        >
+      </parameter>
+      <parameter
+        id="kcat_FAAH"
+        constant="false"
+        value="18000"
+        metaid="kcat_FAAH"
+        >
+      </parameter>
+      <parameter
+        id="kcl_A"
+        constant="false"
+        value="1.74"
+        metaid="kcl_A"
+        >
+      </parameter>
+      <parameter
+        id="kcl_L"
+        constant="false"
+        value="1.25"
+        metaid="kcl_L"
+        >
+      </parameter>
+      <parameter
+        id="kcl_O"
+        constant="false"
+        value="2.5"
+        metaid="kcl_O"
+        >
+      </parameter>
+      <parameter
+        id="kcl_P"
+        constant="false"
+        value="2.61"
+        metaid="kcl_P"
+        >
+      </parameter>
+      <parameter
+        id="kcl_S"
+        constant="false"
+        value="1.2"
+        metaid="kcl_S"
+        >
+      </parameter>
+      <parameter
+        id="kin_PFM"
+        constant="false"
+        value="0.117"
+        metaid="kin_PFM"
+        >
+      </parameter>
+      <parameter
+        id="klinear_PFM"
+        constant="false"
+        value="0.0803"
+        metaid="klinear_PFM"
+        >
+      </parameter>
+      <parameter
+        id="kout_PFM"
+        constant="false"
+        value="0.18"
+        metaid="kout_PFM"
+        >
+      </parameter>
+      <parameter
+        id="ktr_m_p_A"
+        constant="false"
+        value="150"
+        metaid="ktr_m_p_A"
+        >
+      </parameter>
+      <parameter
+        id="ktr_m_p_L"
+        constant="false"
+        value="0"
+        metaid="ktr_m_p_L"
+        >
+      </parameter>
+      <parameter
+        id="ktr_m_p_O"
+        constant="false"
+        value="10"
+        metaid="ktr_m_p_O"
+        >
+      </parameter>
+      <parameter
+        id="ktr_m_p_P"
+        constant="false"
+        value="10"
+        metaid="ktr_m_p_P"
+        >
+      </parameter>
+      <parameter
+        id="ktr_m_p_S"
+        constant="false"
+        value="10"
+        metaid="ktr_m_p_S"
+        >
+      </parameter>
+      <parameter
+        id="ktr_r_p"
+        constant="false"
+        value="100"
+        metaid="ktr_r_p"
+        >
+      </parameter>
+      <parameter
+        id="p_A"
+        constant="false"
+        value="0.051"
+        metaid="p_A"
+        >
+      </parameter>
+      <parameter
+        id="p_L"
+        constant="false"
+        value="0.016"
+        metaid="p_L"
+        >
+      </parameter>
+      <parameter
+        id="p_O"
+        constant="false"
+        value="0.098"
+        metaid="p_O"
+        >
+      </parameter>
+      <parameter
+        id="p_P"
+        constant="false"
+        value="0.615"
+        metaid="p_P"
+        >
+      </parameter>
+      <parameter
+        id="p_S"
+        constant="false"
+        value="0.191"
+        metaid="p_S"
+        >
+      </parameter>
+      <parameter
+        id="F_PFM"
+        constant="false"
+        value="0"
+        metaid="F_PFM"
+        >
+      </parameter>
+      <parameter
+        id="MD"
+        constant="false"
+        value="0"
+        metaid="MD"
+        >
+      </parameter>
+      <parameter
+        id="PF_p"
+        constant="false"
+        value="0"
+        metaid="PF_p"
+        >
+      </parameter>
+      <parameter
+        id="PF_b"
+        constant="false"
+        value="0"
+        metaid="PF_b"
+        >
+      </parameter>
+      <parameter
+        id="PF_r"
+        constant="false"
+        value="0"
+        metaid="PF_r"
+        >
+      </parameter>
+      <parameter
+        id="PF_m"
+        constant="false"
+        value="0"
+        metaid="PF_m"
+        >
+      </parameter>
+      <parameter
+        id="FAAH_D_b"
+        constant="false"
+        value="0"
+        metaid="FAAH_D_b"
+        >
+      </parameter>
+      <parameter
+        id="slag1_b"
+        constant="false"
+        value="0"
+        metaid="slag1_b"
+        >
+      </parameter>
+      <parameter
+        id="slag2_b"
+        constant="false"
+        value="0"
+        metaid="slag2_b"
+        >
+      </parameter>
+      <parameter
+        id="den_b"
+        constant="false"
+        value="0"
+        metaid="den_b"
+        >
+      </parameter>
+      <parameter
+        id="FAAH_D_r"
+        constant="false"
+        value="0"
+        metaid="FAAH_D_r"
+        >
+      </parameter>
+      <parameter
+        id="c_NAT_ROB"
+        constant="false"
+        value="0"
+        metaid="c_NAT_ROB"
+        >
+      </parameter>
+      <parameter
+        id="slag1_r"
+        constant="false"
+        value="0"
+        metaid="slag1_r"
+        >
+      </parameter>
+      <parameter
+        id="slag2_r"
+        constant="false"
+        value="0"
+        metaid="slag2_r"
+        >
+      </parameter>
+      <parameter
+        id="den_r"
+        constant="false"
+        value="0"
+        metaid="den_r"
+        >
+      </parameter>
+      <parameter
+        id="c_FAAH_ROB"
+        constant="false"
+        value="0"
+        metaid="c_FAAH_ROB"
+        >
+      </parameter>
+      <parameter
+        id="c_NAAA_ROB"
+        constant="false"
+        value="0"
+        metaid="c_NAAA_ROB"
+        >
+      </parameter>
+      <parameter
+        id="FAAH_D_m"
+        constant="false"
+        value="0"
+        metaid="FAAH_D_m"
+        >
+      </parameter>
+      <parameter
+        id="F_r"
+        constant="false"
+        value="0"
+        metaid="F_r"
+        >
+      </parameter>
+      <parameter
+        id="PFG_p"
+        constant="false"
+        value="0"
+        metaid="PFG_p"
+        >
+      </parameter>
+      <parameter
+        id="AG_p"
+        constant="false"
+        value="0"
+        metaid="AG_p"
+        >
+      </parameter>
+      <parameter
+        id="OG_p"
+        constant="false"
+        value="0"
+        metaid="OG_p"
+        >
+      </parameter>
+      <parameter
+        id="PG_p"
+        constant="false"
+        value="0"
+        metaid="PG_p"
+        >
+      </parameter>
+      <parameter
+        id="LG_p"
+        constant="false"
+        value="0"
+        metaid="LG_p"
+        >
+      </parameter>
+      <parameter
+        id="SG_p"
+        constant="false"
+        value="0"
+        metaid="SG_p"
+        >
+      </parameter>
+      <parameter
+        id="CB1_b"
+        constant="false"
+        value="0"
+        metaid="CB1_b"
+        >
+      </parameter>
+      <parameter
+        id="tid"
+        constant="false"
+        value="0"
+        metaid="tid"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="F_PFM"
+      metaid="F_PFM::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><ci>Emax_PFM</ci><ci>Dose</ci></apply><apply><plus/><ci>ED50</ci><ci>Dose</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="MD"
+      metaid="MD::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>PFM_gut</ci><apply><times/><apply><times/><cn>1000000</cn><ci>Dose</ci></apply><ci>F_PFM</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="PF_p"
+      metaid="PF_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><divide/><cn>1</cn><ci>M_PF</ci></apply><ci>PFM_p</ci></apply><ci>Vss_PFM</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="PF_b"
+      metaid="PF_b::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>PF_p</ci><ci>Kp_b_PF</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="PF_r"
+      metaid="PF_r::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>PF_p</ci><ci>Kp_r_PF</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="PF_m"
+      metaid="PF_m::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>PF_p</ci><ci>Kp_m_PF</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="FAAH_D_b"
+      metaid="FAAH_D_b::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><cn>1</cn><apply><divide/><ci>A_b</ci><ci>Km_FAAH_A</ci></apply></apply><apply><divide/><ci>O_b</ci><ci>Km_FAAH_O</ci></apply></apply><apply><divide/><ci>P_b</ci><ci>Km_FAAH_P</ci></apply></apply><apply><divide/><ci>L_b</ci><ci>Km_FAAH_L</ci></apply></apply><apply><divide/><ci>S_b</ci><ci>Km_FAAH_S</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="slag1_b"
+      metaid="slag1_b::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><divide/><ci>NAPE_b</ci><ci>Km_NA_PE</ci></apply><apply><divide/><ci>NOPE_b</ci><ci>Km_NO_PE</ci></apply></apply><apply><divide/><ci>NPPE_b</ci><ci>Km_NP_PE</ci></apply></apply><apply><divide/><ci>NLPE_b</ci><ci>Km_NL_PE</ci></apply></apply><apply><divide/><ci>NSPE_b</ci><ci>Km_NS_PE</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="slag2_b"
+      metaid="slag2_b::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><divide/><ci>A_b</ci><ci>Ki_A</ci></apply><apply><divide/><ci>O_b</ci><ci>Ki_O</ci></apply></apply><apply><divide/><ci>P_b</ci><ci>Ki_P</ci></apply></apply><apply><divide/><ci>L_b</ci><ci>Ki_L</ci></apply></apply><apply><divide/><ci>S_b</ci><ci>Ki_S</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="den_b"
+      metaid="den_b::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><cn>1</cn><ci>slag1_b</ci></apply><ci>slag2_b</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="FAAH_D_r"
+      metaid="FAAH_D_r::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><cn>1</cn><apply><divide/><ci>A_r</ci><ci>Km_FAAH_A</ci></apply></apply><apply><divide/><ci>O_r</ci><ci>Km_FAAH_O</ci></apply></apply><apply><divide/><ci>P_r</ci><ci>Km_FAAH_P</ci></apply></apply><apply><divide/><ci>L_r</ci><ci>Km_FAAH_L</ci></apply></apply><apply><divide/><ci>S_r</ci><ci>Km_FAAH_S</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="c_NAT_ROB"
+      metaid="c_NAT_ROB::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><times/><ci>Pancreas</ci><ci>b_NAT_Pancreas</ci></apply><apply><times/><ci>Kidney</ci><ci>b_NAT_Kidney</ci></apply></apply><apply><times/><ci>Heart</ci><ci>b_NAT_Heart</ci></apply></apply><apply><times/><ci>Lungs</ci><ci>b_NAT_Lungs</ci></apply></apply><apply><times/><ci>Muscles</ci><ci>b_NAT_Muscles</ci></apply></apply><apply><times/><ci>Testis</ci><ci>b_NAT_Testis</ci></apply></apply><apply><times/><ci>Leucocytes</ci><ci>b_NAT_Leucocytes</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="slag1_r"
+      metaid="slag1_r::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><divide/><ci>NAPE_r</ci><ci>Km_NA_PE</ci></apply><apply><divide/><ci>NOPE_r</ci><ci>Km_NO_PE</ci></apply></apply><apply><divide/><ci>NPPE_r</ci><ci>Km_NP_PE</ci></apply></apply><apply><divide/><ci>NLPE_r</ci><ci>Km_NL_PE</ci></apply></apply><apply><divide/><ci>NSPE_r</ci><ci>Km_NS_PE</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="slag2_r"
+      metaid="slag2_r::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><divide/><ci>A_r</ci><ci>Ki_A</ci></apply><apply><divide/><ci>O_r</ci><ci>Ki_O</ci></apply></apply><apply><divide/><ci>P_r</ci><ci>Ki_P</ci></apply></apply><apply><divide/><ci>L_r</ci><ci>Ki_L</ci></apply></apply><apply><divide/><ci>S_r</ci><ci>Ki_S</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="den_r"
+      metaid="den_r::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><cn>1</cn><ci>slag1_r</ci></apply><ci>slag2_r</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="c_FAAH_ROB"
+      metaid="c_FAAH_ROB::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><times/><ci>LIVER</ci><ci>b_FAAH_Liver</ci></apply><apply><times/><ci>Gut</ci><ci>b_FAAH_Gut</ci></apply></apply><apply><times/><ci>Spleen</ci><ci>b_FAAH_Spleen</ci></apply></apply><apply><times/><ci>Kidney</ci><ci>b_FAAH_Kidney</ci></apply></apply><apply><times/><ci>Lungs</ci><ci>b_FAAH_Lungs</ci></apply></apply><apply><times/><ci>Testis</ci><ci>b_FAAH_Testis</ci></apply></apply><apply><times/><ci>Leucocytes</ci><ci>b_FAAH_Leucocytes</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="c_NAAA_ROB"
+      metaid="c_NAAA_ROB::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><times/><ci>LIVER</ci><ci>b_NAAA_Liver</ci></apply><apply><times/><ci>Gut</ci><ci>b_NAAA_Gut</ci></apply></apply><apply><times/><ci>Spleen</ci><ci>b_NAAA_Spleen</ci></apply></apply><apply><times/><ci>Kidney</ci><ci>b_NAAA_Kidney</ci></apply></apply><apply><times/><ci>Heart</ci><ci>b_NAAA_Heart</ci></apply></apply><apply><times/><ci>Lungs</ci><ci>b_NAAA_Lungs</ci></apply></apply><apply><times/><ci>Thymus</ci><ci>b_NAAA_Thymus</ci></apply></apply><apply><times/><apply><times/><ci>Testis</ci><ci>b_NAAA_Thymus</ci></apply><ci>Testis</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="FAAH_D_m"
+      metaid="FAAH_D_m::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><apply><plus/><apply><plus/><cn>1</cn><apply><divide/><ci>A_m</ci><ci>Km_FAAH_A</ci></apply></apply><apply><divide/><ci>O_m</ci><ci>Km_FAAH_O</ci></apply></apply><apply><divide/><ci>P_m</ci><ci>Km_FAAH_P</ci></apply></apply><apply><divide/><ci>L_m</ci><ci>Km_FAAH_L</ci></apply></apply><apply><divide/><ci>S_m</ci><ci>Km_FAAH_S</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="F_r"
+      metaid="F_r::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><cn>1500</cn><ci>FAAH_r</ci></apply><apply><plus/><ci>FAAHinh_r</ci><ci>FAAH_r</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="PFG_p"
+      metaid="PFG_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><cn>0.001</cn><ci>PFM_p</ci></apply><ci>Vss_PFM</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="AG_p"
+      metaid="AG_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>0.001</cn><ci>A_p</ci></apply><ci>M_A</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="OG_p"
+      metaid="OG_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>0.001</cn><ci>O_p</ci></apply><ci>M_O</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="PG_p"
+      metaid="PG_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>0.001</cn><ci>P_p</ci></apply><ci>M_P</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="LG_p"
+      metaid="LG_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>0.001</cn><ci>L_p</ci></apply><ci>M_L</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="SG_p"
+      metaid="SG_p::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>0.001</cn><ci>S_p</ci></apply><ci>M_S</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="CB1_b"
+      metaid="CB1_b::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><plus/><apply><divide/><ci>A_b</ci><ci>Kd_CB1_A</ci></apply><apply><divide/><ci>AG2_b</ci><ci>Kd_AG2</ci></apply></apply><apply><plus/><apply><plus/><cn>1</cn><apply><divide/><ci>A_b</ci><ci>Kd_CB1_A</ci></apply></apply><apply><divide/><ci>AG2_b</ci><ci>Kd_AG2</ci></apply></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="tid"
+      metaid="tid::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>24</cn></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="vA_degr_b"
+        name="vA_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vA_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="A_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="A_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_b</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_A</ci></apply><ci>A_b</ci></apply><apply><times/><ci>Km_FAAH_A</ci><ci>FAAH_D_b</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_degr_b"
+        name="vO_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vO_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="O_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="O_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_b</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_O</ci></apply><ci>O_b</ci></apply><apply><times/><ci>Km_FAAH_O</ci><ci>FAAH_D_b</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_degr_b"
+        name="vP_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vP_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="P_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="P_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_b</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_P</ci></apply><ci>P_b</ci></apply><apply><times/><ci>Km_FAAH_P</ci><ci>FAAH_D_b</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_degr_b"
+        name="vL_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vL_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="L_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="L_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_b</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_L</ci></apply><ci>L_b</ci></apply><apply><times/><ci>Km_FAAH_L</ci><ci>FAAH_D_b</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_degr_b"
+        name="vS_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vS_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="S_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="FAAH_b"/>
+          <modifierSpeciesReference species="S_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_b</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_S</ci></apply><ci>S_b</ci></apply><apply><times/><ci>Km_FAAH_S</ci><ci>FAAH_D_b</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNAPE_syn_b"
+        name="vNAPE_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vNAPE_syn_b"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NAPE_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_A</ci></apply><ci>a_NAT_A</ci></apply><ci>b_NAT_Brain</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNOPE_syn_b"
+        name="vNOPE_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vNOPE_syn_b"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NOPE_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_O</ci></apply><ci>a_NAT_O</ci></apply><ci>b_NAT_Brain</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNPPE_syn_b"
+        name="vNPPE_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vNPPE_syn_b"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NPPE_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_P</ci></apply><ci>a_NAT_P</ci></apply><ci>b_NAT_Brain</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNLPE_syn_b"
+        name="vNLPE_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vNLPE_syn_b"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NLPE_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_L</ci></apply><ci>a_NAT_L</ci></apply><ci>b_NAT_Brain</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNSPE_syn_b"
+        name="vNSPE_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vNSPE_syn_b"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NSPE_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_S</ci></apply><ci>a_NAT_S</ci></apply><ci>b_NAT_Brain</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_syn_b"
+        name="vA_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vA_syn_b"
+        >
+        <listOfReactants>
+          <speciesReference species="NAPE_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="A_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NAPE_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>PLD_b</ci></apply><ci>k_NA_PE</ci></apply><ci>NAPE_b</ci></apply><ci>Km_NA_PE</ci></apply><ci>den_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_syn_b"
+        name="vO_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vO_syn_b"
+        >
+        <listOfReactants>
+          <speciesReference species="NOPE_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="O_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NOPE_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>PLD_b</ci></apply><ci>k_NO_PE</ci></apply><ci>NOPE_b</ci></apply><ci>Km_NO_PE</ci></apply><ci>den_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_syn_b"
+        name="vP_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vP_syn_b"
+        >
+        <listOfReactants>
+          <speciesReference species="NPPE_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NPPE_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>PLD_b</ci></apply><ci>k_NP_PE</ci></apply><ci>NPPE_b</ci></apply><ci>Km_NP_PE</ci></apply><ci>den_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_syn_b"
+        name="vL_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vL_syn_b"
+        >
+        <listOfReactants>
+          <speciesReference species="NLPE_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="L_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NLPE_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>PLD_b</ci></apply><ci>k_NL_PE</ci></apply><ci>NLPE_b</ci></apply><ci>Km_NL_PE</ci></apply><ci>den_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_syn_b"
+        name="vS_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vS_syn_b"
+        >
+        <listOfReactants>
+          <speciesReference species="NSPE_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NSPE_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>PLD_b</ci></apply><ci>k_NS_PE</ci></apply><ci>NSPE_b</ci></apply><ci>Km_NS_PE</ci></apply><ci>den_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_syn_b"
+        name="vFAAH_syn_b"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_syn_b"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FAAH_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_t</ci></apply><ci>b_FAAH_Brain</ci></apply><ci>k_deg_FAAH</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_degr_b"
+        name="vFAAH_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAH_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>BRAIN</ci><ci>k_deg_FAAH</ci></apply><ci>FAAH_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_inh_b"
+        name="vFAAH_inh_b"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_inh_b"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAH_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FAAHinh_b" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>k_inh</ci></apply><ci>FAAH_b</ci></apply><ci>PF_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_inh_degr_b"
+        name="vFAAH_inh_degr_b"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_inh_degr_b"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAHinh_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAHinh_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>BRAIN</ci><ci>k_deg_FAAH</ci></apply><ci>FAAHinh_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_UE_b"
+        name="vA_UE_b"
+        reversible="false"
+        fast="false"
+        metaid="vA_UE_b"
+        >
+        <listOfReactants>
+          <speciesReference species="A_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="A_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>b_FAAH_Brain</ci></apply><ci>kcl_A</ci></apply><ci>A_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_UE_b"
+        name="vO_UE_b"
+        reversible="false"
+        fast="false"
+        metaid="vO_UE_b"
+        >
+        <listOfReactants>
+          <speciesReference species="O_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="O_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>b_FAAH_Brain</ci></apply><ci>kcl_O</ci></apply><ci>O_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_UE_b"
+        name="vP_UE_b"
+        reversible="false"
+        fast="false"
+        metaid="vP_UE_b"
+        >
+        <listOfReactants>
+          <speciesReference species="P_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>b_FAAH_Brain</ci></apply><ci>kcl_P</ci></apply><ci>P_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_UE_b"
+        name="vL_UE_b"
+        reversible="false"
+        fast="false"
+        metaid="vL_UE_b"
+        >
+        <listOfReactants>
+          <speciesReference species="L_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="L_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>b_FAAH_Brain</ci></apply><ci>kcl_L</ci></apply><ci>L_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_UE_b"
+        name="vS_UE_b"
+        reversible="false"
+        fast="false"
+        metaid="vS_UE_b"
+        >
+        <listOfReactants>
+          <speciesReference species="S_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="S_b"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>b_FAAH_Brain</ci></apply><ci>kcl_S</ci></apply><ci>S_b</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_degr_r"
+        name="vA_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vA_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="A_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="A_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>FAAH_r</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_A</ci></apply><ci>A_r</ci></apply><apply><times/><ci>Km_FAAH_A</ci><ci>FAAH_D_r</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_degr_r"
+        name="vO_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vO_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="O_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="O_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>FAAH_r</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_O</ci></apply><ci>O_r</ci></apply><apply><times/><ci>Km_FAAH_O</ci><ci>FAAH_D_r</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_degr_r"
+        name="vP_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vP_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="P_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="P_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>FAAH_r</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_P</ci></apply><ci>P_r</ci></apply><apply><times/><ci>Km_FAAH_P</ci><ci>FAAH_D_r</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_degr_r"
+        name="vL_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vL_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="L_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="L_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>FAAH_r</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_L</ci></apply><ci>L_r</ci></apply><apply><times/><ci>Km_FAAH_L</ci><ci>FAAH_D_r</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_degr_r"
+        name="vS_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vS_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="S_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="FAAH_r"/>
+          <modifierSpeciesReference species="S_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>FAAH_r</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_S</ci></apply><ci>S_r</ci></apply><apply><times/><ci>Km_FAAH_S</ci><ci>FAAH_D_r</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNAPE_syn_r"
+        name="vNAPE_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vNAPE_syn_r"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NAPE_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_A</ci></apply><ci>a_NAT_A</ci></apply><ci>c_NAT_ROB</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNOPE_syn_r"
+        name="vNOPE_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vNOPE_syn_r"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NOPE_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_O</ci></apply><ci>a_NAT_O</ci></apply><ci>c_NAT_ROB</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNPPE_syn_r"
+        name="vNPPE_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vNPPE_syn_r"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NPPE_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_P</ci></apply><ci>a_NAT_P</ci></apply><ci>c_NAT_ROB</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNLPE_syn_r"
+        name="vNLPE_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vNLPE_syn_r"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NLPE_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_L</ci></apply><ci>a_NAT_L</ci></apply><ci>c_NAT_ROB</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vNSPE_syn_r"
+        name="vNSPE_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vNSPE_syn_r"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="NSPE_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_S</ci></apply><ci>a_NAT_S</ci></apply><ci>c_NAT_ROB</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_syn_r"
+        name="vA_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vA_syn_r"
+        >
+        <listOfReactants>
+          <speciesReference species="NAPE_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="A_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NAPE_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>PLD_r</ci></apply><ci>k_NA_PE</ci></apply><ci>NAPE_r</ci></apply><ci>Km_NA_PE</ci></apply><ci>den_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_syn_r"
+        name="vO_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vO_syn_r"
+        >
+        <listOfReactants>
+          <speciesReference species="NOPE_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="O_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NOPE_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>PLD_r</ci></apply><ci>k_NO_PE</ci></apply><ci>NOPE_r</ci></apply><ci>Km_NO_PE</ci></apply><ci>den_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_syn_r"
+        name="vP_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vP_syn_r"
+        >
+        <listOfReactants>
+          <speciesReference species="NPPE_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NPPE_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>PLD_r</ci></apply><ci>k_NP_PE</ci></apply><ci>NPPE_r</ci></apply><ci>Km_NP_PE</ci></apply><ci>den_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_syn_r"
+        name="vL_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vL_syn_r"
+        >
+        <listOfReactants>
+          <speciesReference species="NLPE_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="L_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NLPE_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>PLD_r</ci></apply><ci>k_NL_PE</ci></apply><ci>NLPE_r</ci></apply><ci>Km_NL_PE</ci></apply><ci>den_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_syn_r"
+        name="vS_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vS_syn_r"
+        >
+        <listOfReactants>
+          <speciesReference species="NSPE_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="NSPE_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><divide/><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>PLD_r</ci></apply><ci>k_NS_PE</ci></apply><ci>NSPE_r</ci></apply><ci>Km_NS_PE</ci></apply><ci>den_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_syn_r"
+        name="vFAAH_syn_r"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_syn_r"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FAAH_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>FAAH_t</ci><ci>c_FAAH_ROB</ci></apply><ci>k_deg_FAAH</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_degr_r"
+        name="vFAAH_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAH_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>ROB</ci><ci>k_deg_FAAH</ci></apply><ci>FAAH_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_inh_r"
+        name="vFAAH_inh_r"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_inh_r"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAH_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FAAHinh_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>ROB</ci><ci>k_inh</ci></apply><ci>FAAH_r</ci></apply><ci>PF_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_inh_degr_r"
+        name="vFAAH_inh_degr_r"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_inh_degr_r"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAHinh_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAHinh_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>ROB</ci><ci>k_deg_FAAH</ci></apply><ci>FAAHinh_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_UE_r"
+        name="vA_UE_r"
+        reversible="false"
+        fast="false"
+        metaid="vA_UE_r"
+        >
+        <listOfReactants>
+          <speciesReference species="A_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="A_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>c_NAAA_ROB</ci><ci>kcl_A</ci></apply><ci>A_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_UE_r"
+        name="vO_UE_r"
+        reversible="false"
+        fast="false"
+        metaid="vO_UE_r"
+        >
+        <listOfReactants>
+          <speciesReference species="O_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="O_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>c_NAAA_ROB</ci><ci>kcl_O</ci></apply><ci>O_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_UE_r"
+        name="vP_UE_r"
+        reversible="false"
+        fast="false"
+        metaid="vP_UE_r"
+        >
+        <listOfReactants>
+          <speciesReference species="P_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>c_NAAA_ROB</ci><ci>kcl_P</ci></apply><ci>P_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_UE_r"
+        name="vL_UE_r"
+        reversible="false"
+        fast="false"
+        metaid="vL_UE_r"
+        >
+        <listOfReactants>
+          <speciesReference species="L_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="L_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>c_NAAA_ROB</ci><ci>kcl_L</ci></apply><ci>L_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_UE_r"
+        name="vS_UE_r"
+        reversible="false"
+        fast="false"
+        metaid="vS_UE_r"
+        >
+        <listOfReactants>
+          <speciesReference species="S_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="S_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>c_NAAA_ROB</ci><ci>kcl_S</ci></apply><ci>S_r</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_degr_m"
+        name="vA_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vA_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="A_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="A_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_m</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_A</ci></apply><ci>A_m</ci></apply><apply><times/><ci>Km_FAAH_A</ci><ci>FAAH_D_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_degr_m"
+        name="vO_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vO_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="O_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="O_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_m</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_O</ci></apply><ci>O_m</ci></apply><apply><times/><ci>Km_FAAH_O</ci><ci>FAAH_D_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_degr_m"
+        name="vP_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vP_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="P_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="P_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_m</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_P</ci></apply><ci>P_m</ci></apply><apply><times/><ci>Km_FAAH_P</ci><ci>FAAH_D_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_degr_m"
+        name="vL_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vL_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="L_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="L_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_m</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_L</ci></apply><ci>L_m</ci></apply><apply><times/><ci>Km_FAAH_L</ci><ci>FAAH_D_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_degr_m"
+        name="vS_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vS_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="S_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="FAAH_m"/>
+          <modifierSpeciesReference species="S_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_m</ci></apply><ci>kcat_FAAH</ci></apply><ci>a_FAAH_S</ci></apply><ci>S_m</ci></apply><apply><times/><ci>Km_FAAH_S</ci><ci>FAAH_D_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_syn_m"
+        name="vFAAH_syn_m"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_syn_m"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FAAH_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_t</ci></apply><ci>b_FAAH_MEC</ci></apply><ci>k_deg_FAAH</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_degr_m"
+        name="vFAAH_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAH_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>k_deg_FAAH</ci></apply><ci>FAAH_m</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_inh_m"
+        name="vFAAH_inh_m"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_inh_m"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAH_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="FAAHinh_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAH_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>k_inh</ci></apply><ci>FAAH_m</ci></apply><ci>PF_m</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vFAAH_inh_degr_m"
+        name="vFAAH_inh_degr_m"
+        reversible="false"
+        fast="false"
+        metaid="vFAAH_inh_degr_m"
+        >
+        <listOfReactants>
+          <speciesReference species="FAAHinh_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="FAAHinh_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>k_deg_FAAH</ci></apply><ci>FAAHinh_m</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_m_p"
+        name="vA_m_p"
+        reversible="false"
+        fast="false"
+        metaid="vA_m_p"
+        >
+        <listOfReactants>
+          <speciesReference species="A_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="A_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="A_m"/>
+          <modifierSpeciesReference species="A_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_A</ci></apply><apply><minus/><ci>A_m</ci><apply><times/><ci>A_p</ci><ci>Ktr_p_m_A</ci></apply></apply></apply><apply><plus/><apply><plus/><ci>A_m</ci><ci>A_p</ci></apply><ci>Km_p_m_A</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vo_m_p"
+        name="vo_m_p"
+        reversible="false"
+        fast="false"
+        metaid="vo_m_p"
+        >
+        <listOfReactants>
+          <speciesReference species="O_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="O_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="O_m"/>
+          <modifierSpeciesReference species="O_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_O</ci></apply><apply><minus/><ci>O_m</ci><apply><times/><ci>O_p</ci><ci>Ktr_p_m_O</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_m_p"
+        name="vP_m_p"
+        reversible="false"
+        fast="false"
+        metaid="vP_m_p"
+        >
+        <listOfReactants>
+          <speciesReference species="P_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P_m"/>
+          <modifierSpeciesReference species="P_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_P</ci></apply><apply><minus/><ci>P_m</ci><apply><times/><ci>P_p</ci><ci>Ktr_p_m_P</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_m_p"
+        name="vL_m_p"
+        reversible="false"
+        fast="false"
+        metaid="vL_m_p"
+        >
+        <listOfReactants>
+          <speciesReference species="L_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="L_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="L_m"/>
+          <modifierSpeciesReference species="L_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_L</ci></apply><apply><minus/><ci>L_m</ci><apply><times/><ci>L_p</ci><ci>Ktr_p_m_L</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_m_p"
+        name="vS_m_p"
+        reversible="false"
+        fast="false"
+        metaid="vS_m_p"
+        >
+        <listOfReactants>
+          <speciesReference species="S_m" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="S_m"/>
+          <modifierSpeciesReference species="S_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_S</ci></apply><apply><minus/><ci>S_m</ci><apply><times/><ci>S_p</ci><ci>Ktr_p_m_S</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_b_m"
+        name="vA_b_m"
+        reversible="false"
+        fast="false"
+        metaid="vA_b_m"
+        >
+        <listOfReactants>
+          <speciesReference species="A_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="A_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="A_b"/>
+          <modifierSpeciesReference species="A_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_A</ci></apply><apply><minus/><ci>A_b</ci><ci>A_m</ci></apply></apply><apply><plus/><apply><plus/><ci>A_m</ci><ci>A_b</ci></apply><ci>Km_p_m_A</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_b_m"
+        name="vO_b_m"
+        reversible="false"
+        fast="false"
+        metaid="vO_b_m"
+        >
+        <listOfReactants>
+          <speciesReference species="O_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="O_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="O_b"/>
+          <modifierSpeciesReference species="O_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_O</ci></apply><apply><minus/><ci>O_b</ci><ci>O_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_b_m"
+        name="vP_b_m"
+        reversible="false"
+        fast="false"
+        metaid="vP_b_m"
+        >
+        <listOfReactants>
+          <speciesReference species="P_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P_b"/>
+          <modifierSpeciesReference species="P_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_P</ci></apply><apply><minus/><ci>P_b</ci><ci>P_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_b_m"
+        name="vL_b_m"
+        reversible="false"
+        fast="false"
+        metaid="vL_b_m"
+        >
+        <listOfReactants>
+          <speciesReference species="L_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="L_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="L_b"/>
+          <modifierSpeciesReference species="L_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_L</ci></apply><apply><minus/><ci>L_b</ci><ci>L_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_b_m"
+        name="vS_b_m"
+        reversible="false"
+        fast="false"
+        metaid="vS_b_m"
+        >
+        <listOfReactants>
+          <speciesReference species="S_b" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S_m" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="S_b"/>
+          <modifierSpeciesReference species="S_m"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>MEC</ci><ci>ktr_m_p_S</ci></apply><apply><minus/><ci>S_b</ci><ci>S_m</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vA_r_p"
+        name="vA_r_p"
+        reversible="false"
+        fast="false"
+        metaid="vA_r_p"
+        >
+        <listOfReactants>
+          <speciesReference species="A_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="A_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="A_r"/>
+          <modifierSpeciesReference species="A_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><ci>PLASMA</ci><ci>ktr_r_p</ci></apply><apply><minus/><ci>A_r</ci><apply><times/><ci>A_p</ci><ci>Ktr_p_r_A</ci></apply></apply></apply><apply><plus/><apply><plus/><ci>A_r</ci><ci>A_p</ci></apply><ci>Km_p_m_A</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vO_r_p"
+        name="vO_r_p"
+        reversible="false"
+        fast="false"
+        metaid="vO_r_p"
+        >
+        <listOfReactants>
+          <speciesReference species="O_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="O_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="O_r"/>
+          <modifierSpeciesReference species="O_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>PLASMA</ci><ci>ktr_r_p</ci></apply><apply><minus/><ci>O_r</ci><apply><times/><ci>O_p</ci><ci>Ktr_p_r_O</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vP_r_p"
+        name="vP_r_p"
+        reversible="false"
+        fast="false"
+        metaid="vP_r_p"
+        >
+        <listOfReactants>
+          <speciesReference species="P_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="P_r"/>
+          <modifierSpeciesReference species="P_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>PLASMA</ci><ci>ktr_r_p</ci></apply><apply><minus/><ci>P_r</ci><apply><times/><ci>P_p</ci><ci>Ktr_p_r_P</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vL_r_p"
+        name="vL_r_p"
+        reversible="false"
+        fast="false"
+        metaid="vL_r_p"
+        >
+        <listOfReactants>
+          <speciesReference species="L_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="L_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="L_r"/>
+          <modifierSpeciesReference species="L_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>PLASMA</ci><ci>ktr_r_p</ci></apply><apply><minus/><ci>L_r</ci><apply><times/><ci>L_p</ci><ci>Ktr_p_r_L</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vS_r_p"
+        name="vS_r_p"
+        reversible="false"
+        fast="false"
+        metaid="vS_r_p"
+        >
+        <listOfReactants>
+          <speciesReference species="S_r" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="S_r"/>
+          <modifierSpeciesReference species="S_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>PLASMA</ci><ci>ktr_r_p</ci></apply><apply><minus/><ci>S_r</ci><apply><times/><ci>S_p</ci><ci>Ktr_p_r_S</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="absorp"
+        name="absorp"
+        reversible="false"
+        fast="false"
+        metaid="absorp"
+        >
+        <listOfReactants>
+          <speciesReference species="PFM_gut" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PFM_p" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_PFM</ci><ci>MD</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="dist"
+        name="dist"
+        reversible="false"
+        fast="false"
+        metaid="dist"
+        >
+        <listOfReactants>
+          <speciesReference species="PFM_p" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="PFM_r" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="PFM_p"/>
+          <modifierSpeciesReference species="PFM_r"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><apply><times/><ci>kout_PFM</ci><ci>PFM_p</ci></apply><apply><times/><ci>kin_PFM</ci><ci>PFM_r</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="elim"
+        name="elim"
+        reversible="false"
+        fast="false"
+        metaid="elim"
+        >
+        <listOfReactants>
+          <speciesReference species="PFM_p" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="PFM_p"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><times/><ci>klinear_PFM</ci><ci>PFM_p</ci></apply><apply><divide/><apply><divide/><apply><times/><ci>Vm_PFM</ci><ci>PFM_p</ci></apply><apply><plus/><ci>Km_PFM</ci><apply><divide/><ci>PFM_p</ci><ci>Vss_PFM</ci></apply></apply></apply><ci>Vss_PFM</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

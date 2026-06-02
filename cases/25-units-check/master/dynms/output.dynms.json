@@ -1,0 +1,268 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:41:47.602Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        },
+        {
+          "id": "k2",
+          "value": 1.1
+        },
+        {
+          "id": "k21",
+          "value": 1
+        },
+        {
+          "id": "k22",
+          "value": 1
+        }
+      ],
+      "states": [
+        {
+          "id": "p1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "c1",
+          "initial": 3,
+          "static": true
+        },
+        {
+          "id": "c2",
+          "initial": 4,
+          "static": true
+        },
+        {
+          "id": "c3",
+          "initial": 5,
+          "static": true
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              4
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              5
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s2_amt_",
+              "c2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s3_amt_",
+              "c3"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "s1",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                23,
+                "s1"
+              ],
+              [
+                "Add",
+                [
+                  "Power",
+                  "k1",
+                  8
+                ],
+                [
+                  "Multiply",
+                  2,
+                  "x",
+                  [
+                    "Power",
+                    "x",
+                    7
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "y21",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Power",
+                "k21",
+                3
+              ],
+              [
+                "Multiply",
+                [
+                  "Sin",
+                  [
+                    "Multiply",
+                    1.1,
+                    2.2
+                  ]
+                ],
+                [
+                  "Power",
+                  [
+                    "Multiply",
+                    "k21",
+                    1.2
+                  ],
+                  3
+                ],
+                [
+                  "Cos",
+                  [
+                    "Multiply",
+                    1.1,
+                    2.2
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "y22",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Power",
+                "k21",
+                3
+              ],
+              [
+                "Multiply",
+                [
+                  "Sin",
+                  "y"
+                ],
+                [
+                  "Power",
+                  [
+                    "Multiply",
+                    "x",
+                    1.2
+                  ],
+                  3
+                ],
+                [
+                  "Cos",
+                  "y"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s2_amt_",
+          "rhs": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

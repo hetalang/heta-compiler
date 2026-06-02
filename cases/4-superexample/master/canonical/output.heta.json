@@ -1,0 +1,238 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:34:39.187Z",
+    "platformId": "mm",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "3c6ba2b13484e57544bba4fa308637c6ab21852790803c264b9fd46f8d3b0b80",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "mod1",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Page",
+    "content": "this is content",
+    "id": "pg2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "space": "mod1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "p1"
+    },
+    "class": "Compartment",
+    "id": "comp2",
+    "space": "mod1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.1"
+    },
+    "class": "Record",
+    "id": "k1",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.03,
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "p1",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 * 2"
+    },
+    "class": "Record",
+    "id": "p2",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "12.1",
+      "sw2": "p3 * p1 + 10"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "p3",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw2": "0",
+      "sw3": "2"
+    },
+    "class": "Record",
+    "id": "p4",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 * p6"
+    },
+    "class": "Record",
+    "id": "p5",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2 * p4"
+    },
+    "class": "Record",
+    "id": "p6",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "sp1"
+      }
+    ],
+    "assignments": {
+      "ode_": "p1 * sp1 * comp1"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "modifiers": [
+      {
+        "target": "sp1"
+      }
+    ],
+    "reversible": false,
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p3"
+      },
+      {
+        "stoichiometry": -2,
+        "target": "k1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "p4"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Process",
+    "id": "r2",
+    "reversible": false,
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "k1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2"
+    },
+    "class": "Process",
+    "id": "r3",
+    "reversible": false,
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "sp1",
+    "space": "mod1"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "space": "mod1",
+    "start": 6
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw2",
+    "period": 6,
+    "space": "mod1",
+    "start": 12
+  },
+  {
+    "action": "upsert",
+    "class": "CSwitcher",
+    "id": "sw3",
+    "space": "mod1",
+    "trigger": "p1"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "mod1"
+  }
+]

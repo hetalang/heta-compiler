@@ -1,0 +1,258 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:39:27.102Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "220512b8cc6fd850e3f392f321008601f356ebec319f09e184af97b916baf89b",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "zzz",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1.1"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.001,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "hour",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * s1 ^ 2"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "output": true,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "hour",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "12"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s1",
+    "isAmount": true,
+    "output": true,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s2",
+    "output": true,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "s3_0 * exp(t / tau)"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s3",
+    "output": true,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "s3_0",
+    "num": 15,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "hour",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "tau",
+    "num": 12,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "hour",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "TimeScale",
+    "id": "tid",
+    "notes": "Time in days",
+    "output": true,
+    "slope": 0.041667,
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "day",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "s1 * s2"
+    },
+    "class": "Record",
+    "id": "x1",
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 2,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "t / 2"
+    },
+    "class": "Record",
+    "id": "x2",
+    "space": "zzz",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "hour",
+        "multiplier": 1
+      }
+    ]
+  }
+]

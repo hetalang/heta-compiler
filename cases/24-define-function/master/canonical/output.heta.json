@@ -1,0 +1,103 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:41:12.637Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "6d44d7f8357b62ca03fec0019415e73160934939c6067e9a78bfbcc904d1349e",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "class": "Compartment",
+    "id": "c1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * f5(1.1, k1) * pow(1.1, 2) * c1"
+    },
+    "class": "Reaction",
+    "id": "r1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "100"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x1",
+      "x2",
+      "x3"
+    ],
+    "id": "f3",
+    "math": "sqrt(x1 ^ 2 + x2 ^ 2 + x3 ^ 2)"
+  },
+  {
+    "action": "defineFunction",
+    "id": "f4",
+    "math": "15 * 2"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "f5",
+    "math": "f4(x) ^ 2"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "pow7",
+    "math": "pow(x, 7)"
+  },
+  {
+    "action": "defineUnit",
+    "id": "u1",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:34:05.352Z","platformId":"mm","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfParameters>
+      <parameter
+        id="plasma"
+        constant="true"
+        value="2.5"
+        metaid="plasma"
+        >
+      </parameter>
+      <parameter
+        id="k_prol"
+        constant="true"
+        value="0.0001"
+        metaid="k_prol"
+        >
+      </parameter>
+      <parameter
+        id="AXP_neu"
+        constant="true"
+        value="0.1"
+        metaid="AXP_neu"
+        >
+      </parameter>
+    </listOfParameters>
+  
+  
+  </model>
+</sbml>

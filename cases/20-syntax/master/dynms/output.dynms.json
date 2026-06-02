@@ -1,0 +1,242 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:40:00.529Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        },
+        {
+          "id": "period2",
+          "value": 22
+        }
+      ],
+      "states": [
+        {
+          "id": "rec1",
+          "initial": 12,
+          "static": true
+        },
+        {
+          "id": "c1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "m1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "m1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "m1_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "s1",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "c1",
+              [
+                "Which",
+                1,
+                [
+                  "Greater",
+                  "t",
+                  1
+                ],
+                2,
+                [
+                  "Greater",
+                  "t",
+                  2
+                ],
+                "True",
+                0
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x2",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Less",
+                "t",
+                2
+              ],
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r2",
+          "rhs": {
+            "expr": 0.01,
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r1"
+              ],
+              "r2"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "ts1",
+          "trigger": {
+            "type": "time",
+            "start": 12,
+            "period": 24,
+            "stop": 100
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 1.1,
+                "format": "math-json"
+              },
+              "state": "c1"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    [
+                      "Multiply",
+                      "s1",
+                      2
+                    ],
+                    1.1
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s1_amt_"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "ts2",
+          "trigger": {
+            "type": "time",
+            "start": 0,
+            "period": {
+              "expr": "period2",
+              "format": "math-json"
+            }
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true
+        },
+        {
+          "id": "cs1",
+          "trigger": {
+            "type": "crossing",
+            "rhs": {
+              "expr": [
+                "Add",
+                "k1",
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "root"
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

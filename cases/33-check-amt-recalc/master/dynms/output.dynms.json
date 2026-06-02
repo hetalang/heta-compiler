@@ -1,0 +1,368 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:45:07.857Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.1
+        },
+        {
+          "id": "k2",
+          "value": 0.05
+        },
+        {
+          "id": "k3",
+          "value": 0.02
+        }
+      ],
+      "states": [
+        {
+          "id": "c1",
+          "initial": 5.5,
+          "static": true
+        },
+        {
+          "id": "A_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              2,
+              5.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "B_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "C_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "D_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1",
+          "initial": 10,
+          "static": true
+        },
+        {
+          "id": "var1",
+          "initial": 5
+        }
+      ],
+      "assignments": [
+        {
+          "id": "C",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "C_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "A",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "A",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "B",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "B_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k2",
+              "B",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "D",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "D_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k3",
+              "A",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "F",
+          "rhs": {
+            "expr": 10,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pr1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.0001,
+              "var1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "A_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r1"
+              ],
+              [
+                "Negate",
+                "r3"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "B_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "r1",
+              [
+                "Negate",
+                "r2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "C_amt_",
+          "rhs": {
+            "expr": "r2",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "D_amt_",
+          "rhs": {
+            "expr": "r3",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "var1",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "pr1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "time",
+            "start": 24,
+            "period": 24
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "A",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "A_amt_"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "x1",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "x1"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "var1",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "var1"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw2",
+          "trigger": {
+            "type": "crossing",
+            "rhs": {
+              "expr": [
+                "Add",
+                "t",
+                [
+                  "Negate",
+                  48
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "root"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "A",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "A_amt_"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "x1",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "x1"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "var1",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "var1"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

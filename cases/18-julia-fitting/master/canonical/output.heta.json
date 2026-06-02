@@ -1,0 +1,94 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:39:06.724Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "7151253e8d2209838ead20627438a1eba404741b1de4aef46891767c10ee0e9c",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "A"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "B"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "cond1",
+    "num": 1.2
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "free": true,
+    "id": "Km",
+    "lower": 1e-9,
+    "num": 3.2,
+    "scale": "log",
+    "upper": 1000000000
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "A"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "B"
+      }
+    ],
+    "assignments": {
+      "ode_": "Vmax * A / (A + Km) * comp1"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "free": true,
+    "id": "Vmax",
+    "lower": 1e-9,
+    "num": 1.2,
+    "scale": "log",
+    "upper": 1000000000
+  }
+]

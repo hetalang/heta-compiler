@@ -1,0 +1,359 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:35:20.538Z",
+    "platformId": "useNamespace",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "327a79cf21574c63a588540da5fb81789fff0d99f1ef1724b249f2ffc08f0eb8",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "drug",
+    "type": "abstract"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "gut",
+    "id": "a0_first",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "gut",
+    "id": "a0_second",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "gut",
+    "id": "a0_third",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5.2"
+    },
+    "class": "Compartment",
+    "id": "blood"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "blood",
+    "id": "c1_first"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "blood",
+    "id": "c1_second"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "blood",
+    "id": "c1_third"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "gut"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs_first",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs_second",
+    "num": 0.002
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs_third",
+    "num": 0.003
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel_first",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel_second",
+    "num": 0.2
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel_third",
+    "num": 0.3
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeScale",
+    "id": "t_first"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeScale",
+    "id": "t_second"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeScale",
+    "id": "t_third"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0_first"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "c1_first"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs_first * a0_first"
+    },
+    "class": "Reaction",
+    "id": "vabs_first"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0_second"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "c1_second"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs_second * a0_second"
+    },
+    "class": "Reaction",
+    "id": "vabs_second"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0_third"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "c1_third"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs_third * a0_third"
+    },
+    "class": "Reaction",
+    "id": "vabs_third"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "c1_first"
+      }
+    ],
+    "assignments": {
+      "ode_": "kel_first * c1_first * blood"
+    },
+    "class": "Reaction",
+    "id": "vel_first"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "c1_second"
+      }
+    ],
+    "assignments": {
+      "ode_": "kel_second * c1_second * blood"
+    },
+    "class": "Reaction",
+    "id": "vel_second"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "c1_third"
+      }
+    ],
+    "assignments": {
+      "ode_": "kel_third * c1_third * blood"
+    },
+    "class": "Reaction",
+    "id": "vel_third"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin(1.2 * t_first)"
+    },
+    "class": "Record",
+    "id": "x1_first"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin(1.2 * t_second)"
+    },
+    "class": "Record",
+    "id": "x1_second"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin(1.2 * t_third)"
+    },
+    "class": "Record",
+    "id": "x1_third"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "gut",
+    "id": "a0",
+    "isAmount": true,
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "central",
+    "id": "c1",
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5.2"
+    },
+    "class": "Compartment",
+    "id": "central",
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "gut",
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "c1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs * a0"
+    },
+    "class": "Reaction",
+    "id": "vabs",
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "c1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kel * c1 * central"
+    },
+    "class": "Reaction",
+    "id": "vel",
+    "space": "drug"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin(1.2 * t)"
+    },
+    "class": "Record",
+    "id": "x1",
+    "space": "drug"
+  }
+]

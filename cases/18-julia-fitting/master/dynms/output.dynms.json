@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:39:20.232Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "Vmax",
+          "value": 1.2
+        },
+        {
+          "id": "Km",
+          "value": 3.2
+        },
+        {
+          "id": "cond1",
+          "value": 1.2
+        }
+      ],
+      "states": [
+        {
+          "id": "comp1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "A_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              5,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "B_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "B",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "B_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "A",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "Vmax",
+                  "A"
+                ],
+                [
+                  "Add",
+                  "A",
+                  "Km"
+                ]
+              ],
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "A_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "B_amt_",
+          "rhs": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

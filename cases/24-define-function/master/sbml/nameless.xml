@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:41:19.286Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="pow7">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><power/><ci>x</ci><cn>7</cn></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x1 </ci></bvar>
+            <bvar><ci> x2 </ci></bvar>
+            <bvar><ci> x3 </ci></bvar>
+            <apply><root/><apply><plus/><apply><plus/><apply><power/><ci>x1</ci><cn>2</cn></apply><apply><power/><ci>x2</ci><cn>2</cn></apply></apply><apply><power/><ci>x3</ci><cn>2</cn></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f4">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <apply><times/><cn>15</cn><cn>2</cn></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="f5">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><power/><apply><f4/><ci>x</ci></apply><cn>2</cn></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="c1"
+        constant="false"
+        size="2"
+        metaid="c1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="s1"
+        compartment="c1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="100"
+        metaid="s1"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.1"
+        metaid="k1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        reversible="true"
+        fast="false"
+        metaid="r1"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>k1</ci><apply><f5/><cn>1.1</cn><ci>k1</ci></apply></apply><apply><power/><cn>1.1</cn><cn>2</cn></apply></apply><ci>c1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

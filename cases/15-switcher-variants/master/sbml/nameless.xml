@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:38:10.352Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="comp1"
+        constant="false"
+        size="1"
+        metaid="comp1"
+        >
+      </compartment>
+      <compartment
+        id="comp2"
+        constant="false"
+        size="1"
+        metaid="comp2"
+        >
+      </compartment>
+      <compartment
+        id="comp3"
+        constant="false"
+        size="1"
+        metaid="comp3"
+        >
+      </compartment>
+      <compartment
+        id="comp4"
+        constant="false"
+        size="1"
+        metaid="comp4"
+        >
+      </compartment>
+      <compartment
+        id="comp5"
+        constant="false"
+        size="1"
+        metaid="comp5"
+        >
+      </compartment>
+      <compartment
+        id="comp6"
+        constant="false"
+        size="1"
+        metaid="comp6"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="spec_amt1"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="spec_amt1"
+        >
+      </species>
+      <species
+        id="spec_conc1"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        metaid="spec_conc1"
+        >
+      </species>
+      <species
+        id="spec_amt2"
+        compartment="comp2"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="spec_amt2"
+        >
+      </species>
+      <species
+        id="spec_conc2"
+        compartment="comp2"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        metaid="spec_conc2"
+        >
+      </species>
+      <species
+        id="spec_amt3"
+        compartment="comp3"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="spec_amt3"
+        >
+      </species>
+      <species
+        id="spec_conc3"
+        compartment="comp3"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        metaid="spec_conc3"
+        >
+      </species>
+      <species
+        id="spec_amt4"
+        compartment="comp4"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="spec_amt4"
+        >
+      </species>
+      <species
+        id="spec_conc4"
+        compartment="comp4"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        metaid="spec_conc4"
+        >
+      </species>
+      <species
+        id="spec_amt5"
+        compartment="comp5"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="spec_amt5"
+        >
+      </species>
+      <species
+        id="spec_conc5"
+        compartment="comp5"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        metaid="spec_conc5"
+        >
+      </species>
+      <species
+        id="spec_amt6"
+        compartment="comp6"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="spec_amt6"
+        >
+      </species>
+      <species
+        id="spec_conc6"
+        compartment="comp6"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        metaid="spec_conc6"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="rec1"
+        constant="false"
+        value="0"
+        metaid="rec1"
+        >
+      </parameter>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.001"
+        metaid="k1"
+        >
+      </parameter>
+      <parameter
+        id="k2"
+        constant="true"
+        value="0.01"
+        metaid="k2"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="r4"
+        reversible="true"
+        fast="false"
+        metaid="r4"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="spec_amt4" stoichiometry="1"/>
+          <speciesReference species="spec_conc4" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>0.1</cn></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="r5"
+        reversible="true"
+        fast="false"
+        metaid="r5"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="spec_amt5" stoichiometry="1"/>
+          <speciesReference species="spec_conc5" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>0.1</cn></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="r6"
+        reversible="true"
+        fast="false"
+        metaid="r6"
+        >
+        <listOfReactants>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="spec_amt6" stoichiometry="1"/>
+          <speciesReference species="spec_conc6" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>0.1</cn></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+    <listOfEvents>
+      <event
+        id="sw1"
+        metaid="sw1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+              
+              
+              
+            
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="rec1"
+            metaid="rec1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>12</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="comp1"
+            metaid="comp1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_amt1"
+            metaid="spec_amt1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_conc1"
+            metaid="spec_conc1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_amt2"
+            metaid="spec_amt2::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_conc2"
+            metaid="spec_conc2::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="comp3"
+            metaid="comp3::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="comp4"
+            metaid="comp4::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_amt4"
+            metaid="spec_amt4::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_conc4"
+            metaid="spec_conc4::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_amt5"
+            metaid="spec_amt5::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="spec_conc5"
+            metaid="spec_conc5::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="comp6"
+            metaid="comp6::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

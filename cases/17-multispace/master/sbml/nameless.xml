@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:38:51.573Z","platformId":"template","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_L" name="L">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_uM_L" name="uM*L">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="__minute" name="1/minute">
+  <listOfUnits>
+    <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="comp1"
+        constant="false"
+        size="1"
+        units="_L"
+        metaid="comp1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="s1"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        substanceUnits="_uM_L"
+        metaid="s1"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.001"
+        units="__minute"
+        metaid="k1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        reversible="false"
+        fast="false"
+        metaid="r1"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k1</ci><ci>s1</ci></apply><ci>comp1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

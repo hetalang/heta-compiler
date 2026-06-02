@@ -1,0 +1,569 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:45:29.563Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "threeshold",
+          "value": 1.5
+        },
+        {
+          "id": "k1",
+          "value": 0.001
+        },
+        {
+          "id": "k2",
+          "value": 0.001
+        },
+        {
+          "id": "k3",
+          "value": 0.001
+        },
+        {
+          "id": "k4",
+          "value": 0.001
+        },
+        {
+          "id": "k5",
+          "value": 0.001
+        },
+        {
+          "id": "k6",
+          "value": 0.001
+        }
+      ],
+      "states": [
+        {
+          "id": "c1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s4_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s5_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s6_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "s1",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s2_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k2",
+              "s2",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s3_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k3",
+              "s3",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s4",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s4_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k4",
+              "s4",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s5",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s5_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r5",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k5",
+              "s5",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s6",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s6_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r6",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k6",
+              "s6",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s2_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s3_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r3"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s4_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r4"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s5_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r5"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s6_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r6"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "time",
+            "start": 0,
+            "period": 12
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s1",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s1_amt_"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw2",
+          "trigger": {
+            "type": "time",
+            "start": 1,
+            "period": 12
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s2",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s2_amt_"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw3",
+          "trigger": {
+            "type": "crossing",
+            "rhs": {
+              "expr": [
+                "Add",
+                "threeshold",
+                [
+                  "Negate",
+                  "s3"
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "root",
+            "atStart": true
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s3",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s3_amt_"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw4",
+          "trigger": {
+            "type": "crossing",
+            "rhs": {
+              "expr": [
+                "Add",
+                "threeshold",
+                [
+                  "Negate",
+                  "s4"
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "root",
+            "atStart": false
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s4",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s4_amt_"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw5",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Less",
+                "s5",
+                "threeshold"
+              ],
+              "format": "math-json"
+            },
+            "detection": "step",
+            "atStart": true
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s5",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s5_amt_"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw6",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Less",
+                "s6",
+                "threeshold"
+              ],
+              "format": "math-json"
+            },
+            "detection": "step",
+            "atStart": false
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "s6",
+                    [
+                      "Divide",
+                      1,
+                      "c1"
+                    ]
+                  ],
+                  "c1"
+                ],
+                "format": "math-json"
+              },
+              "state": "s6_amt_"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": [
+        {
+          "symbol": "s1"
+        },
+        {
+          "symbol": "s2"
+        },
+        {
+          "symbol": "s3"
+        },
+        {
+          "symbol": "s4"
+        },
+        {
+          "symbol": "s5"
+        },
+        {
+          "symbol": "s6"
+        }
+      ]
+    }
+  ]
+}

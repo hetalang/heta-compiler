@@ -1,0 +1,40 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:35:56.109Z",
+  "platformId": "test-xlsx",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 1.2
+        }
+      ],
+      "states": [
+        {
+          "id": "p1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "p2",
+          "initial": 0.1,
+          "static": true
+        }
+      ],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

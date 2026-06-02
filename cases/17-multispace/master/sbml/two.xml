@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:38:51.596Z","platformId":"template","namespaceId":"two","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="two" 
+    metaid="two"
+    >
+    
+
+  
+    <listOfSpecies>
+      <species
+        id="s2"
+        compartment="comp2"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        substanceUnits=""
+        metaid="two::s2"
+        >
+      </species>
+      <species
+        id="s3"
+        compartment="comp2"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        substanceUnits="_umole"
+        metaid="two::s3"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.00001"
+        units="__minute"
+        metaid="two::k1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="r2"
+        reversible="false"
+        fast="false"
+        metaid="two::r2"
+        >
+        <listOfReactants>
+          <speciesReference species="s2" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="s3" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k1</ci><ci>s2</ci></apply><ci>comp2</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

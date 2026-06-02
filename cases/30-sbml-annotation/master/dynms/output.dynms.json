@@ -1,0 +1,4406 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:44:04.230Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "states": [
+        {
+          "id": "Default",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "BRAIN",
+          "initial": 1.45000004768372,
+          "static": true
+        },
+        {
+          "id": "PLASMA",
+          "initial": 2.6489999294281,
+          "static": true
+        },
+        {
+          "id": "ROB",
+          "initial": 65.3000030517578,
+          "static": true
+        },
+        {
+          "id": "MEC",
+          "initial": 0.0000149999996210681,
+          "static": true
+        },
+        {
+          "id": "A_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.7493309,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "A_b"
+        },
+        {
+          "id": "O_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              20.77858,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "O_b"
+        },
+        {
+          "id": "P_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              6.541209,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "P_b"
+        },
+        {
+          "id": "L_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              2.319571,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "L_b"
+        },
+        {
+          "id": "S_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              3.427807,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "S_b"
+        },
+        {
+          "id": "NAPE_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.00003879041,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "NAPE_b"
+        },
+        {
+          "id": "NOPE_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.0008814287,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "NOPE_b"
+        },
+        {
+          "id": "NPPE_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.0001732296,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "NPPE_b"
+        },
+        {
+          "id": "NLPE_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.00007550331,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "NLPE_b"
+        },
+        {
+          "id": "NSPE_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.0001272629,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "NSPE_b"
+        },
+        {
+          "id": "FAAH_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              15.366,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAH_b"
+        },
+        {
+          "id": "FAAHinh_b_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1.45000004768372
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAHinh_b"
+        },
+        {
+          "id": "A_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.5419204,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "A_r"
+        },
+        {
+          "id": "O_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              14.23822,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "O_r"
+        },
+        {
+          "id": "P_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              4.121915,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "P_r"
+        },
+        {
+          "id": "L_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1.705466,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "L_r"
+        },
+        {
+          "id": "S_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              2.515968,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "S_r"
+        },
+        {
+          "id": "NAPE_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.000004241633,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "NAPE_r"
+        },
+        {
+          "id": "NOPE_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.00009638198,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "NOPE_r"
+        },
+        {
+          "id": "NPPE_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.00001894222,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "NPPE_r"
+        },
+        {
+          "id": "NLPE_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.000008256095,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "NLPE_r"
+        },
+        {
+          "id": "NSPE_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.00001391587,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "NSPE_r"
+        },
+        {
+          "id": "FAAH_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              2.165868,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAH_r"
+        },
+        {
+          "id": "FAAHinh_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              65.3000030517578
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAHinh_r"
+        },
+        {
+          "id": "A_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.97761,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "A_m"
+        },
+        {
+          "id": "O_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              16.3219,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "O_m"
+        },
+        {
+          "id": "P_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              5.809415,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "P_m"
+        },
+        {
+          "id": "L_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "L_m"
+        },
+        {
+          "id": "S_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              2.968774,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "S_m"
+        },
+        {
+          "id": "FAAH_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10.686,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAH_m"
+        },
+        {
+          "id": "FAAHinh_m_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              0.0000149999996210681
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAHinh_m"
+        },
+        {
+          "id": "A_p_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.8740574,
+              2.6489999294281
+            ],
+            "format": "math-json"
+          },
+          "title": "A_p"
+        },
+        {
+          "id": "O_p_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              5.085073,
+              2.6489999294281
+            ],
+            "format": "math-json"
+          },
+          "title": "O_p"
+        },
+        {
+          "id": "P_p_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              4.849307,
+              2.6489999294281
+            ],
+            "format": "math-json"
+          },
+          "title": "P_p"
+        },
+        {
+          "id": "L_p_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1.916254,
+              2.6489999294281
+            ],
+            "format": "math-json"
+          },
+          "title": "L_p"
+        },
+        {
+          "id": "S_p_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0.273772,
+              2.6489999294281
+            ],
+            "format": "math-json"
+          },
+          "title": "S_p"
+        },
+        {
+          "id": "PFM_gut_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "PFM_gut"
+        },
+        {
+          "id": "PFM_p_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "PFM_p"
+        },
+        {
+          "id": "PFM_r_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "PFM_r"
+        },
+        {
+          "id": "AG2_b",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "Dose",
+          "initial": 10,
+          "static": true
+        },
+        {
+          "id": "ED50",
+          "initial": 0.53,
+          "static": true
+        },
+        {
+          "id": "Emax_PFM",
+          "initial": 0.773,
+          "static": true
+        },
+        {
+          "id": "FAAH_t",
+          "initial": 78,
+          "static": true
+        },
+        {
+          "id": "Gut",
+          "initial": 1.65,
+          "static": true
+        },
+        {
+          "id": "H",
+          "initial": 0.48,
+          "static": true
+        },
+        {
+          "id": "Heart",
+          "initial": 0.31,
+          "static": true
+        },
+        {
+          "id": "Kd_AG2",
+          "initial": 3424,
+          "static": true
+        },
+        {
+          "id": "Kd_CB1_A",
+          "initial": 239.2,
+          "static": true
+        },
+        {
+          "id": "Ki_A",
+          "initial": 230,
+          "static": true
+        },
+        {
+          "id": "Ki_L",
+          "initial": 1000,
+          "static": true
+        },
+        {
+          "id": "Ki_O",
+          "initial": 240,
+          "static": true
+        },
+        {
+          "id": "Ki_P",
+          "initial": 6700,
+          "static": true
+        },
+        {
+          "id": "Ki_S",
+          "initial": 840,
+          "static": true
+        },
+        {
+          "id": "Kidney",
+          "initial": 0.28,
+          "static": true
+        },
+        {
+          "id": "Km_FAAH_A",
+          "initial": 8200,
+          "static": true
+        },
+        {
+          "id": "Km_FAAH_L",
+          "initial": 10800,
+          "static": true
+        },
+        {
+          "id": "Km_FAAH_O",
+          "initial": 52200,
+          "static": true
+        },
+        {
+          "id": "Km_FAAH_P",
+          "initial": 543000,
+          "static": true
+        },
+        {
+          "id": "Km_FAAH_S",
+          "initial": 10000,
+          "static": true
+        },
+        {
+          "id": "Km_NA_PE",
+          "initial": 2800,
+          "static": true
+        },
+        {
+          "id": "Km_NL_PE",
+          "initial": 1000,
+          "static": true
+        },
+        {
+          "id": "Km_NO_PE",
+          "initial": 2900,
+          "static": true
+        },
+        {
+          "id": "Km_NP_PE",
+          "initial": 3300,
+          "static": true
+        },
+        {
+          "id": "Km_NS_PE",
+          "initial": 3400,
+          "static": true
+        },
+        {
+          "id": "Km_PFM",
+          "initial": 26.1,
+          "static": true
+        },
+        {
+          "id": "Km_p_m_A",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "Kp_b_PF",
+          "initial": 1.3,
+          "static": true
+        },
+        {
+          "id": "Kp_m_PF",
+          "initial": 1.3,
+          "static": true
+        },
+        {
+          "id": "Kp_r_PF",
+          "initial": 1.5,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_m_A",
+          "initial": 1.89,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_m_L",
+          "initial": 2.77,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_m_O",
+          "initial": 9.07,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_m_P",
+          "initial": 2.65,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_m_S",
+          "initial": 30.01,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_r_A",
+          "initial": 0.62,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_r_L",
+          "initial": 0.89,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_r_O",
+          "initial": 2.8,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_r_P",
+          "initial": 0.85,
+          "static": true
+        },
+        {
+          "id": "Ktr_p_r_S",
+          "initial": 9.19,
+          "static": true
+        },
+        {
+          "id": "LEU",
+          "initial": 0.025,
+          "static": true
+        },
+        {
+          "id": "LIVER",
+          "initial": 1.69,
+          "static": true
+        },
+        {
+          "id": "Leucocytes",
+          "initial": 0.025,
+          "static": true
+        },
+        {
+          "id": "Lungs",
+          "initial": 1.172,
+          "static": true
+        },
+        {
+          "id": "M_A",
+          "initial": 347.5,
+          "static": true
+        },
+        {
+          "id": "M_L",
+          "initial": 323.5,
+          "static": true
+        },
+        {
+          "id": "M_O",
+          "initial": 325.5,
+          "static": true
+        },
+        {
+          "id": "M_P",
+          "initial": 299.5,
+          "static": true
+        },
+        {
+          "id": "M_PF",
+          "initial": 455.4,
+          "static": true
+        },
+        {
+          "id": "M_S",
+          "initial": 321.5,
+          "static": true
+        },
+        {
+          "id": "Muscles",
+          "initial": 35,
+          "static": true
+        },
+        {
+          "id": "PLD_b",
+          "initial": 10000000,
+          "static": true
+        },
+        {
+          "id": "PLD_r",
+          "initial": 10000000,
+          "static": true
+        },
+        {
+          "id": "Pancreas",
+          "initial": 0.077,
+          "static": true
+        },
+        {
+          "id": "R_PF",
+          "initial": 0.6,
+          "static": true
+        },
+        {
+          "id": "Spleen",
+          "initial": 0.192,
+          "static": true
+        },
+        {
+          "id": "Testis",
+          "initial": 0.036,
+          "static": true
+        },
+        {
+          "id": "Thymus",
+          "initial": 0.029,
+          "static": true
+        },
+        {
+          "id": "Vm_PFM",
+          "initial": 1511,
+          "static": true
+        },
+        {
+          "id": "Vmax_NAT",
+          "initial": 300,
+          "static": true
+        },
+        {
+          "id": "Vss_PFM",
+          "initial": 58.328,
+          "static": true
+        },
+        {
+          "id": "a_FAAH_A",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "a_FAAH_L",
+          "initial": 1.15,
+          "static": true
+        },
+        {
+          "id": "a_FAAH_O",
+          "initial": 5.7,
+          "static": true
+        },
+        {
+          "id": "a_FAAH_P",
+          "initial": 37.8,
+          "static": true
+        },
+        {
+          "id": "a_FAAH_S",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "a_NAT_A",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "a_NAT_L",
+          "initial": 8.6,
+          "static": true
+        },
+        {
+          "id": "a_NAT_O",
+          "initial": 13,
+          "static": true
+        },
+        {
+          "id": "a_NAT_P",
+          "initial": 0.42,
+          "static": true
+        },
+        {
+          "id": "a_NAT_S",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Brain",
+          "initial": 0.197,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Gut",
+          "initial": 0.034,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Kidney",
+          "initial": 0.069,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Leucocytes",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Liver",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Lungs",
+          "initial": 0.032,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_MEC",
+          "initial": 0.137,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Spleen",
+          "initial": 0.03,
+          "static": true
+        },
+        {
+          "id": "b_FAAH_Testis",
+          "initial": 0.126,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Brain",
+          "initial": 0.6,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Gut",
+          "initial": 0.2,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Heart",
+          "initial": 0.2,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Kidney",
+          "initial": 0.6,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Liver",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Lungs",
+          "initial": 14,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Spleen",
+          "initial": 8,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Testis",
+          "initial": 0.6,
+          "static": true
+        },
+        {
+          "id": "b_NAAA_Thymus",
+          "initial": 4,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Brain",
+          "initial": 1.667,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Heart",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Kidney",
+          "initial": 0.667,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Leucocytes",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Lungs",
+          "initial": 0.033,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Muscles",
+          "initial": 0.333,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Pancreas",
+          "initial": 0.333,
+          "static": true
+        },
+        {
+          "id": "b_NAT_Testis",
+          "initial": 0.667,
+          "static": true
+        },
+        {
+          "id": "e1",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "k_NA_PE",
+          "initial": 202,
+          "static": true
+        },
+        {
+          "id": "k_NL_PE",
+          "initial": 100,
+          "static": true
+        },
+        {
+          "id": "k_NO_PE",
+          "initial": 230,
+          "static": true
+        },
+        {
+          "id": "k_NP_PE",
+          "initial": 270,
+          "static": true
+        },
+        {
+          "id": "k_NS_PE",
+          "initial": 280,
+          "static": true
+        },
+        {
+          "id": "k_deg_FAAH",
+          "initial": 0.0051,
+          "static": true
+        },
+        {
+          "id": "k_inh",
+          "initial": 1.1,
+          "static": true
+        },
+        {
+          "id": "kabs_PFM",
+          "initial": 2.2,
+          "static": true
+        },
+        {
+          "id": "kcat_FAAH",
+          "initial": 18000,
+          "static": true
+        },
+        {
+          "id": "kcl_A",
+          "initial": 1.74,
+          "static": true
+        },
+        {
+          "id": "kcl_L",
+          "initial": 1.25,
+          "static": true
+        },
+        {
+          "id": "kcl_O",
+          "initial": 2.5,
+          "static": true
+        },
+        {
+          "id": "kcl_P",
+          "initial": 2.61,
+          "static": true
+        },
+        {
+          "id": "kcl_S",
+          "initial": 1.2,
+          "static": true
+        },
+        {
+          "id": "kin_PFM",
+          "initial": 0.117,
+          "static": true
+        },
+        {
+          "id": "klinear_PFM",
+          "initial": 0.0803,
+          "static": true
+        },
+        {
+          "id": "kout_PFM",
+          "initial": 0.18,
+          "static": true
+        },
+        {
+          "id": "ktr_m_p_A",
+          "initial": 150,
+          "static": true
+        },
+        {
+          "id": "ktr_m_p_L",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "ktr_m_p_O",
+          "initial": 10,
+          "static": true
+        },
+        {
+          "id": "ktr_m_p_P",
+          "initial": 10,
+          "static": true
+        },
+        {
+          "id": "ktr_m_p_S",
+          "initial": 10,
+          "static": true
+        },
+        {
+          "id": "ktr_r_p",
+          "initial": 100,
+          "static": true
+        },
+        {
+          "id": "p_A",
+          "initial": 0.051,
+          "static": true
+        },
+        {
+          "id": "p_L",
+          "initial": 0.016,
+          "static": true
+        },
+        {
+          "id": "p_O",
+          "initial": 0.098,
+          "static": true
+        },
+        {
+          "id": "p_P",
+          "initial": 0.615,
+          "static": true
+        },
+        {
+          "id": "p_S",
+          "initial": 0.191,
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "FAAH_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "FAAH_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAH_b"
+        },
+        {
+          "id": "A_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "A_b"
+        },
+        {
+          "id": "O_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "O_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "O_b"
+        },
+        {
+          "id": "P_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "P_b"
+        },
+        {
+          "id": "L_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "L_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "L_b"
+        },
+        {
+          "id": "S_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "S_b"
+        },
+        {
+          "id": "FAAH_D_b",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              [
+                "Divide",
+                "A_b",
+                "Km_FAAH_A"
+              ],
+              [
+                "Divide",
+                "O_b",
+                "Km_FAAH_O"
+              ],
+              [
+                "Divide",
+                "P_b",
+                "Km_FAAH_P"
+              ],
+              [
+                "Divide",
+                "L_b",
+                "Km_FAAH_L"
+              ],
+              [
+                "Divide",
+                "S_b",
+                "Km_FAAH_S"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vA_degr_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "BRAIN",
+                "FAAH_b",
+                "kcat_FAAH",
+                "a_FAAH_A",
+                "A_b"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_A",
+                "FAAH_D_b"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_degr_b"
+        },
+        {
+          "id": "vO_degr_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "BRAIN",
+                "FAAH_b",
+                "kcat_FAAH",
+                "a_FAAH_O",
+                "O_b"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_O",
+                "FAAH_D_b"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_degr_b"
+        },
+        {
+          "id": "vP_degr_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "BRAIN",
+                "FAAH_b",
+                "kcat_FAAH",
+                "a_FAAH_P",
+                "P_b"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_P",
+                "FAAH_D_b"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_degr_b"
+        },
+        {
+          "id": "vL_degr_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "BRAIN",
+                "FAAH_b",
+                "kcat_FAAH",
+                "a_FAAH_L",
+                "L_b"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_L",
+                "FAAH_D_b"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_degr_b"
+        },
+        {
+          "id": "vS_degr_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "BRAIN",
+                "FAAH_b",
+                "kcat_FAAH",
+                "a_FAAH_S",
+                "S_b"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_S",
+                "FAAH_D_b"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_degr_b"
+        },
+        {
+          "id": "vNAPE_syn_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "Vmax_NAT",
+              "p_A",
+              "a_NAT_A",
+              "b_NAT_Brain"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNAPE_syn_b"
+        },
+        {
+          "id": "vNOPE_syn_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "Vmax_NAT",
+              "p_O",
+              "a_NAT_O",
+              "b_NAT_Brain"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNOPE_syn_b"
+        },
+        {
+          "id": "vNPPE_syn_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "Vmax_NAT",
+              "p_P",
+              "a_NAT_P",
+              "b_NAT_Brain"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNPPE_syn_b"
+        },
+        {
+          "id": "vNLPE_syn_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "Vmax_NAT",
+              "p_L",
+              "a_NAT_L",
+              "b_NAT_Brain"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNLPE_syn_b"
+        },
+        {
+          "id": "vNSPE_syn_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "Vmax_NAT",
+              "p_S",
+              "a_NAT_S",
+              "b_NAT_Brain"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNSPE_syn_b"
+        },
+        {
+          "id": "NAPE_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NAPE_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "NAPE_b"
+        },
+        {
+          "id": "NOPE_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NOPE_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "NOPE_b"
+        },
+        {
+          "id": "NPPE_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NPPE_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "NPPE_b"
+        },
+        {
+          "id": "NLPE_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NLPE_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "NLPE_b"
+        },
+        {
+          "id": "NSPE_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NSPE_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "NSPE_b"
+        },
+        {
+          "id": "slag1_b",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                "NAPE_b",
+                "Km_NA_PE"
+              ],
+              [
+                "Divide",
+                "NOPE_b",
+                "Km_NO_PE"
+              ],
+              [
+                "Divide",
+                "NPPE_b",
+                "Km_NP_PE"
+              ],
+              [
+                "Divide",
+                "NLPE_b",
+                "Km_NL_PE"
+              ],
+              [
+                "Divide",
+                "NSPE_b",
+                "Km_NS_PE"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "slag2_b",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                "A_b",
+                "Ki_A"
+              ],
+              [
+                "Divide",
+                "O_b",
+                "Ki_O"
+              ],
+              [
+                "Divide",
+                "P_b",
+                "Ki_P"
+              ],
+              [
+                "Divide",
+                "L_b",
+                "Ki_L"
+              ],
+              [
+                "Divide",
+                "S_b",
+                "Ki_S"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "den_b",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              "slag1_b",
+              "slag2_b"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vA_syn_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "BRAIN",
+                  "PLD_b",
+                  "k_NA_PE",
+                  "NAPE_b"
+                ],
+                "Km_NA_PE"
+              ],
+              "den_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_syn_b"
+        },
+        {
+          "id": "vO_syn_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "BRAIN",
+                  "PLD_b",
+                  "k_NO_PE",
+                  "NOPE_b"
+                ],
+                "Km_NO_PE"
+              ],
+              "den_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_syn_b"
+        },
+        {
+          "id": "vP_syn_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "BRAIN",
+                  "PLD_b",
+                  "k_NP_PE",
+                  "NPPE_b"
+                ],
+                "Km_NP_PE"
+              ],
+              "den_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_syn_b"
+        },
+        {
+          "id": "vL_syn_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "BRAIN",
+                  "PLD_b",
+                  "k_NL_PE",
+                  "NLPE_b"
+                ],
+                "Km_NL_PE"
+              ],
+              "den_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_syn_b"
+        },
+        {
+          "id": "vS_syn_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "BRAIN",
+                  "PLD_b",
+                  "k_NS_PE",
+                  "NSPE_b"
+                ],
+                "Km_NS_PE"
+              ],
+              "den_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_syn_b"
+        },
+        {
+          "id": "vFAAH_syn_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "FAAH_t",
+              "b_FAAH_Brain",
+              "k_deg_FAAH"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_syn_b"
+        },
+        {
+          "id": "vFAAH_degr_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "k_deg_FAAH",
+              "FAAH_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_degr_b"
+        },
+        {
+          "id": "PFM_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "PFM_p_amt_",
+              "Default"
+            ],
+            "format": "math-json"
+          },
+          "title": "PFM_p"
+        },
+        {
+          "id": "PF_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                [
+                  "Divide",
+                  1,
+                  "M_PF"
+                ],
+                "PFM_p"
+              ],
+              "Vss_PFM"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "PF_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PF_p",
+              "Kp_b_PF"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vFAAH_inh_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "k_inh",
+              "FAAH_b",
+              "PF_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_inh_b"
+        },
+        {
+          "id": "FAAHinh_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "FAAHinh_b_amt_",
+              "BRAIN"
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAHinh_b"
+        },
+        {
+          "id": "vFAAH_inh_degr_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "k_deg_FAAH",
+              "FAAHinh_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_inh_degr_b"
+        },
+        {
+          "id": "vA_UE_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "b_FAAH_Brain",
+              "kcl_A",
+              "A_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_UE_b"
+        },
+        {
+          "id": "vO_UE_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "b_FAAH_Brain",
+              "kcl_O",
+              "O_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_UE_b"
+        },
+        {
+          "id": "vP_UE_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "b_FAAH_Brain",
+              "kcl_P",
+              "P_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_UE_b"
+        },
+        {
+          "id": "vL_UE_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "b_FAAH_Brain",
+              "kcl_L",
+              "L_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_UE_b"
+        },
+        {
+          "id": "vS_UE_b",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "BRAIN",
+              "b_FAAH_Brain",
+              "kcl_S",
+              "S_b"
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_UE_b"
+        },
+        {
+          "id": "FAAH_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "FAAH_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAH_r"
+        },
+        {
+          "id": "A_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "A_r"
+        },
+        {
+          "id": "O_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "O_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "O_r"
+        },
+        {
+          "id": "P_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "P_r"
+        },
+        {
+          "id": "L_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "L_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "L_r"
+        },
+        {
+          "id": "S_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "S_r"
+        },
+        {
+          "id": "FAAH_D_r",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              [
+                "Divide",
+                "A_r",
+                "Km_FAAH_A"
+              ],
+              [
+                "Divide",
+                "O_r",
+                "Km_FAAH_O"
+              ],
+              [
+                "Divide",
+                "P_r",
+                "Km_FAAH_P"
+              ],
+              [
+                "Divide",
+                "L_r",
+                "Km_FAAH_L"
+              ],
+              [
+                "Divide",
+                "S_r",
+                "Km_FAAH_S"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vA_degr_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "ROB",
+                "FAAH_r",
+                "kcat_FAAH",
+                "a_FAAH_A",
+                "A_r"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_A",
+                "FAAH_D_r"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_degr_r"
+        },
+        {
+          "id": "vO_degr_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "ROB",
+                "FAAH_r",
+                "kcat_FAAH",
+                "a_FAAH_O",
+                "O_r"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_O",
+                "FAAH_D_r"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_degr_r"
+        },
+        {
+          "id": "vP_degr_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "ROB",
+                "FAAH_r",
+                "kcat_FAAH",
+                "a_FAAH_P",
+                "P_r"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_P",
+                "FAAH_D_r"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_degr_r"
+        },
+        {
+          "id": "vL_degr_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "ROB",
+                "FAAH_r",
+                "kcat_FAAH",
+                "a_FAAH_L",
+                "L_r"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_L",
+                "FAAH_D_r"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_degr_r"
+        },
+        {
+          "id": "vS_degr_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "ROB",
+                "FAAH_r",
+                "kcat_FAAH",
+                "a_FAAH_S",
+                "S_r"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_S",
+                "FAAH_D_r"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_degr_r"
+        },
+        {
+          "id": "c_NAT_ROB",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "Pancreas",
+                "b_NAT_Pancreas"
+              ],
+              [
+                "Multiply",
+                "Kidney",
+                "b_NAT_Kidney"
+              ],
+              [
+                "Multiply",
+                "Heart",
+                "b_NAT_Heart"
+              ],
+              [
+                "Multiply",
+                "Lungs",
+                "b_NAT_Lungs"
+              ],
+              [
+                "Multiply",
+                "Muscles",
+                "b_NAT_Muscles"
+              ],
+              [
+                "Multiply",
+                "Testis",
+                "b_NAT_Testis"
+              ],
+              [
+                "Multiply",
+                "Leucocytes",
+                "b_NAT_Leucocytes"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vNAPE_syn_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "Vmax_NAT",
+              "p_A",
+              "a_NAT_A",
+              "c_NAT_ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNAPE_syn_r"
+        },
+        {
+          "id": "vNOPE_syn_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "Vmax_NAT",
+              "p_O",
+              "a_NAT_O",
+              "c_NAT_ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNOPE_syn_r"
+        },
+        {
+          "id": "vNPPE_syn_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "Vmax_NAT",
+              "p_P",
+              "a_NAT_P",
+              "c_NAT_ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNPPE_syn_r"
+        },
+        {
+          "id": "vNLPE_syn_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "Vmax_NAT",
+              "p_L",
+              "a_NAT_L",
+              "c_NAT_ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNLPE_syn_r"
+        },
+        {
+          "id": "vNSPE_syn_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "Vmax_NAT",
+              "p_S",
+              "a_NAT_S",
+              "c_NAT_ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "vNSPE_syn_r"
+        },
+        {
+          "id": "NAPE_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NAPE_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "NAPE_r"
+        },
+        {
+          "id": "NOPE_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NOPE_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "NOPE_r"
+        },
+        {
+          "id": "NPPE_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NPPE_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "NPPE_r"
+        },
+        {
+          "id": "NLPE_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NLPE_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "NLPE_r"
+        },
+        {
+          "id": "NSPE_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "NSPE_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "NSPE_r"
+        },
+        {
+          "id": "slag1_r",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                "NAPE_r",
+                "Km_NA_PE"
+              ],
+              [
+                "Divide",
+                "NOPE_r",
+                "Km_NO_PE"
+              ],
+              [
+                "Divide",
+                "NPPE_r",
+                "Km_NP_PE"
+              ],
+              [
+                "Divide",
+                "NLPE_r",
+                "Km_NL_PE"
+              ],
+              [
+                "Divide",
+                "NSPE_r",
+                "Km_NS_PE"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "slag2_r",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                "A_r",
+                "Ki_A"
+              ],
+              [
+                "Divide",
+                "O_r",
+                "Ki_O"
+              ],
+              [
+                "Divide",
+                "P_r",
+                "Ki_P"
+              ],
+              [
+                "Divide",
+                "L_r",
+                "Ki_L"
+              ],
+              [
+                "Divide",
+                "S_r",
+                "Ki_S"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "den_r",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              "slag1_r",
+              "slag2_r"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vA_syn_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ROB",
+                  "PLD_r",
+                  "k_NA_PE",
+                  "NAPE_r"
+                ],
+                "Km_NA_PE"
+              ],
+              "den_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_syn_r"
+        },
+        {
+          "id": "vO_syn_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ROB",
+                  "PLD_r",
+                  "k_NO_PE",
+                  "NOPE_r"
+                ],
+                "Km_NO_PE"
+              ],
+              "den_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_syn_r"
+        },
+        {
+          "id": "vP_syn_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ROB",
+                  "PLD_r",
+                  "k_NP_PE",
+                  "NPPE_r"
+                ],
+                "Km_NP_PE"
+              ],
+              "den_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_syn_r"
+        },
+        {
+          "id": "vL_syn_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ROB",
+                  "PLD_r",
+                  "k_NL_PE",
+                  "NLPE_r"
+                ],
+                "Km_NL_PE"
+              ],
+              "den_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_syn_r"
+        },
+        {
+          "id": "vS_syn_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ROB",
+                  "PLD_r",
+                  "k_NS_PE",
+                  "NSPE_r"
+                ],
+                "Km_NS_PE"
+              ],
+              "den_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_syn_r"
+        },
+        {
+          "id": "c_FAAH_ROB",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "LIVER",
+                "b_FAAH_Liver"
+              ],
+              [
+                "Multiply",
+                "Gut",
+                "b_FAAH_Gut"
+              ],
+              [
+                "Multiply",
+                "Spleen",
+                "b_FAAH_Spleen"
+              ],
+              [
+                "Multiply",
+                "Kidney",
+                "b_FAAH_Kidney"
+              ],
+              [
+                "Multiply",
+                "Lungs",
+                "b_FAAH_Lungs"
+              ],
+              [
+                "Multiply",
+                "Testis",
+                "b_FAAH_Testis"
+              ],
+              [
+                "Multiply",
+                "Leucocytes",
+                "b_FAAH_Leucocytes"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vFAAH_syn_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "FAAH_t",
+              "c_FAAH_ROB",
+              "k_deg_FAAH"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_syn_r"
+        },
+        {
+          "id": "vFAAH_degr_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "ROB",
+              "k_deg_FAAH",
+              "FAAH_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_degr_r"
+        },
+        {
+          "id": "PF_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PF_p",
+              "Kp_r_PF"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vFAAH_inh_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "ROB",
+              "k_inh",
+              "FAAH_r",
+              "PF_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_inh_r"
+        },
+        {
+          "id": "FAAHinh_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "FAAHinh_r_amt_",
+              "ROB"
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAHinh_r"
+        },
+        {
+          "id": "vFAAH_inh_degr_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "ROB",
+              "k_deg_FAAH",
+              "FAAHinh_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_inh_degr_r"
+        },
+        {
+          "id": "c_NAAA_ROB",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "LIVER",
+                "b_NAAA_Liver"
+              ],
+              [
+                "Multiply",
+                "Gut",
+                "b_NAAA_Gut"
+              ],
+              [
+                "Multiply",
+                "Spleen",
+                "b_NAAA_Spleen"
+              ],
+              [
+                "Multiply",
+                "Kidney",
+                "b_NAAA_Kidney"
+              ],
+              [
+                "Multiply",
+                "Heart",
+                "b_NAAA_Heart"
+              ],
+              [
+                "Multiply",
+                "Lungs",
+                "b_NAAA_Lungs"
+              ],
+              [
+                "Multiply",
+                "Thymus",
+                "b_NAAA_Thymus"
+              ],
+              [
+                "Multiply",
+                "Testis",
+                "b_NAAA_Thymus",
+                "Testis"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vA_UE_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "c_NAAA_ROB",
+              "kcl_A",
+              "A_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_UE_r"
+        },
+        {
+          "id": "vO_UE_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "c_NAAA_ROB",
+              "kcl_O",
+              "O_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_UE_r"
+        },
+        {
+          "id": "vP_UE_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "c_NAAA_ROB",
+              "kcl_P",
+              "P_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_UE_r"
+        },
+        {
+          "id": "vL_UE_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "c_NAAA_ROB",
+              "kcl_L",
+              "L_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_UE_r"
+        },
+        {
+          "id": "vS_UE_r",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "c_NAAA_ROB",
+              "kcl_S",
+              "S_r"
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_UE_r"
+        },
+        {
+          "id": "FAAH_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "FAAH_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAH_m"
+        },
+        {
+          "id": "A_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "A_m"
+        },
+        {
+          "id": "O_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "O_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "O_m"
+        },
+        {
+          "id": "P_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "P_m"
+        },
+        {
+          "id": "L_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "L_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "L_m"
+        },
+        {
+          "id": "S_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "S_m"
+        },
+        {
+          "id": "FAAH_D_m",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              [
+                "Divide",
+                "A_m",
+                "Km_FAAH_A"
+              ],
+              [
+                "Divide",
+                "O_m",
+                "Km_FAAH_O"
+              ],
+              [
+                "Divide",
+                "P_m",
+                "Km_FAAH_P"
+              ],
+              [
+                "Divide",
+                "L_m",
+                "Km_FAAH_L"
+              ],
+              [
+                "Divide",
+                "S_m",
+                "Km_FAAH_S"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vA_degr_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "FAAH_m",
+                "kcat_FAAH",
+                "a_FAAH_A",
+                "A_m"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_A",
+                "FAAH_D_m"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_degr_m"
+        },
+        {
+          "id": "vO_degr_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "FAAH_m",
+                "kcat_FAAH",
+                "a_FAAH_O",
+                "O_m"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_O",
+                "FAAH_D_m"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_degr_m"
+        },
+        {
+          "id": "vP_degr_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "FAAH_m",
+                "kcat_FAAH",
+                "a_FAAH_P",
+                "P_m"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_P",
+                "FAAH_D_m"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_degr_m"
+        },
+        {
+          "id": "vL_degr_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "FAAH_m",
+                "kcat_FAAH",
+                "a_FAAH_L",
+                "L_m"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_L",
+                "FAAH_D_m"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_degr_m"
+        },
+        {
+          "id": "vS_degr_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "FAAH_m",
+                "kcat_FAAH",
+                "a_FAAH_S",
+                "S_m"
+              ],
+              [
+                "Multiply",
+                "Km_FAAH_S",
+                "FAAH_D_m"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_degr_m"
+        },
+        {
+          "id": "vFAAH_syn_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "FAAH_t",
+              "b_FAAH_MEC",
+              "k_deg_FAAH"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_syn_m"
+        },
+        {
+          "id": "vFAAH_degr_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "k_deg_FAAH",
+              "FAAH_m"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_degr_m"
+        },
+        {
+          "id": "PF_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PF_p",
+              "Kp_m_PF"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vFAAH_inh_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "k_inh",
+              "FAAH_m",
+              "PF_m"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_inh_m"
+        },
+        {
+          "id": "FAAHinh_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "FAAHinh_m_amt_",
+              "MEC"
+            ],
+            "format": "math-json"
+          },
+          "title": "FAAHinh_m"
+        },
+        {
+          "id": "vFAAH_inh_degr_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "k_deg_FAAH",
+              "FAAHinh_m"
+            ],
+            "format": "math-json"
+          },
+          "title": "vFAAH_inh_degr_m"
+        },
+        {
+          "id": "A_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_p_amt_",
+              "PLASMA"
+            ],
+            "format": "math-json"
+          },
+          "title": "A_p"
+        },
+        {
+          "id": "vA_m_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "ktr_m_p_A",
+                [
+                  "Add",
+                  "A_m",
+                  [
+                    "Negate",
+                    [
+                      "Multiply",
+                      "A_p",
+                      "Ktr_p_m_A"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "Add",
+                "A_m",
+                "A_p",
+                "Km_p_m_A"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_m_p"
+        },
+        {
+          "id": "O_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "O_p_amt_",
+              "PLASMA"
+            ],
+            "format": "math-json"
+          },
+          "title": "O_p"
+        },
+        {
+          "id": "vo_m_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_O",
+              [
+                "Add",
+                "O_m",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "O_p",
+                    "Ktr_p_m_O"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vo_m_p"
+        },
+        {
+          "id": "P_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P_p_amt_",
+              "PLASMA"
+            ],
+            "format": "math-json"
+          },
+          "title": "P_p"
+        },
+        {
+          "id": "vP_m_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_P",
+              [
+                "Add",
+                "P_m",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "P_p",
+                    "Ktr_p_m_P"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_m_p"
+        },
+        {
+          "id": "L_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "L_p_amt_",
+              "PLASMA"
+            ],
+            "format": "math-json"
+          },
+          "title": "L_p"
+        },
+        {
+          "id": "vL_m_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_L",
+              [
+                "Add",
+                "L_m",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "L_p",
+                    "Ktr_p_m_L"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_m_p"
+        },
+        {
+          "id": "S_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S_p_amt_",
+              "PLASMA"
+            ],
+            "format": "math-json"
+          },
+          "title": "S_p"
+        },
+        {
+          "id": "vS_m_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_S",
+              [
+                "Add",
+                "S_m",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "S_p",
+                    "Ktr_p_m_S"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_m_p"
+        },
+        {
+          "id": "vA_b_m",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "MEC",
+                "ktr_m_p_A",
+                [
+                  "Add",
+                  "A_b",
+                  [
+                    "Negate",
+                    "A_m"
+                  ]
+                ]
+              ],
+              [
+                "Add",
+                "A_m",
+                "A_b",
+                "Km_p_m_A"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_b_m"
+        },
+        {
+          "id": "vO_b_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_O",
+              [
+                "Add",
+                "O_b",
+                [
+                  "Negate",
+                  "O_m"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_b_m"
+        },
+        {
+          "id": "vP_b_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_P",
+              [
+                "Add",
+                "P_b",
+                [
+                  "Negate",
+                  "P_m"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_b_m"
+        },
+        {
+          "id": "vL_b_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_L",
+              [
+                "Add",
+                "L_b",
+                [
+                  "Negate",
+                  "L_m"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_b_m"
+        },
+        {
+          "id": "vS_b_m",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "MEC",
+              "ktr_m_p_S",
+              [
+                "Add",
+                "S_b",
+                [
+                  "Negate",
+                  "S_m"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_b_m"
+        },
+        {
+          "id": "vA_r_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "PLASMA",
+                "ktr_r_p",
+                [
+                  "Add",
+                  "A_r",
+                  [
+                    "Negate",
+                    [
+                      "Multiply",
+                      "A_p",
+                      "Ktr_p_r_A"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "Add",
+                "A_r",
+                "A_p",
+                "Km_p_m_A"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vA_r_p"
+        },
+        {
+          "id": "vO_r_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PLASMA",
+              "ktr_r_p",
+              [
+                "Add",
+                "O_r",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "O_p",
+                    "Ktr_p_r_O"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vO_r_p"
+        },
+        {
+          "id": "vP_r_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PLASMA",
+              "ktr_r_p",
+              [
+                "Add",
+                "P_r",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "P_p",
+                    "Ktr_p_r_P"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vP_r_p"
+        },
+        {
+          "id": "vL_r_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PLASMA",
+              "ktr_r_p",
+              [
+                "Add",
+                "L_r",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "L_p",
+                    "Ktr_p_r_L"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vL_r_p"
+        },
+        {
+          "id": "vS_r_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "PLASMA",
+              "ktr_r_p",
+              [
+                "Add",
+                "S_r",
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    "S_p",
+                    "Ktr_p_r_S"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "vS_r_p"
+        },
+        {
+          "id": "PFM_gut",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "PFM_gut_amt_",
+              "Default"
+            ],
+            "format": "math-json"
+          },
+          "title": "PFM_gut"
+        },
+        {
+          "id": "F_PFM",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "Emax_PFM",
+                "Dose"
+              ],
+              [
+                "Add",
+                "ED50",
+                "Dose"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "MD",
+          "rhs": {
+            "expr": [
+              "Add",
+              "PFM_gut",
+              [
+                "Multiply",
+                1000000,
+                "Dose",
+                "F_PFM"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "absorp",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs_PFM",
+              "MD"
+            ],
+            "format": "math-json"
+          },
+          "title": "absorp"
+        },
+        {
+          "id": "PFM_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "PFM_r_amt_",
+              "Default"
+            ],
+            "format": "math-json"
+          },
+          "title": "PFM_r"
+        },
+        {
+          "id": "dist",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "kout_PFM",
+                "PFM_p"
+              ],
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  "kin_PFM",
+                  "PFM_r"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "dist"
+        },
+        {
+          "id": "elim",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "klinear_PFM",
+                "PFM_p"
+              ],
+              [
+                "Divide",
+                [
+                  "Divide",
+                  [
+                    "Multiply",
+                    "Vm_PFM",
+                    "PFM_p"
+                  ],
+                  [
+                    "Add",
+                    "Km_PFM",
+                    [
+                      "Divide",
+                      "PFM_p",
+                      "Vss_PFM"
+                    ]
+                  ]
+                ],
+                "Vss_PFM"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "elim"
+        },
+        {
+          "id": "F_r",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                1500,
+                "FAAH_r"
+              ],
+              [
+                "Add",
+                "FAAHinh_r",
+                "FAAH_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "PFG_p",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                0.001,
+                "PFM_p"
+              ],
+              "Vss_PFM"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "AG_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.001,
+              "A_p",
+              "M_A"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "OG_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.001,
+              "O_p",
+              "M_O"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "PG_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.001,
+              "P_p",
+              "M_P"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "LG_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.001,
+              "L_p",
+              "M_L"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "SG_p",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.001,
+              "S_p",
+              "M_S"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "CB1_b",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Divide",
+                  "A_b",
+                  "Kd_CB1_A"
+                ],
+                [
+                  "Divide",
+                  "AG2_b",
+                  "Kd_AG2"
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Divide",
+                  "A_b",
+                  "Kd_CB1_A"
+                ],
+                [
+                  "Divide",
+                  "AG2_b",
+                  "Kd_AG2"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "tid",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "t",
+              24
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "A_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vA_degr_b"
+                  ],
+                  "vA_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vA_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vA_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "O_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vO_degr_b"
+                  ],
+                  "vO_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vO_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vO_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vP_degr_b"
+                  ],
+                  "vP_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vP_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vP_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "L_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vL_degr_b"
+                  ],
+                  "vL_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vL_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vL_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vS_degr_b"
+                  ],
+                  "vS_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vS_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vS_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NAPE_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNAPE_syn_b",
+              [
+                "Negate",
+                "vA_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NOPE_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNOPE_syn_b",
+              [
+                "Negate",
+                "vO_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NPPE_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNPPE_syn_b",
+              [
+                "Negate",
+                "vP_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NLPE_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNLPE_syn_b",
+              [
+                "Negate",
+                "vL_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NSPE_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNSPE_syn_b",
+              [
+                "Negate",
+                "vS_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "FAAH_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "vFAAH_syn_b",
+                [
+                  "Negate",
+                  "vFAAH_degr_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vFAAH_inh_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "FAAHinh_b_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vFAAH_inh_b",
+              [
+                "Negate",
+                "vFAAH_inh_degr_b"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "A_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vA_degr_r"
+                  ],
+                  "vA_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vA_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vA_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "O_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vO_degr_r"
+                  ],
+                  "vO_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vO_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vO_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vP_degr_r"
+                  ],
+                  "vP_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vP_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vP_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "L_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vL_degr_r"
+                  ],
+                  "vL_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vL_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vL_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vS_degr_r"
+                  ],
+                  "vS_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vS_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vS_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NAPE_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNAPE_syn_r",
+              [
+                "Negate",
+                "vA_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NOPE_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNOPE_syn_r",
+              [
+                "Negate",
+                "vO_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NPPE_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNPPE_syn_r",
+              [
+                "Negate",
+                "vP_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NLPE_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNLPE_syn_r",
+              [
+                "Negate",
+                "vL_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "NSPE_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vNSPE_syn_r",
+              [
+                "Negate",
+                "vS_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "FAAH_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "vFAAH_syn_r",
+                [
+                  "Negate",
+                  "vFAAH_degr_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vFAAH_inh_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "FAAHinh_r_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vFAAH_inh_r",
+              [
+                "Negate",
+                "vFAAH_inh_degr_r"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "A_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vA_degr_m"
+              ],
+              [
+                "Negate",
+                "vA_m_p"
+              ],
+              "vA_b_m"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "O_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vO_degr_m"
+              ],
+              [
+                "Negate",
+                "vo_m_p"
+              ],
+              "vO_b_m"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vP_degr_m"
+              ],
+              [
+                "Negate",
+                "vP_m_p"
+              ],
+              "vP_b_m"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "L_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vL_degr_m"
+              ],
+              [
+                "Negate",
+                "vL_m_p"
+              ],
+              "vL_b_m"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vS_degr_m"
+              ],
+              [
+                "Negate",
+                "vS_m_p"
+              ],
+              "vS_b_m"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "FAAH_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "vFAAH_syn_m",
+                [
+                  "Negate",
+                  "vFAAH_degr_m"
+                ]
+              ],
+              [
+                "Negate",
+                "vFAAH_inh_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "FAAHinh_m_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vFAAH_inh_m",
+              [
+                "Negate",
+                "vFAAH_inh_degr_m"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "A_p_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vA_m_p",
+              "vA_r_p"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "O_p_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vo_m_p",
+              "vO_r_p"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P_p_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vP_m_p",
+              "vP_r_p"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "L_p_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vL_m_p",
+              "vL_r_p"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S_p_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vS_m_p",
+              "vS_r_p"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "PFM_gut_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "absorp"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "PFM_p_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "absorp",
+                [
+                  "Negate",
+                  "dist"
+                ]
+              ],
+              [
+                "Negate",
+                "elim"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "PFM_r_amt_",
+          "rhs": {
+            "expr": "dist",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

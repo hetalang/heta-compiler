@@ -1,0 +1,725 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:33:15.737Z",
+    "platformId": "mm",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "f72e1d3dc896faaced06fec8a3c99800a4efb595d6712c03ba27d691bd2364cd",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "mm",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "default_comp",
+    "notes": "Note for the Default compartment",
+    "space": "mm",
+    "title": "Default compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "L",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km",
+    "num": 2.5,
+    "space": "mm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "uM",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "default_comp",
+    "id": "P",
+    "output": true,
+    "space": "mm",
+    "title": "product",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "uM",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "S"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "P"
+      }
+    ],
+    "assignments": {
+      "ode_": "Vmax * S / (Km + S) * default_comp"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "notes": "Transformation of __substrate__ to __product__",
+    "reversible": false,
+    "space": "mm",
+    "title": "Michaelis-Menten reaction",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "minute",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "umole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "class": "Species",
+    "compartment": "default_comp",
+    "id": "S",
+    "output": true,
+    "space": "mm",
+    "title": "substrate",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "uM",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "mm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "minute",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Vmax",
+    "num": 0.1,
+    "space": "mm",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "minute",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "uM",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "cal",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "joule",
+        "multiplier": 4.1868
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "cell",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "item",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "cm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 0.01
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "dL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 0.1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-18
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fs",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "g",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "h",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "hour",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kat",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "katal",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kcal",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "joule",
+        "multiplier": 4186.8
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kcell",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "item",
+        "multiplier": 1000
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1000
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "L",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "m",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "M",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-13
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ms",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ng",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ns",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "percent",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "dimensionless",
+        "multiplier": 0.01
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ps",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "s",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ug",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "uL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "UL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "dimensionless",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "um",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "uM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "umole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "us",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "week",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "day",
+        "multiplier": 7
+      }
+    ]
+  }
+]

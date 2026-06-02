@@ -1,0 +1,272 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:33:36.786Z",
+    "platformId": "mm",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "165a37676feb0aa5c37fe12e81b649eb03a4a6f9ea392cd5afcf90eb2aab050a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "one_comp_saturation",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "one_comp",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km",
+    "num": 1.1
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Vmax",
+    "num": 1.2
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "class": "Species",
+    "compartment": "comp0",
+    "id": "a0",
+    "isAmount": true,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp0",
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5.2"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs",
+    "num": 0.01,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel",
+    "num": 0.01,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km",
+    "num": 1.1,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s1",
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs * a0"
+    },
+    "class": "Reaction",
+    "id": "vabs",
+    "reversible": false,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "Vmax * s1 * comp1 / (Km + s1)"
+    },
+    "class": "Reaction",
+    "id": "vel",
+    "reversible": false,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Vmax",
+    "num": 1.2,
+    "space": "one_comp_saturation"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "class": "Species",
+    "compartment": "comp0",
+    "id": "a0",
+    "isAmount": true,
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp0",
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5.2"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs",
+    "num": 0.01,
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel",
+    "num": 0.01,
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km",
+    "num": 1.1,
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s1",
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs * a0"
+    },
+    "class": "Reaction",
+    "id": "vabs",
+    "reversible": false,
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kel * s1 * comp1"
+    },
+    "class": "Reaction",
+    "id": "vel",
+    "reversible": false,
+    "space": "one_comp"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Vmax",
+    "num": 1.2,
+    "space": "one_comp"
+  }
+]

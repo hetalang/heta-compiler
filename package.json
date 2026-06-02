@@ -10,7 +10,7 @@
     "./web": "./dist/web.js"
   },
   "scripts": {
-    "test:dev": "mocha test/math-json --config=./test/.mocharc.json",
+    "test:dev": "mocha test/cases-build-masters --config=./test/.mocharc.json",
     "test": "mocha test --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -c .jsdoc.json",
     "jsdoc:sitemap": "node scripts/generate-jsdoc-sitemap.js",

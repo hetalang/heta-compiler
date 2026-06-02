@@ -1,0 +1,121 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:38:24.741Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "826a520edf8328ccb3750736595cb3213a625ccc8f408ceeb02095cd5c672391",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "x1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.1"
+    },
+    "class": "Process",
+    "id": "pr1",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * S1 * comp1"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10",
+      "sw1": "S1 + 10"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "S1",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10",
+      "sw1": "S2 + 10"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "S2",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sw1",
+    "trigger": "S1 < 6"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sw2",
+    "trigger": "(S1 < 10) and (t > 4e+5)"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "x1 + 100"
+    },
+    "class": "Record",
+    "id": "x1",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "x2 + 100"
+    },
+    "class": "Record",
+    "id": "x2",
+    "output": true
+  }
+]

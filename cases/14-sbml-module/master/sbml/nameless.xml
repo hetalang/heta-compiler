@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:37:49.901Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_litre" name="litre">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole" name="mole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_1n6mole" name="(1e-6 mole)">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="__h" name="_h">
+  <listOfUnits>
+    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="compartment"
+        name="compartment"
+        constant="false"
+        size="1"
+        units="_litre"
+        metaid="compartment"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="S1"
+        name="S1"
+        compartment="compartment"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        substanceUnits="_mole"
+        metaid="S1"
+        >
+      </species>
+      <species
+        id="S2"
+        name="S2"
+        compartment="compartment"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        substanceUnits="_1n6mole"
+        metaid="S2"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="k1"
+        name="k1"
+        constant="false"
+        value="1"
+        units="__h"
+        metaid="k1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="S1"
+        metaid="S1::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><cn>1</cn><ci>compartment</ci></apply></math>
+      </initialAssignment>
+      <initialAssignment
+        symbol="S2"
+        metaid="S2::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><cn>0</cn><ci>compartment</ci></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  
+    <listOfReactions>
+      <reaction
+        id="reaction1"
+        name="reaction1"
+        reversible="false"
+        fast="false"
+        metaid="reaction1"
+        >
+        <listOfReactants>
+          <speciesReference species="S1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S2" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>compartment</ci><ci>k1</ci></apply><ci>S1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+    <listOfEvents>
+      <event
+        id="event1" metaid="event1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><lt/><ci>S1</ci><cn>0.1</cn></apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="S1"
+            metaid="S1::event1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

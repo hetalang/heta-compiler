@@ -1,0 +1,155 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:36:44.232Z",
+    "platformId": "mm",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "37e2fae16f6cee899f7a629579fdae1ab84ee3ff08627f3ea91476829ca07f2b",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "a0 + 10"
+    },
+    "class": "Species",
+    "compartment": "comp0",
+    "id": "a0",
+    "isAmount": true,
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp0",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5.2",
+      "sw1": "6"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kabs",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kel",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw2": "s1 + 2"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s1",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw2": "s2 + 2"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s2",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw0",
+    "start": 40
+  },
+  {
+    "action": "upsert",
+    "active": false,
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "period": 12,
+    "start": 0,
+    "stop": 60
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw2",
+    "period": 24,
+    "start": "sw2_start"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "sw2_start",
+    "num": 5
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "a0"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kabs * a0"
+    },
+    "class": "Reaction",
+    "id": "vabs",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "kel * s1 * comp1"
+    },
+    "class": "Reaction",
+    "id": "vel",
+    "reversible": false
+  }
+]

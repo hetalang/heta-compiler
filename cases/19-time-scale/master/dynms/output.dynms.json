@@ -1,0 +1,180 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:39:40.634Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "zzz",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        },
+        {
+          "id": "tau",
+          "value": 12
+        },
+        {
+          "id": "s3_0",
+          "value": 15
+        }
+      ],
+      "states": [
+        {
+          "id": "comp1",
+          "initial": 1.1,
+          "static": true
+        },
+        {
+          "id": "s1",
+          "initial": 12
+        },
+        {
+          "id": "s2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1.1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "s3_0",
+              [
+                "Exp",
+                [
+                  "Divide",
+                  "t",
+                  "tau"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              [
+                "Power",
+                "s1",
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s2_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "s1",
+              "s2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "t",
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "tid",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                0.041667,
+                "t"
+              ],
+              0
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "s1",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s2_amt_",
+          "rhs": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": [
+        {
+          "symbol": "s1"
+        },
+        {
+          "symbol": "s2"
+        },
+        {
+          "symbol": "s3"
+        },
+        {
+          "symbol": "r1"
+        }
+      ]
+    }
+  ]
+}

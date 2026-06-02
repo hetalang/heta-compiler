@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:34:05.358Z","platformId":"mm","namespaceId":"invitro","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="invitro" 
+    metaid="invitro"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="tot_vol"
+        constant="false"
+        size="0.1"
+        metaid="invitro::tot_vol"
+        >
+      </compartment>
+      <compartment
+        id="neu_vol"
+        constant="false"
+        metaid="invitro::neu_vol"
+        >
+      </compartment>
+      <compartment
+        id="ext"
+        constant="false"
+        size="1"
+        metaid="invitro::ext"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="ATP_neu"
+        compartment="neu_vol"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        metaid="invitro::ATP_neu"
+        >
+      </species>
+      <species
+        id="S1"
+        compartment="tot_vol"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="150"
+        metaid="invitro::S1"
+        >
+      </species>
+      <species
+        id="neu_count"
+        compartment="tot_vol"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="1000000"
+        metaid="invitro::neu_count"
+        >
+      </species>
+      <species
+        id="ADP_neu"
+        compartment="neu_vol"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        metaid="invitro::ADP_neu"
+        >
+      </species>
+      <species
+        id="P1_neu"
+        compartment="neu_vol"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="invitro::P1_neu"
+        >
+      </species>
+      <species
+        id="P1_ext"
+        compartment="ext"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="invitro::P1_ext"
+        >
+      </species>
+      <species
+        id="IL15_ext"
+        compartment="ext"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="invitro::IL15_ext"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="P1_mean"
+        constant="false"
+        metaid="invitro::P1_mean"
+        >
+      </parameter>
+      <parameter
+        id="AXP_neu"
+        constant="true"
+        value="0.1"
+        metaid="invitro::AXP_neu"
+        >
+      </parameter>
+      <parameter
+        id="neu_size"
+        constant="true"
+        value="1e-12"
+        metaid="invitro::neu_size"
+        >
+      </parameter>
+      <parameter
+        id="K_eq_ADP"
+        constant="true"
+        value="10"
+        metaid="invitro::K_eq_ADP"
+        >
+      </parameter>
+      <parameter
+        id="ksyn_ATP"
+        constant="true"
+        value="0.0001"
+        metaid="invitro::ksyn_ATP"
+        >
+      </parameter>
+      <parameter
+        id="ksyn_P1"
+        constant="true"
+        value="0.01"
+        metaid="invitro::ksyn_P1"
+        >
+      </parameter>
+      <parameter
+        id="Km_S1"
+        constant="true"
+        value="1.2"
+        metaid="invitro::Km_S1"
+        >
+      </parameter>
+      <parameter
+        id="k_tr_P1"
+        constant="true"
+        value="0.013"
+        metaid="invitro::k_tr_P1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="ATP_neu"
+        metaid="invitro::ATP_neu::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><ci>AXP_neu</ci><ci>K_eq_ADP</ci></apply><apply><plus/><cn>1</cn><ci>K_eq_ADP</ci></apply></apply></math>
+      </initialAssignment>
+      <initialAssignment
+        symbol="ADP_neu"
+        metaid="invitro::ADP_neu::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><ci>AXP_neu</ci><apply><plus/><cn>1</cn><ci>K_eq_ADP</ci></apply></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="neu_vol"
+      metaid="invitro::neu_vol::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>neu_count</ci><ci>neu_size</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="ext"
+      metaid="invitro::ext::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>tot_vol</ci><ci>neu_vol</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P1_mean"
+      metaid="invitro::P1_mean::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><plus/><apply><times/><ci>P1_ext</ci><ci>ext</ci></apply><apply><times/><ci>P1_neu</ci><ci>neu_vol</ci></apply></apply><ci>tot_vol</ci></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="r_syn_ATP"
+        reversible="false"
+        fast="false"
+        metaid="invitro::r_syn_ATP"
+        >
+        <listOfReactants>
+          <speciesReference species="ADP_neu" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ATP_neu" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>ksyn_ATP</ci><ci>neu_vol</ci></apply><apply><minus/><ci>ADP_neu</ci><apply><divide/><ci>ATP_neu</ci><ci>K_eq_ADP</ci></apply></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="r_syn_P1"
+        reversible="false"
+        fast="false"
+        metaid="invitro::r_syn_P1"
+        >
+        <listOfReactants>
+          <speciesReference species="ATP_neu" stoichiometry="2"/>
+          <speciesReference species="S1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="ADP_neu" stoichiometry="2"/>
+          <speciesReference species="P1_neu" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference species="IL15_ext"/>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><apply><times/><ci>ksyn_P1</ci><ci>neu_vol</ci></apply><ci>S1</ci></apply><apply><plus/><ci>S1</ci><ci>Km_S1</ci></apply></apply><apply><power/><ci>ATP_neu</ci><cn>2</cn></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="r_tr_P1"
+        reversible="false"
+        fast="false"
+        metaid="invitro::r_tr_P1"
+        >
+        <listOfReactants>
+          <speciesReference species="P1_neu" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="P1_ext" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k_tr_P1</ci><ci>neu_vol</ci></apply><apply><minus/><ci>P1_neu</ci><ci>P1_ext</ci></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

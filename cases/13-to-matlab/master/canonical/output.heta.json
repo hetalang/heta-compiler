@@ -1,0 +1,844 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:37:23.566Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "948781b86ec23fe7cb3c2e2d0fe47ef2f0cbb3119a0e24be95c13091ac25b13f",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "AUC_s3",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1.1"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "notes": "This is the first compartment.",
+    "title": "First Compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "L",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2.2"
+    },
+    "class": "Compartment",
+    "id": "comp2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "dose",
+    "num": 10
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.022
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 0.0021
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k4",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Keq3",
+    "num": 4
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "AUC_s3"
+      }
+    ],
+    "assignments": {
+      "ode_": "s3"
+    },
+    "class": "Process",
+    "id": "pr1",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "PS",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * (s1 - s2) * PS"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "s5"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s4"
+      },
+      {
+        "stoichiometry": 2,
+        "target": "s3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * s2 * s5 * comp2"
+    },
+    "class": "Reaction",
+    "id": "r2",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s3"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s4"
+      }
+    ],
+    "assignments": {
+      "ode_": "k3 * (s3 - s4 / Keq3) * comp2"
+    },
+    "class": "Reaction",
+    "id": "r3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k4 * s3 * comp2"
+    },
+    "class": "Reaction",
+    "id": "r4",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "k1 * s1 * PS",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "rec1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10",
+      "sw1": "s1 + dose"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s1",
+    "isAmount": true,
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "s2_0",
+      "sw1": "s2 + dose / comp2"
+    },
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "s2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "s2_0",
+    "num": 0.3
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "s3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5"
+    },
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "s4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2.4"
+    },
+    "boundary": true,
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "s5"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "period": 6,
+    "start": 12,
+    "stop": 60
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "rec1"
+    },
+    "class": "Record",
+    "id": "x1",
+    "output": true
+  },
+  {
+    "action": "defineUnit",
+    "id": "cal",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "joule",
+        "multiplier": 4.1868
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "cell",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "item",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "cm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 0.01
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "dL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 0.1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-18
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "fs",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "g",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "h",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "hour",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kat",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "katal",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kcal",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "joule",
+        "multiplier": 4186.8
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kcell",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "item",
+        "multiplier": 1000
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "kM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1000
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "L",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "m",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "M",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-13
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "mmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ms",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 0.001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ng",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ns",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "percent",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "dimensionless",
+        "multiplier": 0.01
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pg",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "pmole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ps",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1e-12
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "s",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "ug",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "kilogram",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "uL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "UL",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "dimensionless",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "um",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "uM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "umole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "us",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "week",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "day",
+        "multiplier": 7
+      }
+    ]
+  }
+]

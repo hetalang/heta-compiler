@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:40:14.433Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfParameters>
+      <parameter
+        id="p1"
+        constant="false"
+        value="1"
+        metaid="p1"
+        >
+      </parameter>
+      <parameter
+        id="x1"
+        constant="false"
+        value="10"
+        metaid="x1"
+        >
+      </parameter>
+      <parameter
+        id="x2"
+        constant="false"
+        value="0"
+        metaid="x2"
+        >
+      </parameter>
+      <parameter
+        id="pr1"
+        constant="false"
+        metaid="pr1"
+        >
+      </parameter>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.01"
+        metaid="k1"
+        >
+      </parameter>
+      <parameter
+        id="xxx"
+        constant="true"
+        value="1224"
+        metaid="xxx"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="pr1"
+      metaid="pr1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>k1</ci><ci>x1</ci></apply></math>
+    </assignmentRule>
+    <rateRule
+      variable="x1"
+      metaid="x1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          <apply>
+            <times/>
+            <cn>-1</cn>
+            <ci>pr1</ci>
+          </apply>
+        </apply>
+      </math>
+    </rateRule>
+  
+    <rateRule
+      variable="x2"
+      metaid="x2::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          <apply>
+            <times/>
+            <cn>1</cn>
+            <ci>pr1</ci>
+          </apply>
+        </apply>
+      </math>
+    </rateRule>
+  
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+  
+  </model>
+</sbml>

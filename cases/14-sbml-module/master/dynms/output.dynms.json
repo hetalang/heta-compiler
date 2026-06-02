@@ -1,0 +1,157 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:37:56.807Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "states": [
+        {
+          "id": "compartment",
+          "initial": 1,
+          "static": true,
+          "title": "compartment"
+        },
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "k1",
+          "initial": 1,
+          "static": true,
+          "title": "k1"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "compartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "compartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "compartment",
+              "k1",
+              "S1"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "S1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "reaction1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S2_amt_",
+          "rhs": {
+            "expr": "reaction1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "event1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Less",
+                "S1",
+                0.1
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  1,
+                  "compartment"
+                ],
+                "format": "math-json"
+              },
+              "state": "S1_amt_"
+            }
+          ],
+          "active": true,
+          "title": "event1"
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

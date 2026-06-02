@@ -1,0 +1,172 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:35:13.692Z",
+  "platformId": "use-case",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        }
+      ],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "RateLaws",
+      "constants": [],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "model",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        },
+        {
+          "id": "Km_A",
+          "value": 0.8
+        }
+      ],
+      "states": [
+        {
+          "id": "comp",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "A_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "B_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "enzyme_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1e-8,
+              1
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "B",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "B_amt_",
+              "comp"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "enzyme",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "enzyme_amt_",
+              "comp"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "A",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_amt_",
+              "comp"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "k1",
+                  "enzyme",
+                  "A"
+                ],
+                [
+                  "Add",
+                  "Km_A",
+                  "A"
+                ]
+              ],
+              "comp"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "A_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "B_amt_",
+          "rhs": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

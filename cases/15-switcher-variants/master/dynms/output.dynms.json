@@ -1,0 +1,415 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:38:17.618Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        },
+        {
+          "id": "k2",
+          "value": 0.01
+        }
+      ],
+      "states": [
+        {
+          "id": "rec1",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "comp1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "spec_amt1",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "spec_conc1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        },
+        {
+          "id": "comp2",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "spec_amt2",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "spec_conc2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        },
+        {
+          "id": "comp3",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "spec_amt3",
+          "initial": 0,
+          "static": true
+        },
+        {
+          "id": "spec_conc3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        },
+        {
+          "id": "comp4",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "spec_amt4",
+          "initial": 0
+        },
+        {
+          "id": "spec_conc4_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "comp5",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "spec_amt5",
+          "initial": 0
+        },
+        {
+          "id": "spec_conc5_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "comp6",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "spec_amt6",
+          "initial": 0
+        },
+        {
+          "id": "spec_conc6_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "spec_conc1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "spec_conc1_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "spec_conc2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "spec_conc2_amt_",
+              "comp2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "spec_conc3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "spec_conc3_amt_",
+              "comp3"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "spec_conc4",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "spec_conc4_amt_",
+              "comp4"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r4",
+          "rhs": {
+            "expr": 0.1,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "spec_conc5",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "spec_conc5_amt_",
+              "comp5"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r5",
+          "rhs": {
+            "expr": 0.1,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "spec_conc6",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "spec_conc6_amt_",
+              "comp6"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r6",
+          "rhs": {
+            "expr": 0.1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "spec_amt4",
+          "rhs": {
+            "expr": "r4",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "spec_conc4_amt_",
+          "rhs": {
+            "expr": "r4",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "spec_amt5",
+          "rhs": {
+            "expr": "r5",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "spec_conc5_amt_",
+          "rhs": {
+            "expr": "r5",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "spec_amt6",
+          "rhs": {
+            "expr": "r6",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "spec_conc6_amt_",
+          "rhs": {
+            "expr": "r6",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "time",
+            "start": 10
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 12,
+                "format": "math-json"
+              },
+              "state": "rec1"
+            },
+            {
+              "rhs": {
+                "expr": 10,
+                "format": "math-json"
+              },
+              "state": "comp1"
+            },
+            {
+              "rhs": {
+                "expr": 8,
+                "format": "math-json"
+              },
+              "state": "spec_amt1"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  6,
+                  "comp1"
+                ],
+                "format": "math-json"
+              },
+              "state": "spec_conc1_amt_"
+            },
+            {
+              "rhs": {
+                "expr": 8,
+                "format": "math-json"
+              },
+              "state": "spec_amt2"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  6,
+                  "comp2"
+                ],
+                "format": "math-json"
+              },
+              "state": "spec_conc2_amt_"
+            },
+            {
+              "rhs": {
+                "expr": 10,
+                "format": "math-json"
+              },
+              "state": "comp3"
+            },
+            {
+              "rhs": {
+                "expr": 10,
+                "format": "math-json"
+              },
+              "state": "comp4"
+            },
+            {
+              "rhs": {
+                "expr": 8,
+                "format": "math-json"
+              },
+              "state": "spec_amt4"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  6,
+                  "comp4"
+                ],
+                "format": "math-json"
+              },
+              "state": "spec_conc4_amt_"
+            },
+            {
+              "rhs": {
+                "expr": 8,
+                "format": "math-json"
+              },
+              "state": "spec_amt5"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  6,
+                  "comp5"
+                ],
+                "format": "math-json"
+              },
+              "state": "spec_conc5_amt_"
+            },
+            {
+              "rhs": {
+                "expr": 10,
+                "format": "math-json"
+              },
+              "state": "comp6"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

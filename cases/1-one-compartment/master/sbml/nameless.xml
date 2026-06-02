@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:33:43.792Z","platformId":"mm","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfParameters>
+      <parameter
+        id="kabs"
+        constant="true"
+        value="0.01"
+        metaid="kabs"
+        >
+      </parameter>
+      <parameter
+        id="kel"
+        constant="true"
+        value="0.01"
+        metaid="kel"
+        >
+      </parameter>
+      <parameter
+        id="Vmax"
+        constant="true"
+        value="1.2"
+        metaid="Vmax"
+        >
+      </parameter>
+      <parameter
+        id="Km"
+        constant="true"
+        value="1.1"
+        metaid="Km"
+        >
+      </parameter>
+    </listOfParameters>
+  
+  
+  </model>
+</sbml>

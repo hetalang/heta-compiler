@@ -1,0 +1,541 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:33:57.844Z",
+    "platformId": "mm",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "d1cf42ec197500451a8572b3a4e9019349d1c7dcd1b517c6540d84cddb9e92ad",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "invitro",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "invivo",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "AXP_neu",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k_prol",
+    "num": 0.0001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "plasma",
+    "num": 2.5
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "AXP_neu / (1 + K_eq_ADP)"
+    },
+    "class": "Species",
+    "compartment": "neu_vol",
+    "id": "ADP_neu",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "AXP_neu * K_eq_ADP / (1 + K_eq_ADP)"
+    },
+    "class": "Species",
+    "compartment": "neu_vol",
+    "id": "ATP_neu",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "AXP_neu",
+    "num": 0.1,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "tot_vol - neu_vol",
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "ext",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "ext",
+    "id": "IL15_ext",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "K_eq_ADP",
+    "num": 10,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k_tr_P1",
+    "num": 0.013,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km_S1",
+    "num": 1.2,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ksyn_ATP",
+    "num": 0.0001,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ksyn_P1",
+    "num": 0.01,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1e+6"
+    },
+    "class": "Species",
+    "compartment": "tot_vol",
+    "id": "neu_count",
+    "isAmount": true,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "neu_size",
+    "num": 1e-12,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "neu_count * neu_size"
+    },
+    "class": "Compartment",
+    "id": "neu_vol",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "ext",
+    "id": "P1_ext",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(P1_ext * ext + P1_neu * neu_vol) / tot_vol"
+    },
+    "class": "Record",
+    "id": "P1_mean",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "neu_vol",
+    "id": "P1_neu",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "ADP_neu"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "ATP_neu"
+      }
+    ],
+    "assignments": {
+      "ode_": "ksyn_ATP * neu_vol * (ADP_neu - ATP_neu / K_eq_ADP)"
+    },
+    "class": "Reaction",
+    "id": "r_syn_ATP",
+    "reversible": false,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -2,
+        "target": "ATP_neu"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 2,
+        "target": "ADP_neu"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "P1_neu"
+      }
+    ],
+    "assignments": {
+      "ode_": "ksyn_P1 * neu_vol * S1 / (S1 + Km_S1) * ATP_neu ^ 2"
+    },
+    "class": "Reaction",
+    "id": "r_syn_P1",
+    "modifiers": [
+      {
+        "target": "IL15_ext"
+      }
+    ],
+    "reversible": false,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "P1_neu"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "P1_ext"
+      }
+    ],
+    "assignments": {
+      "ode_": "k_tr_P1 * neu_vol * (P1_neu - P1_ext)"
+    },
+    "class": "Reaction",
+    "id": "r_tr_P1",
+    "reversible": false,
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "150"
+    },
+    "class": "Species",
+    "compartment": "tot_vol",
+    "id": "S1",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.1"
+    },
+    "class": "Compartment",
+    "id": "tot_vol",
+    "space": "invitro"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "AXP_neu / (1 + K_eq_ADP)"
+    },
+    "class": "Species",
+    "compartment": "neu_vol",
+    "id": "ADP_neu",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "AXP_neu * K_eq_ADP / (1 + K_eq_ADP)"
+    },
+    "class": "Species",
+    "compartment": "neu_vol",
+    "id": "ATP_neu",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.1"
+    },
+    "class": "Record",
+    "id": "AXP_neu",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5.2"
+    },
+    "class": "Compartment",
+    "id": "blood",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "plasma"
+    },
+    "class": "Compartment",
+    "id": "ext",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "ext",
+    "id": "IL15_ext",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "K_eq_ADP",
+    "num": 10,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k_prol",
+    "num": 0.0001,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k_tr_P1",
+    "num": 0.013,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km_S1",
+    "num": 1.2,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ksyn_ATP",
+    "num": 0.0001,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "ksyn_P1",
+    "num": 0.01,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1e-9"
+    },
+    "class": "Species",
+    "compartment": "blood",
+    "id": "neu_count",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "neu_size",
+    "num": 1e-12,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "neu_count * neu_size"
+    },
+    "class": "Compartment",
+    "id": "neu_vol",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "ext",
+    "id": "P1_ext",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "neu_vol",
+    "id": "P1_neu",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "plasma",
+    "num": 2.5,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "neu_count"
+      }
+    ],
+    "assignments": {
+      "ode_": "k_prol * neu_count"
+    },
+    "class": "Reaction",
+    "id": "r_prol_neu",
+    "reversible": false,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "ADP_neu"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "ATP_neu"
+      }
+    ],
+    "assignments": {
+      "ode_": "ksyn_ATP * neu_vol * (ADP_neu - ATP_neu / K_eq_ADP)"
+    },
+    "class": "Reaction",
+    "id": "r_syn_ATP",
+    "reversible": false,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -2,
+        "target": "ATP_neu"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 2,
+        "target": "ADP_neu"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "P1_neu"
+      }
+    ],
+    "assignments": {
+      "ode_": "ksyn_P1 * neu_vol * S1 / (S1 + Km_S1) * ATP_neu ^ 2"
+    },
+    "class": "Reaction",
+    "id": "r_syn_P1",
+    "modifiers": [
+      {
+        "target": "IL15_ext"
+      }
+    ],
+    "reversible": false,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "P1_neu"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "P1_ext"
+      }
+    ],
+    "assignments": {
+      "ode_": "k_tr_P1 * neu_vol * (P1_neu - P1_ext)"
+    },
+    "class": "Reaction",
+    "id": "r_tr_P1",
+    "reversible": false,
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "class": "Species",
+    "compartment": "blood",
+    "id": "S1",
+    "space": "invivo"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "invivo"
+  }
+]

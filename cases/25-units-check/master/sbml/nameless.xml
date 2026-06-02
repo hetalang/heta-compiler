@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:41:40.612Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_h" name="h">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_uM" name="uM">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_L" name="L">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mL" name="mL">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="-3" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_m" name="m">
+  <listOfUnits>
+    <unit kind="metre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mM_L" name="mM*L">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mM_mL" name="mM*mL">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
+    <unit kind="dimensionless" exponent="1" scale="-3" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mmole" name="mmole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mmole__h" name="mmole/h">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
+    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mM_h7" name="mM*h^7">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+    <unit kind="second" exponent="7" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="__h" name="1/h">
+  <listOfUnits>
+    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_UL" name="UL">
+  <listOfUnits>
+    <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_metre" name="metre">
+  <listOfUnits>
+    <unit kind="metre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole" name="mole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_metre3" name="metre^3">
+  <listOfUnits>
+    <unit kind="metre" exponent="3" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="pow7">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><times/><cn>2</cn><apply><times/><ci>x</ci><apply><power/><ci>x</ci><cn>7</cn></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="xx">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><plus/><apply><power/><ci>x</ci><cn>8</cn></apply><apply><pow7/><ci>x</ci><cn>1</cn></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="xxx">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><times/><apply><times/><apply><sin/><ci>x</ci></apply><apply><power/><apply><times/><ci>y</ci><cn>1.2</cn></apply><cn>3</cn></apply></apply><apply><cos/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="yyy">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><plus/><apply><plus/><apply><plus/><cn>1</cn><apply><sin/><ci>x</ci></apply></apply><apply><power/><ci>y</ci><cn>3</cn></apply></apply><apply><cos/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="zzz">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><xxx/><ci>y</ci><ci>x</ci></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="c1"
+        constant="false"
+        size="3"
+        units="_L"
+        metaid="c1"
+        >
+      </compartment>
+      <compartment
+        id="c2"
+        constant="false"
+        size="4"
+        units="_mL"
+        metaid="c2"
+        >
+      </compartment>
+      <compartment
+        id="c3"
+        constant="false"
+        size="5"
+        units="_m"
+        metaid="c3"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="s1"
+        compartment="c1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        substanceUnits="_mM_L"
+        metaid="s1"
+        >
+      </species>
+      <species
+        id="s2"
+        compartment="c2"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        substanceUnits="_mM_mL"
+        metaid="s2"
+        >
+      </species>
+      <species
+        id="s3"
+        compartment="c3"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        substanceUnits="_mmole"
+        metaid="s3"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="p1"
+        constant="false"
+        value="1"
+        units="_uM"
+        metaid="p1"
+        >
+      </parameter>
+      <parameter
+        id="p2"
+        constant="false"
+        units="_mM_h7"
+        metaid="p2"
+        >
+      </parameter>
+      <parameter
+        id="y21"
+        constant="false"
+        units="_metre3"
+        metaid="y21"
+        >
+      </parameter>
+      <parameter
+        id="y22"
+        constant="false"
+        units="_metre3"
+        metaid="y22"
+        >
+      </parameter>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.001"
+        units="__h"
+        metaid="k1"
+        >
+      </parameter>
+      <parameter
+        id="k2"
+        constant="true"
+        value="1.1"
+        units="_UL"
+        metaid="k2"
+        >
+      </parameter>
+      <parameter
+        id="k21"
+        constant="true"
+        value="1"
+        units="_metre"
+        metaid="k21"
+        >
+      </parameter>
+      <parameter
+        id="k22"
+        constant="true"
+        value="1"
+        units="_mole"
+        metaid="k22"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="p2"
+      metaid="p2::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><cn>23</cn><ci>s1</ci></apply><apply><xx/><ci>k1</ci><cn>3</cn></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="y21"
+      metaid="y21::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><xxx/><apply><times/><cn>1.1</cn><cn>2.2</cn></apply><ci>k21</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="y22"
+      metaid="y22::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><zzz/><ci>k21</ci><cn>3.1415</cn></apply></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        reversible="false"
+        fast="false"
+        metaid="r1"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="s2" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k1</ci><ci>s1</ci></apply><ci>c1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

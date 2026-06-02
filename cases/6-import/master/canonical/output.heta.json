@@ -1,0 +1,129 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:35:00.328Z",
+    "platformId": "use-case",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "0ed5cc3b84eec504ed578909334719b9d93baf655388bcd0b4078d4f3845d4ab",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "model",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "setNS",
+    "space": "RateLaws",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "class": "Species",
+    "compartment": "comp",
+    "id": "A",
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp",
+    "id": "B",
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp",
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1e-8"
+    },
+    "boundary": true,
+    "class": "Species",
+    "compartment": "comp",
+    "id": "enzyme",
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.001,
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Km_A",
+    "num": 0.8,
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "A"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "B"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * enzyme * A / (Km_A + A) * comp"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "modifiers": [
+      {
+        "target": "enzyme"
+      }
+    ],
+    "notes": "Mikhaelis-Menten reaction",
+    "reversible": false,
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "model"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "RateLaws"
+  }
+]

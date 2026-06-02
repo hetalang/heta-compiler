@@ -1,0 +1,278 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:38:03.338Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "2d4f24c10b6df37d7bdba13e0c424f5667951c02c06e6bb1db07701fa10edbaa",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "10"
+    },
+    "class": "Compartment",
+    "id": "comp1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "10"
+    },
+    "class": "Compartment",
+    "id": "comp3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "10"
+    },
+    "class": "Compartment",
+    "id": "comp4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "comp5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "10"
+    },
+    "class": "Compartment",
+    "id": "comp6"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "spec_amt4"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "spec_conc4"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.1"
+    },
+    "class": "Reaction",
+    "id": "r4"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "spec_amt5"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "spec_conc5"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.1"
+    },
+    "class": "Reaction",
+    "id": "r5"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "spec_amt6"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "spec_conc6"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.1"
+    },
+    "class": "Reaction",
+    "id": "r6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "12"
+    },
+    "class": "Record",
+    "id": "rec1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "8"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "spec_amt1",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "8"
+    },
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "spec_amt2",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp3",
+    "id": "spec_amt3",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "8"
+    },
+    "class": "Species",
+    "compartment": "comp4",
+    "id": "spec_amt4",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "8"
+    },
+    "class": "Species",
+    "compartment": "comp5",
+    "id": "spec_amt5",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "comp6",
+    "id": "spec_amt6",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "6"
+    },
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "spec_conc1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "6"
+    },
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "spec_conc2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "comp3",
+    "id": "spec_conc3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "6"
+    },
+    "class": "Species",
+    "compartment": "comp4",
+    "id": "spec_conc4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "6"
+    },
+    "class": "Species",
+    "compartment": "comp5",
+    "id": "spec_conc5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "comp6",
+    "id": "spec_conc6"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "start": 10
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:38:58.701Z",
+  "platformId": "template",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.001
+        }
+      ],
+      "states": [
+        {
+          "id": "comp1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "s1",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "s1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": [
+        {
+          "symbol": "comp1"
+        },
+        {
+          "symbol": "s1"
+        }
+      ]
+    },
+    {
+      "id": "one",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.00001
+        }
+      ],
+      "states": [
+        {
+          "id": "comp2",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "s2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s3",
+          "initial": 0
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s2_amt_",
+              "comp2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "s2",
+              "comp2"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "s2_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "s3",
+          "rhs": {
+            "expr": "r2",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": [
+        {
+          "symbol": "comp2"
+        },
+        {
+          "symbol": "s2"
+        }
+      ]
+    }
+  ]
+}

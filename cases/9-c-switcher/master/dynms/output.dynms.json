@@ -1,0 +1,207 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:36:16.672Z",
+  "platformId": "cs",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.01
+        }
+      ],
+      "states": [
+        {
+          "id": "comp1",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "x1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p1",
+          "initial": 10,
+          "static": true
+        },
+        {
+          "id": "x3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              12.12,
+              1
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "x2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "x2_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "x1_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "x1",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "x3_amt_",
+              "comp1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "cond1",
+          "rhs": {
+            "expr": [
+              "Add",
+              6,
+              [
+                "Negate",
+                "x1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "x1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "x2_amt_",
+          "rhs": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "crossing",
+            "rhs": {
+              "expr": "cond1",
+              "format": "math-json"
+            },
+            "detection": "root"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  [
+                    "Add",
+                    "x1",
+                    10
+                  ],
+                  "comp1"
+                ],
+                "format": "math-json"
+              },
+              "state": "x1_amt_"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  "x1",
+                  2
+                ],
+                "format": "math-json"
+              },
+              "state": "p1"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": [
+        {
+          "symbol": "x1"
+        },
+        {
+          "symbol": "x2"
+        },
+        {
+          "symbol": "p1"
+        },
+        {
+          "symbol": "x3"
+        }
+      ]
+    }
+  ]
+}

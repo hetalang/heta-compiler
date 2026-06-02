@@ -1,0 +1,302 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:37:04.107Z",
+    "platformId": "to-sbml",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "d2270e2624b59d729501ae70bd576a60229bea4cd2188fcc97d4775126dd4072",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "first",
+    "type": "abstract"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "x * y"
+    },
+    "class": "Compartment",
+    "id": "comp1",
+    "notes": "This is just text. *italic*, **bold**\n\nanother line",
+    "space": "first",
+    "title": "This is compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "L",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3.2"
+    },
+    "class": "Compartment",
+    "id": "comp2",
+    "space": "first"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "t - 12"
+    },
+    "class": "Record",
+    "id": "evt1",
+    "space": "first",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "min",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "15.223"
+    },
+    "class": "Record",
+    "id": "p2",
+    "space": "first",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "fM",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "min",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "nm",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "xxx * yyy"
+    },
+    "class": "Record",
+    "id": "p3",
+    "space": "first",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "h",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "L",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -2,
+        "target": "s1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "s2"
+      }
+    ],
+    "assignments": {
+      "ode_": "p2 * comp1 * s1"
+    },
+    "class": "Reaction",
+    "id": "r2",
+    "modifiers": [
+      {
+        "target": "s2"
+      }
+    ],
+    "space": "first"
+  },
+  {
+    "action": "upsert",
+    "actors": [],
+    "assignments": {
+      "ode_": "28"
+    },
+    "class": "Reaction",
+    "id": "r3",
+    "modifiers": [
+      {
+        "target": "s2"
+      }
+    ],
+    "space": "first",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "L",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1.1",
+      "sw1": "1.5"
+    },
+    "class": "Species",
+    "compartment": "comp2",
+    "id": "s1",
+    "space": "first"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "x * y"
+    },
+    "boundary": true,
+    "class": "Species",
+    "compartment": "comp1",
+    "id": "s2",
+    "space": "first",
+    "title": "s2 title"
+  },
+  {
+    "action": "upsert",
+    "class": "CSwitcher",
+    "id": "sw1",
+    "space": "first",
+    "trigger": "evt1"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "space": "first"
+  },
+  {
+    "action": "defineUnit",
+    "id": "fM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1e-15
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "h",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 3600
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "L",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "m",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "min",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 60
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "nm",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1e-9
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "uM",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.000001
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "umole",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 0.000001
+      }
+    ]
+  }
+]

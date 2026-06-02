@@ -1,0 +1,84 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:42:36.481Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "65402595cfde4a8fc2ff6c2a54b0662ab58dd5a4eb0e4363f0bd7117604e4b17",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "k1 * x1"
+    },
+    "class": "Record",
+    "id": "p2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "x1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * x1"
+    },
+    "class": "Process",
+    "id": "pr1"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "period": 10,
+    "start": 5,
+    "stop": 1000
+  },
+  {
+    "action": "upsert",
+    "class": "CSwitcher",
+    "id": "sw2",
+    "trigger": "x1 - 10"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0",
+      "sw1": "10",
+      "sw2": "20",
+      "sw3": "30"
+    },
+    "class": "Record",
+    "id": "x1"
+  }
+]

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:42:01.708Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="sinh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><minus/><apply><exp/><ci>x</ci></apply><apply><exp/><apply><minus/><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="cosh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><plus/><apply><exp/><ci>x</ci></apply><apply><exp/><apply><minus/><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="tanh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><apply><minus/><apply><exp/><apply><times/><cn>2</cn><ci>x</ci></apply></apply><cn>1</cn></apply><apply><plus/><apply><exp/><apply><times/><cn>2</cn><ci>x</ci></apply></apply><cn>1</cn></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="sech">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><cn>1</cn><apply><cosh/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="csch">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><cn>1</cn><apply><sinh/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="coth">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><cn>1</cn><apply><tanh/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arcsinh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><ci>x</ci><apply><root/><apply><plus/><apply><power/><ci>x</ci><cn>2</cn></apply><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arccosh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><ci>x</ci><apply><root/><apply><minus/><apply><power/><ci>x</ci><cn>2</cn></apply><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arctanh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><ln/><apply><divide/><apply><plus/><cn>1</cn><ci>x</ci></apply><apply><minus/><cn>1</cn><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arcsech">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><divide/><apply><plus/><cn>1</cn><apply><root/><apply><minus/><cn>1</cn><apply><power/><ci>x</ci><cn>2</cn></apply></apply></apply></apply><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arccsch">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><apply><divide/><cn>1</cn><ci>x</ci></apply><apply><root/><apply><plus/><cn>1</cn><apply><divide/><cn>1</cn><apply><power/><ci>x</ci><cn>2</cn></apply></apply></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arccoth">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><ln/><apply><divide/><apply><plus/><ci>x</ci><cn>1</cn></apply><apply><minus/><ci>x</ci><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+
+  
+    <listOfParameters>
+      <parameter
+        id="p1"
+        constant="false"
+        value="1"
+        metaid="p1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+  
+  </model>
+</sbml>

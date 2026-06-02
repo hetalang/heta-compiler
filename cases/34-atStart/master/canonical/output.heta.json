@@ -1,0 +1,269 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:45:14.435Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "d9d393377e992f9391986b55528f0d7b2029f586fa4e0f31a95a81488fbe5057",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "c1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k4",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k5",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k6",
+    "num": 0.001
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * s1 * c1"
+    },
+    "class": "Reaction",
+    "id": "r1",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * s2 * c1"
+    },
+    "class": "Reaction",
+    "id": "r2",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k3 * s3 * c1"
+    },
+    "class": "Reaction",
+    "id": "r3",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s4"
+      }
+    ],
+    "assignments": {
+      "ode_": "k4 * s4 * c1"
+    },
+    "class": "Reaction",
+    "id": "r4",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s5"
+      }
+    ],
+    "assignments": {
+      "ode_": "k5 * s5 * c1"
+    },
+    "class": "Reaction",
+    "id": "r5",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "s6"
+      }
+    ],
+    "assignments": {
+      "ode_": "k6 * s6 * c1"
+    },
+    "class": "Reaction",
+    "id": "r6",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw1": "s1 + 1 / c1"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s1",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw2": "s2 + 1 / c1"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s2",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw3": "s3 + 1 / c1"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s3",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw4": "s4 + 1 / c1"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s4",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw5": "s5 + 1 / c1"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s5",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1",
+      "sw6": "s6 + 1 / c1"
+    },
+    "class": "Species",
+    "compartment": "c1",
+    "id": "s6",
+    "output": true
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "period": 12,
+    "start": 0
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw2",
+    "period": 12,
+    "start": 1
+  },
+  {
+    "action": "upsert",
+    "atStart": true,
+    "class": "CSwitcher",
+    "id": "sw3",
+    "trigger": "threeshold - s3"
+  },
+  {
+    "action": "upsert",
+    "class": "CSwitcher",
+    "id": "sw4",
+    "trigger": "threeshold - s4"
+  },
+  {
+    "action": "upsert",
+    "atStart": true,
+    "class": "DSwitcher",
+    "id": "sw5",
+    "trigger": "s5 < threeshold"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sw6",
+    "trigger": "s6 < threeshold"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "threeshold",
+    "num": 1.5
+  }
+]

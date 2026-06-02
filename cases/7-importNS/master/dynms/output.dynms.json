@@ -1,0 +1,368 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:35:34.786Z",
+  "platformId": "useNamespace",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "kabs_first",
+          "value": 0.001
+        },
+        {
+          "id": "kel_first",
+          "value": 0.1
+        },
+        {
+          "id": "kabs_second",
+          "value": 0.002
+        },
+        {
+          "id": "kel_second",
+          "value": 0.2
+        },
+        {
+          "id": "kabs_third",
+          "value": 0.003
+        },
+        {
+          "id": "kel_third",
+          "value": 0.3
+        }
+      ],
+      "states": [
+        {
+          "id": "gut",
+          "initial": 1,
+          "static": true
+        },
+        {
+          "id": "blood",
+          "initial": 5.2,
+          "static": true
+        },
+        {
+          "id": "a0_first",
+          "initial": 0
+        },
+        {
+          "id": "c1_first_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "a0_second",
+          "initial": 0
+        },
+        {
+          "id": "c1_second_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "a0_third",
+          "initial": 0
+        },
+        {
+          "id": "c1_third_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "vabs_first",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs_first",
+              "a0_first"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "c1_first",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "c1_first_amt_",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vel_first",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kel_first",
+              "c1_first",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "t_first",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                1,
+                "t"
+              ],
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1_first",
+          "rhs": {
+            "expr": [
+              "Sin",
+              [
+                "Multiply",
+                1.2,
+                "t_first"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vabs_second",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs_second",
+              "a0_second"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "c1_second",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "c1_second_amt_",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vel_second",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kel_second",
+              "c1_second",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "t_second",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                1,
+                "t"
+              ],
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1_second",
+          "rhs": {
+            "expr": [
+              "Sin",
+              [
+                "Multiply",
+                1.2,
+                "t_second"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vabs_third",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kabs_third",
+              "a0_third"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "c1_third",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "c1_third_amt_",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "vel_third",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "kel_third",
+              "c1_third",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "t_third",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                1,
+                "t"
+              ],
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x1_third",
+          "rhs": {
+            "expr": [
+              "Sin",
+              [
+                "Multiply",
+                1.2,
+                "t_third"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "a0_first",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "vabs_first"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "c1_first_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vabs_first",
+              [
+                "Negate",
+                "vel_first"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "a0_second",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "vabs_second"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "c1_second_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vabs_second",
+              [
+                "Negate",
+                "vel_second"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "a0_third",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "vabs_third"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "c1_third_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "vabs_third",
+              [
+                "Negate",
+                "vel_third"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

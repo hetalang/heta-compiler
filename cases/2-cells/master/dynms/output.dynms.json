@@ -1,0 +1,855 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:34:12.301Z",
+  "platformId": "mm",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "plasma",
+          "value": 2.5
+        },
+        {
+          "id": "k_prol",
+          "value": 0.0001
+        },
+        {
+          "id": "AXP_neu",
+          "value": 0.1
+        }
+      ],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "invitro",
+      "constants": [
+        {
+          "id": "AXP_neu",
+          "value": 0.1
+        },
+        {
+          "id": "neu_size",
+          "value": 1e-12
+        },
+        {
+          "id": "K_eq_ADP",
+          "value": 10
+        },
+        {
+          "id": "ksyn_ATP",
+          "value": 0.0001
+        },
+        {
+          "id": "ksyn_P1",
+          "value": 0.01
+        },
+        {
+          "id": "Km_S1",
+          "value": 1.2
+        },
+        {
+          "id": "k_tr_P1",
+          "value": 0.013
+        }
+      ],
+      "states": [
+        {
+          "id": "ATP_neu_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "AXP_neu",
+                  "K_eq_ADP"
+                ],
+                [
+                  "Add",
+                  1,
+                  "K_eq_ADP"
+                ]
+              ],
+              1000000,
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "tot_vol",
+          "initial": 0.1,
+          "static": true
+        },
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              150,
+              0.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "neu_count",
+          "initial": 1000000,
+          "static": true
+        },
+        {
+          "id": "ADP_neu_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                "AXP_neu",
+                [
+                  "Add",
+                  1,
+                  "K_eq_ADP"
+                ]
+              ],
+              1000000,
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_neu_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1000000,
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_ext_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              [
+                "Add",
+                0.1,
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    1000000,
+                    "neu_size"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "IL15_ext_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              [
+                "Add",
+                0.1,
+                [
+                  "Negate",
+                  [
+                    "Multiply",
+                    1000000,
+                    "neu_size"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "neu_vol",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "neu_count",
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "ext",
+          "rhs": {
+            "expr": [
+              "Add",
+              "tot_vol",
+              [
+                "Negate",
+                "neu_vol"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "IL15_ext",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "IL15_ext_amt_",
+              "ext"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "ADP_neu",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "ADP_neu_amt_",
+              "neu_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "ATP_neu",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "ATP_neu_amt_",
+              "neu_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_syn_ATP",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "ksyn_ATP",
+              "neu_vol",
+              [
+                "Add",
+                "ADP_neu",
+                [
+                  "Negate",
+                  [
+                    "Divide",
+                    "ATP_neu",
+                    "K_eq_ADP"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "tot_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_syn_P1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ksyn_P1",
+                  "neu_vol",
+                  "S1"
+                ],
+                [
+                  "Add",
+                  "S1",
+                  "Km_S1"
+                ]
+              ],
+              [
+                "Power",
+                "ATP_neu",
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_neu",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P1_neu_amt_",
+              "neu_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_ext",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P1_ext_amt_",
+              "ext"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_tr_P1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k_tr_P1",
+              "neu_vol",
+              [
+                "Add",
+                "P1_neu",
+                [
+                  "Negate",
+                  "P1_ext"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_mean",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Multiply",
+                  "P1_ext",
+                  "ext"
+                ],
+                [
+                  "Multiply",
+                  "P1_neu",
+                  "neu_vol"
+                ]
+              ],
+              "tot_vol"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "ATP_neu_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "r_syn_ATP",
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  2,
+                  "r_syn_P1"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r_syn_P1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "ADP_neu_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r_syn_ATP"
+              ],
+              [
+                "Multiply",
+                2,
+                "r_syn_P1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P1_neu_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "r_syn_P1",
+              [
+                "Negate",
+                "r_tr_P1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P1_ext_amt_",
+          "rhs": {
+            "expr": "r_tr_P1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "invivo",
+      "constants": [
+        {
+          "id": "plasma",
+          "value": 2.5
+        },
+        {
+          "id": "k_prol",
+          "value": 0.0001
+        },
+        {
+          "id": "neu_size",
+          "value": 1e-12
+        },
+        {
+          "id": "K_eq_ADP",
+          "value": 10
+        },
+        {
+          "id": "ksyn_ATP",
+          "value": 0.0001
+        },
+        {
+          "id": "ksyn_P1",
+          "value": 0.01
+        },
+        {
+          "id": "Km_S1",
+          "value": 1.2
+        },
+        {
+          "id": "k_tr_P1",
+          "value": 0.013
+        }
+      ],
+      "states": [
+        {
+          "id": "ATP_neu_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  0.1,
+                  "K_eq_ADP"
+                ],
+                [
+                  "Add",
+                  1,
+                  "K_eq_ADP"
+                ]
+              ],
+              1e-9,
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "neu_count_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1e-9,
+              5.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "ADP_neu_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0.1,
+                [
+                  "Add",
+                  1,
+                  "K_eq_ADP"
+                ]
+              ],
+              1e-9,
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_neu_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1e-9,
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_ext_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              "plasma"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "IL15_ext_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              "plasma"
+            ],
+            "format": "math-json"
+          },
+          "static": true
+        },
+        {
+          "id": "blood",
+          "initial": 5.2,
+          "static": true
+        },
+        {
+          "id": "AXP_neu",
+          "initial": 0.1,
+          "static": true
+        }
+      ],
+      "assignments": [
+        {
+          "id": "ext",
+          "rhs": {
+            "expr": "plasma",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "IL15_ext",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "IL15_ext_amt_",
+              "ext"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "neu_count",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "neu_count_amt_",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "neu_vol",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "neu_count",
+              "neu_size"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "ADP_neu",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "ADP_neu_amt_",
+              "neu_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "ATP_neu",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "ATP_neu_amt_",
+              "neu_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_syn_ATP",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "ksyn_ATP",
+              "neu_vol",
+              [
+                "Add",
+                "ADP_neu",
+                [
+                  "Negate",
+                  [
+                    "Divide",
+                    "ATP_neu",
+                    "K_eq_ADP"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "blood"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_syn_P1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "ksyn_P1",
+                  "neu_vol",
+                  "S1"
+                ],
+                [
+                  "Add",
+                  "S1",
+                  "Km_S1"
+                ]
+              ],
+              [
+                "Power",
+                "ATP_neu",
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_neu",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P1_neu_amt_",
+              "neu_vol"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1_ext",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P1_ext_amt_",
+              "ext"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_tr_P1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k_tr_P1",
+              "neu_vol",
+              [
+                "Add",
+                "P1_neu",
+                [
+                  "Negate",
+                  "P1_ext"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_prol_neu",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k_prol",
+              "neu_count"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "ATP_neu_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "r_syn_ATP",
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  2,
+                  "r_syn_P1"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "S1_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r_syn_P1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "neu_count_amt_",
+          "rhs": {
+            "expr": "r_prol_neu",
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "ADP_neu_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r_syn_ATP"
+              ],
+              [
+                "Multiply",
+                2,
+                "r_syn_P1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P1_neu_amt_",
+          "rhs": {
+            "expr": [
+              "Add",
+              "r_syn_P1",
+              [
+                "Negate",
+                "r_tr_P1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P1_ext_amt_",
+          "rhs": {
+            "expr": "r_tr_P1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

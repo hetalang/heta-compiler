@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:35:28.053Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="gut"
+        constant="false"
+        size="1"
+        metaid="gut"
+        >
+      </compartment>
+      <compartment
+        id="blood"
+        constant="false"
+        size="5.2"
+        metaid="blood"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="a0_first"
+        compartment="gut"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="a0_first"
+        >
+      </species>
+      <species
+        id="c1_first"
+        compartment="blood"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="c1_first"
+        >
+      </species>
+      <species
+        id="a0_second"
+        compartment="gut"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="a0_second"
+        >
+      </species>
+      <species
+        id="c1_second"
+        compartment="blood"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="c1_second"
+        >
+      </species>
+      <species
+        id="a0_third"
+        compartment="gut"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="a0_third"
+        >
+      </species>
+      <species
+        id="c1_third"
+        compartment="blood"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="c1_third"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="x1_first"
+        constant="false"
+        metaid="x1_first"
+        >
+      </parameter>
+      <parameter
+        id="x1_second"
+        constant="false"
+        metaid="x1_second"
+        >
+      </parameter>
+      <parameter
+        id="x1_third"
+        constant="false"
+        metaid="x1_third"
+        >
+      </parameter>
+      <parameter
+        id="kabs_first"
+        constant="true"
+        value="0.001"
+        metaid="kabs_first"
+        >
+      </parameter>
+      <parameter
+        id="kel_first"
+        constant="true"
+        value="0.1"
+        metaid="kel_first"
+        >
+      </parameter>
+      <parameter
+        id="kabs_second"
+        constant="true"
+        value="0.002"
+        metaid="kabs_second"
+        >
+      </parameter>
+      <parameter
+        id="kel_second"
+        constant="true"
+        value="0.2"
+        metaid="kel_second"
+        >
+      </parameter>
+      <parameter
+        id="kabs_third"
+        constant="true"
+        value="0.003"
+        metaid="kabs_third"
+        >
+      </parameter>
+      <parameter
+        id="kel_third"
+        constant="true"
+        value="0.3"
+        metaid="kel_third"
+        >
+      </parameter>
+      <parameter
+        id="t_first"
+        constant="false"
+        metaid="t_first"
+        >
+      </parameter>
+      <parameter
+        id="t_second"
+        constant="false"
+        metaid="t_second"
+        >
+      </parameter>
+      <parameter
+        id="t_third"
+        constant="false"
+        metaid="t_third"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="x1_first"
+      metaid="x1_first::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_first</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="x1_second"
+      metaid="x1_second::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_second</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="x1_third"
+      metaid="x1_third::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_third</ci></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="t_first"
+      metaid="t_first::assignment"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply><plus/>
+          <apply><times/>
+            <cn> 1 </cn>
+            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+          </apply>
+          <cn> 0 </cn>
+        </apply>
+      </math>
+    </assignmentRule>
+    <assignmentRule
+      variable="t_second"
+      metaid="t_second::assignment"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply><plus/>
+          <apply><times/>
+            <cn> 1 </cn>
+            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+          </apply>
+          <cn> 0 </cn>
+        </apply>
+      </math>
+    </assignmentRule>
+    <assignmentRule
+      variable="t_third"
+      metaid="t_third::assignment"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply><plus/>
+          <apply><times/>
+            <cn> 1 </cn>
+            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+          </apply>
+          <cn> 0 </cn>
+        </apply>
+      </math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="vabs_first"
+        reversible="true"
+        fast="false"
+        metaid="vabs_first"
+        >
+        <listOfReactants>
+          <speciesReference species="a0_first" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="c1_first" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_first</ci><ci>a0_first</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vel_first"
+        reversible="true"
+        fast="false"
+        metaid="vel_first"
+        >
+        <listOfReactants>
+          <speciesReference species="c1_first" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_first</ci><ci>c1_first</ci></apply><ci>blood</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vabs_second"
+        reversible="true"
+        fast="false"
+        metaid="vabs_second"
+        >
+        <listOfReactants>
+          <speciesReference species="a0_second" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="c1_second" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_second</ci><ci>a0_second</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vel_second"
+        reversible="true"
+        fast="false"
+        metaid="vel_second"
+        >
+        <listOfReactants>
+          <speciesReference species="c1_second" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_second</ci><ci>c1_second</ci></apply><ci>blood</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vabs_third"
+        reversible="true"
+        fast="false"
+        metaid="vabs_third"
+        >
+        <listOfReactants>
+          <speciesReference species="a0_third" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="c1_third" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_third</ci><ci>a0_third</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vel_third"
+        reversible="true"
+        fast="false"
+        metaid="vel_third"
+        >
+        <listOfReactants>
+          <speciesReference species="c1_third" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_third</ci><ci>c1_third</ci></apply><ci>blood</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

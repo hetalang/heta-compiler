@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:39:33.829Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"zzz","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="zzz" 
+    metaid="zzz"
+    >
+    
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_hour" name="hour">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_litre" name="litre">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole" name="mole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole__hour" name="mole/hour">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_day" name="day">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="4" multiplier="8.64"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="__mole__hour" name="1/hour/mole">
+  <listOfUnits>
+    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
+    <unit kind="mole" exponent="-1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole__litre" name="mole/litre">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole2__litre" name="mole^2/litre">
+  <listOfUnits>
+    <unit kind="mole" exponent="2" scale="0" multiplier="1"/>
+    <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="comp1"
+        constant="false"
+        size="1.1"
+        units="_litre"
+        metaid="zzz::comp1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="s1"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="12"
+        substanceUnits="_mole"
+        metaid="zzz::s1"
+        >
+      </species>
+      <species
+        id="s2"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="1"
+        substanceUnits="_mole"
+        metaid="zzz::s2"
+        >
+      </species>
+      <species
+        id="s3"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="true"
+        hasOnlySubstanceUnits="false"
+        
+        substanceUnits="_mole"
+        metaid="zzz::s3"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="x1"
+        constant="false"
+        units="_mole2__litre"
+        metaid="zzz::x1"
+        >
+      </parameter>
+      <parameter
+        id="x2"
+        constant="false"
+        units="_hour"
+        metaid="zzz::x2"
+        >
+      </parameter>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.001"
+        units="__mole__hour"
+        metaid="zzz::k1"
+        >
+      </parameter>
+      <parameter
+        id="tau"
+        constant="true"
+        value="12"
+        units="_hour"
+        metaid="zzz::tau"
+        >
+      </parameter>
+      <parameter
+        id="s3_0"
+        constant="true"
+        value="15"
+        units="_mole__litre"
+        metaid="zzz::s3_0"
+        >
+      </parameter>
+      <parameter
+        id="tid"
+        constant="false"
+        units="_day"
+        metaid="zzz::tid"
+        >
+        <notes>
+          <html xmlns="http://www.w3.org/1999/xhtml">
+            <p>Time in days</p>
+          </html>
+        </notes>
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="s3"
+      metaid="zzz::s3::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>s3_0</ci><apply><exp/><apply><divide/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><ci>tau</ci></apply></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="x1"
+      metaid="zzz::x1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>s1</ci><ci>s2</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="x2"
+      metaid="zzz::x2::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="tid"
+      metaid="zzz::tid::assignment"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply><plus/>
+          <apply><times/>
+            <cn> 0.041667 </cn>
+            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+          </apply>
+          <cn> 0 </cn>
+        </apply>
+      </math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        reversible="true"
+        fast="false"
+        metaid="zzz::r1"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="s2" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>k1</ci><apply><power/><ci>s1</ci><cn>2</cn></apply></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

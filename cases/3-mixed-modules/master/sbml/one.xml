@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:34:25.449Z","platformId":"mm","namespaceId":"one","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="one" 
+    metaid="one"
+    >
+    
+
+  
+    <listOfParameters>
+      <parameter
+        id="p1"
+        constant="false"
+        value="1"
+        metaid="one::p1"
+        >
+      </parameter>
+      <parameter
+        id="p2"
+        constant="false"
+        metaid="one::p2"
+        >
+      </parameter>
+      <parameter
+        id="p3"
+        name="I am title"
+        constant="false"
+        metaid="one::p3"
+        >
+      </parameter>
+      <parameter
+        id="x1"
+        name="I am title"
+        constant="false"
+        metaid="one::x1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="p2"
+      metaid="one::p2::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+  
+  </model>
+</sbml>

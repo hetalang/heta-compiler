@@ -1,0 +1,115 @@
+[
+  {
+    "action": "hasMeta",
+    "toolName": "heta-compiler",
+    "toolVersion": "0.11.1",
+    "createdAt": "2026-06-02T12:40:07.671Z",
+    "platformId": "template",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "8d6d0e657e39f27104b1793facc1a0a82e38781b529ea1673e672892beffb836",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "x1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "x2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * x1"
+    },
+    "class": "Process",
+    "id": "pr1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "class": "Record",
+    "id": "x1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "x2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "xxx",
+    "num": 1224
+  },
+  {
+    "action": "setScenario",
+    "id": "scn1",
+    "tspan": [
+      0,
+      200
+    ]
+  },
+  {
+    "action": "setScenario",
+    "id": "scn2",
+    "observables": [
+      "x1",
+      "x2"
+    ],
+    "parameters": {
+      "k1": 0.001,
+      "xxx": 2
+    },
+    "saveat": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      8,
+      10,
+      12
+    ]
+  },
+  {
+    "action": "setScenario",
+    "id": "scn3",
+    "tspan": [
+      0,
+      12
+    ]
+  }
+]

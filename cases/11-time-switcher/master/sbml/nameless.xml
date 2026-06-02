@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:36:51.622Z","platformId":"mm","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_mole" name="mole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="comp0"
+        constant="false"
+        size="1"
+        metaid="comp0"
+        >
+      </compartment>
+      <compartment
+        id="comp1"
+        constant="false"
+        size="5.2"
+        metaid="comp1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="a0"
+        compartment="comp0"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        substanceUnits="_mole"
+        metaid="a0"
+        >
+      </species>
+      <species
+        id="s1"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="s1"
+        >
+      </species>
+      <species
+        id="s2"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="s2"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="kabs"
+        constant="true"
+        value="0.01"
+        metaid="kabs"
+        >
+      </parameter>
+      <parameter
+        id="kel"
+        constant="true"
+        value="0.01"
+        metaid="kel"
+        >
+      </parameter>
+      <parameter
+        id="sw2_start"
+        constant="true"
+        value="5"
+        metaid="sw2_start"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfReactions>
+      <reaction
+        id="vabs"
+        reversible="false"
+        fast="false"
+        metaid="vabs"
+        >
+        <listOfReactants>
+          <speciesReference species="a0" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs</ci><ci>a0</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vel"
+        reversible="false"
+        fast="false"
+        metaid="vel"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel</ci><ci>s1</ci></apply><ci>comp1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+    <listOfEvents>
+      <event
+        id="sw0"
+        metaid="sw0"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+              
+              
+              
+            
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+        </listOfEventAssignments>
+      </event>
+      <event
+        id="sw1"
+        metaid="sw1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply><and/><false/>
+              <apply><geq/>
+                  <apply><minus/>
+                    <apply><divide/>
+                      <apply><minus/>
+                        <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                        <cn>0</cn>
+                      </apply>
+                      <cn>12</cn>
+                    </apply>
+                    <apply><floor/>
+                      <apply><plus/>
+                        <apply><divide/>
+                          <apply><minus/>
+                            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                            <cn>0</cn>
+                          </apply>
+                          <cn>12</cn>
+                        </apply>
+                        <cn>0.5</cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn>0</cn>
+                </apply>
+              
+              <apply><leq/>
+                  <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                  <cn>60</cn>
+              </apply>
+              
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="a0"
+            metaid="a0::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>a0</ci><cn>10</cn></apply></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="comp1"
+            metaid="comp1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+      <event
+        id="sw2"
+        metaid="sw2"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+              
+              <apply><geq/>
+                  <apply><minus/>
+                    <apply><divide/>
+                      <apply><minus/>
+                        <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                        <ci>sw2_start</ci>
+                      </apply>
+                      <cn>24</cn>
+                    </apply>
+                    <apply><floor/>
+                      <apply><plus/>
+                        <apply><divide/>
+                          <apply><minus/>
+                            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
+                            <ci>sw2_start</ci>
+                          </apply>
+                          <cn>24</cn>
+                        </apply>
+                        <cn>0.5</cn>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <cn>0</cn>
+                </apply>
+              
+              
+            
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="s1"
+            metaid="s1::sw2">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s1</ci><cn>2</cn></apply></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="s2"
+            metaid="s2::sw2">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s2</ci><cn>2</cn></apply></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

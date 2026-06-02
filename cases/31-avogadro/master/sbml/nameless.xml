@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:44:19.404Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_second" name="second">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_dimensionless" name="dimensionless">
+  <listOfUnits>
+    <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfParameters>
+      <parameter
+        id="foo"
+        constant="false"
+        units="_dimensionless"
+        metaid="foo"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="foo"
+        metaid="foo::start_"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><cn>3</cn><cn>2</cn></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  
+  
+  </model>
+</sbml>

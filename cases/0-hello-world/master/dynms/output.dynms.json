@@ -1,0 +1,145 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "dynms": "0.1.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.11.1"
+  },
+  "created": "2026-06-02T12:33:29.506Z",
+  "platformId": "mm",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    },
+    {
+      "id": "mm",
+      "constants": [
+        {
+          "id": "Vmax",
+          "value": 0.1
+        },
+        {
+          "id": "Km",
+          "value": 2.5
+        }
+      ],
+      "states": [
+        {
+          "id": "default_comp",
+          "initial": 1,
+          "static": true,
+          "title": "Default compartment"
+        },
+        {
+          "id": "S_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "substrate"
+        },
+        {
+          "id": "P_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "product"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "P",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "P_amt_",
+              "default_comp"
+            ],
+            "format": "math-json"
+          },
+          "title": "product"
+        },
+        {
+          "id": "S",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S_amt_",
+              "default_comp"
+            ],
+            "format": "math-json"
+          },
+          "title": "substrate"
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Multiply",
+                  "Vmax",
+                  "S"
+                ],
+                [
+                  "Add",
+                  "Km",
+                  "S"
+                ]
+              ],
+              "default_comp"
+            ],
+            "format": "math-json"
+          },
+          "title": "Michaelis-Menten reaction"
+        }
+      ],
+      "derivatives": [
+        {
+          "state": "S_amt_",
+          "rhs": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "state": "P_amt_",
+          "rhs": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "events": [],
+      "observables": [
+        {
+          "symbol": "S"
+        },
+        {
+          "symbol": "P"
+        }
+      ]
+    }
+  ]
+}

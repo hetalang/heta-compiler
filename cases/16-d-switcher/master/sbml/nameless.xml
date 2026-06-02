@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:38:31.688Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless" 
+    metaid="nameless"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="comp1"
+        constant="false"
+        size="1"
+        metaid="comp1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="S1"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        metaid="S1"
+        >
+      </species>
+      <species
+        id="S2"
+        compartment="comp1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        metaid="S2"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="x1"
+        constant="false"
+        value="0"
+        metaid="x1"
+        >
+      </parameter>
+      <parameter
+        id="x2"
+        constant="false"
+        value="0"
+        metaid="x2"
+        >
+      </parameter>
+      <parameter
+        id="pr1"
+        constant="false"
+        metaid="pr1"
+        >
+      </parameter>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.1"
+        metaid="k1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="pr1"
+      metaid="pr1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>0.1</cn></math>
+    </assignmentRule>
+    <rateRule
+      variable="x1"
+      metaid="x1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <apply>
+          <plus/>
+          <apply>
+            <times/>
+            <cn>1</cn>
+            <ci>pr1</ci>
+          </apply>
+        </apply>
+      </math>
+    </rateRule>
+  
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        reversible="false"
+        fast="false"
+        metaid="r1"
+        >
+        <listOfReactants>
+          <speciesReference species="S1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k1</ci><ci>S1</ci></apply><ci>comp1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+    <listOfEvents>
+      <event
+        id="sw1" metaid="sw1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><lt/><ci>S1</ci><cn>6</cn></apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="S1"
+            metaid="S1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>S1</ci><cn>10</cn></apply></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="S2"
+            metaid="S2::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>S2</ci><cn>10</cn></apply></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="x1"
+            metaid="x1::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>x1</ci><cn>100</cn></apply></math>
+          </eventAssignment>
+          
+          <eventAssignment
+            variable="x2"
+            metaid="x2::sw1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>x2</ci><cn>100</cn></apply></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+      <event
+        id="sw2" metaid="sw2"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><and/><apply><lt/><ci>S1</ci><cn>10</cn></apply><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>400000</cn></apply></apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

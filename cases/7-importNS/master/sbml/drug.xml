@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:35:28.060Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"drug","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="drug" 
+    metaid="drug"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="gut"
+        constant="false"
+        size="1"
+        metaid="drug::gut"
+        >
+      </compartment>
+      <compartment
+        id="central"
+        constant="false"
+        size="5.2"
+        metaid="drug::central"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="a0"
+        compartment="gut"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="true"
+        initialAmount="0"
+        metaid="drug::a0"
+        >
+      </species>
+      <species
+        id="c1"
+        compartment="central"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        metaid="drug::c1"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="x1"
+        constant="false"
+        metaid="drug::x1"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="x1"
+      metaid="drug::x1::ode_"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="vabs"
+        reversible="true"
+        fast="false"
+        metaid="drug::vabs"
+        >
+        <listOfReactants>
+          <speciesReference species="a0" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="c1" stoichiometry="1"/>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs</ci><ci>a0</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="vel"
+        reversible="true"
+        fast="false"
+        metaid="drug::vel"
+        >
+        <listOfReactants>
+          <speciesReference species="c1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+        </listOfProducts>
+        <listOfModifiers>
+        </listOfModifiers>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel</ci><ci>c1</ci></apply><ci>central</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>
