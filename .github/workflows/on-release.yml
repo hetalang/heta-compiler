@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   upload-macos-x64-release-asset:
-    runs-on: macos-latest
+    runs-on: macos-15-intel # supported until 2027-08-01
     outputs:
       sha_x64: ${{ steps.sha_x64.outputs.sha }}
     steps:
