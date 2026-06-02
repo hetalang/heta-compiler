@@ -7,7 +7,8 @@
   "exports": {
     ".": "./src/index.js",
     "./cli": "./src/index.js",
-    "./web": "./dist/web.js"
+    "./web": "./src/web.js",
+    "./package": "./package.json"
   },
   "scripts": {
     "test:dev": "mocha test/cases-build-masters --config=./test/.mocharc.json",
