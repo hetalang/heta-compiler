@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:37:30.611Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:50:01.778Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless" 
@@ -255,8 +255,6 @@
         <listOfProducts>
           <speciesReference species="s2" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k1</ci><apply><minus/><ci>s1</ci><ci>s2</ci></apply></apply><ci>PS</ci></apply></math>
         </kineticLaw>
@@ -275,8 +273,6 @@
           <speciesReference species="s4" stoichiometry="1"/>
           <speciesReference species="s3" stoichiometry="2"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>k2</ci><ci>s2</ci></apply><ci>s5</ci></apply><ci>comp2</ci></apply></math>
         </kineticLaw>
@@ -293,8 +289,6 @@
         <listOfProducts>
           <speciesReference species="s4" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k3</ci><apply><minus/><ci>s3</ci><apply><divide/><ci>s4</ci><ci>Keq3</ci></apply></apply></apply><ci>comp2</ci></apply></math>
         </kineticLaw>
@@ -310,8 +304,6 @@
         </listOfReactants>
         <listOfProducts>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k4</ci><ci>s3</ci></apply><ci>comp2</ci></apply></math>
         </kineticLaw>

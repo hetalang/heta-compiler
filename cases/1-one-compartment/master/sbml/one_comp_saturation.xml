@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:33:43.800Z","platformId":"mm","namespaceId":"one_comp_saturation","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:48:48.940Z","platformId":"mm","namespaceId":"one_comp_saturation","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="one_comp_saturation" 
@@ -98,8 +98,6 @@
         <listOfProducts>
           <speciesReference species="s1" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs</ci><ci>a0</ci></apply></math>
         </kineticLaw>
@@ -115,8 +113,6 @@
         </listOfReactants>
         <listOfProducts>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><apply><times/><ci>Vmax</ci><ci>s1</ci></apply><ci>comp1</ci></apply><apply><plus/><ci>Km</ci><ci>s1</ci></apply></apply></math>
         </kineticLaw>

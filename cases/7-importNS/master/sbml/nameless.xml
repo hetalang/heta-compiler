@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:35:28.053Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:49:23.696Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless" 
@@ -254,8 +254,6 @@
         <listOfProducts>
           <speciesReference species="c1_first" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_first</ci><ci>a0_first</ci></apply></math>
         </kineticLaw>
@@ -271,8 +269,6 @@
         </listOfReactants>
         <listOfProducts>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_first</ci><ci>c1_first</ci></apply><ci>blood</ci></apply></math>
         </kineticLaw>
@@ -289,8 +285,6 @@
         <listOfProducts>
           <speciesReference species="c1_second" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_second</ci><ci>a0_second</ci></apply></math>
         </kineticLaw>
@@ -306,8 +300,6 @@
         </listOfReactants>
         <listOfProducts>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_second</ci><ci>c1_second</ci></apply><ci>blood</ci></apply></math>
         </kineticLaw>
@@ -324,8 +316,6 @@
         <listOfProducts>
           <speciesReference species="c1_third" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_third</ci><ci>a0_third</ci></apply></math>
         </kineticLaw>
@@ -341,8 +331,6 @@
         </listOfReactants>
         <listOfProducts>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_third</ci><ci>c1_third</ci></apply><ci>blood</ci></apply></math>
         </kineticLaw>

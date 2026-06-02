@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:33:22.702Z","platformId":"mm","namespaceId":"mm","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:48:42.152Z","platformId":"mm","namespaceId":"mm","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="mm" 
@@ -134,8 +134,6 @@
         <listOfProducts>
           <speciesReference species="P" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>Vmax</ci><ci>S</ci></apply><apply><plus/><ci>Km</ci><ci>S</ci></apply></apply><ci>default_comp</ci></apply></math>
         </kineticLaw>

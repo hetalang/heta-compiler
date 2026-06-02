@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:35:28.060Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"drug","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:49:23.716Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"drug","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="drug" 
@@ -88,8 +88,6 @@
         <listOfProducts>
           <speciesReference species="c1" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs</ci><ci>a0</ci></apply></math>
         </kineticLaw>
@@ -105,8 +103,6 @@
         </listOfReactants>
         <listOfProducts>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel</ci><ci>c1</ci></apply><ci>central</ci></apply></math>
         </kineticLaw>

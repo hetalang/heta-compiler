@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:34:05.358Z","platformId":"mm","namespaceId":"invitro","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:48:55.119Z","platformId":"mm","namespaceId":"invitro","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="invitro" 
@@ -222,8 +222,6 @@
         <listOfProducts>
           <speciesReference species="ATP_neu" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>ksyn_ATP</ci><ci>neu_vol</ci></apply><apply><minus/><ci>ADP_neu</ci><apply><divide/><ci>ATP_neu</ci><ci>K_eq_ADP</ci></apply></apply></apply></math>
         </kineticLaw>
@@ -261,8 +259,6 @@
         <listOfProducts>
           <speciesReference species="P1_ext" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k_tr_P1</ci><ci>neu_vol</ci></apply><apply><minus/><ci>P1_neu</ci><ci>P1_ext</ci></apply></apply></math>
         </kineticLaw>

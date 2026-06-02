@@ -339,11 +339,13 @@
           {%- endif %}
           {%- endfor %}
         </listOfProducts>
+        {%- if record.modifiers|length > 0 %}
         <listOfModifiers>
           {%- for modifier in record.modifiers %}
           <modifierSpeciesReference species="{{ modifier.target }}"/>
           {%- endfor %}
         </listOfModifiers>
+        {%- endif %}
         <kineticLaw>
           {%- if record.assignments.ode_ is defined %}
           {{ record.assignments.ode_.toCMathML() }}

@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T12:43:56.824Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:51:41.765Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless" 
@@ -2030,8 +2030,6 @@
         <listOfProducts>
           <speciesReference species="NAPE_b" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_A</ci></apply><ci>a_NAT_A</ci></apply><ci>b_NAT_Brain</ci></apply></math>
         </kineticLaw>
@@ -2048,8 +2046,6 @@
         <listOfProducts>
           <speciesReference species="NOPE_b" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_O</ci></apply><ci>a_NAT_O</ci></apply><ci>b_NAT_Brain</ci></apply></math>
         </kineticLaw>
@@ -2066,8 +2062,6 @@
         <listOfProducts>
           <speciesReference species="NPPE_b" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_P</ci></apply><ci>a_NAT_P</ci></apply><ci>b_NAT_Brain</ci></apply></math>
         </kineticLaw>
@@ -2084,8 +2078,6 @@
         <listOfProducts>
           <speciesReference species="NLPE_b" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_L</ci></apply><ci>a_NAT_L</ci></apply><ci>b_NAT_Brain</ci></apply></math>
         </kineticLaw>
@@ -2102,8 +2094,6 @@
         <listOfProducts>
           <speciesReference species="NSPE_b" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>Vmax_NAT</ci></apply><ci>p_S</ci></apply><ci>a_NAT_S</ci></apply><ci>b_NAT_Brain</ci></apply></math>
         </kineticLaw>
@@ -2220,8 +2210,6 @@
         <listOfProducts>
           <speciesReference species="FAAH_b" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>BRAIN</ci><ci>FAAH_t</ci></apply><ci>b_FAAH_Brain</ci></apply><ci>k_deg_FAAH</ci></apply></math>
         </kineticLaw>
@@ -2496,8 +2484,6 @@
         <listOfProducts>
           <speciesReference species="NAPE_r" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_A</ci></apply><ci>a_NAT_A</ci></apply><ci>c_NAT_ROB</ci></apply></math>
         </kineticLaw>
@@ -2514,8 +2500,6 @@
         <listOfProducts>
           <speciesReference species="NOPE_r" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_O</ci></apply><ci>a_NAT_O</ci></apply><ci>c_NAT_ROB</ci></apply></math>
         </kineticLaw>
@@ -2532,8 +2516,6 @@
         <listOfProducts>
           <speciesReference species="NPPE_r" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_P</ci></apply><ci>a_NAT_P</ci></apply><ci>c_NAT_ROB</ci></apply></math>
         </kineticLaw>
@@ -2550,8 +2532,6 @@
         <listOfProducts>
           <speciesReference species="NLPE_r" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_L</ci></apply><ci>a_NAT_L</ci></apply><ci>c_NAT_ROB</ci></apply></math>
         </kineticLaw>
@@ -2568,8 +2548,6 @@
         <listOfProducts>
           <speciesReference species="NSPE_r" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>Vmax_NAT</ci><ci>p_S</ci></apply><ci>a_NAT_S</ci></apply><ci>c_NAT_ROB</ci></apply></math>
         </kineticLaw>
@@ -2686,8 +2664,6 @@
         <listOfProducts>
           <speciesReference species="FAAH_r" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>FAAH_t</ci><ci>c_FAAH_ROB</ci></apply><ci>k_deg_FAAH</ci></apply></math>
         </kineticLaw>
@@ -2962,8 +2938,6 @@
         <listOfProducts>
           <speciesReference species="FAAH_m" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>MEC</ci><ci>FAAH_t</ci></apply><ci>b_FAAH_MEC</ci></apply><ci>k_deg_FAAH</ci></apply></math>
         </kineticLaw>
@@ -3354,8 +3328,6 @@
         <listOfProducts>
           <speciesReference species="PFM_p" stoichiometry="1"/>
         </listOfProducts>
-        <listOfModifiers>
-        </listOfModifiers>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>kabs_PFM</ci><ci>MD</ci></apply></math>
         </kineticLaw>
