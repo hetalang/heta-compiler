@@ -16,7 +16,7 @@
   "json.schemas": [
     {
       "fileMatch": ["*.dynms.json"],
-      "url": "./src/dynms/dynms.shema.json"
+      "url": "./src/dynms/dynms.schema.json"
     }
   ]
 }
