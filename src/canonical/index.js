@@ -69,6 +69,7 @@ function _sortElements(array) {
 // Return object with sorted properties (keys)
 function _sortKeys(o) {
   if (Array.isArray(o)) return o.map(_sortKeys);
+  if (typeof o === 'string') return o.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
   if (o && typeof o === 'object') {
     const out = {};
     for (const k of Object.keys(o).sort()) out[k] = _sortKeys(o[k]);

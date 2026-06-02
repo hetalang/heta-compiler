@@ -3,11 +3,11 @@
     "action": "hasMeta",
     "toolName": "heta-compiler",
     "toolVersion": "0.11.1",
-    "createdAt": "2026-06-02T12:34:18.573Z",
+    "createdAt": "2026-06-02T14:19:36.980Z",
     "platformId": "mm",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "bb89c8cef02240771a413a908d0adea5629fcdb68a82e0a61d1e32481924dc76",
+    "hashSum": "dea9e12242067604f23acb6b241fabfe9b0550495cf2ff5b333cd746e4255743",
     "hashAlgorithm": "sha256"
   },
   {
@@ -27,7 +27,7 @@
   {
     "action": "upsert",
     "class": "Page",
-    "content": "# title\r\nldalklas\r\nkalkdlsa\r\n\r\nksaldklsa\r\nl;adsl;lds\r\n",
+    "content": "# title\nldalklas\nkalkdlsa\n\nksaldklsa\nl;adsl;lds\n",
     "id": "yyy",
     "title": "hhh"
   },
