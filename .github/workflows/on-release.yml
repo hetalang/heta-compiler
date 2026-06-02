@@ -2,7 +2,7 @@ name: On release
 
 on:
   release:
-    types: [created]
+    types: [published, released]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.release.tag_name }}
@@ -10,11 +10,12 @@ concurrency:
 
 permissions:
   contents: write
+  id-token: write
   pull-requests: read
 
 jobs:
   upload-macos-x64-release-asset:
-    runs-on: macos-15-intel # supported until 2027-08-01
+    runs-on: macos-15-intel
     outputs:
       sha_x64: ${{ steps.sha_x64.outputs.sha }}
     steps:
@@ -26,30 +27,34 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run precompile
 
-      - name: Build standalone apps
+      - name: Build standalone app
         run: |
-          npx pkg . -t macos-x64 --compress GZip
+          npx pkg . -t node18-macos-x64 --compress GZip
           cd ./dist
           chmod 775 heta-compiler
           cp heta-compiler heta-compiler-macos-x64
           tar -czvf ./heta-compiler-macos-x64.tar.gz ./heta-compiler
           cd ..
 
-      - name: Compute SHA256 (x64)
+      - name: Compute SHA256
         id: sha_x64
         run: echo "sha=$(shasum -a 256 ./dist/heta-compiler-macos-x64.tar.gz | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
       - name: Upload macOS x64 release assets
         uses: softprops/action-gh-release@v2
         with:
+          overwrite_files: true
+          fail_on_unmatched_files: true
           files: |
             dist/heta-compiler-macos-x64
             dist/heta-compiler-macos-x64.tar.gz
 
   upload-macos-arm64-release-asset:
     runs-on: macos-latest
-    needs: upload-macos-x64-release-asset
+    outputs:
+      sha_arm64: ${{ steps.sha_arm64.outputs.sha }}
     steps:
       - uses: actions/checkout@v6
 
@@ -59,56 +64,29 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run precompile
 
-      - name: Build standalone apps
+      - name: Build standalone app
         run: |
-          npx pkg . -t macos-arm64 --compress GZip
+          npx pkg . -t node18-macos-arm64 --compress GZip
           cd ./dist
           chmod 775 heta-compiler
           cp heta-compiler heta-compiler-macos-arm64
           tar -czvf ./heta-compiler-macos-arm64.tar.gz ./heta-compiler
           cd ..
 
-      - name: Compute SHA256 (arm64)
+      - name: Compute SHA256
         id: sha_arm64
         run: echo "sha=$(shasum -a 256 ./dist/heta-compiler-macos-arm64.tar.gz | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
       - name: Upload macOS arm64 release assets
         uses: softprops/action-gh-release@v2
         with:
+          overwrite_files: true
+          fail_on_unmatched_files: true
           files: |
             dist/heta-compiler-macos-arm64
             dist/heta-compiler-macos-arm64.tar.gz
-
-      - name: Configure SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_HOMEBREW_HETA_COMPILER }}
-
-      - name: Commit to homebrew-heta-compiler repos
-        if: ${{ github.event.release.prerelease == false }}
-        env:
-          SHA_ARM64: ${{ steps.sha_arm64.outputs.sha }}
-          SHA_X64: ${{ needs.upload-macos-x64-release-asset.outputs.sha_x64 }}
-        run: |
-          git clone git@github.com:hetalang/homebrew-heta-compiler.git
-          cd homebrew-heta-compiler
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          mkdir -p Formula
-          cp -f ../build-homebrew/heta-compiler.template.rb Formula/heta-compiler.rb
-          sed -i '' "s|\$VERSION|${{ github.event.release.tag_name }}|" Formula/heta-compiler.rb
-          sed -i '' "s|\$SHA256ARM64|$SHA_ARM64|" Formula/heta-compiler.rb
-          sed -i '' "s|\$SHA256X64|$SHA_X64|" Formula/heta-compiler.rb
-          echo "$SHA_ARM64"
-          echo "$SHA_X64"
-          git add .
-          git commit -m "Automated update from source repository based on release ${{ github.event.release.tag_name }}"
-          git push origin master
 
   upload-linux-x64-release-asset:
     runs-on: ubuntu-latest
@@ -121,10 +99,11 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run precompile
 
-      - name: Build standalone apps
+      - name: Build standalone app
         run: |
-          npx pkg . -t linux --compress GZip
+          npx pkg . -t node18-linux-x64 --compress GZip
           cd ./dist
           chmod 775 heta-compiler
           cp heta-compiler heta-compiler-linux-x64
@@ -145,6 +124,8 @@ jobs:
       - name: Upload Linux x64 release assets
         uses: softprops/action-gh-release@v2
         with:
+          overwrite_files: true
+          fail_on_unmatched_files: true
           files: |
             dist/heta-compiler-linux-x64
             dist/heta-compiler-linux-x64.tar.gz
@@ -161,10 +142,11 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run precompile
 
-      - name: Build standalone apps
+      - name: Build standalone app
         run: |
-          npx pkg . -t linux-arm64 --compress GZip
+          npx pkg . -t node18-linux-arm64 --compress GZip
           cd ./dist
           chmod 775 heta-compiler
           cp heta-compiler heta-compiler-linux-arm64
@@ -174,6 +156,8 @@ jobs:
       - name: Upload Linux arm64 release assets
         uses: softprops/action-gh-release@v2
         with:
+          overwrite_files: true
+          fail_on_unmatched_files: true
           files: |
             dist/heta-compiler-linux-arm64
             dist/heta-compiler-linux-arm64.tar.gz
@@ -189,10 +173,11 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - run: npm run precompile
 
-      - name: Build standalone apps
+      - name: Build standalone app
         run: |
-          npx pkg . -t win --compress GZip
+          npx pkg . -t node18-win-x64 --compress GZip
           cd ./dist
           cp -Force heta-compiler.exe heta-compiler-win-x64.exe
           tar -czvf ./heta-compiler-windows-x64.tar.gz ./heta-compiler.exe
@@ -203,18 +188,24 @@ jobs:
         run: |
           $version = node -p "require('./package.json').version"
           echo "VERSION=$version" >> $env:GITHUB_OUTPUT
+          $msiVersion = $version -replace '^(\d+\.\d+\.\d+).*$','$1'
+          if ($msiVersion -eq $version -and $version -notmatch '^\d+\.\d+\.\d+$') {
+            Write-Error "Cannot convert package version '$version' to MSI version"
+            exit 1
+          }
+          echo "MSI_VERSION=$msiVersion" >> $env:GITHUB_OUTPUT
 
       - name: Install WiX Toolset
         run: choco install wixtoolset
 
-      - name: Update .wxs file with package version
+      - name: Update .wxs file with MSI package version
         run: |
           $pathToWxs = "build-win-installer/perUser.wxs"
           $content = Get-Content $pathToWxs -Raw
-          $newContent = $content -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.VERSION }}"
+          $newContent = $content -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.MSI_VERSION }}"
           $newContent | Set-Content $pathToWxs
 
-      - name: Build windows installer
+      - name: Build Windows installer
         run: |
           & ${env:WIX}bin\candle.exe -o dist/ build-win-installer/perUser.wxs
           & ${env:WIX}bin\light.exe -o dist/heta-compiler-win-x64-installer.msi dist/perUser.wixobj -ext WixUIExtension
@@ -226,15 +217,190 @@ jobs:
       - name: Upload Windows x64 release assets
         uses: softprops/action-gh-release@v2
         with:
+          overwrite_files: true
+          fail_on_unmatched_files: true
           files: |
             dist/heta-compiler-${{ steps.package_version.outputs.VERSION }}-win-x64-installer.msi
             dist/heta-compiler-windows-x64.tar.gz
             dist/heta-compiler-win-x64.exe
 
+  test-macos-x64-release-asset:
+    if: ${{ github.event.release.prerelease == false }}
+    needs: upload-macos-x64-release-asset
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get expected version
+        run: echo "VERSION=$(jq -r .version package.json)" >> "$GITHUB_ENV"
+
+      - name: Install from GitHub Release asset
+        run: |
+          curl -L -o heta-compiler-macos-x64.tar.gz "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-macos-x64.tar.gz"
+          tar -xzf heta-compiler-macos-x64.tar.gz
+          chmod 775 heta-compiler
+
+      - name: Check version
+        run: |
+          if [[ "$(./heta-compiler --version)" != *"$VERSION"* ]]; then
+            echo "Version mismatch: expected $VERSION, got $(./heta-compiler --version)"
+            exit 1
+          fi
+
+  test-macos-arm64-release-asset:
+    if: ${{ github.event.release.prerelease == false }}
+    needs: upload-macos-arm64-release-asset
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get expected version
+        run: echo "VERSION=$(jq -r .version package.json)" >> "$GITHUB_ENV"
+
+      - name: Install from GitHub Release asset
+        run: |
+          curl -L -o heta-compiler-macos-arm64.tar.gz "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-macos-arm64.tar.gz"
+          tar -xzf heta-compiler-macos-arm64.tar.gz
+          chmod 775 heta-compiler
+
+      - name: Check version
+        run: |
+          if [[ "$(./heta-compiler --version)" != *"$VERSION"* ]]; then
+            echo "Version mismatch: expected $VERSION, got $(./heta-compiler --version)"
+            exit 1
+          fi
+
+  test-linux-x64-release-asset:
+    if: ${{ github.event.release.prerelease == false }}
+    needs: upload-linux-x64-release-asset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get expected version
+        run: echo "VERSION=$(jq -r .version package.json)" >> "$GITHUB_ENV"
+
+      - name: Install from GitHub Release asset
+        run: |
+          wget "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-x64.deb"
+          sudo dpkg -i heta-compiler-x64.deb
+
+      - name: Check version
+        run: |
+          if [[ "$(heta --version)" != *"$VERSION"* ]]; then
+            echo "Version mismatch: expected $VERSION, got $(heta --version)"
+            exit 1
+          fi
+
+  test-linux-arm64-release-asset:
+    if: ${{ github.event.release.prerelease == false }}
+    needs: upload-linux-arm64-release-asset
+    runs-on: ubuntu-22.04-arm
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get expected version
+        run: echo "VERSION=$(jq -r .version package.json)" >> "$GITHUB_ENV"
+
+      - name: Install from GitHub Release asset
+        run: |
+          curl -L -o heta-compiler-linux-arm64.tar.gz "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-linux-arm64.tar.gz"
+          tar -xzf heta-compiler-linux-arm64.tar.gz
+          chmod 775 heta-compiler
+
+      - name: Check version
+        run: |
+          if [[ "$(./heta-compiler --version)" != *"$VERSION"* ]]; then
+            echo "Version mismatch: expected $VERSION, got $(./heta-compiler --version)"
+            exit 1
+          fi
+
+  test-windows-x64-release-asset:
+    if: ${{ github.event.release.prerelease == false }}
+    needs: upload-windows-x64-release-asset
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get expected version
+        run: |
+          $version = node -p "require('./package.json').version"
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+
+      - name: Install from GitHub Release asset
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-win-x64.exe" -OutFile heta-compiler-win-x64.exe
+
+      - name: Check version
+        run: |
+          $actual = .\heta-compiler-win-x64.exe --version
+          if ($actual -notlike "*$env:VERSION*") {
+            Write-Error "Version mismatch: expected $env:VERSION, got $actual"
+            exit 1
+          }
+
+  publish-homebrew:
+    if: ${{ github.event.release.prerelease == false }}
+    needs:
+      - upload-macos-x64-release-asset
+      - upload-macos-arm64-release-asset
+      - test-macos-x64-release-asset
+      - test-macos-arm64-release-asset
+      - test-linux-x64-release-asset
+      - test-linux-arm64-release-asset
+      - test-windows-x64-release-asset
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_HOMEBREW_HETA_COMPILER }}
+
+      - name: Commit to homebrew-heta-compiler repo
+        env:
+          SHA_ARM64: ${{ needs.upload-macos-arm64-release-asset.outputs.sha_arm64 }}
+          SHA_X64: ${{ needs.upload-macos-x64-release-asset.outputs.sha_x64 }}
+        run: |
+          git clone git@github.com:hetalang/homebrew-heta-compiler.git
+          cd homebrew-heta-compiler
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          mkdir -p Formula
+          cp -f ../build-homebrew/heta-compiler.template.rb Formula/heta-compiler.rb
+          sed -i '' "s|\$VERSION|${{ github.event.release.tag_name }}|" Formula/heta-compiler.rb
+          sed -i '' "s|\$SHA256ARM64|$SHA_ARM64|" Formula/heta-compiler.rb
+          sed -i '' "s|\$SHA256X64|$SHA_X64|" Formula/heta-compiler.rb
+          git add .
+          git commit -m "Automated update from source repository based on release ${{ github.event.release.tag_name }}"
+          git push origin master
+
+  publish-chocolatey:
+    if: ${{ github.event.release.prerelease == false }}
+    needs:
+      - test-macos-x64-release-asset
+      - test-macos-arm64-release-asset
+      - test-linux-x64-release-asset
+      - test-linux-arm64-release-asset
+      - test-windows-x64-release-asset
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 18.x
+          cache: npm
+
       - name: Prepare files to publish in choco
         run: |
           mkdir -p dist/build-choco/tools
-          cp -Force dist/heta-compiler.exe dist/build-choco/tools/heta.exe
+          Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-win-x64.exe" -OutFile dist/build-choco/tools/heta.exe
           cp -Force LICENSE dist/build-choco/tools/LICENSE.txt
           $VERSION = node -p "require('./package.json').version"
           $SHA256 = (Get-FileHash -Path .\dist\build-choco\tools\heta.exe -Algorithm SHA256).Hash
@@ -251,10 +417,78 @@ jobs:
             Set-Content dist/build-choco/heta-compiler.nuspec
 
       - name: Build for choco and publish
-        if: ${{ github.event.release.prerelease == false }}
         env:
           CHOCO_API_KEY: ${{ secrets.DEPLOY_CHOCO_HETA_COMPILER }}
         run: |
           $VERSION = node -p "require('./package.json').version"
           choco pack dist/build-choco/heta-compiler.nuspec --output-directory dist --version $VERSION
           choco push dist/heta-compiler.$VERSION.nupkg --source https://push.chocolatey.org/ --api-key $env:CHOCO_API_KEY
+
+  publish-npm:
+    if: ${{ github.event.release.prerelease == false }}
+    needs:
+      - test-macos-x64-release-asset
+      - test-macos-arm64-release-asset
+      - test-linux-x64-release-asset
+      - test-linux-arm64-release-asset
+      - test-windows-x64-release-asset
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - run: npm ci
+
+      - name: Check npm publish version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "$VERSION" != "${{ github.event.release.tag_name }}" ]; then
+            echo "Version mismatch: package.json has $VERSION, release tag is ${{ github.event.release.tag_name }}"
+            exit 1
+          fi
+          if node -e "process.exit(require('semver').prerelease(process.argv[1]) ? 0 : 1)" "$VERSION"; then
+            echo "Refusing to publish prerelease package version $VERSION to npm latest"
+            exit 1
+          fi
+
+      - name: Publish to npm
+        run: npm publish
+
+  notify-teams:
+    if: ${{ github.event.release.prerelease == false }}
+    needs:
+      - publish-homebrew
+      - publish-chocolatey
+      - publish-npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification to Microsoft Teams
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK }}
+          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_BODY: ${{ github.event.release.body }}
+          REPO_NAME: ${{ github.repository }}
+          REPO_URL: ${{ github.event.repository.html_url }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+        run: |
+          payload=$(jq -n \
+            --arg release_name "$RELEASE_NAME" \
+            --arg release_body "$RELEASE_BODY" \
+            --arg repo_name "$REPO_NAME" \
+            --arg repo_url "$REPO_URL" \
+            --arg release_url "$RELEASE_URL" \
+            '{
+              text: "A new release has been published",
+              sections: [{
+                activityTitle: ("**Release: [" + $release_name + "](" + $release_url + ")**"),
+                activitySubtitle: ("Repository: [" + $repo_name + "](" + $repo_url + ")"),
+                text: $release_body
+              }]
+            }')
+
+          curl -X POST -H "Content-Type: application/json" -d "$payload" "$WEBHOOK_URL"

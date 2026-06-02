@@ -1,16 +1,7 @@
 name: Test install
 
 on:
-  workflow_run:
-    workflows: [On release]
-    types:
-      - completed
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'Heta Compiler version to install'
-        required: false
-        default: 'latest'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -22,7 +13,6 @@ permissions:
 
 jobs:
   test_macos_homebrew:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
@@ -49,7 +39,6 @@ jobs:
           fi
 
   test_linux_debian:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -75,7 +64,6 @@ jobs:
           fi
 
   test_windows_chocolatey:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
