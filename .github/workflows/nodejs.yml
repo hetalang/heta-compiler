@@ -1,13 +1,14 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Autotests
 
 on:
   push:
     branches: [ master, '*' ]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -23,26 +24,35 @@ jobs:
     runs-on: ${{ matrix.platform }}
 
     steps:
-    - uses: actions/checkout@v6
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v6
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - name: Autotest
-      run: npm test
-      env:
-        CI: true
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Autotest
+        run: npm test
+        env:
+          CI: true
+
   standalone:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - name: Use Node.js 18.x
-      uses: actions/setup-node@v6
-      with:
-        node-version: 18.x
-    - run: npm ci
-    - name: Build and check package
-      run: |
-        npm run pkg
-        dist/heta-compiler-linux --version
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 18.x
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build and check package
+        run: |
+          npm run pkg
+          dist/heta-compiler-linux --version

@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
   pull-requests: read
@@ -14,23 +18,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Send notification to Microsoft Teams
-      env:
-        WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK }}
-        RELEASE_TAG: ${{ github.event.release.tag_name }}
-        RELEASE_NAME: ${{ github.event.release.name }}
-        RELEASE_BODY: ${{ github.event.release.body }}
-        REPO_NAME: ${{ github.repository }}
-        REPO_URL: ${{ github.event.repository.html_url }}
-        RELEASE_URL: ${{ github.event.release.html_url }}
-      run: |
-        curl -X POST -H "Content-Type: application/json" \
-          -d "{
-            \"text\": \"🚀 A new release has been published!\",
-            \"sections\": [{
-              \"activityTitle\": \"**Release: [${RELEASE_NAME}](${RELEASE_URL})**\",
-              \"activitySubtitle\": \"Repository: [${REPO_NAME}](${REPO_URL})\",
-              \"text\": \"${RELEASE_BODY}\"
-            }]
-          }" \
-          $WEBHOOK_URL
+      - name: Send notification to Microsoft Teams
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK }}
+          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_BODY: ${{ github.event.release.body }}
+          REPO_NAME: ${{ github.repository }}
+          REPO_URL: ${{ github.event.repository.html_url }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+        run: |
+          payload=$(jq -n \
+            --arg release_name "$RELEASE_NAME" \
+            --arg release_body "$RELEASE_BODY" \
+            --arg repo_name "$REPO_NAME" \
+            --arg repo_url "$REPO_URL" \
+            --arg release_url "$RELEASE_URL" \
+            '{
+              text: "A new release has been published",
+              sections: [{
+                activityTitle: ("**Release: [" + $release_name + "](" + $release_url + ")**"),
+                activitySubtitle: ("Repository: [" + $repo_name + "](" + $repo_url + ")"),
+                text: $release_body
+              }]
+            }')
+
+          curl -X POST -H "Content-Type: application/json" -d "$payload" "$WEBHOOK_URL"
