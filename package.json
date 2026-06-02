@@ -16,6 +16,8 @@
     "jsdoc:sitemap": "node scripts/generate-jsdoc-sitemap.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "precompile": "node scripts/precompile-templates.js",
+    "prepkg": "npm run precompile",
+    "prepack": "npm run precompile",
     "pkg": "npx pkg . --compress GZip"
   },
   "repository": {

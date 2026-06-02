@@ -65,7 +65,7 @@ class Builder {
     
     // === wrong version throws, if no version stated than skip ===
     let satisfiesVersion = declaration.builderVersion
-      ? semver.satisfies(version, declaration.builderVersion)
+      ? semver.satisfies(version, declaration.builderVersion, { includePrerelease: true })
       : true;
     if (!satisfiesVersion) {
       let msg = `Version "${declaration.builderVersion}" stated in declaration file is not supported by the heta-compiler ${version}.`;

@@ -12,6 +12,8 @@ node_modules
 
 /docs
 /paper
+/cases
+/test
 
 /.github
 /.vscode
