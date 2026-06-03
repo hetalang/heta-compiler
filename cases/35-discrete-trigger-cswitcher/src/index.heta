@@ -1,0 +1,11 @@
+/* 
+  testing different combination of atStart for Switchers
+*/
+
+c1 @Compartment .= 1;
+k1 @Const = 1e-3;
+
+xxx @Record {output: true} := t < 200 ? 1 : 100; 
+sw7 @CSwitcher { trigger: "xxx - 50" };
+s7 @Species { compartment: c1, output: true } .= 1;
+s7 [sw7]= s7 + 1 / c1;
