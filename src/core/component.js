@@ -179,7 +179,7 @@ class Component extends Top {
           if (rule.isArray) { // iterates through array
             this[prop].forEach((item, i) => {
               let fullPath = rule.path ? `${prop}[${i}].${rule.path}` : `${prop}[${i}]`;
-              iterator(item, fullPath, rule);
+              iterator(item, fullPath); // rule
             });
           } else {
             let item = this[prop];
