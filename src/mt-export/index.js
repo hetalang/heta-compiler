@@ -1,5 +1,4 @@
 const { AbstractExport } = require('../abstract-export');
-const pkg = require('../../package');
 const { ajv } = require('../ajv');
 require('./namespace');
 

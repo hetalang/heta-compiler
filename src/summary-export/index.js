@@ -27,7 +27,7 @@ class SummaryExport extends AbstractExport {
     return 'summary';
   }
   makeText() {
-    let { logger } = this._builder;
+    //let { logger } = this._builder;
     let selectedNamespaces = this.selectedNamespaces();
     const { unitDefStorage, functionDefStorage, namespaceStorage } = this._builder.container;
 

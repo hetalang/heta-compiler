@@ -317,7 +317,7 @@ function _toMarkdown(elements = []){
       }
       case 'a': {
         let href = x.attributes?.href;
-        let title = x.attributes?.title;
+        //let title = x.attributes?.title;
         return '[' + _toMarkdown(x.elements) + '](' + href + ')';
         //break;
       }
@@ -675,7 +675,7 @@ function eventToQ(x, eventCounter, options = {}){
   qArr.push(switcher);
 
   // useValuesFromTriggerTime
-  let useValuesFromTriggerTime = x.attributes?.useValuesFromTriggerTime !== 'false';
+  //let useValuesFromTriggerTime = x.attributes?.useValuesFromTriggerTime !== 'false';
 
   // trigger
   let trigger = x.elements?.find((y) => y.name === 'trigger');

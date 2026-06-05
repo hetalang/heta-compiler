@@ -27,7 +27,7 @@ class DotExport extends AbstractExport {
     return 'dot';
   }
   makeText(){
-    let { logger } = this._builder;
+    //let { logger } = this._builder;
 
     let selectedNamespaces = this.selectedNamespaces();
 

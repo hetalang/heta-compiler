@@ -1,4 +1,3 @@
-const { index } = require('mathjs');
 const { Namespace } = require('../namespace');
 require('./expression');
 

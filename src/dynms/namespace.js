@@ -18,7 +18,7 @@ const HetaLevelError = require('../heta-level-error');
     - we do not create new constants
 */
 Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer = (expr) => expr.toString()) {
-    let { logger } = this.container;
+    //let { logger } = this.container;
 
     // generate constants list
     let constants = this.selectByClassName('Const')
