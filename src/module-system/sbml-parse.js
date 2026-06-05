@@ -295,50 +295,50 @@ function _toMarkdown(elements = []){
       case 'div':
       case 'p':
         return _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       case 'b':
       case 'strong':
         return '**' + _toMarkdown(x.elements) + '**';
-        break;
+        //break;
       case 'i':
         return '_' +_toMarkdown(x.elements) + '_';
-        break;
+        //break;
       case 'ul': {
         let list = x.elements.map((y) => '  * ' +_toMarkdown(y.elements))
           .join('\n');
         return list;
-        break;
+        //break;
       }
       case 'ol': {
         let list = x.elements.map((y) => '  1. ' +_toMarkdown(y.elements))
           .join('\n');
         return list;
-        break;
+        //break;
       }
       case 'a': {
         let href = x.attributes?.href;
         let title = x.attributes?.title;
         return '[' + _toMarkdown(x.elements) + '](' + href + ')';
-        break;
+        //break;
       }
       case 'h1':
         return '# ' + _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       case 'h2':
         return '## ' + _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       case 'h3':
         return '### ' + _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       case 'h4':
         return '#### ' + _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       case 'h5':
         return '##### ' + _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       case 'h6':
         return '###### ' + _toMarkdown(x.elements) + '\n\n';
-        break;
+        //break;
       default:
         return _toMarkdown(x.elements);
       }

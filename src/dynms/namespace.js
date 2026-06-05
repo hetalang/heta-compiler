@@ -124,7 +124,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
         action.rhs.format = exprFormat;
 
         return action;
-    }
+    };
 
     // implementing time events (switchers)
     this.selectByInstanceOf('TimeSwitcher')

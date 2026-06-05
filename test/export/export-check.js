@@ -26,7 +26,7 @@ describe('General argument checking', () => {
   it('Create JSON Export with export', () => {
     const b = new Builder({export: [{ format: 'json', filepath: './_1.json'}]});
     let { logger } = b.container;
-    json_export = b.exportArray[0];
+    let json_export = b.exportArray[0];
     expect(logger).to.have.property('hasErrors').false;
     expect(json_export).to.have.property('filepath', './_1.json');
     expect(json_export).to.have.property('format', 'json');

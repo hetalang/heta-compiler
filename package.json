@@ -30,7 +30,7 @@
     "url": "https://github.com/hetalang/heta-compiler/issues",
     "email": "dev@insysbio.com"
   },
-  "author": "Evgeny Metelkin <evgeny.metelkin@gmail.com> (https://github.com/metelkin)",
+  "author": "Evgeny Metelkin <evgeny.metelkin@gmail.com> (https://metelkin.me/)",
   "license": "Apache-2.0",
   "bin": {
     "heta": "bin/heta.js",

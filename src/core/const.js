@@ -52,8 +52,8 @@ class Const extends _Size { // implicit extend Numeric
       if (q.num === null) {
         delete this.num;
       } else if (q.num !== undefined) {
-        this.num = q.num
-      };
+        this.num = q.num;
+      }
       if (q.free === null) {
         delete this.free;
       } else if (q.free !== undefined) {

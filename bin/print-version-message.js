@@ -6,7 +6,7 @@ const semver = require('semver');
 const currentVersion = pkg.version;
 const changelogLink = 'https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md';
 const NPM_REF = 'http://registry.npmjs.org/-/package/heta-compiler/dist-tags';
-const installLink = 'https://hetalang.github.io/hetacompiler/#installation';
+const installLink = 'https://hetalang.github.io/hetacompiler/installation.html';
 
 async function getLatestVersionAsync(){
   try {
@@ -20,7 +20,7 @@ async function getLatestVersionAsync(){
 }
 
 async function printVersionMessage(){
-  let latestVersion = await getLatestVersionAsync('heta-compiler');
+  let latestVersion = await getLatestVersionAsync();
 
   let shouldPrint = latestVersion !== undefined 
       && semver.lt(currentVersion, latestVersion); // installed version is not the latest one

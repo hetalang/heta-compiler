@@ -579,12 +579,12 @@ class Unit extends Array {
    *
    * @returns {string} HTML fragment.
    */
-  toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;', minusSymbol = '&#8722;'){
+  toHTML2(spaceSymbol = '&#160;', timesSymbol = '&#215;'/*, minusSymbol = '&#8722;'*/){
     if (this.length === 0) return '<div class="unit-mult" style="display:inline-block">1</div>';
 
     let numBase = this
       .filter((u) => u.exponent > 0)
-      .map((u) => unitComponentToHTML(u, spaceSymbol, minusSymbol))
+      .map((u) => unitComponentToHTML(u, spaceSymbol)) // minusSymbol
       .join(timesSymbol);
     let denomBase = this
       .filter((u) => u.exponent < 0)
@@ -592,7 +592,7 @@ class Unit extends Array {
         kind: u.kind,
         multiplier: u.multiplier,
         exponent: (-1)*u.exponent
-      }, spaceSymbol, minusSymbol))
+      }, spaceSymbol)) // minusSymbol
       .join(timesSymbol);
     let num = numBase === ''
       ? '<div class="unit-mult" style="display:inline-block">1</div>'

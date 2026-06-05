@@ -4,7 +4,6 @@ const DYNMS_VERSION = '0.1.0';
 const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');
 const { ajv } = require('../ajv');
-const { omitByPaths } = require('../utils');
 
 const schema = {
   type: 'object',

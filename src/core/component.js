@@ -163,7 +163,7 @@ class Component extends Top {
     }, _q);
 
     // change references
-    const iterator = (item, path) => { // Actor { target: 'y', stoichiometry: -1 }, actors[0].target
+    const iterator = (item, path/*, rule*/) => { // Actor { target: 'y', stoichiometry: -1 }, actors[0].target
       let oldRef = this.getProperty(path);
       let newRef = q.rename[oldRef] 
         || [q.prefix, oldRef, q.suffix].join(''); // default behaviour
@@ -184,7 +184,7 @@ class Component extends Top {
           } else {
             let item = this[prop];
             let fullPath = rule.path ? `${prop}.${rule.path}` : `${prop}`;
-            iterator(item, fullPath, rule);
+            iterator(item, fullPath); // rule
           }
         }
       });
