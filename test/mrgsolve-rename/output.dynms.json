@@ -1,0 +1,115 @@
+{
+  "id": "nameless",
+  "constants": [
+    {
+      "id": "k1",
+      "value": 2
+    }
+  ],
+  "states": [
+    {
+      "id": "evid_ren_",
+      "initial": 1,
+      "static": true
+    },
+    {
+      "id": "default",
+      "initial": 10,
+      "static": true
+    },
+    {
+      "id": "rate_ren__amt_",
+      "initial": {
+        "expr": "5.0 * 10.0",
+        "format": "mrgsolve"
+      }
+    },
+    {
+      "id": "out_amt_",
+      "initial": {
+        "expr": "0.0 * 10.0",
+        "format": "mrgsolve"
+      }
+    }
+  ],
+  "assignments": [
+    {
+      "id": "out",
+      "rhs": {
+        "expr": "out_amt_ / default",
+        "format": "mrgsolve"
+      }
+    },
+    {
+      "id": "rate_ren_",
+      "rhs": {
+        "expr": "rate_ren__amt_ / default",
+        "format": "mrgsolve"
+      }
+    },
+    {
+      "id": "r1",
+      "rhs": {
+        "expr": "k1 * rate_ren_ * default + evid_ren_",
+        "format": "mrgsolve"
+      }
+    }
+  ],
+  "derivatives": [
+    {
+      "state": "rate_ren__amt_",
+      "rhs": {
+        "expr": "-r1",
+        "format": "mrgsolve"
+      }
+    },
+    {
+      "state": "out_amt_",
+      "rhs": {
+        "expr": "r1",
+        "format": "mrgsolve"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "table_ren_",
+      "trigger": {
+        "type": "time",
+        "start": 0,
+        "period": 1
+      },
+      "priority": 0,
+      "actions": [
+        {
+          "rhs": {
+            "expr": "(rate_ren_ + k1) * default",
+            "format": "mrgsolve"
+          },
+          "state": "rate_ren__amt_"
+        }
+      ],
+      "active": true
+    }
+  ],
+  "observables": [
+    {
+      "symbol": "rate_ren_"
+    },
+    {
+      "symbol": "out"
+    }
+  ],
+  "dynamicStatesIndex": {
+    "rate_ren__amt_": 1,
+    "out_amt_": 2
+  },
+  "timeEventIndex": {
+    "table_ren_": 10
+  },
+  "nameMap": {
+    "evid": "evid_ren_",
+    "rate": "rate_ren_",
+    "table": "table_ren_"
+  }
+}

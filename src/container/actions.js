@@ -6,7 +6,6 @@ const reservedWords = [
   'include', 'block', 'namespace', 'abstract', 'concrete', 'begin', 'end',
   'NaN', 'Infinity',
   'e', 'E', 'pi', 'PI',
-  'time', 'SOLVERTIME', 'default', // mrgsolve specific reserved words
   'null'
 ];
 

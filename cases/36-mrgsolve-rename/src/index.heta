@@ -1,0 +1,11 @@
+k1 @Const = 2;
+evid @Record .= 1;
+default @Compartment .= 10;
+
+rate @Species { compartment: default, output: true } .= 5;
+out @Species { compartment: default, output: true } .= 0;
+
+r1 @Reaction { actors: rate -> out } := k1 * rate * default + evid;
+
+table @TimeSwitcher { start: 0, period: 1 };
+rate [table]= rate + k1;
