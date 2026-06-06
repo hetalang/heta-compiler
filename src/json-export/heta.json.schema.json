@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+  "title": "Heta JSON export document",
+  "description": "Schema for heta.json format as Heta modules and export result.",
+  "type": "array",
+  "minItems": 1,
+  "prefixItems": [
+    {
+      "$ref": "#/$defs/hasMeta"
+    }
+  ],
+  "items": {
+    "$ref": "#/$defs/statement"
+  },
+  "$defs": {
+    "stringOrNumber": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "unitsComponent": {
+      "type": "object",
+      "required": [
+        "kind",
+        "multiplier",
+        "exponent"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "multiplier": {
+          "type": "number"
+        },
+        "exponent": {
+          "type": "number"
+        }
+      }
+    },
+    "unitsExpr": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/unitsComponent"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "required": [
+        "target"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "target": {
+          "type": "string"
+        },
+        "stoichiometry": {
+          "type": "number"
+        }
+      }
+    },
+    "assignments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "hasMeta": {
+      "type": "object",
+      "required": [
+        "action",
+        "toolName",
+        "toolVersion",
+        "createdAt",
+        "platformId",
+        "format"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "action": {
+          "const": "hasMeta"
+        },
+        "toolName": {
+          "type": "string"
+        },
+        "toolVersion": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "platformId": {
+          "type": "string"
+        },
+        "platformVersion": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "JSON",
+            "json"
+          ]
+        }
+      }
+    },
+    "setNS": {
+      "type": "object",
+      "required": [
+        "action",
+        "space"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "action": {
+          "const": "setNS"
+        },
+        "space": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "concrete",
+            "abstract"
+          ]
+        }
+      }
+    },
+    "defineUnit": {
+      "type": "object",
+      "required": [
+        "action",
+        "id"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "action": {
+          "const": "defineUnit"
+        },
+        "id": {
+          "type": "string"
+        },
+        "units": {
+          "$ref": "#/$defs/unitsExpr"
+        }
+      }
+    },
+    "defineFunction": {
+      "type": "object",
+      "required": [
+        "action",
+        "id",
+        "math"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "action": {
+          "const": "defineFunction"
+        },
+        "id": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "math": {
+          "type": "string"
+        }
+      }
+    },
+    "setScenario": {
+      "type": "object",
+      "required": [
+        "action",
+        "id"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "action": {
+          "const": "setScenario"
+        },
+        "id": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number"
+          }
+        },
+        "saveat": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "tspan": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "observables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "events_active": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "events_save": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    "componentLike": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "upsert",
+            "insert",
+            "forceInsert",
+            "update"
+          ]
+        },
+        "class": {
+          "type": "string"
+        },
+        "space": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "units": {
+          "$ref": "#/$defs/unitsExpr"
+        },
+        "assignments": {
+          "$ref": "#/$defs/assignments"
+        },
+        "num": {
+          "type": "number"
+        },
+        "trigger": {
+          "type": "string"
+        },
+        "period": {
+          "$ref": "#/$defs/stringOrNumber"
+        },
+        "start": {
+          "$ref": "#/$defs/stringOrNumber"
+        },
+        "stop": {
+          "$ref": "#/$defs/stringOrNumber"
+        },
+        "compartment": {
+          "type": "string"
+        },
+        "boundary": {
+          "type": "boolean"
+        },
+        "output": {
+          "type": "boolean"
+        },
+        "reversible": {
+          "type": "boolean"
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actor"
+          }
+        },
+        "modifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actor"
+          }
+        }
+      }
+    },
+    "statement": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/setNS"
+        },
+        {
+          "$ref": "#/$defs/defineUnit"
+        },
+        {
+          "$ref": "#/$defs/defineFunction"
+        },
+        {
+          "$ref": "#/$defs/setScenario"
+        },
+        {
+          "$ref": "#/$defs/componentLike"
+        }
+      ]
+    }
+  }
+}
