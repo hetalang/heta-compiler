@@ -1,10 +1,13 @@
 {
-  "$schema": "http://json-schema.org/schema#",
-  "description" : "Describes platform.json file in Heta compiler.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/builder/declaration-schema.json",
+  "title": "Heta platform declaration",
+  "description": "Describes platform.json file in Heta compiler.",
   "type": "object",
   "required": ["options", "importModule", "export"],
   "additionalProperties": true,
   "properties": {
+    "$schema": {"type": "string"},
     "id": {"type": "string"},
     "notes": {"type": "string"},
     "version": {"type": "string"},
@@ -12,12 +15,13 @@
     "homepage": {"type": "string"},
     "repository": {
       "type": "object",
+      "additionalProperties": true,
       "properties": {
         "type": {"type": "string"},
         "url": {"type": "string"}
       }
     },
-    "license" : {"type": "string", "default": "UNLICENSED", "description": "see https://spdx.org/licenses/"},
+    "license": {"type": "string", "default": "UNLICENSED", "description": "see https://spdx.org/licenses/"},
     "private": {"type": "boolean"},
     "contributors": {"type": "array", "items": {"type": "string", "example": "Your Name <email@example.com> (http://example.com)"}},
     "builderVersion": {"type": "string", "default": "*"},
@@ -51,9 +55,9 @@
       "properties": {
         "type": {"type": "string", "enum": ["heta", "table", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
         "source": {"type": "string", "default": "index.heta"},
-        "sheet": { "type": "integer" },
-        "omitRows": { "type": "integer", "minimum": 0 },
-        "transpose": { "type": "boolean", "default": false }
+        "sheet": {"type": "integer"},
+        "omitRows": {"type": "integer", "minimum": 0},
+        "transpose": {"type": "boolean", "default": false}
       }
     },
     "export": {
@@ -64,10 +68,10 @@
         "required": ["format"],
         "additionalProperties": true,
         "properties": {
-          "id": { "type": "string" },
-          "format": { "type": "string" },
-          "filepath": { "type": "string" },
-          "spaceFilter": { "type": "string" }
+          "id": {"type": "string"},
+          "format": {"type": "string"},
+          "filepath": {"type": "string"},
+          "spaceFilter": {"type": "string"}
         }
       }
     }
