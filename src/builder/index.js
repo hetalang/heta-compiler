@@ -1,6 +1,6 @@
 const path = require('path');
 const declarationSchema = require('./declaration-schema');
-const { ajv2020 } = require('../ajv');
+const { ajv } = require('../ajv');
 const Container = require('../container');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
@@ -53,7 +53,7 @@ class Builder {
     this.templates = Builder._templates;
 
     // check based on schema, use default values from schema
-    let validate = ajv2020.compile(declarationSchema);
+    let validate = ajv.compile(declarationSchema);
     let valid = validate(declaration);
     if (!valid) {
       // convert validation errors to heta errors
