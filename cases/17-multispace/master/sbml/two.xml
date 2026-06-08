@@ -21,7 +21,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        substanceUnits=""
         >
       </species>
       <species

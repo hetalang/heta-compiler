@@ -112,8 +112,9 @@
         {% if record.assignments.start_.num is defined -%}
           {% if record.isAmount===true %}initialAmount{% else %}initialConcentration{% endif %}="{{record.assignments.start_.num}}"
         {%- endif %}
-        {%- if record.units is defined %}
-        substanceUnits="{{record.unitsHash(true)}}"
+        {%- set substanceUnits = record.unitsHash(true) -%}
+        {%- if substanceUnits is defined %}
+        substanceUnits="{{ substanceUnits }}"
         {%- endif %}
         {#- metaid="{{record.index}}" #}
         >

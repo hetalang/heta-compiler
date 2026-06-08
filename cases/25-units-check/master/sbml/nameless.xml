@@ -5,12 +5,61 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:23.511Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T09:46:18.952Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
     >
     
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="pow7">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><times/><cn>2</cn><apply><times/><ci>x</ci><apply><power/><ci>x</ci><cn>7</cn></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="xx">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><plus/><apply><power/><ci>x</ci><cn>8</cn></apply><apply><pow7/><ci>x</ci><cn>1</cn></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="xxx">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><times/><apply><times/><apply><sin/><ci>x</ci></apply><apply><power/><apply><times/><ci>y</ci><cn>1.2</cn></apply><cn>3</cn></apply></apply><apply><cos/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="yyy">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><plus/><apply><plus/><apply><plus/><cn>1</cn><apply><sin/><ci>x</ci></apply></apply><apply><power/><ci>y</ci><cn>3</cn></apply></apply><apply><cos/><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="zzz">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><xxx/><ci>y</ci><ci>x</ci></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
     <unitDefinition id="_h" name="h">
@@ -95,55 +144,6 @@
 </unitDefinition>
     </listOfUnitDefinitions>
 <!-- END UNIT DEFINITIONS -->
-<!-- BEGIN FUNCTION DEFINITIONS -->
-    <listOfFunctionDefinitions>
-      <functionDefinition id="pow7">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <lambda>
-            <bvar><ci> x </ci></bvar>
-            <bvar><ci> y </ci></bvar>
-            <apply><times/><cn>2</cn><apply><times/><ci>x</ci><apply><power/><ci>x</ci><cn>7</cn></apply></apply></apply>
-          </lambda>
-        </math>
-      </functionDefinition>
-      <functionDefinition id="xx">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <lambda>
-            <bvar><ci> x </ci></bvar>
-            <bvar><ci> y </ci></bvar>
-            <apply><plus/><apply><power/><ci>x</ci><cn>8</cn></apply><apply><pow7/><ci>x</ci><cn>1</cn></apply></apply>
-          </lambda>
-        </math>
-      </functionDefinition>
-      <functionDefinition id="xxx">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <lambda>
-            <bvar><ci> x </ci></bvar>
-            <bvar><ci> y </ci></bvar>
-            <apply><times/><apply><times/><apply><sin/><ci>x</ci></apply><apply><power/><apply><times/><ci>y</ci><cn>1.2</cn></apply><cn>3</cn></apply></apply><apply><cos/><ci>x</ci></apply></apply>
-          </lambda>
-        </math>
-      </functionDefinition>
-      <functionDefinition id="yyy">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <lambda>
-            <bvar><ci> x </ci></bvar>
-            <bvar><ci> y </ci></bvar>
-            <apply><plus/><apply><plus/><apply><plus/><cn>1</cn><apply><sin/><ci>x</ci></apply></apply><apply><power/><ci>y</ci><cn>3</cn></apply></apply><apply><cos/><ci>x</ci></apply></apply>
-          </lambda>
-        </math>
-      </functionDefinition>
-      <functionDefinition id="zzz">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <lambda>
-            <bvar><ci> x </ci></bvar>
-            <bvar><ci> y </ci></bvar>
-            <apply><xxx/><ci>y</ci><ci>x</ci></apply>
-          </lambda>
-        </math>
-      </functionDefinition>
-    </listOfFunctionDefinitions>
-<!-- END FUNCTION DEFINITIONS -->
 
   
     <listOfCompartments>
