@@ -43,7 +43,7 @@
           <lambda>
             <bvar><ci> x </ci></bvar>
             <bvar><ci> y </ci></bvar>
-            <apply><power/><apply><f4/><ci>x</ci></apply><cn>2</cn></apply>
+            <apply><power/><apply><ci>f4</ci><ci>x</ci></apply><cn>2</cn></apply>
           </lambda>
         </math>
       </functionDefinition>
@@ -91,7 +91,7 @@
           <speciesReference species="s1" stoichiometry="1"/>
         </listOfReactants>
         <kineticLaw>
-          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>k1</ci><apply><f5/><cn>1.1</cn><ci>k1</ci></apply></apply><apply><power/><cn>1.1</cn><cn>2</cn></apply></apply><ci>c1</ci></apply></math>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>k1</ci><apply><ci>f5</ci><cn>1.1</cn><ci>k1</ci></apply></apply><apply><power/><cn>1.1</cn><cn>2</cn></apply></apply><ci>c1</ci></apply></math>
         </kineticLaw>
       </reaction>
     </listOfReactions>

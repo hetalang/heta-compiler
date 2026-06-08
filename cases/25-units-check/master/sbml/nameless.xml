@@ -27,7 +27,7 @@
           <lambda>
             <bvar><ci> x </ci></bvar>
             <bvar><ci> y </ci></bvar>
-            <apply><plus/><apply><power/><ci>x</ci><cn>8</cn></apply><apply><pow7/><ci>x</ci><cn>1</cn></apply></apply>
+            <apply><plus/><apply><power/><ci>x</ci><cn>8</cn></apply><apply><ci>pow7</ci><ci>x</ci><cn>1</cn></apply></apply>
           </lambda>
         </math>
       </functionDefinition>
@@ -54,7 +54,7 @@
           <lambda>
             <bvar><ci> x </ci></bvar>
             <bvar><ci> y </ci></bvar>
-            <apply><xxx/><ci>y</ci><ci>x</ci></apply>
+            <apply><ci>xxx</ci><ci>y</ci><ci>x</ci></apply>
           </lambda>
         </math>
       </functionDefinition>
@@ -264,17 +264,17 @@
     <assignmentRule
       variable="p2"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><cn>23</cn><ci>s1</ci></apply><apply><xx/><ci>k1</ci><cn>3</cn></apply></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><cn>23</cn><ci>s1</ci></apply><apply><ci>xx</ci><ci>k1</ci><cn>3</cn></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="y21"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><xxx/><apply><times/><cn>1.1</cn><cn>2.2</cn></apply><ci>k21</ci></apply></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><ci>xxx</ci><apply><times/><cn>1.1</cn><cn>2.2</cn></apply><ci>k21</ci></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="y22"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><zzz/><ci>k21</ci><cn>3.1415</cn></apply></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><ci>zzz</ci><ci>k21</ci><cn>3.1415</cn></apply></apply></math>
     </assignmentRule>
   
   </listOfRules>

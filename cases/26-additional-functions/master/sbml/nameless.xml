@@ -41,7 +41,7 @@
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <lambda>
             <bvar><ci> x </ci></bvar>
-            <apply><divide/><cn>1</cn><apply><cosh/><ci>x</ci></apply></apply>
+            <apply><divide/><cn>1</cn><apply><ci>cosh</ci><ci>x</ci></apply></apply>
           </lambda>
         </math>
       </functionDefinition>
@@ -49,7 +49,7 @@
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <lambda>
             <bvar><ci> x </ci></bvar>
-            <apply><divide/><cn>1</cn><apply><sinh/><ci>x</ci></apply></apply>
+            <apply><divide/><cn>1</cn><apply><ci>sinh</ci><ci>x</ci></apply></apply>
           </lambda>
         </math>
       </functionDefinition>
@@ -57,7 +57,7 @@
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <lambda>
             <bvar><ci> x </ci></bvar>
-            <apply><divide/><cn>1</cn><apply><tanh/><ci>x</ci></apply></apply>
+            <apply><divide/><cn>1</cn><apply><ci>tanh</ci><ci>x</ci></apply></apply>
           </lambda>
         </math>
       </functionDefinition>
