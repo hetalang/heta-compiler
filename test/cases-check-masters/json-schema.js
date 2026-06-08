@@ -28,7 +28,7 @@ describe('Cases build masters JSON schema', () => {
 
     const jsonFiles = canonicalExport.files
       .map(normalizePath)
-      .filter((p) => p.endsWith('/master/json/output.heta.json'));
+      .filter((p) => p.endsWith('/master/canonical/output.heta.json'));
 
     jsonFiles.forEach((filePath) => {
       it(`${testCase.case} / json schema / ${filePath}`, () => {
