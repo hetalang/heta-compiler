@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const fs = require('fs-extra');
 const Ajv2020 = require('ajv/dist/2020');
 
-const registry = require('./cases-export-results.json');
+const registry = require('../cases-build-masters/cases-export-results.json');
 
 const repoDir = path.resolve(__dirname, '../..');
 const schemaPath = path.join(repoDir, 'src', 'json-export', 'heta.json.schema.json');

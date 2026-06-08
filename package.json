@@ -11,8 +11,8 @@
     "./package": "./package.json"
   },
   "scripts": {
-    "test:dev": "mocha test/cases-build-masters --config=./test/.mocharc.json",
-    "test": "mocha test --config=./test/.mocharc.json",
+    "test:masters": "mocha test/cases-check-masters --config=./test/.mocharc.json",
+    "test": "mocha test --ignore='test/cases-check-masters/**' --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -c .jsdoc.json",
     "jsdoc:sitemap": "node scripts/generate-jsdoc-sitemap.js",
     "test:cov": "nyc --reporter=lcov npm run test",
@@ -67,7 +67,8 @@
     "nyc": "^18.0.0",
     "pkg": "^5.8.1",
     "sitemap": "^8.0.3",
-    "slv-utils": "^0.5.1"
+    "slv-utils": "^0.5.1",
+    "xmllint-wasm": "^5.2.0"
   },
   "overrides": {
     "serialize-javascript": "^7.0.5",
