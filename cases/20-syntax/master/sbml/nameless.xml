@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:28.759Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:23.279Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -110,8 +110,6 @@
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="m1"/>
         </listOfModifiers>
@@ -124,8 +122,6 @@
         reversible="true"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="s1" stoichiometry="1"/>
         </listOfProducts>
@@ -226,9 +222,6 @@
             
           </math>
         </trigger>
-        <listOfEventAssignments>
-          
-        </listOfEventAssignments>
       </event>
       <event
         id="cs1"
@@ -244,9 +237,6 @@
             
           </math>
         </trigger>
-        <listOfEventAssignments>
-          
-        </listOfEventAssignments>
       </event>
     </listOfEvents>
   

@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:30.634Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:23.907Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -1696,8 +1696,6 @@
         <listOfReactants>
           <speciesReference species="A_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_b"/>
           <modifierSpeciesReference species="FAAH_b"/>
@@ -1716,8 +1714,6 @@
         <listOfReactants>
           <speciesReference species="O_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_b"/>
           <modifierSpeciesReference species="FAAH_b"/>
@@ -1736,8 +1732,6 @@
         <listOfReactants>
           <speciesReference species="P_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_b"/>
           <modifierSpeciesReference species="FAAH_b"/>
@@ -1756,8 +1750,6 @@
         <listOfReactants>
           <speciesReference species="L_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_b"/>
           <modifierSpeciesReference species="FAAH_b"/>
@@ -1776,8 +1768,6 @@
         <listOfReactants>
           <speciesReference species="S_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_b"/>
           <modifierSpeciesReference species="FAAH_b"/>
@@ -1793,8 +1783,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NAPE_b" stoichiometry="1"/>
         </listOfProducts>
@@ -1808,8 +1796,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NOPE_b" stoichiometry="1"/>
         </listOfProducts>
@@ -1823,8 +1809,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NPPE_b" stoichiometry="1"/>
         </listOfProducts>
@@ -1838,8 +1822,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NLPE_b" stoichiometry="1"/>
         </listOfProducts>
@@ -1853,8 +1835,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NSPE_b" stoichiometry="1"/>
         </listOfProducts>
@@ -1963,8 +1943,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="FAAH_b" stoichiometry="1"/>
         </listOfProducts>
@@ -1981,8 +1959,6 @@
         <listOfReactants>
           <speciesReference species="FAAH_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_b"/>
         </listOfModifiers>
@@ -2018,8 +1994,6 @@
         <listOfReactants>
           <speciesReference species="FAAHinh_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAHinh_b"/>
         </listOfModifiers>
@@ -2036,8 +2010,6 @@
         <listOfReactants>
           <speciesReference species="A_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="A_b"/>
         </listOfModifiers>
@@ -2054,8 +2026,6 @@
         <listOfReactants>
           <speciesReference species="O_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="O_b"/>
         </listOfModifiers>
@@ -2072,8 +2042,6 @@
         <listOfReactants>
           <speciesReference species="P_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="P_b"/>
         </listOfModifiers>
@@ -2090,8 +2058,6 @@
         <listOfReactants>
           <speciesReference species="L_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="L_b"/>
         </listOfModifiers>
@@ -2108,8 +2074,6 @@
         <listOfReactants>
           <speciesReference species="S_b" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="S_b"/>
         </listOfModifiers>
@@ -2126,8 +2090,6 @@
         <listOfReactants>
           <speciesReference species="A_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_r"/>
           <modifierSpeciesReference species="FAAH_r"/>
@@ -2146,8 +2108,6 @@
         <listOfReactants>
           <speciesReference species="O_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_r"/>
           <modifierSpeciesReference species="FAAH_r"/>
@@ -2166,8 +2126,6 @@
         <listOfReactants>
           <speciesReference species="P_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_r"/>
           <modifierSpeciesReference species="FAAH_r"/>
@@ -2186,8 +2144,6 @@
         <listOfReactants>
           <speciesReference species="L_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_r"/>
           <modifierSpeciesReference species="FAAH_r"/>
@@ -2206,8 +2162,6 @@
         <listOfReactants>
           <speciesReference species="S_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_r"/>
           <modifierSpeciesReference species="FAAH_r"/>
@@ -2223,8 +2177,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NAPE_r" stoichiometry="1"/>
         </listOfProducts>
@@ -2238,8 +2190,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NOPE_r" stoichiometry="1"/>
         </listOfProducts>
@@ -2253,8 +2203,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NPPE_r" stoichiometry="1"/>
         </listOfProducts>
@@ -2268,8 +2216,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NLPE_r" stoichiometry="1"/>
         </listOfProducts>
@@ -2283,8 +2229,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="NSPE_r" stoichiometry="1"/>
         </listOfProducts>
@@ -2393,8 +2337,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="FAAH_r" stoichiometry="1"/>
         </listOfProducts>
@@ -2411,8 +2353,6 @@
         <listOfReactants>
           <speciesReference species="FAAH_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_r"/>
         </listOfModifiers>
@@ -2448,8 +2388,6 @@
         <listOfReactants>
           <speciesReference species="FAAHinh_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAHinh_r"/>
         </listOfModifiers>
@@ -2466,8 +2404,6 @@
         <listOfReactants>
           <speciesReference species="A_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="A_r"/>
         </listOfModifiers>
@@ -2484,8 +2420,6 @@
         <listOfReactants>
           <speciesReference species="O_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="O_r"/>
         </listOfModifiers>
@@ -2502,8 +2436,6 @@
         <listOfReactants>
           <speciesReference species="P_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="P_r"/>
         </listOfModifiers>
@@ -2520,8 +2452,6 @@
         <listOfReactants>
           <speciesReference species="L_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="L_r"/>
         </listOfModifiers>
@@ -2538,8 +2468,6 @@
         <listOfReactants>
           <speciesReference species="S_r" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="S_r"/>
         </listOfModifiers>
@@ -2556,8 +2484,6 @@
         <listOfReactants>
           <speciesReference species="A_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_m"/>
           <modifierSpeciesReference species="FAAH_m"/>
@@ -2576,8 +2502,6 @@
         <listOfReactants>
           <speciesReference species="O_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_m"/>
           <modifierSpeciesReference species="FAAH_m"/>
@@ -2596,8 +2520,6 @@
         <listOfReactants>
           <speciesReference species="P_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_m"/>
           <modifierSpeciesReference species="FAAH_m"/>
@@ -2616,8 +2538,6 @@
         <listOfReactants>
           <speciesReference species="L_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_m"/>
           <modifierSpeciesReference species="FAAH_m"/>
@@ -2636,8 +2556,6 @@
         <listOfReactants>
           <speciesReference species="S_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_m"/>
           <modifierSpeciesReference species="FAAH_m"/>
@@ -2653,8 +2571,6 @@
         reversible="false"
         fast="false"
         >
-        <listOfReactants>
-        </listOfReactants>
         <listOfProducts>
           <speciesReference species="FAAH_m" stoichiometry="1"/>
         </listOfProducts>
@@ -2671,8 +2587,6 @@
         <listOfReactants>
           <speciesReference species="FAAH_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAH_m"/>
         </listOfModifiers>
@@ -2708,8 +2622,6 @@
         <listOfReactants>
           <speciesReference species="FAAHinh_m" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="FAAHinh_m"/>
         </listOfModifiers>
@@ -3062,8 +2974,6 @@
         <listOfReactants>
           <speciesReference species="PFM_p" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="PFM_p"/>
         </listOfModifiers>

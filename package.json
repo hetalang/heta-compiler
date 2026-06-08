@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "mocha test --ignore='test/cases-check-masters/**' --config=./test/.mocharc.json",
-    "test:dev": "mocha test/cases-check-masters/json-schema.js --config=./test/.mocharc.json",
+    "test:dev": "mocha test/cases-build-masters --config=./test/.mocharc.json",
     "rebuild:masters": "node scripts/rebuild-masters.js",
     "test:masters": "mocha test/cases-check-masters --config=./test/.mocharc.json",
     "jsdoc": "jsdoc -c .jsdoc.json",

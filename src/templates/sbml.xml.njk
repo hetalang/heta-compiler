@@ -325,6 +325,13 @@
           {{ record.xmlAnnotation }}
         </annotation>
         {%- endif %}
+        {%- set hasReactants = false -%}
+        {%- for actor in record.actors -%}
+        {%- if actor.stoichiometry < 0 -%}
+        {%- set hasReactants = true -%}
+        {%- endif -%}
+        {%- endfor -%}
+        {%- if hasReactants %}
         <listOfReactants>
           {%- for actor in record.actors %}
           {%- if actor.stoichiometry < 0 %}
@@ -332,6 +339,12 @@
           {%- endif %}
           {%- endfor %}
         </listOfReactants>
+        {%- endif %}
+        {%- set hasProducts = false -%}
+        {%- for actor in record.actors -%}
+        {%- if actor.stoichiometry > 0 -%}{%- set hasProducts = true -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if hasProducts %}
         <listOfProducts>
           {%- for actor in record.actors %}
           {%- if actor.stoichiometry > 0 %}
@@ -339,6 +352,7 @@
           {%- endif %}
           {%- endfor %}
         </listOfProducts>
+        {%- endif %}
         {%- if record.modifiers|length > 0 %}
         <listOfModifiers>
           {%- for modifier in record.modifiers %}
@@ -407,8 +421,10 @@
             {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
+        {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
+        {%- if eventAssignments|length > 0 %}
         <listOfEventAssignments>
-          {% for record in population.selectRecordsByContext(event.id) %}
+          {% for record in eventAssignments %}
           <eventAssignment
             variable="{{ record.id }}"
             {#- metaid="{{record.index}}::{{event.id}}" #}
@@ -417,6 +433,7 @@
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
+        {%- endif %}
       </event>
       {%- endfor %}
       {%- for event in listOfCEvents %}
@@ -435,8 +452,10 @@
             {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
+        {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
+        {%- if eventAssignments|length > 0 %}
         <listOfEventAssignments>
-          {% for record in population.selectRecordsByContext(event.id) %}
+          {% for record in eventAssignments %}
           <eventAssignment
             variable="{{ record.id }}"
             {#- metaid="{{record.index}}::{{event.id}}" #}
@@ -445,6 +464,7 @@
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
+        {%- endif %}
       </event>
       {%- endfor %}
       {%- for event in listOfDEvents %}
@@ -459,8 +479,10 @@
             {%- if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
+        {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
+        {%- if eventAssignments|length > 0 %}
         <listOfEventAssignments>
-          {% for record in population.selectRecordsByContext(event.id) %}
+          {% for record in eventAssignments %}
           <eventAssignment
             variable="{{ record.id }}"
             {#- metaid="{{record.index}}::{{event.id}}" #}
@@ -469,6 +491,7 @@
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
+        {%- endif %}
       </event>
       {%- endfor %}
     </listOfEvents>

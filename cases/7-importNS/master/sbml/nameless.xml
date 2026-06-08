@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:27.013Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:22.927Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -238,8 +238,6 @@
         <listOfReactants>
           <speciesReference species="c1_first" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_first</ci><ci>c1_first</ci></apply><ci>blood</ci></apply></math>
         </kineticLaw>
@@ -267,8 +265,6 @@
         <listOfReactants>
           <speciesReference species="c1_second" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_second</ci><ci>c1_second</ci></apply><ci>blood</ci></apply></math>
         </kineticLaw>
@@ -296,8 +292,6 @@
         <listOfReactants>
           <speciesReference species="c1_third" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <kineticLaw>
           <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>kel_third</ci><ci>c1_third</ci></apply><ci>blood</ci></apply></math>
         </kineticLaw>

@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:26.785Z","platformId":"mm","namespaceId":"mod1","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:22.868Z","platformId":"mm","namespaceId":"mod1","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="mod1"
@@ -193,8 +193,6 @@
         <listOfReactants>
           <speciesReference species="sp1" stoichiometry="1"/>
         </listOfReactants>
-        <listOfProducts>
-        </listOfProducts>
         <listOfModifiers>
           <modifierSpeciesReference species="sp1"/>
         </listOfModifiers>
