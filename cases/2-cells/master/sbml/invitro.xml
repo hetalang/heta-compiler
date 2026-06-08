@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:48:55.119Z","platformId":"mm","namespaceId":"invitro","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:26.282Z","platformId":"mm","namespaceId":"invitro","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="invitro" 
-    metaid="invitro"
+    id="invitro"
     >
     
 
@@ -19,20 +18,17 @@
         id="tot_vol"
         constant="false"
         size="0.1"
-        metaid="invitro::tot_vol"
         >
       </compartment>
       <compartment
         id="neu_vol"
         constant="false"
-        metaid="invitro::neu_vol"
         >
       </compartment>
       <compartment
         id="ext"
         constant="false"
         size="1"
-        metaid="invitro::ext"
         >
       </compartment>
     </listOfCompartments>
@@ -45,7 +41,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         
-        metaid="invitro::ATP_neu"
         >
       </species>
       <species
@@ -55,7 +50,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="150"
-        metaid="invitro::S1"
         >
       </species>
       <species
@@ -65,7 +59,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="1000000"
-        metaid="invitro::neu_count"
         >
       </species>
       <species
@@ -75,7 +68,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         
-        metaid="invitro::ADP_neu"
         >
       </species>
       <species
@@ -85,7 +77,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="invitro::P1_neu"
         >
       </species>
       <species
@@ -95,7 +86,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="invitro::P1_ext"
         >
       </species>
       <species
@@ -105,7 +95,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="invitro::IL15_ext"
         >
       </species>
     </listOfSpecies>
@@ -114,56 +103,48 @@
       <parameter
         id="P1_mean"
         constant="false"
-        metaid="invitro::P1_mean"
         >
       </parameter>
       <parameter
         id="AXP_neu"
         constant="true"
         value="0.1"
-        metaid="invitro::AXP_neu"
         >
       </parameter>
       <parameter
         id="neu_size"
         constant="true"
         value="1e-12"
-        metaid="invitro::neu_size"
         >
       </parameter>
       <parameter
         id="K_eq_ADP"
         constant="true"
         value="10"
-        metaid="invitro::K_eq_ADP"
         >
       </parameter>
       <parameter
         id="ksyn_ATP"
         constant="true"
         value="0.0001"
-        metaid="invitro::ksyn_ATP"
         >
       </parameter>
       <parameter
         id="ksyn_P1"
         constant="true"
         value="0.01"
-        metaid="invitro::ksyn_P1"
         >
       </parameter>
       <parameter
         id="Km_S1"
         constant="true"
         value="1.2"
-        metaid="invitro::Km_S1"
         >
       </parameter>
       <parameter
         id="k_tr_P1"
         constant="true"
         value="0.013"
-        metaid="invitro::k_tr_P1"
         >
       </parameter>
     </listOfParameters>
@@ -172,13 +153,11 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="ATP_neu"
-        metaid="invitro::ATP_neu::start_"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><ci>AXP_neu</ci><ci>K_eq_ADP</ci></apply><apply><plus/><cn>1</cn><ci>K_eq_ADP</ci></apply></apply></math>
       </initialAssignment>
       <initialAssignment
         symbol="ADP_neu"
-        metaid="invitro::ADP_neu::start_"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><ci>AXP_neu</ci><apply><plus/><cn>1</cn><ci>K_eq_ADP</ci></apply></apply></math>
       </initialAssignment>
@@ -189,19 +168,16 @@
   <listOfRules>
     <assignmentRule
       variable="neu_vol"
-      metaid="invitro::neu_vol::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>neu_count</ci><ci>neu_size</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="ext"
-      metaid="invitro::ext::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><ci>tot_vol</ci><ci>neu_vol</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="P1_mean"
-      metaid="invitro::P1_mean::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><plus/><apply><times/><ci>P1_ext</ci><ci>ext</ci></apply><apply><times/><ci>P1_neu</ci><ci>neu_vol</ci></apply></apply><ci>tot_vol</ci></apply></math>
     </assignmentRule>
@@ -214,7 +190,6 @@
         id="r_syn_ATP"
         reversible="false"
         fast="false"
-        metaid="invitro::r_syn_ATP"
         >
         <listOfReactants>
           <speciesReference species="ADP_neu" stoichiometry="1"/>
@@ -230,7 +205,6 @@
         id="r_syn_P1"
         reversible="false"
         fast="false"
-        metaid="invitro::r_syn_P1"
         >
         <listOfReactants>
           <speciesReference species="ATP_neu" stoichiometry="2"/>
@@ -251,7 +225,6 @@
         id="r_tr_P1"
         reversible="false"
         fast="false"
-        metaid="invitro::r_tr_P1"
         >
         <listOfReactants>
           <speciesReference species="P1_neu" stoichiometry="1"/>

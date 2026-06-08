@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:51:19.782Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:29.264Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 <!-- BEGIN UNIT DEFINITIONS -->
@@ -153,7 +152,6 @@
         constant="false"
         size="3"
         units="_L"
-        metaid="c1"
         >
       </compartment>
       <compartment
@@ -161,7 +159,6 @@
         constant="false"
         size="4"
         units="_mL"
-        metaid="c2"
         >
       </compartment>
       <compartment
@@ -169,7 +166,6 @@
         constant="false"
         size="5"
         units="_m"
-        metaid="c3"
         >
       </compartment>
     </listOfCompartments>
@@ -183,7 +179,6 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
         substanceUnits="_mM_L"
-        metaid="s1"
         >
       </species>
       <species
@@ -194,7 +189,6 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
         substanceUnits="_mM_mL"
-        metaid="s2"
         >
       </species>
       <species
@@ -205,7 +199,6 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
         substanceUnits="_mmole"
-        metaid="s3"
         >
       </species>
     </listOfSpecies>
@@ -216,28 +209,24 @@
         constant="false"
         value="1"
         units="_uM"
-        metaid="p1"
         >
       </parameter>
       <parameter
         id="p2"
         constant="false"
         units="_mM_h7"
-        metaid="p2"
         >
       </parameter>
       <parameter
         id="y21"
         constant="false"
         units="_metre3"
-        metaid="y21"
         >
       </parameter>
       <parameter
         id="y22"
         constant="false"
         units="_metre3"
-        metaid="y22"
         >
       </parameter>
       <parameter
@@ -245,7 +234,6 @@
         constant="true"
         value="0.001"
         units="__h"
-        metaid="k1"
         >
       </parameter>
       <parameter
@@ -253,7 +241,6 @@
         constant="true"
         value="1.1"
         units="_UL"
-        metaid="k2"
         >
       </parameter>
       <parameter
@@ -261,7 +248,6 @@
         constant="true"
         value="1"
         units="_metre"
-        metaid="k21"
         >
       </parameter>
       <parameter
@@ -269,7 +255,6 @@
         constant="true"
         value="1"
         units="_mole"
-        metaid="k22"
         >
       </parameter>
     </listOfParameters>
@@ -278,19 +263,16 @@
   <listOfRules>
     <assignmentRule
       variable="p2"
-      metaid="p2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><cn>23</cn><ci>s1</ci></apply><apply><xx/><ci>k1</ci><cn>3</cn></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="y21"
-      metaid="y21::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><xxx/><apply><times/><cn>1.1</cn><cn>2.2</cn></apply><ci>k21</ci></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="y22"
-      metaid="y22::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><power/><ci>k21</ci><cn>3</cn></apply><apply><zzz/><ci>k21</ci><cn>3.1415</cn></apply></apply></math>
     </assignmentRule>
@@ -303,7 +285,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="r1"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>

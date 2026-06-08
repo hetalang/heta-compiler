@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:51:33.557Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:29.526Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,33 +18,28 @@
         id="p1"
         constant="false"
         value="1"
-        metaid="p1"
         >
       </parameter>
       <parameter
         id="p2"
         constant="false"
-        metaid="p2"
         >
       </parameter>
       <parameter
         id="x1"
         constant="false"
         value="0"
-        metaid="x1"
         >
       </parameter>
       <parameter
         id="pr1"
         constant="false"
-        metaid="pr1"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.1"
-        metaid="k1"
         >
       </parameter>
     </listOfParameters>
@@ -54,19 +48,16 @@
   <listOfRules>
     <assignmentRule
       variable="p2"
-      metaid="p2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>k1</ci><ci>x1</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="pr1"
-      metaid="pr1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>k1</ci><ci>x1</ci></apply></math>
     </assignmentRule>
     <rateRule
       variable="x1"
-      metaid="x1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -87,7 +78,6 @@
     <listOfEvents>
       <event
         id="sw1"
-        metaid="sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -129,14 +119,14 @@
           
           <eventAssignment
             variable="x1"
-            metaid="x1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           
         </listOfEventAssignments>
       </event>
       <event
-        id="sw2" metaid="sw2"
+        id="sw2"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -153,7 +143,7 @@
           
           <eventAssignment
             variable="x1"
-            metaid="x1::sw2">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>20</cn></math>
           </eventAssignment>
           

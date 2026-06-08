@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:48:55.112Z","platformId":"mm","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:26.281Z","platformId":"mm","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,21 +18,18 @@
         id="plasma"
         constant="true"
         value="2.5"
-        metaid="plasma"
         >
       </parameter>
       <parameter
         id="k_prol"
         constant="true"
         value="0.0001"
-        metaid="k_prol"
         >
       </parameter>
       <parameter
         id="AXP_neu"
         constant="true"
         value="0.1"
-        metaid="AXP_neu"
         >
       </parameter>
     </listOfParameters>

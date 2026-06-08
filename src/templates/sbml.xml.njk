@@ -13,7 +13,7 @@
   </annotation>
   <model
     id="{{ population.spaceName }}" 
-    metaid="{{ population.spaceName }}"
+    {#- metaid="{{ population.spaceName }}" #}
 {%- block modelHeader %}
 {%- endblock %}
     >
@@ -76,7 +76,7 @@
         {%- if record.units is defined %}
         units="{{ record.unitsHash() }}"
         {%- endif %}
-        metaid="{{ record.index }}"
+        {#- metaid="{{ record.index }}" #}
         >
         {%- if record.notes is defined %}
         <notes>
@@ -115,7 +115,7 @@
         {%- if record.units is defined %}
         substanceUnits="{{record.unitsHash(true)}}"
         {%- endif %}
-        metaid="{{record.index}}"
+        {#- metaid="{{record.index}}" #}
         >
         {%- if record.notes is defined %}
         <notes>
@@ -153,7 +153,7 @@
         {%- if record.units is defined %}
         units="{{ record.unitsHash() }}"
         {%- endif %}
-        metaid="{{ record.index }}"
+        {#- metaid="{{ record.index }}" #}
         >
         {%- if record.notes is defined %}
         <notes>
@@ -182,7 +182,7 @@
         {%- if con.units is defined %}
         units="{{ con.unitsHash() }}"
         {%- endif %}
-        metaid="{{ con.index }}"
+        {#- metaid="{{ con.index }}" #}
         >
         {%- if con.notes is defined %}
         <notes>
@@ -211,7 +211,7 @@
         {%- if ts.units is defined %}
         units="{{ ts.unitsHash() }}"
         {%- endif %}
-        metaid="{{ ts.index }}"
+        {#- metaid="{{ ts.index }}" #}
         >
         {%- if ts.notes is defined %}
         <notes>
@@ -237,7 +237,7 @@
     {%- for record in listOfInitialAssignments %}
       <initialAssignment
         symbol="{{ record.id }}"
-        metaid="{{ record.index }}::start_"
+        {#- metaid="{{ record.index }}::start_" #}
         >
         {{ record.assignments.start_.toCMathML() }}
       </initialAssignment>
@@ -254,7 +254,7 @@
   {%- for record in listOfAssignmentRules %}
     <assignmentRule
       variable="{{record.id}}"
-      metaid="{{record.index}}::ode_"
+      {#- metaid="{{record.index}}::ode_" #}
       >
       {{ record.assignments.ode_.toCMathML() }}
     </assignmentRule>
@@ -262,7 +262,7 @@
   {%- for ts in listOfTimeScales %}
     <assignmentRule
       variable="{{ts.id}}"
-      metaid="{{ts.index}}::assignment"
+      {#- metaid="{{ts.index}}::assignment" #}
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply><plus/>
@@ -279,7 +279,7 @@
   {%- for record in listOfRateRules %}
     <rateRule
       variable="{{record.id}}"
-      metaid="{{ record.index }}::ode_"
+      {#- metaid="{{ record.index }}::ode_" #}
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -311,7 +311,7 @@
         {%- endif %}
         reversible="{{ record.reversible !== false }}"
         fast="{{ record.aux.fast === 'true' }}"
-        metaid="{{record.index}}"
+        {#- metaid="{{record.index}}" #}
         >
         {%- if record.notes is defined %}
         <notes>
@@ -365,7 +365,7 @@
       {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}
       <event
         id="{{event.id}}"
-        metaid="{{event.index}}"
+        {#- metaid="{{event.index}}" #}
         >
         <trigger{% block timeEventTriggerAttributes %}{% endblock %}>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -411,7 +411,8 @@
           {% for record in population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
-            metaid="{{record.index}}::{{event.id}}">
+            {#- metaid="{{record.index}}::{{event.id}}" #}
+            >
             {{ record.assignments[event.id].toCMathML() }}
           </eventAssignment>
           {% endfor %}
@@ -420,7 +421,8 @@
       {%- endfor %}
       {%- for event in listOfCEvents %}
       <event
-        id="{{event.id}}" metaid="{{event.index}}"
+        id="{{event.id}}" 
+        {#- metaid="{{event.index}}" #}
         >
         <trigger{% block cEventTriggerAttributes %}{% endblock %}>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -437,7 +439,8 @@
           {% for record in population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
-            metaid="{{record.index}}::{{event.id}}">
+            {#- metaid="{{record.index}}::{{event.id}}" #}
+            >
             {{ record.assignments[event.id].toCMathML() }}
           </eventAssignment>
           {% endfor %}
@@ -446,7 +449,8 @@
       {%- endfor %}
       {%- for event in listOfDEvents %}
       <event
-        id="{{ event.id }}" metaid="{{ event.index }}"
+        id="{{ event.id }}" 
+        {#- metaid="{{ event.index }}" #}
         >
         <trigger{% block dEventTriggerAttributes %}{% endblock %}>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -459,7 +463,8 @@
           {% for record in population.selectRecordsByContext(event.id) %}
           <eventAssignment
             variable="{{ record.id }}"
-            metaid="{{record.index}}::{{event.id}}">
+            {#- metaid="{{record.index}}::{{event.id}}" #}
+            >
             {{ record.assignments[event.id].toCMathML() }}
           </eventAssignment>
           {% endfor %}

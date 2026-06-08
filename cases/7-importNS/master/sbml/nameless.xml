@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:49:23.696Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:27.013Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,14 +18,12 @@
         id="gut"
         constant="false"
         size="1"
-        metaid="gut"
         >
       </compartment>
       <compartment
         id="blood"
         constant="false"
         size="5.2"
-        metaid="blood"
         >
       </compartment>
     </listOfCompartments>
@@ -39,7 +36,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="a0_first"
         >
       </species>
       <species
@@ -49,7 +45,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="c1_first"
         >
       </species>
       <species
@@ -59,7 +54,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="a0_second"
         >
       </species>
       <species
@@ -69,7 +63,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="c1_second"
         >
       </species>
       <species
@@ -79,7 +72,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="a0_third"
         >
       </species>
       <species
@@ -89,7 +81,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="c1_third"
         >
       </species>
     </listOfSpecies>
@@ -98,79 +89,67 @@
       <parameter
         id="x1_first"
         constant="false"
-        metaid="x1_first"
         >
       </parameter>
       <parameter
         id="x1_second"
         constant="false"
-        metaid="x1_second"
         >
       </parameter>
       <parameter
         id="x1_third"
         constant="false"
-        metaid="x1_third"
         >
       </parameter>
       <parameter
         id="kabs_first"
         constant="true"
         value="0.001"
-        metaid="kabs_first"
         >
       </parameter>
       <parameter
         id="kel_first"
         constant="true"
         value="0.1"
-        metaid="kel_first"
         >
       </parameter>
       <parameter
         id="kabs_second"
         constant="true"
         value="0.002"
-        metaid="kabs_second"
         >
       </parameter>
       <parameter
         id="kel_second"
         constant="true"
         value="0.2"
-        metaid="kel_second"
         >
       </parameter>
       <parameter
         id="kabs_third"
         constant="true"
         value="0.003"
-        metaid="kabs_third"
         >
       </parameter>
       <parameter
         id="kel_third"
         constant="true"
         value="0.3"
-        metaid="kel_third"
         >
       </parameter>
       <parameter
         id="t_first"
         constant="false"
-        metaid="t_first"
         >
       </parameter>
       <parameter
         id="t_second"
         constant="false"
-        metaid="t_second"
         >
       </parameter>
       <parameter
         id="t_third"
         constant="false"
-        metaid="t_third"
         >
       </parameter>
     </listOfParameters>
@@ -179,25 +158,21 @@
   <listOfRules>
     <assignmentRule
       variable="x1_first"
-      metaid="x1_first::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_first</ci></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x1_second"
-      metaid="x1_second::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_second</ci></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x1_third"
-      metaid="x1_third::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_third</ci></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="t_first"
-      metaid="t_first::assignment"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply><plus/>
@@ -211,7 +186,6 @@
     </assignmentRule>
     <assignmentRule
       variable="t_second"
-      metaid="t_second::assignment"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply><plus/>
@@ -225,7 +199,6 @@
     </assignmentRule>
     <assignmentRule
       variable="t_third"
-      metaid="t_third::assignment"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply><plus/>
@@ -246,7 +219,6 @@
         id="vabs_first"
         reversible="true"
         fast="false"
-        metaid="vabs_first"
         >
         <listOfReactants>
           <speciesReference species="a0_first" stoichiometry="1"/>
@@ -262,7 +234,6 @@
         id="vel_first"
         reversible="true"
         fast="false"
-        metaid="vel_first"
         >
         <listOfReactants>
           <speciesReference species="c1_first" stoichiometry="1"/>
@@ -277,7 +248,6 @@
         id="vabs_second"
         reversible="true"
         fast="false"
-        metaid="vabs_second"
         >
         <listOfReactants>
           <speciesReference species="a0_second" stoichiometry="1"/>
@@ -293,7 +263,6 @@
         id="vel_second"
         reversible="true"
         fast="false"
-        metaid="vel_second"
         >
         <listOfReactants>
           <speciesReference species="c1_second" stoichiometry="1"/>
@@ -308,7 +277,6 @@
         id="vabs_third"
         reversible="true"
         fast="false"
-        metaid="vabs_third"
         >
         <listOfReactants>
           <speciesReference species="a0_third" stoichiometry="1"/>
@@ -324,7 +292,6 @@
         id="vel_third"
         reversible="true"
         fast="false"
-        metaid="vel_third"
         >
         <listOfReactants>
           <speciesReference species="c1_third" stoichiometry="1"/>

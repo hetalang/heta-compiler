@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:49:14.195Z","platformId":"use-case","platformVersion":"v0.1.0","namespaceId":"model","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:26.897Z","platformId":"use-case","platformVersion":"v0.1.0","namespaceId":"model","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="model" 
-    metaid="model"
+    id="model"
     >
     
 
@@ -19,7 +18,6 @@
         id="comp"
         constant="false"
         size="1"
-        metaid="model::comp"
         >
       </compartment>
     </listOfCompartments>
@@ -32,7 +30,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        metaid="model::A"
         >
       </species>
       <species
@@ -42,7 +39,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="model::B"
         >
       </species>
       <species
@@ -52,7 +48,6 @@
         boundaryCondition="true"
         hasOnlySubstanceUnits="false"
         initialConcentration="1e-8"
-        metaid="model::enzyme"
         >
       </species>
     </listOfSpecies>
@@ -62,14 +57,12 @@
         id="k1"
         constant="true"
         value="0.001"
-        metaid="model::k1"
         >
       </parameter>
       <parameter
         id="Km_A"
         constant="true"
         value="0.8"
-        metaid="model::Km_A"
         >
       </parameter>
     </listOfParameters>
@@ -79,7 +72,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="model::r1"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">

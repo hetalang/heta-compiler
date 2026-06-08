@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:50:51.907Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:28.759Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 <!-- BEGIN UNIT DEFINITIONS -->
@@ -29,7 +28,6 @@
         id="c1"
         constant="false"
         size="1"
-        metaid="c1"
         >
       </compartment>
     </listOfCompartments>
@@ -42,7 +40,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        metaid="s1"
         >
       </species>
       <species
@@ -52,7 +49,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="m1"
         >
       </species>
     </listOfSpecies>
@@ -63,33 +59,28 @@
         constant="false"
         value="12"
         units="_ud1_xxx"
-        metaid="rec1"
         >
       </parameter>
       <parameter
         id="x1"
         constant="false"
-        metaid="x1"
         >
       </parameter>
       <parameter
         id="x2"
         constant="false"
-        metaid="x2"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.001"
-        metaid="k1"
         >
       </parameter>
       <parameter
         id="period2"
         constant="true"
         value="22"
-        metaid="period2"
         >
       </parameter>
     </listOfParameters>
@@ -98,13 +89,11 @@
   <listOfRules>
     <assignmentRule
       variable="x1"
-      metaid="x1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>c1</ci><piecewise><piece><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>1</cn></apply><cn>1</cn></piece><piece><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply><cn>2</cn></piece><otherwise><cn>0</cn></otherwise></piecewise></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x2"
-      metaid="x2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>1</cn><apply><lt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply></piece><otherwise><cn>2</cn></otherwise></piecewise></math>
     </assignmentRule>
@@ -117,7 +106,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="r1"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>
@@ -135,7 +123,6 @@
         id="r2"
         reversible="true"
         fast="false"
-        metaid="r2"
         >
         <listOfReactants>
         </listOfReactants>
@@ -151,7 +138,6 @@
     <listOfEvents>
       <event
         id="ts1"
-        metaid="ts1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -193,13 +179,13 @@
           
           <eventAssignment
             variable="c1"
-            metaid="c1::ts1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.1</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="s1"
-            metaid="s1::ts1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><times/><ci>s1</ci><cn>2</cn></apply><cn>1.1</cn></apply></math>
           </eventAssignment>
           
@@ -207,7 +193,6 @@
       </event>
       <event
         id="ts2"
-        metaid="ts2"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -246,7 +231,7 @@
         </listOfEventAssignments>
       </event>
       <event
-        id="cs1" metaid="cs1"
+        id="cs1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">

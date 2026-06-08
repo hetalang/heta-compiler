@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:50:45.117Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"zzz","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:28.611Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"zzz","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="zzz" 
-    metaid="zzz"
+    id="zzz"
     >
     
 <!-- BEGIN UNIT DEFINITIONS -->
@@ -68,7 +67,6 @@
         constant="false"
         size="1.1"
         units="_litre"
-        metaid="zzz::comp1"
         >
       </compartment>
     </listOfCompartments>
@@ -82,7 +80,6 @@
         hasOnlySubstanceUnits="true"
         initialAmount="12"
         substanceUnits="_mole"
-        metaid="zzz::s1"
         >
       </species>
       <species
@@ -93,7 +90,6 @@
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
         substanceUnits="_mole"
-        metaid="zzz::s2"
         >
       </species>
       <species
@@ -104,7 +100,6 @@
         hasOnlySubstanceUnits="false"
         
         substanceUnits="_mole"
-        metaid="zzz::s3"
         >
       </species>
     </listOfSpecies>
@@ -114,14 +109,12 @@
         id="x1"
         constant="false"
         units="_mole2__litre"
-        metaid="zzz::x1"
         >
       </parameter>
       <parameter
         id="x2"
         constant="false"
         units="_hour"
-        metaid="zzz::x2"
         >
       </parameter>
       <parameter
@@ -129,7 +122,6 @@
         constant="true"
         value="0.001"
         units="__mole__hour"
-        metaid="zzz::k1"
         >
       </parameter>
       <parameter
@@ -137,7 +129,6 @@
         constant="true"
         value="12"
         units="_hour"
-        metaid="zzz::tau"
         >
       </parameter>
       <parameter
@@ -145,14 +136,12 @@
         constant="true"
         value="15"
         units="_mole__litre"
-        metaid="zzz::s3_0"
         >
       </parameter>
       <parameter
         id="tid"
         constant="false"
         units="_day"
-        metaid="zzz::tid"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">
@@ -166,25 +155,21 @@
   <listOfRules>
     <assignmentRule
       variable="s3"
-      metaid="zzz::s3::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>s3_0</ci><apply><exp/><apply><divide/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><ci>tau</ci></apply></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x1"
-      metaid="zzz::x1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>s1</ci><ci>s2</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x2"
-      metaid="zzz::x2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="tid"
-      metaid="zzz::tid::assignment"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply><plus/>
@@ -205,7 +190,6 @@
         id="r1"
         reversible="true"
         fast="false"
-        metaid="zzz::r1"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>

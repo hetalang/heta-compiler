@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:48:55.123Z","platformId":"mm","namespaceId":"invivo","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:26.285Z","platformId":"mm","namespaceId":"invivo","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="invivo" 
-    metaid="invivo"
+    id="invivo"
     >
     
 
@@ -18,20 +17,17 @@
       <compartment
         id="neu_vol"
         constant="false"
-        metaid="invivo::neu_vol"
         >
       </compartment>
       <compartment
         id="ext"
         constant="false"
-        metaid="invivo::ext"
         >
       </compartment>
       <compartment
         id="blood"
         constant="false"
         size="5.2"
-        metaid="invivo::blood"
         >
       </compartment>
     </listOfCompartments>
@@ -44,7 +40,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         
-        metaid="invivo::ATP_neu"
         >
       </species>
       <species
@@ -54,7 +49,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        metaid="invivo::S1"
         >
       </species>
       <species
@@ -64,7 +58,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1e-9"
-        metaid="invivo::neu_count"
         >
       </species>
       <species
@@ -74,7 +67,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         
-        metaid="invivo::ADP_neu"
         >
       </species>
       <species
@@ -84,7 +76,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="invivo::P1_neu"
         >
       </species>
       <species
@@ -94,7 +85,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="invivo::P1_ext"
         >
       </species>
       <species
@@ -104,7 +94,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="invivo::IL15_ext"
         >
       </species>
     </listOfSpecies>
@@ -114,63 +103,54 @@
         id="AXP_neu"
         constant="false"
         value="0.1"
-        metaid="invivo::AXP_neu"
         >
       </parameter>
       <parameter
         id="plasma"
         constant="true"
         value="2.5"
-        metaid="invivo::plasma"
         >
       </parameter>
       <parameter
         id="k_prol"
         constant="true"
         value="0.0001"
-        metaid="invivo::k_prol"
         >
       </parameter>
       <parameter
         id="neu_size"
         constant="true"
         value="1e-12"
-        metaid="invivo::neu_size"
         >
       </parameter>
       <parameter
         id="K_eq_ADP"
         constant="true"
         value="10"
-        metaid="invivo::K_eq_ADP"
         >
       </parameter>
       <parameter
         id="ksyn_ATP"
         constant="true"
         value="0.0001"
-        metaid="invivo::ksyn_ATP"
         >
       </parameter>
       <parameter
         id="ksyn_P1"
         constant="true"
         value="0.01"
-        metaid="invivo::ksyn_P1"
         >
       </parameter>
       <parameter
         id="Km_S1"
         constant="true"
         value="1.2"
-        metaid="invivo::Km_S1"
         >
       </parameter>
       <parameter
         id="k_tr_P1"
         constant="true"
         value="0.013"
-        metaid="invivo::k_tr_P1"
         >
       </parameter>
     </listOfParameters>
@@ -179,13 +159,11 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="ATP_neu"
-        metaid="invivo::ATP_neu::start_"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><apply><times/><ci>AXP_neu</ci><ci>K_eq_ADP</ci></apply><apply><plus/><cn>1</cn><ci>K_eq_ADP</ci></apply></apply></math>
       </initialAssignment>
       <initialAssignment
         symbol="ADP_neu"
-        metaid="invivo::ADP_neu::start_"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><ci>AXP_neu</ci><apply><plus/><cn>1</cn><ci>K_eq_ADP</ci></apply></apply></math>
       </initialAssignment>
@@ -196,13 +174,11 @@
   <listOfRules>
     <assignmentRule
       variable="neu_vol"
-      metaid="invivo::neu_vol::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>neu_count</ci><ci>neu_size</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="ext"
-      metaid="invivo::ext::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>plasma</ci></math>
     </assignmentRule>
@@ -215,7 +191,6 @@
         id="r_syn_ATP"
         reversible="false"
         fast="false"
-        metaid="invivo::r_syn_ATP"
         >
         <listOfReactants>
           <speciesReference species="ADP_neu" stoichiometry="1"/>
@@ -231,7 +206,6 @@
         id="r_syn_P1"
         reversible="false"
         fast="false"
-        metaid="invivo::r_syn_P1"
         >
         <listOfReactants>
           <speciesReference species="ATP_neu" stoichiometry="2"/>
@@ -252,7 +226,6 @@
         id="r_tr_P1"
         reversible="false"
         fast="false"
-        metaid="invivo::r_tr_P1"
         >
         <listOfReactants>
           <speciesReference species="P1_neu" stoichiometry="1"/>
@@ -268,7 +241,6 @@
         id="r_prol_neu"
         reversible="false"
         fast="false"
-        metaid="invivo::r_prol_neu"
         >
         <listOfReactants>
         </listOfReactants>

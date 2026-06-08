@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:51:48.711Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:31.096Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 <!-- BEGIN UNIT DEFINITIONS -->
@@ -33,7 +32,6 @@
         id="foo"
         constant="false"
         units="_dimensionless"
-        metaid="foo"
         >
       </parameter>
     </listOfParameters>
@@ -42,7 +40,6 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="foo"
-        metaid="foo::start_"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><cn>3</cn><cn>2</cn></apply></math>
       </initialAssignment>

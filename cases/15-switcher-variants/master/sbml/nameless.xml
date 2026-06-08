@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:50:15.489Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:28.209Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,42 +18,36 @@
         id="comp1"
         constant="false"
         size="1"
-        metaid="comp1"
         >
       </compartment>
       <compartment
         id="comp2"
         constant="false"
         size="1"
-        metaid="comp2"
         >
       </compartment>
       <compartment
         id="comp3"
         constant="false"
         size="1"
-        metaid="comp3"
         >
       </compartment>
       <compartment
         id="comp4"
         constant="false"
         size="1"
-        metaid="comp4"
         >
       </compartment>
       <compartment
         id="comp5"
         constant="false"
         size="1"
-        metaid="comp5"
         >
       </compartment>
       <compartment
         id="comp6"
         constant="false"
         size="1"
-        metaid="comp6"
         >
       </compartment>
     </listOfCompartments>
@@ -67,7 +60,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="spec_amt1"
         >
       </species>
       <species
@@ -77,7 +69,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="spec_conc1"
         >
       </species>
       <species
@@ -87,7 +78,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="spec_amt2"
         >
       </species>
       <species
@@ -97,7 +87,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="spec_conc2"
         >
       </species>
       <species
@@ -107,7 +96,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="spec_amt3"
         >
       </species>
       <species
@@ -117,7 +105,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="spec_conc3"
         >
       </species>
       <species
@@ -127,7 +114,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="spec_amt4"
         >
       </species>
       <species
@@ -137,7 +123,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="spec_conc4"
         >
       </species>
       <species
@@ -147,7 +132,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="spec_amt5"
         >
       </species>
       <species
@@ -157,7 +141,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="spec_conc5"
         >
       </species>
       <species
@@ -167,7 +150,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        metaid="spec_amt6"
         >
       </species>
       <species
@@ -177,7 +159,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="spec_conc6"
         >
       </species>
     </listOfSpecies>
@@ -187,21 +168,18 @@
         id="rec1"
         constant="false"
         value="0"
-        metaid="rec1"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.001"
-        metaid="k1"
         >
       </parameter>
       <parameter
         id="k2"
         constant="true"
         value="0.01"
-        metaid="k2"
         >
       </parameter>
     </listOfParameters>
@@ -211,7 +189,6 @@
         id="r4"
         reversible="true"
         fast="false"
-        metaid="r4"
         >
         <listOfReactants>
         </listOfReactants>
@@ -227,7 +204,6 @@
         id="r5"
         reversible="true"
         fast="false"
-        metaid="r5"
         >
         <listOfReactants>
         </listOfReactants>
@@ -243,7 +219,6 @@
         id="r6"
         reversible="true"
         fast="false"
-        metaid="r6"
         >
         <listOfReactants>
         </listOfReactants>
@@ -260,7 +235,6 @@
     <listOfEvents>
       <event
         id="sw1"
-        metaid="sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -274,79 +248,79 @@
           
           <eventAssignment
             variable="rec1"
-            metaid="rec1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>12</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="comp1"
-            metaid="comp1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_amt1"
-            metaid="spec_amt1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_conc1"
-            metaid="spec_conc1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_amt2"
-            metaid="spec_amt2::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_conc2"
-            metaid="spec_conc2::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="comp3"
-            metaid="comp3::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="comp4"
-            metaid="comp4::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_amt4"
-            metaid="spec_amt4::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_conc4"
-            metaid="spec_conc4::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_amt5"
-            metaid="spec_amt5::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>8</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="spec_conc5"
-            metaid="spec_conc5::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>6</cn></math>
           </eventAssignment>
           
           <eventAssignment
             variable="comp6"
-            metaid="comp6::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>10</cn></math>
           </eventAssignment>
           

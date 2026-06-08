@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:49:08.634Z","platformId":"mm","namespaceId":"mod1","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:26.785Z","platformId":"mm","namespaceId":"mod1","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="mod1" 
-    metaid="mod1"
+    id="mod1"
     >
     
 <!-- BEGIN UNIT DEFINITIONS -->
@@ -29,14 +28,12 @@
         constant="false"
         size="5"
         units="_litre"
-        metaid="mod1::comp1"
         >
       </compartment>
       <compartment
         id="comp2"
         constant="false"
         units="_litre"
-        metaid="mod1::comp2"
         >
       </compartment>
     </listOfCompartments>
@@ -49,7 +46,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="mod1::sp1"
         >
       </species>
     </listOfSpecies>
@@ -59,65 +55,55 @@
         id="k1"
         constant="false"
         value="0.1"
-        metaid="mod1::k1"
         >
       </parameter>
       <parameter
         id="p1"
         constant="false"
         value="1"
-        metaid="mod1::p1"
         >
       </parameter>
       <parameter
         id="p2"
         constant="false"
-        metaid="mod1::p2"
         >
       </parameter>
       <parameter
         id="p3"
         constant="false"
         value="1"
-        metaid="mod1::p3"
         >
       </parameter>
       <parameter
         id="p4"
         constant="false"
         value="0"
-        metaid="mod1::p4"
         >
       </parameter>
       <parameter
         id="p5"
         constant="false"
-        metaid="mod1::p5"
         >
       </parameter>
       <parameter
         id="p6"
         constant="false"
-        metaid="mod1::p6"
         >
       </parameter>
       <parameter
         id="r2"
         constant="false"
-        metaid="mod1::r2"
         >
       </parameter>
       <parameter
         id="r3"
         constant="false"
-        metaid="mod1::r3"
         >
       </parameter>
       <parameter
         id="k2"
         constant="true"
         value="0.03"
-        metaid="mod1::k2"
         >
       </parameter>
     </listOfParameters>
@@ -126,7 +112,6 @@
     <listOfInitialAssignments>
       <initialAssignment
         symbol="p6"
-        metaid="mod1::p6::start_"
         >
         <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><cn>2</cn><ci>p4</ci></apply></math>
       </initialAssignment>
@@ -137,37 +122,31 @@
   <listOfRules>
     <assignmentRule
       variable="p2"
-      metaid="mod1::p2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><cn>1</cn><cn>2</cn></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="p5"
-      metaid="mod1::p5::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><cn>1</cn><ci>p6</ci></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="comp2"
-      metaid="mod1::comp2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>p1</ci></math>
     </assignmentRule>
     <assignmentRule
       variable="r2"
-      metaid="mod1::r2::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1</cn></math>
     </assignmentRule>
     <assignmentRule
       variable="r3"
-      metaid="mod1::r3::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>k2</ci></math>
     </assignmentRule>
     <rateRule
       variable="k1"
-      metaid="mod1::k1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -188,7 +167,6 @@
   
     <rateRule
       variable="p4"
-      metaid="mod1::p4::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <apply>
@@ -211,7 +189,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="mod1::r1"
         >
         <listOfReactants>
           <speciesReference species="sp1" stoichiometry="1"/>
@@ -230,7 +207,6 @@
     <listOfEvents>
       <event
         id="sw1"
-        metaid="mod1::sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -244,7 +220,7 @@
           
           <eventAssignment
             variable="p3"
-            metaid="mod1::p3::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>12.1</cn></math>
           </eventAssignment>
           
@@ -252,7 +228,6 @@
       </event>
       <event
         id="sw2"
-        metaid="mod1::sw2"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -290,20 +265,20 @@
           
           <eventAssignment
             variable="p3"
-            metaid="mod1::p3::sw2">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><times/><ci>p3</ci><ci>p1</ci></apply><cn>10</cn></apply></math>
           </eventAssignment>
           
           <eventAssignment
             variable="p4"
-            metaid="mod1::p4::sw2">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>0</cn></math>
           </eventAssignment>
           
         </listOfEventAssignments>
       </event>
       <event
-        id="sw3" metaid="mod1::sw3"
+        id="sw3"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -320,7 +295,7 @@
           
           <eventAssignment
             variable="p4"
-            metaid="mod1::p4::sw3">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>2</cn></math>
           </eventAssignment>
           

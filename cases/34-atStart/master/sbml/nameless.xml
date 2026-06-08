@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:52:12.817Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:31.368Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,7 +18,6 @@
         id="c1"
         constant="false"
         size="1"
-        metaid="c1"
         >
       </compartment>
     </listOfCompartments>
@@ -32,7 +30,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="s1"
         >
       </species>
       <species
@@ -42,7 +39,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="s2"
         >
       </species>
       <species
@@ -52,7 +48,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="s3"
         >
       </species>
       <species
@@ -62,7 +57,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="s4"
         >
       </species>
       <species
@@ -72,7 +66,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="s5"
         >
       </species>
       <species
@@ -82,7 +75,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        metaid="s6"
         >
       </species>
     </listOfSpecies>
@@ -92,49 +84,42 @@
         id="threeshold"
         constant="true"
         value="1.5"
-        metaid="threeshold"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.001"
-        metaid="k1"
         >
       </parameter>
       <parameter
         id="k2"
         constant="true"
         value="0.001"
-        metaid="k2"
         >
       </parameter>
       <parameter
         id="k3"
         constant="true"
         value="0.001"
-        metaid="k3"
         >
       </parameter>
       <parameter
         id="k4"
         constant="true"
         value="0.001"
-        metaid="k4"
         >
       </parameter>
       <parameter
         id="k5"
         constant="true"
         value="0.001"
-        metaid="k5"
         >
       </parameter>
       <parameter
         id="k6"
         constant="true"
         value="0.001"
-        metaid="k6"
         >
       </parameter>
     </listOfParameters>
@@ -144,7 +129,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="r1"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>
@@ -159,7 +143,6 @@
         id="r2"
         reversible="false"
         fast="false"
-        metaid="r2"
         >
         <listOfReactants>
           <speciesReference species="s2" stoichiometry="1"/>
@@ -174,7 +157,6 @@
         id="r3"
         reversible="false"
         fast="false"
-        metaid="r3"
         >
         <listOfReactants>
           <speciesReference species="s3" stoichiometry="1"/>
@@ -189,7 +171,6 @@
         id="r4"
         reversible="false"
         fast="false"
-        metaid="r4"
         >
         <listOfReactants>
           <speciesReference species="s4" stoichiometry="1"/>
@@ -204,7 +185,6 @@
         id="r5"
         reversible="false"
         fast="false"
-        metaid="r5"
         >
         <listOfReactants>
           <speciesReference species="s5" stoichiometry="1"/>
@@ -219,7 +199,6 @@
         id="r6"
         reversible="false"
         fast="false"
-        metaid="r6"
         >
         <listOfReactants>
           <speciesReference species="s6" stoichiometry="1"/>
@@ -235,7 +214,6 @@
     <listOfEvents>
       <event
         id="sw1"
-        metaid="sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -273,7 +251,7 @@
           
           <eventAssignment
             variable="s1"
-            metaid="s1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s1</ci><apply><divide/><cn>1</cn><ci>c1</ci></apply></apply></math>
           </eventAssignment>
           
@@ -281,7 +259,6 @@
       </event>
       <event
         id="sw2"
-        metaid="sw2"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -319,14 +296,14 @@
           
           <eventAssignment
             variable="s2"
-            metaid="s2::sw2">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s2</ci><apply><divide/><cn>1</cn><ci>c1</ci></apply></apply></math>
           </eventAssignment>
           
         </listOfEventAssignments>
       </event>
       <event
-        id="sw3" metaid="sw3"
+        id="sw3"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -343,14 +320,14 @@
           
           <eventAssignment
             variable="s3"
-            metaid="s3::sw3">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s3</ci><apply><divide/><cn>1</cn><ci>c1</ci></apply></apply></math>
           </eventAssignment>
           
         </listOfEventAssignments>
       </event>
       <event
-        id="sw4" metaid="sw4"
+        id="sw4"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -367,14 +344,14 @@
           
           <eventAssignment
             variable="s4"
-            metaid="s4::sw4">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s4</ci><apply><divide/><cn>1</cn><ci>c1</ci></apply></apply></math>
           </eventAssignment>
           
         </listOfEventAssignments>
       </event>
       <event
-        id="sw5" metaid="sw5"
+        id="sw5"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -385,14 +362,14 @@
           
           <eventAssignment
             variable="s5"
-            metaid="s5::sw5">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s5</ci><apply><divide/><cn>1</cn><ci>c1</ci></apply></apply></math>
           </eventAssignment>
           
         </listOfEventAssignments>
       </event>
       <event
-        id="sw6" metaid="sw6"
+        id="sw6"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -403,7 +380,7 @@
           
           <eventAssignment
             variable="s6"
-            metaid="s6::sw6">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>s6</ci><apply><divide/><cn>1</cn><ci>c1</ci></apply></apply></math>
           </eventAssignment>
           

@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:51:12.652Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:29.107Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 <!-- BEGIN FUNCTION DEFINITIONS -->
@@ -57,7 +56,6 @@
         id="c1"
         constant="false"
         size="2"
-        metaid="c1"
         >
       </compartment>
     </listOfCompartments>
@@ -70,7 +68,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="100"
-        metaid="s1"
         >
       </species>
     </listOfSpecies>
@@ -80,7 +77,6 @@
         id="k1"
         constant="true"
         value="0.1"
-        metaid="k1"
         >
       </parameter>
     </listOfParameters>
@@ -90,7 +86,6 @@
         id="r1"
         reversible="true"
         fast="false"
-        metaid="r1"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>

@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:50:37.103Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:28.513Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,7 +18,6 @@
         id="comp1"
         constant="false"
         size="1"
-        metaid="comp1"
         >
       </compartment>
     </listOfCompartments>
@@ -32,7 +30,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="5"
-        metaid="A"
         >
       </species>
       <species
@@ -42,7 +39,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="B"
         >
       </species>
     </listOfSpecies>
@@ -52,21 +48,18 @@
         id="Vmax"
         constant="true"
         value="1.2"
-        metaid="Vmax"
         >
       </parameter>
       <parameter
         id="Km"
         constant="true"
         value="3.2"
-        metaid="Km"
         >
       </parameter>
       <parameter
         id="cond1"
         constant="true"
         value="1.2"
-        metaid="cond1"
         >
       </parameter>
     </listOfParameters>
@@ -76,7 +69,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="r1"
         >
         <listOfReactants>
           <speciesReference species="A" stoichiometry="1"/>

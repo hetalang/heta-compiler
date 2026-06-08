@@ -5,11 +5,10 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.11.1","createdAt":"2026-06-02T13:49:39.904Z","platformId":"cs","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T07:07:27.245Z","platformId":"cs","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
-    id="nameless" 
-    metaid="nameless"
+    id="nameless"
     >
     
 
@@ -19,7 +18,6 @@
         id="comp1"
         constant="false"
         size="1"
-        metaid="comp1"
         >
       </compartment>
     </listOfCompartments>
@@ -32,7 +30,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        metaid="x1"
         >
       </species>
       <species
@@ -42,7 +39,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        metaid="x2"
         >
       </species>
       <species
@@ -52,7 +48,6 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="12.12"
-        metaid="x3"
         >
       </species>
     </listOfSpecies>
@@ -62,20 +57,17 @@
         id="p1"
         constant="false"
         value="10"
-        metaid="p1"
         >
       </parameter>
       <parameter
         id="cond1"
         constant="false"
-        metaid="cond1"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.01"
-        metaid="k1"
         >
       </parameter>
     </listOfParameters>
@@ -84,7 +76,6 @@
   <listOfRules>
     <assignmentRule
       variable="cond1"
-      metaid="cond1::ode_"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><minus/><cn>6</cn><ci>x1</ci></apply></math>
     </assignmentRule>
@@ -97,7 +88,6 @@
         id="r1"
         reversible="false"
         fast="false"
-        metaid="r1"
         >
         <listOfReactants>
           <speciesReference species="x1" stoichiometry="1"/>
@@ -113,7 +103,7 @@
   
     <listOfEvents>
       <event
-        id="sw1" metaid="sw1"
+        id="sw1"
         >
         <trigger>
           <math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -130,13 +120,13 @@
           
           <eventAssignment
             variable="x1"
-            metaid="x1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>x1</ci><cn>10</cn></apply></math>
           </eventAssignment>
           
           <eventAssignment
             variable="p1"
-            metaid="p1::sw1">
+            >
             <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x1</ci><cn>2</cn></apply></math>
           </eventAssignment>
           
