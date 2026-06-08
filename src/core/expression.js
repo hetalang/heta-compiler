@@ -273,11 +273,13 @@ class Expression {
    * Calculates expression units in the context of a model component.
    *
    * @param {Component} component Component used for reference lookup and logging.
+   * @param {object} options Optional calculation options.
+   * @param {string} [options.policy='general'] Diagnostic policy (`general` or `simbio`).
    *
    * @returns {Unit|undefined} Calculated unit, if it can be inferred.
    */
-  calcUnit(component) { // component here is used for logger and index
-    return _calcUnit(this.exprParsed, component);
+  calcUnit(component, options = {}) { // component here is used for logger and index
+    return _calcUnit(this.exprParsed, component, options);
   }
 }
 

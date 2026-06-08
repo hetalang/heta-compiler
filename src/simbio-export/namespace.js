@@ -1,8 +1,42 @@
 const { Namespace } = require('../namespace');
 const legalUnits = require('./legal-units');
 
+function hasSimbioSensitiveUnitsCheck(expr) {
+  if (!expr || !expr.exprParsed) return false;
+
+  let nodes = expr.exprParsed.filter((node) => {
+    let isPowOperator = node.type === 'OperatorNode' && node.fn === 'pow';
+    let isSensitiveFunction = node.type === 'FunctionNode'
+      && ['pow', 'nthRoot', 'piecewise'].indexOf(node.fn?.name) !== -1;
+
+    return isPowOperator || isSensitiveFunction;
+  });
+
+  return nodes.length > 0;
+}
+
 Namespace.prototype.getSimbioImage = function() {
   let { logger, functionDefStorage } = this.container;
+
+  // Simbio-specific dimensional checks for expression rules.
+  this.selectByInstanceOf('Record')
+    .filter((record) => record.className !== 'Reaction')
+    .forEach((record) => {
+      Object.values(record.assignments).forEach((expr) => {
+        if (!expr || expr.num !== undefined) return;
+        if (!hasSimbioSensitiveUnitsCheck(expr)) return;
+        expr.calcUnit(record, { policy: 'simbio' });
+      });
+    });
+
+  ['DSwitcher', 'CSwitcher', 'StopSwitcher']
+    .forEach((className) => {
+      this.selectByClassName(className)
+        .forEach((switcher) => {
+          if (!switcher.trigger || !hasSimbioSensitiveUnitsCheck(switcher.trigger)) return;
+          switcher.trigger.calcUnit(switcher, { policy: 'simbio' });
+        });
+    });
 
   // checking unitTerm for Species
   this.selectByInstanceOf('Species')
@@ -29,7 +63,7 @@ Namespace.prototype.getSimbioImage = function() {
   // checking unitTerm for Reaction
   this.selectByInstanceOf('Reaction')
     .forEach((reaction) => {
-      let units = reaction.assignments['ode_'].calcUnit(reaction);
+      let units = reaction.assignments['ode_'].calcUnit(reaction, { policy: 'simbio' });
       if (typeof units === 'undefined') {
         //let msg = `Cannot calculate units for Reaction "${reaction.index}" which is not allowed for Simbio.`; // OK if cannot calculate
         //logger.error(msg, {type: 'UnitError'});

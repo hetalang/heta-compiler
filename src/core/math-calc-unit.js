@@ -8,17 +8,18 @@ const { Unit } = require('./unit');
   _this : Node
   record : Record
 */
-function _calcUnit(_this, record) {
+function _calcUnit(_this, record, options = {}) {
   const logger = record.namespace.container.logger;
+  const checkSimbioPolicy = options.policy === 'simbio';
   let args = _this.args;
 
   if (_this.type === 'ParenthesisNode') {
-    return _calcUnit(_this.content, record);
+    return _calcUnit(_this.content, record, options);
   } else if (_this.type === 'ConstantNode') {
     return new Unit(); // dimensionless
   } else if (_this.type === 'OperatorNode') {
     // calculate units of child nodes
-    let argUnit = args.map((node) => _calcUnit(node, record));
+    let argUnit = args.map((node) => _calcUnit(node, record, options));
 
     // check child nodes
     let isUndefined = argUnit
@@ -72,7 +73,7 @@ function _calcUnit(_this, record) {
         let denominator = pArg.content.args[1].value;
         return argUnit[0].power(numerator).root(denominator);
       } else { // x ^ y
-        if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+        if (checkSimbioPolicy && (!argUnitDimensionless[0] || !argUnitDimensionless[1])) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
           logger.warn(`Units inconsistency for "${record.index}": power arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
         }
@@ -88,7 +89,7 @@ function _calcUnit(_this, record) {
     }
   } else if (_this.type === 'FunctionNode') {
     // calculate units of child nodes
-    let argUnit = args.map((node) => _calcUnit(node, record));
+    let argUnit = args.map((node) => _calcUnit(node, record, options));
 
     // check child nodes
     let isUndefined = argUnit
@@ -144,7 +145,7 @@ function _calcUnit(_this, record) {
         let denominator = pArg.args[1].value;
         return argUnit[0].power(numerator).root(denominator);
       } else { // pow(x, y)
-        if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+        if (checkSimbioPolicy && (!argUnitDimensionless[0] || !argUnitDimensionless[1])) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
           logger.warn(`Units inconsistency for "${record.index}": pow() arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
         }
@@ -157,7 +158,7 @@ function _calcUnit(_this, record) {
         let n = args[1].value;
         return argUnit[0].root(n);
       } else { // nthRoot(x, y)
-        if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
+        if (checkSimbioPolicy && (!argUnitDimensionless[0] || !argUnitDimensionless[1])) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
           logger.warn(`Units inconsistency for "${record.index}": nthRoot() arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
         }
@@ -197,7 +198,7 @@ function _calcUnit(_this, record) {
       let isCondition = true;
       for (let i = 1; i < argUnit.length; i++) {
         if (isCondition) {
-          if (!argUnitDimensionless[i]) {
+          if (checkSimbioPolicy && !argUnitDimensionless[i]) {
             logger.warn(`Units inconsistency for "${record.index}": booleam argument "${args[i]}" must be dimensionless "${_this.toString()}", got "${argUnit[i]}"`);
           }
         } else {
@@ -236,7 +237,7 @@ function _calcUnit(_this, record) {
         }
       });
       
-      return _calcUnit(newNode, record);
+      return _calcUnit(newNode, record, options);
     }
     // else
     return undefined; // cannot calculate
@@ -251,11 +252,11 @@ function _calcUnit(_this, record) {
     }
   } else if (_this.type === 'ConditionalNode') {
     // check units of condition
-    _calcUnit(_this.condition, record); // expect to be dimensionless
+    _calcUnit(_this.condition, record, options); // expect to be dimensionless
 
     // check units of arguments
-    let trueUnit = _calcUnit(_this.trueExpr, record);
-    let falseUnit = _calcUnit(_this.falseExpr, record);
+    let trueUnit = _calcUnit(_this.trueExpr, record, options);
+    let falseUnit = _calcUnit(_this.falseExpr, record, options);
     if (typeof trueUnit === 'undefined' || typeof falseUnit === 'undefined')
       return undefined; // BRAKE
     

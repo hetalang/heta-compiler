@@ -112,7 +112,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = x2.assignments.start_;
     let unit = expr.calcUnit(x2);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
-    expect(p.defaultLogs).to.be.lengthOf(1); // second argument should be a number
+    expect(p.defaultLogs).to.be.lengthOf(0);
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -121,7 +121,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = x2.assignments.start_;
     let unit = expr.calcUnit(x2);
     expect(unit.toString()).to.be.equal('dimensionless');
-    expect(p.defaultLogs).to.be.lengthOf(1); // power arguments must be dimensionless
+    expect(p.defaultLogs).to.be.lengthOf(0);
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -193,7 +193,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y2.assignments.start_;
     let unit = expr.calcUnit(y2);
     expect(unit.toString()).to.be.equal('(1e-3 mole)/litre');
-    expect(p.defaultLogs).to.be.lengthOf(1); // second argument should be a number
+    expect(p.defaultLogs).to.be.lengthOf(0);
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -202,7 +202,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y2.assignments.start_;
     let unit = expr.calcUnit(y2);
     expect(unit.toString()).to.be.equal('dimensionless');
-    expect(p.defaultLogs).to.be.lengthOf(1); // power arguments must be dimensionless
+    expect(p.defaultLogs).to.be.lengthOf(0);
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -238,7 +238,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y7.assignments.start_;
     let unit = expr.calcUnit(y7);
     expect(unit.toString()).to.be.equal('dimensionless');
-    expect(p.defaultLogs).to.be.lengthOf(1); // arguments must be dimensionless
+    expect(p.defaultLogs).to.be.lengthOf(0);
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -273,6 +273,33 @@ describe('Testing warnings of checkUnits()', () => {
     let y10 = p.namespaceStorage.get('nameless').get('y11');
     let expr = y10.assignments.start_;
     let unit = expr.calcUnit(y10);
+    expect(unit.toString()).to.be.equal('dimensionless');
+    expect(p.defaultLogs).to.be.lengthOf(1);
+    p.defaultLogs.length = 0; // RESET
+  });
+
+  it('simbio policy: operator ^ warns', () => {
+    let x2 = p.namespaceStorage.get('nameless').get('x2b');
+    let expr = x2.assignments.start_;
+    let unit = expr.calcUnit(x2, { policy: 'simbio' });
+    expect(unit.toString()).to.be.equal('dimensionless');
+    expect(p.defaultLogs).to.be.lengthOf(1);
+    p.defaultLogs.length = 0; // RESET
+  });
+
+  it('simbio policy: nthRoot warns', () => {
+    let y7 = p.namespaceStorage.get('nameless').get('y7');
+    let expr = y7.assignments.start_;
+    let unit = expr.calcUnit(y7, { policy: 'simbio' });
+    expect(unit.toString()).to.be.equal('dimensionless');
+    expect(p.defaultLogs).to.be.lengthOf(1);
+    p.defaultLogs.length = 0; // RESET
+  });
+
+  it('simbio policy: piecewise condition warns', () => {
+    let y10 = p.namespaceStorage.get('nameless').get('y11');
+    let expr = y10.assignments.start_;
+    let unit = expr.calcUnit(y10, { policy: 'simbio' });
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(3);
     p.defaultLogs.length = 0; // RESET
