@@ -29,16 +29,6 @@
       {{ xmlAnnotation }}
     </annotation>
     {%- endif %}
-  {%- if listOfUnitDefinitions | length > 0 %}
-<!-- BEGIN UNIT DEFINITIONS -->
-    <listOfUnitDefinitions>
-    {%- for unitDefinition in listOfUnitDefinitions %}
-    {{ unitDefinition }}
-    {%- endfor %}
-    </listOfUnitDefinitions>
-<!-- END UNIT DEFINITIONS -->
-  {%- endif %}
-  
   {%- if listOfFunctionDefinitions | length > 0 %}
 <!-- BEGIN FUNCTION DEFINITIONS -->
     <listOfFunctionDefinitions>
@@ -58,6 +48,16 @@
     {%- endfor %}
     </listOfFunctionDefinitions>
 <!-- END FUNCTION DEFINITIONS -->
+  {%- endif %}
+
+  {%- if listOfUnitDefinitions | length > 0 %}
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    {%- for unitDefinition in listOfUnitDefinitions %}
+    {{ unitDefinition }}
+    {%- endfor %}
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
   {%- endif %}
 
   {% set listOfCompartments = population.selectByClassName('Compartment') %}
