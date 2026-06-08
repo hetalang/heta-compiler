@@ -378,6 +378,8 @@
     <listOfEvents>
       {%- for event in listOfTimeEvents -%}
       {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}
+      {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
+      {%- if eventAssignments|length > 0 %}{# skip events with no assignments #}
       <event
         id="{{event.id}}"
         {#- metaid="{{event.index}}" #}
@@ -422,8 +424,6 @@
             {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
-        {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-        {%- if eventAssignments|length > 0 %}
         <listOfEventAssignments>
           {% for record in eventAssignments %}
           <eventAssignment
@@ -434,10 +434,12 @@
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
-        {%- endif %}
       </event>
+      {%- endif %}
       {%- endfor %}
       {%- for event in listOfCEvents %}
+      {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
+      {%- if eventAssignments|length > 0 %}
       <event
         id="{{event.id}}" 
         {#- metaid="{{event.index}}" #}
@@ -453,8 +455,6 @@
             {% if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
-        {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-        {%- if eventAssignments|length > 0 %}
         <listOfEventAssignments>
           {% for record in eventAssignments %}
           <eventAssignment
@@ -465,10 +465,12 @@
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
-        {%- endif %}
       </event>
+      {%- endif %}
       {%- endfor %}
       {%- for event in listOfDEvents %}
+      {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
+      {%- if eventAssignments|length > 0 %}
       <event
         id="{{ event.id }}" 
         {#- metaid="{{ event.index }}" #}
@@ -480,8 +482,6 @@
             {%- if not event.active %}</apply>{% endif %}
           </math>
         </trigger>
-        {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-        {%- if eventAssignments|length > 0 %}
         <listOfEventAssignments>
           {% for record in eventAssignments %}
           <eventAssignment
@@ -492,8 +492,8 @@
           </eventAssignment>
           {% endfor %}
         </listOfEventAssignments>
-        {%- endif %}
       </event>
+      {%- endif %}
       {%- endfor %}
     </listOfEvents>
   {% endif %}

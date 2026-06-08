@@ -187,57 +187,6 @@
           
         </listOfEventAssignments>
       </event>
-      <event
-        id="ts2"
-        >
-        <trigger>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-              
-              <apply><geq/>
-                  <apply><minus/>
-                    <apply><divide/>
-                      <apply><minus/>
-                        <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-                        <cn>0</cn>
-                      </apply>
-                      <ci>period2</ci>
-                    </apply>
-                    <apply><floor/>
-                      <apply><plus/>
-                        <apply><divide/>
-                          <apply><minus/>
-                            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-                            <cn>0</cn>
-                          </apply>
-                          <ci>period2</ci>
-                        </apply>
-                        <cn>0.5</cn>
-                      </apply>
-                    </apply>
-                  </apply>
-                  <cn>0</cn>
-                </apply>
-              
-              
-            
-          </math>
-        </trigger>
-      </event>
-      <event
-        id="cs1"
-        >
-        <trigger>
-          <math xmlns="http://www.w3.org/1998/Math/MathML">
-            
-            <apply>
-              <geq/>
-              <apply><minus/><ci>k1</ci><cn>1</cn></apply>
-              <cn>0</cn>
-            </apply>
-            
-          </math>
-        </trigger>
-      </event>
     </listOfEvents>
   
   
