@@ -1,8 +1,5 @@
 /*
-  Entry file for web applications.
-  You must run `npm run precompile` to precompile templates before using this file.
-  It does not use specific Node.js features like:
-  - StdoutTransport
+  Entry file for CLI applications
 */
 
 const {
@@ -13,9 +10,8 @@ const {
   HetaLevelError
 } = require('./entry-common');
 
-const { Transport, StringTransport } = require('./logger');
+const { Transport, StdoutTransport, StringTransport } = require('./logger');
 
-// always load compiled templates
 Builder._templates = require('./compiled-templates').templates;
 
 module.exports = {
@@ -24,7 +20,8 @@ module.exports = {
   coreItems,
   ModuleSystem,
   HetaLevelError,
-
+  
   Transport,
+  StdoutTransport,
   StringTransport
 };

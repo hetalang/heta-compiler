@@ -1,22 +1,12 @@
 {
-  "terminal.integrated.env.windows": {
-    "HETA_TEMPLATES_MODE": "raw"
-  },
-  "terminal.integrated.env.linux": {
-    "HETA_TEMPLATES_MODE": "raw"
-  },
-  "terminal.integrated.env.osx": {
-    "HETA_TEMPLATES_MODE": "raw"
-  },
-  "debug.javascript.terminalOptions": {
-    "env": {
-      "HETA_TEMPLATES_MODE": "raw"
-    }
-  },
   "json.schemas": [
     {
       "fileMatch": ["*.dynms.json"],
       "url": "./src/dynms/dynms.schema.json"
+    },
+    {
+      "fileMatch": ["*.heta.json"],
+      "url": "./src/json-export/heta.json.schema.json"
     }
   ]
 }
