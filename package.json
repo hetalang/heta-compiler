@@ -6,7 +6,7 @@
   "browser": "./src/web.js",
   "exports": {
     ".": "./src/index.js",
-    "./cli": "./src/index.js",
+    "./cli": "./src/cli.js",
     "./web": "./src/web.js",
     "./package": "./package.json"
   },
