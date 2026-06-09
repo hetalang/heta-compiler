@@ -58,7 +58,7 @@ function _toDeepPaths(o){
       var pathArray = _parsePath(keyClean);
     } catch (e) {
       if (e instanceof TypeError) {
-        throw new HetaLevelError(`Invalid header (first raw) "${keyClean}" in table`);
+        throw new HetaLevelError(`Invalid header (first row) "${keyClean}" in table`);
       } else {
         throw e;
       }
