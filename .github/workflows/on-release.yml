@@ -2,7 +2,7 @@ name: On release
 
 on:
   release:
-    types: [published, released]
+    types: [published]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.release.tag_name }}
@@ -447,8 +447,11 @@ jobs:
       - name: Check npm publish version
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          if [ "$VERSION" != "${{ github.event.release.tag_name }}" ]; then
-            echo "Version mismatch: package.json has $VERSION, release tag is ${{ github.event.release.tag_name }}"
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+          TAG_VERSION="${RELEASE_TAG#v}"
+          TAG_VERSION="${TAG_VERSION#V}"
+          if [ "$VERSION" != "$TAG_VERSION" ]; then
+            echo "Version mismatch: package.json has $VERSION, release tag is $RELEASE_TAG (normalized: $TAG_VERSION)"
             exit 1
           fi
           if node -e "process.exit(require('semver').prerelease(process.argv[1]) ? 0 : 1)" "$VERSION"; then
