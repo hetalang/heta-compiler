@@ -177,7 +177,16 @@ jobs:
 
       - name: Build standalone app
         run: |
+          $version = node -p "require('./package.json').version"
+          $msiVersion = $version -replace '^(\d+\.\d+\.\d+).*$','$1'
+          if ($msiVersion -eq $version -and $version -notmatch '^\d+\.\d+\.\d+$') {
+            Write-Error "Cannot convert package version '$version' to MSI/EXE version"
+            exit 1
+          }
+          $exeVersion = "$msiVersion.0"
+
           npx pkg . -t node18-win-x64 --compress GZip
+          npx rcedit dist/heta-compiler.exe --set-file-version "$exeVersion" --set-product-version "$exeVersion" --set-version-string "ProductVersion" "$version"
           cd ./dist
           cp -Force heta-compiler.exe heta-compiler-win-x64.exe
           tar -czvf ./heta-compiler-windows-x64.tar.gz ./heta-compiler.exe
