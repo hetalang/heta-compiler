@@ -85,9 +85,8 @@
       "type": "object",
       "required": [
         "action",
-        "toolName",
-        "toolVersion",
-        "createdAt",
+        "generator",
+        "created",
         "platformId",
         "format"
       ],
@@ -96,13 +95,22 @@
         "action": {
           "const": "hasMeta"
         },
-        "toolName": {
-          "type": "string"
+        "generator": {
+          "type": "object",
+          "required": [
+            "name",
+            "version"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
         },
-        "toolVersion": {
-          "type": "string"
-        },
-        "createdAt": {
+        "created": {
           "type": "string",
           "format": "date-time"
         },

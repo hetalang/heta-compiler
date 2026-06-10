@@ -67,9 +67,8 @@ class JSONExport extends AbstractExport {
 
     let qArr_final = [{
       action: 'hasMeta',
-      toolName: pkg.name,
-      toolVersion: pkg.version,
-      createdAt: new Date().toISOString(),
+      generator: {name: pkg.name, version: pkg.version},
+      created: new Date().toISOString(),
       platformId: this._builder.id,
       platformVersion: this._builder.version,
       format: 'json'

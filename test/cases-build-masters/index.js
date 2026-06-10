@@ -100,7 +100,7 @@ function normalizeJson(value) {
 
   return Object.fromEntries(
     Object.entries(value)
-      .filter(([key]) => !['toolVersion', 'createdAt', 'created', 'generator'].includes(key))
+      .filter(([key]) => !['created', 'generator'].includes(key))
       .map(([key, item]) => [key, normalizeJson(item)])
   );
 }
