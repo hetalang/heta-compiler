@@ -1,5 +1,19 @@
 # Change Log
 
+## 0.12.0
+
+- Added a new **DynMS export** format
+- Reworked **mrgsolve export** using DynMS as an intermediate format; improved support for switchers, static states, states depending on constants, and `#defineFunction`; replaced `SOLVERTIME` with `TIME`.
+- Improved **SBML export** compatibility and correctness: fixed events and event assignments, trigger `initialValue` for Level 3, `piecewise`, user-defined function MathML, and `#defineFunction`; removed unnecessary `<metaid>` and empty SBML blocks.
+- Improved event handling in **DBSolve**, including `atStart`, multiple events, and unsupported event cases.
+- Removed `atStart` from `@TimeSwitcher`
+- Fixed user-defined function substitution in expressions.
+- Improved output metadata and formatting for **Canonical and JSON exports** (`created`, `generator`, cleaner output).
+- Polished **Heta-code export** syntax.
+- Expanded automated checks with case-based regression tests and schema validation for DynMS, Canonical, and SBML.
+- Improved packaging and release pipeline: template precompilation, browser/CLI entry points, CI/CD refresh, and dependency security updates.
+- Documentation updates across export formats.
+
 ## 0.11.1
 
 - fix units check issue when parsing `x++y` expressions
