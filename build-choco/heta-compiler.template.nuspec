@@ -4,7 +4,7 @@
     <id>heta-compiler</id>
     <version>$VERSION</version>
     <title>Heta Compiler - Command-Line Tool for Systems Biology</title>
-    <iconUrl>https://hetalang.github.io/assets/img/logo.svg</iconUrl>
+    <iconUrl>https://hetalang.github.io/img/logo.svg</iconUrl>
     <packageSourceUrl>https://github.com/hetalang/heta-compiler</packageSourceUrl>
     <docsUrl>https://hetalang.github.io/hetacompiler/</docsUrl>
     <bugTrackerUrl>https://github.com/hetalang/heta-compiler/issues</bugTrackerUrl>

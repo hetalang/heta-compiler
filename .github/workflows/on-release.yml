@@ -211,11 +211,16 @@ jobs:
         run: |
           $pathToWxs = "build-win-installer/perUser.wxs"
           $content = Get-Content $pathToWxs -Raw
-          $newContent = $content -replace '(?<=Version\s*=\s*")0\.0\.0', "${{ steps.package_version.outputs.MSI_VERSION }}"
+          $versionReplacement = '${1}' + "${{ steps.package_version.outputs.MSI_VERSION }}" + '${2}'
+          $newContent = $content -replace '(?s)(<Product\b[^>]*\bVersion\s*=\s*")[^"]+(")', $versionReplacement
           $newContent | Set-Content $pathToWxs
 
       - name: Build Windows installer
         run: |
+          if (!(Test-Path "build-win-installer/logo.ico")) {
+            Write-Error "Missing MSI icon file: build-win-installer/logo.ico"
+            exit 1
+          }
           & ${env:WIX}bin\candle.exe -o dist/ build-win-installer/perUser.wxs
           & ${env:WIX}bin\light.exe -o dist/heta-compiler-win-x64-installer.msi dist/perUser.wixobj -ext WixUIExtension
 

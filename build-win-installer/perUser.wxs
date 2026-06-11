@@ -34,6 +34,10 @@ perUser: does not require elevated privileges to install. Sets the package's Ins
         <Property Id="WIXUI_INSTALLDIR" Value="INSTALL_HERE"/>
         <UIRef Id="MyWixUI_InstallDir"/>
 
+        <Icon Id="HetaProductIcon" SourceFile="build-win-installer/logo.ico" />
+        <Property Id="ARPPRODUCTICON" Value="HetaProductIcon" />
+        <!--<WixVariable Id="WixUIDialogBmp" Value="build-win-installer/wix-dialog.bmp" />-->
+
         <MajorUpgrade DowngradeErrorMessage="A newer version of heta-compiler is already installed." />
         <Media Id="1" Cabinet="cab1.cab" EmbedCab="yes" />
 
