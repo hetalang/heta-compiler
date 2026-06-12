@@ -1,5 +1,4 @@
 const colors = require('colors/safe');
-const fetch = require('node-fetch');
 const pkg = require('../package');
 const semver = require('semver');
 
