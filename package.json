@@ -50,7 +50,7 @@
     "heta-parser": "^0.4.3",
     "inquirer": "^8.2.7",
     "js-sha256": "^0.11.1",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.2.0",
     "markdown-it": "^14.1.0",
     "mathjs": "^11.12.0",
     "mathjs-mathml": "^0.4.0",
@@ -72,6 +72,7 @@
     "xmllint-wasm": "^5.2.0"
   },
   "overrides": {
+    "js-yaml": "$js-yaml",
     "serialize-javascript": "^7.0.5",
     "uuid": "^11.1.1"
   },

@@ -41,6 +41,8 @@ module.exports = function(env) {
 function _toStruct(obj) {
   if (Array.isArray(obj)) {
     return '[' + obj.map(_toStruct).join(', ') + ']';
+  } else if (obj === null) {
+    return '[]';
   } else if (typeof obj === 'object') {
     let pairs = Object.entries(obj)
       .filter(([key, value]) => value !== undefined)
@@ -52,8 +54,6 @@ function _toStruct(obj) {
     return obj;
   } else if (typeof obj === 'boolean') {
     return obj;
-  } else if (obj === null) {
-    return '[]';
   } else {
     throw new Error('Unsupported type');
   }
@@ -63,6 +63,8 @@ function _toStruct(obj) {
 function _toYAML(obj) {
   if (Array.isArray(obj)) {
     return '[' + obj.map(_toYAML).join(', ') + ']';
+  } else if (obj === null) {
+    return 'null';
   } else if (typeof obj === 'object') {
     let pairs = Object.entries(obj)
       .filter(([key, value]) => value !== undefined)
@@ -75,8 +77,6 @@ function _toYAML(obj) {
     return obj;
   } else if (typeof obj === 'boolean') {
     return obj;
-  } else if (obj === null) {
-    return 'null';
   } else {
     throw new Error('Unsupported type');
   }
