@@ -1,0 +1,11 @@
+x1 @Record .= 1;
+x2 @Record .= 2;
+
+pr1 @Process {actors: x1=>x2} := k1 * x1;
+
+k1 @Const = 1e-3;
+
+ss1 @StopSwitcher {
+    trigger: "x1 > 10",
+    active: true
+};

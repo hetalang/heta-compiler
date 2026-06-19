@@ -204,6 +204,25 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer =
 
             events.push(event);
         });
+    this.selectByInstanceOf('StopSwitcher')
+        .forEach((switcher) => {
+            let event = {};
+            event.id = switcher.id;
+            let triggerRhs = switcher.trigger.substituteByDefinitions();
+            event.trigger = {
+                type: 'conditional',
+                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                detection: 'step',
+                atStart: true
+            };
+            event.priority = switcher.priority || 0;
+            event.actions = [];
+            event.active = switcher.active;
+            event.stopSimulation = true;
+            event.title = switcher.title;
+
+            events.push(event);
+        });
 
     let observables = this.selectByInstanceOf('Record')
         .filter((x) => x.output)

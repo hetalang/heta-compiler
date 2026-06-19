@@ -33,6 +33,7 @@ let testCases = [
     { input: 'input-24.heta', output: 'output-24.json' },
     { input: 'input-25.heta', output: 'output-25.json' },
     { input: 'input-26.heta', output: 'output-26.json' },
+    { input: 'input-27.heta', output: 'output-27.json' },
 ];
 
 describe('DynMS test sets', () => {

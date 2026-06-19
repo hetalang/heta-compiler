@@ -207,6 +207,10 @@
           "type": "boolean",
           "default": true
         },
+        "stopSimulation": {
+          "type": "boolean",
+          "default": false
+        },
         "actions": {
           "type": "array",
           "items": {

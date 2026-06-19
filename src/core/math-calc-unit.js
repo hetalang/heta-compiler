@@ -74,7 +74,7 @@ function _calcUnit(_this, record) {
       } else { // x ^ y
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
-          logger.warn(`Units inconsistency for "${record.index}": power arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
+          logger.warn(`Units inconsistency for "${record.index}": in power operator/function, base and exponent must be both dimensionless, or or the exponent must be a number: "${_this.toString()}" : "${unitExpr}"`);
         }
 
         return argUnit[0];

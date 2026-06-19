@@ -234,6 +234,26 @@
           "priority": 0,
           "actions": [],
           "active": true
+        },
+        {
+          "id": "ss1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                "s1",
+                "k1"
+              ],
+              "format": "math-json"
+            },
+            "detection": "step",
+            "atStart": true
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true,
+          "stopSimulation": true
         }
       ],
       "observables": []
