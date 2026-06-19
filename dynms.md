@@ -328,6 +328,14 @@ Time triggers activate events at specified times.
 }
 ```
 
+Interpretation notes:
+- `start` is required.
+- `period` is optional. If omitted, the trigger is treated as one-shot and activates only at `start`.
+- `period` should be positive. For compatibility, `period <= 0` should be interpreted the same as omitted `period` (one-shot at `start`).
+- `stop` is optional and is mainly used for periodic triggers. For `period > 0`, event times are: `start + k * period`, where `k = 0, 1, 2, ...`, while `time <= stop`.
+- `stop` is inclusive: if `start + k * period == stop`, the event is activated at this final time.
+- If `period` is omitted or less than or equal to `0`, `stop` does not add extra activations and can be ignored by backends.
+
 ---
 
 ### 6.2 Crossing Triggers
