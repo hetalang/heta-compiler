@@ -247,13 +247,16 @@
           "const": "time"
         },
         "start": {
-          "$ref": "#/$defs/value"
+          "$ref": "#/$defs/value",
+          "description": "Required first activation time."
         },
         "period": {
-          "$ref": "#/$defs/value"
+          "$ref": "#/$defs/value",
+          "description": "Optional repeat interval. For compatibility, non-positive values are treated as one-shot behavior (same as omitted period)."
         },
         "stop": {
-          "$ref": "#/$defs/value"
+          "$ref": "#/$defs/value",
+          "description": "Optional upper time bound used mainly for periodic triggers."
         }
       }
     },

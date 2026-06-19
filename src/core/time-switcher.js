@@ -105,7 +105,7 @@ class TimeSwitcher extends _Switcher {
         delete this.start;
         this.startObj = (new Const).merge({ num: q.start });
       }
-      // empty is same as 0
+      // empty period means one-shot behavior (no repeat)
       if (q.period === null) {
         delete this.period;
         delete this.periodObj;
@@ -115,7 +115,7 @@ class TimeSwitcher extends _Switcher {
         delete this.period;
         this.periodObj = (new Const).merge({ num: q.period });
       }
-      // empty is the same as Infinity
+      // empty stop means no upper bound for periodic triggers
       if (q.stop === null) {
         delete this.stop;
         delete this.stopObj;
