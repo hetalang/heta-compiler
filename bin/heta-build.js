@@ -58,6 +58,7 @@ async function main() {
 
   // set target directory of platform and check if exist
   let targetDir = path.normalize(args[0] || '.');
+  let targetDirAbs = path.resolve(targetDir);
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
     message(`Target directory "${targetDir}" does not exist.\nSTOP!`);
     process.exit(2); // BRAKE
@@ -69,7 +70,7 @@ async function main() {
   // init logging to file
   logStream = fs.createWriteStream(cliOptions.logPath, { flags: 'w' }); // or 'a' to append
 
-  message(`Running compilation in directory "${path.resolve(targetDir)}"...\n`); // global path
+  message(`Running compilation in directory "${targetDirAbs}"...\n`); // global path
 
   // 0. empty declaration
   let declaration = {options: {}, importModule: {}, export: []};
@@ -187,11 +188,12 @@ Promise.all([
 
   let toDelete = logMode === 'never' 
       || (logMode === 'error' && process.exitCode === 0);
-  toDelete && fs.removeSync(logPath);
-  
-  if (logStream) {
-    logStream.end(() => process.exit());
-  } else {
-    process.exit();
-  }
+
+  const closeLogStream = logStream
+    ? new Promise((resolve) => logStream.end(resolve))
+    : Promise.resolve();
+
+  return closeLogStream.then(() => {
+    toDelete && fs.removeSync(logPath);
+  });
 });
