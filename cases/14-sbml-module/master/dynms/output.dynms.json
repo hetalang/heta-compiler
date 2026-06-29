@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
   "dynms": "0.1.0",
   "generator": {
     "name": "heta-compiler",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json",
-  "title": "DynMS document",
+  "$id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
+  "title": "DynMS 0.1.0 document",
   "description": "Dynamic Model Specification (DynMS) document schema.",
   "type": "object",
   "additionalProperties": false,

@@ -10,7 +10,7 @@ The main goals of DynMS are:
 - support deterministic simulation semantics;
 - simplify testing and validation across simulation platforms.
 
-The shema for DynMS is available at: https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json
+The shema for DynMS is available at: https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json
 
 ---
 
@@ -250,7 +250,7 @@ See the original MathJSON standard here: https://cortexjs.io/math-json/
 
 DynMS uses its **own JSON Schema profile** of MathJSON, not the upstream library schema. The DynMS schema is available at:
 
-https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/dynms/dynms.schema.json
+https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json
 
 The DynMS MathJSON profile follows the same conceptual model as the original standard but is independently maintained and may diverge over time to better serve simulation use cases.
 
