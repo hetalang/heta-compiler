@@ -337,6 +337,68 @@ This avoids unnecessary nesting such as `["Add", "a", ["Add", "b", "c"]]`.
 
 ---
 
+#### 4.2.6 Supported MathJSON functions
+
+DynMS supports the following MathJSON function and operator names. In array form, the first item must be one of these names.
+
+Arithmetic:
+- `Add`
+- `Divide`
+- `Multiply`
+- `Negate`
+- `Power`
+- `Root`
+- `Square`
+
+Elementary functions:
+- `Abs`
+- `Ceil`
+- `Exp`
+- `Factorial`
+- `Floor`
+- `Lb`
+- `Lg`
+- `Ln`
+- `Log`
+- `Max`
+- `Min`
+- `Sign`
+- `Sqrt`
+
+Trigonometric functions:
+- `Arccos`
+- `Arccot`
+- `Arccsc`
+- `Arcsec`
+- `Arcsin`
+- `Arctan`
+- `Cos`
+- `Cot`
+- `Csc`
+- `Sec`
+- `Sin`
+- `Tan`
+
+Comparison and logic:
+- `And`
+- `Equal`
+- `Greater`
+- `GreaterEqual`
+- `Less`
+- `LessEqual`
+- `Not`
+- `NotEqual`
+- `Or`
+- `Xor`
+
+Conditional expressions:
+- `If`
+- `Which`
+
+Named constants and boolean literals such as `Pi`, `ExponentialE`, `True`, and `False` are represented as symbols, not function calls.
+
+---
+
 ## 5. Simulation Semantics
 
 ### 5.1 Initialization
