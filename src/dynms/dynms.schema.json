@@ -388,11 +388,7 @@
           "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
         },
         {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/mathJsonNode"
-          }
+          "$ref": "#/$defs/mathJsonFunctionArray"
         },
         {
           "$ref": "#/$defs/mathJsonNumberObject"
@@ -407,6 +403,67 @@
           "$ref": "#/$defs/mathJsonFunctionObject"
         }
       ]
+    },
+    "mathJsonFunctionName": {
+      "type": "string",
+      "enum": [
+        "Abs",
+        "Add",
+        "And",
+        "Arccos",
+        "Arccot",
+        "Arccsc",
+        "Arcsec",
+        "Arcsin",
+        "Arctan",
+        "Ceil",
+        "Cos",
+        "Cot",
+        "Csc",
+        "Divide",
+        "Equal",
+        "Exp",
+        "Factorial",
+        "Floor",
+        "Greater",
+        "GreaterEqual",
+        "If",
+        "Lb",
+        "Less",
+        "LessEqual",
+        "Lg",
+        "Ln",
+        "Log",
+        "Max",
+        "Min",
+        "Multiply",
+        "Negate",
+        "Not",
+        "NotEqual",
+        "Or",
+        "Power",
+        "Root",
+        "Sec",
+        "Sign",
+        "Sin",
+        "Sqrt",
+        "Square",
+        "Tan",
+        "Which",
+        "Xor"
+      ]
+    },
+    "mathJsonFunctionArray": {
+      "type": "array",
+      "minItems": 1,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/mathJsonFunctionName"
+        }
+      ],
+      "items": {
+        "$ref": "#/$defs/mathJsonNode"
+      }
     },
     "mathJsonNumberObject": {
       "type": "object",
@@ -446,11 +503,7 @@
       "required": ["fn"],
       "properties": {
         "fn": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/$defs/mathJsonNode"
-          }
+          "$ref": "#/$defs/mathJsonFunctionArray"
         }
       }
     }
