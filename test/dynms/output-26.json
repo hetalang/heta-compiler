@@ -20,8 +20,12 @@
     {
       "id": "pr1",
       "rhs": {
-        "expr": "k1 * x1",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k1",
+          "x1"
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -29,16 +33,19 @@
     {
       "state": "x1",
       "rhs": {
-        "expr": "-pr1",
-        "format": "heta"
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
       },
       "algebraic": true
     },
     {
       "state": "x2",
       "rhs": {
-        "expr": "+pr1",
-        "format": "heta"
+        "expr": "pr1",
+        "format": "math-json"
       }
     }
   ],

@@ -18,23 +18,44 @@
     {
       "id": "c1",
       "initial": {
-        "expr": "1 + 2",
-        "format": "heta"
+        "expr": [
+          "Add",
+          1,
+          2
+        ],
+        "format": "math-json"
       },
       "static": true
     },
     {
       "id": "x1_amt_",
       "initial": {
-        "expr": "dose1 * F * (1 + 2)",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "dose1",
+          "F",
+          [
+            "Add",
+            1,
+            2
+          ]
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "x2_amt_",
       "initial": {
-        "expr": "2 * (1 + 2)",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          2,
+          [
+            "Add",
+            1,
+            2
+          ]
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -42,22 +63,34 @@
     {
       "id": "x2",
       "rhs": {
-        "expr": "x2_amt_ / c1",
-        "format": "heta"
+        "expr": [
+          "Divide",
+          "x2_amt_",
+          "c1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "x1",
       "rhs": {
-        "expr": "x1_amt_ / c1",
-        "format": "heta"
+        "expr": [
+          "Divide",
+          "x1_amt_",
+          "c1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "pr1",
       "rhs": {
-        "expr": "k1 * x1",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k1",
+          "x1"
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -65,15 +98,18 @@
     {
       "state": "x1_amt_",
       "rhs": {
-        "expr": "-pr1",
-        "format": "heta"
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "state": "x2_amt_",
       "rhs": {
-        "expr": "+pr1",
-        "format": "heta"
+        "expr": "pr1",
+        "format": "math-json"
       }
     }
   ],

@@ -1,4 +1,3 @@
-
 {
   "id": "nameless",
   "constants": [
@@ -16,8 +15,12 @@
     {
       "id": "x1_amt_",
       "initial": {
-        "expr": "1 * 5",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          1,
+          5
+        ],
+        "format": "math-json"
       }
     },
     {
@@ -27,8 +30,12 @@
     {
       "id": "x3_amt_",
       "initial": {
-        "expr": "3 * 5",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          3,
+          5
+        ],
+        "format": "math-json"
       },
       "static": true
     }
@@ -37,22 +44,34 @@
     {
       "id": "x3",
       "rhs": {
-        "expr": "x3_amt_ / c1",
-        "format": "heta"
+        "expr": [
+          "Divide",
+          "x3_amt_",
+          "c1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "x1",
       "rhs": {
-        "expr": "x1_amt_ / c1",
-        "format": "heta"
+        "expr": [
+          "Divide",
+          "x1_amt_",
+          "c1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "pr1",
       "rhs": {
-        "expr": "k1 * x1",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k1",
+          "x1"
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -60,32 +79,50 @@
     {
       "state": "x1_amt_",
       "rhs": {
-        "expr": "-pr1",
-        "format": "heta"
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "state": "x2",
       "rhs": {
-        "expr": "+pr1",
-        "format": "heta"
+        "expr": "pr1",
+        "format": "math-json"
       }
     }
   ],
   "events": [
     {
-      
       "id": "sw1",
       "trigger": {
-        "start": 12,
-        "type": "time"
+        "type": "time",
+        "start": 12
       },
       "priority": 0,
       "actions": [
         {
           "rhs": {
-            "expr": "(x3 * c1 + 10) / c1 * c1",
-            "format": "heta"
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                [
+                  "Add",
+                  [
+                    "Multiply",
+                    "x3",
+                    "c1"
+                  ],
+                  10
+                ],
+                "c1"
+              ],
+              "c1"
+            ],
+            "format": "math-json"
           },
           "state": "x3_amt_"
         }

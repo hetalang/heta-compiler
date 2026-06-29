@@ -1,0 +1,9 @@
+x1 @Record .= 1;
+
+pr1 @Record := Infinity * x1 + NaN + (-Infinity);
+
+sw1 @TimeSwitcher {
+    start: 1
+};
+
+x1 [sw1]= NaN;

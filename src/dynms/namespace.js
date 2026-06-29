@@ -17,7 +17,7 @@ const HetaLevelError = require('../heta-level-error');
     - we create a new states with _amt_ suffix
     - we do not create new constants
 */
-Namespace.prototype.makeDynMSModel = function(exprFormat = 'heta', expRenderer = (expr) => expr.toString()) {
+Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRenderer = (expr) => expr.toMathJSON()) {
     //let { logger } = this.container;
 
     // generate constants list

@@ -1,0 +1,59 @@
+{
+  "id": "nameless",
+  "constants": [],
+  "states": [
+    {
+      "id": "x1",
+      "initial": 1,
+      "static": true
+    }
+  ],
+  "assignments": [
+    {
+      "id": "pr1",
+      "rhs": {
+        "expr": [
+          "Add",
+          [
+            "Multiply",
+            {
+              "num": "+Infinity"
+            },
+            "x1"
+          ],
+          {
+            "num": "NaN"
+          },
+          {
+            "num": "-Infinity"
+          }
+        ],
+        "format": "math-json"
+      }
+    }
+  ],
+  "derivatives": [],
+  "events": [
+    {
+      "id": "sw1",
+      "trigger": {
+        "type": "time",
+        "start": 1
+      },
+      "priority": 0,
+      "actions": [
+        {
+          "rhs": {
+            "expr": {
+              "num": "NaN"
+            },
+            "format": "math-json"
+          },
+          "state": "x1"
+        }
+      ],
+      "active": true
+    }
+  ],
+  "observables": []
+}

@@ -28,15 +28,32 @@
     {
       "id": "pr1",
       "rhs": {
-        "expr": "k1 * x1 ^ 2 * x2 ^ 3",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k1",
+          [
+            "Power",
+            "x1",
+            2
+          ],
+          [
+            "Power",
+            "x2",
+            3
+          ]
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "pr2",
       "rhs": {
-        "expr": "k2 * x3",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k2",
+          "x3"
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -44,22 +61,45 @@
     {
       "state": "x1",
       "rhs": {
-        "expr": "-2 * pr1 + pr2",
-        "format": "heta"
+        "expr": [
+          "Add",
+          [
+            "Multiply",
+            -2,
+            "pr1"
+          ],
+          "pr2"
+        ],
+        "format": "math-json"
       }
     },
     {
       "state": "x2",
       "rhs": {
-        "expr": "-3 * pr1",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          -3,
+          "pr1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "state": "x3",
       "rhs": {
-        "expr": "+4 * pr1 - pr2",
-        "format": "heta"
+        "expr": [
+          "Add",
+          [
+            "Multiply",
+            4,
+            "pr1"
+          ],
+          [
+            "Negate",
+            "pr2"
+          ]
+        ],
+        "format": "math-json"
       }
     }
   ],

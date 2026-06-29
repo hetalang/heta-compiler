@@ -29,8 +29,12 @@
     {
       "id": "pr1",
       "rhs": {
-        "expr": "k1 * x1",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k1",
+          "x1"
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -38,15 +42,18 @@
     {
       "state": "x1",
       "rhs": {
-        "expr": "-pr1",
-        "format": "heta"
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "state": "x2",
       "rhs": {
-        "expr": "+pr1",
-        "format": "heta"
+        "expr": "pr1",
+        "format": "math-json"
       }
     }
   ],
@@ -57,14 +64,24 @@
         "type": "time",
         "start": {
           "expr": "start1",
-          "format": "heta"
+          "format": "math-json"
         }
       },
       "priority": 0,
-      "active": true,
       "actions": [
-        { "state": "x1", "rhs": {"expr": "x1 + dose1", "format": "heta"} }
-      ]
+        {
+          "rhs": {
+            "expr": [
+              "Add",
+              "x1",
+              "dose1"
+            ],
+            "format": "math-json"
+          },
+          "state": "x1"
+        }
+      ],
+      "active": true
     }
   ],
   "observables": []

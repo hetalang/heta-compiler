@@ -20,15 +20,27 @@
     {
       "id": "pr1",
       "rhs": {
-        "expr": "k1 * x1",
-        "format": "heta"
+        "expr": [
+          "Multiply",
+          "k1",
+          "x1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "ts1",
       "rhs": {
-        "expr": "0.001 * t + 5",
-        "format": "heta"
+        "expr": [
+          "Add",
+          [
+            "Multiply",
+            0.001,
+            "t"
+          ],
+          5
+        ],
+        "format": "math-json"
       }
     }
   ],
@@ -36,15 +48,18 @@
     {
       "state": "x1",
       "rhs": {
-        "expr": "-pr1",
-        "format": "heta"
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "state": "x2",
       "rhs": {
-        "expr": "+pr1",
-        "format": "heta"
+        "expr": "pr1",
+        "format": "math-json"
       }
     }
   ],
