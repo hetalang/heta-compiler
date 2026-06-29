@@ -385,7 +385,7 @@
         },
         {
           "type": "string",
-          "minLength": 1
+          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
         },
         {
           "type": "array",
@@ -426,7 +426,7 @@
       "properties": {
         "sym": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
         }
       }
     },
