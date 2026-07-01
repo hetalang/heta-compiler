@@ -12,7 +12,7 @@
     },
     "dynms": {
       "type": "string",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      "const": "0.1.0"
     },
     "generator": {
       "$ref": "#/$defs/generator"

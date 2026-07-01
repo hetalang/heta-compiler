@@ -18,6 +18,13 @@ describe('DynMS schema', () => {
     expect(validateDynms(doc)).to.equal(true);
   });
 
+  it('rejects unsupported DynMS versions', () => {
+    const doc = makeDoc(['Add', 'x', ['Sin', 't']]);
+    doc.dynms = '0.2.0';
+
+    expect(validateDynms(doc)).to.equal(false);
+  });
+
   it('rejects unsupported MathJSON functions in array form', () => {
     const doc = makeDoc(['UnsupportedFunction', 'x']);
 
