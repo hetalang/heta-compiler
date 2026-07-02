@@ -16,22 +16,40 @@ The shema for DynMS is available at: https://raw.githubusercontent.com/hetalang/
 
 ## 1. DynMS Document Structure
 
-Minimal DynMS structure:
+Minimal valid DynMS structure:
 
 ```json
 {
-  "models": []
+  "dynms": "0.1.0",
+  "models": [
+    {
+      "id": "model1",
+      "constants": [],
+      "states": [],
+      "assignments": [],
+      "derivatives": [],
+      "events": [],
+      "observables": []
+    }
+  ]
 }
 ```
 
-The top level meta info is optional but can include:
+Top level required fields:
+- `dynms`: DynMS version, currently must be `"0.1.0"`;
+- `models`: non-empty array of model definitions.
+
+The top level optional meta info can include:
 - `$schema`: JSON Schema URL for validation;
-- `dynms`: DynMS version;
 - `generator.name`: name of the software that generated the document;
 - `generator.version`: version of the software that generated the document;
 - `created`: ISO 8601 timestamp of document creation;
 - `platformId`: optional identifier for the target simulation platform;
+- `platformVersion`: optional version of the target simulation platform;
+- `platformNotes`: optional platform-specific notes;
 - `license`: optional license information.
+
+If `generator` is present, both `generator.name` and `generator.version` are required.
 
 ## 2. DynMS Model Structure
 
@@ -39,6 +57,7 @@ A DynMS document contains one or more models as an array.
 
 ```json
 {
+  "dynms": "0.1.0",
   "models": [
     {
       "id": "model1",
@@ -52,6 +71,8 @@ A DynMS document contains one or more models as an array.
   ]
 }
 ```
+
+Each model object must include `id`, `constants`, `states`, `assignments`, `derivatives`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
 
 ---
 
@@ -68,7 +89,7 @@ Constants are externally configurable scalar values, model inputs.
 }
 ```
 
-Constants initialized by number (never by expressions) and do not change during simulation unless modified by backend-specific mechanisms.
+Constants are initialized by a number or an expression and do not change during simulation unless modified by backend-specific mechanisms.
 
 ---
 
@@ -180,7 +201,11 @@ Events modify model states during simulation.
 
 ```json
 {
-  "trigger": {},
+  "id": "event1",
+  "trigger": {
+    "type": "time",
+    "start": 0
+  },
   "actions": [],
   "priority": 0,
   "active": true,
@@ -188,6 +213,7 @@ Events modify model states during simulation.
 }
 ```
 
+- `id` is the event identifier;
 - `trigger` defines event activation conditions;
 - `actions` is an array of state modifications executed when the event is triggered;
 - `priority` determines the execution order of events with the same trigger conditions;
@@ -231,6 +257,7 @@ Expressions are represented mathematical formulas used in `assignments`, `deriva
 Supported formats:
 - `heta`
 - `c`
+- `mrgsolve`
 - `julia`
 - `math-json`
 
@@ -415,7 +442,7 @@ Before simulation starts:
 ### 5.2 Zero events
 
 Before running integration we should check if any events are active at simulation start.
-- If `atStart` is `true` for the `condition` or `crossing` trigger, and the trigger condition is satisfied at simulation start, the event is activated immediately.
+- If `atStart` is `true` for the `conditional` or `crossing` trigger, and the trigger condition is satisfied at simulation start, the event is activated immediately.
 - If `start` time trigger is corresponding to the simulation start time, the event is activated immediately.
 
 It may require evaluating `assignments` before checking event conditions.
