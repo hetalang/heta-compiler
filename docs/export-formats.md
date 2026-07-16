@@ -75,7 +75,7 @@ Example 1
 
 Starting from heta-compiler version 0.9.0 the inline export is deprecated.
 Use the `export` property in the declaration file or the CLI `--export` option.
-See [migrate to v0.9](./migrate-to-v0.9.md) and [CLI references](./cli-references.md) for details.
+See [migrate to v0.9](./migrate/migrate-to-v0.9.md) and [CLI references](./cli-references.md) for details.
 
 ## JSON
 

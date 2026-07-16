@@ -19,7 +19,7 @@ You can still use JSON format for declaration files without restrictions, but YA
 
 In this version, the `export` array is used in the declaration file to specify the list of actions to be exported.
 
-Alternatively, you can use the `--export` option in CLI commands. For more details, refer to the [CLI documentation](./cli-references.md).
+Alternatively, you can use the `--export` option in CLI commands. For more details, refer to the [CLI documentation](../cli-references.md).
 
 The old inline export syntax will be deprecated but supported in the current version. However, it will be removed in future versions.
 
@@ -61,7 +61,7 @@ The old inline export syntax will be deprecated but supported in the current ver
 
 6. Remove all inline `#export` actions from your `.heta` files and move them to the `export` array in the declaration file.
 
-   Refer to [export formats](./export-formats.md) for more details.
+   Refer to [export formats](../export-formats.md) for more details.
 
    **Before:**
    ```heta
