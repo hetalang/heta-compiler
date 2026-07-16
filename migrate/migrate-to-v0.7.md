@@ -27,7 +27,7 @@ Previously the `filepath` property in `#export` was obligatory. The new version 
 #export {format: Simbio, filepath: my-model}; // files will be saved to `./dist/my-model/` directory
 ```
 
-See more details in documentation [Export formats](./export-formats).
+See more details in documentation [Export formats](../export-formats).
 
 ### Another file structure for exports
 
@@ -55,7 +55,7 @@ The previous format of `#export` action included `spaceFilter` property which cl
 #export { format: JSON, filepath: two}; // all components will be exported 
 ```
 
-Starting from Heta compiler v0.7.0 `spaceFilter` is an regular expression which tests the space names to export. See details in [Export formats](./export-formats).
+Starting from Heta compiler v0.7.0 `spaceFilter` is an regular expression which tests the space names to export. See details in [Export formats](../export-formats).
 
 ```heta
 // in heta v0.7.x
