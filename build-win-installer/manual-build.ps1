@@ -6,9 +6,9 @@ if (!(Test-Path "${env:WIX}bin\candle.exe") -or !(Test-Path "${env:WIX}bin\light
 	Assert-LastExitCode "choco install wixtoolset"
 }
 
-# build .exe file for windows
-npx --yes pkg . -t node18-win-x64 --compress GZip
-Assert-LastExitCode "pkg build"
+# build .exe file for windows (requires Node.js 24 or newer)
+npm run sea
+Assert-LastExitCode "SEA build"
 
 # get version
 $version = node -p "require('./package.json').version"
@@ -18,8 +18,6 @@ if ($msiVersion -eq $version -and $version -notmatch '^\d+\.\d+\.\d+$') {
 	Write-Error "Cannot convert package version '$version' to MSI/EXE version"
 	exit 1
 }
-$exeVersion = "$msiVersion.0"
-
 if (!(Test-Path "build-win-installer/logo.ico")) {
 	Write-Error "Missing MSI icon file: build-win-installer/logo.ico"
 	exit 1
@@ -30,14 +28,6 @@ if (!(Test-Path "${env:WIX}bin\candle.exe") -or !(Test-Path "${env:WIX}bin\light
 	exit 1
 }
 
-# override PE metadata so Windows shows heta version instead of embedded Node runtime version
-try {
-	npx rcedit dist/heta-compiler.exe --set-file-version "$exeVersion" --set-product-version "$exeVersion" --set-version-string "ProductVersion" "$VERSION"
-	Assert-LastExitCode "rcedit"
-}
-catch {
-	Write-Warning "Skipping rcedit metadata update: $($_.Exception.Message)"
-}
 Copy-Item -Force dist/heta-compiler.exe dist/heta-compiler-win-x64.exe
 
 # get new id

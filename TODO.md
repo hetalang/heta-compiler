@@ -37,8 +37,6 @@
 
 ## features
 
-- alternative solution to substitute "pkg":
-  Node.js 22 https://nodejs.org/api/single-executable-applications.html
 - automatic creation of modifiers in SBML
 
 ## ideas

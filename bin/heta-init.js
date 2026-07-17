@@ -5,6 +5,7 @@ const fs = require('fs-extra');
 const path = require('path');
 const { prompt } = require('inquirer');
 const pkg = require('../package');
+const { copyInitAsset } = require('./init-assets');
 
 // for the development of JSON schema
 // we use https://docs.npmjs.com/files/package.json
@@ -91,29 +92,29 @@ if (opts.silent) {
 
   // saving files
   // saving .gitignore
-  fs.copySync(
-    path.join(__dirname, './init/template.gitignore'),
+  copyInitAsset(
+    'template.gitignore',
     path.join(targetDir, '.gitignore')
   );
   // saving .gitattributes
-  fs.copySync(
-    path.join(__dirname, './init/template.gitattributes'),
+  copyInitAsset(
+    'template.gitattributes',
     path.join(targetDir, '.gitattributes')
   );
   // create files in src
   let hetaIndexFile = path.join(targetDir, 'src', 'index.heta');
-  fs.copySync(
-    path.join(__dirname, './init/index0.heta'),
+  copyInitAsset(
+    'index0.heta',
     hetaIndexFile
   );
 
   // saving qsp-units.heta and qsp-functions.heta
-  fs.copySync(
-    path.join(__dirname, './init/qsp-units.heta'),
+  copyInitAsset(
+    'qsp-units.heta',
     path.join(targetDir, 'src/qsp-units.heta')
   );
-  fs.copySync(
-    path.join(__dirname, './init/qsp-functions.heta'),
+  copyInitAsset(
+    'qsp-functions.heta',
     path.join(targetDir, 'src/qsp-functions.heta')
   );
 
@@ -152,8 +153,8 @@ prompt(questions)
       // create files in src
       let hetaIndexFile = path.join(targetDir, 'src', 'index.heta');
       if(!fs.existsSync(hetaIndexFile)){
-        fs.copySync(
-          path.join(__dirname, './init/index0.heta'), 
+        copyInitAsset(
+          'index0.heta',
           hetaIndexFile,
           { overwrite: true, errorOnExist: true }
         );
@@ -164,15 +165,15 @@ prompt(questions)
       // create files in src
       let hetaIndexFile = path.join(targetDir, 'src', 'index.heta');
       if(!fs.existsSync(hetaIndexFile)){
-        fs.copySync(
-          path.join(__dirname, './init/index1.heta'),
+        copyInitAsset(
+          'index1.heta',
           hetaIndexFile
         );
       }
       let xlsxTableFile = path.join(targetDir, 'src', 'table.xlsx');
       if(!fs.existsSync(xlsxTableFile)){
-        fs.copySync(
-          path.join(__dirname, './init/table.xlsx'),
+        copyInitAsset(
+          'table.xlsx',
           xlsxTableFile
         );
       }
@@ -182,15 +183,15 @@ prompt(questions)
       // create files in src
       let hetaIndexFile = path.join(targetDir, 'src', 'index.heta');
       if(!fs.existsSync(hetaIndexFile)){
-        fs.copySync(
-          path.join(__dirname, './init/index1.heta'),
+        copyInitAsset(
+          'index1.heta',
           hetaIndexFile
         );
       }
       let xlsxTableFile = path.join(targetDir, 'src', 'table.xlsx');
       if(!fs.existsSync(xlsxTableFile)){
-        fs.copySync(
-          path.join(__dirname, './init/table-ext.xlsx'),
+        copyInitAsset(
+          'table-ext.xlsx',
           xlsxTableFile
         );
       }
@@ -205,8 +206,8 @@ prompt(questions)
       // create files in src
       let xlsxTableFile = path.join(targetDir, 'src', 'table.xlsx');
       if(!fs.existsSync(xlsxTableFile)){
-        fs.copySync(
-          path.join(__dirname, './init/table.xlsx'),
+        copyInitAsset(
+          'table.xlsx',
           xlsxTableFile
         );
       }
@@ -219,8 +220,8 @@ prompt(questions)
       // create files in src
       let jsonIndexFile = path.join(targetDir, 'src', 'index.json');
       if(!fs.existsSync(jsonIndexFile)){
-        fs.copySync(
-          path.join(__dirname, './init/index.json'),
+        copyInitAsset(
+          'index.json',
           jsonIndexFile
         );
       }
@@ -233,8 +234,8 @@ prompt(questions)
       // create files in src
       let yamlIndexFile = path.join(targetDir, 'src', 'index.yml');
       if(!fs.existsSync(yamlIndexFile)){
-        fs.copySync(
-          path.join(__dirname, './init/index.yml'),
+        copyInitAsset(
+          'index.yml',
           yamlIndexFile
         );
       }
@@ -244,12 +245,12 @@ prompt(questions)
     platform.export = defaultPlatform.export;
 
     // saving qsp-units.heta and qsp-functions.heta
-    fs.copySync(
-      path.join(__dirname, './init/qsp-units.heta'),
+    copyInitAsset(
+      'qsp-units.heta',
       path.join(targetDir, 'src/qsp-units.heta')
     );
-    fs.copySync(
-      path.join(__dirname, './init/qsp-functions.heta'),
+    copyInitAsset(
+      'qsp-functions.heta',
       path.join(targetDir, 'src/qsp-functions.heta')
     );
     // saving platform file
@@ -258,13 +259,13 @@ prompt(questions)
     let yaml = json.replace(/"/g, '');
     fs.writeFileSync(filePath, yaml);
     // saving .gitignore
-    fs.copySync(
-      path.join(__dirname, './init/template.gitignore'),
+    copyInitAsset(
+      'template.gitignore',
       path.join(targetDir, '.gitignore')
     );
     // saving .gitattributes
-    fs.copySync(
-      path.join(__dirname, './init/template.gitattributes'),
+    copyInitAsset(
+      'template.gitattributes',
       path.join(targetDir, '.gitattributes')
     );
 

@@ -19,9 +19,9 @@
     "jsdoc:sitemap": "node scripts/generate-jsdoc-sitemap.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "precompile": "node scripts/precompile-templates.js",
-    "prepkg": "npm run precompile",
+    "presea": "npm run precompile",
     "prepack": "npm run precompile",
-    "pkg": "npx pkg . --compress GZip"
+    "sea": "node scripts/build-sea.js"
   },
   "repository": {
     "type": "git",
@@ -63,10 +63,11 @@
   "devDependencies": {
     "chai": "^4.5.0",
     "chai-xml": "^0.4.1",
+    "esbuild": "0.28.1",
     "jsdoc": "^4.0.4",
     "mocha": "^11.7.1",
     "nyc": "^18.0.0",
-    "pkg": "^5.8.1",
+    "postject": "1.0.0-alpha.6",
     "sitemap": "^8.0.3",
     "slv-utils": "^0.5.1",
     "xmllint-wasm": "^5.2.0"
@@ -78,21 +79,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "pkg": {
-    "scripts": [
-      "bin/heta-build.js",
-      "bin/heta-init.js"
-    ],
-    "targets": [
-      "node18-win-x64",
-      "node18-linux-x64",
-      "node18-macos-x64"
-    ],
-    "assets": [
-      "src/templates/*"
-    ],
-    "outputPath": "dist"
   },
   "private": false
 }
