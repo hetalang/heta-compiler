@@ -69,7 +69,10 @@ Uninstall for single user
 rm ~/bin/heta
 ```
 
-## In MacOS
+## In macOS
+
+Standalone packages and the Homebrew formula are available for Apple Silicon (arm64) only.
+On Intel Macs, install the npm package as described above.
 
 ### Homebrew package manager (recommended)
 
@@ -90,11 +93,11 @@ Uninstall Heta compiler
 brew uninstall heta-compiler
 ```
 
-### Other MacOS systems
+### Manual installation on Apple Silicon
 
 Install/Update for all users (requires sudo privileges)
 ```bash
-sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64 && sudo chmod +x /usr/local/bin/heta
+sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-arm64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 Uninstall for all users
@@ -105,7 +108,7 @@ sudo rm /usr/local/bin/heta
 Install/Update for single user without sudo previleges
 ```bash
 mkdir -p ~/bin
-wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-x64
+wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-arm64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
