@@ -85,11 +85,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         .map(({ record, state }) => {
             // stoichiometry
             let exprString = record.backReferences.map((ref) => {
-                if (ref.stoichiometry < 0 && ref.stoichiometry === -1) {
+                if (ref.stoichiometry === -1) {
                     return `- ${ref.process}`;
                 } else if (ref.stoichiometry < 0) {
                     return `${ref.stoichiometry} * ${ref.process}`;
-                } else if (ref.stoichiometry > 0 && ref.stoichiometry === 1) {
+                } else if (ref.stoichiometry === 1) {
                     return `+ ${ref.process}`;
                 } else if (ref.stoichiometry > 0) {
                     return `+ ${ref.stoichiometry} * ${ref.process}`;

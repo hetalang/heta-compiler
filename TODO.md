@@ -17,7 +17,6 @@
 [x] mrgsolve (R)
 [x] simbio (Matlab)
 [x] xlsx (Heta)
-[x] another xlsx
 [x] matlab
 [x] Julia
 [x] Heta-code (Heta)
@@ -26,11 +25,10 @@
 [ ] ODEs in markdown/latex/ascii
 [ ] rxode2 (R)
 [ ] deSolve (R)
-[x] ModelingToolkit (Julia)
 [ ] PGF and TikZ
 [x] Summary
 [ ] Berkley Madonna
-[ ] DynMS (JSON)
+[x] DynMS (JSON)
 
 ## bugs
 

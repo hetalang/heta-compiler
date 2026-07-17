@@ -43,7 +43,7 @@ jobs:
         run: echo "sha=$(shasum -a 256 ./dist/heta-compiler-macos-x64.tar.gz | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
       - name: Upload macOS x64 release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           overwrite_files: true
           fail_on_unmatched_files: true
@@ -80,7 +80,7 @@ jobs:
         run: echo "sha=$(shasum -a 256 ./dist/heta-compiler-macos-arm64.tar.gz | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
       - name: Upload macOS arm64 release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           overwrite_files: true
           fail_on_unmatched_files: true
@@ -122,7 +122,7 @@ jobs:
           cp dist/heta-compiler-deb.deb dist/heta-compiler-x64.deb
 
       - name: Upload Linux x64 release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           overwrite_files: true
           fail_on_unmatched_files: true
@@ -154,7 +154,7 @@ jobs:
           cd ..
 
       - name: Upload Linux arm64 release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           overwrite_files: true
           fail_on_unmatched_files: true
@@ -229,7 +229,7 @@ jobs:
           cp -Force dist/heta-compiler-win-x64-installer.msi dist/heta-compiler-${{ steps.package_version.outputs.VERSION }}-win-x64-installer.msi
 
       - name: Upload Windows x64 release assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           overwrite_files: true
           fail_on_unmatched_files: true
