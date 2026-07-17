@@ -14,19 +14,7 @@
       "value": 0.9
     }
   ],
-  "states": [
-    {
-      "id": "c1",
-      "initial": {
-        "expr": [
-          "Add",
-          1,
-          2
-        ],
-        "format": "math-json"
-      },
-      "static": true
-    },
+  "dynamic": [
     {
       "id": "x1_amt_",
       "initial": {
@@ -39,6 +27,13 @@
             1,
             2
           ]
+        ],
+        "format": "math-json"
+      },
+      "derivative": {
+        "expr": [
+          "Negate",
+          "pr1"
         ],
         "format": "math-json"
       }
@@ -54,6 +49,23 @@
             1,
             2
           ]
+        ],
+        "format": "math-json"
+      },
+      "derivative": {
+        "expr": "pr1",
+        "format": "math-json"
+      }
+    }
+  ],
+  "static": [
+    {
+      "id": "c1",
+      "initial": {
+        "expr": [
+          "Add",
+          1,
+          2
         ],
         "format": "math-json"
       }
@@ -94,25 +106,7 @@
       }
     }
   ],
-  "derivatives": [
-    {
-      "state": "x1_amt_",
-      "rhs": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
-    },
-    {
-      "state": "x2_amt_",
-      "rhs": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
-    }
-  ],
+  "timeEvents": [],
   "events": [],
   "observables": []
 }

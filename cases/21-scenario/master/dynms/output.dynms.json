@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:40:21.403Z",
+  "created": "2026-07-17T09:08:28.842Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -23,19 +23,31 @@
           "value": 1224
         }
       ],
-      "states": [
-        {
-          "id": "p1",
-          "initial": 1,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "x1",
-          "initial": 10
+          "initial": 10,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "pr1"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "x2",
-          "initial": 0
+          "initial": 0,
+          "derivative": {
+            "expr": "pr1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "p1",
+          "initial": 1
         }
       ],
       "assignments": [
@@ -51,25 +63,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "x1",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "pr1"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "x2",
-          "rhs": {
-            "expr": "pr1",
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": []
     }

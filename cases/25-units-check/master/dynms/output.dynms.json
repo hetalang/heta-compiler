@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:41:47.602Z",
+  "created": "2026-07-17T09:08:28.869Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -31,27 +31,7 @@
           "value": 1
         }
       ],
-      "states": [
-        {
-          "id": "p1",
-          "initial": 1,
-          "static": true
-        },
-        {
-          "id": "c1",
-          "initial": 3,
-          "static": true
-        },
-        {
-          "id": "c2",
-          "initial": 4,
-          "static": true
-        },
-        {
-          "id": "c3",
-          "initial": 5,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "s1_amt_",
           "initial": {
@@ -59,6 +39,13 @@
               "Multiply",
               10,
               3
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "r1"
             ],
             "format": "math-json"
           }
@@ -72,7 +59,29 @@
               4
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r1",
+            "format": "math-json"
           }
+        }
+      ],
+      "static": [
+        {
+          "id": "p1",
+          "initial": 1
+        },
+        {
+          "id": "c1",
+          "initial": 3
+        },
+        {
+          "id": "c2",
+          "initial": 4
+        },
+        {
+          "id": "c3",
+          "initial": 5
         },
         {
           "id": "s3_amt_",
@@ -83,8 +92,7 @@
               5
             ],
             "format": "math-json"
-          },
-          "static": true
+          }
         }
       ],
       "assignments": [
@@ -242,25 +250,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "s1_amt_",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "s2_amt_",
-          "rhs": {
-            "expr": "r1",
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": []
     }

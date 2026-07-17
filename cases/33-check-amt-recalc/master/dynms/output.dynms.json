@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:45:07.857Z",
+  "created": "2026-07-17T09:08:29.004Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -27,12 +27,7 @@
           "value": 0.02
         }
       ],
-      "states": [
-        {
-          "id": "c1",
-          "initial": 5.5,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "A_amt_",
           "initial": {
@@ -40,6 +35,20 @@
               "Multiply",
               2,
               5.5
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r1"
+              ],
+              [
+                "Negate",
+                "r3"
+              ]
             ],
             "format": "math-json"
           }
@@ -53,6 +62,17 @@
               5.5
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "r1",
+              [
+                "Negate",
+                "r2"
+              ]
+            ],
+            "format": "math-json"
           }
         },
         {
@@ -63,6 +83,10 @@
               0,
               5.5
             ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r2",
             "format": "math-json"
           }
         },
@@ -75,16 +99,32 @@
               5.5
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r3",
+            "format": "math-json"
           }
         },
         {
-          "id": "x1",
-          "initial": 10,
-          "static": true
+          "id": "var1",
+          "initial": 5,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "pr1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "c1",
+          "initial": 5.5
         },
         {
-          "id": "var1",
-          "initial": 5
+          "id": "x1",
+          "initial": 10
         }
       ],
       "assignments": [
@@ -187,64 +227,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "A_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "r1"
-              ],
-              [
-                "Negate",
-                "r3"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "B_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "r1",
-              [
-                "Negate",
-                "r2"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "C_amt_",
-          "rhs": {
-            "expr": "r2",
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "D_amt_",
-          "rhs": {
-            "expr": "r3",
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "var1",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "pr1"
-            ],
-            "format": "math-json"
-          }
-        }
-      ],
-      "events": [
+      "timeEvents": [
         {
           "id": "sw1",
           "trigger": {
@@ -297,7 +280,9 @@
             }
           ],
           "active": true
-        },
+        }
+      ],
+      "events": [
         {
           "id": "sw2",
           "trigger": {

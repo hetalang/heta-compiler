@@ -17,46 +17,49 @@ $PARAM @annotated
 {{ constant.id }} : {{ constant.value }} : {{ constant.title | default('-') }}
 {%- endfor %}
 // events active
+{%- for evt in timeEvents %}
+{{ evt.id }}__active__ : {{ '1' if evt.active==true else '0' }} : -
+{%- endfor %}
 {%- for evt in events %}
 {{ evt.id }}__active__ : {{ '1' if evt.active==true else '0' }} : -
 {%- endfor %}
 
 $INIT @annotated
 // dynamic states
-{%- for state in states | exclude2('static', true) %}
+{%- for state in dynamic %}
 {{ state.id }} : {{ state.initial if state.initial is number else 0.0 }} : {{ state.title | default('-') }}
 {%- endfor %}
 
 $PREAMBLE
 // static states
-{%- for state in states | filter2('static', true) %}
+{%- for state in static %}
 double {{ state.id }} = 0.0; // {{ state.title | default('-') }}
 {%- endfor %}
 // triggers
-{%- for event in events | exclude2('trigger.type', 'time') %}
+{%- for event in events %}
 bool {{ event.id }}__pull__ = false;
 int {{ event.id }}__charge__ = 0;
 {%- endfor %}
 
 $MAIN
 // dynamic states initializations
-{%- for state in states | exclude2('static', true) %}
+{%- for state in dynamic %}
 {%- if state.initial is not number %}
 {{ state.id }}_0 = {{ state.initial.expr }};
 {%- endif %}
 {%- endfor %}
 if (NEWIND <= 1) {
 // static states initializations
-{%- for state in states | filter2('static', true) %}
+{%- for state in static %}
 {{ state.id }} = {{ state.initial if state.initial is number else state.initial.expr }};
 {%- endfor %}
 // triggers
-{%- for event in events | exclude2('trigger.type', 'time') %}
+{%- for event in events %}
 {{ event.id }}__pull__ = {{ not event.trigger.atStart }};
 {{ event.id }}__charge__ = 0;
 {%- endfor %}
 // time events
-{%- for event in events | filter2('trigger.type', 'time') %}
+{%- for event in timeEvents %}
 self.mevent({{ event.trigger.start if event.trigger.start is number else event.trigger.start.expr }}, {{ timeEventIndex[event.id] }});
 {%- endfor %}
 }
@@ -67,7 +70,7 @@ $ODE
 double {{ assignment.id }} = {{ assignment.rhs if assignment.rhs is number else assignment.rhs.expr }}; // {{ assignment.title | default('-') }}
 {%- endfor %}
 // triggers
-{%- for event in events | exclude2('trigger.type', 'time') %}
+{%- for event in events %}
 bool {{ event.id }}__trigger__ = ({{ event.trigger.rhs if event.trigger.rhs is number else event.trigger.rhs.expr }}){{ ' >= 0.0' if event.trigger.type == 'crossing'}};
 if ({{ event.id }}__trigger__ && !{{ event.id }}__pull__ && {{ event.id }}__active__) {
   {{ event.id }}__pull__ = true;
@@ -78,8 +81,8 @@ if (!{{ event.id }}__trigger__) {
 }
 {%- endfor %}
 // derivatives
-{%- for derivative in derivatives %}
-dxdt_{{ derivative.state }} = {{ derivative.rhs if derivative.rhs is number else derivative.rhs.expr }};
+{%- for state in dynamic %}
+dxdt_{{ state.id }} = {{ state.derivative if state.derivative is number else state.derivative.expr }};
 {%- endfor %}
 
 $CAPTURE @annotated
@@ -89,11 +92,9 @@ $CAPTURE @annotated
 {%- endif %}
 {%- endfor %}
 
-{% if events | length > 0 -%}
+{% if timeEvents | length > 0 or events | length > 0 -%}
 $TABLE
-{%- for event in events %}
-
-{%- if event.trigger.type == 'time' %}
+{%- for event in timeEvents %}
 // {{ event.id  }} // {{ event.title | default('-') }}
 if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}) {
   {%- for action in event.actions %}
@@ -114,8 +115,9 @@ if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}) {
   if (TIME < {{ event.trigger.stop }}) {% endif -%}
   self.mevent(TIME + {{ event.trigger.period }}, {{ timeEventIndex[event.id] }});{% endif %}
 }
+{%- endfor %}
 
-{%- elif (event.trigger.type in ['crossing', 'conditional']) %}
+{%- for event in events %}
 // {{ event.id }} // {{ event.title | default('-') }}
 // XXX: the problem here is that amt updates by the same amount each time
 for (int {{ event.id }}__i__ = 0; {{ event.id }}__i__ < {{ event.id }}__charge__; {{ event.id }}__i__++) {
@@ -134,6 +136,5 @@ for (int {{ event.id }}__i__ = 0; {{ event.id }}__i__ < {{ event.id }}__charge__
 }
 {{ event.id }}__charge__ = 0;
 
-{%- endif %}
 {%- endfor %}
 {% endif %}

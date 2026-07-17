@@ -9,12 +9,12 @@ const HetaLevelError = require('../heta-level-error');
 /*
     Function converting concrete Namespace to DynMS format.
     Chosen solution:
-    - initial values for `states` can be either numbers or expressions depending on constants only.
-    - when converting init expressions for `states` we substitute: 
+    - initial values for `dynamic` and `static` can be either numbers or expressions depending on constants only.
+    - when converting init expressions for states we substitute:
         - other states by init expressions
         - rules by their expressions
         - constants stay as they are
-    - we create a new states with _amt_ suffix
+    - we create a new state with _amt_ suffix for concentrations
     - we do not create new constants
 */
 Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRenderer = (expr) => expr.toMathJSON()) {
@@ -27,13 +27,12 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         });
 
     // generate states list: not only dynamic, but also static
-    let states = this.selectByInstanceOf('Record')
+    let statesInfo = this.selectByInstanceOf('Record')
         .filter((x) => !x.isRule)
         .map((x) => {
             let isConcentration = x.instanceOf('Species') && !x.isAmount;
             let initialAssignment = x.assignments['start_'];
             let num = initialAssignment.num; // use getter from Expression
-            let isStatic = !x.isDynamic ? true : undefined;
             let title = x.title;
 
             if (isConcentration) {
@@ -45,12 +44,14 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             }
             
             if (typeof num === 'number' && !isConcentration) {
-                return { id: stateId, initial: num, static: isStatic, title: title };
+                var state = { id: stateId, initial: num, title: title };
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                return { id: stateId, initial: {expr: expRenderer(substitutedExpr), format: exprFormat}, static: isStatic, title: title };
+                state = { id: stateId, initial: {expr: expRenderer(substitutedExpr), format: exprFormat}, title: title };
             }
+
+            return { record: x, state };
         });
 
     // generate assignments list
@@ -79,15 +80,11 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         return { id: id, rhs: { expr: expRenderer(expr), format: exprFormat }, title: title };
     });
 
-    let derivatives = this.selectByInstanceOf('Record')
-        .filter((x) => x.isDynamic)
-        .map((x) => {
-            let isConcentration = x.instanceOf('Species') && !x.isAmount;
-            let stateId = isConcentration ? x.id + '_amt_' : x.id;
-            let algebraic = x.ss;
-
+    let dynamic = statesInfo
+        .filter(({ record }) => record.isDynamic)
+        .map(({ record, state }) => {
             // stoichiometry
-            let exprString = x.backReferences.map((ref, i) => {
+            let exprString = record.backReferences.map((ref) => {
                 if (ref.stoichiometry < 0 && ref.stoichiometry === -1) {
                     return `- ${ref.process}`;
                 } else if (ref.stoichiometry < 0) {
@@ -100,10 +97,19 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             }).join('');
             let expr = Expression.fromString(exprString);
 
-            return { state: stateId, rhs: { expr: expRenderer(expr), format: exprFormat }, algebraic: algebraic };
+            return {
+                ...state,
+                derivative: { expr: expRenderer(expr), format: exprFormat },
+                ...(record.ss ? { algebraic: true } : {})
+            };
         });
 
-    // all events in single list
+    let static = statesInfo
+        .filter(({ record }) => !record.isDynamic)
+        .map(({ state }) => state);
+
+    // events split by trigger type
+    let timeEvents = [];
     let events = [];
 
     // actions handler
@@ -157,7 +163,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             event.active = switcher.active;
             event.title = switcher.title;
 
-            events.push(event);
+            timeEvents.push(event);
         });
 
     // implementing continuous events (switchers)
@@ -233,9 +239,10 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
     return {
         id: this.spaceName,
         constants,
-        states,
+        dynamic,
+        static,
         assignments,
-        derivatives,
+        timeEvents,
         events,
         observables
     };
@@ -243,7 +250,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
 
 // TODO: add simplification maybe
 /*
-  Function for calculation of initial values for "states" depending on "constants" only.
+  Function for calculation of initial values for states depending on "constants" only.
   1. Find all dependency paths from constants to states
   2. Check for cycles in the dependency graph
   3. Substitute user defined functions

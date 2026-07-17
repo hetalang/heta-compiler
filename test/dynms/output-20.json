@@ -14,12 +14,7 @@
       "value": 12
     }
   ],
-  "states": [
-    {
-      "id": "c1",
-      "initial": 5,
-      "static": true
-    },
+  "dynamic": [
     {
       "id": "x1_amt_",
       "initial": {
@@ -29,11 +24,28 @@
           5
         ],
         "format": "math-json"
+      },
+      "derivative": {
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
       }
     },
     {
       "id": "x2",
-      "initial": 2
+      "initial": 2,
+      "derivative": {
+        "expr": "pr1",
+        "format": "math-json"
+      }
+    }
+  ],
+  "static": [
+    {
+      "id": "c1",
+      "initial": 5
     }
   ],
   "assignments": [
@@ -60,26 +72,7 @@
       }
     }
   ],
-  "derivatives": [
-    {
-      "state": "x1_amt_",
-      "rhs": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
-    },
-    {
-      "state": "x2",
-      "rhs": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
-    }
-  ],
-  "events": [
+  "timeEvents": [
     {
       "id": "sw1",
       "trigger": {
@@ -125,5 +118,6 @@
       "active": true
     }
   ],
+  "events": [],
   "observables": []
 }

@@ -6,12 +6,7 @@
       "value": 0.001
     }
   ],
-  "states": [
-    {
-      "id": "c1",
-      "initial": 5,
-      "static": true
-    },
+  "dynamic": [
     {
       "id": "x1_amt_",
       "initial": {
@@ -19,6 +14,13 @@
           "Multiply",
           1,
           5
+        ],
+        "format": "math-json"
+      },
+      "derivative": {
+        "expr": [
+          "Negate",
+          "pr1"
         ],
         "format": "math-json"
       }
@@ -32,7 +34,17 @@
           5
         ],
         "format": "math-json"
+      },
+      "derivative": {
+        "expr": "pr1",
+        "format": "math-json"
       }
+    }
+  ],
+  "static": [
+    {
+      "id": "c1",
+      "initial": 5
     }
   ],
   "assignments": [
@@ -70,25 +82,7 @@
       }
     }
   ],
-  "derivatives": [
-    {
-      "state": "x1_amt_",
-      "rhs": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
-    },
-    {
-      "state": "x2_amt_",
-      "rhs": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
-    }
-  ],
+  "timeEvents": [],
   "events": [],
   "observables": []
 }

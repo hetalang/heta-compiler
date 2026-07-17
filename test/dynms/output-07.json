@@ -10,10 +10,17 @@
       "value": 1
     }
   ],
-  "states": [
+  "dynamic": [
     {
       "id": "x1",
-      "initial": 1
+      "initial": 1,
+      "derivative": {
+        "expr": [
+          "Negate",
+          "pr1"
+        ],
+        "format": "math-json"
+      }
     },
     {
       "id": "x2",
@@ -33,9 +40,14 @@
           ]
         ],
         "format": "math-json"
+      },
+      "derivative": {
+        "expr": "pr1",
+        "format": "math-json"
       }
     }
   ],
+  "static": [],
   "assignments": [
     {
       "id": "pr1",
@@ -86,25 +98,7 @@
       }
     }
   ],
-  "derivatives": [
-    {
-      "state": "x1",
-      "rhs": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
-    },
-    {
-      "state": "x2",
-      "rhs": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
-    }
-  ],
+  "timeEvents": [],
   "events": [],
   "observables": []
 }

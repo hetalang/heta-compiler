@@ -6,21 +6,15 @@
       "value": 2
     }
   ],
-  "states": [
-    {
-      "id": "evid_ren_",
-      "initial": 1,
-      "static": true
-    },
-    {
-      "id": "default",
-      "initial": 10,
-      "static": true
-    },
+  "dynamic": [
     {
       "id": "rate_ren__amt_",
       "initial": {
         "expr": "5.0 * 10.0",
+        "format": "mrgsolve"
+      },
+      "derivative": {
+        "expr": "-r1",
         "format": "mrgsolve"
       }
     },
@@ -29,7 +23,21 @@
       "initial": {
         "expr": "0.0 * 10.0",
         "format": "mrgsolve"
+      },
+      "derivative": {
+        "expr": "r1",
+        "format": "mrgsolve"
       }
+    }
+  ],
+  "static": [
+    {
+      "id": "evid_ren_",
+      "initial": 1
+    },
+    {
+      "id": "default",
+      "initial": 10
     }
   ],
   "assignments": [
@@ -55,23 +63,7 @@
       }
     }
   ],
-  "derivatives": [
-    {
-      "state": "rate_ren__amt_",
-      "rhs": {
-        "expr": "-r1",
-        "format": "mrgsolve"
-      }
-    },
-    {
-      "state": "out_amt_",
-      "rhs": {
-        "expr": "r1",
-        "format": "mrgsolve"
-      }
-    }
-  ],
-  "events": [
+  "timeEvents": [
     {
       "id": "table_ren_",
       "trigger": {
@@ -92,6 +84,7 @@
       "active": true
     }
   ],
+  "events": [],
   "observables": [
     {
       "symbol": "rate_ren_"

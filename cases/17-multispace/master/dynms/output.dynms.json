@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:38:58.701Z",
+  "created": "2026-07-17T09:08:28.808Z",
   "platformId": "template",
   "license": "UNLICENSED",
   "models": [
@@ -17,12 +17,7 @@
           "value": 0.001
         }
       ],
-      "states": [
-        {
-          "id": "comp1",
-          "initial": 1,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "s1_amt_",
           "initial": {
@@ -32,7 +27,20 @@
               1
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
           }
+        }
+      ],
+      "static": [
+        {
+          "id": "comp1",
+          "initial": 1
         }
       ],
       "assignments": [
@@ -60,18 +68,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "s1_amt_",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": [
         {
@@ -90,12 +87,7 @@
           "value": 0.00001
         }
       ],
-      "states": [
-        {
-          "id": "comp2",
-          "initial": 1,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "s2_amt_",
           "initial": {
@@ -105,11 +97,28 @@
               1
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "r2"
+            ],
+            "format": "math-json"
           }
         },
         {
           "id": "s3",
-          "initial": 0
+          "initial": 0,
+          "derivative": {
+            "expr": "r2",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "comp2",
+          "initial": 1
         }
       ],
       "assignments": [
@@ -137,25 +146,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "s2_amt_",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "r2"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "s3",
-          "rhs": {
-            "expr": "r2",
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": [
         {

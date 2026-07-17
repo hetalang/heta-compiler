@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:34:12.301Z",
+  "created": "2026-07-17T09:08:28.649Z",
   "platformId": "mm",
   "license": "UNLICENSED",
   "models": [
@@ -25,9 +25,10 @@
           "value": 0.1
         }
       ],
-      "states": [],
+      "dynamic": [],
+      "static": [],
       "assignments": [],
-      "derivatives": [],
+      "timeEvents": [],
       "events": [],
       "observables": []
     },
@@ -63,7 +64,7 @@
           "value": 0.013
         }
       ],
-      "states": [
+      "dynamic": [
         {
           "id": "ATP_neu_amt_",
           "initial": {
@@ -86,12 +87,22 @@
               "neu_size"
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "r_syn_ATP",
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  2,
+                  "r_syn_P1"
+                ]
+              ]
+            ],
+            "format": "math-json"
           }
-        },
-        {
-          "id": "tot_vol",
-          "initial": 0.1,
-          "static": true
         },
         {
           "id": "S1_amt_",
@@ -102,12 +113,14 @@
               0.1
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "r_syn_P1"
+            ],
+            "format": "math-json"
           }
-        },
-        {
-          "id": "neu_count",
-          "initial": 1000000,
-          "static": true
         },
         {
           "id": "ADP_neu_amt_",
@@ -127,6 +140,21 @@
               "neu_size"
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r_syn_ATP"
+              ],
+              [
+                "Multiply",
+                2,
+                "r_syn_P1"
+              ]
+            ],
+            "format": "math-json"
           }
         },
         {
@@ -137,6 +165,17 @@
               0,
               1000000,
               "neu_size"
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "r_syn_P1",
+              [
+                "Negate",
+                "r_tr_P1"
+              ]
             ],
             "format": "math-json"
           }
@@ -161,7 +200,21 @@
               ]
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r_tr_P1",
+            "format": "math-json"
           }
+        }
+      ],
+      "static": [
+        {
+          "id": "tot_vol",
+          "initial": 0.1
+        },
+        {
+          "id": "neu_count",
+          "initial": 1000000
         },
         {
           "id": "IL15_ext_amt_",
@@ -183,8 +236,7 @@
               ]
             ],
             "format": "math-json"
-          },
-          "static": true
+          }
         }
       ],
       "assignments": [
@@ -373,75 +425,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "ATP_neu_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "r_syn_ATP",
-              [
-                "Negate",
-                [
-                  "Multiply",
-                  2,
-                  "r_syn_P1"
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "S1_amt_",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "r_syn_P1"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "ADP_neu_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "r_syn_ATP"
-              ],
-              [
-                "Multiply",
-                2,
-                "r_syn_P1"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P1_neu_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "r_syn_P1",
-              [
-                "Negate",
-                "r_tr_P1"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P1_ext_amt_",
-          "rhs": {
-            "expr": "r_tr_P1",
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": []
     },
@@ -481,7 +465,7 @@
           "value": 0.013
         }
       ],
-      "states": [
+      "dynamic": [
         {
           "id": "ATP_neu_amt_",
           "initial": {
@@ -504,6 +488,21 @@
               "neu_size"
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "r_syn_ATP",
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  2,
+                  "r_syn_P1"
+                ]
+              ]
+            ],
+            "format": "math-json"
           }
         },
         {
@@ -513,6 +512,13 @@
               "Multiply",
               10,
               5.2
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "r_syn_P1"
             ],
             "format": "math-json"
           }
@@ -525,6 +531,10 @@
               1e-9,
               5.2
             ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r_prol_neu",
             "format": "math-json"
           }
         },
@@ -546,6 +556,21 @@
               "neu_size"
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "r_syn_ATP"
+              ],
+              [
+                "Multiply",
+                2,
+                "r_syn_P1"
+              ]
+            ],
+            "format": "math-json"
           }
         },
         {
@@ -556,6 +581,17 @@
               0,
               1e-9,
               "neu_size"
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "r_syn_P1",
+              [
+                "Negate",
+                "r_tr_P1"
+              ]
             ],
             "format": "math-json"
           }
@@ -569,8 +605,14 @@
               "plasma"
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r_tr_P1",
+            "format": "math-json"
           }
-        },
+        }
+      ],
+      "static": [
         {
           "id": "IL15_ext_amt_",
           "initial": {
@@ -580,18 +622,15 @@
               "plasma"
             ],
             "format": "math-json"
-          },
-          "static": true
+          }
         },
         {
           "id": "blood",
-          "initial": 5.2,
-          "static": true
+          "initial": 5.2
         },
         {
           "id": "AXP_neu",
-          "initial": 0.1,
-          "static": true
+          "initial": 0.1
         }
       ],
       "assignments": [
@@ -772,82 +811,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "ATP_neu_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "r_syn_ATP",
-              [
-                "Negate",
-                [
-                  "Multiply",
-                  2,
-                  "r_syn_P1"
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "S1_amt_",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "r_syn_P1"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "neu_count_amt_",
-          "rhs": {
-            "expr": "r_prol_neu",
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "ADP_neu_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "r_syn_ATP"
-              ],
-              [
-                "Multiply",
-                2,
-                "r_syn_P1"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P1_neu_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "r_syn_P1",
-              [
-                "Negate",
-                "r_tr_P1"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P1_ext_amt_",
-          "rhs": {
-            "expr": "r_tr_P1",
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": []
     }

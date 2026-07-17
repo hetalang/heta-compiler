@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:36:58.135Z",
+  "created": "2026-07-17T09:08:28.748Z",
   "platformId": "mm",
   "license": "UNLICENSED",
   "models": [
@@ -25,10 +25,17 @@
           "value": 5
         }
       ],
-      "states": [
+      "dynamic": [
         {
           "id": "a0",
-          "initial": 0
+          "initial": 0,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "vabs"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "s1_amt_",
@@ -39,8 +46,21 @@
               5.2
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "vabs",
+              [
+                "Negate",
+                "vel"
+              ]
+            ],
+            "format": "math-json"
           }
-        },
+        }
+      ],
+      "static": [
         {
           "id": "s2_amt_",
           "initial": {
@@ -50,18 +70,15 @@
               5.2
             ],
             "format": "math-json"
-          },
-          "static": true
+          }
         },
         {
           "id": "comp0",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "comp1",
-          "initial": 5.2,
-          "static": true
+          "initial": 5.2
         }
       ],
       "assignments": [
@@ -111,33 +128,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "a0",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "vabs"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "s1_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vabs",
-              [
-                "Negate",
-                "vel"
-              ]
-            ],
-            "format": "math-json"
-          }
-        }
-      ],
-      "events": [
+      "timeEvents": [
         {
           "id": "sw0",
           "trigger": {
@@ -225,6 +216,7 @@
           "active": true
         }
       ],
+      "events": [],
       "observables": [
         {
           "symbol": "s1"

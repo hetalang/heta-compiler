@@ -20,7 +20,7 @@ describe('DynMS schema', () => {
 
   it('rejects unsupported DynMS versions', () => {
     const doc = makeDoc(['Add', 'x', ['Sin', 't']]);
-    doc.dynms = '0.2.0';
+    doc.dynms = '0.1.0';
 
     expect(validateDynms(doc)).to.equal(false);
   });
@@ -42,21 +42,40 @@ describe('DynMS schema', () => {
 
     expect(validateDynms(doc)).to.equal(true);
   });
+
+  it('accepts algebraic dynamic states', () => {
+    const doc = makeDoc(0);
+    doc.models[0].dynamic[0].algebraic = true;
+
+    expect(validateDynms(doc)).to.equal(true);
+  });
+
+  it('rejects algebraic flag on static states', () => {
+    const doc = makeDoc(0);
+    doc.models[0].static.push({ id: 'y', initial: 0, algebraic: true });
+
+    expect(validateDynms(doc)).to.equal(false);
+  });
 });
 
 function makeDoc(expr) {
   return {
-    dynms: '0.1.0',
+    dynms: '0.2.0',
     models: [
       {
         id: 'model',
         constants: [],
-        states: [
+        dynamic: [
           {
             id: 'x',
-            initial: 0
+            initial: 0,
+            derivative: {
+              expr: 0,
+              format: 'math-json'
+            }
           }
         ],
+        static: [],
         assignments: [
           {
             id: 'y',
@@ -66,15 +85,7 @@ function makeDoc(expr) {
             }
           }
         ],
-        derivatives: [
-          {
-            state: 'x',
-            rhs: {
-              expr: 0,
-              format: 'math-json'
-            }
-          }
-        ],
+        timeEvents: [],
         events: [],
         observables: []
       }

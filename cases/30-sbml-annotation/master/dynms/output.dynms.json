@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:44:04.230Z",
+  "created": "2026-07-17T09:08:28.973Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -14,32 +14,7 @@
     {
       "id": "nameless",
       "constants": [],
-      "states": [
-        {
-          "id": "Default",
-          "initial": 1,
-          "static": true
-        },
-        {
-          "id": "BRAIN",
-          "initial": 1.45000004768372,
-          "static": true
-        },
-        {
-          "id": "PLASMA",
-          "initial": 2.6489999294281,
-          "static": true
-        },
-        {
-          "id": "ROB",
-          "initial": 65.3000030517578,
-          "static": true
-        },
-        {
-          "id": "MEC",
-          "initial": 0.0000149999996210681,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "A_b_amt_",
           "initial": {
@@ -50,7 +25,32 @@
             ],
             "format": "math-json"
           },
-          "title": "A_b"
+          "title": "A_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vA_degr_b"
+                  ],
+                  "vA_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vA_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vA_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "O_b_amt_",
@@ -62,7 +62,32 @@
             ],
             "format": "math-json"
           },
-          "title": "O_b"
+          "title": "O_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vO_degr_b"
+                  ],
+                  "vO_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vO_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vO_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "P_b_amt_",
@@ -74,7 +99,32 @@
             ],
             "format": "math-json"
           },
-          "title": "P_b"
+          "title": "P_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vP_degr_b"
+                  ],
+                  "vP_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vP_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vP_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "L_b_amt_",
@@ -86,7 +136,32 @@
             ],
             "format": "math-json"
           },
-          "title": "L_b"
+          "title": "L_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vL_degr_b"
+                  ],
+                  "vL_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vL_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vL_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "S_b_amt_",
@@ -98,7 +173,32 @@
             ],
             "format": "math-json"
           },
-          "title": "S_b"
+          "title": "S_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vS_degr_b"
+                  ],
+                  "vS_syn_b"
+                ],
+                [
+                  "Negate",
+                  "vS_UE_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vS_b_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NAPE_b_amt_",
@@ -110,7 +210,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NAPE_b"
+          "title": "NAPE_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNAPE_syn_b",
+              [
+                "Negate",
+                "vA_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NOPE_b_amt_",
@@ -122,7 +233,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NOPE_b"
+          "title": "NOPE_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNOPE_syn_b",
+              [
+                "Negate",
+                "vO_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NPPE_b_amt_",
@@ -134,7 +256,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NPPE_b"
+          "title": "NPPE_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNPPE_syn_b",
+              [
+                "Negate",
+                "vP_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NLPE_b_amt_",
@@ -146,7 +279,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NLPE_b"
+          "title": "NLPE_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNLPE_syn_b",
+              [
+                "Negate",
+                "vL_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NSPE_b_amt_",
@@ -158,7 +302,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NSPE_b"
+          "title": "NSPE_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNSPE_syn_b",
+              [
+                "Negate",
+                "vS_syn_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "FAAH_b_amt_",
@@ -170,7 +325,25 @@
             ],
             "format": "math-json"
           },
-          "title": "FAAH_b"
+          "title": "FAAH_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "vFAAH_syn_b",
+                [
+                  "Negate",
+                  "vFAAH_degr_b"
+                ]
+              ],
+              [
+                "Negate",
+                "vFAAH_inh_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "FAAHinh_b_amt_",
@@ -182,7 +355,18 @@
             ],
             "format": "math-json"
           },
-          "title": "FAAHinh_b"
+          "title": "FAAHinh_b",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vFAAH_inh_b",
+              [
+                "Negate",
+                "vFAAH_inh_degr_b"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "A_r_amt_",
@@ -194,7 +378,32 @@
             ],
             "format": "math-json"
           },
-          "title": "A_r"
+          "title": "A_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vA_degr_r"
+                  ],
+                  "vA_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vA_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vA_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "O_r_amt_",
@@ -206,7 +415,32 @@
             ],
             "format": "math-json"
           },
-          "title": "O_r"
+          "title": "O_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vO_degr_r"
+                  ],
+                  "vO_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vO_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vO_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "P_r_amt_",
@@ -218,7 +452,32 @@
             ],
             "format": "math-json"
           },
-          "title": "P_r"
+          "title": "P_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vP_degr_r"
+                  ],
+                  "vP_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vP_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vP_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "L_r_amt_",
@@ -230,7 +489,32 @@
             ],
             "format": "math-json"
           },
-          "title": "L_r"
+          "title": "L_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vL_degr_r"
+                  ],
+                  "vL_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vL_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vL_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "S_r_amt_",
@@ -242,7 +526,32 @@
             ],
             "format": "math-json"
           },
-          "title": "S_r"
+          "title": "S_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                [
+                  "Add",
+                  [
+                    "Negate",
+                    "vS_degr_r"
+                  ],
+                  "vS_syn_r"
+                ],
+                [
+                  "Negate",
+                  "vS_UE_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vS_r_p"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NAPE_r_amt_",
@@ -254,7 +563,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NAPE_r"
+          "title": "NAPE_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNAPE_syn_r",
+              [
+                "Negate",
+                "vA_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NOPE_r_amt_",
@@ -266,7 +586,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NOPE_r"
+          "title": "NOPE_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNOPE_syn_r",
+              [
+                "Negate",
+                "vO_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NPPE_r_amt_",
@@ -278,7 +609,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NPPE_r"
+          "title": "NPPE_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNPPE_syn_r",
+              [
+                "Negate",
+                "vP_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NLPE_r_amt_",
@@ -290,7 +632,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NLPE_r"
+          "title": "NLPE_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNLPE_syn_r",
+              [
+                "Negate",
+                "vL_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "NSPE_r_amt_",
@@ -302,7 +655,18 @@
             ],
             "format": "math-json"
           },
-          "title": "NSPE_r"
+          "title": "NSPE_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vNSPE_syn_r",
+              [
+                "Negate",
+                "vS_syn_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "FAAH_r_amt_",
@@ -314,7 +678,25 @@
             ],
             "format": "math-json"
           },
-          "title": "FAAH_r"
+          "title": "FAAH_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "vFAAH_syn_r",
+                [
+                  "Negate",
+                  "vFAAH_degr_r"
+                ]
+              ],
+              [
+                "Negate",
+                "vFAAH_inh_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "FAAHinh_r_amt_",
@@ -326,7 +708,18 @@
             ],
             "format": "math-json"
           },
-          "title": "FAAHinh_r"
+          "title": "FAAHinh_r",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vFAAH_inh_r",
+              [
+                "Negate",
+                "vFAAH_inh_degr_r"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "A_m_amt_",
@@ -338,7 +731,22 @@
             ],
             "format": "math-json"
           },
-          "title": "A_m"
+          "title": "A_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vA_degr_m"
+              ],
+              [
+                "Negate",
+                "vA_m_p"
+              ],
+              "vA_b_m"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "O_m_amt_",
@@ -350,7 +758,22 @@
             ],
             "format": "math-json"
           },
-          "title": "O_m"
+          "title": "O_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vO_degr_m"
+              ],
+              [
+                "Negate",
+                "vo_m_p"
+              ],
+              "vO_b_m"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "P_m_amt_",
@@ -362,7 +785,22 @@
             ],
             "format": "math-json"
           },
-          "title": "P_m"
+          "title": "P_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vP_degr_m"
+              ],
+              [
+                "Negate",
+                "vP_m_p"
+              ],
+              "vP_b_m"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "L_m_amt_",
@@ -374,7 +812,22 @@
             ],
             "format": "math-json"
           },
-          "title": "L_m"
+          "title": "L_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vL_degr_m"
+              ],
+              [
+                "Negate",
+                "vL_m_p"
+              ],
+              "vL_b_m"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "S_m_amt_",
@@ -386,7 +839,22 @@
             ],
             "format": "math-json"
           },
-          "title": "S_m"
+          "title": "S_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "vS_degr_m"
+              ],
+              [
+                "Negate",
+                "vS_m_p"
+              ],
+              "vS_b_m"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "FAAH_m_amt_",
@@ -398,7 +866,25 @@
             ],
             "format": "math-json"
           },
-          "title": "FAAH_m"
+          "title": "FAAH_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "vFAAH_syn_m",
+                [
+                  "Negate",
+                  "vFAAH_degr_m"
+                ]
+              ],
+              [
+                "Negate",
+                "vFAAH_inh_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "FAAHinh_m_amt_",
@@ -410,7 +896,18 @@
             ],
             "format": "math-json"
           },
-          "title": "FAAHinh_m"
+          "title": "FAAHinh_m",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vFAAH_inh_m",
+              [
+                "Negate",
+                "vFAAH_inh_degr_m"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "A_p_amt_",
@@ -422,7 +919,15 @@
             ],
             "format": "math-json"
           },
-          "title": "A_p"
+          "title": "A_p",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vA_m_p",
+              "vA_r_p"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "O_p_amt_",
@@ -434,7 +939,15 @@
             ],
             "format": "math-json"
           },
-          "title": "O_p"
+          "title": "O_p",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vo_m_p",
+              "vO_r_p"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "P_p_amt_",
@@ -446,7 +959,15 @@
             ],
             "format": "math-json"
           },
-          "title": "P_p"
+          "title": "P_p",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vP_m_p",
+              "vP_r_p"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "L_p_amt_",
@@ -458,7 +979,15 @@
             ],
             "format": "math-json"
           },
-          "title": "L_p"
+          "title": "L_p",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vL_m_p",
+              "vL_r_p"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "S_p_amt_",
@@ -470,7 +999,15 @@
             ],
             "format": "math-json"
           },
-          "title": "S_p"
+          "title": "S_p",
+          "derivative": {
+            "expr": [
+              "Add",
+              "vS_m_p",
+              "vS_r_p"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "PFM_gut_amt_",
@@ -482,7 +1019,14 @@
             ],
             "format": "math-json"
           },
-          "title": "PFM_gut"
+          "title": "PFM_gut",
+          "derivative": {
+            "expr": [
+              "Negate",
+              "absorp"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "PFM_p_amt_",
@@ -494,7 +1038,25 @@
             ],
             "format": "math-json"
           },
-          "title": "PFM_p"
+          "title": "PFM_p",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Add",
+                "absorp",
+                [
+                  "Negate",
+                  "dist"
+                ]
+              ],
+              [
+                "Negate",
+                "elim"
+              ]
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "PFM_r_amt_",
@@ -506,642 +1068,541 @@
             ],
             "format": "math-json"
           },
-          "title": "PFM_r"
+          "title": "PFM_r",
+          "derivative": {
+            "expr": "dist",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "Default",
+          "initial": 1
+        },
+        {
+          "id": "BRAIN",
+          "initial": 1.45000004768372
+        },
+        {
+          "id": "PLASMA",
+          "initial": 2.6489999294281
+        },
+        {
+          "id": "ROB",
+          "initial": 65.3000030517578
+        },
+        {
+          "id": "MEC",
+          "initial": 0.0000149999996210681
         },
         {
           "id": "AG2_b",
-          "initial": 0,
-          "static": true
+          "initial": 0
         },
         {
           "id": "Dose",
-          "initial": 10,
-          "static": true
+          "initial": 10
         },
         {
           "id": "ED50",
-          "initial": 0.53,
-          "static": true
+          "initial": 0.53
         },
         {
           "id": "Emax_PFM",
-          "initial": 0.773,
-          "static": true
+          "initial": 0.773
         },
         {
           "id": "FAAH_t",
-          "initial": 78,
-          "static": true
+          "initial": 78
         },
         {
           "id": "Gut",
-          "initial": 1.65,
-          "static": true
+          "initial": 1.65
         },
         {
           "id": "H",
-          "initial": 0.48,
-          "static": true
+          "initial": 0.48
         },
         {
           "id": "Heart",
-          "initial": 0.31,
-          "static": true
+          "initial": 0.31
         },
         {
           "id": "Kd_AG2",
-          "initial": 3424,
-          "static": true
+          "initial": 3424
         },
         {
           "id": "Kd_CB1_A",
-          "initial": 239.2,
-          "static": true
+          "initial": 239.2
         },
         {
           "id": "Ki_A",
-          "initial": 230,
-          "static": true
+          "initial": 230
         },
         {
           "id": "Ki_L",
-          "initial": 1000,
-          "static": true
+          "initial": 1000
         },
         {
           "id": "Ki_O",
-          "initial": 240,
-          "static": true
+          "initial": 240
         },
         {
           "id": "Ki_P",
-          "initial": 6700,
-          "static": true
+          "initial": 6700
         },
         {
           "id": "Ki_S",
-          "initial": 840,
-          "static": true
+          "initial": 840
         },
         {
           "id": "Kidney",
-          "initial": 0.28,
-          "static": true
+          "initial": 0.28
         },
         {
           "id": "Km_FAAH_A",
-          "initial": 8200,
-          "static": true
+          "initial": 8200
         },
         {
           "id": "Km_FAAH_L",
-          "initial": 10800,
-          "static": true
+          "initial": 10800
         },
         {
           "id": "Km_FAAH_O",
-          "initial": 52200,
-          "static": true
+          "initial": 52200
         },
         {
           "id": "Km_FAAH_P",
-          "initial": 543000,
-          "static": true
+          "initial": 543000
         },
         {
           "id": "Km_FAAH_S",
-          "initial": 10000,
-          "static": true
+          "initial": 10000
         },
         {
           "id": "Km_NA_PE",
-          "initial": 2800,
-          "static": true
+          "initial": 2800
         },
         {
           "id": "Km_NL_PE",
-          "initial": 1000,
-          "static": true
+          "initial": 1000
         },
         {
           "id": "Km_NO_PE",
-          "initial": 2900,
-          "static": true
+          "initial": 2900
         },
         {
           "id": "Km_NP_PE",
-          "initial": 3300,
-          "static": true
+          "initial": 3300
         },
         {
           "id": "Km_NS_PE",
-          "initial": 3400,
-          "static": true
+          "initial": 3400
         },
         {
           "id": "Km_PFM",
-          "initial": 26.1,
-          "static": true
+          "initial": 26.1
         },
         {
           "id": "Km_p_m_A",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "Kp_b_PF",
-          "initial": 1.3,
-          "static": true
+          "initial": 1.3
         },
         {
           "id": "Kp_m_PF",
-          "initial": 1.3,
-          "static": true
+          "initial": 1.3
         },
         {
           "id": "Kp_r_PF",
-          "initial": 1.5,
-          "static": true
+          "initial": 1.5
         },
         {
           "id": "Ktr_p_m_A",
-          "initial": 1.89,
-          "static": true
+          "initial": 1.89
         },
         {
           "id": "Ktr_p_m_L",
-          "initial": 2.77,
-          "static": true
+          "initial": 2.77
         },
         {
           "id": "Ktr_p_m_O",
-          "initial": 9.07,
-          "static": true
+          "initial": 9.07
         },
         {
           "id": "Ktr_p_m_P",
-          "initial": 2.65,
-          "static": true
+          "initial": 2.65
         },
         {
           "id": "Ktr_p_m_S",
-          "initial": 30.01,
-          "static": true
+          "initial": 30.01
         },
         {
           "id": "Ktr_p_r_A",
-          "initial": 0.62,
-          "static": true
+          "initial": 0.62
         },
         {
           "id": "Ktr_p_r_L",
-          "initial": 0.89,
-          "static": true
+          "initial": 0.89
         },
         {
           "id": "Ktr_p_r_O",
-          "initial": 2.8,
-          "static": true
+          "initial": 2.8
         },
         {
           "id": "Ktr_p_r_P",
-          "initial": 0.85,
-          "static": true
+          "initial": 0.85
         },
         {
           "id": "Ktr_p_r_S",
-          "initial": 9.19,
-          "static": true
+          "initial": 9.19
         },
         {
           "id": "LEU",
-          "initial": 0.025,
-          "static": true
+          "initial": 0.025
         },
         {
           "id": "LIVER",
-          "initial": 1.69,
-          "static": true
+          "initial": 1.69
         },
         {
           "id": "Leucocytes",
-          "initial": 0.025,
-          "static": true
+          "initial": 0.025
         },
         {
           "id": "Lungs",
-          "initial": 1.172,
-          "static": true
+          "initial": 1.172
         },
         {
           "id": "M_A",
-          "initial": 347.5,
-          "static": true
+          "initial": 347.5
         },
         {
           "id": "M_L",
-          "initial": 323.5,
-          "static": true
+          "initial": 323.5
         },
         {
           "id": "M_O",
-          "initial": 325.5,
-          "static": true
+          "initial": 325.5
         },
         {
           "id": "M_P",
-          "initial": 299.5,
-          "static": true
+          "initial": 299.5
         },
         {
           "id": "M_PF",
-          "initial": 455.4,
-          "static": true
+          "initial": 455.4
         },
         {
           "id": "M_S",
-          "initial": 321.5,
-          "static": true
+          "initial": 321.5
         },
         {
           "id": "Muscles",
-          "initial": 35,
-          "static": true
+          "initial": 35
         },
         {
           "id": "PLD_b",
-          "initial": 10000000,
-          "static": true
+          "initial": 10000000
         },
         {
           "id": "PLD_r",
-          "initial": 10000000,
-          "static": true
+          "initial": 10000000
         },
         {
           "id": "Pancreas",
-          "initial": 0.077,
-          "static": true
+          "initial": 0.077
         },
         {
           "id": "R_PF",
-          "initial": 0.6,
-          "static": true
+          "initial": 0.6
         },
         {
           "id": "Spleen",
-          "initial": 0.192,
-          "static": true
+          "initial": 0.192
         },
         {
           "id": "Testis",
-          "initial": 0.036,
-          "static": true
+          "initial": 0.036
         },
         {
           "id": "Thymus",
-          "initial": 0.029,
-          "static": true
+          "initial": 0.029
         },
         {
           "id": "Vm_PFM",
-          "initial": 1511,
-          "static": true
+          "initial": 1511
         },
         {
           "id": "Vmax_NAT",
-          "initial": 300,
-          "static": true
+          "initial": 300
         },
         {
           "id": "Vss_PFM",
-          "initial": 58.328,
-          "static": true
+          "initial": 58.328
         },
         {
           "id": "a_FAAH_A",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "a_FAAH_L",
-          "initial": 1.15,
-          "static": true
+          "initial": 1.15
         },
         {
           "id": "a_FAAH_O",
-          "initial": 5.7,
-          "static": true
+          "initial": 5.7
         },
         {
           "id": "a_FAAH_P",
-          "initial": 37.8,
-          "static": true
+          "initial": 37.8
         },
         {
           "id": "a_FAAH_S",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "a_NAT_A",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "a_NAT_L",
-          "initial": 8.6,
-          "static": true
+          "initial": 8.6
         },
         {
           "id": "a_NAT_O",
-          "initial": 13,
-          "static": true
+          "initial": 13
         },
         {
           "id": "a_NAT_P",
-          "initial": 0.42,
-          "static": true
+          "initial": 0.42
         },
         {
           "id": "a_NAT_S",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "b_FAAH_Brain",
-          "initial": 0.197,
-          "static": true
+          "initial": 0.197
         },
         {
           "id": "b_FAAH_Gut",
-          "initial": 0.034,
-          "static": true
+          "initial": 0.034
         },
         {
           "id": "b_FAAH_Kidney",
-          "initial": 0.069,
-          "static": true
+          "initial": 0.069
         },
         {
           "id": "b_FAAH_Leucocytes",
-          "initial": 0,
-          "static": true
+          "initial": 0
         },
         {
           "id": "b_FAAH_Liver",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "b_FAAH_Lungs",
-          "initial": 0.032,
-          "static": true
+          "initial": 0.032
         },
         {
           "id": "b_FAAH_MEC",
-          "initial": 0.137,
-          "static": true
+          "initial": 0.137
         },
         {
           "id": "b_FAAH_Spleen",
-          "initial": 0.03,
-          "static": true
+          "initial": 0.03
         },
         {
           "id": "b_FAAH_Testis",
-          "initial": 0.126,
-          "static": true
+          "initial": 0.126
         },
         {
           "id": "b_NAAA_Brain",
-          "initial": 0.6,
-          "static": true
+          "initial": 0.6
         },
         {
           "id": "b_NAAA_Gut",
-          "initial": 0.2,
-          "static": true
+          "initial": 0.2
         },
         {
           "id": "b_NAAA_Heart",
-          "initial": 0.2,
-          "static": true
+          "initial": 0.2
         },
         {
           "id": "b_NAAA_Kidney",
-          "initial": 0.6,
-          "static": true
+          "initial": 0.6
         },
         {
           "id": "b_NAAA_Liver",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "b_NAAA_Lungs",
-          "initial": 14,
-          "static": true
+          "initial": 14
         },
         {
           "id": "b_NAAA_Spleen",
-          "initial": 8,
-          "static": true
+          "initial": 8
         },
         {
           "id": "b_NAAA_Testis",
-          "initial": 0.6,
-          "static": true
+          "initial": 0.6
         },
         {
           "id": "b_NAAA_Thymus",
-          "initial": 4,
-          "static": true
+          "initial": 4
         },
         {
           "id": "b_NAT_Brain",
-          "initial": 1.667,
-          "static": true
+          "initial": 1.667
         },
         {
           "id": "b_NAT_Heart",
-          "initial": 1,
-          "static": true
+          "initial": 1
         },
         {
           "id": "b_NAT_Kidney",
-          "initial": 0.667,
-          "static": true
+          "initial": 0.667
         },
         {
           "id": "b_NAT_Leucocytes",
-          "initial": 0,
-          "static": true
+          "initial": 0
         },
         {
           "id": "b_NAT_Lungs",
-          "initial": 0.033,
-          "static": true
+          "initial": 0.033
         },
         {
           "id": "b_NAT_Muscles",
-          "initial": 0.333,
-          "static": true
+          "initial": 0.333
         },
         {
           "id": "b_NAT_Pancreas",
-          "initial": 0.333,
-          "static": true
+          "initial": 0.333
         },
         {
           "id": "b_NAT_Testis",
-          "initial": 0.667,
-          "static": true
+          "initial": 0.667
         },
         {
           "id": "e1",
-          "initial": 0,
-          "static": true
+          "initial": 0
         },
         {
           "id": "k_NA_PE",
-          "initial": 202,
-          "static": true
+          "initial": 202
         },
         {
           "id": "k_NL_PE",
-          "initial": 100,
-          "static": true
+          "initial": 100
         },
         {
           "id": "k_NO_PE",
-          "initial": 230,
-          "static": true
+          "initial": 230
         },
         {
           "id": "k_NP_PE",
-          "initial": 270,
-          "static": true
+          "initial": 270
         },
         {
           "id": "k_NS_PE",
-          "initial": 280,
-          "static": true
+          "initial": 280
         },
         {
           "id": "k_deg_FAAH",
-          "initial": 0.0051,
-          "static": true
+          "initial": 0.0051
         },
         {
           "id": "k_inh",
-          "initial": 1.1,
-          "static": true
+          "initial": 1.1
         },
         {
           "id": "kabs_PFM",
-          "initial": 2.2,
-          "static": true
+          "initial": 2.2
         },
         {
           "id": "kcat_FAAH",
-          "initial": 18000,
-          "static": true
+          "initial": 18000
         },
         {
           "id": "kcl_A",
-          "initial": 1.74,
-          "static": true
+          "initial": 1.74
         },
         {
           "id": "kcl_L",
-          "initial": 1.25,
-          "static": true
+          "initial": 1.25
         },
         {
           "id": "kcl_O",
-          "initial": 2.5,
-          "static": true
+          "initial": 2.5
         },
         {
           "id": "kcl_P",
-          "initial": 2.61,
-          "static": true
+          "initial": 2.61
         },
         {
           "id": "kcl_S",
-          "initial": 1.2,
-          "static": true
+          "initial": 1.2
         },
         {
           "id": "kin_PFM",
-          "initial": 0.117,
-          "static": true
+          "initial": 0.117
         },
         {
           "id": "klinear_PFM",
-          "initial": 0.0803,
-          "static": true
+          "initial": 0.0803
         },
         {
           "id": "kout_PFM",
-          "initial": 0.18,
-          "static": true
+          "initial": 0.18
         },
         {
           "id": "ktr_m_p_A",
-          "initial": 150,
-          "static": true
+          "initial": 150
         },
         {
           "id": "ktr_m_p_L",
-          "initial": 0,
-          "static": true
+          "initial": 0
         },
         {
           "id": "ktr_m_p_O",
-          "initial": 10,
-          "static": true
+          "initial": 10
         },
         {
           "id": "ktr_m_p_P",
-          "initial": 10,
-          "static": true
+          "initial": 10
         },
         {
           "id": "ktr_m_p_S",
-          "initial": 10,
-          "static": true
+          "initial": 10
         },
         {
           "id": "ktr_r_p",
-          "initial": 100,
-          "static": true
+          "initial": 100
         },
         {
           "id": "p_A",
-          "initial": 0.051,
-          "static": true
+          "initial": 0.051
         },
         {
           "id": "p_L",
-          "initial": 0.016,
-          "static": true
+          "initial": 0.016
         },
         {
           "id": "p_O",
-          "initial": 0.098,
-          "static": true
+          "initial": 0.098
         },
         {
           "id": "p_P",
-          "initial": 0.615,
-          "static": true
+          "initial": 0.615
         },
         {
           "id": "p_S",
-          "initial": 0.191,
-          "static": true
+          "initial": 0.191
         }
       ],
       "assignments": [
@@ -3689,716 +4150,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "A_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vA_degr_b"
-                  ],
-                  "vA_syn_b"
-                ],
-                [
-                  "Negate",
-                  "vA_UE_b"
-                ]
-              ],
-              [
-                "Negate",
-                "vA_b_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "O_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vO_degr_b"
-                  ],
-                  "vO_syn_b"
-                ],
-                [
-                  "Negate",
-                  "vO_UE_b"
-                ]
-              ],
-              [
-                "Negate",
-                "vO_b_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vP_degr_b"
-                  ],
-                  "vP_syn_b"
-                ],
-                [
-                  "Negate",
-                  "vP_UE_b"
-                ]
-              ],
-              [
-                "Negate",
-                "vP_b_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "L_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vL_degr_b"
-                  ],
-                  "vL_syn_b"
-                ],
-                [
-                  "Negate",
-                  "vL_UE_b"
-                ]
-              ],
-              [
-                "Negate",
-                "vL_b_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "S_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vS_degr_b"
-                  ],
-                  "vS_syn_b"
-                ],
-                [
-                  "Negate",
-                  "vS_UE_b"
-                ]
-              ],
-              [
-                "Negate",
-                "vS_b_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NAPE_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNAPE_syn_b",
-              [
-                "Negate",
-                "vA_syn_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NOPE_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNOPE_syn_b",
-              [
-                "Negate",
-                "vO_syn_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NPPE_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNPPE_syn_b",
-              [
-                "Negate",
-                "vP_syn_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NLPE_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNLPE_syn_b",
-              [
-                "Negate",
-                "vL_syn_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NSPE_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNSPE_syn_b",
-              [
-                "Negate",
-                "vS_syn_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "FAAH_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                "vFAAH_syn_b",
-                [
-                  "Negate",
-                  "vFAAH_degr_b"
-                ]
-              ],
-              [
-                "Negate",
-                "vFAAH_inh_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "FAAHinh_b_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vFAAH_inh_b",
-              [
-                "Negate",
-                "vFAAH_inh_degr_b"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "A_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vA_degr_r"
-                  ],
-                  "vA_syn_r"
-                ],
-                [
-                  "Negate",
-                  "vA_UE_r"
-                ]
-              ],
-              [
-                "Negate",
-                "vA_r_p"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "O_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vO_degr_r"
-                  ],
-                  "vO_syn_r"
-                ],
-                [
-                  "Negate",
-                  "vO_UE_r"
-                ]
-              ],
-              [
-                "Negate",
-                "vO_r_p"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vP_degr_r"
-                  ],
-                  "vP_syn_r"
-                ],
-                [
-                  "Negate",
-                  "vP_UE_r"
-                ]
-              ],
-              [
-                "Negate",
-                "vP_r_p"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "L_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vL_degr_r"
-                  ],
-                  "vL_syn_r"
-                ],
-                [
-                  "Negate",
-                  "vL_UE_r"
-                ]
-              ],
-              [
-                "Negate",
-                "vL_r_p"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "S_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                [
-                  "Add",
-                  [
-                    "Negate",
-                    "vS_degr_r"
-                  ],
-                  "vS_syn_r"
-                ],
-                [
-                  "Negate",
-                  "vS_UE_r"
-                ]
-              ],
-              [
-                "Negate",
-                "vS_r_p"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NAPE_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNAPE_syn_r",
-              [
-                "Negate",
-                "vA_syn_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NOPE_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNOPE_syn_r",
-              [
-                "Negate",
-                "vO_syn_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NPPE_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNPPE_syn_r",
-              [
-                "Negate",
-                "vP_syn_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NLPE_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNLPE_syn_r",
-              [
-                "Negate",
-                "vL_syn_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "NSPE_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vNSPE_syn_r",
-              [
-                "Negate",
-                "vS_syn_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "FAAH_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                "vFAAH_syn_r",
-                [
-                  "Negate",
-                  "vFAAH_degr_r"
-                ]
-              ],
-              [
-                "Negate",
-                "vFAAH_inh_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "FAAHinh_r_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vFAAH_inh_r",
-              [
-                "Negate",
-                "vFAAH_inh_degr_r"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "A_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "vA_degr_m"
-              ],
-              [
-                "Negate",
-                "vA_m_p"
-              ],
-              "vA_b_m"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "O_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "vO_degr_m"
-              ],
-              [
-                "Negate",
-                "vo_m_p"
-              ],
-              "vO_b_m"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "vP_degr_m"
-              ],
-              [
-                "Negate",
-                "vP_m_p"
-              ],
-              "vP_b_m"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "L_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "vL_degr_m"
-              ],
-              [
-                "Negate",
-                "vL_m_p"
-              ],
-              "vL_b_m"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "S_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "vS_degr_m"
-              ],
-              [
-                "Negate",
-                "vS_m_p"
-              ],
-              "vS_b_m"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "FAAH_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                "vFAAH_syn_m",
-                [
-                  "Negate",
-                  "vFAAH_degr_m"
-                ]
-              ],
-              [
-                "Negate",
-                "vFAAH_inh_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "FAAHinh_m_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vFAAH_inh_m",
-              [
-                "Negate",
-                "vFAAH_inh_degr_m"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "A_p_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vA_m_p",
-              "vA_r_p"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "O_p_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vo_m_p",
-              "vO_r_p"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "P_p_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vP_m_p",
-              "vP_r_p"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "L_p_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vL_m_p",
-              "vL_r_p"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "S_p_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vS_m_p",
-              "vS_r_p"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "PFM_gut_amt_",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "absorp"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "PFM_p_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Add",
-                "absorp",
-                [
-                  "Negate",
-                  "dist"
-                ]
-              ],
-              [
-                "Negate",
-                "elim"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "PFM_r_amt_",
-          "rhs": {
-            "expr": "dist",
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": []
     }

@@ -20,14 +20,15 @@ Minimal valid DynMS structure:
 
 ```json
 {
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "models": [
     {
       "id": "model1",
       "constants": [],
-      "states": [],
+      "dynamic": [],
+      "static": [],
       "assignments": [],
-      "derivatives": [],
+      "timeEvents": [],
       "events": [],
       "observables": []
     }
@@ -36,7 +37,7 @@ Minimal valid DynMS structure:
 ```
 
 Top level required fields:
-- `dynms`: DynMS version, currently must be `"0.1.0"`;
+- `dynms`: DynMS version, currently must be `"0.2.0"`;
 - `models`: non-empty array of model definitions.
 
 The top level optional meta info can include:
@@ -57,14 +58,15 @@ A DynMS document contains one or more models as an array.
 
 ```json
 {
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "models": [
     {
       "id": "model1",
       "constants": [...],
-      "states": [...],
+      "dynamic": [...],
+      "static": [...],
       "assignments": [...],
-      "derivatives": [...],
+      "timeEvents": [...],
       "events": [...],
       "observables": [...]
     }
@@ -72,7 +74,7 @@ A DynMS document contains one or more models as an array.
 }
 ```
 
-Each model object must include `id`, `constants`, `states`, `assignments`, `derivatives`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
+Each model object must include `id`, `constants`, `dynamic`, `static`, `assignments`, `timeEvents`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
 
 ---
 
@@ -95,30 +97,34 @@ Constants are initialized by a number or an expression and do not change during 
 
 ### 3.2 States
 
-States represent variables that store values during simulation.
+States represent variables that store values during simulation. DynMS separates states into two collections: `dynamic` and `static`.
 
-Dynamic states are integrated by the solver so the corresponding derivative must be defined.
+Dynamic states are integrated by the solver so the corresponding `derivative` must be defined in the same object.
+Set optional `algebraic` to `true` when the derivative expression is an algebraic
+equation for a steady-state variable rather than an ODE. This is a subset of a
+DAE problem and requires backend support.
 
 ```json
 {
   "id": "x1",
-  "initial": 0
+  "initial": 0,
+  "derivative": {
+    "expr": "-k * x1",
+    "format": "heta"
+  }
 }
 ```
 
-Static states are marked with `static: true` and can be modified by events only. If `derivative` is defined for a static state, it is ignored.
-
-If `static` is not specified, the state is dynamic (not static) by default.
+Static states are stored in `static` and can be modified by events only. Static states do not define derivatives.
 
 ```json
 {
   "id": "volume",
-  "initial": 5.0,
-  "static": true
+  "initial": 5.0
 }
 ```
 
-Some backends may not support `static` states, in this case, it is treated as a regular dynamic state with derivative equal to zero. It is the responsibility of the model converter to check backend capabilities and convert static states if necessary.
+Some backends may not support `static` states. It is the responsibility of the model converter to check backend capabilities and convert static states if necessary.
 
 `initial` value can be a number or an expression. If it is an expression, it is evaluated at simulation start and may depend on `constants` and numeric literals only! It cannot depend on other states or assignments.
 
@@ -152,52 +158,52 @@ Assignments define algebraic expressions (rules) evaluated:
 
 Assignments are not states and do not store values.
 
-Assignments values are available globally during simulation and can be used in other expressions, like: derivatives, events, or other assignments. But not in initial values of states.
+Assignments values are available globally during simulation and can be used in other expressions, like: dynamic state derivatives, events, or other assignments. But not in initial values of states.
 
 DynMS require that assignments must be pre-ordered in a way that allows correct evaluation (no circular dependencies). It must be done at DynMS generation, not at runtime.
 
-Assignments are evaluated before derivatives.
+Assignments are evaluated before dynamic state derivatives.
 
 ---
 
 ### 3.4 Derivatives
 
-Derivatives define ordinary differential equations.
+Derivatives define ordinary differential equations for dynamic states. The derivative expression is stored in `dynamic[].derivative`.
 
 ```json
 {
-  "state": "x",
-  "rhs": {
+  "id": "x",
+  "initial": 1,
+  "derivative": {
     "expr": "-k * x",
     "format": "heta"
   }
 }
 ```
 
-Each non-static state may have at most one derivative, if not defined, it is an error.
-
-In some backends, it is possible to calculate dynamic states as steady-state values by defining algebraic equations instead of derivatives. In this case, the `algebraic` field should be set to `true` in the derivative definition. It is a subset of DAE (Differential-Algebraic Equations) problem having the important practical applications.
+Each dynamic state must have exactly one derivative. When `algebraic` is `true`,
+the derivative expression defines an equation equal to zero instead of an ODE.
+Top-level `derivatives` are not used in DynMS `0.2.0`.
 
 ```json
 {
-  "state": "x",
-  "rhs": {
-    "expr": "-k1 * x1 + k2 * x2",
+  "id": "x",
+  "initial": 1,
+  "derivative": {
+    "expr": "-k1 * x + k2 * y",
     "format": "heta"
-   },
-   "algebraic": true
+  },
+  "algebraic": true
 }
 ```
-
-This means that the state `x` is calculated as an algebraic variable based on the equation `0 = -k1 * x1 + k2 * x2`.
-
-In backends that do not support algebraic equations, the workaround is to set use the equation like `dx/dt = k_large * (-k1 * x1 + k2 * x2)` where `k_large` is a large constant, like `1e15`. It is not the same as solution matrix approach, but it allows to approximate algebraic behavior.
 
 ---
 
 ### 3.5 Events
 
 Events modify model states during simulation.
+
+Time-triggered events are stored in `timeEvents`. Events with `crossing` or `conditional` triggers are stored in `events`.
 
 ```json
 {
@@ -242,7 +248,7 @@ Observables do not affect simulation.
 
 ### 4.1 Expression Structure
 
-Expressions are represented mathematical formulas used in `assignments`, `derivatives`, `events`, and `states` initialization.
+Expressions are represented mathematical formulas used in `assignments`, dynamic state `derivative`, `events`, and state initialization.
 
 ```json
 {
@@ -433,9 +439,9 @@ Named constants and boolean literals such as `Pi`, `ExponentialE`, `True`, and `
 Before simulation starts:
 
 1. All `constants` are initialized with their specified values or with external inputs;
-2. All `states` are initialized with their specified initial values or by expression depending on `constants`;
+2. All `dynamic` and `static` states are initialized with their specified initial values or by expression depending on `constants`;
 3. All expressions inside `trigger` fields like: `start`, `stop`, `period` are evaluated at this step.
-4. The backend can update `active` field in any of `events` externally.
+4. The backend can update `active` field in any of `timeEvents` or `events` externally.
 
 ---
 
@@ -453,12 +459,12 @@ It may require evaluating `assignments` before checking event conditions.
 
 At each solver step:
 1. assignments are evaluated;
-2. derivatives are evaluated;
+2. dynamic state derivatives are evaluated;
 3. events may be processed depending on backend semantics.
 
 ---
 
-### 5.3 Static States
+### 5.4 Static States
 
 Static states:
 - are not integrated by the solver;
@@ -467,7 +473,7 @@ Static states:
 
 ---
 
-### 5.4 Time Variable
+### 5.5 Time Variable
 
 Time variable `t` is available globally during simulation and can be used in any expression.
 
@@ -476,6 +482,8 @@ Time variable `t` is available globally during simulation and can be used in any
 ---
 
 ## 6. Events
+
+DynMS `0.2.0` keeps time-triggered events in `timeEvents` and non-time events in `events`.
 
 ### 6.1 Time Triggers
 
@@ -600,7 +608,7 @@ DynMS schema defines the structure and basic types of the document, but it does 
 DynMS implementations should validate:
 - identifier uniqueness;
 - valid references;
-- derivative/state consistency;
+- dynamic state derivative consistency;
 - trigger compatibility;
 - expression validity.
 

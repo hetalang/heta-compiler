@@ -1,5 +1,5 @@
 const DYNMS_SCHEMA = 'https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json';
-const DYNMS_VERSION = '0.1.0';
+const DYNMS_VERSION = '0.2.0';
 
 const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');

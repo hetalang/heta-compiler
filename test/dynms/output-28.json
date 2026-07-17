@@ -1,11 +1,11 @@
 {
   "id": "nameless",
   "constants": [],
-  "states": [
+  "dynamic": [],
+  "static": [
     {
       "id": "x1",
-      "initial": 1,
-      "static": true
+      "initial": 1
     }
   ],
   "assignments": [
@@ -32,8 +32,7 @@
       }
     }
   ],
-  "derivatives": [],
-  "events": [
+  "timeEvents": [
     {
       "id": "sw1",
       "trigger": {
@@ -55,5 +54,6 @@
       "active": true
     }
   ],
+  "events": [],
   "observables": []
 }

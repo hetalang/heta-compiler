@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.0/src/dynms/dynms.schema.json",
-  "dynms": "0.1.0",
+  "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.11.1"
+    "version": "0.12.0"
   },
-  "created": "2026-06-02T12:35:34.786Z",
+  "created": "2026-07-17T09:08:28.723Z",
   "platformId": "useNamespace",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -39,20 +39,17 @@
           "value": 0.3
         }
       ],
-      "states": [
-        {
-          "id": "gut",
-          "initial": 1,
-          "static": true
-        },
-        {
-          "id": "blood",
-          "initial": 5.2,
-          "static": true
-        },
+      "dynamic": [
         {
           "id": "a0_first",
-          "initial": 0
+          "initial": 0,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "vabs_first"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "c1_first_amt_",
@@ -63,11 +60,29 @@
               5.2
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "vabs_first",
+              [
+                "Negate",
+                "vel_first"
+              ]
+            ],
+            "format": "math-json"
           }
         },
         {
           "id": "a0_second",
-          "initial": 0
+          "initial": 0,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "vabs_second"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "c1_second_amt_",
@@ -78,11 +93,29 @@
               5.2
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "vabs_second",
+              [
+                "Negate",
+                "vel_second"
+              ]
+            ],
+            "format": "math-json"
           }
         },
         {
           "id": "a0_third",
-          "initial": 0
+          "initial": 0,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "vabs_third"
+            ],
+            "format": "math-json"
+          }
         },
         {
           "id": "c1_third_amt_",
@@ -93,7 +126,28 @@
               5.2
             ],
             "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "vabs_third",
+              [
+                "Negate",
+                "vel_third"
+              ]
+            ],
+            "format": "math-json"
           }
+        }
+      ],
+      "static": [
+        {
+          "id": "gut",
+          "initial": 1
+        },
+        {
+          "id": "blood",
+          "initial": 5.2
         }
       ],
       "assignments": [
@@ -287,80 +341,7 @@
           }
         }
       ],
-      "derivatives": [
-        {
-          "state": "a0_first",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "vabs_first"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "c1_first_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vabs_first",
-              [
-                "Negate",
-                "vel_first"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "a0_second",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "vabs_second"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "c1_second_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vabs_second",
-              [
-                "Negate",
-                "vel_second"
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "a0_third",
-          "rhs": {
-            "expr": [
-              "Negate",
-              "vabs_third"
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "state": "c1_third_amt_",
-          "rhs": {
-            "expr": [
-              "Add",
-              "vabs_third",
-              [
-                "Negate",
-                "vel_third"
-              ]
-            ],
-            "format": "math-json"
-          }
-        }
-      ],
+      "timeEvents": [],
       "events": [],
       "observables": []
     }

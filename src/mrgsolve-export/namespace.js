@@ -24,12 +24,12 @@ Namespace.prototype.getMrgsolveImage = function() {
   // a specific dictionary required for "compartment" enumeration in mrgsolve
   // started from 1 for compatibility with mrgsolve
   image.dynamicStatesIndex = {};
-  image.states.filter((state) => !state.static).forEach((state, i) => {
+  image.dynamic.forEach((state, i) => {
     image.dynamicStatesIndex[state.id] = i + 1;
   });
   // started from 10 to avoid conflicts with reserved numbers 0-4 in mrgsolve
   image.timeEventIndex = {};
-  image.events.filter((event) => event.trigger.type === 'time').forEach((event, i) => {
+  image.timeEvents.forEach((event, i) => {
     image.timeEventIndex[event.id] = i + 10;
   });
 
