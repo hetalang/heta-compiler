@@ -2,7 +2,7 @@
 
 ## 0.2.0
 
-- Updated document version to `0.2.0`
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json`
 - Replaced model-level `states` with `dynamic` and `static`
 - Removed `states[].static`; static states are now stored in `static`
 - Moved state derivatives from top-level `derivatives[]` to `dynamic[].derivative`, including `derivatives[].algebraic` to `dynamic[].algebraic`
