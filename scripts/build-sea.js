@@ -11,9 +11,8 @@ const distDir = path.join(projectDir, 'dist');
 const workDir = path.join(distDir, '.sea');
 const bundlePath = path.join(workDir, 'heta.cjs');
 const configPath = path.join(workDir, 'sea-config.json');
-const blobPath = path.join(workDir, 'heta.blob');
 const executablePath = path.join(distDir, process.platform === 'win32' ? 'heta-compiler.exe' : 'heta-compiler');
-const minimumNodeMajor = 24;
+const minimumNodeMajor = 26;
 
 const initAssetNames = [
   'index.json',
@@ -38,12 +37,6 @@ function run(command, args) {
   if (result.status !== 0) {
     throw new Error(`${path.basename(command)} exited with code ${result.status}`);
   }
-}
-
-function postjectCliPath() {
-  const packagePath = require.resolve('postject/package.json');
-  const postjectPackage = require(packagePath);
-  return path.resolve(path.dirname(packagePath), postjectPackage.bin.postject);
 }
 
 function smokeTest() {
@@ -80,7 +73,7 @@ async function main() {
     bundle: true,
     format: 'cjs',
     platform: 'node',
-    target: 'node24',
+    target: 'node26',
     outfile: bundlePath,
     logLevel: 'info'
   });
@@ -91,7 +84,8 @@ async function main() {
   ]));
   const seaConfig = {
     main: bundlePath,
-    output: blobPath,
+    mainFormat: 'commonjs',
+    output: executablePath,
     disableExperimentalSEAWarning: true,
     useSnapshot: false,
     useCodeCache: false,
@@ -99,25 +93,8 @@ async function main() {
   };
   fs.writeFileSync(configPath, JSON.stringify(seaConfig, null, 2));
 
-  run(process.execPath, ['--experimental-sea-config', configPath]);
-  fs.copyFileSync(process.execPath, executablePath);
-
-  if (process.platform === 'darwin') {
-    run('codesign', ['--remove-signature', executablePath]);
-  }
-
-  const postjectArgs = [
-    postjectCliPath(),
-    executablePath,
-    'NODE_SEA_BLOB',
-    blobPath,
-    '--sentinel-fuse',
-    'NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2'
-  ];
-  if (process.platform === 'darwin') {
-    postjectArgs.push('--macho-segment-name', 'NODE_SEA');
-  }
-  run(process.execPath, postjectArgs);
+  fs.rmSync(executablePath, { force: true });
+  run(process.execPath, ['--build-sea', configPath]);
 
   if (process.platform === 'darwin') {
     run('codesign', ['--sign', '-', executablePath]);
@@ -129,11 +106,12 @@ async function main() {
 
   smokeTest();
 
-  fs.rmSync(workDir, { recursive: true, force: true });
   console.log(`Standalone executable created: ${path.relative(projectDir, executablePath)}`);
 }
 
 main().catch((error) => {
   console.error(error.stack || error.message);
   process.exitCode = 1;
+}).finally(() => {
+  fs.rmSync(workDir, { recursive: true, force: true });
 });

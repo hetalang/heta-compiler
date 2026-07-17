@@ -67,7 +67,6 @@
     "jsdoc": "^4.0.4",
     "mocha": "^11.7.1",
     "nyc": "^18.0.0",
-    "postject": "1.0.0-alpha.6",
     "sitemap": "^8.0.3",
     "slv-utils": "^0.5.1",
     "xmllint-wasm": "^5.2.0"
