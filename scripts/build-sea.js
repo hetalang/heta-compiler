@@ -27,6 +27,31 @@ const initAssetNames = [
   'template.gitignore'
 ];
 
+function createSeaCliEntryPlugin() {
+  const developmentEntry = path.join(projectDir, 'bin', 'heta-build.js');
+  const compiledEntry = path.join(projectDir, 'src', 'cli.js');
+  let redirected = false;
+
+  return {
+    plugin: {
+      name: 'heta-sea-cli-entry',
+      setup(build) {
+        build.onResolve({ filter: /^\.\.\/src$/ }, (args) => {
+          if (path.resolve(args.importer) !== developmentEntry) return undefined;
+
+          redirected = true;
+          return { path: compiledEntry };
+        });
+      }
+    },
+    assertRedirected() {
+      if (!redirected) {
+        throw new Error('SEA build did not redirect bin/heta-build.js from src to src/cli.');
+      }
+    }
+  };
+}
+
 function run(command, args) {
   const result = childProcess.spawnSync(command, args, {
     cwd: projectDir,
@@ -68,15 +93,18 @@ async function main() {
   fs.rmSync(workDir, { recursive: true, force: true });
   fs.mkdirSync(workDir, { recursive: true });
 
+  const seaCliEntry = createSeaCliEntryPlugin();
   await esbuild.build({
     entryPoints: [path.join(projectDir, 'bin', 'heta.js')],
     bundle: true,
     format: 'cjs',
     platform: 'node',
     target: 'node26',
+    plugins: [seaCliEntry.plugin],
     outfile: bundlePath,
     logLevel: 'info'
   });
+  seaCliEntry.assertRedirected();
 
   const assets = Object.fromEntries(initAssetNames.map((name) => [
     `init/${name}`,

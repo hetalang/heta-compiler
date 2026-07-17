@@ -9,7 +9,8 @@ const { Command } = require('commander');
 const program = new Command();
 const fs = require('fs-extra');
 const path = require('path');
-const { Builder, StdoutTransport, Transport } = require('../src/cli');
+// The SEA build replaces this import with ../src/cli at bundle time.
+const { Builder, StdoutTransport, Transport } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const { bugs } = require('../package');
 const colors = require('colors');
