@@ -129,7 +129,7 @@ softwareupdate --install-rosetta
 
 ## In NodeJS environment
 
-[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. Currently the recommended version is **NodeJS v18 and newer**.
+[NodeJS](https://nodejs.org/en/) must be installed prior to Heta compiler installation. The recommended version is **NodeJS v24**.
 
 The next steps should be taken using console (shell): **cmd**, **PowerShell**, **sh**, **bash** depending on your operating system.
 
