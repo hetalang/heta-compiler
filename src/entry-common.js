@@ -14,20 +14,6 @@ const ModuleSystem = require('./module-system');
 // const { Transport, StdoutTransport, StringTransport } = require('./logger');
 const HetaLevelError = require('./heta-level-error');
 
-/*
-const { HETA_TEMPLATES_MODE } = process.env;
-let templatesPath = HETA_TEMPLATES_MODE && HETA_TEMPLATES_MODE.toLowerCase() === 'raw'
-  ? './templates'           // raw templates
-  : './compiled-templates'; // compiled templates
-
-// load templates, display errors
-try {
-  Builder._templates = require(templatesPath).templates;
-} catch (error) {
-  throw new Error(`Failed to load templates from "${templatesPath}". Possibly the templates are not compiled. Compile them with \`npm run precompile\` or set the environment variable \`HETA_TEMPLATES_MODE=raw\`. Original error: ${error.message}`);
-}
-*/
-
 // case-insensitive export names
 Builder._exportClasses = {
   dbsolve: require('./dbsolve-export'),
