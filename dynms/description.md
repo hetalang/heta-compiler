@@ -5,6 +5,7 @@
 DynMS (Dynamic Model Specification) is a lightweight portable intermediate representation (IR) for dynamical simulation models.
 
 The main goals of DynMS are:
+
 - provide a solver-independent executable model representation;
 - simplify backend generation and model conversion;
 - support deterministic simulation semantics;
@@ -36,53 +37,28 @@ Minimal valid DynMS structure:
 }
 ```
 
-Top level required fields:
-- `dynms`: DynMS version, currently must be `"0.2.0"`;
+Top-level required fields:
+
+- `dynms`: DynMS version; currently must be `"0.2.0"`;
 - `models`: non-empty array of model definitions.
 
-The top level optional meta info can include:
-- `$schema`: JSON Schema URL for validation;
-- `generator.name`: name of the software that generated the document;
-- `generator.version`: version of the software that generated the document;
-- `created`: ISO 8601 timestamp of document creation;
-- `platformId`: optional identifier for the target simulation platform;
-- `platformVersion`: optional version of the target simulation platform;
-- `platformNotes`: optional platform-specific notes;
-- `license`: optional license information.
-
-If `generator` is present, both `generator.name` and `generator.version` are required.
-
-## 2. DynMS Model Structure
-
-A DynMS document contains one or more models as an array.
-
-```json
-{
-  "dynms": "0.2.0",
-  "models": [
-    {
-      "id": "model1",
-      "constants": [...],
-      "dynamic": [...],
-      "static": [...],
-      "assignments": [...],
-      "timeEvents": [...],
-      "events": [...],
-      "observables": [...]
-    }
-  ]
-}
-```
-
-Each model object must include `id`, `constants`, `dynamic`, `static`, `assignments`, `timeEvents`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
+The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`.
 
 ---
 
-## 3. Core Concepts
+## 2. DynMS Model Structure
+
+A DynMS document contains one or more models. Each model must include `id`, `constants`, `dynamic`, `static`, `assignments`, `timeEvents`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
+
+The following sections describe one model-object type at a time.
+
+---
+
+## 3. Model Objects
 
 ### 3.1 Constants
 
-Constants are externally configurable scalar values, model inputs.
+`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a number or an expression and does not change during simulation unless a backend-specific mechanism changes it.
 
 ```json
 {
@@ -91,31 +67,42 @@ Constants are externally configurable scalar values, model inputs.
 }
 ```
 
-Constants are initialized by a number or an expression and do not change during simulation unless modified by backend-specific mechanisms.
-
 ---
 
-### 3.2 States
+### 3.2 Dynamic states
 
-States represent variables that store values during simulation. DynMS separates states into two collections: `dynamic` and `static`.
-
-Dynamic states are integrated by the solver so the corresponding `derivative` must be defined in the same object.
-Set optional `algebraic` to `true` when the derivative expression is an algebraic
-equation for a steady-state variable rather than an ODE. This is a subset of a
-DAE problem and requires backend support.
+`dynamic` contains states integrated by the solver. Every dynamic state has an `id`, an `initial` value, and exactly one `derivative` expression.
 
 ```json
 {
   "id": "x1",
   "initial": 0,
   "derivative": {
-    "expr": "-k * x1",
-    "format": "heta"
+    "expr": ["Negate", ["Multiply", "k", "x1"]],
+    "format": "math-json"
   }
 }
 ```
 
-Static states are stored in `static` and can be modified by events only. Static states do not define derivatives.
+The `derivative` defines the ordinary differential equation for the state. Set optional `algebraic` to `true` when this expression is an equation equal to zero for a steady-state variable rather than an ODE. This is a subset of a DAE problem and requires backend support.
+
+```json
+{
+  "id": "x",
+  "initial": 1,
+  "derivative": {
+    "expr": ["Add", ["Negate", ["Multiply", "k1", "x"]], ["Multiply", "k2", "y"]],
+    "format": "math-json"
+  },
+  "algebraic": true
+}
+```
+
+---
+
+### 3.3 Static states
+
+`static` contains states that are stored during simulation but are not integrated by the solver. They do not define derivatives and may be modified only by events.
 
 ```json
 {
@@ -124,115 +111,146 @@ Static states are stored in `static` and can be modified by events only. Static 
 }
 ```
 
-Some backends may not support `static` states. It is the responsibility of the model converter to check backend capabilities and convert static states if necessary.
+Some backends may not support static states. The model converter is responsible for checking backend capabilities and converting them when necessary.
 
-`initial` value can be a number or an expression. If it is an expression, it is evaluated at simulation start and may depend on `constants` and numeric literals only! It cannot depend on other states or assignments.
+For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend only on constants and numeric literals, not on states or assignments.
 
 ```json
 {
   "id": "x1",
   "initial": {
-    "expr": "kabs * 100",
-    "format": "heta"
+    "expr": ["Multiply", "kabs", 100],
+    "format": "math-json"
   }
 }
 ```
 
 ---
 
-### 3.3 Assignments
+### 3.4 Assignments
 
-Assignments define algebraic expressions (rules) evaluated:
-- during simulation (each step);
-- before and after events if required by the backend.
+`assignments` contains algebraic expressions (rules) evaluated during simulation, and before or after events when required by the backend. Assignments are not states and do not store values.
 
 ```json
 {
   "id": "rate",
   "rhs": {
-    "expr": "k * x",
-    "format": "heta"
+    "expr": ["Multiply", "k", "x"],
+    "format": "math-json"
   }
 }
 ```
 
-Assignments are not states and do not store values.
-
-Assignments values are available globally during simulation and can be used in other expressions, like: dynamic state derivatives, events, or other assignments. But not in initial values of states.
-
-DynMS require that assignments must be pre-ordered in a way that allows correct evaluation (no circular dependencies). It must be done at DynMS generation, not at runtime.
-
-Assignments are evaluated before dynamic state derivatives.
+Assignment values are globally available during simulation and may be used in derivatives, events, and other assignments, but not in state initial values. They must be pre-ordered by the DynMS generator to permit correct evaluation without circular dependencies. Assignments are evaluated before dynamic-state derivatives.
 
 ---
 
-### 3.4 Derivatives
+### 3.5 Time events
 
-Derivatives define ordinary differential equations for dynamic states. The derivative expression is stored in `dynamic[].derivative`.
-
-```json
-{
-  "id": "x",
-  "initial": 1,
-  "derivative": {
-    "expr": "-k * x",
-    "format": "heta"
-  }
-}
-```
-
-Each dynamic state must have exactly one derivative. When `algebraic` is `true`,
-the derivative expression defines an equation equal to zero instead of an ODE.
-Top-level `derivatives` are not used in DynMS `0.2.0`.
+`timeEvents` contains events activated by a time trigger. Each object has an `id`, a `trigger`, and an `actions` array. Optional `priority`, `active`, and `stopSimulation` fields default to `0`, `true`, and `false`, respectively.
 
 ```json
 {
-  "id": "x",
-  "initial": 1,
-  "derivative": {
-    "expr": "-k1 * x + k2 * y",
-    "format": "heta"
-  },
-  "algebraic": true
-}
-```
-
----
-
-### 3.5 Events
-
-Events modify model states during simulation.
-
-Time-triggered events are stored in `timeEvents`. Events with `crossing` or `conditional` triggers are stored in `events`.
-
-```json
-{
-  "id": "event1",
+  "id": "dose",
   "trigger": {
     "type": "time",
-    "start": 0
+    "start": 12,
+    "period": 24,
+    "stop": 100
   },
-  "actions": [],
-  "priority": 0,
-  "active": true,
-  "stopSimulation": false
+  "actions": [
+    {
+      "state": "x",
+      "rhs": {
+        "expr": ["Add", "x", 10],
+        "format": "math-json"
+      }
+    }
+  ]
 }
 ```
 
-- `id` is the event identifier;
-- `trigger` defines event activation conditions;
-- `actions` is an array of state modifications executed when the event is triggered;
-- `priority` determines the execution order of events with the same trigger conditions;
-- `active` indicates whether the event is currently active. Inactive events are ignored during simulation.
-- `stopSimulation` indicates whether the simulation must stop after the event is triggered. The default value is `false`.
+`start`, `period`, and `stop` may be numbers or expressions evaluated at simulation start. A time-trigger expression may reference constants only; it must not reference states, assignments, or the time variable `t`.
+
+```json
+{
+  "type": "time",
+  "start": {
+    "expr": "start1",
+    "format": "math-json"
+  },
+  "period": {
+    "expr": "period1",
+    "format": "math-json"
+  },
+  "stop": {
+    "expr": "stop1",
+    "format": "math-json"
+  }
+}
+```
+
+- `start` is required.
+- `period` is optional. If omitted, the trigger is one-shot and activates only at `start`.
+- A non-positive `period` is interpreted as omitted for compatibility.
+- For `period > 0`, activation times are `start + k * period`, where `k = 0, 1, 2, ...`, while `time <= stop`.
+- `stop` is inclusive. If an activation time equals `stop`, that activation occurs.
+- For one-shot triggers, `stop` does not add activations and may be ignored by backends.
 
 ---
 
-### 3.6 Observables
+### 3.6 State events
 
-Observables define exported model outputs. 
+`events` contains non-time events. Their triggers are either `crossing` or `conditional`; all other object fields have the same meaning as in `timeEvents`.
 
-> Currently the `observables` are just references to states or assignments, but in the future they may support new expressions, etc.
+A crossing trigger activates when its `rhs` crosses zero in the negative-to-positive direction.
+
+```json
+{
+  "id": "threshold",
+  "trigger": {
+    "type": "crossing",
+    "rhs": {
+      "expr": ["Add", "x", -10],
+      "format": "math-json"
+    },
+    "atStart": true,
+    "detection": "root"
+  },
+  "actions": []
+}
+```
+
+When `atStart` is `true`, a non-negative crossing value is active at simulation start. With `detection: "root"`, the backend should use root finding to determine the crossing time. With `detection: "step"`, the condition is evaluated only at discrete simulation steps; this deprecated mode may be used by backends without root-finding support.
+
+A conditional trigger activates when its logical `rhs` becomes `true`.
+
+```json
+{
+  "id": "stopAtLimit",
+  "trigger": {
+    "type": "conditional",
+    "rhs": {
+      "expr": ["Greater", "x", 10],
+      "format": "math-json"
+    },
+    "atStart": true,
+    "detection": "step"
+  },
+  "actions": [],
+  "stopSimulation": true
+}
+```
+
+The `detection` field for conditional triggers may be `step` or `root` for compatibility, but root detection for logical expressions is not precisely defined and may be deprecated in a future DynMS version.
+
+All event actions are applied all at once. The backend first evaluates every action `rhs` against the state at activation time, then applies all resulting state modifications simultaneously. If `stopSimulation` is `true`, the simulation stops after the actions are applied. Event execution details may vary slightly between backends.
+
+---
+
+### 3.7 Observables
+
+`observables` contains exported model outputs. Currently each observable is a reference to a state or assignment.
 
 ```json
 {
@@ -246,187 +264,65 @@ Observables do not affect simulation.
 
 ## 4. Expressions
 
-### 4.1 Expression Structure
+### 4.1 Expression structure
 
-Expressions are represented mathematical formulas used in `assignments`, dynamic state `derivative`, `events`, and state initialization.
+Expressions are mathematical formulas. They may occur at the following JSON paths:
 
-```json
-{
-  "expr": "x + y",
-  "format": "heta"
-}
-```
+- `constants[].value`;
+- `dynamic[].initial`;
+- `dynamic[].derivative`;
+- `static[].initial`;
+- `assignments[].rhs`;
+- `timeEvents[].trigger.start`;
+- `timeEvents[].trigger.period`;
+- `timeEvents[].trigger.stop`;
+- `timeEvents[].actions[].rhs`;
+- `events[].trigger.rhs`;
+- `events[].actions[].rhs`.
 
-- `expr` is the expression represented as a string, number or array depending on the format;
-- `format` specifies the expression format and syntax.
-
-Supported formats:
-- `heta`
-- `c`
-- `mrgsolve`
-- `julia`
-- `math-json`
-
-### 4.2 MathJSON format
-
-MathJSON is an open format for representing mathematical expressions in JSON. It is designed to be unambiguous and easily parsed by software.
-
-It is the default and recommended expression format in DynMS, preferred for maximum interoperability and precision.
-
-> In future versions of DynMS, support for other expression formats may be deprecated in favor of MathJSON.
-
-See the original MathJSON standard here: https://cortexjs.io/math-json/
-
----
-
-#### 4.2.1 DynMS MathJSON schema
-
-DynMS uses its **own JSON Schema profile** of MathJSON, not the upstream library schema.
-
-The DynMS MathJSON profile follows the same conceptual model as the original standard but is independently maintained and may diverge over time to better serve simulation use cases.
-
----
-
-#### 4.2.2 Permitted node forms
-
-A MathJSON node (`mathJsonNode`) in DynMS may be any of the following:
-
-| Form | Example | Description |
-|---|---|---|
-| JSON number | `1`, `3.14` | Numeric literal |
-| JSON string | `"x"`, `"Pi"` | Symbol or named constant |
-| Array | `["Add", "x", 1]` | Function application: `[operator, arg1, arg2, ...]` |
-| `{"num": "..."}` | `{"num": "NaN"}` | Extended numeric literal (e.g. `NaN`, `+Infinity`, `-Infinity`) |
-| `{"sym": "..."}` | `{"sym": "x"}` | Symbol object form |
-| `{"str": "..."}` | `{"str": "hello"}` | String literal object |
-| `{"fn": [...]}` | `{"fn": ["Add", "x", 1]}` | Function object form |
-
-All node types can be used recursively: arguments of an array or `fn` node are themselves `mathJsonNode` values.
-
-Examples of equivalent representations for $x + 1$:
-
-```json
-["Add", "x", 1]
-```
-
-```json
-{"fn": ["Add", {"sym": "x"}, {"num": "1"}]}
-```
-
-Both are valid according to the DynMS schema.
-
----
-
-#### 4.2.3 Canonical form
-
-Although the DynMS schema accepts all node forms above, **heta-compiler always outputs expressions in canonical form**:
-
-- functions and operators are represented as arrays: `["Add", ...]`, `["Multiply", ...]`
-- plain numeric literals are JSON numbers: `1`, `3.14`
-- symbols are plain JSON strings: `"x"`, `"Pi"`
-- only extended numerics (`NaN`, `+Infinity`, `-Infinity`) use the `{"num": "..."}` object form
-
-This means the canonical form avoids `{"sym": ...}`, `{"str": ...}`, and `{"fn": ...}` object forms entirely, except for special numeric values.
-
-Canonical form example:
+The canonical DynMS representation is a MathJSON expression object:
 
 ```json
 {
-  "expr": ["Add", "x", 1],
+  "expr": ["Add", "x", "y"],
   "format": "math-json"
 }
 ```
 
-The canonical form is simpler to read and process. Consumers of DynMS files generated by heta-compiler can rely on it exclusively.
+### 4.2 Canonical MathJSON form
 
-> Consumers that need to support externally authored DynMS files should accept all permitted forms per the schema.
+MathJSON is the recommended DynMS expression format. See the [MathJSON standard](https://cortexjs.io/math-json/). heta-compiler always outputs its canonical form:
 
----
+- functions and operators are arrays, such as `["Add", ...]` and `["Multiply", ...]`;
+- numeric literals are JSON numbers;
+- symbols are JSON strings;
+- only extended numeric values use the `{"num": "..."}` form.
 
-#### 4.2.4 Special values
+The schema also accepts non-canonical MathJSON node forms, including `sym`, `str`, and `fn` objects, for compatibility with externally authored documents. Producers should emit the canonical form, and consumers of files generated by heta-compiler may rely on it exclusively.
 
-Extended numeric literals use `{"num": "..."}` for values that cannot be represented as JSON numbers:
+Extended numeric values that JSON cannot represent use a `num` object:
 
-| Value | Representation |
+| Value | Canonical representation |
 |---|---|
 | Not a number | `{"num": "NaN"}` |
 | Positive infinity | `{"num": "+Infinity"}` |
 | Negative infinity | `{"num": "-Infinity"}` |
 
----
+For associative operators (`Add`, `Multiply`, `And`, `Or`, and `Xor`), heta-compiler flattens nested calls. For example, `a + b + c` is represented as `["Add", "a", "b", "c"]`, rather than nested `Add` arrays.
 
-#### 4.2.5 Associative flattening
+The permitted MathJSON function and operator names are:
 
-For associative operators (`Add`, `Multiply`, `And`, `Or`, `Xor`), heta-compiler flattens nested calls into a single array:
+- arithmetic: `Add`, `Divide`, `Multiply`, `Negate`, `Power`, `Root`, `Square`;
+- elementary functions: `Abs`, `Ceil`, `Exp`, `Factorial`, `Floor`, `Lb`, `Lg`, `Ln`, `Log`, `Max`, `Min`, `Sign`, `Sqrt`;
+- trigonometric functions: `Arccos`, `Arccot`, `Arccsc`, `Arcsec`, `Arcsin`, `Arctan`, `Cos`, `Cot`, `Csc`, `Sec`, `Sin`, `Tan`;
+- comparison and logic: `And`, `Equal`, `Greater`, `GreaterEqual`, `Less`, `LessEqual`, `Not`, `NotEqual`, `Or`, `Xor`;
+- conditional expressions: `If`, `Which`.
 
-| Heta expression | MathJSON output |
-|---|---|
-| `a + b + c` | `["Add", "a", "b", "c"]` |
-| `a * b * c` | `["Multiply", "a", "b", "c"]` |
+Named constants and Boolean values, such as `Pi`, `ExponentialE`, `True`, and `False`, are represented as symbols rather than function calls.
 
-This avoids unnecessary nesting such as `["Add", "a", ["Add", "b", "c"]]`.
+### 4.3 Other expression formats
 
----
-
-#### 4.2.6 Supported MathJSON functions
-
-DynMS supports the following MathJSON function and operator names. In array form, the first item must be one of these names.
-
-Arithmetic:
-- `Add`
-- `Divide`
-- `Multiply`
-- `Negate`
-- `Power`
-- `Root`
-- `Square`
-
-Elementary functions:
-- `Abs`
-- `Ceil`
-- `Exp`
-- `Factorial`
-- `Floor`
-- `Lb`
-- `Lg`
-- `Ln`
-- `Log`
-- `Max`
-- `Min`
-- `Sign`
-- `Sqrt`
-
-Trigonometric functions:
-- `Arccos`
-- `Arccot`
-- `Arccsc`
-- `Arcsec`
-- `Arcsin`
-- `Arctan`
-- `Cos`
-- `Cot`
-- `Csc`
-- `Sec`
-- `Sin`
-- `Tan`
-
-Comparison and logic:
-- `And`
-- `Equal`
-- `Greater`
-- `GreaterEqual`
-- `Less`
-- `LessEqual`
-- `Not`
-- `NotEqual`
-- `Or`
-- `Xor`
-
-Conditional expressions:
-- `If`
-- `Which`
-
-Named constants and boolean literals such as `Pi`, `ExponentialE`, `True`, and `False` are represented as symbols, not function calls.
+The schema also permits line-expression formats `heta`, `c`, `mrgsolve`, and `julia`. They exist for compatibility with particular tools and backends, but are not recommended. New DynMS documents should use canonical MathJSON with `"format": "math-json"`.
 
 ---
 
@@ -436,184 +332,103 @@ Named constants and boolean literals such as `Pi`, `ExponentialE`, `True`, and `
 
 Before simulation starts:
 
-1. All `constants` are initialized with their specified values or with external inputs;
-2. All `dynamic` and `static` states are initialized with their specified initial values or by expression depending on `constants`;
-3. All expressions inside `trigger` fields like: `start`, `stop`, `period` are evaluated at this step.
-4. The backend can update `active` field in any of `timeEvents` or `events` externally.
-
----
+1. All constants are initialized with their specified values or external inputs.
+2. All dynamic and static states are initialized with their specified values or expressions depending on constants.
+3. Expressions in time-trigger fields (`start`, `stop`, and `period`) are evaluated.
+4. The backend may externally update `active` for any time event or state event.
 
 ### 5.2 Zero events
 
-Before running integration we should check if any events are active at simulation start.
-- If `atStart` is `true` for the `conditional` or `crossing` trigger, and the trigger condition is satisfied at simulation start, the event is activated immediately.
-- If `start` time trigger is corresponding to the simulation start time, the event is activated immediately.
+Before integration, active events at simulation start must be checked:
 
-It may require evaluating `assignments` before checking event conditions.
+- If `atStart` is `true` for a crossing or conditional trigger and its condition is satisfied, the event activates immediately.
+- If a time-event `start` equals the simulation start time, that event activates immediately.
 
----
+This may require evaluating assignments before checking event conditions.
 
-### 5.3 Runtime Evaluation Order
+### 5.3 Runtime evaluation order
 
 At each solver step:
+
 1. assignments are evaluated;
-2. dynamic state derivatives are evaluated;
-3. events may be processed depending on backend semantics.
+2. dynamic-state derivatives are evaluated;
+3. events may be processed, according to backend semantics.
+
+### 5.4 Time variable
+
+The time variable `t` is available globally during simulation and can be used in any expression.
 
 ---
 
-### 5.4 Static States
+## 6. Identifiers inside models
 
-Static states:
-- are not integrated by the solver;
-- may still change through events;
-- remain globally accessible during simulation.
+DynMS uses string identifiers for all model components. An identifier must start with a letter and then contain only letters, digits, or underscores. It must be unique within a model.
 
 ---
 
-### 5.5 Time Variable
+## 7. Validation Rules
 
-Time variable `t` is available globally during simulation and can be used in any expression.
+The DynMS schema validates the document structure and basic types. Implementations must also perform the semantic validation described below.
 
-> In future versions of DynMS, maybe required to declare time variable explicitly or use special semantic in MathJSON expressions.
+### 7.1 Schema compliance
 
----
+A DynMS document must validate against `dynms.schema.json` for the declared DynMS version. This includes required fields, JSON value types, permitted expression formats, MathJSON node structure and function names, trigger shape, and event-action shape.
 
-## 6. Events
+Schema validation does not validate relationships between objects in a model. The following rules provide that validation.
 
-DynMS `0.2.0` keeps time-triggered events in `timeEvents` and non-time events in `events`.
+### 7.2 Identifier uniqueness
 
-### 6.1 Time Triggers
+Identifiers must be unique within a model. The same `id` must not occur in more than one object in any of these collections:
 
-Time triggers activate events at specified times.
+- `constants`;
+- `dynamic`;
+- `static`;
+- `assignments`;
+- `timeEvents`;
+- `events`.
 
-```json
-{
-  "type": "time",
-  "start": 12,
-  "period": 24,
-  "stop": 100
-}
-```
+In particular, time-event and state-event identifiers share the same identifier namespace with states, constants, and assignments. `observables` have no `id` field and are not part of this check.
 
-`start`, `period`, and `stop` can be numbers or expressions evaluated at simulation start.
+### 7.3 Reference validity
 
-```json
-{
-  "type": "time",
-  "start": {"expr": "start1", "format": "heta"},
-  "period": {"expr": "period1", "format": "heta"},
-  "stop": {"expr": "stop1", "format": "heta"}
-}
-```
+Every reference must resolve within the same model and point to an object type allowed by its context.
 
-Interpretation notes:
-- `start` is required.
-- `period` is optional. If omitted, the trigger is treated as one-shot and activates only at `start`.
-- `period` should be positive. For compatibility, `period <= 0` should be interpreted the same as omitted `period` (one-shot at `start`).
-- `stop` is optional and is mainly used for periodic triggers. For `period > 0`, event times are: `start + k * period`, where `k = 0, 1, 2, ...`, while `time <= stop`.
-- `stop` is inclusive: if `start + k * period == stop`, the event is activated at this final time.
-- If `period` is omitted or less than or equal to `0`, `stop` does not add extra activations and can be ignored by backends.
+- Symbols in expressions must resolve to a constant, state, assignment, or the special time symbol `t`, unless a more restrictive rule below applies.
+- `timeEvents[].actions[].state` and `events[].actions[].state` must reference an existing dynamic or static state.
+- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.0.
 
----
+### 7.4 Dynamic states and derivatives
 
-### 6.2 Crossing Triggers
+Each dynamic state must have exactly one `derivative` expression. It defines an ODE unless `algebraic` is `true`, in which case it defines an equation equal to zero for an algebraic state. A dynamic-state identifier cannot also identify a static state or any other object in the model.
 
-Crossing triggers activate when an expression crosses zero.
+### 7.5 State initialization
 
-```json
-{
-  "type": "crossing",
-  "rhs": {
-    "expr": "x - 10",
-    "format": "heta"
-  },
-  "atStart": true,
-  "detection": "root"
-}
-```
+`dynamic[].initial` and `static[].initial` must be numbers or valid expressions that can be evaluated before simulation starts. An initial-value expression may reference constants only. It must not reference states, assignments, or the time symbol `t`.
 
-Triggers activates in a direction from negative to positive values.
+### 7.6 Assignments
 
-When `atStart` is `true`, non-negative trigger values are treated as active at simulation start.
+Assignments must have no circular dependencies. They must be ordered so that every assignment can be evaluated after the assignments on which it depends. This order is established when generating DynMS, rather than at simulation runtime.
 
-When `detection` is `root`, the backend should use root-finding algorithms to determine the exact time of crossing. 
+### 7.7 Time events
 
-If `detection` is `step`, the backend should evaluate the trigger condition only at discrete simulation steps, which may lead to timing inaccuracies. This mode is deprecated but can be used for backends without root-finding support.
+Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference constants only; it must not reference states, assignments, or `t`.
 
----
+For periodic triggers, a computed `period` should be positive. A non-positive value retains the compatibility behavior defined in section 3.5 and is treated as a one-shot trigger.
 
-### 6.3 Conditional Triggers
+### 7.8 State events and triggers
 
-Conditional triggers activate when a logical expression becomes `true`.
+Every object in `events` must use a `crossing` or `conditional` trigger. Its `rhs` must be a valid expression. The `detection` value must be supported by the trigger type and the target backend. `root` detection for conditional triggers is allowed for compatibility, but its semantics are not precisely defined.
 
-It is similar to crossing trigger but the condition is based on logical expressions instead of crossing zero.
+### 7.9 Event actions
 
-```json
-{
-  "type": "conditional",
-  "rhs": {
-    "expr": "x > 10",
-    "format": "heta"
-  },
-  "atStart": true,
-  "detection": "step"
-}
-```
+Each event action must target an existing dynamic or static state, and its `rhs` must be a valid expression. A state must not occur more than once in the `actions` array of the same event; otherwise the all-at-once event semantics would be ambiguous.
 
-The `detection` field for conditional triggers can be `step` or `root` as well for compatibility. But `root` detection for conditional triggers is not clearly defined. Maybe in future versions of DynMS, `root` detection for conditional triggers will be deprecated.
+### 7.10 Observables
 
----
+Each `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Observables are references only and do not define new expressions or affect simulation.
 
-### 6.6 Event Actions
+### 7.11 Expression validity
 
-Event actions are executed in an "all-at-once" manner, meaning that all state modifications defined in the event's `actions` are applied simultaneously at the time of event activation.
+Each expression must be valid in its declared format and use only symbols permitted by its context. For MathJSON, this includes valid node forms and supported function names. Documents generated by heta-compiler use canonical MathJSON with `"format": "math-json"`.
 
-Before executing event actions, all expressions in the `rhs` of the actions are evaluated based on the state of the model at the moment of event activation. This ensures that the order of actions does not affect the final outcome, as all modifications are applied together after evaluation.
-
-If `stopSimulation` is `true`, the simulation stops after the event is triggered and its actions are applied. This can be used to terminate simulation when unrealistic or out-of-range conditions are reached.
-
-Example:
-
-```json
-{
-  "state": "x",
-  "rhs": {
-    "expr": "x + 10",
-    "format": "heta"
-  }
-}
-```
-
-Event execution semantics may vary slightly between backends.
-
----
-
-## 7. Identifiers inside models
-
-DynMS uses string identifiers for all model components (states, constants, assignments, events).
-
-The identifier is a string starting with a letter (not an underscore), followed by letters, digits, or underscores. It must be unique within the model.
-
-The first character must be a letter (a-z, A-Z) for compatibility with various programming languages.
-
----
-
-## 8. Validation Rules
-
-DynMS schema defines the structure and basic types of the document, but it does not enforce all the semantic rules required for a valid model.
-
-DynMS implementations should validate:
-- identifier uniqueness;
-- valid references;
-- dynamic state derivative consistency;
-- trigger compatibility;
-- expression validity.
-
-For the specific converter or backend, additional validation rules may apply, such as:
-- supporting an expression format;
-- supporting specific trigger types;
-- supporting specific event, like `root` detection for crossing triggers;
-- supporting initial state expressions;
-- supporting algebraic equations;
-- etc.
+Specific converters and backends may impose additional requirements, for example support for algebraic equations, a particular trigger-detection mode, or a particular expression format.
