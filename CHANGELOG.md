@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.12.1
+
+- Updated **DynMS export** to version 0.2.0.
+- Added DynMS support for `@StopSwitcher` through the `stopSimulation` event option.
+- Fixed **Simbio export** so time switchers with a negative period do not add a period.
+- Replaced `pkg` with Node.js **SEA** for standalone builds and updated release packaging; macOS standalone packages and Homebrew support are now Apple Silicon (arm64) only.
+- Added Windows installer branding and improved release/installer version handling.
+- Updated DynMS, installation, and migration documentation.
+- Updated dependencies to address known security vulnerabilities.
+
 ## 0.12.0
 
 - Added a new **DynMS export** format
