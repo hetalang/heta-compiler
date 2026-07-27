@@ -298,19 +298,33 @@ function _substituteFunctionDef(fnDef, argNodes = []) {
     throw new TypeError(`Function "${fnDef.id}" requires minimum ${fnDef.arguments.length} arguments, got ${argNodes.length}`);
   }
 
-  // substitute arguments by nodes
-  let transformed = fnDef.math.exprParsed.transform((node) => {
-    let argIndex = fnDef.arguments.indexOf(node.name);
-    if (node.type === 'SymbolNode' && argIndex !== -1) {
-      return argNodes[argIndex];
-    } else if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
-      return _substituteFunctionDef(node.fnObj, node.args);
-    } else {
-      return node;
-    }
-  });
+  // Expand calls in arguments first: nodes returned from `transform` are not
+  // traversed again by mathjs.
+  let expandedArgs = argNodes.map(_substituteUserDefinedFunctions);
 
-  return transformed;
+  // Expand nested calls in the function body before binding the arguments.
+  // The final binding pass then also traverses the expressions produced by
+  // those nested calls (for example, fun2(x) -> fun1(x^2, x^3)).
+  let expandedBody = _substituteUserDefinedFunctions(fnDef.math.exprParsed);
+
+  return expandedBody.transform((node, path) => {
+    let argIndex = fnDef.arguments.indexOf(node.name);
+    if (node.type === 'SymbolNode' && path !== 'fn' && argIndex !== -1) {
+      return expandedArgs[argIndex];
+    }
+
+    return node;
+  });
+}
+
+function _substituteUserDefinedFunctions(node) {
+  return node.transform((node) => {
+    if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
+      return _substituteFunctionDef(node.fnObj, node.args);
+    }
+
+    return node;
+  });
 }
 
 module.exports = {

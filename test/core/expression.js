@@ -1,5 +1,6 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
+const { Container } = require('../../src');
 require('../../src/sbml-export/expression');
 const { expect } = require('chai');
 
@@ -124,5 +125,22 @@ describe('num method for Expression', () => {
   it('Check num for "x-y"', () => {
     let expr = Expression.fromString('x-y');
     expect(expr).to.have.property('num', undefined);
+  });
+});
+
+describe('Function definition substitution', () => {
+  it('Binds outer arguments before expanding nested function calls.', () => {
+    const container = new Container();
+    container.loadMany([
+      { id: 'sumOf', action: 'defineFunction', arguments: ['a', 'b'], math: 'a + b' },
+      { id: 'powersOf', action: 'defineFunction', arguments: ['x'], math: 'sumOf(x^2, x^3)' }
+    ]);
+    container.knitMany();
+
+    const expression = Expression.fromString('powersOf(y + 1)');
+    expression.functionList()[0].fnObj = container.functionDefStorage.get('powersOf');
+
+    expect(expression.substituteByDefinitions().toString())
+      .to.equal('(y + 1) ^ 2 + (y + 1) ^ 3');
   });
 });
