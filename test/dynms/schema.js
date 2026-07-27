@@ -56,6 +56,16 @@ describe('DynMS schema', () => {
 
     expect(validateDynms(doc)).to.equal(false);
   });
+
+  it('rejects expressions as constant values', () => {
+    const doc = makeDoc(0);
+    doc.models[0].constants.push({
+      id: 'k',
+      value: { expr: ['Add', 1, 2], format: 'math-json' }
+    });
+
+    expect(validateDynms(doc)).to.equal(false);
+  });
 });
 
 function makeDoc(expr) {

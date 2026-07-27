@@ -58,7 +58,7 @@ The following sections describe one model-object type at a time.
 
 ### 3.1 Constants
 
-`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a number or an expression and does not change during simulation unless a backend-specific mechanism changes it.
+`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a JSON number and does not change during simulation unless a backend-specific mechanism changes it.
 
 ```json
 {
@@ -268,17 +268,16 @@ Observables do not affect simulation.
 
 Expressions are mathematical formulas. They may occur at the following JSON paths:
 
-- `constants[].value`;
-- `dynamic[].initial`;
+- `dynamic[].initial`: may reference constants only;
 - `dynamic[].derivative`;
-- `static[].initial`;
-- `assignments[].rhs`;
-- `timeEvents[].trigger.start`;
-- `timeEvents[].trigger.period`;
-- `timeEvents[].trigger.stop`;
+- `static[].initial`: may reference constants only;
+- `assignments[].rhs`: dependencies must be ordered and non-circular;
+- `timeEvents[].trigger.start`: may reference constants only;
+- `timeEvents[].trigger.period`: may reference constants only;
+- `timeEvents[].trigger.stop`: may reference constants only;
 - `timeEvents[].actions[].rhs`;
 - `events[].trigger.rhs`;
-- `events[].actions[].rhs`.
+- `events[].actions[].rhs`;
 
 The canonical DynMS representation is a MathJSON expression object:
 
@@ -356,7 +355,7 @@ At each solver step:
 
 ### 5.4 Time variable
 
-The time variable `t` is available globally during simulation and can be used in any expression.
+The time variable `t` is available globally during simulation. It may be used in derivatives, assignments, state-event triggers, and event actions; it must not be used in state initial values or time-trigger fields.
 
 ---
 

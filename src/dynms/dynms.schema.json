@@ -126,7 +126,7 @@
           "$ref": "#/$defs/identifier"
         },
         "value": {
-          "$ref": "#/$defs/value"
+          "type": "number"
         },
         "title": {
           "type": "string"
