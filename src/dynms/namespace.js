@@ -302,7 +302,7 @@ function _sort_expressions_by_dependency(exprs = []) {
     // Actualy is is already checked in checkCircRecord, but just in case
     // Maybe later we will use only one check here or in checkCircRecord, not both
     try {
-        graph.sort();
+        var sortedGraph = graph.sort().reverse(); // independent should be at the beginning
     } catch(err) { // catch cycling
         let infoLine = err.circular
             .map((id) => `  ${id} ~ ${exprs.find(([exprId]) => exprId === id)[1].toString()};`)
@@ -312,26 +312,9 @@ function _sort_expressions_by_dependency(exprs = []) {
         throw error;
     }
 
-    // TopoSort does not retain insertion order for independent vertices. Keep
-    // the source order for such expressions so DynMS output is reproducible.
-    let expressionIds = new Set(exprs.map(([id]) => id));
-    let dependencies = new Map(exprs.map(([id, expr]) => [
-        id,
-        expr.dependOn().filter((dependency) => expressionIds.has(dependency))
-    ]));
-    let sortedIds = [];
+    let sorter = (a, b) => {
+        return sortedGraph.indexOf(a[0]) - sortedGraph.indexOf(b[0]);
+    };
 
-    while (sortedIds.length < exprs.length) {
-        let next = exprs.find(([id]) => !sortedIds.includes(id)
-            && dependencies.get(id).every((dependency) => sortedIds.includes(dependency)));
-
-        // The graph was checked above, so this can only guard against an
-        // unexpected inconsistency between the two representations.
-        if (!next) {
-            throw new HetaLevelError('Circular dependency in expressions.');
-        }
-        sortedIds.push(next[0]);
-    }
-
-    return exprs.sort((a, b) => sortedIds.indexOf(a[0]) - sortedIds.indexOf(b[0]));
+    return exprs.sort(sorter);
 }

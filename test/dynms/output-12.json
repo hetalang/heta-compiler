@@ -73,22 +73,22 @@
   ],
   "assignments": [
     {
-      "id": "x1",
+      "id": "x2",
       "rhs": {
         "expr": [
           "Divide",
-          "x1_amt_",
+          "x2_amt_",
           "c1"
         ],
         "format": "math-json"
       }
     },
     {
-      "id": "x2",
+      "id": "x1",
       "rhs": {
         "expr": [
           "Divide",
-          "x2_amt_",
+          "x1_amt_",
           "c1"
         ],
         "format": "math-json"
