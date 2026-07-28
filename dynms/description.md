@@ -355,7 +355,7 @@ At each solver step:
 
 ### 5.4 Time variable
 
-The time variable `t` is available globally during simulation. It may be used in derivatives, assignments, state-event triggers, and event actions; it must not be used in state initial values or time-trigger fields.
+`t` is the special, globally available time variable. It is reserved and cannot be used as a model-component identifier; it may be used in derivatives, assignments, state-event triggers, and event actions, but not in initial values or time-trigger fields.
 
 ---
 
