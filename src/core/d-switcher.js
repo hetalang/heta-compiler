@@ -53,12 +53,7 @@ class DSwitcher extends _Switcher {
         q.trigger += '';
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
-          if (expr.hasBooleanResult()) {
-            this.trigger = expr; 
-          } else {
-            let msg = `DSwitcher trigger "${this.index}" should be a boolean expression.`;
-            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
-          }
+          this.trigger = expr;
         } catch (err) {
           let msg = this.index + ' ' + err.message + ` "${q.trigger}"`;
           logger && logger.error(msg, {type: 'ValidationError', space: this.space});
@@ -142,6 +137,12 @@ class DSwitcher extends _Switcher {
         logger.error(msg, {type: 'BindingError'});
       }
     });
+
+    if (this.trigger && !this.trigger.hasBooleanResult()) {
+      let msg = `DSwitcher trigger "${this.index}" should be a boolean expression.`;
+      logger.error(msg, {type: 'ValidationError', space: this.space});
+      this.errored = true;
+    }
   }
   /*
   Check units recursively for mathematical expressions

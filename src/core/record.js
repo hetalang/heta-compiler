@@ -93,12 +93,7 @@ class Record extends _Size {
           if (typeof x === 'string' || typeof x === 'number') {
             try { // this is for the cases of wrong ExprString structure
               let expr = Expression.fromString(x);
-              if (!expr.hasBooleanResult()) {
-                this.assignments[key] = expr;
-              } else {
-                let msg = `Record assignments "${this.index}" should be a numeric expression.`;
-                logger && logger.error(msg, {type: 'ValidationError', space: this.space});
-              }
+              this.assignments[key] = expr;
             } catch (e) {
               let msg = this.index + ': '+ e.message + ` in "${x.toString()}"`;
               logger && logger.error(msg, {type: 'ValidationError', space: this.space});
@@ -222,6 +217,12 @@ class Record extends _Size {
           logger.error(msg, {type: 'BindingError'});
         }
       });
+
+      if (mathExpr.hasBooleanResult()) {
+        let msg = `Record assignments "${this.index}" should be a numeric expression.`;
+        logger.error(msg, {type: 'ValidationError', space: this.space});
+        this.errored = true;
+      }
     }
   }
   toQ(options = {}){

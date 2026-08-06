@@ -48,12 +48,7 @@ class CSwitcher extends _Switcher {
       } else if (typeof q.trigger !== 'undefined') {
         try { // this is for the cases of wrong ExprString structure
           let expr = Expression.fromString(q.trigger);
-          if (!expr.hasBooleanResult()) {
-            this.trigger = expr;
-          } else {
-            let msg = `CSwitcher trigger "${this.index}" should be a numeric expression.`;
-            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
-          }
+          this.trigger = expr;
         } catch (err) {
           let msg = this.index + ' ' + err.message + ` "${q.trigger}"`;
           logger && logger.error(msg, {type: 'ValidationError', space: this.space});
@@ -137,6 +132,12 @@ class CSwitcher extends _Switcher {
         logger.error(msg, {type: 'BindingError'});
       }
     });
+
+    if (this.trigger && this.trigger.hasBooleanResult()) {
+      let msg = `CSwitcher trigger "${this.index}" should be a numeric expression.`;
+      logger.error(msg, {type: 'ValidationError', space: this.space});
+      this.errored = true;
+    }
   }
   /*
   Check units recursively for mathematical expressions

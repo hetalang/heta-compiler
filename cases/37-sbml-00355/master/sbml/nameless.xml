@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-06T09:36:17.417Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless"
+    >
+    
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="lessthan">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><lt/><ci>x</ci><ci>y</ci></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_second" name="second">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_litre" name="litre">
+  <listOfUnits>
+    <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    <unitDefinition id="_mole" name="mole">
+  <listOfUnits>
+    <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="C"
+        name="C"
+        constant="false"
+        size="1"
+        units="_litre"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="S1"
+        name="S1"
+        compartment="C"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        substanceUnits="_mole"
+        >
+      </species>
+      <species
+        id="S2"
+        name="S2"
+        compartment="C"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        substanceUnits="_mole"
+        >
+      </species>
+      <species
+        id="S3"
+        name="S3"
+        compartment="C"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        substanceUnits="_mole"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.75"
+        >
+      </parameter>
+      <parameter
+        id="k2"
+        constant="true"
+        value="0.25"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="S1"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><cn>1</cn><ci>C</ci></apply></math>
+      </initialAssignment>
+      <initialAssignment
+        symbol="S2"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><cn>2</cn><ci>C</ci></apply></math>
+      </initialAssignment>
+      <initialAssignment
+        symbol="S3"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><cn>1</cn><ci>C</ci></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  
+    <listOfReactions>
+      <reaction
+        id="reaction1"
+        name="reaction1"
+        reversible="false"
+        fast="false"
+        >
+        <listOfReactants>
+          <speciesReference species="S1" stoichiometry="1"/>
+          <speciesReference species="S2" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S3" stoichiometry="1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><times/><ci>C</ci><ci>k1</ci></apply><ci>S1</ci></apply><ci>S2</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+      <reaction
+        id="reaction2"
+        name="reaction2"
+        reversible="false"
+        fast="false"
+        >
+        <listOfReactants>
+          <speciesReference species="S3" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="S1" stoichiometry="1"/>
+          <speciesReference species="S2" stoichiometry="1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>C</ci><ci>k2</ci></apply><ci>S3</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+    <listOfEvents>
+      <event
+        id="event1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><ci>lessthan</ci><ci>S1</ci><cn>0.5</cn></apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="S2"
+            >
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.2</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

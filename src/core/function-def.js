@@ -63,13 +63,7 @@ class FunctionDef extends Top {
     if (!!q.math) {
       try {
         var expr = Expression.fromString(q.math);
-        if (!expr.hasBooleanResult()) {
-          this.math = expr;
-        } else {
-          let msg = `Function math "${this.id}" should be a numeric expression.`;
-          logger?.error(msg, {type: 'ValidationError'});
-          this.errored = true;
-        }
+        this.math = expr;
       } catch (e) {
         let msg = this.id + ': '+ e.message + ` in "${q.math.toString()}"`;
         logger?.error(msg, {type: 'ValidationError'});

@@ -68,3 +68,33 @@ describe('Proper binding of functionDefinition', () => {
   
   //it('Debugging', () => console.log(c1.hetaErrors()));
 });
+
+describe('Boolean function definitions', () => {
+  it('allows a boolean function in a DSwitcher trigger', () => {
+    const container = new Container();
+    container.loadMany([
+      { id: 'less', action: 'defineFunction', arguments: ['x', 'y'], math: 'x < y' },
+      { id: 'isBelow', action: 'defineFunction', arguments: ['x', 'y'], math: 'less(x, y)' },
+      { id: 'sw1', class: 'DSwitcher', trigger: 'isBelow(1, 2)' }
+    ]);
+    container.knitMany();
+
+    expect(container.hetaErrors()).to.have.lengthOf(0);
+    expect(container.namespaceStorage.get('nameless').get('sw1').trigger.toString())
+      .to.equal('isBelow(1, 2)');
+  });
+
+  it('rejects a boolean function in numeric contexts', () => {
+    const container = new Container();
+    container.loadMany([
+      { id: 'less', action: 'defineFunction', arguments: ['x', 'y'], math: 'x < y' },
+      { id: 'cs1', class: 'CSwitcher', trigger: 'less(1, 2)' },
+      { id: 'rec1', class: 'Record', assignments: { start_: 'less(1, 2)' } }
+    ]);
+    container.knitMany();
+
+    let messages = container.hetaErrors().map((x) => x.msg);
+    expect(messages).to.include('CSwitcher trigger "cs1" should be a numeric expression.');
+    expect(messages).to.include('Record assignments "rec1" should be a numeric expression.');
+  });
+});

@@ -250,9 +250,9 @@ class Expression {
   /**
    * Checks whether the expression has a boolean result.
    *
-   * @returns {boolean} `true` for boolean operators or boolean constants.
+   * @returns {boolean} `true` for boolean operators, constants, or bound function definitions.
    */
-  hasBooleanResult(){
+  hasBooleanResult(visitedFunctionDefs = new Set()){
     const operators = [
       'smaller', 'smallerEq',
       'larger', 'largerEq',
@@ -266,6 +266,17 @@ class Expression {
       && operators.indexOf(node.fn) !== -1;
     let isBooleanValue = node.type === 'ConstantNode'
       && [true, false].indexOf(node.value) !== -1;
+    let isBooleanFunction = node.type === 'FunctionNode'
+      && node.fnObj
+      && !node.fnObj.isCore
+      && !visitedFunctionDefs.has(node.fnObj)
+      && node.fnObj.math;
+
+    if (isBooleanFunction) {
+      // Function references are attached during binding.
+      visitedFunctionDefs.add(node.fnObj);
+      return node.fnObj.math.hasBooleanResult(visitedFunctionDefs);
+    }
 
     return isBooleanOperator || isBooleanValue;
   }
