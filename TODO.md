@@ -22,9 +22,6 @@
 [x] Heta-code (Heta)
 [x] csv
 [x] DOT language / Graphviz
-[ ] ODEs in markdown/latex/ascii
-[ ] rxode2 (R)
-[ ] deSolve (R)
 [ ] PGF and TikZ
 [x] Summary
 [ ] Berkley Madonna
@@ -41,14 +38,13 @@
 
 ## ideas
 
-- use MathJSON https://mathlive.io/math-json/ or OpenMath https://openmath.org/ format for export
-- allow to use const expressions in `TimeSwitcher.start` and `TimeSwitcher.end`
+- use MathJSON https://mathlive.io/math-json/ format for math expressions
+- allow to use const expressions in `TimeSwitcher.start`, `TimeSwitcher.period` and `TimeSwitcher.stop`
 - support SBML's delay
 - AnyUnit for zero numbers
 - updating properties with `one::s1.assignments.start_ 5.5;`
 - check and warning if core component was replaced
 - check file format for modules
-- add "ignoreCompartment" property in Species
 - `@Dose` class to use with simbiology/mrgsolve/nonmem doses
 - stoichiometry as `@Const` and `@Record`
 
