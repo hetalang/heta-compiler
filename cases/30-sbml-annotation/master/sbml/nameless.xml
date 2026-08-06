@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:23.907Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-06T14:37:10.064Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -1208,12 +1208,6 @@
         >
       </parameter>
       <parameter
-        id="e1"
-        constant="false"
-        value="0"
-        >
-      </parameter>
-      <parameter
         id="k_NA_PE"
         constant="false"
         value="202"
@@ -1540,6 +1534,12 @@
       <parameter
         id="tid"
         constant="false"
+        value="0"
+        >
+      </parameter>
+      <parameter
+        id="e1"
+        constant="true"
         value="0"
         >
       </parameter>

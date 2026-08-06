@@ -3,14 +3,14 @@
     "action": "hasMeta",
     "generator": {
       "name": "heta-compiler",
-      "version": "0.12.0-beta.1"
+      "version": "0.12.1"
     },
-    "created": "2026-06-10T11:19:45.763Z",
+    "created": "2026-08-06T14:37:09.800Z",
     "platformId": "template",
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "2af7d219ec76b9c0e0c09f4fffa7d84de9552a250317c5417525cec4e2b90270",
+    "hashSum": "7293c467e7b158d2871b31a378c05626ddb1f2f0354b9d802ce864b565b47788",
     "hashAlgorithm": "sha256"
   },
   {
@@ -44,11 +44,9 @@
   },
   {
     "action": "upsert",
-    "assignments": {
-      "start_": "1"
-    },
-    "class": "Record",
+    "class": "Const",
     "id": "k1",
+    "num": 1,
     "title": "k1",
     "units": [
       {

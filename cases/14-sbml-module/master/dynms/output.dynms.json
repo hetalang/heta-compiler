@@ -3,9 +3,9 @@
   "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.0"
+    "version": "0.12.1"
   },
-  "created": "2026-07-17T09:08:28.785Z",
+  "created": "2026-08-06T14:37:09.865Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -13,7 +13,13 @@
   "models": [
     {
       "id": "nameless",
-      "constants": [],
+      "constants": [
+        {
+          "id": "k1",
+          "value": 1,
+          "title": "k1"
+        }
+      ],
       "dynamic": [
         {
           "id": "S1_amt_",
@@ -64,11 +70,6 @@
           "id": "compartment",
           "initial": 1,
           "title": "compartment"
-        },
-        {
-          "id": "k1",
-          "initial": 1,
-          "title": "k1"
         }
       ],
       "assignments": [

@@ -63,12 +63,10 @@
   },
   {
     "id": "k1",
-    "class": "Record",
+    "class": "Const",
     "title": "k1",
     "units": "_h",
-    "assignments": {
-      "start_": "1"
-    }
+    "num": 1
   },
   {
     "id": "event1",

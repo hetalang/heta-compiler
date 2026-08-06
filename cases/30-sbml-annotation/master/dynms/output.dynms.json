@@ -3,9 +3,9 @@
   "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.0"
+    "version": "0.12.1"
   },
-  "created": "2026-07-17T09:08:28.973Z",
+  "created": "2026-08-06T14:37:10.122Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -13,7 +13,12 @@
   "models": [
     {
       "id": "nameless",
-      "constants": [],
+      "constants": [
+        {
+          "id": "e1",
+          "value": 0
+        }
+      ],
       "dynamic": [
         {
           "id": "A_b_amt_",
@@ -1487,10 +1492,6 @@
         {
           "id": "b_NAT_Testis",
           "initial": 0.667
-        },
-        {
-          "id": "e1",
-          "initial": 0
         },
         {
           "id": "k_NA_PE",

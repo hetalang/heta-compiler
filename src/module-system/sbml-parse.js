@@ -33,6 +33,7 @@ function jsbmlToQArr(JSBML, options = {}) {
 
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
+  let sbmlLevel = Number.parseInt(sbml.attributes?.level);
 
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
@@ -144,7 +145,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .filter((x) => x.name === 'parameter')
     .forEach((x) => {
       let forceRecord = initialAssignmentsSymbols.indexOf(x.attributes?.id) >= 0;
-      let q = parameterToQ(x, unitDict, forceRecord);
+      let q = parameterToQ(x, unitDict, forceRecord, sbmlLevel);
       qArr.push(q);
     });
 
@@ -575,10 +576,12 @@ function reactionToQ(x){
   return qArr;
 }
 
-function parameterToQ(x, unitDict = {}, forceRecord = false){
+function parameterToQ(x, unitDict = {}, forceRecord = false, sbmlLevel){
   let q = baseToQ(x);
 
-  let isConstant = x.attributes?.constant === 'true';
+  // SBML Level 2 defaults an omitted constant attribute to true.
+  let isConstant = x.attributes?.constant === 'true'
+    || (sbmlLevel === 2 && x.attributes?.constant === undefined);
   let num = x.attributes?.value;
   if (isConstant && !forceRecord) {
     q.class = 'Const';

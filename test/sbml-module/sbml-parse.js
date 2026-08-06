@@ -135,3 +135,23 @@ describe('parse units', () => {
       ]);
   });
 });
+
+describe('parse parameter constant defaults', () => {
+  function parseParameter(level) {
+    let xml = `<sbml level="${level}" version="1"><model><listOfParameters><parameter id="p" value="1"/></listOfParameters></model></sbml>`;
+    return SBMLParse(xml).find((q) => q.id === 'p');
+  }
+
+  it('uses the Level 2 default constant=true', () => {
+    let parameter = parseParameter(2);
+
+    expect(parameter).to.include({ id: 'p', class: 'Const', num: 1 });
+  });
+
+  it('keeps an omitted Level 3 constant attribute as a Record', () => {
+    let parameter = parseParameter(3);
+
+    expect(parameter).to.include({ id: 'p', class: 'Record' });
+    expect(parameter).to.have.nested.property('assignments.start_', 1);
+  });
+});
