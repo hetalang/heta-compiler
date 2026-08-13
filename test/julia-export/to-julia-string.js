@@ -140,8 +140,8 @@ describe('Expression exports to Julia', () => {
     let expr = Expression.fromString('NaN*2');
     expect(expr.toJuliaString()).to.be.equal('NaN * 2e+0');
   });
-  it('toJuliaString() for "1*e/4"', () => {
-    let expr = Expression.fromString('1*e/4');
+  it('toJuliaString() for "1*exponentiale/4"', () => {
+    let expr = Expression.fromString('1*exponentiale/4');
     expect(expr.toJuliaString()).to.be.equal('1e+0 * exp(1.0) / 4e+0');
   });
   it('toJuliaString() for "x++y"', () => {

@@ -186,7 +186,7 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
 
     // SymbolNode
     if (node.type === 'SymbolNode') {
-      if (node.name === 'e') {
+      if (node.name === 'exponentiale') {
         return 'exp(1)';
       }
       if (node.name === 'pi') {

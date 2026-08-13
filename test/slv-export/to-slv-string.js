@@ -92,8 +92,8 @@ describe('Ternary operator in DBSolve', () => {
 
 
 describe('Pre-defined constants in toSLVString()', () => {
-  it('toSLVString("e*12")', () => {
-    let expr = Expression.fromString('e*12');
+  it('toSLVString("exponentiale*12")', () => {
+    let expr = Expression.fromString('exponentiale*12');
     expect(expr.toSLVString(null)).to.be.equal('exp(1) * 12');
   });
   it('toSLVString("x*pi")', () => {

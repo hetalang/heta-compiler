@@ -175,7 +175,7 @@ function _toMathJSON(node) {
     if (node.name === 'pi') {
       return 'Pi';
     }
-    if (node.name === 'e') {
+    if (node.name === 'exponentiale') {
       return 'ExponentialE';
     }
 

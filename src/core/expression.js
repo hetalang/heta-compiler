@@ -220,7 +220,7 @@ class Expression {
   /**
    * Lists unique symbols used by the expression.
    *
-   * @returns {string[]} Symbol names excluding function names and constants `e`, `pi`.
+  * @returns {string[]} Symbol names excluding function names and constants `exponentiale`, `pi`.
    */
   dependOn(){
     let res = this.dependOnNodes().map((node) => node.name);
@@ -229,12 +229,12 @@ class Expression {
   /**
    * Lists symbol nodes used by the expression.
    *
-   * @returns {math.SymbolNode[]} Symbol nodes excluding function names and constants `e`, `pi`.
+  * @returns {math.SymbolNode[]} Symbol nodes excluding function names and constants `exponentiale`, `pi`.
    */
   dependOnNodes(){
     return this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'SymbolNode' && path !== 'fn')
-      .filter((node) => ['e', 'pi'].indexOf(node.name) === -1);
+      .filter((node) => ['exponentiale', 'pi'].indexOf(node.name) === -1);
   }
   /**
    * Lists function calls used by the expression.

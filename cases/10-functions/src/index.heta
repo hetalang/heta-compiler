@@ -68,5 +68,5 @@ to08 @Record 'false? y1 : y2' := false ? y1 : y2;
 bo01 @Record '(x > y) and (x < z) ? y1 : y2' := (x > y) and (x < z) ? y1 : y2;
 
 // pre-defined constants
-pc01 @Record '2*e' := 2*e;
+pc01 @Record '2*exponentiale' := 2*exponentiale;
 pc02 @Record '2*pi' := 2*pi;

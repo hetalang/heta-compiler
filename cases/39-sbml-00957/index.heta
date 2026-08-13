@@ -66,5 +66,5 @@ P24 @Record := arctanh(-0.7); // !
 P25 @Record := arcsech(0.42); // !
 P26 @Record := arccsch(0.01); // !
 P27 @Record := arccoth(8.2); // !
-P28 @Record := e;
-P29 @Record := exp(e);
+P28 @Record := exponentiale;
+P29 @Record := exp(exponentiale);

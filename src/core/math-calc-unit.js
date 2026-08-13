@@ -241,7 +241,7 @@ function _calcUnit(_this, record) {
     // else
     return undefined; // cannot calculate
   } else if (_this.type === 'SymbolNode') {
-    if (_this.name === 'e' || _this.name === 'pi')
+    if (_this.name === 'exponentiale' || _this.name === 'pi')
       return new Unit(); // dimensionless
     if (!_this.nameObj || typeof _this.nameObj.unitsParsed === 'undefined') {
       logger.warn(`Cannot check units consistency for "${record.index}" because no units found for "${_this.name}"`);

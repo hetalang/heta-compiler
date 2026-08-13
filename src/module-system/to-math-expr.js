@@ -214,7 +214,7 @@ function _toMathExpr(element, useParentheses = false) {
   } else if (element.name === 'false') {
     return 'false';
   } else if (element.name === 'exponentiale') {
-    return 'e';
+    return 'exponentiale';
   } else if (element.name === 'pi') {
     return 'pi';
   } else if (element.name === 'infinity') {

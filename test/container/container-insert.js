@@ -172,6 +172,10 @@ describe('Unit tests for Container', () => {
     });
 
     it('Insert with reserved word id.', () => {
+      c.insert({id: 'exponentiale', class: 'Const', num: 1});
+      expect(c.logger.hasErrors).to.be.true;
+      c.logger.resetErrors();
+
       c.insert({id: 'true', class: 'Const', num: 1});
       expect(c.logger.hasErrors).to.be.true;
       c.logger.resetErrors();

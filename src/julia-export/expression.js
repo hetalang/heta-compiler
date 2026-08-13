@@ -158,7 +158,7 @@ Expression.prototype.toJuliaString = function(substituteByDefinitions = true, tr
     }
 
     // SymbolNode
-    if (node.type === 'SymbolNode' && node.name === 'e') {
+    if (node.type === 'SymbolNode' && node.name === 'exponentiale') {
       return 'exp(1.0)';
     }
   };
