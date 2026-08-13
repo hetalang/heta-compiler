@@ -1,0 +1,70 @@
+#defineFunction cosh {
+    arguments: [x],
+    math: "0.5 * (exp(x) + exp(-x))"
+};
+#defineFunction sinh {
+    arguments: [x],
+    math: "0.5 * (exp(x) - exp(-x))"
+};
+#defineFunction arcsinh {
+    arguments: [x],
+    math: "ln(x + sqrt(x^2 + 1))"
+};
+#defineFunction arccosh {
+    arguments: [x],
+    math: "ln(x + sqrt(x^2 - 1))"
+};
+#defineFunction arctanh {
+    arguments: [x],
+    math: "0.5 * ln((1 + x) / (1 - x))"
+};
+#defineFunction arcsech {
+    arguments: [x],
+    math: "ln((1 + sqrt(1 - x^2)) / x)"
+};
+#defineFunction arccsch {
+    arguments: [x],
+    math: "ln(1 / x + sqrt(1 + 1 / x^2))"
+};
+#defineFunction arccoth {
+    arguments: [x],
+    math: "0.5 * ln((x + 1) / (x - 1))"
+};
+
+// Level 2
+#defineUnit volume { units: litre };
+//#defineUnit area { units: metre^2 };
+//#defineUnit length { units: metre };
+//#defineUnit substance { units: mole };
+#defineUnit time { units: second };
+
+t {units: time};
+
+P1 @Record := pi;
+P3 @Record := 1 > 0.5 ? 2 : 3;
+P4 @Record := 1 >= 0.5 ? 2 : 3;
+P5 @Record := 1 < 0.5 ? 2 : 3;
+P6 @Record := 1 <= 0.5 ? 2 : 3;
+P7 @Record := 1 == 0.5 ? 2 : 3;
+P8 @Record := 1 != 0.5 ? 2 : 3;
+P9 @Record := factorial(4);
+P10 @Record := true and false ? 2 : 3;
+P11 @Record := true or false ? 2 : 3;
+P12 @Record := true xor false ? 2 : 3;
+P13 @Record := not false ? 2 : 3;
+P14 @Record := sec(0.5);
+P15 @Record := csc(4.5);
+P16 @Record := cot(0.2);
+P17 @Record := sinh(0.3); // !
+P18 @Record := cosh(1.7); // !
+P19 @Record := asec(2.3);
+P20 @Record := acsc(1.1);
+P21 @Record := acot(-0.1);
+P22 @Record := arcsinh(99); // !
+P23 @Record := arccosh(1.34); // !
+P24 @Record := arctanh(-0.7); // !
+P25 @Record := arcsech(0.42); // !
+P26 @Record := arccsch(0.01); // !
+P27 @Record := arccoth(8.2); // !
+P28 @Record := e;
+P29 @Record := exp(e);
