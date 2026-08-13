@@ -561,7 +561,7 @@ _No additional properties_
 |MathExpr: boolean operators                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: ternary operator                              |+ |+ |+ |- |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: `piecewise` function                          |- |- |+ |- |+ |+ |+ |+ |+ |na |+ |
-|MathExpr: `e`, `pi`                                     |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
+|MathExpr: `exponentiale`, `pi`                          |+ |+ |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |MathExpr: `Infinity`, `NaN`                             |- |- |+ |+ |+ |+ |+ |+ |+ |na |+ |
 |Const: `Infinity`, `NaN`                                |- |- |+ |+ |+ |+ |+ |+ |+ |na |- |
 |`@Scenario` support                                     |- |- |- |- |- |- |- |+ |+ |na |- |
@@ -610,7 +610,7 @@ _Skipped cell means no conversion_
 |`ifle(x, y, z1, z2)`| |`x <= y ? z1 : z2`| |`tern__(x<=y, z1, z2)`|
 |`ifeq(x, y, z1, z2)`| |`x == y ? z1 : z2`| |`tern__(x==y, z1, z2)`|
 |`x ^ y`|`x ^ y` or `pow(x, y)`|`NaNMath.pow(x, y)`|`pow(x, y)`| `(x ^ y)` |
-|`e`|`exp(1)`|`exp(1.0)`| | |
+|`exponentiale`|`exp(1)`|`exp(1.0)`| | |
 |`pi`|`acos(-1)` | | | |
 |`Infinity`| |`Inf`| | |
 |`NaN`| |`NaN`| | |
@@ -657,7 +657,7 @@ _Conversion to SBML's MathML_
 |`ifle(x, y, z1, z2)`|not supported|
 |`ifeq(x, y, z1, z2)`|not supported|
 |`x ^ y`|`<apply><power/>(x) (y)</apply>`|
-|`e`|`<exponentiale/>`|
+|`exponentiale`|`<exponentiale/>`|
 |`pi`|`<pi/>`|
 |`Infinity`|`<infinity/>`|
 |`NaN`|`<notanumber/>`|
