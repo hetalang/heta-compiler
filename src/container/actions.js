@@ -5,7 +5,8 @@ const { Namespace } = require('../namespace');
 const reservedWords = [
   'include', 'block', 'namespace', 'abstract', 'concrete', 'begin', 'end',
   'NaN', 'Infinity',
-  'e', 'E', 'pi', 'PI',
+  'e', 'pi',
+  'true', 'false',
   'null'
 ];
 

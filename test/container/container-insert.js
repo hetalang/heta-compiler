@@ -170,5 +170,23 @@ describe('Unit tests for Container', () => {
       expect(c.logger.hasErrors).to.be.true;
       c.logger.resetErrors();
     });
+
+    it('Insert with reserved word id.', () => {
+      c.insert({id: 'true', class: 'Const', num: 1});
+      expect(c.logger.hasErrors).to.be.true;
+      c.logger.resetErrors();
+
+      c.insert({id: 'false', class: 'Const', num: 1});
+      expect(c.logger.hasErrors).to.be.true;
+      c.logger.resetErrors();
+
+      c.insert({id: 'NaN', class: 'Const', num: 1});
+      expect(c.logger.hasErrors).to.be.true;
+      c.logger.resetErrors();
+
+      c.insert({id: 'null', class: 'Const', num: 1});
+      expect(c.logger.hasErrors).to.be.true;
+      c.logger.resetErrors();
+    });
   });
 });
