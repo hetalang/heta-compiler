@@ -1,9 +1,5 @@
 # DynMS Change Log
 
-## 0.2.1
-
-- remove `Sign` from list of math functions
-
 ## 0.2.0
 
 - Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json`
