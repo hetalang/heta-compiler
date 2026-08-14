@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-14T09:05:01.355Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless"
+    >
+    
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="sinh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><minus/><apply><exp/><ci>x</ci></apply><apply><exp/><apply><minus/><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="cosh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><plus/><apply><exp/><ci>x</ci></apply><apply><exp/><apply><minus/><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="tanh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><apply><minus/><apply><exp/><apply><times/><cn>2</cn><ci>x</ci></apply></apply><cn>1</cn></apply><apply><plus/><apply><exp/><apply><times/><cn>2</cn><ci>x</ci></apply></apply><cn>1</cn></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="sech">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><cn>1</cn><apply><ci>cosh</ci><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="csch">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><cn>1</cn><apply><ci>sinh</ci><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="coth">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><divide/><cn>1</cn><apply><ci>tanh</ci><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arcsinh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><ci>x</ci><apply><root/><apply><plus/><apply><power/><ci>x</ci><cn>2</cn></apply><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arccosh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><ci>x</ci><apply><root/><apply><minus/><apply><power/><ci>x</ci><cn>2</cn></apply><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arctanh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><ln/><apply><divide/><apply><plus/><cn>1</cn><ci>x</ci></apply><apply><minus/><cn>1</cn><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arcsech">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><divide/><apply><plus/><cn>1</cn><apply><root/><apply><minus/><cn>1</cn><apply><power/><ci>x</ci><cn>2</cn></apply></apply></apply></apply><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arccsch">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><apply><divide/><cn>1</cn><ci>x</ci></apply><apply><root/><apply><plus/><cn>1</cn><apply><divide/><cn>1</cn><apply><power/><ci>x</ci><cn>2</cn></apply></apply></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="arccoth">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><ln/><apply><divide/><apply><plus/><ci>x</ci><cn>1</cn></apply><apply><minus/><ci>x</ci><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="sign">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <piecewise><piece><apply><minus/><cn>1</cn></apply><apply><lt/><ci>x</ci><cn>0</cn></apply></piece><piece><cn>1</cn><apply><gt/><ci>x</ci><cn>0</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="quotient">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><times/><apply><ci>sign</ci><apply><divide/><ci>x</ci><ci>y</ci></apply></apply><apply><floor/><apply><abs/><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="rem">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <bvar><ci> y </ci></bvar>
+            <apply><minus/><ci>x</ci><apply><times/><apply><times/><ci>y</ci><apply><ci>sign</ci><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply><apply><floor/><apply><abs/><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="implies">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> A </ci></bvar>
+            <bvar><ci> B </ci></bvar>
+            <apply><or/><apply><not/><ci>A</ci></apply><ci>B</ci></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+
+  
+    <listOfParameters>
+      <parameter
+        id="q_pos"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="q_neg"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="r_pos"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="r_neg"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="chk_impl_true"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="chk_impl_false"
+        constant="false"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="q_pos"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>quotient</ci><cn>7</cn><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="q_neg"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>quotient</ci><apply><minus/><cn>7</cn></apply><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="r_pos"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>rem</ci><cn>7</cn><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="r_neg"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>rem</ci><apply><minus/><cn>7</cn></apply><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="chk_impl_true"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>1</cn><apply><ci>implies</ci><apply><gt/><cn>3</cn><cn>2</cn></apply><apply><gt/><cn>10</cn><cn>3</cn></apply></apply></piece><otherwise><cn>0</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="chk_impl_false"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>1</cn><apply><ci>implies</ci><apply><gt/><cn>3</cn><cn>2</cn></apply><apply><lt/><cn>10</cn><cn>3</cn></apply></apply></piece><otherwise><cn>0</cn></otherwise></piecewise></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+  
+  </model>
+</sbml>

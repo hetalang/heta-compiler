@@ -175,9 +175,6 @@ function _calcUnit(_this, record) {
       }
       return new Unit();
     }
-    if (_this.fn.name === 'sign') { // sign()
-      return new Unit();
-    }
     if (_this.fn.name === 'ifgt' || _this.fn.name === 'ifge' || _this.fn.name === 'iflt' || _this.fn.name === 'ifle' || _this.fn.name === 'ifeq') {
       let isEqual0 = argUnit[0].equal(argUnit[1], true);
       if (!isEqual0) {

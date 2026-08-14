@@ -30,7 +30,6 @@ const FUNCTION_MAP = {
   max: 'Max',
   min: 'Min',
   sec: 'Sec',
-  sign: 'Sign',
   sin: 'Sin',
   sqrt: 'Sqrt',
   tan: 'Tan',

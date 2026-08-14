@@ -1,0 +1,16 @@
+/*
+  template file for creating platform
+*/
+//include ./qsp-units.heta;
+include ./qsp-functions.heta;
+
+// simple checks for custom helper functions
+
+q_pos @Record := quotient(7, 3);
+q_neg @Record := quotient(-7, 3);
+
+r_pos @Record := rem(7, 3);
+r_neg @Record := rem(-7, 3);
+
+chk_impl_true @Record := implies(3 > 2, 10 > 3) ? 1 : 0;
+chk_impl_false @Record := implies(3 > 2, 10 < 3) ? 1 : 0;

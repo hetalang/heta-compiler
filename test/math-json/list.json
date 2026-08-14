@@ -152,10 +152,6 @@
     "mathjson": ["Power", "x", 3]
   },
   {
-    "string": "sign(x)",
-    "mathjson": ["Sign", "x"]
-  },
-  {
     "string": "max(x, y, z)",
     "mathjson": ["Max", "x", "y", "z"]
   },

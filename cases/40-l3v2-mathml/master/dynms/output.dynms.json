@@ -1,0 +1,276 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-14T09:05:01.381Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [],
+      "assignments": [
+        {
+          "id": "q_pos",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Which",
+                [
+                  "Less",
+                  [
+                    "Divide",
+                    7,
+                    3
+                  ],
+                  0
+                ],
+                -1,
+                [
+                  "Greater",
+                  [
+                    "Divide",
+                    7,
+                    3
+                  ],
+                  0
+                ],
+                1,
+                "True",
+                0
+              ],
+              [
+                "Floor",
+                [
+                  "Abs",
+                  [
+                    "Divide",
+                    7,
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "q_neg",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Which",
+                [
+                  "Less",
+                  [
+                    "Divide",
+                    -7,
+                    3
+                  ],
+                  0
+                ],
+                -1,
+                [
+                  "Greater",
+                  [
+                    "Divide",
+                    -7,
+                    3
+                  ],
+                  0
+                ],
+                1,
+                "True",
+                0
+              ],
+              [
+                "Floor",
+                [
+                  "Abs",
+                  [
+                    "Divide",
+                    -7,
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_pos",
+          "rhs": {
+            "expr": [
+              "Add",
+              7,
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  3,
+                  [
+                    "Which",
+                    [
+                      "Less",
+                      [
+                        "Divide",
+                        7,
+                        3
+                      ],
+                      0
+                    ],
+                    -1,
+                    [
+                      "Greater",
+                      [
+                        "Divide",
+                        7,
+                        3
+                      ],
+                      0
+                    ],
+                    1,
+                    "True",
+                    0
+                  ],
+                  [
+                    "Floor",
+                    [
+                      "Abs",
+                      [
+                        "Divide",
+                        7,
+                        3
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r_neg",
+          "rhs": {
+            "expr": [
+              "Add",
+              -7,
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  3,
+                  [
+                    "Which",
+                    [
+                      "Less",
+                      [
+                        "Divide",
+                        -7,
+                        3
+                      ],
+                      0
+                    ],
+                    -1,
+                    [
+                      "Greater",
+                      [
+                        "Divide",
+                        -7,
+                        3
+                      ],
+                      0
+                    ],
+                    1,
+                    "True",
+                    0
+                  ],
+                  [
+                    "Floor",
+                    [
+                      "Abs",
+                      [
+                        "Divide",
+                        -7,
+                        3
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "chk_impl_true",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Or",
+                [
+                  "Not",
+                  [
+                    "Greater",
+                    3,
+                    2
+                  ]
+                ],
+                [
+                  "Greater",
+                  10,
+                  3
+                ]
+              ],
+              1,
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "chk_impl_false",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Or",
+                [
+                  "Not",
+                  [
+                    "Greater",
+                    3,
+                    2
+                  ]
+                ],
+                [
+                  "Less",
+                  10,
+                  3
+                ]
+              ],
+              1,
+              0
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

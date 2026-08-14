@@ -109,8 +109,9 @@ class FunctionDef extends Top {
         functionNode.fnObj = target; // used for units checking
       }
 
-      // check arguments in functionNode
-      if (target && functionNode.args.length < target.arguments.length) {
+      // check arguments in functionNode only for fixed-arity functions.
+      // Variadic functions (e.g. piecewise) may not define `arguments`.
+      if (target?.arguments && functionNode.args.length < target.arguments.length) {
         let msg = `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
         logger?.error(msg, {type: 'BindingError'});
       }

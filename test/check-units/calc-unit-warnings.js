@@ -33,7 +33,6 @@ let qArr = [
   {id: 'y6', class: 'Record', assignments: {start_: 'square(k2+k1)*cube(x4)*sqrt(x1a)'}},
   {id: 'y7', class: 'Record', assignments: {start_: 'nthRoot(4,x4)'}},
   {id: 'y8', class: 'Record', assignments: {start_: 'logbase(2, k2)'}},
-  {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3 + 1.1)'}},
   {id: 'y10', class: 'Record', assignments: {start_: 'ifge(k1,k2,k3,k4)'}},
   {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2,k3,k4)'}},
   // no units set
@@ -248,15 +247,6 @@ describe('Testing warnings of checkUnits()', () => {
     let unit = expr.calcUnit(y8);
     expect(unit.toString()).to.be.equal('dimensionless');
     expect(p.defaultLogs).to.be.lengthOf(1); //second arguments of log() must be dimensionless
-    p.defaultLogs.length = 0; // RESET
-  });
-
-  it('functions: sign', () => {
-    let y9 = p.namespaceStorage.get('nameless').get('y9');
-    let expr = y9.assignments.start_;
-    let unit = expr.calcUnit(y9).toString();
-    expect(unit).to.be.equal('dimensionless');
-    expect(p.defaultLogs).to.be.lengthOf(1); // "(1e-3 mole)/litre vs 1"
     p.defaultLogs.length = 0; // RESET
   });
 

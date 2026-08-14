@@ -32,7 +32,6 @@ p11 @Record 'log10(x)' := log10(x);
 p12 @Record 'log2(x)' := log2(x);
 p13 @Record 'multiply(x, y)' := multiply(x, y);
 p14 @Record 'pow(x, y)' := "pow(x, y)";
-p15 @Record 'sign(x)' := sign(x);
 p16 @Record 'sqrt(x)' := sqrt(x);
 p17 @Record 'nthRoot(x)' := nthRoot(x);
 p18 @Record 'nthRoot(x, n)' := nthRoot(x, n);

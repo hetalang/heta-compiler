@@ -208,10 +208,6 @@
         "arguments": ["x", "y"]
     },
     {
-        "id": "sign", "action": "defineFunction",
-        "arguments": ["x"]
-    },
-    {
         "id": "sqrt", "action": "defineFunction",
         "arguments": ["x"]
     },
