@@ -133,7 +133,7 @@ function _toMathExpr(element, useParentheses = false) {
   } else if (element.name === 'apply' && element.elements[0].name === 'arcsec') {
     let arg = _toMathExpr(element.elements[1]);
     return `asec(${arg})`;
-  // hyperbolic arccsch(x)
+  // inverse hyperbolic functions
   } else if (element.name === 'apply' && element.elements[0].name === 'arcsinh') {
     let arg = _toMathExpr(element.elements[1]);
     return `asinh(${arg})`;

@@ -6,27 +6,27 @@
     arguments: [x],
     math: "0.5 * (exp(x) - exp(-x))"
 };
-#defineFunction arcsinh {
+#defineFunction asinh {
     arguments: [x],
     math: "ln(x + sqrt(x^2 + 1))"
 };
-#defineFunction arccosh {
+#defineFunction acosh {
     arguments: [x],
     math: "ln(x + sqrt(x^2 - 1))"
 };
-#defineFunction arctanh {
+#defineFunction atanh {
     arguments: [x],
     math: "0.5 * ln((1 + x) / (1 - x))"
 };
-#defineFunction arcsech {
+#defineFunction asech {
     arguments: [x],
     math: "ln((1 + sqrt(1 - x^2)) / x)"
 };
-#defineFunction arccsch {
+#defineFunction acsch {
     arguments: [x],
     math: "ln(1 / x + sqrt(1 + 1 / x^2))"
 };
-#defineFunction arccoth {
+#defineFunction acoth {
     arguments: [x],
     math: "0.5 * ln((x + 1) / (x - 1))"
 };
@@ -60,11 +60,11 @@ P18 @Record := cosh(1.7); // !
 P19 @Record := asec(2.3);
 P20 @Record := acsc(1.1);
 P21 @Record := acot(-0.1);
-P22 @Record := arcsinh(99); // !
-P23 @Record := arccosh(1.34); // !
-P24 @Record := arctanh(-0.7); // !
-P25 @Record := arcsech(0.42); // !
-P26 @Record := arccsch(0.01); // !
-P27 @Record := arccoth(8.2); // !
+P22 @Record := asinh(99); // !
+P23 @Record := acosh(1.34); // !
+P24 @Record := atanh(-0.7); // !
+P25 @Record := asech(0.42); // !
+P26 @Record := acsch(0.01); // !
+P27 @Record := acoth(8.2); // !
 P28 @Record := exponentiale;
 P29 @Record := exp(exponentiale);

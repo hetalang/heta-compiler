@@ -1,6 +1,7 @@
 /* global describe, it */
 const { expect } = require('chai');
 const { SBMLParse } = require('../../src/module-system/sbml-parse');
+const { _toMathExpr } = require('../../src/module-system/to-math-expr');
 const fs = require('fs');
 const path = require('path');
 
@@ -59,6 +60,25 @@ describe('test sbmlParse() operators', () => {
   res.forEach((x, i) => {
     it('Expect: ' + master[i].expectation, () => {
       expect(x).to.have.nested.property('assignments.ode_', master[i].expectation);
+    });
+  });
+});
+
+describe('inverse hyperbolic MathML functions', () => {
+  const functionNames = ['asinh', 'acosh', 'atanh', 'acoth', 'asech', 'acsch'];
+
+  functionNames.forEach((functionName) => {
+    it(`imports arc${functionName.slice(1)}() as ${functionName}()`, () => {
+      const mathMLName = `arc${functionName.slice(1)}`;
+      const expression = _toMathExpr({
+        name: 'apply',
+        elements: [
+          { name: mathMLName },
+          { name: 'ci', elements: [{ text: 'x' }] }
+        ]
+      });
+
+      expect(expression).to.equal(`${functionName}(x)`);
     });
   });
 });

@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "6c9096570c352b1a25542e6938e551fe7d95f8b3608ccaee561a34c2b680908f",
+    "hashSum": "cf7c0b2c21652131d1117929ed202af0e9b7394174a34e959b9b0b45fda9fbe2",
     "hashAlgorithm": "sha256"
   },
   {
@@ -35,7 +35,7 @@
     "arguments": [
       "x"
     ],
-    "id": "arccosh",
+    "id": "acosh",
     "math": "ln(x + sqrt(x ^ 2 - 1))"
   },
   {
@@ -43,7 +43,7 @@
     "arguments": [
       "x"
     ],
-    "id": "arccoth",
+    "id": "acoth",
     "math": "0.5 * ln((x + 1) / (x - 1))"
   },
   {
@@ -51,7 +51,7 @@
     "arguments": [
       "x"
     ],
-    "id": "arccsch",
+    "id": "acsch",
     "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
   },
   {
@@ -59,7 +59,7 @@
     "arguments": [
       "x"
     ],
-    "id": "arcsech",
+    "id": "asech",
     "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
   },
   {
@@ -67,7 +67,7 @@
     "arguments": [
       "x"
     ],
-    "id": "arcsinh",
+    "id": "asinh",
     "math": "ln(x + sqrt(x ^ 2 + 1))"
   },
   {
@@ -75,7 +75,7 @@
     "arguments": [
       "x"
     ],
-    "id": "arctanh",
+    "id": "atanh",
     "math": "0.5 * ln((1 + x) / (1 - x))"
   },
   {

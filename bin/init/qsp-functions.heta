@@ -37,32 +37,32 @@
 
 // inverse hyperbolic functions
 
-#defineFunction arcsinh {
+#defineFunction asinh {
     arguments: [x],
     math: "ln(x + sqrt(x^2 + 1))"
 };
 
-#defineFunction arccosh {
+#defineFunction acosh {
     arguments: [x],
     math: "ln(x + sqrt(x^2 - 1))"
 };
 
-#defineFunction arctanh {
+#defineFunction atanh {
     arguments: [x],
     math: "0.5 * ln((1 + x) / (1 - x))"
 };
 
-#defineFunction arcsech {
+#defineFunction asech {
     arguments: [x],
     math: "ln((1 + sqrt(1 - x^2)) / x)"
 };
 
-#defineFunction arccsch {
+#defineFunction acsch {
     arguments: [x],
     math: "ln(1 / x + sqrt(1 + 1 / x^2))"
 };
 
-#defineFunction arccoth {
+#defineFunction acoth {
     arguments: [x],
     math: "0.5 * ln((x + 1) / (x - 1))"
 };
