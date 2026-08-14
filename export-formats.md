@@ -594,7 +594,6 @@ _Skipped cell means no conversion_
 |`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`| |`(log(x)/log(2))`|
 |`multiply(x, y)`|`x * y`|`*(x, y)`| | |
 |`pow(x, y)`| `pow(x, y)` or `x ^ y`|`NaNMath.pow(x, y)`| |`power(x, y)`|
-|`sign(x)`| | | | |
 |`sqrt(x)`| |`NaNMath.sqrt(x)`| | |
 |`nthRoot(x, n)`|`pow(x, 1 / n)` or `x ^ (1 / n)`|`NaNMath.pow(x, 1/(n))`| | |
 |`square(x)`|`pow(x, 2)` or `x ^ 2`|`NaNMath.pow(x, 2)`| | |
@@ -641,7 +640,6 @@ _Conversion to SBML's MathML_
 |`log2(x)`|`<apply><log/><logbase><cn>2</cn></logbase>(x)</apply>`|
 |`multiply(x, y)`|`<apply><times/>(x) (y)</apply>`|
 |`pow(x, y)`|`<apply><power/>(x) (y)</apply>`|
-|`sign(x)`|`<apply><sign/>(x)</apply>`|
 |`sqrt(x)`|`<apply><root/>(x)</apply>`|
 |`nthRoot(x, n)`|`<apply><root/><degree>(n)</degree>(x)</apply>`|
 |`square(x)`|`<apply><power/>(x)<cn>2</cn></apply>`|

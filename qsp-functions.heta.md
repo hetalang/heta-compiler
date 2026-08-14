@@ -17,8 +17,8 @@ The `qsp-functions.heta` file contains a curated list of additional functions sp
 
 ## Best Practices
 
-2. Organize new functions in dedicated files or include them in the main `index.heta` for better maintainability.
-3. Keep the `qsp-functions.heta` file intact to ensure a consistent and predictable setup for your project.
+1. Organize new functions in dedicated files or include them in the main `index.heta` for better maintainability.
+2. Keep the `qsp-functions.heta` file intact to ensure a consistent and predictable setup for your project.
 
 ## Content
 
@@ -91,6 +91,33 @@ The `qsp-functions.heta` file contains a curated list of additional functions sp
 #defineFunction arccoth {
     arguments: [x],
     math: "0.5 * ln((x + 1) / (x - 1))"
+};
+
+// numeric helpers
+
+#defineFunction sign {
+    arguments: [x],
+    math: "piecewise(-1, x < 0, 1, x > 0, 0)"
+};
+
+// integer division helpers
+
+#defineFunction quotient {
+    arguments: [x, y],
+    math: "sign(x / y) * floor(abs(x / y))"
+};
+
+#defineFunction rem {
+    arguments: [x, y],
+    math: "x - y * sign(x / y) * floor(abs(x / y))"
+};
+
+
+// logical helpers
+
+#defineFunction implies {
+    arguments: [A, B],
+    math: "(not A) or B"
 };
 ```
 
