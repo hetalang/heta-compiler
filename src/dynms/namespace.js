@@ -269,7 +269,7 @@ function _substitute(topNode, namespace) {
     return topNode.transform((node, path, parent) => {
         if (node.isSymbolNode && path !== 'fn') {
             let componentObj = namespace.get(node.name);
-            if (componentObj.instanceOf('Record')) {
+            if (componentObj?.instanceOf('Record')) {
                 if (!componentObj.isRule) {
                     let initialAssignment = componentObj.assignments['start_'];
                     let num = initialAssignment.num;

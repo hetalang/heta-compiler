@@ -1,0 +1,36 @@
+{
+  "id": "nameless",
+  "constants": [],
+  "dynamic": [],
+  "static": [
+    {
+      "id": "pi_value",
+      "initial": {
+        "expr": "Pi",
+        "format": "math-json"
+      }
+    },
+    {
+      "id": "e_value",
+      "initial": {
+        "expr": "ExponentialE",
+        "format": "math-json"
+      }
+    },
+    {
+      "id": "product",
+      "initial": {
+        "expr": [
+          "Multiply",
+          "Pi",
+          "ExponentialE"
+        ],
+        "format": "math-json"
+      }
+    }
+  ],
+  "assignments": [],
+  "timeEvents": [],
+  "events": [],
+  "observables": []
+}

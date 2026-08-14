@@ -1,0 +1,3 @@
+pi_value @Record .= pi;
+e_value @Record .= exponentiale;
+product @Record .= pi * exponentiale;
