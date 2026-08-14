@@ -312,7 +312,7 @@ For associative operators (`Add`, `Multiply`, `And`, `Or`, and `Xor`), heta-comp
 The permitted MathJSON function and operator names are:
 
 - arithmetic: `Add`, `Divide`, `Multiply`, `Negate`, `Power`, `Root`, `Square`;
-- elementary functions: `Abs`, `Ceil`, `Exp`, `Factorial`, `Floor`, `Lb`, `Lg`, `Ln`, `Log`, `Max`, `Min`, `Sign`, `Sqrt`;
+- elementary functions: `Abs`, `Ceil`, `Exp`, `Factorial`, `Floor`, `Lb`, `Lg`, `Ln`, `Log`, `Max`, `Min`, `Sqrt`;
 - trigonometric functions: `Arccos`, `Arccot`, `Arccsc`, `Arcsec`, `Arcsin`, `Arctan`, `Cos`, `Cot`, `Csc`, `Sec`, `Sin`, `Tan`;
 - comparison and logic: `And`, `Equal`, `Greater`, `GreaterEqual`, `Less`, `LessEqual`, `Not`, `NotEqual`, `Or`, `Xor`;
 - conditional expressions: `If`, `Which`.
