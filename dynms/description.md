@@ -58,7 +58,7 @@ The following sections describe one model-object type at a time.
 
 ### 3.1 Constants
 
-`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a JSON number and does not change during simulation unless a backend-specific mechanism changes it.
+`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a JSON number and does not change during simulation unless a backend-specific mechanism changes it. Model constants are distinct from DynMS built-in symbols such as `Pi` and `ExponentialE`; built-in symbols are not listed in this array.
 
 ```json
 {
@@ -113,7 +113,7 @@ The `derivative` defines the ordinary differential equation for the state. Set o
 
 Some backends may not support static states. The model converter is responsible for checking backend capabilities and converting them when necessary.
 
-For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend only on constants and numeric literals, not on states or assignments.
+For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend on model constants, numeric literals, and built-in numeric symbols, but not on states or assignments.
 
 ```json
 {
@@ -170,7 +170,7 @@ Assignment values are globally available during simulation and may be used in de
 }
 ```
 
-`start`, `period`, and `stop` may be numbers or expressions evaluated at simulation start. A time-trigger expression may reference constants only; it must not reference states, assignments, or the time variable `t`.
+`start`, `period`, and `stop` may be numbers or expressions evaluated at simulation start. A time-trigger expression may reference model constants, numeric literals, and built-in numeric symbols; it must not reference states, assignments, or the time variable `t`.
 
 ```json
 {
@@ -268,13 +268,13 @@ Observables do not affect simulation.
 
 Expressions are mathematical formulas. They may occur at the following JSON paths:
 
-- `dynamic[].initial`: may reference constants only;
+- `dynamic[].initial`: may reference model constants, numeric literals, and built-in numeric symbols;
 - `dynamic[].derivative`;
-- `static[].initial`: may reference constants only;
+- `static[].initial`: may reference model constants, numeric literals, and built-in numeric symbols;
 - `assignments[].rhs`: dependencies must be ordered and non-circular;
-- `timeEvents[].trigger.start`: may reference constants only;
-- `timeEvents[].trigger.period`: may reference constants only;
-- `timeEvents[].trigger.stop`: may reference constants only;
+- `timeEvents[].trigger.start`: may reference model constants, numeric literals, and built-in numeric symbols;
+- `timeEvents[].trigger.period`: may reference model constants, numeric literals, and built-in numeric symbols;
+- `timeEvents[].trigger.stop`: may reference model constants, numeric literals, and built-in numeric symbols;
 - `timeEvents[].actions[].rhs`;
 - `events[].trigger.rhs`;
 - `events[].actions[].rhs`;
@@ -317,7 +317,18 @@ The permitted MathJSON function and operator names are:
 - comparison and logic: `And`, `Equal`, `Greater`, `GreaterEqual`, `Less`, `LessEqual`, `Not`, `NotEqual`, `Or`, `Xor`;
 - conditional expressions: `If`, `Which`.
 
-Named constants and Boolean values, such as `Pi`, `ExponentialE`, `True`, and `False`, are represented as symbols rather than function calls.
+### 4.2.1 Built-in symbols
+
+The following reserved symbols are available in expressions and are not declared as model objects:
+
+| Symbol | Meaning | Allowed in initial values and time-trigger fields |
+|---|---|---|
+| `Pi` | The mathematical constant π | Yes |
+| `ExponentialE` | Euler's number *e* | Yes |
+| `True`, `False` | Boolean literals | Only where a Boolean expression is valid |
+| `t` | Simulation time | No |
+
+`Pi`, `ExponentialE`, `True`, and `False` are represented as symbols rather than function calls. Model identifiers must not use these reserved names.
 
 ### 4.3 Other expression formats
 
@@ -332,7 +343,7 @@ The schema also permits line-expression formats `heta`, `c`, `mrgsolve`, and `ju
 Before simulation starts:
 
 1. All constants are initialized with their specified values or external inputs.
-2. All dynamic and static states are initialized with their specified values or expressions depending on constants.
+2. All dynamic and static states are initialized with their specified values or expressions depending on model constants and built-in numeric symbols.
 3. Expressions in time-trigger fields (`start`, `stop`, and `period`) are evaluated.
 4. The backend may externally update `active` for any time event or state event.
 
@@ -392,7 +403,7 @@ In particular, time-event and state-event identifiers share the same identifier 
 
 Every reference must resolve within the same model and point to an object type allowed by its context.
 
-- Symbols in expressions must resolve to a constant, state, assignment, or the special time symbol `t`, unless a more restrictive rule below applies.
+- Symbols in expressions must resolve to a constant, state, assignment, the special time symbol `t`, or a built-in symbol listed in section 4.2.1, unless a more restrictive rule below applies.
 - `timeEvents[].actions[].state` and `events[].actions[].state` must reference an existing dynamic or static state.
 - `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.0.
 
@@ -402,7 +413,7 @@ Each dynamic state must have exactly one `derivative` expression. It defines an 
 
 ### 7.5 State initialization
 
-`dynamic[].initial` and `static[].initial` must be numbers or valid expressions that can be evaluated before simulation starts. An initial-value expression may reference constants only. It must not reference states, assignments, or the time symbol `t`.
+`dynamic[].initial` and `static[].initial` must be numbers or valid expressions that can be evaluated before simulation starts. An initial-value expression may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`. It must not reference states, assignments, or the time symbol `t`.
 
 ### 7.6 Assignments
 
@@ -410,7 +421,7 @@ Assignments must have no circular dependencies. They must be ordered so that eve
 
 ### 7.7 Time events
 
-Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference constants only; it must not reference states, assignments, or `t`.
+Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`; it must not reference states, assignments, or `t`.
 
 For periodic triggers, a computed `period` should be positive. A non-positive value retains the compatibility behavior defined in section 3.5 and is treated as a one-shot trigger.
 
