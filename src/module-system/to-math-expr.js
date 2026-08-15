@@ -51,7 +51,11 @@ function _toMathExpr(element, useParentheses = false) {
     return `not ${one}`;
   } else if(element.name === 'apply' && element.elements[0].name === 'times') {
     // A * B * C, <times>
-    let expr = element.elements.slice(1) // without first element
+    let args = element.elements.slice(1); // without first element
+    if (args.length <= 1) {
+      return `multiply(${args.map((x) => _toMathExpr(x)).join(', ')})`;
+    }
+    let expr = args
       .map((x) => _toMathExpr(x, true)).join(' * '); 
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && element.elements[0].name === 'divide') {
@@ -72,7 +76,11 @@ function _toMathExpr(element, useParentheses = false) {
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && element.elements[0].name === 'plus') {
     // A + B + C, <plus>
-    let expr = element.elements.slice(1)
+    let args = element.elements.slice(1);
+    if (args.length <= 1) {
+      return `add(${args.map((x) => _toMathExpr(x)).join(', ')})`;
+    }
+    let expr = args
       .map((x) => _toMathExpr(x, false)).join(' + '); // skip ()
     return useParentheses ? `(${expr})` : expr;
   } else if(element.name === 'apply' && element.elements[0].name === 'power') {

@@ -64,6 +64,27 @@ describe('test sbmlParse() operators', () => {
   });
 });
 
+describe('zero- and unary-arity MathML operators', () => {
+  [
+    { operator: 'plus', operands: [], expectation: 'add()' },
+    { operator: 'plus', operands: ['x'], expectation: 'add(x)' },
+    { operator: 'times', operands: [], expectation: 'multiply()' },
+    { operator: 'times', operands: ['x'], expectation: 'multiply(x)' }
+  ].forEach(({ operator, operands, expectation }) => {
+    it(`imports ${operator} with ${operands.length} operand(s)`, () => {
+      let expression = _toMathExpr({
+        name: 'apply',
+        elements: [
+          { name: operator },
+          ...operands.map((text) => ({ name: 'ci', elements: [{ text }] }))
+        ]
+      });
+
+      expect(expression).to.equal(expectation);
+    });
+  });
+});
+
 describe('inverse hyperbolic MathML functions', () => {
   const functionNames = ['asinh', 'acosh', 'atanh', 'acoth', 'asech', 'acsch'];
 
