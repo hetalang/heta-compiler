@@ -57,6 +57,17 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
           .map((arg) => arg.toString(options))
           .join(' + ');
       }
+      if (node.fn.name === 'multiply') {
+        if (node.args.length === 0) {
+          return '1.0';
+        }
+        if (node.args.length === 1) {
+          return node.args[0].toString(options);
+        }
+        return node.args
+          .map((arg) => arg.toString(options))
+          .join(' * ');
+      }
       if (node.fn.name === 'abs') {
         return `fabs(${node.args[0].toString(options)})`;
       }

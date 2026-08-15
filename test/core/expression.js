@@ -33,6 +33,18 @@ describe('Unit test for Expression.', () => {
     });
   });
 
+  it('Conversion of variadic "multiply" to CMathML.', () => {
+    let expected = {
+      'multiply()': '<apply><times/></apply>',
+      'multiply(x)': '<apply><times/><ci>x</ci></apply>',
+      'multiply(x, y)': '<apply><times/><ci>x</ci><ci>y</ci></apply>',
+      'multiply(x, y, z)': '<apply><times/><ci>x</ci><ci>y</ci><ci>z</ci></apply>'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toCMathML(true)).to.equal(output);
+    });
+  });
+
   it('Conversion of t (time) to CMathML.', () => {
     expect(Expression.fromString('1 * x * t').toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>1</cn><ci>x</ci></apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></math>');

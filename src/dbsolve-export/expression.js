@@ -57,6 +57,12 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
         return args;
       }
       if (node.fn.name==='multiply') {
+        if (node.args.length === 0) {
+          return '1';
+        }
+        if (node.args.length === 1) {
+          return node.args[0].toString(options);
+        }
         let args = node.args
           .map((arg) => arg.toString(options))
           .join(' * ');

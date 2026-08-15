@@ -201,7 +201,7 @@
     },
     {
         "id": "multiply", "action": "defineFunction",
-        "arguments": ["x", "y"]
+        "arguments": []
     },
     {
         "id": "pow", "action": "defineFunction",

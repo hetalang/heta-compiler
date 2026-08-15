@@ -39,6 +39,17 @@ describe('Expression exports to Julia', () => {
       expect(Expression.fromString(input).toJuliaString()).to.be.equal(output);
     });
   });
+  it('toJuliaString() for variadic "multiply"', () => {
+    let expected = {
+      'multiply()': '*()',
+      'multiply(x)': '*(x)',
+      'multiply(x, y)': '*(x, y)',
+      'multiply(x, y, z)': '*(x, y, z)'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toJuliaString()).to.be.equal(output);
+    });
+  });
   it('toJuliaString() for "square(x)"', () => {
     let expr = Expression.fromString('square(x)');
     expect(expr.toJuliaString()).to.be.equal('NaNMath.pow(x, 2)');

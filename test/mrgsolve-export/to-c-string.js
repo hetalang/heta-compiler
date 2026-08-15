@@ -15,6 +15,17 @@ describe('Expession exports to mrgsolve', () => {
       expect(Expression.fromString(input).toCString()).to.be.equal(output);
     });
   });
+  it('toCString() for variadic "multiply"', () => {
+    let expected = {
+      'multiply()': '1.0',
+      'multiply(x)': 'x',
+      'multiply(x, y)': 'x * y',
+      'multiply(x, y, z)': 'x * y * z'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toCString()).to.be.equal(output);
+    });
+  });
   it('toCString() for "x*y"', () => {
     let expr = Expression.fromString('x*y');
     expect(expr.toCString()).to.be.equal('x * y');

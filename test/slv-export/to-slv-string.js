@@ -16,6 +16,17 @@ describe('Expression exports to SLV', () => {
       expect(Expression.fromString(input).toSLVString()).to.be.equal(output);
     });
   });
+  it('toSLVString() for variadic "multiply"', () => {
+    let expected = {
+      'multiply()': '1',
+      'multiply(x)': 'x',
+      'multiply(x, y)': 'x * y',
+      'multiply(x, y, z)': 'x * y * z'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toSLVString()).to.be.equal(output);
+    });
+  });
 
   it('toSLVString(null, "keep") for "pow(x, y) + x^y"', () => {
     let expr = Expression.fromString('pow(x, y) + x^y');

@@ -17,6 +17,17 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
           .map((arg) => arg.toString(options))
           .join(' + ');
       }
+      if (node.fn.name==='multiply') {
+        if (node.args.length === 0) {
+          return '1';
+        }
+        if (node.args.length === 1) {
+          return node.args[0].toString(options);
+        }
+        return node.args
+          .map((arg) => arg.toString(options))
+          .join(' * ');
+      }
       if (node.fn.name==='pow') {
         return `power(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
       }

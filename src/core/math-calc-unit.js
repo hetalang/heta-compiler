@@ -118,6 +118,9 @@ function _calcUnit(_this, record) {
       return argUnit[0];
     }
     if (_this.fn.name === 'multiply') { // multiply()
+      if (argUnit.length === 0) {
+        return new Unit();
+      }
       return argUnit.slice(1).reduce(
         (accumulator, unit) => accumulator.multiply(unit),
         argUnit[0]

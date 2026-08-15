@@ -52,6 +52,18 @@
     "mathjson": ["Multiply", "x", "y"]
   },
   {
+    "string": "multiply()",
+    "mathjson": ["Multiply"]
+  },
+  {
+    "string": "multiply(x)",
+    "mathjson": ["Multiply", "x"]
+  },
+  {
+    "string": "multiply(x, y)",
+    "mathjson": ["Multiply", "x", "y"]
+  },
+  {
     "string": "multiply(x, y, z)",
     "mathjson": ["Multiply", "x", "y", "z"]
   },

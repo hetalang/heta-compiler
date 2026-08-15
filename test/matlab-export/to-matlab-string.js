@@ -16,6 +16,17 @@ describe('Expession exports', () => {
       expect(Expression.fromString(input).toMatlabString()).to.be.equal(output);
     });
   });
+  it('toMatlabString() for variadic "multiply"', () => {
+    let expected = {
+      'multiply()': '1',
+      'multiply(x)': 'x',
+      'multiply(x, y)': 'x * y',
+      'multiply(x, y, z)': 'x * y * z'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toMatlabString()).to.be.equal(output);
+    });
+  });
 
   it('toMatlabString() for "pow(x, y)"', () => {
     let expr = Expression.fromString('pow(x, y)');
