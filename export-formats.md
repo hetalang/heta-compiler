@@ -581,7 +581,9 @@ _Skipped cell means no conversion_
 | | SLV/DBSolve | Julia | Mrgsolve/R | Simbio/Matlab |
 |--|--|--|--|--|
 |`abs(x)`| | |`fabs(x)`| |
-|`add(x, y)`|`x + y`|`+(x, y)`| | |
+|`add()`|`0`|`+()`|`0.0`|`0`|
+|`add(x)`|`x`|`+(x)`|`x`|`x`|
+|`add(x, y, ...)`|`x + y + ...`|`+(x, y, ...)`|`x + y + ...`|`x + y + ...`|
 |`ceil(x)`| | | | |
 |`cube(x)`|`pow(x, 3) or x ^ 3`|`NaNMath.pow(x, 3)`| | |
 |`divide(x, y)`|`x / y`|`/(x, y)`| | |
@@ -627,7 +629,9 @@ _Conversion to SBML's MathML_
 | | SBML |
 |--|--|
 |`abs(x)`|`<apply><abs/>(x)</apply>`|
-|`add(x, y)`|`<apply><plus/>(x) (y)</apply>`|
+|`add()`|`<apply><plus/></apply>`|
+|`add(x)`|`<apply><plus/>(x)</apply>`|
+|`add(x, y, ...)`|`<apply><plus/>(x) (y) ...</apply>`|
 |`ceil(x)`|`<apply><ceiling/>(x)</apply>`|
 |`cube(x)`|`<apply><power/>(x)<cn>3</cn></apply>`|
 |`divide(x, y)`|`<apply><divide/>(x) (y)</apply>`|
