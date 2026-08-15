@@ -34,6 +34,12 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
         return `${arg0} ^ ${arg1}`;
       }
       if (node.fn.name==='add') {
+        if (node.args.length === 0) {
+          return '0';
+        }
+        if (node.args.length === 1) {
+          return node.args[0].toString(options);
+        }
         let args = node.args
           .map((arg) => {
             if (arg.type==='OperatorNode') {

@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-14T09:05:01.381Z",
+  "created": "2026-08-15T11:52:32.074Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -263,6 +263,104 @@
               ],
               1,
               0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "add0",
+          "rhs": {
+            "expr": [
+              "Add"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "add1",
+          "rhs": {
+            "expr": [
+              "Add",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "add2",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "add3",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "add4",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              2,
+              3,
+              4
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "plus1",
+          "rhs": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "plus2",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "plus3",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "plus4",
+          "rhs": {
+            "expr": [
+              "Add",
+              1,
+              2,
+              3,
+              4
             ],
             "format": "math-json"
           }

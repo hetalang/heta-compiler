@@ -46,6 +46,17 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
 
     // FunctionNode
     if (node.type === 'FunctionNode') {
+      if (node.fn.name === 'add') {
+        if (node.args.length === 0) {
+          return '0.0';
+        }
+        if (node.args.length === 1) {
+          return node.args[0].toString(options);
+        }
+        return node.args
+          .map((arg) => arg.toString(options))
+          .join(' + ');
+      }
       if (node.fn.name === 'abs') {
         return `fabs(${node.args[0].toString(options)})`;
       }

@@ -5,18 +5,58 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-14T09:05:01.353Z",
+    "created": "2026-08-15T11:52:32.015Z",
     "platformId": "template",
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "7dbf1c12fb2d175ee3ddf6d50f8fb7f7b4a3d71d817a7ac380ba5848746f5931",
+    "hashSum": "1c0afe07ab88fca71d20c38c90101528a463758f1905638a0a9745dab12a752b",
     "hashAlgorithm": "sha256"
   },
   {
     "action": "setNS",
     "space": "nameless",
     "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "add()"
+    },
+    "class": "Record",
+    "id": "add0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "add(1)"
+    },
+    "class": "Record",
+    "id": "add1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "add(1, 2)"
+    },
+    "class": "Record",
+    "id": "add2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "add(1, 2, 3)"
+    },
+    "class": "Record",
+    "id": "add3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "add(1, 2, 3, 4)"
+    },
+    "class": "Record",
+    "id": "add4"
   },
   {
     "action": "upsert",
@@ -33,6 +73,38 @@
     },
     "class": "Record",
     "id": "chk_impl_true"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Record",
+    "id": "plus1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 + 2"
+    },
+    "class": "Record",
+    "id": "plus2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 + 2 + 3"
+    },
+    "class": "Record",
+    "id": "plus3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 + 2 + 3 + 4"
+    },
+    "class": "Record",
+    "id": "plus4"
   },
   {
     "action": "upsert",

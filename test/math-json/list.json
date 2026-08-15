@@ -68,6 +68,18 @@
     "mathjson": ["Add", "x", "y", "z"]
   },
   {
+    "string": "add()",
+    "mathjson": ["Add"]
+  },
+  {
+    "string": "add(x)",
+    "mathjson": ["Add", "x"]
+  },
+  {
+    "string": "add(x, y)",
+    "mathjson": ["Add", "x", "y"]
+  },
+  {
     "string": "add(x, y, z)",
     "mathjson": ["Add", "x", "y", "z"]
   },

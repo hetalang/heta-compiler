@@ -4,6 +4,17 @@ require('../../src/mrgsolve-export/expression');
 const { expect } = require('chai');
 
 describe('Expession exports to mrgsolve', () => {
+  it('toCString() for variadic "add"', () => {
+    let expected = {
+      'add()': '0.0',
+      'add(x)': 'x',
+      'add(x, y)': 'x + y',
+      'add(x, y, z)': 'x + y + z'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toCString()).to.be.equal(output);
+    });
+  });
   it('toCString() for "x*y"', () => {
     let expr = Expression.fromString('x*y');
     expect(expr.toCString()).to.be.equal('x * y');

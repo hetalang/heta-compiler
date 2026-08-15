@@ -5,6 +5,18 @@ const { expect } = require('chai');
 
 describe('Expression exports to SLV', () => {
 
+  it('toSLVString() for variadic "add"', () => {
+    let expected = {
+      'add()': '0',
+      'add(x)': 'x',
+      'add(x, y)': 'x + y',
+      'add(x, y, z)': 'x + y + z'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toSLVString()).to.be.equal(output);
+    });
+  });
+
   it('toSLVString(null, "keep") for "pow(x, y) + x^y"', () => {
     let expr = Expression.fromString('pow(x, y) + x^y');
     expect(expr.toSLVString(null, 'keep')).to.be.equal('pow(x, y) + x ^ y');

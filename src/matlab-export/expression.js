@@ -6,6 +6,17 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
   let matlabStringHandler = (node, options) => {
     // FunctionNode
     if (node.type === 'FunctionNode') {
+      if (node.fn.name==='add') {
+        if (node.args.length === 0) {
+          return '0';
+        }
+        if (node.args.length === 1) {
+          return node.args[0].toString(options);
+        }
+        return node.args
+          .map((arg) => arg.toString(options))
+          .join(' + ');
+      }
       if (node.fn.name==='pow') {
         return `power(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;
       }

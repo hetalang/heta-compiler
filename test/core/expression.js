@@ -21,6 +21,18 @@ describe('Unit test for Expression.', () => {
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>x</ci><ci>y</ci></apply></math>');
   });
 
+  it('Conversion of variadic "add" to CMathML.', () => {
+    let expected = {
+      'add()': '<apply><plus/></apply>',
+      'add(x)': '<apply><plus/><ci>x</ci></apply>',
+      'add(x, y)': '<apply><plus/><ci>x</ci><ci>y</ci></apply>',
+      'add(x, y, z)': '<apply><plus/><ci>x</ci><ci>y</ci><ci>z</ci></apply>'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toCMathML(true)).to.equal(output);
+    });
+  });
+
   it('Conversion of t (time) to CMathML.', () => {
     expect(Expression.fromString('1 * x * t').toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>1</cn><ci>x</ci></apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></math>');
@@ -143,4 +155,5 @@ describe('Function definition substitution', () => {
     expect(expression.substituteByDefinitions().toString())
       .to.equal('(y + 1) ^ 2 + (y + 1) ^ 3');
   });
+
 });

@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-14T09:05:01.355Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-15T11:52:32.017Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -179,6 +179,51 @@
         constant="false"
         >
       </parameter>
+      <parameter
+        id="add0"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="add1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="add2"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="add3"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="add4"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="plus1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="plus2"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="plus3"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="plus4"
+        constant="false"
+        >
+      </parameter>
     </listOfParameters>
   
 <!-- BEGIN RULES -->
@@ -212,6 +257,51 @@
       variable="chk_impl_false"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>1</cn><apply><ci>implies</ci><apply><gt/><cn>3</cn><cn>2</cn></apply><apply><lt/><cn>10</cn><cn>3</cn></apply></apply></piece><otherwise><cn>0</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="add0"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="add1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><cn>1</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="add2"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><cn>1</cn><cn>2</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="add3"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><cn>1</cn><cn>2</cn><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="add4"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><cn>1</cn><cn>2</cn><cn>3</cn><cn>4</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="plus1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1</cn></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="plus2"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><cn>1</cn><cn>2</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="plus3"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><cn>1</cn><cn>2</cn></apply><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="plus4"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><cn>1</cn><cn>2</cn></apply><cn>3</cn></apply><cn>4</cn></apply></math>
     </assignmentRule>
   
   </listOfRules>

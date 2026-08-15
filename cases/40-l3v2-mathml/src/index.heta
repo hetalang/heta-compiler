@@ -14,3 +14,14 @@ r_neg @Record := rem(-7, 3);
 
 chk_impl_true @Record := implies(3 > 2, 10 > 3) ? 1 : 0;
 chk_impl_false @Record := implies(3 > 2, 10 < 3) ? 1 : 0;
+
+add0 @Record := add();
+add1 @Record := add(1);
+add2 @Record := add(1, 2);
+add3 @Record := add(1, 2, 3);
+add4 @Record := add(1, 2, 3, 4);
+
+plus1 @Record := +1;
+plus2 @Record := 1 + 2;
+plus3 @Record := 1 + 2 + 3;
+plus4 @Record := 1 + 2 + 3 + 4;

@@ -104,6 +104,9 @@ function _calcUnit(_this, record) {
       return argUnit[0];
     }
     if (_this.fn.name === 'add' || _this.fn.name === 'subtract' || _this.fn.name === 'max' || _this.fn.name === 'min') { // many arguments with equal units, result as first argument
+      if (_this.fn.name === 'add' && argUnit.length === 0) {
+        return new Unit();
+      }
       let firstUnit = argUnit[0];
       argUnit.slice(1).forEach((unit) => {
         let isEqual = firstUnit.equal(unit, true);

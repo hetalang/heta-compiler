@@ -5,6 +5,18 @@ const { expect } = require('chai');
 
 describe('Expession exports', () => {
 
+  it('toMatlabString() for variadic "add"', () => {
+    let expected = {
+      'add()': '0',
+      'add(x)': 'x',
+      'add(x, y)': 'x + y',
+      'add(x, y, z)': 'x + y + z'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toMatlabString()).to.be.equal(output);
+    });
+  });
+
   it('toMatlabString() for "pow(x, y)"', () => {
     let expr = Expression.fromString('pow(x, y)');
     expect(expr.toMatlabString()).to.be.equal('power(x, y)');

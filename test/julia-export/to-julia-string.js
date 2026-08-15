@@ -28,6 +28,17 @@ describe('Expression exports to Julia', () => {
     let expr = Expression.fromString('add(x,y)');
     expect(expr.toJuliaString()).to.be.equal('+(x, y)');
   });
+  it('toJuliaString() for variadic "add"', () => {
+    let expected = {
+      'add()': '+()',
+      'add(x)': '+(x)',
+      'add(x, y)': '+(x, y)',
+      'add(x, y, z)': '+(x, y, z)'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toJuliaString()).to.be.equal(output);
+    });
+  });
   it('toJuliaString() for "square(x)"', () => {
     let expr = Expression.fromString('square(x)');
     expect(expr.toJuliaString()).to.be.equal('NaNMath.pow(x, 2)');

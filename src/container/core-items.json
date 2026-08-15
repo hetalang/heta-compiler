@@ -157,7 +157,7 @@
     },
     {
         "id": "add", "action": "defineFunction",
-        "arguments": ["x", "y"]
+        "arguments": []
     },
     {
         "id": "ceil", "action": "defineFunction",
