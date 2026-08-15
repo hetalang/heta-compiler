@@ -35,17 +35,20 @@ function _toMathExpr(element, useParentheses = false) {
     let two = _toMathExpr(element.elements[2], true);
     return `${one} != ${two}`;
   } else if(element.name === 'apply' && element.elements[0].name === 'and') {
-    let args = element.elements.slice(1)
-      .map((x) => _toMathExpr(x, true)).join(' and ');
-    return args;
+    let args = element.elements.slice(1);
+    if (args.length === 0) return 'true';
+    if (args.length === 1) return _toMathExpr(args[0]);
+    return args.map((x) => _toMathExpr(x, true)).join(' and ');
   } else if(element.name === 'apply' && element.elements[0].name === 'or') {
-    let args = element.elements.slice(1)
-      .map((x) => _toMathExpr(x, true)).join(' or ');
-    return args;
+    let args = element.elements.slice(1);
+    if (args.length === 0) return 'false';
+    if (args.length === 1) return _toMathExpr(args[0]);
+    return args.map((x) => _toMathExpr(x, true)).join(' or ');
   } else if(element.name === 'apply' && element.elements[0].name === 'xor') {
-    let args = element.elements.slice(1)
-      .map((x) => _toMathExpr(x, true)).join(' xor ');
-    return args;
+    let args = element.elements.slice(1);
+    if (args.length === 0) return 'false';
+    if (args.length === 1) return _toMathExpr(args[0]);
+    return args.map((x) => _toMathExpr(x, true)).join(' xor ');
   } else if(element.name === 'apply' && element.elements[0].name === 'not') {
     let one = _toMathExpr(element.elements[1], true);
     return `not ${one}`;

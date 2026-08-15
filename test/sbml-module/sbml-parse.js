@@ -85,6 +85,32 @@ describe('zero- and unary-arity MathML operators', () => {
   });
 });
 
+describe('zero- and unary-arity MathML boolean operators', () => {
+  [
+    { operator: 'and', operands: [], expectation: 'true' },
+    { operator: 'and', operands: ['x'], expectation: 'x' },
+    { operator: 'and', operands: ['x', 'y'], expectation: 'x and y' },
+    { operator: 'or', operands: [], expectation: 'false' },
+    { operator: 'or', operands: ['x'], expectation: 'x' },
+    { operator: 'or', operands: ['x', 'y'], expectation: 'x or y' },
+    { operator: 'xor', operands: [], expectation: 'false' },
+    { operator: 'xor', operands: ['x'], expectation: 'x' },
+    { operator: 'xor', operands: ['x', 'y'], expectation: 'x xor y' }
+  ].forEach(({ operator, operands, expectation }) => {
+    it(`imports ${operator} with ${operands.length} operand(s)`, () => {
+      let expression = _toMathExpr({
+        name: 'apply',
+        elements: [
+          { name: operator },
+          ...operands.map((text) => ({ name: 'ci', elements: [{ text }] }))
+        ]
+      });
+
+      expect(expression).to.equal(expectation);
+    });
+  });
+});
+
 describe('inverse hyperbolic MathML functions', () => {
   const functionNames = ['asinh', 'acosh', 'atanh', 'acoth', 'asech', 'acsch'];
 
