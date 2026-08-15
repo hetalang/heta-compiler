@@ -594,7 +594,9 @@ _Skipped cell means no conversion_
 |`logbase(x, base)`|`log(x) / log(base)`|`NaNMath.log(base, x)`| |`(log(x)/log(base))`|
 |`log10(x)`| |`NaNMath.log10(x)`| | |
 |`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`| |`(log(x)/log(2))`|
-|`multiply(x, y)`|`x * y`|`*(x, y)`| | |
+|`multiply()`|`1`|`*()`|`1.0`|`1`|
+|`multiply(x)`|`x`|`*(x)`|`x`|`x`|
+|`multiply(x, y, ...)`|`x * y * ...`|`*(x, y, ...)`|`x * y * ...`|`x * y * ...`|
 |`pow(x, y)`| `pow(x, y)` or `x ^ y`|`NaNMath.pow(x, y)`| |`power(x, y)`|
 |`sqrt(x)`| |`NaNMath.sqrt(x)`| | |
 |`nthRoot(x, n)`|`pow(x, 1 / n)` or `x ^ (1 / n)`|`NaNMath.pow(x, 1/(n))`| | |
@@ -642,7 +644,9 @@ _Conversion to SBML's MathML_
 |`logbase(x, base)`|`<apply><log/><logbase>(base)</logbase>(x)</apply>`|
 |`log10(x)`|`<apply><log/>(x)</apply>`|
 |`log2(x)`|`<apply><log/><logbase><cn>2</cn></logbase>(x)</apply>`|
-|`multiply(x, y)`|`<apply><times/>(x) (y)</apply>`|
+|`multiply()`|`<apply><times/></apply>`|
+|`multiply(x)`|`<apply><times/>(x)</apply>`|
+|`multiply(x, y, ...)`|`<apply><times/>(x) (y) ...</apply>`|
 |`pow(x, y)`|`<apply><power/>(x) (y)</apply>`|
 |`sqrt(x)`|`<apply><root/>(x)</apply>`|
 |`nthRoot(x, n)`|`<apply><root/><degree>(n)</degree>(x)</apply>`|
