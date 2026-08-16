@@ -26,10 +26,13 @@ class Expression {
    * Parses a string or number into an `Expression`.
    *
    * @param {string|number} exprStringOrNumber Expression source.
+   * @param {object} options Parsing options.
+   * @param {boolean} options.booleanContext Treat the whole expression as a
+   * boolean position, accepting literal `0` and `1` as `false` and `true`.
    *
    * @returns {Expression} Parsed expression.
    */
-  static fromString(exprStringOrNumber){
+  static fromString(exprStringOrNumber, { booleanContext = false } = {}){
     if (typeof exprStringOrNumber !== 'string' && typeof exprStringOrNumber !== 'number')
       throw new TypeError('Expected <string> or <number>, got ' + JSON.stringify(exprStringOrNumber));
 
@@ -52,6 +55,8 @@ class Expression {
     if (unsupportedNodes.length > 0) {
       throw new TypeError('Unsupported MathExpr syntax');
     }
+
+    exprParsed = _normalizeBooleanLiterals(exprParsed, booleanContext);
 
     // additional check of expressions
     exprParsed.traverse((node) => { // recursive forEach
@@ -299,6 +304,52 @@ function _removeParenthesis(node) {
   } else {
     return node;
   }
+}
+
+// Normalize only literal 0 and 1 where the language requires a Boolean value.
+// Other numeric literals are errors there: Heta deliberately does not use
+// general numeric truthiness.
+function _normalizeBooleanLiterals(node, booleanContext = false) {
+  if (node.type === 'ConstantNode' && booleanContext && typeof node.value === 'number') {
+    if (node.value === 0 || node.value === 1) {
+      return new math.ConstantNode(node.value === 1);
+    }
+    throw new TypeError(`Expected boolean literal true, false, 0 or 1, got ${node.toString()}`);
+  }
+
+  if (node.type === 'ParenthesisNode') {
+    node.content = _normalizeBooleanLiterals(node.content, booleanContext);
+  } else if (node.type === 'OperatorNode') {
+    const isLogicalOperator = ['and', 'or', 'xor', 'not'].indexOf(node.fn) !== -1;
+    node.args = node.args.map((arg) => _normalizeBooleanLiterals(arg, isLogicalOperator));
+  } else if (node.type === 'ConditionalNode') {
+    node.condition = _normalizeBooleanLiterals(node.condition, true);
+    node.trueExpr = _normalizeBooleanLiterals(node.trueExpr, false);
+    node.falseExpr = _normalizeBooleanLiterals(node.falseExpr, false);
+  } else if (node.type === 'FunctionNode') {
+    const isPiecewise = node.fn.name === 'piecewise';
+    const hasOtherwise = node.args.length % 2 === 1;
+    // Heta uses value/condition pairs. Keep compatibility with legacy
+    // condition/value expressions whose first argument is visibly Boolean.
+    const legacyPiecewise = isPiecewise && _hasBooleanSyntax(node.args[0]);
+    node.args = node.args.map((arg, index) => {
+      let isPiecewiseCondition = isPiecewise
+        && (!hasOtherwise || index < node.args.length - 1)
+        && (legacyPiecewise ? index % 2 === 0 : index % 2 === 1);
+      return _normalizeBooleanLiterals(arg, isPiecewiseCondition);
+    });
+  }
+
+  return node;
+}
+
+function _hasBooleanSyntax(node) {
+  node = _removeParenthesis(node);
+  return (node.type === 'ConstantNode' && typeof node.value === 'boolean')
+    || (node.type === 'OperatorNode' && [
+      'smaller', 'smallerEq', 'larger', 'largerEq', 'equal', 'unequal',
+      'and', 'or', 'xor', 'not'
+    ].indexOf(node.fn) !== -1);
 }
 
 // Return mathjs Node with substituted arguments.

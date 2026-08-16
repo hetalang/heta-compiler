@@ -45,7 +45,7 @@ function tableLoader(fileContent, { sheet = 0, omitRows = 0, transpose = false }
       let normalized = {};
       Object.entries(cleaned).forEach(([key, value]) => {
         if (booleanProperties.indexOf(key) !== -1) { // in the list
-          normalized[key] = forceBool(value);
+          normalized[key] = normalizeBooleanInput(value);
         } else {
           normalized[key] = value;
         }
@@ -69,15 +69,24 @@ function clean(x) {
     .replace(/\r*\n+/g, '');
 }
 
-// converts 0/'0' -> false, 1/'1' -> true
-function forceBool(x) {
-  if (typeof x === 'string' && (x.trim() === 'true' || x.trim() === 'false')) {
-    return x.trim() !== 'false';
-  } else if (typeof x === 'number') {
-    return x !== 0;
-  } else {
-    return x;
+// Normalizes textual boolean literals before component schema validation.
+// Numeric values are deliberately preserved so the schema can reject values
+// other than the supported 0 and 1.
+function normalizeBooleanInput(x) {
+  if (typeof x === 'string') {
+    let value = x.trim();
+    if (value === 'true') {
+      return true;
+    }
+    if (value === 'false') {
+      return false;
+    }
+    if (value === '0' || value === '1') {
+      return Number(value);
+    }
   }
+
+  return x;
 }
 
 // clone all own properties and arrays

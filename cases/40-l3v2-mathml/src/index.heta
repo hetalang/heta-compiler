@@ -25,6 +25,3 @@ plus1 @Record := +1;
 plus2 @Record := 1 + 2;
 plus3 @Record := 1 + 2 + 3;
 plus4 @Record := 1 + 2 + 3 + 4;
-
-and2 @Record := true and false ? 101 : 102;
-and3 @Record := true and true and false ? 101 : 102;

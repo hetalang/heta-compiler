@@ -52,7 +52,7 @@ class DSwitcher extends _Switcher {
       } else if (typeof q.trigger !== 'undefined') {
         q.trigger += '';
         try { // this is for the cases of wrong ExprString structure
-          let expr = Expression.fromString(q.trigger);
+          let expr = Expression.fromString(q.trigger, { booleanContext: true });
           this.trigger = expr;
         } catch (err) {
           let msg = this.index + ' ' + err.message + ` "${q.trigger}"`;

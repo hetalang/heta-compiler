@@ -102,6 +102,54 @@ describe('Unit test for Expression with number.', () => {
   });
 });
 
+describe('Boolean literal normalization', () => {
+  it('normalizes 0 and 1 in boolean subexpressions only', () => {
+    let expected = {
+      '1 and 0': 'true and false',
+      'not (1)': 'not (true)',
+      '0 ? 2 : 3': 'false ? 2 : 3',
+      'piecewise(2, 1, 3)': 'piecewise(2, true, 3)',
+      'piecewise(x > 1, 1, x > 2, 2, 0)': 'piecewise(x > 1, 1, x > 2, 2, 0)'
+    };
+
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toString()).to.equal(output);
+    });
+    expect(Expression.fromString('1').toString()).to.equal('1');
+  });
+
+  it('normalizes root literals in an explicit boolean context', () => {
+    expect(Expression.fromString(1, { booleanContext: true }).toString()).to.equal('true');
+    expect(Expression.fromString(0, { booleanContext: true }).toString()).to.equal('false');
+  });
+
+  it('rejects numeric literals other than 0 and 1 in boolean positions', () => {
+    expect(() => Expression.fromString('2 and true')).to.throw(TypeError);
+    expect(() => Expression.fromString('2 ? x : y')).to.throw(TypeError);
+    expect(() => Expression.fromString(2, { booleanContext: true })).to.throw(TypeError);
+  });
+
+  it('normalizes DSwitcher and StopSwitcher numeric triggers', () => {
+    let container = new Container();
+    container.loadMany([
+      { id: 'ds0', class: 'DSwitcher', trigger: 0 },
+      { id: 'ds1', class: 'DSwitcher', trigger: 1 },
+      { id: 'ss0', class: 'StopSwitcher', trigger: 0 },
+      { id: 'ss1', class: 'StopSwitcher', trigger: 1 },
+      { id: 'record', class: 'Record', assignments: { start_: 1 } }
+    ]);
+    container.knitMany();
+
+    let namespace = container.namespaceStorage.get('nameless');
+    expect(namespace.get('ds0').trigger.toString()).to.equal('false');
+    expect(namespace.get('ds1').trigger.toString()).to.equal('true');
+    expect(namespace.get('ss0').trigger.toString()).to.equal('false');
+    expect(namespace.get('ss1').trigger.toString()).to.equal('true');
+    expect(namespace.get('record').assignments.start_.toString()).to.equal('1');
+    expect(container.hetaErrors()).to.have.lengthOf(0);
+  });
+});
+
 describe('Linearization for Expression', () => {
   it('Linearization of y = a*y + b', () => {
     let expr = Expression.fromString('a*y + b');
