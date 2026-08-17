@@ -490,7 +490,7 @@ function reactionToQ(x){
       qArr.push({
         class: 'Const',
         id: newId,
-        num: Number.parseFloat(y.attributes?.value)
+        num: SBMLValueToNumber(y.attributes?.value)
       });
     });
   }

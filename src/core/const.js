@@ -9,7 +9,7 @@ const schema = {
       { enum: [true, false, 1, 0] },
       { type: 'null' }
     ]},
-    num: { type: 'number' },
+    num: { extendedNumber: true },
     scale: {oneOf: [
       { type: 'string', enum: ['direct', 'log', 'logit'], default: 'direct' },
       { type: 'null' }
@@ -39,35 +39,36 @@ class Const extends _Size { // implicit extend Numeric
   constructor(isCore = false){
     super(isCore);
     this.scale = 'direct';
-  } 
+  }
   merge(q = {}){
-    super.merge(q);
+    let normalizedQ = q.num === undefined ? q : {...q, num: normalizeNum(q.num)};
+    super.merge(normalizedQ);
     let logger = this._container?.logger;
-    let valid = Const.isValid(q, logger);
+    let valid = Const.isValid(normalizedQ, logger);
 
     if (valid) {
-      if (q.num !== undefined) {
-        this.num = q.num;
+      if (normalizedQ.num !== undefined) {
+        this.num = normalizedQ.num;
       }
-      if (q.free === null) {
+      if (normalizedQ.free === null) {
         delete this.free;
-      } else if (q.free !== undefined) {
-        this.free = !!q.free;
+      } else if (normalizedQ.free !== undefined) {
+        this.free = !!normalizedQ.free;
       }
-      if (q.scale === null) {
+      if (normalizedQ.scale === null) {
         delete this.scale;
-      } else if (q.scale !== undefined) {
-        this.scale = q.scale;
+      } else if (normalizedQ.scale !== undefined) {
+        this.scale = normalizedQ.scale;
       }
-      if (q.lower === null) {
+      if (normalizedQ.lower === null) {
         delete this.lower;
-      } else if (q.lower !== undefined) {
-        this.lower = q.lower;
+      } else if (normalizedQ.lower !== undefined) {
+        this.lower = normalizedQ.lower;
       }
-      if (q.upper === null) {
+      if (normalizedQ.upper === null) {
         delete this.upper;
-      } else if (q.upper !== undefined) {
-        this.upper = q.upper;
+      } else if (normalizedQ.upper !== undefined) {
+        this.upper = normalizedQ.upper;
       }
     }
 
@@ -152,6 +153,13 @@ Const._requirements = {
     required: false
   }
 };
+
+function normalizeNum(value) {
+  if (value === 'Infinity' || value === '+Infinity') return Infinity;
+  if (value === '-Infinity') return -Infinity;
+  if (value === 'NaN') return NaN;
+  return value;
+}
 
 module.exports = {
   Const

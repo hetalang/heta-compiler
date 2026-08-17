@@ -61,12 +61,27 @@ describe('Wrong usage tests for Const.', () => {
   it('Set num to Infinity', () => {
     let con = new Const();
     con.merge({ id: 'k1', num: Infinity });
-    expect(con.toQ().num).to.be.undefined;
+    expect(con.toQ().num).to.equal(Infinity);
   });
 
   it('Set num to NaN', () => {
     let con = new Const();
     con.merge({ id: 'k1', num: NaN });
-    expect(con.toQ().num).to.be.undefined;
+    expect(con.toQ().num).to.be.NaN;
+  });
+
+  it('Normalizes special num strings', () => {
+    expect(new Const().merge({ num: 'Infinity' }).num).to.equal(Infinity);
+    expect(new Const().merge({ num: '+Infinity' }).num).to.equal(Infinity);
+    expect(new Const().merge({ num: '-Infinity' }).num).to.equal(-Infinity);
+    expect(new Const().merge({ num: 'NaN' }).num).to.be.NaN;
+  });
+
+  it('Rejects all other num strings', () => {
+    ['inf', 'NaN ', 'not-a-number'].forEach((num) => {
+      let con = new Const().merge({ id: 'k1', num: 1 });
+      con.merge({ num });
+      expect(con.num, num).to.equal(1);
+    });
   });
 });

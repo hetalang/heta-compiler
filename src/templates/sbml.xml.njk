@@ -178,7 +178,7 @@
         {%- endif %}
         constant="true"
         {%- if con.num is defined %}
-        value="{{ con.num }}"
+        value="{{ con.num | toSBMLNumber }}"
         {%- endif %}
         {%- if con.units is defined %}
         units="{{ con.unitsHash() }}"

@@ -33,6 +33,12 @@ module.exports = function(env) {
   env.addFilter('toHetaDict', function(obj) {
     return _toHetaDict(obj);
   });
+  env.addFilter('toSBMLNumber', function(value) {
+    if (value === Infinity) return 'INF';
+    if (value === -Infinity) return '-INF';
+    if (Number.isNaN(value)) return 'NaN';
+    return value;
+  });
 
   return env;
 };

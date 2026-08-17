@@ -2,6 +2,7 @@ const { AbstractExport } = require('../abstract-export');
 const pkg = require('../../package');
 const { ajv } = require('../ajv');
 const { omitByPaths } = require('../utils');
+const { jsonSpecialNumberReplacer } = require('../json-special-numbers');
 
 const schema = {
   type: 'object',
@@ -75,7 +76,7 @@ class JSONExport extends AbstractExport {
     }].concat(qArr);
 
     return [{
-      content: JSON.stringify(qArr_final, null, 2),
+      content: JSON.stringify(qArr_final, jsonSpecialNumberReplacer, 2),
       pathSuffix: '/output.heta.json',
       type: 'text'
     }];

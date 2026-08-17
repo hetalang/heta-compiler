@@ -1,5 +1,6 @@
 const { AbstractExport } = require('../abstract-export');
 const { ajv } = require('../ajv');
+const { jsonSpecialNumberReplacer } = require('../json-special-numbers');
 
 const schema = {
   type: 'object',
@@ -32,7 +33,7 @@ class CanonicalExport extends AbstractExport {
     let qArr_final = container.makeCanonicalFull();
 
     return [{
-      content: JSON.stringify(qArr_final, null, 2),
+      content: JSON.stringify(qArr_final, jsonSpecialNumberReplacer, 2),
       pathSuffix: '/output.heta.json',
       type: 'text'
     }];

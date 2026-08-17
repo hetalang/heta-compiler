@@ -222,3 +222,14 @@ describe('parse parameter constant defaults', () => {
     expect(parameter).to.have.nested.property('assignments.start_', 1);
   });
 });
+
+describe('parse SBML special numbers', () => {
+  it('keeps special values of local kinetic-law parameters', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfReactions><reaction id="r"><kineticLaw><listOfLocalParameters><localParameter id="positive" value="INF"/><localParameter id="negative" value="-INF"/><localParameter id="invalid" value="NaN"/></listOfLocalParameters></kineticLaw></reaction></listOfReactions></model></sbml>`;
+    let qArr = SBMLParse(xml);
+
+    expect(qArr.find((q) => q.id === 'positive__r_local').num).to.equal(Infinity);
+    expect(qArr.find((q) => q.id === 'negative__r_local').num).to.equal(-Infinity);
+    expect(qArr.find((q) => q.id === 'invalid__r_local').num).to.be.NaN;
+  });
+});
