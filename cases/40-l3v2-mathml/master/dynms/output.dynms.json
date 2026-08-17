@@ -23,29 +23,12 @@
             "expr": [
               "Multiply",
               [
-                "Which",
+                "Sign",
                 [
-                  "Less",
-                  [
-                    "Divide",
-                    7,
-                    3
-                  ],
-                  0
-                ],
-                -1,
-                [
-                  "Greater",
-                  [
-                    "Divide",
-                    7,
-                    3
-                  ],
-                  0
-                ],
-                1,
-                "True",
-                0
+                  "Divide",
+                  7,
+                  3
+                ]
               ],
               [
                 "Floor",
@@ -68,29 +51,12 @@
             "expr": [
               "Multiply",
               [
-                "Which",
+                "Sign",
                 [
-                  "Less",
-                  [
-                    "Divide",
-                    -7,
-                    3
-                  ],
-                  0
-                ],
-                -1,
-                [
-                  "Greater",
-                  [
-                    "Divide",
-                    -7,
-                    3
-                  ],
-                  0
-                ],
-                1,
-                "True",
-                0
+                  "Divide",
+                  -7,
+                  3
+                ]
               ],
               [
                 "Floor",
@@ -119,29 +85,12 @@
                   "Multiply",
                   3,
                   [
-                    "Which",
+                    "Sign",
                     [
-                      "Less",
-                      [
-                        "Divide",
-                        7,
-                        3
-                      ],
-                      0
-                    ],
-                    -1,
-                    [
-                      "Greater",
-                      [
-                        "Divide",
-                        7,
-                        3
-                      ],
-                      0
-                    ],
-                    1,
-                    "True",
-                    0
+                      "Divide",
+                      7,
+                      3
+                    ]
                   ],
                   [
                     "Floor",
@@ -172,29 +121,12 @@
                   "Multiply",
                   3,
                   [
-                    "Which",
+                    "Sign",
                     [
-                      "Less",
-                      [
-                        "Divide",
-                        -7,
-                        3
-                      ],
-                      0
-                    ],
-                    -1,
-                    [
-                      "Greater",
-                      [
-                        "Divide",
-                        -7,
-                        3
-                      ],
-                      0
-                    ],
-                    1,
-                    "True",
-                    0
+                      "Divide",
+                      -7,
+                      3
+                    ]
                   ],
                   [
                     "Floor",

@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "1c0afe07ab88fca71d20c38c90101528a463758f1905638a0a9745dab12a752b",
+    "hashSum": "3973ff0fdb890c15519820c460a301311341c01537b8a63565601f1f9fbe8e5a",
     "hashAlgorithm": "sha256"
   },
   {
@@ -248,14 +248,6 @@
     ],
     "id": "sech",
     "math": "1 / cosh(x)"
-  },
-  {
-    "action": "defineFunction",
-    "arguments": [
-      "x"
-    ],
-    "id": "sign",
-    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
   },
   {
     "action": "defineFunction",

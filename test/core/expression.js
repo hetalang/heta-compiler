@@ -45,6 +45,14 @@ describe('Unit test for Expression.', () => {
     });
   });
 
+  it('Conversion of core "sign" to SBML-compatible CMathML.', () => {
+    let expr = Expression.fromString('sign(x)');
+    expr.exprParsed.fnObj = { isCore: true };
+    expect(expr.toCMathML(true)).to.equal(
+      '<piecewise><piece><cn>-1</cn><apply><lt/><ci>x</ci><cn>0</cn></apply></piece><piece><cn>1</cn><apply><gt/><ci>x</ci><cn>0</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise>'
+    );
+  });
+
   it('Conversion of t (time) to CMathML.', () => {
     expect(Expression.fromString('1 * x * t').toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>1</cn><ci>x</ci></apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></math>');

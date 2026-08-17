@@ -9,6 +9,12 @@ const csymbols = {
 // Custom handler for user defined functions in SBML
 // use <ci>fun1</ci> instead of <fun1/>
 function sbmlCMathMLHandler(node, options = {}) {
+  // sign is not part of the MathML subset permitted by SBML Level 2.
+  if (node.type === 'FunctionNode' && node.fn.name === 'sign' && node.fnObj?.isCore) {
+    const x = node.args[0].toString({ ...options, handler: sbmlCMathMLHandler });
+    return `<piecewise><piece><cn>-1</cn><apply><lt/>${x}<cn>0</cn></apply></piece><piece><cn>1</cn><apply><gt/>${x}<cn>0</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise>`;
+  }
+
   if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
     let args = node.args
       .map((arg) => arg.toString({ ...options, handler: sbmlCMathMLHandler }))

@@ -117,6 +117,9 @@ function _calcUnit(_this, record) {
       });
       return argUnit[0];
     }
+    if (_this.fn.name === 'sign') { // sign()
+      return new Unit();
+    }
     if (_this.fn.name === 'multiply') { // multiply()
       if (argUnit.length === 0) {
         return new Unit();

@@ -109,20 +109,12 @@
           </lambda>
         </math>
       </functionDefinition>
-      <functionDefinition id="sign">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <lambda>
-            <bvar><ci> x </ci></bvar>
-            <piecewise><piece><apply><minus/><cn>1</cn></apply><apply><lt/><ci>x</ci><cn>0</cn></apply></piece><piece><cn>1</cn><apply><gt/><ci>x</ci><cn>0</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise>
-          </lambda>
-        </math>
-      </functionDefinition>
       <functionDefinition id="quotient">
         <math xmlns="http://www.w3.org/1998/Math/MathML">
           <lambda>
             <bvar><ci> x </ci></bvar>
             <bvar><ci> y </ci></bvar>
-            <apply><times/><apply><ci>sign</ci><apply><divide/><ci>x</ci><ci>y</ci></apply></apply><apply><floor/><apply><abs/><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply></apply>
+            <apply><times/><piecewise><piece><cn>-1</cn><apply><lt/><apply><divide/><ci>x</ci><ci>y</ci></apply><cn>0</cn></apply></piece><piece><cn>1</cn><apply><gt/><apply><divide/><ci>x</ci><ci>y</ci></apply><cn>0</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise><apply><floor/><apply><abs/><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply></apply>
           </lambda>
         </math>
       </functionDefinition>
@@ -131,7 +123,7 @@
           <lambda>
             <bvar><ci> x </ci></bvar>
             <bvar><ci> y </ci></bvar>
-            <apply><minus/><ci>x</ci><apply><times/><apply><times/><ci>y</ci><apply><ci>sign</ci><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply><apply><floor/><apply><abs/><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply></apply></apply>
+            <apply><minus/><ci>x</ci><apply><times/><apply><times/><ci>y</ci><piecewise><piece><cn>-1</cn><apply><lt/><apply><divide/><ci>x</ci><ci>y</ci></apply><cn>0</cn></apply></piece><piece><cn>1</cn><apply><gt/><apply><divide/><ci>x</ci><ci>y</ci></apply><cn>0</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise></apply><apply><floor/><apply><abs/><apply><divide/><ci>x</ci><ci>y</ci></apply></apply></apply></apply></apply>
           </lambda>
         </math>
       </functionDefinition>
