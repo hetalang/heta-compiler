@@ -1,8 +1,9 @@
 const { Expression } = require('../core/expression');
+const { toMathJSONNumber } = require('./special-numbers');
 
-const NUM_NAN = { num: 'NaN' };
-const NUM_POSITIVE_INFINITY = { num: '+Infinity' };
-const NUM_NEGATIVE_INFINITY = { num: '-Infinity' };
+const NUM_NAN = toMathJSONNumber(NaN);
+const NUM_POSITIVE_INFINITY = toMathJSONNumber(Infinity);
+const NUM_NEGATIVE_INFINITY = toMathJSONNumber(-Infinity);
 
 const OPERATOR_MAP = {
   larger: 'Greater',
@@ -158,17 +159,7 @@ function _toMathJSON(node) {
     if (typeof node.value === 'boolean') {
       return node.value ? 'True' : 'False';
     }
-    if (Number.isNaN(node.value)) {
-      return NUM_NAN;
-    }
-    if (node.value === Infinity) {
-      return NUM_POSITIVE_INFINITY;
-    }
-    if (node.value === -Infinity) {
-      return NUM_NEGATIVE_INFINITY;
-    }
-
-    return node.value;
+    return toMathJSONNumber(node.value);
   }
 
   if (node.type === 'SymbolNode') {

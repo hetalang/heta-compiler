@@ -66,11 +66,22 @@ describe('DynMS schema', () => {
 
     expect(validateDynms(doc)).to.equal(false);
   });
+
+  it('accepts MathJSON special numbers as constant values', () => {
+    const doc = makeDoc(0);
+    doc.models[0].constants.push(
+      { id: 'positive', value: { num: '+Infinity' } },
+      { id: 'negative', value: { num: '-Infinity' } },
+      { id: 'invalid', value: { num: 'NaN' } }
+    );
+
+    expect(validateDynms(doc)).to.equal(true);
+  });
 });
 
 function makeDoc(expr) {
   return {
-    dynms: '0.2.0',
+    dynms: '0.2.1',
     models: [
       {
         id: 'model',

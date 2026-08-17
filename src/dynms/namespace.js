@@ -2,6 +2,7 @@ const { Namespace } = require('../namespace');
 const { Expression, math } = require('../core/expression');
 const TopoSort = require('@insysbio/topo-sort');
 const HetaLevelError = require('../heta-level-error');
+const { toMathJSONNumber } = require('./special-numbers');
 
 // XXX: Still not sure if Expression clone() is required here
 // Currently I do not use clone().
@@ -23,7 +24,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
     // generate constants list
     let constants = this.selectByClassName('Const')
         .map((x) => {
-            return { id: x.id, value: x.num, title: x.title };
+            return { id: x.id, value: toMathJSONNumber(x.num), title: x.title };
         });
 
     // generate states list: not only dynamic, but also static

@@ -1,5 +1,10 @@
 # DynMS Change Log
 
+## 0.2.1
+
+- Added extended numeric values for constants and MathJSON expressions: `NaN`, `+Infinity`, and `-Infinity` are encoded as `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}` respectively.
+- Finite numeric literals and finite constant values remain JSON numbers.
+
 ## 0.2.0
 
 - Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json`
