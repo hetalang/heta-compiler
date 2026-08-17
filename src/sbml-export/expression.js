@@ -6,9 +6,26 @@ const csymbols = {
   t: 'http://www.sbml.org/sbml/symbols/time'
 };
 
+const MATHML_INVERSE_TRIGONOMETRIC_OPERATORS = {
+  asin: 'arcsin',
+  acos: 'arccos',
+  atan: 'arctan',
+  acot: 'arccot',
+  acsc: 'arccsc',
+  asec: 'arcsec',
+};
+
 // Custom handler for user defined functions in SBML
 // use <ci>fun1</ci> instead of <fun1/>
 function sbmlCMathMLHandler(node, options = {}) {
+  if (node.type === 'FunctionNode' && MATHML_INVERSE_TRIGONOMETRIC_OPERATORS[node.fn.name]) {
+    const operator = MATHML_INVERSE_TRIGONOMETRIC_OPERATORS[node.fn.name];
+    const args = node.args
+      .map((arg) => arg.toString({ ...options, handler: sbmlCMathMLHandler }))
+      .join('');
+    return `<apply><${operator}/>${args}</apply>`;
+  }
+
   // sign is not part of the MathML subset permitted by SBML Level 2.
   if (node.type === 'FunctionNode' && node.fn.name === 'sign' && node.fnObj?.isCore) {
     const x = node.args[0].toString({ ...options, handler: sbmlCMathMLHandler });

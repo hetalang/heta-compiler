@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-17T19:38:43.153Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless"
+    >
+    
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="cosh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><plus/><apply><exp/><ci>x</ci></apply><apply><exp/><apply><minus/><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="sinh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><minus/><apply><exp/><ci>x</ci></apply><apply><exp/><apply><minus/><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="asinh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><ci>x</ci><apply><root/><apply><plus/><apply><power/><ci>x</ci><cn>2</cn></apply><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="acosh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><ci>x</ci><apply><root/><apply><minus/><apply><power/><ci>x</ci><cn>2</cn></apply><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="atanh">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><ln/><apply><divide/><apply><plus/><cn>1</cn><ci>x</ci></apply><apply><minus/><cn>1</cn><ci>x</ci></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="asech">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><divide/><apply><plus/><cn>1</cn><apply><root/><apply><minus/><cn>1</cn><apply><power/><ci>x</ci><cn>2</cn></apply></apply></apply></apply><ci>x</ci></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="acsch">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><ln/><apply><plus/><apply><divide/><cn>1</cn><ci>x</ci></apply><apply><root/><apply><plus/><cn>1</cn><apply><divide/><cn>1</cn><apply><power/><ci>x</ci><cn>2</cn></apply></apply></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+      <functionDefinition id="acoth">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> x </ci></bvar>
+            <apply><times/><cn>0.5</cn><apply><ln/><apply><divide/><apply><plus/><ci>x</ci><cn>1</cn></apply><apply><minus/><ci>x</ci><cn>1</cn></apply></apply></apply></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+<!-- BEGIN UNIT DEFINITIONS -->
+    <listOfUnitDefinitions>
+    <unitDefinition id="_time" name="time">
+  <listOfUnits>
+    <unit kind="second" exponent="1" scale="0" multiplier="1"/>
+  </listOfUnits>
+</unitDefinition>
+    </listOfUnitDefinitions>
+<!-- END UNIT DEFINITIONS -->
+
+  
+    <listOfParameters>
+      <parameter
+        id="P1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P3"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P4"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P5"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P6"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P7"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P8"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P9"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P10"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P11"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P12"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P13"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P14"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P15"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P16"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P17"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P18"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P19"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P20"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P21"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P22"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P23"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P24"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P25"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P26"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P27"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P28"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="P29"
+        constant="false"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="P1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><pi/></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P3"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><gt/><cn>1</cn><cn>0.5</cn></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P4"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><geq/><cn>1</cn><cn>0.5</cn></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P5"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><lt/><cn>1</cn><cn>0.5</cn></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P6"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><leq/><cn>1</cn><cn>0.5</cn></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P7"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><eq/><cn>1</cn><cn>0.5</cn></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P8"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><neq/><cn>1</cn><cn>0.5</cn></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P9"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><factorial/><cn>4</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P10"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><and/><true/><false/></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P11"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><or/><true/><false/></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P12"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><xor/><true/><false/></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P13"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><piecewise><piece><cn>2</cn><apply><not/><false/></apply></piece><otherwise><cn>3</cn></otherwise></piecewise></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P14"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sec/><cn>0.5</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P15"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><csc/><cn>4.5</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P16"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><cot/><cn>0.2</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P17"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>sinh</ci><cn>0.3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P18"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>cosh</ci><cn>1.7</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P19"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><arcsec/><cn>2.3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P20"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><arccsc/><cn>1.1</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P21"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><arccot/><apply><minus/><cn>0.1</cn></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P22"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>asinh</ci><cn>99</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P23"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>acosh</ci><cn>1.34</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P24"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>atanh</ci><apply><minus/><cn>0.7</cn></apply></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P25"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>asech</ci><cn>0.42</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P26"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>acsch</ci><cn>0.01</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P27"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><ci>acoth</ci><cn>8.2</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P28"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>exponentiale</ci></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="P29"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><exp/><ci>exponentiale</ci></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+  
+  </model>
+</sbml>
