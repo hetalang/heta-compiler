@@ -93,13 +93,6 @@ The `qsp-functions.heta` file contains a curated list of additional functions sp
     math: "0.5 * ln((x + 1) / (x - 1))"
 };
 
-// numeric helpers
-
-#defineFunction sign {
-    arguments: [x],
-    math: "piecewise(-1, x < 0, 1, x > 0, 0)"
-};
-
 // integer division helpers
 
 #defineFunction quotient {
