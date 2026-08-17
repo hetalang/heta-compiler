@@ -10,4 +10,8 @@ describe('Test TimeSwitcher methods', () => {
     expect(ts1.getPeriod()).to.be.equal(6);
     expect(ts1.getStop()).to.be.equal(120);
   });
+
+  it('Rejects null in an inline Const num', () => {
+    expect(TimeSwitcher.isValid({ start: { num: null } })).to.be.false;
+  });
 });

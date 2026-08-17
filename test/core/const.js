@@ -52,6 +52,12 @@ describe('Wrong usage tests for Const.', () => {
     expect(con.toQ().free).to.be.undefined;
   });
 
+  it('Reject null for num', () => {
+    let con = new Const().merge({ id: 'k1', num: 1 });
+    con.merge({ num: null });
+    expect(con.toQ().num).to.equal(1);
+  });
+
   it('Set num to Infinity', () => {
     let con = new Const();
     con.merge({ id: 'k1', num: Infinity });

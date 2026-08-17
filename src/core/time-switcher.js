@@ -29,10 +29,7 @@ const schema = {
           { enum: [true, false, 1, 0] },
           { type: 'null' }
         ]},
-        num: {oneOf: [
-          { type: 'number' },
-          { type: 'null' }
-        ]},
+        num: { type: 'number' },
         scale: {oneOf: [
           { type: 'string', enum: ['direct', 'log', 'logit'], default: 'direct' },
           { type: 'null' }
