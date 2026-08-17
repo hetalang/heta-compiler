@@ -25,3 +25,8 @@ plus1 @Record := +1;
 plus2 @Record := 1 + 2;
 plus3 @Record := 1 + 2 + 3;
 plus4 @Record := 1 + 2 + 3 + 4;
+
+max1 @Record := max(1);
+max2 @Record := max(1, 2);
+max3 @Record := max(1, 2, 3);
+max4 @Record := max(1, 2, 3, 4);

@@ -45,6 +45,20 @@ describe('Unit test for Expression.', () => {
     });
   });
 
+  it('Conversion of variadic "max" and "min" to SBML L3V2 CMathML.', () => {
+    const expected = {
+      'max(x)': '<apply><max/><ci>x</ci></apply>',
+      'max(x, y)': '<apply><max/><ci>x</ci><ci>y</ci></apply>',
+      'max(x, y, z)': '<apply><max/><ci>x</ci><ci>y</ci><ci>z</ci></apply>',
+      'min(x)': '<apply><min/><ci>x</ci></apply>',
+      'min(x, y)': '<apply><min/><ci>x</ci><ci>y</ci></apply>',
+      'min(x, y, z)': '<apply><min/><ci>x</ci><ci>y</ci><ci>z</ci></apply>'
+    };
+    Object.entries(expected).forEach(([input, output]) => {
+      expect(Expression.fromString(input).toCMathML(true)).to.equal(output);
+    });
+  });
+
   it('Conversion of core "sign" to SBML-compatible CMathML.', () => {
     let expr = Expression.fromString('sign(x)');
     expr.exprParsed.fnObj = { isCore: true };

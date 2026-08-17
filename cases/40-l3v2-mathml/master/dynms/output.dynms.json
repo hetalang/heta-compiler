@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-15T11:52:32.074Z",
+  "created": "2026-08-17T10:33:01.264Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -289,6 +289,52 @@
           "rhs": {
             "expr": [
               "Add",
+              1,
+              2,
+              3,
+              4
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "max1",
+          "rhs": {
+            "expr": [
+              "Max",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "max2",
+          "rhs": {
+            "expr": [
+              "Max",
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "max3",
+          "rhs": {
+            "expr": [
+              "Max",
+              1,
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "max4",
+          "rhs": {
+            "expr": [
+              "Max",
               1,
               2,
               3,

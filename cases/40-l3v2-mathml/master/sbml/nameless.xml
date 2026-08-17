@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-15T11:52:32.017Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-17T10:33:01.227Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -216,6 +216,26 @@
         constant="false"
         >
       </parameter>
+      <parameter
+        id="max1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="max2"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="max3"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="max4"
+        constant="false"
+        >
+      </parameter>
     </listOfParameters>
   
 <!-- BEGIN RULES -->
@@ -294,6 +314,26 @@
       variable="plus4"
       >
       <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><plus/><apply><plus/><cn>1</cn><cn>2</cn></apply><cn>3</cn></apply><cn>4</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="max1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><max/><cn>1</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="max2"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><max/><cn>1</cn><cn>2</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="max3"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><max/><cn>1</cn><cn>2</cn><cn>3</cn></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="max4"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><max/><cn>1</cn><cn>2</cn><cn>3</cn><cn>4</cn></apply></math>
     </assignmentRule>
   
   </listOfRules>
