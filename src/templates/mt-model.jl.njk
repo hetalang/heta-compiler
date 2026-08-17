@@ -113,7 +113,7 @@ __{{ event.switcher.id }}_affect__ = [
 
 __constValues__ = [
 {%- for con in constants %}
-  {{ con.id }} => {{ con.num }},
+  {{ con.id }} => {{ con.num | toJuliaNumber }},
 {%- endfor %}
 ]
 

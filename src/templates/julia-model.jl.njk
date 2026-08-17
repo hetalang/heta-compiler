@@ -33,7 +33,7 @@ end
   {%- endfor %}
 )}(Float64[
   {% for con in img.constants | exclude2('num', undefined) -%}
-    {{ con.num }},
+    {{ con.num | toJuliaNumber }},
   {%- endfor %}
 ])
 ### create static ids

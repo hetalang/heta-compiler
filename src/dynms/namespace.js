@@ -24,7 +24,8 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
     // generate constants list
     let constants = this.selectByClassName('Const')
         .map((x) => {
-            return { id: x.id, value: toMathJSONNumber(x.num), title: x.title };
+            let value = exprFormat === 'math-json' ? toMathJSONNumber(x.num) : x.num;
+            return { id: x.id, value, title: x.title };
         });
 
     // generate states list: not only dynamic, but also static

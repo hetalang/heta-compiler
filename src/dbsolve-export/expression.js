@@ -8,6 +8,13 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
   }
 
   let SLVStringHandler = (node, options) => {
+    // DBSolve has no non-finite numeric literals. Preserve the sign of infinity;
+    // NaN has no sign and is saturated to the largest finite double.
+    if (node.type === 'ConstantNode') {
+      if (node.value === Infinity || Number.isNaN(node.value)) return '1.7976931348623157e+308';
+      if (node.value === -Infinity) return '-1.7976931348623157e+308';
+    }
+
     // OperatorNode
     if (node.type === 'OperatorNode') {
       if (node.fn==='pow' && powTransform==='function') {

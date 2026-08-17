@@ -14,7 +14,7 @@ $SET end=120, delta=0.1, hmax=0.01, hmin=0.0, rtol=1e-3, atol=1e-6
 $PARAM @annotated
 // constants
 {%- for constant in constants %}
-{{ constant.id }} : {{ constant.value }} : {{ constant.title | default('-') }}
+{{ constant.id }} : {{ constant.value | toMrgsolveParamNumber }} : {{ constant.title | default('-') }}
 {%- endfor %}
 // events active
 {%- for evt in timeEvents %}

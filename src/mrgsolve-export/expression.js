@@ -10,8 +10,11 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
 
   let CStringHandler = (node, options) => {
     // ConstantNode
-    if (node.type === 'ConstantNode' && Number.isInteger(node.value)) {
-      return node.value + '.0';
+    if (node.type === 'ConstantNode') {
+      if (node.value === Infinity) return 'INFINITY';
+      if (node.value === -Infinity) return '-INFINITY';
+      if (Number.isNaN(node.value)) return 'NAN';
+      if (Number.isInteger(node.value)) return node.value + '.0';
     }
 
     // OperatorNode

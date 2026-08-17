@@ -51,7 +51,7 @@
 {%- for con in listOfConstants %}
 {{ storage_id }}.parameter.{{con.id}} = addparameter(
   {{- model_id }}, '{{con.id}}', 'ConstantValue', true
-  {%- if con.num!==undefined %}, 'Value', {{con.num}}{% endif -%}
+  {%- if con.num!==undefined %}, 'Value', {{con.num | toMatlabNumber}}{% endif -%}
   {%- if con.units!==undefined -%}, 'ValueUnits', '{{ con.unitsRebased(legalUnits, true) }}'{% endif -%}
   , 'Notes', '{{ con.notesHTML | replace("'", "''") }}{{ toAuxHtml(con.aux) }}', 'Tag', '');
 {%- endfor %}

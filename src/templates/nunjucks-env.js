@@ -39,6 +39,35 @@ module.exports = function(env) {
     if (Number.isNaN(value)) return 'NaN';
     return value;
   });
+  env.addFilter('toJuliaNumber', function(value) {
+    if (value === Infinity) return 'Inf';
+    if (value === -Infinity) return '-Inf';
+    if (Number.isNaN(value)) return 'NaN';
+    return value;
+  });
+  env.addFilter('toMatlabNumber', function(value) {
+    if (value === Infinity) return 'Inf';
+    if (value === -Infinity) return '-Inf';
+    if (Number.isNaN(value)) return 'NaN';
+    return value;
+  });
+  env.addFilter('toMrgsolveParamNumber', function(value) {
+    if (value === Infinity) return 'Inf';
+    if (value === -Infinity) return '-Inf';
+    if (Number.isNaN(value)) return 'NaN';
+    return value;
+  });
+  env.addFilter('toMrgsolveCNumber', function(value) {
+    if (value === Infinity) return 'INFINITY';
+    if (value === -Infinity) return '-INFINITY';
+    if (Number.isNaN(value)) return 'NAN';
+    return value;
+  });
+  env.addFilter('toDBSolveNumber', function(value) {
+    if (value === Infinity || Number.isNaN(value)) return '1.7976931348623157e+308';
+    if (value === -Infinity) return '-1.7976931348623157e+308';
+    return value;
+  });
 
   return env;
 };

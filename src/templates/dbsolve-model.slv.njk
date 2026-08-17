@@ -572,7 +572,7 @@ if({{ evt.switcher.trigger.toSLVString(logger, powTransform) + '>=0' if evt.swit
 //
 //!! {{ key if key !== 'undefined' else 'ungroupped' }}
 {%- for con in constants %}
-{{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'" + con.title + "'" if con.title is defined }} {units: {{ con.units|default('?') }}}
+{{ con.id }} = {{ con.num | toDBSolveNumber }}; // @{{ con.className }} {{ "'" + con.title + "'" if con.title is defined }} {units: {{ con.units|default('?') }}}
 {%- endfor %}
 {%- endfor %}
 

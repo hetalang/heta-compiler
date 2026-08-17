@@ -4,6 +4,13 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
   let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
 
   let matlabStringHandler = (node, options) => {
+    // ConstantNode
+    if (node.type === 'ConstantNode') {
+      if (node.value === Infinity) return 'Inf';
+      if (node.value === -Infinity) return '-Inf';
+      if (Number.isNaN(node.value)) return 'NaN';
+    }
+
     // FunctionNode
     if (node.type === 'FunctionNode') {
       if (node.fn.name==='add') {

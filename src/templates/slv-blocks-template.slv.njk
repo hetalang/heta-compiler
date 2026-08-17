@@ -37,13 +37,13 @@ if({{ set.condition  }}){ {% for rule in set.ifPart %}
 //
 //!! {{ key if key !== 'undefined' else 'ungroupped' }}
 {%- for con in constants %}
-{{ con.id }} = {{ con.num }}; // @{{ con.className }} {{ "'"+con.title+"'" if con.title }} {units: {{ con.units|default('?') }}};
+{{ con.id }} = {{ con.num | toDBSolveNumber }}; // @{{ con.className }} {{ "'"+con.title+"'" if con.title }} {units: {{ con.units|default('?') }}};
 {%- endfor %}
 {%- endfor %}
 {% set ivElements = population.toArray()|exclude2("assignments.start_.num", undefined) %}
 //! Initialization at start, count: {{ ivElements|length + 1}}
 {%- for number in ivElements %}
-{{ number.id }} = {{ number.assignments.start_.num }}; // @{{ number.className }} {{ "'"+number.title+"'" if number.title }} {units: {{ number.units|default('?') }}}
+{{ number.id }} = {{ number.assignments.start_.num | toDBSolveNumber }}; // @{{ number.className }} {{ "'"+number.title+"'" if number.title }} {units: {{ number.units|default('?') }}}
 {%- else -%}// nothing here
 {% endfor %}
 default_compartment_ = 1; // {units: UL} This is fake compartment to support compounds without compartment.
