@@ -1,0 +1,1 @@
+Case to test import Infinity, NaN from SBML.
