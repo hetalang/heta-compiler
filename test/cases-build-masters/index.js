@@ -87,7 +87,9 @@ function normalizeContent(exportName, content, filePath) {
   if (exportName === 'sbml') {
     return text
       .replace(/\r\n/g, '\n')
+      .replace(/[\t ]+(?=\n|$)/g, '')
       .replace(/<hetalang:hasMeta\b[^>]*>.*?<\/hetalang:hasMeta>/g, '<hetalang:hasMeta/>')
+      .replace(/>\s+</g, '><')
       .trim();
   }
 

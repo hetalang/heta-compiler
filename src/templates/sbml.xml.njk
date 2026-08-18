@@ -379,7 +379,6 @@
       {%- for event in listOfTimeEvents -%}
       {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}
       {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-      {%- if eventAssignments|length > 0 %}
       <event
         id="{{event.id}}"
         {#- metaid="{{event.index}}" #}
@@ -435,11 +434,9 @@
           {% endfor %}
         </listOfEventAssignments>
       </event>
-      {%- endif %}
       {%- endfor %}
       {%- for event in listOfCEvents %}
       {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-      {%- if eventAssignments|length > 0 %}
       <event
         id="{{event.id}}" 
         {#- metaid="{{event.index}}" #}
@@ -466,11 +463,9 @@
           {% endfor %}
         </listOfEventAssignments>
       </event>
-      {%- endif %}
       {%- endfor %}
       {%- for event in listOfDEvents %}
       {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-      {%- if eventAssignments|length > 0 %}
       <event
         id="{{ event.id }}" 
         {#- metaid="{{ event.index }}" #}
@@ -493,7 +488,6 @@
           {% endfor %}
         </listOfEventAssignments>
       </event>
-      {%- endif %}
       {%- endfor %}
     </listOfEvents>
   {% endif %}
