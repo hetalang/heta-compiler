@@ -15,7 +15,6 @@ const schema = {
       {
         description: 'If true than the condition will be checked at start_',
         enum: [true, false, 1, 0],
-        default: false
       },
       { type: 'null' }
     ]}

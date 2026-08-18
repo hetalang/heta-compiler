@@ -10,7 +10,7 @@ const schema = {
     },
     boundary: {oneOf: [
       {
-        enum: [true, false, 1, 0], default: false,
+        enum: [true, false, 1, 0],
         description: 'If it is true the record cannot be changed by any process, only by expression in assignments.'
       },
       { type: 'null' }

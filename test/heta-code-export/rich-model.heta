@@ -29,7 +29,7 @@ namespace rich begin
   scaleFactor @Const = 1;
 
   sample @TimeSwitcher { start: 0, period: 1, stop: 24 };
-  pulse @DSwitcher { trigger: t >= 2, atStart: true };
+  pulse @DSwitcher { trigger: t >= 2, atStart: true, active: false };
   threshold @CSwitcher { trigger: drug - metabolite };
   endSim @StopSwitcher { trigger: t >= 24 };
 end

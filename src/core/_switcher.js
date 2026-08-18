@@ -7,8 +7,7 @@ const schema = {
     active: {oneOf: [
       {
         description: 'if false the event will not run.',
-        enum: [true, false, 1, 0],
-        default: true
+        enum: [true, false, 1, 0]
       },
       { type: 'null' }
     ]}
@@ -47,14 +46,21 @@ class _Switcher extends Component {
   }
   clone(){
     let clonedComponent = super.clone();
-    if (typeof this.active !== 'undefined')
+    if (typeof this.active !== 'undefined') {
       clonedComponent.active = this.active;
+    } else {
+      delete clonedComponent.active;
+    }
 
     return clonedComponent;
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if (this.active === false) res.active = false;
+    if (this.active === false) {
+      res.active = false;
+    } else if (this.active === undefined) {
+      res.active = null;
+    }
 
     return res;
   }
@@ -63,7 +69,11 @@ class _Switcher extends Component {
   }
 }
 
-_Switcher._requirements = {};
+_Switcher._requirements = {
+  active: {
+    required: true
+  }
+};
 
 module.exports = {
   _Switcher

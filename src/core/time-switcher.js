@@ -31,7 +31,7 @@ const schema = {
         ]},
         num: { extendedNumber: true },
         scale: {oneOf: [
-          { type: 'string', enum: ['direct', 'log', 'logit'], default: 'direct' },
+          { type: 'string', enum: ['direct', 'log', 'logit'] },
           { type: 'null' }
         ]},
         upper: {oneOf: [

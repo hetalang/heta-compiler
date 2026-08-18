@@ -27,4 +27,14 @@ describe('Test for requirements', () => {
 
     expect(concreteContainer.logger.hasErrors).to.equal(true);
   });
+  it('requires an active value after a switcher clears it', () => {
+    let container = new Container();
+    container.load({class: 'DSwitcher', id: 'sw', trigger: 't > 1', active: null});
+    container.knitMany();
+
+    expect(container.logger.hasErrors).to.equal(true);
+    let switcher = container.namespaceStorage.get('nameless').get('sw');
+    expect(switcher.clone().active).to.equal(undefined);
+    expect(switcher.toQ()).to.have.property('active', null);
+  });
 });

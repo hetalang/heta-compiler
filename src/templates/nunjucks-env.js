@@ -139,6 +139,14 @@ function _toHetaDict(component = {}) {
   add('reversible', component.reversible, component.reversible !== undefined);
   add('isAmount', component.isAmount, !!component.isAmount);
   add('output', component.output, !!component.output);
+  let className = component.className || component.class;
+  if (['TimeSwitcher', 'DSwitcher', 'CSwitcher', 'StopSwitcher'].includes(className)) {
+    if (component.active === null) {
+      add('active', 'null');
+    } else {
+      add('active', component.active, component.active === false);
+    }
+  }
   add('slope', component.slope, component.id !== 't' && component.slope !== undefined);
   add('intercept', component.intercept, component.id !== 't' && component.intercept !== undefined);
   add('trigger', component.trigger);

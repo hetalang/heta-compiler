@@ -5,7 +5,7 @@ require('./namespace');
 const schema = {
   type: 'object',
   properties: {
-    auxAsNotes: { type: 'boolean', default: false }
+    auxAsNotes: { type: 'boolean' }
   }
 };
 

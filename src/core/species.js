@@ -15,7 +15,6 @@ const schema = {
       {
         description: 'If it is false then the value represents the concentration, i.e. normalized to compartment.',
         enum: [true, false, 1, 0],
-        default: false
       },
       { type: 'null' }
     ]}
