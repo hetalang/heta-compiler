@@ -1691,7 +1691,6 @@
         id="vA_degr_b"
         name="vA_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_b" stoichiometry="1"/>
@@ -1709,7 +1708,6 @@
         id="vO_degr_b"
         name="vO_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_b" stoichiometry="1"/>
@@ -1727,7 +1725,6 @@
         id="vP_degr_b"
         name="vP_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_b" stoichiometry="1"/>
@@ -1745,7 +1742,6 @@
         id="vL_degr_b"
         name="vL_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_b" stoichiometry="1"/>
@@ -1763,7 +1759,6 @@
         id="vS_degr_b"
         name="vS_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_b" stoichiometry="1"/>
@@ -1781,7 +1776,6 @@
         id="vNAPE_syn_b"
         name="vNAPE_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NAPE_b" stoichiometry="1"/>
@@ -1794,7 +1788,6 @@
         id="vNOPE_syn_b"
         name="vNOPE_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NOPE_b" stoichiometry="1"/>
@@ -1807,7 +1800,6 @@
         id="vNPPE_syn_b"
         name="vNPPE_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NPPE_b" stoichiometry="1"/>
@@ -1820,7 +1812,6 @@
         id="vNLPE_syn_b"
         name="vNLPE_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NLPE_b" stoichiometry="1"/>
@@ -1833,7 +1824,6 @@
         id="vNSPE_syn_b"
         name="vNSPE_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NSPE_b" stoichiometry="1"/>
@@ -1846,7 +1836,6 @@
         id="vA_syn_b"
         name="vA_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NAPE_b" stoichiometry="1"/>
@@ -1865,7 +1854,6 @@
         id="vO_syn_b"
         name="vO_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NOPE_b" stoichiometry="1"/>
@@ -1884,7 +1872,6 @@
         id="vP_syn_b"
         name="vP_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NPPE_b" stoichiometry="1"/>
@@ -1903,7 +1890,6 @@
         id="vL_syn_b"
         name="vL_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NLPE_b" stoichiometry="1"/>
@@ -1922,7 +1908,6 @@
         id="vS_syn_b"
         name="vS_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NSPE_b" stoichiometry="1"/>
@@ -1941,7 +1926,6 @@
         id="vFAAH_syn_b"
         name="vFAAH_syn_b"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="FAAH_b" stoichiometry="1"/>
@@ -1954,7 +1938,6 @@
         id="vFAAH_degr_b"
         name="vFAAH_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAH_b" stoichiometry="1"/>
@@ -1970,7 +1953,6 @@
         id="vFAAH_inh_b"
         name="vFAAH_inh_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAH_b" stoichiometry="1"/>
@@ -1989,7 +1971,6 @@
         id="vFAAH_inh_degr_b"
         name="vFAAH_inh_degr_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAHinh_b" stoichiometry="1"/>
@@ -2005,7 +1986,6 @@
         id="vA_UE_b"
         name="vA_UE_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_b" stoichiometry="1"/>
@@ -2021,7 +2001,6 @@
         id="vO_UE_b"
         name="vO_UE_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_b" stoichiometry="1"/>
@@ -2037,7 +2016,6 @@
         id="vP_UE_b"
         name="vP_UE_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_b" stoichiometry="1"/>
@@ -2053,7 +2031,6 @@
         id="vL_UE_b"
         name="vL_UE_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_b" stoichiometry="1"/>
@@ -2069,7 +2046,6 @@
         id="vS_UE_b"
         name="vS_UE_b"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_b" stoichiometry="1"/>
@@ -2085,7 +2061,6 @@
         id="vA_degr_r"
         name="vA_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_r" stoichiometry="1"/>
@@ -2103,7 +2078,6 @@
         id="vO_degr_r"
         name="vO_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_r" stoichiometry="1"/>
@@ -2121,7 +2095,6 @@
         id="vP_degr_r"
         name="vP_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_r" stoichiometry="1"/>
@@ -2139,7 +2112,6 @@
         id="vL_degr_r"
         name="vL_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_r" stoichiometry="1"/>
@@ -2157,7 +2129,6 @@
         id="vS_degr_r"
         name="vS_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_r" stoichiometry="1"/>
@@ -2175,7 +2146,6 @@
         id="vNAPE_syn_r"
         name="vNAPE_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NAPE_r" stoichiometry="1"/>
@@ -2188,7 +2158,6 @@
         id="vNOPE_syn_r"
         name="vNOPE_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NOPE_r" stoichiometry="1"/>
@@ -2201,7 +2170,6 @@
         id="vNPPE_syn_r"
         name="vNPPE_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NPPE_r" stoichiometry="1"/>
@@ -2214,7 +2182,6 @@
         id="vNLPE_syn_r"
         name="vNLPE_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NLPE_r" stoichiometry="1"/>
@@ -2227,7 +2194,6 @@
         id="vNSPE_syn_r"
         name="vNSPE_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="NSPE_r" stoichiometry="1"/>
@@ -2240,7 +2206,6 @@
         id="vA_syn_r"
         name="vA_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NAPE_r" stoichiometry="1"/>
@@ -2259,7 +2224,6 @@
         id="vO_syn_r"
         name="vO_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NOPE_r" stoichiometry="1"/>
@@ -2278,7 +2242,6 @@
         id="vP_syn_r"
         name="vP_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NPPE_r" stoichiometry="1"/>
@@ -2297,7 +2260,6 @@
         id="vL_syn_r"
         name="vL_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NLPE_r" stoichiometry="1"/>
@@ -2316,7 +2278,6 @@
         id="vS_syn_r"
         name="vS_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="NSPE_r" stoichiometry="1"/>
@@ -2335,7 +2296,6 @@
         id="vFAAH_syn_r"
         name="vFAAH_syn_r"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="FAAH_r" stoichiometry="1"/>
@@ -2348,7 +2308,6 @@
         id="vFAAH_degr_r"
         name="vFAAH_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAH_r" stoichiometry="1"/>
@@ -2364,7 +2323,6 @@
         id="vFAAH_inh_r"
         name="vFAAH_inh_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAH_r" stoichiometry="1"/>
@@ -2383,7 +2341,6 @@
         id="vFAAH_inh_degr_r"
         name="vFAAH_inh_degr_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAHinh_r" stoichiometry="1"/>
@@ -2399,7 +2356,6 @@
         id="vA_UE_r"
         name="vA_UE_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_r" stoichiometry="1"/>
@@ -2415,7 +2371,6 @@
         id="vO_UE_r"
         name="vO_UE_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_r" stoichiometry="1"/>
@@ -2431,7 +2386,6 @@
         id="vP_UE_r"
         name="vP_UE_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_r" stoichiometry="1"/>
@@ -2447,7 +2401,6 @@
         id="vL_UE_r"
         name="vL_UE_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_r" stoichiometry="1"/>
@@ -2463,7 +2416,6 @@
         id="vS_UE_r"
         name="vS_UE_r"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_r" stoichiometry="1"/>
@@ -2479,7 +2431,6 @@
         id="vA_degr_m"
         name="vA_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_m" stoichiometry="1"/>
@@ -2497,7 +2448,6 @@
         id="vO_degr_m"
         name="vO_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_m" stoichiometry="1"/>
@@ -2515,7 +2465,6 @@
         id="vP_degr_m"
         name="vP_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_m" stoichiometry="1"/>
@@ -2533,7 +2482,6 @@
         id="vL_degr_m"
         name="vL_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_m" stoichiometry="1"/>
@@ -2551,7 +2499,6 @@
         id="vS_degr_m"
         name="vS_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_m" stoichiometry="1"/>
@@ -2569,7 +2516,6 @@
         id="vFAAH_syn_m"
         name="vFAAH_syn_m"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="FAAH_m" stoichiometry="1"/>
@@ -2582,7 +2528,6 @@
         id="vFAAH_degr_m"
         name="vFAAH_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAH_m" stoichiometry="1"/>
@@ -2598,7 +2543,6 @@
         id="vFAAH_inh_m"
         name="vFAAH_inh_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAH_m" stoichiometry="1"/>
@@ -2617,7 +2561,6 @@
         id="vFAAH_inh_degr_m"
         name="vFAAH_inh_degr_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="FAAHinh_m" stoichiometry="1"/>
@@ -2633,7 +2576,6 @@
         id="vA_m_p"
         name="vA_m_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_m" stoichiometry="1"/>
@@ -2653,7 +2595,6 @@
         id="vo_m_p"
         name="vo_m_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_m" stoichiometry="1"/>
@@ -2673,7 +2614,6 @@
         id="vP_m_p"
         name="vP_m_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_m" stoichiometry="1"/>
@@ -2693,7 +2633,6 @@
         id="vL_m_p"
         name="vL_m_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_m" stoichiometry="1"/>
@@ -2713,7 +2652,6 @@
         id="vS_m_p"
         name="vS_m_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_m" stoichiometry="1"/>
@@ -2733,7 +2671,6 @@
         id="vA_b_m"
         name="vA_b_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_b" stoichiometry="1"/>
@@ -2753,7 +2690,6 @@
         id="vO_b_m"
         name="vO_b_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_b" stoichiometry="1"/>
@@ -2773,7 +2709,6 @@
         id="vP_b_m"
         name="vP_b_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_b" stoichiometry="1"/>
@@ -2793,7 +2728,6 @@
         id="vL_b_m"
         name="vL_b_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_b" stoichiometry="1"/>
@@ -2813,7 +2747,6 @@
         id="vS_b_m"
         name="vS_b_m"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_b" stoichiometry="1"/>
@@ -2833,7 +2766,6 @@
         id="vA_r_p"
         name="vA_r_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A_r" stoichiometry="1"/>
@@ -2853,7 +2785,6 @@
         id="vO_r_p"
         name="vO_r_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="O_r" stoichiometry="1"/>
@@ -2873,7 +2804,6 @@
         id="vP_r_p"
         name="vP_r_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P_r" stoichiometry="1"/>
@@ -2893,7 +2823,6 @@
         id="vL_r_p"
         name="vL_r_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="L_r" stoichiometry="1"/>
@@ -2913,7 +2842,6 @@
         id="vS_r_p"
         name="vS_r_p"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S_r" stoichiometry="1"/>
@@ -2933,7 +2861,6 @@
         id="absorp"
         name="absorp"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="PFM_gut" stoichiometry="1"/>
@@ -2949,7 +2876,6 @@
         id="dist"
         name="dist"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="PFM_p" stoichiometry="1"/>
@@ -2969,7 +2895,6 @@
         id="elim"
         name="elim"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="PFM_p" stoichiometry="1"/>

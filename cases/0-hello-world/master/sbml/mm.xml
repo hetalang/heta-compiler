@@ -114,7 +114,6 @@
         id="r1"
         name="Michaelis-Menten reaction"
         reversible="false"
-        fast="false"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">

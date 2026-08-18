@@ -80,7 +80,6 @@
       <reaction
         id="vabs"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="a0" stoichiometry="1"/>
@@ -95,7 +94,6 @@
       <reaction
         id="vel"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>

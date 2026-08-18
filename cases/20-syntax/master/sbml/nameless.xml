@@ -105,7 +105,6 @@
       <reaction
         id="r1"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>
@@ -120,7 +119,6 @@
       <reaction
         id="r2"
         reversible="true"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="s1" stoichiometry="1"/>

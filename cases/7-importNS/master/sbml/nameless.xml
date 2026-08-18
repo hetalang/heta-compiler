@@ -217,7 +217,6 @@
     <listOfReactions>
       <reaction
         id="vabs_first"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="a0_first" stoichiometry="1"/>
@@ -231,7 +230,6 @@
       </reaction>
       <reaction
         id="vel_first"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="c1_first" stoichiometry="1"/>
@@ -242,7 +240,6 @@
       </reaction>
       <reaction
         id="vabs_second"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="a0_second" stoichiometry="1"/>
@@ -256,7 +253,6 @@
       </reaction>
       <reaction
         id="vel_second"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="c1_second" stoichiometry="1"/>
@@ -267,7 +263,6 @@
       </reaction>
       <reaction
         id="vabs_third"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="a0_third" stoichiometry="1"/>
@@ -281,7 +276,6 @@
       </reaction>
       <reaction
         id="vel_third"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="c1_third" stoichiometry="1"/>

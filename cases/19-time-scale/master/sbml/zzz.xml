@@ -188,7 +188,6 @@
     <listOfReactions>
       <reaction
         id="r1"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>

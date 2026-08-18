@@ -103,7 +103,6 @@
         id="reaction1"
         name="reaction1"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="S1" stoichiometry="1"/>

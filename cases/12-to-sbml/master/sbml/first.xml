@@ -112,7 +112,6 @@
     <listOfReactions>
       <reaction
         id="r2"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="2"/>
@@ -129,7 +128,6 @@
       </reaction>
       <reaction
         id="r3"
-        fast="false"
         >
         <listOfModifiers>
           <modifierSpeciesReference species="s2"/>

@@ -71,7 +71,6 @@
       <reaction
         id="r1"
         reversible="false"
-        fast="false"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">

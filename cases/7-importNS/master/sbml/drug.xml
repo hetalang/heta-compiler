@@ -71,7 +71,6 @@
     <listOfReactions>
       <reaction
         id="vabs"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="a0" stoichiometry="1"/>
@@ -85,7 +84,6 @@
       </reaction>
       <reaction
         id="vel"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="c1" stoichiometry="1"/>

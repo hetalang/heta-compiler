@@ -187,7 +187,6 @@
     <listOfReactions>
       <reaction
         id="r4"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="spec_amt4" stoichiometry="1"/>
@@ -199,7 +198,6 @@
       </reaction>
       <reaction
         id="r5"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="spec_amt5" stoichiometry="1"/>
@@ -211,7 +209,6 @@
       </reaction>
       <reaction
         id="r6"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="spec_amt6" stoichiometry="1"/>

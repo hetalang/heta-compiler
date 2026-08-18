@@ -68,7 +68,6 @@
       <reaction
         id="r1"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="A" stoichiometry="1"/>

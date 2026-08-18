@@ -221,7 +221,6 @@
       <reaction
         id="r1"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s1" stoichiometry="1"/>
@@ -236,7 +235,6 @@
       <reaction
         id="r2"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s2" stoichiometry="1"/>
@@ -253,7 +251,6 @@
       <reaction
         id="r3"
         reversible="true"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s3" stoichiometry="1"/>
@@ -268,7 +265,6 @@
       <reaction
         id="r4"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="s3" stoichiometry="1"/>

@@ -190,7 +190,6 @@
       <reaction
         id="r_syn_ATP"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="ADP_neu" stoichiometry="1"/>
@@ -205,7 +204,6 @@
       <reaction
         id="r_syn_P1"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="ATP_neu" stoichiometry="2"/>
@@ -225,7 +223,6 @@
       <reaction
         id="r_tr_P1"
         reversible="false"
-        fast="false"
         >
         <listOfReactants>
           <speciesReference species="P1_neu" stoichiometry="1"/>
@@ -240,7 +237,6 @@
       <reaction
         id="r_prol_neu"
         reversible="false"
-        fast="false"
         >
         <listOfProducts>
           <speciesReference species="neu_count" stoichiometry="1"/>
