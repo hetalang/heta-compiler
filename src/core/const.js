@@ -9,7 +9,10 @@ const schema = {
       { enum: [true, false, 1, 0] },
       { type: 'null' }
     ]},
-    num: { extendedNumber: true },
+    num: {oneOf: [
+      { extendedNumber: true },
+      { type: 'null' }
+    ]},
     scale: {oneOf: [
       { type: 'string', enum: ['direct', 'log', 'logit'] },
       { type: 'null' }
@@ -47,7 +50,9 @@ class Const extends _Size { // implicit extend Numeric
     let valid = Const.isValid(normalizedQ, logger);
 
     if (valid) {
-      if (normalizedQ.num !== undefined) {
+      if (normalizedQ.num === null) {
+        delete this.num;
+      } else if (normalizedQ.num !== undefined) {
         this.num = normalizedQ.num;
       }
       if (normalizedQ.free === null) {
