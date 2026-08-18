@@ -5,7 +5,7 @@ pr1 @Process {actors: x1=>x2} := k1 * x1;
 
 k1 @Const = 1e-3;
 
-sw1 @TimeSwitcher {};
+sw1 @TimeSwitcher { start: 0 };
 
 x1 [sw1]= x1 + 10;
 start1 @Const = 12;

@@ -54,11 +54,11 @@ describe('TimeSwitcher uses referencies.', () => {
   });
 
   
-  it('No properties', () => {
+  it('No properties does not create a default start', () => {
     let sw3 = c.namespaceStorage.get('nameless').get('sw3');
 
     expect(sw3).to.not.have.property('start');
-    expect(sw3).to.have.property('startObj').which.has.property('num', 0);
+    expect(sw3).to.not.have.property('startObj');
     expect(sw3).to.not.have.property('period');
     expect(sw3).to.not.have.property('periodObj');
     expect(sw3).to.not.have.property('stop');
@@ -67,8 +67,7 @@ describe('TimeSwitcher uses referencies.', () => {
     
     expect(sw3.toQ()).to.be.deep.equal({
       id: 'sw3',
-      class: 'TimeSwitcher',
-      start: 0
+      class: 'TimeSwitcher'
     });
   });
 });

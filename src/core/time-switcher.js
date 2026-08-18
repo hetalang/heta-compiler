@@ -47,8 +47,7 @@ const schema = {
     ConstInternal: {anyOf: [
       { allOf: [ { '$ref': '#/definitions/Const' }, { type: 'object', required: ['num'] } ] },
       { '$ref': '#/definitions/ID' },
-      { type: 'number' },
-      { type: 'null' }
+      { type: 'number' }
     ]},
     ID: {
       description: 'First character is letter, others are letter, digit or lodash.',
@@ -81,23 +80,19 @@ const schema = {
   if (period > 0 && stop === Infinity/undefined) return Infinity;
 */
 class TimeSwitcher extends _Switcher {
-  constructor(isCore = false){
-    super(isCore);
-    // default start
-    this.startObj = (new Const).merge({ num: 0 });
-  }
   merge(q = {}){
     super.merge(q);
     let logger = this._container?.logger;
     let valid = TimeSwitcher.isValid(q, logger);
 
     if (valid) {
-      // empty means anon 0 as default
+      // null clears the required start value
       if (q.start === null) {
         delete this.start;
-        this.startObj = (new Const).merge({ num: 0 });
+        delete this.startObj;
       } else if (typeof q.start === 'string') {
         this.start = q.start;
+        delete this.startObj;
       } else if (typeof q.start === 'number') {
         delete this.start;
         this.startObj = (new Const).merge({ num: q.start });
@@ -108,6 +103,7 @@ class TimeSwitcher extends _Switcher {
         delete this.periodObj;
       } else if (typeof q.period === 'string'){
         this.period = q.period;
+        delete this.periodObj;
       } else if (typeof q.period === 'number') {
         delete this.period;
         this.periodObj = (new Const).merge({ num: q.period });
@@ -118,6 +114,7 @@ class TimeSwitcher extends _Switcher {
         delete this.stopObj;
       } else if (typeof q.stop === 'string'){
         this.stop = q.stop;
+        delete this.stopObj;
       } else if (typeof q.stop === 'number') {
         delete this.stop;
         this.stopObj = (new Const).merge({ num: q.stop });
@@ -173,13 +170,13 @@ class TimeSwitcher extends _Switcher {
   toQ(options = {}){
     let res = super.toQ(options);
 
-    if (this.startObj !== undefined) {
+    if (this.start !== undefined || this.startObj !== undefined) {
       res.start = this.getStart();
     }
-    if (this.periodObj !== undefined) {
+    if (this.period !== undefined || this.periodObj !== undefined) {
       res.period = this.getPeriod();
     }
-    if (this.stopObj !== undefined) {
+    if (this.stop !== undefined || this.stopObj !== undefined) {
       res.stop = this.getStop();
     }
 
@@ -187,6 +184,15 @@ class TimeSwitcher extends _Switcher {
   }
   static get validate() {
     return ajv.compile(schema);
+  }
+  bind(namespace) {
+    super.bind(namespace);
+    if (this.getStart() === undefined) {
+      this._container?.logger.error(
+        `No required "start" property for "${this.index}" of ${this.className}.`,
+        {type: 'BindingError', space: this.space}
+      );
+    }
   }
 }
 

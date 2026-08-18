@@ -43,6 +43,20 @@ describe('Test for requirements', () => {
 
     expect(concreteContainer.logger.hasErrors).to.equal(true);
   });
+  it('requires TimeSwitcher.start only in concrete namespaces', () => {
+    let abstractContainer = new Container();
+    abstractContainer.setNS({space: 'abstract', type: 'abstract'});
+    abstractContainer.load({class: 'TimeSwitcher', id: 'sw', space: 'abstract', start: null});
+    abstractContainer.knitMany();
+
+    expect(abstractContainer.logger.hasErrors).to.equal(false);
+
+    let concreteContainer = new Container();
+    concreteContainer.load({class: 'TimeSwitcher', id: 'sw', start: null});
+    concreteContainer.knitMany();
+
+    expect(concreteContainer.logger.hasErrors).to.equal(true);
+  });
   it('requires an active value after a switcher clears it', () => {
     let container = new Container();
     container.load({class: 'DSwitcher', id: 'sw', trigger: 't > 1', active: null});
