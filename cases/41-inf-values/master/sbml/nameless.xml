@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-18T07:26:37.419Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless"
+    >
+    
+
+  
+    <listOfCompartments>
+      <compartment
+        id="c1"
+        constant="false"
+        size="1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="s1"
+        compartment="c1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="10"
+        >
+      </species>
+      <species
+        id="s2"
+        compartment="c1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        initialConcentration="0"
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="p1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="p2"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="p3"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="p4"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="p5"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="k1"
+        constant="true"
+        value="0.1"
+        >
+      </parameter>
+      <parameter
+        id="k2"
+        constant="true"
+        value="INF"
+        >
+      </parameter>
+      <parameter
+        id="k3"
+        constant="true"
+        value="NaN"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="p1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><cn>0.1</cn><ci>s1</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="p2"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><infinity/><ci>s1</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="p3"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><notanumber/><ci>s1</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="p4"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><pi/><ci>s1</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="p5"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>exponentiale</ci><ci>s1</ci></apply></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="r1"
+        reversible="true"
+        fast="false"
+        >
+        <listOfReactants>
+          <speciesReference species="s1" stoichiometry="1"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="s2" stoichiometry="1"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>k1</ci><ci>s1</ci></apply><ci>c1</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+  
+  </model>
+</sbml>

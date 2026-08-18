@@ -1,0 +1,175 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-18T07:26:37.696Z",
+  "platformId": "template",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "platform notes",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.1
+        },
+        {
+          "id": "k2",
+          "value": {
+            "num": "+Infinity"
+          }
+        },
+        {
+          "id": "k3",
+          "value": {
+            "num": "NaN"
+          }
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "s1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              10,
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "r1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "r1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "c1",
+          "initial": 1
+        }
+      ],
+      "assignments": [
+        {
+          "id": "s2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s2_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "s1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "s1_amt_",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "r1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "s1",
+              "c1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.1,
+              "s1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              {
+                "num": "+Infinity"
+              },
+              "s1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              {
+                "num": "NaN"
+              },
+              "s1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "Pi",
+              "s1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p5",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "ExponentialE",
+              "s1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

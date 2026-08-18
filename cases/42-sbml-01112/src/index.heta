@@ -1,1 +1,4 @@
+/* Case to test SBML module with variadic functions like 
+   add(), add(1), add(1,2,3) */
+
 #include {source: ./01112-sbml-l3v2.xml, type: sbml};
