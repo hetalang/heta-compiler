@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "327a79cf21574c63a588540da5fb81789fff0d99f1ef1724b249f2ffc08f0eb8",
+    "hashSum": "3ba49df47061d7be29efad1deea896f56addb5fccbc4ac410cd4c46bbff8751b",
     "hashAlgorithm": "sha256"
   },
   {
@@ -138,21 +138,6 @@
   },
   {
     "action": "upsert",
-    "class": "TimeScale",
-    "id": "t_first"
-  },
-  {
-    "action": "upsert",
-    "class": "TimeScale",
-    "id": "t_second"
-  },
-  {
-    "action": "upsert",
-    "class": "TimeScale",
-    "id": "t_third"
-  },
-  {
-    "action": "upsert",
     "actors": [
       {
         "stoichiometry": -1,
@@ -250,7 +235,7 @@
   {
     "action": "upsert",
     "assignments": {
-      "ode_": "sin(1.2 * t_first)"
+      "ode_": "sin(1.2 * t)"
     },
     "class": "Record",
     "id": "x1_first"
@@ -258,7 +243,7 @@
   {
     "action": "upsert",
     "assignments": {
-      "ode_": "sin(1.2 * t_second)"
+      "ode_": "sin(1.2 * t)"
     },
     "class": "Record",
     "id": "x1_second"
@@ -266,7 +251,7 @@
   {
     "action": "upsert",
     "assignments": {
-      "ode_": "sin(1.2 * t_third)"
+      "ode_": "sin(1.2 * t)"
     },
     "class": "Record",
     "id": "x1_third"

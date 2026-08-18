@@ -186,21 +186,6 @@
           }
         },
         {
-          "id": "t_first",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                1,
-                "t"
-              ],
-              0
-            ],
-            "format": "math-json"
-          }
-        },
-        {
           "id": "x1_first",
           "rhs": {
             "expr": [
@@ -208,7 +193,7 @@
               [
                 "Multiply",
                 1.2,
-                "t_first"
+                "t"
               ]
             ],
             "format": "math-json"
@@ -249,21 +234,6 @@
           }
         },
         {
-          "id": "t_second",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                1,
-                "t"
-              ],
-              0
-            ],
-            "format": "math-json"
-          }
-        },
-        {
           "id": "x1_second",
           "rhs": {
             "expr": [
@@ -271,7 +241,7 @@
               [
                 "Multiply",
                 1.2,
-                "t_second"
+                "t"
               ]
             ],
             "format": "math-json"
@@ -312,21 +282,6 @@
           }
         },
         {
-          "id": "t_third",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                1,
-                "t"
-              ],
-              0
-            ],
-            "format": "math-json"
-          }
-        },
-        {
           "id": "x1_third",
           "rhs": {
             "expr": [
@@ -334,7 +289,7 @@
               [
                 "Multiply",
                 1.2,
-                "t_third"
+                "t"
               ]
             ],
             "format": "math-json"

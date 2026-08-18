@@ -358,8 +358,9 @@ Container.prototype.setNS = function(q = {}){
     namespace.container = this; // set parent
     this.namespaceStorage.set(space, namespace);
     
-    // set default t @TimeScale in all namespaces
-    this.insert({id: 't', space: space, class: 'TimeScale'});
+    // Set the system time scale explicitly. User-defined time scales have no
+    // implicit slope or intercept.
+    this.insert({id: 't', space: space, class: 'TimeScale', slope: 1, intercept: 0});
   }
   // it is possible to update type
   namespace._isAbstract = q.type === 'abstract';
@@ -449,8 +450,16 @@ Container.prototype.importNS = function(_q = {}){
     return;
   }
 
+  // Keep the destination namespace's system time scale. Imported components
+  // continue to reference it as "t", even when a prefix or suffix is used.
+  let importOptions = Object.assign({}, q, {
+    rename: Object.assign({}, q.rename, {t: 't'})
+  });
+  let components = fromNamespace.toArray()
+    .filter((component) => !(component.id === 't' && component.instanceOf('TimeScale')));
+
   // normal flow
-  let clones = fromNamespace.toArray().map((component) => {
+  let clones = components.map((component) => {
     // update id: q.id is ignored, q.rename[component.id], [q.suffix, component.id, q.prefix].join('')
     let newId = q.rename[component.id] 
       || [q.prefix, component.id, q.suffix].join(''); // prefix-id-suffix as default value
@@ -458,7 +467,7 @@ Container.prototype.importNS = function(_q = {}){
     // cloning and update references
     let clone = component.clone().merge({id: newId});
     clone.namespace = namespace;
-    clone.updateReferences(q);
+    clone.updateReferences(importOptions);
 
     namespace.set(newId, clone);
 

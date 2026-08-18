@@ -137,21 +137,6 @@
         value="0.3"
         >
       </parameter>
-      <parameter
-        id="t_first"
-        constant="false"
-        >
-      </parameter>
-      <parameter
-        id="t_second"
-        constant="false"
-        >
-      </parameter>
-      <parameter
-        id="t_third"
-        constant="false"
-        >
-      </parameter>
     </listOfParameters>
   
 <!-- BEGIN RULES -->
@@ -159,56 +144,17 @@
     <assignmentRule
       variable="x1_first"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_first</ci></apply></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x1_second"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_second</ci></apply></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x1_third"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><ci>t_third</ci></apply></apply></math>
-    </assignmentRule>
-    <assignmentRule
-      variable="t_first"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <apply><plus/>
-          <apply><times/>
-            <cn> 1 </cn>
-            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-          </apply>
-          <cn> 0 </cn>
-        </apply>
-      </math>
-    </assignmentRule>
-    <assignmentRule
-      variable="t_second"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <apply><plus/>
-          <apply><times/>
-            <cn> 1 </cn>
-            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-          </apply>
-          <cn> 0 </cn>
-        </apply>
-      </math>
-    </assignmentRule>
-    <assignmentRule
-      variable="t_third"
-      >
-      <math xmlns="http://www.w3.org/1998/Math/MathML">
-        <apply><plus/>
-          <apply><times/>
-            <cn> 1 </cn>
-            <csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol>
-          </apply>
-          <cn> 0 </cn>
-        </apply>
-      </math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><sin/><apply><times/><cn>1.2</cn><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></apply></math>
     </assignmentRule>
   
   </listOfRules>

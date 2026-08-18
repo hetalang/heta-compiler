@@ -56,7 +56,7 @@
 {%- for component in namespace.selectByClassName('TimeScale') %}
   {{- notes(component, indentation) }}
 {{ indentation }}{{- component.id }}
-  {{- class(component) }}
+  {{- class(component) if component.id !== 't' }}
   {{- title(component) }}
   {{- dict(component) }}
   {{- ';' }}

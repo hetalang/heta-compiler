@@ -35,8 +35,6 @@ const schema = {
 class TimeScale extends _Size { // implicit extend Numeric
   constructor(isCore = false){
     super(isCore);
-    this.slope = 1;
-    this.intercept = 0;
   } 
   merge(q = {}){
     super.merge(q);
@@ -45,12 +43,12 @@ class TimeScale extends _Size { // implicit extend Numeric
 
     if (valid) {
       if (q.slope === null) {
-        this.slope = 1;
+        delete this.slope;
       } else if (q.slope !== undefined) {
         this.slope = q.slope;
       }
       if (q.intercept === null) {
-        this.intercept = 0;
+        delete this.intercept;
       } else if (q.intercept !== undefined) {
         this.intercept = q.intercept;
       }
@@ -69,16 +67,16 @@ class TimeScale extends _Size { // implicit extend Numeric
   clone(){
     let clonedComponent = super.clone();
 
-    clonedComponent.slope = this.slope;
-    clonedComponent.intercept = this.intercept;
-    clonedComponent.output = this.output;
+    if (this.slope !== undefined) clonedComponent.slope = this.slope;
+    if (this.intercept !== undefined) clonedComponent.intercept = this.intercept;
+    if (this.output !== undefined) clonedComponent.output = this.output;
       
     return clonedComponent;
   }
   toQ(options = {}){
     let res = super.toQ(options);
-    if (this.slope !== 1) res.slope = this.slope;
-    if (this.intercept !== 0) res.intercept = this.intercept;
+    if (this.id !== 't' && this.slope !== undefined) res.slope = this.slope;
+    if (this.id !== 't' && this.intercept !== undefined) res.intercept = this.intercept;
     if (this.output === true) res.output = this.output;
 
     // if base time scale than we "update" not "insert"
@@ -97,6 +95,15 @@ class TimeScale extends _Size { // implicit extend Numeric
     return ajv.compile(schema);
   }
 }
+
+TimeScale._requirements = {
+  slope: {
+    required: true
+  },
+  intercept: {
+    required: true
+  }
+};
 
 module.exports = {
   TimeScale

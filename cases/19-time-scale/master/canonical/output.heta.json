@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "220512b8cc6fd850e3f392f321008601f356ebec319f09e184af97b916baf89b",
+    "hashSum": "196466e88fc1411d325f2962e9c2600c9cfd52cd2ac5a4a6e879d6b91ae7dff7",
     "hashAlgorithm": "sha256"
   },
   {
@@ -208,6 +208,7 @@
     "action": "upsert",
     "class": "TimeScale",
     "id": "tid",
+    "intercept": 0,
     "notes": "Time in days",
     "output": true,
     "slope": 0.041667,
