@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:23.057Z","platformId":"to-sbml","platformVersion":"v0.1.0","namespaceId":"first","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-18T10:19:05.658Z","platformId":"to-sbml","platformVersion":"v0.1.0","namespaceId":"first","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="first"
@@ -112,7 +112,6 @@
     <listOfReactions>
       <reaction
         id="r2"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>
@@ -130,7 +129,6 @@
       </reaction>
       <reaction
         id="r3"
-        reversible="true"
         fast="false"
         >
         <listOfModifiers>
@@ -142,8 +140,7 @@
       </reaction>
     </listOfReactions>
   
-    <listOfEvents>
-      <event
+    <listOfEvents><event
         id="sw1"
         >
         <trigger>

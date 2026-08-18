@@ -133,7 +133,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'reaction')
     .forEach((x) => {
-      let qArr_add = reactionToQ(x);
+      let qArr_add = reactionToQ(x, sbmlLevel);
       qArr = qArr.concat(qArr_add);
     });
 
@@ -467,7 +467,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   return q;
 }
 
-function reactionToQ(x){
+function reactionToQ(x, sbmlLevel){
   let qArr = [];
   let localConstTranslate = [];
   let q = baseToQ(x);
@@ -505,8 +505,13 @@ function reactionToQ(x){
     q.assignments = { ode_: expr };
   }
 
-  // check if reversible
-  q.reversible = x.attributes?.reversible !== 'false' ;
+  // In SBML Level 2, reversible is optional with a default of true. In
+  // Level 3 it is required and has no default, so preserve an omission.
+  if (x.attributes?.reversible !== undefined) {
+    q.reversible = x.attributes.reversible !== 'false';
+  } else if (sbmlLevel === 2) {
+    q.reversible = true;
+  }
   
   // check if fast
   let fast = x.attributes?.fast === 'true' ;

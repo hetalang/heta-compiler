@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.0-beta.1","createdAt":"2026-06-08T08:42:22.927Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-18T10:19:05.560Z","platformId":"useNamespace","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -217,7 +217,6 @@
     <listOfReactions>
       <reaction
         id="vabs_first"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>
@@ -232,7 +231,6 @@
       </reaction>
       <reaction
         id="vel_first"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>
@@ -244,7 +242,6 @@
       </reaction>
       <reaction
         id="vabs_second"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>
@@ -259,7 +256,6 @@
       </reaction>
       <reaction
         id="vel_second"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>
@@ -271,7 +267,6 @@
       </reaction>
       <reaction
         id="vabs_third"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>
@@ -286,7 +281,6 @@
       </reaction>
       <reaction
         id="vel_third"
-        reversible="true"
         fast="false"
         >
         <listOfReactants>

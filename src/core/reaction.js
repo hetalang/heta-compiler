@@ -6,7 +6,7 @@ const schema = {
   type: 'object',
   properties: {
     reversible: {oneOf: [
-      { enum: [true, false, 1, 0], default: true },
+      { enum: [true, false, 1, 0] },
       { type: 'null' }
     ]},
     modifiers: {oneOf: [

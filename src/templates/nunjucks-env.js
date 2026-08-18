@@ -136,7 +136,7 @@ function _toHetaDict(component = {}) {
   if (Array.isArray(component.modifiers) && component.modifiers.length > 0) {
     add('modifiers', _toHetaArray(component.modifiers));
   }
-  add('reversible', component.reversible, component.reversible === false);
+  add('reversible', component.reversible, component.reversible !== undefined);
   add('isAmount', component.isAmount, !!component.isAmount);
   add('output', component.output, !!component.output);
   add('slope', component.slope, component.slope !== undefined && component.slope !== 1);

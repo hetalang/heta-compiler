@@ -223,6 +223,27 @@ describe('parse parameter constant defaults', () => {
   });
 });
 
+describe('parse reaction reversible defaults', () => {
+  function parseReaction(level, reversible) {
+    let attribute = reversible === undefined ? '' : ` reversible="${reversible}"`;
+    let xml = `<sbml level="${level}" version="${level === 2 ? 5 : 1}"><model><listOfReactions><reaction id="r"${attribute}/></listOfReactions></model></sbml>`;
+    return SBMLParse(xml).find((q) => q.id === 'r');
+  }
+
+  it('uses the Level 2 default reversible=true', () => {
+    expect(parseReaction(2)).to.include({ id: 'r', class: 'Reaction', reversible: true });
+  });
+
+  it('keeps an omitted Level 3 reversible attribute absent', () => {
+    expect(parseReaction(3)).not.to.have.property('reversible');
+  });
+
+  it('keeps an explicit reversible attribute at every level', () => {
+    expect(parseReaction(2, 'false')).to.include({ reversible: false });
+    expect(parseReaction(3, 'true')).to.include({ reversible: true });
+  });
+});
+
 describe('parse SBML special numbers', () => {
   it('keeps special values of local kinetic-law parameters', () => {
     let xml = `<sbml level="3" version="1"><model><listOfReactions><reaction id="r"><kineticLaw><listOfLocalParameters><localParameter id="positive" value="INF"/><localParameter id="negative" value="-INF"/><localParameter id="invalid" value="NaN"/></listOfLocalParameters></kineticLaw></reaction></listOfReactions></model></sbml>`;

@@ -3,14 +3,14 @@
     "action": "hasMeta",
     "generator": {
       "name": "heta-compiler",
-      "version": "0.12.0-beta.1"
+      "version": "0.12.1"
     },
-    "created": "2026-06-10T11:19:46.148Z",
+    "created": "2026-08-18T10:19:05.806Z",
     "platformId": "template",
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "745e31c0d214863a2d93399ca5923e97e38aff1b575d0ccf377698d10908a68e",
+    "hashSum": "0d96a16bf057f9cbe1a086ea3b93e10ac4c4bb6b4fb84a5b92b771bd23f2143a",
     "hashAlgorithm": "sha256"
   },
   {
@@ -94,7 +94,8 @@
       "ode_": "0.01"
     },
     "class": "Reaction",
-    "id": "r2"
+    "id": "r2",
+    "reversible": true
   },
   {
     "action": "upsert",

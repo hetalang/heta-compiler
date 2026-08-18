@@ -310,7 +310,9 @@
         {%- if record.title is defined %}
         name="{{ record.title }}"
         {%- endif %}
-        reversible="{{ record.reversible !== false }}"
+        {%- if record.reversible is defined %}
+        reversible="{{ record.reversible }}"
+        {%- endif %}
         fast="{{ record.aux.fast === 'true' }}"
         {#- metaid="{{record.index}}" #}
         >

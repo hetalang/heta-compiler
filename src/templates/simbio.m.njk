@@ -66,7 +66,8 @@
 {{ "% Reactions" if listOfReactions|length > 0 }}
 {%- for record in listOfReactions %}
 {{ storage_id }}.reaction.{{record.id}} = addreaction(
-  {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true, 'Reversible', {{ record.reversible!==false}}
+  {{- model_id }}, 'null -> null', 'Name', '{{record.id}}', 'Active', true
+  {%- if record.reversible is defined %}, 'Reversible', {{ record.reversible }}{% endif %}
   {%- if record.assignments.ode_ %}, 'ReactionRate', '{{record.assignments.ode_.toMatlabString()}}'{% endif -%}
   , 'Notes', '{{ record.notesHTML | replace("'", "''") }}{{ toAuxHtml(record.aux) }}', 'Tag', '');
   {%- set fullActors = record.actors.concat(record.modifiers) -%}
