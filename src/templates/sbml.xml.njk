@@ -371,15 +371,15 @@
     </listOfReactions>
   {% endif %}
 
-  {%- set listOfTimeEvents = population.selectByClassName("TimeSwitcher") -%}
-  {%- set listOfDEvents = population.selectByClassName("DSwitcher") -%}
-  {%- set listOfCEvents = population.selectByClassName("CSwitcher") -%}
+  {%- set listOfTimeEvents = population.selectByClassName("TimeSwitcher") | eventsWithAssignments(population) -%}
+  {%- set listOfDEvents = population.selectByClassName("DSwitcher") | eventsWithAssignments(population) -%}
+  {%- set listOfCEvents = population.selectByClassName("CSwitcher") | eventsWithAssignments(population) -%}
   {% if listOfTimeEvents|length + listOfCEvents|length  + listOfDEvents|length > 0 %}
     <listOfEvents>
       {%- for event in listOfTimeEvents -%}
       {%- set startMathML = '<ci>' + event.start + '</ci>' if event.start is defined else '<cn>'+ event.startObj.num + '</cn>' %}
       {%- set eventAssignments = population.selectRecordsByContext(event.id) -%}
-      {%- if eventAssignments|length > 0 %}{# skip events with no assignments #}
+      {%- if eventAssignments|length > 0 %}
       <event
         id="{{event.id}}"
         {#- metaid="{{event.index}}" #}

@@ -5,12 +5,12 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-18T07:26:37.275Z",
+    "created": "2026-08-18T07:44:01.430Z",
     "platformId": "template",
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "13d723fa88f31f640d704c3e23d293ff43bfed1180c1449cb63452c62645bdd5",
+    "hashSum": "4613adf4245bbb6aeb9bfe10eb17cacd6c74d4f361c09418ff27df66a8b39325",
     "hashAlgorithm": "sha256"
   },
   {
@@ -86,6 +86,12 @@
   },
   {
     "action": "upsert",
+    "class": "Const",
+    "id": "period1",
+    "num": "NaN"
+  },
+  {
+    "action": "upsert",
     "actors": [
       {
         "stoichiometry": -1,
@@ -119,6 +125,34 @@
     "class": "Species",
     "compartment": "c1",
     "id": "s2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "start1",
+    "num": "-Infinity"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "stop1",
+    "num": "Infinity"
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw1",
+    "period": 10,
+    "start": 10,
+    "stop": 100
+  },
+  {
+    "action": "upsert",
+    "class": "TimeSwitcher",
+    "id": "sw4",
+    "period": "period1",
+    "start": "start1",
+    "stop": "stop1"
   },
   {
     "action": "upsert",

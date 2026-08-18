@@ -23,3 +23,25 @@ p3 @Record := NaN * s1;
 // Global constants
 p4 @Record := pi * s1;
 p5 @Record := exponentiale * s1;
+
+// time events
+sw1 @TimeSwitcher {
+  start: 10,
+  period: 10,
+  stop: 100
+};
+/* not supported by current implementation
+sw2 @TimeSwitcher {
+  start: -Infinity,
+  period: NaN,
+  stop: +Infinity
+};
+*/
+sw4 @TimeSwitcher {
+  start: start1,
+  period: period1,
+  stop: stop1
+};
+start1 @Const = -Infinity;
+period1 @Const = NaN;
+stop1 @Const = +Infinity;

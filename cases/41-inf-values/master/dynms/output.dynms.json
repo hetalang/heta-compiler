@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-18T07:26:37.696Z",
+  "created": "2026-08-18T07:44:01.456Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -28,6 +28,24 @@
           "id": "k3",
           "value": {
             "num": "NaN"
+          }
+        },
+        {
+          "id": "start1",
+          "value": {
+            "num": "-Infinity"
+          }
+        },
+        {
+          "id": "period1",
+          "value": {
+            "num": "NaN"
+          }
+        },
+        {
+          "id": "stop1",
+          "value": {
+            "num": "+Infinity"
           }
         }
       ],
@@ -167,7 +185,41 @@
           }
         }
       ],
-      "timeEvents": [],
+      "timeEvents": [
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "time",
+            "start": 10,
+            "period": 10,
+            "stop": 100
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true
+        },
+        {
+          "id": "sw4",
+          "trigger": {
+            "type": "time",
+            "start": {
+              "expr": "start1",
+              "format": "math-json"
+            },
+            "period": {
+              "expr": "period1",
+              "format": "math-json"
+            },
+            "stop": {
+              "expr": "stop1",
+              "format": "math-json"
+            }
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true
+        }
+      ],
       "events": [],
       "observables": []
     }

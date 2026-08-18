@@ -21,6 +21,9 @@ module.exports = function(env) {
     return effectors
       .filter((effector) => !(effector.stoichiometry < 0));
   });
+  env.addFilter('eventsWithAssignments', function(events, population) {
+    return events.filter((event) => population.selectRecordsByContext(event.id).length > 0);
+  });
   env.addFilter('toJSON', function(obj) {
     return JSON.stringify(obj);
   });
