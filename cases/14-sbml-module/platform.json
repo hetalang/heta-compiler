@@ -17,10 +17,10 @@
       "format": "SBML"
     },
     {
-      "format": "JSON"
+      "format": "Canonical"
     },
     {
-      "format": "Julia"
+      "format": "DynMS"
     }
   ]
 }

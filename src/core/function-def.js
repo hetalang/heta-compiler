@@ -19,7 +19,7 @@ const schema = {
       description: 'First character is letter, others are letter, digit or underscore.',
       type: 'string',
       minLength: 1,
-      pattern: '^[_a-zA-Z][_a-zA-Z0-9]*$',
+      pattern: '^[a-zA-Z][a-zA-Z0-9_]*$',
       example: 'x_12_'
     },
 

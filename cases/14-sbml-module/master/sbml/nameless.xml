@@ -5,7 +5,7 @@
   level="2" version="4"
   >
   <annotation>
-    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-06T14:37:09.817Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-19T09:27:01.753Z","platformId":"template","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
   </annotation>
   <model
     id="nameless"
@@ -13,24 +13,14 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_litre" name="litre">
+    <unitDefinition id="_volume" name="volume">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole" name="mole">
+    <unitDefinition id="_substance" name="substance">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
-  </listOfUnits>
-</unitDefinition>
-    <unitDefinition id="_1n6mole" name="(1e-6 mole)">
-  <listOfUnits>
-    <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
-  </listOfUnits>
-</unitDefinition>
-    <unitDefinition id="__h" name="_h">
-  <listOfUnits>
-    <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
     </listOfUnitDefinitions>
@@ -43,7 +33,7 @@
         name="compartment"
         constant="false"
         size="1"
-        units="_litre"
+        units="_volume"
         >
       </compartment>
     </listOfCompartments>
@@ -57,7 +47,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         
-        substanceUnits="_mole"
+        substanceUnits="_substance"
         >
       </species>
       <species
@@ -68,7 +58,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         
-        substanceUnits="_1n6mole"
+        substanceUnits="_substance"
         >
       </species>
     </listOfSpecies>
@@ -78,7 +68,6 @@
         id="k1"
         constant="true"
         value="1"
-        units="__h"
         >
       </parameter>
     </listOfParameters>
@@ -116,8 +105,7 @@
       </reaction>
     </listOfReactions>
   
-    <listOfEvents>
-      <event
+    <listOfEvents><event
         id="event1"
         >
         <trigger>

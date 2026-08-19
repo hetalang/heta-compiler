@@ -9,5 +9,6 @@
 include 00025-sbml-l2v4.xml type sbml;
 */
 
-#defineUnit _h {units: 1/hour};
+#defineUnit volume {units: litre};
+#defineUnit substance {units: mole};
 #include {source: 00026-sbml-l2v4.xml, type: sbml, useCSwitcher: false};

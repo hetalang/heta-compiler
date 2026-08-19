@@ -148,7 +148,7 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
 
   let space = q.space || 'nameless';
   // check index
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  if (!q.id || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
     this.logger.error(
       `${ind} id should be string of type ID, but have "${q.id}"\n\t- ${JSON.stringify(q)}`,
       {type: 'QError', space: space}
@@ -212,7 +212,7 @@ Container.prototype.update = function(q = {}){
       {type: 'QError', space: space}
     );
     return;
-  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
     this.logger.error(
       `"id" property should be string in "#update" action, got "${q.id}"`,
       {type: 'QError', space: space}
@@ -291,7 +291,7 @@ Container.prototype.delete = function(q = {}){
       {type: 'QError', space: space}
     );
     return;
-  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
     this.logger.error(
       `"id" property should be string in "#delete" action, got "${q.id}"`,
       {type: 'QError', space: space}
@@ -519,7 +519,7 @@ Container.prototype.import = function(_q = {}){
     );
     return;
   }
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
+  if (!q.id || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)){
     this.logger.error(
       `${ind} id should be string, but have "${q.id}"`,
       {type: 'QError', space: space}
@@ -588,7 +588,7 @@ Container.prototype.select = function(q = {}){
       {type: 'QError', space: space}
     );
     return;
-  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
     this.logger.error(
       `"id" property should be string in "#select" action, got "${q.id}"`,
       {type: 'QError', space: space}

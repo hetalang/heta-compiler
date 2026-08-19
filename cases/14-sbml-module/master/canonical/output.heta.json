@@ -5,12 +5,12 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-06T14:37:09.800Z",
+    "created": "2026-08-19T09:27:01.785Z",
     "platformId": "template",
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "7293c467e7b158d2871b31a378c05626ddb1f2f0354b9d802ce864b565b47788",
+    "hashSum": "9ba0ebc2015ce9e71f52306e8387ac83707036dc7fc7f2f5a438389c212e669c",
     "hashAlgorithm": "sha256"
   },
   {
@@ -30,7 +30,7 @@
     "units": [
       {
         "exponent": 1,
-        "kind": "litre",
+        "kind": "volume",
         "multiplier": 1
       }
     ]
@@ -47,14 +47,7 @@
     "class": "Const",
     "id": "k1",
     "num": 1,
-    "title": "k1",
-    "units": [
-      {
-        "exponent": 1,
-        "kind": "_h",
-        "multiplier": 1
-      }
-    ]
+    "title": "k1"
   },
   {
     "action": "upsert",
@@ -88,13 +81,13 @@
     "title": "S1",
     "units": [
       {
-        "exponent": -1,
-        "kind": "litre",
+        "exponent": 1,
+        "kind": "substance",
         "multiplier": 1
       },
       {
-        "exponent": 1,
-        "kind": "mole",
+        "exponent": -1,
+        "kind": "volume",
         "multiplier": 1
       }
     ]
@@ -110,14 +103,14 @@
     "title": "S2",
     "units": [
       {
-        "exponent": -1,
-        "kind": "litre",
+        "exponent": 1,
+        "kind": "substance",
         "multiplier": 1
       },
       {
-        "exponent": 1,
-        "kind": "mole",
-        "multiplier": 0.000001
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
       }
     ]
   },
@@ -127,11 +120,22 @@
   },
   {
     "action": "defineUnit",
-    "id": "_h",
+    "id": "substance",
     "units": [
       {
-        "exponent": -1,
-        "kind": "hour",
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
         "multiplier": 1
       }
     ]

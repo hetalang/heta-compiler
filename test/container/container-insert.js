@@ -163,6 +163,10 @@ describe('Unit tests for Container', () => {
       c.insert({id: '1xxx', class: 'ReferenceDefinition'});
       expect(c.logger.hasErrors).to.be.true;
       c.logger.resetErrors();
+
+      c.insert({id: '_xxx', class: 'ReferenceDefinition'});
+      expect(c.logger.hasErrors).to.be.true;
+      c.logger.resetErrors();
     });
 
     it('Insert to wrong namespace', () => {
