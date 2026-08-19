@@ -426,6 +426,13 @@ Container.prototype.importNS = function(_q = {}){
     this.logger.error(`id must not be set for #importNS, got "${q.id}"`);
     return; // BRAKE
   }
+  if (q.prefix !== '' && (typeof q.prefix !== 'string' || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.prefix))) {
+    this.logger.error(
+      `prefix should be string of type ID in #importNS, got "${q.prefix}"`,
+      {type: 'QError', space: space}
+    );
+    return; // BRAKE
+  }
   let namespace = this.namespaceStorage.get(space);
   if (namespace === undefined) {
     this.logger.error(

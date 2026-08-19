@@ -4,6 +4,29 @@ const { Container } = require('../../src');
 const { expect } = require('chai');
 
 describe('Test correct importNS', () => {
+  it('Rejects an invalid prefix', () => {
+    let c = new Container();
+    c.setNS({space: 'one'});
+    c.setNS({space: 'two'});
+    c.load({
+      action: 'insert',
+      class: 'Const',
+      id: 'k1',
+      space: 'one',
+      num: 1
+    });
+
+    let clone = c.importNS({
+      fromSpace: 'one',
+      space: 'two',
+      prefix: '_'
+    });
+
+    expect(clone).to.be.undefined;
+    expect(c.logger.hasErrors).to.be.true;
+    expect(c.namespaceStorage.get('two')).to.have.lengthOf(1);
+  });
+
   it('Two namespaces', () => {
     var c = new Container();
     let counter = c.length;
