@@ -62,82 +62,82 @@
 <!-- END FUNCTION DEFINITIONS -->
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_h" name="h">
+    <unitDefinition id="units_h" name="h">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_uM" name="uM">
+    <unitDefinition id="units_uM" name="uM">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_L" name="L">
+    <unitDefinition id="units_L" name="L">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mL" name="mL">
+    <unitDefinition id="units_mL" name="mL">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="-3" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_m" name="m">
+    <unitDefinition id="units_m" name="m">
   <listOfUnits>
     <unit kind="metre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mM_L" name="mM*L">
+    <unitDefinition id="units_mM_L" name="mM*L">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mM_mL" name="mM*mL">
+    <unitDefinition id="units_mM_mL" name="mM*mL">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
     <unit kind="dimensionless" exponent="1" scale="-3" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mmole" name="mmole">
+    <unitDefinition id="units_mmole" name="mmole">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mmole__h" name="mmole/h">
+    <unitDefinition id="units_mmole__h" name="mmole/h">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mM_h7" name="mM*h^7">
+    <unitDefinition id="units_mM_h7" name="mM*h^7">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-3" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
     <unit kind="second" exponent="7" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="__h" name="1/h">
+    <unitDefinition id="units__h" name="1/h">
   <listOfUnits>
     <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_UL" name="UL">
+    <unitDefinition id="units_UL" name="UL">
   <listOfUnits>
     <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_metre" name="metre">
+    <unitDefinition id="units_metre" name="metre">
   <listOfUnits>
     <unit kind="metre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole" name="mole">
+    <unitDefinition id="units_mole" name="mole">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_metre3" name="metre^3">
+    <unitDefinition id="units_metre3" name="metre^3">
   <listOfUnits>
     <unit kind="metre" exponent="3" scale="0" multiplier="1"/>
   </listOfUnits>
@@ -151,21 +151,21 @@
         id="c1"
         constant="false"
         size="3"
-        units="_L"
+        units="units_L"
         >
       </compartment>
       <compartment
         id="c2"
         constant="false"
         size="4"
-        units="_mL"
+        units="units_mL"
         >
       </compartment>
       <compartment
         id="c3"
         constant="false"
         size="5"
-        units="_m"
+        units="units_m"
         >
       </compartment>
     </listOfCompartments>
@@ -178,7 +178,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        substanceUnits="_mM_L"
+        substanceUnits="units_mM_L"
         >
       </species>
       <species
@@ -188,7 +188,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        substanceUnits="_mM_mL"
+        substanceUnits="units_mM_mL"
         >
       </species>
       <species
@@ -198,7 +198,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        substanceUnits="_mmole"
+        substanceUnits="units_mmole"
         >
       </species>
     </listOfSpecies>
@@ -208,53 +208,53 @@
         id="p1"
         constant="false"
         value="1"
-        units="_uM"
+        units="units_uM"
         >
       </parameter>
       <parameter
         id="p2"
         constant="false"
-        units="_mM_h7"
+        units="units_mM_h7"
         >
       </parameter>
       <parameter
         id="y21"
         constant="false"
-        units="_metre3"
+        units="units_metre3"
         >
       </parameter>
       <parameter
         id="y22"
         constant="false"
-        units="_metre3"
+        units="units_metre3"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.001"
-        units="__h"
+        units="units__h"
         >
       </parameter>
       <parameter
         id="k2"
         constant="true"
         value="1.1"
-        units="_UL"
+        units="units_UL"
         >
       </parameter>
       <parameter
         id="k21"
         constant="true"
         value="1"
-        units="_metre"
+        units="units_metre"
         >
       </parameter>
       <parameter
         id="k22"
         constant="true"
         value="1"
-        units="_mole"
+        units="units_mole"
         >
       </parameter>
     </listOfParameters>

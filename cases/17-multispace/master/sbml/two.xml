@@ -30,7 +30,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="0"
-        substanceUnits="_umole"
+        substanceUnits="units_umole"
         >
       </species>
     </listOfSpecies>
@@ -40,7 +40,7 @@
         id="k1"
         constant="true"
         value="0.00001"
-        units="__minute"
+        units="units__minute"
         >
       </parameter>
     </listOfParameters>

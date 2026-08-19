@@ -13,12 +13,12 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_second" name="second">
+    <unitDefinition id="units_second" name="second">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_dimensionless" name="dimensionless">
+    <unitDefinition id="units_dimensionless" name="dimensionless">
   <listOfUnits>
     <unit kind="dimensionless" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
@@ -31,7 +31,7 @@
       <parameter
         id="foo"
         constant="false"
-        units="_dimensionless"
+        units="units_dimensionless"
         >
       </parameter>
     </listOfParameters>

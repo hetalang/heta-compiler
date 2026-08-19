@@ -18,7 +18,7 @@
         id="comp1"
         name="This is compartment"
         constant="false"
-        units="_L"
+        units="units_L"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">
@@ -61,19 +61,19 @@
         id="p2"
         constant="false"
         value="15.223"
-        units="_nm__min__fM"
+        units="units_nm__min__fM"
         >
       </parameter>
       <parameter
         id="p3"
         constant="false"
-        units="__h__L"
+        units="units__h__L"
         >
       </parameter>
       <parameter
         id="evt1"
         constant="false"
-        units="_min"
+        units="units_min"
         >
       </parameter>
     </listOfParameters>

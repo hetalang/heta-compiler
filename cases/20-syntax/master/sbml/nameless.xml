@@ -13,7 +13,7 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_ud1_xxx" name="ud1_xxx">
+    <unitDefinition id="units_ud1_xxx" name="ud1_xxx">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
@@ -58,7 +58,7 @@
         id="rec1"
         constant="false"
         value="12"
-        units="_ud1_xxx"
+        units="units_ud1_xxx"
         >
       </parameter>
       <parameter

@@ -382,13 +382,13 @@ class Unit extends Array {
   /**
    * Serializes this unit to a stable identifier.
    *
-   * @returns {string} Identifier such as `_mM2_L__mg__h2`.
+   * @returns {string} Identifier such as `units_mM2_L__mg__h2`.
    */
   toHash(){
     if (this.length === 0) {
-      return '_dimensionless';
+      return 'units_dimensionless';
     } else {
-      return this.concat([]) // clone array to exclude mutation
+      return 'units' + this.concat([]) // clone array to exclude mutation
         .sort((x1, x2) => x1.kind > x2.kind ? -1 : 1) // sort by kind id
         .map((item) => {
           let operator = item.exponent < 0

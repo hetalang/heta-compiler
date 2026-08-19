@@ -13,35 +13,35 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_minute" name="minute">
+    <unitDefinition id="units_minute" name="minute">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="1" multiplier="6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_L" name="L">
+    <unitDefinition id="units_L" name="L">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_uM_L" name="uM*L">
+    <unitDefinition id="units_uM_L" name="uM*L">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_umole__minute" name="umole/minute">
+    <unitDefinition id="units_umole__minute" name="umole/minute">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_uM__minute" name="uM/minute">
+    <unitDefinition id="units_uM__minute" name="uM/minute">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="1" multiplier="6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_uM" name="uM">
+    <unitDefinition id="units_uM" name="uM">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="-6" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
@@ -57,7 +57,7 @@
         name="Default compartment"
         constant="false"
         size="1"
-        units="_L"
+        units="units_L"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">
@@ -76,7 +76,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="10"
-        substanceUnits="_uM_L"
+        substanceUnits="units_uM_L"
         >
       </species>
       <species
@@ -87,7 +87,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="0"
-        substanceUnits="_uM_L"
+        substanceUnits="units_uM_L"
         >
       </species>
     </listOfSpecies>
@@ -97,14 +97,14 @@
         id="Vmax"
         constant="true"
         value="0.1"
-        units="_uM__minute"
+        units="units_uM__minute"
         >
       </parameter>
       <parameter
         id="Km"
         constant="true"
         value="2.5"
-        units="_uM"
+        units="units_uM"
         >
       </parameter>
     </listOfParameters>

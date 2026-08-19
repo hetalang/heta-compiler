@@ -13,12 +13,12 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_L" name="L">
+    <unitDefinition id="units_L" name="L">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole" name="mole">
+    <unitDefinition id="units_mole" name="mole">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
@@ -33,7 +33,7 @@
         name="First Compartment"
         constant="false"
         size="1.1"
-        units="_L"
+        units="units_L"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,7 +57,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="10"
-        substanceUnits="_mole"
+        substanceUnits="units_mole"
         >
       </species>
       <species

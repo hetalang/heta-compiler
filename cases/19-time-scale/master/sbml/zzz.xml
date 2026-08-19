@@ -13,45 +13,45 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_hour" name="hour">
+    <unitDefinition id="units_hour" name="hour">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_litre" name="litre">
+    <unitDefinition id="units_litre" name="litre">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole" name="mole">
+    <unitDefinition id="units_mole" name="mole">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole__hour" name="mole/hour">
+    <unitDefinition id="units_mole__hour" name="mole/hour">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
     <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_day" name="day">
+    <unitDefinition id="units_day" name="day">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="4" multiplier="8.64"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="__mole__hour" name="1/hour/mole">
+    <unitDefinition id="units__mole__hour" name="1/hour/mole">
   <listOfUnits>
     <unit kind="second" exponent="-1" scale="3" multiplier="3.6"/>
     <unit kind="mole" exponent="-1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole__litre" name="mole/litre">
+    <unitDefinition id="units_mole__litre" name="mole/litre">
   <listOfUnits>
     <unit kind="mole" exponent="1" scale="0" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
   </listOfUnits>
 </unitDefinition>
-    <unitDefinition id="_mole2__litre" name="mole^2/litre">
+    <unitDefinition id="units_mole2__litre" name="mole^2/litre">
   <listOfUnits>
     <unit kind="mole" exponent="2" scale="0" multiplier="1"/>
     <unit kind="litre" exponent="-1" scale="0" multiplier="1"/>
@@ -66,7 +66,7 @@
         id="comp1"
         constant="false"
         size="1.1"
-        units="_litre"
+        units="units_litre"
         >
       </compartment>
     </listOfCompartments>
@@ -79,7 +79,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="true"
         initialAmount="12"
-        substanceUnits="_mole"
+        substanceUnits="units_mole"
         >
       </species>
       <species
@@ -89,7 +89,7 @@
         boundaryCondition="false"
         hasOnlySubstanceUnits="false"
         initialConcentration="1"
-        substanceUnits="_mole"
+        substanceUnits="units_mole"
         >
       </species>
       <species
@@ -99,7 +99,7 @@
         boundaryCondition="true"
         hasOnlySubstanceUnits="false"
         
-        substanceUnits="_mole"
+        substanceUnits="units_mole"
         >
       </species>
     </listOfSpecies>
@@ -108,40 +108,40 @@
       <parameter
         id="x1"
         constant="false"
-        units="_mole2__litre"
+        units="units_mole2__litre"
         >
       </parameter>
       <parameter
         id="x2"
         constant="false"
-        units="_hour"
+        units="units_hour"
         >
       </parameter>
       <parameter
         id="k1"
         constant="true"
         value="0.001"
-        units="__mole__hour"
+        units="units__mole__hour"
         >
       </parameter>
       <parameter
         id="tau"
         constant="true"
         value="12"
-        units="_hour"
+        units="units_hour"
         >
       </parameter>
       <parameter
         id="s3_0"
         constant="true"
         value="15"
-        units="_mole__litre"
+        units="units_mole__litre"
         >
       </parameter>
       <parameter
         id="tid"
         constant="false"
-        units="_day"
+        units="units_day"
         >
         <notes>
           <html xmlns="http://www.w3.org/1999/xhtml">

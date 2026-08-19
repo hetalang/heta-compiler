@@ -81,7 +81,7 @@
 <!-- END FUNCTION DEFINITIONS -->
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_time" name="time">
+    <unitDefinition id="units_time" name="time">
   <listOfUnits>
     <unit kind="second" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>

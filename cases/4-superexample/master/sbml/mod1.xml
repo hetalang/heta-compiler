@@ -13,7 +13,7 @@
     
 <!-- BEGIN UNIT DEFINITIONS -->
     <listOfUnitDefinitions>
-    <unitDefinition id="_litre" name="litre">
+    <unitDefinition id="units_litre" name="litre">
   <listOfUnits>
     <unit kind="litre" exponent="1" scale="0" multiplier="1"/>
   </listOfUnits>
@@ -27,13 +27,13 @@
         id="comp1"
         constant="false"
         size="5"
-        units="_litre"
+        units="units_litre"
         >
       </compartment>
       <compartment
         id="comp2"
         constant="false"
-        units="_litre"
+        units="units_litre"
         >
       </compartment>
     </listOfCompartments>
