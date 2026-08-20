@@ -2,6 +2,8 @@ name: Verify format conversion
 
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: write
@@ -16,6 +18,8 @@ jobs:
     steps:
       - name: Checkout heta-compiler
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name || github.sha }}
 
       - name: Checkout reports publication branch
         uses: actions/checkout@v6
@@ -96,7 +100,7 @@ jobs:
           NODE
 
       - name: Publish latest reports for the source branch
-        if: always()
+        if: always() && github.event_name == 'workflow_dispatch'
         shell: bash
         run: |
           report_names=(l3v2 l3v1 l2v5)
@@ -122,6 +126,39 @@ jobs:
             exit 0
           fi
           git -C "$GITHUB_WORKSPACE/reports-publication" commit -m "Update SBML reports for $GITHUB_REF_NAME from $GITHUB_SHA"
+          git -C "$GITHUB_WORKSPACE/reports-publication" push origin HEAD:reports
+
+      - name: Publish reports for the release
+        if: always() && github.event_name == 'release'
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          report_names=(l3v2 l3v1 l2v5)
+          for report_name in "${report_names[@]}"; do
+            if [[ ! -f "$FCTS_ROOT/results/$report_name/report.json" ]]; then
+              echo "Report $report_name is unavailable; preserving the previously published release reports."
+              exit 0
+            fi
+          done
+
+          release_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/releases/$RELEASE_TAG"
+          latest_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/releases/latest"
+          rm -rf "$release_root" "$latest_root"
+          mkdir -p "$release_root" "$latest_root"
+          for report_name in "${report_names[@]}"; do
+            cp -a "$FCTS_ROOT/results/$report_name" "$release_root/$report_name"
+            cp -a "$FCTS_ROOT/results/$report_name" "$latest_root/$report_name"
+          done
+
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.name 'github-actions[bot]'
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/releases/$RELEASE_TAG" "sbml-report/releases/latest"
+          if git -C "$GITHUB_WORKSPACE/reports-publication" diff --cached --quiet; then
+            echo 'Published release reports are unchanged.'
+            exit 0
+          fi
+          git -C "$GITHUB_WORKSPACE/reports-publication" commit -m "Publish SBML reports for release $RELEASE_TAG from $GITHUB_SHA"
           git -C "$GITHUB_WORKSPACE/reports-publication" push origin HEAD:reports
 
       - name: Upload SBML L3V2 report
