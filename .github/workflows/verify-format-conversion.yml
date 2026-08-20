@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+
+concurrency:
+  group: fcts-reports-publication
+  cancel-in-progress: false
 
 jobs:
   verify:
@@ -12,6 +16,12 @@ jobs:
     steps:
       - name: Checkout heta-compiler
         uses: actions/checkout@v6
+
+      - name: Checkout reports publication branch
+        uses: actions/checkout@v6
+        with:
+          ref: reports
+          path: reports-publication
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -84,6 +94,35 @@ jobs:
 
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
           NODE
+
+      - name: Publish latest reports for the source branch
+        if: always()
+        shell: bash
+        run: |
+          report_names=(l3v2 l3v1 l2v5)
+          for report_name in "${report_names[@]}"; do
+            if [[ ! -f "$FCTS_ROOT/results/$report_name/report.json" ]]; then
+              echo "Report $report_name is unavailable; preserving the previously published reports."
+              exit 0
+            fi
+          done
+
+          publish_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/$GITHUB_REF_NAME"
+          rm -rf "$publish_root"
+          mkdir -p "$publish_root"
+          for report_name in "${report_names[@]}"; do
+            cp -a "$FCTS_ROOT/results/$report_name" "$publish_root/$report_name"
+          done
+
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.name 'github-actions[bot]'
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/$GITHUB_REF_NAME"
+          if git -C "$GITHUB_WORKSPACE/reports-publication" diff --cached --quiet; then
+            echo 'Published reports are unchanged.'
+            exit 0
+          fi
+          git -C "$GITHUB_WORKSPACE/reports-publication" commit -m "Update SBML reports for $GITHUB_REF_NAME from $GITHUB_SHA"
+          git -C "$GITHUB_WORKSPACE/reports-publication" push origin HEAD:reports
 
       - name: Upload SBML L3V2 report
         if: always()
