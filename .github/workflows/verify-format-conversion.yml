@@ -1,0 +1,110 @@
+name: Verify format conversion
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout heta-compiler
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install heta-compiler from this checkout
+        run: |
+          npm ci
+          npm install --global .
+          heta --version
+
+      - name: Install Format Conversion Test Suite
+        run: |
+          npm install --prefix fcts-run git+https://github.com/hetalang/format-conversion-test-suite.git#main
+          echo "FCTS_ROOT=$GITHUB_WORKSPACE/fcts-run/node_modules/@hetalang/format-conversion-test-suite" >> "$GITHUB_ENV"
+
+      - name: Download and index SBML cases
+        run: |
+          npm --prefix "$FCTS_ROOT" run fetch:sbml
+          npm --prefix "$FCTS_ROOT" run index:sbml
+
+      - name: Build SBML L3V2 report
+        run: |
+          "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/l3v2 --concurrency=4 \
+            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap
+
+      - name: Build SBML L3V1 report
+        run: |
+          "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V1Path --target=results/l3v1 --concurrency=4 \
+            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction
+
+      - name: Build SBML L2V5 report
+        run: |
+          "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=results/l2v5 --concurrency=4 \
+            --skip-component-tags=StoichiometryMath,CSymbolDelay,EventWithDelay,AlgebraicRule \
+            --skip-test-tags=FastReaction
+
+      - name: Summarize build reports
+        if: always()
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const reports = [
+            ['SBML L3V2', 'results/l3v2/report.json'],
+            ['SBML L3V1', 'results/l3v1/report.json'],
+            ['SBML L2V5', 'results/l2v5/report.json'],
+          ];
+          const lines = ['| Report | Successful | Failed | Not evaluated |', '| --- | ---: | ---: | ---: |'];
+
+          for (const [label, relativePath] of reports) {
+            const reportPath = path.join(process.env.FCTS_ROOT, relativePath);
+            if (!fs.existsSync(reportPath)) {
+              lines.push(`| ${label} | — | — | — |`);
+              continue;
+            }
+            const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+            const counts = { success: 0, failed: 0, notEvaluated: 0 };
+            for (const caseResult of report.cases) {
+              if (caseResult.status === 'success') counts.success += 1;
+              else if (caseResult.status === 'failed') counts.failed += 1;
+              else if (caseResult.status === 'not-evaluated') counts.notEvaluated += 1;
+            }
+            lines.push(`| ${label} | ${counts.success} | ${counts.failed} | ${counts.notEvaluated} |`);
+          }
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
+          NODE
+
+      - name: Upload SBML L3V2 report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fcts-sbml-l3v2-${{ github.run_id }}
+          path: ${{ env.FCTS_ROOT }}/results/l3v2
+          if-no-files-found: warn
+
+      - name: Upload SBML L3V1 report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fcts-sbml-l3v1-${{ github.run_id }}
+          path: ${{ env.FCTS_ROOT }}/results/l3v1
+          if-no-files-found: warn
+
+      - name: Upload SBML L2V5 report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fcts-sbml-l2v5-${{ github.run_id }}
+          path: ${{ env.FCTS_ROOT }}/results/l2v5
+          if-no-files-found: warn
