@@ -1,0 +1,124 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:34:36.025Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "reset",
+          "initial": 0
+        },
+        {
+          "id": "Q",
+          "initial": 0
+        },
+        {
+          "id": "R",
+          "initial": 0
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "Qinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                [
+                  "Add",
+                  "t",
+                  [
+                    "Negate",
+                    "reset"
+                  ]
+                ],
+                0.01
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": "t",
+                "format": "math-json"
+              },
+              "state": "reset"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "Q",
+                  0.01
+                ],
+                "format": "math-json"
+              },
+              "state": "Q"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Rinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                [
+                  "Add",
+                  "t",
+                  [
+                    "Negate",
+                    "reset"
+                  ]
+                ],
+                0.01
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": "t",
+                "format": "math-json"
+              },
+              "state": "reset"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "R",
+                  0.01
+                ],
+                "format": "math-json"
+              },
+              "state": "R"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

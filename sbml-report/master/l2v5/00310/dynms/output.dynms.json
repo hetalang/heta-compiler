@@ -1,0 +1,153 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:41:24.067Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.9,
+          "title": "k1"
+        },
+        {
+          "id": "p1",
+          "value": 0.1,
+          "title": "p1"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1.5,
+                [
+                  "Multiply",
+                  "p1",
+                  1.5
+                ]
+              ],
+              "p1",
+              1.5
+            ],
+            "format": "math-json"
+          },
+          "title": "S1",
+          "derivative": {
+            "expr": [
+              "Negate",
+              "reaction1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                [
+                  "Multiply",
+                  "p1",
+                  1.5
+                ]
+              ],
+              "p1",
+              1.5
+            ],
+            "format": "math-json"
+          },
+          "title": "S2",
+          "derivative": {
+            "expr": "reaction1",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p2",
+          "initial": 1.5,
+          "title": "p2",
+          "derivative": {
+            "expr": "p2_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "C",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p1",
+              "p2"
+            ],
+            "format": "math-json"
+          },
+          "title": "C"
+        },
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "C",
+              "k1",
+              "S1"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        },
+        {
+          "id": "p2_proc",
+          "rhs": {
+            "expr": 0.1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

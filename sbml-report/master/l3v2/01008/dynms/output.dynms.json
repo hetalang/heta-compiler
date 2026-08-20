@@ -1,0 +1,114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:23:12.153Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.693,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.25,
+          "title": "k2"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1",
+          "initial": 0.0015,
+          "title": "S1",
+          "derivative": {
+            "expr": [
+              "Negate",
+              "reaction1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "initial": 0.002,
+          "title": "S2",
+          "derivative": {
+            "expr": "reaction1",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S3",
+          "initial": 0.0015,
+          "title": "S3",
+          "derivative": {
+            "expr": "S3_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S4",
+          "initial": 0.004,
+          "title": "S4",
+          "derivative": {
+            "expr": "S4_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "compartment",
+          "initial": 10,
+          "title": "compartment"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "S1"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        },
+        {
+          "id": "S3_proc",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.0005,
+              "k1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S4_proc",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              -0.0005,
+              "k2"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-20T15:34:30.179Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "34f050427fac7023d6c82dc3f7a37884c43e4ad17bfc526513a619bb72438e4a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "P1",
+    "num": 3.7
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "ceil(0.5)"
+    },
+    "class": "Record",
+    "id": "P10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "ceil(3.55)"
+    },
+    "class": "Record",
+    "id": "P11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "ceil((-4.6))"
+    },
+    "class": "Record",
+    "id": "P12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "cos(9.1)"
+    },
+    "class": "Record",
+    "id": "P13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "cos((-0.22))"
+    },
+    "class": "Record",
+    "id": "P14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "exp(0)"
+    },
+    "class": "Record",
+    "id": "P15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "exp(1)"
+    },
+    "class": "Record",
+    "id": "P16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "exp(0.77)"
+    },
+    "class": "Record",
+    "id": "P17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "floor((-4.6))"
+    },
+    "class": "Record",
+    "id": "P18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "floor(9.1)"
+    },
+    "class": "Record",
+    "id": "P19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "abs((-1))"
+    },
+    "class": "Record",
+    "id": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "ln(0.2)"
+    },
+    "class": "Record",
+    "id": "P20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "ln(1)"
+    },
+    "class": "Record",
+    "id": "P21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "logbase(0.2, 10)"
+    },
+    "class": "Record",
+    "id": "P22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "logbase(1, 10)"
+    },
+    "class": "Record",
+    "id": "P23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(1, 2)"
+    },
+    "class": "Record",
+    "id": "P24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(2, 2)"
+    },
+    "class": "Record",
+    "id": "P25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(1.4, 5.1)"
+    },
+    "class": "Record",
+    "id": "P26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(4, 2)"
+    },
+    "class": "Record",
+    "id": "P27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(3.1, 2)"
+    },
+    "class": "Record",
+    "id": "P28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(4, 1 / 2)"
+    },
+    "class": "Record",
+    "id": "P29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "abs(1)"
+    },
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pow(7.4, 1 / 2)"
+    },
+    "class": "Record",
+    "id": "P30"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin(2.1)"
+    },
+    "class": "Record",
+    "id": "P31"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin(0)"
+    },
+    "class": "Record",
+    "id": "P32"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sin((-5.9))"
+    },
+    "class": "Record",
+    "id": "P33"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "tan(0)"
+    },
+    "class": "Record",
+    "id": "P34"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "tan(1.11)"
+    },
+    "class": "Record",
+    "id": "P35"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "tan((-6))"
+    },
+    "class": "Record",
+    "id": "P36"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 + 2"
+    },
+    "class": "Record",
+    "id": "P37"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 - 2"
+    },
+    "class": "Record",
+    "id": "P38"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "5 / 2"
+    },
+    "class": "Record",
+    "id": "P39"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "acos((-1))"
+    },
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "8 * 3"
+    },
+    "class": "Record",
+    "id": "P40"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "acos(0.5)"
+    },
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "asin(1)"
+    },
+    "class": "Record",
+    "id": "P6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "asin((-0.5))"
+    },
+    "class": "Record",
+    "id": "P7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "atan(2.8)"
+    },
+    "class": "Record",
+    "id": "P8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "atan((-7.09))"
+    },
+    "class": "Record",
+    "id": "P9"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

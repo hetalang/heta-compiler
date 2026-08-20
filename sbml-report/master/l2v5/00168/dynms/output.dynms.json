@@ -1,0 +1,161 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:40:25.577Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 100,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.9,
+          "title": "k2"
+        },
+        {
+          "id": "k3",
+          "value": 0.7,
+          "title": "k3"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1",
+          "initial": 0.02,
+          "title": "S1",
+          "derivative": {
+            "expr": "S1_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "initial": 0.02,
+          "title": "S2",
+          "derivative": {
+            "expr": "S2_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S3",
+          "initial": 0,
+          "title": "S3",
+          "derivative": {
+            "expr": "S3_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S4",
+          "initial": 0,
+          "title": "S4",
+          "derivative": {
+            "expr": "S4_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "S1_proc",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                -1,
+                "k1",
+                "S1",
+                "S2"
+              ],
+              [
+                "Multiply",
+                "k2",
+                "S3"
+              ],
+              [
+                "Multiply",
+                "k3",
+                "S3"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_proc",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k2",
+                "S3"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k1",
+                "S1",
+                "S2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S3_proc",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k1",
+                "S1",
+                "S2"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k2",
+                "S3"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k3",
+                "S3"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S4_proc",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k3",
+              "S3"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

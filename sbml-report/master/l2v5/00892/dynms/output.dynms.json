@@ -1,0 +1,93 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:45:25.228Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 1,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.75,
+          "title": "k2"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "P1",
+          "initial": 1.5,
+          "title": "P1",
+          "derivative": {
+            "expr": "P1_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P2",
+          "initial": 0,
+          "title": "P2",
+          "derivative": {
+            "expr": "P2_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "P1_proc",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Power",
+                "ExponentialE",
+                [
+                  "Multiply",
+                  -1,
+                  "t"
+                ]
+              ],
+              "k2",
+              "P2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P2_proc",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Power",
+                "ExponentialE",
+                [
+                  "Multiply",
+                  -1,
+                  "t"
+                ]
+              ],
+              "k1",
+              "P1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

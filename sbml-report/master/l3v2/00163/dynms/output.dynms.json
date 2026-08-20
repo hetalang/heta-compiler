@@ -1,0 +1,93 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:17:45.493Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.5,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.5,
+          "title": "k2"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1",
+          "initial": 0.015,
+          "title": "S1",
+          "derivative": {
+            "expr": "S1_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "initial": 0,
+          "title": "S2",
+          "derivative": {
+            "expr": "S2_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "S1_proc",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k2",
+                "S2"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k1",
+                "S1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_proc",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k1",
+                "S1"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k2",
+                "S2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

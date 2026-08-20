@@ -1,0 +1,16 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01553/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01553/01553-sbml-l3v2.xml"...
+[error]	S2_stoch component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: be6457310276f6eb613daf7b17ddaa83ffac0b7d2dec9ca5bf3b2c0786e43bf6
+[info]	Setting references in elements, total length 98
+[error]	S2_stoch_proc Property "actors[0].target" has lost reference "S2_stoch".
+[error]	Record "S2_stoch_proc" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

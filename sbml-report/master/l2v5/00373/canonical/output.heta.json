@@ -1,0 +1,365 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-20T15:41:50.509Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "ea6fa0670802bf5e904a7466e136acf115ae38a4b3abfb8af277dbd5ec41ba44",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C",
+    "title": "C",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "event1",
+    "title": "event1",
+    "trigger": "S4 > S2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "event2",
+    "title": "event2",
+    "trigger": "S2 < 0.03"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 7.5,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.0025,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S4"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "C * k1 * S1 * S2"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S4"
+      }
+    ],
+    "assignments": {
+      "ode_": "C * k2 * S3 * S4"
+    },
+    "class": "Reaction",
+    "id": "reaction2",
+    "reversible": false,
+    "title": "reaction2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "event1": "1.4",
+      "start_": "0.1 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.12 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.2 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S3",
+    "title": "S3",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "event2": "0.1",
+      "start_": "0.1 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S4",
+    "title": "S4",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

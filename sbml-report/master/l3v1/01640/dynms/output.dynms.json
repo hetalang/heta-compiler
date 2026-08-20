@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:38:11.827Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k0__J0_local",
+          "value": 3
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "J0",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1
+        },
+        {
+          "id": "k0_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                2,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "k0",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "k0_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "J0",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              "k0__J0_local"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

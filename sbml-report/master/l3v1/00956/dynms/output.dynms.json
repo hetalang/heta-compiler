@@ -1,0 +1,441 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:34:31.120Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "P1",
+          "initial": 3.7
+        },
+        {
+          "id": "P2",
+          "initial": {
+            "expr": [
+              "Abs",
+              -1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P3",
+          "initial": {
+            "expr": [
+              "Abs",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P4",
+          "initial": {
+            "expr": [
+              "Arccos",
+              -1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P5",
+          "initial": {
+            "expr": [
+              "Arccos",
+              0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P6",
+          "initial": {
+            "expr": [
+              "Arcsin",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P7",
+          "initial": {
+            "expr": [
+              "Arcsin",
+              -0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P8",
+          "initial": {
+            "expr": [
+              "Arctan",
+              2.8
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P9",
+          "initial": {
+            "expr": [
+              "Arctan",
+              -7.09
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P10",
+          "initial": {
+            "expr": [
+              "Ceil",
+              0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P11",
+          "initial": {
+            "expr": [
+              "Ceil",
+              3.55
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P12",
+          "initial": {
+            "expr": [
+              "Ceil",
+              -4.6
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P13",
+          "initial": {
+            "expr": [
+              "Cos",
+              9.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P14",
+          "initial": {
+            "expr": [
+              "Cos",
+              -0.22
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P15",
+          "initial": {
+            "expr": [
+              "Exp",
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P16",
+          "initial": {
+            "expr": [
+              "Exp",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P17",
+          "initial": {
+            "expr": [
+              "Exp",
+              0.77
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P18",
+          "initial": {
+            "expr": [
+              "Floor",
+              -4.6
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P19",
+          "initial": {
+            "expr": [
+              "Floor",
+              9.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P20",
+          "initial": {
+            "expr": [
+              "Ln",
+              0.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P21",
+          "initial": {
+            "expr": [
+              "Ln",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P22",
+          "initial": {
+            "expr": [
+              "Log",
+              0.2,
+              10
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P23",
+          "initial": {
+            "expr": [
+              "Log",
+              1,
+              10
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P24",
+          "initial": {
+            "expr": [
+              "Power",
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P25",
+          "initial": {
+            "expr": [
+              "Power",
+              2,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P26",
+          "initial": {
+            "expr": [
+              "Power",
+              1.4,
+              5.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P27",
+          "initial": {
+            "expr": [
+              "Power",
+              4,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P28",
+          "initial": {
+            "expr": [
+              "Power",
+              3.1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P29",
+          "initial": {
+            "expr": [
+              "Power",
+              4,
+              [
+                "Divide",
+                1,
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P30",
+          "initial": {
+            "expr": [
+              "Power",
+              7.4,
+              [
+                "Divide",
+                1,
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P31",
+          "initial": {
+            "expr": [
+              "Sin",
+              2.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P32",
+          "initial": {
+            "expr": [
+              "Sin",
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P33",
+          "initial": {
+            "expr": [
+              "Sin",
+              -5.9
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P34",
+          "initial": {
+            "expr": [
+              "Tan",
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P35",
+          "initial": {
+            "expr": [
+              "Tan",
+              1.11
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P36",
+          "initial": {
+            "expr": [
+              "Tan",
+              -6
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P37",
+          "initial": {
+            "expr": [
+              "Add",
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P38",
+          "initial": {
+            "expr": [
+              "Add",
+              1,
+              [
+                "Negate",
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P39",
+          "initial": {
+            "expr": [
+              "Divide",
+              5,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P40",
+          "initial": {
+            "expr": [
+              "Multiply",
+              8,
+              3
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

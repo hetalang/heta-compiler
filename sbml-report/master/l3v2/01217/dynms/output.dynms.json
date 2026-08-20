@@ -1,0 +1,108 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:24:35.322Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "a",
+          "initial": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                4,
+                2
+              ],
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "c",
+          "initial": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                4,
+                2
+              ],
+              1,
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "e",
+          "initial": {
+            "expr": [
+              "Add",
+              [
+                "Divide",
+                4,
+                2
+              ],
+              1
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "b",
+          "rhs": {
+            "expr": [
+              "Add",
+              "c",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "d",
+          "rhs": {
+            "expr": [
+              "Add",
+              "e",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "f",
+          "rhs": {
+            "expr": [
+              "Divide",
+              4,
+              2
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

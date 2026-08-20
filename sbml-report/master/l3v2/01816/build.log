@@ -1,0 +1,15 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01816/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01816/01816-sbml-l3v2.xml"...
+[error]	id must not be a reserved word, got "false". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null
+[info]	Platform hash: 0b655895eebc0d5a454a3fe509194826270937139422c461c69d53e570598661
+[info]	Setting references in elements, total length 95
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

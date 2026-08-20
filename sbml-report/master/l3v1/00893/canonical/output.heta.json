@@ -1,0 +1,246 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-20T15:34:06.406Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "32368fd4d5d8292ca00b263b9ee4375c67bf8ef8e06a2bcc85c18055d9937209",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.5,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.0015"
+    },
+    "class": "Record",
+    "id": "P1",
+    "title": "P1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1) * P1 * P3"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "P1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P2",
+    "title": "P2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P2"
+      }
+    ],
+    "assignments": {
+      "ode_": "P1 * P3"
+    },
+    "aux": {
+      "metaid": "rule3"
+    },
+    "class": "Process",
+    "id": "P2_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.001"
+    },
+    "class": "Record",
+    "id": "P3",
+    "title": "P3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * t"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "P3_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

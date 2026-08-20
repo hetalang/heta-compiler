@@ -1,0 +1,208 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-20T15:45:57.265Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "d3be4b8255481bf5d0fc3f204e6a8e4b12bc5300433c162c1e361840a655f3e8",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "comp"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "10 / S1"
+    },
+    "class": "Reaction",
+    "id": "J0",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1 * comp"
+    },
+    "class": "Species",
+    "compartment": "comp",
+    "id": "S1",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

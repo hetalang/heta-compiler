@@ -1,0 +1,117 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01563/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01563/01563-sbml-l3v1.xml"...
+[error]	S0_stoich component does not exist which is not allowed for the "update" action.
+[error]	S1_stoich component does not exist which is not allowed for the "update" action.
+[error]	S2_stoich component does not exist which is not allowed for the "update" action.
+[error]	S3_stoich component does not exist which is not allowed for the "update" action.
+[error]	S4_stoich component does not exist which is not allowed for the "update" action.
+[error]	S5_stoich component does not exist which is not allowed for the "update" action.
+[error]	S6_stoich component does not exist which is not allowed for the "update" action.
+[error]	S7_stoich component does not exist which is not allowed for the "update" action.
+[error]	S8_stoich component does not exist which is not allowed for the "update" action.
+[error]	S9_stoich component does not exist which is not allowed for the "update" action.
+[error]	S10_stoich component does not exist which is not allowed for the "update" action.
+[error]	S11_stoich component does not exist which is not allowed for the "update" action.
+[error]	S12_stoich component does not exist which is not allowed for the "update" action.
+[error]	S13_stoich component does not exist which is not allowed for the "update" action.
+[error]	S14_stoich component does not exist which is not allowed for the "update" action.
+[error]	S15_stoich component does not exist which is not allowed for the "update" action.
+[error]	S16_stoich component does not exist which is not allowed for the "update" action.
+[error]	S17_stoich component does not exist which is not allowed for the "update" action.
+[error]	S18_stoich component does not exist which is not allowed for the "update" action.
+[error]	S19_stoich component does not exist which is not allowed for the "update" action.
+[error]	S20_stoich component does not exist which is not allowed for the "update" action.
+[error]	S21_stoich component does not exist which is not allowed for the "update" action.
+[error]	S22_stoich component does not exist which is not allowed for the "update" action.
+[error]	S23_stoich component does not exist which is not allowed for the "update" action.
+[error]	S24_stoich component does not exist which is not allowed for the "update" action.
+[error]	S25_stoich component does not exist which is not allowed for the "update" action.
+[error]	S26_stoich component does not exist which is not allowed for the "update" action.
+[error]	S27_stoich component does not exist which is not allowed for the "update" action.
+[error]	S28_stoich component does not exist which is not allowed for the "update" action.
+[error]	S29_stoich component does not exist which is not allowed for the "update" action.
+[error]	S30_stoich component does not exist which is not allowed for the "update" action.
+[error]	S31_stoich component does not exist which is not allowed for the "update" action.
+[error]	S32_stoich component does not exist which is not allowed for the "update" action.
+[error]	S33_stoich component does not exist which is not allowed for the "update" action.
+[error]	S34_stoich component does not exist which is not allowed for the "update" action.
+[error]	S35_stoich component does not exist which is not allowed for the "update" action.
+[error]	S36_stoich component does not exist which is not allowed for the "update" action.
+[error]	S37_stoich component does not exist which is not allowed for the "update" action.
+[error]	S38_stoich component does not exist which is not allowed for the "update" action.
+[error]	S39_stoich component does not exist which is not allowed for the "update" action.
+[error]	S40_stoich component does not exist which is not allowed for the "update" action.
+[error]	S41_stoich component does not exist which is not allowed for the "update" action.
+[error]	S42_stoich component does not exist which is not allowed for the "update" action.
+[error]	S43_stoich component does not exist which is not allowed for the "update" action.
+[error]	S44_stoich component does not exist which is not allowed for the "update" action.
+[error]	S45_stoich component does not exist which is not allowed for the "update" action.
+[error]	S46_stoich component does not exist which is not allowed for the "update" action.
+[error]	S47_stoich component does not exist which is not allowed for the "update" action.
+[error]	S48_stoich component does not exist which is not allowed for the "update" action.
+[error]	S49_stoich component does not exist which is not allowed for the "update" action.
+[error]	S50_stoich component does not exist which is not allowed for the "update" action.
+[error]	S51_stoich component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 8bdc457b9abc93ebedec9d2d8cb650edb5b868b2b55b9b49cfc3c63bfcae0333
+[info]	Setting references in elements, total length 250
+[error]	S0_stoich_proc Property "actors[0].target" has lost reference "S0_stoich".
+[error]	S1_stoich_proc Property "actors[0].target" has lost reference "S1_stoich".
+[error]	S2_stoich_proc Property "actors[0].target" has lost reference "S2_stoich".
+[error]	S3_stoich_proc Property "actors[0].target" has lost reference "S3_stoich".
+[error]	S4_stoich_proc Property "actors[0].target" has lost reference "S4_stoich".
+[error]	S5_stoich_proc Property "actors[0].target" has lost reference "S5_stoich".
+[error]	S6_stoich_proc Property "actors[0].target" has lost reference "S6_stoich".
+[error]	S7_stoich_proc Property "actors[0].target" has lost reference "S7_stoich".
+[error]	S8_stoich_proc Property "actors[0].target" has lost reference "S8_stoich".
+[error]	S9_stoich_proc Property "actors[0].target" has lost reference "S9_stoich".
+[error]	S10_stoich_proc Property "actors[0].target" has lost reference "S10_stoich".
+[error]	S11_stoich_proc Property "actors[0].target" has lost reference "S11_stoich".
+[error]	S12_stoich_proc Property "actors[0].target" has lost reference "S12_stoich".
+[error]	S13_stoich_proc Property "actors[0].target" has lost reference "S13_stoich".
+[error]	S14_stoich_proc Property "actors[0].target" has lost reference "S14_stoich".
+[error]	S15_stoich_proc Property "actors[0].target" has lost reference "S15_stoich".
+[error]	S16_stoich_proc Property "actors[0].target" has lost reference "S16_stoich".
+[error]	S17_stoich_proc Property "actors[0].target" has lost reference "S17_stoich".
+[error]	S18_stoich_proc Property "actors[0].target" has lost reference "S18_stoich".
+[error]	S19_stoich_proc Property "actors[0].target" has lost reference "S19_stoich".
+[error]	S20_stoich_proc Property "actors[0].target" has lost reference "S20_stoich".
+[error]	S21_stoich_proc Property "actors[0].target" has lost reference "S21_stoich".
+[error]	S22_stoich_proc Property "actors[0].target" has lost reference "S22_stoich".
+[error]	S23_stoich_proc Property "actors[0].target" has lost reference "S23_stoich".
+[error]	S24_stoich_proc Property "actors[0].target" has lost reference "S24_stoich".
+[error]	S25_stoich_proc Property "actors[0].target" has lost reference "S25_stoich".
+[error]	S26_stoich_proc Property "actors[0].target" has lost reference "S26_stoich".
+[error]	S27_stoich_proc Property "actors[0].target" has lost reference "S27_stoich".
+[error]	S28_stoich_proc Property "actors[0].target" has lost reference "S28_stoich".
+[error]	S29_stoich_proc Property "actors[0].target" has lost reference "S29_stoich".
+[error]	S30_stoich_proc Property "actors[0].target" has lost reference "S30_stoich".
+[error]	S31_stoich_proc Property "actors[0].target" has lost reference "S31_stoich".
+[error]	S32_stoich_proc Property "actors[0].target" has lost reference "S32_stoich".
+[error]	S33_stoich_proc Property "actors[0].target" has lost reference "S33_stoich".
+[error]	S34_stoich_proc Property "actors[0].target" has lost reference "S34_stoich".
+[error]	S35_stoich_proc Property "actors[0].target" has lost reference "S35_stoich".
+[error]	S36_stoich_proc Property "actors[0].target" has lost reference "S36_stoich".
+[error]	S37_stoich_proc Property "actors[0].target" has lost reference "S37_stoich".
+[error]	S38_stoich_proc Property "actors[0].target" has lost reference "S38_stoich".
+[error]	S39_stoich_proc Property "actors[0].target" has lost reference "S39_stoich".
+[error]	S40_stoich_proc Property "actors[0].target" has lost reference "S40_stoich".
+[error]	S41_stoich_proc Property "actors[0].target" has lost reference "S41_stoich".
+[error]	S42_stoich_proc Property "actors[0].target" has lost reference "S42_stoich".
+[error]	S43_stoich_proc Property "actors[0].target" has lost reference "S43_stoich".
+[error]	S44_stoich_proc Property "actors[0].target" has lost reference "S44_stoich".
+[error]	S45_stoich_proc Property "actors[0].target" has lost reference "S45_stoich".
+[error]	S46_stoich_proc Property "actors[0].target" has lost reference "S46_stoich".
+[error]	S47_stoich_proc Property "actors[0].target" has lost reference "S47_stoich".
+[error]	S48_stoich_proc Property "actors[0].target" has lost reference "S48_stoich".
+[error]	S49_stoich_proc Property "actors[0].target" has lost reference "S49_stoich".
+[error]	S50_stoich_proc Property "actors[0].target" has lost reference "S50_stoich".
+[error]	S51_stoich_proc Property "actors[0].target" has lost reference "S51_stoich".
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

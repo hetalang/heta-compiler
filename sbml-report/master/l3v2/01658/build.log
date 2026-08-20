@@ -1,0 +1,18 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01658/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01658/01658-sbml-l3v2.xml"...
+[error]	_E0 id should be string of type ID, but have "_E0"
+	- {"id":"_E0","aux":{},"class":"DSwitcher","trigger":"t > 6.02214076e23 / (6.022e23)"}
+[error]	p1 Some of properties do not satisfy requirements for class "Record"
+    1. /assignments must match pattern "^[a-zA-Z][a-zA-Z0-9_]*$"
+    2. /assignments property name must be valid
+[info]	Platform hash: 8241bde301bf1b6050caa86ecf2dcadcf31758d2a39e787dd7a9c0587380390b
+[info]	Setting references in elements, total length 94
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

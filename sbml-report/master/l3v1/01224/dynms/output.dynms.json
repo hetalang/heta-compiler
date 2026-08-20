@@ -1,0 +1,69 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T15:36:18.720Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "J0",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "c",
+          "initial": 1
+        },
+        {
+          "id": "p1",
+          "initial": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "c"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "J0",
+          "rhs": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

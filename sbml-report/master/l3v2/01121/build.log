@@ -1,0 +1,17 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01121/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01121/01121-sbml-l3v2.xml"...
+[error]	_J0 id should be string of type ID, but have "_J0"
+	- {"id":"_J0","aux":{},"class":"Reaction","assignments":{"ode_":" kinetics ( k1___J0_local ,  k2 ,  k3 ,  k4 ,  k5 ,  S1 ,  S1ref ,  S3 ,  S4 ,  S2 )"},"reversible":true,"actors":[{"target":"S2","stoichiometry":1},{"target":"S3","stoichiometry":-1},{"target":"S1","stoichiometry":-2}],"modifiers":[{"target":"S4"}]}
+[error]	S1ref component does not exist which is not allowed for the "update" action.
+[error]	S2ref component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 343c601fd77dc64f0e197dcc53af4db77fed049c07f9e0a09056699259f6c3d5
+[info]	Setting references in elements, total length 111
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
