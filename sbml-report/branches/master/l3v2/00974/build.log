@@ -1,0 +1,16 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/00974/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/00974/00974-sbml-l3v2.xml"...
+[info]	Platform hash: 2a750313cedf37e0d4e91e1bba983a1691f02514377c857b37dab46d89664558
+[info]	Setting references in elements, total length 101
+[error]	Component "Xref" is not found in space "nameless" as expected in expression: Z [ode_]= Xref;
+[error]	Component "Xref" is not found in space "nameless" as expected in expression: Q [start_]= Xref;
+[error]	Component "Xref" is not found in space "nameless" as expected in expression: Y_proc [ode_]= Xref;
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

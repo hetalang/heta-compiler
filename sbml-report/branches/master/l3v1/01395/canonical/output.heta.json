@@ -1,0 +1,1712 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-20T17:21:38.878Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "c83fd07fc55f52c1f12910cb70b64bbe05c76a858217dd84e009d7a6973d06c3",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p1 / v1_Kd, v1_h) - 1) / (1 + pow(p1 / v1_Kd, v1_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as1",
+    "title": "as1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p4 / v4_Kd, v4_h) - 1) / (1 + pow(p4 / v4_Kd, v4_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as2",
+    "title": "as2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p5 / v5_Kd, v5_h) - 1) / (1 + pow(p5 / v5_Kd, v5_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as3",
+    "title": "as3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p6 / v6_Kd, v6_h) - 1) / (1 + pow(p6 / v6_Kd, v6_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as4",
+    "title": "as4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p7 / v7_Kd, v7_h) - 1) / (1 + pow(p7 / v7_Kd, v7_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as5",
+    "title": "as5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p7 / v10_Kd, v10_h) - 1) / (1 + pow(p7 / v10_Kd, v10_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as6",
+    "title": "as6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p6 / v8_Kd, v8_h) - 1) / (1 + pow(p6 / v8_Kd, v8_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as7",
+    "title": "as7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(1 + pow(p5 / v9_Kd, v9_h) - 1) / (1 + pow(p5 / v9_Kd, v9_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "as8",
+    "title": "as8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro1_strength",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod1",
+    "title": "cod1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro2_strength * as1 * rs1",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod2",
+    "title": "cod2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro3_strength * rs2 * rs3",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod3",
+    "title": "cod3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro4_strength * rs7 * rs6",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod4",
+    "title": "cod4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro5_strength * as2",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod5",
+    "title": "cod5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro6_strength * (as3 + as4)",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod6",
+    "title": "cod6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro7_strength * (as7 + as8)",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod7",
+    "title": "cod7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro8_strength * as5 * rs4",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod8",
+    "title": "cod8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "pro9_strength * as6 * rs5",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "cod9",
+    "title": "cod9"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "DefaultCompartment",
+    "title": "DefaultCompartment"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p1",
+    "title": "p1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p1_degradation_rate",
+    "num": 0.5,
+    "title": "p1_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p2",
+    "title": "p2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p2_degradation_rate",
+    "num": 0.5,
+    "title": "p2_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p3",
+    "title": "p3"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p3_degradation_rate",
+    "num": 0.5,
+    "title": "p3_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p4",
+    "title": "p4"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p4_degradation_rate",
+    "num": 0.5,
+    "title": "p4_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p5",
+    "title": "p5"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p5_degradation_rate",
+    "num": 0.5,
+    "title": "p5_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p6",
+    "title": "p6"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p6_degradation_rate",
+    "num": 0.5,
+    "title": "p6_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p7",
+    "title": "p7"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p7_degradation_rate",
+    "num": 0.5,
+    "title": "p7_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p8",
+    "title": "p8"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p8_degradation_rate",
+    "num": 0.5,
+    "title": "p8_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "p9",
+    "title": "p9"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p9_degradation_rate",
+    "num": 0.5,
+    "title": "p9_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp1_mrna",
+    "title": "pp1_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp1_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp1_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp1_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod1"
+    },
+    "class": "Reaction",
+    "id": "pp1_v1",
+    "reversible": false,
+    "title": "pp1_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp1_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp1_mrna_degradation_rate * pp1_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp1_v2",
+    "modifiers": [
+      {
+        "target": "p1"
+      }
+    ],
+    "reversible": false,
+    "title": "pp1_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p1"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs1_strength * pp1_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp1_v3",
+    "modifiers": [
+      {
+        "target": "pp1_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp1_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p1"
+      }
+    ],
+    "assignments": {
+      "ode_": "p1_degradation_rate * p1"
+    },
+    "class": "Reaction",
+    "id": "pp1_v4",
+    "reversible": false,
+    "title": "pp1_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp2_mrna",
+    "title": "pp2_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp2_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp2_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp2_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod2"
+    },
+    "class": "Reaction",
+    "id": "pp2_v1",
+    "reversible": false,
+    "title": "pp2_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp2_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp2_mrna_degradation_rate * pp2_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp2_v2",
+    "modifiers": [
+      {
+        "target": "p2"
+      }
+    ],
+    "reversible": false,
+    "title": "pp2_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p2"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs2_strength * pp2_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp2_v3",
+    "modifiers": [
+      {
+        "target": "pp2_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp2_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p2"
+      }
+    ],
+    "assignments": {
+      "ode_": "p2_degradation_rate * p2"
+    },
+    "class": "Reaction",
+    "id": "pp2_v4",
+    "reversible": false,
+    "title": "pp2_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp3_mrna",
+    "title": "pp3_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp3_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp3_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp3_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod3"
+    },
+    "class": "Reaction",
+    "id": "pp3_v1",
+    "reversible": false,
+    "title": "pp3_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp3_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp3_mrna_degradation_rate * pp3_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp3_v2",
+    "modifiers": [
+      {
+        "target": "p3"
+      }
+    ],
+    "reversible": false,
+    "title": "pp3_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p3"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs3_strength * pp3_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp3_v3",
+    "modifiers": [
+      {
+        "target": "pp3_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp3_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p3"
+      }
+    ],
+    "assignments": {
+      "ode_": "p3_degradation_rate * p3"
+    },
+    "class": "Reaction",
+    "id": "pp3_v4",
+    "reversible": false,
+    "title": "pp3_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp4_mrna",
+    "title": "pp4_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp4_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp4_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp4_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod4"
+    },
+    "class": "Reaction",
+    "id": "pp4_v1",
+    "reversible": false,
+    "title": "pp4_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp4_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp4_mrna_degradation_rate * pp4_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp4_v2",
+    "modifiers": [
+      {
+        "target": "p4"
+      }
+    ],
+    "reversible": false,
+    "title": "pp4_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p4"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs4_strength * pp4_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp4_v3",
+    "modifiers": [
+      {
+        "target": "pp4_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp4_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p4"
+      }
+    ],
+    "assignments": {
+      "ode_": "p4_degradation_rate * p4"
+    },
+    "class": "Reaction",
+    "id": "pp4_v4",
+    "reversible": false,
+    "title": "pp4_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp5_mrna",
+    "title": "pp5_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp5_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp5_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp5_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod5"
+    },
+    "class": "Reaction",
+    "id": "pp5_v1",
+    "reversible": false,
+    "title": "pp5_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp5_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp5_mrna_degradation_rate * pp5_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp5_v2",
+    "modifiers": [
+      {
+        "target": "p5"
+      }
+    ],
+    "reversible": false,
+    "title": "pp5_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p5"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs5_strength * pp5_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp5_v3",
+    "modifiers": [
+      {
+        "target": "pp5_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp5_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p5"
+      }
+    ],
+    "assignments": {
+      "ode_": "p5_degradation_rate * p5"
+    },
+    "class": "Reaction",
+    "id": "pp5_v4",
+    "reversible": false,
+    "title": "pp5_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp6_mrna",
+    "title": "pp6_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp6_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp6_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp6_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod6"
+    },
+    "class": "Reaction",
+    "id": "pp6_v1",
+    "reversible": false,
+    "title": "pp6_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp6_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp6_mrna_degradation_rate * pp6_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp6_v2",
+    "modifiers": [
+      {
+        "target": "p6"
+      }
+    ],
+    "reversible": false,
+    "title": "pp6_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p6"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs6_strength * pp6_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp6_v3",
+    "modifiers": [
+      {
+        "target": "pp6_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp6_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p6"
+      }
+    ],
+    "assignments": {
+      "ode_": "p6_degradation_rate * p6"
+    },
+    "class": "Reaction",
+    "id": "pp6_v4",
+    "reversible": false,
+    "title": "pp6_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp7_mrna",
+    "title": "pp7_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp7_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp7_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp7_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod7"
+    },
+    "class": "Reaction",
+    "id": "pp7_v1",
+    "reversible": false,
+    "title": "pp7_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp7_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp7_mrna_degradation_rate * pp7_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp7_v2",
+    "modifiers": [
+      {
+        "target": "p7"
+      }
+    ],
+    "reversible": false,
+    "title": "pp7_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p7"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs7_strength * pp7_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp7_v3",
+    "modifiers": [
+      {
+        "target": "pp7_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp7_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p7"
+      }
+    ],
+    "assignments": {
+      "ode_": "p7_degradation_rate * p7"
+    },
+    "class": "Reaction",
+    "id": "pp7_v4",
+    "reversible": false,
+    "title": "pp7_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp8_mrna",
+    "title": "pp8_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp8_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp8_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp8_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod8"
+    },
+    "class": "Reaction",
+    "id": "pp8_v1",
+    "reversible": false,
+    "title": "pp8_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp8_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp8_mrna_degradation_rate * pp8_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp8_v2",
+    "modifiers": [
+      {
+        "target": "p8"
+      }
+    ],
+    "reversible": false,
+    "title": "pp8_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p8"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs8_strength * pp8_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp8_v3",
+    "modifiers": [
+      {
+        "target": "pp8_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp8_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p8"
+      }
+    ],
+    "assignments": {
+      "ode_": "p8_degradation_rate * p8"
+    },
+    "class": "Reaction",
+    "id": "pp8_v4",
+    "reversible": false,
+    "title": "pp8_v4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / DefaultCompartment"
+    },
+    "class": "Species",
+    "compartment": "DefaultCompartment",
+    "id": "pp9_mrna",
+    "title": "pp9_mrna"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pp9_mrna_degradation_rate",
+    "num": 1,
+    "title": "pp9_mrna_degradation_rate"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "pp9_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "cod9"
+    },
+    "class": "Reaction",
+    "id": "pp9_v1",
+    "reversible": false,
+    "title": "pp9_v1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "pp9_mrna"
+      }
+    ],
+    "assignments": {
+      "ode_": "pp9_mrna_degradation_rate * pp9_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp9_v2",
+    "modifiers": [
+      {
+        "target": "p9"
+      }
+    ],
+    "reversible": false,
+    "title": "pp9_v2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p9"
+      }
+    ],
+    "assignments": {
+      "ode_": "rbs9_strength * pp9_mrna"
+    },
+    "class": "Reaction",
+    "id": "pp9_v3",
+    "modifiers": [
+      {
+        "target": "pp9_mrna"
+      }
+    ],
+    "reversible": false,
+    "title": "pp9_v3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "p9"
+      }
+    ],
+    "assignments": {
+      "ode_": "p9_degradation_rate * p9"
+    },
+    "class": "Reaction",
+    "id": "pp9_v4",
+    "reversible": false,
+    "title": "pp9_v4"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro1_strength",
+    "num": 2,
+    "title": "pro1_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro2_strength",
+    "num": 4.5077,
+    "title": "pro2_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro3_strength",
+    "num": 5,
+    "title": "pro3_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro4_strength",
+    "num": 5,
+    "title": "pro4_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro5_strength",
+    "num": 5,
+    "title": "pro5_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro6_strength",
+    "num": 1.31,
+    "title": "pro6_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro7_strength",
+    "num": 1.31,
+    "title": "pro7_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro8_strength",
+    "num": 5,
+    "title": "pro8_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "pro9_strength",
+    "num": 5,
+    "title": "pro9_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs1_strength",
+    "num": 0.3668,
+    "title": "rbs1_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs2_strength",
+    "num": 1.4102,
+    "title": "rbs2_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs3_strength",
+    "num": 0.8,
+    "title": "rbs3_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs4_strength",
+    "num": 2.21,
+    "title": "rbs4_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs5_strength",
+    "num": 0.5,
+    "title": "rbs5_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs6_strength",
+    "num": 2,
+    "title": "rbs6_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs7_strength",
+    "num": 5,
+    "title": "rbs7_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs8_strength",
+    "num": 3.6377,
+    "title": "rbs8_strength"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "rbs9_strength",
+    "num": 8,
+    "title": "rbs9_strength"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p9 / v13_Kd, v13_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs1",
+    "title": "rs1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p2 / v2_Kd, v2_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs2",
+    "title": "rs2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p3 / v3_Kd, v3_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs3",
+    "title": "rs3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p8 / v11_Kd, v11_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs4",
+    "title": "rs4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p8 / v12_Kd, v12_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs5",
+    "title": "rs5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p2 / v14_Kd, v14_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs6",
+    "title": "rs6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "1 / (1 + pow(p3 / v15_Kd, v15_h))",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "rs7",
+    "title": "rs7"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v1_h",
+    "num": 1,
+    "title": "v1_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v1_Kd",
+    "num": 11.147,
+    "title": "v1_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v10_h",
+    "num": 4,
+    "title": "v10_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v10_Kd",
+    "num": 0.02,
+    "title": "v10_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v11_h",
+    "num": 2,
+    "title": "v11_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v11_Kd",
+    "num": 0.1,
+    "title": "v11_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v12_h",
+    "num": 2,
+    "title": "v12_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v12_Kd",
+    "num": 0.1,
+    "title": "v12_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v13_h",
+    "num": 2,
+    "title": "v13_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v13_Kd",
+    "num": 0.01,
+    "title": "v13_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v14_h",
+    "num": 4,
+    "title": "v14_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v14_Kd",
+    "num": 1,
+    "title": "v14_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v15_h",
+    "num": 1,
+    "title": "v15_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v15_Kd",
+    "num": 20,
+    "title": "v15_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v2_h",
+    "num": 4,
+    "title": "v2_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v2_Kd",
+    "num": 1,
+    "title": "v2_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v3_h",
+    "num": 1,
+    "title": "v3_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v3_Kd",
+    "num": 20,
+    "title": "v3_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v4_h",
+    "num": 4,
+    "title": "v4_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v4_Kd",
+    "num": 0.2,
+    "title": "v4_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v5_h",
+    "num": 4,
+    "title": "v5_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v5_Kd",
+    "num": 0.2,
+    "title": "v5_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v6_h",
+    "num": 4,
+    "title": "v6_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v6_Kd",
+    "num": 0.04,
+    "title": "v6_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v7_h",
+    "num": 4,
+    "title": "v7_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v7_Kd",
+    "num": 0.02,
+    "title": "v7_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v8_h",
+    "num": 4,
+    "title": "v8_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v8_Kd",
+    "num": 0.04,
+    "title": "v8_Kd"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v9_h",
+    "num": 4,
+    "title": "v9_h"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "v9_Kd",
+    "num": 0.2,
+    "title": "v9_Kd"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

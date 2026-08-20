@@ -1,0 +1,29 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/00979/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/00979/00979-sbml-l3v1.xml"...
+[error]	_E0 id should be string of type ID, but have "_E0"
+	- {"id":"_E0","aux":{},"class":"DSwitcher","trigger":"t >=  0.98 "}
+[error]	y Some of properties do not satisfy requirements for class "Record"
+    1. /assignments must match pattern "^[a-zA-Z][a-zA-Z0-9_]*$"
+    2. /assignments property name must be valid
+[error]	x Some of properties do not satisfy requirements for class "Record"
+    1. /assignments must match pattern "^[a-zA-Z][a-zA-Z0-9_]*$"
+    2. /assignments property name must be valid
+[error]	_E1 id should be string of type ID, but have "_E1"
+	- {"id":"_E1","aux":{},"class":"DSwitcher","trigger":"t >=  0.99 "}
+[error]	p Some of properties do not satisfy requirements for class "Record"
+    1. /assignments must match pattern "^[a-zA-Z][a-zA-Z0-9_]*$"
+    2. /assignments property name must be valid
+[error]	q Some of properties do not satisfy requirements for class "Record"
+    1. /assignments must match pattern "^[a-zA-Z][a-zA-Z0-9_]*$"
+    2. /assignments property name must be valid
+[info]	Platform hash: 43dca1aed3c5af10bf136136cfcf6d36856d55e82d9dd53c1e5d154426eb8fc2
+[info]	Setting references in elements, total length 97
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

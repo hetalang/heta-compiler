@@ -1,0 +1,344 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T17:09:25.193Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "C1",
+          "initial": 1,
+          "derivative": {
+            "expr": "C1_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "S2_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "reset",
+          "initial": 0,
+          "derivative": {
+            "expr": "reset_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "Q",
+          "initial": 1
+        },
+        {
+          "id": "R",
+          "initial": 1
+        },
+        {
+          "id": "maxdiff",
+          "initial": 0
+        },
+        {
+          "id": "errorLow",
+          "initial": 0
+        },
+        {
+          "id": "errorHigh",
+          "initial": 0
+        },
+        {
+          "id": "errorS2",
+          "initial": 0
+        },
+        {
+          "id": "S2_det",
+          "initial": 0
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S",
+          "rhs": {
+            "expr": [
+              "Add",
+              "Q",
+              "R"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_proc",
+          "rhs": {
+            "expr": [
+              "Add",
+              "Q",
+              [
+                "Negate",
+                "R"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "C1_proc",
+          "rhs": {
+            "expr": 0.002,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "reset_proc",
+          "rhs": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "Qinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "reset",
+                0.01
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "Q",
+                  0.01
+                ],
+                "format": "math-json"
+              },
+              "state": "Q"
+            },
+            {
+              "rhs": {
+                "expr": 0,
+                "format": "math-json"
+              },
+              "state": "reset"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Rinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "reset",
+                0.01
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "R",
+                  0.01
+                ],
+                "format": "math-json"
+              },
+              "state": "R"
+            },
+            {
+              "rhs": {
+                "expr": 0,
+                "format": "math-json"
+              },
+              "state": "reset"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "maxcheck",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                [
+                  "Abs",
+                  [
+                    "Add",
+                    "Q",
+                    [
+                      "Negate",
+                      "R"
+                    ]
+                  ]
+                ],
+                "maxdiff"
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Abs",
+                  [
+                    "Add",
+                    "Q",
+                    [
+                      "Negate",
+                      "R"
+                    ]
+                  ]
+                ],
+                "format": "math-json"
+              },
+              "state": "maxdiff"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "error_check",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "GreaterEqual",
+                  "t",
+                  99
+                ],
+                [
+                  "Less",
+                  "maxdiff",
+                  0.2
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 1,
+                "format": "math-json"
+              },
+              "state": "errorLow"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "error_check2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "maxdiff",
+                4
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 1,
+                "format": "math-json"
+              },
+              "state": "errorHigh"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "error_check3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                [
+                  "Abs",
+                  "S2"
+                ],
+                250
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 1,
+                "format": "math-json"
+              },
+              "state": "errorS2"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

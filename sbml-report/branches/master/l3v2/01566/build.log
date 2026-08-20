@@ -1,0 +1,64 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01566/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01566/01566-sbml-l3v2.xml"...
+[info]	Platform hash: c6aff207c03417adedb6f1893e58ef29716e8c6d608b62449f2cc8f09cf63354
+[info]	Setting references in elements, total length 145
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P1 [ode_]= exp(S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P2 [ode_]= abs((-S1_stoich));
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P3 [ode_]= abs(S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P4 [ode_]= acos((-S1_stoich) + 1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P5 [ode_]= acos(S1_stoich / 4);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P6 [ode_]= asin(S1_stoich - 1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P7 [ode_]= asin((-S1_stoich) / 4);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P8 [ode_]= atan(S1_stoich + 0.8);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P9 [ode_]= atan((-S1_stoich) * 3 - 1.09);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P10 [ode_]= ceil(S1_stoich / 4);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P11 [ode_]= ceil(S1_stoich * 4 - 0.45);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P12 [ode_]= ceil((-S1_stoich) * 2 - 0.6);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P13 [ode_]= cos(S1_stoich * 4 + 1.1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P14 [ode_]= cos((-S1_stoich) / 10 - 0.02);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P15 [ode_]= exp(0 * S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P16 [ode_]= exp(S1_stoich / 2);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P17 [ode_]= exp(S1_stoich / 2 - 0.33);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P18 [ode_]= floor((-S1_stoich) * 2 - 0.6);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P19 [ode_]= floor(S1_stoich * 4 + 1.1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P20 [ode_]= ln(S1_stoich / 10);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P21 [ode_]= ln(S1_stoich / 2);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P22 [ode_]= logbase(S1_stoich / 10, 10);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P23 [ode_]= logbase(S1_stoich / 2, 10);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P24 [ode_]= pow(1, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P25 [ode_]= pow(S1_stoich, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P25 [ode_]= pow(S1_stoich, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P27 [ode_]= pow(S1_stoich * S1_stoich, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P27 [ode_]= pow(S1_stoich * S1_stoich, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P27 [ode_]= pow(S1_stoich * S1_stoich, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P28 [ode_]= pow(3.1, S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P29 [ode_]= pow(S1_stoich * 2, 1 / 2);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P30 [ode_]= pow(7 + S1_stoich / 5, 1 / 2);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P31 [ode_]= sin(S1_stoich + 0.1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P32 [ode_]= sin(0 * S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P33 [ode_]= sin((-S1_stoich) * 2 - 1.9);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P34 [ode_]= tan(0 * S1_stoich);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P35 [ode_]= tan(S1_stoich / 2 + 0.11);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P36 [ode_]= tan((-S1_stoich) * 3);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P37 [ode_]= sec(S1_stoich / 4);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P38 [ode_]= csc(S1_stoich * 2.25);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P39 [ode_]= cot(S1_stoich / 10);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P40 [ode_]= sinh(S1_stoich / 10 + 0.1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P41 [ode_]= cosh(S1_stoich - 0.3);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P42 [ode_]= asec(S1_stoich + 0.3);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P43 [ode_]= acsc(S1_stoich - 0.9);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P44 [ode_]= acot(S1_stoich - 2.1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P45 [ode_]= asinh(S1_stoich * 50 - 1);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P46 [ode_]= acosh(S1_stoich / 2 + 0.34);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P47 [ode_]= atanh(S1_stoich - 2.7);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P48 [ode_]= asech(S1_stoich * 0.21);
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: P49 [ode_]= acsch(S1_stoich * 0.005);
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

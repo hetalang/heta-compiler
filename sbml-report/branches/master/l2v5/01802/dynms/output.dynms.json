@@ -1,0 +1,74 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T17:34:56.727Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "S1_stoich__J1_local",
+          "value": 0.1
+        },
+        {
+          "id": "S2_stoich__J1_local",
+          "value": 0.1
+        },
+        {
+          "id": "J1__J1_local",
+          "value": 0.1
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1",
+          "initial": 2,
+          "derivative": {
+            "expr": [
+              "Negate",
+              "J1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "initial": 3,
+          "derivative": {
+            "expr": "J1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1
+        }
+      ],
+      "assignments": [
+        {
+          "id": "J1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "S1_stoich__J1_local",
+              "S2_stoich__J1_local",
+              "J1__J1_local",
+              200
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

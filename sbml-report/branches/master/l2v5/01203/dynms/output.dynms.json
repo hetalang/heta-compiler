@@ -1,0 +1,88 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T17:33:24.447Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "y",
+          "initial": 2,
+          "derivative": {
+            "expr": "y_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x",
+          "initial": 0,
+          "derivative": {
+            "expr": "x_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "z",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "LessEqual",
+                "x",
+                0.49
+              ],
+              [
+                "If",
+                [
+                  "Greater",
+                  "y",
+                  1.49
+                ],
+                2,
+                1
+              ],
+              [
+                "If",
+                [
+                  "Greater",
+                  "y",
+                  0.49
+                ],
+                1,
+                0
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "y_proc",
+          "rhs": {
+            "expr": -2,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x_proc",
+          "rhs": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

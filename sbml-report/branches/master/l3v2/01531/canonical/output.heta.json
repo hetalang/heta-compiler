@@ -1,0 +1,1016 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-20T17:08:48.146Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "9f1209bdb823bf73bc3af40ce2016a0c45eba3bcd68d7c792f522df75892b905",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "trig > exponentiale"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E1",
+    "trigger": "trig > exp(exponentiale)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E10",
+    "trigger": "trig > ceil(0.5)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E11",
+    "trigger": "trig > ceil(3.55)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E12",
+    "trigger": "trig > ceil((-4.6))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E13",
+    "trigger": "trig > cos(9.1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E14",
+    "trigger": "trig > cos((-0.22))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E15",
+    "trigger": "trig > exp(0)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E16",
+    "trigger": "trig > exp(1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E17",
+    "trigger": "trig > exp(0.77)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E18",
+    "trigger": "trig > floor((-4.6))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E19",
+    "trigger": "trig > floor(9.1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E2",
+    "trigger": "trig > abs((-1))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E20",
+    "trigger": "trig > ln(0.2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E21",
+    "trigger": "trig > ln(1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E22",
+    "trigger": "trig > logbase(0.2, 10)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E23",
+    "trigger": "trig > logbase(1, 10)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E24",
+    "trigger": "trig > pow(1, 2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E25",
+    "trigger": "trig > pow(2, 2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E26",
+    "trigger": "trig > pow(1.4, 5.1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E27",
+    "trigger": "trig > pow(4, 2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E28",
+    "trigger": "trig > pow(3.1, 2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E29",
+    "trigger": "trig > pow(4, 1 / 2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E3",
+    "trigger": "trig > abs(1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E30",
+    "trigger": "trig > pow(7.4, 1 / 2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E31",
+    "trigger": "trig > sin(2.1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E32",
+    "trigger": "trig > sin(0)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E33",
+    "trigger": "trig > sin((-5.9))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E34",
+    "trigger": "trig > tan(0)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E35",
+    "trigger": "trig > tan(1.11)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E36",
+    "trigger": "trig > tan((-6))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E37",
+    "trigger": "trig > sec(0.5)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E38",
+    "trigger": "trig > csc(4.5)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E39",
+    "trigger": "trig > cot(0.2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E4",
+    "trigger": "trig > acos((-1))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E40",
+    "trigger": "trig > sinh(0.3)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E41",
+    "trigger": "trig > cosh(1.7)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E42",
+    "trigger": "trig > asec(2.3)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E43",
+    "trigger": "trig > acsc(1.1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E44",
+    "trigger": "trig > acot((-0.1))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E45",
+    "trigger": "trig > asinh(99)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E46",
+    "trigger": "trig > acosh(1.34)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E47",
+    "trigger": "trig > atanh((-0.7))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E48",
+    "trigger": "trig > asech(0.42)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E49",
+    "trigger": "trig > acsch(0.01)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E5",
+    "trigger": "trig > acos(0.5)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E50",
+    "trigger": "trig > acoth(8.2)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E51",
+    "trigger": "trig > multiply()"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E52",
+    "trigger": "trig > add()"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E53",
+    "trigger": "trig > 0 and true"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E54",
+    "trigger": "trig > 0 and not false"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E55",
+    "trigger": "trig > 0 and not false"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E6",
+    "trigger": "trig > asin(1)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E7",
+    "trigger": "trig > asin((-0.5))"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E8",
+    "trigger": "trig > atan(2.8)"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E9",
+    "trigger": "trig > atan((-7.09))"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E1": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E10": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E11": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E12": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E13": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E14": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E15": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E16": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E17": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E18": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E19": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E2": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E20": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E21": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E22": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E23": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E24": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E25": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E26": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E27": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E28": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E29": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E3": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E30": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P30"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E31": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P31"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E32": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P32"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E33": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P33"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E34": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P34"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E35": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P35"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E36": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P36"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E37": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P37"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E38": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P38"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E39": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P39"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E4": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E40": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P40"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E41": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P41"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E42": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P42"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E43": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P43"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E44": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P44"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E45": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P45"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E46": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P46"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E47": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P47"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E48": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P48"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E49": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P49"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E5": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E50": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P50"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E51": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P51"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E52": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P52"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E53": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P53"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E54": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P54"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E55": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P55"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E6": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E7": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E8": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E9": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "-5.3"
+    },
+    "class": "Record",
+    "id": "trig"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "trig"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Process",
+    "id": "trig_proc"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

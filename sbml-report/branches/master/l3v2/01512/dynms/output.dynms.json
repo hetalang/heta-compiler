@@ -1,0 +1,137 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T17:08:38.301Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "C1",
+          "initial": 0.5,
+          "derivative": {
+            "expr": "C1_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              0.5
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": "S1_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "x2",
+          "initial": 0
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "C1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "x",
+          "rhs": {
+            "expr": "S1",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1_proc",
+          "rhs": {
+            "expr": 0.4,
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "C1_proc",
+          "rhs": {
+            "expr": 0.2,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                "t",
+                0.45
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 3,
+                "format": "math-json"
+              },
+              "state": "x2"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                "t",
+                0.45
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 5,
+                "format": "math-json"
+              },
+              "state": "x2"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

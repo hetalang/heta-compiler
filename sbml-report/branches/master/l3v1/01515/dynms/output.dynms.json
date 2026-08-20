@@ -1,0 +1,803 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T17:22:23.240Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "P2",
+          "initial": 0,
+          "derivative": {
+            "expr": "P2_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P3",
+          "initial": 0,
+          "derivative": {
+            "expr": "P3_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P4",
+          "initial": 0,
+          "derivative": {
+            "expr": "P4_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P5",
+          "initial": 0,
+          "derivative": {
+            "expr": "P5_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P6",
+          "initial": 0,
+          "derivative": {
+            "expr": "P6_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P7",
+          "initial": 0,
+          "derivative": {
+            "expr": "P7_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P8",
+          "initial": 0,
+          "derivative": {
+            "expr": "P8_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P9",
+          "initial": 0,
+          "derivative": {
+            "expr": "P9_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P10",
+          "initial": 0,
+          "derivative": {
+            "expr": "P10_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P11",
+          "initial": 0,
+          "derivative": {
+            "expr": "P11_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P12",
+          "initial": 0,
+          "derivative": {
+            "expr": "P12_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P13",
+          "initial": 0,
+          "derivative": {
+            "expr": "P13_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P14",
+          "initial": 0,
+          "derivative": {
+            "expr": "P14_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P15",
+          "initial": 0,
+          "derivative": {
+            "expr": "P15_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P16",
+          "initial": 0,
+          "derivative": {
+            "expr": "P16_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P17",
+          "initial": 0,
+          "derivative": {
+            "expr": "P17_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P18",
+          "initial": 0,
+          "derivative": {
+            "expr": "P18_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P19",
+          "initial": 0,
+          "derivative": {
+            "expr": "P19_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P20",
+          "initial": 0,
+          "derivative": {
+            "expr": "P20_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P21",
+          "initial": 0,
+          "derivative": {
+            "expr": "P21_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P22",
+          "initial": 0,
+          "derivative": {
+            "expr": "P22_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P23",
+          "initial": 0,
+          "derivative": {
+            "expr": "P23_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P24",
+          "initial": 0,
+          "derivative": {
+            "expr": "P24_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P25",
+          "initial": 0,
+          "derivative": {
+            "expr": "P25_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P26",
+          "initial": 0,
+          "derivative": {
+            "expr": "P26_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P27",
+          "initial": 0,
+          "derivative": {
+            "expr": "P27_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P28",
+          "initial": 0,
+          "derivative": {
+            "expr": "P28_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P29",
+          "initial": 0,
+          "derivative": {
+            "expr": "P29_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P30",
+          "initial": 0,
+          "derivative": {
+            "expr": "P30_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P31",
+          "initial": 0,
+          "derivative": {
+            "expr": "P31_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P32",
+          "initial": 0,
+          "derivative": {
+            "expr": "P32_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P33",
+          "initial": 0,
+          "derivative": {
+            "expr": "P33_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P34",
+          "initial": 0,
+          "derivative": {
+            "expr": "P34_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P35",
+          "initial": 0,
+          "derivative": {
+            "expr": "P35_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P36",
+          "initial": 0,
+          "derivative": {
+            "expr": "P36_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P37",
+          "initial": 0,
+          "derivative": {
+            "expr": "P37_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P38",
+          "initial": 0,
+          "derivative": {
+            "expr": "P38_proc",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P39",
+          "initial": 0,
+          "derivative": {
+            "expr": "P39_proc",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "P2_proc",
+          "rhs": {
+            "expr": [
+              "Abs",
+              -1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P3_proc",
+          "rhs": {
+            "expr": [
+              "Abs",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P4_proc",
+          "rhs": {
+            "expr": [
+              "Arccos",
+              -1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P5_proc",
+          "rhs": {
+            "expr": [
+              "Arccos",
+              0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P6_proc",
+          "rhs": {
+            "expr": [
+              "Arcsin",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P7_proc",
+          "rhs": {
+            "expr": [
+              "Arcsin",
+              -0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P8_proc",
+          "rhs": {
+            "expr": [
+              "Arctan",
+              2.8
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P9_proc",
+          "rhs": {
+            "expr": [
+              "Arctan",
+              -7.09
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P10_proc",
+          "rhs": {
+            "expr": [
+              "Ceil",
+              0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P11_proc",
+          "rhs": {
+            "expr": [
+              "Ceil",
+              3.55
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P12_proc",
+          "rhs": {
+            "expr": [
+              "Ceil",
+              -4.6
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P13_proc",
+          "rhs": {
+            "expr": [
+              "Cos",
+              9.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P14_proc",
+          "rhs": {
+            "expr": [
+              "Cos",
+              -0.22
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P15_proc",
+          "rhs": {
+            "expr": [
+              "Exp",
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P16_proc",
+          "rhs": {
+            "expr": [
+              "Exp",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P17_proc",
+          "rhs": {
+            "expr": [
+              "Exp",
+              0.77
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P18_proc",
+          "rhs": {
+            "expr": [
+              "Floor",
+              -4.6
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P19_proc",
+          "rhs": {
+            "expr": [
+              "Floor",
+              9.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P20_proc",
+          "rhs": {
+            "expr": [
+              "Ln",
+              0.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P21_proc",
+          "rhs": {
+            "expr": [
+              "Ln",
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P22_proc",
+          "rhs": {
+            "expr": [
+              "Log",
+              0.2,
+              10
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P23_proc",
+          "rhs": {
+            "expr": [
+              "Log",
+              1,
+              10
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P24_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P25_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              2,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P26_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              1.4,
+              5.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P27_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              4,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P28_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              3.1,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P29_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              4,
+              [
+                "Divide",
+                1,
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P30_proc",
+          "rhs": {
+            "expr": [
+              "Power",
+              7.4,
+              [
+                "Divide",
+                1,
+                2
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P31_proc",
+          "rhs": {
+            "expr": [
+              "Sin",
+              2.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P32_proc",
+          "rhs": {
+            "expr": [
+              "Sin",
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P33_proc",
+          "rhs": {
+            "expr": [
+              "Sin",
+              -5.9
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P34_proc",
+          "rhs": {
+            "expr": [
+              "Tan",
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P35_proc",
+          "rhs": {
+            "expr": [
+              "Tan",
+              1.11
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P36_proc",
+          "rhs": {
+            "expr": [
+              "Tan",
+              -6
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P37_proc",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    0
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    0
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P38_proc",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    1.11
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    1.11
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P39_proc",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    -6
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    -6
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-20T17:06:45.032Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [],
+      "assignments": [
+        {
+          "id": "p1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              [
+                "Which",
+                [
+                  "Less",
+                  [
+                    "Divide",
+                    "t",
+                    2
+                  ],
+                  0
+                ],
+                -1,
+                [
+                  "Greater",
+                  [
+                    "Divide",
+                    "t",
+                    2
+                  ],
+                  0
+                ],
+                1,
+                "True",
+                0
+              ],
+              [
+                "Floor",
+                [
+                  "Abs",
+                  [
+                    "Divide",
+                    "t",
+                    2
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}
