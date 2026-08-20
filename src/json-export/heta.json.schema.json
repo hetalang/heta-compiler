@@ -103,7 +103,6 @@
         "action",
         "generator",
         "created",
-        "platformId",
         "format"
       ],
       "additionalProperties": true,
