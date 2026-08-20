@@ -111,7 +111,7 @@ jobs:
             fi
           done
 
-          publish_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/$GITHUB_REF_NAME"
+          publish_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/branches/$GITHUB_REF_NAME"
           rm -rf "$publish_root"
           mkdir -p "$publish_root"
           for report_name in "${report_names[@]}"; do
@@ -120,7 +120,7 @@ jobs:
 
           git -C "$GITHUB_WORKSPACE/reports-publication" config user.name 'github-actions[bot]'
           git -C "$GITHUB_WORKSPACE/reports-publication" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/$GITHUB_REF_NAME"
+          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/branches/$GITHUB_REF_NAME"
           if git -C "$GITHUB_WORKSPACE/reports-publication" diff --cached --quiet; then
             echo 'Published reports are unchanged.'
             exit 0
