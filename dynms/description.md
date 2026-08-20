@@ -21,7 +21,7 @@ Minimal valid DynMS structure:
 
 ```json
 {
-  "dynms": "0.2.0",
+  "dynms": "0.2.1",
   "models": [
     {
       "id": "model1",
@@ -39,7 +39,7 @@ Minimal valid DynMS structure:
 
 Top-level required fields:
 
-- `dynms`: DynMS version; currently must be `"0.2.0"`;
+- `dynms`: DynMS version; currently must be `"0.2.1"`;
 - `models`: non-empty array of model definitions.
 
 The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`.
@@ -58,12 +58,21 @@ The following sections describe one model-object type at a time.
 
 ### 3.1 Constants
 
-`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a JSON number and does not change during simulation unless a backend-specific mechanism changes it. Model constants are distinct from DynMS built-in symbols such as `Pi` and `ExponentialE`; built-in symbols are not listed in this array.
+`constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a finite JSON number or an extended numeric value, and does not change during simulation unless a backend-specific mechanism changes it. Model constants are distinct from DynMS built-in symbols such as `Pi` and `ExponentialE`; built-in symbols are not listed in this array.
 
 ```json
 {
   "id": "kabs",
   "value": 0.01
+}
+```
+
+Because JSON has no native representation for `Infinity`, `-Infinity`, or `NaN`, a constant with one of these values uses the MathJSON number-object form. The same representation is used for these literals inside MathJSON expressions:
+
+```json
+{
+  "id": "upperBound",
+  "value": { "num": "+Infinity" }
 }
 ```
 
@@ -307,6 +316,8 @@ Extended numeric values that JSON cannot represent use a `num` object:
 | Positive infinity | `{"num": "+Infinity"}` |
 | Negative infinity | `{"num": "-Infinity"}` |
 
+The `num` object is permitted both as a MathJSON numeric literal and as `constants[].value`; arbitrary strings and other objects are not numeric values.
+
 For associative operators (`Add`, `Multiply`, `And`, `Or`, and `Xor`), heta-compiler flattens nested calls. For example, `a + b + c` is represented as `["Add", "a", "b", "c"]`, rather than nested `Add` arrays.
 
 The permitted MathJSON function and operator names are:
@@ -405,7 +416,7 @@ Every reference must resolve within the same model and point to an object type a
 
 - Symbols in expressions must resolve to a constant, state, assignment, the special time symbol `t`, or a built-in symbol listed in section 4.2.1, unless a more restrictive rule below applies.
 - `timeEvents[].actions[].state` and `events[].actions[].state` must reference an existing dynamic or static state.
-- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.0.
+- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.1.
 
 ### 7.4 Dynamic states and derivatives
 
