@@ -316,6 +316,26 @@ describe('SBML Level 3 packages', () => {
   });
 });
 
+describe('unsupported SBML Core MathML', () => {
+  it('rejects delay csymbols even inside an ignored event priority', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfEvents><event id="event"><priority><math><apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/delay">delay</csymbol><cn>1</cn><cn>1</cn></apply></math></priority></event></listOfEvents></model></sbml>`;
+
+    expect(() => SBMLParse(xml)).to.throw(HetaLevelError, 'SBML MathML CSymbolDelay is not supported.');
+  });
+
+  it('rejects references to SpeciesReference IDs even inside an ignored event priority', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfReactions><reaction id="reaction"><listOfReactants><speciesReference id="stoich" species="species"/></listOfReactants></reaction></listOfReactions><listOfEvents><event id="event"><priority><math><ci>stoich</ci></math></priority></event></listOfEvents></model></sbml>`;
+
+    expect(() => SBMLParse(xml)).to.throw(HetaLevelError, 'SBML MathML SpeciesReferenceInMath is not supported: "stoich".');
+  });
+
+  it('allows a kinetic-law local parameter that shadows a SpeciesReference ID', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfReactions><reaction id="reaction"><listOfReactants><speciesReference id="stoich" species="species"/></listOfReactants><kineticLaw><listOfLocalParameters><localParameter id="stoich" value="1"/></listOfLocalParameters><math><ci>stoich</ci></math></kineticLaw></reaction></listOfReactions></model></sbml>`;
+
+    expect(() => SBMLParse(xml)).not.to.throw();
+  });
+});
+
 describe('SBML-import identifier renaming', () => {
   it('renames global IDs and rewrites their references', () => {
     let xml = `<sbml level="3" version="1"><model><listOfParameters><parameter id="_x" value="1"/><parameter id="begin" value="2"/><parameter id="sbml__x_1" value="3"/></listOfParameters><listOfRules><assignmentRule variable="_x"><math><apply><plus/><ci>_x</ci><ci>begin</ci></apply></math></assignmentRule></listOfRules><listOfReactions><reaction id="_r"><kineticLaw><listOfLocalParameters><localParameter id="_k" value="4"/></listOfLocalParameters><math><apply><plus/><ci>_k</ci><ci>_x</ci></apply></math></kineticLaw></reaction></listOfReactions></model></sbml>`;

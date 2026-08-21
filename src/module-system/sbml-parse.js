@@ -39,6 +39,7 @@ function jsbmlToQArr(JSBML, options = {}) {
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
   rejectRequiredSBMLPackages(sbml);
+  rejectUnsupportedCoreMath(sbml);
   let sbmlLevel = Number.parseInt(sbml.attributes?.level);
 
   let model = sbml.elements
@@ -768,6 +769,64 @@ function rejectRequiredSBMLPackages(sbml) {
     let details = packages.map(({ name, uri }) => `"${name}" (${uri})`).join(', ');
     throw new HetaLevelError(`SBML Level 3 package with required="true" is not supported: ${details}.`);
   }
+}
+
+/**
+ * Rejects unsupported SBML Core MathML constructs before selectively imported
+ * elements, such as event priorities, can discard them silently.
+ *
+ * @param {object} sbml Root SBML XML element.
+ */
+function rejectUnsupportedCoreMath(sbml) {
+  let speciesReferenceIds = new Set();
+  walkElements(sbml, (element) => {
+    if (element.name === 'speciesReference' && element.attributes?.id !== undefined) {
+      speciesReferenceIds.add(element.attributes.id);
+    }
+  });
+
+  let visit = (element, localIds = new Set()) => {
+    let childLocalIds = new Set(localIds);
+    if (element.name === 'kineticLaw') {
+      findLocalParameterIds(element).forEach((id) => childLocalIds.add(id));
+    } else if (element.name === 'lambda') {
+      element.elements
+        ?.filter((child) => child.name === 'bvar')
+        .map((bvar) => bvar.elements?.find((child) => child.name === 'ci')?.elements?.[0]?.text?.trim())
+        .filter((id) => id !== undefined)
+        .forEach((id) => childLocalIds.add(id));
+    }
+
+    if (element.name === 'csymbol'
+      && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/delay') {
+      throw new HetaLevelError('SBML MathML CSymbolDelay is not supported.');
+    }
+
+    if (element.name === 'ci') {
+      let id = element.elements?.[0]?.text?.trim();
+      if (speciesReferenceIds.has(id) && !childLocalIds.has(id)) {
+        throw new HetaLevelError(`SBML MathML SpeciesReferenceInMath is not supported: "${id}".`);
+      }
+    }
+
+    element.elements?.forEach((child) => visit(child, childLocalIds));
+  };
+
+  visit(sbml);
+}
+
+function findLocalParameterIds(kineticLaw) {
+  return kineticLaw.elements
+    ?.filter((element) => element.name === 'listOfParameters' || element.name === 'listOfLocalParameters')
+    .flatMap((list) => list.elements || [])
+    .filter((element) => element.name === 'parameter' || element.name === 'localParameter')
+    .map((parameter) => parameter.attributes?.id)
+    .filter((id) => id !== undefined) || [];
+}
+
+function walkElements(element, callback) {
+  callback(element);
+  element.elements?.forEach((child) => walkElements(child, callback));
 }
 
 function SBMLValueToNumber(value) {
