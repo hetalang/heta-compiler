@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-21T09:37:11.380Z",
+  "created": "2026-08-21T11:33:18.910Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -42,13 +42,13 @@
                 0.49
               ],
               [
-                "my_piecewise",
-                2,
+                "If",
                 [
                   "Greater",
                   "y",
                   1.49
                 ],
+                2,
                 1
               ],
               0

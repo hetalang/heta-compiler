@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-21T09:44:00.440Z",
+  "created": "2026-08-21T11:45:31.953Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -20,21 +20,18 @@
               "Add",
               3,
               1,
-              [
-                "addone",
-                3
-              ],
-              1,
-              [
-                "addoneagain2x",
-                3
-              ],
               3,
               1,
-              [
-                "addone",
-                3
-              ],
+              1,
+              3,
+              1,
+              3,
+              1,
+              1,
+              3,
+              1,
+              3,
+              1,
               1
             ],
             "format": "math-json"

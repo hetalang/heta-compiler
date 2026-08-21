@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-21T09:29:01.801Z",
+  "created": "2026-08-21T11:18:41.681Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -20,13 +20,7 @@
             "expr": [
               "Add",
               1,
-              [
-                "my_plus",
-                1,
-                [
-                  "Add"
-                ]
-              ]
+              1
             ],
             "format": "math-json"
           }
@@ -37,13 +31,7 @@
             "expr": [
               "Multiply",
               2,
-              [
-                "my_times",
-                2,
-                [
-                  "Multiply"
-                ]
-              ]
+              2
             ],
             "format": "math-json"
           }
@@ -55,11 +43,8 @@
               "If",
               [
                 "And",
-                [
-                  "my_and",
-                  "True",
-                  "True"
-                ],
+                "True",
+                "True",
                 "True"
               ],
               1,
@@ -75,11 +60,8 @@
               "If",
               [
                 "Or",
-                [
-                  "my_or",
-                  "False",
-                  "True"
-                ],
+                "False",
+                "True",
                 "True"
               ],
               1,
@@ -95,11 +77,8 @@
               "If",
               [
                 "Xor",
-                [
-                  "my_xor",
-                  "False",
-                  "True"
-                ],
+                "False",
+                "True",
                 "True"
               ],
               1,
