@@ -45,7 +45,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
                 expr = initialAssignment;
             }
             
-            if (typeof num === 'number' && !isConcentration) {
+            if (typeof num === 'number' && Number.isFinite(num) && !isConcentration) {
                 var state = { id: stateId, initial: num, title: title };
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
