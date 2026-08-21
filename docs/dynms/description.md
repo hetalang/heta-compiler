@@ -11,7 +11,7 @@ The main goals of DynMS are:
 - support deterministic simulation semantics;
 - simplify testing and validation across simulation platforms.
 
-The schema for DynMS is available at: https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json
+The schema for DynMS is available at: https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json
 
 ---
 

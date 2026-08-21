@@ -2,15 +2,14 @@
 
 ## 0.13.0
 
-validation of documents and MathJSON expressions.
 - Improved **SBML import and export** compatibility: added support for variadic MathML arithmetic and logical operators, handled Level 2 reaction defaults correctly, and safely renamed conflicting imported identifiers.
 - Improved support for mathematical expressions, including  inverse hyperbolic functions, Boolean expressions, and canonical `piecewise(value, condition, ..., otherwise)` syntax.
 - Fixed expansion of nested user-defined functions so exported models no longer retain unresolved function calls.
 - Tightened validation for identifiers, `#importNS` prefixes, time scales, and switcher settings.
-- Updated dependencies to address known security vulnerabilities.
 - Follow heta language specifications 0.6.0
 - Remove MT export type
-- Updated **DynMS export** to version 0.2.1, with extended numeric values (`NaN`, `Infinity`, and `-Infinity`) and stricter 
+- Updated **DynMS export** to version 0.2.1, with extended numeric values (`NaN`, `Infinity`, and `-Infinity`) and stricter validation of documents and MathJSON expressions.
+- Updated dependencies to address known security vulnerabilities.
 
 ## 0.12.1
 
