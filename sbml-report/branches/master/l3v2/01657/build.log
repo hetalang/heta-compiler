@@ -5,10 +5,9 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01657/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01657/01657-sbml-l3v2.xml"...
-[error]	S1_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: ac0cf2ffca01841f452b9e2e3b0a3a5af2ffed8e457834b2e42087f4a906e075
-[info]	Setting references in elements, total length 98
-[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: k0 [start_]= S1_stoich * 2;
+[error]	SBML MathML SpeciesReferenceInMath is not supported: "S1_stoich". when converting module "cases/semantic/01657/01657-sbml-l3v2.xml"
+[info]	Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7
+[info]	Setting references in elements, total length 93
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

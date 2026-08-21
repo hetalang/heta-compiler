@@ -5,11 +5,9 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/00974/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00974/00974-sbml-l3v2.xml"...
-[info]	Platform hash: 5b9eff3c9a746dc6125bc11f4c4e8be182302e4cd26c45f811a3c9137247d107
-[info]	Setting references in elements, total length 101
-[error]	Component "Xref" is not found in space "nameless" as expected in expression: Z [ode_]= Xref;
-[error]	Component "Xref" is not found in space "nameless" as expected in expression: Q [start_]= Xref;
-[error]	Component "Xref" is not found in space "nameless" as expected in expression: rate_Y [ode_]= Xref;
+[error]	SBML MathML SpeciesReferenceInMath is not supported: "Xref". when converting module "cases/semantic/00974/00974-sbml-l3v2.xml"
+[info]	Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7
+[info]	Setting references in elements, total length 93
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.
