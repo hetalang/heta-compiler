@@ -5,9 +5,9 @@
     "packageName": "@hetalang/format-conversion-test-suite",
     "packageVersion": "0.1.0"
   },
-  "status": "completed-with-errors",
-  "startedAt": "2026-08-21T12:32:34.795Z",
-  "completedAt": "2026-08-21T12:40:45.969Z",
+  "status": "completed-with-not-evaluated",
+  "startedAt": "2026-08-21T13:21:49.084Z",
+  "completedAt": "2026-08-21T13:31:16.927Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l2v5",
@@ -24631,7 +24631,7 @@
       "caseId": "00950",
       "synopsis": "Three constant parameters, with initialassignments to inf, -inf, and nan.",
       "sourcePath": "semantic/00950/00950-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00950/input.heta",
       "outputs": {
         "canonical": "00950/canonical/output.heta.json",
@@ -24647,110 +24647,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.1 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/$defs/lineExpression/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/2/initial",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/2/initial",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/2/initial",
-              "schemaPath": "#/$defs/lineExpression/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/2/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/2/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -31984,7 +31887,7 @@
       "caseId": "01811",
       "synopsis": "Test SBML IDs named 'inf'",
       "sourcePath": "semantic/01811/01811-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01811/input.heta",
       "outputs": {
         "canonical": "01811/canonical/output.heta.json",
@@ -32000,65 +31903,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.1 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/$defs/lineExpression/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -32094,7 +31945,7 @@
       "caseId": "01813",
       "synopsis": "Test SBML IDs named 'nan'",
       "sourcePath": "semantic/01813/01813-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01813/input.heta",
       "outputs": {
         "canonical": "01813/canonical/output.heta.json",
@@ -32110,65 +31961,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.1 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/$defs/lineExpression/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/3/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {

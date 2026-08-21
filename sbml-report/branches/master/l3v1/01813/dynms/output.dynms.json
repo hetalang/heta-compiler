@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-21T12:32:31.469Z",
+  "created": "2026-08-21T13:21:44.976Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -49,7 +49,12 @@
         },
         {
           "id": "s",
-          "initial": null
+          "initial": {
+            "expr": {
+              "num": "NaN"
+            },
+            "format": "math-json"
+          }
         }
       ],
       "assignments": [],
