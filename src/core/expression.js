@@ -4,6 +4,8 @@ const math = create(all);
 const _calcUnit = require('./math-calc-unit');
 const { uniqBy } = require('../utils');
 
+const MAX_FUNCTION_SUBSTITUTIONS = 10000;
+
 /**
  * Wrapper around a mathjs expression tree used by Heta model elements.
  *
@@ -96,17 +98,48 @@ class Expression {
    * @returns {Expression} Expression with function bodies substituted.
    */
   substituteByDefinitions() {
-    let transformed = this.exprParsed.transform((node) => {
-      if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
-        return _substituteFunctionDef(node.fnObj, node.args);
-      } else {
+    let transformed = this.exprParsed;
+    let substituted = true;
+    let substitutionCount = 0;
+    const definitions = new Map();
+
+    // Transformed nodes are clones and can lose fnObj. Collect definitions
+    // reachable from the original expression and function bodies so each
+    // subsequent pass can still resolve a newly introduced function call.
+    const collectDefinitions = (node) => {
+      node.filter((candidate) => {
+        if (candidate.type !== 'FunctionNode' || !candidate.fnObj || candidate.fnObj.isCore) return false;
+        const definition = candidate.fnObj;
+        if (!definitions.has(definition.id)) {
+          definitions.set(definition.id, definition);
+          collectDefinitions(definition.math.exprParsed);
+        }
+        return false;
+      });
+    };
+    collectDefinitions(this.exprParsed);
+
+    // mathjs does not traverse nodes returned by transform(). Repeat until
+    // every non-core function call introduced by a previous substitution has
+    // also been expanded.
+    while (substituted) {
+      substituted = false;
+      transformed = transformed.transform((node) => {
+        const definition = node.type === 'FunctionNode'
+          && (node.fnObj || definitions.get(node.fn.name));
+        if (definition && !definition.isCore) {
+          substitutionCount += 1;
+          if (substitutionCount > MAX_FUNCTION_SUBSTITUTIONS) {
+            throw new TypeError('Too many user-defined function substitutions; recursive function definitions are not supported');
+          }
+          substituted = true;
+          return _substituteFunctionDef(definition, node.args);
+        }
         return node;
-      }
-    });
+      });
+    }
 
-    let expr = new Expression(transformed);
-
-    return expr;
+    return new Expression(transformed);
   }
   /**
    * Rewrites symbol references using `prefix`, `suffix`, and `rename`.

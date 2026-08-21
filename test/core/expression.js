@@ -2,6 +2,7 @@
 const { Expression } = require('../../src/core/expression');
 const { Container } = require('../../src');
 require('../../src/sbml-export/expression');
+require('../../src/dynms/expression');
 const { expect } = require('chai');
 
 describe('Unit test for Expression.', () => {
@@ -246,6 +247,23 @@ describe('Function definition substitution', () => {
 
     expect(expression.substituteByDefinitions().toString())
       .to.equal('(y + 1) ^ 2 + (y + 1) ^ 3');
+  });
+
+  it('Recursively expands function calls introduced by substitution.', () => {
+    const container = new Container();
+    container.loadMany([
+      { id: 'my_plus0', action: 'defineFunction', arguments: [], math: 'add()' },
+      { id: 'my_plus', action: 'defineFunction', arguments: ['x', 'y'], math: 'x + y' }
+    ]);
+    container.knitMany();
+
+    const expression = Expression.fromString('my_plus(1, my_plus(1, my_plus0()))');
+    expression.functionList().forEach((functionNode) => {
+      functionNode.fnObj = container.functionDefStorage.get(functionNode.fn.name);
+    });
+
+    const expanded = expression.substituteByDefinitions();
+    expect(expanded.toMathJSON()).to.deep.equal(['Add', 1, 1]);
   });
 
 });
