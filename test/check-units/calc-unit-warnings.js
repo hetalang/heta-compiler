@@ -35,7 +35,7 @@ let qArr = [
   {id: 'y8', class: 'Record', assignments: {start_: 'logbase(2, k2)'}},
   {id: 'y9', class: 'Record', assignments: {start_: 'sign(k3 + 1.1)'}},
   {id: 'y10', class: 'Record', assignments: {start_: 'ifge(k1,k2,k3,k4)'}},
-  {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2,k3,k4)'}},
+  {id: 'y11', class: 'Record', assignments: {start_: 'piecewise(k1,k2 > 0,k3,k4 > 0)'}},
   // no units set
   {id: 'theta1', class: 'Const', num: 1.1},
   {id: 'p1', class: 'Record', assignments: {ode_: '10*theta1'}}

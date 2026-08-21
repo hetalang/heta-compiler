@@ -15,9 +15,31 @@ const MATHML_INVERSE_TRIGONOMETRIC_OPERATORS = {
   asec: 'arcsec',
 };
 
+function piecewiseToCMathML(node, options) {
+  const hasOtherwise = node.args.length % 2 === 1;
+  const pairCount = hasOtherwise ? node.args.length - 1 : node.args.length;
+  let result = '<piecewise>';
+
+  for (let index = 0; index < pairCount; index += 2) {
+    const value = node.args[index];
+    const condition = node.args[index + 1];
+    result += `<piece>${value.toString({ ...options, handler: sbmlCMathMLHandler })}${condition.toString({ ...options, handler: sbmlCMathMLHandler })}</piece>`;
+  }
+
+  if (hasOtherwise) {
+    result += `<otherwise>${node.args[node.args.length - 1].toString({ ...options, handler: sbmlCMathMLHandler })}</otherwise>`;
+  }
+
+  return result + '</piecewise>';
+}
+
 // Custom handler for user defined functions in SBML
 // use <ci>fun1</ci> instead of <fun1/>
 function sbmlCMathMLHandler(node, options = {}) {
+  if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
+    return piecewiseToCMathML(node, options);
+  }
+
   if (node.type === 'FunctionNode' && MATHML_INVERSE_TRIGONOMETRIC_OPERATORS[node.fn.name]) {
     const operator = MATHML_INVERSE_TRIGONOMETRIC_OPERATORS[node.fn.name];
     const args = node.args

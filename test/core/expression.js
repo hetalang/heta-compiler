@@ -67,6 +67,16 @@ describe('Unit test for Expression.', () => {
     );
   });
 
+  it('Conversion of canonical "piecewise" to CMathML.', () => {
+    const expected = '<piecewise><piece><cn>1</cn><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>1</cn></apply></piece><piece><cn>2</cn><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise>';
+    expect(Expression.fromString('piecewise(1, t > 1, 2, t > 2, 0)').toCMathML(true)).to.equal(expected);
+  });
+
+  it('Rejects legacy and malformed "piecewise" argument order.', () => {
+    expect(() => Expression.fromString('piecewise(t > 1, 1, t > 2, 2, 0)')).to.throw(TypeError);
+    expect(() => Expression.fromString('piecewise(1, 2, 0)')).to.throw(TypeError);
+  });
+
   it('Conversion of t (time) to CMathML.', () => {
     expect(Expression.fromString('1 * x * t').toCMathML()).to.be
       .equal('<math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><cn>1</cn><ci>x</ci></apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol></apply></math>');
@@ -131,7 +141,7 @@ describe('Boolean literal normalization', () => {
       'not (1)': 'not (true)',
       '0 ? 2 : 3': 'false ? 2 : 3',
       'piecewise(2, 1, 3)': 'piecewise(2, true, 3)',
-      'piecewise(x > 1, 1, x > 2, 2, 0)': 'piecewise(x > 1, 1, x > 2, 2, 0)'
+      'piecewise(1, x > 1, 2, x > 2, 0)': 'piecewise(1, x > 1, 2, x > 2, 0)'
     };
 
     Object.entries(expected).forEach(([input, output]) => {

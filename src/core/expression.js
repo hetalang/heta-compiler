@@ -67,7 +67,9 @@ class Expression {
           throw new TypeError(msg);
         }
       } else */
-      if (node.type === 'AssignmentNode') { // check = sign
+      if (node.type === 'FunctionNode' && node.fn.name === 'piecewise') {
+        _validatePiecewise(node);
+      } else if (node.type === 'AssignmentNode') { // check = sign
         let msg = `Assign (=) symbol must not be in expression, got "${exprParsed.toString()}"`;
         throw new TypeError(msg);
       } else if (node.type === 'AccessorNode') {
@@ -329,13 +331,10 @@ function _normalizeBooleanLiterals(node, booleanContext = false) {
   } else if (node.type === 'FunctionNode') {
     const isPiecewise = node.fn.name === 'piecewise';
     const hasOtherwise = node.args.length % 2 === 1;
-    // Heta uses value/condition pairs. Keep compatibility with legacy
-    // condition/value expressions whose first argument is visibly Boolean.
-    const legacyPiecewise = isPiecewise && _hasBooleanSyntax(node.args[0]);
     node.args = node.args.map((arg, index) => {
       let isPiecewiseCondition = isPiecewise
         && (!hasOtherwise || index < node.args.length - 1)
-        && (legacyPiecewise ? index % 2 === 0 : index % 2 === 1);
+        && index % 2 === 1;
       return _normalizeBooleanLiterals(arg, isPiecewiseCondition);
     });
   }
@@ -350,6 +349,30 @@ function _hasBooleanSyntax(node) {
       'smaller', 'smallerEq', 'larger', 'largerEq', 'equal', 'unequal',
       'and', 'or', 'xor', 'not'
     ].indexOf(node.fn) !== -1);
+}
+
+function _validatePiecewise(node) {
+  if (node.args.length < 2) {
+    throw new TypeError(`piecewise() requires at least one value/condition pair, got ${node.args.length} arguments`);
+  }
+
+  const hasOtherwise = node.args.length % 2 === 1;
+  const pairCount = hasOtherwise ? node.args.length - 1 : node.args.length;
+
+  for (let index = 0; index < pairCount; index += 2) {
+    const value = node.args[index];
+    const condition = node.args[index + 1];
+    if (_hasBooleanSyntax(value)) {
+      throw new TypeError(`piecewise() value at argument ${index + 1} must be numeric, got boolean expression "${value}"`);
+    }
+    if (!_hasBooleanSyntax(condition) && condition.type !== 'SymbolNode') {
+      throw new TypeError(`piecewise() condition at argument ${index + 2} must be boolean, got "${condition}"`);
+    }
+  }
+
+  if (hasOtherwise && _hasBooleanSyntax(node.args[node.args.length - 1])) {
+    throw new TypeError(`piecewise() otherwise value must be numeric, got boolean expression "${node.args[node.args.length - 1]}"`);
+  }
 }
 
 // Return mathjs Node with substituted arguments.

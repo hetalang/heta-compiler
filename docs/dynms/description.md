@@ -328,6 +328,8 @@ The permitted MathJSON function and operator names are:
 - comparison and logic: `And`, `Equal`, `Greater`, `GreaterEqual`, `Less`, `LessEqual`, `Not`, `NotEqual`, `Or`, `Xor`;
 - conditional expressions: `If`, `Which`.
 
+Heta's `piecewise(value, condition, ..., otherwise)` is exported as `If` for one branch or `Which` for multiple branches. In MathJSON these operators put the condition first: `['If', condition, value, otherwise]` and `['Which', condition1, value1, ..., 'True', otherwise]`.
+
 ### 4.2.1 Built-in symbols
 
 The following reserved symbols are available in expressions and are not declared as model objects:

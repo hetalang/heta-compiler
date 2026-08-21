@@ -90,7 +90,7 @@
     <assignmentRule
       variable="x1"
       >
-      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>c1</ci><piecewise><piece><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>1</cn></apply><cn>1</cn></piece><piece><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply><cn>2</cn></piece><otherwise><cn>0</cn></otherwise></piecewise></apply></math>
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>c1</ci><piecewise><piece><cn>1</cn><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>1</cn></apply></piece><piece><cn>2</cn><apply><gt/><csymbol definitionURL="http://www.sbml.org/sbml/symbols/time">t</csymbol><cn>2</cn></apply></piece><otherwise><cn>0</cn></otherwise></piecewise></apply></math>
     </assignmentRule>
     <assignmentRule
       variable="x2"

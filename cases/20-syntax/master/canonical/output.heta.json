@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "0d96a16bf057f9cbe1a086ea3b93e10ac4c4bb6b4fb84a5b92b771bd23f2143a",
+    "hashSum": "4f6c8f19a38091c5829c4e4184a9603cffc87ebef233063f9027c525f1dabdc8",
     "hashAlgorithm": "sha256"
   },
   {
@@ -150,7 +150,7 @@
   {
     "action": "upsert",
     "assignments": {
-      "ode_": "c1 * piecewise(t > 1, 1, t > 2, 2, 0)"
+      "ode_": "c1 * piecewise(1, t > 1, 2, t > 2, 0)"
     },
     "class": "Record",
     "id": "x1"
