@@ -690,7 +690,6 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
   // convert to `CSwitcher`
   switcher.class = options.useCSwitcher ? 'CSwitcher' : 'DSwitcher';
   if (switcher.id === undefined) switcher.id = allocator.generatedName('event_' + eventCounter);
-  qArr.push(switcher);
 
   // useValuesFromTriggerTime
   //let useValuesFromTriggerTime = x.attributes?.useValuesFromTriggerTime !== 'false';
@@ -704,6 +703,7 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
       ? _toNumericExpr(triggerMath)
       : _toMathExpr(triggerMath);
     switcher.trigger = trigger;
+    qArr.push(switcher);
   }
 
   // check if delay is presented, should we include it to Heta standard?

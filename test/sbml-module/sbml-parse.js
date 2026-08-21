@@ -269,6 +269,14 @@ describe('SBML-import generated identifiers', () => {
 
     expect(qArr.find((q) => q.class === 'DSwitcher')).to.include({ id: 'event_1' });
   });
+
+  it('keeps assignments but does not create a switcher for an event without a trigger', () => {
+    let xml = `<sbml level="3" version="2"><model><listOfParameters><parameter id="p" value="3"/></listOfParameters><listOfEvents><event id="E0"><listOfEventAssignments><eventAssignment variable="p"><math><cn>2</cn></math></eventAssignment></listOfEventAssignments></event></listOfEvents></model></sbml>`;
+    let qArr = SBMLParse(xml);
+
+    expect(qArr.find((q) => q.id === 'E0')).to.be.undefined;
+    expect(qArr.find((q) => q.id === 'p' && q.assignments?.E0)).to.deep.include({ assignments: { E0: '2' } });
+  });
 });
 
 describe('SBML-import identifier renaming', () => {
