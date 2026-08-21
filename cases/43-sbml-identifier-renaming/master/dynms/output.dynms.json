@@ -1,0 +1,153 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-21T08:30:13.674Z",
+  "platformId": "sbml_identifier_renaming",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "SBML identifier renaming test case",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "local_sbml__r_1__local",
+          "value": 6
+        },
+        {
+          "id": "sbml_begin_1",
+          "value": 4
+        },
+        {
+          "id": "sbml__k_1",
+          "value": 5
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "sbml__species_1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                2,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "sbml__r_1"
+              ],
+              "rate_sbml__species_1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "sbml__comp_1",
+          "initial": 1
+        },
+        {
+          "id": "sbml__k_2",
+          "initial": 3
+        }
+      ],
+      "assignments": [
+        {
+          "id": "sbml__species_1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "sbml__species_1_amt_",
+              "sbml__comp_1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "sbml__r_1",
+          "rhs": {
+            "expr": [
+              "Add",
+              "local_sbml__r_1__local",
+              1,
+              "sbml__k_2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "sbml__assigned_1",
+          "rhs": {
+            "expr": [
+              "Add",
+              "sbml__k_2",
+              "sbml_begin_1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_sbml__species_1",
+          "rhs": {
+            "expr": "sbml__k_2",
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "sbml__event_1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": "True",
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": "sbml_begin_1",
+                "format": "math-json"
+              },
+              "state": "sbml__k_2"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "event_2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": "True",
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

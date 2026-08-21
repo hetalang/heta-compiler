@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.12.1","createdAt":"2026-08-21T08:30:13.637Z","platformId":"sbml_identifier_renaming","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless"
+    >
+    
+<!-- BEGIN FUNCTION DEFINITIONS -->
+    <listOfFunctionDefinitions>
+      <functionDefinition id="sbml__fn_1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci> sbml__x_1 </ci></bvar>
+            <apply><plus/><ci>sbml__x_1</ci><cn>1</cn></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+<!-- END FUNCTION DEFINITIONS -->
+
+  
+    <listOfCompartments>
+      <compartment
+        id="sbml__comp_1"
+        constant="false"
+        size="1"
+        >
+      </compartment>
+    </listOfCompartments>
+  
+    <listOfSpecies>
+      <species
+        id="sbml__species_1"
+        compartment="sbml__comp_1"
+        constant="false"
+        boundaryCondition="false"
+        hasOnlySubstanceUnits="false"
+        
+        >
+      </species>
+    </listOfSpecies>
+  
+    <listOfParameters>
+      <parameter
+        id="sbml__k_2"
+        constant="false"
+        value="3"
+        >
+      </parameter>
+      <parameter
+        id="sbml__assigned_1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="rate_sbml__species_1"
+        constant="false"
+        >
+      </parameter>
+      <parameter
+        id="local_sbml__r_1__local"
+        constant="true"
+        value="6"
+        >
+      </parameter>
+      <parameter
+        id="sbml_begin_1"
+        constant="true"
+        value="4"
+        >
+      </parameter>
+      <parameter
+        id="sbml__k_1"
+        constant="true"
+        value="5"
+        >
+      </parameter>
+    </listOfParameters>
+  
+<!-- BEGIN INITIAL ASSIGNMENTS -->
+    <listOfInitialAssignments>
+      <initialAssignment
+        symbol="sbml__species_1"
+        >
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><divide/><cn>2</cn><ci>sbml__comp_1</ci></apply></math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+<!-- END INITIAL ASSIGNMENTS -->
+  
+<!-- BEGIN RULES -->
+  <listOfRules>
+    <assignmentRule
+      variable="sbml__assigned_1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><ci>sbml__k_2</ci><ci>sbml_begin_1</ci></apply></math>
+    </assignmentRule>
+    <assignmentRule
+      variable="rate_sbml__species_1"
+      >
+      <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>sbml__k_2</ci></math>
+    </assignmentRule>
+  
+  </listOfRules>
+<!-- BEGIN RULES -->
+  
+    <listOfReactions>
+      <reaction
+        id="sbml__r_1"
+        reversible="true"
+        >
+        <listOfReactants>
+          <speciesReference species="sbml__species_1" stoichiometry="1"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><apply><plus/><apply><ci>sbml__fn_1</ci><ci>local_sbml__r_1__local</ci></apply><ci>sbml__k_2</ci></apply></math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  
+    <listOfEvents><event
+        id="sbml__event_1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <true/>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="sbml__k_2"
+            >
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>sbml_begin_1</ci></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

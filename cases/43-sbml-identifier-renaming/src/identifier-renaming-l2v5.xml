@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version5" level="2" version="5">
+  <model id="identifier_renaming">
+    <listOfFunctionDefinitions>
+      <functionDefinition id="_fn">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <lambda>
+            <bvar><ci>_x</ci></bvar>
+            <apply><plus/><ci>_x</ci><cn>1</cn></apply>
+          </lambda>
+        </math>
+      </functionDefinition>
+    </listOfFunctionDefinitions>
+    <listOfCompartments>
+      <compartment id="_comp" size="1"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="_species" compartment="_comp" initialAmount="2"/>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="_k" value="3" constant="false"/>
+      <parameter id="_assigned" constant="false"/>
+      <parameter id="begin" value="4" constant="true"/>
+      <parameter id="sbml__k_1" value="5" constant="true"/>
+    </listOfParameters>
+    <listOfReactions>
+      <reaction id="_r">
+        <listOfReactants>
+          <speciesReference species="_species"/>
+        </listOfReactants>
+        <kineticLaw>
+          <listOfParameters>
+            <parameter id="_local" value="6"/>
+          </listOfParameters>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <plus/>
+              <apply><ci>_fn</ci><ci>_local</ci></apply>
+              <ci>_k</ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+    <listOfRules>
+      <assignmentRule variable="_assigned">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply><plus/><ci>_k</ci><ci>begin</ci></apply>
+        </math>
+      </assignmentRule>
+      <rateRule variable="_species">
+        <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>_k</ci></math>
+      </rateRule>
+    </listOfRules>
+    <listOfEvents>
+      <event id="_event">
+        <trigger><math xmlns="http://www.w3.org/1998/Math/MathML"><true/></math></trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="_k">
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><ci>begin</ci></math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event>
+        <trigger><math xmlns="http://www.w3.org/1998/Math/MathML"><true/></math></trigger>
+      </event>
+    </listOfEvents>
+  </model>
+</sbml>

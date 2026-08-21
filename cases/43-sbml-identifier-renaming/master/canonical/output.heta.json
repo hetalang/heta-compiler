@@ -1,0 +1,127 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-21T08:30:13.625Z",
+    "platformId": "sbml_identifier_renaming",
+    "platformVersion": "v0.1.0",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "6588968f41c9ab60e594caafef16005fb6a4de389d426337a0ed6cbe6e10b499",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "event_2",
+    "trigger": "true"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_sbml__r_1__local",
+    "num": 6
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "sbml__species_1"
+      }
+    ],
+    "assignments": {
+      "ode_": "sbml__k_2"
+    },
+    "class": "Process",
+    "id": "rate_sbml__species_1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "sbml__k_2 + sbml_begin_1"
+    },
+    "class": "Record",
+    "id": "sbml__assigned_1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "sbml__comp_1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__event_1",
+    "trigger": "true"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "sbml__k_1",
+    "num": 5
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__event_1": "sbml_begin_1",
+      "start_": "3"
+    },
+    "class": "Record",
+    "id": "sbml__k_2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "sbml__species_1"
+      }
+    ],
+    "assignments": {
+      "ode_": "sbml__fn_1(local_sbml__r_1__local) + sbml__k_2"
+    },
+    "class": "Reaction",
+    "id": "sbml__r_1",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2 / sbml__comp_1"
+    },
+    "class": "Species",
+    "compartment": "sbml__comp_1",
+    "id": "sbml__species_1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "sbml_begin_1",
+    "num": 4
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "sbml__x_1"
+    ],
+    "id": "sbml__fn_1",
+    "math": "sbml__x_1 + 1"
+  }
+]

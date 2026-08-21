@@ -1,14 +1,6 @@
 const Container = require('./main');
 const { Namespace } = require('../namespace');
-
-// they cannot be used as id, when 
-const reservedWords = [
-  'include', 'block', 'namespace', 'abstract', 'concrete', 'begin', 'end',
-  'NaN', 'Infinity',
-  'exponentiale', 'pi',
-  'true', 'false',
-  'null'
-];
+const { RESERVED_WORDS, isReservedWord, isValidId } = require('../identifier');
 
 /**
  * Creates an export instance from an inline `#export` action.
@@ -148,16 +140,16 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
 
   let space = q.space || 'nameless';
   // check index
-  if (!q.id || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
+  if (!isValidId(q.id)) {
     this.logger.error(
       `${ind} id should be string of type ID, but have "${q.id}"\n\t- ${JSON.stringify(q)}`,
       {type: 'QError', space: space}
     );
     return;
   }
-  if (reservedWords.indexOf(q.id) !== -1) {
+  if (isReservedWord(q.id)) {
     this.logger.error(
-      `id must not be a reserved word, got "${ind}". Reserved words list: \n\t ${reservedWords.join(', ')}`,
+      `id must not be a reserved word, got "${ind}". Reserved words list: \n\t ${RESERVED_WORDS.join(', ')}`,
       {type: 'QError', space: space}
     );
     return;
@@ -212,7 +204,7 @@ Container.prototype.update = function(q = {}){
       {type: 'QError', space: space}
     );
     return;
-  } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
+  } else if (!isValidId(q.id)) {
     this.logger.error(
       `"id" property should be string in "#update" action, got "${q.id}"`,
       {type: 'QError', space: space}
@@ -291,7 +283,7 @@ Container.prototype.delete = function(q = {}){
       {type: 'QError', space: space}
     );
     return;
-  } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
+  } else if (!isValidId(q.id)) {
     this.logger.error(
       `"id" property should be string in "#delete" action, got "${q.id}"`,
       {type: 'QError', space: space}
@@ -426,7 +418,7 @@ Container.prototype.importNS = function(_q = {}){
     this.logger.error(`id must not be set for #importNS, got "${q.id}"`);
     return; // BRAKE
   }
-  if (q.prefix !== '' && (typeof q.prefix !== 'string' || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.prefix))) {
+  if (q.prefix !== '' && !isValidId(q.prefix)) {
     this.logger.error(
       `prefix should be string of type ID in #importNS, got "${q.prefix}"`,
       {type: 'QError', space: space}
@@ -526,7 +518,7 @@ Container.prototype.import = function(_q = {}){
     );
     return;
   }
-  if (!q.id || !/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)){
+  if (!isValidId(q.id)){
     this.logger.error(
       `${ind} id should be string, but have "${q.id}"`,
       {type: 'QError', space: space}
@@ -595,7 +587,7 @@ Container.prototype.select = function(q = {}){
       {type: 'QError', space: space}
     );
     return;
-  } else if (!/^[a-zA-Z][a-zA-Z0-9_]*$/.test(q.id)) {
+  } else if (!isValidId(q.id)) {
     this.logger.error(
       `"id" property should be string in "#select" action, got "${q.id}"`,
       {type: 'QError', space: space}

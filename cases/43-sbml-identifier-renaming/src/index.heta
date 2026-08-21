@@ -1,0 +1,2 @@
+// SBML Level 2 Version 5 import with IDs requiring Heta renaming.
+#include {source: ./identifier-renaming-l2v5.xml, type: sbml};

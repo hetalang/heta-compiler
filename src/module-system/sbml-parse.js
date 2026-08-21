@@ -4,6 +4,11 @@ const { encodeXML } = require('entities');
 const { Unit } = require('../core/unit');
 const legalUnits = require('../legal-sbml-units');
 const HetaLevelError = require('../heta-level-error');
+const {
+  buildGlobalIdResolver,
+  buildLocalResolver,
+  rewriteMathIdentifiers
+} = require('./sbml-identifiers');
 
 /**
  * Transforms text content of SBML file to Q-array.
@@ -37,6 +42,7 @@ function jsbmlToQArr(JSBML, options = {}) {
 
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
+  let { allocator, resolve } = buildGlobalIdResolver(model);
 
   // preliminary analyses listOfInitialAssignments to get variables to init in the beginning
   // it is applied for parameters which are @Records, not @Const
@@ -80,7 +86,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'functionDefinition')
     .forEach((x) => {
-      let q = functionDefinitionToQ(x);
+      let q = functionDefinitionToQ(x, resolve);
       qArr.push(q);
     });
 
@@ -91,7 +97,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'speciesType')
     .forEach((x) => {
-      let q = speciesTypeToQ(x);
+      let q = speciesTypeToQ(x, resolve);
       qArr.push(q);
     });
 
@@ -106,12 +112,12 @@ function jsbmlToQArr(JSBML, options = {}) {
       // collect compartments with zero dimention
       let isZero = x.attributes?.spatialDimensions === '0';
       if (isZero) {
-        zeroSpatialDimensions.push(x.attributes?.id);
+        zeroSpatialDimensions.push(resolve(x.attributes?.id));
         // set zero initial size
         x.attributes = Object.assign({}, x.attributes, {size: '0'});
       }
 
-      let q = compartmentToQ(x, unitDict);
+      let q = compartmentToQ(x, unitDict, resolve);
       qArr.push(q);
     });
 
@@ -122,7 +128,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'species')
     .forEach((x) => {
-      let q = speciesToQ(x, zeroSpatialDimensions, qArr, unitDict);
+      let q = speciesToQ(x, zeroSpatialDimensions, qArr, unitDict, resolve);
       qArr.push(q);
     });
 
@@ -133,7 +139,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'reaction')
     .forEach((x) => {
-      let qArr_add = reactionToQ(x, sbmlLevel);
+      let qArr_add = reactionToQ(x, sbmlLevel, resolve, allocator);
       qArr = qArr.concat(qArr_add);
     });
 
@@ -145,7 +151,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .filter((x) => x.name === 'parameter')
     .forEach((x) => {
       let forceRecord = initialAssignmentsSymbols.indexOf(x.attributes?.id) >= 0;
-      let q = parameterToQ(x, unitDict, forceRecord, sbmlLevel);
+      let q = parameterToQ(x, unitDict, forceRecord, sbmlLevel, resolve);
       qArr.push(q);
     });
 
@@ -156,7 +162,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'initialAssignment')
     .forEach((x) => {
-      let q = initialAssignmentToQ(x);
+      let q = initialAssignmentToQ(x, resolve);
       qArr.push(q);
     });
 
@@ -167,7 +173,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'assignmentRule')
     .forEach((x) => {
-      let q = assignmentRuleToQ(x);
+      let q = assignmentRuleToQ(x, resolve);
       qArr.push(q);
     });
 
@@ -188,7 +194,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'rateRule')
     .forEach((x) => {
-      let qArr_add = rateRuleToQ(x);
+      let qArr_add = rateRuleToQ(x, resolve, allocator);
       qArr = qArr.concat(qArr_add);
     });
 
@@ -199,7 +205,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'event')
     .forEach((x) => {
-      let qs = eventToQ(x, eventCounter++, options);
+      let qs = eventToQ(x, eventCounter++, options, resolve, allocator);
       qArr = qArr.concat(qs);
     });
 
@@ -229,11 +235,11 @@ function unitDefinitionToUnits(x){
 /*
   transform SBML-like function definition to Heta-like unit array
 */
-function functionDefinitionToQ(x) {
+function functionDefinitionToQ(x, resolve) {
 
   let q = {
     action: 'defineFunction',
-    id: x.attributes.id
+    id: resolve(x.attributes.id)
   };
 
   let mathElement = x.elements?.find((y) => y.name === 'math');
@@ -244,15 +250,18 @@ function functionDefinitionToQ(x) {
   }
 
   // get argument ids
-  q.arguments = lambdaElement.elements
+  let sourceArguments = lambdaElement.elements
     ?.filter((y) => y.name === 'bvar')
     .map((y) => y.elements && y.elements.find((z) => z.name === 'ci'))
     .map((y) => y.elements && y.elements.find((z) => z.type === 'text'))
     .map((y) => y.text.trim());
+  let localResolve = buildLocalResolver(sourceArguments, resolve);
+  q.arguments = sourceArguments.map((id) => localResolve(id));
 
   // get expression
   let notBvarElement = lambdaElement.elements
     ?.find((y) => y.name !== 'bvar');
+  rewriteMathIdentifiers(notBvarElement, localResolve);
   q.math = _toMathExpr(notBvarElement);
 
 
@@ -262,9 +271,9 @@ function functionDefinitionToQ(x) {
 /*
   Converts common properties to Heta Object
 */
-function baseToQ(x){
+function baseToQ(x, resolve = (id) => id){
   let q = {
-    id: x.attributes?.id,
+    id: x.attributes?.id === undefined ? undefined : resolve(x.attributes.id),
     title: x.attributes?.name,
     aux: {}
   };
@@ -354,15 +363,15 @@ function _toAux(elements){
   return elements;
 }
 
-function speciesTypeToQ(x){
-  let q = baseToQ(x);
+function speciesTypeToQ(x, resolve){
+  let q = baseToQ(x, resolve);
   q.class = 'Component';
   
   return q;
 }
 
-function compartmentToQ(x, unitDict = {}){
-  let q = baseToQ(x);
+function compartmentToQ(x, unitDict = {}, resolve = (id) => id){
+  let q = baseToQ(x, resolve);
 
   q.class = 'Compartment';
   q.boundary = x.attributes?.constant !== 'false';
@@ -389,19 +398,19 @@ function compartmentToQ(x, unitDict = {}){
   // compartmentType
   let compartmentType = x.attributes?.compartmentType;
   if (compartmentType !== undefined) {
-    q.tags = [compartmentType];
+    q.tags = [resolve(compartmentType)];
   }
 
   return q;
 }
 
-function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
-  let q = baseToQ(x);
+function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}, resolve = (id) => id){
+  let q = baseToQ(x, resolve);
 
   q.class = 'Species';
   q.boundary = x.attributes?.constant === 'true' 
     || x.attributes?.boundaryCondition === 'true';
-  q.compartment = x.attributes?.compartment;
+  q.compartment = x.attributes?.compartment === undefined ? undefined : resolve(x.attributes.compartment);
   q.isAmount = x.attributes?.hasOnlySubstanceUnits === 'true'
     || zeroSpatialDimensions.indexOf(q.compartment) >= 0;
   let concentration = x.attributes?.initialConcentration;
@@ -417,7 +426,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   }
   // speciesType
   let speciesType = x.attributes?.speciesType;
-  if (speciesType !== undefined) q.tags = [speciesType];
+  if (speciesType !== undefined) q.tags = [resolve(speciesType)];
 
   // units
   let substanceUnitId = x.attributes?.substanceUnits;
@@ -467,10 +476,10 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
   return q;
 }
 
-function reactionToQ(x, sbmlLevel){
+function reactionToQ(x, sbmlLevel, resolve = (id) => id, allocator){
   let qArr = [];
   let localConstTranslate = [];
-  let q = baseToQ(x);
+  let q = baseToQ(x, resolve);
 
   q.class = 'Reaction';
 
@@ -480,10 +489,10 @@ function reactionToQ(x, sbmlLevel){
   let listOfParameters = kineticLaw?.elements?.find((y) => y.name === 'listOfParameters' || y.name === 'listOfLocalParameters');
   if (listOfParameters) {
     let parameters = listOfParameters.elements
-      .filter((y) => y.name = 'parameter');
+      .filter((y) => y.name === 'parameter' || y.name === 'localParameter');
     parameters.forEach((y) => {
       let id = y.attributes?.id;
-      let newId = 'local_' + q.id + '_' + id;
+      let newId = allocator.generatedName('local_' + q.id + '_' + id);
       // set translator
       localConstTranslate.push({id, newId});
       // add component
@@ -497,11 +506,9 @@ function reactionToQ(x, sbmlLevel){
   // math
   let math = kineticLaw?.elements?.find((y) => y.name === 'math');
   if (math) {
+    let localIds = new Map(localConstTranslate.map((item) => [item.id, item.newId]));
+    rewriteMathIdentifiers(math, (id) => localIds.get(id) || resolve(id));
     let expr = _toMathExpr(math);
-    localConstTranslate.forEach((y) => {
-      let regexp = new RegExp(`\\b${y.id}\\b`, 'g');
-      expr = expr.replace(regexp, y.newId);
-    });
     q.assignments = { ode_: expr };
   }
 
@@ -535,7 +542,7 @@ function reactionToQ(x, sbmlLevel){
         // get constant stoichiometry
         let stoichiometry = y.attributes?.stoichiometry || '1';
         return {
-          target: y.attributes?.species,
+          target: resolve(y.attributes?.species),
           stoichiometry: Number.parseFloat(stoichiometry)
         };
       });
@@ -558,7 +565,7 @@ function reactionToQ(x, sbmlLevel){
         // get constant stoichiometry
         let stoichiometry = y.attributes?.stoichiometry || '1';
         return {
-          target: y.attributes?.species,
+          target: resolve(y.attributes?.species),
           stoichiometry: (-1) * Number.parseFloat(stoichiometry)
         };
       });
@@ -570,7 +577,7 @@ function reactionToQ(x, sbmlLevel){
   let modifiers1 = (x.elements?.find((y) => y.name === 'listOfModifiers')?.elements || [])
     .filter((y) => y.name === 'modifierSpeciesReference')
     .map((y) => {
-      return { target: y.attributes?.species };
+      return { target: resolve(y.attributes?.species) };
     });
 
   q.actors = actors0.concat(actors1);
@@ -581,8 +588,8 @@ function reactionToQ(x, sbmlLevel){
   return qArr;
 }
 
-function parameterToQ(x, unitDict = {}, forceRecord = false, sbmlLevel){
-  let q = baseToQ(x);
+function parameterToQ(x, unitDict = {}, forceRecord = false, sbmlLevel, resolve = (id) => id){
+  let q = baseToQ(x, resolve);
 
   // SBML Level 2 defaults an omitted constant attribute to true.
   let isConstant = x.attributes?.constant === 'true'
@@ -625,37 +632,39 @@ function parameterToQ(x, unitDict = {}, forceRecord = false, sbmlLevel){
   return q;
 }
 
-function initialAssignmentToQ(x){
+function initialAssignmentToQ(x, resolve = (id) => id){
   let q = {
-    id: x.attributes?.symbol,
+    id: resolve(x.attributes?.symbol),
   };
 
   let math = x.elements?.find((y) => y.name === 'math');
   if (math !== undefined) {
+    rewriteMathIdentifiers(math, resolve);
     q.assignments = {start_: _toMathExpr(math)};
   }
 
   return q;
 }
 
-function assignmentRuleToQ(x){
+function assignmentRuleToQ(x, resolve = (id) => id){
   let q = {
-    id: x.attributes?.variable
+    id: resolve(x.attributes?.variable)
   };
 
   let math = x.elements?.find((y) => y.name === 'math');
   if (math !== undefined) {
+    rewriteMathIdentifiers(math, resolve);
     q.assignments = { ode_: _toMathExpr(math) };
   }
 
   return q;
 }
 
-function rateRuleToQ(x){
-  let q0 = baseToQ(x);
+function rateRuleToQ(x, resolve = (id) => id, allocator){
+  let q0 = baseToQ(x, resolve);
 
-  let target = x.attributes?.variable;
-  q0.id = 'rate_' + target;
+  let target = resolve(x.attributes?.variable);
+  q0.id = allocator.generatedName('rate_' + target);
   q0.class = 'Process';
   q0.actors = [{
     stoichiometry: 1,
@@ -664,6 +673,7 @@ function rateRuleToQ(x){
 
   let math = x.elements?.find((y) => y.name === 'math');
   if (math !== undefined) {
+    rewriteMathIdentifiers(math, resolve);
     q0.assignments = { ode_: _toMathExpr(math) };
   }
 
@@ -673,13 +683,13 @@ function rateRuleToQ(x){
   return [q0, q1];
 }
 
-function eventToQ(x, eventCounter, options = {}){
+function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator){
   let qArr = [];
 
-  let switcher = baseToQ(x);
+  let switcher = baseToQ(x, resolve);
   // convert to `CSwitcher`
   switcher.class = options.useCSwitcher ? 'CSwitcher' : 'DSwitcher';
-  if (switcher.id === undefined) switcher.id = 'event_' + eventCounter;
+  if (switcher.id === undefined) switcher.id = allocator.generatedName('event_' + eventCounter);
   qArr.push(switcher);
 
   // useValuesFromTriggerTime
@@ -689,6 +699,7 @@ function eventToQ(x, eventCounter, options = {}){
   let trigger = x.elements?.find((y) => y.name === 'trigger');
   let triggerMath = trigger?.elements?.find((y) => y.name === 'math');
   if (triggerMath) {
+    rewriteMathIdentifiers(triggerMath, resolve);
     let trigger = options.useCSwitcher
       ? _toNumericExpr(triggerMath)
       : _toMathExpr(triggerMath);
@@ -718,12 +729,13 @@ function eventToQ(x, eventCounter, options = {}){
       .filter((y) => y.name === 'eventAssignment')
       .forEach((y) => {
         let assign = {
-          id: y.attributes?.variable,
+          id: resolve(y.attributes?.variable),
           assignments: {}
         };
 
         let math = y.elements?.find((z) => z.name === 'math');
         if (math !== undefined) {
+          rewriteMathIdentifiers(math, resolve);
           assign.assignments[switcher.id] = _toMathExpr(math);
         }
         qArr.push(assign);

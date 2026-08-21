@@ -270,3 +270,22 @@ describe('SBML-import generated identifiers', () => {
     expect(qArr.find((q) => q.class === 'DSwitcher')).to.include({ id: 'event_1' });
   });
 });
+
+describe('SBML-import identifier renaming', () => {
+  it('renames global IDs and rewrites their references', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfParameters><parameter id="_x" value="1"/><parameter id="begin" value="2"/><parameter id="sbml__x_1" value="3"/></listOfParameters><listOfRules><assignmentRule variable="_x"><math><apply><plus/><ci>_x</ci><ci>begin</ci></apply></math></assignmentRule></listOfRules><listOfReactions><reaction id="_r"><kineticLaw><listOfLocalParameters><localParameter id="_k" value="4"/></listOfLocalParameters><math><apply><plus/><ci>_k</ci><ci>_x</ci></apply></math></kineticLaw></reaction></listOfReactions></model></sbml>`;
+    let qArr = SBMLParse(xml);
+
+    expect(qArr.find((q) => q.id === 'sbml__x_2' && q.assignments?.ode_)).to.have.nested.property('assignments.ode_', 'sbml__x_2 + sbml_begin_1');
+    expect(qArr.find((q) => q.id === 'local_sbml__r_1__k')).to.include({ num: 4 });
+    expect(qArr.find((q) => q.id === 'sbml__r_1')).to.have.nested.property('assignments.ode_', 'local_sbml__r_1__k + sbml__x_2');
+  });
+
+  it('renames function arguments in their local scope', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfFunctionDefinitions><functionDefinition id="f"><math><lambda><bvar><ci>_x</ci></bvar><apply><plus/><ci>_x</ci><cn>1</cn></apply></lambda></math></functionDefinition></listOfFunctionDefinitions></model></sbml>`;
+    let qArr = SBMLParse(xml);
+
+    expect(qArr[0]).to.include({ id: 'f', math: 'sbml__x_1 + 1' });
+    expect(qArr[0].arguments).to.deep.equal(['sbml__x_1']);
+  });
+});
