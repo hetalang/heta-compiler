@@ -41,7 +41,7 @@ jobs:
 
       - name: Install Format Conversion Test Suite
         run: |
-          npm install --prefix fcts-run git+https://github.com/hetalang/format-conversion-test-suite.git#main
+          npm install --prefix fcts-run git+https://github.com/hetalang/format-conversion-test-suite.git#v0.1.0
           echo "FCTS_ROOT=$GITHUB_WORKSPACE/fcts-run/node_modules/@hetalang/format-conversion-test-suite" >> "$GITHUB_ENV"
 
       - name: Download and index SBML cases
