@@ -3,7 +3,12 @@
 ## 0.2.1
 
 - Added extended numeric values for constants and MathJSON expressions: `NaN`, `+Infinity`, and `-Infinity` are encoded as `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}` respectively.
-- Finite numeric literals and finite constant values remain JSON numbers.
+- The `dynms` field now must be exactly `"0.2.1"`.
+- A document must contain at least one model.
+- `t` is reserved for simulation time and cannot be used as a model identifier.
+- Constants accept only numeric values, including extended MathJSON numeric values; expression objects are no longer permitted as `constants[].value`.
+- Added `stopSimulation` to time events and state events.
+- MathJSON symbols must use the DynMS identifier syntax, and MathJSON function calls are limited to the supported operator and function names. User-defined functions must be expanded before DynMS export.
 
 ## 0.2.0
 

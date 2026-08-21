@@ -71,11 +71,11 @@ See the [installation guide](https://hetalang.github.io/hetacompiler/installatio
 
 The badges show successful assessed cases over all assessed cases. Click a badge to open the latest report for the `master` branch.
 
-| Input format | Conversion check | Latest report |
+| Test set | Conversion check | Latest report |
 | --- | --- | --- |
-| SBML Level 3 Version 2 | SBML → canonical JSON + DynMS | [![SBML L3V2 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v2%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v2%2Freport.json) |
-| SBML Level 3 Version 1 | SBML → canonical JSON + DynMS | [![SBML L3V1 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v1%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v1%2Freport.json) |
-| SBML Level 2 Version 5 | SBML → canonical JSON + DynMS | [![SBML L2V5 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl2v5%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl2v5%2Freport.json) |
+| sbmlteam/sbml-test-suite | SBML L3V2 → canonical JSON + DynMS | [![SBML L3V2 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v2%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v2%2Freport.json) |
+| sbmlteam/sbml-test-suite | SBML L3V1 → canonical JSON + DynMS | [![SBML L3V1 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v1%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v1%2Freport.json) |
+| sbmlteam/sbml-test-suite | SBML L2V5 → canonical JSON + DynMS | [![SBML L2V5 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl2v5%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl2v5%2Freport.json) |
 
 ## About Heta
 
