@@ -2,6 +2,8 @@
 const { expect } = require('chai');
 const { SBMLParse } = require('../../src/module-system/sbml-parse');
 const { _toMathExpr } = require('../../src/module-system/to-math-expr');
+const HetaLevelError = require('../../src/heta-level-error');
+const { Builder } = require('../../src/builder');
 const fs = require('fs');
 const path = require('path');
 
@@ -276,6 +278,41 @@ describe('SBML-import generated identifiers', () => {
 
     expect(qArr.find((q) => q.id === 'E0')).to.be.undefined;
     expect(qArr.find((q) => q.id === 'p' && q.assignments?.E0)).to.deep.include({ assignments: { E0: '2' } });
+  });
+});
+
+describe('SBML Level 3 packages', () => {
+  it('rejects a required package regardless of its XML prefix', () => {
+    let xml = `<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:extension="http://www.sbml.org/sbml/level3/version1/comp/version1" level="3" version="1" extension:required="true"><model/></sbml>`;
+
+    expect(() => SBMLParse(xml)).to.throw(
+      HetaLevelError,
+      'SBML Level 3 package with required="true" is not supported: "comp" (http://www.sbml.org/sbml/level3/version1/comp/version1).'
+    );
+  });
+
+  it('allows an optional package declaration', () => {
+    let xml = `<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:extension="http://www.sbml.org/sbml/level3/version1/comp/version1" level="3" version="1" extension:required="false"><model><listOfParameters><parameter id="p" value="1"/></listOfParameters></model></sbml>`;
+
+    expect(() => SBMLParse(xml)).not.to.throw();
+  });
+
+  it('reports a required package as a regular compilation error', () => {
+    let xml = `<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:extension="http://www.sbml.org/sbml/level3/version1/comp/version1" level="3" version="1" extension:required="true"><model/></sbml>`;
+    let logs = [];
+    let builder = new Builder(
+      { id: 'test', options: {}, importModule: { type: 'sbml', source: 'model.xml' }, export: [] },
+      () => Buffer.from(xml),
+      () => {},
+      [(level, message, details) => logs.push({ level, message, details })]
+    );
+
+    expect(() => builder.run()).not.to.throw();
+    expect(builder.logger.hasErrors).to.equal(true);
+    expect(logs.find((log) => log.level === 'error')).to.nested.include({
+      'details.type': 'ModuleError',
+      'details.filename': 'model.xml'
+    });
   });
 });
 

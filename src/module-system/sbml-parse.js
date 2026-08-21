@@ -38,6 +38,7 @@ function jsbmlToQArr(JSBML, options = {}) {
 
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
+  rejectRequiredSBMLPackages(sbml);
   let sbmlLevel = Number.parseInt(sbml.attributes?.level);
 
   let model = sbml.elements
@@ -743,6 +744,30 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
   }
 
   return qArr;
+}
+
+/**
+ * Rejects SBML Level 3 packages that declare themselves required.
+ * Their semantics can change the Core model and are not implemented by this importer.
+ *
+ * @param {object} sbml Root SBML XML element.
+ */
+function rejectRequiredSBMLPackages(sbml) {
+  let attributes = sbml.attributes || {};
+  let packages = Object.entries(attributes)
+    .filter(([name, value]) => name.endsWith(':required') && String(value).toLowerCase() === 'true')
+    .map(([name]) => {
+      let prefix = name.slice(0, -':required'.length);
+      let uri = attributes[`xmlns:${prefix}`];
+      let match = uri?.match(/^https?:\/\/www\.sbml\.org\/sbml\/level3\/version\d+\/([^/]+)\/version\d+\/?$/);
+      return match ? { name: match[1], uri } : undefined;
+    })
+    .filter((pkg) => pkg !== undefined && pkg.name !== 'core');
+
+  if (packages.length > 0) {
+    let details = packages.map(({ name, uri }) => `"${name}" (${uri})`).join(', ');
+    throw new HetaLevelError(`SBML Level 3 package with required="true" is not supported: ${details}.`);
+  }
 }
 
 function SBMLValueToNumber(value) {
