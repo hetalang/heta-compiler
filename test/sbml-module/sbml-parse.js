@@ -249,8 +249,24 @@ describe('parse SBML special numbers', () => {
     let xml = `<sbml level="3" version="1"><model><listOfReactions><reaction id="r"><kineticLaw><listOfLocalParameters><localParameter id="positive" value="INF"/><localParameter id="negative" value="-INF"/><localParameter id="invalid" value="NaN"/></listOfLocalParameters></kineticLaw></reaction></listOfReactions></model></sbml>`;
     let qArr = SBMLParse(xml);
 
-    expect(qArr.find((q) => q.id === 'positive__r_local').num).to.equal(Infinity);
-    expect(qArr.find((q) => q.id === 'negative__r_local').num).to.equal(-Infinity);
-    expect(qArr.find((q) => q.id === 'invalid__r_local').num).to.be.NaN;
+    expect(qArr.find((q) => q.id === 'local_r_positive').num).to.equal(Infinity);
+    expect(qArr.find((q) => q.id === 'local_r_negative').num).to.equal(-Infinity);
+    expect(qArr.find((q) => q.id === 'local_r_invalid').num).to.be.NaN;
+  });
+});
+
+describe('SBML-import generated identifiers', () => {
+  it('uses a prefixed ID for rate-rule processes', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfParameters><parameter id="r1" value="1"/></listOfParameters><listOfRules><rateRule variable="r1"><math><cn>1</cn></math></rateRule></listOfRules></model></sbml>`;
+    let qArr = SBMLParse(xml);
+
+    expect(qArr.find((q) => q.class === 'Process')).to.include({ id: 'rate_r1' });
+  });
+
+  it('numbers anonymous events from one', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfEvents><event><trigger><math><true/></math></trigger></event></listOfEvents></model></sbml>`;
+    let qArr = SBMLParse(xml);
+
+    expect(qArr.find((q) => q.class === 'DSwitcher')).to.include({ id: 'event_1' });
   });
 });

@@ -29,7 +29,7 @@ function SBMLParse(fileText, options = {}) {
 */
 function jsbmlToQArr(JSBML, options = {}) {
   let qArr = [];
-  let eventCounter = 0; // reset event counter
+  let eventCounter = 1; // reset event counter
 
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
@@ -483,7 +483,7 @@ function reactionToQ(x, sbmlLevel){
       .filter((y) => y.name = 'parameter');
     parameters.forEach((y) => {
       let id = y.attributes?.id;
-      let newId = id + '__' + q.id + '_local';
+      let newId = 'local_' + q.id + '_' + id;
       // set translator
       localConstTranslate.push({id, newId});
       // add component
@@ -655,7 +655,7 @@ function rateRuleToQ(x){
   let q0 = baseToQ(x);
 
   let target = x.attributes?.variable;
-  q0.id = target + '_proc';
+  q0.id = 'rate_' + target;
   q0.class = 'Process';
   q0.actors = [{
     stoichiometry: 1,
@@ -679,7 +679,7 @@ function eventToQ(x, eventCounter, options = {}){
   let switcher = baseToQ(x);
   // convert to `CSwitcher`
   switcher.class = options.useCSwitcher ? 'CSwitcher' : 'DSwitcher';
-  if (switcher.id === undefined) switcher.id = 'evt' + eventCounter;
+  if (switcher.id === undefined) switcher.id = 'event_' + eventCounter;
   qArr.push(switcher);
 
   // useValuesFromTriggerTime
