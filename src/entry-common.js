@@ -32,7 +32,6 @@ Builder._exportClasses = {
   julia: require('./julia-export'),
   dot: require('./dot-export'),
   summary: require('./summary-export'),
-  mt: require('./mt-export'),
   dynms: require('./dynms-export'),
 };
 

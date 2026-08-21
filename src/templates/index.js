@@ -27,7 +27,6 @@ const templates = {
   'simbio.m.njk': nunjucksEnv.getTemplate('simbio.m.njk'),
   'slv-blocks-template.slv.njk': nunjucksEnv.getTemplate('slv-blocks-template.slv.njk'),
   'slv-template.slv.njk': nunjucksEnv.getTemplate('slv-template.slv.njk'),
-  'mt-model.jl.njk': nunjucksEnv.getTemplate('mt-model.jl.njk'),
 };
 
 module.exports = { templates };

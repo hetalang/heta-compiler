@@ -41,7 +41,6 @@ describe('Special numbers in language exports', () => {
     const getText = (format) => new builder.exportClasses[format]().makeText().map((file) => file.content).join('\n');
 
     expect(getText('julia')).to.include('Inf,-Inf,NaN,');
-    expect(getText('mt')).to.include('positive => Inf,').and.include('negative => -Inf,').and.include('invalid => NaN,');
     expect(getText('matlab')).to.include('p(1) = Inf;').and.include('p(2) = -Inf;').and.include('p(3) = NaN;');
     expect(getText('simbio')).to.include("'Value', Inf").and.include("'Value', -Inf").and.include("'Value', NaN");
     expect(getText('mrgsolve')).to.include('positive : Inf :').and.include('negative : -Inf :').and.include('invalid : NaN :');

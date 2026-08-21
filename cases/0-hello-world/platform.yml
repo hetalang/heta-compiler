@@ -44,7 +44,6 @@ export:
     bookType: biff8  
   - format: Dot
   - format: Summary
-  - format: MT
   - format: Canonical
   - format: DynMS
     exprFormat: math-json

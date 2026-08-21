@@ -15,6 +15,4 @@ export:
   - {format: Julia}
   - {format: SBML}
   - {format: Mrgsolve}
-  - {format: MT}
   - {format: DynMS}
-  
