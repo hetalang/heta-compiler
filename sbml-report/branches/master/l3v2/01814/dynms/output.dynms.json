@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-21T09:30:21.281Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "sbml_true_1",
+          "value": 10
+        },
+        {
+          "id": "True",
+          "value": 20
+        },
+        {
+          "id": "TRUE",
+          "value": 30
+        }
+      ],
+      "dynamic": [],
+      "static": [],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

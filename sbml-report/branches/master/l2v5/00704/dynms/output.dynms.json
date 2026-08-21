@@ -5,18 +5,18 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:30:29.049Z",
+  "created": "2026-08-21T09:42:05.695Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "k__reaction1_local",
+          "id": "local_reaction1_k",
           "value": 0.015
         },
         {
-          "id": "k__reaction2_local",
+          "id": "local_reaction2_k",
           "value": 0.5
         },
         {
@@ -79,7 +79,7 @@
           },
           "title": "S2",
           "derivative": {
-            "expr": "S2_proc",
+            "expr": "rate_S2",
             "format": "math-json"
           }
         },
@@ -161,7 +161,7 @@
             "expr": [
               "Multiply",
               "C",
-              "k__reaction1_local",
+              "local_reaction1_k",
               "S1"
             ],
             "format": "math-json"
@@ -186,7 +186,7 @@
             "expr": [
               "Multiply",
               "C",
-              "k__reaction2_local",
+              "local_reaction2_k",
               "S3"
             ],
             "format": "math-json"
@@ -194,7 +194,7 @@
           "title": "reaction2"
         },
         {
-          "id": "S2_proc",
+          "id": "rate_S2",
           "rhs": {
             "expr": [
               "Add",

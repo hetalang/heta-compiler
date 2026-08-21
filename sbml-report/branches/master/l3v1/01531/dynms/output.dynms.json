@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:22:28.631Z",
+  "created": "2026-08-21T09:37:20.355Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -16,7 +16,7 @@
           "id": "trig",
           "initial": -5.3,
           "derivative": {
-            "expr": "trig_proc",
+            "expr": "rate_trig",
             "format": "math-json"
           }
         }
@@ -249,7 +249,7 @@
       ],
       "assignments": [
         {
-          "id": "trig_proc",
+          "id": "rate_trig",
           "rhs": {
             "expr": 1,
             "format": "math-json"

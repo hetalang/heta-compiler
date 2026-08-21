@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:24:46.851Z",
+    "created": "2026-08-21T09:38:42.443Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "0e6e7589d2a22239411bbd11bbea97e466a3e1078085f2e1de3ba510d71514f5",
+    "hashSum": "bb40c59445a6a0e5637b22d23e8479b4c4be93f3c13cc8026bd4e3fa285469c4",
     "hashAlgorithm": "sha256"
   },
   {
@@ -42,6 +42,40 @@
   },
   {
     "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1) * k1 * S1"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "rate_S1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * S1"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "rate_S2"
+  },
+  {
+    "action": "upsert",
     "assignments": {
       "start_": "0.015 / compartment"
     },
@@ -64,23 +98,6 @@
   },
   {
     "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S1"
-      }
-    ],
-    "assignments": {
-      "ode_": "(-1) * k1 * S1"
-    },
-    "aux": {
-      "metaid": "rule1"
-    },
-    "class": "Process",
-    "id": "S1_proc"
-  },
-  {
-    "action": "upsert",
     "assignments": {
       "start_": "0 / compartment"
     },
@@ -100,23 +117,6 @@
         "multiplier": 1
       }
     ]
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S2"
-      }
-    ],
-    "assignments": {
-      "ode_": "k1 * S1"
-    },
-    "aux": {
-      "metaid": "rule2"
-    },
-    "class": "Process",
-    "id": "S2_proc"
   },
   {
     "action": "upsert",

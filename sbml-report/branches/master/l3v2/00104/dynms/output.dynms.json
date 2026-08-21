@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T16:57:14.746Z",
+  "created": "2026-08-21T09:22:17.400Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -28,7 +28,7 @@
           "initial": 1,
           "title": "C",
           "derivative": {
-            "expr": "C_proc",
+            "expr": "rate_C",
             "format": "math-json"
           }
         },
@@ -116,7 +116,7 @@
           "title": "reaction1"
         },
         {
-          "id": "C_proc",
+          "id": "rate_C",
           "rhs": {
             "expr": [
               "Multiply",

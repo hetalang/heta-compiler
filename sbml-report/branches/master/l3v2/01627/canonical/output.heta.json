@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:09:25.192Z",
+    "created": "2026-08-21T09:29:35.238Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "8c5247e2b596efe144e5c1d960e593803033b799e2c02f321215a5bda120493f",
+    "hashSum": "7fb685013d8eea3f244f20f960d9a42335bdfe55dda0989854a2cd43cd87d96f",
     "hashAlgorithm": "sha256"
   },
   {
@@ -23,20 +23,6 @@
     },
     "class": "Compartment",
     "id": "C1"
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "C1"
-      }
-    ],
-    "assignments": {
-      "ode_": "0.002"
-    },
-    "class": "Process",
-    "id": "C1_proc"
   },
   {
     "action": "upsert",
@@ -124,13 +110,17 @@
   },
   {
     "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "C1"
+      }
+    ],
     "assignments": {
-      "Qinc": "0",
-      "Rinc": "0",
-      "start_": "0"
+      "ode_": "0.002"
     },
-    "class": "Record",
-    "id": "reset"
+    "class": "Process",
+    "id": "rate_C1"
   },
   {
     "action": "upsert",
@@ -144,7 +134,31 @@
       "ode_": "1"
     },
     "class": "Process",
-    "id": "reset_proc"
+    "id": "rate_reset"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "Q - R"
+    },
+    "class": "Process",
+    "id": "rate_S2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "0",
+      "Rinc": "0",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
   },
   {
     "action": "upsert",
@@ -176,20 +190,6 @@
     },
     "class": "Record",
     "id": "S2_det"
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S2"
-      }
-    ],
-    "assignments": {
-      "ode_": "Q - R"
-    },
-    "class": "Process",
-    "id": "S2_proc"
   },
   {
     "action": "upsert",

@@ -5,18 +5,18 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:24:00.499Z",
+  "created": "2026-08-21T09:38:14.789Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "m_cf__J0_local",
+          "id": "local_J0_m_cf",
           "value": 1
         },
         {
-          "id": "s1_cf__J0_local",
+          "id": "local_J0_s1_cf",
           "value": 1
         },
         {
@@ -101,8 +101,8 @@
           "rhs": {
             "expr": [
               "Multiply",
-              "m_cf__J0_local",
-              "s1_cf__J0_local",
+              "local_J0_m_cf",
+              "local_J0_s1_cf",
               0.01
             ],
             "format": "math-json"

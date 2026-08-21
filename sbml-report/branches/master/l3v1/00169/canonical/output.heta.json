@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:12:12.383Z",
+    "created": "2026-08-21T09:31:14.350Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "a028f2341642c0eb68f223bc1d2754c3f014fcc4de8583c988a9b0c301e5f8de",
+    "hashSum": "0caef49b2a3070115853265c8c9ec8db334cf660c26677ad9a8cca348b7c32ec",
     "hashAlgorithm": "sha256"
   },
   {
@@ -39,15 +39,6 @@
   },
   {
     "action": "upsert",
-    "assignments": {
-      "start_": "0.01"
-    },
-    "class": "Record",
-    "id": "S1",
-    "title": "S1"
-  },
-  {
-    "action": "upsert",
     "actors": [
       {
         "stoichiometry": 1,
@@ -61,16 +52,7 @@
       "metaid": "rule1"
     },
     "class": "Process",
-    "id": "S1_proc"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0"
-    },
-    "class": "Record",
-    "id": "S2",
-    "title": "S2"
+    "id": "rate_S1"
   },
   {
     "action": "upsert",
@@ -87,16 +69,7 @@
       "metaid": "rule2"
     },
     "class": "Process",
-    "id": "S2_proc"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0"
-    },
-    "class": "Record",
-    "id": "S3",
-    "title": "S3"
+    "id": "rate_S2"
   },
   {
     "action": "upsert",
@@ -113,16 +86,7 @@
       "metaid": "rule3"
     },
     "class": "Process",
-    "id": "S3_proc"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0"
-    },
-    "class": "Record",
-    "id": "S4",
-    "title": "S4"
+    "id": "rate_S3"
   },
   {
     "action": "upsert",
@@ -139,7 +103,43 @@
       "metaid": "rule4"
     },
     "class": "Process",
-    "id": "S4_proc"
+    "id": "rate_S4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.01"
+    },
+    "class": "Record",
+    "id": "S1",
+    "title": "S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S2",
+    "title": "S2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S3",
+    "title": "S3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S4",
+    "title": "S4"
   },
   {
     "action": "upsert",

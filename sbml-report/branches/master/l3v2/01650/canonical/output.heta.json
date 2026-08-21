@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:09:33.183Z",
+    "created": "2026-08-21T09:29:39.934Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "a511082f8516b89b8e7d673580db65f89360b870d9b06eaf25f8d6dfccc3c702",
+    "hashSum": "bf0bea5259a9bce67054f3d51cde47fb306e831c4292d1c1532d7b19330519f7",
     "hashAlgorithm": "sha256"
   },
   {
@@ -38,11 +38,23 @@
       }
     ],
     "assignments": {
-      "ode_": "m_cf__J0_local + s1_cf__J0_local"
+      "ode_": "local_J0_m_cf + local_J0_s1_cf"
     },
     "class": "Reaction",
     "id": "J0",
     "reversible": true
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_J0_m_cf",
+    "num": 0.003
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_J0_s1_cf",
+    "num": 0.007
   },
   {
     "action": "upsert",
@@ -52,24 +64,12 @@
   },
   {
     "action": "upsert",
-    "class": "Const",
-    "id": "m_cf__J0_local",
-    "num": 0.003
-  },
-  {
-    "action": "upsert",
     "assignments": {
       "start_": "2 / C"
     },
     "class": "Species",
     "compartment": "C",
     "id": "S1"
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "s1_cf__J0_local",
-    "num": 0.007
   },
   {
     "action": "upsert",

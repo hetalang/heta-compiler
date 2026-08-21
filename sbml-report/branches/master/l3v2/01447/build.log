@@ -9,14 +9,12 @@ No declaration file, running with defaults...
 [error]	A_sr2 component does not exist which is not allowed for the "update" action.
 [error]	B_sr1 component does not exist which is not allowed for the "update" action.
 [error]	B_sr2 component does not exist which is not allowed for the "update" action.
-[error]	_E0 id should be string of type ID, but have "_E0"
-	- {"id":"_E0","aux":{},"class":"DSwitcher","trigger":"t >=  5 "}
 [error]	A_sr1 component does not exist which is not allowed for the "update" action.
 [error]	A_sr2 component does not exist which is not allowed for the "update" action.
 [error]	B_sr1 component does not exist which is not allowed for the "update" action.
 [error]	B_sr2 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 89d7963d5e03ab617128ca8c0bf2670bfb5b8bc14846aaeb90980678a458245b
-[info]	Setting references in elements, total length 97
+[info]	Platform hash: 88aba53c4e047ef195da01ae07ebe8fc411cdba2e004e899c89f7eb39c7a3625
+[info]	Setting references in elements, total length 98
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

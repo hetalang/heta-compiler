@@ -9,12 +9,12 @@ No declaration file, running with defaults...
 [error]	S2_stoich component does not exist which is not allowed for the "update" action.
 [error]	S3_stoich component does not exist which is not allowed for the "update" action.
 [error]	S4_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: be160886b0f99b9164bb9d6fc2c19ff0f2c431c5d43559982638b9bc6e72b6a8
+[info]	Platform hash: 5417dac920283f4e654fe285d10709176c3eec1e4ec117950c25fc1c2d4293e2
 [info]	Setting references in elements, total length 105
-[error]	S1_stoich_proc Property "actors[0].target" has lost reference "S1_stoich".
-[error]	S2_stoich_proc Property "actors[0].target" has lost reference "S2_stoich".
-[error]	S3_stoich_proc Property "actors[0].target" has lost reference "S3_stoich".
-[error]	S4_stoich_proc Property "actors[0].target" has lost reference "S4_stoich".
+[error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
+[error]	rate_S2_stoich Property "actors[0].target" has lost reference "S2_stoich".
+[error]	rate_S3_stoich Property "actors[0].target" has lost reference "S3_stoich".
+[error]	rate_S4_stoich Property "actors[0].target" has lost reference "S4_stoich".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

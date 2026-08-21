@@ -5,14 +5,14 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:24:20.610Z",
+  "created": "2026-08-21T09:38:26.526Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "S1_stoich__J1_local",
+          "id": "local_J1_S1_stoich",
           "value": 0.1
         }
       ],
@@ -38,7 +38,7 @@
           "rhs": {
             "expr": [
               "Multiply",
-              "S1_stoich__J1_local",
+              "local_J1_S1_stoich",
               2
             ],
             "format": "math-json"

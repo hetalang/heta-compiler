@@ -6,10 +6,10 @@ No declaration file, running with defaults...
 [info]	Reading module of type "heta" from file "results/l3v2/01553/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01553/01553-sbml-l3v2.xml"...
 [error]	S2_stoch component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: be6457310276f6eb613daf7b17ddaa83ffac0b7d2dec9ca5bf3b2c0786e43bf6
+[info]	Platform hash: c949cc0b0827e42736add6e6f64094b3cd374a2ff3954eeba2f61bf3875b1632
 [info]	Setting references in elements, total length 98
-[error]	S2_stoch_proc Property "actors[0].target" has lost reference "S2_stoch".
-[error]	Record "S2_stoch_proc" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	rate_S2_stoch Property "actors[0].target" has lost reference "S2_stoch".
+[error]	Record "rate_S2_stoch" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

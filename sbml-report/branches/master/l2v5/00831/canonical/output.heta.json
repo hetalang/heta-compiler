@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:31:33.739Z",
+    "created": "2026-08-21T09:42:43.891Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "5f9ee2384b660726e19ea7b73ff485faf1aca75d9c72855bd8a06bce17731794",
+    "hashSum": "80483ab1056fe7ed0b3f79c88609560caf8fa7e3047a5f9e2e45a8c0e032eedc",
     "hashAlgorithm": "sha256"
   },
   {
@@ -36,25 +36,25 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "kf__reaction1_local",
+    "id": "local_reaction1_kf",
     "num": 0.8
   },
   {
     "action": "upsert",
     "class": "Const",
-    "id": "kf__reaction2_local",
-    "num": 0.9
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "kr__reaction1_local",
+    "id": "local_reaction1_kr",
     "num": 0.06
   },
   {
     "action": "upsert",
     "class": "Const",
-    "id": "kr__reaction2_local",
+    "id": "local_reaction2_kf",
+    "num": 0.9
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_reaction2_kr",
     "num": 0.075
   },
   {
@@ -70,7 +70,7 @@
       }
     ],
     "assignments": {
-      "ode_": "C * (kf__reaction1_local * S1 + (-1) * kr__reaction1_local * S2)"
+      "ode_": "C * (local_reaction1_kf * S1 + (-1) * local_reaction1_kr * S2)"
     },
     "class": "Reaction",
     "id": "reaction1",
@@ -90,7 +90,7 @@
       }
     ],
     "assignments": {
-      "ode_": "C * (kf__reaction2_local * S3 + (-1) * kr__reaction2_local * S4)"
+      "ode_": "C * (local_reaction2_kf * S3 + (-1) * local_reaction2_kr * S4)"
     },
     "class": "Reaction",
     "id": "reaction2",

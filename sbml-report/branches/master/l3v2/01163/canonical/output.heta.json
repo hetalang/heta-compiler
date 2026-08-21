@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:05:47.517Z",
+    "created": "2026-08-21T09:27:24.933Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "b2990765b4799220186af7dcd6357666abc6a6c1b2de207a87254daaa5e37937",
+    "hashSum": "e447cd330d28ab417c52cf02762d8de88dbe2ebe7896d572ecf504cb570aacec",
     "hashAlgorithm": "sha256"
   },
   {
@@ -39,7 +39,7 @@
       "metaid": "p8_raterule"
     },
     "class": "Process",
-    "id": "p8_proc"
+    "id": "rate_p8"
   },
   {
     "action": "upsert",

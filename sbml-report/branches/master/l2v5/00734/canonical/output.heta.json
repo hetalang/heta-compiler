@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:30:44.521Z",
+    "created": "2026-08-21T09:42:14.646Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "f6ce2a9a453497ae3e1abcbac899799c99cbdfd3de55d562b65cc14cff332f7e",
+    "hashSum": "e47d01973280ec51ab7580830fbcccb9987345dbd57fcc38f0ebdeac86b6c0e0",
     "hashAlgorithm": "sha256"
   },
   {
@@ -43,12 +43,6 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "k1__reaction1_local",
-    "num": 0.01
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
     "id": "k2",
     "num": 0.5,
     "title": "k2"
@@ -56,15 +50,38 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "k2__reaction2_local",
-    "num": 0.4
+    "id": "k3",
+    "num": 1.5,
+    "title": "k3"
   },
   {
     "action": "upsert",
     "class": "Const",
-    "id": "k3",
-    "num": 1.5,
-    "title": "k3"
+    "id": "local_reaction1_k1",
+    "num": 0.01
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_reaction2_k2",
+    "num": 0.4
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * S3 + (-1) * k1 * S1"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "rate_S2"
   },
   {
     "action": "upsert",
@@ -79,7 +96,7 @@
       }
     ],
     "assignments": {
-      "ode_": "C * k1__reaction1_local * S1"
+      "ode_": "C * local_reaction1_k1 * S1"
     },
     "class": "Reaction",
     "id": "reaction1",
@@ -99,7 +116,7 @@
       }
     ],
     "assignments": {
-      "ode_": "C * k2__reaction2_local * S3"
+      "ode_": "C * local_reaction2_k2 * S3"
     },
     "class": "Reaction",
     "id": "reaction2",
@@ -149,23 +166,6 @@
         "multiplier": 1
       }
     ]
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S2"
-      }
-    ],
-    "assignments": {
-      "ode_": "k2 * S3 + (-1) * k1 * S1"
-    },
-    "aux": {
-      "metaid": "rule2"
-    },
-    "class": "Process",
-    "id": "S2_proc"
   },
   {
     "action": "upsert",

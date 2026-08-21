@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:22:28.630Z",
+    "created": "2026-08-21T09:37:20.354Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "9f1209bdb823bf73bc3af40ce2016a0c45eba3bcd68d7c792f522df75892b905",
+    "hashSum": "52350d6e691e8881f1659bb1eb492a2ae7757f605f49958470a17d8875eb8ca9",
     "hashAlgorithm": "sha256"
   },
   {
@@ -858,18 +858,6 @@
   },
   {
     "action": "upsert",
-    "id": "t"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "-5.3"
-    },
-    "class": "Record",
-    "id": "trig"
-  },
-  {
-    "action": "upsert",
     "actors": [
       {
         "stoichiometry": 1,
@@ -880,7 +868,19 @@
       "ode_": "1"
     },
     "class": "Process",
-    "id": "trig_proc"
+    "id": "rate_trig"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "-5.3"
+    },
+    "class": "Record",
+    "id": "trig"
   },
   {
     "action": "defineFunction",

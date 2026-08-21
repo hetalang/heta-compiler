@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:25:54.560Z",
+    "created": "2026-08-21T09:39:22.642Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "31d6af22e8ef69765ad7f745c2f2b4f34f4db758abc7a5f1594899bf4e3ac6f0",
+    "hashSum": "0d1f6ec2100b202de34dd97de321423117b3b0b528d118d11ccb157803304ae8",
     "hashAlgorithm": "sha256"
   },
   {
@@ -32,15 +32,6 @@
   },
   {
     "action": "upsert",
-    "assignments": {
-      "start_": "0.015"
-    },
-    "class": "Record",
-    "id": "S1",
-    "title": "S1"
-  },
-  {
-    "action": "upsert",
     "actors": [
       {
         "stoichiometry": 1,
@@ -54,16 +45,7 @@
       "metaid": "rule1"
     },
     "class": "Process",
-    "id": "S1_proc"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0.015"
-    },
-    "class": "Record",
-    "id": "S2",
-    "title": "S2"
+    "id": "rate_S1"
   },
   {
     "action": "upsert",
@@ -80,7 +62,25 @@
       "metaid": "rule2"
     },
     "class": "Process",
-    "id": "S2_proc"
+    "id": "rate_S2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.015"
+    },
+    "class": "Record",
+    "id": "S1",
+    "title": "S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.015"
+    },
+    "class": "Record",
+    "id": "S2",
+    "title": "S2"
   },
   {
     "action": "upsert",

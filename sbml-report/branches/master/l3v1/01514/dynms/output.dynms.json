@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:22:23.218Z",
+  "created": "2026-08-21T09:37:17.170Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -23,7 +23,7 @@
             "format": "math-json"
           },
           "derivative": {
-            "expr": "C1_proc",
+            "expr": "rate_C1",
             "format": "math-json"
           }
         },
@@ -46,7 +46,7 @@
             "format": "math-json"
           },
           "derivative": {
-            "expr": "S1_proc",
+            "expr": "rate_S1",
             "format": "math-json"
           }
         }
@@ -72,14 +72,14 @@
           }
         },
         {
-          "id": "S1_proc",
+          "id": "rate_S1",
           "rhs": {
             "expr": 0.4,
             "format": "math-json"
           }
         },
         {
-          "id": "C1_proc",
+          "id": "rate_C1",
           "rhs": {
             "expr": 0.2,
             "format": "math-json"

@@ -6,13 +6,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "heta" from file "results/l3v2/01106/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01106/01106-sbml-l3v2.xml"...
 [error]	Xref component does not exist which is not allowed for the "update" action.
-[error]	_E0 id should be string of type ID, but have "_E0"
-	- {"id":"_E0","aux":{},"class":"DSwitcher","trigger":" X  >=  2 "}
-[error]	p1 Some of properties do not satisfy requirements for class "Record"
-    1. /assignments must match pattern "^[a-zA-Z][a-zA-Z0-9_]*$"
-    2. /assignments property name must be valid
-[info]	Platform hash: 1b6f5e3e1374fdd7628244cba2057946f6844f7f6ddae48886b5a8b4383c62ba
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: 356b1d3a24661a3c0024e64e23c3c0d3989c10dd8ac3f19f61c818e05cff5ee2
+[info]	Setting references in elements, total length 99
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

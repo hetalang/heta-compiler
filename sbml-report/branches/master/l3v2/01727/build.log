@@ -7,10 +7,10 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01727/01727-sbml-l3v2.xml"...
 [error]	S1_stoich component does not exist which is not allowed for the "update" action.
 [error]	S2_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 9dfa74a8168236504c8753e58ab93d3db08ce1533e04628b773963bb116c9b9d
+[info]	Platform hash: 2a936fce9f9f69a5c2a7b63270d567e0d4ef0ea3af7ec06eb269153abf0fd516
 [info]	Setting references in elements, total length 101
-[error]	S1_stoich_proc Property "actors[0].target" has lost reference "S1_stoich".
-[error]	S2_stoich_proc Property "actors[0].target" has lost reference "S2_stoich".
+[error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
+[error]	rate_S2_stoich Property "actors[0].target" has lost reference "S2_stoich".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

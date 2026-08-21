@@ -6,8 +6,8 @@
     "packageVersion": "0.1.0"
   },
   "status": "completed-with-errors",
-  "startedAt": "2026-08-20T17:24:31.034Z",
-  "completedAt": "2026-08-20T17:35:05.880Z",
+  "startedAt": "2026-08-21T09:38:33.034Z",
+  "completedAt": "2026-08-21T09:44:49.798Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l2v5",
@@ -24994,13 +24994,29 @@
       "caseId": "00979",
       "synopsis": "Two event where the two event assignments should not interfere with each other.",
       "sourcePath": "semantic/00979/00979-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00979/input.heta",
-      "logPath": "00979/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/00979/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00979/00979-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >=  0.98 \"}\n[error] y Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[error] x Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[error] _E1 id should be string of type ID, but have \"_E1\"\n\t- {\"id\":\"_E1\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >=  0.99 \"}\n[error] p Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[error] q Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: 493f26dafdc44f3bdca96091f1007df061a26519e57da232f5d2cff7de961292\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "00979/canonical/output.heta.json",
+        "dynms": "00979/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -27223,39 +27239,87 @@
       "caseId": "01122",
       "synopsis": "Test of proper interpretation of a boundary species set hasOnlySubstanceUnits=false in a reaction rate.",
       "sourcePath": "semantic/01122/01122-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01122/input.heta",
-      "logPath": "01122/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01122/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01122/01122-sbml-l2v5.xml\"...\n[error] _J0 id should be string of type ID, but have \"_J0\"\n\t- {\"id\":\"_J0\",\"aux\":{},\"class\":\"Reaction\",\"assignments\":{\"ode_\":\" S3  /  10 \"},\"reversible\":true,\"actors\":[{\"target\":\"S1\",\"stoichiometry\":-1}],\"modifiers\":[{\"target\":\"S3\"}]}\n[info] Platform hash: d9545205e6ee1dd1e22eab9f8c5806e510ac7af2cf7948fbcaa545b4187559a7\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01122/canonical/output.heta.json",
+        "dynms": "01122/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01184",
       "synopsis": "A kinetic law set by a constant with an initial assignment.",
       "sourcePath": "semantic/01184/01184-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01184/input.heta",
-      "logPath": "01184/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01184/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01184/01184-sbml-l2v5.xml\"...\n[error] _J0 id should be string of type ID, but have \"_J0\"\n\t- {\"id\":\"_J0\",\"aux\":{},\"class\":\"Reaction\",\"assignments\":{\"ode_\":\" k1 \"},\"reversible\":true,\"actors\":[{\"target\":\"S1\",\"stoichiometry\":1}],\"modifiers\":[]}\n[info] Platform hash: 1be0a0885ae41da46f64238af76560c4bcbe60304087f3774371e7612f811be2\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01184/canonical/output.heta.json",
+        "dynms": "01184/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01185",
       "synopsis": "A kinetic law set by a constant with an initial assignment.",
       "sourcePath": "semantic/01185/01185-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01185/input.heta",
-      "logPath": "01185/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01185/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01185/01185-sbml-l2v5.xml\"...\n[error] _J0 id should be string of type ID, but have \"_J0\"\n\t- {\"id\":\"_J0\",\"aux\":{},\"class\":\"Reaction\",\"assignments\":{\"ode_\":\" k1 \"},\"reversible\":true,\"actors\":[{\"target\":\"S1\",\"stoichiometry\":1}],\"modifiers\":[]}\n[info] Platform hash: 1be0a0885ae41da46f64238af76560c4bcbe60304087f3774371e7612f811be2\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01185/canonical/output.heta.json",
+        "dynms": "01185/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -27639,13 +27703,29 @@
       "caseId": "01211",
       "synopsis": "A trigger with an nary relational element.",
       "sourcePath": "semantic/01211/01211-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01211/input.heta",
-      "logPath": "01211/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01211/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01211/01211-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >  0.21  and  5  <=  5 \"}\n[error] x Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: abed108cd637e1de2e016e1fcc4cb300da5b07dec6c77ca5517a541858abac6d\n[info] Setting references in elements, total length 96\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01211/canonical/output.heta.json",
+        "dynms": "01211/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -27901,13 +27981,29 @@
       "caseId": "01222",
       "synopsis": "A boundary substance-only species in varying compartment under control of a rate rule.",
       "sourcePath": "semantic/01222/01222-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01222/input.heta",
-      "logPath": "01222/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01222/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01222/01222-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >  5.5 \"}\n[error] c Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: f7ce4a4a5256673397275576b2068ac44241b14c3239be841c622c16a839e7cc\n[info] Setting references in elements, total length 98\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01222/canonical/output.heta.json",
+        "dynms": "01222/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -28030,26 +28126,58 @@
       "caseId": "01227",
       "synopsis": "A simple reaction whose identifier is used in a trigger.",
       "sourcePath": "semantic/01227/01227-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01227/input.heta",
-      "logPath": "01227/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01227/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01227/01227-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >  J0 \"}\n[error] k1 Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: 857896b37b52f8e6bc1f114fd7b1dab93db0b3c623f21d08be578088c284bb17\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01227/canonical/output.heta.json",
+        "dynms": "01227/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01228",
       "synopsis": "A simple reaction whose identifier is used in an event assignment.",
       "sourcePath": "semantic/01228/01228-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01228/input.heta",
-      "logPath": "01228/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01228/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01228/01228-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >  5.5 \"}\n[error] k1 Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: 5da7d9e12ca938c26392feccef99481fe377314ed756496126f3283c10c180e1\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01228/canonical/output.heta.json",
+        "dynms": "01228/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -29103,13 +29231,29 @@
       "caseId": "01340",
       "synopsis": "A reaction whose rate goes negative due to an event.",
       "sourcePath": "semantic/01340/01340-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01340/input.heta",
-      "logPath": "01340/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01340/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01340/01340-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >  5.5 \"}\n[error] k1 Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: 5cc4f46fb98e31765d711199fd3a632a50fbb964b6266ae74ce853b587c6a219\n[info] Setting references in elements, total length 99\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01340/canonical/output.heta.json",
+        "dynms": "01340/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -32177,26 +32321,58 @@
       "caseId": "01504",
       "synopsis": "A species and a compartment both under control of a rate rule, then modified by an event.",
       "sourcePath": "semantic/01504/01504-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01504/input.heta",
-      "logPath": "01504/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01504/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01504/01504-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >=  0.45 \"}\n[error] S1 Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: a33dd297d9ffb2ea4edf4a79c62acf61bb3deda63288ccd4b567218fb49d8a80\n[info] Setting references in elements, total length 100\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01504/canonical/output.heta.json",
+        "dynms": "01504/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01505",
       "synopsis": "A species and a compartment both under control of a rate rule, and affected by an event.",
       "sourcePath": "semantic/01505/01505-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01505/input.heta",
-      "logPath": "01505/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01505/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01505/01505-sbml-l2v5.xml\"...\n[error] _E0 id should be string of type ID, but have \"_E0\"\n\t- {\"id\":\"_E0\",\"aux\":{},\"class\":\"DSwitcher\",\"trigger\":\"t >=  0.45 \"}\n[error] C1 Some of properties do not satisfy requirements for class \"Record\"\n    1. /assignments must match pattern \"^[a-zA-Z][a-zA-Z0-9_]*$\"\n    2. /assignments property name must be valid\n[info] Platform hash: a33dd297d9ffb2ea4edf4a79c62acf61bb3deda63288ccd4b567218fb49d8a80\n[info] Setting references in elements, total length 100\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01505/canonical/output.heta.json",
+        "dynms": "01505/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -34288,13 +34464,29 @@
       "caseId": "01812",
       "synopsis": "Test SBML IDs named 'nan'",
       "sourcePath": "semantic/01812/01812-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01812/input.heta",
-      "logPath": "01812/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01812/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01812/01812-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"NaN\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 65f056df42078e0e3eace6df10f2639e99e3e031fcfd1425f4d998b91f9c5867\n[info] Setting references in elements, total length 97\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01812/canonical/output.heta.json",
+        "dynms": "01812/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
@@ -34303,89 +34495,253 @@
       "sourcePath": "semantic/01813/01813-sbml-l2v5.xml",
       "status": "failed",
       "buildSourcePath": "01813/input.heta",
-      "logPath": "01813/build.log",
+      "outputs": {
+        "canonical": "01813/canonical/output.heta.json",
+        "dynms": "01813/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "failed",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/static/3/initial",
+              "schemaPath": "#/oneOf/0/type",
+              "keyword": "type",
+              "message": "must be number",
+              "params": {
+                "type": "number"
+              }
+            },
+            {
+              "instancePath": "/models/0/static/3/initial",
+              "schemaPath": "#/type",
+              "keyword": "type",
+              "message": "must be object",
+              "params": {
+                "type": "object"
+              }
+            },
+            {
+              "instancePath": "/models/0/static/3/initial",
+              "schemaPath": "#/$defs/lineExpression/type",
+              "keyword": "type",
+              "message": "must be object",
+              "params": {
+                "type": "object"
+              }
+            },
+            {
+              "instancePath": "/models/0/static/3/initial",
+              "schemaPath": "#/oneOf",
+              "keyword": "oneOf",
+              "message": "must match exactly one schema in oneOf",
+              "params": {
+                "passingSchemas": null
+              }
+            },
+            {
+              "instancePath": "/models/0/static/3/initial",
+              "schemaPath": "#/oneOf",
+              "keyword": "oneOf",
+              "message": "must match exactly one schema in oneOf",
+              "params": {
+                "passingSchemas": null
+              }
+            }
+          ]
+        }
+      },
+      "buildStatus": "success",
       "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01813/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01813/01813-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"NaN\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 99f88fedd0c57b86056da8112ad8f415e536d9bd65c01cde9da43e5070ce52de\n[info] Setting references in elements, total length 101\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01814",
       "synopsis": "Test SBML IDs named 'true'",
       "sourcePath": "semantic/01814/01814-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01814/input.heta",
-      "logPath": "01814/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01814/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01814/01814-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"true\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 5c0e38c9b89e090782351c55622863f72daf57389c272137bdc0cce3d931e0b2\n[info] Setting references in elements, total length 97\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01814/canonical/output.heta.json",
+        "dynms": "01814/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01815",
       "synopsis": "Test SBML IDs named 'true'",
       "sourcePath": "semantic/01815/01815-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01815/input.heta",
-      "logPath": "01815/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01815/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01815/01815-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"true\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 8162ac0e35b094be2920de5cd89e31cdb6fcab4c7c898f38e51bb7871af1f423\n[info] Setting references in elements, total length 100\n[error] Record assignments \"a\" should be a numeric expression.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01815/canonical/output.heta.json",
+        "dynms": "01815/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01816",
       "synopsis": "Test SBML IDs named 'false'",
       "sourcePath": "semantic/01816/01816-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01816/input.heta",
-      "logPath": "01816/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01816/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01816/01816-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"false\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: f2a661f9dce6bd074a528f62efd0f525a94368eb914a0037e8b1e4fd6bf7380d\n[info] Setting references in elements, total length 97\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01816/canonical/output.heta.json",
+        "dynms": "01816/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01817",
       "synopsis": "Test SBML IDs named 'false'",
       "sourcePath": "semantic/01817/01817-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01817/input.heta",
-      "logPath": "01817/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01817/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01817/01817-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"false\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 9213a74da76ce31cfefb646f42a8f0910869610ea90eb701928ef3147d97f5e3\n[info] Setting references in elements, total length 100\n[error] Record assignments \"a\" should be a numeric expression.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01817/canonical/output.heta.json",
+        "dynms": "01817/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01818",
       "synopsis": "Test SBML IDs named 'pi'",
       "sourcePath": "semantic/01818/01818-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01818/input.heta",
-      "logPath": "01818/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01818/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01818/01818-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"pi\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 6506cb8f42ccd0eb56a918d08b4b86f401726a760d6b3dc99975ea279f56934e\n[info] Setting references in elements, total length 97\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01818/canonical/output.heta.json",
+        "dynms": "01818/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {
       "caseId": "01819",
       "synopsis": "Test SBML IDs named 'pi'",
       "sourcePath": "semantic/01819/01819-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01819/input.heta",
-      "logPath": "01819/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01819/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01819/01819-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"pi\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, exponentiale, pi, true, false, null\n[info] Platform hash: 77e36b17528361585115c67d28b9433239a98f5defacc2da0a25017e5c2361dd\n[info] Setting references in elements, total length 101\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+      "outputs": {
+        "canonical": "01819/canonical/output.heta.json",
+        "dynms": "01819/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.1 document"
+          }
+        }
       }
     },
     {

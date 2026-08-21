@@ -7,7 +7,7 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01626/01626-sbml-l3v2.xml"...
 [error]	Q component does not exist which is not allowed for the "update" action.
 [error]	R component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: d4015f208ab1e90de9e5112f53d0422bd6f205dbe8cad68aadbd788dc3b7f930
+[info]	Platform hash: 36f0afd344caf82e435cfa4f73bc2c9d681d96c9b09b202e817cb12395f7be74
 [info]	Setting references in elements, total length 111
 [error]	Component "Q" is not found in space "nameless" as expected in expression: S [ode_]= Q + R;
 [error]	Component "R" is not found in space "nameless" as expected in expression: S [ode_]= Q + R;

@@ -6,9 +6,9 @@ No declaration file, running with defaults...
 [info]	Reading module of type "heta" from file "results/l3v1/01637/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01637/01637-sbml-l3v1.xml"...
 [error]	k0 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 1d92b3c74b24d87bda77e7deafd861f87efb68fc5c0458d05ed98159b942c337
+[info]	Platform hash: e55a22dbdab93d75af6179f77536a185bd480cf8953f1852bf80fb27f994d96b
 [info]	Setting references in elements, total length 98
-[error]	k0_proc Property "actors[0].target" has lost reference "k0".
+[error]	rate_k0 Property "actors[0].target" has lost reference "k0".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

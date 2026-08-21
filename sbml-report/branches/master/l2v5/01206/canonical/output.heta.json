@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:33:25.530Z",
+    "created": "2026-08-21T09:43:50.235Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "0e9eb9926813822a5a8c67be9eee641feffcc4419ded29ce6bedd1d0bcf7a1c2",
+    "hashSum": "36f46b10a9c42a919da288fb49b14c3cba8e14f49eac8c2cd47e7fd543947c96",
     "hashAlgorithm": "sha256"
   },
   {
@@ -36,7 +36,7 @@
       "ode_": "0.2"
     },
     "class": "Process",
-    "id": "C1_proc"
+    "id": "rate_C1"
   },
   {
     "action": "upsert",

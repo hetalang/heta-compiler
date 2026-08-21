@@ -5,14 +5,14 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:33:51.816Z",
+  "created": "2026-08-21T09:44:05.911Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "k1__J0_local",
+          "id": "local_J0_k1",
           "value": -1
         }
       ],
@@ -85,7 +85,7 @@
           "rhs": {
             "expr": [
               "Multiply",
-              "k1__J0_local",
+              "local_J0_k1",
               "S1",
               "S2"
             ],

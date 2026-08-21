@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:18:15.563Z",
+    "created": "2026-08-21T09:34:50.757Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "b825bf8493b18e88a0fcab83bfee66e1d775ae9ef27d1c5f06677744ee8298ba",
+    "hashSum": "96f67439093d59fc6d681086e6561dc0267c5d2b035a260a7a8d61592797641c",
     "hashAlgorithm": "sha256"
   },
   {
@@ -34,23 +34,6 @@
   },
   {
     "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "C1"
-      }
-    ],
-    "assignments": {
-      "ode_": "0.4 * C1 + 0.25 * C2"
-    },
-    "aux": {
-      "metaid": "rule1"
-    },
-    "class": "Process",
-    "id": "C1_proc"
-  },
-  {
-    "action": "upsert",
     "assignments": {
       "start_": "0.01"
     },
@@ -70,6 +53,23 @@
     "actors": [
       {
         "stoichiometry": 1,
+        "target": "C1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.4 * C1 + 0.25 * C2"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "rate_C1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
         "target": "C2"
       }
     ],
@@ -80,7 +80,7 @@
       "metaid": "rule2"
     },
     "class": "Process",
-    "id": "C2_proc"
+    "id": "rate_C2"
   },
   {
     "action": "upsert",

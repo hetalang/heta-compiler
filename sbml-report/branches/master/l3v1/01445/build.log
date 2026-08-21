@@ -7,12 +7,10 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01445/01445-sbml-l3v1.xml"...
 [error]	A1_sr component does not exist which is not allowed for the "update" action.
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
-[error]	_E0 id should be string of type ID, but have "_E0"
-	- {"id":"_E0","aux":{},"class":"DSwitcher","trigger":"t >=  5 "}
 [error]	A1_sr component does not exist which is not allowed for the "update" action.
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: f8834ec0dbb01ca88cceb8e9a1f1aa81074bb48cd20ed46cd4599db19e015327
-[info]	Setting references in elements, total length 96
+[info]	Platform hash: 03a181a730d41b0e7996e4618d91c35be837072da4ff08713a39fc9308175e62
+[info]	Setting references in elements, total length 97
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

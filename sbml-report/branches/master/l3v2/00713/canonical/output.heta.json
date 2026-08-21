@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:02:14.818Z",
+    "created": "2026-08-21T09:25:17.013Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "c961f25a7d255ae7de6d84dac862f44b16f11581224a4713f7d8ed22fc053391",
+    "hashSum": "73753a8cc22cba0b7b3a77f31319ebbb3593c751bfbdbb68ae07ab65c8664179",
     "hashAlgorithm": "sha256"
   },
   {
@@ -44,23 +44,6 @@
   },
   {
     "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "k1"
-      }
-    ],
-    "assignments": {
-      "ode_": "p1 * add(k2, k3)"
-    },
-    "aux": {
-      "metaid": "rule1"
-    },
-    "class": "Process",
-    "id": "k1_proc"
-  },
-  {
-    "action": "upsert",
     "class": "Const",
     "id": "k2",
     "num": 300000,
@@ -79,6 +62,23 @@
     "id": "p1",
     "num": 1,
     "title": "p1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "k1"
+      }
+    ],
+    "assignments": {
+      "ode_": "p1 * add(k2, k3)"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "rate_k1"
   },
   {
     "action": "upsert",

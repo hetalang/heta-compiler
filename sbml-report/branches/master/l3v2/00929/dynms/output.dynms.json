@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:03:56.144Z",
+  "created": "2026-08-21T09:26:17.804Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -110,7 +110,7 @@
       "timeEvents": [],
       "events": [
         {
-          "id": "evt0",
+          "id": "event_1",
           "trigger": {
             "type": "conditional",
             "rhs": {

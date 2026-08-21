@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:32:44.214Z",
+    "created": "2026-08-21T09:43:25.740Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "4bd7f8a9b4262206fd0935ade8b76546a4bbe62ac497e9105e2b9774f1225a79",
+    "hashSum": "553461696d27a074534548e1b66e7ba7e4eca8dcd5e752af5b08090bc85cde00",
     "hashAlgorithm": "sha256"
   },
   {
@@ -32,20 +32,6 @@
     },
     "class": "Compartment",
     "id": "comp2"
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "comp2"
-      }
-    ],
-    "assignments": {
-      "ode_": "1"
-    },
-    "class": "Process",
-    "id": "comp2_proc"
   },
   {
     "action": "upsert",
@@ -110,6 +96,20 @@
     },
     "class": "Record",
     "id": "p8"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "comp2"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Process",
+    "id": "rate_comp2"
   },
   {
     "action": "upsert",

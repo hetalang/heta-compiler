@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:24:00.412Z",
+    "created": "2026-08-21T09:38:14.548Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "a97307bdf6d912693a0f5eb6b749981f999f9b462b4ce9828c2951c2cb8039b2",
+    "hashSum": "180bd876e9dfdbeca9134304cbc33143b8bacf37b0fd32968b9cb750dea64464",
     "hashAlgorithm": "sha256"
   },
   {
@@ -38,7 +38,7 @@
       }
     ],
     "assignments": {
-      "ode_": "m_cf__J0_local * s1_cf__J0_local * 0.01"
+      "ode_": "local_J0_m_cf * local_J0_s1_cf * 0.01"
     },
     "class": "Reaction",
     "id": "J0",
@@ -47,7 +47,13 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "m_cf__J0_local",
+    "id": "local_J0_m_cf",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_J0_s1_cf",
     "num": 1
   },
   {
@@ -64,12 +70,6 @@
     "class": "Const",
     "id": "s1_cf",
     "num": 5
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "s1_cf__J0_local",
-    "num": 1
   },
   {
     "action": "upsert",

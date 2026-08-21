@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:23:14.310Z",
+    "created": "2026-08-21T09:37:47.264Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "f88bec8bb385230ed2f728cea310f0229e4575906649f823057a8207749bacc2",
+    "hashSum": "036ba31867ecf121e2f99a9fee3c05b3803e458df58c9708d72936ada9708c9f",
     "hashAlgorithm": "sha256"
   },
   {
@@ -38,7 +38,7 @@
       }
     ],
     "assignments": {
-      "ode_": "m_cf__J0_local + s1_cf__J0_local"
+      "ode_": "local_J0_m_cf + local_J0_s1_cf"
     },
     "class": "Reaction",
     "id": "J0",
@@ -47,14 +47,20 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "m_cf",
-    "num": 3
+    "id": "local_J0_m_cf",
+    "num": 0.003
   },
   {
     "action": "upsert",
     "class": "Const",
-    "id": "m_cf__J0_local",
-    "num": 0.003
+    "id": "local_J0_s1_cf",
+    "num": 0.007
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "m_cf",
+    "num": 3
   },
   {
     "action": "upsert",
@@ -70,12 +76,6 @@
     "class": "Const",
     "id": "s1_cf",
     "num": 5
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "s1_cf__J0_local",
-    "num": 0.007
   },
   {
     "action": "upsert",

@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T16:59:04.284Z",
+    "created": "2026-08-21T09:23:23.269Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "915d9055d54f4aae22dd0dfe1457c32a9c0de38259cecf33d9689663ee3080b0",
+    "hashSum": "61751676d77459ba31c88b87183a7488e4b1735e56b0b9c0e0e4209eacf648a3",
     "hashAlgorithm": "sha256"
   },
   {
@@ -32,6 +32,23 @@
     "id": "k1",
     "num": 1.546,
     "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.65"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "rate_S3"
   },
   {
     "action": "upsert",
@@ -106,23 +123,6 @@
         "multiplier": 1
       }
     ]
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S3"
-      }
-    ],
-    "assignments": {
-      "ode_": "0.65"
-    },
-    "aux": {
-      "metaid": "rule1"
-    },
-    "class": "Process",
-    "id": "S3_proc"
   },
   {
     "action": "upsert",

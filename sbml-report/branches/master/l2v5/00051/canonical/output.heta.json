@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:24:57.042Z",
+    "created": "2026-08-21T09:38:48.405Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "364a5f28f8df15afec7aa7e56cf944c85ae5d72dda6edda46052c094e37f31a1",
+    "hashSum": "cf691a3182f0042a9f20a3250a2b6fd0d33136f3060734f15b71868a4405fe5b",
     "hashAlgorithm": "sha256"
   },
   {
@@ -34,6 +34,20 @@
   },
   {
     "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.9,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "p1",
+    "num": 0.1,
+    "title": "p1"
+  },
+  {
+    "action": "upsert",
     "actors": [
       {
         "stoichiometry": 1,
@@ -47,21 +61,7 @@
       "metaid": "rule1"
     },
     "class": "Process",
-    "id": "C_proc"
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "k1",
-    "num": 0.9,
-    "title": "k1"
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "p1",
-    "num": 0.1,
-    "title": "p1"
+    "id": "rate_C"
   },
   {
     "action": "upsert",

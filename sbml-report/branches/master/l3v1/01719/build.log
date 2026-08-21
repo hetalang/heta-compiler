@@ -6,9 +6,9 @@ No declaration file, running with defaults...
 [info]	Reading module of type "heta" from file "results/l3v1/01719/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01719/01719-sbml-l3v1.xml"...
 [error]	S1_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 80d1e8c4f1e92de00dc774558edbd913710aeab4231ec0e213a676c9cf0f2ded
+[info]	Platform hash: 0c11b4a5a7e3fce5281f34bc18d61a31398e033e28cf87898ab1e97ae75bef3a
 [info]	Setting references in elements, total length 99
-[error]	S1_stoich_proc Property "actors[0].target" has lost reference "S1_stoich".
+[error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
 [error]	Component "S1_stoich" is not found in space "nameless" as expected in DSwitcher: "E1"
 	S1_stoich <= 3.3;
 [info]	Checking for circular references in Records.

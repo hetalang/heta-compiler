@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:34:56.726Z",
+    "created": "2026-08-21T09:44:44.441Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "fddde4ef6028afdce24ab827f71419739d8cf35c4e0a95e06392830a43e6d074",
+    "hashSum": "6dca29c63c962bfa0b2f6f45c18fbcff5b4a2ebb5c09d304e2ff716d1d2f2f7c",
     "hashAlgorithm": "sha256"
   },
   {
@@ -38,7 +38,7 @@
       }
     ],
     "assignments": {
-      "ode_": "S1_stoich__J1_local * S2_stoich__J1_local * J1__J1_local * 200"
+      "ode_": "local_J1_S1_stoich * local_J1_S2_stoich * local_J1_J1 * 200"
     },
     "class": "Reaction",
     "id": "J1",
@@ -47,7 +47,19 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "J1__J1_local",
+    "id": "local_J1_J1",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_J1_S1_stoich",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_J1_S2_stoich",
     "num": 0.1
   },
   {
@@ -62,12 +74,6 @@
   },
   {
     "action": "upsert",
-    "class": "Const",
-    "id": "S1_stoich__J1_local",
-    "num": 0.1
-  },
-  {
-    "action": "upsert",
     "assignments": {
       "start_": "3"
     },
@@ -75,12 +81,6 @@
     "compartment": "C",
     "id": "S2",
     "isAmount": true
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "S2_stoich__J1_local",
-    "num": 0.1
   },
   {
     "action": "upsert",

@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:08:38.124Z",
+    "created": "2026-08-21T09:29:07.186Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "1b08a7542e5fb99465973eb8ae6b1d097017e615c91759b7e2007cca29ba189e",
+    "hashSum": "890307f01da9a064ceb7d82e60a9f9ffc702a659301fd96dfc65aafa376c52e2",
     "hashAlgorithm": "sha256"
   },
   {
@@ -26,6 +26,12 @@
   },
   {
     "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "S1 > (-1)"
+  },
+  {
+    "action": "upsert",
     "actors": [
       {
         "stoichiometry": 1,
@@ -36,23 +42,7 @@
       "ode_": "0.2"
     },
     "class": "Process",
-    "id": "C1_proc"
-  },
-  {
-    "action": "upsert",
-    "class": "DSwitcher",
-    "id": "E0",
-    "trigger": "S1 > (-1)"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "E0": "0",
-      "start_": "1"
-    },
-    "class": "Species",
-    "compartment": "C1",
-    "id": "S1"
+    "id": "rate_C1"
   },
   {
     "action": "upsert",
@@ -66,7 +56,17 @@
       "ode_": "0.4"
     },
     "class": "Process",
-    "id": "S1_proc"
+    "id": "rate_S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "0",
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C1",
+    "id": "S1"
   },
   {
     "action": "upsert",

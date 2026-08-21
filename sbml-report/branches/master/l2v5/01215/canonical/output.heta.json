@@ -5,28 +5,16 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:33:29.474Z",
+    "created": "2026-08-21T09:43:52.682Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "9ee9e267954b30640d4791b8564acf80f0a0dcfb65f548e224682dc8dfaf0fd4",
+    "hashSum": "29fdbc5a735fe764f489011c7c4cfe18e75b9746e6772c715d998cecb0a05e68",
     "hashAlgorithm": "sha256"
   },
   {
     "action": "setNS",
     "space": "nameless",
     "type": "concrete"
-  },
-  {
-    "action": "upsert",
-    "id": "t"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "3"
-    },
-    "class": "Record",
-    "id": "x"
   },
   {
     "action": "upsert",
@@ -40,7 +28,19 @@
       "ode_": "((2 > 1) ? 1 : 0)"
     },
     "class": "Process",
-    "id": "x_proc"
+    "id": "rate_x"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3"
+    },
+    "class": "Record",
+    "id": "x"
   },
   {
     "action": "defineFunction",

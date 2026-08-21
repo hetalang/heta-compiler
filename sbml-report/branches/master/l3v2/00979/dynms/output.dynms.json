@@ -1,0 +1,114 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-21T09:26:32.822Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "x",
+          "initial": 0
+        },
+        {
+          "id": "y",
+          "initial": 0
+        },
+        {
+          "id": "p",
+          "initial": 0
+        },
+        {
+          "id": "q",
+          "initial": 0
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "sbml__E0_1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.98
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "x"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "y",
+                  "x"
+                ],
+                "format": "math-json"
+              },
+              "state": "y"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sbml__E1_1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 3,
+                "format": "math-json"
+              },
+              "state": "p"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "p",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "q"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

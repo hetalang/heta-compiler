@@ -1,0 +1,564 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-21T09:26:29.266Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "5760cd8ea9ca3868f0223d3cbb26269124345555000d32d2f8fd336f26f4f2ac",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "repeat": "1.5",
+      "sbml__E17_1": "0",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "assemble"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E0_1": "chi0 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E1_1": "chi1 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E10_1": "chi10 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E11_1": "chi11 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E12_1": "chi12 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E13_1": "chi13 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E14_1": "chi14 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E15_1": "chi15 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E16_1": "chi16 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E2_1": "chi2 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E3_1": "chi3 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E4_1": "chi4 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E5_1": "chi5 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E6_1": "chi6 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E7_1": "chi7 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E8_1": "chi8 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E9_1": "chi9 + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chi9"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "chicount + 1",
+      "Rinc": "chicount + 1",
+      "repeat": "0",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chicount"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "chitest + 1",
+      "sbml__E17_1": "0",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "chitest"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "error"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check",
+    "trigger": "finalchi > 50"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E18_1": "calculateerror(chi0, chi1, chi2, chi3, chi4, chi5, chi6, chi7, chi8, chi9, chi10, chi11, chi12, chi13, chi14, chi15, chi16)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "finalchi"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "repeat",
+    "trigger": "floor(chicount / 16) >= 1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "t",
+      "Rinc": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "Q + R",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E0_1",
+    "trigger": "assemble >= 1 and chitest == 0"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E1_1",
+    "trigger": "assemble >= 1 and chitest == 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E10_1",
+    "trigger": "assemble >= 1 and chitest == 10"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E11_1",
+    "trigger": "assemble >= 1 and chitest == 11"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E12_1",
+    "trigger": "assemble >= 1 and chitest == 12"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E13_1",
+    "trigger": "assemble >= 1 and chitest == 13"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E14_1",
+    "trigger": "assemble >= 1 and chitest == 14"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E15_1",
+    "trigger": "assemble >= 1 and chitest == 15"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E16_1",
+    "trigger": "assemble >= 1 and chitest == 16"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E17_1",
+    "trigger": "assemble >= 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E18_1",
+    "trigger": "tests >= 6240 and finalchi == 0"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E2_1",
+    "trigger": "assemble >= 1 and chitest == 2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E3_1",
+    "trigger": "assemble >= 1 and chitest == 3"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E4_1",
+    "trigger": "assemble >= 1 and chitest == 4"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E5_1",
+    "trigger": "assemble >= 1 and chitest == 5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E6_1",
+    "trigger": "assemble >= 1 and chitest == 6"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E7_1",
+    "trigger": "assemble >= 1 and chitest == 7"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E8_1",
+    "trigger": "assemble >= 1 and chitest == 8"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "sbml__E9_1",
+    "trigger": "assemble >= 1 and chitest == 9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "sbml__E17_1": "tests + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "tests"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x0",
+      "x1",
+      "x2",
+      "x3",
+      "x4",
+      "x5",
+      "x6",
+      "x7",
+      "x8",
+      "x9",
+      "x10",
+      "x11",
+      "x12",
+      "x13",
+      "x14",
+      "x15",
+      "x16"
+    ],
+    "id": "calculateerror",
+    "math": "pow(x0 - 0.0952, 2) / 0.0952 + pow(x1 - 1.523, 2) / 1.523 + pow(x2 - 11.428, 2) / 11.428 + pow(x3 - 53.32, 2) / 53.32 + pow(x4 - 173.29, 2) / 173.29 + pow(x5 - 415.898, 2) / 415.898 + pow(x6 - 762.48, 2) / 762.48 + pow(x7 - 1089.26, 2) / 1089.26 + pow(x8 - 1225.415, 2) / 1225.415 + pow(x9 - 1089.26, 2) / 1089.26 + pow(x10 - 762.48, 2) / 762.48 + pow(x11 - 415.898, 2) / 415.898 + pow(x12 - 173.29, 2) / 173.29 + pow(x13 - 53.32, 2) / 53.32 + pow(x14 - 11.428, 2) / 11.428 + pow(x15 - 1.523, 2) / 1.523 + pow(x16 - 0.0952, 2) / 0.0952"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

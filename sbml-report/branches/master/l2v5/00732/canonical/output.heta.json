@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:30:43.755Z",
+    "created": "2026-08-21T09:42:14.083Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "a461a7392fc93fa8334f3173df5a6d2f14c7d112b7479beaec627e350c778f0d",
+    "hashSum": "08a67e6627f99ae6ec30aebe3d56d34bdefcb2f96ff12d4d4aff4d3ae647760a",
     "hashAlgorithm": "sha256"
   },
   {
@@ -43,15 +43,49 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "k1__reaction1_local",
-    "num": 0.9
+    "id": "k2",
+    "num": 0.25,
+    "title": "k2"
   },
   {
     "action": "upsert",
     "class": "Const",
-    "id": "k2",
-    "num": 0.25,
-    "title": "k2"
+    "id": "local_reaction1_k1",
+    "num": 0.9
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.5 * k1"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "rate_S3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S4"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-0.5) * k2"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "rate_S4"
   },
   {
     "action": "upsert",
@@ -66,7 +100,7 @@
       }
     ],
     "assignments": {
-      "ode_": "C * k1__reaction1_local * S1"
+      "ode_": "C * local_reaction1_k1 * S1"
     },
     "class": "Reaction",
     "id": "reaction1",
@@ -141,23 +175,6 @@
   },
   {
     "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S3"
-      }
-    ],
-    "assignments": {
-      "ode_": "0.5 * k1"
-    },
-    "aux": {
-      "metaid": "rule1"
-    },
-    "class": "Process",
-    "id": "S3_proc"
-  },
-  {
-    "action": "upsert",
     "assignments": {
       "start_": "4 / C"
     },
@@ -177,23 +194,6 @@
         "multiplier": 1
       }
     ]
-  },
-  {
-    "action": "upsert",
-    "actors": [
-      {
-        "stoichiometry": 1,
-        "target": "S4"
-      }
-    ],
-    "assignments": {
-      "ode_": "(-0.5) * k2"
-    },
-    "aux": {
-      "metaid": "rule2"
-    },
-    "class": "Process",
-    "id": "S4_proc"
   },
   {
     "action": "upsert",

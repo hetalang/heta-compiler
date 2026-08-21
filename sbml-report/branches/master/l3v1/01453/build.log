@@ -13,12 +13,12 @@ No declaration file, running with defaults...
 [error]	A_sr2 component does not exist which is not allowed for the "update" action.
 [error]	B_sr1 component does not exist which is not allowed for the "update" action.
 [error]	B_sr2 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 27699ad867ae044b9b1e0ec69a473d3df6fac480863fa85731a6e1547c1245b4
+[info]	Platform hash: 19ee4686d49a5529cd9b7b31e266b247342c05e8a10765479786d2c165aba00c
 [info]	Setting references in elements, total length 101
-[error]	A_sr1_proc Property "actors[0].target" has lost reference "A_sr1".
-[error]	A_sr2_proc Property "actors[0].target" has lost reference "A_sr2".
-[error]	B_sr1_proc Property "actors[0].target" has lost reference "B_sr1".
-[error]	B_sr2_proc Property "actors[0].target" has lost reference "B_sr2".
+[error]	rate_A_sr1 Property "actors[0].target" has lost reference "A_sr1".
+[error]	rate_A_sr2 Property "actors[0].target" has lost reference "A_sr2".
+[error]	rate_B_sr1 Property "actors[0].target" has lost reference "B_sr1".
+[error]	rate_B_sr2 Property "actors[0].target" has lost reference "B_sr2".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

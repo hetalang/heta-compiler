@@ -1,0 +1,7899 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-21T09:37:04.569Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "trig",
+          "value": 1
+        }
+      ],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "A0",
+          "initial": 0
+        },
+        {
+          "id": "A1",
+          "initial": 0
+        },
+        {
+          "id": "A2",
+          "initial": 0
+        },
+        {
+          "id": "A3",
+          "initial": 0
+        },
+        {
+          "id": "A4",
+          "initial": 0
+        },
+        {
+          "id": "A5",
+          "initial": 0
+        },
+        {
+          "id": "A6",
+          "initial": 0
+        },
+        {
+          "id": "A7",
+          "initial": 0
+        },
+        {
+          "id": "A8",
+          "initial": 0
+        },
+        {
+          "id": "A9",
+          "initial": 0
+        },
+        {
+          "id": "A10",
+          "initial": 0
+        },
+        {
+          "id": "A11",
+          "initial": 0
+        },
+        {
+          "id": "A12",
+          "initial": 0
+        },
+        {
+          "id": "A13",
+          "initial": 0
+        },
+        {
+          "id": "A14",
+          "initial": 0
+        },
+        {
+          "id": "A15",
+          "initial": 0
+        },
+        {
+          "id": "A16",
+          "initial": 0
+        },
+        {
+          "id": "A17",
+          "initial": 0
+        },
+        {
+          "id": "A18",
+          "initial": 0
+        },
+        {
+          "id": "A19",
+          "initial": 0
+        },
+        {
+          "id": "A20",
+          "initial": 0
+        },
+        {
+          "id": "A21",
+          "initial": 0
+        },
+        {
+          "id": "A22",
+          "initial": 0
+        },
+        {
+          "id": "A23",
+          "initial": 0
+        },
+        {
+          "id": "A24",
+          "initial": 0
+        },
+        {
+          "id": "A25",
+          "initial": 0
+        },
+        {
+          "id": "A26",
+          "initial": 0
+        },
+        {
+          "id": "A27",
+          "initial": 0
+        },
+        {
+          "id": "A28",
+          "initial": 0
+        },
+        {
+          "id": "A29",
+          "initial": 0
+        },
+        {
+          "id": "A30",
+          "initial": 0
+        },
+        {
+          "id": "A31",
+          "initial": 0
+        },
+        {
+          "id": "A32",
+          "initial": 0
+        },
+        {
+          "id": "A33",
+          "initial": 0
+        },
+        {
+          "id": "A34",
+          "initial": 0
+        },
+        {
+          "id": "A35",
+          "initial": 0
+        },
+        {
+          "id": "A36",
+          "initial": 0
+        },
+        {
+          "id": "A37",
+          "initial": 0
+        },
+        {
+          "id": "A38",
+          "initial": 0
+        },
+        {
+          "id": "A39",
+          "initial": 0
+        },
+        {
+          "id": "A40",
+          "initial": 0
+        },
+        {
+          "id": "A41",
+          "initial": 0
+        },
+        {
+          "id": "A42",
+          "initial": 0
+        },
+        {
+          "id": "A43",
+          "initial": 0
+        },
+        {
+          "id": "A44",
+          "initial": 0
+        },
+        {
+          "id": "A45",
+          "initial": 0
+        },
+        {
+          "id": "A46",
+          "initial": 0
+        },
+        {
+          "id": "A47",
+          "initial": 0
+        },
+        {
+          "id": "A48",
+          "initial": 0
+        },
+        {
+          "id": "A49",
+          "initial": 0
+        },
+        {
+          "id": "A50",
+          "initial": 0
+        },
+        {
+          "id": "A51",
+          "initial": 0
+        },
+        {
+          "id": "A52",
+          "initial": 0
+        },
+        {
+          "id": "A53",
+          "initial": 0
+        },
+        {
+          "id": "A54",
+          "initial": 0
+        },
+        {
+          "id": "A55",
+          "initial": 0
+        },
+        {
+          "id": "A56",
+          "initial": 0
+        },
+        {
+          "id": "A57",
+          "initial": 0
+        },
+        {
+          "id": "A58",
+          "initial": 0
+        },
+        {
+          "id": "A59",
+          "initial": 0
+        },
+        {
+          "id": "A60",
+          "initial": 0
+        },
+        {
+          "id": "A61",
+          "initial": 0
+        },
+        {
+          "id": "A62",
+          "initial": 0
+        },
+        {
+          "id": "A63",
+          "initial": 0
+        },
+        {
+          "id": "A64",
+          "initial": 0
+        },
+        {
+          "id": "A65",
+          "initial": 0
+        },
+        {
+          "id": "A66",
+          "initial": 0
+        },
+        {
+          "id": "A67",
+          "initial": 0
+        },
+        {
+          "id": "A68",
+          "initial": 0
+        },
+        {
+          "id": "A69",
+          "initial": 0
+        },
+        {
+          "id": "A70",
+          "initial": 0
+        },
+        {
+          "id": "A71",
+          "initial": 0
+        },
+        {
+          "id": "A72",
+          "initial": 0
+        },
+        {
+          "id": "A73",
+          "initial": 0
+        },
+        {
+          "id": "A74",
+          "initial": 0
+        },
+        {
+          "id": "A75",
+          "initial": 0
+        },
+        {
+          "id": "A76",
+          "initial": 0
+        },
+        {
+          "id": "A77",
+          "initial": 0
+        },
+        {
+          "id": "A78",
+          "initial": 0
+        },
+        {
+          "id": "A79",
+          "initial": 0
+        },
+        {
+          "id": "A80",
+          "initial": 0
+        },
+        {
+          "id": "A81",
+          "initial": 0
+        },
+        {
+          "id": "A82",
+          "initial": 0
+        },
+        {
+          "id": "A83",
+          "initial": 0
+        },
+        {
+          "id": "A84",
+          "initial": 0
+        },
+        {
+          "id": "A85",
+          "initial": 0
+        },
+        {
+          "id": "A86",
+          "initial": 0
+        },
+        {
+          "id": "A87",
+          "initial": 0
+        },
+        {
+          "id": "A88",
+          "initial": 0
+        },
+        {
+          "id": "A89",
+          "initial": 0
+        },
+        {
+          "id": "A90",
+          "initial": 0
+        },
+        {
+          "id": "A91",
+          "initial": 0
+        },
+        {
+          "id": "A92",
+          "initial": 0
+        },
+        {
+          "id": "A93",
+          "initial": 0
+        },
+        {
+          "id": "A94",
+          "initial": 0
+        },
+        {
+          "id": "A95",
+          "initial": 0
+        },
+        {
+          "id": "A96",
+          "initial": 0
+        },
+        {
+          "id": "A97",
+          "initial": 0
+        },
+        {
+          "id": "A98",
+          "initial": 0
+        },
+        {
+          "id": "A99",
+          "initial": 0
+        },
+        {
+          "id": "B0",
+          "initial": 0
+        },
+        {
+          "id": "B1",
+          "initial": 0
+        },
+        {
+          "id": "B2",
+          "initial": 0
+        },
+        {
+          "id": "B3",
+          "initial": 0
+        },
+        {
+          "id": "B4",
+          "initial": 0
+        },
+        {
+          "id": "B5",
+          "initial": 0
+        },
+        {
+          "id": "B6",
+          "initial": 0
+        },
+        {
+          "id": "B7",
+          "initial": 0
+        },
+        {
+          "id": "B8",
+          "initial": 0
+        },
+        {
+          "id": "B9",
+          "initial": 0
+        },
+        {
+          "id": "B10",
+          "initial": 0
+        },
+        {
+          "id": "B11",
+          "initial": 0
+        },
+        {
+          "id": "B12",
+          "initial": 0
+        },
+        {
+          "id": "B13",
+          "initial": 0
+        },
+        {
+          "id": "B14",
+          "initial": 0
+        },
+        {
+          "id": "B15",
+          "initial": 0
+        },
+        {
+          "id": "B16",
+          "initial": 0
+        },
+        {
+          "id": "B17",
+          "initial": 0
+        },
+        {
+          "id": "B18",
+          "initial": 0
+        },
+        {
+          "id": "B19",
+          "initial": 0
+        },
+        {
+          "id": "B20",
+          "initial": 0
+        },
+        {
+          "id": "B21",
+          "initial": 0
+        },
+        {
+          "id": "B22",
+          "initial": 0
+        },
+        {
+          "id": "B23",
+          "initial": 0
+        },
+        {
+          "id": "B24",
+          "initial": 0
+        },
+        {
+          "id": "B25",
+          "initial": 0
+        },
+        {
+          "id": "B26",
+          "initial": 0
+        },
+        {
+          "id": "B27",
+          "initial": 0
+        },
+        {
+          "id": "B28",
+          "initial": 0
+        },
+        {
+          "id": "B29",
+          "initial": 0
+        },
+        {
+          "id": "B30",
+          "initial": 0
+        },
+        {
+          "id": "B31",
+          "initial": 0
+        },
+        {
+          "id": "B32",
+          "initial": 0
+        },
+        {
+          "id": "B33",
+          "initial": 0
+        },
+        {
+          "id": "B34",
+          "initial": 0
+        },
+        {
+          "id": "B35",
+          "initial": 0
+        },
+        {
+          "id": "B36",
+          "initial": 0
+        },
+        {
+          "id": "B37",
+          "initial": 0
+        },
+        {
+          "id": "B38",
+          "initial": 0
+        },
+        {
+          "id": "B39",
+          "initial": 0
+        },
+        {
+          "id": "B40",
+          "initial": 0
+        },
+        {
+          "id": "B41",
+          "initial": 0
+        },
+        {
+          "id": "B42",
+          "initial": 0
+        },
+        {
+          "id": "B43",
+          "initial": 0
+        },
+        {
+          "id": "B44",
+          "initial": 0
+        },
+        {
+          "id": "B45",
+          "initial": 0
+        },
+        {
+          "id": "B46",
+          "initial": 0
+        },
+        {
+          "id": "B47",
+          "initial": 0
+        },
+        {
+          "id": "B48",
+          "initial": 0
+        },
+        {
+          "id": "B49",
+          "initial": 0
+        },
+        {
+          "id": "B50",
+          "initial": 0
+        },
+        {
+          "id": "B51",
+          "initial": 0
+        },
+        {
+          "id": "B52",
+          "initial": 0
+        },
+        {
+          "id": "B53",
+          "initial": 0
+        },
+        {
+          "id": "B54",
+          "initial": 0
+        },
+        {
+          "id": "B55",
+          "initial": 0
+        },
+        {
+          "id": "B56",
+          "initial": 0
+        },
+        {
+          "id": "B57",
+          "initial": 0
+        },
+        {
+          "id": "B58",
+          "initial": 0
+        },
+        {
+          "id": "B59",
+          "initial": 0
+        },
+        {
+          "id": "B60",
+          "initial": 0
+        },
+        {
+          "id": "B61",
+          "initial": 0
+        },
+        {
+          "id": "B62",
+          "initial": 0
+        },
+        {
+          "id": "B63",
+          "initial": 0
+        },
+        {
+          "id": "B64",
+          "initial": 0
+        },
+        {
+          "id": "B65",
+          "initial": 0
+        },
+        {
+          "id": "B66",
+          "initial": 0
+        },
+        {
+          "id": "B67",
+          "initial": 0
+        },
+        {
+          "id": "B68",
+          "initial": 0
+        },
+        {
+          "id": "B69",
+          "initial": 0
+        },
+        {
+          "id": "B70",
+          "initial": 0
+        },
+        {
+          "id": "B71",
+          "initial": 0
+        },
+        {
+          "id": "B72",
+          "initial": 0
+        },
+        {
+          "id": "B73",
+          "initial": 0
+        },
+        {
+          "id": "B74",
+          "initial": 0
+        },
+        {
+          "id": "B75",
+          "initial": 0
+        },
+        {
+          "id": "B76",
+          "initial": 0
+        },
+        {
+          "id": "B77",
+          "initial": 0
+        },
+        {
+          "id": "B78",
+          "initial": 0
+        },
+        {
+          "id": "B79",
+          "initial": 0
+        },
+        {
+          "id": "B80",
+          "initial": 0
+        },
+        {
+          "id": "B81",
+          "initial": 0
+        },
+        {
+          "id": "B82",
+          "initial": 0
+        },
+        {
+          "id": "B83",
+          "initial": 0
+        },
+        {
+          "id": "B84",
+          "initial": 0
+        },
+        {
+          "id": "B85",
+          "initial": 0
+        },
+        {
+          "id": "B86",
+          "initial": 0
+        },
+        {
+          "id": "B87",
+          "initial": 0
+        },
+        {
+          "id": "B88",
+          "initial": 0
+        },
+        {
+          "id": "B89",
+          "initial": 0
+        },
+        {
+          "id": "B90",
+          "initial": 0
+        },
+        {
+          "id": "B91",
+          "initial": 0
+        },
+        {
+          "id": "B92",
+          "initial": 0
+        },
+        {
+          "id": "B93",
+          "initial": 0
+        },
+        {
+          "id": "B94",
+          "initial": 0
+        },
+        {
+          "id": "B95",
+          "initial": 0
+        },
+        {
+          "id": "B96",
+          "initial": 0
+        },
+        {
+          "id": "B97",
+          "initial": 0
+        },
+        {
+          "id": "B98",
+          "initial": 0
+        },
+        {
+          "id": "B99",
+          "initial": 0
+        },
+        {
+          "id": "toodiverged",
+          "initial": 0
+        }
+      ],
+      "assignments": [
+        {
+          "id": "Asum",
+          "rhs": {
+            "expr": [
+              "Add",
+              "A0",
+              "A1",
+              "A2",
+              "A3",
+              "A4",
+              "A5",
+              "A6",
+              "A7",
+              "A8",
+              "A9",
+              "A10",
+              "A11",
+              "A12",
+              "A13",
+              "A14",
+              "A15",
+              "A16",
+              "A17",
+              "A18",
+              "A19",
+              "A20",
+              "A21",
+              "A22",
+              "A23",
+              "A24",
+              "A25",
+              "A26",
+              "A27",
+              "A28",
+              "A29",
+              "A30",
+              "A31",
+              "A32",
+              "A33",
+              "A34",
+              "A35",
+              "A36",
+              "A37",
+              "A38",
+              "A39",
+              "A40",
+              "A41",
+              "A42",
+              "A43",
+              "A44",
+              "A45",
+              "A46",
+              "A47",
+              "A48",
+              "A49",
+              "A50",
+              "A51",
+              "A52",
+              "A53",
+              "A54",
+              "A55",
+              "A56",
+              "A57",
+              "A58",
+              "A59",
+              "A60",
+              "A61",
+              "A62",
+              "A63",
+              "A64",
+              "A65",
+              "A66",
+              "A67",
+              "A68",
+              "A69",
+              "A70",
+              "A71",
+              "A72",
+              "A73",
+              "A74",
+              "A75",
+              "A76",
+              "A77",
+              "A78",
+              "A79",
+              "A80",
+              "A81",
+              "A82",
+              "A83",
+              "A84",
+              "A85",
+              "A86",
+              "A87",
+              "A88",
+              "A89",
+              "A90",
+              "A91",
+              "A92",
+              "A93",
+              "A94",
+              "A95",
+              "A96",
+              "A97",
+              "A98",
+              "A99"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "Bsum",
+          "rhs": {
+            "expr": [
+              "Add",
+              "B0",
+              "B1",
+              "B2",
+              "B3",
+              "B4",
+              "B5",
+              "B6",
+              "B7",
+              "B8",
+              "B9",
+              "B10",
+              "B11",
+              "B12",
+              "B13",
+              "B14",
+              "B15",
+              "B16",
+              "B17",
+              "B18",
+              "B19",
+              "B20",
+              "B21",
+              "B22",
+              "B23",
+              "B24",
+              "B25",
+              "B26",
+              "B27",
+              "B28",
+              "B29",
+              "B30",
+              "B31",
+              "B32",
+              "B33",
+              "B34",
+              "B35",
+              "B36",
+              "B37",
+              "B38",
+              "B39",
+              "B40",
+              "B41",
+              "B42",
+              "B43",
+              "B44",
+              "B45",
+              "B46",
+              "B47",
+              "B48",
+              "B49",
+              "B50",
+              "B51",
+              "B52",
+              "B53",
+              "B54",
+              "B55",
+              "B56",
+              "B57",
+              "B58",
+              "B59",
+              "B60",
+              "B61",
+              "B62",
+              "B63",
+              "B64",
+              "B65",
+              "B66",
+              "B67",
+              "B68",
+              "B69",
+              "B70",
+              "B71",
+              "B72",
+              "B73",
+              "B74",
+              "B75",
+              "B76",
+              "B77",
+              "B78",
+              "B79",
+              "B80",
+              "B81",
+              "B82",
+              "B83",
+              "B84",
+              "B85",
+              "B86",
+              "B87",
+              "B88",
+              "B89",
+              "B90",
+              "B91",
+              "B92",
+              "B93",
+              "B94",
+              "B95",
+              "B96",
+              "B97",
+              "B98",
+              "B99"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "Allsum",
+          "rhs": {
+            "expr": [
+              "Add",
+              "Asum",
+              "Bsum"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A0",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B0"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A1",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B1"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A2",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B2"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A3",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B3"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E4",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A4",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B4"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E5",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A5",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B5"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E6",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A6",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B6"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E7",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A7",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B7"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E8",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A8",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B8"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E9",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A9",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B9"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E10",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A10",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B10"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E11",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A11",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B11"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E12",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A12",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B12"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E13",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A13",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B13"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E14",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A14",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B14"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E15",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A15",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B15"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E16",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A16",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B16"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E17",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A17",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B17"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E18",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A18",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B18"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E19",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A19",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B19"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E20",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A20",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B20"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E21",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A21",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B21"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E22",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A22",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B22"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E23",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A23",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B23"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E24",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A24",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B24"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E25",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A25",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B25"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E26",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A26",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B26"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E27",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A27",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B27"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E28",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A28",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B28"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E29",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A29",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B29"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E30",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A30",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B30"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E31",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A31",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B31"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E32",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A32",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B32"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E33",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A33",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B33"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E34",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A34",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B34"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E35",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A35",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B35"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E36",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A36",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B36"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E37",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A37",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B37"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E38",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A38",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B38"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E39",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A39",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B39"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E40",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A40",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B40"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E41",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A41",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B41"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E42",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A42",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B42"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E43",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A43",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B43"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E44",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A44",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B44"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E45",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A45",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B45"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E46",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A46",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B46"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E47",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A47",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B47"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E48",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A48",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B48"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E49",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A49",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B49"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E50",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A50",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B50"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E51",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A51",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B51"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E52",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A52",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B52"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E53",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A53",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B53"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E54",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A54",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B54"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E55",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A55",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B55"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E56",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A56",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B56"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E57",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A57",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B57"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E58",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A58",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B58"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E59",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A59",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B59"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E60",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A60",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B60"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E61",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A61",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B61"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E62",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A62",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B62"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E63",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A63",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B63"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E64",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A64",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B64"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E65",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A65",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B65"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E66",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A66",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B66"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E67",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A67",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B67"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E68",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A68",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B68"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E69",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A69",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B69"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E70",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A70",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B70"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E71",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A71",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B71"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E72",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A72",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B72"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E73",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A73",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B73"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E74",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A74",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B74"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E75",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A75",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B75"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E76",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A76",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B76"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E77",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A77",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B77"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E78",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A78",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B78"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E79",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A79",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B79"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E80",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A80",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B80"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E81",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A81",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B81"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E82",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A82",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B82"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E83",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A83",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B83"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E84",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A84",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B84"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E85",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A85",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B85"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E86",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A86",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B86"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E87",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A87",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B87"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E88",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A88",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B88"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E89",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A89",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B89"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E90",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A90",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B90"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E91",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A91",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B91"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E92",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A92",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B92"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E93",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A93",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B93"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E94",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A94",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B94"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E95",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A95",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B95"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E96",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A96",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B96"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E97",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A97",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B97"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E98",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A98",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B98"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E99",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "A99",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "B99"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B0",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A0"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B1",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A1"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B2",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A2"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B3",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A3"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb4",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B4",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A4"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb5",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B5",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A5"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb6",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B6",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A6"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb7",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B7",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A7"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb8",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B8",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A8"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb9",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B9",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A9"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb10",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B10",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A10"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb11",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B11",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A11"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb12",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B12",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A12"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb13",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B13",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A13"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb14",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B14",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A14"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb15",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B15",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A15"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb16",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B16",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A16"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb17",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B17",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A17"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb18",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B18",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A18"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb19",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B19",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A19"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb20",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B20",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A20"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb21",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B21",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A21"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb22",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B22",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A22"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb23",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B23",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A23"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb24",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B24",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A24"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb25",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B25",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A25"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb26",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B26",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A26"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb27",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B27",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A27"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb28",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B28",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A28"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb29",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B29",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A29"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb30",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B30",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A30"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb31",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B31",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A31"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb32",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B32",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A32"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb33",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B33",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A33"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb34",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B34",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A34"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb35",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B35",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A35"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb36",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B36",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A36"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb37",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B37",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A37"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb38",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B38",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A38"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb39",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B39",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A39"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb40",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B40",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A40"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb41",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B41",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A41"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb42",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B42",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A42"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb43",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B43",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A43"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb44",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B44",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A44"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb45",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B45",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A45"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb46",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B46",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A46"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb47",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B47",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A47"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb48",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B48",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A48"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb49",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B49",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A49"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb50",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B50",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A50"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb51",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B51",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A51"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb52",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B52",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A52"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb53",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B53",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A53"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb54",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B54",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A54"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb55",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B55",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A55"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb56",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B56",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A56"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb57",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B57",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A57"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb58",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B58",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A58"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb59",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B59",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A59"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb60",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B60",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A60"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb61",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B61",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A61"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb62",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B62",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A62"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb63",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B63",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A63"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb64",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B64",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A64"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb65",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B65",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A65"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb66",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B66",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A66"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb67",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B67",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A67"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb68",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B68",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A68"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb69",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B69",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A69"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb70",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B70",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A70"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb71",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B71",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A71"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb72",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B72",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A72"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb73",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B73",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A73"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb74",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B74",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A74"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb75",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B75",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A75"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb76",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B76",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A76"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb77",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B77",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A77"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb78",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B78",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A78"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb79",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B79",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A79"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb80",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B80",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A80"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb81",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B81",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A81"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb82",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B82",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A82"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb83",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B83",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A83"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb84",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B84",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A84"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb85",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B85",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A85"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb86",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B86",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A86"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb87",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B87",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A87"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb88",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B88",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A88"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb89",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B89",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A89"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb90",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B90",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A90"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb91",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B91",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A91"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb92",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B92",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A92"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb93",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B93",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A93"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb94",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B94",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A94"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb95",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B95",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A95"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb96",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B96",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A96"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb97",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B97",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A97"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb98",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B98",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A98"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Eb99",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "And",
+                [
+                  "Greater",
+                  "trig",
+                  0
+                ],
+                [
+                  "Less",
+                  "B99",
+                  1
+                ]
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "A99"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sbml__E0_1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                [
+                  "Abs",
+                  [
+                    "Add",
+                    "Asum",
+                    [
+                      "Negate",
+                      "Bsum"
+                    ]
+                  ]
+                ],
+                100
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 1,
+                "format": "math-json"
+              },
+              "state": "toodiverged"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

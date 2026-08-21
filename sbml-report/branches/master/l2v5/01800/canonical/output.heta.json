@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:34:56.023Z",
+    "created": "2026-08-21T09:44:43.883Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "c48e0f4443e8d87724d85d84de8b50ba6604767930a4d4288e6ccfcecbe9f6c1",
+    "hashSum": "cae48d525b19476dd66a9f042d840308bb5806bacd01c5e6ad3b8d9d84736b44",
     "hashAlgorithm": "sha256"
   },
   {
@@ -34,11 +34,17 @@
       }
     ],
     "assignments": {
-      "ode_": "S1_stoich__J1_local * 2"
+      "ode_": "local_J1_S1_stoich * 2"
     },
     "class": "Reaction",
     "id": "J1",
     "reversible": true
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "local_J1_S1_stoich",
+    "num": 0.1
   },
   {
     "action": "upsert",
@@ -49,12 +55,6 @@
     "compartment": "C",
     "id": "S1",
     "isAmount": true
-  },
-  {
-    "action": "upsert",
-    "class": "Const",
-    "id": "S1_stoich__J1_local",
-    "num": 0.1
   },
   {
     "action": "upsert",

@@ -5,18 +5,18 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:14:06.813Z",
+  "created": "2026-08-21T09:32:23.693Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "k__reaction1_local",
+          "id": "local_reaction1_k",
           "value": 750
         },
         {
-          "id": "k__reaction2_local",
+          "id": "local_reaction2_k",
           "value": 250
         }
       ],
@@ -168,7 +168,7 @@
             "expr": [
               "Multiply",
               "C",
-              "k__reaction1_local",
+              "local_reaction1_k",
               "S1",
               "S2"
             ],
@@ -206,7 +206,7 @@
             "expr": [
               "Multiply",
               "C",
-              "k__reaction2_local",
+              "local_reaction2_k",
               "S3",
               "S4"
             ],

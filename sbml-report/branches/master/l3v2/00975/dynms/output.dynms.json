@@ -1,0 +1,165 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-08-21T09:26:31.588Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 1
+        },
+        {
+          "id": "k2",
+          "value": 3
+        },
+        {
+          "id": "k3",
+          "value": 1.4
+        },
+        {
+          "id": "S1conv",
+          "value": 3
+        },
+        {
+          "id": "modelconv",
+          "value": 4
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              "sbml__J0_1",
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  2,
+                  "sbml__J1_1"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0.001,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                3,
+                "sbml__J1_1"
+              ],
+              [
+                "Negate",
+                "sbml__J2_1"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "default_compartment",
+          "initial": 1
+        }
+      ],
+      "assignments": [
+        {
+          "id": "sbml__J0_1",
+          "rhs": {
+            "expr": "k1",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "default_compartment"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "default_compartment"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "sbml__J1_1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Multiply",
+                "k2",
+                "S1"
+              ],
+              "S2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "sbml__J2_1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k3",
+              "S2"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

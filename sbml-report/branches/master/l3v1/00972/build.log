@@ -5,11 +5,9 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/00972/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00972/00972-sbml-l3v1.xml"...
-[error]	_E0 id should be string of type ID, but have "_E0"
-	- {"id":"_E0","aux":{},"class":"DSwitcher","trigger":" X  >=  5 "}
 [error]	Xref component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: a5df81ade1f1d2395261867d23622197fc836ba7cb6c0afbf49ed6c570cb8616
-[info]	Setting references in elements, total length 97
+[info]	Platform hash: 1568b7a23ac5f878fa3c276c0c62f37bc7d1fa13b21a52dbb7571d273da149b4
+[info]	Setting references in elements, total length 98
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

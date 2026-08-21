@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T16:59:04.285Z",
+  "created": "2026-08-21T09:23:23.270Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -44,7 +44,7 @@
           "initial": 0,
           "title": "S3",
           "derivative": {
-            "expr": "S3_proc",
+            "expr": "rate_S3",
             "format": "math-json"
           }
         }
@@ -70,7 +70,7 @@
           "title": "reaction1"
         },
         {
-          "id": "S3_proc",
+          "id": "rate_S3",
           "rhs": {
             "expr": 0.65,
             "format": "math-json"

@@ -5,14 +5,14 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:29:34.745Z",
+  "created": "2026-08-21T09:41:33.281Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "S1__reaction2_local",
+          "id": "local_reaction2_S1",
           "value": 1
         },
         {
@@ -144,7 +144,7 @@
             "expr": [
               "Multiply",
               "C",
-              "S1__reaction2_local",
+              "local_reaction2_S1",
               "S2"
             ],
             "format": "math-json"

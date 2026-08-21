@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:16:38.958Z",
+    "created": "2026-08-21T09:33:53.468Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "4b0f3491247e0bdd766d7dae9cc87bd52fdcec41922785dfda7aa23335fa34d5",
+    "hashSum": "62a17e41fad605ccb0f77f642ac178eddf442b3ad512f3c546fbce43d3bb408d",
     "hashAlgorithm": "sha256"
   },
   {
@@ -50,7 +50,7 @@
   {
     "action": "upsert",
     "class": "Const",
-    "id": "k__reaction1_local",
+    "id": "local_reaction1_k",
     "num": 5
   },
   {
@@ -66,7 +66,7 @@
       }
     ],
     "assignments": {
-      "ode_": "C * k__reaction1_local * S1"
+      "ode_": "C * local_reaction1_k * S1"
     },
     "class": "Reaction",
     "id": "reaction1",

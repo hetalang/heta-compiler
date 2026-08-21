@@ -6,9 +6,9 @@ No declaration file, running with defaults...
 [info]	Reading module of type "heta" from file "results/l3v2/01103/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01103/01103-sbml-l3v2.xml"...
 [error]	Xref component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 1e33b8561d02e562ad1c9550348412edf4875393bb63547aac857fbccf68c0d7
+[info]	Platform hash: 5c8d270f4343b7128063497706fd236d2b01d87a1c2b083d8297cb28fc314a56
 [info]	Setting references in elements, total length 98
-[error]	Xref_proc Property "actors[0].target" has lost reference "Xref".
+[error]	rate_Xref Property "actors[0].target" has lost reference "Xref".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

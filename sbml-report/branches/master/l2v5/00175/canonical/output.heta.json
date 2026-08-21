@@ -5,25 +5,16 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:26:00.496Z",
+    "created": "2026-08-21T09:39:25.716Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "073ba5b2c9b4e72d95fd89d0e433e2b097b4bf14b96cf38bc2a026b71744d297",
+    "hashSum": "b118ee601f65abe48941d74445b0d458a04de22de2d97d8284b37d80ce51c47c",
     "hashAlgorithm": "sha256"
   },
   {
     "action": "setNS",
     "space": "nameless",
     "type": "concrete"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0"
-    },
-    "class": "Record",
-    "id": "S1",
-    "title": "S1"
   },
   {
     "action": "upsert",
@@ -40,7 +31,16 @@
       "metaid": "rule1"
     },
     "class": "Process",
-    "id": "S1_proc"
+    "id": "rate_S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S1",
+    "title": "S1"
   },
   {
     "action": "upsert",

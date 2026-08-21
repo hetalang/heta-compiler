@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:34:16.846Z",
+  "created": "2026-08-21T09:44:20.621Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -16,7 +16,7 @@
           "id": "P2",
           "initial": 0,
           "derivative": {
-            "expr": "P2_proc",
+            "expr": "rate_P2",
             "format": "math-json"
           }
         },
@@ -24,7 +24,7 @@
           "id": "P3",
           "initial": 0,
           "derivative": {
-            "expr": "P3_proc",
+            "expr": "rate_P3",
             "format": "math-json"
           }
         },
@@ -32,7 +32,7 @@
           "id": "P4",
           "initial": 0,
           "derivative": {
-            "expr": "P4_proc",
+            "expr": "rate_P4",
             "format": "math-json"
           }
         },
@@ -40,7 +40,7 @@
           "id": "P5",
           "initial": 0,
           "derivative": {
-            "expr": "P5_proc",
+            "expr": "rate_P5",
             "format": "math-json"
           }
         },
@@ -48,7 +48,7 @@
           "id": "P6",
           "initial": 0,
           "derivative": {
-            "expr": "P6_proc",
+            "expr": "rate_P6",
             "format": "math-json"
           }
         },
@@ -56,7 +56,7 @@
           "id": "P7",
           "initial": 0,
           "derivative": {
-            "expr": "P7_proc",
+            "expr": "rate_P7",
             "format": "math-json"
           }
         },
@@ -64,7 +64,7 @@
           "id": "P8",
           "initial": 0,
           "derivative": {
-            "expr": "P8_proc",
+            "expr": "rate_P8",
             "format": "math-json"
           }
         },
@@ -72,7 +72,7 @@
           "id": "P9",
           "initial": 0,
           "derivative": {
-            "expr": "P9_proc",
+            "expr": "rate_P9",
             "format": "math-json"
           }
         },
@@ -80,7 +80,7 @@
           "id": "P10",
           "initial": 0,
           "derivative": {
-            "expr": "P10_proc",
+            "expr": "rate_P10",
             "format": "math-json"
           }
         },
@@ -88,7 +88,7 @@
           "id": "P11",
           "initial": 0,
           "derivative": {
-            "expr": "P11_proc",
+            "expr": "rate_P11",
             "format": "math-json"
           }
         },
@@ -96,7 +96,7 @@
           "id": "P12",
           "initial": 0,
           "derivative": {
-            "expr": "P12_proc",
+            "expr": "rate_P12",
             "format": "math-json"
           }
         },
@@ -104,7 +104,7 @@
           "id": "P13",
           "initial": 0,
           "derivative": {
-            "expr": "P13_proc",
+            "expr": "rate_P13",
             "format": "math-json"
           }
         },
@@ -112,7 +112,7 @@
           "id": "P14",
           "initial": 0,
           "derivative": {
-            "expr": "P14_proc",
+            "expr": "rate_P14",
             "format": "math-json"
           }
         },
@@ -120,7 +120,7 @@
           "id": "P15",
           "initial": 0,
           "derivative": {
-            "expr": "P15_proc",
+            "expr": "rate_P15",
             "format": "math-json"
           }
         },
@@ -128,7 +128,7 @@
           "id": "P16",
           "initial": 0,
           "derivative": {
-            "expr": "P16_proc",
+            "expr": "rate_P16",
             "format": "math-json"
           }
         },
@@ -136,7 +136,7 @@
           "id": "P17",
           "initial": 0,
           "derivative": {
-            "expr": "P17_proc",
+            "expr": "rate_P17",
             "format": "math-json"
           }
         },
@@ -144,7 +144,7 @@
           "id": "P18",
           "initial": 0,
           "derivative": {
-            "expr": "P18_proc",
+            "expr": "rate_P18",
             "format": "math-json"
           }
         },
@@ -152,7 +152,7 @@
           "id": "P19",
           "initial": 0,
           "derivative": {
-            "expr": "P19_proc",
+            "expr": "rate_P19",
             "format": "math-json"
           }
         },
@@ -160,7 +160,7 @@
           "id": "P20",
           "initial": 0,
           "derivative": {
-            "expr": "P20_proc",
+            "expr": "rate_P20",
             "format": "math-json"
           }
         },
@@ -168,7 +168,7 @@
           "id": "P21",
           "initial": 0,
           "derivative": {
-            "expr": "P21_proc",
+            "expr": "rate_P21",
             "format": "math-json"
           }
         },
@@ -176,7 +176,7 @@
           "id": "P22",
           "initial": 0,
           "derivative": {
-            "expr": "P22_proc",
+            "expr": "rate_P22",
             "format": "math-json"
           }
         },
@@ -184,7 +184,7 @@
           "id": "P23",
           "initial": 0,
           "derivative": {
-            "expr": "P23_proc",
+            "expr": "rate_P23",
             "format": "math-json"
           }
         },
@@ -192,7 +192,7 @@
           "id": "P24",
           "initial": 0,
           "derivative": {
-            "expr": "P24_proc",
+            "expr": "rate_P24",
             "format": "math-json"
           }
         },
@@ -200,7 +200,7 @@
           "id": "P25",
           "initial": 0,
           "derivative": {
-            "expr": "P25_proc",
+            "expr": "rate_P25",
             "format": "math-json"
           }
         },
@@ -208,7 +208,7 @@
           "id": "P26",
           "initial": 0,
           "derivative": {
-            "expr": "P26_proc",
+            "expr": "rate_P26",
             "format": "math-json"
           }
         },
@@ -216,7 +216,7 @@
           "id": "P27",
           "initial": 0,
           "derivative": {
-            "expr": "P27_proc",
+            "expr": "rate_P27",
             "format": "math-json"
           }
         },
@@ -224,7 +224,7 @@
           "id": "P28",
           "initial": 0,
           "derivative": {
-            "expr": "P28_proc",
+            "expr": "rate_P28",
             "format": "math-json"
           }
         },
@@ -232,7 +232,7 @@
           "id": "P29",
           "initial": 0,
           "derivative": {
-            "expr": "P29_proc",
+            "expr": "rate_P29",
             "format": "math-json"
           }
         },
@@ -240,7 +240,7 @@
           "id": "P30",
           "initial": 0,
           "derivative": {
-            "expr": "P30_proc",
+            "expr": "rate_P30",
             "format": "math-json"
           }
         },
@@ -248,7 +248,7 @@
           "id": "P31",
           "initial": 0,
           "derivative": {
-            "expr": "P31_proc",
+            "expr": "rate_P31",
             "format": "math-json"
           }
         },
@@ -256,7 +256,7 @@
           "id": "P32",
           "initial": 0,
           "derivative": {
-            "expr": "P32_proc",
+            "expr": "rate_P32",
             "format": "math-json"
           }
         },
@@ -264,7 +264,7 @@
           "id": "P33",
           "initial": 0,
           "derivative": {
-            "expr": "P33_proc",
+            "expr": "rate_P33",
             "format": "math-json"
           }
         },
@@ -272,7 +272,7 @@
           "id": "P34",
           "initial": 0,
           "derivative": {
-            "expr": "P34_proc",
+            "expr": "rate_P34",
             "format": "math-json"
           }
         },
@@ -280,7 +280,7 @@
           "id": "P35",
           "initial": 0,
           "derivative": {
-            "expr": "P35_proc",
+            "expr": "rate_P35",
             "format": "math-json"
           }
         },
@@ -288,7 +288,7 @@
           "id": "P36",
           "initial": 0,
           "derivative": {
-            "expr": "P36_proc",
+            "expr": "rate_P36",
             "format": "math-json"
           }
         },
@@ -296,7 +296,7 @@
           "id": "P37",
           "initial": 0,
           "derivative": {
-            "expr": "P37_proc",
+            "expr": "rate_P37",
             "format": "math-json"
           }
         },
@@ -304,7 +304,7 @@
           "id": "P38",
           "initial": 0,
           "derivative": {
-            "expr": "P38_proc",
+            "expr": "rate_P38",
             "format": "math-json"
           }
         },
@@ -312,7 +312,7 @@
           "id": "P39",
           "initial": 0,
           "derivative": {
-            "expr": "P39_proc",
+            "expr": "rate_P39",
             "format": "math-json"
           }
         }
@@ -320,7 +320,7 @@
       "static": [],
       "assignments": [
         {
-          "id": "P2_proc",
+          "id": "rate_P2",
           "rhs": {
             "expr": [
               "Abs",
@@ -330,7 +330,7 @@
           }
         },
         {
-          "id": "P3_proc",
+          "id": "rate_P3",
           "rhs": {
             "expr": [
               "Abs",
@@ -340,7 +340,7 @@
           }
         },
         {
-          "id": "P4_proc",
+          "id": "rate_P4",
           "rhs": {
             "expr": [
               "Arccos",
@@ -350,7 +350,7 @@
           }
         },
         {
-          "id": "P5_proc",
+          "id": "rate_P5",
           "rhs": {
             "expr": [
               "Arccos",
@@ -360,7 +360,7 @@
           }
         },
         {
-          "id": "P6_proc",
+          "id": "rate_P6",
           "rhs": {
             "expr": [
               "Arcsin",
@@ -370,7 +370,7 @@
           }
         },
         {
-          "id": "P7_proc",
+          "id": "rate_P7",
           "rhs": {
             "expr": [
               "Arcsin",
@@ -380,7 +380,7 @@
           }
         },
         {
-          "id": "P8_proc",
+          "id": "rate_P8",
           "rhs": {
             "expr": [
               "Arctan",
@@ -390,7 +390,7 @@
           }
         },
         {
-          "id": "P9_proc",
+          "id": "rate_P9",
           "rhs": {
             "expr": [
               "Arctan",
@@ -400,7 +400,7 @@
           }
         },
         {
-          "id": "P10_proc",
+          "id": "rate_P10",
           "rhs": {
             "expr": [
               "Ceil",
@@ -410,7 +410,7 @@
           }
         },
         {
-          "id": "P11_proc",
+          "id": "rate_P11",
           "rhs": {
             "expr": [
               "Ceil",
@@ -420,7 +420,7 @@
           }
         },
         {
-          "id": "P12_proc",
+          "id": "rate_P12",
           "rhs": {
             "expr": [
               "Ceil",
@@ -430,7 +430,7 @@
           }
         },
         {
-          "id": "P13_proc",
+          "id": "rate_P13",
           "rhs": {
             "expr": [
               "Cos",
@@ -440,7 +440,7 @@
           }
         },
         {
-          "id": "P14_proc",
+          "id": "rate_P14",
           "rhs": {
             "expr": [
               "Cos",
@@ -450,7 +450,7 @@
           }
         },
         {
-          "id": "P15_proc",
+          "id": "rate_P15",
           "rhs": {
             "expr": [
               "Exp",
@@ -460,7 +460,7 @@
           }
         },
         {
-          "id": "P16_proc",
+          "id": "rate_P16",
           "rhs": {
             "expr": [
               "Exp",
@@ -470,7 +470,7 @@
           }
         },
         {
-          "id": "P17_proc",
+          "id": "rate_P17",
           "rhs": {
             "expr": [
               "Exp",
@@ -480,7 +480,7 @@
           }
         },
         {
-          "id": "P18_proc",
+          "id": "rate_P18",
           "rhs": {
             "expr": [
               "Floor",
@@ -490,7 +490,7 @@
           }
         },
         {
-          "id": "P19_proc",
+          "id": "rate_P19",
           "rhs": {
             "expr": [
               "Floor",
@@ -500,7 +500,7 @@
           }
         },
         {
-          "id": "P20_proc",
+          "id": "rate_P20",
           "rhs": {
             "expr": [
               "Ln",
@@ -510,7 +510,7 @@
           }
         },
         {
-          "id": "P21_proc",
+          "id": "rate_P21",
           "rhs": {
             "expr": [
               "Ln",
@@ -520,7 +520,7 @@
           }
         },
         {
-          "id": "P22_proc",
+          "id": "rate_P22",
           "rhs": {
             "expr": [
               "Log",
@@ -531,7 +531,7 @@
           }
         },
         {
-          "id": "P23_proc",
+          "id": "rate_P23",
           "rhs": {
             "expr": [
               "Log",
@@ -542,7 +542,7 @@
           }
         },
         {
-          "id": "P24_proc",
+          "id": "rate_P24",
           "rhs": {
             "expr": [
               "Power",
@@ -553,7 +553,7 @@
           }
         },
         {
-          "id": "P25_proc",
+          "id": "rate_P25",
           "rhs": {
             "expr": [
               "Power",
@@ -564,7 +564,7 @@
           }
         },
         {
-          "id": "P26_proc",
+          "id": "rate_P26",
           "rhs": {
             "expr": [
               "Power",
@@ -575,7 +575,7 @@
           }
         },
         {
-          "id": "P27_proc",
+          "id": "rate_P27",
           "rhs": {
             "expr": [
               "Power",
@@ -586,7 +586,7 @@
           }
         },
         {
-          "id": "P28_proc",
+          "id": "rate_P28",
           "rhs": {
             "expr": [
               "Power",
@@ -597,7 +597,7 @@
           }
         },
         {
-          "id": "P29_proc",
+          "id": "rate_P29",
           "rhs": {
             "expr": [
               "Power",
@@ -612,7 +612,7 @@
           }
         },
         {
-          "id": "P30_proc",
+          "id": "rate_P30",
           "rhs": {
             "expr": [
               "Power",
@@ -627,7 +627,7 @@
           }
         },
         {
-          "id": "P31_proc",
+          "id": "rate_P31",
           "rhs": {
             "expr": [
               "Sin",
@@ -637,7 +637,7 @@
           }
         },
         {
-          "id": "P32_proc",
+          "id": "rate_P32",
           "rhs": {
             "expr": [
               "Sin",
@@ -647,7 +647,7 @@
           }
         },
         {
-          "id": "P33_proc",
+          "id": "rate_P33",
           "rhs": {
             "expr": [
               "Sin",
@@ -657,7 +657,7 @@
           }
         },
         {
-          "id": "P34_proc",
+          "id": "rate_P34",
           "rhs": {
             "expr": [
               "Tan",
@@ -667,7 +667,7 @@
           }
         },
         {
-          "id": "P35_proc",
+          "id": "rate_P35",
           "rhs": {
             "expr": [
               "Tan",
@@ -677,7 +677,7 @@
           }
         },
         {
-          "id": "P36_proc",
+          "id": "rate_P36",
           "rhs": {
             "expr": [
               "Tan",
@@ -687,7 +687,7 @@
           }
         },
         {
-          "id": "P37_proc",
+          "id": "rate_P37",
           "rhs": {
             "expr": [
               "Divide",
@@ -723,7 +723,7 @@
           }
         },
         {
-          "id": "P38_proc",
+          "id": "rate_P38",
           "rhs": {
             "expr": [
               "Divide",
@@ -759,7 +759,7 @@
           }
         },
         {
-          "id": "P39_proc",
+          "id": "rate_P39",
           "rhs": {
             "expr": [
               "Divide",

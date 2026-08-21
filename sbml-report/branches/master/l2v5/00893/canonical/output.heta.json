@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-20T17:32:05.694Z",
+    "created": "2026-08-21T09:43:02.766Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "5882ef7d0d9bf639d21530c4e7700be038686d10cc50e4c7a1d963aeda7729e0",
+    "hashSum": "1172754d32e6b933831eff859e1f7c4b5e0736d6508a54d642ad417662114c3b",
     "hashAlgorithm": "sha256"
   },
   {
@@ -34,6 +34,24 @@
   },
   {
     "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P2",
+    "title": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.001"
+    },
+    "class": "Record",
+    "id": "P3",
+    "title": "P3"
+  },
+  {
+    "action": "upsert",
     "actors": [
       {
         "stoichiometry": 1,
@@ -47,16 +65,7 @@
       "metaid": "rule2"
     },
     "class": "Process",
-    "id": "P1_proc"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0"
-    },
-    "class": "Record",
-    "id": "P2",
-    "title": "P2"
+    "id": "rate_P1"
   },
   {
     "action": "upsert",
@@ -73,16 +82,7 @@
       "metaid": "rule3"
     },
     "class": "Process",
-    "id": "P2_proc"
-  },
-  {
-    "action": "upsert",
-    "assignments": {
-      "start_": "0.001"
-    },
-    "class": "Record",
-    "id": "P3",
-    "title": "P3"
+    "id": "rate_P2"
   },
   {
     "action": "upsert",
@@ -99,7 +99,7 @@
       "metaid": "rule1"
     },
     "class": "Process",
-    "id": "P3_proc"
+    "id": "rate_P3"
   },
   {
     "action": "upsert",

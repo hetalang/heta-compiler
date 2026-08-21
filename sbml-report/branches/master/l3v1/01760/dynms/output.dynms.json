@@ -5,14 +5,14 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:24:07.342Z",
+  "created": "2026-08-21T09:38:19.096Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
       "constants": [
         {
-          "id": "avogadro__J0_local",
+          "id": "local_J0_avogadro",
           "value": 0.1
         }
       ],
@@ -54,7 +54,7 @@
         {
           "id": "J0",
           "rhs": {
-            "expr": "avogadro__J0_local",
+            "expr": "local_J0_avogadro",
             "format": "math-json"
           }
         }

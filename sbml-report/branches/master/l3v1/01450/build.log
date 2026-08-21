@@ -9,10 +9,10 @@ No declaration file, running with defaults...
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
 [error]	A1_sr component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 21f2914d0dc36a4d76ec7adeb088fbceee5f1040f8bdd63b92b4e80b65ca9bbe
+[info]	Platform hash: 37c5ce6fc77ece35e5a5beba21d1b67d747fd8f7e5d63db25789573cf8e24f7a
 [info]	Setting references in elements, total length 98
-[error]	A1_sr2_proc Property "actors[0].target" has lost reference "A1_sr2".
-[error]	A1_sr_proc Property "actors[0].target" has lost reference "A1_sr".
+[error]	rate_A1_sr2 Property "actors[0].target" has lost reference "A1_sr2".
+[error]	rate_A1_sr Property "actors[0].target" has lost reference "A1_sr".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

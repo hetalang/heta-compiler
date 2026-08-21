@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-20T17:17:43.260Z",
+  "created": "2026-08-21T09:34:31.799Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -102,7 +102,7 @@
           },
           "title": "S4",
           "derivative": {
-            "expr": "S4_proc",
+            "expr": "rate_S4",
             "format": "math-json"
           }
         }
@@ -190,7 +190,7 @@
           "title": "reaction1"
         },
         {
-          "id": "S4_proc",
+          "id": "rate_S4",
           "rhs": {
             "expr": 0.15,
             "format": "math-json"
