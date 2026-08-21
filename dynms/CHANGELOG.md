@@ -2,6 +2,7 @@
 
 ## 0.2.1
 
+ Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json`
 - Added extended numeric values for constants and MathJSON expressions: `NaN`, `+Infinity`, and `-Infinity` are encoded as `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}` respectively.
 - The `dynms` field now must be exactly `"0.2.1"`.
 - A document must contain at least one model.
