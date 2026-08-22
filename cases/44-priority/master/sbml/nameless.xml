@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sbml 
+  xmlns="http://www.sbml.org/sbml/level2/version4" 
+  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  level="2" version="4"
+  >
+  <annotation>
+    <hetalang:hasMeta xmlns:hetalang="http://hetalang.github.io/sbml/annotation" hetalang:metaVersion="1.0">{"toolName":"heta-compiler","toolVersion":"0.13.0-beta.0","createdAt":"2026-08-22T07:55:35.850Z","platformId":"priority","platformVersion":"v0.1.0","namespaceId":"nameless","format":"sbml"}</hetalang:hasMeta> 
+  </annotation>
+  <model
+    id="nameless"
+    >
+    
+
+  
+    <listOfParameters>
+      <parameter
+        id="x1"
+        constant="false"
+        value="0"
+        >
+      </parameter>
+    </listOfParameters>
+  
+    <listOfEvents><event
+        id="sw1"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><geq/><ci>x1</ci><cn>0</cn></apply>
+          </math>
+        </trigger>
+        
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="x1"
+            >
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event><event
+        id="sw2"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><geq/><ci>x1</ci><cn>1</cn></apply>
+          </math>
+        </trigger>
+        
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="x1"
+            >
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>2</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event><event
+        id="sw3"
+        >
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply><geq/><ci>x1</ci><cn>2</cn></apply>
+          </math>
+        </trigger>
+        
+        <listOfEventAssignments>
+          
+          <eventAssignment
+            variable="x1"
+            >
+            <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>3</cn></math>
+          </eventAssignment>
+          
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  
+  
+  </model>
+</sbml>

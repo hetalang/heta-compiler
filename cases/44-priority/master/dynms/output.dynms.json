@@ -1,0 +1,108 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T07:55:35.884Z",
+  "platformId": "priority",
+  "platformVersion": "v0.1.0",
+  "platformNotes": "SBML event priority export test case",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "x1",
+          "initial": 0
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "sw1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "x1",
+                0
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "actions": [
+            {
+              "rhs": {
+                "expr": 1,
+                "format": "math-json"
+              },
+              "state": "x1"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "x1",
+                1
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "x1"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sw3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "x1",
+                2
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": -2,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 3,
+                "format": "math-json"
+              },
+              "state": "x1"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

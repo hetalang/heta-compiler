@@ -1,0 +1,19 @@
+x1 @Record .= 0;
+
+sw1 @DSwitcher {
+  trigger: "x1 >= 0"
+};
+
+sw2 @DSwitcher {
+  trigger: "x1 >= 1",
+  priority: 0
+};
+
+sw3 @DSwitcher {
+  trigger: "x1 >= 2",
+  priority: -2
+};
+
+x1 [sw1]= 1;
+x1 [sw2]= 2;
+x1 [sw3]= 3;

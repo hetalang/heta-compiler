@@ -37,8 +37,10 @@ describe('Simple test for DSwitcher', () => {
 
     expect(sw1.priority).to.equal(-2.5);
     expect(sw1.clone().priority).to.equal(-2.5);
+    expect(sw1.toQ().priority).to.equal(-2.5);
 
     sw1.merge({ priority: null });
     expect(sw1.priority).to.equal(undefined);
+    expect(sw1.toQ()).not.to.have.property('priority');
   });
 });

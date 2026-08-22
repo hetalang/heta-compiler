@@ -75,6 +75,9 @@ class _Switcher extends Component {
     } else if (this.active === undefined) {
       res.active = null;
     }
+    if (this.priority !== undefined) {
+      res.priority = this.priority;
+    }
 
     return res;
   }

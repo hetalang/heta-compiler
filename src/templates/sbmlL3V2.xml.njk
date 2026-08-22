@@ -14,6 +14,30 @@
 
 {% block timeEventTriggerAttributes %} initialValue="false"{% endblock %}
 
+{% block timeEventPriority %}
+        {% if event.priority is defined %}
+        <priority>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>{{ event.priority }}</cn></math>
+        </priority>
+        {% endif %}
+{% endblock %}
+
 {% block cEventTriggerAttributes %} initialValue="{{ 'false' if event.atStart else 'true' }}"{% endblock %}
 
+{% block cEventPriority %}
+        {% if event.priority is defined %}
+        <priority>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>{{ event.priority }}</cn></math>
+        </priority>
+        {% endif %}
+{% endblock %}
+
 {% block dEventTriggerAttributes %} initialValue="{{ 'false' if event.atStart else 'true' }}"{% endblock %}
+
+{% block dEventPriority %}
+        {% if event.priority is defined %}
+        <priority>
+          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>{{ event.priority }}</cn></math>
+        </priority>
+        {% endif %}
+{% endblock %}
