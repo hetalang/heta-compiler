@@ -60,7 +60,6 @@
         "type": "time",
         "start": 0
       },
-      "priority": 0,
       "actions": [
         {
           "rhs": {

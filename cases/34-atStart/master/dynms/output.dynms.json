@@ -3,9 +3,9 @@
   "dynms": "0.2.1",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.0"
+    "version": "0.13.0-beta.0"
   },
-  "created": "2026-07-17T09:08:29.011Z",
+  "created": "2026-08-22T06:56:11.531Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -307,7 +307,6 @@
             "start": 0,
             "period": 12
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -338,7 +337,6 @@
             "start": 1,
             "period": 12
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -382,7 +380,6 @@
             "detection": "root",
             "atStart": true
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -424,7 +421,6 @@
             "detection": "root",
             "atStart": false
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -463,7 +459,6 @@
             "detection": "step",
             "atStart": true
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -502,7 +497,6 @@
             "detection": "step",
             "atStart": false
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {

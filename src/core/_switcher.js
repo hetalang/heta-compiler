@@ -10,6 +10,10 @@ const schema = {
         enum: [true, false, 1, 0]
       },
       { type: 'null' }
+    ]},
+    priority: {oneOf: [
+      { type: 'number' },
+      { type: 'null' }
     ]}
   }
 };
@@ -37,6 +41,12 @@ class _Switcher extends Component {
       } else if (q.active !== undefined) {
         this.active = !!q.active;
       }
+
+      if (q.priority === null) {
+        delete this.priority;
+      } else if (q.priority !== undefined) {
+        this.priority = q.priority;
+      }
     }
 
     return this;
@@ -50,6 +60,10 @@ class _Switcher extends Component {
       clonedComponent.active = this.active;
     } else {
       delete clonedComponent.active;
+    }
+
+    if (typeof this.priority !== 'undefined') {
+      clonedComponent.priority = this.priority;
     }
 
     return clonedComponent;

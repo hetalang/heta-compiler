@@ -58,7 +58,6 @@
         "detection": "step",
         "atStart": true
       },
-      "priority": 0,
       "actions": [],
       "active": true,
       "stopSimulation": true

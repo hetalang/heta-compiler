@@ -28,4 +28,17 @@ describe('Simple test for DSwitcher', () => {
       atStart: true
     });
   });
+  it('Accepts numeric priority as a switcher property', () => {
+    let sw1 = (new DSwitcher).merge({
+      id: 'sw1',
+      trigger: 'x > y',
+      priority: -2.5
+    });
+
+    expect(sw1.priority).to.equal(-2.5);
+    expect(sw1.clone().priority).to.equal(-2.5);
+
+    sw1.merge({ priority: null });
+    expect(sw1.priority).to.equal(undefined);
+  });
 });

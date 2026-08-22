@@ -3,9 +3,9 @@
   "dynms": "0.2.1",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.1"
+    "version": "0.13.0-beta.0"
   },
-  "created": "2026-08-21T08:30:13.674Z",
+  "created": "2026-08-22T06:56:11.708Z",
   "platformId": "sbml_identifier_renaming",
   "platformVersion": "v0.1.0",
   "platformNotes": "SBML identifier renaming test case",
@@ -120,7 +120,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -142,7 +141,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [],
           "active": true
         }

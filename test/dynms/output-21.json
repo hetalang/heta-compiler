@@ -50,7 +50,6 @@
         "period": 24,
         "stop": 100
       },
-      "priority": 0,
       "actions": [
         {
           "rhs": {
@@ -86,7 +85,6 @@
         "detection": "root",
         "atStart": true
       },
-      "priority": 0,
       "actions": [
         {
           "rhs": {

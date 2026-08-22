@@ -3,9 +3,9 @@
   "dynms": "0.2.1",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.1"
+    "version": "0.13.0-beta.0"
   },
-  "created": "2026-08-06T09:36:17.438Z",
+  "created": "2026-08-22T06:56:11.563Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",
@@ -196,7 +196,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {

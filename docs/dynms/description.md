@@ -156,7 +156,7 @@ Assignment values are globally available during simulation and may be used in de
 
 ### 3.5 Time events
 
-`timeEvents` contains events activated by a time trigger. Each object has an `id`, a `trigger`, and an `actions` array. Optional `priority`, `active`, and `stopSimulation` fields default to `0`, `true`, and `false`, respectively.
+`timeEvents` contains events activated by a time trigger. Each object has an `id`, a `trigger`, and an `actions` array. Optional `active` and `stopSimulation` fields default to `true` and `false`, respectively. `priority`, when present, is a number.
 
 ```json
 {

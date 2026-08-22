@@ -315,6 +315,9 @@
         "trigger": {
           "type": "string"
         },
+        "priority": {
+          "type": "number"
+        },
         "period": {
           "$ref": "#/$defs/stringOrNumber"
         },

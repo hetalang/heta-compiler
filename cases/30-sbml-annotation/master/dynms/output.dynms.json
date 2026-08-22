@@ -3,9 +3,9 @@
   "dynms": "0.2.1",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.1"
+    "version": "0.13.0-beta.0"
   },
-  "created": "2026-08-06T14:37:10.122Z",
+  "created": "2026-08-22T06:56:11.435Z",
   "platformId": "template",
   "platformVersion": "v0.1.0",
   "platformNotes": "platform notes",

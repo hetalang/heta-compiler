@@ -93,7 +93,6 @@
         "type": "time",
         "start": 12
       },
-      "priority": 0,
       "actions": [
         {
           "rhs": {

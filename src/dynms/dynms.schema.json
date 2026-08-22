@@ -218,8 +218,7 @@
           "$ref": "#/$defs/timeTrigger"
         },
         "priority": {
-          "type": "integer",
-          "default": 0
+          "type": "number"
         },
         "active": {
           "type": "boolean",
@@ -255,8 +254,7 @@
           "$ref": "#/$defs/nonTimeEventTrigger"
         },
         "priority": {
-          "type": "integer",
-          "default": 0
+          "type": "number"
         },
         "active": {
           "type": "boolean",

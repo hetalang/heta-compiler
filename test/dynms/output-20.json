@@ -82,7 +82,6 @@
           "format": "math-json"
         }
       },
-      "priority": 0,
       "actions": [
         {
           "rhs": {

@@ -156,8 +156,9 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             } else {
                 event.trigger.stop = switcher.stopObj?.num;
             }
-            // TODO: currently Heta does not support priority
-            event.priority = switcher.priority || 0;
+            if (switcher.priority !== undefined) {
+                event.priority = switcher.priority;
+            }
 
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
@@ -181,7 +182,9 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
                 detection: 'root', // step
                 atStart: switcher.atStart
             };
-            event.priority = switcher.priority || 0;
+            if (switcher.priority !== undefined) {
+                event.priority = switcher.priority;
+            }
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
                 .map((record) => actionHandler(record, switcher.id));
@@ -203,7 +206,9 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
                 detection: 'step',
                 atStart: switcher.atStart
             };
-            event.priority = switcher.priority || 0;
+            if (switcher.priority !== undefined) {
+                event.priority = switcher.priority;
+            }
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
                 .map((record) => actionHandler(record, switcher.id));
@@ -223,7 +228,9 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
                 detection: 'step',
                 atStart: true
             };
-            event.priority = switcher.priority || 0;
+            if (switcher.priority !== undefined) {
+                event.priority = switcher.priority;
+            }
             event.actions = [];
             event.active = switcher.active;
             event.stopSimulation = true;
