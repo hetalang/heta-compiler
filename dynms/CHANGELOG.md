@@ -10,6 +10,7 @@
 - Constants accept only numeric values, including extended MathJSON numeric values; expression objects are no longer permitted as `constants[].value`.
 - Added `stopSimulation` to time events and state events.
 - MathJSON symbols must use the DynMS identifier syntax, and MathJSON function calls are limited to the supported operator and function names. User-defined functions must be expanded before DynMS export.
+- Allow non-integer values for `timeEvents[].priority` and `events[].priority`.
 
 ## 0.2.0
 

@@ -300,6 +300,7 @@ Export to [SBML format](https://sbml.org/).
 - Older SBML versions may not support all Heta features. Compatibility was checked for L3V2.
 - SBML format does not support `TimeSwitcher` and `CSwitcher`. They will be transformed to `DSwitcher` with settings that give approximate behavior.
 - SBML older than L3V1 does not support `initialValue` in `<trigger>` so `atStart` property of `CSwitcher` and `DSwitcher` will not be applied.
+- `priority` of switchers is exported as an SBML `<priority>` MathML number only for L3V1 and newer. It is omitted when not set.
 - In SBML there is no way to clarify if the switcher works in "root finding" mode. We assume that the switcher works in "step" mode, although other implementations may exist in the SBML ecosystem.
 
 **Example:**
