@@ -67,11 +67,11 @@ The compiler reads the `index.heta` entry file and generates output files in the
 Heta Compiler can be installed on major operating systems.\
 See the [installation guide](https://hetalang.github.io/hetacompiler/installation.html) for details.
 
-## Format conversion reports
+## Reproducibility reports
 
-The badges show successful assessed cases over all assessed cases. Click a badge to open the latest report for the `master` branch.
+This section collects automated reproducibility checks for format conversion, simulations, and other validation workflows.
 
-| Test set | Conversion check | Latest report |
+| Test set | Conversion check | Latest **master** |
 | --- | --- | --- |
 | sbmlteam/sbml-test-suite | SBML L3V2 → canonical JSON + DynMS | [![SBML L3V2 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v2%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v2%2Freport.json) |
 | sbmlteam/sbml-test-suite | SBML L3V1 → canonical JSON + DynMS | [![SBML L3V1 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v1%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fmaster%2Fl3v1%2Freport.json) |
