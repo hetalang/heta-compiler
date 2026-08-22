@@ -290,6 +290,15 @@ describe('unsupported SBML event features', () => {
       'SBML event delay is not supported on import for event "delayed_event". Heta Compiler cannot preserve delayed event execution.'
     );
   });
+
+  it('rejects event priorities with an informative message', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfEvents><event id="prioritized_event"><trigger><math><true/></math></trigger><priority><math><cn>-2</cn></math></priority></event></listOfEvents></model></sbml>`;
+
+    expect(() => SBMLParse(xml)).to.throw(
+      HetaLevelError,
+      'SBML event priority is not supported on import for event "prioritized_event". Heta Compiler cannot preserve event execution order.'
+    );
+  });
 });
 
 describe('SBML Level 3 packages', () => {

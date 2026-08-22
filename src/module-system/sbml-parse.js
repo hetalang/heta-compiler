@@ -715,6 +715,13 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
       + 'Heta Compiler cannot preserve delayed event execution.'
     );
   }
+  let priority = x.elements?.find((y) => y.name === 'priority');
+  if (priority !== undefined) {
+    throw new HetaLevelError(
+      `SBML event priority is not supported on import for event "${switcher.id}". `
+      + 'Heta Compiler cannot preserve event execution order.'
+    );
+  }
   // assignments
   let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');
   if (assignments?.elements !== undefined) {
