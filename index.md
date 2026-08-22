@@ -65,10 +65,10 @@ Create platform in directory "/path/to/my-platform" (target directory)
 
 ## JavaScript API
 
-Heta compiler has been written in Node.js environment and can be used as a package for browser or server-side tools.
+Heta Compiler can be used from Node.js applications. The following minimal example compiles a Q-array and exports it to SBML.
 
 ```javascript
-const { Builder } = require('./src');
+const { Builder } = require('heta-compiler');
 let builder = new Builder();
 
 // platform code in Q-array format
