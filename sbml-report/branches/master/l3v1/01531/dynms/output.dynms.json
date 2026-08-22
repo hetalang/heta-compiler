@@ -1,11 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json",
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
   "dynms": "0.2.1",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.1"
+    "version": "0.13.0-beta.0"
   },
-  "created": "2026-08-21T16:13:50.997Z",
+  "created": "2026-08-22T09:40:39.807Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -272,7 +272,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -301,7 +300,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -330,7 +328,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -359,7 +356,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -388,7 +384,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -417,7 +412,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -446,7 +440,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -475,7 +468,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -504,7 +496,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -533,7 +524,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -562,7 +552,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -591,7 +580,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -620,7 +608,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -649,7 +636,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -678,7 +664,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -707,7 +692,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -736,7 +720,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -765,7 +748,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -794,7 +776,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -823,7 +804,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -852,7 +832,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -881,7 +860,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -911,7 +889,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -941,7 +918,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -971,7 +947,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1001,7 +976,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1031,7 +1005,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1061,7 +1034,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1091,7 +1063,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1125,7 +1096,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1159,7 +1129,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1188,7 +1157,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1217,7 +1185,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1246,7 +1213,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1275,7 +1241,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1304,7 +1269,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1333,7 +1297,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1362,7 +1325,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1391,7 +1353,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1420,7 +1381,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1463,7 +1423,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1503,7 +1462,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1532,7 +1490,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1561,7 +1518,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1590,7 +1546,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1634,7 +1589,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1681,7 +1635,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1729,7 +1682,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1780,7 +1732,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1832,7 +1783,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1880,7 +1830,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1908,7 +1857,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1936,7 +1884,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1966,7 +1913,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -1999,7 +1945,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {
@@ -2032,7 +1977,6 @@
             },
             "detection": "step"
           },
-          "priority": 0,
           "actions": [
             {
               "rhs": {

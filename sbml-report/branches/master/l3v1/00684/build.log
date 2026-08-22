@@ -2,10 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/00684/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00684/00684-sbml-l3v1.xml"...
-[error]	"delay" in event is not supported in SBML module when converting module "cases/semantic/00684/00684-sbml-l3v1.xml"
+[error]	SBML event delay is not supported on import for event "event1". Heta Compiler cannot preserve delayed event execution. when converting module "cases/semantic/00684/00684-sbml-l3v1.xml"
 [info]	Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7
 [info]	Setting references in elements, total length 93
 [info]	Checking for circular references in Records.
