@@ -2,6 +2,7 @@
 
 ## 0.13.0
 
+- Add `priority` (experimental) in `_Switcher` to control the order of switchers.
 - Improved **SBML import and export** compatibility: added support for variadic MathML arithmetic and logical operators, handled Level 2 reaction defaults correctly, and safely renamed conflicting imported identifiers.
 - Improved support for mathematical expressions, including  inverse hyperbolic functions, Boolean expressions, and canonical `piecewise(value, condition, ..., otherwise)` syntax.
 - Fixed expansion of nested user-defined functions so exported models no longer retain unresolved function calls.
