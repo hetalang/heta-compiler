@@ -708,21 +708,12 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
     qArr.push(switcher);
   }
 
-  // check if delay is presented, should we include it to Heta standard?
   let delay = x.elements?.find((y) => y.name === 'delay');
-  // currently not used
-  /*
-  let delayMath = delay
-    && delay.elements
-    && delay.elements.find((y) => y.name === 'math');
-  if (delayMath) {
-    let delayExpr = _toMathExpr(delayMath);
-    //console.log(delayExpr);
-
-  }
-  */
   if (delay !== undefined) {
-    throw new HetaLevelError('"delay" in event is not supported in SBML module'); 
+    throw new HetaLevelError(
+      `SBML event delay is not supported on import for event "${switcher.id}". `
+      + 'Heta Compiler cannot preserve delayed event execution.'
+    );
   }
   // assignments
   let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');

@@ -281,6 +281,17 @@ describe('SBML-import generated identifiers', () => {
   });
 });
 
+describe('unsupported SBML event features', () => {
+  it('rejects delayed events with an informative message', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfEvents><event id="delayed_event"><trigger><math><true/></math></trigger><delay><math><cn>2</cn></math></delay></event></listOfEvents></model></sbml>`;
+
+    expect(() => SBMLParse(xml)).to.throw(
+      HetaLevelError,
+      'SBML event delay is not supported on import for event "delayed_event". Heta Compiler cannot preserve delayed event execution.'
+    );
+  });
+});
+
 describe('SBML Level 3 packages', () => {
   it('rejects a required package regardless of its XML prefix', () => {
     let xml = `<sbml xmlns="http://www.sbml.org/sbml/level3/version1/core" xmlns:extension="http://www.sbml.org/sbml/level3/version1/comp/version1" level="3" version="1" extension:required="true"><model/></sbml>`;
