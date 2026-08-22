@@ -161,7 +161,7 @@ class Record extends _Size {
     let hasInit = this.assignments?.start_ !== undefined
       || this.assignments?.ode_ !== undefined;
     if (!hasInit) {
-      let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`
+      let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`;
       logger.error(msg, {type: 'BindingError', space: this.space});
     }
 

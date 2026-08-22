@@ -185,6 +185,9 @@ function _toMathJSON(node) {
       if (operand && operand.num === '+Infinity') {
         return NUM_NEGATIVE_INFINITY;
       }
+      if (operand && operand.num === '-Infinity') {
+        return NUM_POSITIVE_INFINITY;
+      }
       if (operand && operand.num === 'NaN') {
         return NUM_NAN;
       }
