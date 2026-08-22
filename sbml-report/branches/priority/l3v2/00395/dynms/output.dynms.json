@@ -1,0 +1,225 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:14:58.893Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "local_reaction1_k",
+          "value": 0.75
+        },
+        {
+          "id": "local_reaction2_k",
+          "value": 0.25
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S1",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "reaction1"
+              ],
+              "reaction2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                2,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S2",
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "reaction1"
+              ],
+              "reaction2"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S3",
+          "derivative": {
+            "expr": [
+              "Add",
+              "reaction1",
+              [
+                "Negate",
+                "reaction2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1,
+          "title": "C"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "C",
+              "local_reaction1_k",
+              "S1",
+              "S2"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        },
+        {
+          "id": "S3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S3_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S3"
+        },
+        {
+          "id": "reaction2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "C",
+              "local_reaction2_k",
+              "S3"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction2"
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "event1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Less",
+                "S1",
+                0.75
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  1,
+                  "C"
+                ],
+                "format": "math-json"
+              },
+              "state": "S1_amt_"
+            },
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  1.5,
+                  "C"
+                ],
+                "format": "math-json"
+              },
+              "state": "S2_amt_"
+            }
+          ],
+          "active": true,
+          "title": "event1"
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

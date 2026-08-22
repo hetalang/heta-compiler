@@ -1,0 +1,2088 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:42:48.898Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "pp8_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp8_mrna_degradation_rate"
+        },
+        {
+          "id": "pp9_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp9_mrna_degradation_rate"
+        },
+        {
+          "id": "p1_degradation_rate",
+          "value": 0.5,
+          "title": "p1_degradation_rate"
+        },
+        {
+          "id": "p2_degradation_rate",
+          "value": 0.5,
+          "title": "p2_degradation_rate"
+        },
+        {
+          "id": "p3_degradation_rate",
+          "value": 0.5,
+          "title": "p3_degradation_rate"
+        },
+        {
+          "id": "p4_degradation_rate",
+          "value": 0.5,
+          "title": "p4_degradation_rate"
+        },
+        {
+          "id": "p5_degradation_rate",
+          "value": 0.5,
+          "title": "p5_degradation_rate"
+        },
+        {
+          "id": "p6_degradation_rate",
+          "value": 0.5,
+          "title": "p6_degradation_rate"
+        },
+        {
+          "id": "p7_degradation_rate",
+          "value": 0.5,
+          "title": "p7_degradation_rate"
+        },
+        {
+          "id": "p8_degradation_rate",
+          "value": 0.5,
+          "title": "p8_degradation_rate"
+        },
+        {
+          "id": "p9_degradation_rate",
+          "value": 0.5,
+          "title": "p9_degradation_rate"
+        },
+        {
+          "id": "v1_Kd",
+          "value": 11.147,
+          "title": "v1_Kd"
+        },
+        {
+          "id": "v1_h",
+          "value": 1,
+          "title": "v1_h"
+        },
+        {
+          "id": "v2_Kd",
+          "value": 1,
+          "title": "v2_Kd"
+        },
+        {
+          "id": "v2_h",
+          "value": 4,
+          "title": "v2_h"
+        },
+        {
+          "id": "v3_Kd",
+          "value": 20,
+          "title": "v3_Kd"
+        },
+        {
+          "id": "v3_h",
+          "value": 1,
+          "title": "v3_h"
+        },
+        {
+          "id": "v4_Kd",
+          "value": 0.2,
+          "title": "v4_Kd"
+        },
+        {
+          "id": "v4_h",
+          "value": 4,
+          "title": "v4_h"
+        },
+        {
+          "id": "v5_Kd",
+          "value": 0.2,
+          "title": "v5_Kd"
+        },
+        {
+          "id": "v5_h",
+          "value": 4,
+          "title": "v5_h"
+        },
+        {
+          "id": "v6_Kd",
+          "value": 0.04,
+          "title": "v6_Kd"
+        },
+        {
+          "id": "v6_h",
+          "value": 4,
+          "title": "v6_h"
+        },
+        {
+          "id": "v7_Kd",
+          "value": 0.02,
+          "title": "v7_Kd"
+        },
+        {
+          "id": "v7_h",
+          "value": 4,
+          "title": "v7_h"
+        },
+        {
+          "id": "v8_Kd",
+          "value": 0.04,
+          "title": "v8_Kd"
+        },
+        {
+          "id": "v8_h",
+          "value": 4,
+          "title": "v8_h"
+        },
+        {
+          "id": "v9_Kd",
+          "value": 0.2,
+          "title": "v9_Kd"
+        },
+        {
+          "id": "v9_h",
+          "value": 4,
+          "title": "v9_h"
+        },
+        {
+          "id": "pp1_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp1_mrna_degradation_rate"
+        },
+        {
+          "id": "pp2_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp2_mrna_degradation_rate"
+        },
+        {
+          "id": "pro1_strength",
+          "value": 2,
+          "title": "pro1_strength"
+        },
+        {
+          "id": "pro2_strength",
+          "value": 4.5077,
+          "title": "pro2_strength"
+        },
+        {
+          "id": "pro3_strength",
+          "value": 5,
+          "title": "pro3_strength"
+        },
+        {
+          "id": "pro4_strength",
+          "value": 5,
+          "title": "pro4_strength"
+        },
+        {
+          "id": "pro5_strength",
+          "value": 5,
+          "title": "pro5_strength"
+        },
+        {
+          "id": "pro6_strength",
+          "value": 1.31,
+          "title": "pro6_strength"
+        },
+        {
+          "id": "pro7_strength",
+          "value": 1.31,
+          "title": "pro7_strength"
+        },
+        {
+          "id": "pro8_strength",
+          "value": 5,
+          "title": "pro8_strength"
+        },
+        {
+          "id": "pro9_strength",
+          "value": 5,
+          "title": "pro9_strength"
+        },
+        {
+          "id": "pp3_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp3_mrna_degradation_rate"
+        },
+        {
+          "id": "v10_Kd",
+          "value": 0.02,
+          "title": "v10_Kd"
+        },
+        {
+          "id": "v10_h",
+          "value": 4,
+          "title": "v10_h"
+        },
+        {
+          "id": "v11_Kd",
+          "value": 0.1,
+          "title": "v11_Kd"
+        },
+        {
+          "id": "v11_h",
+          "value": 2,
+          "title": "v11_h"
+        },
+        {
+          "id": "v12_Kd",
+          "value": 0.1,
+          "title": "v12_Kd"
+        },
+        {
+          "id": "v12_h",
+          "value": 2,
+          "title": "v12_h"
+        },
+        {
+          "id": "v13_Kd",
+          "value": 0.01,
+          "title": "v13_Kd"
+        },
+        {
+          "id": "v13_h",
+          "value": 2,
+          "title": "v13_h"
+        },
+        {
+          "id": "pp4_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp4_mrna_degradation_rate"
+        },
+        {
+          "id": "v14_Kd",
+          "value": 1,
+          "title": "v14_Kd"
+        },
+        {
+          "id": "v14_h",
+          "value": 4,
+          "title": "v14_h"
+        },
+        {
+          "id": "v15_Kd",
+          "value": 20,
+          "title": "v15_Kd"
+        },
+        {
+          "id": "v15_h",
+          "value": 1,
+          "title": "v15_h"
+        },
+        {
+          "id": "pp5_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp5_mrna_degradation_rate"
+        },
+        {
+          "id": "rbs1_strength",
+          "value": 0.3668,
+          "title": "rbs1_strength"
+        },
+        {
+          "id": "rbs2_strength",
+          "value": 1.4102,
+          "title": "rbs2_strength"
+        },
+        {
+          "id": "rbs3_strength",
+          "value": 0.8,
+          "title": "rbs3_strength"
+        },
+        {
+          "id": "rbs4_strength",
+          "value": 2.21,
+          "title": "rbs4_strength"
+        },
+        {
+          "id": "rbs5_strength",
+          "value": 0.5,
+          "title": "rbs5_strength"
+        },
+        {
+          "id": "rbs6_strength",
+          "value": 2,
+          "title": "rbs6_strength"
+        },
+        {
+          "id": "rbs7_strength",
+          "value": 5,
+          "title": "rbs7_strength"
+        },
+        {
+          "id": "rbs8_strength",
+          "value": 3.6377,
+          "title": "rbs8_strength"
+        },
+        {
+          "id": "rbs9_strength",
+          "value": 8,
+          "title": "rbs9_strength"
+        },
+        {
+          "id": "pp6_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp6_mrna_degradation_rate"
+        },
+        {
+          "id": "pp7_mrna_degradation_rate",
+          "value": 1,
+          "title": "pp7_mrna_degradation_rate"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "pp9_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp9_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp9_v1",
+              [
+                "Negate",
+                "pp9_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p9_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p9",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp9_v3",
+              [
+                "Negate",
+                "pp9_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp8_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp8_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp8_v1",
+              [
+                "Negate",
+                "pp8_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p8_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p8",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp8_v3",
+              [
+                "Negate",
+                "pp8_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp7_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp7_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp7_v1",
+              [
+                "Negate",
+                "pp7_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p7_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p7",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp7_v3",
+              [
+                "Negate",
+                "pp7_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp6_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp6_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp6_v1",
+              [
+                "Negate",
+                "pp6_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p6_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p6",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp6_v3",
+              [
+                "Negate",
+                "pp6_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp5_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp5_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp5_v1",
+              [
+                "Negate",
+                "pp5_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p5_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p5",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp5_v3",
+              [
+                "Negate",
+                "pp5_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp4_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp4_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp4_v1",
+              [
+                "Negate",
+                "pp4_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p4_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p4",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp4_v3",
+              [
+                "Negate",
+                "pp4_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp3_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp3_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp3_v1",
+              [
+                "Negate",
+                "pp3_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p3",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp3_v3",
+              [
+                "Negate",
+                "pp3_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp2_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp2_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp2_v1",
+              [
+                "Negate",
+                "pp2_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p2",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp2_v3",
+              [
+                "Negate",
+                "pp2_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "pp1_mrna_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "pp1_mrna",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp1_v1",
+              [
+                "Negate",
+                "pp1_v2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "p1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                5,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "p1",
+          "derivative": {
+            "expr": [
+              "Add",
+              "pp1_v3",
+              [
+                "Negate",
+                "pp1_v4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "DefaultCompartment",
+          "initial": 1,
+          "title": "DefaultCompartment"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "p7",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p7_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p7"
+        },
+        {
+          "id": "as6",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p7",
+                      "v10_Kd"
+                    ],
+                    "v10_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p7",
+                    "v10_Kd"
+                  ],
+                  "v10_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as6"
+        },
+        {
+          "id": "p8",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p8_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p8"
+        },
+        {
+          "id": "rs5",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p8",
+                    "v12_Kd"
+                  ],
+                  "v12_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs5"
+        },
+        {
+          "id": "cod9",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro9_strength",
+              "as6",
+              "rs5"
+            ],
+            "format": "math-json"
+          },
+          "title": "cod9"
+        },
+        {
+          "id": "pp9_v1",
+          "rhs": {
+            "expr": "cod9",
+            "format": "math-json"
+          },
+          "title": "pp9_v1"
+        },
+        {
+          "id": "pp9_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp9_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp9_mrna"
+        },
+        {
+          "id": "pp9_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp9_mrna_degradation_rate",
+              "pp9_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp9_v2"
+        },
+        {
+          "id": "pp9_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs9_strength",
+              "pp9_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp9_v3"
+        },
+        {
+          "id": "p9",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p9_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p9"
+        },
+        {
+          "id": "pp9_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p9_degradation_rate",
+              "p9"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp9_v4"
+        },
+        {
+          "id": "as5",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p7",
+                      "v7_Kd"
+                    ],
+                    "v7_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p7",
+                    "v7_Kd"
+                  ],
+                  "v7_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as5"
+        },
+        {
+          "id": "rs4",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p8",
+                    "v11_Kd"
+                  ],
+                  "v11_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs4"
+        },
+        {
+          "id": "cod8",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro8_strength",
+              "as5",
+              "rs4"
+            ],
+            "format": "math-json"
+          },
+          "title": "cod8"
+        },
+        {
+          "id": "pp8_v1",
+          "rhs": {
+            "expr": "cod8",
+            "format": "math-json"
+          },
+          "title": "pp8_v1"
+        },
+        {
+          "id": "pp8_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp8_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp8_mrna"
+        },
+        {
+          "id": "pp8_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp8_mrna_degradation_rate",
+              "pp8_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp8_v2"
+        },
+        {
+          "id": "pp8_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs8_strength",
+              "pp8_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp8_v3"
+        },
+        {
+          "id": "pp8_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p8_degradation_rate",
+              "p8"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp8_v4"
+        },
+        {
+          "id": "p6",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p6_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p6"
+        },
+        {
+          "id": "as7",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p6",
+                      "v8_Kd"
+                    ],
+                    "v8_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p6",
+                    "v8_Kd"
+                  ],
+                  "v8_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as7"
+        },
+        {
+          "id": "p5",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p5_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p5"
+        },
+        {
+          "id": "as8",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p5",
+                      "v9_Kd"
+                    ],
+                    "v9_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p5",
+                    "v9_Kd"
+                  ],
+                  "v9_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as8"
+        },
+        {
+          "id": "cod7",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro7_strength",
+              [
+                "Add",
+                "as7",
+                "as8"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "cod7"
+        },
+        {
+          "id": "pp7_v1",
+          "rhs": {
+            "expr": "cod7",
+            "format": "math-json"
+          },
+          "title": "pp7_v1"
+        },
+        {
+          "id": "pp7_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp7_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp7_mrna"
+        },
+        {
+          "id": "pp7_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp7_mrna_degradation_rate",
+              "pp7_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp7_v2"
+        },
+        {
+          "id": "pp7_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs7_strength",
+              "pp7_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp7_v3"
+        },
+        {
+          "id": "pp7_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p7_degradation_rate",
+              "p7"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp7_v4"
+        },
+        {
+          "id": "as3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p5",
+                      "v5_Kd"
+                    ],
+                    "v5_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p5",
+                    "v5_Kd"
+                  ],
+                  "v5_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as3"
+        },
+        {
+          "id": "as4",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p6",
+                      "v6_Kd"
+                    ],
+                    "v6_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p6",
+                    "v6_Kd"
+                  ],
+                  "v6_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as4"
+        },
+        {
+          "id": "cod6",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro6_strength",
+              [
+                "Add",
+                "as3",
+                "as4"
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "cod6"
+        },
+        {
+          "id": "pp6_v1",
+          "rhs": {
+            "expr": "cod6",
+            "format": "math-json"
+          },
+          "title": "pp6_v1"
+        },
+        {
+          "id": "pp6_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp6_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp6_mrna"
+        },
+        {
+          "id": "pp6_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp6_mrna_degradation_rate",
+              "pp6_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp6_v2"
+        },
+        {
+          "id": "pp6_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs6_strength",
+              "pp6_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp6_v3"
+        },
+        {
+          "id": "pp6_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p6_degradation_rate",
+              "p6"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp6_v4"
+        },
+        {
+          "id": "p4",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p4_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p4"
+        },
+        {
+          "id": "as2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p4",
+                      "v4_Kd"
+                    ],
+                    "v4_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p4",
+                    "v4_Kd"
+                  ],
+                  "v4_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as2"
+        },
+        {
+          "id": "cod5",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro5_strength",
+              "as2"
+            ],
+            "format": "math-json"
+          },
+          "title": "cod5"
+        },
+        {
+          "id": "pp5_v1",
+          "rhs": {
+            "expr": "cod5",
+            "format": "math-json"
+          },
+          "title": "pp5_v1"
+        },
+        {
+          "id": "pp5_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp5_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp5_mrna"
+        },
+        {
+          "id": "pp5_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp5_mrna_degradation_rate",
+              "pp5_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp5_v2"
+        },
+        {
+          "id": "pp5_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs5_strength",
+              "pp5_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp5_v3"
+        },
+        {
+          "id": "pp5_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p5_degradation_rate",
+              "p5"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp5_v4"
+        },
+        {
+          "id": "p3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p3_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p3"
+        },
+        {
+          "id": "rs7",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p3",
+                    "v15_Kd"
+                  ],
+                  "v15_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs7"
+        },
+        {
+          "id": "p2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p2_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p2"
+        },
+        {
+          "id": "rs6",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p2",
+                    "v14_Kd"
+                  ],
+                  "v14_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs6"
+        },
+        {
+          "id": "cod4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro4_strength",
+              "rs7",
+              "rs6"
+            ],
+            "format": "math-json"
+          },
+          "title": "cod4"
+        },
+        {
+          "id": "pp4_v1",
+          "rhs": {
+            "expr": "cod4",
+            "format": "math-json"
+          },
+          "title": "pp4_v1"
+        },
+        {
+          "id": "pp4_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp4_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp4_mrna"
+        },
+        {
+          "id": "pp4_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp4_mrna_degradation_rate",
+              "pp4_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp4_v2"
+        },
+        {
+          "id": "pp4_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs4_strength",
+              "pp4_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp4_v3"
+        },
+        {
+          "id": "pp4_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p4_degradation_rate",
+              "p4"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp4_v4"
+        },
+        {
+          "id": "rs2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p2",
+                    "v2_Kd"
+                  ],
+                  "v2_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs2"
+        },
+        {
+          "id": "rs3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p3",
+                    "v3_Kd"
+                  ],
+                  "v3_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs3"
+        },
+        {
+          "id": "cod3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro3_strength",
+              "rs2",
+              "rs3"
+            ],
+            "format": "math-json"
+          },
+          "title": "cod3"
+        },
+        {
+          "id": "pp3_v1",
+          "rhs": {
+            "expr": "cod3",
+            "format": "math-json"
+          },
+          "title": "pp3_v1"
+        },
+        {
+          "id": "pp3_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp3_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp3_mrna"
+        },
+        {
+          "id": "pp3_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp3_mrna_degradation_rate",
+              "pp3_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp3_v2"
+        },
+        {
+          "id": "pp3_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs3_strength",
+              "pp3_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp3_v3"
+        },
+        {
+          "id": "pp3_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p3_degradation_rate",
+              "p3"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp3_v4"
+        },
+        {
+          "id": "p1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "p1_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "p1"
+        },
+        {
+          "id": "as1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Power",
+                    [
+                      "Divide",
+                      "p1",
+                      "v1_Kd"
+                    ],
+                    "v1_h"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p1",
+                    "v1_Kd"
+                  ],
+                  "v1_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "as1"
+        },
+        {
+          "id": "rs1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              1,
+              [
+                "Add",
+                1,
+                [
+                  "Power",
+                  [
+                    "Divide",
+                    "p9",
+                    "v13_Kd"
+                  ],
+                  "v13_h"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "rs1"
+        },
+        {
+          "id": "cod2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pro2_strength",
+              "as1",
+              "rs1"
+            ],
+            "format": "math-json"
+          },
+          "title": "cod2"
+        },
+        {
+          "id": "pp2_v1",
+          "rhs": {
+            "expr": "cod2",
+            "format": "math-json"
+          },
+          "title": "pp2_v1"
+        },
+        {
+          "id": "pp2_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp2_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp2_mrna"
+        },
+        {
+          "id": "pp2_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp2_mrna_degradation_rate",
+              "pp2_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp2_v2"
+        },
+        {
+          "id": "pp2_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs2_strength",
+              "pp2_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp2_v3"
+        },
+        {
+          "id": "pp2_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p2_degradation_rate",
+              "p2"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp2_v4"
+        },
+        {
+          "id": "cod1",
+          "rhs": {
+            "expr": "pro1_strength",
+            "format": "math-json"
+          },
+          "title": "cod1"
+        },
+        {
+          "id": "pp1_v1",
+          "rhs": {
+            "expr": "cod1",
+            "format": "math-json"
+          },
+          "title": "pp1_v1"
+        },
+        {
+          "id": "pp1_mrna",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "pp1_mrna_amt_",
+              "DefaultCompartment"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp1_mrna"
+        },
+        {
+          "id": "pp1_v2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "pp1_mrna_degradation_rate",
+              "pp1_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp1_v2"
+        },
+        {
+          "id": "pp1_v3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "rbs1_strength",
+              "pp1_mrna"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp1_v3"
+        },
+        {
+          "id": "pp1_v4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "p1_degradation_rate",
+              "p1"
+            ],
+            "format": "math-json"
+          },
+          "title": "pp1_v4"
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

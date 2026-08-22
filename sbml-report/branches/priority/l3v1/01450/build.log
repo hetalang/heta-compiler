@@ -1,0 +1,19 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01450/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01450/01450-sbml-l3v1.xml"...
+[error]	A1_sr component does not exist which is not allowed for the "update" action.
+[error]	A1_sr2 component does not exist which is not allowed for the "update" action.
+[error]	A1_sr2 component does not exist which is not allowed for the "update" action.
+[error]	A1_sr component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 37c5ce6fc77ece35e5a5beba21d1b67d747fd8f7e5d63db25789573cf8e24f7a
+[info]	Setting references in elements, total length 98
+[error]	rate_A1_sr2 Property "actors[0].target" has lost reference "A1_sr2".
+[error]	rate_A1_sr Property "actors[0].target" has lost reference "A1_sr".
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

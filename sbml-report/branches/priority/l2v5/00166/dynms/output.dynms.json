@@ -1,0 +1,159 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:36:18.453Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 75,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 25,
+          "title": "k2"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1",
+          "initial": 0.01,
+          "title": "S1",
+          "derivative": {
+            "expr": "rate_S1",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2",
+          "initial": 0.01,
+          "title": "S2",
+          "derivative": {
+            "expr": "rate_S2",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S3",
+          "initial": 0.02,
+          "title": "S3",
+          "derivative": {
+            "expr": "rate_S3",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S4",
+          "initial": 0.01,
+          "title": "S4",
+          "derivative": {
+            "expr": "rate_S4",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "rate_S1",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k2",
+                "S3",
+                "S4"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k1",
+                "S1",
+                "S2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_S2",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k2",
+                "S3",
+                "S4"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k1",
+                "S1",
+                "S2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_S3",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k1",
+                "S1",
+                "S2"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k2",
+                "S3",
+                "S4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_S4",
+          "rhs": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                "k1",
+                "S1",
+                "S2"
+              ],
+              [
+                "Multiply",
+                -1,
+                "k2",
+                "S3",
+                "S4"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

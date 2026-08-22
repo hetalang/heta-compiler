@@ -1,0 +1,88 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:31:27.174Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "comp",
+          "initial": 5,
+          "derivative": {
+            "expr": "rate_comp",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1,
+                5
+              ],
+              5
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Negate",
+              "sbml__J0_1"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "S3",
+          "initial": 4
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "comp"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "sbml__J0_1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S3",
+              10
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_comp",
+          "rhs": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:21:10.025Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "P1",
+          "initial": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    0.3
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    0.3
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [
+        {
+          "id": "P2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    -0.4
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    -0.4
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    "t"
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    "t"
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P4",
+          "rhs": {
+            "expr": [
+              "Divide",
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    [
+                      "Negate",
+                      "t"
+                    ]
+                  ]
+                ],
+                [
+                  "Negate",
+                  1
+                ]
+              ],
+              [
+                "Add",
+                [
+                  "Exp",
+                  [
+                    "Multiply",
+                    2,
+                    [
+                      "Negate",
+                      "t"
+                    ]
+                  ]
+                ],
+                1
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

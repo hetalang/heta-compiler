@@ -1,0 +1,17 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01729/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01729/01729-sbml-l3v2.xml"...
+[error]	S1_stoich component does not exist which is not allowed for the "update" action.
+[error]	S2_stoich component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 8809c2d3023b8eb034145738509ef9ebe1d5666760d33b3442fab2cd4bbff9e2
+[info]	Setting references in elements, total length 100
+[error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
+[error]	rate_S2_stoich Property "actors[0].target" has lost reference "S2_stoich".
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

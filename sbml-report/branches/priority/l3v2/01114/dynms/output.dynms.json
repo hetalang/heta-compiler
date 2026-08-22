@@ -1,0 +1,96 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:19:36.474Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "a",
+          "initial": {
+            "expr": [
+              "Add",
+              1,
+              1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "b",
+          "initial": {
+            "expr": [
+              "Multiply",
+              2,
+              2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "c",
+          "initial": {
+            "expr": [
+              "If",
+              [
+                "And",
+                "True",
+                "True",
+                "True"
+              ],
+              1,
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "d",
+          "initial": {
+            "expr": [
+              "If",
+              [
+                "Or",
+                "False",
+                "True",
+                "True"
+              ],
+              1,
+              0
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "e",
+          "initial": {
+            "expr": [
+              "If",
+              [
+                "Xor",
+                "False",
+                "True",
+                "True"
+              ],
+              1,
+              0
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

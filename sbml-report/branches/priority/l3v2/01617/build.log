@@ -1,0 +1,39 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01617/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01617/01617-sbml-l3v2.xml"...
+[info]	Platform hash: b46893399278564a522d897422413271bd2afb595332e9fe71f6a5eb91b50236
+[info]	Setting references in elements, total length 147
+[error]	Record "R16" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R14" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R15" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R12" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R07" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R13" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R01" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R17" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R03" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R02" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R05" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R04" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R10" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R06" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R09" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R08" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R11" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R18" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R19" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R26" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R25" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R24" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R23" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R22" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R21" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R20" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

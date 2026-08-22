@@ -1,0 +1,990 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.13.0-beta.0"
+    },
+    "created": "2026-08-22T08:22:16.960Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "bf507b598b1a9d3f62e4be684a81bbd3b87393a81b6ba495602a5c98508d8b12",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P30"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P31"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P32"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P33"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P34"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P35"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P36"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P37"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P38"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P39"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P9"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P10"
+      }
+    ],
+    "assignments": {
+      "ode_": "ceil(0.5)"
+    },
+    "class": "Process",
+    "id": "rate_P10"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P11"
+      }
+    ],
+    "assignments": {
+      "ode_": "ceil(3.55)"
+    },
+    "class": "Process",
+    "id": "rate_P11"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P12"
+      }
+    ],
+    "assignments": {
+      "ode_": "ceil((-4.6))"
+    },
+    "class": "Process",
+    "id": "rate_P12"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P13"
+      }
+    ],
+    "assignments": {
+      "ode_": "cos(9.1)"
+    },
+    "class": "Process",
+    "id": "rate_P13"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P14"
+      }
+    ],
+    "assignments": {
+      "ode_": "cos((-0.22))"
+    },
+    "class": "Process",
+    "id": "rate_P14"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P15"
+      }
+    ],
+    "assignments": {
+      "ode_": "exp(0)"
+    },
+    "class": "Process",
+    "id": "rate_P15"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P16"
+      }
+    ],
+    "assignments": {
+      "ode_": "exp(1)"
+    },
+    "class": "Process",
+    "id": "rate_P16"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P17"
+      }
+    ],
+    "assignments": {
+      "ode_": "exp(0.77)"
+    },
+    "class": "Process",
+    "id": "rate_P17"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P18"
+      }
+    ],
+    "assignments": {
+      "ode_": "floor((-4.6))"
+    },
+    "class": "Process",
+    "id": "rate_P18"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P19"
+      }
+    ],
+    "assignments": {
+      "ode_": "floor(9.1)"
+    },
+    "class": "Process",
+    "id": "rate_P19"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P2"
+      }
+    ],
+    "assignments": {
+      "ode_": "abs((-1))"
+    },
+    "class": "Process",
+    "id": "rate_P2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P20"
+      }
+    ],
+    "assignments": {
+      "ode_": "ln(0.2)"
+    },
+    "class": "Process",
+    "id": "rate_P20"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P21"
+      }
+    ],
+    "assignments": {
+      "ode_": "ln(1)"
+    },
+    "class": "Process",
+    "id": "rate_P21"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P22"
+      }
+    ],
+    "assignments": {
+      "ode_": "logbase(0.2, 10)"
+    },
+    "class": "Process",
+    "id": "rate_P22"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P23"
+      }
+    ],
+    "assignments": {
+      "ode_": "logbase(1, 10)"
+    },
+    "class": "Process",
+    "id": "rate_P23"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P24"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(1, 2)"
+    },
+    "class": "Process",
+    "id": "rate_P24"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P25"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(2, 2)"
+    },
+    "class": "Process",
+    "id": "rate_P25"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P26"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(1.4, 5.1)"
+    },
+    "class": "Process",
+    "id": "rate_P26"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P27"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(4, 2)"
+    },
+    "class": "Process",
+    "id": "rate_P27"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P28"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(3.1, 2)"
+    },
+    "class": "Process",
+    "id": "rate_P28"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P29"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(4, 1 / 2)"
+    },
+    "class": "Process",
+    "id": "rate_P29"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P3"
+      }
+    ],
+    "assignments": {
+      "ode_": "abs(1)"
+    },
+    "class": "Process",
+    "id": "rate_P3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P30"
+      }
+    ],
+    "assignments": {
+      "ode_": "pow(7.4, 1 / 2)"
+    },
+    "class": "Process",
+    "id": "rate_P30"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P31"
+      }
+    ],
+    "assignments": {
+      "ode_": "sin(2.1)"
+    },
+    "class": "Process",
+    "id": "rate_P31"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P32"
+      }
+    ],
+    "assignments": {
+      "ode_": "sin(0)"
+    },
+    "class": "Process",
+    "id": "rate_P32"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P33"
+      }
+    ],
+    "assignments": {
+      "ode_": "sin((-5.9))"
+    },
+    "class": "Process",
+    "id": "rate_P33"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P34"
+      }
+    ],
+    "assignments": {
+      "ode_": "tan(0)"
+    },
+    "class": "Process",
+    "id": "rate_P34"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P35"
+      }
+    ],
+    "assignments": {
+      "ode_": "tan(1.11)"
+    },
+    "class": "Process",
+    "id": "rate_P35"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P36"
+      }
+    ],
+    "assignments": {
+      "ode_": "tan((-6))"
+    },
+    "class": "Process",
+    "id": "rate_P36"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P37"
+      }
+    ],
+    "assignments": {
+      "ode_": "tanh(0)"
+    },
+    "class": "Process",
+    "id": "rate_P37"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P38"
+      }
+    ],
+    "assignments": {
+      "ode_": "tanh(1.11)"
+    },
+    "class": "Process",
+    "id": "rate_P38"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P39"
+      }
+    ],
+    "assignments": {
+      "ode_": "tanh((-6))"
+    },
+    "class": "Process",
+    "id": "rate_P39"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P4"
+      }
+    ],
+    "assignments": {
+      "ode_": "acos((-1))"
+    },
+    "class": "Process",
+    "id": "rate_P4"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P5"
+      }
+    ],
+    "assignments": {
+      "ode_": "acos(0.5)"
+    },
+    "class": "Process",
+    "id": "rate_P5"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P6"
+      }
+    ],
+    "assignments": {
+      "ode_": "asin(1)"
+    },
+    "class": "Process",
+    "id": "rate_P6"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P7"
+      }
+    ],
+    "assignments": {
+      "ode_": "asin((-0.5))"
+    },
+    "class": "Process",
+    "id": "rate_P7"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P8"
+      }
+    ],
+    "assignments": {
+      "ode_": "atan(2.8)"
+    },
+    "class": "Process",
+    "id": "rate_P8"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P9"
+      }
+    ],
+    "assignments": {
+      "ode_": "atan((-7.09))"
+    },
+    "class": "Process",
+    "id": "rate_P9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

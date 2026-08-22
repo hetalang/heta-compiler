@@ -1,0 +1,951 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.13.0-beta.0"
+    },
+    "created": "2026-08-22T08:43:12.886Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "3f3649030b4a72da572908dd614fe004e6077bbd583a77ce425b1096079ebb15",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E1",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E10",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E11",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E12",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E13",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E14",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E15",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E16",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E17",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E18",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E19",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E2",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E20",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E21",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E22",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E23",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E24",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E25",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E26",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E27",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E28",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E29",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E3",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E30",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E31",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E32",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E33",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E34",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E35",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E36",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E37",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E38",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E39",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E4",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E40",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E41",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E42",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E43",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E44",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E45",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E46",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E47",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E48",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E49",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E5",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E50",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E6",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E7",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E8",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E9",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "exponentiale",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E1": "exp(exponentiale)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E10": "ceil(0.5)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E11": "ceil(3.55)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E12": "ceil((-4.6))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E13": "cos(9.1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E14": "cos((-0.22))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E15": "exp(0)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E16": "exp(1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E17": "exp(0.77)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E18": "floor((-4.6))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E19": "floor(9.1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E2": "abs((-1))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E20": "ln(0.2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E21": "ln(1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E22": "logbase(0.2, 10)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E23": "logbase(1, 10)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E24": "pow(1, 2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E25": "pow(2, 2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E26": "pow(1.4, 5.1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E27": "pow(4, 2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E28": "pow(3.1, 2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E29": "pow(4, 1 / 2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E3": "abs(1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E30": "pow(7.4, 1 / 2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P30"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E31": "sin(2.1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P31"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E32": "sin(0)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P32"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E33": "sin((-5.9))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P33"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E34": "tan(0)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P34"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E35": "tan(1.11)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P35"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E36": "tan((-6))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P36"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E37": "sec(0.5)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P37"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E38": "csc(4.5)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P38"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E39": "cot(0.2)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P39"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E4": "acos((-1))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E40": "sinh(0.3)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P40"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E41": "cosh(1.7)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P41"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E42": "asec(2.3)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P42"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E43": "acsc(1.1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P43"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E44": "acot((-0.1))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P44"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E45": "asinh(99)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P45"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E46": "acosh(1.34)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P46"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E47": "atanh((-0.7))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P47"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E48": "asech(0.42)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P48"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E49": "acsch(0.01)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P49"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E5": "acos(0.5)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "P50",
+    "num": 0
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "P51",
+    "num": 0
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E50": "multiply()",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P52"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E6": "asin(1)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E7": "asin((-0.5))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E8": "atan(2.8)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E9": "atan((-7.09))",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

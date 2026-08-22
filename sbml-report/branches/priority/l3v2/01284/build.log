@@ -1,0 +1,15 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01284/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01284/01284-sbml-l3v2.xml"...
+[error]	undefined::E0 Expected boolean literal true, false, 0 or 1, got 3 " 3 "
+[info]	Platform hash: ff0ff9f544c13b5f1f780e24697da6c8821cbd25872eced32a203396b46d84d3
+[info]	Setting references in elements, total length 95
+[error]	No required "trigger" property for "E0" of DSwitcher.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

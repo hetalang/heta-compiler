@@ -1,0 +1,198 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:28:53.319Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.1,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.15,
+          "title": "k2"
+        },
+        {
+          "id": "p1",
+          "value": 2.5,
+          "title": "p1"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              2.5
+            ],
+            "format": "math-json"
+          },
+          "title": "S1",
+          "derivative": {
+            "expr": [
+              "Negate",
+              "reaction1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              2.5
+            ],
+            "format": "math-json"
+          },
+          "title": "S2",
+          "derivative": {
+            "expr": "reaction2",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S3_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              0,
+              2.5
+            ],
+            "format": "math-json"
+          },
+          "title": "S3",
+          "derivative": {
+            "expr": [
+              "Add",
+              "reaction1",
+              [
+                "Negate",
+                "reaction2"
+              ]
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 2.5,
+          "title": "C"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "C",
+              "k1",
+              "S1"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        },
+        {
+          "id": "S3",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S3_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S3"
+        },
+        {
+          "id": "S4",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "S3",
+              [
+                "Power",
+                [
+                  "Add",
+                  "p1",
+                  1
+                ],
+                -1
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "S4"
+        },
+        {
+          "id": "S5",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "S4",
+              "p1"
+            ],
+            "format": "math-json"
+          },
+          "title": "S5"
+        },
+        {
+          "id": "reaction2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "C",
+              "k2",
+              "S5"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction2"
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

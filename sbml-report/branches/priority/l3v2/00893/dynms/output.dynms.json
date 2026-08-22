@@ -1,0 +1,91 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:18:11.840Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.5,
+          "title": "k1"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "P1",
+          "initial": 0.0015,
+          "title": "P1",
+          "derivative": {
+            "expr": "rate_P1",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P2",
+          "initial": 0,
+          "title": "P2",
+          "derivative": {
+            "expr": "rate_P2",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P3",
+          "initial": 0.001,
+          "title": "P3",
+          "derivative": {
+            "expr": "rate_P3",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [],
+      "assignments": [
+        {
+          "id": "rate_P3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "t"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_P1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              -1,
+              "P1",
+              "P3"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "rate_P2",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "P1",
+              "P3"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

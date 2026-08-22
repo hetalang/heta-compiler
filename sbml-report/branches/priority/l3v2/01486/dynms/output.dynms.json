@@ -1,0 +1,497 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-22T08:22:05.057Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [],
+      "assignments": [
+        {
+          "id": "P3",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Greater",
+                1,
+                0.5
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P4",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "GreaterEqual",
+                1,
+                0.5
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P5",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Less",
+                1,
+                0.5
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P6",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "LessEqual",
+                1,
+                0.5
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P1",
+          "rhs": {
+            "expr": "Pi",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P7",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Equal",
+                "P1",
+                "Pi"
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P8",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "NotEqual",
+                "P1",
+                "Pi"
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P9",
+          "rhs": {
+            "expr": [
+              "Factorial",
+              4
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P10",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "And",
+                "True",
+                "False"
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P11",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Or",
+                "True",
+                "False"
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P12",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Xor",
+                "True",
+                "False"
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P13",
+          "rhs": {
+            "expr": [
+              "If",
+              [
+                "Not",
+                "False"
+              ],
+              2,
+              3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P14",
+          "rhs": {
+            "expr": [
+              "Sec",
+              0.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P15",
+          "rhs": {
+            "expr": [
+              "Csc",
+              4.5
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P16",
+          "rhs": {
+            "expr": [
+              "Cot",
+              0.2
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P17",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.5,
+              [
+                "Add",
+                [
+                  "Exp",
+                  0.3
+                ],
+                [
+                  "Negate",
+                  [
+                    "Exp",
+                    -0.3
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P18",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.5,
+              [
+                "Add",
+                [
+                  "Exp",
+                  1.7
+                ],
+                [
+                  "Exp",
+                  -1.7
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P19",
+          "rhs": {
+            "expr": [
+              "Arcsec",
+              2.3
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P20",
+          "rhs": {
+            "expr": [
+              "Arccsc",
+              1.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P21",
+          "rhs": {
+            "expr": [
+              "Arccot",
+              -0.1
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P22",
+          "rhs": {
+            "expr": [
+              "Ln",
+              [
+                "Add",
+                99,
+                [
+                  "Sqrt",
+                  [
+                    "Add",
+                    [
+                      "Power",
+                      99,
+                      2
+                    ],
+                    1
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P23",
+          "rhs": {
+            "expr": [
+              "Ln",
+              [
+                "Add",
+                1.34,
+                [
+                  "Sqrt",
+                  [
+                    "Add",
+                    [
+                      "Power",
+                      1.34,
+                      2
+                    ],
+                    [
+                      "Negate",
+                      1
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P24",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.5,
+              [
+                "Ln",
+                [
+                  "Divide",
+                  [
+                    "Add",
+                    1,
+                    -0.7
+                  ],
+                  [
+                    "Add",
+                    1,
+                    [
+                      "Negate",
+                      -0.7
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P25",
+          "rhs": {
+            "expr": [
+              "Ln",
+              [
+                "Divide",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Sqrt",
+                    [
+                      "Add",
+                      1,
+                      [
+                        "Negate",
+                        [
+                          "Power",
+                          0.42,
+                          2
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                0.42
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P26",
+          "rhs": {
+            "expr": [
+              "Ln",
+              [
+                "Add",
+                [
+                  "Divide",
+                  1,
+                  0.01
+                ],
+                [
+                  "Sqrt",
+                  [
+                    "Add",
+                    1,
+                    [
+                      "Divide",
+                      1,
+                      [
+                        "Power",
+                        0.01,
+                        2
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P27",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              0.5,
+              [
+                "Ln",
+                [
+                  "Divide",
+                  [
+                    "Add",
+                    8.2,
+                    1
+                  ],
+                  [
+                    "Add",
+                    8.2,
+                    [
+                      "Negate",
+                      1
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P28",
+          "rhs": {
+            "expr": "ExponentialE",
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "P29",
+          "rhs": {
+            "expr": [
+              "Exp",
+              "ExponentialE"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}
