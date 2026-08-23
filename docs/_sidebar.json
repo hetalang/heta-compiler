@@ -16,6 +16,7 @@
             },
             { "text": "qsp-units.heta", "link": "/hetacompiler/qsp-units.heta" },
             { "text": "qsp-functions.heta", "link": "/hetacompiler/qsp-functions.heta" },
+            { "text": "Quality, security & reproducibility", "link": "/hetacompiler/quality-security-reproducibility" },
             { 
                 "text": "Migration guides",
                 "items": [
@@ -25,7 +26,8 @@
                     { "text": "Migrate to v0.9", "link": "/hetacompiler/migrate/migrate-to-v0.9" },
                     { "text": "Migrate to v0.10", "link": "/hetacompiler/migrate/migrate-to-v0.10" },
                     { "text": "Migrate to v0.11", "link": "/hetacompiler/migrate/migrate-to-v0.11" },
-                    { "text": "Migrate to v0.12", "link": "/hetacompiler/migrate/migrate-to-v0.12" }
+                    { "text": "Migrate to v0.12", "link": "/hetacompiler/migrate/migrate-to-v0.12" },
+                    { "text": "Migrate to v0.13", "link": "/hetacompiler/migrate/migrate-to-v0.13" }
                 ]
             },
             { "text": "Change Log", "link": "https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md" },

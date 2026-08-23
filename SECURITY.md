@@ -17,7 +17,7 @@ We recommend upgrading to the latest version to ensure you receive critical secu
 
 We take security issues seriously and appreciate your efforts to disclose vulnerabilities responsibly. If you find a security issue in our project, please follow the steps below:
 
-1. **Contact**: Email us at [dev@insysbio.com] to report the issue. Please include:
+1. **Contact**: Email us at [dev@insysbio.com](mailto:dev@insysbio.com) to report the issue. Please include:
    - A description of the vulnerability.
    - Steps to reproduce the issue, if applicable.
    - Any relevant details about potential impacts.
@@ -33,3 +33,7 @@ We take security issues seriously and appreciate your efforts to disclose vulner
 5. **Follow-Up**: If your report is not accepted as a valid vulnerability, we will provide an explanation.
 
 Thank you for helping us maintain the security of this project!
+
+## Related Assurance Documentation
+
+For the broader set of engineering controls, including automated testing, release verification, dependency review, and reproducibility reports, see [Quality, security, and reproducibility](https://hetalang.github.io/hetacompiler/quality-security-reproducibility.html).

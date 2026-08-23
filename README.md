@@ -20,6 +20,9 @@ Heta-compiler is part of the **Heta modeling project** for quantitative systems 
 📚 **Documentation**\
 https://hetalang.github.io/hetacompiler/
 
+🛡️ **Quality, security, and reproducibility**\
+https://hetalang.github.io/hetacompiler/quality-security-reproducibility.html
+
 ## Quick start
 
 The example below shows how to create a **simple reaction model** and convert it to SBML, Simbiology, and Heta-Table format.
@@ -69,7 +72,7 @@ See the [installation guide](https://hetalang.github.io/hetacompiler/installatio
 
 ## Reproducibility reports
 
-This section collects automated reproducibility checks for format conversion, simulations, and other validation workflows.
+This section presents automated format-conversion checks for the **master** branch. Case-level results and the scope of excluded unsupported features are documented in [Quality, security, and reproducibility](https://hetalang.github.io/hetacompiler/quality-security-reproducibility.html).
 
 | Test set | Conversion check | Latest **master** |
 | --- | --- | --- |
@@ -90,6 +93,7 @@ for checking, compilation, and transforming models written in Heta to different 
 
 -   📖 Documentation: https://hetalang.github.io/
 -   🐞 Issue tracker: https://github.com/hetalang/heta-compiler/issues
+-   🔐 Security policy: https://github.com/hetalang/heta-compiler/security/policy
 
 ## Citation
 

@@ -1,4 +1,4 @@
-[![GitHub issues](https://img.shields.io/github/issues/hetalang/heta-compiler.svg)](https://GitHub.com/hetalang/heta-compiler/issues/)[![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)[![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)
+[![GitHub issues](https://img.shields.io/github/issues/hetalang/heta-compiler.svg)](https://GitHub.com/hetalang/heta-compiler/issues/)[![GitHub license](https://img.shields.io/github/license/hetalang/heta-compiler.svg)](https://github.com/hetalang/heta-compiler/blob/master/LICENSE)[![GitHub npm](https://img.shields.io/npm/v/heta-compiler/latest.svg)](https://www.npmjs.com/package/heta-compiler)[![Autotests](https://github.com/hetalang/heta-compiler/actions/workflows/nodejs.yml/badge.svg?branch=master)](https://github.com/hetalang/heta-compiler/actions/workflows/nodejs.yml)[![CodeQL](https://github.com/hetalang/heta-compiler/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/hetalang/heta-compiler/actions/workflows/github-code-scanning/codeql)
 
 # Heta compiler
 
@@ -17,6 +17,10 @@
 ## How to cite
 
 Metelkin, E., (2021). Heta compiler: a software tool for the development of large-scale QSP models and compilation into simulation formats. __Journal of Open Source Software, 6(67), 3708__, [DOI: 10.21105/joss.03708](https://doi.org/10.21105/joss.03708)
+
+## Engineering assurance
+
+Heta Compiler applies automated quality controls, cross-platform regression testing, security scanning, and release-level reproducibility checks. See [Quality, security, and reproducibility](./quality-security-reproducibility).
 
 ## Quick start
 
