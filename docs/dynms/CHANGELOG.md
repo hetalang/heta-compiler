@@ -2,15 +2,12 @@
 
 ## 0.2.1
 
- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json`
-- Added extended numeric values for constants and MathJSON expressions: `NaN`, `+Infinity`, and `-Infinity` are encoded as `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}` respectively.
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json`
 - The `dynms` field now must be exactly `"0.2.1"`.
-- A document must contain at least one model.
 - `t` is reserved for simulation time and cannot be used as a model identifier.
-- Constants accept only numeric values, including extended MathJSON numeric values; expression objects are no longer permitted as `constants[].value`.
-- Added `stopSimulation` to time events and state events.
-- MathJSON symbols must use the DynMS identifier syntax, and MathJSON function calls are limited to the supported operator and function names. User-defined functions must be expanded before DynMS export.
-- Allow non-integer values for `timeEvents[].priority` and `events[].priority`.
+- `constants[].value` accepts only finite JSON numbers or extended numeric objects. Arbitrary expression objects are no longer permitted.
+- Extended numeric constants and MathJSON literals use `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}`. The exporter also preserves special state initial values as MathJSON expressions.
+- `timeEvents[].priority` and `events[].priority` are optional numbers, including non-integer values. The default value `0` was removed, and the exporter omits priority when it is not set.
 
 ## 0.2.0
 

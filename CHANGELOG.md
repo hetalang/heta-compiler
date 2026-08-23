@@ -2,15 +2,21 @@
 
 ## 0.13.0
 
-- Added the experimental `priority` property to switchers to control the execution order of simultaneous events.
-- SBML imports now report clear errors when an event uses the unsupported `<delay>` or `<priority>` element.
-- Improved **SBML import and export** compatibility: added support for variadic MathML arithmetic and logical operators, handled Level 2 reaction defaults correctly, and safely renamed conflicting imported identifiers.
-- Improved support for mathematical expressions, including  inverse hyperbolic functions, Boolean expressions, and canonical `piecewise(value, condition, ..., otherwise)` syntax.
-- Fixed expansion of nested user-defined functions so exported models no longer retain unresolved function calls.
-- Tightened validation for identifiers, `#importNS` prefixes, time scales, and switcher settings.
-- Follow heta language specifications 0.6.0
-- Remove MT export type
-- Updated **DynMS export** to version 0.2.1, with extended numeric values (`NaN`, `Infinity`, and `-Infinity`) and stricter validation of documents and MathJSON expressions.
+- Added support for **Heta language specification 0.6.0**. Identifiers must start with a letter; `true` and `false` are reserved Boolean literals; Euler's number is now `exponentiale`; `add()` and `multiply()` are variadic; Boolean user-defined functions and canonical `piecewise(value, condition, ..., otherwise)` expressions are supported.
+- Added `NaN`, `Infinity`, and `-Infinity` support for constants and expressions, with target-specific output in JSON/Canonical, DynMS, SBML, Julia, Matlab/SimBiology, and mrgsolve exports. DBSolve, which has no equivalent literals, uses finite saturation values.
+- Added the experimental numeric `priority` property to switchers.
+- Changed component validation and defaults: `@TimeSwitcher.start` is required in concrete namespaces, custom `@TimeScale` components require `slope` and `intercept`, and `reversible` is no longer implicitly added to processes and reactions.
+- Tightened namespace and table-module handling: `#importNS` validates prefixes and preserves the destination time scale `t`; table Boolean fields accept only `true`, `false`, `0`, or `1`, and switcher `active` is included in table output.
+- Improved expression handling: user-defined functions are expanded recursively, Boolean result validation works through function calls, and literal `0`/`1` is normalized only in Boolean contexts.
+- Updated the bundled `qsp-functions.heta`: inverse hyperbolic helpers now use the `asinh`/`acosh` naming family, and new `quotient`, `rem`, and `implies` helpers were added.
+- Improved **SBML import** compatibility: variadic arithmetic and logical MathML operators are supported, Level 2 defaults are handled correctly, imported identifiers are renamed safely, and generated event/rate/local-parameter identifiers are collision-safe.
+- SBML import now rejects required Level 3 extension packages and unsupported semantics instead of silently discarding them, including event `<delay>`, event `<priority>`, `CSymbolDelay`, and references to `SpeciesReference` identifiers in MathML. Events without a trigger no longer create invalid switchers.
+- Improved **SBML export** correctness for special numeric values, inverse trigonometric functions, `sign()`, optional `reversible`, empty events, and numeric switcher priorities in L3V1/L3V2.
+- Updated **DynMS export** to version 0.2.1: constants are numeric-only, extended numeric values are preserved, `t` is reserved for simulation time, special state initial values remain expressions, and event priority is an optional number without a default.
+- Unit hashes now use the `units_` prefix, preventing generated identifiers from starting with an underscore.
+- Published the DynMS and Heta JSON schemas through the npm package exports `heta-compiler/dynms-schema` and `heta-compiler/heta-json-schema`; `platformId` is now optional in the Heta JSON schema.
+- Removed the experimental ModelingToolkit (`MT`) export format.
+- Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
 - Updated dependencies to address known security vulnerabilities.
 
 ## 0.12.1
