@@ -133,6 +133,7 @@ jobs:
         shell: bash
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
         run: |
           report_names=(l3v2 l3v1 l2v5)
           for report_name in "${report_names[@]}"; do
@@ -144,16 +145,25 @@ jobs:
 
           release_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/releases/$RELEASE_TAG"
           latest_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/releases/latest"
-          rm -rf "$release_root" "$latest_root"
-          mkdir -p "$release_root" "$latest_root"
+          rm -rf "$release_root"
+          mkdir -p "$release_root"
+          if [[ "$PRERELEASE" == "false" ]]; then
+            rm -rf "$latest_root"
+            mkdir -p "$latest_root"
+          fi
           for report_name in "${report_names[@]}"; do
             cp -a "$FCTS_ROOT/results/$report_name" "$release_root/$report_name"
-            cp -a "$FCTS_ROOT/results/$report_name" "$latest_root/$report_name"
+            if [[ "$PRERELEASE" == "false" ]]; then
+              cp -a "$FCTS_ROOT/results/$report_name" "$latest_root/$report_name"
+            fi
           done
 
           git -C "$GITHUB_WORKSPACE/reports-publication" config user.name 'github-actions[bot]'
           git -C "$GITHUB_WORKSPACE/reports-publication" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/releases/$RELEASE_TAG" "sbml-report/releases/latest"
+          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/releases/$RELEASE_TAG"
+          if [[ "$PRERELEASE" == "false" ]]; then
+            git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/releases/latest"
+          fi
           if git -C "$GITHUB_WORKSPACE/reports-publication" diff --cached --quiet; then
             echo 'Published release reports are unchanged.'
             exit 0
