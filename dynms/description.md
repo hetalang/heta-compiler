@@ -21,10 +21,11 @@ Minimal valid DynMS structure:
 
 ```json
 {
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "models": [
     {
       "id": "model1",
+      "timeVariable": { "id": "time" },
       "constants": [],
       "dynamic": [],
       "static": [],
@@ -39,7 +40,7 @@ Minimal valid DynMS structure:
 
 Top-level required fields:
 
-- `dynms`: DynMS version; currently must be `"0.2.1"`;
+- `dynms`: DynMS version; currently must be `"0.3.0"`;
 - `models`: non-empty array of model definitions.
 
 The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`.
@@ -48,7 +49,7 @@ The optional top-level metadata fields are `$schema`, `generator`, `created`, `p
 
 ## 2. DynMS Model Structure
 
-A DynMS document contains one or more models. Each model must include `id`, `constants`, `dynamic`, `static`, `assignments`, `timeEvents`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
+A DynMS document contains one or more models. Each model must include `id`, `timeVariable`, `constants`, `dynamic`, `static`, `assignments`, `timeEvents`, `events`, and `observables`. These component arrays may be empty unless additional semantic validation rules require otherwise.
 
 The following sections describe one model-object type at a time.
 
@@ -56,7 +57,23 @@ The following sections describe one model-object type at a time.
 
 ## 3. Model Objects
 
-### 3.1 Constants
+### 3.1 Time variable
+
+`timeVariable` declares the model's independent simulation-time variable. Its `id` is an ordinary model identifier and may be any valid identifier, including `t`. Expressions reference this identifier as an ordinary MathJSON symbol; its special simulation-time semantics are defined by this declaration.
+
+```json
+{
+  "timeVariable": { "id": "time" },
+  "assignments": [
+    {
+      "id": "doseRate",
+      "rhs": { "expr": ["Multiply", "k", "time"], "format": "math-json" }
+    }
+  ]
+}
+```
+
+### 3.2 Constants
 
 `constants` contains externally configurable scalar values, such as model inputs. A constant is initialized by a finite JSON number or an extended numeric value, and does not change during simulation unless a backend-specific mechanism changes it. Model constants are distinct from DynMS built-in symbols such as `Pi` and `ExponentialE`; built-in symbols are not listed in this array.
 
@@ -78,7 +95,7 @@ Because JSON has no native representation for `Infinity`, `-Infinity`, or `NaN`,
 
 ---
 
-### 3.2 Dynamic states
+### 3.3 Dynamic states
 
 `dynamic` contains states integrated by the solver. Every dynamic state has an `id`, an `initial` value, and exactly one `derivative` expression.
 
@@ -109,7 +126,7 @@ The `derivative` defines the ordinary differential equation for the state. Set o
 
 ---
 
-### 3.3 Static states
+### 3.4 Static states
 
 `static` contains states that are stored during simulation but are not integrated by the solver. They do not define derivatives and may be modified only by events.
 
@@ -136,7 +153,7 @@ For both dynamic and static states, `initial` may be a number or an expression. 
 
 ---
 
-### 3.4 Assignments
+### 3.5 Assignments
 
 `assignments` contains algebraic expressions (rules) evaluated during simulation, and before or after events when required by the backend. Assignments are not states and do not store values.
 
@@ -154,7 +171,7 @@ Assignment values are globally available during simulation and may be used in de
 
 ---
 
-### 3.5 Time events
+### 3.6 Time events
 
 `timeEvents` contains events activated by a time trigger. Each object has an `id`, a `trigger`, and an `actions` array. Optional `active` and `stopSimulation` fields default to `true` and `false`, respectively. `priority`, when present, is a number.
 
@@ -179,7 +196,7 @@ Assignment values are globally available during simulation and may be used in de
 }
 ```
 
-`start`, `period`, and `stop` may be numbers or expressions evaluated at simulation start. A time-trigger expression may reference model constants, numeric literals, and built-in numeric symbols; it must not reference states, assignments, or the time variable `t`.
+`start`, `period`, and `stop` may be numbers or expressions evaluated at simulation start. A time-trigger expression may reference model constants, numeric literals, and built-in numeric symbols; it must not reference states, assignments, or `timeVariable.id`.
 
 ```json
 {
@@ -208,7 +225,7 @@ Assignment values are globally available during simulation and may be used in de
 
 ---
 
-### 3.6 State events
+### 3.7 State events
 
 `events` contains non-time events. Their triggers are either `crossing` or `conditional`; all other object fields have the same meaning as in `timeEvents`.
 
@@ -257,7 +274,7 @@ All event actions are applied all at once. The backend first evaluates every act
 
 ---
 
-### 3.7 Observables
+### 3.8 Observables
 
 `observables` contains exported model outputs. Currently each observable is a reference to a state or assignment.
 
@@ -339,9 +356,8 @@ The following reserved symbols are available in expressions and are not declared
 | `Pi` | The mathematical constant π | Yes |
 | `ExponentialE` | Euler's number *e* | Yes |
 | `True`, `False` | Boolean literals | Only where a Boolean expression is valid |
-| `t` | Simulation time | No |
 
-`Pi`, `ExponentialE`, `True`, and `False` are represented as symbols rather than function calls. Model identifiers must not use these reserved names.
+`Pi`, `ExponentialE`, `True`, and `False` are represented as symbols rather than function calls. Model identifiers must not use these reserved names. Simulation time is defined by the model's `timeVariable`, not by a built-in MathJSON symbol.
 
 ### 4.3 Other expression formats
 
@@ -379,13 +395,13 @@ At each solver step:
 
 ### 5.4 Time variable
 
-`t` is the special, globally available time variable. It is reserved and cannot be used as a model-component identifier; it may be used in derivatives, assignments, state-event triggers, and event actions, but not in initial values or time-trigger fields.
+`timeVariable.id` is the model's time variable. It may be used in derivatives, assignments, state-event triggers, and event actions, but not in initial values or time-trigger fields. Its identifier is not globally reserved: a different model may use another identifier, and `t` may be used as an ordinary component identifier when `timeVariable.id` is different.
 
 ---
 
 ## 6. Identifiers inside models
 
-DynMS uses string identifiers for all model components. An identifier must start with a letter and then contain only letters, digits, or underscores. It must be unique within a model.
+DynMS uses string identifiers for all model components and for `timeVariable.id`. An identifier must start with a letter and then contain only letters, digits, or underscores. It must be unique within a model.
 
 ---
 
@@ -404,21 +420,22 @@ Schema validation does not validate relationships between objects in a model. Th
 Identifiers must be unique within a model. The same `id` must not occur in more than one object in any of these collections:
 
 - `constants`;
+- `timeVariable`;
 - `dynamic`;
 - `static`;
 - `assignments`;
 - `timeEvents`;
 - `events`.
 
-In particular, time-event and state-event identifiers share the same identifier namespace with states, constants, and assignments. `observables` have no `id` field and are not part of this check.
+In particular, time-event and state-event identifiers share the same identifier namespace with states, constants, assignments, and the declared time variable. `observables` have no `id` field and are not part of this check.
 
 ### 7.3 Reference validity
 
 Every reference must resolve within the same model and point to an object type allowed by its context.
 
-- Symbols in expressions must resolve to a constant, state, assignment, the special time symbol `t`, or a built-in symbol listed in section 4.2.1, unless a more restrictive rule below applies.
+- Symbols in expressions must resolve to a constant, state, assignment, the model's `timeVariable.id`, or a built-in symbol listed in section 4.2.1, unless a more restrictive rule below applies.
 - `timeEvents[].actions[].state` and `events[].actions[].state` must reference an existing dynamic or static state.
-- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.1.
+- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.3.0.
 
 ### 7.4 Dynamic states and derivatives
 
@@ -426,7 +443,7 @@ Each dynamic state must have exactly one `derivative` expression. It defines an 
 
 ### 7.5 State initialization
 
-`dynamic[].initial` and `static[].initial` must be numbers or valid expressions that can be evaluated before simulation starts. An initial-value expression may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`. It must not reference states, assignments, or the time symbol `t`.
+`dynamic[].initial` and `static[].initial` must be numbers or valid expressions that can be evaluated before simulation starts. An initial-value expression may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`. It must not reference states, assignments, or `timeVariable.id`.
 
 ### 7.6 Assignments
 
@@ -434,9 +451,9 @@ Assignments must have no circular dependencies. They must be ordered so that eve
 
 ### 7.7 Time events
 
-Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`; it must not reference states, assignments, or `t`.
+Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`; it must not reference states, assignments, or `timeVariable.id`.
 
-For periodic triggers, a computed `period` should be positive. A non-positive value retains the compatibility behavior defined in section 3.5 and is treated as a one-shot trigger.
+For periodic triggers, a computed `period` should be positive. A non-positive value retains the compatibility behavior defined in section 3.6 and is treated as a one-shot trigger.
 
 ### 7.8 State events and triggers
 

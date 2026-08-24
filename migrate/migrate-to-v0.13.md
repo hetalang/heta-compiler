@@ -1,6 +1,6 @@
 # Migration from v0.12 to v0.13
 
-Heta Compiler v0.13.x adopts Heta language specification 0.6.0, updates DynMS to 0.2.1, and makes SBML conversion stricter and more reproducible.
+Heta Compiler v0.13.x adopts Heta language specification 0.6.0, updates DynMS to 0.3.0, and makes SBML conversion stricter and more reproducible.
 
 For full details, see the [change log](https://github.com/hetalang/heta-compiler/blob/master/CHANGELOG.md).
 
