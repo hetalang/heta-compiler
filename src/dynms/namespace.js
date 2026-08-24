@@ -247,6 +247,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
     
     return {
         id: this.spaceName,
+        timeVariable: { id: 't' },
         constants,
         dynamic,
         static,

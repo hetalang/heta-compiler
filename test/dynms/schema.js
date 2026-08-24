@@ -81,10 +81,11 @@ describe('DynMS schema', () => {
 
 function makeDoc(expr) {
   return {
-    dynms: '0.2.1',
+    dynms: '0.3.0',
     models: [
       {
         id: 'model',
+        timeVariable: { id: 't' },
         constants: [],
         dynamic: [
           {

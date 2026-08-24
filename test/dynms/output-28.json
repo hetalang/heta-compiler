@@ -1,5 +1,8 @@
 {
   "id": "nameless",
+  "timeVariable": {
+    "id": "t"
+  },
   "constants": [],
   "dynamic": [],
   "static": [

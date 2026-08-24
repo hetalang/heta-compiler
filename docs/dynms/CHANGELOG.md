@@ -1,5 +1,10 @@
 # DynMS Change Log
 
+## 0.3.0
+
+- Added required model-level `timeVariable` with an `id` that identifies simulation time in expressions.
+- Removed the globally reserved identifier `t`. Simulation time is now resolved through `timeVariable.id`.
+
 ## 0.2.1
 
 - Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json`

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
     "version": "0.13.0-beta.0"
@@ -11,6 +11,9 @@
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "kabs",
