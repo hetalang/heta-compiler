@@ -1,6 +1,6 @@
 /* global describe, it */
 const { expect } = require('chai');
-const { SBMLParse } = require('../../src/module-system/sbml-parse');
+const { SBMLParse, SBMLParseDetailed } = require('../../src/module-system/sbml-parse');
 const { _toMathExpr } = require('../../src/module-system/to-math-expr');
 const HetaLevelError = require('../../src/heta-level-error');
 const { Builder } = require('../../src/builder');
@@ -372,5 +372,42 @@ describe('SBML-import identifier renaming', () => {
 
     expect(qArr[0]).to.include({ id: 'f', math: 'sbml__x_1 + 1' });
     expect(qArr[0].arguments).to.deep.equal(['sbml__x_1']);
+  });
+
+  it('collects renamed and created identifiers in a structured report', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfFunctionDefinitions><functionDefinition id="f"><math><lambda><bvar><ci>_arg</ci></bvar><apply><plus/><ci>_arg</ci><cn>1</cn></apply></lambda></math></functionDefinition></listOfFunctionDefinitions><listOfParameters><parameter id="_x" value="1"/></listOfParameters><listOfRules><rateRule variable="_x"><math><cn>1</cn></math></rateRule></listOfRules><listOfReactions><reaction id="r"><kineticLaw><listOfLocalParameters><localParameter id="k" value="2"/></listOfLocalParameters><math><ci>k</ci></math></kineticLaw></reaction></listOfReactions><listOfEvents><event><trigger><math><true/></math></trigger></event></listOfEvents></model></sbml>`;
+    let { qArr, renamed, created } = SBMLParseDetailed(xml);
+
+    expect(qArr).to.be.an('array').that.is.not.empty;
+    expect(renamed).to.deep.equal({ _x: 'sbml__x_1' });
+    expect(created).to.deep.equal([
+      'local_r_k',
+      'rate_sbml__x_1',
+      'event_1'
+    ]);
+  });
+
+  it('logs one identifier report for a successfully imported SBML file', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfParameters><parameter id="_x" value="1"/></listOfParameters></model></sbml>`;
+    let logs = [];
+    let builder = new Builder(
+      { id: 'test', options: {}, importModule: { type: 'sbml', source: 'model.xml' }, export: [] },
+      () => Buffer.from(xml),
+      () => {},
+      [(level, message, details) => logs.push({ level, message, details })]
+    );
+
+    builder.run();
+
+    let report = logs.find((log) => log.details?.type === 'SBMLImportIdentifiers');
+    expect(report).to.deep.include({
+      level: 'info',
+      message: 'SBML identifiers converted: 1 renamed, 0 created.'
+    });
+    expect(report.details).to.deep.equal({
+      type: 'SBMLImportIdentifiers',
+      renamed: { _x: 'sbml__x_1' },
+      created: []
+    });
   });
 });

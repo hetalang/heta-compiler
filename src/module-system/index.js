@@ -157,7 +157,7 @@ class ModuleSystem {
     
     try {
       let fileContent = this.fileReadHandler(filename);
-      var parsed = loader(fileContent, options);
+      var parsed = loader(fileContent, options, this.logger);
     } catch (e) {
       if (e.name === 'HetaLevelError') {
         let msg = e.message + ` when converting module "${filename}${tabNum}"`;

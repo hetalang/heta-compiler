@@ -46,7 +46,7 @@ function buildGlobalIdResolver(model) {
     }
   });
 
-  return { allocator, resolve: (id) => renamed.get(id) || id };
+  return { allocator, renamed, resolve: (id) => renamed.get(id) || id };
 }
 
 function buildLocalResolver(sourceIds, globalResolve) {

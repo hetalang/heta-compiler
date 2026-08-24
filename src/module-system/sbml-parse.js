@@ -17,6 +17,20 @@ const {
  * @returns {array} Parsed content in Q-array format.
  */
 function SBMLParse(fileText, options = {}) {
+  return SBMLParseDetailed(fileText, options).qArr;
+}
+
+/**
+ * Transforms SBML text into a Q-array and reports identifier changes made by
+ * the importer.
+ *
+ * @param {string} fileText SBML document text.
+ * @param {object} options SBML import options.
+ *
+ * @returns {{qArr: object[], renamed: object, created: string[]}} Parsed
+ * content and identifier conversion report.
+ */
+function SBMLParseDetailed(fileText, options = {}) {
   let fileTextNoAnnotation = fileText.replace(/<annotation>([\s\S]*?)<\/annotation>/g, (match, p1) => {
     let res =  encodeXML(p1)
       .replace(/[\t\r\n]+/g, '');
@@ -35,6 +49,7 @@ function SBMLParse(fileText, options = {}) {
 function jsbmlToQArr(JSBML, options = {}) {
   let qArr = [];
   let eventCounter = 1; // reset event counter
+  let created = [];
 
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
@@ -44,7 +59,7 @@ function jsbmlToQArr(JSBML, options = {}) {
 
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
-  let { allocator, resolve } = buildGlobalIdResolver(model);
+  let { allocator, renamed, resolve } = buildGlobalIdResolver(model);
 
   // preliminary analyses listOfInitialAssignments to get variables to init in the beginning
   // it is applied for parameters which are @Records, not @Const
@@ -141,7 +156,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'reaction')
     .forEach((x) => {
-      let qArr_add = reactionToQ(x, sbmlLevel, resolve, allocator);
+      let qArr_add = reactionToQ(x, sbmlLevel, resolve, allocator, created);
       qArr = qArr.concat(qArr_add);
     });
 
@@ -196,7 +211,7 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'rateRule')
     .forEach((x) => {
-      let qArr_add = rateRuleToQ(x, resolve, allocator);
+      let qArr_add = rateRuleToQ(x, resolve, allocator, created);
       qArr = qArr.concat(qArr_add);
     });
 
@@ -207,11 +222,15 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'event')
     .forEach((x) => {
-      let qs = eventToQ(x, eventCounter++, options, resolve, allocator);
+      let qs = eventToQ(x, eventCounter++, options, resolve, allocator, created);
       qArr = qArr.concat(qs);
     });
 
-  return qArr;
+  return {
+    qArr,
+    renamed: Object.fromEntries(renamed),
+    created
+  };
 }
 
 /*
@@ -478,7 +497,7 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}, res
   return q;
 }
 
-function reactionToQ(x, sbmlLevel, resolve = (id) => id, allocator){
+function reactionToQ(x, sbmlLevel, resolve = (id) => id, allocator, created){
   let qArr = [];
   let localConstTranslate = [];
   let q = baseToQ(x, resolve);
@@ -495,6 +514,7 @@ function reactionToQ(x, sbmlLevel, resolve = (id) => id, allocator){
     parameters.forEach((y) => {
       let id = y.attributes?.id;
       let newId = allocator.generatedName('local_' + q.id + '_' + id);
+      created.push(newId);
       // set translator
       localConstTranslate.push({id, newId});
       // add component
@@ -662,11 +682,12 @@ function assignmentRuleToQ(x, resolve = (id) => id){
   return q;
 }
 
-function rateRuleToQ(x, resolve = (id) => id, allocator){
+function rateRuleToQ(x, resolve = (id) => id, allocator, created){
   let q0 = baseToQ(x, resolve);
 
   let target = resolve(x.attributes?.variable);
   q0.id = allocator.generatedName('rate_' + target);
+  created.push(q0.id);
   q0.class = 'Process';
   q0.actors = [{
     stoichiometry: 1,
@@ -685,13 +706,16 @@ function rateRuleToQ(x, resolve = (id) => id, allocator){
   return [q0, q1];
 }
 
-function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator){
+function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator, created){
   let qArr = [];
 
   let switcher = baseToQ(x, resolve);
   // convert to `CSwitcher`
   switcher.class = options.useCSwitcher ? 'CSwitcher' : 'DSwitcher';
-  if (switcher.id === undefined) switcher.id = allocator.generatedName('event_' + eventCounter);
+  if (switcher.id === undefined) {
+    switcher.id = allocator.generatedName('event_' + eventCounter);
+    created.push(switcher.id);
+  }
 
   // useValuesFromTriggerTime
   //let useValuesFromTriggerTime = x.attributes?.useValuesFromTriggerTime !== 'false';
@@ -839,4 +863,4 @@ function SBMLValueToNumber(value) {
   }
 }
 
-module.exports = { SBMLParse };
+module.exports = { SBMLParse, SBMLParseDetailed };
