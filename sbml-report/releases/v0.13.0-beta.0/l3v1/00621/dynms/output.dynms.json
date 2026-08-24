@@ -1,0 +1,164 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-24T09:36:34.683Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.75,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 5,
+          "title": "k2"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S1",
+          "derivative": {
+            "expr": [
+              "Negate",
+              "reaction1"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0.5,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S2",
+          "derivative": {
+            "expr": "reaction1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1,
+          "title": "C"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "S3",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "k1",
+              "S2"
+            ],
+            "format": "math-json"
+          },
+          "title": "S3"
+        },
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Multiply",
+              "C",
+              "k2",
+              "S1"
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "event1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Less",
+                "S1",
+                0.1
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Multiply",
+                  1,
+                  "C"
+                ],
+                "format": "math-json"
+              },
+              "state": "S2_amt_"
+            }
+          ],
+          "active": true,
+          "title": "event1"
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

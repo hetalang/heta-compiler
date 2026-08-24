@@ -1,0 +1,14 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l2v5/01792/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01792/01792-sbml-l2v5.xml"...
+[error]	"algebraicRule" from SBML module is not supported. when converting module "cases/semantic/01792/01792-sbml-l2v5.xml"
+[info]	Platform hash: 368341e23afd9b3c7f1f06eb40f0154a8e5e5cbf43a47b5eadf61729ecd98aeb
+[info]	Setting references in elements, total length 95
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

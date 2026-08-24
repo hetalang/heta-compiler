@@ -1,0 +1,110 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-24T09:40:59.995Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "A_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              30,
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Negate",
+                "J0"
+              ],
+              [
+                "Negate",
+                [
+                  "Multiply",
+                  2,
+                  "J0"
+                ]
+              ]
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "B_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              1,
+              1
+            ],
+            "format": "math-json"
+          },
+          "derivative": {
+            "expr": [
+              "Add",
+              [
+                "Multiply",
+                2,
+                "J0"
+              ],
+              "J0"
+            ],
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1
+        }
+      ],
+      "assignments": [
+        {
+          "id": "A",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "A_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "B",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "B_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          }
+        },
+        {
+          "id": "J0",
+          "rhs": {
+            "expr": 1,
+            "format": "math-json"
+          }
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.13.0-beta.0"
+    },
+    "created": "2026-08-24T09:41:15.091Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "01274802bf7c4044d9fadc803d0a25203ceff44f3cb8485be1f60af349975042",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_plus(1, my_plus(1, my_plus0()))"
+    },
+    "class": "Record",
+    "id": "a"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_times(2, my_times(2, my_times0()))"
+    },
+    "class": "Record",
+    "id": "b"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(my_and(my_and(my_and0(), true), true) ? 1 : 0)"
+    },
+    "class": "Record",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(my_or(my_or(my_or0(), true), true) ? 1 : 0)"
+    },
+    "class": "Record",
+    "id": "d"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "(my_xor(my_xor(my_xor0(), true), true) ? 1 : 0)"
+    },
+    "class": "Record",
+    "id": "e"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_and",
+    "math": "x and y"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_and0",
+    "math": "true"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_or",
+    "math": "x or y"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_or0",
+    "math": "false"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_plus",
+    "math": "x + y"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_plus0",
+    "math": "add()"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_times",
+    "math": "x * y"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_times0",
+    "math": "multiply()"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_xor",
+    "math": "x xor y"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_xor0",
+    "math": "false"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

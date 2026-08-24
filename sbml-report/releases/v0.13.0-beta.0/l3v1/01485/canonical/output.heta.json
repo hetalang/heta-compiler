@@ -1,0 +1,571 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.13.0-beta.0"
+    },
+    "created": "2026-08-24T09:41:12.756Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "97662294ac0d977dbc35d80e9d052d7f7ebbe51e21dd8b2fa2ebbfbf4aa49b86",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_ceil(0.5)"
+    },
+    "class": "Record",
+    "id": "P10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_ceil(3.55)"
+    },
+    "class": "Record",
+    "id": "P11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_ceil((-4.6))"
+    },
+    "class": "Record",
+    "id": "P12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_cos(9.1)"
+    },
+    "class": "Record",
+    "id": "P13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_cos((-0.22))"
+    },
+    "class": "Record",
+    "id": "P14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_exp(0)"
+    },
+    "class": "Record",
+    "id": "P15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_exp(1)"
+    },
+    "class": "Record",
+    "id": "P16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_exp(0.77)"
+    },
+    "class": "Record",
+    "id": "P17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_floor((-4.6))"
+    },
+    "class": "Record",
+    "id": "P18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_floor(9.1)"
+    },
+    "class": "Record",
+    "id": "P19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_abs((-1))"
+    },
+    "class": "Record",
+    "id": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_log(0.2)"
+    },
+    "class": "Record",
+    "id": "P20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_log(1)"
+    },
+    "class": "Record",
+    "id": "P21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_log10(0.2)"
+    },
+    "class": "Record",
+    "id": "P22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_log10(1)"
+    },
+    "class": "Record",
+    "id": "P23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_pow(1, 2)"
+    },
+    "class": "Record",
+    "id": "P24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_pow(2, 2)"
+    },
+    "class": "Record",
+    "id": "P25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_pow(1.4, 5.1)"
+    },
+    "class": "Record",
+    "id": "P26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sqr(4)"
+    },
+    "class": "Record",
+    "id": "P27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sqr(3.1)"
+    },
+    "class": "Record",
+    "id": "P28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sqrt(4)"
+    },
+    "class": "Record",
+    "id": "P29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_abs(1)"
+    },
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sqrt(7.4)"
+    },
+    "class": "Record",
+    "id": "P30"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sin(2.1)"
+    },
+    "class": "Record",
+    "id": "P31"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sin(0)"
+    },
+    "class": "Record",
+    "id": "P32"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sin((-5.9))"
+    },
+    "class": "Record",
+    "id": "P33"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_tan(0)"
+    },
+    "class": "Record",
+    "id": "P34"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_tan(1.11)"
+    },
+    "class": "Record",
+    "id": "P35"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_tan((-6))"
+    },
+    "class": "Record",
+    "id": "P36"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_tanh((-0.4))"
+    },
+    "class": "Record",
+    "id": "P37"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_acos((-1))"
+    },
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_acos(0.5)"
+    },
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_asin(1)"
+    },
+    "class": "Record",
+    "id": "P6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_asin((-0.5))"
+    },
+    "class": "Record",
+    "id": "P7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_atan(2.8)"
+    },
+    "class": "Record",
+    "id": "P8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_atan((-7.09))"
+    },
+    "class": "Record",
+    "id": "P9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_abs",
+    "math": "abs(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_acos",
+    "math": "acos(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_asin",
+    "math": "asin(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_atan",
+    "math": "atan(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_ceil",
+    "math": "ceil(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_cos",
+    "math": "cos(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_exp",
+    "math": "exp(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_floor",
+    "math": "floor(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_log",
+    "math": "ln(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_log10",
+    "math": "logbase(x, 10)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_pow",
+    "math": "pow(x, y)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_sin",
+    "math": "sin(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_sqr",
+    "math": "pow(x, 2)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_sqrt",
+    "math": "pow(x, 1 / 2)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_tan",
+    "math": "tan(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_tanh",
+    "math": "tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

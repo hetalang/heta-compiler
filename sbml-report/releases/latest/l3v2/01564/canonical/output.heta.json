@@ -1,0 +1,1411 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.13.0-beta.0"
+    },
+    "created": "2026-08-24T09:31:23.221Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "1d337e9cd1372ffe1249d44dd7207186b4c5ed085268e7ced2df25abf541e202",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S0"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * exponentiale"
+    },
+    "class": "Reaction",
+    "id": "J0",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * exp(exponentiale)"
+    },
+    "class": "Reaction",
+    "id": "J1",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S10"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * ceil(0.5)"
+    },
+    "class": "Reaction",
+    "id": "J10",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S11"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * ceil(3.55)"
+    },
+    "class": "Reaction",
+    "id": "J11",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S12"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * ceil((-4.6))"
+    },
+    "class": "Reaction",
+    "id": "J12",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S13"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * cos(9.1)"
+    },
+    "class": "Reaction",
+    "id": "J13",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S14"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * cos((-0.22))"
+    },
+    "class": "Reaction",
+    "id": "J14",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S15"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * exp(0)"
+    },
+    "class": "Reaction",
+    "id": "J15",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S16"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * exp(1)"
+    },
+    "class": "Reaction",
+    "id": "J16",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S17"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * exp(0.77)"
+    },
+    "class": "Reaction",
+    "id": "J17",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S18"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * floor((-4.6))"
+    },
+    "class": "Reaction",
+    "id": "J18",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S19"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * floor(9.1)"
+    },
+    "class": "Reaction",
+    "id": "J19",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * abs((-1))"
+    },
+    "class": "Reaction",
+    "id": "J2",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S20"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * ln(0.2)"
+    },
+    "class": "Reaction",
+    "id": "J20",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S21"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * ln(1)"
+    },
+    "class": "Reaction",
+    "id": "J21",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S22"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * logbase(0.2, 10)"
+    },
+    "class": "Reaction",
+    "id": "J22",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S23"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * logbase(1, 10)"
+    },
+    "class": "Reaction",
+    "id": "J23",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S24"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(1, 2)"
+    },
+    "class": "Reaction",
+    "id": "J24",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S25"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(2, 2)"
+    },
+    "class": "Reaction",
+    "id": "J25",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S26"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(1.4, 5.1)"
+    },
+    "class": "Reaction",
+    "id": "J26",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S27"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(4, 2)"
+    },
+    "class": "Reaction",
+    "id": "J27",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S28"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(3.1, 2)"
+    },
+    "class": "Reaction",
+    "id": "J28",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S29"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(4, 1 / 2)"
+    },
+    "class": "Reaction",
+    "id": "J29",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * abs(1)"
+    },
+    "class": "Reaction",
+    "id": "J3",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S30"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * pow(7.4, 1 / 2)"
+    },
+    "class": "Reaction",
+    "id": "J30",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S31"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * sin(2.1)"
+    },
+    "class": "Reaction",
+    "id": "J31",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S32"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * sin(0)"
+    },
+    "class": "Reaction",
+    "id": "J32",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S33"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * sin((-5.9))"
+    },
+    "class": "Reaction",
+    "id": "J33",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S34"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * tan(0)"
+    },
+    "class": "Reaction",
+    "id": "J34",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S35"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * tan(1.11)"
+    },
+    "class": "Reaction",
+    "id": "J35",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S36"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * tan((-6))"
+    },
+    "class": "Reaction",
+    "id": "J36",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S37"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * sec(0.5)"
+    },
+    "class": "Reaction",
+    "id": "J37",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S38"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * csc(4.5)"
+    },
+    "class": "Reaction",
+    "id": "J38",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S39"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * cot(0.2)"
+    },
+    "class": "Reaction",
+    "id": "J39",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S4"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * acos((-1))"
+    },
+    "class": "Reaction",
+    "id": "J4",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S40"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * sinh(0.3)"
+    },
+    "class": "Reaction",
+    "id": "J40",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S41"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * cosh(1.7)"
+    },
+    "class": "Reaction",
+    "id": "J41",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S42"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * asec(2.3)"
+    },
+    "class": "Reaction",
+    "id": "J42",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S43"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * acsc(1.1)"
+    },
+    "class": "Reaction",
+    "id": "J43",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S44"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * acot((-0.1))"
+    },
+    "class": "Reaction",
+    "id": "J44",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S45"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * asinh(99)"
+    },
+    "class": "Reaction",
+    "id": "J45",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S46"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * acosh(1.34)"
+    },
+    "class": "Reaction",
+    "id": "J46",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S47"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * atanh((-0.7))"
+    },
+    "class": "Reaction",
+    "id": "J47",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S48"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * asech(0.42)"
+    },
+    "class": "Reaction",
+    "id": "J48",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S49"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * acsch(0.01)"
+    },
+    "class": "Reaction",
+    "id": "J49",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S5"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * acos(0.5)"
+    },
+    "class": "Reaction",
+    "id": "J5",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S50"
+      }
+    ],
+    "assignments": {
+      "ode_": "multiply(1)"
+    },
+    "class": "Reaction",
+    "id": "J50",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S51"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * add()"
+    },
+    "class": "Reaction",
+    "id": "J51",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S6"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * asin(1)"
+    },
+    "class": "Reaction",
+    "id": "J6",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S7"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * asin((-0.5))"
+    },
+    "class": "Reaction",
+    "id": "J7",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S8"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * atan(2.8)"
+    },
+    "class": "Reaction",
+    "id": "J8",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S9"
+      }
+    ],
+    "assignments": {
+      "ode_": "1 * atan((-7.09))"
+    },
+    "class": "Reaction",
+    "id": "J9",
+    "reversible": true
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S30"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S31"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S32"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S33"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S34"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S35"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S36"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S37"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S38"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S39"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S40"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S41"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S42"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S43"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S44"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S45"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S46"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S47"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S48"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S49"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S50"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S51"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

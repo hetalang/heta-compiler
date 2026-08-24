@@ -1,0 +1,615 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.13.0-beta.0"
+    },
+    "created": "2026-08-24T09:41:12.940Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "ea03725b2f24773f0884f65135e3ca4a659bb21c7201939eed4f2c8a277946af",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_pi()"
+    },
+    "class": "Record",
+    "id": "P1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_and(true, false), 3)"
+    },
+    "class": "Record",
+    "id": "P10"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_or(true, false), 3)"
+    },
+    "class": "Record",
+    "id": "P11"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_xor(true, false), 3)"
+    },
+    "class": "Record",
+    "id": "P12"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_not(false), 3)"
+    },
+    "class": "Record",
+    "id": "P13"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sec(0.5)"
+    },
+    "class": "Record",
+    "id": "P14"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_csc(4.5)"
+    },
+    "class": "Record",
+    "id": "P15"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_cot(0.2)"
+    },
+    "class": "Record",
+    "id": "P16"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_sinh(0.3)"
+    },
+    "class": "Record",
+    "id": "P17"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_cosh(1.7)"
+    },
+    "class": "Record",
+    "id": "P18"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arcsec(2.3)"
+    },
+    "class": "Record",
+    "id": "P19"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arccsc(1.1)"
+    },
+    "class": "Record",
+    "id": "P20"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arccot((-0.1))"
+    },
+    "class": "Record",
+    "id": "P21"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arcsinh(99)"
+    },
+    "class": "Record",
+    "id": "P22"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arccosh(1.34)"
+    },
+    "class": "Record",
+    "id": "P23"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arctanh((-0.7))"
+    },
+    "class": "Record",
+    "id": "P24"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arcsech(0.42)"
+    },
+    "class": "Record",
+    "id": "P25"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arccsch(0.01)"
+    },
+    "class": "Record",
+    "id": "P26"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_arccoth(8.2)"
+    },
+    "class": "Record",
+    "id": "P27"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_exponentiale()"
+    },
+    "class": "Record",
+    "id": "P28"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_exp(exponentiale)"
+    },
+    "class": "Record",
+    "id": "P29"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_gt(1, 0.5), 3)"
+    },
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_geq(1, 0.5), 3)"
+    },
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_lt(1, 0.5), 3)"
+    },
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_leq(1, 0.5), 3)"
+    },
+    "class": "Record",
+    "id": "P6"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_eq(P1, pi), 3)"
+    },
+    "class": "Record",
+    "id": "P7"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(2, my_neq(P1, pi), 3)"
+    },
+    "class": "Record",
+    "id": "P8"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_factorial(4)"
+    },
+    "class": "Record",
+    "id": "P9"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "A",
+      "B"
+    ],
+    "id": "implies",
+    "math": "(not A) or B"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_and",
+    "math": "x and y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arccosh",
+    "math": "acosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arccot",
+    "math": "acot(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arccoth",
+    "math": "acoth(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arccsc",
+    "math": "acsc(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arccsch",
+    "math": "acsch(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arcsec",
+    "math": "asec(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arcsech",
+    "math": "asech(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arcsinh",
+    "math": "asinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_arctanh",
+    "math": "atanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_cosh",
+    "math": "cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_cot",
+    "math": "cot(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_csc",
+    "math": "csc(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_eq",
+    "math": "x == y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_exp",
+    "math": "exp(x)"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_exponentiale",
+    "math": "exponentiale"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_factorial",
+    "math": "factorial(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_geq",
+    "math": "x >= y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_gt",
+    "math": "x > y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_leq",
+    "math": "x <= y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_lt",
+    "math": "x < y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_neq",
+    "math": "x != y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_not",
+    "math": "not x"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_or",
+    "math": "x or y"
+  },
+  {
+    "action": "defineFunction",
+    "id": "my_pi",
+    "math": "pi"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y",
+      "z"
+    ],
+    "id": "my_piecewise",
+    "math": "(y ? x : z)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_sec",
+    "math": "sec(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "my_sinh",
+    "math": "sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_xor",
+    "math": "x xor y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "quotient",
+    "math": "sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "rem",
+    "math": "x - y * sign(x / y) * floor(abs(x / y))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

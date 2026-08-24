@@ -1,0 +1,129 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.0"
+  },
+  "created": "2026-08-24T09:38:57.557Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [
+        {
+          "id": "kf",
+          "value": 0.9,
+          "title": "kf"
+        },
+        {
+          "id": "kr",
+          "value": 0.075,
+          "title": "kr"
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                1,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S1",
+          "derivative": {
+            "expr": "reaction1",
+            "format": "math-json"
+          }
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1,
+          "title": "C"
+        },
+        {
+          "id": "S2_amt_",
+          "initial": {
+            "expr": [
+              "Multiply",
+              [
+                "Divide",
+                0,
+                1
+              ],
+              1
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S1_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S1"
+        },
+        {
+          "id": "S2",
+          "rhs": {
+            "expr": [
+              "Divide",
+              "S2_amt_",
+              "C"
+            ],
+            "format": "math-json"
+          },
+          "title": "S2"
+        },
+        {
+          "id": "reaction1",
+          "rhs": {
+            "expr": [
+              "Negate",
+              [
+                "Multiply",
+                "C",
+                [
+                  "Add",
+                  [
+                    "Multiply",
+                    "kf",
+                    "S1"
+                  ],
+                  [
+                    "Multiply",
+                    -1,
+                    "kr",
+                    "S2"
+                  ]
+                ]
+              ]
+            ],
+            "format": "math-json"
+          },
+          "title": "reaction1"
+        }
+      ],
+      "timeEvents": [],
+      "events": [],
+      "observables": []
+    }
+  ]
+}
