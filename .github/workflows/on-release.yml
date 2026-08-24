@@ -14,7 +14,32 @@ permissions:
   pull-requests: read
 
 jobs:
+  verify-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 26.5.0
+          cache: npm
+
+      - run: npm ci
+
+      - name: Audit dependencies
+        run: npm audit --omit=dev --audit-level=critical
+
+      - name: Verify release source
+        run: |
+          npm run test
+          npm run test:masters
+        env:
+          CI: true
+
   upload-macos-arm64-release-asset:
+    needs: verify-source
     runs-on: macos-latest
     outputs:
       sha_arm64: ${{ steps.sha_arm64.outputs.sha }}
@@ -51,6 +76,7 @@ jobs:
             dist/heta-compiler-macos-arm64.tar.gz
 
   upload-linux-x64-release-asset:
+    needs: verify-source
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -93,6 +119,7 @@ jobs:
             dist/heta-compiler-x64.deb
 
   upload-linux-arm64-release-asset:
+    needs: verify-source
     runs-on: ubuntu-22.04-arm
     steps:
       - uses: actions/checkout@v6
@@ -123,6 +150,7 @@ jobs:
             dist/heta-compiler-linux-arm64.tar.gz
 
   upload-windows-x64-release-asset:
+    needs: verify-source
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v6
