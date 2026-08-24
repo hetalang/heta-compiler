@@ -1,10 +1,7 @@
 /*
   Common part for all entry points. Used in: 
-  - web.js for web apps, uses compiled templates
-  - cli.js for command line interface, uses compiled templates
+  - compiled.js for apps, uses compiled templates
   - index.js for node library, uses raw templates
-
-  Other variants are: browser.js (deprecated).
 */
 
 const { Builder } = require('./builder');

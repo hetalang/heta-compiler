@@ -29,7 +29,7 @@ const initAssetNames = [
 
 function createSeaCliEntryPlugin() {
   const developmentEntry = path.join(projectDir, 'bin', 'heta-build.js');
-  const compiledEntry = path.join(projectDir, 'src', 'cli.js');
+  const compiledEntry = path.join(projectDir, 'src', 'compiled.js');
   let redirected = false;
 
   return {
@@ -46,7 +46,7 @@ function createSeaCliEntryPlugin() {
     },
     assertRedirected() {
       if (!redirected) {
-        throw new Error('SEA build did not redirect bin/heta-build.js from src to src/cli.');
+        throw new Error('SEA build did not redirect bin/heta-build.js from src to src/compiled.js.');
       }
     }
   };

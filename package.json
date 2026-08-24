@@ -3,11 +3,12 @@
   "version": "0.13.0-beta.0",
   "description": "Programming platform for Quantitative Systems Pharmacology modeling in NodeJS",
   "main": "src/index.js",
-  "browser": "./src/web.js",
+  "browser": "./src/compiled.js",
   "exports": {
     ".": "./src/index.js",
-    "./cli": "./src/cli.js",
-    "./web": "./src/web.js",
+    "./cli": "./src/compiled.js",
+    "./web": "./src/compiled.js",
+    "./compiled": "./src/compiled.js",
     "./package": "./package.json",
     "./dynms-schema": "./src/dynms/dynms.schema.json",
     "./heta-json-schema": "./src/json-export/heta.json.schema.json"
