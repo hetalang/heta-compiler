@@ -1,0 +1,105 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T16:02:25.546Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J0"
+        }
+      ],
+      "static": [
+        {
+          "id": "c",
+          "initial": 1
+        },
+        {
+          "id": "k1",
+          "initial": 1
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "c"
+          ]
+        },
+        {
+          "id": "J0",
+          "rhs": "k1"
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              5.5
+            ],
+            "detection": "step"
+          },
+          "priority": "J0",
+          "actions": [
+            {
+              "state": "k1",
+              "rhs": 10
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              5.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Add",
+            "J0",
+            [
+              "Negate",
+              1
+            ]
+          ],
+          "actions": [
+            {
+              "state": "k1",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01289/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01289/01289-sbml-l3v2.xml"...
+[info]	SBML identifiers converted: 0 renamed, 0 created.
 [info]	Platform hash: d395f0bdf92b0ea60ec07deebafbe1eb91cfb3e011d722fb1cb64496d1b8fd8f
 [info]	Setting references in elements, total length 96
 [error]	Record assignments "p1" should be a numeric expression.

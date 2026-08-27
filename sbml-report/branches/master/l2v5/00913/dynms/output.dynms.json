@@ -1,46 +1,40 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:50:35.242Z",
+  "created": "2026-08-27T16:30:19.678Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [
         {
           "id": "c",
-          "initial": {
-            "expr": [
-              "Divide",
-              3,
-              2
-            ],
-            "format": "math-json"
-          },
+          "initial": [
+            "Divide",
+            3,
+            2
+          ],
           "title": "c",
-          "derivative": {
-            "expr": "rate_c",
-            "format": "math-json"
-          }
+          "derivative": "rate_c"
         }
       ],
       "static": [],
       "assignments": [
         {
           "id": "rate_c",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.25,
-              "c"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            0.25,
+            "c"
+          ]
         }
       ],
       "timeEvents": [],

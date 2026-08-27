@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01623/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01623/01623-sbml-l3v1.xml"...
+[info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	R14_K_stoich component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: 383f9ae1aba527fbe4ce372433826f0c211b52bce3853195a3b81275d35c75c2
 [info]	Setting references in elements, total length 148

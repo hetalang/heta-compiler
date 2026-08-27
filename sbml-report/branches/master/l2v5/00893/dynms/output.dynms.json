@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:50:25.055Z",
+  "created": "2026-08-27T16:30:08.926Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k1",
@@ -22,65 +25,47 @@
           "id": "P1",
           "initial": 0.0015,
           "title": "P1",
-          "derivative": {
-            "expr": "rate_P1",
-            "format": "math-json"
-          }
+          "derivative": "rate_P1"
         },
         {
           "id": "P2",
           "initial": 0,
           "title": "P2",
-          "derivative": {
-            "expr": "rate_P2",
-            "format": "math-json"
-          }
+          "derivative": "rate_P2"
         },
         {
           "id": "P3",
           "initial": 0.001,
           "title": "P3",
-          "derivative": {
-            "expr": "rate_P3",
-            "format": "math-json"
-          }
+          "derivative": "rate_P3"
         }
       ],
       "static": [],
       "assignments": [
         {
           "id": "rate_P3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "t"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "t"
+          ]
         },
         {
           "id": "rate_P1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              -1,
-              "P1",
-              "P3"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            -1,
+            "P1",
+            "P3"
+          ]
         },
         {
           "id": "rate_P2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "P1",
-              "P3"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "P1",
+            "P3"
+          ]
         }
       ],
       "timeEvents": [],

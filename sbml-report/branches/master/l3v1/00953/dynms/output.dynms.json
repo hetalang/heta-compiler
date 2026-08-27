@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:36:44.477Z",
+  "created": "2026-08-27T16:15:44.605Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [],
       "static": [
@@ -33,14 +36,11 @@
       "assignments": [
         {
           "id": "S",
-          "rhs": {
-            "expr": [
-              "Add",
-              "Q",
-              "R"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            "Q",
+            "R"
+          ]
         }
       ],
       "timeEvents": [],
@@ -49,41 +49,32 @@
           "id": "Qinc",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "GreaterEqual",
+            "rhs": [
+              "GreaterEqual",
+              [
+                "Add",
+                "t",
                 [
-                  "Add",
-                  "t",
-                  [
-                    "Negate",
-                    "reset"
-                  ]
-                ],
-                0.01
+                  "Negate",
+                  "reset"
+                ]
               ],
-              "format": "math-json"
-            },
+              0.01
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "Q",
-                  0.01
-                ],
-                "format": "math-json"
-              },
-              "state": "Q"
+              "state": "Q",
+              "rhs": [
+                "Add",
+                "Q",
+                0.01
+              ]
             },
             {
-              "rhs": {
-                "expr": "t",
-                "format": "math-json"
-              },
-              "state": "reset"
+              "state": "reset",
+              "rhs": "t"
             }
           ],
           "active": true
@@ -92,41 +83,32 @@
           "id": "Rinc",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "GreaterEqual",
+            "rhs": [
+              "GreaterEqual",
+              [
+                "Add",
+                "t",
                 [
-                  "Add",
-                  "t",
-                  [
-                    "Negate",
-                    "reset"
-                  ]
-                ],
-                0.01
+                  "Negate",
+                  "reset"
+                ]
               ],
-              "format": "math-json"
-            },
+              0.01
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "R",
-                  0.01
-                ],
-                "format": "math-json"
-              },
-              "state": "R"
+              "state": "R",
+              "rhs": [
+                "Add",
+                "R",
+                0.01
+              ]
             },
             {
-              "rhs": {
-                "expr": "t",
-                "format": "math-json"
-              },
-              "state": "reset"
+              "state": "reset",
+              "rhs": "t"
             }
           ],
           "active": true

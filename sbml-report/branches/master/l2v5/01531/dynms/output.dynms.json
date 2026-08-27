@@ -1,24 +1,24 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:52:43.038Z",
+  "created": "2026-08-27T16:32:32.386Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [
         {
           "id": "trig",
           "initial": -5.3,
-          "derivative": {
-            "expr": "rate_trig",
-            "format": "math-json"
-          }
+          "derivative": "rate_trig"
         }
       ],
       "static": [
@@ -250,10 +250,7 @@
       "assignments": [
         {
           "id": "rate_trig",
-          "rhs": {
-            "expr": 1,
-            "format": "math-json"
-          }
+          "rhs": 1
         }
       ],
       "timeEvents": [],
@@ -262,23 +259,17 @@
           "id": "E0",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                "ExponentialE"
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              "ExponentialE"
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P0"
+              "state": "P0",
+              "rhs": 2
             }
           ],
           "active": true
@@ -287,26 +278,20 @@
           "id": "E1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Exp",
-                  "ExponentialE"
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Exp",
+                "ExponentialE"
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P1"
+              "state": "P1",
+              "rhs": 2
             }
           ],
           "active": true
@@ -315,26 +300,20 @@
           "id": "E2",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Abs",
-                  -1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Abs",
+                -1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P2"
+              "state": "P2",
+              "rhs": 2
             }
           ],
           "active": true
@@ -343,26 +322,20 @@
           "id": "E3",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Abs",
-                  1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Abs",
+                1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P3"
+              "state": "P3",
+              "rhs": 2
             }
           ],
           "active": true
@@ -371,26 +344,20 @@
           "id": "E4",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arccos",
-                  -1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arccos",
+                -1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P4"
+              "state": "P4",
+              "rhs": 2
             }
           ],
           "active": true
@@ -399,26 +366,20 @@
           "id": "E5",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arccos",
-                  0.5
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arccos",
+                0.5
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P5"
+              "state": "P5",
+              "rhs": 2
             }
           ],
           "active": true
@@ -427,26 +388,20 @@
           "id": "E6",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arcsin",
-                  1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arcsin",
+                1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P6"
+              "state": "P6",
+              "rhs": 2
             }
           ],
           "active": true
@@ -455,26 +410,20 @@
           "id": "E7",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arcsin",
-                  -0.5
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arcsin",
+                -0.5
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P7"
+              "state": "P7",
+              "rhs": 2
             }
           ],
           "active": true
@@ -483,26 +432,20 @@
           "id": "E8",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arctan",
-                  2.8
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arctan",
+                2.8
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P8"
+              "state": "P8",
+              "rhs": 2
             }
           ],
           "active": true
@@ -511,26 +454,20 @@
           "id": "E9",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arctan",
-                  -7.09
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arctan",
+                -7.09
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P9"
+              "state": "P9",
+              "rhs": 2
             }
           ],
           "active": true
@@ -539,26 +476,20 @@
           "id": "E10",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Ceil",
-                  0.5
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ceil",
+                0.5
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P10"
+              "state": "P10",
+              "rhs": 2
             }
           ],
           "active": true
@@ -567,26 +498,20 @@
           "id": "E11",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Ceil",
-                  3.55
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ceil",
+                3.55
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P11"
+              "state": "P11",
+              "rhs": 2
             }
           ],
           "active": true
@@ -595,26 +520,20 @@
           "id": "E12",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Ceil",
-                  -4.6
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ceil",
+                -4.6
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P12"
+              "state": "P12",
+              "rhs": 2
             }
           ],
           "active": true
@@ -623,26 +542,20 @@
           "id": "E13",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Cos",
-                  9.1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Cos",
+                9.1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P13"
+              "state": "P13",
+              "rhs": 2
             }
           ],
           "active": true
@@ -651,26 +564,20 @@
           "id": "E14",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Cos",
-                  -0.22
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Cos",
+                -0.22
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P14"
+              "state": "P14",
+              "rhs": 2
             }
           ],
           "active": true
@@ -679,26 +586,20 @@
           "id": "E15",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Exp",
-                  0
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Exp",
+                0
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P15"
+              "state": "P15",
+              "rhs": 2
             }
           ],
           "active": true
@@ -707,26 +608,20 @@
           "id": "E16",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Exp",
-                  1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Exp",
+                1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P16"
+              "state": "P16",
+              "rhs": 2
             }
           ],
           "active": true
@@ -735,26 +630,20 @@
           "id": "E17",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Exp",
-                  0.77
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Exp",
+                0.77
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P17"
+              "state": "P17",
+              "rhs": 2
             }
           ],
           "active": true
@@ -763,26 +652,20 @@
           "id": "E18",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Floor",
-                  -4.6
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Floor",
+                -4.6
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P18"
+              "state": "P18",
+              "rhs": 2
             }
           ],
           "active": true
@@ -791,26 +674,20 @@
           "id": "E19",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Floor",
-                  9.1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Floor",
+                9.1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P19"
+              "state": "P19",
+              "rhs": 2
             }
           ],
           "active": true
@@ -819,26 +696,20 @@
           "id": "E20",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Ln",
-                  0.2
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ln",
+                0.2
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P20"
+              "state": "P20",
+              "rhs": 2
             }
           ],
           "active": true
@@ -847,26 +718,20 @@
           "id": "E21",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Ln",
-                  1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ln",
+                1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P21"
+              "state": "P21",
+              "rhs": 2
             }
           ],
           "active": true
@@ -875,27 +740,21 @@
           "id": "E22",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Log",
-                  0.2,
-                  10
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Log",
+                0.2,
+                10
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P22"
+              "state": "P22",
+              "rhs": 2
             }
           ],
           "active": true
@@ -904,27 +763,21 @@
           "id": "E23",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Log",
-                  1,
-                  10
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Log",
+                1,
+                10
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P23"
+              "state": "P23",
+              "rhs": 2
             }
           ],
           "active": true
@@ -933,27 +786,21 @@
           "id": "E24",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Power",
-                  1,
-                  2
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                1,
+                2
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P24"
+              "state": "P24",
+              "rhs": 2
             }
           ],
           "active": true
@@ -962,27 +809,21 @@
           "id": "E25",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Power",
-                  2,
-                  2
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                2,
+                2
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P25"
+              "state": "P25",
+              "rhs": 2
             }
           ],
           "active": true
@@ -991,27 +832,21 @@
           "id": "E26",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Power",
-                  1.4,
-                  5.1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                1.4,
+                5.1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P26"
+              "state": "P26",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1020,27 +855,21 @@
           "id": "E27",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Power",
-                  4,
-                  2
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                4,
+                2
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P27"
+              "state": "P27",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1049,27 +878,21 @@
           "id": "E28",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Power",
-                  3.1,
-                  2
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                3.1,
+                2
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P28"
+              "state": "P28",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1078,31 +901,25 @@
           "id": "E29",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                4,
                 [
-                  "Power",
-                  4,
-                  [
-                    "Divide",
-                    1,
-                    2
-                  ]
+                  "Divide",
+                  1,
+                  2
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P29"
+              "state": "P29",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1111,31 +928,25 @@
           "id": "E30",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Power",
+                7.4,
                 [
-                  "Power",
-                  7.4,
-                  [
-                    "Divide",
-                    1,
-                    2
-                  ]
+                  "Divide",
+                  1,
+                  2
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P30"
+              "state": "P30",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1144,26 +955,20 @@
           "id": "E31",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Sin",
-                  2.1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Sin",
+                2.1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P31"
+              "state": "P31",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1172,26 +977,20 @@
           "id": "E32",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Sin",
-                  0
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Sin",
+                0
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P32"
+              "state": "P32",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1200,26 +999,20 @@
           "id": "E33",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Sin",
-                  -5.9
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Sin",
+                -5.9
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P33"
+              "state": "P33",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1228,26 +1021,20 @@
           "id": "E34",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Tan",
-                  0
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Tan",
+                0
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P34"
+              "state": "P34",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1256,26 +1043,20 @@
           "id": "E35",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Tan",
-                  1.11
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Tan",
+                1.11
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P35"
+              "state": "P35",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1284,26 +1065,20 @@
           "id": "E36",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Tan",
-                  -6
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Tan",
+                -6
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P36"
+              "state": "P36",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1312,26 +1087,20 @@
           "id": "E37",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Sec",
-                  0.5
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Sec",
+                0.5
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P37"
+              "state": "P37",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1340,26 +1109,20 @@
           "id": "E38",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Csc",
-                  4.5
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Csc",
+                4.5
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P38"
+              "state": "P38",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1368,26 +1131,20 @@
           "id": "E39",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Cot",
-                  0.2
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Cot",
+                0.2
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P39"
+              "state": "P39",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1396,40 +1153,34 @@
           "id": "E40",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Multiply",
+                0.5,
                 [
-                  "Multiply",
-                  0.5,
+                  "Add",
                   [
-                    "Add",
+                    "Exp",
+                    0.3
+                  ],
+                  [
+                    "Negate",
                     [
                       "Exp",
-                      0.3
-                    ],
-                    [
-                      "Negate",
-                      [
-                        "Exp",
-                        -0.3
-                      ]
+                      -0.3
                     ]
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P40"
+              "state": "P40",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1438,37 +1189,31 @@
           "id": "E41",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Multiply",
+                0.5,
                 [
-                  "Multiply",
-                  0.5,
+                  "Add",
                   [
-                    "Add",
-                    [
-                      "Exp",
-                      1.7
-                    ],
-                    [
-                      "Exp",
-                      -1.7
-                    ]
+                    "Exp",
+                    1.7
+                  ],
+                  [
+                    "Exp",
+                    -1.7
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P41"
+              "state": "P41",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1477,26 +1222,20 @@
           "id": "E42",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arcsec",
-                  2.3
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arcsec",
+                2.3
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P42"
+              "state": "P42",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1505,26 +1244,20 @@
           "id": "E43",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arccsc",
-                  1.1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arccsc",
+                1.1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P43"
+              "state": "P43",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1533,26 +1266,20 @@
           "id": "E44",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Arccot",
-                  -0.1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Arccot",
+                -0.1
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P44"
+              "state": "P44",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1561,41 +1288,35 @@
           "id": "E45",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ln",
                 [
-                  "Ln",
+                  "Add",
+                  99,
                   [
-                    "Add",
-                    99,
+                    "Sqrt",
                     [
-                      "Sqrt",
+                      "Add",
                       [
-                        "Add",
-                        [
-                          "Power",
-                          99,
-                          2
-                        ],
-                        1
-                      ]
+                        "Power",
+                        99,
+                        2
+                      ],
+                      1
                     ]
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P45"
+              "state": "P45",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1604,44 +1325,38 @@
           "id": "E46",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ln",
                 [
-                  "Ln",
+                  "Add",
+                  1.34,
                   [
-                    "Add",
-                    1.34,
+                    "Sqrt",
                     [
-                      "Sqrt",
+                      "Add",
                       [
-                        "Add",
-                        [
-                          "Power",
-                          1.34,
-                          2
-                        ],
-                        [
-                          "Negate",
-                          1
-                        ]
+                        "Power",
+                        1.34,
+                        2
+                      ],
+                      [
+                        "Negate",
+                        1
                       ]
                     ]
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P46"
+              "state": "P46",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1650,45 +1365,39 @@
           "id": "E47",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Multiply",
+                0.5,
                 [
-                  "Multiply",
-                  0.5,
+                  "Ln",
                   [
-                    "Ln",
+                    "Divide",
                     [
-                      "Divide",
+                      "Add",
+                      1,
+                      -0.7
+                    ],
+                    [
+                      "Add",
+                      1,
                       [
-                        "Add",
-                        1,
+                        "Negate",
                         -0.7
-                      ],
-                      [
-                        "Add",
-                        1,
-                        [
-                          "Negate",
-                          -0.7
-                        ]
                       ]
                     ]
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P47"
+              "state": "P47",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1697,48 +1406,42 @@
           "id": "E48",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ln",
                 [
-                  "Ln",
+                  "Divide",
                   [
-                    "Divide",
+                    "Add",
+                    1,
                     [
-                      "Add",
-                      1,
+                      "Sqrt",
                       [
-                        "Sqrt",
+                        "Add",
+                        1,
                         [
-                          "Add",
-                          1,
+                          "Negate",
                           [
-                            "Negate",
-                            [
-                              "Power",
-                              0.42,
-                              2
-                            ]
+                            "Power",
+                            0.42,
+                            2
                           ]
                         ]
                       ]
-                    ],
-                    0.42
-                  ]
+                    ]
+                  ],
+                  0.42
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P48"
+              "state": "P48",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1747,49 +1450,43 @@
           "id": "E49",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Ln",
                 [
-                  "Ln",
+                  "Add",
                   [
-                    "Add",
+                    "Divide",
+                    1,
+                    0.01
+                  ],
+                  [
+                    "Sqrt",
                     [
-                      "Divide",
+                      "Add",
                       1,
-                      0.01
-                    ],
-                    [
-                      "Sqrt",
                       [
-                        "Add",
+                        "Divide",
                         1,
                         [
-                          "Divide",
-                          1,
-                          [
-                            "Power",
-                            0.01,
-                            2
-                          ]
+                          "Power",
+                          0.01,
+                          2
                         ]
                       ]
                     ]
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P49"
+              "state": "P49",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1798,45 +1495,39 @@
           "id": "E50",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Multiply",
+                0.5,
                 [
-                  "Multiply",
-                  0.5,
+                  "Ln",
                   [
-                    "Ln",
+                    "Divide",
                     [
-                      "Divide",
+                      "Add",
+                      8.2,
+                      1
+                    ],
+                    [
+                      "Add",
+                      8.2,
                       [
-                        "Add",
-                        8.2,
+                        "Negate",
                         1
-                      ],
-                      [
-                        "Add",
-                        8.2,
-                        [
-                          "Negate",
-                          1
-                        ]
                       ]
                     ]
                   ]
                 ]
-              ],
-              "format": "math-json"
-            },
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P50"
+              "state": "P50",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1845,25 +1536,19 @@
           "id": "E51",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Multiply"
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Multiply"
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P51"
+              "state": "P51",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1872,25 +1557,19 @@
           "id": "E52",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "trig",
-                [
-                  "Add"
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "trig",
+              [
+                "Add"
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P52"
+              "state": "P52",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1899,27 +1578,21 @@
           "id": "E53",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "And",
-                [
-                  "Greater",
-                  "trig",
-                  0
-                ],
-                "True"
+            "rhs": [
+              "And",
+              [
+                "Greater",
+                "trig",
+                0
               ],
-              "format": "math-json"
-            },
+              "True"
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P53"
+              "state": "P53",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1928,30 +1601,24 @@
           "id": "E54",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "And",
-                [
-                  "Greater",
-                  "trig",
-                  0
-                ],
-                [
-                  "Not",
-                  "False"
-                ]
+            "rhs": [
+              "And",
+              [
+                "Greater",
+                "trig",
+                0
               ],
-              "format": "math-json"
-            },
+              [
+                "Not",
+                "False"
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P54"
+              "state": "P54",
+              "rhs": 2
             }
           ],
           "active": true
@@ -1960,30 +1627,24 @@
           "id": "E55",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "And",
-                [
-                  "Greater",
-                  "trig",
-                  0
-                ],
-                [
-                  "Not",
-                  "False"
-                ]
+            "rhs": [
+              "And",
+              [
+                "Greater",
+                "trig",
+                0
               ],
-              "format": "math-json"
-            },
+              [
+                "Not",
+                "False"
+              ]
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
-              "state": "P55"
+              "state": "P55",
+              "rhs": 2
             }
           ],
           "active": true

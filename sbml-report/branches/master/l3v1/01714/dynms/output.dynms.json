@@ -1,0 +1,103 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T16:21:16.282Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [
+        {
+          "id": "local_J0_k1",
+          "value": 3
+        }
+      ],
+      "dynamic": [
+        {
+          "id": "S1_amt_",
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J0"
+        }
+      ],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1
+        },
+        {
+          "id": "k1",
+          "initial": 2
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ]
+        },
+        {
+          "id": "J0",
+          "rhs": "local_J0_k1"
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              2.5
+            ],
+            "detection": "step"
+          },
+          "priority": "k1",
+          "actions": [
+            {
+              "state": "k1",
+              "rhs": 5
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              2.5
+            ],
+            "detection": "step"
+          },
+          "priority": 2.5,
+          "actions": [
+            {
+              "state": "k1",
+              "rhs": 10
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

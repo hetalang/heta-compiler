@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01282/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01282/01282-sbml-l3v2.xml"...
+[info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	p1: Expected boolean literal true, false, 0 or 1, got 5 in "( 5  ?  0  :  1 )"
 [info]	Platform hash: 3fb5e95cb77cec352051692888a4726be7cef4aa6dd6084546b65266895d227d
 [info]	Setting references in elements, total length 96

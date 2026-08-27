@@ -1,796 +1,487 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:27:00.721Z",
+  "created": "2026-08-27T16:05:18.603Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [
         {
           "id": "S0_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J0",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J0"
         },
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J1"
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J2",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J2"
         },
         {
           "id": "S3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J3",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J3"
         },
         {
           "id": "S4_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J4",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J4"
         },
         {
           "id": "S5_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J5",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J5"
         },
         {
           "id": "S6_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J6",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J6"
         },
         {
           "id": "S7_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J7",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J7"
         },
         {
           "id": "S8_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J8",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J8"
         },
         {
           "id": "S9_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J9",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J9"
         },
         {
           "id": "S10_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J10",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J10"
         },
         {
           "id": "S11_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J11",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J11"
         },
         {
           "id": "S12_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J12",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J12"
         },
         {
           "id": "S13_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J13",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J13"
         },
         {
           "id": "S14_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J14",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J14"
         },
         {
           "id": "S15_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J15",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J15"
         },
         {
           "id": "S16_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J16",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J16"
         },
         {
           "id": "S17_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J17",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J17"
         },
         {
           "id": "S18_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J18",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J18"
         },
         {
           "id": "S19_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J19",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J19"
         },
         {
           "id": "S20_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J20",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J20"
         },
         {
           "id": "S21_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J21",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J21"
         },
         {
           "id": "S22_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J22",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J22"
         },
         {
           "id": "S23_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J23",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J23"
         },
         {
           "id": "S24_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J24",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J24"
         },
         {
           "id": "S25_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J25",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J25"
         },
         {
           "id": "S26_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J26",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J26"
         },
         {
           "id": "S27_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J27",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J27"
         },
         {
           "id": "S28_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J28",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J28"
         },
         {
           "id": "S29_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J29",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J29"
         },
         {
           "id": "S30_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J30",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J30"
         },
         {
           "id": "S31_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J31",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J31"
         },
         {
           "id": "S32_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J32",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J32"
         },
         {
           "id": "S33_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J33",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J33"
         },
         {
           "id": "S34_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J34",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J34"
         },
         {
           "id": "S35_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J35",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J35"
         },
         {
           "id": "S36_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J36",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J36"
         },
         {
           "id": "S37_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J37",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J37"
         },
         {
           "id": "S38_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J38",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J38"
         },
         {
           "id": "S39_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J39",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J39"
         },
         {
           "id": "S40_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J40",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J40"
         },
         {
           "id": "S41_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J41",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J41"
         },
         {
           "id": "S42_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J42",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J42"
         },
         {
           "id": "S43_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J43",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J43"
         },
         {
           "id": "S44_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J44",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J44"
         },
         {
           "id": "S45_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J45",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J45"
         },
         {
           "id": "S46_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J46",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J46"
         },
         {
           "id": "S47_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J47",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J47"
         },
         {
           "id": "S48_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J48",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J48"
         },
         {
           "id": "S49_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J49",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J49"
         },
         {
           "id": "S50_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J50",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J50"
         },
         {
           "id": "S51_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J51",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J51"
         }
       ],
       "static": [
@@ -802,1425 +493,1113 @@
       "assignments": [
         {
           "id": "S0",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S0_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S0_amt_",
+            "C"
+          ]
         },
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ]
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "C"
+          ]
         },
         {
           "id": "S3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S3_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S3_amt_",
+            "C"
+          ]
         },
         {
           "id": "S4",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S4_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S4_amt_",
+            "C"
+          ]
         },
         {
           "id": "S5",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S5_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S5_amt_",
+            "C"
+          ]
         },
         {
           "id": "S6",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S6_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S6_amt_",
+            "C"
+          ]
         },
         {
           "id": "S7",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S7_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S7_amt_",
+            "C"
+          ]
         },
         {
           "id": "S8",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S8_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S8_amt_",
+            "C"
+          ]
         },
         {
           "id": "S9",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S9_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S9_amt_",
+            "C"
+          ]
         },
         {
           "id": "S10",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S10_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S10_amt_",
+            "C"
+          ]
         },
         {
           "id": "S11",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S11_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S11_amt_",
+            "C"
+          ]
         },
         {
           "id": "S12",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S12_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S12_amt_",
+            "C"
+          ]
         },
         {
           "id": "S13",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S13_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S13_amt_",
+            "C"
+          ]
         },
         {
           "id": "S14",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S14_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S14_amt_",
+            "C"
+          ]
         },
         {
           "id": "S15",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S15_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S15_amt_",
+            "C"
+          ]
         },
         {
           "id": "S16",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S16_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S16_amt_",
+            "C"
+          ]
         },
         {
           "id": "S17",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S17_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S17_amt_",
+            "C"
+          ]
         },
         {
           "id": "S18",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S18_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S18_amt_",
+            "C"
+          ]
         },
         {
           "id": "S19",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S19_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S19_amt_",
+            "C"
+          ]
         },
         {
           "id": "S20",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S20_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S20_amt_",
+            "C"
+          ]
         },
         {
           "id": "S21",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S21_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S21_amt_",
+            "C"
+          ]
         },
         {
           "id": "S22",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S22_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S22_amt_",
+            "C"
+          ]
         },
         {
           "id": "S23",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S23_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S23_amt_",
+            "C"
+          ]
         },
         {
           "id": "S24",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S24_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S24_amt_",
+            "C"
+          ]
         },
         {
           "id": "S25",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S25_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S25_amt_",
+            "C"
+          ]
         },
         {
           "id": "S26",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S26_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S26_amt_",
+            "C"
+          ]
         },
         {
           "id": "S27",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S27_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S27_amt_",
+            "C"
+          ]
         },
         {
           "id": "S28",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S28_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S28_amt_",
+            "C"
+          ]
         },
         {
           "id": "S29",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S29_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S29_amt_",
+            "C"
+          ]
         },
         {
           "id": "S30",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S30_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S30_amt_",
+            "C"
+          ]
         },
         {
           "id": "S31",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S31_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S31_amt_",
+            "C"
+          ]
         },
         {
           "id": "S32",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S32_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S32_amt_",
+            "C"
+          ]
         },
         {
           "id": "S33",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S33_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S33_amt_",
+            "C"
+          ]
         },
         {
           "id": "S34",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S34_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S34_amt_",
+            "C"
+          ]
         },
         {
           "id": "S35",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S35_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S35_amt_",
+            "C"
+          ]
         },
         {
           "id": "S36",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S36_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S36_amt_",
+            "C"
+          ]
         },
         {
           "id": "S37",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S37_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S37_amt_",
+            "C"
+          ]
         },
         {
           "id": "S38",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S38_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S38_amt_",
+            "C"
+          ]
         },
         {
           "id": "S39",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S39_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S39_amt_",
+            "C"
+          ]
         },
         {
           "id": "S40",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S40_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S40_amt_",
+            "C"
+          ]
         },
         {
           "id": "S41",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S41_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S41_amt_",
+            "C"
+          ]
         },
         {
           "id": "S42",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S42_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S42_amt_",
+            "C"
+          ]
         },
         {
           "id": "S43",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S43_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S43_amt_",
+            "C"
+          ]
         },
         {
           "id": "S44",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S44_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S44_amt_",
+            "C"
+          ]
         },
         {
           "id": "S45",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S45_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S45_amt_",
+            "C"
+          ]
         },
         {
           "id": "S46",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S46_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S46_amt_",
+            "C"
+          ]
         },
         {
           "id": "S47",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S47_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S47_amt_",
+            "C"
+          ]
         },
         {
           "id": "S48",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S48_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S48_amt_",
+            "C"
+          ]
         },
         {
           "id": "S49",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S49_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S49_amt_",
+            "C"
+          ]
         },
         {
           "id": "S50",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S50_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S50_amt_",
+            "C"
+          ]
         },
         {
           "id": "S51",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S51_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S51_amt_",
+            "C"
+          ]
         },
         {
           "id": "J0",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              "ExponentialE"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            "ExponentialE"
+          ]
         },
         {
           "id": "J1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Exp",
-                "ExponentialE"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Exp",
+              "ExponentialE"
+            ]
+          ]
         },
         {
           "id": "J2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Abs",
-                -1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Abs",
+              -1
+            ]
+          ]
         },
         {
           "id": "J3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Abs",
-                1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Abs",
+              1
+            ]
+          ]
         },
         {
           "id": "J4",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arccos",
-                -1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arccos",
+              -1
+            ]
+          ]
         },
         {
           "id": "J5",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arccos",
-                0.5
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arccos",
+              0.5
+            ]
+          ]
         },
         {
           "id": "J6",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arcsin",
-                1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arcsin",
+              1
+            ]
+          ]
         },
         {
           "id": "J7",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arcsin",
-                -0.5
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arcsin",
+              -0.5
+            ]
+          ]
         },
         {
           "id": "J8",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arctan",
-                2.8
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arctan",
+              2.8
+            ]
+          ]
         },
         {
           "id": "J9",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arctan",
-                -7.09
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arctan",
+              -7.09
+            ]
+          ]
         },
         {
           "id": "J10",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ceil",
-                0.5
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ceil",
+              0.5
+            ]
+          ]
         },
         {
           "id": "J11",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ceil",
-                3.55
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ceil",
+              3.55
+            ]
+          ]
         },
         {
           "id": "J12",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ceil",
-                -4.6
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ceil",
+              -4.6
+            ]
+          ]
         },
         {
           "id": "J13",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Cos",
-                9.1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Cos",
+              9.1
+            ]
+          ]
         },
         {
           "id": "J14",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Cos",
-                -0.22
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Cos",
+              -0.22
+            ]
+          ]
         },
         {
           "id": "J15",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Exp",
-                0
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Exp",
+              0
+            ]
+          ]
         },
         {
           "id": "J16",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Exp",
-                1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Exp",
+              1
+            ]
+          ]
         },
         {
           "id": "J17",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Exp",
-                0.77
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Exp",
+              0.77
+            ]
+          ]
         },
         {
           "id": "J18",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Floor",
-                -4.6
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Floor",
+              -4.6
+            ]
+          ]
         },
         {
           "id": "J19",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Floor",
-                9.1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Floor",
+              9.1
+            ]
+          ]
         },
         {
           "id": "J20",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ln",
-                0.2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ln",
+              0.2
+            ]
+          ]
         },
         {
           "id": "J21",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ln",
-                1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ln",
+              1
+            ]
+          ]
         },
         {
           "id": "J22",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Log",
-                0.2,
-                10
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Log",
+              0.2,
+              10
+            ]
+          ]
         },
         {
           "id": "J23",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Log",
               1,
-              [
-                "Log",
-                1,
-                10
-              ]
-            ],
-            "format": "math-json"
-          }
+              10
+            ]
+          ]
         },
         {
           "id": "J24",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
               1,
-              [
-                "Power",
-                1,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+              2
+            ]
+          ]
         },
         {
           "id": "J25",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Power",
-                2,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
+              2,
+              2
+            ]
+          ]
         },
         {
           "id": "J26",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Power",
-                1.4,
-                5.1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
+              1.4,
+              5.1
+            ]
+          ]
         },
         {
           "id": "J27",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Power",
-                4,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
+              4,
+              2
+            ]
+          ]
         },
         {
           "id": "J28",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Power",
-                3.1,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
+              3.1,
+              2
+            ]
+          ]
         },
         {
           "id": "J29",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
+              4,
               [
-                "Power",
-                4,
-                [
-                  "Divide",
-                  1,
-                  2
-                ]
+                "Divide",
+                1,
+                2
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J30",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Power",
+              7.4,
               [
-                "Power",
-                7.4,
-                [
-                  "Divide",
-                  1,
-                  2
-                ]
+                "Divide",
+                1,
+                2
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J31",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Sin",
-                2.1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Sin",
+              2.1
+            ]
+          ]
         },
         {
           "id": "J32",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Sin",
-                0
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Sin",
+              0
+            ]
+          ]
         },
         {
           "id": "J33",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Sin",
-                -5.9
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Sin",
+              -5.9
+            ]
+          ]
         },
         {
           "id": "J34",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Tan",
-                0
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Tan",
+              0
+            ]
+          ]
         },
         {
           "id": "J35",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Tan",
-                1.11
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Tan",
+              1.11
+            ]
+          ]
         },
         {
           "id": "J36",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Tan",
-                -6
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Tan",
+              -6
+            ]
+          ]
         },
         {
           "id": "J37",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Sec",
-                0.5
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Sec",
+              0.5
+            ]
+          ]
         },
         {
           "id": "J38",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Csc",
-                4.5
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Csc",
+              4.5
+            ]
+          ]
         },
         {
           "id": "J39",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Cot",
-                0.2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Cot",
+              0.2
+            ]
+          ]
         },
         {
           "id": "J40",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              0.5,
+          "rhs": [
+            "Multiply",
+            1,
+            0.5,
+            [
+              "Add",
               [
-                "Add",
+                "Exp",
+                0.3
+              ],
+              [
+                "Negate",
                 [
                   "Exp",
-                  0.3
-                ],
-                [
-                  "Negate",
-                  [
-                    "Exp",
-                    -0.3
-                  ]
+                  -0.3
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J41",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              0.5,
+          "rhs": [
+            "Multiply",
+            1,
+            0.5,
+            [
+              "Add",
               [
-                "Add",
-                [
-                  "Exp",
-                  1.7
-                ],
-                [
-                  "Exp",
-                  -1.7
-                ]
+                "Exp",
+                1.7
+              ],
+              [
+                "Exp",
+                -1.7
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J42",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arcsec",
-                2.3
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arcsec",
+              2.3
+            ]
+          ]
         },
         {
           "id": "J43",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arccsc",
-                1.1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arccsc",
+              1.1
+            ]
+          ]
         },
         {
           "id": "J44",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Arccot",
-                -0.1
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Arccot",
+              -0.1
+            ]
+          ]
         },
         {
           "id": "J45",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ln",
               [
-                "Ln",
+                "Add",
+                99,
                 [
-                  "Add",
-                  99,
+                  "Sqrt",
                   [
-                    "Sqrt",
+                    "Add",
                     [
-                      "Add",
-                      [
-                        "Power",
-                        99,
-                        2
-                      ],
+                      "Power",
+                      99,
+                      2
+                    ],
+                    1
+                  ]
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "J46",
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ln",
+              [
+                "Add",
+                1.34,
+                [
+                  "Sqrt",
+                  [
+                    "Add",
+                    [
+                      "Power",
+                      1.34,
+                      2
+                    ],
+                    [
+                      "Negate",
                       1
                     ]
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "J46",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ln",
-                [
-                  "Add",
-                  1.34,
-                  [
-                    "Sqrt",
-                    [
-                      "Add",
-                      [
-                        "Power",
-                        1.34,
-                        2
-                      ],
-                      [
-                        "Negate",
-                        1
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J47",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              0.5,
+          "rhs": [
+            "Multiply",
+            1,
+            0.5,
+            [
+              "Ln",
               [
-                "Ln",
+                "Divide",
                 [
-                  "Divide",
+                  "Add",
+                  1,
+                  -0.7
+                ],
+                [
+                  "Add",
+                  1,
                   [
-                    "Add",
-                    1,
+                    "Negate",
                     -0.7
-                  ],
-                  [
-                    "Add",
-                    1,
-                    [
-                      "Negate",
-                      -0.7
-                    ]
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J48",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ln",
               [
-                "Ln",
-                [
-                  "Divide",
-                  [
-                    "Add",
-                    1,
-                    [
-                      "Sqrt",
-                      [
-                        "Add",
-                        1,
-                        [
-                          "Negate",
-                          [
-                            "Power",
-                            0.42,
-                            2
-                          ]
-                        ]
-                      ]
-                    ]
-                  ],
-                  0.42
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "J49",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Ln",
+                "Divide",
                 [
                   "Add",
-                  [
-                    "Divide",
-                    1,
-                    0.01
-                  ],
+                  1,
                   [
                     "Sqrt",
                     [
                       "Add",
                       1,
                       [
-                        "Divide",
-                        1,
+                        "Negate",
                         [
                           "Power",
-                          0.01,
+                          0.42,
                           2
                         ]
                       ]
                     ]
                   ]
+                ],
+                0.42
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "J49",
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Ln",
+              [
+                "Add",
+                [
+                  "Divide",
+                  1,
+                  0.01
+                ],
+                [
+                  "Sqrt",
+                  [
+                    "Add",
+                    1,
+                    [
+                      "Divide",
+                      1,
+                      [
+                        "Power",
+                        0.01,
+                        2
+                      ]
+                    ]
+                  ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "J50",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1
+          ]
         },
         {
           "id": "J51",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              [
-                "Add"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            [
+              "Add"
+            ]
+          ]
         }
       ],
       "timeEvents": [],

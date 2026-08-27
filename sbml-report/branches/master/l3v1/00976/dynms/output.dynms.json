@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:36:55.169Z",
+  "created": "2026-08-27T16:15:56.654Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k1",
@@ -35,55 +38,43 @@
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "sbml__J0_1",
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": [
+            "Add",
+            "sbml__J0_1",
+            [
+              "Negate",
               [
-                "Negate",
-                [
-                  "Multiply",
-                  2,
-                  "sbml__J1_1"
-                ]
+                "Multiply",
+                2,
+                "sbml__J1_1"
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
+          "initial": [
+            "Multiply",
+            0.001,
+            1
+          ],
+          "derivative": [
+            "Add",
+            [
               "Multiply",
-              0.001,
-              1
+              3,
+              "sbml__J1_1"
             ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                3,
-                "sbml__J1_1"
-              ],
-              [
-                "Negate",
-                "sbml__J2_1"
-              ]
-            ],
-            "format": "math-json"
-          }
+            [
+              "Negate",
+              "sbml__J2_1"
+            ]
+          ]
         }
       ],
       "static": [
@@ -95,58 +86,43 @@
       "assignments": [
         {
           "id": "sbml__J0_1",
-          "rhs": {
-            "expr": "k1",
-            "format": "math-json"
-          }
+          "rhs": "k1"
         },
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "default_compartment"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "default_compartment"
+          ]
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "default_compartment"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "default_compartment"
+          ]
         },
         {
           "id": "sbml__J1_1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              [
-                "Multiply",
-                "k2",
-                "S1"
-              ],
-              "S2"
+          "rhs": [
+            "Divide",
+            [
+              "Multiply",
+              "k2",
+              "S1"
             ],
-            "format": "math-json"
-          }
+            "S2"
+          ]
         },
         {
           "id": "sbml__J2_1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k3",
-              "S2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k3",
+            "S2"
+          ]
         }
       ],
       "timeEvents": [],

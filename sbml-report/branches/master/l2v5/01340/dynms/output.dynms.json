@@ -1,31 +1,28 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:52:11.349Z",
+  "created": "2026-08-27T16:31:58.781Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J0",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "J0"
         }
       ],
       "static": [
@@ -41,21 +38,15 @@
       "assignments": [
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ]
         },
         {
           "id": "J0",
-          "rhs": {
-            "expr": "k1",
-            "format": "math-json"
-          }
+          "rhs": "k1"
         }
       ],
       "timeEvents": [],
@@ -64,23 +55,17 @@
           "id": "sbml__E0_1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "t",
-                5.5
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "t",
+              5.5
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": -1,
-                "format": "math-json"
-              },
-              "state": "k1"
+              "state": "k1",
+              "rhs": -1
             }
           ],
           "active": true

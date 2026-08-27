@@ -1,62 +1,62 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:24:44.851Z",
+  "created": "2026-08-27T16:02:48.953Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [],
       "static": [
         {
           "id": "p1",
-          "initial": {
-            "expr": [
-              "Multiply",
+          "initial": [
+            "Multiply",
+            [
+              "Which",
               [
-                "Which",
+                "Less",
                 [
-                  "Less",
-                  [
-                    "Divide",
-                    9,
-                    2
-                  ],
-                  0
+                  "Divide",
+                  9,
+                  2
                 ],
-                -1,
-                [
-                  "Greater",
-                  [
-                    "Divide",
-                    9,
-                    2
-                  ],
-                  0
-                ],
-                1,
-                "True",
                 0
               ],
+              -1,
               [
-                "Floor",
+                "Greater",
                 [
-                  "Abs",
-                  [
-                    "Divide",
-                    9,
-                    2
-                  ]
+                  "Divide",
+                  9,
+                  2
+                ],
+                0
+              ],
+              1,
+              "True",
+              0
+            ],
+            [
+              "Floor",
+              [
+                "Abs",
+                [
+                  "Divide",
+                  9,
+                  2
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         }
       ],
       "assignments": [],

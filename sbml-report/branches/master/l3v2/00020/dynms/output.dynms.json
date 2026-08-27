@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:14:26.287Z",
+  "created": "2026-08-27T15:51:48.862Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k1",
@@ -30,100 +33,76 @@
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0.01,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0.01,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S1",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction1"
+          ]
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S2",
-          "derivative": {
-            "expr": [
-              "Add",
-              "reaction1",
-              [
-                "Negate",
-                "reaction2"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Add",
+            "reaction1",
+            [
+              "Negate",
+              "reaction2"
+            ]
+          ]
         },
         {
           "id": "S3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S3",
-          "derivative": {
-            "expr": [
-              "Add",
-              "reaction2",
-              [
-                "Negate",
-                "reaction3"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Add",
+            "reaction2",
+            [
+              "Negate",
+              "reaction3"
+            ]
+          ]
         },
         {
           "id": "S4_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S4",
-          "derivative": {
-            "expr": "reaction3",
-            "format": "math-json"
-          }
+          "derivative": "reaction3"
         }
       ],
       "static": [
@@ -136,89 +115,68 @@
       "assignments": [
         {
           "id": "S4",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S4_amt_",
-              "compartment"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S4_amt_",
+            "compartment"
+          ],
           "title": "S4"
         },
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "compartment"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "compartment"
+          ],
           "title": "S1"
         },
         {
           "id": "reaction1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "compartment",
-              "k1",
-              "S1"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Multiply",
+            "compartment",
+            "k1",
+            "S1"
+          ],
           "title": "reaction1"
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "compartment"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "compartment"
+          ],
           "title": "S2"
         },
         {
           "id": "reaction2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "compartment",
-              "k2",
-              "S2"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Multiply",
+            "compartment",
+            "k2",
+            "S2"
+          ],
           "title": "reaction2"
         },
         {
           "id": "S3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S3_amt_",
-              "compartment"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S3_amt_",
+            "compartment"
+          ],
           "title": "S3"
         },
         {
           "id": "reaction3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "compartment",
-              "k3",
-              "S3"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Multiply",
+            "compartment",
+            "k3",
+            "S3"
+          ],
           "title": "reaction3"
         }
       ],

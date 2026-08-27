@@ -1,97 +1,82 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:38:55.610Z",
+  "created": "2026-08-27T16:18:03.269Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [],
       "static": [
         {
           "id": "a",
-          "initial": {
-            "expr": [
+          "initial": [
+            "Divide",
+            4,
+            2
+          ]
+        },
+        {
+          "id": "c",
+          "initial": [
+            "Add",
+            [
               "Divide",
               4,
               2
             ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "c",
-          "initial": {
-            "expr": [
-              "Add",
-              [
-                "Divide",
-                4,
-                2
-              ],
-              1,
-              1
-            ],
-            "format": "math-json"
-          }
+            1,
+            1
+          ]
         },
         {
           "id": "e",
-          "initial": {
-            "expr": [
-              "Add",
-              [
-                "Divide",
-                4,
-                2
-              ],
-              1,
-              1,
-              1,
-              1
+          "initial": [
+            "Add",
+            [
+              "Divide",
+              4,
+              2
             ],
-            "format": "math-json"
-          }
+            1,
+            1,
+            1,
+            1
+          ]
         }
       ],
       "assignments": [
         {
           "id": "b",
-          "rhs": {
-            "expr": [
-              "Add",
-              "a",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            "a",
+            1
+          ]
         },
         {
           "id": "d",
-          "rhs": {
-            "expr": [
-              "Add",
-              "c",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            "c",
+            1
+          ]
         },
         {
           "id": "f",
-          "rhs": {
-            "expr": [
-              "Add",
-              "e",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            "e",
+            1
+          ]
         }
       ],
       "timeEvents": [],

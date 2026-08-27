@@ -1,0 +1,172 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T15:59:48.023Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "C",
+          "initial": 1
+        },
+        {
+          "id": "S1_amt_",
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
+              1
+            ],
+            1
+          ]
+        },
+        {
+          "id": "S2_amt_",
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
+              1
+            ],
+            1
+          ]
+        },
+        {
+          "id": "S3_amt_",
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
+              1
+            ],
+            1
+          ]
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S1",
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ]
+        },
+        {
+          "id": "S2",
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "C"
+          ]
+        },
+        {
+          "id": "S3",
+          "rhs": [
+            "Divide",
+            "S3_amt_",
+            "C"
+          ]
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "sbml__E0_1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "t",
+              0.99
+            ],
+            "detection": "step"
+          },
+          "priority": 1,
+          "actions": [
+            {
+              "state": "S1_amt_",
+              "rhs": [
+                "Multiply",
+                4,
+                "C"
+              ]
+            },
+            {
+              "state": "S2_amt_",
+              "rhs": [
+                "Multiply",
+                5,
+                "C"
+              ]
+            },
+            {
+              "state": "S3_amt_",
+              "rhs": [
+                "Multiply",
+                6,
+                "C"
+              ]
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "sbml__E1_1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "t",
+              0.99
+            ],
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "state": "S1_amt_",
+              "rhs": [
+                "Multiply",
+                1,
+                "C"
+              ]
+            },
+            {
+              "state": "S2_amt_",
+              "rhs": [
+                "Multiply",
+                2,
+                "C"
+              ]
+            },
+            {
+              "state": "S3_amt_",
+              "rhs": [
+                "Multiply",
+                3,
+                "C"
+              ]
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

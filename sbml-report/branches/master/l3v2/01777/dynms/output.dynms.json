@@ -1,57 +1,48 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:28:34.536Z",
+  "created": "2026-08-27T16:07:01.848Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                2,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              2,
               1
             ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "J0"
-            ],
-            "format": "math-json"
-          }
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "J0"
+          ]
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                3,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              3,
               1
             ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J0",
-            "format": "math-json"
-          }
+            1
+          ],
+          "derivative": "J0"
         }
       ],
       "static": [
@@ -61,45 +52,33 @@
         },
         {
           "id": "m_cf",
-          "initial": {
-            "expr": [
-              "Divide",
-              6.02214076e+23,
-              1e+24
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Divide",
+            6.02214076e+23,
+            1e+24
+          ]
         }
       ],
       "assignments": [
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ]
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "C"
+          ]
         },
         {
           "id": "J0",
-          "rhs": {
-            "expr": 0.01,
-            "format": "math-json"
-          }
+          "rhs": 0.01
         }
       ],
       "timeEvents": [],

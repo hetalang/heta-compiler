@@ -1,798 +1,573 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:52:39.937Z",
+  "created": "2026-08-27T16:32:28.792Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [
         {
           "id": "P2",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P2",
-            "format": "math-json"
-          }
+          "derivative": "rate_P2"
         },
         {
           "id": "P3",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P3",
-            "format": "math-json"
-          }
+          "derivative": "rate_P3"
         },
         {
           "id": "P4",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P4",
-            "format": "math-json"
-          }
+          "derivative": "rate_P4"
         },
         {
           "id": "P5",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P5",
-            "format": "math-json"
-          }
+          "derivative": "rate_P5"
         },
         {
           "id": "P6",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P6",
-            "format": "math-json"
-          }
+          "derivative": "rate_P6"
         },
         {
           "id": "P7",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P7",
-            "format": "math-json"
-          }
+          "derivative": "rate_P7"
         },
         {
           "id": "P8",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P8",
-            "format": "math-json"
-          }
+          "derivative": "rate_P8"
         },
         {
           "id": "P9",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P9",
-            "format": "math-json"
-          }
+          "derivative": "rate_P9"
         },
         {
           "id": "P10",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P10",
-            "format": "math-json"
-          }
+          "derivative": "rate_P10"
         },
         {
           "id": "P11",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P11",
-            "format": "math-json"
-          }
+          "derivative": "rate_P11"
         },
         {
           "id": "P12",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P12",
-            "format": "math-json"
-          }
+          "derivative": "rate_P12"
         },
         {
           "id": "P13",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P13",
-            "format": "math-json"
-          }
+          "derivative": "rate_P13"
         },
         {
           "id": "P14",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P14",
-            "format": "math-json"
-          }
+          "derivative": "rate_P14"
         },
         {
           "id": "P15",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P15",
-            "format": "math-json"
-          }
+          "derivative": "rate_P15"
         },
         {
           "id": "P16",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P16",
-            "format": "math-json"
-          }
+          "derivative": "rate_P16"
         },
         {
           "id": "P17",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P17",
-            "format": "math-json"
-          }
+          "derivative": "rate_P17"
         },
         {
           "id": "P18",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P18",
-            "format": "math-json"
-          }
+          "derivative": "rate_P18"
         },
         {
           "id": "P19",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P19",
-            "format": "math-json"
-          }
+          "derivative": "rate_P19"
         },
         {
           "id": "P20",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P20",
-            "format": "math-json"
-          }
+          "derivative": "rate_P20"
         },
         {
           "id": "P21",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P21",
-            "format": "math-json"
-          }
+          "derivative": "rate_P21"
         },
         {
           "id": "P22",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P22",
-            "format": "math-json"
-          }
+          "derivative": "rate_P22"
         },
         {
           "id": "P23",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P23",
-            "format": "math-json"
-          }
+          "derivative": "rate_P23"
         },
         {
           "id": "P24",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P24",
-            "format": "math-json"
-          }
+          "derivative": "rate_P24"
         },
         {
           "id": "P25",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P25",
-            "format": "math-json"
-          }
+          "derivative": "rate_P25"
         },
         {
           "id": "P26",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P26",
-            "format": "math-json"
-          }
+          "derivative": "rate_P26"
         },
         {
           "id": "P27",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P27",
-            "format": "math-json"
-          }
+          "derivative": "rate_P27"
         },
         {
           "id": "P28",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P28",
-            "format": "math-json"
-          }
+          "derivative": "rate_P28"
         },
         {
           "id": "P29",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P29",
-            "format": "math-json"
-          }
+          "derivative": "rate_P29"
         },
         {
           "id": "P30",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P30",
-            "format": "math-json"
-          }
+          "derivative": "rate_P30"
         },
         {
           "id": "P31",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P31",
-            "format": "math-json"
-          }
+          "derivative": "rate_P31"
         },
         {
           "id": "P32",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P32",
-            "format": "math-json"
-          }
+          "derivative": "rate_P32"
         },
         {
           "id": "P33",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P33",
-            "format": "math-json"
-          }
+          "derivative": "rate_P33"
         },
         {
           "id": "P34",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P34",
-            "format": "math-json"
-          }
+          "derivative": "rate_P34"
         },
         {
           "id": "P35",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P35",
-            "format": "math-json"
-          }
+          "derivative": "rate_P35"
         },
         {
           "id": "P36",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P36",
-            "format": "math-json"
-          }
+          "derivative": "rate_P36"
         },
         {
           "id": "P37",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P37",
-            "format": "math-json"
-          }
+          "derivative": "rate_P37"
         },
         {
           "id": "P38",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P38",
-            "format": "math-json"
-          }
+          "derivative": "rate_P38"
         },
         {
           "id": "P39",
           "initial": 0,
-          "derivative": {
-            "expr": "rate_P39",
-            "format": "math-json"
-          }
+          "derivative": "rate_P39"
         }
       ],
       "static": [],
       "assignments": [
         {
           "id": "rate_P2",
-          "rhs": {
-            "expr": [
-              "Abs",
-              -1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Abs",
+            -1
+          ]
         },
         {
           "id": "rate_P3",
-          "rhs": {
-            "expr": [
-              "Abs",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Abs",
+            1
+          ]
         },
         {
           "id": "rate_P4",
-          "rhs": {
-            "expr": [
-              "Arccos",
-              -1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arccos",
+            -1
+          ]
         },
         {
           "id": "rate_P5",
-          "rhs": {
-            "expr": [
-              "Arccos",
-              0.5
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arccos",
+            0.5
+          ]
         },
         {
           "id": "rate_P6",
-          "rhs": {
-            "expr": [
-              "Arcsin",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arcsin",
+            1
+          ]
         },
         {
           "id": "rate_P7",
-          "rhs": {
-            "expr": [
-              "Arcsin",
-              -0.5
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arcsin",
+            -0.5
+          ]
         },
         {
           "id": "rate_P8",
-          "rhs": {
-            "expr": [
-              "Arctan",
-              2.8
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arctan",
+            2.8
+          ]
         },
         {
           "id": "rate_P9",
-          "rhs": {
-            "expr": [
-              "Arctan",
-              -7.09
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arctan",
+            -7.09
+          ]
         },
         {
           "id": "rate_P10",
-          "rhs": {
-            "expr": [
-              "Ceil",
-              0.5
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ceil",
+            0.5
+          ]
         },
         {
           "id": "rate_P11",
-          "rhs": {
-            "expr": [
-              "Ceil",
-              3.55
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ceil",
+            3.55
+          ]
         },
         {
           "id": "rate_P12",
-          "rhs": {
-            "expr": [
-              "Ceil",
-              -4.6
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ceil",
+            -4.6
+          ]
         },
         {
           "id": "rate_P13",
-          "rhs": {
-            "expr": [
-              "Cos",
-              9.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Cos",
+            9.1
+          ]
         },
         {
           "id": "rate_P14",
-          "rhs": {
-            "expr": [
-              "Cos",
-              -0.22
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Cos",
+            -0.22
+          ]
         },
         {
           "id": "rate_P15",
-          "rhs": {
-            "expr": [
-              "Exp",
-              0
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Exp",
+            0
+          ]
         },
         {
           "id": "rate_P16",
-          "rhs": {
-            "expr": [
-              "Exp",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Exp",
+            1
+          ]
         },
         {
           "id": "rate_P17",
-          "rhs": {
-            "expr": [
-              "Exp",
-              0.77
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Exp",
+            0.77
+          ]
         },
         {
           "id": "rate_P18",
-          "rhs": {
-            "expr": [
-              "Floor",
-              -4.6
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Floor",
+            -4.6
+          ]
         },
         {
           "id": "rate_P19",
-          "rhs": {
-            "expr": [
-              "Floor",
-              9.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Floor",
+            9.1
+          ]
         },
         {
           "id": "rate_P20",
-          "rhs": {
-            "expr": [
-              "Ln",
-              0.2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ln",
+            0.2
+          ]
         },
         {
           "id": "rate_P21",
-          "rhs": {
-            "expr": [
-              "Ln",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ln",
+            1
+          ]
         },
         {
           "id": "rate_P22",
-          "rhs": {
-            "expr": [
-              "Log",
-              0.2,
-              10
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Log",
+            0.2,
+            10
+          ]
         },
         {
           "id": "rate_P23",
-          "rhs": {
-            "expr": [
-              "Log",
-              1,
-              10
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Log",
+            1,
+            10
+          ]
         },
         {
           "id": "rate_P24",
-          "rhs": {
-            "expr": [
-              "Power",
-              1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            1,
+            2
+          ]
         },
         {
           "id": "rate_P25",
-          "rhs": {
-            "expr": [
-              "Power",
-              2,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            2,
+            2
+          ]
         },
         {
           "id": "rate_P26",
-          "rhs": {
-            "expr": [
-              "Power",
-              1.4,
-              5.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            1.4,
+            5.1
+          ]
         },
         {
           "id": "rate_P27",
-          "rhs": {
-            "expr": [
-              "Power",
-              4,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            4,
+            2
+          ]
         },
         {
           "id": "rate_P28",
-          "rhs": {
-            "expr": [
-              "Power",
-              3.1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            3.1,
+            2
+          ]
         },
         {
           "id": "rate_P29",
-          "rhs": {
-            "expr": [
-              "Power",
-              4,
-              [
-                "Divide",
-                1,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            4,
+            [
+              "Divide",
+              1,
+              2
+            ]
+          ]
         },
         {
           "id": "rate_P30",
-          "rhs": {
-            "expr": [
-              "Power",
-              7.4,
-              [
-                "Divide",
-                1,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            7.4,
+            [
+              "Divide",
+              1,
+              2
+            ]
+          ]
         },
         {
           "id": "rate_P31",
-          "rhs": {
-            "expr": [
-              "Sin",
-              2.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            2.1
+          ]
         },
         {
           "id": "rate_P32",
-          "rhs": {
-            "expr": [
-              "Sin",
-              0
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            0
+          ]
         },
         {
           "id": "rate_P33",
-          "rhs": {
-            "expr": [
-              "Sin",
-              -5.9
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            -5.9
+          ]
         },
         {
           "id": "rate_P34",
-          "rhs": {
-            "expr": [
-              "Tan",
-              0
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Tan",
+            0
+          ]
         },
         {
           "id": "rate_P35",
-          "rhs": {
-            "expr": [
-              "Tan",
-              1.11
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Tan",
+            1.11
+          ]
         },
         {
           "id": "rate_P36",
-          "rhs": {
-            "expr": [
-              "Tan",
-              -6
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Tan",
+            -6
+          ]
         },
         {
           "id": "rate_P37",
-          "rhs": {
-            "expr": [
-              "Divide",
+          "rhs": [
+            "Divide",
+            [
+              "Add",
               [
-                "Add",
+                "Exp",
                 [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    0
-                  ]
-                ],
-                [
-                  "Negate",
-                  1
+                  "Multiply",
+                  2,
+                  0
                 ]
               ],
               [
-                "Add",
-                [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    0
-                  ]
-                ],
+                "Negate",
                 1
               ]
             ],
-            "format": "math-json"
-          }
+            [
+              "Add",
+              [
+                "Exp",
+                [
+                  "Multiply",
+                  2,
+                  0
+                ]
+              ],
+              1
+            ]
+          ]
         },
         {
           "id": "rate_P38",
-          "rhs": {
-            "expr": [
-              "Divide",
+          "rhs": [
+            "Divide",
+            [
+              "Add",
               [
-                "Add",
+                "Exp",
                 [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    1.11
-                  ]
-                ],
-                [
-                  "Negate",
-                  1
+                  "Multiply",
+                  2,
+                  1.11
                 ]
               ],
               [
-                "Add",
-                [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    1.11
-                  ]
-                ],
+                "Negate",
                 1
               ]
             ],
-            "format": "math-json"
-          }
+            [
+              "Add",
+              [
+                "Exp",
+                [
+                  "Multiply",
+                  2,
+                  1.11
+                ]
+              ],
+              1
+            ]
+          ]
         },
         {
           "id": "rate_P39",
-          "rhs": {
-            "expr": [
-              "Divide",
+          "rhs": [
+            "Divide",
+            [
+              "Add",
               [
-                "Add",
+                "Exp",
                 [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    -6
-                  ]
-                ],
-                [
-                  "Negate",
-                  1
+                  "Multiply",
+                  2,
+                  -6
                 ]
               ],
               [
-                "Add",
-                [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    -6
-                  ]
-                ],
+                "Negate",
                 1
               ]
             ],
-            "format": "math-json"
-          }
+            [
+              "Add",
+              [
+                "Exp",
+                [
+                  "Multiply",
+                  2,
+                  -6
+                ]
+              ],
+              1
+            ]
+          ]
         }
       ],
       "timeEvents": [],

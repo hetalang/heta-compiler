@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:21:40.360Z",
+  "created": "2026-08-27T15:59:28.366Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k3",
@@ -22,47 +25,35 @@
           "id": "k1",
           "initial": 0.00015,
           "title": "k1",
-          "derivative": {
-            "expr": "rate_k1",
-            "format": "math-json"
-          }
+          "derivative": "rate_k1"
         },
         {
           "id": "k2",
           "initial": 0,
           "title": "k2",
-          "derivative": {
-            "expr": "rate_k2",
-            "format": "math-json"
-          }
+          "derivative": "rate_k2"
         }
       ],
       "static": [],
       "assignments": [
         {
           "id": "rate_k1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              -1,
-              "k1",
-              "k3",
-              "t"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            -1,
+            "k1",
+            "k3",
+            "t"
+          ]
         },
         {
           "id": "rate_k2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "k3",
-              "t"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "k3",
+            "t"
+          ]
         }
       ],
       "timeEvents": [],

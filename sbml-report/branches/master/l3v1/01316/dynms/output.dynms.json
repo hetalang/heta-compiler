@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:39:09.070Z",
+  "created": "2026-08-27T16:18:16.843Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "p1",
@@ -20,18 +23,15 @@
       "static": [
         {
           "id": "p2",
-          "initial": {
-            "expr": [
-              "Add",
-              1,
-              [
-                "Divide",
-                6.02214076e+23,
-                1e+24
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Add",
+            1,
+            [
+              "Divide",
+              6.02214076e+23,
+              1e+24
+            ]
+          ]
         }
       ],
       "assignments": [],

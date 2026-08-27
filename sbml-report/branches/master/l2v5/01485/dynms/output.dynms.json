@@ -1,421 +1,316 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:52:28.761Z",
+  "created": "2026-08-27T16:32:17.647Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [],
       "static": [],
       "assignments": [
         {
           "id": "P2",
-          "rhs": {
-            "expr": [
-              "Abs",
-              -1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Abs",
+            -1
+          ]
         },
         {
           "id": "P3",
-          "rhs": {
-            "expr": [
-              "Abs",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Abs",
+            1
+          ]
         },
         {
           "id": "P4",
-          "rhs": {
-            "expr": [
-              "Arccos",
-              -1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arccos",
+            -1
+          ]
         },
         {
           "id": "P5",
-          "rhs": {
-            "expr": [
-              "Arccos",
-              0.5
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arccos",
+            0.5
+          ]
         },
         {
           "id": "P6",
-          "rhs": {
-            "expr": [
-              "Arcsin",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arcsin",
+            1
+          ]
         },
         {
           "id": "P7",
-          "rhs": {
-            "expr": [
-              "Arcsin",
-              -0.5
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arcsin",
+            -0.5
+          ]
         },
         {
           "id": "P8",
-          "rhs": {
-            "expr": [
-              "Arctan",
-              2.8
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arctan",
+            2.8
+          ]
         },
         {
           "id": "P9",
-          "rhs": {
-            "expr": [
-              "Arctan",
-              -7.09
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Arctan",
+            -7.09
+          ]
         },
         {
           "id": "P10",
-          "rhs": {
-            "expr": [
-              "Ceil",
-              0.5
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ceil",
+            0.5
+          ]
         },
         {
           "id": "P11",
-          "rhs": {
-            "expr": [
-              "Ceil",
-              3.55
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ceil",
+            3.55
+          ]
         },
         {
           "id": "P12",
-          "rhs": {
-            "expr": [
-              "Ceil",
-              -4.6
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ceil",
+            -4.6
+          ]
         },
         {
           "id": "P13",
-          "rhs": {
-            "expr": [
-              "Cos",
-              9.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Cos",
+            9.1
+          ]
         },
         {
           "id": "P14",
-          "rhs": {
-            "expr": [
-              "Cos",
-              -0.22
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Cos",
+            -0.22
+          ]
         },
         {
           "id": "P15",
-          "rhs": {
-            "expr": [
-              "Exp",
-              0
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Exp",
+            0
+          ]
         },
         {
           "id": "P16",
-          "rhs": {
-            "expr": [
-              "Exp",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Exp",
+            1
+          ]
         },
         {
           "id": "P17",
-          "rhs": {
-            "expr": [
-              "Exp",
-              0.77
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Exp",
+            0.77
+          ]
         },
         {
           "id": "P18",
-          "rhs": {
-            "expr": [
-              "Floor",
-              -4.6
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Floor",
+            -4.6
+          ]
         },
         {
           "id": "P19",
-          "rhs": {
-            "expr": [
-              "Floor",
-              9.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Floor",
+            9.1
+          ]
         },
         {
           "id": "P20",
-          "rhs": {
-            "expr": [
-              "Ln",
-              0.2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ln",
+            0.2
+          ]
         },
         {
           "id": "P21",
-          "rhs": {
-            "expr": [
-              "Ln",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Ln",
+            1
+          ]
         },
         {
           "id": "P22",
-          "rhs": {
-            "expr": [
-              "Log",
-              0.2,
-              10
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Log",
+            0.2,
+            10
+          ]
         },
         {
           "id": "P23",
-          "rhs": {
-            "expr": [
-              "Log",
-              1,
-              10
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Log",
+            1,
+            10
+          ]
         },
         {
           "id": "P24",
-          "rhs": {
-            "expr": [
-              "Power",
-              1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            1,
+            2
+          ]
         },
         {
           "id": "P25",
-          "rhs": {
-            "expr": [
-              "Power",
-              2,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            2,
+            2
+          ]
         },
         {
           "id": "P26",
-          "rhs": {
-            "expr": [
-              "Power",
-              1.4,
-              5.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            1.4,
+            5.1
+          ]
         },
         {
           "id": "P27",
-          "rhs": {
-            "expr": [
-              "Power",
-              4,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            4,
+            2
+          ]
         },
         {
           "id": "P28",
-          "rhs": {
-            "expr": [
-              "Power",
-              3.1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            3.1,
+            2
+          ]
         },
         {
           "id": "P29",
-          "rhs": {
-            "expr": [
-              "Power",
-              4,
-              [
-                "Divide",
-                1,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            4,
+            [
+              "Divide",
+              1,
+              2
+            ]
+          ]
         },
         {
           "id": "P30",
-          "rhs": {
-            "expr": [
-              "Power",
-              7.4,
-              [
-                "Divide",
-                1,
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Power",
+            7.4,
+            [
+              "Divide",
+              1,
+              2
+            ]
+          ]
         },
         {
           "id": "P31",
-          "rhs": {
-            "expr": [
-              "Sin",
-              2.1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            2.1
+          ]
         },
         {
           "id": "P32",
-          "rhs": {
-            "expr": [
-              "Sin",
-              0
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            0
+          ]
         },
         {
           "id": "P33",
-          "rhs": {
-            "expr": [
-              "Sin",
-              -5.9
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            -5.9
+          ]
         },
         {
           "id": "P34",
-          "rhs": {
-            "expr": [
-              "Tan",
-              0
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Tan",
+            0
+          ]
         },
         {
           "id": "P35",
-          "rhs": {
-            "expr": [
-              "Tan",
-              1.11
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Tan",
+            1.11
+          ]
         },
         {
           "id": "P36",
-          "rhs": {
-            "expr": [
-              "Tan",
-              -6
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Tan",
+            -6
+          ]
         },
         {
           "id": "P37",
-          "rhs": {
-            "expr": [
-              "Divide",
+          "rhs": [
+            "Divide",
+            [
+              "Add",
               [
-                "Add",
+                "Exp",
                 [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    -0.4
-                  ]
-                ],
-                [
-                  "Negate",
-                  1
+                  "Multiply",
+                  2,
+                  -0.4
                 ]
               ],
               [
-                "Add",
-                [
-                  "Exp",
-                  [
-                    "Multiply",
-                    2,
-                    -0.4
-                  ]
-                ],
+                "Negate",
                 1
               ]
             ],
-            "format": "math-json"
-          }
+            [
+              "Add",
+              [
+                "Exp",
+                [
+                  "Multiply",
+                  2,
+                  -0.4
+                ]
+              ],
+              1
+            ]
+          ]
         }
       ],
       "timeEvents": [],

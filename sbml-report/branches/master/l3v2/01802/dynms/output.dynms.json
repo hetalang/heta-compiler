@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:28:39.521Z",
+  "created": "2026-08-27T16:07:08.030Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "local_J1_S1_stoich",
@@ -28,21 +31,15 @@
         {
           "id": "S1",
           "initial": 2,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "J1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "J1"
+          ]
         },
         {
           "id": "S2",
           "initial": 3,
-          "derivative": {
-            "expr": "J1",
-            "format": "math-json"
-          }
+          "derivative": "J1"
         }
       ],
       "static": [
@@ -54,16 +51,13 @@
       "assignments": [
         {
           "id": "J1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "local_J1_S1_stoich",
-              "local_J1_S2_stoich",
-              "local_J1_J1",
-              200
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "local_J1_S1_stoich",
+            "local_J1_S2_stoich",
+            "local_J1_J1",
+            200
+          ]
         }
       ],
       "timeEvents": [],

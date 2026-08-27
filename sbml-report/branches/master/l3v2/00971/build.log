@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/00971/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00971/00971-sbml-l3v2.xml"...
+[info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	Xref component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: a5df81ade1f1d2395261867d23622197fc836ba7cb6c0afbf49ed6c570cb8616
 [info]	Setting references in elements, total length 97

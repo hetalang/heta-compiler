@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01236/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01236/01236-sbml-l3v2.xml"...
+[info]	SBML identifiers converted: 0 renamed, 1 created.
 [info]	Platform hash: 2cca16a94a1370a79b4c65b2afa15f36a96d158bb2526bdbad89ffe608b21caf
 [info]	Setting references in elements, total length 95
 [error]	Record "rate_p" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.

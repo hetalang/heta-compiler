@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:52:14.084Z",
+  "created": "2026-08-27T16:32:02.418Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "local_J0_k1",
@@ -19,36 +22,24 @@
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              5,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "J0"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            5,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "J0"
+          ]
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              5,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "J0",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            5,
+            1
+          ],
+          "derivative": "J0"
         }
       ],
       "static": [
@@ -60,37 +51,28 @@
       "assignments": [
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "default_compartment"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "default_compartment"
+          ]
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "default_compartment"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "default_compartment"
+          ]
         },
         {
           "id": "J0",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "local_J0_k1",
-              "S1",
-              "S2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "local_J0_k1",
+            "S1",
+            "S2"
+          ]
         }
       ],
       "timeEvents": [],

@@ -1,0 +1,243 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T16:05:31.954Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [],
+      "dynamic": [
+        {
+          "id": "reset",
+          "initial": 0,
+          "derivative": "rate_reset"
+        }
+      ],
+      "static": [
+        {
+          "id": "Q",
+          "initial": 0
+        },
+        {
+          "id": "R",
+          "initial": 0
+        },
+        {
+          "id": "maxdiff",
+          "initial": 0
+        },
+        {
+          "id": "errorLow",
+          "initial": 0
+        },
+        {
+          "id": "errorHigh",
+          "initial": 0
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S",
+          "rhs": [
+            "Add",
+            "Q",
+            "R"
+          ]
+        },
+        {
+          "id": "rate_reset",
+          "rhs": 1
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "Qinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "reset",
+              0.01
+            ],
+            "detection": "step"
+          },
+          "priority": 1,
+          "actions": [
+            {
+              "state": "Q",
+              "rhs": [
+                "Add",
+                "Q",
+                [
+                  "Divide",
+                  [
+                    "Multiply",
+                    0.5,
+                    [
+                      "Add",
+                      [
+                        "Exp",
+                        0
+                      ],
+                      [
+                        "Exp",
+                        0
+                      ]
+                    ]
+                  ],
+                  100
+                ]
+              ]
+            },
+            {
+              "state": "reset",
+              "rhs": 0
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Rinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "reset",
+              0.01
+            ],
+            "detection": "step"
+          },
+          "priority": 1,
+          "actions": [
+            {
+              "state": "R",
+              "rhs": [
+                "Add",
+                "R",
+                [
+                  "Divide",
+                  [
+                    "Multiply",
+                    0.5,
+                    [
+                      "Add",
+                      [
+                        "Exp",
+                        0
+                      ],
+                      [
+                        "Exp",
+                        0
+                      ]
+                    ]
+                  ],
+                  100
+                ]
+              ]
+            },
+            {
+              "state": "reset",
+              "rhs": 0
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "maxcheck",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              [
+                "Abs",
+                [
+                  "Add",
+                  "Q",
+                  [
+                    "Negate",
+                    "R"
+                  ]
+                ]
+              ],
+              "maxdiff"
+            ],
+            "detection": "step"
+          },
+          "actions": [
+            {
+              "state": "maxdiff",
+              "rhs": [
+                "Abs",
+                [
+                  "Add",
+                  "Q",
+                  [
+                    "Negate",
+                    "R"
+                  ]
+                ]
+              ]
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "error_check",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "And",
+              [
+                "GreaterEqual",
+                "t",
+                99
+              ],
+              [
+                "Less",
+                "maxdiff",
+                0.2
+              ]
+            ],
+            "detection": "step"
+          },
+          "actions": [
+            {
+              "state": "errorLow",
+              "rhs": 1
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "error_check2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "maxdiff",
+              4
+            ],
+            "detection": "step"
+          },
+          "actions": [
+            {
+              "state": "errorHigh",
+              "rhs": 1
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

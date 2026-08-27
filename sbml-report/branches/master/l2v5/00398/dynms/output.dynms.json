@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:46:09.597Z",
+  "created": "2026-08-27T16:25:40.221Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k1",
@@ -27,94 +30,76 @@
           "id": "S1",
           "initial": 1,
           "title": "S1",
-          "derivative": {
-            "expr": "rate_S1",
-            "format": "math-json"
-          }
+          "derivative": "rate_S1"
         },
         {
           "id": "S2",
           "initial": 2,
           "title": "S2",
-          "derivative": {
-            "expr": "rate_S2",
-            "format": "math-json"
-          }
+          "derivative": "rate_S2"
         },
         {
           "id": "S3",
           "initial": 1,
           "title": "S3",
-          "derivative": {
-            "expr": "rate_S3",
-            "format": "math-json"
-          }
+          "derivative": "rate_S3"
         }
       ],
       "static": [],
       "assignments": [
         {
           "id": "rate_S1",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                "k2",
-                "S3"
-              ],
-              [
-                "Multiply",
-                -1,
-                "k1",
-                "S1",
-                "S2"
-              ]
+          "rhs": [
+            "Add",
+            [
+              "Multiply",
+              "k2",
+              "S3"
             ],
-            "format": "math-json"
-          }
+            [
+              "Multiply",
+              -1,
+              "k1",
+              "S1",
+              "S2"
+            ]
+          ]
         },
         {
           "id": "rate_S2",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                "k2",
-                "S3"
-              ],
-              [
-                "Multiply",
-                -1,
-                "k1",
-                "S1",
-                "S2"
-              ]
+          "rhs": [
+            "Add",
+            [
+              "Multiply",
+              "k2",
+              "S3"
             ],
-            "format": "math-json"
-          }
+            [
+              "Multiply",
+              -1,
+              "k1",
+              "S1",
+              "S2"
+            ]
+          ]
         },
         {
           "id": "rate_S3",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                "k1",
-                "S1",
-                "S2"
-              ],
-              [
-                "Multiply",
-                -1,
-                "k2",
-                "S3"
-              ]
+          "rhs": [
+            "Add",
+            [
+              "Multiply",
+              "k1",
+              "S1",
+              "S2"
             ],
-            "format": "math-json"
-          }
+            [
+              "Multiply",
+              -1,
+              "k2",
+              "S3"
+            ]
+          ]
         }
       ],
       "timeEvents": [],
@@ -123,30 +108,21 @@
           "id": "event1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Less",
-                "S1",
-                0.75
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Less",
+              "S1",
+              0.75
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 1,
-                "format": "math-json"
-              },
-              "state": "S1"
+              "state": "S1",
+              "rhs": 1
             },
             {
-              "rhs": {
-                "expr": 1.5,
-                "format": "math-json"
-              },
-              "state": "S2"
+              "state": "S2",
+              "rhs": 1.5
             }
           ],
           "active": true,

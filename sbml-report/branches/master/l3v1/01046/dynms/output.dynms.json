@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:37:27.122Z",
+  "created": "2026-08-27T16:16:29.860Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k1",
@@ -35,89 +38,65 @@
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                1,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              1,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S1",
-          "derivative": {
-            "expr": "reaction1",
-            "format": "math-json"
-          }
+          "derivative": "reaction1"
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                2,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              2,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S2",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction1"
+          ]
         },
         {
           "id": "S3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                1,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              1,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S3",
-          "derivative": {
-            "expr": "reaction2",
-            "format": "math-json"
-          }
+          "derivative": "reaction2"
         },
         {
           "id": "S4_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                1.5,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              1.5,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S4",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction2"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction2"
+          ]
         }
       ],
       "static": [
@@ -130,106 +109,88 @@
       "assignments": [
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ],
           "title": "S1"
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "C"
+          ],
           "title": "S2"
         },
         {
           "id": "reaction1",
-          "rhs": {
-            "expr": [
-              "Negate",
+          "rhs": [
+            "Negate",
+            [
+              "Multiply",
+              "C",
               [
-                "Multiply",
-                "C",
+                "Add",
                 [
-                  "Add",
-                  [
-                    "Multiply",
-                    "kf",
-                    "S1"
-                  ],
-                  [
-                    "Multiply",
-                    -1,
-                    "kr",
-                    "S2"
-                  ]
+                  "Multiply",
+                  "kf",
+                  "S1"
+                ],
+                [
+                  "Multiply",
+                  -1,
+                  "kr",
+                  "S2"
                 ]
               ]
-            ],
-            "format": "math-json"
-          },
+            ]
+          ],
           "title": "reaction1"
         },
         {
           "id": "S3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S3_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S3_amt_",
+            "C"
+          ],
           "title": "S3"
         },
         {
           "id": "S4",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S4_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S4_amt_",
+            "C"
+          ],
           "title": "S4"
         },
         {
           "id": "reaction2",
-          "rhs": {
-            "expr": [
-              "Negate",
+          "rhs": [
+            "Negate",
+            [
+              "Multiply",
+              "C",
               [
-                "Multiply",
-                "C",
+                "Add",
                 [
-                  "Add",
-                  [
-                    "Multiply",
-                    "k1",
-                    "S3"
-                  ],
-                  [
-                    "Multiply",
-                    -1,
-                    "k2",
-                    "S4"
-                  ]
+                  "Multiply",
+                  "k1",
+                  "S3"
+                ],
+                [
+                  "Multiply",
+                  -1,
+                  "k2",
+                  "S4"
                 ]
               ]
-            ],
-            "format": "math-json"
-          },
+            ]
+          ],
           "title": "reaction2"
         }
       ],
@@ -239,38 +200,29 @@
           "id": "event1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Less",
-                "S1",
-                0.5
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Less",
+              "S1",
+              0.5
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  1.5,
-                  "C"
-                ],
-                "format": "math-json"
-              },
-              "state": "S2_amt_"
+              "state": "S2_amt_",
+              "rhs": [
+                "Multiply",
+                1.5,
+                "C"
+              ]
             },
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  "S2",
-                  "C"
-                ],
-                "format": "math-json"
-              },
-              "state": "S4_amt_"
+              "state": "S4_amt_",
+              "rhs": [
+                "Multiply",
+                "S2",
+                "C"
+              ]
             }
           ],
           "active": true,

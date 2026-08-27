@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:16:18.192Z",
+  "created": "2026-08-27T15:53:45.303Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "k1",
@@ -22,13 +25,10 @@
           "id": "S1",
           "initial": 0.15,
           "title": "S1",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction1"
+          ]
         }
       ],
       "static": [
@@ -46,14 +46,11 @@
       "assignments": [
         {
           "id": "reaction1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "S1"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Multiply",
+            "k1",
+            "S1"
+          ],
           "title": "reaction1"
         }
       ],

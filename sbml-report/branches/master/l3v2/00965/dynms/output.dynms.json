@@ -1,0 +1,218 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T16:00:07.226Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "Q",
+          "initial": 0
+        },
+        {
+          "id": "R",
+          "initial": 0
+        },
+        {
+          "id": "reset",
+          "initial": 0
+        },
+        {
+          "id": "Qrun",
+          "initial": 0
+        },
+        {
+          "id": "Rrun",
+          "initial": 0
+        },
+        {
+          "id": "maxrun",
+          "initial": 0
+        },
+        {
+          "id": "error",
+          "initial": 0
+        }
+      ],
+      "assignments": [
+        {
+          "id": "S",
+          "rhs": [
+            "Add",
+            "Q",
+            "R"
+          ]
+        }
+      ],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "Qinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              [
+                "Add",
+                "t",
+                [
+                  "Negate",
+                  "reset"
+                ]
+              ],
+              0.01
+            ],
+            "detection": "step"
+          },
+          "priority": 10,
+          "actions": [
+            {
+              "state": "Q",
+              "rhs": [
+                "Add",
+                "Q",
+                0.01
+              ]
+            },
+            {
+              "state": "reset",
+              "rhs": "t"
+            },
+            {
+              "state": "Qrun",
+              "rhs": [
+                "Add",
+                "Qrun",
+                1
+              ]
+            },
+            {
+              "state": "Rrun",
+              "rhs": 0
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Rinc",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              [
+                "Add",
+                "t",
+                [
+                  "Negate",
+                  "reset"
+                ]
+              ],
+              0.01
+            ],
+            "detection": "step"
+          },
+          "priority": 10,
+          "actions": [
+            {
+              "state": "R",
+              "rhs": [
+                "Add",
+                "R",
+                0.01
+              ]
+            },
+            {
+              "state": "reset",
+              "rhs": "t"
+            },
+            {
+              "state": "Qrun",
+              "rhs": 0
+            },
+            {
+              "state": "Rrun",
+              "rhs": [
+                "Add",
+                "Rrun",
+                1
+              ]
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "maxrun_check1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "Qrun",
+              "maxrun"
+            ],
+            "detection": "step"
+          },
+          "priority": 9,
+          "actions": [
+            {
+              "state": "maxrun",
+              "rhs": "Qrun"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "maxrun_check2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "Rrun",
+              "maxrun"
+            ],
+            "detection": "step"
+          },
+          "priority": 8,
+          "actions": [
+            {
+              "state": "maxrun",
+              "rhs": "Rrun"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "error_check",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "maxrun",
+              300
+            ],
+            "detection": "step"
+          },
+          "priority": 7,
+          "actions": [
+            {
+              "state": "error",
+              "rhs": 1
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

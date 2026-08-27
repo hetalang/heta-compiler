@@ -1,0 +1,99 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T16:00:18.407Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "p1",
+          "initial": 1
+        },
+        {
+          "id": "p2",
+          "initial": 0
+        },
+        {
+          "id": "p3",
+          "initial": 0
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "p1",
+              1
+            ],
+            "detection": "step"
+          },
+          "priority": 2,
+          "actions": [
+            {
+              "state": "p2",
+              "rhs": 1
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "p1",
+              1
+            ],
+            "detection": "step"
+          },
+          "priority": 2,
+          "actions": [
+            {
+              "state": "p3",
+              "rhs": 1
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "GreaterEqual",
+              "p1",
+              1
+            ],
+            "detection": "step"
+          },
+          "priority": 1,
+          "actions": [
+            {
+              "state": "p1",
+              "rhs": 0
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

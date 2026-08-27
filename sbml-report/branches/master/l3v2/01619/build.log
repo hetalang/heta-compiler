@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01619/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01619/01619-sbml-l3v2.xml"...
+[info]	SBML identifiers converted: 0 renamed, 0 created.
 [info]	Platform hash: b80d6861fa0d1d1d1b3bc3ff8b7d1f603132c36f041790d657fa007facf3dd9a
 [info]	Setting references in elements, total length 147
 [error]	Record "R16" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.

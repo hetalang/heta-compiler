@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:28:41.471Z",
+  "created": "2026-08-27T16:07:10.400Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [],
       "static": [
@@ -23,71 +26,53 @@
         },
         {
           "id": "spec_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              3,
-              1
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            3,
+            1
+          ]
         },
         {
           "id": "Spec_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              4,
-              2
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            4,
+            2
+          ]
         },
         {
           "id": "sPeC_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              5,
-              1
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            5,
+            1
+          ]
         }
       ],
       "assignments": [
         {
           "id": "spec",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "spec_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "spec_amt_",
+            "C"
+          ]
         },
         {
           "id": "Spec",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "Spec_amt_",
-              "c"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "Spec_amt_",
+            "c"
+          ]
         },
         {
           "id": "sPeC",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "sPeC_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "sPeC_amt_",
+            "C"
+          ]
         }
       ],
       "timeEvents": [],

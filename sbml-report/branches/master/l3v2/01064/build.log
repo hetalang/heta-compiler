@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.13.0-beta.0 is initialized for the platform "undefined"
+[info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01064/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01064/01064-sbml-l3v2.xml"...
+[info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	generatedId_0 component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: 514ac42c5c2eaf5b252f571f80f98902e6334611af52b64734ca962cfb1b48de
 [info]	Setting references in elements, total length 101

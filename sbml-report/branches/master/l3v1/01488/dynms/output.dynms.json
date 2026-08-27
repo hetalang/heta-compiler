@@ -1,126 +1,385 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:40:21.735Z",
+  "created": "2026-08-27T16:19:33.410Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [],
       "dynamic": [],
       "static": [],
       "assignments": [
         {
           "id": "P1",
-          "rhs": {
-            "expr": [
-              "Sec",
-              "t"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sec",
+            "t"
+          ]
         },
         {
           "id": "P2",
-          "rhs": {
-            "expr": [
-              "Sec",
-              [
-                "Negate",
-                "t"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sec",
+            [
+              "Negate",
+              "t"
+            ]
+          ]
         },
         {
           "id": "P3",
-          "rhs": {
-            "expr": [
-              "Csc",
-              [
-                "Add",
-                "t",
-                0.001
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Csc",
+            [
+              "Add",
+              "t",
+              0.001
+            ]
+          ]
         },
         {
           "id": "P4",
-          "rhs": {
-            "expr": [
-              "Csc",
+          "rhs": [
+            "Csc",
+            [
+              "Add",
               [
-                "Add",
-                [
-                  "Negate",
-                  "t"
-                ],
-                [
-                  "Negate",
-                  0.001
-                ]
+                "Negate",
+                "t"
+              ],
+              [
+                "Negate",
+                0.001
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "P5",
-          "rhs": {
-            "expr": [
-              "Cot",
-              [
-                "Add",
-                "t",
-                0.001
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Cot",
+            [
+              "Add",
+              "t",
+              0.001
+            ]
+          ]
         },
         {
           "id": "P6",
-          "rhs": {
-            "expr": [
-              "Cot",
+          "rhs": [
+            "Cot",
+            [
+              "Add",
               [
-                "Add",
-                [
-                  "Negate",
-                  "t"
-                ],
-                [
-                  "Negate",
-                  0.001
-                ]
+                "Negate",
+                "t"
+              ],
+              [
+                "Negate",
+                0.001
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "P7",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.5,
+          "rhs": [
+            "Multiply",
+            0.5,
+            [
+              "Add",
               [
-                "Add",
+                "Exp",
+                "t"
+              ],
+              [
+                "Negate",
                 [
                   "Exp",
+                  [
+                    "Negate",
+                    "t"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P8",
+          "rhs": [
+            "Multiply",
+            0.5,
+            [
+              "Add",
+              [
+                "Exp",
+                [
+                  "Negate",
                   "t"
-                ],
+                ]
+              ],
+              [
+                "Negate",
+                [
+                  "Exp",
+                  [
+                    "Negate",
+                    [
+                      "Negate",
+                      "t"
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P9",
+          "rhs": [
+            "Multiply",
+            0.5,
+            [
+              "Add",
+              [
+                "Exp",
+                "t"
+              ],
+              [
+                "Exp",
+                [
+                  "Negate",
+                  "t"
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P10",
+          "rhs": [
+            "Multiply",
+            0.5,
+            [
+              "Add",
+              [
+                "Exp",
+                [
+                  "Negate",
+                  "t"
+                ]
+              ],
+              [
+                "Exp",
                 [
                   "Negate",
                   [
-                    "Exp",
+                    "Negate",
+                    "t"
+                  ]
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P11",
+          "rhs": [
+            "Arcsec",
+            [
+              "Add",
+              "t",
+              1
+            ]
+          ]
+        },
+        {
+          "id": "P12",
+          "rhs": [
+            "Arcsec",
+            [
+              "Add",
+              [
+                "Negate",
+                "t"
+              ],
+              [
+                "Negate",
+                1
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P13",
+          "rhs": [
+            "Arccsc",
+            [
+              "Add",
+              "t",
+              1
+            ]
+          ]
+        },
+        {
+          "id": "P14",
+          "rhs": [
+            "Arccsc",
+            [
+              "Add",
+              [
+                "Negate",
+                "t"
+              ],
+              [
+                "Negate",
+                1
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P15",
+          "rhs": [
+            "Arccot",
+            [
+              "Add",
+              "t",
+              0.001
+            ]
+          ]
+        },
+        {
+          "id": "P16",
+          "rhs": [
+            "Arccot",
+            [
+              "Add",
+              [
+                "Negate",
+                "t"
+              ],
+              [
+                "Negate",
+                0.001
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P17",
+          "rhs": [
+            "Ln",
+            [
+              "Add",
+              "t",
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  [
+                    "Power",
+                    "t",
+                    2
+                  ],
+                  1
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P18",
+          "rhs": [
+            "Ln",
+            [
+              "Add",
+              [
+                "Negate",
+                "t"
+              ],
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  [
+                    "Power",
+                    [
+                      "Negate",
+                      "t"
+                    ],
+                    2
+                  ],
+                  1
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P19",
+          "rhs": [
+            "Ln",
+            [
+              "Add",
+              "t",
+              1,
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  [
+                    "Power",
+                    [
+                      "Add",
+                      "t",
+                      1
+                    ],
+                    2
+                  ],
+                  [
+                    "Negate",
+                    1
+                  ]
+                ]
+              ]
+            ]
+          ]
+        },
+        {
+          "id": "P20",
+          "rhs": [
+            "If",
+            [
+              "Less",
+              "t",
+              1
+            ],
+            [
+              "Multiply",
+              0.5,
+              [
+                "Ln",
+                [
+                  "Divide",
+                  [
+                    "Add",
+                    1,
+                    "t"
+                  ],
+                  [
+                    "Add",
+                    1,
                     [
                       "Negate",
                       "t"
@@ -129,28 +388,36 @@
                 ]
               ]
             ],
-            "format": "math-json"
-          }
+            10
+          ]
         },
         {
-          "id": "P8",
-          "rhs": {
-            "expr": [
+          "id": "P21",
+          "rhs": [
+            "If",
+            [
+              "Less",
+              "t",
+              1
+            ],
+            [
               "Multiply",
               0.5,
               [
-                "Add",
+                "Ln",
                 [
-                  "Exp",
+                  "Divide",
                   [
-                    "Negate",
-                    "t"
-                  ]
-                ],
-                [
-                  "Negate",
+                    "Add",
+                    1,
+                    [
+                      "Negate",
+                      "t"
+                    ]
+                  ],
                   [
-                    "Exp",
+                    "Add",
+                    1,
                     [
                       "Negate",
                       [
@@ -162,234 +429,78 @@
                 ]
               ]
             ],
-            "format": "math-json"
-          }
+            -10
+          ]
         },
         {
-          "id": "P9",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.5,
+          "id": "P22",
+          "rhs": [
+            "If",
+            [
+              "Or",
               [
-                "Add",
-                [
-                  "Exp",
-                  "t"
-                ],
-                [
-                  "Exp",
-                  [
-                    "Negate",
-                    "t"
-                  ]
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P10",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.5,
+                "LessEqual",
+                "t",
+                0
+              ],
               [
-                "Add",
-                [
-                  "Exp",
-                  [
-                    "Negate",
-                    "t"
-                  ]
-                ],
-                [
-                  "Exp",
-                  [
-                    "Negate",
-                    [
-                      "Negate",
-                      "t"
-                    ]
-                  ]
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P11",
-          "rhs": {
-            "expr": [
-              "Arcsec",
-              [
-                "Add",
+                "GreaterEqual",
                 "t",
                 1
               ]
             ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P12",
-          "rhs": {
-            "expr": [
-              "Arcsec",
-              [
-                "Add",
-                [
-                  "Negate",
-                  "t"
-                ],
-                [
-                  "Negate",
-                  1
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P13",
-          "rhs": {
-            "expr": [
-              "Arccsc",
-              [
-                "Add",
-                "t",
-                1
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P14",
-          "rhs": {
-            "expr": [
-              "Arccsc",
-              [
-                "Add",
-                [
-                  "Negate",
-                  "t"
-                ],
-                [
-                  "Negate",
-                  1
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P15",
-          "rhs": {
-            "expr": [
-              "Arccot",
-              [
-                "Add",
-                "t",
-                0.001
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P16",
-          "rhs": {
-            "expr": [
-              "Arccot",
-              [
-                "Add",
-                [
-                  "Negate",
-                  "t"
-                ],
-                [
-                  "Negate",
-                  0.001
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P17",
-          "rhs": {
-            "expr": [
+            0,
+            [
               "Ln",
               [
-                "Add",
-                "t",
+                "Divide",
                 [
-                  "Sqrt",
+                  "Add",
+                  1,
                   [
-                    "Add",
+                    "Sqrt",
                     [
-                      "Power",
-                      "t",
-                      2
-                    ],
-                    1
-                  ]
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P18",
-          "rhs": {
-            "expr": [
-              "Ln",
-              [
-                "Add",
-                [
-                  "Negate",
-                  "t"
-                ],
-                [
-                  "Sqrt",
-                  [
-                    "Add",
-                    [
-                      "Power",
+                      "Add",
+                      1,
                       [
                         "Negate",
-                        "t"
-                      ],
-                      2
-                    ],
-                    1
+                        [
+                          "Power",
+                          "t",
+                          2
+                        ]
+                      ]
+                    ]
                   ]
-                ]
+                ],
+                "t"
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
-          "id": "P19",
-          "rhs": {
-            "expr": [
-              "Ln",
+          "id": "P23",
+          "rhs": [
+            "Ln",
+            [
+              "Add",
               [
-                "Add",
-                "t",
+                "Divide",
                 1,
                 [
-                  "Sqrt",
+                  "Add",
+                  "t",
+                  1
+                ]
+              ],
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  1,
                   [
-                    "Add",
+                    "Divide",
+                    1,
                     [
                       "Power",
                       [
@@ -398,287 +509,117 @@
                         1
                       ],
                       2
-                    ],
-                    [
-                      "Negate",
-                      1
                     ]
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P20",
-          "rhs": {
-            "expr": [
-              "If",
-              [
-                "Less",
-                "t",
-                1
-              ],
-              [
-                "Multiply",
-                0.5,
-                [
-                  "Ln",
-                  [
-                    "Divide",
-                    [
-                      "Add",
-                      1,
-                      "t"
-                    ],
-                    [
-                      "Add",
-                      1,
-                      [
-                        "Negate",
-                        "t"
-                      ]
-                    ]
-                  ]
-                ]
-              ],
-              10
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P21",
-          "rhs": {
-            "expr": [
-              "If",
-              [
-                "Less",
-                "t",
-                1
-              ],
-              [
-                "Multiply",
-                0.5,
-                [
-                  "Ln",
-                  [
-                    "Divide",
-                    [
-                      "Add",
-                      1,
-                      [
-                        "Negate",
-                        "t"
-                      ]
-                    ],
-                    [
-                      "Add",
-                      1,
-                      [
-                        "Negate",
-                        [
-                          "Negate",
-                          "t"
-                        ]
-                      ]
-                    ]
-                  ]
-                ]
-              ],
-              -10
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P22",
-          "rhs": {
-            "expr": [
-              "If",
-              [
-                "Or",
-                [
-                  "LessEqual",
-                  "t",
-                  0
-                ],
-                [
-                  "GreaterEqual",
-                  "t",
-                  1
-                ]
-              ],
-              0,
-              [
-                "Ln",
-                [
-                  "Divide",
-                  [
-                    "Add",
-                    1,
-                    [
-                      "Sqrt",
-                      [
-                        "Add",
-                        1,
-                        [
-                          "Negate",
-                          [
-                            "Power",
-                            "t",
-                            2
-                          ]
-                        ]
-                      ]
-                    ]
-                  ],
-                  "t"
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "P23",
-          "rhs": {
-            "expr": [
-              "Ln",
-              [
-                "Add",
-                [
-                  "Divide",
-                  1,
-                  [
-                    "Add",
-                    "t",
-                    1
-                  ]
-                ],
-                [
-                  "Sqrt",
-                  [
-                    "Add",
-                    1,
-                    [
-                      "Divide",
-                      1,
-                      [
-                        "Power",
-                        [
-                          "Add",
-                          "t",
-                          1
-                        ],
-                        2
-                      ]
-                    ]
-                  ]
-                ]
-              ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "P24",
-          "rhs": {
-            "expr": [
-              "Ln",
+          "rhs": [
+            "Ln",
+            [
+              "Add",
               [
-                "Add",
+                "Divide",
+                1,
                 [
-                  "Divide",
+                  "Add",
+                  [
+                    "Negate",
+                    "t"
+                  ],
+                  [
+                    "Negate",
+                    1
+                  ]
+                ]
+              ],
+              [
+                "Sqrt",
+                [
+                  "Add",
                   1,
                   [
-                    "Add",
-                    [
-                      "Negate",
-                      "t"
-                    ],
-                    [
-                      "Negate",
-                      1
-                    ]
-                  ]
-                ],
-                [
-                  "Sqrt",
-                  [
-                    "Add",
+                    "Divide",
                     1,
                     [
-                      "Divide",
-                      1,
+                      "Power",
                       [
-                        "Power",
+                        "Add",
                         [
-                          "Add",
-                          [
-                            "Negate",
-                            "t"
-                          ],
-                          [
-                            "Negate",
-                            1
-                          ]
+                          "Negate",
+                          "t"
                         ],
-                        2
-                      ]
+                        [
+                          "Negate",
+                          1
+                        ]
+                      ],
+                      2
                     ]
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "P25",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.5,
+          "rhs": [
+            "Multiply",
+            0.5,
+            [
+              "Ln",
               [
-                "Ln",
+                "Divide",
                 [
-                  "Divide",
+                  "Add",
+                  "t",
+                  1.001,
+                  1
+                ],
+                [
+                  "Add",
                   [
                     "Add",
                     "t",
-                    1.001,
-                    1
+                    1.001
                   ],
                   [
-                    "Add",
-                    [
-                      "Add",
-                      "t",
-                      1.001
-                    ],
-                    [
-                      "Negate",
-                      1
-                    ]
+                    "Negate",
+                    1
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "P26",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.5,
+          "rhs": [
+            "Multiply",
+            0.5,
+            [
+              "Ln",
               [
-                "Ln",
+                "Divide",
                 [
-                  "Divide",
+                  "Add",
+                  [
+                    "Negate",
+                    "t"
+                  ],
+                  [
+                    "Negate",
+                    1.001
+                  ],
+                  1
+                ],
+                [
+                  "Add",
                   [
                     "Add",
                     [
@@ -688,32 +629,16 @@
                     [
                       "Negate",
                       1.001
-                    ],
-                    1
+                    ]
                   ],
                   [
-                    "Add",
-                    [
-                      "Add",
-                      [
-                        "Negate",
-                        "t"
-                      ],
-                      [
-                        "Negate",
-                        1.001
-                      ]
-                    ],
-                    [
-                      "Negate",
-                      1
-                    ]
+                    "Negate",
+                    1
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         }
       ],
       "timeEvents": [],

@@ -1,15 +1,18 @@
 {
   "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
-  "dynms": "0.2.1",
+  "dynms": "0.3.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.13.0-beta.0"
+    "version": "0.13.0-beta.1"
   },
-  "created": "2026-08-22T09:22:39.262Z",
+  "created": "2026-08-27T16:00:31.783Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
       "constants": [
         {
           "id": "kf",
@@ -25,49 +28,37 @@
       "dynamic": [
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0.5,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0.5,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S2",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction1"
+          ]
         },
         {
           "id": "S3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S3",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction1"
+          ]
         }
       ],
       "static": [
@@ -78,85 +69,70 @@
         },
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                1,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              1,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S1"
         }
       ],
       "assignments": [
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "C"
+          ],
           "title": "S1"
         },
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "C"
+          ],
           "title": "S2"
         },
         {
           "id": "S3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S3_amt_",
-              "C"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S3_amt_",
+            "C"
+          ],
           "title": "S3"
         },
         {
           "id": "reaction1",
-          "rhs": {
-            "expr": [
-              "Negate",
+          "rhs": [
+            "Negate",
+            [
+              "Multiply",
+              "C",
               [
-                "Multiply",
-                "C",
+                "Add",
                 [
-                  "Add",
-                  [
-                    "Multiply",
-                    "kf",
-                    "S1"
-                  ],
-                  [
-                    "Multiply",
-                    -1,
-                    "kr",
-                    "S2",
-                    "S3"
-                  ]
+                  "Multiply",
+                  "kf",
+                  "S1"
+                ],
+                [
+                  "Multiply",
+                  -1,
+                  "kr",
+                  "S2",
+                  "S3"
                 ]
               ]
-            ],
-            "format": "math-json"
-          },
+            ]
+          ],
           "title": "reaction1"
         }
       ],

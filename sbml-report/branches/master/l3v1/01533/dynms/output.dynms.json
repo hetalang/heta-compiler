@@ -1,0 +1,2671 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
+  "dynms": "0.3.0",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.13.0-beta.1"
+  },
+  "created": "2026-08-27T16:19:52.556Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "timeVariable": {
+        "id": "t"
+      },
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "P0",
+          "initial": 0
+        },
+        {
+          "id": "P1",
+          "initial": 0
+        },
+        {
+          "id": "P2",
+          "initial": 0
+        },
+        {
+          "id": "P3",
+          "initial": 0
+        },
+        {
+          "id": "P4",
+          "initial": 0
+        },
+        {
+          "id": "P5",
+          "initial": 0
+        },
+        {
+          "id": "P6",
+          "initial": 0
+        },
+        {
+          "id": "P7",
+          "initial": 0
+        },
+        {
+          "id": "P8",
+          "initial": 0
+        },
+        {
+          "id": "P9",
+          "initial": 0
+        },
+        {
+          "id": "P10",
+          "initial": 0
+        },
+        {
+          "id": "P11",
+          "initial": 0
+        },
+        {
+          "id": "P12",
+          "initial": 0
+        },
+        {
+          "id": "P13",
+          "initial": 0
+        },
+        {
+          "id": "P14",
+          "initial": 0
+        },
+        {
+          "id": "P15",
+          "initial": 0
+        },
+        {
+          "id": "P16",
+          "initial": 0
+        },
+        {
+          "id": "P17",
+          "initial": 0
+        },
+        {
+          "id": "P18",
+          "initial": 0
+        },
+        {
+          "id": "P19",
+          "initial": 0
+        },
+        {
+          "id": "P20",
+          "initial": 0
+        },
+        {
+          "id": "P21",
+          "initial": 0
+        },
+        {
+          "id": "P22",
+          "initial": 0
+        },
+        {
+          "id": "P23",
+          "initial": 0
+        },
+        {
+          "id": "P24",
+          "initial": 0
+        },
+        {
+          "id": "P25",
+          "initial": 0
+        },
+        {
+          "id": "P26",
+          "initial": 0
+        },
+        {
+          "id": "P27",
+          "initial": 0
+        },
+        {
+          "id": "P28",
+          "initial": 0
+        },
+        {
+          "id": "P29",
+          "initial": 0
+        },
+        {
+          "id": "P30",
+          "initial": 0
+        },
+        {
+          "id": "P31",
+          "initial": 0
+        },
+        {
+          "id": "P32",
+          "initial": 0
+        },
+        {
+          "id": "P33",
+          "initial": 0
+        },
+        {
+          "id": "P34",
+          "initial": 0
+        },
+        {
+          "id": "P35",
+          "initial": 0
+        },
+        {
+          "id": "P36",
+          "initial": 0
+        },
+        {
+          "id": "P37",
+          "initial": 0
+        },
+        {
+          "id": "P38",
+          "initial": 0
+        },
+        {
+          "id": "P39",
+          "initial": 0
+        },
+        {
+          "id": "P40",
+          "initial": 0
+        },
+        {
+          "id": "P41",
+          "initial": 0
+        },
+        {
+          "id": "P42",
+          "initial": 0
+        },
+        {
+          "id": "P43",
+          "initial": 0
+        },
+        {
+          "id": "P44",
+          "initial": 0
+        },
+        {
+          "id": "P45",
+          "initial": 0
+        },
+        {
+          "id": "P46",
+          "initial": 0
+        },
+        {
+          "id": "P47",
+          "initial": 0
+        },
+        {
+          "id": "P48",
+          "initial": 0
+        },
+        {
+          "id": "P49",
+          "initial": 0
+        },
+        {
+          "id": "P50",
+          "initial": 0
+        },
+        {
+          "id": "P51",
+          "initial": 0
+        },
+        {
+          "id": "P52",
+          "initial": 0
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": "ExponentialE",
+          "actions": [
+            {
+              "state": "P0",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Exp",
+            "ExponentialE"
+          ],
+          "actions": [
+            {
+              "state": "P1",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Abs",
+            -1
+          ],
+          "actions": [
+            {
+              "state": "P2",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Abs",
+            1
+          ],
+          "actions": [
+            {
+              "state": "P3",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E4",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arccos",
+            -1
+          ],
+          "actions": [
+            {
+              "state": "P4",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E5",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arccos",
+            0.5
+          ],
+          "actions": [
+            {
+              "state": "P5",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E6",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arcsin",
+            1
+          ],
+          "actions": [
+            {
+              "state": "P6",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E7",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arcsin",
+            -0.5
+          ],
+          "actions": [
+            {
+              "state": "P7",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E8",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arctan",
+            2.8
+          ],
+          "actions": [
+            {
+              "state": "P8",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E9",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arctan",
+            -7.09
+          ],
+          "actions": [
+            {
+              "state": "P9",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E10",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ceil",
+            0.5
+          ],
+          "actions": [
+            {
+              "state": "P10",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E11",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ceil",
+            3.55
+          ],
+          "actions": [
+            {
+              "state": "P11",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E12",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ceil",
+            -4.6
+          ],
+          "actions": [
+            {
+              "state": "P12",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E13",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Cos",
+            9.1
+          ],
+          "actions": [
+            {
+              "state": "P13",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E14",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Cos",
+            -0.22
+          ],
+          "actions": [
+            {
+              "state": "P14",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E15",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Exp",
+            0
+          ],
+          "actions": [
+            {
+              "state": "P15",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E16",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Exp",
+            1
+          ],
+          "actions": [
+            {
+              "state": "P16",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E17",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Exp",
+            0.77
+          ],
+          "actions": [
+            {
+              "state": "P17",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E18",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Floor",
+            -4.6
+          ],
+          "actions": [
+            {
+              "state": "P18",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E19",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Floor",
+            9.1
+          ],
+          "actions": [
+            {
+              "state": "P19",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E20",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ln",
+            0.2
+          ],
+          "actions": [
+            {
+              "state": "P20",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E21",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ln",
+            1
+          ],
+          "actions": [
+            {
+              "state": "P21",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E22",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Log",
+            0.2,
+            10
+          ],
+          "actions": [
+            {
+              "state": "P22",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E23",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Log",
+            1,
+            10
+          ],
+          "actions": [
+            {
+              "state": "P23",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E24",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            1,
+            2
+          ],
+          "actions": [
+            {
+              "state": "P24",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E25",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            2,
+            2
+          ],
+          "actions": [
+            {
+              "state": "P25",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E26",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            1.4,
+            5.1
+          ],
+          "actions": [
+            {
+              "state": "P26",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E27",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            4,
+            2
+          ],
+          "actions": [
+            {
+              "state": "P27",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E28",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            3.1,
+            2
+          ],
+          "actions": [
+            {
+              "state": "P28",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E29",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            4,
+            [
+              "Divide",
+              1,
+              2
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P29",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E30",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Power",
+            7.4,
+            [
+              "Divide",
+              1,
+              2
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P30",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E31",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Sin",
+            2.1
+          ],
+          "actions": [
+            {
+              "state": "P31",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E32",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Sin",
+            0
+          ],
+          "actions": [
+            {
+              "state": "P32",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E33",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Sin",
+            -5.9
+          ],
+          "actions": [
+            {
+              "state": "P33",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E34",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Tan",
+            0
+          ],
+          "actions": [
+            {
+              "state": "P34",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E35",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Tan",
+            1.11
+          ],
+          "actions": [
+            {
+              "state": "P35",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E36",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Tan",
+            -6
+          ],
+          "actions": [
+            {
+              "state": "P36",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E37",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Sec",
+            0.5
+          ],
+          "actions": [
+            {
+              "state": "P37",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E38",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Csc",
+            4.5
+          ],
+          "actions": [
+            {
+              "state": "P38",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E39",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Cot",
+            0.2
+          ],
+          "actions": [
+            {
+              "state": "P39",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E40",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Multiply",
+            0.5,
+            [
+              "Add",
+              [
+                "Exp",
+                0.3
+              ],
+              [
+                "Negate",
+                [
+                  "Exp",
+                  -0.3
+                ]
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P40",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E41",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Multiply",
+            0.5,
+            [
+              "Add",
+              [
+                "Exp",
+                1.7
+              ],
+              [
+                "Exp",
+                -1.7
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P41",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E42",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arcsec",
+            2.3
+          ],
+          "actions": [
+            {
+              "state": "P42",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E43",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arccsc",
+            1.1
+          ],
+          "actions": [
+            {
+              "state": "P43",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E44",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Arccot",
+            -0.1
+          ],
+          "actions": [
+            {
+              "state": "P44",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E45",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ln",
+            [
+              "Add",
+              99,
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  [
+                    "Power",
+                    99,
+                    2
+                  ],
+                  1
+                ]
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P45",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E46",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ln",
+            [
+              "Add",
+              1.34,
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  [
+                    "Power",
+                    1.34,
+                    2
+                  ],
+                  [
+                    "Negate",
+                    1
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P46",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E47",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Multiply",
+            0.5,
+            [
+              "Ln",
+              [
+                "Divide",
+                [
+                  "Add",
+                  1,
+                  -0.7
+                ],
+                [
+                  "Add",
+                  1,
+                  [
+                    "Negate",
+                    -0.7
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P47",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E48",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ln",
+            [
+              "Divide",
+              [
+                "Add",
+                1,
+                [
+                  "Sqrt",
+                  [
+                    "Add",
+                    1,
+                    [
+                      "Negate",
+                      [
+                        "Power",
+                        0.42,
+                        2
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              0.42
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P48",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E49",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Ln",
+            [
+              "Add",
+              [
+                "Divide",
+                1,
+                0.01
+              ],
+              [
+                "Sqrt",
+                [
+                  "Add",
+                  1,
+                  [
+                    "Divide",
+                    1,
+                    [
+                      "Power",
+                      0.01,
+                      2
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P49",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E50",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Multiply",
+            0.5,
+            [
+              "Ln",
+              [
+                "Divide",
+                [
+                  "Add",
+                  8.2,
+                  1
+                ],
+                [
+                  "Add",
+                  8.2,
+                  [
+                    "Negate",
+                    1
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "actions": [
+            {
+              "state": "P50",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E51",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Multiply"
+          ],
+          "actions": [
+            {
+              "state": "P51",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "E52",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": [
+            "Add"
+          ],
+          "actions": [
+            {
+              "state": "P52",
+              "rhs": 2
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P0",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P1",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P2",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P3",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep4",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P4",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep5",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P5",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep6",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P6",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep7",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P7",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep8",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P8",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep9",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P9",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep10",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P10",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep11",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P11",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep12",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P12",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep13",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P13",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep14",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P14",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep15",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P15",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep16",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P16",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep17",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P17",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep18",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P18",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep19",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P19",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep20",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P20",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep21",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P21",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep22",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P22",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep23",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P23",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep24",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P24",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep25",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P25",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep26",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P26",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep27",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P27",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep28",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P28",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep29",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P29",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep30",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P30",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep31",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P31",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep32",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P32",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep33",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P33",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep34",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P34",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep35",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P35",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep36",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P36",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep37",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P37",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep38",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P38",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep39",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P39",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep40",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P40",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep41",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P41",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep42",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P42",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep43",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P43",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep44",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P44",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep45",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P45",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep46",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P46",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep47",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P47",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep48",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P48",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep49",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P49",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep50",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P50",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep51",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P51",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "Ep52",
+          "trigger": {
+            "type": "conditional",
+            "rhs": [
+              "Greater",
+              "t",
+              1.5
+            ],
+            "detection": "step"
+          },
+          "priority": 0.55,
+          "actions": [
+            {
+              "state": "P52",
+              "rhs": 3
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}
