@@ -740,11 +740,10 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
     );
   }
   let priority = x.elements?.find((y) => y.name === 'priority');
-  if (priority !== undefined) {
-    throw new HetaLevelError(
-      `SBML event priority is not supported on import for event "${switcher.id}". `
-      + 'Heta Compiler cannot preserve event execution order.'
-    );
+  let priorityMath = priority?.elements?.find((y) => y.name === 'math');
+  if (priorityMath !== undefined) {
+    rewriteMathIdentifiers(priorityMath, resolve);
+    switcher.priority = _toMathExpr(priorityMath);
   }
   // assignments
   let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');

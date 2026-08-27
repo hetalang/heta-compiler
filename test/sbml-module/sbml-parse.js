@@ -291,13 +291,14 @@ describe('unsupported SBML event features', () => {
     );
   });
 
-  it('rejects event priorities with an informative message', () => {
-    let xml = `<sbml level="3" version="1"><model><listOfEvents><event id="prioritized_event"><trigger><math><true/></math></trigger><priority><math><cn>-2</cn></math></priority></event></listOfEvents></model></sbml>`;
+  it('imports event priority as an expression', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfParameters><parameter id="_k" value="2"/></listOfParameters><listOfEvents><event id="prioritized_event"><trigger><math><true/></math></trigger><priority><math><apply><plus/><ci>_k</ci><cn>-2</cn></apply></math></priority></event></listOfEvents></model></sbml>`;
+    let qArr = SBMLParse(xml);
 
-    expect(() => SBMLParse(xml)).to.throw(
-      HetaLevelError,
-      'SBML event priority is not supported on import for event "prioritized_event". Heta Compiler cannot preserve event execution order.'
-    );
+    expect(qArr.find((q) => q.id === 'prioritized_event')).to.include({
+      class: 'DSwitcher',
+      priority: 'sbml__k_1 + (-2)'
+    });
   });
 });
 
@@ -337,13 +338,13 @@ describe('SBML Level 3 packages', () => {
 });
 
 describe('unsupported SBML Core MathML', () => {
-  it('rejects delay csymbols even inside an ignored event priority', () => {
+  it('rejects delay csymbols inside event priority', () => {
     let xml = `<sbml level="3" version="1"><model><listOfEvents><event id="event"><priority><math><apply><csymbol definitionURL="http://www.sbml.org/sbml/symbols/delay">delay</csymbol><cn>1</cn><cn>1</cn></apply></math></priority></event></listOfEvents></model></sbml>`;
 
     expect(() => SBMLParse(xml)).to.throw(HetaLevelError, 'SBML MathML CSymbolDelay is not supported.');
   });
 
-  it('rejects references to SpeciesReference IDs even inside an ignored event priority', () => {
+  it('rejects references to SpeciesReference IDs inside event priority', () => {
     let xml = `<sbml level="3" version="1"><model><listOfReactions><reaction id="reaction"><listOfReactants><speciesReference id="stoich" species="species"/></listOfReactants></reaction></listOfReactions><listOfEvents><event id="event"><priority><math><ci>stoich</ci></math></priority></event></listOfEvents></model></sbml>`;
 
     expect(() => SBMLParse(xml)).to.throw(HetaLevelError, 'SBML MathML SpeciesReferenceInMath is not supported: "stoich".');
