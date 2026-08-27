@@ -54,7 +54,7 @@ or use explicit expression as `A <=> B` in the reaction definition.
 
 ### Review SBML import and generated output
 
-SBML import is stricter in v0.13.x. Models using required Level 3 packages, event delay, event priority, `CSymbolDelay`, or a `SpeciesReference` identifier in MathML now fail with an explicit error instead of being partially interpreted.
+SBML import is stricter in v0.13.x. Models using required Level 3 packages, event delay, `CSymbolDelay`, or a `SpeciesReference` identifier in MathML now fail with an explicit error instead of being partially interpreted. Event priority is imported as a numeric expression.
 
 Invalid or reserved SBML identifiers are renamed automatically. Generated local-parameter, rate-rule, and anonymous-event identifiers also changed, so snapshots and scripts that depend on generated names must be updated.
 

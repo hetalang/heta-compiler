@@ -161,7 +161,7 @@ Assignment values are globally available during simulation and may be used in de
 
 ### 3.6 Time events
 
-`timeEvents` contains events activated by a time trigger. Each object has an `id`, a `trigger`, and an `actions` array. Optional `active` and `stopSimulation` fields default to `true` and `false`, respectively. `priority`, when present, is a number.
+`timeEvents` contains events activated by a time trigger. Each object has an `id`, a `trigger`, and an `actions` array. Optional `active` and `stopSimulation` fields default to `true` and `false`, respectively. `priority`, when present, is a numeric MathJSON expression evaluated at every simulation time point.
 
 ```json
 {
@@ -354,7 +354,7 @@ At each solver step:
 
 1. assignments are evaluated;
 2. dynamic-state derivatives are evaluated;
-3. events may be processed, according to backend semantics.
+3. event priority expressions are evaluated and events may be processed, according to backend semantics.
 
 ### 5.4 Time variable
 
@@ -414,13 +414,13 @@ Assignments must have no circular dependencies. They must be ordered so that eve
 
 ### 7.7 Time events
 
-Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`; it must not reference states, assignments, or `timeVariable.id`.
+Every object in `timeEvents` must use a trigger with `type: "time"`. The `start`, `period`, and `stop` values may be numbers or expressions evaluated at simulation start. An expression in any of these fields may reference model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`; it must not reference states, assignments, or `timeVariable.id`. When present, `priority` is a numeric expression evaluated at every simulation time point and may reference any symbols valid in a runtime expression.
 
 For periodic triggers, a computed `period` should be positive. A non-positive value retains the compatibility behavior defined in section 3.6 and is treated as a one-shot trigger.
 
 ### 7.8 State events and triggers
 
-Every object in `events` must use a `crossing` or `conditional` trigger. Its `rhs` must be a valid expression. The `detection` value must be supported by the trigger type and the target backend. `root` detection for conditional triggers is allowed for compatibility, but its semantics are not precisely defined.
+Every object in `events` must use a `crossing` or `conditional` trigger. Its `rhs` must be a valid expression. When present, `priority` is a numeric runtime expression. The `detection` value must be supported by the trigger type and the target backend. `root` detection for conditional triggers is allowed for compatibility, but its semantics are not precisely defined.
 
 ### 7.9 Event actions
 
