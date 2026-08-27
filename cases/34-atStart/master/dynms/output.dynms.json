@@ -49,111 +49,75 @@
       "dynamic": [
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "s2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r2"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r2"
+          ]
         },
         {
           "id": "s3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r3"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r3"
+          ]
         },
         {
           "id": "s4_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r4"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r4"
+          ]
         },
         {
           "id": "s5_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r5"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r5"
+          ]
         },
         {
           "id": "s6_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r6"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r6"
+          ]
         }
       ],
       "static": [
@@ -165,141 +129,105 @@
       "assignments": [
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "s1",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "s1",
+            "c1"
+          ]
         },
         {
           "id": "s2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s2_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s2_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k2",
-              "s2",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k2",
+            "s2",
+            "c1"
+          ]
         },
         {
           "id": "s3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s3_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s3_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k3",
-              "s3",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k3",
+            "s3",
+            "c1"
+          ]
         },
         {
           "id": "s4",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s4_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s4_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r4",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k4",
-              "s4",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k4",
+            "s4",
+            "c1"
+          ]
         },
         {
           "id": "s5",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s5_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s5_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r5",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k5",
-              "s5",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k5",
+            "s5",
+            "c1"
+          ]
         },
         {
           "id": "s6",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s6_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s6_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r6",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k6",
-              "s6",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k6",
+            "s6",
+            "c1"
+          ]
         }
       ],
       "timeEvents": [
@@ -312,22 +240,19 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s1",
                   [
-                    "Add",
-                    "s1",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s1_amt_"
             }
           ],
@@ -342,22 +267,19 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s2",
                   [
-                    "Add",
-                    "s2",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s2_amt_"
             }
           ],
@@ -369,38 +291,32 @@
           "id": "sw3",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": [
-                "Add",
-                "threeshold",
-                [
-                  "Negate",
-                  "s3"
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Add",
+              "threeshold",
+              [
+                "Negate",
+                "s3"
+              ]
+            ],
             "detection": "root",
             "atStart": true
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s3",
                   [
-                    "Add",
-                    "s3",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s3_amt_"
             }
           ],
@@ -410,38 +326,32 @@
           "id": "sw4",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": [
-                "Add",
-                "threeshold",
-                [
-                  "Negate",
-                  "s4"
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Add",
+              "threeshold",
+              [
+                "Negate",
+                "s4"
+              ]
+            ],
             "detection": "root",
             "atStart": false
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s4",
                   [
-                    "Add",
-                    "s4",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s4_amt_"
             }
           ],
@@ -451,35 +361,29 @@
           "id": "sw5",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Less",
-                "s5",
-                "threeshold"
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Less",
+              "s5",
+              "threeshold"
+            ],
             "detection": "step",
             "atStart": true
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s5",
                   [
-                    "Add",
-                    "s5",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s5_amt_"
             }
           ],
@@ -489,35 +393,29 @@
           "id": "sw6",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Less",
-                "s6",
-                "threeshold"
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Less",
+              "s6",
+              "threeshold"
+            ],
             "detection": "step",
             "atStart": false
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s6",
                   [
-                    "Add",
-                    "s6",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s6_amt_"
             }
           ],

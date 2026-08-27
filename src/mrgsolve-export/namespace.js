@@ -7,10 +7,13 @@ Namespace.prototype.getMrgsolveImage = function() {
   // TODO: need to refactor the code because currently this result in wrong TIME variable in $ODE block
   // https://mrgsolve.org/user-guide/specification.html#time
   // We must use SOLVERTIME in $ODE
-  let image = this.makeDynMSModel(
-    'mrgsolve',
-    (expr) => expr.toCString(logger, {timeVariable: 'TIME'})
-  );
+  let image = this.makeDynMSModel({
+    renderExpression: (expr) => ({
+      expr: typeof expr === 'string' ? expr : expr.toCString(logger, {timeVariable: 'TIME'}),
+      format: 'mrgsolve'
+    }),
+    renderNumber: (value) => value
+  });
 
   // Check for events of type "conditional", "crossing"
   let eventsToCheck = image.events

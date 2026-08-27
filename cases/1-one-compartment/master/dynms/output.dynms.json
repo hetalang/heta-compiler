@@ -66,35 +66,26 @@
         {
           "id": "a0",
           "initial": 10,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "vabs"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "vabs"
+          ]
         },
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "vabs",
-              [
-                "Negate",
-                "vel"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ],
+          "derivative": [
+            "Add",
+            "vabs",
+            [
+              "Negate",
+              "vel"
+            ]
+          ]
         }
       ],
       "static": [
@@ -110,37 +101,28 @@
       "assignments": [
         {
           "id": "vabs",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kabs",
-              "a0"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kabs",
+            "a0"
+          ]
         },
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "vel",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kel",
-              "s1",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kel",
+            "s1",
+            "comp1"
+          ]
         }
       ],
       "timeEvents": [],
@@ -174,35 +156,26 @@
         {
           "id": "a0",
           "initial": 10,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "vabs"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "vabs"
+          ]
         },
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "vabs",
-              [
-                "Negate",
-                "vel"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ],
+          "derivative": [
+            "Add",
+            "vabs",
+            [
+              "Negate",
+              "vel"
+            ]
+          ]
         }
       ],
       "static": [
@@ -218,45 +191,36 @@
       "assignments": [
         {
           "id": "vabs",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kabs",
-              "a0"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kabs",
+            "a0"
+          ]
         },
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "vel",
-          "rhs": {
-            "expr": [
-              "Divide",
-              [
-                "Multiply",
-                "Vmax",
-                "s1",
-                "comp1"
-              ],
-              [
-                "Add",
-                "Km",
-                "s1"
-              ]
+          "rhs": [
+            "Divide",
+            [
+              "Multiply",
+              "Vmax",
+              "s1",
+              "comp1"
             ],
-            "format": "math-json"
-          }
+            [
+              "Add",
+              "Km",
+              "s1"
+            ]
+          ]
         }
       ],
       "timeEvents": [],

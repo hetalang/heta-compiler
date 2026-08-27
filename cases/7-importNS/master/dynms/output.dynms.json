@@ -46,101 +46,74 @@
         {
           "id": "a0_first",
           "initial": 0,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "vabs_first"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "vabs_first"
+          ]
         },
         {
           "id": "c1_first_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "vabs_first",
-              [
-                "Negate",
-                "vel_first"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ],
+          "derivative": [
+            "Add",
+            "vabs_first",
+            [
+              "Negate",
+              "vel_first"
+            ]
+          ]
         },
         {
           "id": "a0_second",
           "initial": 0,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "vabs_second"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "vabs_second"
+          ]
         },
         {
           "id": "c1_second_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "vabs_second",
-              [
-                "Negate",
-                "vel_second"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ],
+          "derivative": [
+            "Add",
+            "vabs_second",
+            [
+              "Negate",
+              "vel_second"
+            ]
+          ]
         },
         {
           "id": "a0_third",
           "initial": 0,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "vabs_third"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "vabs_third"
+          ]
         },
         {
           "id": "c1_third_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "vabs_third",
-              [
-                "Negate",
-                "vel_third"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ],
+          "derivative": [
+            "Add",
+            "vabs_third",
+            [
+              "Negate",
+              "vel_third"
+            ]
+          ]
         }
       ],
       "static": [
@@ -156,147 +129,111 @@
       "assignments": [
         {
           "id": "vabs_first",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kabs_first",
-              "a0_first"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kabs_first",
+            "a0_first"
+          ]
         },
         {
           "id": "c1_first",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "c1_first_amt_",
-              "blood"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "c1_first_amt_",
+            "blood"
+          ]
         },
         {
           "id": "vel_first",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kel_first",
-              "c1_first",
-              "blood"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kel_first",
+            "c1_first",
+            "blood"
+          ]
         },
         {
           "id": "x1_first",
-          "rhs": {
-            "expr": [
-              "Sin",
-              [
-                "Multiply",
-                1.2,
-                "t"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            [
+              "Multiply",
+              1.2,
+              "t"
+            ]
+          ]
         },
         {
           "id": "vabs_second",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kabs_second",
-              "a0_second"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kabs_second",
+            "a0_second"
+          ]
         },
         {
           "id": "c1_second",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "c1_second_amt_",
-              "blood"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "c1_second_amt_",
+            "blood"
+          ]
         },
         {
           "id": "vel_second",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kel_second",
-              "c1_second",
-              "blood"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kel_second",
+            "c1_second",
+            "blood"
+          ]
         },
         {
           "id": "x1_second",
-          "rhs": {
-            "expr": [
-              "Sin",
-              [
-                "Multiply",
-                1.2,
-                "t"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            [
+              "Multiply",
+              1.2,
+              "t"
+            ]
+          ]
         },
         {
           "id": "vabs_third",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kabs_third",
-              "a0_third"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kabs_third",
+            "a0_third"
+          ]
         },
         {
           "id": "c1_third",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "c1_third_amt_",
-              "blood"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "c1_third_amt_",
+            "blood"
+          ]
         },
         {
           "id": "vel_third",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kel_third",
-              "c1_third",
-              "blood"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kel_third",
+            "c1_third",
+            "blood"
+          ]
         },
         {
           "id": "x1_third",
-          "rhs": {
-            "expr": [
-              "Sin",
-              [
-                "Multiply",
-                1.2,
-                "t"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Sin",
+            [
+              "Multiply",
+              1.2,
+              "t"
+            ]
+          ]
         }
       ],
       "timeEvents": [],

@@ -18,13 +18,16 @@ const { toMathJSONNumber } = require('./special-numbers');
     - we create a new state with _amt_ suffix for concentrations
     - we do not create new constants
 */
-Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRenderer = (expr) => expr.toMathJSON()) {
+Namespace.prototype.makeDynMSModel = function({
+    renderExpression = (expr) => expr instanceof Expression ? expr.toMathJSON() : expr,
+    renderNumber = toMathJSONNumber
+} = {}) {
     //let { logger } = this.container;
 
     // generate constants list
     let constants = this.selectByClassName('Const')
         .map((x) => {
-            let value = exprFormat === 'math-json' ? toMathJSONNumber(x.num) : x.num;
+            let value = renderNumber(x.num);
             return { id: x.id, value, title: x.title };
         });
 
@@ -50,7 +53,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             } else {
                 let substitutedExpr = _substitute_and_simplify(expr, this);
 
-                state = { id: stateId, initial: {expr: expRenderer(substitutedExpr), format: exprFormat}, title: title };
+                state = { id: stateId, initial: renderExpression(substitutedExpr), title: title };
             }
 
             return { record: x, state };
@@ -79,7 +82,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr, title]) => {
-        return { id: id, rhs: { expr: expRenderer(expr), format: exprFormat }, title: title };
+        return { id: id, rhs: renderExpression(expr), title: title };
     });
 
     let dynamic = statesInfo
@@ -101,7 +104,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
 
             return {
                 ...state,
-                derivative: { expr: expRenderer(expr), format: exprFormat },
+                derivative: renderExpression(expr),
                 ...(record.ss ? { algebraic: true } : {})
             };
         });
@@ -119,7 +122,6 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         let isConcentration = record.instanceOf('Species') && !record.isAmount; 
         
         let action = {};
-        action.rhs = {};
         let scopedAssignment = record.getAssignment(switcherId);
         if (isConcentration) {
             action.state = record.id + '_amt_';
@@ -128,8 +130,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             action.state = record.id;
             expr = scopedAssignment;
         }
-        action.rhs.expr = expRenderer(expr.substituteByDefinitions());
-        action.rhs.format = exprFormat;
+        action.rhs = renderExpression(expr.substituteByDefinitions());
 
         return action;
     };
@@ -142,17 +143,17 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             event.trigger = {};
             event.trigger.type = 'time';
             if (typeof switcher.start === 'string') {
-                event.trigger.start = {"expr": switcher.start, "format": exprFormat};
+                event.trigger.start = renderExpression(switcher.start);
             } else if (switcher.startObj?.num !== undefined) {
                 event.trigger.start = switcher.startObj?.num;
             }
             if (typeof switcher.period === 'string') {
-                event.trigger.period = {"expr": switcher.period, "format": exprFormat}; 
+                event.trigger.period = renderExpression(switcher.period);
             } else {
                 event.trigger.period = switcher.periodObj?.num;
             }
             if (typeof switcher.stop === 'string') {
-                event.trigger.stop = {"expr": switcher.stop, "format": exprFormat}; 
+                event.trigger.stop = renderExpression(switcher.stop);
             } else {
                 event.trigger.stop = switcher.stopObj?.num;
             }
@@ -177,7 +178,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'crossing',
-                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                rhs: renderExpression(triggerRhs),
                 // direction: 'up', // down
                 detection: 'root', // step
                 atStart: switcher.atStart
@@ -200,7 +201,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'conditional',
-                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                rhs: renderExpression(triggerRhs),
                 //kind: 'conditional',
                 // direction: 'up',
                 detection: 'step',
@@ -224,7 +225,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'conditional',
-                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                rhs: renderExpression(triggerRhs),
                 detection: 'step',
                 atStart: true
             };

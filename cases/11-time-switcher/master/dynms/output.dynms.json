@@ -32,48 +32,36 @@
         {
           "id": "a0",
           "initial": 0,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "vabs"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "vabs"
+          ]
         },
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "vabs",
-              [
-                "Negate",
-                "vel"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ],
+          "derivative": [
+            "Add",
+            "vabs",
+            [
+              "Negate",
+              "vel"
+            ]
+          ]
         }
       ],
       "static": [
         {
           "id": "s2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.2
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.2
+          ]
         },
         {
           "id": "comp0",
@@ -87,48 +75,36 @@
       "assignments": [
         {
           "id": "s2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s2_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s2_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "vabs",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kabs",
-              "a0"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kabs",
+            "a0"
+          ]
         },
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "vel",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "kel",
-              "s1",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "kel",
+            "s1",
+            "comp1"
+          ]
         }
       ],
       "timeEvents": [
@@ -151,21 +127,15 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "a0",
-                  10
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Add",
+                "a0",
+                10
+              ],
               "state": "a0"
             },
             {
-              "rhs": {
-                "expr": 6,
-                "format": "math-json"
-              },
+              "rhs": 6,
               "state": "comp1"
             }
           ],
@@ -175,41 +145,32 @@
           "id": "sw2",
           "trigger": {
             "type": "time",
-            "start": {
-              "expr": "sw2_start",
-              "format": "math-json"
-            },
+            "start": "sw2_start",
             "period": 24
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  [
-                    "Add",
-                    "s1",
-                    2
-                  ],
-                  "comp1"
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s1",
+                  2
                 ],
-                "format": "math-json"
-              },
+                "comp1"
+              ],
               "state": "s1_amt_"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  [
-                    "Add",
-                    "s2",
-                    2
-                  ],
-                  "comp1"
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s2",
+                  2
                 ],
-                "format": "math-json"
-              },
+                "comp1"
+              ],
               "state": "s2_amt_"
             }
           ],

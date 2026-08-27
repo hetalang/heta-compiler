@@ -31,7 +31,7 @@ describe('DynMS export of special numbers', () => {
     expect(validateDynms(document), validateDynms.errors).to.equal(true);
   });
 
-  it('writes special state initial values as MathJSON expressions', () => {
+  it('writes special state initial values as MathJSON values', () => {
     let builder = new Builder({
       id: 'special-state-numbers',
       builderVersion: '*',
@@ -54,9 +54,9 @@ describe('DynMS export of special numbers', () => {
     ].map((state) => [state.id, state.initial]));
 
     expect(states.get('finite')).to.equal(1.5);
-    expect(states.get('positive')).to.deep.equal({ expr: { num: '+Infinity' }, format: 'math-json' });
-    expect(states.get('negative')).to.deep.equal({ expr: { num: '-Infinity' }, format: 'math-json' });
-    expect(states.get('invalid')).to.deep.equal({ expr: { num: 'NaN' }, format: 'math-json' });
+    expect(states.get('positive')).to.deep.equal({ num: '+Infinity' });
+    expect(states.get('negative')).to.deep.equal({ num: '-Infinity' });
+    expect(states.get('invalid')).to.deep.equal({ num: 'NaN' });
     expect(validateDynms(document), validateDynms.errors).to.equal(true);
   });
 });

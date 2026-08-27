@@ -22,329 +22,272 @@
       "assignments": [
         {
           "id": "q_pos",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            [
+              "Sign",
               [
-                "Sign",
+                "Divide",
+                7,
+                3
+              ]
+            ],
+            [
+              "Floor",
+              [
+                "Abs",
                 [
                   "Divide",
                   7,
                   3
                 ]
-              ],
-              [
-                "Floor",
-                [
-                  "Abs",
-                  [
-                    "Divide",
-                    7,
-                    3
-                  ]
-                ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "q_neg",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            [
+              "Sign",
               [
-                "Sign",
+                "Divide",
+                -7,
+                3
+              ]
+            ],
+            [
+              "Floor",
+              [
+                "Abs",
                 [
                   "Divide",
                   -7,
                   3
                 ]
-              ],
-              [
-                "Floor",
-                [
-                  "Abs",
-                  [
-                    "Divide",
-                    -7,
-                    3
-                  ]
-                ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "r_pos",
-          "rhs": {
-            "expr": [
-              "Add",
-              7,
+          "rhs": [
+            "Add",
+            7,
+            [
+              "Negate",
               [
-                "Negate",
+                "Multiply",
+                3,
                 [
-                  "Multiply",
-                  3,
+                  "Sign",
                   [
-                    "Sign",
+                    "Divide",
+                    7,
+                    3
+                  ]
+                ],
+                [
+                  "Floor",
+                  [
+                    "Abs",
                     [
                       "Divide",
                       7,
                       3
                     ]
-                  ],
-                  [
-                    "Floor",
-                    [
-                      "Abs",
-                      [
-                        "Divide",
-                        7,
-                        3
-                      ]
-                    ]
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "r_neg",
-          "rhs": {
-            "expr": [
-              "Add",
-              -7,
+          "rhs": [
+            "Add",
+            -7,
+            [
+              "Negate",
               [
-                "Negate",
+                "Multiply",
+                3,
                 [
-                  "Multiply",
-                  3,
+                  "Sign",
                   [
-                    "Sign",
+                    "Divide",
+                    -7,
+                    3
+                  ]
+                ],
+                [
+                  "Floor",
+                  [
+                    "Abs",
                     [
                       "Divide",
                       -7,
                       3
                     ]
-                  ],
-                  [
-                    "Floor",
-                    [
-                      "Abs",
-                      [
-                        "Divide",
-                        -7,
-                        3
-                      ]
-                    ]
                   ]
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "chk_impl_true",
-          "rhs": {
-            "expr": [
-              "If",
+          "rhs": [
+            "If",
+            [
+              "Or",
               [
-                "Or",
-                [
-                  "Not",
-                  [
-                    "Greater",
-                    3,
-                    2
-                  ]
-                ],
+                "Not",
                 [
                   "Greater",
-                  10,
-                  3
+                  3,
+                  2
                 ]
               ],
-              1,
-              0
+              [
+                "Greater",
+                10,
+                3
+              ]
             ],
-            "format": "math-json"
-          }
+            1,
+            0
+          ]
         },
         {
           "id": "chk_impl_false",
-          "rhs": {
-            "expr": [
-              "If",
+          "rhs": [
+            "If",
+            [
+              "Or",
               [
-                "Or",
+                "Not",
                 [
-                  "Not",
-                  [
-                    "Greater",
-                    3,
-                    2
-                  ]
-                ],
-                [
-                  "Less",
-                  10,
-                  3
+                  "Greater",
+                  3,
+                  2
                 ]
               ],
-              1,
-              0
+              [
+                "Less",
+                10,
+                3
+              ]
             ],
-            "format": "math-json"
-          }
+            1,
+            0
+          ]
         },
         {
           "id": "add0",
-          "rhs": {
-            "expr": [
-              "Add"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add"
+          ]
         },
         {
           "id": "add1",
-          "rhs": {
-            "expr": [
-              "Add",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1
+          ]
         },
         {
           "id": "add2",
-          "rhs": {
-            "expr": [
-              "Add",
-              1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1,
+            2
+          ]
         },
         {
           "id": "add3",
-          "rhs": {
-            "expr": [
-              "Add",
-              1,
-              2,
-              3
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": "add4",
-          "rhs": {
-            "expr": [
-              "Add",
-              1,
-              2,
-              3,
-              4
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1,
+            2,
+            3,
+            4
+          ]
         },
         {
           "id": "plus1",
-          "rhs": {
-            "expr": 1,
-            "format": "math-json"
-          }
+          "rhs": 1
         },
         {
           "id": "plus2",
-          "rhs": {
-            "expr": [
-              "Add",
-              1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1,
+            2
+          ]
         },
         {
           "id": "plus3",
-          "rhs": {
-            "expr": [
-              "Add",
-              1,
-              2,
-              3
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": "plus4",
-          "rhs": {
-            "expr": [
-              "Add",
-              1,
-              2,
-              3,
-              4
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            1,
+            2,
+            3,
+            4
+          ]
         },
         {
           "id": "max1",
-          "rhs": {
-            "expr": [
-              "Max",
-              1
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Max",
+            1
+          ]
         },
         {
           "id": "max2",
-          "rhs": {
-            "expr": [
-              "Max",
-              1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Max",
+            1,
+            2
+          ]
         },
         {
           "id": "max3",
-          "rhs": {
-            "expr": [
-              "Max",
-              1,
-              2,
-              3
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Max",
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": "max4",
-          "rhs": {
-            "expr": [
-              "Max",
-              1,
-              2,
-              3,
-              4
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Max",
+            1,
+            2,
+            3,
+            4
+          ]
         }
       ],
       "timeEvents": [],

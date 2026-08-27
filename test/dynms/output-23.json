@@ -12,29 +12,20 @@
   "dynamic": [
     {
       "id": "x1_amt_",
-      "initial": {
-        "expr": [
-          "Multiply",
-          1,
-          5
-        ],
-        "format": "math-json"
-      },
-      "derivative": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
+      "initial": [
+        "Multiply",
+        1,
+        5
+      ],
+      "derivative": [
+        "Negate",
+        "pr1"
+      ]
     },
     {
       "id": "x2",
       "initial": 2,
-      "derivative": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
+      "derivative": "pr1"
     }
   ],
   "static": [
@@ -44,49 +35,37 @@
     },
     {
       "id": "x3_amt_",
-      "initial": {
-        "expr": [
-          "Multiply",
-          3,
-          5
-        ],
-        "format": "math-json"
-      }
+      "initial": [
+        "Multiply",
+        3,
+        5
+      ]
     }
   ],
   "assignments": [
     {
       "id": "x3",
-      "rhs": {
-        "expr": [
-          "Divide",
-          "x3_amt_",
-          "c1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Divide",
+        "x3_amt_",
+        "c1"
+      ]
     },
     {
       "id": "x1",
-      "rhs": {
-        "expr": [
-          "Divide",
-          "x1_amt_",
-          "c1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Divide",
+        "x1_amt_",
+        "c1"
+      ]
     },
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "k1",
-          "x1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "k1",
+        "x1"
+      ]
     }
   ],
   "timeEvents": [
@@ -98,26 +77,23 @@
       },
       "actions": [
         {
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            [
+              "Divide",
               [
-                "Divide",
+                "Add",
                 [
-                  "Add",
-                  [
-                    "Multiply",
-                    "x3",
-                    "c1"
-                  ],
-                  10
+                  "Multiply",
+                  "x3",
+                  "c1"
                 ],
-                "c1"
+                10
               ],
               "c1"
             ],
-            "format": "math-json"
-          },
+            "c1"
+          ],
           "state": "x3_amt_"
         }
       ],

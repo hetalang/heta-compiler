@@ -46,4 +46,3 @@ export:
   - format: Summary
   - format: Canonical
   - format: DynMS
-    exprFormat: math-json

@@ -40,38 +40,26 @@
       "dynamic": [
         {
           "id": "S_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              1
-            ],
-            "format": "math-json"
-          },
+          "initial": [
+            "Multiply",
+            10,
+            1
+          ],
           "title": "substrate",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "P_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
           "title": "product",
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -84,50 +72,41 @@
       "assignments": [
         {
           "id": "P",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "P_amt_",
-              "default_comp"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "P_amt_",
+            "default_comp"
+          ],
           "title": "product"
         },
         {
           "id": "S",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S_amt_",
-              "default_comp"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S_amt_",
+            "default_comp"
+          ],
           "title": "substrate"
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            [
+              "Divide",
               [
-                "Divide",
-                [
-                  "Multiply",
-                  "Vmax",
-                  "S"
-                ],
-                [
-                  "Add",
-                  "Km",
-                  "S"
-                ]
+                "Multiply",
+                "Vmax",
+                "S"
               ],
-              "default_comp"
+              [
+                "Add",
+                "Km",
+                "S"
+              ]
             ],
-            "format": "math-json"
-          },
+            "default_comp"
+          ],
           "title": "Michaelis-Menten reaction"
         }
       ],

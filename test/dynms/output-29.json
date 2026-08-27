@@ -8,28 +8,19 @@
   "static": [
     {
       "id": "pi_value",
-      "initial": {
-        "expr": "Pi",
-        "format": "math-json"
-      }
+      "initial": "Pi"
     },
     {
       "id": "e_value",
-      "initial": {
-        "expr": "ExponentialE",
-        "format": "math-json"
-      }
+      "initial": "ExponentialE"
     },
     {
       "id": "product",
-      "initial": {
-        "expr": [
-          "Multiply",
-          "Pi",
-          "ExponentialE"
-        ],
-        "format": "math-json"
-      }
+      "initial": [
+        "Multiply",
+        "Pi",
+        "ExponentialE"
+      ]
     }
   ],
   "assignments": [],

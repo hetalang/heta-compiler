@@ -31,22 +31,16 @@
           "id": "sw1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "GreaterEqual",
-                "x1",
-                0
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "GreaterEqual",
+              "x1",
+              0
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 1,
-                "format": "math-json"
-              },
+              "rhs": 1,
               "state": "x1"
             }
           ],
@@ -56,23 +50,17 @@
           "id": "sw2",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "GreaterEqual",
-                "x1",
-                1
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "GreaterEqual",
+              "x1",
+              1
+            ],
             "detection": "step"
           },
           "priority": 0,
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
+              "rhs": 2,
               "state": "x1"
             }
           ],
@@ -82,23 +70,17 @@
           "id": "sw3",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "GreaterEqual",
-                "x1",
-                2
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "GreaterEqual",
+              "x1",
+              2
+            ],
             "detection": "step"
           },
           "priority": -2,
           "actions": [
             {
-              "rhs": {
-                "expr": 3,
-                "format": "math-json"
-              },
+              "rhs": 3,
               "state": "x1"
             }
           ],

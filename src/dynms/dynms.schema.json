@@ -160,9 +160,7 @@
         "id": {
           "$ref": "#/$defs/identifier"
         },
-        "initial": {
-          "$ref": "#/$defs/value"
-        },
+        "initial": { "$ref": "#/$defs/mathJsonNode" },
         "derivative": {
           "$ref": "#/$defs/expression"
         },
@@ -186,9 +184,7 @@
         "id": {
           "$ref": "#/$defs/identifier"
         },
-        "initial": {
-          "$ref": "#/$defs/value"
-        },
+        "initial": { "$ref": "#/$defs/mathJsonNode" },
         "title": {
           "type": "string"
         },
@@ -319,15 +315,15 @@
           "const": "time"
         },
         "start": {
-          "$ref": "#/$defs/value",
+          "$ref": "#/$defs/mathJsonNode",
           "description": "Required first activation time."
         },
         "period": {
-          "$ref": "#/$defs/value",
+          "$ref": "#/$defs/mathJsonNode",
           "description": "Optional repeat interval. For compatibility, non-positive values are treated as one-shot behavior (same as omitted period)."
         },
         "stop": {
-          "$ref": "#/$defs/value",
+          "$ref": "#/$defs/mathJsonNode",
           "description": "Optional upper time bound used mainly for periodic triggers."
         }
       }
@@ -361,50 +357,8 @@
         }
       }
     },
-    "value": {
-      "oneOf": [
-        {
-          "type": "number"
-        },
-        {
-          "$ref": "#/$defs/expression"
-        }
-      ]
-    },
     "expression": {
-      "oneOf": [
-        { "$ref": "#/$defs/mathjsonExpression" },
-        { "$ref": "#/$defs/lineExpression" }
-      ]
-    },
-    "lineExpression": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["expr", "format"],
-      "properties": {
-        "expr": {
-          "type": "string",
-          "minLength": 1
-        },
-        "format": {
-          "type": "string",
-          "enum": ["heta", "c", "mrgsolve", "julia"]
-        }
-      }
-    },
-    "mathjsonExpression": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["expr", "format"],
-      "properties": {
-        "expr": {
-          "$ref": "#/$defs/mathJsonNode"
-        },
-        "format": {
-          "type": "string",
-          "const": "math-json"
-        }
-      }
+      "$ref": "#/$defs/mathJsonNode"
     },
     "mathJsonNode": {
       "oneOf": [
@@ -500,7 +454,7 @@
       "properties": {
         "num": {
           "type": "string",
-          "minLength": 1
+          "enum": ["Infinity", "+Infinity", "-Infinity", "NaN"]
         }
       }
     },

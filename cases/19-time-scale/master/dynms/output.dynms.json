@@ -47,28 +47,19 @@
         {
           "id": "s1",
           "initial": 12,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "s2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1,
-              1.1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1,
+            1.1
+          ],
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -80,84 +71,66 @@
       "assignments": [
         {
           "id": "s3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "s3_0",
+          "rhs": [
+            "Multiply",
+            "s3_0",
+            [
+              "Exp",
               [
-                "Exp",
-                [
-                  "Divide",
-                  "t",
-                  "tau"
-                ]
+                "Divide",
+                "t",
+                "tau"
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              [
-                "Power",
-                "s1",
-                2
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            [
+              "Power",
+              "s1",
+              2
+            ]
+          ]
         },
         {
           "id": "s2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s2_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s2_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "x1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "s1",
-              "s2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "s1",
+            "s2"
+          ]
         },
         {
           "id": "x2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "t",
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "t",
+            2
+          ]
         },
         {
           "id": "tid",
-          "rhs": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                0.041667,
-                "t"
-              ],
-              0
+          "rhs": [
+            "Add",
+            [
+              "Multiply",
+              0.041667,
+              "t"
             ],
-            "format": "math-json"
-          }
+            0
+          ]
         }
       ],
       "timeEvents": [],

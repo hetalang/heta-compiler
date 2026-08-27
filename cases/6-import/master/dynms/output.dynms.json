@@ -60,36 +60,24 @@
       "dynamic": [
         {
           "id": "A_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            10,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "B_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -99,73 +87,58 @@
         },
         {
           "id": "enzyme_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              1e-8,
-              1
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            1e-8,
+            1
+          ]
         }
       ],
       "assignments": [
         {
           "id": "B",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "B_amt_",
-              "comp"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "B_amt_",
+            "comp"
+          ]
         },
         {
           "id": "enzyme",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "enzyme_amt_",
-              "comp"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "enzyme_amt_",
+            "comp"
+          ]
         },
         {
           "id": "A",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "A_amt_",
-              "comp"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "A_amt_",
+            "comp"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            [
+              "Divide",
               [
-                "Divide",
-                [
-                  "Multiply",
-                  "k1",
-                  "enzyme",
-                  "A"
-                ],
-                [
-                  "Add",
-                  "Km_A",
-                  "A"
-                ]
+                "Multiply",
+                "k1",
+                "enzyme",
+                "A"
               ],
-              "comp"
+              [
+                "Add",
+                "Km_A",
+                "A"
+              ]
             ],
-            "format": "math-json"
-          }
+            "comp"
+          ]
         }
       ],
       "timeEvents": [],

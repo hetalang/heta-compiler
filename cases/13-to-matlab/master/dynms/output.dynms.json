@@ -54,95 +54,71 @@
         {
           "id": "s1",
           "initial": 10,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "s2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              "s2_0",
-              2.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "r1",
-              [
-                "Negate",
-                "r2"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            "s2_0",
+            2.2
+          ],
+          "derivative": [
+            "Add",
+            "r1",
+            [
+              "Negate",
+              "r2"
+            ]
+          ]
         },
         {
           "id": "s3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              2.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
+          "initial": [
+            "Multiply",
+            0,
+            2.2
+          ],
+          "derivative": [
+            "Add",
+            [
               "Add",
               [
-                "Add",
-                [
-                  "Multiply",
-                  2,
-                  "r2"
-                ],
-                [
-                  "Negate",
-                  "r3"
-                ]
+                "Multiply",
+                2,
+                "r2"
               ],
               [
                 "Negate",
-                "r4"
+                "r3"
               ]
             ],
-            "format": "math-json"
-          }
+            [
+              "Negate",
+              "r4"
+            ]
+          ]
         },
         {
           "id": "s4_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              5,
-              2.2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "r2",
-              "r3"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            5,
+            2.2
+          ],
+          "derivative": [
+            "Add",
+            "r2",
+            "r3"
+          ]
         },
         {
           "id": "AUC_s3",
           "initial": 0,
-          "derivative": {
-            "expr": "pr1",
-            "format": "math-json"
-          }
+          "derivative": "pr1"
         }
       ],
       "static": [
@@ -157,158 +133,122 @@
         },
         {
           "id": "s5_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              2.4,
-              2.2
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            2.4,
+            2.2
+          ]
         },
         {
           "id": "x1",
-          "initial": {
-            "expr": [
-              "Multiply",
-              "k1",
-              10,
-              "PS"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            "k1",
+            10,
+            "PS"
+          ]
         }
       ],
       "assignments": [
         {
           "id": "s2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s2_amt_",
-              "comp2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s2_amt_",
+            "comp2"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
+          "rhs": [
+            "Multiply",
+            "k1",
+            [
+              "Add",
+              "s1",
               [
-                "Add",
-                "s1",
-                [
-                  "Negate",
-                  "s2"
-                ]
-              ],
-              "PS"
+                "Negate",
+                "s2"
+              ]
             ],
-            "format": "math-json"
-          }
+            "PS"
+          ]
         },
         {
           "id": "s5",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s5_amt_",
-              "comp2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s5_amt_",
+            "comp2"
+          ]
         },
         {
           "id": "r2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k2",
-              "s2",
-              "s5",
-              "comp2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k2",
+            "s2",
+            "s5",
+            "comp2"
+          ]
         },
         {
           "id": "s3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s3_amt_",
-              "comp2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s3_amt_",
+            "comp2"
+          ]
         },
         {
           "id": "s4",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s4_amt_",
-              "comp2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s4_amt_",
+            "comp2"
+          ]
         },
         {
           "id": "r3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k3",
+          "rhs": [
+            "Multiply",
+            "k3",
+            [
+              "Add",
+              "s3",
               [
-                "Add",
-                "s3",
+                "Negate",
                 [
-                  "Negate",
-                  [
-                    "Divide",
-                    "s4",
-                    "Keq3"
-                  ]
+                  "Divide",
+                  "s4",
+                  "Keq3"
                 ]
-              ],
-              "comp2"
+              ]
             ],
-            "format": "math-json"
-          }
+            "comp2"
+          ]
         },
         {
           "id": "r4",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k4",
-              "s3",
-              "comp2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k4",
+            "s3",
+            "comp2"
+          ]
         },
         {
           "id": "pr1",
-          "rhs": {
-            "expr": "s3",
-            "format": "math-json"
-          }
+          "rhs": "s3"
         },
         {
           "id": "rec1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "s1",
-              "PS"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "s1",
+            "PS"
+          ]
         }
       ],
       "timeEvents": [
@@ -322,33 +262,27 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "s1",
-                  "dose"
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Add",
+                "s1",
+                "dose"
+              ],
               "state": "s1"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "s2",
                   [
-                    "Add",
-                    "s2",
-                    [
-                      "Divide",
-                      "dose",
-                      "comp2"
-                    ]
-                  ],
-                  "comp2"
+                    "Divide",
+                    "dose",
+                    "comp2"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "comp2"
+              ],
               "state": "s2_amt_"
             }
           ],

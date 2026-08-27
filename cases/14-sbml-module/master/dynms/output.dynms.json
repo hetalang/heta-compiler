@@ -26,46 +26,34 @@
       "dynamic": [
         {
           "id": "S1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                1,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              1,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S1",
-          "derivative": {
-            "expr": [
-              "Negate",
-              "reaction1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "reaction1"
+          ]
         },
         {
           "id": "S2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                0,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              0,
               1
             ],
-            "format": "math-json"
-          },
+            1
+          ],
           "title": "S2",
-          "derivative": {
-            "expr": "reaction1",
-            "format": "math-json"
-          }
+          "derivative": "reaction1"
         }
       ],
       "static": [
@@ -78,39 +66,30 @@
       "assignments": [
         {
           "id": "S2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S2_amt_",
-              "compartment"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S2_amt_",
+            "compartment"
+          ],
           "title": "S2"
         },
         {
           "id": "S1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "S1_amt_",
-              "compartment"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Divide",
+            "S1_amt_",
+            "compartment"
+          ],
           "title": "S1"
         },
         {
           "id": "reaction1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "compartment",
-              "k1",
-              "S1"
-            ],
-            "format": "math-json"
-          },
+          "rhs": [
+            "Multiply",
+            "compartment",
+            "k1",
+            "S1"
+          ],
           "title": "reaction1"
         }
       ],
@@ -120,26 +99,20 @@
           "id": "event1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Less",
-                "S1",
-                0.1
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Less",
+              "S1",
+              0.1
+            ],
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  1,
-                  "compartment"
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Multiply",
+                1,
+                "compartment"
+              ],
               "state": "S1_amt_"
             }
           ],

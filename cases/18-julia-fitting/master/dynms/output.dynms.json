@@ -33,36 +33,24 @@
       "dynamic": [
         {
           "id": "A_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              5,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            5,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "B_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -74,48 +62,39 @@
       "assignments": [
         {
           "id": "B",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "B_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "B_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "A",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "A_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "A_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
+          "rhs": [
+            "Multiply",
+            [
+              "Divide",
               [
-                "Divide",
-                [
-                  "Multiply",
-                  "Vmax",
-                  "A"
-                ],
-                [
-                  "Add",
-                  "A",
-                  "Km"
-                ]
+                "Multiply",
+                "Vmax",
+                "A"
               ],
-              "comp1"
+              [
+                "Add",
+                "A",
+                "Km"
+              ]
             ],
-            "format": "math-json"
-          }
+            "comp1"
+          ]
         }
       ],
       "timeEvents": [],

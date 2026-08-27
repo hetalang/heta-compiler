@@ -16,54 +16,39 @@
   "dynamic": [
     {
       "id": "x1",
-      "initial": {
-        "expr": [
-          "Multiply",
-          1.5,
-          "x1_0"
-        ],
-        "format": "math-json"
-      },
-      "derivative": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
+      "initial": [
+        "Multiply",
+        1.5,
+        "x1_0"
+      ],
+      "derivative": [
+        "Negate",
+        "pr1"
+      ]
     },
     {
       "id": "x2",
       "initial": 2,
-      "derivative": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
+      "derivative": "pr1"
     }
   ],
   "static": [],
   "assignments": [
     {
       "id": "rule1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          1.5,
-          "x1_0"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        1.5,
+        "x1_0"
+      ]
     },
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "k1",
-          "x1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "k1",
+        "x1"
+      ]
     }
   ],
   "timeEvents": [],

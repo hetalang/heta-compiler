@@ -29,25 +29,19 @@
       "dynamic": [
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              1
+          "initial": [
+            "Multiply",
+            10,
+            1
+          ],
+          "derivative": [
+            "Add",
+            [
+              "Negate",
+              "r1"
             ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "r1"
-              ],
-              "r2"
-            ],
-            "format": "math-json"
-          }
+            "r2"
+          ]
         }
       ],
       "static": [
@@ -61,100 +55,79 @@
         },
         {
           "id": "m1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ]
         }
       ],
       "assignments": [
         {
           "id": "m1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "m1_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "m1_amt_",
+            "c1"
+          ]
         },
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "s1",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "s1",
+            "c1"
+          ]
         },
         {
           "id": "x1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "c1",
+          "rhs": [
+            "Multiply",
+            "c1",
+            [
+              "Which",
               [
-                "Which",
-                [
-                  "Greater",
-                  "t",
-                  1
-                ],
-                1,
-                [
-                  "Greater",
-                  "t",
-                  2
-                ],
-                2,
-                "True",
-                0
-              ]
-            ],
-            "format": "math-json"
-          }
-        },
-        {
-          "id": "x2",
-          "rhs": {
-            "expr": [
-              "If",
+                "Greater",
+                "t",
+                1
+              ],
+              1,
               [
-                "Less",
+                "Greater",
                 "t",
                 2
               ],
-              1,
+              2,
+              "True",
+              0
+            ]
+          ]
+        },
+        {
+          "id": "x2",
+          "rhs": [
+            "If",
+            [
+              "Less",
+              "t",
               2
             ],
-            "format": "math-json"
-          }
+            1,
+            2
+          ]
         },
         {
           "id": "r2",
-          "rhs": {
-            "expr": 0.01,
-            "format": "math-json"
-          }
+          "rhs": 0.01
         }
       ],
       "timeEvents": [
@@ -168,29 +141,23 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 1.1,
-                "format": "math-json"
-              },
+              "rhs": 1.1,
               "state": "c1"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
                   [
-                    "Add",
-                    [
-                      "Multiply",
-                      "s1",
-                      2
-                    ],
-                    1.1
+                    "Multiply",
+                    "s1",
+                    2
                   ],
-                  "c1"
+                  1.1
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "s1_amt_"
             }
           ],
@@ -201,10 +168,7 @@
           "trigger": {
             "type": "time",
             "start": 0,
-            "period": {
-              "expr": "period2",
-              "format": "math-json"
-            }
+            "period": "period2"
           },
           "actions": [],
           "active": true
@@ -215,17 +179,14 @@
           "id": "cs1",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": [
-                "Add",
-                "k1",
-                [
-                  "Negate",
-                  1
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Add",
+              "k1",
+              [
+                "Negate",
+                1
+              ]
+            ],
             "detection": "root"
           },
           "actions": [],
@@ -235,14 +196,11 @@
           "id": "ss1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": [
-                "Greater",
-                "s1",
-                "k1"
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Greater",
+              "s1",
+              "k1"
+            ],
             "detection": "step",
             "atStart": true
           },

@@ -37,44 +37,32 @@
         {
           "id": "k1",
           "initial": 0.1,
-          "derivative": {
-            "expr": [
-              "Add",
-              [
-                "Multiply",
-                -2,
-                "r2"
-              ],
-              "r3"
+          "derivative": [
+            "Add",
+            [
+              "Multiply",
+              -2,
+              "r2"
             ],
-            "format": "math-json"
-          }
+            "r3"
+          ]
         },
         {
           "id": "p4",
           "initial": 0,
-          "derivative": {
-            "expr": "r2",
-            "format": "math-json"
-          }
+          "derivative": "r2"
         },
         {
           "id": "sp1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         }
       ],
       "static": [
@@ -88,14 +76,11 @@
         },
         {
           "id": "p6",
-          "initial": {
-            "expr": [
-              "Multiply",
-              2,
-              0
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            2,
+            0
+          ]
         },
         {
           "id": "comp1",
@@ -105,69 +90,48 @@
       "assignments": [
         {
           "id": "p2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              2
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            2
+          ]
         },
         {
           "id": "p5",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              1,
-              "p6"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            1,
+            "p6"
+          ]
         },
         {
           "id": "comp2",
-          "rhs": {
-            "expr": "p1",
-            "format": "math-json"
-          }
+          "rhs": "p1"
         },
         {
           "id": "sp1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "sp1_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "sp1_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "p1",
-              "sp1",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "p1",
+            "sp1",
+            "comp1"
+          ]
         },
         {
           "id": "r2",
-          "rhs": {
-            "expr": 1,
-            "format": "math-json"
-          }
+          "rhs": 1
         },
         {
           "id": "r3",
-          "rhs": {
-            "expr": "k2",
-            "format": "math-json"
-          }
+          "rhs": "k2"
         }
       ],
       "timeEvents": [
@@ -179,10 +143,7 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 12.1,
-                "format": "math-json"
-              },
+              "rhs": 12.1,
               "state": "p3"
             }
           ],
@@ -197,25 +158,19 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  [
-                    "Multiply",
-                    "p3",
-                    "p1"
-                  ],
-                  10
+              "rhs": [
+                "Add",
+                [
+                  "Multiply",
+                  "p3",
+                  "p1"
                 ],
-                "format": "math-json"
-              },
+                10
+              ],
               "state": "p3"
             },
             {
-              "rhs": {
-                "expr": 0,
-                "format": "math-json"
-              },
+              "rhs": 0,
               "state": "p4"
             }
           ],
@@ -227,18 +182,12 @@
           "id": "sw3",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": "p1",
-              "format": "math-json"
-            },
+            "rhs": "p1",
             "detection": "root"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 2,
-                "format": "math-json"
-              },
+              "rhs": 2,
               "state": "p4"
             }
           ],

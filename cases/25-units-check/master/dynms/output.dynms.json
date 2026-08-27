@@ -37,36 +37,24 @@
       "dynamic": [
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              3
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            10,
+            3
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "s2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              4
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            10,
+            4
+          ],
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -88,169 +76,145 @@
         },
         {
           "id": "s3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              5
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            10,
+            5
+          ]
         }
       ],
       "assignments": [
         {
           "id": "s2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s2_amt_",
-              "c2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s2_amt_",
+            "c2"
+          ]
         },
         {
           "id": "s3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s3_amt_",
-              "c3"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s3_amt_",
+            "c3"
+          ]
         },
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "s1",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "s1",
+            "c1"
+          ]
         },
         {
           "id": "p2",
-          "rhs": {
-            "expr": [
-              "Divide",
+          "rhs": [
+            "Divide",
+            [
+              "Multiply",
+              23,
+              "s1"
+            ],
+            [
+              "Add",
               [
-                "Multiply",
-                23,
-                "s1"
+                "Power",
+                "k1",
+                8
               ],
               [
-                "Add",
+                "Multiply",
+                2,
+                "k1",
                 [
                   "Power",
                   "k1",
-                  8
-                ],
-                [
-                  "Multiply",
-                  2,
-                  "k1",
-                  [
-                    "Power",
-                    "k1",
-                    7
-                  ]
+                  7
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "y21",
-          "rhs": {
-            "expr": [
-              "Add",
+          "rhs": [
+            "Add",
+            [
+              "Power",
+              "k21",
+              3
+            ],
+            [
+              "Multiply",
+              [
+                "Sin",
+                [
+                  "Multiply",
+                  1.1,
+                  2.2
+                ]
+              ],
               [
                 "Power",
-                "k21",
+                [
+                  "Multiply",
+                  "k21",
+                  1.2
+                ],
                 3
               ],
               [
-                "Multiply",
+                "Cos",
                 [
-                  "Sin",
-                  [
-                    "Multiply",
-                    1.1,
-                    2.2
-                  ]
-                ],
-                [
-                  "Power",
-                  [
-                    "Multiply",
-                    "k21",
-                    1.2
-                  ],
-                  3
-                ],
-                [
-                  "Cos",
-                  [
-                    "Multiply",
-                    1.1,
-                    2.2
-                  ]
+                  "Multiply",
+                  1.1,
+                  2.2
                 ]
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         },
         {
           "id": "y22",
-          "rhs": {
-            "expr": [
-              "Add",
+          "rhs": [
+            "Add",
+            [
+              "Power",
+              "k21",
+              3
+            ],
+            [
+              "Multiply",
+              [
+                "Sin",
+                3.1415
+              ],
               [
                 "Power",
-                "k21",
+                [
+                  "Multiply",
+                  "k21",
+                  1.2
+                ],
                 3
               ],
               [
-                "Multiply",
-                [
-                  "Sin",
-                  3.1415
-                ],
-                [
-                  "Power",
-                  [
-                    "Multiply",
-                    "k21",
-                    1.2
-                  ],
-                  3
-                ],
-                [
-                  "Cos",
-                  3.1415
-                ]
+                "Cos",
+                3.1415
               ]
-            ],
-            "format": "math-json"
-          }
+            ]
+          ]
         }
       ],
       "timeEvents": [],

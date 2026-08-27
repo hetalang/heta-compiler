@@ -59,10 +59,7 @@ describe('DynMS schema', () => {
 
   it('rejects expressions as constant values', () => {
     const doc = makeDoc(0);
-    doc.models[0].constants.push({
-      id: 'k',
-      value: { expr: ['Add', 1, 2], format: 'math-json' }
-    });
+    doc.models[0].constants.push({ id: 'k', value: ['Add', 1, 2] });
 
     expect(validateDynms(doc)).to.equal(false);
   });
@@ -70,12 +67,19 @@ describe('DynMS schema', () => {
   it('accepts MathJSON special numbers as constant values', () => {
     const doc = makeDoc(0);
     doc.models[0].constants.push(
+      { id: 'infinite', value: { num: 'Infinity' } },
       { id: 'positive', value: { num: '+Infinity' } },
       { id: 'negative', value: { num: '-Infinity' } },
       { id: 'invalid', value: { num: 'NaN' } }
     );
 
     expect(validateDynms(doc)).to.equal(true);
+  });
+
+  it('rejects unsupported MathJSON number-object values', () => {
+    const doc = makeDoc({ num: 'not-a-number' });
+
+    expect(validateDynms(doc)).to.equal(false);
   });
 });
 
@@ -91,20 +95,14 @@ function makeDoc(expr) {
           {
             id: 'x',
             initial: 0,
-            derivative: {
-              expr: 0,
-              format: 'math-json'
-            }
+            derivative: 0
           }
         ],
         static: [],
         assignments: [
           {
             id: 'y',
-            rhs: {
-              expr,
-              format: 'math-json'
-            }
+            rhs: expr
           }
         ],
         timeEvents: [],

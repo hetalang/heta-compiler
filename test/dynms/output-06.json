@@ -17,76 +17,58 @@
     {
       "id": "x1",
       "initial": 1,
-      "derivative": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
+      "derivative": [
+        "Negate",
+        "pr1"
+      ]
     },
     {
       "id": "x2",
       "initial": 2,
-      "derivative": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
+      "derivative": "pr1"
     }
   ],
   "static": [],
   "assignments": [
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "k1",
-          "x1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "k1",
+        "x1"
+      ]
     },
     {
       "id": "rule1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "x1",
-          "x2"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "x1",
+        "x2"
+      ]
     },
     {
       "id": "rule3",
-      "rhs": {
-        "expr": [
-          "Add",
-          [
-            "Multiply",
-            1.5,
-            "pr1"
-          ],
-          [
-            "Multiply",
-            0.5,
-            "rule1"
-          ]
+      "rhs": [
+        "Add",
+        [
+          "Multiply",
+          1.5,
+          "pr1"
         ],
-        "format": "math-json"
-      }
+        [
+          "Multiply",
+          0.5,
+          "rule1"
+        ]
+      ]
     },
     {
       "id": "rule2",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          1.5,
-          "rule3"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        1.5,
+        "rule3"
+      ]
     }
   ],
   "timeEvents": [],

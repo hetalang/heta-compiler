@@ -14,25 +14,22 @@
   "assignments": [
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Add",
-          [
-            "Multiply",
-            {
-              "num": "+Infinity"
-            },
-            "x1"
-          ],
+      "rhs": [
+        "Add",
+        [
+          "Multiply",
           {
-            "num": "NaN"
+            "num": "+Infinity"
           },
-          {
-            "num": "-Infinity"
-          }
+          "x1"
         ],
-        "format": "math-json"
-      }
+        {
+          "num": "NaN"
+        },
+        {
+          "num": "-Infinity"
+        }
+      ]
     }
   ],
   "timeEvents": [
@@ -45,10 +42,7 @@
       "actions": [
         {
           "rhs": {
-            "expr": {
-              "num": "NaN"
-            },
-            "format": "math-json"
+            "num": "NaN"
           },
           "state": "x1"
         }

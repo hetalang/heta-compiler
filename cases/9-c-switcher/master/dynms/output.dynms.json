@@ -25,36 +25,24 @@
       "dynamic": [
         {
           "id": "x1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            10,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "x2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -68,75 +56,57 @@
         },
         {
           "id": "x3_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              12.12,
-              1
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            12.12,
+            1
+          ]
         }
       ],
       "assignments": [
         {
           "id": "x2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "x2_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "x2_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "x1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "x1_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "x1_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "x1",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "x1",
+            "comp1"
+          ]
         },
         {
           "id": "x3",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "x3_amt_",
-              "comp1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "x3_amt_",
+            "comp1"
+          ]
         },
         {
           "id": "cond1",
-          "rhs": {
-            "expr": [
-              "Add",
-              6,
-              [
-                "Negate",
-                "x1"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            6,
+            [
+              "Negate",
+              "x1"
+            ]
+          ]
         }
       ],
       "timeEvents": [],
@@ -145,37 +115,28 @@
           "id": "sw1",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": "cond1",
-              "format": "math-json"
-            },
+            "rhs": "cond1",
             "detection": "root"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  [
-                    "Add",
-                    "x1",
-                    10
-                  ],
-                  "comp1"
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "x1",
+                  10
                 ],
-                "format": "math-json"
-              },
+                "comp1"
+              ],
               "state": "x1_amt_"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
-                  "x1",
-                  2
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Multiply",
+                "x1",
+                2
+              ],
               "state": "p1"
             }
           ],

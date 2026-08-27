@@ -13,50 +13,38 @@
     {
       "id": "x1",
       "initial": 1,
-      "derivative": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
+      "derivative": [
+        "Negate",
+        "pr1"
+      ]
     },
     {
       "id": "x2",
       "initial": 2,
-      "derivative": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
+      "derivative": "pr1"
     }
   ],
   "static": [],
   "assignments": [
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "k1",
-          "x1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "k1",
+        "x1"
+      ]
     },
     {
       "id": "ts1",
-      "rhs": {
-        "expr": [
-          "Add",
-          [
-            "Multiply",
-            0.001,
-            "t"
-          ],
-          5
+      "rhs": [
+        "Add",
+        [
+          "Multiply",
+          0.001,
+          "t"
         ],
-        "format": "math-json"
-      }
+        5
+      ]
     }
   ],
   "timeEvents": [],

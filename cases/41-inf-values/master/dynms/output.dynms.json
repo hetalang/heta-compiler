@@ -55,36 +55,24 @@
       "dynamic": [
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              10,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            10,
+            1
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         },
         {
           "id": "s2_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              1
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r1",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            1
+          ],
+          "derivative": "r1"
         }
       ],
       "static": [
@@ -96,96 +84,72 @@
       "assignments": [
         {
           "id": "s2",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s2_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s2_amt_",
+            "c1"
+          ]
         },
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "s1",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "s1",
+            "c1"
+          ]
         },
         {
           "id": "p1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.1,
-              "s1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            0.1,
+            "s1"
+          ]
         },
         {
           "id": "p2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              {
-                "num": "+Infinity"
-              },
-              "s1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            {
+              "num": "+Infinity"
+            },
+            "s1"
+          ]
         },
         {
           "id": "p3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              {
-                "num": "NaN"
-              },
-              "s1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            {
+              "num": "NaN"
+            },
+            "s1"
+          ]
         },
         {
           "id": "p4",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "Pi",
-              "s1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "Pi",
+            "s1"
+          ]
         },
         {
           "id": "p5",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "ExponentialE",
-              "s1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "ExponentialE",
+            "s1"
+          ]
         }
       ],
       "timeEvents": [
@@ -204,18 +168,9 @@
           "id": "sw4",
           "trigger": {
             "type": "time",
-            "start": {
-              "expr": "start1",
-              "format": "math-json"
-            },
-            "period": {
-              "expr": "period1",
-              "format": "math-json"
-            },
-            "stop": {
-              "expr": "stop1",
-              "format": "math-json"
-            }
+            "start": "start1",
+            "period": "period1",
+            "stop": "stop1"
           },
           "actions": [],
           "active": true

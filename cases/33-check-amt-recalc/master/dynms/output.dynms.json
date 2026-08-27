@@ -33,91 +33,64 @@
       "dynamic": [
         {
           "id": "A_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              2,
-              5.5
+          "initial": [
+            "Multiply",
+            2,
+            5.5
+          ],
+          "derivative": [
+            "Add",
+            [
+              "Negate",
+              "r1"
             ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "r1"
-              ],
-              [
-                "Negate",
-                "r3"
-              ]
-            ],
-            "format": "math-json"
-          }
+            [
+              "Negate",
+              "r3"
+            ]
+          ]
         },
         {
           "id": "B_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.5
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              "r1",
-              [
-                "Negate",
-                "r2"
-              ]
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.5
+          ],
+          "derivative": [
+            "Add",
+            "r1",
+            [
+              "Negate",
+              "r2"
+            ]
+          ]
         },
         {
           "id": "C_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.5
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r2",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.5
+          ],
+          "derivative": "r2"
         },
         {
           "id": "D_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              0,
-              5.5
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": "r3",
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            0,
+            5.5
+          ],
+          "derivative": "r3"
         },
         {
           "id": "var1",
           "initial": 5,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "pr1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "pr1"
+          ]
         }
       ],
       "static": [
@@ -133,101 +106,74 @@
       "assignments": [
         {
           "id": "C",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "C_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "C_amt_",
+            "c1"
+          ]
         },
         {
           "id": "A",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "A_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "A_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "A",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "A",
+            "c1"
+          ]
         },
         {
           "id": "B",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "B_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "B_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k2",
-              "B",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k2",
+            "B",
+            "c1"
+          ]
         },
         {
           "id": "D",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "D_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "D_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r3",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k3",
-              "A",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k3",
+            "A",
+            "c1"
+          ]
         },
         {
           "id": "F",
-          "rhs": {
-            "expr": 10,
-            "format": "math-json"
-          }
+          "rhs": 10
         },
         {
           "id": "pr1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              0.0001,
-              "var1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            0.0001,
+            "var1"
+          ]
         }
       ],
       "timeEvents": [
@@ -240,44 +186,35 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "A",
                   [
-                    "Add",
-                    "A",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "A_amt_"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "x1",
-                  1
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Add",
+                "x1",
+                1
+              ],
               "state": "x1"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "var1",
-                  1
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Add",
+                "var1",
+                1
+              ],
               "state": "var1"
             }
           ],
@@ -289,59 +226,47 @@
           "id": "sw2",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": [
-                "Add",
-                "t",
-                [
-                  "Negate",
-                  48
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Add",
+              "t",
+              [
+                "Negate",
+                48
+              ]
+            ],
             "detection": "root"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": [
-                  "Multiply",
+              "rhs": [
+                "Multiply",
+                [
+                  "Add",
+                  "A",
                   [
-                    "Add",
-                    "A",
-                    [
-                      "Divide",
-                      1,
-                      "c1"
-                    ]
-                  ],
-                  "c1"
+                    "Divide",
+                    1,
+                    "c1"
+                  ]
                 ],
-                "format": "math-json"
-              },
+                "c1"
+              ],
               "state": "A_amt_"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "x1",
-                  1
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Add",
+                "x1",
+                1
+              ],
               "state": "x1"
             },
             {
-              "rhs": {
-                "expr": [
-                  "Add",
-                  "var1",
-                  1
-                ],
-                "format": "math-json"
-              },
+              "rhs": [
+                "Add",
+                "var1",
+                1
+              ],
               "state": "var1"
             }
           ],

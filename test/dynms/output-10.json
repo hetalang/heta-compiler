@@ -20,93 +20,69 @@
   "dynamic": [
     {
       "id": "x1_amt_",
-      "initial": {
-        "expr": [
-          "Multiply",
-          "dose1",
-          "F",
-          [
-            "Power",
-            1,
-            2
-          ]
-        ],
-        "format": "math-json"
-      },
-      "derivative": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
+      "initial": [
+        "Multiply",
+        "dose1",
+        "F",
+        [
+          "Power",
+          1,
+          2
+        ]
+      ],
+      "derivative": [
+        "Negate",
+        "pr1"
+      ]
     },
     {
       "id": "x2_amt_",
-      "initial": {
-        "expr": [
-          "Multiply",
-          2,
-          [
-            "Power",
-            1,
-            2
-          ]
-        ],
-        "format": "math-json"
-      },
-      "derivative": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
+      "initial": [
+        "Multiply",
+        2,
+        [
+          "Power",
+          1,
+          2
+        ]
+      ],
+      "derivative": "pr1"
     }
   ],
   "static": [
     {
       "id": "c1",
-      "initial": {
-        "expr": [
-          "Power",
-          1,
-          2
-        ],
-        "format": "math-json"
-      }
+      "initial": [
+        "Power",
+        1,
+        2
+      ]
     }
   ],
   "assignments": [
     {
       "id": "x2",
-      "rhs": {
-        "expr": [
-          "Divide",
-          "x2_amt_",
-          "c1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Divide",
+        "x2_amt_",
+        "c1"
+      ]
     },
     {
       "id": "x1",
-      "rhs": {
-        "expr": [
-          "Divide",
-          "x1_amt_",
-          "c1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Divide",
+        "x1_amt_",
+        "c1"
+      ]
     },
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "k1",
-          "x1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "k1",
+        "x1"
+      ]
     }
   ],
   "timeEvents": [],

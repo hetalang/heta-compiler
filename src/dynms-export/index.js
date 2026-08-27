@@ -6,10 +6,7 @@ const pkg = require('../../package');
 const { ajv } = require('../ajv');
 
 const schema = {
-  type: 'object',
-  properties: {
-    exprFormat: {type: 'string', enum: ['math-json', 'heta', 'c', 'julia']},
-  }
+  type: 'object'
 };
 
 class DynMS extends AbstractExport {
@@ -20,8 +17,6 @@ class DynMS extends AbstractExport {
     let { logger } = this._builder;
     let valid = DynMS.isValid(q, logger);
     if (!valid) { this.errored = true; return; }
-
-    this.exprFormat = q.exprFormat || 'math-json';
   }
   get className(){
     return 'DynMS';
@@ -39,7 +34,7 @@ class DynMS extends AbstractExport {
     return true;
   }
   makeText(){
-    let { logger } = this._builder;
+    //let { logger } = this._builder;
 
     // meta information
     let DynMSObj = {
@@ -55,23 +50,9 @@ class DynMS extends AbstractExport {
       // scenarios: []
     };
 
-    // select expression string generator
-    if (this.exprFormat === 'c') {
-        var expRenderer = (expr) => expr.toCString(logger);
-    } else if (this.exprFormat === 'heta') {
-        expRenderer = (expr) => expr.toString();
-    } else if (this.exprFormat === 'julia') {
-        expRenderer = (expr) => expr.toJuliaString(logger);
-    } else if (this.exprFormat === 'math-json') {
-        expRenderer = (expr) => expr.toMathJSON(logger);
-    } else {
-        let msg = `Unsupported expression format: ${this.exprFormat}`;
-        logger.error(msg, {});
-    }
-
     DynMSObj.models = this.selectedNamespaces()
       .map(([spaceName, ns]) => {
-        return ns.makeDynMSModel(this.exprFormat, expRenderer);
+        return ns.makeDynMSModel();
       });
 
     return [{

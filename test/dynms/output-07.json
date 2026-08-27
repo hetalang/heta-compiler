@@ -17,88 +17,67 @@
     {
       "id": "x1",
       "initial": 1,
-      "derivative": {
-        "expr": [
-          "Negate",
-          "pr1"
-        ],
-        "format": "math-json"
-      }
+      "derivative": [
+        "Negate",
+        "pr1"
+      ]
     },
     {
       "id": "x2",
-      "initial": {
-        "expr": [
-          "Add",
-          [
-            "Multiply",
-            1.5,
-            "k1",
-            1
-          ],
-          [
-            "Multiply",
-            0.5,
-            1
-          ]
+      "initial": [
+        "Add",
+        [
+          "Multiply",
+          1.5,
+          "k1",
+          1
         ],
-        "format": "math-json"
-      },
-      "derivative": {
-        "expr": "pr1",
-        "format": "math-json"
-      }
+        [
+          "Multiply",
+          0.5,
+          1
+        ]
+      ],
+      "derivative": "pr1"
     }
   ],
   "static": [],
   "assignments": [
     {
       "id": "pr1",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          "k1",
-          "x1"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        "k1",
+        "x1"
+      ]
     },
     {
       "id": "rule1",
-      "rhs": {
-        "expr": "x1",
-        "format": "math-json"
-      }
+      "rhs": "x1"
     },
     {
       "id": "rule3",
-      "rhs": {
-        "expr": [
-          "Add",
-          [
-            "Multiply",
-            1.5,
-            "pr1"
-          ],
-          [
-            "Multiply",
-            0.5,
-            "rule1"
-          ]
+      "rhs": [
+        "Add",
+        [
+          "Multiply",
+          1.5,
+          "pr1"
         ],
-        "format": "math-json"
-      }
+        [
+          "Multiply",
+          0.5,
+          "rule1"
+        ]
+      ]
     },
     {
       "id": "rule2",
-      "rhs": {
-        "expr": [
-          "Multiply",
-          1.5,
-          "rule3"
-        ],
-        "format": "math-json"
-      }
+      "rhs": [
+        "Multiply",
+        1.5,
+        "rule3"
+      ]
     }
   ],
   "timeEvents": [],

@@ -25,21 +25,15 @@
       "dynamic": [
         {
           "id": "s1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              100,
-              2
-            ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Negate",
-              "r1"
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            100,
+            2
+          ],
+          "derivative": [
+            "Negate",
+            "r1"
+          ]
         }
       ],
       "static": [
@@ -51,39 +45,33 @@
       "assignments": [
         {
           "id": "s1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "s1_amt_",
-              "c1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "s1_amt_",
+            "c1"
+          ]
         },
         {
           "id": "r1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
+          "rhs": [
+            "Multiply",
+            "k1",
+            [
+              "Power",
               [
-                "Power",
-                [
-                  "Multiply",
-                  15,
-                  2
-                ],
+                "Multiply",
+                15,
                 2
               ],
-              [
-                "Power",
-                1.1,
-                2
-              ],
-              "c1"
+              2
             ],
-            "format": "math-json"
-          }
+            [
+              "Power",
+              1.1,
+              2
+            ],
+            "c1"
+          ]
         }
       ],
       "timeEvents": [],

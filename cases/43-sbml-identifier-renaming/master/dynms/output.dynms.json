@@ -33,29 +33,23 @@
       "dynamic": [
         {
           "id": "sbml__species_1_amt_",
-          "initial": {
-            "expr": [
-              "Multiply",
-              [
-                "Divide",
-                2,
-                1
-              ],
+          "initial": [
+            "Multiply",
+            [
+              "Divide",
+              2,
               1
             ],
-            "format": "math-json"
-          },
-          "derivative": {
-            "expr": [
-              "Add",
-              [
-                "Negate",
-                "sbml__r_1"
-              ],
-              "rate_sbml__species_1"
+            1
+          ],
+          "derivative": [
+            "Add",
+            [
+              "Negate",
+              "sbml__r_1"
             ],
-            "format": "math-json"
-          }
+            "rate_sbml__species_1"
+          ]
         }
       ],
       "static": [
@@ -71,44 +65,32 @@
       "assignments": [
         {
           "id": "sbml__species_1",
-          "rhs": {
-            "expr": [
-              "Divide",
-              "sbml__species_1_amt_",
-              "sbml__comp_1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Divide",
+            "sbml__species_1_amt_",
+            "sbml__comp_1"
+          ]
         },
         {
           "id": "sbml__r_1",
-          "rhs": {
-            "expr": [
-              "Add",
-              "local_sbml__r_1__local",
-              1,
-              "sbml__k_2"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            "local_sbml__r_1__local",
+            1,
+            "sbml__k_2"
+          ]
         },
         {
           "id": "sbml__assigned_1",
-          "rhs": {
-            "expr": [
-              "Add",
-              "sbml__k_2",
-              "sbml_begin_1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Add",
+            "sbml__k_2",
+            "sbml_begin_1"
+          ]
         },
         {
           "id": "rate_sbml__species_1",
-          "rhs": {
-            "expr": "sbml__k_2",
-            "format": "math-json"
-          }
+          "rhs": "sbml__k_2"
         }
       ],
       "timeEvents": [],
@@ -117,18 +99,12 @@
           "id": "sbml__event_1",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": "True",
-              "format": "math-json"
-            },
+            "rhs": "True",
             "detection": "step"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": "sbml_begin_1",
-                "format": "math-json"
-              },
+              "rhs": "sbml_begin_1",
               "state": "sbml__k_2"
             }
           ],
@@ -138,10 +114,7 @@
           "id": "event_2",
           "trigger": {
             "type": "conditional",
-            "rhs": {
-              "expr": "True",
-              "format": "math-json"
-            },
+            "rhs": "True",
             "detection": "step"
           },
           "actions": [],

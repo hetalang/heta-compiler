@@ -26,13 +26,10 @@
         {
           "id": "x1",
           "initial": 0,
-          "derivative": {
-            "expr": [
-              "Negate",
-              "pr1"
-            ],
-            "format": "math-json"
-          }
+          "derivative": [
+            "Negate",
+            "pr1"
+          ]
         }
       ],
       "static": [
@@ -44,25 +41,19 @@
       "assignments": [
         {
           "id": "p2",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "x1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "x1"
+          ]
         },
         {
           "id": "pr1",
-          "rhs": {
-            "expr": [
-              "Multiply",
-              "k1",
-              "x1"
-            ],
-            "format": "math-json"
-          }
+          "rhs": [
+            "Multiply",
+            "k1",
+            "x1"
+          ]
         }
       ],
       "timeEvents": [
@@ -76,10 +67,7 @@
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 10,
-                "format": "math-json"
-              },
+              "rhs": 10,
               "state": "x1"
             }
           ],
@@ -91,25 +79,19 @@
           "id": "sw2",
           "trigger": {
             "type": "crossing",
-            "rhs": {
-              "expr": [
-                "Add",
-                "x1",
-                [
-                  "Negate",
-                  10
-                ]
-              ],
-              "format": "math-json"
-            },
+            "rhs": [
+              "Add",
+              "x1",
+              [
+                "Negate",
+                10
+              ]
+            ],
             "detection": "root"
           },
           "actions": [
             {
-              "rhs": {
-                "expr": 20,
-                "format": "math-json"
-              },
+              "rhs": 20,
               "state": "x1"
             }
           ],

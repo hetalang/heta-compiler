@@ -21,14 +21,11 @@
       "static": [
         {
           "id": "foo",
-          "initial": {
-            "expr": [
-              "Multiply",
-              3,
-              2
-            ],
-            "format": "math-json"
-          }
+          "initial": [
+            "Multiply",
+            3,
+            2
+          ]
         }
       ],
       "assignments": [],

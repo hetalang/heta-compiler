@@ -182,9 +182,7 @@ Export to **DynMS** (Dynamic Model Specifications) format which is an experiment
 
 ### Properties
 
-| property | type | required | default | ref | description |
-| ---------|------|----------|---------|-----|-------------|
-| exprFormat | "math-json" / "heta" / "c" / "julia" | | "math-json" | | The format of mathematical expressions in the exported model. "heta" means that the expressions will be exported in the same format as they are defined in Heta. |
+_No additional properties._
 
 ### Output files
 
@@ -196,8 +194,7 @@ Export to **DynMS** (Dynamic Model Specifications) format which is an experiment
 {
     format: DynMS,
     filepath: dynms,       # save result in directory "dist/dynms"
-    spaceFilter: nameless, # output everything from nameless namespace
-    exprFormat: julia      # export math expressions in Julia code format
+    spaceFilter: nameless  # output everything from nameless namespace
 }
 ```
 
