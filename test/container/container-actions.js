@@ -156,6 +156,17 @@ describe('Unit tests for Container load', () => {
     c.logger.resetErrors();
   });
 
+  it('Rejects inline export', () => {
+    c.defaultLogs.length = 0;
+    c.load({action: 'export', format: 'JSON'});
+
+    expect(c.logger.hasErrors).to.be.true;
+    expect(c.hetaErrors()).to.have.lengthOf(1);
+    expect(c.hetaErrors()[0].msg).to.match(/Inline #export is no longer supported/);
+    c.logger.resetErrors();
+    c.defaultLogs.length = 0;
+  });
+
   it('delete existed element.', () => {
     c.insert({
       class: 'Record',

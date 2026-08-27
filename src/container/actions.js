@@ -3,45 +3,19 @@ const { Namespace } = require('../namespace');
 const { RESERVED_WORDS, isReservedWord, isValidId } = require('../identifier');
 
 /**
- * Creates an export instance from an inline `#export` action.
+ * Rejects an inline `#export` action.
  *
- * The export class is selected by `q.format`, for example `format: "json"`
- * creates a JSON export instance.
+ * Export declarations belong in the platform configuration's `export` array.
+ * This stub is retained solely to provide an actionable diagnostic for parsed
+ * legacy Heta files.
  *
- * @deprecated Use the `export` section in the platform declaration instead.
- * 
- * @param {object} q The `export` object in JS object format.
- * @param {boolean} isCore Kept for action compatibility.
- * 
- * @returns {AbstractExport|undefined} The created export, or `undefined` if validation fails.
+ * @returns {undefined}
  */
-// TODO: this is part which will be removed later
-// invisible => deprecated => removed
-Container.prototype.export = function(q = {}, isCore = false) {
-  this.logger.warn('Inline #export is deprecated and will be removed in the future. Use export property in platform configuration.');
-  
-  let { exportClasses, exportArray } = this._builder;
-  let format = q.format.toLowerCase(); // convert to lower case here
-  if (format === undefined) {
-    this.logger.error('Empty "format" option in export', {type: 'QError'});
-    return; // BRAKE
-  }
-  if (typeof exportClasses[format] !== 'function') {
-    this.logger.error(`Unknown format "${format}" in export.`, {type: 'QError'});
-
-    return; // BRAKE
-  }
-
-  // create and push to storage
-  let exportInstance = new exportClasses[format](q, isCore);
-  let ignoreInlineExport = this._builder.export.length > 0; // TODO: remove at version 0.10.0
-  if (!exportInstance.errored && !ignoreInlineExport) { // TODO: remove second check later
-    exportArray.push(exportInstance);
-  } else if (!exportInstance.errored) {
-    this.logger.warn(`inline #export {format: ${q.format}} will not be applied because export was set in platform configuration.`);
-  }
-
-  return exportInstance;
+Container.prototype.export = function() {
+  this.logger.error(
+    'Inline #export is no longer supported. Define exports in the "export" array in the platform configuration.',
+    {type: 'DeprecatedActionError', action: 'export'}
+  );
 };
 
 /**
