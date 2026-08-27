@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "6e9deb0c58c3bc59773eab44fa278c571e069882c71daa6e243a8a279e79c7e9",
+    "hashSum": "48d8de9cfe731bdcace8e25b08199675bd2b33dfc471c12ad6798add48219b07",
     "hashAlgorithm": "sha256"
   },
   {
@@ -28,14 +28,14 @@
     "action": "upsert",
     "class": "DSwitcher",
     "id": "sw2",
-    "priority": 0,
+    "priority": "0",
     "trigger": "x1 >= 1"
   },
   {
     "action": "upsert",
     "class": "DSwitcher",
     "id": "sw3",
-    "priority": -2,
+    "priority": "-2",
     "trigger": "x1 >= 2"
   },
   {

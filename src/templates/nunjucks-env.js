@@ -154,6 +154,7 @@ function _toHetaDict(component = {}) {
   add('period', component.period);
   add('stop', component.stop);
   add('atStart', component.atStart);
+  add('priority', component.priority);
   if (component.aux !== undefined && Object.keys(component.aux).length > 0) {
     add('aux', _toYAML(component.aux));
   }

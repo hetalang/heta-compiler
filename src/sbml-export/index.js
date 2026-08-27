@@ -42,6 +42,10 @@ class SBMLExport extends AbstractExport {
     
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();
+    let supportedPriorityClasses = this.version.startsWith('L3')
+      ? ['TimeSwitcher', 'DSwitcher', 'CSwitcher']
+      : [];
+    this.warnUnsupportedPriorities(selectedNamespaces, supportedPriorityClasses);
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = ns.getSBMLImage();

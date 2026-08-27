@@ -36,6 +36,7 @@ class MrgsolveExport extends AbstractExport {
 
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let mrgsolveImage = ns.getMrgsolveImage();

@@ -18,6 +18,7 @@ class AnotherXLSXExport extends XLSXExport {
   makeSheet(){
     // filtered namespaces
     let nsOutput = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(nsOutput);
 
     let qArr = nsOutput
       .map(([spaceName, ns]) => ns.toArray())

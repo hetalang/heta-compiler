@@ -158,7 +158,7 @@ Namespace.prototype.makeDynMSModel = function({
                 event.trigger.stop = switcher.stopObj?.num;
             }
             if (switcher.priority !== undefined) {
-                event.priority = switcher.priority;
+                event.priority = renderExpression(switcher.priority.substituteByDefinitions());
             }
 
             event.actions = this.selectRecordsByContext(switcher.id)
@@ -184,7 +184,7 @@ Namespace.prototype.makeDynMSModel = function({
                 atStart: switcher.atStart
             };
             if (switcher.priority !== undefined) {
-                event.priority = switcher.priority;
+                event.priority = renderExpression(switcher.priority.substituteByDefinitions());
             }
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
@@ -208,7 +208,7 @@ Namespace.prototype.makeDynMSModel = function({
                 atStart: switcher.atStart
             };
             if (switcher.priority !== undefined) {
-                event.priority = switcher.priority;
+                event.priority = renderExpression(switcher.priority.substituteByDefinitions());
             }
             event.actions = this.selectRecordsByContext(switcher.id)
                 .filter((record) => !record.isRule)
@@ -230,7 +230,7 @@ Namespace.prototype.makeDynMSModel = function({
                 atStart: true
             };
             if (switcher.priority !== undefined) {
-                event.priority = switcher.priority;
+                event.priority = renderExpression(switcher.priority.substituteByDefinitions());
             }
             event.actions = [];
             event.active = switcher.active;

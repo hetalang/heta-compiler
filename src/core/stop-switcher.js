@@ -131,6 +131,7 @@ class StopSwitcher extends _Switcher {
   Works only for bound switchers
   */
   checkUnits(){
+    super.checkUnits();
     let logger = this._container?.logger;
 
     if (typeof this.trigger !== 'undefined') { // skip empty

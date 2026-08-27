@@ -278,6 +278,9 @@ class Container {
         // check CSwitcher.trigger
         ns.selectByInstanceOf('CSwitcher')
           .forEach((rec) => rec.checkUnits());
+        // check TimeSwitcher.priority
+        ns.selectByInstanceOf('TimeSwitcher')
+          .forEach((rec) => rec.checkUnits());
       }
     });
     

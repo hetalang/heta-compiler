@@ -36,7 +36,9 @@ class SimbioExport extends AbstractExport {
   makeText() {
     //let { logger } = this._builder;
 
-    let results = this.selectedNamespaces().map(([spaceName, ns]) => {
+    let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
+    let results = selectedNamespaces.map(([spaceName, ns]) => {
 
       let image = ns.getSimbioImage();
       image.auxAsNotes = this.auxAsNotes;

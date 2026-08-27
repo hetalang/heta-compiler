@@ -14,7 +14,9 @@ let qArr = [
   {action: 'insert', id: 'sw1', class: 'DSwitcher', trigger: 'true'},
   {action: 'insert', id: 'sw2', class: 'DSwitcher', trigger: '(x1>x2) and false'},
   {action: 'insert', id: 'sw3', class: 'CSwitcher', trigger: 'y1'},
-  {action: 'insert', id: 'sw4', class: 'DSwitcher', trigger: 'true and x1'}
+  {action: 'insert', id: 'sw4', class: 'DSwitcher', trigger: 'true and x1'},
+  {action: 'insert', id: 'sw5', class: 'DSwitcher', trigger: 'true', priority: 'k1'},
+  {action: 'insert', id: 'sw6', class: 'DSwitcher', trigger: 'true', priority: 'x1'}
 ];
 
 describe('Testing checkUnits() for components', () => {
@@ -80,6 +82,23 @@ describe('Testing checkUnits() for components', () => {
     sw4.checkUnits();
     let warnings = p.defaultLogs.filter(x=>x.level==='warn');
     expect(warnings).to.be.lengthOf(1);
+    p.defaultLogs.length = 0; // reset
+  });
+
+  it('No warnings for dimensionless priority', () => {
+    let sw5 = p.namespaceStorage.get('nameless').get('sw5');
+    sw5.checkUnits();
+    let warnings = p.defaultLogs.filter(x=>x.level==='warn');
+    expect(warnings).to.be.lengthOf(0);
+    p.defaultLogs.length = 0; // reset
+  });
+
+  it('Warnings for dimensional priority', () => {
+    let sw6 = p.namespaceStorage.get('nameless').get('sw6');
+    sw6.checkUnits();
+    let warnings = p.defaultLogs.filter(x=>x.level==='warn');
+    expect(warnings).to.have.lengthOf(1);
+    expect(warnings[0].msg).to.match(/priority must be dimensionless/);
     p.defaultLogs.length = 0; // reset
   });
 });

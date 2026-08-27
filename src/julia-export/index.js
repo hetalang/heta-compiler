@@ -38,7 +38,9 @@ class JuliaExport extends AbstractExport {
   makeText(skipVersionCode = false) {
     //let { logger } = this._builder;
     // create image for multiple namespaces
-    let nsImages = this.selectedNamespaces()
+    let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
+    let nsImages = selectedNamespaces
       .map(([spaceName, ns]) => ns.getJuliaImage());
 
     // create Content

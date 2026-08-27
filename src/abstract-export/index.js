@@ -92,6 +92,27 @@ class AbstractExport {
     return concreteNS;
   }
   /**
+   * Warns when an export cannot preserve switcher priorities.
+   *
+   * @param {Array[]} namespaces Namespace pairs returned by selectedNamespaces().
+   * @param {string[]} supportedClasses Switcher class names with supported priority semantics.
+   * @returns {void}
+   */
+  warnUnsupportedPriorities(namespaces, supportedClasses = []) {
+    let ignored = namespaces
+      .flatMap(([, namespace]) => namespace.selectByInstanceOf('_Switcher'))
+      .filter((switcher) => switcher.priority !== undefined
+        && !supportedClasses.includes(switcher.className));
+
+    if (ignored.length > 0) {
+      let switchers = ignored.map((switcher) => switcher.index);
+      this._builder.logger.warn(
+        `The ${this.format} format does not support event priority. It will be ignored for switchers: ${switchers.join(', ')}.`,
+        {type: 'ExportWarning', switchers}
+      );
+    }
+  }
+  /**
    * Creates buffer export outputs ready for file writing.
    *
    * @returns {object[]} Buffer outputs with `content`, `pathSuffix`, and `type`.

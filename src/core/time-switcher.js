@@ -194,6 +194,9 @@ class TimeSwitcher extends _Switcher {
       );
     }
   }
+  checkUnits() {
+    super.checkUnits();
+  }
 }
 
 TimeSwitcher._requirements = {

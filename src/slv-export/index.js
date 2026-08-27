@@ -54,6 +54,7 @@ class SLVExport extends AbstractExport{
 
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = ns.getSLVImage(this.groupConstBy, this.powTransform, this.version);

@@ -133,6 +133,9 @@ function getComponentExpressions(component) {
   if (component.trigger) {
     expressions.push(component.trigger);
   }
+  if (component.priority) {
+    expressions.push(component.priority);
+  }
 
   return expressions;
 }

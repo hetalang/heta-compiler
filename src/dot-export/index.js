@@ -30,6 +30,7 @@ class DotExport extends AbstractExport {
     //let { logger } = this._builder;
 
     let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
 
     let results = selectedNamespaces.map(([spaceName, ns]) => {
       let image = ns.getDotImage();

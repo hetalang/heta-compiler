@@ -29,6 +29,7 @@ class SummaryExport extends AbstractExport {
   makeText() {
     //let { logger } = this._builder;
     let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
     const { unitDefStorage, functionDefStorage, namespaceStorage } = this._builder.container;
 
     let image = {

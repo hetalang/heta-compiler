@@ -316,7 +316,10 @@
           "type": "string"
         },
         "priority": {
-          "type": "number"
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" }
+          ]
         },
         "period": {
           "$ref": "#/$defs/stringOrNumber"

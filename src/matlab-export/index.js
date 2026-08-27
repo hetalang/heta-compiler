@@ -41,6 +41,7 @@ class MatlabExport extends AbstractExport {
 
     // filter namespaces if set
     let selectedNamespaces = this.selectedNamespaces();
+    this.warnUnsupportedPriorities(selectedNamespaces);
 
     let results = [];
 

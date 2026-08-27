@@ -17,7 +17,7 @@
 {% block timeEventPriority %}
         {% if event.priority is defined %}
         <priority>
-          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>{{ event.priority }}</cn></math>
+          {{ event.priority.toCMathML() }}
         </priority>
         {% endif %}
 {% endblock %}
@@ -27,7 +27,7 @@
 {% block cEventPriority %}
         {% if event.priority is defined %}
         <priority>
-          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>{{ event.priority }}</cn></math>
+          {{ event.priority.toCMathML() }}
         </priority>
         {% endif %}
 {% endblock %}
@@ -37,7 +37,7 @@
 {% block dEventPriority %}
         {% if event.priority is defined %}
         <priority>
-          <math xmlns="http://www.w3.org/1998/Math/MathML"><cn>{{ event.priority }}</cn></math>
+          {{ event.priority.toCMathML() }}
         </priority>
         {% endif %}
 {% endblock %}

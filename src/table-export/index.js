@@ -7,7 +7,7 @@ const XLSX = require('xlsx');
 // how to order columns in sheets
 const propSequence = [
   'on', 'action', 'class', 'space', 'id',
-  'active',
+  'active', 'priority',
   'num', 'assignments.start_', 'assignments.ode_', 'units', 'boundary', 'ss',
   'compartment', 'isAmount', 'actors', 'modifiers[]',
   'title', 'notes', 'tags[]'

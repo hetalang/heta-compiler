@@ -224,7 +224,7 @@
           "$ref": "#/$defs/timeTrigger"
         },
         "priority": {
-          "type": "number"
+          "$ref": "#/$defs/mathJsonNode"
         },
         "active": {
           "type": "boolean",
@@ -260,7 +260,7 @@
           "$ref": "#/$defs/nonTimeEventTrigger"
         },
         "priority": {
-          "type": "number"
+          "$ref": "#/$defs/mathJsonNode"
         },
         "active": {
           "type": "boolean",
