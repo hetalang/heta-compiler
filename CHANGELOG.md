@@ -16,6 +16,7 @@
 - Unit hashes now use the `units_` prefix, preventing generated identifiers from starting with an underscore.
 - Published the DynMS and Heta JSON schemas through the npm package exports `heta-compiler/dynms-schema` and `heta-compiler/heta-json-schema`; `platformId` is now optional in the Heta JSON schema.
 - Removed the experimental ModelingToolkit (`MT`) export format.
+- Removed inline `#export` actions. Define exports in the declaration file's `export` array or with the CLI `--export` option.
 - Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
 - Updated dependencies to address known security vulnerabilities.
 
