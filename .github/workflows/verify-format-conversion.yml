@@ -52,13 +52,13 @@ jobs:
       - name: Build SBML L3V2 report
         run: |
           "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/l3v2 --concurrency=4 \
-            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective,EventPriority \
+            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
             --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap
 
       - name: Build SBML L3V1 report
         run: |
           "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V1Path --target=results/l3v1 --concurrency=4 \
-            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective,EventPriority \
+            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
             --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction
 
       - name: Build SBML L2V5 report
