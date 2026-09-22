@@ -1,8 +1,7 @@
 {
   "schemaVersion": 1,
   "label": "sbml-report",
-  "message": "0/903",
-  "color": "red",
-  "isError": true,
+  "message": "859/903",
+  "color": "yellow",
   "cacheSeconds": 300
 }
