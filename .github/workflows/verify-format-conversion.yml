@@ -1,0 +1,196 @@
+name: Verify format conversion
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fcts-reports-publication
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout heta-compiler
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name || github.sha }}
+
+      - name: Checkout reports publication branch
+        uses: actions/checkout@v6
+        with:
+          ref: reports
+          path: reports-publication
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install heta-compiler from this checkout
+        run: |
+          npm ci
+          npm install --global .
+          heta --version
+
+      - name: Install Format Conversion Test Suite
+        run: |
+          npm install --prefix fcts-run git+https://github.com/hetalang/format-conversion-test-suite.git#v0.1.0
+          echo "FCTS_ROOT=$GITHUB_WORKSPACE/fcts-run/node_modules/@hetalang/format-conversion-test-suite" >> "$GITHUB_ENV"
+
+      - name: Download and index SBML cases
+        run: |
+          npm --prefix "$FCTS_ROOT" run fetch:sbml
+          npm --prefix "$FCTS_ROOT" run index:sbml
+
+      - name: Build SBML L3V2 report
+        run: |
+          "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/l3v2 --concurrency=4 \
+            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap
+
+      - name: Build SBML L3V1 report
+        run: |
+          "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V1Path --target=results/l3v1 --concurrency=4 \
+            --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction
+
+      - name: Build SBML L2V5 report
+        run: |
+          "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=results/l2v5 --concurrency=4 \
+            --skip-component-tags=StoichiometryMath,CSymbolDelay,EventWithDelay,AlgebraicRule \
+            --skip-test-tags=FastReaction
+
+      - name: Summarize build reports
+        if: always()
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const reports = [
+            ['SBML L3V2', 'results/l3v2/report.json'],
+            ['SBML L3V1', 'results/l3v1/report.json'],
+            ['SBML L2V5', 'results/l2v5/report.json'],
+          ];
+          const lines = ['| Report | Successful | Failed | Not evaluated |', '| --- | ---: | ---: | ---: |'];
+
+          for (const [label, relativePath] of reports) {
+            const reportPath = path.join(process.env.FCTS_ROOT, relativePath);
+            if (!fs.existsSync(reportPath)) {
+              lines.push(`| ${label} | — | — | — |`);
+              continue;
+            }
+            const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+            const counts = { success: 0, failed: 0, notEvaluated: 0 };
+            for (const caseResult of report.cases) {
+              if (caseResult.status === 'success') counts.success += 1;
+              else if (caseResult.status === 'failed') counts.failed += 1;
+              else if (caseResult.status === 'not-evaluated') counts.notEvaluated += 1;
+            }
+            lines.push(`| ${label} | ${counts.success} | ${counts.failed} | ${counts.notEvaluated} |`);
+          }
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
+          NODE
+
+      - name: Publish latest reports for the source branch
+        if: always() && github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          report_names=(l3v2 l3v1 l2v5)
+          for report_name in "${report_names[@]}"; do
+            if [[ ! -f "$FCTS_ROOT/results/$report_name/report.json" ]]; then
+              echo "Report $report_name is unavailable; preserving the previously published reports."
+              exit 0
+            fi
+          done
+
+          publish_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/branches/$GITHUB_REF_NAME"
+          rm -rf "$publish_root"
+          mkdir -p "$publish_root"
+          for report_name in "${report_names[@]}"; do
+            cp -a "$FCTS_ROOT/results/$report_name" "$publish_root/$report_name"
+          done
+
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.name 'github-actions[bot]'
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/branches/$GITHUB_REF_NAME"
+          if git -C "$GITHUB_WORKSPACE/reports-publication" diff --cached --quiet; then
+            echo 'Published reports are unchanged.'
+            exit 0
+          fi
+          git -C "$GITHUB_WORKSPACE/reports-publication" commit -m "Update SBML reports for $GITHUB_REF_NAME from $GITHUB_SHA"
+          git -C "$GITHUB_WORKSPACE/reports-publication" push origin HEAD:reports
+
+      - name: Publish reports for the release
+        if: always() && github.event_name == 'release'
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          report_names=(l3v2 l3v1 l2v5)
+          for report_name in "${report_names[@]}"; do
+            if [[ ! -f "$FCTS_ROOT/results/$report_name/report.json" ]]; then
+              echo "Report $report_name is unavailable; preserving the previously published release reports."
+              exit 0
+            fi
+          done
+
+          release_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/releases/$RELEASE_TAG"
+          latest_root="$GITHUB_WORKSPACE/reports-publication/sbml-report/releases/latest"
+          rm -rf "$release_root"
+          mkdir -p "$release_root"
+          if [[ "$PRERELEASE" == "false" ]]; then
+            rm -rf "$latest_root"
+            mkdir -p "$latest_root"
+          fi
+          for report_name in "${report_names[@]}"; do
+            cp -a "$FCTS_ROOT/results/$report_name" "$release_root/$report_name"
+            if [[ "$PRERELEASE" == "false" ]]; then
+              cp -a "$FCTS_ROOT/results/$report_name" "$latest_root/$report_name"
+            fi
+          done
+
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.name 'github-actions[bot]'
+          git -C "$GITHUB_WORKSPACE/reports-publication" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/releases/$RELEASE_TAG"
+          if [[ "$PRERELEASE" == "false" ]]; then
+            git -C "$GITHUB_WORKSPACE/reports-publication" add "sbml-report/releases/latest"
+          fi
+          if git -C "$GITHUB_WORKSPACE/reports-publication" diff --cached --quiet; then
+            echo 'Published release reports are unchanged.'
+            exit 0
+          fi
+          git -C "$GITHUB_WORKSPACE/reports-publication" commit -m "Publish SBML reports for release $RELEASE_TAG from $GITHUB_SHA"
+          git -C "$GITHUB_WORKSPACE/reports-publication" push origin HEAD:reports
+
+      - name: Upload SBML L3V2 report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fcts-sbml-l3v2-${{ github.run_id }}
+          path: ${{ env.FCTS_ROOT }}/results/l3v2
+          if-no-files-found: warn
+
+      - name: Upload SBML L3V1 report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fcts-sbml-l3v1-${{ github.run_id }}
+          path: ${{ env.FCTS_ROOT }}/results/l3v1
+          if-no-files-found: warn
+
+      - name: Upload SBML L2V5 report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fcts-sbml-l2v5-${{ github.run_id }}
+          path: ${{ env.FCTS_ROOT }}/results/l2v5
+          if-no-files-found: warn
