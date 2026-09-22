@@ -1,0 +1,15 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l2v5/01817/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01817/01817-sbml-l2v5.xml"...
+[error]	Record assignments "a" should be a numeric expression.
+[info]	Platform hash: 84ca5f3a5a2fe7cbe06def58960919aa0801e69a2f4bff0c7ae9ce8e701c1977
+[info]	Setting references in elements, total length 101
+[error]	Record "a" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

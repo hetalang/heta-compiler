@@ -1,0 +1,31 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01190/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01190/01190-sbml-l3v1.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	id must not be a reserved word, got "E". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[info]	Platform hash: 3156397fba6df78e5597b218007dab2ce1b39969b87048bbe2360f720cd117cf
+[info]	Setting references in elements, total length 141
+
+ +-------------------------------------------------------------------+ 
+ | Internal "Heta compiler" error, contact the developers.           | 
+ | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
+ | or mail to: dev@insysbio.com                                      | 
+ +-------------------------------------------------------------------+ 
+
+
+TypeError: Cannot read properties of undefined (reading 'length')
+    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
+    at Array.forEach (<anonymous>)
+    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
+    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
+    at Map.forEach (<anonymous>)
+    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
+    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
+    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
+    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)

@@ -1,0 +1,30 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l2v5/01489/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01489/01489-sbml-l2v5.xml"...
+[error]	my_plus Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_times Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_and Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_or Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_xor Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	id must not be a reserved word, got "e". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	e component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 6a0cb8d42421adc8fdce6475d93a7935f536fa3e9081a9d72ad35050b706c2aa
+[info]	Setting references in elements, total length 99
+[error]	FunctionDef "my_plus" is not found as expected here: a { math: undefined };
+[error]	FunctionDef "my_times" is not found as expected here: b { math: undefined };
+[error]	FunctionDef "my_and" is not found as expected here: c { math: undefined };
+[error]	FunctionDef "my_or" is not found as expected here: d { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

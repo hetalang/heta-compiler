@@ -1,0 +1,16 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l2v5/01530/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01530/01530-sbml-l2v5.xml"...
+[error]	P52 Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/E50 should not be empty string.
+    2. /assignments/E50 should be a string, number or null.
+[info]	Platform hash: 218361346864bed0f02122db4039f37262e4e7faaa62b7807c9cf7028b27084b
+[info]	Setting references in elements, total length 199
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

@@ -1,0 +1,29 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/00681/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/00681/00681-sbml-l3v1.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[info]	Platform hash: ec85d16864c3858154cf40ed0cb0da0b45021b89b4254434a67225cb2f7ffb8c
+[info]	Setting references in elements, total length 100
+
+ +-------------------------------------------------------------------+ 
+ | Internal "Heta compiler" error, contact the developers.           | 
+ | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
+ | or mail to: dev@insysbio.com                                      | 
+ +-------------------------------------------------------------------+ 
+
+
+TypeError: Cannot read properties of undefined (reading 'length')
+    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
+    at Array.forEach (<anonymous>)
+    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
+    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
+    at Map.forEach (<anonymous>)
+    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
+    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
+    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
+    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)

@@ -1,0 +1,23 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l2v5/01494/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01494/01494-sbml-l2v5.xml"...
+[error]	Function math "my_lt" should be a numeric expression.
+[error]	Function math "my_gt" should be a numeric expression.
+[error]	Function math "my_leq" should be a numeric expression.
+[error]	Function math "my_geq" should be a numeric expression.
+[error]	Function math "my_eq" should be a numeric expression.
+[info]	Platform hash: 76eb12f9a8e8669ae93f7fb0544ea262493c2e9920358daa110e177b4ff0990d
+[info]	Setting references in elements, total length 100
+[error]	FunctionDef "my_lt" is not found as expected here: P1 { math: undefined };
+[error]	FunctionDef "my_gt" is not found as expected here: P2 { math: undefined };
+[error]	FunctionDef "my_leq" is not found as expected here: P3 { math: undefined };
+[error]	FunctionDef "my_geq" is not found as expected here: P4 { math: undefined };
+[error]	FunctionDef "my_eq" is not found as expected here: P5 { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
