@@ -81,6 +81,16 @@ for checking, compilation, and transforming models written in Heta to different 
 -   📖 Documentation: https://hetalang.github.io/
 -   🐞 Issue tracker: https://github.com/hetalang/heta-compiler/issues
 
+## Reproducibility reports
+
+This section presents automated format-conversion checks for the **v0.12.x** branch.
+
+| Test set | Conversion check | Latest **v0.12.x** |
+| --- | --- | --- |
+| sbmlteam/sbml-test-suite | SBML L3V2 → canonical JSON + DynMS | [![SBML L3V2 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fv0.12.x%2Fl3v2%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fv0.12.x%2Fl3v2%2Freport.json) |
+| sbmlteam/sbml-test-suite | SBML L3V1 → canonical JSON + DynMS | [![SBML L3V1 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fv0.12.x%2Fl3v1%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fv0.12.x%2Fl3v1%2Freport.json) |
+| sbmlteam/sbml-test-suite | SBML L2V5 → canonical JSON + DynMS | [![SBML L2V5 conversion](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fv0.12.x%2Fl2v5%2Fbadge.json)](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https%3A%2F%2Fraw.githubusercontent.com%2Fhetalang%2Fheta-compiler%2Freports%2Fsbml-report%2Fbranches%2Fv0.12.x%2Fl2v5%2Freport.json) |
+
 ## Citation
 
 Metelkin, E. (2021).
