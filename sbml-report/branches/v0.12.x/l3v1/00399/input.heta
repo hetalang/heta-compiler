@@ -11,8 +11,5 @@
 #defineFunction acsch { arguments: [x], math: "ln(1 / x + sqrt(1 + 1 / x^2))" };
 #defineFunction acoth { arguments: [x], math: "0.5 * ln((x + 1) / (x - 1))" };
 #defineFunction sign { arguments: [x], math: "piecewise(-1, x < 0, 1, x > 0, 0)" };
-#defineFunction quotient { arguments: [x, y], math: "sign(x / y) * floor(abs(x / y))" };
-#defineFunction rem { arguments: [x, y], math: "x - y * sign(x / y) * floor(abs(x / y))" };
-#defineFunction implies { arguments: [A, B], math: "(not A) or B" };
 
 #include { source: ../../../cases/semantic/00399/00399-sbml-l3v1.xml, type: sbml };

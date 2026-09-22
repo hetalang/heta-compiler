@@ -5,7 +5,6 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01516/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01516/01516-sbml-l3v1.xml"...
-[error]	Function math "implies" should be a numeric expression.
 [error]	P2_sr component does not exist which is not allowed for the "update" action.
 [error]	P3_sr component does not exist which is not allowed for the "update" action.
 [error]	P4_sr component does not exist which is not allowed for the "update" action.
@@ -44,24 +43,9 @@ No declaration file, running with defaults...
 [error]	P37_sr component does not exist which is not allowed for the "update" action.
 [error]	P38_sr component does not exist which is not allowed for the "update" action.
 [error]	P39_sr component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: abca765fceeef7cf58f1c2b96c3d7f2b97ff592688755cc50c8d89b4db644e56
-[info]	Setting references in elements, total length 132
+[info]	Platform hash: caa0fd8c4a587d3d4ae3a82f6e4d2681e0634fde750d3adf7c52030f1c0b74f4
+[info]	Setting references in elements, total length 130
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
 
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)

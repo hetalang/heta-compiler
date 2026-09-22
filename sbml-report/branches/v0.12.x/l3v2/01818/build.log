@@ -12,22 +12,7 @@ No declaration file, running with defaults...
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
 [info]	Platform hash: 53daecbaa4a199f0185b6315b90d755cdb912fe1e998b016da2b5003e69865d0
 [info]	Setting references in elements, total length 93
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
 
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)

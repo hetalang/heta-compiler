@@ -5,27 +5,12 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01631/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01631/01631-sbml-l3v1.xml"...
-[error]	Function math "implies" should be a numeric expression.
 [error]	S1_degrade component does not exist which is not allowed for the "update" action.
 [error]	S1_create component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: f485fc40fbffb1d7d6a9a6f6f41d47cc58e3b650f84bc4b37866374d2510a138
-[info]	Setting references in elements, total length 97
+[info]	Platform hash: d3f277a1732cfb1034db5ce183f83eb128c60ad6c367236fd959b5f19456dbae
+[info]	Setting references in elements, total length 95
+[error]	S1_create_proc Property "actors[0].target" has lost reference "S1_create".
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
 
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)

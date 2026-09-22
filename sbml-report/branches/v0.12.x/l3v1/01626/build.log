@@ -5,27 +5,19 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01626/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01626/01626-sbml-l3v1.xml"...
-[error]	Function math "implies" should be a numeric expression.
 [error]	Q component does not exist which is not allowed for the "update" action.
 [error]	R component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: c659ef925c97c2d488134df6dc8686194ff5ba5d64f740abe957a69a42a396f1
-[info]	Setting references in elements, total length 110
+[info]	Platform hash: 3bfbe3b1303f8377104dad863ed24381a09d93e0a18698f3052b5eeba84c50be
+[info]	Setting references in elements, total length 108
+[error]	Component "Q" is not found in space "nameless" as expected in expression: S [ode_]= Q + R;
+[error]	Component "R" is not found in space "nameless" as expected in expression: S [ode_]= Q + R;
+[error]	Component "Q" is not found in space "nameless" as expected in expression: maxdiff [maxcheck]= abs(Q - R);
+[error]	Component "R" is not found in space "nameless" as expected in expression: maxdiff [maxcheck]= abs(Q - R);
+[error]	Component "Q" is not found in space "nameless" as expected in DSwitcher: "maxcheck"
+	abs(Q - R) > maxdiff;
+[error]	Component "R" is not found in space "nameless" as expected in DSwitcher: "maxcheck"
+	abs(Q - R) > maxdiff;
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
 
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)

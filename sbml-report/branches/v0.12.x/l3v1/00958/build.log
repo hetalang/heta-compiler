@@ -5,9 +5,14 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/00958/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00958/00958-sbml-l3v1.xml"...
-[error]	Function math "implies" should be a numeric expression.
-[info]	Platform hash: 4fbc9ad2afe367d9341873a04759867463cc8c9d1d4c7f9ed5e2f71a16131b3e
-[info]	Setting references in elements, total length 120
+[info]	Platform hash: 623df1e464ed97da9ee29e30c63f4d31e196b21ca513074fc00e497dae8e7f53
+[info]	Setting references in elements, total length 118
+[info]	Checking for circular references in Records.
+[warn]	Units checking skipped. To turn it on set "unitsCheck: true" in declaration.
+[info]	Checking unit's terms.
+[info]	Start exporting to files, total: 2.
+[info]	Exporting to "results/l3v1/00958/canonical" of format "canonical"...
+[info]	Exporting to "results/l3v1/00958/dynms" of format "dynms"...
 
  +-------------------------------------------------------------------+ 
  | Internal "Heta compiler" error, contact the developers.           | 
@@ -16,14 +21,14 @@ No declaration file, running with defaults...
  +-------------------------------------------------------------------+ 
 
 
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+TypeError: Cannot read properties of undefined (reading 'instanceOf')
+    at /home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:272:30
+    at _transform (/home/runner/work/heta-compiler/heta-compiler/node_modules/mathjs/lib/cjs/expression/node/Node.js:191:29)
+    at SymbolNode.transform (/home/runner/work/heta-compiler/heta-compiler/node_modules/mathjs/lib/cjs/expression/node/Node.js:198:16)
+    at _substitute (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:269:20)
+    at _substitute_and_simplify (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:262:27)
+    at /home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:49:39
+    at Array.map (<anonymous>)
+    at Namespace.makeDynMSModel (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:32:10)
+    at /home/runner/work/heta-compiler/heta-compiler/src/dynms-export/index.js:74:19
+    at Array.map (<anonymous>)

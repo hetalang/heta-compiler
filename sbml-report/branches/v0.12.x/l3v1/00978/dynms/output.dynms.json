@@ -1,0 +1,364 @@
+{
+  "$schema": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.2/src/dynms/dynms.schema.json",
+  "dynms": "0.2.1",
+  "generator": {
+    "name": "heta-compiler",
+    "version": "0.12.1"
+  },
+  "created": "2026-09-22T15:54:36.184Z",
+  "license": "UNLICENSED",
+  "models": [
+    {
+      "id": "nameless",
+      "constants": [],
+      "dynamic": [],
+      "static": [
+        {
+          "id": "multitrig",
+          "initial": 0
+        },
+        {
+          "id": "x",
+          "initial": 0
+        },
+        {
+          "id": "y",
+          "initial": 0
+        },
+        {
+          "id": "z",
+          "initial": 0
+        }
+      ],
+      "assignments": [],
+      "timeEvents": [],
+      "events": [
+        {
+          "id": "_E0",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E1",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 0,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E2",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E3",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 0,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E4",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E5",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 0,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E6",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E7",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 0,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E8",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "GreaterEqual",
+                "t",
+                0.99
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": 2,
+                "format": "math-json"
+              },
+              "state": "multitrig"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E9",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                "multitrig",
+                1
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "x",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "x"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E10",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                "multitrig",
+                1
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "y",
+                  1
+                ],
+                "format": "math-json"
+              },
+              "state": "y"
+            }
+          ],
+          "active": true
+        },
+        {
+          "id": "_E11",
+          "trigger": {
+            "type": "conditional",
+            "rhs": {
+              "expr": [
+                "Greater",
+                "multitrig",
+                1
+              ],
+              "format": "math-json"
+            },
+            "detection": "step"
+          },
+          "priority": 0,
+          "actions": [
+            {
+              "rhs": {
+                "expr": [
+                  "Add",
+                  "z",
+                  3
+                ],
+                "format": "math-json"
+              },
+              "state": "z"
+            }
+          ],
+          "active": true
+        }
+      ],
+      "observables": []
+    }
+  ]
+}

@@ -5,7 +5,6 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01491/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01491/01491-sbml-l3v1.xml"...
-[error]	Function math "implies" should be a numeric expression.
 [error]	my_plus0 Some of properties do not satisfy requirements for class "FunctionDef"
     1. /math must NOT have fewer than 1 characters
 [error]	my_times0 Some of properties do not satisfy requirements for class "FunctionDef"
@@ -22,24 +21,15 @@ No declaration file, running with defaults...
 [error]	id must not be a reserved word, got "e". Reserved words list: 
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
 [error]	e component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 6766853e7249ada515e714a4d0b0106b6093ca8208fdce7e5b91d1f6d7da9eea
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: 9bb6aa4503711c764fa682a29bc915bdf42a69a5b7697fbdfbb8124750725189
+[info]	Setting references in elements, total length 96
+[error]	FunctionDef "my_plus0" is not found as expected here: a { math: undefined };
+[error]	FunctionDef "my_times0" is not found as expected here: b { math: undefined };
+[error]	FunctionDef "my_and" is not found as expected here: c { math: undefined };
+[error]	FunctionDef "my_and0" is not found as expected here: c { math: undefined };
+[error]	FunctionDef "my_or" is not found as expected here: d { math: undefined };
+[error]	FunctionDef "my_or0" is not found as expected here: d { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
 
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)

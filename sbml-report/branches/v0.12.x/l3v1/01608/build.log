@@ -5,7 +5,6 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01608/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01608/01608-sbml-l3v1.xml"...
-[error]	Function math "implies" should be a numeric expression.
 [error]	id must not be a reserved word, got "E". Reserved words list: 
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
 [error]	fb_inf Some of properties do not satisfy requirements for class "Const"
@@ -16,24 +15,39 @@ No declaration file, running with defaults...
     1. /num must be number
     2. /num must be null
     3. /num must match exactly one schema in oneOf
-[info]	Platform hash: a29ebb12f9dc12ac764902d3ca8fece992e3602221a1ee54ab22eeef60d9045b
-[info]	Setting references in elements, total length 145
+[info]	Platform hash: 2d88598470478c9d07c80666fa2f5b3a323a799d56f9c7e4cd60a93508bf1d34
+[info]	Setting references in elements, total length 143
+[error]	Record "R16" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R14" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R15" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R12" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	R07 Property "actors[1].target" has lost reference "E".
+[error]	Record "R07" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R13" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R01" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R17" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R03" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R02" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R05" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R04" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R10" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	R06 Property "actors[0].target" has lost reference "E".
+[error]	Record "R06" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R09" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R08" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R11" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R18" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R19" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R26" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R25" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R24" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R23" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R22" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R21" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R20" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	No required "num" property for "fb_inf" of Const.
+[error]	No required "num" property for "fb_ninf" of Const.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
 
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-
-TypeError: Cannot read properties of undefined (reading 'length')
-    at /home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:119:65
-    at Array.forEach (<anonymous>)
-    at Container.classes.FunctionDef.bind (/home/runner/work/heta-compiler/heta-compiler/src/core/function-def.js:107:31)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:48
-    at Map.forEach (<anonymous>)
-    at Container.knitMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:188:29)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:158:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:135:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:168:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)
