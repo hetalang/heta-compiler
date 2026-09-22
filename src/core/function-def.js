@@ -116,7 +116,7 @@ class FunctionDef extends Top {
       }
 
       // check arguments in functionNode
-      if (target && functionNode.args.length < target.arguments.length) {
+      if (target?.arguments && functionNode.args.length < target.arguments.length) {
         let msg = `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
         logger?.error(msg, {type: 'BindingError'});
       }
