@@ -70,7 +70,7 @@ describe('DynMS schema', () => {
 
 function makeDoc(expr) {
   return {
-    dynms: '0.2.0',
+    dynms: '0.2.1',
     models: [
       {
         id: 'model',

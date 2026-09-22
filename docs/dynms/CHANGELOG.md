@@ -1,5 +1,11 @@
 # DynMS Change Log
 
+## 0.2.1
+
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.2/src/dynms/dynms.schema.json`
+- `t` is reserved as a model-component identifier.
+- Constants are now numeric-only.
+
 ## 0.2.0
 
 - Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.1/src/dynms/dynms.schema.json`

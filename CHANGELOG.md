@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.12.2
+
+- Updated DynMS export to version 0.2.1: `t` is reserved as a model-component identifier; constants are numeric-only.
+- Improved expression handling: user-defined functions are expanded recursively.
+- Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
+- Published the DynMS and Heta JSON schemas through the npm package exports heta-compiler/dynms-schema and heta-compiler/heta-json-schema; platformId is now optional in the Heta JSON schema.
+- Updated dependencies to address known security vulnerabilities.
+
 ## 0.12.1
 
 - Updated **DynMS export** to version 0.2.0.
