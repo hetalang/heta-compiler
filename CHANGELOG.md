@@ -18,6 +18,7 @@
 - Removed the experimental ModelingToolkit (`MT`) export format.
 - Removed inline `#export` actions. Define exports in the declaration file's `export` array or with the CLI `--export` option.
 - Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
+- Improved circular-dependency diagnostics by showing implicit species compartment normalization in reported cycles.
 - Updated dependencies to address known security vulnerabilities.
 
 ## 0.12.1

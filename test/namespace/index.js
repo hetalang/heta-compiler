@@ -2,6 +2,8 @@
 const { expect } = require('chai');
 const { Namespace } = require('../../src/namespace');
 const { Record } = require('../../src/core/record');
+const { Compartment } = require('../../src/core/compartment');
+const { Species } = require('../../src/core/species');
 
 describe('Namespace sort testing.', () => {
   let x;
@@ -108,5 +110,38 @@ describe('Namespace sort testing.', () => {
     expect(() => {
       cycle.sortExpressionsByContext('start_');
     }).to.throw(Error); // ExportError?
+  });
+
+  it('shows an implicit compartment dependency in start and ODE cycles', () => {
+    let cycle = new Namespace('one');
+    let compartment = (new Compartment).merge({
+      assignments: {
+        ode_: 'species'
+      }
+    });
+    compartment._id = 'compartment';
+    compartment.namespace = cycle;
+    cycle.set(compartment._id, compartment);
+    let species = (new Species).merge({
+      compartment: 'compartment',
+      assignments: {
+        start_: 1
+      }
+    });
+    species._id = 'species';
+    species.namespace = cycle;
+    cycle.set(species._id, species);
+
+    expect(() => {
+      cycle.sortExpressionsByContext('start_', true);
+    }).to.throw(Error)
+      .with.property('message')
+      .that.includes('species (compartment) ~ 1;');
+
+    expect(() => {
+      cycle.sortExpressionsByContext('ode_', true);
+    }).to.throw(Error)
+      .with.property('message')
+      .that.includes('species (compartment);');
   });
 });

@@ -139,7 +139,16 @@ class Namespace extends Map {
         .sort()
         .reverse(); // independent should be at the beginning
     } catch(err) { // catch cycling
-      // remove constants and records with num
+      const hasCompartmentDependency = (component) => {
+        return includeCompartmentDep
+          && component.instanceOf('Species')
+          && component.compartment !== undefined
+          && !component.isAmount
+          && !component.isRule;
+      };
+
+      // Remove constants and records with numeric assignments, unless a
+      // concentration has an implicit dependency on its compartment.
       let infoLine = err.circular
         .map((id) => this.get(id))
         .filter((component) => {
@@ -147,11 +156,16 @@ class Namespace extends Map {
             && (
               (component.getAssignment(context) !== undefined && component.getAssignment(context).num === undefined)
               || (component.getAssignment('ode_') !== undefined && component.getAssignment('ode_').num === undefined)
+              || hasCompartmentDependency(component)
             ); 
         })
         .map((record) => {
           let assignment = record.getAssignment(context) || record.getAssignment('ode_');
-          return `  ${record.index} ~ ${assignment};`;
+          let compartment = hasCompartmentDependency(record)
+            ? ` (${record.compartment})`
+            : '';
+          let expression = assignment === undefined ? '' : ` ~ ${assignment}`;
+          return `  ${record.index}${compartment}${expression};`;
         })
         .join('\n');
       let error = new HetaLevelError(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
