@@ -6,6 +6,7 @@
 - Improved expression handling: user-defined functions are expanded recursively.
 - Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
 - Published the DynMS and Heta JSON schemas through the npm package exports heta-compiler/dynms-schema and heta-compiler/heta-json-schema; platformId is now optional in the Heta JSON schema.
+- fix errors in SBML import: variadic arguments
 - Updated dependencies to address known security vulnerabilities.
 
 ## 0.12.1
