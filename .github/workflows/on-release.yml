@@ -140,6 +140,7 @@ jobs:
           cd ./dist
           cp -Force heta-compiler.exe heta-compiler-win-x64.exe
           tar -czvf ./heta-compiler-windows-x64.tar.gz ./heta-compiler.exe
+          Compress-Archive -Path ./heta-compiler.exe -DestinationPath ./heta-compiler-windows-x64.zip -CompressionLevel Optimal
           cd ..
 
       - name: Get package version
@@ -186,6 +187,7 @@ jobs:
           files: |
             dist/heta-compiler-${{ steps.package_version.outputs.VERSION }}-win-x64-installer.msi
             dist/heta-compiler-windows-x64.tar.gz
+            dist/heta-compiler-windows-x64.zip
             dist/heta-compiler-win-x64.exe
 
   test-macos-arm64-release-asset:
@@ -272,11 +274,21 @@ jobs:
         run: |
           Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-win-x64.exe" -OutFile heta-compiler-win-x64.exe
 
+      - name: Install ZIP release asset
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/heta-compiler-windows-x64.zip" -OutFile heta-compiler-windows-x64.zip
+          Expand-Archive -LiteralPath heta-compiler-windows-x64.zip -DestinationPath heta-compiler-windows-x64
+
       - name: Check version
         run: |
           $actual = .\heta-compiler-win-x64.exe --version
           if ($actual -notlike "*$env:VERSION*") {
             Write-Error "Version mismatch: expected $env:VERSION, got $actual"
+            exit 1
+          }
+          $actualFromZip = .\heta-compiler-windows-x64\heta-compiler.exe --version
+          if ($actualFromZip -notlike "*$env:VERSION*") {
+            Write-Error "ZIP version mismatch: expected $env:VERSION, got $actualFromZip"
             exit 1
           }
 
