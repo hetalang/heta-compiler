@@ -76,6 +76,7 @@ if (-not $SkipValidation) {
     # Keep the warnings visible, but reserve a failing release job for invalid manifests.
     if ($validationExitCode -eq -1978335192) {
         Write-Warning 'WinGet manifest validation succeeded with warnings.'
+        $global:LASTEXITCODE = 0
     }
     elseif ($validationExitCode -ne 0) {
         throw "WinGet manifest validation failed with exit code $validationExitCode."
