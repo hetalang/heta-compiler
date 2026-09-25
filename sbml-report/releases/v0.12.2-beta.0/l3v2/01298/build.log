@@ -1,0 +1,14 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01298/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01298/01298-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[info]	Platform hash: 9be90e522ab75647fee3d7a5e07a053c8c52055d9092b34deef7f64af4fda179
+[info]	Setting references in elements, total length 98
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

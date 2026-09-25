@@ -1,0 +1,243 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-09-25T10:51:32.360Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "f75dba6ad3c90f211a3864672a5431191032f78d56170a7266457fe377f09553",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E0",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E1",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E10",
+    "trigger": "multitrig > 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E11",
+    "trigger": "multitrig > 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E2",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E3",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E4",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E5",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E6",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E7",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E8",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E9",
+    "trigger": "multitrig > 1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E0": "2",
+      "_E1": "0",
+      "_E2": "2",
+      "_E3": "0",
+      "_E4": "2",
+      "_E5": "0",
+      "_E6": "2",
+      "_E7": "0",
+      "_E8": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "multitrig"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E9": "x + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "x"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E10": "y + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "y"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E11": "z + 3",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "z"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acosh",
+    "math": "ln(x + sqrt(x ^ 2 - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acoth",
+    "math": "0.5 * ln((x + 1) / (x - 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "acsch",
+    "math": "ln(1 / x + sqrt(1 + 1 / x ^ 2))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asech",
+    "math": "ln((1 + sqrt(1 - x ^ 2)) / x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "asinh",
+    "math": "ln(x + sqrt(x ^ 2 + 1))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "atanh",
+    "math": "0.5 * ln((1 + x) / (1 - x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "cosh",
+    "math": "0.5 * (exp(x) + exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "coth",
+    "math": "1 / tanh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "csch",
+    "math": "1 / sinh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sech",
+    "math": "1 / cosh(x)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sign",
+    "math": "piecewise(-1, x < 0, 1, x > 0, 0)"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "sinh",
+    "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "tanh",
+    "math": "(exp(2 * x) - 1) / (exp(2 * x) + 1)"
+  }
+]

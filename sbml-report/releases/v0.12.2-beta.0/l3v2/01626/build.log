@@ -1,0 +1,24 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01626/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01626/01626-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	Q component does not exist which is not allowed for the "update" action.
+[error]	R component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: c659ef925c97c2d488134df6dc8686194ff5ba5d64f740abe957a69a42a396f1
+[info]	Setting references in elements, total length 110
+[error]	Component "Q" is not found in space "nameless" as expected in expression: S [ode_]= Q + R;
+[error]	Component "R" is not found in space "nameless" as expected in expression: S [ode_]= Q + R;
+[error]	Component "Q" is not found in space "nameless" as expected in expression: maxdiff [maxcheck]= abs(Q - R);
+[error]	Component "R" is not found in space "nameless" as expected in expression: maxdiff [maxcheck]= abs(Q - R);
+[error]	Component "Q" is not found in space "nameless" as expected in DSwitcher: "maxcheck"
+	abs(Q - R) > maxdiff;
+[error]	Component "R" is not found in space "nameless" as expected in DSwitcher: "maxcheck"
+	abs(Q - R) > maxdiff;
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

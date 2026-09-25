@@ -1,0 +1,17 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/00357/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/00357/00357-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	Function math "lessthan" should be a numeric expression.
+[error]	DSwitcher trigger "undefined::event1" should be a boolean expression.
+[info]	Platform hash: d1bbb9d56c0b1bd31edd06f37734e8d9563207daf65c9017e709a4a3eee0bd50
+[info]	Setting references in elements, total length 104
+[error]	No required "trigger" property for "event1" of DSwitcher.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

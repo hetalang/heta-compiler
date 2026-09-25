@@ -1,0 +1,16 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01770/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01770/01770-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[info]	Platform hash: 2debebf740c2dce40ecf47056afc1fd3882da1d94f0c5922c39c54c75ca4e2e8
+[info]	Setting references in elements, total length 100
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in DSwitcher: "E0"
+	S1 < (S1_stoich - 0.115);
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

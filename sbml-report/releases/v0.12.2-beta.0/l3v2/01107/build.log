@@ -1,0 +1,15 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01107/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01107/01107-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	Xref component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 9d60e224d30d0c8141ef63739641a06b7ffdcb5542f22160a5f552a7620668cd
+[info]	Setting references in elements, total length 97
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

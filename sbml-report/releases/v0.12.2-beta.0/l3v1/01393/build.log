@@ -1,0 +1,20 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01393/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01393/01393-sbml-l3v1.xml"...
+[error]	id must not be a reserved word, got "e". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	e component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: d92ac9dc97b3e6277a4ff875b9572b06d89bc16772fc83f917c470dae90621e7
+[info]	Setting references in elements, total length 96
+[error]	Record "a" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "b" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "d" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "f" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

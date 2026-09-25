@@ -1,0 +1,34 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/00958/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/00958/00958-sbml-l3v1.xml"...
+[info]	Platform hash: 623df1e464ed97da9ee29e30c63f4d31e196b21ca513074fc00e497dae8e7f53
+[info]	Setting references in elements, total length 118
+[info]	Checking for circular references in Records.
+[warn]	Units checking skipped. To turn it on set "unitsCheck: true" in declaration.
+[info]	Checking unit's terms.
+[info]	Start exporting to files, total: 2.
+[info]	Exporting to "results/l3v1/00958/canonical" of format "canonical"...
+[info]	Exporting to "results/l3v1/00958/dynms" of format "dynms"...
+
+ +-------------------------------------------------------------------+ 
+ | Internal "Heta compiler" error, contact the developers.           | 
+ | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
+ | or mail to: dev@insysbio.com                                      | 
+ +-------------------------------------------------------------------+ 
+
+
+TypeError: Cannot read properties of undefined (reading 'instanceOf')
+    at /home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:272:30
+    at _transform (/home/runner/work/heta-compiler/heta-compiler/node_modules/mathjs/lib/cjs/expression/node/Node.js:191:29)
+    at SymbolNode.transform (/home/runner/work/heta-compiler/heta-compiler/node_modules/mathjs/lib/cjs/expression/node/Node.js:198:16)
+    at _substitute (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:269:20)
+    at _substitute_and_simplify (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:262:27)
+    at /home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:49:39
+    at Array.map (<anonymous>)
+    at Namespace.makeDynMSModel (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:32:10)
+    at /home/runner/work/heta-compiler/heta-compiler/src/dynms-export/index.js:74:19
+    at Array.map (<anonymous>)

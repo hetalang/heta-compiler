@@ -1,0 +1,14 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01096/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01096/01096-sbml-l3v1.xml"...
+[error]	generatedId_0 component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 7a144f049ea2e7bea3fc050a9ffe02c4b322123a7c24774414a95f1fca16aaba
+[info]	Setting references in elements, total length 97
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
