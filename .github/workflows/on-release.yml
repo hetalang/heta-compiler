@@ -156,7 +156,7 @@ jobs:
           echo "MSI_VERSION=$msiVersion" >> $env:GITHUB_OUTPUT
 
       - name: Prepare WinGet manifests
-        run: .\build-winget\prepare-manifests.ps1 -InstallerPath dist\heta-compiler-windows-x64.zip
+        run: .\build-winget\prepare-manifests.ps1 -InstallerPath dist\heta-compiler-windows-x64.zip -Version "${{ steps.package_version.outputs.VERSION }}" -ReleaseTag "${{ github.event.release.tag_name }}"
 
       - name: Upload WinGet manifest draft
         uses: actions/upload-artifact@v4

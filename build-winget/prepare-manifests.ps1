@@ -71,7 +71,15 @@ if (-not $SkipValidation) {
     }
 
     & winget validate --manifest $manifestDirectory --disable-interactivity
-    Assert-LastExitCode 'WinGet manifest validation'
+    $validationExitCode = $LASTEXITCODE
+    # WinGet uses this non-zero exit code when validation succeeds with warnings.
+    # Keep the warnings visible, but reserve a failing release job for invalid manifests.
+    if ($validationExitCode -eq -1978335192) {
+        Write-Warning 'WinGet manifest validation succeeded with warnings.'
+    }
+    elseif ($validationExitCode -ne 0) {
+        throw "WinGet manifest validation failed with exit code $validationExitCode."
+    }
 }
 
 Write-Host "WinGet manifests prepared: $manifestDirectory"
