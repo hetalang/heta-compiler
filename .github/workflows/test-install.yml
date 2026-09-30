@@ -91,3 +91,31 @@ jobs:
           else
             echo "heta-compiler installed and version OK: $VERSION"
           fi
+
+  test_windows_winget:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get version
+        shell: bash
+        run: |
+          VERSION=$(jq -r .version package.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Install Heta Compiler
+        shell: bash
+        run: |
+          echo "Installing Heta Compiler $VERSION"
+          winget install --id HetaProject.HetaCompiler --exact --version="$VERSION" --accept-source-agreements --accept-package-agreements
+
+      - name: Check version
+        shell: bash
+        run: |
+          if [[ "$(heta --version)" != *"$VERSION"* ]]; then
+            echo "Version mismatch: expected $VERSION, got $(heta --version)"
+            exit 1
+          else
+            echo "heta-compiler installed and version OK: $VERSION"
+          fi
+
