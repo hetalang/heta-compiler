@@ -1,0 +1,23 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01531/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01531/01531-sbml-l3v1.xml"...
+[error]	undefined::E51 Cannot parse MathExpr properly. Value expected (char 11) " trig  > ()"
+[error]	undefined::E52 Cannot parse MathExpr properly. Value expected (char 11) " trig  > ()"
+[error]	undefined::E53 Cannot parse MathExpr properly. Unexpected end of expression (char 18) " trig  >  0  and "
+[error]	undefined::E54 Cannot parse MathExpr properly. Unexpected end of expression (char 22) " trig  >  0  and not "
+[error]	undefined::E55 Cannot parse MathExpr properly. Unexpected end of expression (char 22) " trig  >  0  and not "
+[info]	Platform hash: d3d7f97d7969f3941637323a3ba8f17827184c0105e68ca22b9a879e42958284
+[info]	Setting references in elements, total length 204
+[error]	No required "trigger" property for "E51" of DSwitcher.
+[error]	No required "trigger" property for "E52" of DSwitcher.
+[error]	No required "trigger" property for "E53" of DSwitcher.
+[error]	No required "trigger" property for "E54" of DSwitcher.
+[error]	No required "trigger" property for "E55" of DSwitcher.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

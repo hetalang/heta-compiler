@@ -1,0 +1,28 @@
+Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01112/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01112/01112-sbml-l3v1.xml"...
+[error]	id must not be a reserved word, got "e". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	a Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/start_ should not be empty string.
+    2. /assignments/start_ should be a string, number or null.
+[error]	b Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/start_ should not be empty string.
+    2. /assignments/start_ should be a string, number or null.
+[error]	c: Cannot parse MathExpr properly. Value expected (char 3) in "( ?  1  :  0 )"
+[error]	d: Cannot parse MathExpr properly. Value expected (char 3) in "( ?  1  :  0 )"
+[error]	e component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 649a9829c936bd1a65438bf7b66e789722e9275aeea4e34d2e3121b5004ad09e
+[info]	Setting references in elements, total length 94
+[error]	Record "a" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "b" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "c" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "d" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
