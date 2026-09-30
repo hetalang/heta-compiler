@@ -4,7 +4,7 @@
 
 ### MSI Installer (recommended)
 
-[Download -win-x64-installer.msi from release page](https://github.com/hetalang/heta-compiler/releases/latest) and install or update.
+On the [release page](https://github.com/hetalang/heta-compiler/releases/latest), download `heta-compiler-<version>-win-x64-installer.msi` and run it to install or update Heta Compiler.
 
 ### Chocolatey
 
@@ -43,7 +43,7 @@ Uninstall .deb package
 sudo dpkg -r heta-compiler
 ```
 
-### Other Linux systems
+### Other Linux systems (x64)
 
 Install/Update for all users (requires sudo privileges)
 ```bash
@@ -55,7 +55,7 @@ Uninstall for all users
 sudo rm /usr/local/bin/heta
 ```
 
-Install/Update for single user without sudo previleges
+Install/Update for single user without sudo privileges
 ```bash
 mkdir -p ~/bin
 wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-linux-x64
@@ -71,14 +71,14 @@ rm ~/bin/heta
 
 ## In macOS
 
-Standalone packages and the Homebrew formula are available for Apple Silicon (arm64) only.
-On Intel Macs, install the npm package as described above.
+Standalone packages and the Homebrew formula are available for Apple Silicon (arm64) only on macOS 13.5 or later.
 
 ### Homebrew package manager (recommended)
 
 If you have [Homebrew installed](https://brew.sh/), you can install Heta compiler using the following commands:
 ```bash
 brew tap hetalang/heta-compiler
+brew trust --formula hetalang/heta-compiler/heta-compiler
 brew install heta-compiler
 ```
 
@@ -97,7 +97,7 @@ brew uninstall heta-compiler
 
 Install/Update for all users (requires sudo privileges)
 ```bash
-sudo wget -O /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-arm64 && sudo chmod +x /usr/local/bin/heta
+sudo curl -L -o /usr/local/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-arm64 && sudo chmod +x /usr/local/bin/heta
 ```
 
 Uninstall for all users
@@ -105,10 +105,10 @@ Uninstall for all users
 sudo rm /usr/local/bin/heta
 ```
 
-Install/Update for single user without sudo previleges
+Install/Update for single user without sudo privileges
 ```bash
 mkdir -p ~/bin
-wget -O ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-arm64
+curl -L -o ~/bin/heta https://github.com/hetalang/heta-compiler/releases/latest/download/heta-compiler-macos-arm64
 chmod +x ~/bin/heta
 echo "export PATH=$PATH:~/bin" >> ~/.bashrc
 source ~/.bashrc
@@ -119,13 +119,21 @@ Uninstall for single user
 rm ~/bin/heta
 ```
 
-**Troubleshooting:**
+### Older macOS versions and Intel Macs
 
-In some cases you may need to install Rosetta to run the tool on MacOS. To install Rosetta, run the following command in the terminal:
+For other supported Macs, install the indicated Node.js version and then run:
 
 ```bash
-softwareupdate --install-rosetta
+npm i -g heta-compiler
 ```
+
+| Mac and macOS version | Installation method | Node.js version |
+| --- | --- | --- |
+| Apple Silicon, macOS 11.0–13.4 | npm | Node.js 22.x |
+| Intel, macOS 11.0–13.4 | npm | Node.js 22.x |
+| Intel, macOS 10.15 | npm | Node.js 20.x |
+
+The standalone binary and Homebrew formula do not support Intel Macs or macOS before 13.5; macOS 10.14 and earlier are unsupported.
 
 ## In NodeJS environment
 
