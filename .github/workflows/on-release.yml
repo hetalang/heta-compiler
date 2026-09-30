@@ -444,12 +444,49 @@ jobs:
             --arg repo_url "$REPO_URL" \
             --arg release_url "$RELEASE_URL" \
             '{
-              text: "A new release has been published",
-              sections: [{
-                activityTitle: ("**Release: [" + $release_name + "](" + $release_url + ")**"),
-                activitySubtitle: ("Repository: [" + $repo_name + "](" + $repo_url + ")"),
-                text: $release_body
+              type: "message",
+              attachments: [{
+                contentType: "application/vnd.microsoft.card.adaptive",
+                contentUrl: null,
+                content: {
+                  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                  type: "AdaptiveCard",
+                  version: "1.2",
+                  body: [
+                    {
+                      type: "TextBlock",
+                      text: "A new release has been published",
+                      weight: "Bolder",
+                      size: "Medium",
+                      wrap: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: ("Release: " + $release_name),
+                      weight: "Bolder",
+                      wrap: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: ("Repository: [" + $repo_name + "](" + $repo_url + ")"),
+                      wrap: true
+                    },
+                    {
+                      type: "TextBlock",
+                      text: $release_body,
+                      wrap: true
+                    }
+                  ],
+                  actions: [{
+                    type: "Action.OpenUrl",
+                    title: "Open release",
+                    url: $release_url
+                  }]
+                }
               }]
             }')
 
-          curl -X POST -H "Content-Type: application/json" -d "$payload" "$WEBHOOK_URL"
+          curl --fail-with-body --silent --show-error \
+            --write-out '\nTeams webhook HTTP status: %{http_code}\n' \
+            -X POST -H "Content-Type: application/json" \
+            -d "$payload" "$WEBHOOK_URL"
