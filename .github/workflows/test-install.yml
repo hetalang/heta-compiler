@@ -26,6 +26,7 @@ jobs:
         run: |
           echo "Installing latest Heta Compiler"
           brew tap hetalang/heta-compiler
+          brew trust --formula hetalang/heta-compiler/heta-compiler
           brew install heta-compiler
 
       - name: Check version
