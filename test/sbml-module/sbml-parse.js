@@ -135,3 +135,19 @@ describe('parse units', () => {
       ]);
   });
 });
+
+describe('unsupported SBML special numbers', () => {
+  it('rejects MathML infinity with an informative error', () => {
+    const sbml = `<?xml version="1.0"?><sbml><model><listOfParameters><parameter id="x" constant="false"/><\/listOfParameters><listOfInitialAssignments><initialAssignment symbol="x"><math><infinity/><\/math><\/initialAssignment><\/listOfInitialAssignments><\/model><\/sbml>`;
+
+    expect(() => SBMLParse(sbml))
+      .to.throw('SBML MathML <infinity/> is not supported. Heta Compiler supports finite numeric values only.');
+  });
+
+  it('rejects MathML notanumber with an informative error', () => {
+    const sbml = `<?xml version="1.0"?><sbml><model><listOfParameters><parameter id="x" constant="false"/><\/listOfParameters><listOfInitialAssignments><initialAssignment symbol="x"><math><notanumber/><\/math><\/initialAssignment><\/listOfInitialAssignments><\/model><\/sbml>`;
+
+    expect(() => SBMLParse(sbml))
+      .to.throw('SBML MathML <notanumber/> is not supported. Heta Compiler supports finite numeric values only.');
+  });
+});

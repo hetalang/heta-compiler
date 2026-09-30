@@ -218,9 +218,9 @@ function _toMathExpr(element, useParentheses = false) {
   } else if (element.name === 'pi') {
     return 'pi';
   } else if (element.name === 'infinity') {
-    return 'Infinity';
+    throw new HetaLevelError('SBML MathML <infinity/> is not supported. Heta Compiler supports finite numeric values only.');
   } else if (element.name === 'notanumber') {
-    return 'NaN';
+    throw new HetaLevelError('SBML MathML <notanumber/> is not supported. Heta Compiler supports finite numeric values only.');
   } else {
     throw new Error('Cannot parse MathML:' + JSON.stringify(element, null, 2));
   }
