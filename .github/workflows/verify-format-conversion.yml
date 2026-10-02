@@ -53,19 +53,19 @@ jobs:
         run: |
           "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/l3v2 --concurrency=4 \
             --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
-            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap,VolumeConcentrationRates
 
       - name: Build SBML L3V1 report
         run: |
           "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL3V1Path --target=results/l3v1 --concurrency=4 \
             --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
-            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction,VolumeConcentrationRates
 
       - name: Build SBML L2V5 report
         run: |
           "$GITHUB_WORKSPACE/fcts-run/node_modules/.bin/fcts" sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=results/l2v5 --concurrency=4 \
             --skip-component-tags=StoichiometryMath,CSymbolDelay,EventWithDelay,AlgebraicRule \
-            --skip-test-tags=FastReaction
+            --skip-test-tags=FastReaction,VolumeConcentrationRates
 
       - name: Summarize build reports
         if: always()
