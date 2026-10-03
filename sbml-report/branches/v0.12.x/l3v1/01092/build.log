@@ -2,12 +2,12 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01092/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01092/01092-sbml-l3v1.xml"...
-[error]	generatedId_0 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: e9dd37b53425ce7887889e409ce8788a19a55071dfaf6ef8f048f25f704bea23
-[info]	Setting references in elements, total length 102
+[error]	SBML <rateRule variable="S2"> is not supported for concentration species "S2". Convert the species and its rate rule to an amount-based formulation before import. when converting module "cases/semantic/01092/01092-sbml-l3v1.xml"
+[info]	Platform hash: 2e4ca5991d25d53f659bb463a1f59c5963434b9d4d3b13f98478ade79b34ae25
+[info]	Setting references in elements, total length 90
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

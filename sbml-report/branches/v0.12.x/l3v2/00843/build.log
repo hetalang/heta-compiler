@@ -2,12 +2,13 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/00843/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00843/00843-sbml-l3v2.xml"...
+[error]	SBML <rateRule variable="S4"> is not supported for concentration species "S4". Convert the species and its rate rule to an amount-based formulation before import. when converting module "cases/semantic/00843/00843-sbml-l3v2.xml"
 [error]	Function math "implies" should be a numeric expression.
-[info]	Platform hash: 52bc6d1500d2921df0095614aaa4ca5b7c946f0cbb70a4a1623ede566dc2de2d
-[info]	Setting references in elements, total length 101
+[info]	Platform hash: d4e488cf817ed9547576883ce148bc1eab5a6e4c1e4eeac22d6a3f50d7e7496d
+[info]	Setting references in elements, total length 92
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

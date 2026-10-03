@@ -2,14 +2,13 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01813/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01813/01813-sbml-l3v2.xml"...
+[error]	SBML MathML <notanumber/> is not supported. Heta Compiler supports finite numeric values only. when converting module "cases/semantic/01813/01813-sbml-l3v2.xml"
 [error]	Function math "implies" should be a numeric expression.
-[error]	id must not be a reserved word, got "NaN". Reserved words list: 
-	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
-[info]	Platform hash: e3da3bf3c7a161f30b333a4c187400cfc2306279a9bef64d8c38ece20be28aa7
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: d4e488cf817ed9547576883ce148bc1eab5a6e4c1e4eeac22d6a3f50d7e7496d
+[info]	Setting references in elements, total length 92
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.
