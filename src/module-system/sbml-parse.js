@@ -190,9 +190,10 @@ function jsbmlToQArr(JSBML, options = {}) {
       let target = x.attributes?.variable;
       let species = qArr.find((q) => q.id === target && q.class === 'Species');
       if (species && !species.isAmount) {
-        throw new HetaLevelError(
-          `SBML <rateRule variable="${target}"> is not supported for concentration species "${target}". `
-          + 'Convert the species and its rate rule to an amount-based formulation before import.'
+        options.logger?.warn(
+          `SBML <rateRule variable="${target}"> targets concentration species "${target}" in compartment "${species.compartment}". `
+          + `It is imported as Process "${target}_proc"; exported simulations may differ from SBML semantics, especially when the compartment changes.`,
+          { type: 'SBMLImportWarning', target, compartment: species.compartment }
         );
       }
       let qArr_add = rateRuleToQ(x);
