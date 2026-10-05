@@ -67,5 +67,49 @@
       "events": [],
       "observables": []
     }
+  ],
+  "scenarios": [
+    {
+      "id": "scn1",
+      "model": "nameless",
+      "tspan": [
+        0,
+        200
+      ]
+    },
+    {
+      "id": "scn2",
+      "model": "nameless",
+      "tspan": [
+        0,
+        12
+      ],
+      "parameters": {
+        "k1": 0.001,
+        "xxx": 2
+      },
+      "saveat": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "observables": [
+        "x1",
+        "x2"
+      ]
+    },
+    {
+      "id": "scn3",
+      "model": "nameless",
+      "tspan": [
+        0,
+        12
+      ]
+    }
   ]
 }

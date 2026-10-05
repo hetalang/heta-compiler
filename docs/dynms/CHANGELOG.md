@@ -3,6 +3,7 @@
 ## 0.2.2
 
 - add reserved words: "Pi", "ExponentialE", "NaN", "Infinity", "True", "False"
+- add scenarios
 
 ## 0.2.1
 

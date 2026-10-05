@@ -51,8 +51,7 @@ class DynMS extends AbstractExport {
       platformVersion: this._builder.version,
       platformNotes: this._builder.notes,
       license: this._builder.license,
-      models: [],
-      // scenarios: []
+      models: []
     };
 
     // select expression string generator
@@ -69,10 +68,38 @@ class DynMS extends AbstractExport {
         logger.error(msg, {});
     }
 
-    DynMSObj.models = this.selectedNamespaces()
+    let selectedNamespaces = this.selectedNamespaces();
+    DynMSObj.models = selectedNamespaces
       .map(([spaceName, ns]) => {
         return ns.makeDynMSModel(this.exprFormat, expRenderer);
       });
+
+    let selectedModels = new Set(selectedNamespaces.map(([spaceName]) => spaceName));
+    let scenarios = [...this._builder.container.scenarioStorage.values()]
+      .filter((scenario) => selectedModels.has(scenario.model))
+      .flatMap((scenario) => {
+        if (!scenario.tspan) {
+          logger.error(
+            `Scenario "${scenario.id}" cannot be exported to DynMS because "tspan" is required.`,
+            {type: 'DynMSScenarioError', scenario: scenario.id}
+          );
+          return [];
+        }
+
+        let dynmsScenario = {
+          id: scenario.id,
+          model: scenario.model,
+          tspan: scenario.tspan
+        };
+        if (scenario.parameters) dynmsScenario.parameters = scenario.parameters;
+        if (scenario.saveat) dynmsScenario.saveat = scenario.saveat;
+        if (scenario.observables) dynmsScenario.observables = scenario.observables;
+        if (scenario.events_active) dynmsScenario.eventsActive = scenario.events_active;
+        if (scenario.events_save) dynmsScenario.eventsSave = scenario.events_save;
+
+        return [dynmsScenario];
+      });
+    if (scenarios.length > 0) DynMSObj.scenarios = scenarios;
 
     return [{
       content: JSON.stringify(DynMSObj, null, 2),

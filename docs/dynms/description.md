@@ -42,7 +42,24 @@ Top-level required fields:
 - `dynms`: DynMS version; currently must be `"0.2.2"`;
 - `models`: non-empty array of model definitions.
 
-The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`.
+The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, `license`, and `scenarios`. If `generator` is present, it must contain both `name` and `version`.
+
+`scenarios` is an optional array of simulation-run specifications. A scenario is separate from a model, so multiple scenarios can refer to the same model.
+
+```json
+{
+  "id": "baseline",
+  "model": "model1",
+  "tspan": [0, 200],
+  "parameters": { "kabs": 0.01 },
+  "saveat": [0, 12, 24],
+  "observables": ["x"],
+  "eventsActive": { "dose": true },
+  "eventsSave": { "dose": [true, false] }
+}
+```
+
+Every scenario requires `id`, `model`, and `tspan`. `model` references a model identifier, and `tspan` is the inclusive simulation interval `[start, stop]` with `start < stop`. `parameters` overrides values of model constants for that run. `saveat` selects output times, `observables` selects output symbols, `eventsActive` overrides event activity, and `eventsSave` selects whether to save immediately before and after an event. All fields except `id`, `model`, and `tspan` are optional.
 
 ---
 

@@ -44,6 +44,7 @@ describe('Knit correct scenarios', () => {
       {
         id: 'scn2',
         action: 'setScenario',
+        tspan: [0,100],
         saveat: [0,20,30,100],
         parameters: {k1: 20, k2: 1e-3},
         observables: ['x1', 'x2', 'pr1'],
@@ -83,6 +84,7 @@ describe('Knit incorrect scenarios', () => {
       {
         id: 'scn2',
         action: 'setScenario',
+        tspan: [0,100],
         saveat: [0,20,30,100],
         parameters: {x1: 20, k3: 1e-3, sw1: 1.1},
         observables: ['x3', 'k2', 'sw1'],

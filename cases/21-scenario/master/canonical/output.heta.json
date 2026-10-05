@@ -10,7 +10,7 @@
     "platformVersion": "v0.1.0",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "8d6d0e657e39f27104b1793facc1a0a82e38781b529ea1673e672892beffb836",
+    "hashSum": "304a3d161f864fedf8cf6f5b10f084218832d56fbd0e10b158908bff9f16d8be",
     "hashAlgorithm": "sha256"
   },
   {
@@ -95,6 +95,10 @@
       "k1": 0.001,
       "xxx": 2
     },
+    "tspan": [
+      0,
+      12
+    ],
     "saveat": [
       0,
       1,

@@ -19,6 +19,7 @@ scn1 #setScenario {
 scn2 #setScenario {
   model: nameless,
   parameters: {k1: 1e-3, xxx: 2},
+  tspan: [0, 12],
   saveat: [0, 1, 2, 4, 6, 8, 10, 12],
   observables: [x1, x2],
   //events_active: {sw1: false, sw2: true},
