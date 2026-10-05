@@ -1,8 +1,12 @@
 # DynMS Change Log
 
+## 0.2.2
+
+- add reserved words: "Pi", "ExponentialE", "NaN", "Infinity", "True", "False"
+
 ## 0.2.1
 
-- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.2/src/dynms/dynms.schema.json`
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json`
 - `t` is reserved as a model-component identifier.
 - Constants are now numeric-only.
 

@@ -11,7 +11,7 @@ The main goals of DynMS are:
 - support deterministic simulation semantics;
 - simplify testing and validation across simulation platforms.
 
-The schema for DynMS is available at: https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.2/src/dynms/dynms.schema.json
+The schema for DynMS is available at: https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json
 
 ---
 
@@ -21,7 +21,7 @@ Minimal valid DynMS structure:
 
 ```json
 {
-  "dynms": "0.2.1",
+  "dynms": "0.2.2",
   "models": [
     {
       "id": "model1",
@@ -39,7 +39,7 @@ Minimal valid DynMS structure:
 
 Top-level required fields:
 
-- `dynms`: DynMS version; currently must be `"0.2.1"`;
+- `dynms`: DynMS version; currently must be `"0.2.2"`;
 - `models`: non-empty array of model definitions.
 
 The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`.
@@ -394,7 +394,7 @@ Every reference must resolve within the same model and point to an object type a
 
 - Symbols in expressions must resolve to a constant, state, assignment, or the special time symbol `t`, unless a more restrictive rule below applies.
 - `timeEvents[].actions[].state` and `events[].actions[].state` must reference an existing dynamic or static state.
-- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.1.
+- `observables[].symbol` must reference an existing dynamic state, static state, or assignment. Constants and events cannot be observables in DynMS 0.2.2.
 
 ### 7.4 Dynamic states and derivatives
 
