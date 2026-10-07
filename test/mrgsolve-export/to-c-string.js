@@ -40,6 +40,14 @@ describe('Expession exports to mrgsolve', () => {
     let expr = Expression.fromString('exp(-kel*t)');
     expect(expr.toCString()).to.be.equal('exp(-kel * TIME)');
   });
+  it('toCString() for "logbase(x, b)"', () => {
+    let expr = Expression.fromString('logbase(x, b)');
+    expect(expr.toCString()).to.be.equal('log(x) / log(b)');
+  });
+  it('toCString() for "factorial(x)"', () => {
+    let expr = Expression.fromString('factorial(x)');
+    expect(expr.toCString()).to.be.equal('tgamma(x + 1.0)');
+  });
   it('toCString() for "x++y"', () => {
     let expr = Expression.fromString('x++y');
     expect(expr.toCString()).to.be.equal('x + y');

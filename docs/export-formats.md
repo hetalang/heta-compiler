@@ -589,7 +589,7 @@ _Skipped cell means no conversion_
 |`floor(x)`| | | | |
 |`ln(x)`| |`NaNMath.log(x)`| | |
 |`log(x)`| |`NaNMath.log(x)`| |`log(x)`|
-|`logbase(x, base)`|`log(x) / log(base)`|`NaNMath.log(base, x)`| |`(log(x)/log(base))`|
+|`logbase(x, base)`|`log(x) / log(base)`|`NaNMath.log(base, x)`|`log(x) / log(base)`|`(log(x)/log(base))`|
 |`log10(x)`| |`NaNMath.log10(x)`| | |
 |`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`| |`(log(x)/log(2))`|
 |`multiply(x, y)`|`x * y`|`*(x, y)`| | |
@@ -603,7 +603,7 @@ _Skipped cell means no conversion_
 |`max(x, y, z)`|`max3(x, y, z)`| |`std::max(x, y, z)`|`max([x, y, z])`|
 |`min(x, y)`|`min2(x, y)`| |`std::min(x, y)`|`min(x, y)`|
 |`min(x, y, z)`|`min3(x, y, z)`| |`std::min(x, y, z)`|`min([x, y, z])`|
-|`factorial(n)`| |`fact(n)`| | |
+|`factorial(n)`| |`fact(n)`|`tgamma(n + 1.0)`| |
 |`ifgt(x, y, z1, z2)`| |`x > y ? z1 : z2`| |`tern__(x>y, z1, z2)`|
 |`ifge(x, y, z1, z2)`| |`x >= y ? z1 : z2`| |`tern__(x>=y, z1, z2)`|
 |`iflt(x, y, z1, z2)`| |`x < y ? z1 : z2`| |`tern__(x<y, z1, z2)`|

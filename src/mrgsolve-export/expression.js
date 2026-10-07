@@ -61,6 +61,13 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
           .join(', ');
         return `std::min(${args})`;
       }
+      if (node.fn.name === 'logbase') {
+        let args = node.args.map((arg) => arg.toString(options));
+        return `log(${args[0]}) / log(${args[1]})`;
+      }
+      if (node.fn.name === 'factorial') {
+        return `tgamma(${node.args[0].toString(options)} + 1.0)`;
+      }
       if (node.fn.name === 'piecewise') {
         let msg = `mrgsolve format does not support "piecewise" function, got "${node.toString()}"`;
         logger && logger.error(msg);
