@@ -7,7 +7,7 @@
 - Added the experimental expression-valued `priority` property to switchers.
 - Changed component validation and defaults: `@TimeSwitcher.start` is required in concrete namespaces, custom `@TimeScale` components require `slope` and `intercept`, and `reversible` is no longer implicitly added to processes and reactions.
 - Tightened namespace and table-module handling: `#importNS` validates prefixes and preserves the destination time scale `t`; table Boolean fields accept only `true`, `false`, `0`, or `1`, and switcher `active` is included in table output.
-- Improved expression handling: user-defined functions are expanded recursively, Boolean result validation works through function calls, and literal `0`/`1` is normalized only in Boolean contexts.
+- Improved expression handling: user-defined functions are expanded recursively, Boolean result validation works through function calls, and literal `0`/`1` is normalized only in Boolean contexts; fixed a crash when variadic functions are used inside `#defineFunction`.
 - Updated the bundled `qsp-functions.heta`: inverse hyperbolic helpers now use the `asinh`/`acosh` naming family, and new `quotient`, `rem`, and `implies` helpers were added.
 - Improved **SBML import** compatibility: variadic arithmetic and logical MathML operators are supported, event `<priority>` is imported as an expression, Level 2 defaults are handled correctly, imported identifiers are renamed safely, and generated event/rate/local-parameter identifiers are collision-safe.
 - SBML import now rejects required Level 3 extension packages and unsupported semantics instead of silently discarding them, including event `<delay>`, `CSymbolDelay`, and references to `SpeciesReference` identifiers in MathML. Events without a trigger no longer create invalid switchers.
@@ -17,7 +17,9 @@
 - Published the DynMS and Heta JSON schemas through the npm package exports `heta-compiler/dynms-schema` and `heta-compiler/heta-json-schema`; `platformId` is now optional in the Heta JSON schema.
 - Removed the experimental ModelingToolkit (`MT`) export format.
 - Removed inline `#export` actions. Define exports in the declaration file's `export` array or with the CLI `--export` option.
-- Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
+- Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2, updated to use Format Conversion Test Suite 0.2.0.
+- Improved installation guidance and automated installation checks for Homebrew and WinGet; clarified supported macOS versions and npm installation options for older macOS and Intel Macs.
+- Updated Teams release notifications to use Adaptive Cards with a link to the release.
 - Improved circular-dependency diagnostics by showing implicit species compartment normalization in reported cycles.
 - Updated dependencies to address known security vulnerabilities.
 
