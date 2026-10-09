@@ -5,6 +5,7 @@
 - Updated **DynMS export** to version 0.2.2: added exported simulation scenarios and reserved the identifiers `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False`.
 - Improved **SBML import**: imports of rate rules for concentration species now complete with a warning; reports unsupported MathML `infinity` and `notanumber`.
 - Fixed **mrgsolve export** of arbitrary-base logarithms and factorials.
+- Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
 
 ## 0.12.2
 
