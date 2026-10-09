@@ -38,6 +38,27 @@ jobs:
         env:
           CI: true
 
+  upload-schemas-release-asset:
+    needs: verify-source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Build schemas archive
+        run: |
+          tar -czf schemas.tar.gz \
+            -C src/dynms dynms.schema.json \
+            -C ../json-export heta.json.schema.json
+
+      - name: Upload schemas release asset
+        uses: softprops/action-gh-release@v3
+        with:
+          overwrite_files: true
+          fail_on_unmatched_files: true
+          files: schemas.tar.gz
+
   upload-macos-arm64-release-asset:
     needs: verify-source
     runs-on: macos-latest

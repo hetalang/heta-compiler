@@ -22,6 +22,7 @@
 - Updated Teams release notifications to use Adaptive Cards with a link to the release.
 - Improved circular-dependency diagnostics by showing implicit species compartment normalization in reported cycles.
 - Updated dependencies to address known security vulnerabilities.
+- Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
 
 ## 0.12.1
 
