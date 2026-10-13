@@ -74,7 +74,7 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "logbase(8, 2)"', () => {
     let expr = Expression.fromString('logbase(8, 2)');
-    expect(expr.toJuliaString()).to.be.equal('NaNMath.log(2e+0, 8e+0)');
+    expect(expr.toJuliaString()).to.be.equal('(NaNMath.log(8e+0) / NaNMath.log(2e+0))');
   });
   it('toJuliaString() for "log10(100)"', () => {
     let expr = Expression.fromString('log10(100)');
@@ -94,7 +94,7 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "factorial(x*y)"', () => {
     let expr = Expression.fromString('factorial(x*y)');
-    expect(expr.toJuliaString()).to.be.equal('fact(x * y)');
+    expect(expr.toJuliaString()).to.be.equal('SpecialFunctions.gamma((x * y) + 1)');
   });
   it('toJuliaString() for "ceil(x*y)"', () => {
     let expr = Expression.fromString('ceil(x*y)');
