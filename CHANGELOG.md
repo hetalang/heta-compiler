@@ -6,6 +6,7 @@
 - Improved **SBML import**: imports of rate rules for concentration species now complete with a warning; reports unsupported MathML `infinity` and `notanumber`.
 - Fixed **mrgsolve export** of arbitrary-base logarithms and factorials.
 - Fixed **Julia export**: `logbase(x, base)` now uses `(NaNMath.log(x) / NaNMath.log(base))`; `factorial(x)` now uses `SpecialFunctions.gamma((x) + 1)`.
+- Fixed **Julia export** for models without dynamic records: the dummy ODE state now has a non-steady-state flag and is unpacked consistently in the RHS, output function, and event callbacks.
 - Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
 
 ## 0.12.2
