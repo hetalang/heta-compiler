@@ -241,7 +241,7 @@ function _toNumericExpr(element, useParentheses = false) {
   if (element.name === 'math') {
     return _toNumericExpr(element.elements[0]);
   }
-  if (element.name === 'apply' && element.elements[0].name in ['gt', 'geq']) {
+  if (element.name === 'apply' && ['gt', 'geq'].includes(element.elements[0].name)) {
     let one = _toMathExpr(element.elements[1], true);
     let two = _toMathExpr(element.elements[2], true);
     return `${one} - ${two}`;
