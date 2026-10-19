@@ -7,28 +7,40 @@
 - Added the experimental expression-valued `priority` property to switchers.
 - Changed component validation and defaults: `@TimeSwitcher.start` is required in concrete namespaces, custom `@TimeScale` components require `slope` and `intercept`, and `reversible` is no longer implicitly added to processes and reactions.
 - Tightened namespace and table-module handling: `#importNS` validates prefixes and preserves the destination time scale `t`; table Boolean fields accept only `true`, `false`, `0`, or `1`, and switcher `active` is included in table output.
-- Improved expression handling: user-defined functions are expanded recursively, Boolean result validation works through function calls, and literal `0`/`1` is normalized only in Boolean contexts; fixed a crash when variadic functions are used inside `#defineFunction`.
+- Improved expression handling: Boolean result validation works through function calls, and literal `0`/`1` is normalized only in Boolean contexts; fixed a crash when variadic functions are used inside `#defineFunction`.
 - Updated the bundled `qsp-functions.heta`: inverse hyperbolic helpers now use the `asinh`/`acosh` naming family, and new `quotient`, `rem`, and `implies` helpers were added.
-- Improved **SBML import** compatibility: variadic arithmetic and logical MathML operators are supported, event `<priority>` is imported as an expression, Level 2 defaults are handled correctly, imported identifiers are renamed safely, and generated event/rate/local-parameter identifiers are collision-safe.
+- Improved **SBML import** compatibility: event `<priority>` is imported as an expression, Level 2 defaults are handled correctly, imported identifiers are renamed safely, and generated event/rate/local-parameter identifiers are collision-safe.
 - SBML import now rejects required Level 3 extension packages and unsupported semantics instead of silently discarding them, including event `<delay>`, `CSymbolDelay`, and references to `SpeciesReference` identifiers in MathML. Events without a trigger no longer create invalid switchers.
 - Improved **SBML export** correctness for special numeric values, inverse trigonometric functions, `sign()`, optional `reversible`, empty events, and numeric switcher priorities in L3V1/L3V2.
-- Updated **DynMS export** to version 0.3.0: models declare `timeVariable` explicitly, so `t` is no longer globally reserved; constants are numeric-only, extended numeric values are preserved, special state initial values remain expressions, and event priority is an optional expression without a default.
-- DynMS schema now rejects `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers, while permitting `t` under the 0.3.0 time-variable rules.
-- DynMS export now includes selected Heta scenarios and their run options; `#setScenario` requires `tspan` even when `saveat` is provided.
-- Fixed Julia export of `logbase(x, base)` and `factorial(x)` to use valid `NaNMath.log` and `SpecialFunctions.gamma` calls.
-- Fixed Julia export for models without dynamic records: the dummy ODE state is included in the non-steady-state flags and unpacked in generated callbacks.
+- Updated **DynMS export** to version 0.3.0: models declare `timeVariable` explicitly, so `t` is no longer globally reserved; extended numeric values are preserved, special state initial values remain expressions, and event priority is an optional expression without a default.
+- `#setScenario` requires `tspan` even when `saveat` is provided.
 - Unit hashes now use the `units_` prefix, preventing generated identifiers from starting with an underscore.
-- Published the DynMS and Heta JSON schemas through the npm package exports `heta-compiler/dynms-schema` and `heta-compiler/heta-json-schema`; `platformId` is now optional in the Heta JSON schema.
 - Removed the experimental ModelingToolkit (`MT`) export format.
 - Removed inline `#export` actions. Define exports in the declaration file's `export` array or with the CLI `--export` option.
-- Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2, updated to use Format Conversion Test Suite 0.2.0.
+- Updated the automated SBML conversion reproducibility reports to use Format Conversion Test Suite 0.2.0.
 - Improved installation guidance and automated installation checks for Homebrew and WinGet; clarified supported macOS versions and npm installation options for older macOS and Intel Macs.
 - Updated Teams release notifications to use Adaptive Cards with a link to the release.
 - Improved circular-dependency diagnostics by showing implicit species compartment normalization in reported cycles.
-- Updated dependencies to address known security vulnerabilities.
-- Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
 - Added a Windows ZIP release asset and draft WinGet manifests, with validation and a ZIP execution check in the release workflow.
-- SBML import now warns when a rate rule targets a concentration species, since the generated process may change simulation semantics; format-conversion reports exclude `VolumeConcentrationRates` cases.
+- Format-conversion reports exclude `VolumeConcentrationRates` cases.
+
+## 0.12.3
+
+- Updated **DynMS export** to version 0.2.2: added exported simulation scenarios and reserved the identifiers `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False`.
+- Improved **SBML import**: imports of rate rules for concentration species now complete with a warning; reports unsupported MathML `infinity` and `notanumber`.
+- Fixed **mrgsolve export** of arbitrary-base logarithms and factorials.
+- Fixed **Julia export**: `logbase(x, base)` now uses `(NaNMath.log(x) / NaNMath.log(base))`; `factorial(x)` now uses `SpecialFunctions.gamma((x) + 1)`.
+- Fixed **Julia export** for models without dynamic records: the dummy ODE state now has a non-steady-state flag and is unpacked consistently in the RHS, output function, and event callbacks.
+- Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
+
+## 0.12.2
+
+- Updated DynMS export to version 0.2.1: `t` is reserved as a model-component identifier; constants are numeric-only.
+- Improved expression handling: user-defined functions are expanded recursively.
+- Added automated SBML conversion reproducibility reports for L2V5, L3V1, and L3V2.
+- Published the DynMS and Heta JSON schemas through the npm package exports heta-compiler/dynms-schema and heta-compiler/heta-json-schema; platformId is now optional in the Heta JSON schema.
+- fix errors in SBML import: variadic arguments
+- Updated dependencies to address known security vulnerabilities.
 
 ## 0.12.1
 
