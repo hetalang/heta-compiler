@@ -24,6 +24,7 @@
 - Updated dependencies to address known security vulnerabilities.
 - Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
 - Added a Windows ZIP release asset and draft WinGet manifests, with validation and a ZIP execution check in the release workflow.
+- SBML import now warns when a rate rule targets a concentration species, since the generated process may change simulation semantics; format-conversion reports exclude `VolumeConcentrationRates` cases.
 
 ## 0.12.1
 

@@ -211,7 +211,16 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'rateRule')
     .forEach((x) => {
+      let target = resolve(x.attributes?.variable);
+      let species = qArr.find((q) => q.id === target && q.class === 'Species');
       let qArr_add = rateRuleToQ(x, resolve, allocator, created);
+      if (species && !species.isAmount) {
+        options.logger?.warn(
+          `SBML <rateRule variable="${x.attributes?.variable}"> targets concentration species "${x.attributes?.variable}" in compartment "${species.compartment}". `
+          + `It is imported as Process "${qArr_add[0].id}"; exported simulations may differ from SBML semantics, especially when the compartment changes.`,
+          { type: 'SBMLImportWarning', target: x.attributes?.variable, compartment: species.compartment }
+        );
+      }
       qArr = qArr.concat(qArr_add);
     });
 

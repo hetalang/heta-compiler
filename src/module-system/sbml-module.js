@@ -19,7 +19,7 @@ function sbmlLoader(fileContent, _options, logger){
 
   let fileText = fileContent.toString('utf-8');
 
-  let { qArr, renamed, created } = SBMLParseDetailed(fileText, options);
+  let { qArr, renamed, created } = SBMLParseDetailed(fileText, { ...options, logger });
   let renamedCount = Object.keys(renamed).length;
   let createdCount = created.length;
 

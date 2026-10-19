@@ -281,6 +281,33 @@ describe('SBML-import generated identifiers', () => {
   });
 });
 
+describe('SBML rate rules for concentration species', () => {
+  it('warns through the module logger and keeps importing the rule', () => {
+    let xml = `<sbml level="3" version="1"><model><listOfCompartments><compartment id="cell" size="1"/></listOfCompartments><listOfSpecies><species id="_s" compartment="cell" initialConcentration="1"/><species id="amount" compartment="cell" hasOnlySubstanceUnits="true" initialAmount="1"/></listOfSpecies><listOfParameters><parameter id="p" value="1"/></listOfParameters><listOfRules><rateRule variable="_s"><math><cn>1</cn></math></rateRule><rateRule variable="amount"><math><cn>2</cn></math></rateRule><rateRule variable="p"><math><cn>3</cn></math></rateRule></listOfRules></model></sbml>`;
+    let logs = [];
+    let builder = new Builder(
+      { id: 'test', options: {}, importModule: { type: 'sbml', source: 'model.xml' }, export: [] },
+      () => Buffer.from(xml),
+      () => {},
+      [(level, message, details) => logs.push({ level, message, details })]
+    );
+
+    builder.run();
+
+    expect(builder.logger.hasErrors).to.equal(false);
+    let warnings = logs.filter((log) => log.details?.type === 'SBMLImportWarning');
+    expect(warnings).to.have.length(1);
+    expect(warnings[0]).to.deep.include({
+      level: 'warn',
+      details: { type: 'SBMLImportWarning', target: '_s', compartment: 'cell' }
+    });
+    expect(warnings[0].message).to.include('Process "rate_sbml__s_1"');
+    expect(warnings[0].message).to.include('exported simulations may differ from SBML semantics');
+    expect(logs.find((log) => log.details?.type === 'SBMLImportIdentifiers').details.created)
+      .to.include('rate_sbml__s_1');
+  });
+});
+
 describe('unsupported SBML event features', () => {
   it('rejects delayed events with an informative message', () => {
     let xml = `<sbml level="3" version="1"><model><listOfEvents><event id="delayed_event"><trigger><math><true/></math></trigger><delay><math><cn>2</cn></math></delay></event></listOfEvents></model></sbml>`;
