@@ -2,20 +2,24 @@
 
 ## 0.3.0
 
-- Added optional top-level `scenarios` with a required `tspan` for each scenario.
-- Reserved `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers; `t` remains available through the model-level `timeVariable` declaration.
 - Expressions are direct MathJSON values. The legacy `{ "expr": ..., "format": "math-json" }` wrapper and alternate expression formats were removed from DynMS.
 - Added required model-level `timeVariable` with an `id` that identifies simulation time in expressions.
 - Removed the globally reserved identifier `t`. Simulation time is now resolved through `timeVariable.id`.
+- Extended numeric constants and MathJSON literals use `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}`. The exporter also preserves special state initial values as MathJSON expressions.
+- `timeEvents[].priority` and `events[].priority` are optional expressions. The default value `0` was removed, and the exporter omits priority when it is not set.
+
+## 0.2.2
+
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json`
+- Reserved `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers.
+- Added optional top-level `scenarios` with a required `tspan` for each scenario.
 
 ## 0.2.1
 
-- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json`
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.2/src/dynms/dynms.schema.json`
 - The `dynms` field now must be exactly `"0.2.1"`.
 - `t` is reserved for simulation time and cannot be used as a model identifier.
-- `constants[].value` accepts only finite JSON numbers or extended numeric objects. Arbitrary expression objects are no longer permitted.
-- Extended numeric constants and MathJSON literals use `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}`. The exporter also preserves special state initial values as MathJSON expressions.
-- `timeEvents[].priority` and `events[].priority` are optional expressions. The default value `0` was removed, and the exporter omits priority when it is not set.
+- `constants[].value` accepts only JSON numbers. Arbitrary expression objects are no longer permitted.
 
 ## 0.2.0
 
