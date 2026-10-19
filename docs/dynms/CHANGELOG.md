@@ -2,6 +2,7 @@
 
 ## 0.3.0
 
+- Reserved `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers; `t` remains available through the model-level `timeVariable` declaration.
 - Expressions are direct MathJSON values. The legacy `{ "expr": ..., "format": "math-json" }` wrapper and alternate expression formats were removed from DynMS.
 - Added required model-level `timeVariable` with an `id` that identifies simulation time in expressions.
 - Removed the globally reserved identifier `t`. Simulation time is now resolved through `timeVariable.id`.

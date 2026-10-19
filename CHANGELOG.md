@@ -13,6 +13,7 @@
 - SBML import now rejects required Level 3 extension packages and unsupported semantics instead of silently discarding them, including event `<delay>`, `CSymbolDelay`, and references to `SpeciesReference` identifiers in MathML. Events without a trigger no longer create invalid switchers.
 - Improved **SBML export** correctness for special numeric values, inverse trigonometric functions, `sign()`, optional `reversible`, empty events, and numeric switcher priorities in L3V1/L3V2.
 - Updated **DynMS export** to version 0.3.0: models declare `timeVariable` explicitly, so `t` is no longer globally reserved; constants are numeric-only, extended numeric values are preserved, special state initial values remain expressions, and event priority is an optional expression without a default.
+- DynMS schema now rejects `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers, while permitting `t` under the 0.3.0 time-variable rules.
 - Unit hashes now use the `units_` prefix, preventing generated identifiers from starting with an underscore.
 - Published the DynMS and Heta JSON schemas through the npm package exports `heta-compiler/dynms-schema` and `heta-compiler/heta-json-schema`; `platformId` is now optional in the Heta JSON schema.
 - Removed the experimental ModelingToolkit (`MT`) export format.
