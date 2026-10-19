@@ -12,17 +12,13 @@
 - Improved **SBML import** compatibility: event `<priority>` is imported as an expression, Level 2 defaults are handled correctly, imported identifiers are renamed safely, and generated event/rate/local-parameter identifiers are collision-safe.
 - SBML import now rejects required Level 3 extension packages and unsupported semantics instead of silently discarding them, including event `<delay>`, `CSymbolDelay`, and references to `SpeciesReference` identifiers in MathML. Events without a trigger no longer create invalid switchers.
 - Improved **SBML export** correctness for special numeric values, inverse trigonometric functions, `sign()`, optional `reversible`, empty events, and numeric switcher priorities in L3V1/L3V2.
-- Updated **DynMS export** to version 0.3.0: models declare `timeVariable` explicitly, so `t` is no longer globally reserved; extended numeric values are preserved, special state initial values remain expressions, and event priority is an optional expression without a default.
-- `#setScenario` requires `tspan` even when `saveat` is provided.
+- Updated **DynMS export** to version 0.3.0
 - Unit hashes now use the `units_` prefix, preventing generated identifiers from starting with an underscore.
 - Removed the experimental ModelingToolkit (`MT`) export format.
 - Removed inline `#export` actions. Define exports in the declaration file's `export` array or with the CLI `--export` option.
-- Updated the automated SBML conversion reproducibility reports to use Format Conversion Test Suite 0.2.0.
 - Improved installation guidance and automated installation checks for Homebrew and WinGet; clarified supported macOS versions and npm installation options for older macOS and Intel Macs.
 - Updated Teams release notifications to use Adaptive Cards with a link to the release.
 - Improved circular-dependency diagnostics by showing implicit species compartment normalization in reported cycles.
-- Added a Windows ZIP release asset and draft WinGet manifests, with validation and a ZIP execution check in the release workflow.
-- Format-conversion reports exclude `VolumeConcentrationRates` cases.
 
 ## 0.12.3
 
