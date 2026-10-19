@@ -73,10 +73,10 @@ end
 
 ### vector of non-steady-state
 {{ id }}_dynamic_nonss_ = NamedTuple{(
-  {% for record in img.dynamicRecords -%}
+  {% if img.dynamicRecords | length == 0 %}:__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
     :{{ record.id }},
   {%- endfor %}
-)}(Bool[
+)}(Bool[{% if img.dynamicRecords | length == 0 %}true,{% endif %}
   {% for record in img.dynamicRecords -%}
     {{ not record.ss }},
   {%- endfor %}
@@ -126,7 +126,7 @@ function {{ id }}_ode_func_(__du__, __u__, __p__, t)
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __p__.x[1]
     __constants__ = __p__.x[2]
-    ({% for record in img.dynamicRecords -%}
+    ({% if img.dynamicRecords | length == 0 %}__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__ {# TODO: replace by __u__[index] #}
 
@@ -175,7 +175,7 @@ function {{ id }}_saving_generator_(__outputIds__::Vector{Symbol})
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __integrator__.p.x[1]
         __constants__ = __integrator__.p.x[2]
-        ({% for record in img.dynamicRecords -%}
+        ({% if img.dynamicRecords | length == 0 %}__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
         {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
         {%- endfor %}) = __u__{# TODO: replace by __u__[index] #}
 
@@ -225,7 +225,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.x[1]
     __constants__ = __integrator__.p.x[2]
-    ({% for record in img.dynamicRecords -%}
+    ({% if img.dynamicRecords | length == 0 %}__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
 
@@ -252,7 +252,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.x[1]
     __constants__ = __integrator__.p.x[2]
-    ({% for record in img.dynamicRecords -%}
+    ({% if img.dynamicRecords | length == 0 %}__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
 
@@ -279,7 +279,7 @@ function {{ id }}_{{ event.switcher.id }}_condition_func_(__u__, t, __integrator
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.x[1]
     __constants__ = __integrator__.p.x[2]
-    ({% for record in img.dynamicRecords -%}
+    ({% if img.dynamicRecords | length == 0 %}__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __u__
 
@@ -307,7 +307,7 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.p.x[1]
     __constants__ = __integrator__.p.x[2]
-    ({% for record in img.dynamicRecords -%}
+    ({% if img.dynamicRecords | length == 0 %}__fake_var__,{% endif %}{% for record in img.dynamicRecords -%}
     {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }}, 
     {%- endfor %}) = __integrator__.u
 

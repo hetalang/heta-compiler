@@ -16,6 +16,7 @@
 - DynMS schema now rejects `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers, while permitting `t` under the 0.3.0 time-variable rules.
 - DynMS export now includes selected Heta scenarios and their run options; `#setScenario` requires `tspan` even when `saveat` is provided.
 - Fixed Julia export of `logbase(x, base)` and `factorial(x)` to use valid `NaNMath.log` and `SpecialFunctions.gamma` calls.
+- Fixed Julia export for models without dynamic records: the dummy ODE state is included in the non-steady-state flags and unpacked in generated callbacks.
 - Unit hashes now use the `units_` prefix, preventing generated identifiers from starting with an underscore.
 - Published the DynMS and Heta JSON schemas through the npm package exports `heta-compiler/dynms-schema` and `heta-compiler/heta-json-schema`; `platformId` is now optional in the Heta JSON schema.
 - Removed the experimental ModelingToolkit (`MT`) export format.
