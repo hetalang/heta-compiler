@@ -439,3 +439,19 @@ describe('SBML-import identifier renaming', () => {
     });
   });
 });
+
+describe('SBML continuous event triggers', () => {
+  for (const operator of ['gt', 'geq']) {
+    it(`converts ${operator} to a numeric trigger with useCSwitcher`, () => {
+      const sbml = `<sbml><model>
+        <listOfParameters><parameter id="x" value="0" constant="false"/></listOfParameters>
+        <listOfEvents><event id="ev">
+          <trigger><math><apply><${operator}/><ci>x</ci><cn>1</cn></apply></math></trigger>
+          <listOfEventAssignments><eventAssignment variable="x"><math><cn>0</cn></math></eventAssignment></listOfEventAssignments>
+        </event></listOfEvents>
+      </model></sbml>`;
+      const event = SBMLParse(sbml, { useCSwitcher: true }).find(x => x.id === 'ev');
+      expect(event).to.include({ class: 'CSwitcher', trigger: 'x - 1' });
+    });
+  }
+});
