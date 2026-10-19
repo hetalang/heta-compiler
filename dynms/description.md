@@ -324,7 +324,7 @@ The following reserved symbols are available in expressions and are not declared
 | `ExponentialE` | Euler's number *e* | Yes |
 | `True`, `False` | Boolean literals | Only where a Boolean expression is valid |
 
-`Pi`, `ExponentialE`, `True`, and `False` are represented as symbols rather than function calls. Model identifiers must not use these reserved names. Simulation time is defined by the model's `timeVariable`, not by a built-in MathJSON symbol.
+`Pi`, `ExponentialE`, `True`, and `False` are represented as symbols rather than function calls. `NaN` and `Infinity` are also reserved names; their numeric values use MathJSON number objects such as `{ "num": "NaN" }` and `{ "num": "+Infinity" }`. None of these six names may be used as a model identifier. Simulation time is defined by the model's `timeVariable`, not by a built-in MathJSON symbol.
 
 ---
 
@@ -364,7 +364,7 @@ At each solver step:
 
 ## 6. Identifiers inside models
 
-DynMS uses string identifiers for all model components and for `timeVariable.id`. An identifier must start with a letter and then contain only letters, digits, or underscores. It must be unique within a model.
+DynMS uses string identifiers for all model components and for `timeVariable.id`. An identifier must start with a letter and then contain only letters, digits, or underscores. It must not be `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, or `False`, and must be unique within a model. The name `t` is allowed, including as an ordinary component identifier when the model uses another `timeVariable.id`.
 
 ---
 
