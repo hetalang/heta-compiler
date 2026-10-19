@@ -93,12 +93,12 @@ Expression.prototype.toJuliaString = function(substituteByDefinitions = true, tr
       if(node.fn.name==='logbase'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `NaNMath.log(${args[1]}, ${args[0]})`;
+        return `(NaNMath.log(${args[0]}) / NaNMath.log(${args[1]}))`;
       }
       if(node.fn.name==='factorial'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `fact(${args[0]})`;
+        return `SpecialFunctions.gamma((${args[0]}) + 1)`;
       }
       if(node.fn.name==='ifgt'){
         let args = node.args
