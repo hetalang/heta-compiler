@@ -3,7 +3,7 @@ const { ajv } = require('../ajv');
 
 const schema = {
   type: 'object',
-  required: ['id'],
+  required: ['id', 'tspan'],
   properties: {
     model: { '$ref': '#/definitions/ID' },
     parameters: {
@@ -76,10 +76,6 @@ class Scenario extends Top {
       this.parameters = q.parameters;
     }
 
-    if (!q.saveat && !q.tspan) {
-      logger.error(`setScenario "${q.id}" must include "saveat" or "tspan" property.`, {type: 'ValidationError'});
-      this.errored = true;
-    }
     if (q.saveat) {
       this.saveat = q.saveat;
     }

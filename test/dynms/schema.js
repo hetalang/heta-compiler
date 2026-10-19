@@ -43,6 +43,35 @@ describe('DynMS schema', () => {
     expect(validateDynms(doc)).to.equal(true);
   });
 
+  it('accepts scenarios with required run information and optional overrides', () => {
+    const doc = makeDoc(0);
+    doc.scenarios = [{
+      id: 'baseline',
+      model: 'model',
+      tspan: [0, 100],
+      parameters: { k: 0.1 },
+      saveat: [0, 10, 100],
+      observables: ['x', 'y'],
+      eventsActive: { dose: false },
+      eventsSave: { dose: [true, false] }
+    }];
+
+    expect(validateDynms(doc), validateDynms.errors).to.equal(true);
+  });
+
+  it('requires exactly two tspan values and two eventsSave flags', () => {
+    const doc = makeDoc(0);
+    doc.scenarios = [{ id: 'baseline', model: 'model' }];
+    expect(validateDynms(doc)).to.equal(false);
+
+    doc.scenarios[0].tspan = [0];
+    expect(validateDynms(doc)).to.equal(false);
+
+    doc.scenarios[0].tspan = [0, 100];
+    doc.scenarios[0].eventsSave = { dose: [true] };
+    expect(validateDynms(doc)).to.equal(false);
+  });
+
   it('accepts algebraic dynamic states', () => {
     const doc = makeDoc(0);
     doc.models[0].dynamic[0].algebraic = true;

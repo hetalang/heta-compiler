@@ -29,6 +29,7 @@ describe('Unit test for Scenario', () => {
       id: 'scn2',
       model: 'mouse',
       parameters: {weight: 20, kel: 1e-3},
+      tspan: [0, 120],
       saveat: [0, 1, 2, 4, 6, 8, 10, 12],
       observables: ['A0', 'C1', 'C2'],
       events_active: {sw1: false, sw2: true},
@@ -41,6 +42,7 @@ describe('Unit test for Scenario', () => {
       id: 'scn2',
       model: 'mouse',
       parameters: {weight: 20, kel: 1e-3},
+      tspan: [0, 120],
       saveat: [0, 1, 2, 4, 6, 8, 10, 12],
       observables: ['A0', 'C1', 'C2'],
       events_active: {sw1: false, sw2: true},
@@ -70,7 +72,7 @@ describe('Unit test for Scenario', () => {
     c.logger.resetErrors();
   });
 
-  it('No "saveat" or "tspan" arguments', () => {
+  it('No "tspan" argument', () => {
     let scn5 = new c.classes.Scenario().merge({
       id: 'scn5'
     });
@@ -79,10 +81,10 @@ describe('Unit test for Scenario', () => {
     c.logger.resetErrors();
   });
 
-  it('Wrong "saveat" argument', () => {
+  it('A "saveat" argument does not replace "tspan"', () => {
     let scn6 = new c.classes.Scenario().merge({
       id: 'scn6',
-      saveat: ['a']
+      saveat: [0, 1]
     });
 
     expect(c.logger).property('hasErrors').true;

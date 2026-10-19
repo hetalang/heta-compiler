@@ -216,7 +216,8 @@
       "type": "object",
       "required": [
         "action",
-        "id"
+        "id",
+        "tspan"
       ],
       "additionalProperties": true,
       "properties": {
@@ -245,7 +246,9 @@
           "type": "array",
           "items": {
             "type": "number"
-          }
+          },
+          "minItems": 2,
+          "maxItems": 2
         },
         "observables": {
           "type": "array",

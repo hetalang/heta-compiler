@@ -46,14 +46,32 @@ class DynMS extends AbstractExport {
       platformVersion: this._builder.version,
       platformNotes: this._builder.notes,
       license: this._builder.license,
-      models: [],
-      // scenarios: []
+      models: []
     };
 
-    DynMSObj.models = this.selectedNamespaces()
+    let selectedNamespaces = this.selectedNamespaces();
+    DynMSObj.models = selectedNamespaces
       .map(([spaceName, ns]) => {
         return ns.makeDynMSModel();
       });
+
+    let selectedModels = new Set(selectedNamespaces.map(([spaceName]) => spaceName));
+    let scenarios = [...this._builder.container.scenarioStorage.values()]
+      .filter((scenario) => selectedModels.has(scenario.model))
+      .map((scenario) => {
+        let dynmsScenario = {
+          id: scenario.id,
+          model: scenario.model,
+          tspan: scenario.tspan
+        };
+        if (scenario.parameters) dynmsScenario.parameters = scenario.parameters;
+        if (scenario.saveat) dynmsScenario.saveat = scenario.saveat;
+        if (scenario.observables) dynmsScenario.observables = scenario.observables;
+        if (scenario.events_active) dynmsScenario.eventsActive = scenario.events_active;
+        if (scenario.events_save) dynmsScenario.eventsSave = scenario.events_save;
+        return dynmsScenario;
+      });
+    if (scenarios.length > 0) DynMSObj.scenarios = scenarios;
 
     return [{
       content: JSON.stringify(DynMSObj, null, 2),
