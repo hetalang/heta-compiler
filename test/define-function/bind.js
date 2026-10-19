@@ -46,6 +46,17 @@ describe('Proper binding of functionDefinition', () => {
     c1.defaultLogs.length = 0;
   });
 
+  it('allows variadic core functions inside a function definition', () => {
+    const container = new Container();
+    container.load({
+      id: 'signLike', action: 'defineFunction', arguments: ['x'],
+      math: 'piecewise(-1, x < 0, 1, x > 0, 0)'
+    });
+
+    expect(() => container.knitMany()).not.to.throw();
+    expect(container.hetaErrors()).to.have.lengthOf(0);
+  });
+
   it('lost argument inside ode_', () => {
     c1.load({
       id: 'rec3', class: 'Record', assignments: { ode_: 'f5()*pow(rec1, rec2)'}
