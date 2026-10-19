@@ -23,6 +23,7 @@
 - Improved circular-dependency diagnostics by showing implicit species compartment normalization in reported cycles.
 - Updated dependencies to address known security vulnerabilities.
 - Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
+- Added a Windows ZIP release asset and draft WinGet manifests, with validation and a ZIP execution check in the release workflow.
 
 ## 0.12.1
 
