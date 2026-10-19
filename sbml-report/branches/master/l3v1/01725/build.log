@@ -8,8 +8,8 @@ No declaration file, running with defaults...
 [info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	S1_stoich component does not exist which is not allowed for the "update" action.
 [error]	S2_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 4accebd4c4c37f76d7b65e75deabe598bf1d4b9a7a13e0f840e47406bb16a562
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: c32339350d2d2380ee021845cbfe39b1a0b4fbcb047e0dde83dc89dd28be1ed8
+[info]	Setting references in elements, total length 95
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

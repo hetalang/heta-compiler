@@ -7,8 +7,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01623/01623-sbml-l3v1.xml"...
 [info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	R14_K_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 383f9ae1aba527fbe4ce372433826f0c211b52bce3853195a3b81275d35c75c2
-[info]	Setting references in elements, total length 148
+[info]	Platform hash: f9356aba0e5109f05cf3f0be8a3639458943378d60041dd3739381fa20c61ef1
+[info]	Setting references in elements, total length 145
 [error]	Record "R16" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
 [error]	Record "R14" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
 [error]	Record "R15" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.

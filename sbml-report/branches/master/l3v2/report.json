@@ -3,11 +3,11 @@
   "generator": {
     "type": "sbml-report",
     "packageName": "@hetalang/format-conversion-test-suite",
-    "packageVersion": "0.1.0"
+    "packageVersion": "0.3.1"
   },
   "status": "completed-with-errors",
-  "startedAt": "2026-09-25T09:50:36.532Z",
-  "completedAt": "2026-09-25T10:05:40.734Z",
+  "startedAt": "2026-10-19T02:16:28.888Z",
+  "completedAt": "2026-10-19T02:31:20.727Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l3v2",
@@ -41,7 +41,8 @@
       "fbc:MaximizeObjective",
       "fbc:MinimizeObjective",
       "fbc:NonStrict",
-      "BoolNumericSwap"
+      "BoolNumericSwap",
+      "VolumeConcentrationRates"
     ]
   },
   "environment": {
@@ -16702,7 +16703,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00649/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00649/00649-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00649/00649-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00649/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00649/00649-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S3\"> targets concentration species \"S3\" in compartment \"C\". It is imported as Process \"rate_S3\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00649/00649-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -16719,7 +16720,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00650/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00650/00650-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00650/00650-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00650/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00650/00650-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00650/00650-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -16736,7 +16737,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00651/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00651/00651-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00651/00651-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00651/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00651/00651-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S3\"> targets concentration species \"S3\" in compartment \"C\". It is imported as Process \"rate_S3\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00651/00651-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -16840,7 +16841,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00655/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00655/00655-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00655/00655-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00655/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00655/00655-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S2\"> targets concentration species \"S2\" in compartment \"C\". It is imported as Process \"rate_S2\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00655/00655-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -16857,7 +16858,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00656/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00656/00656-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00656/00656-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00656/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00656/00656-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S2\"> targets concentration species \"S2\" in compartment \"C\". It is imported as Process \"rate_S2\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00656/00656-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -16874,7 +16875,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00657/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00657/00657-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00657/00657-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00657/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00657/00657-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S2\"> targets concentration species \"S2\" in compartment \"C\". It is imported as Process \"rate_S2\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00657/00657-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -18532,7 +18533,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00724/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00724/00724-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00724/00724-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00724/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00724/00724-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00724/00724-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -18694,7 +18695,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00737/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00737/00737-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00737/00737-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/00737/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00737/00737-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S3\"> targets concentration species \"S3\" in compartment \"C\". It is imported as Process \"rate_S3\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/00737/00737-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -27084,7 +27085,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01089/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01089/01089-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: f70896aa4fff75050cd539b48bc0d86d10ec3f3d0afe3c89bf183bb6cad36687\n[info] Setting references in elements, total length 104\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01089/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01089/01089-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: f70896aa4fff75050cd539b48bc0d86d10ec3f3d0afe3c89bf183bb6cad36687\n[info] Setting references in elements, total length 104\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -27101,7 +27102,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01090/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01090/01090-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 2 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 4f5a9a4f8695eb0db07aaeb1f657958d4ae535cab03f180ad0dfb380d22f8e3a\n[info] Setting references in elements, total length 104\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01090/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01090/01090-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S3\"> targets concentration species \"S3\" in compartment \"C\". It is imported as Process \"rate_S3\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 2 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 4f5a9a4f8695eb0db07aaeb1f657958d4ae535cab03f180ad0dfb380d22f8e3a\n[info] Setting references in elements, total length 104\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -27118,7 +27119,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01091/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01091/01091-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: edfa9da8897cf748f7fd8c60ecd45c74f46c8b06e93bbaa91f90ade2865f3e84\n[info] Setting references in elements, total length 104\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01091/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01091/01091-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: edfa9da8897cf748f7fd8c60ecd45c74f46c8b06e93bbaa91f90ade2865f3e84\n[info] Setting references in elements, total length 104\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -27135,7 +27136,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01092/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01092/01092-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 1f4541fb47298c825f22bb62113ec3487f3a4aec267f9acae4b4ed431498eff0\n[info] Setting references in elements, total length 105\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01092/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01092/01092-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S2\"> targets concentration species \"S2\" in compartment \"C\". It is imported as Process \"rate_S2\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 1f4541fb47298c825f22bb62113ec3487f3a4aec267f9acae4b4ed431498eff0\n[info] Setting references in elements, total length 105\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -27152,7 +27153,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01093/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01093/01093-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 2 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: d7f637a09b741bd0fcfe13e8436212836dd8a1ad32b7d069a5787b7b9adbb6da\n[info] Setting references in elements, total length 105\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01093/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01093/01093-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S3\"> targets concentration species \"S3\" in compartment \"C\". It is imported as Process \"rate_S3\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 2 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: d7f637a09b741bd0fcfe13e8436212836dd8a1ad32b7d069a5787b7b9adbb6da\n[info] Setting references in elements, total length 105\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -27169,7 +27170,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01094/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01094/01094-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 2 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: fe3ac6444459831b97c982ea9e4d0ef650bd2fbb04a857045e1f90ffa3e8358d\n[info] Setting references in elements, total length 105\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01094/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01094/01094-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S3\"> targets concentration species \"S3\" in compartment \"C\". It is imported as Process \"rate_S3\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 2 created.\n[error] generatedId_0 component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: fe3ac6444459831b97c982ea9e4d0ef650bd2fbb04a857045e1f90ffa3e8358d\n[info] Setting references in elements, total length 105\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -27186,7 +27187,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01095/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01095/01095-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01095/01095-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01095/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01095/01095-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S4\"> targets concentration species \"S4\" in compartment \"C\". It is imported as Process \"rate_S4\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"event1\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01095/01095-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
@@ -29410,7 +29411,7 @@
       "caseId": "01198",
       "synopsis": "A species and a compartment both under control of a rate rule.",
       "sourcePath": "semantic/01198/01198-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01198/input.heta",
       "outputs": {
         "canonical": "01198/canonical/output.heta.json",
@@ -29433,7 +29434,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01199",
@@ -29700,7 +29705,7 @@
       "caseId": "01208",
       "synopsis": "Variable compartment with variable species concentration",
       "sourcePath": "semantic/01208/01208-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01208/input.heta",
       "outputs": {
         "canonical": "01208/canonical/output.heta.json",
@@ -29723,7 +29728,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01209",
@@ -35129,6 +35138,9 @@
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "CSymbolDelay"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     },
     {
@@ -35268,6 +35280,9 @@
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "CSymbolRateOf"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     },
     {
@@ -35583,7 +35598,7 @@
       "caseId": "01478",
       "synopsis": "A species and a compartment both under control of a rate rule.",
       "sourcePath": "semantic/01478/01478-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01478/input.heta",
       "outputs": {
         "canonical": "01478/canonical/output.heta.json",
@@ -35606,7 +35621,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01479",
@@ -36074,7 +36093,8 @@
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
         "AssignedConstantStoichiometry",
-        "SpeciesReferenceInMath"
+        "SpeciesReferenceInMath",
+        "VolumeConcentrationRates"
       ]
     },
     {
@@ -36166,7 +36186,7 @@
       "caseId": "01504",
       "synopsis": "A species and a compartment both under control of a rate rule, then modified by an event.",
       "sourcePath": "semantic/01504/01504-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01504/input.heta",
       "outputs": {
         "canonical": "01504/canonical/output.heta.json",
@@ -36189,13 +36209,17 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01505",
       "synopsis": "A species and a compartment both under control of a rate rule, and affected by an event.",
       "sourcePath": "semantic/01505/01505-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01505/input.heta",
       "outputs": {
         "canonical": "01505/canonical/output.heta.json",
@@ -36218,13 +36242,17 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01506",
       "synopsis": "A species and a compartment both under control of a rate rule, and affected by an event.",
       "sourcePath": "semantic/01506/01506-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01506/input.heta",
       "outputs": {
         "canonical": "01506/canonical/output.heta.json",
@@ -36247,7 +36275,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01507",
@@ -36259,11 +36291,14 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01507/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01507/01507-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01507/01507-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01507/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01507/01507-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S1\"> targets concentration species \"S1\" in compartment \"C1\". It is imported as Process \"rate_S1\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01507/01507-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "EventWithDelay"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     },
     {
@@ -36276,11 +36311,14 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01508/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01508/01508-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01508/01508-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01508/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01508/01508-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S1\"> targets concentration species \"S1\" in compartment \"C1\". It is imported as Process \"rate_S1\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01508/01508-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "EventWithDelay"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     },
     {
@@ -36293,18 +36331,21 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01509/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01509/01509-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01509/01509-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01509/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01509/01509-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S1\"> targets concentration species \"S1\" in compartment \"C1\". It is imported as Process \"rate_S1\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01509/01509-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "EventWithDelay"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     },
     {
       "caseId": "01510",
       "synopsis": "A species and a compartment both under control of a rate rule, modified by an event at t0.",
       "sourcePath": "semantic/01510/01510-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01510/input.heta",
       "outputs": {
         "canonical": "01510/canonical/output.heta.json",
@@ -36327,7 +36368,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01511",
@@ -36339,18 +36384,21 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01511/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01511/01511-sbml-l3v2.xml\"...\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01511/01511-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01511/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01511/01511-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S1\"> targets concentration species \"S1\" in compartment \"C1\". It is imported as Process \"rate_S1\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[error] SBML event delay is not supported on import for event \"E0\". Heta Compiler cannot preserve delayed event execution. when converting module \"cases/semantic/01511/01511-sbml-l3v2.xml\"\n[info] Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7\n[info] Setting references in elements, total length 93\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "EventWithDelay"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     },
     {
       "caseId": "01512",
       "synopsis": "A species and a compartment both under control of a rate rule,that affects an event priority.",
       "sourcePath": "semantic/01512/01512-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01512/input.heta",
       "outputs": {
         "canonical": "01512/canonical/output.heta.json",
@@ -36373,13 +36421,17 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01513",
       "synopsis": "A species and a compartment both under control of a rate rule,with an initial assignment to the species.",
       "sourcePath": "semantic/01513/01513-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01513/input.heta",
       "outputs": {
         "canonical": "01513/canonical/output.heta.json",
@@ -36402,13 +36454,17 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01514",
       "synopsis": "A species and a compartment both under control of a rate rule,with an initial assignment to the species and compartment.",
       "sourcePath": "semantic/01514/01514-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01514/input.heta",
       "outputs": {
         "canonical": "01514/canonical/output.heta.json",
@@ -36431,7 +36487,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01515",
@@ -37061,7 +37121,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01556/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01556/01556-sbml-l3v2.xml\"...\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[info] Platform hash: 11009380b3af227780738fce2d8d7156693cee8cbc247ceea6f799e4fbba74f2\n[info] Setting references in elements, total length 98\n[error] Record \"rate_S1\" is not initialized. You must set \"start_\" or \"ode_\" for the record or use abstract namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.13.0-beta.1 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v2/01556/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01556/01556-sbml-l3v2.xml\"...\n[warn] SBML <rateRule variable=\"S1\"> targets concentration species \"S1\" in compartment \"C\". It is imported as Process \"rate_S1\"; exported simulations may differ from SBML semantics, especially when the compartment changes.\n[info] SBML identifiers converted: 0 renamed, 1 created.\n[info] Platform hash: 11009380b3af227780738fce2d8d7156693cee8cbc247ceea6f799e4fbba74f2\n[info] Setting references in elements, total length 98\n[error] Record \"rate_S1\" is not initialized. You must set \"start_\" or \"ode_\" for the record or use abstract namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
@@ -38221,7 +38281,7 @@
       "caseId": "01627",
       "synopsis": "Competing events with the same priority, jointly causing a parameter to monotonically increase, checking to make sure the two events are not exactly evenly distributed.  NOTE:  STOCHASTIC TEST. Your software may fail periodically; it is only supposed to succeed in the majority of cases.",
       "sourcePath": "semantic/01627/01627-sbml-l3v2.xml",
-      "status": "success",
+      "status": "not-evaluated",
       "buildSourcePath": "01627/input.heta",
       "outputs": {
         "canonical": "01627/canonical/output.heta.json",
@@ -38244,7 +38304,11 @@
             "title": "DynMS 0.3.0 document"
           }
         }
-      }
+      },
+      "buildStatus": "success",
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
+      ]
     },
     {
       "caseId": "01628",
@@ -41736,7 +41800,7 @@
       "caseId": "01814",
       "synopsis": "Test SBML IDs named 'true'",
       "sourcePath": "semantic/01814/01814-sbml-l3v2.xml",
-      "status": "success",
+      "status": "failed",
       "buildSourcePath": "01814/input.heta",
       "outputs": {
         "canonical": "01814/canonical/output.heta.json",
@@ -41752,20 +41816,34 @@
           }
         },
         "dynms": {
-          "status": "valid",
+          "status": "failed",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
             "title": "DynMS 0.3.0 document"
-          }
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/constants/1/id",
+              "schemaPath": "#/$defs/identifier/not",
+              "keyword": "not",
+              "message": "must NOT be valid",
+              "params": {}
+            }
+          ]
         }
+      },
+      "buildStatus": "success",
+      "error": {
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01815",
       "synopsis": "Test SBML IDs named 'true'",
       "sourcePath": "semantic/01815/01815-sbml-l3v2.xml",
-      "status": "success",
+      "status": "failed",
       "buildSourcePath": "01815/input.heta",
       "outputs": {
         "canonical": "01815/canonical/output.heta.json",
@@ -41781,20 +41859,34 @@
           }
         },
         "dynms": {
-          "status": "valid",
+          "status": "failed",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
             "title": "DynMS 0.3.0 document"
-          }
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/constants/1/id",
+              "schemaPath": "#/$defs/identifier/not",
+              "keyword": "not",
+              "message": "must NOT be valid",
+              "params": {}
+            }
+          ]
         }
+      },
+      "buildStatus": "success",
+      "error": {
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01816",
       "synopsis": "Test SBML IDs named 'false'",
       "sourcePath": "semantic/01816/01816-sbml-l3v2.xml",
-      "status": "success",
+      "status": "failed",
       "buildSourcePath": "01816/input.heta",
       "outputs": {
         "canonical": "01816/canonical/output.heta.json",
@@ -41810,20 +41902,34 @@
           }
         },
         "dynms": {
-          "status": "valid",
+          "status": "failed",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
             "title": "DynMS 0.3.0 document"
-          }
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/constants/1/id",
+              "schemaPath": "#/$defs/identifier/not",
+              "keyword": "not",
+              "message": "must NOT be valid",
+              "params": {}
+            }
+          ]
         }
+      },
+      "buildStatus": "success",
+      "error": {
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01817",
       "synopsis": "Test SBML IDs named 'false'",
       "sourcePath": "semantic/01817/01817-sbml-l3v2.xml",
-      "status": "success",
+      "status": "failed",
       "buildSourcePath": "01817/input.heta",
       "outputs": {
         "canonical": "01817/canonical/output.heta.json",
@@ -41839,20 +41945,34 @@
           }
         },
         "dynms": {
-          "status": "valid",
+          "status": "failed",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
             "title": "DynMS 0.3.0 document"
-          }
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/constants/1/id",
+              "schemaPath": "#/$defs/identifier/not",
+              "keyword": "not",
+              "message": "must NOT be valid",
+              "params": {}
+            }
+          ]
         }
+      },
+      "buildStatus": "success",
+      "error": {
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01818",
       "synopsis": "Test SBML IDs named 'pi'",
       "sourcePath": "semantic/01818/01818-sbml-l3v2.xml",
-      "status": "success",
+      "status": "failed",
       "buildSourcePath": "01818/input.heta",
       "outputs": {
         "canonical": "01818/canonical/output.heta.json",
@@ -41868,20 +41988,34 @@
           }
         },
         "dynms": {
-          "status": "valid",
+          "status": "failed",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
             "title": "DynMS 0.3.0 document"
-          }
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/constants/1/id",
+              "schemaPath": "#/$defs/identifier/not",
+              "keyword": "not",
+              "message": "must NOT be valid",
+              "params": {}
+            }
+          ]
         }
+      },
+      "buildStatus": "success",
+      "error": {
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01819",
       "synopsis": "Test SBML IDs named 'pi'",
       "sourcePath": "semantic/01819/01819-sbml-l3v2.xml",
-      "status": "success",
+      "status": "failed",
       "buildSourcePath": "01819/input.heta",
       "outputs": {
         "canonical": "01819/canonical/output.heta.json",
@@ -41897,13 +42031,27 @@
           }
         },
         "dynms": {
-          "status": "valid",
+          "status": "failed",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.13.0/src/dynms/dynms.schema.json",
             "title": "DynMS 0.3.0 document"
-          }
+          },
+          "errors": [
+            {
+              "instancePath": "/models/0/constants/1/id",
+              "schemaPath": "#/$defs/identifier/not",
+              "keyword": "not",
+              "message": "must NOT be valid",
+              "params": {}
+            }
+          ]
         }
+      },
+      "buildStatus": "success",
+      "error": {
+        "phase": "json-schema-validation",
+        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -41996,6 +42144,9 @@
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "CSymbolRateOf"
+      ],
+      "notEvaluatedTestTags": [
+        "VolumeConcentrationRates"
       ]
     }
   ]

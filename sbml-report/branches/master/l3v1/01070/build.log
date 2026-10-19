@@ -8,8 +8,8 @@ No declaration file, running with defaults...
 [info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	generatedId_0 component does not exist which is not allowed for the "update" action.
 [error]	generatedId_1 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 39d9b3059271c6335ea735a2bbaa885d564ef9a02a39c6dca5d0422a82669984
-[info]	Setting references in elements, total length 102
+[info]	Platform hash: 4324b8b64d0bc5e50384f56e9f9b67fde123580525de9bc966edc35e20156ee5
+[info]	Setting references in elements, total length 99
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

@@ -6,8 +6,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "heta" from file "results/l3v1/01611/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01611/01611-sbml-l3v1.xml"...
 [info]	SBML identifiers converted: 0 renamed, 0 created.
-[info]	Platform hash: 3667c7247da2b0b0f163540d30acb32ec97fc0310d366b69aeb27d813140e07d
-[info]	Setting references in elements, total length 147
+[info]	Platform hash: b4747b5f696e0e9a600a3dde72d16bea6f57d948dcd25cbf72da2e340a8d1609
+[info]	Setting references in elements, total length 144
 [error]	Record "R16" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
 [error]	Record "R14" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
 [error]	Record "R15" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.

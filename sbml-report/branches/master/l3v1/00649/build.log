@@ -5,9 +5,10 @@ No declaration file, running with defaults...
 [info]	Heta compiler v0.13.0-beta.1 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/00649/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00649/00649-sbml-l3v1.xml"...
+[warn]	SBML <rateRule variable="S3"> targets concentration species "S3" in compartment "C". It is imported as Process "rate_S3"; exported simulations may differ from SBML semantics, especially when the compartment changes.
 [error]	SBML event delay is not supported on import for event "event1". Heta Compiler cannot preserve delayed event execution. when converting module "cases/semantic/00649/00649-sbml-l3v1.xml"
-[info]	Platform hash: 944949be5c345ac9fbb1dee498d6657db21b622ef85bed6b26a693a458d4aba7
-[info]	Setting references in elements, total length 93
+[info]	Platform hash: 2e4ca5991d25d53f659bb463a1f59c5963434b9d4d3b13f98478ade79b34ae25
+[info]	Setting references in elements, total length 90
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

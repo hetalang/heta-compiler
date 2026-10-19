@@ -7,8 +7,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/00969/00969-sbml-l3v1.xml"...
 [info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	Xref component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: a1620f9ae6d5bf042a70f5df6fdfc4ac0d4794a847c916bb217484e5bace4fc0
-[info]	Setting references in elements, total length 97
+[info]	Platform hash: 22e23ca7d4d8f251b1df0ea383f8f3bfc53a5bfb22551dc94ea9bf56e6de4930
+[info]	Setting references in elements, total length 94
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

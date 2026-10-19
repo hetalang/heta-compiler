@@ -58,8 +58,8 @@ No declaration file, running with defaults...
 [error]	S49_stoich component does not exist which is not allowed for the "update" action.
 [error]	S50_stoich component does not exist which is not allowed for the "update" action.
 [error]	S51_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: d7c9629b9eb29dbde2c1b6d32c2c933da14bef1c02cf20669ab270772a1a9112
-[info]	Setting references in elements, total length 198
+[info]	Platform hash: df8b4dd50a90fb5199621924aa5584d05bff8c9a4f581f13a4b1603fcd019cff
+[info]	Setting references in elements, total length 195
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

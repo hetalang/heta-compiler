@@ -7,8 +7,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01064/01064-sbml-l3v1.xml"...
 [info]	SBML identifiers converted: 0 renamed, 0 created.
 [error]	generatedId_0 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 514ac42c5c2eaf5b252f571f80f98902e6334611af52b64734ca962cfb1b48de
-[info]	Setting references in elements, total length 101
+[info]	Platform hash: a8b96c2f9b12a0d10659ad09d7c9219914309f66d7769b90dff116be64232a65
+[info]	Setting references in elements, total length 98
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

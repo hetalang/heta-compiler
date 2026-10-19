@@ -10,8 +10,8 @@ No declaration file, running with defaults...
 [error]	S2_stoich component does not exist which is not allowed for the "update" action.
 [error]	S3_stoich component does not exist which is not allowed for the "update" action.
 [error]	S4_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: fdaeb9fba9f33d63ca9c202d15156c7a3de833d200729f69ad39ba386e4674e8
-[info]	Setting references in elements, total length 104
+[info]	Platform hash: 64e4cf73f5edc35ccfe8455781875a9136f6c39f53b5355f3d9e7b1c944c21e4
+[info]	Setting references in elements, total length 101
 [error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
 [error]	rate_S2_stoich Property "actors[0].target" has lost reference "S2_stoich".
 [error]	rate_S3_stoich Property "actors[0].target" has lost reference "S3_stoich".

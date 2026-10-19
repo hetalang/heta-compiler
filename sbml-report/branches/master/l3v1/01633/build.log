@@ -8,8 +8,8 @@ No declaration file, running with defaults...
 [info]	SBML identifiers converted: 0 renamed, 1 created.
 [error]	S1_degrade component does not exist which is not allowed for the "update" action.
 [error]	S2_create component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: fbd3e7de85e1b34841d83062ad76c1579de88b2c2d64d8f7d066a7a3e740ea9c
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: 3743bcc8345ed515c9f6ae31d859a2a9e290c572d0c2d429237df162f5331147
+[info]	Setting references in elements, total length 95
 [error]	rate_S2_create Property "actors[0].target" has lost reference "S2_create".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.

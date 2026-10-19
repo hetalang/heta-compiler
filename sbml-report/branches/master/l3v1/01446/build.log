@@ -10,8 +10,8 @@ No declaration file, running with defaults...
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
 [error]	A1_sr component does not exist which is not allowed for the "update" action.
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 745cedb8a7739985681576e545acfe7fa1d50d2a1a2246241726906162bc06e9
-[info]	Setting references in elements, total length 97
+[info]	Platform hash: be4637bd8a2bd36076b69086ae34855e71dc134e5cccea0cc3765640d4f74b43
+[info]	Setting references in elements, total length 94
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 Compilation ERROR! See logs.

@@ -7,8 +7,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01742/01742-sbml-l3v1.xml"...
 [info]	SBML identifiers converted: 0 renamed, 1 created.
 [error]	S1_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: dfd47a3ee13298b67c1296f3a73b0585c7a06818dd8bd807faf05f07c23b2c5a
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: 80bbdd481dd330a05f94195319679203e57a02bcaed6c9679749945721f1242e
+[info]	Setting references in elements, total length 95
 [error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.

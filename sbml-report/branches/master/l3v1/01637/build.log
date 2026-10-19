@@ -7,8 +7,8 @@ No declaration file, running with defaults...
 [info]	Reading module of type "sbml" from file "cases/semantic/01637/01637-sbml-l3v1.xml"...
 [info]	SBML identifiers converted: 0 renamed, 2 created.
 [error]	k0 component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: e55a22dbdab93d75af6179f77536a185bd480cf8953f1852bf80fb27f994d96b
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: a357d598a83a13fa697feb55095b3fa64fc34575ca0688f245c0d3cb3ce6cb44
+[info]	Setting references in elements, total length 95
 [error]	rate_k0 Property "actors[0].target" has lost reference "k0".
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.

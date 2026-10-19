@@ -58,8 +58,8 @@ No declaration file, running with defaults...
 [error]	S49_stoich component does not exist which is not allowed for the "update" action.
 [error]	S50_stoich component does not exist which is not allowed for the "update" action.
 [error]	S51_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 6eb51a7a603df83998b5df82a4e32f69453b0ab0392b0eda7f4d6626e9fb9169
-[info]	Setting references in elements, total length 250
+[info]	Platform hash: 6ebc075633db2e010840abd052fe56c9b72ff5eb78142201acda57935b6986c7
+[info]	Setting references in elements, total length 247
 [error]	rate_S0_stoich Property "actors[0].target" has lost reference "S0_stoich".
 [error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
 [error]	rate_S2_stoich Property "actors[0].target" has lost reference "S2_stoich".

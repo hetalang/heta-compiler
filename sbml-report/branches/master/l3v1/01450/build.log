@@ -10,8 +10,8 @@ No declaration file, running with defaults...
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
 [error]	A1_sr2 component does not exist which is not allowed for the "update" action.
 [error]	A1_sr component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 37c5ce6fc77ece35e5a5beba21d1b67d747fd8f7e5d63db25789573cf8e24f7a
-[info]	Setting references in elements, total length 98
+[info]	Platform hash: 1036de68e36ad8c1286fe9558e6e8f8f2f1b6b6d378cebabbd4ce7f8992e4af3
+[info]	Setting references in elements, total length 95
 [error]	rate_A1_sr2 Property "actors[0].target" has lost reference "A1_sr2".
 [error]	rate_A1_sr Property "actors[0].target" has lost reference "A1_sr".
 [info]	Checking for circular references in Records.

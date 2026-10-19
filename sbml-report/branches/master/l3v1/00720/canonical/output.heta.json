@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.13.0-beta.1"
     },
-    "created": "2026-09-25T10:12:21.674Z",
+    "created": "2026-10-19T02:37:30.108Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "b9ab183779693a74c4dbace5c68d399cad01483e22d584fed1b49823d5d2216b",
+    "hashSum": "5a789ee35c811d3509c537bc52214d37f0f96d14807fffe4401c9ad29eba5682",
     "hashAlgorithm": "sha256"
   },
   {
@@ -286,38 +286,11 @@
   {
     "action": "defineFunction",
     "arguments": [
-      "A",
-      "B"
-    ],
-    "id": "implies",
-    "math": "(not A) or B"
-  },
-  {
-    "action": "defineFunction",
-    "arguments": [
       "x",
       "y"
     ],
     "id": "multiply",
     "math": "x * y"
-  },
-  {
-    "action": "defineFunction",
-    "arguments": [
-      "x",
-      "y"
-    ],
-    "id": "quotient",
-    "math": "sign(x / y) * floor(abs(x / y))"
-  },
-  {
-    "action": "defineFunction",
-    "arguments": [
-      "x",
-      "y"
-    ],
-    "id": "rem",
-    "math": "x - y * sign(x / y) * floor(abs(x / y))"
   },
   {
     "action": "defineFunction",

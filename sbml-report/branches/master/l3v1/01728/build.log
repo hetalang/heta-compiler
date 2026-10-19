@@ -8,8 +8,8 @@ No declaration file, running with defaults...
 [info]	SBML identifiers converted: 0 renamed, 2 created.
 [error]	S1_stoich component does not exist which is not allowed for the "update" action.
 [error]	S2_stoich component does not exist which is not allowed for the "update" action.
-[info]	Platform hash: 597db7bef98e8aff7cac43eaf7c0cabd9d7ea660057a8b186832e3b62215ac16
-[info]	Setting references in elements, total length 100
+[info]	Platform hash: 0716070a64729da3d2c1ab610846c45ae2b880a992994681e358545e46f1c8f8
+[info]	Setting references in elements, total length 97
 [error]	rate_S1_stoich Property "actors[0].target" has lost reference "S1_stoich".
 [error]	rate_S2_stoich Property "actors[0].target" has lost reference "S2_stoich".
 [info]	Checking for circular references in Records.
