@@ -56,6 +56,8 @@ There are properties in the declaration file which do not change the compilation
 | options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
 | export | object[] | -e, --export | `[]` | List of export formats to run separated by colon. Each component includes `format` option and optional settings. See more details in [export-formats](./export-formats.md). |
 
+For an SBML module included from Heta code, `#include {source: model.xml, type: sbml, useCSwitcher: true};` imports events as `CSwitcher` with numeric triggers. The default is `DSwitcher`; `==` and `!=` triggers cannot be converted to `CSwitcher`.
+
 ## Default configuration
 
 Using neither declaration file nor CLI options is equivalent to the following declaration file:

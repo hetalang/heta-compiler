@@ -10,7 +10,7 @@ const { SBMLParse } = require('./sbml-parse');
 function sbmlLoader(fileContent, _options){
   // set defaults
   const options = Object.assign({
-    useCSwitcher: false, // TODO: implement
+    useCSwitcher: false,
   }, _options);
 
   let fileText = fileContent.toString('utf-8');

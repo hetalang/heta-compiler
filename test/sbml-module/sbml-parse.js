@@ -167,3 +167,20 @@ describe('SBML continuous event triggers', () => {
     });
   }
 });
+
+describe('SBML trigger initialValue', () => {
+  for (const useCSwitcher of [false, true]) {
+    it(`imports initialValue for ${useCSwitcher ? 'CSwitcher' : 'DSwitcher'}`, () => {
+      const sbml = `<sbml><model><listOfEvents>
+        <event id="initiallyFalse"><trigger initialValue="false"><math><apply><gt/><ci>x</ci><cn>1</cn></apply></math></trigger></event>
+        <event id="initiallyTrue"><trigger initialValue="true"><math><apply><gt/><ci>x</ci><cn>1</cn></apply></math></trigger></event>
+        <event id="unspecified"><trigger><math><apply><gt/><ci>x</ci><cn>1</cn></apply></math></trigger></event>
+      </listOfEvents></model></sbml>`;
+      const events = SBMLParse(sbml, { useCSwitcher });
+      const className = useCSwitcher ? 'CSwitcher' : 'DSwitcher';
+      expect(events.find(x => x.id === 'initiallyFalse')).to.include({ class: className, atStart: true });
+      expect(events.find(x => x.id === 'initiallyTrue')).not.to.have.property('atStart');
+      expect(events.find(x => x.id === 'unspecified')).not.to.have.property('atStart');
+    });
+  }
+});
