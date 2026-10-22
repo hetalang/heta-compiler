@@ -9,6 +9,7 @@ node_modules
 
 # user-specific files
 /_drafts
+/_issues
 /coverage
 
 # jsdoc
