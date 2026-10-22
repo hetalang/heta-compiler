@@ -66,6 +66,24 @@ describe('DynMS schema', () => {
     expect(validateDynms(doc)).to.equal(false);
   });
 
+  it('requires exactly two correctly typed entries in scenario pairs', () => {
+    const doc = makeDoc(0);
+    doc.scenarios = [{ id: 'baseline', model: 'model', tspan: [0, 10, 20] }];
+
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].tspan = [0];
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].tspan = [0, '10'];
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].tspan = [0, 10];
+    doc.scenarios[0].eventsSave = { dose: [true, false, true] };
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].eventsSave = { dose: [true] };
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].eventsSave = { dose: [true, 1] };
+    expect(validateDynms(doc)).to.equal(false);
+  });
+
   it('accepts algebraic dynamic states', () => {
     const doc = makeDoc(0);
     doc.models[0].dynamic[0].algebraic = true;
