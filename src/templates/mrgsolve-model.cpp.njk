@@ -93,20 +93,24 @@ $CAPTURE @annotated
 {%- endfor %}
 
 {% if timeEvents | length > 0 or events | length > 0 -%}
-$TABLE
+$EVENT
 {%- for event in timeEvents %}
 // {{ event.id  }} // {{ event.title | default('-') }}
 if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}) {
+  // Evaluate all event assignments before changing any state.
+  {%- for action in event.actions %}
+  double {{ event.id }}__next_{{ loop.index }}__ = {{ action.rhs.expr }};
+  {%- endfor %}
   {%- for action in event.actions %}
   {%- if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
   {%- set evtId = 'evt_' + action.state + '_' %}
   mrg::evdata {{ evtId }}(TIME, 8);
-  {{ evtId }}.amt = {{ action.rhs.expr }};
+  {{ evtId }}.amt = {{ event.id }}__next_{{ loop.index }}__;
   {{ evtId }}.cmt = {{ dynamicStatesIndex[action.state] }};
   {{ evtId }}.now = true;
   self.mevector.push_back({{ evtId }});
   {%- else %} {# for static #}
-  {{ action.state }} = {{ action.rhs.expr }};
+  {{ action.state }} = {{ event.id }}__next_{{ loop.index }}__;
   {%- endif %}
   {%- endfor %}
   {%- if event.trigger.period is defined %}
@@ -121,20 +125,28 @@ if ({{ event.id }}__active__ && EVID=={{ timeEventIndex[event.id] }}) {
 // {{ event.id }} // {{ event.title | default('-') }}
 // XXX: the problem here is that amt updates by the same amount each time
 for (int {{ event.id }}__i__ = 0; {{ event.id }}__i__ < {{ event.id }}__charge__; {{ event.id }}__i__++) {
+  // Evaluate all event assignments before changing any state.
+  {%- for action in event.actions %}
+  double {{ event.id }}__next_{{ loop.index }}__ = {{ action.rhs.expr }};
+  {%- endfor %}
   {%- for action in event.actions %}
   {%- if dynamicStatesIndex[action.state] is defined %} {# for dynamic #}
   {%- set evtId = 'evt_' + action.state + '_' %}
   mrg::evdata {{ evtId }}(TIME, 8);
-  {{ evtId }}.amt = {{ action.rhs.expr }};
+  {{ evtId }}.amt = {{ event.id }}__next_{{ loop.index }}__;
   {{ evtId }}.cmt = {{ dynamicStatesIndex[action.state] }};
   {{ evtId }}.now = true;
   self.mevector.push_back({{ evtId }});
   {%- else %} {# for static #}
-  {{ action.state }} = {{ action.rhs.expr }};
+  {{ action.state }} = {{ event.id }}__next_{{ loop.index }}__;
   {%- endif %}
   {%- endfor %}
 }
 {{ event.id }}__charge__ = 0;
 
+{%- endfor %}
+$TABLE
+{%- for assignment in assignments %}
+{{ assignment.id }} = {{ assignment.rhs if assignment.rhs is number else assignment.rhs.expr }};
 {%- endfor %}
 {% endif %}

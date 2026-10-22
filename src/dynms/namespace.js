@@ -17,7 +17,7 @@ const HetaLevelError = require('../heta-level-error');
     - we create a new state with _amt_ suffix for concentrations
     - we do not create new constants
 */
-Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRenderer = (expr) => expr.toMathJSON()) {
+Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRenderer = (expr) => expr.toMathJSON(), odeExpRenderer = expRenderer) {
     //let { logger } = this.container;
 
     // generate constants list
@@ -77,7 +77,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr, title]) => {
-        return { id: id, rhs: { expr: expRenderer(expr), format: exprFormat }, title: title };
+        return { id: id, rhs: { expr: odeExpRenderer(expr), format: exprFormat }, title: title };
     });
 
     let dynamic = statesInfo
@@ -99,7 +99,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
 
             return {
                 ...state,
-                derivative: { expr: expRenderer(expr), format: exprFormat },
+                derivative: { expr: odeExpRenderer(expr), format: exprFormat },
                 ...(record.ss ? { algebraic: true } : {})
             };
         });
@@ -174,7 +174,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'crossing',
-                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                rhs: {expr: odeExpRenderer(triggerRhs), format: exprFormat},
                 // direction: 'up', // down
                 detection: 'root', // step
                 atStart: switcher.atStart
@@ -195,7 +195,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'conditional',
-                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                rhs: {expr: odeExpRenderer(triggerRhs), format: exprFormat},
                 //kind: 'conditional',
                 // direction: 'up',
                 detection: 'step',
@@ -217,7 +217,7 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'conditional',
-                rhs: {expr: expRenderer(triggerRhs), format: exprFormat},
+                rhs: {expr: odeExpRenderer(triggerRhs), format: exprFormat},
                 detection: 'step',
                 atStart: true
             };

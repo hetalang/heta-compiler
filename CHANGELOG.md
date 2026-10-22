@@ -9,7 +9,8 @@
 - Fixed **Julia export**: `logbase(x, base)` now uses `(NaNMath.log(x) / NaNMath.log(base))`; `factorial(x)` now uses `SpecialFunctions.gamma((x) + 1)`.
 - Fixed **Julia expression export** of conditional functions in arithmetic expressions for ifgt etc.
 - Fixed **Julia export** for models without dynamic records: the dummy ODE state now has a non-steady-state flag and is unpacked consistently in the RHS, output function, and event callbacks.
-- Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
+- Fixed event assignment order in **Julia, DBSolve, and mrgsolve exports**: all right-hand sides are evaluated from the pre-event state before assignments are applied.
+- Added `schemas.tar.gz` with the DynMS, Heta and Platform JSON schemas to release assets.
 
 ## 0.12.2
 
