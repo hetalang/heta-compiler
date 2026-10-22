@@ -6,8 +6,8 @@
     "packageVersion": "0.1.1"
   },
   "status": "completed-with-errors",
-  "startedAt": "2026-10-22T15:59:15.912Z",
-  "completedAt": "2026-10-22T16:13:43.388Z",
+  "startedAt": "2026-10-22T19:45:44.424Z",
+  "completedAt": "2026-10-22T19:53:53.026Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l3v1",
@@ -23667,7 +23667,7 @@
       "caseId": "00930",
       "synopsis": "Single forward reaction with two species in one compartment and an event",
       "sourcePath": "semantic/00930/00930-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00930/input.heta",
       "outputs": {
         "canonical": "00930/canonical/output.heta.json",
@@ -23683,45 +23683,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "00931",
       "synopsis": "Single forward reaction with two species in one compartment and an event",
       "sourcePath": "semantic/00931/00931-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00931/input.heta",
       "outputs": {
         "canonical": "00931/canonical/output.heta.json",
@@ -23737,38 +23712,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -24377,13 +24327,29 @@
       "caseId": "00958",
       "synopsis": "Several parameters with initial assignments, testing various L2v1 built-in functions acting on constants.",
       "sourcePath": "semantic/00958/00958-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00958/input.heta",
-      "logPath": "00958/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 1,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v1/00958/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/00958/00958-sbml-l3v1.xml\"...\n[info] Platform hash: 623df1e464ed97da9ee29e30c63f4d31e196b21ca513074fc00e497dae8e7f53\n[info] Setting references in elements, total length 118\n[info] Checking for circular references in Records.\n[warn] Units checking skipped. To turn it on set \"unitsCheck: true\" in declaration.\n[info] Checking unit's terms.\n[info] Start exporting to files, total: 2.\n[info] Exporting to \"results/l3v1/00958/canonical\" of format \"canonical\"...\n[info] Exporting to \"results/l3v1/00958/dynms\" of format \"dynms\"...\n\n +-------------------------------------------------------------------+ \n | Internal \"Heta compiler\" error, contact the developers.           | \n | Create an issue: https://github.com/hetalang/heta-compiler/issues | \n | or mail to: dev@insysbio.com                                      | \n +-------------------------------------------------------------------+ \n\n\nTypeError: Cannot read properties of undefined (reading 'instanceOf')\n    at /home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:272:30\n    at _transform (/home/runner/work/heta-compiler/heta-compiler/node_modules/mathjs/lib/cjs/expression/node/Node.js:191:29)\n    at SymbolNode.transform (/home/runner/work/heta-compiler/heta-compiler/node_modules/mathjs/lib/cjs/expression/node/Node.js:198:16)\n    at _substitute (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:269:20)\n    at _substitute_and_simplify (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:262:27)\n    at /home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:49:39\n    at Array.map (<anonymous>)\n    at Namespace.makeDynMSModel (/home/runner/work/heta-compiler/heta-compiler/src/dynms/namespace.js:32:10)\n    at /home/runner/work/heta-compiler/heta-compiler/src/dynms-export/index.js:74:19\n    at Array.map (<anonymous>)\n"
+      "outputs": {
+        "canonical": "00958/canonical/output.heta.json",
+        "dynms": "00958/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.2 document"
+          }
+        }
       }
     },
     {
@@ -24593,7 +24559,7 @@
       "caseId": "00966",
       "synopsis": "Competing events with the same priority, jointly causing a parameter to monotonically increase, calculating a chi-squared statistic to ensure randomness.  NOTE:  STOCHASTIC TEST. This test is designed to fail with a frequency of 0.00002, but it still may happen.",
       "sourcePath": "semantic/00966/00966-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00966/input.heta",
       "outputs": {
         "canonical": "00966/canonical/output.heta.json",
@@ -24609,191 +24575,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/3/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/4/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/5/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/6/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/7/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/8/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/9/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/10/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/11/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/12/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/13/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/14/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/15/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/16/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/17/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/18/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/19/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/20/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/21/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -24914,7 +24702,7 @@
       "caseId": "00975",
       "synopsis": "A three-step reaction scheme with a model conversion factor.",
       "sourcePath": "semantic/00975/00975-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00975/input.heta",
       "outputs": {
         "canonical": "00975/canonical/output.heta.json",
@@ -24930,54 +24718,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/assignments/3/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/assignments/4/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "00976",
       "synopsis": "A three-step reaction scheme with a model conversion factor and a species conversion factor.",
       "sourcePath": "semantic/00976/00976-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00976/input.heta",
       "outputs": {
         "canonical": "00976/canonical/output.heta.json",
@@ -24993,54 +24747,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/assignments/3/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/assignments/4/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "00977",
       "synopsis": "A three-step reaction scheme with a species conversion factor.",
       "sourcePath": "semantic/00977/00977-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00977/input.heta",
       "outputs": {
         "canonical": "00977/canonical/output.heta.json",
@@ -25056,54 +24776,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/assignments/3/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/assignments/4/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "00978",
       "synopsis": "Several events conspire within the same time step to trigger three events multiple times, with different outcomes.",
       "sourcePath": "semantic/00978/00978-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00978/input.heta",
       "outputs": {
         "canonical": "00978/canonical/output.heta.json",
@@ -25119,135 +24805,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/2/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/3/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/4/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/5/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/6/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/7/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/8/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/9/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/10/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/11/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "00979",
       "synopsis": "Two event where the two event assignments should not interfere with each other.",
       "sourcePath": "semantic/00979/00979-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00979/input.heta",
       "outputs": {
         "canonical": "00979/canonical/output.heta.json",
@@ -25263,38 +24834,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            },
-            {
-              "instancePath": "/models/0/events/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -28304,7 +27850,7 @@
       "caseId": "01122",
       "synopsis": "Test of proper interpretation of a boundary species set hasOnlySubstanceUnits=false in a reaction rate.",
       "sourcePath": "semantic/01122/01122-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01122/input.heta",
       "outputs": {
         "canonical": "01122/canonical/output.heta.json",
@@ -28320,36 +27866,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/2/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01123",
       "synopsis": "Test of proper interpretation of a boundary species set hasOnlySubstanceUnits=true in a reaction rate.",
       "sourcePath": "semantic/01123/01123-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01123/input.heta",
       "outputs": {
         "canonical": "01123/canonical/output.heta.json",
@@ -28365,29 +27895,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -30542,7 +30056,7 @@
       "caseId": "01184",
       "synopsis": "A kinetic law set by a constant with an initial assignment.",
       "sourcePath": "semantic/01184/01184-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01184/input.heta",
       "outputs": {
         "canonical": "01184/canonical/output.heta.json",
@@ -30558,36 +30072,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01185",
       "synopsis": "A kinetic law set by a constant with an initial assignment.",
       "sourcePath": "semantic/01185/01185-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01185/input.heta",
       "outputs": {
         "canonical": "01185/canonical/output.heta.json",
@@ -30603,29 +30101,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/assignments/1/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -31312,7 +30794,7 @@
       "caseId": "01211",
       "synopsis": "A trigger with an nary relational element.",
       "sourcePath": "semantic/01211/01211-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01211/input.heta",
       "outputs": {
         "canonical": "01211/canonical/output.heta.json",
@@ -31328,29 +30810,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -31587,7 +31053,7 @@
       "caseId": "01222",
       "synopsis": "A boundary substance-only species in varying compartment under control of a rate rule.",
       "sourcePath": "semantic/01222/01222-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01222/input.heta",
       "outputs": {
         "canonical": "01222/canonical/output.heta.json",
@@ -31603,29 +31069,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -31748,7 +31198,7 @@
       "caseId": "01227",
       "synopsis": "A simple reaction whose identifier is used in a trigger.",
       "sourcePath": "semantic/01227/01227-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01227/input.heta",
       "outputs": {
         "canonical": "01227/canonical/output.heta.json",
@@ -31764,36 +31214,20 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
       "caseId": "01228",
       "synopsis": "A simple reaction whose identifier is used in an event assignment.",
       "sourcePath": "semantic/01228/01228-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01228/input.heta",
       "outputs": {
         "canonical": "01228/canonical/output.heta.json",
@@ -31809,29 +31243,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -32232,7 +31650,7 @@
       "caseId": "01315",
       "synopsis": "Nested function definitions",
       "sourcePath": "semantic/01315/01315-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01315/input.heta",
       "outputs": {
         "canonical": "01315/canonical/output.heta.json",
@@ -32248,484 +31666,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/oneOf/1/type",
-              "keyword": "type",
-              "message": "must be string",
-              "params": {
-                "type": "string"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/oneOf/1/type",
-              "keyword": "type",
-              "message": "must be string",
-              "params": {
-                "type": "string"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3/0",
-              "schemaPath": "#/$defs/mathJsonFunctionName/enum",
-              "keyword": "enum",
-              "message": "must be equal to one of the allowed values",
-              "params": {
-                "allowedValues": [
-                  "Abs",
-                  "Add",
-                  "And",
-                  "Arccos",
-                  "Arccot",
-                  "Arccsc",
-                  "Arcsec",
-                  "Arcsin",
-                  "Arctan",
-                  "Ceil",
-                  "Cos",
-                  "Cot",
-                  "Csc",
-                  "Divide",
-                  "Equal",
-                  "Exp",
-                  "Factorial",
-                  "Floor",
-                  "Greater",
-                  "GreaterEqual",
-                  "If",
-                  "Lb",
-                  "Less",
-                  "LessEqual",
-                  "Lg",
-                  "Ln",
-                  "Log",
-                  "Max",
-                  "Min",
-                  "Multiply",
-                  "Negate",
-                  "Not",
-                  "NotEqual",
-                  "Or",
-                  "Power",
-                  "Root",
-                  "Sec",
-                  "Sign",
-                  "Sin",
-                  "Sqrt",
-                  "Square",
-                  "Tan",
-                  "Which",
-                  "Xor"
-                ]
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/$defs/mathJsonNumberObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/$defs/mathJsonSymbolObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/$defs/mathJsonStringObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/3",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/oneOf/1/type",
-              "keyword": "type",
-              "message": "must be string",
-              "params": {
-                "type": "string"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5/0",
-              "schemaPath": "#/$defs/mathJsonFunctionName/enum",
-              "keyword": "enum",
-              "message": "must be equal to one of the allowed values",
-              "params": {
-                "allowedValues": [
-                  "Abs",
-                  "Add",
-                  "And",
-                  "Arccos",
-                  "Arccot",
-                  "Arccsc",
-                  "Arcsec",
-                  "Arcsin",
-                  "Arctan",
-                  "Ceil",
-                  "Cos",
-                  "Cot",
-                  "Csc",
-                  "Divide",
-                  "Equal",
-                  "Exp",
-                  "Factorial",
-                  "Floor",
-                  "Greater",
-                  "GreaterEqual",
-                  "If",
-                  "Lb",
-                  "Less",
-                  "LessEqual",
-                  "Lg",
-                  "Ln",
-                  "Log",
-                  "Max",
-                  "Min",
-                  "Multiply",
-                  "Negate",
-                  "Not",
-                  "NotEqual",
-                  "Or",
-                  "Power",
-                  "Root",
-                  "Sec",
-                  "Sign",
-                  "Sin",
-                  "Sqrt",
-                  "Square",
-                  "Tan",
-                  "Which",
-                  "Xor"
-                ]
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/$defs/mathJsonNumberObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/$defs/mathJsonSymbolObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/$defs/mathJsonStringObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/5",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/oneOf/0/type",
-              "keyword": "type",
-              "message": "must be number",
-              "params": {
-                "type": "number"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/oneOf/1/type",
-              "keyword": "type",
-              "message": "must be string",
-              "params": {
-                "type": "string"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8/0",
-              "schemaPath": "#/$defs/mathJsonFunctionName/enum",
-              "keyword": "enum",
-              "message": "must be equal to one of the allowed values",
-              "params": {
-                "allowedValues": [
-                  "Abs",
-                  "Add",
-                  "And",
-                  "Arccos",
-                  "Arccot",
-                  "Arccsc",
-                  "Arcsec",
-                  "Arcsin",
-                  "Arctan",
-                  "Ceil",
-                  "Cos",
-                  "Cot",
-                  "Csc",
-                  "Divide",
-                  "Equal",
-                  "Exp",
-                  "Factorial",
-                  "Floor",
-                  "Greater",
-                  "GreaterEqual",
-                  "If",
-                  "Lb",
-                  "Less",
-                  "LessEqual",
-                  "Lg",
-                  "Ln",
-                  "Log",
-                  "Max",
-                  "Min",
-                  "Multiply",
-                  "Negate",
-                  "Not",
-                  "NotEqual",
-                  "Or",
-                  "Power",
-                  "Root",
-                  "Sec",
-                  "Sign",
-                  "Sin",
-                  "Sqrt",
-                  "Square",
-                  "Tan",
-                  "Which",
-                  "Xor"
-                ]
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/$defs/mathJsonNumberObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/$defs/mathJsonSymbolObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/$defs/mathJsonStringObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr/8",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/$defs/mathJsonNumberObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/$defs/mathJsonSymbolObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/$defs/mathJsonStringObject/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/type",
-              "keyword": "type",
-              "message": "must be object",
-              "params": {
-                "type": "object"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/expr",
-              "schemaPath": "#/$defs/lineExpression/properties/expr/type",
-              "keyword": "type",
-              "message": "must be string",
-              "params": {
-                "type": "string"
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial/format",
-              "schemaPath": "#/$defs/lineExpression/properties/format/enum",
-              "keyword": "enum",
-              "message": "must be equal to one of the allowed values",
-              "params": {
-                "allowedValues": [
-                  "heta",
-                  "c",
-                  "mrgsolve",
-                  "julia"
-                ]
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            },
-            {
-              "instancePath": "/models/0/static/0/initial",
-              "schemaPath": "#/oneOf",
-              "keyword": "oneOf",
-              "message": "must match exactly one schema in oneOf",
-              "params": {
-                "passingSchemas": null
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -33250,7 +32197,7 @@
       "caseId": "01340",
       "synopsis": "A reaction whose rate goes negative due to an event.",
       "sourcePath": "semantic/01340/01340-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01340/input.heta",
       "outputs": {
         "canonical": "01340/canonical/output.heta.json",
@@ -33266,29 +32213,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -36146,7 +35077,7 @@
       "caseId": "01466",
       "synopsis": "A test of random event execution at t0.",
       "sourcePath": "semantic/01466/01466-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01466/input.heta",
       "outputs": {
         "canonical": "01466/canonical/output.heta.json",
@@ -36162,29 +35093,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/200/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {
@@ -36963,30 +35878,15 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
       },
       "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
-      },
       "notEvaluatedTestTags": [
         "VolumeConcentrationRates"
       ]
@@ -37011,30 +35911,15 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
       },
       "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
-      },
       "notEvaluatedTestTags": [
         "VolumeConcentrationRates"
       ]
@@ -39525,7 +38410,7 @@
       "caseId": "01658",
       "synopsis": "An event with avogadro in the trigger.",
       "sourcePath": "semantic/01658/01658-sbml-l3v1.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01658/input.heta",
       "outputs": {
         "canonical": "01658/canonical/output.heta.json",
@@ -39541,29 +38426,13 @@
           }
         },
         "dynms": {
-          "status": "failed",
+          "status": "valid",
           "schema": {
             "source": "heta-compiler/dynms-schema",
             "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
             "title": "DynMS 0.2.2 document"
-          },
-          "errors": [
-            {
-              "instancePath": "/models/0/events/0/id",
-              "schemaPath": "#/$defs/identifier/pattern",
-              "keyword": "pattern",
-              "message": "must match pattern \"^[A-Za-z][A-Za-z0-9_]*$\"",
-              "params": {
-                "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
-              }
-            }
-          ]
+          }
         }
-      },
-      "buildStatus": "success",
-      "error": {
-        "phase": "json-schema-validation",
-        "message": "dynms output does not conform to the exported schema"
       }
     },
     {

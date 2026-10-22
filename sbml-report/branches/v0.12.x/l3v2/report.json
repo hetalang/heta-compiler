@@ -6,8 +6,8 @@
     "packageVersion": "0.1.1"
   },
   "status": "completed-with-errors",
-  "startedAt": "2026-10-22T15:44:10.908Z",
-  "completedAt": "2026-10-22T15:59:15.519Z",
+  "startedAt": "2026-10-22T19:37:08.847Z",
+  "completedAt": "2026-10-22T19:45:44.194Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l3v2",
