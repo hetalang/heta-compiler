@@ -103,27 +103,27 @@ Expression.prototype.toJuliaString = function(substituteByDefinitions = true, tr
       if(node.fn.name==='ifgt'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `${args[0]} > ${args[1]} ? ${args[2]} : ${args[3]}`;
+        return `(${args[0]} > ${args[1]} ? ${args[2]} : ${args[3]})`;
       }
       if(node.fn.name==='ifge'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `${args[0]} >= ${args[1]} ? ${args[2]} : ${args[3]}`;
+        return `(${args[0]} >= ${args[1]} ? ${args[2]} : ${args[3]})`;
       }
       if(node.fn.name==='iflt'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `${args[0]} < ${args[1]} ? ${args[2]} : ${args[3]}`;
+        return `(${args[0]} < ${args[1]} ? ${args[2]} : ${args[3]})`;
       }
       if(node.fn.name==='ifle'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `${args[0]} <= ${args[1]} ? ${args[2]} : ${args[3]}`;
+        return `(${args[0]} <= ${args[1]} ? ${args[2]} : ${args[3]})`;
       }
       if(node.fn.name==='ifeq'){
         let args = node.args
           .map((arg) => arg.toString(options));
-        return `${args[0]} == ${args[1]} ? ${args[2]} : ${args[3]}`;
+        return `(${args[0]} == ${args[1]} ? ${args[2]} : ${args[3]})`;
       }
     }
 

@@ -82,15 +82,15 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "ifgt(x-y, 0, 1,2)"', () => {
     let expr = Expression.fromString('ifgt(x-y, 0, 1,2)');
-    expect(expr.toJuliaString()).to.be.equal('x - y > 0e+0 ? 1e+0 : 2e+0');
+    expect(expr.toJuliaString()).to.be.equal('(x - y > 0e+0 ? 1e+0 : 2e+0)');
   });
   it('toJuliaString() for "ifeq(x-y, 0, 1,2)"', () => {
     let expr = Expression.fromString('ifeq(x-y, 0, 1,2)');
-    expect(expr.toJuliaString()).to.be.equal('x - y == 0e+0 ? 1e+0 : 2e+0');
+    expect(expr.toJuliaString()).to.be.equal('(x - y == 0e+0 ? 1e+0 : 2e+0)');
   });
   it('toJuliaString() for "ifge(x-y, 0, 1, 2)"', () => {
     let expr = Expression.fromString('ifge(x-y, 0, 1, 2)');
-    expect(expr.toJuliaString()).to.be.equal('x - y >= 0e+0 ? 1e+0 : 2e+0');
+    expect(expr.toJuliaString()).to.be.equal('(x - y >= 0e+0 ? 1e+0 : 2e+0)');
   });
   it('toJuliaString() for "factorial(x*y)"', () => {
     let expr = Expression.fromString('factorial(x*y)');
@@ -118,19 +118,35 @@ describe('Expression exports to Julia', () => {
   });
   it('toJuliaString() for "ifgt(1, 2, 3, 4)"', () => {
     let expr = Expression.fromString('ifgt(1, 2, 3, 4)');
-    expect(expr.toJuliaString()).to.be.equal('1e+0 > 2e+0 ? 3e+0 : 4e+0');
+    expect(expr.toJuliaString()).to.be.equal('(1e+0 > 2e+0 ? 3e+0 : 4e+0)');
   });
   it('toJuliaString() for "ifge(1, 2, 3, 4)"', () => {
     let expr = Expression.fromString('ifge(1, 2, 3, 4)');
-    expect(expr.toJuliaString()).to.be.equal('1e+0 >= 2e+0 ? 3e+0 : 4e+0');
+    expect(expr.toJuliaString()).to.be.equal('(1e+0 >= 2e+0 ? 3e+0 : 4e+0)');
   });
   it('toJuliaString() for "iflt(1, 2, 3, 4)"', () => {
     let expr = Expression.fromString('iflt(1, 2, 3, 4)');
-    expect(expr.toJuliaString()).to.be.equal('1e+0 < 2e+0 ? 3e+0 : 4e+0');
+    expect(expr.toJuliaString()).to.be.equal('(1e+0 < 2e+0 ? 3e+0 : 4e+0)');
   });
   it('toJuliaString() for "ifle(1, 2, 3, 4)"', () => {
     let expr = Expression.fromString('ifle(1, 2, 3, 4)');
-    expect(expr.toJuliaString()).to.be.equal('1e+0 <= 2e+0 ? 3e+0 : 4e+0');
+    expect(expr.toJuliaString()).to.be.equal('(1e+0 <= 2e+0 ? 3e+0 : 4e+0)');
+  });
+  it('keeps conditional function values grouped inside arithmetic expressions', () => {
+    const cases = [
+      ['a * ifge(t, 1, 10, 20)', 'a * (t >= 1e+0 ? 1e+1 : 2e+1)'],
+      ['ifge(t, 1, 10, 20) * a', '(t >= 1e+0 ? 1e+1 : 2e+1) * a'],
+      ['1 + ifge(t, 1, 10, 20)', '1e+0 + (t >= 1e+0 ? 1e+1 : 2e+1)'],
+      ['ifge(t, 1, 10, 20) / b', '(t >= 1e+0 ? 1e+1 : 2e+1) / b'],
+      ['-ifge(t, 1, 10, 20)', '-(t >= 1e+0 ? 1e+1 : 2e+1)'],
+      ['b * iflt(t, 1, 10, 20)', 'b * (t < 1e+0 ? 1e+1 : 2e+1)'],
+      ['b * ifgt(t, 1, 10, 20)', 'b * (t > 1e+0 ? 1e+1 : 2e+1)'],
+      ['b * ifle(t, 1, 10, 20)', 'b * (t <= 1e+0 ? 1e+1 : 2e+1)'],
+      ['3 * ifeq(b, 2, 10, 20)', '3e+0 * (b == 2e+0 ? 1e+1 : 2e+1)'],
+    ];
+    cases.forEach(([source, expected]) => {
+      expect(Expression.fromString(source).toJuliaString()).to.equal(expected);
+    });
   });
   it('toJuliaString() for "Infinity/4"', () => {
     let expr = Expression.fromString('Infinity/4');

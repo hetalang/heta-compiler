@@ -7,6 +7,7 @@
 - Fixed **SBML import** of event trigger `initialValue="false"` as `atStart: true` for `DSwitcher` and `CSwitcher`.
 - Fixed **mrgsolve export** of arbitrary-base logarithms and factorials.
 - Fixed **Julia export**: `logbase(x, base)` now uses `(NaNMath.log(x) / NaNMath.log(base))`; `factorial(x)` now uses `SpecialFunctions.gamma((x) + 1)`.
+- Fixed **Julia expression export** of conditional functions in arithmetic expressions for ifgt etc.
 - Fixed **Julia export** for models without dynamic records: the dummy ODE state now has a non-steady-state flag and is unpacked consistently in the RHS, output function, and event callbacks.
 - Added `schemas.tar.gz` with the DynMS and Heta JSON schemas to release assets.
 
