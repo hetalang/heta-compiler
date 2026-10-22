@@ -268,6 +268,7 @@ function _substitute_and_simplify(expr, namespace) {
 function _substitute(topNode, namespace) {
     return topNode.transform((node, path, parent) => {
         if (node.isSymbolNode && path !== 'fn') {
+            if (node.name === 'pi' || node.name === 'e') return node;
             let componentObj = namespace.get(node.name);
             if (componentObj.instanceOf('Record')) {
                 if (!componentObj.isRule) {

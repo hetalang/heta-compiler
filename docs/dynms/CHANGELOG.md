@@ -2,6 +2,7 @@
 
 ## 0.2.2
 
+- allow identifiers to start with an underscore
 - add reserved words: "Pi", "ExponentialE", "NaN", "Infinity", "True", "False"
 - add scenarios
 

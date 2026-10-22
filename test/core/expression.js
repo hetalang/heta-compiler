@@ -143,4 +143,21 @@ describe('Function definition substitution', () => {
     expect(expression.substituteByDefinitions().toString())
       .to.equal('(y + 1) ^ 2 + (y + 1) ^ 3');
   });
+
+  it('expands several levels of nested function calls', () => {
+    const container = new Container();
+    container.loadMany([
+      { id: 'addone', action: 'defineFunction', arguments: ['x'], math: 'x + 1' },
+      { id: 'twice', action: 'defineFunction', arguments: ['x'], math: 'addone(x) + addone(x)' },
+      { id: 'deep', action: 'defineFunction', arguments: ['x'], math: 'twice(x) + twice(x)' }
+    ]);
+    container.knitMany();
+
+    const expression = Expression.fromString('deep(3)');
+    expression.functionList()[0].fnObj = container.functionDefStorage.get('deep');
+    const expanded = expression.substituteByDefinitions();
+
+    expect(expanded.toString()).not.to.match(/addone|twice|deep/);
+    expect(expanded.exprParsed.evaluate()).to.equal(16);
+  });
 });

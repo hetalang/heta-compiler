@@ -43,6 +43,36 @@ describe('DynMS schema', () => {
     expect(validateDynms(doc)).to.equal(true);
   });
 
+  it('accepts identifiers starting with an underscore', () => {
+    const doc = makeDoc(0);
+    doc.models[0].id = '_model';
+    doc.models[0].dynamic[0].id = '_x';
+    doc.models[0].events.push({
+      id: '_E0',
+      trigger: {
+        type: 'conditional',
+        rhs: { expr: ['GreaterEqual', 't', 0.98], format: 'math-json' }
+      },
+      actions: [{ state: '_x', rhs: { expr: 2, format: 'math-json' } }]
+    });
+
+    expect(validateDynms(doc), validateDynms.errors).to.equal(true);
+  });
+
+  it('still rejects identifiers starting with a digit', () => {
+    const doc = makeDoc(0);
+    doc.models[0].events.push({
+      id: '1E0',
+      trigger: {
+        type: 'conditional',
+        rhs: { expr: ['GreaterEqual', 't', 0.98], format: 'math-json' }
+      },
+      actions: []
+    });
+
+    expect(validateDynms(doc)).to.equal(false);
+  });
+
   it('accepts scenarios with required run information', () => {
     const doc = makeDoc(0);
     doc.scenarios = [{

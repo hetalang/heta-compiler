@@ -378,7 +378,7 @@ At each solver step:
 
 ## 6. Identifiers inside models
 
-DynMS uses string identifiers for all model components. An identifier must start with a letter and then contain only letters, digits, or underscores. It must be unique within a model.
+DynMS uses string identifiers for all model components. An identifier must start with a letter or underscore and then contain only letters, digits, or underscores. It must be unique within a model.
 
 ---
 
