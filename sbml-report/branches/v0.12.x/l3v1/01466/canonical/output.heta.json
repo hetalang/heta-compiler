@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.3"
     },
-    "created": "2026-10-19T03:24:06.855Z",
+    "created": "2026-10-22T16:11:03.939Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "cc44365d1ad4929780719b639781ba530ec0d557a4b494ec6d14af9cf11f6275",
+    "hashSum": "4cd79350ed8f845d5698af599bc81f32385958551097b6c157d7863ceb0d50a5",
     "hashAlgorithm": "sha256"
   },
   {
@@ -1848,1200 +1848,1400 @@
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E0",
     "trigger": "trig > 0 and A0 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E1",
     "trigger": "trig > 0 and A1 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E10",
     "trigger": "trig > 0 and A10 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E11",
     "trigger": "trig > 0 and A11 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E12",
     "trigger": "trig > 0 and A12 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E13",
     "trigger": "trig > 0 and A13 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E14",
     "trigger": "trig > 0 and A14 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E15",
     "trigger": "trig > 0 and A15 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E16",
     "trigger": "trig > 0 and A16 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E17",
     "trigger": "trig > 0 and A17 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E18",
     "trigger": "trig > 0 and A18 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E19",
     "trigger": "trig > 0 and A19 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E2",
     "trigger": "trig > 0 and A2 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E20",
     "trigger": "trig > 0 and A20 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E21",
     "trigger": "trig > 0 and A21 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E22",
     "trigger": "trig > 0 and A22 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E23",
     "trigger": "trig > 0 and A23 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E24",
     "trigger": "trig > 0 and A24 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E25",
     "trigger": "trig > 0 and A25 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E26",
     "trigger": "trig > 0 and A26 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E27",
     "trigger": "trig > 0 and A27 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E28",
     "trigger": "trig > 0 and A28 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E29",
     "trigger": "trig > 0 and A29 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E3",
     "trigger": "trig > 0 and A3 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E30",
     "trigger": "trig > 0 and A30 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E31",
     "trigger": "trig > 0 and A31 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E32",
     "trigger": "trig > 0 and A32 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E33",
     "trigger": "trig > 0 and A33 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E34",
     "trigger": "trig > 0 and A34 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E35",
     "trigger": "trig > 0 and A35 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E36",
     "trigger": "trig > 0 and A36 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E37",
     "trigger": "trig > 0 and A37 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E38",
     "trigger": "trig > 0 and A38 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E39",
     "trigger": "trig > 0 and A39 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E4",
     "trigger": "trig > 0 and A4 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E40",
     "trigger": "trig > 0 and A40 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E41",
     "trigger": "trig > 0 and A41 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E42",
     "trigger": "trig > 0 and A42 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E43",
     "trigger": "trig > 0 and A43 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E44",
     "trigger": "trig > 0 and A44 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E45",
     "trigger": "trig > 0 and A45 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E46",
     "trigger": "trig > 0 and A46 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E47",
     "trigger": "trig > 0 and A47 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E48",
     "trigger": "trig > 0 and A48 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E49",
     "trigger": "trig > 0 and A49 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E5",
     "trigger": "trig > 0 and A5 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E50",
     "trigger": "trig > 0 and A50 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E51",
     "trigger": "trig > 0 and A51 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E52",
     "trigger": "trig > 0 and A52 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E53",
     "trigger": "trig > 0 and A53 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E54",
     "trigger": "trig > 0 and A54 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E55",
     "trigger": "trig > 0 and A55 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E56",
     "trigger": "trig > 0 and A56 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E57",
     "trigger": "trig > 0 and A57 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E58",
     "trigger": "trig > 0 and A58 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E59",
     "trigger": "trig > 0 and A59 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E6",
     "trigger": "trig > 0 and A6 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E60",
     "trigger": "trig > 0 and A60 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E61",
     "trigger": "trig > 0 and A61 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E62",
     "trigger": "trig > 0 and A62 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E63",
     "trigger": "trig > 0 and A63 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E64",
     "trigger": "trig > 0 and A64 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E65",
     "trigger": "trig > 0 and A65 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E66",
     "trigger": "trig > 0 and A66 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E67",
     "trigger": "trig > 0 and A67 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E68",
     "trigger": "trig > 0 and A68 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E69",
     "trigger": "trig > 0 and A69 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E7",
     "trigger": "trig > 0 and A7 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E70",
     "trigger": "trig > 0 and A70 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E71",
     "trigger": "trig > 0 and A71 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E72",
     "trigger": "trig > 0 and A72 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E73",
     "trigger": "trig > 0 and A73 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E74",
     "trigger": "trig > 0 and A74 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E75",
     "trigger": "trig > 0 and A75 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E76",
     "trigger": "trig > 0 and A76 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E77",
     "trigger": "trig > 0 and A77 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E78",
     "trigger": "trig > 0 and A78 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E79",
     "trigger": "trig > 0 and A79 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E8",
     "trigger": "trig > 0 and A8 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E80",
     "trigger": "trig > 0 and A80 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E81",
     "trigger": "trig > 0 and A81 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E82",
     "trigger": "trig > 0 and A82 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E83",
     "trigger": "trig > 0 and A83 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E84",
     "trigger": "trig > 0 and A84 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E85",
     "trigger": "trig > 0 and A85 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E86",
     "trigger": "trig > 0 and A86 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E87",
     "trigger": "trig > 0 and A87 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E88",
     "trigger": "trig > 0 and A88 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E89",
     "trigger": "trig > 0 and A89 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E9",
     "trigger": "trig > 0 and A9 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E90",
     "trigger": "trig > 0 and A90 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E91",
     "trigger": "trig > 0 and A91 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E92",
     "trigger": "trig > 0 and A92 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E93",
     "trigger": "trig > 0 and A93 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E94",
     "trigger": "trig > 0 and A94 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E95",
     "trigger": "trig > 0 and A95 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E96",
     "trigger": "trig > 0 and A96 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E97",
     "trigger": "trig > 0 and A97 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E98",
     "trigger": "trig > 0 and A98 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E99",
     "trigger": "trig > 0 and A99 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb0",
     "trigger": "trig > 0 and B0 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb1",
     "trigger": "trig > 0 and B1 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb10",
     "trigger": "trig > 0 and B10 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb11",
     "trigger": "trig > 0 and B11 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb12",
     "trigger": "trig > 0 and B12 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb13",
     "trigger": "trig > 0 and B13 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb14",
     "trigger": "trig > 0 and B14 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb15",
     "trigger": "trig > 0 and B15 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb16",
     "trigger": "trig > 0 and B16 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb17",
     "trigger": "trig > 0 and B17 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb18",
     "trigger": "trig > 0 and B18 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb19",
     "trigger": "trig > 0 and B19 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb2",
     "trigger": "trig > 0 and B2 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb20",
     "trigger": "trig > 0 and B20 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb21",
     "trigger": "trig > 0 and B21 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb22",
     "trigger": "trig > 0 and B22 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb23",
     "trigger": "trig > 0 and B23 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb24",
     "trigger": "trig > 0 and B24 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb25",
     "trigger": "trig > 0 and B25 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb26",
     "trigger": "trig > 0 and B26 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb27",
     "trigger": "trig > 0 and B27 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb28",
     "trigger": "trig > 0 and B28 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb29",
     "trigger": "trig > 0 and B29 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb3",
     "trigger": "trig > 0 and B3 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb30",
     "trigger": "trig > 0 and B30 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb31",
     "trigger": "trig > 0 and B31 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb32",
     "trigger": "trig > 0 and B32 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb33",
     "trigger": "trig > 0 and B33 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb34",
     "trigger": "trig > 0 and B34 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb35",
     "trigger": "trig > 0 and B35 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb36",
     "trigger": "trig > 0 and B36 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb37",
     "trigger": "trig > 0 and B37 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb38",
     "trigger": "trig > 0 and B38 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb39",
     "trigger": "trig > 0 and B39 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb4",
     "trigger": "trig > 0 and B4 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb40",
     "trigger": "trig > 0 and B40 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb41",
     "trigger": "trig > 0 and B41 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb42",
     "trigger": "trig > 0 and B42 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb43",
     "trigger": "trig > 0 and B43 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb44",
     "trigger": "trig > 0 and B44 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb45",
     "trigger": "trig > 0 and B45 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb46",
     "trigger": "trig > 0 and B46 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb47",
     "trigger": "trig > 0 and B47 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb48",
     "trigger": "trig > 0 and B48 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb49",
     "trigger": "trig > 0 and B49 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb5",
     "trigger": "trig > 0 and B5 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb50",
     "trigger": "trig > 0 and B50 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb51",
     "trigger": "trig > 0 and B51 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb52",
     "trigger": "trig > 0 and B52 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb53",
     "trigger": "trig > 0 and B53 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb54",
     "trigger": "trig > 0 and B54 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb55",
     "trigger": "trig > 0 and B55 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb56",
     "trigger": "trig > 0 and B56 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb57",
     "trigger": "trig > 0 and B57 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb58",
     "trigger": "trig > 0 and B58 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb59",
     "trigger": "trig > 0 and B59 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb6",
     "trigger": "trig > 0 and B6 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb60",
     "trigger": "trig > 0 and B60 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb61",
     "trigger": "trig > 0 and B61 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb62",
     "trigger": "trig > 0 and B62 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb63",
     "trigger": "trig > 0 and B63 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb64",
     "trigger": "trig > 0 and B64 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb65",
     "trigger": "trig > 0 and B65 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb66",
     "trigger": "trig > 0 and B66 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb67",
     "trigger": "trig > 0 and B67 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb68",
     "trigger": "trig > 0 and B68 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb69",
     "trigger": "trig > 0 and B69 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb7",
     "trigger": "trig > 0 and B7 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb70",
     "trigger": "trig > 0 and B70 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb71",
     "trigger": "trig > 0 and B71 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb72",
     "trigger": "trig > 0 and B72 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb73",
     "trigger": "trig > 0 and B73 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb74",
     "trigger": "trig > 0 and B74 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb75",
     "trigger": "trig > 0 and B75 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb76",
     "trigger": "trig > 0 and B76 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb77",
     "trigger": "trig > 0 and B77 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb78",
     "trigger": "trig > 0 and B78 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb79",
     "trigger": "trig > 0 and B79 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb8",
     "trigger": "trig > 0 and B8 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb80",
     "trigger": "trig > 0 and B80 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb81",
     "trigger": "trig > 0 and B81 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb82",
     "trigger": "trig > 0 and B82 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb83",
     "trigger": "trig > 0 and B83 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb84",
     "trigger": "trig > 0 and B84 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb85",
     "trigger": "trig > 0 and B85 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb86",
     "trigger": "trig > 0 and B86 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb87",
     "trigger": "trig > 0 and B87 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb88",
     "trigger": "trig > 0 and B88 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb89",
     "trigger": "trig > 0 and B89 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb9",
     "trigger": "trig > 0 and B9 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb90",
     "trigger": "trig > 0 and B90 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb91",
     "trigger": "trig > 0 and B91 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb92",
     "trigger": "trig > 0 and B92 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb93",
     "trigger": "trig > 0 and B93 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb94",
     "trigger": "trig > 0 and B94 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb95",
     "trigger": "trig > 0 and B95 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb96",
     "trigger": "trig > 0 and B96 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb97",
     "trigger": "trig > 0 and B97 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb98",
     "trigger": "trig > 0 and B98 < 1"
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "Eb99",
     "trigger": "trig > 0 and B99 < 1"

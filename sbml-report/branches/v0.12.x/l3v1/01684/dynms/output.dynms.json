@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.12.3"
   },
-  "created": "2026-10-19T03:25:39.273Z",
+  "created": "2026-10-22T16:12:40.915Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -114,7 +114,8 @@
               ],
               "format": "math-json"
             },
-            "detection": "step"
+            "detection": "step",
+            "atStart": true
           },
           "priority": 0,
           "actions": [

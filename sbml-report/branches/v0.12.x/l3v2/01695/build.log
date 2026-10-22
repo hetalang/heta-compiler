@@ -8,7 +8,7 @@ No declaration file, running with defaults...
 [error]	Function math "implies" should be a numeric expression.
 [error]	Function math "comparePointNine" should be a numeric expression.
 [error]	DSwitcher trigger "undefined::E0" should be a boolean expression.
-[info]	Platform hash: 4bd94ea18729a8f357cafd953a77a0bd4be420dbdf2641d677e5eccad1ee73d2
+[info]	Platform hash: edb8590e8e77973fdb35ba022b35d96c4d343fa10fc2ea660fc1b75b15a419f7
 [info]	Setting references in elements, total length 94
 [error]	No required "trigger" property for "E0" of DSwitcher.
 [info]	Checking for circular references in Records.

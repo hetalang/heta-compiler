@@ -6,8 +6,8 @@
     "packageVersion": "0.1.1"
   },
   "status": "completed-with-errors",
-  "startedAt": "2026-10-19T03:12:35.985Z",
-  "completedAt": "2026-10-19T03:26:40.301Z",
+  "startedAt": "2026-10-22T15:59:15.912Z",
+  "completedAt": "2026-10-22T16:13:43.388Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l3v1",
@@ -40404,7 +40404,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v1/01695/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01695/01695-sbml-l3v1.xml\"...\n[error] Function math \"comparePointNine\" should be a numeric expression.\n[error] DSwitcher trigger \"undefined::E0\" should be a boolean expression.\n[info] Platform hash: 0fcb252a55cd1ade29d46d2665317880158bb500fd6790a5b27d60e15ef92ca3\n[info] Setting references in elements, total length 92\n[error] No required \"trigger\" property for \"E0\" of DSwitcher.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v1/01695/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01695/01695-sbml-l3v1.xml\"...\n[error] Function math \"comparePointNine\" should be a numeric expression.\n[error] DSwitcher trigger \"undefined::E0\" should be a boolean expression.\n[info] Platform hash: b64fd570db7666c63a2d12cac542408e9a5d615b8581f0f1fc4d1ef79285e4b9\n[info] Setting references in elements, total length 92\n[error] No required \"trigger\" property for \"E0\" of DSwitcher.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       }
     },
     {
@@ -40900,7 +40900,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v1/01719/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01719/01719-sbml-l3v1.xml\"...\n[error] S1_stoich component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 82b041719a1d2ec2a357791c3ba28fe86399c61e6f75885b5649ef6e736b6e81\n[info] Setting references in elements, total length 96\n[error] S1_stoich_proc Property \"actors[0].target\" has lost reference \"S1_stoich\".\n[error] Component \"S1_stoich\" is not found in space \"nameless\" as expected in DSwitcher: \"E1\"\n\tS1_stoich <= 3.3;\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l3v1/01719/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01719/01719-sbml-l3v1.xml\"...\n[error] S1_stoich component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: c6316bd9de8d9840f0b10f8ddbedcd59401a613d077201bdc3acb0f5676e47ee\n[info] Setting references in elements, total length 96\n[error] S1_stoich_proc Property \"actors[0].target\" has lost reference \"S1_stoich\".\n[error] Component \"S1_stoich\" is not found in space \"nameless\" as expected in DSwitcher: \"E1\"\n\tS1_stoich <= 3.3;\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n"
       },
       "buildStatus": "failed",
       "notEvaluatedTestTags": [
