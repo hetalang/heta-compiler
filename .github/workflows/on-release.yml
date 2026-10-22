@@ -23,7 +23,8 @@ jobs:
         run: |
           tar -czf schemas.tar.gz \
             -C src/dynms dynms.schema.json \
-            -C ../json-export heta.json.schema.json
+            -C ../json-export heta.json.schema.json \
+            -C ../builder declaration-schema.json
 
       - name: Upload schemas release asset
         uses: softprops/action-gh-release@v3
