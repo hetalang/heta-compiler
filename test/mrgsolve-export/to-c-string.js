@@ -4,6 +4,13 @@ require('../../src/mrgsolve-export/expression');
 const { expect } = require('chai');
 
 describe('Expession exports to mrgsolve', () => {
+  it('uses C++ arithmetic operators with the required grouping', () => {
+    expect(Expression.fromString('divide(add(a, b), c)').toCString()).to.equal('(a + b) / c');
+    expect(Expression.fromString('add(a, divide(b, c))').toCString()).to.equal('a + b / c');
+    expect(Expression.fromString('multiply(subtract(a, b), c)').toCString()).to.equal('(a - b) * c');
+    expect(Expression.fromString('divide(a, logbase(b, c))').toCString()).to.equal('a / (log(b) / log(c))');
+    expect(Expression.fromString('a / logbase(b, c)').toCString()).to.equal('a / (log(b) / log(c))');
+  });
   it('toCString() for "x*y"', () => {
     let expr = Expression.fromString('x*y');
     expect(expr.toCString()).to.be.equal('x * y');

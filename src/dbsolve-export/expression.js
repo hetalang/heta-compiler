@@ -1,4 +1,37 @@
 const { Expression } = require('../core/expression');
+const { ConstantNode, FunctionNode, OperatorNode } = require('mathjs');
+
+const infixOperators = {
+  add: '+',
+  subtract: '-',
+  multiply: '*',
+  divide: '/'
+};
+
+function convertInfixFunctions(node, powTransform) {
+  let converted = node.map((child) => convertInfixFunctions(child, powTransform));
+  if (converted.type !== 'FunctionNode') return converted;
+
+  let { name } = converted.fn;
+  let args = converted.args;
+  if (Object.prototype.hasOwnProperty.call(infixOperators, name)) {
+    return new OperatorNode(infixOperators[name], name, args);
+  }
+  if (name === 'pow' && powTransform === 'operator') {
+    return new OperatorNode('^', 'pow', args);
+  }
+  if ((name === 'square' || name === 'cube') && powTransform !== 'function') {
+    return new OperatorNode('^', 'pow', [args[0], new ConstantNode(name === 'square' ? 2 : 3)]);
+  }
+  if (name === 'nthRoot' && powTransform === 'operator') {
+    return new OperatorNode('^', 'pow', [args[0], new OperatorNode('/', 'divide', [new ConstantNode(1), args[1]])]);
+  }
+  if (name === 'logbase' || name === 'log2') {
+    let base = name === 'logbase' ? args[1] : new ConstantNode(2);
+    return new OperatorNode('/', 'divide', [new FunctionNode('log', [args[0]]), new FunctionNode('log', [base])]);
+  }
+  return converted;
+}
 
 Expression.prototype.toSLVString = function(logger, powTransform = 'keep', substituteByDefinitions = true) {
   let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
@@ -6,6 +39,9 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
   if (['keep', 'operator', 'function'].indexOf(powTransform) === -1) {
     throw new TypeError('powTransform must be one of values: "keep", "operator", "function".');
   }
+
+  // Let mathjs print converted operators with precedence-aware parentheses.
+  tree = convertInfixFunctions(tree, powTransform);
 
   let SLVStringHandler = (node, options) => {
     // OperatorNode
@@ -20,48 +56,6 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
 
     // FunctionNode
     if (node.type === 'FunctionNode') {
-      if (node.fn.name==='pow' && powTransform==='operator') {
-        if (node.args[0].type==='OperatorNode') {
-          var arg0 = `(${node.args[0].toString(options)})`;
-        } else {
-          arg0 = node.args[0].toString(options);
-        }
-        if (node.args[1].type==='OperatorNode') {
-          var arg1 = `(${node.args[1].toString(options)})`;
-        } else {
-          arg1 = node.args[1].toString(options);
-        }
-        return `${arg0} ^ ${arg1}`;
-      }
-      if (node.fn.name==='add') {
-        let args = node.args
-          .map((arg) => {
-            if (arg.type==='OperatorNode') {
-              return `(${arg.toString(options)})`;
-            } else {
-              return arg.toString(options);
-            }
-          }).join(' + ');
-        return args;
-      }
-      if (node.fn.name==='divide') {
-        let args = node.args
-          .map((arg) => arg.toString(options))
-          .join(' / ');
-        return args;
-      }
-      if (node.fn.name==='multiply') {
-        let args = node.args
-          .map((arg) => arg.toString(options))
-          .join(' * ');
-        return args;
-      }
-      if (node.fn.name==='subtract') {
-        let args = node.args
-          .map((arg) => arg.toString(options))
-          .join(' - ');
-        return args;
-      }
       if (node.fn.name==='max' && node.args.length===2) {
         let args = node.args
           .map((arg) => arg.toString(options))
@@ -89,26 +83,8 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
       if (node.fn.name==='square' && powTransform==='function') {
         return `pow(${node.args[0].toString(options)}, 2)`;
       }
-      if (node.fn.name==='square' && powTransform!=='function') {
-        let arg0;
-        if (node.args[0].type==='OperatorNode') {
-          arg0 = `(${node.args[0].toString(options)})`;
-        } else {
-          arg0 = node.args[0].toString(options);
-        }
-        return `${arg0} ^ 2`;
-      }
       if (node.fn.name==='cube' && powTransform==='function') {
         return `pow(${node.args[0].toString(options)}, 3)`;
-      }
-      if (node.fn.name==='cube' && powTransform!=='function') {
-        let arg0;
-        if (node.args[0].type==='OperatorNode') {
-          arg0 = `(${node.args[0].toString(options)})`;
-        } else {
-          arg0 = node.args[0].toString(options);
-        }
-        return `${arg0} ^ 3`;
       }
       if (node.fn.name === 'nthRoot' && powTransform !== 'operator') {
         let args = node.args
@@ -120,28 +96,6 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
             }
           });
         return `pow(${args[0]}, 1 / ${args[1]})`;
-      }
-      if (node.fn.name === 'nthRoot' && powTransform === 'operator') {
-        let args = node.args
-          .map((arg) => {
-            if (arg.type === 'OperatorNode') {
-              return `(${arg.toString(options)})`;
-            } else {
-              return arg.toString(options);
-            }
-          });
-
-        return `${args[0]} ^ (1 / ${args[1]})`;
-      }
-      if (node.fn.name === 'logbase') {
-        let args = node.args
-          .map((arg) => arg.toString(options));
-        return `log(${args[0]}) / log(${args[1]})`;
-      }
-      if (node.fn.name === 'log2') {
-        let args = node.args
-          .map((arg) => arg.toString(options));
-        return `log(${args[0]}) / log(2)`;
       }
       if (node.fn.name === 'piecewise') {
         let msg = `DBS and SLV formats do not support "piecewise" function, got "${node.toString()}"`;

@@ -1,4 +1,27 @@
 const { Expression } = require('../core/expression');
+const { FunctionNode, OperatorNode } = require('mathjs');
+
+const infixOperators = {
+  add: '+',
+  subtract: '-',
+  multiply: '*',
+  divide: '/'
+};
+
+function convertInfixFunctions(node) {
+  let converted = node.map((child) => convertInfixFunctions(child));
+  if (converted.type !== 'FunctionNode') return converted;
+
+  let { name } = converted.fn;
+  if (Object.prototype.hasOwnProperty.call(infixOperators, name)) {
+    return new OperatorNode(infixOperators[name], name, converted.args);
+  }
+  if (name === 'logbase') {
+    let args = converted.args;
+    return new OperatorNode('/', 'divide', [new FunctionNode('log', [args[0]]), new FunctionNode('log', [args[1]])]);
+  }
+  return converted;
+}
 
 Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteByDefinitions = true){
   // set defaults
@@ -7,6 +30,7 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
   }, _mathOptions);
 
   let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
+  tree = convertInfixFunctions(tree);
 
   let CStringHandler = (node, options) => {
     // ConstantNode
@@ -60,10 +84,6 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
           .map((arg) => arg.toString(options))
           .join(', ');
         return `std::min(${args})`;
-      }
-      if (node.fn.name === 'logbase') {
-        let args = node.args.map((arg) => arg.toString(options));
-        return `log(${args[0]}) / log(${args[1]})`;
       }
       if (node.fn.name === 'factorial') {
         return `tgamma(${node.args[0].toString(options)} + 1.0)`;

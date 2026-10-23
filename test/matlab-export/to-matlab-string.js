@@ -5,6 +5,11 @@ const { expect } = require('chai');
 
 describe('Expession exports', () => {
 
+  it('uses MATLAB arithmetic functions for nested Heta functions', () => {
+    expect(Expression.fromString('divide(add(a, b), c)').toMatlabString()).to.equal('rdivide(plus(a, b), c)');
+    expect(Expression.fromString('multiply(subtract(a, b), c)').toMatlabString()).to.equal('times(minus(a, b), c)');
+  });
+
   it('toMatlabString() for "pow(x, y)"', () => {
     let expr = Expression.fromString('pow(x, y)');
     expect(expr.toMatlabString()).to.be.equal('power(x, y)');

@@ -3,9 +3,11 @@
 ## 0.12.3
 
 - Updated **DynMS export** to version 0.2.2: added exported simulation scenarios and reserved the identifiers `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False`.
+- Fixed **DynMS export** of initial values with `pi` and `e` and nested user-defined functions; allowed identifiers starting with `_` in the DynMS schema.
 - Improved **SBML import**: imports of rate rules for concentration species now complete with a warning; reports unsupported MathML `infinity` and `notanumber`.
 - Fixed **SBML import** of event trigger `initialValue="false"` as `atStart: true` for `DSwitcher` and `CSwitcher`.
 - Fixed **mrgsolve export** of arbitrary-base logarithms and factorials.
+- Fixed nested arithmetic function export: DBSolve/SLV and mrgsolve/DynMS C expressions preserve grouping; Matlab/Simbio use MATLAB arithmetic functions.
 - Fixed **Julia export**: `logbase(x, base)` now uses `(NaNMath.log(x) / NaNMath.log(base))`; `factorial(x)` now uses `SpecialFunctions.gamma((x) + 1)`.
 - Fixed **Julia expression export** of conditional functions in arithmetic expressions for ifgt etc.
 - Fixed **Julia export** for models without dynamic records: the dummy ODE state now has a non-steady-state flag and is unpacked consistently in the RHS, output function, and event callbacks.

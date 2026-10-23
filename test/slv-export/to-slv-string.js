@@ -37,6 +37,17 @@ describe('Expression exports to SLV', () => {
     let expr = Expression.fromString('sqrt(x)');
     expect(expr.toSLVString(null, 'function')).to.be.equal('sqrt(x)');
   });
+  it('preserves grouping in nested arithmetic functions', () => {
+    expect(Expression.fromString('divide(add(a, b), c)').toSLVString()).to.equal('(a + b) / c');
+    expect(Expression.fromString('add(a, divide(b, c))').toSLVString()).to.equal('a + b / c');
+    expect(Expression.fromString('multiply(add(a, b), c)').toSLVString()).to.equal('(a + b) * c');
+    expect(Expression.fromString('subtract(a, add(b, c))').toSLVString()).to.equal('a - (b + c)');
+    expect(Expression.fromString('divide(a, multiply(b, c))').toSLVString()).to.equal('a / (b * c)');
+    expect(Expression.fromString('2 * add(a, b)').toSLVString()).to.equal('2 * (a + b)');
+    expect(Expression.fromString('square(add(a, b))').toSLVString()).to.equal('(a + b) ^ 2');
+    expect(Expression.fromString('divide(a, logbase(b, c))').toSLVString()).to.equal('a / (log(b) / log(c))');
+    expect(Expression.fromString('pow(add(a, b), c)').toSLVString(null, 'operator')).to.equal('(a + b) ^ c');
+  });
   it('toSLVString(null, "operator") for "nthRoot(x, n)"', () => {
     let expr = Expression.fromString('nthRoot(x, n)');
     expect(expr.toSLVString(null, 'operator')).to.be.equal('x ^ (1 / n)');
