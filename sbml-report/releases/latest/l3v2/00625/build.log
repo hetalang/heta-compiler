@@ -2,9 +2,10 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/00625/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00625/00625-sbml-l3v2.xml"...
+[warn]	SBML <rateRule variable="S2"> targets concentration species "S2" in compartment "C". It is imported as Process "S2_proc"; exported simulations may differ from SBML semantics, especially when the compartment changes.
 [error]	Function math "implies" should be a numeric expression.
 [info]	Platform hash: b24f7780d64be5d565f775d1c5f1b69f4337ce5b10d5419d7da3080f3315c71c
 [info]	Setting references in elements, total length 103

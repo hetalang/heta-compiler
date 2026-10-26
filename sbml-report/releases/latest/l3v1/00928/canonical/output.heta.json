@@ -3,12 +3,12 @@
     "action": "hasMeta",
     "generator": {
       "name": "heta-compiler",
-      "version": "0.12.2"
+      "version": "0.12.3"
     },
-    "created": "2026-09-30T04:14:49.057Z",
+    "created": "2026-10-26T11:51:48.554Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "1df59d2f83eb398024c01ca8e9e5e92466b1cb87ab0e27a65f3e73c05efa6d27",
+    "hashSum": "d087846070d846d0073d15c9eeb2c3f6997bfe010f82903f8a3883a2d80f5a83",
     "hashAlgorithm": "sha256"
   },
   {
@@ -34,6 +34,7 @@
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "evt0",
     "trigger": "t >= 0"

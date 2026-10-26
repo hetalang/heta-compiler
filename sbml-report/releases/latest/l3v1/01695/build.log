@@ -2,12 +2,12 @@ Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/
 
 No declaration file, running with defaults...
 
-[info]	Heta compiler v0.12.2 is initialized for the platform "undefined"
+[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v1/01695/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01695/01695-sbml-l3v1.xml"...
 [error]	Function math "comparePointNine" should be a numeric expression.
 [error]	DSwitcher trigger "undefined::E0" should be a boolean expression.
-[info]	Platform hash: 0fcb252a55cd1ade29d46d2665317880158bb500fd6790a5b27d60e15ef92ca3
+[info]	Platform hash: b64fd570db7666c63a2d12cac542408e9a5d615b8581f0f1fc4d1ef79285e4b9
 [info]	Setting references in elements, total length 92
 [error]	No required "trigger" property for "E0" of DSwitcher.
 [info]	Checking for circular references in Records.
