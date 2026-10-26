@@ -2,13 +2,15 @@
 
 ## 0.2.2
 
-- allow identifiers to start with an underscore
-- add reserved words: "Pi", "ExponentialE", "NaN", "Infinity", "True", "False"
-- add scenarios
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json`.
+- Added top-level `scenarios` for simulation settings and exported Heta scenarios to DynMS.
+- Allowed identifiers to start with an underscore.
+- Reserved `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers, in addition to `t`.
+- Fixed export of state initial values containing `pi` or `e` and nested user-defined functions.
 
 ## 0.2.1
 
-- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json`
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.2/src/dynms/dynms.schema.json`
 - `t` is reserved as a model-component identifier.
 - Constants are now numeric-only.
 

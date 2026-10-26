@@ -42,7 +42,7 @@ Top-level required fields:
 - `dynms`: DynMS version; currently must be `"0.2.2"`;
 - `models`: non-empty array of model definitions.
 
-The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, `license`, and `scenarios`. If `generator` is present, it must contain both `name` and `version`.
+The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`.
 
 `scenarios` is an optional array of simulation-run specifications. A scenario is separate from a model, so multiple scenarios can refer to the same model.
 
@@ -130,7 +130,7 @@ The `derivative` defines the ordinary differential equation for the state. Set o
 
 Some backends may not support static states. The model converter is responsible for checking backend capabilities and converting them when necessary.
 
-For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend only on constants and numeric literals, not on states or assignments.
+For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend only on model constants, numeric literals, and the built-in mathematical constants `Pi` and `ExponentialE`, not on states or assignments.
 
 ```json
 {
@@ -378,7 +378,7 @@ At each solver step:
 
 ## 6. Identifiers inside models
 
-DynMS uses string identifiers for all model components. An identifier must start with a letter or underscore and then contain only letters, digits, or underscores. It must be unique within a model.
+DynMS uses string identifiers for all model components. An identifier must start with a letter or underscore and then contain only letters, digits, or underscores. It must be unique within a model. The identifiers `t`, `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` are reserved and cannot be used for model components. The restriction is case-sensitive.
 
 ---
 
