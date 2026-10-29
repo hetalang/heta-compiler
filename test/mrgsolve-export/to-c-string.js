@@ -49,7 +49,11 @@ describe('Expession exports to mrgsolve', () => {
   });
   it('toCString() for "logbase(x, b)"', () => {
     let expr = Expression.fromString('logbase(x, b)');
-    expect(expr.toCString()).to.be.equal('log(x) / log(b)');
+    expect(expr.toCString()).to.be.equal('(log(x) / log(b))');
+  });
+  it('toCString() for "ln(x)"', () => {
+    expect(Expression.fromString('ln(x)').toCString()).to.equal('log(x)');
+    expect(Expression.fromString('logbase(ln(x), b)').toCString()).to.equal('(log(log(x)) / log(b))');
   });
   it('toCString() for "factorial(x)"', () => {
     let expr = Expression.fromString('factorial(x)');

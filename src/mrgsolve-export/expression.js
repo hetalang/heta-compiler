@@ -1,5 +1,5 @@
 const { Expression } = require('../core/expression');
-const { FunctionNode, OperatorNode } = require('mathjs');
+const { FunctionNode, OperatorNode, ParenthesisNode } = require('mathjs');
 
 const infixOperators = {
   add: '+',
@@ -16,9 +16,12 @@ function convertInfixFunctions(node) {
   if (Object.prototype.hasOwnProperty.call(infixOperators, name)) {
     return new OperatorNode(infixOperators[name], name, converted.args);
   }
+  if (name === 'ln') {
+    return new FunctionNode('log', converted.args);
+  }
   if (name === 'logbase') {
     let args = converted.args;
-    return new OperatorNode('/', 'divide', [new FunctionNode('log', [args[0]]), new FunctionNode('log', [args[1]])]);
+    return new ParenthesisNode(new OperatorNode('/', 'divide', [new FunctionNode('log', [args[0]]), new FunctionNode('log', [args[1]])]));
   }
   return converted;
 }

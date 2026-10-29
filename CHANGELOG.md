@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.12.4
+
+- Fixed **mrgsolve export**: `ln(x)` now emits the C++ `log(x)` function, and `logbase(x, base)` is enclosed in parentheses.
+
 ## 0.12.3
 
 - Updated **DynMS export** to version 0.2.2 with scenarios, revised identifier rules, and fixes for initial expressions and nested user-defined functions; see [DynMS change log](docs/dynms/CHANGELOG.md).
