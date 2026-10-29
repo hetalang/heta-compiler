@@ -9,22 +9,26 @@ If `heta` command is not available check your Heta compiler [installation](./ins
 `heta` is the prefix command for working with the tools. Writing the command alone prints the information about the tool and available options. `heta help` does the same.
 
 ```
-$ heta
+$ heta help
 Usage: heta [options] [command]
 
 Command line utilities for working with Heta compiler
-  version: 0.4.31
-  license: Apache-2.0
+  Version: <compiler version>
+  DynMS version: <DynMS format version>
+  Node: <Node.js version>
 
 Options:
-  -v, --version  output the version number
-  -h, --help     output usage information
+  -v, --version    output the version number
+  --dynms-version  output the DynMS format version
+  -h, --help       display help for command
 
 Commands:
-  build [dir]    Compile Heta-based platform and create set of export files.
-  init [dir]     Create template platform files in directory
-  help [cmd]     display help for [cmd]
+  build [dir]      Compile Heta based platform and create set of export files.
+  init [dir]       Create template platform files in directory.
+  help [command]   display help for command
 ```
+
+`heta --help` and `heta help` show the compiler and DynMS format versions. `heta --dynms-version` prints only the bundled DynMS format version without building a model or accessing the network. For example, the current version is `0.2.2`. `heta --version` prints only the Heta compiler version.
 
 ## "heta build" command
 

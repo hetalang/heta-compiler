@@ -2,6 +2,7 @@
 
 ## 0.12.4
 
+- Added `heta --dynms-version` to report the bundled DynMS format version without building a model; the option is listed in `heta help`.
 - Fixed **mrgsolve export**: `ln(x)` now emits the C++ `log(x)` function, and `logbase(x, base)` is enclosed in parentheses.
 
 ## 0.12.3

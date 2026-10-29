@@ -2,9 +2,11 @@
 'use strict';
 const { Command } = require('commander');
 const { version } = require('../package');
+const dynmsVersion = require('../src/dynms/dynms.schema.json').properties.dynms.const;
 
 let descriptionText = `Command line utilities for working with Heta compiler
   Version: ${version}
+  DynMS version: ${dynmsVersion}
   Node: ${process.version}`;
 
 const subcommands = new Set(['build', 'init']);
@@ -33,6 +35,7 @@ if (subcommands.has(command)) {
   const program = new Command('heta');
   program
     .version(version, '-v, --version')
+    .option('--dynms-version', 'output the DynMS format version')
     .description(descriptionText);
   program
     .command('build [dir]')
@@ -40,5 +43,11 @@ if (subcommands.has(command)) {
   program
     .command('init [dir]')
     .description('Create template platform files in directory.');
+  program.addHelpCommand();
+  program.action(() => {
+    if (program.opts().dynmsVersion) {
+      console.log(dynmsVersion);
+    }
+  });
   program.parse(process.argv);
 }

@@ -70,6 +70,7 @@ function smokeTest() {
   try {
     console.log('Running standalone executable smoke test...');
     run(executablePath, ['--version']);
+    run(executablePath, ['--dynms-version']);
     run(executablePath, ['help', 'build']);
     run(executablePath, ['init', '--silent', '--force', smokeDir]);
     run(executablePath, [
