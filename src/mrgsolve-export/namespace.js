@@ -4,12 +4,14 @@ require('./expression');
 Namespace.prototype.getMrgsolveImage = function() {
   let { logger } = this.container;
   
-  // TODO: need to refactor the code because currently this result in wrong TIME variable in $ODE block
-  // https://mrgsolve.org/user-guide/specification.html#time
-  // We must use SOLVERTIME in $ODE
+  // $ODE uses SOLVERTIME; $MAIN and $TABLE use TIME.
   let image = this.makeDynMSModel({
     renderExpression: (expr) => ({
       expr: typeof expr === 'string' ? expr : expr.toCString(logger, {timeVariable: 'TIME'}),
+      format: 'mrgsolve'
+    }),
+    renderODEExpression: (expr) => ({
+      expr: typeof expr === 'string' ? expr : expr.toCString(logger, {timeVariable: 'SOLVERTIME'}),
       format: 'mrgsolve'
     }),
     renderNumber: (value) => value

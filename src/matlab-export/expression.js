@@ -1,5 +1,12 @@
 const { Expression } = require('../core/expression');
 
+const arithmeticFunctions = {
+  add: 'plus',
+  subtract: 'minus',
+  multiply: 'times',
+  divide: 'rdivide'
+};
+
 Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
   let tree = substituteByDefinitions ? this.substituteByDefinitions().exprParsed : this.exprParsed;
 
@@ -13,27 +20,16 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
 
     // FunctionNode
     if (node.type === 'FunctionNode') {
-      if (node.fn.name==='add') {
-        if (node.args.length === 0) {
-          return '0';
-        }
-        if (node.args.length === 1) {
+      if (Object.prototype.hasOwnProperty.call(arithmeticFunctions, node.fn.name)) {
+        if (node.fn.name === 'add' && node.args.length === 0) return '0';
+        if (node.fn.name === 'multiply' && node.args.length === 0) return '1';
+        if ((node.fn.name === 'add' || node.fn.name === 'multiply') && node.args.length === 1) {
           return node.args[0].toString(options);
         }
-        return node.args
-          .map((arg) => arg.toString(options))
-          .join(' + ');
-      }
-      if (node.fn.name==='multiply') {
-        if (node.args.length === 0) {
-          return '1';
-        }
-        if (node.args.length === 1) {
-          return node.args[0].toString(options);
-        }
-        return node.args
-          .map((arg) => arg.toString(options))
-          .join(' * ');
+
+        let functionName = arithmeticFunctions[node.fn.name];
+        let args = node.args.map((arg) => arg.toString(options));
+        return args.slice(1).reduce((left, right) => `${functionName}(${left}, ${right})`, args[0]);
       }
       if (node.fn.name==='pow') {
         return `power(${node.args[0].toString(options)}, ${node.args[1].toString(options)})`;

@@ -43,6 +43,44 @@ describe('DynMS schema', () => {
     expect(validateDynms(doc)).to.equal(true);
   });
 
+  it('accepts identifiers starting with an underscore', () => {
+    const doc = makeDoc(0);
+    doc.models[0].id = '_model';
+    doc.models[0].dynamic[0].id = '_x';
+    doc.models[0].events.push({
+      id: '_E0',
+      trigger: {
+        type: 'conditional',
+        rhs: ['GreaterEqual', 't', 0.98]
+      },
+      actions: [{ state: '_x', rhs: 2 }]
+    });
+
+    expect(validateDynms(doc), validateDynms.errors).to.equal(true);
+  });
+
+  it('still rejects identifiers starting with a digit', () => {
+    const doc = makeDoc(0);
+    doc.models[0].events.push({
+      id: '1E0',
+      trigger: {
+        type: 'conditional',
+        rhs: ['GreaterEqual', 't', 0.98]
+      },
+      actions: []
+    });
+
+    expect(validateDynms(doc)).to.equal(false);
+  });
+
+  it('accepts t as a component when the time variable has another id', () => {
+    const doc = makeDoc(0);
+    doc.models[0].timeVariable.id = 'tau';
+    doc.models[0].dynamic[0].id = 't';
+
+    expect(validateDynms(doc), validateDynms.errors).to.equal(true);
+  });
+
   it('accepts scenarios with required run information and optional overrides', () => {
     const doc = makeDoc(0);
     doc.scenarios = [{
@@ -69,6 +107,24 @@ describe('DynMS schema', () => {
 
     doc.scenarios[0].tspan = [0, 100];
     doc.scenarios[0].eventsSave = { dose: [true] };
+    expect(validateDynms(doc)).to.equal(false);
+  });
+
+  it('requires exactly two correctly typed entries in scenario pairs', () => {
+    const doc = makeDoc(0);
+    doc.scenarios = [{ id: 'baseline', model: 'model', tspan: [0, 10, 20] }];
+
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].tspan = [0];
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].tspan = [0, '10'];
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].tspan = [0, 10];
+    doc.scenarios[0].eventsSave = { dose: [true, false, true] };
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].eventsSave = { dose: [true] };
+    expect(validateDynms(doc)).to.equal(false);
+    doc.scenarios[0].eventsSave = { dose: [true, 1] };
     expect(validateDynms(doc)).to.equal(false);
   });
 

@@ -50,7 +50,7 @@
   "$defs": {
     "identifier": {
       "type": "string",
-      "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
+      "pattern": "^[_A-Za-z][_A-Za-z0-9]*$",
       "not": {
         "enum": ["Pi", "ExponentialE", "NaN", "Infinity", "True", "False"]
       }
@@ -148,12 +148,9 @@
         "model": { "$ref": "#/$defs/identifier" },
         "tspan": {
           "type": "array",
-          "prefixItems": [
-            { "type": "number" },
-            { "type": "number" }
-          ],
+          "items": { "type": "number" },
           "minItems": 2,
-          "items": false
+          "maxItems": 2
         },
         "parameters": {
           "type": "object",
@@ -178,12 +175,9 @@
           "propertyNames": { "$ref": "#/$defs/identifier" },
           "additionalProperties": {
             "type": "array",
-            "prefixItems": [
-              { "type": "boolean" },
-              { "type": "boolean" }
-            ],
+            "items": { "type": "boolean" },
             "minItems": 2,
-            "items": false
+            "maxItems": 2
           }
         }
       }

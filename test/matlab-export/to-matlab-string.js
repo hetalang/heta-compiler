@@ -9,8 +9,8 @@ describe('Expession exports', () => {
     let expected = {
       'add()': '0',
       'add(x)': 'x',
-      'add(x, y)': 'x + y',
-      'add(x, y, z)': 'x + y + z'
+      'add(x, y)': 'plus(x, y)',
+      'add(x, y, z)': 'plus(plus(x, y), z)'
     };
     Object.entries(expected).forEach(([input, output]) => {
       expect(Expression.fromString(input).toMatlabString()).to.be.equal(output);
@@ -20,12 +20,17 @@ describe('Expession exports', () => {
     let expected = {
       'multiply()': '1',
       'multiply(x)': 'x',
-      'multiply(x, y)': 'x * y',
-      'multiply(x, y, z)': 'x * y * z'
+      'multiply(x, y)': 'times(x, y)',
+      'multiply(x, y, z)': 'times(times(x, y), z)'
     };
     Object.entries(expected).forEach(([input, output]) => {
       expect(Expression.fromString(input).toMatlabString()).to.be.equal(output);
     });
+  });
+
+  it('uses MATLAB arithmetic functions for nested Heta functions', () => {
+    expect(Expression.fromString('divide(add(a, b), c)').toMatlabString()).to.equal('rdivide(plus(a, b), c)');
+    expect(Expression.fromString('multiply(subtract(a, b), c)').toMatlabString()).to.equal('times(minus(a, b), c)');
   });
 
   it('toMatlabString() for "pow(x, y)"', () => {

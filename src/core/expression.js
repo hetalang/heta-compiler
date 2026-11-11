@@ -418,12 +418,13 @@ function _substituteFunctionDef(fnDef, argNodes = []) {
 
   // Expand calls in arguments first: nodes returned from `transform` are not
   // traversed again by mathjs.
-  let expandedArgs = argNodes.map(_substituteUserDefinedFunctions);
+  let functionDefStorage = fnDef._container?.functionDefStorage;
+  let expandedArgs = argNodes.map((node) => _substituteUserDefinedFunctions(node, functionDefStorage));
 
   // Expand nested calls in the function body before binding the arguments.
   // The final binding pass then also traverses the expressions produced by
   // those nested calls (for example, fun2(x) -> fun1(x^2, x^3)).
-  let expandedBody = _substituteUserDefinedFunctions(fnDef.math.exprParsed);
+  let expandedBody = _substituteUserDefinedFunctions(fnDef.math.exprParsed, functionDefStorage);
 
   return expandedBody.transform((node, path) => {
     let argIndex = fnDef.arguments.indexOf(node.name);
@@ -435,10 +436,12 @@ function _substituteFunctionDef(fnDef, argNodes = []) {
   });
 }
 
-function _substituteUserDefinedFunctions(node) {
+function _substituteUserDefinedFunctions(node, functionDefStorage) {
   return node.transform((node) => {
-    if (node.type === 'FunctionNode' && node.fnObj && !node.fnObj.isCore) {
-      return _substituteFunctionDef(node.fnObj, node.args);
+    let functionDef = node.type === 'FunctionNode'
+      && (node.fnObj || functionDefStorage?.get(node.fn.name));
+    if (functionDef && !functionDef.isCore) {
+      return _substituteUserDefinedFunctions(_substituteFunctionDef(functionDef, node.args), functionDefStorage);
     }
 
     return node;

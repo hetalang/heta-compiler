@@ -502,15 +502,25 @@ F[{{ loop.index }}] = {{ diff(dynamic.backReferences) }};
 if({{ evt.switcher.id }}_ > 0){
 if({{ evt.switcher.trigger.toSLVString(logger, powTransform) if evt.switcher.trigger is defined }}){
   if({{ evt.switcher.id }}__pull__ == 0){
+    // Evaluate all assignments before changing the event state.
     {%- for assign in evt.assignments %}
     {%- if assign.targetObj.isDynamic and assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
-    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} * {{ assign.targetObj.compartment }} + {{ assign.targetObj.id }}_offset__;
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }} - {{ assign.targetObj.id }} * {{ assign.targetObj.compartment }} + {{ assign.targetObj.id }}_offset__;
     {%- elif assign.targetObj.isDynamic %}
-    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} + {{ assign.targetObj.id }}_offset__;
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }} - {{ assign.targetObj.id }} + {{ assign.targetObj.id }}_offset__;
     {%- elif assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
-    {{ assign.targetObj.id }}_amt__ = {{ assign.exprString }};
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }};
     {%- else %}
-    {{ assign.targetObj.id }} = {{ assign.exprString }};
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }};
+    {%- endif %}
+    {%- endfor %}
+    {%- for assign in evt.assignments %}
+    {%- if assign.targetObj.isDynamic %}
+    {{ assign.targetObj.id }}_offset__ = {{ evt.switcher.id }}__next_{{ loop.index }}__;
+    {%- elif assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
+    {{ assign.targetObj.id }}_amt__ = {{ evt.switcher.id }}__next_{{ loop.index }}__;
+    {%- else %}
+    {{ assign.targetObj.id }} = {{ evt.switcher.id }}__next_{{ loop.index }}__;
     {%- endif %}
     {%- endfor %}
     {{ evt.switcher.id }}__pull__ = 1;
@@ -525,15 +535,25 @@ if({{ evt.switcher.trigger.toSLVString(logger, powTransform) if evt.switcher.tri
 if({{ evt.switcher.id }}_ > 0){
 if({{ evt.switcher.trigger.toSLVString(logger, powTransform) + '>=0' if evt.switcher.trigger is defined }}){
   if({{ evt.switcher.id }}__pull__ == 0){
+    // Evaluate all assignments before changing the event state.
     {%- for assign in evt.assignments %}
     {%- if assign.targetObj.isDynamic and assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
-    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} * {{ assign.targetObj.compartment }} + {{ assign.targetObj.id }}_offset__;
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }} - {{ assign.targetObj.id }} * {{ assign.targetObj.compartment }} + {{ assign.targetObj.id }}_offset__;
     {%- elif assign.targetObj.isDynamic %}
-    {{ assign.targetObj.id }}_offset__ = {{ assign.exprString }} - {{ assign.targetObj.id }} + {{ assign.targetObj.id }}_offset__;
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }} - {{ assign.targetObj.id }} + {{ assign.targetObj.id }}_offset__;
     {%- elif assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
-    {{ assign.targetObj.id }}_amt__ = {{ assign.exprString }};
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }};
     {%- else %}
-    {{ assign.targetObj.id }} = {{ assign.exprString }};
+    {{ evt.switcher.id }}__next_{{ loop.index }}__ = {{ assign.exprString }};
+    {%- endif %}
+    {%- endfor %}
+    {%- for assign in evt.assignments %}
+    {%- if assign.targetObj.isDynamic %}
+    {{ assign.targetObj.id }}_offset__ = {{ evt.switcher.id }}__next_{{ loop.index }}__;
+    {%- elif assign.targetObj.instanceOf('Species') and not assign.targetObj.isAmount %}
+    {{ assign.targetObj.id }}_amt__ = {{ evt.switcher.id }}__next_{{ loop.index }}__;
+    {%- else %}
+    {{ assign.targetObj.id }} = {{ evt.switcher.id }}__next_{{ loop.index }}__;
     {%- endif %}
     {%- endfor %}
     {{ evt.switcher.id }}__pull__ = 1;

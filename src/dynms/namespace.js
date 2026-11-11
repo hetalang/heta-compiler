@@ -20,6 +20,7 @@ const { toMathJSONNumber } = require('./special-numbers');
 */
 Namespace.prototype.makeDynMSModel = function({
     renderExpression = (expr) => expr instanceof Expression ? expr.toMathJSON() : expr,
+    renderODEExpression = renderExpression,
     renderNumber = toMathJSONNumber
 } = {}) {
     //let { logger } = this.container;
@@ -82,7 +83,7 @@ Namespace.prototype.makeDynMSModel = function({
         });
     let sortedAssignments = _sort_expressions_by_dependency(unsortedAssignments);
     let assignments = sortedAssignments.map(([id, expr, title]) => {
-        return { id: id, rhs: renderExpression(expr), title: title };
+        return { id: id, rhs: renderODEExpression(expr), title: title };
     });
 
     let dynamic = statesInfo
@@ -104,7 +105,7 @@ Namespace.prototype.makeDynMSModel = function({
 
             return {
                 ...state,
-                derivative: renderExpression(expr),
+                derivative: renderODEExpression(expr),
                 ...(record.ss ? { algebraic: true } : {})
             };
         });
@@ -178,7 +179,7 @@ Namespace.prototype.makeDynMSModel = function({
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'crossing',
-                rhs: renderExpression(triggerRhs),
+                rhs: renderODEExpression(triggerRhs),
                 // direction: 'up', // down
                 detection: 'root', // step
                 atStart: switcher.atStart
@@ -201,7 +202,7 @@ Namespace.prototype.makeDynMSModel = function({
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'conditional',
-                rhs: renderExpression(triggerRhs),
+                rhs: renderODEExpression(triggerRhs),
                 //kind: 'conditional',
                 // direction: 'up',
                 detection: 'step',
@@ -225,7 +226,7 @@ Namespace.prototype.makeDynMSModel = function({
             let triggerRhs = switcher.trigger.substituteByDefinitions();
             event.trigger = {
                 type: 'conditional',
-                rhs: renderExpression(triggerRhs),
+                rhs: renderODEExpression(triggerRhs),
                 detection: 'step',
                 atStart: true
             };
@@ -279,6 +280,7 @@ function _substitute_and_simplify(expr, namespace) {
 function _substitute(topNode, namespace) {
     return topNode.transform((node, path, parent) => {
         if (node.isSymbolNode && path !== 'fn') {
+            if (node.name === 'pi' || node.name === 'e') return node;
             let componentObj = namespace.get(node.name);
             if (componentObj?.instanceOf('Record')) {
                 if (!componentObj.isRule) {

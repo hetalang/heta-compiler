@@ -322,14 +322,15 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
     {{ record.id }} = {{ record.id }}_ / {{ record.compartment }}
     {% endif -%}
     {% endfor %}
-    # recalculated values
+    # Evaluate all event assignments before changing the integrator state.
+    # A concentration assignment uses the compartment volume before the event.
     (
     {%- for assignment in event.affect -%}
-    {{ assignment.id }}, 
+    {{ assignment.id }}{{ '_' if assignment.instanceOf('Species') and not assignment.isAmount }},
     {%- endfor -%}
     ) = (
     {%- for assignment in event.affect -%}
-    {{ assignment.getAssignment(event.switcher.id).toJuliaString(false, img.pTranslator) }}, 
+    {{ assignment.getAssignment(event.switcher.id).toJuliaString(false, img.pTranslator) }}{{ '*' + assignment.compartment if assignment.instanceOf('Species') and not assignment.isAmount }},
     {%- endfor -%}
     )
     
@@ -345,7 +346,7 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
         {%- endfor -%}
     ]] = [  
         {%- for record in img.dynamicRecords | exclude2('assignments.' + event.switcher.id, undefined) %}
-        {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }}, 
+        {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }},
         {%- endfor %}
     ]
     {%- endif %}
@@ -355,7 +356,7 @@ function {{ id }}_{{ event.switcher.id }}_affect_func_(__integrator__)
         {%- endfor -%}
     ]] = [
         {%- for record in img.staticRecords | exclude2('assignments.' + event.switcher.id, undefined) %}
-        {{ record.id }}{{ '*' + record.compartment if record.instanceOf('Species') and not record.isAmount }}, 
+        {{ record.id }}{{ '_' if record.instanceOf('Species') and not record.isAmount }},
         {%- endfor %}
     ]
 end

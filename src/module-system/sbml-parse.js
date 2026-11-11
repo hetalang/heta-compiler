@@ -731,6 +731,7 @@ function eventToQ(x, eventCounter, options = {}, resolve = (id) => id, allocator
 
   // trigger
   let trigger = x.elements?.find((y) => y.name === 'trigger');
+  if (trigger?.attributes?.initialValue === 'false') switcher.atStart = true;
   let triggerMath = trigger?.elements?.find((y) => y.name === 'math');
   if (triggerMath) {
     rewriteMathIdentifiers(triggerMath, resolve);
