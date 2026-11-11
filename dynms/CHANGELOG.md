@@ -5,14 +5,16 @@
 - Expressions are direct MathJSON values. The legacy `{ "expr": ..., "format": "math-json" }` wrapper and alternate expression formats were removed from DynMS.
 - Added required model-level `timeVariable` with an `id` that identifies simulation time in expressions.
 - Removed the globally reserved identifier `t`. Simulation time is now resolved through `timeVariable.id`.
-- Extended numeric constants and MathJSON literals use `{"num": "NaN"}`, `{"num": "+Infinity"}`, and `{"num": "-Infinity"}`. The exporter also preserves special state initial values as MathJSON expressions.
-- `timeEvents[].priority` and `events[].priority` are optional expressions. The default value `0` was removed, and the exporter omits priority when it is not set.
+- Expanded `constants[].value` from finite JSON numbers to JSON numbers or MathJSON number objects for `NaN` and positive or negative infinity. The exporter also preserves these extended values in state initial expressions.
+- Changed `timeEvents[].priority` and `events[].priority` from integers with default `0` to optional MathJSON expressions. The exporter omits priority when it is not set.
 
 ## 0.2.2
 
-- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json`
-- Reserved `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as identifiers.
-- Added optional top-level `scenarios` with a required `tspan` for each scenario.
+- Schema id `https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json`.
+- Added top-level `scenarios` for simulation settings and exported Heta scenarios to DynMS; every scenario requires `tspan`.
+- Allowed identifiers to start with an underscore.
+- Reserved `t`, `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` as model identifiers.
+- Fixed export of state initial values containing `pi` or `e` and nested user-defined functions.
 
 ## 0.2.1
 

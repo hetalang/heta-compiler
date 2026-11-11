@@ -43,7 +43,7 @@ Top-level required fields:
 - `dynms`: DynMS version; currently must be `"0.3.0"`;
 - `models`: non-empty array of model definitions.
 
-The optional top-level fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, `license`, and `scenarios`. If `generator` is present, it must contain both `name` and `version`.
+The optional top-level metadata fields are `$schema`, `generator`, `created`, `platformId`, `platformVersion`, `platformNotes`, and `license`. If `generator` is present, it must contain both `name` and `version`. The optional `scenarios` field contains simulation-run specifications.
 
 `scenarios` is an optional array of simulation-run specifications. Multiple scenarios may refer to the same model. A scenario has the following form:
 
@@ -150,7 +150,7 @@ The `derivative` defines the ordinary differential equation for the state. Set o
 
 Some backends may not support static states. The model converter is responsible for checking backend capabilities and converting them when necessary.
 
-For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend on model constants, numeric literals, and built-in numeric symbols, but not on states or assignments.
+For both dynamic and static states, `initial` may be a number or an expression. An initial expression is evaluated at simulation start; it may depend on model constants, numeric literals, and the built-in numeric symbols `Pi` and `ExponentialE`, but not on states, assignments, or `timeVariable.id`.
 
 ```json
 {
@@ -381,7 +381,7 @@ At each solver step:
 
 ## 6. Identifiers inside models
 
-DynMS uses string identifiers for all model components and for `timeVariable.id`. An identifier must start with a letter and then contain only letters, digits, or underscores. It must not be `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, or `False`, and must be unique within a model. The name `t` is allowed, including as an ordinary component identifier when the model uses another `timeVariable.id`.
+DynMS uses string identifiers for all model components and for `timeVariable.id`. An identifier must start with a letter or underscore and then contain only letters, digits, or underscores. It must be unique within a model. The identifiers `Pi`, `ExponentialE`, `NaN`, `Infinity`, `True`, and `False` are reserved and cannot be used as identifiers. The restriction is case-sensitive. The name `t` is allowed, including as an ordinary component identifier when the model uses another `timeVariable.id`.
 
 ---
 

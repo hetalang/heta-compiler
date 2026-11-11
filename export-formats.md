@@ -585,10 +585,10 @@ _Skipped cell means no conversion_
 |`abs(x)`| | |`fabs(x)`| |
 |`add()`|`0`|`+()`|`0.0`|`0`|
 |`add(x)`|`x`|`+(x)`|`x`|`x`|
-|`add(x, y, ...)`|`x + y + ...`|`+(x, y, ...)`|`x + y + ...`|`x + y + ...`|
+|`add(x, y, ...)`|`x + y + ...`|`+(x, y, ...)`|`x + y + ...`|`plus(plus(x, y), ...)`|
 |`ceil(x)`| | | | |
 |`cube(x)`|`pow(x, 3) or x ^ 3`|`NaNMath.pow(x, 3)`| | |
-|`divide(x, y)`|`x / y`|`/(x, y)`| | |
+|`divide(x, y)`|`x / y`|`/(x, y)`|`x / y`|`rdivide(x, y)`|
 |`exp(x)`| | | | |
 |`floor(x)`| | | | |
 |`ln(x)`| |`NaNMath.log(x)`| | |
@@ -598,13 +598,13 @@ _Skipped cell means no conversion_
 |`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`| |`(log(x)/log(2))`|
 |`multiply()`|`1`|`*()`|`1.0`|`1`|
 |`multiply(x)`|`x`|`*(x)`|`x`|`x`|
-|`multiply(x, y, ...)`|`x * y * ...`|`*(x, y, ...)`|`x * y * ...`|`x * y * ...`|
+|`multiply(x, y, ...)`|`x * y * ...`|`*(x, y, ...)`|`x * y * ...`|`times(times(x, y), ...)`|
 |`pow(x, y)`| `pow(x, y)` or `x ^ y`|`NaNMath.pow(x, y)`| |`power(x, y)`|
 |`sign(x)`| | | | |
 |`sqrt(x)`| |`NaNMath.sqrt(x)`| | |
 |`nthRoot(x, n)`|`pow(x, 1 / n)` or `x ^ (1 / n)`|`NaNMath.pow(x, 1/(n))`| | |
 |`square(x)`|`pow(x, 2)` or `x ^ 2`|`NaNMath.pow(x, 2)`| | |
-|`subtract(x, y)`|`x - y`|`-(x, y)`| | |
+|`subtract(x, y)`|`x - y`|`-(x, y)`|`x - y`|`minus(x, y)`|
 |`max(x, y)`|`max2(x, y)`| |`std::max(x, y)`|`max(x, y)`|
 |`max(x, y, z)`|`max3(x, y, z)`| |`std::max(x, y, z)`|`max([x, y, z])`|
 |`min(x, y)`|`min2(x, y)`| |`std::min(x, y)`|`min(x, y)`|
@@ -628,6 +628,8 @@ _Skipped cell means no conversion_
 |`b1 < b2 ? x : y`|`iflt(b1, b2, x, y)`|`(b1 < b2) ? x : y`|`(b1 < b2) ? x : y`|`tern__(b1 < b2, x, y)`|
 |`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|not supported| + |not supported| |
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`| | | | |
+
+Nested arithmetic functions retain their grouping. For example, `divide(add(a, b), c)` becomes `(a + b) / c` in DBSolve, SLV (for supported RHS expressions), and Mrgsolve; Matlab and Simbio output `rdivide(plus(a, b), c)`. DynMS 0.3 stores the same expression as `['Divide', ['Add', 'a', 'b'], 'c']` in canonical MathJSON.
 
 _Conversion to SBML's MathML_
 
