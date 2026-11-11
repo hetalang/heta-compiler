@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.13.0-beta.1"
   },
-  "created": "2026-10-19T02:55:05.726Z",
+  "created": "2026-11-11T12:11:12.003Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -20,12 +20,7 @@
           "id": "a",
           "initial": [
             "Add",
-            [
-              "Divide",
-              4,
-              2
-            ],
-            1,
+            "e",
             1,
             1,
             1,
@@ -36,12 +31,7 @@
           "id": "c",
           "initial": [
             "Add",
-            [
-              "Divide",
-              4,
-              2
-            ],
-            1,
+            "e",
             1,
             1
           ]

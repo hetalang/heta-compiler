@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.13.0-beta.1"
     },
-    "created": "2026-10-19T02:30:21.647Z",
+    "created": "2026-11-11T11:46:17.811Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "7af3396adbb24692b63cc0cf8523f0b97a253388a71e11aa258179ad8ee0128f",
+    "hashSum": "db0d04da0e14ab5f8938d8695fba969f73c87eadae6a360fe5077d0265b14778",
     "hashAlgorithm": "sha256"
   },
   {
@@ -27,6 +27,7 @@
   },
   {
     "action": "upsert",
+    "atStart": true,
     "class": "DSwitcher",
     "id": "E0",
     "trigger": "S1 > 0.9"

@@ -5,7 +5,7 @@
     "name": "heta-compiler",
     "version": "0.13.0-beta.1"
   },
-  "created": "2026-10-19T02:39:44.803Z",
+  "created": "2026-11-11T11:55:46.536Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -42,7 +42,8 @@
               "p1",
               0
             ],
-            "detection": "step"
+            "detection": "step",
+            "atStart": true
           },
           "actions": [
             {
