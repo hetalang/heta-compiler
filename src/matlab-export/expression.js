@@ -1,9 +1,7 @@
 const { Expression } = require('../core/expression');
 
 const arithmeticFunctions = {
-  add: 'plus',
   subtract: 'minus',
-  multiply: 'times',
   divide: 'rdivide'
 };
 
@@ -13,6 +11,15 @@ Expression.prototype.toMatlabString = function(substituteByDefinitions = true) {
   let matlabStringHandler = (node, options) => {
     // FunctionNode
     if (node.type === 'FunctionNode') {
+      if (node.fn.name === 'add' || node.fn.name === 'multiply') {
+        let isAdd = node.fn.name === 'add';
+        if (node.args.length === 0) return isAdd ? '0' : '1';
+        let args = node.args.map((arg) => {
+          let value = arg.toString(options);
+          return arg.type === 'OperatorNode' ? `(${value})` : value;
+        });
+        return `(${args.join(isAdd ? ' + ' : ' * ')})`;
+      }
       if (Object.prototype.hasOwnProperty.call(arithmeticFunctions, node.fn.name)) {
         let args = node.args.map((arg) => arg.toString(options)).join(', ');
         return `${arithmeticFunctions[node.fn.name]}(${args})`;

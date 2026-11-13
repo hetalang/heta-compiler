@@ -581,7 +581,7 @@ _Skipped cell means no conversion_
 | | SLV/DBSolve | Julia | Mrgsolve/R | Simbio/Matlab |
 |--|--|--|--|--|
 |`abs(x)`| | |`fabs(x)`| |
-|`add(x, y)`|`x + y`|`+(x, y)`|`x + y`|`plus(x, y)`|
+|`add(x, y)`|`x + y`|`+(x, y)`|`x + y`|`(x + y)`|
 |`ceil(x)`| | | | |
 |`cube(x)`|`pow(x, 3) or x ^ 3`|`NaNMath.pow(x, 3)`| | |
 |`divide(x, y)`|`x / y`|`/(x, y)`|`x / y`|`rdivide(x, y)`|
@@ -592,7 +592,7 @@ _Skipped cell means no conversion_
 |`logbase(x, base)`|`log(x) / log(base)`|`(NaNMath.log(x) / NaNMath.log(base))`|`(log(x) / log(base))`|`(log(x)/log(base))`|
 |`log10(x)`|`log10(x)`|`NaNMath.log10(x)`|`log10(x)`|`log10(x)`|
 |`log2(x)`|`log(x) / log(2)`|`NaNMath.log2(x)`|`log2(x)`|`(log(x)/log(2))`|
-|`multiply(x, y)`|`x * y`|`*(x, y)`|`x * y`|`times(x, y)`|
+|`multiply(x, y)`|`x * y`|`*(x, y)`|`x * y`|`(x * y)`|
 |`pow(x, y)`| `pow(x, y)` or `x ^ y`|`NaNMath.pow(x, y)`| |`power(x, y)`|
 |`sign(x)`| | | | |
 |`sqrt(x)`| |`NaNMath.sqrt(x)`| | |
@@ -623,7 +623,7 @@ _Skipped cell means no conversion_
 |`piecewise(value1, cond1, value2, cond2, ..., otherwise)`|not supported| + |not supported| |
 |`acos(x)`, `acot(x)`, `acsc(x)`,`asec(x)`, `asin(x)`, `atan(x)`, `cos(x)`, `cot(x)`, `csc(x)`, `sec(x)`, `sin(x)`, `tan(x)`| | | | |
 
-Nested arithmetic functions retain their grouping. For example, `divide(add(a, b), c)` becomes `(a + b) / c` in DBSolve, SLV (for supported RHS expressions), Mrgsolve, and DynMS with `exprFormat: c`; Matlab and Simbio output `rdivide(plus(a, b), c)`.
+Nested arithmetic functions retain their grouping. For example, `divide(add(a, b), c)` becomes `(a + b) / c` in DBSolve, SLV (for supported RHS expressions), Mrgsolve, and DynMS with `exprFormat: c`; Matlab and Simbio output `rdivide((a + b), c)`. Matlab and Simbio export `add` and `multiply` with multiple arguments as parenthesized sums and products.
 
 _Conversion of logarithms to DynMS with the default `exprFormat: math-json`_
 
