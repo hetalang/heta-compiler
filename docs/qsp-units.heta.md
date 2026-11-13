@@ -10,7 +10,7 @@ The `qsp-units.heta` file provides a pre-defined set of units tailored for QSP (
 
 ## Base Units and Units definitions in Heta Specification
 
-Heta specification defines a set of **core units** that serve as the foundation for creating and using units in models. These include fundamental units for quantities like time, mass, and volume. For a detailed list of these core units, refer to the [Heta Core Units](/specifications/units#core-units) documentation.
+Heta specification defines a set of **core units** that serve as the foundation for creating and using units in models. These include units for quantities like time, mass, and volume. The core unit `litre` is defined as `(0.1 metre)^3`, or `0.001 metre^3`, when expanded into primitive units. For a detailed list of these core units, refer to the [Heta Core Units](/specifications/units#core-units) documentation.
 
 Heta allows users to define their own units using the [`#defineUnit`](/specifications/actions#defineunit) action. The `qsp-units.heta` file leverages this capability to provide an extended set of units while maintaining compatibility with the core units.
 

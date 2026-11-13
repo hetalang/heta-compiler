@@ -11,7 +11,12 @@ const qArr = [
   {action: 'insert', class: 'Const', id: 'k3', num: 1, units: []},
   {action: 'defineUnit', id: 'UL', units: [{kind: 'dimensionless'}]},
   {action: 'defineUnit', id: 'percent', units: [{kind: 'dimensionless', multiplier: 1e-2}]},
-  {action: 'insert', class: 'Const', id: 'k4', num: 2, units: 'percent'}
+  {action: 'insert', class: 'Const', id: 'k4', num: 2, units: 'percent'},
+  {action: 'insert', class: 'Const', id: 'volume', num: 1, units: 'litre'},
+  {action: 'insert', class: 'Const', id: 'millilitre', num: 1, units: '(1e-3 litre)'},
+  {action: 'insert', class: 'Const', id: 'inverseVolume', num: 1, units: '1/litre'},
+  {action: 'insert', class: 'Const', id: 'cubicMetre', num: 1, units: 'metre^3'},
+  {action: 'insert', class: 'Const', id: 'litreInMetres', num: 1, units: '(1e-1 metre)^3'}
 ];
 
 describe('Check Unit.rebaseToPrimitive()', () => {
@@ -26,22 +31,49 @@ describe('Check Unit.rebaseToPrimitive()', () => {
   });
 
   it('litre to primitive', () => {
-    let litre = p.unitDefStorage.get('litre');
-    expect(litre.units).to.be.undefined;
+    let volume = p.namespaceStorage.get('nameless').get('volume');
+    let metreVolume = p.namespaceStorage.get('nameless').get('litreInMetres');
+    let cubicMetre = p.namespaceStorage.get('nameless').get('cubicMetre');
+    let rebased = volume.unitsParsed.rebaseToPrimitive();
+    expect(rebased.toQ()).to.deep.equal([{kind: 'metre', multiplier: 0.1, exponent: 3}]);
+    expect(volume.unitsParsed.equal(metreVolume.unitsParsed, true)).to.be.true;
+    expect(volume.unitsParsed.equal(cubicMetre.unitsParsed, true)).to.be.false;
+    expect(volume.unitsParsed.toTerm().simplify().toString()).to.equal('length^3');
+    expect(volume.unitsParsed.rebase(['litre']).toString()).to.equal('litre');
+  });
+
+  it('calculates the litre to cubic metre ratio', () => {
+    let volume = p.namespaceStorage.get('nameless').get('volume');
+    let cubicMetre = p.namespaceStorage.get('nameless').get('cubicMetre');
+    let ratio = volume.unitsParsed.divide(cubicMetre.unitsParsed).rebaseToPrimitive().simplify();
+    expect(ratio).to.have.lengthOf(1);
+    expect(ratio[0].kind).to.equal('dimensionless');
+    expect(ratio[0].multiplier).to.be.closeTo(1e-3, 1e-12);
+  });
+
+  it('scaled and inverse litre to primitive', () => {
+    let millilitre = p.namespaceStorage.get('nameless').get('millilitre');
+    let inverseVolume = p.namespaceStorage.get('nameless').get('inverseVolume');
+    let scaled = millilitre.unitsParsed.rebaseToPrimitive();
+    let inverse = inverseVolume.unitsParsed.rebaseToPrimitive();
+    expect(scaled[0].kind).to.equal('metre');
+    expect(scaled[0].exponent).to.equal(3);
+    expect(scaled[0].multiplier ** scaled[0].exponent).to.be.closeTo(1e-6, 1e-15);
+    expect(inverse.toQ()).to.deep.equal([{kind: 'metre', multiplier: 0.1, exponent: -3}]);
   });
 
   it('mM to primitive', () => {
     let mM = p.unitDefStorage.get('mM');
     expect(mM.units).to.be.equal('(1e-3 mole)/litre');
     let rebased = mM.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('(1e-3 mole)/litre');
+    expect(rebased.toString()).to.be.equal('(1e-3 mole)/(1e-1 metre)^3');
   });
 
   it('uM2 to primitive', () => {
     let xxx = p.namespaceStorage.get('nameless').get('xxx');
     expect(xxx.units).to.be.equal('mM^2');
     let rebased = xxx.unitsParsed.rebaseToPrimitive();
-    expect(rebased.toString()).to.be.equal('(1e-3 mole)^2/litre^2');
+    expect(rebased.toString()).to.be.equal('(1e-3 mole)^2/(1e-1 metre)^6');
   });
   
   it('dimensionless to primitive', () => {

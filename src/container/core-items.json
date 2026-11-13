@@ -9,7 +9,7 @@
     },
     {
         "id": "litre", "action": "defineUnit",
-        "terms": [{"kind": "length", "exponent": 3}]
+        "units": [{"kind": "metre", "multiplier": 0.1, "exponent": 3}]
     },
     {
         "id": "second", "action": "defineUnit",
