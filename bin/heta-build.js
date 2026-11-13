@@ -5,12 +5,12 @@
 // 1 - unexpected error
 // 2 - error because of wrong input
 
-const { Command } = require('commander');
+const { Command, Option } = require('commander');
 const program = new Command();
 const fs = require('fs-extra');
 const path = require('path');
 // The SEA build replaces this import with ../src/cli at bundle time.
-const { Builder, StdoutTransport, Transport } = require('../src');
+const { Builder, Logger, StdoutTransport, StringTransport, JSONTransport, HetaLevelError } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const { bugs } = require('../package');
 const colors = require('colors');
@@ -41,17 +41,19 @@ program
   // cli level
   .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.') // checking newer version of heta-compiler
-  .option('--log-level <debug|info|warn|error|crit>', 'Set log level to display.', 'info')
+  .option('--log-level <debug|info|warn|error|crit>', 'Set minimum log level for console and log file.', 'info')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.', 'error')
   .option('--log-path <filepath>', 'Set log file path.', 'build.log')
-  //.options('--log-format <json|text>', 'Set log format.', 'text') // not implemented
+  .addOption(new Option('--log-format <text|json>', 'Set log file format.')
+    .choices(['text', 'json']).default('text'))
   .parse(process.argv);
 
-let logStream = null;
-function message(message) {
-  process.stdout.write(message + '\n');
-  logStream?.write(message + '\n');
-}
+const logEntries = [];
+const LogTransport = program.opts().logFormat === 'json' ? JSONTransport : StringTransport;
+const logger = new Logger()
+  .addTransport(new StdoutTransport(program.opts().logLevel))
+  .addTransport(new LogTransport(program.opts().logLevel, logEntries));
+let logFilePath = null;
 
 async function main() {
   let args = program.args;   // target directory
@@ -61,17 +63,18 @@ async function main() {
   let targetDir = path.normalize(args[0] || '.');
   let targetDirAbs = path.resolve(targetDir);
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
-    message(`Target directory "${targetDir}" does not exist.\nSTOP!`);
-    process.exit(2); // BRAKE
+    throw new HetaLevelError(`Target directory "${targetDir}" does not exist.`);
   }
   
   // set targetDir as working directory
   process.chdir(targetDir);
   
-  // init logging to file
-  logStream = fs.createWriteStream(cliOptions.logPath, { flags: 'w' }); // or 'a' to append
+  logFilePath = path.resolve(targetDirAbs, cliOptions.logPath);
+  if (fs.existsSync(logFilePath) && fs.lstatSync(logFilePath).isFile()) {
+    fs.unlinkSync(logFilePath);
+  }
 
-  message(`Running compilation in directory "${targetDirAbs}"...\n`); // global path
+  process.stdout.write(`Running compilation in directory "${targetDirAbs}"...\n`);
 
   // 0. empty declaration
   let declaration = {options: {}, importModule: {}, export: []};
@@ -85,13 +88,12 @@ async function main() {
     .indexOf(true);
   // is declaration file found ?
   if (!cliOptions.declaration && extensionNumber === -1) {
-    message('No declaration file, running with defaults...\n');
+    logger.info('No declaration file, running with defaults...', { type: 'CliInfo' });
   } else if (extensionNumber === -1) {
-    message(`Declaration file "${cliOptions.declaration}" not found.\nSTOP!`);
-    process.exit(2); // BRAKE
+    throw new HetaLevelError(`Declaration file "${cliOptions.declaration}" not found.`);
   } else {
     let declarationFile = searches[extensionNumber];
-    message(`Reading declaration file "${declarationFile}"...\n`);
+    logger.info(`Reading declaration file "${declarationFile}"...`, { type: 'CliInfo' });
     let declarationText = fs.readFileSync(declarationFile);
     try {
       let declarationFromFile = YAML.load(declarationText);
@@ -100,8 +102,7 @@ async function main() {
       }
       Object.assign(declaration, declarationFromFile);
     } catch (e) {
-      message(`Wrong format of declaration file: \n"${e.message}"\n`);
-      process.exit(2); // BRAKE
+      throw new HetaLevelError(`Wrong format of declaration file: \n"${e.message}"`);
     }
   }
 
@@ -110,8 +111,7 @@ async function main() {
   try {
     var exportItems = parseExportOption(cliOptions.export);
   } catch (e) {
-    message(`Wrong format of export option: "${cliOptions.export}"\n`);
-    process.exit(2); // BRAKE
+    throw new HetaLevelError(`Wrong format of export option: "${cliOptions.export}"`);
   }
 
   // update declaration
@@ -128,26 +128,10 @@ async function main() {
     declaration,
     fs.readFileSync,
     fs.outputFileSync,
-    [
-      new StdoutTransport(cliOptions.logLevel), // log to stdout
-      new FileTransport(cliOptions.logLevel, logStream) // log to file
-    ]
+    logger
   ).run();
 
   return builder;
-}
-
-class FileTransport extends Transport {
-  constructor(level, stream) {
-    super(level);
-    this.stream = stream;
-  }
-  analyzer(level, msg, opt, levelNum) {
-    if (levelNum >= this.showLevelNum) {
-      let line = `[${level}]\t${msg}`;
-      this.stream?.write(line + '\n');
-    }
-  }
 }
 
 function parseExportOption(value = '') {
@@ -169,32 +153,34 @@ Promise.all([
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
   if (builder.container.hetaErrors().length > 0) {
-    message('Compilation ERROR! See logs.\n'); 
+    logger.error('Compilation ERROR! See logs.', { type: 'CliError' });
     process.exitCode = 2; // ERROR
   } else {
-    message('Compilation OK!\n');
+    logger.info('Compilation OK!', { type: 'CliInfo' });
     process.exitCode = 0; // OK
   }
 }).catch((error) => {
   if (error.name === 'HetaLevelError') {
-    message('Error: ' + error.message + '\nSTOP!\n');
+    logger.error('Error: ' + error.message + '\nSTOP!', { type: 'CliError' });
     process.exitCode = 2;
   } else {
-    message(contactMessage + '\n');
-    message(error.stack);
+    logger.log('crit', contactMessage + '\n' + error.stack, { type: 'CliError' });
     process.exitCode = 1; // unexpected error
   }
 }).finally(() => {
-  const { logMode, logPath } = program.opts();
+  const { logMode, logFormat } = program.opts();
+  const shouldSave = logMode !== 'never'
+    && (logMode !== 'error' || process.exitCode !== 0);
 
-  let toDelete = logMode === 'never' 
-      || (logMode === 'error' && process.exitCode === 0);
-
-  const closeLogStream = logStream
-    ? new Promise((resolve) => logStream.end(resolve))
-    : Promise.resolve();
-
-  return closeLogStream.then(() => {
-    toDelete && fs.removeSync(logPath);
-  });
+  if (logFilePath && shouldSave) {
+    try {
+      const content = logFormat === 'json'
+        ? JSON.stringify(logEntries, null, 2) + '\n'
+        : (logEntries.length ? logEntries.join('\n') + '\n' : '');
+      fs.writeFileSync(logFilePath, content);
+    } catch (error) {
+      process.stderr.write(`Cannot save log file "${logFilePath}": ${error.message}\n`);
+      process.exitCode = 1;
+    }
+  }
 });

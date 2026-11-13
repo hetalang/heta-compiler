@@ -2,6 +2,7 @@ const path = require('path');
 const declarationSchema = require('./declaration-schema');
 const { ajv } = require('../ajv');
 const Container = require('../container');
+const { Logger } = require('../logger');
 const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
 const semver = require('semver');
@@ -20,7 +21,10 @@ const { version } = require('../../package');
  * [platform file format]{@link https://hetalang.github.io/heta-compiler/platform-file}.
  * @param {Function} fileReadHandler Reads module content by filename and returns text.
  * @param {Function} fileWriteHandler Writes exported content by filename.
- * @param {Transport[]} transportArray Logger transports attached to the builder logger.
+ * @param {Logger} logger Shared logger. If omitted, creates an internal logger
+ *    storing events at `info` and above in `container.defaultLogs`, without console
+ *    output. Supplied loggers also receive this diagnostic storage; events logged
+ *    before construction are not replayed.
  *
  * @property {Container} container Main platform storage.
  * @property {Logger} logger Logger shared with `container.logger`.
@@ -34,16 +38,12 @@ class Builder {
     declaration = {},
     fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // must return text
     fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); }, // must return undefined
-    transportArray = [], // Builder-level Transport
+    logger = new Logger(),
   ) {
-
-    // create container
-    this.container = new Container();
+    // create container with logging available during initialization
+    this.container = new Container(logger);
     this.container._builder = this; // back reference to parent builder
-
-    // set logger and transports
-    let logger = this.logger = this.container.logger;
-    transportArray.forEach((...args) => logger.addTransport(...args));
+    this.logger = logger;
 
     // file handlers
     this.fileReadHandler = fileReadHandler;

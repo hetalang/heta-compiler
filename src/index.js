@@ -1,5 +1,6 @@
 /*
   Entry file for Node.js
+  It does not use compiled templates
 */
 
 const {
@@ -10,7 +11,7 @@ const {
   HetaLevelError
 } = require('./entry-common');
 
-const { Transport, StdoutTransport, StringTransport } = require('./logger');
+const { Logger, Transport, StdoutTransport, StringTransport, JSONTransport } = require('./logger');
 
 Builder._templates = require('./templates').templates;
 
@@ -21,7 +22,9 @@ module.exports = {
   ModuleSystem,
   HetaLevelError,
   
+  Logger,
   Transport,
   StdoutTransport,
-  StringTransport
+  StringTransport,
+  JSONTransport
 };

@@ -10,7 +10,7 @@ const {
   HetaLevelError
 } = require('./entry-common');
 
-const { Transport, StdoutTransport, StringTransport } = require('./logger');
+const { Logger, Transport, StdoutTransport, StringTransport, JSONTransport } = require('./logger');
 
 Builder._templates = require('./compiled-templates').templates;
 
@@ -21,7 +21,9 @@ module.exports = {
   ModuleSystem,
   HetaLevelError,
   
+  Logger,
   Transport,
   StdoutTransport,
-  StringTransport
+  StringTransport,
+  JSONTransport
 };

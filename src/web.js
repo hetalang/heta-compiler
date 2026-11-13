@@ -13,7 +13,7 @@ const {
   HetaLevelError
 } = require('./entry-common');
 
-const { Transport, StringTransport } = require('./logger');
+const { Logger, Transport, StringTransport } = require('./logger');
 
 // always load compiled templates
 Builder._templates = require('./compiled-templates').templates;
@@ -25,6 +25,7 @@ module.exports = {
   ModuleSystem,
   HetaLevelError,
 
+  Logger,
   Transport,
   StringTransport
 };

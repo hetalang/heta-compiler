@@ -30,6 +30,9 @@ const TopoSort = require('@insysbio/topo-sort');
  * A typical platform uses one container instance.
  * 
  * @class Container
+ *
+ * @param {Logger} logger Shared logger. Defaults to a new logger without console output.
+ *    A diagnostic JSON transport is always attached for this container's `defaultLogs`.
  * 
  * @property {object} classes Map-like storage for all element constructors that can be created inside platform.
  *    For example the element of the type `UnitsDef` can be created as follows:
@@ -48,7 +51,7 @@ const TopoSort = require('@insysbio/topo-sort');
  */
 class Container {
   /* constructor can be run many times */
-  constructor(){
+  constructor(logger = new Logger()){
     // create personal storage for all bound classes
     this.classes = {};
     // create classes bound to this container
@@ -91,7 +94,7 @@ class Container {
     this.classes.TimeScale.prototype._container = this;  
 
     // logger
-    this.logger = new Logger();
+    this.logger = logger;
     this.defaultLogs = []; // storing logs in JSON-like format here
     this.logger.addTransport(new JSONTransport('info', this.defaultLogs));
 

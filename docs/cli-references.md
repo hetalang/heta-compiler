@@ -58,10 +58,11 @@ List of `heta build` options:
 | --units-check | | | If set all records will be checked for units consistency. |
 | --dist-dir | \<string\> | |  Set export directory path, where to store exported files. Path can be absolute or relative to the project directory. |
 | --meta-dir | \<string\> | |  Set meta directory path. Path can be absolute or relative to the project directory.|
-| --log-mode | string | `error` | The rule in which case the log file should be saved to file. Possible values are: never/error/always. |
-| --log-path | string | `build.log` | Filepath where the log file should be saved. Path can be absolute or relative to the project directory. |
+| --log-mode | string | `error` | When to save the log file: `never`, `error` (nonzero exit code), or `always`. An existing log file at the configured path is removed at startup. Messages are buffered in memory and written synchronously at completion only when required. |
+| --log-path | string | `build.log` | Filepath where the log file should be saved. Path can be absolute or relative to the project directory. The name and extension do not change automatically with `--log-format`. |
+| --log-format | string | `text` | Log file format: `text` for formatted lines, or `json` for an array of events with `level`, `msg`, `levelNum`, and `opt` metadata when present. Console output remains text. |
 | -d, --declaration | string | `platform` | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
-| --log-level | string | `info` | The level of log information to display. Possible values are: crit/error/warn/info/debug. |
+| --log-level | string | `info` | Minimum log level for both console and log file, including CLI progress and compilation results. Possible values are: crit/error/warn/info/debug. |
 | --skip-updates | | | Do not check available new version in npm. |
 | -e, --export | \<string\> | | List of export formats to run separated by colon. It should be in single quotation. It can be list of format names or objects including settings for export. see more details in [export-formats](./export-formats.md). |
 
