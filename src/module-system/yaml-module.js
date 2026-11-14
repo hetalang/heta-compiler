@@ -1,4 +1,5 @@
 const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
+const HetaLevelError = require('../heta-level-error');
 
 /**
  * To initialize a Heta module of the "yaml" type.
@@ -9,9 +10,14 @@ const jsYAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
  */
 function yamlLoader(fileContent){
   let fileText = fileContent.toString('utf-8');
-  let parsed = jsYAML.load(fileText);
-  
-  return parsed;
+  try {
+    return jsYAML.load(fileText);
+  } catch (e) {
+    if (e instanceof jsYAML.YAMLException) {
+      throw new HetaLevelError(e.message);
+    }
+    throw e;
+  }
 }
 
 module.exports = yamlLoader;

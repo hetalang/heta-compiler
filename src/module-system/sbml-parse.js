@@ -17,7 +17,16 @@ function SBMLParse(fileText, options = {}) {
       .replace(/[\t\r\n]+/g, '');
     return `<annotation>${res}</annotation>`;
   });
-  let JSBML = xml2js(fileTextNoAnnotation, { compact: false });
+  let JSBML;
+  try {
+    JSBML = xml2js(fileTextNoAnnotation, { compact: false });
+  } catch (e) {
+    // xml-js marks SAX syntax errors by setting `note` to the error itself.
+    if (e.note === e) {
+      throw new HetaLevelError(e.message);
+    }
+    throw e;
+  }
   
  //let JSBML = xml2js(fileText, { compact: false });
 

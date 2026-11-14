@@ -222,7 +222,7 @@ function _toMathExpr(element, useParentheses = false) {
   } else if (element.name === 'notanumber') {
     throw new HetaLevelError('SBML MathML <notanumber/> is not supported. Heta Compiler supports finite numeric values only.');
   } else {
-    throw new Error('Cannot parse MathML:' + JSON.stringify(element, null, 2));
+    throw new HetaLevelError('Cannot parse MathML:' + JSON.stringify(element, null, 2));
   }
 }
 

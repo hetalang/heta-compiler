@@ -1,3 +1,5 @@
+const HetaLevelError = require('../heta-level-error');
+
 /**
  * To initialize a Heta module of the "json" type.
  * It includes reading and parsing file formatted as Heta-JSON,
@@ -27,21 +29,25 @@ function _JSONParse(
   try {
     return JSON.parse(...params);
   } catch(e) {
-    let select = e.message.match(/at position (\d*)/); // This is ugly part, sorry
-    if((e instanceof SyntaxError) && typeof +select[1]==='number'){
-      e.name = 'JSONSyntaxError';
+    if (!(e instanceof SyntaxError)) throw e;
+    let message = e.message;
+    let select = message.match(/at position (\d+)/);
+    let coordinate;
+    if (select) {
       let pos = +select[1];
       let parsedPart = params[0].substring(0, pos);
       let splittedText = parsedPart.split(/\r*\n/);
       let substringToShow = splittedText[splittedText.length-1];
-      e.coordinate = {
+      coordinate = {
         line: splittedText.length,
         column: substringToShow.length,
         position: pos
       };
-      e.message = `(${e.coordinate.line}:${e.coordinate.column} in JSON) ` + e.message;
+      message = `(${coordinate.line}:${coordinate.column} in JSON) ` + message;
     }
-    throw e;
+    const error = new HetaLevelError(message);
+    if (coordinate) error.coordinate = coordinate;
+    throw error;
   }
 }
 
