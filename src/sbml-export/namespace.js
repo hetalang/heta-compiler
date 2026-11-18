@@ -1,6 +1,7 @@
 const { Namespace } = require('../namespace');
 const legalUnits = require('../legal-sbml-units');
 const pkg = require('../../package.json');
+const HetaLevelError = require('../heta-level-error');
 
 Namespace.prototype.getSBMLImage = function() {
   let { logger, functionDefStorage } = this.container;
@@ -9,7 +10,6 @@ Namespace.prototype.getSBMLImage = function() {
   if (this.isAbstract) {
     var listOfUnitDefinitions = []; 
   } else {
-    try {
       listOfUnitDefinitions = this.getUniqueUnits()
         /*
         .filter((units) => {
@@ -19,14 +19,15 @@ Namespace.prototype.getSBMLImage = function() {
               || units[0].multiplier !== 1;
         })
         */
-        .map((units) => {
-          return units
-            .toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true });
+        .flatMap((units) => {
+          try {
+            return [units.toXmlUnitDefinition(legalUnits, { nameStyle: 'string', simplify: true })];
+          } catch (error) {
+            if (!(error instanceof HetaLevelError)) throw error;
+            logger.warn(error.message, {...error.opt, space: this.spaceName, unitExpression: units.toString()});
+            return [];
+          }
         });
-    } catch(err){
-      logger.warn(err.message);
-      listOfUnitDefinitions = [];
-    }
   }
 
   if (this.isAbstract) {
@@ -42,14 +43,18 @@ Namespace.prototype.getSBMLImage = function() {
   let timeSwitchersIds = this.selectByClassName('TimeSwitcher')
     .map((x) => x.id);
   if (timeSwitchersIds.length > 0) {
-    let msg = `TimeSwitcher is not supported in SBML, got ${timeSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
-    logger.warn(msg);
+    logger.warn(
+      `TimeSwitcher is not supported in SBML, got ${timeSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`, 
+      {diagnosticCode: 'SBML_TIME_EVENT_CONVERTED_TO_DEVENT', space: this.spaceName, ids: timeSwitchersIds, format: 'sbml'}
+    );
   }
   let cSwitchersIds = this.selectByClassName('CSwitcher')
     .map((x) => x.id);
   if (cSwitchersIds.length > 0) {
-    let msg = `CSwitcher is not supported in SBML, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
-    logger.warn(msg);
+    logger.warn(
+      `CSwitcher is not supported in SBML, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`, 
+      {diagnosticCode: 'SBML_CEVENT_CONVERTED_TO_DEVENT', space: this.spaceName, ids: cSwitchersIds, format: 'sbml'}
+    );
   }
 
   let hasMeta = {

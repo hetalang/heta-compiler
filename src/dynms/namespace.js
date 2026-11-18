@@ -62,7 +62,13 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
                 let rawExpr = x.assignments['ode_'];
                 var expr = rawExpr.substituteByDefinitions();
             } else {
-                expr = Expression.fromString(`${x.id}_amt_ / ${x.compartment}`);
+                try {
+                    expr = Expression.fromString(`${x.id}_amt_ / ${x.compartment}`);
+                } catch (error) {
+                    if (!(error instanceof HetaLevelError) || error.opt.diagnosticCode !== 'INVALID_EXPRESSION') throw error;
+                    Object.assign(error.opt, {space: this.spaceName, id: x.id});
+                    throw error;
+                }
             }
 
             return [x.id, expr, x.title];
@@ -71,7 +77,14 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
     this.selectByInstanceOf('TimeScale')
         .filter((ts) => ts.id !== 't')
         .forEach((ts) => {
-            let expr = Expression.fromString(`${ts.slope} * t + ${ts.intercept}`);
+            let expr;
+            try {
+                expr = Expression.fromString(`${ts.slope} * t + ${ts.intercept}`);
+            } catch (error) {
+                if (!(error instanceof HetaLevelError) || error.opt.diagnosticCode !== 'INVALID_EXPRESSION') throw error;
+                Object.assign(error.opt, {space: this.spaceName, id: ts.id});
+                throw error;
+            }
             unsortedAssignments.push([ts.id, expr, ts.title]);
             //console.log([ts.id, expr, ts.title])
         });
@@ -95,7 +108,14 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
                     return `+ ${ref.stoichiometry} * ${ref.process}`;
                 }
             }).join('');
-            let expr = Expression.fromString(exprString);
+            let expr;
+            try {
+                expr = Expression.fromString(exprString);
+            } catch (error) {
+                if (!(error instanceof HetaLevelError) || error.opt.diagnosticCode !== 'INVALID_EXPRESSION') throw error;
+                Object.assign(error.opt, {space: this.spaceName, id: record.id});
+                throw error;
+            }
 
             return {
                 ...state,
@@ -304,13 +324,15 @@ function _sort_expressions_by_dependency(exprs = []) {
     // Maybe later we will use only one check here or in checkCircRecord, not both
     try {
         var sortedGraph = graph.sort().reverse(); // independent should be at the beginning
-    } catch(err) { // catch cycling
-        let infoLine = err.circular
+    } catch(error) { // catch cycling
+        if (error instanceof HetaLevelError || !Array.isArray(error?.circular)) throw error;
+        let infoLine = error.circular
             .map((id) => `  ${id} ~ ${exprs.find(([exprId]) => exprId === id)[1].toString()};`)
             .join('\n');
-        let error = new HetaLevelError(`Circular dependency in expressions: \n` + infoLine);
-        error.circular = err.circular;
-        throw error;
+        throw new HetaLevelError(
+            `Circular dependency in expressions: \n` + infoLine, 
+            {diagnosticCode: 'CIRCULAR_RECORD_DEPENDENCY', circular: error.circular}
+        );
     }
 
     let sorter = (a, b) => {

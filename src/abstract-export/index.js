@@ -85,8 +85,10 @@ class AbstractExport {
       : filteredNS;
 
     if (concreteNS.length === 0) {
-      let msg = `Nothing was exported because there is no concrete namespaces matching spaceFilter in "${this.format}".`;
-      logger.warn(msg, {});
+      logger.warn(
+        `Nothing was exported because there is no concrete namespaces matching spaceFilter in "${this.format}".`, 
+        {diagnosticCode: 'EXPORT_NO_MATCHING_NAMESPACES', format: this.format, filter: this.spaceFilter}
+      );
     }
 
     return concreteNS;
@@ -122,10 +124,12 @@ class AbstractExport {
   static isValid(q, logger) {
     let valid = this.validate(q);
     if (!valid) {
-      let msg = `Some of properties do not satisfy requirements for "${this.name}"\n`
-        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.instancePath} ${x.message}`)
-          .join('\n');
-      logger?.error(msg, {type: 'ValidationError'});
+      let mappingLines = this.validate.errors
+        .map((x, i) => `    ${i+1}. ${x.instancePath} ${x.message}`);
+      logger?.error(
+        `Some of properties do not satisfy requirements for "${this.name}"\n` + mappingLines.join('\n'), 
+        {diagnosticCode: 'INVALID_EXPORT_CONFIGURATION', errors: this.validate.errors}
+      );
     }
     
     return valid;

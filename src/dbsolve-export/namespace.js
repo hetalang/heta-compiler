@@ -114,8 +114,10 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
     .map((switcher) => {
       // check boolean expression in trigger
       if (!switcher.trigger.isComparison) {
-        let msg = `DBSolve supports only simple comparison operators in DSwitcher trigger, got: "${switcher.trigger.toString()}"`;
-        logger.error(msg, {type: 'ExportError'});
+        logger.error(
+          `DBSolve supports only simple comparison operators in DSwitcher trigger, got: "${switcher.trigger.toString()}"`, 
+          {diagnosticCode: 'DBSOLVE_UNSUPPORTED_CONDITION', id: switcher.id, space: this.spaceName, expression: switcher.trigger.toString(), path: 'trigger', format: 'dbsolve'}
+        );
       }       
       
       let assignments = this
@@ -143,8 +145,10 @@ Namespace.prototype.getDBSolveImage = function(powTransform, groupConstBy, versi
     .selectByClassName('CSwitcher')
     .map((switcher) => {
       // CSWitcher is not fully supported in DBsolve
-      let msg = `DBSolve does not support CSwitcher, got: "${switcher.id}. It will be transformed to DSwitcher"`;
-      logger.warn(msg, {type: 'ExportWarning'});
+      logger.warn(
+        `DBSolve does not support CSwitcher, got: "${switcher.id}. It will be transformed to DSwitcher"`, 
+        {diagnosticCode: 'DBSOLVE_CEVENT_CONVERTED_TO_DEVENT', space: switcher.space, id: switcher.id, format: 'dbsolve'}
+      );
 
       let assignments = this
         .selectRecordsByContext(switcher.id)

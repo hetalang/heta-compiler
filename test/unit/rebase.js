@@ -1,6 +1,7 @@
 /* global describe, it */
 const { expect } = require('chai');
 const { Container } = require('../../src');
+const HetaLevelError = require('../../src/heta-level-error');
 
 const platform0 = [
   { id: 'meter', action: 'defineUnit' },
@@ -117,6 +118,6 @@ describe('Hour problem testing', () => {
   it('Error transformation Const', () => {
     let kel = c.select({id: 'kel'});
     
-    expect(() => kel.unitsParsed.rebase(['week'])).to.throw(TypeError);
+    expect(() => kel.unitsParsed.rebase(['week'])).to.throw(HetaLevelError);
   });
 });

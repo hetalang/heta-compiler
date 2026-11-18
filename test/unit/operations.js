@@ -1,6 +1,7 @@
 /* global describe, it*/
 const { expect } = require('chai');
 const { Unit } = require('../../src/core/unit');
+const HetaLevelError = require('../../src/heta-level-error');
 
 describe('Checking operations', () => {
   let test = {
@@ -54,6 +55,8 @@ describe('Test operations for Unit', () => {
     let res = Unit.fromQ(test.in1).simplify();
     let res1 = Unit.fromQ(test.res1);
     expect(res).to.be.deep.equal(res1);
+    expect(() => Unit.fromQ([{kind: 123}])).to.throw(HetaLevelError)
+      .with.property('opt').that.deep.equals({diagnosticCode: 'INVALID_UNIT_DEFINITION', unitItem: {kind: 123}, itemIndex: 0});
   });
 
   it('Check simplify 2:', () => {

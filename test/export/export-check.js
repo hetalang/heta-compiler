@@ -34,7 +34,9 @@ describe('General argument checking', () => {
   });
  
   it('Error in export: no "format"', () => {
-    expect(() => new Builder({export: [{ filepath: './1.json'}]})).to.throw(/Wrong structure/);
+    const b = new Builder({export: [{ filepath: './1.json'}]});
+    expect(b.run()).to.equal(b);
+    expect(b.container.hetaErrors().some((event) => event.opt?.diagnosticCode === 'PLATFORM_DECLARATION_MISSING_PROPERTY')).to.equal(true);
   });
   
   it('Error in export: wrong "format"', () => {
@@ -73,6 +75,8 @@ describe('General argument checking', () => {
   });
   
   it('Error in export: wrong "spaceFilter"', () => {
-    expect(() => new Builder({export: [{ format: 'json', filepath: './1.json', spaceFilter: 12}]})).to.throw(/Wrong structure/);
+    const b = new Builder({export: [{ format: 'json', filepath: './1.json', spaceFilter: 12}]});
+    expect(b.run()).to.equal(b);
+    expect(b.container.hetaErrors().some((event) => event.opt?.diagnosticCode === 'PLATFORM_DECLARATION_INVALID_PROPERTY_TYPE')).to.equal(true);
   });
 });

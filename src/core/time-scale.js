@@ -66,6 +66,14 @@ class TimeScale extends _Size { // implicit extend Numeric
   get className() {
     return 'TimeScale';
   }
+  checkUnits(){
+    if (this.unitsParsed === undefined) {
+      this._container.logger.warn(
+        `No units set for time scale "${this.index}".`,
+        {diagnosticCode: 'UNDEFINED_TIME_UNIT', space: this.space, id: this.id, path: 'units'}
+      );
+    }
+  }
   clone(){
     let clonedComponent = super.clone();
 

@@ -7,7 +7,68 @@
 
 const HetaLevelError = require('../heta-level-error');
 
+function validateMathStructure(element) {
+  if (!element || typeof element !== 'object') return;
+  const name = element.name;
+  if (['math', 'apply', 'piecewise', 'ci', 'cn'].includes(name) && !element.elements) {
+    throw new HetaLevelError(
+      `MathML <${name}> element has no content.`,
+      {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: name, reason: 'empty'}
+    );
+  }
+  if ((name === 'math' || name === 'apply') && !element.elements[0]) {
+    throw new HetaLevelError(
+      `MathML <${name}> element has no content.`,
+      {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: name, reason: 'empty'}
+    );
+  }
+  if (name === 'apply') {
+    const operator = element.elements[0].name;
+    const binary = ['gt', 'geq', 'eq', 'lt', 'leq', 'neq', 'minus'];
+    const unary = ['not', 'arcsin', 'arccos', 'arctan', 'arccot', 'arccsc', 'arcsec', 'arcsinh', 'arccosh', 'arctanh', 'arccoth', 'arcsech', 'arccsch'];
+    const count = operator === 'minus' && element.elements.length === 2 ? 1 : binary.includes(operator) ? 2 : unary.includes(operator) ? 1 : 0;
+    if (element.elements.length <= count) {
+      throw new HetaLevelError(
+        `MathML operator <${operator}> requires at least ${count} operand(s).`,
+        {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: 'apply', operator, reason: 'missing_operands', requiredOperands: count, providedOperands: element.elements.length - 1}
+      );
+    }
+    if (operator === 'root' || operator === 'log') {
+      const qualifier = element.elements.find((child) => child.name === (operator === 'root' ? 'degree' : 'logbase'));
+      if (qualifier && !qualifier.elements) {
+        throw new HetaLevelError(
+          `MathML <${qualifier.name}> element for <${operator}> has no content.`,
+          {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: qualifier.name, operator, reason: 'empty'}
+        );
+      }
+      if (qualifier && !qualifier.elements[0]) {
+        throw new HetaLevelError(
+          `MathML <${qualifier.name}> element for <${operator}> has no content.`,
+          {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: qualifier.name, operator, reason: 'empty'}
+        );
+      }
+    }
+  }
+  if (name === 'piecewise') {
+    for (const child of element.elements.filter((item) => item.name === 'piece' || item.name === 'otherwise')) {
+      if (!child.elements) {
+        throw new HetaLevelError(
+          `MathML <${child.name}> element has no content.`,
+          {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: child.name, reason: 'empty'}
+        );
+      }
+      if (!child.elements[0] || (child.name === 'piece' && !child.elements[1])) {
+        throw new HetaLevelError(
+          `MathML <${child.name}> element is missing ${child.name === 'piece' ? 'a value or condition' : 'a value'}.`,
+          {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: child.name, reason: 'missing_content'}
+        );
+      }
+    }
+  }
+}
+
 function _toMathExpr(element, useParentheses = false) {
+  validateMathStructure(element);
   if (element.name === 'math') {
     return _toMathExpr(element.elements[0]);
   } else if(element.name === 'apply' && element.elements[0].name === 'gt') {
@@ -189,11 +250,17 @@ function _toMathExpr(element, useParentheses = false) {
     return 't';
   } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/delay') {
     // return 'delay';
-    throw new HetaLevelError('"delay" symbol in expression (SBML module) is not supported');
+    throw new HetaLevelError(
+      'The SBML MathML delay symbol is not supported.',
+      {diagnosticCode: 'UNSUPPORTED_SBML_DELAY_SYMBOL', element: 'csymbol', definitionURL: element.attributes.definitionURL}
+    );
   } else if (element.name === 'csymbol' && element.attributes?.definitionURL === 'http://www.sbml.org/sbml/symbols/avogadro') {
     return '6.02214076e23';
   } else if (element.name === 'csymbol') {
-    throw new HetaLevelError(`csymbol with url ${element.attributes?.definitionURL} in expression (SBML module) is not supported`);
+    throw new HetaLevelError(
+      `SBML MathML csymbol with definitionURL "${element.attributes?.definitionURL}" is not supported.`,
+      {diagnosticCode: 'UNSUPPORTED_SBML_CSYMBOL', element: 'csymbol', definitionURL: element.attributes?.definitionURL}
+    );
   } else if (element.name === 'cn' && element.attributes?.type === 'rational' && element.elements[1]?.name === 'sep') { // rational numbers: 1/1000
     let numerator = element.elements[0]?.text;
     let denominator = element.elements[2]?.text;
@@ -218,11 +285,20 @@ function _toMathExpr(element, useParentheses = false) {
   } else if (element.name === 'pi') {
     return 'pi';
   } else if (element.name === 'infinity') {
-    throw new HetaLevelError('SBML MathML <infinity/> is not supported. Heta Compiler supports finite numeric values only.');
+    throw new HetaLevelError(
+      'SBML MathML <infinity/> is not supported. Heta Compiler supports finite numeric values only.',
+      {diagnosticCode: 'UNSUPPORTED_SBML_NONFINITE_NUMBER', element: 'infinity'}
+    );
   } else if (element.name === 'notanumber') {
-    throw new HetaLevelError('SBML MathML <notanumber/> is not supported. Heta Compiler supports finite numeric values only.');
+    throw new HetaLevelError(
+      'SBML MathML <notanumber/> is not supported. Heta Compiler supports finite numeric values only.',
+      {diagnosticCode: 'UNSUPPORTED_SBML_NONFINITE_NUMBER', element: 'notanumber'}
+    );
   } else {
-    throw new HetaLevelError('Cannot parse MathML:' + JSON.stringify(element, null, 2));
+    throw new HetaLevelError(
+      `Unsupported or invalid MathML element <${element.name}>.`,
+      {diagnosticCode: 'INVALID_SBML_EXPRESSION', element: element.name, reason: 'unsupported_element'}
+    );
   }
 }
 
@@ -236,6 +312,7 @@ function _toMathExpr(element, useParentheses = false) {
 // a>b and c>d -> min(a - b, c - d)
 // a>b or c>d -> max(a - b, c - d)
 function _toNumericExpr(element, useParentheses = false) {
+  validateMathStructure(element);
   //console.log(element);
   // transform all boolean, other expressions are the same
   if (element.name === 'math') {
@@ -252,10 +329,16 @@ function _toNumericExpr(element, useParentheses = false) {
     return `${two} - ${one}`;
   }
   if (element.name === 'apply' && element.elements[0].name === 'neq') {
-    throw new HetaLevelError('!= operator in expression (SBML module) is not supported');
+    throw new HetaLevelError(
+      'An SBML inequality trigger cannot be converted to a continuous event trigger.',
+      {diagnosticCode: 'UNSUPPORTED_SBML_EQUALITY_TRIGGER', operator: 'neq'}
+    );
   }
   if (element.name === 'apply' && element.elements[0].name === 'eq') {
-    throw new HetaLevelError('== operator in expression (SBML module) is not supported');
+    throw new HetaLevelError(
+      'An SBML equality trigger cannot be converted to a continuous event trigger.',
+      {diagnosticCode: 'UNSUPPORTED_SBML_EQUALITY_TRIGGER', operator: 'eq'}
+    );
   }
   if (element.name === 'apply' && element.elements[0].name === 'and') {
     let args = element.elements.slice(1)

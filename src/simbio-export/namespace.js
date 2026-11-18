@@ -9,19 +9,26 @@ Namespace.prototype.getSimbioImage = function() {
     .filter((species) => species.isAmount)
     .forEach((species) => {
       if (typeof species.unitsParsed === 'undefined') {
-        logger.error(`Units for "${species.index}" is not found which is not allowed for Simbio format when {isAmount: true}.`);
+        logger.error(
+          `Species "${species.index}" requires units for SimBiology export when isAmount is true.`,
+          {diagnosticCode: 'MISSING_UNIT', space: this.spaceName, id: species.id, path: 'units', format: 'simbio'}
+        );
         return; // BRAKE
       }
       let term = species.unitsParsed.toTerm();
       if (term === undefined) {
-        let msg = `Unit term cannot be calculated for species "${species.index}" that is not allowed for Simbio format when {isAmount: true}.`;
-        logger.error(msg, {type: 'UnitError'});
+        logger.error(
+          `Unit term cannot be calculated for species "${species.index}" during SimBiology export.`,
+          {diagnosticCode: 'UNIT_TERM_UNCOMPUTABLE', space: this.spaceName, id: species.id, path: 'units', format: 'simbio'}
+        );
         return; // BRAKE
       }
       let isLegal = species.legalTerms.some((x) => term.equal(x));
       if (!isLegal) {
-        let msg = `Species {isAmount: true} "${species.index}" has wrong unit term. It must be "amount" or "mass", got "${term}".`;
-        logger.error(msg, {type: 'UnitError'});
+        logger.error(
+          `Species "${species.index}" must have an amount or mass unit term for SimBiology export; got "${term}".`,
+          {diagnosticCode: 'UNIT_TERM_MISMATCH', space: this.spaceName, id: species.id, path: 'units', format: 'simbio', unitTerm: term.toString(), allowedTerms: species.legalTerms.map((allowed) => allowed.toString())}
+        );
         return; // BRAKE
       }
     });
@@ -32,14 +39,23 @@ Namespace.prototype.getSimbioImage = function() {
       let units = reaction.assignments['ode_'].calcUnit(reaction);
       if (typeof units === 'undefined') {
         //let msg = `Cannot calculate units for Reaction "${reaction.index}" which is not allowed for Simbio.`; // OK if cannot calculate
-        //logger.error(msg, {type: 'UnitError'});
+        //logger.error(msg);
         return; // BRAKE
       }
       let term = units.toTerm(); 
+      if (term === undefined) {
+        logger.error(
+          `Unit term cannot be calculated for reaction "${reaction.index}" during SimBiology export.`,
+          {diagnosticCode: 'UNIT_TERM_UNCOMPUTABLE', space: this.spaceName, id: reaction.id, format: 'simbio'}
+        );
+        return; // BRAKE
+      }
       let isLegal = reaction.legalTerms.some((x) => term.equal(x));
       if (!isLegal) {
-        let msg = `Reaction "${reaction.index}" has wrong CALCULATED unit term. It must be "amount/time" or "mass/time", got ${term}`;
-        logger.error(msg, {type: 'UnitError'});
+        logger.error(
+          `Reaction "${reaction.index}" has an unsupported calculated unit term: "${term}". Expected "amount/time" or "mass/time".`,
+          {diagnosticCode: 'SIMBIO_REACTION_UNIT_TERM_MISMATCH', space: this.spaceName, id: reaction.id, format: 'simbio', unitTerm: term.toString()}
+        );
         return; // BRAKE
       }
     });
@@ -51,14 +67,18 @@ Namespace.prototype.getSimbioImage = function() {
   let timeSwitchersIds = this.selectByClassName('TimeSwitcher')
     .map((x) => x.id);
   if (timeSwitchersIds.length > 0) {
-    let msg = `TimeSwitcher is not supported in Simbio, got ${timeSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
-    logger.warn(msg);
+    logger.warn(
+      `TimeSwitcher is not supported in Simbio, got ${timeSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`, 
+      {diagnosticCode: 'SBML_TIME_EVENT_CONVERTED_TO_DEVENT', space: this.spaceName, ids: timeSwitchersIds, format: 'simbio'}
+    );
   }
   let cSwitchersIds = this.selectByClassName('CSwitcher')
     .map((x) => x.id);
   if (cSwitchersIds.length > 0) {
-    let msg = `CSwitcher is not supported in Simbio, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`;
-    logger.warn(msg);
+    logger.warn(
+      `CSwitcher is not supported in Simbio, got ${cSwitchersIds.join(', ')}. They will be transformed to DSwitcher.`, 
+      {diagnosticCode: 'SBML_CEVENT_CONVERTED_TO_DEVENT', space: this.spaceName, ids: cSwitchersIds, format: 'simbio'}
+    );
   }
 
   return {

@@ -1,6 +1,7 @@
 const { Top } = require('./top');
 const { ajv } = require('../ajv');
 const { Expression } = require('./expression');
+const HetaLevelError = require('../heta-level-error');
 
 const schema = {
   type: 'object',
@@ -55,8 +56,10 @@ class FunctionDef extends Top {
     if (!!q.arguments) {
       this.arguments = q.arguments;
     } else if (!this.isCore) {
-      let msg = `The #defineFunction ${q.id} must have "arguments".`;
-      logger?.error(msg, {type: 'ValidationError'});
+      logger?.error(
+        `Function "${this.id}" requires an "arguments" list.`,
+        {diagnosticCode: 'MISSING_FUNCTION_ARGUMENTS', id: this.id, path: 'arguments'}
+      );
       this.errored = true;
     }
     
@@ -66,13 +69,16 @@ class FunctionDef extends Top {
         if (!expr.hasBooleanResult()) {
           this.math = expr;
         } else {
-          let msg = `Function math "${this.id}" should be a numeric expression.`;
-          logger?.error(msg, {type: 'ValidationError'});
+          logger?.error(
+            `Function math "${this.id}" should be a numeric expression.`, 
+            {diagnosticCode: 'EXPECTED_NUMERIC_EXPRESSION', id: this.id, expression: q.math, path: 'math'}
+          );
           this.errored = true;
         }
-      } catch (e) {
-        let msg = this.id + ': '+ e.message + ` in "${q.math.toString()}"`;
-        logger?.error(msg, {type: 'ValidationError'});
+      } catch (error) {
+        if (!(error instanceof HetaLevelError)) throw error;
+        let msg = this.id + ': '+ error.message + ` in "${q.math.toString()}"`;
+        logger?.error(msg, {...error.opt, id: this.id, expression: q.math, path: 'math'});
         this.errored = true;
         return; // BRAKE
       }
@@ -81,13 +87,17 @@ class FunctionDef extends Top {
       let lostVariables = expr.dependOn()
         .filter((v) => this.arguments?.indexOf(v) === -1);
       if (lostVariables.length > 0) {
-        let msg = this.id + ': '+ `variables [${lostVariables.join(', ')}] are presented in math but not in arguments.`;
-        logger?.error(msg, {type: 'ValidationError'});
+        logger?.error(
+          `Function "${this.id}" uses variables not listed in its arguments: ${lostVariables.join(', ')}.`,
+          {diagnosticCode: 'UNDECLARED_FUNCTION_VARIABLE', id: this.id, path: 'math', expression: q.math, variables: lostVariables}
+        );
         this.errored = true;
       }
     } else if (!this.isCore) {
-      let msg = `The #defineFunction ${q.id} must have "math".`;
-      logger?.error(msg, {type: 'ValidationError'});
+      logger?.error(
+        `Function "${this.id}" requires a "math" expression.`,
+        {diagnosticCode: 'MISSING_FUNCTION_EXPRESSION', id: this.id, path: 'math'}
+      );
       this.errored = true;
     }
 
@@ -104,21 +114,26 @@ class FunctionDef extends Top {
     let {logger, functionDefStorage} = this._container;
 
     // find and set reference to other functions
-    this.math?.functionList().forEach((functionNode) => {
+    this.math?.functionList(false).forEach((functionNode) => {
       // find target functionDef
       let target = functionDefStorage.get(functionNode.fn.name);
       if (!target) {
         let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
         + `${this.index} { math: ${this.math} };`;
-        logger?.error(msg, {type: 'BindingError'});
+        logger?.error(
+          msg,
+          {diagnosticCode: 'UNKNOWN_FUNCTION', id: this.id, path: 'math', functionId: functionNode.fn.name, expression: this.math.toString()}
+        );
       } else {
         functionNode.fnObj = target; // used for units checking
       }
 
       // check arguments in functionNode
       if (target?.arguments && functionNode.args.length < target.arguments.length) {
-        let msg = `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
-        logger?.error(msg, {type: 'BindingError'});
+        logger?.error(
+          `FunctionDef "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`, 
+          {diagnosticCode: 'FUNCTION_ARGUMENT_COUNT', functionId: functionNode.fn.name, requiredArguments: target.arguments.length, providedArguments: functionNode.args.length, id: this.id, space: this.space, path: 'math'}
+        );
       }
     });
   }

@@ -1,5 +1,6 @@
 /* global describe, it */
 const { Expression } = require('../../src/core/expression');
+const HetaLevelError = require('../../src/heta-level-error');
 const { Container } = require('../../src');
 require('../../src/sbml-export/expression');
 const { expect } = require('chai');
@@ -37,7 +38,7 @@ describe('Unit test for Expression.', () => {
     }).to.throw(TypeError);
     expect(() => {
       Expression.fromString({});
-    }).to.throw(TypeError);
+    }).to.throw(TypeError).and.not.have.property('diagnosticCode');
     expect(() => {
       Expression.fromString({xxx: 'yyy'});
     }).to.throw(TypeError);
@@ -46,10 +47,25 @@ describe('Unit test for Expression.', () => {
   it('Wrong expr syntax', () => {
     expect(() => {
       Expression.fromString('a/*');
-    }).to.throw(TypeError);
+    }).to.throw(HetaLevelError);
     expect(() => {
       Expression.fromString('(a*b');
-    }).to.throw(TypeError);
+    }).to.throw(HetaLevelError);
+    expect(() => Expression.fromString('[1, 2]')).to.throw(HetaLevelError)
+      .with.property('opt').that.deep.equals({diagnosticCode: 'INVALID_EXPRESSION', expression: '[1, 2]', nodeTypes: ['ArrayNode']});
+    for (const expression of ['x ? 1 : 2', '1 ? 1 : 2', 'true ? (x ? 1 : 2) : 3']) {
+      expect(() => Expression.fromString(expression)).to.throw(HetaLevelError)
+        .with.property('opt').that.includes({diagnosticCode: 'INVALID_EXPRESSION', expression});
+    }
+    for (const expression of ['x % 2', 'x!', 'x & 2', 'x << 2', '1 + (x mod 2)']) {
+      expect(() => Expression.fromString(expression)).to.throw(HetaLevelError)
+        .with.property('opt').that.includes({diagnosticCode: 'INVALID_EXPRESSION', expression});
+    }
+    for (const expression of ['+x', '-x', 'x + y', 'x - y', 'x * y', 'x / y', 'x ^ y',
+      'x > y', 'x >= y', 'x < y', 'x <= y', 'x == y', 'x != y',
+      'x and y', 'x or y', 'x xor y', 'not x', 'x > y ? x : y', 'true ? x : y', '(x > y) ? x : y', 'factorial(x)']) {
+      expect(() => Expression.fromString(expression), expression).not.to.throw();
+    }
   });
 });
 

@@ -83,7 +83,10 @@ class Scenario extends Top {
       if (q.tspan[0] < q.tspan[1]) {
         this.tspan = q.tspan;
       } else {
-        logger.error(`"tspan" property in setScenario "${q.id}" is not ordered`, {type: 'ValidationError'});
+        logger.error(
+          `Scenario "${this.id}" has an invalid time span: the start time must be less than the end time.`,
+          {diagnosticCode: 'INVALID_TIME_SPAN', id: this.id, path: 'tspan', tspan: q.tspan}
+        );
         this.errored = true;
       }
     }
@@ -147,8 +150,10 @@ class Scenario extends Top {
     if (this._container?.namespaceStorage.has(this.model)) {
       this.modelObj = this._container?.namespaceStorage.get(this.model);
     } else {
-      let msg = `Scenario's ${this.id} "model" property must refer to a namespace, got "${this.model}".`;
-      logger.error(msg, {type: 'BindingError'});
+      logger.error(
+        `Scenario "${this.id}" refers to a nonexistent namespace "${this.model}".`,
+        {diagnosticCode: 'MISSING_NAMESPACE', id: this.id, path: 'model', space: this.model}
+      );
       return; // BRAKE
     }
 
@@ -160,19 +165,25 @@ class Scenario extends Top {
           let foundComponent = this.modelObj.get(key);
           if (foundComponent === undefined || !foundComponent.instanceOf('Const')) {
             let msg = `"${key}" key in Scenario "${this.id}.parameters" must refer to Const.`;
-            logger.error(msg, {type: 'BindingError'});
+            logger.error(
+              msg,
+              {diagnosticCode: foundComponent === undefined ? 'MISSING_REFERENCE' : 'WRONG_REFERENCE_TYPE', id: this.id, space: this.model, path: `parameters.${key}`, reference: key}
+            );
           }
         });
     }
 
     // check observables
     if (this.observables !== undefined) {
-      this.observables.forEach((key) => {
+      this.observables.forEach((key, index) => {
         // search in records
         let foundComponent = this.modelObj.get(key);
         if (foundComponent === undefined || !foundComponent.instanceOf('Record')) {
           let msg = `"${key}" value in Scenario "${this.id}.observables" must refer to Record.`;
-          logger.error(msg, {type: 'BindingError'});
+          logger.error(
+            msg,
+            {diagnosticCode: foundComponent === undefined ? 'MISSING_REFERENCE' : 'WRONG_REFERENCE_TYPE', id: this.id, space: this.model, path: `observables.${index}`, reference: key}
+          );
         }
       });
     }
@@ -185,7 +196,10 @@ class Scenario extends Top {
           let foundComponent = this.modelObj.get(key);
           if (foundComponent === undefined || !foundComponent.instanceOf('_Switcher')) {
             let msg = `"${key}" key in Scenario "${this.id}.events_active" must refer to Switcher.`;
-            logger.error(msg, {type: 'BindingError'});
+            logger.error(
+              msg,
+              {diagnosticCode: foundComponent === undefined ? 'MISSING_REFERENCE' : 'WRONG_REFERENCE_TYPE', id: this.id, space: this.model, path: `events_active.${key}`, reference: key}
+            );
           }
         });
     }
@@ -198,7 +212,10 @@ class Scenario extends Top {
           let foundComponent = this.modelObj.get(key);
           if (foundComponent === undefined || !foundComponent.instanceOf('_Switcher')) {
             let msg = `"${key}" key in Scenario "${this.id}.events_save" must refer to Switcher.`;
-            logger.error(msg, {type: 'BindingError'});
+            logger.error(
+              msg,
+              {diagnosticCode: foundComponent === undefined ? 'MISSING_REFERENCE' : 'WRONG_REFERENCE_TYPE', id: this.id, space: this.model, path: `events_save.${key}`, reference: key}
+            );
           }
         });
     }

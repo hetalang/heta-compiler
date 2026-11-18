@@ -10,7 +10,7 @@ const installLink = 'https://hetalang.github.io/hetacompiler/installation.html';
 async function getLatestVersionAsync(){
   try {
     var response = await fetch(NPM_REF);
-  } catch (e) {
+  } catch (error) {
     return; // BRAKE
   }
   let json = await response.json();

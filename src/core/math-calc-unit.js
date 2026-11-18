@@ -46,7 +46,13 @@ function _calcUnit(_this, record) {
         let isEqual = firstUnit.equal(unit, true);
         if (!isEqual) {
           let unitsExpr = argUnit.map((x) => x.toString()).join(' vs ');
-          logger.warn(`Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+          logger.warn(
+
+            `Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`,
+
+            {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+          );
         }
       });
       return argUnit[0];
@@ -54,13 +60,25 @@ function _calcUnit(_this, record) {
       let isEqual = argUnit[0].equal(argUnit[1], true);
       if (!isEqual) {
         let unitsExpr = argUnit.map((x) => x.toString()).join(' vs ');
-        logger.warn(`Units inconsistency for "${record.index}" for comparison here "${_this.toString()}" : "${unitsExpr}"`);
+        logger.warn(
+
+          `Units inconsistency for "${record.index}" for comparison here "${_this.toString()}" : "${unitsExpr}"`,
+
+          {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+        );
       }
       return new Unit();
     } else if (_this.fn === 'and' || _this.fn === 'or' || _this.fn === 'xor' || _this.fn === 'not') {
       let someNotUL = argUnitDimensionless.some((x) => !x);
       if (someNotUL) {
-        logger.warn(`Units inconsistency for "${record.index}" for logical operators here"${_this.toString()}", some of them is not dimensionless : "${argUnit}"`);
+        logger.warn(
+
+          `Units inconsistency for "${record.index}" for logical operators here"${_this.toString()}", some of them is not dimensionless : "${argUnit}"`,
+
+          {diagnosticCode: 'UNIT_DIMENSIONLESS_REQUIRED', space: record.space, id: record.id, expression: _this.toString(), argumentUnits: argUnit.map((unit) => unit.toString())}
+
+        );
       }
       return new Unit();
     } else if (_this.fn === 'pow') { // ^
@@ -74,7 +92,13 @@ function _calcUnit(_this, record) {
       } else { // x ^ y
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
-          logger.warn(`Units inconsistency for "${record.index}": in power operator/function, base and exponent must be both dimensionless, or or the exponent must be a number: "${_this.toString()}" : "${unitExpr}"`);
+          logger.warn(
+
+          `Units inconsistency for "${record.index}": the base and exponent must both be dimensionless unless the exponent is a number: "${_this.toString()}" : "${unitExpr}"`,
+
+            {diagnosticCode: 'UNIT_EXPONENT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitExpr}
+
+          );
         }
 
         return argUnit[0];
@@ -109,7 +133,13 @@ function _calcUnit(_this, record) {
         let isEqual = firstUnit.equal(unit, true);
         if (!isEqual) {
           let unitsExpr = argUnit.map((x) => x.toString()).join(' vs ');
-          logger.warn(`Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+          logger.warn(
+
+            `Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`,
+
+            {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+          );
         }
       });
       return argUnit[0];
@@ -146,7 +176,13 @@ function _calcUnit(_this, record) {
       } else { // pow(x, y)
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
-          logger.warn(`Units inconsistency for "${record.index}": pow() arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
+          logger.warn(
+
+            `Units inconsistency for "${record.index}": pow() arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`,
+
+            {diagnosticCode: 'UNIT_EXPONENT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitExpr}
+
+          );
         }
 
         return argUnit[0];
@@ -159,7 +195,13 @@ function _calcUnit(_this, record) {
       } else { // nthRoot(x, y)
         if (!argUnitDimensionless[0] || !argUnitDimensionless[1]) {
           let unitExpr = argUnit[0].toString() + '^' + argUnit[1].toString();
-          logger.warn(`Units inconsistency for "${record.index}": nthRoot() arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`);
+          logger.warn(
+
+            `Units inconsistency for "${record.index}": nthRoot() arguments must be dimensionless or second argument should be a number: "${_this.toString()}" : "${unitExpr}"`,
+
+            {diagnosticCode: 'UNIT_EXPONENT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitExpr}
+
+          );
         }
 
         return argUnit[0];
@@ -171,7 +213,13 @@ function _calcUnit(_this, record) {
     if (_this.fn.name === 'logbase') {
       if (!argUnitDimensionless[1]) {
         let unitExpr = `logbase(${argUnit[0].toString()}, ${argUnit[1].toString()})`;
-        logger.warn(`Units inconsistency for "${record.index}": second arguments of logbase() must be dimensionless "${_this.toString()}" => "${unitExpr}"`);
+        logger.warn(
+
+          `Units inconsistency for "${record.index}": second arguments of logbase() must be dimensionless "${_this.toString()}" => "${unitExpr}"`,
+
+          {diagnosticCode: 'UNIT_DIMENSIONLESS_REQUIRED', space: record.space, id: record.id, expression: _this.toString(), argumentUnits: argUnit.map((unit) => unit.toString())}
+
+        );
       }
       return new Unit();
     }
@@ -182,12 +230,24 @@ function _calcUnit(_this, record) {
       let isEqual0 = argUnit[0].equal(argUnit[1], true);
       if (!isEqual0) {
         let unitsExpr = `${argUnit[0].toString()} vs ${argUnit[1].toString()}`;
-        logger.warn(`Units inconsistency in ifgt-like finction for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+        logger.warn(
+
+        `Units inconsistency in a conditional function for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`,
+
+          {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+        );
       }
       let isEqual = argUnit[2].equal(argUnit[3], true);
       if (!isEqual) {
         let unitsExpr = `${argUnit[2].toString()} vs ${argUnit[3].toString()}`;
-        logger.warn(`Units inconsistency in ifgt-like finction for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+        logger.warn(
+
+        `Units inconsistency in a conditional function for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`,
+
+          {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+        );
       }
       return argUnit[2];
     }
@@ -198,13 +258,25 @@ function _calcUnit(_this, record) {
       for (let i = 1; i < argUnit.length; i++) {
         if (isCondition) {
           if (!argUnitDimensionless[i]) {
-            logger.warn(`Units inconsistency for "${record.index}": booleam argument "${args[i]}" must be dimensionless "${_this.toString()}", got "${argUnit[i]}"`);
+            logger.warn(
+
+            `Units inconsistency for "${record.index}": boolean argument "${args[i]}" must be dimensionless in "${_this.toString()}", got "${argUnit[i]}"`,
+
+              {diagnosticCode: 'UNIT_DIMENSIONLESS_REQUIRED', space: record.space, id: record.id, expression: _this.toString(), argumentUnits: argUnit.map((unit) => unit.toString())}
+
+            );
           }
         } else {
           let isEqual = firstUnit.equal(argUnit[i], true);
           if (!isEqual) {
             let unitsExpr = `${firstUnit.toString()} vs ${argUnit[i]}`;
-            logger.warn(`Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+            logger.warn(
+
+              `Units inconsistency for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`,
+
+              {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+            );
           }
         }
         isCondition = !isCondition;
@@ -218,7 +290,13 @@ function _calcUnit(_this, record) {
     ];
     if (simpleFunctions.indexOf(_this.fn.name) >=0 ) { // first argument must be dimensionless, result is dimensionless 
       if (!argUnitDimensionless[0]) {
-        logger.warn(`Units inconsistency for "${record.index}": the argument must be dimensionless here "${_this.toString()}", got "${argUnit[0]}"`);
+        logger.warn(
+
+          `Units inconsistency for "${record.index}": the argument must be dimensionless here "${_this.toString()}", got "${argUnit[0]}"`,
+
+          {diagnosticCode: 'UNIT_DIMENSIONLESS_REQUIRED', space: record.space, id: record.id, expression: _this.toString(), argumentUnits: argUnit.map((unit) => unit.toString())}
+
+        );
       }
       return new Unit();
     }
@@ -243,8 +321,14 @@ function _calcUnit(_this, record) {
   } else if (_this.type === 'SymbolNode') {
     if (_this.name === 'e' || _this.name === 'pi')
       return new Unit(); // dimensionless
-    if (!_this.nameObj || typeof _this.nameObj.unitsParsed === 'undefined') {
-      logger.warn(`Cannot check units consistency for "${record.index}" because no units found for "${_this.name}"`);
+    if (!_this.nameObj) {
+      logger.warn(
+        `Cannot calculate units for "${record.index}" because reference "${_this.name}" is not bound.`,
+        {diagnosticCode: 'UNIT_CALCULATION_FAILED', space: record.space, id: record.id, reference: _this.name}
+      );
+      return undefined;
+    }
+    if (typeof _this.nameObj.unitsParsed === 'undefined') {
       return undefined; // BRAKE
     } else {
       return _this.nameObj.unitsParsed;
@@ -262,7 +346,13 @@ function _calcUnit(_this, record) {
     let isEqual = trueUnit.equal(falseUnit, true);
     if (!isEqual) {
       let unitsExpr = `${trueUnit.toString()} vs ${falseUnit.toString()}`;
-      logger.warn(`Units inconsistency in ternary operator for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`);
+      logger.warn(
+
+        `Units inconsistency in ternary operator for "${record.index}" here "${_this.toString()}" : "${unitsExpr}"`,
+
+        {diagnosticCode: 'UNIT_MISMATCH', space: record.space, id: record.id, expression: _this.toString(), unitExpression: unitsExpr}
+
+      );
     }
     return trueUnit;
   } else {

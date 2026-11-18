@@ -2,6 +2,7 @@
   UnitTerm is approximately the same as Unit but simpler.
   It was created to supply checking of unit consistency
 */
+const HetaLevelError = require('../heta-level-error');
 
 // legal term names
 // empty term [] means dimensionless
@@ -17,9 +18,12 @@ const termNames = [
 class UnitTerm extends Array {
   constructor(obj = []){
     super();
-    obj.length && obj.forEach((x) => { // filter((x) => x.exponent !== 0)
+    obj.length && obj.forEach((x, itemIndex) => { // filter((x) => x.exponent !== 0)
       if (termNames.indexOf(x.kind) === -1)
-        throw new TypeError('"kind" property of UnitTerm\'s item should be one of selected words, got ' + x.kind);
+        throw new HetaLevelError(
+          `Unit term item at index ${itemIndex} has an unsupported "kind": "${x.kind}". Allowed values: ${termNames.join(', ')}.`,
+          {diagnosticCode: 'INVALID_UNIT_TERM', termItem: x, itemIndex, allowedKinds: [...termNames]}
+        );
       this.push({
         kind: x.kind,
         exponent: (typeof x.exponent !== 'undefined') ? x.exponent : 1

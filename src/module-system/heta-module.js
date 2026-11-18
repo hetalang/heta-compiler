@@ -25,14 +25,17 @@ function hetaLoader(fileContent) {
 function _hetaParse(...params){
   try {
     return hetaParser.parse(...params);
-  } catch(e) {
-    if (e instanceof hetaParser.SyntaxError) {
-      let loc = e.location;
+  } catch(error) {
+    if (error instanceof hetaParser.SyntaxError) {
+      let loc = error.location;
       let coord = `${loc.start.line}:${loc.start.column}-${loc.end.line}:${loc.end.column}`;
 
-      throw new HetaLevelError(`(${coord} in Heta file) ` + e.message);
+      throw new HetaLevelError(
+        `(${coord} in Heta file) ` + error.message,
+        {diagnosticCode: 'MODULE_SYNTAX_ERROR', location: loc}
+      );
     } else {
-      throw e;
+      throw error;
     }
   }
 }

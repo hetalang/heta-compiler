@@ -67,7 +67,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -76,7 +76,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -85,7 +85,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -103,7 +103,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = x1.assignments.start_;
     let unit = expr.calcUnit(x1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
   
@@ -157,7 +157,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -166,7 +166,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -184,7 +184,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y1.assignments.start_;
     let unit = expr.calcUnit(y1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
   
@@ -211,7 +211,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = y4.assignments.start_;
     let unit = expr.calcUnit(y4);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(2); // no units found for "k5"
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 
@@ -284,7 +284,7 @@ describe('Testing warnings of checkUnits()', () => {
     let expr = p1.assignments.ode_;
     let unit = expr.calcUnit(p1);
     expect(unit).to.be.undefined;
-    expect(p.defaultLogs).to.be.lengthOf(1);
+    expect(p.defaultLogs).to.be.empty;
     p.defaultLogs.length = 0; // RESET
   });
 

@@ -1,6 +1,7 @@
 const { Component } = require('./component');
 const { Unit } = require('./unit');
 const { ajv } = require('../ajv');
+const HetaLevelError = require('../heta-level-error');
 
 const schema = {
   type: "object",
@@ -64,14 +65,25 @@ class _Size extends Component {
         } else if (typeof q.units === 'string') {
           try {
             this.unitsParsed = Unit.parse(q.units);
-          } catch (e) {
-            let msg = this.index + ': '+ e.message;
-            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+          } catch (error) {
+            if (!(error instanceof HetaLevelError)) throw error;
+            logger?.error(
+              this.index + ': '+ error.message, 
+              {...error.opt, space: this.space, id: this.id, path: 'units'}
+            );
           }
         } else if (q.units === null) {
           delete this.unitsParsed;
         } else {
-          this.unitsParsed = Unit.fromQ(q.units);
+          try {
+            this.unitsParsed = Unit.fromQ(q.units);
+          } catch (error) {
+            if (!(error instanceof HetaLevelError)) throw error;
+            logger?.error(
+              this.index + ': ' + error.message, 
+              {...error.opt, space: this.space, id: this.id, path: 'units'}
+            );
+          }
         }
       }
     }
@@ -108,7 +120,10 @@ class _Size extends Component {
         if (!target) {
           let msg = `UnitDef "${x.kind}" is not found as expected here: `
             + `${this.index} { units: ${this.units} };`;
-          logger.error(msg, {type: 'BindingError'});
+          logger.error(
+            msg,
+            {diagnosticCode: 'UNKNOWN_UNIT', space: this.space, id: this.id, path: 'units', unit: x.kind}
+          );
         } else {
           x.kindObj = target;
         }
@@ -132,10 +147,11 @@ class _Size extends Component {
         return this.unitsParsed
           .rebase(legalUnits)
           .toString(usePefix);
-      } catch(err) {
+      } catch(error) {
+        if (!(error instanceof HetaLevelError)) throw error;
         let logger = this._container?.logger;
-        let msg = err.message;
-        logger.warn(msg);
+        let msg = error.message;
+        logger?.warn(msg, {...error.opt, component: this.index, space: this.space});
         return undefined;
       }
     } else {

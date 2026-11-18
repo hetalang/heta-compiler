@@ -28,9 +28,9 @@ function _JSONParse(
 ){
   try {
     return JSON.parse(...params);
-  } catch(e) {
-    if (!(e instanceof SyntaxError)) throw e;
-    let message = e.message;
+  } catch(error) {
+    if (!(error instanceof SyntaxError)) throw error;
+    let message = error.message;
     let select = message.match(/at position (\d+)/);
     let coordinate;
     if (select) {
@@ -45,9 +45,10 @@ function _JSONParse(
       };
       message = `(${coordinate.line}:${coordinate.column} in JSON) ` + message;
     }
-    const error = new HetaLevelError(message);
-    if (coordinate) error.coordinate = coordinate;
-    throw error;
+    throw new HetaLevelError(
+      message,
+      {diagnosticCode: 'MODULE_SYNTAX_ERROR', ...(coordinate ? {coordinate} : {})}
+    );
   }
 }
 

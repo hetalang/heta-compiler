@@ -54,7 +54,8 @@ class Logger {
    * 
    * @param {string} level Log level: `debug`, `info`, `warn`, `error`, or `crit`.
    * @param {string} msg Log message.
-   * @param {object} opt Options for transport.
+   * @param {object} opt Options for transport. Platform diagnostics may include
+   *    a stable `diagnosticCode`; additional metadata is forwarded unchanged.
    *
    * @returns {void}
    */

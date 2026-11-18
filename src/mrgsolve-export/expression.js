@@ -92,8 +92,10 @@ Expression.prototype.toCString = function(logger, _mathOptions = {}, substituteB
         return `tgamma(${node.args[0].toString(options)} + 1.0)`;
       }
       if (node.fn.name === 'piecewise') {
-        let msg = `mrgsolve format does not support "piecewise" function, got "${node.toString()}"`;
-        logger && logger.error(msg);
+        logger?.error(
+          `mrgsolve format does not support "piecewise" function, got "${node.toString()}"`, 
+          {diagnosticCode: 'MRGSOLVE_UNSUPPORTED_FUNCTION', functionId: 'piecewise', format: 'mrgsolve'}
+        );
         let args = node.args
           .map((arg) => arg.toString(options));
         return `piecewise(${args.join(',')})`;

@@ -1,5 +1,6 @@
 const { Record } = require('./record');
 const { ajv } = require('../ajv');
+const HetaLevelError = require('../heta-level-error');
 
 const schema = {
   type: 'object',
@@ -51,9 +52,10 @@ class Process extends Record {
             let { targetArray, isReversible } = rct2actors(q.actors);
             this.actors = targetArray.map((q) => new Actor(q));
             this.reversible = isReversible;
-          } catch (e) {
+          } catch (error) {
+            if (!(error instanceof HetaLevelError)) throw error;
             let msg = `Wrong ProcessExpr string: ${q.actors} in "${this.index}".`;
-            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+            logger?.error(msg, {...error.opt, space: this.space, id: this.id, path: 'actors'});
           }
         }
       }
@@ -84,8 +86,10 @@ class Process extends Record {
 
     // check and warn if actors is empty
     if (this.actors.length === 0) {
-      let msg = `Process "${this.index}" has no actors.`
-      logger.warn(msg, {type: 'BindingError', space: this.space});
+      logger.warn(
+        `Process "${this.index}" has no actors.`, 
+        {diagnosticCode: 'EMPTY_PROCESS_ACTORS', space: this.space, id: this.id}
+      );
     }
 
   }
@@ -156,8 +160,13 @@ class Actor extends _Effector {
 
 function rct2actors(rct){
   let matches = /^([\w\d\s*+]*)(<)?[=-]?(>)?([\w\d\s*+]*)$/m.exec(rct);
-  if(matches===null) throw new TypeError('Wrong ProcessExpr string:', rct);
-
+  if (matches===null) {
+    throw new HetaLevelError(
+      'Wrong ProcessExpr string:', 
+      {diagnosticCode: 'INVALID_PROCESS_EXPRESSION', expression: rct}
+    );
+  }
+  
   let substrates = matches[1];
   let products = matches[4];
 

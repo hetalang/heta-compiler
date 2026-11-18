@@ -20,8 +20,13 @@ const { Const } = require('../core/const');
 const { TimeScale } = require('../core/time-scale');
 // external
 const { Logger, JSONTransport } = require('../logger');
+const HetaLevelError = require('../heta-level-error');
 const coreItems = require('./core-items.json');
 const TopoSort = require('@insysbio/topo-sort');
+const modelActions = new Set([
+  'export', 'defineUnit', 'defineFunction', 'setScenario', 'insert', 'forceInsert',
+  'update', 'upsert', 'delete', 'setNS', 'deleteNS', 'importNS', 'import', 'select', 'hasMeta'
+]);
 
 /**
  * Stores platform elements and provides actions for loading, binding, checking, and exporting them.
@@ -142,10 +147,10 @@ class Container {
   load(q, isCore = false){
     // estimate action, default is upsert
     let actionName = q.action || 'upsert';
-    if (!this[actionName] || typeof this[actionName] !== 'function') {
+    if (!modelActions.has(actionName)) {
       this.logger.error(
         `Action #${actionName} is unknown and will be skipped.`,
-        {type: 'QError', action: actionName}
+        {action: actionName, diagnosticCode: 'UNKNOWN_ACTION'}
       );
       return;
     }
@@ -214,13 +219,17 @@ class Container {
 
     try {
       graph.sort(); // independent will be at the end
-    } catch (err) { // catch cycling
-      let infoLine = err.circular.map((id) => {
+    } catch (error) { // catch cycling
+      if (error instanceof HetaLevelError || !Array.isArray(error?.circular)) throw error;
+      let infoLine = error.circular.map((id) => {
         let unitDef = this.unitDefStorage.get(id);
         return `\t{ ${id} = ${unitDef.units} }`;
       }).join('\n');
-      let msg = 'Circular dependency in UnitDef: \n' + infoLine;
-      this.logger.error(msg, {type: 'CircularError'});
+      
+      this.logger.error(
+        'Circular dependency in UnitDef: \n' + infoLine, 
+        {diagnosticCode: 'CIRCULAR_UNIT_DEFINITION', circular: error.circular}
+      );
     }
 
     return this;
@@ -244,31 +253,31 @@ class Container {
 
     try {
       graph.sort(); // independent will be at the end
-    } catch (err) { // catch cycling
-      let infoLine = err.circular.map((id) => {
+    } catch (error) { // catch cycling
+      if (error instanceof HetaLevelError || !Array.isArray(error?.circular)) throw error;
+      let infoLine = error.circular.map((id) => {
         let functionDef = this.functionDefStorage.get(id);
         return `\t${id} = ${functionDef.math}`;
       }).join('\n');
-      let msg = 'Circular dependency in functionDef: \n' + infoLine;
-      this.logger.error(msg, {type: 'CircularError'});
+      this.logger.error(
+        'Circular dependency in functionDef: \n' + infoLine, 
+        {diagnosticCode: 'CIRCULAR_FUNCTION_DEFINITION', circular: error.circular}
+      );
     }
 
     return this;
   }
 
   /**
-   * Checks unit consistency in records and switcher expressions.
+   * Checks units on constants and unit consistency in records and switcher expressions.
    * 
    * @returns {Container} This container.
    */
   checkUnits(){
     this.namespaceStorage.forEach((ns) => {
       if (!ns.isAbstract) {
-        // check units for t
-        let timeUnits = ns.get('t').unitsParsed;
-        if (!timeUnits) {
-          this.logger.warn('No units set for "t", cannot check ODE units.');
-        }
+        ns.selectByInstanceOf('TimeScale').forEach((timeScale) => timeScale.checkUnits());
+        ns.selectByInstanceOf('Const').forEach((constant) => constant.checkUnits());
         // check Record.assignments
         ns.selectByInstanceOf('Record')
           .forEach((rec) => rec.checkUnits());
@@ -307,8 +316,10 @@ class Container {
             let term = size.unitsParsed.toTerm();
             // check if Term cannot be estimated
             if (typeof term === 'undefined') {
-              let msg = `Unit term cannot be estimated for @${size.className} "${size.index}"`;
-              this.logger.warn(msg, {type: 'UnitError'});
+              this.logger.warn(
+                `Unit term cannot be calculated for @${size.className} "${size.index}".`,
+                {diagnosticCode: 'UNIT_TERM_UNCOMPUTABLE', space: ns.spaceName, id: size.id, path: 'units'}
+              );
               return; // break
             }
             let isLegal = size.legalTerms.some((x) => term.equal(x)); // one of them is legal
@@ -317,8 +328,10 @@ class Container {
               let legalTermStrings = size.legalTerms
                 .map((term) => `"${term.toString()}"`)
                 .join(', ');
-              let msg = `@${size.className} "${size.index}" has wrong unit term. It must be ${legalTermStrings}, got "${termString}"`;
-              this.logger.warn(msg, {type: 'UnitError'});
+              this.logger.warn(
+                `@${size.className} "${size.index}" has an incompatible unit term. Expected ${legalTermStrings}; got "${termString}".`,
+                {diagnosticCode: 'UNIT_TERM_MISMATCH', space: ns.spaceName, id: size.id, path: 'units', unitTerm: termString, allowedTerms: size.legalTerms.map((term) => term.toString())}
+              );
             }
           });
       }

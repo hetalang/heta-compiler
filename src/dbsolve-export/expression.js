@@ -98,8 +98,10 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
         return `pow(${args[0]}, 1 / ${args[1]})`;
       }
       if (node.fn.name === 'piecewise') {
-        let msg = `DBS and SLV formats do not support "piecewise" function, got "${node.toString()}"`;
-        logger && logger.error(msg);
+        logger?.error(
+          `DBS and SLV formats do not support "piecewise" function, got "${node.toString()}"`, 
+          {diagnosticCode: 'DBSOLVE_UNSUPPORTED_FUNCTION', functionId: 'piecewise', format: 'dbsolve'}
+        );
         let args = node.args
           .map((arg) => arg.toString(options));
         return `piecewise(${args.join(',')})`;
@@ -132,8 +134,10 @@ Expression.prototype.toSLVString = function(logger, powTransform = 'keep', subst
       } else if (condition.type === 'ConstantNode' && condition.value === false) {
         return `ifgt(0, 1, ${trueExpr}, ${falseExpr})`;
       } else if (condition.type === 'OperatorNode') {
-        let msg = `SLV format does not support boolean operators, got "${node.toString()}"`;
-        logger && logger.error(msg);
+        logger?.error(
+          `SLV format does not support boolean operators, got "${node.toString()}"`, 
+          {diagnosticCode: 'DBSOLVE_UNSUPPORTED_CONDITION', expression: node.toString(), format: 'dbsolve'}
+        );
         return `ifgt([error], [error], ${trueExpr}, ${falseExpr})`;
       }
     }

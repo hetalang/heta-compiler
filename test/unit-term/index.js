@@ -1,6 +1,7 @@
 /* global describe, it*/
 const { expect } = require('chai');
 const { UnitTerm } = require('../../src/core/unit-term');
+const HetaLevelError = require('../../src/heta-level-error');
 
 describe('Simple testing of UnitTerm', () => {
   it('Create and check', () => {
@@ -18,7 +19,8 @@ describe('Simple testing of UnitTerm', () => {
   });
 
   it('Error: wrong "kind" prop', () => {
-    expect(() => new UnitTerm([{kind: 'amount1', exponent: 1}])).to.throw(TypeError);
+    expect(() => new UnitTerm([{kind: 'amount1', exponent: 1}])).to.throw(HetaLevelError)
+      .with.property('opt').that.deep.equals({diagnosticCode: 'INVALID_UNIT_TERM', termItem: {kind: 'amount1', exponent: 1}, itemIndex: 0, allowedKinds: ['amount', 'length', 'time', 'mass', 'current', 'temperature']});
   });
 
   it('multiply()', () => {

@@ -1,4 +1,5 @@
-const { convertExcelSync } = require('../xlsx-connector');
+const { convertExcelSync, WorksheetNotFoundError, TableHeaderError } = require('../xlsx-connector');
+const HetaLevelError = require('../heta-level-error');
 
 /**
  * To initialize a Heta module of the "table" type.
@@ -6,18 +7,47 @@ const { convertExcelSync } = require('../xlsx-connector');
  * see [Heta specifications](https://hetalang.github.io/specifications/modules#table-module)
  * 
  * @returns {Module} Self.
+ * @throws {HetaLevelError} If `sheet` or `omitRows` is invalid.
  */
 function tableLoader(fileContent, { sheet = 0, omitRows = 0, transpose = false } = {}) {
   // check sheet is non negative integer
   if (typeof sheet !== 'number' || !Number.isInteger(sheet) || sheet < 0) {
-    throw new TypeError(`Table module option 'sheet' must be a non-negative integer, got: ${sheet}`);
+    throw new HetaLevelError(
+      `Table module option 'sheet' must be a non-negative integer, got: ${sheet}`,
+      {diagnosticCode: 'TABLE_INVALID_SHEET_OPTION', path: 'sheet', value: sheet}
+    );
   }
   // check omitRows is non negative integer
   if (typeof omitRows !== 'number' || !Number.isInteger(omitRows) || omitRows < 0) {
-    throw new TypeError(`Table module option 'omitRows' must be a non-negative integer, got: ${omitRows}`);
+    throw new HetaLevelError(
+      `Table module option 'omitRows' must be a non-negative integer, got: ${omitRows}`,
+      {diagnosticCode: 'TABLE_INVALID_OMIT_ROWS_OPTION', path: 'omitRows', value: omitRows}
+    );
+  }
+  if (typeof transpose !== 'boolean') {
+    throw new HetaLevelError(
+      `Table module option 'transpose' must be a boolean, got: ${JSON.stringify(transpose)}`,
+      {diagnosticCode: 'TABLE_INVALID_TRANSPOSE_OPTION', path: 'transpose', value: transpose}
+    );
   }
 
-  let rawData = convertExcelSync(fileContent, null, { sheet, transpose });
+  try {
+    var rawData = convertExcelSync(fileContent, null, { sheet, transpose });
+  } catch (error) {
+    if (error instanceof WorksheetNotFoundError) {
+      throw new HetaLevelError(
+        error.message,
+        {diagnosticCode: 'TABLE_MISSING_SHEET', sheet: error.sheet}
+      );
+    }
+    if (error instanceof TableHeaderError) {
+      throw new HetaLevelError(
+        error.message,
+        {diagnosticCode: 'TABLE_INVALID_HEADER', header: error.header, part: error.part, sheet}
+      );
+    }
+    throw error;
+  }
   rawData.splice(0, omitRows); // remove rows
 
   let parsed = rawData

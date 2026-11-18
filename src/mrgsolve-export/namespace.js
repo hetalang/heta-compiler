@@ -16,8 +16,10 @@ Namespace.prototype.getMrgsolveImage = function() {
     .filter((event) => ['conditional', 'crossing'].includes(event.trigger.type))
     .map((event) => event.id);
   if (eventsToCheck.length > 0) { 
-    const msg = `Unstable results possible for model "${this.spaceName}" in mrgsolve because CSwitcher/DSwitcher were found. \n\tTry to update "delta" and "hmax" parameters in mrgsolve to improve stability.`;
-    logger.warn(msg, {type: 'EventTypeWarning', events: eventsToCheck});
+    logger.warn(
+      `Model "${this.spaceName}" has conditional or crossing events that may cause unstable mrgsolve results. Consider adjusting "delta" and "hmax".`,
+      {diagnosticCode: 'MRGSOLVE_EVENT_STABILITY_RISK', space: this.spaceName, format: 'mrgsolve', events: eventsToCheck}
+    );
   }
 
   // a specific dictionary required for "compartment" enumeration in mrgsolve

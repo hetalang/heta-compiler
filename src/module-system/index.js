@@ -38,6 +38,7 @@ class ModuleSystem {
     // stores modules in format
     // { filepath : module, ...}
     this.moduleCollection = {};
+    this.tableOptions = new Map();
     this.graph = new TopoSort();
     this.logger = logger;
     this.fileReadHandler = fileReadHandler;
@@ -71,6 +72,19 @@ class ModuleSystem {
    */
   _addModuleDeep(modulePath, type, options = {}){
     let moduleName = [modulePath, '#', options.sheet || '0'].join('');
+    if (type === 'table' || type === 'xlsx') {
+      const tableOptions = {omitRows: options.omitRows === undefined ? 0 : options.omitRows,
+        transpose: options.transpose === undefined ? false : options.transpose};
+      const previous = this.tableOptions.get(moduleName);
+      if (previous && (previous.omitRows !== tableOptions.omitRows || previous.transpose !== tableOptions.transpose)) {
+        this.logger.error(
+          `Table module "${modulePath}" sheet ${options.sheet ?? 0} is included with conflicting reading options.`,
+          {diagnosticCode: 'TABLE_CONFLICTING_OPTIONS', filename: modulePath, sheet: options.sheet ?? 0, previousOptions: previous, options: tableOptions}
+        );
+      } else if (!previous) {
+        this.tableOptions.set(moduleName, tableOptions);
+      }
+    }
     if (!(moduleName in this.moduleCollection)) { // new file
       let parsed = this.addModule(modulePath, type, options);
       parsed
@@ -108,10 +122,18 @@ class ModuleSystem {
     let includePaths = parsed
       .filter((q) => q.action==='include')
       .filter((q) => {
+        if (typeof q.source !== 'string' || !q.source.trim()) {
+          this.logger.error(
+            `Include source in "${filename}" must be a non-empty string.`,
+            {diagnosticCode: 'INVALID_MODULE_SOURCE', filename, source: q.source}
+          );
+          q.source = '';
+          return false;
+        }
         if (path.isAbsolute(q.source)) {
           this.logger.error(
             `include statement does not suport absolute path in "${filename}", got "${q.source}".`,
-            {type: 'ModuleError', filename: filename}
+            {diagnosticCode: 'ABSOLUTE_MODULE_PATH', source: q.source, target: filename}
           );
           q.source = '';
           return false;
@@ -140,15 +162,18 @@ class ModuleSystem {
     this.logger.info(`Reading module of type "${type}" from file "${filename}${tabNum}"...`);
 
     if (!filename) { // in case of empty filename or absolute path
-      //this.logger.error(`No filename set for include of type "${type}"`, {type: 'ModuleError', filename: filename});
+      //this.logger.error(`No filename set for include of type "${type}"`, {filename: filename});
       return [];
     }
 
     // run loader
-    let loader = moduleLoaders[type];
+    let loader = Object.prototype.hasOwnProperty.call(moduleLoaders, type) ? moduleLoaders[type] : undefined;
     if (loader === undefined) {
-      let msg = `Unknown module type "${type}". Possible types are: ["heta", "json", "md", "yaml", "xlsx", "sbml", "table"].`;
-      this.logger.error(msg, {type: 'ModuleError', filename: filename});
+      const description = typeof type === 'string' ? `"${type}"` : `${JSON.stringify(type)} (${type === null ? 'null' : typeof type})`;
+      this.logger.error(
+        `Unsupported module type ${description} for "${filename}". Expected one of: heta, json, md, yaml, xlsx, sbml, table.`,
+        {diagnosticCode: 'UNSUPPORTED_MODULE_TYPE', filename, type}
+      );
       return [];
     }
     if (typeof loader !== 'function') {
@@ -156,22 +181,36 @@ class ModuleSystem {
     }
     
     try {
-      let fileContent = this.fileReadHandler(filename);
-      var parsed = loader(fileContent, Object.assign({}, options, { logger: this.logger }));
-    } catch (e) {
-      if (e.name === 'HetaLevelError') {
-        let msg = e.message + ` when converting module "${filename}${tabNum}"`;
-        this.logger.error(msg, {type: 'ModuleError', filename: filename});
-        return [];
-      } else if (e.code === 'ENOENT') {
-        let msg = e.message;
-        this.logger.error(msg, {type: 'ModuleError', filename: filename});
-        return [];
-      } else if (e instanceof TypeError) {
-        this.logger.error(e.message, {type: 'ModuleError', filename: filename});
+      var fileContent = this.fileReadHandler(filename);
+    } catch (error) {
+      if (error.code === 'ENOENT') {
+        this.logger.error(
+          error.message,
+          {diagnosticCode: 'UNAVAILABLE_MODULE', filename, systemCode: error.code}
+        );
         return [];
       } else {
-        throw e;
+        throw error;
+      }
+    }
+    if (fileContent == null) {
+      throw new TypeError(`File read handler returned ${fileContent} for module "${filename}".`);
+    }
+    try {
+      var parsed = loader(fileContent, Object.assign({}, options, { logger: this.logger }));
+    } catch (error) {
+      if (error.name === 'HetaLevelError') {
+        let msg = error.message + ` when converting module "${filename}${tabNum}"`;
+        this.logger.error(msg, {...error.opt, filename: filename});
+        return [];
+      } else if (error instanceof TypeError) {
+        this.logger.error(
+          error.message,
+          {filename: filename, diagnosticCode: 'MODULE_PROCESSING_ERROR', stack: error.stack}
+        );
+        return [];
+      } else {
+        throw error;
       }
     }
 
@@ -187,7 +226,11 @@ class ModuleSystem {
     try {
       return this.graph.sort();
     } catch (error) {
-      throw new HetaLevelError(`Circular include in modules: [ ${error.circular.join(', ')} ]`);
+      if (!Array.isArray(error.circular)) throw error;
+      throw new HetaLevelError(
+        `Circular include in modules: [ ${error.circular.join(', ')} ]`, 
+        {diagnosticCode: 'CIRCULAR_MODULE_INCLUDES', circular: error.circular}
+      );
     }
   }
 

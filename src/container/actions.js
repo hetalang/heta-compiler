@@ -25,16 +25,32 @@ const reservedWords = [
 // TODO: this is part which will be removed later
 // invisible => deprecated => removed
 Container.prototype.export = function(q = {}, isCore = false) {
-  this.logger.warn('Inline #export is deprecated and will be removed in the future. Use export property in platform configuration.');
+  this.logger.warn(
+    'Inline #export is deprecated and will be removed in the future. Use export property in platform configuration.', 
+    {diagnosticCode: 'DEPRECATED_INLINE_EXPORT', input: q}
+  );
   
-  let { exportClasses, exportArray } = this._builder;
-  let format = q.format.toLowerCase(); // convert to lower case here
-  if (format === undefined) {
-    this.logger.error('Empty "format" option in export', {type: 'QError'});
+  if (q.format == null || q.format === '') {
+    this.logger.error(
+      'Inline #export requires a "format" property.',
+      {diagnosticCode: 'MISSING_EXPORT_FORMAT', action: 'export', path: 'format', format: q.format}
+    );
     return; // BRAKE
   }
+  if (typeof q.format !== 'string') {
+    this.logger.error(
+      'The "format" property of inline #export must be a string.',
+      {diagnosticCode: 'INVALID_EXPORT_CONFIGURATION', action: 'export', path: 'format', format: q.format}
+    );
+    return; // BRAKE
+  }
+  let { exportClasses, exportArray } = this._builder;
+  let format = q.format.toLowerCase(); // convert to lower case here
   if (typeof exportClasses[format] !== 'function') {
-    this.logger.error(`Unknown format "${format}" in export.`, {type: 'QError'});
+    this.logger.error(
+      `Export format "${q.format}" is not supported.`,
+      {diagnosticCode: 'UNKNOWN_EXPORT_FORMAT', format: q.format, action: 'export', path: 'format'}
+    );
 
     return; // BRAKE
   }
@@ -45,7 +61,10 @@ Container.prototype.export = function(q = {}, isCore = false) {
   if (!exportInstance.errored && !ignoreInlineExport) { // TODO: remove second check later
     exportArray.push(exportInstance);
   } else if (!exportInstance.errored) {
-    this.logger.warn(`inline #export {format: ${q.format}} will not be applied because export was set in platform configuration.`);
+    this.logger.warn(
+      `inline #export {format: ${q.format}} will not be applied because export was set in platform configuration.`, 
+      {diagnosticCode: 'INLINE_EXPORT_IGNORED'}
+    );
   }
 
   return exportInstance;
@@ -115,7 +134,7 @@ Container.prototype.insert = function(q = {}, isCore = false) {
   if (namespace === undefined) {
     this.logger.error(
       `"${ind}" create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, id: q.id, action: q.action || 'insert'}
     );
     return;
   }
@@ -125,7 +144,7 @@ Container.prototype.insert = function(q = {}, isCore = false) {
     let old = namespace.get(q.id);
     this.logger.warn(
       `"${ind}" Component "${old.id} @${old.className}" is substituted by "${q.id} @${q.class}", use #forceInsert to avoid this warning.`,
-      {space: space}
+      {diagnosticCode: 'COMPONENT_REPLACED', id: q.id, space: space}
     );
   }
   return this.forceInsert(q, isCore);
@@ -147,24 +166,38 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
 
   let space = q.space || 'nameless';
   // check index
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  if (q.id == null || q.id === '') {
     this.logger.error(
-      `${ind} id should be string of type ID, but have "${q.id}"\n\t- ${JSON.stringify(q)}`,
-      {type: 'QError', space: space}
+      `${ind} id should not be empty, got "${q.id}"\n\t- ${JSON.stringify(q)}`,
+      {diagnosticCode: 'MISSING_IDENTIFIER', id: q.id, space, action: q.action || 'forceInsert', path: 'id'}
+    );
+    return;
+  }
+  if (typeof q.id !== 'string' || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+    this.logger.error(
+      `${ind} id should be string of type ID, got "${q.id}"\n\t- ${JSON.stringify(q)}`,
+      {diagnosticCode: 'INVALID_IDENTIFIER', id: q.id, space, action: q.action || 'forceInsert'}
     );
     return;
   }
   if (reservedWords.indexOf(q.id) !== -1) {
     this.logger.error(
       `id must not be a reserved word, got "${ind}". Reserved words list: \n\t ${reservedWords.join(', ')}`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'RESERVED_IDENTIFIER', space, id: q.id, action: q.action || 'forceInsert', path: 'id'}
     );
     return;
   }
-  if (!q.class || typeof q.class !== 'string'){
+  if (q.class === undefined || q.class === '') {
     this.logger.error(
-      `${ind} No class or unsuitable class for "insert": ${q.class}`,
-      {type: 'QError', space: space}
+      `Component "${ind}" requires a "class" property.`,
+      {diagnosticCode: 'MISSING_CLASS', space, id: q.id, action: q.action || 'forceInsert'}
+    );
+    return;
+  }
+  if (typeof q.class !== 'string'){
+    this.logger.error(
+      `${ind} Class must be string for "insert": ${q.class}`,
+      {diagnosticCode: 'INVALID_CLASS', space: space, id: q.id, wrongClass: q.class}
     );
     return;
   }
@@ -174,7 +207,7 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
   if (selectedClass === undefined){
     this.logger.error(
       `"${ind}" Unknown class "${q.class}" for the component.`,
-      {type: 'QError', space: space}
+      {space: space, diagnosticCode: 'INVALID_CLASS'}
     );
     return;
   }
@@ -184,7 +217,7 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
   if (namespace === undefined) {
     this.logger.error(
       `"${ind}" create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, id: q.id, action: q.action || 'forceInsert'}
     );
     return;
   }
@@ -205,16 +238,17 @@ Container.prototype.forceInsert = function(q = {}, isCore = false){
  */
 Container.prototype.update = function(q = {}){
   let space = q.space || 'nameless';
-  if (!q.id) {
+  if (q.id == null || q.id === '') {
     this.logger.error(
       `"id" property is not set in "#update" action:\n\t- ${JSON.stringify(q)}`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_IDENTIFIER', id: q.id, space, action: 'update', path: 'id'}
     );
     return;
-  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  }
+  if (typeof q.id !== 'string' || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
     this.logger.error(
       `"id" property should be string in "#update" action, got "${q.id}"`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'INVALID_IDENTIFIER', id: q.id, space, action: 'update'}
     );
     return;
   }
@@ -222,7 +256,7 @@ Container.prototype.update = function(q = {}){
   if (q.class){
     this.logger.error(
       `${ind} "class" property is not allowed for "update": ${q.class}`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'PROPERTY_NOT_ALLOWED_IN_ACTION', action: 'update', property: 'class', value: q.class, id: q.id, space}
     );
     return;
   }
@@ -231,7 +265,7 @@ Container.prototype.update = function(q = {}){
   if (namespace === undefined) {
     this.logger.error(
       `${ind} Create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, id: q.id, action: 'update'}
     );
     return;
   }
@@ -241,14 +275,14 @@ Container.prototype.update = function(q = {}){
   if (targetComponent === undefined) {
     this.logger.error(
       `${ind} component does not exist which is not allowed for the "update" action.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_REFERENCE', space, id: q.id, reference: q.id, action: 'update'}
     );
     return;
   }
   if (targetComponent.isCore) {
     this.logger.error(
       `${ind} Core component is read-only and cannot be updated.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'UPDATE_CORE_COMPONENT', space, id: q.id, action: 'update'}
     );
     return;
   }
@@ -284,16 +318,17 @@ Container.prototype.upsert = function(q = {}, isCore = false){
 Container.prototype.delete = function(q = {}){
   let space = q.space || 'nameless';
 
-  if (!q.id) {
+  if (q.id == null || q.id === '') {
     this.logger.error(
       `"id" property is not set in "#delete" action:\n\t- ${JSON.stringify(q)}`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_IDENTIFIER', id: q.id, space, action: 'delete', path: 'id'}
     );
     return;
-  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  }
+  if (typeof q.id !== 'string' || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
     this.logger.error(
       `"id" property should be string in "#delete" action, got "${q.id}"`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'INVALID_IDENTIFIER', id: q.id, space, action: 'delete'}
     );
     return;
   }
@@ -301,7 +336,7 @@ Container.prototype.delete = function(q = {}){
   if (q.class){
     this.logger.error(
       `${ind} "class" property is not allowed for "delete": ${q.class}`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'PROPERTY_NOT_ALLOWED_IN_ACTION', action: 'delete', property: 'class', value: q.class, id: q.id, space}
     );
     return;
   }
@@ -310,7 +345,7 @@ Container.prototype.delete = function(q = {}){
   if (namespace === undefined) {
     this.logger.error(
       `${ind} Create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, id: q.id, action: 'delete'}
     );
     return;
   }
@@ -319,14 +354,14 @@ Container.prototype.delete = function(q = {}){
   if (!targetComponent) { // if targetComponent===false, element is not exist
     this.logger.error(
       `${ind} Element with id "${q.id}" does not exist and cannot be deleted.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_REFERENCE', space, id: q.id, reference: q.id, action: 'delete'}
     );
     return;
   }
   if(targetComponent.isCore){
     this.logger.error(
       `${ind} Core component is read-only and cannot be deleted.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'DELETE_CORE_COMPONENT', space: space, id: q.id}
     );
     return;
   }
@@ -379,7 +414,10 @@ Container.prototype.deleteNS = function(_q = {}) {
     this.namespaceStorage.delete(q.space);
     this.logger.info(`Namespace "${q.space}" was deleted.`);
   } else {
-    this.logger.error(`Namespace "${q.space}" is not found.`);
+    this.logger.error(
+      `Namespace "${q.space}" is not found.`,
+      {diagnosticCode: 'MISSING_NAMESPACE', space: q.space, action: 'deleteNS'}
+    );
   }
 
   return this;
@@ -416,26 +454,36 @@ Container.prototype.importNS = function(_q = {}){
   if (q.fromId) {
     this.logger.error(
       `fromId must not be set for #importNS, got "${q.fromId}"`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'PROPERTY_NOT_ALLOWED_IN_ACTION', action: 'importNS', property: 'fromId', value: q.fromId, space}
     );
     return; // BRAKE
   }
   if (q.id) {
-    this.logger.error(`id must not be set for #importNS, got "${q.id}"`);
+    this.logger.error(
+      `id must not be set for #importNS, got "${q.id}"`,
+      {diagnosticCode: 'PROPERTY_NOT_ALLOWED_IN_ACTION', action: 'importNS', property: 'id', value: q.id, space}
+    );
     return; // BRAKE
   }
   let namespace = this.namespaceStorage.get(space);
   if (namespace === undefined) {
     this.logger.error(
       `Create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, action: 'importNS', path: 'space'}
     );
     return;
   }
-  if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
+  if (q.fromSpace == null || q.fromSpace === '') {
     this.logger.error(
-      `space should be string, got "${q.fromSpace}"`,
-      {type: 'QError', space: space}
+      'Source namespace "fromSpace" is required for #importNS.',
+      {diagnosticCode: 'MISSING_SOURCE_NAMESPACE', action: 'importNS', space, fromSpace: q.fromSpace}
+    );
+    return;
+  }
+  if (typeof q.fromSpace !== 'string') {
+    this.logger.error(
+      `Source namespace "fromSpace" must be a string for #importNS, got "${q.fromSpace}".`,
+      {diagnosticCode: 'INVALID_SOURCE_NAMESPACE', action: 'importNS', space, fromSpace: q.fromSpace}
     );
     return;
   }
@@ -443,7 +491,7 @@ Container.prototype.importNS = function(_q = {}){
   if (fromNamespace === undefined) {
     this.logger.error(
       `Create namespace "${q.fromSpace}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, fromSpace: q.fromSpace, action: 'importNS', path: 'fromSpace'}
     );
     return;
   }
@@ -502,17 +550,31 @@ Container.prototype.import = function(_q = {}){
 
   let space = q.space || 'nameless';
   // checking arguments
-  if (!q.fromId || (typeof q.fromId !== 'string')) {
+  if (q.fromId == null || q.fromId === '') {
     this.logger.error(
       `${ind} fromId should be string, but have "${q.fromId}"`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_IMPORT_SOURCE_ID', fromId: q.fromId, fromSpace: q.fromSpace, id: q.id, space, action: 'import'}
     );
     return;
   }
-  if (!q.id || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
+  if (typeof q.fromId !== 'string' || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.fromId)) {
+    this.logger.error(
+      `${ind} fromId should be string of type ID, got "${q.fromId}"`,
+      {diagnosticCode: 'INVALID_IMPORT_SOURCE_ID', fromId: q.fromId, fromSpace: q.fromSpace, id: q.id, space, action: 'import'}
+    );
+    return;
+  }
+  if (q.id == null || q.id === ''){
     this.logger.error(
       `${ind} id should be string, but have "${q.id}"`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_IDENTIFIER', id: q.id, space, action: 'import', path: 'id'}
+    );
+    return;
+  }
+  if (typeof q.id !== 'string' || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)){
+    this.logger.error(
+      `${ind} id should be string, but have "${q.id}"`,
+      {diagnosticCode: 'INVALID_IDENTIFIER', id: q.id, space, action: 'import'}
     );
     return;
   }
@@ -521,15 +583,22 @@ Container.prototype.import = function(_q = {}){
   if (namespace === undefined) {
     this.logger.error(
       `Create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, id: q.id, action: 'import', path: 'space'}
     );
     return;
   }
 
-  if (!q.fromSpace || (typeof q.fromSpace !== 'string')) {
+  if (q.fromSpace == null || q.fromSpace === '') {
     this.logger.error(
-      `fromSpace should be string, but have "${q.fromSpace}"`,
-      {type: 'QError', space: space}
+      'Source namespace "fromSpace" is required for #import.',
+      {diagnosticCode: 'MISSING_SOURCE_NAMESPACE', action: 'import', id: q.id, fromId: q.fromId, space, fromSpace: q.fromSpace}
+    );
+    return;
+  }
+  if (typeof q.fromSpace !== 'string') {
+    this.logger.error(
+      `Source namespace "fromSpace" must be a string for #import, got "${q.fromSpace}".`,
+      {diagnosticCode: 'INVALID_SOURCE_NAMESPACE', action: 'import', id: q.id, fromId: q.fromId, space, fromSpace: q.fromSpace}
     );
     return;
   }
@@ -538,7 +607,7 @@ Container.prototype.import = function(_q = {}){
   if (fromNamespace === undefined) {
     this.logger.error(
       `Create namespace "${q.fromSpace}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, fromSpace: q.fromSpace, id: q.id, action: 'import', path: 'fromSpace'}
     );
     return;
   }
@@ -548,7 +617,7 @@ Container.prototype.import = function(_q = {}){
   if (!component) {
     this.logger.error(
       `Element with ${q.fromSpace}::${q.fromId} does not exist and cannot be imported.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_REFERENCE', space, id: q.id, reference: q.fromId, fromSpace: q.fromSpace, action: 'import'}
     );
     return;
   }
@@ -572,16 +641,17 @@ Container.prototype.import = function(_q = {}){
 Container.prototype.select = function(q = {}){
 
   let space = q.space || 'nameless';
-  if (!q.id) {
+  if (q.id == null || q.id === '') {
     this.logger.error(
       `"id" property is not set in "#select" action:\n\t- ${JSON.stringify(q)}`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_IDENTIFIER', id: q.id, space, action: 'select', path: 'id'}
     );
     return;
-  } else if (!/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
+  }
+  if (typeof q.id !== 'string' || !/^[_a-zA-Z][_a-zA-Z0-9]*$/.test(q.id)) {
     this.logger.error(
       `"id" property should be string in "#select" action, got "${q.id}"`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'INVALID_IDENTIFIER', id: q.id, space, action: 'select'}
     );
     return;
   }
@@ -591,7 +661,7 @@ Container.prototype.select = function(q = {}){
   if (namespace === undefined) {
     this.logger.error(
       `${ind} Create namespace "${space}" before use.`,
-      {type: 'QError', space: space}
+      {diagnosticCode: 'MISSING_NAMESPACE', space, id: q.id, action: 'select'}
     );
     return;
   }

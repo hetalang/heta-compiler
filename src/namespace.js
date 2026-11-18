@@ -138,9 +138,10 @@ class Namespace extends Map {
       var sortedGraph = graph
         .sort()
         .reverse(); // independent should be at the beginning
-    } catch(err) { // catch cycling
+    } catch(error) { // catch cycling
+      if (error instanceof HetaLevelError || !Array.isArray(error?.circular)) throw error;
       // remove constants and records with num
-      let infoLine = err.circular
+      let infoLine = error.circular
         .map((id) => this.get(id))
         .filter((component) => {
           return component.instanceOf('Record')
@@ -154,9 +155,10 @@ class Namespace extends Map {
           return `  ${record.index} ~ ${assignment};`;
         })
         .join('\n');
-      let error = new HetaLevelError(`Circular dependency in context "${context}" for expressions: \n` + infoLine);
-      error.circular = err.circular;
-      throw error;
+      throw new HetaLevelError(
+        `Circular dependency in context "${context}" for expressions: \n` + infoLine,
+        {diagnosticCode: 'CIRCULAR_RECORD_DEPENDENCY', circular: error.circular}
+      );
     }
 
     // if record not in graph than -1 and will be first
@@ -218,8 +220,9 @@ class Namespace extends Map {
     let logger = this.container.logger;
     try {
       this.sortExpressionsByContext(scope, includeCompartmentDep);
-    } catch (e) {
-      logger.error(e.message, {type: 'CircularError'});
+    } catch (error) {
+      if (!(error instanceof HetaLevelError)) throw error;
+      logger.error(error.message, error.opt);
     }
   }
 }

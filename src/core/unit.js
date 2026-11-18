@@ -1,5 +1,6 @@
 const { floor, log10 } = Math;
 const { UnitTerm } = require('./unit-term');
+const HetaLevelError = require('../heta-level-error');
 const prefixes = {
   '1.00000000e-2':       'centi',
   '1.00000000e-1':       'deci',
@@ -35,9 +36,12 @@ class Unit extends Array {
   static fromQ(obj = []){
     let res = new Unit;
 
-    obj.forEach((x) => {
+    obj.forEach((x, itemIndex) => {
       if (typeof x.kind !== 'string')
-        throw new TypeError('kind property must be string.');
+        throw new HetaLevelError(
+          `Unit factor at index ${itemIndex} must have a string "kind" property.`,
+          {diagnosticCode: 'INVALID_UNIT_DEFINITION', unitItem: x, itemIndex}
+        );
       //res.push(Object.assign({multiplier: 1, exponent: 1}, x)); // to copy all properties from x
       res.push({
         kind: x.kind,
@@ -109,6 +113,12 @@ class Unit extends Array {
       } else {
         if (typeof x.kindObj === 'undefined') {
           throw new TypeError(`Cannot rebase the unbound unit: "${x.kind}"`);
+        }
+        if (x.kindObj.unitsParsed === undefined) {
+          throw new HetaLevelError(
+            `Cannot convert unit "${x.kind}" to the requested units.`,
+            {diagnosticCode: 'UNIT_CONVERSION_UNAVAILABLE', unit: x.kind, legalUnits}
+          );
         }
         let unitDefRebased = x.kindObj // is not legal? analyze refs and concat!
           .unitsParsed
@@ -313,12 +323,18 @@ class Unit extends Array {
       .match(/.[^*/]*/g);
 
     if (items === null)
-      throw new SyntaxError(`Wrong syntax of unit: "${unitString}"`);
+      throw new HetaLevelError(
+        'Unit expression is empty.', 
+        {diagnosticCode: 'INVALID_UNIT_EXPRESSION', unitExpression: unitString, reason: 'empty'}
+      );
 
-    items.forEach((item) => {
+    items.forEach((item, itemIndex) => {
       // long item may reult in unsafe behavior, too long
       if (item.length > 100) {
-        throw new SyntaxError(`Unit item is too long: "${item}"`);
+        throw new HetaLevelError(
+          `Unit expression item at index ${itemIndex} exceeds 100 characters.`, 
+          {diagnosticCode: 'INVALID_UNIT_EXPRESSION', unitExpression: unitString, unitItem: item, itemIndex, reason: 'item_too_long', maxLength: 100}
+        );
       }
 
       // checking "/xxx^12.23" or "1" or "/1"
@@ -327,7 +343,10 @@ class Unit extends Array {
       let longFormat = /^(\/|\*)?\((\d+(\.\d*)?)?([eE][+-]?\d+)?([_A-Za-z][_A-Za-z0-9]*)?\)\^?(\d+(\.?\d*)?)?$/;
       
       if (!shortFormat.test(item) && !longFormat.test(item)) 
-        throw new SyntaxError(`Wrong syntax of unit's item: "${unitString}"`);
+        throw new HetaLevelError(
+          `Invalid unit expression item at index ${itemIndex}: "${item}".`, 
+          {diagnosticCode: 'INVALID_UNIT_EXPRESSION', unitExpression: unitString, unitItem: item, itemIndex, reason: 'invalid_syntax'}
+        );
 
       let matcher = /^([/*]?)[(]?(\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)?([_A-Za-z][_A-Za-z0-9]*)?[)]?\^?(\d+(?:\.?\d*)?)?$/;
       let mmm = item.match(matcher);
@@ -449,7 +468,10 @@ class Unit extends Array {
           let exponential = item.multiplier.toExponential(8); // round to 8 digits
           let pref = prefixes[exponential];
           if (pref === undefined) 
-            throw new Error('No prefix found for multiplier ' + exponential + ' in ' + this);
+            throw new HetaLevelError(
+              `No unit prefix is available for multiplier ${exponential} in "${this}".`,
+              {diagnosticCode: 'UNIT_PREFIX_UNAVAILABLE', unit: item.kind, multiplier: item.multiplier}
+            );
           kindUpd = pref + item.kind;
         }
       }

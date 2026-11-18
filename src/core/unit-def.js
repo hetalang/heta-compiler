@@ -2,6 +2,7 @@ const { Top } = require('./top');
 const { Unit } = require('./unit');
 const { UnitTerm } = require('./unit-term');
 const { ajv } = require('../ajv');
+const HetaLevelError = require('../heta-level-error');
 
 const schema = {
   type: 'object',
@@ -78,10 +79,16 @@ class UnitDef extends Top {
 
     // units or terms are required but not both
     if (q.units && q.terms) {
-      logger?.error(`UnitDef "${q.id}" must include "units" or "terms" property but not both`, {type: 'ValidationError'});
+      logger?.error(
+        `UnitDef "${q.id}" must include "units" or "terms" property but not both`, 
+        {diagnosticCode: 'CONFLICTING_UNIT_DEFINITION', id: q.id}
+      );
       this.errored = true;
     } else if (!q.units && !q.terms) {
-      logger?.error(`UnitDef "${q.id}" must include "units" or "terms" property`, {type: 'ValidationError'});
+      logger?.error(
+        `Unit definition "${this.id}" requires either "units" or "terms".`,
+        {diagnosticCode: 'MISSING_UNIT_DEFINITION', id: this.id}
+      );
       this.errored = true;
     }
 
@@ -90,15 +97,39 @@ class UnitDef extends Top {
     } else if (q.units && typeof q.units === 'string') {
       try {
         this.unitsParsed = Unit.parse(q.units);
-      } catch (e) {
-        let msg = this.index + ': '+ e.message;
-        logger?.error(msg, {type: 'ValidationError', space: this.space});
+      } catch (error) {
+        if (!(error instanceof HetaLevelError)) throw error;
+        this.errored = true;
+        logger?.error(
+          this.index + ': '+ error.message, 
+          {...error.opt, space: this.space, id: this.id, path: 'units'}
+        );
       }
     } else if (q.units && q.units instanceof Array) {
-      this.unitsParsed = Unit.fromQ(q.units);
+      try {
+        this.unitsParsed = Unit.fromQ(q.units);
+      } catch (error) {
+        if (!(error instanceof HetaLevelError)) throw error;
+        this.errored = true;
+        logger?.error(
+          this.index + ': ' + error.message, 
+          {...error.opt, space: this.space, id: this.id, path: 'units'}
+        );
+      }
     }
 
-    if (q.terms) this.terms = new UnitTerm(q.terms);
+    if (q.terms) {
+      try {
+        this.terms = new UnitTerm(q.terms);
+      } catch (error) {
+        if (!(error instanceof HetaLevelError)) throw error;
+        this.errored = true;
+        logger?.error(
+          this.index + ': ' + error.message, 
+          {...error.opt, space: this.space, id: this.id, path: 'terms'}
+        );
+      }
+    }
 
     return this;
   }
@@ -122,7 +153,10 @@ class UnitDef extends Top {
         if (!target) {
           let msg = `UnitDef "${x.kind}" is not found as expected here: `
             + `${this.index} { units: ${this.units} };`;
-          logger?.error(msg, {type: 'BindingError'});
+          logger?.error(
+            msg,
+            {diagnosticCode: 'UNKNOWN_UNIT', id: this.id, path: 'units', unit: x.kind}
+          );
         } else {
           x.kindObj = target;
         }

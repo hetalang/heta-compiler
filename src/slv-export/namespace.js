@@ -52,7 +52,10 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
       + startExpressions
         .map((x) => `${x.index} []= ${x.assignments.start_.toString()}`)
         .join('\n');
-    logger.error(errorMsg, {type: 'ExportError'});
+    logger.error(
+      errorMsg,
+      {diagnosticCode: 'SLV_UNSUPPORTED_INITIAL_EXPRESSION', format: 'slv', space: this.spaceName, assignments: startExpressions.map((record) => ({id: record.id, path: 'assignments.start_', expression: record.assignments.start_.toString()}))}
+    );
   }
 
   // create TimeEvents
@@ -75,7 +78,10 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
 
           if (multiply === undefined || add === undefined) {
             let msg = `SLV format cannot export expression "${record.id} [${switcher.id}]= ${expression.toString()}". Use only expressions of type: 'a * ${record.id} + b'. This event will be ignored.`;
-            logger.error(msg, {type: 'ExportError'});
+            logger.error(
+              msg,
+              {diagnosticCode: 'SLV_EVENT_ASSIGNMENT_IGNORED', format: 'slv', space: this.spaceName, id: record.id, event: switcher.id, path: `assignments.${switcher.id}`, expression: expression.toString()}
+            );
             return;
           }
 
@@ -107,7 +113,10 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     .map((x) => x.id);
   if (dSwitchers.length > 0) {
     let msg = `SLV doesn't support @DSwitchers, got ${dSwitchers.join(', ')}. They will be ignored.`;
-    logger.error(msg, {type: 'ExportError'});
+    logger.error(
+      msg,
+      {diagnosticCode: 'SLV_DISCRETE_EVENTS_IGNORED', format: 'slv', space: this.spaceName, events: dSwitchers}
+    );
   }
 
   // CEvents
@@ -116,7 +125,10 @@ Namespace.prototype.getSLVImage = function(groupConstBy, powTransform, version) 
     .map((x) => x.id);
   if (cSwitchers.length > 0) {
     let msg = `SLV doesn't support @CSwitchers, got ${cSwitchers.join(', ')}. They will be ignored.`;
-    logger.error(msg, {type: 'ExportError'});
+    logger.error(
+      msg,
+      {diagnosticCode: 'SLV_CONTINUOUS_EVENTS_IGNORED', format: 'slv', space: this.spaceName, events: cSwitchers}
+    );
   }
 
   // group Const, instead of groupBy
@@ -150,7 +162,7 @@ function _getSLVEventTerm(tree) {
   try {
     let value = tree.evaluate();
     return Number.isFinite(value) ? value : undefined;
-  } catch (e) {
+  } catch (error) {
     return undefined;
   }
 }

@@ -12,11 +12,14 @@ function yamlLoader(fileContent){
   let fileText = fileContent.toString('utf-8');
   try {
     return jsYAML.load(fileText);
-  } catch (e) {
-    if (e instanceof jsYAML.YAMLException) {
-      throw new HetaLevelError(e.message);
+  } catch (error) {
+    if (error instanceof jsYAML.YAMLException) {
+      throw new HetaLevelError(
+        error.message,
+        {diagnosticCode: 'MODULE_SYNTAX_ERROR', ...(error.mark ? {location: {line: error.mark.line + 1, column: error.mark.column + 1}} : {})}
+      );
     }
-    throw e;
+    throw error;
   }
 }
 

@@ -94,23 +94,39 @@ class Const extends _Size { // implicit extend Numeric
 
     // should be: lower <= num
     if (this.lower !== undefined && this.lower > this.num) {
-      let msg = `Constant "${this.index}" is outside of borders: ${this.num}(num) < ${this.lower}(lower)`;
-      logger.error(msg, {type: 'BindingError', space: this.space});
+      logger.error(
+        `Constant "${this.index}" value ${this.num} is below its lower bound ${this.lower}.`,
+        {diagnosticCode: 'VALUE_OUT_OF_BOUNDS', space: this.space, id: this.id, path: 'num', value: this.num, bound: 'lower', limit: this.lower}
+      );
     }
     // should be: num <= upper
     if (this.upper !== undefined && this.upper < this.num) {
-      let msg = `Constant "${this.index}" is outside of borders: ${this.num}(num) > ${this.upper}(upper)`;
-      logger.error(msg, {type: 'BindingError', space: this.space});
+      logger.error(
+        `Constant "${this.index}" value ${this.num} is above its upper bound ${this.upper}.`,
+        {diagnosticCode: 'VALUE_OUT_OF_BOUNDS', space: this.space, id: this.id, path: 'num', value: this.num, bound: 'upper', limit: this.upper}
+      );
     }
     // for scale=='log' should be: num > 0
     if ((this.scale === 'log' || this.scale === 'logit') && this.num <= 0) {
-      let msg = `Constant "${this.index}" ${this.num}(num) is not positive that is not allowed for "log" and "logit" scale`;
-      logger.error(msg, {type: 'BindingError', space: this.space});
+      logger.error(
+        `Constant "${this.index}" must have a positive value for the "${this.scale}" scale; got ${this.num}.`,
+        {diagnosticCode: 'SCALE_VALUE_OUT_OF_RANGE', space: this.space, id: this.id, path: 'num', value: this.num, scale: this.scale}
+      );
     }
     // for scale=='logit' should be: num < 0
     if (this.scale === 'logit' && this.num >= 1) {
-      let msg = `Constant "${this.index}" ${this.num}(num) is not less than 1 that is not allowed for "logit" scale`;
-      logger.error(msg, {type: 'BindingError', space: this.space});
+      logger.error(
+        `Constant "${this.index}" must be less than 1 for the "logit" scale; got ${this.num}.`,
+        {diagnosticCode: 'SCALE_VALUE_OUT_OF_RANGE', space: this.space, id: this.id, path: 'num', value: this.num, scale: this.scale}
+      );
+    }
+  }
+  checkUnits(){
+    if (this.unitsParsed === undefined) {
+      this._container.logger.warn(
+        `No units set for "${this.index}"`,
+        {diagnosticCode: 'MISSING_UNIT', space: this.space, id: this.id, path: 'units'}
+      );
     }
   }
   clone(){

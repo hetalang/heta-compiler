@@ -17,7 +17,7 @@
     "test:dev": "mocha test/cases-build-masters --config=./test/.mocharc.json",
     "rebuild:masters": "node scripts/rebuild-masters.js",
     "test:masters": "mocha test/cases-check-masters --config=./test/.mocharc.json",
-    "jsdoc": "jsdoc -c .jsdoc.json",
+    "jsdoc": "jsdoc -c .jsdoc.json && node scripts/generate-error-handling-doc.js",
     "jsdoc:sitemap": "node scripts/generate-jsdoc-sitemap.js",
     "test:cov": "nyc --reporter=lcov npm run test",
     "precompile": "node scripts/precompile-templates.js",

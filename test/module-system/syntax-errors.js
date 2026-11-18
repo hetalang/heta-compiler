@@ -22,14 +22,14 @@ function caught(fn) {
 describe('Module input errors', () => {
   const model = (body) => `<sbml><model>${body}</model></sbml>`;
   const cases = [
-    {type: 'heta', input: '@@@'},
-    {type: 'json', input: '{'},
-    {type: 'yaml', input: '['},
-    {type: 'sbml', input: '<sbml><model></sbml>'},
-    {type: 'sbml', input: model('<listOfRules><assignmentRule variable="x"><math><unknown/></math></assignmentRule></listOfRules>')}
+    {type: 'heta', input: '@@@', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+    {type: 'json', input: '{', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+    {type: 'yaml', input: '[', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+    {type: 'sbml', input: '<sbml><model></sbml>', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+    {type: 'sbml', input: model('<listOfRules><assignmentRule variable="x"><math><unknown/></math></assignmentRule></listOfRules>'), diagnosticCode: 'INVALID_SBML_EXPRESSION'}
   ];
 
-  cases.forEach(({type, input}, index) => {
+  cases.forEach(({type, input, diagnosticCode}, index) => {
     it(`logs ${type} input error as an expected module error (${index})`, () => {
       const events = [];
       const logger = new Logger().addTransport(new JSONTransport('debug', events));
@@ -38,7 +38,8 @@ describe('Module input errors', () => {
       const errors = events.filter((event) => event.level === 'error');
       expect(errors).to.have.lengthOf(1);
       expect(errors[0].msg).to.include('model');
-      expect(errors[0].opt).to.deep.equal({type: 'ModuleError', filename: 'model'});
+      expect(errors[0].opt).to.include({filename: 'model', diagnosticCode,
+        ...(diagnosticCode === 'INVALID_SBML_EXPRESSION' ? {element: 'unknown', reason: 'unsupported_element'} : {})});
       expect(logger.hasErrors).to.equal(true);
     });
   });
@@ -61,7 +62,14 @@ describe('Module input errors', () => {
       expect(error).to.be.instanceOf(HetaLevelError);
       expect(error.message).to.include(parserError.message);
       expect(error.message).to.include('(2:0 in JSON)');
-      expect(error.coordinate).to.deep.equal({line: 2, column: 0, position: 2});
+      expect(error.opt.coordinate).to.deep.equal({line: 2, column: 0, position: 2});
+      const events = [];
+      const logger = new Logger().addTransport(new JSONTransport('debug', events));
+      const modules = new ModuleSystem(logger, () => '[\n?]');
+      expect(modules.createModule('model.json', 'json')).to.deep.equal([]);
+      expect(events.find((event) => event.level === 'error').opt).to.deep.equal({
+        diagnosticCode: 'MODULE_SYNTAX_ERROR', coordinate: {line: 2, column: 0, position: 2}, filename: 'model.json'
+      });
     } finally {
       JSON.parse = original;
     }

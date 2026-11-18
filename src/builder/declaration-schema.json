@@ -55,7 +55,7 @@
       "properties": {
         "type": {"type": "string", "enum": ["heta", "table", "xlsx", "json", "yaml", "sbml"], "default": "heta"},
         "source": {"type": "string", "default": "index.heta"},
-        "sheet": {"type": "integer"},
+        "sheet": {"type": "integer", "minimum": 0},
         "omitRows": {"type": "integer", "minimum": 0},
         "transpose": {"type": "boolean", "default": false}
       }

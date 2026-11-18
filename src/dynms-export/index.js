@@ -64,8 +64,7 @@ class DynMS extends AbstractExport {
     } else if (this.exprFormat === 'math-json') {
         expRenderer = (expr) => expr.toMathJSON(logger);
     } else {
-        let msg = `Unsupported expression format: ${this.exprFormat}`;
-        logger.error(msg, {});
+        throw new Error(`Unsupported expression format: ${this.exprFormat}`);
     }
 
     let selectedNamespaces = this.selectedNamespaces();
@@ -79,11 +78,7 @@ class DynMS extends AbstractExport {
       .filter((scenario) => selectedModels.has(scenario.model))
       .flatMap((scenario) => {
         if (!scenario.tspan) {
-          logger.error(
-            `Scenario "${scenario.id}" cannot be exported to DynMS because "tspan" is required.`,
-            {type: 'DynMSScenarioError', scenario: scenario.id}
-          );
-          return [];
+          throw new Error(`Scenario "${scenario.id}" cannot be exported to DynMS because "tspan" is required.`);
         }
 
         let dynmsScenario = {

@@ -10,11 +10,18 @@ const program = new Command();
 const fs = require('fs-extra');
 const path = require('path');
 // The SEA build replaces this import with ../src/cli at bundle time.
-const { Builder, Logger, StdoutTransport, StringTransport, JSONTransport, HetaLevelError } = require('../src');
+const { Builder, Logger, StdoutTransport, StringTransport, JSONTransport } = require('../src');
 const YAML = require('js-yaml'); // https://www.npmjs.com/package/js-yaml
 const { bugs } = require('../package');
 const colors = require('colors');
 const { printVersionMessage } = require('./print-version-message');
+
+class CLILevelError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'CLILevelError';
+  }
+}
 
 let contactMessage = colors.bgRed(`
  +-------------------------------------------------------------------+ 
@@ -63,7 +70,7 @@ async function main() {
   let targetDir = path.normalize(args[0] || '.');
   let targetDirAbs = path.resolve(targetDir);
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) { // check if it does not exist or not a directory
-    throw new HetaLevelError(`Target directory "${targetDir}" does not exist.`);
+    throw new CLILevelError(`Target directory "${targetDir}" does not exist.`);
   }
   
   // set targetDir as working directory
@@ -88,21 +95,26 @@ async function main() {
     .indexOf(true);
   // is declaration file found ?
   if (!cliOptions.declaration && extensionNumber === -1) {
-    logger.info('No declaration file, running with defaults...', { type: 'CliInfo' });
+    logger.info('No declaration file, running with defaults...', {});
   } else if (extensionNumber === -1) {
-    throw new HetaLevelError(`Declaration file "${cliOptions.declaration}" not found.`);
+    throw new CLILevelError(`Declaration file "${cliOptions.declaration}" not found.`);
   } else {
     let declarationFile = searches[extensionNumber];
-    logger.info(`Reading declaration file "${declarationFile}"...`, { type: 'CliInfo' });
-    let declarationText = fs.readFileSync(declarationFile);
+    logger.info(`Reading declaration file "${declarationFile}"...`, {});
+    let declarationText;
+    try {
+      declarationText = fs.readFileSync(declarationFile);
+    } catch (error) {
+      throw new CLILevelError(`Cannot read declaration file "${declarationFile}": ${error.message}`);
+    }
     try {
       let declarationFromFile = YAML.load(declarationText);
       if (typeof declarationFromFile !== 'object'){
         throw new Error('Not an object.');
       }
       Object.assign(declaration, declarationFromFile);
-    } catch (e) {
-      throw new HetaLevelError(`Wrong format of declaration file: \n"${e.message}"`);
+    } catch (error) {
+      throw new CLILevelError(`Wrong format of declaration file: \n"${error.message}"`);
     }
   }
 
@@ -110,8 +122,8 @@ async function main() {
   // parse export
   try {
     var exportItems = parseExportOption(cliOptions.export);
-  } catch (e) {
-    throw new HetaLevelError(`Wrong format of export option: "${cliOptions.export}"`);
+  } catch (error) {
+    throw new CLILevelError(`Wrong format of export option: "${cliOptions.export}"`);
   }
 
   // update declaration
@@ -153,18 +165,18 @@ Promise.all([
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
   if (builder.container.hetaErrors().length > 0) {
-    logger.error('Compilation ERROR! See logs.', { type: 'CliError' });
+    logger.error('Compilation ERROR! See logs.', {});
     process.exitCode = 2; // ERROR
   } else {
-    logger.info('Compilation OK!', { type: 'CliInfo' });
+    logger.info('Compilation OK!', {});
     process.exitCode = 0; // OK
   }
 }).catch((error) => {
-  if (error.name === 'HetaLevelError') {
-    logger.error('Error: ' + error.message + '\nSTOP!', { type: 'CliError' });
+  if (error instanceof CLILevelError || error.name === 'HetaLevelError') {
+    logger.error('Error: ' + error.message + '\nSTOP!', error.opt || {});
     process.exitCode = 2;
   } else {
-    logger.log('crit', contactMessage + '\n' + error.stack, { type: 'CliError' });
+    logger.log('crit', contactMessage + '\n' + error.stack);
     process.exitCode = 1; // unexpected error
   }
 }).finally(() => {

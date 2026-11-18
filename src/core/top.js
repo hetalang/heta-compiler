@@ -100,10 +100,12 @@ class Top {
     let valid = this.validate(q);
     
     if (!valid) {
-      let msg = `${q.id} Some of properties do not satisfy requirements for class "${this.name}"\n`
-        + this.validate.errors.map((x, i) => `    ${i+1}. ${x.instancePath} ${x.message}`)
-          .join('\n');
-      logger?.error(msg, {type: 'ValidationError', space: q.space});
+      let errorStrings = this.validate.errors
+        .map((x, i) => `    ${i+1}. ${x.instancePath} ${x.message}`);
+      logger?.error(
+        `${q.id} Some of properties do not satisfy requirements for class "${this.name}"\n` + errorStrings.join('\n'), 
+        {diagnosticCode: 'INVALID_PROPERTY', id: q.id, space: q.space, className: this.name, errors: this.validate.errors}
+      );
     }
     
     return valid;

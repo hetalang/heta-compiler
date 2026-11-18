@@ -3,6 +3,15 @@ const { create, all } = require('mathjs');
 const math = create(all);
 const _calcUnit = require('./math-calc-unit');
 const { uniqBy } = require('../utils');
+const HetaLevelError = require('../heta-level-error');
+
+// https://hetalang.github.io/specifications/math.html#operators
+// Values are mathjs OperatorNode.fn names.
+const supportedOperators = new Set([
+  'add', 'subtract', 'multiply', 'divide', 'pow', 'unaryPlus', 'unaryMinus',
+  'larger', 'largerEq', 'smaller', 'smallerEq', 'equal', 'unequal',
+  'and', 'or', 'xor', 'not'
+]);
 
 /**
  * Wrapper around a mathjs expression tree used by Heta model elements.
@@ -37,8 +46,12 @@ class Expression {
 
     try {
       var exprParsed = math.parse(exprString);
-    } catch(e) {
-      throw new TypeError('Cannot parse MathExpr properly. ' + e.message);
+    } catch(error) {
+      if (!(error instanceof SyntaxError)) throw error;
+      throw new HetaLevelError(
+        'Cannot parse MathExpr properly. ' + error.message,
+        {diagnosticCode: 'INVALID_EXPRESSION', expression: exprString}
+      );
     }
 
     // Check BlockNode and other unsupported syntax
@@ -50,24 +63,28 @@ class Expression {
       return supportedNodeTypes.indexOf(node.type) === -1;
     });
     if (unsupportedNodes.length > 0) {
-      throw new TypeError('Unsupported MathExpr syntax');
+      throw new HetaLevelError(
+        'Unsupported MathExpr syntax', 
+        {diagnosticCode: 'INVALID_EXPRESSION', expression: exprString, nodeTypes: [...new Set(unsupportedNodes.map(node => node.type))]}
+      );
     }
 
     // additional check of expressions
     exprParsed.traverse((node) => { // recursive forEach
-      /*if (node.type === 'ConditionalNode') { // check that ternary has boolean expression
+      if (node.type === 'OperatorNode' && !supportedOperators.has(node.fn)) {
+        throw new HetaLevelError(
+          `Unsupported operator "${node.op}" in expression.`, 
+          {diagnosticCode: 'INVALID_EXPRESSION', expression: exprString, operator: node.op}
+        );
+      }
+      if (node.type === 'ConditionalNode') {
         let cond = node.condition;
-        if (!cond.hasBooleanResult()) {
-          let msg = `Ternary operator must have a boolean condition, got "${cond.toString()}"`;
-          throw new TypeError(msg);
+        if (!new Expression(cond).hasBooleanResult()) {
+          throw new HetaLevelError(
+            `Ternary operator must have a boolean condition, got "${cond.toString()}"`, 
+            {diagnosticCode: 'INVALID_EXPRESSION', expression: exprString}
+          );
         }
-      } else */
-      if (node.type === 'AssignmentNode') { // check = sign
-        let msg = `Assign (=) symbol must not be in expression, got "${exprParsed.toString()}"`;
-        throw new TypeError(msg);
-      } else if (node.type === 'AccessorNode') {
-        let msg = 'Wrong syntax';
-        throw new TypeError(msg);
       }
     });
 
@@ -234,13 +251,14 @@ class Expression {
   /**
    * Lists function calls used by the expression.
    *
-   * @returns {math.FunctionNode[]} Unique function nodes.
+   * @param {boolean} unique Whether to return only the first call of each function.
+   * @returns {math.FunctionNode[]} Function call nodes.
    */
-  functionList() {
+  functionList(unique = true) {
     let list = this.exprParsed
       .filter((node, path/*, parent*/) => node.type === 'FunctionNode');
 
-    return uniqBy(list, (x) => x.name);
+    return unique ? uniqBy(list, (x) => x.name) : list;
   }
   /**
    * Checks whether the expression has a boolean result.
@@ -290,7 +308,10 @@ function _removeParenthesis(node) {
 function _substituteFunctionDef(fnDef, argNodes = []) {
   // check arguments
   if (fnDef.arguments.length > argNodes.length) {
-    throw new TypeError(`Function "${fnDef.id}" requires minimum ${fnDef.arguments.length} arguments, got ${argNodes.length}`);
+    throw new HetaLevelError(
+      `Function "${fnDef.id}" requires minimum ${fnDef.arguments.length} arguments, got ${argNodes.length}`, 
+      {diagnosticCode: 'FUNCTION_ARGUMENT_COUNT', functionId: fnDef.id, requiredArguments: fnDef.arguments.length, providedArguments: argNodes.length}
+    );
   }
 
   // Expand calls in arguments first: nodes returned from `transform` are not

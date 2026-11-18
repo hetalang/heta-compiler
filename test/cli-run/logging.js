@@ -37,7 +37,7 @@ describe('CLI logging', () => {
     expect(events).to.be.an('array').that.is.not.empty;
     expect(events[0]).to.deep.equal({
       level: 'info', msg: 'Reading declaration file "platform.yml"...',
-      opt: { type: 'CliInfo' }, levelNum: 1
+      opt: {}, levelNum: 1
     });
     expect(events.at(-1).msg).to.equal('Compilation OK!');
     expect(JSON.stringify(events)).not.to.include(directory);
@@ -52,14 +52,14 @@ describe('CLI logging', () => {
     expect(JSON.parse(log(directory))).to.deep.equal([]);
   });
 
-  it('saves JSON errors and metadata when Builder cannot be created', () => {
+  it('saves JSON errors and metadata for an invalid declaration', () => {
     fs.writeFileSync(path.join(directory, 'platform.yml'), 'notes: 1.1\n');
     const result = run(directory, '--log-format=json', '--log-level=error');
     expect(result.status, result.stdout + result.stderr).to.equal(2);
     const events = JSON.parse(log(directory));
     expect(events.every((event) => event.level === 'error' && event.levelNum === 3)).to.equal(true);
-    expect(events.some((event) => event.opt.type === 'BuilderError' && event.opt.params)).to.equal(true);
-    expect(events.at(-1).opt.type).to.equal('CliError');
+    expect(events.some((event) => event.opt?.diagnosticCode === 'PLATFORM_DECLARATION_INVALID_PROPERTY_TYPE' && event.opt.params)).to.equal(true);
+    expect(events.at(-1).msg).to.equal('Compilation ERROR! See logs.');
   });
 
   it('applies log-mode to JSON files', () => {
@@ -131,7 +131,7 @@ describe('CLI logging', () => {
     const result = run(directory, '--log-level=error');
     expect(result.status, result.stderr).to.equal(2);
     for (const output of [result.stdout, log(directory)]) {
-      expect(output).to.include('Wrong structure of platform file.');
+      expect(output).to.include('Compilation ERROR! See logs.');
       expect(output).to.include('[error]');
     }
   });

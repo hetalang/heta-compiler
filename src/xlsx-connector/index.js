@@ -1,6 +1,22 @@
 const XLSX = require('xlsx');
-const HetaLevelError = require('../heta-level-error');
-const { _parsePath, _setByPathArray } = require('../utils');
+const { _parsePath, _setByPathArray, PathSyntaxError } = require('../utils');
+
+class WorksheetNotFoundError extends Error {
+  constructor(sheet) {
+    super(`Table worksheet at index ${sheet} was not found.`);
+    this.name = 'WorksheetNotFoundError';
+    this.sheet = sheet;
+  }
+}
+
+class TableHeaderError extends Error {
+  constructor(header, part) {
+    super(`Invalid header (first row) "${header}" in table`);
+    this.name = 'TableHeaderError';
+    this.header = header;
+    this.part = part;
+  }
+}
 
 /*
   This script mimics the behavior of function convertExcel() from "excel-as-json", see https://www.npmjs.com/package/excel-as-json
@@ -13,7 +29,7 @@ function convertExcelSync(src, dst = null, { sheet = 0, transpose = false } = {}
   // reading file
   let workbook = XLSX.read(src, {type: 'buffer'});
   if (sheet >= workbook.SheetNames.length)
-    throw new HetaLevelError(`There is no sheet #${sheet} in ${src}`);
+    throw new WorksheetNotFoundError(sheet);
 
   // get raw Objects
   let sheetName = workbook.SheetNames[sheet];
@@ -56,12 +72,9 @@ function _toDeepPaths(o){
     }
     try {
       var pathArray = _parsePath(keyClean);
-    } catch (e) {
-      if (e instanceof TypeError) {
-        throw new HetaLevelError(`Invalid header (first row) "${keyClean}" in table`);
-      } else {
-        throw e;
-      }
+    } catch (error) {
+      if (!(error instanceof PathSyntaxError)) throw error;
+      throw new TableHeaderError(keyClean, error.part);
     }
     _setByPathArray.call(output, pathArray, valueClean);
   });
@@ -70,5 +83,7 @@ function _toDeepPaths(o){
 }
 
 module.exports = {
-  convertExcelSync
+  convertExcelSync,
+  WorksheetNotFoundError,
+  TableHeaderError
 };

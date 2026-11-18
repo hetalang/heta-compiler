@@ -4,4 +4,4 @@ include table.xlsx type xlsx with { sheet: 0, omitRows: 3 };
 
 include table.xlsx type xlsx with { sheet: 1, omitRows: 3 };
 
-include table.xlsx type xlsx;
+include table.xlsx type xlsx with { omitRows: 3 };

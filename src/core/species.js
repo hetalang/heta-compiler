@@ -140,13 +140,19 @@ class Species extends Record {
 
     let compartmentUnits = this.compartmentObj?.unitsParsed;
     if (!compartmentUnits && !this.isAmount) {
-      logger.warn(`No units set for compartment "${this.compartment}", cannot check units for "${this.index}" associated ODE.`);
+      logger.warn(
+        `No units set for compartment "${this.compartment}", cannot check units for "${this.index}" associated ODE.`,
+        {diagnosticCode: 'MISSING_UNIT', space: this.space, id: this.id, path: 'compartment', reference: this.compartment}
+      );
       return; // BRAKE
     }
 
     let speciesUnits = this.unitsParsed;
     if (!speciesUnits) {
-      logger.warn(`No units set for "${this.index}", cannot check units for associated ODE.`);
+      logger.warn(
+        `No units set for "${this.index}", cannot check units for associated ODE.`,
+        {diagnosticCode: 'MISSING_UNIT', space: this.space, id: this.id, path: 'units'}
+      );
       return; // BRAKE
     }
 
@@ -163,7 +169,10 @@ class Species extends Record {
         return; // BRAKE
       }
       if (!leftSideUnits.equal(processUnits, true)) {
-        logger.warn(`Unit inconsistency for ${this.id} associated ODE. Left: ${leftSideUnits.toString()}. Right: ${processUnits.toString()} (${proc.id})`);
+        logger.warn(
+          `Units of process "${proc.id}" do not match the ODE units for species "${this.index}": ${processUnits.toString()} vs ${leftSideUnits.toString()}.`,
+          {diagnosticCode: 'ODE_UNIT_MISMATCH', id: this.id, space: this.space, process: proc.id, odeUnits: leftSideUnits.toString(), processUnits: processUnits.toString()}
+        );
       }
     });
   }

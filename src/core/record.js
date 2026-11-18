@@ -1,6 +1,7 @@
 const { _Size } = require('./_size');
 const { Expression } = require('./expression');
 const { ajv } = require('../ajv');
+const HetaLevelError = require('../heta-level-error');
 
 const schema = {
   type: 'object',
@@ -96,12 +97,15 @@ class Record extends _Size {
               if (!expr.hasBooleanResult()) {
                 this.assignments[key] = expr;
               } else {
-                let msg = `Record assignments "${this.index}" should be a numeric expression.`;
-                logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+                logger?.error(
+                  `Record assignments "${this.index}" should be a numeric expression.`, 
+                  {diagnosticCode: 'EXPECTED_NUMERIC_EXPRESSION', space: this.space, id: this.id, expression: x, path: `assignments.${key}`}
+                );
               }
-            } catch (e) {
-              let msg = this.index + ': '+ e.message + ` in "${x.toString()}"`;
-              logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+            } catch (error) {
+              if (!(error instanceof HetaLevelError)) throw error;
+              let msg = this.index + ': '+ error.message + ` in "${x.toString()}"`;
+              logger?.error(msg, {...error.opt, space: this.space, id: this.id, path: `assignments.${key}`});
             }
           } else if (x === null) {
             delete this.assignments[key];
@@ -166,8 +170,10 @@ class Record extends _Size {
     let hasInit = this.assignments?.start_ !== undefined
       || this.assignments?.ode_ !== undefined;
     if (!hasInit) {
-      let msg = `Record "${this.index}" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.`
-      logger.error(msg, {type: 'BindingError', space: this.space});
+      logger.error(
+        `Record "${this.index}" requires a "start_" or "ode_" assignment in a concrete namespace.`,
+        {diagnosticCode: 'MISSING_INITIAL_VALUE', space: this.space, id: this.id, path: 'assignments'}
+      );
     }
 
     // check additional context key and corresponding _Switcher
@@ -175,8 +181,10 @@ class Record extends _Size {
       if (key !== 'start_' && key !== 'ode_') {
         let switcher = namespace.get(key);
         if (!switcher) {
-          let msg = `"${this.index} @${this.className}" has reference to Switcher "${key}" but corresponding switcher is not found.`;
-          logger.warn(msg, {space: this.space});
+          logger.warn(
+            `Record "${this.index}" has an assignment for Switcher "${key}", but that Switcher was not found.`,
+            {diagnosticCode: 'MISSING_ASSIGNMENT_SWITCHER', space: this.space, id: this.id, path: `assignments.${key}`, switcher: key}
+          );
         }
       }
     });
@@ -191,12 +199,18 @@ class Record extends _Size {
         if (!target) {
           let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in expression: `
                 + `${this.index} [${key}]= ${mathExpr.toString()};`;
-          logger.error(msg, {type: 'BindingError', space: this.space});
+          logger.error(
+            msg,
+            {diagnosticCode: 'MISSING_REFERENCE', space: this.space, id: this.id, path: `assignments.${key}`, reference: node.name, expression: mathExpr.toString()}
+          );
           this.errored = true;
         } else if (!target.instanceOf('_Size')) {
           let msg = `Component "${node.name}" is not a Const/Record/TimeScale class as expected in expression: `
             + `${this.index} [${key}]= ${mathExpr.toString()};`;
-          logger.error(msg, {type: 'BindingError', space: this.space});
+          logger.error(
+            msg,
+            {diagnosticCode: 'WRONG_REFERENCE_TYPE', space: this.space, id: this.id, path: `assignments.${key}`, reference: node.name, expression: mathExpr.toString(), expectedClass: '_Size', actualClass: target.className}
+          );
           this.errored = true;
         } else {
           node.nameObj = target;
@@ -204,13 +218,14 @@ class Record extends _Size {
       });
 
       // check references to function definitions
-      mathExpr.functionList().forEach((functionNode) => {
+      mathExpr.functionList(false).forEach((functionNode) => {
         // find target functionDef
         let target = functionDefStorage.get(functionNode.fn.name);
         if (!target) {
-          let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
-            + `${this.index} { math: ${this.math} };`;
-          logger.error(msg, {type: 'BindingError'});
+          logger.error(
+            `Function "${functionNode.fn.name}" is not defined in assignment "${key}" of "${this.index}": ${mathExpr.toString()}.`,
+            {diagnosticCode: 'UNKNOWN_FUNCTION', space: this.space, id: this.id, path: `assignments.${key}`, functionId: functionNode.fn.name, expression: mathExpr.toString()}
+          );
         } else {
           // used in units checking and expression substitution, but seems is not the best solution
           functionNode.fnObj = target;
@@ -218,8 +233,10 @@ class Record extends _Size {
 
         // check arguments in functionNode
         if (target?.arguments && functionNode.args.length < target.arguments.length) {
-          let msg = `Record "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
-          logger.error(msg, {type: 'BindingError'});
+          logger?.error(
+            `Record "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`, 
+            {diagnosticCode: 'FUNCTION_ARGUMENT_COUNT', functionId: functionNode.fn.name, requiredArguments: target.arguments.length, providedArguments: functionNode.args.length, id: this.id, space: this.space, path: `assignments.${key}`},
+          );
         }
       });
     }
@@ -301,18 +318,27 @@ class Record extends _Size {
 
     let leftSideUnit = this.unitsParsed;
     if (typeof leftSideUnit === 'undefined') {
-      logger.warn(`No units set for "${this.index}"`);
+      logger.warn(
+        `No units set for "${this.index}"`,
+        {diagnosticCode: 'MISSING_UNIT', space: this.space, id: this.id, path: 'units'}
+      );
     }
     for (const scope in this.assignments) {
       let rightSideExpr = this.assignments[scope];
       if (typeof rightSideExpr.num === 'undefined') { // skip numbers
         let rightSideUnit = rightSideExpr.calcUnit(this);
         if (typeof rightSideUnit === 'undefined') {
-          logger.warn(`Cannot calculate right side units in "${this.index}" for scope "${scope}".`);
+          logger.warn(
+            `Cannot calculate units for assignment "${scope}" in "${this.index}".`,
+            {diagnosticCode: 'UNIT_CALCULATION_FAILED', space: this.space, id: this.id, path: `assignments.${scope}`, expression: rightSideExpr.toString()}
+          );
         } else if (leftSideUnit && !leftSideUnit.equal(rightSideUnit, true)) {
           let leftUnitString = leftSideUnit.toString();
           let rightUnitString = rightSideUnit.simplify().toString();
-          logger.warn(`Units inconsistency in "${this.index}" for scope "${scope}". Left: "${leftUnitString}". Right: "${rightUnitString}"`);
+          logger.warn(
+            `Units inconsistency in "${this.index}" for scope "${scope}". Left: "${leftUnitString}". Right: "${rightUnitString}"`,
+            {diagnosticCode: 'UNIT_MISMATCH', space: this.space, id: this.id, path: `assignments.${scope}`, expression: rightSideExpr.toString(), unitExpression: `${leftUnitString} vs ${rightUnitString}`}
+          );
         }
       }
     }

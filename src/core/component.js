@@ -233,12 +233,12 @@ class Component extends Top {
       if (!target) {
         logger.error(
           this.index + ` Property "${path}" has lost reference "${targetId}".`,
-          {type: 'BindingError', space: this.space}
+          {diagnosticCode: 'MISSING_REFERENCE', space: this.space, id: this.id, path, reference: targetId}
         );
       } else if(rule.targetClass && !target.instanceOf(rule.targetClass)) {
         logger.error(
           this.index + ` "${path}" property should refer to ${rule.targetClass} but not to ${target.className}.`,
-          {type: 'BindingError', space: this.space}
+          {diagnosticCode: 'WRONG_REFERENCE_TYPE', space: this.space, id: this.id, path, reference: targetId, expectedClass: rule.targetClass, actualClass: target.className}
         );
       } else {
         // set direct ref
@@ -263,7 +263,7 @@ class Component extends Top {
       if (rule.required && this[prop] === undefined) {
         logger.error(
           `No required "${prop}" property for "${this.index}" of ${this.className}.`,
-          {type: 'BindingError', space: this.space}
+          {diagnosticCode: 'MISSING_REQUIRED_PROPERTY', space: this.space, id: this.id, path: prop, className: this.className}
         );
       }
       // isReference: true + className

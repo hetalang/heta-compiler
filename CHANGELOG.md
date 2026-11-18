@@ -2,6 +2,8 @@
 
 ## 0.12.4
 
+- Added diagnostic codes and context to model, configuration, import, and export errors and warnings; `HetaLevelError` now requires a diagnostic code.
+- Improved error handling and added checks for modules, expressions, and units.
 - Added `heta --dynms-version` to report the bundled DynMS format version without building a model; the option is listed in `heta help`.
 - Fixed **mrgsolve export**: `ln(x)` now emits the C++ `log(x)` function, and `logbase(x, base)` is enclosed in parentheses.
 

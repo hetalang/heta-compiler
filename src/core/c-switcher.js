@@ -1,6 +1,7 @@
 const { _Switcher } = require('./_switcher');
 const { Expression } = require('./expression');
 const { ajv } = require('../ajv');
+const HetaLevelError = require('../heta-level-error');
 
 const schema = {
   type: "object",
@@ -51,12 +52,15 @@ class CSwitcher extends _Switcher {
           if (!expr.hasBooleanResult()) {
             this.trigger = expr;
           } else {
-            let msg = `CSwitcher trigger "${this.index}" should be a numeric expression.`;
-            logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+            logger?.error(
+              `CSwitcher trigger "${this.index}" should be a numeric expression.`, 
+              {diagnosticCode: 'EXPECTED_NUMERIC_EXPRESSION', space: this.space, id: this.id, expression: q.trigger, path: 'trigger'}
+            );
           }
-        } catch (err) {
-          let msg = this.index + ' ' + err.message + ` "${q.trigger}"`;
-          logger && logger.error(msg, {type: 'ValidationError', space: this.space});
+        } catch (error) {
+          if (!(error instanceof HetaLevelError)) throw error;
+          let msg = this.index + ' ' + error.message + ` "${q.trigger}"`;
+          logger?.error(msg, {...error.opt, space: this.space, id: this.id, expression: q.trigger, path: 'trigger'});
         }
       }
       
@@ -107,12 +111,18 @@ class CSwitcher extends _Switcher {
       if (!target) {
         let msg = `Component "${node.name}" is not found in space "${this.space}" as expected in CSwitcher: "${this.index}"`
               + `\n\t${this.trigger.toString()};`;
-        logger.error(msg, {type: 'BindingError', space: this.space});
+        logger.error(
+          msg,
+          {diagnosticCode: 'MISSING_REFERENCE', space: this.space, id: this.id, path: 'trigger', reference: node.name, expression: this.trigger.toString()}
+        );
         this.errored = true;
       } else if (!target.instanceOf('_Size')) {
         let msg = `Component "${node.name}" is not a Const/Record/TimeScale class as expected in expression: `
           + `${this.trigger.toString()};`;
-        logger.error(msg, {type: 'BindingError', space: this.space});
+        logger.error(
+          msg,
+          {diagnosticCode: 'WRONG_REFERENCE_TYPE', space: this.space, id: this.id, path: 'trigger', reference: node.name, expression: this.trigger.toString(), expectedClass: '_Size', actualClass: target.className}
+        );
         this.errored = true;
       } else {
         node.nameObj = target;
@@ -120,21 +130,26 @@ class CSwitcher extends _Switcher {
     });
     
     // check references to function definitions
-    this.trigger && this.trigger.functionList().forEach((functionNode) => {
+    this.trigger && this.trigger.functionList(false).forEach((functionNode) => {
       // find target functionDef
       let target = functionDefStorage.get(functionNode.fn.name);
       if (!target) {
         let msg = `FunctionDef "${functionNode.fn.name}" is not found as expected here: `
           + `${this.index} { trigger: ${this.trigger} };`;
-        logger.error(msg, {type: 'BindingError'});
+        logger.error(
+          msg,
+          {diagnosticCode: 'UNKNOWN_FUNCTION', space: this.space, id: this.id, path: 'trigger', functionId: functionNode.fn.name, expression: this.trigger.toString()}
+        );
       } else {
         functionNode.fnObj = target; // not used
       }
 
       // check arguments in functionNode
       if (target?.arguments && functionNode.args.length < target.arguments.length) {
-        let msg = `DSwitcher "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`;
-        logger.error(msg, {type: 'BindingError'});
+        logger?.error(
+          `CSwitcher "${this.id}": Not enough arguments inside function ${functionNode}, required ${target.arguments.length}`, 
+          {diagnosticCode: 'FUNCTION_ARGUMENT_COUNT', functionId: functionNode.fn.name, requiredArguments: target.arguments.length, providedArguments: functionNode.args.length, id: this.id, space: this.space, path: 'trigger'}
+        );
       }
     });
   }
@@ -148,7 +163,10 @@ class CSwitcher extends _Switcher {
     if (typeof this.trigger !== 'undefined') { // skip empty
       let rightSideUnit = this.trigger.calcUnit(this);
       if (typeof rightSideUnit === 'undefined') {
-        logger.warn(`Cannot calculate trigger units in "${this.index}".`);
+        logger.warn(
+          `Cannot calculate trigger units in "${this.index}".`,
+          {diagnosticCode: 'UNIT_CALCULATION_FAILED', space: this.space, id: this.id, path: 'trigger', expression: this.trigger.toString()}
+        );
       }
     }
   }

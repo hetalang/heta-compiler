@@ -59,20 +59,35 @@ class Builder {
       // convert validation errors to heta errors
       validate.errors.forEach((x) => {
         const errorPath = x.instancePath || x.dataPath || '/';
-        logger.error(`${x.message} (${errorPath})`, {type: 'BuilderError', params: x.params});
+        logger.error(
+          `${x.message} (${errorPath})`,
+          {diagnosticCode: declarationDiagnosticCode(x), path: errorPath, keyword: x.keyword, params: x.params}
+        );
       });
-      throw new HetaLevelError('Wrong structure of platform file.');
+      return; // BRAKE
     }
     
-    // === wrong version throws, if no version stated than skip ===
-    let satisfiesVersion = declaration.builderVersion
-      ? semver.satisfies(version, declaration.builderVersion, { includePrerelease: true })
-      : true;
-    if (!satisfiesVersion) {
-      let msg = `Version "${declaration.builderVersion}" stated in declaration file is not supported by the heta-compiler ${version}.`;
-      logger.error(msg, {type: 'BuilderError'});
+    // wrong version throws, if no version stated than skip
+    if (!!declaration.builderVersion) {
+      let rangeOK = semver.validRange(declaration.builderVersion, { includePrerelease: true });
+      if (!rangeOK) {
+        logger.error(
+          `Version "builderVersion" stated in declaration file has wrong format: "${declaration.builderVersion}".`,
+          {diagnosticCode: 'INVALID_COMPILER_VERSION_REQUIREMENT', range: declaration.builderVersion}
+        );
 
-      throw new HetaLevelError('Version incompatibility.');
+        return; // BRAKE
+      }
+
+      let versionOK = semver.satisfies(version, declaration.builderVersion, { includePrerelease: true });
+      if (!versionOK) {
+        logger.error(
+          `Version "${declaration.builderVersion}" stated in declaration file is not supported by the heta-compiler "${version}".`, 
+          {diagnosticCode: 'INCOMPATIBLE_COMPILER_VERSION', range: declaration.builderVersion, version: version}
+        );
+
+        return; // BRAKE
+      }
     }
 
     // assign from declaration
@@ -92,10 +107,13 @@ class Builder {
     
     this.exportArray = [];
     // create "export" instances
-    declaration.export.forEach((exportItem) => {
+    declaration.export.forEach((exportItem, i) => {
       // check the filepath
       if (!!exportItem.filepath && path.isAbsolute(exportItem.filepath)) {
-        logger.error(`Export item property "filepath" must be relative, got ${JSON.stringify(exportItem)}.`, {type: 'BuilderError'});
+        logger.error(
+          `Export item property "filepath" must be relative, got ${JSON.stringify(exportItem)}.`, 
+          {diagnosticCode: 'ABSOLUTE_EXPORT_PATH', filepath: exportItem.filepath, itemIndex: i}
+        );
       }
 
       // convert format to lower case to make it case insensitive
@@ -106,7 +124,10 @@ class Builder {
       if (ExportClass) {
         this.exportArray.push(new ExportClass(exportItem));
       } else {
-        logger.error(`Export format "${exportItem.format}" is not supported.`, {type: 'BuilderError'});
+        logger.error(
+          `Export format "${exportItem.format}" is not supported.`,
+          {diagnosticCode: 'UNKNOWN_EXPORT_FORMAT', format: exportItem.format, itemIndex: i, path: 'format'}
+        );
       }
     });
   }
@@ -125,11 +146,18 @@ class Builder {
    * @returns {Builder} This builder.
    */
   run() {
+    if (this.logger.hasErrors) return this; // Early STOP
+
     // 1. Parsing
     let ms = new ModuleSystem(this.logger, this.fileReadHandler);
     if (path.isAbsolute(this.importModule.source)) {
-      this.logger.error(`Import module source must be relative, got "${this.importModule.source}".`, {type: 'BuilderError'});
-      throw new HetaLevelError('Import module source must be relative.');
+      
+      this.logger.error(
+        `Import module source must be relative, got "${this.importModule.source}".`, 
+        {diagnosticCode: 'ABSOLUTE_MODULE_PATH', source: this.importModule.source, target: 'PLATFORM'}
+      );
+      
+      return this; // BRAKE
     }
     ms.addModuleDeep(this.importModule.source, this.importModule.type, this.importModule);
 
@@ -168,7 +196,7 @@ class Builder {
       this.logger.warn('Empty platform. No elements were loaded.');
     }
 
-    // === STOP if errors ===
+    // Middle STOP
     if (!this.logger.hasErrors) {
       // 7. Units checking
       if (this.options.unitsCheck) {
@@ -203,19 +231,41 @@ class Builder {
   }
 }
 
+function declarationDiagnosticCode(error) {
+  if (error.keyword === 'errorMessage' && error.params?.errors?.length) {
+    return declarationDiagnosticCode(error.params.errors[0]);
+  }
+  switch (error.keyword) {
+  case 'required': return 'PLATFORM_DECLARATION_MISSING_PROPERTY';
+  case 'type': return 'PLATFORM_DECLARATION_INVALID_PROPERTY_TYPE';
+  case 'additionalProperties':
+  case 'not': return 'PLATFORM_DECLARATION_UNKNOWN_PROPERTY';
+  default: return 'PLATFORM_DECLARATION_INVALID_VALUE';
+  }
+}
+
 function _makeAndSave(exportItem, pathPrefix) {
   let { logger, fileWriteHandler } = exportItem._builder;
   let absPath = path.join(pathPrefix, exportItem.filepath);
-  let msg = `Exporting to "${absPath}" of format "${exportItem.format}"...`;
-  logger.info(msg);
+  logger.info(`Exporting to "${absPath}" of format "${exportItem.format}"...`);
 
-  exportItem.make().forEach((out) => {
+  try {
+    var outputs = exportItem.make();
+  } catch (error) {
+    if (!(error instanceof HetaLevelError)) throw error;
+    logger.error(
+      error.message, 
+      {...error.opt, format: exportItem.format}
+    );
+    return;
+  }
+
+  outputs.forEach((out) => {
     let filePath = [absPath, out.pathSuffix].join('');
     try {
       fileWriteHandler(filePath, out.content);
-    } catch (err) {
-      let msg =`Heta compiler cannot export to file: "${err.path}": ${err.message}`;
-      logger.error(msg, {type: 'ExportError'});
+    } catch (error) {
+      logger.error(`Heta compiler cannot export to file: "${error.path}": ${error.message}`, {});
     }
   });
 }

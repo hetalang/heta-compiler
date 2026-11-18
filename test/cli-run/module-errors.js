@@ -8,11 +8,11 @@ const path = require('path');
 const cli = path.resolve(__dirname, '../../bin/heta-build.js');
 const model = (body) => `<sbml><model>${body}</model></sbml>`;
 const cases = [
-  {type: 'heta', input: '@@@'},
-  {type: 'json', input: '{'},
-  {type: 'yaml', input: '['},
-  {type: 'sbml', input: '<sbml><model></sbml>'},
-  {type: 'sbml', input: model('<listOfRules><assignmentRule variable="x"><math><unknown/></math></assignmentRule></listOfRules>')}
+  {type: 'heta', input: '@@@', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+  {type: 'json', input: '{', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+  {type: 'yaml', input: '[', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+  {type: 'sbml', input: '<sbml><model></sbml>', diagnosticCode: 'MODULE_SYNTAX_ERROR'},
+  {type: 'sbml', input: model('<listOfRules><assignmentRule variable="x"><math><unknown/></math></assignmentRule></listOfRules>'), diagnosticCode: 'INVALID_SBML_EXPRESSION'}
 ];
 
 describe('CLI module input errors', () => {
@@ -23,7 +23,7 @@ describe('CLI module input errors', () => {
   });
   afterEach(() => fs.removeSync(directory));
 
-  cases.forEach(({type, input}, index) => {
+  cases.forEach(({type, input, diagnosticCode}, index) => {
     it(`reports ${type} input errors as expected compilation failures (${index})`, () => {
       fs.writeFileSync(path.join(directory, 'model'), input);
       const result = spawnSync(process.execPath, [cli, directory, '--skip-updates',
@@ -31,9 +31,11 @@ describe('CLI module input errors', () => {
       expect(result.status, result.stdout + result.stderr).to.equal(2);
       expect(result.stdout).not.to.include('Internal "Heta compiler" error');
       const events = fs.readJsonSync(path.join(directory, 'build.log'));
-      const diagnostic = events.find((event) => event.level === 'error' && event.opt?.type === 'ModuleError');
+      const diagnostic = events.find((event) => event.level === 'error' && event.opt?.diagnosticCode === diagnosticCode);
       expect(diagnostic.msg).to.include('model');
-      expect(diagnostic.opt).to.deep.equal({type: 'ModuleError', filename: 'model'});
+      expect(diagnostic.opt).to.include({filename: 'model', diagnosticCode});
+      if (type === 'heta' || type === 'yaml') expect(diagnostic.opt.location).to.be.an('object');
+      if (diagnosticCode === 'INVALID_SBML_EXPRESSION') expect(diagnostic.opt).to.include({element: 'unknown', reason: 'unsupported_element'});
       expect(events.some((event) => event.level === 'crit')).to.equal(false);
     });
   });

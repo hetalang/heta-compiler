@@ -75,7 +75,10 @@ class SBMLExport extends AbstractExport {
       return this.renderTemplate('sbmlL3V2.xml.njk', image);
       break;
     default:
-      this._builder.logger.error(`SBML of version "${this.version}" is not supported.`);
+      this._builder.logger.error(
+        `SBML version "${this.version}" is not supported.`,
+        {diagnosticCode: 'SBML_UNSUPPORTED_VERSION', format: 'sbml', version: this.version}
+      );
       return '';
     }
     

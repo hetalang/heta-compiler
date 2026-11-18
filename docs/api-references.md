@@ -30,6 +30,8 @@ and Q-object arrays.
 
 ## Logging
 
+- [Error handling recommendations](error-handling.html)
+- [Diagnostic code structure](diagnostic-codes-structure.html)
 - [Logger]{@link Logger}
 - [Transport]{@link Transport}
 - [JSONTransport]{@link JSONTransport}

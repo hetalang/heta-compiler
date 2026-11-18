@@ -20,12 +20,15 @@ function SBMLParse(fileText, options = {}) {
   let JSBML;
   try {
     JSBML = xml2js(fileTextNoAnnotation, { compact: false });
-  } catch (e) {
+  } catch (error) {
     // xml-js marks SAX syntax errors by setting `note` to the error itself.
-    if (e.note === e) {
-      throw new HetaLevelError(e.message);
+    if (error.note === error) {
+      throw new HetaLevelError(
+        error.message,
+        {diagnosticCode: 'MODULE_SYNTAX_ERROR'}
+      );
     }
-    throw e;
+    throw error;
   }
   
  //let JSBML = xml2js(fileText, { compact: false });
@@ -40,11 +43,40 @@ function jsbmlToQArr(JSBML, options = {}) {
   let qArr = [];
   let eventCounter = 0; // reset event counter
 
+  if (!JSBML.elements) {
+    throw new HetaLevelError(
+      'SBML document has no elements.',
+      {diagnosticCode: 'INVALID_SBML_DOCUMENT', path: '/', reason: 'empty'}
+    );
+  }
   let sbml = JSBML.elements // <file>
     .find((x) => x.name === 'sbml'); // <sbml>
-
+  if (!sbml) {
+    throw new HetaLevelError(
+      'SBML document does not contain an <sbml> element.', 
+      {diagnosticCode: 'INVALID_SBML_DOCUMENT', path: '/sbml', reason: 'missing'}
+    );
+  }
+  if (!sbml.elements) {
+    throw new HetaLevelError(
+      'The <sbml> element has no child elements; a <model> element is required.', 
+      {diagnosticCode: 'INVALID_SBML_DOCUMENT', path: '/sbml', reason: 'empty'}
+    );
+  }
   let model = sbml.elements
     .find((x) => x.name === 'model'); // <model>
+  if (!model) {
+    throw new HetaLevelError(
+      'The <sbml> element does not contain a <model> element.', 
+      {diagnosticCode: 'INVALID_SBML_DOCUMENT', path: '/sbml/model', reason: 'missing'}
+    );
+  }
+  if (!model.elements) {
+    throw new HetaLevelError(
+      'The <model> element has no child elements.', 
+      {diagnosticCode: 'INVALID_SBML_DOCUMENT', path: '/sbml/model', reason: 'empty'}
+    );
+  }
 
   // preliminary analyses listOfInitialAssignments to get variables to init in the beginning
   // it is applied for parameters which are @Records, not @Const
@@ -186,7 +218,10 @@ function jsbmlToQArr(JSBML, options = {}) {
     .flat(1)
     .filter((x) => x.name === 'algebraicRule');
   if (algebraicRules.length !== 0) {
-    throw new HetaLevelError('"algebraicRule" from SBML module is not supported.');
+    throw new HetaLevelError(
+      'SBML algebraic rules are not supported.',
+      {diagnosticCode: 'UNSUPPORTED_SBML_ALGEBRAIC_RULE', element: 'algebraicRule', count: algebraicRules.length}
+    );
   }
 
   // rateRules
@@ -202,7 +237,7 @@ function jsbmlToQArr(JSBML, options = {}) {
         options.logger?.warn(
           `SBML <rateRule variable="${target}"> targets concentration species "${target}" in compartment "${species.compartment}". `
           + `It is imported as Process "${target}_proc"; exported simulations may differ from SBML semantics, especially when the compartment changes.`,
-          { type: 'SBMLImportWarning', target, compartment: species.compartment }
+          { target, compartment: species.compartment, diagnosticCode: 'SBML_RATE_RULE_CONCENTRATION_SEMANTICS' }
         );
       }
       let qArr_add = rateRuleToQ(x);
@@ -257,7 +292,11 @@ function functionDefinitionToQ(x) {
   let lambdaElement = mathElement?.elements?.find((y) => y.name === 'lambda');
 
   if (!mathElement || !lambdaElement ) {
-    throw new HetaLevelError(`Heta does not support empty <math> or <lambda> "${q.id}" elements in FunctionDefinition,`);
+    const element = mathElement ? 'lambda' : 'math';
+    throw new HetaLevelError(
+      `SBML function definition "${q.id}" is missing a <${element}> element.`,
+      {diagnosticCode: 'INVALID_SBML_FUNCTION_DEFINITION', id: q.id, element, reason: 'missing'}
+    );
   }
 
   // get argument ids
@@ -270,6 +309,12 @@ function functionDefinitionToQ(x) {
   // get expression
   let notBvarElement = lambdaElement.elements
     ?.find((y) => y.name !== 'bvar');
+  if (!notBvarElement) {
+    throw new HetaLevelError(
+      `MathML <lambda> for function "${q.id}" has no function body.`, 
+      {diagnosticCode: 'INVALID_SBML_EXPRESSION', id: q.id, element: 'lambda', reason: 'missing_body'}
+    );
+  }
   q.math = _toMathExpr(notBvarElement);
 
 
@@ -442,7 +487,10 @@ function speciesToQ(x, zeroSpatialDimensions = [], qArr = [], unitDict = {}){
     // find compartment units
     let compartmentComponent = qArr.find((component) => component.id === q.compartment);
     if (!compartmentComponent)
-      throw new HetaLevelError(`Compartment "${q.compartment}" for "${q.id}" is not found in SBML`);
+      throw new HetaLevelError(
+        `Compartment "${q.compartment}" for "${q.id}" is not found in SBML`, 
+        {diagnosticCode: 'INVALID_SBML_REFERENCE', id: q.id, reference: q.compartment, path: 'compartment'}
+      );
     let compartmentUnits = compartmentComponent.units;
 
     // set species units
@@ -497,7 +545,7 @@ function reactionToQ(x){
   let listOfParameters = kineticLaw?.elements?.find((y) => y.name === 'listOfParameters' || y.name === 'listOfLocalParameters');
   if (listOfParameters) {
     let parameters = listOfParameters.elements
-      .filter((y) => y.name = 'parameter');
+      .filter((y) => y.name === 'parameter' || y.name === 'localParameter');
     parameters.forEach((y) => {
       let id = y.attributes?.id;
       let newId = id + '__' + q.id + '_local';
@@ -529,7 +577,10 @@ function reactionToQ(x){
   let fast = x.attributes?.fast === 'true' ;
   // q.aux.fast = fast;
   if (fast) {
-    throw new HetaLevelError(`"fast" reactions "${q.id}" is not supported in SBML module.`);
+    throw new HetaLevelError(
+      `SBML fast reaction "${q.id}" is not supported.`,
+      {diagnosticCode: 'UNSUPPORTED_SBML_FAST_REACTION', id: q.id, path: 'fast'}
+    );
   }
 
   // products
@@ -542,7 +593,10 @@ function reactionToQ(x){
         let stoichiometryExpr = (y.elements || [])
           .filter((z) => z.name === 'stoichiometryMath');
         if (stoichiometryExpr.length > 0)
-          throw new HetaLevelError('"stoichiometryMath" from SBML module is not supported.');
+          throw new HetaLevelError(
+            `SBML stoichiometryMath is not supported for product "${y.attributes?.species}" in reaction "${q.id}".`,
+            {diagnosticCode: 'UNSUPPORTED_SBML_STOICHIOMETRY_MATH', id: q.id, species: y.attributes?.species, path: 'listOfProducts'}
+          );
 
         // get constant stoichiometry
         let stoichiometry = y.attributes?.stoichiometry || '1';
@@ -565,7 +619,10 @@ function reactionToQ(x){
         let stoichiometryExpr = (y.elements || [])
           .filter((z) => z.name === 'stoichiometryMath');
         if (stoichiometryExpr.length > 0)
-          throw new HetaLevelError('"stoichiometryMath" from SBML module is not supported.');
+          throw new HetaLevelError(
+            `SBML stoichiometryMath is not supported for reactant "${y.attributes?.species}" in reaction "${q.id}".`,
+            {diagnosticCode: 'UNSUPPORTED_SBML_STOICHIOMETRY_MATH', id: q.id, species: y.attributes?.species, path: 'listOfReactants'}
+          );
 
         // get constant stoichiometry
         let stoichiometry = y.attributes?.stoichiometry || '1';
@@ -720,7 +777,10 @@ function eventToQ(x, eventCounter, options = {}){
   }
   */
   if (delay !== undefined) {
-    throw new HetaLevelError('"delay" in event is not supported in SBML module'); 
+    throw new HetaLevelError(
+      `SBML event "${switcher.id}" uses an unsupported delay.`,
+      {diagnosticCode: 'UNSUPPORTED_SBML_EVENT_DELAY', id: switcher.id, path: 'delay'}
+    );
   }
   // assignments
   let assignments = x.elements?.find((y) => y.name === 'listOfEventAssignments');

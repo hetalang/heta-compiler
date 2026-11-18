@@ -16,9 +16,8 @@ describe('Test Builder.', () => {
 
 describe('Errors in declaration.', () => {
   it('Wrong prop type.', () => {
-    expect(() => {
-      let b = new Builder({id: 'test', notes: 1.1, options: {}});
-    }).to.throw();
-    //expect(b.container.hetaErrors()).to.be.lengthOf(1);
+    const b = new Builder({id: 'test', notes: 1.1, options: {}});
+    expect(b.run()).to.equal(b);
+    expect(b.container.hetaErrors().some((event) => event.opt?.diagnosticCode === 'PLATFORM_DECLARATION_INVALID_PROPERTY_TYPE')).to.equal(true);
   });
 });

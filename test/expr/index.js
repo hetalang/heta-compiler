@@ -1,6 +1,7 @@
 /*global describe, it*/
 const { expect } = require('chai');
 const { Expression } = require('../../src/core/expression');
+const HetaLevelError = require('../../src/heta-level-error');
 
 describe('Expression constructor.', () => {
   it('No argument throws.', () => {
@@ -21,6 +22,6 @@ describe('Expression constructor.', () => {
   it('Bad expression string throws.', () => {
     expect(() => {
       let expr = Expression.fromString('e*(m');
-    }).throw(TypeError);
+    }).throw(HetaLevelError);
   });
 });
