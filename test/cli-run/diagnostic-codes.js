@@ -29,7 +29,7 @@ describe('CLI platform diagnostic codes', () => {
     fs.writeFileSync(path.join(directory, 'platform.yml'), 'id: example\n');
     const preload = path.join(directory, 'read-error.js');
     fs.writeFileSync(preload, `
-      const fs = require('fs');
+      const fs = require(${JSON.stringify(require.resolve('fs-extra'))});
       const read = fs.readFileSync;
       fs.readFileSync = function(file, ...args) {
         if (file === 'platform.yml') throw Object.assign(new Error('permission denied'), {code: 'EACCES'});
