@@ -1,0 +1,12 @@
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l2v5/01204/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01204/01204-sbml-l2v5.xml"...
+[error]	z: Ternary operator must have a boolean condition, got "((x <= 0.49) ? true : false)" in "(( x  <=  0.49  ? true : false) ? ( y  >  1.49  ?  2  :  1 ) : ( y  >  0.49  ?  1  :  0 ))"
+[info]	Platform hash: 5c32f1d5981dcae1bf4c21c85bf0a3e02f423d91f2e9dabe245cd360341f81bc
+[info]	Setting references in elements, total length 100
+[error]	Record "z" requires a "start_" or "ode_" assignment in a concrete namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.

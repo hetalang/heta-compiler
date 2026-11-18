@@ -1,0 +1,30 @@
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01489/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01489/01489-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	my_plus Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_times Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_and Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_or Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	my_xor Some of properties do not satisfy requirements for class "FunctionDef"
+    1. /math must NOT have fewer than 1 characters
+[error]	id must not be a reserved word, got "e". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	c: Ternary operator must have a boolean condition, got "my_and()" in "( my_and () ?  1  :  0 )"
+[error]	d: Ternary operator must have a boolean condition, got "my_or()" in "( my_or () ?  1  :  0 )"
+[error]	e component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 22948477415edb3450d48ab9e534e371d4fea6e4d965e671786e9d5bda4d87d7
+[info]	Setting references in elements, total length 96
+[error]	Function "my_plus" is not defined in assignment "start_" of "a": my_plus().
+[error]	Function "my_times" is not defined in assignment "start_" of "b": my_times().
+[error]	Record "c" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "d" requires a "start_" or "ode_" assignment in a concrete namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.

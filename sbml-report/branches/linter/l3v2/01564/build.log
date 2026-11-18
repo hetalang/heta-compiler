@@ -1,0 +1,13 @@
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01564/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01564/01564-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	undefined::J51: Cannot parse MathExpr properly. Value expected (char 8) in " 1  * ()"
+[info]	Platform hash: 28d0378fec1953215d1429e246c633c9c8c1a57f14f7effebcf6a75dc032fe14
+[info]	Setting references in elements, total length 197
+[error]	Record "J51" requires a "start_" or "ode_" assignment in a concrete namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.

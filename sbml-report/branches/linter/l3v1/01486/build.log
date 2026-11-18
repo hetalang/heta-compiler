@@ -1,0 +1,24 @@
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01486/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01486/01486-sbml-l3v1.xml"...
+[error]	my_piecewise: Ternary operator must have a boolean condition, got "y" in "( y  ?  x  :  z )"
+[crit]	
+ +-------------------------------------------------------------------+ 
+ | Internal "Heta compiler" error, contact the developers.           | 
+ | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
+ | or mail to: dev@insysbio.com                                      | 
+ +-------------------------------------------------------------------+ 
+
+TypeError: Cannot read properties of undefined (reading 'errored')
+    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)
+    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)
+    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30
+    at Array.forEach (<anonymous>)
+    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)
+    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)
+    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)
+    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
