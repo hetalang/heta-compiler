@@ -3,9 +3,9 @@
   "dynms": "0.2.2",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.3"
+    "version": "0.12.4"
   },
-  "created": "2026-11-18T15:08:09.329Z",
+  "created": "2026-11-19T14:39:31.804Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -36,7 +36,11 @@
             "format": "math-json"
           },
           "derivative": {
-            "expr": "S1_proc",
+            "expr": [
+              "Multiply",
+              "S1_proc",
+              "C"
+            ],
             "format": "math-json"
           }
         },
@@ -55,7 +59,11 @@
             "format": "math-json"
           },
           "derivative": {
-            "expr": "S2_proc",
+            "expr": [
+              "Multiply",
+              "S2_proc",
+              "C"
+            ],
             "format": "math-json"
           }
         }

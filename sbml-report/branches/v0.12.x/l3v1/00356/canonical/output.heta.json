@@ -3,9 +3,9 @@
     "action": "hasMeta",
     "generator": {
       "name": "heta-compiler",
-      "version": "0.12.3"
+      "version": "0.12.4"
     },
-    "created": "2026-11-18T14:58:18.056Z",
+    "created": "2026-11-19T14:30:10.199Z",
     "format": "JSON",
     "canonical": true,
     "hashSum": "a6e6cd4334daa9303b0a8e53483a890436e8222955273b7d2dc156014dff3012",

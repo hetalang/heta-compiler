@@ -1,8 +1,6 @@
-Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
-
-No declaration file, running with defaults...
-
-[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.4 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01494/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01494/01494-sbml-l3v2.xml"...
 [error]	Function math "implies" should be a numeric expression.
@@ -11,14 +9,18 @@ No declaration file, running with defaults...
 [error]	Function math "my_leq" should be a numeric expression.
 [error]	Function math "my_geq" should be a numeric expression.
 [error]	Function math "my_eq" should be a numeric expression.
-[info]	Platform hash: 4b44f0e0cff7a279a2ea3d1d8a381e356ed448517e6f6536ffa102463e524cf0
+[error]	P1: Condition "my_lt(1, 2, 1)" must be a boolean expression. in "( my_lt ( 1 ,  2 ,  1 ) ?  1  :  3 )"
+[error]	P2: Condition "my_gt(2, 1, 2)" must be a boolean expression. in "( my_gt ( 2 ,  1 ,  2 ) ?  1  :  3 )"
+[error]	P3: Condition "my_leq(1, 2, 1)" must be a boolean expression. in "( my_leq ( 1 ,  2 ,  1 ) ?  1  :  3 )"
+[error]	P4: Condition "my_geq(2, 1, 2)" must be a boolean expression. in "( my_geq ( 2 ,  1 ,  2 ) ?  1  :  3 )"
+[error]	P5: Condition "my_eq(1, 1, 2)" must be a boolean expression. in "( my_eq ( 1 ,  1 ,  2 ) ?  1  :  3 )"
+[info]	Platform hash: 90080a1f7bf7655a1043248a44f56ad8ee539b75c5481dfd2dc2ace2b6956aaf
 [info]	Setting references in elements, total length 97
-[error]	FunctionDef "my_lt" is not found as expected here: P1 { math: undefined };
-[error]	FunctionDef "my_gt" is not found as expected here: P2 { math: undefined };
-[error]	FunctionDef "my_leq" is not found as expected here: P3 { math: undefined };
-[error]	FunctionDef "my_geq" is not found as expected here: P4 { math: undefined };
-[error]	FunctionDef "my_eq" is not found as expected here: P5 { math: undefined };
+[error]	Record "P1" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "P2" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "P3" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "P4" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "P5" requires a "start_" or "ode_" assignment in a concrete namespace.
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
-Compilation ERROR! See logs.
-
+[error]	Compilation ERROR! See logs.

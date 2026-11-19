@@ -3,9 +3,9 @@
   "dynms": "0.2.2",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.3"
+    "version": "0.12.4"
   },
-  "created": "2026-11-18T15:15:32.783Z",
+  "created": "2026-11-19T14:46:36.731Z",
   "license": "UNLICENSED",
   "models": [
     {
@@ -71,7 +71,11 @@
           },
           "title": "S3",
           "derivative": {
-            "expr": "S3_proc",
+            "expr": [
+              "Multiply",
+              "S3_proc",
+              "C"
+            ],
             "format": "math-json"
           }
         }

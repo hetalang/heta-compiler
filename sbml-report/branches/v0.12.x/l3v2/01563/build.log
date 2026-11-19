@@ -1,8 +1,6 @@
-Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
-
-No declaration file, running with defaults...
-
-[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.4 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l3v2/01563/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01563/01563-sbml-l3v2.xml"...
 [error]	Function math "implies" should be a numeric expression.
@@ -122,11 +120,10 @@ No declaration file, running with defaults...
 [error]	S47_stoich_proc Property "actors[0].target" has lost reference "S47_stoich".
 [error]	S48_stoich_proc Property "actors[0].target" has lost reference "S48_stoich".
 [error]	S49_stoich_proc Property "actors[0].target" has lost reference "S49_stoich".
-[error]	Record "S50_stoich_proc" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "S50_stoich_proc" requires a "start_" or "ode_" assignment in a concrete namespace.
 [warn]	Process "S50_stoich_proc" has no actors.
-[error]	Record "S51_stoich_proc" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "S51_stoich_proc" requires a "start_" or "ode_" assignment in a concrete namespace.
 [warn]	Process "S51_stoich_proc" has no actors.
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
-Compilation ERROR! See logs.
-
+[error]	Compilation ERROR! See logs.

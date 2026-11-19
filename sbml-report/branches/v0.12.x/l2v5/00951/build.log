@@ -1,8 +1,6 @@
-Running compilation in directory "/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite"...
-
-No declaration file, running with defaults...
-
-[info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.4 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l2v5/00951/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/00951/00951-sbml-l2v5.xml"...
 [error]	P Some of properties do not satisfy requirements for class "Record"
@@ -16,10 +14,9 @@ No declaration file, running with defaults...
     2. /assignments/start_ should be a string, number or null.
 [info]	Platform hash: bc67acdd9d6a030d22d723b6ce997b0aae582f4a84fd12185473585f34934a7c
 [info]	Setting references in elements, total length 98
-[error]	Record "P" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
-[error]	Record "Q" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
-[error]	Record "R" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "P" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "Q" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "R" requires a "start_" or "ode_" assignment in a concrete namespace.
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
-Compilation ERROR! See logs.
-
+[error]	Compilation ERROR! See logs.
