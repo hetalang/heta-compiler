@@ -1,0 +1,18 @@
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.4 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v2/01490/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01490/01490-sbml-l3v2.xml"...
+[error]	Function math "implies" should be a numeric expression.
+[error]	id must not be a reserved word, got "e". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	c: Condition "my_and(true)" must be a boolean expression. in "( my_and (true) ?  1  :  0 )"
+[error]	d: Condition "my_or(true)" must be a boolean expression. in "( my_or (true) ?  1  :  0 )"
+[error]	e component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: a022ee9779726f3f52cbfdfd1b0479d607847153f9f72061afcbf988a3770389
+[info]	Setting references in elements, total length 101
+[error]	Record "c" requires a "start_" or "ode_" assignment in a concrete namespace.
+[error]	Record "d" requires a "start_" or "ode_" assignment in a concrete namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.

@@ -1,0 +1,30 @@
+[info]	No declaration file, running with defaults...
+[info]	Namespace "nameless" was set as "concrete"
+[info]	Heta compiler v0.12.4 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results/l3v1/01486/input.heta"...
+[info]	Reading module of type "sbml" from file "cases/semantic/01486/01486-sbml-l3v1.xml"...
+[error]	Function math "my_gt" should be a numeric expression.
+[error]	Function math "my_geq" should be a numeric expression.
+[error]	Function math "my_lt" should be a numeric expression.
+[error]	Function math "my_leq" should be a numeric expression.
+[error]	Function math "my_eq" should be a numeric expression.
+[error]	Function math "my_neq" should be a numeric expression.
+[error]	Function math "my_and" should be a numeric expression.
+[error]	Function math "my_or" should be a numeric expression.
+[error]	Function math "my_xor" should be a numeric expression.
+[error]	Function math "my_not" should be a numeric expression.
+[info]	Platform hash: 0fa2b433cd3489fb8d4167111779c2f90a08020e3ff9c3650073d57858746e20
+[info]	Setting references in elements, total length 137
+[error]	Function "my_gt" is not defined in assignment "ode_" of "P3": my_piecewise(2, my_gt(1, 0.5), 3).
+[error]	Function "my_geq" is not defined in assignment "ode_" of "P4": my_piecewise(2, my_geq(1, 0.5), 3).
+[error]	Function "my_lt" is not defined in assignment "ode_" of "P5": my_piecewise(2, my_lt(1, 0.5), 3).
+[error]	Function "my_leq" is not defined in assignment "ode_" of "P6": my_piecewise(2, my_leq(1, 0.5), 3).
+[error]	Function "my_eq" is not defined in assignment "ode_" of "P7": my_piecewise(2, my_eq(P1, pi), 3).
+[error]	Function "my_neq" is not defined in assignment "ode_" of "P8": my_piecewise(2, my_neq(P1, pi), 3).
+[error]	Function "my_and" is not defined in assignment "ode_" of "P10": my_piecewise(2, my_and(true, false), 3).
+[error]	Function "my_or" is not defined in assignment "ode_" of "P11": my_piecewise(2, my_or(true, false), 3).
+[error]	Function "my_xor" is not defined in assignment "ode_" of "P12": my_piecewise(2, my_xor(true, false), 3).
+[error]	Function "my_not" is not defined in assignment "ode_" of "P13": my_piecewise(2, my_not(false), 3).
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.
