@@ -242,7 +242,7 @@ describe('Module diagnostic codes', () => {
     expect(modules.createModule('model.xml', 'sbml')).to.have.lengthOf(3);
     const warning = events.find((e) => e.level === 'warn');
     expect(warning.opt).to.deep.equal({target: 's', compartment: 'c', diagnosticCode: 'SBML_RATE_RULE_CONCENTRATION_SEMANTICS'});
-    expect(warning.msg).to.include('exported simulations may differ');
+    expect(warning.msg).to.equal('SBML <rateRule variable="s"> for concentration species "s" was imported as Process "s_proc". Simulation results may be incorrect if compartment "c" changes size.');
     expect(logger.hasErrors).to.equal(false);
     for (const [type, input] of [['heta', 'x @Const {num: 1};'], ['json', '[{"id":"x"}]'], ['yaml', '- id: x'], ['sbml', model('<listOfParameters><parameter id="x" value="1" constant="true"/></listOfParameters>')]]) {
       const result = system(() => input);

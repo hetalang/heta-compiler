@@ -98,14 +98,19 @@ Namespace.prototype.makeDynMSModel = function(exprFormat = 'math-json', expRende
         .map(({ record, state }) => {
             // stoichiometry
             let exprString = record.backReferences.map((ref) => {
+                // Match the Julia exporter: Process rates for concentration species
+                // are converted to rates of the amount used as the DynMS state.
+                const rate = ref._process_.className === 'Process' && record.instanceOf('Species') && !record.isAmount
+                    ? `${ref.process} * ${record.compartment}`
+                    : ref.process;
                 if (ref.stoichiometry === -1) {
-                    return `- ${ref.process}`;
+                    return `- ${rate}`;
                 } else if (ref.stoichiometry < 0) {
-                    return `${ref.stoichiometry} * ${ref.process}`;
+                    return `${ref.stoichiometry} * ${rate}`;
                 } else if (ref.stoichiometry === 1) {
-                    return `+ ${ref.process}`;
+                    return `+ ${rate}`;
                 } else if (ref.stoichiometry > 0) {
-                    return `+ ${ref.stoichiometry} * ${ref.process}`;
+                    return `+ ${ref.stoichiometry} * ${rate}`;
                 }
             }).join('');
             let expr;

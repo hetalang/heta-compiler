@@ -235,8 +235,8 @@ function jsbmlToQArr(JSBML, options = {}) {
       let species = qArr.find((q) => q.id === target && q.class === 'Species');
       if (species && !species.isAmount) {
         options.logger?.warn(
-          `SBML <rateRule variable="${target}"> targets concentration species "${target}" in compartment "${species.compartment}". `
-          + `It is imported as Process "${target}_proc"; exported simulations may differ from SBML semantics, especially when the compartment changes.`,
+          `SBML <rateRule variable="${target}"> for concentration species "${target}" was imported as Process "${target}_proc". `
+          + `Simulation results may be incorrect if compartment "${species.compartment}" changes size.`,
           { target, compartment: species.compartment, diagnosticCode: 'SBML_RATE_RULE_CONCENTRATION_SEMANTICS' }
         );
       }
