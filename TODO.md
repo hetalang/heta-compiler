@@ -38,6 +38,7 @@
 
 ## ideas
 
+- Decide whether to add complete expression type checking (boolean/numeric) with inferred function argument types or introduce type coercion; assess SBML compatibility and export semantics.
 - use MathJSON https://mathlive.io/math-json/ format for math expressions
 - allow to use const expressions in `TimeSwitcher.start`, `TimeSwitcher.period` and `TimeSwitcher.stop`
 - support SBML's delay

@@ -65,7 +65,7 @@ class FunctionDef extends Top {
     
     if (!!q.math) {
       try {
-        var expr = Expression.fromString(q.math);
+        var expr = Expression.fromString(q.math, {functionArguments: this.arguments});
         if (!expr.hasBooleanResult()) {
           this.math = expr;
         } else {
@@ -77,10 +77,10 @@ class FunctionDef extends Top {
         }
       } catch (error) {
         if (!(error instanceof HetaLevelError)) throw error;
-        let msg = this.id + ': '+ error.message + ` in "${q.math.toString()}"`;
+        let msg = `Function "${this.id}": ${error.message} Expression: "${q.math.toString()}".`;
         logger?.error(msg, {...error.opt, id: this.id, expression: q.math, path: 'math'});
         this.errored = true;
-        return; // BRAKE
+        return this; // BRAKE
       }
 
       // check that identifiers in `math` correspond to `arguments`

@@ -35,10 +35,12 @@ class Expression {
    * Parses a string or number into an `Expression`.
    *
    * @param {string|number} exprStringOrNumber Expression source.
+   * @param {object} [options] Parsing options.
+   * @param {string[]} [options.functionArguments] Arguments of the function being parsed.
    *
    * @returns {Expression} Parsed expression.
    */
-  static fromString(exprStringOrNumber){
+  static fromString(exprStringOrNumber, {functionArguments = []} = {}){
     if (typeof exprStringOrNumber !== 'string' && typeof exprStringOrNumber !== 'number')
       throw new TypeError('Expected <string> or <number>, got ' + JSON.stringify(exprStringOrNumber));
 
@@ -79,10 +81,13 @@ class Expression {
       }
       if (node.type === 'ConditionalNode') {
         let cond = node.condition;
-        if (!new Expression(cond).hasBooleanResult()) {
+        let unwrappedCondition = _removeParenthesis(cond);
+        // XXX: Function arguments may be boolean; their types are not checked at call sites yet.
+        let isFunctionArgument = unwrappedCondition.type === 'SymbolNode' && functionArguments.includes(unwrappedCondition.name);
+        if (!isFunctionArgument && !new Expression(cond).hasBooleanResult()) {
           throw new HetaLevelError(
-            `Ternary operator must have a boolean condition, got "${cond.toString()}"`, 
-            {diagnosticCode: 'INVALID_EXPRESSION', expression: exprString}
+            `Condition "${cond.toString()}" must be a boolean expression.`,
+            {diagnosticCode: 'INVALID_EXPRESSION', expression: exprString, condition: cond.toString()}
           );
         }
       }
@@ -263,7 +268,7 @@ class Expression {
   /**
    * Checks whether the expression has a boolean result.
    *
-   * @returns {boolean} `true` for boolean operators or boolean constants.
+   * @returns {boolean} `true` for boolean expressions and conditional expressions with boolean branches.
    */
   hasBooleanResult(){
     const operators = [
@@ -279,8 +284,11 @@ class Expression {
       && operators.indexOf(node.fn) !== -1;
     let isBooleanValue = node.type === 'ConstantNode'
       && [true, false].indexOf(node.value) !== -1;
+    let isBooleanConditional = node.type === 'ConditionalNode'
+      && new Expression(node.trueExpr).hasBooleanResult()
+      && new Expression(node.falseExpr).hasBooleanResult();
 
-    return isBooleanOperator || isBooleanValue;
+    return isBooleanOperator || isBooleanValue || isBooleanConditional;
   }
   /**
    * Calculates expression units in the context of a model component.

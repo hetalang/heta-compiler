@@ -10,6 +10,10 @@ function lastDiagnostic(container) {
 describe('Container diagnostic codes', () => {
   it('preserves messages, levels and options while identifying action errors', () => {
     const c = new Container();
+    const invalidFunction = c.load({action: 'defineFunction', id: 'bad', arguments: ['x'], math: '1 ? 1 : 0'});
+    expect(invalidFunction.errored).to.equal(true);
+    expect(c.functionDefStorage.has('bad')).to.equal(false);
+    expect(lastDiagnostic(c).opt).to.include({diagnosticCode: 'INVALID_EXPRESSION', id: 'bad', path: 'math'});
     c.load({action: 'notAnAction'});
     expect(lastDiagnostic(c)).to.include({level: 'error', msg: 'Action #notAnAction is unknown and will be skipped.'});
     expect(lastDiagnostic(c).opt).to.deep.equal({action: 'notAnAction', diagnosticCode: 'UNKNOWN_ACTION'});

@@ -131,6 +131,14 @@ describe('core diagnostic codes', () => {
       expect(calls[0].opt).to.deep.equal({diagnosticCode: 'INVALID_EXPRESSION', expression: '1 +', id: 'x', ...(Class === FunctionDef ? {} : {space: 'model'}), path: Class === Record ? 'assignments.start_' : Class === FunctionDef ? 'math' : 'trigger'});
     }
     expect(() => Expression.fromString('[')).to.throw(HetaLevelError).with.property('opt').that.deep.equals({diagnosticCode: 'INVALID_EXPRESSION', expression: '['});
+    const {item, calls} = setup(FunctionDef);
+    item.merge({id: 'my_piecewise', arguments: ['x', 'y', 'z'], math: '1 ? x : z'});
+    expect(calls[0].message).to.equal('Function "my_piecewise": Condition "1" must be a boolean expression. Expression: "1 ? x : z".');
+    expect(calls[0].opt).to.include({id: 'my_piecewise', path: 'math', condition: '1'});
+    const valid = setup(FunctionDef);
+    valid.item.merge({id: 'my_piecewise', arguments: ['x', 'y', 'z'], math: '(y) ? x : z'});
+    expect(valid.calls).to.be.empty;
+    expect(valid.item.math).to.exist;
   });
 
   it('distinguishes numeric and boolean expression requirements', () => {

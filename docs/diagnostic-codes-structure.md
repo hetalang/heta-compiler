@@ -344,7 +344,7 @@ The `opt` fields list the maximum known context at creation or logging, includin
 ### Expressions and function definitions
 
 - `INVALID_EXPRESSION` - A Heta mathematical expression cannot be parsed or represented.
-  - `opt`: `diagnosticCode`, `expression`, `operator`, `nodeTypes`, `space`, `id`, `path`, `format`.
+  - `opt`: `diagnosticCode`, `expression`, `condition`, `operator`, `nodeTypes`, `space`, `id`, `path`, `format`.
   - Files:
     - [src/core/expression.js](../src/core/expression.js)
 

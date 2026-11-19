@@ -57,6 +57,19 @@ describe('Unit test for Expression.', () => {
       expect(() => Expression.fromString(expression)).to.throw(HetaLevelError)
         .with.property('opt').that.includes({diagnosticCode: 'INVALID_EXPRESSION', expression});
     }
+    expect(() => Expression.fromString('y ? x : z'))
+      .to.throw(HetaLevelError, 'Condition "y" must be a boolean expression.')
+      .with.property('opt').that.includes({diagnosticCode: 'INVALID_EXPRESSION', expression: 'y ? x : z', condition: 'y'});
+    expect(() => Expression.fromString('(y) ? x : z', {functionArguments: ['y']})).not.to.throw();
+    expect(() => Expression.fromString('unknown ? x : z', {functionArguments: ['y']})).to.throw(HetaLevelError);
+    expect(() => Expression.fromString('1 ? x : z', {functionArguments: ['y']})).to.throw(HetaLevelError);
+    for (const expression of ['(x > 0 ? true : false) ? 1 : 0', '((x >= 0.49) ? true : false) ? 1 : 0', '((x > 0 ? true : false) ? false : true) ? 1 : 0']) {
+      expect(() => Expression.fromString(expression), expression).not.to.throw();
+    }
+    for (const expression of ['(x > 0 ? true : 1) ? 1 : 0', '(x > 0 ? 1 : false) ? 1 : 0']) {
+      expect(() => Expression.fromString(expression), expression).to.throw(HetaLevelError)
+        .with.property('opt').that.includes({diagnosticCode: 'INVALID_EXPRESSION', expression});
+    }
     for (const expression of ['x % 2', 'x!', 'x & 2', 'x << 2', '1 + (x mod 2)']) {
       expect(() => Expression.fromString(expression)).to.throw(HetaLevelError)
         .with.property('opt').that.includes({diagnosticCode: 'INVALID_EXPRESSION', expression});
