@@ -18,8 +18,8 @@
 [error]	Function math "my_xor" should be a numeric expression.
 [error]	id must not be a reserved word, got "e". Reserved words list: 
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
-[error]	c: Ternary operator must have a boolean condition, got "my_and(my_and(my_and0(), true), true)" in "( my_and ( my_and ( my_and0 (), true), true) ?  1  :  0 )"
-[error]	d: Ternary operator must have a boolean condition, got "my_or(my_or(my_or0(), true), true)" in "( my_or ( my_or ( my_or0 (), true), true) ?  1  :  0 )"
+[error]	c: Condition "my_and(my_and(my_and0(), true), true)" must be a boolean expression. in "( my_and ( my_and ( my_and0 (), true), true) ?  1  :  0 )"
+[error]	d: Condition "my_or(my_or(my_or0(), true), true)" must be a boolean expression. in "( my_or ( my_or ( my_or0 (), true), true) ?  1  :  0 )"
 [error]	e component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: fbef53e8bc8b83905fac5f9ac15490f9eb8160b71dfd865062155c8950642e1f
 [info]	Setting references in elements, total length 96

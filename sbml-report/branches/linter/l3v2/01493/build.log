@@ -4,22 +4,13 @@
 [info]	Reading module of type "heta" from file "results/l3v2/01493/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01493/01493-sbml-l3v2.xml"...
 [error]	Function math "implies" should be a numeric expression.
-[error]	my_piecewise: Ternary operator must have a boolean condition, got "y" in "( y  ?  x  :  z )"
-[crit]	
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-TypeError: Cannot read properties of undefined (reading 'errored')
-    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)
-    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30
-    at Array.forEach (<anonymous>)
-    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)
-    at Object..js (node:internal/modules/cjs/loader:2060:10)
+[error]	Function math "my_gt" should be a numeric expression.
+[error]	Function math "my_lteq" should be a numeric expression.
+[info]	Platform hash: 7abb02b2398b4ae1038fa8cece2586d1ab65a5417d5d7e051645feca9421f804
+[info]	Setting references in elements, total length 98
+[error]	Function "my_gt" is not defined in assignment "ode_" of "z": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), my_piecewise(1, my_gt(y, 0.49), 0)).
+[error]	Function "my_lteq" is not defined in assignment "ode_" of "z": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), my_piecewise(1, my_gt(y, 0.49), 0)).
+[error]	Function "my_gt" is not defined in assignment "ode_" of "z": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), my_piecewise(1, my_gt(y, 0.49), 0)).
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.

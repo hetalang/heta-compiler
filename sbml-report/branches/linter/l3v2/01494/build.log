@@ -9,11 +9,11 @@
 [error]	Function math "my_leq" should be a numeric expression.
 [error]	Function math "my_geq" should be a numeric expression.
 [error]	Function math "my_eq" should be a numeric expression.
-[error]	P1: Ternary operator must have a boolean condition, got "my_lt(1, 2, 1)" in "( my_lt ( 1 ,  2 ,  1 ) ?  1  :  3 )"
-[error]	P2: Ternary operator must have a boolean condition, got "my_gt(2, 1, 2)" in "( my_gt ( 2 ,  1 ,  2 ) ?  1  :  3 )"
-[error]	P3: Ternary operator must have a boolean condition, got "my_leq(1, 2, 1)" in "( my_leq ( 1 ,  2 ,  1 ) ?  1  :  3 )"
-[error]	P4: Ternary operator must have a boolean condition, got "my_geq(2, 1, 2)" in "( my_geq ( 2 ,  1 ,  2 ) ?  1  :  3 )"
-[error]	P5: Ternary operator must have a boolean condition, got "my_eq(1, 1, 2)" in "( my_eq ( 1 ,  1 ,  2 ) ?  1  :  3 )"
+[error]	P1: Condition "my_lt(1, 2, 1)" must be a boolean expression. in "( my_lt ( 1 ,  2 ,  1 ) ?  1  :  3 )"
+[error]	P2: Condition "my_gt(2, 1, 2)" must be a boolean expression. in "( my_gt ( 2 ,  1 ,  2 ) ?  1  :  3 )"
+[error]	P3: Condition "my_leq(1, 2, 1)" must be a boolean expression. in "( my_leq ( 1 ,  2 ,  1 ) ?  1  :  3 )"
+[error]	P4: Condition "my_geq(2, 1, 2)" must be a boolean expression. in "( my_geq ( 2 ,  1 ,  2 ) ?  1  :  3 )"
+[error]	P5: Condition "my_eq(1, 1, 2)" must be a boolean expression. in "( my_eq ( 1 ,  1 ,  2 ) ?  1  :  3 )"
 [info]	Platform hash: 90080a1f7bf7655a1043248a44f56ad8ee539b75c5481dfd2dc2ace2b6956aaf
 [info]	Setting references in elements, total length 97
 [error]	Record "P1" requires a "start_" or "ode_" assignment in a concrete namespace.

@@ -15,8 +15,8 @@
     1. /math must NOT have fewer than 1 characters
 [error]	id must not be a reserved word, got "e". Reserved words list: 
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
-[error]	c: Ternary operator must have a boolean condition, got "my_and()" in "( my_and () ?  1  :  0 )"
-[error]	d: Ternary operator must have a boolean condition, got "my_or()" in "( my_or () ?  1  :  0 )"
+[error]	c: Condition "my_and()" must be a boolean expression. in "( my_and () ?  1  :  0 )"
+[error]	d: Condition "my_or()" must be a boolean expression. in "( my_or () ?  1  :  0 )"
 [error]	e component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: d41dc0063789ee6951ffe8bf317ef3f998e4dcd3f374ed408440ae02c37830f4
 [info]	Setting references in elements, total length 94

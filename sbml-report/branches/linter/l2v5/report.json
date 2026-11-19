@@ -6,8 +6,8 @@
     "packageVersion": "0.1.1"
   },
   "status": "completed-with-errors",
-  "startedAt": "2026-11-18T14:28:29.228Z",
-  "completedAt": "2026-11-18T14:39:18.640Z",
+  "startedAt": "2026-11-19T07:40:59.973Z",
+  "completedAt": "2026-11-19T07:49:01.727Z",
   "command": {
     "source": "cases/index.json",
     "target": "results/l2v5",
@@ -27087,13 +27087,29 @@
       "caseId": "01199",
       "synopsis": "Nested piecewise in conditional.",
       "sourcePath": "semantic/01199/01199-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01199/input.heta",
-      "logPath": "01199/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01199/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01199/01199-sbml-l2v5.xml\"...\n[error] z: Ternary operator must have a boolean condition, got \"((x >= 0.49) ? true : false)\" in \"(( x  >=  0.49  ? true : false) ?  1  :  0 )\"\n[info] Platform hash: a9495a020bb7d55b2e331e20b2bc990b2da76df250e4e1f92b4cedfff1712f4c\n[info] Setting references in elements, total length 98\n[error] Record \"z\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+      "outputs": {
+        "canonical": "01199/canonical/output.heta.json",
+        "dynms": "01199/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.2 document"
+          }
+        }
       }
     },
     {
@@ -27129,13 +27145,29 @@
       "caseId": "01201",
       "synopsis": "Nested piecewise in conditional and return",
       "sourcePath": "semantic/01201/01201-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01201/input.heta",
-      "logPath": "01201/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01201/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01201/01201-sbml-l2v5.xml\"...\n[error] z: Ternary operator must have a boolean condition, got \"((x <= 0.49) ? true : false)\" in \"(( x  <=  0.49  ? true : false) ? ( y  >  1.49  ?  2  :  1 ) :  0 )\"\n[info] Platform hash: 5c32f1d5981dcae1bf4c21c85bf0a3e02f423d91f2e9dabe245cd360341f81bc\n[info] Setting references in elements, total length 100\n[error] Record \"z\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+      "outputs": {
+        "canonical": "01201/canonical/output.heta.json",
+        "dynms": "01201/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.2 document"
+          }
+        }
       }
     },
     {
@@ -27200,13 +27232,29 @@
       "caseId": "01204",
       "synopsis": "Nested piecewise in return, conditional, and otherwise.",
       "sourcePath": "semantic/01204/01204-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01204/input.heta",
-      "logPath": "01204/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01204/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01204/01204-sbml-l2v5.xml\"...\n[error] z: Ternary operator must have a boolean condition, got \"((x <= 0.49) ? true : false)\" in \"(( x  <=  0.49  ? true : false) ? ( y  >  1.49  ?  2  :  1 ) : ( y  >  0.49  ?  1  :  0 ))\"\n[info] Platform hash: 5c32f1d5981dcae1bf4c21c85bf0a3e02f423d91f2e9dabe245cd360341f81bc\n[info] Setting references in elements, total length 100\n[error] Record \"z\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+      "outputs": {
+        "canonical": "01204/canonical/output.heta.json",
+        "dynms": "01204/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.2 document"
+          }
+        }
       }
     },
     {
@@ -29279,8 +29327,8 @@
       "logPath": "01486/build.log",
       "error": {
         "message": "heta build did not produce the required output files",
-        "exitCode": 1,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01486/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01486/01486-sbml-l2v5.xml\"...\n[error] my_piecewise: Ternary operator must have a boolean condition, got \"y\" in \"( y  ?  x  :  z )\"\n[crit] \n +-------------------------------------------------------------------+ \n | Internal \"Heta compiler\" error, contact the developers.           | \n | Create an issue: https://github.com/hetalang/heta-compiler/issues | \n | or mail to: dev@insysbio.com                                      | \n +-------------------------------------------------------------------+ \n\nTypeError: Cannot read properties of undefined (reading 'errored')\n    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)\n    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)\n    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30\n    at Array.forEach (<anonymous>)\n    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)\n    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)\n    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)\n    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n"
+        "exitCode": 2,
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01486/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01486/01486-sbml-l2v5.xml\"...\n[error] Function math \"my_gt\" should be a numeric expression.\n[error] Function math \"my_geq\" should be a numeric expression.\n[error] Function math \"my_lt\" should be a numeric expression.\n[error] Function math \"my_leq\" should be a numeric expression.\n[error] Function math \"my_eq\" should be a numeric expression.\n[error] Function math \"my_neq\" should be a numeric expression.\n[error] Function math \"my_and\" should be a numeric expression.\n[error] Function math \"my_or\" should be a numeric expression.\n[error] Function math \"my_xor\" should be a numeric expression.\n[error] Function math \"my_not\" should be a numeric expression.\n[info] Platform hash: fd1b5ec864708869242639c9522cd62568483eb59ccd3767f120262ee3479ac2\n[info] Setting references in elements, total length 142\n[error] Function \"my_gt\" is not defined in assignment \"ode_\" of \"P3\": my_piecewise(2, my_gt(1, 0.5), 3).\n[error] Function \"my_geq\" is not defined in assignment \"ode_\" of \"P4\": my_piecewise(2, my_geq(1, 0.5), 3).\n[error] Function \"my_lt\" is not defined in assignment \"ode_\" of \"P5\": my_piecewise(2, my_lt(1, 0.5), 3).\n[error] Function \"my_leq\" is not defined in assignment \"ode_\" of \"P6\": my_piecewise(2, my_leq(1, 0.5), 3).\n[error] Function \"my_eq\" is not defined in assignment \"ode_\" of \"P7\": my_piecewise(2, my_eq(P1, pi), 3).\n[error] Function \"my_neq\" is not defined in assignment \"ode_\" of \"P8\": my_piecewise(2, my_neq(P1, pi), 3).\n[error] Function \"my_and\" is not defined in assignment \"ode_\" of \"P10\": my_piecewise(2, my_and(true, false), 3).\n[error] Function \"my_or\" is not defined in assignment \"ode_\" of \"P11\": my_piecewise(2, my_or(true, false), 3).\n[error] Function \"my_xor\" is not defined in assignment \"ode_\" of \"P12\": my_piecewise(2, my_xor(true, false), 3).\n[error] Function \"my_not\" is not defined in assignment \"ode_\" of \"P13\": my_piecewise(2, my_not(false), 3).\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {
@@ -29316,13 +29364,29 @@
       "caseId": "01488",
       "synopsis": "Various uncommon MathML constructs, wrapped in function definitions.",
       "sourcePath": "semantic/01488/01488-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "01488/input.heta",
-      "logPath": "01488/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 1,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01488/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01488/01488-sbml-l2v5.xml\"...\n[error] my_piecewise: Ternary operator must have a boolean condition, got \"y\" in \"( y  ?  x  :  z )\"\n[crit] \n +-------------------------------------------------------------------+ \n | Internal \"Heta compiler\" error, contact the developers.           | \n | Create an issue: https://github.com/hetalang/heta-compiler/issues | \n | or mail to: dev@insysbio.com                                      | \n +-------------------------------------------------------------------+ \n\nTypeError: Cannot read properties of undefined (reading 'errored')\n    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)\n    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)\n    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30\n    at Array.forEach (<anonymous>)\n    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)\n    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)\n    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)\n    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n"
+      "outputs": {
+        "canonical": "01488/canonical/output.heta.json",
+        "dynms": "01488/dynms/output.dynms.json"
+      },
+      "validation": {
+        "canonical": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/heta-json-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/json-export/heta.json.schema.json",
+            "title": "Heta JSON export document"
+          }
+        },
+        "dynms": {
+          "status": "valid",
+          "schema": {
+            "source": "heta-compiler/dynms-schema",
+            "id": "https://raw.githubusercontent.com/hetalang/heta-compiler/v0.12.3/src/dynms/dynms.schema.json",
+            "title": "DynMS 0.2.2 document"
+          }
+        }
       }
     },
     {
@@ -29335,7 +29399,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01489/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01489/01489-sbml-l2v5.xml\"...\n[error] my_plus Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_times Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_and Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_or Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_xor Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] id must not be a reserved word, got \"e\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null\n[error] c: Ternary operator must have a boolean condition, got \"my_and()\" in \"( my_and () ?  1  :  0 )\"\n[error] d: Ternary operator must have a boolean condition, got \"my_or()\" in \"( my_or () ?  1  :  0 )\"\n[error] e component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 43336c6b628bab801698f39d72fbaa04904c568f329751e5dfb17e3119e2c30e\n[info] Setting references in elements, total length 99\n[error] Function \"my_plus\" is not defined in assignment \"start_\" of \"a\": my_plus().\n[error] Function \"my_times\" is not defined in assignment \"start_\" of \"b\": my_times().\n[error] Record \"c\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"d\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01489/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01489/01489-sbml-l2v5.xml\"...\n[error] my_plus Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_times Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_and Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_or Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_xor Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] id must not be a reserved word, got \"e\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null\n[error] c: Condition \"my_and()\" must be a boolean expression. in \"( my_and () ?  1  :  0 )\"\n[error] d: Condition \"my_or()\" must be a boolean expression. in \"( my_or () ?  1  :  0 )\"\n[error] e component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: 43336c6b628bab801698f39d72fbaa04904c568f329751e5dfb17e3119e2c30e\n[info] Setting references in elements, total length 99\n[error] Function \"my_plus\" is not defined in assignment \"start_\" of \"a\": my_plus().\n[error] Function \"my_times\" is not defined in assignment \"start_\" of \"b\": my_times().\n[error] Record \"c\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"d\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {
@@ -29348,7 +29412,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01490/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01490/01490-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"e\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null\n[error] c: Ternary operator must have a boolean condition, got \"my_and(true)\" in \"( my_and (true) ?  1  :  0 )\"\n[error] d: Ternary operator must have a boolean condition, got \"my_or(true)\" in \"( my_or (true) ?  1  :  0 )\"\n[error] e component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: d56c4bd8f5fe256a7dd5d66387814292477324b9a3fa1b7e5c81230d42e394b3\n[info] Setting references in elements, total length 104\n[error] Record \"c\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"d\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01490/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01490/01490-sbml-l2v5.xml\"...\n[error] id must not be a reserved word, got \"e\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null\n[error] c: Condition \"my_and(true)\" must be a boolean expression. in \"( my_and (true) ?  1  :  0 )\"\n[error] d: Condition \"my_or(true)\" must be a boolean expression. in \"( my_or (true) ?  1  :  0 )\"\n[error] e component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: d56c4bd8f5fe256a7dd5d66387814292477324b9a3fa1b7e5c81230d42e394b3\n[info] Setting references in elements, total length 104\n[error] Record \"c\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"d\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {
@@ -29361,7 +29425,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01491/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01491/01491-sbml-l2v5.xml\"...\n[error] my_plus0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_times0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_and0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_or0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_xor0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] Function math \"my_and\" should be a numeric expression.\n[error] Function math \"my_or\" should be a numeric expression.\n[error] Function math \"my_xor\" should be a numeric expression.\n[error] id must not be a reserved word, got \"e\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null\n[error] c: Ternary operator must have a boolean condition, got \"my_and(my_and(my_and0(), true), true)\" in \"( my_and ( my_and ( my_and0 (), true), true) ?  1  :  0 )\"\n[error] d: Ternary operator must have a boolean condition, got \"my_or(my_or(my_or0(), true), true)\" in \"( my_or ( my_or ( my_or0 (), true), true) ?  1  :  0 )\"\n[error] e component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: b7eac5bd3e4ade66c33da0e7a5b1289a9238009401bf44cb511bd27e70e7431d\n[info] Setting references in elements, total length 101\n[error] Function \"my_plus0\" is not defined in assignment \"ode_\" of \"a\": my_plus(1, my_plus(1, my_plus0())).\n[error] Function \"my_times0\" is not defined in assignment \"ode_\" of \"b\": my_times(2, my_times(2, my_times0())).\n[error] Record \"c\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"d\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01491/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01491/01491-sbml-l2v5.xml\"...\n[error] my_plus0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_times0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_and0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_or0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] my_xor0 Some of properties do not satisfy requirements for class \"FunctionDef\"\n    1. /math must NOT have fewer than 1 characters\n[error] Function math \"my_and\" should be a numeric expression.\n[error] Function math \"my_or\" should be a numeric expression.\n[error] Function math \"my_xor\" should be a numeric expression.\n[error] id must not be a reserved word, got \"e\". Reserved words list: \n\t include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null\n[error] c: Condition \"my_and(my_and(my_and0(), true), true)\" must be a boolean expression. in \"( my_and ( my_and ( my_and0 (), true), true) ?  1  :  0 )\"\n[error] d: Condition \"my_or(my_or(my_or0(), true), true)\" must be a boolean expression. in \"( my_or ( my_or ( my_or0 (), true), true) ?  1  :  0 )\"\n[error] e component does not exist which is not allowed for the \"update\" action.\n[info] Platform hash: b7eac5bd3e4ade66c33da0e7a5b1289a9238009401bf44cb511bd27e70e7431d\n[info] Setting references in elements, total length 101\n[error] Function \"my_plus0\" is not defined in assignment \"ode_\" of \"a\": my_plus(1, my_plus(1, my_plus0())).\n[error] Function \"my_times0\" is not defined in assignment \"ode_\" of \"b\": my_times(2, my_times(2, my_times0())).\n[error] Record \"c\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"d\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {
@@ -29373,8 +29437,8 @@
       "logPath": "01492/build.log",
       "error": {
         "message": "heta build did not produce the required output files",
-        "exitCode": 1,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01492/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01492/01492-sbml-l2v5.xml\"...\n[error] my_piecewise: Ternary operator must have a boolean condition, got \"y\" in \"( y  ?  x  :  z )\"\n[crit] \n +-------------------------------------------------------------------+ \n | Internal \"Heta compiler\" error, contact the developers.           | \n | Create an issue: https://github.com/hetalang/heta-compiler/issues | \n | or mail to: dev@insysbio.com                                      | \n +-------------------------------------------------------------------+ \n\nTypeError: Cannot read properties of undefined (reading 'errored')\n    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)\n    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)\n    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30\n    at Array.forEach (<anonymous>)\n    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)\n    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)\n    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)\n    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n"
+        "exitCode": 2,
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01492/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01492/01492-sbml-l2v5.xml\"...\n[error] Function math \"my_gt\" should be a numeric expression.\n[error] Function math \"my_lteq\" should be a numeric expression.\n[info] Platform hash: bda46e605050cbd1eb9ec665d621a3d0e2ca95278ca09569a602a77b5c54e274\n[info] Setting references in elements, total length 101\n[error] Function \"my_gt\" is not defined in assignment \"ode_\" of \"z\": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), 0).\n[error] Function \"my_lteq\" is not defined in assignment \"ode_\" of \"z\": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), 0).\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {
@@ -29386,8 +29450,8 @@
       "logPath": "01493/build.log",
       "error": {
         "message": "heta build did not produce the required output files",
-        "exitCode": 1,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01493/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01493/01493-sbml-l2v5.xml\"...\n[error] my_piecewise: Ternary operator must have a boolean condition, got \"y\" in \"( y  ?  x  :  z )\"\n[crit] \n +-------------------------------------------------------------------+ \n | Internal \"Heta compiler\" error, contact the developers.           | \n | Create an issue: https://github.com/hetalang/heta-compiler/issues | \n | or mail to: dev@insysbio.com                                      | \n +-------------------------------------------------------------------+ \n\nTypeError: Cannot read properties of undefined (reading 'errored')\n    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)\n    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)\n    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30\n    at Array.forEach (<anonymous>)\n    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)\n    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)\n    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)\n    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)\n    at Module._compile (node:internal/modules/cjs/loader:1929:14)\n    at Object..js (node:internal/modules/cjs/loader:2060:10)\n"
+        "exitCode": 2,
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01493/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01493/01493-sbml-l2v5.xml\"...\n[error] Function math \"my_gt\" should be a numeric expression.\n[error] Function math \"my_lteq\" should be a numeric expression.\n[info] Platform hash: fc6f1b26c034f8c18e82a548c944ac1cd707a02c391e4cc23a65b59ef974dbc0\n[info] Setting references in elements, total length 101\n[error] Function \"my_gt\" is not defined in assignment \"ode_\" of \"z\": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), my_piecewise(1, my_gt(y, 0.49), 0)).\n[error] Function \"my_lteq\" is not defined in assignment \"ode_\" of \"z\": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), my_piecewise(1, my_gt(y, 0.49), 0)).\n[error] Function \"my_gt\" is not defined in assignment \"ode_\" of \"z\": my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), my_piecewise(1, my_gt(y, 0.49), 0)).\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {
@@ -29400,7 +29464,7 @@
       "error": {
         "message": "heta build did not produce the required output files",
         "exitCode": 2,
-        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01494/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01494/01494-sbml-l2v5.xml\"...\n[error] Function math \"my_lt\" should be a numeric expression.\n[error] Function math \"my_gt\" should be a numeric expression.\n[error] Function math \"my_leq\" should be a numeric expression.\n[error] Function math \"my_geq\" should be a numeric expression.\n[error] Function math \"my_eq\" should be a numeric expression.\n[error] P1: Ternary operator must have a boolean condition, got \"my_lt(1, 2, 1)\" in \"( my_lt ( 1 ,  2 ,  1 ) ?  1  :  3 )\"\n[error] P2: Ternary operator must have a boolean condition, got \"my_gt(2, 1, 2)\" in \"( my_gt ( 2 ,  1 ,  2 ) ?  1  :  3 )\"\n[error] P3: Ternary operator must have a boolean condition, got \"my_leq(1, 2, 1)\" in \"( my_leq ( 1 ,  2 ,  1 ) ?  1  :  3 )\"\n[error] P4: Ternary operator must have a boolean condition, got \"my_geq(2, 1, 2)\" in \"( my_geq ( 2 ,  1 ,  2 ) ?  1  :  3 )\"\n[error] P5: Ternary operator must have a boolean condition, got \"my_eq(1, 1, 2)\" in \"( my_eq ( 1 ,  1 ,  2 ) ?  1  :  3 )\"\n[info] Platform hash: 25e2cacabb101694c4f169089474d5992333b9aba30f964813b209c31e4dbc20\n[info] Setting references in elements, total length 100\n[error] Record \"P1\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P2\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P3\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P4\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P5\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
+        "stdout": "Running compilation in directory \"/home/runner/work/heta-compiler/heta-compiler/fcts-run/node_modules/@hetalang/format-conversion-test-suite\"...\n[info] No declaration file, running with defaults...\n[info] Namespace \"nameless\" was set as \"concrete\"\n[info] Heta compiler v0.12.3 is initialized for the platform \"undefined\"\n[info] Reading module of type \"heta\" from file \"results/l2v5/01494/input.heta\"...\n[info] Reading module of type \"sbml\" from file \"cases/semantic/01494/01494-sbml-l2v5.xml\"...\n[error] Function math \"my_lt\" should be a numeric expression.\n[error] Function math \"my_gt\" should be a numeric expression.\n[error] Function math \"my_leq\" should be a numeric expression.\n[error] Function math \"my_geq\" should be a numeric expression.\n[error] Function math \"my_eq\" should be a numeric expression.\n[error] P1: Condition \"my_lt(1, 2, 1)\" must be a boolean expression. in \"( my_lt ( 1 ,  2 ,  1 ) ?  1  :  3 )\"\n[error] P2: Condition \"my_gt(2, 1, 2)\" must be a boolean expression. in \"( my_gt ( 2 ,  1 ,  2 ) ?  1  :  3 )\"\n[error] P3: Condition \"my_leq(1, 2, 1)\" must be a boolean expression. in \"( my_leq ( 1 ,  2 ,  1 ) ?  1  :  3 )\"\n[error] P4: Condition \"my_geq(2, 1, 2)\" must be a boolean expression. in \"( my_geq ( 2 ,  1 ,  2 ) ?  1  :  3 )\"\n[error] P5: Condition \"my_eq(1, 1, 2)\" must be a boolean expression. in \"( my_eq ( 1 ,  1 ,  2 ) ?  1  :  3 )\"\n[info] Platform hash: 25e2cacabb101694c4f169089474d5992333b9aba30f964813b209c31e4dbc20\n[info] Setting references in elements, total length 100\n[error] Record \"P1\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P2\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P3\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P4\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[error] Record \"P5\" requires a \"start_\" or \"ode_\" assignment in a concrete namespace.\n[info] Checking for circular references in Records.\n[warn] Units checking and export were skipped because of errors in compilation.\n[error] Compilation ERROR! See logs.\n"
       }
     },
     {

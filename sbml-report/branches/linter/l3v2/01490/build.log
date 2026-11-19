@@ -6,8 +6,8 @@
 [error]	Function math "implies" should be a numeric expression.
 [error]	id must not be a reserved word, got "e". Reserved words list: 
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
-[error]	c: Ternary operator must have a boolean condition, got "my_and(true)" in "( my_and (true) ?  1  :  0 )"
-[error]	d: Ternary operator must have a boolean condition, got "my_or(true)" in "( my_or (true) ?  1  :  0 )"
+[error]	c: Condition "my_and(true)" must be a boolean expression. in "( my_and (true) ?  1  :  0 )"
+[error]	d: Condition "my_or(true)" must be a boolean expression. in "( my_or (true) ?  1  :  0 )"
 [error]	e component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: a022ee9779726f3f52cbfdfd1b0479d607847153f9f72061afcbf988a3770389
 [info]	Setting references in elements, total length 101

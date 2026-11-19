@@ -4,10 +4,8 @@
 [info]	Reading module of type "heta" from file "results/l3v2/01204/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01204/01204-sbml-l3v2.xml"...
 [error]	Function math "implies" should be a numeric expression.
-[error]	z: Ternary operator must have a boolean condition, got "((x <= 0.49) ? true : false)" in "(( x  <=  0.49  ? true : false) ? ( y  >  1.49  ?  2  :  1 ) : ( y  >  0.49  ?  1  :  0 ))"
-[info]	Platform hash: 23314ea4cacb7a105a5237707583486f3cb73072efabe60b8d26c0ea0e101ec4
+[info]	Platform hash: 3bd2f04ea23a09f5baa3a22b94bd792f0df222d07555557463e119d2ebf82ab8
 [info]	Setting references in elements, total length 97
-[error]	Record "z" requires a "start_" or "ode_" assignment in a concrete namespace.
 [info]	Checking for circular references in Records.
 [warn]	Units checking and export were skipped because of errors in compilation.
 [error]	Compilation ERROR! See logs.

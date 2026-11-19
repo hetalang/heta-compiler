@@ -3,22 +3,28 @@
 [info]	Heta compiler v0.12.3 is initialized for the platform "undefined"
 [info]	Reading module of type "heta" from file "results/l2v5/01486/input.heta"...
 [info]	Reading module of type "sbml" from file "cases/semantic/01486/01486-sbml-l2v5.xml"...
-[error]	my_piecewise: Ternary operator must have a boolean condition, got "y" in "( y  ?  x  :  z )"
-[crit]	
- +-------------------------------------------------------------------+ 
- | Internal "Heta compiler" error, contact the developers.           | 
- | Create an issue: https://github.com/hetalang/heta-compiler/issues | 
- | or mail to: dev@insysbio.com                                      | 
- +-------------------------------------------------------------------+ 
-
-TypeError: Cannot read properties of undefined (reading 'errored')
-    at Container.defineFunction (/home/runner/work/heta-compiler/heta-compiler/src/container/actions.js:100:28)
-    at Container.load (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:158:28)
-    at /home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:30
-    at Array.forEach (<anonymous>)
-    at Container.loadMany (/home/runner/work/heta-compiler/heta-compiler/src/container/main.js:170:10)
-    at Builder.run (/home/runner/work/heta-compiler/heta-compiler/src/builder/index.js:177:22)
-    at main (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:144:5)
-    at Object.<anonymous> (/home/runner/work/heta-compiler/heta-compiler/bin/heta-build.js:164:3)
-    at Module._compile (node:internal/modules/cjs/loader:1929:14)
-    at Object..js (node:internal/modules/cjs/loader:2060:10)
+[error]	Function math "my_gt" should be a numeric expression.
+[error]	Function math "my_geq" should be a numeric expression.
+[error]	Function math "my_lt" should be a numeric expression.
+[error]	Function math "my_leq" should be a numeric expression.
+[error]	Function math "my_eq" should be a numeric expression.
+[error]	Function math "my_neq" should be a numeric expression.
+[error]	Function math "my_and" should be a numeric expression.
+[error]	Function math "my_or" should be a numeric expression.
+[error]	Function math "my_xor" should be a numeric expression.
+[error]	Function math "my_not" should be a numeric expression.
+[info]	Platform hash: fd1b5ec864708869242639c9522cd62568483eb59ccd3767f120262ee3479ac2
+[info]	Setting references in elements, total length 142
+[error]	Function "my_gt" is not defined in assignment "ode_" of "P3": my_piecewise(2, my_gt(1, 0.5), 3).
+[error]	Function "my_geq" is not defined in assignment "ode_" of "P4": my_piecewise(2, my_geq(1, 0.5), 3).
+[error]	Function "my_lt" is not defined in assignment "ode_" of "P5": my_piecewise(2, my_lt(1, 0.5), 3).
+[error]	Function "my_leq" is not defined in assignment "ode_" of "P6": my_piecewise(2, my_leq(1, 0.5), 3).
+[error]	Function "my_eq" is not defined in assignment "ode_" of "P7": my_piecewise(2, my_eq(P1, pi), 3).
+[error]	Function "my_neq" is not defined in assignment "ode_" of "P8": my_piecewise(2, my_neq(P1, pi), 3).
+[error]	Function "my_and" is not defined in assignment "ode_" of "P10": my_piecewise(2, my_and(true, false), 3).
+[error]	Function "my_or" is not defined in assignment "ode_" of "P11": my_piecewise(2, my_or(true, false), 3).
+[error]	Function "my_xor" is not defined in assignment "ode_" of "P12": my_piecewise(2, my_xor(true, false), 3).
+[error]	Function "my_not" is not defined in assignment "ode_" of "P13": my_piecewise(2, my_not(false), 3).
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+[error]	Compilation ERROR! See logs.

@@ -5,8 +5,8 @@
 [info]	Reading module of type "sbml" from file "cases/semantic/01490/01490-sbml-l2v5.xml"...
 [error]	id must not be a reserved word, got "e". Reserved words list: 
 	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
-[error]	c: Ternary operator must have a boolean condition, got "my_and(true)" in "( my_and (true) ?  1  :  0 )"
-[error]	d: Ternary operator must have a boolean condition, got "my_or(true)" in "( my_or (true) ?  1  :  0 )"
+[error]	c: Condition "my_and(true)" must be a boolean expression. in "( my_and (true) ?  1  :  0 )"
+[error]	d: Condition "my_or(true)" must be a boolean expression. in "( my_or (true) ?  1  :  0 )"
 [error]	e component does not exist which is not allowed for the "update" action.
 [info]	Platform hash: d56c4bd8f5fe256a7dd5d66387814292477324b9a3fa1b7e5c81230d42e394b3
 [info]	Setting references in elements, total length 104
