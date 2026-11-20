@@ -24,7 +24,8 @@
     "license": {"type": "string", "default": "UNLICENSED", "description": "see https://spdx.org/licenses/"},
     "private": {"type": "boolean"},
     "contributors": {"type": "array", "items": {"type": "string", "example": "Your Name <email@example.com> (http://example.com)"}},
-    "builderVersion": {"type": "string", "default": "*"},
+    "builderVersion": {"type": "string"},
+    "linterConfig": {"type": "string", "minLength": 1},
     "options": {
       "type": "object",
       "additionalProperties": {

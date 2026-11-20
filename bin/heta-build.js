@@ -47,6 +47,7 @@ program
   .option('-e, --export <formats>', 'export formats: "JSON,XLSX" or "{format:JSON},{format:XLSX,omitRows:3}"')
   // cli level
   .option('-d, --declaration <filepath>', 'declaration file name without extension to search throught extensions: ["", ".json", ".yml"]')
+  .option('--linter-config <filepath>', 'Read linter configuration from the specified YAML file.')
   .option('--skip-updates', 'Skip checking newer version of heta-compiler.') // checking newer version of heta-compiler
   .option('--log-level <debug|info|warn|error|crit>', 'Set minimum log level for console and log file.', 'info')
   .option('-L, --log-mode <never|error|always>', 'When to create log file.', 'error')
@@ -134,6 +135,7 @@ async function main() {
   cliOptions.source !== undefined && (declaration.importModule.source = cliOptions.source);
   cliOptions.type !== undefined && (declaration.importModule.type = cliOptions.type);
   cliOptions.export !== undefined && (declaration.export = exportItems);
+  cliOptions.linterConfig !== undefined && (declaration.linterConfig = cliOptions.linterConfig);
 
   // 3. run builder (set declaration defaults internally)
   let builder = new Builder(
@@ -142,6 +144,24 @@ async function main() {
     fs.outputFileSync,
     logger
   ).run();
+
+  if (typeof declaration.linterConfig === 'string' && declaration.linterConfig.length > 0) {
+    const configFile = declaration.linterConfig;
+    logger.info(`Reading linter configuration file "${configFile}"...`);
+    let configText;
+    try {
+      configText = fs.readFileSync(configFile, 'utf8');
+    } catch (error) {
+      throw new CLILevelError(`Cannot read linter configuration file "${configFile}": ${error.message}`);
+    }
+    try {
+      var lintConfig = YAML.load(configText);
+    } catch (error) {
+      throw new CLILevelError(`Wrong format of linter configuration file "${configFile}": ${error.message}`);
+    }
+
+    builder.lint(lintConfig);
+  }
 
   return builder;
 }
@@ -173,7 +193,7 @@ Promise.all([
   }
 }).catch((error) => {
   if (error instanceof CLILevelError || error.name === 'HetaLevelError') {
-    logger.error('Error: ' + error.message + '\nSTOP!', error.opt || {});
+    logger.error(error.message + '\nSTOP!', error.opt || {});
     process.exitCode = 2;
   } else {
     logger.log('crit', contactMessage + '\n' + error.stack);

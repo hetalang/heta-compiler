@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/hetalang/heta-compiler/master/src/lint/linter.schema.json",
+  "title": "Heta model linter configuration",
+  "description": "Describes the configuration of Heta model linter checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "preflightChecks", "automaticChecks", "manualChecks"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": { "type": "string", "minLength": 1 },
+    "description": { "type": "string" },
+    "preflightChecks": {
+      "type": "object",
+      "required": ["builderVersion", "missingChecks", "unknownChecks"],
+      "properties": {
+        "builderVersion": { "type": "string" },
+        "missingChecks": { "$ref": "#/$defs/severity" },
+        "unknownChecks": { "$ref": "#/$defs/severity" }
+      }
+    },
+    "automaticChecks": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/automaticCheck" }
+    },
+    "manualChecks": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/manualCheck" }
+    }
+  },
+  "$defs": {
+    "severity": { 
+      "type": "string", 
+      "enum": ["ignore", "info", "warning", "error"] 
+    },
+    "automaticCheck": {
+      "type": "object",
+      "required": ["options"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "severity": { "$ref": "#/$defs/severity" },
+        "options": { "type": "object" }
+      }
+    },
+    "manualCheck": {
+      "type": "object",
+      "properties": {
+        "description": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "questions": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

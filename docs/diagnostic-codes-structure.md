@@ -638,3 +638,27 @@ The `opt` fields list the maximum known context at creation or logging, includin
   - `opt`: `diagnosticCode`, `space`, `format`, `events`.
   - Files:
     - [src/mrgsolve-export/namespace.js](../src/mrgsolve-export/namespace.js)
+
+## 7. Linter configuration structure
+
+Each schema violation produces a separate event, with the audit check identifier `linter-config-valid`.
+
+- `LINTER_CHECK_INVALID_OPTIONS` - A linter check has invalid rule-specific options.
+  - `opt`: `diagnosticCode`, `auditCode`, `path`, `keyword`, `params` (for schema errors), `className` (when relevant).
+  - Files: [src/linter/A002.js](../src/linter/A002.js), [src/linter/A021.js](../src/linter/A021.js).
+
+- `LINTER_CONFIG_INVALID_PROPERTY_TYPE` - A linter configuration value has a different type than required by the schema.
+  - `opt`: `diagnosticCode`, `checkId`, `path`, `keyword`, `params`.
+  - Files: [src/linter/validate-config.js](../src/linter/validate-config.js), [src/builder/index.js](../src/builder/index.js).
+
+- `LINTER_CONFIG_INVALID_VALUE` - A linter configuration value violates another schema constraint.
+  - `opt`: `diagnosticCode`, `checkId`, `path`, `keyword`, `params`.
+  - Files: [src/linter/validate-config.js](../src/linter/validate-config.js), [src/builder/index.js](../src/builder/index.js).
+
+- `LINTER_CONFIG_MISSING_PROPERTY` - A required linter configuration property is missing.
+  - `opt`: `diagnosticCode`, `checkId`, `path`, `keyword`, `params`.
+  - Files: [src/linter/validate-config.js](../src/linter/validate-config.js), [src/builder/index.js](../src/builder/index.js).
+
+- `LINTER_CONFIG_UNKNOWN_PROPERTY` - A linter configuration contains a property forbidden by the schema.
+  - `opt`: `diagnosticCode`, `checkId`, `path`, `keyword`, `params`.
+  - Files: [src/linter/validate-config.js](../src/linter/validate-config.js), [src/builder/index.js](../src/builder/index.js).

@@ -7,6 +7,8 @@ const HetaLevelError = require('../heta-level-error');
 const ModuleSystem = require('../module-system');
 const semver = require('semver');
 const { version } = require('../../package');
+const linterChecks = require('../linter');
+const { validateLinterConfig } = require('../linter/validate-config');
 
 /**
  * Compiles a Heta platform from a declaration object.
@@ -38,7 +40,7 @@ class Builder {
     declaration = {},
     fileReadHandler = (fn) => { throw new Error('File read is not set for Builder'); }, // must return text
     fileWriteHandler = (fn, text) => { throw new Error('File write is not set for Builder'); }, // must return undefined
-    logger = new Logger(),
+    logger = new Logger()
   ) {
     // create container with logging available during initialization
     this.container = new Container(logger);
@@ -130,6 +132,8 @@ class Builder {
         );
       }
     });
+
+    return; // BRAKE
   }
 
   static _exportClasses = {}; // storing abstract Export classes
@@ -197,24 +201,25 @@ class Builder {
     }
 
     // Middle STOP
-    if (!this.logger.hasErrors) {
-      // 7. Units checking
-      if (this.options.unitsCheck) {
-        this.logger.info('Checking unit\'s consistency.');
-        this.container.checkUnits();
-      } else {
-        this.logger.warn('Units checking skipped. To turn it on set "unitsCheck: true" in declaration.');
-      }
-
-      // 8. Terms checking
-      this.logger.info('Checking unit\'s terms.');
-      this.container.checkTerms();
-
-      // 9. Exports
-      this.exportMany();
-    } else {
+    if (this.logger.hasErrors) {
       this.logger.warn('Units checking and export were skipped because of errors in compilation.');
+      return this;
     }
+
+    // 7. Units checking
+    if (this.options.unitsCheck) {
+      this.logger.info('Checking unit\'s consistency.');
+      this.container.checkUnits();
+    } else {
+      this.logger.warn('Units checking skipped. To turn it on set "unitsCheck: true" in declaration.');
+    }
+
+    // 8. Terms checking
+    this.logger.info('Checking unit\'s terms.');
+    this.container.checkTerms();
+
+    // 9. Exports
+    this.exportMany();
 
     return this;
   }
@@ -228,6 +233,26 @@ class Builder {
     this.logger.info(`Start exporting to files, total: ${this.exportArray.length}.`);
 
     this.exportArray.forEach((exportItem) => _makeAndSave(exportItem, this._distDirname));
+
+    //return this;
+  }
+
+  lint(lintConfig) {
+    const errors = validateLinterConfig(lintConfig);
+    if (errors.length > 0) {
+      errors.forEach(({message, ...details}) => {
+        this.logger.error(`Invalid linter configuration: ${message}.`,
+          {checkId: 'linter-config-valid', ...details});
+      });
+      return this;
+    }
+
+    Object.entries(linterChecks).forEach(([id, check]) => {
+      if (Object.hasOwn(lintConfig.automaticChecks, id)) {
+        check(this, lintConfig.automaticChecks[id]);
+      }
+    });
+    return this;
   }
 }
 

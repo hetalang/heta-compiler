@@ -398,7 +398,7 @@ Container.prototype.setNS = function(q = {}){
   // it is possible to update type
   namespace._isAbstract = q.type === 'abstract';
   let typeString = namespace._isAbstract ? 'abstract' : 'concrete';
-  this.logger.info(`Namespace "${space}" was set as "${typeString}"`);
+  //this.logger.info(`Namespace "${space}" was set as "${typeString}"`);
 };
 
 /**
@@ -412,7 +412,7 @@ Container.prototype.deleteNS = function(_q = {}) {
   let q = Object.assign({space: 'nameless'}, _q);
   if (this.namespaceStorage.has(q.space)) {
     this.namespaceStorage.delete(q.space);
-    this.logger.info(`Namespace "${q.space}" was deleted.`);
+    //this.logger.info(`Namespace "${q.space}" was deleted.`);
   } else {
     this.logger.error(
       `Namespace "${q.space}" is not found.`,

@@ -62,6 +62,7 @@ List of `heta build` options:
 | --log-path | string | `build.log` | Filepath where the log file should be saved. Path can be absolute or relative to the project directory. The name and extension do not change automatically with `--log-format`. |
 | --log-format | string | `text` | Log file format: `text` for formatted lines, or `json` for an array of events with `level`, `msg`, `levelNum`, and `opt` metadata when present. Console output remains text. |
 | -d, --declaration | string | `platform` | The filepath to declaration file (see below) without extension. The command will search the declaration file based on option trying a set of extensions: .json/.yml. |
+| --linter-config | string | | Read the specified YAML configuration and run model audit checks. The exact path is used; relative paths are resolved from the project directory. Overrides `linterConfig` in the platform declaration. |
 | --log-level | string | `info` | Minimum log level for both console and log file, including CLI progress and compilation results. Possible values are: crit/error/warn/info/debug. |
 | --skip-updates | | | Do not check available new version in npm. |
 | -e, --export | \<string\> | | List of export formats to run separated by colon. It should be in single quotation. It can be list of format names or objects including settings for export. see more details in [export-formats](./export-formats.md). |
