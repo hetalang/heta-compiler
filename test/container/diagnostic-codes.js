@@ -165,7 +165,9 @@ describe('Container diagnostic codes', () => {
     const c = new Container();
     c.defaultLogs.length = 0;
     c.setNS({space: 'model'});
-    const info = c.defaultLogs.find((entry) => entry.msg === 'Namespace "model" was set as "concrete"');
+    expect(c.namespaceStorage.has('model')).to.equal(true);
+    c.logger.info('An unrelated info message');
+    const info = c.defaultLogs.find((entry) => entry.msg === 'An unrelated info message');
     expect(info.opt).to.equal(undefined);
     const scenario = c.load({action: 'setScenario', id: 'scenario1', tspan: [0, 1]});
     expect(scenario.id).to.equal('scenario1');

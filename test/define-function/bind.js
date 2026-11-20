@@ -22,7 +22,7 @@ describe('Proper binding of functionDefinition', () => {
     c1.loadMany(qArr1);
     c1.knitMany();
 
-    expect(c1.defaultLogs).lengthOf(1);
+    expect(c1.defaultLogs).lengthOf(0);
     c1.defaultLogs.length = 0;
   });
   

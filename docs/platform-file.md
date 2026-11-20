@@ -46,6 +46,7 @@ There are properties in the declaration file which do not change the compilation
 | private | boolean ||| Set true if a platform must not be shared in public repositories. *Annotation element.* |
 | contributors | string[] ||| Array of authors and contributors. Please follow the format "Albert Einstein <albert.einstein@gmail.com> (https://einstein.org/cv)" *Annotation element.* |
 | builderVersion | string ||| The required version of Heta compiler which should compile the code. This prevents running the old compiler for the updated QSP platforms. The string must follow the rules of [semantic versioning](https://docs.npmjs.com/about-semantic-versioning). See also [semantic versioning calculator](https://semver.npmjs.com/). |
+| linterConfig | string | --linter-config | | Exact path to the YAML audit configuration. Relative paths are resolved from the project directory; absolute paths are also supported. When set, the CLI runs the configured audit after compilation and export. |
 | importModule | object | | {} | Container for the description of index module. |
 | importModule.source | string | --source | index.heta | Path to index heta module. Absolute and relative filepaths are applicable. Example: "src/table.xlsx" |
 | importModule.type | string | --type | heta | Type of source file. This option sets the type of module which will be applied for parsing. Available values: heta/xlsx/json/yaml/sbml. |
@@ -56,6 +57,14 @@ There are properties in the declaration file which do not change the compilation
 | options.metaDir | string | --meta-dir | meta | If `options.debug` is set as `true` this option changes the target directory for meta files. |
 | export | object[] | -e, --export | `[]` | List of export formats to run separated by colon. Each component includes `format` option and optional settings. See more details in [export-formats](./export-formats.md). |
 
+To run an audit without repeating the command-line option, add the configuration path to `platform.yml`:
+
+```yaml
+linterConfig: linter.yml
+```
+
+The CLI reads this file after compilation and export. `--linter-config` overrides the path in the platform declaration; if neither is specified, the CLI does not run the audit.
+
 For an SBML module included from Heta code, `#include {source: model.xml, type: sbml, useCSwitcher: true};` imports events as `CSwitcher` with numeric triggers. The default is `DSwitcher`; `==` and `!=` triggers cannot be converted to `CSwitcher`.
 
 ## Default configuration
@@ -63,7 +72,6 @@ For an SBML module included from Heta code, `#include {source: model.xml, type: 
 Using neither declaration file nor CLI options is equivalent to the following declaration file:
 ```json
 {
-    "builderVersion": "*",
     "options": {
         "distDir": "dist",
         "metaDir": "meta",
