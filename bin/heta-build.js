@@ -145,6 +145,12 @@ async function main() {
     logger
   ).run();
 
+  if (builder.container.hetaErrors().length > 0) {
+    logger.error('Compilation finished with ERRORS!', {});
+  } else {
+    logger.info('Compilation finished with SUCCESS!', {});
+  }
+
   if (typeof declaration.linterConfig === 'string' && declaration.linterConfig.length > 0) {
     const configFile = declaration.linterConfig;
     logger.info(`Reading linter configuration file "${configFile}"...`);
@@ -161,6 +167,12 @@ async function main() {
     }
 
     builder.lint(lintConfig);
+
+    if (builder.container.hetaErrors().length > 0) {
+      logger.error('Audit finished with ERRORS!', {});
+    } else {
+      logger.info('Audit finished with SUCCESS!', {});
+    }
   }
 
   return builder;
@@ -185,18 +197,16 @@ Promise.all([
   !program.opts().skipUpdates && printVersionMessage()
 ]).then(([builder]) => {
   if (builder.container.hetaErrors().length > 0) {
-    logger.error('Compilation ERROR! See logs.', {});
     process.exitCode = 2; // ERROR
   } else {
-    logger.info('Compilation OK!', {});
     process.exitCode = 0; // OK
   }
 }).catch((error) => {
   if (error instanceof CLILevelError || error.name === 'HetaLevelError') {
-    logger.error(error.message + '\nSTOP!', error.opt || {});
+    logger.error('Fast stop: ' + error.message, {...error.opt, fast: true});
     process.exitCode = 2;
   } else {
-    logger.log('crit', contactMessage + '\n' + error.stack);
+    logger.log('crit', contactMessage + '\n' + error.stack, {fast: true});
     process.exitCode = 1; // unexpected error
   }
 }).finally(() => {
@@ -215,4 +225,6 @@ Promise.all([
       process.exitCode = 1;
     }
   }
+  const output = process.exitCode === 0 ? process.stdout : process.stderr;
+  output.write(`EXIT ${process.exitCode}.\n`);
 });

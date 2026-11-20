@@ -74,6 +74,7 @@ describe('CLI platform diagnostic codes', () => {
     expect(result.status, result.stdout + result.stderr).to.equal(1);
     const events = fs.readJsonSync(path.join(directory, 'build.log'));
     const critical = events.find((event) => event.level === 'crit');
-    expect(critical).not.to.have.property('opt');
+    expect(critical.opt).to.include({fast: true});
+    expect(critical.opt).not.to.have.property('diagnosticCode');
   });
 });

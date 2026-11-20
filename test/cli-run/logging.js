@@ -25,7 +25,7 @@ describe('CLI logging', () => {
     expect(result.status, result.stdout + result.stderr).to.equal(0);
     for (const output of [result.stdout, log(directory)]) {
       expect(output).to.include('Reading declaration file "platform.yml"');
-      expect(output).to.include('Compilation OK!');
+      expect(output).to.include('Compilation finished with SUCCESS!');
       expect(output).to.include('[info]');
     }
   });
@@ -39,10 +39,10 @@ describe('CLI logging', () => {
       level: 'info', msg: 'Reading declaration file "platform.yml"...',
       opt: {}, levelNum: 1
     });
-    expect(events.at(-1).msg).to.equal('Compilation OK!');
+    expect(events.at(-1).msg).to.equal('Compilation finished with SUCCESS!');
     expect(JSON.stringify(events)).not.to.include(directory);
     expect(result.stdout).to.include('[info]');
-    expect(result.stdout).to.include('Compilation OK!');
+    expect(result.stdout).to.include('Compilation finished with SUCCESS!');
     expect(fs.existsSync(path.join(directory, 'build.log'))).to.equal(false);
   });
 
@@ -59,7 +59,7 @@ describe('CLI logging', () => {
     const events = JSON.parse(log(directory));
     expect(events.every((event) => event.level === 'error' && event.levelNum === 3)).to.equal(true);
     expect(events.some((event) => event.opt?.diagnosticCode === 'PLATFORM_DECLARATION_INVALID_PROPERTY_TYPE' && event.opt.params)).to.equal(true);
-    expect(events.at(-1).msg).to.equal('Compilation ERROR! See logs.');
+    expect(events.at(-1).msg).to.equal('Compilation finished with ERRORS!');
   });
 
   it('applies log-mode to JSON files', () => {
@@ -83,7 +83,7 @@ describe('CLI logging', () => {
     const result = run(directory, '--log-format=text', '--log-mode=always');
     expect(result.status, result.stdout + result.stderr).to.equal(0);
     expect(log(directory)).to.match(/^\[info\]\tReading declaration file/);
-    expect(log(directory)).to.match(/\[info\]\tCompilation OK!\n$/);
+    expect(log(directory)).to.match(/\[info\]\tCompilation finished with SUCCESS!\n$/);
   });
 
   it('prints the absolute project directory only to the console', () => {
@@ -97,7 +97,7 @@ describe('CLI logging', () => {
   it('filters CLI progress and successful completion in console and file', () => {
     const result = run(directory, '--log-mode=always', '--log-level=error');
     expect(result.status, result.stderr).to.equal(0);
-    expect(result.stdout).to.equal(`Running compilation in directory "${directory}"...\n`);
+    expect(result.stdout).to.equal(`Running compilation in directory "${directory}"...\nEXIT 0.\n`);
     expect(log(directory)).to.equal('');
   });
 
@@ -131,15 +131,21 @@ describe('CLI logging', () => {
     const result = run(directory, '--log-level=error');
     expect(result.status, result.stderr).to.equal(2);
     for (const output of [result.stdout, log(directory)]) {
-      expect(output).to.include('Compilation ERROR! See logs.');
+      expect(output).to.include('Compilation finished with ERRORS!');
       expect(output).to.include('[error]');
     }
   });
 
   it('retains log-mode behavior for success and early failures', () => {
-    expect(run(directory).status).to.equal(0);
+    const success = run(directory);
+    expect(success.status).to.equal(0);
+    expect(success.stdout).to.include('EXIT 0.');
+    expect(success.stderr).to.equal('');
     expect(fs.existsSync(path.join(directory, 'build.log'))).to.equal(false);
-    expect(run(directory, '--declaration=missing', '--log-mode=never').status).to.equal(2);
+    const failure = run(directory, '--declaration=missing', '--log-mode=never');
+    expect(failure.status).to.equal(2);
+    expect(failure.stderr).to.include('EXIT 2.');
+    expect(failure.stdout).not.to.include('EXIT 2.');
     expect(fs.existsSync(path.join(directory, 'build.log'))).to.equal(false);
   });
 
@@ -170,7 +176,7 @@ describe('CLI logging', () => {
     for (const args of [[], ['--log-mode=never'], ['--log-mode=never', '--declaration=missing']]) {
       const result = run(directory, '--log-path', directory, ...args);
       expect(result.status, result.stdout + result.stderr).to.equal(args.includes('--declaration=missing') ? 2 : 0);
-      expect(result.stderr).to.equal('');
+      expect(result.stderr).to.equal(args.includes('--declaration=missing') ? 'EXIT 2.\n' : '');
     }
   });
 
@@ -180,14 +186,16 @@ describe('CLI logging', () => {
     expect(result.status, result.stdout + result.stderr).to.equal(0);
     expect(log(directory)).not.to.include('previous log');
     expect(log(directory)).to.match(/^\[info\]\tReading declaration file/);
-    expect(log(directory)).to.match(/\[info\]\tCompilation OK!\n$/);
+    expect(log(directory)).to.match(/\[info\]\tCompilation finished with SUCCESS!\n$/);
   });
 
   it('reports save failures to stderr without an unhandled exception', () => {
     const result = run(directory, '--log-mode=always', '--log-path', directory);
     expect(result.status).to.equal(1);
-    expect(result.stdout).to.include('Compilation OK!');
+    expect(result.stdout).to.include('Compilation finished with SUCCESS!');
     expect(result.stderr).to.include('Cannot save log file');
+    expect(result.stderr).to.include('EXIT 1.');
+    expect(result.stdout).not.to.include('EXIT 0.');
     expect(result.stderr).not.to.include('UnhandledPromiseRejection');
   });
 

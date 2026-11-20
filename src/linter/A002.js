@@ -12,7 +12,7 @@ const validate = ajv.compile({
   }
 });
 
-function checkA002(builder, { options, description }) {
+function checkA002(builder, { options, description, severity }) {
   const schemaError = validateOptions(validate, options);
   if (schemaError) {
     const {message, ...details} = schemaError;
@@ -34,8 +34,9 @@ function checkA002(builder, { options, description }) {
   );
 
   const status = missing.length > 0 ? 'fail' : 'pass';
+  const level = status === 'pass' ? 'info' : severity;
   const summary = missing.length > 0 ? `Missing or empty: ${missing.join(', ')}.` : '';
-  builder.logger.info(
+  builder.logger.log(level,
     `[A002] ${description}: ${status}` + (summary ? `\n${summary}` : ''),
     {auditCode: 'A002', status, summary, list: missing}
   );

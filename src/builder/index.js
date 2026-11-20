@@ -150,7 +150,8 @@ class Builder {
    * @returns {Builder} This builder.
    */
   run() {
-    if (this.logger.hasErrors) return this; // Early STOP
+    // Early STOP
+    if (this.logger.hasErrors) return this;
 
     // 1. Parsing
     let ms = new ModuleSystem(this.logger, this.fileReadHandler);
@@ -248,10 +249,11 @@ class Builder {
     }
 
     Object.entries(linterChecks).forEach(([id, check]) => {
-      if (Object.hasOwn(lintConfig.automaticChecks, id)) {
+      if (Object.hasOwn(lintConfig.automaticChecks, id) && lintConfig.automaticChecks[id].severity !== 'ignore') {
         check(this, lintConfig.automaticChecks[id]);
       }
     });
+    
     return this;
   }
 }

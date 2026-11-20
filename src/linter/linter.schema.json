@@ -31,11 +31,11 @@
   "$defs": {
     "severity": { 
       "type": "string", 
-      "enum": ["ignore", "info", "warning", "error"] 
+      "enum": ["ignore", "info", "warn", "error"] 
     },
     "automaticCheck": {
       "type": "object",
-      "required": ["options"],
+      "required": ["severity", "options"],
       "additionalProperties": false,
       "properties": {
         "description": { "type": "string" },
